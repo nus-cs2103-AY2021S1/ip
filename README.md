@@ -2,6 +2,14 @@
 
 Duke is a Personal Assistant Chatbot that helps a person to keep track of various things.
 
+# Getting started
+
+1. Clone this repository with: 
+
+    > `git clone https://github.com/se-edu/duke.git`
+
+1. Extend Duke's functionality in `seedu.duke.Duke`.
+
 # Tutorials 
 
 Increments | Tutorial Name
