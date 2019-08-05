@@ -1,9 +1,3 @@
-package seedu.duke;
-
-/**
- * Duke is a personal assistance chatbot.
- * Happy coding!
- */
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
