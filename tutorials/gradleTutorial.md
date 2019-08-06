@@ -78,7 +78,7 @@ plugins {
 ```
 
 Checkstyle expects configuration files for checkstyle to be in `./config/checkstyle/` by convention.
-For example, you can copy the files found here to your project [this file from se-edu/addressbook-level3](https://github.com/se-edu/addressbook-level3/tree/master/config/checkstyle).
+For example, you can copy [these files from se-edu/addressbook-level3](https://github.com/se-edu/addressbook-level3/blob/master/config/checkstyle/) to your project.
 
 The plugin adds a few _tasks_ to your project. Run `gradlew checkstyleMain checkstyleTest` to verify that you have set up Checkstyle properly (the command will check your main code and test code against the style rules).
 
