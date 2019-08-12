@@ -164,6 +164,6 @@ Now that you have a general idea of how to accomplish basic tasks with Gradle, h
  
 * [Official Gradle Documentation](https://docs.gradle.org/current/userguide/userguide.html)
 
-----------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 **Authors:**
 * Initial Version: Jeffry Lum
