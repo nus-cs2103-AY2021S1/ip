@@ -76,13 +76,14 @@ plugins {
 }
 
 checkstyle {
-    toolVersion = '8.1'
+    toolVersion = '8.23'
 }
+
 // ...
 ```
 
 Checkstyle expects configuration files for checkstyle to be in `./config/checkstyle/` by convention.
-For example, you can copy [these files from se-edu/addressbook-level3](https://github.com/se-edu/addressbook-level3/blob/master/config/checkstyle/) to your project.
+A sample checkstyle rule configuration is provided in the branch.
 
 The plugin adds a few _tasks_ to your project. Run `gradlew checkstyleMain checkstyleTest` to verify that you have set up Checkstyle properly (the command will check your main code and test code against the style rules).
 
@@ -164,6 +165,6 @@ Now that you have a general idea of how to accomplish basic tasks with Gradle, h
  
 * [Official Gradle Documentation](https://docs.gradle.org/current/userguide/userguide.html)
 
---------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 **Authors:**
 * Initial Version: Jeffry Lum
