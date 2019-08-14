@@ -1,8 +1,6 @@
 # JavaFX Tutorial 3 – Interacting with the user
 
-Picking up from where we left off last tutorial, we have successfully achieved the desired layout. Now let’s make the application respond to user input.
-
-:info: You should substitute the provided `DukeStub` class with your completed Duke. 
+Picking up from where we left off last tutorial, we have successfully achieved the desired layout. Now let’s make the application respond to user input. 
 
 Rather than to do everything in one try, let’s iterate and build up towards our final goal. 
 
@@ -39,6 +37,7 @@ public void start(Stage stage) {
  * @return a label with the specified text that has word wrap enabled.
  */
 private Label getDialogLabel(String text) {
+    // You will need to import `javafx.scene.control.Label`.
     Label textToAdd = new Label(text);
     textToAdd.setWrapText(true);
 
@@ -103,10 +102,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 ```
 
-Next, add two images:
+Next, add two images to the `main/resources/images` folder.
+For this tutorial, we have two images `DaUser.png` and `DaDuke.png` to represent the user avatar and Duke's avatar respectively.
+
 ```java
-private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+public class Duke extends Application {
+    // ...
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    // ...
+}
 ```
 
 Add a new method to handle user input:
@@ -124,6 +129,14 @@ private void handleUserInput() {
             new DialogBox(dukeText, new ImageView(duke))
     );
     userInput.clear();
+}
+
+/**
+ * You should have your own function to generate a response to user input.
+ * Replace this stub with your completed method.
+ */
+private String getResponse(String input) {
+    return "Duke heard: " + input;
 }
 ```
 
@@ -154,18 +167,13 @@ Run the program and see how it works.
 One additional benefit of defining a custom control is that we can add behavior specific to our `DialogBox`. Let’s add a method to flip a dialog box such that the image on the left to differentiate between user input and Duke’s output.
 
 ```java
-// Make the constructor private
-private DialogBox(Label l, ImageView iv) {
-    //...
-}
-
 /**
  * Flips the dialog box such that the ImageView is on the left and text on the right.
  */
 private void flip() {
     this.setAlignment(Pos.TOP_LEFT);
     ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-    Collections.reverse(tmp);
+    FXCollections.reverse(tmp);
     this.getChildren().setAll(tmp);
 }
 
@@ -224,6 +232,6 @@ You have successfully implemented a fully functional GUI for Duke!
    * What was the development workflow like?
    * Is the code base well-organized?
 
-----------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 **Authors:**
 * Initial Version: Jeffry Lum
