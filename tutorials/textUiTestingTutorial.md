@@ -68,3 +68,7 @@
 1. Add an `EXPECTED.txt` to the same folder, containing the expected output.
 1. Add an `input.txt` containing the input commands.
 1. Run the `.bat`/`.sh` file to execute the test.
+
+--------------------------------------------------------------------------------
+**Authors:**
+* Initial Version: based on se-edu/addressbook-level2, adapted by Jeffry Lum
