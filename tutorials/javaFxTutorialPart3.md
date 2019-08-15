@@ -103,7 +103,13 @@ import javafx.scene.image.ImageView;
 ```
 
 Next, add two images to the `main/resources/images` folder.
-For this tutorial, we have two images `DaUser.png` and `DaDuke.png` to represent the user avatar and Duke's avatar respectively.
+For this tutorial, we have two images `DaUser.png` and `DaDuke.png` to represent the user avatar and Duke's avatar respectively but you can use any image you want.
+
+Image|Filename
+---|---
+![DaDuke](assets/DaUser.png) | `DaUser.png`
+![DaUser](assets/DaDuke.png) | `DaDuke.png`
+
 
 ```java
 public class Duke extends Application {
