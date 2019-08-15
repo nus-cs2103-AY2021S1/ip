@@ -44,7 +44,7 @@ javafx {
 
 ## Writing your first program
 
-As customary, let’s start off with a simple “Hello World” program. Create a new `HelloWorld.java` class in the `duke.seedu` package. Have the class extend `javafx.application.Application`. This requires you to override the `Application#start()` method and provide a concrete implementation. Notice that the method signature for `Application#start()` has a parameter `Stage`. This is the _primary stage_ that JavaFX provides.
+As customary, let’s start off with a simple “Hello World” program. Modify your `Duke` class to extend `javafx.application.Application`. This requires you to override the `Application#start()` method and provide a concrete implementation. Notice that the method signature for `Application#start()` has a parameter `Stage`. This is the _primary stage_ that JavaFX provides.
 
 ```java
 import javafx.application.Application;
