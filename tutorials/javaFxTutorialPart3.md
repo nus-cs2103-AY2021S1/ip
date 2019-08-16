@@ -129,7 +129,7 @@ Add a new method to handle user input:
  */
 private void handleUserInput() {
     Label userText = new Label(userInput.getText());
-    Label dukeText = new Label(DukeStub.getResponse(userInput.getText()));
+    Label dukeText = new Label(getResponse(userInput.getText()));
     dialogContainer.getChildren().addAll(
             new DialogBox(userText, new ImageView(user)),
             new DialogBox(dukeText, new ImageView(duke))
@@ -210,7 +210,7 @@ Now, we can go back to the `Main` class and change the event handler to use our 
 ```java
 private void handleUserInput() {
     Label userText = new Label(userInput.getText());
-    Label dukeText = new Label(DukeStub.getResponse(userInput.getText()));
+    Label dukeText = new Label(getResponse(userInput.getText()));
     dialogContainer.getChildren().addAll(
             DialogBox.getUserDialog(userText, new ImageView(user)),
             DialogBox.getDukeDialog(dukeText, new ImageView(duke))
