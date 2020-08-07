@@ -1,45 +1,126 @@
 import java.util.Scanner; // Import the scanner class
 
 public class Duke {
+    //Task list to store the tasks
+    private TaskList taskList;
 
-    public static void main(String[] args) {
+    //Logo for the mascot
+    private String logo="  _    _ _ _                   \n" +
+                        " | |  | | | |                  \n" +
+                        " | |  | | | |_ _ __ ___  _ __  \n" +
+                        " | |  | | | __| '__/ _ \\| '_ \\ \n" +
+                        " | |__| | | |_| | | (_) | | | |\n" +
+                        "  \\____/|_|\\__|_|  \\___/|_| |_|";
 
-        // String to store the logo
-        String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
+    public Duke(){
+        //Create a new task list
+        this.taskList = new TaskList();
+    }
 
+    public void printIntro(){
         // Print the intro messages
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + this.getLogo());
         System.out.println("____________________________________________________________\n"
-                        + "Hello Master sama, I am Duke chan\n"
-                        + "What can I do for you?\n"
-                        + "____________________________________________________________\n");
+                + "Hello lesser being, I am Ultron\n"
+                + "What do you want?\n"
+                + "____________________________________________________________\n");
+    }
 
+    public void printEnd(){
+        // Print the end message
+        System.out.println("____________________________________________________________\n"
+                + "Clearly you were not worth my time.\n"
+                + "____________________________________________________________");
+    }
+
+    public String getLogo(){
+        return this.logo;
+    }
+
+    private String getInput(){
         // Create the scanner object
         Scanner sc = new Scanner(System.in);
 
         // Take in input
         String input = sc.nextLine();
 
-        // While the user input is not bye
-        while(!input.equals("bye")){
+        //Return the input
+        return input;
+    }
 
-            // Echo the user input
-            System.out.println("____________________________________________________________\n"
-                            + input
-                            + "\n____________________________________________________________\n");
+    private int checkInput(String input) {
+        //Switch case to process the commands
+        switch (input) {
+
+            //If the user keys in bye
+            case "bye": {
+                return 0;
+            }
+
+            //If the user keys in list
+            case "list": {
+
+                //Print out the list so far
+                System.out.println("Heh, you cant even remember what you had");
+
+                //Display the content
+                this.taskList.displayContent();
+
+                //Break out of the switch
+                return 2;
+            }
+
+            //Otherwise it will be a task to be added
+            default: {
+
+                //Add the task to the task list
+                this.taskList.add(new Task(input));
+
+                //Print the added message
+                System.out.println(String.format("Can't you keep track of '%s' yourself?", input));
+
+                //Break out of the switch
+                return 3;
+            }
+        }
+    }
+
+    public void mainLoop(){
+        //Print the intro
+        this.printIntro();
+
+        //Get input
+        String input = this.getInput();
+
+        // While the user input is not bye
+        while(true){
+
+            //Print the separator
+            System.out.println("____________________________________________________________");
+
+            //If it is a terminating condition
+            if (this.checkInput(input) <= 0){
+                break;
+            }
+
+            //Print the separator
+            System.out.println("____________________________________________________________");
 
             // Get the next line as input
-            input = sc.nextLine();
+            input = this.getInput();
         }
 
-        // Print the end message
-        System.out.println("____________________________________________________________\n"
-                        + "Goodbye master! Hope to see you again >.<\n"
-                        + "____________________________________________________________");
+        //Print the ending before the bot exits
+        this.printEnd();
+    }
+
+    public static void main(String[] args) {
+
+        //Create a new duke
+        Duke duke = new Duke();
+
+        //Run the main loop
+        duke.mainLoop();
 
     }
 }
