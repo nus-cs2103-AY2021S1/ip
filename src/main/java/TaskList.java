@@ -18,7 +18,10 @@ public class TaskList {
 
     public void displayContent(){
 
+        //Iterate through the list of tasks
         for(int i = 0; i < this.list.size(); ++i){
+
+            //Print the index and the message of the task
             System.out.println(String.format("%d. %s", i + 1, this.get(i).getMessage()));
         }
 
