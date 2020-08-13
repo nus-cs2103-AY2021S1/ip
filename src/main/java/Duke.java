@@ -11,12 +11,12 @@ public class Duke {
         printChatWindow("Greetings! I'm Duke J.", "What can I do for you?");
 
         Scanner sc = new Scanner(System.in);
-        String input = sc.next();
+        String input = sc.nextLine();
 
         // Loop continues echoing input until input == "bye"
         while (!input.equals("bye")) {
             printChatWindow(input);
-            input = sc.next();
+            input = sc.nextLine();
         }
 
         printChatWindow("Have a nice day. Goodbye!");
