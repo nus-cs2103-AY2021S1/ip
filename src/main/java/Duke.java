@@ -39,57 +39,6 @@ public class Duke {
         System.out.println(bye);
     }
 
-//    public static void getListOfTasks(ArrayList<Task> tasks) {
-//        if (tasks.isEmpty()) {
-//            String nothing = "   ____________________________________________________________"
-//                           + "\n    Can't seem to find any task hmm..."
-//                           + "\n   ____________________________________________________________\n";
-//            System.out.println(nothing);
-//        } else {
-//            String lst = "   ____________________________________________________________"
-//                       + "\n    Here are the tasks in your list:";
-//            for (int i = 0; i < tasks.size(); i++) {
-//                int index = i + 1;
-//                lst += "\n    " + index + ". " + tasks.get(i);
-//            }
-//            lst += "\n   ____________________________________________________________\n";
-//            System.out.println(lst);
-//        }
-//    }
-
-//    public static void createToDo(ArrayList<Task> tasks, String task) {
-//        ToDos todo = new ToDos(task);
-//        tasks.add(todo);
-//        String str = "   ____________________________________________________________"
-//                   + "\n    Got it. I've added this task:"
-//                   + "\n      " + tasks.get(tasks.size() - 1)
-//                   + "\n    Now you have " + tasks.size() + " tasks in the list."
-//                   + "\n   ____________________________________________________________\n";
-//        System.out.println(str);
-//    }
-
-//    public static void createDeadline(ArrayList<Task> tasks, String task, String due) {
-//        Deadlines deadlines = new Deadlines(task, due);
-//        tasks.add(deadlines);
-//        String str = "   ____________________________________________________________"
-//                   + "\n    Got it. I've added this task:"
-//                   + "\n      " + tasks.get(tasks.size() - 1)
-//                   + "\n    Now you have " + tasks.size() + " tasks in the list."
-//                   + "\n   ____________________________________________________________\n";
-//        System.out.println(str);
-//    }
-
-//    public static void createEvent(ArrayList<Task> tasks, String event, String scheduled) {
-//        Events events = new Events(event, scheduled);
-//        tasks.add(events);
-//        String str = "   ____________________________________________________________"
-//                   + "\n    Got it. I've added this task:"
-//                   + "\n      " + tasks.get(tasks.size() - 1)
-//                   + "\n    Now you have " + tasks.size() + " tasks in the list."
-//                   + "\n   ____________________________________________________________\n";
-//        System.out.println(str);
-//    }
-
     public static void done(ArrayList<Task> tasks, Integer index) {
         tasks.get(index - 1).markAsDone();
         String str = "   ____________________________________________________________"
@@ -150,9 +99,12 @@ public class Duke {
             } else if (input.startsWith("done")) {
                 int index = Integer.parseInt(input.split(" ")[1]);
                 done(tasks, index);
+                input = sc.nextLine();
                 continue;
             } else {
                 unknown();
+                input = sc.nextLine();
+                continue;
             }
             input = sc.nextLine();
         }
