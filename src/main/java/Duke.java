@@ -39,6 +39,14 @@ public class Duke {
         System.out.println(bye);
     }
 
+    public static void invalid_index() {
+        String str = "   ____________________________________________________________"
+                   + "\n    This index does not exist. Please try again!"
+                   + "\n   ____________________________________________________________";
+        System.out.println(str);
+
+    }
+
     public static void unknown() {
         String str = "   ____________________________________________________________"
                 + "\n    Sorry? I didn't get what you want me to do."
@@ -88,13 +96,21 @@ public class Duke {
                     Events.invalid_input();
                 }
             } else if (input.startsWith("done")) {
-                int index = Integer.parseInt(input.split(" ")[1]);
-                Task.done(tasks, index);
+                try {
+                    int index = Integer.parseInt(input.split(" ")[1]);
+                    Task.done(tasks, index);
+                } catch (IndexOutOfBoundsException e) {
+                    invalid_index();
+                }
                 input = sc.nextLine();
                 continue;
             } else if (input.startsWith("delete")) {
-                int index = Integer.parseInt(input.split(" ")[1]);
-                Task.delete(tasks, index);
+                try {
+                    int index = Integer.parseInt(input.split(" ")[1]);
+                    Task.delete(tasks, index);
+                } catch (IndexOutOfBoundsException e) {
+                    invalid_index();
+                }
                 input = sc.nextLine();
                 continue;
             } else {
