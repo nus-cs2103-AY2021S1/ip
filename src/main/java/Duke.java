@@ -39,15 +39,6 @@ public class Duke {
         System.out.println(bye);
     }
 
-    public static void done(ArrayList<Task> tasks, Integer index) {
-        tasks.get(index - 1).markAsDone();
-        String str = "   ____________________________________________________________"
-                    + "\n    Nice! I've marked this task as done:\n      "
-                    + tasks.get(index - 1)
-                    + "\n   ____________________________________________________________\n";
-        System.out.println(str);
-    }
-
     public static void unknown() {
         String str = "   ____________________________________________________________"
                 + "\n    Sorry? I didn't get what you want me to do."
@@ -74,7 +65,7 @@ public class Duke {
                 String task;
                 try {
                     task = input.split("todo")[1];
-                    ToDos.createToDo(tasks, task);
+                    ToDos.createTask(tasks, task);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     ToDos.invalid_input();
                 }
@@ -84,7 +75,7 @@ public class Duke {
                 try {
                     task = input.split("deadline")[1].split("/by")[0];
                     due = input.split("deadline")[1].split("/by")[1];
-                    Deadlines.createDeadline(tasks, task, due);
+                    Deadlines.createTask(tasks, task, due);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     Deadlines.invalid_input();
                 }
@@ -92,13 +83,18 @@ public class Duke {
                 try {
                     String event = input.split("event")[1].split("/at")[0];
                     String scheduled = input.split("event")[1].split("/at")[1];
-                    Events.createEvent(tasks, event, scheduled);
+                    Events.createTask(tasks, event, scheduled);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     Events.invalid_input();
                 }
             } else if (input.startsWith("done")) {
                 int index = Integer.parseInt(input.split(" ")[1]);
-                done(tasks, index);
+                Task.done(tasks, index);
+                input = sc.nextLine();
+                continue;
+            } else if (input.startsWith("delete")) {
+                int index = Integer.parseInt(input.split(" ")[1]);
+                Task.delete(tasks, index);
                 input = sc.nextLine();
                 continue;
             } else {

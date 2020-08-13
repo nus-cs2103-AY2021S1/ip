@@ -6,13 +6,13 @@ class ToDos extends Task {
         super(description);
     }
 
-    public static void createToDo(ArrayList<Task> tasks, String task) {
+    public static void createTask(ArrayList<Task> tasks, String task) {
         ToDos todo = new ToDos(task);
         tasks.add(todo);
         String str = "   ____________________________________________________________"
                 + "\n    Got it. I've added this task:"
                 + "\n      " + tasks.get(tasks.size() - 1)
-                + "\n    Now you have " + tasks.size() + " tasks in the list."
+                + "\n    Now you have " + tasks.size() + " task(s) in the list."
                 + "\n   ____________________________________________________________\n";
         System.out.println(str);
     }

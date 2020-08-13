@@ -9,13 +9,13 @@ public class Events extends Task {
         this.calender = calender;
     }
 
-    public static void createEvent(ArrayList<Task> tasks, String event, String scheduled) {
+    public static void createTask(ArrayList<Task> tasks, String event, String scheduled) {
         Events events = new Events(event, scheduled);
         tasks.add(events);
         String str = "   ____________________________________________________________"
                 + "\n    Got it. I've added this task:"
                 + "\n      " + tasks.get(tasks.size() - 1)
-                + "\n    Now you have " + tasks.size() + " tasks in the list."
+                + "\n    Now you have " + tasks.size() + " task(s) in the list."
                 + "\n   ____________________________________________________________\n";
         System.out.println(str);
     }
