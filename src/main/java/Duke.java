@@ -41,7 +41,7 @@ public class Duke {
 
         greeting();
         String input = sc.nextLine();
-        while (sc.hasNext()) {
+        while (input.isEmpty()) {
             if (input.equals("bye")) {
                 bye();
                 break;
