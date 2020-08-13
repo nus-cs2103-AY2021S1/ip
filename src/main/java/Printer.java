@@ -13,19 +13,27 @@ public class Printer {
         int index = 0;
 
         for (Task task : tasks) {
-            String taskDescription = task.getDescription();
-            String checkBox = box(task.getStatusIcon());
-            System.out.printf("%s%d.%s %s\n", indent, ++index, checkBox, taskDescription);
+            System.out.printf("%s%d. %s\n", indent, ++index, task);
         }
 
         printBorder();
     }
 
-    public static void printDoneTask(Task task) {
+    public static void printDoneTaskChatWindow(Task task) {
         printBorder();
 
         System.out.printf("%sGreat! I've marked this task as done:\n", indent);
-        System.out.printf("%s%s %s\n", doubleIndent, tickedBox, task.getDescription());
+        System.out.printf("%s%s\n", doubleIndent, task);
+
+        printBorder();
+    }
+
+    public static void printAddTaskChatWindow(Task task, int numOfTotalTasks) {
+        printBorder();
+
+        System.out.printf("%sAlright. I've added this task:\n", indent);
+        System.out.printf("%s%s\n", doubleIndent, task);
+        System.out.printf("%sNow you have %d tasks in the list.\n", indent, numOfTotalTasks);
 
         printBorder();
     }

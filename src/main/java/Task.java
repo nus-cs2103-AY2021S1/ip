@@ -1,6 +1,7 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected TaskType taskType;
 
     public Task(String description) {
         this.description = description;
@@ -19,4 +20,8 @@ public class Task {
         isDone = true;
     }
 
+    @Override
+    public String toString() {
+        return String.format("[%s] %s", getStatusIcon(), description);
+    }
 }

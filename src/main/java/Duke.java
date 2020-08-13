@@ -23,7 +23,8 @@ public class Duke {
 
         // Loop continues echoing input until input == "bye"
         while (!input.equals("bye")) {
-            switch (input.split(" ")[0]) {
+            String tag = input.split(" ")[0];
+            switch (tag) {
                 case "list":
                     Printer.printTasksChatWindow(tasks);
                     break;
@@ -32,16 +33,50 @@ public class Duke {
                     int index = Integer.parseInt(input.substring(5)) - 1;
                     Task task = tasks.get(index);
                     task.markAsDone();
-                    Printer.printDoneTask(task);
+                    Printer.printDoneTaskChatWindow(task);
+                    break;
+
+                case "todo":
+                case "event":
+                case "deadline":
+                    addTask(tag, input, tasks);
                     break;
 
                 default:
-                    tasks.add(new Task(input));
-                    Printer.printGeneralChatWindow("added: " + input);
+                    Printer.printGeneralChatWindow("Unknown input. Try again.");
             }
             input = sc.nextLine();
         }
 
         Printer.printGeneralChatWindow("Thank you for using Duke J.", "Have a nice day. Goodbye!");
+    }
+
+    private static void addTask(String tag, String input, List<Task> tasks) {
+        switch (tag) {
+            case "todo":
+                String toDoText = input.substring(5);
+                ToDo toDo = new ToDo(toDoText);
+                tasks.add(toDo);
+                Printer.printAddTaskChatWindow(toDo, tasks.size());
+                break;
+
+            case "event":
+                String[] eventText = input.substring(6).split(" /at ");
+                String eventDescription = eventText[0];
+                String eventAt = eventText[1];
+                Event event = new Event(eventDescription, eventAt);
+                tasks.add(event);
+                Printer.printAddTaskChatWindow(event, tasks.size());
+                break;
+
+            case "deadline":
+                String[] deadlineText = input.substring(9).split(" /by ");
+                String deadlineDescription = deadlineText[0];
+                String deadlineBy = deadlineText[1];
+                Deadline deadline = new Deadline(deadlineDescription, deadlineBy);
+                tasks.add(deadline);
+                Printer.printAddTaskChatWindow(deadline, tasks.size());
+                break;
+        }
     }
 }
