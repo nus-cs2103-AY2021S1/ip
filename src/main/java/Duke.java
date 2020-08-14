@@ -1,20 +1,23 @@
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 
 public class Duke {
     List<String> toDoLst;
     HashMap<Integer, Boolean> toDoItemToStatus;
+    HashMap<Integer, String> toDoItemToType;
 
     Duke() {
         toDoLst = new ArrayList<>();
         toDoItemToStatus = new HashMap<>();
+        toDoItemToType = new HashMap<>();
     }
 
     public List<String> getToDoLst() {
         return toDoLst;
+    }
+
+    public int getToDoLstSize() {
+        return toDoLst.size();
     }
 
     // needed?
@@ -22,12 +25,21 @@ public class Duke {
         return toDoItemToStatus;
     }
 
-    public void printToDoItem(int i) {
-        System.out.println(String.format("%d.[%s] %s", i + 1, toDoItemToStatus.get(i) ? "✓" : "✗", toDoLst.get(i)));
+    // needed?
+    public HashMap<Integer, String> getToDoItemToType() {
+        return toDoItemToType;
+    }
+
+    public String getToDoItemDescription(int i) {
+        return String.format("[%s][%s] %s", toDoItemToType.get(i), toDoItemToStatus.get(i) ? "✓" : "✗", toDoLst.get(i));
     }
 
     public void setToDoItemStatus(int i, boolean bool) {
         toDoItemToStatus.put(i, bool);
+    }
+
+    public void setToDoItemToType(int i, String type) {
+        toDoItemToType.put(i, Character.toString(type.charAt(0)).toUpperCase());
     }
 
     public static void main(String[] args) {
@@ -43,7 +55,7 @@ public class Duke {
             if (!line.equals("")) {
                 if (line.equals("list")) {
                     for (int i = 0; i < duke.getToDoLst().size(); i++) {
-                        duke.printToDoItem(i);
+                        System.out.println(String.format("%d.%s", i + 1, duke.getToDoItemDescription(i)));
                     }
                 } else if (line.split(" ")[0].equals("done")) {
                     String[] lineData = line.split(" ");
@@ -53,12 +65,41 @@ public class Duke {
 
                     System.out.println("Nice! I've marked this task as done:");
 
-                    duke.printToDoItem(i);
+                    System.out.println(duke.getToDoItemDescription(i));
                 } else {
-                    duke.setToDoItemStatus(duke.getToDoLst().size(), false);
+                    String[] lineData = line.split(" ");
+                    String type = lineData[0];
+
+                    duke.setToDoItemStatus(duke.getToDoLstSize(), false);
+                    duke.setToDoItemToType(duke.getToDoLstSize(), type);
+
+                    if (type.equals("todo")) {
+                        line = String.join(" ", Arrays.copyOfRange(lineData, 1, lineData.length));
+                    } else if (type.equals("deadline")) {
+                        for (int i = 0; i < lineData.length; i++) {
+                            if (lineData[i].equals("/by")) {
+                                lineData[i] = "(by:";
+                                break;
+                            }
+                        }
+
+                        line = String.join(" ", Arrays.copyOfRange(lineData, 1, lineData.length)) + ")";
+                    } else {
+                        for (int i = 0; i < lineData.length; i++) {
+                            if (lineData[i].equals("/at")) {
+                                lineData[i] = "(at:";
+                                break;
+                            }
+                        }
+
+                        line = String.join(" ", Arrays.copyOfRange(lineData, 1, lineData.length)) + ")";
+                    }
+
                     duke.getToDoLst().add(line);
 
-                    System.out.println("added: " + line);
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println(duke.getToDoItemDescription(duke.getToDoLstSize() - 1));
+                    System.out.println(String.format("Now you have %d %s in the list.", duke.getToDoLstSize(), duke.getToDoLstSize() > 1 ? "tasks" : "task"));
                 }
             }
 
