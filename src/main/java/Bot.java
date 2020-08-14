@@ -3,17 +3,18 @@
 
 import java.util.List;
 import java.util.Arrays;
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
 public class Bot {
-    private String name;
-    private List<String> inputs;
+    private final String name;
+    private final List<Task> tasks;
 
     public Bot(String name) {
         this.name = name;
-        this.inputs = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     private void printMessage(List<String> msgs) {
@@ -26,6 +27,13 @@ public class Bot {
         System.out.printf("  %s\n\n", line);
     }
 
+    private void printMessage(String m) {
+        var line = "-------------------------------------";
+        System.out.printf("\n  %s\n", line);
+        System.out.printf("  %s\n", m);
+        System.out.printf("  %s\n\n", line);
+    }
+
     public void greet() {
         this.printMessage(Arrays.asList(
             String.format("Hello, I'm %s", this.name),
@@ -34,25 +42,39 @@ public class Bot {
     }
 
     public boolean processCommand(String cmd) {
+        var shouldExit = false;
         if (cmd.equals("bye")) {
             this.printMessage(Arrays.asList(
                 String.format("goodbye.")
             ));
-            return false;
+            shouldExit = true;
         } else if (cmd.equals("list")) {
             this.printMessage(
                 Stream.iterate(0, x -> x + 1)
-                    .map(i -> String.format("%d. %s", 1 + i, this.inputs.get(i)))
-                    .limit(this.inputs.size())
+                    .map(i -> String.format("%d. %s", 1 + i, this.tasks.get(i)))
+                    .limit(this.tasks.size())
                     .collect(Collectors.toList())
             );
-            return true;
-        } else {
-            this.inputs.add(cmd);
+        } else if (cmd.startsWith("done")) {
+            var sc = new Scanner(cmd);
+            sc.next();
+
+            int idx = sc.nextInt();
+            assert 0 < idx && idx <= this.tasks.size();
+
+            // one-indexed
+            idx -= 1;
+
+            this.tasks.get(idx).markAsDone();
             this.printMessage(Arrays.asList(
-                String.format("added: %s", cmd)
+                String.format("marked as done:"),
+                String.format("  %s", this.tasks.get(idx))
             ));
-            return true;
+        } else {
+            this.tasks.add(new Task(cmd));
+            this.printMessage(String.format("added: %s", cmd));
         }
+
+        return !shouldExit;
     }
 }
