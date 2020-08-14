@@ -3,7 +3,7 @@ import java.util.List;
 public class Printer {
     private static final String indent = "    ";
     private static final String doubleIndent = indent + indent;
-    private static final String border = "________________________________________";
+    private static final String border = "_________________________________________________";
 
     private static final String tickedBox = box("\u2713");
     private static final String crossedBox = box("\u2718");
