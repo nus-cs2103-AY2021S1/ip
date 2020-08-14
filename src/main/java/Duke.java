@@ -1,19 +1,16 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    static int count = 0;
-    static String[] list = new String[100];
 
-    public static void addList(String str) {
-        list[count] = str;
-        count++;
-        System.out.println("added: " + str);
-    }
+    static List<Task> list = new ArrayList<>();
+
     public static void printList() {
-        for (int i = 0; i < list.length; i++) {
-            if (list[i] != null) {
-                System.out.println((i + 1) + ". " + list[i]);
-            }
+        int i = 1;
+        for(Task t : list) {
+            System.out.println(i + "." + t.printTask());
+            i++;
         }
     }
 
@@ -28,9 +25,16 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             } else if (command.equals("list")) {
+                System.out.println("Here are the tasks in your list: ");
                 printList();
+            } else if (command.startsWith("done")) {
+                int index = Integer.parseInt(command.split(" ")[1]) - 1;
+                list.get(index).markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(list.get(index).printTask());
             } else {
-                addList(command);
+                list.add(new Task(command));
+                System.out.println("added: " + command);
             }
 
         }
