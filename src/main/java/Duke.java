@@ -12,6 +12,14 @@ public class Duke {
     private static String makeWrappedString(String txt) {
         return LINE + "\n     " + txt + "\n" + LINE;
     }
+    private static void addToList(Task task) {
+        list.add(task);
+        System.out.println(LINE
+            + "\n     Sure, I've added this task to your list:\n"
+            + "       " + task
+            + "\n     You now have " + list.size() + " task(s) in the list!\n"
+            + LINE);
+    }
 
     public static void main(String[] args) {
         System.out.println(makeWrappedString(WELCOME_MESSAGE));
@@ -21,8 +29,19 @@ public class Duke {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             switch (input.split(" ")[0]) {
+            case "todo":
+                addToList(new Todo(input.substring(5)));
+                break;
+            case "deadline":
+                int indexOfBy = input.indexOf(" /by ");
+                addToList(new Deadline(input.substring(9, indexOfBy), input.substring(indexOfBy + 5)));
+                break;
+            case "event":
+                int indexOfAt = input.indexOf(" /at ");
+                addToList(new Event(input.substring(6, indexOfAt), input.substring(indexOfAt + 5)));
+                break;
             case "list":
-                System.out.println(LINE);
+                System.out.println(LINE + "\n     Here are the tasks in your list:");
                 for (int i = 0; i < list.size(); i++) {
                     System.out.println("     " + (i + 1) + ": " + list.get(i));
                 }
@@ -35,8 +54,8 @@ public class Duke {
                     makeWrappedString("Great Job! I've marked this task as done:\n       " + doneTask));
                 break;
             default:
-                list.add(new Task(input));
-                System.out.println(makeWrappedString("added: " + input));
+                System.out.println(makeWrappedString("Check your command again!\n     "
+                    + "Your command should either start with todo, deadline, event, list or done."));
                 break;
             }
             input = sc.nextLine();
