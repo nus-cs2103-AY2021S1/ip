@@ -2,8 +2,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private final static String divider =
+    private static final String divider =
             "\t_____________________________________________\n";
+    private static final ArrayList<Task> tasks = new ArrayList<>();
 
     private static void greetings() {
         String logo = "\n"
@@ -29,17 +30,23 @@ public class Duke {
         System.out.print(address);
     }
 
-    private static void listTasks(ArrayList<Task> tasks) {
+    private static void listTasks() {
         System.out.print(divider);
+        System.out.print("\tHere are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             int number = i + 1;
-            System.out.print("\t" + number + ": " + tasks.get(i) + "\n");
+            System.out.print("\t" + number + ". " + tasks.get(i) + "\n");
         }
         System.out.print(divider);
     }
 
-    private static void markTaskDone() {
-
+    private static void markTaskDone(int index) {
+        Task finishedTask = tasks.get(index - 1);
+        finishedTask.markAsDone();
+        String doneTask = divider
+                + "\tGood job! I've marked this task as done:\n\t\t"
+                + finishedTask + "\n\tKeep going!\n" + divider;
+        System.out.print(doneTask);
     }
 
     private static void exitFocus() {
@@ -49,9 +56,12 @@ public class Duke {
         System.out.print(exit);
     }
 
-    private static void printTask(String taskName) {
-        String task = divider + "\t added: " + taskName + "\n" + divider;
-        System.out.print(task);
+    private static void addTask(String taskName) {
+        Task task = new Task(taskName);
+        tasks.add(task);
+        String printing = divider + "\t added: "
+                + taskName + "\n" + divider;
+        System.out.print(printing);
     }
 
     public static void main(String[] args) {
@@ -60,21 +70,19 @@ public class Duke {
         String name = sc.nextLine();
         addressUser(name);
 
-        ArrayList<Task> tasks = new ArrayList<>();
         String input = "";
         while (sc.hasNext()) {
             input = sc.nextLine();
             if (input.equals("list")) { // list tasks
-                listTasks(tasks);
+                listTasks();
             } else if (input.contains("done")) { // done tasks
-                markTaskDone();
-            } else if (input.equals("bye")) { // say bye
+                int index = Integer.parseInt(input.substring(5));
+                markTaskDone(index);
+            } else if (input.equals("bye")) { // exit bot
                 exitFocus();
                 break;
             } else { // add tasks
-                Task task = new Task(input);
-                tasks.add(task);
-                printTask(input);
+                addTask(input);
             }
         }
         sc.close();
