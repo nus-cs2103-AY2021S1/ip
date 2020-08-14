@@ -1,0 +1,9 @@
+todo read book
+deadline return book /by tomorrow
+event library renewal /at next Sunday
+todo do homework
+list
+done 2
+done 4
+list
+bye

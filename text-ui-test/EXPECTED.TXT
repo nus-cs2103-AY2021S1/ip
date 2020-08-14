@@ -1,7 +1,49 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+    ____________________________________________________________
+     Hello, I'm Duke, your personal assistant!
+     What can I do for you?
+    ____________________________________________________________
+    ____________________________________________________________
+     Sure, I've added this task to your list:
+       [T][X] read book
+     You now have 1 task(s) in the list!
+    ____________________________________________________________
+    ____________________________________________________________
+     Sure, I've added this task to your list:
+       [D][X] return book (by: tomorrow)
+     You now have 2 task(s) in the list!
+    ____________________________________________________________
+    ____________________________________________________________
+     Sure, I've added this task to your list:
+       [E][X] library renewal (at: next Sunday)
+     You now have 3 task(s) in the list!
+    ____________________________________________________________
+    ____________________________________________________________
+     Sure, I've added this task to your list:
+       [T][X] do homework
+     You now have 4 task(s) in the list!
+    ____________________________________________________________
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1: [T][X] read book
+     2: [D][X] return book (by: tomorrow)
+     3: [E][X] library renewal (at: next Sunday)
+     4: [T][X] do homework
+    ____________________________________________________________
+    ____________________________________________________________
+     Great Job! I've marked this task as done:
+       [D][Y] return book (by: tomorrow)
+    ____________________________________________________________
+    ____________________________________________________________
+     Great Job! I've marked this task as done:
+       [T][Y] do homework
+    ____________________________________________________________
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1: [T][X] read book
+     2: [D][Y] return book (by: tomorrow)
+     3: [E][X] library renewal (at: next Sunday)
+     4: [T][Y] do homework
+    ____________________________________________________________
+    ____________________________________________________________
+     Bye. Hope to see you again soon! :)
+    ____________________________________________________________
