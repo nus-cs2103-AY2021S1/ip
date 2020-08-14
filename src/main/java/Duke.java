@@ -54,13 +54,20 @@ public class Duke {
                 completeTask(taskNumber);
                 return true;
             case "deadline":
-                String command = scanner.nextLine().trim();
-                System.out.println(command.charAt(0));
-                String[] parts = command.split(" /by ");
-                addTask(new Deadline(parts[0], parts[1]));
+                String deadlineCommand = scanner.nextLine().trim();
+                String[] deadlineParts = deadlineCommand.split(" /by ");
+                addTask(new Deadline(deadlineParts[0], deadlineParts[1]));
+                return true;
+            case "event":
+                String eventCommand = scanner.nextLine().trim();
+                String[] eventParts = eventCommand.split(" /at ");
+                addTask(new Event(eventParts[0], eventParts[1]));
+                return true;
+            case "todo":
+                addTask(new Todo(userInput + scanner.nextLine()));
                 return true;
             default:
-                addTask(new Todo(userInput + scanner.nextLine()));
+                System.out.println("Command not recognised");
                 return true;
         }
     }
