@@ -1,10 +1,34 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    static ArrayList<String> storage = new ArrayList<>();
+
+    // border line
+    public static void line() {
+        System.out.println("____________________________________________________________");
+    }
+
+    // output sandwiched by border lines
     public static void echo(String output) {
-        System.out.println("____________________________________________________________");
+        line();
         System.out.println(output);
-        System.out.println("____________________________________________________________");
+        line();
+    }
+
+    // stores user inputs in storage
+    public static void store(String item) {
+        storage.add(item);
+    }
+
+    // lists items in storage with numbers
+    public static void listOut() {
+        line();
+        for (int i = 0; i < storage.size(); i++) {
+            // list starts from 1
+            System.out.println((i + 1) + ". " + storage.get(i));
+        }
+        line();
     }
 
     public static void main(String[] args) {
@@ -21,11 +45,20 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
             String output = scanner.next();
+            // bye exits while
             if (output.equals("bye")) {
                 echo("Ciao!");
                 break;
             }
-            echo(output);
+            // list of items in storage
+            else if (output.equals("list")) {
+                listOut();
+            }
+            // no special order, adds user input to storage
+            else {
+                storage.add(output);
+                echo("added: " + output);
+            }
         }
 
     }
