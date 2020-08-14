@@ -1,6 +1,7 @@
 public class Task {
     protected boolean isDone;
     protected String description;
+    public static int totalTasks = 0;
 
     Task(String description) {
         this.isDone = false;

@@ -31,8 +31,11 @@ public class Duke {
 
     private static void parseCommands(String command) throws Exception {
         while (command != null && !command.equals("bye")) {
-            String[] tokens = command.split(" ");
-            String commandCheck = tokens[0];
+            String[] userInputArray = command.split(" ");
+            String commandCheck = userInputArray[0];
+            Task taskToAdd;
+            int numOfInput = userInputArray.length;
+
             printBorder();
 
             switch (commandCheck) {
@@ -48,6 +51,7 @@ public class Duke {
                             index++;
                         }
                     }
+                    printBorder();
                     break;
 
                 case "done":
@@ -60,14 +64,95 @@ public class Duke {
                     System.out.println(" " + currentTask.toString());
                     break;
 
+                case "todo":
+                    StringBuilder todoString = new StringBuilder("");
+                    int j = 1;
+                    while (j < numOfInput) {
+                        todoString.append(userInputArray[j]);
+                        todoString.append(" ");
+                        j++;
+                    }
+                    taskToAdd = new Todo(todoString.toString().trim());
+                    printGotIt();
+                    printTask(taskToAdd);
+                    STORAGE.add(taskToAdd);
+                    printTaskCount();
+                    break;
+
+                case "deadline":
+                    StringBuilder deadlineString = new StringBuilder("");
+                    StringBuilder deadlineDate = new StringBuilder("");
+                    boolean checkForDate = false;
+                    int m = 1;
+                    while (m < numOfInput) {
+                        if (userInputArray[m].equals("/by")) {
+                            checkForDate = true;
+                        } else {
+                            if (checkForDate == false) {
+                                deadlineString.append(userInputArray[m]);
+                                deadlineString.append(" ");
+                            } else {
+                                deadlineDate.append(userInputArray[m]);
+                                deadlineDate.append(" ");
+                            }
+                        }
+                        m++;
+                    }
+                    taskToAdd = new Deadline(deadlineString.toString().trim(), deadlineDate.toString().trim());
+                    printGotIt();
+                    printTask(taskToAdd);
+                    STORAGE.add(taskToAdd);
+                    printTaskCount();
+                    break;
+
+                case "event":
+                    StringBuilder eventString = new StringBuilder("");
+                    StringBuilder eventDate = new StringBuilder(" ");
+                    boolean checkForEvent = false;
+                    int z = 1;
+                    while (z < numOfInput) {
+                        if (userInputArray[z].equals("/at")) {
+                            checkForEvent = true;
+                        } else {
+                            if (checkForEvent == false) {
+                                eventString.append(userInputArray[z]);
+                                eventString.append(" ");
+                            } else {
+                                eventDate.append(userInputArray[z]);
+                                eventDate.append(" ");
+                            }
+                        }
+                        z++;
+                    }
+                    taskToAdd = new Event(eventString.toString().trim(), eventDate.toString().trim());
+                    printGotIt();
+                    printTask(taskToAdd);
+                    STORAGE.add(taskToAdd);
+                    printTaskCount();
+                    break;
+
                 default:
-                    System.out.println("added: " + command);
-                    Task newTask = new Task(command);
-                    STORAGE.add(newTask);
                     break;
             }
             command = READER.readLine();
         }
+    }
+
+    private static void printTask(Task taskToAdd) {
+        System.out.println(" " + taskToAdd.toString());
+    }
+
+    private static void printGotIt() {
+        System.out.println("Got it. I've added this task:");
+    }
+
+    private static void printTaskCount() {
+        if (Task.totalTasks > 1) {
+            System.out.println("Now you have " + Task.totalTasks + " tasks in the list.");
+        } else {
+            System.out.println("Now you have " + Task.totalTasks + " task in the list.");
+        }
+        printBorder();
     }
 
     private static void printBorder() {
