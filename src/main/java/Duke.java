@@ -20,7 +20,7 @@ public class Duke {
 
     public void addTask(Task task) {
         taskList.add(task);
-        printMessage(String.format("added: %s", task));
+        printMessage(String.format("added: %s \n Now you have %d tasks in the list", task, taskList.size()));
     }
 
     public void completeTask(int taskNumber) {
