@@ -6,13 +6,13 @@ import java.util.ArrayList;
 public class Duke {
 
     public static final String LOGO = " ____        _        \n"
-                                      + "|  _ \\ _   _| | _____ \n"
-                                      + "| | | | | | | |/ / _ \\\n"
-                                      + "| |_| | |_| |   <  __/\n"
-                                      + "|____/ \\__,_|_|\\_\\___|\n";
+                                    + "|  _ \\ _   _| | _____ \n"
+                                    + "| | | | | | | |/ / _ \\\n"
+                                    + "| |_| | |_| |   <  __/\n"
+                                    + "|____/ \\__,_|_|\\_\\___|\n";
     public static final Reader INPUTSTREAMREADER = new InputStreamReader(System.in);
     public static final BufferedReader READER = new BufferedReader(INPUTSTREAMREADER);
-    public static final ArrayList<String> STORAGE = new ArrayList<String>();
+    public static final ArrayList<Task> STORAGE = new ArrayList<Task>();
 
     public static void main(String[] args) throws Exception {
         executeProgram();
@@ -31,16 +31,40 @@ public class Duke {
 
     private static void parseCommands(String command) throws Exception {
         while (command != null && !command.equals("bye")) {
+            String[] tokens = command.split(" ");
+            String commandCheck = tokens[0];
             printBorder();
-            if (command.equals("list")) {
-                int index = 1;
-                for (String inputString: STORAGE) {
-                    System.out.println(index + ". " + inputString);
-                    index++;
-                }
-            } else {
-                System.out.println("added: " + command);
-                STORAGE.add(command);
+
+            switch (commandCheck) {
+                case "list":
+                    if (STORAGE.isEmpty()) {
+                        System.out.println("The list is empty!");
+                    } else {
+                        int index = 1;
+                        System.out.println("These are the tasks in your list:");
+                        for (Task task : STORAGE) {
+                            String str = task.toString();
+                            System.out.println(index + ". " + str);
+                            index++;
+                        }
+                    }
+                    break;
+
+                case "done":
+                    String temp = command.split(" ")[1];
+                    int indexOfTemp = Integer.parseInt(temp);
+                    int currentTaskIndex = indexOfTemp - 1;
+                    Task currentTask = STORAGE.get(currentTaskIndex);
+                    STORAGE.get(currentTaskIndex).setDone();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(" " + currentTask.toString());
+                    break;
+
+                default:
+                    System.out.println("added: " + command);
+                    Task newTask = new Task(command);
+                    STORAGE.add(newTask);
+                    break;
             }
             command = READER.readLine();
         }
