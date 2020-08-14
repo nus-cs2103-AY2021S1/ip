@@ -1,0 +1,8 @@
+todo eat cake
+event friend's birthday /at 23 Aug 4pm
+deadline CS2103 /by 20 Aug
+list
+done 1
+done 2
+list
+bye
