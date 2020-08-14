@@ -9,7 +9,6 @@ public class Task {
 
     public void complete() {
         this.completed = true;
-        System.out.println(">> Yay! The following task is marked as done:\n>> " + this.toString());
     }
 
     public String getStatusIcon() {
