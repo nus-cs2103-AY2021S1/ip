@@ -1,23 +1,34 @@
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class Server {
-    LinkedList<String> taskList = new LinkedList<>();
+    ArrayList<Task> taskList = new ArrayList<>();
 
-    public void add(String task) {
-        this.taskList.add(task);
-        System.out.print(formatOut("Added: " + task + "\n"));
+    public void add(String description) {
+        Task newTask = new Task(description);
+        this.taskList.add(newTask);
+        System.out.print(Duke.formatOut("Added: " + description + "\n"));
     }
 
     public void list() {
         StringBuilder builder = new StringBuilder();
-        int index = 1;
 
-        for(String s:taskList) {
-            builder.append(index).append(". ").append(s).append("\n").append("\t");
-            index++;
+        for(Task task:taskList) {
+            builder.append(taskList.indexOf(task) + 1).append(". ").append(task.toString()).append("\n").append("\t");
         }
 
-        System.out.print(formatOut(builder.toString()));
+        System.out.print(Duke.formatOut(builder.toString()));
+    }
+
+    public void perform(String input) {
+        String[] s = input.split(" ");
+        if (s[0].equals("list")) {
+            this.list();
+        } else if (s[0].equals("done")) {
+            int index = Integer.parseInt(s[1]) - 1;
+            this.taskList.get(index).markAsDone();
+        } else {
+            this.add(input);
+        }
     }
 
     public String formatOut(String s) {

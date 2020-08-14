@@ -12,26 +12,31 @@ public class Duke {
         Server s = new Server();
         System.out.print(s.formatOut(welcome()));
         Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
+        String input = sc.nextLine();
 
-        while (!command.equals("bye")) {
-            if (command.equals("list")) {
-                s.list();
-            } else {
-                s.add(command);
-            }
-            command = sc.nextLine();
+        while (!input.equals("bye")) {
+            s.perform(input);
+            input = sc.nextLine();
         }
 
         System.out.print(s.formatOut(goodbye()));
     }
 
+    public static String formatOut(String s) {
+        return String.format("  %s\n    %s\n  %s\n",hor_line(),s,hor_line());
+    }
 
+    private static String hor_line() {
+        return "-------------------------------------";
+    }
 
     private static String welcome() {
-        return "Hello, I am Duke !\t\n What can I do for you ?";
+        return "Hello, I am Duke !\n\t What can I do for you ?";
     }
 
     private static String goodbye() { return "Bye ! Hope to see you again soon.";}
 
+    public static String donegreet() {
+        return "Nice! I've marked this task as done: \n";
+    }
 }
