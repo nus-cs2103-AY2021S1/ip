@@ -1,7 +1,7 @@
 // Task.java
 // Copyright (c) 2020, zhiayang, Apache License 2.0.
 
-public class Task {
+public abstract class Task {
     private String name;
     private boolean done;
 
@@ -23,11 +23,7 @@ public class Task {
         this.done = true;
     }
 
-    @Override
-    public String toString() {
-        return String.format("[%s] %s",
-            this.done ? "\u2713" : "\u2718",
-            this.name
-        );
+    protected String getCheckboxString() {
+        return String.format("[%s]", this.done ? "\u2713" : "\u2718");
     }
 }

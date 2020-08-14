@@ -4,6 +4,7 @@
 import java.util.List;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Optional;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
@@ -41,60 +42,80 @@ public class Bot {
         ));
     }
 
-    public boolean processCommand(String cmd) {
-        var command = parseCommand(cmd);
-        switch (command.getType()) {
-        case Quit:
-            this.printMessage(Arrays.asList(
-                String.format("goodbye.")
-            ));
+    public boolean processCommand(String str) {
+        var sc = new Scanner(str);
+        if (!sc.hasNext()) {
+            return true;
+        }
+
+        var cmd = sc.next().trim();
+
+        if (cmd.equals("bye")) {
+            this.printMessage("goodbye.");
             return false;
-
-        case AddItem:
-            var name = command.getItemName().get();
-            this.tasks.add(new Task(name));
-            this.printMessage(String.format("added: %s", name));
-            break;
-
-        case ListItems:
+        } else if (cmd.equals("list")) {
             this.printMessage(
                 Stream.iterate(0, x -> x + 1)
                     .map(i -> String.format("%d. %s", 1 + i, this.tasks.get(i)))
                     .limit(this.tasks.size())
                     .collect(Collectors.toList())
             );
-            break;
-
-        case MarkItemAsDone:
-            var idx = command.getItemIndex().get();
-            assert 0 < idx && idx <= this.tasks.size();
-
+        } else if (cmd.equals("done")) {
             // one-indexed
-            idx -= 1;
+            var idx = sc.nextInt() - 1;
+            assert 0 <= idx && idx < this.tasks.size();
 
             this.tasks.get(idx).markAsDone();
             this.printMessage(Arrays.asList(
                 String.format("marked as done:"),
                 String.format("  %s", this.tasks.get(idx))
             ));
-            break;
+        } else if (cmd.equals("todo")) {
+            var task = new Todo(sc.nextLine().trim());
+            this.tasks.add(task);
+
+            this.printMessage(Arrays.asList(
+                String.format("added: %s", task)
+            ));
+        } else if (cmd.equals("event")) {
+            sc.useDelimiter("/");
+            var item = sc.next().trim();
+            var when = sc.next().trim();
+
+            if (!when.startsWith("at ")) {
+                this.printMessage(String.format("expected: event <name> /at time"));
+                return true;
+            }
+
+            when = when.substring(3).trim();
+            var task = new Event(item, when);
+            this.tasks.add(task);
+
+            this.printMessage(Arrays.asList(
+                String.format("added: %s", task)
+            ));
+        } else if (cmd.equals("deadline")) {
+            sc.useDelimiter("/");
+            var item = sc.next().trim();
+            var when = sc.next().trim();
+
+            if (!when.startsWith("by ")) {
+                this.printMessage(String.format("expected: deadline <name> /by time"));
+                return true;
+            }
+
+            when = when.substring(3).trim();
+
+            var task = new Deadline(item, when);
+            this.tasks.add(task);
+
+            this.printMessage(Arrays.asList(
+                String.format("added: %s", task)
+            ));
+        } else {
+            this.printMessage(String.format("unknown command '%s'", cmd));
         }
 
         return true;
-    }
-
-    private static Command parseCommand(String input) {
-        var sc = new Scanner(input);
-        var cmd = sc.next().trim();
-
-        if (cmd.equals("bye")) {
-            return Command.quit();
-        } else if (cmd.equals("list")) {
-            return Command.listItems();
-        } else if (cmd.equals("done")) {
-            return Command.markItemAsDone(sc.nextInt());
-        } else {
-            return Command.addItem(input);
-        }
     }
 }
