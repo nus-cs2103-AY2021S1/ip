@@ -42,24 +42,31 @@ public class Bot {
     }
 
     public boolean processCommand(String cmd) {
-        var shouldExit = false;
-        if (cmd.equals("bye")) {
+        var command = parseCommand(cmd);
+        switch (command.getType()) {
+        case Quit:
             this.printMessage(Arrays.asList(
                 String.format("goodbye.")
             ));
-            shouldExit = true;
-        } else if (cmd.equals("list")) {
+            return false;
+
+        case AddItem:
+            var name = command.getItemName().get();
+            this.tasks.add(new Task(name));
+            this.printMessage(String.format("added: %s", name));
+            break;
+
+        case ListItems:
             this.printMessage(
                 Stream.iterate(0, x -> x + 1)
                     .map(i -> String.format("%d. %s", 1 + i, this.tasks.get(i)))
                     .limit(this.tasks.size())
                     .collect(Collectors.toList())
             );
-        } else if (cmd.startsWith("done")) {
-            var sc = new Scanner(cmd);
-            sc.next();
+            break;
 
-            int idx = sc.nextInt();
+        case MarkItemAsDone:
+            var idx = command.getItemIndex().get();
             assert 0 < idx && idx <= this.tasks.size();
 
             // one-indexed
@@ -70,11 +77,24 @@ public class Bot {
                 String.format("marked as done:"),
                 String.format("  %s", this.tasks.get(idx))
             ));
-        } else {
-            this.tasks.add(new Task(cmd));
-            this.printMessage(String.format("added: %s", cmd));
+            break;
         }
 
-        return !shouldExit;
+        return true;
+    }
+
+    private static Command parseCommand(String input) {
+        var sc = new Scanner(input);
+        var cmd = sc.next().trim();
+
+        if (cmd.equals("bye")) {
+            return Command.quit();
+        } else if (cmd.equals("list")) {
+            return Command.listItems();
+        } else if (cmd.equals("done")) {
+            return Command.markItemAsDone(sc.nextInt());
+        } else {
+            return Command.addItem(input);
+        }
     }
 }
