@@ -1,6 +1,9 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
+    private static ArrayList<String> inputList = new ArrayList<>(); // List of all input items from user
+
     public static void main(String[] args) {
         String logo = "Hans ㋡";
                 /*"_   _        _        \n"
@@ -16,6 +19,7 @@ public class Duke {
 
     private static void awaitInstructions() {
         Scanner sc = new Scanner(System.in);
+
         while (sc.hasNext()) {
             String userInput =  sc.nextLine();
 
@@ -23,11 +27,25 @@ public class Duke {
                 case "bye":
                     System.out.println("Bye. Hope to see you again soon!");
                     break;
+                case "list":
+                    listAllItems();
+                    break;
                 default:
-                    echo(userInput);
+                    addItem(userInput);
                     break;
             }
         }
+    }
+
+    public static void addItem(String userInput) {
+        Duke.inputList.add(userInput);
+        System.out.println("added: " + userInput);
+    }
+
+    private static void listAllItems() {
+        ArrayList<String> currList = Duke.inputList;
+        currList.forEach(item ->
+                System.out.println((currList.indexOf(item) + 1) + ". " + item));
     }
 
     private static void echo(String userInput) {
