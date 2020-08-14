@@ -1,3 +1,5 @@
+import jdk.jfr.Event;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -10,8 +12,10 @@ public class Duke {
 
         while (true) {
             String userInput = sc.nextLine();
-            String[] splitInput = userInput.split(" "); // split command by the spaces
+            String[] splitInput = userInput.split(" ", 2); // split command by the spaces
             String command = splitInput[0];
+            String value;
+            value = splitInput.length > 1 ? splitInput[1] : "";
 
             switch (command) {
                 case "bye":  // terminate on "bye"
@@ -29,13 +33,28 @@ public class Duke {
                     }
                     break;
                 case "done":  // mark task as done and print it
-                    int taskNum = Integer.parseInt(splitInput[1]) - 1;
+                    int taskNum = Integer.parseInt(value) - 1;
                     System.out.println(tasks[taskNum].markAsDone());
                     break;
-                default: // add task
-                    tasks[index] = new Task(userInput);
-                    System.out.println("――――  added: " + userInput);
+                case "todo": // add toDoTask
+                    tasks[index] = new ToDoTask(value);
+                    System.out.println("―――― Received, added the following task:\n" + tasks[index].toString());
                     index += 1; // increment index
+                    System.out.println("You now have " + index + " pending tasks.");
+                    break;
+                case "deadline": // add deadlineTask
+                case "event": // add eventTask
+                    String[] splitValue;
+                    if (command.equals("deadline")) {
+                        splitValue = value.split("/by ");
+                        tasks[index] = new DeadlineTask(splitValue[0], splitValue[1]);
+                    } else {
+                        splitValue = value.split("/at ");
+                        tasks[index] = new EventTask(splitValue[0], splitValue[1]);
+                    }
+                    System.out.println("―――― Received, added the following task:\n" + tasks[index].toString());
+                    index += 1; // increment index
+                    System.out.println("You now have " + index + " pending tasks.");
                     break;
             }
         }
