@@ -40,7 +40,8 @@ public class Duke {
         System.out.print(divider);
     }
 
-    private static void markTaskDone(int index) {
+    private static void markTaskDone(String input) {
+        int index = Integer.parseInt(input.substring(5));
         Task finishedTask = tasks.get(index - 1);
         finishedTask.markAsDone();
         String doneTask = divider
@@ -56,20 +57,27 @@ public class Duke {
         System.out.print(exit);
     }
 
-//    private static void addTask(String taskName) {
-//        Task task = new Task(taskName);
-//        tasks.add(task);
-//        String printing = divider + "\t added: "
-//                + taskName + "\n" + divider;
-//        System.out.print(printing);
-//    }
-
-    private static void addToDo(String taskName) {
-        Task task = new ToDo(taskName);
-        tasks.add(task);
+    private static void addToDo(String input) {
+        String description = input.substring(5);
+        Task toDo = new ToDo(description);
+        tasks.add(toDo);
         String printing = divider
                 + "\tGot it. I've added this task:\n\t\t"
-                + task + "\n\t" + "Now you have "
+                + toDo + "\n\t" + "Now you have "
+                + tasks.size() + " tasks in the list.\n"
+                + divider;
+        System.out.print(printing);
+    }
+
+    private static void addDeadline(String input) {
+        int end = input.indexOf("/");
+        String description = input.substring(9, end);
+        String by = input.substring(end + 4);
+        Task deadline = new Deadline(description, by);
+        tasks.add(deadline);
+        String printing = divider
+                + "\tGot it. I've added this task:\n\t\t"
+                + deadline + "\n\t" + "Now you have "
                 + tasks.size() + " tasks in the list.\n"
                 + divider;
         System.out.print(printing);
@@ -85,11 +93,11 @@ public class Duke {
         while (sc.hasNext()) {
             input = sc.nextLine();
             if (input.contains("todo")) {
-                String description = input.substring(5);
-                addToDo(description);
+                addToDo(input);
+            } else if (input.contains("deadline")) {
+                addDeadline(input);
             } else if (input.contains("done")) { // done tasks
-                int index = Integer.parseInt(input.substring(5));
-                markTaskDone(index);
+                markTaskDone(input);
             } else if (input.equals("list")) { // list tasks
                 listTasks();
             } else if (input.equals("bye")) { // exit bot
