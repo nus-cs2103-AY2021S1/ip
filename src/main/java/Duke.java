@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -22,22 +23,46 @@ public class Duke {
     }
 
     public static void startChat() {
+        ArrayList<String> list = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
         while (true) {
-            Scanner scanner = new Scanner(System.in);
             // Listens for input
-            System.out.print("Enter a command: ");
+            System.out.print("Enter text or bye to quit: ");
             String input = scanner.nextLine();
             if (input.equals("bye")) {
                 // Encounters exit command
+                System.out.println();
+                indent();
                 System.out.println("Bye bye! Hope to see you again soon!");
                 break;
+            } else if (input.equals("list")) {
+                // Prints the given list
+                printList(list);
             } else if (!input.isBlank()) {
-                // Parrots the given command
-                System.out.print("You have entered: " + input + "\n\n");
+                // Stores text given
+                list.add(input);
+                indent();
+                System.out.print("Successfully added: " + input + "\n\n");
             } else {
                 // Returns blank line
                 System.out.println();
             }
         }
+    }
+
+    public static void printList(ArrayList<String> list) {
+        if (list.isEmpty()) {
+            return;
+        }
+        int listPos = 1;
+        for (int i = 0; i < list.size(); i++,listPos++) {
+            indent();
+            System.out.println(listPos + ". " + list.get(i));
+        }
+        System.out.println();
+    }
+
+    public static void indent() {
+        System.out.print("    ");
     }
 }
