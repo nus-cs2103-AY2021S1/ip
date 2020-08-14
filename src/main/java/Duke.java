@@ -53,6 +53,12 @@ public class Duke {
                 int taskNumber = scanner.nextInt();
                 completeTask(taskNumber);
                 return true;
+            case "deadline":
+                String command = scanner.nextLine().trim();
+                System.out.println(command.charAt(0));
+                String[] parts = command.split(" /by ");
+                addTask(new Deadline(parts[0], parts[1]));
+                return true;
             default:
                 addTask(new Todo(userInput + scanner.nextLine()));
                 return true;
