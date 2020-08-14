@@ -14,7 +14,7 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
-        String[] lstOfStr = new String[100];
+        Task[] lstOfTasks = new Task[100];
         int counter = 0;
 
         while (!str.equals("bye")) {
@@ -22,14 +22,17 @@ public class Duke {
 
             if (str.equals("list")) {
                 for (int i = 0; i < 100; i++) {
-                    if ( lstOfStr[i] != null) {
-                        System.out.println(i + 1 + ". " + lstOfStr[i]);
+                    if (lstOfTasks[i] != null) {
+                        System.out.println(i + 1 + ". " + lstOfTasks[i]);
                     } else {
                         break;
                     }
                 }
+            } else if (str.startsWith("done")){
+                int temp = Integer.parseInt(str.substring(5));
+                lstOfTasks[temp - 1].doTask();
             } else {
-                lstOfStr[counter] = str;
+                lstOfTasks[counter] = new Task(str);
                 System.out.println("added: " + str);
                 counter++;
             }
