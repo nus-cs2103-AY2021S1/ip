@@ -2,12 +2,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static String LINE = "    ____________________________________________________________";
-    private static String WELCOME_MESSAGE = "Hello, I'm Duke!\n"
+    private static final String LINE = "    ____________________________________________________________";
+    private static final String WELCOME_MESSAGE = "Hello, I'm Duke!\n"
         + "     What can I do for you?";
-    private static String GOODBYE_MESSAGE = "Bye. Hope to see you again soon! :)";
+    private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon! :)";
 
-    private static ArrayList<String> list = new ArrayList<>();
+    private static ArrayList<Task> list = new ArrayList<>();
 
     private static String makeWrappedString(String txt) {
         return LINE + "\n     " + txt + "\n" + LINE;
@@ -20,7 +20,7 @@ public class Duke {
 
         String input = sc.nextLine();
         while (!input.equals("bye")) {
-            switch (input) {
+            switch (input.split(" ")[0]) {
             case "list":
                 System.out.println(LINE);
                 for (int i = 0; i < list.size(); i++) {
@@ -28,9 +28,15 @@ public class Duke {
                 }
                 System.out.println(LINE);
                 break;
+            case "done":
+                Task doneTask = list.get(Integer.parseInt(input.split(" ")[1]) - 1);
+                doneTask.setDone(true);
+                System.out.println(
+                    makeWrappedString("Great Job! I've marked this task as done:\n       " + doneTask));
+                break;
             default:
-                list.add(input);
-                System.out.println(makeWrappedString( "added: " + input));
+                list.add(new Task(input));
+                System.out.println(makeWrappedString("added: " + input));
                 break;
             }
             input = sc.nextLine();
