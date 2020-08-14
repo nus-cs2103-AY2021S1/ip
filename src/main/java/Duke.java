@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static List<Chore> toDoList = new ArrayList<>();
+    public static List<Task> toDoList = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -24,7 +24,56 @@ public class Duke {
                 }
             }
             else {
-                addToDo(inputLine);
+                switch (arr[0]) {
+                    case "todo":
+                        String todo = inputLine.substring(4).trim();
+                        if (todo.equals("")) {
+                            emptyTaskError();
+                        } else {
+                            addTask(new ToDo(todo));
+                        }
+                        break;
+                    case "deadline":
+                        int by = inputLine.indexOf("/by");
+                        String deadline, byDate;
+                        if (by == -1) {
+                            deadline = inputLine.substring(8).trim();
+                            byDate = "";
+                        } else {
+                            deadline = inputLine.substring(8, by).trim();
+                            byDate = inputLine.substring(by + 3).trim();
+                        }
+                        if (deadline.equals("")) {
+                            emptyTaskError();
+                        } else if (byDate.equals("")) {
+                            emptyDateError();
+                        } else {
+                            addTask(new Deadline(deadline, byDate));
+                        }
+                        break;
+                    case "event":
+                        int at = inputLine.indexOf("/at");
+                        String event, atDate;
+                        if (at == -1) {
+                            event = inputLine.substring(5).trim();
+                            atDate = "";
+                        } else {
+                            event = inputLine.substring(5, at).trim();
+                            atDate = inputLine.substring(at + 3).trim();
+                        }
+                        if (event.equals("")) {
+                            emptyTaskError();
+                        } else if (atDate.equals("")) {
+                            emptyDateError();
+                        } else {
+                            addTask(new Event(event, atDate));
+                        }
+                        break;
+                    default:
+                        unknownCommandError();
+                        break;
+                }
+
             }
             inputLine = sc.nextLine();
         }
@@ -43,16 +92,18 @@ public class Duke {
         hrTag();
     }
 
-    private static void addToDo(String toDo) {
+    private static void addTask(Task task) {
         hrTag();
-        System.out.println("Chore added: " + toDo);
-        toDoList.add(new Chore(toDo));
+        toDoList.add(task);
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + task);
+        System.out.println(String.format("Now you have %d tasks in the list.", toDoList.size()));
         hrTag();
     }
 
     private static void displayList() {
         hrTag();
-        System.out.println("Here are the chores you have left:");
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < toDoList.size(); i++) {
             System.out.println((i+1) + "." + toDoList.get(i));
         }
@@ -94,6 +145,25 @@ public class Duke {
         hrTag();
         System.out.println("Uh oh! That number looks like it is out of range. Check again!");
         // can add feature for user to add todo
+        hrTag();
+    }
+
+    private static void emptyTaskError() {
+        hrTag();
+        System.out.println("Please insert a task!");
+        hrTag();
+    }
+
+    private static void emptyDateError() {
+        hrTag();
+        System.out.println("Please input a date!");
+        hrTag();
+    }
+
+    private static void unknownCommandError() {
+        hrTag();
+        System.out.println("Unknown command! " +
+                "Please insert the task type first before typing in your task!");
         hrTag();
     }
 }

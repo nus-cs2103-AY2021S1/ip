@@ -1,8 +1,8 @@
-public class Chore {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
-    public Chore(String description) {
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
@@ -23,8 +23,10 @@ public class Chore {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    public abstract String getTaskType();
+
     @Override
     public String toString() {
-        return String.format("[%s] %s",getStatusIcon(), description);
+        return String.format("[%s][%s] %s", getTaskType(),getStatusIcon(), description);
     }
 }
