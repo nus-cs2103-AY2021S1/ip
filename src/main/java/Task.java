@@ -1,4 +1,5 @@
-public class Task {
+public abstract class Task {
+
     boolean done;
     String task;
 
@@ -7,10 +8,10 @@ public class Task {
         this.task = task;
     }
 
-    public String markDone() {
+    String markDone() {
         this.done = true;
         return "Great job, keep it up!\n" + this.toString();
-    }
+    };
 
     @Override
     public String toString() {

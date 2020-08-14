@@ -4,21 +4,30 @@ import java.util.List;
 public class DukeList {
 
     List<Task> list;
+    int activeTasks;
+    int completedTasks;
 
     DukeList() {
         this.list = new ArrayList<>();
+        this.activeTasks = 0;
+        this.completedTasks = 0;
     }
 
-    public String addItem(String item) {
-        this.list.add(new Task(item));
-        return "added: " + item;
+    public String addItem(Task item) {
+        this.list.add(item);
+        this.activeTasks += 1;
+        return "added: " + item + "\nActive Tasks: " +
+                this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
     }
 
     public String markDone(int index) {
-        if (index >= this.list.size()) {
+        if (index >= this.list.size() || index < 0) {
             return "Please choose a valid task number.";
         }
-        return this.list.get(index).markDone();
+        this.activeTasks -= 1;
+        this.completedTasks += 1;
+        return this.list.get(index).markDone() + "\nActive Tasks: " +
+                this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
     }
 
     @Override
@@ -30,6 +39,8 @@ public class DukeList {
         for (int i = 1; i <= this.list.size(); i++) {
             result += i + ". " + this.list.get(i - 1) + "\n";
         }
+        result += "\nActive Tasks: " +
+                this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
         return result;
     }
 }
