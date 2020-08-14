@@ -24,6 +24,7 @@ public class Duke {
                         "____________________________________________________________\n" +
                                 "Bye. Hope to see you again soon!" +
                                 "\n____________________________________________________________\n");
+                scanner.close();
             } else {
                 System.out.println(
                         "____________________________________________________________\n" +
@@ -35,8 +36,16 @@ public class Duke {
     }
 
     private static String processCommand(String command, DukeList list) {
-        if (command.equals("list")) {
+        String[] stringArray = command.split(" ");
+
+        if (stringArray[0].equals("list")) {
             return list.toString();
+        } else if (stringArray[0].equals("done")) {
+            if (stringArray.length > 1) {
+                return list.markDone(Integer.parseInt(stringArray[1]) - 1);
+            } else {
+                return "Please choose a task to mark as done, with \"done <task number>\"";
+            }
         } else {
             return list.addItem(command);
         }
