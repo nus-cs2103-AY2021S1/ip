@@ -21,21 +21,52 @@ public class Duke {
 
                 Duke.speak(sb.toString().trim());
             } else if (userInput.startsWith("done")) {
-                String[] words = userInput.split(" ");
+                String[] commandArgs = userInput.split(" ");
 
-                if (words.length < 2) {
+                if (commandArgs.length < 2) {
                     throw new IllegalArgumentException("taskId not found!");
                 }
 
-                int taskId = Integer.parseInt(userInput.split(" ")[1]);
+                int taskId = Integer.parseInt(commandArgs[1]);
                 Task task = tasks.get(taskId - 1);
                 task.markAsDone();
 
                 Duke.speak(String.format("Nice! I've marked this task as done:\n%s", task));
             } else {
-                tasks.add(new Task(userInput));
+                Task task;
+                String[] commandArgs = userInput.split(" ", 2);
 
-                Duke.speak(String.format("added: %s", userInput));
+                if (commandArgs.length < 2) {
+                    throw new IllegalArgumentException("Attempted to create new task without providing details!");
+                }
+
+                if (commandArgs[0].equals("todo")) {
+                    task = new Todo(commandArgs[1]);
+                } else if (commandArgs[0].equals("deadline")) {
+                    String[] taskArgs = commandArgs[1].split("/by", 2);
+
+                    if (taskArgs.length < 2) {
+                        throw new IllegalArgumentException("Attempted to create deadline without specifying deadline!");
+                    }
+
+                    task = new Deadline(taskArgs[0].trim(), taskArgs[1].trim());
+
+                } else if (commandArgs[0].equals("event")) {
+                    String[] taskArgs = commandArgs[1].split("/at", 2);
+
+                    if (taskArgs.length < 2) {
+                        throw new IllegalArgumentException("Attempted to create event without specifying time!");
+                    }
+
+                    task = new Event(taskArgs[0].trim(), taskArgs[1].trim());
+                } else {
+                    throw new IllegalArgumentException("Unrecognised command!");
+                }
+
+                tasks.add(task);
+
+                Duke.speak(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
+                        task, tasks.size()));
             }
         }
 
