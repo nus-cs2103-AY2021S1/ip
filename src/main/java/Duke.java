@@ -11,26 +11,43 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?");
         Scanner sc = new Scanner(System.in);
-        String input = sc.next();
-        ArrayList<String> list = new ArrayList<>();
+        String itemName = sc.nextLine();
+        ArrayList<Item> list = new ArrayList<>();
 
-        while (!input.equals("bye")) {
-            if (input.equals("list")) {
+        while (!itemName.equals("bye")) {
+            if (itemName.equals("list")) {
                 if (list.isEmpty()) {
                     System.out.println("List is empty.");
                 } else {
                     StringBuilder listOutput = new StringBuilder();
-                    for (int i = 0; i < list.size(); i++) {
-                        int num = i + 1;
-                        listOutput.append(num + ". " + list.get(i) + "\n");
+                    for (int j = 0; j < list.size(); j++) {
+                        int num = j + 1;
+                        Item item = list.get(j);
+                        listOutput.append(num + "." + item.toString() + "\n");
                     }
                     System.out.println(listOutput);
                 }
             } else {
-                list.add(input);
-                System.out.println("added: " + input);
+                if (itemName.contains(" ")) {
+                    int i = itemName.indexOf(" ");
+                    String firstWord = itemName.substring(0, i);
+                    if (firstWord.equals("done")) {
+                        int num = Integer.parseInt(itemName.substring(i+1));
+                        Item itemToSetToDone = list.get(num-1);
+                        itemToSetToDone.setDone();
+                        System.out.println("Nice! I've marked this task as done:" + "\n" + itemToSetToDone.toString());
+                    } else {
+                        Item item = new Item(itemName);
+                        list.add(item);
+                        System.out.println("added: " + itemName);
+                    }
+                } else {
+                    Item item = new Item(itemName);
+                    list.add(item);
+                    System.out.println("added: " + itemName);
+                }
             }
-            input = sc.next();
+            itemName = sc.nextLine();
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
