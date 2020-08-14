@@ -38,6 +38,10 @@ public class Duke {
                         Printer.printDoneTaskChatWindow(completeTask(input, tasks));
                         break;
 
+                    case "delete":
+                        Printer.printDeleteTaskChatWindow(deleteTask(input, tasks), tasks.size());
+                        break;
+
                     case "todo":
                     case "event":
                     case "deadline":
@@ -70,6 +74,14 @@ public class Duke {
         int index = Integer.parseInt(input.substring(5)) - 1;
         Task task = tasks.get(index);
         task.markAsDone();
+        return task;
+    }
+
+    private static Task deleteTask(String input, List<Task> tasks) {
+        // Obtain index within list of tasks
+        int index = Integer.parseInt(input.substring(7)) - 1;
+        Task task = tasks.get(index);
+        tasks.remove(index);
         return task;
     }
 

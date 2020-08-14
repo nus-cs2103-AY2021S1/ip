@@ -40,9 +40,23 @@
         [D][?] return book (by: Sunday)
     _________________________________________________
     _________________________________________________
+    Here are the tasks in your list:
     1. [T][?] borrow book
     2. [D][?] return book (by: Sunday)
     3. [E][?] project meeting (at: Mon 2-4pm)
+    _________________________________________________
+    _________________________________________________
+    Okay. I've removed this task:
+        [D][?] return book (by: Sunday)
+    Now you have 2 tasks in the list.
+    _________________________________________________
+    _________________________________________________
+    Here are the tasks in your list:
+    1. [T][?] borrow book
+    2. [E][?] project meeting (at: Mon 2-4pm)
+    _________________________________________________
+    _________________________________________________
+    ERROR: Invalid list number input!
     _________________________________________________
     _________________________________________________
     Thank you for using Duke J.

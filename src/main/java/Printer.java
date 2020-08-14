@@ -11,8 +11,9 @@ public class Printer {
     // Prints a chat window showing the list of tasks
     public static void printTasksChatWindow(List<Task> tasks) {
         printBorder();
-        int index = 0;
+        printIndentedMessage("Here are the tasks in your list:");
 
+        int index = 0;
         for (Task task : tasks) {
             System.out.printf("%s%d. %s\n", indent, ++index, task);
         }
@@ -23,21 +24,26 @@ public class Printer {
     // Prints a chat window that describes a task that is done
     public static void printDoneTaskChatWindow(Task task) {
         printBorder();
+        printIndentedMessage("Great! I've marked this task as done:");
+        printDoubleIndentedMessage(task.toString());
+        printBorder();
+    }
 
-        System.out.printf("%sGreat! I've marked this task as done:\n", indent);
-        System.out.printf("%s%s\n", doubleIndent, task);
-
+    // Prints a chat window that describes a task that is deleted
+    public static void printDeleteTaskChatWindow(Task task, int numOfTotalTasks) {
+        printBorder();
+        printIndentedMessage("Okay. I've removed this task:");
+        printDoubleIndentedMessage(task.toString());
+        printNumberOfTasks(numOfTotalTasks);
         printBorder();
     }
 
     // Prints a chat window with a customised "add task" description
     public static void printAddTaskChatWindow(Task task, int numOfTotalTasks) {
         printBorder();
-
-        System.out.printf("%sAlright. I've added this task:\n", indent);
-        System.out.printf("%s%s\n", doubleIndent, task);
-        System.out.printf("%sNow you have %d tasks in the list.\n", indent, numOfTotalTasks);
-
+        printIndentedMessage("Alright. I've added this task:");
+        printDoubleIndentedMessage(task.toString());
+        printNumberOfTasks(numOfTotalTasks);
         printBorder();
     }
 
@@ -46,7 +52,7 @@ public class Printer {
         printBorder();
 
         for (String message : messages) {
-            System.out.printf("%s%s\n", indent, message);
+            printIndentedMessage(message);
         }
 
         printBorder();
@@ -60,5 +66,20 @@ public class Printer {
     // Prints a border as in the chat window
     private static void printBorder() {
         System.out.printf("%s%s\n", indent, border);
+    }
+
+    // Prints an indented generic message
+    private static void printIndentedMessage(String s) {
+        System.out.printf("%s%s\n", indent, s);
+    }
+
+    // Prints a double-indented generic message
+    private static void printDoubleIndentedMessage(String s) {
+        System.out.printf("%s%s\n", doubleIndent, s);
+    }
+
+    // Prints the number of tasks left in the list
+    private static void printNumberOfTasks(int n) {
+        System.out.printf("%sNow you have %d tasks in the list.\n", indent, n);
     }
 }

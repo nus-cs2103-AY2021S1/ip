@@ -7,4 +7,7 @@ event project meeting
 event project meeting /at Mon 2-4pm
 done 2
 list
+delete 2
+list
+delete 5
 bye
