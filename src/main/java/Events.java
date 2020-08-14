@@ -15,7 +15,7 @@ public class Events extends Task {
         String str = "   ____________________________________________________________"
                 + "\n    Got it. I've added this task:"
                 + "\n      " + tasks.get(tasks.size() - 1)
-                + "\n    Now you have " + tasks.size() + " task(s) in the list."
+                + "\n    Now you have " + tasks.size() + " tasks in the list."
                 + "\n   ____________________________________________________________\n";
         System.out.println(str);
     }

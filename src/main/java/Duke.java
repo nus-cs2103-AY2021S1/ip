@@ -1,21 +1,17 @@
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
 
     public static void greeting() {
-        String logo = "\n           ███▄ ▄███▓  ██▓   ▄████▄   ██░  ██ "
-                    + "\n           ▓██▒▀█▀ ██▒ ▓██▒ ▒██▀ ▀██ ▓██░  ██▒"
-                    + "\n           ▓██    ▓██░ ▒██▒ ▒▓█    ▄ ▒██▀▀▀██░"
-                    + "\n           ▒██    ▒██  ░██░▒ ▓▓▄ ▄██▒░▓█  ░██ "
-                    + "\n           ▒██▒   ░██▒ ░██░▒  ▓███▀ ░░▓█▒ ░██▓"
-                    + "\n           ░ ▒░   ░  ░░ ▒  ░  ░▒ ▒  ░ ▒ ░ ░▒░▒"
-                    + "\n           ░  ░      ░  ▒ ░   ░  ▒    ▒ ░ ▒░ ░"
-                    + "\n           ░      ░     ▒ ░░          ░   ░░ ░"
-                    + "\n                  ░     ░  ░ ░        ░   ░  ░";
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
         String greet = "\n____________________________________________________________"
-                + "\n Hi Michaelia, I am your productivity tracker bot."
-                + "\n Type help to see all the commands that you can use!"
+                + "\n Hello! I'm Duke"
+                + "\n What can I do for you?"
                 + "\n____________________________________________________________\n";
         System.out.println(logo + greet);
     }
@@ -41,8 +37,8 @@ public class Duke {
 
     public static void invalid_index() {
         String str = "   ____________________________________________________________"
-                   + "\n    This index does not exist. Please try again!"
-                   + "\n   ____________________________________________________________";
+                + "\n    This index does not exist. Please try again!"
+                + "\n   ____________________________________________________________";
         System.out.println(str);
 
     }
@@ -69,7 +65,7 @@ public class Duke {
                 commands();
             } else if (input.equals("list")) {
                 Task.getListOfTasks(tasks);
-            } else if (input.startsWith("todo")){
+            } else if (input.startsWith("todo")) {
                 String task;
                 try {
                     task = input.split("todo")[1];
@@ -77,7 +73,7 @@ public class Duke {
                 } catch (ArrayIndexOutOfBoundsException e) {
                     ToDos.invalid_input();
                 }
-            } else if (input.startsWith("deadline")){
+            } else if (input.startsWith("deadline")) {
                 String task;
                 String due;
                 try {
