@@ -8,8 +8,9 @@ public class Duke {
         + "________________________\n";
     private final String EXIT_COMMAND = "bye";
     private final String LIST_COMMAND = "list";
+    private final String DONE_COMMAND = "done";
     private boolean hasCommand;
-    private String command;
+    private String[] input;
     private List<Task> tasks;
 
     public Duke() {
@@ -25,11 +26,13 @@ public class Duke {
 
     private void getCommand() {
         System.out.println();
-        command = sc.nextLine().trim();
+        input = sc.nextLine().trim().split(" ", 2);
         System.out.printf("%s", SEPARATOR);
     }
 
-    private void addTask(String taskName) {
+    private void addTask(String[] input) {
+        String taskName = input[0];
+        if (input.length > 1) taskName += " " + input[1];
         tasks.add(new Task(taskName));
         System.out.printf("     added: %s\n%s", taskName, SEPARATOR);
     }
@@ -42,7 +45,17 @@ public class Duke {
     private void printTaskList() {
         for (int i = 0; i < tasks.size(); i++)
             System.out.printf("     %d. %s\n", i + 1, tasks.get(i));
+        if (tasks.size() == 0)
+            System.out.println("     There are no tasks yet!");
         System.out.print(SEPARATOR);
+    }
+
+    private void setTaskDone(int taskNum) {
+        Task task = tasks.get(taskNum - 1);
+        task.setDone();
+        System.out.printf("     Nice! I've marked this task as done:\n"
+                        + "       %s\n%s",
+                task, SEPARATOR);
     }
 
     public void initialise() {
@@ -51,6 +64,7 @@ public class Duke {
 
         while (hasCommand) {
             getCommand();
+            String command = input[0];
             switch (command) {
                 case EXIT_COMMAND:
                     hasCommand = false;
@@ -58,8 +72,12 @@ public class Duke {
                 case LIST_COMMAND:
                     printTaskList();
                     break;
+                case DONE_COMMAND:
+                    int taskNum = Integer.parseInt(input[1]);
+                    setTaskDone(taskNum);
+                    break;
                 default:
-                    addTask(command);
+                    addTask(input);
                     break;
             }
         }
