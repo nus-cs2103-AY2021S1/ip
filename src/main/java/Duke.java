@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static final String LINE = "____________________________________________________________";
+    private static final String LINE = Colour.Red("____________________________________________________________");
     private static final String INDENT = "    ";
 
     public static void printLine() {
