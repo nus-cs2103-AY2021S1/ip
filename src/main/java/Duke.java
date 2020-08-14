@@ -1,6 +1,21 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
+    private static ArrayList<String> list = new ArrayList<>();
+
+    public static void addToList(String command) {
+        list.add(command);
+    }
+
+    public static void readList() {
+        int i = 1;
+        for (String ele : list) {
+            System.out.println(i + ". " + ele);
+            i++;
+        }
+    }
 
     public static void main(String[] args) {
         String logo = "_________     _____  .______________\n"
@@ -18,8 +33,11 @@ public class Duke {
                 System.out.println("Bye! Let's talk again soon!");
                 sc.close();
                 break;
+            } else if (command.equals("list")) {
+                readList();
             } else {
-                System.out.println(command);
+                addToList(command);
+                System.out.println("added: " + command);
             }
         }
     }
