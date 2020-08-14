@@ -21,6 +21,12 @@ public class Duke {
         System.out.println(">> Added the task:\n>> " + task + "\n>> You now have " + tasks.size() + " tasks to do!");
     }
 
+    private static void deleteTask(int idx) {
+        Task task = tasks.get(idx);
+        tasks.remove(idx);
+        System.out.println(">> I've eradicated the task:\n>> " + task + "\n>> You now have " + tasks.size() + " tasks to do!");
+    }
+
     private static void descriptionError(String type) {
         System.out.println(">> Oh no!!! A " + type + " must have a description!");
     }
@@ -45,6 +51,14 @@ public class Duke {
                     for (Task task : tasks) {
                         System.out.println(">> " + i++ + ". " + task);
                     }
+                    break;
+                case("delete"):
+                    int deleteIndex = Integer.parseInt(chunks[1]) - 1;
+                    if (deleteIndex >= tasks.size()) {
+                        System.out.println(">> Oh no!!! That task does not exist!");
+                        break;
+                    }
+                    deleteTask(deleteIndex);
                     break;
                 case("done"):
                     int index = Integer.parseInt(chunks[1]) - 1;

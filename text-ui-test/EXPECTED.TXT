@@ -24,4 +24,10 @@
 >> 1. [T][✓] eat cake
 >> 2. [E][✓] friend's birthday (at: 23 Aug 4pm)
 >> 3. [D][✘] CS2103 (by: 20 Aug)
+>> Oh no!!! That task does not exist!
+>> I've eradicated the task:
+>> [D][✘] CS2103 (by: 20 Aug)
+>> You now have 2 tasks to do!
+>> 1. [T][✓] eat cake
+>> 2. [E][✓] friend's birthday (at: 23 Aug 4pm)
 >> Bye! Hope I helped!
