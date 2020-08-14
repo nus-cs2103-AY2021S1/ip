@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
     private static final String LINE = "    ____________________________________________________________";
-    private static final String WELCOME_MESSAGE = "Hello, I'm Duke!\n"
+    private static final String WELCOME_MESSAGE = "Hello, I'm Duke, your personal assistant!\n"
         + "     What can I do for you?";
     private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon! :)";
 
