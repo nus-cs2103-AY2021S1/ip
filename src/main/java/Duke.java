@@ -85,19 +85,26 @@ public class Duke {
                 System.out.println("    Nice! I've marked this task as done:");
                 System.out.println(userList.get(listNumber - 1).toString());
                 System.out.println("   ____________________________________________________________");
-                
-            } else {
+
+            } else if ((input.startsWith("deadline") || input.startsWith("event")) || input.startsWith("todo")) {
                 // user trying to input to List
                 System.out.println("   ____________________________________________________________");
                 System.out.println("    Got it. I've added this task:");
                 if (input.startsWith("deadline") || input.startsWith("event")) {
                     System.out.println("      " + processEventOrDeadline(input));
-                } else {
+                } else if (input.startsWith("todo")){
                     // input starts with todo
                     System.out.println("      " + processToDo(input));
                 }
                 System.out.println("    Now you have " + userList.size() + " tasks in the list.");
                 System.out.println("   ____________________________________________________________");
+
+            } else {
+                // invalid input
+                System.out.println("   ____________________________________________________________");
+                System.out.println("    I do not recongise that input! Please try again! :D");
+                System.out.println("   ____________________________________________________________");
+
             }
         }
     }
