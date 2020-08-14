@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class Duke {
     boolean running = false;
+    String[] memory = new String[100];
+    int currentMemoryIndex = 0;
 
     boolean isRunning() {
         return running;
@@ -54,23 +56,48 @@ public class Duke {
         printLine();
     }
 
+    void list() {
+        indent();
+        printLine();
+
+        for (int i = 0; i < currentMemoryIndex; i++) {
+            indent();
+            System.out.println((i + 1) + ". " + memory[i]);
+        }
+
+        indent();
+        printLine();
+    }
+
+    void addToMemory(String string) {
+        memory[currentMemoryIndex] = string;
+        currentMemoryIndex++;
+    }
+
+    void printAddMessage(String string) {
+        indent();
+        printLine();
+
+        indent();
+        System.out.println("added " + string);
+
+        indent();
+        printLine();
+    }
+
     void checkAndPrint(String string) {
         if (string.equals("bye")) {
-            running = false;
             exit();
+        } else if (string.equals("list")) {
+            list();
         } else {
-            indent();
-            printLine();
-
-            indent();
-            System.out.println(string);
-
-            indent();
-            printLine();
+            addToMemory(string);
+            printAddMessage(string);
         }
     }
 
     void exit() {
+        running = false;
         farewell();
     }
 
