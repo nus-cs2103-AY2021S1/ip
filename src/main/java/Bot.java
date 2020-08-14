@@ -13,7 +13,7 @@ public class Bot {
     static String indentation = "    ";
     static String demarcation = Bot.indentation + "---------------";
 
-    ArrayList<String> todos;
+    ArrayList<TodoItem> todos;
 
     Bot() {
         this.todos = new ArrayList<>(100);
@@ -27,6 +27,7 @@ public class Bot {
 
         while (scanner.hasNext()) {
             String command = scanner.nextLine();
+
             System.out.println(Bot.demarcation);
             // Dispatch respective handlers depending on command
             switch (command) {
@@ -37,17 +38,25 @@ public class Bot {
                     printTodos();
                     break;
                 default:
-                    addTodos(command);
+                    if (command.startsWith("done ")) {
+                        markComplete(command);
+                    } else {
+                        addTodos(command);
+                    }
                     break;
             }
             System.out.println(Bot.demarcation);
         }
     }
 
+    private String indentWord(String word) {
+        return Bot.indentation + word;
+    }
+
     private void printTodos() {
         int counter = 1;
-
-        for (String todo : todos) {
+        System.out.println("Here are the tasks in your list:");
+        for (TodoItem todo : todos) {
             System.out.print(indentWord(Integer.toString(counter) + ". "));
             System.out.println(todo);
             counter++;
@@ -55,14 +64,20 @@ public class Bot {
     }
 
     private void addTodos(String command) {
+        TodoItem todo = new TodoItem(command);
         // Add todos
-        todos.add(command);
+        todos.add(todo);
         // Response from Duke for adding todos
         System.out.print(indentWord("added: "));
-        System.out.println(command);
+        System.out.println(todo);
     }
 
-    private String indentWord(String word) {
-        return Bot.indentation + word;
+    private void markComplete(String command) {
+        int indexToMark = Integer.parseInt(command.substring(5)) - 1;
+        todos.get(indexToMark).markDone();
+
+        // Print todo that has been marked done
+        System.out.println(indentWord("Nice! I've marked this task as done: "));
+        System.out.println(Bot.indentation + todos.get(indexToMark));
     }
 }
