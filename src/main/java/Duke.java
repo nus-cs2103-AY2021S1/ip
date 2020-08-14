@@ -6,26 +6,37 @@ public class Duke {
         String welcomeMessage = "―――― Serina here, what would you like to do?";
         System.out.println(welcomeMessage); // print welcome message
         int index = 0;
-        String[] tasks = new String[100];
+        Task[] tasks = new Task[100];
 
         while (true) {
             String userInput = sc.nextLine();
-            if (userInput.equals("bye")) { // terminate on "bye"
-                System.out.println("――――  Goodbye, call me when you need me."); // send goodbye message
-                break;
-            } if (userInput.equals("list")) { // list task
-                for (int i = 0; i < tasks.length; i++) {
-                    if (tasks[i] == null) {
-                        break;
-                    } else {
-                        int num = i + 1;
-                        System.out.println("――――  " + num + ". " + tasks[i]);
+            String[] splitInput = userInput.split(" "); // split command by the spaces
+            String command = splitInput[0];
+
+            switch (command) {
+                case "bye":  // terminate on "bye"
+                    System.out.println("――――  Goodbye, call me when you need me.");
+                    break;
+                case "list":  // list task
+                    System.out.println("―――― Your Tasks: ");
+                    for (int i = 0; i < tasks.length; i++) {
+                        if (tasks[i] == null) {
+                            break;
+                        } else {
+                            int num = i + 1;
+                            System.out.println(num + ". " + tasks[i]);
+                        }
                     }
-                }
-            } else {
-                tasks[index] = userInput; // add task
-                System.out.println("――――  added: " + userInput); // print added task
-                index += 1; // increment index
+                    break;
+                case "done":  // mark task as done and print it
+                    int taskNum = Integer.parseInt(splitInput[1]) - 1;
+                    System.out.println(tasks[taskNum].markAsDone());
+                    break;
+                default: // add task
+                    tasks[index] = new Task(userInput);
+                    System.out.println("――――  added: " + userInput);
+                    index += 1; // increment index
+                    break;
             }
         }
     }
