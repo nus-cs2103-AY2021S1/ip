@@ -1,10 +1,27 @@
+import java.util.Scanner;
+
 public class Duke {
+
+    private static void botStart() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("=========================================="
+                + "\nHi, my name is Duke."
+                + "\nWhat can I do for you today?"
+                + "\n==========================================");
+        while (true) {
+            String command = sc.next();
+            if (command.equals("bye")) {
+                System.out.println("Thanks for chatting with me, see you soon!"
+                        + "\n==========================================");
+                break;
+            } else {
+                System.out.println(">" + command + "<");
+            }
+        }
+        sc.close();
+    }
+
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        Duke.botStart();
     }
 }
