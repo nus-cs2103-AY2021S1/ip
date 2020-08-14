@@ -1,6 +1,7 @@
 public class Task {
-    boolean isDone;
-    String task;
+
+    protected boolean isDone;
+    protected String task;
 
     public Task(String task) {
         this.task = task;
@@ -17,6 +18,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s\n", getStatusIcon(), this.task);
+        return String.format("[%s] %s", getStatusIcon(), this.task);
     }
+
 }
