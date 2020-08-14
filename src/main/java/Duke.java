@@ -13,6 +13,7 @@ public class Duke {
                         "\n____________________________________________________________\n");
 
         Scanner scanner = new Scanner(System.in);
+        DukeList list = new DukeList();
 
         boolean running = true;
         while (running) {
@@ -26,14 +27,18 @@ public class Duke {
             } else {
                 System.out.println(
                         "____________________________________________________________\n" +
-                                Duke.processCommand(command) +
+                                Duke.processCommand(command, list) +
                                 "\n____________________________________________________________\n");
             }
         }
 
     }
 
-    private static String processCommand(String command) {
-        return command;
+    private static String processCommand(String command, DukeList list) {
+        if (command.equals("list")) {
+            return list.toString();
+        } else {
+            return list.addItem(command);
+        }
     }
 }
