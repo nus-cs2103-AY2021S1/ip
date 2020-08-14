@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static ArrayList<String> inputList = new ArrayList<>(); // List of all input items from user
+    private static ArrayList<Task> taskList = new ArrayList<>(); // List of all input items from user
 
     public static void main(String[] args) {
         String logo = "Hans ㋡";
@@ -31,19 +31,35 @@ public class Duke {
                     listAllItems();
                     break;
                 default:
-                    addItem(userInput);
+                    if (userInput.substring(0, 4).equals("done")) { // mark as done case, to be able to use regex
+                        String taskIndex = userInput.substring(5);
+                        markTaskAsDone(taskIndex);
+                    } else {
+                        addItem(userInput);
+                    }
                     break;
             }
         }
     }
 
+    public static void markTaskAsDone(String taskIndex) {
+        int index = Integer.valueOf(taskIndex) - 1; // taskIndex started from 1
+        Task completedTask = Duke.taskList.get(index);
+        completedTask.markAsDone();
+
+        System.out.println("Nice! I've marked this task as done: \n" +
+        completedTask.toString());
+
+    }
+
     public static void addItem(String userInput) {
-        Duke.inputList.add(userInput);
+        Task newTask = new Task(userInput);
+        Duke.taskList.add(newTask);
         System.out.println("added: " + userInput);
     }
 
     private static void listAllItems() {
-        ArrayList<String> currList = Duke.inputList;
+        ArrayList<Task> currList = Duke.taskList;
         currList.forEach(item ->
                 System.out.println((currList.indexOf(item) + 1) + ". " + item));
     }
