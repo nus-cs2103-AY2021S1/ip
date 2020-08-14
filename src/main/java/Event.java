@@ -7,6 +7,6 @@ public class Event extends Task {
 
     @Override
     public String returnStringForm() {
-        return "[E]" + super.returnStringForm() + "(at: " + this.time + ")";
+        return "[E]" + super.returnStringForm() + "( at: " + this.time + ")";
     }
 }

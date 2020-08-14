@@ -1,16 +1,5 @@
 import java.util.Scanner;
 
-enum Commands {
-    LIST("list"), BYE("bye"), DONE("done"), DEADLINE("deadline"), EVENT("event"), TODO("todo");
-    private String action;
-
-    public String getAction() {
-        return this.action;
-    }
-    private Commands(String action) {
-        this.action = action;
-    }
-};
 public class Duke {
     private Task[] taskStorage;
     private int index;
@@ -26,6 +15,14 @@ public class Duke {
         System.out.println("    ----------------------------------------");
         System.out.println("    " + content + "\n");
         System.out.println("    ----------------------------------------");
+    }
+
+    private void deleteTask(int index) {
+        for(int i = index + 1;i < this.index;i++) {
+            this.taskStorage[i - 1] = this.taskStorage[i];
+        }
+        this.taskStorage[this.index - 1] = null;
+        this.index--;
     }
 
     static String furtherProcessing(Commands commandType, String[] tokens, Duke dk) throws DukeException {
@@ -45,22 +42,45 @@ public class Duke {
             content += tokens[i] + " ";
         }
         if(content.equals("")) throw new DukeException("Description cannot be empty PLEASE!!!");
-        if(deadline.equals("") && commandType != Commands.TODO) throw new DukeException("NOT ENOUGH INFORMATION!!!");
+        if(deadline.equals("") && (commandType == Commands.DEADLINE || commandType == Commands.EVENT)) throw new DukeException("NOT ENOUGH INFORMATION!!!");
+
         if(commandType == Commands.DEADLINE) {
-            //String deadline = tokens[tokens.length - 1];
-            //if(deadline.equals(""))
+
             Deadline deadlineTask = new Deadline(content, deadline);
             dk.taskStorage[dk.index++] = deadlineTask;
             main_content = deadlineTask.returnStringForm();
+
         } else if(commandType == Commands.EVENT) {
-            //String deadline = tokens[tokens.length - 1];
+
             Event eventTask = new Event(content, deadline);
             dk.taskStorage[dk.index++] = eventTask;
             main_content = eventTask.returnStringForm();
+
         } else if(commandType == Commands.TODO) {
+
             Todo todoTask = new Todo(content);
             dk.taskStorage[dk.index++] = todoTask;
             main_content = todoTask.returnStringForm();
+
+        } else if(commandType == Commands.DELETE) {
+            int mark_number = Integer.parseInt(tokens[1]);
+            try {
+                Task marked = dk.taskStorage[mark_number - 1];
+                dk.deleteTask(mark_number - 1);
+                return "Noted. I've removed this task:\n      " + marked.returnStringForm() + "\n    Now you have " + dk.index + " task(s) in the list.";
+            } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("Invalid number");
+            }
+
+        } else if(commandType == Commands.DONE) {
+            int mark_number = Integer.parseInt(tokens[1]);
+            try {
+                Task marked = dk.taskStorage[mark_number - 1];
+                marked.markAsDone();
+                return "Nice! I've marked this task as done:\n      " + marked.returnStringForm();
+            } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("Invalid number");
+            }
         }
         return result_prefix + main_content + "\n    " + result_subfix;
     }
@@ -68,20 +88,9 @@ public class Duke {
     static String processedCommand(String command, Duke dk) throws DukeException {
         if(command.equals("")) return "";
         String[] tokens = command.split(" ");
-        if(tokens[0].equals(Commands.DONE.getAction())) {
-            int mark_number = Integer.parseInt(tokens[1]);
-            Task marked = dk.taskStorage[mark_number - 1];
-            marked.markAsDone();
-            return "Nice! I've marked this task as done:\n      " + marked.returnStringForm();
-        } else if(tokens[0].equals(Commands.TODO.getAction())) {
-            return furtherProcessing(Commands.TODO, tokens, dk);
-        } else if(tokens[0].equals(Commands.DEADLINE.getAction())) {
-            return furtherProcessing(Commands.DEADLINE, tokens, dk);
-        } else if(tokens[0].equals(Commands.EVENT.getAction())) {
-            return furtherProcessing(Commands.EVENT, tokens, dk);
-        }
-        else {
-            //dk.addTask(command);
+        try {
+            return furtherProcessing(Commands.valueOf(tokens[0].toUpperCase()), tokens, dk);
+        } catch (IllegalArgumentException e) {
             throw new DukeException("OOPS!!! CAN YOU PLEASE TYPE SOMETHING MEANINGFUL?");
         }
     }
