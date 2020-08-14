@@ -1,9 +1,9 @@
 public class Task {
-    private String name;
+    private String description;
     private boolean done;
 
-    public Task(String name) {
-        this.name = name;
+    public Task(String description) {
+        this.description = description;
         this.done = false;
     }
 
@@ -17,6 +17,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.name;
+        String icon = getStatus() ? "[✓]" : "[✗]";
+        return String.format("%s %s", icon, this.description);
     }
 }

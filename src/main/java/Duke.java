@@ -23,7 +23,7 @@ public class Duke {
                     Task item = lst.get(lstNum-1);
 
                     item.setStatus(true);
-                    Duke.echo(String.format("Nice! I've marked this task as done: \n[✓] %s", item));
+                    Duke.echo(String.format("Nice! I've marked this task as done: \n%s", item));
                     break;
                 case "bye":
                     Duke.echo("Bye. Hope to see you again soon!");
@@ -45,8 +45,7 @@ public class Duke {
         String s = "";
         for (int i = 1; i <= lst.size(); i++) {
             Task item = lst.get(i-1);
-            String icon = item.getStatus() ? "[✓]" : "[✗]";
-            s += String.format("%d.%s %s", i, icon, item);
+            s += String.format("%d.%s", i, item);
             s += (i == lst.size()) ? "" : "\n";
         }
         Duke.echo(s);
