@@ -1,8 +1,10 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
 
 public class Duke {
+
     public static final String LOGO = " ____        _        \n"
                                       + "|  _ \\ _   _| | _____ \n"
                                       + "| | | | | | | |/ / _ \\\n"
@@ -10,6 +12,7 @@ public class Duke {
                                       + "|____/ \\__,_|_|\\_\\___|\n";
     public static final Reader INPUTSTREAMREADER = new InputStreamReader(System.in);
     public static final BufferedReader READER = new BufferedReader(INPUTSTREAMREADER);
+    public static final ArrayList<String> STORAGE = new ArrayList<String>();
 
     public static void main(String[] args) throws Exception {
         executeProgram();
@@ -29,7 +32,16 @@ public class Duke {
     private static void parseCommands(String command) throws Exception {
         while (command != null && !command.equals("bye")) {
             printBorder();
-            System.out.println(command);
+            if (command.equals("list")) {
+                int index = 1;
+                for (String inputString: STORAGE) {
+                    System.out.println(index + ". " + inputString);
+                    index++;
+                }
+            } else {
+                System.out.println("added: " + command);
+                STORAGE.add(command);
+            }
             command = READER.readLine();
         }
     }
