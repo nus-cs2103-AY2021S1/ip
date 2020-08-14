@@ -10,14 +10,14 @@ public class Duke {
         System.out.println("     Hello! I'm Duke");
         System.out.println("     What can I do for you?");
         System.out.println("    ____________________________________________________________");
-        while(true) {
+        while (true) {
             res = sc.nextLine();
-            if(res.equals("bye")) {
+            if (res.equals("bye")) {
                 break;
-            } else if(res.equals("list")) {
+            } else if (res.equals("list")) {
                 System.out.println("    ____________________________________________________________");
-                for(int i = 0; i < data.size(); i++) {
-                    System.out.printf("     %d: %s\n", i + 1, data.get(i));
+                for (int i = 0; i < data.size(); i++) {
+                    System.out.printf("     %d. %s\n", i + 1, data.get(i));
                 }
                 System.out.println("    ____________________________________________________________");
             } else {
@@ -31,4 +31,6 @@ public class Duke {
         System.out.println("     Bye. Hope to see you again soon!");
         System.out.println("    ____________________________________________________________");
     }
+
+
 }
