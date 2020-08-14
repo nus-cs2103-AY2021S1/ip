@@ -6,7 +6,7 @@ import java.lang.StringBuilder;
 public class Duke {
 
     private final String lineSeparator = "***********************";
-    private List<String> taskList = new ArrayList<>();
+    private List<Task> taskList = new ArrayList<>();
 
     public void greet() {
         printMessage("Hi! I'm Duke. What can I do for you?");
@@ -18,9 +18,15 @@ public class Duke {
         System.out.println(lineSeparator);
     }
 
-    public void addTask(String task) {
+    public void addTask(Task task) {
         taskList.add(task);
         printMessage(String.format("added: %s", task));
+    }
+
+    public void completeTask(int taskNumber) {
+        Task completedTask = taskList.get(taskNumber - 1).markCompleted();
+        taskList.set(taskNumber - 1, completedTask);
+        printMessage(String.format("Nice! I've marked this task as done: \n %s", completedTask.toString()));
     }
 
     public void printList() {
@@ -38,14 +44,17 @@ public class Duke {
         greet();
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            String userInput = scanner.nextLine();
+            String userInput = scanner.next();
             if (userInput.equals("bye")) {
-                printMessage("Bye. Hope to see you soon!");
+                printMessage("Bye! Hope to see you soon!");
                 break;
             } else if (userInput.equals("list")) {
                 printList();
+            } else if (userInput.equals("done")) {
+                int taskNumber = scanner.nextInt();
+                completeTask(taskNumber);
             } else {
-                addTask(userInput);
+                addTask(new Task(userInput + scanner.nextLine()));
             }
         }
         scanner.close();

@@ -16,4 +16,10 @@ public class Task {
     public Task markCompleted() {
         return new Task(description, true);
     }
+
+    @Override
+    public String toString() {
+        String completionStatus = completed ? "Done!" : "X";
+        return String.format("[%s] %s", completionStatus, description);
+    }
 }
