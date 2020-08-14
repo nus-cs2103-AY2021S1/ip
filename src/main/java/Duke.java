@@ -5,6 +5,14 @@ import java.util.Scanner;
 public class Duke {
     private static List<Task> tasks;
 
+    private enum Commands {
+        bye, list, delete, done, todo, deadline, event, invalid
+    }
+
+    private enum TaskTypes {
+        todo, deadline, event
+    }
+
     public static void main(String[] args) {
         tasks = new ArrayList<>();
         greet();
@@ -27,12 +35,16 @@ public class Duke {
         System.out.println(">> I've eradicated the task:\n>> " + task + "\n>> You now have " + tasks.size() + " tasks to do!");
     }
 
-    private static void descriptionError(String type) {
+    private static void descriptionError(TaskTypes type) {
         System.out.println(">> Oh no!!! A " + type + " must have a description!");
     }
 
-    private static void conditionError(String type) {
+    private static void conditionError(TaskTypes type) {
         System.out.println(">> Oh no!!! A " + type + " must have an associated date!");
+    }
+
+    private static void deleteError() {
+        System.out.println(">> Oh no!!! That task does not exist!");
     }
 
     private static void converse(Scanner sc) {
@@ -41,66 +53,71 @@ public class Duke {
             String input = sc.nextLine();
             String[] chunks = input.split(" ", 2);
             String action = chunks[0];
-            switch(action) {
-                case("bye"):
+            Commands command = Commands.invalid;
+            try {
+                command = Commands.valueOf(action);
+            } catch (IllegalArgumentException e) {
+                System.out.println(">> Oh no!!! I don't understand this input :(" );
+            }
+            switch(command) {
+                case bye:
                     System.out.println(">> Bye! Hope I helped!");
                     running = false;
                     break;
-                case("list"):
+                case list:
                     int i = 1;
                     for (Task task : tasks) {
                         System.out.println(">> " + i++ + ". " + task);
                     }
                     break;
-                case("delete"):
+                case delete:
                     int deleteIndex = Integer.parseInt(chunks[1]) - 1;
                     if (deleteIndex >= tasks.size()) {
-                        System.out.println(">> Oh no!!! That task does not exist!");
+                        deleteError();
                         break;
                     }
                     deleteTask(deleteIndex);
                     break;
-                case("done"):
+                case done:
                     int index = Integer.parseInt(chunks[1]) - 1;
                     tasks.get(index).complete();
                     System.out.println(">> Yay! The following task is marked as done:\n>> " + tasks.get(index));
                     break;
-                case("todo"):
+                case todo:
                     if (chunks.length < 2) {
-                        descriptionError("todo");
+                        descriptionError(TaskTypes.todo);
                         break;
                     }
                     Task todo = new Todo(chunks[1]);
                     addTask(todo);
                     break;
-                case("deadline"):
+                case deadline:
                     if (chunks.length < 2) {
-                        descriptionError("deadline");
+                        descriptionError(TaskTypes.deadline);
                         break;
                     }
                     String[] deadlineInfo = chunks[1].split(" /by ", 2); // [name, deadline]
                     if (deadlineInfo.length < 2) {
-                        conditionError("deadline");
+                        conditionError(TaskTypes.deadline);
                         break;
                     }
                     Task deadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
                     addTask(deadline);
                     break;
-                case("event"):
+                case event:
                     if (chunks.length < 2) {
-                        descriptionError("event");
+                        descriptionError(TaskTypes.event);
                         break;
                     }
                     String[] eventInfo = chunks[1].split(" /at ", 2); // [name, date]
                     if (eventInfo.length < 2) {
-                        conditionError("event");
+                        conditionError(TaskTypes.event);
                         break;
                     }
                     Task event = new Event(eventInfo[0], eventInfo[1]);
                     addTask(event);
                     break;
                 default:
-                    System.out.println(">> Oh no!!! I don't understand this input :(" );
                     break;
             }
         }
