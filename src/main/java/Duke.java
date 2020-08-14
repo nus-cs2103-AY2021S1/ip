@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> arr = new ArrayList<>();
+        ArrayList<Task> arr = new ArrayList<>();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -18,7 +18,6 @@ public class Duke {
         System.out.println("______________________");
 
         String s = sc.nextLine();
-        int counter = 1;
 
         while (1 == 1) {
             if (s.equals("bye")) {
@@ -26,14 +25,23 @@ public class Duke {
                 System.out.println("______________________");
                 break;
             } else if (s.equals("list")) {
-                arr.forEach(System.out::println);
+                for (int i = 0; i < arr.size(); i ++) {
+                    System.out.println(Integer.toString(i + 1) + ". " + arr.get(i).toString());
+                }
+                System.out.println("______________________");
+                s = sc.nextLine();
+            } else if (s.startsWith("done")) {
+                System.out.println("gfy youve managed to finish the following...");
+                Task t = arr.get(Integer.parseInt(s.substring(5)) - 1);
+                t = t.completeTask();
+                arr.set(Integer.parseInt(s.substring(5)) - 1, t);
+                System.out.println(t);
                 System.out.println("______________________");
                 s = sc.nextLine();
             } else {
                 System.out.println("added: " + s + "\nyoure welcome ;)");
                 System.out.println("______________________");
-                arr.add(Integer.toString(counter) + ". " + s);
-                counter++;
+                arr.add(new Task(s));
                 s = sc.nextLine();
             }
         }
