@@ -4,7 +4,7 @@ public class Duke {
 
     private static void botStart() {
         Scanner sc = new Scanner(System.in);
-        String[] storage = new String[100];
+        Task[] taskStorage = new Task[100];
         int storageCount = 0;
         System.out.println("=========================================="
                 + "\nHi, my name is Duke."
@@ -18,10 +18,16 @@ public class Duke {
                 break;
             } else if (command.equals("list")) {
                 for (int i = 0; i < storageCount; i++) {
-                    System.out.println(storage[i]);
+                    System.out.println(Integer.toString(i + 1) + "." + taskStorage[i]);
                 }
+            } else if (command.substring(0, 4).equals("done") && !command.equals("done")) {
+                int taskNumber = Integer.parseInt(command.substring(5, 6));
+                taskStorage[taskNumber - 1].markAsDone();
+                System.out.println("I have marked this task as done: "
+                        + "\n" + taskStorage[taskNumber - 1]);
             } else {
-                storage[storageCount] = Integer.toString(storageCount + 1) + ". " + command;
+                Task task = new Task(command);
+                taskStorage[storageCount] = task;
                 System.out.println(">" + "added: " + command + "<");
                 storageCount++;
             }
