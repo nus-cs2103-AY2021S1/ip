@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.lang.StringBuilder;
 
 public class Duke {
 
@@ -22,6 +23,17 @@ public class Duke {
         printMessage(String.format("added: %s", task));
     }
 
+    public void printList() {
+        StringBuilder tasks = new StringBuilder();
+        for (int i = 0; i < taskList.size(); i++) {
+            tasks.append(String.format("%d. %s", i + 1, taskList.get(i)));
+            if (i != taskList.size() - 1) {
+                tasks.append('\n');
+            }
+        }
+        printMessage(tasks.toString());
+    }
+
     public void start() {
         greet();
         Scanner scanner = new Scanner(System.in);
@@ -30,6 +42,8 @@ public class Duke {
             if (userInput.equals("bye")) {
                 printMessage("Bye. Hope to see you soon!");
                 break;
+            } else if (userInput.equals("list")) {
+                printList();
             } else {
                 addTask(userInput);
             }
