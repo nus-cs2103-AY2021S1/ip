@@ -1,11 +1,20 @@
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import main.java.Deadline;
+import main.java.Event;
+import main.java.Task;
+import main.java.ToDo;
 
 public class Duke {
     private final static String EXIT_COMMAND = "bye";
     private final static String MARK_DONE_COMMAND = "done";
     private final static String DISPLAY_TASKS_COMMAND = "list";
+    private final static String TODO_COMMAND = "todo";
+    private final static String DEADLINE_COMMAND = "deadline";
+    private final static String EVENT_COMMAND = "event";
     private List<Task> tasks;
 
     public static void main(String[] args) {
@@ -27,12 +36,21 @@ public class Duke {
                 this.displayTasks();
             } else {
                 String[] inputWords = input.split(" ", 2);
-                switch (inputWords[0]) {
+                String command = inputWords[0];
+                String argument = inputWords[1];
+                switch (command) {
                     case MARK_DONE_COMMAND:
-                        this.markDone(Integer.parseInt(inputWords[1]));
+                        this.markDone(Integer.parseInt(argument));
                         break;
-                    default:
-                        this.addTask(input);
+                    case TODO_COMMAND:
+                        this.addTodo(argument);
+                        break;
+                    case DEADLINE_COMMAND:
+                        this.addDeadline(argument);
+                        break;
+                    case EVENT_COMMAND:
+                        this.addEvent(argument);
+                        break;
                 }
             }
             input = scanner.nextLine();
@@ -50,10 +68,30 @@ public class Duke {
         say("Hello! I'm Duke\nWhat can I do for you?");
     }
 
-    private void addTask(String description) {
-        Task toAdd = new Task(description);
+    private void addTodo(String description) {
+        Task toAdd = new ToDo(description);
         this.tasks.add(toAdd);
-        say("added: " + description);
+        sayAddedTask(toAdd);
+    }
+
+    private void addDeadline(String text) {
+        String description = text.split(" /by ", 2)[0];
+        String deadline = text.split(" /by ", 2)[1];
+        Task toAdd = new Deadline(description, deadline);
+        this.tasks.add(toAdd);
+        sayAddedTask(toAdd);
+    }
+
+    private void addEvent(String text) {
+        String description = text.split(" /at ", 2)[0];
+        String time = text.split(" /at ", 2)[1];
+        Task toAdd = new Event(description, time);
+        this.tasks.add(toAdd);
+        sayAddedTask(toAdd);
+    }
+
+    private void sayAddedTask(Task task) {
+        say("Got it. I've added this task:\n" + task + "\nNow you have " + this.tasks.size() + " tasks in the list.");
     }
 
     private void displayTasks() {
@@ -75,35 +113,6 @@ public class Duke {
         toDone.markAsDone();
         String text = "Nice! I've marked this task as done: \n" + toDone;
         say(text);
-    }
-
-    public class Task {
-        protected String description;
-        protected boolean isDone;
-
-        public Task(String description) {
-            this.description = description;
-            this.isDone = false;
-        }
-
-        public String getStatusIcon() {
-            String tick = "\u2713";
-            String X = "\u2718";
-            return (isDone ? tick : X); //return tick or X symbols
-        }
-
-        public String getDescription() {
-            return this.description;
-        }
-
-        @Override
-        public String toString() {
-            return "[" + this.getStatusIcon() + "] " + this.getDescription();
-        }
-
-        public void markAsDone() {
-            this.isDone = true;
-        }
     }
 
 }
