@@ -23,7 +23,7 @@ public class Duke {
     }
 
     /**
-     * This method add task for the bot.
+     * This method adds task for the bot.
      *
      * @param taskName name of the task
      */
@@ -38,13 +38,14 @@ public class Duke {
      * This method displays the task list.
      */
     public void displayList() {
+        System.out.println("Here are the tasks in your list:");
         for (int i = 1; i < numberOfTasks + 1; i++) {
-            System.out.println(indent + i + ". " + taskList[i - 1]);
+            System.out.println(indent + i + "." + taskList[i - 1]);
         }
     }
 
     /**
-     * This method respond to the user.
+     * This method responds to the user's input.
      */
     public void respond() {
         Scanner userInput = new Scanner(System.in);
@@ -57,11 +58,19 @@ public class Duke {
                 break;
             }
 
+            if (input.contains("done")) {
+                System.out.println("Nice! I've marked this task as done:");
+                taskList[Integer.parseInt(String.valueOf(input.charAt(5)))-1].markAsDone();
+                System.out.println(indent + "----------------------------");
+                continue;
+            }
+
             if (input.trim().equals("list")) {
                 displayList();
                 System.out.println(indent + "----------------------------");
                 continue;
             }
+
             addTask(input);
             System.out.println(indent + "----------------------------");
         }
