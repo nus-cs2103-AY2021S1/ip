@@ -1,16 +1,16 @@
 public class Task {
 
-    private boolean completed;
+    private boolean isCompleted;
     private String description;
 
     public Task(String description) {
         this.description = description;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     public Task(String description, boolean completed) {
         this.description = description;
-        this.completed = completed;
+        this.isCompleted = completed;
     }
 
     public Task markCompleted() {
@@ -19,7 +19,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String completionStatus = completed ? "Done!" : "X";
+        String completionStatus = isCompleted ? "\u2713" : "\u2718";
         return String.format("[%s] %s", completionStatus, description);
     }
 }
