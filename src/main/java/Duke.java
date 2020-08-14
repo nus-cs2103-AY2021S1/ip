@@ -1,13 +1,28 @@
 import java.util.Scanner;
+
+/**
+ * The Best2013TBot program that implements a chatbot.
+ *
+ * @author Zeng Yu Ting
+ * @version 1.0
+ * @since 2020-15-08
+ */
 public class Duke {
 
     private static String indent = "   ";
+
+    /**
+     * This method greets the user.
+     */
     public static void greet() {
         System.out.println(indent + "----------------------------");
         System.out.println(indent + "Hello! I'm Best2103/TBot\n"+ indent + "What can I do for you?");
         System.out.println(indent + "----------------------------");
     }
 
+    /**
+     * This method respond to the user.
+     */
     public static void respond() {
         Scanner userInput = new Scanner(System.in);
         while(true) {
