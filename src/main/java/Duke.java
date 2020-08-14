@@ -41,7 +41,8 @@ public class Duke {
                     case "todo":
                     case "event":
                     case "deadline":
-                        addTask(tag, input, tasks);
+                        Task toAdd = addTask(tag, input, tasks);
+                        Printer.printAddTaskChatWindow(toAdd, tasks.size());
                         break;
 
                     default:
@@ -72,15 +73,16 @@ public class Duke {
         return task;
     }
 
-    private static void addTask(String tag, String input, List<Task> tasks)
+    private static Task addTask(String tag, String input, List<Task> tasks)
             throws DukeEmptyTaskDescriptionException, DukeEmptyTaskDurationException {
+        Task toAdd = null;
         try {
             switch (tag) {
                 case "todo":
                     String toDoText = input.substring(5);
                     ToDo toDo = new ToDo(toDoText);
                     tasks.add(toDo);
-                    Printer.printAddTaskChatWindow(toDo, tasks.size());
+                    toAdd = toDo;
                     break;
 
                 case "event":
@@ -89,7 +91,7 @@ public class Duke {
                     String eventAt = eventText[1];
                     Event event = new Event(eventDescription, eventAt);
                     tasks.add(event);
-                    Printer.printAddTaskChatWindow(event, tasks.size());
+                    toAdd = event;
                     break;
 
                 case "deadline":
@@ -98,7 +100,7 @@ public class Duke {
                     String deadlineBy = deadlineText[1];
                     Deadline deadline = new Deadline(deadlineDescription, deadlineBy);
                     tasks.add(deadline);
-                    Printer.printAddTaskChatWindow(deadline, tasks.size());
+                    toAdd = deadline;
                     break;
             }
         } catch (StringIndexOutOfBoundsException e) {
@@ -106,5 +108,6 @@ public class Duke {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeEmptyTaskDurationException(input);
         }
-    }
+        return toAdd;
+    } 
 }
