@@ -15,7 +15,11 @@ public class Duke {
         String command = sc.nextLine();
 
         while (!command.equals("bye")) {
-            System.out.print(s.formatOut(command));
+            if (command.equals("list")) {
+                s.list();
+            } else {
+                s.add(command);
+            }
             command = sc.nextLine();
         }
 
