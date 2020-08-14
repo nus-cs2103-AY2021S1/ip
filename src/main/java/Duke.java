@@ -20,6 +20,10 @@ public class Duke {
         return toDoLst.size();
     }
 
+    public boolean isTaskModification(String action) {
+        return action.equals("done") || action.equals("delete");
+    }
+
     // needed?
     public HashMap<Integer, Boolean> getToDoItemToStatus() {
         return toDoItemToStatus;
@@ -34,12 +38,21 @@ public class Duke {
         return String.format("[%s][%s] %s", toDoItemToType.get(i), toDoItemToStatus.get(i) ? "✓" : "✗", toDoLst.get(i));
     }
 
+    public String getTotalItemsDescription() {
+        return String.format("Now you have %d %s in the list.", getToDoLstSize(), getToDoLstSize() > 1 ? "tasks" : "task");
+    }
+
     public void setToDoItemStatus(int i, boolean bool) {
         toDoItemToStatus.put(i, bool);
     }
 
     public void setToDoItemToType(int i, String type) {
         toDoItemToType.put(i, Character.toString(type.charAt(0)).toUpperCase());
+    }
+
+    public void removeToDoItem(int i) {
+        toDoLst.remove(i);
+        toDoItemToStatus.remove(i);
     }
 
     public static void main(String[] args) {
@@ -57,15 +70,25 @@ public class Duke {
                     for (int i = 0; i < duke.getToDoLst().size(); i++) {
                         System.out.println(String.format("%d.%s", i + 1, duke.getToDoItemDescription(i)));
                     }
-                } else if (line.split(" ")[0].equals("done")) {
+                } else if (duke.isTaskModification(line.split(" ")[0])) {
                     String[] lineData = line.split(" ");
                     int i = Integer.parseInt(lineData[1]) - 1;
 
-                    duke.setToDoItemStatus(i, true);
+                    if (line.split(" ")[0].equals("done")) {
+                        duke.setToDoItemStatus(i, true);
 
-                    System.out.println("Nice! I've marked this task as done:");
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println(duke.getToDoItemDescription(i));
+                    }  else {
 
-                    System.out.println(duke.getToDoItemDescription(i));
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(duke.getToDoItemDescription(i));
+
+                        // remove here
+                        duke.removeToDoItem(i);
+
+                        System.out.println(duke.getTotalItemsDescription());
+                    }
                 } else {
                     String[] lineData = line.split(" ");
                     String type = lineData[0];
@@ -109,7 +132,7 @@ public class Duke {
 
                         System.out.println("Got it. I've added this task: ");
                         System.out.println(duke.getToDoItemDescription(duke.getToDoLstSize() - 1));
-                        System.out.println(String.format("Now you have %d %s in the list.", duke.getToDoLstSize(), duke.getToDoLstSize() > 1 ? "tasks" : "task"));
+                        duke.getTotalItemsDescription();
                     }
                 }
             }
