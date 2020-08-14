@@ -6,32 +6,33 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        List<String> lst = new ArrayList<>();
+        List<Task> lst = new ArrayList<>();
 
         Duke.echo("Hello! I'm Duke\nWhat can I do for you?");
 
         loop: while (sc.hasNextLine()) {
-            String nxt = sc.nextLine();
+            String sentence = sc.nextLine();
+            String[] arr = sentence.split("\\s+");
+            String nxt = arr[0];
             switch (nxt) {
                 case "list":
                     Duke.printList(lst);
+                    break;
+                case "done":
+                    int lstNum = Integer.parseInt(arr[1]);
+                    Task item = lst.get(lstNum-1);
+
+                    item.setStatus(true);
+                    Duke.echo(String.format("Nice! I've marked this task as done: \n[✓] %s", item));
                     break;
                 case "bye":
                     Duke.echo("Bye. Hope to see you again soon!");
                     break loop;
                 default:
-                    Duke.echo("added: " + nxt);
-                    lst.add(nxt);
+                    Duke.echo("added: " + sentence);
+                    lst.add(new Task(sentence));
                     break;
             }
-            exit_loop: ;
-//            if (!nxt.equals("bye")) {
-//                Duke.echo(nxt);
-//                lst.add(nxt);
-//            } else {
-//                Duke.echo("Bye. Hope to see you again soon!");
-//                break;
-//            }
         }
     }
 
@@ -40,11 +41,13 @@ public class Duke {
         System.out.printf("%s\n%s\n%s\n", line, s, line);
     }
 
-    private static void printList(List lst) {
+    private static void printList(List<Task> lst) {
         String s = "";
         for (int i = 1; i <= lst.size(); i++) {
-            s += String.format("%d. %s", i, lst.get(i-1));
-            s += i == lst.size() ? "" : "\n";
+            Task item = lst.get(i-1);
+            String icon = item.getStatus() ? "[✓]" : "[✗]";
+            s += String.format("%d.%s %s", i, icon, item);
+            s += (i == lst.size()) ? "" : "\n";
         }
         Duke.echo(s);
     }
