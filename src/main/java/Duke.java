@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        // Initial greeting, prompt user for commands
         String logo = " ____        _         -----------\n"
                 + "|  _ \\ _   _| | _____  \\__    __/\n"
                 + "| | | | | | | |/ / _ \\    |  |\n"
@@ -18,11 +19,13 @@ public class Duke {
         // Initialise a fixed array of tasks to store
         List<Task> tasks = new ArrayList<>(taskCapacity);
 
+        // Start scanning for user input
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
         // Loop continues echoing input until input == "bye"
         while (!input.equals("bye")) {
+            // Tag refers to the command to perform
             String tag = input.split(" ")[0];
 
             try {
@@ -57,10 +60,12 @@ public class Duke {
             }
         }
 
+        // Print goodbye chat window
         Printer.printGeneralChatWindow("Thank you for using Duke J.", "Have a nice day. Goodbye!");
     }
 
     private static Task completeTask(String input, List<Task> tasks) {
+        // Obtain index within list of tasks
         int index = Integer.parseInt(input.substring(5)) - 1;
         Task task = tasks.get(index);
         task.markAsDone();

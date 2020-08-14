@@ -8,6 +8,7 @@ public class Printer {
     private static final String tickedBox = box("\u2713");
     private static final String crossedBox = box("\u2718");
 
+    // Prints a chat window showing the list of tasks
     public static void printTasksChatWindow(List<Task> tasks) {
         printBorder();
         int index = 0;
@@ -19,6 +20,7 @@ public class Printer {
         printBorder();
     }
 
+    // Prints a chat window that describes a task that is done
     public static void printDoneTaskChatWindow(Task task) {
         printBorder();
 
@@ -28,6 +30,7 @@ public class Printer {
         printBorder();
     }
 
+    // Prints a chat window with a customised "add task" description
     public static void printAddTaskChatWindow(Task task, int numOfTotalTasks) {
         printBorder();
 
@@ -38,6 +41,7 @@ public class Printer {
         printBorder();
     }
 
+    // Prints an indented chat window with a customised message
     public static void printGeneralChatWindow(String... messages) {
         printBorder();
 
@@ -48,10 +52,12 @@ public class Printer {
         printBorder();
     }
 
+    // Prints a box with the symbol inside, i.e. [s]
     private static String box(String symbol) {
         return String.format("[%s]", symbol);
     }
 
+    // Prints a border as in the chat window
     private static void printBorder() {
         System.out.printf("%s%s\n", indent, border);
     }
