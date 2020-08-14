@@ -3,7 +3,7 @@ import java.util.*;
 public class Duke {
 
     public static void main(String[] args) {
-        List<String> list = new ArrayList<>();
+        List<Task> list = new ArrayList<>();
 
         String greet = "   ____________________________________________________________\n" +
                 "    Hello! I'm Duke\n" +
@@ -20,21 +20,38 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            String input = sc.nextLine();
+            String input = sc.next();
             if (input.equals("bye")) {
                 System.out.println(exit);
                 break;
             } else if (input.equals("list")) {
-                Iterator<String> iterator = list.iterator();
+                Iterator<Task> iterator = list.iterator();
                 int count = 0;
                 System.out.println(line);
+                System.out.println("    Here are the tasks in your list:");
                 while (iterator.hasNext()) {
                     count++;
-                    System.out.println("    " + count + ". " + iterator.next());
+                    Task task = iterator.next();
+                    String done = task.getDone() ? "[✓] " : "[✗] ";
+                    System.out.println("    " + count + ". " + done + task.getDetails());
                 }
                 System.out.println(line);
+            } else if (input.equals("done")) {
+                int taskNumber = sc.nextInt();
+                if (list.size() >= taskNumber) {
+                    Task task = list.get(taskNumber - 1);
+                    task.markAsDone();
+                    System.out.println(line + "\n" +
+                            "    Nice! I've marked this task as done: " + "\n" +
+                            "    [✓] " + task.getDetails() + "\n" +
+                            line);
+                } else {
+                    System.out.println(line + "\n" +
+                            "   Oops! No such task!" + "\n" +
+                            line);
+                }
             } else {
-                list.add(input);
+                list.add(new Task(input));
                 System.out.println(line + "\n" + "     added: " + input + "\n" + line + "\n");
             }
         }
