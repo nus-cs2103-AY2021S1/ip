@@ -22,19 +22,23 @@ public class Duke {
         printMessage(String.format("added: %s", task));
     }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.greet();
+    public void start() {
+        greet();
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String userInput = scanner.nextLine();
             if (userInput.equals("bye")) {
-                duke.printMessage("Bye. Hope to see you soon!");
+                printMessage("Bye. Hope to see you soon!");
                 break;
             } else {
-                duke.addTask(userInput);
+                addTask(userInput);
             }
         }
         scanner.close();
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.start();
     }
 }
