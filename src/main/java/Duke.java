@@ -69,12 +69,18 @@ public class Duke {
                 } else {
                     String[] lineData = line.split(" ");
                     String type = lineData[0];
+                    boolean isValidEntry = true;
 
                     duke.setToDoItemStatus(duke.getToDoLstSize(), false);
                     duke.setToDoItemToType(duke.getToDoLstSize(), type);
 
                     if (type.equals("todo")) {
-                        line = String.join(" ", Arrays.copyOfRange(lineData, 1, lineData.length));
+                        if (lineData.length == 1) {
+                            isValidEntry = false;
+                            System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                        } else {
+                            line = String.join(" ", Arrays.copyOfRange(lineData, 1, lineData.length));
+                        }
                     } else if (type.equals("deadline")) {
                         for (int i = 0; i < lineData.length; i++) {
                             if (lineData[i].equals("/by")) {
@@ -84,7 +90,7 @@ public class Duke {
                         }
 
                         line = String.join(" ", Arrays.copyOfRange(lineData, 1, lineData.length)) + ")";
-                    } else {
+                    } else if (type.equals("event")) {
                         for (int i = 0; i < lineData.length; i++) {
                             if (lineData[i].equals("/at")) {
                                 lineData[i] = "(at:";
@@ -93,13 +99,18 @@ public class Duke {
                         }
 
                         line = String.join(" ", Arrays.copyOfRange(lineData, 1, lineData.length)) + ")";
+                    } else {
+                        isValidEntry = false;
+                        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
 
-                    duke.getToDoLst().add(line);
+                    if (isValidEntry) {
+                        duke.getToDoLst().add(line);
 
-                    System.out.println("Got it. I've added this task: ");
-                    System.out.println(duke.getToDoItemDescription(duke.getToDoLstSize() - 1));
-                    System.out.println(String.format("Now you have %d %s in the list.", duke.getToDoLstSize(), duke.getToDoLstSize() > 1 ? "tasks" : "task"));
+                        System.out.println("Got it. I've added this task: ");
+                        System.out.println(duke.getToDoItemDescription(duke.getToDoLstSize() - 1));
+                        System.out.println(String.format("Now you have %d %s in the list.", duke.getToDoLstSize(), duke.getToDoLstSize() > 1 ? "tasks" : "task"));
+                    }
                 }
             }
 
