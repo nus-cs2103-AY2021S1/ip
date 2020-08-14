@@ -10,6 +10,8 @@ import java.util.Scanner;
 public class Duke {
 
     private static String indent = "   ";
+    private Task[] taskList = new Task[100];
+    private int numberOfTasks = 0;
 
     /**
      * This method greets the user.
@@ -21,9 +23,30 @@ public class Duke {
     }
 
     /**
+     * This method add task for the bot.
+     *
+     * @param taskName name of the task
+     */
+    public String addTask(String taskName) {
+        numberOfTasks += 1;
+        taskList[numberOfTasks - 1] = new Task(taskName);
+        System.out.println(indent + "Added: " + taskName);
+        return taskName;
+    }
+
+    /**
+     * This method displays the task list.
+     */
+    public void displayList() {
+        for (int i = 1; i < numberOfTasks + 1; i++) {
+            System.out.println(indent + i + ". " + taskList[i - 1]);
+        }
+    }
+
+    /**
      * This method respond to the user.
      */
-    public static void respond() {
+    public void respond() {
         Scanner userInput = new Scanner(System.in);
         while(true) {
             String input = userInput.nextLine();
@@ -33,13 +56,20 @@ public class Duke {
                 System.out.println(indent + "----------------------------");
                 break;
             }
-            System.out.println(indent + input);
+
+            if (input.trim().equals("list")) {
+                displayList();
+                System.out.println(indent + "----------------------------");
+                continue;
+            }
+            addTask(input);
             System.out.println(indent + "----------------------------");
         }
     }
 
     public static void main(String[] args) {
-        greet();
-        respond();
+        Duke duke = new Duke();
+        duke.greet();
+        duke.respond();
     }
 }
