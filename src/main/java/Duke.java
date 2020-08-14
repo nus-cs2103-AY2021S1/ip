@@ -7,14 +7,14 @@ public class Duke {
     public static ArrayList<Task> shelf;
 
     public static void main(String[] args) {
-        Welcome();
+        welcome();
         shelf = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
-        Handler(sc);
+        handler(sc);
         sc.close();
     }
 
-    public static void Welcome() {
+    public static void welcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -26,7 +26,7 @@ public class Duke {
         System.out.println(LINE);
     }
 
-    public static void Handler(Scanner sc) {
+    public static void handler(Scanner sc) {
         int counter;
         int indexer;
         Task book;
@@ -46,15 +46,14 @@ public class Duke {
                     counter++;
                 }
                 System.out.println(LINE);
-            } else if (response.indexOf("done ") == 0){
+            } else if (response.indexOf("done ") == 0) {
                 System.out.println("Nice! I've marked this task as done: ");
-                indexer = Integer.parseInt(response.replaceAll("\\D+","")) -1;
+                indexer = Integer.parseInt(response.replaceAll("\\D+", "")) - 1;
                 book = shelf.get(indexer);
                 book.complete();
                 System.out.println(book);
                 System.out.println(LINE);
-            }
-            else {
+            } else {
                 shelf.add(new Task(response));
                 System.out.println("added: " + response);
                 System.out.println(LINE);
