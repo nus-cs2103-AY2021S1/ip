@@ -14,7 +14,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
 
-        while (!command.equals("exit")) {
+        while (!command.equals("bye")) {
             System.out.print(s.formatOut(command));
             command = sc.nextLine();
         }
@@ -25,7 +25,7 @@ public class Duke {
 
 
     private static String welcome() {
-        return "Hello, I am Duke !\n What can I do for you ?";
+        return "Hello, I am Duke !\t\n What can I do for you ?";
     }
 
     private static String goodbye() { return "Bye ! Hope to see you again soon.";}
