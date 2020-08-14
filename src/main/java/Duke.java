@@ -11,8 +11,9 @@ public class Duke {
             speak(userInput);
         }
         speak("Bye. Hope to see you again soon!");
-    }
 
+        scanner.close();
+    }
 
     public static void speak(String message) {
         String horizontalLine = "____________________________________________________________";
