@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static List<String> todos;
+    private static List<Task> todos;
 
     public static void main(String[] args) {
         todos = new ArrayList<>();
@@ -20,19 +20,25 @@ public class Duke {
         boolean running = true;
         while(running) {
             String input = sc.nextLine();
-            switch(input) {
+            String[] chunks = input.split(" ", 2);
+            String action = chunks[0];
+            switch(action) {
                 case("bye"):
                     System.out.println(">> Bye! Hope I helped!");
                     running = false;
                     break;
                 case("list"):
                     int i = 1;
-                    for (String item : todos) {
-                        System.out.println(">> " + i++ + ". " + item);
+                    for (Task task : todos) {
+                        System.out.println(">> " + i++ + ". " + task);
                     }
                     break;
+                case("done"):
+                    int index = Integer.parseInt(chunks[1]) - 1;
+                    todos.get(index).complete();
+                    break;
                 default:
-                    todos.add(input);
+                    todos.add(new Task(input));
                     System.out.println(">> added: " + input);
                     break;
             }
