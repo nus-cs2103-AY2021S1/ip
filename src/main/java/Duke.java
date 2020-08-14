@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 public class Duke {
+
+
+
     public static void main(String[] args) {
 
         System.out.println("Hello from Bikini Bottom!");
@@ -11,13 +14,29 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
+        String[] lstOfStr = new String[100];
+        int counter = 0;
 
         while (!str.equals("bye")) {
-            System.out.println("____________________________________________________________\n"
-                + str + "\n"
-                + "____________________________________________________________\n");
+            System.out.println("____________________________________________________________\n");
+
+            if (str.equals("list")) {
+                for (int i = 0; i < 100; i++) {
+                    if ( lstOfStr[i] != null) {
+                        System.out.println(i + 1 + ". " + lstOfStr[i]);
+                    } else {
+                        break;
+                    }
+                }
+            } else {
+                lstOfStr[counter] = str;
+                System.out.println("added: " + str);
+                counter++;
+            }
+            System.out.println("____________________________________________________________\n");
 
             str = sc.nextLine();
+
         }
 
         System.out.println("____________________________________________________________\n"
