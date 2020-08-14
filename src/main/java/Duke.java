@@ -56,11 +56,22 @@ public class Duke {
         System.out.print(exit);
     }
 
-    private static void addTask(String taskName) {
-        Task task = new Task(taskName);
+//    private static void addTask(String taskName) {
+//        Task task = new Task(taskName);
+//        tasks.add(task);
+//        String printing = divider + "\t added: "
+//                + taskName + "\n" + divider;
+//        System.out.print(printing);
+//    }
+
+    private static void addToDo(String taskName) {
+        Task task = new ToDo(taskName);
         tasks.add(task);
-        String printing = divider + "\t added: "
-                + taskName + "\n" + divider;
+        String printing = divider
+                + "\tGot it. I've added this task:\n\t\t"
+                + task + "\n\t" + "Now you have "
+                + tasks.size() + " tasks in the list.\n"
+                + divider;
         System.out.print(printing);
     }
 
@@ -73,16 +84,17 @@ public class Duke {
         String input = "";
         while (sc.hasNext()) {
             input = sc.nextLine();
-            if (input.equals("list")) { // list tasks
-                listTasks();
+            if (input.contains("todo")) {
+                String description = input.substring(5);
+                addToDo(description);
             } else if (input.contains("done")) { // done tasks
                 int index = Integer.parseInt(input.substring(5));
                 markTaskDone(index);
+            } else if (input.equals("list")) { // list tasks
+                listTasks();
             } else if (input.equals("bye")) { // exit bot
                 exitFocus();
                 break;
-            } else { // add tasks
-                addTask(input);
             }
         }
         sc.close();
