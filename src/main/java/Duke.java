@@ -1,22 +1,28 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import command.Command;
 /**
- * Driver class for Duke chat bot
+ * Driver class for Duke chat bot called "Jarvis"
  */
 public class Duke {
     public static void main(String[] args) {
-        String intro = "Hello! I'm Jarvis\n"
-                + "What can I do for you?";
-        String command;
-
-        System.out.println(intro);
-
         Scanner in = new Scanner(System.in);
-        command = in.nextLine();
-        while (!command.equals("bye")) {
-            System.out.println(command);
-            command = in.nextLine();
-        }
-        System.out.println("Bye. Hope to see you again soon!");
+        CommandReader reader = new CommandReader();
+        CommandAgent agent = new CommandAgent(new DukeBuffer());
+        Command command;
+
+        System.out.println("Hello! I'm Jarvis\n"
+                + "What can I do for you?");
+
+        do {
+            String userInput = in.nextLine();
+            command = reader.readCommand(userInput);
+            String result = agent.handleCommand(command);
+            System.out.println(result);
+        } while (!command.isExit());
+
+        System.out.println(agent.handleCommand(command));
     }
 }
