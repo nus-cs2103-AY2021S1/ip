@@ -13,8 +13,39 @@ public class Duke {
         loop: while (sc.hasNextLine()) {
             String sentence = sc.nextLine();
             String[] arr = sentence.split("\\s+");
-            String nxt = arr[0];
-            switch (nxt) {
+            String command = arr[0];
+            String comText = "";
+            for (int i = 1; i < arr.length; i++) {
+                comText += arr[i] + " ";
+            }
+            comText.trim();
+            switch (command) {
+                case "todo":
+                    Task todo = new Todo(comText);
+                    lst.add(todo);
+                    Duke.echo(String.format("Got it. I've added this task: " +
+                                    "\n%s\nNow you have %d tasks in the list.", todo, lst.size()));
+                    break;
+                case "deadline":
+                    int dIdx = comText.lastIndexOf("/by");
+                    Task deadline = new Deadline(
+                            comText.substring(0, dIdx-1),
+                            comText.substring(dIdx+4, comText.length())
+                    );
+                    lst.add(deadline);
+                    Duke.echo(String.format("Got it. I've added this task: " +
+                            "\n%s\nNow you have %d tasks in the list.", deadline, lst.size()));
+                    break;
+                case "event":
+                    int eIdx = comText.lastIndexOf("/at");
+                    Task event = new Event(
+                            comText.substring(0, eIdx-1),
+                            comText.substring(eIdx+4, comText.length())
+                    );
+                    lst.add(event);
+                    Duke.echo(String.format("Got it. I've added this task: " +
+                            "\n%s\nNow you have %d tasks in the list.", event, lst.size()));
+                    break;
                 case "list":
                     Duke.printList(lst);
                     break;
