@@ -38,11 +38,36 @@ public class Duke {
                 System.out.println(t);
                 System.out.println("______________________");
                 s = sc.nextLine();
-            } else {
-                System.out.println("added: " + s + "\nyoure welcome ;)");
+            } else if (s.startsWith("todo")) {
+                System.out.println("added!");
+                Task t = new Todo(s.substring(5));
+                arr.add(t);
+                System.out.println(t);
+                System.out.println("total task: " + Integer.toString(arr.size()) + "\n:o");
                 System.out.println("______________________");
-                arr.add(new Task(s));
                 s = sc.nextLine();
+            } else if (s.startsWith("deadline")) {
+                String name = s.split("/")[0].substring(9);
+                String deadline = s.split("/")[1].substring(3);
+                System.out.println("added!");
+                Task t = new Deadline(name, deadline);
+                arr.add(t);
+                System.out.println(t);
+                System.out.println("total task: " + Integer.toString(arr.size()) + "\n:o");
+                System.out.println("______________________");
+                s = sc.nextLine();
+            } else if (s.startsWith("event")) {
+                String name = s.split("/")[0].substring(6);
+                String time = s.split("/")[1].substring(3);
+                System.out.println("added!");
+                Task t = new Event(name, time);
+                arr.add(t);
+                System.out.println(t);
+                System.out.println("total task: " + Integer.toString(arr.size()) + "\n:o");
+                System.out.println("______________________");
+                s = sc.nextLine();
+            } else {
+                // do whatever
             }
         }
     }
