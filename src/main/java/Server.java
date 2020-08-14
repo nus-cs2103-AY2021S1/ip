@@ -74,10 +74,10 @@ public class Server {
                         this.add(new Event(set[0], set[1]));
                         break;
                     }
-//                    case "delete": {
-//                        this.delete(Integer.parseInt(s[1]) - 1);
-//                        break;
-//                    }
+                    case "delete": {
+                        this.delete(Integer.parseInt(s[1]) - 1);
+                        break;
+                    }
                     default:
                         throw new AmbiguousInputException();
                 }
