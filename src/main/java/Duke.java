@@ -30,7 +30,7 @@ public class Duke {
     }
 
     public void printList() {
-        StringBuilder tasks = new StringBuilder();
+        StringBuilder tasks = new StringBuilder("Here are the tasks in your list: \n");
         for (int i = 0; i < taskList.size(); i++) {
             tasks.append(String.format("%d. %s", i + 1, taskList.get(i)));
             if (i != taskList.size() - 1) {
@@ -40,22 +40,31 @@ public class Duke {
         printMessage(tasks.toString());
     }
 
+    public boolean handleInput(Scanner scanner) {
+        String userInput = scanner.next();
+        switch (userInput) {
+            case "bye":
+                printMessage("Bye! Hope to see you soon!");
+                return false;
+            case "list":
+                printList();
+                return true;
+            case "done":
+                int taskNumber = scanner.nextInt();
+                completeTask(taskNumber);
+                return true;
+            default:
+                addTask(new Task(userInput + scanner.nextLine()));
+                return true;
+        }
+    }
+
     public void start() {
         greet();
         Scanner scanner = new Scanner(System.in);
-        while (true) {
-            String userInput = scanner.next();
-            if (userInput.equals("bye")) {
-                printMessage("Bye! Hope to see you soon!");
-                break;
-            } else if (userInput.equals("list")) {
-                printList();
-            } else if (userInput.equals("done")) {
-                int taskNumber = scanner.nextInt();
-                completeTask(taskNumber);
-            } else {
-                addTask(new Task(userInput + scanner.nextLine()));
-            }
+        boolean isRunning = true;
+        while (isRunning) {
+            isRunning = handleInput(scanner);
         }
         scanner.close();
     }
