@@ -15,7 +15,7 @@ public class Main {
         var sc = new Scanner(System.in);
 
         bot.greet();
-        while (bot.processCommand(sc.nextLine())) {
+        while (sc.hasNextLine() && bot.processCommand(sc.nextLine())) {
         }
     }
 }
