@@ -54,7 +54,7 @@ public class Duke {
                 completeTask(taskNumber);
                 return true;
             default:
-                addTask(new Task(userInput + scanner.nextLine()));
+                addTask(new Todo(userInput + scanner.nextLine()));
                 return true;
         }
     }
