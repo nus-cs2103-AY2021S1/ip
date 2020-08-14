@@ -1,25 +1,25 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    public static void main(String[] args)  {
+            String logo = " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
+            System.out.println("Hello from\n" + logo);
 
-        Server s = new Server();
-        System.out.print(s.formatOut(welcome()));
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
+            Server s = new Server();
+            System.out.print(Duke.formatOut(welcome()));
+            Scanner sc = new Scanner(System.in);
+            String input = sc.nextLine();
 
-        while (!input.equals("bye")) {
-            s.perform(input);
-            input = sc.nextLine();
-        }
+            while (!input.equals("bye")) {
+                s.perform(input);
+                input = sc.nextLine();
+            }
 
-        System.out.print(s.formatOut(goodbye()));
+            System.out.print(Duke.formatOut(goodbye()));
     }
 
     public static String formatOut(String s) {
