@@ -28,24 +28,32 @@ public class Duke {
         System.out.println("    ----------------------------------------");
     }
 
-    static String furtherProcessing(Commands commandType, String[] tokens, Duke dk) {
+    static String furtherProcessing(Commands commandType, String[] tokens, Duke dk) throws DukeException {
         String content = "";
         String result_prefix = "Got it. I've added this task:\n      ";
         String result_subfix = "Now you have " + (dk.index + 1) + " tasks in the list.";
         String main_content = "";
+        String deadline = "";
         for(int i = 1;i < tokens.length; i++) {
-            if(tokens[i].charAt(0) == '/')
+            if(tokens[i].charAt(0) == '/') {
+                for(int j = i + 1; j < tokens.length;j++) {
+                    deadline += tokens[j] + " ";
+                }
                 break;
+            }
 
-            content += tokens[i];
+            content += tokens[i] + " ";
         }
+        if(content.equals("")) throw new DukeException("Description cannot be empty PLEASE!!!");
+        if(deadline.equals("") && commandType != Commands.TODO) throw new DukeException("NOT ENOUGH INFORMATION!!!");
         if(commandType == Commands.DEADLINE) {
-            String deadline = tokens[tokens.length - 1];
+            //String deadline = tokens[tokens.length - 1];
+            //if(deadline.equals(""))
             Deadline deadlineTask = new Deadline(content, deadline);
             dk.taskStorage[dk.index++] = deadlineTask;
             main_content = deadlineTask.returnStringForm();
         } else if(commandType == Commands.EVENT) {
-            String deadline = tokens[tokens.length - 1];
+            //String deadline = tokens[tokens.length - 1];
             Event eventTask = new Event(content, deadline);
             dk.taskStorage[dk.index++] = eventTask;
             main_content = eventTask.returnStringForm();
@@ -57,7 +65,7 @@ public class Duke {
         return result_prefix + main_content + "\n    " + result_subfix;
     }
 
-    static String processedCommand(String command, Duke dk) {
+    static String processedCommand(String command, Duke dk) throws DukeException {
         if(command.equals("")) return "";
         String[] tokens = command.split(" ");
         if(tokens[0].equals(Commands.DONE.getAction())) {
@@ -73,9 +81,9 @@ public class Duke {
             return furtherProcessing(Commands.EVENT, tokens, dk);
         }
         else {
-            dk.addTask(command);
+            //dk.addTask(command);
+            throw new DukeException("OOPS!!! CAN YOU PLEASE TYPE SOMETHING MEANINGFUL?");
         }
-        return command;
     }
     private void printStoredTasks() {
         String result = "Here are the tasks in your list:\n    ";
@@ -104,8 +112,12 @@ public class Duke {
             if(content.equals(Commands.LIST.getAction())) {
                 dk.printStoredTasks();
             } else  {
-                String result = processedCommand(content, dk);
-                if(!result.equals("")) printDialog(result);
+                try {
+                    String result = processedCommand(content, dk);
+                    if (!result.equals("")) printDialog(result);
+                } catch (DukeException e) {
+                    printDialog(e.getMessage());
+                }
             }
         }
     }
