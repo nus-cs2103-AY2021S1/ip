@@ -1,6 +1,11 @@
 todo eat cake
 event friend's birthday /at 23 Aug 4pm
 deadline CS2103 /by 20 Aug
+hello
+todo
+event description-less event :(
+deadline CS2103 /by
+testy test
 list
 done 1
 done 2
