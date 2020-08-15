@@ -37,7 +37,6 @@ public class Duke {
                         }
                         Todo todo = new Todo(input.substring(5));
                         tasks.add(todo);
-//                        tasks[index] = todo;
                         total++;
                         System.out.println("Got it. I've added this task:\n" + todo + "\nNow you have "
                                 + total + " tasks in the list.");
