@@ -14,9 +14,14 @@ public class Duke {
         }
     }
 
-    public static void printTotalTask(Task task) {
+    public static void printAddTask(Task task) {
         System.out.println("Got it. I've added this task:\n" + task);
         System.out.println("Now you have " + list.size() + " tasks in the list." );
+    }
+
+    public static void printDeleteTask(Task task) {
+        System.out.println("Noted. I've deleted this task:\n" + task);
+        System.out.println("Now you have " + (list.size() - 1) + " tasks in the list." );
     }
 
     public static void main(String[] args) {
@@ -26,6 +31,7 @@ public class Duke {
         while (sc.hasNext()) {
             try {
                 String command = sc.nextLine();
+                int index = 0;
                 if (command.equals("bye")) {
                     System.out.println("Bye. Hope to see you again soon!");
                     break;
@@ -39,10 +45,18 @@ public class Duke {
                             if (command.split(" ", 2).length == 1) {
                                 throw new EmptyDescriptionException("The description of " + line + " cannot be empty, Please re-enter");
                             }
-                            int index = Integer.parseInt(command.split(" ", 2)[1]) - 1;
+                            index = Integer.parseInt(command.split(" ", 2)[1]) - 1;
                             list.get(index).markAsDone();
                             System.out.println("Nice! I've marked this task as done:");
                             System.out.println(list.get(index));
+                            break;
+                        case "delete":
+                            if (command.split(" ", 2).length == 1) {
+                                throw new EmptyDescriptionException("The description of " + line + " cannot be empty, Please re-enter");
+                            }
+                            index = Integer.parseInt(command.split(" ", 2)[1]) - 1;
+                            printDeleteTask(list.get(index));
+                            list.remove(index);
                             break;
                         case "todo": {
                             if (command.split(" ", 2).length == 1) {
@@ -50,7 +64,7 @@ public class Duke {
                             }
                             Task task = new Todo(command.split(" ", 2)[1]);
                             list.add(task);
-                            printTotalTask(task);
+                            printAddTask(task);
                             break;
                         }
                         case "deadline": {
@@ -61,7 +75,7 @@ public class Duke {
                             String date = command.split(" ", 2)[1].split("/", 2)[1].split(" ", 2)[1];
                             Task task = new Deadline(str, date);
                             list.add(task);
-                            printTotalTask(task);
+                            printAddTask(task);
                             break;
                         }
                         case "event": {
@@ -72,7 +86,7 @@ public class Duke {
                             String date = command.split(" ", 2)[1].split("/", 2)[1].split(" ", 2)[1];
                             Task task = new Event(str, date);
                             list.add(task);
-                            printTotalTask(task);
+                            printAddTask(task);
                             break;
                         }
                         default:
