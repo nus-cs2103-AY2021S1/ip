@@ -3,14 +3,40 @@
      What can I do for you?
     ____________________________________________________________
     ____________________________________________________________
+     Error! We had a problem understanding your message.
+     The description of a todo cannot be empty.
+    ____________________________________________________________
+    ____________________________________________________________
+     Error! We had a problem understanding your message.
+     The description of a todo cannot be empty.
+    ____________________________________________________________
+    ____________________________________________________________
      Sure, I've added this task to your list:
        [T][X] read book
      You now have 1 task(s) in the list!
     ____________________________________________________________
     ____________________________________________________________
+     Error! We had a problem understanding your message.
+     The description of a deadline cannot be empty.
+    ____________________________________________________________
+    ____________________________________________________________
+     Error! We had a problem understanding your message.
+     A date needs to be provided with /by when adding a deadline.
+     Usage: deadline return book /by tomorrow
+    ____________________________________________________________
+    ____________________________________________________________
      Sure, I've added this task to your list:
        [D][X] return book (by: tomorrow)
      You now have 2 task(s) in the list!
+    ____________________________________________________________
+    ____________________________________________________________
+     Error! We had a problem understanding your message.
+     The description of an event cannot be empty.
+    ____________________________________________________________
+    ____________________________________________________________
+     Error! We had a problem understanding your message.
+     A date needs to be provided with /at when adding a event.
+     Usage: event library renewal /at next sunday
     ____________________________________________________________
     ____________________________________________________________
      Sure, I've added this task to your list:
@@ -30,6 +56,11 @@
      4: [T][X] do homework
     ____________________________________________________________
     ____________________________________________________________
+     Error! We had a problem understanding your message.
+     The index provided is too large.
+     Run list to see your list of tasks.
+    ____________________________________________________________
+    ____________________________________________________________
      Great Job! I've marked this task as done:
        [D][Y] return book (by: tomorrow)
     ____________________________________________________________
@@ -43,6 +74,11 @@
      2: [D][Y] return book (by: tomorrow)
      3: [E][X] library renewal (at: next Sunday)
      4: [T][Y] do homework
+    ____________________________________________________________
+    ____________________________________________________________
+     Error! We had a problem understanding your message.
+     Your input must start with one of the following:
+     "todo", "deadline", "event", "list" or "done".
     ____________________________________________________________
     ____________________________________________________________
      Bye. Hope to see you again soon! :)

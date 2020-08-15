@@ -1,9 +1,17 @@
+todo
+todo     
 todo read book
+deadline
+deadline return book
 deadline return book /by tomorrow
+event
+event library renewal
 event library renewal /at next Sunday
 todo do homework
 list
+done 5
 done 2
 done 4
 list
+blahblah
 bye
