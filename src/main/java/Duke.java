@@ -31,19 +31,19 @@ public class Duke {
                 list.add(new Todo(next.substring(5)));
                 System.out.println("Hi there, I've added this task:\n"
                         + list.get(list.size() - 1) + "\nYou have "
-                        + list.size() + " tasks in the list");
+                        + list.size() + " tasks in the list.");
             } else if (next.length() > 8 && next.substring(0, 8).equals("deadline")) {
                 String[] descriptions = next.substring(9).split("/by ");
                 list.add(new Deadline(descriptions[0], descriptions[1]));
                 System.out.println("Hi there, I've added this task:\n"
                         + list.get(list.size() - 1) + "\nYou have "
-                        + list.size() + " tasks in the list");
+                        + list.size() + " tasks in the list.");
             } else if (next.length() > 5 && next.substring(0, 5).equals("event")) {
                 String[] descriptions = next.substring(6).split("/at ");
                 list.add(new Event(descriptions[0], descriptions[1]));
                 System.out.println("Hi there, I've added this task:\n"
                         + list.get(list.size() - 1) + "\nYou have "
-                        + list.size() + " tasks in the list");
+                        + list.size() + " tasks in the list.");
             } else {
                 System.out.println("Error! Please key in what type of task it is." );
             }
