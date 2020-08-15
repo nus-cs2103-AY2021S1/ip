@@ -1,4 +1,5 @@
 package main.java;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,7 +9,7 @@ public class Duke {
     private static void chat(){
         Scanner scanner = new Scanner(System.in);
         String word;
-        while(!(word = scanner.nextLine()).equals("bye")){
+        while(scanner.hasNextLine() && !(word = scanner.nextLine()).equals("bye")){
             if (word.equals("list")){
                 System.out.println(Chat.numberedListChatBox(items));
             } else if(word.startsWith("done ")){
