@@ -1,6 +1,6 @@
 package operation;
 
-import storage.TaskStorage;
+import task.TaskStorage;
 
 public class ListOperation extends Operation {
     private TaskStorage taskStorage;

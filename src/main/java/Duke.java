@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 import operation.Operation;
 import parser.CommandParser;
-import storage.TaskStorage;
+import task.TaskStorage;
 
 public class Duke {
 
@@ -14,7 +14,7 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private Duke() {
+    Duke() {
         this.taskStorage = new TaskStorage();
     }
 

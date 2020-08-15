@@ -1,15 +1,15 @@
-package storage;
+package task;
 
 public class TaskStorage {
-    private String[] storage;
+    private Task[] storage;
     private int index;
 
     public TaskStorage() {
-        this.storage = new String[100];
+        this.storage = new Task[100];
         this.index = 0;
     }
 
-    public void addTask(String task) {
+    public void addTask(Task task) {
         this.storage[index] = task;
         index++;
     }
