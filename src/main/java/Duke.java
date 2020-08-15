@@ -19,36 +19,52 @@ public class Duke {
         Pattern deadline = Pattern.compile("deadline (.+?) /by (.+)");
         Pattern event = Pattern.compile("event (.+?) /at (.+)");
 
-        while(sc.hasNextLine()) {
-            String next = sc.nextLine();
-            if (next.equals("bye")) {
-               bot.goodByeMessage();
-                break;
-            } else if (next.equals("list")) {
-                bot.displayActivities();
-            } else if (next.length() > 5 && next.substring(0,4).equals("done")) {
-                try {
-                    int taskNum = Integer.parseInt(next.substring(5));
-                    bot.completeTask(taskNum);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
+
+        while (sc.hasNextLine()) {
+            try {
+                String next = sc.nextLine();
+                if (next.equals("bye")) {
+                    bot.goodByeMessage();
+                    break;
+                } else if (next.equals("list")) {
+                    bot.displayActivities();
+                } else if (next.split(" ")[0].equals("done")) {
+                    try {
+                        int taskNum = Integer.parseInt(next.substring(5));
+                        bot.completeTask(taskNum);
+                    } catch (NumberFormatException e1) {
+                        throw new InvalidInputException("Please input an Integer for the task!");
+                    } catch (StringIndexOutOfBoundsException e2) {
+                        throw new EmptyDescriptionException("done");
+                    } catch (IndexOutOfBoundsException e3) {
+                    throw new InvalidInputException("Number provided is too small or too large, Please input a valid task number");
                 }
-            } else {
-                Matcher todoMatcher = todo.matcher(next);
-                Matcher deadlineMatcher = deadline.matcher(next);
-                Matcher eventMatcher = event.matcher(next);
-                if (todoMatcher.find()) {
-                    bot.addTodo(todoMatcher.group(1));
-                }
-                else if (deadlineMatcher.find()) {
-                    bot.addDeadline(deadlineMatcher.group(1),deadlineMatcher.group(2));
-                } else if (eventMatcher.find()) {
-                    bot.addEvent(eventMatcher.group(1),eventMatcher.group(2));
+                } else if(next.split(" ")[0].equals("todo")) {
+                    Matcher todoMatcher = todo.matcher(next);
+                    if (todoMatcher.find()) {
+                        bot.addTodo(todoMatcher.group(1));
+                    } else {
+                        throw new EmptyDescriptionException("todo");
+                    }
+                } else if(next.split(" ")[0].equals("deadline")) {
+                    Matcher deadlineMatcher = deadline.matcher(next);
+                    if (deadlineMatcher.find()) {
+                        bot.addDeadline(deadlineMatcher.group(1), deadlineMatcher.group(2));
+                    } else {
+                        throw new EmptyDescriptionException("deadline");
+                    }
+                } else if(next.split(" ")[0].equals("event")) {
+                    Matcher eventMatcher = event.matcher(next);
+                    if (eventMatcher.find()) {
+                        bot.addEvent(eventMatcher.group(1), eventMatcher.group(2));
+                    } else {
+                        throw new EmptyDescriptionException("event");
+                    }
                 } else {
-                    System.out.println("Invalid Msg");
+                    throw new InvalidInputException();
                 }
-
-
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
     }

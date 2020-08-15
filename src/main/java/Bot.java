@@ -4,7 +4,7 @@ public class Bot {
     String delim;
     ArrayList<Task> activityList;
 
-    String welcomeMessage = "Hello! I'm Duke\n What can I do for you? ";
+    String welcomeMessage = "Hello! I'm Duke\n What can I do for you?";
     String goodbyeMessage = "Bye! Message me anytime!";
 
     public Bot(String delim) {
@@ -43,7 +43,7 @@ public class Bot {
 
     public void activityReply(Task task) {
         System.out.println(this.delim);
-        System.out.println("Got it. I've added this task: ");
+        System.out.println("Got it. I've added this task:");
         System.out.println(task);
         System.out.println(String.format("You have %s tasks currently, work on them soon!", activityList.size()));
         System.out.println(this.delim);

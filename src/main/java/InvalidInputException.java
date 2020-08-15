@@ -1,4 +1,9 @@
-package PACKAGE_NAME;
+public class InvalidInputException extends DukeException {
+    public InvalidInputException() {
+        super("Input given is invalid! Please try again!");
+    }
 
-public class InvalidInputException {
+    public InvalidInputException(String message) {
+        super(message);
+    }
 }
