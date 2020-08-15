@@ -1,8 +1,8 @@
 package exception;
 
 public class DukeException extends Exception {
-    DukeException(String msg) {
-        super("Apologies, " + msg);
+    public DukeException(String msg) {
+        super("Apologies. " + msg);
     }
 
     @Override

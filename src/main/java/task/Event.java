@@ -1,5 +1,7 @@
 package task;
 
+import exception.DukeException;
+
 public class Event extends Task{
     private String time;
 
@@ -11,7 +13,10 @@ public class Event extends Task{
         this.time = time;
     }
 
-    public static Event createEvent(String[] commands) {
+    public static Event createEvent(String[] commands) throws DukeException {
+        if (commands.length <= 2) {
+            throw new DukeException("Please fill in the description and time.");
+        }
         return new Event(commands[1], false, commands[2]);
     }
 

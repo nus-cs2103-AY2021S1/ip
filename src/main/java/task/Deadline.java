@@ -1,5 +1,7 @@
 package task;
 
+import exception.DukeException;
+
 public class Deadline extends Task {
     private String datetime;
 
@@ -11,7 +13,10 @@ public class Deadline extends Task {
         this.datetime = datetime;
     }
 
-    public static Deadline createDeadline(String[] commands) {
+    public static Deadline createDeadline(String[] commands) throws DukeException{
+        if (commands.length <= 2) {
+            throw new DukeException("Please fill in the description and date or time.");
+        }
         return new Deadline(commands[1], false, commands[2]);
     }
 
