@@ -39,12 +39,34 @@ public class Layout {
         System.out.println("\t\t" + task.toString());
         printLine();
     }
+    
+    public void printDeleted(Task task, int size) {
+        String str = size > 1 ? "tasks" : "task";
+        printLine();
+        System.out.println("\tNoted. I've removed this task: ");
+        System.out.println("\t\t" + task.toString());
+        System.out.println("\tNow you have " + size + " " + str + " in the list.");
+        printLine();
+    }
 
     public void printAddedMessage(String description, int size) {
+        String str = size > 1 ? "tasks" : "task";
         printLine();
         System.out.println("\tGot it. I've added this task:");
         System.out.println("\t\t" + description);
-        System.out.println("\tNow you have " + size + " tasks in the list.");
+        System.out.println("\tNow you have " + size + " " + str + " in the list.");
+        printLine();
+    }
+    
+    public void printCommands(String [] arr) {
+        printLine();
+        for (int i = 0; i < arr.length; i++) {
+            if (i != arr.length - 1) {
+                System.out.println("\t" + arr[i] + "\n");
+            } else {
+                System.out.println("\t" + arr[i]);
+            }
+        }
         printLine();
     }
 

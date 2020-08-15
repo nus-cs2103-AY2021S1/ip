@@ -8,41 +8,61 @@ public class Tasks {
 
     public void addTask(String type, String [] arr) {
         Task task;
-        String date = getInfo(arr)[0];
-        String description = getInfo(arr)[1];
-
-        switch(type) {
-            case "todo":
-                task =  new Todo(description);
-                break;
-            case "deadline":
-                task = new Deadline(description, date);
-                break;
-            case "event":
-                task = new Event(description, date);
-                break;
-            default:
-                task = new Todo(description);
-                break;
+        try {
+            String date = getInfo(arr)[0];
+            String description = getInfo(arr)[1];
+            if (description.equals("") || arr.length == 1) {
+                throw new DukeException("The description of a " + type + " cannot be empty");
+            }
+    
+            switch(type) {
+                case "deadline":
+                    if (date.equals("")) {
+                        throw new DukeException("Please specify a due date using /by");
+                    } else {
+                        task = new Deadline(description, date);
+                    }
+                    break;
+                case "event":
+                    if (date.equals("")) {
+                        throw new DukeException("Please specify an event date using /at");
+                    } else {
+                        task = new Event(description, date);   
+                    }
+                    break;
+                default: //case: todo
+                    task = new Todo(description);
+                    break;
+            }
+    
+            tasks.add(task);
+            layout.printAddedMessage(task.toString(), tasks.size());
+        } catch (DukeException e) {
+            layout.print(e.getMessage());
         }
-
-        tasks.add(task);
-        layout.printAddedMessage(task.toString(), tasks.size());
     }
-
 
     public void showTasks() {
         layout.printTaskList(tasks);
     }
 
-    public void markDone(String i) {
-        int index = Integer.parseInt(i);
+    public void modifyTask(String type, String i) {
         try {
+            int index = Integer.parseInt(i);
             Task task = tasks.get(index - 1);
-            task.markDone();
-            layout.printMarkedDone(task);
+            if (type.equals("done")) {
+                task.markDone();
+                layout.printMarkedDone(task);
+            } else { //action: delete
+                tasks.remove(index - 1);
+                layout.printDeleted(task, tasks.size());
+            }
         } catch (IndexOutOfBoundsException e) {
-            layout.print("No task labelled " + i);
+            DukeException d = new DukeException("Task " + i + " cannot be found");
+            layout.print(d.getMessage());
+        } catch (NumberFormatException e) {
+            DukeException d = new DukeException(i + " is not an integer");
+            layout.print(d.getMessage());
         }
 
     }
@@ -53,7 +73,11 @@ public class Tasks {
         String description = "";
         for (int i = 1; i < arr.length; i ++) {
             if (reached) {
-                date += arr[i] + " ";
+                if (i != arr.length - 1) {
+                    date += arr[i] + " ";
+                } else {
+                    date += arr[i];
+                }
             } else if (arr[i].equals("/by") || arr[i].equals("/at")) {
                 reached = true;
             } else {
