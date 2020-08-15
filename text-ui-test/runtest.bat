@@ -12,7 +12,8 @@ REM compile the code into the bin folder
 javac  -cp "%MY_PATH%\src\main\java" -Xlint:none -d "%MY_PATH%\bin" "%MY_PATH%\src\main\java\Duke.java"
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
-
+    PAUSE
+    exit /b 1
 )
 REM no error here, errorlevel == 0
 
@@ -21,3 +22,5 @@ java -classpath "%MY_PATH%\bin" Duke < input.txt > ACTUAL.TXT
 
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT
+
+PAUSE
