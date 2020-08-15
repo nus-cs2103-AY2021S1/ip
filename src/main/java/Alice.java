@@ -16,32 +16,48 @@ public class Alice {
             return false;
         }
 
-        String[] inputs = s.split(" ");
-        if (inputs[0].equals("list")) {
+        String[] arr = s.split(" ", 2);
+        if (arr[0].equals("list")) {
             // Display task list
             print_list();
-            prompt();
-        } else if (inputs[0].equals("done")) {
+        } else if (arr[0].equals("done")) {
             // Mark as done
             try {
-                int index = Integer.parseInt(inputs[1]) - 1;
-                Task completedTask = ls.get(index).markAsDone();
-                ls.set(index, completedTask);
-                display("Great work! I've marked this task as done: \n    " + completedTask);
+                int index = Integer.parseInt(arr[1]) - 1;
+                ls.get(index).markAsDone();
+                display("Great work! I've marked this task as done: \n    " + ls.get(index));
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 display("Sorry! I could not register that. Please use a valid number");
-            } finally {
-                prompt();
+            }
+        } else if (arr.length == 2 && arr[0].equals("todo")) {
+            // Add to-do
+            addTask(new Todo(arr[1]));
+        } else if (arr.length == 2 && arr[0].equals("deadline")) {
+            String[] details = arr[1].split(" /by ", 2);
+            if (details.length == 2) {
+                addTask(new Deadline(details[0], details[1]));
+            } else {
+                display("Did you forget to include '/by'?");
+            }
+        } else if (arr.length == 2 && arr[0].equals("event")) {
+            String[] details = arr[1].split(" /at ", 2);
+            if (details.length == 2) {
+                addTask(new Event(details[0], details[1]));
+            } else {
+                display("Did you forget to include '/at'?");
             }
         } else {
-            // Add task
-            Task t = new Task(s);
-            ls.add(t);
-
-            display("added: " + s);
-            prompt();
+            display("Sorry! I could not register that.");
         }
+
+        prompt();
         return true;
+    }
+
+    private void addTask(Task t) {
+        ls.add(t);
+        display("Roger. I've added the task to your list:\n    " + t
+                + "\nNow you have " + ls.size() + " task in your list");
     }
 
     private void display(String s) {
@@ -51,7 +67,8 @@ public class Alice {
     }
 
     private void print_list() {
-        System.out.println("____________________________________________________________");
+        System.out.println("____________________________________________________________" +
+                "\nHere are the tasks in your list:");
         for (int i = 0; i < ls.size(); i++) {
             System.out.println(i + 1 + ". " + ls.get(i));
         }

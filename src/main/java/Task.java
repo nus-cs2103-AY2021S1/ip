@@ -1,5 +1,5 @@
 public class Task {
-    private String description;
+    private final String description;
     private boolean isDone;
 
     public Task(String description) {
@@ -7,16 +7,12 @@ public class Task {
         this.isDone = false;
     }
 
-    public Task(String description, boolean isDone) {
-        this.description = description;
-        this.isDone = isDone;
-    }
-
-    public Task markAsDone() {
+    public boolean markAsDone() {
         if (!isDone) {
-            return new Task(description, true);
+            isDone = true;
+            return true;
         } else {
-            return this;
+            return false;
         }
     }
 
