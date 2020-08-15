@@ -1,10 +1,13 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     public final Scanner scanner;
+    public TaskManager taskManager;
 
     public Duke() {
         this.scanner = new Scanner(System.in);
+        this.taskManager = new TaskManager();
     }
 
     public static void main(String[] args) {
@@ -22,7 +25,8 @@ public class Duke {
                 duke.sendMessage(duke.getByeMessage());
                 break;
             } else {
-                duke.sendMessage(input);
+                duke.taskManager.addTask(input);
+                duke.sendMessage(duke.taskManager.toString());
             }
         }
     }
