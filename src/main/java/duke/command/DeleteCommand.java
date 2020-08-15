@@ -7,7 +7,7 @@ import duke.DukeException;
  * A subclass of Command which sends request to mark a task in list as done.
  */
 public class DeleteCommand extends Command {
-    
+
     /**
      * Creates a DeleteCommand.
      *

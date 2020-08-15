@@ -10,7 +10,7 @@ import duke.task.TaskList;
 import duke.task.Todo;
 
 /**
- * An agent to process incoming duke.command and return the feedback.
+ * An agent to process incoming command and return the feedback.
  */
 public class CommandAgent {
     private static TaskList taskList = new TaskList();
@@ -19,13 +19,14 @@ public class CommandAgent {
         return taskList.getSize();
     }
     /**
-     * Takes in the duke.command and handle it based on the request from the duke.command.
+     * Takes in the command and handle it based on the request from the command.
      *
-     * @param command the duke.command parsed from user input.
+     * @param command the command parsed from user input.
      * @return a String feedback for the user.
      */
     public String handleCommand(Command command) {
         String feedback = "____________________________________________________________\n";
+        int taskId;
         switch (command.sendRequest()) {
         case "error":
             List<String> errorMessage = command.getContent();
@@ -44,10 +45,17 @@ public class CommandAgent {
             feedback += this.generateRetrievalFeedback();
             break;
         case "update":
-            List<String> contentList = command.getContent();
-            int taskId = Integer.parseInt(contentList.get(0));
+            List<String> updateList = command.getContent();
+            taskId = Integer.parseInt(updateList.get(0));
             taskList = taskList.markAsDone(taskId);
             feedback += this.generateUpdateFeedback(taskId);
+            break;
+        case "delete":
+            List<String> deleteList = command.getContent();
+            taskId = Integer.parseInt(deleteList.get(0));
+            Task deletedTask = taskList.getTaskById(taskId);
+            taskList = taskList.deleteTask(taskId);
+            feedback += this.generateDeleteFeedback(deletedTask);
             break;
         default:
             feedback += "";
@@ -59,7 +67,7 @@ public class CommandAgent {
     /**
      * Create different types of tasks based on the identifier stored in the taskInfo.
      *
-     * @param taskInfo a list of String containing all the relevant information for the duke.task.
+     * @param taskInfo a list of String containing all the relevant information for the task.
      * @return a correct type of Task object.
      */
     public Task createTask(List<String> taskInfo) {
@@ -81,30 +89,47 @@ public class CommandAgent {
     }
 
     /**
-     * Generate the feedback for a duke.task creation.
-     * @return a String suggesting the completion of duke.task creation.
+     * Generate the feedback for a task creation.
+     * @return a String suggesting the completion of task creation.
      */
     public String generateCreateFeedback() {
         int taskId = taskList.getSize();
         Task currentTask = taskList.getTaskById(taskId);
-        String result = "Got it. I've added this duke.task:\n  ";
+        String result = "Got it. I've added this task:\n  ";
         result += currentTask;
         result += String.format("\nNow you have %d tasks in the list.", taskId);
         return result;
     }
 
     /**
-     * Generate the feedback for an update of duke.task status.
+     * Generate the feedback for an update of task status.
      *
      * @param taskId the displayed id in the taskList.
-     * @return a String suggesting the completion of duke.task update.
+     * @return a String suggesting the completion of task update.
      */
     public String generateUpdateFeedback(int taskId) {
         Task currentTask = taskList.getTaskById(taskId);
-        return "Nice! I've marked this duke.task as done:\n  " + currentTask;
+        return "Nice! I've marked this task as done:\n  " + currentTask;
     }
 
+    /**
+     * Generate the feedback for a retrieval of tasks information.
+     * @return a String showing all the task information.
+     */
     public String generateRetrievalFeedback() {
         return taskList.printTasks();
+    }
+
+    /**
+     * Generate the feedback for a delete of task from the task list.
+     *
+     * @param deletedTask the delete task.
+     * @return a String suggesting the task has been deleted.
+     */
+    public String generateDeleteFeedback(Task deletedTask) {
+        String result = "Noted. I've removed this task:\n  ";
+        result += deletedTask;
+        result += String.format("\nNow you have %d tasks in the list.", listSize());
+        return result;
     }
 }

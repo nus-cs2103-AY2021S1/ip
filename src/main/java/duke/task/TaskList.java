@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 /**
- * TaskList stores a list of tasks and
- * the corresponding operations on it.
+ * TaskList stores a list of tasks and the corresponding operations on it.
  */
 public class TaskList {
     private final List<Task> tasks;
@@ -24,10 +23,10 @@ public class TaskList {
     }
 
     /**
-     * Get the duke.task in the list by its id.
+     * Get the task in the list by its id.
      *
      * @param taskId the displayed id in the list.
-     * @return the duke.task associated with id.
+     * @return the Task associated with id.
      */
     public Task getTaskById(int taskId) {
         int index = taskId - 1;
@@ -35,11 +34,10 @@ public class TaskList {
     }
 
     /**
-     * Add a new duke.task to the list of tasks.
+     * Add a new task to the list of tasks.
      *
-     * @param newTask the new duke.task to be added.
-     * @return a new TaskList containing all the old tasks and
-     * the new duke.task.
+     * @param newTask the new task to be added.
+     * @return a new TaskList containing all the old tasks and the new task.
      */
     public TaskList addTask(Task newTask) {
         List<Task> newTaskList = this.tasks;
@@ -48,7 +46,20 @@ public class TaskList {
     }
 
     /**
-     * Set a duke.task with input id in the list as done.
+     * Delete a task in the list via its taskId .
+     *
+     * @param taskId the displayed id in the list.
+     * @return a new TaskList containing all the update tasks.
+     */
+    public TaskList deleteTask(int taskId) {
+        int index = taskId - 1;
+        List<Task> newTaskList = this.tasks;
+        newTaskList.remove(index);
+        return new TaskList(newTaskList);
+    }
+
+    /**
+     * Set a task with input id in the list as done.
      *
      * @param taskId the displayed id in the list.
      * @return a new TaskList containing all the update tasks.
@@ -78,5 +89,4 @@ public class TaskList {
 
         return result;
     }
-
 }
