@@ -10,7 +10,9 @@ public class Duke {
     private static String listTasks(ArrayList<Task> tasks) {
         String listOfTasks = "";
         for (int i = 0; i < tasks.size(); i++) {
-            listOfTasks = listOfTasks + (i + 1) + ". " + tasks.get(i).getTaskDescription()
+            Task task = tasks.get(i);
+            listOfTasks = listOfTasks + (i + 1) + ". " + (task.getDone() ? "[\u2713] " : "[\u274C] ")
+                    + task.getTaskDescription()
                     + (i == tasks.size() - 1 ? "" : "\n");
         }
         return listOfTasks;
