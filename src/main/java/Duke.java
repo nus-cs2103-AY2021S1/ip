@@ -1,7 +1,8 @@
 public class Duke {
     public static void main(String[] args) {
-        Interactor.welcome();
-        Interactor.getInput();
+        Interactor interactor = new Interactor();
+        interactor.welcome();
+        interactor.getInput();
 
     }
 }

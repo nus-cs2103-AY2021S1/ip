@@ -3,30 +3,36 @@ import java.util.List;
 import java.util.ArrayList;
 
 class Interactor {
-    static String user = "You: ";
-    static String kai = "Kai: ";
-    List<String> toDoList = new ArrayList<>();
+    String logo;
+    String user;
+    String kai;
+    List<String> toDoList;
 
-    static void welcome() {
-         String logo = "#    #   ##   # ###### ###### #    #\n"
-         + "#   #   #  #  #     #  #      ##   #\n"
-         + "####   #    # #    #   #####  # #  #\n"
-         + "#  #   ###### #   #    #      #  # #\n"
-         + "#   #  #    # #  #     #      #   ##\n"
-         + "#    # #    # # ###### ###### #    #\n";
+    Interactor() {
+        logo = logo = "#    #   ##   # ###### ###### #    #\n"
+                + "#   #   #  #  #     #  #      ##   #\n"
+                + "####   #    # #    #   #####  # #  #\n"
+                + "#  #   ###### #   #    #      #  # #\n"
+                + "#   #  #    # #  #     #      #   ##\n"
+                + "#    # #    # # ###### ###### #    #\n";
+        user = "You: ";
+        kai = "Kai: ";
+        toDoList = new ArrayList<>();
+    }
 
+    void welcome() {
          String welcomeMessage = "Konichiwa! Welcome to Kaizen \n"
                  + "I am Kai, what can I do for you today?\n";
 
-        System.out.println(logo + "\n"
+        System.out.println(this.logo + "\n"
                 + ConsoleColors.YELLOW.getColor() + welcomeMessage + ConsoleColors.RESET.getColor());
     }
 
-    static void getInput() {
+    void getInput() {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            System.out.print(user);
+            System.out.print(this.user);
             String input = sc.nextLine();
             if (input.equals("bye")) {
                 System.out.println(ConsoleColors.YELLOW.getColor()
@@ -35,17 +41,11 @@ class Interactor {
                         + ConsoleColors.RESET.getColor());
                 break;
             }
-
-            System.out.println(ConsoleColors.YELLOW.getColor()
-                    + kai
-                    + input
-                    + ConsoleColors.RESET.getColor()
-                    + "\n");
+//            System.out.println(ConsoleColors.YELLOW.getColor()
+//                    + kai
+//                    + input
+//                    + ConsoleColors.RESET.getColor()
+//                    + "\n");
         }
     }
-
-
-
-
-
 }
