@@ -18,7 +18,7 @@ public class Duke {
 
     public static void startGreet() {
         String greeting = "Hello! I'm Duke the chatbot! \n" +
-                "What can I do for you? \n";
+                "What can I do for you?\n";
         System.out.println(greeting);
     }
 
@@ -27,7 +27,6 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             // Listens for input
-            System.out.print("Enter command: ");
             String input = scanner.nextLine();
             if (input.equals("bye")) {
                 // Encounters exit command
@@ -69,32 +68,35 @@ public class Duke {
                 // Finding and marking the actual task as done
                 int indexOfDone =  Integer.parseInt(stringArr[1]) - 1;
                 Task currentTask = list.get(indexOfDone);
+                if (currentTask.isDone) {
+                    continue;
+                }
                 currentTask.markAsDone();
                 indent();
-                System.out.println("Good job! You completed: ");
+                System.out.println("Good job! You completed:");
                 indent();
                 indent();
                 System.out.println(currentTask);
             } else if (input.startsWith("todo")) {
                 // Create and store todos given in list
                 String taskDesc = input.substring(5);
-                list.add(new Todo(taskDesc));
-                indent();
-                System.out.print("Successfully added: " + taskDesc + "\n\n");
+                Task newTodo = new Todo(taskDesc);
+                list.add(newTodo);
+                printAddSuccess(list.size(), newTodo);
             } else if (input.startsWith("deadline")) {
                 // Create and store deadlines given in list
                 String taskDesc = input.substring(9, input.indexOf("/by"));
                 String by = input.substring(input.indexOf("/by") + 4);
-                list.add(new Deadline(taskDesc, by));
-                indent();
-                System.out.print("Successfully added: " + taskDesc + "\n\n");
+                Task newDeadline = new Deadline(taskDesc, by);
+                list.add(newDeadline);
+                printAddSuccess(list.size(), newDeadline);
             } else if (input.startsWith("event")) {
                 // Create and store events given in list
                 String taskDesc = input.substring(6, input.indexOf("/at"));
                 String at = input.substring(input.indexOf("/at") + 4);
-                list.add(new Event(taskDesc, at));
-                indent();
-                System.out.print("Successfully added: " + taskDesc + "\n\n");
+                Task newEvent = new Event(taskDesc, at);
+                list.add(newEvent);
+                printAddSuccess(list.size(), newEvent);
             } else {
                 // Returns blank line
                 System.out.println();
@@ -124,5 +126,17 @@ public class Duke {
 
     public static void indent() {
         System.out.print("    ");
+    }
+
+    public static void printAddSuccess(int listSize, Task task) {
+        // Prints success message after an item is added to list
+        indent();
+        System.out.print("Successfully added:\n");
+        indent();
+        indent();
+        System.out.println(task);
+        indent();
+        System.out.println("You have " + listSize + " task(s) in the list");
+        System.out.println();
     }
 }
