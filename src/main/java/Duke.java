@@ -14,22 +14,22 @@ public class Duke {
         while (true) {
             try {
                 res = sc.nextLine();
-                if (res.equals("bye")) {
+                if (res.equalsIgnoreCase(Operations.BYE.name())) {
                     break;
-                } else if (res.equals("list")) {
+                } else if (res.equalsIgnoreCase(Operations.LIST.name())) {
                     System.out.println("    ____________________________________________________________");
                     System.out.println("     Here are the tasks in your list:");
                     for (int i = 0; i < data.size(); i++) {
                         System.out.printf("     %d.%s\n", i + 1, data.get(i).toString());
                     }
                     System.out.println("    ____________________________________________________________");
-                } else if (res.startsWith("done")) {
+                } else if (res.startsWith(Operations.DONE.name().toLowerCase())) {
                     if (res.length() <= 5) {
                         // Exception: eg. done
                         throw new DukeException("     ☹ OOPS!!! The description of done is incomplete.");
                     }
                     int n = Integer.parseInt(res.substring(5)) - 1;
-                    if (n < 0 || n >= data.size()) {
+                    if (n > data.size() || n < 0) {
                         //Exception: eg. done 999
                         throw new DukeException("     ☹ OOPS!!! The index is out of bounds.");
                     }
@@ -38,13 +38,13 @@ public class Duke {
                     System.out.println("    Nice! I've marked this task as done: ");
                     System.out.printf("     %s\n", data.get(n).toString());
                     System.out.println("    ____________________________________________________________");
-                } else if (res.startsWith("delete")) {
+                } else if (res.startsWith(Operations.DELETE.name().toLowerCase())) {
                     if (res.length() <= 7) {
                         // Exception: eg. delete
                         throw new DukeException("     ☹ OOPS!!! The description of delete is incomplete.");
                     }
                     int n = Integer.parseInt(res.substring(7)) - 1;
-                    if (n < 0 || n >= data.size()) {
+                    if (n > data.size() || n < 0) {
                         //Exception: eg. delete 999
                         throw new DukeException("     ☹ OOPS!!! The index is out of bounds.");
                     }
@@ -54,7 +54,7 @@ public class Duke {
                     data.remove(n);
                     System.out.printf("     Now you have %d tasks in the list.\n", data.size());
                     System.out.println("    ____________________________________________________________");
-                } else if (res.startsWith("todo")) {
+                } else if (res.startsWith(Operations.TODO.name().toLowerCase())) {
                     if (res.length() <= 5) {
                         // Exception: eg. todo
                         throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
@@ -66,7 +66,7 @@ public class Duke {
                     System.out.printf("       %s\n", t.toString());
                     System.out.printf("     Now you have %d tasks in the list.\n", data.size());
                     System.out.println("    ____________________________________________________________");
-                } else if (res.startsWith("deadline")) {
+                } else if (res.startsWith(Operations.DEADLINE.name().toLowerCase())) {
                     if (res.length() <= 9) {
                         // Exception: eg. deadline
                         throw new DukeException("     ☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -87,7 +87,7 @@ public class Duke {
                     System.out.printf("       %s\n", t.toString());
                     System.out.printf("     Now you have %d tasks in the list.\n", data.size());
                     System.out.println("    ____________________________________________________________");
-                } else if (res.startsWith("event")) {
+                } else if (res.startsWith(Operations.EVENT.name().toLowerCase())) {
                     if (res.length() <= 9) {
                         // Exception: eg. event
                         throw new DukeException("     ☹ OOPS!!! The description of an event cannot be empty.");
