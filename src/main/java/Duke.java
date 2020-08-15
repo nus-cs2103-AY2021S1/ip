@@ -32,8 +32,7 @@ public class Duke {
                     break;
                 default:
                     if (userMarkAsDone(userInput)) {
-                        String taskIndex = userInput.substring(5);
-                        markTaskAsDone(taskIndex);
+                        markTaskAsDone(userInput);
 
                     } else if (userAddingToDo(userInput)) {
                         addToDoTask(userInput);
@@ -51,6 +50,7 @@ public class Duke {
             }
         }
     }
+
     private static void addToDoTask(String userInput) {
         String taskDescription = userInput.substring(5);
         ToDo newToDoItem = new ToDo(taskDescription);
@@ -58,11 +58,17 @@ public class Duke {
     }
 
     private static void addEventTask(String userInput) {
-
+        String taskDescription = userInput.substring(6, userInput.indexOf("/at") - 1);
+        String eventDateTime = userInput.substring(userInput.indexOf("/at") + 4);
+        Event newEventItem  = new Event(taskDescription, eventDateTime);
+        addItem(newEventItem);
     }
 
     private static void addDeadlineTask(String userInput) {
-
+        String taskDescription = userInput.substring(9, userInput.indexOf("/by") - 1);
+        String deadlineBy = userInput.substring(userInput.indexOf("/by") + 4);
+        Deadline newDeadlineItem = new Deadline(taskDescription, deadlineBy);
+        addItem(newDeadlineItem);
     }
 
     private static boolean userAddingToDo(String userInput) {
@@ -107,7 +113,7 @@ public class Duke {
         System.out.println("Here are the tasks in your list:\n");
         ArrayList<Task> currList = Duke.taskList;
         currList.forEach(item ->
-                System.out.println((currList.indexOf(item) + 1) + ". " + item));
+                System.out.println((currList.indexOf(item) + 1) + "." + item));
     }
 
     private static void echo(String userInput) {
