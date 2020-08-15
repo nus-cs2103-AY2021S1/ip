@@ -33,21 +33,30 @@ public class Duke {
                 switch (input.split(" ")[0]) {
                 case "todo":
                     if (input.length() <= 5 || input.split(" ").length < 2) {
-                        throw new EmptyDescriptionException("The description of a todo cannot be empty.");
+                        throw new IllegalArgumentException("The description of a todo cannot be empty.");
                     }
                     addToList(new Todo(input.substring(5)));
                     break;
                 case "deadline":
                     int indexOfBy = input.indexOf(" /by ");
                     if (input.length() <= 9 || input.split(" ").length < 2) {
-                        throw new EmptyDescriptionException("The description of a deadline cannot be empty.");
+                        throw new IllegalArgumentException("The description of a deadline cannot be empty.");
+                    }
+                    if (indexOfBy < 0 || input.substring(indexOfBy + 5).split(" ").length <= 0) {
+                        throw new IllegalArgumentException(
+                            "A date needs to be provided with /by when adding a deadline.\n"
+                                + "     Usage: deadline return book /by tomorrow");
                     }
                     addToList(new Deadline(input.substring(9, indexOfBy), input.substring(indexOfBy + 5)));
                     break;
                 case "event":
                     int indexOfAt = input.indexOf(" /at ");
                     if (input.length() <= 6 || input.split(" ").length < 2) {
-                        throw new EmptyDescriptionException("The description of an event cannot be empty.");
+                        throw new IllegalArgumentException("The description of an event cannot be empty.");
+                    }
+                    if (indexOfAt < 0 || input.substring(indexOfAt + 5).split(" ").length <= 0) {
+                        throw new IllegalArgumentException("A date needs to be provided with /at when adding a event.\n"
+                            + "     Usage: event library renewal /at next sunday");
                     }
                     addToList(new Event(input.substring(6, indexOfAt), input.substring(indexOfAt + 5)));
                     break;
@@ -59,18 +68,26 @@ public class Duke {
                     System.out.println(LINE);
                     break;
                 case "done":
+                    if (input.split(" ").length < 2 || !input.split(" ")[1].matches("\\d+")) {
+                        throw new IllegalArgumentException("The index of the task to be marked done must be provided.");
+                    }
+                    if (Integer.parseInt(input.split(" ")[1]) > list.size()) {
+                        throw new IllegalArgumentException(
+                            "The index provided is too large. Run list to see your list of tasks.");
+                    }
                     Task doneTask = list.get(Integer.parseInt(input.split(" ")[1]) - 1);
                     doneTask.setDone(true);
                     System.out.println(
                         makeWrappedString("Great Job! I've marked this task as done:\n       " + doneTask));
                     break;
                 default:
-                    System.out.println(makeWrappedString("Check your command again!\n     "
-                        + "Your command should either start with todo, deadline, event, list or done."));
-                    break;
+                    throw new IllegalArgumentException("Your input must start with one of the following:\n"
+                        + "     \"todo\", \"deadline\", \"event\", \"list\" or \"done\"."
+                    );
+                    // break;
                 }
-            } catch (EmptyDescriptionException e) {
-                System.out.println(makeWrappedString("Error! You have an empty description.\n     "
+            } catch (IllegalArgumentException e) {
+                System.out.println(makeWrappedString("Error! We had a problem understanding your message.\n     "
                     + e.getMessage()));
             }
             input = sc.nextLine();
