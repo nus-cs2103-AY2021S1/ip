@@ -16,7 +16,7 @@ public class Duke {
     private void addTask(String task) {
         String message = "Added: " + task;
         tasks.add(task);
-        System.out.println(message);
+        sendMessage(message);
     }
 
     private void welcome() {
