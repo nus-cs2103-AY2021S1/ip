@@ -1,11 +1,13 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 class Interactor {
     static String user = "You: ";
     static String kai = "Kai: ";
+    List<String> toDoList = new ArrayList<>();
 
     static void welcome() {
-
          String logo = "#    #   ##   # ###### ###### #    #\n"
          + "#   #   #  #  #     #  #      ##   #\n"
          + "####   #    # #    #   #####  # #  #\n"
@@ -22,7 +24,6 @@ class Interactor {
 
     static void getInput() {
         Scanner sc = new Scanner(System.in);
-
 
         while (true) {
             System.out.print(user);
@@ -41,8 +42,9 @@ class Interactor {
                     + ConsoleColors.RESET.getColor()
                     + "\n");
         }
-
     }
+
+
 
 
 
