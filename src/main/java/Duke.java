@@ -21,7 +21,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(LINE);
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from " + logo);
         System.out.println("What can I do for you pal? :D");
         System.out.println(LINE);
     }
@@ -30,6 +30,7 @@ public class Duke {
         int counter;
         int indexer;
         Task book;
+        String date;
         while (true) {
             String response = sc.nextLine();
             System.out.println(LINE);
@@ -54,8 +55,25 @@ public class Duke {
                 System.out.println(book);
                 System.out.println(LINE);
             } else {
-                shelf.add(new Task(response));
-                System.out.println("added: " + response);
+                if (response.indexOf("todo ") == 0) {
+                    book = new ToDo(response.substring(4));
+                    shelf.add(book);
+                } else if (response.indexOf("deadline ") == 0) {
+                    date = response.substring(response.indexOf("/by ") + 4);
+                    response = response.substring(response.indexOf("deadline ") + 8, response.indexOf("/by "));
+                    book = new Deadline(response, date);
+                    shelf.add(book);
+                } else {
+                    date = response.substring(response.indexOf("/at ") + 4);
+                    response = response.substring(response.indexOf("event ") + 5, response.indexOf("/at "));
+                    book = new EventTask(response, date);
+                    shelf.add(book);
+
+                }
+                // exception
+                System.out.println("Got it. I've added this task: ");
+                System.out.println("  " + book);
+                System.out.println("Now you have " + shelf.size() + " tasks in the list.");
                 System.out.println(LINE);
             }
         }

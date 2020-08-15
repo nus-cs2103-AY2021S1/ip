@@ -1,8 +1,8 @@
 public class Task {
-    private boolean isDone;
-    private final String name;
+    protected boolean isDone;
+    protected final String name;
 
-    public Task(String name) {
+    protected Task(String name) {
         this.isDone = false;
         this.name = name;
     }
@@ -15,8 +15,8 @@ public class Task {
         this.isDone = true;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+    protected String getStatusIcon() {
+        return (isDone ? "[\u2713]" : "[\u2718]");
     }
 
     @Override
