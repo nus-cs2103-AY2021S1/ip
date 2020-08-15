@@ -12,7 +12,8 @@ public class Duke {
     final static String exitMessage = textIndent + "Bye. Hope to see you again soon!\n";
     final static String listMessage = textIndent + "Here are the tasks in your list:\n";
     final static String doneMessage = textIndent + "Nice! I've marked this task as done:\n";
-    final static String todoMessage = textIndent + "Got it. I've added this task:\n";
+    final static String taskAddedMessage = textIndent + "Got it. I've added this task:\n";
+    final static String deleteMessage = textIndent + "Noted. I've removed this task:\n";
 
     static String[] commands = {"bye", "list", "done", "todo", "deadline", "event"};
 
@@ -61,6 +62,14 @@ public class Duke {
                 }
                 detail = commandDetail[1];
                 handleDone(detail);
+                break;
+
+            case "delete":
+                if (commandDetail.length < 2) {
+                    throw new DukeException("Please key in a task to be marked as done!");
+                }
+                detail = commandDetail[1];
+                handleDelete(detail);
                 break;
 
             case "todo":
@@ -112,11 +121,23 @@ public class Duke {
         }
     }
 
+    public static void handleDelete(String detail) throws DukeException {
+        try {
+            int num = Integer.parseInt(detail);
+            Task curr = tasks.get(num - 1);
+            tasks.remove(num - 1);
+            String numTasks = "Now you have " + tasks.size() + " tasks in the list.\n";
+            say(deleteMessage + textIndent + curr + "\n" + textIndent + numTasks);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Please key in the number of an existing task to be removed!");
+        }
+    }
+
     public static void handleTodo(String detail) {
         Task task = new Todo(detail);
         tasks.add(task);
         String numTasks = "Now you have " + tasks.size() + " tasks in the list.\n";
-        String out = todoMessage + textIndent + task +
+        String out = taskAddedMessage + textIndent + task +
                 "\n" + textIndent + numTasks;
         say(out);
     }
@@ -127,7 +148,7 @@ public class Duke {
             Task task = new Deadline(split[0], split[1]);
             tasks.add(task);
             String numTasks = "Now you have " + tasks.size() + " tasks in the list.\n";
-            String out = todoMessage + textIndent + task +
+            String out = taskAddedMessage + textIndent + task +
                     "\n" + textIndent + numTasks;
             say(out);
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -141,7 +162,7 @@ public class Duke {
             Task task = new Event(split[0], split[1]);
             tasks.add(task);
             String numTasks = "Now you have " + tasks.size() + " tasks in the list.\n";
-            String out = todoMessage + textIndent + task +
+            String out = taskAddedMessage + textIndent + task +
                     "\n" + textIndent + numTasks;
             say(out);
         } catch (ArrayIndexOutOfBoundsException e) {
