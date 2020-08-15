@@ -76,6 +76,13 @@ public class Duke {
                 Todo todo = new Todo(inputBreakdown[1]);
                 addTask(todo);
                 break;
+            case ("deadline"):
+                String[] remainingInput = inputBreakdown[1].split(" /by ", 2);
+                String description = remainingInput[0];
+                String by = remainingInput[1];
+                Deadline deadline = new Deadline(description, by);
+                addTask(deadline);
+                break;
             case ("bye"):
                 exit();
                 break;
