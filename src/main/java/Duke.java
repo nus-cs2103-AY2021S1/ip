@@ -14,7 +14,7 @@ public class Duke {
                 + " ------  ___/  /        \\ /        \\    -----\n";
         System.out.println("Hello! I'm\n" + logo + "\nWhat can I do for you?");
         String next = "";
-        while (true) {
+        while (sc.hasNext()) {
             next = sc.nextLine();
             if (next.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
