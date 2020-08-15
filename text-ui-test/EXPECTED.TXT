@@ -29,5 +29,11 @@ Here are the tasks in your list:
 3.[E][✘]  attend ninja fruit competition (at: Mon 2-4pm)
 --------------------------------------
 --------------------------------------
+Oops! Todo cannot have an empty message!
+--------------------------------------
+--------------------------------------
+Oops! I'm sorry Boss! I do not know what that means :-(
+--------------------------------------
+--------------------------------------
 Bye Boss! Hope to see you again!
 --------------------------------------

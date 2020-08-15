@@ -4,4 +4,6 @@ deadline must eat the fruit /by Sunday
 event attend ninja fruit competition /at Mon 2-4pm
 done 1
 list
+todo
+helloworld
 bye
