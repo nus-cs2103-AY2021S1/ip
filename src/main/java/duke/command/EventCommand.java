@@ -15,9 +15,8 @@ public class EventCommand extends AddCommand {
     /**
      * Creates a EventCommand.
      *
-     * @param content the duke.task information supplied by the user.
-     * @throws DukeException if the content has missing name or schedule.
-     * or the format does not contain /at.
+     * @param content the task information supplied by the user.
+     * @throws DukeException if the content has missing name or schedule or the format does not contain /at.
      */
     public EventCommand(String content) throws DukeException {
         if (!content.contains("/at")) {

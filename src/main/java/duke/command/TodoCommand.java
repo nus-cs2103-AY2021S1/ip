@@ -14,7 +14,7 @@ public class TodoCommand extends AddCommand {
     /**
      * Creates a TodoCommand.
      *
-     * @param content the duke.task information supplied by the user.
+     * @param content the task information supplied by the user.
      * @throws DukeException if the content is missing.
      */
     public TodoCommand(String content) throws DukeException {
