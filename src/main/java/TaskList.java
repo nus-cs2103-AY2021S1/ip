@@ -22,7 +22,32 @@ public class TaskList {
         for(int i = 0; i < this.list.size(); ++i){
 
             //Print the index and the message of the task
-            System.out.println(String.format("%d. %s", i + 1, this.get(i).getMessage()));
+            System.out.println(String.format("%d.[%s] %s", i + 1, this.get(i).getStatusIcon(), this.get(i).getMessage()));
+        }
+
+    }
+
+    public int size(){
+
+        //Get the size of the list
+        return this.list.size();
+    }
+
+    public boolean markDone(int index){
+
+        //Check if the index is valid
+        if (index < this.list.size() && index >= 0){
+
+            //Mark the task at index as done
+            this.get(index).markDone();
+
+            //Return true if operation is successful
+            return true;
+
+        }else{
+
+            //Otherwise operation will fail
+            return false;
         }
 
     }
