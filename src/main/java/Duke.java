@@ -13,12 +13,23 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        TodoList todoList = new TodoList();
+        TaskList taskList = new TaskList();
         while (!input.equals("bye")) {
             if (input.equals("list")) {
-                todoList.list();
+                taskList.list();
+            } else if (input.equals("")) {
+                // Do nothing
             } else {
-                todoList.add(input);
+                String[] inputArray = input.split("\\s+");
+                if (inputArray.length >= 2 && inputArray[0].equals("done")) {
+                    try {
+                        taskList.markAsDone(Integer.parseInt(inputArray[1]));
+                    } catch (NumberFormatException e) {
+                        System.out.println("Not a valid task");
+                    }
+                } else {
+                    taskList.add(input);
+                }
             }
             input = scanner.nextLine();
         }
