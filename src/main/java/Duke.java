@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private List<String> tasks;
+    private List<Task> tasks;
+    private String indentation = "  ";
     private String BYE_COMMAND = "bye";
     private String LIST_COMMAND = "list";
+    private String DONE_COMMAND = "done";
 
     Duke() {
         tasks = new ArrayList<>();
@@ -15,8 +17,9 @@ public class Duke {
 
     private void addTask(String task) {
         String message = "Added: " + task;
-        tasks.add(task);
+        tasks.add(new Task(task));
         sendMessage(message);
+
     }
 
     private void welcome() {
@@ -44,7 +47,19 @@ public class Duke {
         }
 
         sendMessage(message);
+    }
 
+    private void doneTask(int taskNumber) {
+        String message;
+        if (taskNumber < 1 || taskNumber > tasks.size()) {
+            message = "Invalid task number!";
+        } else {
+            Task task = tasks.get(taskNumber - 1);
+            task.setStatusToDone();
+            message = "Sucessfully marked this task as done: \n" + indentation + task.toString();
+        }
+
+        sendMessage(message);
 
     }
 
@@ -53,11 +68,19 @@ public class Duke {
 
         while (true) {
             String userInput = sc.nextLine();
+            String[] userInputArr = userInput.split("\\s", 2);
+            String command = userInputArr[0];
 
-            if (userInput.equals(BYE_COMMAND)) {
+            if (command.equals(BYE_COMMAND)) {
                 break;
-            }else if (userInput.equals(LIST_COMMAND)) {
+            } else if (command.equals(LIST_COMMAND)) {
                 showAllTask();
+            } else if (command.equals(DONE_COMMAND)) {
+                if (userInputArr.length == 1) {
+                    doneTask(0);
+                } else {
+                    doneTask(Integer.parseInt(userInputArr[1]));
+                }
             } else {
                 addTask(userInput);
             }
@@ -71,7 +94,6 @@ public class Duke {
     private String createLine(String response) {
         Scanner sc = new Scanner(response);
         String equalSign = "=";
-        String indentation = "  ";
         int width = 75;
         StringBuilder sb = new StringBuilder();
 
