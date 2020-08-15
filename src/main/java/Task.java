@@ -1,14 +1,14 @@
-public class Item {
-    private String item;
+public class Task {
+    private String name;
     private Boolean isDone;
 
-    public Item(String item) {
-        this.item = item;
+    public Task(String name) {
+        this.name = name;
         this.isDone = false;
     }
 
     public String getItemName() {
-        return item;
+        return name;
     }
 
     public Boolean isDone() {
