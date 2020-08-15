@@ -1,7 +1,6 @@
 package main.java;
 
 import javax.print.DocFlavor;
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,13 +42,53 @@ public class Duke {
                 System.out.print(LINE);
             } else if(input.contains(DONE_COMMAND)){
                 doneOutput(input);
+            } else if(input.contains(TODO_COMMAND)){
+                todoTask(input);
+                System.out.println(DOUBLE_TAB +"Now you have " +list.size() +" tasks in the list\n" + LINE);
+            } else if(input.contains(DEADLINE_COMMAND)){
+                deadlineTask(input);
+                System.out.println(DOUBLE_TAB +"Now you have " +list.size() +" tasks in the list\n" + LINE);
+            } else if(input.contains(EVENT_COMMAND)){
+                eventTask(input);
+                System.out.println(DOUBLE_TAB +"Now you have " +list.size() +" tasks in the list\n"+LINE);
             }else {
                 add(input);
             }
         }
     }
 
+    private void deadlineTask(String input) {
+        String taskDetails = input.split("\\s",2)[1];
+        String[] splitTaskDetails = taskDetails.split("/");
+        String taskDescription = splitTaskDetails[0];
+        String taskTime = splitTaskDetails[1];
+        final String BY = taskTime.split("\\s")[0];
+        final String TIME = taskTime.split("\\s")[1];
+        DeadlineTask deadlineTask = new DeadlineTask(taskDescription);
+        list.add(deadlineTask);
+        System.out.println(LINE + DOUBLE_TAB + "Got it. I've added this task:\n" +
+                DOUBLE_TAB  + deadlineTask +" (" + BY + ": " + TIME +")");
+    }
 
+    private void eventTask(String input) {
+        String taskDetails = input.split("\\s",2)[1];
+        String taskDescription = taskDetails.split("/",2)[0];
+        String taskTime = taskDetails.split("/",2)[1];
+        final String AT = taskTime.split("\\s")[0];
+        final String TIME = taskTime.split("\\s")[1];
+        EventTask eventTask = new EventTask(taskDescription);
+        list.add(eventTask);
+        System.out.println(LINE + DOUBLE_TAB + "Got it. I've added this task:\n" +
+                DOUBLE_TAB  + eventTask +" (" + AT + ": " + TIME +")");
+    }
+
+    private void todoTask(String input) {
+        String taskDescription = input.split("\\s")[1];
+        TodoTask todoTask = new TodoTask(taskDescription);
+        list.add(todoTask);
+        System.out.println(LINE + DOUBLE_TAB + "Got it. I've added this task :\n"
+                + DOUBLE_TAB + todoTask);
+    }
 
     private void doneOutput(String input) {
         int index = Integer.parseInt(input.split(" ")[1]);
