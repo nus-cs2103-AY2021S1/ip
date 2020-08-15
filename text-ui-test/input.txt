@@ -1,10 +1,20 @@
-todo borrow book
-deadline return book /by Sunday
+bash
+todo
+todo learn cs2103
+deadline quiz 2
+deadline quiz2 /by
+deadlinetest
+deadline quiz 2 /by Thursday
+todo read info
+event project meeting /at tonight
+todo watch videos
 list
-event project meeting /at Mon 2-4pm
-new task
-event presentation /by sometime
+done
+done 0
+done 3
+done 8
 list
-done 2
+delete 0
+delete 2
 list
 bye
