@@ -44,6 +44,9 @@ public class Duke {
                 } else if (taskType.equals("deadline")) {
                     String[] arr = taskName.split("/");
                     task = new Deadline(arr[0], arr[1].substring(arr[1].indexOf(" ") + 1));
+                } else if (taskType.equals("event")) {
+                    String[] arr = taskName.split("/");
+                    task = new Event(arr[0], arr[1].substring(arr[1].indexOf(" ") + 1));
                 } else {
                     System.out.println("debug");
                     task = new Task(taskName);
