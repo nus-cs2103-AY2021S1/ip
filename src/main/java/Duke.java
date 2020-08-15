@@ -1,3 +1,5 @@
+package main.java;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -23,7 +25,7 @@ public class Duke {
         System.out.println(logo);
         printInWindow("Hello, I'm a banana.\nWhat can I do for you?");
 
-        List<String> tasks = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
 
         while(sc.hasNextLine()) {
             String command = sc.nextLine();
@@ -36,7 +38,8 @@ public class Duke {
                 printInWindow("Bye. Hope to see you again soon!");
                 return;
             default:
-                tasks.add(command);
+                Task newTask = new Task(command);
+                tasks.add(newTask);
                 printInWindow("Added: " + command);
             }
         }
@@ -49,12 +52,12 @@ public class Duke {
         System.out.println(divider);
     }
 
-    public static String formatTaskListToString(List<String> tasks) {
+    public static String formatTaskListToString(List<Task> tasks) {
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < tasks.size(); i++) {
             sb.append(i)
                     .append(". ")
-                    .append(tasks.get(i));
+                    .append(tasks.get(i).toString());
             if(i < tasks.size() - 1) {
                 sb.append("\n");
             }
