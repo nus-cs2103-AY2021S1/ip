@@ -25,12 +25,18 @@ public class Duke {
     }
 
     public static void listTasks(){
-        StringBuilder output = new StringBuilder("   ______________________________________________________________");
-        for(int i = 0; i < myTasks.size(); i++){
-            output.append("\n    ").append(i + 1).append(". ").append(myTasks.get(i));
+        if(myTasks.size() == 0){
+            System.out.println("   ______________________________________________________________"
+                    + "\n   " + "You have no tasks"
+                    + "\n   ______________________________________________________________");
+        } else {
+            StringBuilder output = new StringBuilder("   ______________________________________________________________");
+            for (int i = 0; i < myTasks.size(); i++) {
+                output.append("\n    ").append(i + 1).append(". ").append(myTasks.get(i));
+            }
+            output.append("\n   ______________________________________________________________");
+            System.out.println(output);
         }
-        output.append("\n   ______________________________________________________________");
-        System.out.println(output);
     }
 
     public static void bye(){
@@ -50,6 +56,7 @@ public class Duke {
         System.out.println(output);
     }
 
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -61,38 +68,70 @@ public class Duke {
         greet();
         Scanner scanner = new Scanner(System.in);
         while (true){
-            String input = scanner.nextLine();
-            String firstWord = "";
-            int i = 0;
-            if(input.contains(" ")) {
-                i = input.indexOf(" ");
-                firstWord = input.substring(0, i);
-            }
-            if(input.equals("bye") || input.equals("Bye")){
-                bye();
-                break;
-            } else if(input.equals("list")){
-                listTasks();
-            } else if (firstWord.equals("done")){
-                int index = Integer.parseInt(input.substring(i+1));
-                markAsDone(index);
-            }
-            else if(firstWord.equals("todo")) {
-                String name = input.substring(i+1);
-                Task task = new TodoTask(name);
-                addTask(task);
-            } else if(firstWord.equals("deadline")){
-                int t = input.indexOf("/");
-                String name = input.substring(i+1, t);
-                String time = input.substring(t+4);
-                Task task = new DeadlineTask(name, time);
-                addTask(task);
-            }else if(firstWord.equals("event")){
-                int t = input.indexOf("/");
-                String name = input.substring(i+1, t);
-                String time = input.substring(t+4);
-                Task task = new EventTask(name, time);
-                addTask(task);
+            try {
+                String input = scanner.nextLine();
+                if (input.equals("bye") || input.equals("Bye")) {
+                    bye();
+                    break;
+                } else if (input.equals("list")) {
+                    listTasks();
+                } else if (input.startsWith("done")) {
+                    try {
+                        if(input.split("done ").length>=2) {
+                            String[] inputSplit = input.split("done ");
+                            int index = Integer.parseInt(inputSplit[1]);
+                            markAsDone(index);
+                        } else {
+                            throw new DukeException("", DukeExceptionType.NO_DESCRIPTION);
+                        }
+                    } catch(DukeException e){
+                        System.err.println(e);
+                    }
+                } else if (input.startsWith("todo")) {
+                    try {
+                        if (input.split("todo ").length>=2) {
+                            String[] inputSplit = input.split("todo ");
+                            Task task = new TodoTask(inputSplit[1]);
+                            addTask(task);
+                        } else {
+                            throw new DukeException("todo needs description", DukeExceptionType.NO_DESCRIPTION);
+                        }
+                    } catch (DukeException e){
+                        System.err.println(e);
+                    }
+                } else if (input.startsWith("deadline")) {
+                    try {
+                        if(input.split("deadline ").length>=2) {
+                            String[] inputSplit = input.split("/by ");
+                            String name = inputSplit[0].split("deadline ")[1];
+                            String time = inputSplit[1];
+                            Task task = new DeadlineTask(name, time);
+                            addTask(task);
+                        } else {
+                            throw new DukeException("deadline needs description", DukeExceptionType.NO_DESCRIPTION);
+                        }
+                    } catch(DukeException e){
+                        System.err.println(e);
+                    }
+                } else if (input.startsWith("event")) {
+                    try{
+                        if (input.split("event ").length>=2){
+                            String[] inputSplit = input.split("/at ");
+                            String name = inputSplit[0].split("event ")[1];
+                            String time = inputSplit[1];
+                            Task task = new EventTask(name, time);
+                            addTask(task);
+                        } else {
+                            throw new DukeException("", DukeExceptionType.NO_DESCRIPTION);
+                        }
+                    } catch(DukeException e){
+                        System.err.println(e);
+                    }
+                } else {
+                    throw new DukeException("", DukeExceptionType.INVALID_TASK);
+                }
+            } catch(DukeException e) {
+                System.err.println(e);
             }
         }
 
