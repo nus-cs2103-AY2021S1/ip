@@ -3,16 +3,28 @@ package ip.src.main.java;
 import java.util.ArrayList;
 
 public class Tasks {
-    ArrayList<String> tasks = new ArrayList<String>();
-    Layout layout = new Layout();
+    private ArrayList<Task> tasks = new ArrayList<Task>();
+    private Layout layout = new Layout();
 
     public void addTask(String task) {
-        tasks.add(task);
+        tasks.add(new Task(task));
         layout.print("added: " + task);
     }
 
     public void showTasks() {
-        layout.printList(tasks);
+        layout.printTaskList(tasks);
+    }
+
+    public void markDone(String i) {
+        int index = Integer.parseInt(i);
+        try {
+            Task task = tasks.get(index - 1);
+            task.markDone();
+            layout.printMarkedDone(task);
+        } catch (IndexOutOfBoundsException e) {
+            layout.print("No task labelled " + i);
+        }
+
     }
 
 }

@@ -19,6 +19,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while(sc.hasNextLine()) {
             String next = sc.nextLine();
+            String [] arr = next.split(" ");
 
             if (next.equals("")) {
                 System.exit(0);
@@ -27,6 +28,8 @@ public class Duke {
                 layout.print("Bye. Hope to see you again soon!");
             } else if (next.equals("list")) {
                 tasks.showTasks();
+            } else if (arr[0].equals("done")) {
+                tasks.markDone(arr[1]);
             } else {
                 tasks.addTask(next);
             }
