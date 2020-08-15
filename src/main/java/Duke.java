@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Duke {
@@ -20,23 +21,47 @@ public class Duke {
         while(echo.equals("bye") == false){
             int type = checker.typeChecker(echo);
             if(type == 1){
-                String name = checker.name(echo);
-                Todo t = new Todo(name);
-                store.add(t);
+                try{
+                    String name = checker.name(echo);
+                    Todo t = new Todo(name);
+                    store.add(t);
+                    t.print();
+                }
+                catch(NoSuchElementException e){
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
             }
             else if(type == 2){
-                String name = checker.name(echo);
-                Deadline d = new Deadline(name);
-                String date = checker.dateFinder(echo,2);
-                d.addDate(date);
-                store.add(d);
+                try{
+                    String name = checker.name(echo);
+                    Deadline d = new Deadline(name);
+//                    try{
+//
+//                    }
+//                    catch(NoSuchElementException e){
+//
+//                    }
+                    String date = checker.dateFinder(echo,2);
+                    d.addDate(date);
+                    store.add(d);
+                    d.print();
+                }
+                catch(NoSuchElementException e){
+                    System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
+                }
             }
             else if(type == 3){
-                String name = checker.name(echo);
-                Event e = new Event(name);
-                String date = checker.dateFinder(echo,3);
-                e.addDate(date);
-                store.add(e);
+                try{
+                    String name = checker.name(echo);
+                    Event e = new Event(name);
+                    String date = checker.dateFinder(echo,3);
+                    e.addDate(date);
+                    store.add(e);
+                    e.print();
+                }
+                catch(NoSuchElementException e){
+                    System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
+                }
             }
             else{
                 if(echo.equals("list")){
@@ -56,10 +81,7 @@ public class Duke {
                     }
                 }
                 else{
-                    task temp = new task(echo);
-                    System.out.println("added: " +echo);
-                    store.add(temp);
-                    count++;
+                    System.out.println("Invalid Command, I do not understand! ☹");
                 }
             }
             echo = sc.nextLine();

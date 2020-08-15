@@ -14,11 +14,11 @@ public class checker {
                     isDone = I;
                 }
                 catch(NumberFormatException e){ // next word is not an integer
-//                    System.out.println("Error 2: Not a complete 'Done' command, added as a task!");
+                    System.out.println("Error 2: Not a complete 'Done' command, added as a task!");
                 }
             }
             catch(NoSuchElementException e){
-//                System.out.println("Error 1: Not a complete 'Done' command, added as a task!");
+                System.out.println("Error 1: Not a complete 'Done' command, added as a task!");
             }
         }
         return isDone;
@@ -92,7 +92,7 @@ public class checker {
                     return date;
                 }
                 else{
-//                    System.out.println("Wrong command format, missing date");
+                    System.out.println("Wrong event command format, missing date");
                 }
             }
         }
@@ -101,7 +101,7 @@ public class checker {
                 return date;
             }
             else{
-//                System.out.println("Wrong command format, missing /action: date");
+                System.out.println("Wrong deadline or event command format, missing /action: date");
             }
         }
         return date;

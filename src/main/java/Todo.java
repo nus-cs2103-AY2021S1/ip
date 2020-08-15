@@ -4,9 +4,6 @@ public class Todo extends task{
 
     public Todo(String name){
         super(name);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("  " + this.type + "[X]" + " " + this.name);
-        System.out.println("Now you have " + count + " tasks in the list.");
     }
 
     public void addDate(String date){
@@ -33,5 +30,11 @@ public class Todo extends task{
             done = "[X]";
         }
         return this.type + done + " " + this.name;
+    }
+
+    public void print(){
+        System.out.println("Got it. I've added this task: ");
+        System.out.println("  " + this.type + "[X]" + " " + this.name);
+        System.out.println("Now you have " + count + " tasks in the list.");
     }
 }
