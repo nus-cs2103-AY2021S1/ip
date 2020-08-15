@@ -16,15 +16,14 @@ public class Duke {
         String input = sc.nextLine();
         ArrayList<String> list = new ArrayList<>();
         while(!input.equals("bye")){
-//            if (input.equals("list")){
-//                print(list);
-//                input = sc.nextLine();
-//                continue;
-//            }
+            if (input.equals("list")){
+                print(list);
+                input = sc.nextLine();
+                continue;
+            }
             System.out.println("_____________________________");
-            System.out.println(input);
-//            list.add(input);
-//            System.out.println("added: " + input);
+            list.add(input);
+            System.out.println("added: " + input);
             System.out.println("_____________________________");
             input = sc.nextLine();
         }
