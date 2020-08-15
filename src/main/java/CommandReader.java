@@ -41,6 +41,12 @@ public class CommandReader {
         }
     }
 
+    /**
+     * Generate content for the input.
+     *
+     * @param words user input parsed into an array of string.
+     * @return a String representing non-commandWord part of the user input
+     */
     public static String generateContent(String[] words) {
         String result = words[1];
         for (int i = 2; i < words.length; i++) {
