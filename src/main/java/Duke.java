@@ -64,7 +64,7 @@ public class Duke {
                 addTask(new Event(eventParts[0], eventParts[1]));
                 return true;
             case "todo":
-                addTask(new Todo(userInput + scanner.nextLine()));
+                addTask(new Todo(scanner.nextLine()));
                 return true;
             default:
                 System.out.println("Command not recognised");
