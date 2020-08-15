@@ -9,7 +9,7 @@ public class Duke {
     private final static String BYE = "bye";
     private final static String LIST = "list";
     private final static String DONE = "done";
-
+    private final static String DELETE = "delete";
     private final static String TODO = "todo";
     private final static String EVENT = "event";
     private final static String DEADLINE = "deadline";
@@ -66,6 +66,21 @@ public class Duke {
                             throw new DukeException(e.getMessage());
                         } catch (NumberFormatException e) {
                             throw new DukeException(String.format("%s is not a number that Done can use",
+                                    parsedInput[1]));
+                        }
+                        break;
+                    case DELETE:
+                        try {
+                            int index = Integer.parseInt(parsedInput[1]) - 1;
+                            Task deleted = list.get(index);
+                            list.remove(index);
+                            reply(String.format("Task deleted: \n%s", deleted.toString()));
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            throw new DukeException(e.getMessage());
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException(e.getMessage());
+                        } catch (NumberFormatException e) {
+                            throw new DukeException(String.format("%s is not a number that Delete can use",
                                     parsedInput[1]));
                         }
                         break;
