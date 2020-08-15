@@ -6,9 +6,11 @@ public class Task {
         this.name = name;
         this.isCompleted = false;
     }
+
     public void markDone(){
         this.isCompleted = true;
     }
+
     public String getIcon(){
         if(isCompleted){
             return "[✓] ";

@@ -13,10 +13,13 @@ public class Duke {
         System.out.println(greeting);
     }
 
-    public static void addTask(String input){
-        myTasks.add(new Task(input));
+
+    public static void addTask(Task task){
+        myTasks.add(task);
         String output = "   ______________________________________________________________"
-                        + "\n   added: " + input
+                        + "\n   Got it. I've added this task:"
+                        + "\n       " + task
+                        + String.format("\n   Now you have %d tasks in the list.", myTasks.size())
                         + "\n   ______________________________________________________________";
         System.out.println(output);
     }
@@ -74,8 +77,22 @@ public class Duke {
                 int index = Integer.parseInt(input.substring(i+1));
                 markAsDone(index);
             }
-            else {
-                addTask(input);
+            else if(firstWord.equals("todo")) {
+                String name = input.substring(i+1);
+                Task task = new TodoTask(name);
+                addTask(task);
+            } else if(firstWord.equals("deadline")){
+                int t = input.indexOf("/");
+                String name = input.substring(i+1, t);
+                String time = input.substring(t+4);
+                Task task = new DeadlineTask(name, time);
+                addTask(task);
+            }else if(firstWord.equals("event")){
+                int t = input.indexOf("/");
+                String name = input.substring(i+1, t);
+                String time = input.substring(t+4);
+                Task task = new EventTask(name, time);
+                addTask(task);
             }
         }
 
