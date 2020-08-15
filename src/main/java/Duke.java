@@ -52,10 +52,11 @@ public class Duke {
             if (s == -1) {
                 throw new InvalidCommandException("\u2639 OOPS!!! Time should be specified");
             }
-            String time = description.substring(s + 4);
-            if (time.length() < 1) {
+            if (description.length() - s < 4) {
                 throw new InvalidCommandException("The time specification cannot be empty.");
+
             }
+            String time = description.substring(s + 4);
             description = description.substring(0, s - 1);
             return new Deadline(description, time);
         } else if (cmd.startsWith("event")) {
@@ -71,10 +72,11 @@ public class Duke {
             if (s == -1) {
                 throw new InvalidCommandException("\u2639 OOPS!!! Time should be specified");
             }
-            String time = description.substring(s + 4);
-            if (time.length() < 1) {
+            if (description.length() - s < 4) {
                 throw new InvalidCommandException("The time specification cannot be empty.");
+
             }
+            String time = description.substring(s + 4);
             description = description.substring(0, s - 1);
             return new Event(description, time);
         } else {
