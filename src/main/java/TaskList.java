@@ -1,6 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
+/**
+ * TaskList stores a list of tasks and
+ * the corresponding operations on it.
+ */
 public class TaskList {
     private final List<Task> tasks;
 
@@ -12,19 +17,33 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    public TaskList addToList(Task newTask) {
-        tasks.add(newTask);
-        return new TaskList(this.tasks);
+    /**
+     * Add a new task to the list of tasks.
+     *
+     * @param newTask the new task to be added.
+     * @return a new TaskList containing all the old tasks and
+     * the new task.
+     */
+    public TaskList addTask(Task newTask) {
+        List<Task> newTaskList = tasks;
+        newTaskList.add(newTask);
+        return new TaskList(newTaskList);
     }
 
-    public String getAllTasks() {
+    /**
+     * Print all the tasks.
+     *
+     * @return a String shows all takes in a formatted way.
+     */
+    public String printTasks() {
         String result = "";
-        for (int i = 0; i < tasks.size(); i++) {
-            result += "\n";
-            Task currentTask = tasks.get(i);
-            int taskId = i + 1;
-            result += taskId + ". " + currentTask;
-        }
+
+        result += IntStream.range(0, tasks.size())
+                .mapToObj((id) -> String.format("%d.%s\n", id + 1, tasks.get(id)))
+                .reduce((a, b) -> a + b)
+                .get();
+
         return result;
     }
+
 }

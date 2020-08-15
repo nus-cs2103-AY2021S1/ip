@@ -4,11 +4,16 @@ import command.ExitCommand;
 import command.ListCommand;
 
 /**
- * A Parser object takes in user input and
- * find correct type of command for the input
+ * A CommandReader object to parse the user input.
  */
 public class CommandReader {
-
+    /**
+     * Read in user input and identify the
+     * correct type of command for the input.
+     *
+     * @param userInput a String from user's input.
+     * @return a Command to be processed by the agent.
+     */
     public Command readCommand(String userInput) {
         if (userInput.equals("list")) {
             return new ListCommand(userInput);

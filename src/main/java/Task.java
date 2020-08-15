@@ -10,6 +10,11 @@ public class Task {
         this.name = name;
     }
 
+    /**
+     * Get the name of the task.
+     *
+     * @return the name of the task.
+     */
     public String getName() {
         return name;
     }
