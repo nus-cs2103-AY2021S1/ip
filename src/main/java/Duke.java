@@ -56,6 +56,17 @@ public class Duke {
         System.out.println(output);
     }
 
+    public static void deleteTask(int i){
+        Task task = myTasks.get(i-1);
+        myTasks.remove(i-1);
+        String output = "   ______________________________________________________________"
+                + "\n   " + "Noted. I've removed this task: "
+                + "\n   " + task
+                + String.format("\n   Now you have %d tasks in the list.", myTasks.size())
+                + "\n   ______________________________________________________________";
+        System.out.println(output);
+    }
+
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -127,7 +138,20 @@ public class Duke {
                     } catch(DukeException e){
                         System.err.println(e);
                     }
-                } else {
+                } else if (input.startsWith("delete")) {
+                    try{
+                        if (input.split("delete ").length>=2){
+                            String[] inputSplit = input.split("delete ");
+                            int index = Integer.parseInt(inputSplit[1]);
+                            deleteTask(index);
+                        } else {
+                            throw new DukeException("", DukeExceptionType.NO_DESCRIPTION);
+                        }
+                    } catch(DukeException e){
+                        System.err.println(e);
+                    }
+                }
+                else {
                     throw new DukeException("", DukeExceptionType.INVALID_TASK);
                 }
             } catch(DukeException e) {
