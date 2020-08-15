@@ -16,6 +16,10 @@ public class task {
     }
 
     public String toString(){
-        return this.work;
+        if (!this.done){
+            return "[✗]" + this.work;
+        } else {
+            return "[✓]" + this.work;
+        }
     }
 }

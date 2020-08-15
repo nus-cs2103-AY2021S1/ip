@@ -3,12 +3,6 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
         System.out.println("_____________________________");
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         System.out.println("_____________________________");
@@ -27,30 +21,54 @@ public class Duke {
             if (request[0].equals("done")){
                 int index = Integer.parseInt(request[1]);
                 list.get(index - 1).updateStatus();
-                System.out.println("Nice! I've marked this task as done: \n [✓] " + list.get(index - 1));
+                System.out.println("Nice! I've marked this task as done: \n " + list.get(index - 1));
                 System.out.println("_____________________________");
                 input = sc.nextLine();
-                continue;
+            } else if (request[0].equals("todo")){
+                String sb = input.substring(4);
+                ToDos todo = new ToDos(sb);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(todo);
+                list.add(todo);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                System.out.println("_____________________________");
+                input = sc.nextLine();
+            } else if (request[0].equals("deadline")){
+                String sb = input.substring(8);
+                Deadline deadline = new Deadline(sb);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(deadline);
+                list.add(deadline);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                System.out.println("_____________________________");
+                input = sc.nextLine();
+            } else if (request[0].equals("event")){
+                String sb = input.substring(5);
+                Event event = new Event(sb);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(event);
+                list.add(event);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                System.out.println("_____________________________");
+                input = sc.nextLine();
+            } else {
+                list.add(new task(input));
+                System.out.println("added: " + input);
+                System.out.println("_____________________________");
+                input = sc.nextLine();
             }
-            list.add(new task(input));
-            System.out.println("added: " + input);
-            System.out.println("_____________________________");
-            input = sc.nextLine();
-//            System.out.println("_____________________________");
         }
         System.out.println("_____________________________");
         System.out.println("Bye. Hope to see you again soon!\n_____________________________");
     }
 
     public static void print(ArrayList<task> list){
-//        System.out.println("_____________________________");
         for (int i = 0; i < list.size(); i++){
             if (!list.get(i).isDone()) {
-                System.out.println("" + (i + 1) + ".[✗]" + list.get(i));
+                System.out.println("" + (i + 1) + "." + list.get(i));
             } else {
-                System.out.println("" + (i + 1) + ".[✓]" + list.get(i));
+                System.out.println("" + (i + 1) + "." + list.get(i));
             }
         }
-//        System.out.println("_____________________________");
     }
 }
