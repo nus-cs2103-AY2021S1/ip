@@ -49,6 +49,9 @@ public class Duke {
                     case "done":
                         markTaskAsDone(userInput);
                         break;
+                    case "delete":
+                        deleteTask(userInput);
+                        break;
                     default:
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
@@ -61,6 +64,23 @@ public class Duke {
 
     private static boolean emptyToDoDescription(String userInput) {
         return userInput.length() <= 4;
+    }
+
+    private static void deleteTask(String userInput) throws DukeException {
+        try {
+            String taskIndex = userInput.substring(7);
+            int index = Integer.valueOf(taskIndex) - 1; // taskIndex started from 1
+            Task completedTask = Duke.taskList.remove(index);
+
+            System.out.println("Noted. I've removed this task:\n" +
+                    completedTask.toString() + "\nNow you have " + (Duke.taskList.size())
+                    + (Duke.taskList.size() > 1 ? " tasks" : " task")
+                    + " in the list.");
+
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            throw new DukeException("Please enter a valid task number for me delete.");
+        }
+
     }
 
     private static void addToDoTask(String userInput) throws DukeException {

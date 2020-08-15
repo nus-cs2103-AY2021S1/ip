@@ -12,4 +12,9 @@ event project meeting /at Mon 2-4pm
 todo
 blah
 done 929
+delete 3
+list
+delete 1
+list
+delete
 bye

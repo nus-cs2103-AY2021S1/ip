@@ -41,4 +41,26 @@ Now you have 7 tasks in the list.
 ☹ OOPS!!! The description of a todo cannot be empty.
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 ☹ OOPS!!! Please enter a valid task number for me to mark as done.
+Noted. I've removed this task:
+[E][?] project meeting (at: Aug 6th 2-4pm)
+Now you have 6 tasks in the list.
+Here are the tasks in your list:
+
+1.[T][?] read book
+2.[D][?] return book (by: June 6th)
+3.[T][?] join sports club
+4.[T][?] borrow book
+5.[D][?] return book (by: Sunday)
+6.[E][?] project meeting (at: Mon 2-4pm)
+Noted. I've removed this task:
+[T][?] read book
+Now you have 5 tasks in the list.
+Here are the tasks in your list:
+
+1.[D][?] return book (by: June 6th)
+2.[T][?] join sports club
+3.[T][?] borrow book
+4.[D][?] return book (by: Sunday)
+5.[E][?] project meeting (at: Mon 2-4pm)
+☹ OOPS!!! Please enter a valid task number for me delete.
 Bye. Hope to see you again soon!
