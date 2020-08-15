@@ -1,7 +1,7 @@
 package task;
 
 /**
- * Represents a to-do task
+ * Represents a todo task
  */
 public class Todo extends Task {
     public Todo(String name, boolean isDone) {
@@ -16,7 +16,6 @@ public class Todo extends Task {
     @Override
     public String toString() {
         String taskString = super.toString();
-        String result = "[T]" + taskString;
-        return result;
+        return "[T]" + taskString;
     }
 }

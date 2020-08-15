@@ -1,10 +1,18 @@
 package task;
 
+/**
+ * Represents an deadline task
+ */
 public class Deadline extends Task {
     private final String schedule;
+
     public Deadline(String name, boolean isDone, String schedule) {
         super(name, isDone);
         this.schedule = schedule;
+    }
+
+    public String getSchedule() {
+        return this.schedule;
     }
 
     @Override
@@ -15,11 +23,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String taskString = super.toString();
-        String result = "[E]" + taskString + " (at: " + this.getSchedule() + ")";
-        return result;
-    }
-
-    public String getSchedule() {
-        return this.schedule;
+        return "[E]" + taskString + " (at: " + this.getSchedule() + ")";
     }
 }

@@ -26,11 +26,11 @@ public class TaskList {
     /**
      * Get the task in the list by its id.
      *
-     * @param task_id the displayed id in the list.
+     * @param taskId the displayed id in the list.
      * @return the task associated with id.
      */
-    public Task getTaskById(int task_id) {
-        int index = task_id - 1;
+    public Task getTaskById(int taskId) {
+        int index = taskId - 1;
         return this.tasks.get(index);
     }
 
@@ -50,14 +50,14 @@ public class TaskList {
     /**
      * Set a task with input id in the list as done.
      *
-     * @param task_id the displayed id in the list.
+     * @param taskId the displayed id in the list.
      * @return a new TaskList containing all the update tasks.
      */
-    public TaskList markAsDone(int task_id) {
-        Task currentTask = this.getTaskById(task_id);
+    public TaskList markAsDone(int taskId) {
+        Task currentTask = this.getTaskById(taskId);
         Task doneTask = currentTask.complete();
 
-        int index = task_id - 1;
+        int index = taskId - 1;
         List<Task> newTaskList = this.tasks;
         newTaskList.set(index, doneTask);
         return new TaskList(newTaskList);
@@ -74,7 +74,7 @@ public class TaskList {
         result += IntStream.range(0, this.getSize())
                 .mapToObj((id) -> String.format("\n%d.%s", id + 1, tasks.get(id)))
                 .reduce((a, b) -> a + b)
-                .get();
+                .orElse("");
 
         return result;
     }

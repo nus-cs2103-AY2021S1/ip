@@ -1,5 +1,4 @@
 package task;
-
 /**
  * Task is a class for each task specified from
  * the user commands.
