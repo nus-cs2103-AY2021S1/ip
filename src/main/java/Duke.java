@@ -16,9 +16,8 @@ public class Duke {
 
     private static void order() {
         Scanner sc = new Scanner(System.in);
-        WorkList lst = new WorkList();
         String output;
-
+        WorkList lst = new WorkList();
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             if(input.equals("list")) {
@@ -76,7 +75,7 @@ public class Duke {
 
     }
 
-    private static void welcome() {
+    public static void welcome() {
         String logo = " ___    ___        ______\n"
                 + "|   \\  /   |_    _|  ____|\n"
                 + "|    \\/    | |  | |  |  _\n"
