@@ -20,6 +20,7 @@ public class Duke {
 
     private static void executeProgram() throws Exception {
         printWelcomeMessage(LOGO);
+        printBorder();
         String command = READER.readLine();
         parseCommands(command);
         printByeMessage();
@@ -35,8 +36,6 @@ public class Duke {
             String commandCheck = userInputArray[0];
             Task taskToAdd;
             int numOfInput = userInputArray.length;
-
-            printBorder();
 
             switch (commandCheck) {
                 case "list":
@@ -160,7 +159,6 @@ public class Duke {
     }
 
     private static void printByeMessage() {
-        printBorder();
         System.out.println("Bye. Hope to see you again soon!");
     }
 }
