@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static final String horizontalLine = "\t==================================================\n\t  ";
+    private static final String horizontalLine = "\t==================================================";
     private static int n = -1;
 
     private static String output(String message) {
-        return horizontalLine + message + "\n" + horizontalLine;
+        return horizontalLine + "\n\t  " + message + "\n" + horizontalLine + "\n";
     }
 
     private static boolean isDoneCommand(String cmd) {
@@ -56,11 +56,11 @@ public class Duke {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             if (input.equals("list")) {
-                System.out.println(horizontalLine + "Here are the tasks in your list:");
+                System.out.println(horizontalLine + "\n\t  " + "Here are the tasks in your list:");
                 for (int i = 0; i < count; i++) {
                     System.out.println("\t  " + (i + 1) + "." + list[i]);
                 }
-                System.out.println(horizontalLine);
+                System.out.println(horizontalLine + "\n");
             } else if (isDoneCommand(input)) {
                 if (n > 0 && n <= count) {
                     list[n - 1].markAsDone();
