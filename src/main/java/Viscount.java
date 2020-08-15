@@ -45,6 +45,14 @@ public class Viscount {
                 + String.format("\nNow you have %d tasks in the list.", taskList.size()));
     }
 
+    private static void removeFromTaskList(int taskIndex) {
+        Task task = taskList.get(taskIndex);
+        taskList.remove(taskIndex);
+        Viscount.speak("Very well. I've removed this task:\n"
+                + task.toString()
+                + String.format("\nNow you have %d tasks in the list.", taskList.size()));
+    }
+
     private static void markAsDone(Task task) {
         task.check();
         Viscount.speak("Very good! I have marked this task as done:\n" + task.toString());
@@ -109,6 +117,21 @@ public class Viscount {
                 try {
                     indexOfTask = Integer.parseInt(arguments.get(1));
                     Viscount.markAsDone(taskList.get(indexOfTask - 1));
+                } catch (NumberFormatException e) {
+                    throw new ViscountNumberFormatException(arguments.get(1));
+                } catch (IndexOutOfBoundsException e) {
+                    throw new ViscountIndexOutOfBoundsException(indexOfTask);
+                }
+            }
+        } else if (command.equals("delete")) {
+            if (arguments.size() < 2) {
+                throw new ViscountMissingArgumentException("task number");
+            } else {
+                int indexOfTask = 0;
+
+                try {
+                    indexOfTask = Integer.parseInt(arguments.get(1));
+                    Viscount.removeFromTaskList(indexOfTask - 1);
                 } catch (NumberFormatException e) {
                     throw new ViscountNumberFormatException(arguments.get(1));
                 } catch (IndexOutOfBoundsException e) {

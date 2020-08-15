@@ -1,6 +1,6 @@
 public class ViscountMissingArgumentDescriptionException extends ViscountException {
     private String argument;
-    private static final String ERROR_MESSAGE = "Alas, the description of the %s argument\ncannot be empty.";
+    private static final String ERROR_MESSAGE = "Alas, the description of the %s argument cannot be empty.";
 
     public ViscountMissingArgumentDescriptionException(String argument) {
         super();

@@ -1,6 +1,6 @@
 public class ViscountMissingArgumentException extends ViscountException {
     private String missingArgument;
-    private static final String ERROR_MESSAGE = "Alas, you need to specify the %s argument\nfor this task.";
+    private static final String ERROR_MESSAGE = "Alas, you need to specify the %s argument.";
 
     public ViscountMissingArgumentException(String missingArgument) {
         super();
