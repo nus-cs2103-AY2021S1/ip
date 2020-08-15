@@ -24,16 +24,14 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        List<Task> storage = new ArrayList();
+        List<Task> storage = new ArrayList<>();
 
-        while (true) {
+        while (!input.equals("bye")) {
 
             String firstWord = input.split(" ")[0];
             int size = storage.size();
 
-            if (firstWord.equals("bye")) {
-                break;
-            } else if (firstWord.equals("list")) {
+            if (firstWord.equals("list")) {
                 System.out.print("Retrieving your list, patient ah!\n");
                 for (int i = 0; i < size; i++) {
                     System.out.print(String.format("   %2d. %s\n", i + 1, storage.get(i)));
@@ -43,8 +41,8 @@ public class Duke {
             } else if (firstWord.equals("done")) {
                 int index = Integer.parseInt(input.split(" ")[1]) - 1;
                 storage.get(index).makeDone();
-                System.out.print(String.format("    Swee la, task done liao!:\n     " +
-                        "%s\n", storage.get(index)));
+                System.out.print(String.format("    Swee la, task done liao!:\n" +
+                        "       %s\n", storage.get(index)));
             } else {
                 String message = input.substring(firstWord.length());
                 taskSorter(storage, firstWord, message);
@@ -55,6 +53,7 @@ public class Duke {
 
     public static void taskSorter(List<Task> storage, String tag, String message) {
         Task newTask = null;
+
         if (tag.equals("todo")) {
             newTask = new Todo(message);
         } else if (tag.equals("deadline")) {
@@ -69,6 +68,7 @@ public class Duke {
         System.out.print(String.format("        added: %s\n", newTask));
         System.out.print(String.format("    Now you got %d tasks in list, " +
                 "don't procrastinate hor\n", storage.size()));
+
     }
 
     public static void exit() {
