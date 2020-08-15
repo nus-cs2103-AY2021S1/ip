@@ -3,17 +3,19 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private final static String LINE = "____________________________________________________________";
+    private final static String LINE1 = "_____________________________________________________DUKE___";
+    private final static String LINE2 = "------------------------------------------------------------";
 
     private final static String BYE = "bye";
     private final static String LIST = "list";
+    private final static String DONE = "done";
 
     public static void main(String[] args) {
         looper();
     }
 
     private static void reply(String text) {
-        System.out.printf("%s\n%s\n%s\n", LINE, text.trim(), LINE);
+        System.out.printf("%s\n%s\n%s\n", LINE1, text.trim(), LINE2);
     }
 
     private static String[] readCommand(String text) {
@@ -23,12 +25,13 @@ public class Duke {
 
     private static void looper() {
         reply("Hello");
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<>();
         Boolean exit = false;
         Scanner sc = new Scanner(System.in);
         while (!exit) {
             String input = sc.nextLine().trim();
-            switch(readCommand(input)[0]) {
+            String[] parsedInput = readCommand(input);
+            switch(parsedInput[0]) {
                 case BYE:
                     exit = true;
                     break;
@@ -39,9 +42,15 @@ public class Duke {
                     }
                     reply(result);
                     break;
+                case DONE:
+                    int index = Integer.parseInt(parsedInput[1]) - 1;
+                    list.get(index).setCompleted();
+                    reply(String.format("Task marked as completed: \n%s", list.get(index).toString()));
+                    break;
                 default:
-                    list.add(input);
-                    reply(input);
+                    Task task = new Task(input);
+                    list.add(task);
+                    reply(String.format("Added %s", input));
                     break;
             }
 
