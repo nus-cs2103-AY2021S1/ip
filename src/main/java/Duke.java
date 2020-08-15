@@ -9,6 +9,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         welcomeMessage();
         String inputLine = sc.nextLine().trim();
+
         while (!inputLine.equals("bye")) {
             String[] arr = inputLine.split(" ");
             if (inputLine.equals("list")) {
@@ -16,64 +17,74 @@ public class Duke {
             }
             else if (arr.length == 2 && arr[0].equals("done") && isInteger(arr[1])) {
                 int num = Integer.parseInt(arr[1]);
-                if (num >= 1 && num <= toDoList.size()) {
+                try {
+                    if (num < 1 || num > toDoList.size()) {
+                        throw new InvalidRangeError();
+                    }
                     doneTask(num);
                 }
-                else {
-                    invalidRangeError();
+                catch (DukeError e) {
+                    hrTag();
+                    System.out.println(e.getMessage());
+                    hrTag();
                 }
             }
             else {
-                switch (arr[0]) {
-                    case "todo":
-                        String todo = inputLine.substring(4).trim();
-                        if (todo.equals("")) {
-                            emptyTaskError();
-                        } else {
-                            addTask(new ToDo(todo));
-                        }
-                        break;
-                    case "deadline":
-                        int by = inputLine.indexOf("/by");
-                        String deadline, byDate;
-                        if (by == -1) {
-                            deadline = inputLine.substring(8).trim();
-                            byDate = "";
-                        } else {
-                            deadline = inputLine.substring(8, by).trim();
-                            byDate = inputLine.substring(by + 3).trim();
-                        }
-                        if (deadline.equals("")) {
-                            emptyTaskError();
-                        } else if (byDate.equals("")) {
-                            emptyDateError();
-                        } else {
-                            addTask(new Deadline(deadline, byDate));
-                        }
-                        break;
-                    case "event":
-                        int at = inputLine.indexOf("/at");
-                        String event, atDate;
-                        if (at == -1) {
-                            event = inputLine.substring(5).trim();
-                            atDate = "";
-                        } else {
-                            event = inputLine.substring(5, at).trim();
-                            atDate = inputLine.substring(at + 3).trim();
-                        }
-                        if (event.equals("")) {
-                            emptyTaskError();
-                        } else if (atDate.equals("")) {
-                            emptyDateError();
-                        } else {
-                            addTask(new Event(event, atDate));
-                        }
-                        break;
-                    default:
-                        unknownCommandError();
-                        break;
+                try {
+                    switch (arr[0]) {
+                        case "todo":
+                            String todo = inputLine.substring(4).trim();
+                            if (todo.equals("")) {
+                                throw new EmptyTaskError();
+                            } else {
+                                addTask(new ToDo(todo));
+                            }
+                            break;
+                        case "deadline":
+                            int by = inputLine.indexOf("/by");
+                            String deadline, byDate;
+                            if (by == -1) {
+                                deadline = inputLine.substring(8).trim();
+                                byDate = "";
+                            } else {
+                                deadline = inputLine.substring(8, by).trim();
+                                byDate = inputLine.substring(by + 3).trim();
+                            }
+                            if (deadline.equals("")) {
+                                throw new EmptyTaskError();
+                            } else if (byDate.equals("")) {
+                                throw new EmptyDateError();
+                            } else {
+                                addTask(new Deadline(deadline, byDate));
+                            }
+                            break;
+                        case "event":
+                            int at = inputLine.indexOf("/at");
+                            String event, atDate;
+                            if (at == -1) {
+                                event = inputLine.substring(5).trim();
+                                atDate = "";
+                            } else {
+                                event = inputLine.substring(5, at).trim();
+                                atDate = inputLine.substring(at + 3).trim();
+                            }
+                            if (event.equals("")) {
+                                throw new EmptyTaskError();
+                            } else if (atDate.equals("")) {
+                                throw new EmptyDateError();
+                            } else {
+                                addTask(new Event(event, atDate));
+                            }
+                            break;
+                        default:
+                            throw new UnknownCommandError();
+                    }
                 }
-
+                catch (DukeError e) {
+                    hrTag();
+                    System.out.println(e.getMessage());
+                    hrTag();
+                }
             }
             inputLine = sc.nextLine();
         }
@@ -81,7 +92,7 @@ public class Duke {
         sc.close();
     }
 
-    private static void hrTag() {
+    public static void hrTag() {
         System.out.println("____________________________________________________________");
     }
 
