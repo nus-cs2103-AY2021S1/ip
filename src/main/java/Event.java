@@ -2,7 +2,7 @@ public class Event extends Task {
     String timing;
 
     public Event(String description, String timing) {
-        super(description);
+        super(description, TaskType.EVENT);
         this.timing = timing;
         Task.totalTasks++;
     }
@@ -13,6 +13,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + timing + ")";
+        return super.toString() + " (at: " + timing + ")";
     }
 }

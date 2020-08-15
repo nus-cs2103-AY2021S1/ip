@@ -2,7 +2,7 @@ public class Deadline extends Task {
     String date;
 
     public Deadline(String description, String date) {
-        super(description);
+        super(description, TaskType.DEADLINE);
         this.date = date;
         Task.totalTasks++;
     }
@@ -13,6 +13,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + date.trim() + ")";
+        return super.toString() + " (by: " + date.trim() + ")";
     }
 }
