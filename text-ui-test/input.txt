@@ -6,6 +6,10 @@ done 2
 done 3
 done 1
 list
+delete 3
+delete 2
+delete 1
+list
 alsdk;fjn
 todo
 bye

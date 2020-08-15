@@ -35,14 +35,17 @@ public class Duke {
             String command = splitInput[0];
             String parameters = splitInput.length > 1 ? splitInput[1] : null;
             try {
-                processCommand(command, parameters);
+                int result = processCommand(command, parameters);
+                if(result == 0) {
+                    return;
+                }
             } catch (DukeException exception) {
                 printInWindow(exception.getMessage());
             }
         }
     }
 
-    public static void processCommand(String command, String parameters) throws DukeException{
+    public static int processCommand(String command, String parameters) throws DukeException{
         switch(command) {
         case "todo":
             ToDo todo = new ToDo(parameters);
@@ -62,23 +65,27 @@ public class Duke {
             printInWindow("Added: " + deadline.toString());
             break;
         case "done":
-            int taskNumber = Integer.parseInt(parameters);
-            Task task = tasks.get(taskNumber - 1);
+            int doneNumber = Integer.parseInt(parameters);
+            Task task = tasks.get(doneNumber - 1);
             task.markAsDone(true);
-            printInWindow(
-                    "Nice! I've marked the this as done.\n" +
-                            task.toString()
-            );
+            printInWindow("Nice! I've marked the this as done.\n" + task.toString());
             break;
         case "list":
             printInWindow(formatTaskListToString(tasks));
             break;
+        case "delete":
+            int deleteNumber = Integer.parseInt(parameters);
+            Task deleteTask = tasks.get(deleteNumber - 1);
+            tasks.remove(deleteNumber - 1);
+            printInWindow("I've removed this task:\n" + deleteTask.toString());
+            break;
         case "bye":
             printInWindow("Bye. Hope to see you again soon!");
-            return;
+            return 0;
         default:
             throw new DukeException("I don't know what that means!");
         }
+        return 1;
     }
 
     public static void printInWindow(String text) {
