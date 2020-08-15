@@ -35,10 +35,28 @@ public class Duke {
                 System.out.println("Nicely done. I've marked this task as done: \n" +
                         taskToMark);
             } else {
-                int listSize = taskList.size() + 1;
-                Task newTask = new Task(input);
+                String[] taskInput = input.split(" ", 2);
+                String taskCategory = taskInput[0];
+                String taskMessage = taskInput[1];
+                String[] taskMessageArr = taskMessage.split("/");
+                Task newTask;
+
+                if (taskCategory.equals("todo")) {
+                    newTask = new ToDo(taskMessage);
+                } else {
+                    String taskTime = taskMessageArr[1].split(" ", 2)[1];
+                    if (taskCategory.equals("deadline")) {
+                        newTask = new Deadline(taskMessageArr[0].trim(), taskTime);
+                    } else if (taskCategory.equals("event")) {
+                        newTask = new Event(taskMessageArr[0].trim(), taskTime);
+                    } else {
+                        newTask = new Task(input);
+                    }
+                }
+
                 taskList.add(newTask);
-                System.out.println("Task added: " + input);
+                String remainingTasks = "\n Now you have " + taskList.size() + " tasks in the list.";
+                System.out.println("Got it. I've added this task: \n" + newTask + remainingTasks);
             }
         }
         System.out.println("SAYONARA HUMAN ಥ﹏ಥ");
