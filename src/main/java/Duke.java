@@ -6,6 +6,14 @@ public class Duke {
         return "**\n" + word + "\n**";
     }
 
+    private static String addWorkStringDesign(String work, WorkList lst) {
+        return "Got it. I've added this task:\n"
+                + work
+                + "\nNow you have "
+                + lst.getWorkList().size()
+                + " tasks in the list.";
+    }
+
     private static void order() {
         Scanner sc = new Scanner(System.in);
         WorkList lst = new WorkList();
@@ -13,21 +21,50 @@ public class Duke {
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            String[] checkCommand = input.split(" ");
-            if(checkCommand[0].equals("done")) {
-                output = printDesign(
-                        lst.updateTaskStatus(
-                                Integer.parseInt(checkCommand[checkCommand.length - 1])
-                        )
-                );
-            } else if(input.equals("list")) {
+            if(input.equals("list")) {
                 output = printDesign(lst.readWork());
             } else if(input.equals("bye")) {
                 output = "** Bye. Hope to see you soon!! **";
             } else {
-                Task newTask = new Task(input);
-                lst.addWork(newTask);
-                output = printDesign("added: " + input);
+                String[] splitOrder = input.split(" ", 2);
+                String Command = splitOrder[0];
+                String info = splitOrder[1];
+
+                switch (Command) {
+                    case "done":
+                        output = printDesign(
+                                lst.updateTaskStatus(
+                                        Integer.parseInt(info)
+                                )
+                        );
+                        break;
+                    case "todo":
+                        Todo newTodo = new Todo(info);
+                        lst.addWork(newTodo);
+                        output = printDesign(addWorkStringDesign(newTodo.toString(), lst));
+                        break;
+                    case "deadline":
+                        String[] deadlineInfo = info.split(" /by ");
+                        String deadlineEvent = deadlineInfo[0];
+                        String deadlineTime = deadlineInfo[1];
+                        Deadline newDeadline = new Deadline(deadlineEvent, deadlineTime);
+                        lst.addWork(newDeadline);
+                        output = printDesign(addWorkStringDesign(newDeadline.toString(), lst));
+                        break;
+                    case "event":
+                        String[] eventInfo = info.split(" /at ");
+                        String eventEvent = eventInfo[0];
+                        String EventTime = eventInfo[1];
+                        Event newEvent = new Event(eventEvent, EventTime);
+                        lst.addWork(newEvent);
+                        output = printDesign(addWorkStringDesign(newEvent.toString(), lst));
+                        break;
+                    default:
+                        Task newTask = new Task(input);
+                        lst.addWork(newTask);
+                        output = printDesign("added: " + input);
+                        break;
+                }
             }
 
             System.out.println(output);
