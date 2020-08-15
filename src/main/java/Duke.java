@@ -34,20 +34,31 @@ public class Duke {
 
                 Done(index);
             } else {
-                Add(input);
+                String taskType = input.substring(0, input.indexOf(" "));
+                String taskName = input.substring(input.indexOf(" ") + 1);
+
+                Task task;
+
+                if (taskType.equals("todo")) {
+                    task = new ToDo(taskName);
+                } else {
+                    System.out.println("debug");
+                    task = new Task(taskName);
+                }
+
+                Add(task);
                 System.out.println();
             }
         }
     }
 
-    public static void Add(String string) {
+    public static void Add(Task task) {
         System.out.println("    ____________________________________________________________");
-        System.out.println("     added: " + string);
-        System.out.println("    ____________________________________________________________");
-
-        Task task = new Task(string);
-
+        System.out.println("     Got it. I've added this task: ");
+        System.out.println("       " + task);
         list.add(task);
+        System.out.printf("     Now you have %d tasks in the list.\n", list.size());
+        System.out.println("    ____________________________________________________________");
     }
 
     public static void ListOut() {
