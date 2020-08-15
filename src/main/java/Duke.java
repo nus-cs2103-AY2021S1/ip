@@ -29,7 +29,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        printResponse("Hello! I'm Duke\nliWhat can I do for you?");
+        printResponse("Hello! I'm Duke\nWhat can I do for you?");
         handleCommands();
 
     }
