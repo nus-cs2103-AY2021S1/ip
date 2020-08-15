@@ -26,10 +26,10 @@ public class CommandReader {
 
         try {
             switch (commandWord) {
-            case "list":
-                return new ListCommand();
             case "done":
                 return new DoneCommand(content);
+            case "list":
+                return new ListCommand();
             case "bye":
                 return new ExitCommand();
             case "todo":
@@ -41,7 +41,7 @@ public class CommandReader {
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-        } catch (Exception e) {
+        } catch (DukeException e) {
             return new ErrorCommand(e.getMessage());
         }
     }

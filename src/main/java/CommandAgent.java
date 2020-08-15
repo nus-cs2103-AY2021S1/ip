@@ -13,6 +13,9 @@ import task.Todo;
 public class CommandAgent {
     private static TaskList taskList = new TaskList();
 
+    public static int listSize() {
+        return taskList.getSize();
+    }
     /**
      * Takes in the command and handle it based on the request from the command.
      *

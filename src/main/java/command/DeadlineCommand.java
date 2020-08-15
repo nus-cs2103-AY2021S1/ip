@@ -15,16 +15,21 @@ public class DeadlineCommand extends AddCommand {
     /**
      * Creates a DeadlineCommand.
      *
-     * @param content the arguments supplied by the user.
-     * @throws DukeException if the content is has missing name or schedule.
+     * @param content the task information supplied by the user.
+     * @throws DukeException if the content has missing name or schedule
+     * or the format does not contain /by.
      */
     public DeadlineCommand(String content) throws DukeException {
-        String[] contentParts = content.split(" /by ");
-        if (contentParts[0].equals("") || contentParts[1].equals("")) {
-            throw new DukeException("The description of a deadline must not be empty");
+        if (!content.contains("/by")) {
+            throw new DukeException("☹ OOPS!!! The information contains invalid delimiter");
         } else {
-            this.name = contentParts[0];
-            this.schedule = contentParts[1];
+            String[] contentParts = content.split(" /by ");
+            if (contentParts[0].equals("") || contentParts[1].equals("")) {
+                throw new DukeException("☹ OOPS!!! The information of a deadline cannot be empty.");
+            } else {
+                this.name = contentParts[0];
+                this.schedule = contentParts[1];
+            }
         }
     }
 
