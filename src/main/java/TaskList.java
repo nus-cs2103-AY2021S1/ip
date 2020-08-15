@@ -1,14 +1,13 @@
 import java.util.ArrayList;
 
-public class ToDoList {
+public class TaskList {
     private final ArrayList<Task> list;
 
-    public ToDoList() {
+    public TaskList() {
         list = new ArrayList<Task>();
     }
 
-    public void addTask(String description) {
-        Task task = new Task(description);
+    public void addTask(Task task) {
         list.add(task);
     }
 
@@ -18,6 +17,10 @@ public class ToDoList {
 
     public Task getTask(int index) {
         return list.get(index);
+    }
+
+    public int getNumberOfTask() {
+        return list.size();
     }
 
     @Override
