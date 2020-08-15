@@ -14,26 +14,16 @@ public class Duke {
 
         ArrayList<Task> arraylst = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
+        Processor processor = new Processor();
         while (sc.hasNext()) {
             String cmd = sc.nextLine();
             if (!cmd.equals("bye")) {
                 String[] stringarr = cmd.split(" ");
                 if (stringarr[0].equals("list")) {
-                    System.out.println("_________________________________________");
-                    for (int i = 0; i < arraylst.size(); i++) {
-                        int index = i+1;
-                        String checked = arraylst.get(i).getDone() ? "O" : "X";
-                        System.out.println(index + ".[" + checked + "] " + arraylst.get(i).getTask());
-                    }
-                    System.out.println("_________________________________________");
+                    processor.processorList(arraylst);
                 } else if (stringarr[0].equals("done")) {
                     int index = Integer.parseInt(stringarr[1]);
-                    int i = index - 1;
-                    arraylst.get(i).setDone();
-                    System.out.println("_________________________________________");
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(index + ".[O] " + arraylst.get(i).getTask());
-                    System.out.println("_________________________________________");
+                    processor.processorDone(arraylst, index);
                 } else {
                     Task task = Task.setTask(cmd);
                     arraylst.add(task);
