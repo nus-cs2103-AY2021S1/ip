@@ -4,7 +4,8 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void greet() {
+
+    public void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -16,13 +17,13 @@ public class Duke {
         System.out.println(intro);
     }
 
-    public static void exit() {
+    public void exit() {
         String bye = "Alamak why so fast end the convo with me? Ok lah I also need to sleep now Zzzz.\n" +
                 "Goodbye!";
         System.out.println(bye);
     }
 
-    public static void echoDuke() {
+    public void echoDuke() {
         Scanner sc = new Scanner(System.in);
         String cmd = sc.nextLine();
         while (!cmd.toLowerCase().equals("bye")) {
@@ -32,8 +33,9 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        greet();
-        echoDuke();
-        exit();
+        Duke duke = new Duke();
+        duke.greet();
+        duke.echoDuke();
+        duke.exit();
     }
 }
