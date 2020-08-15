@@ -1,8 +1,8 @@
-public class task {
+public class Task {
     private boolean done;
     private String work;
 
-    public task(String work){
+    public Task(String work){
         this.done = false;
         this.work = work;
     }

@@ -1,4 +1,4 @@
-public class ToDos extends task{
+public class ToDos extends Task {
 
     public ToDos(String work) {
         super(work);
