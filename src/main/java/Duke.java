@@ -29,12 +29,19 @@ public class Duke {
 
         while(sc.hasNextLine()) {
             String input = sc.nextLine();
-            String[] commandList = input.split(" ")[0];
+            String[] commandList = input.split(" ");
 
             String command = commandList[0];
             switch(command) {
             case "done":
-
+                int taskNumber = Integer.parseInt(commandList[1]);
+                Task task = tasks.get(taskNumber - 1);
+                task.markAsDone(true);
+                printInWindow(
+                        "Nice! I've marked the this as done." +
+                                task.toString()
+                );
+                break;
             case "list":
                 printInWindow(formatTaskListToString(tasks));
                 break;
@@ -42,9 +49,9 @@ public class Duke {
                 printInWindow("Bye. Hope to see you again soon!");
                 return;
             default:
-                Task newTask = new Task(command);
+                Task newTask = new Task(input);
                 tasks.add(newTask);
-                printInWindow("Added: " + command);
+                printInWindow("Added: " + input);
             }
         }
     }
