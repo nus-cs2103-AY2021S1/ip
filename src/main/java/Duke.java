@@ -25,7 +25,7 @@ public class Duke {
             } else if (s.equals("list")) {
                 System.out.println("________________________________________");
                 for (int i = 0; i < tasks.size(); i++) {
-                    System.out.println((i + 1) + ".[" + tasks.get(i).getStatusIcon() + "] " + tasks.get(i).description);
+                    System.out.println((i + 1) + "." + tasks.get(i).toString());
                 }
                 System.out.println("________________________________________");
             } else if (s.contains("done")) {
@@ -35,9 +35,9 @@ public class Duke {
                         System.out.println("________________________________________");
                         System.out.println("Nice! I've marked this task as done: ");
                         tasks.get(index).markAsDone();
-                        System.out.println("[" + tasks.get(index).getStatusIcon() + "] " + tasks.get(index).description);
+                        System.out.println(tasks.get(index).toString());
                     } else {
-                        throw new Exception("Please key in this format: done <integer>");
+                        System.out.println("Integer should have a corresponding task in the list.");
                     }
                 } catch (Exception e) {
                     System.out.println("________________________________________");
@@ -47,8 +47,10 @@ public class Duke {
                 }
             } else {
                 System.out.println("________________________________________");
-                System.out.println("added: [\u2718] " + s);
-                tasks.add(new Task(s));
+                Task temp = new Task(s);
+                tasks.add(temp);
+                System.out.println("Yay! New task added: ");
+                System.out.println("added: " + temp.toString());
                 System.out.println("________________________________________");
             }
         }
