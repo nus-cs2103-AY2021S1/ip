@@ -11,7 +11,7 @@ public class Bot {
     static String prompt = "What can I do for you?";
     static String farewellMsg = "Bye. Hope to see you again soon!";
     static String indentation = "    ";
-    static String demarcation = Bot.indentation + "----------------------------------";
+    static String demarcation = Bot.indentation + "-------------------------------------------------------------------";
 
     ArrayList<Task> todos;
 
@@ -41,7 +41,11 @@ public class Bot {
                     if (command.startsWith("done ")) {
                         markComplete(command);
                     } else {
-                        addTodos(command);
+                        try {
+                            addTodos(command);
+                        } catch (DukeException e) {
+                            System.out.println(indentWord(e.getMessage()));
+                        }
                     }
                     break;
             }
@@ -63,12 +67,15 @@ public class Bot {
         }
     }
 
-    private void addTodos(String command) {
-        String todoType = command.split(" ")[0];
+    private void addTodos(String command) throws DukeException {
+        String[] todoArr = command.split(" ");
+        String todoType = todoArr[0];
         Task todo = new Task("");
 
         switch (todoType) {
             case ("todo"):
+                // Only has the word todo
+                if (todoArr.length == 1) throw new EmptyTodoException();
                 todo = new Todo(command.substring(5));
                 break;
             case ("deadline"):
@@ -81,7 +88,7 @@ public class Bot {
                 String[] eventArr = eventContent.split("/");
                 todo = new Event(eventArr[0], eventArr[1]);
             default:
-                break;
+                throw new DukeException();
         }
 
 
