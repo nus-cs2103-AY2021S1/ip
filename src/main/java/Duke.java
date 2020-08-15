@@ -11,7 +11,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         System.out.println(output("Hello! I'm Duke\n\t  What can I do for you?"));
-
+        String[] list = new String[100];
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             System.out.println(output(input));
