@@ -27,7 +27,14 @@ public class Duke {
                 break;
             } else if (command.equals("list")) {
                 System.out.println(formatReply(listTasks(taskList)));
-            } else {
+            } else if (command.split( " ")[0].equals("done")) {
+                Task task = taskList.get(Integer.parseInt(command.split(" ")[1]) - 1);
+                task.completeTask();
+                ArrayList<Task> temp = new ArrayList<>();
+                temp.add(task);
+                System.out.println(formatReply("This task has been marked as done.\n" + listTasks(temp)));
+            }
+            else {
                 taskList.add(new Task(command));
                 System.out.println(formatReply("added: " + command));
             }
@@ -51,5 +58,9 @@ class Task {
 
     public boolean getDone() {
         return this.done;
+    }
+
+    public void completeTask() {
+        this.done = true;
     }
 }
