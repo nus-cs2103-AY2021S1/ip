@@ -1,9 +1,7 @@
 package operation;
 
-import task.Deadline;
 import task.Task;
 import task.TaskStorage;
-import task.ToDo;
 import task.TaskFactory;
 
 public class AddOperation extends Operation {
