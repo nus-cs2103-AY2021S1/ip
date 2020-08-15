@@ -13,7 +13,7 @@ public class Duke {
 
     private static void greet() {
         String greeting = "Hello! I'm Duke \nWhat can I do for you?";
-        System.out.println(formatResponse(greeting));
+        printResponse(greeting);
     }
 
     private static void acceptCommand(Scanner sc) {
@@ -21,35 +21,40 @@ public class Duke {
 
         while (!userInput.equals("bye")){
             if (userInput.equals("list")) {
-                System.out.println(formatResponse(listTasks()));
+                printResponse(listTasks());
+            } else if (userInput.startsWith("todo")) {
+                String description = userInput.substring(userInput.indexOf(' ') + 1);
+                Task task = new ToDo(description);
+                tasks.add(task);
+                String response = String.format(
+                        "I've added this task:\n  %s \nNow you have %s tasks in the list.",
+                        task, tasks.size()
+                );
+                printResponse(response);
             } else if (userInput.matches("done \\d+")) {
                 int index = Integer.parseInt(userInput.split(" ")[1]);
                 if (index > tasks.size()) {
-                    System.out.println(formatResponse("No such task!"));
+                    printResponse("No such task!");
                 } else {
                     Task task = tasks.get(index-1);
                     task.completeTask();
-                    System.out.println(formatResponse("Nice! I've marked this task as done:\n  "
-                            + task.toString()));
+                    String response = "Nice! I've marked this task as done:\n  " + task.toString();
+                    printResponse(response);
                 }
-            } else {
-                Task task = new Task(userInput);
-                tasks.add(task);
-                System.out.println(formatResponse("added: " + task.toString()));
             }
 
             userInput = sc.nextLine();
         }
 
-        System.out.println(formatResponse("Bye. Hope to see you again soon!"));
+        printResponse("Bye. Hope to see you again soon!");
     }
 
-    // Formats a given String by adding horizontal lines to the top and bottom
-    // as well as indenting 1 tab
-    private static String formatResponse(String string) {
+    // Wrapper method for printing with horizontal line borders and 1 tab indent
+    private static void printResponse(String string) {
         String horizontalLine = "----------------------------------------------------------------";
-        return String.format("%s\n%s\n%s", horizontalLine, string, horizontalLine)
+        String formatted = String.format("%s\n%s\n%s", horizontalLine, string, horizontalLine)
                 .replaceAll("(?m)^", "\t");
+        System.out.println(formatted);
     }
 
     // Returns a formatted String of all the tasks
