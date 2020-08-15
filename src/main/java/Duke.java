@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static ArrayList<String> list = new ArrayList<>();
+    public static ArrayList<Task> list = new ArrayList<>();
 
     public static void Greet() {
         System.out.println("    ____________________________________________________________");
@@ -28,6 +28,11 @@ public class Duke {
                 break;
             } else if (input.equals("list")) {
                 ListOut();
+            } else if (input.contains("done")) {
+                String[] arr = input.split(" ");
+                int index = Integer.parseInt(arr[1]);
+
+                Done(index);
             } else {
                 Add(input);
                 System.out.println();
@@ -40,17 +45,31 @@ public class Duke {
         System.out.println("     added: " + string);
         System.out.println("    ____________________________________________________________");
 
-        list.add(string);
+        Task task = new Task(string);
+
+        list.add(task);
     }
 
     public static void ListOut() {
         System.out.println("    ____________________________________________________________");
+        System.out.println("     Here are the tasks in your list:");
 
         for (int i = 0; i < list.size(); i++) {
             System.out.printf("     %d. %s \n", i + 1, list.get(i));
         }
 
         System.out.println("    ____________________________________________________________");
+    }
+
+    public static void Done(int index) {
+        Task task = list.get(index - 1);
+        task.completed();
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Nice! I've marked this task as done: ");
+
+        System.out.println("       " + task);
+        System.out.println("    ____________________________________________________________");
+        System.out.println();
     }
 
     public static void main(String[] args) {
