@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
+    private static String[] tasks = new String[100];
 
     private static void printResponse(String response) {
         System.out.println("____________________________________________________________");
@@ -8,15 +9,29 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
-    private static void handleCommands() {
+    private static void handleUserInputs() {
         Scanner sc = new Scanner(System.in);
+        int numberOfTasks = 0;
         while (true) {
-            String userCommand = sc.nextLine();
-            if (userCommand.equals("bye")) {
-                printResponse("Bye. Hope to see you again soon!");
-                break;
-            } else {
-                printResponse(userCommand);
+            String userInput = sc.nextLine();
+            switch(userInput) {
+                case "list":
+                    String numberedList = "";
+                    for (int i = 0; i < numberOfTasks; i++) {
+                        if (i != 0) {
+                            numberedList += "\n";
+                        }
+                        numberedList += (i + 1) + ". " + tasks[i];
+                    }
+                    printResponse(numberedList);
+                    break;
+                case "bye":
+                    printResponse("Bye. Hope to see you again soon!");
+                    return;
+                default:
+                    tasks[numberOfTasks] = userInput;
+                    numberOfTasks++;
+                    printResponse("added: " + userInput);
             }
         }
     }
@@ -30,7 +45,6 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         printResponse("Hello! I'm Duke\nWhat can I do for you?");
-        handleCommands();
-
+        handleUserInputs();
     }
 }
