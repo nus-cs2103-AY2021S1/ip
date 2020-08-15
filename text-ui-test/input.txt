@@ -1,0 +1,13 @@
+todo first todo
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
+list
+done 1
+deadline going out /by i dont know :|
+done 3
+list
+done 2
+list
+done 4
+list
+bye
