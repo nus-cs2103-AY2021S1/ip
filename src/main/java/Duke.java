@@ -23,14 +23,17 @@ public class Duke {
         System.out.printf(stringFormat, "Bye. Hope to see you again soon!");
     }
 
-    private void processAdd(String item) {
-        this.list.add(new Task(item));
-        System.out.printf(stringFormat, "added: " + item);
+    private void processAdd(Task task) {
+        this.list.add(task);
+        String content = String.format("Got it. I've added this task:\n" +
+                        "\t%1$s\n" +
+                        "Now you have %2$d tasks in the list.",
+                        task.toString(), this.list.size());
+        System.out.printf(stringFormat, content);
     }
 
     private void processList() {
         StringBuilder content = new StringBuilder();
-
         for (int i = 0; i < this.list.size(); i++) {
             content.append(i + 1);
             content.append(". " + this.list.get(i).toString());
@@ -58,7 +61,35 @@ public class Duke {
         System.out.printf(stringFormat, "Nice! I've marked this task as done:\n\t" + task.toString());
     }
 
+    private void createTodo(String action) {
+        String description = new StringBuilder(action).substring(5);
+        System.out.println(description);
+        Todo newTodo = new Todo(description);
+        this.processAdd(newTodo);
+    }
+
+    private void createDeadline(String action) {
+        if (!action.contains(" /by ")) {
+            System.out.printf(stringFormat, "Invalid format, missing '/by' key!!");
+            return;
+        }
+        String[] taskDetails = new StringBuilder(action).substring(9).split(" /by ");
+        Deadline newDeadline = new Deadline(taskDetails[0], taskDetails[1]);
+        this.processAdd(newDeadline);
+    }
+
+    private void createEvent(String action) {
+        if (!action.contains(" /at ")) {
+            System.out.printf(stringFormat, "Invalid format, missing '/at' key!!");
+            return;
+        }
+        String[] taskDetails = new StringBuilder(action).substring(6).split(" /at ");
+        Event newEvent = new Event(taskDetails[0], taskDetails[1]);
+        this.processAdd(newEvent);
+    }
+
     private boolean processAction() {
+        System.out.println("Type an action (list, done, todo, deadline, event, bye):");
         String action = this.scanner.nextLine();
         String key = action.split(" ")[0];
         switch (key) {
@@ -71,8 +102,17 @@ public class Duke {
             case "done":
                 this.processDone(action);
                 break;
+            case "todo":
+                this.createTodo(action);
+                break;
+            case "deadline":
+                this.createDeadline(action);
+                break;
+            case "event":
+                this.createEvent(action);
+                break;
             default:
-                this.processAdd(action);
+                System.out.printf(stringFormat, "Unknown action!! Try again...");
                 break;
         }
         return true;
