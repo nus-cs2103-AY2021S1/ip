@@ -1,4 +1,5 @@
-import main.java.Task;
+import main.java.*;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -25,16 +26,21 @@ public class Duke {
                 System.out.println("This task has been mark as done.");
                 System.out.println(cur);
                 System.out.println();
+            } else if (next[0].equals("todo")) {
+                Task temp = new Task(next[1]);
+                duke.addTask(temp);
+            } else if (next[0].equals("deadline")) {
+                String[] str = next[1].split("/by", 2);
+                Task temp = new Deadline(str[0], str[1]);
+                duke.addTask(temp);
+            } else if (next[0].equals("event")) {
+                String[] strEvent = next[1].split("/at",2);
+                Task temp = new Event(strEvent[0], strEvent[1]);
+                duke.addTask(temp);
             } else {
-                if(next.length == 1){
-                    duke.addTask(next[0]);
-                }
-                else {
-                    duke.addTask(next[0] + " " + next[1]);
-                }
-
+                System.out.println("Command not known");
             }
-            next = sc.nextLine().split(" ");
+            next = sc.nextLine().split(" ",2);
         }
         duke.goodbyeMessage();
     }
@@ -57,9 +63,8 @@ public class Duke {
 
 
 
-    public void addTask(String task) {
-        Task temp = new Task(task);
-        this.taskList.add(temp);
+    public void addTask(Task task) {
+        this.taskList.add(task);
         System.out.println("********************************************");
         System.out.println("Added new task " + task);
         System.out.println("********************************************");
