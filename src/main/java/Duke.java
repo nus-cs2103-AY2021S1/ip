@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -27,7 +28,7 @@ public class Duke {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             say(input);
-            input = sc.next();
+            input = sc.nextLine();
         }
         say("Goodbye!");
         sc.close();
