@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class Duke {
+    private static Todo todo = new Todo();
+
     public static void main(String[] args) {
         String greeting = "Hello! I'm Duke \nWhat can I do for you?";
         System.out.println(formatResponse(greeting));
@@ -8,12 +10,17 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String userInput = sc.nextLine();
         while (!userInput.equals("bye")){
-            System.out.println(formatResponse(userInput));
+            if (userInput.equals("list")) {
+                System.out.println(formatResponse(todo.toString()));
+            } else {
+                todo.addItem(userInput);
+                System.out.println(formatResponse("added: " + userInput));
+            }
+
             userInput = sc.nextLine();
         }
 
         System.out.println(formatResponse("Bye. Hope to see you again soon!"));
-
     }
 
     // Formats a given String by adding horizontal lines to the top and bottom
