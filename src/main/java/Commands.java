@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Commands {
     private boolean shouldBreak = true;
-    private ArrayList<String> stringsArrayList = new ArrayList<>();
+    private ArrayList<Task> stringsArrayList = new ArrayList<>();
 
     private final String INPUT_LIST = "list";
     private final String INPUT_BLAH = "blah";
@@ -34,7 +34,7 @@ public class Commands {
                 shouldBreak = !shouldBreak;
                 break;
             default:
-                stringsArrayList.add(inputs);
+                stringsArrayList.add(new Task(inputs));
                 System.out.println("~ \n added: " + inputs + "\n~");
                 inputs = scanner.nextLine().toLowerCase().trim();
             }
@@ -46,11 +46,12 @@ public class Commands {
     }
 
     public void lst() {
-        System.out.println("~ \n");
+        System.out.println("~ \n Here are targets in your kill list: ");
         if (!stringsArrayList.isEmpty()) {
             for (int i = 0; i < stringsArrayList.size(); i++) {
                 int count = i + 1;
-                System.out.println(count + ". " + stringsArrayList.get(i));
+                System.out.println(String.format(" %d.[%s] %s", count, stringsArrayList.get(i).getStatusIcon(),
+                        stringsArrayList.get(i).getDescription()));
             }
         } else {
             System.out.println(" list");
