@@ -42,7 +42,7 @@ public class Commands {
                         System.out.println("Please input a valid integer");
                     }
                 } else {
-                    stringsArrayList.add(new Task(inputs, false));
+                    stringsArrayList.add(new Task(inputs));
                     System.out.println("~ \n added: " + inputs + "\n~");
                 }
                 inputs = scanner.nextLine().toLowerCase().trim();
@@ -54,9 +54,8 @@ public class Commands {
         if (Character.isDigit(input)) {
             int taskNumber = Character.getNumericValue(input) - 1;
             if (!stringsArrayList.isEmpty() && taskNumber < stringsArrayList.size()) {
-                stringsArrayList.set(taskNumber,
-                        new Task(stringsArrayList.get(taskNumber).getDescription(), true));
-                System.out.println("~ \n Nice! Target Eliminated: \n"
+                stringsArrayList.get(taskNumber).doneTask();
+                System.out.println("~ \n Nice! Target Eliminated: \n   "
                         + stringsArrayList.get(taskNumber).toString() + "\n~");
             } else {
                 System.out.println("Please choose a task to mark as done, with \"done <task number>\"");
