@@ -6,4 +6,6 @@ done 2
 done 3
 done 1
 list
+alsdk;fjn
+todo
 bye

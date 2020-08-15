@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    static List<Task> tasks;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String logo =
@@ -26,51 +27,57 @@ public class Duke {
         System.out.println(logo);
         printInWindow("Hello, I'm a banana.\nWhat can I do for you?");
 
-        List<Task> tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
 
         while(sc.hasNextLine()) {
             String input = sc.nextLine();
             String[] splitInput = input.split(" ", 2);
             String command = splitInput[0];
             String parameters = splitInput.length > 1 ? splitInput[1] : null;
-            switch(command) {
-            case "todo":
-                ToDo todo = new ToDo(parameters);
-                tasks.add(todo);
-                printInWindow("Added: " + todo.toString());
-                break;
-            case "event":
-                String[] eventParameters = parameters.split(" /at ");
-                Event event = new Event(eventParameters[0], eventParameters[1]);
-                tasks.add(event);
-                printInWindow("Added: " + event.toString());
-                break;
-            case "deadline":
-                String[] deadlineParameters = parameters.split(" /by ");
-                Deadline deadline = new Deadline(deadlineParameters[0], deadlineParameters[1]);
-                tasks.add(deadline);
-                printInWindow("Added: " + deadline.toString());
-                break;
-            case "done":
-                int taskNumber = Integer.parseInt(parameters);
-                Task task = tasks.get(taskNumber - 1);
-                task.markAsDone(true);
-                printInWindow(
-                        "Nice! I've marked the this as done.\n" +
-                                task.toString()
-                );
-                break;
-            case "list":
-                printInWindow(formatTaskListToString(tasks));
-                break;
-            case "bye":
-                printInWindow("Bye. Hope to see you again soon!");
-                return;
-            default:
-                Task newTask = new Task(input);
-                tasks.add(newTask);
-                printInWindow("Added: " + input);
+            try {
+                processCommand(command, parameters);
+            } catch (DukeException exception) {
+                printInWindow(exception.getMessage());
             }
+        }
+    }
+
+    public static void processCommand(String command, String parameters) throws DukeException{
+        switch(command) {
+        case "todo":
+            ToDo todo = new ToDo(parameters);
+            tasks.add(todo);
+            printInWindow("Added: " + todo.toString());
+            break;
+        case "event":
+            String[] eventParameters = parameters.split(" /at ");
+            Event event = new Event(eventParameters[0], eventParameters[1]);
+            tasks.add(event);
+            printInWindow("Added: " + event.toString());
+            break;
+        case "deadline":
+            String[] deadlineParameters = parameters.split(" /by ");
+            Deadline deadline = new Deadline(deadlineParameters[0], deadlineParameters[1]);
+            tasks.add(deadline);
+            printInWindow("Added: " + deadline.toString());
+            break;
+        case "done":
+            int taskNumber = Integer.parseInt(parameters);
+            Task task = tasks.get(taskNumber - 1);
+            task.markAsDone(true);
+            printInWindow(
+                    "Nice! I've marked the this as done.\n" +
+                            task.toString()
+            );
+            break;
+        case "list":
+            printInWindow(formatTaskListToString(tasks));
+            break;
+        case "bye":
+            printInWindow("Bye. Hope to see you again soon!");
+            return;
+        default:
+            throw new DukeException("I don't know what that means!");
         }
     }
 
