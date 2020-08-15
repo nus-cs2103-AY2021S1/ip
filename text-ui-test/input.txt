@@ -12,4 +12,5 @@ todo
 delete 3
 delete 7
 list
+give me money
 bye

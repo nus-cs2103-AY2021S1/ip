@@ -15,24 +15,24 @@ public class Duke {
     final static String taskAddedMessage = textIndent + "Got it. I've added this task:\n";
     final static String deleteMessage = textIndent + "Noted. I've removed this task:\n";
 
-    static String[] commands = {"bye", "list", "done", "todo", "deadline", "event"};
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         say(welcomeMessage);
 
-        int index = 0;
         String input;
-        while(!(input = sc.nextLine()).equals("bye")){
-
-            try {
-                handleCommand(input);
-            } catch (DukeException e) {
-                say(textIndent + e.getMessage() + "\n");
+        while(sc.hasNext()){
+            if ((input = sc.nextLine()).equals("bye")) {
+                say(exitMessage);
+                break;
+            } else {
+                try {
+                    handleCommand(input);
+                } catch (DukeException e) {
+                    say(textIndent + e.getMessage() + "\n");
+                }
             }
         }
 
-        say(exitMessage);
         sc.close();
 
     }
@@ -48,15 +48,21 @@ public class Duke {
             throw new DukeException("Be sure to follow the exact format of the commands!");
         }
 
-        String command = commandDetail[0];
+        Commands command;
+        try {
+            command = Commands.valueOf(commandDetail[0].toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("Sorry! I don't recognize that command!");
+        }
+
         String detail;
 
         switch (command) {
-            case "list":
+            case LIST:
                 handleList();
                 break;
 
-            case "done":
+            case DONE:
                 if (commandDetail.length < 2) {
                     throw new DukeException("Please key in a task to be marked as done!");
                 }
@@ -64,7 +70,7 @@ public class Duke {
                 handleDone(detail);
                 break;
 
-            case "delete":
+            case DELETE:
                 if (commandDetail.length < 2) {
                     throw new DukeException("Please key in a task to be marked as done!");
                 }
@@ -72,7 +78,7 @@ public class Duke {
                 handleDelete(detail);
                 break;
 
-            case "todo":
+            case TODO:
                 if (commandDetail.length < 2) {
                     throw new DukeException("Please input a task to add!");
                 }
@@ -80,7 +86,7 @@ public class Duke {
                 handleTodo(detail);
                 break;
 
-            case "deadline":
+            case DEADLINE:
                 if (commandDetail.length < 2) {
                     throw new DukeException("Please input a task to add!");
                 }
@@ -88,16 +94,13 @@ public class Duke {
                 handleDeadline(detail);
                 break;
 
-            case "event":
+            case EVENT:
                 if (commandDetail.length < 2) {
                     throw new DukeException("Please input a task to add!");
                 }
                 detail = commandDetail[1];
                 handleEvent(detail);
                 break;
-
-            default:
-                throw new DukeException("Sorry! I don't recognize that command!");
         }
     }
 
@@ -152,7 +155,7 @@ public class Duke {
                     "\n" + textIndent + numTasks;
             say(out);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Please enter a deadline to complete the task by!");
+            throw new DukeException("Please enter a deadline to complete the task by or follow the exact command format!");
         }
     }
 
@@ -166,7 +169,7 @@ public class Duke {
                     "\n" + textIndent + numTasks;
             say(out);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Please enter the time at which the event will take place!");
+            throw new DukeException("Please enter the time at which the event will take place or follow the exact command format!");
         }
     }
 }
