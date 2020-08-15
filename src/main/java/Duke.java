@@ -11,7 +11,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         System.out.println(output("Hello! I'm Duke\n\t  What can I do for you?"));
-        String[] list = new String[100];
+        Task[] list = new Task[100];
         int count = 0;
         String input = sc.nextLine();
         while (!input.equals("bye")) {
@@ -27,7 +27,7 @@ public class Duke {
                 System.out.println(horizontalLine);
             } else {
                 System.out.println(output("added: " + input));
-                list[count++] = input;
+                list[count++] = new Task(input);
             }
             input = sc.nextLine();
         }
