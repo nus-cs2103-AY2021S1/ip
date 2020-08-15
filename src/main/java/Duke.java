@@ -13,7 +13,8 @@ public class Duke {
         System.out.println("Hello! I'm\n" + logo + "How can I help you, Boss?");
 
         Scanner sc = new Scanner(System.in);
-        String toEcho = sc.nextLine();
+        String toEcho = sc.next();
+        String echoDescription = sc.nextLine();
         while (!toEcho.equals("bye")) {
             System.out.println("--------------------------------------");
             if (toEcho.equals("list")) {
@@ -22,8 +23,8 @@ public class Duke {
                     int number = i + 1;
                     System.out.println(number + ". " + storage.get(i));
                 }
-            } else if (toEcho.length() > 4 && toEcho.substring(0, 5).equals("done ")) {
-                int index = Integer.parseInt(toEcho.substring(5)) - 1;
+            } else if (toEcho.equals("done")) {
+                int index = Integer.parseInt(echoDescription.substring(1)) - 1;
                 if (storage.size() <= index) {
                     System.out.println("Sorry Boss! There is no task number " + (index + 1));
                     System.out.println("--------------------------------------");
@@ -34,11 +35,18 @@ public class Duke {
                 storage.get(index).markAsDone();
                 System.out.println("    " + storage.get(index));
             } else {
-                System.out.println("added: " + toEcho);
-                storage.add(new Task(toEcho));
+                if (toEcho.equals("todo")) {
+                    System.out.println("Got it. I've added this task:");
+                    Todo task = new Todo(echoDescription.substring(1));
+                    storage.add(task);
+                    System.out.println(task);
+                }
+                System.out.println("Now you have " + storage.size() + " tasks in the list.");
             }
+
             System.out.println("--------------------------------------");
-            toEcho = sc.nextLine();
+            toEcho = sc.next();
+            echoDescription = sc.nextLine();
         }
         System.out.println("--------------------------------------\n" +
             "Bye Boss! Hope to see you again!" + "\n"
