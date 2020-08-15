@@ -34,9 +34,24 @@ public class Duke {
                     if (firstWord.equals("done")) {
                         // what if task is not in the list
                         int num = Integer.parseInt(taskName.substring(i+1));
-                        Task taskToSetToDone = list.get(num-1);
-                        taskToSetToDone.setDone();
-                        System.out.println("Nice! I've marked this task as done:" + "\n" + taskToSetToDone.toString());
+                        if (list.size() < num) {
+                            throw new DukeException("List does not have that item.");
+                        } else {
+                            Task taskToSetToDone = list.get(num-1);
+                            taskToSetToDone.setDone();
+                            System.out.println("Nice! I've marked this task as done:" + "\n" + taskToSetToDone.toString());
+                        }
+                    } else if (firstWord.equals("delete")) {
+                        // what if task is not in the list
+                        int num = Integer.parseInt(taskName.substring(i+1));
+                        if (list.size() < num) {
+                            throw new DukeException("List does not have that item.");
+                        } else {
+                            Task taskToDelete = list.get(num-1);
+                            list.remove(num-1);
+                            System.out.println("Noted. I've removed this task:" + "\n" + taskToDelete.toString() + "\n" + "Now you have " + list.size() +
+                                    " tasks in the list.");
+                        }
                     } else if (firstWord.equals("todo")) {
                         String todoName = taskName.substring(i+1);
                         Todo newTodo = new Todo(todoName);
