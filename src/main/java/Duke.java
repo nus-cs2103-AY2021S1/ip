@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Duke {
     private static final String horizontalLine = "\t================================================================";
     private static int n = -1;
+    private static int m = -1;
 
     private static String output(String message) {
         return horizontalLine + "\n\t  " + message + "\n" + horizontalLine + "\n";
@@ -20,6 +21,27 @@ public class Duke {
                 if (n < 1) {
                     throw new InvalidCommandException("\u2639 OOPS!!! The task index should be a positive integer.");
                 } else if (n > count) {
+                    throw new InvalidCommandException("\u2639 OOPS!!! The task index does not exist.");
+                }
+                return true;
+            } catch (Exception e) {
+                throw new InvalidCommandException("\u2639 OOPS!!! The task index should be a number.");
+            }
+        } else {
+            return false;
+        }
+    }
+
+    private static boolean isDeleteCommand(String cmd, int count) throws InvalidCommandException {
+        if (cmd.startsWith("delete ")) {
+            if (cmd.length() < 8) {
+                throw new InvalidCommandException("\u2639 OOPS!!! The task to mark to delete cannot be empty.");
+            }
+            try {
+                m = Integer.parseInt(cmd.substring(7));
+                if (m < 1) {
+                    throw new InvalidCommandException("\u2639 OOPS!!! The task index should be a positive integer.");
+                } else if (m > count) {
                     throw new InvalidCommandException("\u2639 OOPS!!! The task index does not exist.");
                 }
                 return true;
@@ -102,12 +124,14 @@ public class Duke {
                     }
                     System.out.println(horizontalLine + "\n");
                 } else if (isDoneCommand(input, count)) {
-                    if (n > 0 && n <= count) {
-                        list.get(n - 1).markAsDone();
-                        System.out.println(output("Nice! I've marked this task as done:\n\t    " + list.get(n - 1)));
-                    } else {
-                        System.out.println(output("The task does not exist!"));
-                    }
+                    list.get(n - 1).markAsDone();
+                    System.out.println(output("Nice! I've marked this task as done:\n\t    " + list.get(n - 1)));
+                } else if (isDeleteCommand(input, count)) {
+                    Task toDelete = list.get(m - 1);
+                    list.remove(toDelete);
+                    System.out.println(output("Noted. I've removed this task:\n\t    " + toDelete +
+                            "\n\t  Now you have " + list.size()));
+                    count--;
                 } else {
                     Task task = generate(input);
                     list.add(count++, task);
