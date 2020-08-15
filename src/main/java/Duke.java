@@ -44,7 +44,8 @@ public class Duke {
                 }
             } else {
                 list[count] = Task.generate(input);
-                System.out.println(output("added: " + list[count]));
+                System.out.println(output("Got it. I've added this task:\n\t    " + list[count] +
+                        "\n\t  Now you have " + (count + 1) + " tasks in the list."));
                 count++;
             }
             input = sc.nextLine();
