@@ -30,6 +30,7 @@ public class Duke {
     }
 
     private void listAllTasks() {
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskListSize; i++) {
             int taskNumber = i + 1;
             String entry = String.format("%d. %s", taskNumber, taskList[i]);
@@ -37,10 +38,13 @@ public class Duke {
         }
     }
 
-    private void addToTaskList(String description) {
-        taskList[taskListSize] = new Task(description);
+    private void addTask(Task task) {
+        taskList[taskListSize] = task;
         taskListSize++;
-        System.out.println("added: " + description);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        String taskWord = (taskListSize > 1 ? "tasks" : "task");
+        System.out.println(String.format("Now you have %d %s in the list.", taskListSize, taskWord));
     }
 
     private void markTaskAsDone(int taskNumber) {
@@ -58,7 +62,7 @@ public class Duke {
 
     private void listenForCommands() {
         String input = scanner.nextLine();
-        String[] inputBreakdown = input.split(" ");
+        String[] inputBreakdown = input.split(" ", 2);
         String command = inputBreakdown[0];
         switch (command) {
             case ("list"):
@@ -68,11 +72,16 @@ public class Duke {
                 int taskNumber = Integer.parseInt(inputBreakdown[1]);
                 markTaskAsDone(taskNumber);
                 break;
+            case ("todo"):
+                Todo todo = new Todo(inputBreakdown[1]);
+                addTask(todo);
+                break;
             case ("bye"):
                 exit();
                 break;
             default:
-                addToTaskList(input);
+                Task task = new Task(input);
+                addTask(task);
         }
         listenForCommands();
     }
