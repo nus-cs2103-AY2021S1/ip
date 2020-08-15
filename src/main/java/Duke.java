@@ -1,9 +1,12 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+
+import static java.lang.Integer.parseInt;
 
 public class Duke {
+
     boolean running = false;
-    String[] memory = new String[100];
-    int currentMemoryIndex = 0;
+    ArrayList<Task> memory = new ArrayList<>();
 
     boolean isRunning() {
         return running;
@@ -17,6 +20,16 @@ public class Duke {
         System.out.print("    ");
     }
 
+    boolean stringIsInt(String string) {
+        try {
+            parseInt(string);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+
     void greet() {
         indent();
         System.out.println("Hello! I'm Duke.");
@@ -25,6 +38,7 @@ public class Duke {
     }
 
     void printLine() {
+        indent();
         System.out.println("-------------------------------------------------------------");
     }
 
@@ -36,60 +50,92 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        indent();
         printLine();
 
         greet();
 
-        indent();
         printLine();
     }
 
     void farewell() {
-        indent();
         printLine();
 
         indent();
         System.out.println("Goodbye! Hope to see you again soon!");
 
-        indent();
         printLine();
     }
 
     void list() {
-        indent();
         printLine();
 
-        for (int i = 0; i < currentMemoryIndex; i++) {
+        indent();
+        System.out.println("Here are the tasks in your list:");
+
+        for (int i = 0; i < memory.size(); i++) {
             indent();
-            System.out.println((i + 1) + ". " + memory[i]);
+            Task currentTask = memory.get(i);
+            System.out.println((i + 1) + ". " + "[" +
+                    currentTask.getStatusIcon() + "] " + currentTask.getDescription());
         }
 
-        indent();
         printLine();
     }
 
+    void done(int index) {
+        try {
+            Task task = memory.get(index - 1);
+            task.markAsDone();
+            printDoneMessage(task);
+        } catch (IndexOutOfBoundsException e) {
+            printLine();
+
+            indent();
+            System.out.println("No such task!");
+
+            printLine();
+        }
+    }
+
+
     void addToMemory(String string) {
-        memory[currentMemoryIndex] = string;
-        currentMemoryIndex++;
+        memory.add(new Task(string));
     }
 
     void printAddMessage(String string) {
-        indent();
         printLine();
 
         indent();
-        System.out.println("added " + string);
+        System.out.println("added: " + string);
+
+        printLine();
+    }
+
+    void printDoneMessage(Task task) {
+        printLine();
 
         indent();
+        System.out.println("Nice! I've marked this task as done:");
+
+        indent();
+        System.out.println("[" +
+                task.getStatusIcon() + "] " + task.getDescription());
+
         printLine();
     }
 
     void checkAndPrint(String string) {
+        String[] splitString = string.split("\\s+");
         if (string.equals("bye")) {
             exit();
         } else if (string.equals("list")) {
             list();
+        } else if (splitString.length == 2 &&
+                splitString[0].equals("done") && stringIsInt(splitString[1])) {
+            int index = parseInt(splitString[1]);
+            // out of bounds index??
+            done(index);
+
         } else {
             addToMemory(string);
             printAddMessage(string);
@@ -107,6 +153,7 @@ public class Duke {
         Duke duke = new Duke();
         duke.setRunningState(true);
         Scanner sc = new Scanner(System.in);
+
         duke.opener();
 
         while (duke.isRunning()) {
