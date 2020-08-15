@@ -12,21 +12,31 @@ public class Duke {
         System.out.println("Initializing\n" + logo);
         System.out.println("Yo what's up man, it's ya boi DUKE \n" + "What can I do for you today, homie?");
 
-        ArrayList<String> arraylst = new ArrayList<>();
+        ArrayList<Task> arraylst = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String cmd = sc.nextLine();
             if (!cmd.equals("bye")) {
-                //System.out.println("_________________________________________\n" + cmd + "\n" + "_________________________________________");
-                if (cmd.equals("list")) {
+                String[] stringarr = cmd.split(" ");
+                if (stringarr[0].equals("list")) {
                     System.out.println("_________________________________________");
                     for (int i = 0; i < arraylst.size(); i++) {
                         int index = i+1;
-                        System.out.println(index + ". " + arraylst.get(i));
+                        String checked = arraylst.get(i).getDone() ? "O" : "X";
+                        System.out.println(index + ".[" + checked + "] " + arraylst.get(i).getTask());
                     }
                     System.out.println("_________________________________________");
+                } else if (stringarr[0].equals("done")) {
+                    int index = Integer.parseInt(stringarr[1]);
+                    int i = index - 1;
+                    arraylst.get(i).setDone();
+                    System.out.println("_________________________________________");
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(index + ".[O] " + arraylst.get(i).getTask());
+                    System.out.println("_________________________________________");
                 } else {
-                    arraylst.add(cmd);
+                    Task task = Task.setTask(cmd);
+                    arraylst.add(task);
                     System.out.println("_________________________________________\n" + "added: " + cmd + "\n" + "_________________________________________");
                 }
             } else {
