@@ -9,9 +9,19 @@ public class TaskManager {
         this.taskList = new ArrayList<>();
     }
 
-    public void addTask(String content) {
-        Task task = new Task(content);
-        taskList.add(task);
+    public void addTodo(String content) {
+        Todo todo = new Todo(content);
+        taskList.add(todo);
+    }
+
+    public void addDeadline(String content, String datetimeDue) {
+        Deadline deadline = new Deadline(content, datetimeDue);
+        taskList.add(deadline);
+    }
+
+    public void addEvent(String content, String datetime) {
+        Event event = new Event(content, datetime);
+        taskList.add(event);
     }
 
     public void completeTask(int taskNumber) {
