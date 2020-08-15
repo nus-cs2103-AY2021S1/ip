@@ -45,9 +45,10 @@ public class Processor {
                     break;
                 case "delete":
                     int pos2 = Integer.parseInt(this.description);
+                    Task temp = list.get(pos2 - 1);
                     list.remove(pos2 - 1);
                     System.out.println("Removed this task for you!\n"
-                            + list.get(pos2 - 1) + "\nYou have "
+                            + temp + "\nYou have "
                             + list.size() + " tasks in the list.");
                     break;
                 default:
