@@ -24,9 +24,10 @@ public class Duke {
         while(sc.hasNextLine()) {
             String command = sc.nextLine();
 
-            if(command.equals("bye")) {
+            switch(command) {
+            case "bye":
                 printInWindow("Bye. Hope to see you again soon!");
-                break;
+                return;
             }
 
             printInWindow(command);
