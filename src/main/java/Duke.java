@@ -1,6 +1,7 @@
 /*
  * Duke is a retired old uncle who likes to speak in Singlish.
  */
+import java.util.Scanner;
 
 public class Duke {
     public static void greet() {
@@ -20,8 +21,19 @@ public class Duke {
                 "Goodbye!";
         System.out.println(bye);
     }
-    
+
+    public static void echoDuke() {
+        greet();
+        Scanner sc = new Scanner(System.in);
+        String cmd = sc.nextLine();
+        while (!cmd.toLowerCase().equals("bye")) {
+            System.out.println(cmd);
+            cmd = sc.nextLine();
+        }
+        exit();
+    }
+
     public static void main(String[] args) {
-       // System.out.println("Hello from\n" + logo);
+       echoDuke();
     }
 }
