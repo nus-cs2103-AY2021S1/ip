@@ -43,10 +43,14 @@ public class Duke {
                     System.out.println(output("The task does not exist!"));
                 }
             } else {
-                list[count] = Task.generate(input);
-                System.out.println(output("Got it. I've added this task:\n\t    " + list[count] +
-                        "\n\t  Now you have " + (count + 1) + " tasks in the list."));
-                count++;
+                Task task = Task.generate(input);
+                if (task == null) {
+                    System.out.println(output("Your input task is invalid!"));
+                } else {
+                    list[count++] = task;
+                    System.out.println(output("Got it. I've added this task:\n\t    " + task +
+                            "\n\t  Now you have " + count + " tasks in the list."));
+                }
             }
             input = sc.nextLine();
         }
