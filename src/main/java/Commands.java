@@ -11,6 +11,7 @@ public class Commands {
     private final String INPUT_LIST = "list";
     private final String INPUT_BLAH = "blah";
     private final String INPUT_BYE = "bye";
+    private final String INPUT_DONE = "done";
 
     public void start() {
         this.greet();
@@ -34,10 +35,34 @@ public class Commands {
                 shouldBreak = !shouldBreak;
                 break;
             default:
-                stringsArrayList.add(new Task(inputs));
-                System.out.println("~ \n added: " + inputs + "\n~");
+                if (inputs.substring(0,4).equals(INPUT_DONE)) {
+                    try {
+                        markDone(inputs.charAt(5));
+                    } catch (StringIndexOutOfBoundsException e) {
+                        System.out.println("Please input a valid integer");
+                    }
+                } else {
+                    stringsArrayList.add(new Task(inputs, false));
+                    System.out.println("~ \n added: " + inputs + "\n~");
+                }
                 inputs = scanner.nextLine().toLowerCase().trim();
             }
+        }
+    }
+
+    private void markDone(char input) {
+        if (Character.isDigit(input)) {
+            int taskNumber = Character.getNumericValue(input) - 1;
+            if (!stringsArrayList.isEmpty() && taskNumber < stringsArrayList.size()) {
+                stringsArrayList.set(taskNumber,
+                        new Task(stringsArrayList.get(taskNumber).getDescription(), true));
+                System.out.println("~ \n Nice! Target Eliminated: \n"
+                        + stringsArrayList.get(taskNumber).toString() + "\n~");
+            } else {
+                System.out.println("Please choose a task to mark as done, with \"done <task number>\"");
+            }
+        } else {
+            System.out.println("Please input a valid integer");
         }
     }
 
@@ -50,11 +75,8 @@ public class Commands {
         if (!stringsArrayList.isEmpty()) {
             for (int i = 0; i < stringsArrayList.size(); i++) {
                 int count = i + 1;
-                System.out.println(String.format(" %d.[%s] %s", count, stringsArrayList.get(i).getStatusIcon(),
-                        stringsArrayList.get(i).getDescription()));
+                System.out.println(String.format("   %d. ", count) + stringsArrayList.get(i).toString());
             }
-        } else {
-            System.out.println(" list");
         }
         System.out.println("\n~ ");
     }
