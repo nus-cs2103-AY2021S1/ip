@@ -11,6 +11,7 @@ public class Duke {
     private static final String TODO_COMMAND = "todo";
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String EVENT_COMMAND = "event";
+    private static final String DELETE_COMMAND = "delete";
 
     private final Scanner sc;
     private boolean hasCommand;
@@ -78,12 +79,24 @@ public class Duke {
         System.out.print(SEPARATOR);
     }
 
-    private void setTaskDone(int taskNum) {
+    private void setTaskDone(int taskNum) throws InvalidTaskException {
+        if (taskNum < 1 || taskNum > tasks.size())
+            throw new InvalidTaskException();
         Task task = tasks.get(taskNum - 1);
         task.setDone();
         System.out.printf("     Nice! I've marked this task as done:\n"
                         + "       %s\n%s",
                 task, SEPARATOR);
+    }
+
+    private void deleteTask(int taskNum) throws InvalidTaskException {
+        if (taskNum < 1 || taskNum > tasks.size())
+            throw new InvalidTaskException();
+        Task removed = tasks.remove(taskNum - 1);
+        System.out.printf("     Noted. I've removed this task:\n       %s\n"
+                        + "     Now you have %d %s in the list.\n%s",
+                removed, tasks.size(),
+                tasks.size() == 1 ? "task" : "tasks", SEPARATOR);
     }
 
     public void initialise() {
@@ -93,6 +106,8 @@ public class Duke {
         while (hasCommand) {
             getCommand();
             String command = input[0];
+            int taskNum;
+
             try {
                 switch (command) {
                     case EXIT_COMMAND:
@@ -102,8 +117,12 @@ public class Duke {
                         printTaskList();
                         break;
                     case DONE_COMMAND:
-                        int taskNum = Integer.parseInt(input[1]);
+                        taskNum = Integer.parseInt(input[1]);
                         setTaskDone(taskNum);
+                        break;
+                    case DELETE_COMMAND:
+                        taskNum = Integer.parseInt(input[1]);
+                        deleteTask(taskNum);
                         break;
                     case TODO_COMMAND:
                     case DEADLINE_COMMAND:
