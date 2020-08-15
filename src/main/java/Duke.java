@@ -36,8 +36,6 @@ public class Duke {
             } else if (command.equals("done")) {
                 int entryDone = Integer.parseInt(input.substring(5)) - 1;
 
-                System.out.println(entryDone);
-
                 if (entryDone >= 0) {
                     Task temp = toDoList.get(entryDone);
 
