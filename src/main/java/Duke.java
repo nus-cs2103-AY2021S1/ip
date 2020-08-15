@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Duke {
     public static void main(String[] args) {
@@ -13,6 +15,10 @@ public class Duke {
         bot.welcomeMessage();
 
         Scanner sc = new Scanner(System.in);
+        Pattern todo = Pattern.compile("todo (.+)");
+        Pattern deadline = Pattern.compile("deadline (.+?) /by (.+)");
+        Pattern event = Pattern.compile("event (.+?) /at (.+)");
+
         while(sc.hasNextLine()) {
             String next = sc.nextLine();
             if (next.equals("bye")) {
@@ -28,7 +34,21 @@ public class Duke {
                     System.out.println(e.getMessage());
                 }
             } else {
-                bot.addActivity(next);
+                Matcher todoMatcher = todo.matcher(next);
+                Matcher deadlineMatcher = deadline.matcher(next);
+                Matcher eventMatcher = event.matcher(next);
+                if (todoMatcher.find()) {
+                    bot.addTodo(todoMatcher.group(1));
+                }
+                else if (deadlineMatcher.find()) {
+                    bot.addDeadline(deadlineMatcher.group(1),deadlineMatcher.group(2));
+                } else if (eventMatcher.find()) {
+                    bot.addEvent(eventMatcher.group(1),eventMatcher.group(2));
+                } else {
+                    System.out.println("Invalid Msg");
+                }
+
+
             }
         }
     }

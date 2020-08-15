@@ -23,14 +23,35 @@ public class Bot {
     public void goodByeMessage() {
         reply(goodbyeMessage);
     }
-    public void addActivity(String activity) {
-        activityList.add(new Task(activity));
-        reply("added: " + activity);
+    public void addTodo(String activity) {
+        Task todoTask = new TodoTask(activity);
+        activityList.add(todoTask);
+        activityReply(todoTask);
     }
 
+    public void addDeadline(String activity, String deadline) {
+        Task deadlineTask = new DeadlineTask(activity, deadline);
+        activityList.add(deadlineTask);
+        activityReply(deadlineTask);
+    }
+
+    public void addEvent(String activity, String time) {
+        Task event = new EventTask(activity,time);
+        activityList.add(event);
+        activityReply(event);
+    }
+
+    public void activityReply(Task task) {
+        System.out.println(this.delim);
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(task);
+        System.out.println(String.format("You have %s tasks currently, work on them soon!", activityList.size()));
+        System.out.println(this.delim);
+
+    }
     public void displayActivities() {
         System.out.println(this.delim);
-        System.out.println("Here are the tasks in your list:");
+        System.out.println("Here are your current tasks:");
         for (int i = 0; i < activityList.size(); i++) {
             System.out.println(i + 1 + "." + activityList.get(i));
         }
