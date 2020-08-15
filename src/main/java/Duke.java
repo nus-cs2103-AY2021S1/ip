@@ -6,9 +6,6 @@ public class Duke {
         printLogo();
         startGreet();
         startChat();
-        Task t = new Task("read book");
-        t.markAsDone();
-        System.out.println(t);
     }
     public static void printLogo() {
         String logo = " ____        _        \n"
@@ -41,7 +38,7 @@ public class Duke {
             } else if (input.equals("list")) {
                 // Prints the given list
                 printList(list);
-            } else if (input.contains("done")) {
+            } else if (input.startsWith("done")) {
                 // Mark given task as done
                 if (!input.contains(" "))  {
                     // checking if done command is given correctly else asks the user again
@@ -78,11 +75,26 @@ public class Duke {
                 indent();
                 indent();
                 System.out.println(currentTask);
-            } else if (!input.isBlank()) {
-                // Create and store task given in list
-                list.add(new Task(input));
+            } else if (input.startsWith("todo")) {
+                // Create and store todos given in list
+                String taskDesc = input.substring(5);
+                list.add(new Todo(taskDesc));
                 indent();
-                System.out.print("Successfully added: " + input + "\n\n");
+                System.out.print("Successfully added: " + taskDesc + "\n\n");
+            } else if (input.startsWith("deadline")) {
+                // Create and store deadlines given in list
+                String taskDesc = input.substring(9, input.indexOf("/by"));
+                String by = input.substring(input.indexOf("/by") + 4);
+                list.add(new Deadline(taskDesc, by));
+                indent();
+                System.out.print("Successfully added: " + taskDesc + "\n\n");
+            } else if (input.startsWith("event")) {
+                // Create and store events given in list
+                String taskDesc = input.substring(6, input.indexOf("/at"));
+                String at = input.substring(input.indexOf("/at") + 4);
+                list.add(new Event(taskDesc, at));
+                indent();
+                System.out.print("Successfully added: " + taskDesc + "\n\n");
             } else {
                 // Returns blank line
                 System.out.println();
@@ -92,6 +104,7 @@ public class Duke {
 
     public static void printList(ArrayList<Task> list) {
         if (list.isEmpty()) {
+            // Asks user for tasks when printing empty list
             indent();
             System.out.println("Empty list, pls add tasks to list first");
             return;
@@ -104,6 +117,8 @@ public class Duke {
             indent();
             System.out.println(listPos + ". " + list.get(i));
         }
+        indent();
+        System.out.println("You have " + list.size() + " task(s) in the list");
         System.out.println();
     }
 
