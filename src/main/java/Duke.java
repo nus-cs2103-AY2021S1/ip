@@ -32,48 +32,48 @@ public class Duke {
     private static Task generate(String cmd) throws InvalidCommandException {
         if (cmd.startsWith("todo")) {
             if (cmd.length() < 5) {
-                throw new EmptyTaskException("todo");
+                throw new InvalidCommandException("\u2639 OOPS!!! The description of a todo cannot be empty.");
             } else if (cmd.charAt(4) != ' ') {
-                throw new NoSpaceException("todo", cmd.substring(4));
+                throw new InvalidCommandException("Do you mean 'todo " + cmd.substring(4) + "'");
             } else if (cmd.length() < 6) {
-                throw new EmptyTaskException("todo");
+                throw new InvalidCommandException("\u2639 OOPS!!! The description of a todo cannot be empty.");
             }
             return new ToDo(cmd.substring(5));
         } else if (cmd.startsWith("deadline")) {
             if (cmd.length() < 9) {
-                throw new EmptyTaskException("deadline");
+                throw new InvalidCommandException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
             } else if (cmd.charAt(8) != ' ') {
-                throw new NoSpaceException("deadline", cmd.substring(8));
+                throw new InvalidCommandException("Do you mean 'deadline " + cmd.substring(8) + "'");
             } else if (cmd.length() < 10) {
-                throw new EmptyTaskException("deadline");
+                throw new InvalidCommandException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
             }
             String description = cmd.substring(9);
             int s = description.indexOf("/by");
             if (s == -1) {
-                throw new NoTimeException("deadline");
+                throw new InvalidCommandException("\u2639 OOPS!!! Time should be specified");
             }
             String time = description.substring(s + 4);
             if (time.length() < 1) {
-                throw new EmptyTimeException("deadline");
+                throw new InvalidCommandException("The time specification cannot be empty.");
             }
             description = description.substring(0, s - 1);
             return new Deadline(description, time);
         } else if (cmd.startsWith("event")) {
             if (cmd.length() < 6) {
-                throw new EmptyTaskException("event");
+                throw new InvalidCommandException("\u2639 OOPS!!! The description of a event cannot be empty.");
             } else if (cmd.charAt(5) != ' ') {
-                throw new NoSpaceException("event", cmd.substring(5));
+                throw new InvalidCommandException("Do you mean 'event " + cmd.substring(5) + "'");
             } else if (cmd.length() < 7) {
-                throw new EmptyTaskException("event");
+                throw new InvalidCommandException("\u2639 OOPS!!! The description of a event cannot be empty.");
             }
             String description = cmd.substring(6);
             int s = description.indexOf("/at");
             if (s == -1) {
-                throw new NoTimeException("event");
+                throw new InvalidCommandException("\u2639 OOPS!!! Time should be specified");
             }
             String time = description.substring(s + 4);
             if (time.length() < 1) {
-                throw new EmptyTimeException("event");
+                throw new InvalidCommandException("The time specification cannot be empty.");
             }
             description = description.substring(0, s - 1);
             return new Event(description, time);
