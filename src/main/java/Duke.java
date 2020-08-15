@@ -50,22 +50,22 @@ public class Duke {
                     tasks.showTasks();
                     break;
                 case "done":
-                    tasks.modifyTask("done", arr[1]);
+                    tasks.modifyTask(Tasks.Action.DONE, arr[1]);
                     break;
                 case "delete":
-                    tasks.modifyTask("delete", arr[1]);
+                    tasks.modifyTask(Tasks.Action.DELETE, arr[1]);
                     break;
                 case "help": 
                     getCommands();
                     break;
                 case "deadline":
-                    tasks.addTask("deadline", arr);
+                    tasks.addTask(Tasks.Type.DEADLINE, arr);
                     break;
                 case "event":
-                    tasks.addTask("event", arr);
+                    tasks.addTask(Tasks.Type.EVENT, arr);
                     break;
                 case "todo":
-                    tasks.addTask("todo", arr);
+                    tasks.addTask(Tasks.Type.TODO, arr);
                     break;
                 default:
                     DukeException e = new DukeException("I do not understand your command");

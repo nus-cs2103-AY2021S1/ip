@@ -5,8 +5,19 @@ import java.util.ArrayList;
 public class Tasks {
     private ArrayList<Task> tasks = new ArrayList<Task>();
     private Layout layout = new Layout();
+    
+    public enum Type {
+        TODO,
+        DEADLINE,
+        EVENT
+    };
+    
+    public enum Action {
+        DONE, 
+        DELETE
+    }
 
-    public void addTask(String type, String [] arr) {
+    public void addTask(Type type, String [] arr) {
         Task task;
         try {
             String date = getInfo(arr)[0];
@@ -16,14 +27,14 @@ public class Tasks {
             }
     
             switch(type) {
-                case "deadline":
+                case DEADLINE:
                     if (date.equals("")) {
                         throw new DukeException("Please specify a due date using /by");
                     } else {
                         task = new Deadline(description, date);
                     }
                     break;
-                case "event":
+                case EVENT:
                     if (date.equals("")) {
                         throw new DukeException("Please specify an event date using /at");
                     } else {
@@ -46,16 +57,19 @@ public class Tasks {
         layout.printTaskList(tasks);
     }
 
-    public void modifyTask(String type, String i) {
+    public void modifyTask(Action type, String i) {
         try {
             int index = Integer.parseInt(i);
             Task task = tasks.get(index - 1);
-            if (type.equals("done")) {
-                task.markDone();
-                layout.printMarkedDone(task);
-            } else { //action: delete
-                tasks.remove(index - 1);
-                layout.printDeleted(task, tasks.size());
+            switch (type) {
+                case DONE:
+                    task.markDone();
+                    layout.printMarkedDone(task);
+                    break;
+                case DELETE:
+                    tasks.remove(index - 1);
+                    layout.printDeleted(task, tasks.size());
+                    break;
             }
         } catch (IndexOutOfBoundsException e) {
             DukeException d = new DukeException("Task " + i + " cannot be found");
