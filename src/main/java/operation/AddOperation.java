@@ -1,8 +1,11 @@
 package operation;
 
+import task.Deadline;
 import task.Task;
 import task.TaskStorage;
-import task.TaskFactory;
+import task.Deadline;
+import task.Event;
+import task.Todo;
 
 public class AddOperation extends Operation {
     private TaskStorage taskStorage;
@@ -20,11 +23,11 @@ public class AddOperation extends Operation {
     private Task createTask() {
         switch(this.commands[0]) {
             case "deadline":
-                return TaskFactory.createDeadline(this.commands);
+                return Deadline.createDeadline(this.commands);
             case "event":
-                return TaskFactory.createEvent(this.commands);
+                return Event.createEvent(this.commands);
             default :
-                return TaskFactory.createToDo(this.commands);
+                return Todo.createTodo(this.commands);
         }
     }
 

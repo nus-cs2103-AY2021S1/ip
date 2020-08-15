@@ -1,10 +1,14 @@
 package task;
 
-public class ToDo extends Task {
+public class Todo extends Task {
     private static String TODO = "[T]";
 
-    ToDo(String task, boolean completed) {
+    Todo(String task, boolean completed) {
         super(task, completed);
+    }
+
+    public static Todo createTodo(String[] commands) {
+        return new Todo(commands[1], false);
     }
 
     @Override

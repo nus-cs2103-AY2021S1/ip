@@ -11,6 +11,10 @@ public class Event extends Task{
         this.time = time;
     }
 
+    public static Event createEvent(String[] commands) {
+        return new Event(commands[1], false, commands[2]);
+    }
+
     @Override
     public String toString() {
         String atTime = String.format("(at: %s)", this.time);

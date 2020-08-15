@@ -11,6 +11,10 @@ public class Deadline extends Task {
         this.datetime = datetime;
     }
 
+    public static Deadline createDeadline(String[] commands) {
+        return new Deadline(commands[1], false, commands[2]);
+    }
+
     @Override
     public String toString() {
         String byDatetime = String.format("(by: %s)", this.datetime);
