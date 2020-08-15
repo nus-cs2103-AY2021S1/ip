@@ -1,10 +1,13 @@
+/**
+ * Entrypoint for the Duke chatbot.
+ */
 public class Duke {
+    /**
+     * Starts the REPL environment.
+     *
+     * @param args The command line parameters (unused)
+     */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        Repl.run();
     }
 }
