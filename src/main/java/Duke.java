@@ -6,21 +6,32 @@ public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        greet();
+        acceptCommand(sc);
+    }
+
+    private static void greet() {
         String greeting = "Hello! I'm Duke \nWhat can I do for you?";
         System.out.println(formatResponse(greeting));
+    }
 
-        Scanner sc = new Scanner(System.in);
+    private static void acceptCommand(Scanner sc) {
         String userInput = sc.nextLine();
 
         while (!userInput.equals("bye")){
             if (userInput.equals("list")) {
                 System.out.println(formatResponse(listTasks()));
             } else if (userInput.matches("done \\d+")) {
-                String index = userInput.split(" ")[1];
-                Task task = tasks.get(Integer.valueOf(index) - 1);
-                task.completeTask();
-                System.out.println(formatResponse("Nice! I've marked this task as done:\n  "
-                        + task.toString()));
+                int index = Integer.parseInt(userInput.split(" ")[1]);
+                if (index > tasks.size()) {
+                    System.out.println(formatResponse("No such task!"));
+                } else {
+                    Task task = tasks.get(index-1);
+                    task.completeTask();
+                    System.out.println(formatResponse("Nice! I've marked this task as done:\n  "
+                            + task.toString()));
+                }
             } else {
                 Task task = new Task(userInput);
                 tasks.add(task);
@@ -49,5 +60,4 @@ public class Duke {
         }
         return result.toString();
     }
-
 }
