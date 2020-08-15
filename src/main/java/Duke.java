@@ -19,6 +19,10 @@ public class Duke {
 
     static final String TERMINATE_COMMAND = "bye";
     static final String LIST_COMMAND  = "list";
+    static final String DONE_COMMAND = "done";
+    static final String TODO_COMMAND = "todo";
+    static final String DEADLINE_COMMAND =  "deadline";
+    static final String EVENT_COMMAND = "event";
     static final String LINE = "    _____________________________________________________________________\n";
     static final String SINGLE_TAB = "  ";
     static final String DOUBLE_TAB = "      ";
@@ -33,13 +37,15 @@ public class Duke {
                 break;
             } else if (input.equals(LIST_COMMAND)) {
                 System.out.println(LINE + showList() + LINE);
-            } else if(input.contains("done")){
+            } else if(input.contains(DONE_COMMAND)){
                 doneOutput(input);
             }else {
                 add(input);
             }
         }
     }
+
+   
 
     private void doneOutput(String input) {
         int index = Integer.parseInt(input.split(" ")[1]);
@@ -51,6 +57,7 @@ public class Duke {
 
     private String showList() {
         StringBuilder sb = new StringBuilder();
+        System.out.println("Here are the tasks in your list: ");
         for(int i = 0 ; i < list.size() ; i++) {
             sb.append(DOUBLE_TAB + (i+1) + ". " + list.get(i) +"\n");
         }
