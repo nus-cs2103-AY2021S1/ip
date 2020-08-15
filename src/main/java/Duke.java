@@ -3,20 +3,19 @@ import java.util.Scanner;
 
 public class Duke {
     private static final String divider =
-            "\t_____________________________________________\n";
+            "\t---------------------------------------------------\n";
     private static final ArrayList<Task> tasks = new ArrayList<>();
 
     private static void greetings() {
-        String logo = "\n"
-                + "\t███████╗ ██████╗  ██████╗██╗   ██╗███████╗   \n"
-                + "\t██╔════╝██╔═══██╗██╔════╝██║   ██║██╔════╝   \n"
-                + "\t█████╗  ██║   ██║██║     ██║   ██║███████╗   \n"
-                + "\t██╔══╝  ██║   ██║██║     ██║   ██║╚════██║   \n"
-                + "\t██║     ╚██████╔╝╚██████╗╚██████╔╝███████║██╗\n"
-                + "\t╚═╝      ╚═════╝  ╚═════╝ ╚═════╝ ╚══════╝╚═╝\n";
-        System.out.println("Welcome to " + logo);
+        String logo =
+                "\t __\n" +
+                "\t/ _|   ___    ___  _   _  ___\n" +
+                "\t| |_  / _ \\  / __|| | | |/ __|\n" +
+                "\t|  _|| (_) || (__ | |_| |\\__ \\ _\n" +
+                "\t|_|   \\___/  \\___| \\__,_||___/(_)\n";
+        System.out.println("Welcome to\n" + logo);
         String greetings = divider
-                + "\t(｡･ω･)ﾉﾞ I am Pocus, your personal assistant!"
+                + "\t>~< I am Pocus, your personal assistant!"
                 + "\n\tBefore we start, may I know your name?\n"
                 + divider;
         System.out.print(greetings);
@@ -92,7 +91,7 @@ public class Duke {
 
     private static void exitFocus() {
         String exit = divider
-                + "\tヾ(｡･ω･｡) Hopefully I helped you today. Bye!\n"
+                + "\tHopefully I have helped you today. Bye! >~<\n"
                 + divider;
         System.out.print(exit);
     }

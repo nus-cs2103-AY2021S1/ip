@@ -1,0 +1,7 @@
+sample name
+todo borrow book
+deadline return book /by Sunday
+done 2
+event project meeting /at Mon 2-4pm
+list
+bye
