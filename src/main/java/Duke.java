@@ -8,6 +8,8 @@ public class Duke {
 
     /**
      * Executes the "Jarvis" bot to run.
+     * The bot has a reader to parse user input
+     * and an agent to handle the command parsed from user input
      *
      * @param args main() function arguments.
      */

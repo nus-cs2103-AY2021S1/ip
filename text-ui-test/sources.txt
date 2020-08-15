@@ -6,9 +6,11 @@ C:\Users\22333\Desktop\CS2103\iP\src\main\java\Task.java
 C:\Users\22333\Desktop\CS2103\iP\src\main\java\TaskList.java
 C:\Users\22333\Desktop\CS2103\iP\src\main\java\command\AddCommand.java
 C:\Users\22333\Desktop\CS2103\iP\src\main\java\command\Command.java
+C:\Users\22333\Desktop\CS2103\iP\src\main\java\command\DoneCommand.java
 C:\Users\22333\Desktop\CS2103\iP\src\main\java\command\ExitCommand.java
 C:\Users\22333\Desktop\CS2103\iP\src\main\java\command\ListCommand.java
 C:\Users\22333\Desktop\CS2103\iP\src\main\java\command\AddCommand.java
 C:\Users\22333\Desktop\CS2103\iP\src\main\java\command\Command.java
+C:\Users\22333\Desktop\CS2103\iP\src\main\java\command\DoneCommand.java
 C:\Users\22333\Desktop\CS2103\iP\src\main\java\command\ExitCommand.java
 C:\Users\22333\Desktop\CS2103\iP\src\main\java\command\ListCommand.java
