@@ -8,7 +8,14 @@ public class Duke {
     public static void main(String[] args) {
         System.out.println(formatReply("Hello! I'm Duke\nWhat can I do for you?"));
         Scanner input = new Scanner(System.in);
-        String command = input.nextLine();
-        System.out.println(formatReply(command));
+        while (true) {
+            String command = input.nextLine();
+            if (command.equals("bye")) {
+                break;
+            } else {
+                System.out.println(formatReply(command));
+            }
+        }
+        System.out.println(formatReply("Bye. Hope to see you again soon!"));
     }
 }
