@@ -9,29 +9,19 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         String SPACES = "____________________________________________________________";
         System.out.println("Hello from\n" + logo);
-        welcomeMessage(SPACES);
+        Bot bot = new Bot(SPACES);
+        bot.welcomeMessage();
 
-
-    }
-
-    public static void botTemplate(String content, String delim) {
-        System.out.println(delim);
-        System.out.println(content);
-        System.out.println(delim);
-        System.out.println();
-    }
-
-    public static void welcomeMessage(String delim) {
-        botTemplate("Hello! I'm Duke\n What can I do for you? ", delim);
         Scanner sc = new Scanner(System.in);
-
         while(sc.hasNextLine()) {
             String next = sc.nextLine();
             if (next.equals("bye")) {
-                botTemplate("Bye! Message me anytime!",delim);
+               bot.goodByeMessage();
                 break;
+            } else if (next.equals("list")) {
+                bot.displayActivities();
             } else {
-                botTemplate(next,delim);
+                bot.addActivity(next);
             }
         }
     }
