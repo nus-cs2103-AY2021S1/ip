@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static final String horizontalLine = "\t==================================================";
+    private static final String horizontalLine = "\t================================================================";
     private static int n = -1;
 
     private static String output(String message) {
@@ -21,7 +21,7 @@ public class Duke {
         }
     }
 
-    private static Task generate(String cmd) {
+    private static Task generate(String cmd) throws InvalidCommandException {
         if (cmd.startsWith("todo ")) {
             return new ToDo(cmd.substring(5));
         } else if (cmd.startsWith("deadline ")) {
@@ -43,7 +43,7 @@ public class Duke {
             description = description.substring(0, s - 1);
             return new Event(description, time);
         } else {
-            return null;
+            throw new InvalidCommandException();
         }
     }
 
@@ -69,14 +69,19 @@ public class Duke {
                     System.out.println(output("The task does not exist!"));
                 }
             } else {
-                Task task = generate(input);
-                if (task == null) {
-                    System.out.println(output("Your input task is invalid!"));
-                } else {
+                try {
+                    Task task = generate(input);
                     list[count++] = task;
                     System.out.println(output("Got it. I've added this task:\n\t    " + task +
                             "\n\t  Now you have " + count + " tasks in the list."));
+                } catch (Exception e) {
+                    System.out.println(output(e.getMessage()));
                 }
+
+                /*if (task == null) {
+                    System.out.println(output("Your input task is invalid!"));
+                }
+                 */
             }
             input = sc.nextLine();
         }

@@ -1,5 +1,5 @@
 public class InvalidCommandException extends Exception {
-    public InvalidCommandException(String msg) {
+    public InvalidCommandException() {
         super("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 }
