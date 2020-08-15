@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -21,13 +22,21 @@ public class Duke {
 
         boolean stop = false;
         Scanner sc = new Scanner(System.in);
+        List<String> list = new ArrayList<>();
         while (!stop) {
             String input = sc.nextLine();
+            BotClass bot = new BotClass();
             if (input.equals("bye")) {
-                stop = true;
-                say("Bye. Hope to see you again soon!");
+                new ByeFunction().execute("", bot, list);
+            } else if (input.equals("list")) {
+                new ListFunction().execute("", bot, list);
             } else {
-                say(input);
+                new AddFunction().execute(input, bot, list);
+            }
+
+            say(bot.getLines());
+            if (bot.stopped()) {
+                stop = true;
             }
         }
         sc.close();
