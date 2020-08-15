@@ -7,6 +7,8 @@ import java.util.List;
 public class TaskManager {
     /** Message prefix to be displayed upon adding a {@code Task}. */
     private static final String ADD_TASK_MESSAGE_PREFIX = "added: ";
+    /** Message to be displayed upon marking a {@code Task} as done. */
+    private static final String MARK_TASK_DONE_MESSAGE = "Nice! I've marked this task as done:\n  ";
 
     /** List of {@code Task} objects. */
     private final List<Task> tasks = new ArrayList<>();
@@ -23,6 +25,18 @@ public class TaskManager {
     public String addTask(String taskName) {
         tasks.add(new Task(taskName));
         return ADD_TASK_MESSAGE_PREFIX + taskName;
+    }
+
+    /**
+     * Mark a {@code Task} as done.
+     *
+     * @param listIndex the index of the {@code Task} in the {@code TaskManager} list.
+     * @return a string representation of the action of marking a task as done.
+     */
+    public String markAsDone(int listIndex) {
+        Task updatedTask = tasks.get(listIndex).markAsDone();
+        tasks.set(listIndex, updatedTask);
+        return MARK_TASK_DONE_MESSAGE + updatedTask;
     }
 
     /**
