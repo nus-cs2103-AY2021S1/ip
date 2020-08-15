@@ -17,6 +17,7 @@ public class Duke {
         while (!toEcho.equals("bye")) {
             System.out.println("--------------------------------------");
             if (toEcho.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < storage.size(); i++) {
                     int number = i + 1;
                     System.out.println(number + ". " + storage.get(i));
