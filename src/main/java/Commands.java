@@ -16,12 +16,18 @@ public class Commands {
             switch (inputs) {
             case "list":
                 this.lst();
+                inputs = scanner.nextLine().toLowerCase();
+                break;
+            case "blah":
+                this.blah();
+                inputs = scanner.nextLine().toLowerCase();
+                break;
             case "bye":
+                System.out.println("~ \n I’ll Be Back \n~ ");
                 shouldBreak = !shouldBreak;
+                break;
             }
-            inputs = scanner.nextLine().toLowerCase();
         }
-
     }
 
     public static void greet() {
@@ -30,5 +36,9 @@ public class Commands {
 
     public void lst() {
         System.out.println("~ \n list \n~");
+    }
+
+    public void blah() {
+        System.out.println("~ \n blah \n~");
     }
 }
