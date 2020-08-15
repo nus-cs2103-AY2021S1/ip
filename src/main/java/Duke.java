@@ -1,4 +1,5 @@
-import java.util.Scanner; // Import the scanner class
+import java.util.Scanner;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Duke {
@@ -12,6 +13,12 @@ public class Duke {
                         " | |  | | | __| '__/ _ \\| '_ \\ \n" +
                         " | |__| | | |_| | | (_) | | | |\n" +
                         "  \\____/|_|\\__|_|  \\___/|_| |_|";
+
+    //Get the pattern for the regex for parsing the command
+    private Pattern pattern = Pattern.compile("(^\\s?\\w+\\b) ?(.*)?$");
+
+    //Regex for parsing the date
+    private Pattern date_match = Pattern.compile("^(.*) (/by|/at) (.*)$");
 
     public Duke(){
 
@@ -54,14 +61,38 @@ public class Duke {
         return input;
     }
 
-    private int checkInput(String input) {
+    private void helpMessage(){
+        System.out.println("Heh I guess I could help an insect like you:\n" +
+                "- todo (name)               : Adds a todo to the list\n" +
+                "- event (name) /at (date)   : Adds an event at date\n" +
+                "- deadline (name) /by (date): Adds a deadline which expires by date"
+                );
+    }
+
+    private boolean checkInput(String input){
+        //Checks if the user wants to quit
+
+        //Use regex to get the grp
+        Matcher inputs = this.pattern.matcher(input);
+
+        //Find the items in the group
+        if(!inputs.find()){
+            errorMessage(input);
+            return false;
+        }
+
+        //Get the command
+        String command = inputs.group(1);
+
+        //Get the other arguments
+        String args = inputs.group(2);
 
         //Switch case to process the commands
-        switch (input) {
+        switch (command) {
 
             //If the user keys in bye
             case "bye": {
-                return 0;
+                return true;
             }
 
             //If the user keys in list
@@ -72,60 +103,79 @@ public class Duke {
 
                 //Display the content
                 this.taskList.displayContent();
-
-                //Break out of the switch
-                return 2;
+                break;
             }
 
+            //Check if the user is asking for help
+            case "help":{
 
+                //Print the help message
+                helpMessage();
+                break;
+            }
             //Otherwise it will be a task to be added
             default: {
+                try{
+                    //Get the state
+                    States val = States.valueOf(command.toUpperCase());
 
-                //Check if the user is marking a task as done
-                if (input.indexOf("done") == 0){
+                    //Initialise the task
+                    Task tsk = null;
 
-                    //Get the rest of string after done
-                    String substring = input.substring(5);
+                    //Switch case for the enums
+                    switch (val) {
 
-                    //Check mark the task as complete
-                    if (Pattern.matches("[0-9]+", substring)){
+                        //If it is the deadline enum
+                        case DEADLINE:
 
-                        //Get the index of the entry
-                        int number = Integer.valueOf(substring) - 1;
+                        //If it is the Event enum
+                        case EVENT:
 
-                        //Perform the task
-                        boolean completed = this.taskList.markDone(number);
+                            //Create the matcher
+                            Matcher m = this.date_match.matcher(args);
 
-                        //Check if it is completed successfully
-                        if (completed){
+                            //Check for matches
+                            m.find();
 
-                            //Print the completed message
-                            System.out.println(String.format("Finally you have done something:\n  [%s] %s", this.taskList.get(number).getStatusIcon(), this.taskList.get(number).getMessage()));
+                            //Get the date and the name
+                            String name = m.group(1);
+                            String date = m.group(3);
 
-                        }else{
+                            //Pass the 2 arguments into the function
+                            tsk = val.createTask(name, date);
+                            break;
 
-                            //Otherwise print the error message
-                            System.out.println(String.format("You can't even key in a correct number!\nClearly %d is not valid when u have %d tasks", number, this.taskList.size()));
-                        }
+                        //Otherwise
+                        case TODO:
+
+                            //Pass the first item
+                            tsk = val.createTask(args);
+                            break;
                     }
 
-
-                    //Break out of the switch
-                    return 4;
-
-                }else{
-
                     //Add the task to the task list
-                    this.taskList.add(new Task(input));
+                    this.taskList.add(tsk);
 
-                    //Print the added message
-                    System.out.println(String.format("Can't you keep track of '%s' yourself?", input));
+                    //Print out the message
+                    System.out.println(String.format("Can't you keep track of '%s' yourself?\nNow you have %d burdens", tsk, this.taskList.size()));
 
-                    //Break out of the switch
-                    return 3;
+                //If there is an error
+                }catch(Exception e) {
+
+                    //Print the error message
+                    this.errorMessage(input);
                 }
             }
         }
+
+        //Do not quit
+        return false;
+    }
+
+    public void errorMessage(String args){
+
+        //Prints the error message
+        System.out.println(String.format("Heh you cant even key in a correct command.\nClearly '%s' is not valid", args));
     }
 
     public void mainLoop(){
@@ -133,26 +183,23 @@ public class Duke {
         //Print the intro
         this.printIntro();
 
-        //Get input
-        String input = this.getInput();
-
         // While the user input is not bye
-        while(true){
+        do{
+            // Get the next line as input
+            String input = this.getInput();
 
             //Print the separator
             System.out.println("____________________________________________________________");
 
             //If it is a terminating condition
-            if (this.checkInput(input) <= 0){
+            if (this.checkInput(input.trim())){
                 break;
             }
 
             //Print the separator
             System.out.println("____________________________________________________________");
 
-            // Get the next line as input
-            input = this.getInput();
-        }
+        }while(true);
 
         //Print the ending before the bot exits
         this.printEnd();
