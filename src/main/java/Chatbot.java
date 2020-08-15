@@ -1,6 +1,6 @@
 public class Chatbot {
     private int lengthOfLine = 45;
-    String[] tasks = new String[100];
+    Task[] tasks = new Task[100];
     int numOfTasks = 0;
 
     public String getHorizontalLine() {
@@ -9,5 +9,10 @@ public class Chatbot {
             line = line + "-";
         }
         return line;
+    }
+
+    public String[] parseStringBySpace(String str) {
+        String[] res = str.split(" ");
+        return res;
     }
 }
