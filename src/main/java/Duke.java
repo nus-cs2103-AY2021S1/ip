@@ -4,6 +4,8 @@ import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 
 public class Duke {
+    private static ArrayList<Task> list = new ArrayList<>();
+
     static class Task {
         private final String text;
         private boolean done = false;
@@ -29,9 +31,21 @@ public class Duke {
         System.out.println(s);
         System.out.println("______________________________");
     }
+
+    private static void printList() {
+        System.out.println("______________________________");
+        if (list.size() > 0) {
+            for (int i = 1; i <= list.size(); i++) {
+                System.out.println(i + "." + list.get(i - 1));
+            }
+        } else {
+            System.out.println("List is empty.");
+        }
+        System.out.println("______________________________");
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> list = new ArrayList<>();
         String logo =
                 "█████████████████████████████████████████████████████████████\n" +
                 "█░░░░░░░░░░░░░░███░░░░░░░░░░░░░░░░░░░░░░░░░█░░░░░░░░░░░░░░███\n" +
@@ -52,15 +66,7 @@ public class Duke {
         while (!input.equals("bye")) {
             if (input.equals("list")) {
                 System.out.println("Here is your list:");
-                System.out.println("______________________________");
-                if (list.size() > 0) {
-                    for (int i = 1; i <= list.size(); i++) {
-                        System.out.println(i + "." + list.get(i - 1));
-                    }
-                } else {
-                    System.out.println("List is empty.");
-                }
-                System.out.println("______________________________");
+                printList();
             } else if (input.startsWith("done")) {
                 try {
                     String number = input.substring(5);
