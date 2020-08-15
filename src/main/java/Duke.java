@@ -70,18 +70,37 @@ public class Duke {
                 break;
             case ("done"):
                 int taskNumber = Integer.parseInt(inputBreakdown[1]);
-                markTaskAsDone(taskNumber);
+                try {
+                    markTaskAsDone(taskNumber);
+                } catch (Exception e) {
+
+                }
                 break;
             case ("todo"):
                 Todo todo = new Todo(inputBreakdown[1]);
                 addTask(todo);
                 break;
             case ("deadline"):
-                String[] remainingInput = inputBreakdown[1].split(" /by ", 2);
-                String description = remainingInput[0];
-                String by = remainingInput[1];
-                Deadline deadline = new Deadline(description, by);
-                addTask(deadline);
+                try {
+                    String[] remainingInput = inputBreakdown[1].split(" /by ", 2);
+                    String description = remainingInput[0];
+                    String by = remainingInput[1];
+                    Deadline deadline = new Deadline(description, by);
+                    addTask(deadline);
+                } catch (Exception e) {
+
+                }
+                break;
+            case ("event"):
+                try {
+                    String[] remainingInput = inputBreakdown[1].split(" /at ", 2);
+                    String description = remainingInput[0];
+                    String at = remainingInput[1];
+                    Event event = new Event(description, at);
+                    addTask(event);
+                } catch (Exception e) {
+
+                }
                 break;
             case ("bye"):
                 exit();
