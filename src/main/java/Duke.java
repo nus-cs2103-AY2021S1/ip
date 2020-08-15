@@ -22,14 +22,48 @@ public class Duke {
             String command = sc.nextLine();
             if (command.equals("list")) {
                 System.out.println(divider);
-                System.out.println("      To do:");
+                System.out.println("      Tasks:");
                 for (int i = 1; i < listIndex; i++) {
                     System.out.println("      " + i + ". " + list[i]);
                 }
                 System.out.println(divider);
+
+            } else if (command.contains("deadline")) {
+                int indexOfDate = command.indexOf("/");
+                String taskDescription = command.substring(9, indexOfDate - 1);
+                String by = command.substring(indexOfDate + 3);
+                Deadline deadline = new Deadline(taskDescription, by);
+                list[listIndex] = deadline;
+                listIndex++;
+                System.out.println(divider);
+                System.out.println("      Mr Camel has added: " + deadline);
+                System.out.println("      Number of tasks: " + (listIndex - 1));
+                System.out.println(divider);
+
+            } else if (command.contains("todo")) {
+                String taskDescription = command.substring(5);
+                Todo todo = new Todo(taskDescription);
+                list[listIndex] = todo;
+                listIndex++;
+                System.out.println(divider);
+                System.out.println("      Mr Camel has added: " + todo);
+                System.out.println("      Number of tasks: " + (listIndex - 1));
+                System.out.println(divider);
+
+            } else if (command.contains("event")) {
+                int indexOfDate = command.indexOf("/");
+                String taskDescription = command.substring(6, indexOfDate - 1);
+                String at = command.substring(indexOfDate + 3);
+                Event event = new Event(taskDescription, at);
+                list[listIndex] = event;
+                listIndex++;
+                System.out.println(divider);
+                System.out.println("      Mr Camel has added: " + event);
+                System.out.println("      Number of tasks: " + (listIndex - 1));
+                System.out.println(divider);
+
             } else if (command.contains("done")) {
-                String[] temp = command.split(" ");
-                int indexDone = Integer.parseInt(temp[1]);
+                int indexDone = Integer.parseInt(command.substring(5));
                 list[indexDone].markAsDone();
                 System.out.println(divider);
                 System.out.println("      Mr Camel will mark this task as done:\n" + "        " + list[indexDone]);
