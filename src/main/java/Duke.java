@@ -1,6 +1,7 @@
 package main.java;
 
 import javax.print.DocFlavor;
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,10 @@ public class Duke {
                 bye();
                 break;
             } else if (input.equals(LIST_COMMAND)) {
-                System.out.println(LINE + showList() + LINE);
+                System.out.print(LINE);
+                System.out.println(DOUBLE_TAB + "Here are the tasks in your list: ");
+                System.out.print(showList());
+                System.out.print(LINE);
             } else if(input.contains(DONE_COMMAND)){
                 doneOutput(input);
             }else {
@@ -45,7 +49,7 @@ public class Duke {
         }
     }
 
-   
+
 
     private void doneOutput(String input) {
         int index = Integer.parseInt(input.split(" ")[1]);
@@ -57,7 +61,6 @@ public class Duke {
 
     private String showList() {
         StringBuilder sb = new StringBuilder();
-        System.out.println("Here are the tasks in your list: ");
         for(int i = 0 ; i < list.size() ; i++) {
             sb.append(DOUBLE_TAB + (i+1) + ". " + list.get(i) +"\n");
         }
