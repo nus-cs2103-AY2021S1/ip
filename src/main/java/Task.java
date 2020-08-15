@@ -1,4 +1,4 @@
-public class Item {
+public class Task {
 
     private static final String DONE = "✓";
     private static final String NOT_DONE = "✗";
@@ -7,7 +7,7 @@ public class Item {
     private boolean isDone;
 
 
-    public Item(String itemString) {
+    public Task(String itemString) {
         this.itemString = itemString;
         this.isDone = false;
     }
