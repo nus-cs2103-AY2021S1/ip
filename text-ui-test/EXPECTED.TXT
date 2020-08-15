@@ -15,42 +15,42 @@
 	──────────────────────────────────────────────────
 	──────────────────────────────────────────────────
 	Got it. I've added this task:
-		[D][✘] assignment 30% ( by: tomorrow 1159 )
+		[D][✘] assignment 30% (by: tomorrow 1159)
 	Now you have 2 tasks in the list.
 	──────────────────────────────────────────────────
 	──────────────────────────────────────────────────
 	Here are the tasks in your list: 
 	1.[T][✘] borrow book 
-	2.[D][✘] assignment 30% ( by: tomorrow 1159 )
+	2.[D][✘] assignment 30% (by: tomorrow 1159)
 	──────────────────────────────────────────────────
 	──────────────────────────────────────────────────
 	Got it. I've added this task:
-		[E][✘] wedding ( at: fullerton sunday 4pm )
+		[E][✘] wedding (at: fullerton sunday 4pm)
 	Now you have 3 tasks in the list.
 	──────────────────────────────────────────────────
 	──────────────────────────────────────────────────
 	Here are the tasks in your list: 
 	1.[T][✘] borrow book 
-	2.[D][✘] assignment 30% ( by: tomorrow 1159 )
-	3.[E][✘] wedding ( at: fullerton sunday 4pm )
+	2.[D][✘] assignment 30% (by: tomorrow 1159)
+	3.[E][✘] wedding (at: fullerton sunday 4pm)
 	──────────────────────────────────────────────────
 	──────────────────────────────────────────────────
 	Nice! I've marked this task as done: 
-		[D][✓] assignment 30% ( by: tomorrow 1159 )
+		[D][✓] assignment 30% (by: tomorrow 1159)
 	──────────────────────────────────────────────────
 	──────────────────────────────────────────────────
 	Here are the tasks in your list: 
 	1.[T][✘] borrow book 
-	2.[D][✓] assignment 30% ( by: tomorrow 1159 )
-	3.[E][✘] wedding ( at: fullerton sunday 4pm )
+	2.[D][✓] assignment 30% (by: tomorrow 1159)
+	3.[E][✘] wedding (at: fullerton sunday 4pm)
 	──────────────────────────────────────────────────
 	──────────────────────────────────────────────────
 	Nice! I've marked this task as done: 
-		[E][✓] wedding ( at: fullerton sunday 4pm )
+		[E][✓] wedding (at: fullerton sunday 4pm)
 	──────────────────────────────────────────────────
 	──────────────────────────────────────────────────
 	Here are the tasks in your list: 
 	1.[T][✘] borrow book 
-	2.[D][✓] assignment 30% ( by: tomorrow 1159 )
-	3.[E][✓] wedding ( at: fullerton sunday 4pm )
+	2.[D][✓] assignment 30% (by: tomorrow 1159)
+	3.[E][✓] wedding (at: fullerton sunday 4pm)
 	──────────────────────────────────────────────────
