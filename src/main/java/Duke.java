@@ -9,6 +9,7 @@ public class Duke {
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        ArrayList<String> list = new ArrayList<>();
         String logo =
                 "█████████████████████████████████████████████████████████████\n" +
                 "█░░░░░░░░░░░░░░███░░░░░░░░░░░░░░░░░░░░░░░░░█░░░░░░░░░░░░░░███\n" +
@@ -27,7 +28,17 @@ public class Duke {
         say(welcome);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
-            say(input);
+            if (input.equals("list")) {
+                System.out.println("______________________________");
+                for (int i = 1; i <= list.size(); i++) {
+                    System.out.println(i + ". " + list.get(i - 1));
+                }
+                System.out.println("______________________________");
+            } else {
+                list.add(input);
+                String text = "added: " + input;
+                say(text);
+            }
             input = sc.nextLine();
         }
         say("Goodbye!");
