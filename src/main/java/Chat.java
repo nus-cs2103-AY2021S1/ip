@@ -10,6 +10,15 @@ public class Chat {
                 "\t==================================\n";
     }
 
+    // Creates a chat box when item is added
+    public static String addItemChatBox(String chatContent, int noOfItems){
+        return "\t== King says =====================\n" +
+                "\t Got it. I've added this task:\n" +
+                "\t\t" + chatContent + "\n" +
+                "\t Now you have " + noOfItems + " tasks in the list.\n" +
+                "\t==================================\n";
+    }
+
     // Returns a printable chatBox numbering each item in given a list
     public static <T> String numberedListChatBox(List<T> chatContent){
         StringBuilder formatted = new StringBuilder();

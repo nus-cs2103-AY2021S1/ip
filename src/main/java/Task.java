@@ -1,8 +1,8 @@
 package main.java;
 
 public class Task {
-    private TaskStates state;
-    private String task;
+    protected TaskStates state;
+    protected String task;
 
     Task(String task){
         state = TaskStates.UNDONE;
