@@ -4,8 +4,8 @@ public abstract class Task {
     protected final String task;
     protected boolean completed;
 
-    protected static char TICK = 10003;
-    protected static char CROSS = 10007;
+    protected static String TICK = "Y";
+    protected static String CROSS = "N";
 
     Task(String task, boolean completed) {
         this.task = task;
@@ -16,9 +16,9 @@ public abstract class Task {
 
     public String toStringSuffix() {
         if (this.completed) {
-            return String.format("[%c] %s", TICK, this.task);
+            return String.format("[%s] %s", TICK, this.task);
         } else {
-            return String.format("[%c] %s", CROSS, this.task);
+            return String.format("[%s] %s", CROSS, this.task);
         }
     }
 

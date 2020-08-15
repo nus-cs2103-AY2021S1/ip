@@ -32,7 +32,7 @@ public class AddOperation extends Operation {
     public void execute() {
         Task newTask = createTask();
         this.taskStorage.addTask(newTask);
-        System.out.println("I have added the task: \n" + newTask);
+        System.out.println("I have added the task:\n" + newTask);
         String capacity = String.format("You now have %d tasks.", this.taskStorage.getCurrCapacity());
         System.out.println(capacity);
     }

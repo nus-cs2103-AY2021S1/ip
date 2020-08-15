@@ -20,7 +20,7 @@ public class DoneOperation extends Operation {
     public void execute() {
         int index = Integer.parseInt(this.commands[1]);
         this.taskStorage.completeTask(index);
-        System.out.println("You have completed this task: ");
+        System.out.println("You have completed this task:");
         this.taskStorage.printTask(index);
     }
 }
