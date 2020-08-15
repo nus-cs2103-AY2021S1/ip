@@ -36,11 +36,17 @@ public class Duke {
             throw new DukeException("Something went wrong when parsing your inputs!");
         }
 
-        String command = commandInputs[0];
+        Command command;
+        try {
+            command = Command.valueOf(commandInputs[0].toUpperCase());
+        } catch (IllegalArgumentException e) {
+            command = Command.UNKNOWN;
+        }
+
         String commandDetails;
 
         switch (command) {
-            case "list":
+            case LIST:
                 StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
 
                 for (int i = 0; i < Duke.tasks.size(); i++) {
@@ -50,7 +56,7 @@ public class Duke {
                 Duke.speak(sb.toString().trim());
                 break;
 
-            case "done":
+            case DONE:
                 if (commandInputs.length < 2) {
                     throw new DukeException("Attempted to mark a task as done, but no task was specified!");
                 }
@@ -70,7 +76,7 @@ public class Duke {
 
                 break;
 
-            case "delete":
+            case DELETE:
                 if (commandInputs.length < 2) {
                     throw new DukeException("Attempted to delete a task, but no task was specified!");
                 }
@@ -89,9 +95,9 @@ public class Duke {
 
                 break;
 
-            case "todo":
-            case "deadline":
-            case "event":
+            case TODO:
+            case DEADLINE:
+            case EVENT:
                 Task task;
 
                 if (commandInputs.length < 2) {
@@ -100,9 +106,9 @@ public class Duke {
 
                 commandDetails = commandInputs[1];
 
-                if (command.equals("todo")) {
+                if (command == Command.TODO) {
                     task = new Todo(commandDetails);
-                } else if (command.equals("deadline")) {
+                } else if (command == Command.DEADLINE) {
                     String[] deadlineDetails = commandDetails.split("/by", 2);
 
                     if (deadlineDetails.length < 2) {
@@ -133,7 +139,7 @@ public class Duke {
                         task, tasks.size()));
                 break;
 
-            default:
+            case UNKNOWN:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
     }
