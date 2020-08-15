@@ -9,14 +9,17 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    static String line = "_____________________________________________________________________\n";
+    static final String TERMINATE_COMMAND = "bye";
+    static final String LINE = "    _____________________________________________________________________\n";
+    static final String SINGLE_TAB = "  ";
+    static final String DOUBLE_TAB = "      ";
 
     public void mainProgram() {
         Scanner sc = new Scanner(System.in);
-        System.out.println(line + "Hello! I'm Duke.\nWhat can I do for you?\n" + line);
+        greet();
         while (sc.hasNext()) {
             String input = sc.nextLine();
-            if (input.equals("bye") || input.equals("Bye")) {
+            if (input.equals(TERMINATE_COMMAND)) {
                 bye();
                 break;
             } else {
@@ -25,12 +28,16 @@ public class Duke {
         }
     }
 
+    private void greet() {
+        System.out.println(LINE + DOUBLE_TAB + "Hello! I'm Duke.\n" + DOUBLE_TAB+ "What can I do for you?\n" + LINE);
+    }
+
     private void echo(String input) {
-        System.out.println(line + input + "\n" + line);
+        System.out.println(LINE + DOUBLE_TAB + input + "\n" + LINE);
     }
 
     public void bye() {
-        System.out.println(line + "Bye.Hope to see you again soon!\n" + line);
+        System.out.println(LINE + DOUBLE_TAB +"Bye.Hope to see you again soon!\n" + LINE);
     }
     public static void main(String[] args) {
         Duke duke = new Duke();
