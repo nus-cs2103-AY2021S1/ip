@@ -1,4 +1,5 @@
 public class DukeOut {
+
     private static final String DIVIDER = "    ______________________________________________";
 
     public static void print(String message) {

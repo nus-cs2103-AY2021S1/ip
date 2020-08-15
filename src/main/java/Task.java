@@ -12,6 +12,7 @@ public class Task {
         this.isDone = true;
     }
 
+    @Override
     public String toString() {
         return "[" + (this.isDone ? "\u2713" : "\u2718") + "] " + this.name;
     }

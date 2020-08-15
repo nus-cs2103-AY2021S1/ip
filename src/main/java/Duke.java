@@ -18,15 +18,17 @@ public class Duke {
     }
 
     private static void handleResponse(String response) {
-        String[] parsedResponse = response.split(" ");
-        switch (parsedResponse[0]) {
+        String[] parsedResponse = response.split(" ", 2);
+        String command = parsedResponse[0];
+        String rest = parsedResponse.length == 1 ? null : parsedResponse[1];
+        switch (command) {
             case "bye":
                 exit();
             case "list":
                 showList();
                 break;
             case "done":
-                int taskDone = Integer.parseInt(parsedResponse[1]) - 1;
+                int taskDone = Integer.parseInt(rest) - 1;
                 if (taskDone < 0 || taskDone >= taskIndex) {
                     DukeOut.print("No such task!");
                     break;
@@ -34,9 +36,23 @@ public class Duke {
                 markTaskDone(taskDone);
                 DukeOut.print("Nice! I've marked this task as done:\n      " + taskList[taskDone]);
                 break;
+            case "todo":
+                addToList(new Todo(rest));
+                break;
+            case "deadline":
+                String[] deadlineParsed = rest.split("/");
+                String deadlineName = deadlineParsed[0].trim();
+                String by = deadlineParsed[1].split(" ", 2)[1];
+                addToList(new Deadline(deadlineName, by));
+                break;
+            case "event":
+                String[] eventParsed = rest.split("/");
+                String eventName = eventParsed[0].trim();
+                String at = eventParsed[1].split(" ", 2)[1];
+                addToList(new Event(eventName, at));
+                break;
             default:
-                addToList(response);
-                DukeOut.print("added: " + response);
+                DukeOut.print("Unrecognized command!");
         }
     }
 
@@ -51,9 +67,10 @@ public class Duke {
         System.exit(0);
     }
 
-    private static void addToList(String task) {
-        taskList[taskIndex] = new Task(task);
+    private static void addToList(Task task) {
+        taskList[taskIndex] = task;
         ++taskIndex;
+        DukeOut.print("Got it. I've added this task:\n      " + task + "\n    " + "Now you have " + taskIndex + " task(s) in the list.");
     }
 
     private static void showList() {
