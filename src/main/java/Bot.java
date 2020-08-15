@@ -45,9 +45,13 @@ public class Bot {
         System.out.println(this.delim);
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
-        System.out.println(String.format("You have %s tasks currently, work on them soon!", activityList.size()));
+        System.out.println(replyTaskNum());
         System.out.println(this.delim);
 
+    }
+
+    public String replyTaskNum() {
+       return String.format("You have %s tasks currently, work on them soon!", activityList.size());
     }
     public void displayActivities() {
         System.out.println(this.delim);
@@ -62,5 +66,11 @@ public class Bot {
         Task task = activityList.get(taskNum - 1);
         task.MarkAsDone();
         reply("Nice! I've marked this task as done:\n " + task);
+    }
+
+    public void deleteTask(int taskNum) {
+        Task task = activityList.get(taskNum - 1);
+        this.activityList.remove(taskNum - 1);
+        reply(String.format("Noted. I've removed this task:\n%s\n%s", task, replyTaskNum()));
     }
 }

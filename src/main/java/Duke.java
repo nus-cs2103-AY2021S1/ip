@@ -18,7 +18,8 @@ public class Duke {
         Pattern todo = Pattern.compile("todo (.+)");
         Pattern deadline = Pattern.compile("deadline (.+?) /by (.+)");
         Pattern event = Pattern.compile("event (.+?) /at (.+)");
-
+        Pattern done = Pattern.compile("done ([0-9]+)");
+        Pattern delete = Pattern.compile("delete ([0-9]+)");
 
         while (sc.hasNextLine()) {
             try {
@@ -29,17 +30,33 @@ public class Duke {
                 } else if (next.equals("list")) {
                     bot.displayActivities();
                 } else if (next.split(" ")[0].equals("done")) {
-                    try {
-                        int taskNum = Integer.parseInt(next.substring(5));
-                        bot.completeTask(taskNum);
-                    } catch (NumberFormatException e1) {
-                        throw new InvalidInputException("Please input an Integer for the task!");
-                    } catch (StringIndexOutOfBoundsException e2) {
+                    Matcher doneMatcher = done.matcher(next);
+                    if (doneMatcher.find()) {
+                        int taskNum = Integer.parseInt(doneMatcher.group(1));
+                        if (taskNum != 0 && taskNum <= bot.activityList.size()) {
+                            bot.completeTask(taskNum);
+                        }
+                        else {
+                            throw new InvalidInputException("Number provided is too small or too large, Please provide a valid task number");
+                        }
+                    } else {
                         throw new EmptyDescriptionException("done");
-                    } catch (IndexOutOfBoundsException e3) {
-                    throw new InvalidInputException("Number provided is too small or too large, Please input a valid task number");
+                    }
+                } else if (next.split(" ")[0].equals("delete")) {
+                    Matcher deleteMatcher = delete.matcher(next);
+                    if (deleteMatcher.find()) {
+                        int taskNum = Integer.parseInt(deleteMatcher.group(1));
+                        if (taskNum != 0 && taskNum <= bot.activityList.size()) {
+                            bot.deleteTask(taskNum);
+                        }
+                        else {
+                            throw new InvalidInputException("Number provided is too small or too large, Please provide a valid task number");
+                        }
+                    } else {
+                        throw new EmptyDescriptionException("done");
+                    }
                 }
-                } else if(next.split(" ")[0].equals("todo")) {
+                else if(next.split(" ")[0].equals("todo")) {
                     Matcher todoMatcher = todo.matcher(next);
                     if (todoMatcher.find()) {
                         bot.addTodo(todoMatcher.group(1));
