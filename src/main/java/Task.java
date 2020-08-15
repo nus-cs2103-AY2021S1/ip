@@ -1,4 +1,4 @@
-public class Task {
+abstract class Task {
 
     // Attributes
     protected String description;

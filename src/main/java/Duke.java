@@ -43,6 +43,14 @@ public class Duke {
         System.out.println(wrapText(sb.toString()));
     }
 
+    public static void createNewTask(Task newTask) {
+        lst.add(newTask);
+        int newSize = lst.size();
+        String todoText = String.format("     Got it. I've added this task: \n" +
+                "       %s\n" +
+                "     Now you have %s tasks in the list", newTask, newSize);
+        System.out.println(wrapText(todoText));
+    }
 
     // Exit
     private static void exit() {
@@ -53,25 +61,45 @@ public class Duke {
         greeting();
         while (sc.hasNext()) {
 
+            // Input Handling
             String input = sc.nextLine();
-            String[] words = input.split(" ");
+            String[] words = input.split(" ", 2);
             String firstWord = words[0];
+            String remaining = words.length > 1 ? words[1] : "";
+
             switch (firstWord) {
                 case "bye" -> exit();
                 case "list" -> printList();
                 case "done" -> {
-                    int taskNumber = Integer.parseInt(words[1]);
+                    int taskNumber = Integer.parseInt(remaining);
                     Task task = lst.get(taskNumber - 1);
                     task.markAsDone();
                     String doneText = String.format("     Nice! I've marked this task as done: \n" +
                                                     "     %s", task);
                     System.out.println(wrapText(doneText));
                 }
+                case "todo" -> {
+                    Task newTodo = new Todo(remaining);
+                    createNewTask(newTodo);
+                }
+                case "deadline" -> {
+                    String[] text = remaining.split(" /by ");
+                    String description = text[0];
+                    String deadline = text[1];
+                    Task newDeadline = new Deadline(description, deadline);
+                    createNewTask(newDeadline);
+                }
+                case "event" -> {
+                    String[] text = remaining.split(" /at ");
+                    String description = text[0];
+                    String dateTime = text[1];
+                    Task newEvent = new Event(description, dateTime);
+                    createNewTask(newEvent);
+                }
 
                 default -> {
-                    Task newTask = new Task(input);
-                    lst.add(newTask);
-                    System.out.println(wrapText("     added: " + input));
+                    Task newTask = new Todo(input);
+                    createNewTask(newTask);
                 }
             }
         }
