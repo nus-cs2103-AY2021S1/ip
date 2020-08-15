@@ -1,3 +1,6 @@
+import exceptions.DukeException;
+import exceptions.UnknownCommandException;
+
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -40,7 +43,7 @@ public class Duke {
         printMessage(tasks.toString());
     }
 
-    public boolean handleInput(Scanner scanner) {
+    public boolean handleInput(Scanner scanner) throws DukeException {
         String userInput = scanner.next();
         switch (userInput) {
             case "bye":
@@ -67,8 +70,7 @@ public class Duke {
                 addTask(new Todo(scanner.nextLine()));
                 return true;
             default:
-                System.out.println("Command not recognised");
-                return true;
+                throw(new UnknownCommandException(userInput));
         }
     }
 
@@ -77,7 +79,12 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         boolean isRunning = true;
         while (isRunning) {
-            isRunning = handleInput(scanner);
+            try {
+                isRunning = handleInput(scanner);
+            } catch (DukeException e) {
+                printMessage(e.getFriendlyMessage());
+            }
+
         }
         scanner.close();
     }
