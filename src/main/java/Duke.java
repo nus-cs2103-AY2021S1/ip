@@ -35,11 +35,15 @@ public class Duke {
                 storage.get(index).markAsDone();
                 System.out.println("    " + storage.get(index));
             } else {
+                System.out.println("Got it. I've added this task:");
                 if (toEcho.equals("todo")) {
-                    System.out.println("Got it. I've added this task:");
-                    Todo task = new Todo(echoDescription.substring(1));
-                    storage.add(task);
-                    System.out.println(task);
+                    Todo todo = new Todo(echoDescription.substring(1));
+                    storage.add(todo);
+                    System.out.println("    " + todo);
+                } else if (toEcho.equals("deadline")) {
+                    Deadline deadline = new Deadline(echoDescription.substring(1));
+                    storage.add(deadline);
+                    System.out.println("    " + deadline);
                 }
                 System.out.println("Now you have " + storage.size() + " tasks in the list.");
             }
