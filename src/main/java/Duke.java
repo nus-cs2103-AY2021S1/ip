@@ -29,7 +29,7 @@ public class Duke {
             return new ToDo(cmd.substring(5));
         } else if (cmd.startsWith("deadline")) {
             if (cmd.length() < 9) {
-                throw new EmptyTaskException("deadline")
+                throw new EmptyTaskException("deadline");
             }
             String description = cmd.substring(9);
             int s = description.indexOf("/by");
