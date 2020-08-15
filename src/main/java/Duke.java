@@ -28,9 +28,13 @@ public class Duke {
         List<Task> tasks = new ArrayList<>();
 
         while(sc.hasNextLine()) {
-            String command = sc.nextLine();
+            String input = sc.nextLine();
+            String[] commandList = input.split(" ")[0];
 
+            String command = commandList[0];
             switch(command) {
+            case "done":
+
             case "list":
                 printInWindow(formatTaskListToString(tasks));
                 break;
@@ -55,7 +59,7 @@ public class Duke {
     public static String formatTaskListToString(List<Task> tasks) {
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < tasks.size(); i++) {
-            sb.append(i)
+            sb.append(i + 1)
                     .append(". ")
                     .append(tasks.get(i).toString());
             if(i < tasks.size() - 1) {
