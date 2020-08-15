@@ -55,6 +55,26 @@ public class Duke {
                     String output = "     Nice! I've marked this task as done:\n" +
                             "       " + toChange + "\n";
                     log(output);
+                } else if (input.startsWith("delete")) {
+                    if (input.length() == 6 || input.substring(7).isBlank()) {
+                        throw new DukeException("\tNo task number specified.");
+                    }
+                    int idx;
+                    try {
+                        idx = Integer.parseInt(input.substring(7).trim()) - 1;
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("\tTask number format invalid, " +
+                                "must be a number.");
+                    }
+                    if (idx < 0 || idx > todos.size() - 1) {
+                        throw new DukeException("\tThere is no such task.");
+                    }
+                    Task toDelete = todos.get(idx);
+                    todos.remove(idx);
+                    String output = "     Noted. I've removed this task:\n" +
+                            "       " + toDelete + "\n" +
+                            "     Now you have " + todos.size() + " tasks in the list.\n";
+                    log(output);
                 } else if (input.equals("list")) {
                     if (todos.size() == 0) {
                         log("\tYay! You have nothing to do at the moment! :-)\n");

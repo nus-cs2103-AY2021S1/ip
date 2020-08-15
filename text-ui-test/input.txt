@@ -19,4 +19,9 @@ event Wedding Party /at
 done
 done a
 done 10000
+delete
+delete a
+delete 10000
+delete 1
+list
 bye
