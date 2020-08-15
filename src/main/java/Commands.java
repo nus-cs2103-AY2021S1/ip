@@ -46,7 +46,16 @@ public class Commands {
     }
 
     public void lst() {
-        System.out.println("~ \n list \n~");
+        System.out.println("~ \n");
+        if (!stringsArrayList.isEmpty()) {
+            for (int i = 0; i < stringsArrayList.size(); i++) {
+                int count = i + 1;
+                System.out.println(count + ". " + stringsArrayList.get(i));
+            }
+        } else {
+            System.out.println(" list");
+        }
+        System.out.println("\n~ ");
     }
 
     public void blah() {
