@@ -3,13 +3,11 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static ArrayList<String> previousInst;
-    private static int instCounter;
+    private static ArrayList<Task> taskList;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        previousInst = new ArrayList<>();
-        instCounter = 0;
+        taskList = new ArrayList<>();
 
 
         intro();
@@ -18,7 +16,7 @@ public class Duke {
         do {
             input = sc.nextLine();
             process(input);
-            previousInst.add(++instCounter + ". " + input);
+
         } while (!input.equals("bye"));
 
     }
@@ -34,6 +32,11 @@ public class Duke {
         }
         System.out.println("\t____________________________________________________________");
     }
+    private static void println(String message) {
+        System.out.println("\t____________________________________________________________");
+        System.out.println("\t" + message);
+        System.out.println("\t____________________________________________________________");
+    }
 
     private static void intro() {
         String[] msg = new String[] {"Hello! I'm KING!", "What can I do for you?"} ;
@@ -41,12 +44,32 @@ public class Duke {
     }
 
     private static void exit() {
-        String[] msg = new String[] { "Bye. Hope to see you again soon!" };
-        println(msg);
+        println("Bye. Hope to see you again soon!");
     }
 
     private static void list() {
-        println(previousInst.toArray(new String[instCounter]));
+        String[] output = new String[taskList.size() + 1];
+        output[0] = " Here are the tasks in your list:";
+
+        for (int i = 1; i <= taskList.size(); i++) {
+            output[i] = i + "." + taskList.get(i-1);
+        }
+
+        println(output);
+    }
+
+    private static void done(String num) {
+        try {
+            int selected = Integer.parseInt(num);
+            taskList.get(selected-1).setDone();
+
+            String[] output = new String[] { "Nice! I've marked this task as done: ", taskList.get(selected-1).toString() };
+            println(output);
+        } catch (NumberFormatException nfe) {
+            println("Not a number: " + num);
+        } catch (IndexOutOfBoundsException iooob) {
+            println("Invalid Selection: " + num);
+        }
     }
 
     private static void process(String msg) {
@@ -54,7 +77,11 @@ public class Duke {
             exit();
         else if (msg.equals("list"))
             list();
-        else
-            println(new String[] {"added: " + msg});
+        else if (msg.startsWith("done "))
+            done(msg.substring(5));
+        else {
+            println(new String[]{"added: " + msg});
+            taskList.add(new Task(msg));
+        }
     }
 }
