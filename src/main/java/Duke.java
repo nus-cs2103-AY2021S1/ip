@@ -51,7 +51,22 @@ public class Duke {
     }
 
     public static Task addTask(List<Task> tasks, String type, String info) {
-        Task newTask = new Task(info);
+        Task newTask;
+        switch(type) {
+            case "todo":
+                newTask = new Todo(info);
+                break;
+            case "deadline":
+                String dDesc = info.substring(0, info.indexOf('/'));
+                String by = info.substring(info.indexOf('/') + 4);
+                newTask = new Deadline(dDesc, by);
+                break;
+            default:
+                String eDesc = info.substring(0, info.indexOf('/'));
+                String at = info.substring(info.indexOf('/') + 4);
+                newTask = new Event(eDesc, at);
+                break;
+        }
         tasks.add(newTask);
         return newTask;
     }
