@@ -1,15 +1,14 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private Task[] taskStorage;
-    private int index;
+    private ArrayList<Task> taskStorage;
     Duke() {
-        this.taskStorage = new Task[100];
-        this.index = 0;
+        this.taskStorage = new ArrayList<>();
     }
     private void addTask(String task) {
         Task newTask = new Task(task);
-        this.taskStorage[this.index++] = newTask;
+        this.taskStorage.add(newTask);
     }
     static void printDialog(String content) {
         System.out.println("    ----------------------------------------");
@@ -18,17 +17,13 @@ public class Duke {
     }
 
     private void deleteTask(int index) {
-        for(int i = index + 1;i < this.index;i++) {
-            this.taskStorage[i - 1] = this.taskStorage[i];
-        }
-        this.taskStorage[this.index - 1] = null;
-        this.index--;
+        this.taskStorage.remove(index);
     }
 
     static String furtherProcessing(Commands commandType, String[] tokens, Duke dk) throws DukeException {
         String content = "";
         String result_prefix = "Got it. I've added this task:\n      ";
-        String result_subfix = "Now you have " + (dk.index + 1) + " tasks in the list.";
+        String result_subfix = "Now you have " + (dk.taskStorage.size() + 1) + " tasks in the list.";
         String main_content = "";
         String deadline = "";
         for(int i = 1;i < tokens.length; i++) {
@@ -47,27 +42,27 @@ public class Duke {
         if(commandType == Commands.DEADLINE) {
 
             Deadline deadlineTask = new Deadline(content, deadline);
-            dk.taskStorage[dk.index++] = deadlineTask;
+            dk.taskStorage.add(deadlineTask);
             main_content = deadlineTask.returnStringForm();
 
         } else if(commandType == Commands.EVENT) {
 
             Event eventTask = new Event(content, deadline);
-            dk.taskStorage[dk.index++] = eventTask;
+            dk.taskStorage.add(eventTask);
             main_content = eventTask.returnStringForm();
 
         } else if(commandType == Commands.TODO) {
 
             Todo todoTask = new Todo(content);
-            dk.taskStorage[dk.index++] = todoTask;
+            dk.taskStorage.add(todoTask);
             main_content = todoTask.returnStringForm();
 
         } else if(commandType == Commands.DELETE) {
             int mark_number = Integer.parseInt(tokens[1]);
             try {
-                Task marked = dk.taskStorage[mark_number - 1];
+                Task marked = dk.taskStorage.get(mark_number - 1);
                 dk.deleteTask(mark_number - 1);
-                return "Noted. I've removed this task:\n      " + marked.returnStringForm() + "\n    Now you have " + dk.index + " task(s) in the list.";
+                return "Noted. I've removed this task:\n      " + marked.returnStringForm() + "\n    Now you have " + dk.taskStorage.size() + " task(s) in the list.";
             } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("Invalid number");
             }
@@ -75,7 +70,7 @@ public class Duke {
         } else if(commandType == Commands.DONE) {
             int mark_number = Integer.parseInt(tokens[1]);
             try {
-                Task marked = dk.taskStorage[mark_number - 1];
+                Task marked = dk.taskStorage.get(mark_number - 1);
                 marked.markAsDone();
                 return "Nice! I've marked this task as done:\n      " + marked.returnStringForm();
             } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
@@ -96,9 +91,9 @@ public class Duke {
     }
     private void printStoredTasks() {
         String result = "Here are the tasks in your list:\n    ";
-        for(int i= 0; i < this.index; i++) {
-            result += ((i+1) + "." + this.taskStorage[i].returnStringForm());
-            if(i < this.index - 1) result += "\n    ";
+        for(int i= 0; i < this.taskStorage.size(); i++) {
+            result += ((i+1) + "." + this.taskStorage.get(i).returnStringForm());
+            if(i < this.taskStorage.size() - 1) result += "\n    ";
         }
         printDialog(result);
     }
