@@ -18,23 +18,34 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         while(sc.hasNextLine()) {
-            String next = sc.nextLine();
-            String [] arr = next.split(" ");
+            String [] arr = sc.nextLine().split(" ");
 
-            if (next.equals("")) {
-                System.exit(0);
-                sc.close();
-            } else if (next.equals("bye")) {
-                layout.print("Bye. Hope to see you again soon!");
-            } else if (next.equals("list")) {
-                tasks.showTasks();
-            } else if (arr[0].equals("done")) {
-                tasks.markDone(arr[1]);
-            } else {
-                tasks.addTask(next);
+            switch(arr[0]) {
+                case "" :
+                    System.exit(0);
+                    sc.close();
+                    break;
+                case "bye":
+                    layout.print("Bye. Hope to see you again soon!");
+                    break;
+                case "list":
+                    tasks.showTasks();
+                    break;
+                case "done":
+                    tasks.markDone(arr[1]);
+                    break;
+                case "deadline":
+                    tasks.addTask("deadline", arr);
+                    break;
+                case "event":
+                    tasks.addTask("event", arr);
+                    break;
+                case "todo":
+                    tasks.addTask("todo", arr);
+                    break;
+                default:
+                    layout.print("I do not understand");
             }
         }
-
-
     }
 }

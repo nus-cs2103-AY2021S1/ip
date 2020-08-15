@@ -25,7 +25,7 @@ public class Layout {
             System.out.println("\tHere are the tasks in your list: ");
             for (int i = 0; i < arr.size(); i++) {
                 Task task = arr.get(i);
-                System.out.println("\t" + (i + 1) + "." + task.getStatusSymbol() + " " + task.description);
+                System.out.println("\t" + (i + 1) + "." + task.toString());
             }
         } else {
             System.out.println("\t No tasks");
@@ -36,7 +36,15 @@ public class Layout {
     public void printMarkedDone(Task task) {
         printLine();
         System.out.println("\tNice! I've marked this task as done: ");
-        System.out.println("\t\t" + task.getStatusSymbol() + " " + task.description);
+        System.out.println("\t\t" + task.toString());
+        printLine();
+    }
+
+    public void printAddedMessage(String description, int size) {
+        printLine();
+        System.out.println("\tGot it. I've added this task:");
+        System.out.println("\t\t" + description);
+        System.out.println("\tNow you have " + size + " tasks in the list.");
         printLine();
     }
 

@@ -13,7 +13,11 @@ public class Task {
         done = true;
     }
 
-    public String getStatusSymbol() {
+    private String getStatusSymbol() {
         return done ? "[\u2713]" : "[\u2718]";
+    }
+
+    public String toString() {
+        return getStatusSymbol() + " " + description;
     }
 }
