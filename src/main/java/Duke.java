@@ -2,14 +2,15 @@ import java.util.Scanner;
 
 public class Duke {
     public static Scanner sc = new Scanner(System.in);
-    public static String[] tasks = new String[100];
+    public static Task[] tasks = new Task[100];
     public static int numberOfTasks = 0;
 
     public static void printTasks() {
         System.out.println(
                 "    ____________________________________________________________");
         for (int i = 0; i < numberOfTasks; i++) {
-            System.out.format("     %d. %s\n", i + 1, tasks[i]);
+            Task t = tasks[i];
+            System.out.format("     %d.[%s] %s\n", i + 1, t.getStatusIcon(), t.getDescription());
         }
         System.out.println(
                 "    ____________________________________________________________\n");
@@ -58,16 +59,40 @@ public class Duke {
                         "    ____________________________________________________________\n");
 
                 running = false;
+            } else if (input.matches("done \\d+")) {
+
+                int taskNum = Integer.parseInt(input.substring(5));
+                if (taskNum <= numberOfTasks) {
+                    Task t = tasks[taskNum - 1];
+                    t.markAsDone();
+
+                    System.out.println(
+                            "    ____________________________________________________________\n" +
+                                    "     Nice! I've marked this task as done: \n" +
+                                    "       [" + t.getStatusIcon() + "] " + t.getDescription() + "\n" +
+                                    "    ____________________________________________________________");
+                } else {
+                    System.out.println("    ____________________________________________________________\n" +
+                            "     Rrrrwrr:( You you don't even have a task " + taskNum + "\n" +
+                            "    ____________________________________________________________");
+                }
             } else if (input.equals("list")) {
                 printTasks();
             } else {
-                tasks[numberOfTasks] = input;
-                numberOfTasks++;
+                if (numberOfTasks < 100) {
+                    tasks[numberOfTasks] = new Task(input);
+                    numberOfTasks++;
 
-                System.out.println(
-                        "    ____________________________________________________________\n" +
-                        String.format("     added:" + input + "\n") +
-                        "    ____________________________________________________________\n");
+                    System.out.println(
+                            "    ____________________________________________________________\n" +
+                                    "     added:" + input + "\n" +
+                                    "    ____________________________________________________________\n");
+                } else {
+                    System.out.println(
+                            "    ____________________________________________________________\n" +
+                                    "    I'm too full to add more tasks :(\n" +
+                                    "    ____________________________________________________________\n");
+                }
             }
         }
     }
