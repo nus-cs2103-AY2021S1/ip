@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        List<String> storage = new ArrayList<>();
+        List<Task> storage = new ArrayList<>();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -21,9 +21,20 @@ public class Duke {
                     int number = i + 1;
                     System.out.println(number + ". " + storage.get(i));
                 }
+            } else if (toEcho.length() > 4 && toEcho.substring(0, 5).equals("done ")) {
+                int index = Integer.parseInt(toEcho.substring(5)) - 1;
+                if (storage.size() <= index) {
+                    System.out.println("Sorry Boss! There is no task number " + (index + 1));
+                    System.out.println("--------------------------------------");
+                    toEcho = sc.nextLine();
+                    continue;
+                }
+                System.out.println("Nice! I've marked this task as done:");
+                storage.get(index).markAsDone();
+                System.out.println("    " + storage.get(index));
             } else {
                 System.out.println("added: " + toEcho);
-                storage.add(toEcho);
+                storage.add(new Task(toEcho));
             }
             System.out.println("--------------------------------------");
             toEcho = sc.nextLine();
