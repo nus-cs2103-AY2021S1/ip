@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String res;
         List<Task> data = new ArrayList<>();
@@ -24,7 +24,7 @@ public class Duke {
                     }
                     System.out.println("    ____________________________________________________________");
                 } else if (res.startsWith("done")) {
-                    if (res.length() < 5) {
+                    if (res.length() <= 5) {
                         // Exception: eg. done
                         throw new DukeException("     ☹ OOPS!!! The description of done is incomplete.");
                     }
