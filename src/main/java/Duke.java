@@ -73,7 +73,7 @@ public class Duke {
                     }
                     if (Integer.parseInt(input.split(" ")[1]) > list.size()) {
                         throw new IllegalArgumentException(
-                            "The index provided is too large. Run list to see your list of tasks.");
+                            "The index provided is too large.\n     Run list to see your list of tasks.");
                     }
                     Task doneTask = list.get(Integer.parseInt(input.split(" ")[1]) - 1);
                     doneTask.setDone(true);
