@@ -13,7 +13,7 @@ public class Bot {
     static String indentation = "    ";
     static String demarcation = Bot.indentation + "---------------";
 
-    ArrayList<TodoItem> todos;
+    ArrayList<Task> todos;
 
     Bot() {
         this.todos = new ArrayList<>(100);
@@ -56,7 +56,7 @@ public class Bot {
     private void printTodos() {
         int counter = 1;
         System.out.println("Here are the tasks in your list:");
-        for (TodoItem todo : todos) {
+        for (Task todo : todos) {
             System.out.print(indentWord(Integer.toString(counter) + ". "));
             System.out.println(todo);
             counter++;
@@ -64,12 +64,33 @@ public class Bot {
     }
 
     private void addTodos(String command) {
-        TodoItem todo = new TodoItem(command);
+        String todoType = command.split(" ")[0];
+        Task todo = new Task("");
+
+        switch (todoType) {
+            case ("todo"):
+                todo = new Todo(command.substring(5));
+                break;
+            case ("deadline"):
+                String deadlineContent = command.substring(9);
+                String[] deadlineArr = deadlineContent.split("/");
+                todo = new Deadline(deadlineArr[0], deadlineArr[1]);
+                break;
+            case("event"):
+                String eventContent = command.substring(6);
+                String[] eventArr = eventContent.split("/");
+                todo = new Event(eventArr[0], eventArr[1]);
+            default:
+                break;
+        }
+
+
         // Add todos
         todos.add(todo);
         // Response from Duke for adding todos
-        System.out.print(indentWord("added: "));
-        System.out.println(todo);
+        System.out.println(indentWord("Got it. I've added this task: "));
+        System.out.println(indentWord(todo.toString()));
+        System.out.println(indentWord(String.format("Now you have %s tasks in the list.", todos.size())));
     }
 
     private void markComplete(String command) {
@@ -78,6 +99,6 @@ public class Bot {
 
         // Print todo that has been marked done
         System.out.println(indentWord("Nice! I've marked this task as done: "));
-        System.out.println(Bot.indentation + todos.get(indexToMark));
+        System.out.println(indentWord(todos.get(indexToMark).toString()));
     }
 }

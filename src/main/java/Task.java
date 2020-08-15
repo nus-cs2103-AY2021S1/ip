@@ -1,8 +1,8 @@
-public class TodoItem {
+public class Task {
     String label;
     boolean done;
 
-    TodoItem(String label) {
+    Task(String label) {
         this.label = label;
         this.done = false;
     }
