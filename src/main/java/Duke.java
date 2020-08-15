@@ -10,7 +10,10 @@ public class Duke {
         Bot bot = new Bot();
         while (flag) {
             String input = scanner.nextLine();
-            if (input.equals("bye")) {
+            if (isDone(input)) {
+                int index = Integer.parseInt(input.substring(5, 6)) - 1;
+                bot.markDone(index, store);
+            } else if (input.equals("bye")) {
                 bot.sayBye();
                 flag = false;
             } else if (input.equals("list")) {
@@ -19,6 +22,21 @@ public class Duke {
                 store.addItem(input);
                 bot.repeat(input);
             }
+        }
+    }
+
+    static boolean isDone(String input) {
+        return input.length() == 6
+                && input.substring(0, 4).equals("done")
+                && isNumber(input.substring(5,6));
+    }
+
+    static boolean isNumber(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 }
