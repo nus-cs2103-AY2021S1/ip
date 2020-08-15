@@ -16,10 +16,7 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Greet();
-
+    public static void  Echo(Scanner sc) {
         while (true) {
             String input = sc.next();
             if (input.equals("bye")) {
@@ -31,6 +28,13 @@ public class Duke {
                 System.out.println();
             }
         }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Greet();
+
+        Echo(sc);
 
         Bye();
     }
