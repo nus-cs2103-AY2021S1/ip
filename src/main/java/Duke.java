@@ -18,7 +18,8 @@ public class Duke {
             System.out.println("--------------------------------------");
             if (toEcho.equals("list")) {
                 for (int i = 0; i < storage.size(); i++) {
-                    System.out.println(i + ". " + storage.get(i));
+                    int number = i + 1;
+                    System.out.println(number + ". " + storage.get(i));
                 }
             } else {
                 System.out.println("added: " + toEcho);
