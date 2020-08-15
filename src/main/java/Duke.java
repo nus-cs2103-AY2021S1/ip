@@ -4,5 +4,6 @@ public class Duke {
         return line + "\n\t\t" + text.replaceAll("\\n", "\n\t\t") + "\n" + line;
     }
     public static void main(String[] args) {
+        System.out.println(formatReply("Hello! I'm Duke\nWhat can I do for you?"));
     }
 }
