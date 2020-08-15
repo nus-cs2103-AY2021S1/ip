@@ -1,7 +1,9 @@
-import main.java.*;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import main.java.*;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -20,25 +22,26 @@ public class Duke {
             if (next[0].equals("list")){
                 duke.printList();
             } else if (next[0].equals("done")) {
-                Integer toBeChange = Integer.valueOf(next[1]);
-                Task cur = duke.taskList.get(toBeChange-1);
-                cur.changeIsDone();
-                System.out.println("This task has been mark as done.");
-                System.out.println(cur);
-                System.out.println();
-            } else if (next[0].equals("todo")) {
-                Task temp = new Task(next[1]);
-                duke.addTask(temp);
-            } else if (next[0].equals("deadline")) {
-                String[] str = next[1].split("/by", 2);
-                Task temp = new Deadline(str[0], str[1]);
-                duke.addTask(temp);
-            } else if (next[0].equals("event")) {
-                String[] strEvent = next[1].split("/at",2);
-                Task temp = new Event(strEvent[0], strEvent[1]);
-                duke.addTask(temp);
+                try {
+                    Integer toBeChange = Integer.valueOf(next[1]);
+                    Task cur = duke.taskList.get(toBeChange - 1);
+                    cur.changeIsDone();
+                    System.out.println("This task has been mark as done.");
+                    System.out.println(cur);
+                    System.out.println();
+                } catch (NumberFormatException e) {
+                    System.err.println(new DoneUnknownException());
+                } catch (IndexOutOfBoundsException e) {
+                    System.err.println(new DoneOutOfBoundException());
+                }
+            } else if (next[0].equals("event") || next[0].equals("todo") || next[0].equals("deadline")) {
+                try {
+                    duke.addTask(next);
+                } catch(DukeException e) {
+                    System.err.println(e);
+                }
             } else {
-                System.out.println("Command not known");
+                System.err.println(new CommandException());
             }
             next = sc.nextLine().split(" ",2);
         }
@@ -63,13 +66,47 @@ public class Duke {
 
 
 
-    public void addTask(Task task) {
-        this.taskList.add(task);
-        System.out.println("********************************************");
-        System.out.println("Added new task " + task);
-        System.out.println("********************************************");
-        System.out.println();
+    public void addTask(String[] next) throws TaskException, DeadlineException {
+        if (next[0].equals("todo")) {
+            try {
+                Task temp = new Task(next[1]);
+                this.taskList.add(temp);
+                System.out.println("********************************************");
+                System.out.println("Added new task " + temp);
+                System.out.println("********************************************");
+                System.out.println();
+            } catch (IndexOutOfBoundsException e) {
+                throw new TaskException();
+            }
+        } else if(next[0].equals("deadline")) {
+            try {
+                String[] str = next[1].split("/by", 2);
+                Task temp = new Deadline(str[0], str[1]);
+                this.taskList.add(temp);
+                System.out.println("********************************************");
+                System.out.println("Added new task " + temp);
+                System.out.println("********************************************");
+                System.out.println();
+            } catch (IndexOutOfBoundsException e) {
+                throw new DeadlineException();
+            }
+        } else {
+            try {
+                String[] str = next[1].split("/at", 2);
+                Task temp = new Event(str[0], str[1]);
+                this.taskList.add(temp);
+                System.out.println("********************************************");
+                System.out.println("Added new task " + temp);
+                System.out.println("********************************************");
+                System.out.println();
+            } catch (IndexOutOfBoundsException e) {
+                throw new DeadlineException();
+            }
+        }
+
     }
+
+
 
     private void printList() {
         for(int i = 0; i < this.taskList.size(); i++) {
