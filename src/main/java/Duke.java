@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    static ArrayList<String> myTasks = new ArrayList<>();
+    static ArrayList<Task> myTasks = new ArrayList<>();
 
     public static void greet(){
         String greeting = "\n   _________________________________________________________________"
@@ -14,7 +14,7 @@ public class Duke {
     }
 
     public static void addTask(String input){
-        myTasks.add(input);
+        myTasks.add(new Task(input));
         String output = "   ______________________________________________________________"
                         + "\n   added: " + input
                         + "\n   ______________________________________________________________";
@@ -37,6 +37,16 @@ public class Duke {
         System.out.println(output);
     }
 
+    private static void markAsDone(int i) {
+        Task task = myTasks.get(i-1);
+        task.markDone();
+        String output = "   ______________________________________________________________"
+                + "\n   " + "Nice! I've marked this task as done:"
+                + "\n   " + task
+                + "\n   ______________________________________________________________";
+        System.out.println(output);
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -49,11 +59,20 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         while (true){
             String input = scanner.nextLine();
+            String firstWord = "";
+            int i = 0;
+            if(input.contains(" ")) {
+                i = input.indexOf(" ");
+                firstWord = input.substring(0, i);
+            }
             if(input.equals("bye") || input.equals("Bye")){
                 bye();
                 break;
             } else if(input.equals("list")){
                 listTasks();
+            } else if (firstWord.equals("done")){
+                int index = Integer.parseInt(input.substring(i+1));
+                markAsDone(index);
             }
             else {
                 addTask(input);
@@ -61,4 +80,5 @@ public class Duke {
         }
 
     }
+
 }
