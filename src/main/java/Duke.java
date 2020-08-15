@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -54,14 +54,26 @@ public class Duke {
                         Event newEvent = new Event(eventName, eventTime);
                         addTasktoList(list, newEvent);
                     } else {
-                        Task task = new Task(taskName);
-                        list.add(task);
-                        System.out.println("added: " + taskName);
+                        // throw exception
+                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means. Please enter your task with the " +
+                                "starting keyword \"todo\" or \"deadline\" or \"event\".");
                     }
                 } else {
-                    Task task = new Task(taskName);
-                    list.add(task);
-                    System.out.println("added: " + taskName);
+                    // throw exception
+                    if (taskName.equals("todo")) {
+                        // throw empty todo exception
+                        throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                    } else if (taskName.equals("deadline")) {
+                        // throw empty deadline
+                        throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+                    } else if (taskName.equals("event")) {
+                        // throw empty deadline
+                        throw new DukeException("OOPS!!! The description of an event cannot be empty.");
+                    } else {
+                        // throw idk what it means exception
+                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means. Please enter your task with the " +
+                                "starting keyword \"todo\" or \"deadline\" or \"event\".");
+                    }
                 }
             }
             taskName = sc.nextLine();
