@@ -12,7 +12,29 @@ public class Chatbot {
     }
 
     public String[] parseStringBySpace(String str) {
-        String[] res = str.split(" ");
-        return res;
+        if (str.contains(" ")) {
+            String[] split1 = str.split(" ", 2);
+            String type = split1[0];
+            String temp = split1[1];
+            if (temp.contains("/")) {
+                String[] split2;
+                if (temp.contains("/by")) {
+                    split2 = temp.split("/by", 2);
+                } else {
+                    split2 = temp.split("/at", 2);
+                }
+                String taskDescription = split2[0];
+                String time = split2[1];
+                String[] res = {type, taskDescription, time};
+                return res;
+            } else {
+                String taskDescription = temp;
+                String[] res = {type, taskDescription};
+                return res;
+            }
+        } else {
+            String[] res = {str};
+            return res;
+        }
     }
 }
