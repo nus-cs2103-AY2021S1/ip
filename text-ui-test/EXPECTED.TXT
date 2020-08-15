@@ -1,7 +1,44 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+***********************
+Hi! I'm Duke. What can I do for you?
+***********************
+***********************
+added: [T][✘]  sleep 
+ Now you have 1 tasks in the list
+***********************
+***********************
+added: [T][✘]  sleep again 
+ Now you have 2 tasks in the list
+***********************
+***********************
+added: [D][✘] wake up (by: tmr) 
+ Now you have 3 tasks in the list
+***********************
+***********************
+added: [E][✘] sleep one more time (at: 9pm) 
+ Now you have 4 tasks in the list
+***********************
+***********************
+Here are the tasks in your list: 
+1. [T][✘]  sleep
+2. [T][✘]  sleep again
+3. [D][✘] wake up (by: tmr)
+4. [E][✘] sleep one more time (at: 9pm)
+***********************
+***********************
+Nice! I've marked this task as done: 
+ [T][✓]  sleep again
+***********************
+***********************
+Nice! I've marked this task as done: 
+ [D][✓] wake up (by: tmr)
+***********************
+***********************
+Here are the tasks in your list: 
+1. [T][✘]  sleep
+2. [T][✓]  sleep again
+3. [D][✓] wake up (by: tmr)
+4. [E][✘] sleep one more time (at: 9pm)
+***********************
+***********************
+Bye! Hope to see you soon!
+***********************

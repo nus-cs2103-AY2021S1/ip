@@ -1,0 +1,9 @@
+todo sleep
+todo sleep again
+deadline wake up /by tmr
+event sleep one more time /at 9pm
+list
+done 2
+done 3
+list
+bye
