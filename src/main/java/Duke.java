@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-
 import static java.lang.Integer.parseInt;
 
 public class Duke {
@@ -75,8 +74,7 @@ public class Duke {
         for (int i = 0; i < memory.size(); i++) {
             indent();
             Task currentTask = memory.get(i);
-            System.out.println((i + 1) + ". " + "[" +
-                    currentTask.getStatusIcon() + "] " + currentTask.getDescription());
+            System.out.println((i + 1) + ". " + currentTask.toString());
         }
 
         printLine();
@@ -97,16 +95,32 @@ public class Duke {
         }
     }
 
-
-    void addToMemory(String string) {
-        memory.add(new Task(string));
-    }
-
-    void printAddMessage(String string) {
+    void unknownCommandMessage() {
         printLine();
 
         indent();
-        System.out.println("added: " + string);
+        System.out.println("Unknown command");
+
+        printLine();
+    }
+
+
+    void addToMemory(Task task) {
+        memory.add(task);
+    }
+
+
+    void printAddMessage(Task task) {
+        printLine();
+
+        indent();
+        System.out.println("Got it. I've added this task:");
+
+        indent();
+        System.out.println(task.toString());
+
+        indent();
+        System.out.println("Now you have " + memory.size() + " tasks in the list.");
 
         printLine();
     }
@@ -118,10 +132,26 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done:");
 
         indent();
-        System.out.println("[" +
-                task.getStatusIcon() + "] " + task.getDescription());
+        System.out.println(task.toString());
 
         printLine();
+    }
+
+    String stringArrayToString(String[] arr, int startIndex, int endIndex) {
+        try {
+            if (endIndex > startIndex) {
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int i = startIndex; i < endIndex - 1; i++) {
+                    stringBuilder.append(arr[i] + " ");
+                }
+                stringBuilder.append(arr[endIndex - 1]);
+                return stringBuilder.toString();
+            } else {
+                return null;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
     }
 
     void checkAndPrint(String string) {
@@ -133,14 +163,61 @@ public class Duke {
         } else if (splitString.length == 2 &&
                 splitString[0].equals("done") && stringIsInt(splitString[1])) {
             int index = parseInt(splitString[1]);
-            // out of bounds index??
             done(index);
-
+        } else if (splitString[0].equals("todo")) {
+            todo(splitString);
+        } else if (splitString[0].equals("deadline")) {
+            deadline(splitString);
+        } else if (splitString[0].equals("event")) {
+            event(splitString);
         } else {
-            addToMemory(string);
-            printAddMessage(string);
+            unknownCommandMessage();
         }
     }
+
+    // Takes the input as a string array, adds a new deadline to list, then prints the message
+    void deadline(String[] stringArray) {
+        int indexOfBy = -1;
+        for (int i = 0; i < stringArray.length; i++) {
+            if (stringArray[i].equals("/by")) {
+                indexOfBy = i;
+                break;
+            }
+        }
+
+        String by = stringArrayToString(stringArray, indexOfBy + 1, stringArray.length);
+        String description = stringArrayToString(stringArray, 1, indexOfBy);
+        Deadline deadline = new Deadline(description, by);
+        addToMemory(deadline);
+        printAddMessage(deadline);
+    }
+
+    // Takes the input as a string array, then adds a new todo to list, then prints the message
+    void todo(String[] stringArray) {
+        String description = stringArrayToString(stringArray,
+                1, stringArray.length);
+        ToDo todo = new ToDo(description);
+        addToMemory(todo);
+        printAddMessage(todo);
+    }
+
+    // Takes input as a string array, then adds a new event to list, then prints the message
+    void event(String[] stringArray) {
+        int indexOfAt = -1;
+        for (int i = 0; i < stringArray.length; i++) {
+            if (stringArray[i].equals("/at")) {
+                indexOfAt = i;
+                break;
+            }
+        }
+
+        String at = stringArrayToString(stringArray, indexOfAt + 1, stringArray.length);
+        String description = stringArrayToString(stringArray, 1, indexOfAt);
+        Event event = new Event(description, at);
+        addToMemory(event);
+        printAddMessage(event);
+    }
+
 
     void exit() {
         running = false;
