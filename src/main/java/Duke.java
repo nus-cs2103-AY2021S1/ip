@@ -4,6 +4,7 @@ public class Duke {
 
     private static final String DIVIDER = "    ________________________________________________________\n";
     private static final String LIST_COMMAND = "list";
+    private static final String DONE_COMMAND = "done";
     private static final String EXIT_COMMAND = "bye";
 
     private static void greet() {
@@ -26,8 +27,12 @@ public class Duke {
             System.out.print(DIVIDER);
             if (input.equals(LIST_COMMAND)) {
                 storage.listItems();
+            } else if (input.startsWith(DONE_COMMAND)) {
+                int index = Integer.parseInt(input.split(" ")[1]) - 1;
+                storage.markAsDone(index);
             } else {
-                storage.add(input);
+                Task newTask = new Task(input);
+                storage.add(newTask);
             }
             System.out.println(DIVIDER);
             input = sc.nextLine();
