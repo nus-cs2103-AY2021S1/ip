@@ -2,24 +2,35 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static void order() {
+    private static String printDesign(String word) {
+        return "**\n" + word + "\n**";
+    }
+
+    private static void order() {
         Scanner sc = new Scanner(System.in);
+        WorkList lst = new WorkList();
+        String output;
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            if(input.equals("bye")) {
-                System.out.println("** Bye. Hope to see you soon!! **");
+            if(input.equals("list")) {
+                output = lst.readWork();
+                System.out.println(printDesign(output));
+            } else if(input.equals("bye")) {
+                output = "** Bye. Hope to see you soon!! **";
+                System.out.println(output);
                 break;
             } else {
-                String output = "**\n" + input + "\n**";
-                System.out.println(output);
+                lst.addWork(input);
+                output = "added: " + input;
+                System.out.println(printDesign(output));
             }
         }
 
 
     }
 
-    public static void welcome() {
+    private static void welcome() {
         String logo = " ___    ___        ______\n"
                 + "|   \\  /   |_    _|  ____|\n"
                 + "|    \\/    | |  | |  |  _ \n"
