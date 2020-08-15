@@ -1,3 +1,5 @@
+import main.java.*;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -34,7 +36,7 @@ public class Duke {
                 Task toChange = todos.get(idx);
                 toChange.markAsDone();
                 String output = startLine +
-                        "     Nice! I've marked this task as done: \n" +
+                        "     Nice! I've marked this task as done:\n" +
                         "       " + toChange + "\n" +
                         endLine;
 
@@ -70,7 +72,7 @@ public class Duke {
                 todos.add(newTask);
 
                 String output = startLine +
-                        "     Got it. I've added this task: \n" +
+                        "     Got it. I've added this task:\n" +
                         "       " + newTask + "\n" +
                         "     Now you have " + todos.size() + " tasks in the list.\n" +
                         endLine;
