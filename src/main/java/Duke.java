@@ -32,9 +32,10 @@ public class Duke {
         while(sc.hasNextLine()) {
             String input = sc.nextLine();
             String[] splitInput = input.split(" ", 2);
-            String command = splitInput[0];
-            String parameters = splitInput.length > 1 ? splitInput[1] : null;
+
             try {
+                CommandType command = CommandType.enumFromString(splitInput[0]);
+                String parameters = splitInput.length > 1 ? splitInput[1] : null;
                 int result = processCommand(command, parameters);
                 if(result == 0) {
                     return;
@@ -45,45 +46,47 @@ public class Duke {
         }
     }
 
-    public static int processCommand(String command, String parameters) throws DukeException{
+    public static int processCommand(CommandType command, String parameters) throws DukeException{
         switch(command) {
-        case "todo":
+        case TODO:
             ToDo todo = new ToDo(parameters);
             tasks.add(todo);
             printInWindow("Added: " + todo.toString());
             break;
-        case "event":
+        case EVENT:
             String[] eventParameters = parameters.split(" /at ");
             Event event = new Event(eventParameters[0], eventParameters[1]);
             tasks.add(event);
             printInWindow("Added: " + event.toString());
             break;
-        case "deadline":
+        case DEADLINE:
             String[] deadlineParameters = parameters.split(" /by ");
             Deadline deadline = new Deadline(deadlineParameters[0], deadlineParameters[1]);
             tasks.add(deadline);
             printInWindow("Added: " + deadline.toString());
             break;
-        case "done":
+        case DONE:
             int doneNumber = Integer.parseInt(parameters);
             Task task = tasks.get(doneNumber - 1);
             task.markAsDone(true);
             printInWindow("Nice! I've marked the this as done.\n" + task.toString());
             break;
-        case "list":
+        case LIST:
             printInWindow(formatTaskListToString(tasks));
             break;
-        case "delete":
+        case DELETE:
             int deleteNumber = Integer.parseInt(parameters);
             Task deleteTask = tasks.get(deleteNumber - 1);
             tasks.remove(deleteNumber - 1);
             printInWindow("I've removed this task:\n" + deleteTask.toString());
             break;
-        case "bye":
+        case BYE:
             printInWindow("Bye. Hope to see you again soon!");
             return 0;
-        default:
+        case UNDEFINED:
             throw new DukeException("I don't know what that means!");
+        default:
+            throw new DukeException("This command has not yet been implemented!");
         }
         return 1;
     }
