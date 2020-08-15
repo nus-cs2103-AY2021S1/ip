@@ -1,8 +1,11 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
 
     public static void main(String[] args) {
+        List<String> list = new ArrayList<>();
         String divider = "----------------------------------------";
         greet();
         Scanner sc = new Scanner(System.in);
@@ -10,7 +13,16 @@ public class Duke {
 
         while (!message.equals("bye")) {
             System.out.println(divider);
-            System.out.println("\t" + message);
+            if (!message.equals("list")) {
+                list.add(message);
+                System.out.println("\t" + "added: " + message);
+            } else {
+                System.out.println("Here is a list of all texts that you have entered:");
+                for (int i = 0; i < list.size(); i ++) {
+                    int index = i + 1;
+                    System.out.println("\t" + String.format("%d. %s", index, list.get(i)));
+                }
+            }
             System.out.println(divider);
             message = sc.nextLine();
         }
@@ -24,8 +36,9 @@ public class Duke {
     public static void greet() {
         String divider = "----------------------------------------";
         String greeting = "  Hello! I am JonasBot! Nice to meet you :) \n" +
-                "  I am a bot that will replicate anything that you say. \n" +
-                "  To end this chat, simply type 'bye' \n" +
+                "  I am a bot that will store all texts entered. \n" +
+                "  To display all texts that have been entered, input 'list' \n" +
+                "  To end this chat, input 'bye' \n" +
                 "  How may I assist you today?";
         System.out.println(divider);
         System.out.println(greeting);
