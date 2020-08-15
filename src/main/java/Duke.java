@@ -16,37 +16,41 @@ public class Duke {
         }
     }
 
+    // Gets the command from the user
+    private static String parseCommand(String userInput) {
+        String[] splitString = userInput.split(" ");
+        return splitString[0];
+    }
+
     private static void awaitInstructions() throws DukeException {
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNext()) {
             try {
                 String userInput =  sc.nextLine();
+                String userCommand = parseCommand(userInput);
 
-                switch (userInput) { // Determine output from user input
+                switch (userCommand) { // Determine output from user input
                     case "bye":
                         System.out.println("Bye. Hope to see you again soon!");
                         break;
                     case "list":
                         listAllItems();
                         break;
-                    default:
-                        if (userMarkAsDone(userInput)) {
-                            markTaskAsDone(userInput);
-
-                        } else if (userAddingToDo(userInput)) {
-                            addToDoTask(userInput);
-
-                        } else if (userAddingEvent(userInput)) {
-                            addEventTask(userInput);
-
-                        } else if (userAddingDeadline(userInput)) {
-                            addDeadlineTask(userInput);
-
-                        } else { // Any other command that Duke doesn't know
-                            throw new DukeException("I'm sorry, but I don't know what that means :-(");
-                        }
+                    case "todo":
+                        addToDoTask(userInput);
                         break;
+                    case "event":
+                        addEventTask(userInput);
+                        break;
+                    case "deadline":
+                        addDeadlineTask(userInput);
+                        break;
+                    case "done":
+                        markTaskAsDone(userInput);
+                        break;
+                    default:
+                        throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
@@ -83,33 +87,16 @@ public class Duke {
         addItem(newDeadlineItem);
     }
 
-    private static boolean userAddingToDo(String userInput) {
-        return userInput.length() >= 4 && userInput.substring(0, 4).equals("todo");
-    }
-
-    private static boolean userAddingEvent(String userInput) {
-        return userInput.length() >= 5 && userInput.substring(0, 5).equals("event");
-    }
-
-
-    private static boolean userAddingDeadline(String userInput) {
-        return userInput.length() >= 8 && userInput.substring(0, 8).equals("deadline");
-    }
-
-    private static boolean userMarkAsDone(String userInput) {
-        return userInput.length() >= 4 && userInput.substring(0, 4).equals("done");
-    }
-
     // Updates taskList attribute to indicate task as done
     public static void markTaskAsDone(String userInput) throws DukeException {
         try {
-        String taskIndex = userInput.substring(5);
-        int index = Integer.valueOf(taskIndex) - 1; // taskIndex started from 1
-        Task completedTask = Duke.taskList.get(index);
-        completedTask.markAsDone();
+            String taskIndex = userInput.substring(5);
+            int index = Integer.valueOf(taskIndex) - 1; // taskIndex started from 1
+            Task completedTask = Duke.taskList.get(index);
+            completedTask.markAsDone();
 
-        System.out.println("Nice! I've marked this task as done:\n" +
-                completedTask.toString());
+            System.out.println("Nice! I've marked this task as done:\n" +
+                    completedTask.toString());
 
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("Please enter a valid task number for me to mark as done.");
