@@ -3,10 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import main.java.Deadline;
-import main.java.Event;
-import main.java.Task;
-import main.java.ToDo;
+import main.java.*;
 
 public class Duke {
     private final static String EXIT_COMMAND = "bye";
@@ -37,20 +34,42 @@ public class Duke {
             } else {
                 String[] inputWords = input.split(" ", 2);
                 String command = inputWords[0];
-                String argument = inputWords[1];
+                String argument;
                 switch (command) {
                     case MARK_DONE_COMMAND:
-                        this.markDone(Integer.parseInt(argument));
+                        try {
+                            argument = inputWords[1];
+                            this.markDone(Integer.parseInt(argument));
+                        } catch (IndexOutOfBoundsException e) {
+                            sayException(new EmptyDoneException());
+                        }
                         break;
                     case TODO_COMMAND:
-                        this.addTodo(argument);
+                        try {
+                            argument = inputWords[1];
+                            this.addTodo(argument);
+                        } catch (IndexOutOfBoundsException e) {
+                            sayException(new EmptyTodoException());
+                        }
                         break;
                     case DEADLINE_COMMAND:
-                        this.addDeadline(argument);
+                        try {
+                            argument = inputWords[1];
+                            this.addDeadline(argument);
+                        } catch (IndexOutOfBoundsException e) {
+                            sayException(new EmptyDeadlineException());
+                        }
                         break;
                     case EVENT_COMMAND:
-                        this.addEvent(argument);
+                        try {
+                            argument = inputWords[1];
+                            this.addEvent(argument);
+                        } catch (IndexOutOfBoundsException e) {
+                            sayException(new EmptyEventException());
+                        }
                         break;
+                    default:
+                        sayException(new UnknownCommandException());
                 }
             }
             input = scanner.nextLine();
@@ -61,6 +80,12 @@ public class Duke {
     private void say(String text) {
         System.out.println("------------------------------------------------------------");
         System.out.println(text);
+        System.out.println("------------------------------------------------------------\n");
+    }
+
+    private void sayException(Exception e) {
+        System.out.println("------------------------------------------------------------");
+        System.out.println(e);
         System.out.println("------------------------------------------------------------\n");
     }
 
@@ -109,10 +134,14 @@ public class Duke {
 
     private void markDone(int oneBasedIndex) {
         int zeroBasedIndex = oneBasedIndex - 1;
-        Task toDone = this.tasks.get(zeroBasedIndex);
-        toDone.markAsDone();
-        String text = "Nice! I've marked this task as done: \n" + toDone;
-        say(text);
+        try {
+            Task toDone = this.tasks.get(zeroBasedIndex);
+            toDone.markAsDone();
+            String text = "Nice! I've marked this task as done:\n" + toDone;
+            say(text);
+        } catch (IndexOutOfBoundsException e) {
+            sayException(new DoneOutOfBoundException(oneBasedIndex));
+        }
     }
 
 }
