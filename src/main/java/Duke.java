@@ -34,7 +34,8 @@ public class Duke {
         System.out.printf("%s", SEPARATOR);
     }
 
-    private void addTask(String command, String taskDescription) {
+    private void addTask(String command, String taskDescription)
+            throws EmptyDeadlineException, EmptyEventTimeException {
         Task task;
         String[] nameAndTime;
         switch (command) {
@@ -43,12 +44,14 @@ public class Duke {
                 break;
             case DEADLINE_COMMAND:
                 nameAndTime = taskDescription.split(" /by ", 2);
-                if (nameAndTime.length == 1) return;
+                if (nameAndTime.length == 1)
+                    throw new EmptyDeadlineException();
                 task = new Deadline(nameAndTime[0], nameAndTime[1]);
                 break;
             case EVENT_COMMAND:
                 nameAndTime = taskDescription.split(" /at ", 2);
-                if (nameAndTime.length == 1) return;
+                if (nameAndTime.length == 1)
+                    throw new EmptyEventTimeException();
                 task = new Event(nameAndTime[0], nameAndTime[1]);
                 break;
             default:
@@ -90,26 +93,31 @@ public class Duke {
         while (hasCommand) {
             getCommand();
             String command = input[0];
-            switch (command) {
-                case EXIT_COMMAND:
-                    hasCommand = false;
-                    break;
-                case LIST_COMMAND:
-                    printTaskList();
-                    break;
-                case DONE_COMMAND:
-                    int taskNum = Integer.parseInt(input[1]);
-                    setTaskDone(taskNum);
-                    break;
-                case TODO_COMMAND:
-                case DEADLINE_COMMAND:
-                case EVENT_COMMAND:
-                    if (input.length == 1) break;
-                    String taskDescription = input[1];
-                    addTask(command, taskDescription);
-                    break;
-                default:
-                    break;
+            try {
+                switch (command) {
+                    case EXIT_COMMAND:
+                        hasCommand = false;
+                        break;
+                    case LIST_COMMAND:
+                        printTaskList();
+                        break;
+                    case DONE_COMMAND:
+                        int taskNum = Integer.parseInt(input[1]);
+                        setTaskDone(taskNum);
+                        break;
+                    case TODO_COMMAND:
+                    case DEADLINE_COMMAND:
+                    case EVENT_COMMAND:
+                        if (input.length == 1)
+                            throw new EmptyMessageException(true, command);
+                        String taskDescription = input[1];
+                        addTask(command, taskDescription);
+                        break;
+                    default:
+                        throw new UnknownCommandException();
+                }
+            } catch (DukeException e) {
+                System.out.printf("%s\n%s", e.getMessage(), SEPARATOR);
             }
         }
 
