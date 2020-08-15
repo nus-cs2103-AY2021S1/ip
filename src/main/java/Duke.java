@@ -16,13 +16,9 @@ public class Duke {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             if (input.equals("list")) {
-                System.out.print(horizontalLine);
+                System.out.println(horizontalLine + "Here are the tasks in your list:");
                 for (int i = 0; i < count; i++) {
-                    if (i == 0) {
-                        System.out.println((i + 1) + ". " + list[0]);
-                    } else {
-                        System.out.println("\t  " + (i + 1) + ". " + list[i]);
-                    }
+                    System.out.println("\t  " + (i + 1) + "." + list[i]);
                 }
                 System.out.println(horizontalLine);
             } else {
