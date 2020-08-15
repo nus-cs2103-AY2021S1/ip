@@ -25,9 +25,7 @@ public class Duke {
                     int index = Integer.parseInt(stringarr[1]);
                     processor.processorDone(arraylst, index);
                 } else {
-                    Task task = Task.setTask(cmd);
-                    arraylst.add(task);
-                    System.out.println("_________________________________________\n" + "added: " + cmd + "\n" + "_________________________________________");
+                    processor.processorAdd(cmd, arraylst);
                 }
             } else {
                 System.out.println("_________________________________________\n" + "Bye. Hope to see you again soon!" + "\n" + "_________________________________________");
