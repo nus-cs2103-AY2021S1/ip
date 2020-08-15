@@ -5,8 +5,8 @@ public class Printer {
     private static final String doubleIndent = indent + indent;
     private static final String border = "_________________________________________________";
 
-    private static final String tickedBox = box("\u2713");
-    private static final String crossedBox = box("\u2718");
+    private static final String tickedBox = box("✓");
+    private static final String crossedBox = box("✘");
 
     // Prints a chat window showing the list of tasks
     public static void printTasksChatWindow(List<Task> tasks) {
