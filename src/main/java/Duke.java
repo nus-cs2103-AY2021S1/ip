@@ -13,40 +13,52 @@ public class Duke {
 
         System.out.println(logo);
 
-        displayThis("Hello! I'm Duke\n    What can I do for you?");
+        displayThis("Hello! I'm Duke\n    What can I remember for you?");
 
         Scanner scanner = new Scanner(System.in);
 
         String input = scanner.nextLine();
 
-        ArrayList<String> myList = new ArrayList<String>();
+        ArrayList<Task> toDoList = new ArrayList<Task>();
 
         while (!input.equals("bye")) {
 
             if (input.equals("list")) {
 
-                if (myList.size() == 0) { // checks if the user types list to a empty list
+                if (toDoList.size() == 0) { // checks if the user types list to a empty list
                     displayThis("List is empty");
-                }else {
+
+                } else {
 
                     int temp = 0;
-                    System.out.println("\n    ---------------------------------");
-                    for (int i = 0; i < myList.size() && myList.get(i) != null; i++) {
+                    System.out.println("\n    ---------------------------------\n" +
+                            "    Here are the tasks in your list:");
+                    for (int i = 0; i < toDoList.size() && toDoList.get(i) != null; i++) {
 
                         temp = i + 1;
-                        System.out.println("    " + temp + ". " + myList.get(i));
+                        System.out.println("    " + temp + ". " + toDoList.get(i));
 
                     }
                     System.out.println("    ---------------------------------");
                 }
 
-            } else if(!input.trim().equals("")){
+            } else if (input.toLowerCase().contains("done")) {
+                int entryDone =  Integer.parseInt(input.substring(input.length() - 1)) - 1;
+
+                Task temp = toDoList.get(entryDone);
+
+                temp.markAsDone();
+
+                displayThis("Nice! I've marked this task as done: \n        " +  temp.toString());
+
+            } else if (!input.equals("")) {
+                toDoList.add(new Task(input));
+
                 displayThis("added: " + input);
-                myList.add(input);
             }
 
 
-            input = scanner.nextLine();
+            input = scanner.nextLine().trim();
         }
 
         displayThis("Bye. Hope to see you again soon!");
