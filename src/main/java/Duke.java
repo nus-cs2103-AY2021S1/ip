@@ -5,12 +5,18 @@ import java.util.Scanner;
 public class Duke {
 
     private static void chat(){
+        ArrayList<String> items = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         String word;
         while(!(word = scanner.nextLine()).equals("bye")){
-            System.out.print(Chat.singleLineChatBox(word));
+            if (word.equals("list")){
+                System.out.println(Chat.numberedListChatBox(items));
+            } else {
+                items.add(word);
+                System.out.print(Chat.singleLineChatBox("added: " + word));
+            }
         }
-        System.out.print(Chat.singleLineChatBox("Bye! Hope to see you again soon!"));
+        System.out.print(Chat.singleLineChatBox("Bye. Hope to see you again soon!"));
         scanner.close();
     }
 
