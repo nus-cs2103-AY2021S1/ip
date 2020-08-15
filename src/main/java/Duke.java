@@ -17,13 +17,13 @@ public class Duke {
     }
 
     private static void acceptCommand(Scanner sc) {
-        String userInput = sc.nextLine();
+        String command = sc.nextLine();
 
-        while (!userInput.equals("bye")){
-            if (userInput.equals("list")) {
+        while (!command.equals("bye")){
+            if (command.equals("list")) {
                 printResponse(listTasks());
-            } else if (userInput.startsWith("todo")) {
-                String description = userInput.substring(userInput.indexOf(' ') + 1);
+            } else if (command.startsWith("todo")) {
+                String description = command.substring(command.indexOf(' ') + 1);
                 Task task = new ToDo(description);
                 tasks.add(task);
                 String response = String.format(
@@ -31,8 +31,19 @@ public class Duke {
                         task, tasks.size()
                 );
                 printResponse(response);
-            } else if (userInput.matches("done \\d+")) {
-                int index = Integer.parseInt(userInput.split(" ")[1]);
+            } else if (command.startsWith("deadline")) {
+                String[] input = command.substring(command.indexOf(' ') + 1).split(" /by ");
+                String description = input[0];
+                String by = input[1];
+                Task task = new Deadline(description, by);
+                tasks.add(task);
+                String response = String.format(
+                        "I've added this task:\n  %s \nNow you have %s tasks in the list.",
+                        task, tasks.size()
+                );
+                printResponse(response);
+            } else if (command.matches("done \\d+")) {
+                int index = Integer.parseInt(command.split(" ")[1]);
                 if (index > tasks.size()) {
                     printResponse("No such task!");
                 } else {
@@ -43,7 +54,7 @@ public class Duke {
                 }
             }
 
-            userInput = sc.nextLine();
+            command = sc.nextLine();
         }
 
         printResponse("Bye. Hope to see you again soon!");
