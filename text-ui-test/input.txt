@@ -6,4 +6,17 @@ list
 done 1
 done 2
 list
+todo
+deadline
+event
+Hello
+deadline          /by Monday 4PM
+deadline Wash Car
+deadline Wash Car /by
+event /at Monday 6-8 PM
+event Wedding Party
+event Wedding Party /at
+done
+done a
+done 10000
 bye
