@@ -1,11 +1,8 @@
 package operation;
 
 import exception.DukeException;
-import task.Deadline;
 import task.Task;
 import task.TaskStorage;
-import task.Event;
-import task.Todo;
 
 public abstract class AddOperation extends Operation {
     protected TaskStorage taskStorage;

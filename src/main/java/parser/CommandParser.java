@@ -3,7 +3,14 @@ package parser;
 import java.lang.StringBuilder;
 
 import exception.DukeException;
-import operation.*;
+import operation.Operation;
+import operation.AddDeadlineOperation;
+import operation.AddEventOperation;
+import operation.AddTodoOperation;
+import operation.DeleteOperation;
+import operation.DoneOperation;
+import operation.ExitOperation;
+import operation.ListOperation;
 import task.TaskStorage;
 
 public class CommandParser {
@@ -60,6 +67,8 @@ public class CommandParser {
                 return new AddDeadlineOperation(commands, taskStorage);
             case "event" :
                 return new AddEventOperation(commands, taskStorage);
+            case "delete":
+                return new DeleteOperation(commands, taskStorage);
             default:
                 throw new DukeException("This command is not recognised unfortunately.");
         }

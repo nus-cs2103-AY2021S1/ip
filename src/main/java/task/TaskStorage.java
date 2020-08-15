@@ -21,6 +21,10 @@ public class TaskStorage {
         this.storage.get(index - 1).completeTask();
     }
 
+    public void removeTask(int index) {
+        this.storage.remove(index - 1);
+    }
+
     public void printTask(int index) {
         System.out.println(this.storage.get(index - 1));
     }

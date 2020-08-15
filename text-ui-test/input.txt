@@ -5,6 +5,10 @@ list
 done 1
 done 2
 list
+delete 2
+list
+delete 1
+list
 not a command
 todo
 bye
