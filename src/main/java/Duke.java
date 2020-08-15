@@ -20,6 +20,13 @@ public class Duke {
                 break;
             } else if (next.equals("list")) {
                 bot.displayActivities();
+            } else if (next.length() > 5 && next.substring(0,4).equals("done")) {
+                try {
+                    int taskNum = Integer.parseInt(next.substring(5));
+                    bot.completeTask(taskNum);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             } else {
                 bot.addActivity(next);
             }
