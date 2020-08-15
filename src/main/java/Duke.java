@@ -13,7 +13,7 @@ public class Duke {
     private static final String EXIT = "     Bye. Hope to see you again soon!";
     private static final String LINE = "    ____________________________________________________________";
 
-    private static List<String> lst = new ArrayList<>();
+    private static List<Task> lst = new ArrayList<>();
 
     // Scanner
     private final static Scanner sc = new Scanner(System.in);
@@ -32,15 +32,12 @@ public class Duke {
     public static void printList() {
         StringBuilder sb = new StringBuilder();
         int sizeOfList = lst.size();
+        sb.append("     Here are the tasks in your list:");
 
         for (int i = 0; i < sizeOfList; i++) {
-            if (i > 0) {
-                sb.append("\n");
-            }
-
             int number = i + 1;
-            String text = lst.get(i);
-            sb.append(String.format("     %s. %s", number, text));
+            String text = lst.get(i).toString();
+            sb.append(String.format("\n     %s. %s", number, text));
         }
 
         System.out.println(wrapText(sb.toString()));
@@ -55,15 +52,27 @@ public class Duke {
     public static void main(String[] args) {
         greeting();
         while (sc.hasNext()) {
+
             String input = sc.nextLine();
-            if (input.equals("bye")) {
-                exit();
-                break;
-            } else if (input.equals("list")) {
-                printList();
-            } else {
-                lst.add(input);
-                System.out.println(wrapText("     added: " + input));
+            String[] words = input.split(" ");
+            String firstWord = words[0];
+            switch (firstWord) {
+                case "bye" -> exit();
+                case "list" -> printList();
+                case "done" -> {
+                    int taskNumber = Integer.parseInt(words[1]);
+                    Task task = lst.get(taskNumber - 1);
+                    task.markAsDone();
+                    String doneText = String.format("     Nice! I've marked this task as done: \n" +
+                                                    "     %s", task);
+                    System.out.println(wrapText(doneText));
+                }
+
+                default -> {
+                    Task newTask = new Task(input);
+                    lst.add(newTask);
+                    System.out.println(wrapText("     added: " + input));
+                }
             }
         }
     }
