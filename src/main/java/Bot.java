@@ -13,10 +13,10 @@ public class Bot {
     static String indentation = "    ";
     static String demarcation = Bot.indentation + "-------------------------------------------------------------------";
 
-    ArrayList<Task> todos;
+    ArrayList<Task> tasks;
 
     Bot() {
-        this.todos = new ArrayList<>(100);
+        this.tasks = new ArrayList<>(100);
     }
 
     public void interact() {
@@ -27,25 +27,28 @@ public class Bot {
 
         while (scanner.hasNext()) {
             String command = scanner.nextLine();
-
+            String[] commandArr = command.split(" ");
+            String commandType = commandArr[0];
+            
             System.out.println(Bot.demarcation);
             // Dispatch respective handlers depending on command
-            switch (command) {
+            switch (commandType) {
                 case ("bye"):
                     System.out.println(indentWord(farewellMsg));
                     return;
                 case ("list"):
-                    printTodos();
+                    printTasks();
                     break;
+                case ("delete"):
+                    deleteTask(commandArr[1]);
+                    break;
+                case ("done"):
+                    markComplete(commandArr[1]);
                 default:
-                    if (command.startsWith("done ")) {
-                        markComplete(command);
-                    } else {
-                        try {
-                            addTodos(command);
-                        } catch (DukeException e) {
-                            System.out.println(indentWord(e.getMessage()));
-                        }
+                    try {
+                        addTask(command);
+                    } catch (DukeException e) {
+                        System.out.println(indentWord(e.getMessage()));
                     }
                     break;
             }
@@ -57,55 +60,65 @@ public class Bot {
         return Bot.indentation + word;
     }
 
-    private void printTodos() {
+    private void printTasks() {
         int counter = 1;
         System.out.println("Here are the tasks in your list:");
-        for (Task todo : todos) {
+        for (Task todo : tasks) {
             System.out.print(indentWord(Integer.toString(counter) + ". "));
             System.out.println(todo);
             counter++;
         }
     }
 
-    private void addTodos(String command) throws DukeException {
-        String[] todoArr = command.split(" ");
-        String todoType = todoArr[0];
-        Task todo = new Task("");
+    private void markComplete(String index) {
+        int intIndex = Integer.parseInt(index) - 1;
+        tasks.get(intIndex).markDone();
 
-        switch (todoType) {
+        // Print todo that has been marked done
+        System.out.println(indentWord("Nice! I've marked this task as done:"));
+        System.out.println(indentWord(tasks.get(intIndex).toString()));
+    }
+
+    private void deleteTask(String index) {
+        int intIndex = Integer.parseInt(index) - 1;
+        Task removedTask = tasks.remove(intIndex);
+        
+        // Print response from Duke after deleting task
+        System.out.println(indentWord("Noted. I've removed this task:"));
+        System.out.println(indentWord(removedTask.toString()));
+        System.out.println(indentWord(String.format("Now you have %s tasks in the list.", tasks.size())));
+    }
+    
+    private void addTask(String command) throws DukeException {
+        String[] taskArr = command.split(" ");
+        String taskType = taskArr[0];
+        Task task = new Task("");
+
+        switch (taskType) {
             case ("todo"):
                 // Only has the word todo
-                if (todoArr.length == 1) throw new EmptyTodoException();
-                todo = new Todo(command.substring(5));
+                if (taskArr.length == 1) throw new EmptyTodoException();
+                task = new Todo(command.substring(5));
                 break;
             case ("deadline"):
                 String deadlineContent = command.substring(9);
                 String[] deadlineArr = deadlineContent.split("/");
-                todo = new Deadline(deadlineArr[0], deadlineArr[1]);
+                task = new Deadline(deadlineArr[0], deadlineArr[1]);
                 break;
             case("event"):
                 String eventContent = command.substring(6);
                 String[] eventArr = eventContent.split("/");
-                todo = new Event(eventArr[0], eventArr[1]);
+                task = new Event(eventArr[0], eventArr[1]);
             default:
                 throw new DukeException();
         }
 
 
-        // Add todos
-        todos.add(todo);
-        // Response from Duke for adding todos
+        // Add task
+        tasks.add(task);
+        // Print response from Duke for adding task
         System.out.println(indentWord("Got it. I've added this task:"));
-        System.out.println(indentWord(todo.toString()));
-        System.out.println(indentWord(String.format("Now you have %s tasks in the list.", todos.size())));
-    }
-
-    private void markComplete(String command) {
-        int indexToMark = Integer.parseInt(command.substring(5)) - 1;
-        todos.get(indexToMark).markDone();
-
-        // Print todo that has been marked done
-        System.out.println(indentWord("Nice! I've marked this task as done:"));
-        System.out.println(indentWord(todos.get(indexToMark).toString()));
+        System.out.println(indentWord(task.toString()));
+        System.out.println(indentWord(String.format("Now you have %s tasks in the list.", tasks.size())));
     }
 }
