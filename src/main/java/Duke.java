@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Duke {
     private static ArrayList<Task> taskList = new ArrayList<>(); // List of all input items from user
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String logo = "Duke";
         System.out.println("Hello from " + logo + "\n" + "How may I be of service " +
                 "to you this fine day sire?");
@@ -12,7 +12,8 @@ public class Duke {
         try {
             awaitInstructions();
         } catch (DukeException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
+            awaitInstructions();
         }
     }
 
@@ -27,29 +28,35 @@ public class Duke {
 
         while (sc.hasNext()) {
             try {
-                String userInput =  sc.nextLine();
+                String userInput = sc.nextLine();
                 String userCommand = parseCommand(userInput);
+                Commands command;
+                try {
+                    command = Commands.valueOf(userCommand.toUpperCase());
+                } catch (IllegalArgumentException e) {
+                   command = Commands.UNKNOWN;
+                }
 
-                switch (userCommand) { // Determine output from user input
-                    case "bye":
+                switch (command) { // Determine output from user input
+                    case BYE:
                         System.out.println("Bye. Hope to see you again soon!");
                         break;
-                    case "list":
+                    case LIST:
                         listAllItems();
                         break;
-                    case "todo":
+                    case TODO:
                         addToDoTask(userInput);
                         break;
-                    case "event":
+                    case EVENT:
                         addEventTask(userInput);
                         break;
-                    case "deadline":
+                    case DEADLINE:
                         addDeadlineTask(userInput);
                         break;
-                    case "done":
+                    case DONE:
                         markTaskAsDone(userInput);
                         break;
-                    case "delete":
+                    case DELETE:
                         deleteTask(userInput);
                         break;
                     default:
