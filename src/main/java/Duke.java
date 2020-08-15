@@ -38,6 +38,7 @@ public class Duke {
                         tasks.get(index).markAsDone();
                         System.out.println(tasks.get(index).toString());
                     } else {
+                        System.out.println("________________________________________");
                         System.out.println("Integer should have a corresponding task in the list.");
                     }
                 } catch (Exception e) {
@@ -51,18 +52,30 @@ public class Duke {
                 try {
                     if (s.startsWith("todo")) {
                         s = sc.nextLine();
-                        temp = new ToDo(s);
-                        tasks.add(temp);
+                        if (s.isEmpty()) {
+                            throw new EmptyDescriptionException("Description cannot be empty");
+                        } else {
+                            temp = new ToDo(s);
+                            tasks.add(temp);
+                        }
                     } else if (s.startsWith("deadline")) {
                         s = sc.nextLine();
-                        String[] parts = s.split("\\s*/by\\s*");
-                        temp = new Deadline(parts[0], parts[1]);
-                        tasks.add(temp);
+                        if (s.isEmpty()) {
+                            throw new EmptyDescriptionException("Description cannot be empty");
+                        } else {
+                            String[] parts = s.split("\\s*/by\\s*");
+                            temp = new Deadline(parts[0], parts[1]);
+                            tasks.add(temp);
+                        }
                     } else if (s.startsWith("event")) {
                         s = sc.nextLine();
-                        String[] parts = s.split("\\s*/at\\s*");
-                        temp = new Event(parts[0], parts[1]);
-                        tasks.add(temp);
+                        if (s.isEmpty()) {
+                            throw new EmptyDescriptionException("Description cannot be empty");
+                        } else {
+                            String[] parts = s.split("\\s*/at\\s*");
+                            temp = new Event(parts[0], parts[1]);
+                            tasks.add(temp);
+                        }
                     } else {
                         sc.nextLine();
                         throw new Exception("Wrong command.");
@@ -71,9 +84,12 @@ public class Duke {
                     System.out.println("Yay! New task added: ");
                     System.out.println("   " + temp.toString());
                     System.out.println("Now you have " + tasks.size() + " tasks in your list.");
-                } catch (Exception e) {
+                } catch (EmptyDescriptionException e) {
                     System.out.println("________________________________________");
-                    System.out.println("Start with either todo, deadline or event to add new task.");
+                    System.out.println("Description cannot be empty!");
+                } catch (Exception e) {
+                        System.out.println("________________________________________");
+                        System.out.println("Start with either todo, deadline or event to add new task.");
                 } finally {
                     System.out.println("________________________________________");
                 }

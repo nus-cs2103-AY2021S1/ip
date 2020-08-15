@@ -1,0 +1,7 @@
+todo hi
+deadline homework /by wednesday
+event concert /at next month
+list
+done 2
+done 4
+bye

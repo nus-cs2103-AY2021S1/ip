@@ -5,3 +5,44 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm Duke
+     What can I do for you?
+________________________________________
+todo hi
+________________________________________
+Yay! New task added: 
+   [T][✘] hi
+Now you have 1 tasks in your list.
+________________________________________
+deadline homework /by wednesday
+________________________________________
+Yay! New task added: 
+   [D][✘] homework (by: wednesday)
+Now you have 2 tasks in your list.
+________________________________________
+event concert /at next month
+________________________________________
+Yay! New task added: 
+   [E][✘] concert (at: next month)
+Now you have 3 tasks in your list.
+________________________________________
+list
+________________________________________
+Here is your current list:
+1.[T][✘] hi
+2.[D][✘] homework (by: wednesday)
+3.[E][✘] concert (at: next month)
+________________________________________
+done 2
+________________________________________
+Nice! I've marked this task as done: 
+[D][✓] homework (by: wednesday)
+________________________________________
+done 4
+________________________________________
+Integer should have a corresponding task in the list.
+________________________________________
+bye
+________________________________________
+Bye. Hope to see you again soon!
+________________________________________
