@@ -55,6 +55,46 @@ public class Duke {
         System.out.println(task);
     }
 
+    private void handleDoneCommand(String input) throws DukeException {
+        try {
+            int taskNumber = Integer.parseInt(input);
+            markTaskAsDone(taskNumber);
+        } catch (NullPointerException e) {
+            throw new DukeException("Error! The entry number you entered does not exist.");
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Error! Please enter a valid entry number.");
+        }
+    }
+    
+    private void handleTodoCommand(String input) {
+        Todo todo = new Todo(input);
+        addTask(todo);
+    }
+    
+    private void handleDeadlineCommand(String input) throws DukeException {
+        String[] inputBreakdown = input.split(" /by ", 2);
+        if (inputBreakdown.length < 2) {
+            throw new DukeException("Error! Note the syntax: deadline [description] /by [date]");
+        } else {
+            String description = inputBreakdown[0];
+            String by = inputBreakdown[1];
+            Deadline deadline = new Deadline(description, by);
+            addTask(deadline);
+        }
+    }
+    
+    private void handleEventCommand(String input) throws DukeException {
+        String[] inputBreakdown = input.split(" /at ", 2);
+        if (inputBreakdown.length < 2) {
+            throw new DukeException("Error! Note the syntax: event [description] /at [date]");
+        } else {
+            String description = inputBreakdown[0];
+            String at = inputBreakdown[1];
+            Event event = new Event(description, at);
+            addTask(event);
+        }
+    }
+
     private void exit() {
         System.out.println(exitMessage);
         System.exit(0);
@@ -64,53 +104,47 @@ public class Duke {
         String input = scanner.nextLine();
         String[] inputBreakdown = input.split(" ", 2);
         String command = inputBreakdown[0];
-        switch (command) {
-            case ("list"):
-                listAllTasks();
-                break;
-            case ("done"):
-                try {
-                    int taskNumber = Integer.parseInt(inputBreakdown[1]);
-                    markTaskAsDone(taskNumber);
-                } catch (Exception e) {
-
-                }
-                break;
-            case ("todo"):
-                try {
-                    Todo todo = new Todo(inputBreakdown[1]);
-                    addTask(todo);
-                } catch (Exception e) {
-
-                }
-                break;
-            case ("deadline"):
-                try {
-                    String[] remainingInput = inputBreakdown[1].split(" /by ", 2);
-                    String description = remainingInput[0];
-                    String by = remainingInput[1];
-                    Deadline deadline = new Deadline(description, by);
-                    addTask(deadline);
-                } catch (Exception e) {
-
-                }
-                break;
-            case ("event"):
-                try {
-                    String[] remainingInput = inputBreakdown[1].split(" /at ", 2);
-                    String description = remainingInput[0];
-                    String at = remainingInput[1];
-                    Event event = new Event(description, at);
-                    addTask(event);
-                } catch (Exception e) {
-
-                }
-                break;
-            case ("bye"):
-                exit();
-                break;
-            default:
-                System.out.println("I'm sorry, but I don't know what that means!");
+        try {
+            switch (command) {
+                case ("list"):
+                    listAllTasks();
+                    break;
+                case ("done"):
+                    if (inputBreakdown.length < 2) {
+                        throw new DukeException("Error! Note the syntax: done [task number]");
+                    } else {
+                        handleDoneCommand(inputBreakdown[1]);
+                    }
+                    break;
+                case ("todo"):
+                    if (inputBreakdown.length < 2) {
+                        throw new DukeException("Error! Note the syntax: todo [description]");
+                    } else {
+                        handleTodoCommand(inputBreakdown[1]);
+                    }
+                    break;
+                case ("deadline"):
+                    if (inputBreakdown.length < 2) {
+                        throw new DukeException("Error! Note the syntax: deadline [description] /by [date]");
+                    } else {
+                        handleDeadlineCommand(inputBreakdown[1]);
+                    }
+                    break;
+                case ("event"):
+                    if (inputBreakdown.length < 2) {
+                        throw new DukeException("Error! Note the syntax: event [description] /at [date]");
+                    } else {
+                        handleEventCommand(inputBreakdown[1]);
+                    }
+                    break;
+                case ("bye"):
+                    exit();
+                    break;
+                default:
+                    throw new DukeException("I'm sorry, but I don't know what that means \u2639");
+            }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
         listenForCommands();
     }

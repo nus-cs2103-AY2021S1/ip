@@ -1,6 +1,12 @@
+test
 todo read book
+todo
 deadline homework /by Sunday
+deadline homework
+deadline
 event lesson /at 1-2pm
+event lesson
+event
 list
 done 2
 list

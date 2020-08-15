@@ -6,15 +6,21 @@
 
 Hello! My name is Duke.
 What can I do for you?
+I'm sorry, but I don't know what that means ☹
 Got it. I've added this task:
 [T][✘] read book
 Now you have 1 task in the list.
+Error! Note the syntax: todo [description]
 Got it. I've added this task:
 [D][✘] homework (by: Sunday)
 Now you have 2 tasks in the list.
+Error! Note the syntax: deadline [description] /by [date]
+Error! Note the syntax: deadline [description] /by [date]
 Got it. I've added this task:
 [E][✘] lesson (at: 1-2pm)
 Now you have 3 tasks in the list.
+Error! Note the syntax: event [description] /at [date]
+Error! Note the syntax: event [description] /at [date]
 Here are the tasks in your list:
 1. [T][✘] read book
 2. [D][✘] homework (by: Sunday)
