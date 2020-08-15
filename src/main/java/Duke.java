@@ -6,7 +6,7 @@ public class Duke {
 
     public static void main(String[] args) {
         greet();
-        pikaService();
+        userCommand();
         exit();
     }
 
@@ -20,55 +20,92 @@ public class Duke {
                 "4. or you can say 'bye' to end us </3");
     }
 
-    public static void pikaService() {
+    public static void userCommand() {
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         List<Task> storage = new ArrayList<>();
 
         while (!input.equals("bye")) {
-
-            String firstWord = input.split(" ")[0];
-            int size = storage.size();
-
-            if (firstWord.equals("list")) {
-                System.out.print("Retrieving your list, patient ah!\n");
-                for (int i = 0; i < size; i++) {
-                    System.out.print(String.format("   %2d. %s\n", i + 1, storage.get(i)));
+            try {
+                String command = input.split(" ")[0];
+                int size = storage.size();
+                commandChecker(command);
+                if (command.equals("list")) {
+                    commandList(size, storage);
+                } else if (command.equals("done")) {
+                    int index = Integer.parseInt(input.split(" ")[1]) - 1;
+                    commandDone(index, storage);
+                } else {
+                    String message = input.substring(command.length());
+                    commandTasks(storage, command, message);
                 }
-            } else if (firstWord.equals("list") && size == 0){
-                System.out.print("  There is nothing added to the storage!\n");
-            } else if (firstWord.equals("done")) {
-                int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                storage.get(index).makeDone();
-                System.out.print(String.format("    Swee la, task done liao!:\n" +
-                        "       %s\n", storage.get(index)));
-            } else {
-                String message = input.substring(firstWord.length());
-                taskSorter(storage, firstWord, message);
+            } catch (DukeCommandException | DukeIndexException | DukeTaskException | DukeListException e) {
+                System.out.print(String.format("  ERROR: %s\n", e.getMessage()));
             }
             input = sc.nextLine();
         }
     }
 
-    public static void taskSorter(List<Task> storage, String tag, String message) {
-        Task newTask = null;
-
-        if (tag.equals("todo")) {
-            newTask = new Todo(message);
-        } else if (tag.equals("deadline")) {
-            String[] parsedMessage = message.split("/by");
-            newTask = new Deadline(parsedMessage[0], parsedMessage[1]);
-        } else if (tag.equals("event")) {
-            String[] parsedMessage = message.split("/at");
-            newTask = new Deadline(parsedMessage[0], parsedMessage[1]);
+    public static void commandList(int index, List<Task> storage) throws DukeListException {
+        if (storage.size() != 0 ) {
+            System.out.print("Retrieving your list, patient ah!\n");
+            for (int i = 0; i < storage.size(); i++) {
+                System.out.print(String.format("   %2d. %s\n", i + 1, storage.get(i)));
+            }
+        } else {
+            throw new DukeListException("Your list is empty.");
         }
-        storage.add(newTask);
-        System.out.print("    Steady! I add... wait ah...\n");
-        System.out.print(String.format("        added: %s\n", newTask));
-        System.out.print(String.format("    Now you got %d tasks in list, " +
-                "don't procrastinate hor\n", storage.size()));
+    }
 
+    public static void commandDone(int index, List<Task> storage) throws DukeIndexException {
+        if (index > storage.size() - 1 || index < 0) {
+            String errorMessage = "Wrong list number input. " +
+                    "Please put a number between 1 and " + storage.size();
+            throw new DukeIndexException(errorMessage);
+        }
+        storage.get(index).makeDone();
+        System.out.print(String.format("    Swee la, task done liao!:\n" +
+                "       %s\n", storage.get(index)));
+    }
+
+    public static void commandTasks(List<Task> storage, String tag, String message) throws DukeTaskException {
+        String[] parsedMessage = null;
+        Task newTask = null;
+        int size = storage.size();
+
+        try {
+            if (tag.equals("todo")) {
+                newTask = new Todo(message);
+            } else if (tag.equals("deadline")) {
+                parsedMessage = message.split("/by ");
+            } else if (tag.equals("event")) {
+                parsedMessage = message.split("/at ");
+            }
+
+            newTask = new Deadline(parsedMessage[0], parsedMessage[1]);
+            storage.add(newTask);
+
+            System.out.print("    Steady! I add... wait ah...\n");
+            System.out.print(String.format("        ADDED: %s\n", newTask));
+            System.out.print(String.format("    Now you got %d tasks in list, " +
+                    "don't procrastinate hor\n", size));
+        } catch (IndexOutOfBoundsException e) {
+            String errorMessage = "You might have left your message or duration empty.";
+            throw new DukeTaskException(errorMessage);
+        }
+    }
+
+    public static void commandChecker(String command) throws DukeCommandException {
+        boolean isCorrect = command.equals("event") ||
+                            command.equals("deadline") ||
+                            command.equals("todo") ||
+                            command.equals("list") ||
+                            command.equals("done");
+        if (!isCorrect) {
+            String errorMessage = "Command is wrong. Please start with list, done, deadline, todo or event.";
+            throw new DukeCommandException(errorMessage);
+        }
     }
 
     public static void exit() {

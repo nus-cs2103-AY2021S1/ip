@@ -13,7 +13,7 @@ public class Task {
     }
 
     public void makeDone() {
-        this.isDone = !this.isDone;
+        this.isDone = true;
     }
 
     @Override
