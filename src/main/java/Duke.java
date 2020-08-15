@@ -52,7 +52,7 @@ public class Duke {
 
             case "done":
                 if (commandInputs.length < 2) {
-                    throw new DukeException("Attempted to mark a task as done, but not task was specified!");
+                    throw new DukeException("Attempted to mark a task as done, but no task was specified!");
                 }
 
                 commandDetails = commandInputs[1];
@@ -116,8 +116,6 @@ public class Duke {
 
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
-
         }
-
     }
 }

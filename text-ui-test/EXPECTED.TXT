@@ -79,7 +79,7 @@ ____________________________________________________________
 ☹ OOPS!!! Attempted to create event without specifying time!
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Attempted to mark a task as done, but not task was specified!
+☹ OOPS!!! Attempted to mark a task as done, but no task was specified!
 ____________________________________________________________
 ____________________________________________________________
 ☹ OOPS!!! Please key in only the integer representing the task you want to mark as complete!
