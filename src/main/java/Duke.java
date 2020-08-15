@@ -4,15 +4,15 @@ public class Duke {
     private Scanner scanner;
 
     private static final int MAXSIZE = 100;
-    private String[] todoList;
-    private int todoListSize;
+    private Task[] taskList;
+    private int taskListSize;
 
     private String logo, greetingMessage, exitMessage;
 
     public void initialise() {
         scanner = new Scanner(System.in);
-        todoList = new String[MAXSIZE];
-        todoListSize = 0;
+        taskList = new Task[MAXSIZE];
+        taskListSize = 0;
         logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -29,18 +29,26 @@ public class Duke {
         System.out.println(greetingMessage);
     }
 
-    private void list() {
-        for (int i = 0; i < todoListSize; i++) {
-            int number = i + 1;
-            String entry = String.format("%d. %s", number, todoList[i]);
+    private void listAllTasks() {
+        for (int i = 0; i < taskListSize; i++) {
+            int taskNumber = i + 1;
+            String entry = String.format("%d. %s", taskNumber, taskList[i]);
             System.out.println(entry);
         }
     }
 
-    private void addToList(String item) {
-        todoList[todoListSize] = item;
-        todoListSize++;
-        System.out.println("added: " + item);
+    private void addToTaskList(String description) {
+        taskList[taskListSize] = new Task(description);
+        taskListSize++;
+        System.out.println("added: " + description);
+    }
+
+    private void markTaskAsDone(int taskNumber) {
+        int index = taskNumber - 1;
+        Task task = taskList[index];
+        task.markAsDone();
+        System.out.println("Nice! I have marked this task as done:");
+        System.out.println(task);
     }
 
     private void exit() {
@@ -49,16 +57,22 @@ public class Duke {
     }
 
     private void listenForCommands() {
-        String command = scanner.nextLine();
+        String input = scanner.nextLine();
+        String[] inputBreakdown = input.split(" ");
+        String command = inputBreakdown[0];
         switch (command) {
             case ("list"):
-                list();
+                listAllTasks();
+                break;
+            case ("done"):
+                int taskNumber = Integer.parseInt(inputBreakdown[1]);
+                markTaskAsDone(taskNumber);
                 break;
             case ("bye"):
                 exit();
                 break;
             default:
-                addToList(command);
+                addToTaskList(input);
         }
         listenForCommands();
     }
