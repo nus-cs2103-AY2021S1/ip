@@ -1,7 +1,16 @@
+package Duke;
+/**
+ * The task class that represents a task.
+ *
+ * @author Zeng Yu Ting
+ * @version 1.0
+ * @since 2020-15-08
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
 
+    public Task() {}
 
     public Task(String description) {
         this.description = description;
