@@ -39,7 +39,7 @@ public class Duke {
         String task = sc.nextLine();
         while (!task.toLowerCase().equals("bye")) {
             if (task.toLowerCase().equals("list")) {
-                System.out.println("Lao Duke not so blur like you. I got remember your tasks one hor.");
+                System.out.println("Lao Duke not so blur like you. Tsk. I got remember your tasks one hor.");
                 for (int i = 0; i < this.taskList.size(); i++) {
                     System.out.println("Task " + (i + 1) + ": " + taskList.get(i));
                 }
