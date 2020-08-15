@@ -23,17 +23,17 @@ public class Duke {
     }
 
     public static void echoDuke() {
-        greet();
         Scanner sc = new Scanner(System.in);
         String cmd = sc.nextLine();
         while (!cmd.toLowerCase().equals("bye")) {
             System.out.println(cmd);
             cmd = sc.nextLine();
         }
-        exit();
     }
 
     public static void main(String[] args) {
-       echoDuke();
+        greet();
+        echoDuke();
+        exit();
     }
 }
