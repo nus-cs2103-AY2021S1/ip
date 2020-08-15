@@ -1,10 +1,8 @@
 public class Duke {
+    private static String formatReply(String text) {
+        String line = "\t_______________________________________________________________";
+        return line + "\n\t\t" + text.replaceAll("\\n", "\n\t\t") + "\n" + line;
+    }
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
     }
 }
