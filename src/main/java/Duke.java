@@ -13,17 +13,26 @@ public class Duke {
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            if(input.equals("list")) {
-                output = lst.readWork();
-                System.out.println(printDesign(output));
+            String[] checkCommand = input.split(" ");
+            if(checkCommand[0].equals("done")) {
+                output = printDesign(
+                        lst.updateTaskStatus(
+                                Integer.parseInt(checkCommand[checkCommand.length - 1])
+                        )
+                );
+            } else if(input.equals("list")) {
+                output = printDesign(lst.readWork());
             } else if(input.equals("bye")) {
                 output = "** Bye. Hope to see you soon!! **";
-                System.out.println(output);
-                break;
             } else {
-                lst.addWork(input);
-                output = "added: " + input;
-                System.out.println(printDesign(output));
+                Task newTask = new Task(input);
+                lst.addWork(newTask);
+                output = printDesign("added: " + input);
+            }
+
+            System.out.println(output);
+            if(input.equals("bye")) {
+                break;
             }
         }
 
