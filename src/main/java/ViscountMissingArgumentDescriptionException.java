@@ -1,0 +1,14 @@
+public class ViscountMissingArgumentDescriptionException extends ViscountException {
+    private String argument;
+    private static final String ERROR_MESSAGE = "Alas, the description of the %s argument\ncannot be empty.";
+
+    public ViscountMissingArgumentDescriptionException(String argument) {
+        super();
+        this.argument = argument;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(ViscountMissingArgumentDescriptionException.ERROR_MESSAGE, this.argument);
+    }
+}

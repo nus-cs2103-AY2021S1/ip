@@ -50,40 +50,90 @@ public class Viscount {
         Viscount.speak("Very good! I have marked this task as done:\n" + task.toString());
     }
 
+    private static void parseInput(List<String> arguments) throws ViscountException {
+        String command = arguments.get(0);
+
+        if (command.equals("list")) {
+            Viscount.speak("Here are the tasks in your list:\n" + Viscount.taskListToString());
+        } else if (command.equals("todo")) {
+            String description = String.join(" ", arguments.subList(1, arguments.size()));
+
+            if (description.isEmpty()) {
+                throw new ViscountMissingDescriptionException("todo");
+            } else {
+                Todo todo = new Todo(description);
+                Viscount.addToTaskList(todo);
+            }
+        } else if (command.equals("deadline")) {
+            int indexOfDueDate = arguments.indexOf("/by");
+
+            if (indexOfDueDate == -1) {
+                throw new ViscountMissingArgumentException("/by");
+            } else {
+                String description = String.join(" ", arguments.subList(1, indexOfDueDate));
+                String dueDate = String.join(" ", arguments.subList(indexOfDueDate + 1, arguments.size()));
+
+                if (description.isEmpty()) {
+                    throw new ViscountMissingDescriptionException("deadline");
+                } else if (dueDate.isEmpty()) {
+                    throw new ViscountMissingArgumentDescriptionException("/by");
+                } else {
+                    Deadline deadline = new Deadline(description, dueDate);
+                    Viscount.addToTaskList(deadline);
+                }
+            }
+        } else if (command.equals("event")) {
+            int indexOfEventTime = arguments.indexOf("/at");
+
+            if (indexOfEventTime == -1) {
+                throw new ViscountMissingArgumentException("/at");
+            } else {
+                String description = String.join(" ", arguments.subList(1, indexOfEventTime));
+                String eventTime = String.join(" ", arguments.subList(indexOfEventTime + 1, arguments.size()));
+
+                if (description.isEmpty()) {
+                    throw new ViscountMissingDescriptionException("event");
+                } else if (eventTime.isEmpty()) {
+                    throw new ViscountMissingArgumentDescriptionException("/at");
+                } else {
+                    Event event = new Event(description, eventTime);
+                    Viscount.addToTaskList(event);
+                }
+            }
+        } else if (command.equals("done")) {
+            if (arguments.size() < 2) {
+                throw new ViscountMissingArgumentException("task number");
+            } else {
+                int indexOfTask = 0;
+
+                try {
+                    indexOfTask = Integer.parseInt(arguments.get(1));
+                    Viscount.markAsDone(taskList.get(indexOfTask - 1));
+                } catch (NumberFormatException e) {
+                    throw new ViscountNumberFormatException(arguments.get(1));
+                } catch (IndexOutOfBoundsException e) {
+                    throw new ViscountIndexOutOfBoundsException(indexOfTask);
+                }
+            }
+        } else {
+            throw new ViscountUnknownCommandException(command);
+        }
+    }
+
     private static void chat() {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
             List<String> arguments = Arrays.asList(input.split(" "));
-            String command = arguments.get(0);
 
-            if (command.equals("list")) {
-                Viscount.speak("Here are the tasks in your list:\n" + Viscount.taskListToString());
-            } else if (command.equals("todo")) {
-                String description = String.join(" ", arguments.subList(1, arguments.size()));
-                Todo todo = new Todo(description);
-                Viscount.addToTaskList(todo);
-            } else if (command.equals("deadline")) {
-                int indexOfDueDate = arguments.indexOf("/by");
-                String description = String.join(" ", arguments.subList(1, indexOfDueDate));
-                String dueDate = String.join(" ", arguments.subList(indexOfDueDate + 1, arguments.size()));
-
-                Deadline deadline = new Deadline(description, dueDate);
-                Viscount.addToTaskList(deadline);
-            } else if (command.equals("event")) {
-                int indexOfEventTime = arguments.indexOf("/at");
-                String description = String.join(" ", arguments.subList(1, indexOfEventTime));
-                String eventTime = String.join(" ", arguments.subList(indexOfEventTime + 1, arguments.size()));
-
-                Event event = new Event(description, eventTime);
-                Viscount.addToTaskList(event);
-            } else if (command.equals("done")) {
-                int indexOfTask = Integer.parseInt(arguments.get(1)) - 1;
-                Viscount.markAsDone(taskList.get(indexOfTask));
+            try {
+                Viscount.parseInput(arguments);
+            } catch (ViscountException e) {
+                Viscount.speak(e.toString());
+            } finally {
+                input = sc.nextLine();
             }
-
-            input = sc.nextLine();
         }
     }
 

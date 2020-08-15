@@ -10,9 +10,34 @@ What can I do for you on this blessed day?
 __________________________________________________
 
 __________________________________________________
+Alas, I do apologise but I don't know
+what 'blah' means.
+__________________________________________________
+
+__________________________________________________
+Alas, the description of a todo
+cannot be empty.
+__________________________________________________
+
+__________________________________________________
 Very well. I've added this task:
 [T][?] read book
 Now you have 1 tasks in the list.
+__________________________________________________
+
+__________________________________________________
+Alas, you need to specify the /by argument
+for this task.
+__________________________________________________
+
+__________________________________________________
+Alas, the description of a deadline
+cannot be empty.
+__________________________________________________
+
+__________________________________________________
+Alas, the description of the /by argument
+cannot be empty.
 __________________________________________________
 
 __________________________________________________
@@ -22,9 +47,38 @@ Now you have 2 tasks in the list.
 __________________________________________________
 
 __________________________________________________
+Alas, you need to specify the /at argument
+for this task.
+__________________________________________________
+
+__________________________________________________
+Alas, the description of a event
+cannot be empty.
+__________________________________________________
+
+__________________________________________________
+Alas, the description of the /at argument
+cannot be empty.
+__________________________________________________
+
+__________________________________________________
 Very well. I've added this task:
-[E][?] project meeting (at: thursday 6pm)
+[E][?] project meeting (at: 6pm)
 Now you have 3 tasks in the list.
+__________________________________________________
+
+__________________________________________________
+Alas, you need to specify the task number argument
+for this task.
+__________________________________________________
+
+__________________________________________________
+Alas, 'a' is not a valid task number.
+__________________________________________________
+
+__________________________________________________
+Alas, your task list does not contain a task
+number 0.
 __________________________________________________
 
 __________________________________________________
@@ -36,19 +90,19 @@ __________________________________________________
 Here are the tasks in your list:
 1.[T][?] read book
 2.[D][?] return book (by: wednesday)
-3.[E][?] project meeting (at: thursday 6pm)
+3.[E][?] project meeting (at: 6pm)
 __________________________________________________
 
 __________________________________________________
 Very good! I have marked this task as done:
-[E][?] project meeting (at: thursday 6pm)
+[E][?] project meeting (at: 6pm)
 __________________________________________________
 
 __________________________________________________
 Here are the tasks in your list:
 1.[T][?] read book
 2.[D][?] return book (by: wednesday)
-3.[E][?] project meeting (at: thursday 6pm)
+3.[E][?] project meeting (at: 6pm)
 __________________________________________________
 
 __________________________________________________

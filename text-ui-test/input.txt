@@ -1,6 +1,17 @@
+blah
+todo
 todo read book
+deadline
+deadline /by
+deadline return book /by
 deadline return book /by wednesday
-event project meeting /at thursday 6pm
+event
+event /at
+event project meeting /at
+event project meeting /at 6pm
+done
+done a
+done 0
 done 1
 list
 done 3
