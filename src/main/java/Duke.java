@@ -29,7 +29,7 @@ public class Duke {
                         throw new DukeException("     ☹ OOPS!!! The description of done is incomplete.");
                     }
                     int n = Integer.parseInt(res.substring(5)) - 1;
-                    if (n > data.size() || n <= 0) {
+                    if (n > data.size() || n < 0) {
                         //Exception: eg. done 999
                         throw new DukeException("     ☹ OOPS!!! The index is out of bounds.");
                     }
