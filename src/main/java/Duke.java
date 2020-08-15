@@ -1,12 +1,15 @@
 package main.java;
 
+import javax.print.DocFlavor;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
+
 public class Duke {
-    private List<String> list = new ArrayList<>();
+    private List<Task> list = new ArrayList<>();
 
     static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -30,10 +33,20 @@ public class Duke {
                 break;
             } else if (input.equals(LIST_COMMAND)) {
                 System.out.println(LINE + showList() + LINE);
+            } else if(input.contains("done")){
+                doneOutput(input);
             }else {
                 add(input);
             }
         }
+    }
+
+    private void doneOutput(String input) {
+        int index = Integer.parseInt(input.split(" ")[1]);
+        Task task = list.get(index-1);
+        task.setStatus(true);
+        System.out.println(LINE +DOUBLE_TAB +"Nice! I've marked this task as done:\n" + DOUBLE_TAB+  task + "\n"+ LINE);
+
     }
 
     private String showList() {
@@ -49,7 +62,7 @@ public class Duke {
     }
 
     private void add(String input) {
-        list.add(input);
+        list.add(new Task(input));
         System.out.println(LINE + DOUBLE_TAB + "added: " + input + "\n" + LINE);
     }
 
