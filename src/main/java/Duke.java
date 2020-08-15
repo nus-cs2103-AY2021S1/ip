@@ -4,7 +4,34 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static List<String> toDoList = new ArrayList<String>();
+    public static List<Task> toDoList = new ArrayList<Task>();
+    public static String seperator = "\t____________________________________________________________";
+
+    public static void listTask() {
+        System.out.println(seperator);
+        for (int i = 1; i <= toDoList.size(); i++) {
+            Task current = toDoList.get(i - 1);
+            System.out.println("\t" + i + ".[" + current.getIcon() + "] " + current.taskDesc);
+        }
+        System.out.println(seperator);
+    }
+
+    public static void completeTask(String newLine) {
+        int completed = Integer.parseInt(newLine.substring(5));
+        Task current = toDoList.get(completed - 1);
+        current.completeTask();
+        System.out.println(seperator);
+        System.out.println("\tNice! I've marked this task as done:");
+        System.out.println("\t\t[" + current.getIcon() + "] " + current.taskDesc);
+        System.out.println();
+    }
+
+    public static void addTask(String newLine) {
+        System.out.println(seperator);
+        System.out.println("\tadded: "+newLine);
+        System.out.println(seperator);
+        toDoList.add(new Task(newLine));
+    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -14,7 +41,6 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        String seperator = "\t____________________________________________________________";
         System.out.println(seperator);
         System.out.println("\tHello! I'm Duke\n\tWhat can I do for you?");
         System.out.println(seperator);
@@ -28,16 +54,11 @@ public class Duke {
                 break;
 
             } else if (newLine.equals("list")) {
-                System.out.println(seperator);
-                for ( int i = 1; i <= toDoList.size(); i++) {
-                    System.out.println("\t"+i + ". " + toDoList.get(i-1));
-                }
-                System.out.println(seperator);
+                listTask();
+            } else if (newLine.length() >= 5 && newLine.substring(0,4).equals("done")) {
+                completeTask(newLine);
             } else {
-                System.out.println(seperator);
-                System.out.println("\tadded: "+newLine);
-                System.out.println(seperator);
-                toDoList.add(newLine);
+                addTask(newLine);
             }
         }
     }
