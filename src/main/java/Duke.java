@@ -2,6 +2,18 @@ import java.util.Scanner;
 
 public class Duke {
     public static Scanner sc = new Scanner(System.in);
+    public static String[] tasks = new String[100];
+    public static int numberOfTasks = 0;
+
+    public static void printTasks() {
+        System.out.println(
+                "    ____________________________________________________________");
+        for (int i = 0; i < numberOfTasks; i++) {
+            System.out.format("     %d. %s\n", i + 1, tasks[i]);
+        }
+        System.out.println(
+                "    ____________________________________________________________\n");
+    }
 
     public static void main(String[] args) {
         boolean running = true;
@@ -20,7 +32,7 @@ public class Duke {
                 "    ____________________________________________________________\n");
 
         while(running) {
-            var input = sc.nextLine();
+            String input = sc.nextLine();
 
             if (input.equals("bye")) {
                 System.out.println(
@@ -29,10 +41,15 @@ public class Duke {
                         "    ____________________________________________________________\n");
 
                 running = false;
+            } else if (input.equals("list")) {
+                printTasks();
             } else {
+                tasks[numberOfTasks] = input;
+                numberOfTasks++;
+
                 System.out.println(
                         "    ____________________________________________________________\n" +
-                        String.format("    " + input + "\n") +
+                        String.format("     added:" + input + "\n") +
                         "    ____________________________________________________________\n");
             }
         }
