@@ -14,7 +14,7 @@ public class Duke {
 
     private static void add(String task) {
         String echoizer = "\t____________________________________________________________\n"
-                + "\t Got it. I've added this task: \n"
+                + "\t Got it. I've added this task:\n"
                 + "\t %s\n"
                 + "\t Now you have %d tasks in the list.\n"
                 + "\t____________________________________________________________\n";
@@ -53,14 +53,14 @@ public class Duke {
         Task t = tasks.get(i - 1);
         t.markAsDone();
         String done = "\t____________________________________________________________\n"
-                + "\t Nice! I've marked this task as done: \n"
+                + "\t Nice! I've marked this task as done:\n"
                 + "\t   %s\n"
                 + "\t____________________________________________________________\n";
-        System.out.printf(done, t);
+        System.out.printf((done) + "%n", t);
     }
 
     public static void main(String[] args) {
-        String logo = " _____    __        \n"
+        String logo = " _____    __\n"
                 + "|     \\  |  |\n"
                 + "|  |\\  \\ |  |\n"
                 + "|  | \\  \\|  |\n"
