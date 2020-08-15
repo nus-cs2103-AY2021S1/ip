@@ -71,7 +71,8 @@ public class Duke {
                             int currentTaskIndex = indexOfTemp - 1;
 
                             if (currentTaskIndex < 0 || currentTaskIndex >= STORAGE.size()) {
-                                throw new DukeException("The task number" + " (" + (currentTaskIndex + 1) + ") " + "that you have input can not be found in your list.");
+                                throw new DukeException("The task number" + " (" + (currentTaskIndex + 1) + ") " +
+                                                        "that you have input can not be found in your list.");
                             }
 
                             Task currentTask = STORAGE.get(currentTaskIndex);
@@ -113,8 +114,8 @@ public class Duke {
                             }
 
                             if (numOfInput < 4) {
-                                throw new DukeException("☹ OOPS!!! The correct way to log a deadline is: (deadline) " +
-                                        "(description) (/by) (date)");
+                                throw new DukeException("☹ OOPS!!! The correct way to log a deadline is: (deadline) "
+                                                        + "(description) (/by) (date)");
                             }
 
                             StringBuilder deadlineString = new StringBuilder("");
@@ -184,8 +185,41 @@ public class Duke {
                         }
                         break;
 
+                    case "delete":
+                        try {
+                            if (numOfInput < 2) {
+                                throw new DukeException("Please specify which task you want to delete.");
+                            }
+
+                            try {
+                                Integer.parseInt(userInputArray[1]);
+                            } catch (NumberFormatException error) {
+                                throw new DukeException("Input is not a valid integer.");
+                            }
+
+                            String tempStr = command.split(" ")[1];
+                            int indexOfTempStr = Integer.parseInt(tempStr);
+                            int indexToRemove = indexOfTempStr - 1;
+                            int arraySize = STORAGE.size();
+
+                            if (indexToRemove < 0 || indexToRemove >= arraySize) {
+                                throw new DukeException("The task number" + " (" + (indexToRemove + 1) + ") " + "that you want to delete can not be found in your list.");
+                            } else {
+                                Task curr = STORAGE.get(indexToRemove);
+                                printDelete();
+                                System.out.println(" " + curr.toString());
+                                STORAGE.remove(indexToRemove);
+                                Task.totalTasks = Task.totalTasks - 1;
+                                printTaskCount();
+                            }
+                        } catch (DukeException error) {
+                            System.err.println(error.getMessage());
+                        }
+                        break;
+
                     default:
-                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what '" + command + "' means :-(");
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what '" + command
+                                                + "' means :-(");
                 }
             } catch (DukeException error) {
                 System.err.println(error.getMessage());
@@ -213,6 +247,10 @@ public class Duke {
 
     private static void printBorder() {
         System.out.print("---------------------------\n");
+    }
+
+    private static void printDelete() {
+        System.out.println("Noted. I've removed this task:");
     }
 
     private static void printByeMessage() {
