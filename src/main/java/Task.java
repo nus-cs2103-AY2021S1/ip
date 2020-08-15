@@ -17,9 +17,9 @@ public abstract class Task {
     public String toString() {
         String result = "";
         if (this.done) {
-            result += "[✓] ";
+            result += "[\u2713] ";
         } else {
-            result += "[x] ";
+            result += "[\u2718] ";
         }
         result += this.task;
         return result;
