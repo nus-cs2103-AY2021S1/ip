@@ -1,0 +1,11 @@
+list
+deadline die /by next year
+event death /at soon pls
+todo off myself
+list
+done 1
+done 2
+done 3
+done 100
+list
+bye
