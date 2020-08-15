@@ -1,0 +1,7 @@
+todo read book
+deadline homework /by Sunday
+event lesson /at 1-2pm
+list
+done 2
+list
+bye

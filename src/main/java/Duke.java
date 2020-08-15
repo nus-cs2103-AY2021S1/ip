@@ -69,16 +69,20 @@ public class Duke {
                 listAllTasks();
                 break;
             case ("done"):
-                int taskNumber = Integer.parseInt(inputBreakdown[1]);
                 try {
+                    int taskNumber = Integer.parseInt(inputBreakdown[1]);
                     markTaskAsDone(taskNumber);
                 } catch (Exception e) {
 
                 }
                 break;
             case ("todo"):
-                Todo todo = new Todo(inputBreakdown[1]);
-                addTask(todo);
+                try {
+                    Todo todo = new Todo(inputBreakdown[1]);
+                    addTask(todo);
+                } catch (Exception e) {
+
+                }
                 break;
             case ("deadline"):
                 try {
@@ -106,8 +110,7 @@ public class Duke {
                 exit();
                 break;
             default:
-                Task task = new Task(input);
-                addTask(task);
+                System.out.println("I'm sorry, but I don't know what that means!");
         }
         listenForCommands();
     }
