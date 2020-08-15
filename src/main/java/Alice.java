@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Alice {
-    private final ArrayList<String> ls;
+    private final ArrayList<Task> ls;
 
     public Alice() {
         ls = new ArrayList<>();
@@ -14,16 +14,34 @@ public class Alice {
         if (s.equals("bye")) {
             display("Goodbye. Hope to see you again soon!");
             return false;
-        } else if (s.equals("list")) {
+        }
+
+        String[] inputs = s.split(" ");
+        if (inputs[0].equals("list")) {
+            // Display task list
             print_list();
             prompt();
-            return true;
+        } else if (inputs[0].equals("done")) {
+            // Mark as done
+            try {
+                int index = Integer.parseInt(inputs[1]) - 1;
+                Task completedTask = ls.get(index).markAsDone();
+                ls.set(index, completedTask);
+                display("Great work! I've marked this task as done: \n    " + completedTask);
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                display("Sorry! I could not register that. Please use a valid number");
+            } finally {
+                prompt();
+            }
         } else {
-            ls.add(s);
+            // Add task
+            Task t = new Task(s);
+            ls.add(t);
+
             display("added: " + s);
             prompt();
-            return true;
         }
+        return true;
     }
 
     private void display(String s) {
@@ -35,7 +53,7 @@ public class Alice {
     private void print_list() {
         System.out.println("____________________________________________________________");
         for (int i = 0; i < ls.size(); i++) {
-            System.out.println(i+1 + ". " + ls.get(i));
+            System.out.println(i + 1 + ". " + ls.get(i));
         }
         System.out.println("____________________________________________________________");
     }
