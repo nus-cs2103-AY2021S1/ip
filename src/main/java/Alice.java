@@ -25,7 +25,7 @@ public class Alice {
             try {
                 int index = Integer.parseInt(arr[1]) - 1;
                 ls.get(index).markAsDone();
-                display("Great work! I've marked this task as done: \n    " + ls.get(index));
+                display("Great work! I've marked this task as done:\n    " + ls.get(index));
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 display("Sorry! I could not register that. Please use a valid number");
             }
@@ -76,12 +76,12 @@ public class Alice {
     }
 
     private void greet() {
-        String logo = "\n _____  _     _____ _____  _____ \n" +
+        String logo = " _____  _     _____ _____  _____\n" +
                 "/  _  \\| |   |_   _/  __ \\|  ___|\n" +
-                "| |_| || |     | | | /  \\/| |__  \n" +
-                "|  _  || |     | | | |    |  __| \n" +
-                "| | | || |_____| |_| \\__/\\| |___ \n" +
-                "\\_| |_/\\_____/\\___/ \\____/\\____/ \n";
+                "| |_| || |     | | | /  \\/| |__\n" +
+                "|  _  || |     | | | |    |  __|\n" +
+                "| | | || |_____| |_| \\__/\\| |___\n" +
+                "\\_| |_/\\_____/\\___/ \\____/\\____/\n";
 
         System.out.println(logo +
                 "\nHello! I'm Alice\n" +
