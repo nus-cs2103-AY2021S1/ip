@@ -16,6 +16,8 @@ public class Duke {
                 DukeCommandsHandler.addDeadline(input);
             } else if (input.contains("event")) { // add event tasks
                 DukeCommandsHandler.addEvent(input);
+            } else if (input.contains("delete")) { // delete tasks
+                DukeCommandsHandler.deleteTask(input);
             } else if (input.contains("done")) { // mark tasks done
                 DukeCommandsHandler.markTaskDone(input);
             } else if (input.equals("list")) { // list out the tasks

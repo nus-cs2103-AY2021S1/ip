@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class DukeCommandsHandler {
     private static final String divider =
-            "\t---------------------------------------------------\n";
+            "\t------------------------------------------------\n";
     private static final ArrayList<Task> tasks = new ArrayList<>();
 
     protected static void greetings() {
@@ -30,16 +30,17 @@ public class DukeCommandsHandler {
 
     protected static void addToDo(String input) throws ArrayIndexOutOfBoundsException {
         String information;
-        try {
+        try { // user did not input description of to-do task
             information = input.split("todo")[1];
-        } catch (ArrayIndexOutOfBoundsException e) { // for no spacing after command eg. "todo"
+        } catch (ArrayIndexOutOfBoundsException e) {
             DukeException.toDoInvalidDescription();
             return;
         }
-        if (information.isBlank()) { // for spacing after command eg. "todo "
+        if (information.isBlank()) {
             DukeException.toDoInvalidDescription();
             return;
         }
+
         String description = information.substring(1);
         Task toDo = new ToDo(description);
         tasks.add(toDo);
@@ -51,21 +52,39 @@ public class DukeCommandsHandler {
         System.out.print(printing);
     }
 
-    protected static void addDeadline(String input) throws ArrayIndexOutOfBoundsException {
+    protected static void addDeadline(String input)
+            throws ArrayIndexOutOfBoundsException, StringIndexOutOfBoundsException {
         String information;
-        try {
+        try { // user did not input description of deadline task
             information = input.split("deadline")[1];
-        } catch (ArrayIndexOutOfBoundsException e) { // for no spacing after command eg. "deadline"
+        } catch (ArrayIndexOutOfBoundsException e) {
             DukeException.deadlineInvalidDescription();
             return;
         }
-        if (information.isBlank()) { // for spacing after command eg. "deadline "
+        if (information.isBlank()) {
             DukeException.deadlineInvalidDescription();
             return;
         }
+
         int end = information.indexOf("/");
+        if (end == -1) { // user did not input correct command
+            DukeException.deadlineInvalidCommand();
+            return;
+        }
+
         String description = information.substring(1, end - 1);
-        String by = information.substring(end + 4);
+        String by;
+        try { // user did not input date of deadline task
+            by = information.substring(end + 4);
+        } catch (StringIndexOutOfBoundsException e) {
+            DukeException.deadlineInvalidDate();
+            return;
+        }
+        if (by.isBlank()) {
+            DukeException.deadlineInvalidDate();
+            return;
+        }
+
         Task deadline = new Deadline(description, by);
         tasks.add(deadline);
         String printing = divider
@@ -76,21 +95,39 @@ public class DukeCommandsHandler {
         System.out.print(printing);
     }
 
-    protected static void addEvent(String input) throws ArrayIndexOutOfBoundsException {
+    protected static void addEvent(String input)
+            throws ArrayIndexOutOfBoundsException, StringIndexOutOfBoundsException {
         String information;
-        try {
+        try { // user did not input description of event task
             information = input.split("event")[1];
-        } catch (ArrayIndexOutOfBoundsException e) { // for no spacing after command eg. "event"
+        } catch (ArrayIndexOutOfBoundsException e) {
             DukeException.eventInvalidDescription();
             return;
         }
-        if (information.isBlank()) { // for spacing after command eg. "event "
+        if (information.isBlank()) {
             DukeException.eventInvalidDescription();
             return;
         }
+
         int end = information.indexOf("/");
+        if (end == -1) { // user did not input correct command
+            DukeException.eventInvalidCommand();
+            return;
+        }
+
         String description = information.substring(1, end - 1);
-        String at = information.substring(end + 4);
+        String at;
+        try { // user did not input date of event task
+            at = information.substring(end + 4);
+        } catch (StringIndexOutOfBoundsException e) {
+            DukeException.eventInvalidDate();
+            return;
+        }
+        if (at.isBlank()) {
+            DukeException.eventInvalidDate();
+            return;
+        }
+
         Task event = new Event(description, at);
         tasks.add(event);
         String printing = divider
@@ -101,8 +138,28 @@ public class DukeCommandsHandler {
         System.out.print(printing);
     }
 
+    protected static void deleteTask(String input) {
+        int index = Integer.parseInt(input.substring(7));
+        if ((index <= 0) || (index > tasks.size())) {
+            DukeException.invalidIndex();
+            return;
+        }
+        Task taskToBeDeleted = tasks.get(index - 1);
+        tasks.remove(index - 1);
+        String deletedTask = divider
+                + "\tNoted. I've removed this task:\n\t\t"
+                + taskToBeDeleted
+                + "\n\tNow you have " + tasks.size()
+                + " tasks in the list.\n" + divider;
+        System.out.print(deletedTask);
+    }
+
     protected static void markTaskDone(String input) {
         int index = Integer.parseInt(input.substring(5));
+        if ((index <= 0) || (index > tasks.size())) {
+            DukeException.invalidIndex();
+            return;
+        }
         Task finishedTask = tasks.get(index - 1);
         finishedTask.markAsDone();
         String doneTask = divider
