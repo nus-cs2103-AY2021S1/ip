@@ -29,7 +29,7 @@ public class Duke {
     }
 
     private void greet() {
-        System.out.println(LINE + DOUBLE_TAB + "Hello! I'm Duke.\n" + DOUBLE_TAB+ "What can I do for you?\n" + LINE);
+        System.out.println(LINE + DOUBLE_TAB + "Hello! I'm Rich.\n" + DOUBLE_TAB  + "What can I do for you?\n" + LINE);
     }
 
     private void echo(String input) {
