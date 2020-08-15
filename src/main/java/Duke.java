@@ -10,7 +10,7 @@ public class Duke {
         System.out.println();
     }
 
-    public static void Bye() {
+    public static void Exit() {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Bye. Hope to see you again soon!");
         System.out.println("    ____________________________________________________________");
