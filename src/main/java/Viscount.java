@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Viscount {
-    private static final String VISCOUNT_LOGO = "        _  _____  _____                  _    \n" +
+    private static final String VISCOUNT_LOGO =
+            "        _  _____  _____                  _    \n" +
             "       (_)/ ____|/ ____|                | |   \n" +
             " __   ___| (___ | |     ___  _   _ _ __ | |_  \n" +
             " \\ \\ / / |\\___ \\| |    / _ \\| | | | '_ \\| __| \n" +

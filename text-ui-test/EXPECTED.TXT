@@ -1,7 +1,57 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+        _  _____  _____                  _    
+       (_)/ ____|/ ____|                | |   
+ __   ___| (___ | |     ___  _   _ _ __ | |_  
+ \ \ / / |\___ \| |    / _ \| | | | '_ \| __| 
+  \ V /| |____) | |___| (_) | |_| | | | | |_  
+   \_/ |_|_____/ \_____\___/ \__,_|_| |_|\__|
+__________________________________________________
+Good day to you! I'm Viscount.
+What can I do for you on this blessed day?
+__________________________________________________
+
+__________________________________________________
+Very well. I've added this task:
+[T][?] read book
+Now you have 1 tasks in the list.
+__________________________________________________
+
+__________________________________________________
+Very well. I've added this task:
+[D][?] return book (by: wednesday)
+Now you have 2 tasks in the list.
+__________________________________________________
+
+__________________________________________________
+Very well. I've added this task:
+[E][?] project meeting (at: thursday 6pm)
+Now you have 3 tasks in the list.
+__________________________________________________
+
+__________________________________________________
+Very good! I have marked this task as done:
+[T][?] read book
+__________________________________________________
+
+__________________________________________________
+Here are the tasks in your list:
+1.[T][?] read book
+2.[D][?] return book (by: wednesday)
+3.[E][?] project meeting (at: thursday 6pm)
+__________________________________________________
+
+__________________________________________________
+Very good! I have marked this task as done:
+[E][?] project meeting (at: thursday 6pm)
+__________________________________________________
+
+__________________________________________________
+Here are the tasks in your list:
+1.[T][?] read book
+2.[D][?] return book (by: wednesday)
+3.[E][?] project meeting (at: thursday 6pm)
+__________________________________________________
+
+__________________________________________________
+Farewell my friend, I hope to see you again!
+__________________________________________________
 
