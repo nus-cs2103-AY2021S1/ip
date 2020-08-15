@@ -1,11 +1,12 @@
-import command.AddCommand;
 import command.Command;
 import command.DeadlineCommand;
 import command.DoneCommand;
+import command.ErrorCommand;
 import command.EventCommand;
 import command.ExitCommand;
 import command.ListCommand;
 import command.TodoCommand;
+import exception.DukeException;
 
 /**
  * A CommandReader object to parse the user input.
@@ -23,21 +24,25 @@ public class CommandReader {
         String commandWord = words[0];
         String content = words.length == 1 ? "" : CommandReader.generateContent(words);
 
-        switch (commandWord) {
-        case "list":
-            return new ListCommand();
-        case "done":
-            return new DoneCommand(content);
-        case "bye":
-            return new ExitCommand();
-        case "todo":
-            return new TodoCommand(content);
-        case "deadline":
-            return new DeadlineCommand(content);
-        case "event":
-            return new EventCommand(content);
-        default:
-            return new AddCommand();
+        try {
+            switch (commandWord) {
+            case "list":
+                return new ListCommand();
+            case "done":
+                return new DoneCommand(content);
+            case "bye":
+                return new ExitCommand();
+            case "todo":
+                return new TodoCommand(content);
+            case "deadline":
+                return new DeadlineCommand(content);
+            case "event":
+                return new EventCommand(content);
+            default:
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+        } catch (Exception e) {
+            return new ErrorCommand(e.getMessage());
         }
     }
 
@@ -50,7 +55,7 @@ public class CommandReader {
     public static String generateContent(String[] words) {
         String result = words[1];
         for (int i = 2; i < words.length; i++) {
-            result += " " + words[i];
+            result = result + " " + words[i];
         }
         return result;
     }

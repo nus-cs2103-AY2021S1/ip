@@ -22,6 +22,10 @@ public class CommandAgent {
     public String handleCommand(Command command) {
         String feedback = "____________________________________________________________\n";
         switch (command.sendRequest()) {
+        case "error":
+            List<String> errorMessage = command.getContent();
+            feedback += errorMessage.get(0);
+            break;
         case "end":
             feedback += "Bye. Hope to see you again soon!";
             break;
