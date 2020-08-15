@@ -96,6 +96,20 @@ public class Duke {
                             Duke.echo(String.format("Nice! I've marked this task as done:\n%s", item));
                         }
                         break;
+                    case "delete":
+                        if (arr.length != 2) {
+                            throw new InvalidCommandException();
+                        }
+                        int deleteNum = Integer.parseInt(arr[1]);
+                        if (deleteNum > lst.size() || deleteNum < 0) {
+                            throw new InvalidIndexException();
+                        } else {
+                            Task item = lst.get(deleteNum-1);
+                            lst.remove(deleteNum-1);
+                            Duke.echo(String.format("Noted. I've removed this task:\n%s" +
+                                    "\nNow you have %d tasks in the list.", item, lst.size()));
+                        }
+                        break;
                     case "bye":
                         Duke.echo("Bye. Hope to see you again soon!");
                         break loop;
