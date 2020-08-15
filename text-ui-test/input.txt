@@ -9,3 +9,12 @@ todo borrow book
 list
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
+todo
+blah
+deadline
+event
+deadline testing deadline without specifying deadline
+event testing event without specifying time
+done
+done project meeting
+bye

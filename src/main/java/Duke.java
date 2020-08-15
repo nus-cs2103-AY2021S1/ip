@@ -12,68 +12,16 @@ public class Duke {
 
         String userInput;
         while (!(userInput = scanner.nextLine()).equals("bye")) {
-            if (userInput.equals("list")) {
-                StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
-
-                for (int i = 0; i < Duke.tasks.size(); i++) {
-                    sb.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
-                }
-
-                Duke.speak(sb.toString().trim());
-            } else if (userInput.startsWith("done")) {
-                String[] commandArgs = userInput.split(" ");
-
-                if (commandArgs.length < 2) {
-                    throw new IllegalArgumentException("taskId not found!");
-                }
-
-                int taskId = Integer.parseInt(commandArgs[1]);
-                Task task = tasks.get(taskId - 1);
-                task.markAsDone();
-
-                Duke.speak(String.format("Nice! I've marked this task as done:\n%s", task));
-            } else {
-                Task task;
-                String[] commandArgs = userInput.split(" ", 2);
-
-                if (commandArgs.length < 2) {
-                    throw new IllegalArgumentException("Attempted to create new task without providing details!");
-                }
-
-                if (commandArgs[0].equals("todo")) {
-                    task = new Todo(commandArgs[1]);
-                } else if (commandArgs[0].equals("deadline")) {
-                    String[] taskArgs = commandArgs[1].split("/by", 2);
-
-                    if (taskArgs.length < 2) {
-                        throw new IllegalArgumentException("Attempted to create deadline without specifying deadline!");
-                    }
-
-                    task = new Deadline(taskArgs[0].trim(), taskArgs[1].trim());
-
-                } else if (commandArgs[0].equals("event")) {
-                    String[] taskArgs = commandArgs[1].split("/at", 2);
-
-                    if (taskArgs.length < 2) {
-                        throw new IllegalArgumentException("Attempted to create event without specifying time!");
-                    }
-
-                    task = new Event(taskArgs[0].trim(), taskArgs[1].trim());
-                } else {
-                    throw new IllegalArgumentException("Unrecognised command!");
-                }
-
-                tasks.add(task);
-
-                Duke.speak(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
-                        task, tasks.size()));
+            try {
+                parseInputs(userInput);
+            } catch (DukeException e) {
+                speak(e.getMessage());
             }
         }
 
         Duke.speak("Bye. Hope to see you again soon!");
 
         scanner.close();
-
     }
 
     public static void speak(String message) {
@@ -81,4 +29,95 @@ public class Duke {
         System.out.printf("%s\n%s\n%s\n", horizontalLine, message, horizontalLine);
     }
 
+    public static void parseInputs(String userInput) throws DukeException {
+        String[] commandInputs = userInput.split(" ", 2);
+
+        if (commandInputs.length == 0) {
+            throw new DukeException("Something went wrong when parsing your inputs!");
+        }
+
+        String command = commandInputs[0];
+        String commandDetails;
+
+        switch (command) {
+            case "list":
+                StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
+
+                for (int i = 0; i < Duke.tasks.size(); i++) {
+                    sb.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
+                }
+
+                Duke.speak(sb.toString().trim());
+                break;
+
+            case "done":
+                if (commandInputs.length < 2) {
+                    throw new DukeException("Attempted to mark a task as done, but not task was specified!");
+                }
+
+                commandDetails = commandInputs[1];
+
+                try {
+                    int taskId = Integer.parseInt(commandDetails);
+                    Task task = tasks.get(taskId - 1);
+                    task.markAsDone();
+
+                    Duke.speak(String.format("Nice! I've marked this task as done:\n%s", task));
+                } catch (NumberFormatException e) {
+                    throw new DukeException(
+                            "Please key in only the integer representing the task you want to mark as complete!");
+                }
+
+                break;
+
+            case "todo":
+            case "deadline":
+            case "event":
+                Task task;
+
+                if (commandInputs.length < 2) {
+                    throw new DukeException("Attempted to create new task without providing details!");
+                }
+
+                commandDetails = commandInputs[1];
+
+                if (command.equals("todo")) {
+                    task = new Todo(commandDetails);
+                } else if (command.equals("deadline")) {
+                    String[] deadlineDetails = commandDetails.split("/by", 2);
+
+                    if (deadlineDetails.length < 2) {
+                        throw new DukeException("Attempted to create task with deadline without specifying deadline!");
+                    }
+
+                    String description = deadlineDetails[0].trim();
+                    String by = deadlineDetails[1].trim();
+
+                    task = new Deadline(description, by);
+                } else {
+                    // Last case would be creating an event
+                    String[] eventDetails = commandDetails.split("/at", 2);
+
+                    if (eventDetails.length < 2) {
+                        throw new DukeException("Attempted to create event without specifying time!");
+                    }
+
+                    String description = eventDetails[0].trim();
+                    String at = eventDetails[1].trim();
+
+                    task = new Event(description, at);
+                }
+
+                tasks.add(task);
+
+                Duke.speak(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
+                        task, tasks.size()));
+                break;
+
+            default:
+                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+
+        }
+
+    }
 }
