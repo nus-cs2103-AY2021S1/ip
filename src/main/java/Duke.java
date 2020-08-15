@@ -15,8 +15,20 @@ public class Duke {
         int count = 0;
         String input = sc.nextLine();
         while (!input.equals("bye")) {
-            System.out.println(output(input));
-            list[count++] = input;
+            if (input.equals("list")) {
+                System.out.print(horizontalLine);
+                for (int i = 0; i < count; i++) {
+                    if (i == 0) {
+                        System.out.println((i + 1) + ". " + list[0]);
+                    } else {
+                        System.out.println("\t  " + (i + 1) + ". " + list[i]);
+                    }
+                }
+                System.out.println(horizontalLine);
+            } else {
+                System.out.println(output("added: " + input));
+                list[count++] = input;
+            }
             input = sc.nextLine();
         }
         System.out.println(output("Bye. Hope to see you again soon!"));
