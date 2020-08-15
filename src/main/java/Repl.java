@@ -20,6 +20,8 @@ public class Repl {
     private static final Scanner scanner = new Scanner(System.in);
     /** {@code PrettyPrinter} object for formatting the REPL output. */
     private static final PrettyPrinter prettyPrinter = new PrettyPrinter(LEFT_PADDING_SIZE, DIVIDER_LENGTH);
+    /** {@code TaskManager} object to keep track of tasks */
+    private static final TaskManager taskManager = new TaskManager();
 
     /**
      * Runs the REPL.
@@ -32,8 +34,11 @@ public class Repl {
                 case "bye":
                     prettyPrinter.print(FAREWELL_MESSAGE);
                     return;
+                case "list":
+                    prettyPrinter.print(taskManager.toString());
+                    break;
                 default:
-                    prettyPrinter.print(command);
+                    prettyPrinter.print(taskManager.addTask(command));
                     break;
             }
         }

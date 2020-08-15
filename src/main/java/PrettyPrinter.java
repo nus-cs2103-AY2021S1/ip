@@ -8,11 +8,11 @@ public class PrettyPrinter {
     private final int dividerLength;
 
     /**
-     * Constructs a new {@code PrettyPrinter} that will prefix each line with the specified number of spaces and add a
-     * divider with the specified number of underscores to the top and bottom of each message block.
+     * Constructs a new {@code PrettyPrinter} object that will prefix each line with the specified number of spaces and
+     * add a divider with the specified number of underscores to the top and bottom of each message block.
      *
-     * @param leftPadding The number of spaces to prefix each line with.
-     * @param dividerLength The number of underscores of each divider.
+     * @param leftPadding the number of spaces to prefix each line with.
+     * @param dividerLength the number of underscores of each divider.
      */
     public PrettyPrinter(int leftPadding, int dividerLength) {
         this.leftPadding = leftPadding;
@@ -40,7 +40,7 @@ public class PrettyPrinter {
     /**
      * Pretty prints the message by adding left padding and dividers at the top and bottom of the message.
      *
-     * @param message The string to be pretty printed.
+     * @param message the string to be pretty printed.
      */
     public void print(String message) {
         // Handle both LF and CRLF
