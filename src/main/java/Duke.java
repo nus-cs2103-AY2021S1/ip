@@ -27,6 +27,8 @@ public class Duke {
                 throw new EmptyTaskException("todo");
             } else if (cmd.charAt(4) != ' ') {
                 throw new NoSpaceException("todo", cmd.substring(4));
+            } else if (cmd.length() < 6) {
+                throw new EmptyTaskException("todo");
             }
             return new ToDo(cmd.substring(5));
         } else if (cmd.startsWith("deadline")) {
@@ -34,6 +36,8 @@ public class Duke {
                 throw new EmptyTaskException("deadline");
             } else if (cmd.charAt(8) != ' ') {
                 throw new NoSpaceException("deadline", cmd.substring(8));
+            } else if (cmd.length() < 10) {
+                throw new EmptyTaskException("deadline");
             }
             String description = cmd.substring(9);
             int s = description.indexOf("/by");
@@ -48,6 +52,8 @@ public class Duke {
                 throw new EmptyTaskException("event");
             } else if (cmd.charAt(5) != ' ') {
                 throw new NoSpaceException("event", cmd.substring(5));
+            } else if (cmd.length() < 7) {
+                throw new EmptyTaskException("event");
             }
             String description = cmd.substring(6);
             int s = description.indexOf("/at");
