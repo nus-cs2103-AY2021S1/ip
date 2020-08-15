@@ -58,7 +58,6 @@ public class Duke {
     }
     public static void main(String[] args) {
         Duke duke = new Duke();
-        System.out.println("Hello from\n" + logo);
         duke.mainProgram();
     }
 }
