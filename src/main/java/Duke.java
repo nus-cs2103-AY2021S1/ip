@@ -12,7 +12,7 @@ public class Duke {
     String exitMessage = textIndent + "Bye. Hope to see you again soon!\n";
     String listMessage = textIndent + "Here are the tasks in your list:\n";
     String doneMessage = textIndent + "Nice! I've marked this task as done:\n";
-    String todoMessage = textIndent + "Got it. I've added this task: \n";
+    String todoMessage = textIndent + "Got it. I've added this task:\n";
 
     static String[] commands = {"bye", "list", "done", "todo", "deadline", "event"};
 
@@ -47,7 +47,7 @@ public class Duke {
                 int num = Integer.parseInt(part[1]);
                 Task curr = duke.tasks[num - 1];
                 curr.markAsDone();
-                System.out.println(duke.divide + duke.doneMessage + duke.textIndent + curr);
+                System.out.println(duke.divide + duke.doneMessage + duke.textIndent + curr + "\n" + duke.divide);
             } else if (part[0].equals(commands[3])) { // handle todo
                 String numTasks = "Now you have " + (index + 1) + " tasks in the list.\n";
                 duke.tasks[index] = new Todo(part[1]);
