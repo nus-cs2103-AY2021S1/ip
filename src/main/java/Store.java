@@ -5,18 +5,10 @@ public class Store {
     List<String> store;
 
     public Store() {
-        List<String> store = new ArrayList<>();
+        this.store = new ArrayList<>();
     }
 
     public void addItem(String item) {
         this.store.add(item);
-    }
-
-    public void listItems() {
-        int counter = 1;
-        for (String item: this.store) {
-            System.out.println(counter + ". " + item);
-            counter++;
-        }
     }
 }

@@ -6,17 +6,19 @@ public class Duke {
         System.out.println("What can I do for you?");
         Scanner scanner = new Scanner(System.in);
         boolean flag = true;
+        Store store = new Store();
+        Bot bot = new Bot();
         while (flag) {
-            String input = scanner.next();
-            System.out.println("___________________");
+            String input = scanner.nextLine();
             if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                System.out.println("___________________");
+                bot.sayBye();
                 flag = false;
-                return ;
+            } else if (input.equals("list")) {
+                bot.listItems(store);
+            } else {
+                store.addItem(input);
+                bot.repeat(input);
             }
-            System.out.println(input);
-            System.out.println("___________________");
         }
     }
 }
