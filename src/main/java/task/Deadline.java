@@ -23,6 +23,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String taskString = super.toString();
-        return "[D]" + taskString + " (at: " + this.getSchedule() + ")";
+        return "[D]" + taskString + " (by: " + this.getSchedule() + ")";
     }
 }
