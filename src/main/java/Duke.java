@@ -47,7 +47,42 @@ public class Duke {
                     System.out.println(line);
                     System.out.println("Nice! I've marked this task as done: \n" + ListOfItems.get(index));
                     System.out.println(line);
+                    echo = sc.nextLine();
+                } else if (arr[0].equals("todo")) {
+                ToDo item =  new ToDo(arr[1]);
+                    ListOfItems.add(item);
+                    System.out.println(line);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(item);
+                    System.out.println("Now you have " + ListOfItems.size() + " tasks in the list");
+                    System.out.println(line);
+                    echo = sc.nextLine();
+                }else if (arr[0].equals("deadline")) {
+                    String obtainDate = arr[1];
+                    String arr2[] = obtainDate.split("/by", 2);
+                    String descrip =  arr2[0];
+                    String date = arr2[1];
+                    Deadline item = new Deadline(descrip, date);
+                    ListOfItems.add(item);
+                    System.out.println(line);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(item);
+                    System.out.println("Now you have " + ListOfItems.size() + " tasks in the list");
+                    System.out.println(line);
+                    echo = sc.nextLine();
 
+                }else if (arr[0].equals("event")) {
+                    String obtainDate = arr[1];
+                    String arr2[] = obtainDate.split("/at", 2);
+                    String descrip =  arr2[0];
+                    String date = arr2[1];
+                    Event item = new Event(descrip, date);
+                    ListOfItems.add(item);
+                    System.out.println(line);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(item);
+                    System.out.println("Now you have " + ListOfItems.size() + " tasks in the list");
+                    System.out.println(line);
                     echo = sc.nextLine();
                 } else {
                     Task item = new Task(echo);
