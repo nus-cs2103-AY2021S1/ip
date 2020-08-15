@@ -97,15 +97,27 @@ public class Duke {
         toDoList.add(task);
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + task);
-        System.out.println(String.format("Now you have %d tasks in the list.", toDoList.size()));
+        if (toDoList.size() == 1) {
+            System.out.println(String.format("Now you have %d task in the list.", toDoList.size()));
+        } else {
+            System.out.println(String.format("Now you have %d tasks in the list.", toDoList.size()));
+        }
         hrTag();
     }
 
     private static void displayList() {
         hrTag();
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < toDoList.size(); i++) {
-            System.out.println((i+1) + "." + toDoList.get(i));
+        if (toDoList.isEmpty()) {
+            System.out.println("You have no tasks left! Good job my child!");
+        } else {
+            if (toDoList.size() == 1) {
+                System.out.println("Here is the task in your list:");
+            } else {
+                System.out.println("Here are the tasks in your list:");
+            }
+            for (int i = 0; i < toDoList.size(); i++) {
+                System.out.println((i+1) + "." + toDoList.get(i));
+            }
         }
         hrTag();
     }
@@ -162,8 +174,7 @@ public class Duke {
 
     private static void unknownCommandError() {
         hrTag();
-        System.out.println("Unknown command! " +
-                "Please insert the task type first before typing in your task!");
+        System.out.println("Unknown command! Please insert the task type first before\ntyping in your task!");
         hrTag();
     }
 }
