@@ -12,6 +12,7 @@ public class Duke {
     private final static String TODO_COMMAND = "todo";
     private final static String DEADLINE_COMMAND = "deadline";
     private final static String EVENT_COMMAND = "event";
+    private final static String DELETE_COMMAND = "delete";
     private List<Task> tasks;
 
     public static void main(String[] args) {
@@ -68,6 +69,14 @@ public class Duke {
                             sayException(new EmptyEventException());
                         }
                         break;
+                    case DELETE_COMMAND:
+                        try {
+                            argument = inputWords[1];
+                            this.deleteTask(Integer.parseInt(argument));
+                        } catch (IndexOutOfBoundsException e) {
+                            sayException(new EmptyDeleteException());
+                        }
+                        break;
                     default:
                         sayException(new UnknownCommandException());
                 }
@@ -119,6 +128,10 @@ public class Duke {
         say("Got it. I've added this task:\n" + task + "\nNow you have " + this.tasks.size() + " tasks in the list.");
     }
 
+    private void sayDeletedTask(Task task) {
+        say("Noted. I've removed this task:\n" + task + "\nNow you have " + this.tasks.size() + " tasks in the list.");
+    }
+
     private void displayTasks() {
         String text = "";
         for (int i = 0; i < this.tasks.size(); i++) {
@@ -142,6 +155,17 @@ public class Duke {
         } catch (IndexOutOfBoundsException e) {
             sayException(new DoneOutOfBoundException(oneBasedIndex));
         }
+    }
+
+    private void deleteTask(int oneBasedIndex) {
+        int zeroBasedIndex = oneBasedIndex - 1;
+        try {
+            Task toDelete = this.tasks.remove(zeroBasedIndex);
+            sayDeletedTask(toDelete);
+        } catch (IndexOutOfBoundsException e) {
+            sayException(new DeleteOutOfBoundException(oneBasedIndex));
+        }
+
     }
 
 }

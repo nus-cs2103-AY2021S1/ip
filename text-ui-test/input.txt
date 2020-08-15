@@ -12,4 +12,6 @@ done 4
 list
 done 5
 deadline
+delete 1
+list
 bye
