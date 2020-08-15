@@ -1,7 +1,10 @@
 sample name
 todo borrow book
+todo
 deadline return book /by Sunday
 done 2
+deadline
 event project meeting /at Mon 2-4pm
+event
 list
 bye
