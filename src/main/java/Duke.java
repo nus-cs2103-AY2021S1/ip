@@ -3,11 +3,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private final String line = "------------------------------------";
+    private final String line = "--------------------------------------------------";
     private final String stringFormat = line + "\n%s\n" + line + "\n\n";
 
     private Scanner scanner;
-    private List<String> list;
+    private List<Task> list;
 
     private Duke() {
         this.scanner = new Scanner(System.in);
@@ -24,7 +24,7 @@ public class Duke {
     }
 
     private void processAdd(String item) {
-        this.list.add(item);
+        this.list.add(new Task(item));
         System.out.printf(stringFormat, "added: " + item);
     }
 
@@ -33,7 +33,7 @@ public class Duke {
 
         for (int i = 0; i < this.list.size(); i++) {
             content.append(i + 1);
-            content.append(". " + this.list.get(i));
+            content.append(". " + this.list.get(i).toString());
             if (i < this.list.size() - 1) {
                 content.append("\n");
             }
@@ -41,14 +41,35 @@ public class Duke {
         System.out.printf(stringFormat, content.toString());
     }
 
+    private void processDone(String action) {
+        String[] splitKeys = action.split(" ");
+        if (splitKeys.length < 2) {
+            System.out.printf(stringFormat, "Please key in a valid task number after 'done'");
+            return;
+        }
+
+        int taskIndex = Integer.parseInt(splitKeys[1]);
+        if (taskIndex > this.list.size() || taskIndex < 1) {
+            System.out.printf(stringFormat, "Please key in a valid task number!");
+            return;
+        }
+        Task task = this.list.get(taskIndex - 1);
+        task.markAsDone();
+        System.out.printf(stringFormat, "Nice! I've marked this task as done:\n\t" + task.toString());
+    }
+
     private boolean processAction() {
         String action = this.scanner.nextLine();
-        switch (action) {
+        String key = action.split(" ")[0];
+        switch (key) {
             case "bye":
                 this.processBye();
                 return false;
             case "list":
                 this.processList();
+                break;
+            case "done":
+                this.processDone(action);
                 break;
             default:
                 this.processAdd(action);
