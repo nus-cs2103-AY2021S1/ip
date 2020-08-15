@@ -35,17 +35,26 @@ class Interactor {
             System.out.print(this.user);
             String input = sc.nextLine();
             if (input.equals("bye")) {
-                System.out.println(ConsoleColors.YELLOW.getColor()
-                        + kai
-                        + "Sayonara! See you again my friend!"
-                        + ConsoleColors.RESET.getColor());
+                bye();
                 break;
             }
-//            System.out.println(ConsoleColors.YELLOW.getColor()
-//                    + kai
-//                    + input
-//                    + ConsoleColors.RESET.getColor()
-//                    + "\n");
+
+            add(input);
         }
+    }
+
+    void add(String item) {
+        this.toDoList.add(item);
+        System.out.println(ConsoleColors.YELLOW.getColor()
+                + this.kai
+                + "<" + item + "> has been added to your list! \n"
+                + ConsoleColors.RESET.getColor());
+    }
+
+    void bye() {
+        System.out.println(ConsoleColors.YELLOW.getColor()
+                + this.kai
+                + "Sayonara! See you again my friend!"
+                + ConsoleColors.RESET.getColor());
     }
 }
