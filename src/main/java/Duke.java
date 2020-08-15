@@ -6,7 +6,6 @@ public class Duke {
 
     public static void greet(){
 
-
     }
     public static void main(String[] args) {
         System.out.println("  ____________________________________________________________\n" + "  Hello! I'm Duke\n" + "  What can I do for you?\n"
@@ -16,6 +15,7 @@ public class Duke {
             FileInputStream inputStream = new FileInputStream(file);
             int size = inputStream.available();
             ArrayList<String> strings = new ArrayList<>();
+            ArrayList<String> list = new ArrayList<>();
             StringBuffer text = new StringBuffer();
             for(int i = 0; i < size; i++){
                 char c = (char)inputStream.read();
@@ -36,8 +36,15 @@ public class Duke {
                     System.out.println("  Bye. Hope to see you again soon!\n" + "  ____________________________________________________________");
                     break;
                 }
-                System.out.println("  " + string + "\n" +
-                        "  ____________________________________________________________");
+                if(string.equals("list")){
+                    for(int i = 0; i < list.size(); i++){
+                        System.out.println("  " + (i + 1) + ". " + list.get(i));
+                    }
+                }else {
+                    list.add(string);
+                    System.out.println("  " + "added: " + string + "\n" +
+                            "  ____________________________________________________________");
+                }
             }
         }catch (Exception e){
             System.out.println(e);

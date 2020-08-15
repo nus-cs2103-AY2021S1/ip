@@ -1,3 +1,4 @@
+read book
+return book
 list
-blah
 bye
