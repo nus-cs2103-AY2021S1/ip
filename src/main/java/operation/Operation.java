@@ -1,10 +1,10 @@
 package operation;
 
 public abstract class Operation {
-    protected final String operation;
+    protected final String[] commands;
 
-    public Operation(String operation) {
-        this.operation = operation;
+    public Operation(String[] commands) {
+        this.commands = commands;
     }
 
     public abstract boolean isExit();

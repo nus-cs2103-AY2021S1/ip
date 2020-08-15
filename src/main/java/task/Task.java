@@ -24,4 +24,8 @@ public class Task {
             return String.format("[%c] %s", CROSS, this.task);
         }
     }
+
+    public void completeTask() {
+        this.completed = true;
+    }
 }

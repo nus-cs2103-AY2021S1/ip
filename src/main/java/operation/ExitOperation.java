@@ -1,8 +1,8 @@
 package operation;
 
 public class ExitOperation extends Operation {
-    public ExitOperation(String operation) {
-        super(operation);
+    public ExitOperation(String[] commands) {
+        super(commands);
     }
 
     @Override

@@ -2,19 +2,28 @@ package parser;
 
 import operation.Operation;
 import operation.AddOperation;
-import operation.ExitOperation;
+import operation.DoneOperation;
 import operation.ListOperation;
+import operation.ExitOperation;
 import task.TaskStorage;
 
 public class CommandParser {
-    public Operation parse(String command, TaskStorage taskStorage) {
-        switch(command) {
+    private String[] parseCommandString(String commandString) {
+        String[] commands = commandString.split(" ");
+        return commands;
+    }
+
+    public Operation parse(String commandString, TaskStorage taskStorage) {
+        String[] commands = parseCommandString(commandString);
+        switch(commands[0]) {
             case "bye":
-                return new ExitOperation(command);
+                return new ExitOperation(commands);
             case "list":
-                return new ListOperation(command, taskStorage);
+                return new ListOperation(commands, taskStorage);
+            case "done":
+                return new DoneOperation(commands, taskStorage);
             default :
-                return new AddOperation(command, taskStorage);
+                return new AddOperation(commands, taskStorage);
         }
     }
 }

@@ -4,11 +4,10 @@ import task.Task;
 import task.TaskStorage;
 
 public class AddOperation extends Operation {
-
     private TaskStorage taskStorage;
 
-    public AddOperation(String operation, TaskStorage taskStorage) {
-        super(operation);
+    public AddOperation(String[] commands, TaskStorage taskStorage) {
+        super(commands);
         this.taskStorage = taskStorage;
     }
 
@@ -19,8 +18,9 @@ public class AddOperation extends Operation {
 
     @Override
     public void execute() {
-        Task task = Task.createTask(this.operation);
+        String taskString = String.join(" ", this.commands);
+        Task task = Task.createTask(taskString);
         this.taskStorage.addTask(task);
-        System.out.println("added: " + this.operation);
+        System.out.println("added: " + taskString);
     }
 }

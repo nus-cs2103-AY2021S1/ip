@@ -5,8 +5,8 @@ import parser.CommandParser;
 import task.TaskStorage;
 
 public class Duke {
-
     private final TaskStorage taskStorage;
+
     private static String DIVIDER = "-------------------------------------------------";
     private static String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
