@@ -44,6 +44,11 @@ public class Duke {
                     Deadline deadline = new Deadline(echoDescription.substring(1));
                     storage.add(deadline);
                     System.out.println("    " + deadline);
+                } else if (toEcho.equals("event")) {
+                    Event event = new Event(echoDescription.substring(1));
+                    storage.add(event);
+                    System.out.println("    " + event);
+
                 }
                 System.out.println("Now you have " + storage.size() + " tasks in the list.");
             }
