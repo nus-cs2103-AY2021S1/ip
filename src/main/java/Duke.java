@@ -3,27 +3,62 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static String lines = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
+    private String[] listOfToDos;
+    private String lines = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.";
+    private int countToDos;
 
-    public static void list(String message) {
-        System.out.println(lines + " " + message+ "\n" + lines);
+    Duke() {
+        countToDos = 0;
+        listOfToDos = new String[100];
+        String welcome = "\n Hello! I'm Yuki *Woof*\n What can I do for you? *Woof*\n";
+        System.out.println(lines + welcome + lines);
     }
+
+    public void goodBye() {
+        String bye = "\n Bye. Hope to see you again soon! *Woof woof*\n";
+        System.out.println(lines + bye + lines);
+    }
+
+    public void addToDos(String message) {
+        listOfToDos[countToDos] = message;
+        countToDos += 1;
+        System.out.println(lines + "\n I have added: " + message + " *Woof*\n" + lines);
+    }
+
+    public void printToDos() {
+        int count = 0;
+        System.out.println(lines);
+        for (String message : listOfToDos) {
+            if (countToDos == 0) {
+                System.out.println(" You have no task to complete! *WOOF*\n" + lines);
+                break;
+            } else {
+                if (listOfToDos[count] == null) {
+                    System.out.println(lines);
+                    break;
+                } else {
+                    count += 1;
+                    System.out.println(" " + count + ". " + message);
+                }
+            }
+        }
+    }
+
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        String welcome = " Hello! I'm Yuki *Woof*\n What can I do for you? *Woof*\n";
-        String bye = " Bye. Hope to see you again soon! *Woof woof*";
+        Duke duke = new Duke();
 
-        System.out.println(lines + welcome + lines);
-
-        while (input.hasNext()) {
-            String query = input.next();
+        while (input.hasNextLine()) {
+            String query = input.nextLine();
             if (query.equalsIgnoreCase("bye")) {
-                System.out.println(lines + bye + "\n" + lines);
+                duke.goodBye();
                 input.close();
                 break;
+            } else if (query.equalsIgnoreCase("list")) {
+                duke.printToDos();
             } else {
-                list(query);
+                duke.addToDos(query);
             }
         }
 
