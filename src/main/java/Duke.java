@@ -7,13 +7,13 @@ public class Duke {
     private static final String EXIT_COMMAND = "bye";
 
     private static void greet() {
-        String welcomeMessage = "    Konnichiwa!\n"
-                + "    What can I do for you?\n";
+        String welcomeMessage = "     Konnichiwa!\n"
+                + "     What can I do for you?\n";
         System.out.println(DIVIDER + welcomeMessage + DIVIDER);
     }
 
     private static void exit() {
-        String exitMessage = "    Ja ne!\n";
+        String exitMessage = "     Ja ne!\n";
         System.out.println(DIVIDER + exitMessage + DIVIDER);
     }
 
