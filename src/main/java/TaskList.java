@@ -22,7 +22,7 @@ public class TaskList {
         for(int i = 0; i < this.list.size(); ++i){
 
             //Print the index and the message of the task
-            System.out.println(String.format("%d.%s", i + 1, this.get(i)));
+            System.out.println(String.format("%d.[%s] %s", i + 1, this.get(i).getStatusIcon(), this.get(i).getMessage()));
         }
 
     }
