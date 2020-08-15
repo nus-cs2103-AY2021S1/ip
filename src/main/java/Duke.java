@@ -17,7 +17,7 @@ public class Duke {
         System.out.println(greeting);
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> todos = new ArrayList<>();
+        ArrayList<Task> todos = new ArrayList<>();
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
@@ -26,18 +26,33 @@ public class Duke {
                 break;
             }
 
-            if (input.equals("list")) {
-                StringBuilder output = new StringBuilder("    ____________________________________________________________\n");
+            if (input.startsWith("done")) {
+                int idx = Integer.parseInt(input.substring(5)) - 1;
+                Task toChange = todos.get(idx);
+                toChange.markAsDone();
+                String output = "    ____________________________________________________________\n" +
+                        "     Nice! I've marked this task as done: \n" +
+                        "       [" + toChange.getStatusIcon() + "] return book\n" +
+                        "    ____________________________________________________________";
+
+                System.out.println(output);
+            } else if (input.equals("list")) {
+                StringBuilder output =
+                        new StringBuilder("    ____________________________________________________________\n")
+                        .append("     Here are the tasks in your list:\n");
 
                 for (int i = 1; i <= todos.size(); i++) {
-                    output.append("\t").append(i).append(". ").append(todos.get(i - 1)).append("\n");
+                    Task theTask = todos.get(i - 1);
+                    output.append("\t ").append(i).append(".[")
+                            .append(theTask.getStatusIcon()).append("] ").append(theTask.description).append("\n");
                 }
 
                 output.append("    ____________________________________________________________");
 
                 System.out.println(output);
             } else if (!input.equals("")) {
-                todos.add(input);
+                Task newTask = new Task(input);
+                todos.add(newTask);
                 String output = "    ____________________________________________________________\n" +
                         "     added: " + input + "\n" +
                         "    ____________________________________________________________";
