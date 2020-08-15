@@ -21,12 +21,18 @@ public class Task {
         } else if (cmd.startsWith("deadline ")) {
             String description = cmd.substring(9);
             int s = description.indexOf("/by");
+            if (s == -1) {
+                return null;
+            }
             String time = description.substring(s + 4);
             description = description.substring(0, s - 1);
             return new Deadline(description, time);
         } else if (cmd.startsWith("event ")) {
             String description = cmd.substring(6);
             int s = description.indexOf("/at");
+            if (s == -1) {
+                return null;
+            }
             String time = description.substring(s + 4);
             description = description.substring(0, s - 1);
             return new Event(description, time);
