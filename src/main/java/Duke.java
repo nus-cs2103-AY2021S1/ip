@@ -6,7 +6,7 @@ public class Duke {
                                     + "| |_| | |_| |   <  __/\n"
                                     + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static final String[] taskList = new String[100];
+    private static final Task[] taskList = new Task[100];
     private static int taskIndex = 0;
 
     public static void main(String[] args) {
@@ -18,11 +18,21 @@ public class Duke {
     }
 
     private static void handleResponse(String response) {
-        switch (response) {
+        String[] parsedResponse = response.split(" ");
+        switch (parsedResponse[0]) {
             case "bye":
                 exit();
             case "list":
                 showList();
+                break;
+            case "done":
+                int taskDone = Integer.parseInt(parsedResponse[1]) - 1;
+                if (taskDone < 0 || taskDone >= taskIndex) {
+                    DukeOut.print("No such task!");
+                    break;
+                }
+                markTaskDone(taskDone);
+                DukeOut.print("Nice! I've marked this task as done:\n      " + taskList[taskDone]);
                 break;
             default:
                 addToList(response);
@@ -42,7 +52,7 @@ public class Duke {
     }
 
     private static void addToList(String task) {
-        taskList[taskIndex] = task;
+        taskList[taskIndex] = new Task(task);
         ++taskIndex;
     }
 
@@ -52,11 +62,16 @@ public class Duke {
             return;
         }
 
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n    ");
         for (int i = 0; i < taskIndex; ++i) {
-            sb.append((i + 1) + ". " + taskList[i] + "\n    ");
+            sb.append((i + 1) + "." + taskList[i] + "\n    ");
         }
         sb.setLength(sb.length() - 5);
         DukeOut.print(sb.toString());
+    }
+
+    private static void markTaskDone(int taskNum) {
+        Task task = taskList[taskNum];
+        task.markDone();
     }
 }
