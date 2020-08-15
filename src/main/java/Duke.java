@@ -41,6 +41,9 @@ public class Duke {
 
                 if (taskType.equals("todo")) {
                     task = new ToDo(taskName);
+                } else if (taskType.equals("deadline")) {
+                    String[] arr = taskName.split("/");
+                    task = new Deadline(arr[0], arr[1].substring(arr[1].indexOf(" ") + 1));
                 } else {
                     System.out.println("debug");
                     task = new Task(taskName);
