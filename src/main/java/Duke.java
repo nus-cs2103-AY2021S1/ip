@@ -40,7 +40,7 @@ public class Duke {
 
         System.out.println("\nWhat can I do for you?");
 
-        ArrayList<String> inputStore = new ArrayList<>();
+        ArrayList<Task> inputStore = new ArrayList<>();
 
         Scanner sc = new Scanner(System.in);
 
@@ -53,12 +53,21 @@ public class Duke {
                 System.out.println("\uD83D\uDE20 Don't enter NOTHING!!");
             } else if (userInput.equals("list")) {
                 System.out.println("\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0");
+                System.out.println("\t Here are the tasks in your list:");
                 for (int i = 0; i < inputStore.size(); i++) {
-                    System.out.println("\t " + (i + 1) + ". " +  inputStore.get(i));
+                    System.out.println("\t " + (i + 1) + ". " +  inputStore.get(i).toString());
                 }
                 System.out.println("\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0");
+            } else if (userInput.length() > 3 && userInput.substring(0,4).equals("done")) {
+                String[] splitString = userInput.split(" ");
+                Task task = inputStore.get(Integer.parseInt(splitString[1]) - 1);
+                task.markDone();
+                System.out.println("\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0");
+                System.out.println("\t Nice! I've marked this task as done: ");
+                System.out.println("\t   " + task.toString());
+                System.out.println("\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0");
             } else {
-                inputStore.add(userInput);
+                inputStore.add(new Task(userInput));
                 System.out.println("\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0");
                 System.out.println("\t " + "added: " + userInput);
                 System.out.println("\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0");
