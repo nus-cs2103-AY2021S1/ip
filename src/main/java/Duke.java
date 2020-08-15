@@ -36,7 +36,12 @@ public class Duke {
                 }
                 System.out.println(horizontalLine);
             } else if (isDoneCommand(input)) {
-                System.out.println("Mark as done: " + n);
+                if (n > 0 && n <= count) {
+                    list[n - 1].markAsDone();
+                    System.out.println(output("Nice! I've marked this task as done:\n\t    " + list[n - 1]));
+                } else {
+                    System.out.println(output("The task does not exist!"));
+                }
             } else {
                 System.out.println(output("added: " + input));
                 list[count++] = new Task(input);
