@@ -4,14 +4,18 @@ public class Duke {
 
     private void userInput() {
         Scanner sc = new Scanner(System.in);
-        if (sc.hasNextLine()) {
-            System.out.println("Bye. Hope to see you again soon!\n"+"_____________________________________" );
+        while (sc.hasNextLine()) {
+            String input = sc.nextLine();
+            Output output = new Output();
+            output.response(input);
+            if (input.equals("bye")) break;
         }
+        sc.close();
     }
 
     private void printWelcomeMessage() {
         String welcome = "_____________________________________ \n"
-                + "Hello! I'm Ray \n" + "What can I do for you?\n"
+                + "Hello! I'm Ray \n" + "Please input a command\n"
                 + "_____________________________________ \n";
         System.out.println(welcome);
     }
