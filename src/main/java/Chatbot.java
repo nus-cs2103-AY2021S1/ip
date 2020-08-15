@@ -7,19 +7,21 @@ import java.util.Scanner;
  */
 public class Chatbot {
 
-    private String inquiry;
-    private List<String> planner;
-    private final String INDENTATION = "     ";
-    private final String LINE = "    ____________________________________________________________";
+    protected String inquiry;
+    protected List<Task> planner;
+    protected final String INDENTATION = "     ";
+    protected final String LINE = "    ____________________________________________________________";
 
     Chatbot() {
         this.inquiry = "";
-        this.planner = new ArrayList<String>();
+        this.planner = new ArrayList<Task>();
     }
 
     /**
      * The chat method prints the introductions and carry out the necessary steps.
      * A String of horizontal lines will be printed after every inquiry.
+     * Under the while loop, if the inquiry is 'list', it will list all the tasks.
+     * If the inquiry starts with 'done', it will mark the task as done.
      * Once the user input "bye" the chat bot will print the farewell message.
      */
     void chat() {
@@ -30,8 +32,17 @@ public class Chatbot {
         while (!inquiry.equals("bye")) {
             if (inquiry.equals("list")) {
                 list();
+            } else if (inquiry.startsWith("done")) {
+                String number = "";
+                for (String val: inquiry.split(" ")) {
+                    number = val;
+                }
+                Task currentTask = planner.get(Integer.parseInt(number) - 1);
+                done(currentTask);
+
             } else {
-                addToPlanner(inquiry);
+                Task currentTask = new Task(inquiry);
+                addToPlanner(currentTask);
                 reply("added: " + inquiry);
             }
             System.out.println(LINE);
@@ -68,10 +79,10 @@ public class Chatbot {
 
     /**
      * Add inquiry to the planner.
-     * @param event String to be added to the list.
+     * @param task String to be added to the list.
      */
-    private void addToPlanner(String event) {
-        planner.add(event);
+    private void addToPlanner(Task task) {
+        planner.add(task);
     }
 
     /**
@@ -79,9 +90,24 @@ public class Chatbot {
      */
     private void list() {
         for (int i = 0; i < planner.size(); i++) {
-            String number = (i + 1) + ". ";
-            reply(number + planner.get(i));
+            String number = (i + 1) + ".";
+            String status = "[" + planner.get(i).getStatusIcon() + "]";
+            reply(number + status + " " + planner.get(i).description);
         }
+    }
+
+    /**
+     * Marks the task as done. It also prints the completion message.
+     * @param task Task that was just completed.
+     */
+    private void done(Task task) {
+        task.done();
+        System.out.println(INDENTATION + "Good job! I've marked this task as done");
+        System.out.println(INDENTATION
+                + INDENTATION
+                + "[" + "\u2713" + "] "
+                + task.description);
+
     }
 
 
