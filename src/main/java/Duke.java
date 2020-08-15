@@ -21,7 +21,7 @@ public class Duke {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < storage.size(); i++) {
                     int number = i + 1;
-                    System.out.println(number + ". " + storage.get(i));
+                    System.out.println(number + "." + storage.get(i));
                 }
             } else if (toEcho.equals("done")) {
                 int index = Integer.parseInt(echoDescription.substring(1)) - 1;
