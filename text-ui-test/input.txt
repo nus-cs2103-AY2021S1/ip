@@ -10,4 +10,7 @@ deadline sell book /by Monday
 done 3
 done 4
 list
+delete 1
+delete 3
+list
 bye

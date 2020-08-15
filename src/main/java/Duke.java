@@ -34,6 +34,20 @@ public class Duke {
                 } catch (IndexOutOfBoundsException e) {
                     System.err.println(new DoneOutOfBoundException());
                 }
+            } else if (next[0].equals("delete")) {
+                try {
+                    Integer toBeChange = Integer.valueOf(next[1]);
+                    Task cur = duke.taskList.get(toBeChange - 1);
+                    duke.taskList.remove(toBeChange - 1);
+//                    cur.changeIsDone();
+                    System.out.println("This task has been deleted.");
+                    System.out.println(cur);
+                    System.out.println();
+                } catch (NumberFormatException e) {
+                    System.err.println(new DeleteUnknownException());
+                } catch (IndexOutOfBoundsException e) {
+                    System.err.println(new DeleteOutOfBoundException());
+                }
             } else if (next[0].equals("event") || next[0].equals("todo") || next[0].equals("deadline")) {
                 try {
                     duke.addTask(next);

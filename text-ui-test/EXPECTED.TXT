@@ -53,6 +53,16 @@ This task has been mark as done.
 4. [T][?] buy book
 5. [D][?] sell book  (by: Monday)
 
+This task has been deleted.
+[T][?] borrow book
+
+This task has been deleted.
+[T][?] buy book
+
+1. [D][?] return book  (by: Sunday)
+2. [E][?] project meeting  (at: Mon 2-4pm)
+3. [D][?] sell book  (by: Monday)
+
 ********************************************
 GoodBye, Hope to see you back soon.
 ********************************************
