@@ -1,7 +1,10 @@
-list
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 event eat lunch
-done 5
+todo do CS2103 homework
+delete 2
+delete 2
+delete 5
+done 1
 list
 bye

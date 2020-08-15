@@ -6,7 +6,6 @@ Pikachu: Hello, I am Pikachu! My pika service creates a to-do list for you!
    2.2. if 'deadline', type the task followed by a '/by <deadline>' to indicate deadline
 3. type 'done x' where x is the index of the item you want to be indicated done
 4. or you can say 'bye' to end us </3
-  ERROR: Your list is empty.
     Steady! I add... wait ah...
         ADDED: [D][✘]  return book  (by: Sunday)
     Now you got 0 tasks in list, don't procrastinate hor
@@ -14,8 +13,18 @@ Pikachu: Hello, I am Pikachu! My pika service creates a to-do list for you!
         ADDED: [D][✘]  project meeting  (by: Mon 2-4pm)
     Now you got 1 tasks in list, don't procrastinate hor
   ERROR: You might have left your message or duration empty.
-  ERROR: Wrong list number input. Please put a number between 1 and 2
+    Steady! I add... wait ah...
+        ADDED: [T][✘]  do CS2103 homework
+    Now you got 2 tasks in list, don't procrastinate hor
+    Delete liao boss:
+       [D][✘]  project meeting  (by: Mon 2-4pm)
+    Remaining Tasks: 3
+    Delete liao boss:
+       [T][✘]  do CS2103 homework
+    Remaining Tasks: 2
+  ERROR: Wrong list number input. Please put a number between 1 and 1
+    Swee la, task done liao!:
+       [D][✓]  return book  (by: Sunday)
 Retrieving your list, patient ah!
-    1. [D][✘]  return book  (by: Sunday)
-    2. [D][✘]  project meeting  (by: Mon 2-4pm)
+    1. [D][✓]  return book  (by: Sunday)
 Pikachu: Pika byebye!

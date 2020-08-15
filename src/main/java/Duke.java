@@ -30,15 +30,17 @@ public class Duke {
             try {
                 String command = input.split(" ")[0];
                 int size = storage.size();
-                commandChecker(command);
                 if (command.equals("list")) {
                     commandList(size, storage);
-                } else if (command.equals("done")) {
+                } else if (command.equals("done") || command.equals("delete")) {
                     int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                    commandDone(index, storage);
-                } else {
+                    commandDoneDelete(index, storage, command);
+                } else if (commandTaskChecker(command)) {
                     String message = input.substring(command.length());
                     commandTasks(storage, command, message);
+                } else {
+                    String errorMessage = "Command is wrong. Please start with delete, list, done, deadline, todo or event.";
+                    throw new DukeCommandException(errorMessage);
                 }
             } catch (DukeCommandException | DukeIndexException | DukeTaskException | DukeListException e) {
                 System.out.print(String.format("  ERROR: %s\n", e.getMessage()));
@@ -48,7 +50,7 @@ public class Duke {
     }
 
     public static void commandList(int index, List<Task> storage) throws DukeListException {
-        if (storage.size() != 0 ) {
+        if (storage.size() != 0) {
             System.out.print("Retrieving your list, patient ah!\n");
             for (int i = 0; i < storage.size(); i++) {
                 System.out.print(String.format("   %2d. %s\n", i + 1, storage.get(i)));
@@ -58,32 +60,44 @@ public class Duke {
         }
     }
 
-    public static void commandDone(int index, List<Task> storage) throws DukeIndexException {
+    public static void commandDoneDelete(int index, List<Task> storage, String mode) throws DukeIndexException {
         if (index > storage.size() - 1 || index < 0) {
             String errorMessage = "Wrong list number input. " +
                     "Please put a number between 1 and " + storage.size();
             throw new DukeIndexException(errorMessage);
         }
-        storage.get(index).makeDone();
-        System.out.print(String.format("    Swee la, task done liao!:\n" +
-                "       %s\n", storage.get(index)));
+
+        if (mode.equals("done")) {
+            storage.get(index).makeDone();
+            System.out.print(String.format("    Swee la, task done liao!:\n" +
+                    "       %s\n", storage.get(index)));
+        } else {
+            System.out.print(String.format("    Delete liao boss:\n" +
+                    "       %s\n    Remaining Tasks: %d\n", storage.get(index), storage.size()));
+            storage.remove(index);
+        }
+
     }
 
+
     public static void commandTasks(List<Task> storage, String tag, String message) throws DukeTaskException {
+
         String[] parsedMessage = null;
         Task newTask = null;
         int size = storage.size();
 
         try {
+
             if (tag.equals("todo")) {
                 newTask = new Todo(message);
             } else if (tag.equals("deadline")) {
                 parsedMessage = message.split("/by ");
+                newTask = new Deadline(parsedMessage[0], parsedMessage[1]);
             } else if (tag.equals("event")) {
                 parsedMessage = message.split("/at ");
+                newTask = new Deadline(parsedMessage[0], parsedMessage[1]);
             }
 
-            newTask = new Deadline(parsedMessage[0], parsedMessage[1]);
             storage.add(newTask);
 
             System.out.print("    Steady! I add... wait ah...\n");
@@ -96,16 +110,8 @@ public class Duke {
         }
     }
 
-    public static void commandChecker(String command) throws DukeCommandException {
-        boolean isCorrect = command.equals("event") ||
-                            command.equals("deadline") ||
-                            command.equals("todo") ||
-                            command.equals("list") ||
-                            command.equals("done");
-        if (!isCorrect) {
-            String errorMessage = "Command is wrong. Please start with list, done, deadline, todo or event.";
-            throw new DukeCommandException(errorMessage);
-        }
+    public static boolean commandTaskChecker(String command) throws DukeCommandException {
+        return command.equals("event") || command.equals("deadline") || command.equals("todo");
     }
 
     public static void exit() {
