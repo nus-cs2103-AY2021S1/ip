@@ -1,9 +1,12 @@
+import java.lang.reflect.Array;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner myObj = new Scanner(System.in);
         Boolean botRunning = true;
+        ArrayList<String> taskList = new ArrayList<String>();
         String logo =
                 "___.           __                         \n"
                         + "\\_ |__ _____ _/  |_  _____ _____    ____  \n"
@@ -17,8 +20,14 @@ public class Duke {
             String input = myObj.nextLine();
             if (input.equals("bye")) {
                 botRunning = false;
+            } else if (input.equals("list")) {
+                for (String task : taskList) {
+                    System.out.println(task);
+                }
             } else {
-                System.out.println(input);
+                int listSize = taskList.size() + 1;
+                taskList.add(listSize + ". " + input);
+                System.out.println("Task added: " + input);
             }
         }
         System.out.println("SAYONARA HUMAN ಥ﹏ಥ");
