@@ -16,7 +16,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
         while (true) {
-            String s = sc.nextLine();
+            String s = sc.next();
             if (s.equals("bye")) {
                 System.out.println("________________________________________");
                 System.out.println("Bye. Hope to see you again soon!");
@@ -24,14 +24,15 @@ public class Duke {
                 System.exit(0);
             } else if (s.equals("list")) {
                 System.out.println("________________________________________");
+                System.out.println("Here is your current list:");
                 for (int i = 0; i < tasks.size(); i++) {
                     System.out.println((i + 1) + "." + tasks.get(i).toString());
                 }
                 System.out.println("________________________________________");
-            } else if (s.contains("done")) {
+            } else if (s.equals("done")) {
                 try {
-                    int index = Integer.parseInt(s.substring(5)) - 1;
-                    if (index < tasks.size()) {
+                    int index = Integer.parseInt(sc.next()) - 1;
+                    if (index < tasks.size() && index >= 0) {
                         System.out.println("________________________________________");
                         System.out.println("Nice! I've marked this task as done: ");
                         tasks.get(index).markAsDone();
@@ -46,14 +47,37 @@ public class Duke {
                     System.out.println("________________________________________");
                 }
             } else {
-                System.out.println("________________________________________");
-                Task temp = new Task(s);
-                tasks.add(temp);
-                System.out.println("Yay! New task added: ");
-                System.out.println("added: " + temp.toString());
-                System.out.println("________________________________________");
+                Task temp;
+                try {
+                    if (s.startsWith("todo")) {
+                        s = sc.nextLine();
+                        temp = new ToDo(s);
+                        tasks.add(temp);
+                    } else if (s.startsWith("deadline")) {
+                        s = sc.nextLine();
+                        String[] parts = s.split("\\s*/by\\s*");
+                        temp = new Deadline(parts[0], parts[1]);
+                        tasks.add(temp);
+                    } else if (s.startsWith("event")) {
+                        s = sc.nextLine();
+                        String[] parts = s.split("\\s*/at\\s*");
+                        temp = new Event(parts[0], parts[1]);
+                        tasks.add(temp);
+                    } else {
+                        sc.nextLine();
+                        throw new Exception("Wrong command.");
+                    }
+                    System.out.println("________________________________________");
+                    System.out.println("Yay! New task added: ");
+                    System.out.println("   " + temp.toString());
+                    System.out.println("Now you have " + tasks.size() + " tasks in your list.");
+                } catch (Exception e) {
+                    System.out.println("________________________________________");
+                    System.out.println("Start with either todo, deadline or event to add new task.");
+                } finally {
+                    System.out.println("________________________________________");
+                }
             }
         }
-
     }
 }
