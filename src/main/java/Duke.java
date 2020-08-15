@@ -24,7 +24,7 @@ public class Duke {
                     throw new InvalidCommandException("\u2639 OOPS!!! The task index does not exist.");
                 }
                 return true;
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 throw new InvalidCommandException("\u2639 OOPS!!! The task index should be a number.");
             }
         } else {
@@ -45,7 +45,7 @@ public class Duke {
                     throw new InvalidCommandException("\u2639 OOPS!!! The task index does not exist.");
                 }
                 return true;
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 throw new InvalidCommandException("\u2639 OOPS!!! The task index should be a number.");
             }
         } else {
