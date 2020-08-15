@@ -1,7 +1,9 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
-    private static Task[] tasks = new Task[100];
+    private static List<Task> tasks = new ArrayList<>();
     private static int numberOfTasks = 0;
 
     private static void greet() {
@@ -21,7 +23,8 @@ public class Duke {
     }
 
     private static void printAddTask(Task task) {
-        printResponse("Got it. I've added this task: \n\t" + task + "\nNow you have " + numberOfTasks + " tasks in the list.");
+        printResponse("Got it. I've added this task: \n\t" + task + "\nNow you have "
+                + numberOfTasks + " tasks in the list.");
     }
 
     private static void handleUserInputs() {
@@ -33,7 +36,7 @@ public class Duke {
                 if (splitInput[0].equals("list")) {
                     String numberedList = "Here are the tasks in your list:";
                     for (int i = 0; i < numberOfTasks; i++) {
-                        numberedList += "\n" + (i + 1) + "." + tasks[i];
+                        numberedList += "\n" + (i + 1) + "." + tasks.get(i);
                     }
                     printResponse(numberedList);
                 } else if (splitInput[0].equals("bye")) {
@@ -42,41 +45,52 @@ public class Duke {
                 } else if (splitInput[0].equals("done")) {
                     try {
                         int taskNumber = Integer.parseInt(splitInput[1]);
-                        tasks[taskNumber - 1].markAsDone();
-                        printResponse("Nice! I've marked this task as done:\n" + tasks[taskNumber - 1]);
-                    } catch (NullPointerException | NumberFormatException | ArrayIndexOutOfBoundsException ex) {
+                        tasks.get(taskNumber - 1).markAsDone();
+                        printResponse("Nice! I've marked this task as done:\n"
+                                + tasks.get(taskNumber - 1));
+                    } catch (NullPointerException | NumberFormatException
+                            | IndexOutOfBoundsException ex) {
+                        throw new DukeException("☹ OOPS!!! The task number is not valid.");
+                    }
+                } else if (splitInput[0].equals("delete")) {
+                    try {
+                        int taskNumber = Integer.parseInt(splitInput[1]);
+                        Task removedTask = tasks.remove(taskNumber - 1);
+                        printResponse("Noted. I've removed this task:\n\t" + removedTask +
+                                "\nNow you have " + + --numberOfTasks + " tasks in the list.");
+                    } catch (NullPointerException | NumberFormatException
+                            | IndexOutOfBoundsException ex) {
                         throw new DukeException("☹ OOPS!!! The task number is not valid.");
                     }
                 } else if (splitInput[0].equals("todo")) {
                     try {
-                        tasks[numberOfTasks] = new Todo(splitInput[1]);
-                    } catch(ArrayIndexOutOfBoundsException ex) {
+                        tasks.add(new Todo(splitInput[1]));
+                    } catch(IndexOutOfBoundsException ex) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
-                    printAddTask(tasks[numberOfTasks++]);
+                    printAddTask(tasks.get(numberOfTasks++));
                 } else if (splitInput[0].equals("deadline")) {
                     try {
                         String[] splitDescription = splitInput[1].split(" /by ", 2);
-                        tasks[numberOfTasks] = new Deadline(splitDescription[0], splitDescription[1]);
-                    } catch (ArrayIndexOutOfBoundsException ex) {
+                        tasks.add(new Deadline(splitDescription[0], splitDescription[1]));
+                    } catch (IndexOutOfBoundsException ex) {
                         throw new DukeException("☹ OOPS!!! The description or date of a deadline cannot be empty.");
                     }
-                    printAddTask(tasks[numberOfTasks++]);
+                    printAddTask(tasks.get(numberOfTasks++));
                 } else if (splitInput[0].equals("event")) {
                     try {
                         String[] splitDescription = splitInput[1].split(" /at ", 2);
-                        tasks[numberOfTasks] = new Event(splitDescription[0], splitDescription[1]);
-                    } catch (ArrayIndexOutOfBoundsException ex) {
+                        tasks.add(new Event(splitDescription[0], splitDescription[1]));
+                    } catch (IndexOutOfBoundsException ex) {
                         throw new DukeException("☹ OOPS!!! The description or date of an event cannot be empty.");
                     }
-                    printAddTask(tasks[numberOfTasks++]);
+                    printAddTask(tasks.get(numberOfTasks++));
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch(DukeException ex) {
-                System.err.println(ex.getMessage());
+                System.out.println(ex.getMessage());
             }
-
         }
     }
 

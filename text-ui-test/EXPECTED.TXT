@@ -60,6 +60,22 @@ Got it. I've added this task:
 	[E]? project meeting (at: Mon 2-4pm)
 Now you have 7 tasks in the list.
 ____________________________________________________________
+☹ OOPS!!! The description of a todo cannot be empty.
+☹ OOPS!!! The description or date of a deadline cannot be empty.
+☹ OOPS!!! The description or date of an event cannot be empty.
+☹ OOPS!!! The description or date of a deadline cannot be empty.
+☹ OOPS!!! The description or date of an event cannot be empty.
+☹ OOPS!!! The task number is not valid.
+☹ OOPS!!! The task number is not valid.
+☹ OOPS!!! The task number is not valid.
+____________________________________________________________
+Noted. I've removed this task:
+	[E]? project meeting (at: Aug 6th 2-4pm)
+Now you have 6 tasks in the list.
+____________________________________________________________
+☹ OOPS!!! The task number is not valid.
+☹ OOPS!!! The task number is not valid.
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 ____________________________________________________________
 Bye. Hope to see you again soon!
 ____________________________________________________________
