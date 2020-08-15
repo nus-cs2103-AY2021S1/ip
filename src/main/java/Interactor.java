@@ -68,7 +68,7 @@ class Interactor {
         this.toDoList.add(item);
         System.out.println(ConsoleColors.YELLOW.getColor()
                 + this.kai
-                + "<" + item + "> has been added to your list! \n"
+                + "[" + item + "] has been added to your list! \n"
                 + ConsoleColors.RESET.getColor());
     }
 
