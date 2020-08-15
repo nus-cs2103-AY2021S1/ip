@@ -1,5 +1,6 @@
 import command.AddCommand;
 import command.Command;
+import command.DoneCommand;
 import command.ExitCommand;
 import command.ListCommand;
 
@@ -15,11 +16,17 @@ public class CommandReader {
      * @return a Command to be processed by the agent.
      */
     public Command readCommand(String userInput) {
-        if (userInput.equals("list")) {
-            return new ListCommand(userInput);
-        } else if (userInput.equals("bye")) {
-            return new ExitCommand(userInput);
-        } else {
+        String[] words = userInput.split(" ");
+        String commandWord = words[0];
+
+        switch (commandWord) {
+        case "list":
+            return new ListCommand();
+        case "done":
+            return new DoneCommand(words[1]);
+        case "bye":
+            return new ExitCommand();
+        default:
             return new AddCommand(userInput);
         }
     }
