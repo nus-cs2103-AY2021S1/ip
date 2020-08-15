@@ -44,6 +44,7 @@ public class Bot {
                     break;
                 case ("done"):
                     markComplete(commandArr[1]);
+                    break;
                 default:
                     try {
                         addTask(command);
@@ -60,6 +61,14 @@ public class Bot {
         return Bot.indentation + word;
     }
 
+    private int getNumTasks() {
+        int counter = 0;
+        for (Task task : tasks) {
+            if (!task.isDone()) counter++;
+        }
+        return counter;
+    }
+
     private void printTasks() {
         int counter = 1;
         System.out.println("Here are the tasks in your list:");
@@ -70,13 +79,32 @@ public class Bot {
         }
     }
 
+    private void printTask(Task task, Action action) {
+        String message = "";
+        switch (action) {
+            case ADD:
+                message = "Got it. I've added this task:";
+                break;
+            case DONE:
+                message = "Nice! I've marked this task as done:";
+                break;
+            case DELETE:
+                message = "Noted. I've removed this task:";
+                break;
+            default:
+                break;
+        }
+        System.out.println(indentWord(message));
+        System.out.println(indentWord(task.toString()));
+        System.out.println(indentWord(String.format("Now you have %s tasks in the list.", getNumTasks())));
+    }
+
     private void markComplete(String index) {
         int intIndex = Integer.parseInt(index) - 1;
         tasks.get(intIndex).markDone();
 
         // Print todo that has been marked done
-        System.out.println(indentWord("Nice! I've marked this task as done:"));
-        System.out.println(indentWord(tasks.get(intIndex).toString()));
+        printTask(tasks.get(intIndex), Action.DONE);
     }
 
     private void deleteTask(String index) {
@@ -84,15 +112,13 @@ public class Bot {
         Task removedTask = tasks.remove(intIndex);
         
         // Print response from Duke after deleting task
-        System.out.println(indentWord("Noted. I've removed this task:"));
-        System.out.println(indentWord(removedTask.toString()));
-        System.out.println(indentWord(String.format("Now you have %s tasks in the list.", tasks.size())));
+        printTask(removedTask, Action.DELETE);
     }
     
     private void addTask(String command) throws DukeException {
         String[] taskArr = command.split(" ");
         String taskType = taskArr[0];
-        Task task = new Task("");
+        Task task;
 
         switch (taskType) {
             case ("todo"):
@@ -109,6 +135,7 @@ public class Bot {
                 String eventContent = command.substring(6);
                 String[] eventArr = eventContent.split("/");
                 task = new Event(eventArr[0], eventArr[1]);
+                break;
             default:
                 throw new DukeException();
         }
@@ -117,8 +144,6 @@ public class Bot {
         // Add task
         tasks.add(task);
         // Print response from Duke for adding task
-        System.out.println(indentWord("Got it. I've added this task:"));
-        System.out.println(indentWord(task.toString()));
-        System.out.println(indentWord(String.format("Now you have %s tasks in the list.", tasks.size())));
+        printTask(task, Action.ADD);
     }
 }
