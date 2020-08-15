@@ -7,11 +7,11 @@ public class Duke {
     // Attributes
     private static final String NAME = "DUKE";
     private static final String INTRODUCTION = String.format(
-            "Hello! I'm %s\n" +
-                    "I was created for the module CS2103T\n" +
-                    "What can I do for you?", NAME);
-    private static final String EXIT = "Bye. Hope to see you again soon!";
-    private static final String LINE = "____________________________________________________________";
+            "     Hello! I'm %s\n" +
+                    "     I was created for the module CS2103T\n" +
+                    "     What can I do for you?", NAME);
+    private static final String EXIT = "     Bye. Hope to see you again soon!";
+    private static final String LINE = "    ____________________________________________________________";
 
     private static List<String> lst = new ArrayList<>();
 
@@ -34,9 +34,13 @@ public class Duke {
         int sizeOfList = lst.size();
 
         for (int i = 0; i < sizeOfList; i++) {
+            if (i > 0) {
+                sb.append("\n");
+            }
+
             int number = i + 1;
             String text = lst.get(i);
-            sb.append(String.format("\n%s. %s", number, text));
+            sb.append(String.format("     %s. %s", number, text));
         }
 
         System.out.println(wrapText(sb.toString()));
@@ -59,7 +63,7 @@ public class Duke {
                 printList();
             } else {
                 lst.add(input);
-                System.out.println(wrapText("added: " + input));
+                System.out.println(wrapText("     added: " + input));
             }
         }
     }
