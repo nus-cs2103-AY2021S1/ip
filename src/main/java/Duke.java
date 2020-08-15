@@ -70,6 +70,25 @@ public class Duke {
 
                 break;
 
+            case "delete":
+                if (commandInputs.length < 2) {
+                    throw new DukeException("Attempted to delete a task, but no task was specified!");
+                }
+
+                commandDetails = commandInputs[1];
+
+                try {
+                    int taskId = Integer.parseInt(commandDetails);
+                    Task task = tasks.remove(taskId - 1);
+
+                    Duke.speak(String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.",
+                            task, tasks.size()));
+                } catch (NumberFormatException e) {
+                    throw new DukeException("Please key in only the integer representing the task you want to delete!");
+                }
+
+                break;
+
             case "todo":
             case "deadline":
             case "event":

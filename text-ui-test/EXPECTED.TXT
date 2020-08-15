@@ -85,5 +85,35 @@ ____________________________________________________________
 ☹ OOPS!!! Please key in only the integer representing the task you want to mark as complete!
 ____________________________________________________________
 ____________________________________________________________
+☹ OOPS!!! Attempted to delete a task, but no task was specified!
+____________________________________________________________
+____________________________________________________________
+☹ OOPS!!! Please key in only the integer representing the task you want to delete!
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][✓] read book
+2. [D][✘] return book (by: June 6th)
+3. [E][✘] project meeting (at: Aug 6th 2-4pm)
+4. [T][✓] join sports club
+5. [T][✘] borrow book
+6. [D][✘] return book (by: Sunday)
+7. [E][✘] project meeting (at: Mon 2-4pm)
+____________________________________________________________
+____________________________________________________________
+Noted. I've removed this task:
+[T][✓] join sports club
+Now you have 6 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][✓] read book
+2. [D][✘] return book (by: June 6th)
+3. [E][✘] project meeting (at: Aug 6th 2-4pm)
+4. [T][✘] borrow book
+5. [D][✘] return book (by: Sunday)
+6. [E][✘] project meeting (at: Mon 2-4pm)
+____________________________________________________________
+____________________________________________________________
 Bye. Hope to see you again soon!
 ____________________________________________________________

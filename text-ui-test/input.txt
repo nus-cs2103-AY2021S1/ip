@@ -17,4 +17,9 @@ deadline testing deadline without specifying deadline
 event testing event without specifying time
 done
 done project meeting
+delete
+delete project meeting
+list
+delete 4
+list
 bye
