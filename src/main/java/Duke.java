@@ -22,9 +22,15 @@ public class Duke {
     }
 
     private static Task generate(String cmd) throws InvalidCommandException {
-        if (cmd.startsWith("todo ")) {
+        if (cmd.startsWith("todo")) {
+            if (cmd.length() < 5) {
+                throw new EmptyTaskException("todo");
+            }
             return new ToDo(cmd.substring(5));
-        } else if (cmd.startsWith("deadline ")) {
+        } else if (cmd.startsWith("deadline")) {
+            if (cmd.length() < 9) {
+                throw new EmptyTaskException("deadline")
+            }
             String description = cmd.substring(9);
             int s = description.indexOf("/by");
             if (s == -1) {
@@ -33,7 +39,10 @@ public class Duke {
             String time = description.substring(s + 4);
             description = description.substring(0, s - 1);
             return new Deadline(description, time);
-        } else if (cmd.startsWith("event ")) {
+        } else if (cmd.startsWith("event")) {
+            if (cmd.length() < 6) {
+                throw new EmptyTaskException("event");
+            }
             String description = cmd.substring(6);
             int s = description.indexOf("/at");
             if (s == -1) {
