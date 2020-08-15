@@ -15,13 +15,18 @@ public class Duke {
             if (inputLine.equals("list")) {
                 displayList();
             }
-            else if (arr.length == 2 && arr[0].equals("done") && isInteger(arr[1])) {
+            else if (arr.length == 2 && (arr[0].equals("done") || arr[0].equals("delete")) && isInteger(arr[1])) {
                 int num = Integer.parseInt(arr[1]);
                 try {
                     if (num < 1 || num > toDoList.size()) {
                         throw new InvalidRangeError();
                     }
-                    doneTask(num);
+                    if (arr[0].equals("done")) {
+                        doneTask(num);
+                    }
+                    else if (arr[0].equals("delete")) {
+                        deleteTask(num);
+                    }
                 }
                 catch (DukeError e) {
                     hrTag();
@@ -106,12 +111,12 @@ public class Duke {
     private static void addTask(Task task) {
         hrTag();
         toDoList.add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + task);
+        System.out.println(" Got it. I've added this task:");
+        System.out.println("   " + task);
         if (toDoList.size() == 1) {
-            System.out.println(String.format("Now you have %d task in the list.", toDoList.size()));
+            System.out.println(String.format(" Now you have %d task in the list.", toDoList.size()));
         } else {
-            System.out.println(String.format("Now you have %d tasks in the list.", toDoList.size()));
+            System.out.println(String.format(" Now you have %d tasks in the list.", toDoList.size()));
         }
         hrTag();
     }
@@ -122,12 +127,12 @@ public class Duke {
             System.out.println("You have no tasks left! Good job my child!");
         } else {
             if (toDoList.size() == 1) {
-                System.out.println("Here is the task in your list:");
+                System.out.println(" Here is the task in your list:");
             } else {
-                System.out.println("Here are the tasks in your list:");
+                System.out.println(" Here are the tasks in your list:");
             }
             for (int i = 0; i < toDoList.size(); i++) {
-                System.out.println((i+1) + "." + toDoList.get(i));
+                System.out.println(" " + (i+1) + "." + toDoList.get(i));
             }
         }
         hrTag();
@@ -164,28 +169,19 @@ public class Duke {
         hrTag();
     }
 
-    private static void invalidRangeError() {
+    private static void deleteTask(int num) {
         hrTag();
-        System.out.println("Uh oh! That number looks like it is out of range. Check again!");
-        // can add feature for user to add todo
-        hrTag();
-    }
-
-    private static void emptyTaskError() {
-        hrTag();
-        System.out.println("Please insert a task!");
-        hrTag();
-    }
-
-    private static void emptyDateError() {
-        hrTag();
-        System.out.println("Please input a date!");
-        hrTag();
-    }
-
-    private static void unknownCommandError() {
-        hrTag();
-        System.out.println("Unknown command! Please insert the task type first before\ntyping in your task!");
+        System.out.println(" Noted. I've removed this task:");
+        System.out.println("  " + toDoList.get(num - 1));
+        toDoList.remove(num - 1);
+        if (toDoList.size() == 0) {
+            System.out.println(" Great job son! You're left with no more tasks!");
+        }
+        else if (toDoList.size() == 1) {
+            System.out.println(" Now you have only 1 task in the list!");
+        } else {
+            System.out.println(String.format(" Now you have %d tasks in the list.", toDoList.size()));
+        }
         hrTag();
     }
 }
