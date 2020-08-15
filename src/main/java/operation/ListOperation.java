@@ -2,11 +2,9 @@ package operation;
 
 import storage.TaskStorage;
 
-public class AddOperation extends Operation {
-
+public class ListOperation extends Operation {
     private TaskStorage taskStorage;
-
-    public AddOperation(String operation, TaskStorage taskStorage) {
+    public ListOperation(String operation, TaskStorage taskStorage) {
         super(operation);
         this.taskStorage = taskStorage;
     }
@@ -18,7 +16,6 @@ public class AddOperation extends Operation {
 
     @Override
     public void execute() {
-        this.taskStorage.addTask(this.operation);
-        System.out.println("added: " + this.operation);
+        this.taskStorage.printTaskStorage();
     }
 }
