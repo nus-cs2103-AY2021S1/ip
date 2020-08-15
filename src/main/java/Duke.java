@@ -80,9 +80,24 @@ public class Duke {
                     System.out.println(
                         makeWrappedString("Great Job! I've marked this task as done:\n       " + doneTask));
                     break;
+                case "delete":
+                    if (input.split(" ").length < 2 || !input.split(" ")[1].matches("\\d+")) {
+                        throw new IllegalArgumentException("The index of the task to be deleted must be provided.");
+                    }
+                    if (Integer.parseInt(input.split(" ")[1]) > list.size()) {
+                        throw new IllegalArgumentException(
+                            "The index provided is too large.\n     Run list to see your list of tasks.");
+                    }
+                    Task deleted = list.remove(Integer.parseInt(input.split(" ")[1]) - 1);
+                    System.out.println(LINE
+                        + "\n     Sure, I've deleted this task from your list:\n"
+                        + "       " + deleted
+                        + "\n     You now have " + list.size() + " task(s) in the list.\n"
+                        + LINE);
+                    break;
                 default:
                     throw new IllegalArgumentException("Your input must start with one of the following:\n"
-                        + "     \"todo\", \"deadline\", \"event\", \"list\" or \"done\"."
+                        + "     \"todo\", \"deadline\", \"event\", \"list\", \"done\" or \"delete\"."
                     );
                     // break;
                 }
