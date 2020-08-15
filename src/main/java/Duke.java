@@ -42,7 +42,7 @@ public class Duke {
             String description = cmd.substring(9);
             int s = description.indexOf("/by");
             if (s == -1) {
-                return null;
+                throw new NoTimeException("deadline");
             }
             String time = description.substring(s + 4);
             description = description.substring(0, s - 1);
@@ -58,7 +58,7 @@ public class Duke {
             String description = cmd.substring(6);
             int s = description.indexOf("/at");
             if (s == -1) {
-                return null;
+                throw new NoTimeException("event");
             }
             String time = description.substring(s + 4);
             description = description.substring(0, s - 1);
