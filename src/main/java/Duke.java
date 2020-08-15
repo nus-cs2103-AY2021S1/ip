@@ -9,25 +9,39 @@ public class Duke {
 //                + "| |_| | |_| |   <  __/\n"
 //                + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
-        ArrayList<String> store = new ArrayList<>();
+        ArrayList<task> store = new ArrayList<>();
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         Scanner sc = new Scanner(System.in);
         String echo = sc.nextLine();
         int count = 1;
+        int index = checker.inputChecker(echo);
+
         while(echo.equals("bye") == false){
             if(echo.equals("list")){
-                for(String i : store){
-                    System.out.println(i);
+                for(task i : store){
+                    System.out.println(i.read());
+                }
+            }
+            else if(index!=0){
+                try{
+                    task l = store.get(index-1);
+                    l.done();
+                    System.out.println("Nice! I've marked this task as done: ");
+                    System.out.println("  " + l.read2());
+                }
+                catch(IndexOutOfBoundsException e){
+                    System.out.println("There is no such task!");
                 }
             }
             else{
+                task temp = new task(echo);
                 System.out.println("added: " +echo);
-                echo = count + ". " + echo;
-                store.add(echo);
+                store.add(temp);
                 count++;
             }
             echo = sc.nextLine();
+            index = checker.inputChecker(echo);
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
