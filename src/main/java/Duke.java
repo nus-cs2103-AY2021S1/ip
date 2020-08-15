@@ -22,8 +22,8 @@ public class Duke {
         System.out.printf("%s\n%s\n%s\n", LINE1, text.trim(), LINE2);
     }
 
-    private static void invalid() {
-        reply("Invalid format");
+    private static void invalid(String message) {
+        reply(String.format("Invalid command. %s", message));
     }
 
     private static void addTaskNotification(Task t) {
@@ -31,23 +31,19 @@ public class Duke {
     }
 
     private static String[] readCommand(String text) {
-        String[] split = text.split(" ", 2);
-        return split;
+        return text.split(" ", 2);
     }
 
 
     private static void looper() {
         reply("Hello");
         ArrayList<Task> list = new ArrayList<>();
-        Boolean exit = false;
+        boolean exit = false;
         Scanner sc = new Scanner(System.in);
         while (!exit) {
             String input = sc.nextLine().trim();
             String[] parsedInput = readCommand(input);
-            if (parsedInput.length != 2 && !(parsedInput[0].equals(BYE) || parsedInput[0].equals(LIST))) {
-                invalid();
-
-            } else {
+            try {
                 switch (parsedInput[0]) {
                     case BYE:
                         exit = true;
@@ -60,39 +56,54 @@ public class Duke {
                         reply(result);
                         break;
                     case DONE:
-                        int index = Integer.parseInt(parsedInput[1]) - 1;
-                        list.get(index).setCompleted();
-                        reply(String.format("Task marked as completed: \n%s", list.get(index).toString()));
+                        try {
+                            int index = Integer.parseInt(parsedInput[1]) - 1;
+                            list.get(index).setCompleted();
+                            reply(String.format("Task marked as completed: \n%s", list.get(index).toString()));
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            throw new DukeException(e.getMessage());
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException(e.getMessage());
+                        } catch (NumberFormatException e) {
+                            throw new DukeException(String.format("%s is not a number that Done can use",
+                                    parsedInput[1]));
+                        }
                         break;
                     case TODO:
-                        Todo todo = new Todo(parsedInput[1]);
-                        list.add(todo);
-                        addTaskNotification(todo);
+                        try {
+                            Todo todo = new Todo(parsedInput[1]);
+                            list.add(todo);
+                            addTaskNotification(todo);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            throw new DukeException("Insufficient arguments for Todo");
+                        }
                         break;
                     case EVENT:
-                        String[] evInput = parsedInput[1].split("/at ", 2);
-                        if (evInput.length != 2) {
-                            invalid();
-                        } else {
+                        try {
+                            String[] evInput = parsedInput[1].split("/at ", 2);
                             Event event = new Event(evInput[0].trim(), evInput[1].trim());
                             list.add(event);
                             addTaskNotification(event);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            throw new DukeException("Insufficient arguments for Event");
                         }
                         break;
                     case DEADLINE:
-                        String[] dlInput = parsedInput[1].split("/by ", 2);
-                        if (dlInput.length != 2) {
-                            invalid();
-                        } else {
+                        try {
+                            String[] dlInput = parsedInput[1].split("/by ", 2);
                             Deadline deadline = new Deadline(dlInput[0].trim(), dlInput[1].trim());
                             list.add(deadline);
                             addTaskNotification(deadline);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            throw new DukeException("Insufficient arguments for Deadline");
+
                         }
                         break;
                     default:
-                        invalid();
-                        break;
+                        throw new DukeException("Input did not match any existing command.");
                 }
+            } catch (DukeException e) {
+                System.out.println(String.format("DukeException: %s", e.getMessage()));
             }
         }
         reply("Goodbye.");
