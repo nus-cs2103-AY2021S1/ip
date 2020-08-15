@@ -45,6 +45,9 @@ public class Duke {
                 throw new NoTimeException("deadline");
             }
             String time = description.substring(s + 4);
+            if (time.length() < 1) {
+                throw new EmptyTimeException("deadline");
+            }
             description = description.substring(0, s - 1);
             return new Deadline(description, time);
         } else if (cmd.startsWith("event")) {
@@ -61,6 +64,9 @@ public class Duke {
                 throw new NoTimeException("event");
             }
             String time = description.substring(s + 4);
+            if (time.length() < 1) {
+                throw new EmptyTimeException("event");
+            }
             description = description.substring(0, s - 1);
             return new Event(description, time);
         } else {
