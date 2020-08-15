@@ -1,5 +1,7 @@
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Duke {
     public final Scanner scanner;
@@ -12,6 +14,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke duke = new Duke();
+        String pattern = "^done (?<taskNumber>[0-9]+)$";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -24,6 +27,13 @@ public class Duke {
             if (input.equalsIgnoreCase("bye")) {
                 duke.sendMessage(duke.getByeMessage());
                 break;
+            } else if (input.matches(pattern)) {
+                Pattern r = Pattern.compile(pattern);
+                Matcher m = r.matcher(input);
+                m.find();
+                int taskNumber = Integer.parseInt(m.group("taskNumber"));
+                duke.taskManager.completeTask(taskNumber);
+                duke.sendMessage(duke.taskManager.toString());
             } else {
                 duke.taskManager.addTask(input);
                 duke.sendMessage(duke.taskManager.toString());

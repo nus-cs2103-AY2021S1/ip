@@ -14,6 +14,17 @@ public class TaskManager {
         taskList.add(task);
     }
 
+    public void completeTask(int taskNumber) {
+        if (taskNumber <= 0) {
+            throw new IllegalArgumentException("Invalid task number specified");
+        } else if (taskNumber > taskList.size()) {
+            throw new IllegalArgumentException("Task number specified is larger than current amount of tasks");
+        }
+        int index = taskNumber - 1;
+        Task task = taskList.get(index);
+        task.setComplete(true);
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
