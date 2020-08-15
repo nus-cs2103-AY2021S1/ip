@@ -29,12 +29,29 @@ public class Duke {
 
         while(sc.hasNextLine()) {
             String input = sc.nextLine();
-            String[] commandList = input.split(" ");
-
-            String command = commandList[0];
+            String[] splitInput = input.split(" ", 2);
+            String command = splitInput[0];
+            String parameters = splitInput.length > 1 ? splitInput[1] : null;
             switch(command) {
+            case "todo":
+                ToDo todo = new ToDo(parameters);
+                tasks.add(todo);
+                printInWindow("Added: " + todo.toString());
+                break;
+            case "event":
+                String[] eventParameters = parameters.split(" /at ");
+                Event event = new Event(eventParameters[0], eventParameters[1]);
+                tasks.add(event);
+                printInWindow("Added: " + event.toString());
+                break;
+            case "deadline":
+                String[] deadlineParameters = parameters.split(" /by ");
+                Deadline deadline = new Deadline(deadlineParameters[0], deadlineParameters[1]);
+                tasks.add(deadline);
+                printInWindow("Added: " + deadline.toString());
+                break;
             case "done":
-                int taskNumber = Integer.parseInt(commandList[1]);
+                int taskNumber = Integer.parseInt(parameters);
                 Task task = tasks.get(taskNumber - 1);
                 task.markAsDone(true);
                 printInWindow(
