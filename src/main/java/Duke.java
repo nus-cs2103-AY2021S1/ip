@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static final String LOGO =
+    private static final String LOGO =
             "██████╗ ███████╗███╗   ██╗███████╗██████╗ ██╗ ██████╗████████╗\n"
                     + "██╔══██╗██╔════╝████╗  ██║██╔════╝██╔══██╗██║██╔════╝╚══██╔══╝\n"
                     + "██████╔╝█████╗  ██╔██╗ ██║█████╗  ██║  ██║██║██║        ██║\n"
