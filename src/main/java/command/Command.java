@@ -1,5 +1,8 @@
 package command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represents an executable command
  */
@@ -34,7 +37,9 @@ public abstract class Command {
      * @return a list of String containing relevant
      * content from the command.
      */
-    public String getContent() {
-        return this.content;
+    public List<String> getContent() {
+        List<String> contentList = new ArrayList<>();
+        contentList.add(this.content);
+        return contentList;
     }
 }
