@@ -5,12 +5,12 @@ import java.util.Scanner;
 public class Duke {
 
     public static void greet(){
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+
 
     }
     public static void main(String[] args) {
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
+        System.out.println("  ____________________________________________________________\n" + "  Hello! I'm Duke\n" + "  What can I do for you?\n"
+                         + "  ____________________________________________________________");
         try {
             String file = args[0];
             FileInputStream inputStream = new FileInputStream(file);
@@ -21,21 +21,23 @@ public class Duke {
                 char c = (char)inputStream.read();
                 text.append(c);
             }
-            String s = "";
+            String s = " ";
             for(int i = 0 ; i < size; i++){
                 if(text.toString().charAt(i) == 10){
-                    strings.add(s);
+                    strings.add(s.substring(1));
                     s = "";
                 }
                 s = s + text.toString().charAt(i);
             }
-            strings.add(s);
+            strings.add(s.substring(1));
             for(String string : strings){
-                System.out.println(string);
+                System.out.println("\n" + string + "\n  ____________________________________________________________");
                 if(string.equals("bye")){
-                    System.out.println("Bye. Hope to see you again soon!");
+                    System.out.println("  Bye. Hope to see you again soon!\n" + "  ____________________________________________________________");
                     break;
                 }
+                System.out.println("  " + string + "\n" +
+                        "  ____________________________________________________________");
             }
         }catch (Exception e){
             System.out.println(e);
