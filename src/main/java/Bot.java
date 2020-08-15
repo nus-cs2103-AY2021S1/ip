@@ -2,8 +2,8 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Bot {
-    static String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
+    static String logo = " ____        _\n"
+            + "|  _ \\ _   _| | _____\n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
@@ -11,7 +11,7 @@ public class Bot {
     static String prompt = "What can I do for you?";
     static String farewellMsg = "Bye. Hope to see you again soon!";
     static String indentation = "    ";
-    static String demarcation = Bot.indentation + "---------------";
+    static String demarcation = Bot.indentation + "----------------------------------";
 
     ArrayList<Task> todos;
 
@@ -88,7 +88,7 @@ public class Bot {
         // Add todos
         todos.add(todo);
         // Response from Duke for adding todos
-        System.out.println(indentWord("Got it. I've added this task: "));
+        System.out.println(indentWord("Got it. I've added this task:"));
         System.out.println(indentWord(todo.toString()));
         System.out.println(indentWord(String.format("Now you have %s tasks in the list.", todos.size())));
     }
@@ -98,7 +98,7 @@ public class Bot {
         todos.get(indexToMark).markDone();
 
         // Print todo that has been marked done
-        System.out.println(indentWord("Nice! I've marked this task as done: "));
+        System.out.println(indentWord("Nice! I've marked this task as done:"));
         System.out.println(indentWord(todos.get(indexToMark).toString()));
     }
 }
