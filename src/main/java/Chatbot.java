@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -6,11 +8,13 @@ import java.util.Scanner;
 public class Chatbot {
 
     private String inquiry;
+    private List<String> planner;
     private final String INDENTATION = "     ";
     private final String LINE = "    ____________________________________________________________";
 
     Chatbot() {
         this.inquiry = "";
+        this.planner = new ArrayList<String>();
     }
 
     /**
@@ -24,7 +28,12 @@ public class Chatbot {
         Scanner sc = new Scanner(System.in);
         this.inquiry = sc.nextLine();
         while (!inquiry.equals("bye")) {
-            reply(inquiry);
+            if (inquiry.equals("list")) {
+                list();
+            } else {
+                addToPlanner(inquiry);
+                reply("added: " + inquiry);
+            }
             System.out.println(LINE);
             inquiry = sc.nextLine();
         }
@@ -55,6 +64,24 @@ public class Chatbot {
      */
     private void reply (String string) {
         System.out.println(INDENTATION + string);
+    }
+
+    /**
+     * Add inquiry to the planner.
+     * @param event String to be added to the list.
+     */
+    private void addToPlanner(String event) {
+        planner.add(event);
+    }
+
+    /**
+     * Prints out the list.
+     */
+    private void list() {
+        for (int i = 0; i < planner.size(); i++) {
+            String number = (i + 1) + ". ";
+            reply(number + planner.get(i));
+        }
     }
 
 
