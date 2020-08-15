@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Commands {
     private boolean shouldBreak = true;
+    private ArrayList<String> stringsArrayList = new ArrayList<>();
 
     private final String INPUT_LIST = "list";
     private final String INPUT_BLAH = "blah";
@@ -16,22 +17,26 @@ public class Commands {
 
         Scanner scanner = new Scanner(System.in);
 
-        String inputs = scanner.nextLine().toLowerCase();
+        String inputs = scanner.nextLine().toLowerCase().trim();
 
         while (shouldBreak) {
             switch (inputs) {
             case INPUT_LIST:
                 this.lst();
-                inputs = scanner.nextLine().toLowerCase();
+                inputs = scanner.nextLine().toLowerCase().trim();
                 break;
             case INPUT_BLAH:
                 this.blah();
-                inputs = scanner.nextLine().toLowerCase();
+                inputs = scanner.nextLine().toLowerCase().trim();
                 break;
             case INPUT_BYE:
                 System.out.println("~ \n I’ll Be Back \n~ ");
                 shouldBreak = !shouldBreak;
                 break;
+            default:
+                stringsArrayList.add(inputs);
+                System.out.println("~ \n added: " + inputs + "\n~");
+                inputs = scanner.nextLine().toLowerCase().trim();
             }
         }
     }
