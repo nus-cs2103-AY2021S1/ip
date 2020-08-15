@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-// I'm taking a break
+
 public class Duke {
 
     static class Task {
@@ -141,7 +141,6 @@ public class Duke {
                 else if (firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event")) {
                     // whitespace in front of nextLine
                     String remainingWords = multiWord.nextLine().trim();
-                    System.out.println(remainingWords);
                     store(firstWord, remainingWords);
                 }
                 // no special order, this shouldn't happen anymore
