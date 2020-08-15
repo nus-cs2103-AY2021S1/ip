@@ -13,9 +13,10 @@ public class Duke {
         System.out.println(output("Hello! I'm Duke\nWhat can I do for you?"));
 
         String input = sc.nextLine();
-        while (input.equals("bye")) {
+        while (!input.equals("bye")) {
             System.out.println(output(input));
             input = sc.nextLine();
         }
+        System.out.println(output("Bye. Hope to see you again soon!"));
     }
 }
