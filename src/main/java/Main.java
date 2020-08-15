@@ -15,7 +15,9 @@ public class Main {
         var sc = new Scanner(System.in);
 
         bot.greet();
+        System.out.printf("> ");
         while (sc.hasNextLine() && bot.processCommand(sc.nextLine())) {
+            System.out.printf("> ");
         }
     }
 }

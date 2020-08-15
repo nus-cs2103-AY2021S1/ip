@@ -18,28 +18,9 @@ public class Bot {
         this.tasks = new ArrayList<>();
     }
 
-    private void printMessage(List<String> msgs) {
-        var line = "-------------------------------------";
-        System.out.printf("\n  %s\n", line);
-        for (var m : msgs) {
-            System.out.printf("  %s\n", m);
-        }
-
-        System.out.printf("  %s\n\n", line);
-    }
-
-    private void printMessage(String m) {
-        var line = "-------------------------------------";
-        System.out.printf("\n  %s\n", line);
-        System.out.printf("  %s\n", m);
-        System.out.printf("  %s\n\n", line);
-    }
-
     public void greet() {
-        this.printMessage(Arrays.asList(
-            String.format("Hello, I'm %s", this.name),
-            String.format("What can I do for you?")
-        ));
+        println("Hello, I'm %s", this.name);
+        println("What can I do for you?");
     }
 
     public boolean processCommand(String str) {
@@ -48,74 +29,99 @@ public class Bot {
             return true;
         }
 
-        var cmd = sc.next().trim();
+        var cmd = sc.next().strip();
+        beginLog();
 
         if (cmd.equals("bye")) {
-            this.printMessage("goodbye.");
+
+            println("goodbye");
             return false;
+
         } else if (cmd.equals("list")) {
-            this.printMessage(
-                Stream.iterate(0, x -> x + 1)
-                    .map(i -> String.format("%d. %s", 1 + i, this.tasks.get(i)))
-                    .limit(this.tasks.size())
-                    .collect(Collectors.toList())
-            );
+
+            var doneTasks = this.tasks.stream().filter(x -> x.isDone()).count();
+            var pendingTasks = this.tasks.size() - doneTasks;
+
+            println("tracking %d tasks (%d pending, %d done, %.1f%% complete)",
+                this.tasks.size(), pendingTasks, doneTasks,
+                100.0 * ((double) doneTasks / this.tasks.size()));
+
+            Stream.iterate(0, x -> x + 1)
+                .map(i -> String.format("  %d. %s", 1 + i, this.tasks.get(i)))
+                .limit(this.tasks.size())
+                .forEach(Bot::println);
+
         } else if (cmd.equals("done")) {
+
             // one-indexed
             var idx = sc.nextInt() - 1;
             assert 0 <= idx && idx < this.tasks.size();
 
             this.tasks.get(idx).markAsDone();
-            this.printMessage(Arrays.asList(
-                String.format("marked as done:"),
-                String.format("  %s", this.tasks.get(idx))
-            ));
+
+            println("marked as done:");
+            println("  %s", this.tasks.get(idx));
+
         } else if (cmd.equals("todo")) {
-            var task = new Todo(sc.nextLine().trim());
+
+            var task = new Todo(sc.nextLine().strip());
             this.tasks.add(task);
 
-            this.printMessage(Arrays.asList(
-                String.format("added: %s", task)
-            ));
+            println("added: %s", task);
+
         } else if (cmd.equals("event")) {
+
             sc.useDelimiter("/");
-            var item = sc.next().trim();
-            var when = sc.next().trim();
+            var item = sc.next().strip();
+            var when = sc.next().strip();
 
             if (!when.startsWith("at ")) {
-                this.printMessage(String.format("expected: event <name> /at time"));
+                println("expected: event <name> /at <time>");
                 return true;
             }
 
-            when = when.substring(3).trim();
+            when = when.substring(3).strip();
             var task = new Event(item, when);
             this.tasks.add(task);
 
-            this.printMessage(Arrays.asList(
-                String.format("added: %s", task)
-            ));
+            println("added: %s", task);
+
         } else if (cmd.equals("deadline")) {
+
             sc.useDelimiter("/");
-            var item = sc.next().trim();
-            var when = sc.next().trim();
+            var item = sc.next().strip();
+            var when = sc.next().strip();
 
             if (!when.startsWith("by ")) {
-                this.printMessage(String.format("expected: deadline <name> /by time"));
+                println("expected: deadline <name> /by <time>");
                 return true;
             }
 
-            when = when.substring(3).trim();
+            when = when.substring(3).strip();
 
             var task = new Deadline(item, when);
             this.tasks.add(task);
 
-            this.printMessage(Arrays.asList(
-                String.format("added: %s", task)
-            ));
+            println("added: %s", task);
+
         } else {
-            this.printMessage(String.format("unknown command '%s'", cmd));
+            println("unknown command '%s'", cmd);
         }
 
+        endLog();
         return true;
+    }
+
+    private static void println(String fmt, Object... args) {
+        System.out.printf(fmt, args);
+        System.out.println();
+    }
+
+    private static void beginLog() {
+        println("");
+    }
+
+    private static void endLog() {
+        println("--------------------------------------");
     }
 }
