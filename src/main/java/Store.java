@@ -2,32 +2,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Store {
-    List<String> store;
-    List<Boolean> checkList;
+    private List<Task> list;
 
     public Store() {
-        this.store = new ArrayList<>();
-        this.checkList = new ArrayList<>();
+        this.list = new ArrayList<>();
     }
 
-    public void addItem(String item) {
-        this.store.add(item);
-        this.checkList.add(false);
-    }
-
-    public String getItem(Integer index) {
-        return this.store.get(index);
-    }
-
-    public boolean getDoneIndicator(Integer index) {
-        return this.checkList.get(index);
-    }
-
-    public void setDone(Integer index) {
-        this.checkList.set(index, true);
+    public void addItem(Task item) {
+        this.list.add(item);
     }
 
     public int size() {
-        return this.store.size();
+        return this.list.size();
+    }
+
+    public void setDone(int index) {
+        Task task = this.list.get(index);
+        task.setDone(true);
+    }
+
+    public Task getItem(int index) {
+        return this.list.get(index);
+    }
+
+    public List getList() {
+        return this.list;
     }
 }

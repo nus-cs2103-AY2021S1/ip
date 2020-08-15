@@ -10,6 +10,7 @@ public class Duke {
         Bot bot = new Bot();
         while (flag) {
             String input = scanner.nextLine();
+
             if (isDone(input)) {
                 int index = Integer.parseInt(input.substring(5, 6)) - 1;
                 bot.markDone(index, store);
@@ -19,8 +20,17 @@ public class Duke {
             } else if (input.equals("list")) {
                 bot.listItems(store);
             } else {
-                store.addItem(input);
-                bot.repeat(input);
+                String taskType = input.substring(0, input.indexOf(" "));
+                String task = input.substring(input.indexOf(" ") + 1);
+                if (taskType.equals("todo")) {
+                    store.addItem(new ToDos(task));
+                } else if (taskType.equals("deadline")) {
+                    // date = 'by Sunday'
+                    store.addItem(new Deadlines(task));
+                } else if (taskType.equals("event")) {
+                    store.addItem(new Events(task));
+                }
+                bot.repeat(store);
             }
         }
     }
