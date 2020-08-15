@@ -1,7 +1,7 @@
-package task;
+package duke.task;
 
 /**
- * Represents a todo task
+ * Represents a todo duke.task
  */
 public class Todo extends Task {
     public Todo(String name, boolean isDone) {

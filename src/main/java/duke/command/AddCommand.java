@@ -1,7 +1,7 @@
-package command;
+package duke.command;
 
 /**
- * A subclass of Command which sends request to add task to list.
+ * A subclass of Command which sends request to add duke.task to list.
  */
 public class AddCommand extends Command {
     @Override

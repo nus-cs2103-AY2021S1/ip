@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +24,10 @@ public class TaskList {
     }
 
     /**
-     * Get the task in the list by its id.
+     * Get the duke.task in the list by its id.
      *
      * @param taskId the displayed id in the list.
-     * @return the task associated with id.
+     * @return the duke.task associated with id.
      */
     public Task getTaskById(int taskId) {
         int index = taskId - 1;
@@ -35,11 +35,11 @@ public class TaskList {
     }
 
     /**
-     * Add a new task to the list of tasks.
+     * Add a new duke.task to the list of tasks.
      *
-     * @param newTask the new task to be added.
+     * @param newTask the new duke.task to be added.
      * @return a new TaskList containing all the old tasks and
-     * the new task.
+     * the new duke.task.
      */
     public TaskList addTask(Task newTask) {
         List<Task> newTaskList = this.tasks;
@@ -48,7 +48,7 @@ public class TaskList {
     }
 
     /**
-     * Set a task with input id in the list as done.
+     * Set a duke.task with input id in the list as done.
      *
      * @param taskId the displayed id in the list.
      * @return a new TaskList containing all the update tasks.

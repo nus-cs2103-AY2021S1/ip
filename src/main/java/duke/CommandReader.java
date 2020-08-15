@@ -1,20 +1,21 @@
-import command.Command;
-import command.DeadlineCommand;
-import command.DoneCommand;
-import command.ErrorCommand;
-import command.EventCommand;
-import command.ExitCommand;
-import command.ListCommand;
-import command.TodoCommand;
-import exception.DukeException;
+package duke;
+
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DoneCommand;
+import duke.command.ErrorCommand;
+import duke.command.EventCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 
 /**
- * A CommandReader object to parse the user input.
+ * A duke.CommandReader object to parse the user input.
  */
 public class CommandReader {
     /**
      * Read in user input and identify the
-     * correct type of command for the input.
+     * correct type of duke.command for the input.
      *
      * @param userInput a String from user's input.
      * @return a Command to be processed by the agent.

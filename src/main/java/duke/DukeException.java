@@ -1,4 +1,4 @@
-package exception;
+package duke;
 
 /**
  * A exception class DukeException to handle the exceptions in chat bot.

@@ -1,7 +1,7 @@
-package task;
+package duke.task;
 
 /**
- * Task is a class for each task specified from
+ * Task is a class for each duke.task specified from
  * the user commands.
  *
  */
@@ -20,25 +20,25 @@ public class Task {
     }
 
     /**
-     * Get the name of the task.
+     * Get the name of the duke.task.
      *
-     * @return a String showing the name of the task.
+     * @return a String showing the name of the duke.task.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Get the status of the task.
+     * Get the status of the duke.task.
      *
-     * @return a boolean indicating if the task is done.
+     * @return a boolean indicating if the duke.task is done.
      */
     public boolean isDoneTask() {
         return isDone;
     }
 
     /**
-     * Mark the status of the task as done.
+     * Mark the status of the duke.task as done.
      *
      * @return a new Task object with the status updated to "done".
      */
@@ -47,9 +47,9 @@ public class Task {
     }
 
     /**
-     * Display the task object as a string
+     * Display the duke.task object as a string
      *
-     * @return the status of the task followed by the name
+     * @return the status of the duke.task followed by the name
      */
     @Override
     public String toString() {

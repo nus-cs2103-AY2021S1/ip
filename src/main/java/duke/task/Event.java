@@ -1,7 +1,7 @@
-package task;
+package duke.task;
 
 /**
- * Represents an event task
+ * Represents an event duke.task
  */
 public class Event extends Task {
     private final String schedule;

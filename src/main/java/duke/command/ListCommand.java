@@ -1,4 +1,4 @@
-package command;
+package duke.command;
 
 /**
  * A subclass of Command which sends request to show list.

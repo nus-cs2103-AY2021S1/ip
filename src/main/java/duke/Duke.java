@@ -1,15 +1,17 @@
+package duke;
+
 import java.util.Scanner;
 
-import command.Command;
+import duke.command.Command;
 /**
- * Driver class for Duke chat bot called "Jarvis"
+ * Driver class for duke.Duke chat bot called "Jarvis"
  */
 public class Duke {
 
     /**
      * Executes the "Jarvis" bot to run.
      * The bot has a reader to parse user input
-     * and an agent to handle the command parsed from user input
+     * and an agent to handle the duke.command parsed from user input
      *
      * @param args main() function arguments.
      */

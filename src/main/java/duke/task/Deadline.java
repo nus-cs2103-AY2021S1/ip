@@ -1,7 +1,7 @@
-package task;
+package duke.task;
 
 /**
- * Represents an deadline task
+ * Represents an deadline duke.task
  */
 public class Deadline extends Task {
     private final String schedule;

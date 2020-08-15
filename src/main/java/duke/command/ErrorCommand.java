@@ -1,4 +1,4 @@
-package command;
+package duke.command;
 
 import java.util.ArrayList;
 import java.util.List;
