@@ -42,6 +42,17 @@ public class Duke {
                         task, tasks.size()
                 );
                 printResponse(response);
+            } else if (command.startsWith("event")) {
+                String[] input = command.substring(command.indexOf(' ') + 1).split(" /at ");
+                String description = input[0];
+                String at = input[1];
+                Task task = new Event(description, at);
+                tasks.add(task);
+                String response = String.format(
+                        "I've added this task:\n  %s \nNow you have %s tasks in the list.",
+                        task, tasks.size()
+                );
+                printResponse(response);
             } else if (command.matches("done \\d+")) {
                 int index = Integer.parseInt(command.split(" ")[1]);
                 if (index > tasks.size()) {
