@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Command {
 
-    DukeList list;
+    private DukeList list;
 
     Command(DukeList list) {
         this.list = list;
@@ -18,7 +18,7 @@ public class Command {
         if (com.equals("hello")) {
             return "Hi! I'm Duke! Pleasure to meet you :)";
         }
-        if (com.equals("list") || com.equals("done")) {
+        if (com.equals("list") || com.equals("done") || com.equals("delete")) {
             try {
                 return this.processList(com, stringList);
             } catch (Exception e){
@@ -71,6 +71,13 @@ public class Command {
                 return list.markDone(Integer.parseInt(stringList.get(0)) - 1);
             } else {
                 throw new DukeException("Please choose a task to mark as done, with \"done <task number>\"");
+            }
+        }
+        if (com.equals("delete")) {
+            if (!stringList.isEmpty()) {
+                return list.deleteItem(Integer.parseInt(stringList.get(0)) - 1);
+            } else {
+                throw new DukeException("Please choose a task to delete, with \"delete <task number>\"");
             }
         }
         return null;

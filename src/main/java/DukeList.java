@@ -20,9 +20,20 @@ public class DukeList {
                 this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
     }
 
+    public String deleteItem(int index) {
+        if (index >= this.list.size() || index < 0) {
+            return "Please choose a valid task to delete";
+        }
+        Task deletedTask = this.list.remove(index);
+        if (deletedTask.done) this.completedTasks -= 1; else this.activeTasks -= 1;
+        return "Noted. I have deleted the following task: \n"
+                + deletedTask + "\nActive Tasks: " +
+                this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
+    }
+
     public String markDone(int index) {
         if (index >= this.list.size() || index < 0) {
-            return "Please choose a valid task number.";
+            return "Please choose a valid task to mark as done";
         }
         this.activeTasks -= 1;
         this.completedTasks += 1;
