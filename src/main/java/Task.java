@@ -1,13 +1,15 @@
+
 public class Task {
-    private final String DONE = "[✓]";
-    private final String NOT_DONE = "[✗]";
     private final String name;
     private boolean doneState;
-
 
     public Task(String name) {
         this.name = name;
         doneState = false;
+    }
+
+    private String doneTag() {
+        return doneState ? "[\u2713]" : "[\u2718]";
     }
 
     public void setDone() {
@@ -16,6 +18,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("%s %s", doneState ? DONE : NOT_DONE, name);
+        return String.format("%s %s", doneTag(), name);
     }
 }
