@@ -21,7 +21,7 @@ public class Duke {
                     System.out.println(i + ". " + storage.get(i));
                 }
             } else {
-                System.out.println(toEcho);
+                System.out.println("added: " + toEcho);
                 storage.add(toEcho);
             }
             System.out.println("--------------------------------------");
