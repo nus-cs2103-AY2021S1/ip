@@ -37,71 +37,73 @@ public class Duke {
                 comText += arr[i] + " ";
             }
             comText = comText.trim();
-            switch (command) {
-                case "todo":
-                    if (arr.length == 1) {
-                        Duke.echo("☹ OOPS!!! The description of a todo cannot be empty.");
-                    } else {
-                        Task todo = new Todo(comText);
-                        lst.add(todo);
-                        Duke.echo(String.format("Got it. I've added this task:" +
-                                "\n%s\nNow you have %d tasks in the list.", todo, lst.size()));
-                    }
-                    break;
-                case "deadline":
-                    int dIdx = comText.lastIndexOf("/by");
-                    if (arr.length == 1) {
-                        Duke.echo("☹ OOPS!!! The description of a deadline cannot be empty.");
-                    } else if (dIdx == -1 ){
-                        Duke.echo("☹ OOPS!!! Please include a /by");
-                    } else {
-                        String desc = comText.substring(0, dIdx-1);
-                        String by = comText.substring(dIdx+4, comText.length()).trim();
-                        Task deadline = new Deadline(desc, by);
-                        lst.add(deadline);
-                        Duke.echo(String.format("Got it. I've added this task:" +
-                                "\n%s\nNow you have %d tasks in the list.", deadline, lst.size()));
-                    }
-                    break;
-                case "event":
-                    int eIdx = comText.lastIndexOf("/at");
-                    if (arr.length == 1) {
-                        Duke.echo("☹ OOPS!!! The description of an event cannot be empty.");
-                    } else if (eIdx == -1 ){
-                        Duke.echo("☹ OOPS!!! Please include a /at");
-                    } else {
-                        String desc = comText.substring(0, eIdx-1);
-                        String at = comText.substring(eIdx+4, comText.length()).trim();
-                        Task event = new Event(desc, at);
-                        lst.add(event);
-                        Duke.echo(String.format("Got it. I've added this task:" +
-                                "\n%s\nNow you have %d tasks in the list.", event, lst.size()));
-                    }
-                    break;
-                case "list":
-                    Duke.printList(lst);
-                    break;
-                case "done":
-                    if (arr.length != 2) {
-                        Duke.echo("☹ OOPS!!! Please use `done item_number`, e.g. done 3");
+            try {
+                switch (command) {
+                    case "todo":
+                        if (arr.length == 1) {
+                            throw new EmptyDescException();
+                        } else {
+                            Task todo = new Todo(comText);
+                            lst.add(todo);
+                            Duke.echo(String.format("Got it. I've added this task:" +
+                                    "\n%s\nNow you have %d tasks in the list.", todo, lst.size()));
+                        }
                         break;
-                    }
-                    int lstNum = Integer.parseInt(arr[1]);
-                    if (lstNum > lst.size() || lstNum < 0) {
-                        Duke.echo("☹ OOPS!!! The item does not exist within the list");
-                    } else {
-                        Task item = lst.get(lstNum-1);
+                    case "deadline":
+                        int dIdx = comText.lastIndexOf("/by");
+                        if (arr.length == 1) {
+                            throw new EmptyDescException();
+                        } else if (dIdx == -1 || comText.length() == (dIdx+3)){
+                            throw new DeadlineException();
+                        } else {
+                            String desc = comText.substring(0, dIdx-1);
+                            String by = comText.substring(dIdx+4, comText.length()).trim();
+                            Task deadline = new Deadline(desc, by);
+                            lst.add(deadline);
+                            Duke.echo(String.format("Got it. I've added this task:" +
+                                    "\n%s\nNow you have %d tasks in the list.", deadline, lst.size()));
+                        }
+                        break;
+                    case "event":
+                        int eIdx = comText.lastIndexOf("/at");
+                        if (arr.length == 1) {
+                            throw new EmptyDescException();
+                        } else if (eIdx == -1 || comText.length() == (eIdx+3)){
+                            throw new EventTaskException();
+                        } else {
+                            String desc = comText.substring(0, eIdx-1);
+                            String at = comText.substring(eIdx+4, comText.length()).trim();
+                            Task event = new Event(desc, at);
+                            lst.add(event);
+                            Duke.echo(String.format("Got it. I've added this task:" +
+                                    "\n%s\nNow you have %d tasks in the list.", event, lst.size()));
+                        }
+                        break;
+                    case "list":
+                        Duke.printList(lst);
+                        break;
+                    case "done":
+                        if (arr.length != 2) {
+                            throw new InvalidCommandException();
+                        }
+                        int doneNum = Integer.parseInt(arr[1]);
+                        if (doneNum > lst.size() || doneNum < 0) {
+                            throw new InvalidIndexException();
+                        } else {
+                            Task item = lst.get(doneNum-1);
 
-                        item.setStatus(true);
-                        Duke.echo(String.format("Nice! I've marked this task as done:\n%s", item));
-                    }
-                    break;
-                case "bye":
-                    Duke.echo("Bye. Hope to see you again soon!");
-                    break loop;
-                default:
-                    Duke.echo("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    break;
+                            item.setStatus(true);
+                            Duke.echo(String.format("Nice! I've marked this task as done:\n%s", item));
+                        }
+                        break;
+                    case "bye":
+                        Duke.echo("Bye. Hope to see you again soon!");
+                        break loop;
+                    default:
+                        throw new InvalidCommandException();
+                }
+            } catch (Exception e) {
+                Duke.echo(e.getMessage());
             }
         }
     }
