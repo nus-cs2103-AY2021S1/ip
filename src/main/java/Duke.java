@@ -29,32 +29,16 @@ public class Duke {
                         throw new DukeException("     ☹ OOPS!!! The description of done is incomplete.");
                     }
                     int n = Integer.parseInt(res.substring(5)) - 1;
-                    if (n > data.size() || n < 0) {
+                    if (n < 0 || n >= data.size()) {
                         //Exception: eg. done 999
                         throw new DukeException("     ☹ OOPS!!! The index is out of bounds.");
                     }
                     data.get(n).done();
                     System.out.println("    ____________________________________________________________");
                     System.out.println("    Nice! I've marked this task as done: ");
-                    System.out.printf("     [%s] %s\n", data.get(n).getStatusIcon(), data.get(n).getDescription());
+                    System.out.printf("     %s\n", data.get(n).toString());
                     System.out.println("    ____________________________________________________________");
-                } else if (res.startsWith("delete")) {
-                    if (res.length() <= 7) {
-                        // Exception: eg. delete
-                        throw new DukeException("     ☹ OOPS!!! The description of delete is incomplete.");
-                    }
-                    int n = Integer.parseInt(res.substring(7)) - 1;
-                    if (n > data.size() || n < 0) {
-                        //Exception: eg. delete 999
-                        throw new DukeException("     ☹ OOPS!!! The index is out of bounds.");
-                    }
-                    System.out.println("    ____________________________________________________________");
-                    System.out.println("     Noted. I've removed this task: ");
-                    System.out.printf("     [%s] %s\n", data.get(n).getStatusIcon(), data.get(n).getDescription());
-                    data.remove(n);
-                    System.out.printf("     Now you have %d tasks in the list.\n", data.size());
-                    System.out.println("    ____________________________________________________________");
-                } else if (res.startsWith("todo")) {
+                }  else if (res.startsWith("todo")) {
                     if (res.length() <= 5) {
                         // Exception: eg. todo
                         throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
@@ -114,7 +98,6 @@ public class Duke {
                 }
             } catch (NumberFormatException e) {
                 // Exception: eg. done some words
-                // Exception: eg. delete some words
                 System.out.println("    ____________________________________________________________");
                 System.out.println("     ☹ OOPS!!! Please enter a number");
                 System.out.println("    ____________________________________________________________");
