@@ -1,25 +1,22 @@
 package command;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Represents an executable command
  */
 public abstract class Command {
-    protected String userInput;
+    protected String content;
 
-    public Command(String userInput) {
-        this.userInput = userInput;
+    public Command() {
+        this.content = "";
     }
 
     /**
-     * Check if the command is an ExitCommand.
+     * Check if the command is an ExitCommand via its content.
      *
      * @return a boolean suggesting if the command is ExitCommand.
      */
     public boolean isExit() {
-        return this.userInput.equals("bye");
+        return this.content.equals("bye");
     }
 
     /**
@@ -37,7 +34,7 @@ public abstract class Command {
      * @return a list of String containing relevant
      * content from the command.
      */
-    public List<String> getContent() {
-        return new ArrayList<>();
+    public String getContent() {
+        return this.content;
     }
 }
