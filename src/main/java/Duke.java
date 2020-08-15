@@ -37,101 +37,158 @@ public class Duke {
             Task taskToAdd;
             int numOfInput = userInputArray.length;
 
-            switch (commandCheck) {
-                case "list":
-                    if (STORAGE.isEmpty()) {
-                        System.out.println("The list is empty!");
-                    } else {
-                        int index = 1;
-                        System.out.println("These are the tasks in your list:");
-                        for (Task task : STORAGE) {
-                            String str = task.toString();
-                            System.out.println(index + ". " + str);
-                            index++;
-                        }
-                    }
-                    printBorder();
-                    break;
-
-                case "done":
-                    String temp = command.split(" ")[1];
-                    int indexOfTemp = Integer.parseInt(temp);
-                    int currentTaskIndex = indexOfTemp - 1;
-                    Task currentTask = STORAGE.get(currentTaskIndex);
-                    STORAGE.get(currentTaskIndex).setDone();
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(" " + currentTask.toString());
-                    break;
-
-                case "todo":
-                    StringBuilder todoString = new StringBuilder("");
-                    int j = 1;
-                    while (j < numOfInput) {
-                        todoString.append(userInputArray[j]);
-                        todoString.append(" ");
-                        j++;
-                    }
-                    taskToAdd = new Todo(todoString.toString().trim());
-                    printGotIt();
-                    printTask(taskToAdd);
-                    STORAGE.add(taskToAdd);
-                    printTaskCount();
-                    break;
-
-                case "deadline":
-                    StringBuilder deadlineString = new StringBuilder("");
-                    StringBuilder deadlineDate = new StringBuilder("");
-                    boolean checkForDate = false;
-                    int m = 1;
-                    while (m < numOfInput) {
-                        if (userInputArray[m].equals("/by")) {
-                            checkForDate = true;
+            try {
+                switch (commandCheck) {
+                    case "list":
+                        if (STORAGE.isEmpty()) {
+                            throw new DukeException("The list is empty.");
                         } else {
-                            if (checkForDate == false) {
-                                deadlineString.append(userInputArray[m]);
-                                deadlineString.append(" ");
-                            } else {
-                                deadlineDate.append(userInputArray[m]);
-                                deadlineDate.append(" ");
+                            int index = 1;
+                            System.out.println("These are the tasks in your list:");
+                            for (Task task: STORAGE) {
+                                String str = task.toString();
+                                System.out.println(index + ". " + str);
+                                index++;
                             }
                         }
-                        m++;
-                    }
-                    taskToAdd = new Deadline(deadlineString.toString().trim(), deadlineDate.toString().trim());
-                    printGotIt();
-                    printTask(taskToAdd);
-                    STORAGE.add(taskToAdd);
-                    printTaskCount();
-                    break;
+                        printBorder();
+                        break;
 
-                case "event":
-                    StringBuilder eventString = new StringBuilder("");
-                    StringBuilder eventDate = new StringBuilder(" ");
-                    boolean checkForEvent = false;
-                    int z = 1;
-                    while (z < numOfInput) {
-                        if (userInputArray[z].equals("/at")) {
-                            checkForEvent = true;
-                        } else {
-                            if (checkForEvent == false) {
-                                eventString.append(userInputArray[z]);
-                                eventString.append(" ");
-                            } else {
-                                eventDate.append(userInputArray[z]);
-                                eventDate.append(" ");
+                    case "done":
+                        try {
+                            if (numOfInput < 2) {
+                                throw new DukeException("Please specify which task you have completed.");
                             }
-                        }
-                        z++;
-                    }
-                    taskToAdd = new Event(eventString.toString().trim(), eventDate.toString().trim());
-                    printGotIt();
-                    printTask(taskToAdd);
-                    STORAGE.add(taskToAdd);
-                    printTaskCount();
-                    break;
 
-                default:
-                    break;
+                            try {
+                                Integer.parseInt(userInputArray[1]);
+                            } catch (NumberFormatException error) {
+                                throw new DukeException("Input is not a valid integer.");
+                            }
+
+                            String temp = command.split(" ")[1];
+                            int indexOfTemp = Integer.parseInt(temp);
+                            int currentTaskIndex = indexOfTemp - 1;
+
+                            if (currentTaskIndex < 0 || currentTaskIndex >= STORAGE.size()) {
+                                throw new DukeException("The task number" + " (" + (currentTaskIndex + 1) + ") " + "that you have input can not be found in your list.");
+                            }
+
+                            Task currentTask = STORAGE.get(currentTaskIndex);
+                            STORAGE.get(currentTaskIndex).setDone();
+                            System.out.println("Nice! I've marked this task as done:");
+                            System.out.println(" " + currentTask.toString());
+                        } catch (DukeException error) {
+                            System.err.println(error.getMessage());
+                        }
+                        printBorder();
+                        break;
+
+                    case "todo":
+                        try {
+                            if (numOfInput == 1) {
+                                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                            }
+                            StringBuilder todoString = new StringBuilder("");
+                            int j = 1;
+                            while (j < numOfInput) {
+                                todoString.append(userInputArray[j]);
+                                todoString.append(" ");
+                                j++;
+                            }
+                            taskToAdd = new Todo(todoString.toString().trim());
+                            printGotIt();
+                            printTask(taskToAdd);
+                            STORAGE.add(taskToAdd);
+                            printTaskCount();
+                        } catch (DukeException error) {
+                            System.err.println(error.getMessage());
+                        }
+                        break;
+
+                    case "deadline":
+                        try {
+                            if (numOfInput == 1) {
+                                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                            }
+
+                            if (numOfInput < 4) {
+                                throw new DukeException("☹ OOPS!!! The correct way to log a deadline is: (deadline) " +
+                                        "(description) (/by) (date)");
+                            }
+
+                            StringBuilder deadlineString = new StringBuilder("");
+                            StringBuilder deadlineDate = new StringBuilder("");
+                            boolean checkForDate = false;
+                            int m = 1;
+                            while (m < numOfInput) {
+                                if (userInputArray[m].equals("/by")) {
+                                    checkForDate = true;
+                                } else {
+                                    if (checkForDate == false) {
+                                        deadlineString.append(userInputArray[m]);
+                                        deadlineString.append(" ");
+                                    } else {
+                                        deadlineDate.append(userInputArray[m]);
+                                        deadlineDate.append(" ");
+                                    }
+                                }
+                                m++;
+                            }
+                            taskToAdd = new Deadline(deadlineString.toString().trim(), deadlineDate.toString().trim());
+                            printGotIt();
+                            printTask(taskToAdd);
+                            STORAGE.add(taskToAdd);
+                            printTaskCount();
+                        } catch (DukeException error) {
+                            System.err.println(error.getMessage());
+                        }
+                        break;
+
+                    case "event":
+                        try {
+                            if (numOfInput == 1) {
+                                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                            }
+
+                            if (numOfInput < 4) {
+                                throw new DukeException("☹ OOPS!!! The correct way to log an event is: (event) " +
+                                                        "(description) (/at) (date)");
+                            }
+
+                            StringBuilder eventString = new StringBuilder("");
+                            StringBuilder eventDate = new StringBuilder(" ");
+                            boolean checkForEvent = false;
+                            int z = 1;
+                            while (z < numOfInput) {
+                                if (userInputArray[z].equals("/at")) {
+                                    checkForEvent = true;
+                                } else {
+                                    if (checkForEvent == false) {
+                                        eventString.append(userInputArray[z]);
+                                        eventString.append(" ");
+                                    } else {
+                                        eventDate.append(userInputArray[z]);
+                                        eventDate.append(" ");
+                                    }
+                                }
+                                z++;
+                            }
+                            taskToAdd = new Event(eventString.toString().trim(), eventDate.toString().trim());
+                            printGotIt();
+                            printTask(taskToAdd);
+                            STORAGE.add(taskToAdd);
+                            printTaskCount();
+                        } catch (DukeException error) {
+                            System.err.println(error.getMessage());
+                        }
+                        break;
+
+                    default:
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what '" + command + "' means :-(");
+                }
+            } catch (DukeException error) {
+                System.err.println(error.getMessage());
             }
             command = READER.readLine();
         }
