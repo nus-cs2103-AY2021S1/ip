@@ -9,6 +9,13 @@ public class Duke {
             + "\t| |_| | |_| |   <  __/\n"
             + "\t|____/ \\__,_|_|\\_\\___|\n";
 
+    private DukeList list;
+
+
+    public Duke() {
+        this.list = new DukeList();
+    }
+
 
     /**
      * Prints a given message within line separators.
@@ -67,7 +74,13 @@ public class Duke {
             msgInput = sc.nextLine();
 
             if (!shouldQuit(msgInput)) {
-                Duke.printMessage(msgInput);
+                if (msgInput.equals("list")) {
+                    String listString = this.list.toString();
+                    Duke.printMessage(listString);
+                } else {
+                    String statusString = this.list.add(msgInput);
+                    Duke.printMessage(statusString);
+                }
             }
         }
     }
