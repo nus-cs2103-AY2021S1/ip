@@ -9,7 +9,7 @@ public class Duke {
             + "\t| |_| | |_| |   <  __/\n"
             + "\t|____/ \\__,_|_|\\_\\___|\n";
 
-    private DukeList list;
+    private final DukeList list;
 
 
     public Duke() {
@@ -74,12 +74,25 @@ public class Duke {
             msgInput = sc.nextLine();
 
             if (!shouldQuit(msgInput)) {
-                if (msgInput.equals("list")) {
-                    String listString = this.list.toString();
-                    Duke.printMessage(listString);
-                } else {
-                    String statusString = this.list.add(msgInput);
-                    Duke.printMessage(statusString);
+                String[] msgArr = msgInput.split(" ");
+                String keyword = msgArr[0];
+
+                switch (keyword) {
+                    case ("list"):
+                        String listString = this.list.toString();
+                        Duke.printMessage(listString);
+                        break;
+
+                    case ("done"):
+                        int index = Integer.parseInt(msgArr[1]);
+                        String statusMsg = this.list.markAsDone(index);
+                        Duke.printMessage(statusMsg);
+                        break;
+
+                    default:
+                        String statusString = this.list.add(msgInput);
+                        Duke.printMessage(statusString);
+                        break;
                 }
             }
         }

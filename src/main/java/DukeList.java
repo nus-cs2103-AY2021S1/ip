@@ -3,7 +3,7 @@ import java.lang.StringBuilder;
 
 
 public class DukeList {
-    private ArrayList<String> list;
+    private ArrayList<Item> list;
     private static final int CAPACITY = 100;
 
 
@@ -19,8 +19,25 @@ public class DukeList {
      * @return Status string to be printed.
      */
     public String add(String itemString) {
-        this.list.add(itemString);
+        this.list.add(new Item(itemString));
         return "added: " + itemString;
+    }
+
+
+    /**
+     * Mark an item as done.
+     * @param index Index of item to be marked as done.
+     *              !This index is the printed index, not the actual index in the list.
+     * @return Status string to be printed.
+     */
+    public String markAsDone(int index) {
+        try {
+            Item targetItem = this.list.get(index - 1);
+            targetItem.markAsDone();
+            return String.format("Nice! I've marked this task as done: \n\t\t%s", targetItem.toString());
+        } catch (NullPointerException e) {
+            return "Index is invalid!";
+        }
     }
 
 
