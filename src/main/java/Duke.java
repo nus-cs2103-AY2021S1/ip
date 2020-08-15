@@ -18,27 +18,49 @@ public class Duke {
         int index = checker.inputChecker(echo);
 
         while(echo.equals("bye") == false){
-            if(echo.equals("list")){
-                for(task i : store){
-                    System.out.println(i.read());
-                }
+            int type = checker.typeChecker(echo);
+            if(type == 1){
+                String name = checker.name(echo);
+                Todo t = new Todo(name);
+                store.add(t);
             }
-            else if(index!=0){
-                try{
-                    task l = store.get(index-1);
-                    l.done();
-                    System.out.println("Nice! I've marked this task as done: ");
-                    System.out.println("  " + l.read2());
-                }
-                catch(IndexOutOfBoundsException e){
-                    System.out.println("There is no such task!");
-                }
+            else if(type == 2){
+                String name = checker.name(echo);
+                Deadline d = new Deadline(name);
+                String date = checker.dateFinder(echo,2);
+                d.addDate(date);
+                store.add(d);
+            }
+            else if(type == 3){
+                String name = checker.name(echo);
+                Event e = new Event(name);
+                String date = checker.dateFinder(echo,3);
+                e.addDate(date);
+                store.add(e);
             }
             else{
-                task temp = new task(echo);
-                System.out.println("added: " +echo);
-                store.add(temp);
-                count++;
+                if(echo.equals("list")){
+                    for(task i : store){
+                        System.out.println(i.read());
+                    }
+                }
+                else if(index!=0){
+                    try{
+                        task l = store.get(index-1);
+                        l.done();
+                        System.out.println("Nice! I've marked this task as done: ");
+                        System.out.println("  " + l.read2());
+                    }
+                    catch(IndexOutOfBoundsException e){
+                        System.out.println("There is no such task!");
+                    }
+                }
+                else{
+                    task temp = new task(echo);
+                    System.out.println("added: " +echo);
+                    store.add(temp);
+                    count++;
+                }
             }
             echo = sc.nextLine();
             index = checker.inputChecker(echo);
