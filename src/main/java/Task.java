@@ -11,11 +11,9 @@ public class Task {
         this.done = true;
     }
 
-    public boolean getDone() {
-        return this.done;
-    }
-
-    public String getDetails() {
-        return this.details;
+    @Override
+    public String toString() {
+        String s = this.done ? "[✓] " : "[✗] ";
+        return s + this.details;
     }
 }

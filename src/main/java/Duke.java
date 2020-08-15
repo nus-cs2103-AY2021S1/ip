@@ -31,9 +31,7 @@ public class Duke {
                 System.out.println("    Here are the tasks in your list:");
                 while (iterator.hasNext()) {
                     count++;
-                    Task task = iterator.next();
-                    String done = task.getDone() ? "[✓] " : "[✗] ";
-                    System.out.println("    " + count + ". " + done + task.getDetails());
+                    System.out.println("    " + count + ". " + iterator.next().toString());
                 }
                 System.out.println(line);
             } else if (input.equals("done")) {
@@ -43,16 +41,41 @@ public class Duke {
                     task.markAsDone();
                     System.out.println(line + "\n" +
                             "    Nice! I've marked this task as done: " + "\n" +
-                            "    [✓] " + task.getDetails() + "\n" +
+                            "    " + task.toString() + "\n" +
                             line);
                 } else {
                     System.out.println(line + "\n" +
                             "   Oops! No such task!" + "\n" +
                             line);
                 }
-            } else {
-                list.add(new Task(input));
-                System.out.println(line + "\n" + "     added: " + input + "\n" + line + "\n");
+            } else if (input.equals("todo")) {
+                ToDo toDo = new ToDo(sc.nextLine());
+                list.add(toDo);
+                System.out.println(line + "\n" +
+                        "    Got it! I have added this todo to the list!" + "\n" +
+                        "      " + toDo + "\n" +
+                        String.format("    Now you have %d tasks in the list.", list.size()) + "\n" +
+                        line + "\n");
+            } else if (input.equals("event")) {
+                String s = sc.nextLine();
+                String[] arr = s.split("/at");
+                Event event = new Event(arr[0], arr[1]);
+                list.add(event);
+                System.out.println(line + "\n" +
+                        "    Got it! I have added this event to the list!" + "\n" +
+                        "      " + event + "\n" +
+                        String.format("    Now you have %d tasks in the list.", list.size()) + "\n" +
+                        line + "\n");
+            } else if (input.equals("deadline")) {
+                String s = sc.nextLine();
+                String[] arr = s.split("/by");
+                Deadline deadline = new Deadline(arr[0], arr[1]);
+                list.add(deadline);
+                System.out.println(line + "\n" +
+                        "    Got it! I have added this deadline to the list!" + "\n" +
+                        "      " + deadline + "\n" +
+                        String.format("    Now you have %d tasks in the list.", list.size()) + "\n" +
+                        line + "\n");
             }
         }
     }
