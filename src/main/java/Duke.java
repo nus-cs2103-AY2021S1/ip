@@ -1,6 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
+    static ArrayList<String> myTasks = new ArrayList<>();
 
     public static void greet(){
         String greeting = "\n   _________________________________________________________________"
@@ -10,10 +13,20 @@ public class Duke {
         System.out.println(greeting);
     }
 
-    public static void echo(String input){
+    public static void addTask(String input){
+        myTasks.add(input);
         String output = "   ______________________________________________________________"
-                        + "\n   " + input
+                        + "\n   added: " + input
                         + "\n   ______________________________________________________________";
+        System.out.println(output);
+    }
+
+    public static void listTasks(){
+        String output = "   ______________________________________________________________";
+        for(int i = 0; i < myTasks.size(); i++){
+            output +="\n    " + (i + 1) +". " + myTasks.get(i);
+        }
+        output += "\n   ______________________________________________________________";
         System.out.println(output);
     }
 
@@ -39,8 +52,11 @@ public class Duke {
             if(input.equals("bye") || input.equals("Bye")){
                 bye();
                 break;
-            } else {
-                echo(input);
+            } else if(input.equals("list")){
+                listTasks();
+            }
+            else {
+                addTask(input);
             }
         }
 
