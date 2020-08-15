@@ -6,14 +6,15 @@ import duke.DukeException;
 /**
  * A subclass of Command which sends request to mark a task in list as done.
  */
-public class DoneCommand extends Command {
+public class DeleteCommand extends Command {
+    
     /**
-     * Creates a DoneCommand.
+     * Creates a DeleteCommand.
      *
-     * @param content the task information supplied by the user.
+     * @param content the ask information supplied by the user.
      * @throws DukeException if the content has no input or improper input.
      */
-    public DoneCommand(String content) throws DukeException {
+    public DeleteCommand(String content) throws DukeException {
         if (content.isEmpty()) {
             throw new DukeException("☹ OOPS!!! Please enter a value");
         } else if (!(Character.isDigit(content.charAt(0)))) {
@@ -27,6 +28,6 @@ public class DoneCommand extends Command {
 
     @Override
     public String sendRequest() {
-        return "update";
+        return "delete";
     }
 }

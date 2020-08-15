@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ErrorCommand;
 import duke.command.EventCommand;
@@ -29,6 +30,8 @@ public class CommandReader {
             switch (commandWord) {
             case "done":
                 return new DoneCommand(content);
+            case "delete":
+                return new DeleteCommand(content);
             case "list":
                 return new ListCommand();
             case "bye":
