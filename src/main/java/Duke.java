@@ -76,22 +76,23 @@ public class Duke {
                         System.out.println("_____________________________");
                         input = sc.nextLine();
                     }
-                } else {
-                    try {
-                        int index = Integer.parseInt(request[1]);
-                        isNumeric(index, list);
-                        System.out.println("The event has been removed as per your request: \n " + list.get(index - 1));
-                        list.remove(index - 1);
-                        System.out.println("Now you have " + list.size() + " tasks in the list+ \n_____________________________");
-                        input = sc.nextLine();
-                    } catch (NumberFormatException e){
-                        System.out.println("You have not provided a valid number\n_____________________________");
-                        input = sc.nextLine();
-                    } catch (InvalidNumberException e){
-                        System.out.println("The number provided was greater or lesser than the number of items in the list\n_____________________________");
-                        input = sc.nextLine();
-                    }
                 }
+//                else {
+//                    try {
+//                        int index = Integer.parseInt(request[1]);
+//                        isNumeric(index, list);
+//                        System.out.println("The event has been removed as per your request: \n " + list.get(index - 1));
+//                        list.remove(index - 1);
+//                        System.out.println("Now you have " + list.size() + " tasks in the list+ \n_____________________________");
+//                        input = sc.nextLine();
+//                    } catch (NumberFormatException e){
+//                        System.out.println("You have not provided a valid number\n_____________________________");
+//                        input = sc.nextLine();
+//                    } catch (InvalidNumberException e){
+//                        System.out.println("The number provided was greater or lesser than the number of items in the list\n_____________________________");
+//                        input = sc.nextLine();
+//                    }
+//                }
             } catch (UnknownCommandException ex) {
                 System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(\n_____________________________");
                 input = sc.nextLine();
