@@ -5,7 +5,7 @@ public class Duke {
     private static ArrayList<Task> taskList = new ArrayList<>(); // List of all input items from user
 
     public static void main(String[] args) {
-        String logo = "Hans ㋡";
+        String logo = "Duke";
                 /*"_   _        _        \n"
                    + "| |_| | ___  _| | _____ \n"
                    + "|  ㋡ | | | | | |/ / _ \\\n"
@@ -95,7 +95,7 @@ public class Duke {
         Task completedTask = Duke.taskList.get(index);
         completedTask.markAsDone();
 
-        System.out.println("Nice! I've marked this task as done: \n" +
+        System.out.println("Nice! I've marked this task as done:\n" +
                 completedTask.toString());
 
     }
