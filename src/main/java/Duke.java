@@ -19,28 +19,49 @@ public class Duke {
         System.out.println(line);
 
         Scanner sc = new Scanner(System.in);
-        List<String> list = new ArrayList<>();
+        List<Task> list = new ArrayList<>();
 
-        String output = sc.next();
+        String output;
 
-        while (!output.equals("bye")) {
+         do {
 
-            System.out.println(line);
+             output = sc.nextLine();
+             System.out.println(line);
 
-            if (output.equals("list")) {
-                for (int i = 0; i < list.size(); i++){
-                    System.out.println((i + 1) + ". " + list.get(i));
-                }
-            }
-            else {
-                list.add(output);
-                System.out.println("added: " + output);
-            }
+             if (output.equals("list")) {
+                 for (int i = 0; i < list.size(); i++) {
+                     System.out.println((i + 1) + ". " + list.get(i));
+                 }
+                 System.out.println(line);
+                 continue;
+             }
 
-            System.out.println(line);
+             if (output.indexOf("done") == 0) {
+                 String[] arr = output.split(" ");
 
-            output = sc.next();
-        }
+                 try {
+
+                     int index = Integer.parseInt(arr[1]) - 1;
+
+                     if (index < list.size()) {
+                         list.get(index).completeTask();
+                         System.out.println("Nice! I've marked this task as done:");
+                         System.out.println(list.get(index));
+                         System.out.println(line);
+                     }
+
+                     continue;
+
+                 } catch (NumberFormatException nfe) {
+
+                 }
+             }
+
+             list.add(new Task(output));
+             System.out.println("added: " + output);
+             System.out.println(line);
+
+        } while (!output.equals("bye"));
 
         System.out.println(line);
         System.out.println("Bye. Hope to see you again soon!");
