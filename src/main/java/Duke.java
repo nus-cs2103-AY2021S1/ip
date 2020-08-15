@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Duke {
 
     private Task[] tasks = new Task[100];
-    private int currentIndex = 0;
+    private int numOfTasks = 0;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -29,7 +29,7 @@ public class Duke {
                 int index = Integer.parseInt(input.split(" ")[1]);
                 System.out.println(wrapWithLines(done(index)));
             } else {
-                System.out.println(wrapWithLines(add(input)));
+                System.out.println(wrapWithLines(addTask(input)));
             }
         }
     }
@@ -48,26 +48,16 @@ public class Duke {
     }
 
     private String line() {
-        StringBuilder str = new StringBuilder("\t");
-        for (int i = 0; i < 50; i++) {
-            str.append("-");
-        }
-        return str.toString();
+        return "\t" + "-".repeat(50);
     }
 
     private String wrapWithLines(String str) {
         return line() + "\n" + str + "\n" + line();
     }
 
-    private String add(String str) {
-        tasks[currentIndex] = new Task(str);
-        currentIndex++;
-        return "\t added: " + str + "\n";
-    }
-
     private String list() {
         StringBuilder str = new StringBuilder("\t Here are the tasks in your list:\n");
-        for (int i = 0; i < currentIndex; i++) {
+        for (int i = 0; i < numOfTasks; i++) {
             str.append("\t ").append(i + 1).append(".")
                     .append(tasks[i].toString()).append("\n");
         }
@@ -79,7 +69,41 @@ public class Duke {
         Task task = tasks[index];
         task.markAsDone();
         return "\t Nice! I've marked this task as done:\n\t\t"
-                + task.toString();
+                + task.toString() + "\n";
+    }
+
+    private void addTaskToList(Task task) {
+        tasks[numOfTasks] = task;
+        numOfTasks++;
+    }
+
+    private String addTask(String input) {
+        String[] splitInput = input.split(" ", 2);
+        String command = splitInput[0];
+        String taskString = splitInput[1];
+        Task task;
+        switch (command) {
+            case "todo":
+                task = new Todo(taskString);
+                break;
+            case "deadline": {
+                String[] parsed = taskString.split("/by");
+                task = new Deadline(parsed[0], parsed[1]);
+                break;
+            }
+            case "event": {
+                String[] parsed = taskString.split("/at");
+                task = new Event(parsed[0], parsed[1]);
+                break;
+            }
+            default:
+                // throw exception
+                return "";
+        }
+        addTaskToList(task);
+        return "\t Got it. I've added this task: \n"
+                + "\t\t" + task.toString() + "\n"
+                + "\t Now you have " + numOfTasks + " tasks in this list.";
     }
 
 }
