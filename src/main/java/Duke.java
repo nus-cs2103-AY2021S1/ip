@@ -25,11 +25,11 @@ public class Duke {
     }
 
     public static void listTasks(){
-        String output = "   ______________________________________________________________";
+        StringBuilder output = new StringBuilder("   ______________________________________________________________");
         for(int i = 0; i < myTasks.size(); i++){
-            output +="\n    " + (i + 1) +". " + myTasks.get(i);
+            output.append("\n    ").append(i + 1).append(". ").append(myTasks.get(i));
         }
-        output += "\n   ______________________________________________________________";
+        output.append("\n   ______________________________________________________________");
         System.out.println(output);
     }
 
