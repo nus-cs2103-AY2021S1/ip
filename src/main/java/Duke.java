@@ -11,13 +11,29 @@ public class Duke {
     }
 
     public static void greet() {
+        String logo = "       \\:.             .:/\n" +
+                "        \\``._________.''/ \n" +
+                "         \\             / \n" +
+                " .--.--, / .':.   .':. \\\n" +
+                "/__:  /  | '::' . '::' |\n" +
+                "   / /   |`.   ._.   .'|\n" +
+                "  / /    |.'         '.|\n" +
+                " /___-_-,|.\\  \\   /  /.|\n" +
+                "      // |''\\.;   ;,/ '|\n" +
+                "      `==|:=         =:|\n" +
+                "         `.          .'\n" +
+                "           :-._____.-:\n" +
+                "          `''       `''\n";
+        System.out.print(logo);
         System.out.println("Pikachu: Hello, I am Pikachu! My pika service creates a to-do list for you!\n\n" +
                 "1. type 'list' and I list all that you said, along if it is completed\n" +
                 "2. type either 'event', 'deadline', 'todo', followed by the task!\n" +
                 "   2.1. if 'event', type the task followed by a '/at <duration>' to indicate duration\n" +
                 "   2.2. if 'deadline', type the task followed by a '/by <deadline>' to indicate deadline\n" +
+                "   2.3. if 'delete' type the task followed by a number within the list index to delete\n" +
+                "   2.4. if 'done' type the task followed by a number within the list index to mark it\n" +
                 "3. type 'done x' where x is the index of the item you want to be indicated done\n" +
-                "4. or you can say 'bye' to end us </3");
+                "4. or you can say 'bye' to end us </3 Type your command:");
     }
 
     public static void userCommand() {
@@ -115,8 +131,33 @@ public class Duke {
     }
 
     public static void exit() {
-        String exitMessage = "Pikachu: Pika byebye!\n";
-        System.out.print(exitMessage);
+        String exitMessage = "Pikachu: Pika byebye! THUNDERBOLT!\n";
+        String bolt = "\n" +
+                "                  .-~*~--,.   .-.\n" +
+                "          .-~-. ./OOOOOOOOO\\.'OOO`9~~-.\n" +
+                "        .`OOOOOO.OOM.OLSONOOOOO@@OOOOOO\\\n" +
+                "       /OOOO@@@OO@@@OO@@@OOO@@@@@@@@OOOO`.\n" +
+                "       |OO@@@WWWW@@@@OOWWW@WWWW@@@@@@@OOOO).\n" +
+                "     .-'OO@@@@WW@@@W@WWWWWWWWOOWW@@@@@OOOOOO}\n" +
+                "    /OOO@@O@@@@W@@@@@OOWWWWWOOWOO@@@OOO@@@OO|\n" +
+                "   lOOO@@@OO@@@WWWWWWW\\OWWWO\\WWWOOOOOO@@@O.'\n" +
+                "    \\OOO@@@OOO@@@@@@OOW\\     \\WWWW@@@@@@@O'.\n" +
+                "     `,OO@@@OOOOOOOOOOWW\\     \\WWWW@@@@@@OOO)\n" +
+                "      \\,O@@@@@OOOOOOWWWWW\\     \\WW@@@@@OOOO.'\n" +
+                "        `~c~8~@@@@WWW@@W\\       \\WOO|\\UO-~'\n" +
+                "             (OWWWWWW@/\\W\\    ___\\WO)\n" +
+                "               `~-~''     \\   \\WW=*'\n" +
+                "                         __\\   \\\n" +
+                "                         \\      \\\n" +
+                "                          \\    __\\\n" +
+                "                           \\  \\\n" +
+                "                            \\ \\\n" +
+                "                             \\ \\\n" +
+                "                              \\\\\n" +
+                "                               \\\\\n" +
+                "                                \\\n" +
+                "                                 \\\n";
+        System.out.print(exitMessage + bolt);
     }
 
 }
