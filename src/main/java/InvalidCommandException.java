@@ -3,7 +3,7 @@ public class InvalidCommandException extends Exception {
         super("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
-    protected InvalidCommandException(String msg) {
+    public InvalidCommandException(String msg) {
         super(msg);
     }
 }

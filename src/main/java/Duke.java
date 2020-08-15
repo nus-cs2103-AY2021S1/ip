@@ -8,13 +8,21 @@ public class Duke {
         return horizontalLine + "\n\t  " + message + "\n" + horizontalLine + "\n";
     }
 
-    private static boolean isDoneCommand(String cmd) {
+    private static boolean isDoneCommand(String cmd, int count) throws InvalidCommandException {
         if (cmd.startsWith("done ")) {
+            if (cmd.length() < 6) {
+                throw new InvalidCommandException("\u2639 OOPS!!! The task to mark as done cannot be empty.");
+            }
             try {
                 n = Integer.parseInt(cmd.substring(5));
+                if (n < 1) {
+                    throw new InvalidCommandException("\u2639 OOPS!!! The task index should be a positive integer.");
+                } else if (n > count) {
+                    throw new InvalidCommandException("\u2639 OOPS!!! The task index does not exist.");
+                }
                 return true;
             } catch (Exception e) {
-                return false;
+                throw new InvalidCommandException("\u2639 OOPS!!! The task index should be a number.");
             }
         } else {
             return false;
@@ -82,33 +90,28 @@ public class Duke {
         int count = 0;
         String input = sc.nextLine();
         while (!input.equals("bye")) {
-            if (input.equals("list")) {
-                System.out.println(horizontalLine + "\n\t  " + "Here are the tasks in your list:");
-                for (int i = 0; i < count; i++) {
-                    System.out.println("\t  " + (i + 1) + "." + list[i]);
-                }
-                System.out.println(horizontalLine + "\n");
-            } else if (isDoneCommand(input)) {
-                if (n > 0 && n <= count) {
-                    list[n - 1].markAsDone();
-                    System.out.println(output("Nice! I've marked this task as done:\n\t    " + list[n - 1]));
+            try {
+                if (input.equals("list")) {
+                    System.out.println(horizontalLine + "\n\t  " + "Here are the tasks in your list:");
+                    for (int i = 0; i < count; i++) {
+                        System.out.println("\t  " + (i + 1) + "." + list[i]);
+                    }
+                    System.out.println(horizontalLine + "\n");
+                } else if (isDoneCommand(input, count)) {
+                    if (n > 0 && n <= count) {
+                        list[n - 1].markAsDone();
+                        System.out.println(output("Nice! I've marked this task as done:\n\t    " + list[n - 1]));
+                    } else {
+                        System.out.println(output("The task does not exist!"));
+                    }
                 } else {
-                    System.out.println(output("The task does not exist!"));
-                }
-            } else {
-                try {
                     Task task = generate(input);
                     list[count++] = task;
                     System.out.println(output("Got it. I've added this task:\n\t    " + task +
                             "\n\t  Now you have " + count + " tasks in the list."));
-                } catch (Exception e) {
-                    System.out.println(output(e.getMessage()));
                 }
-
-                /*if (task == null) {
-                    System.out.println(output("Your input task is invalid!"));
-                }
-                 */
+            } catch (InvalidCommandException e) {
+                System.out.println(output(e.getMessage()));
             }
             input = sc.nextLine();
         }
