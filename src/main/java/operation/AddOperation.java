@@ -1,7 +1,10 @@
 package operation;
 
+import task.Deadline;
 import task.Task;
 import task.TaskStorage;
+import task.ToDo;
+import task.TaskFactory;
 
 public class AddOperation extends Operation {
     private TaskStorage taskStorage;
@@ -16,11 +19,19 @@ public class AddOperation extends Operation {
         return false;
     }
 
+    private Task createTask() {
+        switch(this.commands[0]) {
+            case "deadline":
+                return TaskFactory.createDeadline(this.commands);
+            default :
+                return TaskFactory.createToDo(this.commands);
+        }
+    }
+
     @Override
     public void execute() {
-        String taskString = String.join(" ", this.commands);
-        Task task = Task.createTask(taskString);
-        this.taskStorage.addTask(task);
-        System.out.println("added: " + taskString);
+        Task newTask = createTask();
+        this.taskStorage.addTask(newTask);
+        System.out.println("I have added the task: \n" + newTask);
     }
 }

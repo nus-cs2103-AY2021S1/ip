@@ -1,23 +1,20 @@
 package task;
 
-public class Task {
-    private final String task;
-    private boolean completed;
+public abstract class Task {
+    protected final String task;
+    protected boolean completed;
 
-    private static char TICK = 10003;
-    private static char CROSS = 10007;
+    protected static char TICK = 10003;
+    protected static char CROSS = 10007;
 
     Task(String task, boolean completed) {
         this.task = task;
         this.completed = completed;
     }
 
-    public static Task createTask(String task) {
-        return new Task(task, false);
-    }
+    public abstract String toString();
 
-    @Override
-    public String toString() {
+    public String toStringSuffix() {
         if (this.completed) {
             return String.format("[%c] %s", TICK, this.task);
         } else {

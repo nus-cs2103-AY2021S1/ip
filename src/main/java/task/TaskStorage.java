@@ -2,16 +2,16 @@ package task;
 
 public class TaskStorage {
     private Task[] storage;
-    private int index;
+    private int currCapacity;
 
     public TaskStorage() {
         this.storage = new Task[100];
-        this.index = 0;
+        this.currCapacity = 0;
     }
 
     public void addTask(Task task) {
-        this.storage[index] = task;
-        index++;
+        this.storage[currCapacity] = task;
+        currCapacity++;
     }
 
     public void completeTask(int index) {
@@ -24,7 +24,7 @@ public class TaskStorage {
 
     public void printTaskStorage() {
         System.out.println("Here are your tasks:");
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i < currCapacity; i++) {
             String output = String.format("%d. %s", i + 1, this.storage[i]);
             System.out.println(output);
         }
