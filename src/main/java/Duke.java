@@ -25,16 +25,33 @@ public class Duke {
         System.out.println(wrapMessage("added: " + task));
     }
 
+    static String formatTask(int num) {
+        String lineBreak = num != taskList.size() - 1 ? "\n " : "";
+        return (num + 1) + ". " + taskList.get(num) + lineBreak;
+    }
+
+    static void list() {
+        String list = "";
+        for (int i = 0; i < taskList.size(); i++) {
+            list += formatTask(i);
+        }
+        System.out.println(wrapMessage(list));
+    }
+
     static void readInput() {
         Scanner sc = new Scanner(System.in);
+
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-
-            if (input.equals("bye")) {
-                exit();
-                break;
-            } else {
-                addTask(input);
+            switch (input) {
+                case "list":
+                    list();
+                    break;
+                case "bye":
+                    exit();
+                    break;
+                default:
+                    addTask(input);
             }
         }
     }
