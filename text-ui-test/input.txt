@@ -2,6 +2,7 @@ todo read book
 deadline return book /by Friday 9pm
 list
 done 2
+carrots
 event book visiting /at June 13th 3-4am
 todo go to bed
 done 3
