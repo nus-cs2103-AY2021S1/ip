@@ -57,6 +57,19 @@
     ____________________________________________________________
     ____________________________________________________________
      Error! We had a problem understanding your message.
+     The index of the task to be marked done must be provided.
+    ____________________________________________________________
+    ____________________________________________________________
+     Error! We had a problem understanding your message.
+     The index of the task to be marked done must be provided.
+    ____________________________________________________________
+    ____________________________________________________________
+     Error! We had a problem understanding your message.
+     The index provided is too small.
+     Input an integer that is 1 or greater.
+    ____________________________________________________________
+    ____________________________________________________________
+     Error! We had a problem understanding your message.
      The index provided is too large.
      Run list to see your list of tasks.
     ____________________________________________________________
@@ -77,8 +90,37 @@
     ____________________________________________________________
     ____________________________________________________________
      Error! We had a problem understanding your message.
+     The index of the task to be deleted must be provided.
+    ____________________________________________________________
+    ____________________________________________________________
+     Error! We had a problem understanding your message.
+     The index of the task to be deleted must be provided.
+    ____________________________________________________________
+    ____________________________________________________________
+     Error! We had a problem understanding your message.
+     The index provided is too small.
+     Input an integer that is 1 or greater.
+    ____________________________________________________________
+    ____________________________________________________________
+     Sure, I've deleted this task from your list:
+       [T][Y] do homework
+     You now have 3 task(s) in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     Error! We had a problem understanding your message.
+     The index provided is too large.
+     Run list to see your list of tasks.
+    ____________________________________________________________
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1: [T][X] read book
+     2: [D][Y] return book (by: tomorrow)
+     3: [E][X] library renewal (at: next Sunday)
+    ____________________________________________________________
+    ____________________________________________________________
+     Error! We had a problem understanding your message.
      Your input must start with one of the following:
-     "todo", "deadline", "event", "list" or "done".
+     "todo", "deadline", "event", "list", "done" or "delete".
     ____________________________________________________________
     ____________________________________________________________
      Bye. Hope to see you again soon! :)

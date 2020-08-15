@@ -9,9 +9,18 @@ event library renewal
 event library renewal /at next Sunday
 todo do homework
 list
+done
+done -1
+done 0
 done 5
 done 2
 done 4
+list
+delete
+delete -1
+delete 0
+delete 4
+delete 4
 list
 blahblah
 bye
