@@ -1,3 +1,5 @@
+package main.java;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -11,8 +13,13 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
+        TodoList todoList = new TodoList();
         while (!input.equals("bye")) {
-            System.out.println(input);
+            if (input.equals("list")) {
+                todoList.list();
+            } else {
+                todoList.add(input);
+            }
             input = scanner.nextLine();
         }
         System.out.println("Have a nice day.");
