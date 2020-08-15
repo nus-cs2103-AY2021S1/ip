@@ -16,7 +16,7 @@ public class Duke {
 
     public static void printTotalTask(Task task) {
         System.out.println("Got it. I've added this task:\n" + task);
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        System.out.println("Now you have " + list.size() + " tasks in the list." );
     }
 
     public static void main(String[] args) {
@@ -30,7 +30,7 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             } else if (command.equals("list")) {
-                System.out.println("Here are the tasks in your list: ");
+                System.out.println("Here are the tasks in your list:");
                 printList();
             } else if (command.startsWith("done")) {
                 int index = Integer.parseInt(command.split(" ")[1]) - 1;
