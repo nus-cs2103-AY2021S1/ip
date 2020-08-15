@@ -5,16 +5,10 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         List<Task> storage = new ArrayList<>();
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello! I'm\n" + logo + "How can I help you, Boss?");
+        System.out.println("Hello Boss! How can I help you?");
 
         Scanner sc = new Scanner(System.in);
-        String toEcho = sc.next();
-        String echoDescription = sc.nextLine();
+        String toEcho = sc.nextLine();
         while (!toEcho.equals("bye")) {
             System.out.println("--------------------------------------");
             if (toEcho.equals("list")) {
@@ -23,39 +17,37 @@ public class Duke {
                     int number = i + 1;
                     System.out.println(number + "." + storage.get(i));
                 }
-            } else if (toEcho.equals("done")) {
-                int index = Integer.parseInt(echoDescription.substring(1)) - 1;
-                if (storage.size() <= index) {
-                    System.out.println("Sorry Boss! There is no task number " + (index + 1));
-                    System.out.println("--------------------------------------");
-                    toEcho = sc.nextLine();
-                    continue;
-                }
+                System.out.println("--------------------------------------");
+                toEcho = sc.nextLine();
+                continue;
+            }
+            String[] command = toEcho.split(" ");
+            if (command[0].equals("done")) {
+                int index = Integer.parseInt(command[1]);
                 System.out.println("Nice! I've marked this task as done:");
-                storage.get(index).markAsDone();
-                System.out.println("    " + storage.get(index));
+                storage.get(index - 1).markAsDone();
+                System.out.println("   " + storage.get(index - 1));
+                System.out.println("--------------------------------------");
+                toEcho = sc.nextLine();
             } else {
                 System.out.println("Got it. I've added this task:");
-                if (toEcho.equals("todo")) {
-                    Todo todo = new Todo(echoDescription.substring(1));
+                if (command[0].equals("todo")) {
+                    Todo todo = new Todo(toEcho.substring(4));
                     storage.add(todo);
-                    System.out.println("    " + todo);
-                } else if (toEcho.equals("deadline")) {
-                    Deadline deadline = new Deadline(echoDescription.substring(1));
+                    System.out.println("   " + todo);
+                } else if (command[0].equals("deadline")) {
+                    Deadline deadline = new Deadline(toEcho.substring(8));
                     storage.add(deadline);
-                    System.out.println("    " + deadline);
-                } else if (toEcho.equals("event")) {
-                    Event event = new Event(echoDescription.substring(1));
+                    System.out.println("   " + deadline);
+                } else if (command[0].equals("event")) {
+                    Event event = new Event(toEcho.substring(5));
                     storage.add(event);
-                    System.out.println("    " + event);
-
+                    System.out.println("   " + event);
                 }
                 System.out.println("Now you have " + storage.size() + " tasks in the list.");
+                System.out.println("--------------------------------------");
+                toEcho = sc.nextLine();
             }
-
-            System.out.println("--------------------------------------");
-            toEcho = sc.next();
-            echoDescription = sc.nextLine();
         }
         System.out.println("--------------------------------------\n" +
             "Bye Boss! Hope to see you again!" + "\n"
