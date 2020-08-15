@@ -29,8 +29,18 @@ public class Duke {
         System.out.print(address);
     }
 
-    private static void addToDo(String input) {
-        String description = input.substring(5);
+    private static void addToDo(String input) throws ArrayIndexOutOfBoundsException {
+        String description;
+        try {
+            description = input.split("todo")[1];
+        } catch (ArrayIndexOutOfBoundsException e) { // for no spacing after command eg. "todo"
+            DukeErrorsHandler.toDoInvalidDescription();
+            return;
+        }
+        if (description.isBlank()) { // for spacing after command eg. "todo "
+            DukeErrorsHandler.toDoInvalidDescription();
+            return;
+        }
         Task toDo = new ToDo(description);
         tasks.add(toDo);
         String printing = divider
@@ -41,10 +51,21 @@ public class Duke {
         System.out.print(printing);
     }
 
-    private static void addDeadline(String input) {
-        int end = input.indexOf("/");
-        String description = input.substring(9, end);
-        String by = input.substring(end + 4);
+    private static void addDeadline(String input) throws ArrayIndexOutOfBoundsException {
+        String information;
+        try {
+            information = input.split("deadline")[1];
+        } catch (ArrayIndexOutOfBoundsException e) { // for no spacing after command eg. "deadline"
+            DukeErrorsHandler.deadlineInvalidDescription();
+            return;
+        }
+        if (information.isBlank()) { // for spacing after command eg. "deadline "
+            DukeErrorsHandler.deadlineInvalidDescription();
+            return;
+        }
+        int end = information.indexOf("/");
+        String description = information.substring(1, end - 1);
+        String by = information.substring(end + 4);
         Task deadline = new Deadline(description, by);
         tasks.add(deadline);
         String printing = divider
@@ -55,10 +76,21 @@ public class Duke {
         System.out.print(printing);
     }
 
-    private static void addEvent(String input) {
-        int end = input.indexOf("/");
-        String description = input.substring(6, end);
-        String at = input.substring(end + 4);
+    private static void addEvent(String input) throws ArrayIndexOutOfBoundsException {
+        String information;
+        try {
+            information = input.split("event")[1];
+        } catch (ArrayIndexOutOfBoundsException e) { // for no spacing after command eg. "event"
+            DukeErrorsHandler.eventInvalidDescription();
+            return;
+        }
+        if (information.isBlank()) { // for spacing after command eg. "event "
+            DukeErrorsHandler.eventInvalidDescription();
+            return;
+        }
+        int end = information.indexOf("/");
+        String description = information.substring(1, end - 1);
+        String at = information.substring(end + 4);
         Task event = new Event(description, at);
         tasks.add(event);
         String printing = divider
@@ -102,7 +134,7 @@ public class Duke {
         String name = sc.nextLine();
         addressUser(name);
 
-        String input = "";
+        String input;
         while (sc.hasNext()) {
             input = sc.nextLine();
             if (input.contains("todo")) {
@@ -118,6 +150,8 @@ public class Duke {
             } else if (input.equals("bye")) {
                 exitFocus();
                 break;
+            } else {
+                DukeErrorsHandler.invalidInput();
             }
         }
         sc.close();
