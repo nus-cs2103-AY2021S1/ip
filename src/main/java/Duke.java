@@ -43,8 +43,9 @@ public class Duke {
                     System.out.println(output("The task does not exist!"));
                 }
             } else {
-                System.out.println(output("added: " + input));
-                list[count++] = new Task(input);
+                list[count] = Task.generate(input);
+                System.out.println(output("added: " + list[count]));
+                count++;
             }
             input = sc.nextLine();
         }
