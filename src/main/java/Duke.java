@@ -1,60 +1,94 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo =
-                "     ____        _        \n"
-                        + "    |  _ \\ _   _| | _____ \n"
-                        + "    | | | | | | | |/ / _ \\\n"
-                        + "    | |_| | |_| |   <  __/\n"
-                        + "    |____/ \\__,_|_|\\_\\___|";
+        String logo = "     ____        _        \n"
+                + "    |  _ \\ _   _| | _____ \n"
+                + "    | | | | | | | |/ / _ \\\n"
+                + "    | |_| | |_| |   <  __/\n"
+                + "    |____/ \\__,_|_|\\_\\___|";
 
 
         System.out.println(logo);
 
-        displayThis("Hello! I'm Duke\n    What can I remember for you?");
+        displayThis("Hello! I'm Duke\n    What can I remember for you?" +
+                "\n    I only accept list, done and" +
+                "\n    todo, deadline, events");
 
         Scanner scanner = new Scanner(System.in);
 
         String input = scanner.nextLine();
 
-        ArrayList<Task> toDoList = new ArrayList<Task>();
+        ArrayList<Task> toDoList = new ArrayList<>();
 
         while (!input.equals("bye")) {
 
-            if (input.equals("list")) {
+            String command = input.contains(" ") ?
+                    input.split(" ")[0].toLowerCase() :
+                    input.toLowerCase();
 
-                if (toDoList.size() == 0) { // checks if the user types list to a empty list
-                    displayThis("List is empty");
+            if (command.equals("list")) {
+
+                displayList(toDoList);
+
+            } else if (command.equals("done")) {
+                int entryDone = Integer.parseInt(input.substring(5)) - 1;
+
+                System.out.println(entryDone);
+
+                if (entryDone >= 0) {
+                    Task temp = toDoList.get(entryDone);
+
+                    temp.markAsDone();
+
+                    displayThis("Nice! I've marked this task as done: \n        " + temp.toString());
 
                 } else {
-
-                    int temp = 0;
-                    System.out.println("\n    ---------------------------------\n" +
-                            "    Here are the tasks in your list:");
-                    for (int i = 0; i < toDoList.size() && toDoList.get(i) != null; i++) {
-
-                        temp = i + 1;
-                        System.out.println("    " + temp + ". " + toDoList.get(i));
-
-                    }
-                    System.out.println("    ---------------------------------");
+                    displayThis("Command done is in the wrong format");
                 }
 
-            } else if (input.toLowerCase().contains("done")) {
-                int entryDone =  Integer.parseInt(input.substring(input.length() - 1)) - 1;
 
-                Task temp = toDoList.get(entryDone);
+            } else if (!command.equals("")) {
+                Task tempTask;
 
-                temp.markAsDone();
+                switch (command) {
+                    case "deadline": {
+                        int timing = input.indexOf(" /by");
 
-                displayThis("Nice! I've marked this task as done: \n        " +  temp.toString());
+                        String description = input.substring(9, timing);
+                        String by = input.substring(timing + 5);
 
-            } else if (!input.equals("")) {
-                toDoList.add(new Task(input));
+                        tempTask = new Deadline(description, by);
 
-                displayThis("added: " + input);
+                        break;
+                    }
+                    case "event": {
+                        int timing = input.indexOf(" /at");
+
+                        String description = input.substring(6, timing);
+                        String by = input.substring(timing + 5);
+
+                        tempTask = new Events(description, by);
+
+
+                        break;
+                    }
+                    case "todo":  // to do task
+                        tempTask = new Task(input.substring(5));
+
+                        break;
+
+                    default:
+                        tempTask = new Task("Unknown type: " + input);
+                        break;
+                }
+
+                toDoList.add(tempTask);
+
+                displayThis("Got it. I've added this task: \n         " + tempTask
+                        + "\n    Now you have " + toDoList.size() + " tasks in the list");
             }
 
 
@@ -72,6 +106,26 @@ public class Duke {
 
         System.out.println("    ---------------------------------\n");
 
+    }
+
+    private static void displayList(List<Task> list) {
+        if (list.size() == 0) {
+            displayThis("List is empty");
+
+        } else {
+
+            int temp = 0;
+            System.out.println("\n    ---------------------------------\n" +
+                    "    Here are the tasks in your list:");
+            for (int i = 0; i < list.size() && list.get(i) != null; i++) {
+
+                temp = i + 1;
+                System.out.println("    " + temp + ". " + list.get(i));
+
+            }
+
+            System.out.println("    ---------------------------------");
+        }
     }
 
 }
