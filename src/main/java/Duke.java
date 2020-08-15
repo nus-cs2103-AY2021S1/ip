@@ -62,8 +62,12 @@ public class Duke {
                     break;
                 case "list":
                     System.out.println(LINE + "\n     Here are the tasks in your list:");
-                    for (int i = 0; i < list.size(); i++) {
-                        System.out.println("     " + (i + 1) + ": " + list.get(i));
+                    if (list.size() == 0) {
+                        System.out.println("     Your list is empty. How about adding some tasks?");
+                    } else {
+                        for (int i = 0; i < list.size(); i++) {
+                            System.out.println("     " + (i + 1) + ": " + list.get(i));
+                        }
                     }
                     System.out.println(LINE);
                     break;
@@ -74,6 +78,10 @@ public class Duke {
                     if (Integer.parseInt(input.split(" ")[1]) > list.size()) {
                         throw new IllegalArgumentException(
                             "The index provided is too large.\n     Run list to see your list of tasks.");
+                    }
+                    if (Integer.parseInt(input.split(" ")[1]) < 1) {
+                        throw new IllegalArgumentException(
+                            "The index provided is too small.\n     Input an integer that is 1 or greater.");
                     }
                     Task doneTask = list.get(Integer.parseInt(input.split(" ")[1]) - 1);
                     doneTask.setDone(true);
@@ -87,6 +95,10 @@ public class Duke {
                     if (Integer.parseInt(input.split(" ")[1]) > list.size()) {
                         throw new IllegalArgumentException(
                             "The index provided is too large.\n     Run list to see your list of tasks.");
+                    }
+                    if (Integer.parseInt(input.split(" ")[1]) < 1) {
+                        throw new IllegalArgumentException(
+                            "The index provided is too small.\n     Input an integer that is 1 or greater.");
                     }
                     Task deleted = list.remove(Integer.parseInt(input.split(" ")[1]) - 1);
                     System.out.println(LINE
