@@ -1,7 +1,6 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Duke {
     static List<Task> tasks = new ArrayList<>();
@@ -26,6 +25,7 @@ public class Duke {
         String userCommand = sc.nextLine();
 
         while (!userCommand.equals("bye")) {
+            // Show list of tasks
             if (userCommand.equals("list")) {
                 System.out.println("\t____________________________________________________________");
                 for (int i = 0; i < tasks.size(); i++) {
@@ -42,11 +42,11 @@ public class Duke {
                     // To prevent cases such as "done 1 7"
                     if (userCommandSplit.length != 2) {
                         System.out.println("\t____________________________________________________________");
-                        System.out.println("Oops! Something went wrong!");
+                        System.out.println("Done command written incorrectly. Please check again.");
                         System.out.println("\t____________________________________________________________\n");
                         userCommand = sc.nextLine();
                     } else {
-                        // Take serial number e.g 1 "done 1"
+                        // Take serial number e.g 1 "done 1" and mark as done
                         int serialNumber = Integer.parseInt(userCommandSplit[1]);
                         Task doneTask = tasks.get(serialNumber - 1);
                         doneTask.markAsDone();
@@ -56,21 +56,45 @@ public class Duke {
                         System.out.println("\t____________________________________________________________\n");
                         userCommand = sc.nextLine();
                     }
-                } catch (Exception e) {
+                } catch (Exception e) { // To prevent garbage cases like "done1728371", "done"
                     System.out.println("\t____________________________________________________________");
-                    System.out.println("Oops! Something went wrong!");
+                    System.out.println("Done command written incorrectly. Please check again.");
                     System.out.println("\t____________________________________________________________\n");
                     userCommand = sc.nextLine();
                 }
-            } else {
-                tasks.add(new Task(userCommand));
-                System.out.println("\t____________________________________________________________");
-                System.out.println("\t" + "added: " + userCommand);
-                System.out.println("\t____________________________________________________________\n");
-                userCommand = sc.nextLine();
+            } else { // Add Task
+                Task newTask = null;
+                if (userCommand.contains("todo")) { // To Do
+                    newTask = new Todo(userCommand);
+                } else if (userCommand.contains("deadline")) { // Deadline
+                    String[] userCommandSplit = userCommand.split(" /by ");
+                    String description = userCommandSplit[0].split(" ", 2)[1];
+                    String by = userCommandSplit[1];
+                    newTask = new Deadline(description, by);
+                } else if (userCommand.contains("event")) { // Event
+                    String[] userCommandSplit = userCommand.split(" /at ");
+                    String description = userCommandSplit[0].split(" ", 2)[1];
+                    String at = userCommandSplit[1];
+                    newTask = new Event(description, at);
+                }
+
+                // If a task is specified as a Task but not a Deadline / To Do / Event, throw an error
+                if (newTask == null) {
+                    System.out.println("\t____________________________________________________________");
+                    System.out.println("Please specify either a Deadline, To Do, or Event!");
+                    System.out.println("\t____________________________________________________________\n");
+                    userCommand = sc.nextLine();
+                } else {
+                    tasks.add(newTask);
+                    System.out.println("\t____________________________________________________________");
+                    System.out.println("\tGot it. I've added this task:");
+                    System.out.println("\t\t" + newTask);
+                    System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
+                    System.out.println("\t____________________________________________________________\n");
+                    userCommand = sc.nextLine();
+                }
             }
         }
-
         farewell();
     }
 }
