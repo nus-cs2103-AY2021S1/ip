@@ -1,9 +1,19 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
     private static Task[] tasks = new Task[100];
     private static int numberOfTasks = 0;
 
+    private static void greet() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+        printResponse("Hello! I'm Duke\nWhat can I do for you?");
+    }
 
     private static void printResponse(String response) {
         System.out.println("____________________________________________________________");
@@ -51,14 +61,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-        printResponse("Hello! I'm Duke\nWhat can I do for you?");
+        greet();
         handleUserInputs();
     }
 }
