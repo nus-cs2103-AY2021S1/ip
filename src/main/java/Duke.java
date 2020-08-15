@@ -1,6 +1,7 @@
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -39,6 +40,8 @@ public class Duke {
 
         System.out.println("\nWhat can I do for you?");
 
+        ArrayList<String> inputStore = new ArrayList<>();
+
         Scanner sc = new Scanner(System.in);
 
         while (true) {
@@ -48,9 +51,16 @@ public class Duke {
                 break;
             } else if (userInput.equals("")) {
                 System.out.println("\uD83D\uDE20 Don't enter NOTHING!!");
-            } else {
+            } else if (userInput.equals("list")) {
                 System.out.println("\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0");
-                System.out.println("\t" + userInput);
+                for (int i = 0; i < inputStore.size(); i++) {
+                    System.out.println("\t " + (i + 1) + ". " +  inputStore.get(i));
+                }
+                System.out.println("\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0");
+            } else {
+                inputStore.add(userInput);
+                System.out.println("\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0");
+                System.out.println("\t " + "added: " + userInput);
                 System.out.println("\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0");
             }
         }
