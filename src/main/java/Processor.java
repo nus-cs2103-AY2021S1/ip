@@ -15,7 +15,8 @@ public class Processor {
                 case "done":
                     int pos = Integer.parseInt(this.description);
                     list.get(pos - 1).markAsDone();
-                    System.out.println("Marked this task as done for you!\n" + list.get(pos - 1));
+                    System.out.println("Marked this task as done for you!\n" + list.get(pos - 1)
+                            + "\nYou have " + list.size() + " tasks in the list.");
                     break;
                 case "list":
                     for (Task i : list) {
@@ -42,6 +43,13 @@ public class Processor {
                             + list.get(list.size() - 1) + "\nYou have "
                             + list.size() + " tasks in the list.");
                     break;
+                case "delete":
+                    int pos2 = Integer.parseInt(this.description);
+                    list.remove(pos2 - 1);
+                    System.out.println("Removed this task for you!\n"
+                            + list.get(pos2 - 1) + "\nYou have "
+                            + list.size() + " tasks in the list.");
+                    break;
                 default:
                     System.out.println("Error! Please key in what type of task it is.");
             }
@@ -63,7 +71,7 @@ public class Processor {
             if (description.substring(3).split(" ").length == 1) {
                 throw new DukeException("you need to give a number.");
             } else if (description.split(" ").length > 2) {
-                throw new DukeException("Check one at a time pls.");
+                throw new DukeException("Check one at a time pls and only one space between your 'done' and the task number.");
             } else {
                 try {
                     int index = Integer.parseInt(description.split(" ")[1]);
@@ -98,6 +106,23 @@ public class Processor {
             }
             this.command = "event";
             this.description = description.substring(6);
+        } else if (description.length() >= 6 && description.substring(0,6).equals("delete")) {
+            if (description.substring(5).split(" ").length == 1) {
+                throw new DukeException("you need to give a number.");
+            } else if (description.split(" ").length > 2) {
+                throw new DukeException("Delete one at a time pls and only have one space between 'delete' and the task number.");
+            } else {
+                try {
+                    int index = Integer.parseInt(description.split(" ")[1]);
+                    if (this.list.size() < index || index <= 0) {
+                        throw new DukeException("you don't have this task number.");
+                    }
+                } catch (NumberFormatException e) {
+                    throw new DukeException("you need to put a number.");
+                }
+            }
+            this.command = "delete";
+            this.description = description.split(" ")[1];
         } else if (entered) {
             throw new DukeException("you gotta put in a correct command.");
         } else {
