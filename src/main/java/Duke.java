@@ -1,4 +1,5 @@
 import java.util.Scanner; // Import the scanner class
+import java.util.regex.Pattern;
 
 public class Duke {
     //Task list to store the tasks
@@ -13,8 +14,10 @@ public class Duke {
                         "  \\____/|_|\\__|_|  \\___/|_| |_|";
 
     public Duke(){
+
         //Create a new task list
         this.taskList = new TaskList();
+
     }
 
     public void printIntro(){
@@ -34,10 +37,13 @@ public class Duke {
     }
 
     public String getLogo(){
+
+        //Get the logo of Ultron
         return this.logo;
     }
 
     private String getInput(){
+
         // Create the scanner object
         Scanner sc = new Scanner(System.in);
 
@@ -49,6 +55,7 @@ public class Duke {
     }
 
     private int checkInput(String input) {
+
         //Switch case to process the commands
         switch (input) {
 
@@ -70,22 +77,59 @@ public class Duke {
                 return 2;
             }
 
+
             //Otherwise it will be a task to be added
             default: {
 
-                //Add the task to the task list
-                this.taskList.add(new Task(input));
+                //Check if the user is marking a task as done
+                if (input.indexOf("done") == 0){
 
-                //Print the added message
-                System.out.println(String.format("Can't you keep track of '%s' yourself?", input));
+                    //Get the rest of string after done
+                    String substring = input.substring(5);
 
-                //Break out of the switch
-                return 3;
+                    //Check mark the task as complete
+                    if (Pattern.matches("[0-9]+", substring)){
+
+                        //Get the index of the entry
+                        int number = Integer.valueOf(substring) - 1;
+
+                        //Perform the task
+                        boolean completed = this.taskList.markDone(number);
+
+                        //Check if it is completed successfully
+                        if (completed){
+
+                            //Print the completed message
+                            System.out.println(String.format("Finally you have done something:\n  [%s] %s", this.taskList.get(number).getStatusIcon(), this.taskList.get(number).getMessage()));
+
+                        }else{
+
+                            //Otherwise print the error message
+                            System.out.println(String.format("You can't even key in a correct number!\nClearly %d is not valid when u have %d tasks", number, this.taskList.size()));
+                        }
+                    }
+
+
+                    //Break out of the switch
+                    return 4;
+
+                }else{
+
+                    //Add the task to the task list
+                    this.taskList.add(new Task(input));
+
+                    //Print the added message
+                    System.out.println(String.format("Can't you keep track of '%s' yourself?", input));
+
+                    //Break out of the switch
+                    return 3;
+                }
             }
         }
     }
 
     public void mainLoop(){
+
         //Print the intro
         this.printIntro();
 
