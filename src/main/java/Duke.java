@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -10,6 +12,8 @@ public class Duke {
                     "What can I do for you?", NAME);
     private static final String EXIT = "Bye. Hope to see you again soon!";
     private static final String LINE = "____________________________________________________________";
+
+    private static List<String> lst = new ArrayList<>();
 
     // Scanner
     private final static Scanner sc = new Scanner(System.in);
@@ -24,6 +28,21 @@ public class Duke {
         return LINE + "\n" + text + "\n" + LINE + "\n";
     }
 
+    // Prints list
+    public static void printList() {
+        StringBuilder sb = new StringBuilder();
+        int sizeOfList = lst.size();
+
+        for (int i = 0; i < sizeOfList; i++) {
+            int number = i + 1;
+            String text = lst.get(i);
+            sb.append(String.format("\n%s. %s", number, text));
+        }
+
+        System.out.println(wrapText(sb.toString()));
+    }
+
+
     // Exit
     private static void exit() {
         System.out.println(wrapText(EXIT));
@@ -36,8 +55,11 @@ public class Duke {
             if (input.equals("bye")) {
                 exit();
                 break;
+            } else if (input.equals("list")) {
+                printList();
             } else {
-                System.out.println(wrapText(input));
+                lst.add(input);
+                System.out.println(wrapText("added: " + input));
             }
         }
     }
