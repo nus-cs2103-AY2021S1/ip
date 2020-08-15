@@ -33,4 +33,11 @@ public class TaskFactory {
         String datetimeString = concatenateString(commands, breakIndex + 1, commands.length);
         return new Deadline(taskString, false, datetimeString);
     }
+
+    public static Event createEvent(String[] commands) {
+        int breakIndex = getBreakIndex(commands, Event.EVENT_BREAK);
+        String taskString = concatenateString(commands, 1, breakIndex);
+        String timeString = concatenateString(commands, breakIndex + 1, commands.length);
+        return new Event(taskString, false, timeString);
+    }
 }

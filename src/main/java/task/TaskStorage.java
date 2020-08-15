@@ -9,6 +9,10 @@ public class TaskStorage {
         this.currCapacity = 0;
     }
 
+    public int getCurrCapacity() {
+        return this.currCapacity;
+    }
+
     public void addTask(Task task) {
         this.storage[currCapacity] = task;
         currCapacity++;
