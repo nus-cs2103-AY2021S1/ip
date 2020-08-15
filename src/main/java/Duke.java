@@ -68,14 +68,33 @@ public class Duke {
         System.exit(0);
     }
 
-    private static void done(int i) {
-        Task t = tasks.get(i - 1);
-        t.markAsDone();
-        String done = "\t____________________________________________________________\n"
-                + "\t Nice! I've marked this task as done:\n"
-                + "\t   %s\n"
-                + "\t____________________________________________________________\n";
-        System.out.printf((done) + "%n", t);
+    private static void done(int i) throws DukeException {
+        try {
+            Task t = tasks.get(i - 1);
+            t.markAsDone();
+            String done = "\t____________________________________________________________\n"
+                    + "\t Nice! I've marked this task as done:\n"
+                    + "\t   %s\n"
+                    + "\t____________________________________________________________\n";
+            System.out.printf((done) + "%n", t);
+        } catch (IndexOutOfBoundsException ex) {
+            throw new DukeException("Can't complete a task that does not exist.");
+        }
+    }
+
+    private static void delete(int i) throws DukeException {
+        try {
+            Task t = tasks.get(i - 1);
+            tasks.remove(i - 1);
+            String done = "\t____________________________________________________________\n"
+                    + "\t Noted. I've removed this task:\n"
+                    + "\t   %s\n"
+                    + "\t Now you have %d tasks in the list.\n"
+                    + "\t____________________________________________________________\n";
+            System.out.printf((done) + "%n", t, tasks.size());
+        } catch (IndexOutOfBoundsException ex) {
+            throw new DukeException("Can't delete a task that does not exist.");
+        }
     }
 
     public static void main(String[] args) {
@@ -99,6 +118,8 @@ public class Duke {
                     list();
                 } else if (input.startsWith("done")) {
                     done(Integer.parseInt(input.split(" ")[1]));
+                } else if (input.startsWith("delete")) {
+                    delete(Integer.parseInt(input.split(" ")[1]));
                 } else {
                     add(input);
                 }

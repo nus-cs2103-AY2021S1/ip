@@ -1,4 +1,5 @@
 todo read book
+delete 10
 deadline return book /by Friday 9pm
 list
 done 2
