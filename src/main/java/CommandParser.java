@@ -1,5 +1,5 @@
 import operation.Operation;
-import operation.EchoOperation;
+import operation.AddOperation;
 import operation.ExitOperation;
 
 public class CommandParser {
@@ -8,7 +8,7 @@ public class CommandParser {
             case "bye":
                 return new ExitOperation(command);
             default :
-                return new EchoOperation(command);
+                return new AddOperation(command);
         }
     }
 }

@@ -1,7 +1,7 @@
 package operation;
 
-public class EchoOperation extends Operation {
-    public EchoOperation(String operation) {
+public class AddOperation extends Operation {
+    public AddOperation(String operation) {
         super(operation);
     }
 
@@ -12,6 +12,6 @@ public class EchoOperation extends Operation {
 
     @Override
     public void execute() {
-        System.out.println(this.operation);
+        System.out.println("added: " + this.operation);
     }
 }
