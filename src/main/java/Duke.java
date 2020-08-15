@@ -3,11 +3,11 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static final String LOGO = "\t ____        _        \n"
-            + "\t|  _ \\ _   _| | _____ \n"
-            + "\t| | | | | | | |/ / _ \\\n"
-            + "\t| |_| | |_| |   <  __/\n"
-            + "\t|____/ \\__,_|_|\\_\\___|\n";
+    private static final String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
 
     private final DukeList list;
 
@@ -24,7 +24,7 @@ public class Duke {
      */
     private static void printMessage(String msg) {
         Duke.printSeparator();
-        System.out.println("\t" + msg);
+        System.out.println(msg);
         Duke.printSeparator();
     }
 
@@ -35,8 +35,8 @@ public class Duke {
     private static void printStartMsg() {
         Duke.printSeparator();
         System.out.println(Duke.LOGO);
-        System.out.println("\tHello! I'm Duke");
-        System.out.println("\tWhat can I do for you?");
+        System.out.println("Hello! I'm Duke");
+        System.out.println("What can I do for you?");
         Duke.printSeparator();
     }
 
@@ -45,7 +45,7 @@ public class Duke {
      * Prints a line separator.
      */
     private static void printSeparator() {
-        System.out.println("\t____________________________________________________________");
+        System.out.println("____________________________________________________________");
     }
 
 
