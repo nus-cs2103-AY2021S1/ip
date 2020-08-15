@@ -1,4 +1,4 @@
 /*============= Program Features =============*/
 public enum Command {
-    GREET, ECHO, EXIT
+    GREET, ADD, LIST, EXIT
 }
