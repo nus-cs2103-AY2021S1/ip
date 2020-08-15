@@ -39,8 +39,29 @@ class Interactor {
                 break;
             }
 
-            add(input);
+            if (input.equals("list")) {
+                showList();
+            } else {
+                add(input);
+            }
+
+
         }
+    }
+
+    void showList() {
+        System.out.println(ConsoleColors.YELLOW.getColor()
+            + this.kai
+            + "Here are your tasks!"
+            + ConsoleColors.RESET.getColor());
+        for (int i = 0; i < toDoList.size(); i++) {
+            System.out.println(ConsoleColors.BLUE_BOLD.getColor()
+                + (i+1) + ". "
+                + ConsoleColors.BLUE.getColor() + "\t"
+                + toDoList.get(i)
+                + ConsoleColors.RESET.getColor());
+        }
+        System.out.println();
     }
 
     void add(String item) {
