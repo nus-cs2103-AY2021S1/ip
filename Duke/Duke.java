@@ -24,9 +24,46 @@ public class Duke {
     }
 
     /**
+     * This method adds todoTask for the bot.
+     *
+     * @param taskName name of the task
+     * @return taskName name of the task
+     */
+    public String addTodo(String taskName) {
+        numberOfTasks += 1;
+        System.out.println(indent + "Got it. I've added this task:");
+        taskList[numberOfTasks - 1] = new Todo(taskName);
+        System.out.println(indent + "  " + taskList[numberOfTasks - 1]);
+        displayNoOfTasks();
+        return taskName;
+    }
+
+    /**
+     * This method adds deadlineTask for the bot.
+     *
+     * @param input string to be cleaned and parsed
+     * @return boolean true or false depending on the success
+     */
+    public boolean addDeadline(String input) {
+        String cleaned = input.replace("deadline", "").trim();
+        String[] splittedInput = input.split("/");
+        numberOfTasks += 1;
+        System.out.println(indent + "Got it. I've added this task:");
+        taskList[numberOfTasks - 1] = new Deadline(splittedInput[0], splittedInput[1].replace("by", "").trim());
+        System.out.println(indent + "  " + taskList[numberOfTasks - 1]);
+        displayNoOfTasks();
+        return true;
+    }
+
+    public void displayNoOfTasks() {
+        System.out.println(indent + "Now you have " + numberOfTasks + (numberOfTasks > 1 ? " tasks" : " task") + " in the list.");
+    }
+
+    /**
      * This method adds task for the bot.
      *
      * @param taskName name of the task
+     * @return taskName name of the task
      */
     public String addTask(String taskName) {
         numberOfTasks += 1;
@@ -62,6 +99,18 @@ public class Duke {
             if (input.contains("done")) {
                 System.out.println("Nice! I've marked this task as done:");
                 taskList[Integer.parseInt(String.valueOf(input.charAt(5)))-1].markAsDone();
+                System.out.println(indent + "----------------------------");
+                continue;
+            }
+
+            if (input.contains("todo")) {
+                addTodo(input.replace("todo","").trim());
+                System.out.println(indent + "----------------------------");
+                continue;
+            }
+
+            if (input.contains("deadline")) {
+                addDeadline(input);
                 System.out.println(indent + "----------------------------");
                 continue;
             }
