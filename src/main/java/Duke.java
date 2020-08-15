@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -6,15 +8,29 @@ public class Duke {
 
 
     public static void main(String[] args) {
+        List<String> result = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         printAnswer(greetings);
         while (sc.hasNextLine()) {
             String instruction = sc.nextLine();
+
             if (instruction.equals("bye")) {
                 printAnswer(farewell);
                 break;
+            } else if (instruction.equals("list")) {
+                String resultString = "";
+                for (int i = 0; i < result.size(); i++) {
+                    if (i < result.size() -1) {
+                        resultString = resultString + (i + 1) + ". " + result.get(i) + "\n     ";
+                    } else {
+                        resultString = resultString + (i + 1) + ". " + result.get(i);
+                    }
+                }
+                printAnswer(resultString);
+
             } else {
-                printAnswer(instruction);
+                result.add(instruction);
+                printAnswer("added: " + instruction);
             }
         }
 
