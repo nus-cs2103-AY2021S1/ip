@@ -13,7 +13,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (this.completed ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (this.completed ? "o" : "x"); //return O or X symbols
     }
 
     Task completeTask() {

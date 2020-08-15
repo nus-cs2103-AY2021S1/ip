@@ -1,0 +1,7 @@
+todo eat
+deadline cry /by tonight
+event hackathon /at 30 august
+list
+done 1
+list
+bye

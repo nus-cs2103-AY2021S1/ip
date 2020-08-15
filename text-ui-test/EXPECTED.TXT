@@ -1,7 +1,36 @@
-Hello from
+______________________
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
-
+welcome to my crib
+______________________
+added!
+[todo][x] eat
+total task: 1
+:o
+______________________
+added!
+[deadline][x] cry (by: tonight)
+total task: 2
+:o
+______________________
+added!
+[event][x] hackathon (at: 30 august)
+total task: 3
+:o
+______________________
+1. [todo][x] eat
+2. [deadline][x] cry (by: tonight)
+3. [event][x] hackathon (at: 30 august)
+______________________
+gfy youve managed to finish the following...
+[o] eat
+______________________
+1. [o] eat
+2. [deadline][x] cry (by: tonight)
+3. [event][x] hackathon (at: 30 august)
+______________________
+ok u can leave lmao
+______________________
