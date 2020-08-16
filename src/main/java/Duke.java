@@ -1,9 +1,7 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private TaskList taskList;
+    private static final TaskList taskList = new TaskList();
     private static final String starline = "**************************************************************************";
     private static final String logo =
               " ____        _        \n"
@@ -11,10 +9,6 @@ public class Duke {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|";
-
-    public Duke() {
-        this.taskList = new TaskList();
-    }
 
     public static void greet() {
         System.out.println(starline +
@@ -27,23 +21,29 @@ public class Duke {
                 starline);
     }
 
-    public void awaitInputCommand() {
+    public static void awaitInputCommand() {
         Scanner sc = new Scanner(System.in);
         String next = sc.nextLine();
+
+        // "bye" breaks the while loop and the program to exit
         while (!next.equals("bye")){
             String[] splitNext = next.split(" ", 2);
+
+            // "list" prints the task list
             if (next.equals("list")) {
                 taskList.list();
+
+            // "done" checks off boxes, need to check for input errors
             } else if (splitNext[0].equals("done")) {
                 try {
                     int index = Integer.parseInt(splitNext[1]);
                     taskList.markTaskAsDone(index - 1);
-                } catch (NumberFormatException ex1) {
+                } catch (NumberFormatException | IndexOutOfBoundsException ex) {
                     System.out.println("The magic word 'done' is reserved for checking off tasks! " +
                             "Please avoid using it at the start of a task name.");
-                } catch (IndexOutOfBoundsException ex2) {
-                    System.out.println("You do not have this task yet! Type 'list' to check out your tasks.");
                 }
+
+            // for Tasks, ToDos, Deadlines and Events
             } else {
                 taskList.add(next);
             }
@@ -65,9 +65,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
         greet();
-        duke.awaitInputCommand();
+        awaitInputCommand();
         exit();
     }
 }

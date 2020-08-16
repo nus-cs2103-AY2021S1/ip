@@ -1,21 +1,21 @@
 public class Task {
-    private String name;
+    private final String description;
     private Boolean done;
 
-    public Task(String name) {
-        this.name = name;
+    public Task(String description) {
+        this.description = description;
         this.done = false;
     }
 
-    public String getName() {
-        return this.name;
+    public String getDescription() {
+        return this.description;
     }
 
     public String getCheckBox() {
         if (this.done) {
-            return ("[✓]");
+            return "[✓]";
         } else {
-            return("[✗]");
+            return "[✗]";
         }
     }
 
@@ -25,6 +25,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return (getCheckBox() + " " + this.getName());
+        return getCheckBox() + " " + this.getDescription();
     }
 }
