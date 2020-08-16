@@ -38,35 +38,65 @@ public class Duke {
 
                 case "todo" :
                     String todo =  Arrays.stream(splitString).skip(1).collect(Collectors.joining(" "));
-                    Todo newTodo = new Todo(todo);
-                    inputStore.add(newTodo);
-                    returnString = "\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
-                                    "\n\t Got it. I've added this task: " + "\n\t  " +  newTodo.toString() +
-                                      "\n\t Now you have " + inputStore.size() + " tasks in the list." +
-                                      "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0";
+                    if (todo.equals("")) {
+                        returnString = "\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
+                                "\n\t ☹ OOPS!!! The description of a todo cannot be empty. " +
+                                "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0";
+                    } else {
+                        Todo newTodo = new Todo(todo);
+                        inputStore.add(newTodo);
+                        returnString = "\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
+                                "\n\t Got it. I've added this task: " + "\n\t  " + newTodo.toString() +
+                                "\n\t Now you have " + inputStore.size() + " tasks in the list." +
+                                "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0";
+                    }
 
                     break;
 
                 case "deadline" :
                     String taskName =  Arrays.stream(splitString).skip(1).takeWhile(e -> !e.equals("/by")).collect(Collectors.joining(" "));
-                    String deadline = Arrays.stream(splitString).dropWhile(e -> !e.equals("/by")).skip(1).collect(Collectors.joining(" "));
-                    Deadline newDeadline = new Deadline(taskName, deadline);
-                    inputStore.add(newDeadline);
-                    returnString = "\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
-                            "\n\t Got it. I've added this task: " + "\n\t  " +  newDeadline.toString() +
-                            "\n\t Now you have " + inputStore.size() + " tasks in the list." +
-                            "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0";
+                    if (taskName.equals("")) {
+                        returnString = "\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
+                                "\n\t ☹ OOPS!!! The description of a deadline task cannot be empty. " +
+                                "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0";
+                    } else {
+                        String deadline = Arrays.stream(splitString).dropWhile(e -> !e.equals("/by")).skip(1).collect(Collectors.joining(" "));
+                        if (deadline.equals("")) {
+                            returnString = "\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
+                                    "\n\t ☹ OOPS!!! The deadline of a deadline task cannot be empty. " +
+                                    "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0";
+                        } else {
+                            Deadline newDeadline = new Deadline(taskName, deadline);
+                            inputStore.add(newDeadline);
+                            returnString = "\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
+                                    "\n\t Got it. I've added this task: " + "\n\t  " + newDeadline.toString() +
+                                    "\n\t Now you have " + inputStore.size() + " tasks in the list." +
+                                    "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0";
+                        }
+                    }
                     break;
 
                 case "event" :
                     String eventName =  Arrays.stream(splitString).skip(1).takeWhile(e -> !e.equals("/at")).collect(Collectors.joining(" "));
-                    String eventTime = Arrays.stream(splitString).dropWhile(e -> !e.equals("/at")).skip(1).collect(Collectors.joining(" "));
-                    Event newEvent = new Event(eventName, eventTime);
-                    inputStore.add(newEvent);
-                    returnString = "\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
-                            "\n\t Got it. I've added this task: " + "\n\t  " +  newEvent.toString() +
-                            "\n\t Now you have " + inputStore.size() + " tasks in the list." +
-                            "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0";
+                    if (eventName.equals("")) {
+                        returnString = "\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
+                                "\n\t ☹ OOPS!!! The description of an event task cannot be empty. " +
+                                "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0";
+                    } else {
+                        String eventTime = Arrays.stream(splitString).dropWhile(e -> !e.equals("/at")).skip(1).collect(Collectors.joining(" "));
+                        if (eventTime.equals("")) {
+                            returnString = "\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
+                                    "\n\t ☹ OOPS!!! The time of an event task cannot be empty. " +
+                                    "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0";
+                        } else {
+                            Event newEvent = new Event(eventName, eventTime);
+                            inputStore.add(newEvent);
+                            returnString = "\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
+                                    "\n\t Got it. I've added this task: " + "\n\t  " + newEvent.toString() +
+                                    "\n\t Now you have " + inputStore.size() + " tasks in the list." +
+                                    "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0";
+                        }
+                    }
                     break;
 
                 case "done" :
@@ -79,7 +109,7 @@ public class Duke {
                     break;
 
                 default :
-                    returnString = "Please use a correct command - todo / deadline / event / done / bye!";
+                    returnString = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
             }
 
