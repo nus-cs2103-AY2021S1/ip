@@ -4,42 +4,58 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private List<String> tasks = new ArrayList<String>();
+    private List<Task> tasks = new ArrayList<>();
 
     void greet() {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
 
     void addTask(String task) {
-        tasks.add(task);
+        Task t = new Task(task);
+        tasks.add(t);
         System.out.println("added: " + task);
     }
 
     void listTasks() {
+        System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= tasks.size(); i ++) {
-            System.out.println(i + ". " + tasks.get(i - 1));
+            System.out.println(i + ". " + tasks.get(i - 1).toString());
         }
+    }
+
+    void completeTask(int index) {
+        Task completedTask = tasks.get(index -1 );
+        completedTask.markAsDone();
+        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println(completedTask.toString());
     }
 
     void exit() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.greet();
+    void initializeChatbot() {
+        greet();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String command = sc.nextLine();
             if (command.equals("bye")) {
-                duke.exit();
+                exit();
                 break;
             } else if (command.equals("list")) {
-                duke.listTasks();
+                listTasks();
+            } else if (command.startsWith("done")) {
+                String index = command.split(" ")[1];
+                completeTask(Integer.valueOf(index));
             } else {
-                duke.addTask(command);
+                addTask(command);
             }
         }
         sc.close();
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.initializeChatbot();
     }
 }
