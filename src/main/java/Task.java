@@ -1,17 +1,11 @@
 public class Task{
-    private String lines = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.";
-    private int ind;
+    private String lines = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
     private String description;
     private boolean isDone;
 
-    Task(int ind, String message) {
-        this.ind = ind;
-        this.description = message;
+    Task(String message) {
+        this.description = message.stripLeading().stripTrailing();
         this.isDone = false;
-    }
-
-    public String getInd() {
-        return String.valueOf(ind);
     }
 
     public String getStatusIcon() {
@@ -21,11 +15,11 @@ public class Task{
     public Task markAsDone() {
         if (!isDone) {
             this.isDone = true;
-            System.out.println(lines + "\n Good Job!!! You cleared this task:\n   ["
+            System.out.println(lines + " Good Job!!! You cleared this task:\n   ["
                     + this.getStatusIcon() + "] " + this.description + "\n" + lines);
         } else {
             System.out.println(lines
-                    + "\n You have already completed this task! *Woof woof*\n" + lines);
+                    + " You have already completed this task! *Woof woof*\n" + lines);
         }
         return this;
     }
