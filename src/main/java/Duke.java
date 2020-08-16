@@ -15,6 +15,15 @@ public class Duke {
         System.out.println(str);
     }
 
+    public static void delete(ArrayList<Task> ls, int i) {
+        Task toPrint = ls.get(i-1);
+        ls.remove(i-1);
+        int numTask = ls.size();
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println(toPrint);
+        System.out.println("Now you have " + numTask + " tasks in the list.");
+    }
+
     public static void main(String[] args) throws DukeException {
 
         Scanner myObj = new Scanner(System.in); // Creates a new scanner object
@@ -54,7 +63,7 @@ public class Duke {
                     System.out.println(taskDeadline);
                     System.out.println("Now you have " + itemsLs.size() + " tasks in the list.");
                     toPrint = myObj.nextLine();
-                } catch (ArrayIndexOutOfBoundsException e){
+                } catch (ArrayIndexOutOfBoundsException e) {
                     Deadline.invalidInput();
                     toPrint = myObj.nextLine();
                 }
@@ -88,10 +97,17 @@ public class Duke {
                     System.out.println(taskEvent);
                     System.out.println("Now you have " + itemsLs.size() + " tasks in the list.");
                     toPrint = myObj.nextLine();
-                } catch (ArrayIndexOutOfBoundsException e){
+                } catch (ArrayIndexOutOfBoundsException e) {
                     Event.invalidInput();
                     toPrint = myObj.nextLine();
                 }
+
+            } else if(toPrint.contains("delete")) {
+                String command = toPrint.replaceAll("[^\\d.]", "");
+                System.out.println(command);
+                int indexCommand = Integer.parseInt(command.trim());
+                delete(itemsLs, indexCommand);
+                toPrint = myObj.nextLine();
 
             } else {
                 confused();
