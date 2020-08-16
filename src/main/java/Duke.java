@@ -1,9 +1,11 @@
+import main.java.Task;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
 
-    public static ArrayList<String> newList = new ArrayList<>();
+    public static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -17,17 +19,23 @@ public class Duke {
         Scanner scan = new Scanner(System.in);
 
         while (scan.hasNext()) {
-            String nextLine = scan.nextLine();
-            if (nextLine.equals("bye")) {
+            String input = scan.nextLine();
+            if (input.length() >= 4 && input.substring(0,4).equals("done")) {
+                    int index = Integer.parseInt(input.substring(5));
+                    Task done = taskList.get(index-1);
+                    done.markAsDone();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(done);
+            } else if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 return;
-            } else if (nextLine.equals("list")) {
-                for (int i = 0; i < newList.size(); i++ ) {
-                    System.out.println((i+1) + ". " + newList.get(i));
+            } else if (input.equals("list")) {
+                for (int i = 0; i < taskList.size(); i++) {
+                    System.out.println((i + 1) + "." + taskList.get(i));
                 }
             } else {
-                newList.add(nextLine);
-                System.out.println("Added: " + nextLine);
+                taskList.add(new Task(input));
+                System.out.println("Added: " + input);
             }
         }
     }
