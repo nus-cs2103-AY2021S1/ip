@@ -1,0 +1,18 @@
+list
+todo off myself
+todo
+deadline die /by next year
+deadline die /at next year
+event death /at soon pls
+event death /by soon pls
+list
+fake command
+done 1
+done 2
+done 3
+done 100
+list
+todo hello world
+delete 0
+delete 1
+bye
