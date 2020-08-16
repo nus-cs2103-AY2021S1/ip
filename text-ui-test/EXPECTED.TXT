@@ -1,32 +1,35 @@
 Hello! I'm Duke
 What can I do for you?
-☹ OOPS!!! The description of a todo cannot be empty.
 Got it. I've added this task:
-  [T][X] successful
+  [T][X] test 1
 Now you have 1 tasks in the list.
-1. [T][X] successful
-☹ OOPS!!! The description of a deadline cannot be empty.
-ErrorExceptions: Wrong deadline or event command format, missing /action: deadline
-ErrorExceptions: Wrong event command format, missing date
-1. [T][X] successful
 Got it. I've added this task:
-  [D][X] successful (by: monday)
-Now you have 2 tasks in the list.
-1. [T][X] successful
-2. [D][X] successful (by: monday)
-☹ OOPS!!! The description of an event cannot be empty.
-ErrorExceptions: Wrong deadline or event command format, missing /action: deadline
-ErrorExceptions: Wrong event command format, missing date
-ErrorExceptions: Wrong event command format, missing timeslot
-1. [T][X] successful
-2. [D][X] successful (by: monday)
+  [D][X] test 2 (by: Monday)
+Now you have 2 tasks in the list
 Got it. I've added this task:
-  [E][X] successful (at: sunday 4-6pm)
+  [E][X] test 3 (at: Tuesday 2-3pm)
 Now you have 3 tasks in the list.
-1. [T][X] successful
-2. [D][X] successful (by: monday)
-3. [E][X] successful (at: sunday 4-6pm)
+Got it. I've added this task:
+  [T][X] test 4
+Now you have 4 tasks in the list
+1. [T][X] test 1
+2. [D][X] test 2 (by: Monday)
+3. [E][X] test 3 (at: Tuesday 2-3pm)
+4. [T][X] test 4
 Invalid Command, I do not understand! ☹
-Invalid Command, I do not understand! ☹
-Invalid Command, I do not understand! ☹
+Noted. I've removed this task:
+  [D][X] test 2 (by: Monday)
+Now you have 3 tasks in the list.
+1. [T][X] test 1
+2. [E][X] test 3 (at: Tuesday 2-3pm)
+3. [T][X] test 4
+There is no such task!
+1. [T][X] test 1
+2. [E][X] test 3 (at: Tuesday 2-3pm)
+3. [T][X] test 4
+Noted. I've removed this task:
+  [T][X] test 4
+Now you have 2 tasks in the list.
+1. [T][X] test 1
+2. [E][X] test 3 (at: Tuesday 2-3pm)
 Bye. Hope to see you again soon!

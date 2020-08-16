@@ -1,20 +1,13 @@
-todo
-todo successful
+todo test 1
+deadline test 2 /by Monday
+event test 3 /at Tuesday 2-3pm
+todo test 4
 list
-deadline
-deadline failure 1
-deadline failure 2 /by
+delete
+delete 2
 list
-deadline successful /by monday
+delete 4
 list
-event
-event failure 1
-event failure 2 /at
-event failure 3 /at sunday
+delete 3
 list
-event successful /at sunday 4-6pm
-list
-blah
-random
-invalid
 bye
