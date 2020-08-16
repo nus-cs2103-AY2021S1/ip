@@ -1,4 +1,3 @@
-import java.util.Calendar;
 import java.util.Scanner;
 
 public class Duke {
@@ -7,9 +6,6 @@ public class Duke {
     }
 
     static void init() {
-        Calendar now = Calendar.getInstance();
-        int hour = now.get(Calendar.HOUR_OF_DAY);
-
         String logo = "         ,---._                                                            \n" +
                         "       .-- -.' \\    ,---,       ,-.----.                 ,---,  .--.--.    \n" +
                         "       |    |   :  '  .' \\      \\    /  \\        ,---.,`--.' | /  /    '.  \n" +
@@ -24,13 +20,7 @@ public class Duke {
                         "\\    \\         ; |  | ,'        :   : :-'      :   \\ |;   |.'   `--'---'   \n" +
                         " \\    \\      ,'  `--''          |   |.'         '---\" '---'                \n" +
                         "  \"---....--'                   `---'                                      \n";
-        if (hour < 12) {
-            System.out.println("\tGood morning boss! This is\n" + logo);
-        } else if (hour < 20) {
-            System.out.println("\tGood afternoon boss! This is\n" + logo);
-        } else {
-            System.out.println("\tGood evening boss! This is\n" + logo);
-        }
+        System.out.println("\tHello boss! This is\n" + logo);
         System.out.println("\tWhat can I do for you?");
         System.out.println("\t___________________________________________________________________________\n");
 
