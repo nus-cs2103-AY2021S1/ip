@@ -28,10 +28,15 @@ public class Duke {
         System.out.println("");
 
         Scanner sc = new Scanner(System.in);
+        String[] items = new String[100];
+        int itemsIndex = 0;
 
         while (!sc.hasNext("bye")) {
             System.out.println("    ____________________________________________________________");
-            System.out.println("    " + sc.nextLine());
+            String newItem = sc.nextLine();
+            items[itemsIndex] = newItem;
+            itemsIndex++;
+            System.out.println("     added: " + newItem);
             System.out.println("    ____________________________________________________________");
             System.out.println("");
         }
