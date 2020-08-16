@@ -90,19 +90,19 @@ public class Duke {
             }
             return new AddFunction(new Task(args));
         } else if (command.equals("deadline")) {
-            String[] argsSplit = args.split("/by", 2);
+            String[] argsSplit = args.split("\\s+/by\\s+", 2);
             if (argsSplit.length != 2 || argsSplit[0].isBlank() || argsSplit[1].isBlank()) {
                 return new ErrorFunction(Arrays.asList("Couldn't add deadline! To add a deadline, talk to me using the",
                                                        "format: deadline <description> /by <date>"));
             }
-            return new AddFunction(new Deadline(argsSplit[0].stripTrailing(), argsSplit[1].stripLeading()));
+            return new AddFunction(new Deadline(argsSplit[0], argsSplit[1]));
         } else if (command.equals("event")) {
-            String[] argsSplit = args.split("/at", 2);
+            String[] argsSplit = args.split("\\s+/at\\s+", 2);
             if (argsSplit.length != 2 || argsSplit[0].isBlank() || argsSplit[1].isBlank()) {
                 return new ErrorFunction(Arrays.asList("Couldn't add event! To add an event, talk to me using the format:",
                                                        "event <description> /at <date>"));
             }
-            return new AddFunction(new Event(argsSplit[0].stripTrailing(), argsSplit[1].stripLeading()));
+            return new AddFunction(new Event(argsSplit[0], argsSplit[1]));
         } else if (input.isBlank()) {
             return new ErrorFunction("Please tell me what you want me to do!");
         } else {
