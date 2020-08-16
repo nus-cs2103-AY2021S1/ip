@@ -1,33 +1,48 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Duke {
+public class Chatbot {
+
+    private static ArrayList<String> tasks;
+    private static TaskPrinter taskPrinter;
 
     private static boolean getUserInput(Scanner s) {
         System.out.print(">> ");
-        return s.hasNext();
+        return s.hasNextLine();
     }
 
     private static void handleUserInput(String userInput) {
         switch (userInput) {
+            case "list":
+                taskPrinter.list(tasks);
+                break;
             case "bye":
-                Printer.display("Bye. Hope to see you again soon!");
+                taskPrinter.display("Bye. Hope to see you again soon!");
                 break;
             default:
-                Printer.display(userInput);
+                tasks.add(userInput);
+                taskPrinter.display("Added: " + userInput);
         }
     }
 
     public static void main(String[] args) {
+
         System.out.println(
                 "   ##############################\n" +
                 "   # Hi! I'm Hanry the ChatBot. #\n" +
                 "   # What can I do for you?     #\n" +
                 "   ##############################"
         );
+
+        tasks = new ArrayList<>();
+        taskPrinter = new TaskPrinter();
         Scanner sc = new Scanner(System.in);
+
         while(getUserInput(sc)) {
-            String userInput = sc.next();
+            String userInput = sc.nextLine();
             handleUserInput(userInput);
         }
+
+        sc.close();
     }
 }
