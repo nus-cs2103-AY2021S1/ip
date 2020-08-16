@@ -13,7 +13,7 @@ public class Deadline extends Task {
 
     @Override
     public Deadline markDone() {
-        return new Deadline(task, deadline, isDone);
+        return new Deadline(task, deadline, true);
     }
 
     @Override

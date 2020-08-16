@@ -13,7 +13,7 @@ public class Event extends Task {
 
     @Override
     public Event markDone() {
-        return new Event(task, date, isDone);
+        return new Event(task, date, true);
     }
 
     @Override

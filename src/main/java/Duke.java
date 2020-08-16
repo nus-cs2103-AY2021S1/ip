@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
     private static String line = "____________________________________________________________";
 
     private String name = "Bolot";

@@ -10,7 +10,7 @@ public class ToDo extends Task {
 
     @Override
     public ToDo markDone() {
-        return new ToDo(task, isDone);
+        return new ToDo(task, true);
     }
 
     @Override
