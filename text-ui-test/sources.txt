@@ -7,6 +7,7 @@
 ../src/main/java/Divider.java
 ../src/main/java/InvalidTaskNumberException.java
 ../src/main/java/Task.java
+../src/main/java/InvalidDeleteException.java
 ../src/main/java/NoTaskDateTimeException.java
 ../src/main/java/Duke.java
 ../src/main/java/Deadline.java

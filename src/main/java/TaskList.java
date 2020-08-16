@@ -15,6 +15,10 @@ public class TaskList {
         list.get(index).completeTask();
     }
 
+    public void removeTask(int index) {
+        list.remove(index);
+    }
+
     public Task getTask(int index) {
         return list.get(index);
     }

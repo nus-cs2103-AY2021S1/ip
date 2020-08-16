@@ -39,6 +39,8 @@ public class Duke {
             handleTaskCommand(command, "deadline");
         } else if (command.startsWith("event")) {
             handleTaskCommand(command, "event");
+        } else if (command.startsWith("delete")) {
+            handleDeleteCommand(command);
         } else {
             throw new InvalidCommandException();
         }
@@ -115,19 +117,46 @@ public class Duke {
         } else {
             throw new InvalidCommandException();
         }
-        // print "task" if there is 1 task, else print "tasks" if there is more than 1
+
         list.addTask(task);
         int noOfTask = list.getNumberOfTask();
+        String taskDescription = getTaskDescription(noOfTask);
+        System.out.println(divider.wrapInDivider("Got it. I've added this task: \n\t   " +
+                task + "\n\t " +
+                "Now you have " +
+                taskDescription +
+                " in the list."));
+    }
+
+    private static void handleDeleteCommand(String command) throws DukeException {
+        String[] split = command.split(" ");
+        if (split.length != 2 || !split[1].matches("[0-9]+")) {
+            throw new InvalidDeleteException();
+        } else {
+            int taskNumber = Integer.parseInt(split[1]) - 1;
+            if (taskNumber < 0 || taskNumber >= list.getNumberOfTask()) {
+                throw new InvalidTaskNumberException();
+            } else {
+                int noOfTask = list.getNumberOfTask() - 1;
+                String taskDescription = getTaskDescription(noOfTask);
+                System.out.println(divider.wrapInDivider("Noted. I've removed this task:\n\t   " +
+                        list.getTask(taskNumber) + "\n\t " +
+                        "Now you have " +
+                        taskDescription +
+                        " in the list."));
+                list.removeTask(taskNumber);
+            }
+        }
+    }
+
+    // print "task" if there is 1 task, else print "tasks" if there is more than 1
+    public static String getTaskDescription(int noOfTask) {
         String taskDescription = "";
         if (noOfTask > 1) {
             taskDescription = noOfTask + " tasks";
         } else {
             taskDescription = noOfTask + " task";
         }
-        System.out.println(divider.wrapInDivider("Got it. I've added this task: \n\t   " +
-                task + "\n\t " +
-                "Now you have " +
-                taskDescription +
-                " in the list."));
+        return taskDescription;
     }
 }
