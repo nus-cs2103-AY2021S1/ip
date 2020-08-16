@@ -1,14 +1,10 @@
-public class Task {
+public abstract class Task {
 
     private final String task;
     private boolean done = false;
 
-    private Task(String task) {
+    protected Task(String task) {
         this.task = task;
-    }
-
-    protected static Task makeTask(String task) {
-        return new Task(task);
     }
     
     protected String getTask() {
@@ -21,11 +17,6 @@ public class Task {
 
     protected boolean isDone() {
         return this.done;
-    }
-
-    @Override
-    public String toString() {
-        return this.task;
     }
 
 }
