@@ -95,20 +95,16 @@ class ChatBot {
             int taskNumber = Integer.parseInt(taskString);
             // guard clause to prevent index error out of bounds
             if (taskNumber <= 0 || taskNumber > this.toDoList.size()) {
-                System.out.println("Sorry, no such task!");
+                System.out.println("Sorry, no such task!"); // to throw exception
                 return;
             }
 
             Task currentTask = this.toDoList.get(taskNumber - 1);
-            if (currentTask instanceof ToDo) {
-                ToDo currentToDo = (ToDo) currentTask;
-//                ToDo newToDo = currentToDo.markAsDone();
-            }
 
             Task newTask = currentTask.markAsDone();
             this.toDoList.set(taskNumber - 1, newTask);
             System.out.println("Sugoi! This task is done!");
-            System.out.println(newTask);
+            System.out.println(newTask + "\n");
 
         } catch(NumberFormatException e) {
             System.out.println(e);
@@ -122,19 +118,38 @@ class ChatBot {
      */
     void add(String[] inputArray) {
         String command = inputArray[0].toLowerCase();
-        String description = inputArray[1];
+        String description = inputArray[1]; // error when only one word is typed. to handle afterwards
         Task taskToAdd;
+
         if (command.equals("todo")) {
             taskToAdd = new ToDo(description);
-            this.toDoList.add(taskToAdd);
+        } else if (command.equals("deadline")) {
+            // guard clause. Show exception and break.
+            if (description.indexOf("/by") < 0) {
+                System.out.println("Please enter a valid deadline!"); // to throw exception
+                return;
+            }
+
+            String[] descriptionArray = description.split("/by", 2);
+            String deadlineName = descriptionArray[0];
+            String deadlineEndDate = descriptionArray[1];
+            taskToAdd = new Deadline(deadlineName, deadlineEndDate);
         } else {
             return;
         }
+
+        this.toDoList.add(taskToAdd);
+
         System.out.println(ConsoleColors.YELLOW.getColor()
                 + this.botName + ": "
                 + "Hai! I have added this task to your list:\n"
                 + taskToAdd + "\n"
                 + ConsoleColors.RESET.getColor());
+        System.out.println(ConsoleColors.YELLOW.getColor()
+            + "You now have "
+            + this.toDoList.size()
+            + " tasks in your list. Gambatte!\n"
+            + ConsoleColors.RESET.getColor());
     }
 
     /**
