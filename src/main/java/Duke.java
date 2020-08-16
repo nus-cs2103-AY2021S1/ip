@@ -2,21 +2,25 @@ import java.util.Scanner;
 
 public class Duke {
 
-    static String[] tasks = new String[100];
+    static Task[] tasks = new Task[100];
     static int numTasks = 0;
 
-    // loop through tasks array and return all tasks as a string
-    public static String printTasks() {
+    // loop through tasks array and print tasks in order
+    public static void printTasks() {
         String tasksList = "";
         for (int i = 0; i < numTasks; i++) {
+            Task curr = tasks[i];
             if (i == 0) {
-                tasksList = "1. " + tasks[i];
+                tasksList = " 1. " + "[" + curr.getStatusIcon() + "] " + curr.description;
             } else {
-                tasksList = tasksList + "\n " + (i + 1) + ". " + tasks[i];
+                tasksList = tasksList + "\n " + (i + 1) + ". " + "[" + curr.getStatusIcon() + "] " + curr.description;
             }
         }
 
-        return tasksList;
+        System.out.println(" ____________________________________________________________\n " +
+                "Here are the tasks in your list:\n" +
+                tasksList +
+                "\n ____________________________________________________________");
     }
 
     public static void getInput() {
@@ -26,12 +30,20 @@ public class Duke {
             String inputData = sc.nextLine();
 
             if (inputData.equals("list")) {
-                System.out.println(" ____________________________________________________________\n " +
-                        printTasks() +
-                        "\n ____________________________________________________________");
+                printTasks();
+
+            } else if (inputData.split(" ")[0].equals("done")) {
+                int taskNumber = Integer.parseInt(inputData.split(" ")[1]);
+
+                if (taskNumber > numTasks || taskNumber < 0) {
+                    System.out.println("Invalid task number. Please try again.");
+                } else {
+                    tasks[taskNumber - 1] = tasks[taskNumber - 1].markAsDone();
+                }
+
             } else if (!inputData.equals("bye")) {
                 // add inputData to next index in tasks array and print inputData
-                tasks[numTasks] = inputData;
+                tasks[numTasks] = new Task(inputData);
                 numTasks++;
                 System.out.println(" ____________________________________________________________\n " +
                         "added: " + inputData +
