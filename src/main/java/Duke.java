@@ -8,6 +8,7 @@ public class Duke {
     // list of commands
     private static String exitCmd = "bye";
     private static String doneCmd = "done";
+    private static String deleteCmd = "delete";
     private static String todoCmd = Task.Command.TODO.getCmd();
     private static String deadlineCmd = Task.Command.DEADLINE.getCmd();
     private static String eventCmd = Task.Command.EVENT.getCmd();
@@ -17,7 +18,8 @@ public class Duke {
     // list of messages
     private static String exitMsg = "Bye human. See you again soon!";
     private static String doneMsg = "Good job bud! I've marked this task as done:";
-    private static String showTasksMsg = "Here are the tasks in your lists:";
+    private static String deleteMsg = "Noted. I've deleted this task:";
+    private static String showTasksMsg = "Here are the task(s) in your lists:";
     private static String addSuccessfulMsg = "Got it. I've added this task:";
     private static String horizontalLine = "________________________________________";
     private static String cmdReq = "Your command: ";
@@ -51,7 +53,7 @@ public class Duke {
         while (!input.equals(exitCmd)) {
             System.out.println(horizontalLine);
             try {
-                if (input.equals("list")) {
+                if (input.equals("list")) { // command is "list"
                     if (tasks.size() == 0) {
                         System.out.println(lazyHumanBash);
                     } else {
@@ -60,12 +62,17 @@ public class Duke {
                             System.out.println((i + 1) + ". " + tasks.get(i).toString());
                         }
                     }
-                } else if (inputSplitted[0].equals(doneCmd)) {
+                } else if (inputSplitted[0].equals(deleteCmd)) { // command is "delete [index]"
+                    int idx = Integer.parseInt(inputSplitted[1]) - 1;
+                    System.out.println(deleteMsg);
+                    System.out.println(tasks.remove(idx));
+                    System.out.println(taskReport());
+                } else if (inputSplitted[0].equals(doneCmd)) { // command is "done [index]"
                     int idx = Integer.parseInt(inputSplitted[1]) - 1;
                     tasks.set(idx, tasks.get(idx).markAsDone());
                     System.out.println(doneMsg);
                     System.out.println(tasks.get(idx));
-                } else if (inputSplitted[0].equals(todoCmd)) {
+                } else if (inputSplitted[0].equals(todoCmd)) { // command is "todo [description]"
                     if (inputSplitted.length == 1 || inputSplitted[1].equals("")) {
                         throw new InadequateCommandException("todo",
                                 new String[] {"description"});
@@ -76,8 +83,8 @@ public class Duke {
                         System.out.println(newTask);
                         System.out.println(taskReport());
                     }
-                } else if (inputSplitted[0].equals(deadlineCmd)
-                        || inputSplitted[0].equals(eventCmd)) {
+                } else if (inputSplitted[0].equals(deadlineCmd) // command is "deadline [description] /by [time]"
+                        || inputSplitted[0].equals(eventCmd)) { // or "event [description] / at [time]"
                     String type, timeSpecifier;
                     boolean isDeadline;
                     if (inputSplitted[0].equals(deadlineCmd)) {
@@ -126,7 +133,7 @@ public class Duke {
                         System.out.println(newTask);
                         System.out.println(taskReport());
                     }
-                } else {
+                } else { // any other commands
                     throw new IncorrectCommandException();
                 }
             } catch (InadequateCommandException e) {
