@@ -1,11 +1,11 @@
 public class StringUtils {
 
-    public static void printWithWrapper(String[] strArr, boolean withNumbering) {
+    public static <T> void printWithWrapper(T[] arr, boolean withNumbering) {
         String BORDER = "=======================================";
         String INDENT = "    ";
         System.out.println(BORDER);
-        for (int i = 0; i < strArr.length; i++) {
-            if (strArr[i] == null) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == null) {
                 break;
             }
 
@@ -13,7 +13,7 @@ public class StringUtils {
             if (withNumbering) {
                 prepend += (i + 1) + ". ";
             }
-            System.out.println(prepend + strArr[i]);
+            System.out.println(prepend + arr[i].toString());
         }
         System.out.println(BORDER);
     }
