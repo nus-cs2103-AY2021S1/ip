@@ -22,6 +22,7 @@ public class Duke {
         //Looping and echoing user inputs
         while (scanner.hasNext()) {
             String userInput = scanner.nextLine();
+            int len = userInput.length();
             if (userInput.equals("bye")) {
                 System.out.println(line);
                 System.out.println(bot + "Goodbye! Hope to see you again soon! ^_^");
@@ -29,7 +30,10 @@ public class Duke {
                 break;
             } else if (userInput.equals("list")) {
                 showTaskList(tasks);
-            } else {
+            } else if (userInput.substring(0,4).equals("done")) { //mark as done
+                int pos = Integer.parseInt(userInput.substring(5, len));
+                taskIsDone(pos);
+            } else { //added
                 tasks.add(new Task(userInput));
                 System.out.println(line);
                 System.out.print(bot);
@@ -53,5 +57,10 @@ public class Duke {
             }
             System.out.println(line);
         }
+    }
+
+    static void taskIsDone(int pos) {
+        System.out.println("Nice! I've marked this task as done: ");
+
     }
 }
