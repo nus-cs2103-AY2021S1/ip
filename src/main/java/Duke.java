@@ -39,18 +39,25 @@ public class Duke {
     void start() {
         greet();
         Scanner sc = new Scanner(System.in);
-        while(sc.hasNext()) {
-            String command = sc.nextLine();
-            if(command.equals("bye")) {
-                exit();
-                break;
-            } else if(command.equals("list")){
-                list();
-            } else if(command.startsWith("done")) {
-                int taskNo = Integer.valueOf(command.split(" ")[1]);
-                completeTask(taskNo);
-            } else {
-                addTask(command);
+        boolean isRunning = true;
+        while(isRunning) {
+            String command = sc.next();
+            switch (command) {
+                case "bye": {
+                    exit();
+                    isRunning = false;
+                    break;
+                }
+                case "list":
+                    list();
+                    break;
+                case "done":
+                    int taskNo = sc.nextInt();
+                    completeTask(taskNo);
+                    break;
+                default:
+                    addTask(command + sc.nextLine());
+                    break;
             }
         }
         sc.close();
