@@ -19,12 +19,20 @@ public class Duke {
                 if (taskCategory.equals("bye")) {
                     break;
                 } else if (taskCategory.equals("list")) {
+                    if (taskList.size() == 0) {
+                        System.out.println("You have no tasks currently :)");
+                        continue;
+                    }
                     System.out.println("Here are the tasks in your list:");
                     for (int n = 1; n <= taskList.size(); n++) {
                         System.out.println(n + "." + taskList.get(n - 1));
                     }
                 } else if (taskCategory.equals("done")) {
-                    int taskNumberToMark = Integer.parseInt(input.substring(input.length() - 1));
+                    String digitsOnlyInput = input.replaceAll("[^0-9]", "");
+                    if (digitsOnlyInput.isEmpty()) {
+                        throw new DukeException("Specify the task number to delete e.g. delete 12");
+                    }
+                    int taskNumberToMark = Integer.parseInt(digitsOnlyInput);
                     if (taskNumberToMark > taskList.size() | taskNumberToMark < 1 ) {
                         throw new DukeException("There is no such task number.");
                     }
@@ -32,6 +40,18 @@ public class Duke {
                     taskToMark.markAsDone();
                     System.out.println("Nicely done. I've marked this task as done:" +
                             "\n" + taskToMark);
+                } else if (taskCategory.equals("delete")) {
+                    String digitsOnlyInput = input.replaceAll("[^0-9]", "");
+                    if (digitsOnlyInput.isEmpty()) {
+                        throw new DukeException("Specify the task number to delete e.g. delete 12");
+                    }
+                    int taskNumberToMark = Integer.parseInt(digitsOnlyInput);
+                    if (taskNumberToMark > taskList.size() | taskNumberToMark < 1 ) {
+                        throw new DukeException("There is no such task number.");
+                    }
+                    Task taskToMark = taskList.remove(taskNumberToMark - 1);
+                    String remainingTasksMsg = "\nNow you have " + taskList.size() + " tasks in the list.";
+                    System.out.println("Noted. I've removed this task:\n" + taskToMark + remainingTasksMsg);
                 } else {
                     boolean invalidTask = !taskCategory.equals("todo") &&
                             !taskCategory.equals("event") &&
