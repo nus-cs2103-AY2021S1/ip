@@ -1,10 +1,20 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
-    public static String line = "_______________________________________________";
-    Scanner sc = new Scanner(System.in);
+    private static String LINE = "_______________________________________________";
+    private static String ADDED = "added: ";
 
+    private final Scanner sc;
+    private ArrayList<String> listItems;
+
+    Duke() {
+        sc = new Scanner(System.in);
+        listItems = new ArrayList<>();
+    }
+
+    // activate the Duke Bot
     void echo() {
         greetings();
         while(sc.hasNext()) {
@@ -12,8 +22,11 @@ public class Duke {
             if (input.equals("bye")) {
                 goodBye();
                 break;
+            } else if (input.equals("list")) {
+                showListItems(listItems);
             } else {
-                messageFormatter(() -> System.out.println(input));
+                listItems.add(input);
+                messageFormatter(() -> System.out.println(ADDED + input));
             }
         }
     }
@@ -30,9 +43,23 @@ public class Duke {
     }
 
     void messageFormatter(Runnable func) {
-        System.out.println(line);
+        System.out.println(LINE);
         func.run();
-        System.out.println(line);
+        System.out.println(LINE);
+        System.out.println(); // optional
+    }
+
+    // Printing out the items in the list
+    void showListItems(ArrayList<String> listItems) {
+        if (listItems.size() == 0) {
+            messageFormatter(() -> System.out.println("Your list is empty!!!"));
+        } else {
+            messageFormatter(() -> {
+                for(int i = 1; i <= listItems.size(); i++) {
+                    System.out.println(i + ". " + listItems.get(i - 1));
+                }
+            });
+        }
     }
 
 }
