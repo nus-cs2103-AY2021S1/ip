@@ -1,4 +1,22 @@
-package PACKAGE_NAME;
+public enum Command {
+    BYE("bye"),
+    COMMANDS("commands"),
+    DEADLINE("deadline"),
+    DELETE("delete"),
+    DONE("done"),
+    EVENT("event"),
+    LIST("list"),
+    TODO("todo"),
+    UNKNOWN("unknown");
 
-public class Command {
+    private String label;
+
+    Command(String label) {
+        this.label = label;
+    }
+
+    @Override
+    public String toString() {
+        return this.label;
+    }
 }
