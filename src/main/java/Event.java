@@ -10,9 +10,9 @@ public class Event extends Task{
     @Override
     public String toString() {
         if (done) {
-            return String.format ("[E][\u2713] %s (at: %s)", this.task, this.time);
+            return String.format ("[E][\u2713] %s(at: %s)", this.task, this.time);
         } else {
-            return String.format ("[E][\u2718] %s (at: %s)", this.task, this.time);
+            return String.format ("[E][\u2718] %s(at: %s)", this.task, this.time);
         }
     }
 }

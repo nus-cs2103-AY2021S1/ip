@@ -10,9 +10,9 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (done) {
-            return String.format ("[E][\u2713] %s (by: %s)", this.task, this.by);
+            return String.format ("[D][\u2713] %s(by: %s)", this.task, this.by);
         } else {
-            return String.format ("[E][\u2718] %s (by: %s)", this.task, this.by);
+            return String.format ("[D][\u2718] %s(by: %s)", this.task, this.by);
         }
     }
 }
