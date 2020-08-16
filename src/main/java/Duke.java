@@ -9,6 +9,7 @@ public class Duke {
     public static final String TODO = "todo";
     public static final String EVENT = "event";
     public static final String DEADLINE = "deadline";
+    public static final String DELETE = "delete";
 
     public static void main(String[] args) {
         List<Task> list = new ArrayList<>();
@@ -40,7 +41,7 @@ public class Duke {
                         System.out.println(LINE);
                         break;
 
-                    case DONE:
+                    case DONE: {
                         int taskNumber = sc.nextInt();
                         if (list.size() >= taskNumber) {
                             Task task = list.get(taskNumber - 1);
@@ -53,6 +54,22 @@ public class Duke {
                             throw new DukeException("Oops! No such task!");
                         }
                         break;
+                    }
+
+                    case DELETE: {
+                        int taskNumber = sc.nextInt();
+                        if (list.size() >= taskNumber && taskNumber > 0) {
+                            Task task = list.remove(taskNumber - 1);
+                            System.out.println(LINE +
+                                    "    Noted. I've removed this task:" + "\n" +
+                                    "      " + task.toString() + "\n" +
+                                    String.format("    Now you have %d tasks in the list.\n", list.size()) +
+                                    LINE);
+                        } else {
+                            throw new DukeException("Oops! No such task!");
+                        }
+                        break;
+                    }
 
                     case TODO:
                         String detail = sc.nextLine();
