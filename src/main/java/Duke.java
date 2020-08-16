@@ -39,9 +39,9 @@ public class Duke {
             } else {
                 throw new DukeException("Todo cannot be empty", new Throwable("empty field"));
             }
-        } else if (phrase.startsWith("event ")) {
-            phrase = phrase.substring(6).trim();
-            String[] tokens = phrase.split(" /at ");
+        } else if (phrase.startsWith("event ") || (phrase.startsWith("event") && phraseLength == 5)) {
+            String item = phrase.substring(5).trim();
+            String[] tokens = item.split(" /at ");
             if (tokens.length == 2) {
                 Event event = new Event(tokens[0],tokens[1]);
                 items.add(event);
@@ -53,9 +53,9 @@ public class Duke {
                         "bad event"
                 ));
             }
-        } else if (phrase.startsWith("deadline ")) {
-            phrase = phrase.substring(9).trim();
-            String[] tokens = phrase.split(" /by ");
+        } else if (phrase.startsWith("deadline ") || (phrase.startsWith("deadline") && phraseLength == 8)) {
+            String item = phrase.substring(8).trim();
+            String[] tokens = item.split(" /by ");
             if (tokens.length == 2) {
                 Deadline deadline = new Deadline(tokens[0],tokens[1]);
                 items.add(deadline);
