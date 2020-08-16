@@ -3,13 +3,9 @@ import java.util.*;
 
 /*================== Welcome to BOB ==================*/
 /*
-                ██████╗░░█████╗░██████╗░
-                ██╔══██╗██╔══██╗██╔══██╗
-                ██████╦╝██║░░██║██████╦╝
-                ██╔══██╗██║░░██║██╔══██╗
-                ██████╦╝╚█████╔╝██████╦╝
-                ╚═════╝░░╚════╝░╚═════╝░
-
+                    █▀▀▄ █▀▀█ █▀▀▄
+                    █▀▀▄ █  █ █▀▀▄
+                    ▀▀▀  ▀▀▀▀ ▀▀▀
             Also known as BERY ORDINARY BOT
 */
 
@@ -22,7 +18,11 @@ public class Bob {
     /*================ Static fields ================*/
 
     // Print when user first starts the program
-    public static String INTRO = "Hi, my name is BOB.\n" +
+    public static String INTRO =
+            "█▀▀▄ █▀▀█ █▀▀▄\n" +
+            "█▀▀▄ █  █ █▀▀▄\n" +
+            "▀▀▀  ▀▀▀▀ ▀▀▀\n"  +
+            "Hi, my name is BOB.\n" +
             "What can I do for you?";
     // Print when user exits the program
     public static String OUTRO = "See you soon, maybe?";
@@ -41,6 +41,8 @@ public class Bob {
 
     /*================ Private methods ================*/
 
+    /*---- Task methods ---- */
+    
     // Generates message after adding task
     private String afterAdd(Task task) {
         return "Yes boss, I have added this task to your list:\n" + "  " + task + "\n" + "Currently you have " + this.list.size() + " tasks in your list.";
@@ -66,6 +68,8 @@ public class Bob {
         this.list.add(event);
         return afterAdd(event);
     }
+
+    /*---- List methods ---- */
 
     // Converts list to readable String
     private String convertList() {
@@ -94,6 +98,9 @@ public class Bob {
         list.set(index, task);
         return "I have marked the task as done, good job. \n" + task + "\n";
     }
+
+
+    /*---- Command methods ---- */
 
     // Executes action based on command without need for user input
     private Bob execute(Command command) {
