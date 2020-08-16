@@ -1,6 +1,6 @@
 public class Chat {
     private boolean isRunning;
-    private TaskList<String> list;
+    private TaskList<Task> list;
 
     Chat() {
         isRunning = true;
@@ -30,8 +30,10 @@ public class Chat {
             exit();
         } else if (input.equals("list")) {
             list();
+        } else if (input.length() >= 6 && input.substring(0, 5).equals("done ")) {
+            markAsDone(input);
         } else if (!input.isEmpty()) {
-            addToList(input);
+            addToList(new Task(input));
         }
     }
 
@@ -39,9 +41,20 @@ public class Chat {
         System.out.println(list);
     }
 
-    void addToList(String item) {
+    void addToList(Task item) {
         list.add(item);
-        System.out.println("    added: " + item + "\n");
+        System.out.println("    ok! I've added this task:\n      " + item + "\n");
+    }
+
+    void markAsDone(String input) {
+        try {
+            int id = Integer.parseInt(input.substring(5)) - 1;
+            Task task = list.get(id);
+            task.markAsDone();
+            System.out.println("    nice! I've marked this task as done:\n      " + task + "\n");
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            System.out.println("    invalid task number!\n");
+        }
     }
 
     void exit() {
