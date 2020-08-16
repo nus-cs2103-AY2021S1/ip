@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class DukeList {
 
-    private ArrayList<Task> list;
+    private final ArrayList<Task> list;
     private static final int CAPACITY = 100;
 
 
@@ -61,12 +61,9 @@ public class DukeList {
 
         this.list.add(newTask);
 
-        StringBuilder newTaskStrBuild = new StringBuilder();
-        newTaskStrBuild.append(String.format("Got it. I've added this task:\n"));
-        newTaskStrBuild.append(String.format("\t%s\n", newTask.toString()));
-        newTaskStrBuild.append(String.format("%s", this.getListStats()));
-
-        return newTaskStrBuild.toString();
+        return "Got it. I've added this task:\n" +
+                String.format("\t%s\n", newTask.toString()) +
+                String.format("%s", this.getListStats());
 
     }
 
@@ -82,7 +79,7 @@ public class DukeList {
         try {
             Task targetTask = this.list.get(index - 1);
             targetTask.markAsDone();
-            return String.format("Nice! I've marked this task as done: \n\t%s", targetTask.toString());
+            return String.format("Nice! I've marked this task as done:\n\t%s", targetTask.toString());
         } catch (NullPointerException e) {
             return "Index is invalid!";
         }
@@ -116,8 +113,6 @@ public class DukeList {
                     outputString.append("\n");
                 }
             }
-
-            outputString.append(this.getListStats());
 
             return outputString.toString();
         }
