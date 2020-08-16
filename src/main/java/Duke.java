@@ -5,7 +5,7 @@ public class Duke {
     public static void main(String[] args) {
         String bot = "Dave: \n";
         String user = "Me: \n";
-        String addedText = "Added: ";
+        String addedText = "added: ";
         String line = "_______________________________________________________________";
         ArrayList<String> added = new ArrayList<>();
 
@@ -18,7 +18,7 @@ public class Duke {
 
         //Looping and echoing user inputs
         while (scanner.hasNext()) {
-            String userInput = scanner.next(); //may be string, int, etc
+            String userInput = scanner.nextLine();
             if (userInput.equals("bye")) {
                 System.out.println(line);
                 System.out.println(bot + "Goodbye! Hope to see you again soon! ^_^");
@@ -44,5 +44,7 @@ public class Duke {
             }
 
         }
+
+        scanner.close();
     }
 }
