@@ -2,12 +2,12 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private void userInput() {
+    private void userInput(TodoList todoList) {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             Output output = new Output();
-            output.response(input);
+            output.response(input, todoList);
             if (input.equals("bye")) break;
         }
         sc.close();
@@ -21,8 +21,9 @@ public class Duke {
     }
 
     public void start() {
+        TodoList todoList = new TodoList();
         printWelcomeMessage();
-        userInput();
+        userInput(todoList);
     }
 
     public static void main(String[] args) {
