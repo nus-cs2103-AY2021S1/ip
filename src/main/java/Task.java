@@ -1,7 +1,7 @@
 /**
  * This class encapsulates the functionality of a task
  */
-public class Task {
+abstract class Task {
     private String task;
     private boolean isDone;
     /**
@@ -39,8 +39,6 @@ public class Task {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[").append(getStatusIcon()).append("] ").append(getTask()).append("\n");
-        return sb.toString();
+        return "[" + getStatusIcon() + "] " + getTask() + "\n";
     }
 }
