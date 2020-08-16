@@ -11,11 +11,11 @@ public class Task {
         this.isDone = true;
     }
 
-    public String getDescription() {
-        return this.description;
-    }
-
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
+    public String toString() {
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }
