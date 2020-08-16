@@ -36,8 +36,10 @@ public class Duke {
                 System.out.println("☹ OOPS!!! Seems you have provided an invalid index :-(");
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            } catch (Exception e) {
+            } catch (DukeException e) {
                 System.out.println(e.getMessage());
+            } catch (Exception e) {
+                System.out.println(e.toString());
             } finally {
                 next = sc.nextLine();
             }
@@ -46,16 +48,34 @@ public class Duke {
     }
 
     private static String[] extractAction(String command) throws DukeException {
-        if (command.equals("todo") || command.equals("done") || command.equals("event") || command.equals("deadline")) {
+        String[] split = command.split(" ", 2);
+        int len = split.length;
+
+        // command is empty
+        if (len == 0) {
+            throw new DukeException("☹ OOPS!!! The command cannot be empty!");
+        }
+
+        String status = split[0];
+        if (!(status.equals("todo") ||
+                status.equals("done") ||
+                status.equals("event") ||
+                status.equals("deadline") ||
+                status.equals("delete"))) {
+            throw new DukeException("☹ OOPS!!! Check if you have spelled correctly!");
+        }
+
+        // no description supplied
+        if (len == 1) {
             throw new DukeException(String.format("☹ OOPS!!! The description of a %s cannot be empty.", command));
         }
-        return command.split(" ", 2);
+        return split;
     }
 
     private static String[] extractTime(String command) throws DukeException {
-        String[] spliced = command.split(" /by | /at ", 2);
-        if (spliced.length < 2) {
-            if (spliced[0].charAt(0) == '/') {
+        String[] split = command.split(" /by | /at ", 2);
+        if (split.length < 2) {
+            if (split[0].charAt(0) == '/') {
                 throw new DukeException("☹ OOPS!!! Seems you forgot to supply the main content!");
             } else {
                 String message = "☹ OOPS!!! Seems you forgot to supply the time!\n"
@@ -63,7 +83,7 @@ public class Duke {
                 throw new DukeException(message);
             }
         }
-        return spliced;
+        return split;
     }
 
     private static void close() {
