@@ -1,6 +1,24 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Immutable Duke chatbot class to encapsulate the behavior of the chatbot.
+ */
 public class Duke {
+    private final ArrayList<String> list;
+
+    private Duke(ArrayList<String> list) {
+        this.list = new ArrayList<>(list);
+    }
+
+    /**
+     * Return a new Duke chatbot object.
+     *
+     * @return New Duke chatbot object.
+     */
+    public static Duke getDuke() {
+        return new Duke(new ArrayList<>());
+    }
 
     /**
      * Print greeting message.
@@ -26,8 +44,28 @@ public class Duke {
         System.out.println(TextFormatter.getFormattedText(command));
     }
 
+    /**
+     * Store a command in the bot.
+     *
+     * @param command User input string.
+     * @return Updated Duke object.
+     */
+    public Duke storeItem(String command) {
+        ArrayList<String> newList = new ArrayList<>(this.list);
+        newList.add(command);
+        return new Duke(newList);
+    }
+
+    public void displayList() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            sb.append(" ").append(i + 1).append(". ").append(list.get(i)).append("\n");
+        }
+        System.out.println(TextFormatter.getFormattedText(sb.toString()));
+    }
+
     public static void main(String[] args) {
-        Duke bot = new Duke();
+        Duke bot = getDuke();
         Scanner sc = new Scanner(System.in);
 
         // Greet user
@@ -35,11 +73,15 @@ public class Duke {
 
         // Echo command until user types bye
         while (sc.hasNext()) {
-            String s = sc.next();
+            String s = sc.nextLine();
             if (s.equals("bye")) {
                 break;
+            } else if (s.equals("list")) {
+                bot.displayList();
+            } else {
+                bot = bot.storeItem(s);
+                System.out.println(TextFormatter.getFormattedText("added: " + s));
             }
-            bot.echo(s);
         }
 
         // Exit bot
