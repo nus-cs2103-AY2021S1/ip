@@ -41,6 +41,21 @@ public class Bot {
         Bot.sectionize();
     }
 
+    private void remove(int index) {
+        try {
+            Task task = this.store.remove(index);
+            Bot.sectionize();
+            System.out.println("\tNoted. I've removed this task: ");
+            System.out.println("\t\t" + task.toString());
+            System.out.println("\tNow you have " + this.store.size() + " tasks in the list.");
+            Bot.sectionize();
+        } catch (IndexOutOfBoundsException e) {
+            Bot.sectionize();
+            System.out.println("\t☹ OOPS!!! I'm sorry, this task does not exist in your list!");
+            Bot.sectionize();
+        }
+    }
+
     private void intro() {
         System.out.println("Hello! I'm DukeBot");
         System.out.println("What can I do for you?");
@@ -70,6 +85,9 @@ public class Bot {
         if (InputParser.isDone(input)) {
             int index = Integer.parseInt(input.substring(5, 6)) - 1;
             this.markDone(index);
+        } else if(InputParser.isDelete(input)) {
+            int index = Integer.parseInt(input.split(" ")[1]) - 1;
+            this.remove(index);
         } else if (input.equals("bye")) {
             this.sayBye();
             exit();

@@ -1,9 +1,17 @@
 public class InputParser {
 
     public static boolean isDone(String input) {
-        return input.length() == 6
+        String[] inputArr = input.split(" ");
+        return inputArr.length == 2
                 && input.substring(0, 4).equals("done")
                 && isNumber(input.substring(5,6));
+    }
+
+    public static boolean isDelete(String input) {
+        String[] inputArr = input.split(" ");
+        return inputArr.length == 2
+                && input.substring(0, 6).equals("delete")
+                && isNumber(input.substring(7,8));
     }
 
     public static boolean isNumber(String input) {
@@ -33,4 +41,5 @@ public class InputParser {
 
         return todoBool || deadlineBool || eventBool;
     }
+
 }

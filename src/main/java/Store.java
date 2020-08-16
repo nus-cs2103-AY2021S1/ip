@@ -28,4 +28,8 @@ public class Store {
     public List getList() {
         return this.list;
     }
+
+    public Task remove(int index) {
+        return this.list.remove(index);
+    };
 }

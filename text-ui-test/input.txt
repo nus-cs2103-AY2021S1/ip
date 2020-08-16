@@ -9,7 +9,10 @@ list
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 blah
+delete 7
 todo
 event 1
 deadline b
+delete a
+delete 10
 bye
