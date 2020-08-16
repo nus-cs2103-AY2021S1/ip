@@ -26,4 +26,11 @@ event
 event project submission
 event /at 1-2pm
 event meeting /at
+list
+delete 1
+list
+delete
+delete1
+delete 0
+delete 1A
 bye
