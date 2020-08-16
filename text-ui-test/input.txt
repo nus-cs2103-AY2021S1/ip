@@ -16,4 +16,9 @@ done 3
 done 3
 deaLine complete chapter 1 /by Monday
 list
+delete 1
+list
+delete a
+delete 8
+list
 bye
