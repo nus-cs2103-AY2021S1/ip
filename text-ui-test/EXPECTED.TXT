@@ -8,6 +8,7 @@ ITS ME:
   888   888  Y88888     888     888 T88b   888     888 888    888 888     888    888
   888   888   Y8888     888     888  T88b  Y88b. .d88P 888   d88P Y88b. .d88P    888
 8888888 888    Y888     888     888   T88b  "Y88888P"  8888888P"   "Y88888P"     888
+I want to know EVERYTHING ABOUT YOU
 __________________________
 __________________________
 Got it. I've added this task:
@@ -39,6 +40,15 @@ __________________________
 2. [D][✓] return book (by: Sunday)
 3. [E][✘] project meeting (at: Mon 2-4pm)
 
+__________________________
+__________________________
+Something is amiss `(OCO)/ !!: Invalid Command Exception
+__________________________
+__________________________
+Something is amiss `(OCO)/ !!: Task number does not exist
+__________________________
+__________________________
+Something is amiss `(OCO)/ !!: No arguments specified for event
 __________________________
 __________________________
 bye
