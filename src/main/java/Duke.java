@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -10,13 +11,12 @@ public class Duke {
     private static String listTasks(ArrayList<Task> tasks) {
         String listOfTasks = "";
         for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-            listOfTasks = listOfTasks + (i + 1) + ". " + (task.getDone() ? "[\u2713] " : "[\u274C] ")
-                    + task.getTaskDescription()
+            listOfTasks = listOfTasks + (i + 1) + ". " + tasks.get(i).toString()
                     + (i == tasks.size() - 1 ? "" : "\n");
         }
         return listOfTasks;
     }
+
     public static void main(String[] args) {
         System.out.println(formatReply("Hello! I'm Duke\nWhat can I do for you?"));
         ArrayList<Task> taskList = new ArrayList<>();
@@ -44,8 +44,8 @@ public class Duke {
 }
 
 class Task {
-    private String taskDescription;
-    private boolean done;
+    protected String taskDescription;
+    protected boolean done;
 
     public Task(String taskDescription) {
         this.taskDescription = taskDescription;
@@ -62,5 +62,50 @@ class Task {
 
     public void completeTask() {
         this.done = true;
+    }
+
+    @Override
+    public String toString() {
+        return (getDone() ? "[\u2713] " : "[\u2718] ") + getTaskDescription();
+    }
+}
+
+class Todo extends Task {
+
+    public Todo(String description) {
+        super(description);
+    }
+
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
+    }
+}
+
+class Deadline extends Task {
+    protected String by;
+
+    public Deadline(String description, String by) {
+        super(description);
+        this.by = by;
+    }
+
+    @Override
+    public String toString() {
+        return "[D]" + super.toString() + " (by: " + by + ")";
+    }
+}
+
+class Event extends Task {
+    protected String at;
+
+    public Event(String description, String at) {
+        super(description);
+        this.at = at;
+    }
+
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + " (at: " + this.at + ")";
     }
 }
