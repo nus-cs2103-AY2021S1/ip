@@ -4,19 +4,25 @@ import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
         Duke dk = new Duke();
-        ArrayList<String> tasks = new ArrayList<String>();
+        ArrayList<Task> tasks = new ArrayList<Task>();
 
         dk.greet();
         Scanner sc = new Scanner( System.in );
         while (sc.hasNext()) {
-            String input = sc.next();
+            String input = sc.nextLine();
             if (input.equals("bye")) {
                 dk.endConversation();
             } else if (input.equals("list")) {
                 dk.showTask(tasks);
+            } else if (input.contains("done")){
+                String no = input.substring(5);
+                int index = Integer.parseInt(no) - 1;
+                Task newTask = tasks.get(index).markAsDone();
+                tasks.set(index, newTask);
             } else {
                 dk.echo(input);
-                tasks.add(input);
+                Task newTask = new Task(input);
+                tasks.add(newTask);
             }
         }
     }
@@ -29,10 +35,11 @@ public class Duke {
         System.out.println("added: " + input);
     }
 
-    public void showTask(ArrayList<String> tasks){
+    public void showTask(ArrayList<Task> tasks){
         int no = 1;
-        for (String task : tasks) {
-            System.out.println(no + ". " + task);
+        for (Task task : tasks) {
+            String state = "[" + task.getStatusIcon() + "] ";
+            System.out.println(state + no + ". " + task.description);
             no++;
         }
     }
