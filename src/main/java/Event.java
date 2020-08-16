@@ -8,7 +8,12 @@ public class Event extends Task {
     }
 
     @Override
+    public String getTypeOfTask() {
+        return "event";
+    }
+
+    @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description + " ----- When: " + this.date;
+        return "[E] [" + this.getStatusIcon() + "] " + this.description + " ----- When: " + this.date;
     }
 }

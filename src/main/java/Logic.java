@@ -32,7 +32,10 @@ public class Logic {
                 String[] command = answer.split(" ", 2);
                 this.store.addToStore(command[0], command[1]);
             } else {
-                System.out.println("Please re-enter in this manner: <type of task> <description>.\n" +
+                String instruction =  "<type of task> <description>" ;
+                if (answers[0].equals(DEADLINE_COMMAND)) instruction = "<type of task> <description> / <due date>";
+                else if (answers[0].equals(EVENT_COMMAND)) instruction = "<type of task> <description> / <date of event>";
+                System.out.println("Please re-enter in this manner: " + instruction + ".\n" +
                         "The description can't be empty.\n" + line);
                 return true;
             }

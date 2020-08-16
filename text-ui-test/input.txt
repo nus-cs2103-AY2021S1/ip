@@ -1,1 +1,19 @@
 hello
+wrong command
+todo
+deadline
+event
+todo something
+todo with 2 words
+deadline wrong
+deadline right / mon
+deadline right more that 2 words/ mon
+event wrong
+event right / tue
+event right more that 2 words/ mon
+list
+done two invalid
+done invalid
+done 2
+list
+bye

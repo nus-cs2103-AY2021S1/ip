@@ -24,7 +24,9 @@ public class Store {
         } else {
             String[] parts_of_task = actual_item.split("/");
             if (parts_of_task.length != 2) {
-                System.out.println("Please reenter your tasks in the format <type of task> <description>/<deadline>\n" + line);
+                String instruction = "deadline";
+                if (type.equals(EVENT)) instruction = "date of event";
+                System.out.println("Please reenter your tasks in the format <type of task> <description>/<" + instruction + ">\n" + line);
                 return;
             } else {
                 String description = parts_of_task[0];
@@ -76,8 +78,8 @@ public class Store {
             Task toComplete = this.allItems.get(real_index);
             toComplete.finishTask();
         } catch (NumberFormatException ex) {
-            System.out.println("I can't seem to understand what task you are deleting.\n " +
-                    "Please let me know in this format: 'done <number of task>'" + line);
+            System.out.println("I can't seem to understand what task you are referring to.\n" +
+                    "Please let me know in this format: done <number of task> \n" + line);
         } catch (IndexOutOfBoundsException ex) {
             System.out.println("Hmm... I don't have a task numbered " + answer + "\n" + line);
         }
