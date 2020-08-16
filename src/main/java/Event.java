@@ -1,5 +1,14 @@
 public class Event extends Task {
-    public Event(String d) {
-        super(d);
+
+    private String date;
+
+    public Event(String desc, String date) {
+        super(desc);
+        this.date = date;
+    }
+
+    @Override
+    public String getStatus() {
+        return Colour.Cyan("[E]") + super.getStatus() + " (at: " + this.date + ")";
     }
 }

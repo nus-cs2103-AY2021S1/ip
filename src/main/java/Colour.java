@@ -7,8 +7,16 @@ public class Colour {
         return "\033[0;32m" + s + "\033[0m";
     }
 
-    public static String Brown(String s) {
-        return "\033[0;33m" + s + "\033[0m";
+    public static String Cyan(String s) {
+        return "\033[0;96m" + s + "\033[0m";
+    }
+
+    public static String Magenta(String s) {
+        return "\033[0;95m" + s + "\033[0m";
+    }
+
+    public static String Yellow(String s) {
+        return "\033[0;93m" + s + "\033[0m";
     }
 
     public static String Blue(String s) {

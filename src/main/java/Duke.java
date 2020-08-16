@@ -76,21 +76,43 @@ public class Duke {
                     break;
                 case "todo":
                 case "deadline":
+
                 case "event":
                     Task newTask;
-                    responses.add("Got it. I've added this task");
+
 
                     String description = String.join(" ", Arrays.copyOfRange(inputSplit, 1, inputSplit.length));
 
                     if (option.equals("todo")) {
                         newTask = new Todo(description);
                     } else if (option.equals("deadline")) {
-                        newTask = new Deadline(description);
+                        String[] split = description.split("/by");
+                        String desc, date;
+
+                        if (split.length < 2) {
+                            responses.add(Colour.Red("Please specify a date"));
+                            break;
+                        }
+
+                        desc = split[0].strip();
+                        date = split[1].strip();
+                        newTask = new Deadline(desc, date);
                     } else {
-                        newTask = new Event(description);
+                        String[] split = description.split("/at");
+                        String desc, date;
+
+                        if (split.length < 2) {
+                            responses.add(Colour.Red("Please specify a date"));
+                            break;
+                        }
+
+                        desc = split[0].strip();
+                        date = split[1].strip();
+                        newTask = new Event(desc, date);
                     }
 
                     Duke.tasks.add(newTask);
+                    responses.add("Got it. I've added this task");
                     responses.add("  " + newTask.getStatus());
                     responses.add("Now you have " + Duke.tasks.size() + " tasks in the list.");
                     break;
