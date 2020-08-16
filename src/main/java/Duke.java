@@ -19,60 +19,56 @@ public class Duke {
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
-            processInput(input, store);
+            try {
+                processInput(input.trim(), store);
+            } catch (DukeException e) {
+                e.printError();
+            }
             input = sc.nextLine();
         }
 
         StringUtils.printWithWrapper(new String[]{"Bye bye! Hope to see you again soon!"}, false);
     }
 
-    private static void processInput(String input, Store store) {
+    private static void processInput(String input, Store store) throws DukeException {
+        if (input.equals("")) {
+            throw new DukeException("Empty input");
+        }
+
         String[] splitInput = input.split(" ");
         String firstInput = splitInput[0];
         String[] sections;
 
         switch (firstInput) {
-            case "done":
-                store.markTaskAsDone(Integer.parseInt(splitInput[1]));
-                return;
-            case "todo":
-                sections = parseInputSections(input, firstInput, null);
-                store.add(sections, firstInput);
-                return;
-            case "deadline":
-                sections = parseInputSections(input, firstInput, "/by");
-                store.add(sections, firstInput);
-                return;
-            case "event":
-                sections = parseInputSections(input, firstInput, "/at");
-                store.add(sections, firstInput);
-                return;
-        }
-
-        switch (input) {
             case "list":
                 store.list();
                 break;
+            case "done":
+                store.markTaskAsDone(Integer.parseInt(splitInput[1]));
+                break;
+            case "todo":
+            case "deadline":
+            case "event":
+                try {
+                    sections = StringUtils.parseInputSections(input, firstInput, getTaskBreakPt(firstInput));
+                    store.add(sections, firstInput);
+                } catch (DukeException e) {
+                    throw e;
+                }
+                break;
             default:
-                store.add(new String[]{input}, "");
+                throw new DukeException("Aww! The first word of your input is wrong!");
         }
     }
 
-    private static String[] parseInputSections(String input, String breakPt1, String breakPt2) {
-        int size = 2;
-        if (breakPt2 == null) {
-            size = 1;
+    private static String getTaskBreakPt(String taskName) {
+        switch (taskName) {
+            case "deadline":
+                return "/by";
+            case "event":
+                return "/at";
+            default:
+                return "";
         }
-        String[] res = new String[size];
-
-        String[] splitByBP1 = input.split(breakPt1 + " ");
-        if (size == 1) {
-            res[0] = splitByBP1[1];
-        } else {
-            String[] splitByBP2 = splitByBP1[1].split(" " + breakPt2 + " ");
-            res[0] = splitByBP2[0];
-            res[1] = splitByBP2[1];
-        }
-        return res;
     }
 }
