@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    private List<String> todos;
+    private List<Task> todos;
 
     public Duke() {
-        todos = new ArrayList<String>();
+        todos = new ArrayList<Task>();
         this.todos = todos;
     }
 
@@ -34,15 +34,25 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while(sc.hasNextLine()) {
             String command = sc.nextLine();
-            if(!command.equals("list") && !command.equals("bye")) {
-                saveToList(command);
-            } else if (!command.equals("bye")){
+            String[] cmd = command.split(" ");
+
+            if (cmd[0].equals("list")) {
                 listItems();
-            } else {
+
+            } else if (cmd[0].equals("done")) {
+                Integer taskNum = Integer.parseInt(cmd[1]);
+                System.out.println(taskNum);
+                markAsDone(taskNum);
+
+            } else if (cmd[0].equals("bye")){
                 sc.close();
-                System.out.println("Bye. Hope to see you again!");
+                System.out.println("baii~ see you!");
                 System.exit(0);
                 return;
+            } else {
+                Task task = new Task(command);
+                saveToList(task);
+
             }
         }
     }
@@ -50,16 +60,26 @@ public class Duke {
     public void listItems() {
         StringBuilder todoList = new StringBuilder("");
         int num = 1;
-        for(String item : this.todos) {
-            todoList.append(num + ". " + item + "\n");
+        for(Task item : this.todos) {
+            todoList.append(num + ". [" + item.getStatusIcon() + "] " + item.toString() + "\n");
             num++;
         }
         System.out.println(todoList);
     }
 
-    public void saveToList(String todo) {
+    public void saveToList(Task todo) {
         this.todos.add(todo);
-        System.out.println("added: " + todo);
+        System.out.println("added: " + todo.toString());
+    }
+
+    public void markAsDone(int taskNum) {
+        int index = taskNum - 1;
+        Task oldTask = this.todos.get(index);
+        Task newTask = new Task(oldTask.toString(), true);
+        this.todos.remove(oldTask);
+        this.todos.add(index, newTask);
+        System.out.println("Nice job! I've marked this task as done : \n"
+                            + "[" + newTask.getStatusIcon() + "] " + newTask.toString());
     }
 
 //    public static void echo() {
