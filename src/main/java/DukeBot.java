@@ -5,6 +5,7 @@ import java.util.stream.IntStream;
 public class DukeBot {
 
     private ArrayList<String> tasks = new ArrayList<String>();
+    private ArrayList<String> taskstype = new ArrayList<String>();
     private ArrayList<Boolean> tasksDone = new ArrayList<Boolean>();
 
     public void horizontalRule(){
@@ -33,8 +34,9 @@ public class DukeBot {
         }
     }
 
-    public void addTask(String task){
+    public void addTask(String task,String type){
         this.tasks.add(task);
+        this.taskstype.add(type);
         this.tasksDone.add(false);
         System.out.println("added: "+task);
     }
@@ -51,13 +53,24 @@ public class DukeBot {
                 horizontalRule();
                 break;
             }
+
+            else if(args[0].equals("todo")){
+                String task = "";
+                for(int i = 1;i<args.length;i++){
+                    task+=args[i]+" ";
+                }
+                addTask(task,"[T]");
+            }
+            else if(args[0].equals("deadline")){}
+            else if(args[0].equals("event")){}
+
             else if(currInput.equals("list")){
                 for (int i = 0;i< this.tasks.size();i++){
                     String checkBox = "[✗]";
                     if(this.tasksDone.get(i)){
                         checkBox = "[✓]";
                     }
-                    System.out.println("" + (i+1) + "." + checkBox + " "+ this.tasks.get(i));
+                    System.out.println("" + (i+1) + "." + this.taskstype.get(i) +checkBox + " "+ this.tasks.get(i));
                 }
             }
             else if(args[0].equals("done")){
@@ -67,7 +80,7 @@ public class DukeBot {
                 System.out.println( "[✓] "+ this.tasks.get(index));
             }
             else{
-                addTask(currInput);
+                addTask(currInput,"[T]");
             }
             horizontalRule();
 
