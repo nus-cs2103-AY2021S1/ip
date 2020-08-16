@@ -22,28 +22,17 @@ public class Duke {
 
         boolean stop = false;
         Scanner sc = new Scanner(System.in);
-        List<String> list = new ArrayList<>();
+        List<Task> list = new ArrayList<>();
         while (!stop) {
             String input = sc.nextLine();
             BotClass bot = new BotClass();
-            if (input.equals("bye")) {
-                new ByeFunction().execute("", bot, list);
-            } else if (input.equals("list")) {
-                new ListFunction().execute("", bot, list);
-            } else {
-                new AddFunction().execute(input, bot, list);
-            }
-
+            processArgs(input).execute(bot, list);
             say(bot.getLines());
             if (bot.stopped()) {
                 stop = true;
             }
         }
         sc.close();
-    }
-
-    private void say(String string) {
-        say(Arrays.asList(string));
     }
 
     private void say(List<String> strings) {
@@ -53,5 +42,23 @@ public class Duke {
         }
         System.out.println(SEPARATOR);
         System.out.println();
+    }
+
+    private void say(String string) {
+        say(Arrays.asList(string));
+    }
+
+    private Function processArgs(String input) {
+        if (input.equals("bye")) {
+            return new ByeFunction();
+        } else if (input.equals("list")) {
+            return new ListFunction();
+        } else if (input.startsWith("done")) {
+            String indexString = input.split(" ", 2)[1];
+            int index = Integer.valueOf(indexString) - 1;
+            return new DoneFunction(index);
+        } else {
+            return new AddFunction(new Task(input));
+        }
     }
 }
