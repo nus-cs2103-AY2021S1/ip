@@ -51,6 +51,27 @@ public class Duke {
         }
     }
 
+    static class DukeException extends Exception {
+        public DukeException(String message) {
+            super(message);
+        }
+
+        static DukeException empty(String type) {
+            String message = "The description of "+ type + " cannot be empty.";
+            return new DukeException(message);
+        }
+
+        static DukeException invalid(String order) {
+            String message = "Sorry, '" + order + "' is not a recognised order.";
+            return new DukeException(message);
+        }
+
+        static DukeException outOfBounds(int index) {
+            String message = "There is no task number " + index + " , there are only " + storage.size() +" task(s).";
+            return new DukeException(message);
+        }
+    }
+
     // Task storage
     static ArrayList<Task> storage = new ArrayList<>();
 
@@ -104,7 +125,7 @@ public class Duke {
         line();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String logo =
                           " ____             _     \n"
                         + "|  _ \\           | |    \n"
@@ -135,17 +156,28 @@ public class Duke {
                 if (firstWord.equals("done")) {
                     String index = multiWord.next();
                     int intIndex = Integer.parseInt(index);
-                    markComplete(intIndex - 1);
+                    if (intIndex <= storage.size()) {
+                        markComplete(intIndex - 1);
+                    } else {
+                        // I don't like how the program exits on throw
+                        throw DukeException.outOfBounds(intIndex);
+                    }
                 }
                 // it's a task
                 else if (firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event")) {
                     // whitespace in front of nextLine
-                    String remainingWords = multiWord.nextLine().trim();
-                    store(firstWord, remainingWords);
+                    if (multiWord.hasNextLine()){
+                        String remainingWords = multiWord.nextLine().trim();
+                        store(firstWord, remainingWords);
+                    } else {
+                        // I don't like how the program exits on throw
+                        throw DukeException.empty(firstWord);
+                    }
                 }
-                // no special order, this shouldn't happen anymore
+                // invalid order
                 else {
-                    System.out.println("invalid order");
+                    // I don't like how the program exits on throw
+                    throw DukeException.invalid(output);
                 }
             }
         }
