@@ -15,7 +15,7 @@ public class Duke {
             printTopLine();
             System.out.println("Bye. Hope to see you again soon!");
             printBottomLine();
-        return;
+            return;
         }
         else if (word.equals("list")) {
             printTopLine();
@@ -35,10 +35,57 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done: \n" + nextTask);
                 printBottomLine();
             }
-            catch (Exception e) {
+            catch (IndexOutOfBoundsException e) {
                 return;
             }
         }
+        else if (word.startsWith("todo")) {
+            Task toDo = new Todo(word);
+            tasks.add(toDo);
+            printTopLine();
+            System.out.println("Got it. I've added this task:");
+            System.out.println(toDo);
+            String numberTasks = String.format("Now you have %s %s in the list.", tasks.size(), tasks.size() == 1 ? "task" : "tasks");
+            System.out.println(numberTasks);
+            printBottomLine();
+        }
+        else if (word.startsWith("deadline") || word.startsWith("event")) {
+            int index = word.indexOf(' ');
+            boolean isDeadline = word.startsWith("deadline");
+            if (index == -1 || index == word.length() - 1) {
+                //nothing after the space
+                return;
+            }
+            //get stuff after the space if there are still characters after the space
+            String content = word.substring(word.indexOf(' ') + 1);
+            index = content.indexOf('/');
+            if (index == -1 || index == content.length() - 1) {
+                //nothing after the slash
+                return;
+            }
+            //if there are words after the slash
+            String taskName = content.substring(0,index);
+            String keyword = content.substring(index + 1, index + 3);
+            boolean matches = isDeadline && keyword.equals("by") || !isDeadline && keyword.equals("at");
+            if (!matches) {
+                //no "by" or "at"
+                return;
+            }
+            try {
+                String time = content.substring(index + 4);
+                Task newTask = isDeadline ? new Deadline(taskName, time) : new Event(taskName, time);
+                tasks.add(newTask);
+                printTopLine();
+                System.out.println("Got it. I've added this task:");
+                System.out.println(newTask);
+                String numberTasks = String.format("Now you have %s %s in the list.", tasks.size(), tasks.size() == 1 ? "task" : "tasks");
+                System.out.println(numberTasks);
+                printBottomLine();
+            } catch (IndexOutOfBoundsException e) {
+                return;
+            }
+        }
+
         else {
             Task newTask = new Task(word);
             tasks.add(newTask);
