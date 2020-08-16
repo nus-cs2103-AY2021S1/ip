@@ -3,5 +3,6 @@ event second task /at Aug 20th 2pm
 deadline 3rd task /by Saturday 4pm
 done 1
 done 2
+delete 3
 list
 bye

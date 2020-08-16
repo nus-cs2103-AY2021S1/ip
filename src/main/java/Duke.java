@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Duke {
@@ -23,7 +22,7 @@ public class Duke {
         // Loop program until command 'bye' is entered as input.
         while (true) {
             try {
-                System.out.print("Enter input: ");
+                System.out.println("Enter input: ");
                 input = sc.nextLine();
                 if (input.equals("bye")) {
                     System.out.println("Bye, see you soon. Exiting...");
@@ -38,6 +37,14 @@ public class Duke {
                         addTask(d);
                     } else {
                         throw new DukeException("The description of a deadline cannot be empty.");                    }
+                } else if (input.length() >= 6 && input.substring(0, 6).equals("delete")) {
+                    if (input.substring(6).length() > 1) {
+                        String numString = input.substring(7);
+                        int entryNum = Integer.parseInt(numString);
+                        deleteTask(entryNum);
+                    } else {
+                        throw new DukeException("Invalid number for delete command.");
+                    }
                 } else if (input.length() >= 5 && input.substring(0, 5).equals("event")) {
                     if (input.substring(5).length() > 1) {
                         String description = input.substring(6);
@@ -52,10 +59,14 @@ public class Duke {
                     // Navigate to either done or to-do.
                     switch (command) {
                         case "done":
-                            // For processing "done" command with the corresponding integer value.
-                            String numString = input.substring(5);
-                            int entryNum = Integer.parseInt(numString);
-                            markEntryDone(entryNum);
+                            if (input.substring(4).length() > 1) {
+                                // For processing "done" command with the corresponding integer value.
+                                String numString = input.substring(5);
+                                int entryNum = Integer.parseInt(numString);
+                                markTaskDone(entryNum);
+                            } else {
+                                throw new DukeException("Invalid number for done command.");
+                            }
                             break;
                         case "todo":
                             if (input.substring(4).length() > 1) {
@@ -110,7 +121,7 @@ public class Duke {
      *
      * @param taskNum The task number to mark as done.
      */
-    public static void markEntryDone(int taskNum) {
+    public static void markTaskDone(int taskNum) {
         try {
             if (taskNum < 0 || taskNum > taskList.size()) {
                 throw new DukeException("Task number does not exist.");
@@ -122,6 +133,21 @@ public class Duke {
             }
         } catch (DukeException e) {
             System.out.println("Exception occurred while marking task as done: " + e);
+        }
+    }
+
+    public static void deleteTask(int taskNum) {
+        try {
+            if (taskNum > 0 && taskNum <= taskList.size()) {
+                System.out.println("Noted. I have removed this task:");
+                System.out.println(taskList.get(taskNum - 1));
+                taskList.remove(taskNum - 1);
+                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+            } else {
+                throw new DukeException("Invalid task number for current task list.");
+            }
+        } catch (DukeException e) {
+            System.out.println("Exception occurred while deleting task: " + e);
         }
     }
 
@@ -150,14 +176,14 @@ public class Duke {
             StringBuilder sb = new StringBuilder();
             for (int j = 0; j < indexToStop; j++) {
                 sb.append(arr[j]);
-                sb.append(" ");
+                if (j != indexToStop - 1) sb.append(" ");
             }
             result[0] = sb.toString();
 
             sb = new StringBuilder();
             for (int k = indexToStop + 1; k < arr.length; k++) {
                 sb.append(arr[k]);
-                sb.append(" ");
+                if (k != arr.length - 1)  sb.append(" ");
             }
             result[1] = sb.toString();
         } catch (DukeException e) {
