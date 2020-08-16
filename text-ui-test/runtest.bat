@@ -1,21 +1,28 @@
 @ECHO OFF
 
+SET MY_PATH = C:\D\Univ files\Sem 3\CS 2103T\IP\ip
+
+
 REM create bin directory if it doesn't exist
-if not exist ..\bin mkdir ..\bin
+if not exist "%MY_PATH%\bin" mkdir "%MY_PATH%\bin"
 
 REM delete output from previous run
 del ACTUAL.TXT
 
 REM compile the code into the bin folder
-javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\Duke.java
+javac  -cp "%MY_PATH%\src" -Xlint:none -d "%MY_PATH%\bin" "..\src\main\java\Task.java" "..\src\main\java\DeadlineTask.java" "..\src\main\java\TodoTask.java"  "..\src\main\java\EventTask.java" "..\src\main\java\Duke.java"
+
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
+    PAUSE
     exit /b 1
 )
 REM no error here, errorlevel == 0
 
 REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
+java -classpath "%MY_PATH%\bin" Duke < input.txt > ACTUAL.TXT
 
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT
+
+PAUSE

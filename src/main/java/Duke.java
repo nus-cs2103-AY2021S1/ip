@@ -23,7 +23,7 @@ public class Duke {
     static final String TODO_COMMAND = "todo";
     static final String DEADLINE_COMMAND =  "deadline";
     static final String EVENT_COMMAND = "event";
-    static final String LINE = "    _____________________________________________________________________\n";
+    static final String LINE = "     ____________________________________________________________\n";
     static final String SINGLE_TAB = "  ";
     static final String DOUBLE_TAB = "      ";
 
@@ -74,8 +74,8 @@ public class Duke {
         String taskDetails = input.split("\\s",2)[1];
         String taskDescription = taskDetails.split("/",2)[0];
         String taskTime = taskDetails.split("/",2)[1];
-        final String AT = taskTime.split("\\s")[0];
-        final String TIME = taskTime.split("\\s")[1];
+        final String AT = taskTime.split("\\s",2)[0];
+        final String TIME = taskTime.split("\\s",2)[1];
         EventTask eventTask = new EventTask(taskDescription);
         list.add(eventTask);
         System.out.println(LINE + DOUBLE_TAB + "Got it. I've added this task:\n" +
