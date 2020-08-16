@@ -22,8 +22,12 @@ public class Duke {
         try {
             int index = Integer.parseInt(strIndex);
 
-            if (index > listLen && command.equals("done")) {
-                throw new DukeException("I don't have this work to mark as Done :>");
+            if (index > listLen) {
+                if(command.equals("done")){
+                    throw new DukeException("I don't have this work to mark as Done :>");
+                } else if (command.equals("delete")){
+                    throw new DukeException("I don't have this work to Delete @_@");
+                }
             } else if (splitNum < 2) {
                 throw new DukeException("HEY!!! Don't be stingy give me more information >.<");
             }
@@ -55,6 +59,11 @@ public class Duke {
                         infoValidator(command, splitOrder.length, false);
                         int doneTaskId = indexValidator(command, splitOrder[1], lst.workListLen(), splitOrder.length);
                         output = printDesign(lst.updateTaskStatus(doneTaskId));
+                        break;
+                    case "delete":
+                        infoValidator(command, splitOrder.length, false);
+                        int deleteTaskId = indexValidator(command, splitOrder[1], lst.workListLen(), splitOrder.length);
+                        output = printDesign(lst.deleteWork(deleteTaskId));
                         break;
                     case "todo":
                         infoValidator(command, splitOrder.length, false);

@@ -40,4 +40,14 @@ public class WorkList {
     public int workListLen() {
         return this.workList.size();
     }
+
+    public String deleteWork(int taskId) {
+        Task tsk = this.workList.get(taskId - 1);
+        this.workList.remove(taskId - 1);
+        return "Noted. I've removed this task: \n"
+                + tsk
+                + "\nNow you have "
+                + this.workList.size()
+                + " tasks in the list.";
+    }
 }
