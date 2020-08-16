@@ -32,18 +32,36 @@ public class Chat {
             list();
         } else if (input.length() >= 6 && input.substring(0, 5).equals("done ")) {
             markAsDone(input);
-        } else if (!input.isEmpty()) {
-            addToList(new Task(input));
+        } else if (input.length() >= 6 && input.substring(0, 5).equals("todo ")) {
+            addToList(new Todo(input));
+        } else if (input.length() >= 10 && input.substring(0, 9).equals("deadline ")) {
+            if (input.contains(" /by ")) {
+                addToList(new Deadline(input));
+            } else {
+                invalidFormatHandler(Deadline.FORMAT);
+            }
+        } else if (input.length() >= 7 && input.substring(0, 6).equals("event ")) {
+            if (input.contains(" /at ")) {
+                addToList(new Event(input));
+            } else {
+                invalidFormatHandler(Event.FORMAT);
+            }
         }
     }
 
     void list() {
-        System.out.println(list);
+        if (list.size() <= 0) {
+            System.out.println("    your list is empty!\n");
+        } else {
+            System.out.println("    here's your list:\n" + list);
+        }
     }
 
-    void addToList(Task item) {
-        list.add(item);
-        System.out.println("    ok! I've added this task:\n      " + item + "\n");
+    void addToList(Task task) {
+        list.add(task);
+        int numOfTasks = list.size();
+        System.out.println(String.format("    ok! I've added this task:\n      %s\n    you now have %d task"
+                + (numOfTasks > 1 ? "s" : "") + " in your list\n", task, numOfTasks));
     }
 
     void markAsDone(String input) {
@@ -60,5 +78,9 @@ public class Chat {
     void exit() {
         System.out.println("    bye! see you soon!");
         isRunning = false;
+    }
+
+    void invalidFormatHandler(String format) {
+        System.out.println(String.format("    invalid format! please follow '%s'\n", format));
     }
 }

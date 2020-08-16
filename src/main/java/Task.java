@@ -1,5 +1,5 @@
 public class Task {
-    private final String name;
+    protected final String name;
     private boolean isDone;
 
     Task(String name) {
@@ -13,10 +13,5 @@ public class Task {
 
     void markAsDone() {
         isDone = true;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), name);
     }
 }
