@@ -57,7 +57,12 @@ class ChatBot {
             if (input.equals("list")) {
                 showList();
             } else {
-                add(input);
+                String[] inputArray = input.split(" ", 2); // separates the first word from the rest
+                if (inputArray[0].equals("done")) {
+                    makeTaskDone(inputArray[1]);
+                } else {
+                    add(input);
+                }
             }
         }
         sc.close();
@@ -72,12 +77,37 @@ class ChatBot {
                 + "Here are your tasks!"
                 + ConsoleColors.RESET.getColor());
         for (int i = 0; i < toDoList.size(); i++) {
-            System.out.println(ConsoleColors.BLUE_BOLD.getColor()
+            System.out.printf("%-20s\n",
+                    ConsoleColors.BLUE_BOLD.getColor()
                     + (i+1) + ". "
-                    + "\t"
-                    + toDoList.get(i));
+                    + toDoList.get(i)
+                    + ConsoleColors.RESET.getColor());
         }
         System.out.println();
+    }
+
+    /**
+     * Produce a done Task
+     * @param taskString the position of the task in the arraylist
+     */
+    void makeTaskDone(String taskString) {
+        try {
+            int taskNumber = Integer.parseInt(taskString);
+            if (taskNumber <= 0 || taskNumber > this.toDoList.size()) {
+                System.out.println("Sorry, no such task!");
+                return;
+            }
+
+            Task currentTask = this.toDoList.get(taskNumber - 1);
+            Task newTask = currentTask.markAsDone();
+            this.toDoList.set(taskNumber - 1, newTask);
+            System.out.println("Sugoi! This task is done!");
+            System.out.println(newTask);
+
+        } catch(NumberFormatException e) {
+            System.out.println(e);
+            System.out.println(taskString + " is not an integer!");
+        }
     }
 
     /**

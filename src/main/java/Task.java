@@ -29,9 +29,11 @@ public class Task {
      * @return whether or not a task is done
      */
     String getStatusIcon() {
-        return (isDone
+        return ConsoleColors.BLUE.getColor() + "[" + ConsoleColors.RESET.getColor()
+            + (isDone
                 ? ConsoleColors.GREEN.getColor() + "\u2713" + ConsoleColors.RESET.getColor()
-                : ConsoleColors.RED.getColor() + "\u2718" + ConsoleColors.RESET.getColor()); //return tick or X symbols
+                : ConsoleColors.RED.getColor() + "\u2718" + ConsoleColors.RESET.getColor()) //return tick or X symbols
+            + ConsoleColors.BLUE.getColor() + "]" + ConsoleColors.RESET.getColor();
     }
 
     /**
