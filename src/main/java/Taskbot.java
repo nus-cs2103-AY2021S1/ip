@@ -47,29 +47,42 @@ public class Taskbot {
     }
 
     public void addEventTask(String input) {
-        //splits the input according to whitespace
-        String[] parsedString = input.split("/at");
+        try {
+            //splits the input according to whitespace
+            String[] parsedString = input.split("/at");
 
-        //Makes a new Event task
-        Event newTask = new Event(parsedString[0], parsedString[1].stripLeading());
-        //Adds the new task to the list
-        tasks.add(newTask);
-        //Informs the user that the task has been added
-        borderString("I have added an Event:\n" + newTask +
-                "\n" + listTaskSize());
+            if (parsedString.length != 2) {
+                throw new WrongFormatException("Wrong format for event. Please ensure that you provide a description and time, delimited by /at");
+            }
+            //Makes a new Event task
+            Event newTask = new Event(parsedString[0], parsedString[1].stripLeading());
+            //Adds the new task to the list
+            tasks.add(newTask);
+            //Informs the user that the task has been added
+            borderString("I have added an Event:\n" + newTask +
+                    "\n" + listTaskSize());
+        } catch (WrongFormatException e) {
+            handleException(e);
+        }
     }
 
     public void addDeadlineTask(String input) {
-        //splits the input according to whitespace
-        String[] parsedString = input.split("/by");
-
-        //Makes a new Deadline task
-        Deadline newTask = new Deadline(parsedString[0], parsedString[1].stripLeading());
-        //Adds the new task to the list
-        tasks.add(newTask);
-        //Informs the user that the task has been added
-        borderString("I have added a Deadline:\n" + newTask +
-                "\n" + listTaskSize());
+        try {
+            //splits the input according to whitespace
+            String[] parsedString = input.split("/by");
+            if (parsedString.length != 2) {
+                throw new WrongFormatException("Wrong format for deadline. Please ensure that you provide a description and time, delimited by /by");
+            }
+            //Makes a new Deadline task
+            Deadline newTask = new Deadline(parsedString[0], parsedString[1].stripLeading());
+            //Adds the new task to the list
+            tasks.add(newTask);
+            //Informs the user that the task has been added
+            borderString("I have added a Deadline:\n" + newTask +
+                    "\n" + listTaskSize());
+        } catch (WrongFormatException e) {
+            handleException(e);
+        }
     }
 
     /**
@@ -83,6 +96,12 @@ public class Taskbot {
      * Lists all the tasks added so far
      */
     public void listTasks() {
+        //If tasks is empty
+        if (tasks.size() == 0) {
+            borderString("You currently have no tasks pending.");
+            return;
+        }
+
         StringBuilder sb = new StringBuilder("These are the following task(s) to complete:\n");
         //size of the tasks
         int size = tasks.size();
@@ -95,20 +114,42 @@ public class Taskbot {
         borderString(sb.toString());
     }
 
+    /**
+     * Completes a task in the given index
+     * @param taskIndex
+     */
     public void completeTask(int taskIndex) {
-        tasks.get(taskIndex).completeTask();
-        String message = "Understood. The following task is now marked as done:\n";
-        message += "    " + tasks.get(taskIndex);
-        borderString(message);
+        try {
+            if (tasks.get(taskIndex).getStatusIcon().equals("\u2713")) {
+                throw new TaskAlreadyCompleteException("The specified task has already been completed.");
+            }
+            tasks.get(taskIndex).completeTask();
+            String message = "Understood. The following task is now marked as done:\n";
+            message += "    " + tasks.get(taskIndex);
+            borderString(message);
+        } catch (IndexOutOfBoundsException e) {
+            InvalidIndexException iie = new InvalidIndexException("You have specified an index not within the ranges of the list. Please try again.");
+            handleException(iie);
+        } catch (TaskAlreadyCompleteException e) {
+            handleException(e);
+        }
     }
 
     /**
      * Helper function to wrap the given string in lines
-     * @param s
+     * @param s the string to be wrapped
      */
     private void borderString(String s) {
         System.out.println("----------------------------------------------");
         System.out.println(s);
         System.out.println("----------------------------------------------\n");
+    }
+
+    /**
+     * Helper function to print the error message of the exception
+     * @param e the exception
+     */
+    public void handleException(Exception e) {
+        borderString(e.getMessage());
     }
 }

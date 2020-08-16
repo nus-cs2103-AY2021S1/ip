@@ -7,9 +7,9 @@ public class Main {
     //Commands for the bot to execute
     public enum Command {
         LIST, DONE, NONE,
-        TODO, DEADLINE, EVENT
+        TODO, DEADLINE, EVENT, EXIT
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         //The logo to be used for TaskBot
         String logo = "___________              __   __________        __   \n" +
                 "\\__    ___/____    _____|  | _\\______   \\ _____/  |_ \n" +
@@ -29,63 +29,88 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         Command cmd = Command.NONE;
-        //Loops while the user does not input "bye"
-        label:
-        while (sc.hasNextLine()) {
-            int taskIndex = -1;
-            String input = sc.nextLine();
+            //Loops while the user does not input "bye"
+            label:
+            while (sc.hasNextLine()) {
+                try {
+                int taskIndex = -1;
+                String input = sc.nextLine();
 
-            //Splits the string to find keywords for commands
-            String[] key = input.split(" ", 2);
+                //Splits the string to find keywords for commands
+                String[] key = input.split(" ", 2);
+                cmd = getCommand(key[0]);
 
-            switch (key[0]) {
-                case "bye":
-                    break label;
-                case "list":
-                    cmd = Command.LIST;
-                    break;
-                case "done":
-                    cmd = Command.DONE;
-                    taskIndex = Integer.parseInt(key[1]) - 1;
-                    break;
-                case "todo":
-                    cmd = Command.TODO;
-                    break;
-                case "deadline":
-                    cmd = Command.DEADLINE;
-                    break;
-                case "event":
-                    cmd = Command.EVENT;
-                    break;
+                //instructs the bot given the command, throwing the required exceptions when necessary
+                switch (cmd) {
+                    case LIST:
+                        tb.listTasks();
+                        break;
+                    case DONE:
+                        if (key.length == 1 || key[1].strip().length() == 0) {
+                            throw new EmptyArgumentException("Please enter the index of the task you wish to complete.");
+                        }
+                        taskIndex = Integer.parseInt(key[1]) - 1;
+                        tb.completeTask(taskIndex);
+                        break;
+                    case TODO:
+                        if (key.length == 1 || key[1].strip().length() == 0) {
+                            throw new EmptyArgumentException("The description of a todo cannot be empty. Please input a valid description.");
+                        }
+                        tb.addTodoTask(key[1]);
+                        break;
+                    case EVENT:
+                        if (key.length == 1 || key[1].strip().length() == 0) {
+                            throw new EmptyArgumentException("The description of an event cannot be empty. Please input a valid description.");
+                        }
+                        tb.addEventTask(key[1]);
+                        break;
+                    case DEADLINE:
+                        if (key.length == 1 || key[1].strip().length() == 0) {
+                            throw new EmptyArgumentException("The description of a deadline cannot be empty. Please input a valid description.");
+                        }
+                        tb.addDeadlineTask(key[1]);
+                        break;
+                    case NONE:
+                        throw new InvalidCommandException("That was not a valid command. Please try again.");
+                    case EXIT:
+                        break label;
+                }
+                //Reset the cmd for the next user input
+                cmd = Command.NONE;
+                } catch (NumberFormatException e) {
+                    InvalidIndexException wfe = new InvalidIndexException("Please enter a valid index for the task.");
+                    tb.handleException(wfe);
+                } catch (InvalidCommandException | EmptyArgumentException e) {
+                    tb.handleException(e);
+                }
             }
-
-            //instructs the bot given the command
-            switch (cmd) {
-                case LIST:
-                   tb.listTasks();
-                   break;
-                case DONE:
-                    tb.completeTask(taskIndex);
-                    break;
-                case TODO:
-                    tb.addTodoTask(key[1]);
-                    break;
-                case EVENT:
-                    tb.addEventTask(key[1]);
-                    break;
-                case DEADLINE:
-                    tb.addDeadlineTask(key[1]);
-                    break;
-                case NONE:
-                    System.out.println("That was not a valid command. Please try again.");
-                    break;
-            }
-            //Reset the cmd for the next user input
-            cmd = Command.NONE;
-        }
 
         //The bot says bye and the program terminates
         tb.sayBye();
+    }
+
+    /**
+     * Returns the proper Command given the input
+     * @param input String to be checked
+     * @return a Command enum
+     */
+    public static Command getCommand(String input) {
+        switch (input) {
+            case "bye":
+                return Command.EXIT;
+            case "list":
+                return Command.LIST;
+            case "done":
+                return Command.DONE;
+            case "todo":
+                return Command.TODO;
+            case "deadline":
+                return Command.DEADLINE;
+            case "event":
+                return Command.EVENT;
+            default:
+                return Command.NONE;
+        }
     }
 
 }
