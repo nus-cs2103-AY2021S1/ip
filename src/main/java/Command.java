@@ -12,7 +12,6 @@ public enum Command {
         this.name = name;
     }
 
-
     public boolean is(String cmd) {
         return cmd.startsWith(this.name);
     }

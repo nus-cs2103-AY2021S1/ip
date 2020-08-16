@@ -31,16 +31,16 @@ public class Duke {
         System.out.println("Bye! Hope to never see you again!");
     }
 
-    public void done(String cmd) {
+    public void done(String cmd) throws DukeException {
         String[] cmdParts = cmd.split(" ");
         try {
             this.done(Integer.parseInt(cmdParts[1]));
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            System.out.print("Input format is wrong. Please make sure it is `done <task-index>`");
+            throw new DukeException("Input format is wrong. Please make sure it is `done <task-index>`");
         }
     }
 
-    public void done(int index) {
+    public void done(int index) throws DukeException {
         try {
             if (index == 0) {
                 // Task list is 1-indexed, 0 is an out-of-bound value
@@ -51,14 +51,16 @@ public class Duke {
             task.setDone(true);
             System.out.printf("Good job. This task is marked as done:\n %s%n", task);
         } catch (IndexOutOfBoundsException e) {
-            System.out.printf("Task at index %d doesn't exist%n", index);
+            StringBuilder message = new StringBuilder(String.format("Task at index %d doesn't exist%n", index));
             if (this.tasks.size() == 0) {
-                System.out.println("There are no tasks currently.");
+                message.append("\nThere are no tasks currently.");
             } else {
-                System.out.printf(
-                        "There are %d tasks currently. Please a number between 1 and %d inclusive%n",
-                        this.getNumberOfTasks(), this.getNumberOfTasks());
+                message.append(String.format(
+                        "There are %d tasks currently. Please a number between 1 and %d inclusive.",
+                        this.getNumberOfTasks(), this.getNumberOfTasks()));
             }
+
+            throw new DukeException(message.toString());
         }
     }
 
@@ -67,25 +69,45 @@ public class Duke {
         System.out.printf("Got it. I've added this task:%n %s%n", task);
     }
 
-    public void event(String cmd) {
-        String task = cmd.split(Command.EVENT.toString() + " ")[1];
-        String[] taskParts = task.split(" /at ", 2);
+    public static String getTaskDescription(Command type, String cmd) throws DukeException {
+        String[] cmdParts = cmd.split(type.toString() + " ", 2);
+
+        if (cmdParts.length != 2 || cmdParts[1].equals("")) {
+            throw new DukeException(String.format("Error! The description of a %s cannot be empty.", type));
+        }
+
+        return cmdParts[1];
+    }
+
+    public void event(String cmd) throws DukeException {
+        String description = Duke.getTaskDescription(Command.EVENT, cmd);
+        String[] taskParts = description.split(" /at ", 2);
+
+        if (taskParts.length != 2) {
+            throw new DukeException(String.format("Error! The description of a %s is missing a date.", Command.EVENT));
+        }
+
         String name = taskParts[0];
         String date = taskParts[1];
         this.addTask(new Event(name, date));
     }
 
-    public void deadline(String cmd) {
-        String task = cmd.split(Command.DEADLINE.toString() + " ")[1];
-        String[] taskParts = task.split(" /by ", 2);
+    public void deadline(String cmd) throws DukeException {
+        String description = Duke.getTaskDescription(Command.DEADLINE, cmd);
+        String[] taskParts = description.split(" /by ", 2);
+
+        if (taskParts.length != 2) {
+            throw new DukeException(String.format("Error! The description of a %s is missing a date.", Command.DEADLINE));
+        }
+
         String name = taskParts[0];
         String date = taskParts[1];
         this.addTask(new Deadline(name, date));
     }
 
-    public void todo(String cmd) {
-        String name = cmd.split(Command.TODO.toString() + " ")[1];
-        this.addTask(new ToDo(name));
+    public void todo(String cmd) throws DukeException {
+        String description = Duke.getTaskDescription(Command.TODO, cmd);
+        this.addTask(new ToDo(description));
     }
 
     public static void main(String[] args) {
@@ -96,18 +118,23 @@ public class Duke {
         String cmd = sc.nextLine();
 
         while (!Command.BYE.is(cmd)) {
-            if (Command.LIST.is(cmd)) {
-                duke.list();
-            } else if (Command.DONE.is(cmd)) {
-                duke.done(cmd);
-            } else if (Command.TODO.is(cmd)) {
-                duke.todo(cmd);
-            } else if (Command.DEADLINE.is(cmd)) {
-                duke.deadline(cmd);
-            } else if (Command.EVENT.is(cmd)) {
-                duke.event(cmd);
+            try {
+                if (Command.LIST.is(cmd)) {
+                    duke.list();
+                } else if (Command.DONE.is(cmd)) {
+                    duke.done(cmd);
+                } else if (Command.TODO.is(cmd)) {
+                    duke.todo(cmd);
+                } else if (Command.DEADLINE.is(cmd)) {
+                    duke.deadline(cmd);
+                } else if (Command.EVENT.is(cmd)) {
+                    duke.event(cmd);
+                } else {
+                    throw new DukeException("This command is invalid.");
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
-
             cmd = sc.nextLine();
         }
 
