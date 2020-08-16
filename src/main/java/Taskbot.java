@@ -34,7 +34,7 @@ public class Taskbot {
      * Method invoked to say goodbye to the user
      */
     public void sayBye() {
-        String message = "Bye! Hope to see you again soon!!";
+        String message = "Goodbye, I await your next visit.";
         borderString(message);
     }
 
@@ -43,17 +43,19 @@ public class Taskbot {
      * @param task The task to be added
      */
     public void addTask(String task) {
+        //Makes a new task
+        Task newTask = new Task(task);
         //Adds a new task to the list
-        tasks.add(new Task(task));
+        tasks.add(newTask);
         //Informs the user that the task has been added
-        borderString("added: " + task);
+        borderString("I have added: " + newTask);
     }
 
     /**
      * Lists all the tasks added so far
      */
     public void listTasks() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("These are the following task(s) to complete:\n");
         //size of the tasks
         int size = tasks.size();
         //Builds the list of tasks
@@ -65,13 +67,21 @@ public class Taskbot {
         borderString(sb.toString());
     }
 
+    public void completeTask(int taskIndex) {
+        tasks.get(taskIndex).completeTask();
+        String message = "Understood. The following task is now marked as done:\n";
+        message += "    " + tasks.get(taskIndex);
+        borderString(message);
+    }
+
     /**
      * Helper function to wrap the given string in lines
      * @param s
      */
     private void borderString(String s) {
-        System.out.println("------------------------------------------");
+        System.out.println("----------------------------------------------");
         System.out.println(s);
-        System.out.println("------------------------------------------\n");
+        System.out.println("----------------------------------------------\n");
     }
+
 }
