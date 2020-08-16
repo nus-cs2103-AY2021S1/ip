@@ -7,11 +7,27 @@ public class Store {
         this.nextIndx = 0;
     }
 
-    public void add(String str) {
-        Task newTask = new Task(str);
+    private Task processTaskType(String[] inputs, String type) {
+        switch (type) {
+            case "todo":
+                return new TodoTask(inputs[0]);
+            case "deadline":
+                return new DeadlineTask(inputs[0], inputs[1]);
+            case "event":
+                return new EventTask(inputs[0], inputs[1]);
+            default:
+                return new Task(inputs[0]);
+        }
+    }
+
+    public void add(String[] inputs, String type) {
+        Task newTask = processTaskType(inputs, type);
         taskStore[nextIndx] = newTask;
-        StringUtils.printWithWrapper(new String[]{"Added: " + str}, false);
         nextIndx++;
+        StringUtils.printWithWrapper(new String[]{
+                "Sure! I have added the following task to your list: ",
+                newTask.toString(),
+                "There are now " + nextIndx + " tasks in your list!"}, false);
     }
 
     public void markTaskAsDone(int i) {
