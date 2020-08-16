@@ -15,4 +15,10 @@ event
 event project meeting
 event project meeting /at
 hello
+delete 3
+delete 1
+list
+delete
+delete 9
+delete u
 bye

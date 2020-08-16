@@ -57,6 +57,26 @@ public class TaskManager {
         }
     }
 
+    public static void deleteTask(String command) throws DukeException{
+        String[] deleteCommand = command.split("\\W+");
+        if (deleteCommand.length == 1) {
+            throw new DukeException("Oh no! You must DELETE this! (The description of delete can't be empty!)");
+        } else {
+            try {
+                int i = parseInt(command.split(" ")[1]);
+                Task deleteTask = list.get(i - 1);
+                list.remove(i - 1);
+                System.out.println("This task has been deleted from the list:");
+                System.out.println(deleteTask);
+                System.out.println("You now have " + list.size() + " tasks.");
+            } catch (IndexOutOfBoundsException e) {
+                indexOutOfBounds();
+            } catch (NumberFormatException e) {
+                numberFormat();
+            }
+        }
+    }
+
     public static void handleTodo(String command) throws DukeException {
         String[] todoCommand = command.split("\\W+");
         if (todoCommand.length == 1) {
@@ -111,6 +131,8 @@ public class TaskManager {
             String taskType = command.split(" ")[0];
             if (taskType.equals("done")) {
                 setDoneTask(command);
+            } else if (taskType.equals("delete")) {
+                deleteTask(command);
             } else if (taskType.equals("todo")) {
                 handleTodo(command);
             } else if (taskType.equals("deadline")) {

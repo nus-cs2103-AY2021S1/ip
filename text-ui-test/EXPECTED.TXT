@@ -39,4 +39,16 @@ Oh no! EVENTually you'll get it right! (The description of event can't be empty!
 Oh no! Remember to write /at (time) after your task!
 Oh no! Remember to write /at (time) after your task!
 Sorry! I don't understand that command. Please try again!
+This task has been deleted from the list:
+[E][✘] project meeting (at: Mon 2-4pm)
+You now have 2 tasks.
+This task has been deleted from the list:
+[T][✓] borrow book
+You now have 1 tasks.
+Here's all your tasks to complete:
+1. [D][✘] return book (by: Sunday)
+Time to get to work! :D
+Oh no! You must DELETE this! (The description of delete can't be empty!)
+Oh no! That number is not on the list! D:
+Oh no! Type only a number for the description!
 Bye! Let's talk again soon!
