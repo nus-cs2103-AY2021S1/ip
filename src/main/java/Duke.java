@@ -1,7 +1,8 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
         Task[] list = new Task[101];
         String divider = "    _________________________________________\n";
@@ -29,57 +30,73 @@ public class Duke {
                 System.out.println(divider);
 
             } else if (command.contains("deadline")) {
-                int indexOfDate = command.indexOf("/");
-                String taskDescription = command.substring(9, indexOfDate - 1);
-                String by = command.substring(indexOfDate + 3);
-                Deadline deadline = new Deadline(taskDescription, by);
-                list[listIndex] = deadline;
-                listIndex++;
-                System.out.println(divider);
-                System.out.println("      Mr Camel has added: " + deadline);
-                System.out.println("      Number of tasks: " + (listIndex - 1));
-                System.out.println(divider);
+                try {
+                    int indexOfDate = command.indexOf("/");
+                    String taskDescription = command.substring(9, indexOfDate - 1);
+                    String by = command.substring(indexOfDate + 3);
+                    Deadline deadline = new Deadline(taskDescription, by);
+                    list[listIndex] = deadline;
+                    listIndex++;
+                    System.out.println(divider);
+                    System.out.println("      Mr Camel has added: " + deadline);
+                    System.out.println("      Number of tasks: " + (listIndex - 1));
+                    System.out.println(divider);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new DukeException("Please provide both a description and a deadline!");
+                }
 
             } else if (command.contains("todo")) {
-                String taskDescription = command.substring(5);
-                Todo todo = new Todo(taskDescription);
-                list[listIndex] = todo;
-                listIndex++;
-                System.out.println(divider);
-                System.out.println("      Mr Camel has added: " + todo);
-                System.out.println("      Number of tasks: " + (listIndex - 1));
-                System.out.println(divider);
+                try {
+                    String taskDescription = command.substring(5);
+                    Todo todo = new Todo(taskDescription);
+                    list[listIndex] = todo;
+                    listIndex++;
+                    System.out.println(divider);
+                    System.out.println("      Mr Camel has added: " + todo);
+                    System.out.println("      Number of tasks: " + (listIndex - 1));
+                    System.out.println(divider);
+                } catch (StringIndexOutOfBoundsException e) {
+                    throw new DukeException("Please provide a description!");
+                }
 
             } else if (command.contains("event")) {
-                int indexOfDate = command.indexOf("/");
-                String taskDescription = command.substring(6, indexOfDate - 1);
-                String at = command.substring(indexOfDate + 3);
-                Event event = new Event(taskDescription, at);
-                list[listIndex] = event;
-                listIndex++;
-                System.out.println(divider);
-                System.out.println("      Mr Camel has added: " + event);
-                System.out.println("      Number of tasks: " + (listIndex - 1));
-                System.out.println(divider);
+                try {
+                    int indexOfDate = command.indexOf("/");
+                    String taskDescription = command.substring(6, indexOfDate - 1);
+                    String at = command.substring(indexOfDate + 3);
+                    Event event = new Event(taskDescription, at);
+                    list[listIndex] = event;
+                    listIndex++;
+                    System.out.println(divider);
+                    System.out.println("      Mr Camel has added: " + event);
+                    System.out.println("      Number of tasks: " + (listIndex - 1));
+                    System.out.println(divider);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new DukeException("Please provide both a description and date!");
+                }
 
             } else if (command.contains("done")) {
-                int indexDone = Integer.parseInt(command.substring(5));
-                list[indexDone].markAsDone();
-                System.out.println(divider);
-                System.out.println("      Mr Camel will mark this task as done:\n" + "        " + list[indexDone]);
-                System.out.println(divider);
+                try {
+                    int indexDone = Integer.parseInt(command.substring(5));
+                    list[indexDone].markAsDone();
+                    System.out.println(divider);
+                    System.out.println("      Mr Camel will mark this task as done:\n" + "        " + list[indexDone]);
+                    System.out.println(divider);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new DukeException("Invalid task number!");
+                } catch (NullPointerException e) {
+                    throw new DukeException("Invalid task number!");
+                }
+
 
             } else if (command.equals("bye")) {
                 System.out.println(divider);
                 System.out.println("      Bye. Mr Camel will miss you! :(");
                 System.out.println(divider);
                 break;
-            } else {
-                list[listIndex] = new Task(command);
-                listIndex++;
-                System.out.println(divider);
-                System.out.println("      Mr Camel has added: " + command);
-                System.out.println(divider);
+            } else { //invalid input
+
+                throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
         }
     }
