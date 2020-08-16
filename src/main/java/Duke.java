@@ -2,9 +2,11 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        String bot = "Dave: \n";
+        String user = "Me: \n";
         //Initial greetings
         System.out.println("_______________________________________________________________");
-        System.out.println("Greetings from me, Dave! \n"  + "How can I help you? ^_^");
+        System.out.println(bot + "Greetings from me, Dave! \n"  + "How can I help you? ^_^");
         System.out.println("_______________________________________________________________");
 
         Scanner scanner = new Scanner(System.in);
@@ -14,11 +16,11 @@ public class Duke {
             String userInput = scanner.next(); //may be string, int, etc
             if(userInput.equals("Bye")) {
                 System.out.println("_______________________________________________________________");
-                System.out.println("Goodbye! Hope to see you again soon! ^_^");
+                System.out.println(bot + "Goodbye! Hope to see you again soon! ^_^");
                 System.out.println("_______________________________________________________________");
                 break;
             } else {
-                System.out.println(userInput);
+                System.out.println(bot + userInput);
             }
 
         }
