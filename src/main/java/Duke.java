@@ -67,6 +67,7 @@ public class Duke {
         String response = "Here are all the commands:\n\n"
                 + "bye\n"
                 + "deadline <task> /by <time>\n"
+                + "delete <task index>\n"
                 + "done <task index>\n"
                 + "event <task> /at <time>\n"
                 + "list\n"
