@@ -3,16 +3,17 @@ import java.util.Scanner;
 
 /**
  * Immutable Duke chatbot class to encapsulate the behavior of the chatbot.
+ * Task id starts from 1.
  */
-public class Duke {
-    private final ArrayList<String> list;
+public class Duke implements IDuke{
+    private final ArrayList<ITask> list;
 
-    private Duke(ArrayList<String> list) {
+    private Duke(ArrayList<ITask> list) {
         this.list = new ArrayList<>(list);
     }
 
     /**
-     * Return a new Duke chatbot object.
+     * Returns a new Duke chatbot object.
      *
      * @return New Duke chatbot object.
      */
@@ -21,65 +22,85 @@ public class Duke {
     }
 
     /**
-     * Print greeting message.
+     * {@inheritDoc}
      */
+    @Override
     public void greet() {
         System.out.println(TextFormatter.LOGO);
-        System.out.println(TextFormatter.getFormattedText("Hi I'm Cat Bot.\nWhat can I do for you?"));
+        System.out.println(TextFormatter
+                .getFormattedText("Hi I'm Cat Bot.\nWhat can I do for you?"));
     }
 
     /**
-     * Print goodbye message.
+     * {@inheritDoc}
      */
+    @Override
     public void bye() {
-        System.out.println(TextFormatter.getFormattedText("Bye! Hope to see you again!"));
+        System.out.println(TextFormatter
+                .getFormattedText("Bye! Hope to see you again!"));
     }
 
     /**
-     * Print echoed command.
-     *
-     * @param command User command.
+     * {@inheritDoc}
      */
-    public void echo(String command) {
-        System.out.println(TextFormatter.getFormattedText(command));
-    }
-
-    /**
-     * Store a command in the bot.
-     *
-     * @param command User input string.
-     * @return Updated Duke object.
-     */
-    public Duke storeItem(String command) {
-        ArrayList<String> newList = new ArrayList<>(this.list);
-        newList.add(command);
+    @Override
+    public Duke storeTask(ITask task) {
+        ArrayList<ITask> newList = new ArrayList<>(this.list);
+        newList.add(task);
         return new Duke(newList);
     }
 
-    public void displayList() {
-        StringBuilder sb = new StringBuilder();
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void displayTasks() {
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < list.size(); i++) {
-            sb.append(" ").append(i + 1).append(". ").append(list.get(i)).append("\n");
+            sb.append(" ").append(i + 1).append(". ")
+                    .append(list.get(i).toString()).append("\n");
         }
         System.out.println(TextFormatter.getFormattedText(sb.toString()));
     }
 
+    @Override
+    public ITask getTask(int id) {
+        return list.get(id - 1);
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public IDuke doneTask(int id) {
+        ArrayList<ITask> newList = new ArrayList<>(this.list);
+        newList.set(id - 1, newList.get(id - 1).markComplete());
+        return new Duke(newList);
+    }
+
     public static void main(String[] args) {
-        Duke bot = getDuke();
+        IDuke bot = getDuke();
         Scanner sc = new Scanner(System.in);
 
         // Greet user
         bot.greet();
 
-        // Echo command until user types bye
+        // Handle commands until user types bye
         while (sc.hasNext()) {
             String s = sc.nextLine();
+
             if (s.equals("bye")) {
                 break;
             } else if (s.equals("list")) {
-                bot.displayList();
+                bot.displayTasks();
+            } else if (s.matches("^done [0-9]?$")) {
+                int index = Integer.parseInt(s.split(" ")[1]);
+                bot = bot.doneTask(index);
+                System.out.println(TextFormatter.getFormattedText(
+                        "Naisu! I've marked this task done!\n" + bot.getTask(index)));
             } else {
-                bot = bot.storeItem(s);
+                bot = bot.storeTask(Task.getTask(s));
                 System.out.println(TextFormatter.getFormattedText("added: " + s));
             }
         }
