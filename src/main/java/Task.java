@@ -3,7 +3,7 @@ public abstract class Task {
     protected boolean isDone;
 
     public enum Command {
-        TODO("todo"), DEADLINE("deadline"), EVENT("event");
+        TODO("todo"), DEADLINE("deadline", "/by"), EVENT("event", "/at");
 
         private String cmd;
         private String timeSpecifier;

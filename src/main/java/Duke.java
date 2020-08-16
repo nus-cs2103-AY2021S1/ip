@@ -23,6 +23,8 @@ public class Duke {
     private static String horizontalLine = "________________________________________";
     private static String cmdReq = "Your command: ";
     private static String lazyHumanBash = "You have nothing in your list. Why are you so lazy human?";
+    private static String unrecognizedCmdMsg = "I don't understand a single word you say, human\n"
+            + "Speak robot language pls";
 
     private static String taskReport() {
         return "You have " + taskCount + " tasks in your list";
@@ -46,57 +48,110 @@ public class Duke {
         // getting command
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        String[] inputSplitted = input.split(" ", 2);
+        String[] inputSplitted = input.split("\\s+", 2);
         while (!input.equals(exitCmd)) {
             System.out.println(horizontalLine);
-            if (input.equals("list")) {
-                if (taskCount == 0) {
-                    System.out.println(lazyHumanBash);
-                } else {
-                    System.out.println(showTasksMsg);
-                    for (int i = 0; i < taskCount; i++) {
-                        System.out.println((i + 1) + ". " + tasks[i].toString());
+            try {
+                if (input.equals("list")) {
+                    if (taskCount == 0) {
+                        System.out.println(lazyHumanBash);
+                    } else {
+                        System.out.println(showTasksMsg);
+                        for (int i = 0; i < taskCount; i++) {
+                            System.out.println((i + 1) + ". " + tasks[i].toString());
+                        }
                     }
+                } else if (inputSplitted[0].equals(doneCmd)) {
+                    int idx = Integer.parseInt(inputSplitted[1]) - 1;
+                    tasks[idx] = tasks[idx].markAsDone();
+                    System.out.println(doneMsg);
+                    System.out.println(tasks[idx]);
+                } else if (inputSplitted[0].equals(todoCmd)) {
+                    if (inputSplitted.length == 1 || inputSplitted[1].equals("")) {
+                        throw new InadequateCommandException("todo",
+                                new String[] {"description"});
+                    } else {
+                        Task newTask = new ToDo(inputSplitted[1]);
+                        taskCount++;
+                        tasks[taskCount - 1] = newTask;
+                        System.out.println(addSuccessfulMsg);
+                        System.out.println(tasks[taskCount - 1]);
+                        System.out.println(taskReport());
+                    }
+                } else if (inputSplitted[0].equals(deadlineCmd)
+                        || inputSplitted[0].equals(eventCmd)) {
+                    String type, timeSpecifier;
+                    boolean isDeadline;
+                    if (inputSplitted[0].equals(deadlineCmd)) {
+                        type = "deadline";
+                        timeSpecifier = deadlineTimeSpecifier;
+                        isDeadline = true;
+                    } else {
+                        type = "event";
+                        timeSpecifier = eventTimeSpecifier;
+                        isDeadline = false;
+                    }
+                    if (inputSplitted.length == 1) {
+                        String[] missing = {"description", "time"};
+                        throw new InadequateCommandException(type, missing);
+                    } else {
+                        String content = inputSplitted[1];
+                        String[] split2Test = content.split("\\s+");
+                        int timeIdx = content.indexOf(" " + timeSpecifier);
+                        if (split2Test.length == 0 ||
+                                (split2Test.length == 1 &&
+                                        (split2Test[0].equals(timeSpecifier) || split2Test[0].equals(""))
+                                )
+                        ) {
+                            String[] missing = {"description", "time"};
+                            throw new InadequateCommandException(type, missing);
+                        }
+                        if (timeIdx == 0 || content.indexOf(timeSpecifier) == 0) {
+                            throw new InadequateCommandException(type,
+                                    new String[] {"description"});
+                        }
+                        if (timeIdx == -1 || timeIdx + 5 >= content.length()) {
+                            throw new InadequateCommandException(type,
+                                    new String[] {"time"});
+                        }
+                        String description = content.substring(0, timeIdx);
+                        String time = content.substring(timeIdx + 5, content.length());
+                        if (time.split("\\s+").length == 0) {
+                            throw new InadequateCommandException(type,
+                                    new String[] {"time"});
+                        }
+                        Task newTask = isDeadline
+                                ? new Deadline(description, time)
+                                : new Event(description, time);
+                        taskCount++;
+                        tasks[taskCount - 1] = newTask;
+                        System.out.println(addSuccessfulMsg);
+                        System.out.println(tasks[taskCount - 1]);
+                        System.out.println(taskReport());
+                    }
+                } else if (inputSplitted[0].equals(eventCmd)) {
+                    String content = inputSplitted[1];
+                    int timeIdx = content.indexOf(" /at");
+                    String description = content.substring(0, timeIdx);
+                    String time = content.substring(timeIdx + 5, content.length());
+                    Task newTask = new Event(description, time);
+                    taskCount++;
+                    tasks[taskCount - 1] = newTask;
+                    System.out.println(addSuccessfulMsg);
+                    System.out.println(tasks[taskCount - 1]);
+                    System.out.println(taskReport());
+                } else {
+                    throw new IncorrectCommandException();
                 }
-            } else if (inputSplitted[0].equals(doneCmd)) {
-                int idx = Integer.parseInt(inputSplitted[1]) - 1;
-                tasks[idx] = tasks[idx].markAsDone();
-                System.out.println(doneMsg);
-                System.out.println(tasks[idx]);
-            } else if (inputSplitted[0].equals(todoCmd)){
-                Task newTask = new ToDo(inputSplitted[1]);
-                taskCount++;
-                tasks[taskCount - 1] = newTask;
-                System.out.println(addSuccessfulMsg);
-                System.out.println(tasks[taskCount - 1]);
-                System.out.println(taskReport());
-            } else if (inputSplitted[0].equals(deadlineCmd)) {
-                String content = inputSplitted[1];
-                int timeIdx = content.indexOf(" /by");
-                String description = content.substring(0, timeIdx);
-                String time = content.substring(timeIdx + 5, content.length());
-                Task newTask = new Deadline(description, time);
-                taskCount++;
-                tasks[taskCount - 1] = newTask;
-                System.out.println(addSuccessfulMsg);
-                System.out.println(tasks[taskCount - 1]);
-                System.out.println(taskReport());
-            } else if (inputSplitted[0].equals(eventCmd)) {
-                String content = inputSplitted[1];
-                int timeIdx = content.indexOf(" /at");
-                String description = content.substring(0, timeIdx);
-                String time = content.substring(timeIdx + 5, content.length());
-                Task newTask = new Event(description, time);
-                taskCount++;
-                tasks[taskCount - 1] = newTask;
-                System.out.println(addSuccessfulMsg);
-                System.out.println(tasks[taskCount - 1]);
-                System.out.println(taskReport());
+            } catch (InadequateCommandException e) {
+                System.out.println(e.getMessage());
+            } catch (IncorrectCommandException e) {
+                System.out.println(unrecognizedCmdMsg);
             }
             System.out.println(horizontalLine);
             System.out.println(cmdReq);
             input = sc.nextLine();
-            inputSplitted = input.split(" ", 2);
+            inputSplitted = input.split("\\s+", 2);
         }
 
         // exit
