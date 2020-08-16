@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -17,9 +19,26 @@ public class Duke {
         System.out.println(DIVIDER);
     }
 
+    private static String convertTaskListToString(List<String> tasks) {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append((i+1));
+            sb.append(". ");
+            sb.append(tasks.get(i));
+            sb.append('\n');
+        }
+
+        // remove last newline character
+        sb.deleteCharAt(sb.length() - 1);
+
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        List<String> tasks = new ArrayList<>();
 
         System.out.println(LOGO);
         printToConsole("Hi I'm Alfred! How can I help you today?");
@@ -31,8 +50,12 @@ public class Duke {
             case "bye":
                 printToConsole("Goodbye!");
                 return;
+            case "list":
+                printToConsole(convertTaskListToString(tasks));
+                break;
             default:
-                printToConsole(input);
+                tasks.add(input);
+                printToConsole("added: " + input);
             }
         }
 
