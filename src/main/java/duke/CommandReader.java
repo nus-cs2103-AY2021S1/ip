@@ -43,7 +43,7 @@ public class CommandReader {
             case "event":
                 return new EventCommand(content);
             default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (DukeException e) {
             return new ErrorCommand(e.getMessage());

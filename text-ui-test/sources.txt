@@ -6,6 +6,7 @@ C:\Users\22333\Desktop\CS2103\iP\src\main\java\duke\DukeException.java
 C:\Users\22333\Desktop\CS2103\iP\src\main\java\duke\command\AddCommand.java
 C:\Users\22333\Desktop\CS2103\iP\src\main\java\duke\command\Command.java
 C:\Users\22333\Desktop\CS2103\iP\src\main\java\duke\command\DeadlineCommand.java
+C:\Users\22333\Desktop\CS2103\iP\src\main\java\duke\command\DeleteCommand.java
 C:\Users\22333\Desktop\CS2103\iP\src\main\java\duke\command\DoneCommand.java
 C:\Users\22333\Desktop\CS2103\iP\src\main\java\duke\command\ErrorCommand.java
 C:\Users\22333\Desktop\CS2103\iP\src\main\java\duke\command\EventCommand.java
