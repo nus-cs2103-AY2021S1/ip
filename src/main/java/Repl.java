@@ -10,14 +10,6 @@ public class Repl {
     /** Number of underscores each divider should be made up of. */
     private static final int DIVIDER_LENGTH = 60;
 
-    // Strings
-    /** Message to be displayed on start-up. */
-    private static final String WELCOME_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
-    /** Message to be displayed on exit. */
-    private static final String FAREWELL_MESSAGE = "Bye. Hope to see you again soon!";
-    /** Error to be displayed when marking a {@code Task} as done fails. */
-    private static final String MARK_AS_DONE_ERROR = "Please input a valid task index.";
-
     /** {@code Scanner} object which reads in user input. */
     private static final Scanner scanner = new Scanner(System.in);
     /** {@code PrettyPrinter} object for formatting the REPL output. */
@@ -29,28 +21,48 @@ public class Repl {
      * Runs the REPL.
      */
     public static void run() {
-        prettyPrinter.print(WELCOME_MESSAGE);
+        prettyPrinter.print(ResourceHandler.getString("repl.greeting"));
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            String[] tokens = line.split(" ");
-            String command = tokens[0];
+            String command = line.split(" ")[0];
+            String[] args;
             switch (command) {
                 case "bye":
-                    prettyPrinter.print(FAREWELL_MESSAGE);
+                    prettyPrinter.print(ResourceHandler.getString("repl.farewell"));
                     return;
+                case "deadline":
+                    line = line.replaceFirst("^deadline\\s*", "");
+                    args = line.split("\\s*/by\\s*");
+                    String deadlineName = args[0];
+                    String dueDate = args[1];
+                    prettyPrinter.print(taskManager.addTask(new Deadline(deadlineName, dueDate)));
+                    break;
                 case "done":
                     try {
-                        int listIndex = Integer.parseInt(tokens[1]) - 1;
+                        line = line.replaceFirst("^done\\s*", "");
+                        args = line.split("");
+                        int listIndex = Integer.parseInt(args[0]) - 1;
                         prettyPrinter.print(taskManager.markAsDone(listIndex));
                     } catch (Exception e) {
-                        prettyPrinter.print(MARK_AS_DONE_ERROR);
+                        prettyPrinter.print(ResourceHandler.getString("repl.invalidTaskIndex"));
                     }
+                    break;
+                case "event":
+                    line = line.replaceFirst("^deadline\\s*", "");
+                    args = line.split("\\s*/at\\s*");
+                    String eventName = args[0];
+                    String dateTime = args[1];
+                    prettyPrinter.print(taskManager.addTask(new Event(eventName, dateTime)));
                     break;
                 case "list":
                     prettyPrinter.print(taskManager.toString());
                     break;
+                case "todo":
+                    String toDoName = line.replaceFirst("^todo\\s*", "");
+                    prettyPrinter.print(taskManager.addTask(new ToDo(toDoName)));
+                    break;
                 default:
-                    prettyPrinter.print(taskManager.addTask(line));
+                    prettyPrinter.print(ResourceHandler.getString("repl.unknownCommand"));
                     break;
             }
         }
