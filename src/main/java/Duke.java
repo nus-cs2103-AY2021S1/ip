@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -10,6 +12,7 @@ public class Duke {
         + "|____/ \\__,_|_|\\_\\___|\n";
     Scanner sc = new Scanner(System.in);
     String input = "";
+    List list = new ArrayList();
 
     System.out.println("\n" + logo);
     System.out.println("\t" + divider);
@@ -17,7 +20,7 @@ public class Duke {
     System.out.println("\t" + divider);
 
     while (true) {
-      input = sc.next();
+      input = sc.nextLine();
 
       if (input.equals("bye")) {
         break;
