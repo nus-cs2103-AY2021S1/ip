@@ -63,6 +63,8 @@ public class DukeBot {
             else if(args[0].equals("done")){
                 int index = Integer.parseInt(args[1])-1;
                 this.tasksDone.set(index,true);
+                System.out.println("Nice I've marked this tasks as done");
+                System.out.println( "[✓] "+ this.tasks.get(index));
             }
             else{
                 addTask(currInput);
