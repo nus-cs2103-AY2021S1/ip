@@ -26,7 +26,7 @@ public class Duke {
         while (!stop) {
             String input = sc.nextLine();
             BotClass bot = new BotClass();
-            processArgs(input).execute(bot, list);
+            processInput(input).execute(bot, list);
             say(bot.getLines());
             if (bot.stopped()) {
                 stop = true;
@@ -48,17 +48,27 @@ public class Duke {
         say(Arrays.asList(string));
     }
 
-    private Function processArgs(String input) {
+    private Function processInput(String input) {
+        input = input.stripTrailing();
+        String[] split = input.split("\\s+", 2); // guranteed to contain at least ""
+        String command = split[0];
+        String args = split.length == 2 ? split[1] : "";
+
         if (input.equals("bye")) {
             return new ByeFunction();
         } else if (input.equals("list")) {
             return new ListFunction();
-        } else if (input.startsWith("done")) {
-            String indexString = input.split(" ", 2)[1];
-            int index = Integer.valueOf(indexString) - 1;
+        } else if (command.equals("done")) {
+            int index = Integer.valueOf(args) - 1;
             return new DoneFunction(index);
-        } else {
-            return new AddFunction(new Task(input));
+        } else if (command.equals("todo")) {
+            return new AddFunction(new Task(args));
+        } else if (command.equals("deadline")) {
+            String[] argsSplit = args.split("/by", 2);
+            return new AddFunction(new Deadline(argsSplit[0].stripTrailing(), argsSplit[1].stripLeading()));
+        } else { // if (command.equals("event")) {
+            String[] argsSplit = args.split("/at", 2);
+            return new AddFunction(new Event(argsSplit[0].stripTrailing(), argsSplit[1].stripLeading()));
         }
     }
 }
