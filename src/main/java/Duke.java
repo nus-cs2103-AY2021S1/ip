@@ -37,27 +37,62 @@ public class Duke {
         for (int i = 0; i < 50; i++) {
             System.out.print("\u2500");
         }
-        System.out.println("");
+        System.out.println();
     }
 
     private static void displayTasks(ArrayList<Task> tasks) {
         System.out.println("Here are the tasks in your list:");
         int i = 1;
-        for (Task t: tasks) {
+        for (Task t : tasks) {
             System.out.println(i + "." + t.toString());
             i++;
         }
     }
 
     private static void addTask(String str, ArrayList<Task> tasks) {
-        Task t = new Task(str);
-        tasks.add(t);
-        System.out.println("added: " + t.description);
+        if (str.contains(" ")) {
+            String[] arr = str.split(" ", 2);
+            String str2 = arr[1];
+            switch (arr[0]) {
+                case "todo":
+                    ToDo td = new ToDo(str2);
+                    insert(td, tasks);
+                    break;
+                case "deadline":
+                    if (str2.contains("/by ")) {
+                        String[] arr2 = str2.split("/by ", 2);
+                        Deadline dl = new Deadline(arr2[0], arr2[1]);
+                        insert(dl, tasks);
+                    } else {
+                        System.out.println("Please indicate a deadline with /by");
+                    }
+                    break;
+                case "event":
+                    if (str2.contains("/at ")) {
+                        String[] arr2 = str2.split("/at ", 2);
+                        Event ev = new Event(arr2[0], arr2[1]);
+                        insert(ev, tasks);
+                    } else {
+                        System.out.println("Please indicate a time with /at");
+                    }
+                    break;
+                default:
+                    System.out.println("Error, please enter a valid command.");
+            }
+        } else {
+            System.out.println("Error, please enter a valid command.");
+        }
+    }
+
+    public static void insert(Task T, ArrayList<Task> tasks) {
+        tasks.add(T);
+        System.out.println("Task has been added:");
+        System.out.println(T.toString());
+        System.out.println("You now have " + tasks.size() + " tasks in the list");
     }
 
     private static void completeTask(String str, ArrayList<Task> tasks) {
         String val = str.substring(5);
-        System.out.println(val);
         if (isInteger(val)) {
             int i = Integer.parseInt(val);
             if (i > 0 && i <= tasks.size()) {
@@ -72,7 +107,7 @@ public class Duke {
 
     public static boolean isInteger(String str) {
         try {
-            int i = Integer.parseInt(str);
+            Integer.parseInt(str);
         } catch (NumberFormatException nfe) {
             return false;
         }
