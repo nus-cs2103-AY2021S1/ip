@@ -34,8 +34,8 @@ public class Duke {
      */
     private static void printStartMsg() {
         Duke.printSeparator();
-        System.out.println(Duke.LOGO);
-        System.out.println("Hello! I'm Duke");
+        // System.out.println(Duke.LOGO);
+        System.out.println("Hello! I'm Duke.");
         System.out.println("What can I do for you?");
         Duke.printSeparator();
     }
@@ -70,7 +70,7 @@ public class Duke {
     private void dukeLogic(Scanner sc) {
         String msgInput = "";
 
-        while (!shouldQuit(msgInput)) {
+        while (!shouldQuit(msgInput) && sc.hasNextLine()) {
             msgInput = sc.nextLine();
 
             if (!shouldQuit(msgInput)) {
