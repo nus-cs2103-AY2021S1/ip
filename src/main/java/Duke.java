@@ -25,30 +25,35 @@ public class Duke {
 
     private static void handleResponse(String response) throws DukeException {
         String[] parsedResponse = response.split(" ", 2);
-        String command = parsedResponse[0];
+        Command command;
+        try {
+            command = Command.valueOf(parsedResponse[0].toUpperCase());
+        } catch (IllegalArgumentException ex) {
+            command = Command.INVALID;
+        }
         String rest = parsedResponse.length == 1 ? null : parsedResponse[1];
         switch (command) {
-            case "bye":
+            case BYE:
                 exit();
-            case "list":
+            case LIST:
                 handleList();
                 break;
-            case "done":
+            case DONE:
                 handleDone(rest);
                 break;
-            case "todo":
+            case TODO:
                 handleTodo(rest);
                 break;
-            case "deadline":
+            case DEADLINE:
                 handleDeadline(rest);
                 break;
-            case "event":
+            case EVENT:
                 handleEvent(rest);
                 break;
-            case "delete":
+            case DELETE:
                 handleDelete(rest);
                 break;
-            default:
+            case INVALID:
                 throw new DukeException("Unrecognized command!");
         }
     }
