@@ -20,16 +20,25 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in); //scans for input
         DisplayList displayList = new DisplayList();
-        String input = sc.nextLine();
+        String input = sc.next();
 
         while (!input.equals("bye")) {
             if (input.equals("list")) {
                 System.out.println(border + displayList.toString() + border);
+            } else if (input.equals("done")) {
+                int index = Integer.valueOf(sc.next()) - 1;
+                displayList.completeTask(index);
+                System.out.println(border
+                        + "Making great progress master.\n"
+                        + displayList.getTask(index) + "\n"
+                        + border
+                );
             } else {
-                displayList.add(input);
-                System.out.println(border + "Added: " + input + "\n" + border);
+                String task = input + sc.nextLine();
+                displayList.addTask(task);
+                System.out.println(border + "Added: " + task + "\n" + border);
             }
-            input = sc.nextLine();
+            input = sc.next();
         }
 
         System.out.println(border + farewell + border);
