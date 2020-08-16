@@ -32,7 +32,8 @@ public class Duke {
                 task.setDone();
                 System.out.println("Well done! The following task is complete:\n" + task);
             } else {
-                break;
+                tasks.add(new Task(number++, input));
+                System.out.println(lines + "added: " + input + "\n" + lines);
             }
         }
     }
