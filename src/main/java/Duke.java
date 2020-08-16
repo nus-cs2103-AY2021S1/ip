@@ -1,5 +1,5 @@
 public class Duke {
     public static void main(String[] args) {
-        Gel.parrot();
+        Gel.keepingList();
     }
 }
