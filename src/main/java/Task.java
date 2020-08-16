@@ -15,12 +15,8 @@ public class Task {
         return ("[" + (isDone ? "\u2713" : "\u2718") + "]"); //return tick or X symbols
     }
 
-    public String taskRow() {
-        return getStatusIcon() + " " + this;
-    }
-
     @Override
     public String toString() {
-        return description;
+        return getStatusIcon() + " " + description;
     }
 }

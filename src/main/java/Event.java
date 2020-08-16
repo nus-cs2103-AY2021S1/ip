@@ -1,5 +1,5 @@
 public class Event extends Task{
-    private String eventTime;
+    protected String eventTime;
 
     public Event(String description, String eventTime) {
         super(description);
@@ -7,7 +7,7 @@ public class Event extends Task{
     }
 
     @Override
-    public String taskRow() {
-        return "[E]" + super.taskRow() + "(at: " + eventTime + ")";
+    public String toString() {
+        return "[E]" + super.toString() + "(at: " + eventTime + ")";
     }
 }

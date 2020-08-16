@@ -1,5 +1,5 @@
 public class Deadline extends Task {
-    private String deadlineTime;
+    protected String deadlineTime;
 
     public Deadline(String description, String date) {
         super(description);
@@ -7,7 +7,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String taskRow() {
-        return "[D]" + super.taskRow() + "(by: " + deadlineTime + ")";
+    public String toString() {
+        return "[D]" + super.toString() + "(by: " + deadlineTime + ")";
     }
 }

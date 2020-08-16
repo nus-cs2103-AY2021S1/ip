@@ -42,7 +42,7 @@ public class Duke {
                     splitBySlash[1].replaceFirst("at ", ""));
         }
         taskList.add(tsk);
-        System.out.println("Lao Duke has added this task for you:\n" + tsk.taskRow());
+        System.out.println("Lao Duke has added this task for you:\n" + tsk);
         System.out.println("You have " + taskList.size() + " task(s) in your list!");
     }
 
@@ -50,7 +50,7 @@ public class Duke {
         System.out.println("Lao Duke not so blur like you. Tsk. I got remember your tasks one hor.");
         for (int i = 0; i < taskList.size(); i++) {
             Task tsk = taskList.get(i);
-            System.out.println("Task " + (i + 1) + ": "  + tsk.taskRow());
+            System.out.println("Task " + (i + 1) + ": "  + tsk);
         }
     }
 
@@ -61,7 +61,7 @@ public class Duke {
             Task tsk = taskList.get(taskNum - 1);
             tsk.markAsDone();
             System.out.println("Wah very good! I am proud that you got do your task!");
-            System.out.println(tsk.taskRow());
+            System.out.println(tsk);
         }
     }
 
