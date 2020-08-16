@@ -35,17 +35,22 @@ public class Duke {
         System.out.println("\t___________________________________________________________________________\n");
 
         Scanner s = new Scanner(System.in);
+        Tasks tasks = new Tasks();
         String input = s.nextLine();
         while (!input.equals("bye")) {
-            echo(input);
+            if (input.equals("list")) {
+                tasks.printTasks();
+            } else {
+                tasks.addTask(input);
+            }
             input = s.nextLine();
         }
-        echo("\tBye. Hope to see you again soon");
+        bye();
     }
 
-    static void echo(String s) {
+    static void bye() {
         System.out.println("\t___________________________________________________________________________");
-        System.out.println("\t" + s);
+        System.out.println("\t" + "\tBye. Hope to see you again soon");
         System.out.println("\t___________________________________________________________________________\n");
     }
 }
