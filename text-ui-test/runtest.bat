@@ -1,5 +1,8 @@
 @ECHO OFF
 
+set PATH=%PATH%;C:\Program Files\Java\jdk-11.0.8\bin
+set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
+
 SET MY_PATH=C:\Users\Lee\Dropbox\Y2S1\CS2103T\Duke
 
 REM create bin directory if it doesn't exist
