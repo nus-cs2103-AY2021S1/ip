@@ -14,24 +14,8 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke();
         System.out.println(duke.toString());
-        echo();
-        //duke.receiveInput(); //lvl 2
-    }
-
-    public static void echo() {
-        Scanner sc = new Scanner(System.in);
-        String command;
-        while (sc.hasNextLine()) {
-            command = sc.nextLine();
-            if (!command.equals("bye")) {
-                System.out.println(command);
-            } else {
-                sc.close();
-                System.out.println("bai~ see you!");
-                System.exit(0);
-                return;
-            }
-        }
+        //echo();
+        duke.receiveInput();
     }
 
     @Override
@@ -46,4 +30,50 @@ public class Duke {
         return donLogo + "\n" + msg;
     }
 
+    public void receiveInput() {
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNextLine()) {
+            String command = sc.nextLine();
+            if(!command.equals("list") && !command.equals("bye")) {
+                saveToList(command);
+            } else if (!command.equals("bye")){
+                listItems();
+            } else {
+                sc.close();
+                System.out.println("Bye. Hope to see you again!");
+                System.exit(0);
+                return;
+            }
+        }
+    }
+
+    public void listItems() {
+        StringBuilder todoList = new StringBuilder("");
+        int num = 1;
+        for(String item : this.todos) {
+            todoList.append(num + ". " + item + "\n");
+            num++;
+        }
+        System.out.println(todoList);
+    }
+
+    public void saveToList(String todo) {
+        this.todos.add(todo);
+        System.out.println("added: " + todo);
+    }
+
+//    public static void echo() {
+//        Scanner sc = new Scanner(System.in);
+//        String command;
+//        while (sc.hasNextLine()) {
+//            command = sc.nextLine();
+//            if (!command.equals("bye")) {
+//                System.out.println(command);
+//            } else {
+//                sc.close();
+//                System.out.println("bai~ see you!");
+//                System.exit(0);
+//                return;
+//            }
+//        } //lvl 1
 }
