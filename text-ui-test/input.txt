@@ -1,0 +1,15 @@
+todo cs1010s
+event watch ndp /at 7pm
+deadline study the science of happiness /by 8pm
+todo intended typo
+list
+delete 4
+done 3
+
+delete 4
+todo 
+event watch POOPOOPEEPEE /by 7pm
+deadline fly /at 9years
+done 4
+
+bye
