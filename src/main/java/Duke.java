@@ -29,10 +29,14 @@ public class Duke {
             } else if (input.equals("list")) {
                 listOut();
             } else if (input.contains("done")) {
-                String[] arr = input.split(" ");
-                int index = Integer.parseInt(arr[1]);
-
-                done(index);
+                try {
+                    done(input);
+                } catch (DukeException e) {
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("     " + e.getMessage());
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println();
+                }
             } else {
 
                 try {
@@ -58,7 +62,7 @@ public class Duke {
     }
 
     public static void handleEvent(String input) throws DukeException {
-        if (!input.contains(" ")) {
+        if (input.strip().length() <= 5) {
             throw new DukeException(" ☹ OOPS!!! The description of a Event cannot be empty.");
         } else if (!input.contains("/")) {
             throw new DukeException(" ☹ OOPS!!! Event requires a date.");
@@ -72,7 +76,7 @@ public class Duke {
     }
 
     public static void handleDeadline(String input) throws DukeException {
-        if (!input.contains(" ")) {
+        if (input.strip().length() <= 8) {
             throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
         } else if (!input.contains("/")) {
             throw new DukeException(" ☹ OOPS!!! Deadline requires a date.");
@@ -86,7 +90,7 @@ public class Duke {
     }
 
     public static void handleToDo(String input) throws DukeException {
-        if (!input.contains(" ")) {
+        if (input.strip().length() <= 4) {
             throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
         } else {
             //String taskType = input.substring(0, input.indexOf(" "));
@@ -117,15 +121,26 @@ public class Duke {
         System.out.println();
     }
 
-    public static void done(int index) {
-        Task task = list.get(index - 1);
-        task.completed();
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Nice! I've marked this task as done: ");
+    public static void done(String input) throws DukeException {
+        if (!input.contains(" ")) {
+            throw new DukeException(" ☹ OOPS!!! Please enter done with a number.");
+        } else {
+            String[] arr = input.split(" ");
+            int index = Integer.parseInt(arr[1]);
 
-        System.out.println("       " + task);
-        System.out.println("    ____________________________________________________________");
-        System.out.println();
+            if (index > list.size()) {
+                throw new DukeException(" ☹ OOPS!!! Invalid number.");
+            }
+
+            Task task = list.get(index - 1);
+            task.completed();
+            System.out.println("    ____________________________________________________________");
+            System.out.println("     Nice! I've marked this task as done: ");
+
+            System.out.println("       " + task);
+            System.out.println("    ____________________________________________________________");
+            System.out.println();
+        }
     }
 
     public static void main(String[] args) {
