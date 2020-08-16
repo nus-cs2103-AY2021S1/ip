@@ -19,10 +19,34 @@ ______________________________
 Sorry, I don't understand what you just said.
 ______________________________
 ______________________________
+Your list is empty.
+______________________________
+______________________________
+Error! 'todo' description cannot be empty.
+______________________________
+______________________________
 Added ToDo 'finish work' to your list!
 ______________________________
 ______________________________
+Error! 'deadline' description cannot be empty.
+______________________________
+______________________________
+Error! No task description provided.
+______________________________
+______________________________
+Error! '/by' date not found.
+______________________________
+______________________________
 Added Deadline 'cs2103 ip' to your list!
+______________________________
+______________________________
+Error! 'event' description cannot be empty.
+______________________________
+______________________________
+Error! No task description provided.
+______________________________
+______________________________
+Error! '/at' date not found.
 ______________________________
 ______________________________
 Added Event 'rest' to your list!
@@ -31,17 +55,26 @@ ______________________________
 Here is your list:
 1.[T][✗] finish work
 2.[D][✗] cs2103 ip (by: Aug 20th 2359)
-3.[E][✗] rest (at: never)
+3.[E][✗] rest (at: always)
 ______________________________
 ______________________________
 Marked this task as done:
-[E][✓] rest (at: never)
+[E][✓] rest (at: always)
 ______________________________
 ______________________________
 Here is your list:
 1.[T][✗] finish work
 2.[D][✗] cs2103 ip (by: Aug 20th 2359)
-3.[E][✓] rest (at: never)
+3.[E][✓] rest (at: always)
+______________________________
+______________________________
+Deleted this task:
+[E][✓] rest (at: always)
+______________________________
+______________________________
+Here is your list:
+1.[T][✗] finish work
+2.[D][✗] cs2103 ip (by: Aug 20th 2359)
 ______________________________
 ______________________________
 Goodbye!
