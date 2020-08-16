@@ -13,10 +13,12 @@ public class Duke {
         while(scanner.hasNext()) {
             String userInput = scanner.next(); //may be string, int, etc
             if(userInput.equals("Bye")) {
+                System.out.println("_______________________________________________________________");
                 System.out.println("Goodbye! Hope to see you again soon! ^_^");
+                System.out.println("_______________________________________________________________");
                 break;
             } else {
-                System.out.println("Not Bye");
+                System.out.println(userInput);
             }
 
         }
