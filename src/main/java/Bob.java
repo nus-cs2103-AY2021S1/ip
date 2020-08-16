@@ -1,5 +1,8 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 public class Bob {
+    static ArrayList<String> list = new ArrayList<>();
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String logo = " ____        _        \n"
@@ -11,10 +14,19 @@ public class Bob {
         String exit = "Bye! Hope to see you again.";
         System.out.println("Hello from\n" + logo);
         System.out.println(greetings);
-        String command = sc.next();
+        String command = sc.nextLine();
         while(!command.equals("bye")) {
-            System.out.println(command);
-            command = sc.next();
+            if (command.equals("list")) {
+                int count = 1;
+                for(String item: list) {
+                    System.out.println(count +". " + item);
+                    count++;
+                }
+            } else {
+                list.add(command);
+                System.out.println("added: " + command);
+            }
+            command = sc.nextLine();
         }
         System.out.println(exit);
     }
