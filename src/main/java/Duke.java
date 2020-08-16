@@ -75,9 +75,7 @@ public class Duke {
             } else if (command.equals("done")) {
                 Task task = taskList.get(input.nextInt() - 1);
                 task.completeTask();
-                ArrayList<Task> temp = new ArrayList<>();
-                temp.add(task);
-                System.out.println(formatReply("This task has been marked as done.\n" + listTasks(temp)));
+                System.out.println(formatReply("This task has been marked as done:\n" + task.toString()));
             }
             else {
                 Task newTask = getTask(command, input);
@@ -113,7 +111,7 @@ class Task {
 
     @Override
     public String toString() {
-        return (getDone() ? "[\u2713] " : "[\u2718] ") + getTaskDescription();
+        return (getDone() ? "[✓] " : "[✘] ") + getTaskDescription();
     }
 }
 
