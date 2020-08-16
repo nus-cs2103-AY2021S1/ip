@@ -10,6 +10,10 @@ public class Task{
         this.isDone = false;
     }
 
+    public String getInd() {
+        return String.valueOf(ind);
+    }
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
@@ -17,7 +21,7 @@ public class Task{
     public Task markAsDone() {
         if (!isDone) {
             this.isDone = true;
-            System.out.println(lines + "\n Good Job!!! You cleared this task:\n  ["
+            System.out.println(lines + "\n Good Job!!! You cleared this task:\n   ["
                     + this.getStatusIcon() + "] " + this.description + "\n" + lines);
         } else {
             System.out.println(lines
@@ -28,6 +32,6 @@ public class Task{
 
     @Override
     public String toString() {
-        return this.ind + ". [" + this.getStatusIcon() + "] " + this.description;
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }
