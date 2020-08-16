@@ -54,10 +54,10 @@ public class Duke {
         if (task.startsWith("todo")) {
             newTask = new ToDo(task.substring(5));
         } else if (task.startsWith("deadline")) {
-            String[] taskInfo = task.substring(9).split("/by ", 2);
+            String[] taskInfo = task.substring(9).split(" /by ", 2);
             newTask = new Deadline(taskInfo[0], taskInfo[1]);
         } else if (task.startsWith("event")) {
-            String[] taskInfo = task.substring(6).split("/at ", 2);
+            String[] taskInfo = task.substring(6).split(" /at ", 2);
             newTask = new Event(taskInfo[0], taskInfo[1]);
         }
 
@@ -66,7 +66,7 @@ public class Duke {
             System.out.println(LINES +
                     "Got it, I have added this task:\n"
                     + newTask
-                    + "\nNow you have " + tasks.size() + " tasks in this list\n"
+                    + "\nNow you have " + tasks.size() + " task(s) in this list\n"
                     + LINES);
         }
     }
