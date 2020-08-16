@@ -11,11 +11,16 @@ public class Task {
         this.done = true;
     }
 
-    public String getName() {
-        return this.name;
-    }
-
     public boolean isDone() {
         return this.done;
+    }
+
+    public String toString() {
+        if (isDone()) {
+            return "[✓] " + this.name;
+        } else {
+            return "[✗] " + this.name;
+        }
+
     }
 }
