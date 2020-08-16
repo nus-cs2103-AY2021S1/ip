@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     /**
@@ -19,29 +20,45 @@ public class Duke {
      * @return output by Hal9000
      */
     public static String get_output(String user_input) {
-        return user_input; // level 1
+        return "added: " + user_input + "\n"; // level 2
     }
 
     public static String format_response(String output_msg) {
         return 
         "____________________________________________________________\n"+
-        output_msg + "\n" +
+        output_msg +
         "____________________________________________________________\n";
+    }
+
+    public static String summarize(ArrayList<String> tasks) {
+        String all_tasks = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            all_tasks += String.format("%d. %s\n", i+1, tasks.get(i));
+        }
+
+        return all_tasks;
     }
 
     public static void hal9000_op() {
         boolean end = false;
         Scanner sc = new Scanner(System.in);
+        ArrayList<String> tasks = new ArrayList<>();
+        
         while (!end) {
             String input = get_input(sc);
             if (input.compareTo("bye") == 0) {
                 end = true;
+            } else if (input.compareTo("list") == 0) {
+                System.out.println(format_response(summarize(tasks)));
             } else {
+                // add task to list of tasks
+                tasks.add(input);
+
                 String output_string = format_response(get_output(input));
                 System.out.println(output_string);
             }
         }
-        System.out.println(format_response("Bye. Hope to see you again soon!"));
+        System.out.println(format_response("Bye. Hope to see you again soon!\n"));
     }
     
     public static void main(String[] args) {
@@ -54,7 +71,7 @@ public class Duke {
         // Intro message
         System.out.println(logo);
         System.out.println(format_response(
-            "Hello! I'm Hal9000\nWhat can I do for you?"
+            "Hello! I'm Hal9000\nWhat can I do for you?\n"
         ));
 
         hal9000_op();
