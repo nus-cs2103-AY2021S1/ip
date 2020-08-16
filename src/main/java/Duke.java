@@ -55,14 +55,14 @@ public class Duke {
                 System.out.println(numberTasks);
                 printBottomLine();
             } catch (IndexOutOfBoundsException e) {
-             throw new EmptyArgumentException("No task name given", e);
+             throw new EmptyArgumentException("No task name given! ", e);
             }
         }
         else if (word.startsWith("deadline") || word.startsWith("event")) {
             int index = word.indexOf(' ');
             boolean isDeadline = word.startsWith("deadline");
             if (index == -1 || index == word.length() - 1) {
-              throw new EmptyArgumentException("No task name given");
+              throw new EmptyArgumentException("No task name given!");
             }
             //get stuff after the space if there are still characters after the space
             String content = word.substring(word.indexOf(' ') + 1);
@@ -89,7 +89,7 @@ public class Duke {
                 System.out.println(numberTasks);
                 printBottomLine();
             } catch (IndexOutOfBoundsException e) {
-               throw new EmptyArgumentException("No task name given");
+               throw new EmptyArgumentException("No task name given!");
             }
         }
 
