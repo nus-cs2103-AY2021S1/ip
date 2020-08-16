@@ -57,27 +57,37 @@ public class Duke {
                         input = sc.nextLine();
                         continue;
                     }
-                } else if (input.startsWith("event")){
+                } else if (input.startsWith("event")) {
                     int breakpoint = input.indexOf("/");
                     try {
-                        String tempString = input.substring("event".length()+1, breakpoint);
-                        String tempString2 = "("+ input.substring(breakpoint+1, breakpoint +3) + ":"+ input.substring(breakpoint+3) + ")";
+                        String tempString = input.substring("event".length() + 1, breakpoint);
+                        String tempString2 = "(" + input.substring(breakpoint + 1, breakpoint + 3) + ":" + input.substring(breakpoint + 3) + ")";
                         String result = tempString + tempString2;
                         Task theTask = new Event(result);
                         System.out.println("  " + theTask.getCurrentStatus());
                         toDoList.add(theTask);
                     } catch (StringIndexOutOfBoundsException e) {
                         System.out.println("☹ OOPS!!! The description of a event cannot be incomplete.");
-                        System.out.println(" "+"-----------------");
+                        System.out.println(" " + "-----------------");
                         input = sc.nextLine();
                         continue;
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
-                        System.out.println(" "+"-----------------");
+                        System.out.println(" " + "-----------------");
                         input = sc.nextLine();
                         continue;
                     }
-                } else {
+                }/* else if (input.startsWith("delete")){
+                    System.out.println(" Noted. I've removed this task:");
+                    Task theTask = toDoList.remove(Integer.parseInt(input.substring(7))-1);
+                    try {
+                        System.out.println(theTask.getCurrentStatus());
+                    } catch (DukeException e){
+                        System.out.println(e.getMessage());
+                    }
+                 }
+                */
+                 else {
                     System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     System.out.println(" "+"-----------------");
                     input = sc.nextLine();
@@ -89,11 +99,7 @@ public class Duke {
                 int count = 1;
                 System.out.println(" Here are the tasks in your list:");
                 for (Task t: toDoList) {
-                    try{
-                        System.out.println("  "+ count + ". " + t.getCurrentStatus());
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                    }
+                    System.out.println("  "+ count + ". " + t.getCurrentShortStatus());
                     count++;
                 }
             }
