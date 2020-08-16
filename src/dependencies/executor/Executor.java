@@ -1,9 +1,11 @@
 package dependencies.executor;
 
+import dependencies.storage.Store;
 import static dependencies.executor.Commands.*;
 
 public class Executor {
 
+    private static final Store storage = Store.initStorage(100);
     private static final String ADD_COMMAND = "add";
     private static final String LIST_COMMAND = "list";
     private Commands commandState;
@@ -26,6 +28,17 @@ public class Executor {
 
     private void exec(Commands c) {
 
+    }
+
+    /**
+     * Temporary function to satisfy the Level-2 requirements.
+     * @param command
+     * @return String indicating the finished command
+     */
+    public String level2Exec(String command) {
+        if (command.equals(LIST_COMMAND)) {
+
+        }
     }
 
     public String receiveAndExec(String command) {

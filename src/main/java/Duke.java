@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import dependencies.parser.Parser;
+
 public class Duke {
     private static final String DIVIDER = "____________________________________________________________\n";
     private static final String GREETING = "Hello, I'm Duke\nwhat can I do for you?\n";
@@ -20,6 +22,7 @@ public class Duke {
     }
 
     private static void readInput(Scanner sc) {
+        Parser p = Parser.initParser();
         while (sc.hasNext()) {
             String input = sc.nextLine();
             if (input.equals("bye")) {
