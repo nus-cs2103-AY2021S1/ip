@@ -84,6 +84,40 @@
 
 
     ---------------------------------
+    OKay, I've remove this task: 
+        [T][?] return book
+    Now you have 4 tasks in the list
+    ---------------------------------
+
+
+    ---------------------------------
+    Here are the tasks in your list:
+    1. [T][?] read book
+    2. [T][?] borrow book
+    3. [D][?] return book (by: Sunday)
+    4. [E][?] project meeting (at: Mon 2-4pm)
+    ---------------------------------
+
+    ---------------------------------
+    OOPS! This task does not exist
+    ---------------------------------
+
+
+    ---------------------------------
+    OKay, I've remove this task: 
+        [T][?] read book
+    Now you have 3 tasks in the list
+    ---------------------------------
+
+
+    ---------------------------------
+    Here are the tasks in your list:
+    1. [T][?] borrow book
+    2. [D][?] return book (by: Sunday)
+    3. [E][?] project meeting (at: Mon 2-4pm)
+    ---------------------------------
+
+    ---------------------------------
     Bye. Hope to see you again soon!
     ---------------------------------
 
