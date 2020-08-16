@@ -1,4 +1,5 @@
 import exceptions.DukeException;
+import exceptions.EmptyBodyException;
 import exceptions.UnknownCommandException;
 
 import java.util.Scanner;
@@ -67,7 +68,11 @@ public class Duke {
                 addTask(new Event(eventParts[0], eventParts[1]));
                 return true;
             case "todo":
-                addTask(new Todo(scanner.nextLine()));
+                String task = scanner.nextLine().trim();
+                if (task.isBlank()) {
+                    throw(new EmptyBodyException());
+                }
+                addTask(new Todo(task));
                 return true;
             default:
                 throw(new UnknownCommandException(userInput));
@@ -84,7 +89,6 @@ public class Duke {
             } catch (DukeException e) {
                 printMessage(e.getFriendlyMessage());
             }
-
         }
         scanner.close();
     }
