@@ -9,5 +9,12 @@ event lesson
 event
 list
 done 2
+done a
+done 0
+done -3
+list
+delete 2
+delete 0
+delete -3
 list
 bye

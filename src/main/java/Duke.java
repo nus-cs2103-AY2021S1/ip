@@ -1,18 +1,15 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     private Scanner scanner;
-
-    private static final int MAXSIZE = 100;
-    private Task[] taskList;
-    private int taskListSize;
-
+    private List<Task> taskList;
     private String logo, greetingMessage, exitMessage;
 
     public void initialise() {
         scanner = new Scanner(System.in);
-        taskList = new Task[MAXSIZE];
-        taskListSize = 0;
+        taskList = new ArrayList<>();
         logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -31,25 +28,26 @@ public class Duke {
 
     private void listAllTasks() {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < taskListSize; i++) {
+        int size = taskList.size();
+        for (int i = 0; i < size; i++) {
             int taskNumber = i + 1;
-            String entry = String.format("%d. %s", taskNumber, taskList[i]);
+            String entry = String.format("%d. %s", taskNumber, taskList.get(i));
             System.out.println(entry);
         }
     }
 
     private void addTask(Task task) {
-        taskList[taskListSize] = task;
-        taskListSize++;
+        taskList.add(task);
+        int size = taskList.size();
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
-        String taskWord = (taskListSize > 1 ? "tasks" : "task");
-        System.out.println(String.format("Now you have %d %s in the list.", taskListSize, taskWord));
+        String taskWord = (size > 1 ? "tasks" : "task");
+        System.out.println("Now you have " + size + " " + taskWord + " in the list.");
     }
 
     private void markTaskAsDone(int taskNumber) {
         int index = taskNumber - 1;
-        Task task = taskList[index];
+        Task task = taskList.get(index);
         task.markAsDone();
         System.out.println("Nice! I have marked this task as done:");
         System.out.println(task);
@@ -59,10 +57,10 @@ public class Duke {
         try {
             int taskNumber = Integer.parseInt(input);
             markTaskAsDone(taskNumber);
-        } catch (NullPointerException e) {
-            throw new DukeException("Error! The entry number you entered does not exist.");
-        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Error! Please enter a valid entry number.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Error! The task number you entered does not exist.");
+        } catch (NumberFormatException e) {
+            throw new DukeException("Error! Please enter a valid task number.");
         }
     }
     
@@ -92,6 +90,21 @@ public class Duke {
             String at = inputBreakdown[1];
             Event event = new Event(description, at);
             addTask(event);
+        }
+    }
+    
+    private void handleDeleteCommand(String input) throws DukeException {
+        try {
+            int taskNumber = Integer.parseInt(input);
+            int index = taskNumber - 1;
+            Task task = taskList.get(index);
+            taskList.remove(index);
+            System.out.println("Got it. I've removed this task:");
+            System.out.println(task);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Error! The task number you entered does not exist.");
+        } catch (NumberFormatException e) {
+            throw new DukeException("Error! Please enter a valid task number.");
         }
     }
 
@@ -135,6 +148,13 @@ public class Duke {
                         throw new DukeException("Error! Note the syntax: event [description] /at [date]");
                     } else {
                         handleEventCommand(inputBreakdown[1]);
+                    }
+                    break;
+                case ("delete"):
+                    if (inputBreakdown.length < 2) {
+                        throw new DukeException("Error! Note the syntax: delete [task number]");
+                    } else {
+                        handleDeleteCommand(inputBreakdown[1]);
                     }
                     break;
                 case ("bye"):
