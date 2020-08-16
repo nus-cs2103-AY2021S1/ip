@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -17,22 +18,44 @@ public class Duke {
             LEFT_MARGIN + "_______________________________________________________\n";
 
 
-    // processes the input and generates the output. In this implementation, it just repeats the input in another
-    // format.
-    public static String commandOutput(String input) {
+    // processes the input and generates the output in the correct format.
+    public static String displayOutput(String input) {
         return DIVIDER + LEFT_MARGIN + input + "\n" + DIVIDER;
+    }
+
+    // formats a list item
+    public static String displayListItem(String listItem, short rank) {
+        return String.format("%s. %s", rank, listItem);
+    }
+
+    // displays the task list in the correct format
+    public static String displayList(ArrayList<String> inputArr) {
+        StringBuilder out = new StringBuilder(DIVIDER);
+        for (short i = 0; i < inputArr.size(); i++) {
+            out.append(LEFT_MARGIN).append(displayListItem(inputArr.get(i), (short) (i + 1))).append("\n");
+        }
+        return out.append(DIVIDER).toString();
+    }
+
+    // adds task to list
+    public static String addToList(String inputTask, ArrayList<String> taskList) {
+        taskList.add(inputTask);
+        return displayOutput("added: " + inputTask);
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println(DIVIDER + LOGO + commandOutput(WELCOME_MESSAGE));
+        ArrayList<String> taskList = new ArrayList<>();
+        System.out.println(DIVIDER + LOGO + displayOutput(WELCOME_MESSAGE));
         while (sc.hasNext()) {
             String input = sc.nextLine();
             if (input.equals("bye")) {
-                System.out.print(commandOutput(EXIT_MESSAGE));
+                System.out.print(displayOutput(EXIT_MESSAGE));
                 break;
+            } else if (input.equals("list")) {
+                System.out.print(displayList(taskList));
             } else {
-                System.out.print(commandOutput(input));
+                System.out.print(addToList(input, taskList));
             }
         }
     }
