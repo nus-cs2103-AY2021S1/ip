@@ -11,8 +11,9 @@ public class Task {
         return (isDone ? "X" : " "); //return tick or X symbols
     }
 
-    public void markAsDone() {
-        isDone = true;
+    public Task markAsDone() {
+        this.isDone = true;
+        return this;
     }
 
     @Override

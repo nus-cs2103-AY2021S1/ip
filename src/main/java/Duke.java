@@ -1,10 +1,12 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
     public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
-        Task[] list = new Task[101];
+        ArrayList<Task> list = new ArrayList<>();
         String divider = "    _________________________________________\n";
         int listIndex = 1;
         String MrCamel = "                  ,,__\n"
@@ -24,8 +26,9 @@ public class Duke {
             if (command.equals("list")) {
                 System.out.println(divider);
                 System.out.println("      Tasks:");
-                for (int i = 1; i < listIndex; i++) {
-                    System.out.println("      " + i + ". " + list[i]);
+
+                for (int i = 1; i < list.size() + 1; i++) {
+                    System.out.println("      " + i + ". " + list.get(i-1));
                 }
                 System.out.println(divider);
 
@@ -35,11 +38,11 @@ public class Duke {
                     String taskDescription = command.substring(9, indexOfDate - 1);
                     String by = command.substring(indexOfDate + 3);
                     Deadline deadline = new Deadline(taskDescription, by);
-                    list[listIndex] = deadline;
-                    listIndex++;
+                    list.add(deadline);
+
                     System.out.println(divider);
                     System.out.println("      Mr Camel has added: " + deadline);
-                    System.out.println("      Number of tasks: " + (listIndex - 1));
+                    System.out.println("      Number of tasks: " + list.size());
                     System.out.println(divider);
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Please provide both a description and a deadline!");
@@ -49,11 +52,11 @@ public class Duke {
                 try {
                     String taskDescription = command.substring(5);
                     Todo todo = new Todo(taskDescription);
-                    list[listIndex] = todo;
-                    listIndex++;
+                    list.add(todo);
+
                     System.out.println(divider);
                     System.out.println("      Mr Camel has added: " + todo);
-                    System.out.println("      Number of tasks: " + (listIndex - 1));
+                    System.out.println("      Number of tasks: " + list.size());
                     System.out.println(divider);
                 } catch (StringIndexOutOfBoundsException e) {
                     throw new DukeException("Please provide a description!");
@@ -65,11 +68,11 @@ public class Duke {
                     String taskDescription = command.substring(6, indexOfDate - 1);
                     String at = command.substring(indexOfDate + 3);
                     Event event = new Event(taskDescription, at);
-                    list[listIndex] = event;
-                    listIndex++;
+                    list.add(event);
+
                     System.out.println(divider);
                     System.out.println("      Mr Camel has added: " + event);
-                    System.out.println("      Number of tasks: " + (listIndex - 1));
+                    System.out.println("      Number of tasks: " + list.size());
                     System.out.println(divider);
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Please provide both a description and date!");
@@ -78,9 +81,10 @@ public class Duke {
             } else if (command.contains("done")) {
                 try {
                     int indexDone = Integer.parseInt(command.substring(5));
-                    list[indexDone].markAsDone();
+                    list.set(indexDone - 1, list.get(indexDone - 1).markAsDone());
+
                     System.out.println(divider);
-                    System.out.println("      Mr Camel will mark this task as done:\n" + "        " + list[indexDone]);
+                    System.out.println("      Mr Camel will mark this task as done:\n" + "        " + list.get(indexDone - 1));
                     System.out.println(divider);
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Invalid task number!");
@@ -88,6 +92,21 @@ public class Duke {
                     throw new DukeException("Invalid task number!");
                 }
 
+            } else if (command.contains("delete")) {
+                try {
+                    int indexDone = Integer.parseInt(command.substring(7));
+
+                    System.out.println(divider);
+                    System.out.println("      Mr Camel will delete this task:\n" + "        " + list.get(indexDone - 1));
+                    list.remove(indexDone - 1);
+                    System.out.println("      Number of tasks: " + list.size());
+                    System.out.println(divider);
+
+                } catch (IndexOutOfBoundsException e) {
+                    throw new DukeException("Invalid task number!");
+                } catch (NullPointerException e) {
+                    throw new DukeException("Invalid task number!");
+                }
 
             } else if (command.equals("bye")) {
                 System.out.println(divider);
