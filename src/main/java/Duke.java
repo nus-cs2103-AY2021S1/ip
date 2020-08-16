@@ -32,7 +32,12 @@ public class Duke {
                 showTaskList(tasks);
             } else if (userInput.substring(0,4).equals("done")) { //mark as done
                 int pos = Integer.parseInt(userInput.substring(5, len));
-                taskIsDone(tasks, pos);
+                if(pos <= tasks.size() && pos > 0) {
+                    taskIsDone(tasks, pos);
+                } else {
+                    System.out.println("You have keyed in an invalid number!");
+                }
+
             } else { //added
                 tasks.add(new Task(userInput));
                 System.out.println(line);
@@ -60,9 +65,12 @@ public class Duke {
     }
 
     static void taskIsDone(ArrayList<Task> tasks, int pos) {
-        tasks.get(pos).markAsDone(); //marking task as done
+        tasks.get(pos - 1).markAsDone(); //marking task as done
+        System.out.println(line);
+        System.out.print(bot);
         System.out.println("Great work! I've marked this task as done: ");
-        System.out.println("[" + tasks.get(pos).getStatusIcon() + "]" + " " + tasks.get(pos).getTask());
-        System.out.println("Keep the ticks going!");
+        System.out.println("[" + tasks.get(pos - 1).getStatusIcon() + "]" + " " + tasks.get(pos - 1).getTask());
+        System.out.println("Keep the ticks going! ^_^");
+        System.out.println(line);
     }
 }
