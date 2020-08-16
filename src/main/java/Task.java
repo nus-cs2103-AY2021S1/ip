@@ -1,9 +1,8 @@
 package main.java;
-import java.util.*;
 
 public class Task {
-    private String description;
-    private boolean isDone;
+    protected String description;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -16,8 +15,12 @@ public class Task {
                 : "\u2718";
     }
 
-    public String getDescription() { return this.description; }
-
     public void finishTask() { isDone = true; }
+
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + this.description;
+    }
+
 
 }
