@@ -1,8 +1,8 @@
 public class Task {
     private static int taskCount = 0;
-    private int taskId;
+    private final int taskId;
     private boolean completed;
-    private String description;
+    private final String description;
 
     private static final String TICK = "\u2713", CROSS = "\u2718";
 
@@ -12,8 +12,17 @@ public class Task {
         this.completed = false;
     }
 
+    protected Task complete() {
+        this.completed = true;
+        return this;
+    }
+    public int getID() {
+        return this.taskId;
+    }
+
     @Override
     public String toString() {
-        return this.taskId + ". " + this.description;
+        return "[" + (this.completed ? TICK : CROSS) + "] "
+                + this.description;
     }
 }

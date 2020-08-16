@@ -8,15 +8,16 @@ public class Duke {
     private static final String exitGreeting = "Bye. Hope to see you again soon!";
     private static final String indent = "    ";
     private static final String mode = "list";
+    private static final String doneMessage = "Nice! I've marked this task as done";
 
     static boolean terminate = false;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        TaskList allTasks = new TaskList();
+        TaskList myTasks = new TaskList();
         greet();
         while(!terminate) {
-            respond(sc, allTasks);
+            respond(sc, myTasks);
         }
         sc.close();
     }
@@ -29,18 +30,17 @@ public class Duke {
     }
 
     // determines Duke's response and exit conditions:
-    private static void respond(Scanner sc, TaskList allTasks) {
+    private static void respond(Scanner sc, TaskList myTasks) {
         String input = sc.nextLine();
-        ArrayList<String> response = new ArrayList<>();
+        ArrayList<String> response;
 
         if(input.equals("bye")) {
             response = exit();
         } else if(Duke.mode.equals("echo")) {
             response = echo(input);
         } else {
-            response = handleTask(input, allTasks);
-        }
-        ;
+            response = handleTask(input, myTasks);
+        };
         printResponse(response);
     };
 
@@ -48,16 +48,24 @@ public class Duke {
         ArrayList<String> response = new ArrayList<>();
         // enumerates all tasks:
         if (description.equals("list")) {
+            response.add("Here are the tasks in your list:");
             ArrayList<Task> allTasks = tasks.getAllTasks();
             for(Task t : allTasks) {
-                response.add(t.toString());
+                response.add(t.getID() + "."  + t.toString());
             }
+        }  else if (isDoneAction(description)) {
+            String[] words = description.split(" ");
+            int taskID = Integer.parseInt(words[1]);
+            response.add(doneMessage);
+            response.add(tasks.completeTask(taskID));
         } else {
             String reply = tasks.addEntry(description);
             response.add(reply);
         }
         return prettify(response);
     }
+
+
 
     private static ArrayList<String> exit() {
         Duke.terminate = true;
@@ -95,7 +103,10 @@ public class Duke {
         }
     }
 
-
+    private static boolean isDoneAction(String description) {
+        String[] words = description.split(" ");
+        return words[0].equals("done") && words.length == 2;
+    }
 
     private static void printLogo() {
         String logo = " ____        _        \n"
