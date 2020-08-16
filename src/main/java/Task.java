@@ -11,7 +11,10 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
-    public void markAsDone() {
+    public void markAsDone() throws InvalidCommandException {
+        if (isDone) {
+            throw new InvalidCommandException("The task " + this + " has already been done.");
+        }
         isDone = true;
     }
 
