@@ -16,7 +16,7 @@ public class Task {
     @Override
     public String toString(){
         String finished = this.done ? "✓" : "✗";
-        String toReturn = "[" + finished + "] " + taskName;
+        String toReturn = "[" + finished + "]" + taskName;
         return toReturn;
     }
 }

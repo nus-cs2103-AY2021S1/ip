@@ -1,4 +1,8 @@
 import main.java.Task;
+import main.java.Todo;
+import main.java.Deadline;
+import main.java.Event;
+
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -39,8 +43,28 @@ public class Duke {
                             todo.get(number - 1) + "\n" + underscore
                         );
             } else {
-                todo.add(new Task(line));
-                System.out.println(underscore + " added: " + line + "\n" + underscore);
+                if (line.indexOf("todo") == 0){
+                    String[] splits = line.split("todo");
+                    Todo task = new Todo(splits[1]);
+                    todo.add(task);
+                    System.out.println(underscore + "Got it. I've added this to task: \n" + task + "\n"
+                            + "Now you have " + todo.size() + " tasks in the list \n" + underscore
+                    );
+                } else if (line.indexOf("deadline") == 0) {
+                    String[] splits = line.split("deadline |/by ");
+                    Deadline task = new Deadline(splits[1], splits[2]);
+                    todo.add(task);
+                    System.out.println(underscore + "Got it. I've added this to task: \n" + task + "\n"
+                            + "Now you have " + todo.size() + " tasks in the list \n" + underscore
+                    );
+                } else if (line.indexOf("event") == 0){
+                    String[] splits = line.split("event |/at");
+                    Event task = new Event(splits[1], splits[2]);
+                    todo.add(task);
+                    System.out.println(underscore + "Got it. I've added this to task: \n" + task + "\n"
+                            + "Now you have " + todo.size() + " tasks in the list \n" + underscore
+                    );
+                }
             }
         }
         input.close();
