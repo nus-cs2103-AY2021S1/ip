@@ -1,6 +1,6 @@
 public class Task {
-  private static final String DONE = "[✓]";
-  private static final String NOT_DONE = "[✗]";
+  private static final String DONE = "[x]";
+  private static final String NOT_DONE = "[ ]";
 
   private String name;
   private String type;

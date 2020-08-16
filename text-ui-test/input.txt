@@ -1,0 +1,7 @@
+todo buy book
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
+event project meeting /at Sat 2-4pm
+done 2
+list
+bye
