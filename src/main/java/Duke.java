@@ -64,27 +64,45 @@ public class Duke {
 
         String input = sc.nextLine();
         while(!input.equals("bye")) {
-            if (input.equals("list")) {
-                displayList(tasks);
-            } else if (input.matches("done \\d")) {
-                String[] arr = input.split(" ");
-                int index = Integer.parseInt(arr[1]) - 1;
-                if( index < tasks.size() && index > -1) {
+            try {
+                if (input.equals("list")) {
+                    displayList(tasks);
+                } else if (input.matches("done.*")) {
+                    if(input.matches("done\\s*")) {
+                        throw new EmptyArgumentException("Task Index");
+                    }
+                    if(!input.matches("done \\d+")) {
+                        throw new InvalidArgumentException("Task Index");
+                    }
+                    String[] arr = input.split(" ");
+                    int index = Integer.parseInt(arr[1]) - 1;
+                    if (index >= tasks.size() || index < 0) {
+                        throw new InvalidArgumentException("index");
+                    }
                     tasks.get(index).markAsDone();
                     print("Nice! I've marked this task as done:\n" + tasks.get(index));
+                } else if (input.matches("todo.*")) {
+                    if(input.matches("todo\\s*")) {
+                        throw new EmptyArgumentException("todo's description");
+                    }
+                    addTask(new Todo(input.substring(5)), tasks);
+                } else if (input.matches("deadline.*")) {
+                    if(input.matches("deadline\\s*")) {
+                        throw new EmptyArgumentException("deadline's description");
+                    }
+                    String[] split = input.substring(9).split("/by");
+                    addTask(new Deadline(split[0].stripTrailing(), split[1].stripLeading()), tasks);
+                } else if (input.matches("event.*")) {
+                    if(input.matches("event\\s*")) {
+                        throw new EmptyArgumentException("event's description");
+                    }
+                    String[] split = input.substring(6).split("/at");
+                    addTask(new Event(split[0].stripTrailing(), split[1].stripLeading()), tasks);
                 } else {
-                    print("Invalid Index Bro");
+                    throw new InvalidCommandException();
                 }
-            } else if (input.matches("todo .+")) {
-                addTask(new Todo(input.substring(5)), tasks);
-            } else if (input.matches("deadline .+")) {
-                String[] split = input.substring(9).split("/by");
-                addTask(new Deadline(split[0].stripTrailing(), split[1].stripLeading()), tasks);
-            } else if (input.matches("event .+")) {
-                String[] split = input.substring(6).split("/at");
-                addTask(new Event(split[0].stripTrailing(), split[1].stripLeading()), tasks);
-            } else {
-                print("No command called / invalid parameters given to command");
+            } catch (Exception e) {
+                print(e.toString());
             }
 
             input = sc.nextLine();
