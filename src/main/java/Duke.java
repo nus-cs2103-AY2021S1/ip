@@ -14,6 +14,9 @@ public class Duke {
         Task[] taskList = new Task[taskCapacity];
         int numTasks = 0;
 
+        // Declare task tokens parsed from user input
+        String[] taskTokens;
+        String taskName;
 
         // Main conversation loop
         Scanner sc = new Scanner(System.in);
@@ -27,6 +30,7 @@ public class Duke {
 
             // Respond by user commands
             String userCommand = userTokens[0];
+            String userTask = String.join(" ", Arrays.copyOfRange(userTokens, 1, userTokens.length));
             switch(userCommand) {
 
                 // Exit the program
@@ -37,9 +41,44 @@ public class Duke {
 
                 // List the tasks available in taskList
                 case "list":
+                    System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < numTasks; i++) {
                         System.out.println(i + 1 + "." + taskList[i]);
                     }
+                    break;
+
+                // Create a to-do task
+                case "todo":
+                    taskList[numTasks] = new Todo(userTask);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + taskList[numTasks]);
+                    System.out.println("Now you have " + (numTasks + 1) + " tasks in the list.");
+                    numTasks++;
+                    break;
+
+
+                // Create a deadline task (contains "/by")
+                case "deadline":
+                    taskTokens = userTask.split(" /by ");
+                    taskName = taskTokens[0];
+                    String taskBy = taskTokens[1];
+                    taskList[numTasks] = new Deadline(taskName, taskBy);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + taskList[numTasks]);
+                    System.out.println("Now you have " + (numTasks + 1) + " tasks in the list.");
+                    numTasks++;
+                    break;
+
+                // Create a event task (contains "/at")
+                case "event":
+                    taskTokens = userTask.split(" /at ");
+                    taskName = taskTokens[0];
+                    String taskAt = taskTokens[1];
+                    taskList[numTasks] = new Event(taskName, taskAt);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + taskList[numTasks]);
+                    System.out.println("Now you have " + (numTasks + 1) + " tasks in the list.");
+                    numTasks++;
                     break;
 
                 // Mark the identified task as done
@@ -52,9 +91,6 @@ public class Duke {
 
                 // For all other user input, add to task list
                 default:
-                    taskList[numTasks] = new Task(userInput);
-                    numTasks++;
-                    System.out.println("added: " + userInput);
             }
         }
     }
