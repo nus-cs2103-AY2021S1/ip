@@ -9,10 +9,16 @@ list
 done1
 done
 todo
+delete 2
+list
 event
 deadline
 done 2
 done s3
-done 3
+list
+delete1
+delete 5
+delete s
+delete 1
 list
 bye

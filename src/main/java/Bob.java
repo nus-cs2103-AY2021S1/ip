@@ -85,21 +85,32 @@ public class Bob {
         }
 
         return  list.size() == 0
-                ? "Wow, you currently have no tasks."
+                ? "You currently have no tasks."
                 : taskCompleted == list.size()
                 ? "Wow congrats, you finished all your tasks.\n" + output
                 : "You have " + (list.size() - taskCompleted) + " unfinished tasks.\n" + output;
     }
 
     // Marks task as done
-    private String markTaskDone(int taskNum) throws BobListIndexOutOfBoundsException{
+    private String markTaskDone(int taskNum) throws BobListIndexOutOfBoundsException {
         if (taskNum > list.size() || taskNum <= 0) {
-            throw new BobListIndexOutOfBoundsException(list.size(), taskNum);
+            throw new BobListIndexOutOfBoundsException(list.size(), taskNum, "mark");
         }
         int index = taskNum - 1;
         Task task = list.get(index).markDone();
         list.set(index, task);
-        return "I have marked the task as done, good job. \n" + task + "\n";
+        return "I have marked the task as done, good job.\n" + task + "\n";
+    }
+
+    //Deletes the task from list
+    private String deleteTask(int taskNum) throws BobListIndexOutOfBoundsException {
+        if (taskNum > list.size() || taskNum <= 0) {
+            throw new BobListIndexOutOfBoundsException(list.size(), taskNum, "delete");
+        }
+        int index = taskNum - 1;
+        Task task = list.get(index);
+        list.remove(index);
+        return "I have deleted the task.\n" + task + "\n";
     }
 
 
@@ -120,9 +131,12 @@ public class Bob {
     // Executes action based on command with need for user input
     private Bob execute(Command command, String input) throws BobListIndexOutOfBoundsException, BobEmptyDateException, BobInvalidNumberException {
         switch (command) {
+            // If the command given by user is todo
             case TODO:
                 String outputTodo = addTodo(input.substring(5));
                 return new Bob(outputTodo, this.list);
+
+            // If the command given by user is deadline, handles empty date exception
             case DEADLINE:
                 String[] split1 = input.split("/");
                 if (split1.length == 1) {
@@ -132,6 +146,8 @@ public class Bob {
                 String by1 = split1[1];
                 String outputDeadline = addDeadline(description1, by1);
                 return new Bob(outputDeadline, this.list);
+
+            // If the command given by user is event, handles empty date exception
             case EVENT:
                 String[] split2 = input.split("/");
                 if (split2.length == 1) {
@@ -141,6 +157,8 @@ public class Bob {
                 String by2 = split2[1];
                 String outputEvent = addEvent(description2, by2);
                 return new Bob(outputEvent, this.list);
+
+            // If the command given by user is done, handles invalid number and number out of range exceptions
             case DONE:
                 try {
                     int taskNumber = Integer.parseInt(input.substring(4).replaceAll("\\s+", ""));
@@ -152,7 +170,17 @@ public class Bob {
                     throw new BobInvalidNumberException();
                 }
 
-
+                // If the command given by user is delete, handles invalid number and number out of range exceptions
+            case DELETE:
+                try {
+                    int taskNumber = Integer.parseInt(input.substring(6).replaceAll("\\s+", ""));
+                    String out = deleteTask(taskNumber);
+                    return new Bob(out, this.list);
+                } catch (BobListIndexOutOfBoundsException e){
+                    throw e;
+                } catch (NumberFormatException e) {
+                    throw new BobInvalidNumberException();
+                }
             default:
                 return this;
         }
@@ -178,7 +206,7 @@ public class Bob {
 
 
 
-    // Handles user input which decides which command Bob executes
+    // Handles user input which decides which command Bob executes, handles all exceptions
     public Bob nextCommand(String input) throws BobInvalidCommandException,
             BobEmptyTaskException, BobListIndexOutOfBoundsException, BobEmptyDateException, BobInvalidNumberException {
         try {
@@ -188,6 +216,8 @@ public class Bob {
                 return execute(Command.LIST);
             } else if (input.length() >= 4 && input.substring(0, 4).equals("done")) {
                 return execute(Command.DONE, input);
+            } else if (input.length() >= 6 && input.substring(0,6).equals("delete")) {
+                return execute(Command.DELETE, input);
             } else if (input.length() >= 4 && input.substring(0, 4).equals("todo")) {
                 if (input.substring(4).replaceAll("\\s+", "").length() == 0) {
                     throw new BobEmptyTaskException();
@@ -203,6 +233,7 @@ public class Bob {
                     throw new BobEmptyTaskException();
                 }
                 return execute(Command.DEADLINE, input);
+                // If user's command is invalid/ not recognisable by Bob
             } else {
                 throw new BobInvalidCommandException();
             }
@@ -216,6 +247,7 @@ public class Bob {
 
     }
 
+    // Main environment where Bob runs
     public static void main(String[] args) {
         // Initializing stage
         Bob chatbot = initializeBob();
