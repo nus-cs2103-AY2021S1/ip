@@ -1,7 +1,7 @@
 public abstract class Task {
 
-    static final String DONE = "✓";
-    static final String NOT_DONE = "✗";
+    static final char DONE = '\u2713';
+    static final char NOT_DONE = '\u2717';
 
     final String itemString;
     boolean isDone;
@@ -47,7 +47,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        String stateSymbol = this.isDone ? DONE : NOT_DONE;
+        char stateSymbol = this.isDone ? DONE : NOT_DONE;
         return String.format("[%s] %s", stateSymbol, this.itemString);
     }
 

@@ -13,7 +13,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String stateSymbol = this.isDone ? DONE : NOT_DONE;
+        char stateSymbol = this.isDone ? DONE : NOT_DONE;
         return String.format("[D][%s] %s (at: %s)", stateSymbol, this.itemString, this.date);
     }
 

@@ -7,7 +7,7 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        String stateSymbol = this.isDone ? DONE : NOT_DONE;
+        char stateSymbol = this.isDone ? DONE : NOT_DONE;
         return String.format("[T][%s] %s", stateSymbol, this.itemString);
     }
 
