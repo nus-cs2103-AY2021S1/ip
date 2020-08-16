@@ -7,4 +7,8 @@ done 2
 list
 delete 1
 list
+delete
+even
+delete a
+deadline return book
 bye
