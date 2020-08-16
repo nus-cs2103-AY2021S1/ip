@@ -23,9 +23,10 @@ public class Duke {
     private static String addSuccessfulMsg = "Got it. I've added this task:";
     private static String horizontalLine = "________________________________________";
     private static String cmdReq = "Your command: ";
-    private static String lazyHumanBash = "You have nothing in your list. Why are you so lazy human?";
+    private static String lazyHumanBash = "You have nothing in your list. Find something to do you human!";
     private static String unrecognizedCmdMsg = "I don't understand a single word you say, human\n"
             + "Speak robot language pls";
+    private static String invalidIdxMsg = "Invalid index. Don't you know how to count?";
 
     private static String taskReport() {
         return "You have " + tasks.size() + " tasks in your list";
@@ -63,15 +64,23 @@ public class Duke {
                         }
                     }
                 } else if (inputSplitted[0].equals(deleteCmd)) { // command is "delete [index]"
-                    int idx = Integer.parseInt(inputSplitted[1]) - 1;
-                    System.out.println(deleteMsg);
-                    System.out.println(tasks.remove(idx));
-                    System.out.println(taskReport());
+                    try {
+                        int idx = Integer.parseInt(inputSplitted[1]) - 1;
+                        System.out.println(deleteMsg);
+                        System.out.println(tasks.remove(idx));
+                        System.out.println(taskReport());
+                    } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                        throw new InvalidIndexException();
+                    }
                 } else if (inputSplitted[0].equals(doneCmd)) { // command is "done [index]"
-                    int idx = Integer.parseInt(inputSplitted[1]) - 1;
-                    tasks.set(idx, tasks.get(idx).markAsDone());
-                    System.out.println(doneMsg);
-                    System.out.println(tasks.get(idx));
+                    try {
+                        int idx = Integer.parseInt(inputSplitted[1]) - 1;
+                        tasks.set(idx, tasks.get(idx).markAsDone());
+                        System.out.println(doneMsg);
+                        System.out.println(tasks.get(idx));
+                    } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                        throw new InvalidIndexException();
+                    }
                 } else if (inputSplitted[0].equals(todoCmd)) { // command is "todo [description]"
                     if (inputSplitted.length == 1 || inputSplitted[1].equals("")) {
                         throw new InadequateCommandException("todo",
@@ -138,6 +147,8 @@ public class Duke {
                 }
             } catch (InadequateCommandException e) {
                 System.out.println(e.getMessage());
+            } catch (InvalidIndexException e) {
+                System.out.println(invalidIdxMsg);
             } catch (IncorrectCommandException e) {
                 System.out.println(unrecognizedCmdMsg);
             }
