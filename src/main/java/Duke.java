@@ -17,21 +17,36 @@ public class Duke {
 
     public static void start() {
         Scanner sc = new Scanner(System.in);
-        System.out.println(wrapWithLines(greet()));
+        DukePrint.print(greet());
 
         while (sc.hasNext()) {
-            String input = sc.nextLine();
-            if (input.equals("bye")) {
-                System.out.println(wrapWithLines(exit()));
-                System.exit(0);
-            } else if (input.equals("list")) {
-                System.out.println(wrapWithLines(list()));
-            } else if (input.split(" ")[0].equals("done")) {
-                int index = Integer.parseInt(input.split(" ")[1]);
-                System.out.println(wrapWithLines(done(index)));
-            } else {
-                System.out.println(wrapWithLines(addTask(input)));
+            String input = sc.nextLine().toLowerCase();
+            try {
+                if (input.strip().equals("bye")) {
+                    DukePrint.print(exit());
+                    System.exit(0);
+                } else {
+                    DukePrint.print(runCommand(input.strip()));
+                }
+            } catch (Exception ex) {
+                DukePrint.print("\t " + ex.toString());
             }
+        }
+    }
+
+    private static String runCommand(String input) {
+        String[] arr = input.split(" ", 2);
+        switch (arr[0]) {
+            case "list":
+                return list();
+            case "done":
+                return done(input);
+            case "todo":
+            case "deadline":
+            case "event":
+                return addTask(input);
+            default:
+                throw new InvalidCommandException();
         }
     }
 
@@ -48,14 +63,6 @@ public class Duke {
         return "\t Bye. Hope to see you again soon!";
     }
 
-    private static String line() {
-        return "\t" + "_".repeat(50);
-    }
-
-    private static String wrapWithLines(String str) {
-        return line() + "\n" + str + "\n" + line();
-    }
-
     private static String list() {
         StringBuilder str = new StringBuilder("\t Here are the tasks in your list:\n");
         for (int i = 0; i < numOfTasks; i++) {
@@ -68,12 +75,22 @@ public class Duke {
         return str.toString();
     }
 
-    private static String done(int input) {
-        int index = input - 1;
-        Task task = tasks[index];
-        task.markAsDone();
-        return "\t Nice! I've marked this task as done:\n\t\t"
-                + task.toString();
+    private static String done(String input) {
+        String[] arr = input.split(" ");
+        if (arr.length < 2) {
+            throw new EmptyTaskDoneException();
+        } else {
+            try {
+                int index = (Integer.parseInt(arr[1])) - 1;
+                Task task = tasks[index];
+                task.markAsDone();
+                return "\t Nice! I've marked this task as done:\n\t\t"
+                        + task.toString();
+            } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
+                throw new InvalidTaskDoneException();
+            }
+        }
+
     }
 
     private static void addTaskToList(Task task) {
@@ -83,6 +100,9 @@ public class Duke {
 
     private static String addTask(String input) {
         String[] splitInput = input.split(" ", 2);
+        if (splitInput.length < 2) {
+            throw new EmptyTaskDescriptionException(splitInput[0]);
+        }
         String command = splitInput[0];
         String taskString = splitInput[1];
         Task task;
@@ -92,16 +112,27 @@ public class Duke {
                 break;
             case "deadline": {
                 String[] parsed = taskString.split("/by");
+                if (parsed.length < 2) {
+                    throw new EmptyDueDateException();
+                }
+                if (parsed[0].strip().equals("")) {
+                    throw new EmptyTaskDescriptionException(command);
+                }
                 task = new Deadline(parsed[0], parsed[1]);
                 break;
             }
             case "event": {
                 String[] parsed = taskString.split("/at");
+                if (parsed.length < 2) {
+                    throw new EmptyEventDateException();
+                }
+                if (parsed[0].strip().equals("")) {
+                    throw new EmptyTaskDescriptionException(command);
+                }
                 task = new Event(parsed[0], parsed[1]);
                 break;
             }
             default:
-                // throw exception
                 return "";
         }
         addTaskToList(task);
