@@ -41,6 +41,12 @@ public class Duke {
         return String.format("Nice! I've marked this task as done.\n %s", task.toString());
     }
 
+    private static String addTaskToList(List<Task> tasks, Task task) {
+        tasks.add(task);
+        return String.format("Got it. I've added this task: \n %s \nNow you have %d tasks in the list",
+                task.toString(), tasks.size());
+    }
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -52,6 +58,7 @@ public class Duke {
         while (sc.hasNextLine()) {
             String[] inputList = sc.nextLine().split(" ", 2);
             String command = inputList[0];
+            String argument = inputList.length > 1 ? inputList[1] : "";
 
             switch (command) {
             case "bye":
@@ -63,9 +70,19 @@ public class Duke {
             case "done":
                 printToConsole(markTaskAsDone(tasks, Integer.parseInt(inputList[1])));
                 break;
+            case "todo":
+                printToConsole(addTaskToList(tasks, new ToDo(argument)));
+                break;
+            case "event":
+                String[] eventArguments = argument.split(" /at ");
+                printToConsole(addTaskToList(tasks, new Event(eventArguments[0], eventArguments[1])));
+                break;
+            case "deadline":
+                String[] deadlineArguments = argument.split(" /by ");
+                printToConsole(addTaskToList(tasks, new Deadline(deadlineArguments[0], deadlineArguments[1])));
+                break;
             default:
-                tasks.add(new Task(command));
-                printToConsole("added: " + command);
+                printToConsole("unsupported command");
             }
         }
 
