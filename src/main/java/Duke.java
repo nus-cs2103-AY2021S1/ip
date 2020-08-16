@@ -7,38 +7,58 @@ public class Duke {
         TaskManager manager = new TaskManager();
         String next = sc.nextLine();
         while (!next.equals("bye")) {
-            if (next.equals("list")) {
-                manager.printList();
-            } else {
-                String[] actionExtracted = extractAction(next);
-                String status = actionExtracted[0];
-                String body = actionExtracted[1];
-                switch (status) {
-                    case "done":
-                        manager.markTaskAsDone(Integer.parseInt(body));
-                        break;
-                    case "todo":
-                        manager.addTask(body, status);
-                        break;
-                    default:
-                        String[] timeExtracted = extractTime(body);
-                        String content = timeExtracted[0];
-                        String time = timeExtracted[1];
-                        manager.addTask(content, status, time);
-                        break;
+            try {
+                if (next.equals("list")) {
+                    manager.printList();
+                } else {
+                    String[] actionExtracted = extractAction(next);
+                    String status = actionExtracted[0];
+                    String body = actionExtracted[1];
+                    switch (status) {
+                        case "done":
+                            manager.markTaskAsDone(Integer.parseInt(body));
+                            break;
+                        case "todo":
+                            manager.addTask(body, status);
+                            break;
+                        default:
+                            String[] timeExtracted = extractTime(body);
+                            String content = timeExtracted[0];
+                            String time = timeExtracted[1];
+                            manager.addTask(content, status, time);
+                            break;
+                    }
                 }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            } finally {
+                next = sc.nextLine();
             }
-            next = sc.nextLine();
         }
         close();
     }
 
-    private static String[] extractAction(String command) {
+    private static String[] extractAction(String command) throws DukeException {
+        if (command.equals("todo") || command.equals("done") || command.equals("event") || command.equals("deadline")) {
+            throw new DukeException(String.format("☹ OOPS!!! The description of a %s cannot be empty.", command));
+        }
         return command.split(" ", 2);
     }
 
-    private static String[] extractTime(String command) {
-        return command.split(" /by | /at ", 2);
+    private static String[] extractTime(String command) throws DukeException {
+        String[] spliced = command.split(" /by | /at ", 2);
+        if (spliced.length < 2) {
+            if (spliced[0].charAt(0) == '/') {
+                throw new DukeException("☹ OOPS!!! Seems you forgot to supply the main content!");
+            } else {
+                String message = "☹ OOPS!!! Seems you forgot to supply the time!\n"
+                        + "Simply add '/by <time>' for deadline OR '/at <time>' for event behind your command";
+                throw new DukeException(message);
+            }
+        }
+        return spliced;
     }
 
     private static void close() {
