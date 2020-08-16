@@ -8,24 +8,32 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<String> todoList = new ArrayList<String>();
+        ArrayList<Task> todoList = new ArrayList<Task>();
 
         String greetingText = "Hey There! What can I do for you?";
         say(greetingText);
 
-        String response = scanner.nextLine();
-        while (!response.equals("bye")) {
-            if (response.equals("list")) {
+        String newResponse = scanner.nextLine();
+
+        while (!newResponse.equals("bye")) {
+            if (newResponse.equals("list")) {
                 int count = 1;
-                for (String task : todoList) {
+                for (Task task : todoList) {
                     System.out.println(count + ". " + task);
                     count++;
                 }
+            } else if (newResponse.substring(0, 4).equals("done")) {
+                int number = Integer.parseInt(newResponse.substring(5));
+                Task task = todoList.get(number - 1);
+                task.markDone();
+                say("I have marked it as done!");
+                System.out.println(task);
             } else {
-                say("Added '" + response + "' to the to-do list.");
-                todoList.add(response);
+                say("Added '" + newResponse + "' to the to-do list.");
+                Task newTask = new Task(newResponse);
+                todoList.add(newTask);
             }
-            response = scanner.nextLine();
+            newResponse = scanner.nextLine();
         }
 
         String byeText = "Bye! Hope to see you again.";
