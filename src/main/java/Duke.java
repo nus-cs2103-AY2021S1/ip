@@ -1,6 +1,16 @@
 import java.util.Scanner;
-
+import java.util.List;
+import java.util.ArrayList;
 public class Duke {
+
+    private static String line = "________________________________________________";
+
+    public static void display(String text) {
+        System.out.println(line);
+        System.out.println(text);
+        System.out.println(line);
+    }
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         String logo = "Hello I'm Verzachtend \n" +
@@ -8,12 +18,17 @@ public class Duke {
                 "BE YOURSELF, NEVER SURRENDER AND KEEP A SMILE ON YOUR FACE";
         System.out.println(logo);
 
-        String echo = scan.next();
+        String end = "bye";
+        List<String> list = new ArrayList<>();
+        String echo = scan.nextLine();
+        String listing = "list";
 
-        while (!echo.equals("bye")) {
-            System.out.println(echo);
-            echo = scan.next();
+        while (!echo.equals(end)) {
+            display(echo);
+            echo = scan.nextLine();
         }
+        System.out.println(line);
         System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(line);
     }
 }
