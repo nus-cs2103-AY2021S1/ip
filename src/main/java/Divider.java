@@ -1,12 +1,11 @@
 public class Divider {
-    private static final String DIVIDER = "――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――";
-
+    private static final String DIVIDER = "____________________________________________________________";
     public Divider() {
 
     }
 
     public String wrapInDivider(String message) {
-        return (DIVIDER + "\n " + message + "\n" + DIVIDER);
+        return ("\t" + DIVIDER + "\n\t " + message + "\n\t" + DIVIDER);
     }
 
 }

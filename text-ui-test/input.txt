@@ -1,0 +1,15 @@
+todo borrow book
+deadline readbook /by August 24th
+todo ip
+todo play basketball
+list
+done 3
+event project meeting /at 6 August 2-4pm
+event supper /at Tue 10-11pm
+done 1
+done 2
+list
+deadline CS 2101 readings /by Sunday
+done 6
+list
+bye
