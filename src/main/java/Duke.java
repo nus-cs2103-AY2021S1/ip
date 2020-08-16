@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -10,6 +11,11 @@ public class Duke {
     static String replyFormatter(String reply) {
         String partition = "__________________________";
         return String.format(partition + "\n%s\n" + partition, reply);
+    }
+
+    static String addTaskReplyFormatter(Task task) {
+        return replyFormatter(String.format("Got it. I've added this task:\n    %s\nNow you have %d tasks in the list"
+                , task.toString(), taskItems.size()));
     }
 
     static String listFormatter(List<Task> ls) {
@@ -42,9 +48,27 @@ public class Duke {
                 printReply(replyFormatter(reply));
                 break;
             } else if (reply.startsWith("done ")) {
-                Task task = taskItems.get(Integer.parseInt(reply.substring(5,reply.length())) - 1);
+                Task task = taskItems.get(Integer.parseInt(reply.substring(5, reply.length())) - 1);
                 task.markDone();
-                printReply(replyFormatter("Nice! I've marked this task as done:\n" +  task.toString()));
+                printReply(replyFormatter("Nice! I've marked this task as done:\n" + task.toString()));
+            } else if (reply.startsWith("todo ")) {
+                Task newTodo = new ToDo(reply.substring(5));
+                taskItems.add(newTodo);
+                printReply(addTaskReplyFormatter(newTodo));
+            } else if (reply.startsWith("deadline ")) {
+                String[] taskTimeArray = reply.split(" /by ");
+                String description = taskTimeArray[0].substring(9);
+                String by = taskTimeArray[1];
+                Task newDeadline = new Deadline(description, by);
+                taskItems.add(newDeadline);
+                printReply(addTaskReplyFormatter(newDeadline));
+            } else if (reply.startsWith("event ")) {
+                String[] taskTimeArray = reply.split(" /at ");
+                String description = taskTimeArray[0].substring(6);
+                String by = taskTimeArray[1];
+                Task newEvent = new Event(description, by);
+                taskItems.add(newEvent);
+                printReply(addTaskReplyFormatter(newEvent));
             } else if (reply.equals("list")) { // Show all in list
                 printReply(replyFormatter(listFormatter(taskItems)));
             } else { // Add to list
