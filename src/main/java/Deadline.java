@@ -7,6 +7,7 @@ public class Deadline extends Task {
     /**
      * Instantiates a Deadline with a description of it.
      * @param description the description of the deadline
+     * @param endDate the end date of the deadline
      */
     Deadline(String description, String endDate) {
         super(description);
@@ -17,6 +18,7 @@ public class Deadline extends Task {
      * Overloaded constructor to instantiate a deadline with customised status.
      * @param description description of the deadline
      * @param done status of the deadline
+     * @param endDate the end date of the deadline
      */
     Deadline(String description, boolean done, String endDate) {
         super(description, done);
@@ -34,8 +36,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return ConsoleColors.CYAN_BACKGROUND.getColor() + "DEADLINE" + ConsoleColors.RESET.getColor()
+        return ConsoleColors.RED_BACKGROUND.getColor() + "DEADLINE" + ConsoleColors.RESET.getColor()
                 + " " + super.toString()
-                + " (by: " + this.endDate + ")\n";
+                + " (by:" + this.endDate + ")";
     }
 }

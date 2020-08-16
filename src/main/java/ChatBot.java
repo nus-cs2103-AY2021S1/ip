@@ -103,7 +103,9 @@ class ChatBot {
 
             Task newTask = currentTask.markAsDone();
             this.toDoList.set(taskNumber - 1, newTask);
-            System.out.println("Sugoi! This task is done!");
+            System.out.println(ConsoleColors.YELLOW.getColor()
+                    + this.botName + ": " + "Sugoi! This task is done!"
+                    + ConsoleColors.RESET.getColor());
             System.out.println(newTask + "\n");
 
         } catch(NumberFormatException e) {
@@ -126,7 +128,7 @@ class ChatBot {
         } else if (command.equals("deadline")) {
             // guard clause. Show exception and break.
             if (description.indexOf("/by") < 0) {
-                System.out.println("Please enter a valid deadline!"); // to throw exception
+                System.out.println("Please enter a valid deadline!\n"); // to throw exception
                 return;
             }
 
@@ -134,6 +136,18 @@ class ChatBot {
             String deadlineName = descriptionArray[0];
             String deadlineEndDate = descriptionArray[1];
             taskToAdd = new Deadline(deadlineName, deadlineEndDate);
+        } else if (command.equals("event")) {
+            // guard clause. Show exception and break.
+            if (description.indexOf("/at") < 0) {
+                System.out.println("Please enter a valid event!\n"); // to throw exception
+                return;
+            }
+
+            String[] descriptionArray = description.split("/at", 2);
+            String eventName = descriptionArray[0];
+            String eventTiming = descriptionArray[1];
+            taskToAdd = new Event(eventName, eventTiming);
+
         } else {
             return;
         }
@@ -143,8 +157,8 @@ class ChatBot {
         System.out.println(ConsoleColors.YELLOW.getColor()
                 + this.botName + ": "
                 + "Hai! I have added this task to your list:\n"
-                + taskToAdd + "\n"
-                + ConsoleColors.RESET.getColor());
+                + ConsoleColors.RESET.getColor()
+                + taskToAdd + "\n");
         System.out.println(ConsoleColors.YELLOW.getColor()
             + "You now have "
             + this.toDoList.size()
