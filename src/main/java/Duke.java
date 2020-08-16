@@ -98,6 +98,22 @@ public class Duke {
         }
     }
 
+    public void deleteTask(String si) throws DukeException {
+        try {
+            int i = Integer.parseInt(si);
+            int index = i - 1;
+            Task task = list.get(index);
+            list.remove(task);
+            String msg = "Okay I've deleted:\n    " + task + "\n";
+            msg += String.format("Now you have %d tasks in the list.", list.size());
+            sendMessage(msg);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Sorry, I don't know what that means :(");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Invalid task number!");
+        }
+    }
+
     public void displayList() {
         if (list.isEmpty()) {
             sendMessage("Your list is empty!");
@@ -155,6 +171,15 @@ public class Duke {
                         sendMessage(e.getMessage());
                         break;
                     }
+                case "delete":
+                    try {
+                        String si = inputSplit[1];
+                        deleteTask(si);
+                        break;
+                    } catch (DukeException e) {
+                        sendMessage(e.getMessage());
+                        break;
+                    }
                 default:
                     sendMessage(
                             new DukeException("Sorry, I don't know what that means :(")
@@ -166,7 +191,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String lvl = "5";
+        String lvl = "6";
         String logo = "                                                 _     _\n"
                 + " _______  _______  _______  _______  __   __    (c).-.(c)\n"
                 + "|       ||       ||  _    ||  _    ||  | |  |    / ._. \\ \n"

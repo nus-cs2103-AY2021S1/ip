@@ -6,4 +6,6 @@ done 0
 done two
 done 2
 list
+delete 200
+delete 1
 bye
