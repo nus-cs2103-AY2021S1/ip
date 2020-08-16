@@ -15,6 +15,10 @@ public class TaskList {
         list.add(item);
     }
 
+    public int size() {
+        return list.size();
+    }
+
     public int getNumTasks() {
         return numTasks;
     }
