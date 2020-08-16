@@ -96,11 +96,15 @@ public class Duke {
                     System.out.println(formatReply("OOPS!!! Task number is invalid."));
                 }
             } else if (command.equals("delete")) {
-                int taskNumber = input.nextInt();
-                Task task = taskList.get(taskNumber - 1);
-                taskList.remove(taskNumber - 1);
-                System.out.println(formatReply("This task has been removed:\n" + task.toString()
-                        + "\nNow you have " + taskList.size() + " in the list."));
+                try {
+                    int taskNumber = input.nextInt();
+                    Task task = taskList.get(taskNumber - 1);
+                    taskList.remove(taskNumber - 1);
+                    System.out.println(formatReply("This task has been removed:\n" + task.toString()
+                            + "\nNow you have " + taskList.size() + " in the list."));
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(formatReply("OOPS!!! Task number is invalid."));
+                }
             } else {
                 try {
                     TypeOfTask typeOfTask;
