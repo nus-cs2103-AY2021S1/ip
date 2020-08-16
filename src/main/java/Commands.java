@@ -35,7 +35,7 @@ public class Commands {
                 inputs = scanner.nextLine().trim();
                 break;
             case INPUT_BYE:
-                System.out.println("~ \n I’ll Be Back \n~ ");
+                System.out.println("~ \n I will be back \n~ ");
                 shouldBreak = !shouldBreak;
                 break;
             case INPUT_DONE:

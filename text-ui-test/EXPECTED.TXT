@@ -5,3 +5,18 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+~ 
+ Hello I'm the Terminator 
+ What can I do for you? 
+~
+~ 
+ added: add book
+~ 
+~ 
+ Here are targets in your kill list: 
+   1. [✘] add book
+
+~ 
+~ 
+ I will be back 
+~ 
