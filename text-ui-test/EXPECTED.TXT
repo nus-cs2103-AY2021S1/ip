@@ -7,15 +7,15 @@ Got it. I've added this task:
 Got it. I've added this task:
  [E][ ] project meeting (at: Mon 2-4pm)
 Got it. I've added this task:
- [E][ ] project meeting (at: Sat 2-4pm)
+ [E][ ] sky jumping (at: Sat 2-4pm)
 Error! The description of a event is missing a date.
 Error! The description of a deadline is missing a date.
 Got it. I've added this task:
- [T][ ] project meeting  Sat 2-4pm
+ [T][ ] team bundling
 Got it. I've added this task:
  [T][ ] eat chicken nuggets
 Good job. This task is marked as done:
- [T][x] project meeting  Sat 2-4pm
+ [T][x] team bundling
 Task at index 100 doesn't exist
 There are 6 tasks currently. Please a number between 1 and 6 inclusive.
 Got it. I've added this task:
@@ -25,8 +25,25 @@ Good job. This task is marked as done:
 1. [T][ ] buy book
 2. [E][x] return book (by: Sunday)
 3. [E][ ] project meeting (at: Mon 2-4pm)
-4. [E][ ] project meeting (at: Sat 2-4pm)
-5. [T][x] project meeting  Sat 2-4pm
+4. [E][ ] sky jumping (at: Sat 2-4pm)
+5. [T][x] team bundling
 6. [T][ ] eat chicken nuggets
 7. [E][ ] sing song (at: Fri 2pm)
+Task at index 100 doesn't exist
+There are 7 tasks currently. Please a number between 1 and 7 inclusive.
+Noted. I've remove this task:
+ [E][ ] project meeting (at: Mon 2-4pm)
+1. [T][ ] buy book
+2. [E][x] return book (by: Sunday)
+3. [E][ ] sky jumping (at: Sat 2-4pm)
+4. [T][x] team bundling
+5. [T][ ] eat chicken nuggets
+6. [E][ ] sing song (at: Fri 2pm)
+Noted. I've remove this task:
+ [T][x] team bundling
+1. [T][ ] buy book
+2. [E][x] return book (by: Sunday)
+3. [E][ ] sky jumping (at: Sat 2-4pm)
+4. [T][ ] eat chicken nuggets
+5. [E][ ] sing song (at: Fri 2pm)
 Bye! Hope to never see you again!
