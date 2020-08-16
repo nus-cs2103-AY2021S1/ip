@@ -1,11 +1,11 @@
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        List<String> tasks = new LinkedList<>();
+        List<Task> tasks = new ArrayList<>(100);
 
         int number = 1;
         String lines = "____________________\n";
@@ -23,10 +23,11 @@ public class Duke {
                 break;
             } else if (input.equals("list")) {
                 System.out.println(lines);
+                System.out.println("Here are the tasks in your list:");
                 tasks.forEach(System.out::println);
                 System.out.println(lines);
             } else {
-                tasks.add(String.format("%d. ", number++) + input);
+                tasks.add(new Task(number++, input));
                 System.out.println(lines + "added: " + input + "\n" + lines);
             }
         }
