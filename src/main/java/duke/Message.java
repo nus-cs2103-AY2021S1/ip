@@ -7,6 +7,6 @@ public class Message {
     public static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
     public static final String INDENT = "    ";
     public static final String BORDERS = "_________________________________________________";
-    public static final String ADDED = "added: ";
+    public static final String ADDED = "Got it. I've added this task:\n        ";
     public static final String DONE = "Nice! I've marked this task as done:\n       ";
 }
