@@ -159,6 +159,7 @@ public class Duke {
             System.out.println("     Noted. I've removed this task: ");
 
             System.out.println("       " + task);
+            System.out.printf("     Now you have %d tasks in the list.\n", list.size());
             System.out.println("    ____________________________________________________________");
             System.out.println();
         }
