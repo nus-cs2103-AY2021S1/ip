@@ -1,10 +1,10 @@
 public class Chat {
     private boolean isRunning;
-    private TaskList<Task> list;
+    private NumberedList<Task> list;
 
     Chat() {
         isRunning = true;
-        list = new TaskList<>();
+        list = new NumberedList<>();
         greet();
     }
 

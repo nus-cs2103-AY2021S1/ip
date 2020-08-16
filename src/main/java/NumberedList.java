@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 
-public class TaskList<T> extends LinkedList<T> {
-    TaskList() {
+public class NumberedList<T> extends LinkedList<T> {
+    NumberedList() {
         super();
     }
 
