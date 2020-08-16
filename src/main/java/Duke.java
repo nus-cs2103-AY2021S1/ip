@@ -20,23 +20,40 @@ public class Duke {
         return " Now you have " + listOfTask.size() + " tasks in the list. Keep going!!\n";
     }
 
-    public void addToDo(Task t) {
+    public void deleteTask(String message) throws DukeException{
+        try {
+            int ind = Integer.parseInt(message.substring(6).stripLeading().stripTrailing()) - 1;
+            Task t = listOfTask.get(ind);
+            listOfTask.remove(ind);
+            System.out.println(lines + " *WOOF* I have removed:\n   " + t + "\n" + printTotal() + lines);
+        } catch (IndexOutOfBoundsException e) {
+            String errMessage = lines + "*Woof!* This task does not exist!\n" + lines;
+            throw new DukeException(errMessage);
+        } catch (NumberFormatException e) {
+            String errMessage = lines + "Woof! Please enter an integer value\n" + lines;
+            throw new DukeException(errMessage);
+        }
+    }
+
+    public void addTask(Task t) {
         listOfTask.add(t);
         System.out.println(lines + " *WOOF* I have added:\n   " + t + "\n" + printTotal() + lines);
     }
 
-    public void checkToDo(String message) throws DukeException{
+    public void checkAction(String message) throws DukeException{
         Task t;
         String messageLowerCase = message.toLowerCase();
         if (messageLowerCase.contains("deadline")) {
             t = Deadline.createTask(message);
-            addToDo(t);
+            addTask(t);
         } else if (messageLowerCase.contains("event")) {
             t = Event.createTask(message);
-            addToDo(t);
+            addTask(t);
         } else if (messageLowerCase.contains("todo")) {
             t = Todo.createTask(message);
-            addToDo(t);
+            addTask(t);
+        } else if (messageLowerCase.contains("delete")) {
+            deleteTask(message);
         } else {
             String errMessage = lines + " I'm sorry but i do not know what you want to do. *woof*\n"
                     + lines;
@@ -88,7 +105,7 @@ public class Duke {
                     int taskInd = Integer.parseInt(query.substring(5));
                     duke.markAsDone(taskInd - 1);
                 } else {
-                    duke.checkToDo(query);
+                    duke.checkAction(query);
                 }
             } catch (DukeException ex) {
                 System.out.println(ex.getMessage());
