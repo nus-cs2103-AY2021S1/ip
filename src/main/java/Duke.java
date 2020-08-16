@@ -37,6 +37,15 @@ public class Duke {
                     System.out.println("    ____________________________________________________________");
                     System.out.println();
                 }
+            } else if (input.contains("delete")) {
+                try {
+                    delete(input);
+                } catch (DukeException e) {
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("     " + e.getMessage());
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println();
+                }
             } else {
 
                 try {
@@ -127,12 +136,47 @@ public class Duke {
         System.out.println();
     }
 
+    public static void delete(String input) throws DukeException {
+        if (!input.contains(" ")) {
+            throw new DukeException(" ☹ OOPS!!! Please enter delete with a number.");
+        } else {
+            String[] arr = input.split(" ");
+            int index;
+
+            try {
+                index = Integer.parseInt(arr[1]);
+            } catch (NumberFormatException e) {
+                throw new DukeException(" ☹ OOPS!!! Invalid number.");
+            }
+
+            if (index > list.size()) {
+                throw new DukeException(" ☹ OOPS!!! Invalid number.");
+            }
+
+            Task task = list.get(index - 1);
+            list.remove(index - 1);
+            System.out.println("    ____________________________________________________________");
+            System.out.println("     Noted. I've removed this task: ");
+
+            System.out.println("       " + task);
+            System.out.println("    ____________________________________________________________");
+            System.out.println();
+        }
+    }
+
     public static void done(String input) throws DukeException {
         if (!input.contains(" ")) {
             throw new DukeException(" ☹ OOPS!!! Please enter done with a number.");
         } else {
             String[] arr = input.split(" ");
-            int index = Integer.parseInt(arr[1]);
+            int index;
+
+            try {
+                // if string after done cannot be parsed to integer
+                index = Integer.parseInt(arr[1]);
+            } catch (NumberFormatException e) {
+                throw new DukeException(" ☹ OOPS!!! Invalid number.");
+            }
 
             if (index > list.size()) {
                 throw new DukeException(" ☹ OOPS!!! Invalid number.");
