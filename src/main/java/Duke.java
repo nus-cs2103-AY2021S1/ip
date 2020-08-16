@@ -1,3 +1,5 @@
+import Exception.DukeException;
+import Exception.InvalidCommandException;
 import Task.DeadlineTask;
 import Task.EventTask;
 import Task.Task;
@@ -43,10 +45,15 @@ public class Duke {
 
         while (!command.equals("bye")) {
             BiConsumer<String, List<Task>> action =  map.get(command.replaceAll(" .*", ""));
-            if (action == null) {
-                addCommand(list, command);
-            } else {
-                action.accept(command, list);
+
+            try {
+                if (action == null) {
+                    throw new InvalidCommandException();
+                } else {
+                    action.accept(command, list);
+                }
+            } catch (DukeException e){
+                System.out.println(e);
             }
             command = sc.nextLine();
         }
