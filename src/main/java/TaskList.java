@@ -17,10 +17,16 @@ public class TaskList {
             return newToDo.toString();
         }
 
-        if (isDeadline(words)) {
+        if (isDeadlineAction(words)) {
             Deadline newDeadline = Deadline.createDeadline(description);
             this.taskList.add(newDeadline);
             return newDeadline.toString();
+        }
+
+        if (isEventAction(words)) {
+            Event newEvent = Event.createEvent(description);
+            this.taskList.add(newEvent);
+            return newEvent.toString();
         }
         return "fuck";
 
@@ -36,10 +42,10 @@ public class TaskList {
         return words[0].equals("todo");
     }
 
-    private static boolean isDeadline(String[] words) {
+    private static boolean isDeadlineAction(String[] words) {
         return words[0].equals("deadline");
     }
-    private static boolean isEvent(String[] words) {
+    private static boolean isEventAction(String[] words) {
         return words[0].equals("event");
     }
 
