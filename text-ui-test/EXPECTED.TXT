@@ -8,59 +8,53 @@
 Hello! I'm King
 What can I do for you?
 	== King says =====================
+	 I don't understand you!
+	==================================
+
+	== King says =====================
 	 Got it. I've added this task:
-		[T][?] todo read book
+		[T][?] read book
 	 Now you have 1 tasks in the list.
 	==================================
+
 	== King says =====================
 	 Got it. I've added this task:
-		[T][?] todo return book
+		[D][?] return book (by: Sunday)
 	 Now you have 2 tasks in the list.
 	==================================
+
 	== King says =====================
 	 Got it. I've added this task:
-		[D][?] return book (by: Sunday)
+		[E][?] project meeting (at: Mon 2-4pm)
 	 Now you have 3 tasks in the list.
 	==================================
+
 	== King says =====================
-	 Got it. I've added this task:
-		[E][?] project meeting (at: Mon 2-4pm)
-	 Now you have 4 tasks in the list.
-	==================================
-	== King says =====================
-	Here are the items in your list:
-	1. [T][?] todo read book
-	2. [T][?] todo return book
-	3. [D][?] return book (by: Sunday)
-	4. [E][?] project meeting (at: Mon 2-4pm)
+	 Todo cannot be empty
 	==================================
 
 	== King says =====================
-	 Nice! I've marked this task as done:
-		[T][?] todo read book
+	 Event description and time CANNOT be empty!
 	==================================
 
 	== King says =====================
-	 Nice! I've marked this task as done:
-		[T][?] todo return book
+	 Deadline description and time CANNOT be empty!
 	==================================
 
 	== King says =====================
 	Here are the items in your list:
-	1. [T][?] todo read book
-	2. [T][?] todo return book
-	3. [D][?] return book (by: Sunday)
-	4. [E][?] project meeting (at: Mon 2-4pm)
+	1. [T][?] read book
+	2. [D][?] return book (by: Sunday)
+	3. [E][?] project meeting (at: Mon 2-4pm)
 	==================================
 
 	== King says =====================
 	 Nice! I've marked this task as done:
-		[D][?] return book (by: Sunday)
+		[T][?] read book
 	==================================
 
 	== King says =====================
-	 Nice! I've marked this task as done:
-		[E][?] project meeting (at: Mon 2-4pm)
+	 Item 10 not found.
 	==================================
 
 	== King says =====================
