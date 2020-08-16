@@ -5,24 +5,33 @@ import java.util.Scanner;
  * result of executing the input
  */
 public class CommandLineInterface {
-    /** This will determine the number of underscores each divider should be made of */
+    /**
+     * This will determine the number of underscores each divider should be made of
+     */
     private static final int dividerLength = 50;
-    /** This will determine the left padding size of the messages that the application outputs */
+    /**
+     * This will determine the left padding size of the messages that the application outputs
+     */
     private static final int leftPadding = 7;
 
     private static final Scanner scanner = new Scanner(System.in);
     private static final Formatter formatter = new Formatter(dividerLength, leftPadding);
+    private static final TaskManager taskManager = new TaskManager();
 
-    public static void run(){
+    public static void run() {
         String welcomeMessage = "Hello! I'm Erica \n" + "How may I be of assistance?\n";
         formatter.print(welcomeMessage);
-        while(scanner.hasNext()){
+        while (scanner.hasNext()) {
             String userInput = scanner.nextLine();
-            if(userInput.toLowerCase().equals("bye")){
+            if (userInput.toLowerCase().equals("bye")) {
                 formatter.print("Bye. Hope my service has been satisfactory. Hope to see you again soon.");
                 break;
+            } else if (userInput.toLowerCase().equals("list")) {
+                formatter.print(taskManager.getAllTasks());
+            } else {
+                Task newUserTask = new Task(userInput);
+                formatter.print(taskManager.addTask(newUserTask));
             }
-            formatter.print(userInput);
         }
         scanner.close();
     }
