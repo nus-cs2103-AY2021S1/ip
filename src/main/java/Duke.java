@@ -27,12 +27,22 @@ public class Duke {
     // EventHandlers
     static void handleDone(String reply) throws DukeException {
         try {
-            int itemNumber = Integer.parseInt(reply.substring(5, reply.length())) - 1;
+            int itemNumber = Integer.parseInt(reply.split(" ")[1]) - 1;
             Task task = taskItems.get(itemNumber);
             task.markDone();
             printReply(replyFormatter("Nice! I've marked this task as done:\n" + task.toString()));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task number does not exist");
+        }
+    }
+
+    static void handleDelete(String reply) throws DukeException {
+        try {
+            int itemNumber = Integer.parseInt(reply.split(" ")[1]) - 1;
+            Task task = taskItems.remove(itemNumber);
+            printReply(deleteTaskReplyFormatter(task));
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Cannot delete task that does not exist");
         }
     }
 
@@ -53,6 +63,9 @@ public class Duke {
                     switch (command) {
                         case "done":
                             handleDone(reply);
+                            break;
+                        case "delete":
+                            handleDelete(reply);
                             break;
                         case "todo":
                             Task newTodo = new ToDo(reply.substring(5));
@@ -97,6 +110,11 @@ public class Duke {
 
     static String addTaskReplyFormatter(Task task) {
         return replyFormatter(String.format("Got it. I've added this task:\n    %s\nNow you have %d tasks in the list"
+                , task.toString(), taskItems.size()));
+    }
+
+    static String deleteTaskReplyFormatter(Task task) {
+        return replyFormatter(String.format("HAI. I've deleted this task:\n    %s\nNow you have %d tasks in the list"
                 , task.toString(), taskItems.size()));
     }
 
