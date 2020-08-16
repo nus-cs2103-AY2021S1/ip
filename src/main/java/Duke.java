@@ -4,9 +4,14 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         greet();
+        TaskManager manager = new TaskManager();
         String next = sc.nextLine();
         while (!next.equals("bye")) {
-            System.out.println(next);
+            if (next.equals("list")) {
+                manager.printList();
+            } else {
+                manager.addTask(next);
+            }
             next = sc.nextLine();
         }
         close();
