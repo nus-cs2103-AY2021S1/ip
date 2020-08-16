@@ -3,11 +3,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    static String divider = "____________________________________________________________\n";
+    static String INDENT = "    ";
+    static String divider = INDENT + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n";
 
     static void start() {
         String logo =
-                                " .----------------.  .----------------.  .----------------.  .----------------. \n" +
+                                " .----------------.  .----------------.  .----------------.  .----------------.\n" +
                                         "| .--------------. || .--------------. || .--------------. || .--------------. |\n" +
                                         "| |  ________    | || |     ____     | || |     ____     | || |  ___  ____   | |\n" +
                                         "| | |_   ___ `.  | || |   .'    `.   | || |   .'    `.   | || | |_  ||_  _|  | |\n" +
@@ -17,24 +18,31 @@ public class Duke {
                                         "| | |________.'  | || |   `.____.'   | || |   `.____.'   | || | |____||____| | |\n" +
                                         "| |              | || |              | || |              | || |              | |\n" +
                                         "| '--------------' || '--------------' || '--------------' || '--------------' |\n" +
-                                        " '----------------'  '----------------'  '----------------'  '----------------' \n";
+                                        " '----------------'  '----------------'  '----------------'  '----------------'\n";
         String intro =
                 "\n" +
                 "\n" +
                 logo +
                 "\n" +
                 divider +
+                INDENT +
                 "Hola! I am dook\n" +
+                INDENT +
                 "how i can help u?\n" + divider;
         System.out.println(intro);
     }
     static void print(String str){
-        String intro = divider + str + "\n" + divider;
+        String[] arr = str.split("\n");
+        String res = "";
+        for(int i = 0; i < arr.length; i++ ){
+            res += INDENT + arr[i] + "\n";
+        }
+        String intro = divider +  res + divider;
         System.out.println(intro);
     }
-    static void addTask(String str, List<Task> taskList) {
-        taskList.add(new Task(str));
-        print("added: " + str);
+    static void addTask(Task task, List<Task> taskList) {
+        taskList.add(task);
+        print("Got it. I've added this task:\n  " + task.toString() + "\nNow you have " + taskList.size() + " tasks in the list.");
     }
     static void displayList(List<Task> list) {
         if(list.size() == 0) {
@@ -67,8 +75,16 @@ public class Duke {
                 } else {
                     print("Invalid Index Bro");
                 }
+            } else if (input.matches("todo .+")) {
+                addTask(new Todo(input.substring(5)), tasks);
+            } else if (input.matches("deadline .+")) {
+                String[] split = input.substring(9).split("/by");
+                addTask(new Deadline(split[0].stripTrailing(), split[1].stripLeading()), tasks);
+            } else if (input.matches("event .+")) {
+                String[] split = input.substring(6).split("/at");
+                addTask(new Event(split[0].stripTrailing(), split[1].stripLeading()), tasks);
             } else {
-                addTask(input, tasks);
+                print("No command called / invalid parameters given to command");
             }
 
             input = sc.nextLine();
