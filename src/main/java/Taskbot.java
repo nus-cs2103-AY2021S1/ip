@@ -4,7 +4,6 @@ public class Taskbot {
     private String logo;
     private final String name = "TaskBot";
     private ArrayList<Task> tasks;
-    private int index;
 
     /**
      * Constructor for the Taskbot class
@@ -13,7 +12,6 @@ public class Taskbot {
     public Taskbot(String logo) {
         this.logo = logo;
         this.tasks = new ArrayList<>();
-        this.index = 0;
     }
 
     /**
@@ -38,17 +36,47 @@ public class Taskbot {
         borderString(message);
     }
 
-    /**
-     * Adds a new Task to the list of tasks
-     * @param task The task to be added
-     */
-    public void addTask(String task) {
-        //Makes a new task
-        Task newTask = new Task(task);
-        //Adds a new task to the list
+    public void addTodoTask(String task) {
+        //Makes a new Todo task
+        Todo newTask = new Todo(task);
+        //Adds the new task to the list
         tasks.add(newTask);
         //Informs the user that the task has been added
-        borderString("I have added: " + newTask);
+        borderString("I have added a Todo:\n" + newTask +
+                "\n" + listTaskSize());
+    }
+
+    public void addEventTask(String input) {
+        //splits the input according to whitespace
+        String[] parsedString = input.split("/at");
+
+        //Makes a new Event task
+        Event newTask = new Event(parsedString[0], parsedString[1].stripLeading());
+        //Adds the new task to the list
+        tasks.add(newTask);
+        //Informs the user that the task has been added
+        borderString("I have added an Event:\n" + newTask +
+                "\n" + listTaskSize());
+    }
+
+    public void addDeadlineTask(String input) {
+        //splits the input according to whitespace
+        String[] parsedString = input.split("/by");
+
+        //Makes a new Deadline task
+        Deadline newTask = new Deadline(parsedString[0], parsedString[1].stripLeading());
+        //Adds the new task to the list
+        tasks.add(newTask);
+        //Informs the user that the task has been added
+        borderString("I have added a Deadline:\n" + newTask +
+                "\n" + listTaskSize());
+    }
+
+    /**
+     * Informs the user of the number of tasks in the current list
+     */
+    public String listTaskSize() {
+        return "You now have " + tasks.size() + " task(s) in the list";
     }
 
     /**
@@ -83,5 +111,4 @@ public class Taskbot {
         System.out.println(s);
         System.out.println("----------------------------------------------\n");
     }
-
 }

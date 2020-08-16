@@ -6,7 +6,8 @@ import java.util.Scanner;
 public class Main {
     //Commands for the bot to execute
     public enum Command {
-        LIST, DONE, NONE
+        LIST, DONE, NONE,
+        TODO, DEADLINE, EVENT
     }
     public static void main(String[] args) {
         //The logo to be used for TaskBot
@@ -30,20 +31,33 @@ public class Main {
 
         Command cmd = Command.NONE;
         //Loops while the user does not input "bye"
+        label:
         while (sc.hasNextLine()) {
             int taskIndex = -1;
             String input = sc.nextLine();
 
             //Splits the string to find keywords for commands
-            if (input.equals("bye")) {
-                break;
-            }
-            String parse = input.length() > 3 ? input.substring(0, 4) : input;
-            if (parse.equals("list")){
-                cmd = Command.LIST;
-            } else if (parse.equals("done")){
-                cmd = Command.DONE;
-                taskIndex = Integer.parseInt(input.substring(5, 6)) - 1;
+            String[] key = input.split(" ", 2);
+
+            switch (key[0]) {
+                case "bye":
+                    break label;
+                case "list":
+                    cmd = Command.LIST;
+                    break;
+                case "done":
+                    cmd = Command.DONE;
+                    taskIndex = Integer.parseInt(key[1]) - 1;
+                    break;
+                case "todo":
+                    cmd = Command.TODO;
+                    break;
+                case "deadline":
+                    cmd = Command.DEADLINE;
+                    break;
+                case "event":
+                    cmd = Command.EVENT;
+                    break;
             }
 
             //instructs the bot given the command
@@ -54,9 +68,21 @@ public class Main {
                 case DONE:
                     tb.completeTask(taskIndex);
                     break;
+                case TODO:
+                    tb.addTodoTask(key[1]);
+                    break;
+                case EVENT:
+                    tb.addEventTask(key[1]);
+                    break;
+                case DEADLINE:
+                    tb.addDeadlineTask(key[1]);
+                    break;
                 case NONE:
-                    tb.addTask(input);
+                    System.out.println("That was not a valid command. Please try again.");
+                    break;
             }
+            //Reset the cmd for the next user input
+            cmd = Command.NONE;
         }
 
         //The bot says bye and the program terminates
