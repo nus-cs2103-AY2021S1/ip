@@ -27,11 +27,11 @@ public class Duke {
     public void runDuke() {
         printStartMessage();
 
-        boolean done = false;
+        boolean isExit = false;
         Scanner userInput = new Scanner(System.in);
         CommandParser commandParser = new CommandParser();
 
-        while (!done) {
+        while (!isExit) {
             System.out.printf("\n");
             String command = userInput.nextLine();
 
@@ -39,9 +39,7 @@ public class Duke {
             try {
                 Operation operation = commandParser.parse(command, this.taskStorage);
                 operation.execute();
-                if (operation.isExit()) {
-                    done = true;
-                }
+                isExit = operation.isExit();
             } catch (DukeException exception) {
                 System.out.println(exception.getMessage());
             }

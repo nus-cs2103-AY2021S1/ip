@@ -3,7 +3,7 @@ package operation;
 import task.TaskStorage;
 
 public class ListOperation extends Operation {
-    private TaskStorage taskStorage;
+    private final TaskStorage taskStorage;
 
     public ListOperation(TaskStorage taskStorage) {
         this.taskStorage = taskStorage;

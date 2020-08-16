@@ -3,7 +3,7 @@ package task;
 import java.util.ArrayList;
 
 public class TaskStorage {
-    private ArrayList<Task> storage;
+    private final ArrayList<Task> storage;
 
     public TaskStorage() {
         this.storage = new ArrayList<>();
