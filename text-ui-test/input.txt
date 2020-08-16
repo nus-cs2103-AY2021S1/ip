@@ -1,18 +1,8 @@
 test
-list
-todo
 todo finish work
-deadline
-deadline /by Aug 20th 2359
-deadline cs2103 ip
 deadline cs2103 ip /by Aug 20th 2359
-event
-event /at always
-event rest
-event rest /at always
+event rest /at never
 list
 done 3
-list
-delete 3
 list
 bye

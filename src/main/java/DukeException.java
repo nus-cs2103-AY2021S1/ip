@@ -7,11 +7,11 @@ public class DukeException extends Exception {
         return new DukeException("Your list is empty.");
     }
 
-    public static DukeException typeMismatch(String command) {
-        return new DukeException("Error! Integer should follow '" + command + "' command.");
+    public static DukeException doneTypeMismatch() {
+        return new DukeException("Error! Integer should follow 'done' command.");
     }
 
-    public static DukeException outOfBounds() {
+    public static DukeException doneOutOfBounds() {
         return new DukeException("Error! Enter a valid task number.");
     }
 

@@ -37,9 +37,9 @@ public class Duke {
                 throw(DukeException.emptyDesc("done"));
             }
         } catch (NumberFormatException e) {
-            throw(DukeException.typeMismatch("done"));
+            throw(DukeException.doneTypeMismatch());
         } catch (IndexOutOfBoundsException e) {
-            throw(DukeException.outOfBounds());
+            throw(DukeException.doneOutOfBounds());
         }
     }
 
@@ -104,25 +104,6 @@ public class Duke {
         throw(DukeException.unknownCommand());
     }
 
-    private static void delete(String input) throws DukeException {
-        try {
-            String pattern = "(delete\\s)(.+)";
-            if (input.trim().matches(pattern)) {
-                String number = input.substring(7);
-                int index = parseInt(number) - 1;
-                Task task = list.get(index);
-                list.remove(index);
-                say("Deleted this task:\n" + task);
-            } else {
-                throw(DukeException.emptyDesc("delete"));
-            }
-        } catch (NumberFormatException e) {
-            throw(DukeException.typeMismatch("delete"));
-        } catch (IndexOutOfBoundsException e) {
-            throw(DukeException.outOfBounds());
-        }
-    }
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String logo =
@@ -154,8 +135,6 @@ public class Duke {
                     handleDeadline(input);
                 } else if (input.startsWith("event")) {
                     handleEvent(input);
-                } else if (input.startsWith("delete")) {
-                    delete(input);
                 } else {
                     handleOthers();
                 }
