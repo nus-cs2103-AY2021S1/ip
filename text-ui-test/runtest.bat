@@ -7,6 +7,7 @@ REM delete output from previous run
 del ACTUAL.TXT
 
 REM compile the code into the bin folder
+set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\Duke.java
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
