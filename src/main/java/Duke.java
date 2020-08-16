@@ -3,8 +3,7 @@ import java.util.ArrayList;
 
 public class Duke {
     // list storage
-    private static Task[] tasks = new Task[100];
-    private static int taskCount = 0;
+    private static ArrayList<Task> tasks = new ArrayList<>();
 
     // list of commands
     private static String exitCmd = "bye";
@@ -27,7 +26,7 @@ public class Duke {
             + "Speak robot language pls";
 
     private static String taskReport() {
-        return "You have " + taskCount + " tasks in your list";
+        return "You have " + tasks.size() + " tasks in your list";
     }
 
     // logo and greeting
@@ -53,29 +52,28 @@ public class Duke {
             System.out.println(horizontalLine);
             try {
                 if (input.equals("list")) {
-                    if (taskCount == 0) {
+                    if (tasks.size() == 0) {
                         System.out.println(lazyHumanBash);
                     } else {
                         System.out.println(showTasksMsg);
-                        for (int i = 0; i < taskCount; i++) {
-                            System.out.println((i + 1) + ". " + tasks[i].toString());
+                        for (int i = 0; i < tasks.size(); i++) {
+                            System.out.println((i + 1) + ". " + tasks.get(i).toString());
                         }
                     }
                 } else if (inputSplitted[0].equals(doneCmd)) {
                     int idx = Integer.parseInt(inputSplitted[1]) - 1;
-                    tasks[idx] = tasks[idx].markAsDone();
+                    tasks.set(idx, tasks.get(idx).markAsDone());
                     System.out.println(doneMsg);
-                    System.out.println(tasks[idx]);
+                    System.out.println(tasks.get(idx));
                 } else if (inputSplitted[0].equals(todoCmd)) {
                     if (inputSplitted.length == 1 || inputSplitted[1].equals("")) {
                         throw new InadequateCommandException("todo",
                                 new String[] {"description"});
                     } else {
                         Task newTask = new ToDo(inputSplitted[1]);
-                        taskCount++;
-                        tasks[taskCount - 1] = newTask;
+                        tasks.add(newTask);
                         System.out.println(addSuccessfulMsg);
-                        System.out.println(tasks[taskCount - 1]);
+                        System.out.println(newTask);
                         System.out.println(taskReport());
                     }
                 } else if (inputSplitted[0].equals(deadlineCmd)
@@ -123,23 +121,11 @@ public class Duke {
                         Task newTask = isDeadline
                                 ? new Deadline(description, time)
                                 : new Event(description, time);
-                        taskCount++;
-                        tasks[taskCount - 1] = newTask;
+                        tasks.add(newTask);
                         System.out.println(addSuccessfulMsg);
-                        System.out.println(tasks[taskCount - 1]);
+                        System.out.println(newTask);
                         System.out.println(taskReport());
                     }
-                } else if (inputSplitted[0].equals(eventCmd)) {
-                    String content = inputSplitted[1];
-                    int timeIdx = content.indexOf(" /at");
-                    String description = content.substring(0, timeIdx);
-                    String time = content.substring(timeIdx + 5, content.length());
-                    Task newTask = new Event(description, time);
-                    taskCount++;
-                    tasks[taskCount - 1] = newTask;
-                    System.out.println(addSuccessfulMsg);
-                    System.out.println(tasks[taskCount - 1]);
-                    System.out.println(taskReport());
                 } else {
                     throw new IncorrectCommandException();
                 }
