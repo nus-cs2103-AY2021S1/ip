@@ -34,6 +34,12 @@ public class Duke {
         printMessage(String.format("Nice! I've marked this task as done: \n %s", completedTask.toString()));
     }
 
+    public void deleteTask(int taskNumber) {
+        Task toRemove = taskList.get(taskNumber - 1);
+        taskList.remove(taskNumber - 1);
+        printMessage(String.format("Noted. I've removed this task: \n %s", toRemove.toString()));
+    }
+
     public void printList() {
         StringBuilder tasks = new StringBuilder("Here are the tasks in your list: \n");
         for (int i = 0; i < taskList.size(); i++) {
@@ -57,6 +63,10 @@ public class Duke {
             case "done":
                 int taskNumber = scanner.nextInt();
                 completeTask(taskNumber);
+                return true;
+            case "delete":
+                int toDelete = scanner.nextInt();
+                deleteTask(toDelete);
                 return true;
             case "deadline":
                 String deadlineCommand = scanner.nextLine().trim();
@@ -82,6 +92,8 @@ public class Duke {
                 addTask(new Todo(task));
                 return true;
             default:
+                // unknown command, skip the entire line
+                scanner.nextLine();
                 throw(new UnknownCommandException(userInput));
         }
     }
