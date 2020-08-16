@@ -1,9 +1,17 @@
 public class Deadline extends Task {
     String dueDate;
 
-    Deadline(String description, String dueDate) {
+    private Deadline(String description, String dueDate) {
         super(description);
         this.dueDate = dueDate;
+    }
+
+    static Deadline create(String task)
+            throws EmptyTaskException, MissingDateException {
+        if (task.length() <= 9) throw new EmptyTaskException("deadline");
+        String[] taskInfo = task.substring(9).split(" /by ", 2);
+        if (taskInfo.length < 2) throw new MissingDateException();
+        return new Deadline(taskInfo[0], taskInfo[1]);
     }
 
     @Override

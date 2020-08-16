@@ -1,9 +1,17 @@
 public class Event extends Task {
     String date;
 
-    Event(String description, String date) {
+    private Event(String description, String date) {
         super(description);
         this.date = date;
+    }
+
+    static Event create(String task)
+            throws EmptyTaskException, MissingDateException {
+        if (task.length() <= 6) throw new EmptyTaskException("deadline");
+        String[] taskInfo = task.substring(6).split(" /at ", 2);
+        if (taskInfo.length < 2) throw new MissingDateException();
+        return new Event(taskInfo[0], taskInfo[1]);
     }
 
     @Override

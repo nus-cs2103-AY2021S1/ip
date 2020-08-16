@@ -16,17 +16,27 @@ public class Duke {
                 + LINES);
 
         while (sc.hasNext()) {
-            String input = sc.nextLine();
-            if (input.equals("bye")) {
-                System.out.println(LINES + farewell + LINES);
-                break;
-            } else if (input.equals("list")) {
-                list(tasks);
-            } else if (input.startsWith("done")) {
-                int index = Integer.parseInt(input.substring(5)) - 1;
-                completeTask(tasks, index);
-            } else {
-                addTask(tasks, input);
+            try{
+                String input = sc.nextLine();
+                if (input.equals("bye")) {
+                    System.out.println(LINES + farewell + LINES);
+                    break;
+                } else if (input.equals("list")) {
+                    list(tasks);
+                } else if (input.startsWith("done")) {
+                    int index = Integer.parseInt(input.substring(5)) - 1;
+                    completeTask(tasks, index);
+                } else {
+                    addTask(tasks, input);
+                }
+            } catch (InvalidCommandException e) {
+                System.out.println(e);
+            } catch (InvalidIndexException e) {
+                System.out.println(e);
+            } catch (EmptyTaskException e) {
+                System.out.println(e);
+            } catch (MissingDateException e) {
+                System.out.println(e);
             }
         }
     }
@@ -40,7 +50,10 @@ public class Duke {
         System.out.println(LINES);
     }
 
-    private static void completeTask(List<Task> tasks, int index) {
+    private static void completeTask(List<Task> tasks, int index) throws InvalidIndexException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new InvalidIndexException();
+        }
         Task task = tasks.get(index);
         task.setDone();
         System.out.println(LINES
@@ -48,26 +61,29 @@ public class Duke {
                 + "\n" + LINES);
     }
 
-    private static void addTask(List<Task> tasks, String task) {
+    private static void addTask(List<Task> tasks, String task)
+            throws InvalidCommandException, EmptyTaskException, MissingDateException {
         Task newTask = null;
 
-        if (task.startsWith("todo")) {
-            newTask = new ToDo(task.substring(5));
-        } else if (task.startsWith("deadline")) {
-            String[] taskInfo = task.substring(9).split(" /by ", 2);
-            newTask = new Deadline(taskInfo[0], taskInfo[1]);
-        } else if (task.startsWith("event")) {
-            String[] taskInfo = task.substring(6).split(" /at ", 2);
-            newTask = new Event(taskInfo[0], taskInfo[1]);
+        try {
+            if (task.startsWith("todo")) {
+                newTask = ToDo.create(task);
+            } else if (task.startsWith("deadline")) {
+                newTask = Deadline.create(task);
+            } else if (task.startsWith("event")) {
+                newTask = Event.create(task);
+            } else {
+                throw new InvalidCommandException();
+            }
+        } catch (EmptyTaskException | MissingDateException e) {
+            throw e;
         }
 
-        if (newTask != null) {
-            tasks.add(newTask);
-            System.out.println(LINES +
-                    "Got it, I have added this task:\n"
-                    + newTask
-                    + "\nNow you have " + tasks.size() + " task(s) in this list\n"
-                    + LINES);
-        }
+        tasks.add(newTask);
+        System.out.println(LINES +
+                "Got it, I have added this task:\n"
+                + newTask
+                + "\nNow you have " + tasks.size() + " task(s) in this list\n"
+                + LINES);
     }
 }
