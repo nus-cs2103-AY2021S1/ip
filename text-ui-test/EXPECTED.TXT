@@ -9,81 +9,114 @@
 	 What can I do for you?
 	____________________________________________________________
 	____________________________________________________________
+	 OOPS!!! I'm sorry, but I don't know what that means :-(
+	____________________________________________________________
+	____________________________________________________________
+	 OOPS!!! The description of a todo cannot be empty.
+	____________________________________________________________
+	____________________________________________________________
+	 OOPS!!! I'm sorry, but I don't know what that means :-(
+	____________________________________________________________
+	____________________________________________________________
 	 Got it. I've added this task:
 	   [T][✘] borrow book
 	 Now you have 1 task in the list.
 	____________________________________________________________
 	____________________________________________________________
+	 OOPS!!! The description and date/time of a deadline cannot be empty.
+	____________________________________________________________
+	____________________________________________________________
+	 OOPS!!! The date/time of a deadline cannot be empty.
+	____________________________________________________________
+	____________________________________________________________
 	 Got it. I've added this task:
-	   [D][✘] readbook (by: August 24th)
+	   [D][✘] read book (by: August 24th)
 	 Now you have 2 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
+	 OOPS!!! The description and duration of an event cannot be empty.
+	____________________________________________________________
+	____________________________________________________________
+	 OOPS!!! The duration of an event cannot be empty.
+	____________________________________________________________
+	____________________________________________________________
 	 Got it. I've added this task:
-	   [T][✘] ip
+	   [E][✘] lesson (at: Mon 6-8pm)
 	 Now you have 3 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	 Got it. I've added this task:
-	   [T][✘] play basketball
+	   [T][✘] ip
 	 Now you have 4 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
-	 Here are the tasks in your list:
-	 1.[T][✘] borrow book
-	 2.[D][✘] readbook (by: August 24th)
-	 3.[T][✘] ip
-	 4.[T][✘] play basketball
+	 OOPS!!! Task Number is invalid.
 	____________________________________________________________
 	____________________________________________________________
-	 Nice! I've marked this task as done:
-	   [T][✓] ip
-	____________________________________________________________
-	____________________________________________________________
-	 Got it. I've added this task:
-	   [E][✘] project meeting (at: 6 August 2-4pm)
-	 Now you have 5 tasks in the list.
-	____________________________________________________________
-	____________________________________________________________
-	 Got it. I've added this task:
-	   [E][✘] supper (at: Tue 10-11pm)
-	 Now you have 6 tasks in the list.
+	 OOPS!!! The task to be done has to be a number.
 	____________________________________________________________
 	____________________________________________________________
 	 Nice! I've marked this task as done:
 	   [T][✓] borrow book
 	____________________________________________________________
 	____________________________________________________________
-	 Nice! I've marked this task as done:
-	   [D][✓] readbook (by: August 24th)
+	 OOPS!!! Task Number is invalid.
+	____________________________________________________________
+	____________________________________________________________
+	 Got it. I've added this task:
+	   [T][✘] play basketball
+	 Now you have 5 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	 Here are the tasks in your list:
 	 1.[T][✓] borrow book
-	 2.[D][✓] readbook (by: August 24th)
-	 3.[T][✓] ip
-	 4.[T][✘] play basketball
-	 5.[E][✘] project meeting (at: 6 August 2-4pm)
-	 6.[E][✘] supper (at: Tue 10-11pm)
+	 2.[D][✘] read book (by: August 24th)
+	 3.[E][✘] lesson (at: Mon 6-8pm)
+	 4.[T][✘] ip
+	 5.[T][✘] play basketball
+	____________________________________________________________
+	____________________________________________________________
+	 OOPS!!! I'm sorry, but I don't know what that means :-(
+	____________________________________________________________
+	____________________________________________________________
+	 Nice! I've marked this task as done:
+	   [E][✓] lesson (at: Mon 6-8pm)
+	____________________________________________________________
+	____________________________________________________________
+	 Here are the tasks in your list:
+	 1.[T][✓] borrow book
+	 2.[D][✘] read book (by: August 24th)
+	 3.[E][✓] lesson (at: Mon 6-8pm)
+	 4.[T][✘] ip
+	 5.[T][✘] play basketball
 	____________________________________________________________
 	____________________________________________________________
 	 Got it. I've added this task:
-	   [D][✘] CS 2101 readings (by: Sunday)
+	   [E][✘] project meeting (at: 6 August 2-4pm)
+	 Now you have 6 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	 Got it. I've added this task:
+	   [D][✘] survey (by: Tue 10pm)
 	 Now you have 7 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	 Nice! I've marked this task as done:
-	   [E][✓] supper (at: Tue 10-11pm)
+	   [T][✓] play basketball
+	____________________________________________________________
+	____________________________________________________________
+	 Nice! I've marked this task as done:
+	   [T][✓] ip
 	____________________________________________________________
 	____________________________________________________________
 	 Here are the tasks in your list:
 	 1.[T][✓] borrow book
-	 2.[D][✓] readbook (by: August 24th)
-	 3.[T][✓] ip
-	 4.[T][✘] play basketball
-	 5.[E][✘] project meeting (at: 6 August 2-4pm)
-	 6.[E][✓] supper (at: Tue 10-11pm)
-	 7.[D][✘] CS 2101 readings (by: Sunday)
+	 2.[D][✘] read book (by: August 24th)
+	 3.[E][✓] lesson (at: Mon 6-8pm)
+	 4.[T][✓] ip
+	 5.[T][✓] play basketball
+	 6.[E][✘] project meeting (at: 6 August 2-4pm)
+	 7.[D][✘] survey (by: Tue 10pm)
 	____________________________________________________________
 	____________________________________________________________
 	 Bye. Hope to see you again soon!
