@@ -1,4 +1,6 @@
+import java.lang.reflect.Array;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -7,10 +9,21 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String userInput = sc.nextLine();
+        ArrayList<String> ls = new ArrayList<>();
 
         while (!userInput.equals("bye")) {
-            System.out.println(lines + "    " + userInput + "\n" + lines);
-            userInput = sc.nextLine();
+            if (userInput.equals("list")) {
+                System.out.println(lines);
+                for (int i = 0; i < ls.size(); i++) {
+                    System.out.println("  " + (i+1) + ". " + ls.get(i) + "\n");
+                }
+                System.out.println(lines);
+                userInput = sc.nextLine();
+            } else {
+                ls.add(userInput);
+                System.out.println(lines + "  added: " + userInput + "\n" + lines);
+                userInput = sc.nextLine();
+            }
         }
 
         System.out.println(lines + "    Bye! Hope to see you again soon." + "\n" + lines);
