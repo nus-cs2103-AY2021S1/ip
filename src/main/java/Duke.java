@@ -63,6 +63,13 @@ public class Duke {
                     throw e;
                 }
                 break;
+            case "delete":
+                try {
+                    delete(sc, tasks);
+                } catch (DukeException e) {
+                    throw e;
+                }
+                break;
             default:
                 throw new DukeException("That was an invalid command");
         }
@@ -79,7 +86,6 @@ public class Duke {
             System.out.println(i + ". " + task);
             i++;
         }
-        System.out.println(String.format("You have a total of %d tasks",  i - 1));
     }
 
     private static void complete(Scanner sc, List<Task> tasks) throws DukeException {
@@ -136,5 +142,17 @@ public class Duke {
         }
         tasks.add(new Event(eventName, start, end));
         System.out.println("*added: " + eventName);
+    }
+
+    private static void delete(Scanner sc, List<Task> tasks) throws DukeException {
+        System.out.println("Which task would you like to remove: ");
+        int taskNum = Integer.parseInt(sc.nextLine());
+        try {
+            Task task = tasks.remove(taskNum - 1);
+            System.out.println(String.format("Successfully removed the following task:\n %s", task));
+            System.out.println(String.format("You have a total of %d tasks left", tasks.size()));
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("You did not provide a valid task number!");
+        }
     }
 }
