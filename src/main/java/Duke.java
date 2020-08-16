@@ -1,10 +1,9 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static void handleInputs() {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Task> list = new ArrayList<>();
+        Tasks list = new Tasks();
         while(scanner.hasNextLine()) {
             String input = scanner.nextLine();
             String command = input.split(" ")[0];
@@ -13,17 +12,17 @@ public class Duke {
                     PrintDuke.printExitMessage();
                     System.exit(0);
                 case "list":
-                    PrintDuke.printList(list);
+                    PrintDuke.printList(list.tasks);
                     break;
                 case "done":
-                    int taskIndex = Integer.parseInt(input.substring(5).trim()) - 1;
-                    list.get(taskIndex).markAsDone();
-                    PrintDuke.printMarkTaskAsDone(list.get(taskIndex));
+                    list.markTaskAsDone(input);
+                    break;
+                case "todo":
+                case "event":
+                case "deadline":
+                    list.addTask(command, input);
                     break;
                 default:
-                    Task task = new Task(input);
-                    list.add(task);
-                    PrintDuke.printAddTask(task);
                     break;
             }
         }

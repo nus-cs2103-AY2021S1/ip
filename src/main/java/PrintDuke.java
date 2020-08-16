@@ -27,9 +27,10 @@ public class PrintDuke {
         printWithDashes(" " + bye);
     }
 
-    protected static void printAddTask(Task task) {
-        String message = " added: ";
-        message += task;
+    protected static void printAddTask(Task task, int length) {
+        String message = " Got it. I've added this task:\n";
+        message += " " + task;
+        message += String.format("\n Now you have %s task%s in the list.", length, length > 1 ? "s" : "" );
         printWithDashes(message);
     }
 
