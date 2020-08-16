@@ -36,6 +36,10 @@ public class Taskbot {
         borderString(message);
     }
 
+    /**
+     * Adds a todo Task to the list
+     * @param task The task to be added
+     */
     public void addTodoTask(String task) {
         //Makes a new Todo task
         Todo newTask = new Todo(task);
@@ -46,6 +50,10 @@ public class Taskbot {
                 "\n" + listTaskSize());
     }
 
+    /**
+     * Adds an event Task to the list
+     * @param input The task to be added followed by time
+     */
     public void addEventTask(String input) {
         try {
             //splits the input according to whitespace
@@ -66,6 +74,10 @@ public class Taskbot {
         }
     }
 
+    /**
+     * Adds a deadline Task to the list
+     * @param input The task to be added followed by time
+     */
     public void addDeadlineTask(String input) {
         try {
             //splits the input according to whitespace
@@ -132,6 +144,27 @@ public class Taskbot {
             handleException(iie);
         } catch (TaskAlreadyCompleteException e) {
             handleException(e);
+        }
+    }
+
+    /**
+     * Deletes the task at the specified index
+     * @param taskIndex the given index
+     */
+    public void deleteTask(int taskIndex) {
+        try {
+            if (tasks.size() == 0) {
+                borderString("You currently have no tasks pending.");
+                return;
+            }
+            String message = "Understood. The following task has been deleted.\n";
+            message += "    " + tasks.get(taskIndex) + "\n";
+            tasks.remove(taskIndex);
+            message += listTaskSize();
+            borderString(message);
+        } catch (IndexOutOfBoundsException e) {
+            InvalidIndexException iie = new InvalidIndexException("You have specified an index not within the ranges of the list. Please try again.");
+            handleException(iie);
         }
     }
 

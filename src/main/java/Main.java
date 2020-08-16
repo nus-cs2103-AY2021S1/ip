@@ -7,7 +7,8 @@ public class Main {
     //Commands for the bot to execute
     public enum Command {
         LIST, DONE, NONE,
-        TODO, DEADLINE, EVENT, EXIT
+        TODO, DEADLINE, EVENT,
+        EXIT, DELETE
     }
     public static void main(String[] args) throws Exception {
         //The logo to be used for TaskBot
@@ -51,6 +52,13 @@ public class Main {
                         }
                         taskIndex = Integer.parseInt(key[1]) - 1;
                         tb.completeTask(taskIndex);
+                        break;
+                    case DELETE:
+                        if (key.length == 1 || key[1].strip().length() == 0) {
+                            throw new EmptyArgumentException("Please enter the index of the task you wish to delete.");
+                        }
+                        taskIndex = Integer.parseInt(key[1]) - 1;
+                        tb.deleteTask(taskIndex);
                         break;
                     case TODO:
                         if (key.length == 1 || key[1].strip().length() == 0) {
@@ -108,6 +116,8 @@ public class Main {
                 return Command.DEADLINE;
             case "event":
                 return Command.EVENT;
+            case "delete":
+                return Command.DELETE;
             default:
                 return Command.NONE;
         }
