@@ -12,6 +12,15 @@ public class Duke {
         System.out.println("Got it. I've added this task:\n" + task);
         System.out.println("Now you have " + num + " tasks in the list.");
     }
+    public static void doneTask(Task task) {
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(task);
+    }
+    public static void deleteTask(Task task) {
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -34,9 +43,17 @@ public class Duke {
                     int index = Integer.parseInt(input.substring(5));
                     Task done = taskList.get(index - 1);
                     done.markAsDone();
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(done);
-                } else if (input.length() >= 4 && input.substring(0, 4).equals("todo")) {
+                    doneTask(done);
+                } else if (input.length() >= 6 && input.substring(0, 6).equals("delete")) {
+                    if (input.length() == 6) {
+                        throw new DukeException("☹ OOPS!!! Please select a task to be deleted.");
+                    }
+                    int index = Integer.parseInt(input.substring(7));
+                    Task delete = taskList.get(index - 1);
+                    taskList.remove(delete);
+                    deleteTask(delete);
+                }
+                else if (input.length() >= 4 && input.substring(0, 4).equals("todo")) {
                     if (input.length() == 4) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
