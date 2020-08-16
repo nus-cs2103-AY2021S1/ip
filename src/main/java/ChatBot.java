@@ -6,10 +6,10 @@ import java.util.ArrayList;
  * Encapsulates the chatBot and its behavior.
  */
 class ChatBot {
-    String logo;
-    String user;
-    String botName;
-    List<String> toDoList;
+    private String logo;
+    private String user;
+    private String botName;
+    private List<String> toDoList;
 
     /**
      * Instantiates a chatBot with a name.
@@ -53,18 +53,36 @@ class ChatBot {
                 bye();
                 break;
             }
-            reply(input);
+
+            if (input.equals("list")) {
+                showList();
+            } else {
+                add(input);
+            }
         }
         sc.close();
     }
 
-    /**
-     * Replies the user by echoing his input.
-     * @param input the string that the user enters
-     */
-    void reply(String input) {
+    void showList() {
         System.out.println(ConsoleColors.YELLOW.getColor()
-                + this.botName + ": " + input + "\n"
+                + this.botName + ": "
+                + "Here are your tasks!"
+                + ConsoleColors.RESET.getColor());
+        for (int i = 0; i < toDoList.size(); i++) {
+            System.out.println(ConsoleColors.BLUE_BOLD.getColor()
+                    + (i+1) + ". "
+                    + ConsoleColors.BLUE.getColor() + "\t"
+                    + toDoList.get(i)
+                    + ConsoleColors.RESET.getColor());
+        }
+        System.out.println();
+    }
+
+    void add(String item) {
+        this.toDoList.add(item);
+        System.out.println(ConsoleColors.YELLOW.getColor()
+                + this.botName + ": "
+                + "[" + item + "] has been added to your list! \n"
                 + ConsoleColors.RESET.getColor());
     }
 
