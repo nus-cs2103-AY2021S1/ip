@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -73,10 +74,29 @@ public class Duke {
                     }
 
                     break;
-                default:
-                    Task newTask = new Task(input);
+                case "todo":
+                case "deadline":
+                case "event":
+                    Task newTask;
+                    responses.add("Got it. I've added this task");
+
+                    String description = String.join(" ", Arrays.copyOfRange(inputSplit, 1, inputSplit.length));
+
+                    if (option.equals("todo")) {
+                        newTask = new Todo(description);
+                    } else if (option.equals("deadline")) {
+                        newTask = new Deadline(description);
+                    } else {
+                        newTask = new Event(description);
+                    }
+
                     Duke.tasks.add(newTask);
-                    responses.add("added: " + newTask.getDescription());
+                    responses.add("  " + newTask.getStatus());
+                    responses.add("Now you have " + Duke.tasks.size() + " tasks in the list.");
+                    break;
+                default:
+                   responses.add(Colour.Red("Instruction not recognized!"));
+
             }
 
             respond(responses);
