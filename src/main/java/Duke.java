@@ -27,10 +27,10 @@ public class Duke {
             listOfTask.remove(ind);
             System.out.println(lines + " *WOOF* I have removed:\n   " + t + "\n" + printTotal() + lines);
         } catch (IndexOutOfBoundsException e) {
-            String errMessage = lines + "*Woof!* This task does not exist!\n" + lines;
+            String errMessage = lines + " *Woof!* This task does not exist!\n" + lines;
             throw new DukeException(errMessage);
         } catch (NumberFormatException e) {
-            String errMessage = lines + "Woof! Please enter an integer value\n" + lines;
+            String errMessage = lines + " *Woof!* Please enter an integer value\n" + lines;
             throw new DukeException(errMessage);
         }
     }
