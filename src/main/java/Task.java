@@ -8,7 +8,7 @@ public class Task {
     }
 
     public String getStatus() {
-        return this.isDone ? "[\u2713]" : "[\u2718]";
+        return this.isDone ? "[✓]" : "[✘]";
     }
 
     public void markAsDone() {
