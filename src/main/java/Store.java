@@ -1,19 +1,20 @@
 public class Store {
-    private String[] strStore;
+    private Task[] taskStore;
     private int nextIndx;
 
     public Store() {
-        this.strStore = new String[100];
+        this.taskStore = new Task[100];
         this.nextIndx = 0;
     }
 
     public void add(String str) {
-        strStore[nextIndx] = str;
+        Task newTask = new Task(str);
+        taskStore[nextIndx] = newTask;
         StringUtils.printWithWrapper(new String[]{"Added: " + str}, false);
         nextIndx++;
     }
 
     public void list() {
-        StringUtils.printWithWrapper(this.strStore, true);
+        StringUtils.printWithWrapper(this.taskStore, true);
     }
 }
