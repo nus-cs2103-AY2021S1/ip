@@ -5,10 +5,10 @@ public class Duke {
     public static void main(String[] args) {
         List<Task> list = new ArrayList<>();
 
-        String greet = "   ____________________________________________________________\n" +
+        String greet = "    ____________________________________________________________\n" +
                 "    Hello! I'm Duke\n" +
                 "    What can I do for you?\n" +
-                "   ____________________________________________________________\n";
+                "    ____________________________________________________________\n";
 
         String exit = "    ____________________________________________________________\n" +
                 "     Bye. Hope to see you again soon!\n" +
@@ -40,7 +40,7 @@ public class Duke {
                     Task task = list.get(taskNumber - 1);
                     task.markAsDone();
                     System.out.println(line + "\n" +
-                            "    Nice! I've marked this task as done: " + "\n" +
+                            "    Nice! I've marked this task as done:" + "\n" +
                             "    " + task.toString() + "\n" +
                             line);
                 } else {
