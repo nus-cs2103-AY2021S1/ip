@@ -5,3 +5,12 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+No tasks added.
+New task added: [T][✗] buy textbook
+New task added: [D][✗] CS2103T project (by: thu)
+New task added: [E][✗] CS2100 lecture (at: tue 4-6pm)
+Marked as done: [T][✓] buy textbook
+1. [T][✓] buy textbook
+2. [D][✗] CS2103T project (by: thu)
+3. [E][✗] CS2100 lecture (at: tue 4-6pm)
+Have a nice day.
