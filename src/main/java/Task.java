@@ -11,8 +11,12 @@ public class Task {
         this.isDone = true;
     }
 
-    public String getStatusIcon() {
+    protected String getStatusIcon() {
         return ("[" + (isDone ? "\u2713" : "\u2718") + "]"); //return tick or X symbols
+    }
+
+    public String taskRow() {
+        return getStatusIcon() + " " + this;
     }
 
     @Override
