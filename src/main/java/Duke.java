@@ -1,13 +1,28 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
-    public static String divider = "__________________________________________________________";
+    private static String DIVIDER = "__________________________________________________________";
+    private static String BYE_COMMAND = "bye";
+    private static String LIST_COMMAND = "list";
 
-    public static void messageEcho(String word) {
-        System.out.println(divider);
+    private static void messageEcho(String word) {
+        System.out.println(DIVIDER);
         System.out.println(word);
-        System.out.println(divider + "\n");
+        System.out.println(DIVIDER + "\n");
+    }
+
+    private static String listIterator(ArrayList<String> list) {
+        StringBuffer string = new StringBuffer();
+        for (int i =0; i < list.size(); i++){
+            if (list.size() == i + 1) {
+                string.append((i + 1) + ". " + list.get(i));
+            } else {
+                string.append((i + 1) + ". " + list.get(i) + "\n");
+            }
+        }
+        return string.toString();
     }
 
     public static void main(String[] args) {
@@ -15,14 +30,21 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
+        ArrayList<String> list = new ArrayList<>();
+
         while (sc.hasNext()) {
             String word  = sc.nextLine();
-            if (word.equals("bye")) {
+            if (word.equals(BYE_COMMAND)) {
+                messageEcho("Bye. Hope to see you again soon!");
                 break;
             }
-            messageEcho(word);
-        }
+            if (word.equals(LIST_COMMAND)) {
+                messageEcho(listIterator(list));
+                continue;
+            }
 
-        messageEcho("Bye. Hope to see you again soon!");
+            list.add(word);
+            messageEcho("added: " + word);
+        }
     }
 }
