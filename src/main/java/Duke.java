@@ -1,3 +1,5 @@
+import exceptions.InvalidCommandException;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -7,7 +9,11 @@ public class Duke {
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             Output output = new Output();
-            output.response(input, taskList);
+            try {
+                output.response(input, taskList);
+            } catch (InvalidCommandException e) {
+                System.out.println(e.getMessage());
+            }
             if (input.equals("bye")) break;
         }
         sc.close();
