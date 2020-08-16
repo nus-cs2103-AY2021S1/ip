@@ -5,19 +5,49 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    private enum TaskType {
+        TODO, DEADLINE, EVENT;
+    }
     private List<Task> tasks;
     private String indentation = "  ";
     private String BYE_COMMAND = "bye";
     private String LIST_COMMAND = "list";
     private String DONE_COMMAND = "done";
+    private String TODO_COMMAND = "todo";
+    private String DEADLINE_COMMAND = "deadline";
+    private String EVENT_COMMAND = "event";
 
     Duke() {
         tasks = new ArrayList<>();
     }
 
-    private void addTask(String task) {
-        String message = "Added: " + task;
-        tasks.add(new Task(task));
+    private void addTask(String task, TaskType taskType) {
+        Task newTask;
+
+        switch (taskType) {
+            case TODO:
+                newTask = new ToDoTask(task);
+                break;
+            case DEADLINE:
+                String[] arrForDeadline = task.split("/by", 2);
+                String taskForDeadline = arrForDeadline[0].trim();
+                String dateForDeadline = arrForDeadline[1].trim();
+                newTask = new DeadlineTask(taskForDeadline, dateForDeadline);
+                break;
+            case EVENT:
+                String[] arrForEvent = task.split("/at", 2);
+                String taskForEvent = arrForEvent[0].trim();
+                String dateForEvent = arrForEvent[1].trim();
+                newTask = new EventTask(taskForEvent, dateForEvent);
+                break;
+            default:
+                newTask = new Task(task);
+                break;
+        }
+
+        String message = "Okay. I will add this task:\n" + indentation + newTask + "\n";
+        tasks.add(newTask);
+        message = message + "Now you have " + tasks.size() + " " + (tasks.size() == 1 ? "task " : "tasks ") + "in the list.";
         sendMessage(message);
 
     }
@@ -39,6 +69,7 @@ public class Duke {
             message = "You haven't add any task!";
         } else {
             StringBuilder sb = new StringBuilder();
+            sb.append("Here is the tasks in your list:\n");
 
             for (int i = 0; i < tasks.size(); i++) {
                 sb.append((i + 1) + ". " + tasks.get(i) + "\n");
@@ -63,6 +94,11 @@ public class Duke {
 
     }
 
+    private void invalidInput() {
+        String message = "Invalid input!";
+        sendMessage(message);
+    }
+
     private void takeUserInput() {
         Scanner sc = new Scanner(System.in);
 
@@ -70,19 +106,31 @@ public class Duke {
             String userInput = sc.nextLine();
             String[] userInputArr = userInput.split("\\s", 2);
             String command = userInputArr[0];
+            String arg = null;
+
+
+            if (userInputArr.length != 1) {
+                arg = userInputArr[1];
+            }
 
             if (command.equals(BYE_COMMAND)) {
                 break;
             } else if (command.equals(LIST_COMMAND)) {
                 showAllTask();
-            } else if (command.equals(DONE_COMMAND)) {
-                if (userInputArr.length == 1) {
-                    doneTask(0);
+            } else if (arg != null) {
+                if (command.equals(DONE_COMMAND)) {
+                    doneTask(Integer.parseInt(arg));
+                } else if (command.equals(TODO_COMMAND)) {
+                    addTask(arg, TaskType.TODO);
+                } else if (command.equals(DEADLINE_COMMAND)) {
+                    addTask(arg, TaskType.DEADLINE);
+                } else if (command.equals(EVENT_COMMAND)) {
+                    addTask(arg, TaskType.EVENT);
                 } else {
-                    doneTask(Integer.parseInt(userInputArr[1]));
+                    invalidInput();
                 }
             } else {
-                addTask(userInput);
+                invalidInput();
             }
         }
     }
