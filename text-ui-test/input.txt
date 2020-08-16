@@ -9,4 +9,14 @@ done 2
 done 3
 done 5
 list
+todo
+invalidCommand
+deadline deadlineName /by
+deadline real /at aDate
+deadline /by Aug 5
+deadline
+event eventName /at
+event eventName /by aDate
+event /at aDate
+event
 bye
