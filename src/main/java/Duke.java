@@ -3,8 +3,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Duke {
+    static String border = "____________________________________________________________\n";
+
+    public static boolean checkBye(String s) {
+        if(s.equals("bye")) {
+            System.out.println(border + "Bye. Hope to see you again soon!\n" + border);
+            return true;
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
-        String border = "____________________________________________________________\n";
+
         System.out.println(border + "Hello! I'm Duke\n" + "What can I do for you?\n" + border);
 
         Scanner scan = new Scanner(System.in);
@@ -13,8 +23,7 @@ public class Duke {
 
         while(scan.hasNext()) {
             String input = scan.nextLine();
-            if(input.equals("bye")) {
-                System.out.println(border + "Bye. Hope to see you again soon!\n" + border);
+            if(checkBye(input)) {
                 return;
             } else if(input.equals("list")) {
                 int listLen = storage.size();
