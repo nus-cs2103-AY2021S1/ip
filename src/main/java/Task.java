@@ -6,12 +6,18 @@
 public class Task {
     protected String description; // Describes the task
     protected boolean isDone; // Marks whether the task is completed or not
-    protected String taskType; // To-Do, Deadline or Event task
+    protected String taskTypeSymbol; // [T], [D] or [E]
+    protected String taskTypeName; // To-Do, Deadline or Event task
 
-    public Task(String description, String taskType) {
+    public Task(String description, String taskTypeSymbol, String taskTypeName)
+            throws WrongFormatException {
+        if (description.isEmpty()) {
+            throw new WrongFormatException(taskTypeName);
+        }
         this.description = description;
         this.isDone = false;
-        this.taskType = taskType;
+        this.taskTypeSymbol = taskTypeSymbol;
+        this.taskTypeName = taskTypeName;
     }
 
     public String getStatusIcon() {
@@ -24,6 +30,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return taskType + "[" + getStatusIcon() + "] " + description;
+        return taskTypeSymbol + "[" + getStatusIcon() + "] " + description;
     }
 }

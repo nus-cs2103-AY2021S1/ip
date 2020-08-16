@@ -2,8 +2,8 @@ public class Event extends Task {
 
     protected String at;
 
-    public Event(String description, String at) {
-        super(description, "[E]");
+    public Event(String description, String at) throws WrongFormatException {
+        super(description, "[E]", "event");
         this.at = at;
     }
 

@@ -9,7 +9,9 @@ import java.util.ArrayList;
  */
 public class Duke {
 
-    /** Star Bot's logo shown upon start up */
+    /**
+     * Star Bot's logo shown upon start up
+     */
     private static String logo = "     _______.___________.    ___      " +
             ".______     " +
             " \n" +
@@ -27,11 +29,15 @@ public class Duke {
             "         |______/   \\______/      |__|             \n" +
             "                                                   ";
 
-    /** Divider that delineates Star Bot's replies */
+    /**
+     * Divider that delineates Star Bot's replies
+     */
     private static String divider =
             "------------------------------------------------------\n";
 
-    /** Stores user's tasks */
+    /**
+     * Stores user's tasks
+     */
     private static List<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -41,47 +47,84 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
-        while(sc.hasNextLine()) {
+        while (sc.hasNextLine()) { // Duke takes in user input indefinitely
+            // until the user says "bye"
             String line = sc.nextLine();
-            if (line.equals("bye")) { // Exits the program
-                System.out.println(botReply("Goodbye, see you again soon!"));
-                System.exit(0);
-            } else if (line.equals("list")) { // Lists out task list
-                System.out.println(botReply(printList()));
-            } else if (line.length() > 4 && line.substring(0,4)
-                    .equals("done")) { // Done with a task
-                int taskIndex = Integer.parseInt(line.substring(5)) - 1;
-                Task completedTask = taskList.get(taskIndex);
-                completedTask.markAsDone();
-                System.out.println(botReply("Nice! I've marked this task as " +
-                        "done:\n" + completedTask.toString()));
-            } else if (line.length() >= 4) { // Add task to task list
-                if (line.substring(0,4).equals("todo")) { // To-Do task
-                    Task newTask = new ToDo(line.substring(5));
-                    taskList.add(newTask);
-                    System.out.println(botReplyForAddTask(newTask));
-                } else if (line.substring(0,8).equals("deadline")) {
-                    // Deadline task
-                    String[] splitLine = line.split("/");
-                    Task newTask =
-                            new Deadline(splitLine[0].substring(9).trim(),
-                                    splitLine[1].substring(3));
-                    taskList.add(newTask);
-                    System.out.println(botReplyForAddTask(newTask));
-                } else if (line.substring(0,5).equals("event")) { // Event task
-                    String[] splitLine = line.split("/");
-                    Task newTask =
-                            new Event(splitLine[0].substring(6).trim(),
-                                    splitLine[1].substring(3));
-                    taskList.add(newTask);
-                    System.out.println(botReplyForAddTask(newTask));
+            String[] splitLine = line.split(" ");
+            try {
+                if (line.equals("bye")) { // Exit the program
+                    System.out.println(botReply("Goodbye, see you again soon!" +
+                            " :)"));
+                    System.exit(0);
+                } else if (line.equals("list")) { // List out task list
+                    System.out.println(botReply(printList()));
+                } else if (splitLine[0].equals("done")) { // Done with a task
+                    try {
+                        if (splitLine.length != 2) { // If command is in a wrong
+                            // format
+                            throw new DoneWrongFormatException();
+                        }
+                        int taskIndex = Integer.parseInt(splitLine[1]) - 1;
+                        // Index of task in the task list
+                        Task completedTask = taskList.get(taskIndex);
+                        completedTask.markAsDone();
+                        System.out.println(botReply("Nice! I've marked this " +
+                                "task as done:\n" + completedTask.toString()));
+                    } catch (NumberFormatException e) { // Second argument of
+                        // command was not a number, e.g. "done X"
+                        throw new DoneWrongFormatException();
+                    } catch (IndexOutOfBoundsException e) { // User requests
+                        // for a task with an index not within the current
+                        // task list
+                        throw new TaskIndexOutOfBoundsException(splitLine[1]);
+                    }
+                } else if (splitLine[0].equals("todo")) { // Add To-Do task
+                    try {
+                        Task newTask = new ToDo(line.substring(5).trim());
+                        taskList.add(newTask);
+                        System.out.println(botReplyForAddTask(newTask));
+                    } catch (IndexOutOfBoundsException | WrongFormatException e)
+                    { // Command is in a wrong format
+                        throw new TodoWrongFormatException();
+                    }
+                } else if (splitLine[0].equals("event")) { // Add Event task
+                    try {
+                        String[] splitLineIntoTwo = line.split("/at");
+                        Task newTask = new Event(splitLineIntoTwo[0]
+                                .substring(6).trim(),
+                                splitLineIntoTwo[1].trim());
+                        taskList.add(newTask);
+                        System.out.println(botReplyForAddTask(newTask));
+                    } catch (IndexOutOfBoundsException | WrongFormatException e)
+                    { // Command is in a wrong format
+                        throw new EventWrongFormatException();
+                    }
+                } else if (splitLine[0].equals("deadline")) { // Add Deadline
+                    // task
+                    try {
+                        String[] splitLineIntoTwo = line.split("/by");
+                        Task newTask = new Deadline(splitLineIntoTwo[0]
+                                .substring(9).trim(),
+                                splitLineIntoTwo[1].trim());
+                        taskList.add(newTask);
+                        System.out.println(botReplyForAddTask(newTask));
+                    } catch (IndexOutOfBoundsException | WrongFormatException e)
+                    { // Command is in a wrong format
+                        throw new DeadlineWrongFormatException();
+                    }
+                } else { // Unknown command entered
+                    throw new UnknownCommandException();
                 }
+            } catch (DukeException e) {
+                System.out.println(botReply(e.defaultErrorMessage()));
             }
         }
     }
 
-    /** Standardises the look of Star Bot's replies by wrapping it in
-     * dividers */
+    /**
+     * Standardises the look of Star Bot's replies by wrapping it in
+     * dividers
+     */
     private static String botReply(String reply) {
         return divider + reply + "\n" + divider;
     }
@@ -91,7 +134,9 @@ public class Duke {
                 "you have " + taskList.size() + " tasks in the list.");
     }
 
-    /** Formats the task list to be shown to the user */
+    /**
+     * Formats the task list to be shown to the user
+     */
     private static String printList() {
         int index = 1;
         String result = "Here are the tasks in your list:";
