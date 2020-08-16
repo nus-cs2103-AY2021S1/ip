@@ -28,7 +28,7 @@ public class Duke {
                 }
 
             } catch (DukeException ex) {
-                displayThis(ex.getMessage());
+                displayError(ex.getMessage());
             }
 
         }
@@ -66,6 +66,20 @@ public class Duke {
                     Task temp = toDoList.get(entryDone);
                     temp.markAsDone();
                     displayThis("Nice! I've marked this task as done: \n        " + temp.toString());
+
+                } catch (Exception ex) {
+                    throw new DukeException("This task does not exist");
+                }
+
+                break;
+
+            case "delete":
+                try {
+                    int entryDelete = Integer.parseInt(input.substring(7)) - 1;
+                    Task temp = toDoList.get(entryDelete);
+                    toDoList.remove(entryDelete);
+
+                    displayThis("OKay, I've remove this task: \n        " + temp.toString());
 
                 } catch (Exception ex) {
                     throw new DukeException("This task does not exist");
@@ -115,15 +129,23 @@ public class Duke {
 
     private static void addTask(Task task) {
         toDoList.add(task);
-        displayThis("Got it. I've added this task: \n         " + task
-                + "\n    Now you have " + toDoList.size() + " tasks in the list");
+        displayThis("Got it. I've added this task: \n         " + task);
     }
 
 
     private static void displayThis(String s) {
         System.out.println("\n    ---------------------------------");
         System.out.println("    " + s);
+        System.out.println("    Now you have " + toDoList.size() + " tasks in the list");
         System.out.println("    ---------------------------------\n");
+    }
+
+
+    private static void displayError(String s){
+        System.out.println("\n    ---------------------------------");
+        System.out.println("    " + s);
+        System.out.println("    ---------------------------------\n");
+
     }
 
 
