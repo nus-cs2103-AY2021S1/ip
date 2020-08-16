@@ -1,0 +1,9 @@
+this is a test task
+this is another test task
+todo eat strawberry
+todo drink something hot
+deadline cs3230 assignment 1 /by this saturday 22 Aug
+deadline technical interview with ABC /by tuesday
+event john's birthday /at Friday night
+event school orientation /at 0800 today
+bye

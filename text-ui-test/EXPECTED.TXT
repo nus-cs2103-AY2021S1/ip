@@ -1,7 +1,52 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+=======================================
+    Hello, my name is 
+     ____        _        
+    |  _ \ _   _| | _____ 
+    | | | | | | | |/ / _ \
+    | |_| | |_| |   <  __/
+    |____/ \__,_|_|\_\___|
+    How may I help you?
+=======================================
+=======================================
+    Sure! I have added the following task to your list: 
+    [✘] this is a test task
+    There are now 1 tasks in your list!
+=======================================
+=======================================
+    Sure! I have added the following task to your list: 
+    [✘] this is another test task
+    There are now 2 tasks in your list!
+=======================================
+=======================================
+    Sure! I have added the following task to your list: 
+    [T][✘] eat strawberry
+    There are now 3 tasks in your list!
+=======================================
+=======================================
+    Sure! I have added the following task to your list: 
+    [T][✘] drink something hot
+    There are now 4 tasks in your list!
+=======================================
+=======================================
+    Sure! I have added the following task to your list: 
+    [D][✘] cs3230 assignment 1 (by: this saturday 22 Aug)
+    There are now 5 tasks in your list!
+=======================================
+=======================================
+    Sure! I have added the following task to your list: 
+    [D][✘] technical interview with ABC (by: tuesday)
+    There are now 6 tasks in your list!
+=======================================
+=======================================
+    Sure! I have added the following task to your list: 
+    [E][✘] john's birthday (at: Friday night)
+    There are now 7 tasks in your list!
+=======================================
+=======================================
+    Sure! I have added the following task to your list: 
+    [E][✘] school orientation (at: 0800 today)
+    There are now 8 tasks in your list!
+=======================================
+=======================================
+    Bye bye! Hope to see you again soon!
+=======================================
