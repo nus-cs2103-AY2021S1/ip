@@ -1,2 +1,5 @@
-package dependencies.executor;public enum Commands {
+package dependencies.executor;
+
+enum Commands {
+    ADD, LIST, INVALID
 }

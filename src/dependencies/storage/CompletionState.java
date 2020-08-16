@@ -1,2 +1,5 @@
-package dependencies.storage;public enum CompletionState {
+package dependencies.storage;
+
+enum CompletionState {
+
 }
