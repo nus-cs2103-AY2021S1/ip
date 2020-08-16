@@ -13,7 +13,8 @@ public class Duke {
     void addTask(String task) {
         Task t = new Task(task);
         tasks.add(t);
-        System.out.println("added: " + task);
+        System.out.println("Got it. I've added this task:\n " + t);
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
     void listTasks() {
@@ -37,8 +38,8 @@ public class Duke {
     void initializeChatbot() {
         greet();
         Scanner sc = new Scanner(System.in);
-        while (sc.hasNextLine()) {
-            String command = sc.nextLine();
+        while (sc.hasNext()) {
+            String command = sc.next();
             if (command.equals("bye")) {
                 exit();
                 break;
@@ -47,8 +48,9 @@ public class Duke {
             } else if (command.startsWith("done")) {
                 String index = command.split(" ")[1];
                 completeTask(Integer.valueOf(index));
-            } else {
-                addTask(command);
+            } else if (command.equals("todo")){
+                String task = sc.nextLine().trim();
+                addTask(task);
             }
         }
         sc.close();
