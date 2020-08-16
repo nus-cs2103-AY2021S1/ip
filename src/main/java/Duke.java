@@ -10,6 +10,7 @@ public class Duke {
                     if (!input.contains("done")) {
                         if (!input.contains("bye")) {
                             if (!input.contains("list")) {
+                                if (!input.contains("delete"))
                                 throw new DukeException("I don't know what that means! Try again.");
                             }
                         }
@@ -47,7 +48,7 @@ public class Duke {
                     try {
                         int index = userInput.charAt(5) - '0';
                         if (index < 1 || index > ls.size()) {
-                            System.out.println(lines + "Invalid index! Try Again.\n" + lines);
+                            System.out.println(lines + "Index out of range! Try Again.\n" + lines);
                             userInput = sc.nextLine();
                         } else {
                             ls.get(index - 1).markAsDone();
@@ -59,6 +60,20 @@ public class Duke {
                     } catch (StringIndexOutOfBoundsException e) {
                         System.out.println(lines + "Index out of range! Try again.\n" + lines);
                         userInput = sc.nextLine();
+                    }
+                } else if (userInput.contains("delete")) {
+                    int index = userInput.charAt(7) - '0';
+                    if (index < 1 || index > ls.size()) {
+                        System.out.println(lines + "Index out of range! Try Again.\n" + lines);
+                        userInput = sc.nextLine();
+                    } else {
+                        System.out.println(lines);
+                        System.out.println("Noted. I have removed this task:");
+                        System.out.println("  " + ls.get(index - 1).toString());
+                        ls.remove(index - 1);
+                        System.out.println("Now you have " + ls.size() + " tasks in the list");
+                        userInput = sc.nextLine();
+                        System.out.println(lines);
                     }
                 } else {
                     if (userInput.contains("todo")) {
