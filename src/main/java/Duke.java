@@ -19,10 +19,16 @@ public class Duke {
         System.out.println(border + greeting + border);
 
         Scanner sc = new Scanner(System.in); //scans for input
+        DisplayList displayList = new DisplayList();
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
-            System.out.println(border + input + "\n" + border);
+            if (input.equals("list")) {
+                System.out.println(border + displayList.toString() + border);
+            } else {
+                displayList.add(input);
+                System.out.println(border + "Added: " + input + "\n" + border);
+            }
             input = sc.nextLine();
         }
 
