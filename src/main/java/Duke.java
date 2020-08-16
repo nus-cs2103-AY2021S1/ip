@@ -10,8 +10,22 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
 
-    void addTask(String task) {
-        Task t = new Task(task);
+    void addTodoTask(String task) {
+        TodoTask t = new TodoTask(task);
+        tasks.add(t);
+        System.out.println("Got it. I've added this task:\n " + t);
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+    }
+
+    void addDeadlineTask(String task, String deadline) {
+        DeadlineTask t = new DeadlineTask(task, deadline);
+        tasks.add(t);
+        System.out.println("Got it. I've added this task:\n " + t);
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+    }
+
+    void addEventTask(String task, String timing) {
+        EventTask t = new EventTask(task, timing);
         tasks.add(t);
         System.out.println("Got it. I've added this task:\n " + t);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -40,17 +54,35 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String command = sc.next();
-            if (command.equals("bye")) {
-                exit();
-                break;
-            } else if (command.equals("list")) {
-                listTasks();
-            } else if (command.startsWith("done")) {
-                String index = command.split(" ")[1];
-                completeTask(Integer.valueOf(index));
-            } else if (command.equals("todo")){
-                String task = sc.nextLine().trim();
-                addTask(task);
+            switch(command) {
+                case ("bye"): {
+                    exit();
+                    break;
+                }
+                case ("list"): {
+                    listTasks();
+                    break;
+                }
+                case ("todo"): {
+                    String task = sc.nextLine().trim();
+                    addTodoTask(task);
+                    break;
+                }
+                case ("deadline"): {
+                    String[] task = sc.nextLine().trim().split(" /by ");
+                    addDeadlineTask(task[0], task[1]);
+                    break;
+                }
+                case ("event"): {
+                    String[] task = sc.nextLine().trim().split(" /at ");
+                    addEventTask(task[0], task[1]);
+                    break;
+                }
+                case ("done"): {
+                    int index = sc.nextInt();
+                    completeTask(index);
+                    break;
+                }
             }
         }
         sc.close();
