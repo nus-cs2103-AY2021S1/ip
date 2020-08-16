@@ -1,7 +1,8 @@
+package main.java;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import main.java.*;
 
 public class Duke {
     public static void main(String[] args) {
