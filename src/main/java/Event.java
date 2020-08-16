@@ -8,7 +8,7 @@ public class Event extends Task {
 
     static Event create(String task)
             throws EmptyTaskException, MissingDateException {
-        if (task.length() <= 6) throw new EmptyTaskException("deadline");
+        if (task.length() <= 6) throw new EmptyTaskException("event");
         String[] taskInfo = task.substring(6).split(" /at ", 2);
         if (taskInfo.length < 2) throw new MissingDateException();
         return new Event(taskInfo[0], taskInfo[1]);

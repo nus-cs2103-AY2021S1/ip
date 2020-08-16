@@ -5,4 +5,14 @@ list
 done 1
 todo Buy eggs
 list
+evnt
+done 4
+event IT fair
+event IT fair at May
+deadline Return library book
+deadline Return library book by next week
+todo
+deadline
+event
+list
 bye

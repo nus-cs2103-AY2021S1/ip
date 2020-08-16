@@ -44,6 +44,49 @@ Here are the tasks in your list:
 ____________________
 
 ____________________
+I do not know what you mean, care to try again?
+____________________
+
+____________________
+Fool, there is no task associated with this number!
+____________________
+
+____________________
+Hey, you need to tell me the date for this.
+____________________
+
+____________________
+Hey, you need to tell me the date for this.
+____________________
+
+____________________
+Hey, you need to tell me the date for this.
+____________________
+
+____________________
+Hey, you need to tell me the date for this.
+____________________
+
+____________________
+You can't add a non-existent todo, silly!
+____________________
+
+____________________
+You can't add a non-existent deadline, silly!
+____________________
+
+____________________
+You can't add a non-existent event, silly!
+____________________
+
+____________________
+Here are the tasks in your list:
+1.[D][✓] Complete assignment (by: Sunday)
+2.[E][✘] Attend seminar (at: 6 Jun 21)
+3.[T][✘] Buy eggs
+____________________
+
+____________________
 Sad to see you go!
 ____________________
 
