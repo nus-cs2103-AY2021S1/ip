@@ -7,8 +7,17 @@ public class Task {
         this.isDone = false;
     }
 
+    private Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     private String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
+    }
+
+    public Task markAsDone() {
+        return new Task(description, true);
     }
 
     @Override

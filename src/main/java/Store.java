@@ -14,6 +14,12 @@ public class Store {
         nextIndx++;
     }
 
+    public void markTaskAsDone(int i) {
+        taskStore[i - 1] = taskStore[i - 1].markAsDone();
+        StringUtils.printWithWrapper(new String[]{
+                "OK! I have marked the following task as done:",
+                taskStore[i - 1].toString()}, false);
+    }
     public void list() {
         StringUtils.printWithWrapper(this.taskStore, true);
     }
