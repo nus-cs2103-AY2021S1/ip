@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
-    static List<String> taskList = new ArrayList<>();
+    static List<Task> taskList = new ArrayList<>();
 
     static String wrapMessage(String message) {
         String line = "----------------------------------------------";
@@ -20,22 +20,29 @@ public class Duke {
         System.out.println(wrapMessage(byeMessage));
     }
 
-    static void addTask(String task) {
-        taskList.add(task);
-        System.out.println(wrapMessage("added: " + task));
+    static void addTask(String desc) {
+        taskList.add(new Task(desc));
+        System.out.println(wrapMessage("added: " + desc));
     }
 
     static String formatTask(int num) {
         String lineBreak = num != taskList.size() - 1 ? "\n " : "";
-        return (num + 1) + ". " + taskList.get(num) + lineBreak;
+        return (num + 1) + "." + taskList.get(num) + lineBreak;
     }
 
     static void list() {
-        String list = "";
+        String list = "Here are the tasks in your list: \n  ";
         for (int i = 0; i < taskList.size(); i++) {
             list += formatTask(i);
         }
         System.out.println(wrapMessage(list));
+    }
+
+    static void completeTask(int num) {
+        Task task = taskList.get(num - 1);
+        task.completeTask();
+        String message = "Nice! I've marked this task as done: \n  " + task;
+        System.out.println(wrapMessage(message));
     }
 
     static void readInput() {
@@ -43,12 +50,16 @@ public class Duke {
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            switch (input) {
+            String [] commands = input.split(" ");
+            switch (commands[0]) {
                 case "list":
                     list();
                     break;
                 case "bye":
                     exit();
+                    break;
+                case "done":
+                    completeTask(Integer.valueOf(commands[1]));
                     break;
                 default:
                     addTask(input);
