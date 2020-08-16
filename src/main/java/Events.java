@@ -8,7 +8,7 @@ public class Events extends Task {
 
     @Override
     public String toString() {
-        return "[E][" + super.getStatusIcon() + "] " + super.description + " (by: " + this.on + ")";
+        return "[E][" + super.getStatusIcon() + "] " + super.description + " (at: " + this.on + ")";
     }
 
 

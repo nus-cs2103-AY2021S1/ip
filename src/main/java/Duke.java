@@ -3,13 +3,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String logo = "     ____        _        \n"
                 + "    |  _ \\ _   _| | _____ \n"
                 + "    | | | | | | | |/ / _ \\\n"
                 + "    | |_| | |_| |   <  __/\n"
                 + "    |____/ \\__,_|_|\\_\\___|";
-
 
         System.out.println(logo);
 
@@ -19,111 +18,123 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
 
-        String input = scanner.nextLine();
 
-        ArrayList<Task> toDoList = new ArrayList<>();
+        while (true) {
+            String input = scanner.nextLine().trim();
 
-        while (!input.equals("bye")) {
-
-            String command = input.contains(" ") ?
-                    input.split(" ")[0].toLowerCase() :
-                    input.toLowerCase();
-
-            if (command.equals("list")) {
-
-                displayList(toDoList);
-
-            } else if (command.equals("done")) {
-                int entryDone = Integer.parseInt(input.substring(5)) - 1;
-
-                if (entryDone >= 0) {
-                    Task temp = toDoList.get(entryDone);
-
-                    temp.markAsDone();
-
-                    displayThis("Nice! I've marked this task as done: \n        " + temp.toString());
-
-                } else {
-                    displayThis("Command done is in the wrong format");
+            try {
+                if (!startCommand(input)) {
+                    break;
                 }
 
-
-            } else if (!command.equals("")) {
-                Task tempTask;
-
-                switch (command) {
-                    case "deadline": {
-                        int timing = input.indexOf(" /by");
-
-                        String description = input.substring(9, timing);
-                        String by = input.substring(timing + 5);
-
-                        tempTask = new Deadline(description, by);
-
-                        break;
-                    }
-                    case "event": {
-                        int timing = input.indexOf(" /at");
-
-                        String description = input.substring(6, timing);
-                        String by = input.substring(timing + 5);
-
-                        tempTask = new Events(description, by);
-
-
-                        break;
-                    }
-                    case "todo":  // to do task
-                        tempTask = new Task(input.substring(5));
-
-                        break;
-
-                    default:
-                        tempTask = new Task("Unknown type: " + input);
-                        break;
-                }
-
-                toDoList.add(tempTask);
-
-                displayThis("Got it. I've added this task: \n         " + tempTask
-                        + "\n    Now you have " + toDoList.size() + " tasks in the list");
+            } catch (DukeException ex) {
+                displayThis(ex.getMessage());
             }
 
+        }
+    }
 
-            input = scanner.nextLine().trim();
+
+    private static final ArrayList<Task> toDoList = new ArrayList<>();
+
+    private static boolean startCommand(String input) throws DukeException {
+
+        if (input.equals("")) {
+            throw new DukeException("Please type a command");
         }
 
-        displayThis("Bye. Hope to see you again soon!");
+        String command = input.contains(" ") ?
+                input.split(" ")[0].toLowerCase() :
+                input.toLowerCase();
 
+
+        switch (command) {
+            case "bye":
+                displayThis("Bye. Hope to see you again soon!");
+                return false;
+
+            case "list":
+                if (toDoList.size() == 0) {
+                    throw new DukeException("There's nothing in the list :-(");
+                }
+                displayList();
+                break;
+
+            case "done":
+                try {
+                    int entryDone = Integer.parseInt(input.substring(5)) - 1;
+                    Task temp = toDoList.get(entryDone);
+                    temp.markAsDone();
+                    displayThis("Nice! I've marked this task as done: \n        " + temp.toString());
+
+                } catch (Exception ex) {
+                    throw new DukeException("This task does not exist");
+                }
+
+                break;
+
+            case "deadline": {
+                try {
+                    int timing = input.indexOf(" /by");
+                    String description = input.substring(9, timing);
+                    String by = input.substring(timing + 5);
+                    addTask(new Deadline(description, by));
+
+                } catch (Exception ex) {
+                    throw new DukeException("Deadline format isn't correct");
+                }
+
+                break;
+            }
+
+            case "event": {
+                try {
+                    int timing = input.indexOf(" /at");
+                    String description = input.substring(6, timing);
+                    String at = input.substring(timing + 5);
+                    addTask(new Events(description, at));
+
+                } catch (Exception ex) {
+                    throw new DukeException("Event format isn't correct");
+                }
+
+                break;
+
+            }
+            case "todo":
+                addTask(new Task(input.substring(5)));
+                break;
+
+            default:
+                throw new DukeException("I don't know what that means :-(");
+
+        }
+        return true;
     }
+
+
+    private static void addTask(Task task) {
+        toDoList.add(task);
+        displayThis("Got it. I've added this task: \n         " + task
+                + "\n    Now you have " + toDoList.size() + " tasks in the list");
+    }
+
 
     private static void displayThis(String s) {
         System.out.println("\n    ---------------------------------");
-
         System.out.println("    " + s);
-
         System.out.println("    ---------------------------------\n");
-
     }
 
-    private static void displayList(List<Task> list) {
-        if (list.size() == 0) {
-            displayThis("List is empty");
 
-        } else {
-
-            int temp = 0;
-            System.out.println("\n    ---------------------------------\n" +
-                    "    Here are the tasks in your list:");
-            for (int i = 0; i < list.size() && list.get(i) != null; i++) {
-
-                temp = i + 1;
-                System.out.println("    " + temp + ". " + list.get(i));
-
-            }
-
-            System.out.println("    ---------------------------------");
+    private static void displayList() {
+        System.out.println("\n    ---------------------------------\n" +
+                "    Here are the tasks in your list:");
+        for (int i = 0; i < toDoList.size(); i++) {
+            System.out.println("    " + (i + 1) + ". " + toDoList.get(i));
         }
+        System.out.println("    ---------------------------------");
     }
+
 
 }
