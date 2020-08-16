@@ -21,6 +21,10 @@ public class Duke {
             if (input.equals("bye")) {
                 System.out.println(lines + farewell + lines);
                 break;
+            } else if (input.equals("list")) {
+                System.out.println(lines);
+                tasks.forEach(System.out::println);
+                System.out.println(lines);
             } else {
                 tasks.add(String.format("%d. ", number++) + input);
                 System.out.println(lines + "added: " + input + "\n" + lines);
