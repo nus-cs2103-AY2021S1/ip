@@ -1,4 +1,6 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
@@ -47,22 +49,41 @@ public class DukeBot {
 
         while (true){
             horizontalRule();
-            String[] args= currInput.split(" ");
+            String[] fullArg= currInput.split("/");
+            String[] args1= fullArg[0].split(" ");
+
+
+
             if(currInput.equals("bye")){
                 System.out.println("Bye. Hope to see you again soon!");
                 horizontalRule();
                 break;
             }
 
-            else if(args[0].equals("todo")){
+            else if(args1[0].equals("todo")){
                 String task = "";
-                for(int i = 1;i<args.length;i++){
-                    task+=args[i]+" ";
+                for(int i = 1;i<args1.length;i++){
+                    task+=args1[i]+" ";
                 }
                 addTask(task,"[T]");
             }
-            else if(args[0].equals("deadline")){}
-            else if(args[0].equals("event")){}
+            else if(args1[0].equals("deadline")){
+                String task = "";
+                for(int i = 1;i<args1.length;i++){
+                    task+=args1[i]+" ";
+                }
+                addTask(task+"--- "+ fullArg[1],"[D]");
+                
+            }
+            else if(args1[0].equals("event") ){
+
+                String task = "";
+                for(int i = 1;i<args1.length;i++){
+                    task+=args1[i]+" ";
+                }
+                addTask(task+"--- "+ fullArg[1],"[E]");
+
+            }
 
             else if(currInput.equals("list")){
                 for (int i = 0;i< this.tasks.size();i++){
@@ -73,8 +94,8 @@ public class DukeBot {
                     System.out.println("" + (i+1) + "." + this.taskstype.get(i) +checkBox + " "+ this.tasks.get(i));
                 }
             }
-            else if(args[0].equals("done")){
-                int index = Integer.parseInt(args[1])-1;
+            else if(args1[0].equals("done")){
+                int index = Integer.parseInt(args1[1])-1;
                 this.tasksDone.set(index,true);
                 System.out.println("Nice I've marked this tasks as done");
                 System.out.println( "[✓] "+ this.tasks.get(index));
