@@ -1,0 +1,8 @@
+test
+todo finish work
+deadline cs2103 ip /by Aug 20th 2359
+event rest /at never
+list
+done 3
+list
+bye
