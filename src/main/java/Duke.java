@@ -25,17 +25,17 @@ public class Duke {
         return listOfTasks;
     }
 
-    private static Task getTask(TypeOfTask typeOfTask, Scanner input) {
+    private static Task getTask(String command, TypeOfTask typeOfTask, Scanner input) throws MissingInfoException {
         String[] commandArray = input.nextLine().split(" ");
         String description = "";
         String timing = null;
 
         for (int i = 1; i < commandArray.length; i++) {
             if (commandArray[i].equals("/by")) {
-                timing = getTiming(commandArray, i + 1);
+                timing = getTiming(command, commandArray, i + 1);
                 break;
             } else if (commandArray[i].equals("/at")) {
-                timing = getTiming(commandArray, i + 1);
+                timing = getTiming(command, commandArray, i + 1);
                 break;
             }
             if (i == 1) {
@@ -43,6 +43,10 @@ public class Duke {
             } else {
                 description = description + " " + commandArray[i];
             }
+        }
+
+        if (description.isEmpty()) {
+            throw new MissingInfoException("OOPS!!! The description of a " + command + " cannot be empty.");
         }
 
         switch (typeOfTask) {
@@ -57,7 +61,7 @@ public class Duke {
         }
     }
 
-    private static String getTiming(String[] commandArray, int index) {
+    private static String getTiming(String command, String[] commandArray, int index) throws MissingInfoException {
         String timing = "";
         for (int i = index; i < commandArray.length; i++) {
             if (i == index) {
@@ -65,6 +69,10 @@ public class Duke {
             } else {
                 timing = timing + " " + commandArray[i];
             }
+        }
+
+        if (timing.isEmpty()) {
+            throw new MissingInfoException("OOPS!!! The date/time of a " + command + " cannot be empty.");
         }
         return timing;
     }
@@ -85,25 +93,30 @@ public class Duke {
                 System.out.println(formatReply("This task has been marked as done:\n" + task.toString()));
             }
             else {
-                TypeOfTask typeOfTask;
-                switch (command) {
-                    case "todo":
-                        typeOfTask = TypeOfTask.TODO;
-                        break;
-                    case "deadline":
-                        typeOfTask = TypeOfTask.DEADLINE;
-                        break;
-                    case "event":
-                        typeOfTask = TypeOfTask.EVENT;
-                        break;
-                    default:
-                        typeOfTask = null;
-                        break;
+                try {
+                    TypeOfTask typeOfTask;
+                    switch (command) {
+                        case "todo":
+                            typeOfTask = TypeOfTask.TODO;
+                            break;
+                        case "deadline":
+                            typeOfTask = TypeOfTask.DEADLINE;
+                            break;
+                        case "event":
+                            typeOfTask = TypeOfTask.EVENT;
+                            break;
+                        default:
+                            throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
+                    Task newTask = getTask(command, typeOfTask, input);
+                    taskList.add(newTask);
+                    System.out.println(formatReply("Got it. I've added this task:\n" + newTask.toString()
+                            + "\nNow you have " + taskList.size() + " tasks in the list."));
+                } catch (InvalidCommandException e) {
+                    System.out.println(formatReply(e.getMessage()));
+                } catch (MissingInfoException e) {
+                    System.out.println(formatReply(e.getMessage()));
                 }
-                Task newTask = getTask(typeOfTask, input);
-                taskList.add(newTask);
-                System.out.println(formatReply("Got it. I've added this task:\n" + newTask.toString()
-                        + "\nNow you have " + taskList.size() + " tasks in the list."));
             }
         }
         System.out.println(formatReply("Bye. Hope to see you again soon!"));
@@ -174,5 +187,17 @@ class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.at + ")";
+    }
+}
+
+class InvalidCommandException extends Exception {
+    public InvalidCommandException(String message) {
+        super(message);
+    }
+}
+
+class MissingInfoException extends Exception {
+    public MissingInfoException(String message) {
+        super(message);
     }
 }
