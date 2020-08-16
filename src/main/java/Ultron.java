@@ -63,9 +63,11 @@ public class Ultron {
 
     private void helpMessage(){
         System.out.println("Heh I guess I could help an insect like you:\n" +
-                "- todo (name)               : Adds a todo to the list\n" +
-                "- event (name) /at (date)   : Adds an event at date\n" +
-                "- deadline (name) /by (date): Adds a deadline which expires by date"
+                        "- help                      : Get help for the commands\n" +
+                        "- todo (name)               : Adds a todo to the list\n" +
+                        "- event (name) /at (date)   : Adds an event at date\n" +
+                        "- deadline (name) /by (date): Adds a deadline which expires by date\n"
+
                 );
     }
 
