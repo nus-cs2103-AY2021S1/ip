@@ -1,6 +1,6 @@
 public class DukeException {
     private static final String divider =
-            "\t------------------------------------------------\n";
+            "\t----------------------------------------------------\n";
 
     protected static void toDoInvalidDescription() {
         System.out.print(divider

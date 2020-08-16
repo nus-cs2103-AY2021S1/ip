@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class DukeCommandsHandler {
     private static final String divider =
-            "\t------------------------------------------------\n";
+            "\t----------------------------------------------------\n";
     private static final ArrayList<Task> tasks = new ArrayList<>();
 
     protected static void greetings() {
@@ -14,7 +14,7 @@ public class DukeCommandsHandler {
                 + "\t|_|   \\___/  \\___| \\__,_||___/(_)\n";
         System.out.println("Welcome to\n" + logo);
         String greetings = divider
-                + "\t>~< I am Pocus, your personal assistant!"
+                + "\t\"\\(*^O^*) I am Pocus, your personal assistant!"
                 + "\n\tBefore we start, may I know your name?\n"
                 + divider;
         System.out.print(greetings);
@@ -45,9 +45,9 @@ public class DukeCommandsHandler {
         Task toDo = new ToDo(description);
         tasks.add(toDo);
         String printing = divider
-                + "\tGot it. I've added this task:\n\t\t"
-                + toDo + "\n\t" + "Now you have "
-                + tasks.size() + " tasks in the list.\n"
+                + "\tGotcha! I've added this task:\n\t\t"
+                + toDo + "\n\t" + "You have "
+                + tasks.size() + " tasks on the list now.\n"
                 + divider;
         System.out.print(printing);
     }
@@ -88,9 +88,9 @@ public class DukeCommandsHandler {
         Task deadline = new Deadline(description, by);
         tasks.add(deadline);
         String printing = divider
-                + "\tGot it. I've added this task:\n\t\t"
-                + deadline + "\n\t" + "Now you have "
-                + tasks.size() + " tasks in the list.\n"
+                + "\tGotcha! I've added this task:\n\t\t"
+                + deadline + "\n\t" + "You have "
+                + tasks.size() + " tasks on the list now.\n"
                 + divider;
         System.out.print(printing);
     }
@@ -131,9 +131,9 @@ public class DukeCommandsHandler {
         Task event = new Event(description, at);
         tasks.add(event);
         String printing = divider
-                + "\tGot it. I've added this task:\n\t\t"
-                + event + "\n\t" + "Now you have "
-                + tasks.size() + " tasks in the list.\n"
+                + "\tGotcha! I've added this task:\n\t\t"
+                + event + "\n\t" + "You have "
+                + tasks.size() + " tasks on the list now.\n"
                 + divider;
         System.out.print(printing);
     }
@@ -147,10 +147,10 @@ public class DukeCommandsHandler {
         Task taskToBeDeleted = tasks.get(index - 1);
         tasks.remove(index - 1);
         String deletedTask = divider
-                + "\tNoted. I've removed this task:\n\t\t"
+                + "\tRoger that! I've removed this task:\n\t\t"
                 + taskToBeDeleted
-                + "\n\tNow you have " + tasks.size()
-                + " tasks in the list.\n" + divider;
+                + "\n\tYou have " + tasks.size()
+                + " tasks on the list now.\n" + divider;
         System.out.print(deletedTask);
     }
 
@@ -163,14 +163,14 @@ public class DukeCommandsHandler {
         Task finishedTask = tasks.get(index - 1);
         finishedTask.markAsDone();
         String doneTask = divider
-                + "\tGood job! I've marked this task as done:\n\t\t"
+                + "\t\\(^O^)/ Good job! I've marked this task as done:\n\t\t"
                 + finishedTask + "\n\tKeep going!\n" + divider;
         System.out.print(doneTask);
     }
 
     protected static void listTasks() {
         System.out.print(divider);
-        System.out.print("\tHere are the tasks in your list:\n");
+        System.out.print("\tHere are the tasks on your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             int number = i + 1;
             System.out.print("\t" + number + ". " + tasks.get(i) + "\n");
@@ -180,7 +180,7 @@ public class DukeCommandsHandler {
 
     protected static void exitFocus() {
         String exit = divider
-                + "\tHopefully I have helped you today. Bye! >~<\n"
+                + "\tHopefully I have helped you today. Byeee! (*^O^*)/\"\n"
                 + divider;
         System.out.print(exit);
     }
