@@ -49,16 +49,16 @@ class ChatBot {
             String input = sc.nextLine();
 
             // guard clause for when user says 'bye'. Program will exit while loop.
-            if (input.equals("bye")) {
+            if (input.toLowerCase().equals("bye")) {
                 bye();
                 break;
             }
 
-            if (input.equals("list")) {
+            if (input.toLowerCase().equals("list")) {
                 showList();
             } else {
                 String[] inputArray = input.split(" ", 2); // separates the first word from the rest
-                if (inputArray[0].equals("done")) {
+                if (inputArray[0].toLowerCase().toLowerCase().equals("done")) {
                     makeTaskDone(inputArray[1]);
                 } else {
                     add(inputArray);
@@ -115,7 +115,9 @@ class ChatBot {
      * @param inputArray the name of the task the user entered
      */
     void add(String[] inputArray) {
-////        if (inputArray[0].equals())
+        if (inputArray[0].toLowerCase().equals("todo")) {
+
+        }
 //        Task task = new Task(item);
 //        this.toDoList.add(task);
 //        System.out.println(ConsoleColors.YELLOW.getColor()
