@@ -36,8 +36,12 @@ public class Duke {
                         }
                     }
                 } else if (str.startsWith("delete ")) {
-                    int temp = Integer.parseInt(str.substring(5));
-                    lstOfTasks.get(temp - 1).doTask();
+                    int temp = Integer.parseInt(str.substring(7));
+                    Task task = lstOfTasks.get(temp - 1);
+                    lstOfTasks.remove(temp - 1);
+                    System.out.println("Noted. I've removed the task: \n"
+                        + task
+                        + "\nNow you have " + lstOfTasks.size() + " tasks in the list.");
 
                 } else if (str.startsWith("done ")) {
                     int temp = Integer.parseInt(str.substring(5));

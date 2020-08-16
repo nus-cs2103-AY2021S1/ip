@@ -3,4 +3,49 @@ ____________________________________________________________
 Hello! I'm Spongebob
 What can I do for you?
 ____________________________________________________________
+____________________________________________________________
+
+Got it. I've added this task: 
+[T][?] Read Book
+Now you have 1 task(s) in the list.
+____________________________________________________________
+
+____________________________________________________________
+
+Got it. I've added this task: 
+[D][?] Return Book (by: June 6th)
+Now you have 2 task(s) in the list.
+____________________________________________________________
+
+____________________________________________________________
+
+Got it. I've added this task: 
+[E][?] Project meeting (at: Aug 6th 2-4pm)
+Now you have 3 task(s) in the list.
+____________________________________________________________
+
+____________________________________________________________
+
+Got it. I've added this task: 
+[T][?] Join Sports Club
+Now you have 4 task(s) in the list.
+____________________________________________________________
+
+____________________________________________________________
+
+Got it. I've added this task: 
+[T][?] Borrow book
+Now you have 5 task(s) in the list.
+____________________________________________________________
+
+____________________________________________________________
+
+Here are the tasks in your list: 
+
+1. [T][?] Read Book
+2. [D][?] Return Book (by: June 6th)
+3. [E][?] Project meeting (at: Aug 6th 2-4pm)
+4. [T][?] Join Sports Club
+5. [T][?] Borrow book
+____________________________________________________________
 
