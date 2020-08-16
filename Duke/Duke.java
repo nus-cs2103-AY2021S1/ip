@@ -1,5 +1,6 @@
 package Duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.*;
 
@@ -13,8 +14,7 @@ import java.util.regex.*;
 public class Duke {
 
     private static String indent = "   ";
-    private Task[] taskList = new Task[100];
-    private int numberOfTasks = 0;
+    private ArrayList<Task> taskList = new ArrayList<Task>();
     private static String line = indent + "----------------------------";
 
     /**
@@ -33,10 +33,9 @@ public class Duke {
      * @return taskName name of the task
      */
     public String addTodo(String taskName) {
-        numberOfTasks += 1;
         System.out.println(indent + "Got it. I've added this task:");
-        taskList[numberOfTasks - 1] = new Todo(taskName);
-        System.out.println(indent + "  " + taskList[numberOfTasks - 1]);
+        taskList.add(new Todo(taskName));
+        System.out.println(indent + "  " + taskList.get(taskList.size() - 1));
         displayNoOfTasks();
         return taskName;
     }
@@ -50,10 +49,9 @@ public class Duke {
     public boolean addDeadline(String input) {
         input.replace("deadline", "").trim();
         String[] splittedInput = input.split("/");
-        numberOfTasks += 1;
         System.out.println(indent + "Got it. I've added this task:");
-        taskList[numberOfTasks - 1] = new Deadline(splittedInput[0], splittedInput[1].replace("by", "").trim());
-        System.out.println(indent + "  " + taskList[numberOfTasks - 1]);
+        taskList.add(new Deadline(splittedInput[0], splittedInput[1].replace("by", "").trim()));
+        System.out.println(indent + "  " + taskList.get(taskList.size()-1));
         displayNoOfTasks();
         return true;
     }
@@ -67,17 +65,16 @@ public class Duke {
     public boolean addEvent(String input) {
         input.replace("event", "").trim();
         String[] splittedInput = input.split("/");
-        numberOfTasks += 1;
         System.out.println(indent + "Got it. I've added this task:");
-        taskList[numberOfTasks - 1] = new Event(splittedInput[0], splittedInput[1].replace("at", "").trim());
-        System.out.println(indent + "  " + taskList[numberOfTasks - 1]);
+        taskList.add(new Event(splittedInput[0], splittedInput[1].replace("at", "").trim()));
+        System.out.println(indent + "  " + taskList.get(taskList.size()-1));
         displayNoOfTasks();
         return true;
     }
 
     public void displayNoOfTasks() {
         System.out.println(
-                indent + "Now you have " + numberOfTasks + (numberOfTasks > 1 ? " tasks" : " task") + " in the list.");
+                indent + "Now you have " + taskList.size() + (taskList.size() > 1 ? " tasks" : " task") + " in the list.");
     }
 
     /**
@@ -87,8 +84,7 @@ public class Duke {
      * @return taskName name of the task
      */
     public String addTask(String taskName) {
-        numberOfTasks += 1;
-        taskList[numberOfTasks - 1] = new Task(taskName);
+        taskList.add(new Task(taskName));
         System.out.println(indent + "Added: " + taskName);
         return taskName;
     }
@@ -97,15 +93,20 @@ public class Duke {
      * This method displays the task list.
      */
     public void displayList() {
+        if (taskList.size() == 0) {
+            System.out.println("There's nothing in your list");
+            return ;
+        }
         System.out.println(indent + "Here are the tasks in your list:");
-        for (int i = 1; i < numberOfTasks + 1; i++) {
-            System.out.println(indent + i + "." + taskList[i - 1]);
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.println(indent + (i+1) + "." + taskList.get(i));
         }
     }
 
     /**
      * This method does verification for description.
      * @param type Type of task
+     * @throws DukeException Customized exception
      */
     public void verificationDescription(String type) throws DukeException {
         throw new DukeException("The description of a " + type + " task cannot be empty.");
@@ -114,6 +115,7 @@ public class Duke {
 
     /**
      * This method responds to the user's input.
+     * @throws DukeException Customized exception
      */
     public void respond() throws DukeException {
         Scanner userInput = new Scanner(System.in);
@@ -127,7 +129,7 @@ public class Duke {
 
                 // If input does not contain any of the actions
                 if (!(input.contains("bye") || input.contains("done") || input.contains("todo")
-                        || input.contains("deadline") || input.contains("list") || input.contains("event"))) {
+                        || input.contains("deadline") || input.contains("list") || input.contains("event") || input.contains("delete"))) {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
 
@@ -137,11 +139,22 @@ public class Duke {
                     continue;
                 }
                 if (inputList[0].equals("done")) {
-                    int number = Integer.parseInt(String.valueOf(input.charAt(5))) - 1;
-                    if (number >= 0 && number < numberOfTasks) {
+                    int number = Integer.parseInt(inputList[1]) - 1;
+                    if (number >= 0 && number < taskList.size()) {
                         System.out.println(indent+"Nice! I've marked this task as done:");
-                        taskList[number].markAsDone();
+                        taskList.get(number).markAsDone();
                         System.out.println(line);
+                    }
+                    continue;
+                }
+
+                if (inputList[0].equals("delete")) {
+                    int number = Integer.parseInt(inputList[1]) - 1;
+                    if (number >= 0 && number < taskList.size()) {
+                        System.out.println(indent+"Noted. I've removed this task:");
+                        System.out.println(indent+taskList.get(number));
+                        taskList.remove(number);
+                        displayNoOfTasks();
                     }
                     continue;
                 }
