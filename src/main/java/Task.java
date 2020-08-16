@@ -26,7 +26,7 @@ public class Task {
     public static void listing(){
         System.out.println("   Here are the tasks in your list: ");
         for(Task task : tasks){
-            System.out.println("  " + task.ID + "." + task);
+             System.out.println("  " + task.ID + "." + task);
         }
         System.out.println("\n" + "  ____________________________________________________________");
     }
