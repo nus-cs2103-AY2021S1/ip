@@ -38,8 +38,16 @@ public class Duke {
                     responses.add("Bye. Hope to see you again soon!");
                     run = false;
                     break;
+                case "list":
+                    for (int i = 0; i < Duke.tasks.size(); i++) {
+                        String item = "" + (i+1) + ". " + Duke.tasks.get(i).getDescription();
+                        responses.add(item);
+                    }
+                    break;
                 default:
-                    responses.add(input);
+                    Task newTask = new Task(input);
+                    Duke.tasks.add(newTask);
+                    responses.add("added: " + newTask.getDescription());
             }
 
             respond(responses);
