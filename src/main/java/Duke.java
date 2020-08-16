@@ -163,6 +163,7 @@ public class Duke {
             // multiple words
             else {
                 Scanner multiWord = new Scanner(output);
+                // can't use enums here, firstWord can be literally anything
                 String firstWord = multiWord.next();
                 // wow intelliJ is a better programmer than i'll ever be
                 switch (firstWord) {
