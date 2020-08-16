@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -125,6 +126,16 @@ public class Duke {
         line();
     }
 
+    public static void delete(int taskNumber) {
+        Task currentTask = storage.get(taskNumber);
+        line();
+        System.out.println("Deleted task:");
+        System.out.println(currentTask.getType() + "[✓] " + storage.get(taskNumber).getName());
+        storage.remove(taskNumber);
+        System.out.println("There are now " + storage.size() + " task(s) remaining.");
+        line();
+    }
+
     public static void main(String[] args) throws DukeException {
         String logo =
                           " ____             _     \n"
@@ -153,31 +164,47 @@ public class Duke {
             else {
                 Scanner multiWord = new Scanner(output);
                 String firstWord = multiWord.next();
-                if (firstWord.equals("done")) {
-                    String index = multiWord.next();
-                    int intIndex = Integer.parseInt(index);
-                    if (intIndex <= storage.size() && intIndex > 0) {
-                        markComplete(intIndex - 1);
-                    } else {
-                        // I don't like how the program exits on throw
-                        throw DukeException.outOfBounds(intIndex);
+                // wow intelliJ is a better programmer than i'll ever be
+                switch (firstWord) {
+                    case "done": {
+                        String index = multiWord.next();
+                        int intIndex = Integer.parseInt(index);
+                        if (intIndex <= storage.size() && intIndex > 0) {
+                            markComplete(intIndex - 1);
+                        } else {
+                            // I don't like how the program exits on throw
+                            throw DukeException.outOfBounds(intIndex);
+                        }
+                        break;
                     }
-                }
-                // it's a task
-                else if (firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event")) {
-                    // whitespace in front of nextLine
-                    if (multiWord.hasNextLine()){
-                        String remainingWords = multiWord.nextLine().trim();
-                        store(firstWord, remainingWords);
-                    } else {
-                        // I don't like how the program exits on throw
-                        throw DukeException.empty(firstWord);
+                    case "delete": {
+                        String index = multiWord.next();
+                        int intIndex = Integer.parseInt(index);
+                        if (intIndex <= storage.size() && intIndex > 0) {
+                            delete(intIndex - 1);
+                        } else {
+                            // I don't like how the program exits on throw
+                            throw DukeException.outOfBounds(intIndex);
+                        }
+                        break;
                     }
-                }
-                // invalid order
-                else {
-                    // I don't like how the program exits on throw
-                    throw DukeException.invalid(output);
+                    // it's a task
+                    case "todo":
+                    case "deadline":
+                    case "event":
+                        // whitespace in front of nextLine
+                        if (multiWord.hasNextLine()) {
+                            String remainingWords = multiWord.nextLine().trim();
+                            store(firstWord, remainingWords);
+                        } else {
+                            // I don't like how the program exits on throw
+                            throw DukeException.empty(firstWord);
+                        }
+                        break;
+                    // invalid order
+                    default:
+                        // I don't like how the program exits on throw
+                        throw DukeException.invalid(output);
                 }
             }
         }
