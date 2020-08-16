@@ -10,7 +10,12 @@ public class Duke {
             if (next.equals("list")) {
                 manager.printList();
             } else {
-                manager.addTask(next);
+                String[] parsed = next.split(" +");
+                if (parsed[0].equals("done")) {
+                    manager.markTaskAsDone(Integer.parseInt(parsed[1]));
+                } else {
+                    manager.addTask(next); // default behaviour
+                }
             }
             next = sc.nextLine();
         }
