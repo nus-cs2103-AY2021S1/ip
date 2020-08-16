@@ -1,4 +1,5 @@
 package Duke;
+
 /**
  * The task class that represents a task.
  *

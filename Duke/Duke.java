@@ -55,6 +55,23 @@ public class Duke {
         return true;
     }
 
+    /**
+     * This method adds eventTask for the bot.
+     *
+     * @param input string to be cleaned and parsed
+     * @return boolean true or false depending on the success
+     */
+    public boolean addEvent(String input) {
+        String cleaned = input.replace("event", "").trim();
+        String[] splittedInput = input.split("/");
+        numberOfTasks += 1;
+        System.out.println(indent + "Got it. I've added this task:");
+        taskList[numberOfTasks - 1] = new Event(splittedInput[0], splittedInput[1].replace("at", "").trim());
+        System.out.println(indent + "  " + taskList[numberOfTasks - 1]);
+        displayNoOfTasks();
+        return true;
+    }
+
     public void displayNoOfTasks() {
         System.out.println(indent + "Now you have " + numberOfTasks + (numberOfTasks > 1 ? " tasks" : " task") + " in the list.");
     }
@@ -97,9 +114,12 @@ public class Duke {
             }
 
             if (input.contains("done")) {
-                System.out.println("Nice! I've marked this task as done:");
-                taskList[Integer.parseInt(String.valueOf(input.charAt(5)))-1].markAsDone();
-                System.out.println(indent + "----------------------------");
+                int number = Integer.parseInt(String.valueOf(input.charAt(5)))-1;
+                if (number >= 0 && number < numberOfTasks) {
+                    System.out.println("Nice! I've marked this task as done:");
+                    taskList[number].markAsDone();
+                    System.out.println(indent + "----------------------------");
+                }
                 continue;
             }
 
@@ -111,6 +131,12 @@ public class Duke {
 
             if (input.contains("deadline")) {
                 addDeadline(input);
+                System.out.println(indent + "----------------------------");
+                continue;
+            }
+
+            if (input.contains("event")) {
+                addEvent(input);
                 System.out.println(indent + "----------------------------");
                 continue;
             }
