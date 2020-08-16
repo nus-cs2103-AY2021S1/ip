@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -15,13 +16,24 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         String user_input = "";
+        ArrayList<String> textList = new ArrayList<String>();
         while (true) {
             user_input = scanner.nextLine();  // Read user input
-            if (user_input.equals("bye")){
-                System.out.println("Bye. Hope to see you again soon!");  // quit
+            if (user_input.equals("bye")) {
+                // quit
+                System.out.println("Bye. Hope to see you again soon!");
                 break;
+            } else if (user_input.equals("list")) {
+                // list text
+                int index = 1;
+                for (String text : textList) {
+                    System.out.println(String.format("%s. %s", index, text));
+                    index += 1;
+                }
             } else {
-                System.out.println(user_input);  // Output user input
+                // add text
+                textList.add(user_input);
+                System.out.println(String.format("added: %s", user_input));  // Output user input
             }
         }
     }
