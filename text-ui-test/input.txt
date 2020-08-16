@@ -5,3 +5,5 @@ list
 done 1
 done 2
 list
+delete 2
+list
