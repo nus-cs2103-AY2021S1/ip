@@ -1,6 +1,10 @@
+../src/main/java/InvalidTaskTypeException.java
 ../src/main/java/Tasks.java
+../src/main/java/InvalidArgumentException.java
+../src/main/java/InvalidCommandException.java
 ../src/main/java/Event.java
 ../src/main/java/Task.java
 ../src/main/java/Duke.java
 ../src/main/java/Deadline.java
 ../src/main/java/ToDo.java
+../src/main/java/DukeException.java
