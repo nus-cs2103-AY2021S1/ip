@@ -140,7 +140,6 @@ public class Duke {
             String input = sc.nextLine();
             String[] inputSplit = input.split(" ");
             String command = inputSplit[0];
-            boolean doDefault = false;
 
             switch(command.toLowerCase()) {
                 case "bye":
