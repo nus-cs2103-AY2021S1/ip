@@ -120,8 +120,21 @@ public class Ultron {
             //Check if the user is done with any task
             case "done":{
 
-                //Get the index of the items
-                int index = Integer.valueOf(args) - 1;
+                //Initialise index
+                int index;
+
+                //Catch any errors in the number
+                try{
+
+                    //Get the index of the items
+                    index = Integer.valueOf(args) - 1;
+
+                }catch(NumberFormatException e){
+
+                    //Throw a new ultron exception
+                    throw new UltronException(String.format("'%s' is not a valid number", args));
+                }
+
 
                 //Mark the task as done
                 this.taskList.markDone(index);
@@ -144,7 +157,7 @@ public class Ultron {
                 }catch (IllegalArgumentException e){
 
                     //Throw a Duke exception
-                    throw new UltronException(String.format("%s is not a valid command", command));
+                    throw new UltronException(String.format("'%s' is not a valid command", command));
                 }
                 if (args.trim().length() == 0){
                     throw new UltronException("There are no arguments supplied");
@@ -154,7 +167,7 @@ public class Ultron {
                     tsk = val.createTask(args);
                 }catch(IllegalStateException e){
                     //Throw a Duke exception
-                    throw new UltronException(String.format("Invalid %s command syntax\nUse help for more information",command));
+                    throw new UltronException(String.format("Invalid %s command syntax\nUse 'help' for more information",command));
                 }
 
 
