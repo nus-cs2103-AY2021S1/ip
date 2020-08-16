@@ -1,7 +1,4 @@
-import exceptions.DukeException;
-import exceptions.EmptyBodyException;
-import exceptions.UnknownCommandException;
-import exceptions.WrongSyntaxException;
+import exceptions.*;
 
 import java.util.Scanner;
 import java.util.List;
@@ -62,10 +59,16 @@ public class Duke {
                 return true;
             case "done":
                 int taskNumber = scanner.nextInt();
+                if (taskNumber < 1 || taskNumber > taskList.size()) {
+                    throw new NoSuchTaskException();
+                }
                 completeTask(taskNumber);
                 return true;
             case "delete":
                 int toDelete = scanner.nextInt();
+                if (toDelete < 1 || toDelete > taskList.size()) {
+                    throw new NoSuchTaskException();
+                }
                 deleteTask(toDelete);
                 return true;
             case "deadline":
