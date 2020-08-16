@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class DukeBot {
 
     private ArrayList<String> tasks = new ArrayList<String>();
+    private ArrayList<Boolean> tasksDone = new ArrayList<Boolean>();
 
     public void horizontalRule(){
         System.out.println("____________________________________________________________");
@@ -33,6 +34,7 @@ public class DukeBot {
 
     public void addTask(String task){
         this.tasks.add(task);
+        this.tasksDone.add(false);
         System.out.println("added: "+task);
     }
 
@@ -49,7 +51,11 @@ public class DukeBot {
             }
             else if(currInput.equals("list")){
                 for (int i = 0;i< this.tasks.size();i++){
-                    System.out.println(""+(i+1)+". "+ this.tasks.get(i));
+                    String checkBox = "[✗]";
+                    if(this.tasksDone.get(i)){
+                        checkBox = "[✓]";
+                    }
+                    System.out.println("" + (i+1) + "." + checkBox + " "+ this.tasks.get(i));
                 }
             }
             else{
