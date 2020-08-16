@@ -43,7 +43,22 @@ public class DukeBot {
         System.out.println("added: "+task);
     }
 
-    public void listener(){
+    public void numTask(){
+        int done=0;
+        int undone=0;
+        for(int i = 0;i<tasksDone.size();i++){
+            if(tasksDone.get(i)){
+                done++;
+            }
+            else {
+                undone++;
+            }
+        }
+        System.out.println(done+ " finished tasks in the list.");
+        System.out.println(undone+ " unfinished tasks in the list.");
+    }
+
+    public void listener() {
         Scanner fetch = new Scanner(System.in);
         String currInput = fetch.nextLine();
 
@@ -60,12 +75,17 @@ public class DukeBot {
                 break;
             }
 
+            if((args1[0].equals("todo") || args1[0].equals("deadline")||args1[0].equals("event")) && args1.length==1){
+                System.out.println("☹ OOPS!!! The description of a "+ args1[0] +" cannot be empty.");
+            }
+
             else if(args1[0].equals("todo")){
                 String task = "";
                 for(int i = 1;i<args1.length;i++){
                     task+=args1[i]+" ";
                 }
                 addTask(task,"[T]");
+                numTask();
             }
             else if(args1[0].equals("deadline")){
                 String task = "";
@@ -73,7 +93,8 @@ public class DukeBot {
                     task+=args1[i]+" ";
                 }
                 addTask(task+"--- "+ fullArg[1],"[D]");
-                
+                numTask();
+
             }
             else if(args1[0].equals("event") ){
 
@@ -82,6 +103,7 @@ public class DukeBot {
                     task+=args1[i]+" ";
                 }
                 addTask(task+"--- "+ fullArg[1],"[E]");
+                numTask();
 
             }
 
@@ -101,7 +123,7 @@ public class DukeBot {
                 System.out.println( "[✓] "+ this.tasks.get(index));
             }
             else{
-                addTask(currInput,"[T]");
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             horizontalRule();
 
