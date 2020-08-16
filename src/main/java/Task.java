@@ -15,11 +15,10 @@ public class Task{
     public Task markAsDone() {
         if (!isDone) {
             this.isDone = true;
-            System.out.println(lines + " Good Job!!! You cleared this task:\n   ["
-                    + this.getStatusIcon() + "] " + this.description + "\n" + lines);
+            Print.print(" Good Job!!! You cleared this task:\n   [" + this.getStatusIcon() + "] "
+                    + this.description + "\n");
         } else {
-            System.out.println(lines
-                    + " You have already completed this task! *Woof woof*\n" + lines);
+            Print.print(" You have already completed this task! *Woof woof*\n");
         }
         return this;
     }

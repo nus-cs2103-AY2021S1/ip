@@ -7,7 +7,6 @@ public class Deadline extends Task {
     }
 
     public static Deadline createTask(String message) throws DukeException{
-        String lines = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
         String errMessage = " Oops!! You missed out some vital information... *woof*\n";
         try {
             String messageLowerCase = message.toLowerCase();
@@ -15,7 +14,7 @@ public class Deadline extends Task {
             String description = message.substring(9, indOfTime);
             String deadline = message.substring(indOfTime + 3);
             if (description.isBlank() || deadline.isBlank()) {
-                String exMessage = lines+ errMessage + lines;
+                String exMessage = Print.printFormat(errMessage);
                 throw new DukeException(exMessage);
             } else {
                 return new Deadline(description, deadline);
@@ -23,7 +22,7 @@ public class Deadline extends Task {
         } catch (DukeException e) {
             throw e;
         } catch (Exception e) {
-            String exMessage = lines + errMessage + lines;
+            String exMessage = Print.printFormat(errMessage);
             throw new DukeException(exMessage);
         }
     }
