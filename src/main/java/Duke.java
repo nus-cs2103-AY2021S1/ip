@@ -16,20 +16,15 @@ public class Duke {
             LEFT_MARGIN + "_______________________________________________________\n";
 
     // Messages
-    private static final String MESSAGE_WELCOME = "It's a-me, Mario! how can I help you today?\n";
-    private static final String MESSAGE_EXIT = "Hey! Come back here! You big-a monkey!\n";
+    private static final String MESSAGE_WELCOME = "It's a-me, Mario! how can I help you today?";
+    private static final String MESSAGE_EXIT = "Hey! Come back here! You big-a monkey!";
     private static final String MESSAGE_EMPTY = "What do you expect me to say when you didn't save any tasks?";
-    private static final String MESSAGE_TASKS = "As you wish, here's what you gotta do:\n";
-    public static final String MESSAGE_DONE = "You did it! Good job little guy!\n";
+    private static final String MESSAGE_TASKS = "As you wish, here's what you gotta do:";
+    public static final String MESSAGE_DONE = "You did it! Good job little guy!";
 
     // processes the input and generates the output in the correct format.
     public static String displayOutput(String input) {
         return BORDER + LEFT_MARGIN + input + "\n" + BORDER;
-    }
-
-    // displays the task in the correct style (without the numbering)
-    public static String displayTask(Task task) {
-        return (task.isDone() ? "[✓] " : "[✗] ") + task.getName() + "\n";
     }
 
     // displays the task list in the correct format
@@ -37,12 +32,12 @@ public class Duke {
         if (Task.getCount() == 0) {
             return displayOutput(MESSAGE_EMPTY);
         } else {
-            StringBuilder out = new StringBuilder(BORDER).append(LEFT_MARGIN).append(MESSAGE_TASKS);
+            StringBuilder out = new StringBuilder(MESSAGE_TASKS).append("\n");
             for (short i = 1; i <= Task.getCount(); i++) {
-                out.append(LEFT_MARGIN_DOUBLE).append(inputArr[i].getId()).append(".")
-                        .append(displayTask(inputArr[i]));
+                out.append(LEFT_MARGIN_DOUBLE).append(inputArr[i].getId())
+                        .append(".").append(inputArr[i]).append("\n");
             }
-            return out.append(BORDER).toString();
+            return displayOutput(out.substring(0, out.length() - 2));
         }
     }
 
@@ -56,13 +51,13 @@ public class Duke {
     // mark task as done
     public static String markAsDone(Task[] taskList, short id) {
         taskList[id].markAsDone();
-        return BORDER + LEFT_MARGIN + MESSAGE_DONE + LEFT_MARGIN_DOUBLE + displayTask(taskList[id]) + BORDER;
+        return displayOutput(MESSAGE_DONE + "\n" + LEFT_MARGIN_DOUBLE + taskList[id]);
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Task[] taskList = new Task[100];
-        System.out.println(BORDER + LOGO + displayOutput(MESSAGE_WELCOME));
+        System.out.print(BORDER + LOGO + displayOutput(MESSAGE_WELCOME));
         while (sc.hasNext()) {
             String input = sc.nextLine();
             if (input.equals("bye")) {
