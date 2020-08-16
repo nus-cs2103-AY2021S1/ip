@@ -1,7 +1,11 @@
 todo borrow book
 deadline return book /by June 6th
 list
+event
 event project meeting /at Mon 2-4pm
+done
 done 1
 list
+todo
+blah
 bye
