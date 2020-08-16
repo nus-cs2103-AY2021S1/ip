@@ -44,11 +44,42 @@ public class Duke {
                 System.out.println("        " + list.get(taskPosition-1));
                 System.out.println("    ______________________________________");
 
-            } else {
+            } else if (userInput.startsWith("todo")) {
+                int spacePosition = userInput.indexOf(" ");
+                String description = userInput.substring(spacePosition+1);
+                Task toDo = new Todo(description);
+                list.add(toDo);
                 System.out.println("    ______________________________________");
-                System.out.println("        added: " + userInput);
+                System.out.println("        Got it. I've added this task: ");
+                System.out.println("            " + toDo);
+                System.out.println("        Now you have " + list.size() + " tasks in the list.");
                 System.out.println("    ______________________________________");
-                list.add(new Task(userInput));
+
+            } else if (userInput.startsWith("deadline")) {
+                int spacePosition = userInput.indexOf(" ");
+                int keywordPosition = userInput.indexOf("/by");
+                String description = userInput.substring(spacePosition+1, keywordPosition-1);
+                String by = userInput.substring(keywordPosition+4);
+                Task deadline = new Deadline(description,by);
+                list.add(deadline);
+                System.out.println("    ______________________________________");
+                System.out.println("        Got it. I've added this task: ");
+                System.out.println("            " + deadline);
+                System.out.println("        Now you have " + list.size() + " tasks in the list.");
+                System.out.println("    ______________________________________");
+
+            } else if (userInput.startsWith("event")) {
+                int spacePosition = userInput.indexOf(" ");
+                int keywordPosition = userInput.indexOf("/at");
+                String description = userInput.substring(spacePosition+1, keywordPosition-1);
+                String at = userInput.substring(keywordPosition+4);
+                Task event = new Event(description,at);
+                list.add(event);
+                System.out.println("    ______________________________________");
+                System.out.println("        Got it. I've added this task: ");
+                System.out.println("            " + event);
+                System.out.println("        Now you have " + list.size() + " tasks in the list.");
+                System.out.println("    ______________________________________");
             }
         }
     }
