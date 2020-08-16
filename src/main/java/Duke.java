@@ -19,12 +19,19 @@ public class Duke {
         System.out.println("added: " + task);
     }
 
+    void completeTask(int taskNo) {
+        Task task = tasks.get(taskNo - 1);
+        task.done();
+        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println(task);
+    }
+
     void list() {
         System.out.println("Here are the tasks in your list:");
         for(int i = 1; i <= tasks.size(); i++) {
             Task task = tasks.get(i - 1);
             String message = String.valueOf(i) + ".";
-            message += task.toString();
+            message += task;
             System.out.println(message);
         }
     }
@@ -39,6 +46,9 @@ public class Duke {
                 break;
             } else if(command.equals("list")){
                 list();
+            } else if(command.startsWith("done")) {
+                int taskNo = Integer.valueOf(command.split(" ")[1]);
+                completeTask(taskNo);
             } else {
                 addTask(command);
             }
