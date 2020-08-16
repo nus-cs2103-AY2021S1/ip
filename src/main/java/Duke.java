@@ -13,25 +13,30 @@ public class Duke {
         System.out.println(line);
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
-        System.out.println("\n" + line);
 
         Scanner sc = new Scanner(System.in);
-        List<String> cmds = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
+        
         while(true) {
             System.out.print("your input: ");
             String cmd = sc.nextLine();
             System.out.println("\n" + line);
             if (cmd.equals("bye")) {
                 end();
-                System.out.println(line + "\n");
+                System.out.println(line);
                 break;
             } else if (cmd.equals("list")) {
-                list(cmds);
-                System.out.println(line + "\n");
+                list(tasks);
+                System.out.println(line);
+            } else if (cmd.equals("complete")) {
+                System.out.print("which task should we mark as complete?: ");
+                int taskNum = Integer.parseInt(sc.nextLine());
+                tasks.get(taskNum - 1).markDone();
+                System.out.println(line);
             } else {
-                System.out.println("added: " + cmd);
-                cmds.add(cmd);
-                System.out.println(line + "\n");
+                System.out.println("*added: " + cmd);
+                tasks.add(new Task(cmd));
+                System.out.println(line);
             }
         }
     }
@@ -40,10 +45,12 @@ public class Duke {
          System.out.println("Bye. Hope to see you again soon!");       
     }
 
-    private static void list(List<String> cmds) {
-        for (int i = 0; i < cmds.size(); i++) {
-            System.out.println((i + 1) + ". " + cmds.get(i));
+    private static void list(List<Task> tasks) {
+        int i = 1;
+        System.out.println("*Here are all your tasks");
+        for (Task task: tasks) {
+            System.out.println(i + ". " + task);
+            i++;
         }
-        System.out.println();
     }
 }
