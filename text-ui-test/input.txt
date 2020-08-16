@@ -3,9 +3,13 @@ deadline return book /by June 6th
 event project meeting /at Aug 6th 2-4pm
 todo join sports club
 done 1
+done hello
 done 4
+todo
 todo return book
 list
+deadline
 deadline return book /by Sunday
+event
 event project meeting /at Mon 2-4pm
 bye
