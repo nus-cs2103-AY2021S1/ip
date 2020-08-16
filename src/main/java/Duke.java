@@ -6,26 +6,18 @@ import java.util.Arrays;
 public class Duke {
 
     private final String name;
-    private boolean running;
+    private boolean isRunning;
     private final List<Task> list;
 
     public Duke(String name) {
         this.name = name;
-        this.running = true;
+        this.isRunning = true;
         this.list = new ArrayList<>();
         sendMessage("Hello! " + this.name + " lives to serve :)");
     }
 
-    public boolean isRunning() {
-        return running;
-    }
-
-    public void genericError() {
-        sendMessage("Whoops something went wrong hehe...");
-    }
-
     public void exit() {
-        running = false;
+        isRunning = false;
         sendMessage("Bye :(");
     }
 
@@ -46,26 +38,38 @@ public class Duke {
         System.out.println(line + "\n    " + sb + "\n" + line);
     }
 
-    public void addToList(String type, String description) {
+    public void addToList(String type, String description) throws DukeException {
         Task task;
         String[] split;
         String desc;
+        description = description.trim();
+        if (description.isEmpty()) {
+            throw new DukeException("Description cannot be empty!");
+        }
         switch (type) {
             case "todo":
                 task = new Todo(description);
                 break;
             case "deadline":
-                split = description.split(" /by ");
-                desc = split[0];
-                String by = split[1];
-                task = new Deadline(desc, by);
-                break;
+                try {
+                    split = description.split(" /by ");
+                    desc = split[0];
+                    String by = split[1];
+                    task = new Deadline(desc, by);
+                    break;
+                } catch (IndexOutOfBoundsException e) {
+                    throw new DukeException("Invalid deadline description!");
+                }
             case "event":
-                split = description.split(" /at ");
-                desc = split[0];
-                String at = split[1];
-                task = new Event(desc, at);
-                break;
+                try {
+                    split = description.split(" /at ");
+                    desc = split[0];
+                    String at = split[1];
+                    task = new Event(desc, at);
+                    break;
+                } catch (IndexOutOfBoundsException e) {
+                    throw new DukeException("Invalid event description!");
+                }
             default:
                 task = new Task(description);
                 break;
@@ -76,18 +80,21 @@ public class Duke {
         sendMessage(msg);
     }
 
-    public void markTaskDone(int i) {
-        if (i < 1 || i > list.size()) {
-            genericError();
-            return;
-        }
-        int index = i - 1;
-        Task t = list.get(index);
-        if (t.getDone()) {
-            sendMessage("That task is already done!");
-        } else {
-            t.markAsDone();
-            sendMessage("Okay I have marked this task as done:\n    " + t);
+    public void markTaskDone(String si) throws DukeException {
+        try {
+            int i = Integer.parseInt(si);
+            int index = i - 1;
+            Task t = list.get(index);
+            if (t.getDone()) {
+                throw new DukeException("That task is already done!");
+            } else {
+                t.markAsDone();
+                sendMessage("Okay I've marked this task as done:\n    " + t);
+            }
+        } catch (NumberFormatException e) {
+            throw new DukeException("Sorry, I don't know what that means :(");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Invalid task number!");
         }
     }
 
@@ -110,8 +117,56 @@ public class Duke {
         }
     }
 
+    public void run() {
+        Scanner sc = new Scanner(System.in);
+
+        while (isRunning) {
+            String input = sc.nextLine();
+            String[] inputSplit = input.split(" ");
+            String command = inputSplit[0];
+            boolean doDefault = false;
+
+            switch(command.toLowerCase()) {
+                case "bye":
+                    exit();
+                    break;
+                case "list":
+                    displayList();
+                    break;
+                case "done":
+                    try {
+                        String si = inputSplit[1];
+                        markTaskDone(si);
+                        break;
+                    } catch (DukeException e) {
+                        sendMessage(e.getMessage());
+                        break;
+                    }
+                case "todo":
+                case "deadline":
+                case "event":
+                    try {
+                        String[] descArr = Arrays.copyOfRange(inputSplit,
+                                1, inputSplit.length);
+                        String desc = String.join(" ", descArr);
+                        addToList(command, desc);
+                        break;
+                    } catch (DukeException e) {
+                        sendMessage(e.getMessage());
+                        break;
+                    }
+                default:
+                    sendMessage(
+                            new DukeException("Sorry, I don't know what that means :(")
+                            .getMessage());
+                    break;
+            }
+        }
+        sc.close();
+    }
+
     public static void main(String[] args) {
-        String lvl = "4";
+        String lvl = "5";
         String logo = "                                                 _     _\n"
                 + " _______  _______  _______  _______  __   __    (c).-.(c)\n"
                 + "|       ||       ||  _    ||  _    ||  | |  |    / ._. \\ \n"
@@ -125,48 +180,6 @@ public class Duke {
         System.out.println(logo);
 
         Duke duke = new Duke("Tebby");
-        Scanner sc = new Scanner(System.in);
-
-        while (duke.isRunning()) {
-            String input = sc.nextLine();
-            String[] inputSplit = input.split(" ");
-            String command = inputSplit[0];
-            boolean doDefault = false;
-
-            switch(command.toLowerCase()) {
-                case "bye":
-                    duke.exit();
-                    break;
-                case "list":
-                    duke.displayList();
-                    break;
-                case "done":
-                    try {
-                        int i = Integer.parseInt(inputSplit[1]);
-                        duke.markTaskDone(i);
-                        break;
-                    } catch (ArrayIndexOutOfBoundsException
-                            | NumberFormatException e) {
-                        break;
-                    }
-                case "todo":
-                case "deadline":
-                case "event":
-                    try {
-                        String[] descArr = Arrays.copyOfRange(inputSplit,
-                                1, inputSplit.length);
-                        String desc = String.join(" ", descArr);
-                        duke.addToList(command, desc);
-                        break;
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        break;
-                    }
-                default:
-                    duke.addToList("", input);
-                    break;
-            }
-        }
-
-        sc.close();
+        duke.run();
     }
 }

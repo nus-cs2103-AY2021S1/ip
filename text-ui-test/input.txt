@@ -1,0 +1,9 @@
+todo todo
+event event at some date
+event event /at some date
+deadline deadline /by some date
+done 0
+done two
+done 2
+list
+bye
