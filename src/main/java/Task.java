@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected final String description;
     protected final boolean isDone;
 
@@ -16,9 +16,7 @@ public class Task {
         return "[" + (isDone ? "\u2713" : "\u2718") + "]";
     }
 
-    public Task markAsDone() {
-        return new Task(description, true);
-    }
+    public abstract Task markAsDone();
 
     @Override
     public String toString() {

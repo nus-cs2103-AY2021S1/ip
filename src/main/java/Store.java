@@ -16,7 +16,7 @@ public class Store {
             case "event":
                 return new EventTask(inputs[0], inputs[1]);
             default:
-                return new Task(inputs[0]);
+                return null;
         }
     }
 
