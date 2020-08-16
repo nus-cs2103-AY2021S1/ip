@@ -156,7 +156,7 @@ public class Duke {
                 if (firstWord.equals("done")) {
                     String index = multiWord.next();
                     int intIndex = Integer.parseInt(index);
-                    if (intIndex <= storage.size()) {
+                    if (intIndex <= storage.size() && intIndex > 0) {
                         markComplete(intIndex - 1);
                     } else {
                         // I don't like how the program exits on throw
