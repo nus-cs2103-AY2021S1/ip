@@ -27,10 +27,12 @@ public class Main {
         //Loops while the user does not input "bye"
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            if (!input.equals("bye")) {
-                tb.echo(input);
-            } else {
+            if (input.equals("bye")) {
                 break;
+            } else if (input.equals("list")){
+                tb.listTasks();
+            } else {
+                tb.addTask(input);
             }
         }
 

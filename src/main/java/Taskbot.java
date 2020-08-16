@@ -1,6 +1,10 @@
+import java.util.ArrayList;
+
 public class Taskbot {
     private String logo;
     private final String name = "TaskBot";
+    private ArrayList<Task> tasks;
+    private int index;
 
     /**
      * Constructor for the Taskbot class
@@ -8,6 +12,8 @@ public class Taskbot {
      */
     public Taskbot(String logo) {
         this.logo = logo;
+        this.tasks = new ArrayList<>();
+        this.index = 0;
     }
 
     /**
@@ -25,19 +31,38 @@ public class Taskbot {
     }
 
     /**
-     * Returns the same word given in the argument
-     * @param word The input to be echoed
-     */
-    public void echo(String word) {
-        borderString(word);
-    }
-
-    /**
      * Method invoked to say goodbye to the user
      */
     public void sayBye() {
         String message = "Bye! Hope to see you again soon!!";
         borderString(message);
+    }
+
+    /**
+     * Adds a new Task to the list of tasks
+     * @param task The task to be added
+     */
+    public void addTask(String task) {
+        //Adds a new task to the list
+        tasks.add(new Task(task));
+        //Informs the user that the task has been added
+        borderString("added: " + task);
+    }
+
+    /**
+     * Lists all the tasks added so far
+     */
+    public void listTasks() {
+        StringBuilder sb = new StringBuilder();
+        //size of the tasks
+        int size = tasks.size();
+        //Builds the list of tasks
+        for (int i = 0; i < size - 1; i++) {
+            sb.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
+        }
+        sb.append(size).append(". ").append(tasks.get(size - 1));
+        //Prints the string
+        borderString(sb.toString());
     }
 
     /**
