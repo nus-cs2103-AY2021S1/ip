@@ -4,7 +4,8 @@ public enum Command {
     TODO("todo"),
     EVENT("event"),
     DONE("done"),
-    BYE("bye");
+    BYE("bye"),
+    DELETE("delete");
 
     private String name;
 

@@ -13,6 +13,40 @@ public class Duke {
         tasks.add(null);
     }
 
+    private static String getTaskDescription(Command type, String cmd) throws DukeException {
+        String[] cmdParts = cmd.split(type.toString() + " ", 2);
+
+        if (cmdParts.length != 2 || cmdParts[1].equals("")) {
+            throw new DukeException(String.format("Error! The description of a %s cannot be empty.", type));
+        }
+
+        return cmdParts[1];
+    }
+
+    private int getTaskTargetIndex(Command type, String cmd) throws DukeException {
+        String description = Duke.getTaskDescription(type, cmd);
+        try {
+            int index = Integer.parseInt(description);
+
+            if (index == 0 || index > this.tasks.size() - 1) {
+                StringBuilder message = new StringBuilder(String.format("Task at index %d doesn't exist%n", index));
+                if (this.tasks.size() == 0) {
+                    message.append("\nThere are no tasks currently.");
+                } else {
+                    message.append(String.format(
+                            "There are %d tasks currently. Please a number between 1 and %d inclusive.",
+                            this.getNumberOfTasks(), this.getNumberOfTasks()));
+                }
+
+                throw new DukeException(message.toString());
+            }
+
+            return index;
+        } catch (NumberFormatException e) {
+            throw new DukeException(String.format("Input format is wrong. Please make sure it is `%s <task-index>`", type));
+        }
+    }
+
     private int getNumberOfTasks() {
         return this.tasks.size() - 1;
     }
@@ -32,51 +66,21 @@ public class Duke {
     }
 
     public void done(String cmd) throws DukeException {
-        String[] cmdParts = cmd.split(" ");
-        try {
-            this.done(Integer.parseInt(cmdParts[1]));
-        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Input format is wrong. Please make sure it is `done <task-index>`");
-        }
+        int index = this.getTaskTargetIndex(Command.DONE, cmd);
+        Task task = this.tasks.get(index);
+        task.setDone(true);
+        System.out.printf("Good job. This task is marked as done:\n %s%n", task);
     }
 
-    public void done(int index) throws DukeException {
-        try {
-            if (index == 0) {
-                // Task list is 1-indexed, 0 is an out-of-bound value
-                throw new IndexOutOfBoundsException();
-            }
-
-            Task task = this.tasks.get(index);
-            task.setDone(true);
-            System.out.printf("Good job. This task is marked as done:\n %s%n", task);
-        } catch (IndexOutOfBoundsException e) {
-            StringBuilder message = new StringBuilder(String.format("Task at index %d doesn't exist%n", index));
-            if (this.tasks.size() == 0) {
-                message.append("\nThere are no tasks currently.");
-            } else {
-                message.append(String.format(
-                        "There are %d tasks currently. Please a number between 1 and %d inclusive.",
-                        this.getNumberOfTasks(), this.getNumberOfTasks()));
-            }
-
-            throw new DukeException(message.toString());
-        }
+    public void delete(String cmd) throws DukeException {
+        int index = this.getTaskTargetIndex(Command.DELETE, cmd);
+        Task task = this.tasks.remove(index);
+        System.out.printf("Noted. I've remove this task:\n %s%n", task);
     }
 
     public void addTask(Task task) {
         tasks.add(task);
         System.out.printf("Got it. I've added this task:%n %s%n", task);
-    }
-
-    public static String getTaskDescription(Command type, String cmd) throws DukeException {
-        String[] cmdParts = cmd.split(type.toString() + " ", 2);
-
-        if (cmdParts.length != 2 || cmdParts[1].equals("")) {
-            throw new DukeException(String.format("Error! The description of a %s cannot be empty.", type));
-        }
-
-        return cmdParts[1];
     }
 
     public void event(String cmd) throws DukeException {
@@ -129,6 +133,8 @@ public class Duke {
                     duke.deadline(cmd);
                 } else if (Command.EVENT.is(cmd)) {
                     duke.event(cmd);
+                } else if (Command.DELETE.is(cmd)) {
+                    duke.delete(cmd);
                 } else {
                     throw new DukeException("This command is invalid.");
                 }
