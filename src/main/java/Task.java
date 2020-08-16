@@ -1,10 +1,8 @@
-public class Task {
-    private int number;
+abstract class Task {
     private String description;
     private boolean isDone;
 
-    Task(int number, String description) {
-        this.number = number;
+    Task(String description) {
         this.description = description;
         this.isDone = false;
     }
@@ -19,6 +17,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("%d.", number) + getStatus() + description;
+        return getStatus() + description;
     }
 }
