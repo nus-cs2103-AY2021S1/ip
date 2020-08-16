@@ -4,8 +4,8 @@ import java.util.ArrayList;
 public class Duke {
 
     private static class Task {
-        private String description;
-        private boolean isDone;
+        protected String description;
+        protected boolean isDone;
 
         public Task(String description) {
             this.description = description;
@@ -26,6 +26,45 @@ public class Duke {
         }
     }
 
+    private static class ToDo extends Task {
+        private ToDo(String description) {
+            super(description);
+        }
+
+        @Override
+        public String toString() {
+            return "[T]" + super.toString();
+        }
+    }
+
+    private static class Deadline extends Task {
+        protected String by;
+
+        private Deadline(String description, String by) {
+            super(description);
+            this.by = by;
+        }
+
+        @Override
+        public String toString() {
+            return "[D]" + super.toString() + " (by: " + by + ")";
+        }
+    }
+
+    private static class Event extends Task {
+        protected String at;
+
+        private Event(String description, String at) {
+            super(description);
+            this.at = at;
+        }
+
+        @Override
+        public String toString() {
+            return "[E]" + super.toString() + " (at: " + at + ")";
+        }
+    }
+
     public static void main(String[] args) {
 
         String logo = " ____        _        \n"
@@ -40,9 +79,9 @@ public class Duke {
         ArrayList<Task> todoList = new ArrayList<>();
 
         chatBot:
-        while(sc.hasNextLine()) {
-            String userInput = sc.nextLine();
-            String userOp = userInput.split(" ")[0]; //type of operation
+        while (sc.hasNextLine()) {
+            String[] userInput = sc.nextLine().split(" ", 2);
+            String userOp = userInput[0]; //type of operation
             switch (userOp) {
                 case "bye":
                     System.out.println("Bye! Hope to see you again soon!");
@@ -53,18 +92,38 @@ public class Duke {
                         System.out.println((i + 1) + ". " + todoList.get(i));
                     }
                     break;
-                case "done":
-                    int taskId = Integer.parseInt(userInput.split(" ")[1]);
+                case "done": {
+                    int taskId = Integer.parseInt(userInput[1]);
                     Task task = todoList.get(taskId - 1);
                     task.markDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(task);
                     break;
-                default:
-                    todoList.add(new Task(userInput));
-                    System.out.println("added: " + userInput);
+                }
+                case "todo":
+                case "deadline":
+                case "event": {
+                    Task task = null;
+                    if (userOp.equals("todo")) {
+                        String description = userInput[1];
+                        task = new ToDo(description);
+                        todoList.add(task);
+                    } else if (userOp.equals("deadline")) {
+                        String[] description = userInput[1].split(" /by ");
+                        task = new Deadline(description[0], description[1]);
+                        todoList.add(task);
+                    } else {
+                        String[] description = userInput[1].split(" /at ");
+                        task = new Event(description[0], description[1]);
+                        todoList.add(task);
+                    }
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(task);
+                    System.out.println("Now you have " + todoList.size() + " task(s) in the list.");
                     break;
+                }
             }
         }
     }
 }
+
