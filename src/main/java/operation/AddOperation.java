@@ -1,14 +1,14 @@
 package operation;
 
-import exception.DukeException;
 import task.Task;
 import task.TaskStorage;
 
 public abstract class AddOperation extends Operation {
+    protected String description;
     protected TaskStorage taskStorage;
 
-    AddOperation(String[] commands, TaskStorage taskStorage) {
-        super(commands);
+    AddOperation(String description, TaskStorage taskStorage) {
+        this.description = description;
         this.taskStorage = taskStorage;
     }
 
@@ -17,19 +17,15 @@ public abstract class AddOperation extends Operation {
         return false;
     }
 
-    public abstract Task createTask() throws DukeException;
+    public abstract Task createTask();
 
     @Override
     public void execute() {
-        try {
-            Task newTask = createTask();
-            this.taskStorage.addTask(newTask);
-            System.out.println("I have added the task:\n" + newTask);
-            String capacity = String.format("You now have %d tasks.",
-                    this.taskStorage.getCurrCapacity());
-            System.out.println(capacity);
-        } catch (DukeException exception) {
-            System.out.println(exception.getMessage());
-        }
+        Task newTask = createTask();
+        this.taskStorage.addTask(newTask);
+        System.out.println("I have added the task:\n" + newTask);
+        String capacity = String.format("You now have %d tasks.",
+                this.taskStorage.getCurrCapacity());
+        System.out.println(capacity);
     }
 }

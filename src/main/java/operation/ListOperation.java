@@ -5,8 +5,7 @@ import task.TaskStorage;
 public class ListOperation extends Operation {
     private TaskStorage taskStorage;
 
-    public ListOperation(String[] commands, TaskStorage taskStorage) {
-        super(commands);
+    public ListOperation(TaskStorage taskStorage) {
         this.taskStorage = taskStorage;
     }
 
@@ -17,6 +16,7 @@ public class ListOperation extends Operation {
 
     @Override
     public void execute() {
+        System.out.println("Here are your tasks:");
         this.taskStorage.printTaskStorage();
     }
 }

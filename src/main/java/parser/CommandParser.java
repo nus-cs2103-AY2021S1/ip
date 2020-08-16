@@ -1,6 +1,7 @@
 package parser;
 
 import java.lang.StringBuilder;
+import java.util.Arrays;
 
 import exception.DukeException;
 import operation.Operation;
@@ -11,64 +12,114 @@ import operation.DeleteOperation;
 import operation.DoneOperation;
 import operation.ExitOperation;
 import operation.ListOperation;
+import task.Deadline;
+import task.Event;
 import task.TaskStorage;
 
 public class CommandParser {
-    private static int getForwardSlashIndex(String[] arr) {
-        for (int i = 1; i < arr.length; i++) {
-            if (arr[i].charAt(0) == '/') {
-                return i;
-            }
-        }
-        return 0;
-    }
-
     private static String concatenate(String[] arr, int start, int end) {
         StringBuilder builder = new StringBuilder();
+        String prefix = "";
         for (int i = start; i < end; i++) {
+            builder.append(prefix);
             builder.append(arr[i]);
-            builder.append(" ");
+            prefix = " ";
         }
-        builder.deleteCharAt(builder.length() - 1);
         return builder.toString();
     }
 
-    private String[] parseCommandString(String commandString) {
-        String[] commands = commandString.split(" ");
-        String mainCommand = commands[0];
-        String description;
-        String datetime;
-        int splitIndex = getForwardSlashIndex(commands);
+    public static int getIndexOf(String[] arr, String target) {
+        return Arrays.asList(arr).indexOf(target);
+    }
 
-        if (commands.length == 1) {
-            return new String[]{mainCommand};
-        } else if (splitIndex == 0 || splitIndex == commands.length - 1) {
-            description = concatenate(commands, 1, commands.length);
-            return new String[] {mainCommand, description};
-        } else {
-            description = concatenate(commands, 1, splitIndex);
-            datetime = concatenate(commands, splitIndex + 1, commands.length);
-            return new String[] {mainCommand, description, datetime};
+    private ExitOperation createExitOp() {
+        return new ExitOperation();
+    }
+
+    private ListOperation createListOp(TaskStorage storage) {
+        return new ListOperation(storage);
+    }
+
+    private DoneOperation createDoneOp(String[] commands, TaskStorage storage) throws DukeException {
+        try {
+            int index = Integer.parseInt(commands[1]);
+            if (index <= storage.getCurrCapacity() && index > 0) {
+                return new DoneOperation(storage, index);
+            } else {
+               throw new DukeException(
+                       "The index you have passed in cannot be found in the list of tasks.");
+            }
+        } catch (NumberFormatException exception) {
+            throw new DukeException("Ensure a number is passed after a done command.");
+        }
+    }
+
+    private AddTodoOperation createTodoOp(String[] commands, TaskStorage storage) throws DukeException {
+        if (commands.length <= 1) {
+            throw new DukeException("Ensure there is description for a todo item.");
+        }
+        String description = concatenate(commands, 1, commands.length);
+        return new AddTodoOperation(description, storage);
+    }
+
+    private AddDeadlineOperation createDeadlineOp(
+            String[] commands, TaskStorage storage) throws DukeException {
+        if (commands.length <= 2) {
+            throw new DukeException("Ensure there is a description and a datetime for a deadline command.");
+        }
+        int splitIndex = getIndexOf(commands, Deadline.DEADLINE_BREAK);
+        if (splitIndex == -1) {
+            throw new DukeException("Ensure an indication of '/by' after a deadline command.");
+        }
+        String description = concatenate(commands, 1, splitIndex);
+        String datetime = concatenate(commands, splitIndex + 1, commands.length);
+        return new AddDeadlineOperation(description, datetime, storage);
+    }
+
+    private AddEventOperation createEventOp(String[] commands, TaskStorage storage) throws DukeException {
+        if (commands.length <= 2) {
+            throw new DukeException("Ensure there is a description and a time for an event command.");
+        }
+        int splitIndex = getIndexOf(commands, Event.EVENT_BREAK);
+        if (splitIndex == -1) {
+            throw new DukeException("Ensure an indication of '/at' after an event command.");
+        }
+        String description = concatenate(commands, 1, splitIndex);
+        String datetime = concatenate(commands, splitIndex + 1, commands.length);
+        return new AddEventOperation(description, datetime, storage);
+    }
+
+    private DeleteOperation createDeleteOp(String[] commands, TaskStorage storage) throws DukeException {
+        try {
+            int index = Integer.parseInt(commands[1]);
+            if (index <= storage.getCurrCapacity() && index > 0) {
+                return new DeleteOperation(storage, index);
+            } else {
+                throw new DukeException(
+                        "The index you have passed in cannot be found in the list of tasks.");
+            }
+        } catch (NumberFormatException exception) {
+            throw new DukeException("Ensure a number is passed after a delete command.");
         }
     }
 
     public Operation parse(String commandString, TaskStorage taskStorage) throws DukeException {
-        String[] commands = parseCommandString(commandString);
+        String[] commands = commandString.split(" ");
         switch(commands[0]) {
             case "bye":
-                return new ExitOperation(commands);
+                return createExitOp();
             case "list":
-                return new ListOperation(commands, taskStorage);
+                return createListOp(taskStorage);
             case "done":
-                return new DoneOperation(commands, taskStorage);
+                return createDoneOp(commands, taskStorage);
             case "todo" :
-                return new AddTodoOperation(commands, taskStorage);
+                return createTodoOp(commands, taskStorage);
             case "deadline" :
-                return new AddDeadlineOperation(commands, taskStorage);
+                return createDeadlineOp(commands, taskStorage);
             case "event" :
-                return new AddEventOperation(commands, taskStorage);
+                return createEventOp(commands, taskStorage);
             case "delete":
-                return new DeleteOperation(commands, taskStorage);
+                return createDeleteOp(commands, taskStorage);
             default:
                 throw new DukeException("This command is not recognised unfortunately.");
         }

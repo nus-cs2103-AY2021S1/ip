@@ -1,16 +1,18 @@
 package operation;
 
-import exception.DukeException;
 import task.TaskStorage;
 import task.Event;
 
 public class AddEventOperation extends AddOperation {
-    public AddEventOperation(String[] commands, TaskStorage taskStorage) {
-        super(commands, taskStorage);
+    private final String time;
+
+    public AddEventOperation(String description, String time, TaskStorage taskStorage) {
+        super(description, taskStorage);
+        this.time = time;
     }
 
     @Override
-    public Event createTask() throws DukeException {
-        return Event.createEvent(this.commands);
+    public Event createTask() {
+        return Event.createEvent(this.description, this.time);
     }
 }

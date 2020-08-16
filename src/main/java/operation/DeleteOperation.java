@@ -1,13 +1,15 @@
 package operation;
 
+import task.Task;
 import task.TaskStorage;
 
 public class DeleteOperation extends Operation {
-    private TaskStorage taskStorage;
+    private final TaskStorage taskStorage;
+    private final int index;
 
-     public DeleteOperation(String[] commands, TaskStorage taskStorage) {
-        super(commands);
+     public DeleteOperation(TaskStorage taskStorage, int index) {
         this.taskStorage = taskStorage;
+        this.index = index;
      }
 
     @Override
@@ -17,12 +19,10 @@ public class DeleteOperation extends Operation {
 
     @Override
     public void execute() {
-        int index = Integer.parseInt(this.commands[1]);
-        this.taskStorage.removeTask(index);
-        System.out.println("Noted. I've removed this task:");
-        this.taskStorage.printTask(index);
-        String remainder = String.format("You now have %d tasks in the list",
-                this.taskStorage.getCurrCapacity());
-        System.out.println(remainder);
+        Task removed = this.taskStorage.removeTask(this.index);
+        String output = "Noted. I've removed this task:\n"
+                + removed + "\n"
+                + String.format("You now have %d tasks in the list", this.taskStorage.getCurrCapacity());
+        System.out.println(output);
     }
 }

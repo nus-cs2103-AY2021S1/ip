@@ -1,23 +1,18 @@
 package task;
 
-import exception.DukeException;
-
 public class Event extends Task{
-    private String time;
+    private final String time;
 
-    private static String EVENT= "[D]";
-    public static String EVENT_BREAK = "/at";
+    private static final String EVENT= "[D]";
+    public static final String EVENT_BREAK = "/at";
 
-    Event(String task, boolean completed, String time) {
-        super(task, completed);
+    Event(String description, boolean completed, String time) {
+        super(description, completed);
         this.time = time;
     }
 
-    public static Event createEvent(String[] commands) throws DukeException {
-        if (commands.length <= 2) {
-            throw new DukeException("Please fill in the description and time.");
-        }
-        return new Event(commands[1], false, commands[2]);
+    public static Event createEvent(String description, String time) {
+        return new Event(description, false, time);
     }
 
     @Override

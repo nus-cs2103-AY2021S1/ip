@@ -49,7 +49,7 @@ Here are your tasks:
 
 ---------------------------------------------------------
 Noted. I've removed this task:
-[D][N] return book (by: 1 Jan)
+[T][Y] borrow book
 You now have 2 tasks in the list
 ---------------------------------------------------------
 
@@ -61,7 +61,7 @@ Here are your tasks:
 
 ---------------------------------------------------------
 Noted. I've removed this task:
-[D][N] return book (by: 1 Jan)
+[D][Y] project meeting (at: Mon 2-4pm)
 You now have 1 tasks in the list
 ---------------------------------------------------------
 
@@ -75,7 +75,7 @@ Apologies. This command is not recognised unfortunately.
 ---------------------------------------------------------
 
 ---------------------------------------------------------
-Apologies. The description of a todo cannot be empty.
+Apologies. Ensure there is description for a todo item.
 ---------------------------------------------------------
 
 ---------------------------------------------------------

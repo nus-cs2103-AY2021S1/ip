@@ -1,10 +1,6 @@
 package operation;
 
 public class ExitOperation extends Operation {
-    public ExitOperation(String[] commands) {
-        super(commands);
-    }
-
     @Override
     public boolean isExit() {
         return true;

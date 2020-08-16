@@ -1,16 +1,15 @@
 package operation;
 
-import exception.DukeException;
 import task.TaskStorage;
 import task.Todo;
 
 public class AddTodoOperation extends AddOperation {
-    public AddTodoOperation(String[] commands, TaskStorage taskStorage) {
-        super(commands, taskStorage);
+    public AddTodoOperation(String description, TaskStorage taskStorage) {
+        super(description, taskStorage);
     }
 
     @Override
-    public Todo createTask() throws DukeException {
-        return Todo.createTodo(this.commands);
+    public Todo createTask() {
+        return Todo.createTodo(this.description);
     }
 }
