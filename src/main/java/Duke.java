@@ -43,12 +43,12 @@ public class Duke {
     private static String markTaskAsDone(List<Task> tasks, int taskID) {
         Task task = tasks.get(taskID - 1);
         task.competeTask();
-        return String.format("Nice! I've marked this task as done.\n %s", task.toString());
+        return String.format("Nice! I've marked this task as done.\n%s", task.toString());
     }
 
     private static String addTaskToList(List<Task> tasks, Task task) {
         tasks.add(task);
-        return String.format("Got it. I've added this task: \n %s \n Now you have %d tasks in the list",
+        return String.format("Got it. I've added this task: \n%s\nNow you have %d tasks in the list",
                 task.toString(), tasks.size());
     }
 
