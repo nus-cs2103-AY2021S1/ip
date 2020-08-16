@@ -12,7 +12,7 @@ public class Duke {
         + "|____/ \\__,_|_|\\_\\___|\n";
     Scanner sc = new Scanner(System.in);
     String input = "";
-    List list = new ArrayList();
+    List<String> list = new ArrayList<>();
 
     System.out.println("\n" + logo);
     System.out.println("\t" + divider);
@@ -24,11 +24,21 @@ public class Duke {
 
       if (input.equals("bye")) {
         break;
-      }
+      } else if (input.equals("list")) {
+        System.out.println("\t" + divider);
 
-      System.out.println("\t" + divider);
-      System.out.println("\t" + input);
-      System.out.println("\t" + divider + "\n");
+        for (int i = 0; i < list.size(); i++) {
+          System.out.printf("\t%d. %s\n", i + 1, list.get(i));
+        }
+
+        System.out.println("\t" + divider + "\n");
+      } else {
+        list.add(input);
+
+        System.out.println("\t" + divider);
+        System.out.println("\tadded: " + input);
+        System.out.println("\t" + divider + "\n");
+      }
     }
 
     System.out.println("\t" + divider);
