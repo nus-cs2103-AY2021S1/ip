@@ -74,9 +74,8 @@ class ChatBot {
         for (int i = 0; i < toDoList.size(); i++) {
             System.out.println(ConsoleColors.BLUE_BOLD.getColor()
                     + (i+1) + ". "
-                    + ConsoleColors.BLUE.getColor() + "\t"
-                    + toDoList.get(i)
-                    + ConsoleColors.RESET.getColor());
+                    + "\t"
+                    + toDoList.get(i));
         }
         System.out.println();
     }
