@@ -4,6 +4,13 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+
+    enum TypeOfTask {
+        TODO,
+        DEADLINE,
+        EVENT
+    }
+
     private static String formatReply(String text) {
         String line = "\t_______________________________________________________________";
         return line + "\n\t\t" + text.replaceAll("\\n", "\n\t\t") + "\n" + line;
@@ -18,7 +25,7 @@ public class Duke {
         return listOfTasks;
     }
 
-    private static Task getTask(String command, Scanner input) {
+    private static Task getTask(TypeOfTask typeOfTask, Scanner input) {
         String[] commandArray = input.nextLine().split(" ");
         String description = "";
         String timing = null;
@@ -38,12 +45,12 @@ public class Duke {
             }
         }
 
-        switch (command) {
-            case "todo":
+        switch (typeOfTask) {
+            case TODO:
                 return new Todo(description);
-            case "deadline":
+            case DEADLINE:
                 return new Deadline(description, timing);
-            case "event":
+            case EVENT:
                 return new Event(description, timing);
             default:
                 return new Task(description);
@@ -78,7 +85,22 @@ public class Duke {
                 System.out.println(formatReply("This task has been marked as done:\n" + task.toString()));
             }
             else {
-                Task newTask = getTask(command, input);
+                TypeOfTask typeOfTask;
+                switch (command) {
+                    case "todo":
+                        typeOfTask = TypeOfTask.TODO;
+                        break;
+                    case "deadline":
+                        typeOfTask = TypeOfTask.DEADLINE;
+                        break;
+                    case "event":
+                        typeOfTask = TypeOfTask.EVENT;
+                        break;
+                    default:
+                        typeOfTask = null;
+                        break;
+                }
+                Task newTask = getTask(typeOfTask, input);
                 taskList.add(newTask);
                 System.out.println(formatReply("Got it. I've added this task:\n" + newTask.toString()
                         + "\nNow you have " + taskList.size() + " tasks in the list."));
