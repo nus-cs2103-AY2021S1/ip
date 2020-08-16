@@ -13,8 +13,7 @@ public class Duke {
     private static final String BYE = "bye";
     private static final String GOODBYE_MESSAGE = "Ok lor like that lor.";
 
-    // ASSUMPTION: There will be no more than 100 tasks.
-    private static final List<String> TASKS = new ArrayList<>();
+    private static final List<Task> TASKS = new ArrayList<>();
 
     public static void main(String[] args) {
         System.out.println("Hi, I'm\n" + LOGO);
@@ -38,26 +37,45 @@ public class Duke {
     }
 
     private static void handleCommand(String input) {
-        if ("list".equals(input.toLowerCase())) {
+        String[] tokens = input.split(" ");
+        String command = tokens[0].toLowerCase();
+        switch (command) {
+        case "list": // show tasks available
             Duke.displayTasks();
-        } else {
+            break;
+        case "done": // label a task as done
+            // ASSUMPTION: valid input provided
+            int index = Integer.parseInt(tokens[1]) - 1;
+            Task task = TASKS.get(index);
+            task.markDone();
+            Duke.displayMessages(
+                    "Okay. So you've done:",
+                    task.toString());
+            break;
+        default: // it's a new task
             Duke.addTask(input);
+            break;
         }
     }
 
-    private static void addTask(String task) {
-        TASKS.add(task);
-        Duke.displayMessages(String.format("Ok, you want to: %s", task));
+    private static void addTask(String taskName) {
+        TASKS.add(new Task(taskName));
+        Duke.displayMessages(String.format("Ok, you want to: %s", taskName));
     }
 
     private static void displayTasks() {
-        System.out.println("     ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――");
-        System.out.println("     Right, you said you wanted to:");
-        for (int i = 0; i < TASKS.size(); i++) {
-            System.out.printf("     %3d: %s\n", i + 1, TASKS.get(i));
+        if (TASKS.size() == 0) {
+            Duke.displayMessages("You didn't tell me to remind you anything.");
+        } else {
+            String[] messages = new String[TASKS.size() + 1];
+            messages[0] = "Right, you said you wanted to:";
+
+            for (int i = 0; i < TASKS.size(); i++) {
+                messages[i + 1] = String.format("%3d: %s", i + 1, TASKS.get(i));
+            }
+
+            Duke.displayMessages(messages);
         }
-        System.out.println("     ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――");
-        System.out.println();
     }
 
     private static void displayMessages(String... messages) {
