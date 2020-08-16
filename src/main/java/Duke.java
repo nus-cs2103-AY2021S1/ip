@@ -59,7 +59,7 @@ public class Duke {
               case "todo":
                 System.out.println(addMessage);
                 // Change line below to for Arraylist implementation
-                tasksArr[taskTracker] = new Todo(scanner.nextLine());
+                tasksArr[taskTracker] = new Todo(scanner.nextLine().trim());
                 break;
               case "deadline":
                 {
