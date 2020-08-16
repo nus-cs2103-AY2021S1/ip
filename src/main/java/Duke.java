@@ -11,6 +11,14 @@ public class Duke {
     private static final int EVENT_INDEX = 6;
     private static final int TODO_INDEX = 5;
 
+    private static final String BYE = "bye";
+    private static final String DEADLINE = "deadline";
+    private static final String DELETE = "delete";
+    private static final String DONE = "done";
+    private static final String EVENT = "event";
+    private static final String LIST = "list";
+    private static final String TODO = "todo";
+
     private static void botStart() {
         Scanner sc = new Scanner(System.in);
         List<Task> taskStorage = new ArrayList<>(100);
@@ -23,16 +31,16 @@ public class Duke {
             try {
                 String command = sc.nextLine().trim();
                 String[] commandWordArray = command.split(" ");
-                if (command.equals("bye")) {
+                if (command.equals(BYE)) {
                     System.out.println("Thanks for chatting with me, see you soon!"
                             + "\n==========================================");
                     break;
-                } else if (command.equals("list")) {
+                } else if (command.equals(LIST)) {
                     System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < storageCount; i++) {
                         System.out.println(i + 1 + "." + taskStorage.get(i));
                     }
-                } else if (commandWordArray[0].equals("done")) {
+                } else if (commandWordArray[0].equals(DONE)) {
                     if (command.substring(DONE_INDEX - 1).isBlank()) {
                         throw new DukeException("Argument of done cannot be empty!");
                     }
@@ -46,7 +54,7 @@ public class Duke {
                     } catch (NumberFormatException e) {
                         throw new DukeException("Please enter a valid argument for done!");
                     }
-                } else if (commandWordArray[0].equals("delete")) {
+                } else if (commandWordArray[0].equals(DELETE)) {
                     if (command.substring(DELETE_INDEX - 1).isBlank()) {
                         throw new DukeException("Argument of delete cannot be empty!");
                     }
@@ -63,13 +71,13 @@ public class Duke {
                     }
                 } else {
                     Task task;
-                    if (commandWordArray[0].equals("todo")) {
+                    if (commandWordArray[0].equals(TODO)) {
                         if (command.substring(TODO_INDEX - 1).isBlank()) {
                             throw new DukeException("Description of todo cannot be empty!");
                         }
                         task = new Todo(command.substring(TODO_INDEX));
                     } else {
-                        if (commandWordArray[0].equals("deadline")) {
+                        if (commandWordArray[0].equals(DEADLINE)) {
                             if (command.substring(DEADLINE_INDEX - 1).isBlank()) {
                                 throw new DukeException("Description of deadline cannot be empty!");
                             } else {
@@ -82,7 +90,7 @@ public class Duke {
                                     throw new DukeException("Please enter a valid date!");
                                 }
                             }
-                        } else if (commandWordArray[0].equals("event")) {
+                        } else if (commandWordArray[0].equals(EVENT)) {
                             if (command.substring(EVENT_INDEX - 1).isBlank()) {
                                 throw new DukeException("Description of event cannot be empty!");
                             } else {
