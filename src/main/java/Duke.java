@@ -3,58 +3,86 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    private static final String CHATBOT = "Bob: ";
+    private static final String SKIPLINE = "\n";
+    private static final String USER = SKIPLINE + "You: ";
+
     public static void main(String[] args) {
-        String chatbot = "Bob: ";
-        String skipLine = "\n";
-        String user = skipLine + "You: ";
-        List<String> listOfCommands = new ArrayList<>();
+        TaskList tasks = new TaskList();
 
         // Greetings
-        System.out.println(chatbot + "Hey there! I'm Bob" + skipLine + "What can I do for you today?");
-        System.out.println(user);
+        System.out.println(CHATBOT + "Hey there! I'm Bob" + SKIPLINE + "What can I do for you today?");
+        System.out.println(USER);
 
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            String echoUser = sc.nextLine();
+            String description = sc.nextLine();
 
-            boolean exit = echoUser.equals("bye");
+            boolean exit = description.equals("bye");
 
             // Exit chatbot
             if (exit) {
                 break;
             }
 
-            boolean showListOfCommands = echoUser.equals("list");
+            boolean markDone = description.substring(0, 4).equals("done");
+            boolean showListOfCommands = description.equals("list");
 
-            // Display List
-            if (showListOfCommands) {
-                System.out.println(skipLine + chatbot);
+            // Mark indicated task as done
+            if (markDone) {
+                int lengthOfCommand = description.length();
+                int index = Integer.parseInt(description.substring(5, lengthOfCommand));
+                markTaskAsDone(tasks, index - 1);
+            }
 
-                if (listOfCommands.size() == 0) {
-                    System.out.println("List is empty :(");
-                }
+            // Display list of tasks to user
+            else if (showListOfCommands) {
+                displayTaskList(tasks);
 
-                for (String command: listOfCommands) {
-                    int listIndex = listOfCommands.indexOf(command) + 1;
-                    System.out.println(listIndex + ". " + command);
-                }
-
-            // Add text to the list
+            // Add a new task to the list
             } else {
-                listOfCommands.add(echoUser);
-
-                System.out.println();
-                System.out.println(chatbot + "added '" + echoUser + "'");
+                updateTaskList(tasks, description);
             }
 
             // Prompt user commands
-            System.out.println(user);
+            System.out.println(USER);
 
         }
 
         sc.close();
-        System.out.println(skipLine + chatbot + "Goodbye! Have a nice day :D");
 
+        // Exit chatbot
+        System.out.println(SKIPLINE + CHATBOT + "Goodbye! Have a nice day :D");
+    }
+
+    private static void displayTaskList(TaskList tasks) {
+        System.out.println(SKIPLINE + CHATBOT);
+
+        if (tasks.totalNumberOfTasks() == 0) {
+            System.out.println("List is empty :(");
+        } else {
+            System.out.println("Here is your current list of tasks:");
+            System.out.println(tasks);
+        }
+    }
+
+    private static void updateTaskList(TaskList tasks, String description) {
+        Task newTask = new Task(description);
+        tasks.addNewTask(newTask);
+
+        System.out.println();
+        System.out.println(CHATBOT + "added '" + description + "'");
+    }
+
+    private static void markTaskAsDone(TaskList tasks, int index) {
+        System.out.println(SKIPLINE + CHATBOT);
+
+        Task doneTask = tasks.getTask(index);
+        doneTask.markAsDone();
+
+        System.out.println("Good job completing this task! I've marked this task as done:");
+        System.out.println(doneTask);
+        System.out.println("Keep up the good work :)");
     }
 }
