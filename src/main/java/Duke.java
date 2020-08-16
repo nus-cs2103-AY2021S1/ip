@@ -37,7 +37,7 @@ public class Duke {
                 break;
             } else if (input.equals(LIST_COMMAND)) {
                 System.out.print(LINE);
-                System.out.println(DOUBLE_TAB + "Here are the tasks in your list: ");
+                System.out.println(DOUBLE_TAB + "Here are the tasks in your list:");
                 System.out.print(showList());
                 System.out.print(LINE);
             } else if(input.contains(DONE_COMMAND)){
@@ -58,16 +58,22 @@ public class Duke {
     }
 
     private void deadlineTask(String input) {
-        String taskDetails = input.split("\\s",2)[1];
-        String[] splitTaskDetails = taskDetails.split("/");
-        String taskDescription = splitTaskDetails[0];
-        String taskTime = splitTaskDetails[1];
-        final String BY = taskTime.split("\\s")[0];
-        final String TIME = taskTime.split("\\s")[1];
-        DeadlineTask deadlineTask = new DeadlineTask(taskDescription);
-        list.add(deadlineTask);
-        System.out.println(LINE + DOUBLE_TAB + "Got it. I've added this task:\n" +
-                DOUBLE_TAB  + deadlineTask +" (" + BY + ": " + TIME +")");
+        try {
+            String taskDetails = input.split("\\s", 2)[1];
+            String[] splitTaskDetails = taskDetails.split("/");
+            String taskDescription = splitTaskDetails[0];
+            String taskTime = splitTaskDetails[1];
+            final String BY = taskTime.split("\\s",2)[0];
+            final String TIME = taskTime.split("\\s",2)[1];
+            DeadlineTask deadlineTask = new DeadlineTask(taskDescription);
+            list.add(deadlineTask);
+            System.out.println(LINE + DOUBLE_TAB + "Got it. I've added this task:\n" +
+                    DOUBLE_TAB + deadlineTask + " (" + BY + ": " + TIME + ")");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.print(LINE);
+            System.out.println("OOPS!!The description of the todo cannot be empty");
+            System.out.println(LINE);
+        }
     }
 
     private void eventTask(String input) {
@@ -83,7 +89,7 @@ public class Duke {
     }
 
     private void todoTask(String input) {
-        String taskDescription = input.split("\\s")[1];
+        String taskDescription = input.split("\\s",2)[1];
         TodoTask todoTask = new TodoTask(taskDescription);
         list.add(todoTask);
         System.out.println(LINE + DOUBLE_TAB + "Got it. I've added this task :\n"
