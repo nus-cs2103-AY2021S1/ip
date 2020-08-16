@@ -25,6 +25,8 @@ public class Duke {
                 if (command.equals("bye")) {
                     handleBye();
                     break;
+                } else if (command.equals("commands")) {
+                    handleCommands();
                 } else if (command.equals("list")) {
                     handleList();
                 } else if (command.startsWith("todo")) {
@@ -43,6 +45,17 @@ public class Duke {
             }
             command = sc.nextLine();
         }
+    }
+
+    private static void handleCommands() {
+        String response = "Here are all the commands:\n\n"
+                + "bye\n"
+                + "deadline <task> /by <time>\n"
+                + "done <task index>\n"
+                + "event <task> /at <time>\n"
+                + "list\n"
+                + "todo <task>";
+        printResponse(response);
     }
 
     private static void handleBye() {
