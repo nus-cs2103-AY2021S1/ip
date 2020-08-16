@@ -1,6 +1,7 @@
 import exceptions.DukeException;
 import exceptions.EmptyBodyException;
 import exceptions.UnknownCommandException;
+import exceptions.WrongSyntaxException;
 
 import java.util.Scanner;
 import java.util.List;
@@ -60,11 +61,17 @@ public class Duke {
             case "deadline":
                 String deadlineCommand = scanner.nextLine().trim();
                 String[] deadlineParts = deadlineCommand.split(" /by ");
+                if (deadlineParts.length != 2) {
+                    throw new WrongSyntaxException();
+                }
                 addTask(new Deadline(deadlineParts[0], deadlineParts[1]));
                 return true;
             case "event":
                 String eventCommand = scanner.nextLine().trim();
                 String[] eventParts = eventCommand.split(" /at ");
+                if (eventParts.length != 2) {
+                    throw new WrongSyntaxException();
+                }
                 addTask(new Event(eventParts[0], eventParts[1]));
                 return true;
             case "todo":
