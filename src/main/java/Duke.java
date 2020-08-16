@@ -52,7 +52,7 @@ public class Duke {
 
             } else if (firstWord.equals("bye")) {
                 sc.close();
-                System.out.println("time to say goodbye :( \n +" +
+                System.out.println("time to say goodbye :( \n" +
                                     "have a great day!");
                 System.exit(0);
                 return;
@@ -80,7 +80,7 @@ public class Duke {
         try {
             String[] cmd = command.split(" ", 2);
             return cmd[1];
-        } catch (Exception e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException(e.getMessage());
         }
     }
