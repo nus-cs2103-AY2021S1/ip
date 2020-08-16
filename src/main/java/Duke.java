@@ -4,12 +4,13 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    static String bot = "Dave: \n";
+    //static String user = "Me: \n";
+    static String addedText = "added: ";
+    static String line = "_______________________________________________________________";
+
     public static void main(String[] args) {
-        String bot = "Dave: \n";
-        String user = "Me: \n";
-        String addedText = "added: ";
-        String line = "_______________________________________________________________";
-        ArrayList<Task> added = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         //Initial greetings
         System.out.println(line);
@@ -27,26 +28,30 @@ public class Duke {
                 System.out.println(line);
                 break;
             } else if (userInput.equals("list")) {
-                if(added.isEmpty()) {
-                    System.out.println("");
-                } else {
-                    System.out.println(line);
-                    System.out.print(bot);
-                    for (int i = 0; i < added.size(); i++) {
-                        System.out.println(i + 1 + "." + " " + added.get(i));
-                    }
-                    System.out.println(line);
-                }
+                showTaskList(tasks);
             } else {
-                added.add(new Task(userInput));
+                tasks.add(new Task(userInput));
                 System.out.println(line);
                 System.out.print(bot);
                 System.out.println(addedText + userInput);
                 System.out.println(line);
             }
-
         }
 
         scanner.close();
+    }
+
+    static void showTaskList(ArrayList<Task> tasks) {
+        if(tasks.isEmpty()) {
+            System.out.println("There are no tasks in your list yet! >_<");
+        } else {
+            System.out.println(line);
+            System.out.print(bot);
+            System.out.println("Here are the tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println(i + 1 + "." + " " + "[" + tasks.get(i).getStatusIcon() + "]" + " " + tasks.get(i).getTask());
+            }
+            System.out.println(line);
+        }
     }
 }
