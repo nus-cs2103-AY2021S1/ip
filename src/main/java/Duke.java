@@ -32,11 +32,17 @@ public class Duke {
         int itemsIndex = 0;
 
         while (!sc.hasNext("bye")) {
-            System.out.println("    ____________________________________________________________");
             String newItem = sc.nextLine();
-            items[itemsIndex] = newItem;
-            itemsIndex++;
-            System.out.println("     added: " + newItem);
+            System.out.println("    ____________________________________________________________");
+            if (newItem.equals("list")) {
+                for (int i = 0; i < itemsIndex; i++) {
+                    System.out.println("     " + (i + 1) + ". " + items[i]);
+                }
+            } else {
+                items[itemsIndex] = newItem;
+                itemsIndex++;
+                System.out.println("     added: " + newItem);
+            }
             System.out.println("    ____________________________________________________________");
             System.out.println("");
         }
