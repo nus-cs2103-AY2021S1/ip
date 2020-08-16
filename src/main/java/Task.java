@@ -21,6 +21,10 @@ public class Task {
 
     public String getStatus() {
         String check = this.done ? "\u2713" : "\u2718";
-        return "[" + check + "] " + this.getDescription();
+        String status = "[" + check + "] " + this.getDescription();
+        return this.done ?
+                Colour.Green(status)
+                :
+                Colour.Red(status);
     }
 }

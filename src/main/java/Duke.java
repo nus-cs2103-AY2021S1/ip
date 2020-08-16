@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static final String LINE = Colour.Red("____________________________________________________________");
+    private static final String LINE = Colour.Blue("____________________________________________________________");
     private static final String INDENT = "    ";
     private static List<Task> tasks = new ArrayList<>();
 
@@ -62,7 +62,7 @@ public class Duke {
                             responses.add(usage);
                             break;
                         } else {
-                            responses.add("Nice! I've marked this as done:");
+                            responses.add("Nice! I've marked this as " + Colour.Green("done"));
                             Task task = Duke.tasks.get(taskNumber - 1);
                             task.markDone();
                             responses.add("  " + task.getStatus());
