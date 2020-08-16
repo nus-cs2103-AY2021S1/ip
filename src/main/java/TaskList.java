@@ -12,23 +12,18 @@ public class TaskList {
         String[] words = description.split(" ");
 
         if(isToDo(words)) {
-
-            // todo: find a better way to handle these strings
-            StringBuilder newDescription = new StringBuilder();
-            for(int i = 1; i < words.length - 1; i++) {
-                newDescription.append(words[i]).append(" ");
-            }
-            newDescription.append(words[words.length - 1]);
-
-            ToDo newToDo = new ToDo(newDescription.toString());
+            ToDo newToDo = ToDo.createToDo(words);
             this.taskList.add(newToDo);
             return newToDo.toString();
         }
+
+        if (isDeadline(words)) {
+            Deadline newDeadline = Deadline.createDeadline(description);
+            this.taskList.add(newDeadline);
+            return newDeadline.toString();
+        }
         return "fuck";
 
-//        Task newEntry = new Task(description);
-//        this.taskList.add(newEntry);
-//        return "added: " + description;
     }
 
     // side effect: completes task + returns string for completed task

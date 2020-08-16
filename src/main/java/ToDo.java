@@ -3,6 +3,16 @@ public class ToDo extends Task{
         super(description);
     }
 
+    protected static ToDo createToDo(String[] words) {
+        // todo: find a better way to handle these strings
+        StringBuilder newDescription = new StringBuilder();
+        for(int i = 1; i < words.length - 1; i++) {
+            newDescription.append(words[i]).append(" ");
+        }
+        newDescription.append(words[words.length - 1]);
+        return new ToDo(newDescription.toString());
+    }
+
     @Override
     protected boolean isComplete() {
         return super.isComplete();
