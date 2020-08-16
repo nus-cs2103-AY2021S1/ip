@@ -1,7 +1,8 @@
+import main.java.Task;
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Bob {
-    static ArrayList<String> list = new ArrayList<>();
+    static ArrayList<Task> list = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -18,12 +19,19 @@ public class Bob {
         while(!command.equals("bye")) {
             if (command.equals("list")) {
                 int count = 1;
-                for(String item: list) {
-                    System.out.println(count +". " + item);
+                for(Task item: list) {
+                    System.out.println(count +"." + item.toString());
                     count++;
                 }
+            } else if(command.contains("done")) {
+                int index = Integer.parseInt(command.substring(command.length()-1));
+                Task task = list.get(index-1);
+                task.markAsDone();
+                System.out.println("Good job! I have marked this task as done:");
+                System.out.println("\t" + index + "." + task.toString());
             } else {
-                list.add(command);
+                Task task = new Task(command);
+                list.add(task);
                 System.out.println("added: " + command);
             }
             command = sc.nextLine();
