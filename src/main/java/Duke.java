@@ -42,6 +42,15 @@ public class Duke {
                             "  Nice! I've marked this task as done:");
                     System.out.println("    [" + task.getStatusIcon() + "] " + task.getDescription());
                     System.out.println("____________________________________________________________\n");
+                } else if (string1.contains("delete")) {
+                    int order = parseInt(string1.substring(string1.length() - 1));
+                    Task task = lists.get(order - 1);
+                    lists.remove(order - 1);
+                    System.out.println("____________________________________________________________\n" +
+                            "Noted. I've removed this task:");
+                    System.out.println("  " + task.toString());
+                    System.out.println("Now you have " + lists.size() + " tasks in the list.\n" +
+                            "____________________________________________________________");
                 } else {
                     String type;
                     if (string1.contains(" ")) {
@@ -82,7 +91,7 @@ public class Duke {
                     message1 = "____________________________________________________________\n" +
                             "Got it. I've added this task:\n  "
                             + lists.get(lists.size() - 1).toString() + "\n" +
-                            "now you have " + lists.size() + " tasks in the list.\n" +
+                            "Now you have " + lists.size() + " tasks in the list.\n" +
                             "____________________________________________________________\n";
                     System.out.println(message1);
                 }
