@@ -22,9 +22,32 @@ public class Duke {
                 theTask.setDone();
                 System.out.println("  " + theTask.getCurrentStatus());
             } else if (!input.equals("list")){
-                System.out.println("    added: "+ input);
-                toDoList.add(new Task(input));
-            } else {
+                System.out.println(" Got it. I've added this task:");
+                if (input.startsWith("todo")){
+                    Task theTask = new Todo(input.substring("todo".length()+1));
+                    System.out.println("    " + theTask.getCurrentStatus());
+                    toDoList.add(theTask);
+                }
+                if (input.startsWith("deadline")){
+                    int breakpoint = input.indexOf("/");
+                    String tempString = input.substring("deadline".length()+1, breakpoint);
+                    String tempString2 = "("+ input.substring(breakpoint+1, breakpoint +3) + ":"+ input.substring(breakpoint+3) + ")";
+                    String result = tempString + tempString2;
+                    Task theTask = new Deadline(result);
+                    System.out.println("    " + theTask.getCurrentStatus());
+                    toDoList.add(theTask);
+                }
+                if (input.startsWith("event")){
+                    int breakpoint = input.indexOf("/");
+                    String tempString = input.substring("event".length()+1, breakpoint);
+                    String tempString2 = "("+ input.substring(breakpoint+1, breakpoint +3) + ":"+ input.substring(breakpoint+3) + ")";
+                    String result = tempString + tempString2;
+                    Task theTask = new Event(result);
+                    System.out.println("    " + theTask.getCurrentStatus());
+                    toDoList.add(theTask);
+                }
+                System.out.println(" Now you have " + toDoList.size() + " tasks in the list.");
+            } else { //it must be a list command
                 int count = 1;
                 System.out.println(" Here are the tasks in your list:");
                 for (Task t: toDoList) {
