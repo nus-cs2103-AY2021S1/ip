@@ -68,6 +68,28 @@ public class Duke {
         return task;
     }
 
+    private static Task processDelete(String input) throws DeletionException {
+        String[] temp = input.split(" ");
+        if (temp.length == 1) {
+            throw new DeletionException("Please input index after delete! Example of input would be 'delete 1' which deletes 1st item from list");
+        }
+        if (temp.length > 2) {
+            throw new DeletionException("Too many arguments! Example of input would be 'delete 1' which deletes 1st item from list");
+        }
+
+        String command = temp[0];
+        int index = Integer.parseInt(temp[1]) - 1;
+
+        if (index >= userList.size() || index < 0) {
+            throw new DeletionException("Item does not exist in list!");
+        }
+
+        Task task = userList.get(index);
+        userList.remove(index);
+
+        return task;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello! I'm Duke");
@@ -110,10 +132,8 @@ public class Duke {
                         Task task = processEventOrDeadline(input);
                         System.out.println(task);
                         System.out.println("Now you have " + userList.size() + " tasks in the list.");
-
                     } catch (EventException | DeadlineException e) {
                         System.out.println(e.getMessage());
-
                     }
                 } else if (input.startsWith("todo")){
                     // input starts with todo
@@ -122,11 +142,20 @@ public class Duke {
                         Task task = processToDo(input);
                         System.out.println(task);
                         System.out.println("Now you have " + userList.size() + " tasks in the list.");
-
                     } catch (ToDoException e) {
                         System.out.println(e.getMessage());
-
                     }
+                }
+            } else if (input.startsWith("delete")) {
+                // if input starts with delete
+
+                try {
+                    Task task = processDelete(input);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(task);
+                    System.out.println("Now you have " + userList.size() + " tasks in the list.");
+                } catch (DeletionException e) {
+                    System.out.println(e.getMessage());
                 }
             } else {
                 // invalid input
