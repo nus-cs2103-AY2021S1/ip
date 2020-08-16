@@ -7,13 +7,9 @@ public class Commands {
     private boolean shouldBreak = true;
     private ArrayList<Task> taskList = new ArrayList<>();
 
-    private final String INPUT_LIST = "list";
-    private final String INPUT_BYE = "bye";
-    private final String INPUT_DONE = "done";
-    private final String INPUT_TODO = "todo";
-    private final String INPUT_DEADLINES = "deadline";
-    private final String INPUT_EVENTS = "event";
-    private final String INPUT_DELETE = "delete";
+    enum Input {
+        LIST, BYE, DONE, TODO, DEADLINES, EVENTS, DELETE
+    }
 
     public void start() {
         this.greet();
@@ -25,32 +21,32 @@ public class Commands {
         while (shouldBreak) {
             String[] inputArray = inputs.split(" ", 2);
             try {
-                switch (inputArray[0].toLowerCase()) {
-                case INPUT_LIST:
+                switch (Input.valueOf(inputArray[0].toUpperCase())) {
+                case LIST:
                     this.lst();
                     inputs = scanner.nextLine().trim();
                     break;
-                case INPUT_BYE:
+                case BYE:
                     System.out.println("~ \n I will be back \n~ ");
                     shouldBreak = !shouldBreak;
                     break;
-                case INPUT_DONE:
+                case DONE:
                     markDone(inputArray);
                     inputs = scanner.nextLine().trim();
                     break;
-                case INPUT_TODO:
+                case TODO:
                     addTodo(inputArray);
                     inputs = scanner.nextLine().trim();
                     break;
-                case INPUT_DEADLINES:
+                case DEADLINES:
                     addDeadline(inputArray);
                     inputs = scanner.nextLine().trim();
                     break;
-                case INPUT_EVENTS:
+                case EVENTS:
                     addEvent(inputArray);
                     inputs = scanner.nextLine().trim();
                     break;
-                case INPUT_DELETE:
+                case DELETE:
                     deleteItem(inputArray);
                     inputs = scanner.nextLine().trim();
                     break;
@@ -65,7 +61,7 @@ public class Commands {
     }
 
     private void markDone(String[] inputs) throws DukeException {
-        if (inputs.length == 2 && Character.isDigit(inputs[1].charAt(0))) {
+        if (inputs.length > 1 && Character.isDigit(inputs[1].charAt(0))) {
             int taskNumber = Character.getNumericValue(inputs[1].charAt(0)) - 1;
             if (!taskList.isEmpty() && taskNumber < taskList.size()) {
                 taskList.get(taskNumber).doneTask();
@@ -144,7 +140,7 @@ public class Commands {
     }
 
     private void deleteItem(String[] inputs) throws DukeException {
-        if (inputs.length == 2 && Character.isDigit(inputs[1].charAt(0))) {
+        if (inputs.length > 1 && Character.isDigit(inputs[1].charAt(0))) {
             int taskNumber = Character.getNumericValue(inputs[1].charAt(0)) - 1;
             if (!taskList.isEmpty() && taskNumber < taskList.size()) {
                 Task removedTask = taskList.remove(taskNumber);
