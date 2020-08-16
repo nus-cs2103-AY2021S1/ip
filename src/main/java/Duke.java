@@ -18,7 +18,7 @@ public class Duke {
 
     public static void main(String[] args) {
         System.out.println("Hi, I'm\n" + LOGO);
-        Duke.displayMessage("What do you need this time 😫");
+        Duke.displayMessages("What do you need this time 😫");
 
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.print("> ");
@@ -33,7 +33,7 @@ public class Duke {
                 System.out.print("> ");
             }
 
-            Duke.displayMessage(GOODBYE_MESSAGE);
+            Duke.displayMessages(GOODBYE_MESSAGE);
         }
     }
 
@@ -47,7 +47,7 @@ public class Duke {
 
     private static void addTask(String task) {
         TASKS.add(task);
-        Duke.displayMessage(String.format("Ok, you want to: %s", task));
+        Duke.displayMessages(String.format("Ok, you want to: %s", task));
     }
 
     private static void displayTasks() {
@@ -60,9 +60,11 @@ public class Duke {
         System.out.println();
     }
 
-    private static void displayMessage(String message) {
+    private static void displayMessages(String... messages) {
         System.out.println("     ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――");
-        System.out.println("     " + message);
+        for (String message : messages) {
+            System.out.printf("     %s\n", message);
+        }
         System.out.println("     ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――");
         System.out.println();
     }
