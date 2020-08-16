@@ -19,7 +19,7 @@ public class Duke {
     void listTasks() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= tasks.size(); i ++) {
-            System.out.println(i + ". " + tasks.get(i - 1).toString());
+            System.out.println(i + ". " + tasks.get(i - 1));
         }
     }
 
@@ -27,7 +27,7 @@ public class Duke {
         Task completedTask = tasks.get(index -1 );
         completedTask.markAsDone();
         System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(completedTask.toString());
+        System.out.println(completedTask);
     }
 
     void exit() {
