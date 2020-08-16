@@ -6,4 +6,6 @@ done 1
 list
 todo
 blah
+delete 2
+list
 bye
