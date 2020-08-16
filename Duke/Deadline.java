@@ -1,5 +1,4 @@
 package Duke;
-
 /**
  * The Deadline class that represents a Deadline task.
  *
