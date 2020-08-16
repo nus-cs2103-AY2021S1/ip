@@ -2,17 +2,17 @@ public class Task {
     private final String description;
     private boolean isDone;
 
-    Task(String description, boolean isDone) {
+    Task(String description) {
         this.description = description;
-        this.isDone = isDone;
+        this.isDone = false;
     }
 
     public String getDescription() {
         String checkbox = "[";
         if (this.isDone()) {
-            checkbox = checkbox + "✔] ";
+            checkbox = checkbox + "\u2713] ";
         } else {
-            checkbox = checkbox + "ｘ] ";
+            checkbox = checkbox + "\u2718] ";
         }
         return checkbox + this.description;
     }
