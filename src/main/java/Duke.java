@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 public class Duke {
     public final Scanner scanner;
     public TaskManager taskManager;
+    static String deleteTaskPattern = "^delete (?<taskNumber>[0-9]+)$";
     static String completeTaskPattern = "^done (?<taskNumber>[0-9]+)$";
     static String addEventPattern = "^event (?<content>.+) /at (?<datetime>.+)$";
     static String addDeadlinePattern = "^deadline (?<content>.+) /by (?<datetimeDue>.+)$";
@@ -20,6 +21,9 @@ public class Duke {
             "Now you have %d task(s) in the list.";
     static String successfulTaskCompleteStringFormat = "Nice! I've marked this task as done:\n" +
             "%s";
+    static String successfulTaskDeleteStringFormat = "Noted. I've removed this task:\n" +
+            "%s\n" +
+            "Now you have %d task(s) in the list.";
 
     public Duke() {
         this.scanner = new Scanner(System.in);
@@ -43,6 +47,8 @@ public class Duke {
                 break;
             } else if (input.matches(Duke.completeTaskPattern)) {
                 completeTask(duke, input);
+            } else if (input.matches(Duke.deleteTaskPattern)) {
+                deleteTask(duke, input);
             } else if (input.matches(Duke.addEventPattern)) {
                 addEvent(duke, input);
             } else if (input.matches(Duke.addDeadlinePattern)) {
@@ -119,6 +125,26 @@ public class Duke {
         } catch (DukeException e) {
             duke.sendMessage(e.getMessage());
         }
+    }
+
+    private static void deleteTask(Duke duke, String input) {
+        Pattern r = Pattern.compile(Duke.deleteTaskPattern);
+        Matcher m = r.matcher(input);
+        m.find();
+        int taskNumber = Integer.parseInt(m.group("taskNumber"));
+        try {
+            Task task = duke.taskManager.deleteTask(taskNumber);
+            duke.sendMessage(duke.getDeleteSuccessMessage(task));
+        } catch (DukeException e) {
+            duke.sendMessage(e.getMessage());
+        }
+    }
+
+    private String getDeleteSuccessMessage(Task task) {
+        return String.format(
+                successfulTaskDeleteStringFormat,
+                task,
+                this.taskManager.getTaskCount());
     }
 
     public String getGreetMessage() {

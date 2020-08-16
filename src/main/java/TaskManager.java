@@ -27,16 +27,26 @@ public class TaskManager {
         return event;
     }
 
+    public Task deleteTask(int taskNumber) throws DukeException {
+        int index = getIndex(taskNumber);
+        return taskList.remove(index);
+    }
+
     public Task completeTask(int taskNumber) throws DukeException {
+        int index = getIndex(taskNumber);
+        Task task = taskList.get(index);
+        task.setComplete(true);
+        return task;
+    }
+
+    private int getIndex(int taskNumber) throws DukeException {
         if (taskNumber <= 0) {
             throw new DukeException("Invalid task number specified, task number must be greater than 0.");
         } else if (taskNumber > taskList.size()) {
             throw new DukeException("Task number specified is larger than current amount of tasks.");
         }
         int index = taskNumber - 1;
-        Task task = taskList.get(index);
-        task.setComplete(true);
-        return task;
+        return index;
     }
 
     @Override
