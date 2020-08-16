@@ -48,21 +48,21 @@ public class Duke {
             String input = sc.nextLine();
             List<String> responses = new ArrayList<>();
             String[] inputSplit = input.split(" ");
-            String option = inputSplit[0];
+            Option option = Option.from(inputSplit[0]);
             try {
                 switch (option) {
-                    case "bye":
+                    case BYE:
                         responses.add("Bye. Hope to see you again soon!");
                         run = false;
                         break;
-                    case "list":
+                    case LIST:
                         responses.add("Here are the tasks in your list");
                         for (int i = 0; i < Duke.tasks.size(); i++) {
                             String item = "" + (i + 1) + ". " + Duke.tasks.get(i).getStatus();
                             responses.add(item);
                         }
                         break;
-                    case "done":
+                    case DONE:
                         if (inputSplit.length != 2) {
                             throw new DukeException("Please provide a task number!");
                         }
@@ -84,7 +84,7 @@ public class Duke {
                         }
 
                         break;
-                    case "delete":
+                    case DELETE:
                         if (inputSplit.length != 2) {
                             throw new DukeException("Please provide a task number!");
                         }
@@ -108,9 +108,9 @@ public class Duke {
                         }
 
                         break;
-                    case "todo":
-                    case "deadline":
-                    case "event":
+                    case TODO:
+                    case DEADLINE:
+                    case EVENT:
                         Task newTask;
 
                         String description = String.join(" ", Arrays.copyOfRange(inputSplit, 1, inputSplit.length));
@@ -119,9 +119,9 @@ public class Duke {
                             throw new DukeException("The description field cannot be empty!");
                         }
 
-                        if (option.equals("todo")) {
+                        if (option.equals(Option.TODO)) {
                             newTask = new Todo(description);
-                        } else if (option.equals("deadline")) {
+                        } else if (option.equals(Option.DEADLINE)) {
 
                             String[] parsedString = Duke.parseWithDate(description, "/by");
                             String desc, date;
@@ -142,6 +142,7 @@ public class Duke {
                         responses.add("  " + newTask.getStatus());
                         responses.add(Duke.getNumberOfTasks());
                         break;
+                    case UNRECOGNIZED:
                     default:
                         throw new DukeException("Instruction not recognized");
 
