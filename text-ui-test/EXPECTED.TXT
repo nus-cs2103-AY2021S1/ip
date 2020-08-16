@@ -3,15 +3,30 @@ What can I do for you?
 Got it. I've added this task:
  [T][ ] buy book
 Got it. I've added this task:
- [D][ ] return book (by: Sunday)
+ [E][ ] return book (by: Sunday)
 Got it. I've added this task:
  [E][ ] project meeting (at: Mon 2-4pm)
 Got it. I've added this task:
  [E][ ] project meeting (at: Sat 2-4pm)
+Error! The description of a event is missing a date.
+Error! The description of a deadline is missing a date.
+Got it. I've added this task:
+ [T][ ] project meeting  Sat 2-4pm
+Got it. I've added this task:
+ [T][ ] eat chicken nuggets
 Good job. This task is marked as done:
- [D][x] return book (by: Sunday)
+ [T][x] project meeting  Sat 2-4pm
+Task at index 100 doesn't exist
+There are 6 tasks currently. Please a number between 1 and 6 inclusive.
+Got it. I've added this task:
+ [E][ ] sing song (at: Fri 2pm)
+Good job. This task is marked as done:
+ [E][x] return book (by: Sunday)
 1. [T][ ] buy book
-2. [D][x] return book (by: Sunday)
+2. [E][x] return book (by: Sunday)
 3. [E][ ] project meeting (at: Mon 2-4pm)
 4. [E][ ] project meeting (at: Sat 2-4pm)
+5. [T][x] project meeting  Sat 2-4pm
+6. [T][ ] eat chicken nuggets
+7. [E][ ] sing song (at: Fri 2pm)
 Bye! Hope to never see you again!
