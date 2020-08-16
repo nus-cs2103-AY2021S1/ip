@@ -26,7 +26,7 @@ public class Duke {
             } catch (NumberFormatException e){
                 throw (stringItem.isEmpty())
                     ? new DukeException("Done must be followed by item number", e)
-                        : new DukeException(stringItem + " is not a valid item number", e);
+                        : new DukeException(stringItem + " is not a valid item number!", e);
             } catch (Exception e) {
                 throw new DukeException("Please follow the syntax: done <item no.>", e);
             }
@@ -37,7 +37,7 @@ public class Duke {
                 items.add(todo);
                 return Chat.addItemChatBox(todo.toString(),items.size());
             } else {
-                throw new DukeException("Todo cannot be empty", new Throwable("empty field"));
+                throw new DukeException("Todo cannot be empty!", new Throwable("empty field"));
             }
         } else if (phrase.startsWith("event ") || (phrase.startsWith("event") && phraseLength == 5)) {
             String item = phrase.substring(5).trim();
@@ -66,6 +66,26 @@ public class Duke {
                 throw new DukeException("Follow the syntax: deadline <description> /by <time>", new Throwable(
                         "bad deadline"
                 ));
+            }
+        } else if (phrase.startsWith("delete ") || (phrase.startsWith("delete") && phraseLength == 6)) {
+            String stringItem = phrase.substring(6).trim();
+            try {
+                int itemNo = Integer.parseInt(stringItem) - 1;
+                Task item = items.get(itemNo);
+                items.remove(itemNo);
+                return Chat.chatBox(
+                        "I have deleted the following item:\n"
+                                + "\t\t" + item.toString() +
+                                "\n\t You got " + items.size() + " task(s) left."
+                );
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("Item " + stringItem + " not found.", e);
+            } catch (NumberFormatException e){
+                throw (stringItem.isEmpty())
+                        ? new DukeException("delete must be followed by item number", e)
+                        : new DukeException(stringItem + " is not a valid item number", e);
+            } catch (Exception e) {
+                throw new DukeException("Please follow the syntax: delete <item no.>", e);
             }
         } else {
             throw new DukeException("I don't understand you!", new Throwable("invalid command"));
