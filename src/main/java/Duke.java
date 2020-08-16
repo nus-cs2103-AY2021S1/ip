@@ -5,52 +5,77 @@ import java.util.Scanner;
 public class Duke {
     private Scanner scanner;
     private List<Task> taskList;
-    private String logo, greetingMessage, exitMessage;
+    private String logo, exitMessage;
 
     public void initialise() {
         scanner = new Scanner(System.in);
         taskList = new ArrayList<>();
-        logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        greetingMessage = "Hello! My name is Duke.\n" + "What can I do for you?";
-        exitMessage = "Bye. Hope to see you again soon!";
+        logo = "\t ____        _        \n"
+                + "\t|  _ \\ _   _| | _____ \n"
+                + "\t| | | | | | | |/ / _ \\\n"
+                + "\t| |_| | |_| |   <  __/\n"
+                + "\t|____/ \\__,_|_|\\_\\___|\n";
         greet();
         listenForCommands();
     }
+    
+    private void sendMessage(List<String> messages) {
+        System.out.println("\t____________________________________________________________");
+        for (String message : messages) {
+            System.out.println("\t " + message);
+        }
+        System.out.println("\t____________________________________________________________");
+    }
 
     private void greet() {
-        System.out.println(logo);
-        System.out.println(greetingMessage);
+        System.out.printf(logo);
+        List<String> messages = new ArrayList<>();
+        messages.add("Hello! My name is Duke.");
+        messages.add("What can I do for you?");
+        sendMessage(messages);
     }
 
     private void listAllTasks() {
-        System.out.println("Here are the tasks in your list:");
+        List<String> messages = new ArrayList<>();
+        messages.add("Here are the tasks in your list:");
         int size = taskList.size();
         for (int i = 0; i < size; i++) {
             int taskNumber = i + 1;
             String entry = String.format("%d. %s", taskNumber, taskList.get(i));
-            System.out.println(entry);
+            messages.add(entry);
         }
+        sendMessage(messages);
     }
 
     private void addTask(Task task) {
         taskList.add(task);
         int size = taskList.size();
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
         String taskWord = (size > 1 ? "tasks" : "task");
-        System.out.println("Now you have " + size + " " + taskWord + " in the list.");
+        List<String> messages = new ArrayList<>();
+        messages.add("Got it. I've added this task:");
+        messages.add("  " + task);
+        messages.add("Now you have " + size + " " + taskWord + " in the list.");
+        sendMessage(messages);
     }
 
     private void markTaskAsDone(int taskNumber) {
         int index = taskNumber - 1;
         Task task = taskList.get(index);
         task.markAsDone();
-        System.out.println("Nice! I have marked this task as done:");
-        System.out.println(task);
+        List<String> messages = new ArrayList<>();
+        messages.add("Nice! I have marked this task as done:");
+        messages.add("  " + task);
+        sendMessage(messages);
+    }
+    
+    private void deleteTask(int taskNumber) {
+        int index = taskNumber - 1;
+        Task task = taskList.get(index);
+        taskList.remove(index);
+        List<String> messages = new ArrayList<>();
+        messages.add("Got it. I've removed this task:");
+        messages.add("  " + task);
+        sendMessage(messages);
     }
 
     private void handleDoneCommand(String input) throws DukeException {
@@ -58,7 +83,7 @@ public class Duke {
             int taskNumber = Integer.parseInt(input);
             markTaskAsDone(taskNumber);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Error! The task number you entered does not exist.");
+            throw new DukeException("Error! The task number entered does not exist.");
         } catch (NumberFormatException e) {
             throw new DukeException("Error! Please enter a valid task number.");
         }
@@ -96,20 +121,18 @@ public class Duke {
     private void handleDeleteCommand(String input) throws DukeException {
         try {
             int taskNumber = Integer.parseInt(input);
-            int index = taskNumber - 1;
-            Task task = taskList.get(index);
-            taskList.remove(index);
-            System.out.println("Got it. I've removed this task:");
-            System.out.println(task);
+            deleteTask(taskNumber);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Error! The task number you entered does not exist.");
+            throw new DukeException("Error! The task number entered does not exist.");
         } catch (NumberFormatException e) {
             throw new DukeException("Error! Please enter a valid task number.");
         }
     }
 
     private void exit() {
-        System.out.println(exitMessage);
+        List<String> messages = new ArrayList<>();
+        messages.add("Bye. Hope to see you again soon!");
+        sendMessage(messages);
         System.exit(0);
     }
 
@@ -164,7 +187,9 @@ public class Duke {
                     throw new DukeException("I'm sorry, but I don't know what that means \u2639");
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            List<String> messages = new ArrayList<>();
+            messages.add(e.getMessage());
+            sendMessage(messages);
         }
         listenForCommands();
     }

@@ -1,44 +1,85 @@
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
-Hello! My name is Duke.
-What can I do for you?
-I'm sorry, but I don't know what that means ☹
-Got it. I've added this task:
-[T][✘] read book
-Now you have 1 task in the list.
-Error! Note the syntax: todo [description]
-Got it. I've added this task:
-[D][✘] homework (by: Sunday)
-Now you have 2 tasks in the list.
-Error! Note the syntax: deadline [description] /by [date]
-Error! Note the syntax: deadline [description] /by [date]
-Got it. I've added this task:
-[E][✘] lesson (at: 1-2pm)
-Now you have 3 tasks in the list.
-Error! Note the syntax: event [description] /at [date]
-Error! Note the syntax: event [description] /at [date]
-Here are the tasks in your list:
-1. [T][✘] read book
-2. [D][✘] homework (by: Sunday)
-3. [E][✘] lesson (at: 1-2pm)
-Nice! I have marked this task as done:
-[D][✓] homework (by: Sunday)
-Error! Please enter a valid task number.
-Error! The task number you entered does not exist.
-Error! The task number you entered does not exist.
-Here are the tasks in your list:
-1. [T][✘] read book
-2. [D][✓] homework (by: Sunday)
-3. [E][✘] lesson (at: 1-2pm)
-Got it. I've removed this task:
-[D][✓] homework (by: Sunday)
-Error! The task number you entered does not exist.
-Error! The task number you entered does not exist.
-Here are the tasks in your list:
-1. [T][✘] read book
-2. [E][✘] lesson (at: 1-2pm)
-Bye. Hope to see you again soon!
+	 ____        _        
+	|  _ \ _   _| | _____ 
+	| | | | | | | |/ / _ \
+	| |_| | |_| |   <  __/
+	|____/ \__,_|_|\_\___|
+	____________________________________________________________
+	 Hello! My name is Duke.
+	 What can I do for you?
+	____________________________________________________________
+	____________________________________________________________
+	 I'm sorry, but I don't know what that means ☹
+	____________________________________________________________
+	____________________________________________________________
+	 Got it. I've added this task:
+	   [T][✘] read book
+	 Now you have 1 task in the list.
+	____________________________________________________________
+	____________________________________________________________
+	 Error! Note the syntax: todo [description]
+	____________________________________________________________
+	____________________________________________________________
+	 Got it. I've added this task:
+	   [D][✘] homework (by: Sunday)
+	 Now you have 2 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	 Error! Note the syntax: deadline [description] /by [date]
+	____________________________________________________________
+	____________________________________________________________
+	 Error! Note the syntax: deadline [description] /by [date]
+	____________________________________________________________
+	____________________________________________________________
+	 Got it. I've added this task:
+	   [E][✘] lesson (at: 1-2pm)
+	 Now you have 3 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	 Error! Note the syntax: event [description] /at [date]
+	____________________________________________________________
+	____________________________________________________________
+	 Error! Note the syntax: event [description] /at [date]
+	____________________________________________________________
+	____________________________________________________________
+	 Here are the tasks in your list:
+	 1. [T][✘] read book
+	 2. [D][✘] homework (by: Sunday)
+	 3. [E][✘] lesson (at: 1-2pm)
+	____________________________________________________________
+	____________________________________________________________
+	 Nice! I have marked this task as done:
+	   [D][✓] homework (by: Sunday)
+	____________________________________________________________
+	____________________________________________________________
+	 Error! Please enter a valid task number.
+	____________________________________________________________
+	____________________________________________________________
+	 Error! The task number entered does not exist.
+	____________________________________________________________
+	____________________________________________________________
+	 Error! The task number entered does not exist.
+	____________________________________________________________
+	____________________________________________________________
+	 Here are the tasks in your list:
+	 1. [T][✘] read book
+	 2. [D][✓] homework (by: Sunday)
+	 3. [E][✘] lesson (at: 1-2pm)
+	____________________________________________________________
+	____________________________________________________________
+	 Got it. I've removed this task:
+	   [D][✓] homework (by: Sunday)
+	____________________________________________________________
+	____________________________________________________________
+	 Error! The task number entered does not exist.
+	____________________________________________________________
+	____________________________________________________________
+	 Error! The task number entered does not exist.
+	____________________________________________________________
+	____________________________________________________________
+	 Here are the tasks in your list:
+	 1. [T][✘] read book
+	 2. [E][✘] lesson (at: 1-2pm)
+	____________________________________________________________
+	____________________________________________________________
+	 Bye. Hope to see you again soon!
+	____________________________________________________________
