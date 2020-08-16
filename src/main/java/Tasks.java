@@ -1,6 +1,48 @@
 import java.util.ArrayList;
 import java.util.List;
 
+enum Command {
+    LIST("list"),
+    DONE("done"),
+    DELETE("delete");
+
+    private String command;
+
+    private Command(String command) {
+        this.command = command;
+    }
+
+    String getCommand() {
+        return this.command;
+    }
+
+    @Override
+    public String toString() {
+        return this.command;
+    }
+}
+
+enum TaskType {
+    TODO("todo"),
+    EVENT("event"),
+    DEADLINE("deadline");
+
+    private String type;
+
+    private TaskType(String type) {
+        this.type = type;
+    }
+
+    String getType() {
+        return this.type;
+    }
+
+    @Override
+    public String toString() {
+        return this.type;
+    }
+}
+
 public class Tasks {
     private List<Task> list;
 
@@ -11,27 +53,27 @@ public class Tasks {
     void addTask(String input) throws DukeException {
         String[] inputArray = input.split(" ");
         input = input.strip();
-        if (input.equals("list")) {
+        if (input.equals(Command.LIST.getCommand())) {
             this.listTasks();
-        } else if (input.equals("done") || input.equals("delete")) {
+        } else if (input.equals(Command.DONE.getCommand()) || input.equals(Command.DELETE.getCommand())) {
             throw new InvalidCommandException("☹ OOPS!!! The index of a task cannot be empty.");
-        } else if (inputArray[0].equals("done")) {
+        } else if (inputArray[0].equals(Command.DONE.getCommand())) {
             this.markDone(Integer.parseInt(inputArray[1]));
-        } else if (inputArray[0].equals("delete")) {
+        } else if (inputArray[0].equals(Command.DELETE.getCommand())) {
             this.deleteTask(Integer.parseInt(inputArray[1]));
         } else {
             String type = input.split(" ")[0];
             String temp = input.strip();
-            if (temp.equals("todo") || temp.equals("deadline") || temp.equals("event")) {
+            if (temp.equals(TaskType.TODO.getType()) || temp.equals(TaskType.DEADLINE.getType()) || temp.equals(TaskType.EVENT.getType())) {
                 throw new InvalidArgumentException("☹ OOPS!!! The description of a " + temp + " cannot be empty.");
             } else if (temp.equals("")) {
                 throw new InvalidTaskTypeException("☹ OOPS!!! The type of a task cannot be empty.");
             }
-            if (type == null || (!type.equals("todo") && !type.equals("deadline") && !type.equals("event"))) {
+            if (type == null || (!type.equals(TaskType.TODO.getType()) && !type.equals(TaskType.DEADLINE.getType()) && !type.equals(TaskType.EVENT.getType()))) {
                 throw new InvalidTaskTypeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             String details = input.substring(type.length());
-            if (type.equals("todo")) {
+            if (type.equals(TaskType.TODO.getType())) {
                 ToDo t = new ToDo(details.strip());
                 this.list.add(t);
                 echo(t);
@@ -39,7 +81,7 @@ public class Tasks {
                 String[] detailsArray = details.split("/");
                 String[] keywords = detailsArray[1].split(" ");
                 String datetime = detailsArray[1].substring(keywords[0].length() + 1);
-                if (type.equals("deadline")) {
+                if (type.equals(TaskType.DEADLINE.getType())) {
                     Deadline d = new Deadline(detailsArray[0].strip(), keywords[0] + ": " + datetime);
                     this.list.add(d);
                     echo(d);
