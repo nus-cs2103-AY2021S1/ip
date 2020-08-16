@@ -4,19 +4,26 @@ import java.util.Scanner;
 public class Duke {
     private static void handleInputs() {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<>();
         while(scanner.hasNextLine()) {
             String input = scanner.nextLine();
-            switch(input) {
+            String command = input.split(" ")[0];
+            switch(command) {
                 case "bye":
                     PrintDuke.printExitMessage();
                     System.exit(0);
                 case "list":
                     PrintDuke.printList(list);
                     break;
+                case "done":
+                    int taskIndex = Integer.parseInt(input.substring(5).trim()) - 1;
+                    list.get(taskIndex).markAsDone();
+                    PrintDuke.printMarkTaskAsDone(list.get(taskIndex));
+                    break;
                 default:
-                    list.add(input);
-                    PrintDuke.printAddTask(input);
+                    Task task = new Task(input);
+                    list.add(task);
+                    PrintDuke.printAddTask(task);
                     break;
             }
         }

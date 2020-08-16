@@ -27,15 +27,21 @@ public class PrintDuke {
         printWithDashes(" " + bye);
     }
 
-    protected static void printAddTask(String task) {
-        printWithDashes(" added: " + task);
+    protected static void printAddTask(Task task) {
+        String message = " added: ";
+        message += task;
+        printWithDashes(message);
     }
 
-    protected static void printList(ArrayList<String> list) {
-        StringBuilder listStr = new StringBuilder();
+    protected static void printList(ArrayList<Task> list) {
+        StringBuilder listStr = new StringBuilder(" Here are the tasks in your list:\n");
         for (int i = 0; i < list.size(); i++) {
             listStr.append(String.format(" %s. %s\n", i + 1, list.get(i)));
         }
         printWithDashes(listStr.toString());
+    }
+
+    protected static void printMarkTaskAsDone(Task task) {
+        printWithDashes(" Nice! I've marked this task as done:\n " + task);
     }
 }
