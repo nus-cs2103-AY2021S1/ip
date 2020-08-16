@@ -151,24 +151,36 @@ public class Duke {
     }
 
     public static void deadlineCommand(List<Task> list, String command) {
-        int spaceIndex = command.indexOf(" ");
-        int slashIndex = command.indexOf("/");
-        String description = command.substring(spaceIndex + 1, slashIndex - 1);
-        String time = command.substring(slashIndex + 4);
+        try {
+            int spaceIndex = command.indexOf(" ");
+            int slashIndex = command.indexOf("/by");
 
-        Task task = new DeadlineTask(description, time);
-        list.add(task);
+            if (spaceIndex == -1) {
+                throw new EmptyActionException(); // "deadline"
+            } else if (slashIndex == -1 || spaceIndex + 1 == slashIndex || slashIndex + 4 > command.length()) {
+                throw new InvalidActionException(); // "deadline project submission", "deadline /by Sunday", "deadline return book /by"
+            } else {
+                String description = command.substring(spaceIndex + 1, slashIndex - 1);
+                String time = command.substring(slashIndex + 4);
 
-        System.out.println("    ____________________________________________________________\n"
-                + "     Got it. I've added this task:\n"
-                + "     "
-                + task
-                + "\n"
-                + "     Now you have "
-                + list.size()
-                + " task(s) in the list.\n"
-                + "    ____________________________________________________________\n"
-        );
+                Task task = new DeadlineTask(description, time);
+                list.add(task);
+
+                System.out.println("    ____________________________________________________________\n"
+                        + "     Got it. I've added this task:\n"
+                        + "     "
+                        + task
+                        + "\n"
+                        + "     Now you have "
+                        + list.size()
+                        + " task(s) in the list.\n"
+                        + "    ____________________________________________________________\n"
+                );
+            }
+
+        } catch (DukeException e) {
+            System.out.println(e);
+        }
     }
 
     public static void eventCommand(List<Task> list, String command) {
