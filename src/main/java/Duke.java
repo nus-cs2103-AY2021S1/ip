@@ -90,14 +90,34 @@ public class Duke {
                     if(input.matches("deadline\\s*")) {
                         throw new EmptyArgumentException("deadline's description");
                     }
+                    if(!input.matches("deadline .+/by.+")) {
+                        throw new InvalidArgumentException("deadline's description");
+                    }
                     String[] split = input.substring(9).split("/by");
                     addTask(new Deadline(split[0].stripTrailing(), split[1].stripLeading()), tasks);
                 } else if (input.matches("event.*")) {
                     if(input.matches("event\\s*")) {
                         throw new EmptyArgumentException("event's description");
                     }
+                    if(!input.matches("event .+/at.+")) {
+                        throw new InvalidArgumentException("event description");
+                    }
                     String[] split = input.substring(6).split("/at");
                     addTask(new Event(split[0].stripTrailing(), split[1].stripLeading()), tasks);
+                } else if (input.matches("delete.*")) {
+                    if(input.matches("delete\\s*")) {
+                        throw new EmptyArgumentException("Task Index");
+                    }
+                    if(!input.matches("delete \\d+")) {
+                        throw new InvalidArgumentException("Task Index");
+                    }
+                    String[] arr = input.split(" ");
+                    int index = Integer.parseInt(arr[1]) - 1;
+                    if (index >= tasks.size() || index < 0) {
+                        throw new InvalidArgumentException("index");
+                    }
+                    Task deleted = tasks.remove(index);
+                    print("Noted. I've removed this task:\n  " + deleted.toString() + "\nNow you have " + tasks.size() + " tasks in the list.");
                 } else {
                     throw new InvalidCommandException();
                 }
