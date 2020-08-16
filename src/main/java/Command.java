@@ -1,4 +1,4 @@
 /*============= Program Features =============*/
 public enum Command {
-     ADD, DONE, LIST, EXIT
+     TODO, DEADLINE, EVENT , DONE, LIST, EXIT
 }

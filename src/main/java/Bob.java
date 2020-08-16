@@ -41,11 +41,30 @@ public class Bob {
 
     /*================ Private methods ================*/
 
+    // Generates message after adding task
+    private String afterAdd(Task task) {
+        return "Yes boss, I have added this task to your list:\n" + "  " + task + "\n" + "Currently you have " + this.list.size() + " tasks in your list.";
+    }
+
     // Adds an unfinished task to list and returns readable String
-    private String addTask(String description) {
+    private String addTodo(String description) {
         Task task = new Task(description);
         this.list.add(task);
-        return  "\"" + description + "\" " + "is added to your list.";
+        return afterAdd(task);
+    }
+
+    // Adds an unfinished deadline to list and returns readable String
+    private String addDeadline(String description, String timeAndDate) {
+        Deadline deadline = new Deadline(description, timeAndDate);
+        this.list.add(deadline);
+        return afterAdd(deadline);
+    }
+
+    // Adds an unfinished event to list and returns readable String
+    private String addEvent(String description, String time) {
+        Event event = new Event(description, time);
+        this.list.add(event);
+        return afterAdd(event);
     }
 
     // Converts list to readable String
@@ -91,9 +110,21 @@ public class Bob {
     // Executes action based on command with need for user input
     private Bob execute(Command command, String input) {
         switch (command) {
-            case ADD:
-                String output = addTask(input);
-                return new Bob(output, this.list);
+            case TODO:
+                String outputTodo = addTodo(input.substring(5));
+                return new Bob(outputTodo, this.list);
+            case DEADLINE:
+                String[] split1 = input.split("/");
+                String description1 = split1[0].substring(9);
+                String by1 = split1[1];
+                String outputDeadline = addDeadline(description1, by1);
+                return new Bob(outputDeadline, this.list);
+            case EVENT:
+                String[] split2 = input.split("/");
+                String description2 = split2[0].substring(6);
+                String by2 = split2[1];
+                String outputEvent = addEvent(description2, by2);
+                return new Bob(outputEvent, this.list);
             case DONE:
                 int taskNumber = Integer.parseInt(input.substring(5,6));
                 String out = markTaskDone(taskNumber);
@@ -125,14 +156,20 @@ public class Bob {
 
     // Handles user input which decides which command Bob executes
     public Bob nextCommand(String input) {
-        if (input.toLowerCase().equals("bye")) {
+        if (input.equals("bye")) {
             return execute(Command.EXIT);
-        } else if (input.toLowerCase().equals("list")) {
+        } else if (input.equals("list")) {
             return execute(Command.LIST);
-        } else if (input.length() == 6 && input.toLowerCase().substring(0,4).equals("done")) {
+        } else if (input.length() == 6 && input.substring(0,4).equals("done")) {
             return execute(Command.DONE, input);
         } else {
-            return execute(Command.ADD, input);
+            if (input.substring(0,5).equals("event")) {
+                return execute(Command.EVENT, input);
+            } else if (input.substring(0,8).equals("deadline")) {
+                return execute(Command.DEADLINE, input);
+            } else {
+                return execute(Command.TODO, input);
+            }
         }
     }
 
