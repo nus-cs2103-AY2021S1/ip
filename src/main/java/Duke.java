@@ -7,30 +7,53 @@ public class Duke {
 
     public static void readAndEcho(List<String> list) {
         String intro1 = "Hello! I'm Duke \n";
-        String intro2 = "What can I do for you?";
+        String intro2 = "What can I do for you? \n";
 
 
-        String greeting = addDividers(String.format("%" + (6 + intro1.length()) + "s", intro1) +
-                String.format("%" + (6 + intro2.length()) + "s", intro2));
+        String greeting = addDividers(formatString(intro1) + formatString(intro2));
         System.out.println(greeting);
 
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
-            String echo = addDividers(String.format("%" + (6 + input.length()) + "s", input));
-            System.out.println(echo);
+            if (input.equals("list")) {
+                printList(list);
+            } else {
+                list.add(input);
+                String inputText = "added: " + input + '\n';
+                String echo = addDividers(formatString(inputText));
+                System.out.println(echo);
+            }
             input = sc.nextLine();
         }
-        String goodbye = "Bye. Hope to see you again soon!";
-        System.out.println(addDividers(String.format("%" + (6 + goodbye.length()) + "s", goodbye)));
+        String goodbye = "Bye. Hope to see you again soon! \n";
+        System.out.println(addDividers(formatString(goodbye)));
+    }
+
+    private static void printList(List<String> list) {
+        String printedList = "";
+        if (list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                String lineItem = (i + 1) + ". " + list.get(i) + "\n";
+                printedList = printedList + formatString(lineItem);
+            }
+        } else {
+            String emptyString = "List is empty \n";
+            printedList = formatString(emptyString);
+        }
+        System.out.println(addDividers(printedList));
     }
 
     private static String addDividers(String s) {
         String divider = "___________________________\n";
         String dividerFormatted = String.format("%" + (5 + divider.length()) + "s", divider);
-        String added = dividerFormatted + s + "\n" + dividerFormatted;
+        String added = dividerFormatted + s + dividerFormatted;
         return added;
+    }
+
+    private static String formatString(String s) {
+        return String.format("%" + (6 + s.length()) + "s", s);
     }
 
     public static void main(String[] args) {
