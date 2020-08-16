@@ -9,8 +9,8 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
-    void add(String task) {
-        this.tasks.add(new Task(task));
+    void add(Task task) {
+        this.tasks.add(task);
         System.out.println("New task added: " + task);
     }
 
