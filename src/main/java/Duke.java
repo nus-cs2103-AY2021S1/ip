@@ -24,7 +24,19 @@ public class Duke {
         String listing = "list";
 
         while (!echo.equals(end)) {
-            display(echo);
+            String displayText = "";
+            if (!echo.equals(listing)) {
+                displayText = "added: " + echo;
+                display(displayText);
+                list.add(echo);
+            } else {
+                int i = 1;
+                for (String item :list) {
+                    displayText = displayText + i + ". " + item + "\n";
+                    i++;
+                }
+                display(displayText);
+            }
             echo = scan.nextLine();
         }
         System.out.println(line);
