@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -18,32 +19,73 @@ public class Duke {
     public static boolean processLine(Scanner sc) {
         String str;
         str = sc.nextLine();
-        String[] tokens = str.split(" ");
+        ArrayList<String> tokens = new ArrayList<String>(Arrays.asList(str.split(" ")));
         boolean bl;
         System.out.println("-----------------");
-        if (tokens[0].equals("bye")){
+        if (tokens.get(0).equals("bye")){
             System.out.println("Bye. Hope to see you again!");
             bl = false;
-        } else{
-            if (tokens[0].equals("done")){
-                int ind = Integer.parseInt(tokens[1])-1;
+        } else {
+            if (tokens.get(0).equals("done")) {
+                int ind = Integer.parseInt(tokens.get(1))-1;
                 tasks.get(ind).completeTask();
                 System.out.println(tasks.get(ind).toString());
-            }else if (tokens[0].equals("list")){
+            } else if (tokens.get(0).equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 int i=0;
                 for(Task task:tasks){
                     System.out.println(String.format("%d.%s", ++i, task));
                 }
-            }else{
-                System.out.println("Added: "+str);
-                tasks.add(new Task(str));
-
+            } else {
+                Task task = addNewTask(tokens);
+                tasks.add(task);
+                System.out.println(
+                        String.format("I have added this task: \n\t%s\nYou now have %d tasks in the list",
+                                task.toString(), tasks.size()));
             }
             bl = true;
         }
         System.out.println("-----------------");
         return bl;
 
+    }
+
+    public static Task addNewTask(ArrayList<String> tokens) {
+        if (tokens.get(0).equals("todo")) {
+            return new ToDo(stringCombiner(tokens, 1, tokens.size()));
+        } else if (tokens.get(1).equals("deadline")) {
+            int ind = 1;
+            boolean found= false;
+            while (!found && ind < tokens.size()) {
+                if (tokens.get(ind).equals("/by")) {
+                    found = true;
+                }
+                ind++;
+            }
+            return new Deadline(stringCombiner(tokens, 1, ind-1),
+                    stringCombiner(tokens, ind+1, tokens.size()));
+        } else {
+            int ind = 1;
+            boolean found= false;
+            while (!found && ind < tokens.size()) {
+                if (tokens.get(ind).equals("/at")) {
+                    found = true;
+                }
+                ind++;
+            }
+            return new Event(stringCombiner(tokens, 1, ind-1),
+                    stringCombiner(tokens, ind+1, tokens.size()));
+        }
+    }
+
+    public static String stringCombiner(ArrayList<String> tokens, int start, int end) {
+        StringBuilder str = new StringBuilder();
+        for (int i = start; i < end; i++) {
+            str.append(tokens.get(i));
+            if (i != end - 1) {
+                str.append(" ");
+            }
+        }
+        return str.toString();
     }
 }
