@@ -2,13 +2,21 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        introduction();
+        Scanner sc  = new Scanner(System.in);
+        interact(sc);
+        sc.close();
+    }
+
+    public static void introduction() {
         String greeting = "    ____________________________________________________________\n"
                 + "     Hello! I'm Duke\n"
                 + "     What can I do for you?\n"
                 + "    ____________________________________________________________\n";
         System.out.println(greeting);
+    }
 
-        Scanner sc  = new Scanner(System.in);
+    public static void interact(Scanner sc) {
         String command = sc.nextLine();
 
         while (!command.equals("bye")) {
@@ -18,7 +26,6 @@ public class Duke {
                     + "\n"
                     + "    ____________________________________________________________\n"
             );
-
             command = sc.nextLine();
         }
 
@@ -26,7 +33,5 @@ public class Duke {
                 + "     Bye. Hope to see you again soon!\n"
                 + "    ____________________________________________________________\n"
         );
-
-        sc.close();
     }
 }
