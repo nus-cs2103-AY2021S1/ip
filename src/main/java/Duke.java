@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -8,6 +9,7 @@ public class Duke {
     // INSTRUCTIONS
     private static final String BYE = "bye";
     private static final String HELP = "help";
+    private static final String LIST = "list";
 
     // User Interaction Text
     // Standardise by using only LINE here. NEWLINE to be used for functions
@@ -20,9 +22,12 @@ public class Duke {
                     LINE; // END OF INTRODUCTIONS
 
     private static final String INSTRUCTIONS =
-            "AVAILABLE INSTRUCTIONS:\n" +
+            "How to use Duke:\n" +
+                    "* Level 2: List. Except for the available instructions, whatever you type is added to my list!\n\n" +
+                    "AVAILABLE INSTRUCTIONS:\n" +
                     " help - Display Available Instructions\n" +
                     " bye - Terminate Duke\n" +
+                    " list - Display current input list\n" +
                     LINE; // END OF INSTRUCTIONS
 
     private static final String OUTRO = "Goodbye. Hope to see you soon!\n" + LINE;
@@ -32,6 +37,8 @@ public class Duke {
         System.out.println(INTRODUCTION);
 
         Scanner sc = new Scanner(System.in);
+        String[] inputList = new String[100];
+        int counter = 0;
 
         // Echo User Instructions
         instructionLoop: while (sc.hasNext()) { // labelling of while-loop
@@ -43,8 +50,21 @@ public class Duke {
                 case HELP:
                     System.out.println(INSTRUCTIONS);
                     break;
+                case LIST:
+                    System.out.println("Your List:");
+                    if (counter == 0) {
+                        System.out.println("Your list is empty!");
+                    } else {
+                        for (int i = 0; i < counter; i++) {
+                            System.out.println((i+1) + ". " + inputList[i]);
+                        }
+                    }
+                    System.out.println(LINE);
+                    break;
                 default:
-                    System.out.println(instruction + "\n" + LINE);
+                    inputList[counter] = instruction;
+                    counter++;
+                    System.out.println("Item Added: " + instruction + "\n" + LINE);
             }
         }
 
