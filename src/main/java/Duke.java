@@ -83,7 +83,7 @@ public class Duke {
                 userList.get(listNumber - 1).completedTask();
                 System.out.println("   ____________________________________________________________");
                 System.out.println("    Nice! I've marked this task as done:");
-                System.out.println(userList.get(listNumber - 1).toString());
+                System.out.println("      " + userList.get(listNumber - 1).toString());
                 System.out.println("   ____________________________________________________________");
 
             } else if ((input.startsWith("deadline") || input.startsWith("event")) || input.startsWith("todo")) {
