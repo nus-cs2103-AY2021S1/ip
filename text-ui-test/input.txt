@@ -18,5 +18,6 @@ deadline    /by
 deadline    /by sometime
 event
 
+delete 1
 list
 bye

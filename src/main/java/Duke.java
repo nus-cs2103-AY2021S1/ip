@@ -75,6 +75,15 @@ public class Duke {
                                                        "Eg. done 1"));
             }
             return new DoneFunction(index);
+        } else if (command.equals("delete")) {
+            int index;
+            try {
+                index = Integer.valueOf(args) - 1;
+            } catch (NumberFormatException e) {
+                return new ErrorFunction(Arrays.asList("You need to tell me the number of the task you want to remove.",
+                                                       "Eg. delete 1"));
+            }
+            return new DeleteFunction(index);
         } else if (command.equals("todo")) {
             if (args.isEmpty()) {
                 return new ErrorFunction("Couldn't add todo! The description of a todo cannot be empty.");
