@@ -16,6 +16,13 @@ public class Duke {
             if(input.equals("bye")) {
                 System.out.println(border + "Bye. Hope to see you again soon!\n" + border);
                 return;
+            } else if(input.equals("list")) {
+                int listLen = storage.size();
+                System.out.println(border.replace("\n", ""));
+                for(int i = 1; i <= listLen; i++) {
+                    System.out.println(i + ". " + storage.get(i - 1));
+                }
+                System.out.println(border);
             } else {
                 storage.add(input);
                 System.out.println(border + "added: " + input + "\n" + border);
