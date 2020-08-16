@@ -1,7 +1,62 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+ ____  __.__
+|    |/ _|__| ____    ____
+|      < |  |/    \  / ___\ 
+|    |  \|  |   |  \/ /_/  >
+|____|__ \__|___|  /\___  /
+        \/       \//_____/
 
+Hello! I'm King
+What can I do for you?
+	== King says =====================
+	 I don't understand you!
+	==================================
+
+	== King says =====================
+	 Got it. I've added this task:
+		[T][?] read book
+	 Now you have 1 tasks in the list.
+	==================================
+
+	== King says =====================
+	 Got it. I've added this task:
+		[D][?] return book (by: Sunday)
+	 Now you have 2 tasks in the list.
+	==================================
+
+	== King says =====================
+	 Got it. I've added this task:
+		[E][?] project meeting (at: Mon 2-4pm)
+	 Now you have 3 tasks in the list.
+	==================================
+
+	== King says =====================
+	 Todo cannot be empty
+	==================================
+
+	== King says =====================
+	 Event description and time CANNOT be empty!
+	==================================
+
+	== King says =====================
+	 Deadline description and time CANNOT be empty!
+	==================================
+
+	== King says =====================
+	Here are the items in your list:
+	1. [T][?] read book
+	2. [D][?] return book (by: Sunday)
+	3. [E][?] project meeting (at: Mon 2-4pm)
+	==================================
+
+	== King says =====================
+	 Nice! I've marked this task as done:
+		[T][?] read book
+	==================================
+
+	== King says =====================
+	 Item 10 not found.
+	==================================
+
+	== King says =====================
+	 Bye. Hope to see you again soon!
+	==================================
