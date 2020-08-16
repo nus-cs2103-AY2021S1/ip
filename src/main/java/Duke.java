@@ -87,7 +87,7 @@ public class Duke {
         String description = Duke.getTaskDescription(Command.EVENT, cmd);
         String[] taskParts = description.split(" /at ", 2);
 
-        if (taskParts.length != 2) {
+        if (taskParts.length != 2 || taskParts[1].equals("")) {
             throw new DukeException(String.format("Error! The description of a %s is missing a date.", Command.EVENT));
         }
 
@@ -100,7 +100,7 @@ public class Duke {
         String description = Duke.getTaskDescription(Command.DEADLINE, cmd);
         String[] taskParts = description.split(" /by ", 2);
 
-        if (taskParts.length != 2) {
+        if (taskParts.length != 2 || taskParts[1].equals("")) {
             throw new DukeException(String.format("Error! The description of a %s is missing a date.", Command.DEADLINE));
         }
 
