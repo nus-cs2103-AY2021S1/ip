@@ -1,5 +1,5 @@
 public class Events extends Task {
-    String time;
+    protected String time;
 
     public Events(String task) {
         // date = 'at Sunday 2-4pm'

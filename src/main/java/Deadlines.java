@@ -1,5 +1,5 @@
 public class Deadlines extends Task {
-    String date;
+    protected String date;
 
     public Deadlines(String task) {
         // date = 'by Sunday'
