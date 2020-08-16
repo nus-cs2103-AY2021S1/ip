@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static final String DIVIDER = "_________________________________________________________________________________";
+    private static final String DIVIDER = "___________________________________________________________________________";
 
     private static final String LOGO = "             _        ______   _____    ______   _____  \n" +
             "     /\\     | |      |  ____| |  __ \\  |  ____| |  __ \\ \n" +
@@ -20,6 +20,11 @@ public class Duke {
     }
 
     private static String convertTaskListToString(List<Task> tasks) {
+
+        if (tasks.isEmpty()) {
+            return "You have no tasks!";
+        }
+
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -43,7 +48,7 @@ public class Duke {
 
     private static String addTaskToList(List<Task> tasks, Task task) {
         tasks.add(task);
-        return String.format("Got it. I've added this task: \n %s \nNow you have %d tasks in the list",
+        return String.format("Got it. I've added this task: \n %s \n Now you have %d tasks in the list",
                 task.toString(), tasks.size());
     }
 
