@@ -37,6 +37,12 @@ public class Duke {
         System.out.println("\t" + message);
         System.out.println("\t____________________________________________________________");
     }
+    private static void printAddTask(Task t) {
+        String[] output = new String[] {
+                "Got it. I've added this task: ", t.toString(), "Now you have " + taskList.size() + " tasks in the list."
+        };
+        println(output);
+    }
 
     private static void intro() {
         String[] msg = new String[] {"Hello! I'm KING!", "What can I do for you?"} ;
@@ -72,6 +78,26 @@ public class Duke {
         }
     }
 
+    private static void todo(String todo) {
+        ToDo todo1 = new ToDo(todo);
+        taskList.add(todo1);
+        printAddTask(todo1);
+    }
+
+    private static void deadline(String dl) {
+        String[] split = dl.split("/by");
+        Deadline deadline = new Deadline(split[0].strip(), split[1].strip());
+        taskList.add(deadline);
+        printAddTask(deadline);
+    }
+
+    private static void event(String ev) {
+        String[] split = ev.split("/at");
+        Event event = new Event(split[0].strip(), split[1].strip());
+        taskList.add(event);
+        printAddTask(event);
+    }
+
     private static void process(String msg) {
         if (msg.equals("bye"))
             exit();
@@ -79,9 +105,13 @@ public class Duke {
             list();
         else if (msg.startsWith("done "))
             done(msg.substring(5));
-        else {
-            println(new String[]{"added: " + msg});
-            taskList.add(new Task(msg));
-        }
+        else if (msg.startsWith("todo "))
+            todo(msg.substring(5));
+        else if (msg.startsWith("deadline "))
+            deadline(msg.substring(9));
+        else if (msg.startsWith("event "))
+            event(msg.substring(6));
+        else
+            println("Invalid Command!!");
     }
 }
