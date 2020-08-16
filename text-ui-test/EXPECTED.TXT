@@ -28,4 +28,16 @@ Here are the tasks in your list:
 1.[T][✘] borrow book
 2.[D][✓] return book (by: Sunday)
 3.[E][✘] project meeting (at: Mon 2-4pm)
+Got it. I've added this task:
+	[T][✘] join sports club
+Now you have 4 tasks in list.
+Nice! I've marked this task as done:
+[T][✓] join sports club
+Noted. I've removed this task: 
+	[E][✘] project meeting (at: Mon 2-4pm)
+Now you have 3 tasks in the list
+Here are the tasks in your list: 
+1.[T][✘] borrow book
+2.[D][✓] return book (by: Sunday)
+3.[T][✓] join sports club
 Bye. Hope to see you again soon!

@@ -5,4 +5,8 @@ event project meeting /at Mon 2-4pm
 list
 done 2
 list
+todo join sports club
+done 4
+delete 3
+list
 bye

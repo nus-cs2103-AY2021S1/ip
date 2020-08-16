@@ -33,6 +33,13 @@ public class Duke {
           System.out.println("Nice! I've marked this task as done:");
           System.out.printf("%s\n", task);
           break;
+        case "delete":
+          int delete = scanner.nextInt() - 1;
+          System.out.println("Noted. I've removed this task: ");
+          System.out.printf("\t%s\n", dataArrayList.get(delete));
+          dataArrayList.remove(delete);
+          System.out.printf("Now you have %o tasks in the list\n", dataArrayList.size());
+          break;
         default:
           if (!input.equals("bye")) {
             String addMessage = "Got it. I've added this task:";
