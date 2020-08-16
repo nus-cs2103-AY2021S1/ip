@@ -34,6 +34,7 @@ public class Duke {
                     System.out.println((i + 1) + ". " + list.get(i));
                 }
             }
+
             else if (output.indexOf("done ") == 0) {
 
                 String[] arr = output.split(" ");
@@ -48,7 +49,30 @@ public class Duke {
                         System.out.println(list.get(index));
                     }
                     else {
-                        System.out.println("☹ OOPS!!! parameter given :-(");
+                        System.out.println("☹ OOPS!!! Invalid parameter given :-(");
+                    }
+
+                } catch (NumberFormatException nfe) {
+                    System.out.println("☹ OOPS!!! Invalid parameter given :-(");
+                }
+            }
+
+            else if (output.indexOf("delete ") == 0) {
+
+                String[] arr = output.split(" ");
+
+                try {
+
+                    int index = Integer.parseInt(arr[1]) - 1;
+
+                    if (index > -1 && index < list.size()) {
+                        list.remove(index);
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(list.get(index));
+                        System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    }
+                    else {
+                        System.out.println("☹ OOPS!!! Invalid parameter given :-(");
                     }
 
                 } catch (NumberFormatException nfe) {
