@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Duke {
 
     private static final String LOGO = " ____        _        \n"
@@ -6,8 +9,7 @@ public class Duke {
                                     + "| |_| | |_| |   <  __/\n"
                                     + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static final Task[] taskList = new Task[100];
-    private static int taskIndex = 0;
+    private static final List<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         greet();
@@ -43,32 +45,43 @@ public class Duke {
             case "event":
                 handleEvent(rest);
                 break;
+            case "delete":
+                handleDelete(rest);
+                break;
             default:
                 throw new DukeException("Unrecognized command!");
         }
     }
 
     private static void handleList() {
-        if (taskIndex == 0) {
+        if (taskList.isEmpty()) {
             DukeOut.print("You have no tasks!");
             return;
         }
 
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n    ");
-        for (int i = 0; i < taskIndex; ++i) {
-            sb.append((i + 1) + "." + taskList[i] + "\n    ");
+        for (int i = 0; i < taskList.size(); ++i) {
+            sb.append((i + 1) + "." + taskList.get(i) + "\n    ");
         }
         sb.setLength(sb.length() - 5);
         DukeOut.print(sb.toString());
     }
 
     private static void handleDone(String rest) throws DukeException {
-        int taskDone = Integer.parseInt(rest) - 1;
-        if (taskDone < -1 || taskDone >= taskIndex) {
+        if (rest == null) {
+            throw new DukeException("Specify a task!");
+        }
+        int taskDone;
+        try {
+            taskDone = Integer.parseInt(rest) - 1;
+        } catch (NumberFormatException ex) {
+            throw new DukeException("Specify a valid task number!");
+        }
+        if (taskDone < 0 || taskDone >= taskList.size()) {
             throw new DukeException("No such task!");
         }
         markTaskDone(taskDone);
-        DukeOut.print("Nice! I've marked this task as done:\n      " + taskList[taskDone]);
+        DukeOut.print("Nice! I've marked this task as done:\n      " + taskList.get(taskDone));
     }
 
     private static void handleTodo(String rest) throws DukeException {
@@ -112,6 +125,22 @@ public class Duke {
         addToList(new Event(eventName, at));
     }
 
+    private static void handleDelete(String rest) throws DukeException {
+        if (rest == null) {
+            throw new DukeException("Specify a task!");
+        }
+        int deleteIndex;
+        try {
+            deleteIndex = Integer.parseInt(rest) - 1;
+        } catch (NumberFormatException ex) {
+            throw new DukeException("Specify a valid task number!");
+        }
+        if (deleteIndex < 0 || deleteIndex >= taskList.size()) {
+            throw new DukeException("No such task!");
+        }
+        deleteFromList(deleteIndex);
+    }
+
     private static void greet() {
         String greeting = "Hi! I am\n" + LOGO + "\n" + "What can I do for you?";
         System.out.println(greeting);
@@ -124,13 +153,22 @@ public class Duke {
     }
 
     private static void addToList(Task task) {
-        taskList[taskIndex] = task;
-        ++taskIndex;
-        DukeOut.print("Got it. I've added this task:\n      " + task + "\n    " + "Now you have " + taskIndex + " task(s) in the list.");
+        taskList.add(task);
+        DukeOut.print("Got it. I've added this task:\n      " + task + "\n    " + taskSizeString());
+    }
+
+    private static void deleteFromList(int index) {
+        Task taskToDelete = taskList.get(index);
+        taskList.remove(index);
+        DukeOut.print("Noted. I've removed this task:\n      " + taskToDelete + "\n    " + taskSizeString());
+    }
+
+    private static String taskSizeString() {
+        return "Now you have " + taskList.size() + " task(s) in the list.";
     }
 
     private static void markTaskDone(int taskNum) {
-        Task task = taskList[taskNum];
+        Task task = taskList.get(taskNum);
         task.markDone();
     }
 }
