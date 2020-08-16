@@ -1,4 +1,4 @@
-public class InvalidTaskException extends RuntimeException {
+public class InvalidTaskException extends InvalidInputException {
     public InvalidTaskException(String message) {
         super(message);
     }

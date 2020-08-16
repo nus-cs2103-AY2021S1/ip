@@ -37,45 +37,46 @@ public class Duke {
     }
 
     private static void handleCommand(String input) {
-        String[] tokens = input.split(" ");
-        String command = tokens[0].toLowerCase();
-        switch (command) {
-        case "list": // show tasks available
-            Duke.displayTasks();
-            break;
-        case "done": {
-            // ASSUMPTION: valid input provided
-            int index = Integer.parseInt(tokens[1]) - 1;
-            Task task = TASKS.get(index);
-            task.markDone();
-            Duke.displayMessages(
-                    "Okay. So you've done:",
-                    task.toString());
-        }
-        break;
-        case "delete":
-            int index = Integer.parseInt(tokens[1]) - 1;
-            Task task = TASKS.get(index);
-            TASKS.remove(index);
-            Duke.displayMessages(
-                    "Right, you no longer want me to track:",
-                    task.toString(),
-                    Duke.getTasksLeftMessage());
-            break;
-        case "todo":
-        case "deadline":
-        case "event": // it's a new task
-            try {
-                Duke.addTask(command, input);
-            } catch (InvalidTaskException e) {
-                Duke.displayMessages(e.getMessage());
+        try {
+            String[] tokens = input.split(" ");
+            String command = tokens[0].toLowerCase();
+            switch (command) {
+            case "list": // show tasks available
+                Duke.displayTasks();
+                break;
+            case "done": {
+                if (tokens.length < 2) {
+                    throw new InvalidInputException("Um, you need to tell me what it is you've done.");
+                }
+                int index = Integer.parseInt(tokens[1]) - 1;
+                Task task = TASKS.get(index);
+                task.markDone();
+                Duke.displayMessages(
+                        "Okay. So you've done:",
+                        task.toString());
             }
             break;
-        default:
-            Duke.displayMessages("Um, I don't get what you're saying.");
-            break;
+            case "delete":
+                int index = Integer.parseInt(tokens[1]) - 1;
+                Task task = TASKS.get(index);
+                TASKS.remove(index);
+                Duke.displayMessages(
+                        "Right, you no longer want me to track:",
+                        task.toString(),
+                        Duke.getTasksLeftMessage());
+                break;
+            case "todo":
+            case "deadline":
+            case "event": // it's a new task
+                Duke.addTask(command, input);
+                break;
+            default:
+                Duke.displayMessages("Um, I don't get what you're saying.");
+                break;
+            }
+        } catch (InvalidInputException e) {
+            Duke.displayMessages(e.getMessage());
         }
-
     }
 
     // TODO: Consider some cleaner way of validating, perhaps a factory method for each Task
