@@ -11,7 +11,7 @@ public class Duke {
             int taskNumber = 1;
             while (taskNumber < taskList.size() + 1) {
                 Task task = taskList.get(taskNumber - 1);
-                System.out.println(taskNumber + ". [" + task.getStatusIcon() + "] " + task.getDescription());
+                System.out.println(taskNumber + "." + task.toString());
                 taskNumber++;
             }
         }
@@ -21,8 +21,7 @@ public class Duke {
         Task task = taskList.get(taskNumber - 1);
         task.markAsDone();
         taskList.set(taskNumber - 1, task);
-        System.out.println("Nice! I've marked this task as done:\n"
-                + "  [" + task.getStatusIcon() + "] " + task.getDescription());
+        System.out.println("Nice! I've marked this task as done:\n" + "  " + task.toString());
     }
 
     public static void main(String[] args) {
@@ -34,10 +33,11 @@ public class Duke {
 
         // Receive commands
         Scanner scanner = new Scanner(System.in);
-        String command = "";
+        String command;
 
         while (true) {
             command = scanner.nextLine();
+            String firstWordOfCommand = command.split(" ", 2)[0];
 
             if (command.equals("list")) {
                 printTaskList(taskList);
@@ -47,14 +47,29 @@ public class Duke {
                 break;
 
             // Mark a task as done
-            } else if (command.split(" ", 2)[0].equals("done")) {
+            } else if (firstWordOfCommand.equals("done")) {
                 int taskNumber = Integer.parseInt(command.split(" ", 2)[1]);
                 markTaskAsDone(taskList, taskNumber);
 
             // Add task to task list
             } else {
-                taskList.add(new Task(command));
-                System.out.println("added: " + command);
+                Task task;
+                String remainingWordsOfCommand = command.split(" ", 2)[1];
+                if (firstWordOfCommand.equals("todo")) {
+                    task = new Todo(remainingWordsOfCommand);
+                } else if (firstWordOfCommand.equals("deadline")) {
+                    String description = remainingWordsOfCommand.split(" /by ")[0];
+                    String by = remainingWordsOfCommand.split(" /by ")[1];
+                    task = new Deadline(description, by);
+                } else { // Event
+                    String description = remainingWordsOfCommand.split(" /at ")[0];
+                    String at = remainingWordsOfCommand.split(" /at ")[1];
+                    task = new Event(description, at);
+                }
+                taskList.add(task);
+                System.out.println("Got it. I've added this task:\n"
+                        + "  " + task.toString() + "\n"
+                        + "Now you have " + taskList.size() + " tasks in the list");
             }
         }
     }
