@@ -117,20 +117,37 @@ public class Duke {
     }
 
     public static void toDoCommand(List<Task> list, String command) {
-        int spaceIndex = command.indexOf(" ");
-        Task task = new ToDoTask(command.substring(spaceIndex + 1));
-        list.add(task);
+        try {
+            int spaceIndex = command.indexOf(" ");
 
-        System.out.println("    ____________________________________________________________\n"
-                + "     Got it. I've added this task:\n"
-                + "     "
-                + task
-                + "\n"
-                + "     Now you have "
-                + list.size()
-                + " task(s) in the list.\n"
-                + "    ____________________________________________________________\n"
-        );
+            if (spaceIndex == -1) {
+                throw new EmptyActionException(); // "todo"
+            }
+
+            String action = command.substring(spaceIndex + 1);
+
+            if (action.toLowerCase().contains("/by") || action.toLowerCase().contains("/at")) {
+                throw new InvalidActionException(); // "todo borrow book /by Sunday" etc
+            } else if (action.replaceAll(" ", "").equals("")) {
+                throw new EmptyActionException(); // "todo     "
+            } else {
+                Task task = new ToDoTask(command.substring(spaceIndex + 1));
+                list.add(task);
+
+                System.out.println("    ____________________________________________________________\n"
+                        + "     Got it. I've added this task:\n"
+                        + "     "
+                        + task
+                        + "\n"
+                        + "     Now you have "
+                        + list.size()
+                        + " task(s) in the list.\n"
+                        + "    ____________________________________________________________\n"
+                );
+            }
+        } catch (DukeException e) {
+            System.out.println(e);
+        }
     }
 
     public static void deadlineCommand(List<Task> list, String command) {
