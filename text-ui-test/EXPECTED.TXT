@@ -16,7 +16,7 @@ Hello I am
 Please say something.
 ______________________________
 ______________________________
-Sorry, I don't know what you just said.
+Sorry, I don't understand what you just said.
 ______________________________
 ______________________________
 Added ToDo 'finish work' to your list!
@@ -27,8 +27,8 @@ ______________________________
 ______________________________
 Added Event 'rest' to your list!
 ______________________________
-Here is your list:
 ______________________________
+Here is your list:
 1.[T][✗] finish work
 2.[D][✗] cs2103 ip (by: Aug 20th 2359)
 3.[E][✗] rest (at: never)
@@ -37,8 +37,8 @@ ______________________________
 Marked this task as done:
 [E][✓] rest (at: never)
 ______________________________
-Here is your list:
 ______________________________
+Here is your list:
 1.[T][✗] finish work
 2.[D][✗] cs2103 ip (by: Aug 20th 2359)
 3.[E][✓] rest (at: never)
