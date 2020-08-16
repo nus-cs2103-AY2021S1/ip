@@ -33,9 +33,29 @@ public class Duke {
                 int taskNum = Integer.parseInt(sc.nextLine());
                 tasks.get(taskNum - 1).markDone();
                 System.out.println(line);
-            } else {
-                System.out.println("*added: " + cmd);
-                tasks.add(new Task(cmd));
+            } else if (cmd.equals("todo")) {
+                System.out.println("what is the name of the todo: ");
+                String todoName = sc.nextLine();
+                tasks.add(new Todo(todoName));
+                System.out.println("*added: " + todoName);
+                System.out.println(line);
+            } else if (cmd.equals("deadline")) {
+                System.out.println("what is the name of the task: ");
+                String deadlineName = sc.nextLine();
+                System.out.println("when is the due date: ");
+                String dueDate = sc.nextLine();
+                tasks.add(new Deadline(deadlineName, dueDate));
+                System.out.println("*added: " + deadlineName);
+                System.out.println(line);
+            } else if (cmd.equals("event")){
+                System.out.println("what is the name of the event: ");
+                String eventName = sc.nextLine();
+                System.out.println("when does the event start: ");
+                String start = sc.nextLine();
+                System.out.println("when does the event end: ");
+                String end = sc.nextLine();
+                tasks.add(new Event(eventName, start, end));
+                System.out.println("*added: " + eventName);
                 System.out.println(line);
             }
         }
@@ -52,5 +72,6 @@ public class Duke {
             System.out.println(i + ". " + task);
             i++;
         }
+        System.out.println(String.format("You have a total of %d tasks",  i - 1));
     }
 }
