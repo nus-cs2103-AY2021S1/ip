@@ -1,9 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
-    private static Task[] tasks = new Task[100];
-    private static int numOfTasks = 0;
+    private static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -65,10 +65,10 @@ public class Duke {
 
     private static String list() {
         StringBuilder str = new StringBuilder("\t Here are the tasks in your list:\n");
-        for (int i = 0; i < numOfTasks; i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             str.append("\t ").append(i + 1).append(".")
-                    .append(tasks[i].toString());
-            if (i != numOfTasks - 1) {
+                    .append(tasks.get(i).toString());
+            if (i != tasks.size() - 1) {
                 str.append("\n");
             }
         }
@@ -82,7 +82,7 @@ public class Duke {
         } else {
             try {
                 int index = (Integer.parseInt(arr[1])) - 1;
-                Task task = tasks[index];
+                Task task = tasks.get(index);
                 task.markAsDone();
                 return "\t Nice! I've marked this task as done:\n\t\t"
                         + task.toString();
@@ -94,8 +94,7 @@ public class Duke {
     }
 
     private static void addTaskToList(Task task) {
-        tasks[numOfTasks] = task;
-        numOfTasks++;
+        tasks.add(task);
     }
 
     private static String addTask(String input) {
@@ -138,7 +137,7 @@ public class Duke {
         addTaskToList(task);
         return "\t Got it. I've added this task: \n"
                 + "\t\t" + task.toString() + "\n"
-                + "\t Now you have " + numOfTasks + " tasks in this list.";
+                + "\t Now you have " + tasks.size() + " tasks in this list.";
     }
 
 }
