@@ -8,9 +8,91 @@ public class Duke {
     // Collection of user's tasks
     static List<Task> taskItems = new ArrayList<>();
 
+    /**
+     * Sends a greeting to user and indicates the INTRUBOT is active.
+     */
+    static void start() {
+        String logo =
+                "8888888 888b    888 88888888888 8888888b.  888     888 888888b.    .d88888b. 88888888888 \n" +
+                        "  888   8888b   888     888     888   Y88b 888     888 888  \"88b  d88P\" \"Y88b    888     \n" +
+                        "  888   88888b  888     888     888    888 888     888 888  .88P  888     888    888     \n" +
+                        "  888   888Y88b 888     888     888   d88P 888     888 8888888K.  888     888    888     \n" +
+                        "  888   888 Y88b888     888     8888888P\"  888     888 888  \"Y88b 888     888    888     \n" +
+                        "  888   888  Y88888     888     888 T88b   888     888 888    888 888     888    888     \n" +
+                        "  888   888   Y8888     888     888  T88b  Y88b. .d88P 888   d88P Y88b. .d88P    888     \n" +
+                        "8888888 888    Y888     888     888   T88b  \"Y88888P\"  8888888P\"   \"Y88888P\"     888";
+        printReply(replyFormatter("ITS ME: \n" + logo + "\nI want to know EVERYTHING ABOUT YOU"));
+    }
+
+    // EventHandlers
+    static void handleDone(String reply) throws DukeException {
+        try {
+            int itemNumber = Integer.parseInt(reply.substring(5, reply.length())) - 1;
+            Task task = taskItems.get(itemNumber);
+            task.markDone();
+            printReply(replyFormatter("Nice! I've marked this task as done:\n" + task.toString()));
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Task number does not exist");
+        }
+    }
+
+
+    /**
+     * Parses user input and carry out operations on user's tasks
+     */
+    static void replyHandler(String reply) throws DukeException {
+            String[] replyArray = reply.split(" ");
+            String command = replyArray[0];
+            if (command.equals("bye")) {
+                printReply(replyFormatter(reply));
+                System.exit(0);
+            } else if (command.equals("list")) {
+                printReply(replyFormatter(listFormatter(taskItems)));
+            } else {
+                try {
+                    switch (command) {
+                        case "done":
+                            handleDone(reply);
+                            break;
+                        case "todo":
+                            Task newTodo = new ToDo(reply.substring(5));
+                            taskItems.add(newTodo);
+                            printReply(addTaskReplyFormatter(newTodo));
+                            break;
+                        case "deadline":
+                            String[] taskAndTimeByArray = reply.split(" /by ");
+                            String deadlineDescription = taskAndTimeByArray[0].substring(9);
+                            String by = taskAndTimeByArray[1];
+                            Task newDeadline = new Deadline(deadlineDescription, by);
+                            taskItems.add(newDeadline);
+                            printReply(addTaskReplyFormatter(newDeadline));
+                            break;
+                        case "event":
+                            String[] taskAndTimeAtArray = reply.split(" /at ");
+                            String eventDescription = taskAndTimeAtArray[0].substring(6);
+                            String at = taskAndTimeAtArray[1];
+                            Task newEvent = new Event(eventDescription, at);
+                            taskItems.add(newEvent);
+                            printReply(addTaskReplyFormatter(newEvent));
+                            break;
+                        default:
+                            throw new DukeException("Invalid Command Exception");
+                    }
+                } catch (StringIndexOutOfBoundsException e) {
+                    throw new DukeException(String.format("No arguments specified for %s", command));
+                }
+            }
+
+    }
+
+    // Formatting and UI
     static String replyFormatter(String reply) {
         String partition = "__________________________";
         return String.format(partition + "\n%s\n" + partition, reply);
+    }
+
+    static void errorReply(String reply) {
+        System.out.println(replyFormatter(String.format("Something is amiss `(OCO)/ !!: %s", reply)));
     }
 
     static String addTaskReplyFormatter(Task task) {
@@ -30,49 +112,19 @@ public class Duke {
         System.out.println(reply);
     }
 
+    /**
+     * main driver function
+     * @param args
+     */
     public static void main(String[] args) {
-        String logo =
-                "8888888 888b    888 88888888888 8888888b.  888     888 888888b.    .d88888b. 88888888888 \n" +
-                        "  888   8888b   888     888     888   Y88b 888     888 888  \"88b  d88P\" \"Y88b    888     \n" +
-                        "  888   88888b  888     888     888    888 888     888 888  .88P  888     888    888     \n" +
-                        "  888   888Y88b 888     888     888   d88P 888     888 8888888K.  888     888    888     \n" +
-                        "  888   888 Y88b888     888     8888888P\"  888     888 888  \"Y88b 888     888    888     \n" +
-                        "  888   888  Y88888     888     888 T88b   888     888 888    888 888     888    888     \n" +
-                        "  888   888   Y8888     888     888  T88b  Y88b. .d88P 888   d88P Y88b. .d88P    888     \n" +
-                        "8888888 888    Y888     888     888   T88b  \"Y88888P\"  8888888P\"   \"Y88888P\"     888";
-       printReply(replyFormatter("ITS ME: \n" + logo));
+        start();
         Scanner sc = new Scanner(System.in);
         while(sc.hasNextLine()) {
             String reply = sc.nextLine();
-            if (reply.equals("bye")) {
-                printReply(replyFormatter(reply));
-                break;
-            } else if (reply.startsWith("done ")) {
-                Task task = taskItems.get(Integer.parseInt(reply.substring(5, reply.length())) - 1);
-                task.markDone();
-                printReply(replyFormatter("Nice! I've marked this task as done:\n" + task.toString()));
-            } else if (reply.startsWith("todo ")) {
-                Task newTodo = new ToDo(reply.substring(5));
-                taskItems.add(newTodo);
-                printReply(addTaskReplyFormatter(newTodo));
-            } else if (reply.startsWith("deadline ")) {
-                String[] taskTimeArray = reply.split(" /by ");
-                String description = taskTimeArray[0].substring(9);
-                String by = taskTimeArray[1];
-                Task newDeadline = new Deadline(description, by);
-                taskItems.add(newDeadline);
-                printReply(addTaskReplyFormatter(newDeadline));
-            } else if (reply.startsWith("event ")) {
-                String[] taskTimeArray = reply.split(" /at ");
-                String description = taskTimeArray[0].substring(6);
-                String by = taskTimeArray[1];
-                Task newEvent = new Event(description, by);
-                taskItems.add(newEvent);
-                printReply(addTaskReplyFormatter(newEvent));
-            } else if (reply.equals("list")) { // Show all in list
-                printReply(replyFormatter(listFormatter(taskItems)));
-            } else {
-                printReply(replyFormatter("This input is not valid"));
+            try {
+                replyHandler(reply);
+            } catch (DukeException duked) {
+                errorReply(duked.getMessage());
             }
         }
     }
