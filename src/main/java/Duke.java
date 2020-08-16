@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -17,6 +16,11 @@ public class Duke {
     private static final String HELP = "help";
     private static final String LIST = "list";
     private static final String DONE = "done";
+    private static final String TODO = "todo";
+    private static final String DEADLINE = "deadline";
+    private static final String BY_INDICATOR = "/by";
+    private static final String EVENT = "event";
+    private static final String AT_INDICATOR = "/at";
 
     // User Interaction Text
     // Standardise by using only LINE here. NEWLINE to be used for functions
@@ -25,20 +29,24 @@ public class Duke {
             LINE + "\n" +
                     "Hello! I am Duke, your Personal Assistant!\n" + // START OF INTRODUCTIONS
                     "What can I do for you today?\n" +
-                    "* Type \"help\" to see the available instructions!\n" +
+                    "Type \"help\" to see the available instructions!\n" +
                     LINE; // END OF INTRODUCTIONS
 
     private static final String INSTRUCTIONS =
-            "How to use Duke:\n" +
-                    "* Level 3: Tasking. Except for the available instructions, whatever you type is added as a DukeTask!\n" +
-                    "* Do try to avoid ambiguous inputs, such as [keywords] + [random gibberish]\n" +
+            "How to use Duke:\n" + // Guide to Duke
+                    "* Level 4: Specific Tasks. Follow the Task Input Instructions for more\n" +
+                    "* Do try to avoid ambiguous inputs, " +
+                        "such as [keywords] + [random gibberish] as I cannot recognise them!\n" +
                     "\tI'm not very smart (yet) :( \n\n" +
-                    "AVAILABLE INSTRUCTIONS:\n" +
+                    "TASK INPUT INSTRUCTIONS:\n" + // Task Input Instructions
+                    " todo [Task Description] - Inputs a TODO DukeTask\n" +
+                    " deadline [Task Description] /by [Date] - Inputs a DEADLINE DukeTask, along with INDICATOR /by\n" +
+                    " event [Task Description] /at [Date] - Inputs an EVENT DukeTask, along with INDICATOR /at\n\n" +
+                    "AVAILABLE INSTRUCTIONS:\n" + // Available Instructions
                     " help - Display Available Instructions\n" +
                     " bye - Terminate Duke\n" +
                     " list - Display current DukeTasks\n" +
-                    " done [Task Number] - Complete the specified task number (Specify in numeric format!) Eg: \"done 3\"\n" +
-                    LINE; // END OF INSTRUCTIONS
+                    " done [Task Number] - Complete the specified task number (Specify in numeric format!) Eg: \"done 3\""; // END OF INSTRUCTIONS
 
     private static final String OUTRO =
             "Goodbye. Hope to see you soon!\n" +
@@ -53,33 +61,26 @@ public class Duke {
         DukeTask[] inputList = new DukeTask[100];
         int counter = 0;
 
-        // Echo User Instructions
+        // User Instructions
         instructionLoop: while (sc.hasNextLine()) { // labelling of while-loop
             String instruction = sc.nextLine().trim();
-            int instrLen = instruction.split(" ").length;
+            String[] instructionArray = instruction.split(" ");
+            int instrLen = instructionArray.length;
             String indicator = instruction.split(" ")[0]; // indicates if instruction or not
 
-            boolean addInstruction = false; // assume it is an instruction by default
-            String tag = ""; // used for ambiguous inputs
-
             switch (indicator) {
-                case "": // no inputs
-                    System.out.println("Please key in a valid input!");
-                    break;
                 case BYE:
                     if (instrLen == 1) {
                         break instructionLoop;
                     } else {
-                        addInstruction = true;
-                        tag = BYE;
+                        System.out.println("Please key in a valid instruction! (bye)");
                     }
                     break;
                 case HELP:
                     if (instrLen == 1) {
                         System.out.println(INSTRUCTIONS);
                     } else {
-                        addInstruction = true;
-                        tag = HELP;
+                        System.out.println("Please key in a valid instruction! (help)");
                     }
                     break;
                 case LIST:
@@ -91,11 +92,10 @@ public class Duke {
                             for (int i = 0; i < counter; i++) {
                                 System.out.println((i + 1) + ". " + inputList[i]);
                             }
+                            System.out.println(getTaskStatus(inputList, counter));
                         }
-                        System.out.println(LINE);
                     } else {
-                        addInstruction = true;
-                        tag = LIST;
+                        System.out.println("Please key in a valid instruction! (list)");
                     }
                     break;
                 case DONE:
@@ -112,26 +112,59 @@ public class Duke {
                                 inputList[idx].markAsDone();
                                 System.out.println(inputList[idx]);
                             }
-                            System.out.println(LINE);
                             break;
                         }
                     } // if len != 2 or the input is not an integer
-                    addInstruction = true;
-                    tag = DONE;
+                    System.out.println("Please key in a valid instruction! (done)");
+                    break;
+                case TODO:
+                    TodoTask todotask = new TodoTask(mergeArray(instructionArray, 1, instrLen));
+                    inputList[counter] = todotask;
+                    counter++;
+                    System.out.println("Task Added: " + todotask.toString());
+                    break;
+                case DEADLINE:
+                    int byIndex = findIndex(instructionArray, BY_INDICATOR);
+                    if (byIndex == -1) {
+                        System.out.println("Please use correct format for deadline tasks! [/by]");
+                    } else {
+                        String deadlineDesc = mergeArray(instructionArray, 1, byIndex);
+                        String deadlineDatetime = mergeArray(instructionArray, byIndex + 1, instrLen);
+                        if (deadlineDesc.equals("")) {
+                            System.out.println("Please enter description");
+                        } else if (deadlineDatetime.equals("")) {
+                            System.out.println("Please enter date and time");
+                        } else {
+                            DeadlineTask deadlinetask = new DeadlineTask(deadlineDesc, deadlineDatetime);
+                            inputList[counter] = deadlinetask;
+                            counter++;
+                            System.out.println("Task Added: " + deadlinetask.toString());
+                        }
+                    }
+                    break;
+                case EVENT:
+                    int atIndex = findIndex(instructionArray, AT_INDICATOR);
+                    if (atIndex == -1) {
+                        System.out.println("Please use correct format for deadline tasks! [/at]");
+                    } else {
+                        String eventDesc = mergeArray(instructionArray, 1, atIndex);
+                        String eventDatetime = mergeArray(instructionArray, atIndex + 1, instrLen);
+                        if (eventDesc.equals("")) {
+                            System.out.println("Please enter description");
+                        } else if (eventDatetime.equals("")) {
+                            System.out.println("Please enter date and time");
+                        } else {
+                            EventTask eventTask = new EventTask(eventDesc, eventDatetime);
+                            inputList[counter] = eventTask;
+                            counter++;
+                            System.out.println("Task Added: " + eventTask.toString());
+                        }
+                    }
                     break;
                 default:
-                    addInstruction = true;
-                    tag = "";
+                    System.out.println("Please key in a valid instruction! (unknown)");
             }
-
-            if (addInstruction) {
-                if (!tag.equals("")) {
-                    System.out.printf("It seems your DukeTask starts with a \"%s\", try not to use it as \"%s\" is a keyword!\n%n", tag, tag);
-                }
-                inputList[counter] = new DukeTask(instruction);
-                counter++;
-                System.out.println("Task Added: " + instruction + "\n" + LINE);
-            }
+            System.out.println(LINE);
         }
 
         // OUTRO
@@ -148,5 +181,36 @@ public class Duke {
             return false;
         }
         return true;
+    }
+
+    // Merges the String array into one string, from index 1, until (not including) index end
+    private static String mergeArray(String[] array, int start, int end) {
+        StringBuilder output = new StringBuilder();
+        for (int i = start; i < end; i++) {
+            output.append(array[i]).append(" ");
+        }
+        return output.toString().trim();
+    }
+
+    private static int findIndex(String[] array, String regex) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].equals(regex)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private static String getTaskStatus(DukeTask[] tasks, int counter) {
+        int done = 0;
+        int notDone = 0;
+        for (int i = 0; i < counter; i++) {
+            if (tasks[i].getDoneStatus()) {
+                done++;
+            } else {
+                notDone++;
+            }
+        }
+        return String.format("You now have %d %s done, and %d %s not done", done, done == 1 ? "task" : "tasks", notDone, notDone == 1 ? "task" : "tasks");
     }
 }
