@@ -12,11 +12,15 @@ Here are the tasks in your list:
 1.[T][✘] borrow book
 2.[D][✘] return book (by: Sunday)
 3.[E][✘] project meeting (at: Mon 2-4pm)
+That task does not exist in the list!
 I have marked this task as done: 
 [T][✓] borrow book
 Here are the tasks in your list:
 1.[T][✓] borrow book
 2.[D][✘] return book (by: Sunday)
 3.[E][✘] project meeting (at: Mon 2-4pm)
+Invalid command!
+Invalid command!
+Invalid command!
 Thanks for chatting with me, see you soon!
 ==========================================
