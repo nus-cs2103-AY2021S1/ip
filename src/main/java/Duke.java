@@ -77,12 +77,11 @@ public class Duke {
                         input = sc.nextLine();
                         continue;
                     }
-                } /*else if (input.startsWith("delete")){
+                } else if (input.startsWith("delete")){
                     System.out.println(" Noted. I've removed this task:");
                     Task theTask = toDoList.remove(Integer.parseInt(input.substring(7))-1);
                     System.out.println(theTask.getCurrentShortStatus());
-                 } */
-                else {
+                 } else {
                     System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     System.out.println(" "+"-----------------");
                     input = sc.nextLine();
