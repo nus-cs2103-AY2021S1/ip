@@ -1,3 +1,5 @@
+package utils;
+
 /**
  * Responsible for the formatting of output from <i>Duke</i>.
  */

@@ -1,3 +1,10 @@
+import enums.Command;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.TaskManager;
+import tasks.ToDo;
+import utils.PrettyPrinter;
+import utils.ResourceHandler;
 import java.util.Scanner;
 
 /**
@@ -24,46 +31,49 @@ public class Repl {
         prettyPrinter.print(ResourceHandler.getString("repl.greeting"));
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            String command = line.split(" ")[0];
+            String firstToken = line.split(" ")[0];
+            Command command;
             String[] args;
-            switch (command) {
-                case "bye":
-                    prettyPrinter.print(ResourceHandler.getString("repl.farewell"));
-                    return;
-                case "deadline":
-                    line = line.replaceFirst("^deadline\\s*", "");
-                    args = line.split("\\s*/by\\s*");
-                    String deadlineName = args[0];
-                    String dueDate = args[1];
-                    prettyPrinter.print(taskManager.addTask(new Deadline(deadlineName, dueDate)));
-                    break;
-                case "done":
-                    try {
-                        line = line.replaceFirst("^done\\s*", "");
-                        args = line.split("");
-                        int listIndex = Integer.parseInt(args[0]) - 1;
-                        prettyPrinter.print(taskManager.markAsDone(listIndex));
-                    } catch (Exception e) {
-                        prettyPrinter.print(ResourceHandler.getString("repl.invalidTaskIndex"));
-                    }
-                    break;
-                case "event":
-                    line = line.replaceFirst("^deadline\\s*", "");
-                    args = line.split("\\s*/at\\s*");
-                    String eventName = args[0];
-                    String dateTime = args[1];
-                    prettyPrinter.print(taskManager.addTask(new Event(eventName, dateTime)));
-                    break;
-                case "list":
-                    prettyPrinter.print(taskManager.toString());
-                    break;
-                case "todo":
-                    String toDoName = line.replaceFirst("^todo\\s*", "");
-                    prettyPrinter.print(taskManager.addTask(new ToDo(toDoName)));
-                    break;
-                default:
-                    prettyPrinter.print(ResourceHandler.getString("repl.unknownCommand"));
-                    break;
+            try {
+                command = Command.valueOf(firstToken.toUpperCase());
+                switch (command) {
+                    case BYE:
+                        prettyPrinter.print(ResourceHandler.getString("repl.farewell"));
+                        return;
+                    case DEADLINE:
+                        line = line.replaceFirst("^deadline\\s*", "");
+                        args = line.split("\\s*/by\\s*");
+                        String deadlineName = args[0];
+                        String dueDate = args[1];
+                        prettyPrinter.print(taskManager.addTask(new Deadline(deadlineName, dueDate)));
+                        break;
+                    case DONE:
+                        try {
+                            line = line.replaceFirst("^done\\s*", "");
+                            args = line.split("");
+                            int listIndex = Integer.parseInt(args[0]) - 1;
+                            prettyPrinter.print(taskManager.markAsDone(listIndex));
+                        } catch (Exception e) {
+                            prettyPrinter.print(ResourceHandler.getString("repl.invalidTaskIndex"));
+                        }
+                        break;
+                    case EVENT:
+                        line = line.replaceFirst("^deadline\\s*", "");
+                        args = line.split("\\s*/at\\s*");
+                        String eventName = args[0];
+                        String dateTime = args[1];
+                        prettyPrinter.print(taskManager.addTask(new Event(eventName, dateTime)));
+                        break;
+                    case LIST:
+                        prettyPrinter.print(taskManager.toString());
+                        break;
+                    case TODO:
+                        String toDoName = line.replaceFirst("^todo\\s*", "");
+                        prettyPrinter.print(taskManager.addTask(new ToDo(toDoName)));
+                        break;
+                }
+            } catch (IllegalArgumentException e) {
+                prettyPrinter.print(ResourceHandler.getString("repl.unknownCommand"));
             }
         }
     }

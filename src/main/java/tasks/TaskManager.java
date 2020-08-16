@@ -1,3 +1,6 @@
+package tasks;
+
+import utils.ResourceHandler;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
