@@ -76,6 +76,7 @@ public class Duke {
         }
 
         System.out.println("    ____________________________________________________________");
+        System.out.println();
     }
 
     public static void Done(int index) {
