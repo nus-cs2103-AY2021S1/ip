@@ -20,7 +20,9 @@ public class Task {
         return description;
     }
 
-    public String getCurrentStatus(){
-        return "["+ type + "]"+ "[" + getStatusIcon() +"] " + getDescription();
+    public String getCurrentStatus() throws DukeException{
+        if (getDescription() == "") throw new DukeException("");
+        System.out.println(" Got it. I've added this task:");
+        return "  ["+ type + "]"+ "[" + getStatusIcon() +"]" + getDescription();
     }
 }
