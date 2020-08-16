@@ -15,6 +15,7 @@ public class Duke {
     private String BYE_COMMAND = "bye";
     private String LIST_COMMAND = "list";
     private String DONE_COMMAND = "done";
+    private String DELETE_COMMAND = "delete";
     private String TODO_COMMAND = "todo";
     private String DEADLINE_COMMAND = "deadline";
     private String EVENT_COMMAND = "event";
@@ -125,9 +126,29 @@ public class Duke {
         } catch (DoneException e) {
             message = e.getMessage();
         }
-
         sendMessage(message);
+    }
 
+    private void deleteTask(String taskNumber) {
+        String message;
+        try {
+            if (taskNumber == null) {
+                throw new DeleteException();
+            }
+            int taskNum = Integer.parseInt(taskNumber);
+            if (taskNum < 1 || taskNum > tasks.size()) {
+                message = "Invalid task number!";
+            } else {
+                Task task = tasks.remove(taskNum - 1);
+                message = "Okay. I will delete this task:\n" + indentation + task + "\n" +
+                        "Now you have " + tasks.size() + " " + (tasks.size() == 1 ? "task " : "tasks ") + "in the list.";
+            }
+        } catch (NumberFormatException e) {
+            message = "Please put a number!";
+        } catch (DeleteException e) {
+            message = e.getMessage();
+        }
+        sendMessage(message);
     }
 
     private void takeUserInput() {
@@ -151,6 +172,8 @@ public class Duke {
                     showAllTask();
                 } else if (command.equals(DONE_COMMAND)) {
                     doneTask(arg);
+                } else if (command.equals(DELETE_COMMAND)) {
+                    deleteTask(arg);
                 } else if (command.equals(TODO_COMMAND)) {
                     addTask(arg, TaskType.TODO);
                 } else if (command.equals(DEADLINE_COMMAND)) {
