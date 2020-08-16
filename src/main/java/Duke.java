@@ -1,4 +1,7 @@
+import main.java.Deadline;
+import main.java.Event;
 import main.java.Task;
+import main.java.Todo;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -6,6 +9,12 @@ import java.util.ArrayList;
 public class Duke {
 
     public static ArrayList<Task> taskList = new ArrayList<>();
+
+    public static void addedReply(Task task) {
+        int num = taskList.size();
+        System.out.println("Got it. I've added this task:\n" + task);
+        System.out.println("Now you have " + num + " tasks in the list.");
+    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -26,7 +35,25 @@ public class Duke {
                     done.markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(done);
-            } else if (input.equals("bye")) {
+            } else if (input.length() >= 4 && input.substring(0,4).equals("todo")) {
+                String tasking = input.substring(5);
+                Task todo = new Todo(tasking);
+                taskList.add(todo);
+                addedReply(todo);
+            } else if (input.length() >= 8 && input.substring(0,8).equals("deadline")) {
+                String[] split = input.substring(9).split("/by", 2);
+                Task deadline = new Deadline(split[0], split[1]);
+                taskList.add(deadline);
+                addedReply(deadline);
+            } else if (input.length() >= 5 && input.substring(0,5).equals("event")) {
+                String[] split = input.substring(6).split("/at", 2);
+                Task event = new Event(split[0], split[1]);
+                taskList.add(event);
+                addedReply(event);
+            }
+
+
+            else if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 return;
             } else if (input.equals("list")) {
