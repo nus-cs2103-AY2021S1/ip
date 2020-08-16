@@ -12,8 +12,8 @@ public class Store {
     }
 
     public void addToStore(String item) {
-        System.out.println("Okay I have added " + item + " to your list of tasks.\n" + line);
         String actual_item = item.strip();
+        System.out.println("Okay I have added " + actual_item + " to your list of tasks.\n" + line);
         this.allItems.add(actual_item);
     }
 
