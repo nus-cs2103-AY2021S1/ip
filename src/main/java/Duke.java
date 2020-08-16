@@ -1,7 +1,6 @@
-import javax.swing.*;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 public class Duke {
 
@@ -98,6 +97,9 @@ public class Duke {
                     System.out.println(formatReply("This task has been marked as done:\n" + task.toString()));
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(formatReply("OOPS!!! Task number is invalid."));
+                } catch (InputMismatchException e) {
+                    input.nextLine();
+                    System.out.println(formatReply("OOPS!!! Task number must be a number."));
                 }
             } else if (command.equals("delete")) {
                 try {
@@ -108,6 +110,9 @@ public class Duke {
                             + "\nNow you have " + taskList.size() + " in the list."));
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(formatReply("OOPS!!! Task number is invalid."));
+                } catch (InputMismatchException e) {
+                    input.nextLine();
+                    System.out.println(formatReply("OOPS!!! Task number must be a number."));
                 }
             } else {
                 try {
