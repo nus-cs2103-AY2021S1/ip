@@ -18,4 +18,9 @@ public class Task {
     public String getTask() {
         return this.task;
     }
+
+    @Override
+    public String toString() {
+        return this.getStatus() + " " + this.getTask();
+    }
 }

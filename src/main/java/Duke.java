@@ -16,7 +16,7 @@ public class Duke {
                 System.out.println(lines);
                 System.out.println("  Here are the tasks in your list:\n");
                 for (int i = 0; i < ls.size(); i++) {
-                    System.out.println("  " + (i+1) + ". " + ls.get(i).getStatus() + " " + ls.get(i).getTask());
+                    System.out.println("  " + (i+1) + ". " + ls.get(i).toString());
                 }
                 System.out.println(lines);
                 userInput = sc.nextLine();
@@ -29,7 +29,7 @@ public class Duke {
                     } else {
                         ls.get(index - 1).markAsDone();
                         System.out.println(lines + "  Nice! I have marked this task as done:\n");
-                        System.out.println("    " + ls.get(index - 1).getStatus() + ls.get(index - 1).getTask()
+                        System.out.println("    " + ls.get(index - 1).toString()
                                 + "\n" + lines);
                         userInput = sc.nextLine();
                     }
@@ -39,9 +39,43 @@ public class Duke {
                 }
             }
             else {
-                ls.add(new Task(userInput));
-                System.out.println(lines + "  added: " + userInput + "\n" + lines);
-                userInput = sc.nextLine();
+                if (userInput.contains("todo")) {
+                    String s = userInput.substring(5);
+                    System.out.println(lines);
+                    System.out.println("Got it. I have added this task:");
+                    Todo temp = new Todo((s));
+                    System.out.println("  " + temp.toString());
+                    ls.add(temp);
+                    System.out.println("Now you have " + ls.size() + " tasks in the list");
+                    System.out.println(lines);
+                    userInput = sc.nextLine();
+                }
+                if (userInput.contains("deadline")) {
+                    int dateIndex = userInput.indexOf("/");
+                    String s = userInput.substring(9, dateIndex);
+                    String time = userInput.substring(dateIndex + 1);
+                    System.out.println(lines);
+                    System.out.println("Got it. I have added this task:");
+                    Deadline temp = new Deadline(s, time);
+                    System.out.println("  " + temp.toString());
+                    ls.add(temp);
+                    System.out.println("Now you have " + ls.size() + " tasks in the list");
+                    System.out.println(lines);
+                    userInput = sc.nextLine();
+                }
+                if (userInput.contains("event")) {
+                    int dateIndex = userInput.indexOf("/");
+                    String s = userInput.substring(6, dateIndex);
+                    String time = userInput.substring(dateIndex + 1);
+                    System.out.println(lines);
+                    System.out.println("Got it. I have added this task:");
+                    Event temp = new Event(s, time);
+                    System.out.println("  " + temp.toString());
+                    ls.add(temp);
+                    System.out.println("Now you have " + ls.size() + " tasks in the list");
+                    System.out.println(lines);
+                    userInput = sc.nextLine();
+                }
             }
         }
 
