@@ -43,7 +43,7 @@ public class Duke {
         case "list": // show tasks available
             Duke.displayTasks();
             break;
-        case "done": // label a task as done
+        case "done": {
             // ASSUMPTION: valid input provided
             int index = Integer.parseInt(tokens[1]) - 1;
             Task task = TASKS.get(index);
@@ -51,15 +51,31 @@ public class Duke {
             Duke.displayMessages(
                     "Okay. So you've done:",
                     task.toString());
+        }
+        break;
+        case "delete":
+            int index = Integer.parseInt(tokens[1]) - 1;
+            Task task = TASKS.get(index);
+            TASKS.remove(index);
+            Duke.displayMessages(
+                    "Right, you no longer want me to track:",
+                    task.toString(),
+                    Duke.getTasksLeftMessage());
             break;
-        default: // it's a new task
+        case "todo":
+        case "deadline":
+        case "event": // it's a new task
             try {
                 Duke.addTask(command, input);
             } catch (InvalidTaskException e) {
                 Duke.displayMessages(e.getMessage());
             }
             break;
+        default:
+            Duke.displayMessages("Um, I don't get what you're saying.");
+            break;
         }
+
     }
 
     // TODO: Consider some cleaner way of validating, perhaps a factory method for each Task
@@ -101,10 +117,14 @@ public class Duke {
         Duke.displayMessages(
                 "Okay, you want to:",
                 task.toString(),
-                String.format(
-                        "Now you have %d thing%s you'need me to remind you about.",
-                        TASKS.size(),
-                        TASKS.size() == 1 ? "" : "s"));
+                Duke.getTasksLeftMessage());
+    }
+
+    private static String getTasksLeftMessage() {
+        return String.format(
+                "Now you have %d thing%s you'need me to remind you about.",
+                TASKS.size(),
+                TASKS.size() == 1 ? "" : "s");
     }
 
     private static void displayTasks() {
