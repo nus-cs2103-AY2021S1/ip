@@ -1,16 +1,19 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
 
-    private static final int DONE_INDEX = 5;
-    private static final int TODO_INDEX = 5;
-    private static final int DEADLINE_INDEX = 9;
-    private static final int EVENT_INDEX = 6;
     private static final int DATE_INDEX = 4;
+    private static final int DEADLINE_INDEX = 9;
+    private static final int DELETE_INDEX = 7;
+    private static final int DONE_INDEX = 5;
+    private static final int EVENT_INDEX = 6;
+    private static final int TODO_INDEX = 5;
 
     private static void botStart() {
         Scanner sc = new Scanner(System.in);
-        Task[] taskStorage = new Task[100];
+        List<Task> taskStorage = new ArrayList<>(100);
         int storageCount = 0;
         System.out.println("=========================================="
                 + "\nHi, my name is Duke."
@@ -27,16 +30,36 @@ public class Duke {
                 } else if (command.equals("list")) {
                     System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < storageCount; i++) {
-                        System.out.println(i + 1 + "." + taskStorage[i]);
+                        System.out.println(i + 1 + "." + taskStorage.get(i));
                     }
-                } else if (commandWordArray[0].equals("done") && !command.equals("done")) {
+                } else if (commandWordArray[0].equals("done")) {
+                    if (command.substring(DONE_INDEX - 1).isBlank()) {
+                        throw new DukeException("Argument of done cannot be empty!");
+                    }
                     try {
                         int taskNumber = Integer.parseInt(command.substring(DONE_INDEX));
-                        taskStorage[taskNumber - 1].markAsDone();
+                        taskStorage.get(taskNumber - 1).markAsDone();
                         System.out.println("I have marked this task as done: "
-                                + "\n" + taskStorage[taskNumber - 1]);
-                    } catch (NullPointerException e) {
+                                + "\n" + taskStorage.get(taskNumber - 1));
+                    } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("That task does not exist in the list!");
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("Please enter a valid argument for done!");
+                    }
+                } else if (commandWordArray[0].equals("delete")) {
+                    if (command.substring(DELETE_INDEX - 1).isBlank()) {
+                        throw new DukeException("Argument of delete cannot be empty!");
+                    }
+                    try {
+                        int taskNumber = Integer.parseInt(command.substring(DELETE_INDEX));
+                        System.out.println("I have deleted this task: "
+                                + "\n" + taskStorage.get(taskNumber - 1));
+                        taskStorage.remove(taskNumber - 1);
+                        storageCount--;
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeException("That task does not exist in the list!");
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("Please enter a valid argument for delete!");
                     }
                 } else {
                     Task task;
@@ -52,7 +75,9 @@ public class Duke {
                             } else {
                                 try {
                                     String date = command.substring(command.indexOf("/") + DATE_INDEX);
-                                    task = new Deadline(command.substring(DEADLINE_INDEX, command.indexOf("/") - 1), date);
+                                    task = new Deadline(
+                                            command.substring(
+                                                    DEADLINE_INDEX, command.indexOf("/") - 1), date);
                                 } catch (StringIndexOutOfBoundsException e) {
                                     throw new DukeException("Please enter a valid date!");
                                 }
@@ -63,7 +88,9 @@ public class Duke {
                             } else {
                                 try {
                                     String date = command.substring(command.indexOf("/") + DATE_INDEX);
-                                    task = new Event(command.substring(EVENT_INDEX, command.indexOf("/") - 1), date);
+                                    task = new Event(
+                                            command.substring(
+                                                    EVENT_INDEX, command.indexOf("/") - 1), date);
                                 } catch (StringIndexOutOfBoundsException e) {
                                     throw new DukeException("Please enter a valid date!");
                                 }
@@ -72,7 +99,7 @@ public class Duke {
                             throw new DukeException("Invalid command!");
                         }
                     }
-                    taskStorage[storageCount] = task;
+                    taskStorage.add(storageCount, task);
                     System.out.println(">" + "added: " + task + "<");
                     storageCount++;
                     System.out.println("You now have " + storageCount + " task(s) in your list.");
