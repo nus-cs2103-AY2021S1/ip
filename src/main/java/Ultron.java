@@ -137,7 +137,11 @@ public class Ultron {
 
 
                 //Mark the task as done
-                this.taskList.markDone(index);
+                if (!this.taskList.markDone(index)){
+
+                    //Throw an error if the method return false
+                    throw new UltronException(String.format("Invalid value of done '%s'", index));
+                }
 
                 //Print the done message
                 System.out.println(String.format("Finally! Making yourself useful\n  %s", this.taskList.get(index)));
@@ -159,17 +163,23 @@ public class Ultron {
                     //Throw a Duke exception
                     throw new UltronException(String.format("'%s' is not a valid command", command));
                 }
+
+                //Trim the args
                 if (args.trim().length() == 0){
-                    throw new UltronException("There are no arguments supplied");
+
+                    //Throw an exception when there is nothing supplied
+                    throw new UltronException(String.format("There are no arguments supplied to %s command", command));
                 }
+
                 try{
                     //Create a new task
                     tsk = val.createTask(args);
+
                 }catch(IllegalStateException e){
+
                     //Throw a Duke exception
                     throw new UltronException(String.format("Invalid %s command syntax\nUse 'help' for more information",command));
                 }
-
 
                 //Add the task to the task list
                 this.taskList.add(tsk);
@@ -205,10 +215,18 @@ public class Ultron {
 
             //If it is a terminating condition
             try{
+
+                //If the input returns True to quitting
                 if (this.checkInput(input.trim())){
+
+                    //Break out of the loop
                     break;
                 }
+
+            //Catch the Ultron exception
             }catch(UltronException e){
+
+                //Print the error message
                 this.errorMessage(e);
             }
 
