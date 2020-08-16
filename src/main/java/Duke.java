@@ -11,7 +11,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello! I'm duke. What can I do for you? \n" + logo);
 
-        ArrayList<String> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
@@ -20,7 +20,11 @@ public class Duke {
             if (str.equals("list")) {
                 displayTasks(tasks);
             } else {
-                addTask(str, tasks);
+                if (str.startsWith("done ")) {
+                    completeTask(str, tasks);
+                } else {
+                    addTask(str, tasks);
+                }
             }
             line();
             str = sc.nextLine();
@@ -36,17 +40,42 @@ public class Duke {
         System.out.println("");
     }
 
-    private static void displayTasks(ArrayList<String> tasks) {
+    private static void displayTasks(ArrayList<Task> tasks) {
+        System.out.println("Here are the tasks in your list:");
         int i = 1;
-        for (String str: tasks) {
-            System.out.println(i + ". " + str);
+        for (Task t: tasks) {
+            System.out.println(i + "." + t.toString());
             i++;
         }
     }
 
-    private static void addTask(String str, ArrayList<String> tasks) {
-        tasks.add(str);
-        System.out.println("added: " + str);
+    private static void addTask(String str, ArrayList<Task> tasks) {
+        Task t = new Task(str);
+        tasks.add(t);
+        System.out.println("added: " + t.description);
     }
 
+    private static void completeTask(String str, ArrayList<Task> tasks) {
+        String val = str.substring(5);
+        System.out.println(val);
+        if (isInteger(val)) {
+            int i = Integer.parseInt(val);
+            if (i > 0 && i <= tasks.size()) {
+                tasks.get(i - 1).complete();
+            } else {
+                System.out.println("Error, please key in a valid number.");
+            }
+        } else {
+            System.out.println("Error, please key in a valid number.");
+        }
+    }
+
+    public static boolean isInteger(String str) {
+        try {
+            int i = Integer.parseInt(str);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
 }
