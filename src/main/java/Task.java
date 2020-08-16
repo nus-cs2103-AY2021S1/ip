@@ -1,7 +1,31 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    public enum Command {
+        TODO("todo"), DEADLINE("deadline"), EVENT("event");
+
+        private String cmd;
+        private String timeSpecifier;
+
+        Command(String cmd) {
+            this.cmd = cmd;
+            this.timeSpecifier = "";
+        }
+
+        Command(String cmd, String timeSpecifier) {
+            this.cmd = cmd;
+            this.timeSpecifier = timeSpecifier;
+        }
+
+        public String getCmd() {
+            return cmd;
+        }
+
+        public String getTimeSpecifier() {
+            return timeSpecifier;
+        }
+    }
     public Task(String description) {
         this.description = description;
         isDone = false;
@@ -13,13 +37,13 @@ public class Task {
     }
 
     // presentation:
-    // getting from CS2103 week 2 project https://nus-cs2103-ay2021s1.github.io/website/schedule/week2/project.html
     public String getStatusIcon() {
         //return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
-        return (isDone ? "Done" : "Not done");
+        return "[" + (isDone ? "Done" : "Not done") + "]";
     }
 
-    public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
-    }
+    public abstract String getTypeIcon();
+
+    @Override
+    public abstract String toString();
 }
