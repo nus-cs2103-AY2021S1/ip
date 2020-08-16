@@ -1,3 +1,5 @@
+package utils;
+
 public class Formatter {
     private final int dividerLength;
     private final int leftPadding;

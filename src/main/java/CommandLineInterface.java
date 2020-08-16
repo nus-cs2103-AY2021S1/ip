@@ -1,3 +1,6 @@
+import task.Task;
+import task.TaskManager;
+import utils.Formatter;
 import java.util.Scanner;
 
 /**
@@ -8,7 +11,7 @@ public class CommandLineInterface {
     /**
      * This will determine the number of underscores each divider should be made of
      */
-    private static final int dividerLength = 50;
+    private static final int dividerLength = 70;
     /**
      * This will determine the left padding size of the messages that the application outputs
      */
@@ -23,7 +26,11 @@ public class CommandLineInterface {
         formatter.print(welcomeMessage);
         while (scanner.hasNext()) {
             String userInput = scanner.nextLine();
-            if (userInput.toLowerCase().equals("bye")) {
+            String[] words = userInput.split(" ");
+            if(words[0].equals("done")){
+                int taskIndex = Integer.parseInt(words[1]);
+                formatter.print(taskManager.markTaskAsDone(taskIndex));
+            } else if (userInput.toLowerCase().equals("bye")) {
                 formatter.print("Bye. Hope my service has been satisfactory. Hope to see you again soon.");
                 break;
             } else if (userInput.toLowerCase().equals("list")) {
