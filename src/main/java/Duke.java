@@ -3,68 +3,6 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    private static class Task {
-        protected String description;
-        protected boolean isDone;
-
-        public Task(String description) {
-            this.description = description;
-            this.isDone = false;
-        }
-
-        public String getStatusIcon() {
-            return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
-        }
-
-        public void markDone() {
-            isDone = true;
-        }
-
-        @Override
-        public String toString() {
-            return "[" + getStatusIcon() + "] " + description;
-        }
-    }
-
-    private static class ToDo extends Task {
-        private ToDo(String description) {
-            super(description);
-        }
-
-        @Override
-        public String toString() {
-            return "[T]" + super.toString();
-        }
-    }
-
-    private static class Deadline extends Task {
-        protected String by;
-
-        private Deadline(String description, String by) {
-            super(description);
-            this.by = by;
-        }
-
-        @Override
-        public String toString() {
-            return "[D]" + super.toString() + " (by: " + by + ")";
-        }
-    }
-
-    private static class Event extends Task {
-        protected String at;
-
-        private Event(String description, String at) {
-            super(description);
-            this.at = at;
-        }
-
-        @Override
-        public String toString() {
-            return "[E]" + super.toString() + " (at: " + at + ")";
-        }
-    }
-
     public static void main(String[] args) {
 
         String logo = " ____        _        \n"
