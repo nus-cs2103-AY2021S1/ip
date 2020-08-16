@@ -45,6 +45,8 @@ public class Duke {
             case "deadline":
             case "event":
                 return addTask(input);
+            case "delete":
+                return delete(input);
             default:
                 throw new InvalidCommandException();
         }
@@ -87,7 +89,7 @@ public class Duke {
                 return "\t Nice! I've marked this task as done:\n\t\t"
                         + task.toString();
             } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
-                throw new InvalidTaskDoneException();
+                throw new NoSuchTaskException();
             }
         }
 
@@ -138,6 +140,23 @@ public class Duke {
         return "\t Got it. I've added this task: \n"
                 + "\t\t" + task.toString() + "\n"
                 + "\t Now you have " + tasks.size() + " tasks in this list.";
+    }
+
+    private static String delete(String input) {
+        String[] arr = input.split(" ");
+        if (arr.length < 2) {
+            throw new EmptyTaskDeletedException();
+        } else {
+            try {
+                int index = (Integer.parseInt(arr[1])) - 1;
+                Task task = tasks.get(index);
+                tasks.remove(index);
+                return String.format("\t Noted. I've removed this task:\n\t\t%s\n\t Now you have %d tasks in the list",
+                        task.toString(), tasks.size());
+            } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
+                throw new NoSuchTaskException();
+            }
+        }
     }
 
 }

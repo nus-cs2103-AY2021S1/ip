@@ -1,4 +1,4 @@
-public class InvalidTaskDoneException extends IllegalArgumentException {
+public class NoSuchTaskException extends IllegalArgumentException {
 
     @Override
     public String toString() {
