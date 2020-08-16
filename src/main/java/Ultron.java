@@ -71,6 +71,20 @@ public class Ultron {
                 );
     }
 
+    private int parseInteger(String args) throws UltronException{
+        //Catch any errors in the number
+        try{
+
+            //Get the index of the items
+            return Integer.valueOf(args) - 1;
+
+        }catch(NumberFormatException e){
+
+            //Throw a new Ultron exception
+            throw new UltronException(String.format("'%s' is not a valid number", args));
+        }
+    }
+
     private boolean checkInput(String input) throws UltronException{
         //Checks if the user wants to quit
 
@@ -117,24 +131,30 @@ public class Ultron {
                 break;
             }
 
+            case "delete":{
+                //Initialise index
+                int index = this.parseInteger(args);
+
+                //Get the task
+                Task tsk = this.taskList.get(index);
+
+                //Remove the task
+                if (!this.taskList.remove(index)){
+
+                    //Throw an error if the method return false
+                    throw new UltronException(String.format("Invalid value of done '%s'", index));
+                }
+
+                //Print the delete message
+                System.out.println(String.format("What are you doing removing this?!?!\n  %s", tsk));
+                break;
+            }
+
             //Check if the user is done with any task
             case "done":{
 
                 //Initialise index
-                int index;
-
-                //Catch any errors in the number
-                try{
-
-                    //Get the index of the items
-                    index = Integer.valueOf(args) - 1;
-
-                }catch(NumberFormatException e){
-
-                    //Throw a new ultron exception
-                    throw new UltronException(String.format("'%s' is not a valid number", args));
-                }
-
+                int index = this.parseInteger(args);
 
                 //Mark the task as done
                 if (!this.taskList.markDone(index)){
