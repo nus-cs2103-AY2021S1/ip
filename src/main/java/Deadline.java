@@ -1,7 +1,7 @@
 public class Deadline extends Task {
     String datetimeDue;
 
-    public Deadline(String content, String datetimeDue) {
+    public Deadline(String content, String datetimeDue) throws DukeException {
         super(content);
         this.datetimeDue = datetimeDue;
     }

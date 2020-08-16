@@ -3,7 +3,10 @@ public class Task {
     public String content;
     public boolean isComplete;
 
-    public Task(String content) {
+    public Task(String content) throws DukeException {
+        if (content.replace(" ", "").equals("")) {
+            throw new DukeException("Contents of a task cannot be empty.");
+        }
         this.content = content;
         this.isComplete = false;
     }

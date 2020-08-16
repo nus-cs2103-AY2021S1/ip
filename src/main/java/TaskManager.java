@@ -9,30 +9,34 @@ public class TaskManager {
         this.taskList = new ArrayList<>();
     }
 
-    public void addTodo(String content) {
+    public Todo addTodo(String content) throws DukeException {
         Todo todo = new Todo(content);
         taskList.add(todo);
+        return todo;
     }
 
-    public void addDeadline(String content, String datetimeDue) {
+    public Deadline addDeadline(String content, String datetimeDue) throws DukeException {
         Deadline deadline = new Deadline(content, datetimeDue);
         taskList.add(deadline);
+        return deadline;
     }
 
-    public void addEvent(String content, String datetime) {
+    public Event addEvent(String content, String datetime) throws DukeException {
         Event event = new Event(content, datetime);
         taskList.add(event);
+        return event;
     }
 
-    public void completeTask(int taskNumber) {
+    public Task completeTask(int taskNumber) throws DukeException {
         if (taskNumber <= 0) {
-            throw new IllegalArgumentException("Invalid task number specified");
+            throw new DukeException("Invalid task number specified, task number must be greater than 0.");
         } else if (taskNumber > taskList.size()) {
-            throw new IllegalArgumentException("Task number specified is larger than current amount of tasks");
+            throw new DukeException("Task number specified is larger than current amount of tasks.");
         }
         int index = taskNumber - 1;
         Task task = taskList.get(index);
         task.setComplete(true);
+        return task;
     }
 
     @Override
@@ -43,4 +47,7 @@ public class TaskManager {
                 .reduce("", String::concat);
     }
 
+    public int getTaskCount() {
+        return taskList.size();
+    }
 }

@@ -6,8 +6,20 @@ public class Duke {
     public final Scanner scanner;
     public TaskManager taskManager;
     static String completeTaskPattern = "^done (?<taskNumber>[0-9]+)$";
-    static String addEventPattern = "^(?<content>.+) /at (?<datetime>.+)$";
-    static String addDeadlinePattern = "^(?<content>.+) /by (?<datetimeDue>.+)$";
+    static String addEventPattern = "^event (?<content>.+) /at (?<datetime>.+)$";
+    static String addDeadlinePattern = "^deadline (?<content>.+) /by (?<datetimeDue>.+)$";
+    static String addTodoPattern = "^todo (?<content>.+)$";
+    static String listPattern = "^list$";
+    static String byePattern = "^bye$";
+    static String greetMessage = "Hello. What can I do for you?";
+    static String byeMessage = "Bye. Hope to see you again soon!";
+    static String listStringFormat = "Here are the tasks in your list:\n" +
+            "%sYou have %s task(s) in your list.";
+    static String successfulTaskAddStringFormat = "Got it. I've added this task:\n" +
+            "%s\n" +
+            "Now you have %d task(s) in the list.";
+    static String successfulTaskCompleteStringFormat = "Nice! I've marked this task as done:\n" +
+            "%s";
 
     public Duke() {
         this.scanner = new Scanner(System.in);
@@ -26,7 +38,7 @@ public class Duke {
 
         while (true) {
             String input = duke.getInput();
-            if (input.equalsIgnoreCase("bye")) {
+            if (input.matches(Duke.byePattern)) {
                 duke.sendMessage(duke.getByeMessage());
                 break;
             } else if (input.matches(Duke.completeTaskPattern)) {
@@ -35,10 +47,22 @@ public class Duke {
                 addEvent(duke, input);
             } else if (input.matches(Duke.addDeadlinePattern)) {
                 addDeadline(duke, input);
-            } else {
+            } else if (input.matches(Duke.addTodoPattern)) {
                 addTodo(duke, input);
+            } else if (input.matches(Duke.listPattern)) {
+                listTasks(duke);
+            } else {
+                duke.sendMessage("I don't know what you just sent...");
             }
         }
+    }
+
+    private static void listTasks(Duke duke) {
+        String message = String.format(
+                listStringFormat,
+                duke.taskManager.toString(),
+                duke.taskManager.getTaskCount());
+        duke.sendMessage(message);
     }
 
     private static void addDeadline(Duke duke, String input) {
@@ -47,9 +71,15 @@ public class Duke {
         m.find();
         String content = m.group("content");
         String datetimeDue = m.group("datetimeDue");
-        duke.taskManager.addDeadline(content, datetimeDue);
-        duke.sendMessage(duke.taskManager.toString());
+        try {
+            Deadline deadline = duke.taskManager.addDeadline(content, datetimeDue);
+            duke.sendMessage(duke.getAddSuccessMessage(deadline));
+        } catch (DukeException e) {
+            duke.sendMessage(e.getMessage());
+        }
     }
+
+
 
     private static void addEvent(Duke duke, String input) {
         Pattern r = Pattern.compile(Duke.addEventPattern);
@@ -57,13 +87,25 @@ public class Duke {
         m.find();
         String content = m.group("content");
         String datetime = m.group("datetime");
-        duke.taskManager.addEvent(content, datetime);
-        duke.sendMessage(duke.taskManager.toString());
+        try {
+            Event event = duke.taskManager.addEvent(content, datetime);
+            duke.sendMessage(duke.getAddSuccessMessage(event));
+        } catch (DukeException e) {
+            duke.sendMessage(e.getMessage());
+        }
     }
 
     private static void addTodo(Duke duke, String input) {
-        duke.taskManager.addTodo(input);
-        duke.sendMessage(duke.taskManager.toString());
+        Pattern r = Pattern.compile(Duke.addTodoPattern);
+        Matcher m = r.matcher(input);
+        m.find();
+        String content = m.group("content");
+        try {
+            Todo todo = duke.taskManager.addTodo(content);
+            duke.sendMessage(duke.getAddSuccessMessage(todo));
+        } catch (DukeException e) {
+            duke.sendMessage(e.getMessage());
+        }
     }
 
     private static void completeTask(Duke duke, String input) {
@@ -71,16 +113,33 @@ public class Duke {
         Matcher m = r.matcher(input);
         m.find();
         int taskNumber = Integer.parseInt(m.group("taskNumber"));
-        duke.taskManager.completeTask(taskNumber);
-        duke.sendMessage(duke.taskManager.toString());
+        try {
+            Task task = duke.taskManager.completeTask(taskNumber);
+            duke.sendMessage(duke.getCompleteSuccessMessage(task));
+        } catch (DukeException e) {
+            duke.sendMessage(e.getMessage());
+        }
     }
 
     public String getGreetMessage() {
-        return "Hello. What can I do for you?";
+        return greetMessage;
     }
 
     public String getByeMessage() {
-        return "Bye. Hope to see you again soon!";
+        return byeMessage;
+    }
+
+    private String getCompleteSuccessMessage(Task task) {
+        return String.format(
+                successfulTaskCompleteStringFormat,
+                task);
+    }
+
+    private String getAddSuccessMessage(Task task) {
+        return String.format(
+                successfulTaskAddStringFormat,
+                task,
+                this.taskManager.getTaskCount());
     }
 
     public void sendMessage(String message) {
