@@ -8,4 +8,22 @@ done 2
 list
 done 3
 list
+blah
+done
+done1
+doneA
+done 1A
+todo
+todoborrowagain
+todo study /by Monday
+todo study /at 12am-1am
+todo
+deadline
+deadline project submission
+deadline /by Sunday
+deadline project submission /by
+event
+event project submission
+event /at 1-2pm
+event meeting /at
 bye
