@@ -11,8 +11,8 @@ public class Duke {
         + "| |_| | |_| |   <  __/\n"
         + "|____/ \\__,_|_|\\_\\___|\n";
     Scanner sc = new Scanner(System.in);
-    String input = "";
-    List<String> list = new ArrayList<>();
+    String input;
+    List<Task> list = new ArrayList<>();
 
     System.out.println("\n" + logo);
     System.out.println("\t" + divider);
@@ -21,19 +21,30 @@ public class Duke {
 
     while (true) {
       input = sc.nextLine();
+      String[] multiInput = input.split(" ");
 
       if (input.equals("bye")) {
         break;
       } else if (input.equals("list")) {
         System.out.println("\t" + divider);
+        System.out.println("\tHere are the tasks in your list: ");
 
         for (int i = 0; i < list.size(); i++) {
           System.out.printf("\t%d. %s\n", i + 1, list.get(i));
         }
 
         System.out.println("\t" + divider + "\n");
+      } else if (multiInput[0].equals("done")){
+        int index = Integer.parseInt(multiInput[1]) - 1;
+        Task targetTask = list.get(index);
+        targetTask.setDone();
+
+        System.out.println("\t" + divider);
+        System.out.println("\tNice! I've marked this task as done: ");
+        System.out.println("\t\t" + targetTask);
+        System.out.println("\t" + divider);
       } else {
-        list.add(input);
+        list.add(new Task(input));
 
         System.out.println("\t" + divider);
         System.out.println("\tadded: " + input);
