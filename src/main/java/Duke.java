@@ -5,8 +5,8 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        // attributes for word storage
-        String[] lib = new String[100];
+        // attributes for task storage
+        Task[] lib = new Task[100];
         int curr = 0;
 
         String logo = "   ____        _        \n"
@@ -27,17 +27,28 @@ public class Duke {
             }
 
             if (echo.equals("list")) {
-                System.out.println("---------------\n");
+                System.out.println("---------------\n" + "Here are the tasks in your list:\n");
+
                 for (int i = 1; i <= curr; i++) {
-                    System.out.println(i + ". " + lib[i - 1] +"\n");
+                    Task task = lib[i - 1];
+                    System.out.println(i + ".[" + task.getStatusIcon() + "] " +
+                            task.getDescription() +"\n");
                 }
                 System.out.println("---------------\n");
                 continue;
             }
 
+            if (echo.equals("done")) {
+                int refNum = sc.nextInt();
+                lib[refNum - 1].finishTask();
+                System.out.println("---------------\n" + "The following task is now marked as complete!\n" +
+                        "  [" + lib[refNum - 1].getStatusIcon() + "] " + lib[refNum - 1].getDescription());
+                continue;
+            }
+
             System.out.println("---------------\n" + "Storing item " + "(" + curr + "/100)"+
                     " : " + echo + "\n" + "---------------\n");
-            lib[curr] = echo;
+            lib[curr] = new Task(echo);
             curr++;
         }
 
