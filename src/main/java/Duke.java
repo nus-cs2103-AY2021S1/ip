@@ -14,7 +14,7 @@ public class Duke {
 
 
         Scanner sc = new Scanner (System.in);
-        ArrayList<Task> Todo = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         //Greeting the user
         System.out.println ("Hello! I'm Duke");
@@ -22,23 +22,26 @@ public class Duke {
 
         String next = sc.nextLine();
 
+
         while (!next.equals("bye")){
 
+            //listing out all the tasks
             if (next.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < Todo.size(); i++) {
-                    System.out.printf("%d.%s \n", i + 1, Todo.get(i));
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.printf("%d.%s \n", i + 1, tasks.get(i));
                 }
 
-            } else if (next.contains("done")) {
-                int index = next.charAt(5) - 48;
-                Todo.get(index - 1).markDone();
-                System.out.println ("Nice! I've marked this task as done:");
-                System.out.println (Todo.get(index - 1));
+            //when a task is done
+            } else if (next.contains("done") && next.startsWith("done")) {
+                int index = Integer.parseInt(next.replaceAll("[^0-9]", ""));
+                tasks.get(index - 1).markDone();
+                System.out.println (tasks.get(index - 1));
 
+            //adding a new task
             } else {
                 Task t = new Task(next);
-                Todo.add(t);
+                tasks.add(t);
                 System.out.printf("added: %s \n", next);
             }
 
