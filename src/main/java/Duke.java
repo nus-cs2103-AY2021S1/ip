@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Duke {
     public static String greetings = "Hello! I'm Duke\n     What can I do for you?";
     public static String farewell = "Bye. Hope to see you again soon!";
-    public static String doneAlert = "Nice! I've marked this task as done: ";
+    public static String doneAlert = "Nice! I've marked this task as done:";
     public static String addTaskFrontAlert = "Got it. I've added this task:";
     public static String addTaskTailAlert = "Now you have %d tasks in the list.";
 
