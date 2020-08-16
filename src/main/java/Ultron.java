@@ -135,18 +135,21 @@ public class Ultron {
                 //Initialise index
                 int index = this.parseInteger(args);
 
+                //Check if the index is out of range
+                if (index >= this.taskList.size()){
+
+                    //Throw an Ultron exception if it is out of range
+                    throw new UltronException(String.format("Invalid value of delete with '%s'", index + 1));
+                }
+
                 //Get the task
                 Task tsk = this.taskList.get(index);
 
                 //Remove the task
-                if (!this.taskList.remove(index)){
-
-                    //Throw an error if the method return false
-                    throw new UltronException(String.format("Invalid value of done '%s'", index));
-                }
+                this.taskList.remove(index);
 
                 //Print the delete message
-                System.out.println(String.format("What are you doing removing this?!?!\n  %s", tsk));
+                System.out.println(String.format("What are you doing removing this?!?!\n  %s\nNow you have %d burdens", tsk, this.taskList.size()));
                 break;
             }
 
