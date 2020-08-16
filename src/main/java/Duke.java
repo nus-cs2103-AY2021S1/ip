@@ -26,7 +26,7 @@ public class Duke {
         while (!stop) {
             String input = sc.nextLine();
             BotClass bot = new BotClass();
-            processInput(input).execute(bot, list);
+            route(input).execute(bot, list);
             say(bot.getLines());
             if (bot.stopped()) {
                 stop = true;
@@ -48,7 +48,8 @@ public class Duke {
         say(Arrays.asList(string));
     }
 
-    private Function processInput(String input) {
+    // TODO: reduce repetition here
+    private Function route(String input) {
         input = input.strip();
         String[] split = input.split("\\s+", 2); // guranteed to contain at least ""
         String command = split[0];
