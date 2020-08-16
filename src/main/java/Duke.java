@@ -50,28 +50,29 @@ public class Duke {
 
     public boolean handleInput(Scanner scanner) throws DukeException {
         String userInput = scanner.next();
-        switch (userInput) {
-            case "bye":
+        Command command = Command.getCommand(userInput);
+        switch (command) {
+            case BYE:
                 printMessage("Bye! Hope to see you soon!");
                 return false;
-            case "list":
+            case LIST:
                 printList();
                 return true;
-            case "done":
+            case DONE:
                 int taskNumber = scanner.nextInt();
                 if (taskNumber < 1 || taskNumber > taskList.size()) {
                     throw new NoSuchTaskException();
                 }
                 completeTask(taskNumber);
                 return true;
-            case "delete":
+            case DELETE:
                 int toDelete = scanner.nextInt();
                 if (toDelete < 1 || toDelete > taskList.size()) {
                     throw new NoSuchTaskException();
                 }
                 deleteTask(toDelete);
                 return true;
-            case "deadline":
+            case DEADLINE:
                 String deadlineCommand = scanner.nextLine().trim();
                 String[] deadlineParts = deadlineCommand.split(" /by ");
                 if (deadlineParts.length != 2) {
@@ -79,7 +80,7 @@ public class Duke {
                 }
                 addTask(new Deadline(deadlineParts[0], deadlineParts[1]));
                 return true;
-            case "event":
+            case EVENT:
                 String eventCommand = scanner.nextLine().trim();
                 String[] eventParts = eventCommand.split(" /at ");
                 if (eventParts.length != 2) {
@@ -87,17 +88,20 @@ public class Duke {
                 }
                 addTask(new Event(eventParts[0], eventParts[1]));
                 return true;
-            case "todo":
+            case TODO:
                 String task = scanner.nextLine().trim();
                 if (task.isBlank()) {
                     throw(new EmptyBodyException());
                 }
                 addTask(new Todo(task));
                 return true;
-            default:
+            case UNKNOWN:
                 // unknown command, skip the entire line
                 scanner.nextLine();
                 throw(new UnknownCommandException(userInput));
+            default:
+                scanner.nextLine();
+                return true;
         }
     }
 
