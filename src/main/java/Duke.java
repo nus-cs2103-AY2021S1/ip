@@ -49,6 +49,10 @@ public class Duke {
             throw new MissingInfoException("OOPS!!! The description of a " + command + " cannot be empty.");
         }
 
+        if ((typeOfTask.equals(TypeOfTask.DEADLINE) || typeOfTask.equals(TypeOfTask.EVENT)) && timing == null) {
+            throw new MissingInfoException("OOPS!!! The date/time of a " + command + " cannot be empty.");
+        }
+
         switch (typeOfTask) {
             case TODO:
                 return new Todo(description);
