@@ -33,6 +33,9 @@ public class Duke {
 
         while (!sc.hasNext("bye")) {
             String newItem = sc.nextLine();
+            String[] split = newItem.split(" ");
+
+
             System.out.println("    ____________________________________________________________");
             if (newItem.equals("list")) {
                 for (int i = 0; i < itemsIndex; i++) {
@@ -48,9 +51,23 @@ public class Duke {
                 System.out.println("        " + selectedTask);
 
             } else {
-                tasks[itemsIndex] = new Task(newItem);
+                System.out.println("     Got it. I've added this task:");
+                Task newTask = null;
+                if (split[0].equals("todo")) {
+                    newTask = new ToDo(newItem.substring(5, newItem.length()));
+                } else if (split[0].equals("deadline")) {
+                    String strippedFront = newItem.substring(9, newItem.length());
+                    String[] splitParts = strippedFront.split((" /by "));
+                    newTask = new Deadline(splitParts[0], splitParts[1]);
+                } else if (split[0].equals("event")) {
+                    String strippedFront = newItem.substring(6, newItem.length());
+                    String[] splitParts = strippedFront.split((" /at "));
+                    newTask = new Event(splitParts[0], splitParts[1]);
+                }
+                tasks[itemsIndex] = newTask;
                 itemsIndex++;
-                System.out.println("     added: " + newItem);
+                System.out.println("       " + newTask);
+                System.out.println("     Now you have " + itemsIndex +" tasks in the list.");
             }
             System.out.println("    ____________________________________________________________");
             System.out.println("");
