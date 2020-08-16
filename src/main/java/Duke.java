@@ -20,12 +20,25 @@ public class Duke {
         String topPartOfBotReplyMessage = separationLine + indentation;
         String botPartOfBotReplyMessage = "\n" + separationLine;
 
+        TaskManager taskManager = new TaskManager();
+
         while (!reply.equals("bye"))
         {
-            System.out.println(topPartOfBotReplyMessage + reply + botPartOfBotReplyMessage);
-            reply = sc.nextLine();
-        }
+            // System.out.println(topPartOfBotReplyMessage + reply + botPartOfBotReplyMessage);
+            if (!reply.equals("list"))
+            {
+                taskManager.AddTask(new Task(reply));
+                System.out.println(topPartOfBotReplyMessage + "added: " + reply + botPartOfBotReplyMessage);
+                reply = sc.nextLine();
+            }
+            else
+            {
+                String resultList = taskManager.toString().replaceAll("(?m)^\\s+$", "");
 
+                System.out.println(topPartOfBotReplyMessage + resultList + botPartOfBotReplyMessage);
+                reply = sc.nextLine();
+            }
+        }
         String byeMessage = "That's all? Sure. See you again (hopefully LOL).";
         System.out.println(topPartOfBotReplyMessage + byeMessage + botPartOfBotReplyMessage);
         sc.close();
