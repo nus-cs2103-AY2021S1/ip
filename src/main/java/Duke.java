@@ -6,6 +6,7 @@ public class Duke {
 
     private static final String LINE = Colour.Red("____________________________________________________________");
     private static final String INDENT = "    ";
+    private static List<Task> tasks = new ArrayList<>();
 
     public static void printLine() {
         System.out.println(INDENT + LINE);
@@ -31,12 +32,16 @@ public class Duke {
         while (run) {
             String input = sc.nextLine();
             List<String> responses = new ArrayList<>();
-            if (input.equals("bye")) {
-                responses.add("Bye. Hope to see you again soon!");
-                run = false;
-            } else {
-                responses.add(input);
+
+            switch (input) {
+                case "bye":
+                    responses.add("Bye. Hope to see you again soon!");
+                    run = false;
+                    break;
+                default:
+                    responses.add(input);
             }
+
             respond(responses);
         }
     }
