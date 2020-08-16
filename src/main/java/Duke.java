@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private List<String> list;
+    private TaskList taskList;
     private static final String starline = "**************************************************************************";
     private static final String logo =
               " ____        _        \n"
@@ -13,15 +13,16 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|";
 
     public Duke() {
-        this.list = new ArrayList<>();
+        this.taskList = new TaskList();
     }
 
     public static void greet() {
         System.out.println(starline +
                 "\nWelcome! I am \n" + logo +
                 "\nHere are some magic words to get you going: " +
-                "\nIf you are done, feel free to say 'bye'!" +
-                "\nIf you'd like to view your tasks, say 'list'." +
+                "\nTo view your tasks, say 'list'." +
+                "\nTo check off a task, say 'done <task number>'." +
+                "\nTo leave, say 'bye'." +
                 "\nOtherwise, send me new tasks to add them to your todo list!\n" +
                 starline);
     }
@@ -30,31 +31,25 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String next = sc.nextLine();
         while (!next.equals("bye")){
+            String[] splitNext = next.split(" ", 2);
             if (next.equals("list")) {
-                list();
+                taskList.list();
+            } else if (splitNext[0].equals("done")) {
+                try {
+                    int index = Integer.parseInt(splitNext[1]);
+                    taskList.markTaskAsDone(index - 1);
+                } catch (NumberFormatException ex1) {
+                    System.out.println("The magic word 'done' is reserved for checking off tasks! " +
+                            "Please avoid using it at the start of a task name.");
+                } catch (IndexOutOfBoundsException ex2) {
+                    System.out.println("You do not have this task yet! Type 'list' to check out your tasks.");
+                }
             } else {
-                add(next);
+                taskList.add(next);
             }
             next = sc.nextLine();
         }
         sc.close();
-    }
-
-    public void echo(String input) {
-        System.out.println("added: " + input);
-    }
-
-    public void add(String input) {
-        this.list.add(input);
-        echo(input);
-    }
-
-    public void list() {
-        System.out.println(starline);
-        for (int i=0; i < this.list.size(); i++) {
-            System.out.println(String.format("%d. %s", i+1, this.list.get(i)));
-        }
-        System.out.println(starline);
     }
 
     public static void exit() {
