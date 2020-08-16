@@ -19,6 +19,7 @@ public class Duke {
     while (!input.equals("bye")) {
       input = scanner.next();
       // Switch case use to prepare for future requirements
+      label:
       switch (input) {
         case "list":
           /*
@@ -30,6 +31,7 @@ public class Duke {
                    }
           */
 
+          System.out.println("Here are the tasks in your list: ");
           for (int i = 0; i < tasksArr.length; i++) {
             if (tasksArr[i] == null) {
               break;
@@ -53,30 +55,38 @@ public class Duke {
         default:
           if (!input.equals("bye")) {
             String addMessage = "Got it. I've added this task:";
-            if (input.equals("todo")) {
-              System.out.println(addMessage);
-              // Change line below to for Arraylist implementation
-              tasksArr[taskTracker] = new Todo(scanner.nextLine());
-            } else if (input.equals("deadline")) {
-              System.out.println(addMessage);
-              scanner.useDelimiter("/by");
-              String desc = scanner.next().trim();
-              scanner.skip("/by");
-              String by = scanner.nextLine().trim();
-              // Change line below to for Arraylist implementation
-              tasksArr[taskTracker] = new Deadline(desc, by);
-            } else if (input.equals("event")) {
-              System.out.println(addMessage);
-              scanner.useDelimiter("/at");
-              String desc = scanner.next().trim();
-              scanner.skip("/at");
-              String at = scanner.nextLine().trim();
-              // Change line below to for Arraylist implementation
-              tasksArr[taskTracker] = new Event(desc, at);
-            } else {
-              // Change line below to for proper throw exception
-              System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-              break;
+            switch (input) {
+              case "todo":
+                System.out.println(addMessage);
+                // Change line below to for Arraylist implementation
+                tasksArr[taskTracker] = new Todo(scanner.nextLine());
+                break;
+              case "deadline":
+                {
+                  System.out.println(addMessage);
+                  scanner.useDelimiter("/by");
+                  String desc = scanner.next().trim();
+                  scanner.skip("/by");
+                  String by = scanner.nextLine().trim();
+                  // Change line below to for Arraylist implementation
+                  tasksArr[taskTracker] = new Deadline(desc, by);
+                  break;
+                }
+              case "event":
+                {
+                  System.out.println(addMessage);
+                  scanner.useDelimiter("/at");
+                  String desc = scanner.next().trim();
+                  scanner.skip("/at");
+                  String at = scanner.nextLine().trim();
+                  // Change line below to for Arraylist implementation
+                  tasksArr[taskTracker] = new Event(desc, at);
+                  break;
+                }
+              default:
+                // Change line below to for proper throw exception
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                break label;
             }
             System.out.println("\t" + tasksArr[taskTracker]);
             taskTracker++;
