@@ -1,6 +1,6 @@
 public class DoneException extends DukeException {
 
     public DoneException() {
-        super("OOPS!!! The description of a done cannot be empty.");
+        super("what have you done? It's empty... JK you cannot leave done description blank :)");
     }
 }

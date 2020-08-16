@@ -24,12 +24,18 @@ public class Duke {
 
     @Override
     public String toString() {
-        String donLogo = "  ______      _______     ____    __    \n"
-                + " |   _  \\    /   _   \\   |    \\  |  |\n"
-                + " |  | |  |  |   | |   |  |  |\\ \\ |  |\n"
-                + " |  |_|  |  |   |_|   |  |  | \\ \\|  |\n "
-                + "|_____ /    \\______ /   |__|  \\____|\n";
-        String msg = "Hola! I'm Don \n" +
+//        String donLogo = "  ______      _______     ____    __    \n"
+//                + " |   _  \\    /   _   \\   |    \\  |  |\n"
+//                + " |  | |  |  |   | |   |  |  |\\ \\ |  |\n"
+//                + " |  |_|  |  |   |_|   |  |  | \\ \\|  |\n "
+//                + "|_____ /    \\______ /   |__|  \\____|\n";
+        String donLogo = "   ___     ___    _  _     ___     ___ \n"
+                + "  |   \\   / _ \\  | \\| |   / __|   / _ \\  \n"
+                + "  | |) | | (_) | | .` |  | (_ |  | (_) | \n"
+                + "  |___/   \\___/  |_|\\_|   \\___|   \\___/  \n"
+                + "_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"| \n"
+                + "\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-' \n";
+        String msg = "Hola! I'm Dongo :) \n" +
                 "How can I help you?";
         return donLogo + "\n" + msg;
     }
@@ -46,7 +52,8 @@ public class Duke {
 
             } else if (firstWord.equals("bye")) {
                 sc.close();
-                System.out.println("baii~ have a great day!");
+                System.out.println("time to say goodbye :( \n +" +
+                                    "have a great day!");
                 System.exit(0);
                 return;
 
@@ -60,6 +67,8 @@ public class Duke {
                     processDeadline(command);
                 } else if (firstWord.equals("event")) {
                     processEvent(command);
+                } else if (firstWord.equals("delete")) {
+                    processDelete(command);
                 } else {
                     throw new WrongInputException();
                 }
@@ -74,6 +83,25 @@ public class Duke {
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }
+    }
+
+    public void processDelete(String command) throws DeleteException {
+        try {
+            String theRest = removeFirstWord(command);
+            Integer taskNum = Integer.parseInt(theRest);
+            int index = taskNum - 1;
+            deleteTask(index);
+        } catch (DukeException d) {
+            throw new DeleteException();
+        }
+    }
+    public void deleteTask(int taskNum) {
+        Task task = this.todos.get(taskNum);
+        this.todos.remove(task);
+        System.out.println("Noted. I've removed this task for you: \n"
+                + task.toString() + "\n"
+                + "Now you have " + this.todos.size() + " task(s) in the list.");
+
     }
 
     public void processDone(String command) throws DoneException {
@@ -127,7 +155,7 @@ public class Duke {
     }
 
     public void listItems() {
-        StringBuilder todoList = new StringBuilder("Here are the tasks in your list: \n");
+        StringBuilder todoList = new StringBuilder("Here are the task(s) in your list: \n");
         int num = 1;
         for (Task item : this.todos) {
             todoList.append(num + ". " + item.toString() + "\n");
@@ -138,8 +166,8 @@ public class Duke {
 
     public void saveToList(Task todo) {
         this.todos.add(todo);
-        System.out.println("Got it. I've added this task: \n" + todo.toString());
-        System.out.println("Now you have " + this.todos.size() + " tasks in the list.");
+        System.out.println("Okay~ I've added this task: \n" + todo.toString());
+        System.out.println("Now you have " + this.todos.size() + " task(s) in the list.");
     }
 
     public void markTaskAsDone(int taskNum) {
@@ -148,7 +176,7 @@ public class Duke {
         Task newTask = oldTask.markAsDone();
         this.todos.remove(oldTask);
         this.todos.add(index, newTask);
-        System.out.println("Nice job! I've marked this task as done : \n"
+        System.out.println("YAYY! I've marked this task as done : \n"
                 + newTask.toString());
     }
 }

@@ -1,6 +1,6 @@
 public class DeadlineException extends DukeException {
 
     public DeadlineException() {
-        super("OOPS!!! The description of a deadline cannot be empty.");
+        super("I don't know what are you trying to finish, please elaborate :)");
     }
 }
