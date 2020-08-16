@@ -6,6 +6,7 @@ public class Duke {
     private static String line = "____________________________________________________________";
 
     private String name = "Bolot";
+    private String end = "bye";
     private ArrayList<String> list = new ArrayList<>();
 
     public void greet() {
@@ -15,9 +16,15 @@ public class Duke {
         System.out.println(line);
     }
 
+    public void bye() {
+        System.out.println(line);
+        System.out.println("Bye! Thank you for chatting with me!");
+        System.out.println("Hope to see you again soon!");
+        System.out.println(line);
+    }
+
     public void echo() {
         Scanner sc = new Scanner(System.in);
-        String end = "bye";
 
         String type = sc.nextLine();
 
@@ -29,10 +36,35 @@ public class Duke {
             type = sc.nextLine();
         }
 
-        System.out.println(line);
-        System.out.println("Bye! Thank you for chatting with me!");
-        System.out.println("Hope to see you again soon!");
-        System.out.println(line);
+        bye();
+    }
+
+    public void addList() {
+        Scanner sc = new Scanner(System.in);
+
+        String type = sc.nextLine();
+
+        while (!type.equalsIgnoreCase(end)) {
+
+            System.out.println(line);
+
+            if (type.equalsIgnoreCase("list")) {
+                int i = 1;
+                for (String todo: list) {
+                    System.out.println(String.format("%d. %s", i, todo));
+                    i++;
+                }
+            } else {
+                list.add(type);
+                System.out.println(String.format("added: %s", type));
+            }
+
+            System.out.println(line);
+
+            type = sc.nextLine();
+        }
+
+        bye();
     }
 
     public static void main(String[] args) {
@@ -46,7 +78,8 @@ public class Duke {
 
         Duke bot = new Duke();
         bot.greet();
-        bot.echo();
+//        bot.echo();
+        bot.addList();
     }
 
 
