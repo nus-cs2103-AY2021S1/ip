@@ -24,7 +24,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("%s. %s", id, name);
+        return (isDone() ? "[✓] " : "[✗] ") + name;
     }
 
     public boolean isDone() {
