@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ public class Duke {
         String description = "";
         String timing = null;
 
-        for (int i = 0; i < commandArray.length; i++) {
+        for (int i = 1; i < commandArray.length; i++) {
             if (commandArray[i].equals("/by")) {
                 timing = getTiming(commandArray, i + 1);
                 break;
@@ -30,7 +31,11 @@ public class Duke {
                 timing = getTiming(commandArray, i + 1);
                 break;
             }
-            description = description + " " + commandArray[i];
+            if (i == 1) {
+                description = commandArray[i];
+            } else {
+                description = description + " " + commandArray[i];
+            }
         }
 
         switch (command) {
@@ -66,7 +71,7 @@ public class Duke {
             if (command.equals("bye")) {
                 break;
             } else if (command.equals("list")) {
-                System.out.println(formatReply(listTasks(taskList)));
+                System.out.println(formatReply("Here are the tasks in your list:\n" + listTasks(taskList)));
             } else if (command.equals("done")) {
                 Task task = taskList.get(input.nextInt() - 1);
                 task.completeTask();
@@ -77,7 +82,8 @@ public class Duke {
             else {
                 Task newTask = getTask(command, input);
                 taskList.add(newTask);
-                System.out.println(formatReply("added: " + newTask.getTaskDescription()));
+                System.out.println(formatReply("Got it. I've added this task:\n" + newTask.toString()
+                        + "\nNow you have " + taskList.size() + " tasks in the list."));
             }
         }
         System.out.println(formatReply("Bye. Hope to see you again soon!"));
