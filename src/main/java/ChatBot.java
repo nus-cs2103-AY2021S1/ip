@@ -61,7 +61,7 @@ class ChatBot {
                 if (inputArray[0].equals("done")) {
                     makeTaskDone(inputArray[1]);
                 } else {
-                    add(input);
+                    add(inputArray);
                 }
             }
         }
@@ -112,15 +112,16 @@ class ChatBot {
 
     /**
      * Adds a string task into the arraylist.
-     * @param item the name of the task the user entered
+     * @param inputArray the name of the task the user entered
      */
-    void add(String item) {
-        Task task = new Task(item);
-        this.toDoList.add(task);
-        System.out.println(ConsoleColors.YELLOW.getColor()
-                + this.botName + ": "
-                + "[" + item + "] has been added to your list! \n"
-                + ConsoleColors.RESET.getColor());
+    void add(String[] inputArray) {
+////        if (inputArray[0].equals())
+//        Task task = new Task(item);
+//        this.toDoList.add(task);
+//        System.out.println(ConsoleColors.YELLOW.getColor()
+//                + this.botName + ": "
+//                + "[" + item + "] has been added to your list! \n"
+//                + ConsoleColors.RESET.getColor());
     }
 
     /**
