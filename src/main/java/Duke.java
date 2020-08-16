@@ -1,7 +1,12 @@
-import java.util.Scanner;
-import java.util.List;
+import Task.DeadlineTask;
+import Task.EventTask;
+import Task.Task;
+import Task.ToDoTask;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
 import java.util.function.BiConsumer;
 
 public class Duke {
