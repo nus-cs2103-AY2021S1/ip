@@ -53,14 +53,38 @@ public class Duke {
                     task.toString());
             break;
         default: // it's a new task
-            Duke.addTask(input);
+            Duke.addTask(command, input);
             break;
         }
     }
 
-    private static void addTask(String taskName) {
-        TASKS.add(new Task(taskName));
-        Duke.displayMessages(String.format("Ok, you want to: %s", taskName));
+    private static void addTask(String command, String input) {
+        Task task;
+        switch (command) {
+        case "todo":
+            String taskName = input.split("todo ")[1];
+            task = new TodoTask(taskName);
+            break;
+        case "deadline":
+            String[] deadlineDetails = input.split("deadline | /by ");
+            task = new DeadlineTask(deadlineDetails[1], deadlineDetails[2]);
+            break;
+        case "event":
+            String[] eventDetails = input.split("event | /at ");
+            task = new EventTask(eventDetails[1], eventDetails[2]);
+            break;
+        default:
+            task = new Task(input);
+            break;
+        }
+        TASKS.add(task);
+        Duke.displayMessages(
+                "Okay, you want to:",
+                task.toString(),
+                String.format(
+                        "Now you have %d thing%s you'need me to remind you about.",
+                        TASKS.size(),
+                        TASKS.size() == 1 ? "" : "s"));
     }
 
     private static void displayTasks() {
