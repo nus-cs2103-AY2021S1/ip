@@ -1,8 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static final String spacing = "     ";
     private static final String divider = "_______________________________________________________";
+    private static ArrayList<String> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         Greeting();
@@ -14,8 +16,18 @@ public class Duke {
                 scanner.close();
                 printMessage("Bye! See you next time :)");
                 System.exit(0);
+            } else if (input.equals("list")) {
+                System.out.println(spacing + divider);
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.println(spacing + (i + 1) + ": " + tasks.get(i));
+
+                }
+                System.out.println(spacing + divider);
+            } else {
+                tasks.add(input);
+                printMessage("Added: " + input);
             }
-            printMessage(input);
+
         }
     }
 
