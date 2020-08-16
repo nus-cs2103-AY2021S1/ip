@@ -25,15 +25,20 @@ public class Duke {
             //Print list when user inputs "list"
             if (input.equals("list")) {
                 printList(list);
-            } else if (inputArr[0].equals("done")) { // Mark task as done when user inputs "done"
+            }
+            // Mark task as done when user inputs "done"
+            else if (inputArr[0].equals("done")) {
                 String taskNumber = inputArr[1];
                 try {
                     markTaskDoneInList(list, Integer.parseInt(taskNumber) - 1);
                 } catch (NumberFormatException e) {
                     System.out.println(addDividers(formatString("Please enter out a valid number\n")));
                 }
-            } else { //Add a new task to the list
-                if (inputArr[0].equals("todo")) { //Add a new to-do task
+            }
+            //Add a new task to the list
+            else {
+                //Add a new to-do task
+                if (inputArr[0].equals("todo")) {
                     String todoName = input.substring(5);
                     ToDo todo = new ToDo(todoName);
                     list.add(todo);
@@ -41,7 +46,20 @@ public class Duke {
                             formatString(todo.toString() + '\n') +
                             formatString("Now you have " + list.size() + " tasks in the list. \n");
                     System.out.println(addDividers(s));
-                } else {
+                }
+                //Add a new deadline task
+                else if (inputArr[0].equals("deadline")) {
+                    String deadlineString = input.substring(9);
+                    String[] deadlineArr = deadlineString.split(" /by ");
+                    Deadline deadline = new Deadline(deadlineArr[0], deadlineArr[1]);
+                    list.add(deadline);
+                    String s = formatString("Got it. I've added this task: \n") +
+                            formatString(deadline.toString() + '\n') +
+                            formatString("Now you have " + list.size() + " tasks in the list. \n");
+                    System.out.println(addDividers(s));
+                }
+                //Add a normal task
+                else {
                     list.add(new Task(input));
                     String inputText = "added: " + input + '\n';
                     String echo = addDividers(formatString(inputText));
