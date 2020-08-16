@@ -7,12 +7,13 @@ public class WorkList {
         this.workList = new ArrayList<>();
     }
 
-    public ArrayList<Task> getWorkList() {
-        return this.workList;
-    }
-
-    public void addWork(Task work) {
+    public String addWork(Task work) {
         this.workList.add(work);
+        return "Got it. I've added this task:\n"
+                + work
+                + "\nNow you have "
+                + this.workList.size()
+                + " tasks in the list.";
     }
 
     public String readWork() {
@@ -20,7 +21,7 @@ public class WorkList {
         for(int i = 0; i < this.workList.size(); i ++) {
             results.append(i + 1);
             results.append(". ");
-            results.append(this.workList.get(i).toString());
+            results.append(this.workList.get(i));
             if(i + 1 != this.workList.size()){
                 results.append("\n");
             }
@@ -33,6 +34,10 @@ public class WorkList {
         this.workList.set(taskId - 1, tsk.markAsDone());
 
         return  "Congratz! I've marked this task as done:\n"
-                + this.workList.get(taskId - 1).toString();
+                + this.workList.get(taskId - 1);
+    }
+
+    public int workListLen() {
+        return this.workList.size();
     }
 }

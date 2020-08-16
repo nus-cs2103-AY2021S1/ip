@@ -6,70 +6,96 @@ public class Duke {
         return "**\n" + word + "\n**";
     }
 
-    private static String addWorkStringDesign(String work, WorkList lst) {
-        return "Got it. I've added this task:\n"
-                + work
-                + "\nNow you have "
-                + lst.getWorkList().size()
-                + " tasks in the list.";
+    private static void infoValidator(String command, int splitNum, boolean timeRelated) throws DukeException {
+        if(splitNum < 2) {
+            if(timeRelated
+                    && (command.equals("deadline") || command.equals("event"))) {
+                throw new DukeException("HEY!!! Feed me with time/date. I am hungry T_T");
+            } else {
+                throw new DukeException("HEY!!! Don't be stingy give me more information >.<");
+            }
+        }
     }
+
+    private static int indexValidator(String command, String strIndex, int listLen, int splitNum)
+            throws DukeException, NumberFormatException {
+        try {
+            int index = Integer.parseInt(strIndex);
+
+            if (index > listLen && command.equals("done")) {
+                throw new DukeException("I don't have this work to mark as Done :>");
+            } else if (splitNum < 2) {
+                throw new DukeException("HEY!!! Don't be stingy give me more information >.<");
+            }
+            return index;
+        } catch ( NumberFormatException ex) {
+            throw new NumberFormatException("Please feed me with integer number ~_~");
+        }
+    }
+
 
     private static void order() {
         Scanner sc = new Scanner(System.in);
         String output;
         WorkList lst = new WorkList();
+
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            if(input.equals("list")) {
-                output = printDesign(lst.readWork());
-            } else if(input.equals("bye")) {
-                output = "** Bye. Hope to see you soon!! **";
-            } else {
-                String[] splitOrder = input.split(" ", 2);
-                String Command = splitOrder[0];
-                String info = splitOrder[1];
-
-                switch (Command) {
+            String[] splitOrder = input.split(" ", 2);
+            String command = splitOrder[0];
+            try {
+                switch (command) {
+                    case "list":
+                        output = printDesign(lst.readWork());
+                        break;
+                    case "bye":
+                        output = "** Bye. Hope to see you soon!! **";
+                        break;
                     case "done":
-                        output = printDesign(
-                                lst.updateTaskStatus(
-                                        Integer.parseInt(info)
-                                )
-                        );
+                        infoValidator(command, splitOrder.length, false);
+                        int doneTaskId = indexValidator(command, splitOrder[1], lst.workListLen(), splitOrder.length);
+                        output = printDesign(lst.updateTaskStatus(doneTaskId));
                         break;
                     case "todo":
-                        Todo newTodo = new Todo(info);
-                        lst.addWork(newTodo);
-                        output = printDesign(addWorkStringDesign(newTodo.toString(), lst));
+                        infoValidator(command, splitOrder.length, false);
+                        String todoInfo = splitOrder[1];
+                        Todo newTodo = new Todo(todoInfo);
+                        output = printDesign(lst.addWork(newTodo));
                         break;
                     case "deadline":
-                        String[] deadlineInfo = info.split(" /by ");
-                        String deadlineEvent = deadlineInfo[0];
-                        String deadlineTime = deadlineInfo[1];
+                        infoValidator(command, splitOrder.length, false);
+                        String deadlineInfo = splitOrder[1];
+                        String[] dInfo = deadlineInfo.split(" /by ");
+                        infoValidator(command, dInfo.length, true);
+                        String deadlineEvent = dInfo[0];
+                        String deadlineTime = dInfo[1];
                         Deadline newDeadline = new Deadline(deadlineEvent, deadlineTime);
-                        lst.addWork(newDeadline);
-                        output = printDesign(addWorkStringDesign(newDeadline.toString(), lst));
+                        output = printDesign(lst.addWork(newDeadline));
                         break;
                     case "event":
-                        String[] eventInfo = info.split(" /at ");
-                        String eventEvent = eventInfo[0];
-                        String EventTime = eventInfo[1];
+                        infoValidator(command, splitOrder.length, false);
+                        String eventInfo = splitOrder[1];
+                        String[] eInfo = eventInfo.split(" /at ");
+                        infoValidator(command, eInfo.length, true);
+                        String eventEvent = eInfo[0];
+                        String EventTime = eInfo[1];
                         Event newEvent = new Event(eventEvent, EventTime);
-                        lst.addWork(newEvent);
-                        output = printDesign(addWorkStringDesign(newEvent.toString(), lst));
+                        output = printDesign(lst.addWork(newEvent));
                         break;
                     default:
-                        Task newTask = new Task(input);
-                        lst.addWork(newTask);
-                        output = printDesign("added: " + input);
+                        String errorCommand = "Hey!!! I'm sorry, but I don't know what that means :-()";
+                        output = printDesign(errorCommand);
                         break;
                 }
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException ex){
+                output = printDesign(ex.getMessage());
             }
 
             System.out.println(output);
             if(input.equals("bye")) {
                 break;
             }
+
         }
 
 
