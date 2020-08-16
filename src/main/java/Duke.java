@@ -1,3 +1,5 @@
+package main.java;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,6 +24,7 @@ public class Duke {
         List<Task> list = new ArrayList<>();
 
         String output;
+        boolean added = false;
 
          do {
 
@@ -33,10 +36,9 @@ public class Duke {
                      System.out.println((i + 1) + ". " + list.get(i));
                  }
                  System.out.println(line);
-                 continue;
              }
 
-             if (output.indexOf("done") == 0) {
+             else if (output.indexOf("done ") == 0) {
                  String[] arr = output.split(" ");
 
                  try {
@@ -50,20 +52,45 @@ public class Duke {
                          System.out.println(line);
                      }
 
-                     continue;
-
                  } catch (NumberFormatException nfe) {
 
                  }
              }
 
-             list.add(new Task(output));
-             System.out.println("added: " + output);
-             System.out.println(line);
+             else if (output.indexOf("todo ") == 0 && output.length() > 5) {
+                 list.add(new ToDo(output.substring(5)));
+                 added = true;
+             }
+
+             else if (output.indexOf("deadline ") == 0) {
+
+                 int deadlineIndex = output.indexOf("/by ");
+
+                 if (deadlineIndex != -1 && output.length() > deadlineIndex + 4) {
+                     list.add(new Deadline(output.substring(9, deadlineIndex - 1), output.substring(deadlineIndex + 4)));
+                     added = true;
+                 }
+             }
+
+             else if (output.indexOf("event ") == 0) {
+
+                 int timeIndex = output.indexOf("/at ");
+
+                 if (timeIndex != -1 && output.length() > timeIndex + 4) {
+                     list.add(new Event(output.substring(6, timeIndex - 1), output.substring(timeIndex + 4)));
+                     added = true;
+                 }
+             }
+
+             if (added){
+                 added = false;
+                 System.out.println("Got it. I've added this task:");
+                 System.out.println(list.get(list.size() - 1));
+                 System.out.println(line);
+             }
 
         } while (!output.equals("bye"));
 
-        System.out.println(line);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(line);
     }

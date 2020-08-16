@@ -1,4 +1,6 @@
-public class Task {
+package main.java;
+
+public abstract class Task {
 
     private boolean completed;
     private String msg;
