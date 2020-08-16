@@ -26,7 +26,7 @@ public class Duke {
      * @return output by Hal9000
      */
     public String get_output(Task taskInput) {
-        return "added: " + taskInput + "\n"; // level 2
+        return String.format("Got it. I've added this task:\n  %s %s\nNow you have %d tasks in the list\n", labels(taskInput), taskInput.toString(), this.tasks.size());
     }
 
     public static String format_response(String output_msg) {
@@ -36,29 +36,31 @@ public class Duke {
         "____________________________________________________________\n";
     }
 
+    public static String labels(Task t) {
+        String label = "";
+        if (t.getType() == TaskType.ToDo) {
+            label += "[T]";
+        } else if (t.getType() == TaskType.Deadline) {
+            label += "[D]";
+        } else {
+            label += "[E]";
+        }
+
+        if (t.isDone()) {
+            label += "[✓]";
+        } else {
+            label += "[✗]";
+        }
+
+        return label;
+    }
+
     public String summarize() {
         String all_tasks = "Here are the tasks in your list:\n";
         for (int i = 0; i < this.tasks.size(); i++) {
             Task t = tasks.get(i);
-            String tick = "";
-            if (t.isDone()) {
-                tick = "✓";
-            } else {
-                tick = "✗";
-            }
-
-            String label = "";
-            if (t.getType() == TaskType.ToDo) {
-                label = "T";
-            } else if (t.getType() == TaskType.Deadline) {
-                label = "D";
-            } else {
-                label = "E";
-            }
-
-            all_tasks += String.format("%d.[%s][%s] %s\n", i+1, label, tick, t.toString());
+            all_tasks += String.format("%d.%s %s\n", i+1, labels(t), t.toString());
         }
-
         return all_tasks;
     }
 
