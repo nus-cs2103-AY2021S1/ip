@@ -2,7 +2,6 @@
  * Handles text formatting
  */
 public class TextFormatter {
-
     /** Horizontal lines used for formatting */
     private static final String HORIZONTAL_LINE = "∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴";
     private static final String HORIZONTAL_LINE_2 = "▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼";
@@ -24,7 +23,7 @@ public class TextFormatter {
             + "　　 　＼/＿＿＿/\n";
 
     /**
-     * Return text formatted with indentation and lines.
+     * Returns text formatted with indentation and lines.
      *
      * @param text Text to be wrapped.
      */
