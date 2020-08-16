@@ -1,8 +1,7 @@
-package main.java;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import main.java.*;
 
 public class Duke {
     public static void main(String[] args) {
@@ -86,6 +85,7 @@ public class Duke {
                  added = false;
                  System.out.println("Got it. I've added this task:");
                  System.out.println(list.get(list.size() - 1));
+                 System.out.println("Now you have " + list.size() + " tasks in the list.");
                  System.out.println(line);
              }
 
