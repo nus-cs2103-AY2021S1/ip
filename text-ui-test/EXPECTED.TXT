@@ -10,20 +10,22 @@ What can I do for you?
 ________________________________________
 Your command:
 ________________________________________
+You have nothing in your list. Find something to do you human!
+________________________________________
+Your command:
+________________________________________
 Got it. I've added this task:
 [T] [Not done] borrow book
 You have 1 tasks in your list
 ________________________________________
 Your command:
 ________________________________________
+OOPS, the description of a todo cannot be empty
 ________________________________________
 Your command:
 ________________________________________
-Here are the tasks in your lists:
+Here are the task(s) in your lists:
 1. [T] [Not done] borrow book
-________________________________________
-Your command:
-________________________________________
 ________________________________________
 Your command:
 ________________________________________
@@ -33,6 +35,23 @@ You have 2 tasks in your list
 ________________________________________
 Your command:
 ________________________________________
+OOPS, the description, time of a deadline cannot be empty
+________________________________________
+Your command:
+________________________________________
+OOPS, the description, time of a deadline cannot be empty
+________________________________________
+Your command:
+________________________________________
+OOPS, the time of a deadline cannot be empty
+________________________________________
+Your command:
+________________________________________
+OOPS, the time of a deadline cannot be empty
+________________________________________
+Your command:
+________________________________________
+OOPS, the description of a deadline cannot be empty
 ________________________________________
 Your command:
 ________________________________________
@@ -42,6 +61,55 @@ You have 3 tasks in your list
 ________________________________________
 Your command:
 ________________________________________
+OOPS, the description, time of a event cannot be empty
+________________________________________
+Your command:
+________________________________________
+OOPS, the description, time of a event cannot be empty
+________________________________________
+Your command:
+________________________________________
+OOPS, the time of a event cannot be empty
+________________________________________
+Your command:
+________________________________________
+OOPS, the time of a event cannot be empty
+________________________________________
+Your command:
+________________________________________
+OOPS, the time of a event cannot be empty
+________________________________________
+Your command:
+________________________________________
+OOPS, the description of a event cannot be empty
+________________________________________
+Your command:
+________________________________________
+Good job bud! I've marked this task as done:
+[T] [Done] borrow book
+________________________________________
+Your command:
+________________________________________
+Invalid index. Please input a number between 1 and 3
+________________________________________
+Your command:
+________________________________________
+Invalid index. Please input a number between 1 and 3
+________________________________________
+Your command:
+________________________________________
+Noted. I've deleted this task:
+[D] [Not done] return book (by: Sunday)
+You have 2 tasks in your list
+________________________________________
+Your command:
+________________________________________
+Noted. I've deleted this task:
+Invalid index. Please input a number between 1 and 2
+________________________________________
+Your command:
+________________________________________
+Invalid index. Please input a number between 1 and 2
 ________________________________________
 Your command:
 ________________________________________

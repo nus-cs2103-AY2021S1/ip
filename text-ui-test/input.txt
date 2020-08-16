@@ -1,9 +1,24 @@
-todo borrow book
-
 list
-
+todo borrow book
+todo
+list
 deadline return book /by Sunday
-
+deadline
+deadline /by
+deadline book /by
+deadline book
+deadline /by Sunday
 event project meeting /at Mon 2-4pm
-
+event
+event /at
+event project meeting /at
+event project meeting
+event project /at
+event /at Mon 2-4pm
+done 1
+done 0
+done something else
+delete 2
+delete 10
+delete something else
 bye

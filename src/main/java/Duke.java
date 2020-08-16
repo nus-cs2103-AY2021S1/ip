@@ -22,23 +22,25 @@ public class Duke {
     private static String showTasksMsg = "Here are the task(s) in your lists:";
     private static String addSuccessfulMsg = "Got it. I've added this task:";
     private static String horizontalLine = "________________________________________";
-    private static String cmdReq = "Your command: ";
+    private static String cmdReq = "Your command:";
     private static String lazyHumanBash = "You have nothing in your list. Find something to do you human!";
     private static String unrecognizedCmdMsg = "I don't understand a single word you say, human\n"
             + "Speak robot language pls";
-    private static String invalidIdxMsg = "Invalid index. Don't you know how to count?";
+    private static String invalidIdxMsg() {
+        return "Invalid index. Please input a number between 1 and " + tasks.size();
+    }
 
     private static String taskReport() {
         return "You have " + tasks.size() + " tasks in your list";
     }
 
     // logo and greeting
-    private static String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    private static String greeting = "Hello human, I'm Duke the supporting chatbot \n"
+    private static String logo = " ____        _\n"
+                                + "|  _ \\ _   _| | _____\n"
+                                + "| | | | | | | |/ / _ \\\n"
+                                + "| |_| | |_| |   <  __/\n"
+                                + "|____/ \\__,_|_|\\_\\___|\n";
+    private static String greeting = "Hello human, I'm Duke the supporting chatbot\n"
             + "What can I do for you?";
 
     // main
@@ -148,7 +150,7 @@ public class Duke {
             } catch (InadequateCommandException e) {
                 System.out.println(e.getMessage());
             } catch (InvalidIndexException e) {
-                System.out.println(invalidIdxMsg);
+                System.out.println(invalidIdxMsg());
             } catch (IncorrectCommandException e) {
                 System.out.println(unrecognizedCmdMsg);
             }
