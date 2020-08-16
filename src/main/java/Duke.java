@@ -25,7 +25,7 @@ public class Duke {
             try {
                 System.out.print("Enter input: ");
                 input = sc.nextLine();
-
+                System.out.print("\n");
                 if (input.equals("bye")) {
                     System.out.println("Bye, see you soon. Exiting...");
                     break;

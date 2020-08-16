@@ -1,0 +1,7 @@
+todo first task
+event second task /at Aug 20th 2pm
+deadline 3rd task /by Saturday 4pm
+done 1
+done 2
+list
+bye
