@@ -23,5 +23,4 @@ public class Duke {
             answer = answer.toLowerCase();
         } while (!answer.equals("bye"));
     }
-
 }
