@@ -6,9 +6,9 @@ public class Task {
         this.taskName = taskName;
         this.isDone = false;
     }
-
-    public boolean isDone() {
-        return this.isDone;
+    
+    public void setDone() {
+        isDone = true;
     }
 
     @Override

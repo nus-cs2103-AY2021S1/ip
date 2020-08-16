@@ -38,6 +38,15 @@ public class Duke {
                 for (int i = 0; i < itemsIndex; i++) {
                     System.out.println("     " + (i + 1) + ". " + tasks[i]);
                 }
+            } else if (isDoneString(newItem)) {
+                //Need to handle out of bounds number.
+                String itemNumber = newItem.substring(5, newItem.length());
+                int itemIndex = Integer.valueOf((itemNumber)) - 1;
+                Task selectedTask = tasks[itemIndex];
+                selectedTask.setDone();
+                System.out.println("     Nice! I've marked this task as done: ");
+                System.out.println("        " + selectedTask);
+
             } else {
                 tasks[itemsIndex] = new Task(newItem);
                 itemsIndex++;
@@ -50,5 +59,19 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
         System.out.println("    Bye. Hope to see you again soon!");
         System.out.println("    ____________________________________________________________");
+    }
+
+    private static boolean isDoneString(String s) {
+        String[] split = s.split(" ");
+        if (split.length != 2) {
+            return false;
+        } else {
+            for (char c : split[1].toCharArray()) {
+                if (!Character.isDigit(c)) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
