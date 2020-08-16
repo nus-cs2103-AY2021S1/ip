@@ -1,19 +1,19 @@
 public class Task {
-    private final String description;
-    private boolean isDone;
+    protected final String description;
+    protected final boolean isDone;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    private Task(String description, boolean isDone) {
+    protected Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
 
     private String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return "[" + (isDone ? "\u2713" : "\u2718") + "]";
     }
 
     public Task markAsDone() {
@@ -22,6 +22,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + this.description;
+        return getStatusIcon() + " " + this.description;
     }
 }
