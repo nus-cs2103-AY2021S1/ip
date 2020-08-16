@@ -32,17 +32,46 @@ public class Duke {
         while (run) {
             String input = sc.nextLine();
             List<String> responses = new ArrayList<>();
-
-            switch (input) {
+            String[] inputSplit = input.split(" ");
+            String option = inputSplit[0];
+            switch (option) {
                 case "bye":
                     responses.add("Bye. Hope to see you again soon!");
                     run = false;
                     break;
                 case "list":
+                    responses.add("Here are the tasks in your list");
                     for (int i = 0; i < Duke.tasks.size(); i++) {
-                        String item = "" + (i+1) + ". " + Duke.tasks.get(i).getDescription();
+                        String item = "" + (i+1) + ". " + Duke.tasks.get(i).getStatus();
                         responses.add(item);
                     }
+                    break;
+                case "done":
+                    String usage = Colour.Blue("Usage: done [taskNumber]");
+                    if (inputSplit.length != 2) {
+                        responses.add(Colour.Red("Please provide a task number!"));
+                        responses.add(usage);
+                        break;
+                    }
+
+                    try {
+                        int taskNumber = Integer.parseInt(inputSplit[1]);
+
+                        if (taskNumber > Duke.tasks.size()) {
+                            responses.add(Colour.Red("No such task with that number!"));
+                            responses.add(usage);
+                            break;
+                        } else {
+                            responses.add("Nice! I've marked this as done:");
+                            Task task = Duke.tasks.get(taskNumber - 1);
+                            task.markDone();
+                            responses.add("  " + task.getStatus());
+                        }
+                    } catch (NumberFormatException e) {
+                        responses.add(Colour.Red("Invalid number provided"));
+                        responses.add(usage);
+                    }
+
                     break;
                 default:
                     Task newTask = new Task(input);

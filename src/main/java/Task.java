@@ -20,7 +20,7 @@ public class Task {
     }
 
     public String getStatus() {
-        String check = this.done ? "X" : " ";
+        String check = this.done ? "\u2713" : "\u2718";
         return "[" + check + "] " + this.getDescription();
     }
 }
