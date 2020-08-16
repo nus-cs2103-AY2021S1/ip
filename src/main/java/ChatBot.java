@@ -63,6 +63,9 @@ class ChatBot {
         sc.close();
     }
 
+    /**
+     * Presents the user with the list of tasks
+     */
     void showList() {
         System.out.println(ConsoleColors.YELLOW.getColor()
                 + this.botName + ": "
@@ -78,6 +81,10 @@ class ChatBot {
         System.out.println();
     }
 
+    /**
+     * Adds a string task into the arraylist.
+     * @param item the name of the task the user entered
+     */
     void add(String item) {
         this.toDoList.add(item);
         System.out.println(ConsoleColors.YELLOW.getColor()
