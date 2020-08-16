@@ -14,4 +14,8 @@ public class Task {
     public String getIcon() {
         return ( taskStatus ? "\u2713" : "\u2718" );
     }
+    @Override
+    public String toString() {
+        return "["+this.getIcon()+"] " + this.taskDesc;
+    }
 }
