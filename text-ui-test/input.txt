@@ -1,0 +1,8 @@
+list
+deadline Complete assignment /by Sunday
+event Attend seminar /at 6 Jun 21
+list
+done 1
+todo Buy eggs
+list
+bye
