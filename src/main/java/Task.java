@@ -2,11 +2,11 @@
  * Immutable Task Object.
  * A task has a description and a completion status.
  */
-public class Task implements ITask{
+public class Task implements ITask {
     protected final String description;
     protected final boolean isDone;
 
-    private Task(String description, boolean isDone) {
+    protected Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
