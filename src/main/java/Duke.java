@@ -27,12 +27,13 @@ public class Duke {
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
 
-            if (input.equals("bye")) {
+            switch (input) {
+            case "bye":
                 printToConsole("Goodbye!");
-                break;
+                return;
+            default:
+                printToConsole(input);
             }
-
-            printToConsole(input);
         }
 
         sc.close();
