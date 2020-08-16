@@ -32,6 +32,10 @@ public class Duke {
         return split;
     }
 
+    private static String getNumberOfTasks() {
+        return "Now you have " + Duke.tasks.size() + " tasks in the list.";
+    }
+
     public static void main(String[] args) {
         List<String> welcomeMessage = new ArrayList<>();
         welcomeMessage.add("Hello! I'm Duke");
@@ -80,7 +84,30 @@ public class Duke {
                         }
 
                         break;
+                    case "delete":
+                        if (inputSplit.length != 2) {
+                            throw new DukeException("Please provide a task number!");
+                        }
 
+                        try {
+                            int taskNumber = Integer.parseInt(inputSplit[1]);
+
+                            if (taskNumber > Duke.tasks.size()) {
+                                throw new DukeException("No such task with that number!");
+
+                            } else {
+                                responses.add("Noted. I've removed this task");
+                                Task task = Duke.tasks.get(taskNumber - 1);
+                                Duke.tasks.remove(taskNumber - 1);
+
+                                responses.add("  " + task.getStatus());
+                                responses.add(Duke.getNumberOfTasks());
+                            }
+                        } catch (NumberFormatException e) {
+                            throw new DukeException("Invalid number provided");
+                        }
+
+                        break;
                     case "todo":
                     case "deadline":
                     case "event":
@@ -113,7 +140,7 @@ public class Duke {
                         Duke.tasks.add(newTask);
                         responses.add("Got it. I've added this task");
                         responses.add("  " + newTask.getStatus());
-                        responses.add("Now you have " + Duke.tasks.size() + " tasks in the list.");
+                        responses.add(Duke.getNumberOfTasks());
                         break;
                     default:
                         throw new DukeException("Instruction not recognized");
