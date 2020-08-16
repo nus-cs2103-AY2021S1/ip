@@ -1,6 +1,8 @@
+
+
 public class event extends Task {
     String dateTime;
-    event(String name, String dateTime) {
+    public event(String name, String dateTime) {
         super(name);
         this.dateTime = dateTime;
     }

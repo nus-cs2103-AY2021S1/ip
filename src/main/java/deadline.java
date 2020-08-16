@@ -1,6 +1,7 @@
+
 public class deadline extends Task {
     String day;
-    deadline(String name, String day) {
+    public deadline(String name, String day) {
         super(name);
         this.day = day;
     }

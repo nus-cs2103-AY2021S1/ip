@@ -1,8 +1,10 @@
+
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Task {
-    static List<Task> tasks = new ArrayList<>();
+    public static List<Task> tasks = new ArrayList<>();
     private boolean done;
     private String name;
     private int ID;
@@ -30,14 +32,15 @@ public class Task {
     public static void listing(){
         System.out.println("   Here are the tasks in your list: ");
         for(Task task : tasks){
-             System.out.println("  " + task.ID + "." + task);
+             System.out.println("  " + task.ID + "." + task.toString());
         }
         System.out.println("\n" + "  ____________________________________________________________");
     }
     public String toString(){
         if(this.done) {
-            return "[✓] " + this.name;
+
+            return "[" + "\u2713" + "] " + this.name;
         }
-        return "[✗] " + this.name;
+        return "[" + "\u2717" + "] " + this.name;
     }
 }
