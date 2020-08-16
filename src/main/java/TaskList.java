@@ -24,8 +24,10 @@ public class TaskList {
 
     public String toString() {
         StringBuilder ls = new StringBuilder();
+        int counter = 1;
         for (Task task : list) {
-            ls.append(task).append("\n");
+            ls.append(counter).append(".").append(task).append("\n");
+            counter++;
         }
         return ls.toString();
     }

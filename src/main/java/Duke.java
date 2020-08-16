@@ -25,7 +25,7 @@ public class Duke {
                 System.out.println(tasks);
             } else {
                 System.out.println("added: " + input);
-                tasks.addItem(new Task(input, tasks.getNumTasks()));
+                tasks.addItem(new Task(input));
             }
         }
     }

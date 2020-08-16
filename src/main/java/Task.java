@@ -1,11 +1,9 @@
 public class Task {
     protected String name;
-    protected int number;
     protected boolean done;
 
-    public Task(String name, int number) {
+    public Task(String name) {
         this.name = name;
-        this.number = number;
         this.done = false;
     }
 
@@ -18,6 +16,6 @@ public class Task {
     }
 
     public String toString() {
-        return number + ".[" + getStatusIcon() + "]" + name;
+        return "[" + getStatusIcon() + "] " + name;
     }
 }
