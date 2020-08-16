@@ -10,4 +10,25 @@ list
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 list
+todo
+blah
+todooo
+event
+event disco
+event /at
+event disco /at
+event /at Orchard Rd
+event disco /at Orchard Rd
+deadline
+deadline homework
+deadline /by
+deadline homework /by
+deadline /by tomorrow
+deadline homework /by tomorrow
+list
+done 99
+done 3
+delete 5
+delete 21
+list
 bye

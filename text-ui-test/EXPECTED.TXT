@@ -95,6 +95,135 @@ Here are the tasks in your list:
 ------------------------------------------------------
 
 ------------------------------------------------------
+OOPS! The todo command has to be followed by a
+description of a task.
+------------------------------------------------------
+
+------------------------------------------------------
+OOPS! I'm sorry, but I don't know what that means :(
+------------------------------------------------------
+
+------------------------------------------------------
+OOPS! I'm sorry, but I don't know what that means :(
+------------------------------------------------------
+
+------------------------------------------------------
+OOPS! The event command has to be followed by a
+description of a task in the following format:
+event /at time.
+------------------------------------------------------
+
+------------------------------------------------------
+OOPS! The event command has to be followed by a
+description of a task in the following format:
+event /at time.
+------------------------------------------------------
+
+------------------------------------------------------
+OOPS! The event command has to be followed by a
+description of a task in the following format:
+event /at time.
+------------------------------------------------------
+
+------------------------------------------------------
+OOPS! The event command has to be followed by a
+description of a task in the following format:
+event /at time.
+------------------------------------------------------
+
+------------------------------------------------------
+OOPS! The event command has to be followed by a
+description of a task in the following format:
+event /at time.
+------------------------------------------------------
+
+------------------------------------------------------
+Got it. I've added this task:
+[E][✘] disco (at: Orchard Rd)
+Now you have 8 tasks in the list.
+------------------------------------------------------
+
+------------------------------------------------------
+OOPS! The deadline command has to be followed by a
+description of a task in the following format:
+task /by deadline.
+------------------------------------------------------
+
+------------------------------------------------------
+OOPS! The deadline command has to be followed by a
+description of a task in the following format:
+task /by deadline.
+------------------------------------------------------
+
+------------------------------------------------------
+OOPS! The deadline command has to be followed by a
+description of a task in the following format:
+task /by deadline.
+------------------------------------------------------
+
+------------------------------------------------------
+OOPS! The deadline command has to be followed by a
+description of a task in the following format:
+task /by deadline.
+------------------------------------------------------
+
+------------------------------------------------------
+OOPS! The deadline command has to be followed by a
+description of a task in the following format:
+task /by deadline.
+------------------------------------------------------
+
+------------------------------------------------------
+Got it. I've added this task:
+[D][✘] homework (by: tomorrow)
+Now you have 9 tasks in the list.
+------------------------------------------------------
+
+------------------------------------------------------
+Here are the tasks in your list:
+1.[T][✓] read book
+2.[D][✘] return book (by: June 6th)
+3.[E][✘] project meeting (at: Aug 6th 2-4pm)
+4.[T][✓] join sports club
+5.[T][✘] borrow book
+6.[D][✘] return book (by: Sunday)
+7.[E][✘] project meeting (at: Mon 2-4pm)
+8.[E][✘] disco (at: Orchard Rd)
+9.[D][✘] homework (by: tomorrow)
+------------------------------------------------------
+
+------------------------------------------------------
+OOPS! There is no task no. 99
+------------------------------------------------------
+
+------------------------------------------------------
+Nice! I've marked this task as done:
+[E][✓] project meeting (at: Aug 6th 2-4pm)
+------------------------------------------------------
+
+------------------------------------------------------
+Noted. I've removed this task:
+[T][✘] borrow book
+Now you have 8 tasks in the list.
+------------------------------------------------------
+
+------------------------------------------------------
+OOPS! There is no task no. 21
+------------------------------------------------------
+
+------------------------------------------------------
+Here are the tasks in your list:
+1.[T][✓] read book
+2.[D][✘] return book (by: June 6th)
+3.[E][✓] project meeting (at: Aug 6th 2-4pm)
+4.[T][✓] join sports club
+5.[D][✘] return book (by: Sunday)
+6.[E][✘] project meeting (at: Mon 2-4pm)
+7.[E][✘] disco (at: Orchard Rd)
+8.[D][✘] homework (by: tomorrow)
+------------------------------------------------------
+
+------------------------------------------------------
 Goodbye, see you again soon! :)
 ------------------------------------------------------
 

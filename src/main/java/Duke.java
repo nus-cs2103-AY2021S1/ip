@@ -12,9 +12,8 @@ public class Duke {
     /**
      * Star Bot's logo shown upon start up
      */
-    private static String logo = "     _______.___________.    ___      " +
-            ".______     " +
-            " \n" +
+    private static final String LOGO = "     _______.___________.    ___     " +
+            " .______      \n" +
             "    /       |           |   /   \\     |   _  \\     \n" +
             "   |   (----`---|  |----`  /  ^  \\    |  |_)  |    \n" +
             "    \\   \\       |  |      /  /_\\  \\   |      /     \n" +
@@ -32,17 +31,17 @@ public class Duke {
     /**
      * Divider that delineates Star Bot's replies
      */
-    private static String divider =
+    private static final String DIVIDER =
             "------------------------------------------------------\n";
 
     /**
      * Stores user's tasks
      */
-    private static List<Task> taskList = new ArrayList<>();
+    private static final List<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
 
-        System.out.println(logo + "\nHello, I'm Star Bot! What can I do for " +
+        System.out.println(LOGO + "\nHello, I'm Star Bot! What can I do for " +
                 "you?\nSay \"bye\" to exit.\n");
 
         Scanner sc = new Scanner(System.in);
@@ -68,11 +67,28 @@ public class Duke {
                         // Index of task in the task list
                         Task completedTask = taskList.get(taskIndex);
                         completedTask.markAsDone();
-                        System.out.println(botReply("Nice! I've marked this " +
-                                "task as done:\n" + completedTask.toString()));
+                        System.out.println(botReplyForDoneTask(completedTask));
                     } catch (NumberFormatException e) { // Second argument of
                         // command was not a number, e.g. "done X"
                         throw new DoneWrongFormatException();
+                    } catch (IndexOutOfBoundsException e) { // User requests
+                        // for a task with an index not within the current
+                        // task list
+                        throw new TaskIndexOutOfBoundsException(splitLine[1]);
+                    }
+                } else if (splitLine[0].equals("delete")) { // Delete a task
+                    try {
+                        if (splitLine.length != 2) { // If command is in a wrong
+                            // format
+                            throw new DeleteWrongFormatException();
+                        }
+                        int taskIndex = Integer.parseInt(splitLine[1]) - 1;
+                        // Index of task in the task list
+                        Task removedTask = taskList.remove(taskIndex);
+                        System.out.println(botReplyForDeleteTask(removedTask));
+                    } catch (NumberFormatException e) { // Second argument of
+                        // command was not a number, e.g. "delete X"
+                        throw new DeleteWrongFormatException();
                     } catch (IndexOutOfBoundsException e) { // User requests
                         // for a task with an index not within the current
                         // task list
@@ -126,7 +142,7 @@ public class Duke {
      * dividers
      */
     private static String botReply(String reply) {
-        return divider + reply + "\n" + divider;
+        return DIVIDER + reply + "\n" + DIVIDER;
     }
 
     private static String botReplyForAddTask(Task newTask) {
@@ -134,15 +150,25 @@ public class Duke {
                 "you have " + taskList.size() + " tasks in the list.");
     }
 
+    private static String botReplyForDoneTask(Task doneTask) {
+        return botReply("Nice! I've marked this task as done:\n" + doneTask);
+    }
+
+    private static String botReplyForDeleteTask(Task removedTask) {
+        return botReply("Noted. I've removed this task:\n" + removedTask +
+                "\nNow you have " + taskList.size() + " tasks in the list.");
+    }
+
     /**
      * Formats the task list to be shown to the user
      */
     private static String printList() {
         int index = 1;
-        String result = "Here are the tasks in your list:";
+        StringBuilder result = new StringBuilder("Here are the tasks in your " +
+                "list:");
         for (Task task : taskList) {
-            result += "\n" + index++ + "." + task;
+            result.append("\n").append(index++).append(".").append(task);
         }
-        return result;
+        return result.toString();
     }
 }
