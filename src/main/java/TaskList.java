@@ -1,24 +1,24 @@
 import java.util.ArrayList;
 
-public class TodoList {
-    ArrayList<Todo> list;
+public class TaskList {
+    ArrayList<Task> list;
 
-    TodoList() {
+    TaskList() {
         this.list = new ArrayList<>();
     }
 
-    public void add(Todo todo) {
-        this.list.add(todo);
+    public void add(Task task) {
+        this.list.add(task);
     }
 
-    public Todo getTodo(int index) {
+    public Task getTask(int index) {
         return this.list.get(index - 1);
     }
 
-    public void listAllTodos() {
-        this.list.forEach(todo -> {
-            String index = String.valueOf(this.list.indexOf(todo) + 1);
-            System.out.println(index + ". " + todo);
+    public void listAllTasks() {
+        this.list.forEach(task -> {
+            String index = String.valueOf(this.list.indexOf(task) + 1);
+            System.out.println(index + ". " + task);
         });
     }
 

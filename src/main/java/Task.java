@@ -1,7 +1,7 @@
-public class Todo {
+public class Task {
     protected String description;
     protected boolean isDone;
-    public Todo(String s) {
+    public Task(String s) {
         this.description = s;
         this.isDone = false;
     }
