@@ -1,7 +1,7 @@
 public class Event extends Task {
     protected String at;
     public Event(String desc, String at) {
-        super(desc);
+        super(desc, "event");
         this.at = at;
     }
 
