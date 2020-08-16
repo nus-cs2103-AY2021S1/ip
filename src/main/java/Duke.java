@@ -36,14 +36,14 @@ public class Duke {
 
     @Override
     public String toString() {
-        String dongLogo = "  ______      _______     ____    __    \n"
+        String donLogo = "  ______      _______     ____    __    \n"
                 + " |   _  \\    /   _   \\   |    \\  |  |\n"
                 + " |  | |  |  |   | |   |  |  |\\ \\ |  |\n"
                 + " |  |_|  |  |   |_|   |  |  | \\ \\|  |\n "
                 + "|_____ /    \\______ /   |__|  \\____|\n";
         String msg = "Hola! I'm Don \n" +
                 "How can I help you?";
-        return dongLogo + "\n" + msg;
+        return donLogo + "\n" + msg;
     }
 
 }
