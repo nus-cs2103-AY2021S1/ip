@@ -8,11 +8,19 @@ public class TaskManager {
     }
 
     // Should i make it immutable?
-    public void AddTask(Task newTask) {
+    public void addTask(Task newTask) {
         taskList.add(newTask);
     }
 
-    public void RemoveTask(Task taskToRemove) {
+    public void markTaskAsDone(int index) {
+        taskList.get(index).setTaskAsDone();
+    }
+
+    public Task getTask(int i) {
+        return taskList.get(i);
+    }
+
+    public void removeTask(Task taskToRemove) {
         taskList.removeIf(task -> task == taskToRemove);
     }
 

@@ -15,32 +15,8 @@ public class Duke {
         System.out.print(indentation + "Let's see how long it takes. \n");
         System.out.print(indentation + "So, tell me, what do you want, sweetie? \n" + separationLine);
 
-        Scanner sc = new Scanner(System.in);
-        String reply = sc.nextLine();
-        String topPartOfBotReplyMessage = separationLine + indentation;
-        String botPartOfBotReplyMessage = "\n" + separationLine;
+        InputOutputHandler handler = new InputOutputHandler();
 
-        TaskManager taskManager = new TaskManager();
-
-        while (!reply.equals("bye"))
-        {
-            // System.out.println(topPartOfBotReplyMessage + reply + botPartOfBotReplyMessage);
-            if (!reply.equals("list"))
-            {
-                taskManager.AddTask(new Task(reply));
-                System.out.println(topPartOfBotReplyMessage + "added: " + reply + botPartOfBotReplyMessage);
-                reply = sc.nextLine();
-            }
-            else
-            {
-                String resultList = taskManager.toString().replaceAll("(?m)^\\s+$", "");
-
-                System.out.println(topPartOfBotReplyMessage + resultList + botPartOfBotReplyMessage);
-                reply = sc.nextLine();
-            }
-        }
-        String byeMessage = "That's all? Sure. See you again (hopefully LOL).";
-        System.out.println(topPartOfBotReplyMessage + byeMessage + botPartOfBotReplyMessage);
-        sc.close();
+        handler.handleInput();
     }
 }
