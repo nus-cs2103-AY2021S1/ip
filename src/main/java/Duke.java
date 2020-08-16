@@ -69,13 +69,13 @@ public class Duke {
                         if (nextLine.length() > 0) {
                             newTask = new ToDo(nextLine);
                         } else {
-                            throw new InvalidTaskFormat("todo");
+                            throw new InvalidTaskFormat(TaskType.TODO);
                         }
                     } else if (command.equals("deadline")) {
                         String[] splitParts = sc.nextLine().split((" /by "));
                         if (splitParts.length != 2 || splitParts[0].strip().length() == 0 ||
                                     splitParts[1].strip().length() == 0) {
-                            throw new InvalidTaskFormat("deadline");
+                            throw new InvalidTaskFormat(TaskType.DEADLINE);
                         } else {
                             newTask = new Deadline(splitParts[0].stripLeading(), splitParts[1]);
                         }
@@ -83,7 +83,7 @@ public class Duke {
                         String[] splitParts = sc.nextLine().split((" /at "));
                         if (splitParts.length != 2 || splitParts[0].strip().length() == 0 ||
                                     splitParts[1].strip().length() == 0) {
-                            throw new InvalidTaskFormat("event");
+                            throw new InvalidTaskFormat(TaskType.EVENT);
                         } else {
                             newTask = new Event(splitParts[0].strip(), splitParts[1].strip());
                         }
