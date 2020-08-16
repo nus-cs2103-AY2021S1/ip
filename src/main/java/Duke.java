@@ -11,6 +11,7 @@ public class Duke {
 
         while(true) {
             String echo = sc.nextLine();
+
             if (echo.equals("bye")) {
                 System.out.println("    ____________________________________________________________");
                 System.out.println("     Bye. Hope to see you again soon!");
