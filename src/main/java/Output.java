@@ -35,21 +35,21 @@ public class Output {
     public void todoResponse(TaskList taskList, String command) {
         Todo todo = new Todo(command.substring(4));
         taskList.add(todo);
-        System.out.println("Got it. I've added this task: \n " + todo + "\nNow you have "
+        System.out.println("Got it. I've added this task:\n " + todo + "\nNow you have "
                 + taskList.list.size() + " in the list");
     }
 
     public void deadlineResponse(TaskList taskList, String command) {
         Deadline deadline = new Deadline(command.substring(8));
         taskList.add(deadline);
-        System.out.println("Got it. I've added this task: \n" +
+        System.out.println("Got it. I've added this task:\n" +
                 deadline + "\nNow you have " + taskList.list.size() + " in the list");
     }
 
     public void eventResponse(TaskList taskList, String command) {
         Event event = new Event(command.substring(5));
         taskList.add(event);
-        System.out.println("Got it. I've added this task: \n" +
+        System.out.println("Got it. I've added this task:\n" +
                 event + "\nNow you have " + taskList.list.size() + " in the list");
     }
 }

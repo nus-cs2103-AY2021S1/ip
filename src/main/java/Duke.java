@@ -14,9 +14,9 @@ public class Duke {
     }
 
     private void printWelcomeMessage() {
-        String welcome = "_____________________________________ \n"
-                + "Hello! I'm Ray \n" + "Please input a command\n"
-                + "_____________________________________ \n";
+        String welcome = "_____________________________________\n"
+                + "Hello! I'm Ray\n" + "Please input a command\n"
+                + "_____________________________________\n";
         System.out.println(welcome);
     }
 
