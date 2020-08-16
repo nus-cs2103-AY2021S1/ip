@@ -1,7 +1,16 @@
-todo read book
-deadline return book /by Monday
-event buy food /at Sunday 3-6pm
+todo
+todo successful
 list
-done 1
+deadline
+deadline failure 1
+deadline failure 2 /by
 list
-
+deadline successful /by monday
+list
+event
+event failure 1
+event failure 2 /at
+event failure 3 /at sunday
+list
+event successful /at sunday 4-6pm
+list

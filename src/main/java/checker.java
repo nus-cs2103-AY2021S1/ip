@@ -60,7 +60,7 @@ public class checker {
         return N;
     }
 
-    public static String dateFinder(String echo, int type){
+    public static String dateFinder(String echo, int type) throws ErrorExceptions {
         Scanner sc = new Scanner(echo);
         String next = sc.next();
         String N = "" + next.charAt(0);
@@ -78,22 +78,23 @@ public class checker {
             action = "(" + action + ": ";
             try{
                 String day = sc.next();
+                action = action + day;
                 try{
                     String time = sc.next();
-                    action = action + day + " " + time + ")";
+                    action = action + " " + time + ")";
                 }
                 catch(NoSuchElementException e){
-                    action = action + day + ")";
+                    if(type == 2){
+                        action = action + ")";
+                    }
+                    else{
+                        throw new ErrorExceptions("Wrong event command format, missing timeslot");
+                    }
                 }
                 date = action;
             }
             catch(NoSuchElementException e){
-                if(type == 2){
-                    return date;
-                }
-                else{
-                    System.out.println("Wrong event command format, missing date");
-                }
+                throw new ErrorExceptions("Wrong event command format, missing date");
             }
         }
         catch(NoSuchElementException e){
@@ -101,7 +102,7 @@ public class checker {
                 return date;
             }
             else{
-                System.out.println("Wrong deadline or event command format, missing /action: date");
+                throw new ErrorExceptions("Wrong deadline or event command format, missing /action: deadline");
             }
         }
         return date;

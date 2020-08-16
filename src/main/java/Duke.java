@@ -15,7 +15,6 @@ public class Duke {
         System.out.println("What can I do for you?");
         Scanner sc = new Scanner(System.in);
         String echo = sc.nextLine();
-        int count = 1;
         int index = checker.inputChecker(echo);
 
         while(echo.equals("bye") == false){
@@ -34,17 +33,16 @@ public class Duke {
             else if(type == 2){
                 try{
                     String name = checker.name(echo);
-                    Deadline d = new Deadline(name);
-//                    try{
-//
-//                    }
-//                    catch(NoSuchElementException e){
-//
-//                    }
-                    String date = checker.dateFinder(echo,2);
-                    d.addDate(date);
-                    store.add(d);
-                    d.print();
+                    try{
+                        String date = checker.dateFinder(echo,2);
+                        Deadline d = new Deadline(name);
+                        d.addDate(date);
+                        store.add(d);
+                        d.print();
+                    }
+                    catch(ErrorExceptions e){
+                        System.out.println(e);
+                    }
                 }
                 catch(NoSuchElementException e){
                     System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -53,11 +51,16 @@ public class Duke {
             else if(type == 3){
                 try{
                     String name = checker.name(echo);
-                    Event e = new Event(name);
-                    String date = checker.dateFinder(echo,3);
-                    e.addDate(date);
-                    store.add(e);
-                    e.print();
+                    try{
+                        String date = checker.dateFinder(echo,3);
+                        Event e = new Event(name);
+                        e.addDate(date);
+                        store.add(e);
+                        e.print();
+                    }
+                    catch(ErrorExceptions m){
+                        System.out.println(m);
+                    }
                 }
                 catch(NoSuchElementException e){
                     System.out.println("☹ OOPS!!! The description of an event cannot be empty.");

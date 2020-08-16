@@ -1,19 +1,28 @@
 Hello! I'm Duke
 What can I do for you?
+☹ OOPS!!! The description of a todo cannot be empty.
 Got it. I've added this task:
-  [T][X] read book
+  [T][X] successful
 Now you have 1 tasks in the list.
+1. [T][X] successful
+☹ OOPS!!! The description of a deadline cannot be empty.
+ErrorExceptions: Wrong deadline or event command format, missing /action: deadline
+ErrorExceptions: Wrong event command format, missing date
+1. [T][X] successful
 Got it. I've added this task:
-  [D][X] return book (by: Monday)
+  [D][X] successful (by: monday)
 Now you have 2 tasks in the list.
+1. [T][X] successful
+2. [D][X] successful (by: monday)
+☹ OOPS!!! The description of an event cannot be empty.
+ErrorExceptions: Wrong deadline or event command format, missing /action: deadline
+ErrorExceptions: Wrong event command format, missing date
+ErrorExceptions: Wrong event command format, missing timeslot
+1. [T][X] successful
+2. [D][X] successful (by: monday)
 Got it. I've added this task:
-  [E][X] buy food (at: Sunday 3-6pm)
+  [E][X] successful (at: sunday 4-6pm)
 Now you have 3 tasks in the list.
-1. [T][X] read book
-2. [D][X] return book (by: Monday)
-3. [E][X] buy food (at: Sunday 3-6pm)
-Nice! I've marked this task as done:
-  [T][✓] read book
-1. [T][✓] read book
-2. [D][X] return book (by: Monday)
-3. [E][X] buy food (at: Sunday 3-6pm)
+1. [T][X] successful
+2. [D][X] successful (by: monday)
+3. [E][X] successful (at: sunday 4-6pm)
