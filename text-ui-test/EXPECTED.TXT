@@ -26,3 +26,7 @@ Now you have 3 tasks in the list.
 1. [T][X] successful
 2. [D][X] successful (by: monday)
 3. [E][X] successful (at: sunday 4-6pm)
+Invalid Command, I do not understand! ☹
+Invalid Command, I do not understand! ☹
+Invalid Command, I do not understand! ☹
+Bye. Hope to see you again soon!

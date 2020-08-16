@@ -14,3 +14,7 @@ event failure 3 /at sunday
 list
 event successful /at sunday 4-6pm
 list
+blah
+random
+invalid
+bye
