@@ -30,7 +30,7 @@ public class Duke {
             return;
         }
 
-        switch(input) {
+        switch (input) {
             case "list":
                 store.list();
                 break;

@@ -20,6 +20,7 @@ public class Store {
                 "OK! I have marked the following task as done:",
                 taskStore[i - 1].toString()}, false);
     }
+
     public void list() {
         StringUtils.printWithWrapper(this.taskStore, true);
     }
