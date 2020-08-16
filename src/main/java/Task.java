@@ -15,6 +15,11 @@ public class Task {
         this.isDone = true;
     }
 
+    public static void invalidInput(String error) {
+        String errorMsg = "Error: " + error;
+        System.out.println(errorMsg);
+    }
+
     @Override
     public String toString() {
         return "[" + this.isDone + "]" + this.description;

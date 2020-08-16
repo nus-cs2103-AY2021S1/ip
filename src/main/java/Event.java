@@ -6,6 +6,10 @@ public class Event extends Task{
         this.at = at;
     }
 
+    public static void invalidInput() {
+        invalidInput("OOPS!!! The format of the Event is wrong.");
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at:" + at + ")";

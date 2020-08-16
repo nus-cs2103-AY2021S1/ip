@@ -7,6 +7,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public static void invalidInput() {
+        invalidInput("OOPS!!! The format of the Deadline is wrong.");
+    }
+
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by:" + by + ")";
