@@ -21,21 +21,25 @@ public class Duke {
         String command = sc.nextLine();
 
         while (true) {
-            if (command.equals("bye")) {
-                handleBye();
-                break;
-            } else if (command.equals("list")) {
-                handleList();
-            } else if (command.startsWith("todo")) {
-                handleToDo(command);
-            } else if (command.startsWith("deadline")) {
-                handleDeadline(command);
-            } else if (command.startsWith("event")) {
-                handleEvent(command);
-            } else if (command.matches("done \\d+")) {
-                handleDone(command);
-            } else {
-                handleUnknown();
+            try {
+                if (command.equals("bye")) {
+                    handleBye();
+                    break;
+                } else if (command.equals("list")) {
+                    handleList();
+                } else if (command.startsWith("todo")) {
+                    handleToDo(command);
+                } else if (command.startsWith("deadline")) {
+                    handleDeadline(command);
+                } else if (command.startsWith("event")) {
+                    handleEvent(command);
+                } else if (command.matches("done \\d+")) {
+                    handleDone(command);
+                } else {
+                    handleUnknown();
+                }
+            } catch (DukeException e) {
+                printResponse(e.getMessage());
             }
             command = sc.nextLine();
         }
@@ -49,63 +53,80 @@ public class Duke {
         printResponse(listTasks());
     }
 
-    private static void handleToDo(String command) {
+    private static void handleToDo(String command) throws InvalidToDoException {
         String[] split = command.split(" ");
         if (split.length == 1) {
-            printResponse("OOPS!!! The description of a todo cannot be empty.");
-        } else {
-            String[] descriptionArray = Arrays.copyOfRange(split, 1, split.length);
-            String description = String.join(" ", descriptionArray);
-            Task task = new ToDo(description);
+            String response = "The description of a todo cannot be empty :(\n"
+                    + "The command format is \"todo <task>\"";
+            throw new InvalidToDoException(response);
+        }
+
+        String[] descriptionArray = Arrays.copyOfRange(split, 1, split.length);
+        String description = String.join(" ", descriptionArray);
+        Task task = new ToDo(description);
+        tasks.add(task);
+        String response = String.format(
+                "I've added this task:\n  %s \nNow you have %s tasks in the list.",
+                task, tasks.size()
+        );
+        printResponse(response);
+    }
+
+    private static void handleDeadline(String command) throws InvalidDeadlineException {
+        try {
+            String[] input = command.substring(command.indexOf(' ') + 1).split(" /by ");
+            String description = input[0];
+            String by = input[1];
+            Task task = new Deadline(description, by);
             tasks.add(task);
             String response = String.format(
                     "I've added this task:\n  %s \nNow you have %s tasks in the list.",
                     task, tasks.size()
             );
             printResponse(response);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            String response = "You entered the deadline command incorrectly :(\n"
+                    + "The command format is \"deadline <task> /by <time>\"";
+            throw new InvalidDeadlineException(response);
         }
     }
 
-    private static void handleDeadline(String command) {
-        String[] input = command.substring(command.indexOf(' ') + 1).split(" /by ");
-        String description = input[0];
-        String by = input[1];
-        Task task = new Deadline(description, by);
-        tasks.add(task);
-        String response = String.format(
-                "I've added this task:\n  %s \nNow you have %s tasks in the list.",
-                task, tasks.size()
-        );
-        printResponse(response);
+    private static void handleEvent(String command) throws InvalidEventException {
+        try {
+            String[] input = command.substring(command.indexOf(' ') + 1).split(" /at ");
+            String description = input[0];
+            String at = input[1];
+            Task task = new Event(description, at);
+            tasks.add(task);
+            String response = String.format(
+                    "I've added this task:\n  %s \nNow you have %s tasks in the list.",
+                    task, tasks.size()
+            );
+            printResponse(response);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            String response = "You entered the event command incorrectly :(\n"
+                    + "The command format is \"event <task> /at <time>\"";
+            throw new InvalidEventException(response);
+        }
     }
 
-    private static void handleEvent(String command) {
-        String[] input = command.substring(command.indexOf(' ') + 1).split(" /at ");
-        String description = input[0];
-        String at = input[1];
-        Task task = new Event(description, at);
-        tasks.add(task);
-        String response = String.format(
-                "I've added this task:\n  %s \nNow you have %s tasks in the list.",
-                task, tasks.size()
-        );
-        printResponse(response);
-    }
-
-    private static void handleDone(String command) {
+    private static void handleDone(String command) throws InvalidDoneIndexException {
         int index = Integer.parseInt(command.split(" ")[1]);
         if (index > tasks.size()) {
-            printResponse("No such task!");
-        } else {
-            Task task = tasks.get(index-1);
-            task.completeTask();
-            String response = "Nice! I've marked this task as done:\n  " + task.toString();
-            printResponse(response);
+            String response = String.format("No such task :(\nYou have %d tasks.", tasks.size());
+            throw new InvalidDoneIndexException(response);
         }
+
+        Task task = tasks.get(index-1);
+        task.completeTask();
+        String response = "Nice! I've marked this task as done:\n  " + task.toString();
+        printResponse(response);
     }
 
-    private static void handleUnknown() {
-        printResponse("OOPS!!! I'm sorry, but I don't know what that means :-(");
+    private static void handleUnknown() throws DukeException{
+        String response = "OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                + "To see all commands, type \"commands\"";
+        throw new DukeException(response);
     }
 
     // Wrapper method for printing with horizontal line borders and 1 tab indent
