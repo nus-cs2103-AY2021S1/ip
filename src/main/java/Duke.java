@@ -25,21 +25,27 @@ public class Duke {
         System.out.println(bye);
     }
 
-    private void addTask(String input) {
+    private void addTask(String input) throws NotTaskException, NoDescriptionException {
         //Here, we do the classification & processing of tasks: to-do/deadline/event
         //input is from String from user
+        //this function also processes the incorrect inputs by users
         String[] content = input.split(" ");
         Task tsk = null;
         if (content[0].toLowerCase().equals("todo")) {
+            if (content.length < 2) throw new NoDescriptionException(content[0]);
             tsk = new Todo(input.replaceFirst(content[0] + " ", ""));
         } else if (content[0].toLowerCase().equals("deadline")) {
+            if (content.length < 2) throw new NoDescriptionException(content[0]);
             String[] splitBySlash = input.split("/");
             tsk = new Deadline(splitBySlash[0].replaceFirst(content[0] + " ", ""),
                     splitBySlash[1].replaceFirst("by ", ""));
-        } else {
+        } else if (content[0].toLowerCase().equals("event")) {
+            if (content.length < 2) throw new NoDescriptionException(content[0]);
             String[] splitBySlash = input.split("/");
             tsk = new Event(splitBySlash[0].replaceFirst(content[0] + " ", ""),
                     splitBySlash[1].replaceFirst("at ", ""));
+        } else {
+            throw new NotTaskException();
         }
         taskList.add(tsk);
         System.out.println("Lao Duke has added this task for you:\n" + tsk);
@@ -54,9 +60,9 @@ public class Duke {
         }
     }
 
-    private void markDone(int taskNum) {
+    private void markDone(int taskNum) throws InvalidTaskNumber {
         if (taskNum < 1 || taskNum > taskList.size()) {
-            System.out.println("Aiyo, don't have this task number leh...");
+            throw new InvalidTaskNumber();
         } else {
             Task tsk = taskList.get(taskNum - 1);
             tsk.markAsDone();
@@ -83,10 +89,16 @@ public class Duke {
                     } catch (NumberFormatException e) {
                         System.out.println("Eh I not so smart one la..." +
                                 "Can you format your done task properly or not?");
+                    } catch (InvalidTaskNumber e) {
+                        System.out.println(e);
                     }
                 } else {
-                    //simply add tasks
-                    addTask(input);
+                    //process input
+                    try {
+                        addTask(input);
+                    } catch (NotTaskException | NoDescriptionException e) {
+                        System.out.println(e);
+                    }
                 }
             }
             input = sc.nextLine();

@@ -1,5 +1,5 @@
 public class InvalidTaskNumber extends DukeException {
-    InvalidTaskNumber() {
+    public InvalidTaskNumber() {
         super("Aiyo, don't have this task number leh...");
     }
 }
