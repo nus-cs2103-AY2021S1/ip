@@ -1,10 +1,19 @@
-LiSt
-read book
-return book
-buy bbt
-lIst
+liSt
+todo
+todo buy Books
+done 1
+done 2
+deadLine        complete project     /by
+deadLIne /by Tuesday
+deadLine
+DEADLINE complete project
+deadLine complete project /by Monday
+Event      tutorial           /at
+Event /at Monday 2-4pm
+EVENT meeting /at      Monday 3-4pm
+list
 done 3
-done 4
-
-LIST
-BYE
+done 3
+deaLine complete chapter 1 /by Monday
+list
+bye
