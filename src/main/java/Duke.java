@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -14,14 +15,27 @@ public class Duke {
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
-            if (input.equals("list")) {
-                store.list();
-            } else {
-                store.add(input);
-            }
+            processInput(input, store);
             input = sc.nextLine();
         }
 
         StringUtils.printWithWrapper(new String[]{"Bye bye! Hope to see you again soon!"}, false);
+    }
+
+    private static void processInput(String input, Store store) {
+        String[] splitInput = input.split(" ");
+
+        if (splitInput[0].equals("done")) {
+            store.markTaskAsDone(Integer.parseInt(splitInput[1]));
+            return;
+        }
+
+        switch(input) {
+            case "list":
+                store.list();
+                break;
+            default:
+                store.add(input);
+        }
     }
 }
