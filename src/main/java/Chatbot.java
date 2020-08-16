@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Chatbot {
 
-    private static ArrayList<String> tasks;
+    private static ArrayList<Task> tasks;
     private static TaskPrinter taskPrinter;
 
     private static boolean getUserInput(Scanner s) {
@@ -12,18 +12,26 @@ public class Chatbot {
     }
 
     private static void handleUserInput(String userInput) {
-        switch (userInput) {
+        String processed = userInput.trim();
+        String first = processed.split(" ")[0];
+        switch (first) {
             case "list":
                 taskPrinter.list(tasks);
+                break;
+            case "done":
+                int index = Integer.parseInt(processed.split(" ")[1]) - 1;
+                tasks.set(index, tasks.get(index).markDone());
+                taskPrinter.display("Nice! I've marked this task as done: \n" + tasks.get(index));
                 break;
             case "bye":
                 taskPrinter.display("Bye. Hope to see you again soon!");
                 break;
             default:
-                String text = userInput.strip();
+                String text = userInput.trim();
                 if (text != "") {
-                    tasks.add(text);
-                    taskPrinter.display("Added: " + userInput);
+                    Task newTask = new Task(text);
+                    tasks.add(newTask);
+                    taskPrinter.display("Got it. I've added this task: \n" + newTask);
                 }
         }
     }

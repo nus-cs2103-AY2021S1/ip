@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class TaskPrinter implements Printable<String> {
+public class TaskPrinter implements Printable<Task> {
     public void display(String message) {
         System.out.println(message);
     }
 
-    public void list(ArrayList<String> ls) {
+    public void list(ArrayList<Task> ls) {
         System.out.println("____________________________________________________________");
         System.out.println("|###################### Your Tasks: #######################|");
         System.out.println("------------------------------------------------------------");
@@ -16,7 +16,7 @@ public class TaskPrinter implements Printable<String> {
             return;
         }
 
-        Iterator<String> iter = ls.iterator();
+        Iterator<Task> iter = ls.iterator();
         int index = 1;
         while (iter.hasNext()) {
             System.out.println(index + ". " + iter.next());
