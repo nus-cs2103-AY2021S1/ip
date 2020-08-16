@@ -24,8 +24,7 @@ public class Duke {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < lists.size(); i++) {
                     Task task = lists.get(i);
-                    System.out.println((i + 1) + "." + "[" + task.getStatusIcon() + "] "
-                            + task.getDescription());
+                    System.out.println((i + 1) + "." + task.toString());
                 }
                 System.out.println("____________________________________________________________\n");
             } else if (string1.contains("done ")) {
@@ -37,9 +36,25 @@ public class Duke {
                 System.out.println("    [" + task.getStatusIcon() + "] " + task.getDescription());
                 System.out.println("____________________________________________________________\n");
             } else {
-                lists.add(new Task(string1));
+                String type = string1.substring(0, string1.indexOf(' '));
+                System.out.println(type);
+                if (type.equals("deadline")) {
+                    String by = string1.substring(string1.indexOf("/by") + 4);
+                    String description = string1.substring(string1.indexOf(' ') + 1, string1.indexOf('/') - 1);
+                    lists.add(new Deadline(description, by));
+                } else if (type.equals("event")) {
+                    String time = string1.substring(string1.indexOf("/at") + 4);
+                    String description = string1.substring(string1.indexOf(' ') + 1, string1.indexOf('/') - 1);
+                    lists.add(new Event(description, time));
+                } else {
+                    String description = string1.substring(string1.indexOf(' ') + 1);
+                    lists.add(new ToDo(description));
+                }
+
                 message1 = "____________________________________________________________\n" +
-                        "  added: " + string1 + "\n" +
+                        "Got it. I've added this task:\n  "
+                        + lists.get(lists.size() - 1).toString() + "\n" +
+                        "now you have " + lists.size() + " tasks in the list.\n" +
                         "____________________________________________________________\n";
                 System.out.println(message1);
             }
