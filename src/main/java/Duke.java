@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -23,29 +22,29 @@ public class Duke {
         return DIVIDER + LEFT_MARGIN + input + "\n" + DIVIDER;
     }
 
-    // formats a list item
-    public static String displayListItem(String listItem, short rank) {
-        return String.format("%s. %s", rank, listItem);
-    }
-
     // displays the task list in the correct format
-    public static String displayList(ArrayList<String> inputArr) {
-        StringBuilder out = new StringBuilder(DIVIDER);
-        for (short i = 0; i < inputArr.size(); i++) {
-            out.append(LEFT_MARGIN).append(displayListItem(inputArr.get(i), (short) (i + 1))).append("\n");
+    public static String displayList(Task[] inputArr) {
+        if (Task.getCount() == 0) {
+            return displayOutput("What do you expect me to say when you didn't save any tasks?");
+        } else {
+            StringBuilder out = new StringBuilder(DIVIDER);
+            for (short i = 1; i <= Task.getCount(); i++) {
+                out.append(LEFT_MARGIN).append(inputArr[i]).append("\n");
+            }
+            return out.append(DIVIDER).toString();
         }
-        return out.append(DIVIDER).toString();
     }
 
     // adds task to list
-    public static String addToList(String inputTask, ArrayList<String> taskList) {
-        taskList.add(inputTask);
-        return displayOutput("added: " + inputTask);
+    public static String addToList(String input, Task[] taskList) {
+        Task inputTask = new Task(input);
+        taskList[inputTask.getId()] = inputTask;
+        return displayOutput("added: " + inputTask.getName());
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> taskList = new ArrayList<>();
+        Task[] taskList = new Task[100];
         System.out.println(DIVIDER + LOGO + displayOutput(WELCOME_MESSAGE));
         while (sc.hasNext()) {
             String input = sc.nextLine();
