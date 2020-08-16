@@ -10,6 +10,7 @@ public class Duke {
     public Duke() {
         scanner = new Scanner(System.in);
         taskList = new ArrayList<>();
+        writeOutput("Hello! I'm Duke", "What can I do for you?");
     }
 
     public String readInput() {
@@ -30,11 +31,20 @@ public class Duke {
     }
 
     private void listTasks() {
-        String[] taskOutputs = new String[taskList.size()];
-        for (int i = 0; i < taskOutputs.length; i++) {
-            taskOutputs[i] = taskList.get(i).toString();
+        String[] taskOutputs = new String[taskList.size() + 1];
+        taskOutputs[0] = "Here are the tasks in your list:";
+        for (int i = 0; i < taskList.size(); i++) {
+            taskOutputs[i + 1] = taskList.get(i).toString();
         }
         writeOutput(taskOutputs);
+    }
+
+    private void markDone(int position) {
+        Task task = taskList.get(position - 1);
+        task.markDone();
+        String[] outputs = new String[] { "Nice! I've marked this task as done:",
+                "\t" + task.toString() };
+        writeOutput(outputs);
     }
 
     public boolean processInput(String input) {
@@ -43,6 +53,8 @@ public class Duke {
             return false;
         } else if (input.equals("list")) {
             listTasks();
+        } else if (input.startsWith("done ")) {
+            markDone(Integer.parseInt(input.split(" ")[1]));
         } else {
             addTask(input);
         }
@@ -56,8 +68,6 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke duke = new Duke();
-
-        duke.writeOutput("Hello! I'm Duke", "What can I do for you?");
         String input;
         boolean keepGoing = true;
         while (keepGoing) {
