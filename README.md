@@ -28,5 +28,8 @@ This marks the thing at index `index` as completed
 `delete <index>`
 This deletes the thing at index `index`
 
+`bye`
+This closes the chatbot
+
 `More to be expected...`
 
