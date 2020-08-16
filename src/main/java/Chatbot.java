@@ -20,8 +20,11 @@ public class Chatbot {
                 taskPrinter.display("Bye. Hope to see you again soon!");
                 break;
             default:
-                tasks.add(userInput);
-                taskPrinter.display("Added: " + userInput);
+                String text = userInput.strip();
+                if (text != "") {
+                    tasks.add(text);
+                    taskPrinter.display("Added: " + userInput);
+                }
         }
     }
 
