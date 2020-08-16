@@ -1,8 +1,4 @@
-import main.java.Deadline;
-import main.java.Event;
-import main.java.Task;
-import main.java.Todo;
-
+package main.java;
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Bob {
@@ -54,7 +50,7 @@ public class Bob {
             System.out.println("Got it! I have added a new task to the list.");
             System.out.println("added: " + task.toString());
         } else {
-            System.out.println("Sorry,I do not understand your request.");
+            System.out.println("Sorry, I do not understand your request.");
         }
     }
 }
