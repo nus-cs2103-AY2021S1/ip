@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class DukeBot {
 
@@ -44,6 +45,7 @@ public class DukeBot {
 
         while (true){
             horizontalRule();
+            String[] args= currInput.split(" ");
             if(currInput.equals("bye")){
                 System.out.println("Bye. Hope to see you again soon!");
                 horizontalRule();
@@ -57,6 +59,10 @@ public class DukeBot {
                     }
                     System.out.println("" + (i+1) + "." + checkBox + " "+ this.tasks.get(i));
                 }
+            }
+            else if(args[0].equals("done")){
+                int index = Integer.parseInt(args[1])-1;
+                this.tasksDone.set(index,true);
             }
             else{
                 addTask(currInput);
