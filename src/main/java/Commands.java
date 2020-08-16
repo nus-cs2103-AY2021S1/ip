@@ -1,6 +1,5 @@
 package main.java;
 
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,6 +13,7 @@ public class Commands {
     private final String INPUT_TODO = "todo";
     private final String INPUT_DEADLINES = "deadline";
     private final String INPUT_EVENTS = "event";
+    private final String INPUT_DELETE = "delete";
 
     public void start() {
         this.greet();
@@ -48,6 +48,10 @@ public class Commands {
                     break;
                 case INPUT_EVENTS:
                     addEvent(inputArray);
+                    inputs = scanner.nextLine().trim();
+                    break;
+                case INPUT_DELETE:
+                    deleteItem(inputArray);
                     inputs = scanner.nextLine().trim();
                     break;
                 default:
@@ -106,28 +110,52 @@ public class Commands {
     public void addDeadline(String[] inputs) throws DukeException {
         if (inputs.length > 1) {
             String[] stringArray = inputs[1].split("/", 2);
-            String day = stringArray[1].split(" ", 2)[1];
-            System.out.println("~ \n Got it. I've added this task: ");
-            Deadlines deadline = new Deadlines(stringArray[0], day);
-            taskList.add(deadline);
-            System.out.println(String.format("   %s \n Now you have %d tasks in the list. \n~",
-                    deadline, taskList.size()));
+            if (stringArray.length > 1 && stringArray[1].split(" ", 2).length > 1) {
+                String day = stringArray[1].split(" ", 2)[1];
+                System.out.println("~ \n Got it. I've added this task: ");
+                Deadlines deadline = new Deadlines(stringArray[0], day);
+                taskList.add(deadline);
+                System.out.println(String.format("   %s \n Now you have %d tasks in the list. \n~",
+                        deadline, taskList.size()));
+            } else {
+                throw new DukeException("~\n ERROR... DEADLINE DATE EMPTY. \n PLEASE TRY AGAIN \n~");
+            }
         } else {
-            throw new DukeException("~\n ERROR... DEADLINE DESCRIPTION OR DATE EMPTY. \n PLEASE TRY AGAIN \n~");
+            throw new DukeException("~\n ERROR... DEADLINE DESCRIPTION EMPTY . \n PLEASE TRY AGAIN \n~");
         }
     }
 
     public void addEvent(String[] inputs) throws DukeException {
         if (inputs.length > 1) {
             String[] stringArray = inputs[1].split("/", 2);
-            String at = stringArray[1].split(" ", 2)[1];
-            System.out.println("~ \n Got it. I've added this task: ");
-            Events event = new Events(stringArray[0], at);
-            taskList.add(event);
-            System.out.println(String.format("   %s \n Now you have %d tasks in the list. \n~",
-                    event, taskList.size()));
+            if (stringArray.length > 1 && stringArray[1].split(" ", 2).length > 1) {
+                String at = stringArray[1].split(" ", 2)[1];
+                System.out.println("~ \n Got it. I've added this task: ");
+                Events event = new Events(stringArray[0], at);
+                taskList.add(event);
+                System.out.println(String.format("   %s \n Now you have %d tasks in the list. \n~",
+                        event, taskList.size()));
+            } else {
+                throw new DukeException("~\n ERROR... EVENT DATE EMPTY. \n PLEASE TRY AGAIN \n~");
+            }
         } else {
-            throw new DukeException("~\n ERROR... EVENT DESCRIPTION OR DATE EMPTY. \n PLEASE TRY AGAIN \n~");
+            throw new DukeException("~\n ERROR... EVENT DESCRIPTION EMPTY. \n PLEASE TRY AGAIN \n~");
+        }
+    }
+
+    private void deleteItem(String[] inputs) throws DukeException {
+        if (inputs.length == 2 && Character.isDigit(inputs[1].charAt(0))) {
+            int taskNumber = Character.getNumericValue(inputs[1].charAt(0)) - 1;
+            if (!taskList.isEmpty() && taskNumber < taskList.size()) {
+                Task removedTask = taskList.remove(taskNumber);
+                System.out.println( String.format("~ \n Noted. Target Scraped: \n   %s \n " +
+                        "Now you have %d tasks in the list. \n~", removedTask.toString(), taskList.size()));
+            } else {
+                throw new DukeException("~\n ERROR... TASK NOT FOUND. \n PLEASE TRY AGAIN \n~");
+            }
+        } else {
+            throw new DukeException("~\n ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n " +
+                    "PLEASE TRY AGAIN \n~");
         }
     }
 }
