@@ -12,8 +12,12 @@ public class Duke {
         while (!input.equals("bye")) {
             System.out.println("");
             if (input.equals("list")) {
+                System.out.println("Here are your tasks:");
                 System.out.println(list);
-            } else {
+            } else if (input.length() > 3 && input.substring(0,4).equals("done")) {
+                int listIndex = Integer.parseInt(input.substring(5));
+                list.markTaskDone(listIndex);
+            } else{
                 Task task = Task.makeTask(input);
                 list.addTask(task);
             }
