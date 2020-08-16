@@ -30,52 +30,65 @@ public class Duke {
     public static void output(){
         System.out.println("  ____________________________________________________________\n" + "  Hello! I'm Duke\n" + "  What can I do for you?\n" +
                 "  ____________________________________________________________");
-        for(String string : todos){
-            if(string.equals("bye")){
-                System.out.println("\n" + string + "\n  ____________________________________________________________");
-                System.out.println("  Bye. Hope to see you again soon!\n" + "  ____________________________________________________________");
-                break;
-            }
-            if(string.equals("list")){
-                System.out.println("\n" + string + "\n  ____________________________________________________________");
-                Task.listing();
-            }else if(string.substring(0,4).equals("done")){
-                System.out.println("\n" + string + "\n  ____________________________________________________________");
-                int ID = Integer.parseInt(string.substring(5));
-                Task.tasks.get(ID - 1).setDone();
-                Task.tasks.get(ID - 1).donePrint();
-            }else if(string.substring(0,4).equals("todo")){
-                System.out.println("\n" + string + "\n  ____________________________________________________________");
-                todo t = new todo(string.substring(5));
-                t.output();
-            }else if(string.substring(0, 5).equals("event")){
-                System.out.println("\n" + string + "\n  ____________________________________________________________");
-                String s = "";
-                int index = -1;
-                for(int i = 5; i < string.length(); i++){
-                    if(string.charAt(i) == '/'){
-                        index = i;
-                        break;
-                    }
-                    s = s + string.charAt(i);
+        try {
+            for (String string : todos) {
+                if (string.equals("bye")) {
+                    System.out.println("\n" + string + "\n  ____________________________________________________________");
+                    System.out.println("  Bye. Hope to see you again soon!\n" + "  ____________________________________________________________");
+                    break;
                 }
-                event e = new event(s.substring(1, s.length() - 1), string.substring(index + 4));
-                e.output();
-                //event e = new event(string.substring())
-            }else if(string.substring(0, 8).equals("deadline")){
-                System.out.println("\n" + string + "\n  ____________________________________________________________");
-                String s = "";
-                int index = -1;
-                for(int i = 8; i < string.length(); i++){
-                    if(string.charAt(i) == '/'){
-                        index = i;
-                        break;
+                if (string.equals("list")) {
+                    System.out.println("\n" + string + "\n  ____________________________________________________________");
+                    Task.listing();
+                } else if (string.substring(0, 4).equals("done")) {
+                    System.out.println("\n" + string + "\n  ____________________________________________________________");
+                    int ID = Integer.parseInt(string.substring(5));
+                    Task.tasks.get(ID - 1).setDone();
+                    Task.tasks.get(ID - 1).donePrint();
+                } else if (string.substring(0, 4).equals("todo")) {
+                    if(string.length() == 4 || string.length() == 5){
+                        throw  new ToDoException();
                     }
-                    s = s + string.charAt(i);
+                    System.out.println("\n" + string + "\n  ____________________________________________________________");
+                    todo t = new todo(string.substring(5));
+                    t.output();
+                } else if (string.substring(0, 5).equals("event")) {
+                    System.out.println("\n" + string + "\n  ____________________________________________________________");
+                    String s = "";
+                    int index = -1;
+                    for (int i = 5; i < string.length(); i++) {
+                        if (string.charAt(i) == '/') {
+                            index = i;
+                            break;
+                        }
+                        s = s + string.charAt(i);
+                    }
+                    event e = new event(s.substring(1, s.length() - 1), string.substring(index + 4));
+                    e.output();
+                    //event e = new event(string.substring())
+                } else if (string.substring(0, 8).equals("deadline")) {
+                    System.out.println("\n" + string + "\n  ____________________________________________________________");
+                    String s = "";
+                    int index = -1;
+                    for (int i = 8; i < string.length(); i++) {
+                        if (string.charAt(i) == '/') {
+                            index = i;
+                            break;
+                        }
+                        s = s + string.charAt(i);
+                    }
+                    deadline e = new deadline(s.substring(1, s.length() - 1), string.substring(index + 4));
+                    e.output();
+                } else {
+                    throw new UnknownError();
                 }
-                deadline e = new deadline(s.substring(1, s.length() - 1), string.substring(index + 4));
-                e.output();
             }
+        }catch (UnknownError u){
+            System.out.println("  ☹ OOPS!!! The description of a todo cannot be empty.\n" +
+                    "  ____________________________________________________________");
+        }catch (ToDoException t){
+            System.out.println("  ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                    "  ____________________________________________________________");
         }
     }
     public static void main(String[] args) {

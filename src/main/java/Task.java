@@ -34,7 +34,7 @@ public class Task {
         for(Task task : tasks){
              System.out.println("  " + task.ID + "." + task.toString());
         }
-        System.out.println("\n" + "  ____________________________________________________________");
+        System.out.println("  ____________________________________________________________");
     }
     public String toString(){
         if(this.done) {
