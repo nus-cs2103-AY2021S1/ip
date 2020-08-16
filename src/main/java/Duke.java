@@ -12,70 +12,96 @@ public class Duke {
         System.out.println("______________________________");
     }
 
-    private static void printList() {
-        System.out.println("______________________________");
+    private static void printList() throws DukeException {
         if (list.size() > 0) {
+            System.out.println("______________________________");
+            System.out.println("Here is your list:");
             for (int i = 1; i <= list.size(); i++) {
                 System.out.println(i + "." + list.get(i - 1));
             }
+            System.out.println("______________________________");
         } else {
-            System.out.println("List is empty.");
+            throw(DukeException.emptyList());
         }
-        System.out.println("______________________________");
     }
 
-    private static void printDone(String input) {
+    private static void printDone(String input) throws DukeException {
         try {
-            String number = input.substring(5);
-            int index = parseInt(number) - 1;
-            list.get(index).setDone();
-            say("Marked this task as done:\n" + list.get(index));
+            String pattern = "(done\\s)(.+)";
+            if (input.trim().matches(pattern)) {
+                String number = input.substring(5);
+                int index = parseInt(number) - 1;
+                list.get(index).setDone();
+                say("Marked this task as done:\n" + list.get(index));
+            } else {
+                throw(DukeException.emptyDesc("done"));
+            }
         } catch (NumberFormatException e) {
-            say("Error! Integer should follow 'done' command.");
+            throw(DukeException.doneTypeMismatch());
         } catch (IndexOutOfBoundsException e) {
-            say("Error! Enter a valid task number.");
+            throw(DukeException.doneOutOfBounds());
         }
     }
 
-    private static void handleToDo(String input) {
+    private static void handleToDo(String input) throws DukeException {
         String pattern = "(todo\\s)(.+)";
-        if (input.matches(pattern)) {
+        if (input.trim().matches(pattern)) {
             String task = input.replaceAll(pattern, "$2");
             Task next = new ToDo(task);
             list.add(next);
             String text = "Added ToDo '" + task + "' to your list!";
             say(text);
         } else {
-            say("Error! Task should follow 'todo' command.");
+            throw(DukeException.emptyDesc("todo"));
         }
     }
 
-    private static void handleDeadline(String input) {
-        String pattern = "(deadline\\s)(.+)\\s(/by\\s)(.+)";
-        if (input.matches(pattern)) {
-            String task = input.replaceAll(pattern, "$2");
-            String time = input.replaceAll(pattern, "$4");
-            Task next = new Deadline(task, time);
-            list.add(next);
-            String text = "Added Deadline '" + task + "' to your list!";
-            say(text);
+    private static void handleDeadline(String input) throws DukeException {
+        String pattern1 = "(deadline\\s)(.+)";
+        String pattern2 = "(deadline\\s)(.+)\\s(/by\\s)(.+)";
+        String pattern3 = "(deadline\\s)(/by)((\\s(.*))*)";
+        if (input.trim().matches(pattern1)) {
+            if (input.trim().matches(pattern2)) {
+                String task = input.replaceAll(pattern2, "$2");
+                String time = input.replaceAll(pattern2, "$4");
+                Task next = new Deadline(task, time);
+                list.add(next);
+                String text = "Added Deadline '" + task + "' to your list!";
+                say(text);
+            } else if (input.trim().matches(pattern3)) {
+                throw(DukeException.missingTask());
+            } else {
+                throw(DukeException.missingTime("by"));
+            }
         } else {
-            say("Error! 'deadline' command should be followed by task and '/by' date");
+            throw(DukeException.emptyDesc("deadline"));
         }
     }
 
-    private static void handleEvent(String input) {
-        String pattern = "(event\\s)(.+)\\s(/at\\s)(.+)";
-        if (input.matches(pattern)) {
-            String task = input.replaceAll(pattern, "$2");
-            String time = input.replaceAll(pattern, "$4");
-            Task next = new Event(task, time);
-            list.add(next);
-            String text = "Added Event '" + task + "' to your list!";
-            say(text);
+    private static void handleEvent(String input) throws DukeException {
+        String pattern1 = "(event\\s)(.+)";
+        String pattern2 = "(event\\s)(.+)\\s(/at\\s)(.+)";
+        String pattern3 = "(event\\s)(/at)((\\s(.*))*)";
+        if (input.trim().matches(pattern1)) {
+            if (input.trim().matches(pattern2)) {
+                String task = input.replaceAll(pattern2, "$2");
+                String time = input.replaceAll(pattern2, "$4");
+                Task next = new Event(task, time);
+                list.add(next);
+                String text = "Added Event '" + task + "' to your list!";
+                say(text);
+            } else if (input.trim().matches(pattern3)) {
+                throw(DukeException.missingTask());
+            } else {
+                throw(DukeException.missingTime("at"));
+            }
         } else {
-            say("Error! 'event' command should be followed by task and '/bat' date");
+            throw(DukeException.emptyDesc("event"));
         }
+    }
+
+    private static void handleOthers() throws DukeException {
+        throw(DukeException.unknownCommand());
     }
 
     public static void main(String[] args) {
@@ -98,19 +124,22 @@ public class Duke {
         say(welcome);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
-            if (input.equals("list")) {
-                System.out.println("Here is your list:");
-                printList();
-            } else if (input.startsWith("done")) {
-                printDone(input);
-            } else if (input.startsWith("todo")) {
-                handleToDo(input);
-            } else if (input.startsWith("deadline")) {
-                handleDeadline(input);
-            } else if (input.startsWith("event")) {
-                handleEvent(input);
-            } else {
-                say("Sorry, I don't know what you just said.");
+            try {
+                if (input.trim().equals("list")) {
+                    printList();
+                } else if (input.startsWith("done")) {
+                    printDone(input);
+                } else if (input.startsWith("todo")) {
+                    handleToDo(input);
+                } else if (input.startsWith("deadline")) {
+                    handleDeadline(input);
+                } else if (input.startsWith("event")) {
+                    handleEvent(input);
+                } else {
+                    handleOthers();
+                }
+            } catch (DukeException e) {
+                say(e.getMessage());
             }
             input = sc.nextLine();
         }
