@@ -19,7 +19,8 @@ public class Duke {
     public static void main(String[] args) {
         boolean running = true;
 
-        String logo = "############################################################# \n" +
+        String logo =
+                "############################################################# \n" +
                 "###################################################   ####### \n" +
                 "###############################################   /~\\   #####\n" +
                 "############################################   _- `~~~', ####\n" +
@@ -53,28 +54,30 @@ public class Duke {
             String input = sc.nextLine();
 
             if (input.equals("bye")) {
-                System.out.println(
+                String endMessage =
                         "    ____________________________________________________________\n" +
                         "     Bye. Hope to see you again soon!\n" +
-                        "    ____________________________________________________________\n");
-
+                        "    ____________________________________________________________\n";
+                System.out.println(endMessage);
                 running = false;
-            } else if (input.matches("done \\d+")) {
 
+            } else if (input.matches("done \\d+")) {
                 int taskNum = Integer.parseInt(input.substring(5));
                 if (taskNum <= numberOfTasks) {
                     Task t = tasks[taskNum - 1];
                     t.markAsDone();
-
-                    System.out.println(
+                    String doneTaskMessage =
                             "    ____________________________________________________________\n" +
-                                    "     Nice! I've marked this task as done: \n" +
-                                    "       [" + t.getStatusIcon() + "] " + t.getDescription() + "\n" +
-                                    "    ____________________________________________________________");
+                            "     Nice! I've marked this task as done: \n" +
+                            "       [" + t.getStatusIcon() + "] " + t.getDescription() + "\n" +
+                            "    ____________________________________________________________";
+                    System.out.println(doneTaskMessage);
                 } else {
-                    System.out.println("    ____________________________________________________________\n" +
+                    String invalidTaskMessage =
+                            "    ____________________________________________________________\n" +
                             "     Rrrrwrr:( You you don't even have a task " + taskNum + "\n" +
-                            "    ____________________________________________________________");
+                            "    ____________________________________________________________";
+                    System.out.println(invalidTaskMessage);
                 }
             } else if (input.equals("list")) {
                 printTasks();
@@ -83,15 +86,17 @@ public class Duke {
                     tasks[numberOfTasks] = new Task(input);
                     numberOfTasks++;
 
-                    System.out.println(
+                    String addTaskMessage =
                             "    ____________________________________________________________\n" +
-                                    "     added:" + input + "\n" +
-                                    "    ____________________________________________________________\n");
+                            "     added:" + input + "\n" +
+                            "    ____________________________________________________________\n";
+                    System.out.println(addTaskMessage);
                 } else {
-                    System.out.println(
+                    String tooManyTasksMessage =
                             "    ____________________________________________________________\n" +
-                                    "    I'm too full to add more tasks :(\n" +
-                                    "    ____________________________________________________________\n");
+                            "    I'm too full to add more tasks :(\n" +
+                            "    ____________________________________________________________\n";
+                    System.out.println(tooManyTasksMessage);
                 }
             }
         }
