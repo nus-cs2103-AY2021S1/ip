@@ -46,5 +46,23 @@ What can I do for you?
 	==================================
 
 	== King says =====================
+	Here are the items in your list:
+	1. [T][?] todo read book
+	2. [T][?] todo return book
+	3. [D][?] return book (by: Sunday)
+	4. [E][?] project meeting (at: Mon 2-4pm)
+	==================================
+
+	== King says =====================
+	 Nice! I've marked this task as done:
+		[D][?] return book (by: Sunday)
+	==================================
+
+	== King says =====================
+	 Nice! I've marked this task as done:
+		[E][?] project meeting (at: Mon 2-4pm)
+	==================================
+
+	== King says =====================
 	 Bye. Hope to see you again soon!
 	==================================
