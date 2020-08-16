@@ -33,8 +33,9 @@ public class Duke {
             endConversation();
         } else if (input.equals("list")) {
             showTask(tasks);
-        } else if (type.equals("done")||type.equals("todo")||type.equals("deadline")||type.equals("event")) {
-            if (parseArray.length == 1 && type.equals("done")){
+        } else if (type.equals("done")||type.equals("delete")||
+                type.equals("todo")||type.equals("deadline")||type.equals("event")) {
+            if (parseArray.length == 1 && (type.equals("done")||type.equals("delete"))){
                 throw new EmptyTaskException("Please specify task index. (´∀`)");
             } else if (parseArray.length == 1 ){
                 throw new EmptyTaskException("Please specify task description. (´∀`)");
@@ -47,6 +48,13 @@ public class Duke {
                     int index = Integer.parseInt(rest) - 1;
                     Task newTask = tasks.get(index).markAsDone();
                     tasks.set(index, newTask);
+                } else if (type.equals("delete")) {
+                    int index = Integer.parseInt(rest) - 1;
+                    Task.reduceOneTasks();
+                    String message = tasks.get(index).deleteMessage();
+                    System.out.println(message);
+                    tasks.remove(index);
+
                 } else {
                     switch (type) {
                         case "todo":
@@ -75,8 +83,8 @@ public class Duke {
                             System.out.println(newEvent);
                             break;
                     }
-                    System.out.println("Now you have " + Task.numberOfTasks + " tasks in the list.");
                 }
+                System.out.println("Now you have " + Task.numberOfTasks + " tasks in the list.");
             }
         } else {
             throw new CommandNotFoundException();

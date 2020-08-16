@@ -10,4 +10,9 @@ public class Event extends Task {
     public String toString() {
         return super.toString().replace("[\u2718]", "[E][\u2718]") + " (at: " + time + ")";
     }
+
+    @Override
+    public String deleteMessage() {
+        return super.deleteMessage().replace("[\u2718]", "[T][\u2718]");
+    }
 }

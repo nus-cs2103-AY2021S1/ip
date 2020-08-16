@@ -10,4 +10,9 @@ public class Deadline extends Task{
     public String toString() {
         return super.toString().replace("[\u2718]", "[D][\u2718]") + " (by: " + time + ")";
     }
+
+    @Override
+    public String deleteMessage() {
+        return super.deleteMessage().replace("[\u2718]", "[T][\u2718]");
+    }
 }

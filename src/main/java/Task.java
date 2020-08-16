@@ -10,6 +10,10 @@ public class Task {
         numberOfTasks++;
     }
 
+    public static void reduceOneTasks() {
+        numberOfTasks--;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
@@ -23,6 +27,11 @@ public class Task {
     @Override
     public String toString() {
         return "Got it. I've added this task:\n" +
+                "[\u2718] " + this.description;
+    }
+
+    public String deleteMessage() {
+        return "Got it. I've deleted this task:\n" +
                 "[\u2718] " + this.description;
     }
 }
