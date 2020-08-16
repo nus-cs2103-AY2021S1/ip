@@ -11,7 +11,7 @@ public class Store {
 
     public void add(Task item) {
         this.store.add(item);
-        System.out.printf("     added: %s\n", item.toString());
+        System.out.printf("     Got it. I've added this task:\n       %s\n", item.toString());
     }
 
     public void markAsDone(int index) {
@@ -24,7 +24,7 @@ public class Store {
     public void listItems() {
         System.out.println("     Here are the tasks in your list:");
         for (int i = 0; i < this.store.size(); i++) {
-            System.out.printf("     %d. %s\n", i + 1, this.store.get(i).toString());
+            System.out.printf("     %d.%s\n", i + 1, this.store.get(i).toString());
         }
     }
 }

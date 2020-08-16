@@ -6,6 +6,9 @@ public class Duke {
     private static final String LIST_COMMAND = "list";
     private static final String DONE_COMMAND = "done";
     private static final String EXIT_COMMAND = "bye";
+    private static final String DEADLINE_COMMAND = "deadline";
+    private static final String TODO_COMMAND = "todo";
+    private static final String EVENT_COMMAND = "event";
 
     private static void greet() {
         String welcomeMessage = "     Konnichiwa!\n"
@@ -25,14 +28,32 @@ public class Duke {
         input = sc.nextLine();
         while (!input.equals(EXIT_COMMAND)) {
             System.out.print(DIVIDER);
-            if (input.equals(LIST_COMMAND)) {
+            String[] rawInput = input.split(" ", 2);
+            String command = rawInput[0];
+            switch(command) {
+            case LIST_COMMAND:
                 storage.listItems();
-            } else if (input.startsWith(DONE_COMMAND)) {
+                break;
+            case DONE_COMMAND:
                 int index = Integer.parseInt(input.split(" ")[1]) - 1;
                 storage.markAsDone(index);
-            } else {
-                Task newTask = new Task(input);
-                storage.add(newTask);
+                break;
+            case TODO_COMMAND:
+                ToDo newToDo = new ToDo(rawInput[1]);
+                storage.add(newToDo);
+                break;
+            case DEADLINE_COMMAND:
+                String deadlineDescription = rawInput[1].split("/")[0].trim();
+                String due = rawInput[1].split("/", 2)[1].split(" ", 2)[1].trim();
+                Deadline newDeadline = new Deadline(deadlineDescription, due);
+                storage.add(newDeadline);
+                break;
+            case EVENT_COMMAND:
+                String eventDescription = rawInput[1].split("/")[0].trim();
+                String time = rawInput[1].split("/", 2)[1].split(" ", 2)[1].trim();
+                Event newEvent = new Event(eventDescription, time);
+                storage.add(newEvent);
+                break;
             }
             System.out.println(DIVIDER);
             input = sc.nextLine();
