@@ -42,6 +42,16 @@ public class Duke {
                         throw new DukeException("Wrong format.");
                     }
                     break;
+                case "delete":
+                    if (inputArray.length != 2) {
+                        throw new DukeException("Wrong format.");
+                    }
+                    try {
+                        taskList.delete(Integer.parseInt(inputArray[1]));
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("Wrong format.");
+                    }
+                    break;
                 case "list":
                     taskList.list();
                     break;

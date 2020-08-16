@@ -14,11 +14,20 @@ public class TaskList {
         System.out.println("New task added: " + task);
     }
 
-    void markAsDone(int position) {
+    void markAsDone(int position) throws DukeException {
         if (position <= 0 || position > this.tasks.size()) {
-            System.out.println("Invalid task.");
+            throw new DukeException("Invalid task.");
         } else {
             this.tasks.get(position - 1).markAsDone();
+        }
+    }
+
+    void delete(int position) throws DukeException {
+        if (position <= 0 || position > this.tasks.size()) {
+            throw new DukeException("Invalid task.");
+        } else {
+            Task removed = this.tasks.remove(position - 1);
+            System.out.println("Deleted: " + removed);
         }
     }
 
