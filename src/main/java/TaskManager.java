@@ -8,33 +8,47 @@ public class TaskManager {
         this.tasks = new ArrayList<>();
     }
 
-    public List<Task> getTasks() {
-        return this.tasks;
+    public void showAllTask() {
+        System.out.println("\t____________________________________________________________\n");
+        for (int i = 0; i < this.tasks.size(); i++) {
+            int serialNumber = i + 1;
+            Task task = this.tasks.get(i);
+            System.out.println("\t" + serialNumber + "." + task);
+        }
+        System.out.println("\t____________________________________________________________\n");
     }
 
-    public void addTaskDescription(Task newTask) {
-        tasks.add(newTask);
+    public void addedTaskDescription(Task newTask) {
         System.out.println("\t____________________________________________________________\n");
         System.out.println("\tGot it. I've added this task:\n");
         System.out.println("\t\t" + newTask + "\n");
-        System.out.println("\tNow you have " + tasks.size() + " tasks in the list.\n");
+        System.out.println("\tNow you have " + this.tasks.size() + " tasks in the list.\n");
         System.out.println("\t____________________________________________________________\n");
     }
 
     public void addTask(String userCommand) {
         if (userCommand.contains("todo")) { // To Do
-            List<Task> tasks = this.getTasks();
-            Task newTask = new Todo(userCommand);
-            this.addTaskDescription(newTask);
+            // E.g todowork
+            if (userCommand.split(" ").length == 1) {
+                DukeException.invalidTodo();
+            } else {
+                // Add and report that the todo is added
+                Task newTask = new Todo(userCommand);
+                this.tasks.add(newTask);
+                this.addedTaskDescription(newTask);
+            }
         } else if (userCommand.contains("deadline")) { // Deadline
             try {
                 String[] userCommandSplit = userCommand.split(" /by ");
                 String description = userCommandSplit[0].split(" ", 2)[1];
                 String by = userCommandSplit[1];
-                List<Task> tasks = this.getTasks();
+
+                // Add and report that the deadline is added
                 Task newTask = new Deadline(description, by);
-                this.addTaskDescription(newTask);
+                this.tasks.add(newTask);
+                this.addedTaskDescription(newTask);
             } catch (ArrayIndexOutOfBoundsException e) {
+                // E.g deadline return book /bylmklmlmlkmlkmlmlmlmlmkl Sunday
                 DukeException.invalidDeadline();
             }
         } else { // Event
@@ -42,22 +56,22 @@ public class TaskManager {
                 String[] userCommandSplit = userCommand.split(" /at ");
                 String description = userCommandSplit[0].split(" ", 2)[1];
                 String at = userCommandSplit[1];
-                List<Task> tasks = this.getTasks();
+
+                // Add and report that the event is added
                 Task newTask = new Event(description, at);
-                this.addTaskDescription(newTask);
+                this.tasks.add(newTask);
+                this.addedTaskDescription(newTask);
             } catch (ArrayIndexOutOfBoundsException e) {
+                // E.g event project meeting /atlmklmlmlkmlkmlmlmlmlmkl Mon 2-4pm
                 DukeException.invalidEvent();
             }
         }
     }
 
-    public void showAllTask() {
+    public void doneTaskDescription(Task doneTask) {
         System.out.println("\t____________________________________________________________\n");
-        for (int i = 0; i < tasks.size(); i++) {
-            int serialNumber = i + 1;
-            Task task = tasks.get(i);
-            System.out.println("\t" + serialNumber + "." + task);
-        }
+        System.out.println("\tNice! I've marked this task as done:\n");
+        System.out.println("\t" + doneTask);
         System.out.println("\t____________________________________________________________\n");
     }
 
@@ -67,19 +81,50 @@ public class TaskManager {
             String[] userCommandSplit = userCommand.split(" ");
             // To prevent cases such as "done 1 7", "done", "done123123123"
             if (userCommandSplit.length != 2) {
-                DukeException.invalidDoneCommand();
+                DukeException.invalidCommand();
             } else {
-                // Take serial number e.g 1 "done 1" and mark as done
+                // Take serial number e.g 1 "done 1"
                 int serialNumber = Integer.parseInt(userCommandSplit[1]);
-                List<Task> tasks = this.getTasks();
-                Task doneTask = tasks.get(serialNumber - 1);
+                int index = serialNumber - 1;
+
+                // Mark as done and report that the task is done
+                Task doneTask = this.tasks.get(index);
                 doneTask.markAsDone();
-                System.out.println("\t____________________________________________________________\n");
-                System.out.println("\tNice! I've marked this task as done:\n");
-                System.out.println("\t" + doneTask);
-                System.out.println("\t____________________________________________________________\n");
+                this.doneTaskDescription(doneTask);
             }
         } catch (IndexOutOfBoundsException e) {
+            // E.g "done 719329813298712398123" is not valid as number of tasks is cap to 100 by requirements
+            DukeException.noSuchTask();
+        }
+    }
+
+    public void deletedTaskDescription(Task deletedTask) {
+        System.out.println("\t____________________________________________________________\n");
+        System.out.println("\tNoted. I've removed this task:\n");
+        System.out.println("\t\t" + deletedTask + "\n");
+        System.out.println("\tNow you have " + this.tasks.size() + " tasks in the list.\n");
+        System.out.println("\t____________________________________________________________\n");
+    }
+
+    public void deleteTask(String userCommand) {
+        try {
+            // E.g given "delete 1", we split to ["delete", "1"]
+            String[] userCommandSplit = userCommand.split(" ");
+            // To prevent cases such as "delete 1 7", "delete", "delete123123123"
+            if (userCommandSplit.length != 2) {
+                DukeException.invalidCommand();
+            } else {
+                // Take serial number e.g 1 "delete 1" and delete
+                int serialNumber = Integer.parseInt(userCommandSplit[1]);
+                int index = serialNumber - 1;
+
+                // Mark as deleted and report that the task is deleted
+                Task deletedTask = this.tasks.get(index);
+                this.tasks.remove(index);
+                this.deletedTaskDescription(deletedTask);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            // E.g "delete 719329813298712398123" is not valid as number of tasks is cap to 100 by requirements
             DukeException.noSuchTask();
         }
     }

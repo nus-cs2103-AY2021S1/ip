@@ -1,8 +1,8 @@
 public class DukeException {
     private final static String line = "\t____________________________________________________________\n";
 
-    protected static void invalidDoneCommand() {
-        System.out.println(line + "\tDone command written incorrectly. Please check again.\n" + line);
+    protected static void invalidCommand() {
+        System.out.println(line + "\tCommand written incorrectly. Please check again.\n" + line);
     }
 
     protected static void genericTask() {
@@ -19,5 +19,9 @@ public class DukeException {
 
     protected static void invalidEvent() {
         System.out.println(line + "\tEvent format is invalid\n" + line);
+    }
+
+    protected static void invalidTodo() {
+        System.out.println(line + "\tTodo format is invalid\n" + line);
     }
 }

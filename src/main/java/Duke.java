@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.List;
 
 public class Duke {
     public static void greet() {
@@ -27,10 +26,12 @@ public class Duke {
                 break;
             } else if (userCommand.equals("list")) { // Show list of tasks
                 taskManager.showAllTask();
-            } else if (userCommand.contains("done")) {
+            } else if (userCommand.contains("done")) { // e.g done 1
                 taskManager.markTaskDone(userCommand);
-            } else if (userCommand.contains("todo") || userCommand.contains("deadline") || userCommand.contains("event")) { // Add Task
+            } else if (userCommand.contains("todo") || userCommand.contains("deadline") || userCommand.contains("event")) { // Add Task, e.g todo work
                 taskManager.addTask(userCommand);
+            } else if (userCommand.contains("delete")) {
+                taskManager.deleteTask(userCommand);
             } else {
                 // If a task is specified as a Task but not a Deadline / To Do / Event, throw an error
                 DukeException.genericTask();
