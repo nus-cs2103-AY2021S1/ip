@@ -9,7 +9,7 @@ class ChatBot {
     private String logo;
     private String user;
     private String botName;
-    private List<String> toDoList;
+    private List<Task> toDoList;
 
     /**
      * Instantiates a chatBot with a name.
@@ -86,7 +86,8 @@ class ChatBot {
      * @param item the name of the task the user entered
      */
     void add(String item) {
-        this.toDoList.add(item);
+        Task task = new Task(item);
+        this.toDoList.add(task);
         System.out.println(ConsoleColors.YELLOW.getColor()
                 + this.botName + ": "
                 + "[" + item + "] has been added to your list! \n"
