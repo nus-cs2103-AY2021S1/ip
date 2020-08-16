@@ -30,7 +30,13 @@ What can I do for you?
 	==================================
 
 	== King says =====================
-	 Todo cannot be empty
+	 I have deleted the following item:
+		[T][?] read book
+	 You got 2 task(s) left.
+	==================================
+
+	== King says =====================
+	 Todo cannot be empty!
 	==================================
 
 	== King says =====================
@@ -42,15 +48,18 @@ What can I do for you?
 	==================================
 
 	== King says =====================
+	 delete must be followed by item number
+	==================================
+
+	== King says =====================
 	Here are the items in your list:
-	1. [T][?] read book
-	2. [D][?] return book (by: Sunday)
-	3. [E][?] project meeting (at: Mon 2-4pm)
+	1. [D][?] return book (by: Sunday)
+	2. [E][?] project meeting (at: Mon 2-4pm)
 	==================================
 
 	== King says =====================
 	 Nice! I've marked this task as done:
-		[T][?] read book
+		[D][?] return book (by: Sunday)
 	==================================
 
 	== King says =====================
