@@ -42,6 +42,14 @@ public class DukeBot {
         this.tasksDone.add(false);
         System.out.println("added: "+task);
     }
+    public void deleteTask(int index){
+        String task= "[✓] "+ this.tasks.get(index);
+        this.tasks.remove(index);
+        this.taskstype.remove(index);
+        this.tasksDone.remove(index);
+        System.out.println("removed: "+task);
+        numTask();
+    }
 
     public void numTask(){
         int done=0;
@@ -75,7 +83,7 @@ public class DukeBot {
                 break;
             }
 
-            if((args1[0].equals("todo") || args1[0].equals("deadline")||args1[0].equals("event")) && args1.length==1){
+            if((args1[0].equals("delete") ||args1[0].equals("todo") || args1[0].equals("deadline")||args1[0].equals("event")) && args1.length==1){
                 System.out.println("☹ OOPS!!! The description of a "+ args1[0] +" cannot be empty.");
             }
 
@@ -87,6 +95,10 @@ public class DukeBot {
                 addTask(task,"[T]");
                 numTask();
             }
+            else if(args1[0].equals("delete")){
+                deleteTask(Integer.parseInt(args1[1])-1);
+            }
+
             else if(args1[0].equals("deadline")){
                 String task = "";
                 for(int i = 1;i<args1.length;i++){
