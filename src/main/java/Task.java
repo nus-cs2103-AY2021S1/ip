@@ -1,13 +1,20 @@
 public class Task {
-  private final static String DONE = "[✓]";
-  private final static String NOT_DONE = "[✗]";
+  private static final String DONE = "[✓]";
+  private static final String NOT_DONE = "[✗]";
 
   private String name;
+  private String type;
   private boolean isDone;
 
   public Task(String name) {
     this.name = name;
     this.isDone = false;
+  }
+
+  public Task(String name, String type) {
+    this.name = name;
+    this.isDone = false;
+    this.type = type;
   }
 
   private String getStatus() {
@@ -20,6 +27,6 @@ public class Task {
 
   @Override
   public String toString() {
-    return String.format("%s %s", this.getStatus(), this.name);
+    return String.format("%s%s %s", this.type, this.getStatus(), this.name);
   }
 }
