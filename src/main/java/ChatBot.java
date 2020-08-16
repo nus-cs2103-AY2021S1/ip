@@ -2,13 +2,20 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
-class Interactor {
+/**
+ * Encapsulates the chatBot and its behavior.
+ */
+class ChatBot {
     String logo;
     String user;
-    String kai;
+    String botName;
     List<String> toDoList;
 
-    Interactor() {
+    /**
+     * Instantiates a chatBot with a name.
+     * @param botName the name of the chatBot
+     */
+    ChatBot(String botName) {
         logo = logo = "#    #   ##   # ###### ###### #    #\n"
                 + "#   #   #  #  #     #  #      ##   #\n"
                 + "####   #    # #    #   #####  # #  #\n"
@@ -16,65 +23,57 @@ class Interactor {
                 + "#   #  #    # #  #     #      #   ##\n"
                 + "#    # #    # # ###### ###### #    #\n";
         user = "You: ";
-        kai = "Kai: ";
+        this.botName = botName;
         toDoList = new ArrayList<>();
     }
 
+    /**
+     * Prints a welcome message for the user.
+     */
     void welcome() {
          String welcomeMessage = "Konichiwa! Welcome to Kaizen \n"
-                 + "I am Kai, what can I do for you today?\n";
+                 + "I am " + this.botName + " what can I do for you today?\n";
 
         System.out.println(this.logo + "\n"
                 + ConsoleColors.YELLOW.getColor() + welcomeMessage + ConsoleColors.RESET.getColor());
     }
 
+    /**
+     * Interacts with the user based on his input.
+     */
     void getInput() {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
             System.out.print(this.user);
             String input = sc.nextLine();
+
+            // guard clause for when user says 'bye'. Program will exit while loop.
             if (input.equals("bye")) {
                 bye();
                 break;
             }
-
-            if (input.equals("list")) {
-                showList();
-            } else {
-                add(input);
-            }
-
-
+            reply(input);
         }
+        sc.close();
     }
 
-    void showList() {
+    /**
+     * Replies the user by echoing his input.
+     * @param input the string that the user enters
+     */
+    void reply(String input) {
         System.out.println(ConsoleColors.YELLOW.getColor()
-            + this.kai
-            + "Here are your tasks!"
-            + ConsoleColors.RESET.getColor());
-        for (int i = 0; i < toDoList.size(); i++) {
-            System.out.println(ConsoleColors.BLUE_BOLD.getColor()
-                + (i+1) + ". "
-                + ConsoleColors.BLUE.getColor() + "\t"
-                + toDoList.get(i)
-                + ConsoleColors.RESET.getColor());
-        }
-        System.out.println();
-    }
-
-    void add(String item) {
-        this.toDoList.add(item);
-        System.out.println(ConsoleColors.YELLOW.getColor()
-                + this.kai
-                + "[" + item + "] has been added to your list! \n"
+                + this.botName + ": " + input + "\n"
                 + ConsoleColors.RESET.getColor());
     }
 
+    /**
+     * Says 'bye' to the user.
+     */
     void bye() {
         System.out.println(ConsoleColors.YELLOW.getColor()
-                + this.kai
+                + this.botName + ": "
                 + "Sayonara! See you again my friend!"
                 + ConsoleColors.RESET.getColor());
     }

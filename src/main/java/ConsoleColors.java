@@ -1,3 +1,6 @@
+/**
+ * Enum of the console colors used in the project.
+ */
 public enum ConsoleColors {
     RESET("\033[0m"),
     RED("\033[0;31m"),
@@ -8,10 +11,18 @@ public enum ConsoleColors {
 
     public final String color;
 
+    /**
+     * Instantiates the enum with a color code.
+     * @param color the color code associated with that color
+     */
     ConsoleColors(String color) {
         this.color = color;
     }
 
+    /**
+     * Get the color code of a particular color.
+     * @return the code code of a particular color
+     */
     String getColor() {
         return this.color;
     }
