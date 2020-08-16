@@ -1,14 +1,14 @@
 public class DukeException extends Exception {
 
     protected DukeExceptionType exceptionType;
-    protected String command;
+    protected Commands command;
 
     public DukeException(String e, DukeExceptionType exceptionType){
         super(e);
         this.exceptionType = exceptionType;
     }
 
-    public DukeException(String e, DukeExceptionType exceptionType, String command){
+    public DukeException(String e, DukeExceptionType exceptionType, Commands command){
         super(e);
         this.exceptionType = exceptionType;
         this.command = command;
@@ -19,16 +19,49 @@ public class DukeException extends Exception {
         String error = "";
         switch (exceptionType){
             case EMPTY_TIME:
-                error+= "Deadline/event task requires a time";
+                switch (command){
+                    case DEADLINE:
+                        error+= "Deadline task requires a time";
+                        break;
+                    case EVENT:
+                        error+= "Event task requires a time";
+                        break;
+                }
                 break;
             case INVALID_TASK:
                 error+= "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
                 break;
             case NO_DESCRIPTION:
-                error+="this command cannot have an empty description";
+                switch (command){
+                    case DEADLINE:
+                        error+= "Deadline task description cannot be empty";
+                        break;
+                    case TODO:
+                        error+= "Todo task description cannot be empty";
+                        break;
+                    case EVENT:
+                        error+= "Event task description cannot be empty";
+                        break;
+                    case DONE:
+                        error+= "Done task description cannot be empty";
+                        break;
+                }
                 break;
             case WRONG_DESCRIPTION:
-                error+= "Deadline must have task name followed by '/by' and event must be follow by '/at'";
+                switch (command){
+                    case DEADLINE:
+                        error+= "Deadline command must be followed by '/by' and then a deadline";
+                        break;
+                    case EVENT:
+                        error+= "Event command must be followed by '/at' and then a duration";
+                        break;
+                    case DONE:
+                        error+= "Such a task does not exist, please only follow done by the serial number of the task to be marked done";
+                        break;
+                    case DELETE:
+                        error+= "Such a task does not exist, please only follow delete by the serial number of the task to be marked deleted";
+                        break;
+                }
                 break;
         }
         return error;

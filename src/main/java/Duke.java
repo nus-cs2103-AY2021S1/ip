@@ -19,7 +19,7 @@ public class Duke {
         String output = "   ______________________________________________________________"
                         + "\n   Got it. I've added this task:"
                         + "\n       " + task
-                        + String.format("\n   Now you have %d tasks in the list.", myTasks.size())
+                        + String.format("\n   Now you have %d task(s) in the list.", myTasks.size())
                         + "\n   ______________________________________________________________";
         System.out.println(output);
     }
@@ -62,9 +62,22 @@ public class Duke {
         String output = "   ______________________________________________________________"
                 + "\n   " + "Noted. I've removed this task: "
                 + "\n   " + task
-                + String.format("\n   Now you have %d tasks in the list.", myTasks.size())
+                + String.format("\n   Now you have %d task(s) in the list.", myTasks.size())
                 + "\n   ______________________________________________________________";
         System.out.println(output);
+    }
+
+    public static boolean isNumeric(String string){
+        if(string == null){
+            return true;
+        }
+        int a;
+        try {
+            a = Integer.parseInt(string);
+        } catch (NumberFormatException e){
+            return true;
+        }
+        return (a <= 0 || a > myTasks.size());
     }
 
 
@@ -88,64 +101,92 @@ public class Duke {
                     listTasks();
                 } else if (input.startsWith("done")) {
                     try {
-                        if(input.split("done ").length>=2) {
+                        if(input.split("done ").length < 2) {
+                            throw new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.DONE);
+                        } else if(isNumeric(input.split("done ")[1])){
+                            throw new DukeException("", DukeExceptionType.WRONG_DESCRIPTION, Commands.DONE);
+                        } else {
                             String[] inputSplit = input.split("done ");
                             int index = Integer.parseInt(inputSplit[1]);
                             markAsDone(index);
-                        } else {
-                            throw new DukeException("", DukeExceptionType.NO_DESCRIPTION);
                         }
                     } catch(DukeException e){
                         System.err.println(e);
                     }
                 } else if (input.startsWith("todo")) {
                     try {
-                        if (input.split("todo ").length>=2) {
+                        if (input.split("todo ").length < 2) {
+                            throw new DukeException("todo needs description", DukeExceptionType.NO_DESCRIPTION, Commands.TODO);
+                        } else {
                             String[] inputSplit = input.split("todo ");
                             Task task = new TodoTask(inputSplit[1]);
                             addTask(task);
-                        } else {
-                            throw new DukeException("todo needs description", DukeExceptionType.NO_DESCRIPTION);
                         }
                     } catch (DukeException e){
                         System.err.println(e);
                     }
                 } else if (input.startsWith("deadline")) {
                     try {
-                        if(input.split("deadline ").length>=2) {
-                            String[] inputSplit = input.split("/by ");
-                            String name = inputSplit[0].split("deadline ")[1];
-                            String time = inputSplit[1];
-                            Task task = new DeadlineTask(name, time);
-                            addTask(task);
+                        if(input.split("deadline ").length < 2) {
+                            throw new DukeException("deadline needs description", DukeExceptionType.NO_DESCRIPTION, Commands.DEADLINE);
+                        } else if(!input.contains("/by")) {
+                            throw new DukeException("", DukeExceptionType.WRONG_DESCRIPTION, Commands.DEADLINE);
+                        }  else if(input.split("/by ").length < 2) {
+                            throw new DukeException("", DukeExceptionType.EMPTY_TIME, Commands.DEADLINE);
                         } else {
-                            throw new DukeException("deadline needs description", DukeExceptionType.NO_DESCRIPTION);
+                            String[] inputSplit = input.split("/by ");
+                            try {
+                                if(inputSplit[0].split("deadline ").length < 2) {
+                                    throw new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.DEADLINE);
+                                } else{
+                                    String name = inputSplit[0].split("deadline ")[1];
+                                    String time = inputSplit[1];
+                                    Task task = new DeadlineTask(name, time);
+                                    addTask(task);
+                                }
+                            } catch(DukeException e){
+                                System.err.println(e);
+                            }
                         }
                     } catch(DukeException e){
                         System.err.println(e);
                     }
                 } else if (input.startsWith("event")) {
                     try{
-                        if (input.split("event ").length>=2){
+                        if (input.split("event ").length<2){
+                            throw new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.EVENT);
+                        } else if(!input.contains("/at")) {
+                            throw new DukeException("", DukeExceptionType.WRONG_DESCRIPTION, Commands.EVENT);
+                        }  else if(input.split("/at ").length < 2) {
+                            throw new DukeException("", DukeExceptionType.EMPTY_TIME, Commands.EVENT);
+                        }
+                        else {
                             String[] inputSplit = input.split("/at ");
-                            String name = inputSplit[0].split("event ")[1];
-                            String time = inputSplit[1];
-                            Task task = new EventTask(name, time);
-                            addTask(task);
-                        } else {
-                            throw new DukeException("", DukeExceptionType.NO_DESCRIPTION);
+                            try {
+                                if (inputSplit[0].split("event ").length >= 2) {
+                                    String name = inputSplit[0].split("event ")[1];
+                                    String time = inputSplit[1];
+                                    Task task = new EventTask(name, time);
+                                    addTask(task);
+                                }
+                                throw new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.EVENT);
+                            } catch(DukeException e){
+                                System.err.println(e);
+                            }
                         }
                     } catch(DukeException e){
                         System.err.println(e);
                     }
                 } else if (input.startsWith("delete")) {
                     try{
-                        if (input.split("delete ").length>=2){
+                        if (input.split("delete ").length<2){
+                            throw new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.DELETE);
+                        } else if(isNumeric(input.split("delete ")[1])){
+                            throw new DukeException("", DukeExceptionType.WRONG_DESCRIPTION, Commands.DELETE);
+                        } else {
                             String[] inputSplit = input.split("delete ");
                             int index = Integer.parseInt(inputSplit[1]);
                             deleteTask(index);
-                        } else {
-                            throw new DukeException("", DukeExceptionType.NO_DESCRIPTION);
                         }
                     } catch(DukeException e){
                         System.err.println(e);
