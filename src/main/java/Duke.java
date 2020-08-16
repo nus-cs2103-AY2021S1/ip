@@ -1,3 +1,5 @@
+import main.java.Task;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -7,7 +9,7 @@ public class Duke {
         String user = "Me: \n";
         String addedText = "added: ";
         String line = "_______________________________________________________________";
-        ArrayList<String> added = new ArrayList<>();
+        ArrayList<Task> added = new ArrayList<>();
 
         //Initial greetings
         System.out.println(line);
@@ -36,7 +38,7 @@ public class Duke {
                     System.out.println(line);
                 }
             } else {
-                added.add(userInput);
+                added.add(new Task(userInput));
                 System.out.println(line);
                 System.out.print(bot);
                 System.out.println(addedText + userInput);
