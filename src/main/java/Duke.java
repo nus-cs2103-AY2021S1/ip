@@ -108,6 +108,16 @@ public class Duke {
                             "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0";
                     break;
 
+                case "delete" :
+                    Task deletedTask = inputStore.get(Integer.parseInt(splitString[1]) - 1);
+                    inputStore.remove(Integer.parseInt(splitString[1]) - 1);
+                    returnString = "\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
+                            "\n\t Noted. I've removed this task: " +
+                            "\n\t   " + deletedTask.toString() +
+                            "\n\t Now you have " +  inputStore.size()  + " tasks in the list." +
+                            "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0";
+                    break;
+
                 default :
                     returnString = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
