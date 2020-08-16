@@ -13,10 +13,11 @@ public class Duke {
         System.out.println("Bye. Hope to see you soon!");
     }
 
-    void addTask(String task) {
-        Task newTask = new Task(task);
-        tasks.add(newTask);
-        System.out.println("added: " + task);
+    void addTask(Task task) {
+        tasks.add(task);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
     void completeTask(int taskNo) {
@@ -40,7 +41,7 @@ public class Duke {
         greet();
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
-        while(isRunning) {
+        while (isRunning) {
             String command = sc.next();
             switch (command) {
                 case "bye": {
@@ -51,12 +52,29 @@ public class Duke {
                 case "list":
                     list();
                     break;
-                case "done":
+                case "done": {
                     int taskNo = sc.nextInt();
                     completeTask(taskNo);
                     break;
+                }
+                case "todo": {
+                    String description = sc.nextLine().trim();
+                    addTask(new Todo(description));
+                    break;
+                }
+                case "deadline": {
+                    String input = sc.nextLine().trim();
+                    String[] details = input.split(" /by ");
+                    addTask(new Deadline(details[0], details[1]));
+                    break;
+                }
+                case "event": {
+                    String input = sc.nextLine().trim();
+                    String[] details = input.split(" /at ");
+                    addTask(new Event(details[0], details[1]));
+                    break;
+                }
                 default:
-                    addTask(command + sc.nextLine());
                     break;
             }
         }
