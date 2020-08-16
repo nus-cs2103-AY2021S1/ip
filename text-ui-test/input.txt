@@ -10,4 +10,12 @@ done 2
 list
 done 3
 list
+delete 3
+list
+delete 2
+list
+delete 1
+list
+todo final task
+list
 bye

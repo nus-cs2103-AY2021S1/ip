@@ -11,6 +11,18 @@ public class TaskHandler {
         return taskList;
     }
 
+    public Task findTaskByNum(String input, ArrayList<Task> list) throws DukeException {
+        try {
+            // Checking if only one task is given to complete/valid int
+            String[] stringArr = input.split(" ");
+            // Finding the actual task
+            int indexOfDone = Integer.parseInt(stringArr[1]) - 1;
+            return list.get(indexOfDone);
+        } catch (Exception e){
+            throw new DukeException("Oops, pls enter only one valid task");
+        }
+    }
+
     public void printList() {
         if (taskList.isEmpty()) {
             // Asks user for tasks when printing empty list
@@ -29,9 +41,11 @@ public class TaskHandler {
         System.out.println("You have " + taskList.size() + " task(s) in the list");
     }
 
+
     public Task processTask(String input, String tasktype) throws DukeException {
         // Processes the input into a task
         if (tasktype.equals("todo")) {
+            // input.length() == 4 || input.substring(5).isEmpty()
             if (input.substring(4).trim().isEmpty()) {
                 // if given empty arguments or space as task
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -50,7 +64,7 @@ public class TaskHandler {
 
     public static Task processTaskWithTime(String input, String tasktype, String separator) throws DukeException {
         // String processing to find task description and time
-        String taskDesc = input.substring(tasktype.length(), input.indexOf(separator));
+        String taskDesc = input.substring(tasktype.length()+1, input.indexOf(separator));
         checkIsFieldEmpty("taskDesc", taskDesc);
         // +4 due to size of /by or /at with a space
         String time = input.substring(input.indexOf(separator) + 4);
