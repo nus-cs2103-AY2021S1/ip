@@ -1,26 +1,32 @@
-# Duke project template
+# Duke project by Zhou Zijian
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This is the individual project for CS2103T in Semester 1, AY2020
 
-## Setting up in Intellij
+## Introduction
+Duke a Personal Assistant Chatbot that helps a person to keep track of various things. It is very user-friendly.
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Usage
+To use the the chatbot, simply compile and run the Duke.java file at `src/main/java/Duke.java`. Then type in commands
+to interact with Duke.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+Sample commands include:
+`list`
+This shows the list of things you have added
+
+`event <content> /at <time>`
+This adds an event at the stipulated time
+
+`deadline <content> /by <time>`
+This adds a deadline by the stipulated time
+
+`todo <content>`
+This adds a todo to the bot
+
+`done <index>`
+This marks the thing at index `index` as completed
+
+`delete <index>`
+This deletes the thing at index `index`
+
+`More to be expected...`
+
