@@ -1,5 +1,8 @@
 import Exception.DukeException;
 import Exception.InvalidCommandException;
+import Exception.EmptyActionException;
+import Exception.InvalidActionException;
+
 import Task.DeadlineTask;
 import Task.EventTask;
 import Task.Task;
@@ -84,15 +87,33 @@ public class Duke {
     }
 
     public static void doneCommand(List<Task> list, String command) {
-        int index = Integer.parseInt(command.substring(5));
-        list.get(index - 1).markAsDone();
-        System.out.println("    ____________________________________________________________\n"
-                + "     Nice! I've marked this task as done:\n"
-                + "     "
-                + list.get(index - 1)
-                + "\n"
-                + "    ____________________________________________________________\n"
-        );
+        try {
+            int length  = command.length();
+            if (length < 5) {
+                throw new EmptyActionException(); // only "done"
+            } else {
+                try {
+                    String num = command.substring(5);
+                    int index = Integer.parseInt(num);
+
+                    if (index == 0) {
+                        throw new InvalidActionException(); // "done 0"
+                    }
+                    list.get(index - 1).markAsDone();
+                    System.out.println("    ____________________________________________________________\n"
+                            + "     Nice! I've marked this task as done:\n"
+                            + "     "
+                            + list.get(index - 1)
+                            + "\n"
+                            + "    ____________________________________________________________\n"
+                    );
+                } catch (NumberFormatException e) {
+                    throw new InvalidActionException(); // "done 1A" etc
+                }
+            }
+        } catch (DukeException e) {
+            System.out.println(e);
+        }
     }
 
     public static void toDoCommand(List<Task> list, String command) {
