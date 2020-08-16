@@ -8,17 +8,37 @@ public class Duke {
 
         dk.greet();
         Scanner sc = new Scanner( System.in );
+
         while (sc.hasNext()) {
             System.out.println("____________________________________________________________");
             String input = sc.nextLine();
-            if (input.equals("bye")) {
-                dk.endConversation();
-            } else if (input.equals("list")) {
-                dk.showTask(tasks);
-            } else {
-                String[] parseArray = input.split(" ", 2);
-                String type = parseArray[0];
+            try {
+                dk.respond(input, tasks);
+            } catch (CommandNotFoundException ex) {
+                System.out.println(ex);
+            } catch (EmptyTaskException ex) {
+                System.out.println(ex);
+            } catch (EmptyTimeException ex) {
+                System.out.println(ex);
+            }
+            System.out.println("____________________________________________________________");
+        }
+    }
 
+    public void respond(String input, ArrayList<Task> tasks) throws CommandNotFoundException, EmptyTaskException,
+    EmptyTimeException {
+        String[] parseArray = input.split(" ", 2);
+        String type = parseArray[0];
+        if (input.equals("bye")) {
+            endConversation();
+        } else if (input.equals("list")) {
+            showTask(tasks);
+        } else if (type.equals("done")||type.equals("todo")||type.equals("deadline")||type.equals("event")) {
+            if (parseArray.length == 1 && type.equals("done")){
+                throw new EmptyTaskException("Please specify task index. (´∀`)");
+            } else if (parseArray.length == 1 ){
+                throw new EmptyTaskException("Please specify task description. (´∀`)");
+            } else {
                 String rest = parseArray[1];
                 String description = "";
                 String time = "";
@@ -35,6 +55,9 @@ public class Duke {
                             System.out.println(newTodo);
                             break;
                         case "deadline":
+                            if (rest.split("/").length == 1 ) {
+                                throw new EmptyTimeException("Please specify deadline using \"/by\". (´∀`)");
+                            }
                             description = rest.split(" /")[0];
                             time = rest.split(" /")[1].split(" ", 2)[1];
                             Deadline newDeadline = new Deadline(description, time);
@@ -42,19 +65,21 @@ public class Duke {
                             System.out.println(newDeadline);
                             break;
                         case "event":
+                            if (rest.split("/").length == 1 ) {
+                                throw new EmptyTimeException("Please specify deadline using \"/at\". (´∀`)");
+                            }
                             description = rest.split(" /")[0];
                             time = rest.split(" /")[1].split(" ", 2)[1];
                             Event newEvent = new Event(description, time);
                             tasks.add(newEvent);
                             System.out.println(newEvent);
                             break;
-                        default:
-                            System.out.println("Task type not available.");
                     }
                     System.out.println("Now you have " + Task.numberOfTasks + " tasks in the list.");
-                    System.out.println("____________________________________________________________");
                 }
             }
+        } else {
+            throw new CommandNotFoundException();
         }
     }
 
@@ -63,6 +88,10 @@ public class Duke {
     }
 
     public void showTask(ArrayList<Task> tasks){
+        if (tasks.size() == 0) {
+            System.out.println("This is no task in your task list yet. Add one now! (/^▽^)/");
+        }
+
         int no = 1;
         for (Task task : tasks) {
             String state = "[" + task.getStatusIcon() + "] ";
