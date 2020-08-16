@@ -1,8 +1,17 @@
 public class Deadline extends Task {
 
     private String deadline;
+    
+    public static Deadline createNewDeadline(String argument) {
+        String[] deadlineArguments = argument.split(" /by ");
 
-    public Deadline(String taskName, String deadline) {
+        String deadlineName = deadlineArguments[0];
+        String deadlineTime = deadlineArguments[1];
+
+        return new Deadline(deadlineName, deadlineTime);
+    }
+
+    private Deadline(String taskName, String deadline) {
         super(taskName);
         this.deadline = deadline;
     }
