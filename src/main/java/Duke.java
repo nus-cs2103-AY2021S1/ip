@@ -59,11 +59,8 @@ public class Duke {
                         }
                         break;
                     case "done":
-                        String usage = Colour.Blue("Usage: done [taskNumber]");
                         if (inputSplit.length != 2) {
-                            responses.add(Colour.Red("Please provide a task number!"));
-                            responses.add(usage);
-                            break;
+                            throw new DukeException("Please provide a task number!");
                         }
 
                         try {
@@ -79,11 +76,11 @@ public class Duke {
                                 responses.add("  " + task.getStatus());
                             }
                         } catch (NumberFormatException e) {
-                            responses.add(Colour.Red("Invalid number provided"));
-                            responses.add(usage);
+                            throw new DukeException("Invalid number provided");
                         }
 
                         break;
+
                     case "todo":
                     case "deadline":
                     case "event":
