@@ -38,8 +38,11 @@ public class Duke {
         Tasks tasks = new Tasks();
         String input = s.nextLine();
         while (!input.equals("bye")) {
+            String[] inputArray = input.split(" ");
             if (input.equals("list")) {
-                tasks.printTasks();
+                tasks.listTasks();
+            } else if (inputArray[0].equals("done")) {
+                tasks.markDone(Integer.parseInt(inputArray[1]));
             } else {
                 tasks.addTask(input);
             }
