@@ -58,7 +58,44 @@ public class Duke {
              throw new EmptyArgumentException("No task name given", e);
             }
         }
+        else if (word.startsWith("deadline") || word.startsWith("event")) {
+            int index = word.indexOf(' ');
+            boolean isDeadline = word.startsWith("deadline");
+            if (index == -1 || index == word.length() - 1) {
+              throw new EmptyArgumentException("No task name given");
+            }
+            //get stuff after the space if there are still characters after the space
+            String content = word.substring(word.indexOf(' ') + 1);
+            index = content.indexOf('/');
+            if (index == -1 || index == content.length() - 1) {
+                //nothing after the slash
+                return;
+            }
+            //if there are words after the slash
+            String taskName = content.substring(0,index);
+            String keyword = content.substring(index + 1, index + 3);
+            boolean matches = isDeadline && keyword.equals("by") || !isDeadline && keyword.equals("at");
+            if (!matches) {
+                throw new EmptyArgumentException("Task name does not start with proper arguments");
+            }
+            try {
+                String time = content.substring(index + 4);
+                Task newTask = isDeadline ? new Deadline(taskName, time) : new Event(taskName, time);
+                tasks.add(newTask);
+                printTopLine();
+                System.out.println("Got it. I've added this task:");
+                System.out.println(newTask);
+                String numberTasks = String.format("Now you have %s %s in the list.", tasks.size(), tasks.size() == 1 ? "task" : "tasks");
+                System.out.println(numberTasks);
+                printBottomLine();
+            } catch (IndexOutOfBoundsException e) {
+               throw new EmptyArgumentException("No task name given");
+            }
+        }
 
+        else {
+            throw new InvalidArgumentException();
+        }
     }
 
     static void printTopLine() {
