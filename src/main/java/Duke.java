@@ -38,6 +38,7 @@ public class Duke {
         map.put("todo", (command, list) -> toDoCommand(list, command));
         map.put("deadline", (command, list) -> deadlineCommand(list, command));
         map.put("event", (command, list) -> eventCommand(list, command));
+        map.put("delete",(command, list) -> deleteCommand(list, command));
         return map;
     }
 
@@ -96,7 +97,7 @@ public class Duke {
                     String num = command.substring(5);
                     int index = Integer.parseInt(num);
 
-                    if (index == 0) {
+                    if (index == 0 || index > list.size()) {
                         throw new InvalidActionException(); // "done 0"
                     }
                     list.get(index - 1).markAsDone();
@@ -211,6 +212,40 @@ public class Duke {
                 );
             }
 
+        } catch (DukeException e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void deleteCommand(List<Task> list, String command) {
+        try {
+            int length  = command.length();
+            if (length < 7) {
+                throw new EmptyActionException(); // only "delete"
+            } else {
+                try {
+                    String num = command.substring(7);
+                    int index = Integer.parseInt(num);
+
+                    if (index == 0 || index > list.size()) {
+                        throw new InvalidActionException(); // "delete 0"
+                    }
+                    Task task = list.get(index - 1);
+                    list.remove(index - 1);
+                    System.out.println("    ____________________________________________________________\n"
+                            + "     Noted. I've removed this task:\n"
+                            + "     "
+                            + task
+                            + "\n"
+                            + "     Now you have "
+                            + list.size()
+                            + " task(s) in the list.\n"
+                            + "    ____________________________________________________________\n"
+                    );
+                } catch (NumberFormatException e) {
+                    throw new InvalidActionException(); // "delete 1A" etc
+                }
+            }
         } catch (DukeException e) {
             System.out.println(e);
         }
