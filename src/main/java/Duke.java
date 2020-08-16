@@ -6,7 +6,7 @@ public class Duke {
     /**
      * 1-indexed list
      */
-    private List<Task> tasks;
+    private final List<Task> tasks;
 
     public Duke() {
         this.tasks = new ArrayList<>();
@@ -62,15 +62,31 @@ public class Duke {
         }
     }
 
+    public void addTask(Task task) {
+        tasks.add(task);
+        System.out.printf("Got it. I've added this task:%n %s%n", task);
+    }
+
     public void event(String cmd) {
+        String task = cmd.split(Command.EVENT.toString() + " ")[1];
+        String[] taskParts = task.split(" /at ", 2);
+        String name = taskParts[0];
+        String date = taskParts[1];
+        this.addTask(new Event(name, date));
     }
 
     public void deadline(String cmd) {
+        String task = cmd.split(Command.DEADLINE.toString() + " ")[1];
+        String[] taskParts = task.split(" /by ", 2);
+        String name = taskParts[0];
+        String date = taskParts[1];
+        this.addTask(new Deadline(name, date));
     }
 
     public void todo(String cmd) {
+        String name = cmd.split(Command.TODO.toString() + " ")[1];
+        this.addTask(new ToDo(name));
     }
-
 
     public static void main(String[] args) {
         Duke duke = new Duke();
