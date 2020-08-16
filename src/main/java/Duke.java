@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException{
         printLogo();
         startGreet();
         startChat();
@@ -22,121 +22,91 @@ public class Duke {
         System.out.println(greeting);
     }
 
-    public static void startChat() {
-        ArrayList<Task> list = new ArrayList<>();
+    public static void startChat() throws DukeException {
         Scanner scanner = new Scanner(System.in);
+        TaskHandler handler = new TaskHandler();
+        ArrayList<Task> list = handler.getTaskList();
         while (true) {
             // Listens for input
             String input = scanner.nextLine();
             if (input.equals("bye")) {
                 // Encounters exit command
                 System.out.println();
-                indent();
+                indent(1);
                 System.out.println("Bye bye! Hope to see you again soon!");
                 break;
             } else if (input.equals("list")) {
                 // Prints the given list
-                printList(list);
+                handler.printList();
             } else if (input.startsWith("done")) {
-                // Mark given task as done
-                if (!input.contains(" "))  {
-                    // checking if done command is given correctly else asks the user again
-                    System.out.println("pls input done followed by valid task number");
-                    continue;
-                }
-                // Splits the input command by space
-                String[] stringArr = input.split(" ");
-                if (stringArr.length != 2) {
-                    // Checking if done command is given correctly else asks the user again
-                    indent();
-                    System.out.println("pls input done followed by valid task number");
-                    continue;
-                }
+                String[] stringArr;
                 try {
-                    // Checking if valid integer given using parseInt() method
-                    Integer.parseInt(stringArr[1]);
-                    Task dummyTask = list.get(Integer.parseInt(stringArr[1]) - 1);
-                } catch (NumberFormatException e) {
-                    indent();
-                    System.out.println('"' + stringArr[1] + '"' +" is not a valid integer number");
-                    continue;
-                } catch (IndexOutOfBoundsException e) {
-                    indent();
-                    System.out.println("pls input done followed by valid task num");
-                    continue;
+                    // Checking if only one task is given to complete/valid int
+                    stringArr = input.split(" ");
+                    if (stringArr.length != 2) {
+                        // Checking if only one task is given to complete
+                        throw new DukeException("Oops, pls only enter one task to complete");
+                    }
+                    // Finding the actual task
+                    int indexOfDone =  Integer.parseInt(stringArr[1]) - 1;
+                    Task currentTask = list.get(indexOfDone);
+                    if (currentTask.isDone) {
+                        System.out.println("Task: " + currentTask.description + " has already been completed!");
+                        continue;
+                    }
+                    // Mark given task as done
+                    currentTask.markAsDone();
+                    indent(1);
+                    System.out.println("Good job! You completed:");
+                    indent(2);
+                    System.out.println(currentTask);
+                } catch (Exception e) {
+                    throw new DukeException("Oops, pls enter a valid task number");
                 }
-                // Finding and marking the actual task as done
-                int indexOfDone =  Integer.parseInt(stringArr[1]) - 1;
-                Task currentTask = list.get(indexOfDone);
-                if (currentTask.isDone) {
-                    continue;
-                }
-                currentTask.markAsDone();
-                indent();
-                System.out.println("Good job! You completed:");
-                indent();
-                indent();
-                System.out.println(currentTask);
             } else if (input.startsWith("todo")) {
                 // Create and store todos given in list
-                String taskDesc = input.substring(5);
-                Task newTodo = new Todo(taskDesc);
+                Task newTodo = handler.processTask(input, "todo");
                 list.add(newTodo);
                 printAddSuccess(list.size(), newTodo);
             } else if (input.startsWith("deadline")) {
                 // Create and store deadlines given in list
-                String taskDesc = input.substring(9, input.indexOf("/by"));
-                String by = input.substring(input.indexOf("/by") + 4);
-                Task newDeadline = new Deadline(taskDesc, by);
-                list.add(newDeadline);
-                printAddSuccess(list.size(), newDeadline);
+                try {
+                    Task newDeadline = handler.processTask(input, "deadline");
+                    list.add(newDeadline);
+                    printAddSuccess(list.size(), newDeadline);
+                } catch (Exception e) {
+                    throw new DukeException("Oops, correct add deadline format: deadline [task] /by [time]");
+                }
             } else if (input.startsWith("event")) {
                 // Create and store events given in list
-                String taskDesc = input.substring(6, input.indexOf("/at"));
-                String at = input.substring(input.indexOf("/at") + 4);
-                Task newEvent = new Event(taskDesc, at);
-                list.add(newEvent);
-                printAddSuccess(list.size(), newEvent);
+                try {
+                    Task newEvent = handler.processTask(input, "event");
+                    list.add(newEvent);
+                    printAddSuccess(list.size(), newEvent);
+                } catch (Exception e) {
+                    throw new DukeException("Oops, correct add event format: event [task] /at [time]");
+                }
             } else {
-                // Returns blank line
-                System.out.println();
+                // Other command
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
+            System.out.println();
         }
     }
 
-    public static void printList(ArrayList<Task> list) {
-        if (list.isEmpty()) {
-            // Asks user for tasks when printing empty list
-            indent();
-            System.out.println("Empty list, pls add tasks to list first");
-            return;
+    public static void indent(int times) {
+        for (int i=0; i<times; i++) {
+            System.out.print("    ");
         }
-        int listPos = 1;
-        indent();
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < list.size(); i++,listPos++) {
-            indent();
-            indent();
-            System.out.println(listPos + ". " + list.get(i));
-        }
-        indent();
-        System.out.println("You have " + list.size() + " task(s) in the list");
-        System.out.println();
-    }
-
-    public static void indent() {
-        System.out.print("    ");
     }
 
     public static void printAddSuccess(int listSize, Task task) {
         // Prints success message after an item is added to list
-        indent();
+        indent(1);
         System.out.print("Successfully added:\n");
-        indent();
-        indent();
+        indent(2);
         System.out.println(task);
-        indent();
+        indent(1);
         System.out.println("You have " + listSize + " task(s) in the list");
-        System.out.println();
     }
 }
