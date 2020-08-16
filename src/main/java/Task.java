@@ -14,4 +14,8 @@ public class Task {
   protected void markAsDone() {
     this.isDone = true;
   }
+
+  public String toString() {
+    return this.description;
+  }
 }

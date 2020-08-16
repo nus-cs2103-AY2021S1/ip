@@ -22,16 +22,16 @@ public class Duke {
         case "list":
           int count = 1;
           for (Task task : dataArrayList) {
-            System.out.printf("%d.[%s] %s\n", count, task.getStatusIcon(), task.description);
+            System.out.printf("%d.[%s] %s\n", count, task.getStatusIcon(), task);
             count++;
           }
           break;
         case "done":
-          int change = scanner.nextInt();
+          int change = scanner.nextInt() - 1;
           Task task = dataArrayList.get(change);
           task.markAsDone();
           System.out.println("Nice! I've marked this task as done:");
-          System.out.printf("[%s] %s%n", task.getStatusIcon(), task.description);
+          System.out.printf("[%s] %s%n", task.getStatusIcon(), task);
           break;
         default:
           if (!input.equals("bye")) {
