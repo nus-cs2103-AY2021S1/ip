@@ -2,20 +2,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private ArrayList<String> tasks;
-    private ArrayList<Integer> is_done;
-    private ArrayList<TaskType> types;
-    
-    enum TaskType {
-        ToDo,
-        Deadline,
-        Event,
-    }
+    private ArrayList<Task> tasks;
     
     public Duke() {
         this.tasks = new ArrayList<>();
-        this.is_done = new ArrayList<>();
-        this.types = new ArrayList<>();
     }
 
     /**
@@ -35,8 +25,8 @@ public class Duke {
      * @param user_input input from user as String
      * @return output by Hal9000
      */
-    public String get_output(String user_input) {
-        return "added: " + user_input + "\n"; // level 2
+    public String get_output(Task taskInput) {
+        return "added: " + taskInput + "\n"; // level 2
     }
 
     public static String format_response(String output_msg) {
@@ -49,23 +39,33 @@ public class Duke {
     public String summarize() {
         String all_tasks = "Here are the tasks in your list:\n";
         for (int i = 0; i < this.tasks.size(); i++) {
+            Task t = tasks.get(i);
             String tick = "";
-            if (this.is_done.get(i) > 0) {
+            if (t.isDone()) {
                 tick = "✓";
             } else {
                 tick = "✗";
             }
 
-            all_tasks += String.format("%d.[%s] %s\n", i+1, tick, this.tasks.get(i));
+            String label = "";
+            if (t.getType() == TaskType.ToDo) {
+                label = "T";
+            } else if (t.getType() == TaskType.Deadline) {
+                label = "D";
+            } else {
+                label = "E";
+            }
+
+            all_tasks += String.format("%d.[%s][%s] %s\n", i+1, label, tick, t.toString());
         }
 
         return all_tasks;
     }
 
     public String mark_done(int index) {
-        if (this.is_done.get(index) == 0) {
-            this.is_done.set(index, 1);
-            return String.format("Nice! I've marked this task as done:\n[✓] %s\n", this.tasks.get(index));
+        if (!this.tasks.get(index).isDone()) {
+            this.tasks.get(index).done();
+            return String.format("Nice! I've marked this task as done:\n[✓] %s\n", this.tasks.get(index).getName());
         } else {
             return String.format("Task %d already done!\n", index);
         }
@@ -81,31 +81,36 @@ public class Duke {
         }
     }
 
-    public static String task_name(String[] input_parts) {
-        String t_name = "";
+    // Can be used to get the details too
+    public static String extractTask(String[] input_parts) {
+        String task = "";
         for (int i = 1; i < input_parts.length; i++) {
-            t_name += input_parts[i] + " ";
+            task += input_parts[i] + " ";
         }
-        return t_name.trim();
+        return task.trim();
     }
-
-    public static String get_task(String input) {
+    
+    public static Task getTask(String input) {
         String[] parts = input.split(" ");
         TaskType type = categorize(parts);
+
         if (type == TaskType.ToDo) {
             parts = input.split(" ");
-            return task_name(parts);
+            String name = extractTask(parts);
+            
+            return new ToDo(name);
         } else if (type == TaskType.Deadline) {
-            String name = task_name(input.split("/")[0].split(" "));
-            String deadline = input.split("/")[1];
-            return String.format("%s (%s)", name, deadline); // need to insert : after by
+            String name = extractTask(input.split("/")[0].split(" "));
+            String deadline = extractTask(input.split("/")[1].split(" "));
+            return new Deadline(name, deadline); 
         } else {
-            String name = task_name(input.split("/")[0].split(" "));
-            String time = input.split("/")[1];
-            return String.format("%s (%s)", name, time); // need to insert : after by
+            String name = extractTask(input.split("/")[0].split(" "));
+            String details = extractTask(input.split("/")[1].split(" "));
+            
+            return new Event(name, details); // need to insert : after by
         }
     }
-
+    
     public void op() {
         boolean end = false;
         Scanner sc = new Scanner(System.in);
@@ -120,15 +125,11 @@ public class Duke {
             } else if (parts[0].compareTo("done") == 0) {
                 System.out.println(format_response(this.mark_done(Integer.parseInt(parts[1]) - 1))); 
             } else {
-                // Determine type of task:
-                TaskType type = categorize(parts);
+                Task taskInput = getTask(input);
 
                 // add task to list of tasks
-                this.tasks.add(get_task(input));
-                this.is_done.add(0); // add 0 for false
-                this.types.add(type); // Add type
-
-                String output_string = format_response(get_output(input));
+                this.tasks.add(taskInput);
+                String output_string = format_response(get_output(taskInput));
                 System.out.println(output_string);
             }
         }
@@ -153,4 +154,6 @@ public class Duke {
         hal9000.op();
 
     }
+/*
+*/
 }
