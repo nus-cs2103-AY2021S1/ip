@@ -52,6 +52,23 @@ public class TaskList {
 
     }
 
+    public boolean remove(int index){
+        //Check if the index is valid
+        if (index < this.list.size() && index >= 0){
+
+            //Remove the task at index
+            this.list.remove(index);
+
+            //Return true if operation is successful
+            return true;
+
+        }else{
+
+            //Otherwise operation will fail
+            return false;
+        }
+    }
+
     public Task get(int index){
 
         //Return the index of the arraylist
