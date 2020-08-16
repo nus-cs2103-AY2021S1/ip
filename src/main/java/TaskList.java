@@ -7,7 +7,7 @@ public class TaskList {
 
     protected void addTask(Task task) {
         list.add(task);
-        System.out.println("added: " + task);
+        System.out.println("added: " + task + "\n");
     }
 
     @Override
@@ -15,9 +15,8 @@ public class TaskList {
         String message = "";
         int count = 1;
         for (Task task : list) {
-            message += String.format("%d. %s", count++, task);
+            message += String.format("%d. %s\n", count++, task);
         }
-        message += "\n";
         return message;
     }
 }
