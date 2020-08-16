@@ -88,9 +88,13 @@ public class Duke {
             } else if (command.equals("list")) {
                 System.out.println(formatReply("Here are the tasks in your list:\n" + listTasks(taskList)));
             } else if (command.equals("done")) {
-                Task task = taskList.get(input.nextInt() - 1);
-                task.completeTask();
-                System.out.println(formatReply("This task has been marked as done:\n" + task.toString()));
+                try {
+                    Task task = taskList.get(input.nextInt() - 1);
+                    task.completeTask();
+                    System.out.println(formatReply("This task has been marked as done:\n" + task.toString()));
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(formatReply("OOPS!!! Task number is invalid."));
+                }
             }
             else {
                 try {
