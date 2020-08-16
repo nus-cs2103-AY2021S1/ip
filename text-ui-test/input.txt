@@ -7,4 +7,7 @@ list
 sayonara
 done 5
 event
+delete 3
+list
+delete 3
 bye

@@ -51,5 +51,18 @@ __________________________
 Something is amiss `(OCO)/ !!: No arguments specified for event
 __________________________
 __________________________
+HAI. I've deleted this task:
+    [E][✘] project meeting (at: Mon 2-4pm)
+Now you have 2 tasks in the list
+__________________________
+__________________________
+1. [T][✘] borrow book
+2. [D][✓] return book (by: Sunday)
+
+__________________________
+__________________________
+Something is amiss `(OCO)/ !!: Cannot delete task that does not exist
+__________________________
+__________________________
 bye
 __________________________
