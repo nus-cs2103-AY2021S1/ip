@@ -3,24 +3,30 @@ import java.util.ArrayList;
 public class TaskList {
 
     private int numTasks;
-    private ArrayList<String> list;
+    private ArrayList<Task> list;
 
     public TaskList() {
-        numTasks = 0;
+        this.numTasks = 1;
         this.list = new ArrayList<>();
     }
 
-    public void addItem(String item) {
+    public void addItem(Task item) {
         numTasks++;
-        String added = numTasks + ". " + item;
-        list.add(added);
+        list.add(item);
+    }
+
+    public int getNumTasks() {
+        return numTasks;
+    }
+    public ArrayList<Task> getTasks() {
+        return list;
     }
 
     public String toString() {
-        String ls = "";
-        for (String item : list) {
-            ls += item + "\n";
+        StringBuilder ls = new StringBuilder();
+        for (Task task : list) {
+            ls.append(task).append("\n");
         }
-        return ls;
+        return ls.toString();
     }
 }
