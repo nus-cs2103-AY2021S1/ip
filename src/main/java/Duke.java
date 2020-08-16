@@ -1,7 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        List<String> toDoList = new ArrayList<>();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -12,7 +15,16 @@ public class Duke {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             System.out.println(" "+"-----------------");
-            System.out.println("     "+ input);
+            if (!input.equals("list")){
+                System.out.println("    added: "+ input);
+                toDoList.add(input);
+            } else {
+                int count = 1;
+                for (String s: toDoList) {
+                    System.out.println("  "+ count + ": " + s);
+                    count++;
+                }
+            }
             System.out.println(" "+"-----------------");
             input = sc.nextLine();
         }
