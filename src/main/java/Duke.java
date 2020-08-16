@@ -62,6 +62,8 @@ public class Duke {
     }
 
     public static void handleEvent(String input) throws DukeException {
+        // since input is confirmed to have "event", just need to ensure that stripped input > 5 letters
+        // input needs to be stripped to prevent trailing whitespaces eg. "deadline    "
         if (input.strip().length() <= 5) {
             throw new DukeException(" ☹ OOPS!!! The description of a Event cannot be empty.");
         } else if (!input.contains("/")) {
@@ -76,6 +78,8 @@ public class Duke {
     }
 
     public static void handleDeadline(String input) throws DukeException {
+        // since input is confirmed to have "deadline", just need to ensure that stripped input > 8 letters
+        // input needs to be stripped to prevent trailing whitespaces eg. "deadline    "
         if (input.strip().length() <= 8) {
             throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
         } else if (!input.contains("/")) {
@@ -90,6 +94,8 @@ public class Duke {
     }
 
     public static void handleToDo(String input) throws DukeException {
+        // since input is confirmed to have "to do", just need to ensure that stripped input > 4 letters
+        // input needs to be stripped to prevent trailing whitespaces eg. "deadline    "
         if (input.strip().length() <= 4) {
             throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
         } else {
