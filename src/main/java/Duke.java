@@ -48,6 +48,15 @@ public class Duke {
                         counter++;
                     }
                     System.out.println(LINE);
+                } else if (response.indexOf("delete ") == 0) {
+                    indexer = Integer.parseInt(response.replaceAll("\\D+", "")) - 1;
+                    if (indexer >= shelf.size() || indexer < 0) {
+                        throw new DukeTaskNonExistException("error");
+                    }
+                    System.out.println("Noted. I've removed this task: ");
+                    shelf.remove(indexer);
+                    System.out.println("Now you have " + shelf.size() + " in the list.");
+                    System.out.println(LINE);
                 } else if (response.indexOf("done ") == 0) {
                     indexer = Integer.parseInt(response.replaceAll("\\D+", "")) - 1;
                     if (indexer >= shelf.size() || indexer < 0) {
@@ -95,9 +104,8 @@ public class Duke {
                     System.out.println("Now you have " + shelf.size() + " tasks in the list.");
                     System.out.println(LINE);
                 }
-            }
-            catch(DukeUnknownInputException | EmptyDescriptionException |
-                    DukeTaskNonExistException | DukeKeywordMissingException e){
+            } catch (DukeUnknownInputException | EmptyDescriptionException |
+                    DukeTaskNonExistException | DukeKeywordMissingException e) {
                 System.out.println(e);
                 System.out.println(LINE);
             }
