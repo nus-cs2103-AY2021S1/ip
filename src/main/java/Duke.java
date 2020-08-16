@@ -19,12 +19,12 @@ public class Duke {
         System.out.println(DIVIDER);
     }
 
-    private static String convertTaskListToString(List<String> tasks) {
+    private static String convertTaskListToString(List<Task> tasks) {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < tasks.size(); i++) {
             sb.append((i+1));
-            sb.append(". ");
+            sb.append(".");
             sb.append(tasks.get(i));
             sb.append('\n');
         }
@@ -38,7 +38,7 @@ public class Duke {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        List<String> tasks = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
 
         System.out.println(LOGO);
         printToConsole("Hi I'm Alfred! How can I help you today?");
@@ -54,7 +54,7 @@ public class Duke {
                 printToConsole(convertTaskListToString(tasks));
                 break;
             default:
-                tasks.add(input);
+                tasks.add(new Task(input));
                 printToConsole("added: " + input);
             }
         }
