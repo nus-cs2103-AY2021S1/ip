@@ -27,4 +27,10 @@ Here are the tasks in your list:
 1.[T][✓] borrow book
 2.[D][✓] return book (by: Sunday)
 3.[E][✗] project meeting (at: Mon 2-4pm)
+Noted. I've removed this task:
+[T][✓] borrow book
+Now you have 2 tasks in the list.
+Here are the tasks in your list:
+1.[D][✓] return book (by: Sunday)
+2.[E][✗] project meeting (at: Mon 2-4pm)
 Bye. Hope to see you again soon!

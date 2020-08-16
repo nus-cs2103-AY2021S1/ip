@@ -10,25 +10,30 @@ public class Duke {
             try {
                 if (next.equals("list")) {
                     manager.printList();
-                } else {
-                    String[] actionExtracted = extractAction(next);
-                    String status = actionExtracted[0];
-                    String body = actionExtracted[1];
-                    switch (status) {
-                        case "done":
-                            manager.markTaskAsDone(Integer.parseInt(body));
-                            break;
-                        case "todo":
-                            manager.addTask(body, status);
-                            break;
-                        default:
-                            String[] timeExtracted = extractTime(body);
-                            String content = timeExtracted[0];
-                            String time = timeExtracted[1];
-                            manager.addTask(content, status, time);
-                            break;
-                    }
+                    continue;
                 }
+                String[] actionExtracted = extractAction(next);
+                String status = actionExtracted[0];
+                String body = actionExtracted[1];
+                switch (status) {
+                    case "done":
+                        manager.markTaskAsDone(Integer.parseInt(body));
+                        break;
+                    case "todo":
+                        manager.addTask(body, status);
+                        break;
+                    case "delete":
+                        manager.deleteTask(Integer.parseInt(body));
+                        break;
+                    default:
+                        String[] timeExtracted = extractTime(body);
+                        String content = timeExtracted[0];
+                        String time = timeExtracted[1];
+                        manager.addTask(content, status, time);
+                        break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("☹ OOPS!!! Seems you have provided an invalid index :-(");
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             } catch (Exception e) {
