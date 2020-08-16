@@ -1,5 +1,7 @@
 package main.java;
 
+import jdk.jfr.Event;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -23,31 +25,55 @@ public class Duke {
 
     private void addTask(String task, TaskType taskType) {
         Task newTask;
+        String message;
 
-        switch (taskType) {
-            case TODO:
-                newTask = new ToDoTask(task);
-                break;
-            case DEADLINE:
-                String[] arrForDeadline = task.split("/by", 2);
-                String taskForDeadline = arrForDeadline[0].trim();
-                String dateForDeadline = arrForDeadline[1].trim();
-                newTask = new DeadlineTask(taskForDeadline, dateForDeadline);
-                break;
-            case EVENT:
-                String[] arrForEvent = task.split("/at", 2);
-                String taskForEvent = arrForEvent[0].trim();
-                String dateForEvent = arrForEvent[1].trim();
-                newTask = new EventTask(taskForEvent, dateForEvent);
-                break;
-            default:
-                newTask = new Task(task);
-                break;
+        try {
+            switch (taskType) {
+                case TODO:
+                    if (task == null) {
+                        throw new ToDoException();
+                    }
+                    newTask = new ToDoTask(task);
+                    break;
+                case DEADLINE:
+                    if (task == null) {
+                        throw new DeadlineException();
+                    }
+
+                    String[] arrForDeadline = task.split("/by", 2);
+
+                    if (arrForDeadline.length == 1) {
+                        throw new DeadlineException();
+                    }
+
+                    String taskForDeadline = arrForDeadline[0].trim();
+                    String dateForDeadline = arrForDeadline[1].trim();
+                    newTask = new DeadlineTask(taskForDeadline, dateForDeadline);
+                    break;
+                case EVENT:
+                    if (task == null) {
+                        throw new EventException();
+                    }
+                    String[] arrForEvent = task.split("/at", 2);
+
+                    if (arrForEvent.length == 1) {
+                        throw new EventException();
+                    }
+                    String taskForEvent = arrForEvent[0].trim();
+                    String dateForEvent = arrForEvent[1].trim();
+                    newTask = new EventTask(taskForEvent, dateForEvent);
+                    break;
+                default:
+                    newTask = new Task(task);
+                    break;
+            }
+            tasks.add(newTask);
+            message = "Okay. I will add this task:\n" + indentation + newTask + "\n" +
+                    "Now you have " + tasks.size() + " " + (tasks.size() == 1 ? "task " : "tasks ") + "in the list.";
+        } catch (ToDoException | DeadlineException | EventException e) {
+            message = e.getMessage();
         }
 
-        String message = "Okay. I will add this task:\n" + indentation + newTask + "\n";
-        tasks.add(newTask);
-        message = message + "Now you have " + tasks.size() + " " + (tasks.size() == 1 ? "task " : "tasks ") + "in the list.";
         sendMessage(message);
 
     }
@@ -80,46 +106,51 @@ public class Duke {
         sendMessage(message);
     }
 
-    private void doneTask(int taskNumber) {
+    private void doneTask(String taskNumber) {
         String message;
-        if (taskNumber < 1 || taskNumber > tasks.size()) {
-            message = "Invalid task number!";
-        } else {
-            Task task = tasks.get(taskNumber - 1);
-            task.setStatusToDone();
-            message = "Sucessfully marked this task as done: \n" + indentation + task.toString();
+        try {
+            if (taskNumber == null) {
+                throw new DoneException();
+            }
+            int taskNum = Integer.parseInt(taskNumber);
+            if (taskNum < 1 || taskNum > tasks.size()) {
+                message = "Invalid task number!";
+            } else {
+                Task task = tasks.get(taskNum - 1);
+                task.setStatusToDone();
+                message = "Sucessfully marked this task as done: \n" + indentation + task.toString();
+            }
+        } catch (NumberFormatException e) {
+            message = "Please put a number!";
+        } catch (DoneException e) {
+            message = e.getMessage();
         }
 
         sendMessage(message);
 
     }
 
-    private void invalidInput() {
-        String message = "Invalid input!";
-        sendMessage(message);
-    }
-
     private void takeUserInput() {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            String userInput = sc.nextLine();
-            String[] userInputArr = userInput.split("\\s", 2);
-            String command = userInputArr[0];
-            String arg = null;
+            try {
+                String userInput = sc.nextLine();
+                String[] userInputArr = userInput.split("\\s", 2);
+                String command = userInputArr[0];
+                String arg = null;
 
 
-            if (userInputArr.length != 1) {
-                arg = userInputArr[1];
-            }
+                if (userInputArr.length != 1) {
+                    arg = userInputArr[1];
+                }
 
-            if (command.equals(BYE_COMMAND)) {
-                break;
-            } else if (command.equals(LIST_COMMAND)) {
-                showAllTask();
-            } else if (arg != null) {
-                if (command.equals(DONE_COMMAND)) {
-                    doneTask(Integer.parseInt(arg));
+                if (command.equals(BYE_COMMAND)) {
+                    break;
+                } else if (command.equals(LIST_COMMAND)) {
+                    showAllTask();
+                } else if (command.equals(DONE_COMMAND)) {
+                    doneTask(arg);
                 } else if (command.equals(TODO_COMMAND)) {
                     addTask(arg, TaskType.TODO);
                 } else if (command.equals(DEADLINE_COMMAND)) {
@@ -127,10 +158,10 @@ public class Duke {
                 } else if (command.equals(EVENT_COMMAND)) {
                     addTask(arg, TaskType.EVENT);
                 } else {
-                    invalidInput();
+                    throw new NotACommandException();
                 }
-            } else {
-                invalidInput();
+            } catch (NotACommandException e) {
+                sendMessage(e.getMessage());
             }
         }
     }
