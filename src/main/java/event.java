@@ -5,6 +5,6 @@ public class event extends Task {
         this.dateTime = dateTime;
     }
     public String toString() {
-        return "[E]" + super.toString();
+        return "[E]" + super.toString() + "(at: " + this.dateTime + ")";
     }
 }

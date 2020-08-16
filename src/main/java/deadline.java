@@ -5,6 +5,6 @@ public class deadline extends Task {
         this.day = day;
     }
     public String toString() {
-        return "[D]" + super.toString();
+        return "[D]" + super.toString() + "(by: " + this.day + ")";
     }
 }

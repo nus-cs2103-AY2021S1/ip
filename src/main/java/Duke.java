@@ -56,7 +56,7 @@ public class Duke {
                     }
                     s = s + string.charAt(i);
                 }
-                event e = new event(s, string.substring(index + 1));
+                event e = new event(s.substring(1, s.length() - 1), string.substring(index + 1));
                 e.output();
                 //event e = new event(string.substring())
             }else{
@@ -69,7 +69,7 @@ public class Duke {
                     }
                     s = s + string.charAt(i);
                 }
-                deadline e = new deadline(s.substring(s.length() - 1), string.substring(index + 1));
+                deadline e = new deadline(s.substring(1, s.length() - 1), string.substring(index + 3));
                 e.output();
             }
         }
@@ -126,7 +126,7 @@ public class Duke {
             String file = args[0];
             FileInputStream inputStream = new FileInputStream(file);
             scan(inputStream);
-            output();
+           output();
         }catch (Exception e){
 
         }
