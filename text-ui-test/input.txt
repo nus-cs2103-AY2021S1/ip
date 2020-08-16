@@ -1,0 +1,9 @@
+deadline homework /by sunday
+event meeting /at 2-5pm
+todo project
+list
+done 3
+deadline lunch /by noon
+done 7
+list
+bye
