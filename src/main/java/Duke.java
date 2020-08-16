@@ -5,12 +5,17 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         Store store = new Store();
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        StringUtils.printWithWrapper(new String[]{"Hello, my name is \n" + logo, "How may I help you?"}, false);
+        String[] welcomeTexts = new String[]{
+                "Hello, my name is ",
+                " ____        _        ",
+                "|  _ \\ _   _| | _____ ",
+                "| | | | | | | |/ / _ \\",
+                "| |_| | |_| |   <  __/",
+                "|____/ \\__,_|_|\\_\\___|",
+                "How may I help you?"
+        };
+
+        StringUtils.printWithWrapper(welcomeTexts, false);
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
