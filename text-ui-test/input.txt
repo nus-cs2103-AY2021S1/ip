@@ -1,5 +1,10 @@
 LiSt
 read book
 return book
-list
-bye
+buy bbt
+lIst
+done 3
+done 4
+
+LIST
+BYE
