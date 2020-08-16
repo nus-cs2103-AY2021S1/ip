@@ -136,7 +136,7 @@ public class Duke {
         line();
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         String logo =
                           " ____             _     \n"
                         + "|  _ \\           | |    \n"
@@ -169,22 +169,29 @@ public class Duke {
                     case "done": {
                         String index = multiWord.next();
                         int intIndex = Integer.parseInt(index);
-                        if (intIndex <= storage.size() && intIndex > 0) {
-                            markComplete(intIndex - 1);
-                        } else {
-                            // I don't like how the program exits on throw
-                            throw DukeException.outOfBounds(intIndex);
+                        try {
+                            if (intIndex <= storage.size() && intIndex > 0) {
+                                markComplete(intIndex - 1);
+                            } else {
+                                throw DukeException.outOfBounds(intIndex);
+                            }
+                        } catch (DukeException e) {
+                            echo(e.getMessage());
                         }
+
                         break;
                     }
                     case "delete": {
                         String index = multiWord.next();
                         int intIndex = Integer.parseInt(index);
-                        if (intIndex <= storage.size() && intIndex > 0) {
-                            delete(intIndex - 1);
-                        } else {
-                            // I don't like how the program exits on throw
-                            throw DukeException.outOfBounds(intIndex);
+                        try {
+                            if (intIndex <= storage.size() && intIndex > 0) {
+                                delete(intIndex - 1);
+                            } else {
+                                throw DukeException.outOfBounds(intIndex);
+                            }
+                        } catch (DukeException e) {
+                            echo(e.getMessage());
                         }
                         break;
                     }
@@ -192,19 +199,22 @@ public class Duke {
                     case "todo":
                     case "deadline":
                     case "event":
-                        // whitespace in front of nextLine
-                        if (multiWord.hasNextLine()) {
-                            String remainingWords = multiWord.nextLine().trim();
-                            store(firstWord, remainingWords);
-                        } else {
-                            // I don't like how the program exits on throw
-                            throw DukeException.empty(firstWord);
+                        try {
+                            // whitespace in front of nextLine
+                            if (multiWord.hasNextLine()) {
+                                String remainingWords = multiWord.nextLine().trim();
+                                store(firstWord, remainingWords);
+                            } else {
+                                throw DukeException.empty(firstWord);
+                            }
+                        } catch (DukeException e) {
+                            echo(e.getMessage());
                         }
                         break;
                     // invalid order
                     default:
-                        // I don't like how the program exits on throw
-                        throw DukeException.invalid(output);
+                        // skip the try catch block
+                        echo(DukeException.invalid(output).getMessage());
                 }
             }
         }
