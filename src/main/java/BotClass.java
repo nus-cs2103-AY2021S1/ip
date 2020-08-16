@@ -24,6 +24,11 @@ public class BotClass implements Bot {
         response.add(string);
     }
 
+    @Override
+    public void sayLines(List<String> strings) {
+        response.addAll(strings);
+    }
+
     public List<String> getLines() { return response; }
 
     public boolean stopped() { return stop; }
