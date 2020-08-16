@@ -17,9 +17,13 @@ public class Duke {
 
     private void handleUserInput() {
         Scanner sc = new Scanner(System.in);
-        if (sc.hasNextLine()) {
-            printGoodbye();
+        String input = sc.nextLine();
+        while (!input.equals("bye")) {
+            System.out.println(input);
+            input = sc.nextLine();
         }
+        sc.close();
+        printGoodbye();
     }
 
     public void run() {
