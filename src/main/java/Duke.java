@@ -33,10 +33,20 @@ public class Duke {
                     System.out.println(addDividers(formatString("Please enter out a valid number\n")));
                 }
             } else { //Add a new task to the list
-                list.add(new Task(input));
-                String inputText = "added: " + input + '\n';
-                String echo = addDividers(formatString(inputText));
-                System.out.println(echo);
+                if (inputArr[0].equals("todo")) { //Add a new to-do task
+                    String todoName = input.substring(5);
+                    ToDo todo = new ToDo(todoName);
+                    list.add(todo);
+                    String s = formatString("Got it. I've added this task: \n") +
+                            formatString(todo.toString() + '\n') +
+                            formatString("Now you have " + list.size() + " tasks in the list. \n");
+                    System.out.println(addDividers(s));
+                } else {
+                    list.add(new Task(input));
+                    String inputText = "added: " + input + '\n';
+                    String echo = addDividers(formatString(inputText));
+                    System.out.println(echo);
+                }
             }
             input = sc.nextLine();
         }
@@ -46,7 +56,7 @@ public class Duke {
         System.out.println(addDividers(formatString(goodbye)));
     }
 
-    
+
     private static void markTaskDoneInList(List<Task> list, Integer taskNumber) {
         if (taskNumber < 0 || taskNumber > list.size() - 1) {
             System.out.println(addDividers(formatString("Please enter a valid task number\n")));
