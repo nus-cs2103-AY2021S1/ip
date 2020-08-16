@@ -10,23 +10,42 @@ public class Duke {
             if (next.equals("list")) {
                 manager.printList();
             } else {
-                String[] parsed = next.split(" +");
-                if (parsed[0].equals("done")) {
-                    manager.markTaskAsDone(Integer.parseInt(parsed[1]));
-                } else {
-                    manager.addTask(next); // default behaviour
+                String[] actionExtracted = extractAction(next);
+                String status = actionExtracted[0];
+                String body = actionExtracted[1];
+                switch (status) {
+                    case "done":
+                        manager.markTaskAsDone(Integer.parseInt(body));
+                        break;
+                    case "todo":
+                        manager.addTask(body, status);
+                        break;
+                    default:
+                        String[] timeExtracted = extractTime(body);
+                        String content = timeExtracted[0];
+                        String time = timeExtracted[1];
+                        manager.addTask(content, status, time);
+                        break;
                 }
             }
             next = sc.nextLine();
         }
         close();
-}
+    }
 
-    public static void close() {
+    private static String[] extractAction(String command) {
+        return command.split(" ", 2);
+    }
+
+    private static String[] extractTime(String command) {
+        return command.split(" /by | /at ", 2);
+    }
+
+    private static void close() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public static void greet() {
+    private static void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
