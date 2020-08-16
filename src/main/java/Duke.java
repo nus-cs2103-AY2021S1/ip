@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -16,8 +18,8 @@ public class Duke {
                     + "  \\####           (\n"
                     + "   `\\###          |\n"
                     + "     \\###         |\n"
-                    + "      \\##        |\n"
-                    + "       \\###.    .)\n"
+                    + "      \\##         |\n"
+                    + "       \\###.     .)\n"
                     + "         `======/";
 
         System.out.println("A massive alien head has appeared\n" + logo);
@@ -28,8 +30,8 @@ public class Duke {
         System.out.println("");
 
         Scanner sc = new Scanner(System.in);
-        Task[] tasks = new Task[100];
-        int itemsIndex = 0;
+        List<Task> tasks = new ArrayList<>();
+
 
         while (!sc.hasNext("bye")) {
             try {
@@ -38,17 +40,28 @@ public class Duke {
                 System.out.println("    ____________________________________________________________");
                 if (command.equals("list")) {
                     System.out.println("     Here are the tasks in your list:");
-                    for (int i = 0; i < itemsIndex; i++) {
-                        System.out.println("     " + (i + 1) + ". " + tasks[i]);
+                    int taskCount = 1;
+                    for (Task task : tasks) {
+                        System.out.println("     " + (taskCount) + ". " + task);
+                        taskCount++;
+                    }
+                    if (tasks.size() == 0) {
+                        System.out.println("     This is a very empty list... UwU");
                     }
                 } else if (command.equals("done")) {
                     //Need to handle out of bounds number.
                     int itemNumber = sc.nextInt();
-                    Task selectedTask = tasks[itemNumber - 1];
+                    Task selectedTask = tasks.get(itemNumber - 1);
                     selectedTask.setDone();
                     System.out.println("     Nice! I've marked this task as done:");
                     System.out.println("       " + selectedTask);
 
+                } else if (command.equals("delete")) {
+                    int itemNumber = sc.nextInt();
+                    Task selectedTask = tasks.remove(itemNumber - 1);
+                    System.out.println("     Noted. I've removed this task:");
+                    System.out.println("       " + selectedTask);
+                    System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
                 } else {
                     Task newTask = null;
                     if (command.equals("todo")) {
@@ -81,10 +94,9 @@ public class Duke {
 
                     if (newTask != null) {
                         System.out.println("     Got it. I've added this task:");
-                        tasks[itemsIndex] = newTask;
-                        itemsIndex++;
+                        tasks.add(newTask);
                         System.out.println("       " + newTask);
-                        System.out.println("     Now you have " + itemsIndex +" tasks in the list.");
+                        System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
                     }
 
                 }

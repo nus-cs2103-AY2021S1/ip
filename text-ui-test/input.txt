@@ -19,4 +19,7 @@ event eventName /at
 event eventName /by aDate
 event /at aDate
 event
+delete 5
+delete 3
+delete 2
 bye
