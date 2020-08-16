@@ -4,51 +4,80 @@ import java.util.Scanner;
 public class Duke {
 
     // constant strings:
-    private static final String horizontalLine = "____________________________________________________________";
+    private static final String lineBreak = "____________________________________________________________";
     private static final String exitGreeting = "Bye. Hope to see you again soon!";
-    private static final String indent = "    "; // set to 4 spaces
+    private static final String indent = "    ";
+    private static final String mode = "list";
 
-    static boolean exit = false;
+    static boolean terminate = false;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        TaskList allTasks = new TaskList();
         greet();
-        while(!exit) {
-            respond(sc);
+        while(!terminate) {
+            respond(sc, allTasks);
         }
         sc.close();
     }
 
-
-    // ================= HELPERS ======================
     private static void greet() {
         ArrayList<String> greeting = new ArrayList<>();
-        greeting.add(horizontalLine);
         greeting.add("Hello I'm Duke");
         greeting.add("What can I do for you?");
-        greeting.add(horizontalLine);
-        printResponse(indentLines(greeting));
+        printResponse(prettify(greeting));
     }
 
-    private static void respond(Scanner sc) {
+    // determines Duke's response and exit conditions:
+    private static void respond(Scanner sc, TaskList allTasks) {
         String input = sc.nextLine();
         ArrayList<String> response = new ArrayList<>();
+
         if(input.equals("bye")) {
-            // ^dumb things: don't check pointer equality! use .equals
-            Duke.exit = true;
-            input = exitGreeting;
+            response = exit();
+        } else if(Duke.mode.equals("echo")) {
+            response = echo(input);
+        } else {
+            response = handleTask(input, allTasks);
         }
-        // insert horiz line before and after reponse msg:
-        response.add(horizontalLine);
-        response.add(input);
-        response.add(horizontalLine);
-        printResponse(indentLines(response));
+        ;
+        printResponse(response);
     };
 
-    private static void printResponse(ArrayList<String> response) {
-        for (String s : response) {
-            System.out.println(s);
+    private static ArrayList<String> handleTask(String description, TaskList tasks) {
+        ArrayList<String> response = new ArrayList<>();
+        // enumerates all tasks:
+        if (description.equals("list")) {
+            ArrayList<Task> allTasks = tasks.getAllTasks();
+            for(Task t : allTasks) {
+                response.add(t.toString());
+            }
+        } else {
+            String reply = tasks.addEntry(description);
+            response.add(reply);
         }
+        return prettify(response);
+    }
+
+    private static ArrayList<String> exit() {
+        Duke.terminate = true;
+        ArrayList<String> response = new ArrayList<>();
+        response.add(exitGreeting);
+        return prettify(response);
+
+    }
+
+    private static ArrayList<String> echo(String output) {
+        ArrayList<String> response = new ArrayList<>();
+        response.add(output);
+        return prettify(response);
+    }
+
+    // encapsulates and indents response lines:
+    private static ArrayList<String> prettify(ArrayList<String> rawResponse){
+        rawResponse.add(0, lineBreak);
+        rawResponse.add(rawResponse.size(), lineBreak);
+        return indentLines(rawResponse);
     }
 
     private static ArrayList<String> indentLines(ArrayList<String> responseLines) {
@@ -58,6 +87,12 @@ public class Duke {
             result.add(current);
         }
         return result;
+    }
+
+    private static void printResponse(ArrayList<String> response) {
+        for (String s : response) {
+            System.out.println(s);
+        }
     }
 
 
