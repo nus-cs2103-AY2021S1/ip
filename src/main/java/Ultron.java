@@ -1,8 +1,9 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Duke {
+public class Ultron {
     //Task list to store the tasks
     private TaskList taskList;
 
@@ -20,11 +21,25 @@ public class Duke {
     //Regex for parsing the date
     private Pattern date_match = Pattern.compile("^(.*) (/by|/at) (.*)$");
 
-    public Duke(){
+    // Create the scanner object
+    private Scanner rd = new Scanner(System.in);
+
+    public Ultron(){
 
         //Create a new task list
         this.taskList = new TaskList();
 
+    }
+    private String getInput() {
+
+        //Declare type
+        String input;
+
+        // Take in input
+        input = this.rd.nextLine();
+
+        //Return the input
+        return input;
     }
 
     public void printIntro(){
@@ -47,18 +62,6 @@ public class Duke {
 
         //Get the logo of Ultron
         return this.logo;
-    }
-
-    private String getInput(){
-
-        // Create the scanner object
-        Scanner sc = new Scanner(System.in);
-
-        // Take in input
-        String input = sc.nextLine();
-
-        //Return the input
-        return input;
     }
 
     private void helpMessage(){
@@ -111,6 +114,20 @@ public class Duke {
 
                 //Print the help message
                 helpMessage();
+                break;
+            }
+
+            //Check if the user is done with any task
+            case "done":{
+
+                //Get the index of the items
+                int index = Integer.valueOf(args) - 1;
+
+                //Mark the task as done
+                this.taskList.markDone(index);
+
+                //Print the done message
+                System.out.println(String.format("Finally! Making yourself useful\n  %s", this.taskList.get(index)));
                 break;
             }
             //Otherwise it will be a task to be added
@@ -208,7 +225,7 @@ public class Duke {
     public static void main(String[] args) {
 
         //Create a new duke
-        Duke duke = new Duke();
+        Ultron duke = new Ultron();
 
         //Run the main loop
         duke.mainLoop();
