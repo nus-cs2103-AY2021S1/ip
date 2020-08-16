@@ -1,0 +1,10 @@
+todo read book
+done 1
+deadline return book /by June 6th
+event project meeting /at Aug 6th 2-4pm
+todo join go home club
+list
+done 4
+todo do java prog
+list
+bye
