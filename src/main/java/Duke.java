@@ -9,7 +9,7 @@ public class Duke {
     }
 
     public static String welcomeMessage() {
-
+        print
     }
 
 }
