@@ -25,7 +25,6 @@ public class Duke {
             try {
                 System.out.print("Enter input: ");
                 input = sc.nextLine();
-                System.out.print("\n");
                 if (input.equals("bye")) {
                     System.out.println("Bye, see you soon. Exiting...");
                     break;
@@ -38,8 +37,7 @@ public class Duke {
                         Deadline d = new Deadline(processedDesc[0], processedDesc[1]);
                         addTask(d);
                     } else {
-                        System.out.println("OOPS!!! The description of a deadline cannot be empty.");
-                    }
+                        throw new DukeException("The description of a deadline cannot be empty.");                    }
                 } else if (input.length() >= 5 && input.substring(0, 5).equals("event")) {
                     if (input.substring(5).length() > 1) {
                         String description = input.substring(6);
@@ -47,7 +45,7 @@ public class Duke {
                         Event e = new Event(processedDesc[0], processedDesc[1]);
                         addTask(e);
                     } else {
-                        System.out.println("OOPS!!! The description of an event cannot be empty.");
+                        throw new DukeException("The description of an event cannot be empty.");
                     }
                 } else if (input.length() >= 4) {
                     String command = input.substring(0, 4);
@@ -65,17 +63,16 @@ public class Duke {
                                 Todo d = new Todo(description);
                                 addTask(d);
                             } else {
-                                System.out.println("OOPS!!! The description of a todo cannot be empty.");
+                                throw new DukeException("The description of a todo cannot be empty.");
                             }
                             break;
                         default:
-                            System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                            throw new DukeException("I'm sorry, but I don't know what that means :-(");
                     }
                 } else {
-                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }
-            } catch (Exception e) {
-                System.out.println("Exception occurred during control flow of main loop.");
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");                }
+            } catch (DukeException e) {
+                System.out.println("Exception occurred during main loop: " + e);
             }
         }
         sc.close();
@@ -116,15 +113,15 @@ public class Duke {
     public static void markEntryDone(int taskNum) {
         try {
             if (taskNum < 0 || taskNum > taskList.size()) {
-                throw new InputMismatchException("Entry number does not exist.");
+                throw new DukeException("Task number does not exist.");
             } else {
                 Task t = taskList.get(taskNum - 1);
                 t.markDone();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(t);
             }
-        } catch (Exception e) {
-            System.out.println("Exception occurred while marking task as done.");
+        } catch (DukeException e) {
+            System.out.println("Exception occurred while marking task as done: " + e);
         }
     }
 
@@ -147,7 +144,7 @@ public class Duke {
                     indexToStop = i;
                 }
             }
-            if (indexToStop == -1) throw new Exception("Incorrect Input");
+            if (indexToStop == -1) throw new DukeException("Incorrect Input for timed task.");
 
             // Use StringBuilder Class to recreate the description and time separately.
             StringBuilder sb = new StringBuilder();
@@ -163,8 +160,8 @@ public class Duke {
                 sb.append(" ");
             }
             result[1] = sb.toString();
-        } catch (Exception e) {
-            System.out.println("Exception occurred while processing timed task.");
+        } catch (DukeException e) {
+            System.out.println("Exception occurred while processing timed task: " + e);
         }
         return result;
     }
