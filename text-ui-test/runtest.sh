@@ -23,7 +23,7 @@ fi
 java -Dfile.encoding=UTF-8 -classpath ../bin Duke < input.txt > ACTUAL.TXT
 
 # compare the output to the expected output
-diff ACTUAL.TXT EXPECTED.TXT  | cat -vet
+diff ACTUAL.TXT EXPECTED.TXT
 if [ $? -eq 0 ]
 then
     echo "Test result: PASSED"
@@ -31,4 +31,4 @@ then
 else
     echo "Test result: FAILED"
     exit 1
-fi
+fi 
