@@ -16,10 +16,20 @@ public class Duke {
     System.out.println("\t" + "Hello! I'm Duke\n\tWhat can I do for you?");
     System.out.println("\t" + divider);
 
-    input = sc.next();
+    while (true) {
+      input = sc.next();
+
+      if (input.equals("bye")) {
+        break;
+      }
+
+      System.out.println("\t" + divider);
+      System.out.println("\t" + input);
+      System.out.println("\t" + divider + "\n");
+    }
 
     System.out.println("\t" + divider);
-    System.out.println("\t" + input);
+    System.out.println("\tBye. Hope to see you again soon!");
     System.out.println("\t" + divider);
   }
 }
