@@ -1,3 +1,5 @@
+import main.java.Task;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -16,20 +18,28 @@ public class Duke {
         Scanner input =  new Scanner(System.in);
         String underscore = "____________________________________________________________ \n";
         String line = "";
-        ArrayList<String> todo = new ArrayList<>();
+        ArrayList<Task> todo = new ArrayList<>();
         while(!line.equals("bye")) {
             line = input.nextLine();
-            if(line.equals("bye")) {
+            if (line.equals("bye")) {
                 System.out.println(underscore + " Bye. Hope to see you again soon!" + "\n" + underscore);
             } else if (line.equals("list")) {
                 System.out.println(underscore);
-                for (int i = 0; i < todo.size(); i++){
+                for (int i = 0; i < todo.size(); i++) {
                     int number = i + 1;
-                    System.out.println(" " + number + ". " + todo.get(i));
+                    System.out.println(" " + number + "." + todo.get(i));
                 }
                 System.out.println(underscore);
+            } else if (line.indexOf("done") == 0) {
+//                int number = input.nextInt();
+                int number = Character.getNumericValue(line.charAt(line.length() - 1));
+                System.out.println(number);
+                todo.get(number - 1).checkOff();
+                System.out.println(underscore + "Nice! I've marked this task as done: \n" +
+                            todo.get(number - 1) + "\n" + underscore
+                        );
             } else {
-                todo.add(line);
+                todo.add(new Task(line));
                 System.out.println(underscore + " added: " + line + "\n" + underscore);
             }
         }
