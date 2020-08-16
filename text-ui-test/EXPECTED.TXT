@@ -5,3 +5,7 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What can I do for you?
+list
+blah
+Bye. Hope to see you again soon!
