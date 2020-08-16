@@ -12,6 +12,7 @@ public class Store {
     public void add(Task item) {
         this.store.add(item);
         System.out.printf("     Got it. I've added this task:\n       %s\n", item.toString());
+        System.out.printf("     Now you have %d tasks in your list.\n", this.store.size());
     }
 
     public void markAsDone(int index) {
