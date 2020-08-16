@@ -35,6 +35,12 @@ public class Duke {
         return sb.toString();
     }
 
+    private static String markTaskAsDone(List<Task> tasks, int taskID) {
+        Task task = tasks.get(taskID - 1);
+        task.competeTask();
+        return String.format("Nice! I've marked this task as done.\n %s", task.toString());
+    }
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -44,18 +50,22 @@ public class Duke {
         printToConsole("Hi I'm Alfred! How can I help you today?");
 
         while (sc.hasNextLine()) {
-            String input = sc.nextLine();
+            String[] inputList = sc.nextLine().split(" ", 2);
+            String command = inputList[0];
 
-            switch (input) {
+            switch (command) {
             case "bye":
                 printToConsole("Goodbye!");
                 return;
             case "list":
                 printToConsole(convertTaskListToString(tasks));
                 break;
+            case "done":
+                printToConsole(markTaskAsDone(tasks, Integer.parseInt(inputList[1])));
+                break;
             default:
-                tasks.add(new Task(input));
-                printToConsole("added: " + input);
+                tasks.add(new Task(command));
+                printToConsole("added: " + command);
             }
         }
 
