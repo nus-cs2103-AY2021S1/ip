@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Duke {
     private static String longLine = "________________________________________________________________________________";
-    private static ArrayList<String> theList = new ArrayList<>();
+    private static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -18,7 +18,6 @@ public class Duke {
     }
 
     public static void echo_input(){
-
         Scanner scanner = new Scanner(System.in);
         while(scanner.hasNext()){
             String input = scanner.nextLine();
@@ -31,39 +30,95 @@ public class Duke {
         }
     }
 
+
     public static void add_input(){
         Scanner scanner = new Scanner(System.in);
+
         while(scanner.hasNext()){
             String input = scanner.nextLine();
-            if(input.toLowerCase().equals("list")){
+            //splitting into list for easier comparison
+            String[] inputList = input.trim().split(" ", 2);
+
+            if(inputList[0].toLowerCase().equals("list")){
                 StringBuffer result = new StringBuffer();
-                for(int i = 0; i < theList.size(); i ++){
-                    result.append((i + 1)+ ". " + theList.get(i) + "\n");
+                //to add in the starting line of the section
+                result.append("Here are the tasks in your list: \n");
+
+                for(int i = 0; i < taskList.size(); i ++){
+                    // getting the current task
+                    Task currentTask = taskList.get(i);
+
+                    // adding the current task into the tasklist
+                    result.append((i + 1)+ ". [" + currentTask.getStatusIcon() + "] " + currentTask.getTask() + "\n");
                 }
                 lineFormatter(result.toString());
-            } else if(input.toLowerCase().equals("bye")){
+
+                //ending the process
+            } else if(inputList[0].toLowerCase().equals("bye")){
                 byeGreetings();
                 break;
-            } else {
+
+                //checking for done
+            } else if(inputList[0].toLowerCase().equals("done") && isNum(inputList[1])){
+                int currentIndex = Integer.parseInt(inputList[1]) - 1;
+                if(currentIndex + 1> taskList.size() || currentIndex + 1 <= 0){
+                    lineFormatter("You do not have " + (currentIndex + 1) + " tasks!\n"
+                            + "Choose a number less than equals to " + taskList.size() + "!");
+                } else {
+                    Task task = taskList.get(currentIndex);
+                    // to check if the task is already done
+                    if(task.getStatus()){
+                        lineFormatter("This task is already done!\n" +
+                                "[" + task.getStatusIcon() + "] " + task.getTask());
+                    // if task is not done
+                    } else {
+                        taskList.get(currentIndex).markAsDone();
+                        taskDone(taskList.get(currentIndex));
+                    }
+                }
+
+            }
+            else {
                 added_to_List(input);
             }
         }
     }
 
+    // method that adds tasks into the list of tasks
     public static void added_to_List(String printable) {
         lineFormatter("added: " + printable);
-        theList.add(printable);
+        Task newTask = new Task(printable);
+        taskList.add(newTask);
 
 
     }
+
+    //method to segment every String that is being fed into this method
     public static void lineFormatter (String printable){
         System.out.println(longLine);
         System.out.println(printable);
         System.out.println(longLine);
     }
 
+
+    // standardised goodbye greeting
     public static void byeGreetings () {
         lineFormatter("Bye! Hope to see you soon again?!");
+    }
+
+    //method to mark tasks as done
+    public static void taskDone(Task task) {
+        lineFormatter("Nice! This task is getting done!!\n" + "[" + task.getStatusIcon() + "] " + task.getTask());
+    }
+
+    // method to check for int in String
+    public static boolean isNum(String num){
+        try{
+            int check = Integer.parseInt(num);
+            return true;
+        } catch (NumberFormatException e){
+            return false;
+        }
     }
 
 
