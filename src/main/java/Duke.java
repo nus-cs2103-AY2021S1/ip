@@ -71,11 +71,9 @@ public class Duke {
                 printReply(addTaskReplyFormatter(newEvent));
             } else if (reply.equals("list")) { // Show all in list
                 printReply(replyFormatter(listFormatter(taskItems)));
-            } else { // Add to list
-                taskItems.add(new Task(reply));
-                printReply(replyFormatter(String.format("added: %s", reply)));
+            } else {
+                printReply(replyFormatter("This input is not valid"));
             }
         }
-
     }
 }
