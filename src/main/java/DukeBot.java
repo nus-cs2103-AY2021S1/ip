@@ -15,7 +15,6 @@ public class DukeBot {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-        horizontalRule();
         System.out.println("Hello from\n" + logo);
         System.out.println("What Can I do for you?");
         horizontalRule();
@@ -42,16 +41,21 @@ public class DukeBot {
         String currInput = fetch.nextLine();
 
         while (true){
+            horizontalRule();
             if(currInput.equals("bye")){
                 System.out.println("Bye. Hope to see you again soon!");
+                horizontalRule();
                 break;
             }
             else if(currInput.equals("list")){
-                System.out.println(this.tasks);
+                for (int i = 0;i< this.tasks.size();i++){
+                    System.out.println(""+(i+1)+". "+ this.tasks.get(i));
+                }
             }
             else{
                 addTask(currInput);
             }
+            horizontalRule();
 
             currInput=fetch.nextLine();
         }
