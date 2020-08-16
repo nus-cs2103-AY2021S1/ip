@@ -9,19 +9,19 @@ public class TextFormatter {
 
     /** Bot Logo */
     public static final String LOGO =
-            "ㅤ　＼　　　　　／\n" +
-                    "　　　＼∧∧∧／\n" +
-                    "　　　＜　 Ｃ ＞\n" +
-                    "　　　＜ 　Ａ ＞\n" +
-                    "　　　＜　 Ｔ ＞\n" +
-                    "　 ───＜ Ｂ　 ＞───\n" +
-                    "　　　＜ Ｏ　 ＞\n" +
-                    "　　　＜ Ｔ　 ＞\n" +
-                    "　　　／∨∨∨＼\n" +
-                    "　　／ ∧_∧　　＼\n" +
-                    "　／　( ･ω･)　　 ＼\n" +
-                    "／　＿(_つ/￣￣￣/　＼\n" +
-                    "　　 　＼/＿＿＿/\n";
+            "ㅤ　＼　　　　　／\n"
+            + "　　　＼∧∧∧／\n"
+            + "　　　＜　 Ｃ ＞\n"
+            + "　　　＜ 　Ａ ＞\n"
+            + "　　　＜　 Ｔ ＞\n"
+            + "　 ───＜ Ｂ　 ＞───\n"
+            + "　　　＜ Ｏ　 ＞\n"
+            + "　　　＜ Ｔ　 ＞\n"
+            + "　　　／∨∨∨＼\n"
+            + "　　／ ∧_∧　　＼\n"
+            + "　／　( ･ω･)　　 ＼\n"
+            + "／　＿(_つ/￣￣￣/　＼\n"
+            + "　　 　＼/＿＿＿/\n";
 
     /**
      * Return text formatted with indentation and lines.
