@@ -5,33 +5,61 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static void readAndEcho(List<String> list) {
+    public static void readAndEcho(List<Task> list) {
+
+        //Formatting of greeting
         String intro1 = "Hello! I'm Duke \n";
         String intro2 = "What can I do for you? \n";
-
 
         String greeting = addDividers(formatString(intro1) + formatString(intro2));
         System.out.println(greeting);
 
-
+        //Reading in user input
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
+
+        //Stop when user inputs "bye"
         while (!input.equals("bye")) {
+            String[] inputArr = input.split(" ");
+
+            //Print list when user inputs "list"
             if (input.equals("list")) {
                 printList(list);
-            } else {
-                list.add(input);
+            } else if (inputArr[0].equals("done")) { // Mark task as done when user inputs "done"
+                String taskNumber = inputArr[1];
+                try {
+                    markTaskDoneInList(list, Integer.parseInt(taskNumber) - 1);
+                } catch (NumberFormatException e) {
+                    System.out.println(addDividers(formatString("Please enter out a valid number\n")));
+                }
+            } else { //Add a new task to the list
+                list.add(new Task(input));
                 String inputText = "added: " + input + '\n';
                 String echo = addDividers(formatString(inputText));
                 System.out.println(echo);
             }
             input = sc.nextLine();
         }
+
+        //Formatting and printing of goodbye message
         String goodbye = "Bye. Hope to see you again soon! \n";
         System.out.println(addDividers(formatString(goodbye)));
     }
 
-    private static void printList(List<String> list) {
+    
+    private static void markTaskDoneInList(List<Task> list, Integer taskNumber) {
+        if (taskNumber < 0 || taskNumber > list.size() - 1) {
+            System.out.println(addDividers(formatString("Please enter a valid task number\n")));
+        } else {
+            list.get(taskNumber).markDone();
+            String success = formatString("Nice! I've marked this task as done: \n") +
+                    formatString(list.get(taskNumber).toString() + "\n");
+            System.out.println(addDividers(success));
+        }
+
+    }
+
+    private static void printList(List<Task> list) {
         String printedList = "";
         if (list.size() > 0) {
             for (int i = 0; i < list.size(); i++) {
@@ -57,7 +85,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        ArrayList<String> arrayList = new ArrayList<>();
+        ArrayList<Task> arrayList = new ArrayList<>();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
