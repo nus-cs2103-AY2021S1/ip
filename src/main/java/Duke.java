@@ -52,6 +52,17 @@ public class Duke {
         System.out.println("You have " + taskList.size() + " task(s) in your list!");
     }
 
+    private void deleteTask(int taskNum) throws InvalidTaskNumber {
+        if (taskNum < 1 || taskNum > taskList.size()) {
+            throw new InvalidTaskNumber();
+        } else {
+            Task tsk = taskList.get(taskNum - 1);
+            taskList.remove(taskNum - 1);
+            System.out.println("Can can I removed this task for you:\n" + tsk);
+            System.out.println("You have " + taskList.size() + " task(s) in your list!");
+        }
+    }
+
     private void listTask() {
         System.out.println("Lao Duke not so blur like you. Tsk. I got remember your tasks one hor.");
         for (int i = 0; i < taskList.size(); i++) {
@@ -92,7 +103,17 @@ public class Duke {
                     } catch (InvalidTaskNumber e) {
                         System.out.println(e);
                     }
-                } else {
+                } else if (cmd[0].toLowerCase().equals("delete")) {
+                    try {
+                        Integer taskNum = Integer.parseInt(cmd[1]);
+                        deleteTask(taskNum);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Eh I not so smart one la..." +
+                                "Can you format your delete task properly or not?");
+                    } catch (InvalidTaskNumber e) {
+                        System.out.println(e);
+                    }
+                } else{
                     //process input
                     try {
                         addTask(input);
