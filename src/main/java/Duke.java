@@ -2,6 +2,11 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Serves as a chat bot. Duke can keep a record of user's inputs as a list of
+ * tasks, mark them as completed when they are done, and show the user the list
+ * of tasks upon request.
+ */
 public class Duke {
 
     /** Star Bot's logo shown upon start up */
@@ -27,7 +32,7 @@ public class Duke {
             "------------------------------------------------------\n";
 
     /** Stores user's tasks */
-    private static List<String> taskList = new ArrayList<>();
+    private static List<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -43,9 +48,15 @@ public class Duke {
                 System.exit(0);
             } else if (line.equals("list")) { // Lists out task list
                 System.out.println(botReply(printList()));
-            }
-            else { // Add task to task list
-                taskList.add(line);
+            } else if (line.length() > 4 && line.substring(0,4)
+                    .equals("done")) { // Done with a task
+                int taskIndex = Integer.parseInt(line.substring(5)) - 1;
+                Task completedTask = taskList.get(taskIndex);
+                completedTask.markAsDone();
+                System.out.println(botReply("Nice! I've marked this task as " +
+                        "done:\n" + completedTask.toString()));
+            } else { // Add task to task list
+                taskList.add(new Task(line, taskList.size() + 1));
                 System.out.println(botReply("added: " + line));
             }
         }
@@ -60,13 +71,9 @@ public class Duke {
     /** Formats the task list to be shown to the user */
     private static String printList() {
         String result = "";
-        int index = 1;
-        for (String task : taskList) {
-            if (index != 1) {
-                result += "\n";
-            }
-            result += index++ + ". " + task;
+        for (Task task : taskList) {
+            result += task + "\n";
         }
-        return result;
+        return result.substring(0,result.length() - 1);
     }
 }
