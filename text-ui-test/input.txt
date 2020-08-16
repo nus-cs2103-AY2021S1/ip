@@ -1,0 +1,5 @@
+deadline return book /by Sunday
+event project meeting /at 3:30 pm
+todo buy bread
+list
+bye

@@ -1,7 +1,42 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+___________              __   __________        __   
+\__    ___/____    _____|  | _\______   \ _____/  |_ 
+  |    |  \__  \  /  ___/  |/ /|    |  _//  _ \   __\
+  |    |   / __ \_\___ \|    < |    |   (  <_> )  |  
+  |____|  (____  /____  >__|_ \|______  /\____/|__|  
+               \/     \/     \/       \/             
+Hello there, my name is TaskBot.
+How may I be of assistance today?
+----------------------------------------------
+I have added a Deadline:
+[?] Deadline: return book (by: Sunday)
 
+You now have 1 task(s) in the list
+----------------------------------------------
+
+----------------------------------------------
+I have added an Event:
+[?] Event: project meeting (at: 3:30 pm)
+
+You now have 2 task(s) in the list
+----------------------------------------------
+
+----------------------------------------------
+I have added a Todo:
+[?] Todo: buy bread
+
+You now have 3 task(s) in the list
+----------------------------------------------
+
+----------------------------------------------
+These are the following task(s) to complete:
+1. [?] Deadline: return book (by: Sunday)
+
+2. [?] Event: project meeting (at: 3:30 pm)
+
+3. [?] Todo: buy bread
+
+----------------------------------------------
+
+----------------------------------------------
+Goodbye, I await your next visit.
+----------------------------------------------
