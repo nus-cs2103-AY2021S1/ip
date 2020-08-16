@@ -112,7 +112,7 @@ public class Duke {
 
     private static void handleDone(String command) throws InvalidDoneIndexException {
         int index = Integer.parseInt(command.split(" ")[1]);
-        if (index > tasks.size()) {
+        if (index > tasks.size() || index < 1) {
             String response = String.format("No such task :(\nYou have %d tasks.", tasks.size());
             throw new InvalidDoneIndexException(response);
         }
