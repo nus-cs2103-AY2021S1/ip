@@ -49,6 +49,16 @@ public class Duke {
         return String.format("Nice! I've marked this task as done.\n%s", task.toString());
     }
 
+    private static String deleteTask(List<Task> tasks, int taskID) throws DukeException {
+        if (taskID < 1 || taskID > tasks.size()) {
+            throw new DukeException("Task ID is invalid!");
+        }
+        Task task = tasks.get(taskID - 1);
+        tasks.remove(taskID - 1);
+        return String.format("Nice! I've marked this task as done.\n%s\nNow you have %d tasks in the list", 
+                task.toString(), tasks.size());
+    }
+
     private static String addTaskToList(List<Task> tasks, Task task) {
         tasks.add(task);
         return String.format("Got it. I've added this task: \n%s\nNow you have %d tasks in the list",
@@ -78,6 +88,9 @@ public class Duke {
                     break;
                 case "done":
                     printToConsole(markTaskAsDone(tasks, Integer.parseInt(inputList[1])));
+                    break;
+                case "delete":
+                    printToConsole(deleteTask(tasks, Integer.parseInt(inputList[1])));
                     break;
                 case "todo":
                     ToDo newTodo = ToDo.createNewToDo(argument);
