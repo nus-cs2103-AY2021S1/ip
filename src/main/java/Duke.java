@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class Duke {
 
-
     private ArrayList<Task> taskList;
 
     // Constructor for the bot
@@ -65,7 +64,6 @@ public class Duke {
             } else {
                 System.out.println("Unrecognised Command");
             }
-
         }
     }
 

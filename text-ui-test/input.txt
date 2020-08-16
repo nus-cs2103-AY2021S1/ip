@@ -1,0 +1,13 @@
+todo study for exam
+deadline read a book /by October
+event eat lunch with girlfriend /at Mon 2-4pm
+done 1
+list
+done 2
+list
+done 0
+done 4
+done 3
+done 2
+list
+bye
