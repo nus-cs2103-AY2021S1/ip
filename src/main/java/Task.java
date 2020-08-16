@@ -1,8 +1,8 @@
 package main.java;
 
 public abstract class Task {
-    String title;
-    boolean isDone;
+    private String title;
+    private boolean isDone;
 
     Task(String title) {
         this.title = title;

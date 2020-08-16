@@ -13,4 +13,7 @@ Marked as done: [T][✓] buy textbook
 1. [T][✓] buy textbook
 2. [D][✗] CS2103T project (by: thu)
 3. [E][✗] CS2100 lecture (at: tue 4-6pm)
+ToDo cannot be empty.
+I'm not sure what you're talking about.
+Invalid task.
 Have a nice day.

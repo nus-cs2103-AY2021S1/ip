@@ -4,4 +4,7 @@ deadline CS2103T project /by thu
 event CS2100 lecture /at tue 4-6pm
 done 1
 list
+todo
+hello :)
+done 100
 bye

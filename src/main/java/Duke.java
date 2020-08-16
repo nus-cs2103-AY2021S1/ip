@@ -12,50 +12,46 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+        String input = scanner.nextLine().trim();
         TaskList taskList = new TaskList();
         while (true) {
-            String[] inputArray = input.split("\\s+");
-            switch (inputArray[0]) {
-            case "bye":
-                System.out.println("Have a nice day.");
-                return;
-            case "":
-                break;
-            case "todo":
-                String content = input.substring(5);
-                taskList.add(new ToDo(content));
-                break;
-            case "deadline":
-                String[] split = input.substring(9).split("\\s+/by\\s+");
-                if (split.length == 2) {
-                    taskList.add(new Deadline(split[0], split[1]));
-                } else {
-                    System.out.println("Wrong format.");
+            try {
+                String[] inputArray = input.split("\\s+");
+                switch (inputArray[0]) {
+                case "bye":
+                    System.out.println("Have a nice day.");
+                    return;
+                case "":
+                    break;
+                case "todo":
+                    taskList.add(ToDo.of(input));
+                    break;
+                case "deadline":
+                    taskList.add(Deadline.of(input));
+                    break;
+                case "event":
+                    taskList.add(Event.of(input));
+                    break;
+                case "done":
+                    if (inputArray.length != 2) {
+                        throw new DukeException("Wrong format.");
+                    }
+                    try {
+                        taskList.markAsDone(Integer.parseInt(inputArray[1]));
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("Wrong format.");
+                    }
+                    break;
+                case "list":
+                    taskList.list();
+                    break;
+                default:
+                    throw new DukeException("I'm not sure what you're talking about.");
                 }
-                break;
-            case "event":
-                String[] split2 = input.substring(6).split("\\s+/at\\s+");
-                if (split2.length == 2) {
-                    taskList.add(new Event(split2[0], split2[1]));
-                } else {
-                    System.out.println("Wrong format.");
-                }
-                break;
-            case "done":
-                try {
-                    taskList.markAsDone(Integer.parseInt(inputArray[1]));
-                } catch (NumberFormatException e) {
-                    System.out.println("Not a valid task");
-                }
-                break;
-            case "list":
-                taskList.list();
-                break;
-            default:
-                System.out.println("I'm not sure what you're talking about.");
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
-            input = scanner.nextLine();
+            input = scanner.nextLine().trim();
         }
     }
 }

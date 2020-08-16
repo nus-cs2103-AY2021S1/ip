@@ -1,11 +1,22 @@
 package main.java;
 
 public class Deadline extends Task {
-    String deadline;
+    private String deadline;
 
     Deadline(String title, String deadline) {
         super(title);
         this.deadline = deadline;
+    }
+
+    static Deadline of(String command) throws DukeException {
+        if (command.length() <= 9) {
+            throw new DukeException("Deadline cannot be empty.");
+        }
+        String[] split = command.substring(9).split("\\s+/by\\s+");
+        if (split.length != 2) {
+            throw new DukeException("Wrong format.");
+        }
+        return new Deadline(split[0], split[1]);
     }
 
     public String toString() {
