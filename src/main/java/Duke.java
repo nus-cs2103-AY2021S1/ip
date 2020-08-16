@@ -38,6 +38,7 @@ public class Duke {
 
             System.out.println("    ____________________________________________________________");
             if (newItem.equals("list")) {
+                System.out.println("     Here are the tasks in your list:");
                 for (int i = 0; i < itemsIndex; i++) {
                     System.out.println("     " + (i + 1) + ". " + tasks[i]);
                 }
@@ -47,8 +48,8 @@ public class Duke {
                 int itemIndex = Integer.valueOf((itemNumber)) - 1;
                 Task selectedTask = tasks[itemIndex];
                 selectedTask.setDone();
-                System.out.println("     Nice! I've marked this task as done: ");
-                System.out.println("        " + selectedTask);
+                System.out.println("     Nice! I've marked this task as done:");
+                System.out.println("       " + selectedTask);
 
             } else {
                 System.out.println("     Got it. I've added this task:");
