@@ -1,5 +1,7 @@
 @ECHO OFF
 
+REM !THIS FILE IS IGNORED AS IM USING MACOS
+
 REM create bin directory if it doesn't exist
 if not exist ..\bin mkdir ..\bin
 
