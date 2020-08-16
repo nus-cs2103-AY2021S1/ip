@@ -31,13 +31,15 @@ public class Duke {
             if (echo.equals("bye")) {
                 exitMessage();
                 break;
-            } else {
-                todoList.add(echo);
+            } else if (echo.equals("list")) {
                 String message = "";
                 for (int i = 0; i < todoList.size(); i++) {
                     message = message + "     " + (i + 1) + ". " + todoList.get(i) + "\n";
                 }
                 printMessage(message);
+            } else {
+                todoList.add(echo);
+                printMessage("     added: " + echo + "\n");
             }
         }
 
