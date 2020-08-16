@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private Task[] tasks = new Task[100];
-    private int numOfTasks = 0;
+    private static Task[] tasks = new Task[100];
+    private static int numOfTasks = 0;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -12,9 +12,10 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        start();
     }
 
-    public void start() {
+    public static void start() {
         Scanner sc = new Scanner(System.in);
         System.out.println(wrapWithLines(greet()));
 
@@ -34,50 +35,53 @@ public class Duke {
         }
     }
 
-    private String greet() {
+    private static String greet() {
         return "\t Hello! I'm Duke\n"
-                + "\t What can I do for you?\n";
+                + "\t What can I do for you?";
     }
 
-    private String echo(String str) {
-        return "\t " + str + '\n';
+    private static String echo(String str) {
+        return "\t " + str;
     }
 
-    private String exit() {
-        return "\t Bye. Hope to see you again soon!\n";
+    private static String exit() {
+        return "\t Bye. Hope to see you again soon!";
     }
 
-    private String line() {
-        return "\t" + "-".repeat(50);
+    private static String line() {
+        return "\t" + "_".repeat(50);
     }
 
-    private String wrapWithLines(String str) {
+    private static String wrapWithLines(String str) {
         return line() + "\n" + str + "\n" + line();
     }
 
-    private String list() {
+    private static String list() {
         StringBuilder str = new StringBuilder("\t Here are the tasks in your list:\n");
         for (int i = 0; i < numOfTasks; i++) {
             str.append("\t ").append(i + 1).append(".")
-                    .append(tasks[i].toString()).append("\n");
+                    .append(tasks[i].toString());
+            if (i != numOfTasks - 1) {
+                str.append("\n");
+            }
         }
         return str.toString();
     }
 
-    private String done(int input) {
+    private static String done(int input) {
         int index = input - 1;
         Task task = tasks[index];
         task.markAsDone();
         return "\t Nice! I've marked this task as done:\n\t\t"
-                + task.toString() + "\n";
+                + task.toString();
     }
 
-    private void addTaskToList(Task task) {
+    private static void addTaskToList(Task task) {
         tasks[numOfTasks] = task;
         numOfTasks++;
     }
 
-    private String addTask(String input) {
+    private static String addTask(String input) {
         String[] splitInput = input.split(" ", 2);
         String command = splitInput[0];
         String taskString = splitInput[1];
