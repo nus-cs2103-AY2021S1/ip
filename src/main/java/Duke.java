@@ -55,9 +55,27 @@ public class Duke {
                 completedTask.markAsDone();
                 System.out.println(botReply("Nice! I've marked this task as " +
                         "done:\n" + completedTask.toString()));
-            } else { // Add task to task list
-                taskList.add(new Task(line, taskList.size() + 1));
-                System.out.println(botReply("added: " + line));
+            } else if (line.length() >= 4) { // Add task to task list
+                if (line.substring(0,4).equals("todo")) { // To-Do task
+                    Task newTask = new ToDo(line.substring(5));
+                    taskList.add(newTask);
+                    System.out.println(botReplyForAddTask(newTask));
+                } else if (line.substring(0,8).equals("deadline")) {
+                    // Deadline task
+                    String[] splitLine = line.split("/");
+                    Task newTask =
+                            new Deadline(splitLine[0].substring(9).trim(),
+                                    splitLine[1].substring(3));
+                    taskList.add(newTask);
+                    System.out.println(botReplyForAddTask(newTask));
+                } else if (line.substring(0,5).equals("event")) { // Event task
+                    String[] splitLine = line.split("/");
+                    Task newTask =
+                            new Event(splitLine[0].substring(6).trim(),
+                                    splitLine[1].substring(3));
+                    taskList.add(newTask);
+                    System.out.println(botReplyForAddTask(newTask));
+                }
             }
         }
     }
@@ -68,12 +86,18 @@ public class Duke {
         return divider + reply + "\n" + divider;
     }
 
+    private static String botReplyForAddTask(Task newTask) {
+        return botReply("Got it. I've added this task:\n" + newTask + "\nNow " +
+                "you have " + taskList.size() + " tasks in the list.");
+    }
+
     /** Formats the task list to be shown to the user */
     private static String printList() {
-        String result = "";
+        int index = 1;
+        String result = "Here are the tasks in your list:";
         for (Task task : taskList) {
-            result += task + "\n";
+            result += "\n" + index++ + "." + task;
         }
-        return result.substring(0,result.length() - 1);
+        return result;
     }
 }

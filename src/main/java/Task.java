@@ -1,18 +1,17 @@
 /**
  * Encapsulates a to-do list type of task for the Duke program. A task is
- * inclusive of a textual description, a boolean flag to mark whether it has
- * been completed or not, and an index for where it appears in a list of tasks.
+ * inclusive of a textual description and a boolean flag to mark whether it has
+ * been completed or not.
  */
 public class Task {
     protected String description; // Describes the task
     protected boolean isDone; // Marks whether the task is completed or not
-    protected int index; // The index for where the task appears in a list of
-    // tasks
+    protected String taskType; // To-Do, Deadline or Event task
 
-    public Task(String description, int index) {
+    public Task(String description, String taskType) {
         this.description = description;
         this.isDone = false;
-        this.index = index;
+        this.taskType = taskType;
     }
 
     public String getStatusIcon() {
@@ -23,7 +22,8 @@ public class Task {
         isDone = true;
     }
 
+    @Override
     public String toString() {
-        return index + ".[" + getStatusIcon() + "] " + description;
+        return taskType + "[" + getStatusIcon() + "] " + description;
     }
 }
