@@ -3,11 +3,36 @@ import java.util.Scanner;
 
 public class Duke {
 
+    class Task {
+        private final String task;
+        private final boolean isDone;
+
+        private Task(String task, boolean isDone) {
+            this.task = task;
+            this.isDone = isDone;
+        }
+
+        public Task(String task){
+            this.task = task;
+            this.isDone = false;
+        }
+
+        public Task markDone() {
+            return new Task(this.task, true);
+        }
+
+        @Override
+        public String toString() {
+            String symbol = isDone ? "[✓] " : "[✗] ";
+            return symbol + task;
+        }
+    }
+
     private static String line = "____________________________________________________________";
 
     private String name = "Bolot";
     private String end = "bye";
-    private ArrayList<String> list = new ArrayList<>();
+    private ArrayList<Task> list = new ArrayList<>();
 
     public void greet() {
         System.out.println(line);
@@ -50,12 +75,18 @@ public class Duke {
 
             if (type.equalsIgnoreCase("list")) {
                 int i = 1;
-                for (String todo: list) {
-                    System.out.println(String.format("%d. %s", i, todo));
+                for (Task todo: list) {
+                    System.out.println(String.format("%d. %s", i, todo.toString()));
                     i++;
                 }
+            } else if (type.toLowerCase().contains("done")) {
+                int taskNo = Integer.parseInt(type.substring(5)) - 1;
+                list.set(taskNo, list.get(taskNo).markDone());
+
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(list.get(taskNo));
             } else {
-                list.add(type);
+                list.add(new Task(type));
                 System.out.println(String.format("added: %s", type));
             }
 
@@ -81,6 +112,5 @@ public class Duke {
 //        bot.echo();
         bot.addList();
     }
-
 
 }
