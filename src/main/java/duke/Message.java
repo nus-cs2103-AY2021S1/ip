@@ -7,4 +7,5 @@ public class Message {
     public static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
     public static final String INDENT = "    ";
     public static final String BORDERS = "_________________________________________________";
+    public static final String ADDED = "added: ";
 }
