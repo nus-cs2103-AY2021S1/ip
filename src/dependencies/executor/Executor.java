@@ -37,7 +37,11 @@ public class Executor {
      */
     public String level2Exec(String command) {
         if (command.equals(LIST_COMMAND)) {
-
+            return storage.getTodos();
+        } else {
+            // Level-2: only otehr comment is add.
+            // TODO: here man!!!
+            return null;
         }
     }
 
