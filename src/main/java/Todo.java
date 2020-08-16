@@ -8,6 +8,10 @@ public class Todo extends Task{
 
     }
 
+    public static Todo parseCommand(String args){
+        return new Todo(args);
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();
