@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
     String logo =
         " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -57,36 +57,52 @@ public class Duke {
             String addMessage = "Got it. I've added this task:";
             switch (input) {
               case "todo":
-                System.out.println(addMessage);
                 // Change line below to for Arraylist implementation
-                tasksArr[taskTracker] = new Todo(scanner.nextLine().trim());
+                String descToDo = scanner.nextLine().trim();
+                if (descToDo.equals("")) {
+                  throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
+                System.out.println(addMessage);
+                tasksArr[taskTracker] = new Todo(descToDo);
                 break;
               case "deadline":
                 {
-                  System.out.println(addMessage);
                   scanner.useDelimiter("/by");
-                  String desc = scanner.next().trim();
+                  String descDeadline = scanner.next().trim();
+                  if (descDeadline.equals("")) {
+                    throw new DukeException(
+                        "☹ OOPS!!! The description of a deadline cannot be empty.");
+                  }
                   scanner.skip("/by");
                   String by = scanner.nextLine().trim();
+                  if (by.equals("")) {
+                    throw new DukeException("☹ OOPS!!! The deadline cannot be empty.");
+                  }
+                  System.out.println(addMessage);
                   // Change line below to for Arraylist implementation
-                  tasksArr[taskTracker] = new Deadline(desc, by);
+                  tasksArr[taskTracker] = new Deadline(descDeadline, by);
                   break;
                 }
               case "event":
                 {
                   System.out.println(addMessage);
                   scanner.useDelimiter("/at");
-                  String desc = scanner.next().trim();
+                  String descEvent = scanner.next().trim();
+                  if (descEvent.equals("")) {
+                    throw new DukeException(
+                        "☹ OOPS!!! The description of a event cannot be empty.");
+                  }
                   scanner.skip("/at");
                   String at = scanner.nextLine().trim();
+                  if (at.equals("")) {
+                    throw new DukeException("☹ OOPS!!! The event date cannot be empty.");
+                  }
                   // Change line below to for Arraylist implementation
-                  tasksArr[taskTracker] = new Event(desc, at);
+                  tasksArr[taskTracker] = new Event(descEvent, at);
                   break;
                 }
               default:
-                // Change line below to for proper throw exception
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                break label;
+                throw new Exception("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             System.out.println("\t" + tasksArr[taskTracker]);
             taskTracker++;
