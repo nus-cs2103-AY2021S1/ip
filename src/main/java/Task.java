@@ -7,7 +7,7 @@ public class Task {
     private static final String TICK = "\u2713", CROSS = "\u2718";
 
     public Task(String description) {
-        this.taskId = ++ taskCount;
+        this.taskId = ++taskCount;
         this.description = description;
         this.completed = false;
     }
@@ -15,6 +15,10 @@ public class Task {
     protected Task complete() {
         this.completed = true;
         return this;
+    }
+
+    protected boolean isComplete() {
+        return this.completed;
     }
     public int getID() {
         return this.taskId;
