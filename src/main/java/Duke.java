@@ -15,7 +15,7 @@ public class Duke {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             System.out.println(" "+"-----------------");
-            if (input.startsWith("done ")) {
+            if (input.startsWith("done")) {
                 System.out.println(" Nice! I've marked this task as done:");
                 //get the integer from the string command and convert to integer
                 Task theTask = toDoList.get(Integer.parseInt(input.substring(5))-1);
@@ -77,17 +77,12 @@ public class Duke {
                         input = sc.nextLine();
                         continue;
                     }
-                }/* else if (input.startsWith("delete")){
+                } /*else if (input.startsWith("delete")){
                     System.out.println(" Noted. I've removed this task:");
                     Task theTask = toDoList.remove(Integer.parseInt(input.substring(7))-1);
-                    try {
-                        System.out.println(theTask.getCurrentStatus());
-                    } catch (DukeException e){
-                        System.out.println(e.getMessage());
-                    }
-                 }
-                */
-                 else {
+                    System.out.println(theTask.getCurrentShortStatus());
+                 } */
+                else {
                     System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     System.out.println(" "+"-----------------");
                     input = sc.nextLine();
