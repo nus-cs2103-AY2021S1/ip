@@ -20,6 +20,10 @@ public class TaskManager {
         return taskList.get(i);
     }
 
+    public int getTotalNoOfTasks() {
+        return this.taskList.size();
+    }
+
     public void removeTask(Task taskToRemove) {
         taskList.removeIf(task -> task == taskToRemove);
     }
