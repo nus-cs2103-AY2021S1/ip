@@ -1,15 +1,24 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static void handleInputs() {
         Scanner scanner = new Scanner(System.in);
+        ArrayList<String> list = new ArrayList<>();
         while(scanner.hasNextLine()) {
-            String input = scanner.next();
-            if (input.equals("bye")) {
-                PrintDuke.printExitMessage();
-                break;
+            String input = scanner.nextLine();
+            switch(input) {
+                case "bye":
+                    PrintDuke.printExitMessage();
+                    System.exit(0);
+                case "list":
+                    PrintDuke.printList(list);
+                    break;
+                default:
+                    list.add(input);
+                    PrintDuke.printAddTask(input);
+                    break;
             }
-            PrintDuke.printWithDashes(" " + input);
         }
         scanner.close();
     }

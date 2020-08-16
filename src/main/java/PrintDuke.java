@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class PrintDuke {
     private static void printDashes() {
         int length = 60;
@@ -23,5 +25,17 @@ public class PrintDuke {
     protected static void printExitMessage() {
         String bye = "Bye. Hope to see you again soon!";
         printWithDashes(" " + bye);
+    }
+
+    protected static void printAddTask(String task) {
+        printWithDashes(" added: " + task);
+    }
+
+    protected static void printList(ArrayList<String> list) {
+        StringBuilder listStr = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            listStr.append(String.format(" %s. %s\n", i + 1, list.get(i)));
+        }
+        printWithDashes(listStr.toString());
     }
 }
