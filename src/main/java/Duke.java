@@ -26,7 +26,7 @@ public class Duke {
         map.put("list", (command, list) -> listCommand(list));
         map.put("done", (command, list) -> doneCommand(list, command));
         map.put("todo", (command, list) -> toDoCommand(list, command));
-
+        map.put("deadline", (command, list) -> deadlineCommand(list, command));
         return map;
     }
 
@@ -85,6 +85,27 @@ public class Duke {
     public static void toDoCommand(List<Task> list, String command) {
         int spaceIndex = command.indexOf(" ");
         Task task = new ToDoTask(command.substring(spaceIndex + 1));
+        list.add(task);
+
+        System.out.println("    ____________________________________________________________\n"
+                + "     Got it. I've added this task:\n"
+                + "     "
+                + task
+                + "\n"
+                + "     Now you have "
+                + list.size()
+                + " task(s) in the list.\n"
+                + "    ____________________________________________________________\n"
+        );
+    }
+
+    public static void deadlineCommand(List<Task> list, String command) {
+        int spaceIndex = command.indexOf(" ");
+        int slashIndex = command.indexOf("/");
+        String description = command.substring(spaceIndex + 1, slashIndex - 1);
+        String time = command.substring(slashIndex + 4);
+
+        Task task = new DeadlineTask(description, time);
         list.add(task);
 
         System.out.println("    ____________________________________________________________\n"
