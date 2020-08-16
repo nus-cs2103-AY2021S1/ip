@@ -5,7 +5,7 @@ public class Duke {
 
     public static ArrayList<Task> list = new ArrayList<>();
 
-    public static void Greet() {
+    public static void greet() {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Hello! I'm Duke");
         System.out.println("     What can I do for you?");
@@ -13,13 +13,13 @@ public class Duke {
         System.out.println();
     }
 
-    public static void Exit() {
+    public static void exit() {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Bye. Hope to see you again soon!");
         System.out.println("    ____________________________________________________________");
     }
 
-    public static void Echo() {
+    public static void echo() {
 
         Scanner sc = new Scanner(System.in);
         while (true) {
@@ -27,38 +27,76 @@ public class Duke {
             if (input.equals("bye")) {
                 break;
             } else if (input.equals("list")) {
-                ListOut();
+                listOut();
             } else if (input.contains("done")) {
                 String[] arr = input.split(" ");
                 int index = Integer.parseInt(arr[1]);
 
-                Done(index);
+                done(index);
             } else {
-                String taskType = input.substring(0, input.indexOf(" "));
-                String taskName = input.substring(input.indexOf(" ") + 1);
 
-                Task task;
+                try {
+                    if (input.contains("todo")) {
+                        handleToDo(input);
+                    } else if (input.contains("deadline")) {
+                        handleDeadline(input);
+                    } else if (input.contains("event")) {
+                        handleEvent(input);
+                    } else {
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
 
-                if (taskType.equals("todo")) {
-                    task = new ToDo(taskName);
-                } else if (taskType.equals("deadline")) {
-                    String[] arr = taskName.split("/");
-                    task = new Deadline(arr[0], arr[1].substring(arr[1].indexOf(" ") + 1));
-                } else if (taskType.equals("event")) {
-                    String[] arr = taskName.split("/");
-                    task = new Event(arr[0], arr[1].substring(arr[1].indexOf(" ") + 1));
-                } else {
-                    System.out.println("debug");
-                    task = new Task(taskName);
+                    System.out.println();
+                } catch (DukeException e) {
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("     " + e.getMessage());
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println();
                 }
-
-                Add(task);
-                System.out.println();
             }
         }
     }
 
-    public static void Add(Task task) {
+    public static void handleEvent(String input) throws DukeException {
+        if (!input.contains(" ")) {
+            throw new DukeException(" ☹ OOPS!!! The description of a Event cannot be empty.");
+        } else if (!input.contains("/")) {
+            throw new DukeException(" ☹ OOPS!!! Event requires a date.");
+        } else {
+            //String taskType = input.substring(0, input.indexOf(" "));
+            String taskName = input.substring(input.indexOf(" ") + 1);
+            String[] arr = taskName.split("/");
+            Event task = new Event(arr[0], arr[1].substring(arr[1].indexOf(" ") + 1));
+            add(task);
+        }
+    }
+
+    public static void handleDeadline(String input) throws DukeException {
+        if (!input.contains(" ")) {
+            throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+        } else if (!input.contains("/")) {
+            throw new DukeException(" ☹ OOPS!!! Deadline requires a date.");
+        } else {
+            //String taskType = input.substring(0, input.indexOf(" "));
+            String taskName = input.substring(input.indexOf(" ") + 1);
+            String[] arr = taskName.split("/");
+            Deadline task = new Deadline(arr[0], arr[1].substring(arr[1].indexOf(" ") + 1));
+            add(task);
+        }
+    }
+
+    public static void handleToDo(String input) throws DukeException {
+        if (!input.contains(" ")) {
+            throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
+        } else {
+            //String taskType = input.substring(0, input.indexOf(" "));
+            String taskName = input.substring(input.indexOf(" ") + 1);
+            ToDo task = new ToDo(taskName);
+            add(task);
+        }
+    }
+
+    public static void add(Task task) {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Got it. I've added this task: ");
         System.out.println("       " + task);
@@ -67,7 +105,7 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
     }
 
-    public static void ListOut() {
+    public static void listOut() {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Here are the tasks in your list:");
 
@@ -79,7 +117,7 @@ public class Duke {
         System.out.println();
     }
 
-    public static void Done(int index) {
+    public static void done(int index) {
         Task task = list.get(index - 1);
         task.completed();
         System.out.println("    ____________________________________________________________");
@@ -92,10 +130,10 @@ public class Duke {
 
     public static void main(String[] args) {
 
-        Greet();
+        greet();
 
-        Echo();
+        echo();
 
-        Exit();
+        exit();
     }
 }
