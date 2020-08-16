@@ -37,8 +37,15 @@ public class Chatbot {
                 for (String val: inquiry.split(" ")) {
                     number = val;
                 }
-                Task currentTask = planner.get(Integer.parseInt(number) - 1);
-                done(currentTask);
+
+                int num = Integer.parseInt(number);
+
+                if (num > planner.size() || num == 0) {
+                    reply("There appears to be a problem. Type 'list' to show your tasks.");
+                } else {
+                    Task currentTask = planner.get(num - 1);
+                    done(currentTask);
+                }
 
             } else {
                 Task currentTask = new Task(inquiry);
