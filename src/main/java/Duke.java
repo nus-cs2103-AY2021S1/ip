@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        List<String> toDoList = new ArrayList<>();
+        List<Task> toDoList = new ArrayList<>();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -15,13 +15,20 @@ public class Duke {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             System.out.println(" "+"-----------------");
-            if (!input.equals("list")){
+            if (input.startsWith("done ")) {
+                System.out.println(" Nice! I've marked this task as done:");
+                //get the integer from the string command and convert to integer
+                Task theTask = toDoList.get(Integer.parseInt(input.substring(5))-1);
+                theTask.setDone();
+                System.out.println("  " + theTask.getCurrentStatus());
+            } else if (!input.equals("list")){
                 System.out.println("    added: "+ input);
-                toDoList.add(input);
+                toDoList.add(new Task(input));
             } else {
                 int count = 1;
-                for (String s: toDoList) {
-                    System.out.println("  "+ count + ": " + s);
+                System.out.println(" Here are the tasks in your list:");
+                for (Task t: toDoList) {
+                    System.out.println("  "+ count + ". " + t.getCurrentStatus());
                     count++;
                 }
             }
@@ -29,7 +36,7 @@ public class Duke {
             input = sc.nextLine();
         }
         System.out.println(" "+"-----------------");
-        System.out.println("     Bye. Hope to see you again soon!");
+        System.out.println(" Bye. Hope to see you again soon!");
         System.out.println(" "+"-----------------");
     }
 }
