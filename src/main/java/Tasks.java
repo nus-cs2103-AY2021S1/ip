@@ -55,7 +55,7 @@ public class Tasks {
     void listTasks() {
         System.out.println("\t___________________________________________________________________________");
         for (int i = 0; i < this.list.size(); i++) {
-            System.out.println("\t" + (i + 1) + "." + list.get(i));
+            System.out.println("\t " + (i + 1) + "." + list.get(i));
         }
         System.out.println("\t___________________________________________________________________________\n");
     }
