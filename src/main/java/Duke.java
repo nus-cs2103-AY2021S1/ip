@@ -8,7 +8,18 @@ public class Duke {
         System.out.println("_______________________________________________________________");
 
         Scanner scanner = new Scanner(System.in);
-        String userinput = scanner.next(); //may be string, int, etc
+
+        //Looping and echoing user inputs
+        while(scanner.hasNext()) {
+            String userInput = scanner.next(); //may be string, int, etc
+            if(userInput.equals("Bye")) {
+                System.out.println("Goodbye! Hope to see you again soon! ^_^");
+                break;
+            } else {
+                System.out.println("Not Bye");
+            }
+
+        }
 
 
 
