@@ -1,14 +1,26 @@
 public class Deadline extends Task {
 
     private String deadline;
-    
-    public static Deadline createNewDeadline(String argument) {
+
+    public static Deadline createNewDeadline(String argument) throws DukeException {
         String[] deadlineArguments = argument.split(" /by ");
 
+        if (deadlineArguments.length != 2) {
+            throw new DukeException("Invalid arguments for a new deadline.");
+        }
+
         String deadlineName = deadlineArguments[0];
+        if (deadlineName.isBlank()) {
+            throw new DukeException("Deadline name cannot be blank!");
+        }
+
         String deadlineTime = deadlineArguments[1];
+        if (deadlineTime.isBlank()) {
+            throw new DukeException("Deadline time cannot be blank!");
+        }
 
         return new Deadline(deadlineName, deadlineTime);
+
     }
 
     private Deadline(String taskName, String deadline) {

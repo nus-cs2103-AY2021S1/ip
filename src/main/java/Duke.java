@@ -40,7 +40,10 @@ public class Duke {
         return sb.toString();
     }
 
-    private static String markTaskAsDone(List<Task> tasks, int taskID) {
+    private static String markTaskAsDone(List<Task> tasks, int taskID) throws DukeException {
+        if (taskID < 1 || taskID > tasks.size()) {
+            throw new DukeException("Task ID is invalid!");
+        }
         Task task = tasks.get(taskID - 1);
         task.competeTask();
         return String.format("Nice! I've marked this task as done.\n%s", task.toString());
@@ -65,29 +68,34 @@ public class Duke {
             String command = inputList[0];
             String argument = inputList.length > 1 ? inputList[1] : "";
 
-            switch (command) {
-            case "bye":
-                printToConsole("Goodbye!");
-                return;
-            case "list":
-                printToConsole(convertTaskListToString(tasks));
-                break;
-            case "done":
-                printToConsole(markTaskAsDone(tasks, Integer.parseInt(inputList[1])));
-                break;
-            case "todo":
-                printToConsole(addTaskToList(tasks, new ToDo(argument)));
-                break;
-            case "event":
-                String[] eventArguments = argument.split(" /at ");
-                printToConsole(addTaskToList(tasks, new Event(eventArguments[0], eventArguments[1])));
-                break;
-            case "deadline":
-                String[] deadlineArguments = argument.split(" /by ");
-                printToConsole(addTaskToList(tasks, new Deadline(deadlineArguments[0], deadlineArguments[1])));
-                break;
-            default:
-                printToConsole("unsupported command");
+            try {
+                switch (command) {
+                case "bye":
+                    printToConsole("Goodbye!");
+                    return;
+                case "list":
+                    printToConsole(convertTaskListToString(tasks));
+                    break;
+                case "done":
+                    printToConsole(markTaskAsDone(tasks, Integer.parseInt(inputList[1])));
+                    break;
+                case "todo":
+                    ToDo newTodo = ToDo.createNewToDo(argument);
+                    printToConsole(addTaskToList(tasks, newTodo));
+                    break;
+                case "event":
+                    Event newEvent = Event.createNewEvent(argument);
+                    printToConsole(addTaskToList(tasks, newEvent));
+                    break;
+                case "deadline":
+                    Deadline newDeadline = Deadline.createNewDeadline(argument);
+                    printToConsole(addTaskToList(tasks, newDeadline));
+                    break;
+                default:
+                    throw new DukeException("Invalid Command.");
+                }
+            } catch (DukeException e) {
+                printToConsole(e.getMessage());
             }
         }
 
