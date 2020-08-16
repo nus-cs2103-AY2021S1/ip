@@ -37,6 +37,8 @@ public class Duke {
                     handleEvent(command);
                 } else if (command.matches("done \\d+")) {
                     handleDone(command);
+                } else if (command.startsWith("delete")) {
+                    handleDelete(command);
                 } else {
                     handleUnknown();
                 }
@@ -45,6 +47,20 @@ public class Duke {
             }
             command = sc.nextLine();
         }
+    }
+
+    private static void handleDelete(String command) throws InvalidDeleteIndexException {
+        int index = Integer.parseInt(command.split(" ")[1]);
+        if (index > tasks.size() || index < 1) {
+            String response = String.format("No such task :(\nYou have %d tasks.", tasks.size());
+            throw new InvalidDeleteIndexException(response);
+        }
+
+        Task task = tasks.remove(index-1);
+        String response = String.format("Noted. I've removed this task:\n"
+                + "%s\n"
+                + "Now you have %d tasks in the list.", task, tasks.size());
+        printResponse(response);
     }
 
     private static void handleCommands() {
