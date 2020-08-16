@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.ArrayList;
+
 public class Duke {
     public static void main(String[] args) {
 
@@ -28,11 +29,11 @@ public class Duke {
             } else if (echo.equals("list")) {
                 System.out.println(line);
                 System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i< ListOfItems.size(); i++) {
-                int number = i+1;
-                System.out.println(Integer.toString(number) + ". " + ListOfItems.get(i));
+                for (int i = 0; i < ListOfItems.size(); i++) {
+                    int number = i + 1;
+                    System.out.println(Integer.toString(number) + ". " + ListOfItems.get(i));
 
-            }
+                }
                 System.out.println(line);
                 echo = sc.nextLine();
             } else {
@@ -49,7 +50,7 @@ public class Duke {
                     System.out.println(line);
                     echo = sc.nextLine();
                 } else if (arr[0].equals("todo")) {
-                ToDo item =  new ToDo(arr[1]);
+                    ToDo item = new ToDo(arr[1]);
                     ListOfItems.add(item);
                     System.out.println(line);
                     System.out.println("Got it. I've added this task:");
@@ -57,10 +58,10 @@ public class Duke {
                     System.out.println("Now you have " + ListOfItems.size() + " tasks in the list");
                     System.out.println(line);
                     echo = sc.nextLine();
-                }else if (arr[0].equals("deadline")) {
+                } else if (arr[0].equals("deadline")) {
                     String obtainDate = arr[1];
                     String arr2[] = obtainDate.split("/by", 2);
-                    String descrip =  arr2[0];
+                    String descrip = arr2[0];
                     String date = arr2[1];
                     Deadline item = new Deadline(descrip, date);
                     ListOfItems.add(item);
@@ -71,10 +72,10 @@ public class Duke {
                     System.out.println(line);
                     echo = sc.nextLine();
 
-                }else if (arr[0].equals("event")) {
+                } else if (arr[0].equals("event")) {
                     String obtainDate = arr[1];
                     String arr2[] = obtainDate.split("/at", 2);
-                    String descrip =  arr2[0];
+                    String descrip = arr2[0];
                     String date = arr2[1];
                     Event item = new Event(descrip, date);
                     ListOfItems.add(item);
@@ -97,14 +98,6 @@ public class Duke {
                 }
             }
         }
-
-
-
-
-
-
-
-
 
 
     }
