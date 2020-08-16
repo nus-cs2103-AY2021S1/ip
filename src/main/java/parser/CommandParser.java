@@ -28,7 +28,7 @@ public class CommandParser {
         return builder.toString();
     }
 
-    public static int getIndexOf(String[] arr, String target) {
+    private static int getIndexOf(String[] arr, String target) {
         return Arrays.asList(arr).indexOf(target);
     }
 
@@ -106,19 +106,19 @@ public class CommandParser {
     public Operation parse(String commandString, TaskStorage taskStorage) throws DukeException {
         String[] commands = commandString.split(" ");
         switch(commands[0]) {
-            case "bye":
+            case CommandType.BYE:
                 return createExitOp();
-            case "list":
+            case CommandType.LIST:
                 return createListOp(taskStorage);
-            case "done":
+            case CommandType.DONE:
                 return createDoneOp(commands, taskStorage);
-            case "todo" :
+            case CommandType.TODO:
                 return createTodoOp(commands, taskStorage);
-            case "deadline" :
+            case CommandType.DEADLINE:
                 return createDeadlineOp(commands, taskStorage);
-            case "event" :
+            case CommandType.EVENT:
                 return createEventOp(commands, taskStorage);
-            case "delete":
+            case CommandType.DELETE:
                 return createDeleteOp(commands, taskStorage);
             default:
                 throw new DukeException("This command is not recognised unfortunately.");
