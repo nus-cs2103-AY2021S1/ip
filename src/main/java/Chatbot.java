@@ -7,17 +7,26 @@ public class Chatbot {
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<String> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         System.out.println(indent + "What can I do for you delightful human?\n" + divider);
 
         loop: while(scanner.hasNext()) {
             String input = scanner.nextLine();
             System.out.println(divider);
 
-            if (input.equals("list")) {
+            if (input.startsWith("done")) {
+                int index = Integer.parseInt(input.split(" ")[1]);
+                Task curr = tasks.get(index - 1);
+                curr.markAsDone();
+                System.out.println(indent + "Good job! I've marked this task as done:");
+                System.out.println(indent + "  [" + curr.getStatusIcon() + "] " + curr.getDescription());
+                System.out.println(divider);
+            } else if (input.equals("list")) {
                 System.out.println(indent + "Here are your tasks for today:");
                 for (int i = 0; i < tasks.size(); i++) {
-                    System.out.println(indent + (i + 1) + ". " + tasks.get(i));
+                    Task curr = tasks.get(i);
+                    System.out.println(indent + (i + 1) + ".[" + curr.getStatusIcon() +
+                            "] " + curr.getDescription());
                 }
                 System.out.println(divider);
             } else if (input.equals("bye")) { // Termination statement
@@ -26,8 +35,9 @@ public class Chatbot {
                 System.out.println(divider);
                 break;
             } else { // Echo back user input
-                tasks.add(input);
-                System.out.println(indent + "Added: " + input);
+                Task curr = new Task(input);
+                tasks.add(curr);
+                System.out.println(indent + "Added: " + curr.getDescription());
                 System.out.println(divider);
             }
         }
