@@ -1,3 +1,4 @@
+------------------------
 Hello from
  ____        _        
 |  _ \ _   _| | _____ 
@@ -5,3 +6,35 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm Duke 
+What can I do for you?
+your input: 
+------------------------
+what is the name of the todo: 
+*added: clean my room
+------------------------
+your input: 
+------------------------
+what is the name of the task: 
+when is the due date: 
+*added: assignment
+------------------------
+your input: 
+------------------------
+what is the name of the event: 
+when does the event start: 
+when does the event end: 
+*added: soccer practice
+------------------------
+your input: 
+------------------------
+*Here are all your tasks
+1. [T][x] clean my room
+2. [D][x] assignment (due: tomorrow)
+3. [E][x] soccer practice (start: 4pm, end: 6pm)
+You have a total of 3 tasks
+------------------------
+your input: 
+------------------------
+Bye. Hope to see you again soon!
+------------------------
