@@ -5,14 +5,14 @@ import java.util.ArrayList;
 public class Duke {
 
     // Collection of user's tasks
-    static List<String> taskItems = new ArrayList<>();
+    static List<Task> taskItems = new ArrayList<>();
 
     static String replyFormatter(String reply) {
         String partition = "__________________________";
         return String.format(partition + "\n%s\n" + partition, reply);
     }
 
-    static String listFormatter(List<String> ls) {
+    static String listFormatter(List<Task> ls) {
         String formattedListString = "";
         for (int i = 0; i < ls.size(); i ++) {
             formattedListString+= String.format("%d. %s\n", i + 1, ls.get(i));
@@ -41,10 +41,14 @@ public class Duke {
             if (reply.equals("bye")) {
                 printReply(replyFormatter(reply));
                 break;
-            } else if (reply.equals("list")) {
+            } else if (reply.startsWith("done ")) {
+                Task task = taskItems.get(Integer.parseInt(reply.substring(5,reply.length())) - 1);
+                task.markDone();
+                printReply(replyFormatter("Nice! I've marked this task as done:\n" +  task.toString()));
+            } else if (reply.equals("list")) { // Show all in list
                 printReply(replyFormatter(listFormatter(taskItems)));
-            } else {
-                taskItems.add(reply);
+            } else { // Add to list
+                taskItems.add(new Task(reply));
                 printReply(replyFormatter(String.format("added: %s", reply)));
             }
         }
