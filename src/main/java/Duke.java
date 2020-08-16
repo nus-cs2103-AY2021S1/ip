@@ -75,36 +75,42 @@ public class Duke {
 
         while (sc.hasNextLine()) {
             String[] inputList = sc.nextLine().split(" ", 2);
-            String command = inputList[0];
             String argument = inputList.length > 1 ? inputList[1] : "";
+            Command command;
+            
+            try {
+                command = Command.valueOf(inputList[0].toUpperCase());
+            } catch (IllegalArgumentException e) {
+                command = Command.INVALID;
+            }
 
             try {
                 switch (command) {
-                case "bye":
+                case BYE:
                     printToConsole("Goodbye!");
                     return;
-                case "list":
+                case LIST:
                     printToConsole(convertTaskListToString(tasks));
                     break;
-                case "done":
+                case DONE:
                     printToConsole(markTaskAsDone(tasks, Integer.parseInt(inputList[1])));
                     break;
-                case "delete":
+                case DELETE:
                     printToConsole(deleteTask(tasks, Integer.parseInt(inputList[1])));
                     break;
-                case "todo":
+                case TODO:
                     ToDo newTodo = ToDo.createNewToDo(argument);
                     printToConsole(addTaskToList(tasks, newTodo));
                     break;
-                case "event":
+                case EVENT:
                     Event newEvent = Event.createNewEvent(argument);
                     printToConsole(addTaskToList(tasks, newEvent));
                     break;
-                case "deadline":
+                case DEADLINE:
                     Deadline newDeadline = Deadline.createNewDeadline(argument);
                     printToConsole(addTaskToList(tasks, newDeadline));
                     break;
-                default:
+                case INVALID:
                     throw new DukeException("Invalid Command.");
                 }
             } catch (DukeException e) {
