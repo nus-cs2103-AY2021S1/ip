@@ -1,16 +1,18 @@
 todo read book
+bad input
+done 3
 deadline return book /June 6th
 event project meeting /Aug 6th 2-4pm
-todo join sports club
-done 1
-done 4
-todo borrow book
+event birthday party /
+deadline assignment /
 list
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+done1
+done
+todo
+event
+deadline
 done 2
+done s3
 done 3
-done 5
-done 6
-done 7
+list
 bye

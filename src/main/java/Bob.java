@@ -42,7 +42,7 @@ public class Bob {
     /*================ Private methods ================*/
 
     /*---- Task methods ---- */
-    
+
     // Generates message after adding task
     private String afterAdd(Task task) {
         return "Yes boss, I have added this task to your list:\n" + "  " + task + "\n" + "Currently you have " + this.list.size() + " tasks in your list.";
@@ -92,7 +92,10 @@ public class Bob {
     }
 
     // Marks task as done
-    private String markTaskDone(int taskNum) {
+    private String markTaskDone(int taskNum) throws BobListIndexOutOfBoundsException{
+        if (taskNum > list.size() || taskNum <= 0) {
+            throw new BobListIndexOutOfBoundsException(list.size(), taskNum);
+        }
         int index = taskNum - 1;
         Task task = list.get(index).markDone();
         list.set(index, task);
@@ -115,27 +118,41 @@ public class Bob {
     }
 
     // Executes action based on command with need for user input
-    private Bob execute(Command command, String input) {
+    private Bob execute(Command command, String input) throws BobListIndexOutOfBoundsException, BobEmptyDateException, BobInvalidNumberException {
         switch (command) {
             case TODO:
                 String outputTodo = addTodo(input.substring(5));
                 return new Bob(outputTodo, this.list);
             case DEADLINE:
                 String[] split1 = input.split("/");
+                if (split1.length == 1) {
+                    throw new BobEmptyDateException();
+                }
                 String description1 = split1[0].substring(9);
                 String by1 = split1[1];
                 String outputDeadline = addDeadline(description1, by1);
                 return new Bob(outputDeadline, this.list);
             case EVENT:
                 String[] split2 = input.split("/");
+                if (split2.length == 1) {
+                    throw new BobEmptyDateException();
+                }
                 String description2 = split2[0].substring(6);
                 String by2 = split2[1];
                 String outputEvent = addEvent(description2, by2);
                 return new Bob(outputEvent, this.list);
             case DONE:
-                int taskNumber = Integer.parseInt(input.substring(5,6));
-                String out = markTaskDone(taskNumber);
-                return new Bob(out, this.list);
+                try {
+                    int taskNumber = Integer.parseInt(input.substring(4).replaceAll("\\s+", ""));
+                    String out = markTaskDone(taskNumber);
+                    return new Bob(out, this.list);
+                } catch (BobListIndexOutOfBoundsException e){
+                    throw e;
+                } catch (NumberFormatException e) {
+                    throw new BobInvalidNumberException();
+                }
+
+
             default:
                 return this;
         }
@@ -162,22 +179,41 @@ public class Bob {
 
 
     // Handles user input which decides which command Bob executes
-    public Bob nextCommand(String input) {
-        if (input.equals("bye")) {
-            return execute(Command.EXIT);
-        } else if (input.equals("list")) {
-            return execute(Command.LIST);
-        } else if (input.length() == 6 && input.substring(0,4).equals("done")) {
-            return execute(Command.DONE, input);
-        } else {
-            if (input.substring(0,5).equals("event")) {
+    public Bob nextCommand(String input) throws BobInvalidCommandException,
+            BobEmptyTaskException, BobListIndexOutOfBoundsException, BobEmptyDateException, BobInvalidNumberException {
+        try {
+            if (input.equals("bye")) {
+                return execute(Command.EXIT);
+            } else if (input.equals("list")) {
+                return execute(Command.LIST);
+            } else if (input.length() >= 4 && input.substring(0, 4).equals("done")) {
+                return execute(Command.DONE, input);
+            } else if (input.length() >= 4 && input.substring(0, 4).equals("todo")) {
+                if (input.substring(4).replaceAll("\\s+", "").length() == 0) {
+                    throw new BobEmptyTaskException();
+                }
+                return execute(Command.TODO, input);
+            } else if (input.length() >= 5 && input.substring(0, 5).equals("event")) {
+                if (input.substring(5).replaceAll("\\s+", "").length() == 0) {
+                    throw new BobEmptyTaskException();
+                }
                 return execute(Command.EVENT, input);
-            } else if (input.substring(0,8).equals("deadline")) {
+            } else if (input.length() >= 8 && input.substring(0, 8).equals("deadline")) {
+                if (input.substring(8).replaceAll("\\s+", "").length() == 0) {
+                    throw new BobEmptyTaskException();
+                }
                 return execute(Command.DEADLINE, input);
             } else {
-                return execute(Command.TODO, input);
+                throw new BobInvalidCommandException();
             }
+        } catch (BobListIndexOutOfBoundsException e){
+            throw e;
+        } catch (BobEmptyDateException e) {
+            throw e;
+        } catch (BobInvalidNumberException e) {
+            throw e;
         }
+
     }
 
     public static void main(String[] args) {
@@ -189,9 +225,21 @@ public class Bob {
         Scanner sc = new Scanner(System.in);
 
         while (!chatbot.hasExited()) {
-            String userInput = sc.nextLine();
-            chatbot = chatbot.nextCommand(userInput);
-            System.out.println(chatbot.getOutput());
+            try {
+                String userInput = sc.nextLine();
+                chatbot = chatbot.nextCommand(userInput);
+                System.out.println(chatbot.getOutput());
+            } catch (BobInvalidCommandException e) {
+                System.out.println(e.toString());
+            } catch (BobEmptyTaskException e) {
+                System.out.println(e.toString());
+            } catch (BobListIndexOutOfBoundsException e) {
+                System.out.println(e.toString());
+            } catch (BobEmptyDateException e) {
+                System.out.println(e.toString());
+            } catch (BobInvalidNumberException e) {
+                System.out.println(e.toString());
+            }
         }
 
         sc.close();
