@@ -1,6 +1,8 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.function.BiConsumer;
 
 public class Duke {
     public static void main(String[] args) {
@@ -18,17 +20,26 @@ public class Duke {
         System.out.println(greeting);
     }
 
+    public static HashMap<String, BiConsumer<String, List<Task>>> setUp() {
+        HashMap<String, BiConsumer<String, List<Task>>> map = new HashMap<>();
+
+        map.put("list", (command, list) -> listCommand(list));
+        map.put("done", (command, list) -> doneCommand(list, command));
+
+        return map;
+    }
+
     public static void interact(Scanner sc) {
+        HashMap<String, BiConsumer<String, List<Task>>> map = setUp();
         String command = sc.nextLine();
         List<Task> list = new ArrayList<>();
 
         while (!command.equals("bye")) {
-            if (command.equals("list")) {
-                listCommand(list);
-            } else if (command.substring(0, 5).equals("done ")) {
-                doneCommand(list, command);
-            } else {
+            BiConsumer<String, List<Task>> action =  map.get(command.replaceAll(" .*", ""));
+            if (action == null) {
                 addCommand(list, command);
+            } else {
+                action.accept(command, list);
             }
             command = sc.nextLine();
         }
