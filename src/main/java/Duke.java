@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public class Duke {
     private static final String LINES = "____________________\n";
+    private static List<Task> tasks = new ArrayList<>(100);
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        List<Task> tasks = new ArrayList<>(100);
         String farewell = "Sad to see you go!\n";
 
         System.out.println(LINES
@@ -22,26 +22,23 @@ public class Duke {
                     System.out.println(LINES + farewell + LINES);
                     break;
                 } else if (input.equals("list")) {
-                    list(tasks);
+                    list();
                 } else if (input.startsWith("done")) {
                     int index = Integer.parseInt(input.substring(5)) - 1;
-                    completeTask(tasks, index);
+                    completeTask(index);
+                } else if (input.startsWith("delete")) {
+                    int index = Integer.parseInt(input.substring(7)) - 1;
+                    deleteTask(index);
                 } else {
-                    addTask(tasks, input);
+                    addTask(input);
                 }
-            } catch (InvalidCommandException e) {
-                System.out.println(e);
-            } catch (InvalidIndexException e) {
-                System.out.println(e);
-            } catch (EmptyTaskException e) {
-                System.out.println(e);
-            } catch (MissingDateException e) {
+            } catch (InvalidCommandException | MissingDateException | InvalidIndexException | EmptyTaskException e) {
                 System.out.println(e);
             }
         }
     }
 
-    private static void list(List<Task> tasks) {
+    private static void list() {
         System.out.println(LINES + "Here are the tasks in your list:");
         int number = 1;
         for (Task task : tasks) {
@@ -50,7 +47,7 @@ public class Duke {
         System.out.println(LINES);
     }
 
-    private static void completeTask(List<Task> tasks, int index) throws InvalidIndexException {
+    private static void completeTask(int index) throws InvalidIndexException {
         if (index < 0 || index >= tasks.size()) {
             throw new InvalidIndexException();
         }
@@ -61,22 +58,18 @@ public class Duke {
                 + "\n" + LINES);
     }
 
-    private static void addTask(List<Task> tasks, String task)
+    private static void addTask(String task)
             throws InvalidCommandException, EmptyTaskException, MissingDateException {
-        Task newTask = null;
+        Task newTask;
 
-        try {
-            if (task.startsWith("todo")) {
-                newTask = ToDo.create(task);
-            } else if (task.startsWith("deadline")) {
-                newTask = Deadline.create(task);
-            } else if (task.startsWith("event")) {
-                newTask = Event.create(task);
-            } else {
-                throw new InvalidCommandException();
-            }
-        } catch (EmptyTaskException | MissingDateException e) {
-            throw e;
+        if (task.startsWith("todo")) {
+            newTask = ToDo.create(task);
+        } else if (task.startsWith("deadline")) {
+            newTask = Deadline.create(task);
+        } else if (task.startsWith("event")) {
+            newTask = Event.create(task);
+        } else {
+            throw new InvalidCommandException();
         }
 
         tasks.add(newTask);
@@ -84,6 +77,18 @@ public class Duke {
                 "Got it, I have added this task:\n"
                 + newTask
                 + "\nNow you have " + tasks.size() + " task(s) in this list\n"
+                + LINES);
+    }
+
+    private static void deleteTask(int index) throws InvalidIndexException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new InvalidIndexException();
+        }
+        Task removed = tasks.remove(index);
+        System.out.println(LINES
+                + "Noted, I have removed the below task:\n"
+                + removed
+                + "\nNow you have " + tasks.size() + " task(s) left\n"
                 + LINES);
     }
 }

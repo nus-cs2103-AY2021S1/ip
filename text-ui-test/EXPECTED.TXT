@@ -87,6 +87,27 @@ Here are the tasks in your list:
 ____________________
 
 ____________________
+Noted, I have removed the below task:
+[D][✓] Complete assignment (by: Sunday)
+Now you have 2 task(s) left
+____________________
+
+____________________
+Noted, I have removed the below task:
+[T][✘] Buy eggs
+Now you have 1 task(s) left
+____________________
+
+____________________
+Here are the tasks in your list:
+1.[E][✘] Attend seminar (at: 6 Jun 21)
+____________________
+
+____________________
+Fool, there is no task associated with this number!
+____________________
+
+____________________
 Sad to see you go!
 ____________________
 
