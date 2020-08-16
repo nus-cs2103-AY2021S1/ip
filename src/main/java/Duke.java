@@ -17,26 +17,67 @@ public class Duke {
         return listOfTasks;
     }
 
+    private static Task getTask(String command, Scanner input) {
+        String[] commandArray = input.nextLine().split(" ");
+        String description = "";
+        String timing = null;
+
+        for (int i = 0; i < commandArray.length; i++) {
+            if (commandArray[i].equals("/by")) {
+                timing = getTiming(commandArray, i + 1);
+                break;
+            } else if (commandArray[i].equals("/at")) {
+                timing = getTiming(commandArray, i + 1);
+                break;
+            }
+            description = description + " " + commandArray[i];
+        }
+
+        switch (command) {
+            case "todo":
+                return new Todo(description);
+            case "deadline":
+                return new Deadline(description, timing);
+            case "event":
+                return new Event(description, timing);
+            default:
+                return new Task(description);
+        }
+    }
+
+    private static String getTiming(String[] commandArray, int index) {
+        String timing = "";
+        for (int i = index; i < commandArray.length; i++) {
+            if (i == index) {
+                timing = commandArray[i];
+            } else {
+                timing = timing + " " + commandArray[i];
+            }
+        }
+        return timing;
+    }
+
     public static void main(String[] args) {
         System.out.println(formatReply("Hello! I'm Duke\nWhat can I do for you?"));
         ArrayList<Task> taskList = new ArrayList<>();
         Scanner input = new Scanner(System.in);
         while (true) {
-            String command = input.nextLine();
+            String command = input.next();
             if (command.equals("bye")) {
                 break;
             } else if (command.equals("list")) {
                 System.out.println(formatReply(listTasks(taskList)));
-            } else if (command.split( " ")[0].equals("done")) {
-                Task task = taskList.get(Integer.parseInt(command.split(" ")[1]) - 1);
+            } else if (command.equals("done")) {
+                Task task = taskList.get(input.nextInt() - 1);
                 task.completeTask();
                 ArrayList<Task> temp = new ArrayList<>();
                 temp.add(task);
                 System.out.println(formatReply("This task has been marked as done.\n" + listTasks(temp)));
             }
             else {
-                taskList.add(new Task(command));
-                System.out.println(formatReply("added: " + command));
+                Task newTask = getTask(command, input);
+                taskList.add(newTask);
+                System.out.println(formatReply("added: " + newTask.getTaskDescription()));
             }
         }
         System.out.println(formatReply("Bye. Hope to see you again soon!"));
