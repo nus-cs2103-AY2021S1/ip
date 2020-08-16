@@ -184,23 +184,35 @@ public class Duke {
     }
 
     public static void eventCommand(List<Task> list, String command) {
-        int spaceIndex = command.indexOf(" ");
-        int slashIndex = command.indexOf("/");
-        String description = command.substring(spaceIndex + 1, slashIndex - 1);
-        String time = command.substring(slashIndex + 4);
+        try {
+            int spaceIndex = command.indexOf(" ");
+            int slashIndex = command.indexOf("/at");
 
-        Task task = new EventTask(description, time);
-        list.add(task);
+            if (spaceIndex == -1) {
+                throw new EmptyActionException(); // "event"
+            } else if (slashIndex == -1 || spaceIndex + 1 == slashIndex || slashIndex + 4 > command.length()) {
+                throw new InvalidActionException(); // "event project submission", "event /at 1-2pm", "deadline meeting /at"
+            } else {
+                String description = command.substring(spaceIndex + 1, slashIndex - 1);
+                String time = command.substring(slashIndex + 4);
 
-        System.out.println("    ____________________________________________________________\n"
-                + "     Got it. I've added this task:\n"
-                + "     "
-                + task
-                + "\n"
-                + "     Now you have "
-                + list.size()
-                + " task(s) in the list.\n"
-                + "    ____________________________________________________________\n"
-        );
+                Task task = new EventTask(description, time);
+                list.add(task);
+
+                System.out.println("    ____________________________________________________________\n"
+                        + "     Got it. I've added this task:\n"
+                        + "     "
+                        + task
+                        + "\n"
+                        + "     Now you have "
+                        + list.size()
+                        + " task(s) in the list.\n"
+                        + "    ____________________________________________________________\n"
+                );
+            }
+
+        } catch (DukeException e) {
+            System.out.println(e);
+        }
     }
 }
