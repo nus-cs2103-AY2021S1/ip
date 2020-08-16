@@ -1,0 +1,9 @@
+list
+todo sleep
+list
+done 1
+list
+deadline cs2103 ip level 6 /by Thu 20 Aug 23:59
+event some other event /at TBD
+list
+bye
