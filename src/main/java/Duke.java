@@ -52,8 +52,8 @@ public class Duke {
 
             } else if (firstWord.equals("bye")) {
                 sc.close();
-                System.out.println("time to say goodbye :( \n" +
-                                    "have a great day!");
+                System.out.println("Time to say goodbye :( \n" +
+                                    "Have a great day!");
                 System.exit(0);
                 return;
 
@@ -70,7 +70,8 @@ public class Duke {
                 } else if (firstWord.equals("delete")) {
                     processDelete(command);
                 } else {
-                    throw new WrongInputException();
+                    WrongInputException wrong = new WrongInputException();
+                    System.out.println(wrong.getMessage());
                 }
             }
         }
@@ -85,14 +86,15 @@ public class Duke {
         }
     }
 
-    public void processDelete(String command) throws DeleteException {
+    public void processDelete(String command) {
         try {
             String theRest = removeFirstWord(command);
             Integer taskNum = Integer.parseInt(theRest);
             int index = taskNum - 1;
             deleteTask(index);
         } catch (DukeException d) {
-            throw new DeleteException();
+            DeleteException delete = new DeleteException();
+            System.out.println(delete.getMessage());
         }
     }
     public void deleteTask(int taskNum) {
@@ -104,24 +106,26 @@ public class Duke {
 
     }
 
-    public void processDone(String command) throws DoneException {
+    public void processDone(String command) {
         try {
             String theRest = removeFirstWord(command);
             Integer taskNum = Integer.parseInt(theRest);
             System.out.println(taskNum);
             markTaskAsDone(taskNum);
         } catch (DukeException d) {
-            throw new DoneException();
+            DoneException done = new DoneException();
+            System.out.println(done.getMessage());
         }
     }
 
-    public void processTodo(String command) throws TodoException {
+    public void processTodo(String command) {
         try {
             String theRest = removeFirstWord(command);
             Todo todo = new Todo(theRest);
             saveToList(todo);
         } catch (DukeException e) {
-            throw new TodoException();
+            TodoException t = new TodoException();
+            System.out.println(t.getMessage());
         }
     }
 
@@ -136,7 +140,8 @@ public class Duke {
             Deadline deadline = new Deadline(task, date);
             saveToList(deadline);
         } catch (DukeException d) {
-            throw new DeadlineException();
+            DeadlineException dead = new DeadlineException();
+            System.out.println(dead.getMessage());
         }
     }
 
@@ -150,7 +155,8 @@ public class Duke {
             Event event = new Event(eventDesc, eventDate);
             saveToList(event);
         } catch (DukeException d) {
-            throw new EventException();
+            EventException event = new EventException();
+            System.out.println(event.getMessage());
         }
     }
 
