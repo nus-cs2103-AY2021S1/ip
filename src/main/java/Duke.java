@@ -32,21 +32,18 @@ public class Duke {
         int itemsIndex = 0;
 
         while (!sc.hasNext("bye")) {
-            String newItem = sc.nextLine();
-            String[] split = newItem.split(" ");
-
+            String command = sc.next();
 
             System.out.println("    ____________________________________________________________");
-            if (newItem.equals("list")) {
+            if (command.equals("list")) {
                 System.out.println("     Here are the tasks in your list:");
                 for (int i = 0; i < itemsIndex; i++) {
                     System.out.println("     " + (i + 1) + ". " + tasks[i]);
                 }
-            } else if (isDoneString(newItem)) {
+            } else if (command.equals("done")) {
                 //Need to handle out of bounds number.
-                String itemNumber = newItem.substring(5, newItem.length());
-                int itemIndex = Integer.valueOf((itemNumber)) - 1;
-                Task selectedTask = tasks[itemIndex];
+                int itemNumber = sc.nextInt();
+                Task selectedTask = tasks[itemNumber - 1];
                 selectedTask.setDone();
                 System.out.println("     Nice! I've marked this task as done:");
                 System.out.println("       " + selectedTask);
@@ -54,21 +51,24 @@ public class Duke {
             } else {
                 System.out.println("     Got it. I've added this task:");
                 Task newTask = null;
-                if (split[0].equals("todo")) {
-                    newTask = new ToDo(newItem.substring(5, newItem.length()));
-                } else if (split[0].equals("deadline")) {
-                    String strippedFront = newItem.substring(9, newItem.length());
-                    String[] splitParts = strippedFront.split((" /by "));
-                    newTask = new Deadline(splitParts[0], splitParts[1]);
-                } else if (split[0].equals("event")) {
-                    String strippedFront = newItem.substring(6, newItem.length());
-                    String[] splitParts = strippedFront.split((" /at "));
-                    newTask = new Event(splitParts[0], splitParts[1]);
+                if (command.equals("todo")) {
+                    newTask = new ToDo(sc.nextLine().stripLeading());
+                } else if (command.equals("deadline")) {
+                    String[] splitParts = sc.nextLine().split((" /by "));
+                    newTask = new Deadline(splitParts[0].stripLeading(), splitParts[1]);
+                } else if (command.equals("event")) {
+                    String[] splitParts = sc.nextLine().split((" /at "));
+                    newTask = new Event(splitParts[0].stripLeading(), splitParts[1]);
                 }
-                tasks[itemsIndex] = newTask;
-                itemsIndex++;
-                System.out.println("       " + newTask);
-                System.out.println("     Now you have " + itemsIndex +" tasks in the list.");
+                if (newTask != null) {
+                    tasks[itemsIndex] = newTask;
+                    itemsIndex++;
+                    System.out.println("       " + newTask);
+                    System.out.println("     Now you have " + itemsIndex +" tasks in the list.");
+                } else {
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+
             }
             System.out.println("    ____________________________________________________________");
             System.out.println("");
@@ -79,17 +79,4 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
     }
 
-    private static boolean isDoneString(String s) {
-        String[] split = s.split(" ");
-        if (split.length != 2) {
-            return false;
-        } else {
-            for (char c : split[1].toCharArray()) {
-                if (!Character.isDigit(c)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-    }
 }
