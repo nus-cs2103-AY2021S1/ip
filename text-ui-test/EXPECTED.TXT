@@ -8,35 +8,105 @@ Hello there, my name is TaskBot.
 How may I be of assistance today?
 ----------------------------------------------
 I have added a Deadline:
-[?] Deadline: return book (by: Sunday)
+[✗] Deadline: return book (by: Sunday)
 
 You now have 1 task(s) in the list
 ----------------------------------------------
 
 ----------------------------------------------
 I have added an Event:
-[?] Event: project meeting (at: 3:30 pm)
+[✗] Event: project meeting (at: 3:30 pm)
 
 You now have 2 task(s) in the list
 ----------------------------------------------
 
 ----------------------------------------------
 I have added a Todo:
-[?] Todo: buy bread
+[✗] Todo: buy bread
 
 You now have 3 task(s) in the list
 ----------------------------------------------
 
 ----------------------------------------------
+I have added a Todo:
+[✗] Todo: buy milk
+
+You now have 4 task(s) in the list
+----------------------------------------------
+
+----------------------------------------------
 These are the following task(s) to complete:
-1. [?] Deadline: return book (by: Sunday)
+1. [✗] Deadline: return book (by: Sunday)
 
-2. [?] Event: project meeting (at: 3:30 pm)
+2. [✗] Event: project meeting (at: 3:30 pm)
 
-3. [?] Todo: buy bread
+3. [✗] Todo: buy bread
 
+4. [✗] Todo: buy milk
+
+----------------------------------------------
+
+----------------------------------------------
+Wrong format for deadline. Please ensure that you provide a description and time, delimited by /by
+----------------------------------------------
+
+----------------------------------------------
+The description of a todo cannot be empty. Please input a valid description.
+----------------------------------------------
+
+----------------------------------------------
+Understood. The following task is now marked as done:
+    [✓] Event: project meeting (at: 3:30 pm)
+
+----------------------------------------------
+
+----------------------------------------------
+Understood. The following task is now marked as done:
+    [✓] Todo: buy bread
+
+----------------------------------------------
+
+----------------------------------------------
+You have specified an index not within the ranges of the list. Please try again.
+----------------------------------------------
+
+----------------------------------------------
+Understood. The following task has been deleted.
+    [✗] Deadline: return book (by: Sunday)
+
+You now have 3 task(s) in the list
+----------------------------------------------
+
+----------------------------------------------
+Understood. The following task has been deleted.
+    [✓] Event: project meeting (at: 3:30 pm)
+
+You now have 2 task(s) in the list
+----------------------------------------------
+
+----------------------------------------------
+You have specified an index not within the ranges of the list. Please try again.
+----------------------------------------------
+
+----------------------------------------------
+Understood. The following task has been deleted.
+    [✓] Todo: buy bread
+
+You now have 1 task(s) in the list
+----------------------------------------------
+
+----------------------------------------------
+Understood. The following task has been deleted.
+    [✗] Todo: buy milk
+
+You now have 0 task(s) in the list
+----------------------------------------------
+
+----------------------------------------------
+You currently have no tasks pending.
 ----------------------------------------------
 
 ----------------------------------------------
 Goodbye, I await your next visit.
 ----------------------------------------------
+

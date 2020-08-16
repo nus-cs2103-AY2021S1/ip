@@ -1,5 +1,17 @@
 deadline return book /by Sunday
 event project meeting /at 3:30 pm
 todo buy bread
+todo buy milk
 list
+deadline orange
+todo
+done 2
+done 3
+done 10
+delete 1
+delete 1
+delete 90
+delete 1
+delete 1
+delete 5
 bye
