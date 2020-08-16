@@ -1,4 +1,10 @@
 public class Duke {
+
+    public String echo(){
+        return "";
+    }
+
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
