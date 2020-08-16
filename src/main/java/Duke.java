@@ -28,13 +28,12 @@ public class Duke {
         Tasks tasks = new Tasks();
         String input = s.nextLine();
         while (!input.equals("bye")) {
-            String[] inputArray = input.split(" ");
-            if (input.equals("list")) {
-                tasks.listTasks();
-            } else if (inputArray[0].equals("done")) {
-                tasks.markDone(Integer.parseInt(inputArray[1]));
-            } else {
+            try {
                 tasks.addTask(input);
+            } catch (DukeException e) {
+                System.out.println("\t___________________________________________________________________________");
+                System.out.println("\t " + e.getMessage());
+                System.out.println("\t___________________________________________________________________________\n");
             }
             input = s.nextLine();
         }
@@ -43,7 +42,7 @@ public class Duke {
 
     static void bye() {
         System.out.println("\t___________________________________________________________________________");
-        System.out.println("\t" + "\tBye. Hope to see you again soon");
+        System.out.println("\t Bye. Hope to see you again soon");
         System.out.println("\t___________________________________________________________________________\n");
     }
 }
