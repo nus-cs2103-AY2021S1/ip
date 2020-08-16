@@ -3,13 +3,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private String[] listOfToDos;
+    private Task[] listOfToDos;
     private String lines = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.";
     private int countToDos;
 
     Duke() {
         countToDos = 0;
-        listOfToDos = new String[100];
+        listOfToDos = new Task[100];
         String welcome = "\n Hello! I'm Yuki *Woof*\n What can I do for you? *Woof*\n";
         System.out.println(lines + welcome + lines);
     }
@@ -20,25 +20,38 @@ public class Duke {
     }
 
     public void addToDos(String message) {
-        listOfToDos[countToDos] = message;
-        countToDos += 1;
-        System.out.println(lines + "\n I have added: " + message + " *Woof*\n" + lines);
+        if (message.length() == 0) {
+            System.out.println(lines + "\n Woof!! The description cannot be empty!!\n"
+                    + lines);
+        } else {
+            listOfToDos[countToDos] = new Task(countToDos + 1, message);
+            countToDos += 1;
+            System.out.println(lines + "\n I have added: " + message + " *Woof*\n" + lines);
+        }
+    }
+
+    public void markAsDone(int ind) {
+        if (listOfToDos[ind] != null) {
+            listOfToDos[ind].markAsDone();
+        } else {
+            int taskInd = ind + 1;
+            System.out.println(lines + "\n There's no task " + taskInd
+                    + " in your list *Woof*\n" + lines);
+        }
     }
 
     public void printToDos() {
-        int count = 0;
         System.out.println(lines);
-        for (String message : listOfToDos) {
-            if (countToDos == 0) {
-                System.out.println(" You have no task to complete! *WOOF*\n" + lines);
-                break;
-            } else {
+        if (countToDos == 0) {
+            System.out.println(" You have no task to complete! *WOOF*\n" + lines);
+        } else {
+            System.out.println(" Here are the tasks in your list *Woof*:");
+            for (int count=0; count <= 100; count++) {
                 if (listOfToDos[count] == null) {
                     System.out.println(lines);
                     break;
                 } else {
-                    count += 1;
-                    System.out.println(" " + count + ". " + message);
+                    System.out.println("  " + listOfToDos[count]);
                 }
             }
         }
@@ -51,12 +64,16 @@ public class Duke {
 
         while (input.hasNextLine()) {
             String query = input.nextLine();
-            if (query.equalsIgnoreCase("bye")) {
+            String lowerCaseQuery = query.toLowerCase();
+            if (lowerCaseQuery.equals("bye")) {
                 duke.goodBye();
                 input.close();
                 break;
-            } else if (query.equalsIgnoreCase("list")) {
+            } else if (lowerCaseQuery.equals("list")) {
                 duke.printToDos();
+            } else if (lowerCaseQuery.matches("done (.*)")) {
+                int taskInd = Integer.parseInt(query.substring(5));
+                duke.markAsDone(taskInd - 1);
             } else {
                 duke.addToDos(query);
             }
