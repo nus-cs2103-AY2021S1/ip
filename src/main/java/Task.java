@@ -6,7 +6,7 @@ public class Task {
         this.taskName = taskName;
         this.isDone = false;
     }
-    
+
     public void setDone() {
         isDone = true;
     }
