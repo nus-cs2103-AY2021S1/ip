@@ -5,6 +5,6 @@ public class Todo extends Task {
 
     @Override
     public String taskRow() {
-        return "[T]" + " " + getStatusIcon() + " " + this;
+        return "[T]" + super.taskRow();
     }
 }

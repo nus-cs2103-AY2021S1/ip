@@ -1,5 +1,6 @@
 public class Deadline extends Task {
-    String deadlineTime;
+    private String deadlineTime;
+
     public Deadline(String description, String date) {
         super(description);
         this.deadlineTime = date;
@@ -7,7 +8,6 @@ public class Deadline extends Task {
 
     @Override
     public String taskRow() {
-        return "[D]" + " " + getStatusIcon() + " " + this +
-                "(by: " + deadlineTime + ")";
+        return "[D]" + super.taskRow() + "(by: " + deadlineTime + ")";
     }
 }

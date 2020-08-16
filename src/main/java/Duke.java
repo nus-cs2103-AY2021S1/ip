@@ -25,25 +25,32 @@ public class Duke {
         System.out.println(bye);
     }
 
-    public void echoDuke() {
-        Scanner sc = new Scanner(System.in);
-        String cmd = sc.nextLine();
-        while (!cmd.toLowerCase().equals("bye")) {
-            System.out.println(cmd);
-            cmd = sc.nextLine();
+    private void addTask(String input) {
+        //Here, we do the classification & processing of tasks: to-do/deadline/event
+        //input is from String from user
+        String[] content = input.split(" ");
+        Task tsk = null;
+        if (content[0].toLowerCase().equals("todo")) {
+            tsk = new Todo(input.replaceFirst(content[0] + " ", ""));
+        } else if (content[0].toLowerCase().equals("deadline")) {
+            String[] splitBySlash = input.split("/");
+            tsk = new Deadline(splitBySlash[0].replaceFirst(content[0] + " ", ""),
+                    splitBySlash[1].replaceFirst("by ", ""));
+        } else {
+            String[] splitBySlash = input.split("/");
+            tsk = new Event(splitBySlash[0].replaceFirst(content[0] + " ", ""),
+                    splitBySlash[1].replaceFirst("at ", ""));
         }
-    }
-
-    private void addTask(Task tsk) {
         taskList.add(tsk);
-        System.out.println("Lao Duke has added this task for you: " + tsk);
+        System.out.println("Lao Duke has added this task for you:\n" + tsk.taskRow());
+        System.out.println("You have " + taskList.size() + " task(s) in your list!");
     }
 
     private void listTask() {
         System.out.println("Lao Duke not so blur like you. Tsk. I got remember your tasks one hor.");
         for (int i = 0; i < taskList.size(); i++) {
             Task tsk = taskList.get(i);
-            System.out.println("Task " + (i + 1) + ": " + tsk.getStatusIcon() + " " + tsk);
+            System.out.println("Task " + (i + 1) + ": "  + tsk.taskRow());
         }
     }
 
@@ -54,11 +61,11 @@ public class Duke {
             Task tsk = taskList.get(taskNum - 1);
             tsk.markAsDone();
             System.out.println("Wah very good! I am proud that you got do your task!");
-            System.out.println(tsk.getStatusIcon() + " " + tsk);
+            System.out.println(tsk.taskRow());
         }
     }
 
-    public void processTask() {
+    public void process() {
         greet();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
@@ -75,11 +82,11 @@ public class Duke {
                         markDone(taskNum);
                     } catch (NumberFormatException e) {
                         System.out.println("Eh I not so smart one la..." +
-                                "Can you format your done task properly or not? One spacing only leh!");
+                                "Can you format your done task properly or not?");
                     }
                 } else {
                     //simply add tasks
-                    addTask(new Task(input));
+                    addTask(input);
                 }
             }
             input = sc.nextLine();
@@ -89,6 +96,6 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke duke = new Duke();
-        duke.processTask();
+        duke.process();
     }
 }
