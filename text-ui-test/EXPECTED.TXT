@@ -28,4 +28,15 @@ Here's all your tasks to complete:
 2. [D][✘] return book (by: Sunday)
 3. [E][✘] project meeting (at: Mon 2-4pm)
 Time to get to work! :D
+Oh no! This can't be DONE! (The description of done can't be empty!)
+Oh no! That number is not on the list! D:
+Oh no! Type only a number for the description!
+Oh no! What are you trying TODO? (The description of todo can't be empty!)
+Oh no! This LINE has made me DEAD! (The description of deadline can't be empty!)
+Oh no! Remember to write /by (time) after your task!
+Oh no! Remember to write /by (time) after your task!
+Oh no! EVENTually you'll get it right! (The description of event can't be empty!)
+Oh no! Remember to write /at (time) after your task!
+Oh no! Remember to write /at (time) after your task!
+Sorry! I don't understand that command. Please try again!
 Bye! Let's talk again soon!

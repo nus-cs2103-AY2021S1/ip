@@ -4,4 +4,15 @@ event project meeting /at Mon 2-4pm
 list
 done 1
 list
+done
+done 9
+done u
+todo
+deadline
+deadline return book
+deadline return book /by
+event
+event project meeting
+event project meeting /at
+hello
 bye
