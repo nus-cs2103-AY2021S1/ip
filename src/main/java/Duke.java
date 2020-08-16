@@ -26,6 +26,11 @@ public class Duke {
                 System.out.println("Here are the tasks in your list:");
                 tasks.forEach(System.out::println);
                 System.out.println(lines);
+            } else if (input.startsWith("done")) {
+                int toDo = Integer.parseInt(input.substring(5)) - 1;
+                Task task = tasks.get(toDo);
+                task.setDone();
+                System.out.println("Well done! The following task is complete:\n" + task);
             } else {
                 tasks.add(new Task(number++, input));
                 System.out.println(lines + "added: " + input + "\n" + lines);
