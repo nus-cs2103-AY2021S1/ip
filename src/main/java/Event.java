@@ -12,7 +12,6 @@ public class Event extends Task {
         this.endTime = endTime;
     }
 
-
     public static Event createEvent(String input) {
         String[] separatedInput = input.split("/" + DELIMITER);
         String[] words = separatedInput[0].split(" ");
@@ -22,7 +21,7 @@ public class Event extends Task {
 
         StringBuilder dateStringBuilder = new StringBuilder();
         for(int i = 0; i < separatedTimeStrings.length - 2; i++) {
-            dateStringBuilder.append(separatedTimeStrings[i] + " ");
+            dateStringBuilder.append(separatedTimeStrings[i]).append(" ");
         }
         dateStringBuilder.append(separatedTimeStrings[separatedTimeStrings.length - 2]);
         String dateString = dateStringBuilder.toString();

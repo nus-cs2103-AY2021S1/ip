@@ -4,7 +4,6 @@ public class ToDo extends Task{
     }
 
     protected static ToDo createToDo(String[] words) {
-        // todo: find a better way to handle these strings
         StringBuilder newDescription = new StringBuilder();
         for(int i = 1; i < words.length - 1; i++) {
             newDescription.append(words[i]).append(" ");

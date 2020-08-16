@@ -41,7 +41,6 @@ public class TaskList {
     private static boolean isToDo(String[] words) {
         return words[0].equals("todo");
     }
-
     private static boolean isDeadlineAction(String[] words) {
         return words[0].equals("deadline");
     }

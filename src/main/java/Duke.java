@@ -15,6 +15,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        Parser parser = new Parser();
         TaskList myTasks = new TaskList();
         greet();
         while (!terminate) {
@@ -45,7 +46,6 @@ public class Duke {
         ;
         printResponse(response);
     }
-
     ;
 
     private static ArrayList<String> handleTask(String description, TaskList tasks) {
