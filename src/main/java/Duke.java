@@ -4,57 +4,83 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static ArrayList<Task> items = new ArrayList<>();
+    private ArrayList<Task> items = new ArrayList<>();
 
-    private static void chat(){
-        Scanner scanner = new Scanner(System.in);
-        String word;
-        while(scanner.hasNextLine() && !(word = scanner.nextLine()).equals("bye")){
-            if (word.equals("list")){
-                System.out.println(Chat.numberedListChatBox(items));
-            } else if(word.startsWith("done ")){
-                String[] tokens = word.split(" ");
-                try {
-                    int itemNo = Integer.parseInt(tokens[1]) - 1;
-                    Task item = items.get(itemNo);
-                    item.markAsDone();
-                    System.out.println(Chat.chatBox(
-                            "Nice! I've marked this task as done:\n"
-                            + "\t\t" + item.toString()
-                    ));
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println(Chat.chatBox("Item " + tokens[1] + " not found."));
-                } catch (Exception e){
-                    System.out.println(Chat.chatBox("Item not found."));
-                }
-            } else if (word.startsWith("todo ")) {
-                String item = word.substring(6);
-                ToDo todo = new ToDo(word);
+    // method generates reply based on the phrase given by the User
+    private String generateReply(String phrase) throws DukeException {
+        int phraseLength = phrase.length();
+        if (phrase.equals("list")){
+            return Chat.numberedListChatBox(items);
+        } else if((phrase.startsWith("done") && phraseLength == 4) || phrase.startsWith("done ")){
+            String stringItem = phrase.substring(4).trim();
+            try {
+                int itemNo = Integer.parseInt(stringItem) - 1;
+                Task item = items.get(itemNo);
+                item.markAsDone();
+                return Chat.chatBox(
+                        "Nice! I've marked this task as done:\n"
+                                + "\t\t" + item.toString()
+                );
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("Item " + stringItem + " not found.", e);
+            } catch (NumberFormatException e){
+                throw (stringItem.isEmpty())
+                    ? new DukeException("Done must be followed by item number", e)
+                        : new DukeException(stringItem + " is not a valid item number", e);
+            } catch (Exception e) {
+                throw new DukeException("Please follow the syntax: done <item no.>", e);
+            }
+        } else if (phrase.startsWith("todo ") || (phrase.startsWith("todo") && phraseLength == 4)) {
+            String item;
+            if (phraseLength != 4 && (item = phrase.substring(5).trim()).length() != 0){
+                ToDo todo = new ToDo(item);
                 items.add(todo);
-                System.out.print(Chat.addItemChatBox(todo.toString(),items.size()));
-            } else if (word.startsWith("event ")) {
-                word = word.substring(6);
-                String[] tokens = word.split(" /at ");
-                if (tokens.length == 2) {
-                    Event event = new Event(tokens[0],tokens[1]);
-                    items.add(event);
-                    System.out.print(Chat.addItemChatBox(event.toString(),items.size()));
-                } else {
-                    System.out.print(Chat.chatBox("I did not understand you!"));
-                }
-            } else if (word.startsWith("deadline ")) {
-                word = word.substring(9);
-                String[] tokens = word.split(" /by ");
-                if (tokens.length == 2) {
-                    Deadline deadline = new Deadline(tokens[0],tokens[1]);
-                    items.add(deadline);
-                    System.out.print(Chat.addItemChatBox(deadline.toString(),items.size()));
-                } else {
-                    System.out.print(Chat.chatBox("I did not understand you!"));
-                }
+                return Chat.addItemChatBox(todo.toString(),items.size());
             } else {
-                items.add(new Task(word));
-                System.out.print(Chat.chatBox("added: " + word));
+                throw new DukeException("Todo cannot be empty", new Throwable("empty field"));
+            }
+        } else if (phrase.startsWith("event ")) {
+            phrase = phrase.substring(6).trim();
+            String[] tokens = phrase.split(" /at ");
+            if (tokens.length == 2) {
+                Event event = new Event(tokens[0],tokens[1]);
+                items.add(event);
+                return Chat.addItemChatBox(event.toString(),items.size());
+            } else if(tokens.length < 2){
+                throw new DukeException("Event description and time CANNOT be empty!", new Throwable("empty field"));
+            } else {
+                throw new DukeException("Follow the syntax event: <description> /at <time>", new Throwable(
+                        "bad event"
+                ));
+            }
+        } else if (phrase.startsWith("deadline ")) {
+            phrase = phrase.substring(9).trim();
+            String[] tokens = phrase.split(" /by ");
+            if (tokens.length == 2) {
+                Deadline deadline = new Deadline(tokens[0],tokens[1]);
+                items.add(deadline);
+                return Chat.addItemChatBox(deadline.toString(),items.size());
+            } else if(tokens.length < 2){
+                throw new DukeException("Deadline description and time CANNOT be empty!", new Throwable("empty field"));
+            } else {
+                throw new DukeException("Follow the syntax: deadline <description> /by <time>", new Throwable(
+                        "bad deadline"
+                ));
+            }
+        } else {
+            throw new DukeException("I don't understand you!", new Throwable("invalid command"));
+        }
+    }
+
+    // handles user input
+    public void chat() {
+        Scanner scanner = new Scanner(System.in);
+        String phrase;
+        while(scanner.hasNextLine() && !(phrase = scanner.nextLine()).equals("bye")){
+            try {
+                System.out.println(generateReply(phrase));
+            } catch (DukeException e) {
+                System.out.println(Chat.chatBox(e.message));
             }
         }
         System.out.print(Chat.chatBox("Bye. Hope to see you again soon!"));
@@ -64,14 +90,15 @@ public class Duke {
     public static void main(String[] args) {
         String logo =
                 " ____  __.__\n" +
-                "|    |/ _|__| ____    ____\n" +
-                "|      < |  |/    \\  / ___\\ \n" +
-                "|    |  \\|  |   |  \\/ /_/  >\n" +
-                "|____|__ \\__|___|  /\\___  /\n" +
-                "        \\/       \\//_____/\n";
+                        "|    |/ _|__| ____    ____\n" +
+                        "|      < |  |/    \\  / ___\\ \n" +
+                        "|    |  \\|  |   |  \\/ /_/  >\n" +
+                        "|____|__ \\__|___|  /\\___  /\n" +
+                        "        \\/       \\//_____/\n";
         System.out.println(logo);
         System.out.println("Hello! I'm King");
         System.out.println("What can I do for you?");
-        chat();
+        Duke king = new Duke();
+        king.chat();
     }
 }
