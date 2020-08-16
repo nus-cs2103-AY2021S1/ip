@@ -16,7 +16,8 @@ public class Store {
     }
 
     public void addToStore(String type, String item) {
-        String actual_item = item.strip();
+        try {
+            String actual_item = item.strip();
         Task toAdd;
         if (type.equals(TODO)) {
             toAdd = new Task(actual_item);
@@ -24,10 +25,9 @@ public class Store {
         } else {
             String[] parts_of_task = actual_item.split("/");
             if (parts_of_task.length != 2) {
-                String instruction = "deadline";
-                if (type.equals(EVENT)) instruction = "date of event";
-                System.out.println("Please reenter your tasks in the format <type of task> <description>/<" + instruction + ">\n" + line);
-                return;
+                String instruction = "<type of task> <description> / <deadline>";
+                if (type.equals(EVENT)) instruction = "<type of task> <description> / <date of event>";
+                throw new DukeGotNoArgumentsException(instruction);
             } else {
                 String description = parts_of_task[0];
                 String duedate = parts_of_task[1];
@@ -45,6 +45,9 @@ public class Store {
                             "Please try again.\n" + line);
                 }
             }
+        }
+        } catch (DukeGotNoArgumentsException e) {
+            System.out.println(e.getMessage() + "\n" + line);
         }
     }
 

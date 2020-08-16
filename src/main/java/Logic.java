@@ -19,29 +19,30 @@ public class Logic {
     private final String EVENT_COMMAND = "event";
 
     public boolean digestString(String answer) {
-        String editted_answer = answer.strip().toLowerCase();
-        String[] answers = answer.split(" ");
-        if (answers.length == 2 && answers[0].equals(DONE_COMMAND)) {
-            return store.completeTask(answers[1]);
-        } else if (editted_answer.equals(LIST_COMMAND)) {
-            return this.store.printStore();
-        } else if (editted_answer.equals(EXIT_COMMAND)) {
-            return this.exit();
-        } else if (answers[0].equals(TODO_COMMAND) || answers[0].equals(DEADLINE_COMMAND) || answers[0].equals(EVENT_COMMAND) ) {
-            if (answers.length > 1) {
-                String[] command = answer.split(" ", 2);
-                this.store.addToStore(command[0], command[1]);
+        try {
+            String editted_answer = answer.strip().toLowerCase();
+            String[] answers = answer.split(" ");
+            if (answers.length == 2 && answers[0].equals(DONE_COMMAND)) {
+                return store.completeTask(answers[1]);
+            } else if (editted_answer.equals(LIST_COMMAND)) {
+                return this.store.printStore();
+            } else if (editted_answer.equals(EXIT_COMMAND)) {
+                return this.exit();
+            } else if (answers[0].equals(TODO_COMMAND) || answers[0].equals(DEADLINE_COMMAND) || answers[0].equals(EVENT_COMMAND) ) {
+                if (answers.length > 1) {
+                    String[] command = answer.split(" ", 2);
+                    this.store.addToStore(command[0], command[1]);
+                } else {
+                    String instruction =  "<type of task> <description>" ;
+                    if (answers[0].equals(DEADLINE_COMMAND)) instruction = "<type of task> <description> / <due date>";
+                    else if (answers[0].equals(EVENT_COMMAND)) instruction = "<type of task> <description> / <date of event>";
+                    throw new DukeGotNoArgumentsException(instruction);
+                }
             } else {
-                String instruction =  "<type of task> <description>" ;
-                if (answers[0].equals(DEADLINE_COMMAND)) instruction = "<type of task> <description> / <due date>";
-                else if (answers[0].equals(EVENT_COMMAND)) instruction = "<type of task> <description> / <date of event>";
-                System.out.println("Please re-enter in this manner: " + instruction + ".\n" +
-                        "The description can't be empty.\n" + line);
-                return true;
+                throw new DukeCannotUnderstandException();
             }
-        } else {
-            System.out.println("Hmm I did not understand what you meant.\n" +
-                    "Could you try again?\n" + line);
+        } catch (DukeGotNoArgumentsException | DukeCannotUnderstandException e) {
+            System.out.println(e.getMessage() + "\n" + line);
         }
         return true;
     }
