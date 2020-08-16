@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 public class Duke {
     static char line  = (char) 	0x2501 ;
     static List<Task> tasks = new ArrayList<>();
-    static void loopMethod() {
+    static void loopMethod() throws EmptyArgumentException, InvalidArgumentException {
 
         //gets input and displays it
         Scanner sc = new Scanner(System.in);
@@ -36,64 +36,29 @@ public class Duke {
                 printBottomLine();
             }
             catch (IndexOutOfBoundsException e) {
-                return;
+               throw new InvalidArgumentException("Sorry, the task cannot be found!");
             }
         }
         else if (word.startsWith("todo")) {
-            Task toDo = new Todo(word);
-            tasks.add(toDo);
-            printTopLine();
-            System.out.println("Got it. I've added this task:");
-            System.out.println(toDo);
-            String numberTasks = String.format("Now you have %s %s in the list.", tasks.size(), tasks.size() == 1 ? "task" : "tasks");
-            System.out.println(numberTasks);
-            printBottomLine();
-        }
-        else if (word.startsWith("deadline") || word.startsWith("event")) {
-            int index = word.indexOf(' ');
-            boolean isDeadline = word.startsWith("deadline");
-            if (index == -1 || index == word.length() - 1) {
-                //nothing after the space
-                return;
-            }
-            //get stuff after the space if there are still characters after the space
-            String content = word.substring(word.indexOf(' ') + 1);
-            index = content.indexOf('/');
-            if (index == -1 || index == content.length() - 1) {
-                //nothing after the slash
-                return;
-            }
-            //if there are words after the slash
-            String taskName = content.substring(0,index);
-            String keyword = content.substring(index + 1, index + 3);
-            boolean matches = isDeadline && keyword.equals("by") || !isDeadline && keyword.equals("at");
-            if (!matches) {
-                //no "by" or "at"
-                return;
-            }
             try {
-                String time = content.substring(index + 4);
-                Task newTask = isDeadline ? new Deadline(taskName, time) : new Event(taskName, time);
-                tasks.add(newTask);
+                int index = word.indexOf(" ");
+                if (index == -1) {
+                    throw new EmptyArgumentException("No task name given");
+                }
+                word = word.substring(index + 1);
+                Task toDo = new Todo(word);
+                tasks.add(toDo);
                 printTopLine();
                 System.out.println("Got it. I've added this task:");
-                System.out.println(newTask);
+                System.out.println(toDo);
                 String numberTasks = String.format("Now you have %s %s in the list.", tasks.size(), tasks.size() == 1 ? "task" : "tasks");
                 System.out.println(numberTasks);
                 printBottomLine();
             } catch (IndexOutOfBoundsException e) {
-                return;
+             throw new EmptyArgumentException("No task name given", e);
             }
         }
 
-        else {
-            Task newTask = new Task(word);
-            tasks.add(newTask);
-            printTopLine();
-            System.out.println("added: " + word);
-            printBottomLine();
-        }
-        loopMethod();
     }
 
     static void printTopLine() {
@@ -111,6 +76,10 @@ public class Duke {
         printTopLine();
         System.out.println("Hello! I'm Duke \n What can I do for you?");
         printBottomLine();
-        loopMethod();
+        try {
+            loopMethod();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
     }
 }
