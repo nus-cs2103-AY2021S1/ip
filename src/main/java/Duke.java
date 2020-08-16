@@ -15,7 +15,11 @@ public class Duke {
         Duke duke = new Duke();
         System.out.println(duke.toString());
         //echo();
-        duke.receiveInput();
+        try {
+            duke.receiveInput();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
@@ -30,7 +34,7 @@ public class Duke {
         return donLogo + "\n" + msg;
     }
 
-    public void receiveInput() {
+    public void receiveInput() throws DukeException {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String command = sc.nextLine();
@@ -47,48 +51,79 @@ public class Duke {
                 return;
 
             } else {
-                String theRest = cmd[1];
 
                 if (firstWord.equals("done")) {
-                    processDone(theRest);
+                    processDone(command);
                 } else if (firstWord.equals("todo")) {
-                    processTodo(theRest);
+                    processTodo(command);
                 } else if (firstWord.equals("deadline")) {
-                    processDeadline(theRest);
+                    processDeadline(command);
                 } else if (firstWord.equals("event")) {
-                    processEvent(theRest);
+                    processEvent(command);
+                } else {
+                    throw new WrongInputException();
                 }
             }
         }
     }
 
-    public void processDone(String theRest) {
-        Integer taskNum = Integer.parseInt(theRest);
-        System.out.println(taskNum);
-        markTaskAsDone(taskNum);
+    public String removeFirstWord(String command) throws DukeException {
+        try {
+            String[] cmd = command.split(" ", 2);
+            return cmd[1];
+        } catch (Exception e) {
+            throw new DukeException(e.getMessage());
+        }
     }
 
-    public void processTodo(String theRest) {
-        Todo todo = new Todo(theRest);
-        saveToList(todo);
+    public void processDone(String command) throws DoneException {
+        try {
+            String theRest = removeFirstWord(command);
+            Integer taskNum = Integer.parseInt(theRest);
+            System.out.println(taskNum);
+            markTaskAsDone(taskNum);
+        } catch (DukeException d) {
+            throw new DoneException();
+        }
     }
 
-    public void processDeadline(String theRest) {
-        String[] taskAndDeadline = theRest.split(" /by", 2);
-        String task = taskAndDeadline[0];
-        String date = taskAndDeadline[1];
-
-        Deadline deadline = new Deadline(task, date);
-        saveToList(deadline);
+    public void processTodo(String command) throws TodoException {
+        try {
+            String theRest = removeFirstWord(command);
+            Todo todo = new Todo(theRest);
+            saveToList(todo);
+        } catch (DukeException e) {
+            throw new TodoException();
+        }
     }
 
-    public void processEvent(String theRest) {
-        String[] eventAndDate = theRest.split(" /at", 2);
-        String eventDesc = eventAndDate[0];
-        String eventDate = eventAndDate[1];
 
-        Event event = new Event(eventDesc, eventDate);
-        saveToList(event);
+    public void processDeadline(String command) throws DeadlineException {
+        try {
+            String theRest = removeFirstWord(command);
+            String[] taskAndDeadline = theRest.split(" /by", 2);
+            String task = taskAndDeadline[0];
+            String date = taskAndDeadline[1];
+
+            Deadline deadline = new Deadline(task, date);
+            saveToList(deadline);
+        } catch (DukeException d) {
+            throw new DeadlineException();
+        }
+    }
+
+    public void processEvent(String command) throws EventException {
+        try {
+            String theRest = removeFirstWord(command);
+            String[] eventAndDate = theRest.split(" /at", 2);
+            String eventDesc = eventAndDate[0];
+            String eventDate = eventAndDate[1];
+
+            Event event = new Event(eventDesc, eventDate);
+            saveToList(event);
+        } catch (DukeException d) {
+            throw new EventException();
+        }
     }
 
     public void listItems() {
