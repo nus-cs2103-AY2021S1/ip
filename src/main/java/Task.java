@@ -17,7 +17,10 @@ public class Task {
 
     public String displayString() {
         String doneString = done ? "✓" : "✗";
-        return String.format("[%s] %s", doneString, description);
-        // return String.format("[%s][%s] %s", taskTypeString(), doneString, description);
+        return String.format("[%s][%s] %s", taskTypeString(), doneString, description);
+    }
+
+    protected String taskTypeString() {
+        return "T";
     }
 }
