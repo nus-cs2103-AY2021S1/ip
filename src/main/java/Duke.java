@@ -1,15 +1,32 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Hello I'm Vector\n" + "How can I help you today?");
-        while (sc.hasNext()) {
-            String command = sc.next();
-            if (command.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-            } else {
-                System.out.println(command);
+        ArrayList<String> todo = new ArrayList<String>();
+        System.out.println("What's new scooby doo?\n" + "How can I help you today?");
+        while (sc.hasNextLine()) {
+            String command = sc.nextLine();
+            switch (command) {
+                case "bye":
+                    System.out.println("See you later alligator ");
+                    System.exit(0);
+                    break;
+                case "list":
+                    int index = 1;
+                    for (String str :
+                            todo) {
+                        System.out.println(index + ". " + str);
+                        index++;
+                    }
+                    if (todo.size() == 0) {
+                        System.out.println("Your life is empty now bruh");
+                    }
+                    break;
+                default:
+                    todo.add(command);
+                    System.out.println("okay you need to: " + command);
             }
         }
     }
