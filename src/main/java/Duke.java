@@ -43,7 +43,6 @@ public class Duke {
                 System.out.println("____________________________________________________________\n");
             } else {
                 String type = string1.substring(0, string1.indexOf(' '));
-                System.out.println(type);
                 if (type.equals("deadline")) {
                     String by = string1.substring(string1.indexOf("/by") + 4);
                     String description = string1.substring(string1.indexOf(' ') + 1, string1.indexOf('/') - 1);
