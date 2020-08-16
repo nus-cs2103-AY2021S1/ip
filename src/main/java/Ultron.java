@@ -18,9 +18,6 @@ public class Ultron {
     //Get the pattern for the regex for parsing the command
     private Pattern pattern = Pattern.compile("(^\\s?\\w+\\b) ?(.*)?$");
 
-    //Regex for parsing the date
-    private Pattern date_match = Pattern.compile("^(.*) (/by|/at) (.*)$");
-
     // Create the scanner object
     private Scanner rd = new Scanner(System.in);
 
@@ -72,7 +69,7 @@ public class Ultron {
                 );
     }
 
-    private boolean checkInput(String input){
+    private boolean checkInput(String input) throws UltronException{
         //Checks if the user wants to quit
 
         //Use regex to get the grp
@@ -80,7 +77,8 @@ public class Ultron {
 
         //Find the items in the group
         if(!inputs.find()){
-            errorMessage(input);
+
+            errorMessage(new UltronException(String.format("Invalid command", input)));
             return false;
         }
 
@@ -132,56 +130,38 @@ public class Ultron {
             }
             //Otherwise it will be a task to be added
             default: {
+
+                //Init the enum states
+                States val;
+                Task tsk;
+
                 try{
                     //Get the state
-                    States val = States.valueOf(command.toUpperCase());
+                    val = States.valueOf(command.toUpperCase());
 
-                    //Initialise the task
-                    Task tsk = null;
+                }catch (IllegalArgumentException e){
 
-                    //Switch case for the enums
-                    switch (val) {
-
-                        //If it is the deadline enum
-                        case DEADLINE:
-
-                        //If it is the Event enum
-                        case EVENT:
-
-                            //Create the matcher
-                            Matcher m = this.date_match.matcher(args);
-
-                            //Check for matches
-                            m.find();
-
-                            //Get the date and the name
-                            String name = m.group(1);
-                            String date = m.group(3);
-
-                            //Pass the 2 arguments into the function
-                            tsk = val.createTask(name, date);
-                            break;
-
-                        //Otherwise
-                        case TODO:
-
-                            //Pass the first item
-                            tsk = val.createTask(args);
-                            break;
-                    }
-
-                    //Add the task to the task list
-                    this.taskList.add(tsk);
-
-                    //Print out the message
-                    System.out.println(String.format("Can't you keep track of '%s' yourself?\nNow you have %d burdens", tsk, this.taskList.size()));
-
-                //If there is an error
-                }catch(Exception e) {
-
-                    //Print the error message
-                    this.errorMessage(input);
+                    //Throw a Duke exception
+                    throw new UltronException(String.format("%s is not a valid command", command));
                 }
+                if (args.trim().length() == 0){
+                    throw new UltronException("There are no arguments supplied");
+                }
+                try{
+                    //Create a new task
+                    tsk = val.createTask(args);
+                }catch(IllegalStateException e){
+                    //Throw a Duke exception
+                    throw new UltronException(String.format("Invalid %s command syntax\nUse help for more information",command));
+                }
+
+
+                //Add the task to the task list
+                this.taskList.add(tsk);
+
+                //Print out the message
+                System.out.println(String.format("Can't you keep track of '%s' yourself?\nNow you have %d burdens", tsk, this.taskList.size()));
+
             }
         }
 
@@ -189,10 +169,10 @@ public class Ultron {
         return false;
     }
 
-    public void errorMessage(String args){
+    public void errorMessage(UltronException e){
 
         //Prints the error message
-        System.out.println(String.format("Heh you cant even key in a correct command.\nClearly '%s' is not valid", args));
+        System.out.println(String.format("Heh you cant even key in a correct command.\n%s", e.getMessage()));
     }
 
     public void mainLoop(){
@@ -209,8 +189,12 @@ public class Ultron {
             System.out.println("____________________________________________________________");
 
             //If it is a terminating condition
-            if (this.checkInput(input.trim())){
-                break;
+            try{
+                if (this.checkInput(input.trim())){
+                    break;
+                }
+            }catch(UltronException e){
+                this.errorMessage(e);
             }
 
             //Print the separator
