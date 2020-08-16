@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -16,35 +17,41 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
-        Task[] lstOfTasks = new Task[100];
-        int counter = 0;
+        ArrayList<Task> lstOfTasks = new ArrayList<>();
+
 
         while (!str.equals("bye")) {
             System.out.println("____________________________________________________________\n");
             try {
 
                 if (str.equals("list")) {
+                    int counter = 1;
                     System.out.println("Here are the tasks in your list: \n");
-                    for (int i = 0; i < 100; i++) {
-                        if (lstOfTasks[i] != null) {
-                            System.out.println(i + 1 + ". " + lstOfTasks[i]);
+                    for (int i = 0; i < lstOfTasks.size(); i++) {
+                        if (lstOfTasks.get(i) != null) {
+                            System.out.println(counter + ". " + lstOfTasks.get(i));
+                            counter++;
                         } else {
                             break;
                         }
                     }
+                } else if (str.startsWith("delete ")) {
+                    int temp = Integer.parseInt(str.substring(5));
+                    lstOfTasks.get(temp - 1).doTask();
+
                 } else if (str.startsWith("done ")) {
                     int temp = Integer.parseInt(str.substring(5));
-                    lstOfTasks[temp - 1].doTask();
+                    lstOfTasks.get(temp-1).doTask();
                 } else if (str.startsWith("todo ")) {
                     if (str.length() <= 5) {
                         throw new DescriptionException("todo");
                     }
                     str = str.substring(5);
-                    lstOfTasks[counter] = new ToDo(str);
-                    counter++;
+                    lstOfTasks.add(new ToDo(str));
+
                     System.out.println("Got it. I've added this task: \n"
-                        + lstOfTasks[counter - 1]
-                        + "\nNow you have " + counter + " task(s) in the list.");
+                        + lstOfTasks.get(lstOfTasks.size()-1)
+                        + "\nNow you have " + lstOfTasks.size() + " task(s) in the list.");
 
                 } else if (str.startsWith("deadline ")) {
 
@@ -66,11 +73,11 @@ public class Duke {
                     }
 
                     String by = temp[1];
-                    lstOfTasks[counter] = new Deadline(desc, by);
-                    counter++;
+                    lstOfTasks.add(new Deadline(desc, by));
+
                     System.out.println("Got it. I've added this task: \n"
-                        + lstOfTasks[counter - 1]
-                        + "\nNow you have " + counter + " task(s) in the list.");
+                        + lstOfTasks.get(lstOfTasks.size() - 1)
+                        + "\nNow you have " + lstOfTasks.size() + " task(s) in the list.");
 
                 } else if (str.startsWith("event ")) {
                     if (str.length() <= 6) {
@@ -89,11 +96,11 @@ public class Duke {
                     if (at.length() == 0) {
                         throw new TrackingException("event");
                     }
-                    lstOfTasks[counter] = new Events(desc, at);
-                    counter++;
+                    lstOfTasks.add(new Events(desc, at));
+
                     System.out.println("Got it. I've added this task: \n"
-                        + lstOfTasks[counter - 1]
-                        + "\nNow you have " + counter + " task(s) in the list.");
+                        + lstOfTasks.get(lstOfTasks.size() - 1)
+                        + "\nNow you have " + lstOfTasks.size() + " task(s) in the list.");
 
                 } else if (str.equals("event") || str.equals("deadline") || str.equals("todo") ||
                 str.equals("done")) {
