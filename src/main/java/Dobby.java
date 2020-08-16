@@ -1,6 +1,6 @@
 import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
+
 public class Dobby {
     public static void main(String[] args) {
         /* String logo = " ____        _        \n"
@@ -13,7 +13,7 @@ public class Dobby {
         System.out.println(underscore_line);
         System.out.println("    Hello! I'm Dobby\n    How can I help you?");
         System.out.println(underscore_line);
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         Scanner scanner = new Scanner(System.in);
         while(scanner.hasNext()) {
@@ -27,13 +27,23 @@ public class Dobby {
             } else if (text.equalsIgnoreCase("list")) {
                 int i = 0;
                 System.out.println(underscore_line);
-                for (String item: list) {
+                for (Task task : tasks) {
                     i++;
-                    System.out.println("    " + i + ". " + item);
+                    String description = task.getDescription();
+                    System.out.println("    " + i + ". " + description);
                 }
                 System.out.println(underscore_line);
+            } else if (text.startsWith("done")) {
+                int index = Integer.parseInt(text.substring(5));
+                Task task = tasks.get(index - 1);
+                task.setDone();
+                System.out.println(underscore_line);
+                System.out.println("    Great! I've marked this task as done:\n");
+                System.out.println("        " + task.getDescription());
+                System.out.println(underscore_line);
             } else {
-                list.add(text);
+                Task task = new Task(text, false);
+                tasks.add(task);
                 System.out.println(underscore_line);
                 System.out.println("    Added: " + text );
                 System.out.println(underscore_line);
@@ -41,3 +51,4 @@ public class Dobby {
         }
     }
 }
+
