@@ -9,10 +9,14 @@ public class Duke {
 
     public static void listTask() {
         System.out.println(seperator);
-        System.out.println("\t Here are the tasks in your list:");
-        for (int i = 1; i <= toDoList.size(); i++) {
-            Task current = toDoList.get(i - 1);
-            System.out.println("\t" + i + "."+current.toString());
+        if(toDoList.size() == 0) {
+            System.out.println("\tList is empty! Start adding some tasks");
+        } else {
+            System.out.println("\t Here are the tasks in your list:");
+            for (int i = 1; i <= toDoList.size(); i++) {
+                Task current = toDoList.get(i - 1);
+                System.out.println("\t" + i + "." + current.toString());
+            }
         }
         System.out.println(seperator);
     }
@@ -27,12 +31,12 @@ public class Duke {
         System.out.println();
     }
 
-    public static void addTask(String newLine) {
-        System.out.println(seperator);
-        System.out.println("\tadded: "+newLine);
-        System.out.println(seperator);
-        toDoList.add(new Task(newLine));
-    }
+//    public static void addTask(String newLine) {
+//        System.out.println(seperator);
+//        System.out.println("\tadded: "+newLine);
+//        System.out.println(seperator);
+//        toDoList.add(new Task(newLine));
+//    }
     private static void deadlineTask(String newLine) {
         String[] splitWord = newLine.split("/");
         Deadlines task = new Deadlines(splitWord[0].substring(9),splitWord[1]);
@@ -77,25 +81,31 @@ public class Duke {
         System.out.println(seperator);
         Scanner sc = new Scanner(System.in);
         while(sc.hasNext()) {
-            String newLine = sc.nextLine();
-            if(newLine.equals("bye")) {
-                System.out.println(seperator);
-                System.out.println("\tBye. Hope to see you again soon!");
-                System.out.println(seperator);
-                break;
+            try {
+                String newLine = sc.nextLine();
+                if (newLine.equals("bye")) {
+                    System.out.println(seperator);
+                    System.out.println("\tBye. Hope to see you again soon!");
+                    System.out.println(seperator);
+                    break;
 
-            } else if (newLine.equals("list")) {
-                listTask();
-            } else if (newLine.length() >= 5 && newLine.substring(0,4).equals("done")) {
-                completeTask(newLine);
-            } else if (newLine.length() >= 5 && newLine.substring(0,4).equals("todo")) {
-                todoTask(newLine);
-            }else if (newLine.length() >= 9 && newLine.substring(0,8).equals("deadline")) {
-                deadlineTask(newLine);
-            }else if (newLine.length() >= 6 && newLine.substring(0,5).equals("event")) {
-                eventTask(newLine);
-            } else {
-                addTask(newLine);
+                } else if (newLine.equals("list")) {
+                    listTask();
+                } else if (newLine.length() > 5 && newLine.substring(0, 4).equals("done")) {
+                    completeTask(newLine);
+                } else if (newLine.length() > 5 && newLine.substring(0, 4).equals("todo")) {
+                    todoTask(newLine);
+                } else if (newLine.length() > 9 && newLine.substring(0, 8).equals("deadline")) {
+                    deadlineTask(newLine);
+                } else if (newLine.length() > 6 && newLine.substring(0, 5).equals("event")) {
+                    eventTask(newLine);
+                } else {
+                    throw new InvalidInputException(newLine);
+                }
+            } catch (InvalidInputException e) {
+                System.out.println(seperator);
+                System.out.println(e.getMessage());
+                System.out.println(seperator);
             }
         }
     }
