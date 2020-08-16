@@ -32,7 +32,18 @@ Here are the tasks in your list:
 Oops! Todo cannot have an empty message!
 --------------------------------------
 --------------------------------------
+Sorry Boss! The description that you put is invalid..
+--------------------------------------
+--------------------------------------
+Oops! Done cannot have an empty message!
+--------------------------------------
+--------------------------------------
 Oops! I'm sorry Boss! I do not know what that means :-(
+--------------------------------------
+--------------------------------------
+Noted. I've removed this task:
+   [T][✓]  buy some fruits
+Now you have 2 tasks in the list.
 --------------------------------------
 --------------------------------------
 Bye Boss! Hope to see you again!
