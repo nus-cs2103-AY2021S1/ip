@@ -12,9 +12,27 @@ public class ToDo extends Task {
         super(description);
     }
 
+    /**
+     * Overloaded constructor to instantiate a todo with customised status.
+     * @param description description of the todo
+     * @param done status of the todo
+     */
+    ToDo(String description, boolean done) {
+        super(description, done);
+    }
+
+    /**
+     * Marks a todo as 'done'.
+     * @return a todo that is done
+     */
+    @Override
+    ToDo markAsDone() {
+        return new ToDo(this.description, true);
+    }
+
     @Override
     public String toString() {
-        return ConsoleColors.YELLOW_BACKGROUND.getColor() + "TODO" + ConsoleColors.RESET.getColor()
-            + super.toString();
+        return ConsoleColors.WHITE_BACKGROUND.getColor() + "TODO" + ConsoleColors.RESET.getColor()
+            + " " + super.toString();
     }
 }

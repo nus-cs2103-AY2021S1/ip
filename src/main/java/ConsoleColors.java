@@ -9,7 +9,7 @@ public enum ConsoleColors {
     BLUE("\033[0;34m"),
     BLUE_BOLD("\033[1;94m"),
     GREEN_BACKGROUND("\033[0;102m"),
-    YELLOW_BACKGROUND("\033[0;103m"),
+    WHITE_BACKGROUND("\033[0;107m"),
     CYAN_BACKGROUND("\033[0;106m");
 
     public final String color;

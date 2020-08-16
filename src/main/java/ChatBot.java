@@ -58,7 +58,7 @@ class ChatBot {
                 showList();
             } else {
                 String[] inputArray = input.split(" ", 2); // separates the first word from the rest
-                if (inputArray[0].toLowerCase().toLowerCase().equals("done")) {
+                if (inputArray[0].toLowerCase().equals("done")) {
                     makeTaskDone(inputArray[1]);
                 } else {
                     add(inputArray);
@@ -93,12 +93,18 @@ class ChatBot {
     void makeTaskDone(String taskString) {
         try {
             int taskNumber = Integer.parseInt(taskString);
+            // guard clause to prevent index error out of bounds
             if (taskNumber <= 0 || taskNumber > this.toDoList.size()) {
                 System.out.println("Sorry, no such task!");
                 return;
             }
 
             Task currentTask = this.toDoList.get(taskNumber - 1);
+            if (currentTask instanceof ToDo) {
+                ToDo currentToDo = (ToDo) currentTask;
+//                ToDo newToDo = currentToDo.markAsDone();
+            }
+
             Task newTask = currentTask.markAsDone();
             this.toDoList.set(taskNumber - 1, newTask);
             System.out.println("Sugoi! This task is done!");
@@ -115,15 +121,20 @@ class ChatBot {
      * @param inputArray the name of the task the user entered
      */
     void add(String[] inputArray) {
-        if (inputArray[0].toLowerCase().equals("todo")) {
-
+        String command = inputArray[0].toLowerCase();
+        String description = inputArray[1];
+        Task taskToAdd;
+        if (command.equals("todo")) {
+            taskToAdd = new ToDo(description);
+            this.toDoList.add(taskToAdd);
+        } else {
+            return;
         }
-//        Task task = new Task(item);
-//        this.toDoList.add(task);
-//        System.out.println(ConsoleColors.YELLOW.getColor()
-//                + this.botName + ": "
-//                + "[" + item + "] has been added to your list! \n"
-//                + ConsoleColors.RESET.getColor());
+        System.out.println(ConsoleColors.YELLOW.getColor()
+                + this.botName + ": "
+                + "Hai! I have added this task to your list:\n"
+                + taskToAdd + "\n"
+                + ConsoleColors.RESET.getColor());
     }
 
     /**

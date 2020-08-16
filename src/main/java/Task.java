@@ -15,11 +15,11 @@ public class Task {
     }
 
     /**
-     * Overloaded private constructor to instantiate a task with customised status.
-     * @param description
-     * @param done
+     * Overloaded constructor to instantiate a task with customised status.
+     * @param description description of the task
+     * @param done status of the task
      */
-    private Task(String description, boolean done) {
+    Task(String description, boolean done) {
         this.description = description;
         this.isDone = done;
     }
