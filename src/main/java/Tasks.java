@@ -8,8 +8,17 @@ public class Tasks {
         this.list = new ArrayList<>();
     }
 
-    void addTask(String task) {
+    void addTask(String task) throws DukeException {
         String type = task.split(" ")[0];
+        String temp = task.strip();
+        if (temp.equals("todo") || temp.equals("deadline") || temp.equals("event")) {
+            throw new InvalidTaskTypeException("☹ OOPS!!! The description of a " + temp + " cannot be empty.");
+        } else if (temp.equals("")) {
+            throw new InvalidTaskTypeException("☹ OOPS!!! The type of a task cannot be empty.");
+        }
+        if (type == null || (!type.equals("todo") && !type.equals("deadline") && !type.equals("event"))) {
+            throw new InvalidTaskTypeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
         String details = task.substring(type.length());
         if (type.equals("todo")) {
             ToDo t = new ToDo(details.strip());
