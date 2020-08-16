@@ -21,9 +21,11 @@ public class Duke {
             String command = sc.next();
             if (command == "bye") {
                 exit();
+                break;
             } else {
                 echo(command);
             }
         }
+        sc.close();
     }
 }
