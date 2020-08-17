@@ -10,7 +10,7 @@ public class ItemList {
 
     void printList() {
         for (int i = 1; i <= itemList.size(); i++) {
-            System.out.println(i + ". " + itemList.get(i - 1) + "\n");
+            System.out.println(i + ". " + itemList.get(i - 1));
         }
     }
 }
