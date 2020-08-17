@@ -24,6 +24,10 @@ public class Planner {
         return this.list[i-1];
     }
 
+    public int getNumTasks () {
+        return currIndex;
+    }
+
     // Overrides toString() method of Object Class to display contents of list neatly
     @Override
     public String toString() {

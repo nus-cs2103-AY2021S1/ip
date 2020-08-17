@@ -31,13 +31,26 @@ public class Jimmy {
                 System.out.println(div + "\tBye. Hope to see you again soon!" + div);
                 break;
             } else if (!msg.equals("list") && !arr[0].equals("done")) {
-                System.out.println(div + "\tadded:\t" + msg + div);
-                lst.addTask(new Task(msg));
+                System.out.println(div + "\tGot it. I've added this task:"); // + msg + div);
+                Task t = null;
+                switch (arr[0]) {
+                    case "todo":
+                        t = new Todo(msg);
+                        break;
+                    case "deadline":
+                        t = new Deadline(msg);
+                        break;
+                    case "event":
+                        t = new Event(msg);
+                        break;
+                }
+                lst.addTask(t);
+                System.out.println("\t  " + t + "\n\tNow you have " + lst.getNumTasks() + " tasks in the list." + div);
             } else if (arr[0].equals("done")) {
                 int i = Integer.parseInt(arr[1]);
                 lst.completeTask(i);
                 Task t = lst.getTask(i);
-                System.out.println(div + "\tNice! I've marked this task as done:" + "\n\t  " + t + "\n");
+                System.out.println(div + "\tNice! I've marked this task as done:" + "\n\t  " + t + div);
             } else {
                 System.out.println(div + lst + div);
             }
