@@ -9,7 +9,7 @@ public class Deadline extends Task {
     protected static Deadline createDeadline(String details) {
         String[] info = details.split("/");
         String desc = info[0];
-        String by = info[1];
+        String by = info[1].replaceFirst("by ", "");
         return new Deadline(desc, by);
     }
 
