@@ -42,7 +42,12 @@ public class Duke {
                 break;
             }
 
-            taskManager.manage(next);
+            try {
+                taskManager.manage(next);
+            }
+            catch(DukeException e) {
+                System.out.println(e);
+            }
 
         }
 
