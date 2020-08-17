@@ -1,3 +1,4 @@
+import main.java.Deadline;
 import main.java.Task;
 import main.java.ToDo;
 
@@ -41,17 +42,24 @@ public class Duke {
                 }
 
             } else if (userInput.startsWith("todo")) { //added
-                ToDo newTask = new ToDo(userInput.substring(5));
-                tasks.add(newTask); //adds into tasks list
+                ToDo todo = new ToDo(userInput.substring(5));
+                tasks.add(todo); //adds into tasks list
                 System.out.println(line);
                 System.out.print(bot);
                 System.out.println("Got it! I've added this task:");
                 //System.out.println(addedText + userInput);
-                System.out.println(newTask);
+                System.out.println(todo);
                 System.out.println("Now you have " + tasks.size() + "tasks in the list.");
                 System.out.println(line);
             } else if (userInput.startsWith("deadline")) {
-
+                int indexOfSlash = userInput.indexOf('/');
+                String description = userInput.substring(9, indexOfSlash - 1);
+                String date =  userInput.substring(indexOfSlash + 1);
+                Deadline deadline = new Deadline(description, date);
+                tasks.add(deadline);
+                System.out.println("Got it! I've added this task:");
+                System.out.println(deadline);
+                System.out.println("Now you have " + tasks.size() + "tasks in the list.");
             } else if (userInput.startsWith("event")) {
 
             } else { //invalid command
