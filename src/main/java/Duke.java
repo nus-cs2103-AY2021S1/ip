@@ -33,6 +33,15 @@ public class Duke {
         s = sc.nextLine();
     }
 
+    static void del() {
+        System.out.println("removed!! ^^");
+        Task t = arr.remove(Integer.parseInt(s.substring(7)) - 1);
+        System.out.println(t);
+        System.out.println("total task: " + Integer.toString(arr.size()) + "\n:o");
+        System.out.println("______________________");
+        s = sc.nextLine();
+    }
+
     static void finish() {
         System.out.println("gfy youve managed to finish the following...");
         Task t = arr.get(Integer.parseInt(s.substring(5)) - 1);
@@ -121,6 +130,8 @@ public class Duke {
                     ls();
                 } else if (s.startsWith("done")) {
                     finish();
+                } else if (s.startsWith("delete")) {
+                    del();
                 } else if (s.startsWith("todo")) {
                     handleTodo();
                 } else if (s.startsWith("deadline")) {
