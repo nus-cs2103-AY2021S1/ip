@@ -105,7 +105,7 @@ public class Duke {
                     }
                 } else {
                     System.out.println(line);
-                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println("DukeException: ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     System.out.println(line);
                     echo = sc.nextLine();
 
