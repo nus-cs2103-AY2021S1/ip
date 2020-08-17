@@ -4,8 +4,4 @@ public class EmptyTaskDescriptionException extends IllegalArgumentException {
         super(String.format("OOPS! The description of a %s cannot be empty.", taskType));
     }
 
-    @Override
-    public String toString() {
-        return super.getMessage();
-    }
 }
