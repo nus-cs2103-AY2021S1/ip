@@ -10,8 +10,10 @@ public class TaskManager {
         this.toDoList.add(task);
     }
     public void displayList() {
+        int i = 1;
         for (String s : this.toDoList) {
-            System.out.println(s);
+            System.out.println(i + "." + s);
+            i += 1;
         }
     }
 }
