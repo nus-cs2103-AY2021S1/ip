@@ -14,8 +14,24 @@ public class Duke {
     }
 
     public String addTask(String t) {
-        this.list.add(new Task(t));
-        return "added: " + t;
+        Task toBeAdded;
+        if (t.startsWith("todo")) {
+            String des = t.substring(5);
+            toBeAdded = new Todo(des);
+        } else if (t.startsWith("deadline")) {
+            String[] tokens = t.split(" /by ");
+            String des = tokens[0].substring(9);
+            toBeAdded = new Deadline(des, tokens[1]);
+        } else {
+            String[] tokens = t.split(" /at ");
+            String des = tokens[0].substring(6);
+            toBeAdded = new Event(des, tokens[1]);
+        }
+        list.add(toBeAdded);
+        return "Got it. I've added this task:\n" +
+                INDENT + "  " + toBeAdded + "\n" +
+                INDENT +
+                String.format("Now you have %d tasks in the in the list", list.size());
     }
 
     public String markDone(int index) {
