@@ -26,7 +26,7 @@ public class Duke {
      * @return output by Hal9000
      */
     public String get_output(Task taskInput) {
-        return String.format("Got it. I've added this task:\n  %s %s\nNow you have %d tasks in the list\n", labels(taskInput), taskInput.toString(), this.tasks.size());
+        return String.format("Got it. I've added this task:\n  %s %s\nNow you have %d tasks in the list.\n", labels(taskInput), taskInput.toString(), this.tasks.size());
     }
 
     public static String format_response(String output_msg) {
@@ -73,7 +73,7 @@ public class Duke {
         }
     }
 
-    public static TaskType categorize(String[] input_parts) {
+    public static TaskType categorize(String[] input_parts) { // throw dukeexception: unknown task
         if (input_parts[0].compareTo("todo") == 0) {
             return TaskType.ToDo;
         } else if (input_parts[0].compareTo("deadline") == 0) {
@@ -84,7 +84,7 @@ public class Duke {
     }
 
     // Can be used to get the details too
-    public static String extractTask(String[] input_parts) {
+    public static String extractTask(String[] input_parts) { // throw exception: missing details
         String task = "";
         for (int i = 1; i < input_parts.length; i++) {
             task += input_parts[i] + " ";
@@ -92,14 +92,14 @@ public class Duke {
         return task.trim();
     }
     
-    public static Task getTask(String input) {
+    public static Task getTask(String input) { // catch duke exception from extractTask and categorize, throw to op()
         String[] parts = input.split(" ");
         TaskType type = categorize(parts);
 
         if (type == TaskType.ToDo) {
             parts = input.split(" ");
             String name = extractTask(parts);
-            
+
             return new ToDo(name);
         } else if (type == TaskType.Deadline) {
             String name = extractTask(input.split("/")[0].split(" "));
@@ -109,7 +109,7 @@ public class Duke {
             String name = extractTask(input.split("/")[0].split(" "));
             String details = extractTask(input.split("/")[1].split(" "));
             
-            return new Event(name, details); // need to insert : after by
+            return new Event(name, details);
         }
     }
     
@@ -127,7 +127,7 @@ public class Duke {
             } else if (parts[0].compareTo("done") == 0) {
                 System.out.println(format_response(this.mark_done(Integer.parseInt(parts[1]) - 1))); 
             } else {
-                Task taskInput = getTask(input);
+                Task taskInput = getTask(input); // catch duke exception from getTask(input)
 
                 // add task to list of tasks
                 this.tasks.add(taskInput);
