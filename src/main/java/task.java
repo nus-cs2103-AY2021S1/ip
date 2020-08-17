@@ -48,4 +48,14 @@ public class task {
         }
         return done + " " + this.name;
     }
+
+    public void delete(){
+        this.count = count - 1;
+        String line1 = "Noted. I've removed this task: ";
+        String line2 = "  " + this.read2();
+        String line3 = "Now you have " + this.count + " tasks in the list.";
+        System.out.println(line1);
+        System.out.println(line2);
+        System.out.println(line3);
+    }
 }
