@@ -27,9 +27,31 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(tasks[index -1].toString());
             } else {
-                tasks[count] = new Task(input);
-                count ++;
-                System.out.println("added: " + input);
+                System.out.println("Got it. I've added this task:");
+                switch (splitArr[0]) {
+                    case "todo":
+                        tasks[count] = new ToDo(input.substring(5));
+                        count++;
+                        System.out.println("    " + tasks[count - 1].toString());
+                        break;
+                    case "deadline":
+                        int index = input.indexOf("/");
+                        String desc = input.substring(9, index - 1);
+                        String date = input.substring(index + 4);
+                        tasks[count] = new Deadline(desc, date);
+                        count++;
+                        System.out.println("    " + tasks[count - 1].toString());
+                        break;
+                    case "event":
+                        int ind = input.indexOf("/");
+                        String des = input.substring(6, ind - 1);
+                        String dat = input.substring(ind + 4);
+                        tasks[count] = new Event(des, dat);
+                        count++;
+                        System.out.println("    " + tasks[count - 1].toString());
+                        break;
+                }
+                System.out.println("Now, you have " + count + " tasks in the list");
             }
         }
     }
