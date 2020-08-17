@@ -31,8 +31,30 @@ public class Duke {
                 }
                 input = sc.nextLine();
             } else { //if user types anything other than "bye" or "list"
-                list.add(new Task(input));
-                System.out.println("added: " + input);
+                Task newTask;
+                if (input.contains("todo")) {
+                    String description = input.substring(5);
+                    newTask = new Todo(description);
+                    list.add(newTask);
+                } else if (input.contains("deadline")) {
+                    String descriptionAndTime = input.substring(9);
+                    String description = descriptionAndTime.split("/by ")[0];
+                    String by = descriptionAndTime.split("/by ")[1];
+                    newTask = new Deadline(description, by);
+                    list.add(newTask);
+                } else if (input.contains("event")) {
+                    String descriptionAndTime = input.substring(6);
+                    String description = descriptionAndTime.split("/at ")[0];
+                    String at = descriptionAndTime.split("/at ")[1];
+                    newTask = new Event(description, at);
+                    list.add(newTask);
+                } else {
+                    newTask = null;
+                    System.out.println("Please enter a valid task");
+                }
+                System.out.println("Got itt. I've added this task:\n    "
+                        + newTask
+                        + "\nNow you have " + list.size() + " task(s) in the list." );
                 input = sc.nextLine();
             }
         }
