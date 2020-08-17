@@ -45,6 +45,17 @@ public class Duke {
         System.out.println(outputMsg);
     }
 
+    public static void help() {
+        String commandList = "**************************************************************"
+                + "\n ┗( ⊙.⊙ )┛ "
+                + "\n These are all the commands you may use:"
+                + "\n     1.list -- show all tasks"
+                + "\n     2.help -- show all commands"
+                + "\n     3.bye -- exit the chatbot"
+                + "\n**************************************************************\n";
+        System.out.println(commandList);
+    }
+
     public static void bye() {
         String byeMsg = "\n___________________________________________________________"
                 + "\n Bye. Hope to see you again soon! |^_^|┛"
@@ -63,6 +74,8 @@ public class Duke {
         while (!inputMsg.equals("bye")) {
             if (inputMsg.equals("list")) {
                 getAllTasks(tasks);
+            } else if (inputMsg.equals("help")) {
+                help();
             } else {
                 tasks = addTask(inputMsg, tasks);
             }
