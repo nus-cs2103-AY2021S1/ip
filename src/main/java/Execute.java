@@ -3,20 +3,28 @@ import java.util.Scanner;
 public class Execute {
     public static void output() {
         // Initial welcome message
-        Section welcomeSection = new Section("Hello! I'm Duke\n      What can I do for you?");
-        welcomeSection.displayText();
+        Salutations welcome = new Salutations(Salutations.type.WELCOME);
+        welcome.printMessage();
+
+        // creation of List
+        Storage listOfItems = new Storage();
 
         // Subsequent messages
         Scanner scan = new Scanner(System.in);
         while (true) {
-            String userInput = scan.next();
+            String userInput = scan.nextLine();
+
             if (userInput.equals("bye")) {
-                Section exitSection = new Section("Bye. Hope to see you again soon!");
-                exitSection.displayText();
                 break;
+            } else if (userInput.equals("list")) {
+                listOfItems.print();
+            } else {
+                Item item = new Item(userInput);
+                listOfItems.addItem(item);
             }
-                Section section = new Section(userInput);
-                section.displayText();
         }
+        // Exit message
+        Salutations goodbye = new Salutations(Salutations.type.GOODBYE);
+        goodbye.printMessage();
     }
 }
