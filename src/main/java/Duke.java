@@ -23,6 +23,14 @@ public class Duke {
             } else if (userInput.startsWith("done")) {
                 int num = Integer.parseInt(userInput.substring(5));
                 formatMarkAsDone(num - 1);
+            } else if (userInput.startsWith("todo")) {
+                formatAddTask(new ToDo(userInput.substring(5)));
+            } else if (userInput.startsWith("deadline")) {
+                int pos = userInput.indexOf("/by");
+                formatAddTask(new Deadline(userInput.substring(9, pos - 1), userInput.substring(pos + 4)));
+            } else if (userInput.startsWith("event")) {
+                int pos = userInput.indexOf("/at");
+                formatAddTask(new Event(userInput.substring(6, pos - 1), userInput.substring(pos + 4)));
             } else {
                 format("added: " + userInput);
                 lst.add(new Task(userInput));
@@ -53,6 +61,16 @@ public class Duke {
         System.out.println(line);
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(lst.get(num));
+        System.out.println(line);
+    }
+
+    public static void formatAddTask(Task task) {
+        lst.add(task);
+        int size = lst.size();
+        System.out.println(line);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        System.out.println(String.format("Now you have %d %s in the list.", size, size == 1 ? "task" : "tasks"));
         System.out.println(line);
     }
 }
