@@ -3,8 +3,6 @@ import java.util.Scanner;
 public class Duke {
     public static void handleInput() {
         Task[] list = new Task[100];
-        int i = 0;
-
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNextLine()) {
@@ -15,12 +13,11 @@ public class Duke {
                 sc.close();
                 break;
             } else if (input.toLowerCase().equals("list")) {
-                replyList(list, i);
+                replyList(list, Task.totalTasks);
             } else if (input.toLowerCase().substring(0, 4).equals("done")) {
-                replyDone(input, list, i);
+                replyDone(input, list, Task.totalTasks);
             } else {
-                list[i] = new Task(input);
-                i++;
+                list[Task.totalTasks] = new Task(input);
                 printReply("added: \"" + input + "\" to list! =D");
             }
         }

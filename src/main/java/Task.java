@@ -3,8 +3,10 @@ public class Task {
     private boolean isDone;
     private static String tick = "\u2713";
     private static String cross = "\u2718";
+    public static int totalTasks = 0;
 
     public Task(String taskName) {
+        totalTasks++;
         this.taskName = taskName;
         this.isDone = false;
     }
