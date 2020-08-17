@@ -40,6 +40,21 @@ public class Gel {
                         System.out.println();
                         break;
                     }
+                    case "delete": { //delete
+                        if (inputArr.length <= 1) {
+                            throw new GelException("    Yo tell me what you want to delete la");
+                        }
+                        try {
+                            int taskNo = Integer.parseInt(inputArr[1]);
+                            Task taskToBeDone = listOfText.remove(taskNo - 1);
+                            System.out.println("\n    Noted. I've removed this task:");
+                            System.out.println("    " + taskToBeDone);
+                            System.out.println("    Now you have " + listOfText.size() + " task(s) in the list.\n");
+                            break;
+                        } catch (Exception e) {
+                            throw new GelException("    Yoyoyo please input a valid number after delete");
+                        }
+                    }
                     case "deadline": {//deadline
                         int dateIndex = input.lastIndexOf("/");
                         if (dateIndex == -1 ) {

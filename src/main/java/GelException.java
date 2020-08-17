@@ -1,7 +1,7 @@
 public class GelException extends Exception {
 
     public GelException() {
-        super("\n    LOL! Please read the user guide before talking to me again...");
+        super("\n    LOL! Please use the bye tag if you wanna waste my time ");
     }
 
     public GelException(String msg) {
