@@ -1,0 +1,11 @@
+todo myTodo
+deadline myDeadline /by today
+event myEvent /at today
+list
+delete 2
+list
+delete 1
+list
+delete 1
+list
+bye

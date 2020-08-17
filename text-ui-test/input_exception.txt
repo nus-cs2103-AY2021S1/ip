@@ -22,4 +22,7 @@ done 1
 done 2
 done 2
 list
+delete haha this is funny
+delete -1
+delete 20
 bye
