@@ -18,7 +18,10 @@ public class TaskManager {
     public String toString() {
         String output = "";
         for (int i = 1; i <= tasks.size(); i++) {
-            output += i + ". " + tasks.get(i).toString() + "\n";
+            output += i + ". " + tasks.get(i-1).toString();
+            if (i != tasks.size()) {
+                output += "\n";
+            }
         }
         return output;
     }
