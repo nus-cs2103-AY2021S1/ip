@@ -9,7 +9,7 @@ public class Duke {
         // Introduction
         System.out.println(line);
         System.out.println("Welcome to mel's drive-in!");
-        System.out.println("What would you like to order?");
+        System.out.println("What would you like to have?");
         System.out.println(line);
 
         nextLine = scanner.nextLine();
