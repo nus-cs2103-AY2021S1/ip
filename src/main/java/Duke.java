@@ -8,6 +8,29 @@ import java.util.Scanner;
 
 
 public class Duke {
+
+    public enum Command {
+        TERMINATE ("bye"),
+        LIST("list"),
+        DONE("done"),
+        TODO("todo"),
+        DEADLINE("deadline"),
+        EVENT("event"),
+        HELP("--help"),
+        DELETE("delete");
+
+        private String command;
+
+        Command(String command){
+            this.command = command;
+        }
+
+        @Override
+        public String toString() {
+            return this.command;
+        }
+
+    }
     private List<Task> list = new ArrayList<>();
 
     static String logo = " ____        _        \n"
@@ -15,16 +38,7 @@ public class Duke {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-
-    static final String TERMINATE_COMMAND = "bye";
-    static final String LIST_COMMAND  = "list";
-    static final String DONE_COMMAND = "done";
-    static final String TODO_COMMAND = "todo";
-    static final String DEADLINE_COMMAND =  "deadline";
-    static final String EVENT_COMMAND = "event";
-    static final String HELP_COMMAND = "--help";
-    static final String DELETE_COMMAND = "delete";
-
+    
     static final String LINE = "     ___________________________________________________________________________\n";
     static final String DOUBLE_TAB = "      ";
 
@@ -34,38 +48,38 @@ public class Duke {
         greet();
         while (sc.hasNext()) {
             String input = sc.nextLine().toLowerCase();
-            if (input.equals(TERMINATE_COMMAND)) {
+            if (input.equals(Command.TERMINATE.toString())) {
                 bye();
                 break;
-            } else if (input.equals(LIST_COMMAND)) {
+            } else if (input.equals(Command.LIST.toString())) {
                 runList();
-            } else if(input.contains(DONE_COMMAND)){
+            } else if(input.contains(Command.DONE.toString())){
                 try {
                     done(input);
                 } catch (IndexOutOfBoundsException e){
                     printException(new DoneException());
                 }
-            } else if(input.contains(TODO_COMMAND)){
+            } else if(input.contains(Command.TODO.toString())){
                 try {
                     todoTask(input);
                 } catch (IndexOutOfBoundsException e) {
                     printException(new TodoException());
                 }
-            } else if(input.contains(DEADLINE_COMMAND)){
+            } else if(input.contains(Command.DEADLINE.toString())){
                 try {
                     deadlineTask(input);
                 } catch (IndexOutOfBoundsException e) {
                     printException(new DeadlineException());
                 }
-            } else if(input.contains(EVENT_COMMAND)){
+            } else if(input.contains(Command.EVENT.toString())){
                 try {
                     eventTask(input);
                 } catch(IndexOutOfBoundsException e) {
                    printException(new EventException());
                 }
-            } else if(input.contains(HELP_COMMAND)){
+            } else if(input.equals(Command.HELP.toString())){
                 help();
-            } else if(input.contains(DELETE_COMMAND)){
+            } else if(input.contains(Command.DELETE.toString())){
                 try {
                     delete(input);
                 } catch (IndexOutOfBoundsException e) {
@@ -95,7 +109,7 @@ public class Duke {
     }
 
     private void printCommandList(String command, String format) {
-        String indentation = "%-20s%s%n" ;  
+        String indentation = "%-20s%s%n" ;
         System.out.printf(indentation,command,format);
     }
 
