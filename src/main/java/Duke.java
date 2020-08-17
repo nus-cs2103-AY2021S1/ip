@@ -24,8 +24,14 @@ public class Duke {
                 if (userCommand.equals("list")) {
                     taskSimulator.getList();
                 } else {
-                    Task newTask = new Task(userCommand);
-                    taskSimulator.addTask(newTask);
+                    String[] wordArray = userCommand.split(" ");
+                    if (wordArray[0].equals("done")) {
+                        Integer index = Integer.parseInt(wordArray[1]);
+                        taskSimulator.markAsDone(index);
+                    } else {
+                        Task newTask = new Task(userCommand);
+                        taskSimulator.addTask(newTask);
+                    }
                 }
             }
         }

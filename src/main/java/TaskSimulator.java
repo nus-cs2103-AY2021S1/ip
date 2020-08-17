@@ -32,4 +32,14 @@ public class TaskSimulator {
         System.out.println(line);
     }
 
+    public void markAsDone(Integer i) {
+        Task theTask = listOfTasks.get(i - 1);
+        theTask.setTaskToBeDone();
+        System.out.println(line);
+        System.out.println("     Great! The task: [" + theTask.getName()
+                + "] is marked as Done.\n" + "     " + theTask.getStatusSymbol()
+                + " " + theTask.getName());
+        System.out.println(line);
+    }
+
 }
