@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
 public class InputOutputHandler {
     String separationLine = "     _____________________________________________________\n";
@@ -16,13 +15,17 @@ public class InputOutputHandler {
 
     private String[] splitReply() {
         // index 4 is excluded
-        if (reply.length() > 0)
-        {
+        if (reply.length() >= 4) {
             if (reply.substring(0, 4).equals("done")) {
                 replyArr = reply.split(" ");
-            } else {
+            } else if (reply.contains("/")){
                 replyArr = reply.split("/");
+            } else {
+                replyArr = reply.split(" ");
             }
+        } else {
+            printMessage(new UnexpectedInputException().toString());
+            replyArr = null;
         }
         return replyArr;
     }
@@ -39,13 +42,14 @@ public class InputOutputHandler {
             String resultList = indentation + taskManager.toString();
             fullReply = botReply + resultList;
         }
-        else if (replyArr[0].equals("done")) {
+        else if (replyArr != null && replyArr[0].equals("done")) {
             int taskIndex = Integer.parseInt(replyArr[1]) - 1;
             taskManager.markTaskAsDone(taskIndex);
             String botReply = "Wah finally. Wondering how long more I need to wait... \n";
             String taskDone = indentation + taskManager.getTask(taskIndex).toString();
             fullReply = botReply + taskDone;
         }
+        // adding task to the list
         else {
             Task newTask = null;
             if (reply.contains("todo")) {
@@ -63,8 +67,8 @@ public class InputOutputHandler {
                 reply = reply.replace("/at", "/");
                 String[] tempArr = splitReply();
                 newTask = new EventTask(tempArr[0], tempArr[1]);
-            }
 
+            }
             taskManager.addTask(newTask);
             String botReply = "Wow, another task. Added. You sure you can finish them all? \n";
             assert newTask != null;
@@ -75,12 +79,19 @@ public class InputOutputHandler {
         printMessage(fullReply);
     }
 
-    public void handleInput()
-    {
+    public void handleInput() {
         while (!reply.equals("bye"))
         {
             replyArr = splitReply();
-            handleUserInput();
+
+            if (replyArr != null) {
+                String errorMessage = DukeExceptionHandler.checkForException(replyArr);
+                if (errorMessage != null) {
+                    printMessage(errorMessage);
+                } else {
+                    handleUserInput();
+                }
+            }
             reply = sc.nextLine();
         }
         String byeMessage = "That's all? Sure. See you again (hopefully LOL).";
