@@ -73,6 +73,15 @@ public class Duke {
         }
     }
 
+    public String deleteTask(int index) {
+        if (tasks.size() <= index) {
+            return "No such task";
+        }
+        Task t = this.tasks.get(index);
+        this.tasks.remove(index);
+        return String.format("Noted. I've removed this task:\n  %s %s\nNow you have %d tasks in the list.\n", labels(t), t.toString(), this.tasks.size());
+    }
+
     public static TaskType categorize(String[] input_parts) throws Exception {
         if (input_parts[0].compareTo("todo") == 0) {
             return TaskType.ToDo;
@@ -141,6 +150,8 @@ public class Duke {
                 System.out.println(format_response(this.summarize()));
             } else if (parts[0].compareTo("done") == 0) {
                 System.out.println(format_response(this.mark_done(Integer.parseInt(parts[1]) - 1))); 
+            } else if (parts[0].compareTo("delete") == 0) {
+                System.out.println(format_response(this.deleteTask(Integer.parseInt(parts[1]) - 1))); 
             } else {
                 Task taskInput;
                 try {
