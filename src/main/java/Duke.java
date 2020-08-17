@@ -10,23 +10,38 @@ public class Duke {
     public static void echo(String message) {
         String line = "____________________________________________________________\n";
         System.out.println(line + message + "\n" + line);
-
     }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        TaskManager duke = new TaskManager();
+        TaskManager taskManager = new TaskManager();
         echo("    Hello! I'm Duke\n    How can I help you?");
         while (sc.hasNext()) {
             String input = sc.nextLine();
-            switch (input) {
+            String[] words = input.split("\\s+");
+            String command = words[0];
+            switch (command) {
                 case "bye" :
                     echo("Bye. Hope to see you again, bro!");
                     break;
                 case "list":
-                    echo(duke.toString());
+                    echo(taskManager.toString());
+                    break;
+                case "done":
+                    try {
+                        int index = Integer.parseInt(words[1]);
+                        taskManager.doTask(index);
+                        String returnMessage = "Nice! I've marked this task as done: \n";
+                        returnMessage += taskManager.getTaskStatus(index);
+                        echo(returnMessage);
+                    } catch (NumberFormatException err){
+                        echo("Error. Please key in an integer after \"done\"");
+                    } catch (IndexOutOfBoundsException err) {
+                        echo("Error. You don't have task # " + words[1]);
+                    }
                     break;
                 default:
-                    duke.addTask(input);
+                    taskManager.addTask(input);
                     echo("added: " + input);
                     break;
             }
