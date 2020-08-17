@@ -21,12 +21,19 @@ public class Task implements ITask {
     }
 
     /**
-     * Returns a task which is completed.
-     * @return Completed Task.
+     * {@inheritDoc}
      */
     @Override
     public Task markComplete() {
         return new Task(this.description, true);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isDone() {
+        return this.isDone;
     }
 
     @Override
