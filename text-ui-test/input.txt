@@ -4,6 +4,7 @@ event project meeting /at Aug 6th 2-4pm
 todo join sports club
 todo borrow book
 event
+done
 list
 delete 10
 delete 6

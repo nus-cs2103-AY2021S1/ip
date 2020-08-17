@@ -76,6 +76,9 @@ public class Duke {
                         printList();
                         break;
                     case "delete": {
+                        if (remaining.equals("")) {
+                            throw new EmptyBodyException("task number", "task");
+                        }
                         int taskNumber = Integer.parseInt(remaining);
                         try {
                             Task task = lst.get(taskNumber - 1);
@@ -89,6 +92,9 @@ public class Duke {
                         }
                     }
                     case "done":
+                        if (remaining.equals("")) {
+                            throw new EmptyBodyException("task number", "task");
+                        }
                         int taskNumber = Integer.parseInt(remaining);
                         try {
                             Task task = lst.get(taskNumber - 1);
