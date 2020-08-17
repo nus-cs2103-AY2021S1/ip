@@ -12,6 +12,10 @@ public class Task {
         this.done = done;
     }
 
+    public String getStatusIcon() {
+        return (done ? "\u2713" : "\u2718");
+    }
+
     public Task setDone(boolean b) {
         return new Task(this.name, true);
     }
