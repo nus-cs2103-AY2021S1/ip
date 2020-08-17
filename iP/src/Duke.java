@@ -52,7 +52,16 @@ public class Duke {
             System.out.println("Nice! I've marked this task as done: ");
             System.out.println(chosenTask);
 
-        } else if (user_input.split(" ")[0].equals("todo")) {
+        } else if (user_input.split(" ")[0].equals("delete")) {
+            //delete task
+            int index = Integer.parseInt(user_input.split(" ")[1]) - 1;
+            Task chosenTask = taskList.get(index);
+            taskList.remove(index);
+            System.out.println("Noted. I've removed this task: ");
+            System.out.println(chosenTask);
+            System.out.println(String.format("Now you have %s tasks in the list.", taskList.size()));
+
+        }else if (user_input.split(" ")[0].equals("todo")) {
             // make to do
             if (user_input.split(" ", 2).length == 1) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -66,12 +75,16 @@ public class Duke {
 
         } else if (user_input.split(" ")[0].equals("deadline")) {
             // make deadline
-            String task = user_input.split(" ", 2)[1];
-            if (user_input.split("/by", 2).length == 1) {
+            if (user_input.split(" ", 2).length == 1) {
                 throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
             }
-            String description = user_input.split("/by", 2)[1];
+            String task = user_input.split(" ", 2)[1];
+            if (task.split("/by", 2).length < 2) {
+                throw new DukeException("☹ OOPS!!! The description and time is required for deadline");
+            }
+            String description = task.split("/by", 2)[0];
             String time = task.split("/by")[1];
+
             Task deadline = new Deadline(description, time);
             taskList.add(deadline);
             System.out.println("Got it. I've added this task:");
@@ -80,12 +93,16 @@ public class Duke {
 
         } else if (user_input.split(" ")[0].equals("event")){
             // make event
-            String task = user_input.split(" ", 2)[1];
-            if (user_input.split("/at", 2).length == 1) {
+            if (user_input.split(" ", 2).length == 1) {
                 throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
             }
-            String description = user_input.split("/at", 2)[1];
+            String task = user_input.split(" ", 2)[1];
+            if (task.split("/at", 2).length < 2) {
+                throw new DukeException("☹ OOPS!!! The description and time is required for event");
+            }
+            String description = user_input.split("/at", 2)[0];
             String time = task.split("/at")[1];
+
             Task event = new Event(description, time);
             taskList.add(event);
             System.out.println("Got it. I've added this task:");
