@@ -1,6 +1,7 @@
 public enum Command {
     LIST("list"),
     DONE("done"),
+    DELETE("delete"),
     BYE("bye"),
     TODO("todo"),
     DEADLINE("deadline"),

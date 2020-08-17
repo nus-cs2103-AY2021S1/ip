@@ -10,10 +10,13 @@ public class Duke {
     public String lowerLine =  indent + "___________________________________________________" +"\n";
     private final String INVALID_COMMAND_MESSAGE = "    Sorry couldn't recognise command";
     private final String DONE_TASK_MARKED_MESSAGE = "    Nice! I've marked this task as done:";
+    private final String DELETE_TASK_MARKED_MESSAGE = "    Noted. I've removed this task:";
+
     private final String NO_TASK_MESSAGE = "    Sorry the task does not exists";
     private final String ADDED_TASK_MESSAGE = "    Got it. I've added this task: ";
     private final String INVALID_DONE_MESSAGE = "    Sorry done cannot be empty ";
     private final String INVALID_TODO_MESSAGE = "    Sorry todo cannot be empty ";
+    private final String INVALID_DELETE_MESSAGE = "    Sorry delete cannot be empty ";
 
     private List<Task> lstOfTask = new ArrayList<>();
 
@@ -57,6 +60,9 @@ public class Duke {
                     resultString = ADDED_TASK_MESSAGE + "\n" + outputIndent + addDeadline(parsedUserInput) + "\n"
                             + getNumOfTaskMessage();
                     break;
+                case DELETE:
+                    resultString = delete(parsedUserInput);
+                    break;
                 default:
                     resultString = "";
                     break;
@@ -99,6 +105,22 @@ public class Duke {
         } catch (IndexOutOfBoundsException e1) {
             return INVALID_DONE_MESSAGE;
         }
+    }
+
+    private String delete(String[] parsedUserInput) {
+        try {
+            String deleteTask = parsedUserInput[1];
+            int doneTaskNumber = Integer.parseInt(deleteTask);
+            int identifierNumberInArrayList = doneTaskNumber - 1;
+            Task task = this.lstOfTask.get(identifierNumberInArrayList);
+            lstOfTask.remove(identifierNumberInArrayList);
+            return DELETE_TASK_MARKED_MESSAGE + "\n"
+                    + outputIndent + outputIndent + task.toString() + "\n"
+                    + getNumOfTaskMessage();
+        } catch (IndexOutOfBoundsException e1) {
+            return INVALID_DELETE_MESSAGE;
+        }
+
     }
 
     private String addToDo(String[] parsedUserInput) {
