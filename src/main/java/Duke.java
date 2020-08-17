@@ -9,6 +9,8 @@ public class Duke {
                 + " \\____|__  /__|  /____  > /_______  /__|___|  /\\____/ \n"
                 + "         \\/           \\/          \\/        \\/ \n";
         System.out.println("Hello from\n" + logo);
-//        Echo.initialise();
+        System.out.println("Welcome!");
+        System.out.println("What can Mrs Dino do for you?");
+        Echo.initialise();
     }
 }

@@ -1,13 +1,11 @@
 import java.util.Scanner;
 
 public class Echo {
-    private static boolean terminate = true;
+    private static boolean terminate = false;
     public static void initialise() {
-        while (Echo.terminate) {
+        while (!Echo.terminate) {
             Scanner sc = new Scanner(System.in);  // Create a Scanner object
-            System.out.println("Enter command:");
-
-            String command = sc.nextLine();  // Read user input
+             String command = sc.nextLine();  // Read user input
             Echo.echoMessage(command); // Output user input
         }
     }
@@ -16,7 +14,7 @@ public class Echo {
         if (!message.equals("bye")) {
             System.out.println(message);
         } else {
-            Echo.terminate = false;
+            Echo.terminate = true;
             System.out.println("Bye. Hope to see you again soon!");
         }
     }
