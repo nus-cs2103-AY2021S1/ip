@@ -4,13 +4,17 @@ public class Duke {
     private static final Divider divider = new Divider();
     private static final TaskList list = new TaskList();
 
+    public enum Command {
+        BYE, LIST, DONE, TASK, DELETE, OTHERS
+    }
+
     public static void main(String[] args) {
         sendGreeting();
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
             try {
-                String command = scanner.nextLine();
-                handleCommands(command);
+                String input = scanner.nextLine();
+                handleCommands(getCommand(input), input);
             } catch (Exception e){
                 System.out.println(divider.wrapInDivider(e.getMessage()));
             }
@@ -26,23 +30,45 @@ public class Duke {
         System.out.println(divider.wrapInDivider(logo + "\n\t Hello! I'm Duke\n\t What can I do for you?"));
     }
 
-    public static void handleCommands(String command) throws DukeException {
+    public static Command getCommand(String command) {
         if (command.equals("bye")) {
-            handleByeCommand();
+            return Command.BYE;
         } else if (command.equals("list")) {
-            handleListCommand();
+            return Command.LIST;
         } else if (command.startsWith("done")) {
-            handleDoneCommand(command);
+            return Command.DONE;
         } else if (command.startsWith("todo")) {
-            handleTaskCommand(command);
+            return Command.TASK;
         } else if (command.startsWith("deadline")) {
-            handleTaskCommand(command);
+            return Command.TASK;
         } else if (command.startsWith("event")) {
-            handleTaskCommand(command);
+            return Command.TASK;
         } else if (command.startsWith("delete")) {
-            handleDeleteCommand(command);
+            return Command.DELETE;
         } else {
-            throw new InvalidCommandException();
+            return Command.OTHERS;
+        }
+    }
+
+    public static void handleCommands(Command command, String input) throws DukeException {
+        switch (command) {
+            case BYE:
+                handleByeCommand();
+                break;
+            case LIST:
+                handleListCommand();
+                break;
+            case DONE:
+                handleDoneCommand(input);
+                break;
+            case TASK:
+                handleTaskCommand(input);
+                break;
+            case DELETE:
+                handleDeleteCommand(input);
+                break;
+            default:
+                throw new InvalidCommandException();
         }
     }
 
