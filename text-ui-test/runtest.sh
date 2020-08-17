@@ -16,6 +16,7 @@ fi
 if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/Duke.java
 then
     echo "********** BUILD FAILURE **********"
+    PAUSE
     exit 1
 fi
 
