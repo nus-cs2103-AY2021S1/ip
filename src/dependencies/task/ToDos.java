@@ -1,6 +1,6 @@
-package dependencies.storage;
+package dependencies.task;
 
-import static dependencies.storage.CompletionState.UNFINISHED;
+import static dependencies.task.CompletionState.UNFINISHED;
 
 public class ToDos extends Task {
     ToDos(String task) {

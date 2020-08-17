@@ -1,6 +1,8 @@
 package dependencies.executor;
 
 import dependencies.storage.Store;
+import dependencies.task.Task;
+
 import static dependencies.executor.Commands.*;
 
 public class Executor {
@@ -9,6 +11,8 @@ public class Executor {
     private static final String ADD_COMMAND = "add";
     private static final String LIST_COMMAND = "list";
     private static final String DONE_COMMAND = "done";
+    private static final String DELETE_COMMAND = "delete";
+
     private Commands commandState;
 
     /** Private constructor. */
@@ -26,17 +30,6 @@ public class Executor {
     private void setState(Commands c) {
         this.commandState = c;
     }
-
-/*
-    public String level2Exec(String command) {
-        if (command.equals(LIST_COMMAND)) {
-            return storage.getTodos();
-        } else {
-            // Level-2: only otehr comment is add.
-            storage.add(command);
-            return String.format("added: %s", command);
-        }
-    }*/
 
     /**
      * Executed the given command.
@@ -64,7 +57,7 @@ public class Executor {
      * @param command
      * @return string specifying what happened/what was done
      */
-    public String receiveAndExec(String command, String task) {
+    public String receiveAndExec(String command, Task task) {
         switch(command) {
             case ADD_COMMAND: {
                 setState(ADD);
@@ -99,14 +92,22 @@ public class Executor {
         }
     }
 
-    private String execAndReturn(String task) {
+    private String execAndReturn(Task task) {
         switch(commandState) {
             case ADD: {
                 String reply = storage.add(task);
-                return String.format("Added: %s", task);
+                return String.format("Got it! I have added the task:", task.toString());
             }
+            default: {
+                return "Error";
+            }
+        }
+    }
+
+    private String execAndReturn(String[] nums) {
+        switch(commandState) {
             case DONE: {
-                String reply = storage.done(task);
+                String reply = storage.done(nums);
                 return String.format("Congratz! I will marked this task as completed for you!\n%s\n" +
                         "Keep up the good work and continue to stay motivated.", reply);
             }

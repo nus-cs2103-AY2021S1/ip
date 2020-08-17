@@ -22,13 +22,29 @@ class Checker {
             String[] sArr = s.substring((x >= 0 ? x : y) + 5).split("\\s+");
             this.task = sArr[0];
             this.containsTask = true;
+
         }
-        else {
-            // TODO: add check here to ensure no gibberish is passed to todolist.
-            this.command = "add";
+        else if (s.contains("todo ") || s.contains("Todo ")) {
+            this.command = "todo";
             this.containsTask = true;
             this.task = s;
+
+        } else if (s.contains("event ") || s.contains("Event ")) {
+            this.command = "event";
+            this.containsTask = true;
+
+        } else  if (s.contains("deadline ") || s.contains("Deadline ")) {
+            this.command = "deadline";
+            this.containsTask = true;
         }
+    }
+
+    private boolean checkEvent(String s) {
+        return s.contains("/at");
+    }
+
+    private boolean checkDeadline(String s) {
+        return s.contains("/by");
     }
 
     public String getCommand() {

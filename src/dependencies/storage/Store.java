@@ -1,6 +1,6 @@
 package dependencies.storage;
 
-import java.util.*;
+import dependencies.task.Task;
 
 
 public class Store {
@@ -49,22 +49,25 @@ public class Store {
      * @param task
      * @return a string represenitng the newly added task
      */
-    public String add(String task) {
-        Task t = new Task(task);
-        todoList[todoIdx++] = t;
-        return t.toString();
+    public String add(Task task) {
+        todoList[todoIdx++] = task;
+        return task.toString();
     }
 
     /**
      * Finds the given task at index and completes it.
      *
-     * @param num
+     * @param nums am array of numbers in string form
      * @return a string represenitng the newly completed task.
      */
-    public String done(String num) {
-        Task t = todoList[Integer.valueOf(num) - 1];
-        t.completed();
-        return t.toString();
+    public String done(String[] nums) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < nums.length; i++) {
+            Task t = todoList[Integer.valueOf(nums[i])];
+            t.completed();
+            sb.append(t.toString()).append("\n");
+        }
+        return sb.toString();
     }
 
     public void deleteTask(int i) {

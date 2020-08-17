@@ -1,6 +1,6 @@
-package dependencies.storage;
+package dependencies.task;
 
-import static dependencies.storage.CompletionState.*;
+import static dependencies.task.CompletionState.*;
 
 public class Task {
     protected CompletionState state;
@@ -15,7 +15,4 @@ public class Task {
         this.state = COMPLETED;
     }
 
-    public String toString() {
-        return String.format("[%s] %s", state == UNFINISHED ? "X" : Character.toString((char)0x2713) , task);
-    }
 }

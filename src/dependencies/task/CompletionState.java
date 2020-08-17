@@ -1,4 +1,4 @@
-package dependencies.storage;
+package dependencies.task;
 
 enum CompletionState {
     COMPLETED, UNFINISHED
