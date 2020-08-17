@@ -46,6 +46,19 @@ public class Duke {
                 taskManager.displayList();
             }
 
+            else if(next.contains("check")) {
+                int checkInt;
+                try {
+                    String intAtBack = next.substring(6, next.length());
+                    checkInt = Integer.parseInt(intAtBack);
+                    System.out.println(checkInt);
+                    taskManager.checkList(checkInt);
+                }
+                catch(Exception e) {
+                    System.out.print(e);
+                }
+            }
+
             else {
                 System.out.println("--------------------------------------");
                 taskManager.addToList(next);
