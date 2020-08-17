@@ -15,6 +15,6 @@ class Deadline extends Task {
     @Override
     public String toString() {
         String tick = this.isDone() ? "[✓]" : "[✗]";
-        return String.format("%s%s %s", SYMBOL, tick, name);
+        return String.format("%s%s %s (by: %s)", SYMBOL, tick, name, deadline);
     }
 }
