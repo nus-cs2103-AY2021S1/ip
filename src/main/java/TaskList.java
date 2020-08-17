@@ -11,6 +11,10 @@ public class TaskList {
         taskList.add(task);
     }
 
+    public void deleteTask(int index) {
+        taskList.remove(index - 1);
+    }
+
     public Task getTask(int index) {
         // index is bounded from 0 to len - 1
         return taskList.get(index - 1);
