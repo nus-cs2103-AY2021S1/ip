@@ -6,12 +6,8 @@ public class Duke {
     private static final List<Task> storage = new ArrayList<>();
     private static final String border = "____________________________________________________________\n";
 
-    public static boolean checkBye(String task) {
-        if (task.equals("bye")) {
-            System.out.println(border + "Bye. Hope to see you again soon!\n" + border);
-            return true;
-        }
-        return false;
+    public static void exitLine() {
+        System.out.println(border + "Bye. Hope to see you again soon!\n" + border);
     }
 
     public static void displayList() {
@@ -64,7 +60,7 @@ public class Duke {
         while (true) {
             String test = scan.next();
             if (test.equals("bye")) {
-                checkBye("bye");
+                exitLine();
                 break;
             } else {
                 String next = scan.nextLine().replaceFirst(" ", "");
