@@ -31,7 +31,7 @@ public class Duke {
     public static void addTask(String s, String next) throws DukeException {
         Task toAdd = new Task("");
         if (s.matches("todo|deadline|event|done") && next.equals("")) {
-            throw new DukeException("OOPS!!! The description of " + s + " cannot be empty");
+            throw new DukeException("OOPS!!! The description of " + s + " cannot be empty.");
         }
 
         switch (s) {
@@ -57,7 +57,7 @@ public class Duke {
             default:
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :(");
         }
-        
+
         System.out.println(
                 border + "Got it. I've added this task:\n"
                         + "  " + toAdd + "\n"
@@ -70,22 +70,20 @@ public class Duke {
         return s.equals("done");
     }
 
-    public static void doneTask(String s) {
+    public static void doneTask(String s) throws DukeException {
         if (s.equals("")) {
             try {
                 addTask("done", "");
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                System.out.println(border + e.getMessage() + "\n" + border);
             }
             return;
         }
 
         int i = Integer.parseInt(s);
         if (i < 1 || i > storage.size()) {
-            System.out.println(
-                    border + "You have entered an invalid number: " + i
-                        + ". Please try again.\n" + border
-            );
+            throw new DukeException("You have entered an invalid number: " + i
+                                    + ". Please try again.");
         } else {
             Task t = storage.get(i - 1);
             Task completed = t.setDone(true);
@@ -99,7 +97,10 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        System.out.println(border + "Hello! I'm Duke\n" + "What can I do for you?\n" + border);
+        System.out.println(
+                border + "Hello! I'm Duke\n"
+                + "What can I do for you?\n" + border
+        );
 
         while (true) {
             String test = scan.next();
@@ -111,12 +112,16 @@ public class Duke {
                 if (checkList(test)) {
                     displayList();
                 } else if (checkDone(test)) {
-                    doneTask(next);
+                    try {
+                        doneTask(next);
+                    } catch (DukeException e) {
+                        System.out.println(border + e.getMessage() + "\n" + border);
+                    }
                 } else {
                     try {
                         addTask(test, next);
                     } catch (DukeException e) {
-                        System.out.println(e.getMessage());
+                        System.out.println(border + e.getMessage() + "\n" + border);
                     }
                 }
             }
