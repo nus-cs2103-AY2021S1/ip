@@ -4,6 +4,7 @@ public class Deadline extends Task {
 
     public Deadline(String name, String date) {
         super(name);
+        this.date = date;
     }
 
     @Override
