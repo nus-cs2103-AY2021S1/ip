@@ -32,29 +32,46 @@ public class Duke {
         System.out.println(store.get(num - 1));
     }
 
+    public void addTask(Task task) {
+        store.add(task);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        System.out.println(String.format("Now you have %d tasks in the list", store.size()));
+    }
+
     public void run() {
         Scanner scanner = new Scanner(System.in);
         store = new ArrayList<>();
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         boolean running = true;
         while (running) {
-            String input = scanner.nextLine();
-            String[] splitted = input.split(" ", 2);
-            String first = splitted[0];
-            switch (first) {
+            String input = scanner.nextLine().trim();
+            String[] splitString = input.split(" ", 2);
+            String command = splitString[0];
+            switch (command) {
                 case "bye":
                     running = false;
                     break;
                 case "list":
                     list();
                     break;
+                case "todo":
+                    addTask(new Todo(splitString[1]));
+                    break;
+                case "deadline":
+                    String[] deadlineInfo = splitString[1].split(" /by ");
+                    addTask(new Deadline(deadlineInfo[0], deadlineInfo[1]));
+                    break;
+                case "event":
+                    String[] eventInfo = splitString[1].split(" /at ");
+                    addTask(new Event(eventInfo[0], eventInfo[1]));
+                    break;
                 case "done":
-                    int num = Integer.parseInt(splitted[1]);
+                    int num = Integer.parseInt(splitString[1]);
                     doneTask(num);
                     break;
                 default:
-                    store.add(new Task(input));
-                    System.out.println("added: " + input);
+                    break;
             }
         }
         scanner.close();
