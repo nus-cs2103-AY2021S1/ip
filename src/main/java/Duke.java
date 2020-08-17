@@ -12,7 +12,7 @@ public class Duke {
         int numberOfItems = 0;
         while(carryOn) {
             String inputString = input.nextLine();
-            if (inputString.contains("done")) {
+            if (inputString.indexOf("done ") == 0) {
                 try {
                     int itemNumber = Integer.parseInt(inputString.substring(inputString.indexOf(" ") + 1));
                     if (inputString.length() <= 5) {
@@ -43,6 +43,26 @@ public class Duke {
                 System.out.println(divider + "Bye! See you next time!" + "\n" + divider);
                 carryOn = false;
                 input.close();
+            } else if (inputString.indexOf("delete ") == 0) {
+                try {
+                    int itemNumber = Integer.parseInt(inputString.substring(inputString.indexOf(" ") + 1));
+                    if (inputString.length() <= 7) {
+                        throw new DukeException("You did not specify which task you are deleting!");
+                    } else if (numberOfItems < itemNumber || itemNumber <= 0) {
+                        throw new DukeException("Hey, no such task exists!");
+                    } else {
+                        Task task = taskArray.get(itemNumber - 1);
+                        System.out.println(divider + "Noted, the task has been deleted");
+                        System.out.println(task + "\n" + divider);
+                        numberOfItems -= 1;
+                        System.out.println("Now you have " + numberOfItems + " tasks in the list.");
+                        taskArray.remove(itemNumber - 1);
+                    }
+                } catch (DukeException e) {
+                    System.out.println(divider + e.getMessage() + "\n" + divider);
+                } catch (NumberFormatException e) {
+                    System.out.println(divider + "Invalid input for done command!" + "\n" + divider);
+                }
             } else {
                 Task task = null;
                 if (inputString.indexOf("todo") == 0) {
@@ -68,7 +88,7 @@ public class Duke {
                         } else if (inputString.contains("deadline /by ")) {
                             throw new DukeException("You aren't setting anything for your deadline?!");
                         } else {
-                            task = new Deadline(inputString.substring(9, byIndex - 1), inputString.substring(byIndex + 4));
+                            task = new Deadline(inputString.substring(9, byIndex), inputString.substring(byIndex + 4));
                         }
                     } catch (DukeException e) {
                         System.out.println(divider + e.getMessage() + "\n" + divider);
@@ -85,7 +105,7 @@ public class Duke {
                         } else if (inputString.contains("event /at ")) {
                             throw new DukeException("You aren't setting anything as your event?!");
                         } else {
-                            task = new Deadline(inputString.substring(6, atIndex - 1), inputString.substring(atIndex + 4));
+                            task = new Event(inputString.substring(6, atIndex), inputString.substring(atIndex + 4));
                         }
                     } catch (DukeException e) {
                         System.out.println(divider + e.getMessage() + "\n" + divider);
