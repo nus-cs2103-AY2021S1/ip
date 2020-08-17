@@ -46,6 +46,12 @@ public class PrintDuke {
         printWithDashes(" Nice! I've marked this task as done:\n " + task);
     }
 
+    protected static void printDeleteTask(Task task, int length) {
+        String message = " Noted. I've removed this task:\n " + task;
+        message += String.format("\n Now you have %s task%s in the list.", length, length > 1 ? "s" : "" );
+        printWithDashes(message);
+    }
+
     protected static void printException(DukeException ex) {
         printWithDashes(" ERROR: " + ex.getMessage());
     }

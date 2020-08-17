@@ -18,6 +18,9 @@ public class Duke {
                     case "done":
                         list.markTaskAsDone(input);
                         break;
+                    case "delete":
+                        list.deleteTask(input);
+                        break;
                     case "todo":
                     case "event":
                     case "deadline":

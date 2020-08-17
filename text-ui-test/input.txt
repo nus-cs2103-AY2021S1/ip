@@ -23,3 +23,7 @@ done
 done
 done 2
 done 324341
+delete
+delete
+delete 3
+delete 747

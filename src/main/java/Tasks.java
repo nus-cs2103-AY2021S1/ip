@@ -92,7 +92,29 @@ public class Tasks {
             this.tasks.get(taskIndex).markAsDone();
             PrintDuke.printMarkTaskAsDone(this.tasks.get(taskIndex));
         } catch (IndexOutOfBoundsException ex) {
-            throw new InvalidTaskNumberException();
+            throw new InvalidTaskNumberException("The task to be marked as done does not exist!");
+        }
+    }
+
+    protected void deleteTask(String input) throws EmptyInputException, InvalidTaskNumberException {
+        String taskIndexStr;
+        try {
+            taskIndexStr = input.substring(7).trim();
+        } catch (IndexOutOfBoundsException ex) {
+            throw new EmptyInputException("The task to be deleted is not specified.");
+        }
+
+        if (taskIndexStr.length() < 1) {
+            throw new EmptyInputException("The task to be deleted is not specified.");
+        }
+        int taskIndex = Integer.parseInt(taskIndexStr) - 1;
+
+        try {
+            Task task = this.tasks.get(taskIndex);
+            this.tasks.remove(taskIndex);
+            PrintDuke.printDeleteTask(task, this.tasks.size());
+        } catch (IndexOutOfBoundsException ex) {
+            throw new InvalidTaskNumberException("The task to be deleted does not exist!");
         }
     }
 }
