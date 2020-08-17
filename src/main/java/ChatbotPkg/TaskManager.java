@@ -24,8 +24,8 @@ public class TaskManager {
 
     public void addTask(Task task) {
         tasks.add(task);
-        taskPrinter.display("Got it. I've added this task:\n   " + task +
-                String.format("\nNow you have %d tasks in the list.", count()));
+        taskPrinter.display("Got it. I've added this task:\n        " + task +
+                String.format("\n    Now you have %d task(s) in the list.", count()));
     }
 
     public void listAll() {
@@ -39,7 +39,7 @@ public class TaskManager {
     public boolean markAsDone(int index) {
         Task taskDone = getTask(index).markDone();
         if (this.tasks.set(index, taskDone) != null) {
-            taskPrinter.display("Nice! I've marked this task as done:\n" + taskDone);
+            taskPrinter.display("Nice! I've marked this task as done:\n    " + "    " + taskDone);
             return true;
         }
         return false;
