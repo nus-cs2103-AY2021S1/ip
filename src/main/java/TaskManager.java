@@ -8,15 +8,64 @@ public class TaskManager {
         this.toDoList = new ArrayList<>();
     }
 
-    public void addToList(String task, TaskType type) {
-        this.toDoList.add(new Task(task, type));
+    public void manage(String input) {
+        if(input.equals("list")) {
+            this.displayList();
+        }
+
+        else if(input.contains("check")) {
+            int checkInt;
+            try {
+                String intAtBack = input.substring(6, input.length());
+                checkInt = Integer.parseInt(intAtBack);
+                System.out.println(checkInt);
+                this.checkList(checkInt);
+            }
+            catch(Exception e) {
+                System.out.print(e);
+            }
+        }
+
+        else if (input.contains("todo")) {
+            System.out.println("--------------------------------------");
+            this.addToList(new ToDo(input));
+            this.taskPrint(input);
+            System.out.println("--------------------------------------");
+        }
+
+        else if (input.contains("deadline")) {
+            System.out.println("--------------------------------------");
+            this.addToList(new Deadline(input));
+            this.taskPrint(input);
+            System.out.println("--------------------------------------");
+        }
+
+        else if (input.contains("event")) {
+            System.out.println("--------------------------------------");
+            this.addToList(new Event(input));
+            this.taskPrint(input);
+            System.out.println("--------------------------------------");
+        }
+
+        else {
+            System.out.println("--------------------------------------");
+            this.addToList(new Task(input, TaskType.U));
+            this.taskPrint(input);
+            System.out.println("--------------------------------------");
+
+        }
+    }
+
+    public void addToList(Task task) {
+        this.toDoList.add(task);
     }
 
     public void displayList() {
         System.out.println("Check out your missions!");
         int i = 1;
         for (Task s : this.toDoList) {
-            System.out.println(i + ". " + s.toString() + " [" + s.getTaskStatusIcon() + "]");
+            System.out.println(i + ". " + " [" + s.getType() + "]"
+                    + s.toString() + " [" + s.getTaskStatusIcon() + "]");
             i += 1;
         }
     }
