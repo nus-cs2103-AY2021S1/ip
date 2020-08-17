@@ -9,8 +9,13 @@ public class Task {
         this.isDone = false;
     }
 
+    public void setDone() {
+        this.isDone = true;
+    }
+
     @Override
     public String toString() {
-        return name;
+        String icon = isDone ? "\u2713" : "\u2718";
+        return "[" + icon + "] " + name;
     }
 }
