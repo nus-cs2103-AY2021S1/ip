@@ -11,7 +11,7 @@ public class Chatbot {
     protected final String LINE = "    ____________________________________________________________";
     protected final String INVALID_TASK = "⚠⚠⚠ I'm sorry, but I don't know what that means :-(";
     protected final String INVALID_INDEX = "⚠⚠⚠ There appears to be a problem with your task number.";
-    protected final String EMPTY_DONE_TASK = "⚠⚠⚠ Add the appropriate task number after the command 'done'.";
+    protected final String EMPTY_ACTION_TASK = "⚠⚠⚠ Add the appropriate task number after the command 'done/delete'.";
     protected final String EMPTY_TODO_TASK = "⚠⚠⚠ The description of a 'todo' cannot be empty.";
     protected final String EMPTY_DEADLINE_TASK = "⚠⚠⚠ The description of a 'deadline' cannot be empty.";
     protected final String EMPTY_EVENT_TASK = "⚠⚠⚠ The description of a 'event' cannot be empty.";
@@ -38,13 +38,15 @@ public class Chatbot {
                     if (inquiry.equals("list")) {
                         list();
                     } else if (inquiry.startsWith("todo")) {
-                        taskHandler(TaskType.TODOS, inquiry);
+                        taskHandler(TaskType.TODO, inquiry);
                     } else if (inquiry.startsWith("deadline")) {
                         taskHandler(TaskType.DEADLINE, inquiry);
                     } else if (inquiry.startsWith("event")) {
                         taskHandler(TaskType.EVENT, inquiry);
                     } else if (inquiry.startsWith("done")) {
-                        completeTask(inquiry);
+                        taskAction(TaskType.DONE, inquiry);
+                    } else if (inquiry.startsWith("delete")) {
+                        taskAction(TaskType.DELETE, inquiry);
                     } else {
                         throw new DukeInvalidTaskException(INVALID_TASK);
                     }
@@ -61,9 +63,9 @@ public class Chatbot {
 
     private void taskHandler(TaskType type, String body) throws DukeException {
             Task currentTask;
-            if (type.equals(TaskType.TODOS)) {
+            if (type.equals(TaskType.TODO)) {
                 if (inquiry.equals("todo")) throw new DukeEmptyToDoException(EMPTY_TODO_TASK);
-                currentTask = new ToDos(body.substring(5));
+                currentTask = new ToDo(body.substring(5));
 
             } else if (type.equals(TaskType.DEADLINE)) {
                 if (inquiry.equals("deadline")) throw new DukeEmptyDeadlineException(EMPTY_DEADLINE_TASK);
@@ -89,7 +91,7 @@ public class Chatbot {
             reply("Now you have " + planner.size() + " tasks in the list.");
     }
 
-    private void completeTask(String inquiry) throws DukeException {
+    private void taskAction(TaskType type, String inquiry) throws DukeException {
 
         try {
             String[] tokens = inquiry.split(" ");
@@ -99,15 +101,25 @@ public class Chatbot {
                 throw new DukeInvalidIndexException(INVALID_INDEX);
             }
             Task currentTask = planner.get(num - 1);
-            currentTask.done();
+            if (type.equals(TaskType.DONE)) {
+                currentTask.done();
+                reply("Good job! I've marked this task as done");
+                reply(INDENTATION + currentTask.toString());
 
-            reply("Good job! I've marked this task as done");
-            reply(INDENTATION + currentTask.toString());
+            } else {
+                planner.remove(num - 1);
+                reply("Noted. I've removed this task: ");
+                reply(INDENTATION + currentTask.toString());
+                reply("Now you have " + planner.size() + " tasks in the list.");
+
+            }
+
+
 
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeInvalidIndexException(INVALID_INDEX);
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            throw new DukeEmptyDoneException(EMPTY_DONE_TASK);
+            throw new DukeEmptyActionException(EMPTY_ACTION_TASK);
         }
     }
 
