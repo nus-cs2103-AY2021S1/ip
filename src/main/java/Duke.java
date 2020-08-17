@@ -1,7 +1,5 @@
-import exceptions.DukeException;
-
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         CommandLineInterface.run();
     }
 }
