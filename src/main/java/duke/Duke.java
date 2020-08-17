@@ -60,6 +60,22 @@ public class Duke {
                             throw new InvalidUsageException("Usage: done <task number>");
                         }
                         break;
+                    case "delete":
+                        try {
+                            int taskNumber = Integer.parseInt(parsed[1]) - 1;
+                            // Check that the task number makes sense.
+                            if (taskNumber >= 0 && taskNumber < todoList.size()) {
+                                System.out.println("     Noted. I've removed this task: ");
+                                System.out.printf("      %s%n", todoList.remove(taskNumber).showTask());
+                                System.out.printf("     Now you have %d %s in the list%n",
+                                        todoList.size(), todoList.size() > 1 ? "tasks" : "task");
+                            } else {
+                                System.out.println("     Sorry, I can't find it in your list!");
+                            }
+                        } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
+                            throw new InvalidUsageException("Usage: delete <task number>");
+                        }
+                        break;
                     case "todo":
                         try {
                             this.addTodo(parsed[1]);
@@ -133,7 +149,7 @@ public class Duke {
     private void addDeadline(String deadline) throws DeadlineInvalidUsageException {
         String[] parsedDeadline = deadline.split("\\s*/by\\s*", 2);
 
-        if(parsedDeadline.length < 2) {
+        if (parsedDeadline.length < 2) {
             throw new DeadlineInvalidUsageException("You should specify the deadline by using `/by`");
         }
         if (parsedDeadline[0].equals("")) {
@@ -149,7 +165,7 @@ public class Duke {
     private void addEvent(String event) throws EventInvalidUsageException {
         String[] parsedEvent = event.split("\\s*/at\\s*", 2);
 
-        if(parsedEvent.length < 2) {
+        if (parsedEvent.length < 2) {
             throw new EventInvalidUsageException("You should specify a date by using `/at`");
         }
         if (parsedEvent[0].equals("")) {
