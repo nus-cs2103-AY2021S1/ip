@@ -23,6 +23,7 @@ public class Duke {
     public static final String MESSAGE_INVALID = "I don't understand anything you just said";
     public static final String MESSAGE_ADD = "Got it! I've added this task:";
     public static final String MESSAGE_COUNT = "Now you have %s tasks in the list.";
+    public static final String MESSAGE_BLANK_TASK = "Did you casually forget to put in the description of the task?";
 
     // processes the input and generates the output in the correct format.
     public static String displayOutput(String input) {
@@ -45,6 +46,9 @@ public class Duke {
 
     // adds task to list
     public static String addToList(Task[] taskList, char taskType, String taskStr) {
+        if (taskStr.isBlank()) {
+            return displayOutput(MESSAGE_BLANK_TASK);
+        }
         Task inputTask;
         int delimiter = taskStr.indexOf("/");
         switch (taskType) {
