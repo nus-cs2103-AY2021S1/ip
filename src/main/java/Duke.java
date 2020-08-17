@@ -19,8 +19,7 @@ public class Duke {
         System.out.println(border.replace("\n", ""));
         for (int i = 1; i <= listLen; i++) {
             Task curr = storage.get(i - 1);
-            String statusIcon = "[" + curr.getStatusIcon() + "] ";
-            System.out.println(i + "." + statusIcon + curr.getName());
+            System.out.println(i + "." + curr);
         }
         System.out.println(border);
     }
@@ -34,10 +33,9 @@ public class Duke {
         Task t = storage.get(i - 1);
         Task completed = t.setDone(true);
         storage.set(i - 1, completed);
-        String statusIcon = "[" + completed.getStatusIcon() + "] ";
         System.out.println(
                 border + "Nice! I've marked this task as done:\n" + "  "
-                        + statusIcon + completed.getName() + "\n" + border
+                        + completed + "\n" + border
         );
     }
 
