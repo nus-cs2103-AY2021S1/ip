@@ -13,7 +13,10 @@ public class Duke {
             } else if (next.startsWith("done ")) {    //When a task is done
                 done(next);
 
-            } else {         //Adding a to do, deadline, event
+            } else if (next.startsWith("delete")) {
+                delete(next);
+
+            } else {        //Adding a to do, deadline, event
                 tasks(next);
             }
 
@@ -39,6 +42,7 @@ public class Duke {
         try {
             int index = Integer.parseInt(s.replaceAll("[^0-9]", ""));
             tasks.get(index - 1).markDone();
+            System.out.println("Nice! I've marked this task as done:");
             System.out.println(tasks.get(index - 1));
 
         } catch (IndexOutOfBoundsException e){
@@ -47,7 +51,7 @@ public class Duke {
     }
 
 
-    public static void tasks(String s) throws DukeException {
+    public static void tasks(String s) throws DukeException, IllegalArgumentException {
         Task task;
         if (s.contains("todo")) {
             if (s.substring(4).trim().length() == 0) {
@@ -77,6 +81,21 @@ public class Duke {
         tasks.add(task);
         System.out.println(task);
         System.out.printf ("Now you have %d tasks in the list.\n", tasks.size());
+    }
+
+
+    public static void delete(String s) {
+        try {
+            int index = Integer.parseInt(s.replaceAll("[^0-9]", ""));
+            System.out.println ("Noted. I've removed this task:");
+            System.out.println (tasks.get(index - 1));
+            tasks.remove (index - 1);
+            System.out.printf ("Now you have %d tasks in the list.\n", tasks.size());
+
+
+        } catch (IndexOutOfBoundsException e){
+            System.out.println ("Sorry that task does not exist");
+        }
     }
 
 
