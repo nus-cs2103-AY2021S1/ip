@@ -35,7 +35,24 @@
     ____________________________________________________________
 
     ____________________________________________________________
-    EmptyBodyException: :((( OOPS!!! The description of a class Todo cannot be empty.
+    EmptyBodyException: :((( OOPS!!! The date and time of a event cannot be empty.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Here are the tasks in your list:
+     1. [T][✘] read book
+     2. [D][✘] return book (by: June 6th)
+     3. [E][✘] project meeting (at: Aug 6th 2-4pm)
+     4. [T][✘] join sports club
+     5. [T][✘] borrow book
+    ____________________________________________________________
+
+    ____________________________________________________________
+    IndexOutOfBoundsDukeException: :((( OOPS!!! Cannot find task 10 with only 5 task
+    ____________________________________________________________
+
+    ____________________________________________________________
+    IndexOutOfBoundsDukeException: :((( OOPS!!! Cannot find task 6 with only 5 task
     ____________________________________________________________
 
     ____________________________________________________________
@@ -54,6 +71,19 @@
     ____________________________________________________________
     Nice! I've marked this task as done:
      [E][✓] project meeting (at: Aug 6th 2-4pm)
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Here are the tasks in your list:
+     1. [T][✘] read book
+     2. [D][✘] return book (by: June 6th)
+     3. [E][✓] project meeting (at: Aug 6th 2-4pm)
+     4. [T][✘] join sports club
+     5. [T][✘] borrow book
+    ____________________________________________________________
+
+    ____________________________________________________________
+    IndexOutOfBoundsDukeException: :((( OOPS!!! Cannot find task 0 with only 5 task
     ____________________________________________________________
 
     ____________________________________________________________

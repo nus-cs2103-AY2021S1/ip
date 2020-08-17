@@ -75,14 +75,31 @@ public class Duke {
                     case "list":
                         printList();
                         break;
+                    case "delete": {
+                        int taskNumber = Integer.parseInt(remaining);
+                        try {
+                            Task task = lst.get(taskNumber - 1);
+                            lst.remove(taskNumber - 1);
+                            String deleteText = String.format("Okay. I've removed this task:\n" +
+                                    " %s", task);
+                            System.out.println(wrapText(deleteText));
+                            break;
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new IndexOutOfBoundsDukeException(taskNumber, lst.size(), "task");
+                        }
+                    }
                     case "done":
                         int taskNumber = Integer.parseInt(remaining);
-                        Task task = lst.get(taskNumber - 1);
-                        task.markAsDone();
-                        String doneText = String.format("Nice! I've marked this task as done:\n" +
-                                " %s", task);
-                        System.out.println(wrapText(doneText));
-                        break;
+                        try {
+                            Task task = lst.get(taskNumber - 1);
+                            task.markAsDone();
+                            String doneText = String.format("Nice! I've marked this task as done:\n" +
+                                    " %s", task);
+                            System.out.println(wrapText(doneText));
+                            break;
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new IndexOutOfBoundsDukeException(taskNumber, lst.size(), "task");
+                        }
                     case "todo":
                         Task newTodo = new Todo(remaining);
                         createNewTask(newTodo);
@@ -90,7 +107,10 @@ public class Duke {
                     case "deadline": {
                         String[] text = remaining.split(" /by ");
                         String description = text[0];
-                        String deadline = text.length > 1 ? text[1] : "";
+                        if (text.length <= 1) {
+                            throw new EmptyBodyException("deadline", "deadline");
+                        }
+                        String deadline = text[1];
                         Task newDeadline = new Deadline(description, deadline);
                         createNewTask(newDeadline);
                         break;
@@ -98,7 +118,10 @@ public class Duke {
                     case "event": {
                         String[] text = remaining.split(" /at ");
                         String description = text[0];
-                        String dateTime = text.length > 1 ? text[1] : "";
+                        if (text.length <= 1) {
+                            throw new EmptyBodyException("date and time", "event");
+                        }
+                        String dateTime = text[1];
                         Task newEvent = new Event(description, dateTime);
                         createNewTask(newEvent);
                         break;
