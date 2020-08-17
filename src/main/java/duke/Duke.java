@@ -1,5 +1,8 @@
 package duke;
 
+import exception.UnknownCommandException;
+import exception.InvalidUsageException;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,44 +33,59 @@ public class Duke {
                 break;
             }
 
-            // add instructions
-            String[] parsed = parseInput(input);
-            String command = parsed[0];
-            switch (command) {
-                case "list":
-                    System.out.println("     Here are the tasks in your list:");
-                    for (int i = 0; i < todoList.size(); i++) {
-                        System.out.printf("     %d. %s%n", i + 1, todoList.get(i).showTask());
-                    }
-                    break;
-                case "done":
-                    int done = Integer.parseInt(parsed[1]);
-                    if (done > 0 && done <= todoList.size()) {
-                        todoList.get(done - 1).markAsDone();
-                        System.out.println("     Good job! I've marked this task as done:");
-                        System.out.printf("      %s%n", todoList.get(done - 1).showTask());
-                    } else {
-                        System.out.println("     Sorry, I can't find it in your list!");
-                    }
-                    break;
-                case "todo":
-                    todoList.add(new Todo(parsed[1]));
-                    printAddConfirmation(todoList.size() - 1);
-                    break;
-                case "deadline":
-                    String[] parsedDeadline = parsed[1].split(" /by ", 2);
-                    todoList.add(new Deadline(parsedDeadline[0], parsedDeadline[1]));
-                    printAddConfirmation(todoList.size() - 1);
-                    break;
-                case "event":
-                    String[] parsedEvent = parsed[1].split(" /at ", 2);
-                    todoList.add(new Event(parsedEvent[0], parsedEvent[1]));
-                    printAddConfirmation(todoList.size() - 1);
-                    break;
-                default:
-                    // TODO: handle unknown cases here
-                    System.out.println("Invalid command!");
-                    continue;
+            // handle commands
+            try {
+                String[] parsed = parseInput(input);
+                String command = parsed[0];
+                switch (command) {
+                    case "list":
+                        // we ignore the argument after `list`.
+                        System.out.println("     Here are the tasks in your list:");
+                        for (int i = 0; i < todoList.size(); i++) {
+                            System.out.printf("     %d. %s%n", i + 1, todoList.get(i).showTask());
+                        }
+                        break;
+                    case "done":
+                        try {
+                            int taskNumber = Integer.parseInt(parsed[1]) - 1;
+                            // Check that the task number makes sense.
+                            if (taskNumber >= 0 && taskNumber < todoList.size()) {
+                                todoList.get(taskNumber).markAsDone();
+                                System.out.println("     Good job! I've marked this task as done:");
+                                System.out.printf("      %s%n", todoList.get(taskNumber).showTask());
+                            } else {
+                                System.out.println("     Sorry, I can't find it in your list!");
+                            }
+                        } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
+                            throw new InvalidUsageException("Usage: done <task number>");
+                        }
+                        break;
+                    case "todo":
+                        try {
+                            this.addTodo(parsed[1]);
+                        } catch (ArrayIndexOutOfBoundsException ex) {
+                            throw new InvalidUsageException("The description of a todo cannot be empty.");
+                        }
+                        break;
+                    case "deadline":
+                        try {
+                            this.addDeadline(parsed[1]);
+                        } catch (ArrayIndexOutOfBoundsException ex) {
+                            throw new InvalidUsageException("The description of a deadline cannot be empty.");
+                        }
+                        break;
+                    case "event":
+                        try {
+                            this.addEvent(parsed[1]);
+                        } catch (ArrayIndexOutOfBoundsException ex) {
+                            throw new InvalidUsageException("The description of an event cannot be empty.");
+                        }
+                        break;
+                    default:
+                        throw new UnknownCommandException();
+                }
+            } catch (InvalidUsageException | UnknownCommandException ex) {
+                System.out.println(ex.getMessage());
             }
             buildChatFence();
         }
@@ -106,4 +124,32 @@ public class Duke {
     private String[] parseInput(String input) {
         return input.split("\\W+", 2);
     }
+
+    private void addTodo(String todo) {
+        todoList.add(new Todo(todo));
+        printAddConfirmation(todoList.size() - 1);
+    }
+
+    private void addDeadline(String deadline) throws InvalidUsageException {
+        String[] parsedDeadline = deadline.split(" /by ", 2);
+        if (parsedDeadline.length < 2) {
+            String errorMsg = "Please ensure that the deadline description and date are not empty.\n"
+                    + "     Usage: deadline <deadline description> /by <deadline date>";
+            throw new InvalidUsageException(errorMsg);
+        }
+        todoList.add(new Deadline(parsedDeadline[0], parsedDeadline[1]));
+        printAddConfirmation(todoList.size() - 1);
+    }
+
+    private void addEvent(String event) throws InvalidUsageException {
+        String[] parsedEvent = event.split(" /at ", 2);
+        if (parsedEvent.length < 2) {
+            String errorMsg = "Please ensure that the event description and date are not empty.\n"
+                    + "     Usage: event <event description> /at <event date>";
+            throw new InvalidUsageException(errorMsg);
+        }
+        todoList.add(new Event(parsedEvent[0], parsedEvent[1]));
+        printAddConfirmation(todoList.size() - 1);
+    }
 }
+
