@@ -2,9 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Chatbot to execute the necessary actions.
- */
+
 public class Chatbot {
 
     protected String inquiry;
@@ -12,19 +10,13 @@ public class Chatbot {
     protected final String INDENTATION = "     ";
     protected final String LINE = "    ____________________________________________________________";
 
-    Chatbot() {
+    public Chatbot() {
         this.inquiry = "";
         this.planner = new ArrayList<Task>();
     }
 
-    /**
-     * The chat method prints the introductions and carry out the necessary steps.
-     * A String of horizontal lines will be printed after every inquiry.
-     * Under the while loop, if the inquiry is 'list', it will list all the tasks.
-     * If the inquiry starts with 'done', it will mark the task as done.
-     * Once the user input "bye" the chat bot will print the farewell message.
-     */
-    void chat() {
+
+    public void chat() {
         introductions();
 
         Scanner sc = new Scanner(System.in);
@@ -32,6 +24,13 @@ public class Chatbot {
         while (!inquiry.equals("bye")) {
             if (inquiry.equals("list")) {
                 list();
+
+            } else if (inquiry.startsWith("todo")) {
+                taskHandler(TaskType.TODOS, inquiry.substring(5));
+            } else if (inquiry.startsWith("deadline")) {
+                taskHandler(TaskType.DEADLINE, inquiry.substring(9));
+            } else if (inquiry.startsWith("event")) {
+                taskHandler(TaskType.EVENT, inquiry.substring(6));
             } else if (inquiry.startsWith("done")) {
                 String number = "";
                 for (String val: inquiry.split(" ")) {
@@ -46,11 +45,6 @@ public class Chatbot {
                     Task currentTask = planner.get(num - 1);
                     done(currentTask);
                 }
-
-            } else {
-                Task currentTask = new Task(inquiry);
-                addToPlanner(currentTask);
-                reply("added: " + inquiry);
             }
             System.out.println(LINE);
             inquiry = sc.nextLine();
@@ -59,63 +53,67 @@ public class Chatbot {
         farewell();
     }
 
-    /**
-     * Prints out the introductions.
-     */
+    private void taskHandler(TaskType type, String body) {
+        reply("Got it. I've added this task:");
+        Task currentTask;
+        if (type.equals(TaskType.TODOS)) {
+            currentTask = new ToDos(body);
+
+        } else if (type.equals(TaskType.DEADLINE)) {
+            int index = body.indexOf('/');
+            String deadline = body.substring(index + 1);
+            String description = body.substring(0, index);
+            currentTask = new Deadline(description, deadline);
+//        } else if (type.equals(TaskType.EVENT)) {
+        } else {
+            int index = body.indexOf('/');
+            String deadline = body.substring(index + 1);
+            String description = body.substring(0, index);
+            currentTask = new Event(description, deadline);
+        }
+        addToPlanner(currentTask);
+        reply(INDENTATION + currentTask.toString());
+        reply("Now you have " + planner.size() + " tasks in the list.");
+    }
+
+
     private void introductions() {
         reply("Hello, I'm Ravenloss");
         reply("What can I do for you?");
         System.out.println(LINE);
     }
 
-    /**
-     * Prints the farewell message.
-     */
+
     private void farewell() {
         reply("Bye. Hope to see you again soon!");
         System.out.println(LINE);
     }
 
-    /**
-     * Prints out the string with the indentation.
-     * @param string The string to be printed.
-     */
+
     private void reply (String string) {
         System.out.println(INDENTATION + string);
     }
 
-    /**
-     * Add inquiry to the planner.
-     * @param task String to be added to the list.
-     */
+
     private void addToPlanner(Task task) {
         planner.add(task);
     }
 
-    /**
-     * Prints out the list.
-     */
+
     private void list() {
+        reply("Here are the tasks in your list:");
         for (int i = 0; i < planner.size(); i++) {
             String number = (i + 1) + ".";
-            String status = "[" + planner.get(i).getStatusIcon() + "]";
-            reply(number + status + " " + planner.get(i).description);
+            Task currentTask = planner.get(i);
+            reply(number + currentTask.toString());
         }
     }
 
-    /**
-     * Marks the task as done. It also prints the completion message.
-     * @param task Task that was just completed.
-     */
+
     private void done(Task task) {
         task.done();
-        System.out.println(INDENTATION + "Good job! I've marked this task as done");
-        System.out.println(INDENTATION
-                + INDENTATION
-                + "[" + "\u2713" + "] "
-                + task.description);
+        reply("Good job! I've marked this task as done");
+        reply(INDENTATION + task.toString());
 
     }
-
-
 }
