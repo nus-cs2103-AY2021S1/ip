@@ -59,6 +59,7 @@ public class Chatbot {
         int i = 0;
 
         printHeader();
+        System.out.println(stylise("dO YoU ReAlLy nEeD Me tO NaMe tHeM OuT foR yOu?"));
         for (Task t : storedTasks) {
             System.out.println(stylise(String.format("%d. %s", ++i, t.toString())));
         }
