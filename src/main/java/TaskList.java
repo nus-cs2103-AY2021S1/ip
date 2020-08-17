@@ -8,7 +8,12 @@ public class TaskList {
         itemList.add(new Task(item));
     }
 
-    void markAsDone(int itemIndex) {
+    void markAsDone(int itemIndex) throws IllegalArgumentException {
+        if (itemIndex > itemList.size()) {
+            throw new IllegalArgumentException("Item #" + itemIndex + " does " +
+                                                       "not exist and cannot " +
+                                                       "be marked as done.");
+        }
         itemList.get(itemIndex - 1).markAsDone();
     }
 

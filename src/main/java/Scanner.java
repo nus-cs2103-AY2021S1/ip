@@ -17,13 +17,16 @@ public class Scanner {
             String line = reader.readLine();
             String command = line.split(" ")[0];
 
-            if (COMMANDS.contains(command)) {
+            if (COMMANDS.contains(command) && line.split(" ").length > 1) {
                 switch (command) {
                     case "done":
-                        System.out.println("running");
-                        userTaskList.markAsDone(
-                                Integer.parseInt(line.split( " ")[1])
-                        );
+                        try {
+                            userTaskList.markAsDone(
+                                    Integer.parseInt(line.split( " ")[1])
+                            );
+                        } catch (IllegalArgumentException ex) {
+                            System.out.println(ex.getMessage());
+                        }
                         break;
                     default:
                         break;
