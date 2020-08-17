@@ -34,11 +34,11 @@ public class Duke {
         } else if (command.startsWith("done")) {
             handleDoneCommand(command);
         } else if (command.startsWith("todo")) {
-            handleTaskCommand(command, "todo");
+            handleTaskCommand(command);
         } else if (command.startsWith("deadline")) {
-            handleTaskCommand(command, "deadline");
+            handleTaskCommand(command);
         } else if (command.startsWith("event")) {
-            handleTaskCommand(command, "event");
+            handleTaskCommand(command);
         } else if (command.startsWith("delete")) {
             handleDeleteCommand(command);
         } else {
@@ -75,7 +75,7 @@ public class Duke {
         }
     }
 
-    public static void handleTaskCommand(String command, String commandWord) throws DukeException {
+    public static void handleTaskCommand(String command) throws DukeException {
         String[] splitCommand = command.split(" ", 2);
         String taskWord = splitCommand[0];
         Task task = null;
