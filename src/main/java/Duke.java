@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Duke {
 
@@ -6,6 +8,7 @@ public class Duke {
         public String print();
     }
     public static void main(String[] args) {
+        List<String> tasks = new ArrayList<>();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -17,13 +20,17 @@ public class Duke {
         speak(greeting);
         Printable input;
         Scanner sc = new Scanner(System.in);
+
         do {
             input = getUserInput(sc);
-            if (input.print().equals("bye")) {
+            String command = input.print();
+            if (command.toLowerCase().equals("bye")) {
                 speak(goodbye);
                 break;
+            } else if (command.toLowerCase().equals("list")) {
+                listTasks(tasks);
             } else {
-                speak(input);
+                storeInput(command,tasks);
             }
         } while (true);
     }
@@ -35,8 +42,30 @@ public class Duke {
     }
 
     public static Printable getUserInput(Scanner sc) {
-        Printable input = () -> sc.nextLine().toLowerCase();
-        return input;
+        return () -> sc.nextLine();
     }
+
+    public static void storeInput(String command, List<String> tasks) {
+        tasks.add(command);
+        Printable userReply = () -> String.format("added: %s",command);
+        speak(userReply);
+        return;
+    }
+
+    public static void listTasks (List<String> tasks) {
+        int i;
+        StringBuilder sb = new StringBuilder();
+        for (i = 0 ; i < tasks.size() ; i++) {
+            if (i==tasks.size()-1) {
+                sb.append(String.format("%d. %s",i+1,tasks.get(i)));
+            } else {
+                sb.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
+            }
+        }
+        Printable task = () -> sb.toString();
+        speak(task);
+        return;
+     }
+
 
 }
