@@ -10,4 +10,20 @@ event fweofkowekf
 event fewf e/at fwofkew
 event john's birthday /at Friday night
 event school orientation /at 0800 today
+done 1
+done 2
+delete 1
+delete 2
+todo
+todo
+todo eat strawberry
+todo drink something hot
+deadline feowfke
+deadline defoekf /by
+deadline cs3230 assignment 1 /by this saturday 22 Aug
+deadline technical interview with ABC /by tuesday
+event fweofkowekf
+event fewf e/at fwofkew
+event john's birthday /at Friday night
+event school orientation /at 0800 today
 bye

@@ -16,7 +16,7 @@
 =======================================
     Sure! I have added the following task to your list: 
     [T][✘] eat strawberry
-    There are now 1 tasks in your list!
+    There is now 1 task in your list!
 =======================================
 =======================================
     Sure! I have added the following task to your list: 
@@ -56,6 +56,74 @@
     Sure! I have added the following task to your list: 
     [E][✘] school orientation (at: 0800 today)
     There are now 7 tasks in your list!
+=======================================
+=======================================
+    OK! I have marked the following task as done:
+    [T][✓] eat strawberry
+=======================================
+=======================================
+    OK! I have marked the following task as done:
+    [T][✓] drink something hot
+=======================================
+=======================================
+    OK! I have deleted the following task for your list:
+    [T][✓] eat strawberry
+    There are now 6 tasks in your list!
+=======================================
+=======================================
+    OK! I have deleted the following task for your list:
+    [D][✘] cs3230 assignment 1 (by: this saturday 22 Aug)
+    There are now 5 tasks in your list!
+=======================================
+=======================================
+    [ERROR]: todo description cannot be empty!
+=======================================
+=======================================
+    [ERROR]: todo description cannot be empty!
+=======================================
+=======================================
+    Sure! I have added the following task to your list: 
+    [T][✘] eat strawberry
+    There are now 6 tasks in your list!
+=======================================
+=======================================
+    Sure! I have added the following task to your list: 
+    [T][✘] drink something hot
+    There are now 7 tasks in your list!
+=======================================
+=======================================
+    [ERROR]: /by keyword must be in input for all deadline commands!
+=======================================
+=======================================
+    [ERROR]: Content after /by should not be empty!
+=======================================
+=======================================
+    Sure! I have added the following task to your list: 
+    [D][✘] cs3230 assignment 1 (by: this saturday 22 Aug)
+    There are now 8 tasks in your list!
+=======================================
+=======================================
+    Sure! I have added the following task to your list: 
+    [D][✘] technical interview with ABC (by: tuesday)
+    There are now 9 tasks in your list!
+=======================================
+=======================================
+    [ERROR]: /at keyword must be in input for all event commands!
+=======================================
+=======================================
+    Sure! I have added the following task to your list: 
+    [E][✘] fewf e (at: fwofkew)
+    There are now 10 tasks in your list!
+=======================================
+=======================================
+    Sure! I have added the following task to your list: 
+    [E][✘] john's birthday (at: Friday night)
+    There are now 11 tasks in your list!
+=======================================
+=======================================
+    Sure! I have added the following task to your list: 
+    [E][✘] school orientation (at: 0800 today)
+    There are now 12 tasks in your list!
 =======================================
 =======================================
     Bye bye! Hope to see you again soon!
