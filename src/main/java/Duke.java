@@ -13,10 +13,10 @@ public class Duke {
     private static final String EXIT = "     Bye. Hope to see you again soon!";
     private static final String LINE = "    ____________________________________________________________";
 
-    private static List<Task> lst = new ArrayList<>();
+    private static final List<Task> lst = new ArrayList<>();
 
     // Scanner
-    private final static Scanner sc = new Scanner(System.in);
+    private static final Scanner sc = new Scanner(System.in);
 
     // Greeting
     private static void greeting() {
@@ -29,7 +29,7 @@ public class Duke {
     }
 
     // Prints list
-    public static void printList() {
+    private static void printList() {
         StringBuilder sb = new StringBuilder();
         int sizeOfList = lst.size();
         sb.append("     Here are the tasks in your list:");
@@ -43,10 +43,10 @@ public class Duke {
         System.out.println(wrapText(sb.toString()));
     }
 
-    public static void createNewTask(Task newTask) {
+    private static void createNewTask(Task newTask) {
         lst.add(newTask);
         int newSize = lst.size();
-        String todoText = String.format("     Got it. I've added this task: \n" +
+        String todoText = String.format("     Got it. I've added this task:\n" +
                 "       %s\n" +
                 "     Now you have %s tasks in the list", newTask, newSize);
         System.out.println(wrapText(todoText));
