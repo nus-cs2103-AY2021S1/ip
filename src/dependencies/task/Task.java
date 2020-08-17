@@ -28,6 +28,8 @@ public abstract class Task {
 
     /* -------------------------- Static facory methods to create different Tasks ----------------------- */
 
+    public static Task createDoneTask(String task) { return new DoneTask(task); }
+
     public static Task createEmptyTask(){
         return new EmptyTask();
     }
@@ -48,6 +50,28 @@ public abstract class Task {
     private static class EmptyTask extends Task{
         private EmptyTask() {
             super(null);
+            super.state = null;
+        }
+
+        @Override
+        public String getDateLine() {
+            return "";
+        }
+
+        @Override
+        public boolean isTaskEmpty() {
+            return true;
+        }
+
+        @Override
+        public String toString() {
+            return "There is nothing here to see...";
+        }
+    }
+
+    private static class DoneTask extends Task{
+        private DoneTask(String nums) {
+            super(nums);
             super.state = null;
         }
 

@@ -63,7 +63,7 @@ public class Store {
     public String done(Integer[] nums) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < nums.length; i++) {
-            Task t = todoList[nums[i]];
+            Task t = todoList[nums[i] - 1];
             t.completed();
             sb.append(t.toString()).append("\n");
         }

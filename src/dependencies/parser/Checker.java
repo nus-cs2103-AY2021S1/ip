@@ -1,45 +1,59 @@
 package dependencies.parser;
 
+import dependencies.executable.Command;
 import dependencies.executable.CommandType.*;
 import dependencies.executable.Executable;
+import dependencies.task.Task;
 
 class Checker {
-    private String s;
     private Executable command;
-    private String task;
-    private boolean containsTask;
 
+    /**
+     * Constructor for the checker object. Validates the command given/if and creates an Executable object
+     * that can be passed to the executor.
+     *
+     * @param e string to be parsed into a command
+     */
+    private Checker(Executable e) {
+        this.command = e;
+    }
 
-    Checker(String s) {
-        this.s = s;
-
+    public static Checker parseAndCheck(String s) {
+        Executable e;
         if (s.contains("list") || s.contains("List")) {
-            this.containsTask = false;
-            this.command = "list";
-
+            e = Command.createListCommand(null);
         }
         else if (s.contains("done ") || s.contains("Done ")) {
-            this.command = "done";
             int x = s.indexOf("done");
-            int y = s.indexOf("done");
-            String[] sArr = s.substring((x >= 0 ? x : y) + 5).split("[\\D]+");
-            this.task = sArr[0];
-            this.containsTask = true;
-
+            String task = s.substring((x) + 5);
+            Task t = Task.createDoneTask(task);
+            e = Command.createDoneCommand(t);
         }
         else if (s.contains("todo ") || s.contains("Todo ")) {
-            this.command = "todo";
-            this.containsTask = true;
-            this.task = s;
+            int x = s.indexOf("todo");
+            String task = s.substring(x + 5);
+            Task t = Task.createTodo(task);
+            e = Command.createAddCommand(t);
 
         } else if (s.contains("event ") || s.contains("Event ")) {
-            this.command = "event";
-            this.containsTask = true;
+            int x = s.indexOf("event");
+            String task = s.substring(x + 6);
+            String[] arr = task.split("/at");
+            Task t = Task.createEvent(arr[0], arr[1]);
+            e = Command.createAddCommand(t);
 
         } else  if (s.contains("deadline ") || s.contains("Deadline ")) {
-            this.command = "deadline";
-            this.containsTask = true;
+            int x = s.indexOf("deadline");
+            String task = s.substring(x + 9);
+            String[] arr = task.split("/by");
+            Task t = Task.createEvent(arr[0], arr[1]);
+            e = Command.createAddCommand(t);
+
+        } else {
+            e = null;
         }
+
+        return new Checker(e);
     }
 
     private boolean isEvent(String s) {

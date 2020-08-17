@@ -82,11 +82,11 @@ public class Executor {
             case ADD: {
                 Task t = e.getTask();
                 reply = storage.add(t);
-                return String.format("Got it! I have added the task:", reply);
+                return String.format("Got it! I have added the task:\n%s", reply);
             }
             case DONE: {
                 // Done command would have a task of "1 2 3 4"
-                String[] nums = e.getTask().showTask().split("\\s+");
+                String[] nums = e.getTask().showTask().split("[\\D]+");
                 Integer[] arr = new Integer[nums.length];
                 for (int i = 0; i < nums.length; i++) {
                     arr[i] = Integer.valueOf(nums[i]);

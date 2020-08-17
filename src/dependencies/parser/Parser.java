@@ -34,7 +34,7 @@ public class Parser {
      * @return reply: what was done
      */
     public String parseAndExec(String command) {
-        Checker checker = new Checker(command);
+        Checker checker = Checker.parseAndCheck(command);
         String reply;
         reply = executor.receiveAndExec(checker.getExecutable());
         return reply;

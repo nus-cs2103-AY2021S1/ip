@@ -37,7 +37,7 @@ class DK {
      */
     public int takeCommand(String s) {
         // End command
-        if (END.contains(s)) {
+        if (!s.isEmpty() && END.contains(s)) {
             end();
             return 0;
         }
