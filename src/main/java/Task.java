@@ -1,6 +1,7 @@
 package main.java;
 
 public class Task {
+
     protected String description;
     protected boolean isDone;
 
@@ -8,11 +9,6 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-    }
-
-    // Get the description for this task
-    public String getDescription() {
-        return description;
     }
 
     // Check if this task is done or not
@@ -32,5 +28,11 @@ public class Task {
         } else {
             return "\u2718";
         }
+    }
+
+    // Return string representation of Task, added with tick or x symbol
+    @Override
+    public String toString() {
+        return "[" + getIcon() + "] " + description;
     }
 }

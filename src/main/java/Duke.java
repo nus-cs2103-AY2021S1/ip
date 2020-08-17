@@ -34,19 +34,19 @@ public class Duke {
                         break;
                     }
                     Task t = storage[i];
-                    System.out.println(" " + (i + 1) + "." + "[" + t.getIcon() + "] " + t.getDescription());
+                    System.out.println(" " + (i + 1) + "." + t.toString());
                 }
                 System.out.println(line);
             } else if (s[0].equals("done")) {
                 Task t = storage[Integer.parseInt(s[1]) - 1];
                 t.markAsDone();
                 System.out.println(line + "\n" + " Yay! I have marked this task as done: " + "\n"
-                    + "   [" + t.getIcon() + "] " + t.getDescription() + "\n" + line);
+                    + "   " + t.toString() + "\n" + line);
             } else {
                 Task t = new Task(input);
                 storage[counter] = t;
                 counter++;
-                System.out.println(line + "\n" + " added: " + t.getDescription() + "\n" + line);
+                System.out.println(line + "\n" + " added: " + t.toString() + "\n" + line);
             }
         }
     }
