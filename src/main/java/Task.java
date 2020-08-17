@@ -1,15 +1,8 @@
 public abstract class Task {
 
-    private final String task;
     private boolean done = false;
 
-    protected Task(String task) {
-        this.task = task;
-    }
-    
-    protected String getTask() {
-        return this.task;
-    }
+    abstract protected String getTask();
 
     protected void markDone() {
         this.done = true;
