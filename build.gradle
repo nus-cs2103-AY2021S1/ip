@@ -1,0 +1,17 @@
+plugins {
+    id "application"
+}
+
+apply plugin: 'java'
+
+ext {
+    javaMainClass = "Tickbot"
+}
+    
+application {
+    mainClassName = javaMainClass
+}
+
+run {
+    standardInput = System.in
+}
