@@ -1,10 +1,9 @@
 import main.java.Task;
-
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    static String bot = "Dave: \n";
+    static String bot = "Dave says: \n";
     //static String user = "Me: \n";
     static String addedText = "added: ";
     static String line = "_______________________________________________________________";
