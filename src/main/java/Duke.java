@@ -18,8 +18,9 @@ public class Duke {
             if (input.equals("bye")){
                 echo("Bye. Hope to see you again, bro!");
                 break;
+            } else {
+                echo(input);
             }
-            echo(input);
         }
     }
 }
