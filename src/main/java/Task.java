@@ -8,4 +8,9 @@ public class Task {
     public void markAsDone() {
         this.done = true;
     }
+
+    @Override
+    public String toString() {
+        return this.taskName;
+    }
 }
