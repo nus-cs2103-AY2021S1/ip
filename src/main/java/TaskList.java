@@ -5,7 +5,23 @@ public class TaskList {
     private final List<Task> itemList = new ArrayList<>();
 
     void addItem(String item) {
-        itemList.add(new Task(item));
+        String type = getItemType(item);
+        switch(type) {
+            case "todo":
+                itemList.add(new Todo(item.split("todo")[1].trim()));
+                break;
+            default:
+                break;
+        }
+    }
+
+    String getItemType(String item) {
+        return item.split(" ")[0];
+    }
+
+    String getItemParameter(String item, String itemType) {
+        String delimiter = itemType.equals("deadline") ? "/by" : "/at";
+        return item.split(delimiter)[1];
     }
 
     void markAsDone(int itemIndex) throws IllegalArgumentException {
