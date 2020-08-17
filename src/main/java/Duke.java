@@ -18,19 +18,63 @@ public class Duke {
     }
 
     private static void printList() {
-        System.out.println("     Here are the tasks in your list:");
         System.out.println(line);
+        System.out.println("     Here are the tasks in your list:");
         for(int i = 0; i < arr.size(); i++) {
             System.out.println(String.format("     %d. %s", i + 1, arr.get(i).getOutput()));
         }
         System.out.println(line);
     }
 
+    static void numTask() {
+        System.out.println(String.format("     Now you have %d tasks in the list.", arr.size()));
+    }
+
+    static void addTodo(String input) {
+        ToDo temp = new ToDo(input.substring(5, input.length()));
+        arr.add(temp);
+        System.out.println(line);
+        System.out.println("     Got it. I've added this task: ");
+        System.out.println("      " + temp.getOutput());
+        numTask();
+        System.out.println(line);
+        System.out.println();
+    }
+
+    static void addDeadline(String input) {
+        int dash = input.indexOf('/');
+        Deadline temp = new Deadline(input.substring(9,dash),
+                input.substring(dash, input.length()));
+        arr.add(temp);
+        System.out.println(line);
+        System.out.println("     Got it. I've added this task: ");
+        System.out.println("      " + temp.getOutput());
+        numTask();
+        System.out.println(line);
+        System.out.println();
+    }
+
+    static void addEvent(String input) {
+        int dash = input.indexOf('/');
+        Deadline temp = new Deadline(input.substring(6,dash),
+                input.substring(dash, input.length()));
+        arr.add(temp);
+        System.out.println(line);
+        System.out.println("     Got it. I've added this task: ");
+        System.out.println("      " + temp.getOutput());
+        numTask();
+        System.out.println(line);
+        System.out.println();
+    }
+
     private static void addNewTask(String input) {
-        arr.add(new Task(input));
-        System.out.println(line);
-        System.out.println(String.format("     added: %s", input));
-        System.out.println(line);
+        if(input.indexOf("todo") == 0) {
+            addTodo(input);
+        } else if (input.indexOf("deadline") == 0) {
+            addDeadline(input);
+        } else {
+            addEvent(input);
+        }
     }
 
     public static void main(String[] args) {
@@ -41,7 +85,7 @@ public class Duke {
 
         while(on) {
             String input = sc.nextLine();
-            if(input.compareTo("bye") == 0) {
+            if (input.compareTo("bye") == 0) {
                 on = false;
                 System.out.println(line);
                 System.out.println("     Bye. Hope to see you again soon!");
