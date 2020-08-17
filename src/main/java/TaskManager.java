@@ -20,6 +20,6 @@ public class TaskManager {
     }
 
     public void taskPrint(String msg) {
-        System.out.println("Added : re" + msg);
+        System.out.println("Added : " + msg);
     }
 }
