@@ -48,9 +48,9 @@ public class Duke {
                 return;
             } else if (input[0].equals("list")) {
                 int i = 0;
-                System.out.println(line);
+                System.out.println(line + "\n    Here are the tasks in your list: ");
                 while (list.size() > i) {
-                    System.out.println("    " + ++i + ". " + list.get(i - 1).toString());
+                    System.out.println("        " + ++i + ". " + list.get(i - 1).toString());
                 }
                 System.out.println( line);
             } else if (input[0].equals("done")) {
