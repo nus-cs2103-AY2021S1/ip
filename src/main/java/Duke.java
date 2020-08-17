@@ -21,7 +21,7 @@ public class Duke {
 
     while (true) {
       input = sc.nextLine();
-      String[] multiInput = input.split(" ");
+      String[] command = input.split(" ", 2);
 
       if (input.equals("bye")) {
         break;
@@ -34,14 +34,23 @@ public class Duke {
         }
 
         System.out.println("\t" + divider + "\n");
-      } else if (multiInput[0].equals("done")){
-        int index = Integer.parseInt(multiInput[1]) - 1;
+      } else if (command[0].equals("done")){
+        int index = Integer.parseInt(command[1]) - 1;
         Task targetTask = list.get(index);
         targetTask.setDone();
 
         System.out.println("\t" + divider);
         System.out.println("\tNice! I've marked this task as done: ");
         System.out.println("\t\t" + targetTask);
+        System.out.println("\t" + divider);
+      } else if (command[0].equals("todo")) {
+        ToDo newToDo = new ToDo(command[1]);
+        list.add(newToDo);
+
+        System.out.println("\t" + divider);
+        System.out.println("\tGot it. I've added this task: ");
+        System.out.println("\t\t" + newToDo);
+        System.out.println("\tNow you have " + list.size() + " tasks in the list.");
         System.out.println("\t" + divider);
       } else {
         list.add(new Task(input));
