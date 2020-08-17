@@ -95,7 +95,6 @@ public class Duke {
                 if (test.equals("list")) {
                     displayList();
                 } else if (checkDone(test)) {
-                    System.out.println(next);
                     doneTask(next);
                 } else {
                     try {
