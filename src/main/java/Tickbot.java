@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Tickbot {
@@ -55,9 +56,56 @@ public class Tickbot {
                 }
                 break;
             }
+            case "todo": {
+                String content = args[1];
+                for (int i = 2; i < args.length; i++) {
+                    content += " " + args[i];
+                }
+                Todo todo = new Todo(content);
+                tasks.add(todo);
+                printMessage("TO-DO added: " + todo);
+                break;
+            }
+            case "deadline": {
+                String content = args[1];
+                String time = null;
+                boolean inputingTime = false;
+                for (int i = 2; i < args.length; i++) {
+                    if (inputingTime) {
+                        time += " " + args[i];
+                    } else if (Objects.equals(args[i], "/by")) {
+                        inputingTime = true;
+                        time = args[++i];
+                    } else {
+                        content += " " + args[i];
+                    }
+                }
+                Deadline deadline = new Deadline(content, time);
+                tasks.add(deadline);
+                printMessage("Deadline added: " + deadline);
+                break;
+            }
+            case "event": {
+                String content = args[1];
+                String time = null;
+                boolean inputingTime = false;
+                for (int i = 2; i < args.length; i++) {
+                    if (inputingTime) {
+                        time += " " + args[i];
+                    } else if (Objects.equals(args[i], "/at")) {
+                        inputingTime = true;
+                        time = args[++i];
+                    } else {
+                        content += " " + args[i];
+                    }
+                }
+                Event event = new Event(content, time);
+                tasks.add(event);
+                printMessage("Event added: " + event);
+                break;
+            }
             default: {
-                tasks.add(new Task(command));
-                printMessage("Task added: " + command);
+                printMessage("Invalid command.");
             }
         }
         return true; // continue inputing

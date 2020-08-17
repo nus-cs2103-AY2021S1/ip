@@ -1,7 +1,7 @@
 /**
  * The class to represent a task.
  */
-public class Task {
+public abstract class Task {
     private final String content;
     private boolean completed;
 
@@ -22,9 +22,7 @@ public class Task {
         completed = status;
     }
 
-    @Override
-    public String toString() {
-        String mark = completed ? "✔︎" : "✘";
-        return String.format("[%s] %s", mark, content);
+    protected String getCompleteMark() {
+        return isCompleted() ? "✔︎" : "✘";
     }
 }
