@@ -1,8 +1,33 @@
 package dependencies.executable;
 
-public class Command<E> implements Executable {
-    private E e;
-    public Command(E e) {
-        this.e = e;
+import dependencies.task.Task;
+
+public class Command implements Executable {
+    private CommandType command;
+    private Task task;
+    private Command(CommandType command, Task task) {
+        this.command = command;
+        this.task = task;
+    }
+
+    public static Command createAddCommand(Task task) {
+        return new Command(CommandType.ADD, task);
+    }
+
+    public static Command createDoneCommand(Task task) {
+        return new Command(CommandType.DONE, task);
+    }
+
+    public static Command createListCommand(Task task) {
+        return new Command(CommandType.LIST, Task.createEmptyTask());
+    }
+    @Override
+    public CommandType getType() {
+        return command;
+    }
+
+    @Override
+    public Task getTask() {
+        return this.task;
     }
 }

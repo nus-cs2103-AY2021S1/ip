@@ -1,8 +1,11 @@
 package dependencies.parser;
 
+import dependencies.executable.CommandType.*;
+import dependencies.executable.Executable;
+
 class Checker {
     private String s;
-    private String command;
+    private Executable command;
     private String task;
     private boolean containsTask;
 
@@ -19,7 +22,7 @@ class Checker {
             this.command = "done";
             int x = s.indexOf("done");
             int y = s.indexOf("done");
-            String[] sArr = s.substring((x >= 0 ? x : y) + 5).split("\\s+");
+            String[] sArr = s.substring((x >= 0 ? x : y) + 5).split("[\\D]+");
             this.task = sArr[0];
             this.containsTask = true;
 
@@ -39,31 +42,22 @@ class Checker {
         }
     }
 
-    private boolean checkEvent(String s) {
+    private boolean isEvent(String s) {
         return s.contains("/at");
     }
 
-    private boolean checkDeadline(String s) {
+    private boolean isDeadline(String s) {
         return s.contains("/by");
     }
 
-    public String getCommand() {
+    private boolean isTodo(String s) {return false;}
+
+    public Executable getExecutable() {
         return this.command;
-    }
-
-    public String getTask() {
-        return this.task;
-    }
-
-    public boolean containsTask() {
-        return this.containsTask;
     }
 
     public boolean isValidCommand(String s) {
         return false;
     }
-
-
-
 
 }

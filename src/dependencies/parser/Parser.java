@@ -36,11 +36,7 @@ public class Parser {
     public String parseAndExec(String command) {
         Checker checker = new Checker(command);
         String reply;
-        if (checker.containsTask()) {
-            reply = executor.receiveAndExec(checker.getCommand(), checker.getTask());
-        } else {
-            reply = executor.receiveAndExec(command);
-        }
+        reply = executor.receiveAndExec(checker.getExecutable());
         return reply;
     }
 

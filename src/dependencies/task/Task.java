@@ -2,17 +2,133 @@ package dependencies.task;
 
 import static dependencies.task.CompletionState.*;
 
-public class Task {
+public abstract class Task {
     protected CompletionState state;
     protected String task;
 
-    Task(String task) {
+    protected Task(String task) {
         this.task = task;
         this.state = UNFINISHED;
     }
 
+    public String showTask() {
+        return this.task;
+    }
+
+    public boolean isTaskEmpty() {
+        return false;
+    }
+
+    abstract String getDateLine();
+
+
     public void completed() {
         this.state = COMPLETED;
+    }
+
+    /* -------------------- Static facory methods to create different Tasks --------------------- */
+
+    public static Task createEmptyTask(){
+        return new EmptyTask();
+    }
+
+    public static Task createTodo(String task) {
+        return new ToDos(task);
+    }
+
+    public static Task createEvent(String task, String date) {
+        return new Events(task, date);
+    }
+
+    public static Task createDeadline(String task, String date) {
+        return new Deadlines(task, date);
+    }
+
+    /* ------------------------------------ Subclasses --------------------------------------- */
+    private static class EmptyTask extends Task{
+        private EmptyTask() {
+            super(null);
+            super.state = null;
+        }
+
+        @Override
+        public String getDateLine() {
+            return "";
+        }
+
+        @Override
+        public boolean isTaskEmpty() {
+            return true;
+        }
+
+        @Override
+        public String toString() {
+            return "There is nothing here to see...";
+        }
+    }
+
+    private static class Events extends Task {
+        private String date;
+        private Events(String task, String date) {
+            super(task);
+            this.date = date;
+        }
+
+        @Override
+        public String getDateLine() {
+            return this.date;
+        }
+
+        @Override
+        public String toString() {
+            return String.format(
+                    "[Event][%s] %s (at: %s)", super.state == UNFINISHED ? "X"
+                            : Character.toString((char)0x2713),
+                    super.task,
+                    date);
+        }
+    }
+
+    private static class ToDos extends Task {
+        private ToDos(String task) {
+            super(task);
+        }
+
+        @Override
+        public String getDateLine() {
+            return "";
+        }
+
+        @Override
+        public String toString() {
+            return String.format(
+                    "[ToDo][%s] %s", super.state == UNFINISHED ? "X"
+                            : Character.toString((char)0x2713),
+                    super.task);
+        }
+    }
+
+    private static class Deadlines extends Task {
+        private String deadline;
+
+        private Deadlines(String task, String deadline) {
+            super(task);
+            this.deadline = deadline;
+        }
+
+        @Override
+        public String getDateLine() {
+            return this.deadline;
+        }
+
+        @Override
+        public String toString() {
+            return String.format(
+                    "[Deadline][%s] %s (by: %s)", super.state == UNFINISHED ? "X"
+                            : Character.toString((char)0x2713),
+                    super.task,
+                    deadline);
+        }
     }
 
 }

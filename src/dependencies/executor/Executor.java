@@ -4,7 +4,7 @@ import dependencies.storage.Store;
 import dependencies.task.Task;
 import dependencies.executable.*;
 
-import static dependencies.executor.Commands.*;
+import static dependencies.executable.CommandType.*;
 
 public class Executor {
 
@@ -14,7 +14,7 @@ public class Executor {
     private static final String DONE_COMMAND = "done";
     private static final String DELETE_COMMAND = "delete";
 
-    private Commands commandState;
+    private CommandType commandState;
 
     /** Private constructor. */
     private Executor() {}
@@ -28,43 +28,32 @@ public class Executor {
         return new Executor();
     }
 
-    private void setState(Commands c) {
+    private void setState(CommandType c) {
         this.commandState = c;
     }
 
     /**
      * Executed the given command.
      *
-     * @param command
+     * @param executable
      * @return string specifying what happened/what was done
      */
-    public String receiveAndExec(String command) {
-        switch(command) {
-            case LIST_COMMAND: {
+    public String receiveAndExec(Executable executable) {
+        // TODO: Adding of new commands is to be done here.
+        switch(executable.getType()) {
+            case LIST: {
                 setState(LIST);
                 break;
             }
-            default: {
-                setState(INVALID);  // Should never reached this stage.
-                break;
-            }
-        }
-        return execAndReturn();
-    }
-
-    /**
-     * Executed the given command on the given task.
-     *
-     * @param command
-     * @return string specifying what happened/what was done
-     */
-    public String receiveAndExec(String command, Task task) {
-        switch(command) {
-            case ADD_COMMAND: {
+            case ADD: {
                 setState(ADD);
                 break;
             }
-            case DONE_COMMAND: {
+            case DELETE: {
+                setState(DELETE);
+                break;
+            }
+            case DONE: {
                 setState(DONE);
                 break;
             }
@@ -73,13 +62,16 @@ public class Executor {
                 break;
             }
         }
-        return execAndReturn(task);
+        return execAndReturn(executable);
     }
 
-    private String execAndReturn() {
+
+
+    private String execAndReturn(Executable e) {
+        String reply;
         switch(commandState) {
             case LIST: {
-                String reply = storage.getTodosInList();
+                reply = storage.getTodosInList();
                 StringBuilder sb = new StringBuilder();
                 sb.append("Here are the task in your list:\n")
                         .append(reply)
@@ -87,28 +79,19 @@ public class Executor {
                         .append("Stop whining and start rolling.");
                 return sb.toString();
             }
-            default: {
-                return "Error";
-            }
-        }
-    }
-
-    private String execAndReturn(Task task) {
-        switch(commandState) {
             case ADD: {
-                String reply = storage.add(task);
-                return String.format("Got it! I have added the task:", task.toString());
+                Task t = e.getTask();
+                reply = storage.add(t);
+                return String.format("Got it! I have added the task:", reply);
             }
-            default: {
-                return "Error";
-            }
-        }
-    }
-
-    private String execAndReturn(String[] nums) {
-        switch(commandState) {
             case DONE: {
-                String reply = storage.done(nums);
+                // Done command would have a task of "1 2 3 4"
+                String[] nums = e.getTask().showTask().split("\\s+");
+                Integer[] arr = new Integer[nums.length];
+                for (int i = 0; i < nums.length; i++) {
+                    arr[i] = Integer.valueOf(nums[i]);
+                }
+                reply = storage.done(arr);
                 return String.format("Congratz! I will marked this task as completed for you!\n%s\n" +
                         "Keep up the good work and continue to stay motivated.", reply);
             }
@@ -117,9 +100,6 @@ public class Executor {
             }
         }
     }
-
-
-
 
 
 }

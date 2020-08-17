@@ -60,18 +60,18 @@ public class Store {
      * @param nums am array of numbers in string form
      * @return a string represenitng the newly completed task.
      */
-    public String done(String[] nums) {
+    public String done(Integer[] nums) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < nums.length; i++) {
-            Task t = todoList[Integer.valueOf(nums[i])];
+            Task t = todoList[nums[i]];
             t.completed();
             sb.append(t.toString()).append("\n");
         }
         return sb.toString();
     }
 
-    public void deleteTask(int i) {
-
+    public String deleteTask(Integer i) {
+        return null;
     }
 
 
