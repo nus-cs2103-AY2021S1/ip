@@ -73,6 +73,6 @@ public class Duke {
         }
 
         //Exit
-        System.out.println ("Bye. Hope to see your again soon!");
+        System.out.println ("Bye. Hope to see you again soon!");
     }
 }
