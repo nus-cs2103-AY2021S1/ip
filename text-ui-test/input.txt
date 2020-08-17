@@ -22,6 +22,16 @@ done 1000
 done 2
 done 3
 list
+delete
+delete all my stuff
+delete -1
+delete 1000
+delete 1
+todo newHomework
+event dinner /at 9March2021
+done 3
+delete 3
+list
 help me
 list all
 done all my homework

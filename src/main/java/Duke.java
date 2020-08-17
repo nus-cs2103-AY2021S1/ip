@@ -98,7 +98,8 @@ public class Duke {
                         if (instrLen == 1) {
                             System.out.println(INSTRUCTIONS);
                         } else {
-                            throw new InvalidInstructionException(HELP);                        }
+                            throw new InvalidInstructionException(HELP);
+                        }
                         break;
                     case LIST:
                         if (instrLen == 1) {
@@ -128,11 +129,28 @@ public class Duke {
                                     System.out.println("Alright! I'll mark this task as done!");
                                     inputList.get(idx).markAsDone();
                                     System.out.println(inputList.get(idx));
+                                    System.out.println(getTaskStatus(inputList, inputList.size()));
                                 }
                                 break;
                             }
                         } // if len != 2 or the input is not an integer
                         throw new InvalidInstructionException(DONE);
+                    case DELETE:
+                        if (instrLen == 2) {
+                            if (isNumeric(instruction.split(" ")[1])) { // second word in instruction is an integer
+                                int idx = Integer.parseInt(instruction.split(" ")[1]) - 1; // get index in list
+
+                                if (idx < 0 || idx >= inputList.size()) { // check if loc is an existing DukeTask inside the array inputList
+                                    throw new InvalidInstructionException(DELETE + ": Invalid Task Number");
+                                } else {
+                                    System.out.println("Alright! I'll delete this task!\n" + "Take note that this is irreversible!");
+                                    System.out.println(inputList.remove(idx));
+                                    System.out.println(getTaskSize(inputList));
+                                }
+                                break;
+                            }
+                        } // if len != 2 or the input is not an integer
+                        throw new InvalidInstructionException(DELETE);
                     case TODO:
                         if (instrLen == 1) {
                             throw new MissingFieldException(TODO + ": Description");
@@ -140,6 +158,7 @@ public class Duke {
                             TodoTask todotask = new TodoTask(mergeArray(instructionArray, 1, instrLen));
                             inputList.add(todotask);
                             System.out.println("Task Added: " + todotask.toString());
+                            System.out.println(getTaskSize(inputList));
                         }
                         break;
                     case DEADLINE:
@@ -157,6 +176,7 @@ public class Duke {
                                 DeadlineTask deadlinetask = new DeadlineTask(deadlineDesc, deadlineDatetime);
                                 inputList.add(deadlinetask);
                                 System.out.println("Task Added: " + deadlinetask.toString());
+                                System.out.println(getTaskSize(inputList));
                             }
                         }
                         break;
@@ -175,6 +195,7 @@ public class Duke {
                                 EventTask eventTask = new EventTask(eventDesc, eventDatetime);
                                 inputList.add(eventTask);
                                 System.out.println("Task Added: " + eventTask.toString());
+                                System.out.println(getTaskSize(inputList));
                             }
                         }
                         break;
@@ -233,5 +254,9 @@ public class Duke {
             }
         }
         return String.format("You now have %d %s done, and %d %s not done", done, done == 1 ? "task" : "tasks", notDone, notDone == 1 ? "task" : "tasks");
+    }
+
+    private static String getTaskSize(ArrayList<DukeTask> tasks) {
+        return String.format("You now have %d %s", tasks.size(), tasks.size() == 1 ? "task" : "tasks");
     }
 }
