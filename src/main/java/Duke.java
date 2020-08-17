@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
         String input;
 
@@ -110,6 +110,27 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println(lines);
                 System.exit(0);
+            } else if (input.contains("delete")) {
+                String stringIndex = input.substring(7, input.length());
+                int index = Integer.parseInt(stringIndex);
+                if (list.isEmpty()) {
+                    System.out.println(lines);
+                    System.out.println(" ☹ OOPS!!! Your list is currently empty!");
+                    System.out.println(lines);
+                } else if (index > 0 && index <= list.size()) {
+                    Task chosen = list.get(index - 1);
+                    list.remove(chosen);
+                    System.out.println(lines);
+                    System.out.println(" Noted. I've removed this task: ");
+                    System.out.println(chosen);
+                    System.out.println(" Now you have " + Integer.toString(list.size()) + " tasks in the list.");
+                    System.out.println(lines);
+                } else {
+                    System.out.println(lines);
+                    System.out.println(" ☹ OOPS!!! The index you've chosen is invalid");
+                    System.out.println(lines);
+                }
+
             } else {
                 System.out.println(lines);
                 System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
