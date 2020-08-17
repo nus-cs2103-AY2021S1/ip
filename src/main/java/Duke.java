@@ -13,30 +13,50 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        greet();
+        greet(logo);
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String input = sc.nextLine();
-            String[] splittedWords = input.split("\\s"); // splits string based on whitespace
+            String[] splittedWords = input.split("\\s", 2); // splits string based on whitespace
             String command = splittedWords[0];
+            String afterCommand = null;
+            if (splittedWords.length > 1) {
+                afterCommand = splittedWords[1];
+            }
 
+            // handle all different commands
             if (command.equals("bye")) {
                 exit();
                 break;
             } else if (command.equals("list")) {
                 displayList();
             } else if (command.equals("done")){
-                int taskNo = Integer.parseInt(splittedWords[1]);
-                tasks[taskNo - 1].markAsCompleted();
-                displayCompletedTask(tasks[taskNo - 1]);
+                int taskNo = Integer.parseInt(afterCommand) - 1;
+                tasks[taskNo].markAsCompleted();
+                displayCompletedTask(tasks[taskNo]);
+            } else if (command.equals("todo")) {
+                addOnToList(new ToDo(afterCommand));
+            } else if (command.equals("deadline")) {
+                // first chunk is the deadline details, second chunk is by when
+                String[] splittedDeadline = afterCommand.split("/");
+                String details = splittedDeadline[0].trim();
+                String by = splittedDeadline[1].split("\\s", 2)[1];
+                addOnToList(new Deadline(details, by));
+            } else if (command.equals("event")) {
+                // first chunk is the event details, second chunk is at where
+                String[] splittedEvent = afterCommand.split(("/"));
+                String details = splittedEvent[0].trim();
+                String at = splittedEvent[1].split("\\s", 2)[1];
+                addOnToList(new Event(details, at));
             } else {
+                // random adding
                 addOnToList(new Task(input));
             }
         }
     }
 
-    private static void greet() {
-       format("Hello! I'm Duke" + "\n" +
+    private static void greet(String logo) {
+       format("Hello! I'm\n" + logo + "\n" +
                 "What can I do for you?");
     }
 
@@ -50,7 +70,8 @@ public class Duke {
 
     private static void addOnToList(Task task) {
         tasks[index++] = task;
-        format("added: " + task.details);
+        format("Got it. I've added this task:\n" + task +  "\n"
+            + "Now you have " + index + " tasks in the list.");
     }
 
     private static void displayList() {
