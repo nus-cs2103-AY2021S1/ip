@@ -4,5 +4,9 @@ public class Todo extends Task{
         super(task);
     }
 
-
+    @Override
+    public String toString() {
+        String done = this.done ? "O" : "X";
+        return "[T][" + done + "] " + this.task;
+    }
 }

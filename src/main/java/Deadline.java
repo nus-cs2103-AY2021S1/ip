@@ -10,4 +10,10 @@ public class Deadline extends Task {
     private String getDeadline() {
         return this.deadline;
     }
+
+    @Override
+    public String toString() {
+        String done = this.done ? "O" : "X";
+        return "[D][" + done + "] " + this.task + "(by:" + this.deadline + ")";
+    }
 }

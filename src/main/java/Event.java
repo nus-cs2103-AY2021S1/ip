@@ -10,4 +10,10 @@ public class Event extends Task {
     private String getEvent() {
         return this.event;
     }
+
+    @Override
+    public String toString() {
+        String done = this.done ? "O" : "X";
+        return "[E][" + done + "] " + this.task + "(at:" + this.event + ")";
+    }
 }

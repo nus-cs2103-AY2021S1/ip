@@ -25,7 +25,7 @@ public class Duke {
                     int index = Integer.parseInt(stringarr[1]);
                     processor.processorDone(arraylst, index);
                 } else {
-                    processor.processorAdd(cmd, arraylst);
+                    arraylst = processor.processorAdd(cmd, arraylst);
                 }
             } else {
                 System.out.println("_________________________________________\n" + "Bye. Hope to see you again soon!" + "\n" + "_________________________________________");
