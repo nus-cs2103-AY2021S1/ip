@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Bill {
+public class level2 {
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -17,14 +17,27 @@ public class Bill {
         System.out.println("What Can I do for you? ");
         System.out.println("------------------------------------------");
 
-        String input = sc.next();
+        String input = sc.nextLine();
 
-       while (!input.equals("bye")) {
-           System.out.println("------------------------------------------");
-           System.out.println(input);
-           System.out.println("------------------------------------------");
-           input = sc.next();
-       }
+        List list_Of_Content = new ArrayList();
+
+        while (!input.equals("bye")) {
+
+            if (input.equals("list")) {
+
+                for (int i = 0; i < list_Of_Content.size(); i = i + 1) {
+                    String counter = Integer.toString(i + 1) + ". ";
+                    System.out.println(counter + list_Of_Content.get(i));
+                }
+                input = sc.nextLine();
+            } else {
+                list_Of_Content.add(input);
+                System.out.println("------------------------------------------");
+                System.out.println("added: " + input);
+                System.out.println("------------------------------------------");
+                input = sc.nextLine();
+            }
+        }
 
         System.out.println("------------------------------------------");
         System.out.println("Bye. Hope to see you again soon!");
