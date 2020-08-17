@@ -7,13 +7,17 @@ public class TaskList {
         taskList = new ArrayList<>();
     }
 
-    public void addTask(String taskDesc){
-        taskList.add(new Task(taskDesc));
+    public void addTask(Task task) {
+        taskList.add(task);
     }
 
     public Task getTask(int index) {
         // index is bounded from 0 to len - 1
         return taskList.get(index - 1);
+    }
+
+    public int numTasks() {
+        return taskList.size();
     }
 
     public void displayTasks() {

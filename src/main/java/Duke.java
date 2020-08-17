@@ -33,8 +33,33 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println(completedTask);
             } else {
-                taskList.addTask(newInput);
-                System.out.println("added: " + newInput);
+                // use indexOf() method to find substring
+                Task newTask = new Task("");    // this is to make the compiler happy
+
+                if (newInput.indexOf("event ") == 0) {
+                    int indexOfAtKeyword = newInput.indexOf(" /at ");
+                    String eventDesc = newInput.substring(6, indexOfAtKeyword);
+                    String eventTime = newInput.substring(indexOfAtKeyword + 5);
+
+                    newTask = new Event(eventDesc, eventTime);
+                    taskList.addTask(newTask);
+
+                } else if (newInput.indexOf("deadline ") == 0) {
+                    int indexOfByKeyword = newInput.indexOf(" /by ");
+                    String deadlineDesc = newInput.substring(9, indexOfByKeyword);
+                    String deadlineTime = newInput.substring(indexOfByKeyword + 5);
+
+                    newTask = new Deadline(deadlineDesc, deadlineTime);
+                    taskList.addTask(newTask);
+                } else if (newInput.indexOf("todo ") == 0){
+
+                    newTask = new Todo(newInput.substring(5));
+                    taskList.addTask(newTask);
+                }
+
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(newTask);
+                System.out.println("Now you have " + taskList.numTasks() + " tasks in the list.");
             }
         }
 
