@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -13,31 +14,30 @@ public class Duke {
 
         List<String> ls = new ArrayList<>();
         int count = 1;
-
         String line = "";
+
         while (!line.equals("bye")) {
             Scanner in = new Scanner(System.in);
             line = in.nextLine();
-            if (line.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            }
-
-            if (line.equals("list")) {
-                System.out.println("____________________________________________________________");
-                for (int x = 0; x < ls.size(); x++) {
-                    System.out.println(ls.get(x));
-                }
-                System.out.println("____________________________________________________________");
-            }
-            if (line.equals("list") == false) {
-                ls.add(count + ". " + line);
-                count++;
-                System.out.println("____________________________________________________________");
-                System.out.println("added: " + line);
-                System.out.println("____________________________________________________________");
+            switch (line) {
+                case "bye":
+                    System.out.println("Bye. Hope to see you again soon!");
+                    break;
+                case "list":
+                    System.out.println("____________________________________________________________");
+                    for (int x = 0; x < ls.size(); x++) {
+                        System.out.println(ls.get(x));
+                    }
+                    System.out.println("____________________________________________________________");
+                    break;
+                default:
+                    count++;
+                    System.out.println("____________________________________________________________");
+                    System.out.println("added: " + line);
+                    System.out.println("____________________________________________________________");
             }
         }
     }
 }
+
 
