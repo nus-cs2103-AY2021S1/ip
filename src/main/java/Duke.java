@@ -20,8 +20,11 @@ public class Duke {
         System.out.println(border);
     }
 
-    public static void addTask(String s, String next) {
+    public static void addTask(String s, String next) throws DukeException {
         Task toAdd = new Task("");
+        if (s.matches("todo|deadline|event|done") && next.equals("")) {
+            throw new DukeException("OOPS!!! The description of " + s + " cannot be empty");
+        }
         if (s.equals("todo")) {
             ToDo todo = new ToDo(next);
             storage.add(todo);
@@ -37,10 +40,7 @@ public class Duke {
             storage.add(event);
             toAdd = event;
         } else {
-            Task task = new Task(s + " " + next);
-            storage.add(task);
-            System.out.println(border + "added: " + task.getName() + "\n" + border);
-            return;
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :(");
         }
         System.out.println(
                 border + "Got it. I've added this task:\n"
@@ -56,7 +56,11 @@ public class Duke {
 
     public static void doneTask(String s) {
         if (s.equals("")) {
-            addTask("done", "");
+            try {
+                addTask("done", "");
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
             return;
         }
 
@@ -94,7 +98,11 @@ public class Duke {
                     System.out.println(next);
                     doneTask(next);
                 } else {
-                    addTask(test, next);
+                    try {
+                        addTask(test, next);
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
             }
         }
