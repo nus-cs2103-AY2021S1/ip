@@ -2,7 +2,6 @@ package duke;
 
 import exception.*;
 
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,16 +35,25 @@ public class Duke {
             // handle commands
             try {
                 String[] parsed = parseInput(input);
-                String command = parsed[0];
+                Commands command;
+
+                try {
+                    // modify parsed[0] to uppercase to ensure that comparison with the commands enum is standardized
+                    command = Commands.valueOf(parsed[0].toUpperCase());
+                } catch (IllegalArgumentException ex){
+                    // if parsed[0] not amongst valid commands, will throw an IllegalArgumentException
+                    throw new UnknownCommandException();
+                }
+
                 switch (command) {
-                    case "list":
+                    case LIST:
                         // we ignore the argument after `list`.
                         System.out.println("     Here are the tasks in your list:");
                         for (int i = 0; i < todoList.size(); i++) {
                             System.out.printf("     %d. %s%n", i + 1, todoList.get(i).showTask());
                         }
                         break;
-                    case "done":
+                    case DONE:
                         try {
                             int taskNumber = Integer.parseInt(parsed[1]) - 1;
                             // Check that the task number makes sense.
@@ -60,7 +68,7 @@ public class Duke {
                             throw new InvalidUsageException("Usage: done <task number>");
                         }
                         break;
-                    case "delete":
+                    case DELETE:
                         try {
                             int taskNumber = Integer.parseInt(parsed[1]) - 1;
                             // Check that the task number makes sense.
@@ -76,21 +84,21 @@ public class Duke {
                             throw new InvalidUsageException("Usage: delete <task number>");
                         }
                         break;
-                    case "todo":
+                    case TODO:
                         try {
                             this.addTodo(parsed[1]);
                         } catch (ArrayIndexOutOfBoundsException ex) {
                             throw new TodoInvalidUsageException("Todo description cannot be empty.");
                         }
                         break;
-                    case "deadline":
+                    case DEADLINE:
                         try {
                             this.addDeadline(parsed[1]);
                         } catch (ArrayIndexOutOfBoundsException ex) {
                             throw new DeadlineInvalidUsageException("Deadline description cannot be empty.");
                         }
                         break;
-                    case "event":
+                    case EVENT:
                         try {
                             this.addEvent(parsed[1]);
                         } catch (ArrayIndexOutOfBoundsException ex) {
