@@ -8,7 +8,7 @@ public class Duke {
         public String print();
     }
     public static void main(String[] args) {
-        List<String> tasks = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -29,6 +29,10 @@ public class Duke {
                 break;
             } else if (command.toLowerCase().equals("list")) {
                 listTasks(tasks);
+            } else if (command.split("\\s+")[0].equals("done")){
+                Task task = tasks.get(Integer.parseInt(command.split("\\s+")[1])-1);
+                task.setDone();
+                speak(() -> "Nice! I've marked this task as done:\n[✓] " + task.toString());
             } else {
                 storeInput(command,tasks);
             }
@@ -45,21 +49,23 @@ public class Duke {
         return () -> sc.nextLine();
     }
 
-    public static void storeInput(String command, List<String> tasks) {
-        tasks.add(command);
-        Printable userReply = () -> String.format("added: %s",command);
+    public static void storeInput(String command, List<Task> tasks) {
+        Task task = new Task(command,false);
+        tasks.add(task);
+        Printable userReply = () -> String.format("added: %s",task);
         speak(userReply);
         return;
     }
 
-    public static void listTasks (List<String> tasks) {
+    public static void listTasks (List<Task> tasks) {
         int i;
         StringBuilder sb = new StringBuilder();
         for (i = 0 ; i < tasks.size() ; i++) {
+            Task task = tasks.get(i);
             if (i==tasks.size()-1) {
-                sb.append(String.format("%d. %s",i+1,tasks.get(i)));
+                sb.append(String.format("%d.%s %s",i+1,task.getSymbol(),task));
             } else {
-                sb.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
+                sb.append(String.format("%d.%s %s\n", i+1,task.getSymbol(), task));
             }
         }
         Printable task = () -> sb.toString();
