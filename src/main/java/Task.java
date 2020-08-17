@@ -19,4 +19,8 @@ public class Task {
     public boolean isDone() {
         return done;
     }
+
+    public String getName() {
+        return this.name;
+    }
 }
