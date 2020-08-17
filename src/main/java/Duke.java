@@ -82,6 +82,15 @@ public class Duke {
         System.out.println("\t\t" + newEvent);
         System.out.println("\tNow you have " + list.size() + " tasks in the list.");
         System.out.println("\t" + divider);
+      } else if (command[0].equals("delete")) {
+        int index = Integer.parseInt(command[1]) - 1;
+        Task targetTask = list.remove(index);
+
+        System.out.println("\t" + divider);
+        System.out.println("\tNoted. I've removed this task: ");
+        System.out.println("\t\t" + targetTask);
+        System.out.println("\tNow you have " + list.size() + " tasks in the list.");
+        System.out.println("\t" + divider);
       } else {
         System.out.println("\t" + divider);
         System.out.println("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
