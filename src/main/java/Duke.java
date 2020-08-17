@@ -21,64 +21,83 @@ public class Duke {
         //Stop when user inputs "bye"
         while (!input.equals("bye")) {
             String[] inputArr = input.split(" ");
-
-            //Print list when user inputs "list"
-            if (input.equals("list")) {
-                printList(list);
-            }
-            // Mark task as done when user inputs "done"
-            else if (inputArr[0].equals("done")) {
-                String taskNumber = inputArr[1];
-                try {
+            try {
+                //Print list when user inputs "list"
+                if (input.equals("list")) {
+                    printList(list);
+                }
+                // Mark task as done when user inputs "done"
+                else if (inputArr[0].equals("done")) {
+                    if (inputArr.length < 2) {
+                        throw new DukeException("Task is empty :(\n");
+                    }
+                    String taskNumber = inputArr[1];
                     markTaskDoneInList(list, Integer.parseInt(taskNumber) - 1);
-                } catch (NumberFormatException e) {
-                    System.out.println(addDividers(formatString("Please enter out a valid number\n")));
                 }
-            }
-            //Add a new task to the list
-            else {
-                //Add a new to-do task
-                if (inputArr[0].equals("todo")) {
-                    String todoName = input.substring(5);
-                    ToDo todo = new ToDo(todoName);
-                    list.add(todo);
-                    String s = formatString("Got it. I've added this task: \n") +
-                            formatString(todo.toString() + '\n') +
-                            formatString("Now you have " + list.size() + " tasks in the list. \n");
-                    System.out.println(addDividers(s));
-                }
-                //Add a new deadline task
-                else if (inputArr[0].equals("deadline")) {
-                    String deadlineString = input.substring(9);
-                    String[] deadlineArr = deadlineString.split(" /by ");
-                    Deadline deadline = new Deadline(deadlineArr[0], deadlineArr[1]);
-                    list.add(deadline);
-                    String s = formatString("Got it. I've added this task: \n") +
-                            formatString(deadline.toString() + '\n') +
-                            formatString("Now you have " + list.size() + " tasks in the list. \n");
-                    System.out.println(addDividers(s));
-                }
-                //Add a new Event task
-                else if (inputArr[0].equals("event")) {
-                    String eventString = input.substring(6);
-                    String[] eventArr = eventString.split(" /at ");
-                    Event event = new Event(eventArr[0], eventArr[1]);
-                    list.add(event);
-                    String s = formatString("Got it. I've added this task: \n") +
-                            formatString(event.toString() + '\n') +
-                            formatString("Now you have " + list.size() + " tasks in the list. \n");
-                    System.out.println(addDividers(s));
-                }
-                //Add a normal task
+                //Add a new task to the list
                 else {
-                    list.add(new Task(input));
-                    String inputText = "added: " + input + '\n';
-                    String echo = addDividers(formatString(inputText));
-                    System.out.println(echo);
+                    //Add a new to-do task
+                    if (inputArr[0].equals("todo")) {
+                        if (inputArr.length < 2) {
+                            throw new TaskException("☹ OOPS!!! The description of a todo cannot be empty.\n");
+                        }
+                        String todoName = input.substring(5);
+                        ToDo todo = new ToDo(todoName);
+                        list.add(todo);
+                        String s = formatString("Got it. I've added this task: \n") +
+                                formatString(todo.toString() + '\n') +
+                                formatString("Now you have " + list.size() + " tasks in the list. \n");
+                        System.out.println(addDividers(s));
+                    }
+                    //Add a new deadline task
+                    else if (inputArr[0].equals("deadline")) {
+                        if (inputArr.length < 2) {
+                            throw new TaskException("☹ OOPS!!! The description of a deadline cannot be empty.\n");
+                        }
+                        String deadlineString = input.substring(9);
+                        String[] deadlineArr = deadlineString.split(" /by ");
+                        if (deadlineArr.length < 2) {
+                            throw new TaskException("☹ OOPS!!! The date of a deadline cannot be empty.\n");
+                        }
+                        Deadline deadline = new Deadline(deadlineArr[0], deadlineArr[1]);
+                        list.add(deadline);
+                        String s = formatString("Got it. I've added this task: \n") +
+                                formatString(deadline.toString() + '\n') +
+                                formatString("Now you have " + list.size() + " tasks in the list. \n");
+                        System.out.println(addDividers(s));
+                    }
+                    //Add a new Event task
+                    else if (inputArr[0].equals("event")) {
+                        if (inputArr.length < 2) {
+                            throw new TaskException("☹ OOPS!!! The description of an event cannot be empty.\n");
+                        }
+                        String eventString = input.substring(6);
+                        String[] eventArr = eventString.split(" /at ");
+                        if (eventArr.length < 2) {
+                            throw new TaskException("☹ OOPS!!! The date of an event cannot be empty.\n");
+                        }
+                        Event event = new Event(eventArr[0], eventArr[1]);
+                        list.add(event);
+                        String s = formatString("Got it. I've added this task: \n") +
+                                formatString(event.toString() + '\n') +
+                                formatString("Now you have " + list.size() + " tasks in the list. \n");
+                        System.out.println(addDividers(s));
+                    }
+                    //Unrecognised command
+                    else {
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+                    }
                 }
+            } catch (TaskException e) {
+                System.out.println(addDividers(formatString(e.toString())));
+            } catch (DukeException e) {
+                System.out.println(addDividers(formatString(e.toString())));
+            } catch (NumberFormatException e) {
+                System.out.println(addDividers(formatString("Please enter out a valid number\n")));
             }
             input = sc.nextLine();
         }
+
 
         //Formatting and printing of goodbye message
         String goodbye = "Bye. Hope to see you again soon! \n";
@@ -86,9 +105,9 @@ public class Duke {
     }
 
 
-    private static void markTaskDoneInList(List<Task> list, Integer taskNumber) {
+    private static void markTaskDoneInList(List<Task> list, Integer taskNumber) throws DukeException {
         if (taskNumber < 0 || taskNumber > list.size() - 1) {
-            System.out.println(addDividers(formatString("Please enter a valid task number\n")));
+            throw new DukeException("Please enter a valid task number\n");
         } else {
             list.get(taskNumber).markDone();
             String success = formatString("Nice! I've marked this task as done: \n") +
@@ -115,8 +134,7 @@ public class Duke {
     private static String addDividers(String s) {
         String divider = "___________________________\n";
         String dividerFormatted = String.format("%" + (5 + divider.length()) + "s", divider);
-        String added = dividerFormatted + s + dividerFormatted;
-        return added;
+        return dividerFormatted + s + dividerFormatted;
     }
 
     private static String formatString(String s) {
@@ -132,6 +150,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+
         readAndEcho(arrayList);
     }
 }
