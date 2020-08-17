@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -16,10 +17,23 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
 
         String command = sc.nextLine();
+        ArrayList<String> list = new ArrayList<>();
+
         while(!command.equals("bye")) {
-            System.out.println("    ____________________________________________________________");
-            System.out.println("     " + command);
-            System.out.println("    ____________________________________________________________");
+            if(command.equals("list")){
+                System.out.println("    ____________________________________________________________");
+                Integer i = 1;
+                for(String s : list) {
+                    System.out.println("    " + i.toString() + ". " + s);
+                    i++;
+                }
+                System.out.println("    ____________________________________________________________");
+            } else {
+                System.out.println("    ____________________________________________________________");
+                System.out.println("     added: " + command);
+                list.add(command);
+                System.out.println("    ____________________________________________________________");
+            }
             command = sc.nextLine();
         }
 
