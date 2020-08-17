@@ -1,12 +1,11 @@
-import java.util.ArrayList;
 import java.util.Scanner;
+import ChatbotPkg.*;
 
 public class Chatbot {
 
     private static TaskManager tskManager;
 
     private static boolean getUserInput(Scanner s) {
-        System.out.print(">> ");
         return s.hasNextLine();
     }
 

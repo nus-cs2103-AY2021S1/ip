@@ -1,9 +1,13 @@
+package ChatbotPkg;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class TaskPrinter implements Printable<Task> {
     public void display(String message) {
+        System.out.println("____________________________________________________________");
         System.out.println(message);
+        System.out.println("____________________________________________________________");
     }
 
     public void list(ArrayList<Task> ls) {
@@ -22,5 +26,6 @@ public class TaskPrinter implements Printable<Task> {
             System.out.println(index + ". " + iter.next());
             index++;
         }
+        System.out.println("- End of list -");
     }
 }
