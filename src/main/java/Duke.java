@@ -90,6 +90,22 @@ public class Duke {
         }
     }
 
+    public String deleteTask(String dt) throws DukeInvalidDeleteIndexException, DukeEmptyDeleteIndexException {
+        int index;
+        try {
+            String[] tokens = dt.split(" ");
+            index = Integer.parseInt(tokens[1]);
+            Task removedTask = list.remove(index - 1);
+            return "Noted. I've removed this task: \n" +
+                    "      " + removedTask +
+                    String.format("\n     Now you have %d tasks in the list.", list.size());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeEmptyDeleteIndexException(EMPTY_TASK_INDEX);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeInvalidDeleteIndexException(NO_SUCH_TASK);
+        }
+    }
+
     public void printList() {
         String s = "";
         for (int i = 0; i < list.size(); i ++) {
@@ -136,6 +152,12 @@ public class Duke {
                 try {
                     printWindow(duke.markDone(nextLine));
                 } catch (DukeEmptyDoneIndexException | DukeInvalidDoneIndexException e) {
+                    printWindow(e.getMessage());
+                }
+            } else if (nextLine.startsWith("delete")) {
+                try {
+                    printWindow(duke.deleteTask(nextLine));
+                } catch (DukeInvalidDeleteIndexException | DukeEmptyDeleteIndexException e) {
                     printWindow(e.getMessage());
                 }
             } else {
