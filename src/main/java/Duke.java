@@ -5,6 +5,18 @@ public class Duke {
     private static Task[] lst = new Task[100];
     private static int counter = 0;
 
+    public static Task getTask(String st) {
+        if ((st.length() >= 4) && (st.substring(0, 4).equals("todo"))) {
+            return new ToDo(st.substring(5));
+        } else if ((st.length() >= 8) && (st.substring(0, 8).equals("deadline"))) {
+            String[] arr = st.substring(9).split(" /by ");
+            return new Deadline(arr[0], arr[1]);
+        } else {
+            String[] arr = st.substring(6).split(" /at ");
+            return new Event(arr[0], arr[1]);
+        }
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -37,10 +49,12 @@ public class Duke {
                 System.out.println("-------------------------------------------------------------------------------------");
             } else {
                 System.out.println("-------------------------------------------------------------------------------------");
-                System.out.println("added: " + s);
-                System.out.println("-------------------------------------------------------------------------------------");
-                lst[counter] = new Task(s);
+                System.out.println("Got it. I've added this task:");
+                lst[counter] = getTask(s);
+                System.out.println("    " + lst[counter]);
                 counter += 1;
+                System.out.println("Now you have " + counter + " tasks in the list.");
+                System.out.println("-------------------------------------------------------------------------------------");
             }
             s = scan.nextLine();
         }
