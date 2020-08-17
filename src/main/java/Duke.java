@@ -4,9 +4,10 @@ import java.util.Scanner;
 public class Duke {
 
     private Scanner input;
-    private ArrayList<String> list;
+    private ArrayList<Task> list;
 
-    Duke(Scanner input, ArrayList<String> list) {
+
+    Duke(Scanner input, ArrayList<Task> list) {
         this.input = input;
         this.list = list;
     }
@@ -23,6 +24,9 @@ public class Duke {
                 break;
             } else if (command.equals("list")) {
                 this.printList();
+            } else if (command.split(" ")[0].equals("done")) {
+                int taskNo = Integer.parseInt(command.split(" ")[1]) - 1;
+                this.taskDone(taskNo);
             } else {
                 this.addToList(command);
             }
@@ -30,13 +34,23 @@ public class Duke {
         }
     }
 
-    void addToList(String task) {
+
+    void addToList(String command) {
+        Task task = new Task(command);
         this.list.add(task);
         System.out.println("added: " + task);
     }
 
+    void taskDone(int taskNo) {
+        Task toBeDone = this.list.get(taskNo);
+        toBeDone.markAsDone();
+        this.list.set(taskNo, toBeDone);
+        System.out.println("Good Job, this task is now done:");
+        System.out.println(toBeDone);
+    }
+
     void printList() {
-        for(int i = 1; i <= this.list.size(); i++) {
+        for (int i = 1; i <= this.list.size(); i++) {
             System.out.println(i + ". " + this.list.get(i - 1));
         }
     }
@@ -48,7 +62,7 @@ public class Duke {
         System.out.println("___________________________________________________");
 
         Scanner input = new Scanner(System.in);
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<>();
         Duke duke = new Duke(input, list);
 
         duke.commandHandler();
