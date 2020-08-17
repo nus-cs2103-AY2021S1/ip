@@ -2,7 +2,7 @@ public class Event extends Task {
 
     private String date;
 
-    public Event(String name) {
+    public Event(String name, String date) {
         super(name);
     }
 
