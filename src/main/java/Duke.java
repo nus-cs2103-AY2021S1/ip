@@ -32,6 +32,14 @@ public class Duke {
         System.out.println(store.get(num - 1));
     }
 
+    public void deleteTask(int num) {
+        Task task = store.get(num - 1);
+        store.remove(task);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(task);
+        System.out.println(String.format("Now you have %d tasks in the list", store.size()));
+    }
+
     public void addTaskToList(Task task) {
         store.add(task);
         System.out.println("Got it. I've added this task:");
@@ -74,6 +82,7 @@ public class Duke {
             String input = scanner.nextLine().trim();
             String[] splitString = input.split(" ", 2);
             String command = splitString[0];
+            int num;
 
             try {
                 switch (command) {
@@ -92,8 +101,12 @@ public class Duke {
                         addTask(command, splitString[1].trim());
                         break;
                     case "done":
-                        int num = Integer.parseInt(splitString[1]);
+                        num = Integer.parseInt(splitString[1]);
                         doneTask(num);
+                        break;
+                    case "delete":
+                        num = Integer.parseInt(splitString[1]);
+                        deleteTask(num);
                         break;
                     default:
                         throw new InvalidCommandException();
