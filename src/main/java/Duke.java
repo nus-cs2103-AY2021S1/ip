@@ -20,7 +20,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         while (true) {
             String input = scanner.nextLine();
-            String[] splitted = input.split(" ");
+            String[] splitted = input.split(" ", 2);
             String first = splitted[0];
             if (first.equals("bye")) {
                 break;
