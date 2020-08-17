@@ -38,19 +38,23 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done:\n" + "  " + statusIcon + completed.getName());
     }
 
+    public static boolean checkDone(Task task) {
+        String[] name = task.getName().split(" ");
+        return name[0].equals("done") && name[1].matches("\\d+");
+    }
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.println(border + "Hello! I'm Duke\n" + "What can I do for you?\n" + border);
 
         while(scan.hasNext()) {
-
             Task input = new Task(scan.nextLine());
             if(checkBye(input)) {
                 return;
             } else if(input.getName().equals("list")) {
                 displayList();
-//            } else if(input.getName().contains("done")) {
-
+            } else if(checkDone(input)) {
+                System.out.println(checkDone(input));
             } else {
                 addTask(input);
             }
