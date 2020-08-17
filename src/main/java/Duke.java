@@ -12,7 +12,7 @@ public class Duke {
         Scanner userInput = new Scanner(System.in);
 
         while (userInput.hasNext()) {
-            String input = userInput.next();
+            String input = userInput.nextLine();
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
