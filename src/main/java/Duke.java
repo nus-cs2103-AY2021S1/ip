@@ -21,6 +21,7 @@ public class Duke {
     public static void displayList() {
         int listLen = storage.size();
         System.out.println(border.replace("\n", ""));
+        System.out.println("Here are the tasks in your list: ");
         for (int i = 1; i <= listLen; i++) {
             Task curr = storage.get(i - 1);
             System.out.println(i + "." + curr);
@@ -30,7 +31,7 @@ public class Duke {
 
     public static void addTask(String s, String next) throws DukeException {
         Task toAdd = new Task("");
-        if (s.matches("todo|deadline|event|done") && next.equals("")) {
+        if (s.matches("todo|deadline|event|done|delete") && next.equals("")) {
             throw new DukeException("OOPS!!! The description of " + s + " cannot be empty.");
         }
 
