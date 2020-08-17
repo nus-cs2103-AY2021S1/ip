@@ -7,9 +7,19 @@ public class Store {
     private List<Task> allItems;
     private final String line = "____________________________________________________________\n";
 
-    private final String TODO = "todo";
-    private final String DEADLINE = "deadline";
-    private final String EVENT = "event";
+    enum TYPES {
+        TODO ("todo"),
+        DEADLINE("deadline"),
+        EVENT ("event")
+        ;
+        private String text;
+        TYPES(String text) {
+            this.text = text;
+        }
+    }
+//    private final String TODO = "todo";
+//    private final String DEADLINE = "deadline";
+//    private final String EVENT = "event";
 
     Store() {
         this.allItems = new ArrayList<>();
@@ -19,23 +29,23 @@ public class Store {
         try {
             String actual_item = item.strip();
         Task toAdd;
-            if (type.equals(TODO)) {
+            if (type.equals(TYPES.TODO.text)) {
             toAdd = new Task(actual_item);
             this.addTask(toAdd);
         } else {
             String[] parts_of_task = actual_item.split("/");
             if (parts_of_task.length != 2) {
                 String instruction = "<type of task> <description> / <deadline>";
-                if (type.equals(EVENT)) instruction = "<type of task> <description> / <date of event>";
+                if (type.equals(TYPES.EVENT.text)) instruction = "<type of task> <description> / <date of event>";
                 throw new DukeGotNoArgumentsException(instruction);
             } else {
                 String description = parts_of_task[0];
                 String duedate = parts_of_task[1];
-                if (type.equals(DEADLINE)) {
+                if (type.equals(TYPES.DEADLINE.text)) {
                     toAdd = new Deadline(description.strip(), duedate.strip());
                     this.addTask(toAdd);
 
-                } else if (type.equals(EVENT)) {
+                } else if (type.equals(TYPES.EVENT.text)) {
                     toAdd = new Event(description.strip(), duedate.strip());
                     this.addTask(toAdd);
 
@@ -82,7 +92,7 @@ public class Store {
             toComplete.finishTask();
         } catch (NumberFormatException ex) {
             System.out.println("I can't seem to understand what task you are referring to.\n" +
-                    "Please let me know in this format: done <number of task> \n" + line);
+                    "Please let me know in this format: done <number of task>\n" + line);
         } catch (IndexOutOfBoundsException ex) {
             System.out.println("Hmm... I don't have a task numbered " + answer + "\n" + line);
         }
@@ -96,7 +106,7 @@ public class Store {
             System.out.println("I have removed the task from your list.\n" + line);
         } catch (NumberFormatException ex) {
             System.out.println("I can't seem to understand what task you are referring to.\n" +
-                    "Please let me know in this format: done <number of task> \n" + line);
+                    "Please let me know in this format: done <number of task>\n" + line);
         } catch (IndexOutOfBoundsException ex) {
             System.out.println("Hmm... I don't have a task numbered " + answer + "\n" + line);
         }

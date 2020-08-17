@@ -11,28 +11,42 @@ public class Logic {
         this.store = new Store();
     }
 
-    private final String LIST_COMMAND = "list";
-    private final String EXIT_COMMAND = "bye";
-    private final String DONE_COMMAND = "done";
-    private final String TODO_COMMAND = "todo";
-    private final String DEADLINE_COMMAND = "deadline";
-    private final String EVENT_COMMAND = "event";
-    private final String DELETE_COMMAND = "delete";
+    enum COMMANDS {
+        TODO("todo"),
+        DEADLINE("deadline"),
+        EVENT("event"),
+        LIST("list"),
+        EXIT("bye"),
+        DONE("done"),
+        DELETE("delete")
+        ;
+        private String text;
+        COMMANDS(String text) {
+            this.text = text;
+        }
+    }
+//    private final String LIST_COMMAND = "list";
+//    private final String EXIT_COMMAND = "bye";
+//    private final String DONE_COMMAND = "done";
+//    private final String TODO_COMMAND = "todo";
+//    private final String DEADLINE_COMMAND = "deadline";
+//    private final String EVENT_COMMAND = "event";
+//    private final String DELETE_COMMAND = "delete";
 
 
     public boolean digestString(String answer) {
         try {
             String editted_answer = answer.strip().toLowerCase();
             String[] answers = answer.split(" ");
-            if (answers.length == 2 && answers[0].equals(DONE_COMMAND)) {
+            if (answers.length == 2 && answers[0].equals(COMMANDS.DONE.text)) {
                 return store.completeTask(answers[1]);
-            } else if (answers.length == 2 && answers[0].equals(DELETE_COMMAND)) {
+            } else if (answers.length == 2 && answers[0].equals(COMMANDS.DELETE.text)) {
                 return store.deleteTask(answers[1]);
-            }  else if (editted_answer.equals(LIST_COMMAND)) {
+            }  else if (editted_answer.equals(COMMANDS.LIST.text)) {
                 return this.store.printStore();
-            } else if (editted_answer.equals(EXIT_COMMAND)) {
+            } else if (editted_answer.equals(COMMANDS.EXIT.text)) {
                 return this.exit();
-            } else if (answers[0].equals(TODO_COMMAND) || answers[0].equals(DEADLINE_COMMAND) || answers[0].equals(EVENT_COMMAND) ) {
+            } else if (answers[0].equals(COMMANDS.TODO.text) || answers[0].equals(COMMANDS.DEADLINE.text) || answers[0].equals(COMMANDS.EVENT.text) ) {
                 return this.understandingTask(answer);
             } else {
                 throw new DukeCannotUnderstandException();
@@ -51,8 +65,8 @@ public class Logic {
             } else {
                 // no description
                 String instruction =  "<type of task> <description>" ;
-                if (answers[0].equals(DEADLINE_COMMAND)) instruction = "<type of task> <description> / <due date>";
-                else if (answers[0].equals(EVENT_COMMAND)) instruction = "<type of task> <description> / <date of event>";
+                if (answers[0].equals(COMMANDS.DEADLINE.text)) instruction = "<type of task> <description> / <due date>";
+                else if (answers[0].equals(COMMANDS.EVENT.text)) instruction = "<type of task> <description> / <date of event>";
                 throw new DukeGotNoArgumentsException(instruction);
             }
         } catch (DukeGotNoArgumentsException e) {

@@ -15,6 +15,7 @@ IF ERRORLEVEL 1 (
 REM no error here, errorlevel == 0
 
 set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
+set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 
 REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
 java -classpath ..\bin Duke < input.txt > ACTUAL.TXT

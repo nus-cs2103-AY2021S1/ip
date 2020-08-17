@@ -15,16 +15,16 @@ Hmm I did not understand what you meant.
 Could you try again?
 ____________________________________________________________
 
-Please re-enter in this manner: <type of task> <description>.
-The description can't be empty.
+Please reenter your tasks in the format <type of task> <description>
+Fill in all blanks.
 ____________________________________________________________
 
-Please re-enter in this manner: <type of task> <description> / <due date>.
-The description can't be empty.
+Please reenter your tasks in the format <type of task> <description> / <due date>
+Fill in all blanks.
 ____________________________________________________________
 
-Please re-enter in this manner: <type of task> <description> / <date of event>.
-The description can't be empty.
+Please reenter your tasks in the format <type of task> <description> / <date of event>
+Fill in all blanks.
 ____________________________________________________________
 
 Alright, its in your list now!
@@ -37,7 +37,8 @@ Alright, its in your list now!
 Now you have 2 tasks.
 ____________________________________________________________
 
-Please reenter your tasks in the format <type of task> <description>/<deadline>
+Please reenter your tasks in the format <type of task> <description> / <deadline>
+Fill in all blanks.
 ____________________________________________________________
 
 Alright, its in your list now!
@@ -50,7 +51,8 @@ Alright, its in your list now!
 Now you have 4 tasks.
 ____________________________________________________________
 
-Please reenter your tasks in the format <type of task> <description>/<date of event>
+Please reenter your tasks in the format <type of task> <description> / <date of event>
+Fill in all blanks.
 ____________________________________________________________
 
 Alright, its in your list now!
@@ -94,6 +96,16 @@ Please finish these tasks ASAP!
 [6] [E] [✘] right more that 2 words ----- When: mon
 If you're brave enough to start,
 You're strong enough to finish it!
+____________________________________________________________
+
+I can't seem to understand what task you are referring to.
+Please let me know in this format: done <number of task>
+____________________________________________________________
+
+I have removed the task from your list.
+____________________________________________________________
+
+Hmm... I don't have a task numbered 12
 ____________________________________________________________
 
 Bye! See you later :)

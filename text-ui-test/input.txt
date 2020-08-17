@@ -16,4 +16,7 @@ done two invalid
 done invalid
 done 2
 list
+delete invalid
+delete 1
+delete 12
 bye
