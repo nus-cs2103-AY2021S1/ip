@@ -14,25 +14,35 @@ public class TodoList {
     }
 
     private static void handleCommand(String command) {
-        if (command.equals("list")) {
+        String[] splitCommand = command.split(" ", 2);
+        if (splitCommand[0].equals("list")) {
             for (int i = 0; i < todoList.size(); i++) {
                 int index = i + 1;
                 System.out.println(index + ". " + todoList.get(i).toString());
             }
-        } else if (command.equals("bye")) {
+        } else if (splitCommand[0].equals("bye")) {
             TodoList.terminate = true;
             System.out.println("Bye. Hope to see you again soon!");
-        } else if (command.startsWith("done ")) {
-            String splicedCommand = command.substring(5);
+        } else if (splitCommand[0].equals("done")) {
             try {
-                int index = Integer.parseInt(splicedCommand);
+                int index = Integer.parseInt(splitCommand[1]);
                 Task targetTask = todoList.get(index - 1);
                 String message = targetTask.completeTask();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(message);
             } catch (NumberFormatException error) {
-                System.out.println("Are you sure this is the right command?");
+                // When "done" is not followed by a valid number
+                System.out.println("Please enter a valid index!");
+            } catch (ArrayIndexOutOfBoundsException error) {
+                // When "done" is not followed by any number
+                System.out.println("Please let me know which task you are referring to!");
             }
+        } else if (splitCommand[0].equals("deadline")) {
+
+        } else if (splitCommand[0].equals("todo")) {
+
+        } else if (splitCommand[0].equals("event")) {
+
         } else {
             TodoList.addTask(command);
         }
@@ -43,6 +53,4 @@ public class TodoList {
         todoList.add(newTask);
         System.out.println("added: " + task);
     }
-
-
 }
