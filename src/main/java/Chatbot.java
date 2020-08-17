@@ -60,15 +60,15 @@ public class Chatbot {
             currentTask = new ToDos(body);
 
         } else if (type.equals(TaskType.DEADLINE)) {
-            int index = body.indexOf('/');
-            String deadline = body.substring(index + 1);
-            String description = body.substring(0, index);
+            String[] arrOfString = body.split("/by ", 2);
+            String deadline = arrOfString[1];
+            String description = arrOfString[0];
             currentTask = new Deadline(description, deadline);
 //        } else if (type.equals(TaskType.EVENT)) {
         } else {
-            int index = body.indexOf('/');
-            String deadline = body.substring(index + 1);
-            String description = body.substring(0, index);
+            String[] arrOfString = body.split("/at ", 2);
+            String deadline = arrOfString[1];
+            String description = arrOfString[0];
             currentTask = new Event(description, deadline);
         }
         addToPlanner(currentTask);
