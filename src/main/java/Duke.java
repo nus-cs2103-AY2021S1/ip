@@ -110,7 +110,7 @@ public class Duke {
                         System.out.println(line);
                         break;
                     }
-                    case "done":
+                    case "done": {
                         int index = 0;
                         if (input.length == 1) {
                             throw new DukeException("Please select a task to mark as completed!");
@@ -118,7 +118,7 @@ public class Duke {
                         try {
                             index = Integer.parseInt(input[1]);
                         } catch (NumberFormatException e) {
-                            throw new DukeException("Please choose an integer greater than 0!");
+                            throw new DukeException("Please choose an integer value!");
                         }
                         if (index <= 0) {
                             throw new DukeException("Please choose an integer greater than 0!");
@@ -129,6 +129,7 @@ public class Duke {
                         System.out.println(line + "\n    Nice! I've marked this task as done:\n        "
                                 + list.get(index - 1).toString() + "\n" + line);
                         break;
+                    }
                     case "todo": {
                         if (input.length == 1) {
                             throw new DukeException("The description of a todo cannot be empty!");
@@ -140,6 +141,30 @@ public class Duke {
                         task = new ToDo(description.toString());
                         list.add(task);
                         System.out.println(line + "\n    Got it. I've added this task:\n        "
+                                + task.toString()
+                                + "\n    You now have " + list.size()
+                                + (list.size() == 1 ? " task" : " tasks")
+                                + " in your list.\n" + line);
+                        break;
+                    }
+                    case "delete": {
+                        int index = 0;
+                        if (input.length == 1) {
+                            throw new DukeException("Please select a task to mark as completed!");
+                        }
+                        try {
+                            index = Integer.parseInt(input[1]);
+                        } catch (NumberFormatException e) {
+                            throw new DukeException("Please choose an integer value!");
+                        }
+                        if (index <= 0) {
+                            throw new DukeException("Please choose an integer greater than 0!");
+                        } else if (index > list.size()) {
+                            throw new DukeException("Your task list is not that long yet!");
+                        }
+                        task = list.get(index - 1);
+                        list.remove(task);
+                        System.out.println(line + "\n    Noted. I've removed this task:\n        "
                                 + task.toString()
                                 + "\n    You now have " + list.size()
                                 + (list.size() == 1 ? " task" : " tasks")
