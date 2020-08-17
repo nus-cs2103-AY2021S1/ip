@@ -27,7 +27,8 @@ public class Store {
         StringUtils.printWithWrapper(new String[]{
                 "Sure! I have added the following task to your list: ",
                 newTask.toString(),
-                "There are now " + nextIndx + " tasks in your list!"}, false);
+                "There " + (nextIndx > 1 ? "are " : "is ") + "now " + nextIndx + " " +
+                        (nextIndx > 1 ? "tasks " : "task ") + "in your list!"}, false);
     }
 
     public void markTaskAsDone(int i) {
