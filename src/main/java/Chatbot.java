@@ -25,19 +25,12 @@ public class Chatbot {
 
     private void printFooter() {
         System.out.print("\n");
-        System.out.print(String.format("\t|%s|\n", " @ . ".repeat(20)));
-        System.out.print("\n");
+        printHeader();
     }
 
-    private void greet() {
+    private void printWithDecorations(String textToPrint) {
         printHeader();
-        System.out.println(stylise("yOu HavE nO cOnTrOL ovEr ME!"));
-        printFooter();
-    }
-
-    private void bye() {
-        printHeader();
-        System.out.println(stylise("hOpE To sEe yOu aGaIn. NoT."));
+        System.out.println(stylise(textToPrint));
         printFooter();
     }
 
@@ -58,10 +51,8 @@ public class Chatbot {
     private void storeText(String textToStore) {
         storedText.add(textToStore);
 
-        printHeader();
-        System.out.println(stylise(
-                "sInCe yOu'rE So hElPlEsS, i'lL ReMeMbEr \""+ textToStore + "\" FoR YoU."));
-        printFooter();
+        printWithDecorations("sInCe yOu'rE So hElPlEsS, " +
+                "i'lL ReMeMbEr \""+ textToStore + "\" FoR YoU.");
     }
 
     private void printStoredText() {
@@ -77,10 +68,11 @@ public class Chatbot {
     public void start() {
         String text = "";
 
-        greet();
+        printWithDecorations("yOu HavE nO cOnTrOL ovEr ME!");
+
         for (text = parseText(); ; text = parseText()) {
             if (text.equals("bye")) {
-                bye();
+                printWithDecorations("hOpE To sEe yOu aGaIn. NoT.");
                 break;
             } else if (text.equals("list")) {
                 printStoredText();
