@@ -1,10 +1,29 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
+    private final static ArrayList<String> list = new ArrayList<>();
+
     public static void start() {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
+    }
+
+    public static void reply(String input) {
+        if (input.equals("list")) {
+            System.out.println("Here are the tasks in your list:");
+            for (int i = 1; i < list.size() + 1; i++) {
+                System.out.println(i + ". " + list.get(i - 1));
+            }
+        } else {
+            addTask(input);
+        }
+    }
+
+    public static void addTask(String input) {
+        list.add(input);
+        System.out.println("added: " + input);
     }
 
     public static void exit() {
@@ -16,7 +35,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
-            System.out.println(input);
+            reply(input);
             input = sc.nextLine();
         }
         exit();
