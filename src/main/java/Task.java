@@ -1,15 +1,16 @@
 import java.util.ArrayList;
 
 public class Task {
-    ArrayList<Detail> thingsToDo;
+    ArrayList<TaskDetail> thingsToDo;
 
     public Task() {
         this.thingsToDo = new ArrayList<>();
     }
 
-    public String add(String desc) {
-        this.thingsToDo.add(new Detail(desc));
-        return "     added: " + desc + "\n";
+    // TODO: 17/8/20 print type, done
+    public Pair<String, Integer> add(TaskDetail detail) {
+        this.thingsToDo.add(detail);
+        return new Pair<>(detail.toString() + "\n", thingsToDo.size());
     }
 
     public String printTodoList() {
@@ -19,8 +20,8 @@ public class Task {
             message = message
                     + "     "
                     + (i + 1)
-                    + ". [" + sign + "] "
-                    + thingsToDo.get(i).description
+                    + "."
+                    + thingsToDo.get(i).toString()
                     + "\n";
         }
         return message;
@@ -30,15 +31,5 @@ public class Task {
         this.thingsToDo.get(i - 1).done = true;
         String message = "       [✓] " + thingsToDo.get(i - 1).description + "\n";
         return message;
-    }
-
-    private class Detail {
-        boolean done;
-        String description;
-
-        public Detail(String description) {
-            this.done = false;
-            this.description = description;
-        }
     }
 }

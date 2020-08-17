@@ -26,6 +26,14 @@ public class Duke {
         printMessage(toPrint);
     }
 
+    public static void printAdd(Pair<String, Integer> msg) {
+        String toPrint = "     Got it. I've added this task:\n"
+                + "       " + msg.getT()
+                + "     Now you have " + msg.getU() + " tasks in the list.\n";
+        printMessage(toPrint);
+    }
+
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Task tasks = new Task();
@@ -33,17 +41,32 @@ public class Duke {
         initialMessage();
         while(true) {
             String echo = sc.nextLine();
-            if (echo.equals("bye")) {
-                exitMessage();
-                break;
-            } else if (echo.equals("list")) {
+
+            // Command Handling
+            // Adding items
+            if (echo.matches("^todo.*")) {
+                printAdd(tasks.add(new ToDo(echo)));
+            } else if (echo.matches("^deadline.*\\/by.*")) {
+                String[] res = echo.substring("deadline".length()).split("/by");
+                printAdd(tasks.add(new Deadline(res[0], res[1])));
+            } else if (echo.matches("^event.*\\/at.*")) {
+                String[] res = echo.substring("event".length()).split("/at");
+                printAdd(tasks.add(new Event(res[0], res[1])));
+            }
+
+            // Querying items
+            else if (echo.equals("list")) {
                 printList(tasks.printTodoList());
             } else if (echo.matches("done\\s[0-9]+")) { // Checks if it matches done and an integer
                 // Strip the done, leaving the integer
                 int index = Integer.parseInt(echo.replaceAll("done ", ""));
                 printDone(tasks.markAsDone(index));
-            } else { // adds something
-                printMessage(tasks.add(echo));
+            }
+
+            // Exit command
+            else if (echo.equals("bye")) {
+                exitMessage();
+                break;
             }
         }
     }
