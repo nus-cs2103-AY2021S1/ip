@@ -1,0 +1,21 @@
+list
+todo
+todo task 1
+todo task 2
+deadline finish this project /by today 2:00am
+done 0
+done 5
+done 1
+deadline task 2
+deadline finish this project /by today 4:00am
+event task 4
+event project meeting /at Mon 2-4pm
+event project meeting /at Tues 2-4pm
+list
+done 4
+done 4
+done 2
+done 3
+list
+blah
+bye

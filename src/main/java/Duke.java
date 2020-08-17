@@ -23,20 +23,28 @@ public class Duke {
     // activate the Duke Bot
     public void echo() {
         greetings();
-        while(sc.hasNext()) {
-            String input = sc.nextLine();
-            String[] inputArr = input.trim().split(" ", 2);
-            if (isEnd(inputArr[0])) {
-                goodBye();
-                break;
-            } else if (isList(inputArr[0])) {
-                showListTasks(listTasks);
-            } else if (isValidDone(inputArr[0], inputArr[1])) {
-                marking(parseInt(inputArr[1]), listTasks.size());
-            } else if (isTask(inputArr[0])) {
-                addTask(inputArr[0], inputArr[1]);
-            } else {
-                System.out.println("Unknown command inputted in"); // temporary check!!!
+        while (sc.hasNext()) {
+            try {
+                String input = sc.nextLine();
+                String[] inputArr = input.trim().split(" ", 2);
+                if (isEnd(inputArr[0])) {
+                    goodBye();
+                    break;
+                } else if (isList(inputArr[0])) {
+                    showListTasks(listTasks);
+                } else if (isValidDone(inputArr[0]) && isNumber(inputArr[1])) {
+                    marking(parseInt(inputArr[1]), listTasks.size());
+                } else if (isTask(inputArr[0])) {
+                    // checking if the input is valid
+                    if (inputArr.length == 1) {
+                        throw new EmptyTextException(inputArr[0]);
+                    }
+                    addTask(inputArr[0], inputArr[1]);
+                } else {
+                    throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException e) {
+                printException(e.getMessage());
             }
         }
     }
@@ -50,6 +58,10 @@ public class Duke {
 
     private void goodBye() {
         messageFormatter(() -> System.out.println("Bye ^.^, Hope to see you again soon!!!"));
+    }
+
+    private void printException(String msg) {
+        messageFormatter(() -> System.out.println(msg));
     }
 
     // Formatter to format any message. Easily customizable
@@ -69,8 +81,8 @@ public class Duke {
         }
     }
 
-    private boolean isValidDone(String type, String num) {
-        return type.equals(KEYWORD_DONE) && isNumber(num);
+    private boolean isValidDone(String type) {
+        return type.equals(KEYWORD_DONE);
     }
 
     public boolean isEnd(String type) {
@@ -112,11 +124,9 @@ public class Duke {
     }
 
     // marking the task
-    private void marking(int num, int size) {
-        if (num <= 0) {
-            messageFormatter(() -> System.out.println("Invalid input!"));
-        } else if (size < num) {
-            messageFormatter(() -> System.out.printf("You have only %d task in your list\n", size));
+    private void marking(int num, int size) throws InvalidFormatDoneException {
+        if (num <= 0 || size < num) {
+            throw new InvalidFormatDoneException();
         } else {
             Task task = listTasks.get(num - 1);
             messageFormatter(() -> task.markAsDone());
@@ -124,16 +134,25 @@ public class Duke {
     }
 
     // adding the task into the list
-    private void addTask(String type, String message) {
+    private void addTask(String type, String message)
+            throws InvalidFormatDeadlineException, InvalidFormatEventException {
         Task task;
         String[] dateTime;
         if (isTODO(type)) {
             task = new ToDo(message);
         } else if (isDeadline(type)) {
             dateTime = message.split(" /by ", 2);
+            // checking if the input is valid
+            if (dateTime.length == 1) {
+                throw new InvalidFormatDeadlineException();
+            }
             task = new Deadline(dateTime[0], dateTime[1]);
         } else if (isEvent(type)){
             dateTime = message.split(" /at ", 2);
+            // checking if the input is valid
+            if (dateTime.length == 1) {
+                throw new InvalidFormatEventException();
+            }
             task = new Event(dateTime[0], dateTime[1]);
         } else {
             return;

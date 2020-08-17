@@ -1,7 +1,117 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+_______________________________________________
+Hello! I'm Duke ^.^
+What can I do for you?
+_______________________________________________
+
+_______________________________________________
+Your list is empty!!!
+_______________________________________________
+
+_______________________________________________
+ ☹ OOPS! You must fill in the text for todo
+_______________________________________________
+
+_______________________________________________
+Got it. I've added this task:
+[T][✘] task 1
+Now you have 1 tasks in the list.
+_______________________________________________
+
+_______________________________________________
+Got it. I've added this task:
+[T][✘] task 2
+Now you have 2 tasks in the list.
+_______________________________________________
+
+_______________________________________________
+Got it. I've added this task:
+[D][✘] finish this project (by: today 2:00am)
+Now you have 3 tasks in the list.
+_______________________________________________
+
+_______________________________________________
+ ☹ OOPS! A proper done format would be like + e.g. done 'an integer that is between 1(if list is not empty) to the number of items in the list'
+_______________________________________________
+
+_______________________________________________
+ ☹ OOPS! A proper done format would be like + e.g. done 'an integer that is between 1(if list is not empty) to the number of items in the list'
+_______________________________________________
+
+_______________________________________________
+Nice! I've marked this task as done:
+[T][✓] task 1
+_______________________________________________
+
+_______________________________________________
+ ☹ OOPS! A proper deadline format would be like, e.g. deadline 'task name' /by 'any date format'
+_______________________________________________
+
+_______________________________________________
+Got it. I've added this task:
+[D][✘] finish this project (by: today 4:00am)
+Now you have 4 tasks in the list.
+_______________________________________________
+
+_______________________________________________
+ ☹ OOPS! A proper event format would be like, e.g. event 'event name' /by 'any date format'
+_______________________________________________
+
+_______________________________________________
+Got it. I've added this task:
+[E][✘] project meeting (at: Mon 2-4pm)
+Now you have 5 tasks in the list.
+_______________________________________________
+
+_______________________________________________
+Got it. I've added this task:
+[E][✘] project meeting (at: Tues 2-4pm)
+Now you have 6 tasks in the list.
+_______________________________________________
+
+_______________________________________________
+Here are the tasks in your list:
+1. [T][✓] task 1
+2. [T][✘] task 2
+3. [D][✘] finish this project (by: today 2:00am)
+4. [D][✘] finish this project (by: today 4:00am)
+5. [E][✘] project meeting (at: Mon 2-4pm)
+6. [E][✘] project meeting (at: Tues 2-4pm)
+_______________________________________________
+
+_______________________________________________
+Nice! I've marked this task as done:
+[D][✓] finish this project (by: today 4:00am)
+_______________________________________________
+
+_______________________________________________
+This task has already been marked!
+_______________________________________________
+
+_______________________________________________
+Nice! I've marked this task as done:
+[T][✓] task 2
+_______________________________________________
+
+_______________________________________________
+Nice! I've marked this task as done:
+[D][✓] finish this project (by: today 2:00am)
+_______________________________________________
+
+_______________________________________________
+Here are the tasks in your list:
+1. [T][✓] task 1
+2. [T][✓] task 2
+3. [D][✓] finish this project (by: today 2:00am)
+4. [D][✓] finish this project (by: today 4:00am)
+5. [E][✘] project meeting (at: Mon 2-4pm)
+6. [E][✘] project meeting (at: Tues 2-4pm)
+_______________________________________________
+
+_______________________________________________
+ ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+_______________________________________________
+
+_______________________________________________
+Bye ^.^, Hope to see you again soon!!!
+_______________________________________________
 
