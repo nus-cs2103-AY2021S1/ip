@@ -26,12 +26,14 @@ public class Duke {
 
         greet();
 
-        String userInput = scan.next();
+        String userInput = scan.nextLine();
         while (!userInput.equals("bye")) {
             if (userInput.equals("list")) {
                 prettyPrint(userInputCollector);
-            } else if (userInput.equals("done")) {
-                Task taskToUpdate = userInputCollector.get(scan.nextInt() - 1);
+            } else if (userInput.split(" ", 2)[0].equals("done")) {
+                System.out.println("here");
+                Task taskToUpdate = userInputCollector.get(Integer.parseInt(userInput.split(" ", 2)[1])
+                        - 1);
                 taskToUpdate.updateStatus(true);
                 prettyPrint("Nice! I've marked this task as done: \n" + "       " + taskToUpdate);
             }
@@ -40,7 +42,7 @@ public class Duke {
                 userInputCollector.add(new Task(userInput));
             }
 
-            userInput = scan.next();
+            userInput = scan.nextLine();
         }
 
         prettyPrint("Bye. Hope to see you again soon!");
