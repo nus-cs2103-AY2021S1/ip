@@ -1,0 +1,8 @@
+list
+todo buy mlik
+deadline submit assignment /by Mon, 24 Aug
+event dance training /at Tue, 18 Aug
+list
+done 2
+list
+bye

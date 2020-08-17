@@ -4,4 +4,63 @@ Hello from
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
+--------------------------------------------------
+Hello! I'm Duke
+What can I do for you?
+--------------------------------------------------
+
+Type an action (list, done, todo, deadline, event, bye):
+--------------------------------------------------
+There is nothing in the list!!
+--------------------------------------------------
+
+Type an action (list, done, todo, deadline, event, bye):
+buy milk
+--------------------------------------------------
+Got it. I've added this task:
+	[T][✘] buy milk
+Now you have 1 tasks in the list.
+--------------------------------------------------
+
+Type an action (list, done, todo, deadline, event, bye):
+--------------------------------------------------
+Got it. I've added this task:
+	[D][✘] submit assignment (by: Mon, 24 Aug)
+Now you have 2 tasks in the list.
+--------------------------------------------------
+
+Type an action (list, done, todo, deadline, event, bye):
+--------------------------------------------------
+Got it. I've added this task:
+	[E][✘] dance training (at: Tue, 18 Aug)
+Now you have 3 tasks in the list.
+--------------------------------------------------
+
+Type an action (list, done, todo, deadline, event, bye):
+--------------------------------------------------
+1. [T][✘] buy milk
+2. [D][✘] submit assignment (by: Mon, 24 Aug)
+3. [E][✘] dance training (at: Tue, 18 Aug)
+--------------------------------------------------
+
+Type an action (list, done, todo, deadline, event, bye):
+--------------------------------------------------
+Nice! I've marked this task as done:
+	[D][✓] submit assignment (by: Mon, 24 Aug)
+--------------------------------------------------
+
+Type an action (list, done, todo, deadline, event, bye):
+--------------------------------------------------
+1. [T][✘] buy milk
+2. [D][✓] submit assignment (by: Mon, 24 Aug)
+3. [E][✘] dance training (at: Tue, 18 Aug)
+--------------------------------------------------
+
+Type an action (list, done, todo, deadline, event, bye):
+--------------------------------------------------
+Bye. Hope to see you again soon!
+--------------------------------------------------
+
+
+Process finished with exit code 0
 

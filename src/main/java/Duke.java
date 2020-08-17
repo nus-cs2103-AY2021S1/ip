@@ -33,6 +33,10 @@ public class Duke {
     }
 
     private void processList() {
+        if (this.list.size() < 1) {
+            System.out.printf(stringFormat, "There is nothing in the list!!");
+            return;
+        }
         StringBuilder content = new StringBuilder();
         for (int i = 0; i < this.list.size(); i++) {
             content.append(i + 1);
@@ -112,7 +116,7 @@ public class Duke {
                 this.createEvent(action);
                 break;
             default:
-                System.out.printf(stringFormat, "Unknown action!! Try again...");
+                System.out.printf(stringFormat, "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 break;
         }
         return true;
