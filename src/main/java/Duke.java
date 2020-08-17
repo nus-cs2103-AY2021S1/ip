@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Duke {
 
@@ -13,6 +15,7 @@ public class Duke {
 
     private static void interactWithUser() {
         boolean exitProgram = false;
+        List<String> listOfUserInput = new ArrayList<>();
         Scanner scn = new Scanner(System.in);
         while (!exitProgram) {
             System.out.println();
@@ -21,8 +24,14 @@ public class Duke {
             if (userInput.equals("bye")) {
                 System.out.println("Goodbye! Shutting down now...");
                 exitProgram = true;
+            } else if (userInput.equals("list")) {
+                int n = listOfUserInput.size();
+                for (int i = 0; i < n; i++) {
+                    System.out.println(String.format("%d. %s", i + 1, listOfUserInput.get(i)));
+                }
             } else {
-                System.out.println(userInput);
+                listOfUserInput.add(userInput);
+                System.out.println("added: " + userInput);
             }
             Duke.printHorizontalLine();
         }
