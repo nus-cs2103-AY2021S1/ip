@@ -42,7 +42,12 @@ public class InputHandler {
 
     private boolean handleList() {
         int len = taskList.size();
+        System.out.println(len);
+        String firstLine = len == 0
+            ? "There are no tasks in your list!"
+            : "Here are the tasks in your list:";
         System.out.println(DIVIDER);
+        System.out.println(firstLine);
         for (int i = 1; i <= len; i++) {
             Task task = taskList.get(i - 1);
             String output = i + "." + task.toString();
