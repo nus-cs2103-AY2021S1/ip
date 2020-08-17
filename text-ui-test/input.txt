@@ -1,13 +1,23 @@
 list
-todo study
-todo go for lecture
+todo study for exams
+todo buy food
+list
+done 1
+done oops type wrong
+done 69
+todo pray
 deadline CS2103 /by 20 August 2020
-list
+deadline final assignment /by 19 September 2020
+deadline /by
+event run /at Utown 10pm
+event run at Utown 10pm
+event /at Utown 10pm
+event run /at
+todo
+deadline
+event
+blah
 done 2
-todo eat lunch with friend
-event welfare pack giveaway /at COM1 12-3pm
-list
-done 50
-done 5
+done 4
 list
 bye
