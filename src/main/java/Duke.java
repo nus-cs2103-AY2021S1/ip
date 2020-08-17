@@ -45,32 +45,62 @@ public class Duke {
         input = sc.nextLine();
         while (!input.equals(EXIT_COMMAND)) {
             System.out.print(prependIndent(DIVIDER, 4));
-            String[] rawInput = input.split(" ", 2);
-            String command = rawInput[0];
-            switch(command) {
-            case LIST_COMMAND:
-                System.out.printf(prependIndent(storage.listItems(), 5));
-                break;
-            case DONE_COMMAND:
-                int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                System.out.printf(prependIndent(storage.markAsDone(index), 5));
-                break;
-            case TODO_COMMAND:
-                ToDo newToDo = new ToDo(rawInput[1]);
-                System.out.printf(prependIndent(storage.add(newToDo), 5));
-                break;
-            case DEADLINE_COMMAND:
-                String deadlineDescription = rawInput[1].split("/")[0].trim();
-                String due = rawInput[1].split("/", 2)[1].split(" ", 2)[1].trim();
-                Deadline newDeadline = new Deadline(deadlineDescription, due);
-                System.out.printf(prependIndent(storage.add(newDeadline), 5));
-                break;
-            case EVENT_COMMAND:
-                String eventDescription = rawInput[1].split("/")[0].trim();
-                String time = rawInput[1].split("/", 2)[1].split(" ", 2)[1].trim();
-                Event newEvent = new Event(eventDescription, time);
-                System.out.printf(prependIndent(storage.add(newEvent), 5));
-                break;
+            try {
+                String[] rawInput = input.split(" ", 2);
+                String command = rawInput[0];
+                switch (command) {
+                case LIST_COMMAND:
+                    System.out.printf(prependIndent(storage.listItems(), 5));
+                    break;
+                case DONE_COMMAND:
+                    try {
+                        int index = Integer.parseInt(input.split(" ")[1]) - 1;
+                        System.out.printf(prependIndent(storage.markAsDone(index), 5));
+                        break;
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("This isn't harry potter, please use only integers.");
+                    }
+                case TODO_COMMAND:
+                    try {
+                        ToDo newToDo = new ToDo(rawInput[1]);
+                        System.out.printf(prependIndent(storage.add(newToDo), 5));
+                        break;
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new DukeException("I know your life is empty but your todo can't be empty.");
+                    }
+                case DEADLINE_COMMAND:
+                    try {
+                        String deadlineDescription = rawInput[1].split("/")[0].trim();
+                        try {
+                            String due = rawInput[1].split("/by", 2)[1].trim();
+                            Deadline newDeadline = new Deadline(deadlineDescription, due);
+                            System.out.printf(prependIndent(storage.add(newDeadline), 5));
+                            break;
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            throw new DukeException("So you never did plan on doing it huh...");
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new DukeException("What are you rushing for? To wait?");
+                    }
+                case EVENT_COMMAND:
+                    try {
+                        String eventDescription = rawInput[1].split("/")[0].trim();
+                        try {
+                            String time = rawInput[1].split("/at", 2)[1].trim();
+                            Event newEvent = new Event(eventDescription, time);
+                            System.out.printf(prependIndent(storage.add(newEvent), 5));
+                            break;
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            throw new DukeException("Wow that sure is one long event...");
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new DukeException("Are you going to attend a nameless event?");
+                    }
+                default:
+                    throw new DukeException("Wakarimasen~");
+                }
+            } catch (DukeException dukeEx) {
+                System.out.printf(prependIndent(dukeEx.getMessage(), 5));
             }
             System.out.println(prependIndent(DIVIDER, 4));
             input = sc.nextLine();

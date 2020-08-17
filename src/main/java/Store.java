@@ -16,10 +16,14 @@ public class Store {
                 this.store.size());
     }
 
-    public String markAsDone(int index) {
-        Task selected = store.get(index);
-        selected.setCompleted();
-        return String.format("Nice! I've marked this task as done:\n  %s\n", selected.toString());
+    public String markAsDone(int index) throws DukeException {
+        try {
+            Task selected = store.get(index);
+            selected.setCompleted();
+            return String.format("Nice! I've marked this task as done:\n  %s\n", selected.toString());
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("I couldn't find that task. Are you trying to make 2020 worse?");
+        }
     }
 
     public String listItems() {
