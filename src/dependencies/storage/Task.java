@@ -1,11 +1,9 @@
 package dependencies.storage;
 
 import static dependencies.storage.CompletionState.*;
-import static dependencies.storage.TaskType.*;
 
 public class Task {
     private CompletionState state;
-    private TaskType type;
     private String task;
 
     Task(String task) {
