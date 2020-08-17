@@ -37,12 +37,12 @@ public class Duke {
                 Task task = listOfTasks.get(idx - 1);
                 task.markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println("  " + task);
+                Duke.printWithIndent(task.toString());
             } else {
                 Task task = createTask(userInputArgs);
                 listOfTasks.add(task);
                 System.out.println("Got it. I've added this task:");
-                System.out.println("  " + task);
+                Duke.printWithIndent(task.toString());
                 System.out.println(String.format("Now you have %d tasks in the list.", listOfTasks.size()));
             }
             Duke.printHorizontalLine();
@@ -75,5 +75,9 @@ public class Duke {
     private static void printHorizontalLine() {
         String horizontalLine = "---------------------------------------------";
         System.out.println(horizontalLine);
+    }
+
+    private static void printWithIndent(String str) {
+        System.out.println("  " + str);
     }
 }
