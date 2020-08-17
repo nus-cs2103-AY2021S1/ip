@@ -18,9 +18,24 @@ public class Execute {
                 break;
             } else if (userInput.equals("list")) {
                 listOfItems.print();
+            } else if (userInput.contains("done")) {
+
+
+                char numberCharacter = userInput.charAt(5);
+                int index = Integer.parseInt(String.valueOf(numberCharacter)) - 1;
+
+                Task taskToChange = listOfItems.getItem(index);
+                taskToChange.markDone();
+
+                // printing part
+                Salutations markedDone = new Salutations(Salutations.type.TASKDONE);
+                markedDone.printMessage();
+                taskToChange.print();
+
+
             } else {
-                Item item = new Item(userInput);
-                listOfItems.addItem(item);
+                Task task = new Task(userInput);
+                listOfItems.addItem(task);
             }
         }
         // Exit message
