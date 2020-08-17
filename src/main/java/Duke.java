@@ -26,7 +26,7 @@ public class Duke {
             } else if (first.equals("done")) {
                 int index = Integer.parseInt(s[1]);
                 books.get(index - 1).markAsDone();
-                System.out.println("Nice! I've marked this task as done:\n" + books.get(index - 1).getStatusIcon() + " return book");
+                System.out.println("Nice! I've marked this task as done:\n  " + books.get(index - 1).getStatusIcon() + " return book");
             } else {
                 if (first.equals("todo")) {
 
@@ -34,7 +34,7 @@ public class Duke {
                     books.add(t);
 
                     System.out.println("Got it. I've added this task:");
-                    System.out.println(books.get(books.size() - 1));
+                    System.out.println("  " + books.get(books.size() - 1));
                     System.out.println("Now you have " + books.size() + " tasks in the list.");
                 } else if (first.equals("event")) {
 
@@ -44,7 +44,7 @@ public class Duke {
                     books.add(t);
 
                     System.out.println("Got it. I've added this task:");
-                    System.out.println(books.get(books.size() - 1));
+                    System.out.println("  " + books.get(books.size() - 1));
                     System.out.println("Now you have " + books.size() + " tasks in the list.");
                 } else if (first.equals("deadline")) {
 
@@ -54,7 +54,7 @@ public class Duke {
                     books.add(t);
 
                     System.out.println("Got it. I've added this task:");
-                    System.out.println(books.get(books.size() - 1));
+                    System.out.println("  " + books.get(books.size() - 1));
                     System.out.println("Now you have " + books.size() + " tasks in the list.");
                 }
             }
