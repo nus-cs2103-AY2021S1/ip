@@ -35,14 +35,43 @@ Hello from
      ___________________________
 
      ___________________________
+      Task to be done not specified :(
+     ___________________________
+
+     ___________________________
+      Please enter out a valid number
+     ___________________________
+
+     ___________________________
+      Please enter a valid task number
+     ___________________________
+
+     ___________________________
       Nice! I've marked this task as done: 
       [E][✓] project meeting (at: Mon 2-4pm)
      ___________________________
 
      ___________________________
+      Task to delete not specified :(
+     ___________________________
+
+     ___________________________
+      Please enter out a valid number
+     ___________________________
+
+     ___________________________
+      Please enter a valid task number
+     ___________________________
+
+     ___________________________
+      Noted. I've removed this task: 
+      [D][✘] return book (by: Sunday)
+      Now you have 2 tasks in the list. 
+     ___________________________
+
+     ___________________________
       1. [T][✘] borrow book
-      2. [D][✘] return book (by: Sunday)
-      3. [E][✓] project meeting (at: Mon 2-4pm)
+      2. [E][✓] project meeting (at: Mon 2-4pm)
      ___________________________
 
      ___________________________
