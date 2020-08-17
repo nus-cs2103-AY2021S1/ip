@@ -8,7 +8,7 @@ public class TextFormatter {
 
     /** Bot Logo */
     public static final String LOGO =
-            "ㅤ　＼　　　　　／\n"
+            "　　＼　　　　　／\n"
             + "　　　＼∧∧∧／\n"
             + "　　　＜　 Ｃ ＞\n"
             + "　　　＜ 　Ａ ＞\n"
