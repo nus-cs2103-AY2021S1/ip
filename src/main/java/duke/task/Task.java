@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Task is a class for each task specified from the user commands.
  */
-public class Task {
+public abstract class Task {
     protected final String name;
     protected final boolean isDone;
 
@@ -40,9 +40,7 @@ public class Task {
      *
      * @return a new Task object with the status updated to "done".
      */
-    public Task complete() {
-        return new Task(this.name, true);
-    }
+    public abstract Task complete();
 
     /**
      * Display the task object as a string

@@ -66,6 +66,8 @@ public class CommandAgent {
 
     /**
      * Create different types of tasks based on the identifier stored in the taskInfo.
+     * Set default option to todo task.
+     * The CommandReader has ensured no erroneous keyword will be sent to agent.
      *
      * @param taskInfo a list of String containing all the relevant information for the task.
      * @return a correct type of Task object.
@@ -78,13 +80,11 @@ public class CommandAgent {
         case "E":
             schedule = taskInfo.get(2);
             return new Event(name, false, schedule);
-        case "T":
-            return new Todo(name, false);
         case "D":
             schedule = taskInfo.get(2);
             return new Deadline(name, false, schedule);
         default:
-            return new Task(name);
+            return new Todo(name, false);
         }
     }
 
