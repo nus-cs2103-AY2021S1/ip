@@ -3,8 +3,7 @@ import java.util.Scanner;
 
 public class Chatbot {
 
-    private static ArrayList<Task> tasks;
-    private static TaskPrinter taskPrinter;
+    private static TaskManager tskManager;
 
     private static boolean getUserInput(Scanner s) {
         System.out.print(">> ");
@@ -12,27 +11,34 @@ public class Chatbot {
     }
 
     private static void handleUserInput(String userInput) {
-        String processed = userInput.trim();
-        String first = processed.split(" ")[0];
+        String text = userInput.trim();
+        String first = text.split(" ")[0];
+        String remainder = text.substring(first.length()).trim();
         switch (first) {
             case "list":
-                taskPrinter.list(tasks);
+                tskManager.listAll();
                 break;
             case "done":
-                int index = Integer.parseInt(processed.split(" ")[1]) - 1;
-                tasks.set(index, tasks.get(index).markDone());
-                taskPrinter.display("Nice! I've marked this task as done: \n" + tasks.get(index));
+                int index = Integer.parseInt(text.split(" ")[1]) - 1;
+                tskManager.markAsDone(index);
+                break;
+            case "todo":
+                Task todo = new Todo(remainder);
+                tskManager.addTask(todo);
+                break;
+            case "deadline":
+                Task deadline = new Deadline(remainder);
+                tskManager.addTask(deadline);
+                break;
+            case "event":
+                Task event = new Event(remainder);
+                tskManager.addTask(event);
                 break;
             case "bye":
-                taskPrinter.display("Bye. Hope to see you again soon!");
+                System.out.println("Bye. Hope to see you again soon!");
                 break;
             default:
-                String text = userInput.trim();
-                if (text != "") {
-                    Task newTask = new Task(text);
-                    tasks.add(newTask);
-                    taskPrinter.display("Got it. I've added this task: \n" + newTask);
-                }
+                // todo
         }
     }
 
@@ -45,8 +51,7 @@ public class Chatbot {
                 "   ##############################"
         );
 
-        tasks = new ArrayList<>();
-        taskPrinter = new TaskPrinter();
+        tskManager = TaskManager.getInstance();
         Scanner sc = new Scanner(System.in);
 
         while(getUserInput(sc)) {
