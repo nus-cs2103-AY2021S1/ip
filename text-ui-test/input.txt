@@ -1,20 +1,23 @@
 bash
 todo
-todo learn cs2103
-deadline quiz 2
-deadline quiz2 /by
-deadlinetest
-deadline quiz 2 /by Thursday
-todo read info
-event project meeting /at tonight
-todo watch videos
+todo borrow books
+deadline assignment 1
+deadline assignment 1 /by
+deadline assignment 1 /by Thursday
+list
+event cs2103 project meeting /at today
+deadline tutorial 1 /by 25 Aug
+todo verify critical data
+todo return books
 list
 done
-done 0
 done 3
-done 8
 list
-delete 0
+delete
 delete 2
+list
+done 1
+list
+done 2
 list
 bye

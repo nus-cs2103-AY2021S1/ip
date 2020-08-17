@@ -13,7 +13,7 @@
 
 	================================================================
 	  Got it. I've added this task:
-	    [T][✘] learn cs2103
+	    [T][✘] borrow books
 	  Now you have 1 tasks in the list.
 	================================================================
 
@@ -26,46 +26,49 @@
 	================================================================
 
 	================================================================
-	  Do you mean 'deadline test'
-	================================================================
-
-	================================================================
 	  Got it. I've added this task:
-	    [D][✘] quiz 2 (by: Thursday)
+	    [D][✘] assignment 1 (by: Thursday)
 	  Now you have 2 tasks in the list.
 	================================================================
 
 	================================================================
 	  Here are the tasks in your list:
-	  1.[T][✘] learn cs2103
-	  2.[D][✘] quiz 2 (by: Thursday)
+	  1.[T][✘] borrow books
+	  2.[D][✘] assignment 1 (by: Thursday)
 	================================================================
 
 	================================================================
 	  Got it. I've added this task:
-	    [T][✘] read info
+	    [E][✘] cs2103 project meeting (at: today)
 	  Now you have 3 tasks in the list.
 	================================================================
 
 	================================================================
 	  Got it. I've added this task:
-	    [E][✘] project meeting (at: tonight)
+	    [D][✘] tutorial 1 (by: 25 Aug)
 	  Now you have 4 tasks in the list.
 	================================================================
 
 	================================================================
 	  Got it. I've added this task:
-	    [T][✘] watch videos
+	    [T][✘] verify critical data
 	  Now you have 5 tasks in the list.
 	================================================================
 
 	================================================================
+	  Got it. I've added this task:
+	    [T][✘] return books
+	  Now you have 6 tasks in the list.
+	================================================================
+
+	================================================================
 	  Here are the tasks in your list:
-	  1.[T][✘] learn cs2103
-	  2.[D][✘] quiz 2 (by: Thursday)
-	  3.[T][✘] read info
-	  4.[E][✘] project meeting (at: tonight)
-	  5.[T][✘] watch videos
+	  1.[T][✘] borrow books
+	  2.[D][✘] assignment 1 (by: Thursday)
+	  3.[E][✘] cs2103 project meeting (at: today)
+	  4.[D][✘] tutorial 1 (by: 25 Aug)
+	  5.[T][✘] verify critical data
+	  6.[T][✘] return books
 	================================================================
 
 	================================================================
@@ -73,43 +76,64 @@
 	================================================================
 
 	================================================================
-	  ☹ OOPS!!! The task index should be a positive integer.
-	================================================================
-
-	================================================================
 	  Nice! I've marked this task as done:
-	    [T][✓] read info
-	================================================================
-
-	================================================================
-	  ☹ OOPS!!! The task index does not exist.
+	    [E][✓] cs2103 project meeting (at: today)
 	================================================================
 
 	================================================================
 	  Here are the tasks in your list:
-	  1.[T][✘] learn cs2103
-	  2.[D][✘] quiz 2 (by: Thursday)
-	  3.[T][✓] read info
-	  4.[E][✘] project meeting (at: tonight)
-	  5.[T][✘] watch videos
+	  1.[T][✘] borrow books
+	  2.[D][✘] assignment 1 (by: Thursday)
+	  3.[E][✓] cs2103 project meeting (at: today)
+	  4.[D][✘] tutorial 1 (by: 25 Aug)
+	  5.[T][✘] verify critical data
+	  6.[T][✘] return books
 	================================================================
 
 	================================================================
-	  ☹ OOPS!!! The task index should be a positive integer.
+	  ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 	================================================================
 
 	================================================================
 	  Noted. I've removed this task:
-	    [D][✘] quiz 2 (by: Thursday)
-	  Now you have 4
+	    [D][✘] assignment 1 (by: Thursday)
+	  Now you have 5
 	================================================================
 
 	================================================================
 	  Here are the tasks in your list:
-	  1.[T][✘] learn cs2103
-	  2.[T][✓] read info
-	  3.[E][✘] project meeting (at: tonight)
-	  4.[T][✘] watch videos
+	  1.[T][✘] borrow books
+	  2.[E][✓] cs2103 project meeting (at: today)
+	  3.[D][✘] tutorial 1 (by: 25 Aug)
+	  4.[T][✘] verify critical data
+	  5.[T][✘] return books
+	================================================================
+
+	================================================================
+	  Nice! I've marked this task as done:
+	    [T][✓] borrow books
+	================================================================
+
+	================================================================
+	  Here are the tasks in your list:
+	  1.[T][✓] borrow books
+	  2.[E][✓] cs2103 project meeting (at: today)
+	  3.[D][✘] tutorial 1 (by: 25 Aug)
+	  4.[T][✘] verify critical data
+	  5.[T][✘] return books
+	================================================================
+
+	================================================================
+	  The task [E][✓] cs2103 project meeting (at: today) has already been done.
+	================================================================
+
+	================================================================
+	  Here are the tasks in your list:
+	  1.[T][✓] borrow books
+	  2.[E][✓] cs2103 project meeting (at: today)
+	  3.[D][✘] tutorial 1 (by: 25 Aug)
+	  4.[T][✘] verify critical data
+	  5.[T][✘] return books
 	================================================================
 
 	================================================================
