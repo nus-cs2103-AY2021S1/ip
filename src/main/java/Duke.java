@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Duke {
     private static final String INDENT = "    ";
     private static final String LINE = "____________________________________________________________";
-    private static final ArrayList<String> tasks = new ArrayList<>();
+    private static final ArrayList<Task> tasks = new ArrayList<>();
 
     private static void formatResponse(ArrayList<String> response) {
         System.out.println(INDENT + LINE);
@@ -23,12 +23,17 @@ public class Duke {
         formatResponse(lst);
     }
 
-    private static void formatList(ArrayList<String> response) {
+    private static void formatList(ArrayList<Task> response) {
         ArrayList<String> lst = new ArrayList<>();
+        lst.add("Here are the tasks in your list:");
         for (int i = 0; i < response.size(); i++) {
             lst.add((i + 1) + ". " + response.get(i));
         }
         formatResponse(lst);
+    }
+
+    private static void formatDoneTask(Task task) {
+        formatResponse("Nice! I've marked this task as done:", INDENT + task.toString());
     }
 
     public static void main(String[] args) {
@@ -39,9 +44,13 @@ public class Duke {
             display = sc.nextLine();
             if (display.equals("list")) {
                 formatList(tasks);
+            } else if (display.length() >= 4 && display.substring(0, 4).equals("done")) {
+                int idx = Integer.parseInt(String.valueOf(display.charAt(5))) - 1;
+                tasks.get(idx).markAsDone();
+                formatDoneTask(tasks.get(idx));
             } else if (!display.equals("bye")) {
                 formatResponse("added: " + display);
-                tasks.add(display);
+                tasks.add(new Task(display));
             }
         }
        formatResponse("Bye. Hope to see you again soon!");
