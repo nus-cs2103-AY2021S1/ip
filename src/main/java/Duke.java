@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static String[] lst = new String[100];
+    private static Task[] lst = new Task[100];
     private static int counter = 0;
 
     public static void main(String[] args) {
@@ -23,15 +23,23 @@ public class Duke {
         while (!s.equals("bye")) {
             if (s.equals("list")) {
                 System.out.println("-------------------------------------------------------------------------------------");
+                System.out.println("Here are the tasks in your list: ");
                 for (int i = 0; i < counter; i++) {
-                    System.out.println((i + 1) + ". " + lst[i]);
+                    System.out.println((i + 1) + "." + lst[i]);
                 }
+                System.out.println("-------------------------------------------------------------------------------------");
+            } else if ((s.length() >= 4) && (s.substring(0, 4).equals("done"))) {
+                int i = Integer.parseInt(s.substring(5)) - 1;
+                lst[i].markAsDone();
+                System.out.println("-------------------------------------------------------------------------------------");
+                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println("    " + lst[i]);
                 System.out.println("-------------------------------------------------------------------------------------");
             } else {
                 System.out.println("-------------------------------------------------------------------------------------");
                 System.out.println("added: " + s);
                 System.out.println("-------------------------------------------------------------------------------------");
-                lst[counter] = s;
+                lst[counter] = new Task(s);
                 counter += 1;
             }
             s = scan.nextLine();
