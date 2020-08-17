@@ -2,8 +2,6 @@ package main.java;
 import java.util.Scanner;
 
 public class Duke {
-    private String[] taskList = new String[100];
-    private int totalTask = 0;
 
     public static void echoInput() {
         Scanner readInput = new Scanner(System.in);
@@ -15,34 +13,38 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    // method to add task and print the corresponding response
-    public void addTask(String task, int position) {
-        taskList[position] = task;
-        System.out.println("added: " + task);
+    public static String[] split(String command) {
+        String[] array = command.split(" ");
+        return array;
     }
 
-    // method to print out the entire list
-    public void listing() {
-        for (int i = 0; i < totalTask; i++) {
-            int taskNumber = i + 1;
-            String task = taskList[i];
-            System.out.println(taskNumber + ". " + task);
+    public static String join(String[] stringArray, int index) {
+        String result = "";
+        for (int i = index; i < stringArray.length; i++) {
+            result += stringArray[i] + (i == stringArray.length - 1 ? "" : " ");
         }
+        return result;
     }
 
     public static void run() {
-        Duke duke = new Duke();
+        TaskList taskList = new TaskList();
         Scanner scanner = new Scanner(System.in);
         String currentWord = scanner.nextLine();
         while (!currentWord.equals("bye")) {
-            // listing
             if (currentWord.equals("list")) {
-                duke.listing();
+                System.out.println(taskList.toString());
             } else {
-                duke.addTask(currentWord, duke.totalTask); // add task to tasklist
-                duke.totalTask += 1;
+                String command = split(currentWord)[0];
+                if (command.equals("done")) {
+                    int taskNumber = Integer.parseInt(join(split(currentWord), 1));
+                    taskList.getTask(taskNumber - 1).markAsDone();
+                } else {
+                    String description = join(split(currentWord), 0);
+                    Task newTask = new Task(description);
+                    taskList.addList(newTask);
+                }
             }
-            currentWord = scanner.nextLine(); // update next word
+            currentWord = scanner.nextLine();
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
