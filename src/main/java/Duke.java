@@ -6,30 +6,30 @@ public class Duke {
     private final static String INDENT = "    ";
     private final static String horizL = INDENT +
             "____________________________________________________________";
-    private final static String logo = INDENT + " ____        _        \n"
-            + INDENT + "|  _ \\ _   _| | _____ \n"
-            + INDENT + "| | | | | | | |/ / _ \\\n"
-            + INDENT + "| |_| | |_| |   <  __/\n"
-            + INDENT + "|____/ \\__,_|_|\\_\\___|\n";
+    private final static String logo = INDENT
+            + "           ____                   _      _\n"
+            + INDENT + "    __    |  _ \\   _   _    ___  | | _  (_)  ___     __\n"
+            + INDENT + "___( o)>  | | | | | | | | /  __| | |/ / | | / _ \\  <(o )___ \n"
+            + INDENT + "\\ <_. )   | |_| | | | | | | (__  |   <  | | | __/   ( ._> /\n"
+            + INDENT + " `---'    |____/  \\___,_|  \\ __| |_|\\_\\ |_| \\___|    `___' \n";
     private static ArrayList<Task> lst = new ArrayList<>();
 
     private static void intro() {
         System.out.println(horizL + "\n" + logo + "\n" +
-                INDENT + "Hello. I'm Duke.\n" +
+                INDENT + "Quack. I'm Duckie.\n" +
                 INDENT + "How can I help you?\n" + horizL);
     }
 
     private static void ending() {
         System.out.println("\n" + INDENT +
-                "Bye! Hope to see you again soon!\n" + horizL);
+                "Quack! Hope to see you again!\n" + horizL);
     }
 
     private static void displayList() {
-        int len = lst.size();
         int index = 1;
         System.out.println(horizL);
-        for (int i = 0; i < len; i++) {
-            System.out.println(INDENT + index + ". " + lst.get(i));
+        for (Task task : lst) {
+            System.out.println(INDENT + index + ". " + task);
             index++;
         }
         System.out.println(horizL);
@@ -44,7 +44,7 @@ public class Duke {
         System.out.println(horizL);
         Task t1 = lst.get(ind - 1);
         t1.checked();
-        System.out.println(INDENT + "Nice! I've marked this task as done: \n" +
+        System.out.println(INDENT + "Quack! I've marked this task as done: \n" +
                  INDENT + t1 + "\n" + horizL);
     }
 
@@ -64,7 +64,7 @@ public class Duke {
             } else {
                     Duke.addTask(input);
                     System.out.println(horizL);
-                    System.out.println(INDENT + "Added: " + input);
+                    System.out.println(INDENT + "Quack! Added: " + input);
                     System.out.println(horizL);
             }
         }

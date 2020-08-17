@@ -1,24 +1,24 @@
 public class Task {
-    private String info;
-    private boolean done;
+    private String description;
+    private boolean isDone;
 
-    Task(String info) {
-        this.info = info;
-        done = false;
+    Task(String description) {
+        this.description = description;
+        isDone = false;
     }
 
     public void checked() {
-        this.done = true;
+        this.isDone = true;
     }
 
     @Override
     public String toString() {
         String tick = "✔";
         String cross = "✘";
-        if (done) {
-            return "[" + tick + "] " + this.info;
+        if (isDone) {
+            return "[" + tick + "] " + this.description;
         } else {
-            return "[" + cross + "] " + this.info;
+            return "[" + cross + "] " + this.description;
         }
     }
 }
