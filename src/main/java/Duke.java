@@ -19,7 +19,10 @@ public class Duke {
             } else if (input.startsWith("event")) {
                 Event eventTask = new Event(input);
                 list.addTask(eventTask);
-            } else {
+            } else if (input.startsWith("delete")) {
+                list.deleteTask(input);
+            }
+            else {
                 //unrecognised command
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means.\n");
             }

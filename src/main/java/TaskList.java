@@ -5,6 +5,7 @@ public class TaskList {
 
     private final List<Task> list = new ArrayList<>();
     private static final String doneErrorMessage = "OOPS!!! Please choose a valid task index to mark as done.\n";
+    private static final String deleteErrorMessage = "OOPS!!! Please choose a valid task index to delete.\n";
 
     protected void addTask(Task task) {
         list.add(task);
@@ -20,6 +21,19 @@ public class TaskList {
             System.out.println(task + "\n");
         } catch (Exception error) {
             throw new DukeException(doneErrorMessage);
+        }
+    }
+
+    protected void deleteTask(String command) throws DukeException {
+        try {
+            int listIndex = Integer.parseInt(command.substring(7));
+            Task task = list.get(listIndex - 1);
+            list.remove(listIndex - 1);
+            System.out.printf("Okay %s has been deleted.\n", task.getTask());
+            System.out.println(task);
+            System.out.println("You now have " + list.size() + " tasks.\n");
+        } catch (Exception error) {
+            throw new DukeException(deleteErrorMessage);
         }
     }
 
