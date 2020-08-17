@@ -1,8 +1,11 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
         String userInput;
+        List<String> items = new ArrayList<>();
 
         greeting();
 
@@ -11,9 +14,19 @@ public class Duke {
 
             if (userInput.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
+            } else if (userInput.equals("list")){
+                int size = items.size();
+                int index = 1;
+                for (String s : items) {
+                    System.out.println(index + ". " + s);
+                    index++;
+                }
             } else {
-                System.out.println(userInput);
+                items.add(userInput);
+                String text = "added: " + userInput;
+                System.out.println(text);
             }
+
         } while (!userInput.equals("bye"));
     }
 
