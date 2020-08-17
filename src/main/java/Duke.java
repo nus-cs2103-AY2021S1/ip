@@ -33,23 +33,31 @@ public class Duke {
         if (s.matches("todo|deadline|event|done") && next.equals("")) {
             throw new DukeException("OOPS!!! The description of " + s + " cannot be empty");
         }
-        if (s.equals("todo")) {
-            ToDo todo = new ToDo(next);
-            storage.add(todo);
-            toAdd = todo;
-        } else if (s.equals("deadline")) {
-            String[] ls = next.split("/by ");
-            Deadline deadline = new Deadline(ls[0], ls[1]);
-            storage.add(deadline);
-            toAdd = deadline;
-        } else if(s.equals("event")) {
-            String[] ls = next.split("/at ");
-            Event event = new Event(ls[0], ls[1]);
-            storage.add(event);
-            toAdd = event;
-        } else {
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :(");
+
+        switch (s) {
+            case "todo":
+                ToDo todo = new ToDo(next);
+                storage.add(todo);
+                toAdd = todo;
+                break;
+            case "deadline": {
+                String[] ls = next.split("/by ");
+                Deadline deadline = new Deadline(ls[0], ls[1]);
+                storage.add(deadline);
+                toAdd = deadline;
+                break;
+            }
+            case "event": {
+                String[] ls = next.split("/at ");
+                Event event = new Event(ls[0], ls[1]);
+                storage.add(event);
+                toAdd = event;
+                break;
+            }
+            default:
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :(");
         }
+        
         System.out.println(
                 border + "Got it. I've added this task:\n"
                         + "  " + toAdd + "\n"
