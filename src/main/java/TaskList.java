@@ -17,6 +17,10 @@ public class TaskList {
         return this.list.get(index - 1);
     }
 
+    public Task deleteTask(int index) {
+        return this.list.remove(index - 1);
+    }
+
     public void listAllTasks() {
         this.list.forEach(task -> {
             String index = String.valueOf(this.list.indexOf(task) + 1);
