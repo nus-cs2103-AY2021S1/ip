@@ -44,14 +44,20 @@ public class Duke {
         System.out.println("\t\t" + targetTask);
         System.out.println("\t" + divider);
       } else if (command[0].equals("todo")) {
-        ToDo newToDo = new ToDo(command[1]);
-        list.add(newToDo);
+        if (command.length < 2) {
+          System.out.println("\t" + divider);
+          System.out.println("\t☹ OOPS!!! The description of a todo cannot be empty.");
+          System.out.println("\t" + divider + "\n");
+        } else {
+          ToDo newToDo = new ToDo(command[1]);
+          list.add(newToDo);
 
-        System.out.println("\t" + divider);
-        System.out.println("\tGot it. I've added this task: ");
-        System.out.println("\t\t" + newToDo);
-        System.out.println("\tNow you have " + list.size() + " tasks in the list.");
-        System.out.println("\t" + divider);
+          System.out.println("\t" + divider);
+          System.out.println("\tGot it. I've added this task: ");
+          System.out.println("\t\t" + newToDo);
+          System.out.println("\tNow you have " + list.size() + " tasks in the list.");
+          System.out.println("\t" + divider);
+        }
       } else if (command[0].equals("deadline")) {
         String[] commandParam = command[1].split("/by");
         String description = commandParam[0].trim();
@@ -77,10 +83,8 @@ public class Duke {
         System.out.println("\tNow you have " + list.size() + " tasks in the list.");
         System.out.println("\t" + divider);
       } else {
-        list.add(new Task(input));
-
         System.out.println("\t" + divider);
-        System.out.println("\tadded: " + input);
+        System.out.println("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         System.out.println("\t" + divider + "\n");
       }
     }
