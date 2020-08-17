@@ -6,7 +6,7 @@ public class ChatBot {
 
     // The entry point to run the chat bot
     public void start() {
-        String welcome = "Hello! I'm Duke \nWhat can I do for you?";
+        String welcome = "Hello! I'm Duke \n    What can I do for you?";
         sendChat(welcome);
         String response = receiveChat();
         while (!response.equals("bye")) {
@@ -18,9 +18,9 @@ public class ChatBot {
 
     // Send specified content in a chat box
     private void sendChat(String content) {
-        System.out.println("____________________________________________________________");
-        System.out.println(content);
-        System.out.println("____________________________________________________________");
+        System.out.println("    ____________________________________________________________");
+        System.out.println("    " + content);
+        System.out.println("    ____________________________________________________________");
     }
 
     // Scan for user's response and return the string

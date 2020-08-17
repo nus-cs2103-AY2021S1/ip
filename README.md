@@ -24,3 +24,36 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+
+## Level 1 Greet, Echo, Exit
+
+Implement a *skeletal* version of Duke that starts by greeting the user, simply echos commands entered by the user, and
+exits when the user types 'bye'.
+
+Example:
+```
+    ____________________________________________________________
+     Hello! I'm Duke
+     What can I do for you?
+    ____________________________________________________________
+
+list
+    ____________________________________________________________
+     list
+    ____________________________________________________________
+
+blah
+    ____________________________________________________________
+     blah
+    ____________________________________________________________
+
+bye
+    ____________________________________________________________
+     Bye. Hope to see you again soon!
+    ____________________________________________________________
+```
+* The indentation and horizontal lines are optional.
+
+> You are strongly encouraged to customize the chatbot name,
+>command/display formats, and even the personality of the chatbot
+>to make your chatbot unique.
