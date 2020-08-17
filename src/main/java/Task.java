@@ -1,17 +1,14 @@
 public class Task {
-    private String task;
+    protected String task;
     private boolean done;
 
     public Task(String task) {
         this.task = task;
     }
 
-    public Task(String task, boolean done) {
-        this.task = task;
-        this.done = done;
-    }
     public Task doneTask() {
-        return new Task(task,true);
+        this.done = true;
+        return this;
     }
 
     @Override

@@ -9,12 +9,13 @@ public class Duke {
     }
     public static void addTask(Task task) {
         taskList.add(task);
-        System.out.println("added: " + task);
+        System.out.println("\tGot it. I've added this task:" + "\n\t\t" + task);
+        System.out.println(String.format("\tNow you have %d tasks in the list.", taskList.size()));
     }
     public static void printList() {
         System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < taskList.size(); i++) {
-            System.out.println(String.format("%d. %s", i + 1, taskList.get(i)));
+            System.out.println(String.format("\t%d. %s", i + 1, taskList.get(i)));
         }
     }
 
@@ -37,10 +38,24 @@ public class Duke {
                     Duke.printList();
                     break;
                 default :
-                    if (task.substring(0,4).equals("done")) {
+                    if (task.startsWith("done")) {
                         int taskNo = Character.getNumericValue(task.charAt(5));
                         System.out.println("Nice! I've marked this task as done:");
                         markTaskDone(taskNo);
+                    } else if (task.startsWith("todo")) {
+                        Duke.addTask(new ToDos(task));
+                    } else if (task.startsWith("deadline")) {
+                        task = task.replace("deadline ", "");
+                        String[] stringArr = task.split("/by", 2);
+                        task = stringArr[0];
+                        String by = stringArr[1];
+                        Duke.addTask(new Deadlines(task, by));
+                    } else if (task.startsWith("event")) {
+                        task = task.replace("event ", "");
+                        String[] stringArr = task.split("/at", 2);
+                        task = stringArr[0];
+                        String at = stringArr[1];
+                        Duke.addTask(new Events(task, at));
                     } else {
                         Duke.addTask(new Task(task));
                     }
