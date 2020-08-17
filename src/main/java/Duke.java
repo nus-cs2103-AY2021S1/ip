@@ -17,15 +17,7 @@ public class Duke {
         String str = sc.nextLine();
         while (!str.equals("bye")) {
             line();
-            if (str.equals("list")) {
-                displayTasks(tasks);
-            } else {
-                if (str.startsWith("done ")) {
-                    completeTask(str, tasks);
-                } else {
-                    addTask(str, tasks);
-                }
-            }
+            command(str, tasks);
             line();
             str = sc.nextLine();
         }
@@ -33,8 +25,24 @@ public class Duke {
         sc.close();
     }
 
+    private static void command(String str, ArrayList<Task> tasks) {
+        try {
+            if (str.equals("list")) {
+                displayTasks(tasks);
+            } else {
+                if (str.startsWith("done")) {
+                    completeTask(str, tasks);
+                } else {
+                    addTask(str, tasks);
+                }
+            }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public static void line() {
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 75; i++) {
             System.out.print("\u2500");
         }
         System.out.println();
@@ -49,7 +57,11 @@ public class Duke {
         }
     }
 
-    private static void addTask(String str, ArrayList<Task> tasks) {
+    private static void addTask(String s, ArrayList<Task> tasks) throws InvalidCommandException, EmptyCommandException, MissingTimeException {
+        String str = s.trim();
+        if (str.equals("todo") || str.equals("deadline") || str.equals("event")) {
+            throw new EmptyCommandException(str);
+        }
         if (str.contains(" ")) {
             String[] arr = str.split(" ", 2);
             String str2 = arr[1];
@@ -59,28 +71,40 @@ public class Duke {
                     insert(td, tasks);
                     break;
                 case "deadline":
-                    if (str2.contains("/by ")) {
-                        String[] arr2 = str2.split("/by ", 2);
-                        Deadline dl = new Deadline(arr2[0], arr2[1]);
+                    if (str2.contains("/by")) {
+                        String[] arr2 = str2.split("/by", 2);
+                        if (arr2[0].isBlank()) {
+                            throw new EmptyCommandException("deadline");
+                        }
+                        if (arr2[1].isBlank()) {
+                            throw new MissingTimeException("deadline");
+                        }
+                        Deadline dl = new Deadline(arr2[0], arr2[1].trim());
                         insert(dl, tasks);
                     } else {
-                        System.out.println("Please indicate a deadline with /by");
+                        throw new MissingTimeException("deadline");
                     }
                     break;
                 case "event":
-                    if (str2.contains("/at ")) {
-                        String[] arr2 = str2.split("/at ", 2);
-                        Event ev = new Event(arr2[0], arr2[1]);
+                    if (str2.contains("/at")) {
+                        String[] arr2 = str2.split("/at", 2);
+                        if (arr2[0].isBlank()) {
+                            throw new EmptyCommandException("event");
+                        }
+                        if (arr2[1].isBlank()) {
+                            throw new MissingTimeException("event");
+                        }
+                        Event ev = new Event(arr2[0], arr2[1].trim());
                         insert(ev, tasks);
                     } else {
-                        System.out.println("Please indicate a time with /at");
+                        throw new MissingTimeException("event");
                     }
                     break;
                 default:
-                    System.out.println("Error, please enter a valid command.");
+                    throw new InvalidCommandException();
             }
         } else {
-            System.out.println("Error, please enter a valid command.");
+            throw new InvalidCommandException();
         }
     }
 
@@ -91,17 +115,20 @@ public class Duke {
         System.out.println("You now have " + tasks.size() + " tasks in the list");
     }
 
-    private static void completeTask(String str, ArrayList<Task> tasks) {
+    private static void completeTask(String str, ArrayList<Task> tasks) throws TaskCompletionException{
+        if (!str.startsWith("done ")) {
+            throw new TaskCompletionException(tasks.size());
+        }
         String val = str.substring(5);
         if (isInteger(val)) {
             int i = Integer.parseInt(val);
             if (i > 0 && i <= tasks.size()) {
                 tasks.get(i - 1).complete();
             } else {
-                System.out.println("Error, please key in a valid number.");
+                throw new TaskCompletionException(tasks.size());
             }
         } else {
-            System.out.println("Error, please key in a valid number.");
+            throw new TaskCompletionException(tasks.size());
         }
     }
 
