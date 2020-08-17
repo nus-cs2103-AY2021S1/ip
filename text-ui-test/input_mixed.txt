@@ -1,0 +1,13 @@
+list
+todo coding
+list
+deadline lab1 /by tomorrow
+list
+event weeee~ /at next year
+list
+done 1
+done 2
+list
+done 3
+list
+bye

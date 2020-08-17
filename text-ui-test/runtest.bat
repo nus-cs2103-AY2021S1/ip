@@ -4,10 +4,13 @@ REM create bin directory if it doesn't exist
 if not exist ..\bin mkdir ..\bin
 
 REM delete output from previous run
-del ACTUAL.TXT
+del ACTUAL_TODO.TXT
+del ACTUAL_DEADLINE.TXT
+del ACTUAL_EVENT.TXT
+del ACTUAL_MIXED.TXT
 
 REM compile the code into the bin folder
-javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\Duke.java
+javac  -cp ..\src -Xlint:none -encoding UTF-8 -d ..\bin ..\src\main\java\*.java
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
@@ -15,7 +18,17 @@ IF ERRORLEVEL 1 (
 REM no error here, errorlevel == 0
 
 REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
+java -Dfile.encoding=UTF-8 -classpath ..\bin Duke < input_todo.txt > ACTUAL_TODO.TXT
+java -Dfile.encoding=UTF-8 -classpath ..\bin Duke < input_deadline.txt > ACTUAL_DEADLINE.TXT
+java -Dfile.encoding=UTF-8 -classpath ..\bin Duke < input_event.txt > ACTUAL_EVENT.TXT
+java -Dfile.encoding=UTF-8 -classpath ..\bin Duke < input_mixed.txt > ACTUAL_MIXED.TXT
 
 REM compare the output to the expected output
-FC ACTUAL.TXT EXPECTED.TXT
+FC ACTUAL_TODO.TXT EXPECTED_TODO.TXT
+pause
+FC ACTUAL_DEADLINE.TXT EXPECTED_DEADLINE.TXT
+pause
+FC ACTUAL_EVENT.TXT EXPECTED_EVENT.TXT
+pause
+FC ACTUAL_MIXED.TXT EXPECTED_MIXED.TXT
+pause

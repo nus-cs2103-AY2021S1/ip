@@ -1,0 +1,72 @@
+　　＼　　　　　／
+　　　＼∧∧∧／
+　　　＜　 Ｃ ＞
+　　　＜ 　Ａ ＞
+　　　＜　 Ｔ ＞
+　 ───＜ Ｂ　 ＞───
+　　　＜ Ｏ　 ＞
+　　　＜ Ｔ　 ＞
+　　　／∨∨∨＼
+　　／ ∧_∧　　＼
+　／　( ･ω･)　　 ＼
+／　＿(_つ/￣￣￣/　＼
+　　 　＼/＿＿＿/
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Hi I'm Cat Bot.
+∴‥	What can I do for you?
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Oops! Looks like there's no task in the list!
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Got it. I've added this task:
+∴‥		[E][✗] NUS OPEN HOUSE (at: August)
+∴‥	Now you have 1 task(s) in the list.
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Here are the tasks in your list:
+∴‥	 1. [E][✗] NUS OPEN HOUSE (at: August)
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Got it. I've added this task:
+∴‥		[E][✗] SOMETHING FUN (at: JUNE)
+∴‥	Now you have 2 task(s) in the list.
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Here are the tasks in your list:
+∴‥	 1. [E][✗] NUS OPEN HOUSE (at: August)
+∴‥	 2. [E][✗] SOMETHING FUN (at: JUNE)
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Naisu! I've marked this task done!
+∴‥	[E][✓] NUS OPEN HOUSE (at: August)
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Here are the tasks in your list:
+∴‥	 1. [E][✓] NUS OPEN HOUSE (at: August)
+∴‥	 2. [E][✗] SOMETHING FUN (at: JUNE)
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Naisu! I've marked this task done!
+∴‥	[E][✓] SOMETHING FUN (at: JUNE)
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Here are the tasks in your list:
+∴‥	 1. [E][✓] NUS OPEN HOUSE (at: August)
+∴‥	 2. [E][✓] SOMETHING FUN (at: JUNE)
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Bye! Hope to see you again!
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+

@@ -1,0 +1,10 @@
+list
+event NUS OPEN HOUSE /at August
+list
+event SOMETHING FUN /at JUNE
+list
+done 1
+list
+done 2
+list
+bye

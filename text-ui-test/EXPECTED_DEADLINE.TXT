@@ -1,0 +1,72 @@
+　　＼　　　　　／
+　　　＼∧∧∧／
+　　　＜　 Ｃ ＞
+　　　＜ 　Ａ ＞
+　　　＜　 Ｔ ＞
+　 ───＜ Ｂ　 ＞───
+　　　＜ Ｏ　 ＞
+　　　＜ Ｔ　 ＞
+　　　／∨∨∨＼
+　　／ ∧_∧　　＼
+　／　( ･ω･)　　 ＼
+／　＿(_つ/￣￣￣/　＼
+　　 　＼/＿＿＿/
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Hi I'm Cat Bot.
+∴‥	What can I do for you?
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Oops! Looks like there's no task in the list!
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Got it. I've added this task:
+∴‥		[D][✗] do laundry (by: tomorrow)
+∴‥	Now you have 1 task(s) in the list.
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Here are the tasks in your list:
+∴‥	 1. [D][✗] do laundry (by: tomorrow)
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Got it. I've added this task:
+∴‥		[D][✗] have something to eat (by: lunch time)
+∴‥	Now you have 2 task(s) in the list.
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Here are the tasks in your list:
+∴‥	 1. [D][✗] do laundry (by: tomorrow)
+∴‥	 2. [D][✗] have something to eat (by: lunch time)
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Naisu! I've marked this task done!
+∴‥	[D][✓] do laundry (by: tomorrow)
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Here are the tasks in your list:
+∴‥	 1. [D][✓] do laundry (by: tomorrow)
+∴‥	 2. [D][✗] have something to eat (by: lunch time)
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Naisu! I've marked this task done!
+∴‥	[D][✓] have something to eat (by: lunch time)
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Here are the tasks in your list:
+∴‥	 1. [D][✓] do laundry (by: tomorrow)
+∴‥	 2. [D][✓] have something to eat (by: lunch time)
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Bye! Hope to see you again!
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
