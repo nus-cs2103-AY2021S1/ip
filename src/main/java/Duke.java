@@ -56,13 +56,17 @@ public class Duke {
         if (info.length == 1) {
             throw new DukeException("Which item???");
         } else {
-            int index = Integer.parseInt(info[1]);
-            if (index > list.size() || index <= 0) {
-                throw new DukeException("Excuse Moi???");
-            } else {
-                toBeDeleted = list.get(index - 1);
-                list.remove(index - 1);
-                return toBeDeleted;
+            try {
+                int index = Integer.parseInt(info[1]);
+                if (index > list.size() || index <= 0) {
+                    throw new DukeException("Excuse Moi???");
+                } else {
+                    toBeDeleted = list.get(index - 1);
+                    list.remove(index - 1);
+                    return toBeDeleted;
+                }
+            } catch (NumberFormatException ex1){
+                throw new DukeException("Excuse Meee? number pls.");
             }
         }
     }
