@@ -7,14 +7,18 @@ public class Duke {
     public Duke() {
         this.items = new ArrayList<>();
     }
-    private void addItem(String input) {
-        this.items.add(new Todo(input));
-        systemMessage("morning sir i have added \""+input+"\" to the list sir");
+    private void addItem(Task task) {
+        this.items.add(task);
+        systemMessage("morning sir i have added this to the list sir:\n"
+                        + task
+                        + "\ni counted all your number of tasks sir it is "
+                        + this.items.size()
+                        + " sir");
     }
     private void printList() {
         String numberedItems = "";
         for (int i=0;i<this.items.size();i++) {
-            numberedItems += Integer.toString(i+1) + ". " + this.items.get(i) + "\n";
+            numberedItems += (i+1) + ". " + this.items.get(i) + "\n";
         }
         systemMessage(numberedItems);
     }
@@ -23,19 +27,47 @@ public class Duke {
         selected.markAsDone();
         systemMessage("afternoon sir i have mark this task done sir:\n  " + selected);
     }
+    private void displayParseError() {
+        systemMessage("sorry sir i dont understand your command sir\n"
+                        + "please enter again sir thank you sir");
+    }
+    private void parseAndRun(String input) {
+        if (input.equals("list")) {
+            this.printList();
+        } else if (input.matches("^done \\d+")) {
+            int itemIndex = Integer.parseInt(input.substring(5));
+            this.markItem(itemIndex - 1);
+        } else if (input.matches("^todo .*")) {
+            String description = input.substring(5);
+            this.addItem(new Todo(description));
+        } else if (input.matches("^deadline .*")) {
+            String[] items = input.substring(9).split(" /by ");
+            if(items.length!=2) {
+                displayParseError();
+                return;
+            }
+            String description = items[0];
+            String time = items[1];
+            this.addItem(new Deadline(description, time));
+        } else if (input.matches("^event .*")) {
+            String[] items = input.substring(6).split(" /at ");
+            if(items.length!=2) {
+                displayParseError();
+                return;
+            }
+            String description = items[0];
+            String time = items[1];
+            this.addItem(new Event(description, time));
+        } else {
+            displayParseError();
+        }
+    }
     public void run() {
         Scanner scanner = new Scanner(System.in);
         systemMessage(logo);
         String input = scanner.nextLine();
         while (!input.equals("bye")) {
-            if (input.equals("list")) {
-                this.printList();
-            } else if (input.length() > 5 && input.substring(0,5).equals("done ")) {
-                int itemIndex = Integer.parseInt(input.substring(5));
-                this.markItem(itemIndex-1);
-            } else {
-                this.addItem(input);
-            }
+            parseAndRun(input);
             input = scanner.nextLine();
         }
         systemMessage("bye sir thanks for using me sir hope to see you again sir");
