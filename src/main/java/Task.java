@@ -1,13 +1,17 @@
 public class Task {
-    protected String description;
+    protected final String description;
     protected boolean isDone;
+    protected final TaskType taskType;
 
-    public Task(String description) {
+    public Task(String description, TaskType taskType) {
         this.description = description;
         this.isDone = false;
+        this.taskType = taskType;
     }
 
     public String getStatusIcon() {
+//            return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        //For checking purposes, V is checkmark and X is cross
         return (isDone ? "✓" : "✘");
     }
 
@@ -17,6 +21,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + getStatusIcon() +"] " + description;
+        return taskType + "[" + getStatusIcon() +"] " + description;
     }
 }
