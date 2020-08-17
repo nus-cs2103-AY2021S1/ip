@@ -36,14 +36,22 @@ public class TodoList {
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(message);
                 } else if (splitCommand[0].equals("deadline")) {
-
+                    String[] splitDeadline = splitCommand[1].split(" /by ");
+                    System.out.println("Got it. I've added this task:");
+                    TodoList.addDeadline(splitDeadline[0], splitDeadline[1]);
+                    int size = todoList.size();
+                    System.out.println("Now you have " + size + " tasks in the list.");
                 } else if (splitCommand[0].equals("todo")) {
                     System.out.println("Got it. I've added this task:");
                     TodoList.addTodo(splitCommand[1]);
                     int size = todoList.size();
                     System.out.println("Now you have " + size + " tasks in the list.");
                 } else if (splitCommand[0].equals("event")) {
-
+                    String[] splitEvent = splitCommand[1].split(" /at ");
+                    System.out.println("Got it. I've added this task:");
+                    TodoList.addEvent(splitEvent[0], splitEvent[1]);
+                    int size = todoList.size();
+                    System.out.println("Now you have " + size + " tasks in the list.");
                 }
             } catch (NumberFormatException error) {
                 // When "done" is not followed by a valid number
@@ -64,5 +72,15 @@ public class TodoList {
     private static void addTodo(String task) {
         Todo newTodo = new Todo(task);
         todoList.add(newTodo);
+    }
+
+    private static void addDeadline(String task, String deadline) {
+        Deadline newDeadline = new Deadline(task, deadline);
+        todoList.add(newDeadline);
+    }
+
+    private static void addEvent(String task, String eventDate) {
+        Event newEvent = new Event(task, eventDate);
+        todoList.add(newEvent);
     }
 }
