@@ -6,11 +6,12 @@ public class TodoList {
     private static boolean terminate = false;
 
     public static void initialise() {
+        Scanner sc = new Scanner(System.in);  // Create a Scanner object
         while(!TodoList.terminate) {
-            Scanner sc = new Scanner(System.in);  // Create a Scanner object
             String command = sc.nextLine();  // Read user input
             TodoList.handleCommand(command); // Output user input
         }
+        sc.close();
     }
 
     private static void handleCommand(String command) {
