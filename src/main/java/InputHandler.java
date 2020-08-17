@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Scanner;
 
 public class InputHandler {
     private static ArrayList<Task> taskList = new ArrayList<>();
@@ -7,8 +8,10 @@ public class InputHandler {
     private static final String EXIT_CMD = "bye";
     private static final String LIST_CMD = "list";
     private static final String DONE_CMD = "done";
+    private Scanner sc;
 
-    public InputHandler() {
+    public InputHandler(Scanner sc) {
+        this.sc = sc;
         handleStart();
     }
 
@@ -21,6 +24,14 @@ public class InputHandler {
         System.out.println(startMsg);
     }
 
+    public void run() {
+        String input;
+        while (!(input = sc.nextLine()).equals(EXIT_CMD)) {
+            handleInput(input);
+        }
+        handleExit();
+    }
+
     public boolean handleInput(String in) {
         String[] input = in.split(" ");
         String cmdWord = input[0];
@@ -29,8 +40,6 @@ public class InputHandler {
             return handleList();
         case (DONE_CMD):
             return handleDone(Integer.parseInt(input[1]));
-        case (EXIT_CMD):
-            return handleExit();
         default:
             return handleOthers(in, cmdWord);
         }
