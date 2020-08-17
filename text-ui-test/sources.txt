@@ -1,6 +1,7 @@
 ../src/main/java/EmptyTextException.java
 ../src/main/java/InvalidFormatDoneException.java
 ../src/main/java/Event.java
+../src/main/java/InvalidFormatDeleteException.java
 ../src/main/java/InvalidFormatDeadlineException.java
 ../src/main/java/Main.java
 ../src/main/java/Task.java

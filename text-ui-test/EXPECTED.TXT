@@ -8,6 +8,14 @@ Your list is empty!!!
 _______________________________________________
 
 _______________________________________________
+Your list is empty!!!
+_______________________________________________
+
+_______________________________________________
+Your list is empty!!!
+_______________________________________________
+
+_______________________________________________
  ☹ OOPS! You must fill in the text for todo
 _______________________________________________
 
@@ -30,11 +38,11 @@ Now you have 3 tasks in the list.
 _______________________________________________
 
 _______________________________________________
- ☹ OOPS! A proper done format would be like + e.g. done 'an integer that is between 1(if list is not empty) to the number of items in the list'
+Invalid input for done
 _______________________________________________
 
 _______________________________________________
- ☹ OOPS! A proper done format would be like + e.g. done 'an integer that is between 1(if list is not empty) to the number of items in the list'
+Invalid input for done
 _______________________________________________
 
 _______________________________________________
@@ -69,6 +77,12 @@ Now you have 6 tasks in the list.
 _______________________________________________
 
 _______________________________________________
+Got it. I've added this task:
+[E][✘] project meeting (at: Wednesday 2-4pm)
+Now you have 7 tasks in the list.
+_______________________________________________
+
+_______________________________________________
 Here are the tasks in your list:
 1. [T][✓] task 1
 2. [T][✘] task 2
@@ -76,6 +90,13 @@ Here are the tasks in your list:
 4. [D][✘] finish this project (by: today 4:00am)
 5. [E][✘] project meeting (at: Mon 2-4pm)
 6. [E][✘] project meeting (at: Tues 2-4pm)
+7. [E][✘] project meeting (at: Wednesday 2-4pm)
+_______________________________________________
+
+_______________________________________________
+Noted . I've removed this task:
+[E][✘] project meeting (at: Mon 2-4pm)
+Now you have 6 tasks in the list.
 _______________________________________________
 
 _______________________________________________
@@ -98,13 +119,18 @@ Nice! I've marked this task as done:
 _______________________________________________
 
 _______________________________________________
+Noted . I've removed this task:
+[D][✓] finish this project (by: today 2:00am)
+Now you have 5 tasks in the list.
+_______________________________________________
+
+_______________________________________________
 Here are the tasks in your list:
 1. [T][✓] task 1
 2. [T][✓] task 2
-3. [D][✓] finish this project (by: today 2:00am)
-4. [D][✓] finish this project (by: today 4:00am)
-5. [E][✘] project meeting (at: Mon 2-4pm)
-6. [E][✘] project meeting (at: Tues 2-4pm)
+3. [D][✓] finish this project (by: today 4:00am)
+4. [E][✘] project meeting (at: Tues 2-4pm)
+5. [E][✘] project meeting (at: Wednesday 2-4pm)
 _______________________________________________
 
 _______________________________________________

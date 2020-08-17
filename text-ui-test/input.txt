@@ -1,4 +1,6 @@
 list
+delete 0
+delete 1
 todo
 todo task 1
 todo task 2
@@ -11,11 +13,14 @@ deadline finish this project /by today 4:00am
 event task 4
 event project meeting /at Mon 2-4pm
 event project meeting /at Tues 2-4pm
+event project meeting /at Wednesday 2-4pm
 list
+delete 5
 done 4
 done 4
 done 2
 done 3
+delete 3
 list
 blah
 bye
