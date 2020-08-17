@@ -24,13 +24,33 @@ public class Chatbot {
             } else if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")) {
                 Task curr;
                 if (input.startsWith("todo")) { // Create Todo task
+                    // Input does not contain the required keyword
+                    if (input.equals("todo") || input.substring(5).isEmpty()) {
+                        System.out.println(indent + "My apologies sir but the description of todo cannot be empty :(");
+                        System.out.println(divider);
+                        continue;
+                    }
                     curr = new Todo(input.substring(5));
                     tasks.add(curr);
                 } else if (input.startsWith("deadline")) { // Create Deadline task
+                    // Input does not contain the required keyword
+                    if (input.equals("deadline") || !input.substring(5).contains("/by")) {
+                        System.out.println(indent + "My apologies sir but you will have to use the correct " +
+                                "format to create a deadline :(");
+                        System.out.println(divider);
+                        continue;
+                    }
                     String[] splicedInput = input.substring(9).split(" /by ");
                     curr = new Deadline(splicedInput[0], splicedInput[1]);
                     tasks.add(curr);
                 } else { // Create Event task
+                    // Input does not contain the required keyword
+                    if (input.equals("event") || !input.substring(5).contains("/at")) {
+                        System.out.println(indent + "My apologies sir but you will have to use the correct " +
+                                "format to create a event :(");
+                        System.out.println(divider);
+                        continue;
+                    }
                     String[] splicedInput = input.substring(6).split(" /at ");
                     curr = new Event(splicedInput[0], splicedInput[1]);
                     tasks.add(curr);
@@ -51,10 +71,8 @@ public class Chatbot {
                         + indent + "Thanks for the memories\n" + indent + ":`(");
                 System.out.println(divider);
                 break;
-            } else {
-                Task curr = new Task(input);
-                tasks.add(curr);
-                System.out.println(indent + "Added: " + curr);
+            } else { // Invalid command
+                System.out.println(indent + "Sorry sir but I don't know what you mean :(");
                 System.out.println(divider);
             }
         }
