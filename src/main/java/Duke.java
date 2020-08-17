@@ -14,43 +14,55 @@ public class Duke {
     }
 
     public static void addTask(String taskTitle, ArrayList<Task> tasks) {
+        Task.createTask(taskTitle, tasks);
+
         String outputMsg = "\n___________________________________________________________"
                 + "\n (^.^)"
-                + "\n Task added: " + taskTitle
+                + "\n Got it. I've added this task:"
+                + "\n     "+ tasks.size()+"."+ tasks.get(tasks.size()-1)
+                + "\n Now you have " + tasks.size()+" tasks in the list."
                 + "\n___________________________________________________________\n";
         System.out.println(outputMsg);
-
-        Task.createTask(taskTitle, tasks);
     }
 
     public static void addTodoTask(String taskTitle, ArrayList<Task> tasks) {
+        ToDos.createTodoTask(taskTitle, tasks);
+
         String outputMsg = "\n___________________________________________________________"
                 + "\n (^.^)"
-                + "\n Todo-Task added: " + taskTitle
+                + "\n Got it. I've added this task:"
+                + "\n     "+ tasks.size()+"."+ tasks.get(tasks.size()-1)
+                + "\n Now you have " + tasks.size()+" tasks in the list."
                 + "\n___________________________________________________________\n";
         System.out.println(outputMsg);
 
-        ToDos.createTodoTask(taskTitle, tasks);
     }
 
     public static void addDeadlineTask(String taskTitle, String deadlineTime, ArrayList<Task> tasks) {
+        Deadlines.createDeadline(taskTitle, deadlineTime, tasks);
+
         String outputMsg = "\n___________________________________________________________"
                 + "\n (^.^)"
-                + "\n Deadline-Task added: " + taskTitle + " (by: " + deadlineTime + ")"
+                + "\n Got it. I've added this task:"
+                + "\n     "+ tasks.size()+"."+ tasks.get(tasks.size()-1)
+                + "\n Now you have " + tasks.size()+" tasks in the list."
                 + "\n___________________________________________________________\n";
         System.out.println(outputMsg);
 
-        Deadlines.createDeadline(taskTitle, deadlineTime, tasks);
     }
 
     public static void addEventTask(String taskTitle, String eventTime, ArrayList<Task> tasks) {
+        Events.createEvent(taskTitle, eventTime, tasks);
+
         String outputMsg = "\n___________________________________________________________"
                 + "\n (^.^)"
-                + "\n Event-Task added: " + taskTitle + " (by: " + eventTime + ")"
+                + "\n Got it. I've added this task:"
+                + "\n     "+ tasks.size()+"."+ tasks.get(tasks.size()-1)
+                + "\n Now you have " + tasks.size()+" tasks in the list."
                 + "\n___________________________________________________________\n";
         System.out.println(outputMsg);
 
-        Events.createEvent(taskTitle, eventTime, tasks);
+
     }
 
     public static void getAllTasks(ArrayList<Task> tasks) {
@@ -100,7 +112,6 @@ public class Duke {
                 + "\n**************************************************************\n";
         System.out.println(commandList);
     }
-
 
     public static void invalidDoneTaskIndex(int tasksSize) {
         String warningMsg = "**************************************************************"
