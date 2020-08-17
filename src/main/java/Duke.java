@@ -27,6 +27,13 @@ public class Duke {
                 String item = input.substring(5).trim();
                 markAsDone(item);
             }
+        } else if (input.startsWith("delete ") || input.equals("delete")) {
+            if (input.length() < 8 || input.substring(7).trim().isEmpty()) {
+                System.out.println("Which task do you want to delete?");
+            } else {
+                String item = input.substring(7).trim();
+                deleteTask(item);
+            }
         } else {
             try {
                 addTask(input);
@@ -94,6 +101,23 @@ public class Duke {
             }
         } catch (NumberFormatException error) {
             System.out.println("Please provide a valid task number to mark as done");
+        }
+    }
+
+    public static void deleteTask(String item) {
+        try {
+            int index = Integer.parseInt(item) - 1;
+            if (index > -1 && index < list.size()) {
+                Task deletedTask = list.get(index);
+                list.remove(index);
+                System.out.println("Noted. I've removed this task:");
+                System.out.println(deletedTask);
+                System.out.println("You now have " + list.size() + " tasks in your list");
+            } else {
+                System.out.println("This task is not in your list");
+            }
+        } catch (NumberFormatException error) {
+            System.out.println("Please provide a valid task number to delete");
         }
     }
 
