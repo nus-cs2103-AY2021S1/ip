@@ -60,7 +60,7 @@ public class Duke {
                 tasks.add(deadline);
                 System.out.println("Got it! I've added this task:");
                 System.out.println(deadline);
-                System.out.println("Now you have " + tasks.size() + "tasks in the list.");
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             } else if (userInput.startsWith("event")) {
                 int indexOfSlash = userInput.indexOf('/');
                 String description = userInput.substring(6, indexOfSlash - 1);
@@ -69,7 +69,7 @@ public class Duke {
                 tasks.add(event);
                 System.out.println("Got it! I've added this task:");
                 System.out.println(event);
-                System.out.println("Now you have " + tasks.size() + "tasks in the list.");
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             } else { //invalid command
                 System.out.println("You have keyed in an invalid command! \n (Valid commands: todo, deadline, event, list, bye)");
             }
@@ -86,7 +86,8 @@ public class Duke {
             System.out.print(bot);
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println(i + 1 + "." + " " + "[" + tasks.get(i).getStatusIcon() + "]" + " " + tasks.get(i).getTask());
+                //System.out.println(i + 1 + "." + " " + "[" + tasks.get(i).getStatusIcon() + "]" + " " + tasks.get(i).getTask());
+                System.out.println(i + 1 + "." + " " + tasks.get(i));
             }
             System.out.println(line);
         }
