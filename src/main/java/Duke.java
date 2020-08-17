@@ -3,9 +3,14 @@ import java.util.ArrayList;
 import static java.lang.Integer.parseInt;
 
 public class Duke {
-
     private static final String LINE = "_______________________________________________";
-    private static final String ADDED = "added: ";
+    private static final String ADDED = "added: "; // might remove (have to see later level)
+    private static final String KEYWORD_BYE = "bye";
+    private static final String KEYWORD_LIST = "list";
+    private static final String KEYWORD_DONE = "done";
+    private static final String KEYWORD_TODO = "todo";
+    private static final String KEYWORD_EVENT = "event";
+    private static final String KEYWORD_DEADLINE = "deadline";
 
     private final Scanner sc;
     private ArrayList<Task> listTasks;
@@ -21,26 +26,17 @@ public class Duke {
         while(sc.hasNext()) {
             String input = sc.nextLine();
             String[] inputArr = input.trim().split(" ", 2);
-            if (inputArr[0].equals("bye")) {
+            if (isEnd(inputArr[0])) {
                 goodBye();
                 break;
-            } else if (inputArr[0].equals("list")) {
+            } else if (isList(inputArr[0])) {
                 showListTasks(listTasks);
-            } else if (inputArr[0].equals("done") && isNumber(inputArr[1])) {
-                int num = parseInt(inputArr[1]);
-                int size = listTasks.size();
-                if (num <= 0) {
-                    messageFormatter(() -> System.out.println("Invalid input!"));
-                } else if (size < num) {
-                    messageFormatter(() -> System.out.printf("You have only %d task in your list\n", size));
-                } else {
-                    Task task = listTasks.get(num - 1);
-                    messageFormatter(() -> task.markAsDone());
-                }
+            } else if (isValidDone(inputArr[0], inputArr[1])) {
+                marking(parseInt(inputArr[1]), listTasks.size());
+            } else if (isTask(inputArr[0])) {
+                addTask(inputArr[0], inputArr[1]);
             } else {
-                Task task = new Task(input);
-                listTasks.add(task);
-                messageFormatter(() -> System.out.println(ADDED + input));
+                System.out.println("Unknown command inputted in"); // temporary check!!!
             }
         }
     }
@@ -64,6 +60,43 @@ public class Duke {
         System.out.println(); // optional
     }
 
+    private boolean isNumber(String str) {
+        try {
+            int num = parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private boolean isValidDone(String type, String num) {
+        return type.equals(KEYWORD_DONE) && isNumber(num);
+    }
+
+    public boolean isEnd(String type) {
+        return type.equals(KEYWORD_BYE);
+    }
+
+    public boolean isList(String type) {
+        return type.equals(KEYWORD_LIST);
+    }
+
+    public boolean isTODO(String type) {
+        return type.equals(KEYWORD_TODO);
+    }
+
+    public boolean isDeadline(String type) {
+        return type.equals(KEYWORD_DEADLINE);
+    }
+
+    public boolean isEvent(String type) {
+        return type.equals(KEYWORD_EVENT);
+    }
+
+    private boolean isTask(String type) {
+        return isDeadline(type) || isTODO(type) || isEvent(type);
+    }
+
     // Printing out the items in the list
     private void showListTasks(ArrayList<Task> listTasks) {
         if (listTasks.size() == 0) {
@@ -78,13 +111,39 @@ public class Duke {
         }
     }
 
-    private boolean isNumber(String str) {
-        try {
-            int num = parseInt(str);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
+    // marking the task
+    private void marking(int num, int size) {
+        if (num <= 0) {
+            messageFormatter(() -> System.out.println("Invalid input!"));
+        } else if (size < num) {
+            messageFormatter(() -> System.out.printf("You have only %d task in your list\n", size));
+        } else {
+            Task task = listTasks.get(num - 1);
+            messageFormatter(() -> task.markAsDone());
         }
+    }
+
+    // adding the task into the list
+    private void addTask(String type, String message) {
+        Task task;
+        String[] dateTime;
+        if (isTODO(type)) {
+            task = new ToDo(message);
+        } else if (isDeadline(type)) {
+            dateTime = message.split(" /by ", 2);
+            task = new Deadline(dateTime[0], dateTime[1]);
+        } else if (isEvent(type)){
+            dateTime = message.split(" /at ", 2);
+            task = new Event(dateTime[0], dateTime[1]);
+        } else {
+            return;
+        }
+        listTasks.add(task);
+        messageFormatter(() -> {
+            System.out.println("Got it. I've added this task:");
+            System.out.println(task);
+            System.out.printf("Now you have %d tasks in the list.\n", listTasks.size());
+        });
     }
 
 }
