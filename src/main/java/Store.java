@@ -26,6 +26,17 @@ public class Store {
         }
     }
 
+    public String deleteTask(int index) throws DukeException {
+        try {
+            Task removed = store.remove(index);
+            return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in your list.",
+                    removed.toString(),
+                    this.store.size());
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("I couldn't find that task. Are you trying to make 2020 worse?");
+        }
+    }
+
     public String listItems() {
         String list = "Here are the tasks in your list:\n";
         for (int i = 0; i < this.store.size(); i++) {

@@ -9,6 +9,7 @@ public class Duke {
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String TODO_COMMAND = "todo";
     private static final String EVENT_COMMAND = "event";
+    private static final String DELETE_COMMAND = "delete";
 
     private static String prependIndent(String content, int indent) {
         String spaces = "";
@@ -95,6 +96,14 @@ public class Duke {
                         }
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("Are you going to attend a nameless event?");
+                    }
+                case DELETE_COMMAND:
+                    try {
+                        int index = Integer.parseInt(input.split(" ")[1]) - 1;
+                        System.out.printf(prependIndent(storage.deleteTask(index), 5));
+                        break;
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("This isn't harry potter, please use only integers.");
                     }
                 default:
                     throw new DukeException("Wakarimasen~");
