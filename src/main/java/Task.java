@@ -9,6 +9,10 @@ public class Task {
         this.done = true;
     }
 
+    public String getTaskStatusIcon() {
+        return (done ? "\u2713" : "\u2718");
+    }
+
     @Override
     public String toString() {
         return this.taskName;
