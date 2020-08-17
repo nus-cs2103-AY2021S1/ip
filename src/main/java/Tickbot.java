@@ -1,14 +1,17 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Scanner;
+import java.util.function.BiFunction;
 
 public class Tickbot {
     private static Scanner inputScanner = new Scanner(System.in);
     private static List<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
-        printMessage("hello, This is tickbot! How can I help you?");
+        printMessage("Hello, this is tickbot! How can I help you?");
         boolean running = true;
         while (running) {
             System.out.print("==> ");
@@ -57,58 +60,62 @@ public class Tickbot {
                 break;
             }
             case "todo": {
-                String content = args[1];
-                for (int i = 2; i < args.length; i++) {
-                    content += " " + args[i];
-                }
-                Todo todo = new Todo(content);
-                tasks.add(todo);
-                printMessage("TO-DO added: " + todo);
+                processAddTask(args, "TO-DO", (content, _time) -> new Todo(content), null);
                 break;
             }
             case "deadline": {
-                String content = args[1];
-                String time = null;
-                boolean inputingTime = false;
-                for (int i = 2; i < args.length; i++) {
-                    if (inputingTime) {
-                        time += " " + args[i];
-                    } else if (Objects.equals(args[i], "/by")) {
-                        inputingTime = true;
-                        time = args[++i];
-                    } else {
-                        content += " " + args[i];
-                    }
-                }
-                Deadline deadline = new Deadline(content, time);
-                tasks.add(deadline);
-                printMessage("Deadline added: " + deadline);
+                processAddTask(args, "Deadline", Deadline::new, "/by");
                 break;
             }
             case "event": {
-                String content = args[1];
-                String time = null;
-                boolean inputingTime = false;
-                for (int i = 2; i < args.length; i++) {
-                    if (inputingTime) {
-                        time += " " + args[i];
-                    } else if (Objects.equals(args[i], "/at")) {
-                        inputingTime = true;
-                        time = args[++i];
-                    } else {
-                        content += " " + args[i];
-                    }
-                }
-                Event event = new Event(content, time);
-                tasks.add(event);
-                printMessage("Event added: " + event);
+                processAddTask(args, "Event", Event::new, "/at");
                 break;
             }
             default: {
-                printMessage("Invalid command.");
+                printMessage("Unknown command " + args[0] + ".");
             }
         }
         return true; // continue inputing
+    }
+
+    private static void processAddTask(
+        String[] args,
+        String taskName,
+        BiFunction<String, String, ? extends Task> initializer,
+        String timeMarker
+    ) {
+        String lowerTaskName = taskName.toLowerCase();
+        if (args.length < 2) {
+            printMessage("Please input the content of the " + lowerTaskName + ".");
+            printMessage(String.format("Usage: %s <content> %s <time>",
+                lowerTaskName, timeMarker));
+            return;
+        }
+        String content = args[1];
+        Optional<String> time = Optional.empty();
+        try {
+            for (int i = 2; i < args.length; i++) {
+                if (time.isPresent()) {
+                    time = Optional.of(time.get() + " " + args[i]);
+                } else if (Objects.equals(args[i], timeMarker)) {
+                    time = Optional.of(args[++i]);
+                } else {
+                    content += " " + args[i];
+                }
+            }
+            Task task = initializer.apply(content,
+                timeMarker == null ? null : time.get());
+            tasks.add(task);
+            printMessage(taskName + " added: " + task);
+        } catch (IndexOutOfBoundsException err) {
+            printMessage("Please input valid time after " + timeMarker + ".");
+            printMessage(String.format("Usage: %s <content> %s <time>",
+                lowerTaskName, timeMarker));
+        } catch (NoSuchElementException err) {
+            printMessage("Missing time for the " + lowerTaskName + ".");
+            printMessage(String.format("Usage: %s <content> %s <time>",
+                lowerTaskName, timeMarker));
+        }
     }
 
     private static void printMessage(String message) {
