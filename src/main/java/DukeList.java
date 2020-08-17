@@ -20,8 +20,12 @@ public class DukeList {
      * @param strArr Array of strings (originally split by spaces).
      * @return Substring with the keyword removed.
      */
-    private static String getFormattedItemString(String[] strArr) {
-        return String.join(" ", Arrays.copyOfRange(strArr, 1, strArr.length));
+    private static String getItemSubstring(String[] strArr) throws ArrayIndexOutOfBoundsException {
+        if (strArr.length <= 1) {
+            throw new ArrayIndexOutOfBoundsException("String array of unexpected length: expected length > 1");
+        } else {
+            return String.join(" ", Arrays.copyOfRange(strArr, 1, strArr.length));
+        }
     }
 
 
@@ -31,7 +35,7 @@ public class DukeList {
      * @param itemString String to be added.
      * @return Status string to be printed.
      */
-    public String add(String itemString) {
+    public String add(String itemString) throws DukeException {
         // this.list.add(new Task(itemString));
         Task newTask;
 
@@ -41,22 +45,34 @@ public class DukeList {
         String formattedItemString;
         switch (keyword) {
             case ("todo"):
-                formattedItemString = DukeList.getFormattedItemString(strArr);
-                newTask = new Todo(formattedItemString);
-                break;
+                try {
+                    formattedItemString = DukeList.getItemSubstring(strArr);
+                    newTask = new Todo(formattedItemString);
+                    break;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new DukeNoDescriptionException(String.format("OOPS!!! The description of a %s cannot be empty.", keyword));
+                }
 
             case ("deadline"):
-                formattedItemString = DukeList.getFormattedItemString(strArr);
-                newTask = new Deadline(formattedItemString);
-                break;
+                try {
+                    formattedItemString = DukeList.getItemSubstring(strArr);
+                    newTask = new Deadline(formattedItemString);
+                    break;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new DukeNoDescriptionException(String.format("OOPS!!! The description of a %s cannot be empty.", keyword));
+                }
 
             case ("event"):
-                formattedItemString = DukeList.getFormattedItemString(strArr);
-                newTask = new Event(formattedItemString);
-                break;
+                try {
+                    formattedItemString = DukeList.getItemSubstring(strArr);
+                    newTask = new Event(formattedItemString);
+                    break;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new DukeNoDescriptionException(String.format("OOPS!!! The description of a %s cannot be empty.", keyword));
+                }
 
             default:
-                return "Error adding";
+                throw new DukeInvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         this.list.add(newTask);

@@ -90,9 +90,13 @@ public class Duke {
                         break;
 
                     default:
-                        String statusString = this.list.add(msgInput);
-                        Duke.printMessage(statusString);
-                        break;
+                        try {
+                            String statusString = this.list.add(msgInput);
+                            Duke.printMessage(statusString);
+                            break;
+                        } catch (DukeException e) {
+                            Duke.printMessage(e.getMessage());
+                        }
                 }
             }
         }
