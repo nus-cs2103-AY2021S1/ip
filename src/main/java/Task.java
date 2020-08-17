@@ -7,9 +7,9 @@ public class Task {
         this.taskCompleted = false;
     }
 
-    public void completeTask() {
+    public String completeTask() {
         this.taskCompleted = true;
-        returnTask();
+        return returnTask();
     }
 
     public String returnTask() {
