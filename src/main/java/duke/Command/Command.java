@@ -19,6 +19,9 @@ public abstract class Command {
         } else if (str.contains("done")) {
             int taskIndex = Integer.parseInt(str.split("\\s+")[1]);
             return new CompleteCommand(taskIndex).execute();
+        } else if (str.contains("delete")) {
+            int taskIndex = Integer.parseInt(str.split("\\s+")[1]);
+            return new DeleteCommand(taskIndex).execute();
         } else {
             return new AddCommand(str).execute();
         }
