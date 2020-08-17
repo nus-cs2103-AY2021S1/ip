@@ -8,7 +8,7 @@ public class TaskManager {
         this.toDoList = new ArrayList<>();
     }
 
-    public void manage(String input) {
+    public void manage(String input) throws DukeException {
         if(input.equals("list")) {
             this.displayList();
         }
@@ -27,6 +27,9 @@ public class TaskManager {
         }
 
         else if (input.contains("todo")) {
+            if(checkEmpty(input, "todo")) {
+                throw new DukeException("Much error! You have to describe your mission!");
+            }
             System.out.println("--------------------------------------");
             this.addToList(new ToDo(input.substring(5, input.length())));
             this.taskPrint(input);
@@ -34,6 +37,9 @@ public class TaskManager {
         }
 
         else if (input.contains("deadline")) {
+            if(checkEmpty(input, "deadline")) {
+                throw new DukeException("Much error! You have to describe your mission!");
+            }
             System.out.println("--------------------------------------");
             if(input.contains("/")) {
                 int notePos = input.indexOf("/") + 1;
@@ -51,6 +57,9 @@ public class TaskManager {
         }
 
         else if (input.contains("event")) {
+            if(checkEmpty(input, "event")) {
+                throw new DukeException("Much error! You have to describe your mission!");
+            }
             System.out.println("--------------------------------------");
             if(input.contains("/")) {
                 int notePos = input.indexOf("/") + 1;
@@ -66,17 +75,38 @@ public class TaskManager {
         }
 
         else {
-            System.out.println("--------------------------------------");
+            /*System.out.println("--------------------------------------");
             this.addToList(new Task(input, TaskType.U));
             this.taskPrint(input);
-            System.out.println("--------------------------------------");
+            System.out.println("--------------------------------------");*/
+            throw new DukeException("Oops! There is no such keyword!");
 
         }
         int t = toDoList.size();
         System.out.println("You have a total of " + t + " tasks");
         System.out.println("--------------------------------------");
     }
+    //checks whether string is empty after keyword
+    public Boolean checkEmpty(String input, String keyWord) {
+        int keywordLength = keyWord.length();
+        String remainingDescription = input.substring(keywordLength, input.length());
+        if (remainingDescription.length() == 0 ) {
+            //int i = remainingDescription.charAt(0);
+            //System.out.println(i);
+            return true;
+        }
+        else if (remainingDescription.length() > 1 && remainingDescription.charAt(1) == 32) {
+            return true;
+        }
+        else if (remainingDescription.length() <= 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
+    
     public void addToList(Task task) {
         this.toDoList.add(task);
     }
