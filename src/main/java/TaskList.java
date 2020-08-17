@@ -8,6 +8,10 @@ public class TaskList {
         itemList.add(new Task(item));
     }
 
+    void markAsDone(int itemIndex) {
+        itemList.get(itemIndex - 1).markAsDone();
+    }
+
     void printList() {
         for (int i = 1; i <= itemList.size(); i++) {
             System.out.println(i + ". " + itemList.get(i - 1));
