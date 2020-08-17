@@ -22,20 +22,25 @@ public class Duke {
     // Driver method to respond to user input
     private static void respondPicker() {
         Scanner scan = new Scanner(System.in);
-        ArrayList<String> userInputCollector = new ArrayList();
+        ArrayList<Task> userInputCollector = new ArrayList();
 
         greet();
 
-        String userInput = scan.nextLine();
+        String userInput = scan.next();
         while (!userInput.equals("bye")) {
             if (userInput.equals("list")) {
                 prettyPrint(userInputCollector);
-            } else {
+            } else if (userInput.equals("done")) {
+                Task taskToUpdate = userInputCollector.get(scan.nextInt() - 1);
+                taskToUpdate.updateStatus(true);
+                prettyPrint("Nice! I've marked this task as done: \n" + "       " + taskToUpdate);
+            }
+            else {
                 prettyPrint(userInput);
+                userInputCollector.add(new Task(userInput));
             }
 
-            userInputCollector.add(userInput);
-            userInput = scan.nextLine();
+            userInput = scan.next();
         }
 
         prettyPrint("Bye. Hope to see you again soon!");
@@ -58,7 +63,7 @@ public class Duke {
     private static void prettyPrint(ArrayList array) {
         System.out.println(LINEDIVIDER);
         for (int i = 0; i < array.size(); i++) {
-            System.out.println("     " + (i + 1) + ". " + array.get(i));
+            System.out.println("     " + (i + 1) + "." + array.get(i));
         }
         System.out.println(LINEDIVIDER);
     }
