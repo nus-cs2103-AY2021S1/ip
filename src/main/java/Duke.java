@@ -8,24 +8,35 @@ public class Duke {
         String intro = "Hello! I'm Duke\nWhat can i do for you?\n";
         System.out.println(divider + intro + divider);
         boolean carryOn = true;
-        ArrayList<String> stringArray = new ArrayList<>();
+        ArrayList<Task> taskArray = new ArrayList<>();
         int numberOfItems = 0;
         while(carryOn) {
             String inputString = input.nextLine();
-            if (inputString.equals("list")) {
+            if (inputString.length() >= 6 && inputString.substring(0, 4).equals("done")) {
+                int itemNumber = Integer.parseInt(inputString.substring(inputString.length() - 1));
+                if (taskArray.size() < itemNumber || itemNumber <= 0) {
+                    System.out.println(divider + "Hey, no such task exists!" + "\n" + divider);
+                } else {
+                    Task task = taskArray.get(itemNumber - 1);
+                    task.updateTask(1);
+                    System.out.println(divider + "Nice! I have marked this task as done:");
+                    System.out.println(task.getStatusIcon() + "\n" + divider);
+                }
+            } else if (inputString.equals("list")) {
                 System.out.println(divider);
-                for (int i = 0; i < stringArray.size(); i++) {
+                System.out.println("Here are the tasks in your list!");
+                for (int i = 0; i < taskArray.size(); i++) {
                     int numbering = i + 1;
-                    System.out.println(numbering + ". " + stringArray.get(i));
+                    Task task = taskArray.get(i);
+                    System.out.println(numbering + "." + task.getStatusIcon());
                 }
                 System.out.println(divider);
-            }
-            else if (inputString.equals("bye")) {
+            } else if (inputString.equals("bye")) {
                 System.out.println(divider + "Bye! See you next time!" + "\n" + divider);
                 carryOn = false;
             } else {
                 if (numberOfItems < 100) {
-                    stringArray.add(inputString);
+                    taskArray.add(new Task(inputString));
                     System.out.println(divider + "added: " + inputString + "\n" + divider);
                     numberOfItems += 1;
                 } else {
