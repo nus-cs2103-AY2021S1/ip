@@ -27,20 +27,20 @@ public class Duke {
                 String[] userInputArgs = userInput.split(" ");
                 Duke.printHorizontalLine();
                 try {
-                    if (userInput.equals("bye")) {
+                    if (userInput.equals(Command.BYE.getName())) {
                         System.out.println("Goodbye! Shutting down now...");
                         exitProgram = true;
-                    } else if (userInput.equals("list")) {
+                    } else if (userInput.equals(Command.LIST.getName())) {
                         int n = listOfTasks.size();
                         System.out.println("Here are the tasks in your list:");
                         for (int i = 0; i < n; i++) {
                             System.out.println(String.format("%d.%s", i + 1, listOfTasks.get(i)));
                         }
-                    } else if (userInputArgs[0].equals("done")) {
+                    } else if (userInputArgs[0].equals(Command.DONE.getName())) {
                         Task task = markTaskDone(listOfTasks, userInputArgs);
                         System.out.println("Nice! I've marked this task as done:");
                         Duke.printWithIndent(task.toString());
-                    } else if (userInputArgs[0].equals("delete")) {
+                    } else if (userInputArgs[0].equals(Command.DELETE.getName())) {
                         Task task = deleteTask(listOfTasks, userInputArgs);
                         System.out.println("Noted. I've removed this task:");
                         Duke.printWithIndent(task.toString());
@@ -89,13 +89,13 @@ public class Duke {
     }
 
     private static Task createTask(String[] userInputArgs) throws DukeException {
-        if (userInputArgs[0].equals("todo")) {
+        if (userInputArgs[0].equals(Command.TODO.getName())) {
             String description = Duke.reassembleString(userInputArgs, 1, userInputArgs.length);
             if (description.equals("")) {
                 throw new DukeException("The description of a todo cannot be empty.");
             }
             return new Todo(description);
-        } else if (userInputArgs[0].equals("deadline")) {
+        } else if (userInputArgs[0].equals(Command.DEADLINE.getName())) {
             int byIdx = Arrays.asList(userInputArgs).indexOf("/by");
             if (byIdx < 0) {
                 throw new DukeException("The deadline date has to be provided to the deadline task.");
@@ -109,7 +109,7 @@ public class Duke {
             } else {
                 return new Deadline(description, by);
             }
-        } else if (userInputArgs[0].equals("event")) {
+        } else if (userInputArgs[0].equals(Command.EVENT.getName())) {
             int atIdx = Arrays.asList(userInputArgs).indexOf("/at");
             if (atIdx < 0) {
                 throw new DukeException("The event date has to be provided to the event task.");
