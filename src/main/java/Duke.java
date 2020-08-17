@@ -95,6 +95,34 @@ public class Duke {
         }
     }
 
+    public static boolean checkDel(String s) {
+        return s.equals("delete");
+    }
+
+    public static void delTask(String s) throws DukeException {
+        if (s.equals("")) {
+            try {
+                addTask("delete", "");
+            } catch (DukeException e) {
+                System.out.println(border + e.getMessage() + "\n" + border);
+            }
+            return;
+        }
+
+        int i = Integer.parseInt(s);
+        if (i < 1 || i > storage.size()) {
+            throw new DukeException("You have entered an invalid number: " + i
+                    + ". Please try again.");
+        } else {
+            Task t = storage.get(i - 1);
+            storage.remove(i - 1);
+            System.out.println(
+                    border + "Noted. I've removed this task:\n" + "  "
+                    + t + "\n"
+                    + "Now you have " + storage.size() + " tasks in the list.\n" + border
+            );
+        }
+    }
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.println(
@@ -114,6 +142,12 @@ public class Duke {
                 } else if (checkDone(test)) {
                     try {
                         doneTask(next);
+                    } catch (DukeException e) {
+                        System.out.println(border + e.getMessage() + "\n" + border);
+                    }
+                } else if (checkDel(test)) {
+                    try {
+                        delTask(next);
                     } catch (DukeException e) {
                         System.out.println(border + e.getMessage() + "\n" + border);
                     }
