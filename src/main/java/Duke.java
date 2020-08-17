@@ -72,6 +72,12 @@ public class Duke {
 
     }
 
+    public static class DukeException extends Exception {
+        public DukeException(String error) {
+            super(error);
+        }
+    }
+
     public static void main(String[] args) {
         String logo
                 = " ____        _        \n"
@@ -86,65 +92,127 @@ public class Duke {
                 + "\n    Awaiting input...\n" + line);
         var list = new ArrayList<Task>();
         while (true) {
-            String[] input = sc.nextLine().split(" ");
-            if (input.length == 1) {
-                if (input[0].equals("bye")) {
-                    System.out.println(line + "\n    Bye. Hope to see you again soon!\n" + line);
-                    return;
-                } else if (input[0].equals("list")) {
-                    int i = 0;
-                    System.out.println(line + "\n    Here are the tasks in your list: ");
-                    while (list.size() > i) {
-                        System.out.println("        " + ++i + ". " + list.get(i - 1).toString());
+            try {
+                Task task = null;
+                StringBuilder description = new StringBuilder();
+                StringBuilder time = new StringBuilder();
+                String[] input = sc.nextLine().split(" ");
+                switch (input[0]) {
+                    case "bye":
+                        System.out.println(line + "\n    Bye. Hope to see you again soon!\n" + line);
+                        return;
+                    case "list": {
+                        int i = 0;
+                        System.out.println(line + "\n    Here are the tasks in your list: ");
+                        while (list.size() > i) {
+                            System.out.println("        " + ++i + ". " + list.get(i - 1).toString());
+                        }
+                        System.out.println(line);
+                        break;
                     }
-                    System.out.println(line);
-                }
-            } else {
-                if (input[0].equals("done")) {
-                    int index = Integer.parseInt(input[1]) - 1;
-                    list.get(index).complete();
-                    System.out.println(line + "\n    Nice! I've marked this task as done:\n        "
-                            + list.get(index).toString() + "\n" + line);
-                } else {
-                    Task task = null;
-                    StringBuilder description = new StringBuilder();
-                    StringBuilder time = new StringBuilder();
-                    if (input[0].equals("todo")) {
+                    case "done":
+                        int index = 0;
+                        if (input.length == 1) {
+                            throw new DukeException("Please select a task to mark as completed!");
+                        }
+                        try {
+                            index = Integer.parseInt(input[1]);
+                        } catch (NumberFormatException e) {
+                            throw new DukeException("Please choose an integer greater than 0!");
+                        }
+                        if (index <= 0) {
+                            throw new DukeException("Please choose an integer greater than 0!");
+                        } else if (index > list.size()) {
+                            throw new DukeException("Your task list is not that long yet!");
+                        }
+                        list.get(index - 1).complete();
+                        System.out.println(line + "\n    Nice! I've marked this task as done:\n        "
+                                + list.get(index - 1).toString() + "\n" + line);
+                        break;
+                    case "todo": {
+                        if (input.length == 1) {
+                            throw new DukeException("The description of a todo cannot be empty!");
+                        }
                         for (int i = 1; i < input.length; i++) {
                             description.append(input[i]).append(" ");
                         }
                         description.deleteCharAt(description.length() - 1);
                         task = new ToDo(description.toString());
-                    } else if (input[0].equals("deadline")) {
+                        list.add(task);
+                        System.out.println(line + "\n    Got it. I've added this task:\n        "
+                                + task.toString()
+                                + "\n    You now have " + list.size()
+                                + (list.size() == 1 ? " task" : " tasks")
+                                + " in your list.\n" + line);
+                        break;
+                    }
+                    case "deadline": {
+                        if (input.length == 1) {
+                            throw new DukeException("A deadline requires a description and a time!");
+                        }
                         int i = 1;
                         while (!input[i].equals("/by")) {
                             description.append(input[i++]).append(" ");
+                            if (i == input.length) {
+                                throw new DukeException("deadline requires the use of \"/by\"!");
+                            }
+                        }
+                        if (description.length() == 0) {
+                            throw new DukeException("The description of a deadline cannot be empty!");
                         }
                         while (++i < input.length) {
                             time.append(input[i]).append(" ");
+                        }
+                        if (time.length() == 0) {
+                            throw new DukeException("The time of a deadline cannot be empty!");
                         }
                         description.deleteCharAt(description.length() - 1);
                         time.deleteCharAt(time.length() - 1);
                         task = new Deadline(description.toString(), time.toString());
-                    } else if (input[0].equals("event")) {
+                        list.add(task);
+                        System.out.println(line + "\n    Got it. I've added this task:\n        "
+                                + task.toString()
+                                + "\n    You now have " + list.size()
+                                + (list.size() == 1 ? " task" : " tasks")
+                                + " in your list.\n" + line);
+                        break;
+                    }
+                    case "event": {
+                        if (input.length == 1) {
+                            throw new DukeException("An event requires a description and a time!");
+                        }
                         int i = 1;
                         while (!input[i].equals("/at")) {
                             description.append(input[i++]).append(" ");
+                            if (i == input.length) {
+                                throw new DukeException("event requires the use of \"/at\"!");
+                            }
+                        }
+                        if (description.length() == 0) {
+                            throw new DukeException("The description of a deadline cannot be empty!");
                         }
                         while (++i < input.length) {
                             time.append(input[i]).append(" ");
                         }
+                        if (time.length() == 0) {
+                            throw new DukeException("The time of a deadline cannot be empty!");
+                        }
                         description.deleteCharAt(description.length() - 1);
                         time.deleteCharAt(time.length() - 1);
                         task = new Event(description.toString(), time.toString());
+                        list.add(task);
+                        System.out.println(line + "\n    Got it. I've added this task:\n        "
+                                + task.toString()
+                                + "\n    You now have " + list.size()
+                                + (list.size() == 1 ? " task" : " tasks")
+                                + " in your list.\n" + line);
+                        break;
                     }
-                    list.add(task);
-                    System.out.println(line + "\n    Got it. I've added this task:\n      "
-                            + task.toString()
-                            + "\n    You now have " + list.size()
-                            + (list.size() == 1 ? " task" : " tasks")
-                            + " in your list.\n" + line);
+                    default:
+                        throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
+            } catch (DukeException e) {
+                System.out.println(line + "\n    Error: " + e.getMessage() + "\n" + line);
             }
         }
     }
