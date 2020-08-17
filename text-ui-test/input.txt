@@ -1,0 +1,26 @@
+todo the thing to do
+deadline the deadline /by sometime
+event the event /at sometime
+		todo                           the second thing to do           
+list
+done 1
+list
+delete 3
+list     
+                                done              2                   
+                                list            
+                                done              3
+		list                   
+hello
+todo
+deadline
+event
+deadline the deadline
+event the event
+event the event /by sometime
+done
+delete
+done 100
+delete 100
+list
+bye
