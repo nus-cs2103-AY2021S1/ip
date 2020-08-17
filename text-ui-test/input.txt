@@ -1,0 +1,14 @@
+list
+todo test1
+deadline thisbreaks
+deadline add tests /by now
+event commit changes /at later
+list
+event thisalsobreaks
+deadline do tasks /by now
+done 1
+done 3
+list
+done 4
+list
+bye
