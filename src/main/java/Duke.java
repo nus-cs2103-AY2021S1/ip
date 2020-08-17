@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String horizontalLine = "\t================================================================";
+    private static final String horizontalLine = "\t=================================================================================";
     private static int n = -1;
     private static int m = -1;
 
