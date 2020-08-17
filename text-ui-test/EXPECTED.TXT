@@ -3,66 +3,56 @@
 
   I am a bot that will keep track of all your tasks.
 
-  Below is a list of all my functions:
-  1. Create a new task
-          1.1 Todo: Input 'todo' followed by the todo description. For eg, todo eat
-          1.2 Deadline: Input 'deadline' followed by task description, then a '/by' and lastly the due date. For eg, deadline return book /by Sunday
-          1.3 Event: Input 'event', followed by task description, then a '/at' and lastly the event time.
-
-  2. To display all tasks in your list, input 'list'
-
-  3. To mark a task as completed, input 'done' followed by the task ID in the list. For eg, 'done 2'
-
-  4. To end this chat, input 'bye'
+  To view a list of all my commands, input '/commands'
 
   Now that you are familiar with the commands, how may I assist you today?
 ----------------------------------------
 ----------------------------------------
   Success! This task has been added:
-    [T][✘] do cs2103T project
+	[T][✗] do cs2103T project
   You have 1 tasks in your list now.
 ----------------------------------------
 ----------------------------------------
   Success! This task has been added:
-    [D][✗] finish week 2 requirements (by: Monday)
+	[D][✗] finish week 2 requirements (by: Monday)
   You have 2 tasks in your list now.
 ----------------------------------------
 ----------------------------------------
   Success! This task has been added:
-    [E][✗] cs2103T lecture (at: Fri 4-6pm)
+	[E][✗] cs2103T lecture (at: Fri 4-6pm)
   You have 3 tasks in your list now.
 ----------------------------------------
 ----------------------------------------
 Here is a list of all your tasks:
-    1. [T][✗] do cs2103T project
-    2. [D][✗] finish week 2 requirements (by: Monday)
-    3. [E][✗] cs2103T lecture (at: Fri 4-6pm)
+	1. [T][✗] do cs2103T project
+	2. [D][✗] finish week 2 requirements (by: Monday)
+	3. [E][✗] cs2103T lecture (at: Fri 4-6pm)
 ----------------------------------------
 ----------------------------------------
   Nice! I've marked this task as done:
-    [D][✓] finish week 2 requirements (by: Monday)
+	[D][✓] finish week 2 requirements (by: Monday)
 ----------------------------------------
 ----------------------------------------
   Success! This task has been added:
-    [D][✗] finish week 1 post lecture quiz (by: Saturday)
+	[D][✗] finish week 1 post lecture quiz (by: Saturday)
   You have 4 tasks in your list now.
 ----------------------------------------
 ----------------------------------------
   Success! This task has been added:
-    [T][✗] read up on week 2 topics
+	[T][✗] read up on week 2 topics
   You have 5 tasks in your list now.
 ----------------------------------------
 ----------------------------------------
   Nice! I've marked this task as done:
-    [D][✓] finish week 1 post lecture quiz (by: Saturday)
+	[D][✓] finish week 1 post lecture quiz (by: Saturday)
 ----------------------------------------
 ----------------------------------------
 Here is a list of all your tasks:
-    1. [T][✗] do cs2103T project
-    2. [D][✓] finish week 2 requirements (by: Monday)
-    3. [E][✗] cs2103T lecture (at: Fri 4-6pm)
-    4. [D][✓] finish week 1 post lecture quiz (by: Saturday)
-    5. [T][✗] read up on week 2 topics
+	1. [T][✗] do cs2103T project
+	2. [D][✓] finish week 2 requirements (by: Monday)
+	3. [E][✗] cs2103T lecture (at: Fri 4-6pm)
+	4. [D][✓] finish week 1 post lecture quiz (by: Saturday)
+	5. [T][✗] read up on week 2 topics
 ----------------------------------------
 ----------------------------------------
   GoodBye and I hope to see you soon! Have a fantastic day!

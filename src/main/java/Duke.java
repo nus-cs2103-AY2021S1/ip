@@ -46,6 +46,8 @@ public class Duke {
                     completeTask(message);
                 } else if (function.equals("todo") || function.equals("deadline") || function.equals("event")){
                     createTask(message);
+                } else if (function.equals("delete")) {
+                    deleteTask(message);
                 } else {
                     handleFailedFunction();
                 }
@@ -85,21 +87,39 @@ public class Duke {
     public void completeTask(String message) throws InvalidTaskException, InvalidFunctionException {
         try {
             int index = Integer.parseInt(message.split(" ")[1]);
-            if (index > this.list.size()) {
+            if (index > this.list.size() || index <= 0) {
                 String err = "Invalid Task! The task does not exist, try again.";
                 throw new InvalidTaskException(err);
             } else {
                 if (this.list.get(index - 1).isDone) {
                     System.out.println("  This task has already been completed:");
-                    System.out.println("\t" + this.list.get(index - 1));
                 } else {
                     this.list.get(index - 1).markAsDone();
                     System.out.println("  Nice! I've marked this task as done:");
-                    System.out.println("\t" + this.list.get(index - 1));
                 }
+                System.out.println("\t" + this.list.get(index - 1));
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
             String err = "No Task ID found! Please input the ID of the task you wish to mark as completed.";
+            throw new InvalidFunctionException(err);
+        }
+    }
+
+    public void deleteTask(String message) throws InvalidTaskException, InvalidFunctionException {
+        try {
+            int index = Integer.parseInt(message.split(" ")[1]);
+            if (index > this.list.size() || index <= 0) {
+                String err = "Invalid Task! The task does not exist, try again.";
+                throw new InvalidTaskException(err);
+            } else {
+                Task toRemove = this.list.get(index - 1);
+                System.out.println("  Found it! This task has been successfully deleted:");
+                System.out.println("\t" + toRemove);
+                this.list.remove(index - 1);
+                System.out.println("  You have " + this.list.size() + " tasks in your list now.");
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            String err = "No Task ID found! Please input the ID of the task you wish to delete.";
             throw new InvalidFunctionException(err);
         }
     }
@@ -114,14 +134,15 @@ public class Duke {
                 " For eg, event project meeting /at Mon 2-4pm \n" +
                 "  \n  2. To display all tasks in your list: 'list' \n" +
                 "  \n  3. To mark a task as completed: 'done' {task ID}. For eg, 'done 2' \n" +
-                "  \n  4. To end this chat: 'bye' \n";
+                "  \n  4. To delete a task: 'delete' {task ID}. For eg, 'delete 2' \n" +
+                "  \n  5. To end this chat: 'bye' \n";
         System.out.println(commands);
     }
 
     public void createTask(String message) throws InvalidTaskException {
         String taskType = message.split(" ")[0];
-        String description = "";
-        String time = "";
+        String description;
+        String time;
         Task toAdd = null;
         try {
             if (taskType.equals("todo")) {
