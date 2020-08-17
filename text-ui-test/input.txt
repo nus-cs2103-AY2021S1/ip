@@ -1,0 +1,26 @@
+help
+list
+todo homework
+list
+deadline CS2103 webcast /by Saturday
+deadline /by Saturday
+deadline CS2103 webcast /by
+list
+event CS2100 Lab /at Monday 2pm-4pm
+event CS2100 Lab /at
+event /at Monday 2pm-4pm
+list
+deadline GER1000 assignment /at Tomorrow
+event CS1010X /by Saturday
+list
+done 1
+done 1
+done -1
+done 1000
+done 2
+done 3
+help me
+list all
+done all my homework
+bye bye
+bye
