@@ -28,7 +28,7 @@ public class Duke {
                 break;
             } else if (s[0].equals("list")) {
                 System.out.println(line);
-                System.out.println("These are the tasks in your list:");
+                System.out.println(" These are the tasks in your list:");
                 for (int i = 0; i < storage.length; i++) {
                     if (storage[i] == null) {
                         break;
@@ -43,10 +43,28 @@ public class Duke {
                 System.out.println(line + "\n" + " Yay! I have marked this task as done: " + "\n"
                     + "   " + t.toString() + "\n" + line);
             } else {
-                Task t = new Task(input);
+                Task t;
+                if (s[0].equals("event")) {
+                    // Split string to get date
+                    String[] str = input.split(" /at ");
+                    // Ignore task type
+                    String description = str[0].substring(6);
+                    String date = str[1];
+                    t = new Event(description, date);
+                } else if (s[0].equals("deadline")) {
+                    // Split string to get date
+                    String[] str = input.split(" /by ");
+                    // Ignore task type
+                    String description = str[0].substring(9);
+                    String date = str[1];
+                    t = new Deadline(description, date);
+                } else {
+                    t = new Todo(input.substring(5));
+                }
                 storage[counter] = t;
                 counter++;
-                System.out.println(line + "\n" + " added: " + t.toString() + "\n" + line);
+                System.out.println(line + "\n" + " Okay! I have added this task:" + "\n" + "   " + t.toString()
+                    + "\n" + " Now you have " + counter + (counter > 1 ? " tasks" : " task") + "\n" + line);
             }
         }
     }
