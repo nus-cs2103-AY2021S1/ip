@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Scanner {
+    // array of valid commands
     private final static List<String> COMMANDS = Arrays.asList("done");
 
     static void scan() throws IOException {
@@ -18,6 +19,7 @@ public class Scanner {
             String command = line.split(" ")[0];
 
             if (COMMANDS.contains(command) && line.split(" ").length > 1) {
+                // handle commands with >1 argument
                 switch (command) {
                     case "done":
                         try {

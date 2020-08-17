@@ -12,7 +12,7 @@ public class Task {
     }
 
     public String toString() {
-        String status = isDone ? "✓" : "✗";
+        String status = isDone ? "\u2713" : "\u2718";
         return "[" + status + "] " + taskDescription;
     }
 }
