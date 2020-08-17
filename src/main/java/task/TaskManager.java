@@ -1,5 +1,7 @@
 package task;
 
+import utils.Colour;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -11,25 +13,25 @@ public class TaskManager {
 
     public String addTask(Task newTask) {
         tasks.add(newTask);
-        String output = "Got it. I've added this task:\n " + newTask.toString() + "\n";
+        String output = "Got it. I've added this task:\n " + Colour.Green(newTask.toString()) + "\n";
         String numberOfTasks = tasks.size() < 2 ? " task in the list." : " tasks in the list.";
         return output + "Now you have a total of " + String.valueOf(tasks.size()) + numberOfTasks;
     }
 
-    public int getCompletedTasks(){
+    public int getCompletedTasks() {
         int completedTasks = 0;
-        for (int i = 0; i < tasks.size(); i++){
-            if(tasks.get(i).getIsDone()){
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getIsDone()) {
                 completedTasks++;
             }
         }
         return completedTasks;
     }
 
-    public int getUncompletedTasks(){
+    public int getUncompletedTasks() {
         int uncompletedTasks = 0;
-        for(int i = 0; i < tasks.size(); i++){
-            if(!tasks.get(i).getIsDone()){
+        for (int i = 0; i < tasks.size(); i++) {
+            if (!tasks.get(i).getIsDone()) {
                 uncompletedTasks++;
             }
         }
@@ -42,8 +44,14 @@ public class TaskManager {
         for (int i = 0; i < tasks.size(); i++) {
             stringBuilder.append(String.valueOf(i + 1) + ") " + tasks.get(i).toString() + "\n");
         }
-        stringBuilder.append("You have completed " + getCompletedTasks() + " tasks and have yet to complete "
-        + getUncompletedTasks() + " tasks.");
+        boolean isPluralCompletedTasks = getCompletedTasks() >= 2;
+        boolean isPluralUncompletedTasks = getUncompletedTasks() >= 2;
+        String completedTasks = Colour.Green(getCompletedTasks()
+                + (isPluralCompletedTasks ? " tasks" : " task"));
+        String uncompletedTasks = Colour.Red(getUncompletedTasks()
+                + (isPluralUncompletedTasks ? " tasks." : " task"));
+        stringBuilder.append("You have completed " + completedTasks + " and have yet to complete "
+                + uncompletedTasks);
         return stringBuilder.toString();
     }
 
@@ -53,7 +61,7 @@ public class TaskManager {
         String taskDoneMessage = "Good job on completing this task! I have marked this task as done: ";
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(taskDoneMessage + "\n");
-        stringBuilder.append(updatedTask.toString());
+        stringBuilder.append(Colour.Green(updatedTask.toString()));
         return stringBuilder.toString();
     }
 }
