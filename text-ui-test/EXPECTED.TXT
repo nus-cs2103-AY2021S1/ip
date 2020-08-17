@@ -47,12 +47,24 @@ Here is a list of all your tasks:
 	[D][✓] finish week 1 post lecture quiz (by: Saturday)
 ----------------------------------------
 ----------------------------------------
+  Found it! This task has been successfully deleted:
+	[D][✓] finish week 2 requirements (by: Monday)
+  You have 4 tasks in your list now.
+----------------------------------------
+----------------------------------------
+  Found it! This task has been successfully deleted:
+	[T][✗] do cs2103T project
+  You have 3 tasks in your list now.
+----------------------------------------
+----------------------------------------
+  Found it! This task has been successfully deleted:
+	[E][✗] cs2103T lecture (at: Fri 4-6pm)
+  You have 2 tasks in your list now.
+----------------------------------------
+----------------------------------------
 Here is a list of all your tasks:
-	1. [T][✗] do cs2103T project
-	2. [D][✓] finish week 2 requirements (by: Monday)
-	3. [E][✗] cs2103T lecture (at: Fri 4-6pm)
-	4. [D][✓] finish week 1 post lecture quiz (by: Saturday)
-	5. [T][✗] read up on week 2 topics
+	1. [D][✓] finish week 1 post lecture quiz (by: Saturday)
+	2. [T][✗] read up on week 2 topics
 ----------------------------------------
 ----------------------------------------
   GoodBye and I hope to see you soon! Have a fantastic day!

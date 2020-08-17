@@ -6,5 +6,8 @@ done 2
 deadline finish week 1 post lecture quiz /by Saturday
 todo read up on week 2 topics
 done 4
+delete 2
+delete 1
+delete 1
 list
 bye
