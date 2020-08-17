@@ -7,6 +7,8 @@ public class Scanner {
         BufferedReader reader =
                 new BufferedReader(new InputStreamReader((System.in)));
 
+        ItemList userItemList = new ItemList();
+
         while(true) {
             String line = reader.readLine();
             // when ctrl-D is pressed, reader returns null
@@ -18,8 +20,13 @@ public class Scanner {
                 break;
             }
 
-            System.out.println(line);
+            if (line.equals("list")) {
+                userItemList.printList();
+                // don't break even after printing
+            }
+
+            userItemList.addItem(line);
+            System.out.println("added: " + line);
         }
     }
-
 }
