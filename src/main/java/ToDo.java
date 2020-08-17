@@ -1,6 +1,6 @@
 public class ToDo extends Task {
 
-    public ToDo(String name) {
+    public ToDo(String name) throws BlankTaskException {
         super(name);
     }
 

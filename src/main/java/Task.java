@@ -4,9 +4,13 @@ public class Task {
     private final short id;
     private final String name;
     private boolean Done = false;
+    private static final String MESSAGE_BLANK_TASK = "Did you casually forget to put in the description of the task?";
 
-    public Task(String name) {
-        this.name = name;
+    public Task(String name) throws BlankTaskException {
+        if (name.isBlank()) {
+            throw new BlankTaskException(MESSAGE_BLANK_TASK);
+        }
+        this.name = name.strip();
         id = ++count;
     }
 

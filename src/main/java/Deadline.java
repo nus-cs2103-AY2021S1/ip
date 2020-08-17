@@ -1,10 +1,14 @@
 public class Deadline extends Task {
 
+    private static final String MESSAGE_MISSING_DUE = "Did you casually forget to put in the due date of the deadline?";
     private final String dueDateTime;
 
-    public Deadline(String name, String dueDateTime) {
+    public Deadline(String name, String dueDateTime) throws BlankTaskException, MissingDateTimeException {
         super(name);
-        this.dueDateTime = dueDateTime;
+        if (dueDateTime.isBlank()) {
+            throw new MissingDateTimeException(MESSAGE_MISSING_DUE);
+        }
+        this.dueDateTime = dueDateTime.strip();
     }
 
     public String getDueDateTime() {
