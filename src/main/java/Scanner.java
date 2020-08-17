@@ -42,8 +42,8 @@ public class Scanner {
                         userTaskList.printList();
                         break;
                     default:
-                        userTaskList.addItem(line);
-                        System.out.println("added: " + line);
+                        Task addedTask = userTaskList.addItem(line);
+                        System.out.println("added: " + addedTask);
                         break;
                 }
             }

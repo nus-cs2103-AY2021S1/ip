@@ -4,29 +4,35 @@ import java.util.ArrayList;
 public class TaskList {
     private final List<Task> itemList = new ArrayList<>();
 
-    void addItem(String item) {
+    Task addItem(String item) {
         String type = getItemType(item);
+        Task taskToAdd = null;
         switch(type) {
             case "todo":
-                itemList.add(new Todo(item.split("todo")[1].trim()));
+                taskToAdd = new Todo(item.split("todo")[1].trim());
                 break;
             case "deadline":
-                itemList.add(new Deadline(
+                taskToAdd = new Deadline(
                         getItemDescription(item, type),
                         getItemParameter(item, type)
-                ));
+                );
                 break;
             case "event":
-                itemList.add(new Event(
+                taskToAdd = new Event(
                         getItemDescription(item, type),
                         getItemParameter(item, type)
-                ));
+                );
                 break;
             default:
                 break;
         }
+
+
+        if (taskToAdd != null) itemList.add(taskToAdd);
+        return taskToAdd;
     }
 
+    //--------start of item literal parsers---------//
     String getItemType(String item) {
         return item.split(" ")[0].trim();
     }
@@ -46,6 +52,7 @@ public class TaskList {
         String delimiter = itemType.equals("deadline") ? "/by" : "/at";
         return item.split(delimiter);
     }
+    //--------end of item literal parsers---------//
 
     void markAsDone(int itemIndex) throws IllegalArgumentException {
         if (itemIndex > itemList.size()) {
