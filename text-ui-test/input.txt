@@ -1,16 +1,16 @@
 todo the thing to do
 deadline the deadline /by sometime
 event the event /at sometime
-		todo                           the second thing to do           
+	todo                           the second thing to do           
 list
 done 1
 list
 delete 3
 list     
-                                done              2                   
-                                list            
-                                done              3
-		list                   
+                done              2                   
+                 list            
+                done              3
+list                   
 hello
 todo
 deadline
