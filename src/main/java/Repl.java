@@ -1,4 +1,5 @@
 import enums.Command;
+import exceptions.DukeException;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.TaskManager;
@@ -36,42 +37,48 @@ public class Repl {
             String[] args;
             try {
                 command = Command.valueOf(firstToken.toUpperCase());
+                // Check that the user input is of the correct format for the command.
+                command.validate(line);
                 switch (command) {
                     case BYE:
                         prettyPrinter.print(ResourceHandler.getString("repl.farewell"));
                         return;
                     case DEADLINE:
-                        line = line.replaceFirst("^deadline\\s*", "");
-                        args = line.split("\\s*/by\\s*");
-                        String deadlineName = args[0];
-                        String dueDate = args[1];
+                        line = line.replaceFirst("^deadline", "");
+                        args = line.split("/by", 2);
+                        String deadlineName = args[0].trim();
+                        String dueDate = args[1].trim();
                         prettyPrinter.print(taskManager.addTask(new Deadline(deadlineName, dueDate)));
                         break;
                     case DONE:
+                        line = line.replaceFirst("^done", "");
+                        String listIndexStr = line.trim();
+                        // `listIndexStr` is guaranteed to be a string made up of only digit characters.
+                        int listIndex = Integer.parseInt(listIndexStr) - 1;
                         try {
-                            line = line.replaceFirst("^done\\s*", "");
-                            args = line.split("");
-                            int listIndex = Integer.parseInt(args[0]) - 1;
                             prettyPrinter.print(taskManager.markAsDone(listIndex));
-                        } catch (Exception e) {
+                        } catch (IndexOutOfBoundsException e) {
                             prettyPrinter.print(ResourceHandler.getString("repl.invalidTaskIndex"));
                         }
                         break;
                     case EVENT:
-                        line = line.replaceFirst("^deadline\\s*", "");
-                        args = line.split("\\s*/at\\s*");
-                        String eventName = args[0];
-                        String dateTime = args[1];
+                        line = line.replaceFirst("^event", "");
+                        args = line.split("/at", 2);
+                        String eventName = args[0].trim();
+                        String dateTime = args[1].trim();
                         prettyPrinter.print(taskManager.addTask(new Event(eventName, dateTime)));
                         break;
                     case LIST:
                         prettyPrinter.print(taskManager.toString());
                         break;
                     case TODO:
-                        String toDoName = line.replaceFirst("^todo\\s*", "");
+                        line = line.replaceFirst("^todo", "");
+                        String toDoName = line.trim();
                         prettyPrinter.print(taskManager.addTask(new ToDo(toDoName)));
                         break;
                 }
+            } catch (DukeException e) {
+                prettyPrinter.print(e.getMessage());
             } catch (IllegalArgumentException e) {
                 prettyPrinter.print(ResourceHandler.getString("repl.unknownCommand"));
             }
