@@ -23,22 +23,37 @@ public class Processor {
         System.out.println("_________________________________________");
     }
 
-    public ArrayList<Task> processorAdd(String cmd, ArrayList<Task> arraylst) {
+    public ArrayList<Task> processorAdd(String cmd, ArrayList<Task> arraylst) throws DukeException {
         String[] stringarr = cmd.split(" ", 2);
         if (stringarr[0].equals("todo")) {
-            Todo todo = new Todo(stringarr[1]);
-            arraylst.add(todo);
+            if (stringarr.length <= 1) {
+                String message = "OOPS!!! The description of a todo cannot be empty";
+                throw new DukeException("_________________________________________\n" + message + "\n_________________________________________");
+            } else {
+                Todo todo = new Todo(stringarr[1]);
+                arraylst.add(todo);
+            }
         } else if (stringarr[0].equals("deadline")) {
-            String[] secondarr = stringarr[1].split("/by", 2);
-            Deadline deadline = new Deadline(secondarr[0], secondarr[1]);
-            arraylst.add(deadline);
+            if (stringarr.length <= 1) {
+                String message = "OOPS!!! The description of a deadline cannot be empty";
+                throw new DukeException("_________________________________________\n" + message + "\n_________________________________________");
+            } else {
+                String[] secondarr = stringarr[1].split("/by", 2);
+                Deadline deadline = new Deadline(secondarr[0], secondarr[1]);
+                arraylst.add(deadline);
+            }
         } else if (stringarr[0].equals("event")) {
-            String[] secondarr = stringarr[1].split("/at", 2);
-            Event event = new Event(secondarr[0], secondarr[1]);
-            arraylst.add(event);
+            if (stringarr.length <= 1) {
+                String message = "OOPS!!! The description of an event cannot be empty";
+                throw new DukeException("_________________________________________\n" + message + "\n_________________________________________");
+            } else {
+                String[] secondarr = stringarr[1].split("/at", 2);
+                Event event = new Event(secondarr[0], secondarr[1]);
+                arraylst.add(event);
+            }
         } else {
-            System.out.println("Place holder for exceptions");
-            return arraylst;
+            String message = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+            throw new DukeException("_________________________________________\n" + message + "\n_________________________________________");
         }
         int lastelem = arraylst.size() - 1;
         Task latesttask = arraylst.get(lastelem);
