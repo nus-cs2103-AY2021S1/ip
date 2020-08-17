@@ -13,15 +13,44 @@ public class Duke {
         System.out.println(greetingMsg);
     }
 
-    public static ArrayList<Task> addTask(String inputMsg, ArrayList<Task> tasks) {
+    public static void addTask(String taskTitle, ArrayList<Task> tasks) {
         String outputMsg = "\n___________________________________________________________"
                 + "\n (^.^)"
-                + "\n Task added: " + inputMsg
+                + "\n Task added: " + taskTitle
                 + "\n___________________________________________________________\n";
         System.out.println(outputMsg);
 
-        Task.createTask(inputMsg, tasks);
-        return tasks;
+        Task.createTask(taskTitle, tasks);
+    }
+
+    public static void addTodoTask(String taskTitle, ArrayList<Task> tasks) {
+        String outputMsg = "\n___________________________________________________________"
+                + "\n (^.^)"
+                + "\n Todo-Task added: " + taskTitle
+                + "\n___________________________________________________________\n";
+        System.out.println(outputMsg);
+
+        ToDos.createTodoTask(taskTitle, tasks);
+    }
+
+    public static void addDeadlineTask(String taskTitle, String deadlineTime,ArrayList<Task> tasks) {
+        String outputMsg = "\n___________________________________________________________"
+                + "\n (^.^)"
+                + "\n Deadline-Task added: " + taskTitle+" (by: "+deadlineTime+")"
+                + "\n___________________________________________________________\n";
+        System.out.println(outputMsg);
+
+        Deadlines.createDeadline(taskTitle,deadlineTime,tasks);
+    }
+
+    public static void addEventTask(String taskTitle, String eventTime,ArrayList<Task> tasks) {
+        String outputMsg = "\n___________________________________________________________"
+                + "\n (^.^)"
+                + "\n Event-Task added: " + taskTitle+" (by: "+eventTime+")"
+                + "\n___________________________________________________________\n";
+        System.out.println(outputMsg);
+
+        Events.createEvent(taskTitle,eventTime,tasks);
     }
 
     public static void getAllTasks(ArrayList<Task> tasks) {
