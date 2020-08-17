@@ -28,7 +28,7 @@ public class Duke {
                     }
                     for (Task task :
                             todo) {
-                        System.out.println(todo.indexOf(task) + 1 + " " + task.toString());
+                        System.out.println(todo.indexOf(task) + 1 + ". " + task.toString());
                     }
                     printLine();
                     break;
@@ -78,7 +78,6 @@ public class Duke {
                 case "event":
                     printLine();
                     String fullE = sc.nextLine();
-
                     try {
                         String EventName = fullE.split("/at")[0];
                         String EventTime = fullE.split("/at")[1];
@@ -91,6 +90,13 @@ public class Duke {
                         e.printStackTrace();
                     }
                     printLine();
+                    break;
+                case "delete":
+                    int deleteID = sc.nextInt() - 1;
+                    Task deleted = todo.get(deleteID);
+                    todo.remove(deleteID);
+                    System.out.println("Gotchu, I am removing \n" + deleted.toString());
+                    System.out.println("Now you got " + todo.size() + " task(s) waiting man");
                     break;
                 default:
                     printLine();
