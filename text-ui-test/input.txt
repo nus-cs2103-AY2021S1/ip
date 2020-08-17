@@ -1,2 +1,7 @@
-test
+read book
+todo write book
+deadline return book /by Sunday
+list
+event project meeting /at Mon 2-4pm
+list
 bye
