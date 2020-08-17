@@ -35,6 +35,12 @@ public class Chatbot {
         printFooter();
     }
 
+    private void bye() {
+        printHeader();
+        System.out.println(stylise("hOpE To sEe yOu aGaIn. NoT."));
+        printFooter();
+    }
+
     private String parseText() {
         String text = "";
 
@@ -74,6 +80,7 @@ public class Chatbot {
         greet();
         for (text = parseText(); ; text = parseText()) {
             if (text.equals("bye")) {
+                bye();
                 break;
             } else if (text.equals("list")) {
                 printStoredText();
