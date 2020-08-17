@@ -6,7 +6,7 @@ public class Scanner {
     static void scan() throws IOException {
         BufferedReader reader =
                 new BufferedReader(new InputStreamReader((System.in)));
-        ItemList userItemList = new ItemList();
+        TaskList userTaskList = new TaskList();
 
         scanLoop:
         while(true) {
@@ -16,10 +16,10 @@ public class Scanner {
                     System.out.println("Bye. Hope to see you again");
                     break scanLoop;
                 case "list":
-                    userItemList.printList();
+                    userTaskList.printList();
                     break;
                 default:
-                    userItemList.addItem(line);
+                    userTaskList.addItem(line);
                     System.out.println("added: " + line);
                     break;
             }

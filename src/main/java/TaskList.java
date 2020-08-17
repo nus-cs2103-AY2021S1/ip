@@ -1,11 +1,11 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class ItemList {
-    private final List<String> itemList = new ArrayList<>();
+public class TaskList {
+    private final List<Task> itemList = new ArrayList<>();
 
     void addItem(String item) {
-        itemList.add(item);
+        itemList.add(new Task(item));
     }
 
     void printList() {

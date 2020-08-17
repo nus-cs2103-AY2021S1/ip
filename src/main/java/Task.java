@@ -13,6 +13,6 @@ public class Task {
 
     public String toString() {
         String status = isDone ? "✓" : "✗";
-        return "[" + status + "]" + taskDescription;
+        return "[" + status + "] " + taskDescription;
     }
 }
