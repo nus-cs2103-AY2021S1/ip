@@ -6,13 +6,21 @@ Hello, I am
 |____/ \__,_|_|\_\___|
 ___________________________________________________
 Duke: What can i do for you?
+I'm sorry, but I don't know what that means!
+___________________________________________________
+Please include description!
+___________________________________________________
 Got it. I've added this task:
 	[T][✘] CS2103T post-lecture quiz
 Now you have 1 task in the list.
 ___________________________________________________
+Invalid description of a deadline item!
+___________________________________________________
 Got it. I've added this task:
 	[D][✘] CS2103T ip (by: Thursday 2359)
 Now you have 2 tasks in the list.
+___________________________________________________
+Invalid description of an event!
 ___________________________________________________
 Got it. I've added this task:
 	[E][✘] CS2103T Week 2 (at: Friday 12am)
@@ -23,7 +31,12 @@ Here are the tasks in your list:
 2. [D][✘] CS2103T ip (by: Thursday 2359)
 3. [E][✘] CS2103T Week 2 (at: Friday 12am)
 ---------------------------------------------------
-Nice! I've marked this task as done: [T][✓] CS2103T post-lecture quiz
+Missing or invalid item number!
+___________________________________________________
+Missing or invalid item number!
+___________________________________________________
+Nice! I've marked this task as done:
+	[T][✓] CS2103T post-lecture quiz
 ---------------------------------------------------
 Here are the tasks in your list:
 1. [T][✓] CS2103T post-lecture quiz

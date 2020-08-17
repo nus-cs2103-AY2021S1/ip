@@ -21,7 +21,7 @@ public class Duke {
             "\nDuke: What can i do for you?");
     }
 
-    private static void printTasks() {
+    private static void listTasks() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
@@ -43,44 +43,77 @@ public class Duke {
     private static void setDoneTask(int index) {
         Task task = tasks.get(index - 1); // index - 1 to match the index in ArrayList
         task.markDone();
-        System.out.println("Nice! I've marked this task as done: " +
-                task +
-                "\n---------------------------------------------------");
+        System.out.println("Nice! I've marked this task as done:" +
+                "\n\t" + task );
+        System.out.println("---------------------------------------------------");
     }
 
-    private static void handleTask(String input) {
+    private static void handleTask(String input) throws DukeException {
         String taskType = input.split(" ")[0];
+
         if (taskType.equals("done")) {
-            String taskIndex = input.split(" ")[1];
-            setDoneTask(Integer.parseInt(taskIndex));
+            try {
+                String taskIndex = input.split(" ")[1];
+                if (taskIndex.isBlank()) {
+                    throw new DukeException("Please include item number!");
+                }
+                setDoneTask(Integer.parseInt(taskIndex));
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("Missing or invalid item number!");
+            } catch (NumberFormatException e) {
+                throw new DukeException("Invalid format!");
+            }
         } else {
             String taskName = "";
-            if (taskType.equals("todo")){
-                taskName = input.substring(5);
-                Task taskCreated = new Todo(taskName);
-                tasks.add(taskCreated);
-                System.out.println("Got it. I've added this task:");
-                System.out.println("\t" + taskCreated);
-                printTotalNumberOfTasks();
+            if (taskType.equals("todo")) {
+                try {
+                    taskName = input.substring(5);
+                    if (taskName.isBlank()) {
+                        throw new DukeException("Description cannot be only empty spaces!");
+                    }
+                    Task taskCreated = new Todo(taskName);
+                    tasks.add(taskCreated);
+                    System.out.println("Got it. I've added this task:" +
+                            "\n\t" + taskCreated);
+                    printTotalNumberOfTasks();
+                } catch (IndexOutOfBoundsException e) {
+                    throw new DukeException("Please include description!");
+                }
             } else if (taskType.equals("deadline")) {
-                String[] task = input.substring(9).split(" /by ");
-                taskName = task[0];
-                String timeBy = task[1];
-                Task taskCreated = new Deadline(taskName, timeBy);
-                tasks.add(taskCreated);
-                System.out.println("Got it. I've added this task:");
-                System.out.println("\t" + taskCreated);
-                printTotalNumberOfTasks();
+                try {
+                    if (input.substring(9).isBlank()) {
+                        throw new DukeException("Description cannot be only empty spaces!");
+                    }
+                    String[] task = input.substring(9).split(" /by ");
+                    taskName = task[0];
+                    String timeBy = task[1];
+                    Task taskCreated = new Deadline(taskName, timeBy);
+                    tasks.add(taskCreated);
+                    System.out.println("Got it. I've added this task:" +
+                            "\n\t" + taskCreated);
+                    printTotalNumberOfTasks();
+                } catch (IndexOutOfBoundsException e) {
+                    throw new DukeException("Invalid description of a deadline item!");
+                }
             } else if (taskType.equals("event")) {
-                String[] task = input.substring(6).split(" /at ");
-                taskName = task[0];
-                String timeAt = task[1];
-                Task taskCreated = new Event(taskName, timeAt);
-                tasks.add(taskCreated);
-                System.out.println("Got it. I've added this task:");
-                System.out.println("\t" + taskCreated);
-                printTotalNumberOfTasks();
-            } else { }
+                try {
+                    if (input.substring(6).isBlank()) {
+                        throw new DukeException("Description cannot be only empty spaces!");
+                    }
+                    String[] task = input.substring(6).split(" /at ");
+                    taskName = task[0];
+                    String timeAt = task[1];
+                    Task taskCreated = new Event(taskName, timeAt);
+                    tasks.add(taskCreated);
+                    System.out.println("Got it. I've added this task:" +
+                            "\n\t" + taskCreated);
+                    printTotalNumberOfTasks();
+                } catch (IndexOutOfBoundsException e) {
+                    throw new DukeException("Invalid description of an event!");
+                }
+            } else {
+                throw new DukeException("I'm sorry, but I don't know what that means!");
+            }
             System.out.println("___________________________________________________");
         }
     }
@@ -94,9 +127,14 @@ public class Duke {
                 sc.close();
                 break;
             } else if (input.equals("list")) {
-                printTasks();
+                listTasks();
             } else {
-               handleTask(input);
+               try {
+                   handleTask(input);
+               } catch (DukeException e) {
+                   System.out.println(e.getMessage());
+                   System.out.println("___________________________________________________");
+               }
             }
 
         }

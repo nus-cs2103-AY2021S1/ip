@@ -1,7 +1,13 @@
+Hello World
+todo
 todo CS2103T post-lecture quiz
+deadline
 deadline CS2103T ip /by Thursday 2359
+event
 event CS2103T Week 2 /at Friday 12am
 list
+done
+done 6
 done 1
 list
 bye
