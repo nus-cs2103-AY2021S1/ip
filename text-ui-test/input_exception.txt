@@ -1,0 +1,25 @@
+list 123
+todo  
+todo myTodo
+todo myTodo something extra
+list
+deadline wrong command
+deadline place /at time
+deadline   /by time
+deadline place /by    
+deadline place /by time
+list
+event
+event wrong command	
+event place /by time
+event   /at tomorrow
+event someEvent /at   
+event correctEvent /at today
+list
+done 9
+done -1
+done 1
+done 2
+done 2
+list
+bye
