@@ -10,6 +10,19 @@ public class Command implements Executable {
         this.task = task;
     }
 
+
+    @Override
+    public CommandType getType() {
+        return command;
+    }
+
+    @Override
+    public Task getTask() {
+        return this.task;
+    }
+
+    /* ------------------------------ Static Factory Methods ----------------------------------*/
+
     public static Command createAddCommand(Task task) {
         return new Command(CommandType.ADD, task);
     }
@@ -20,14 +33,5 @@ public class Command implements Executable {
 
     public static Command createListCommand(Task task) {
         return new Command(CommandType.LIST, Task.createEmptyTask());
-    }
-    @Override
-    public CommandType getType() {
-        return command;
-    }
-
-    @Override
-    public Task getTask() {
-        return this.task;
     }
 }

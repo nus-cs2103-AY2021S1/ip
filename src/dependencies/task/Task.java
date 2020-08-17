@@ -26,7 +26,7 @@ public abstract class Task {
         this.state = COMPLETED;
     }
 
-    /* -------------------- Static facory methods to create different Tasks --------------------- */
+    /* -------------------------- Static facory methods to create different Tasks ----------------------- */
 
     public static Task createEmptyTask(){
         return new EmptyTask();
@@ -44,7 +44,7 @@ public abstract class Task {
         return new Deadlines(task, date);
     }
 
-    /* ------------------------------------ Subclasses --------------------------------------- */
+    /* ----------------------------------------- Subclasses--------------------------------------------- */
     private static class EmptyTask extends Task{
         private EmptyTask() {
             super(null);
