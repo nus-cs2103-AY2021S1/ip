@@ -35,6 +35,7 @@ abstract class Task {
             case (TODO):
                 return new Todo(details);
             case(DEADLINE):
+                return Deadline.createDeadline(details);
             case (EVENT):
             default:
                 return new Todo("");
