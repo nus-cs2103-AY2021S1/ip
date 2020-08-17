@@ -20,6 +20,7 @@ public class Duke {
         if (next.equals("bye")) {
             System.out.println("Bye. Hope to see you again soon!");
         } else if (next.equals("list")) {
+            System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < list.size(); i++) {
                 System.out.println(i + 1 + "." + list.get(i));
             }
@@ -37,8 +38,38 @@ public class Duke {
                 response();
             }
         } else {
-            System.out.println("added " + next);
-            list.add(new Task(next));
+            if (next.startsWith("todo ")) {
+                ToDo todo = new ToDo(next.substring(5, next.length()));
+                list.add(todo);
+                System.out.println("Got it. I've added this task:\n\t" + todo);
+                System.out.println("Now you have " + list.size() + " tasks in the list");
+            } else if (next.startsWith("deadline ")) {
+                int cut = next.indexOf(" /by ");
+                if (cut != -1) {
+                    String desc = next.substring(9, cut);
+                    String by = next.substring(cut + 5, next.length());
+                    Deadline deadline = new Deadline(desc, by);
+                    list.add(deadline);
+                    System.out.println("Got it. I've added this task:\n\t" + deadline);
+                    System.out.println("Now you have " + list.size() + " tasks in the list");
+                } else {
+                    System.out.println("Please input a deadline");
+                }
+            } else if (next.startsWith("event ")) {
+                int cut = next.indexOf(" /at ");
+                if (cut != -1) {
+                    String desc = next.substring(6, cut);
+                    String time = next.substring(cut + 5, next.length());
+                    Event event = new Event(desc, time);
+                    list.add(event);
+                    System.out.println("Got it. I've added this task:\n\t" + event);
+                    System.out.println("Now you have " + list.size() + " tasks in the list");
+                } else {
+                    System.out.println("Please input a time for the event");
+                }
+            } else {
+                System.out.println("Sorry I don't understand!");
+            }
             response();
         }
     }
