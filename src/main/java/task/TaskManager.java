@@ -18,6 +18,13 @@ public class TaskManager {
         return output + "Now you have a total of " + String.valueOf(tasks.size()) + numberOfTasks;
     }
 
+    public String deleteTask(int taskIndex){
+        Task deletedTask = tasks.remove(taskIndex);
+        String output = "Noted. I have removed the task: \n";
+        return output + Colour.Red(deletedTask.toString());
+
+    }
+
     public int getCompletedTasks() {
         int completedTasks = 0;
         for (int i = 0; i < tasks.size(); i++) {

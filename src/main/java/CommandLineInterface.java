@@ -30,7 +30,7 @@ public class CommandLineInterface {
                 String userInput = scanner.nextLine();
                 String[] words = userInput.toLowerCase().split(" ");
                 CommandTypes commandType = CommandTypes.valueOf(words[0].toUpperCase());
-                commandType.checkInput(userInput);
+                commandType.checkInput(userInput.toLowerCase());
                 String content, dateTime;
                 String[] userInputArgs;
                 switch (commandType) {
@@ -43,14 +43,14 @@ public class CommandLineInterface {
                         return;
 
                     case TODO:
-                        content = userInput.replaceFirst("^todo", "");
+                        content = userInput.replaceFirst("^(?i)todo", "");
                         String trimmedContent = content.trim();
                         Todo newTodoTask = new Todo(trimmedContent);
                         formatter.print(taskManager.addTask(newTodoTask));
                         break;
 
                     case DEADLINE:
-                        userInput = userInput.replaceFirst("^deadline", "");
+                        userInput = userInput.replaceFirst("^(?i)deadline", "");
                         userInputArgs = userInput.split("\\s*/by\\s*");
                         content = userInputArgs[0].trim();
                         dateTime = userInputArgs[1];
@@ -59,7 +59,7 @@ public class CommandLineInterface {
                         break;
 
                     case EVENT:
-                        userInput = userInput.replaceFirst("^event", "");
+                        userInput = userInput.replaceFirst("^(?i)event", "");
                         userInputArgs = userInput.split("\\s*/at\\s*");
                         content = userInputArgs[0].trim();
                         dateTime = userInputArgs[1];
@@ -75,6 +75,14 @@ public class CommandLineInterface {
                             throw new DukeException(invalidTaskIndexErrorMessage);
                         }
                         break;
+
+                    case DELETE:
+                        try{
+                            int taskIndex = Integer.parseInt(words[1]);
+                            formatter.print(taskManager.deleteTask(taskIndex));
+                        } catch (IndexOutOfBoundsException e){
+                            throw new DukeException(invalidTaskIndexErrorMessage);
+                        }
                 }
             } catch (DukeException e) {
                 formatter.print(e.toString());
