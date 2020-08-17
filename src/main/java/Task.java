@@ -33,12 +33,12 @@ abstract class Task {
     public static Task createTask(String type, String details) {
         switch (type) {
             case (TODO):
-                return new Todo(details);
+                return Todo.createTodo(details);
             case(DEADLINE):
                 return Deadline.createDeadline(details);
             case (EVENT):
             default:
-                return new Todo("");
+                return null;
         }
     }
 

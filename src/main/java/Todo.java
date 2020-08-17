@@ -1,6 +1,10 @@
 public class Todo extends Task {
-    public Todo(String desc) {
+    private Todo(String desc) {
         super(desc);
+    }
+
+    protected static Todo createTodo(String desc) {
+        return new Todo(desc);
     }
 
     @Override
