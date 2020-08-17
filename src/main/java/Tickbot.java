@@ -1,11 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Tickbot {
     private static Scanner inputScanner = new Scanner(System.in);
-    private static List<String> tasks = new ArrayList<>();
+    private static List<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         printMessage("hello, This is tickbot! How can I help you?");
@@ -16,25 +15,41 @@ public class Tickbot {
                 break;
             }
             String command = inputScanner.nextLine();
-            switch (command) {
-                case "bye": {
-                    printMessage("See you next time!");
-                    running = false;
-                    break;
+            running = processCommand(command);
+        }
+    }
+
+    private static boolean processCommand(String command) {
+        if (command.isBlank()) {
+            return true; // empty line, continue inputing
+        }
+        String[] args = command.split("\\s+");
+        switch (args[0]) {
+            case "bye": {
+                printMessage("See you next time!");
+                return false; // end of input
+            }
+            case "done": {
+                int index = Integer.parseInt(args[1]) - 1;
+                Task task = tasks.get(index);
+                task.setCompleted(true);
+                printMessage("Task completed: " + task);
+                break;
+            }
+            case "list": {
+                printMessage("Task list:");
+                for (int i = 0; i < tasks.size(); i++) {
+                    String message = String.format("%d. %s", i + 1, tasks.get(i));
+                    printMessage(message);
                 }
-                case "list": {
-                    for (int i = 0; i < tasks.size(); i++) {
-                        int index = i + 1;
-                        printMessage(index + ". " + tasks.get(i));
-                    }
-                    break;
-                }
-                default: {
-                    tasks.add(command);
-                    printMessage("Task added: " + command);
-                }
+                break;
+            }
+            default: {
+                tasks.add(new Task(command));
+                printMessage("Task added: " + command);
             }
         }
+        return true; // continue inputing
     }
 
     private static void printMessage(String message) {
