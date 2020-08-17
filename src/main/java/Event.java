@@ -36,7 +36,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return ConsoleColors.PURPLE_BACKGROUND.getColor() + "EVENT" + ConsoleColors.RESET.getColor()
+        return "[EVENT]"
                 + " " + super.toString()
                 + " (at:" + this.timing + ")";
     }

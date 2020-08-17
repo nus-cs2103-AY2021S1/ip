@@ -29,11 +29,11 @@ public class Task {
      * @return whether or not a task is done
      */
     String getStatusIcon() {
-        return ConsoleColors.BLUE.getColor() + "[" + ConsoleColors.RESET.getColor()
+        return "["
             + (isDone
-                ? ConsoleColors.GREEN.getColor() + "\u2713" + ConsoleColors.RESET.getColor()
-                : ConsoleColors.RED.getColor() + "\u2718" + ConsoleColors.RESET.getColor()) //return tick or X symbols
-            + ConsoleColors.BLUE.getColor() + "]" + ConsoleColors.RESET.getColor();
+                ? "\u2713"
+                : "\u2718" ) //return tick or X symbols
+            + "]";
     }
 
     /**
@@ -50,9 +50,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return this.getStatusIcon() + " "
-                + ConsoleColors.BLUE.getColor()
-                + this.description
-                + ConsoleColors.RESET.getColor();
+        return this.getStatusIcon() + " " + this.description;
     }
 }

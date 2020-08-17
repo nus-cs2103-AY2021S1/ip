@@ -36,7 +36,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return ConsoleColors.RED_BACKGROUND.getColor() + "DEADLINE" + ConsoleColors.RESET.getColor()
+        return "[DEADLINE]"
                 + " " + super.toString()
                 + " (by:" + this.endDate + ")";
     }

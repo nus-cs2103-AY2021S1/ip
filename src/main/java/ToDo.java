@@ -32,7 +32,6 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return ConsoleColors.YELLOW_BACKGROUND.getColor() + "TODO" + ConsoleColors.RESET.getColor()
-            + " " + super.toString();
+        return "[TODO]" + " " + super.toString();
     }
 }
