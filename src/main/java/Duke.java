@@ -15,7 +15,7 @@ public class Duke {
         }
 
         public String getStatusIcon() {
-            return isDone ? "\u2713" : "\u2718";
+            return isDone ? "O" : "X";
         }
 
         public void complete() {
@@ -80,7 +80,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         Scanner sc = new Scanner(System.in);
-        String line = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        String line = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
         System.out.println(line + "\n" + logo + "\n    Hello! I'm Duke!"
                 + "\n    What can I do for you?"
                 + "\n    Awaiting input...\n" + line);
