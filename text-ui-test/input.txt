@@ -1,0 +1,8 @@
+deadline some deadline task /by 20/21/22 Monday
+event some event task /at 10/11/12 Tuesday 12pm
+todo some todo task andits description
+list
+done 1
+done 2
+done 5
+bye
