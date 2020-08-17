@@ -39,12 +39,10 @@ public class Duke {
             String [] arr = sc.nextLine().split(" ");
 
             switch(arr[0]) {
-                case "" :
-                    System.exit(0);
-                    sc.close();
-                    break;
                 case "bye":
                     layout.print("Bye. Hope to see you again soon!");
+                    System.exit(0);
+                    sc.close();
                     break;
                 case "list":
                     tasks.showTasks();
