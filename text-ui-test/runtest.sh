@@ -12,8 +12,11 @@ then
     rm ACTUAL.TXT
 fi
 
+# force shell to use UTF-8 format for output
+export LC_ALL=en_US.UTF-8
+
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/Duke.java
+if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/*.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1
