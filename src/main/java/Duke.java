@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -16,14 +17,26 @@ public class Duke {
     public void repl() {
         Scanner sc = new Scanner(System.in);
         String input;
+        List<String> taskHistory = new ArrayList<>();
         boolean isActive = true;
 
         print(GREETING, PROMPT);
         while(isActive) {
-            input = sc.nextLine();
+            input = sc.nextLine().trim();
             isActive = !input.equalsIgnoreCase("bye");
-
-            if(isActive) print(input);
+            switch(input) {
+                case "list": {
+                    print(itemize(taskHistory));
+                    break;
+                }
+                case "bye": {
+                    break;
+                }
+                default: {
+                    taskHistory.add(input);
+                    print("added: " + input);
+                }
+            }
         }
         print(EXIT);
     }
@@ -40,6 +53,16 @@ public class Duke {
     }
 
     private void print(String ...strings) {
-        print(Arrays.asList((strings)));
+        print(Arrays.asList(strings));
+    }
+
+    private List<String> itemize(List<String> strings) {
+        int itemNumber = 1;
+        List<String> itemizedStrings = new ArrayList<>();
+        for(String s : strings) {
+            itemizedStrings.add(itemNumber + ". " + s);
+            itemNumber++;
+        }
+        return itemizedStrings;
     }
 }
