@@ -21,6 +21,5 @@ public class Task {
         } else {
             return "[✗] " + this.name;
         }
-
     }
 }
