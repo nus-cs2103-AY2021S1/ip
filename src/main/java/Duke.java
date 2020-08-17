@@ -34,7 +34,7 @@ public class Duke {
     // Loop through tasks array and print tasks in order
     public static void printTasks() {
         if (numTasks == 0) {
-            System.out.println(formatMessage("There are currently no tasks in your list.\n"));
+            System.out.println(formatMessage("There are currently no tasks in your list."));
         } else {
             String tasksList = "";
             for (int i = 0; i < numTasks; i++) {
@@ -98,7 +98,7 @@ public class Duke {
                         throw new DukeException("The description of a " + firstWord + " cannot be empty.");
                     } else if (inputData.split("/by ").length < 2 || inputDataWords[1].equals("/by")) {
                         throw new DukeException("The deadline of this task is not provided.\n" +
-                                "   Please re-enter the desired deadline task \n" +
+                                "   Please re-enter the desired deadline task\n" +
                                 "   (e.g. deadline xxx /by zzz)");
                     } else {
                         tasks[numTasks] = new Deadline(inputData.split("deadline ")[1].split("/by ")[0],
@@ -115,7 +115,7 @@ public class Duke {
                         throw new DukeException("The description of a " + firstWord + " cannot be empty.");
                     } else if (inputData.split("/at ").length < 2) {
                         throw new DukeException("The duration of this task cannot be empty.\n" +
-                                "   Please re-enter the desired event task \n" +
+                                "   Please re-enter the desired event task\n" +
                                 "   (e.g. event xxx /at zzz)");
                     } else {
                         tasks[numTasks] = new Event(inputData.split("event ")[1].split("/at ")[0],

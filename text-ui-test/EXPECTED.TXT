@@ -10,8 +10,50 @@
  ____________________________________________________________
  There are currently no tasks in your list.
  ____________________________________________________________
-Invalid task number. Please try again.
-Invalid command. Please try again.
+ ____________________________________________________________
+ ☹ ERROR: Please enter a valid task number.
+ ____________________________________________________________
+ ____________________________________________________________
+ ☹ ERROR: Invalid command provided. Please try again.
+ ____________________________________________________________
+ ____________________________________________________________
+ ☹ ERROR: The description of a todo cannot be empty.
+ ____________________________________________________________
+ ____________________________________________________________
+ ☹ ERROR: The description of a deadline cannot be empty.
+ ____________________________________________________________
+ ____________________________________________________________
+ ☹ ERROR: The description of a event cannot be empty.
+ ____________________________________________________________
+ ____________________________________________________________
+ ☹ ERROR: The deadline of this task is not provided.
+   Please re-enter the desired deadline task
+   (e.g. deadline xxx /by zzz)
+ ____________________________________________________________
+ ____________________________________________________________
+ ☹ ERROR: The deadline of this task is not provided.
+   Please re-enter the desired deadline task
+   (e.g. deadline xxx /by zzz)
+ ____________________________________________________________
+ ____________________________________________________________
+ ☹ ERROR: The deadline of this task is not provided.
+   Please re-enter the desired deadline task
+   (e.g. deadline xxx /by zzz)
+ ____________________________________________________________
+ ____________________________________________________________
+ ☹ ERROR: The description of a event cannot be empty.
+ ____________________________________________________________
+ ____________________________________________________________
+ ☹ ERROR: The description of a event cannot be empty.
+ ____________________________________________________________
+ ____________________________________________________________
+ ☹ ERROR: The duration of this task cannot be empty.
+   Please re-enter the desired event task
+   (e.g. event xxx /at zzz)
+ ____________________________________________________________
+ ____________________________________________________________
+ ☹ ERROR: Invalid command provided. Please try again.
+ ____________________________________________________________
  ____________________________________________________________
  Got it. I've added this task:
     [T][✘] borrow english book
@@ -47,8 +89,9 @@ Invalid command. Please try again.
  Nice! I've marked this task as done:
     [T][✓] read book
  ____________________________________________________________
-Invalid task number. Please try again.
-Invalid command. Please try again.
+ ____________________________________________________________
+ ☹ ERROR: Please enter a valid task number.
+ ____________________________________________________________
  ____________________________________________________________
  Task(s) in your list:
  1. [T][✓] borrow english book
