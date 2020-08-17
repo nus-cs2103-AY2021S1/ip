@@ -17,21 +17,30 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
 
         String command = sc.nextLine();
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<>();
 
         while(!command.equals("bye")) {
             if(command.equals("list")){
                 System.out.println("    ____________________________________________________________");
-                Integer i = 1;
-                for(String s : list) {
-                    System.out.println("    " + i.toString() + ". " + s);
-                    i++;
+                System.out.println("    Here are the tasks in your list:");
+                Integer index = 1;
+                for(Task task: list) {
+                    System.out.println("    " + index.toString() + ". " + task);
+                    index++;
                 }
                 System.out.println("    ____________________________________________________________");
+            } else if (command.substring(0, 4).equals("done")){
+                Integer index = Integer.parseInt(command.substring(5));
+                Task task = list.get(index - 1).markAsDone();
+                System.out.println("    ____________________________________________________________");
+                System.out.println("     Nice! I've marked this task as done:");
+                System.out.println("       " + task);
+                System.out.println("    ____________________________________________________________");
+
             } else {
                 System.out.println("    ____________________________________________________________");
                 System.out.println("     added: " + command);
-                list.add(command);
+                list.add(new Task(command));
                 System.out.println("    ____________________________________________________________");
             }
             command = sc.nextLine();
