@@ -1,9 +1,26 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
     static final String HORIZONTAL_LINE =
             "____________________________________________________________";
     static final String INDENT = "    ";
+
+    public static void printList(List<String> list) {
+        String s = "";
+        for (int i = 0; i < list.size(); i ++) {
+            s += String.valueOf(i+1) + ". " + list.get(i);
+            if (i != list.size() - 1) {
+                s += '\n' + INDENT;
+            }
+        }
+        if (s.equals("")) {
+            printWindow("There is nothing in the list!");
+        } else {
+            printWindow(s);
+        }
+    }
 
     public static void printWindow(String s) {
         System.out.println(INDENT + HORIZONTAL_LINE);
@@ -19,6 +36,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        List<String> list = new ArrayList<>();
 
         System.out.println(INDENT + HORIZONTAL_LINE);
         System.out.println("    Hello! I'm Duke\n" +
@@ -30,8 +48,11 @@ public class Duke {
             if (nextLine.equals("bye")) {
                 printBye();
                 break;
+            } else if (nextLine.equals("list")) {
+                printList(list);
             } else {
-                printWindow(nextLine);
+                list.add(nextLine);
+                printWindow("added: " + nextLine);
             }
         }
     }
