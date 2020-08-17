@@ -3,12 +3,13 @@ import java.util.List;
 
 public class TaskManager {
     private List<Task> toDoList;
+
     public TaskManager() {
         this.toDoList = new ArrayList<>();
     }
 
-    public void addToList(String task) {
-        this.toDoList.add(new Task(task));
+    public void addToList(String task, TaskType type) {
+        this.toDoList.add(new Task(task, type));
     }
 
     public void displayList() {

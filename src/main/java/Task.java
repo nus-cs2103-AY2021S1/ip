@@ -1,10 +1,11 @@
 public class Task {
     private Boolean done;
     private String taskName;
-    private String type;
-    public Task(String taskName) {
+    private TaskType type;
+    public Task(String taskName, TaskType type) {
         this.done = false;
         this.taskName = taskName;
+        this.type = type;
     }
     public void markAsDone() {
         this.done = true;
