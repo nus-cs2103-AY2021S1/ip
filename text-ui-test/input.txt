@@ -1,0 +1,6 @@
+todo Watch webcast
+deadline Finish tutorial /by 5pm Monday
+event Family dinner /at 6pm Tuesday
+todo Buy new clothes
+done 2
+list

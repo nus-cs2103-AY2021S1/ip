@@ -30,7 +30,7 @@ public class TaskList {
         StringBuilder ls = new StringBuilder();
         int counter = 1;
         for (Task task : list) {
-            ls.append(counter).append(".").append(task).append("\n");
+            ls.append(counter == 1 ? "" : "\n").append(counter).append(".").append(task);
             counter++;
         }
         return ls.toString();

@@ -5,3 +5,20 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Added new task: Watch webcast
+You now have 1 task in your list.
+Added new task: Finish tutorial
+You now have 2 tasks in your list.
+Added new task: Family dinner
+You now have 3 tasks in your list.
+Added new task: Buy new clothes
+You now have 4 tasks in your list.
+Congrats, you've finished this task!
+1.[T][✘] Watch webcast
+2.[D][✓] Finish tutorial (by: 5pm Monday)
+3.[E][✘] Family dinner (at: 6pm Tuesday)
+4.[T][✘] Buy new clothes
+1.[T][✘] Watch webcast
+2.[D][✓] Finish tutorial (by: 5pm Monday)
+3.[E][✘] Family dinner (at: 6pm Tuesday)
+4.[T][✘] Buy new clothes
