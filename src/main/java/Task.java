@@ -37,6 +37,7 @@ abstract class Task {
             case(DEADLINE):
                 return Deadline.createDeadline(details);
             case (EVENT):
+                return Event.createEvent(details);
             default:
                 return null;
         }
