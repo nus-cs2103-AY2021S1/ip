@@ -16,6 +16,12 @@ public class TaskList {
                         getItemParameter(item, type)
                 ));
                 break;
+            case "event":
+                itemList.add(new Event(
+                        getItemDescription(item, type),
+                        getItemParameter(item, type)
+                ));
+                break;
             default:
                 break;
         }
