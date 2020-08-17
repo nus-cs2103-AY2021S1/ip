@@ -1,4 +1,5 @@
-public class Task {
+public abstract class Task {
+    protected abstract String getTaskIdentifier();
     private final String description;
     private boolean isDone;
     public Task(String description) {
@@ -10,7 +11,13 @@ public class Task {
     }
     @Override
     public String toString() {
-        char checkMark = this.isDone ? '✓' : '✗';
-        return "["+checkMark+"] "+this.description;
+        String checkMark = this.isDone ? "✓" : "✗";
+        return squareBox(this.getTaskIdentifier())
+                + squareBox(checkMark)
+                + " "
+                + this.description;
+    }
+    private String squareBox(String str) {
+        return "["+str+"]";
     }
 }

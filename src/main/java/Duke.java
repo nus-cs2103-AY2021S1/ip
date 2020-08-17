@@ -8,7 +8,7 @@ public class Duke {
         this.items = new ArrayList<>();
     }
     private void addItem(String input) {
-        this.items.add(new Task(input));
+        this.items.add(new Todo(input));
         systemMessage("morning sir i have added \""+input+"\" to the list sir");
     }
     private void printList() {
