@@ -10,7 +10,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
 
-    void addTodoTask(String task) {
+    void addTodoTask(String task){
         TodoTask t = new TodoTask(task);
         tasks.add(t);
         System.out.println("Got it. I've added this task:\n " + t);
@@ -41,15 +41,14 @@ public class Duke {
     void completeTask(int index) {
         Task completedTask = tasks.get(index -1 );
         completedTask.markAsDone();
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(completedTask);
+        System.out.println("Nice! I've marked this task as done:\n " + completedTask);
     }
 
     void exit() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    void initializeChatbot() {
+    void initializeChatbot() throws DukeException{
         greet();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
@@ -65,16 +64,25 @@ public class Duke {
                 }
                 case ("todo"): {
                     String task = sc.nextLine().trim();
+                    if (task.isEmpty()) {
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
                     addTodoTask(task);
                     break;
                 }
                 case ("deadline"): {
                     String[] task = sc.nextLine().trim().split(" /by ");
+                    if (task[0].isEmpty()) {
+                        throw new DukeException("☹ OOPS!!! The description of a deadline task cannot be empty.");
+                    }
                     addDeadlineTask(task[0], task[1]);
                     break;
                 }
                 case ("event"): {
                     String[] task = sc.nextLine().trim().split(" /at ");
+                    if (task[0].isEmpty()) {
+                        throw new DukeException("☹ OOPS!!! The description of an event task cannot be empty.");
+                    }
                     addEventTask(task[0], task[1]);
                     break;
                 }
@@ -83,6 +91,10 @@ public class Duke {
                     completeTask(index);
                     break;
                 }
+                default: {
+                    //Invalid commands
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
             }
         }
         sc.close();
@@ -90,6 +102,10 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke duke = new Duke();
-        duke.initializeChatbot();
+        try {
+            duke.initializeChatbot();
+        } catch (DukeException ex) {
+            System.out.println(ex);
+        }
     }
 }
