@@ -1,7 +1,2 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Duke: Hey There! What can I do for you?
+Duke: Bye! Hope to see you again.

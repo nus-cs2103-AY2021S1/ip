@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class TaskHandler {
     // input a line and check what it is and act accordingly
 
@@ -11,6 +13,10 @@ public class TaskHandler {
             default: type = Task.Type.UNKNOWN;
         }
         return type;
+    }
+
+    public boolean checkTodo(String input) {
+        return input.split(" ", 2).length == 2;
     }
 
     public String getTodo(String input) {
@@ -55,6 +61,11 @@ public class TaskHandler {
     public boolean isDone(String input) {
         String[] parsed = input.split(" ", 2);
         return parsed[0].equals("done") && parsed.length == 2;
+    }
+
+    public boolean isValidSize(String input, ArrayList<Task> task) {
+        String[] parsed = input.split(" ", 2);
+        return task.size() >= Integer.parseInt(parsed[1]) && Integer.parseInt(parsed[1]) > 0;
     }
 
     public int getNumber(String input) {
