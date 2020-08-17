@@ -18,8 +18,8 @@ public class Duke {
             }
         } else if (input.startsWith("done ") || input.equals("done")) {
             if (input.length() > 5) {
-                String task = input.substring(5);
-                markAsDone(task);
+                String item = input.substring(5);
+                markAsDone(item);
             } else {
                 System.out.println("Which task do you want to mark as done?");
             }
@@ -29,12 +29,38 @@ public class Duke {
     }
 
     public static void addTask(String input) {
-        list.add(new Task(input));
-        System.out.println("added: " + input);
+        Task task;
+        if (input.startsWith("todo ")) {
+            String name = input.substring(5);
+            task = new ToDo(name);
+        } else if (input.startsWith("deadline ")) {
+            String details = input.substring(9);
+            String[] split = details.split("/by ");
+            String name = split[0];
+            String by = split[1];
+            task = new Deadline(name, by);
+        } else if (input.startsWith("event ")) {
+            String details = input.substring(6);
+            String[] split = input.substring(6).split("/at ");
+            String name = split[0];
+            String duration = split[1];
+            task = new Event(name, duration);
+        } else {
+            System.out.println("Please specify type of task");
+            return;
+        }
+        list.add(task);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        if (list.size() > 1) {
+            System.out.println("Now you have " + list.size() + " tasks in your list");
+        } else {
+            System.out.println("Now you have " + list.size() + " task in your list");
+        }
     }
 
-    public static void markAsDone(String task) {
-        int index = Integer.parseInt(task) - 1;
+    public static void markAsDone(String item) {
+        int index = Integer.parseInt(item) - 1;
         if (index > -1 && index < list.size()) {
             list.get(index).done();
             System.out.println("Nice! I've marked this task as done:");
