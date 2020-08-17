@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
 
     public static int numberOfTask = 0;
 
@@ -8,12 +8,6 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        numberOfTask++;
-    }
-
-    public Task(String description, boolean isDone) {
-        this.description = description;
-        this.isDone = isDone;
         numberOfTask++;
     }
 
@@ -32,4 +26,8 @@ public class Task {
     public boolean checkStatus() {
         return this.isDone;
     }
+
+    public abstract String getTaskType();
+
+
 }

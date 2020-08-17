@@ -4,79 +4,163 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static void chatbot() {
-        Scanner sc = new Scanner(System.in);
-        List<Task> lst = new ArrayList<>();
-        String listCommand = "list";
-        String doneCommand = "done";
+    private String indent = "    ";
+    private String outputIndent = "    ";
+    public String upperLine = indent + "___________________________________________________" + "\n";
+    public String lowerLine =  indent + "___________________________________________________" +"\n";
+    private final String INVALID_COMMAND_MESSAGE = "    Sorry couldn't recognise command";
+    private final String DONE_TASK_MARKED_MESSAGE = "    Nice! I've marked this task as done:";
+    private final String NO_TASK_MESSAGE = "    Sorry the task does not exists";
+    private final String ADDED_TASK_MESSAGE = "    Got it. I've added this task: ";
 
-        String indent = "    ";
-        String upperLine = indent + "___________________________________________________" + "\n";
-        String lowerLine =  indent + "___________________________________________________" +"\n";
-        String greetings = indent + "Hello! I'm Duke" + "\n"
-                + indent + "What can I do for you?" +"\n";
-        System.out.println(upperLine + greetings + lowerLine);
+    private List<Task> lstOfTask = new ArrayList<>();
 
-        while (sc.hasNext()) {
-
-            String input = sc.nextLine();
-            String outputIndent = indent + " ";
-            String output = input + "\n";
-            String addedMessage = outputIndent + "added: ";
-            String markedMessage = "Nice! I've marked this task as done:";
-
-            if (input.equals("bye")) {
-                String exit = outputIndent + "Bye. Hope to see you again soon!" + "\n";
-                System.out.println(upperLine + exit + lowerLine);
-                break;
-            }
-
-            if (input.equals(listCommand)) {
-                String concat = listTask(lst);
-                System.out.println(upperLine + concat + lowerLine);
-            }else if (input.contains(doneCommand)) {
-                String[] token = input.split(" ");
-                String taskNumberString = token[1];
-                int inputNum = Integer.parseInt(taskNumberString);
-
-                if (inputNum > lst.size()) {
-                    System.out.println("Make sure you keyed in the correct task number!");
-                } else {
-                    int taskNum = inputNum - 1;
-                    Task task = lst.get(taskNum);
-                    task.markAsDone();
-
-                    System.out.println(upperLine + outputIndent + markedMessage +"\n" +
-                            outputIndent + " " + "[" + task.getStatusIcon() + "]" + " " + task.getDescription()
-                            + lowerLine);
-
-                }
-
-            } else {
-
-                lst.add(new Task(output));
-                System.out.println(upperLine + addedMessage
-                        + input +"\n" + lowerLine);
-
-            }
-        }
+    private String greetUser() {
+        return upperLine + indent + "Hello! I'm Duke" + "\n"
+                + indent + "What can I do for you?" +"\n"
+                + lowerLine;
     }
 
-    public static String listTask(List<Task> lst) {
+    private String[] parseString(String input) {
+        String[] tokens = input.split(" ");
+        return tokens;
+    }
+
+    private String processCommand(String[] parsedUserInput) {
+        String cmd = parsedUserInput[0];
+        Command checkedCommand = Command.valueOfUserCommand(cmd);
+        String resultString;
+
+        if (checkedCommand == null) {
+            resultString = INVALID_COMMAND_MESSAGE;
+        } else {
+            switch (checkedCommand) {
+                case LIST:
+                    resultString = listTask();
+                    break;
+                case BYE:
+                    resultString = exit();
+                    break;
+                case DONE:
+                    resultString = DONE_TASK_MARKED_MESSAGE + "\n"
+                            + outputIndent + done(parsedUserInput);
+                    break;
+                case TODO:
+                    resultString = ADDED_TASK_MESSAGE + "\n"
+                            + outputIndent + addToDo(parsedUserInput) + "\n"
+                            + getNumOfTaskMessage();
+                    break;
+                case EVENT:
+                    resultString = ADDED_TASK_MESSAGE + "\n" + outputIndent + addEvent(parsedUserInput) + "\n"
+                        + getNumOfTaskMessage();
+                    break;
+                case DEADLINE:
+                    resultString = ADDED_TASK_MESSAGE + "\n" + outputIndent + addDeadline(parsedUserInput) + "\n"
+                            + getNumOfTaskMessage();
+                    break;
+                default:
+                    resultString = "";
+                    break;
+            }
+        }
+        return upperLine + resultString +"\n" + lowerLine;
+    }
+
+    private String listTask() {
         String outputIndent = "    ";
         StringBuilder concat = new StringBuilder();
-        for (int i = 0; i < lst.size(); i++) {
-            Task task = lst.get(i);
+        for (int i = 0; i < lstOfTask.size(); i++) {
+            Task task = lstOfTask.get(i);
             int taskNumber = i + 1;
-            String s = outputIndent + taskNumber + "." + "[" + task.getStatusIcon() + "]" + " " + task.getDescription();
+            String s = outputIndent + taskNumber + "." + task.toString() +"\n";
             concat.append(s);
         }
         return concat.toString();
+    }
 
+    private String exit() {
+        return outputIndent + "Bye. Hope to see you again soon!" + "\n";
+    }
+
+    private String done(String[] parsedUserInput) {
+        String doneTask = parsedUserInput[1];
+        int doneTaskNumber = Integer.parseInt(doneTask);
+        int identifierNumberInArrayList = doneTaskNumber - 1;
+        try {
+            Task task = this.lstOfTask.get(identifierNumberInArrayList);
+            task.markAsDone();
+            return outputIndent+task.toString();
+        } catch (IndexOutOfBoundsException e1) {
+            return NO_TASK_MESSAGE;
+        }
+    }
+
+    private String addToDo(String[] parsedUserInput) {
+        String taskDescription ="";
+        for(int i = 1; i < parsedUserInput.length; i++) {
+            taskDescription += parsedUserInput[i] + " ";
+        }
+        ToDo td = new ToDo(taskDescription);
+        lstOfTask.add(td);
+        return outputIndent + td.toString();
+    }
+
+    private String addEvent(String[] parsedUserInput) {
+        String taskDescription ="";
+        for(int i = 1; i < parsedUserInput.length; i++) {
+            taskDescription += parsedUserInput[i] + " ";
+        }
+
+        String[] eventArray = taskDescription.split(" /at ");
+        String description = eventArray[0];
+        String date = eventArray[1];
+
+        Event event = new Event(description, date.trim());
+        lstOfTask.add(event);
+        return outputIndent+event.toString();
+    }
+
+    private String addDeadline(String[] parsedUserInput) {
+        String taskDescription ="";
+        for(int i = 1; i < parsedUserInput.length; i++) {
+            taskDescription += parsedUserInput[i] + " ";
+        }
+
+        String[] deadlineArray = taskDescription.split(" /by ");
+        String description = deadlineArray[0];
+        String date = deadlineArray[1];
+
+        Deadline deadline = new Deadline(description, date.trim());
+        lstOfTask.add(deadline);
+        return outputIndent + deadline.toString();
+    }
+
+    public int getNumOfTask() {
+        return lstOfTask.size();
+    }
+
+    private String getNumOfTaskMessage() {
+        return "    Now you have " + getNumOfTask() + " tasks in the list";
     }
 
 
+
+
     public static void main(String[] args) {
-        chatbot();
+        Duke duke = new Duke();
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println(duke.greetUser());;
+
+        while (sc.hasNext()) {
+            String input = sc.nextLine();
+            String[] parsedString = duke.parseString(input);
+            String output = duke.processCommand(parsedString);
+            System.out.println(output);
+        }
+
+
+
+
     }
 }
