@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+
 public class Duke {
     private static final String logo = "      ____        _        \n"
             + "     |  _ \\ _   _| | _____ \n"
@@ -11,13 +13,20 @@ public class Duke {
 
     public static void main(String[] args) {
         greet();
+        TaskSimulator taskSimulator = new TaskSimulator();
         while (s.hasNextLine()) {
             String userCommand = s.nextLine();
             if (userCommand.equals("bye")) {
                 exit();
+                s.close();
                 break;
             } else {
-                echo(userCommand);
+                if (userCommand.equals("list")) {
+                    taskSimulator.getList();
+                } else {
+                    Task newTask = new Task(userCommand);
+                    taskSimulator.addTask(newTask);
+                }
             }
         }
     }
@@ -25,12 +34,6 @@ public class Duke {
             System.out.println(line);
             System.out.println("     Hi, I am\n" + logo);
             System.out.println("     Is there anything I could help with?");
-            System.out.println(line);
-        }
-
-        private static void echo(String command) {
-            System.out.println(line);
-            System.out.println("     " + command);
             System.out.println(line);
         }
 
