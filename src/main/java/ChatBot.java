@@ -78,7 +78,6 @@ class ChatBot {
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
-
         }
         sc.close();
     }
@@ -109,8 +108,8 @@ class ChatBot {
      */
     void makeTaskDone(String[] taskStringArray) throws DukeException {
         try {
-            // check if nothing was passed in after 'done'
-            if (taskStringArray.length != 2) { // length should be 2
+            // if length is not 2, nothing was passed in after 'done'
+            if (taskStringArray.length != 2) {
                 throw new DukeException("Which task are you done with? Please key in the task number!\n");
             }
             // check if taskNumber is a number
@@ -131,57 +130,73 @@ class ChatBot {
         }
     }
 
-    /**
-     * Adds a string task into the arraylist.
-     * @param inputArray the name of the task the user entered
-     */
-    void add(String[] inputArray) {
-        try {
-            String command = inputArray[0].toLowerCase();
-            String description = inputArray[1]; // error when only one word is typed. to handle afterwards
-            Task taskToAdd;
-
-            if (command.equals("todo")) {
-                taskToAdd = new ToDo(description);
-            } else if (command.equals("deadline")) {
-                // guard clause. Show exception and break.
-                if (description.indexOf("/by") < 0) {
-                    System.out.println("Please enter a valid deadline!\n"); // to throw exception
-                    return;
-                }
-
-                String[] descriptionArray = description.split("/by", 2);
-                String deadlineName = descriptionArray[0];
-                String deadlineEndDate = descriptionArray[1];
-                taskToAdd = new Deadline(deadlineName, deadlineEndDate);
-            } else if (command.equals("event")) {
-                // guard clause. Show exception and break.
-                if (description.indexOf("/at") < 0) {
-                    System.out.println("Please enter a valid event!\n"); // to throw exception
-                    return;
-                }
-
-                String[] descriptionArray = description.split("/at", 2);
-                String eventName = descriptionArray[0];
-                String eventTiming = descriptionArray[1];
-                taskToAdd = new Event(eventName, eventTiming);
-
-            } else {
-                return;
-            }
-
-            this.toDoList.add(taskToAdd);
-
-            System.out.println(this.botName + ": "
-                    + "Hai! I have added this task to your list:\n"
-                    + taskToAdd);
-            System.out.println("You now have "
-                    + this.toDoList.size()
-                    + " tasks in your list. Gambatte!\n");
-        } catch (Exception e) {
-
+    void makeTodo(String[] inputArray) throws DukeException {
+        // if length is not 2, nothing was passed in after 'todo'
+        if (inputArray.length != 2) {
+            throw new DukeException("NANI??! Enter a description for your todo!\n");
         }
 
+        String description = inputArray[1];
+        Task taskToAdd = new ToDo(description);
+        addTask(taskToAdd);
+    }
+
+    void makeDeadline(String[] inputArray) throws DukeException {
+        // if length is not 2, nothing was passed in after 'deadline'
+        if (inputArray.length != 2) {
+            throw new DukeException("NANI??! Enter a description for your deadline!\n");
+        }
+
+        // if description is lacking a /by keyword
+        String description = inputArray[1];
+        if (description.indexOf("/by") < 0) {
+            throw new DukeException("Please enter a valid deadline!\n");
+        }
+
+        String[] descriptionArray = description.split("/by", 2);
+        if (descriptionArray.length != 2) {
+            throw new DukeException("NANI??! Enter your deadline name & an end-time for your deadline!\n");
+        }
+
+        String deadlineName = descriptionArray[0];
+        String deadlineEndTime = descriptionArray[1];
+
+        Task taskToAdd = new Deadline(deadlineName, deadlineEndTime);
+        addTask(taskToAdd);
+    }
+
+    void makeEvent(String[] inputArray) throws DukeException {
+        // if length is not 2, nothing was passed in after 'makeEvent'
+        if (inputArray.length != 2) {
+            throw new DukeException("NANI??! Enter a description for your event!\n");
+        }
+
+        // if event is lacking a /by keyword
+        String description = inputArray[1];
+        if (description.indexOf("/at") < 0) {
+            throw new DukeException("Please enter a valid event!\n");
+        }
+
+        String[] descriptionArray = description.split("/at", 2);
+        if (descriptionArray.length != 2) {
+            throw new DukeException("NANI??! Enter your event name & an event timing!\n");
+        }
+
+        String eventName = descriptionArray[0];
+        String eventTiming = descriptionArray[1];
+
+        Task taskToAdd = new Event(eventName, eventTiming);
+        addTask(taskToAdd);
+    }
+
+    void addTask(Task taskToAdd) {
+        this.toDoList.add(taskToAdd);
+        System.out.println(this.botName + ": "
+                + "Hai! I have added this task to your list:\n"
+                + taskToAdd);
+        System.out.println("You now have "
+                + this.toDoList.size()
+                + " tasks in your list. Gambatte!\n");
     }
 
     /**
