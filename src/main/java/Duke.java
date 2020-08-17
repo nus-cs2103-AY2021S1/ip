@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
     static String line = "    ____________________________________________________________\n";
-    static ArrayList<String> todo = new ArrayList<>();
+    static ArrayList<Task> todo = new ArrayList<>();
 
     private static String format(String string) {
         return line + string + "\n" + line;
@@ -16,13 +16,22 @@ public class Duke {
             System.out.println(format("     Bye. Hope to see you again soon!"));
         } else if (input.equals("list")) {
             StringBuilder todoList = new StringBuilder();
+            todoList.append("Here are the tasks in your list:\n");
             for (int i = 1; i < todo.size() + 1; i++) {
-                todoList.append("     ").append(i).append(". ").append(todo.get(i - 1)).append("\n");
+                todoList.append("     ").append(i).append(".").append(todo.get(i - 1)).append("\n");
             }
             System.out.println(format(todoList.toString()));
             echo();
+        } else if (input.length() > 4 && input.startsWith("done ")) {
+            int index = Integer.parseInt(input.substring(5));
+            if (index <= todo.size()) {
+                Task current =todo.get(index - 1);
+                current.markAsDone();
+                System.out.println(format("     Nice! I've marked this task as done:\n       " + current));
+            }
+            echo();
         } else {
-            todo.add(input);
+            todo.add(new Task(input));
             System.out.println(format("added: " + input));
             echo();
         }
