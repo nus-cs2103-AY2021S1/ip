@@ -1,7 +1,7 @@
 abstract class Task {
 
     // Attributes
-    protected String description;
+    protected final String description;
     protected boolean isDone;
 
     // Constructor

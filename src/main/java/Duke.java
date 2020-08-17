@@ -68,39 +68,44 @@ public class Duke {
             String remaining = words.length > 1 ? words[1] : "";
 
             switch (firstWord) {
-                case "bye" -> exit();
-                case "list" -> printList();
-                case "done" -> {
+                case "bye":
+                    exit();
+                    break;
+                case "list":
+                    printList();
+                    break;
+                case "done":
                     int taskNumber = Integer.parseInt(remaining);
                     Task task = lst.get(taskNumber - 1);
                     task.markAsDone();
-                    String doneText = String.format("     Nice! I've marked this task as done: \n" +
-                                                    "     %s", task);
+                    String doneText = String.format("     Nice! I've marked this task as done:\n" +
+                            "     %s", task);
                     System.out.println(wrapText(doneText));
-                }
-                case "todo" -> {
+                    break;
+                case "todo":
                     Task newTodo = new Todo(remaining);
                     createNewTask(newTodo);
-                }
-                case "deadline" -> {
+                    break;
+                case "deadline": {
                     String[] text = remaining.split(" /by ");
                     String description = text[0];
                     String deadline = text[1];
                     Task newDeadline = new Deadline(description, deadline);
                     createNewTask(newDeadline);
+                    break;
                 }
-                case "event" -> {
+                case "event": {
                     String[] text = remaining.split(" /at ");
                     String description = text[0];
                     String dateTime = text[1];
                     Task newEvent = new Event(description, dateTime);
                     createNewTask(newEvent);
+                    break;
                 }
-
-                default -> {
+                default:
                     Task newTask = new Todo(input);
                     createNewTask(newTask);
-                }
+                    break;
             }
         }
     }
