@@ -6,6 +6,14 @@ public class Duke {
     static final String HORIZONTAL_LINE =
             "____________________________________________________________";
     static final String INDENT = "    ";
+    static final String EMPTY_DESCRIPTION_ERROR(String task) {
+        return String.format("☹ OOPS!!! The description of a %s cannot be empty.", task);
+    }
+    static final String UNKNOWN_TASK_ERROR = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    static final String EMPTY_BY_ERROR = "☹ OOPS!!! The deadline cannot be empty.";
+    static final String EMPTY_AT_ERROR = "☹ OOPS!!! The event time cannot be empty.";
+    static final String NO_SUCH_TASK = "☹ OOPS!!! There is no such task.";
+    static final String EMPTY_TASK_INDEX = "☹ OOPS!!! The task index cannot be empty.";
 
     private List<Task> list;
 
@@ -13,32 +21,73 @@ public class Duke {
         this.list = new ArrayList<Task>();
     }
 
-    public String addTask(String t) {
+    public String addTask(String t) throws DukeEmptyDescriptionException,
+            DukeEmptyByException, DukeEmptyAtException,
+            DukeUnknownInputException{
         Task toBeAdded;
+        String des;
+        String[] tokens;
         if (t.startsWith("todo")) {
-            String des = t.substring(5);
-            toBeAdded = new Todo(des);
+            try {
+                des = t.substring(5);
+                toBeAdded = new Todo(des);
+                list.add(toBeAdded);
+                return "Got it. I've added this task:\n" +
+                        INDENT + "  " + toBeAdded + "\n" +
+                        INDENT +
+                        String.format("Now you have %d tasks in the in the list", list.size());
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeEmptyDescriptionException(EMPTY_DESCRIPTION_ERROR("todo"));
+            }
         } else if (t.startsWith("deadline")) {
-            String[] tokens = t.split(" /by ");
-            String des = tokens[0].substring(9);
-            toBeAdded = new Deadline(des, tokens[1]);
+            tokens = t.split(" /by ");
+            try {
+                des = tokens[0].substring(9);
+                toBeAdded = new Deadline(des, tokens[1]);
+                list.add(toBeAdded);
+                return "Got it. I've added this task:\n" +
+                        INDENT + "  " + toBeAdded + "\n" +
+                        INDENT +
+                        String.format("Now you have %d tasks in the in the list", list.size());
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeEmptyDescriptionException(EMPTY_DESCRIPTION_ERROR("deadline"));
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeEmptyByException(EMPTY_BY_ERROR);
+            }
+        } else if (t.startsWith("event")) {
+            try {
+                tokens = t.split(" /at ");
+                des = tokens[0].substring(6);
+                toBeAdded = new Event(des, tokens[1]);
+                list.add(toBeAdded);
+                return "Got it. I've added this task:\n" +
+                        INDENT + "  " + toBeAdded + "\n" +
+                        INDENT +
+                        String.format("Now you have %d tasks in the in the list", list.size());
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeEmptyDescriptionException(EMPTY_DESCRIPTION_ERROR("event"));
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeEmptyAtException(EMPTY_AT_ERROR);
+            }
         } else {
-            String[] tokens = t.split(" /at ");
-            String des = tokens[0].substring(6);
-            toBeAdded = new Event(des, tokens[1]);
+            throw new DukeUnknownInputException(UNKNOWN_TASK_ERROR);
         }
-        list.add(toBeAdded);
-        return "Got it. I've added this task:\n" +
-                INDENT + "  " + toBeAdded + "\n" +
-                INDENT +
-                String.format("Now you have %d tasks in the in the list", list.size());
     }
 
-    public String markDone(int index) {
-        Task task = list.get(index-1);
-        task.markAsDone();
-        return "Nice! I've marked this task as done: \n" +
-                "      " + task;
+    public String markDone(String md) throws DukeInvalidDoneIndexException, DukeEmptyDoneIndexException {
+        int index;
+        try {
+            String[] tokens = md.split(" ");
+            index = Integer.parseInt(tokens[1]);
+            Task task = list.get(index - 1);
+            task.markAsDone();
+            return "Nice! I've marked this task as done: \n" +
+                    "      " + task;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeEmptyDoneIndexException(EMPTY_TASK_INDEX);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeInvalidDoneIndexException(NO_SUCH_TASK);
+        }
     }
 
     public void printList() {
@@ -84,10 +133,22 @@ public class Duke {
             } else if (nextLine.equals("list")) {
                 duke.printList();
             } else if (nextLine.startsWith("done")) {
-                String[] tokens = nextLine.split(" ");
-                printWindow(duke.markDone(Integer.parseInt(tokens[1])));
+                try {
+                    printWindow(duke.markDone(nextLine));
+                } catch (DukeEmptyDoneIndexException | DukeInvalidDoneIndexException e) {
+                    printWindow(e.getMessage());
+                }
             } else {
-                printWindow(duke.addTask(nextLine));
+                String printed;
+                try {
+                    printed = duke.addTask(nextLine);
+                    printWindow(printed);
+                } catch (DukeUnknownInputException |
+                        DukeEmptyByException |
+                        DukeEmptyAtException |
+                        DukeEmptyDescriptionException e) {
+                    printWindow(e.getMessage());
+                }
             }
         }
     }
