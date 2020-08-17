@@ -8,6 +8,6 @@ public class ToDo extends Task { //added
 
     @Override
     public String toString() {
-        return "[T]" + " " + super.toString();
+        return "[T]" + super.toString();
     }
 }

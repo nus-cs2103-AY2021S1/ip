@@ -50,7 +50,7 @@ public class Duke {
                 System.out.println("Got it! I've added this task:");
                 //System.out.println(addedText + userInput);
                 System.out.println(todo);
-                System.out.println("Now you have " + tasks.size() + "tasks in the list.");
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 System.out.println(line);
             } else if (userInput.startsWith("deadline")) {
                 int indexOfSlash = userInput.indexOf('/');
@@ -98,7 +98,8 @@ public class Duke {
         System.out.println(line);
         System.out.print(bot);
         System.out.println("Great work! I've marked this task as done: ");
-        System.out.println("[" + tasks.get(pos - 1).getStatusIcon() + "]" + " " + tasks.get(pos - 1).getTask());
+        //System.out.println("[" + tasks.get(pos - 1).getStatusIcon() + "]" + " " + tasks.get(pos - 1).getTask());
+        System.out.println(tasks.get(pos - 1));
         System.out.println("Keep the ticks going! ^_^");
         System.out.println(line);
     }
