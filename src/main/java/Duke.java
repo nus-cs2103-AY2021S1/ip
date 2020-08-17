@@ -21,7 +21,7 @@ public class Duke {
 
         System.out.println(HELLO_MESSAGE);
         while (true) {
-            String command = sc.next();
+            String command = sc.nextLine();
             if (command.equals(EXIT_COMMAND)) {
                 System.out.println(EXIT_MESSAGE);
                 break;
