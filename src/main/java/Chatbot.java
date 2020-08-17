@@ -21,8 +21,8 @@ public class Chatbot {
                 tskManager.listAll();
                 break;
             case "done":
-                int index = Integer.parseInt(text.split(" ")[1]) - 1;
-                tskManager.markAsDone(index);
+                int ind1 = Integer.parseInt(text.split(" ")[1]) - 1;
+                tskManager.markAsDone(ind1);
                 break;
             case "todo":
                 try {
@@ -40,8 +40,12 @@ public class Chatbot {
                 Event event = new Event(trailing);
                 tskManager.addTask(event);
                 break;
+            case "delete":
+                int ind2 = Integer.parseInt(text.split(" ")[1]) - 1;
+                tskManager.removeTask(ind2);
+                break;
             case "bye":
-                tskPrint.display("Bye. Hope to see you again soon!");
+                tskPrint.display("Bye, hope to see you again soon.");
                 break;
             default:
                 tskPrint.display("Arghh! I do not know what you mean, are you using the right\n    commands?");
