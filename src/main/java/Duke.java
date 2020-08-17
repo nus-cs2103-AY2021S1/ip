@@ -3,16 +3,79 @@ import java.util.Scanner;
 
 public class Duke {
 
-    // Constants
-    private static final String LINE = "____________________________________________________________";
-    private static final String LOGO =
-            " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
+    // PRIVATE ENUMS:
+    // Contain texts that are for various purposes explained below
+    // Abstracted from static constants to make them easy to maintain
 
-    // INSTRUCTIONS
+    // Instruction Guides split up the various parts of the "help" function guide
+    // Splitting them up into parts makes it easier to edit according to the specific guide in the future
+    private enum InstructionGuide {
+        // For formatting purposes, except for the last guide, the guides must end with a guideBreaker
+        // It splits them into paragraphs
+        LevelInformation("* Level 6: Allowing Delete. Follow the Task Input Instructions for more\n" +
+                "* Do try to avoid ambiguous inputs, " +
+                "such as [keywords] + [random gibberish] as I cannot recognise them!\n" +
+                "\tI'm not very smart (yet) :(", false),
+
+        TaskInput(" todo [Task Description] - Inputs a TODO DukeTask\n" +
+                " deadline [Task Description] /by [Date] - Inputs a DEADLINE DukeTask, along with INDICATOR /by\n" +
+                " event [Task Description] /at [Date] - Inputs an EVENT DukeTask, along with INDICATOR /at", false),
+
+        AvailableInstruction(" help - Display Available Instructions\n" +
+                " bye - Terminate Duke\n" +
+                " list - Display current DukeTasks\n" +
+                " done [Task Number] - Complete the specified task number (Specify in numeric format!) Eg: \"done 3\"\n" +
+                " delete [Task Number] - Deletes the task number (Specify in numeric format!) Eg: \"delete 3\"", true);
+
+        private final static String guideBreaker = "\n\n";
+        private final String instruction;
+        private final boolean last;
+
+        InstructionGuide(String instruction, boolean last) {
+            this.instruction = instruction;
+            this.last = last;
+        }
+
+        @Override
+        public String toString() {
+            return instruction + (last ? "" : guideBreaker);
+        }
+    }
+
+    // User Interaction Text
+    private enum UserInteractionText {
+        INTRODUCTION(CommonString.LINE + "\n" +
+                "Hello! I am Duke, your Personal Assistant!\n" + // START OF INTRODUCTIONS
+                "What can I do for you today?\n" +
+                "Type \"help\" to see the available instructions!\n" +
+                CommonString.LINE), // END OF INTRODUCTIONS)
+
+        INSTRUCTIONS("How to use Duke:\n" + // Guide to Duke
+                InstructionGuide.LevelInformation +
+                "TASK INPUT INSTRUCTIONS:\n" + // Task Input Instructions
+                InstructionGuide.TaskInput +
+                "AVAILABLE INSTRUCTIONS:\n" + // Available Instructions
+                InstructionGuide.AvailableInstruction), // END OF INSTRUCTIONS)
+
+        OUTRO("Goodbye. Hope to see you soon!\n" +
+              CommonString.LOGO + CommonString.LINE)
+        ;
+
+        private final String value;
+
+        UserInteractionText(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+    }
+
+    // INSTRUCTIONS and related CONSTANTS
+    // Kept as Strings because of certain constants (indicators) that are related to certain instructions
+    // Convenient to use - final keeps them as constant values
     private static final String BYE = "bye";
     private static final String HELP = "help";
     private static final String LIST = "list";
@@ -25,47 +88,16 @@ public class Duke {
     private static final String UNKNOWN = "unknown";
     private static final String DELETE = "delete";
 
-    // User Interaction Text
-    // Standardise by using only LINE here. NEWLINE to be used for functions
-    // Maybe can include Username in introductions
-    private static final String INTRODUCTION =
-            LINE + "\n" +
-                    "Hello! I am Duke, your Personal Assistant!\n" + // START OF INTRODUCTIONS
-                    "What can I do for you today?\n" +
-                    "Type \"help\" to see the available instructions!\n" +
-                    LINE; // END OF INTRODUCTIONS
-
-    private static final String INSTRUCTIONS =
-            "How to use Duke:\n" + // Guide to Duke
-                    "* Level 6: Allowing Delete. Follow the Task Input Instructions for more\n" +
-                    "* Do try to avoid ambiguous inputs, " +
-                        "such as [keywords] + [random gibberish] as I cannot recognise them!\n" +
-                    "\tI'm not very smart (yet) :(\n\n" +
-                    "TASK INPUT INSTRUCTIONS:\n" + // Task Input Instructions
-                    " todo [Task Description] - Inputs a TODO DukeTask\n" +
-                    " deadline [Task Description] /by [Date] - Inputs a DEADLINE DukeTask, along with INDICATOR /by\n" +
-                    " event [Task Description] /at [Date] - Inputs an EVENT DukeTask, along with INDICATOR /at\n\n" +
-                    "AVAILABLE INSTRUCTIONS:\n" + // Available Instructions
-                    " help - Display Available Instructions\n" +
-                    " bye - Terminate Duke\n" +
-                    " list - Display current DukeTasks\n" +
-                    " done [Task Number] - Complete the specified task number (Specify in numeric format!) Eg: \"done 3\"\n" +
-                    " delete [Task Number] - Deletes the task number (Specify in numeric format!) Eg: \"delete 3\""; // END OF INSTRUCTIONS
-
-    private static final String OUTRO =
-            "Goodbye. Hope to see you soon!\n" +
-            LOGO + LINE;
-
     // MAIN FUNCTION
     public static void main(String[] args) {
         // Initialisation of Duke
-        System.out.println(INTRODUCTION);
+        System.out.println(UserInteractionText.INTRODUCTION);
 
         // Execute Duke
         invokeDuke();
 
         // OUTRO
-        System.out.println(OUTRO);
+        System.out.println(UserInteractionText.OUTRO);
     }
 
     // HEAVY LIFTING LOGIC FOR DUKE BOT
@@ -80,7 +112,7 @@ public class Duke {
         // are to be handled the loop
         instructionLoop: while (sc.hasNextLine()) { // labelling of while-loop
 
-            // Instruction Setup
+            // Instruction Setup - split by whitespace to check
             String instruction = sc.nextLine().trim();
             String[] instructionArray = instruction.split(" ");
             int instrLen = instructionArray.length;
@@ -96,7 +128,7 @@ public class Duke {
                         }
                     case HELP:
                         if (instrLen == 1) {
-                            System.out.println(INSTRUCTIONS);
+                            System.out.println(UserInteractionText.INSTRUCTIONS);
                         } else {
                             throw new InvalidInstructionException(HELP);
                         }
@@ -110,7 +142,7 @@ public class Duke {
                                 for (int i = 0; i < inputList.size(); i++) {
                                     System.out.println((i + 1) + ". " + inputList.get(i));
                                 }
-                                System.out.println(getTaskStatus(inputList, inputList.size()));
+                                System.out.println(getTaskStatus(inputList));
                             }
                         } else {
                             throw new InvalidInstructionException(LIST);
@@ -129,7 +161,7 @@ public class Duke {
                                     System.out.println("Alright! I'll mark this task as done!");
                                     inputList.get(idx).markAsDone();
                                     System.out.println(inputList.get(idx));
-                                    System.out.println(getTaskStatus(inputList, inputList.size()));
+                                    System.out.println(getTaskStatus(inputList));
                                 }
                                 break;
                             }
@@ -206,7 +238,7 @@ public class Duke {
                 System.out.println(exception);
             }
 
-            System.out.println(LINE);
+            System.out.println(CommonString.LINE);
         }
 
         // Cleaning up before terminating invokeDuke()
@@ -225,7 +257,7 @@ public class Duke {
         return true;
     }
 
-    // Merges the String array into one string, from index 1, until (not including) index end
+    // Merges the String array into one string, from index start, until (not including) index end
     private static String mergeArray(String[] array, int start, int end) {
         StringBuilder output = new StringBuilder();
         for (int i = start; i < end; i++) {
@@ -243,17 +275,18 @@ public class Duke {
         return -1;
     }
 
-    private static String getTaskStatus(ArrayList<DukeTask> tasks, int counter) {
+    private static String getTaskStatus(ArrayList<DukeTask> tasks) {
         int done = 0;
         int notDone = 0;
-        for (int i = 0; i < counter; i++) {
-            if (tasks.get(i).getDoneStatus()) {
+        for (DukeTask task : tasks) {
+            if (task.getDoneStatus()) {
                 done++;
             } else {
                 notDone++;
             }
         }
-        return String.format("You now have %d %s done, and %d %s not done", done, done == 1 ? "task" : "tasks", notDone, notDone == 1 ? "task" : "tasks");
+        return String.format("You now have %d %s done, and %d %s not done",
+                done, done == 1 ? "task" : "tasks", notDone, notDone == 1 ? "task" : "tasks");
     }
 
     private static String getTaskSize(ArrayList<DukeTask> tasks) {
