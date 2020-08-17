@@ -15,22 +15,27 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         System.out.println(" ____________________________________________________________");
-        ArrayList<String> stringStore = new ArrayList<>();
+        ArrayList<Task> stringStore = new ArrayList<>();
         String input = sc.nextLine();
         while(!input.equals("bye")){
-            if(input.equals("list")){
+            if(input.equals("list")) {
                 System.out.println(" ____________________________________________________________");
+                System.out.println(" Here are the tasks in your list:");
                 int sizeStore = stringStore.size();
-                for (int i = 1; i < sizeStore + 1 ; i++) {
-                    System.out.println(i +". " + stringStore.get(i-1));
+                for (int i = 1; i < sizeStore + 1; i++) {
+                    System.out.println(i + "." + stringStore.get(i - 1));
                 }
                 System.out.println(" ____________________________________________________________");
+            } else if (input.split(" ")[0].equals("done")){
+                stringStore.get(Integer.parseInt(input.split(" ")[1]) - 1).markAsDone();
             } else {
                 System.out.println(" ____________________________________________________________");
+                String actual = "";
                 System.out.println("added: " + input);
+                Task a = new Task(input);
                 System.out.println(" ____________________________________________________________");
                 System.out.println("");
-                stringStore.add(input);
+                stringStore.add(a);
             }
             input =  sc.nextLine();
 
