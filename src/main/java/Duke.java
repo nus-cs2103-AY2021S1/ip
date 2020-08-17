@@ -19,6 +19,7 @@ public class Duke {
                     break;
                 }
                 if (first.equals("list")) {
+                    System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < books.size(); i++) {
                         int l = i + 1;
                         System.out.println(l + "." + books.get(i));
@@ -62,6 +63,13 @@ public class Duke {
 
                         System.out.println("Got it. I've added this task:");
                         System.out.println("  " + books.get(books.size() - 1));
+                        System.out.println("Now you have " + books.size() + " tasks in the list.");
+                    } else if (first.equals("delete")) {
+                        int index = Integer.parseInt(s[1]);
+                        Task t = books.get(index - 1);
+                        books.remove(index - 1);
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println("  " + t);
                         System.out.println("Now you have " + books.size() + " tasks in the list.");
                     } else {
                         throw new UnknownCommandException();
