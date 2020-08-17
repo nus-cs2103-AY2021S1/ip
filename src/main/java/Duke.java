@@ -14,7 +14,7 @@ public class Duke {
         while (userInput.hasNext()) {
             String input = userInput.next();
             if (input.equals("bye")) {
-                System.out.println("Bye! Hope to see you again soon!");
+                System.out.println("Bye. Hope to see you again soon!");
                 break;
             } else {
                 System.out.println(input);
