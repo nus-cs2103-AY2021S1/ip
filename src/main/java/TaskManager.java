@@ -28,7 +28,7 @@ public class TaskManager {
 
         else if (input.contains("todo")) {
             System.out.println("--------------------------------------");
-            this.addToList(new ToDo(input));
+            this.addToList(new ToDo(input.substring(5, input.length())));
             this.taskPrint(input);
             System.out.println("--------------------------------------");
         }
@@ -72,6 +72,9 @@ public class TaskManager {
             System.out.println("--------------------------------------");
 
         }
+        int t = toDoList.size();
+        System.out.println("You have a total of " + t + " tasks");
+        System.out.println("--------------------------------------");
     }
 
     public void addToList(Task task) {
