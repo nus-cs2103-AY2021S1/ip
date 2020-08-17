@@ -11,4 +11,18 @@ list
 done 6
 done 4
 list
+done 7
+done 0
+done
+done abc
+todo
+deadline
+deadline /by
+deadline buy coffee /by
+deadline buy coffee /by 4 aug
+event
+event /at
+event watch movie /at
+event watch movie /at 5 aug
+blah
 bye
