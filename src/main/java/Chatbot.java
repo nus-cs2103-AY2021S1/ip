@@ -10,10 +10,13 @@ public class Chatbot {
     }
 
     private static void handleUserInput(String userInput) {
+
+        TaskPrinter tskPrint = new TaskPrinter();
         String text = userInput.trim();
-        String first = text.split(" ")[0];
-        String remainder = text.substring(first.length()).trim();
-        switch (first) {
+        String leading = text.split(" ")[0].trim();
+        String trailing = text.substring(leading.length()).trim();
+
+        switch (leading) {
             case "list":
                 tskManager.listAll();
                 break;
@@ -22,32 +25,38 @@ public class Chatbot {
                 tskManager.markAsDone(index);
                 break;
             case "todo":
-                Task todo = new Todo(remainder);
-                tskManager.addTask(todo);
+                try {
+                    Todo task = Todo.newTodo(trailing);
+                    tskManager.addTask(task);
+                } catch (ChatbotException e) {
+                    tskPrint.display(e.getMessage());
+                }
                 break;
             case "deadline":
-                Task deadline = new Deadline(remainder);
+                Deadline deadline = new Deadline(trailing);
                 tskManager.addTask(deadline);
                 break;
             case "event":
-                Task event = new Event(remainder);
+                Event event = new Event(trailing);
                 tskManager.addTask(event);
                 break;
             case "bye":
-                System.out.println("Bye. Hope to see you again soon!");
+                tskPrint.display("Bye. Hope to see you again soon!");
                 break;
             default:
-                // todo
+                tskPrint.display("Arghh! I do not know what you mean, are you using the right\n    commands?");
         }
     }
 
     public static void main(String[] args) {
 
         System.out.println(
-                "   ##############################\n" +
-                "   # Hi! I'm Hanry the ChatBot. #\n" +
-                "   # What can I do for you?     #\n" +
-                "   ##############################"
+                "   ################################################\n" +
+                "   #                                              #\n" +
+                "   #  Hey there, I'm Hanry the impatient ChatBot. #\n" +
+                "   #  What can I do for you? (-.-)                #\n" +
+                "   #                                              #\n" +
+                "   ################################################"
         );
 
         tskManager = TaskManager.getInstance();
