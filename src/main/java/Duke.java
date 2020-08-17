@@ -21,9 +21,29 @@ public class Duke {
     }
 
     public static void addTask(String s, String next) {
-        Task task = new Task(s + " " + next);
-        storage.add(task);
-        System.out.println(border + "added: " + task.getName() + "\n" + border);
+        Task toAdd = new Task("");
+        if (s.equals("todo")) {
+            ToDo todo = new ToDo(next);
+            storage.add(todo);
+            toAdd = todo;
+
+        } else if (s.equals("deadline")) {
+            String[] ls = next.split("/by ");
+            Deadline deadline = new Deadline(ls[0], ls[1]);
+            storage.add(deadline);
+            toAdd = deadline;
+        } else {
+            Task task = new Task(s + " " + next);
+            storage.add(task);
+            System.out.println(border + "added: " + task.getName() + "\n" + border);
+            return;
+        }
+        System.out.println(
+                border + "Got it. I've added this task:\n"
+                        + "  " + toAdd + "\n"
+                        + "Now you have " + storage.size() + " tasks in the list.\n"
+                        + border
+        );
     }
 
     public static boolean checkDone(String s) {
