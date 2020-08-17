@@ -5,5 +5,56 @@
 #   #  #    # #  #     #      #   ##
 #    # #    # # ###### ###### #    #
 
-[0;33mKonichiwa! Welcome to Kaizen
-I am Kai what can I do for you today?[0m
+Konichiwa! Welcome to Kaizen
+I am Kai what can I do for you today?
+
+No tasks at the moment! Good job!
+
+Kai: Hai! I have added this task to your list:
+[TODO] [✘] study
+You now have 1 tasks in your list. Gambatte!
+
+Kai: Hai! I have added this task to your list:
+[TODO] [✘] go for lecture
+You now have 2 tasks in your list. Gambatte!
+
+Kai: Hai! I have added this task to your list:
+[DEADLINE] [✘] CS2103  (by: 20 August 2020)
+You now have 3 tasks in your list. Gambatte!
+
+Kai: Here are your tasks!
+1. [TODO] [✘] study
+2. [TODO] [✘] go for lecture
+3. [DEADLINE] [✘] CS2103  (by: 20 August 2020)
+
+Kai: Sugoi! This task is done!
+[TODO] [✓] go for lecture
+
+Kai: Hai! I have added this task to your list:
+[TODO] [✘] eat lunch with friend
+You now have 4 tasks in your list. Gambatte!
+
+Kai: Hai! I have added this task to your list:
+[EVENT] [✘] welfare pack giveaway  (at: COM1 12-3pm)
+You now have 5 tasks in your list. Gambatte!
+
+Kai: Here are your tasks!
+1. [TODO] [✘] study
+2. [TODO] [✓] go for lecture
+3. [DEADLINE] [✘] CS2103  (by: 20 August 2020)
+4. [TODO] [✘] eat lunch with friend
+5. [EVENT] [✘] welfare pack giveaway  (at: COM1 12-3pm)
+
+Sorry, no such task!
+
+Kai: Sugoi! This task is done!
+[EVENT] [✓] welfare pack giveaway  (at: COM1 12-3pm)
+
+Kai: Here are your tasks!
+1. [TODO] [✘] study
+2. [TODO] [✓] go for lecture
+3. [DEADLINE] [✘] CS2103  (by: 20 August 2020)
+4. [TODO] [✘] eat lunch with friend
+5. [EVENT] [✓] welfare pack giveaway  (at: COM1 12-3pm)
+
+Kai: Sayonara! See you again my friend!

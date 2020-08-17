@@ -1,1 +1,13 @@
+list
 todo study
+todo go for lecture
+deadline CS2103 /by 20 August 2020
+list
+done 2
+todo eat lunch with friend
+event welfare pack giveaway /at COM1 12-3pm
+list
+done 50
+done 5
+list
+bye
