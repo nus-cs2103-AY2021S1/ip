@@ -53,27 +53,27 @@ public class Duke {
     public static Task addNewTask(ArrayList<String> tokens) {
         if (tokens.get(0).equals("todo")) {
             return new ToDo(stringCombiner(tokens, 1, tokens.size()));
-        } else if (tokens.get(1).equals("deadline")) {
-            int ind = 1;
+        } else if (tokens.get(0).equals("deadline")) {
+            int ind = 0;
             boolean found= false;
-            while (!found && ind < tokens.size()) {
+            while (!found && ind < tokens.size()-1) {
+                ind++;
                 if (tokens.get(ind).equals("/by")) {
                     found = true;
                 }
-                ind++;
             }
-            return new Deadline(stringCombiner(tokens, 1, ind-1),
+            return new Deadline(stringCombiner(tokens, 1, ind),
                     stringCombiner(tokens, ind+1, tokens.size()));
         } else {
-            int ind = 1;
+            int ind = 0;
             boolean found= false;
-            while (!found && ind < tokens.size()) {
+            while (!found && ind < tokens.size()-1) {
+                ind++;
                 if (tokens.get(ind).equals("/at")) {
                     found = true;
                 }
-                ind++;
             }
-            return new Event(stringCombiner(tokens, 1, ind-1),
+            return new Event(stringCombiner(tokens, 1, ind),
                     stringCombiner(tokens, ind+1, tokens.size()));
         }
     }

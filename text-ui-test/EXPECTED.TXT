@@ -5,3 +5,76 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What can I do for you?
+-----------------
+I have added this task: 
+	[T][✘] 123
+You now have 1 tasks in the list
+-----------------
+-----------------
+I have added this task: 
+	[E][✘] help (at: asd)
+You now have 2 tasks in the list
+-----------------
+-----------------
+I have added this task: 
+	[D][T][✘] uuu (by: jjj)
+You now have 3 tasks in the list
+-----------------
+-----------------
+[E][✓] help (at: asd)
+-----------------
+-----------------
+[T][✓] 123
+-----------------
+-----------------
+Here are the tasks in your list:
+1.[T][✓] 123
+2.[E][✓] help (at: asd)
+3.[D][T][✘] uuu (by: jjj)
+-----------------
+-----------------
+I have added this task: 
+	[T][✘] 345
+You now have 4 tasks in the list
+-----------------
+-----------------
+I have added this task: 
+	[E][✘] help2 (at: asd2)
+You now have 5 tasks in the list
+-----------------
+-----------------
+I have added this task: 
+	[D][T][✘] uuu2 (by: jjj2)
+You now have 6 tasks in the list
+-----------------
+-----------------
+[D][T][✓] uuu (by: jjj)
+-----------------
+-----------------
+Here are the tasks in your list:
+1.[T][✓] 123
+2.[E][✓] help (at: asd)
+3.[D][T][✓] uuu (by: jjj)
+4.[T][✘] 345
+5.[E][✘] help2 (at: asd2)
+6.[D][T][✘] uuu2 (by: jjj2)
+-----------------
+-----------------
+I have added this task: 
+	[T][✘] 666
+You now have 7 tasks in the list
+-----------------
+-----------------
+Here are the tasks in your list:
+1.[T][✓] 123
+2.[E][✓] help (at: asd)
+3.[D][T][✓] uuu (by: jjj)
+4.[T][✘] 345
+5.[E][✘] help2 (at: asd2)
+6.[D][T][✘] uuu2 (by: jjj2)
+7.[T][✘] 666
+-----------------
+-----------------
+Bye. Hope to see you again!
+-----------------
