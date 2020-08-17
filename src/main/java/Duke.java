@@ -2,13 +2,13 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String divider = "______________________________";
+        String divider = "_____________________________________________________________";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        Task[] storage = new Task[100];
+        Task[] task = new Task[100];
         System.out.println("Hello from\n" + logo);
 
         System.out.println(divider);
@@ -17,6 +17,7 @@ public class Duke {
 
         /* Takes in user inputs. Program terminates when the String "bye" is entered.
         Program stores user inputs as Tasks and returns the list when the String "list" is entered.
+        Tasks are categorised into "todo", "deadline" (to specify "by") and "event"  (to specify "at").
         When "done xx" is entered, Task xx in the list is marked as done.
          */
         int pointer = 1;
@@ -27,17 +28,27 @@ public class Duke {
 
             if (input.equals("list")) {
                 System.out.println("Here are the tasks in your list: ");
-                for (Integer i = 1; i < pointer; i++) {
-                    System.out.println(i.toString() + ". [" + storage[i - 1].getStatusIcon() + "] " + storage[i - 1].description);
+                for (int i = 1; i < pointer; i++) {
+                    System.out.println(i + ". " + task[i - 1]);
                 }
-            } else if (input.contains("done")) {
+            } else if (input.startsWith("done")) {
                 int taskToMark = Integer.parseInt(input.substring(5)) - 1;
-                storage[taskToMark].markAsDone();
+                task[taskToMark].markAsDone();
                 System.out.println("Task Accomplished! I've marked this task as done:");
-                System.out.println("[" + storage[taskToMark].getStatusIcon() + "] " + storage[taskToMark].description);
+                System.out.println(task[taskToMark]);
             } else {
-                System.out.println("Added: " + input);
-                storage[pointer - 1] = new Task(input);
+                System.out.println("Got it! I've added this task:");
+                if (input.startsWith("todo")) {
+                    task[pointer - 1] = new ToDo(input.substring(5));
+                } else if (input.startsWith("deadline")) {
+                    int endIndex = input.indexOf("/by") - 1;
+                    task[pointer - 1] = new Deadline(input.substring(9, endIndex), input.substring(endIndex + 5));
+                } else {
+                    int endIndex = input.indexOf("/at") - 1;
+                    task[pointer - 1] = new Event(input.substring(6, endIndex), input.substring(endIndex + 5));
+                }
+                System.out.println(task[pointer - 1]);
+                System.out.println("Now you have " + pointer + " tasks in your list.");
                 pointer++;
             }
 
