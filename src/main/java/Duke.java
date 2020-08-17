@@ -22,9 +22,13 @@ public class Duke {
                         list.deleteTask(input);
                         break;
                     case "todo":
+                        list.addTask(TaskType.TODO, input);
+                        break;
                     case "event":
+                        list.addTask(TaskType.EVENT, input);
+                        break;
                     case "deadline":
-                        list.addTask(command, input);
+                        list.addTask(TaskType.DEADLINE, input);
                         break;
                     default:
                         throw new UnknownInputException();

@@ -9,12 +9,12 @@ public class Tasks {
 
     private static Todo addTodo(String input) throws EmptyTaskException {
         if (input.length() == 4) {
-            throw new EmptyTaskException("description", "todo");
+            throw new EmptyTaskException("description", TaskType.TODO);
         }
 
         String description = input.substring(5).trim();
         if (description.length() < 1) {
-            throw new EmptyTaskException("description", "todo");
+            throw new EmptyTaskException("description", TaskType.TODO);
         }
 
         return new Todo(description);
@@ -28,12 +28,12 @@ public class Tasks {
 
         String description = input.substring(6, slashIndex).trim();
         if (description.length() < 1) {
-            throw new EmptyTaskException("description", "event");
+            throw new EmptyTaskException("description", TaskType.EVENT);
         }
 
         String date = input.substring(slashIndex + 3).trim();
         if (date.length() < 1) {
-            throw new EmptyTaskException("date", "event");
+            throw new EmptyTaskException("date", TaskType.EVENT);
         }
 
         return new Event(description, date);
@@ -47,29 +47,31 @@ public class Tasks {
 
         String description = input.substring(9, slashIndex).trim();
         if (description.length() < 1) {
-            throw new EmptyTaskException("description", "deadline");
+            throw new EmptyTaskException("description", TaskType.DEADLINE);
         }
 
         String deadline = input.substring(slashIndex + 3).trim();
         if (deadline.length() < 1) {
-            throw new EmptyTaskException("date", "deadline");
+            throw new EmptyTaskException("date", TaskType.DEADLINE);
         }
 
         return new Deadline(description, deadline);
     }
 
-    protected void addTask(String command, String input) throws EmptyTaskException, InvalidTaskException {
-        Task task = new Task("");
-        switch (command) {
-            case "todo":
+    protected void addTask(TaskType type, String input) throws EmptyTaskException, InvalidTaskException, UnknownInputException {
+        Task task;
+        switch (type) {
+            case TODO:
                 task = addTodo(input);
                 break;
-            case "event":
+            case EVENT:
                 task = addEvent(input);
                 break;
-            case "deadline":
+            case DEADLINE:
                 task = addDeadline(input);
                 break;
+            default:
+                throw new UnknownInputException();
         }
         this.tasks.add(task);
         PrintDuke.printAddTask(task, this.tasks.size());

@@ -3,7 +3,10 @@ public class EmptyTaskException extends EmptyInputException {
         super(message);
     }
 
-    EmptyTaskException(String field, String type) {
-        super(String.format("The %s of %s %s cannot be empty.", field, type.equals("event") ? "an" : "a", type));
+    EmptyTaskException(String field, TaskType type) {
+        super(String.format("The %s of %s %s cannot be empty.",
+                field,
+                type.compareTo(TaskType.EVENT) == 0 ? "an" : "a",
+                type.toString().toLowerCase()));
     }
 }
