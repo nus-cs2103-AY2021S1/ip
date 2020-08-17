@@ -1,0 +1,25 @@
+{
+  "name": "ip",
+  "version": "0.1.0",
+  "description": "This project is part of a module for CS2103 Software Engineering in NUS.",
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {
+    "standard-version": "^9.0.0"
+  },
+  "scripts": {
+    "release": "standard-version",
+    "release-minor": "npm run release -- --release-as minor"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/therizhao/ip.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/therizhao/ip/issues"
+  },
+  "homepage": "https://github.com/therizhao/ip#readme"
+}
