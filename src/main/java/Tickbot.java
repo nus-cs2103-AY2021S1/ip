@@ -78,17 +78,24 @@ public class Tickbot {
         return true; // continue inputing
     }
 
+    private static void printUsage(String[] args, String timeMarker) {
+        if (timeMarker != null) {
+            printMessage(String.format("Usage: %s <content> %s <time>",
+                args[0], timeMarker));
+        } else {
+            printMessage(String.format("Usage: %s <content>", args[0]));
+        }
+    }
+
     private static void processAddTask(
         String[] args,
         String taskName,
         BiFunction<String, String, ? extends Task> initializer,
         String timeMarker
     ) {
-        String lowerTaskName = taskName.toLowerCase();
         if (args.length < 2) {
-            printMessage("Please input the content of the " + lowerTaskName + ".");
-            printMessage(String.format("Usage: %s <content> %s <time>",
-                lowerTaskName, timeMarker));
+            printMessage("Please input the content of the " + args[0] + ".");
+            printUsage(args, timeMarker);
             return;
         }
         String content = args[1];
@@ -110,12 +117,10 @@ public class Tickbot {
             printMessage("You have " + tasks.size() + " task(s) in task list.");
         } catch (IndexOutOfBoundsException err) {
             printMessage("Please input valid time after " + timeMarker + ".");
-            printMessage(String.format("Usage: %s <content> %s <time>",
-                lowerTaskName, timeMarker));
+            printUsage(args, timeMarker);
         } catch (NoSuchElementException err) {
-            printMessage("Missing time for the " + lowerTaskName + ".");
-            printMessage(String.format("Usage: %s <content> %s <time>",
-                lowerTaskName, timeMarker));
+            printMessage("Missing time for the " + args[0] + ".");
+            printUsage(args, timeMarker);
         }
     }
 

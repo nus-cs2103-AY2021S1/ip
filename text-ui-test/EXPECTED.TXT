@@ -10,4 +10,9 @@
   1. [E][✔︎] Scheduled meeting (at: 10:00 tomorrow)
   2. [D][✘] project work (by: Tuesday)
   3. [T][✘] complete survey
+==>   Sorry, No such task found.
+==>   Missing time for the event.
+  Usage: event <content> /at <time>
+==>   Please input the content of the todo.
+  Usage: todo <content>
 ==>   See you next time!
