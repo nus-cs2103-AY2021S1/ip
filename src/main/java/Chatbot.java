@@ -19,7 +19,7 @@ public class Chatbot {
     }
 
     private void printHeader() {
-        System.out.print(String.format("\t|%s|\n", " @ . ".repeat(20)));
+        System.out.printf("\t|%s|\n", " @ . ".repeat(20));
         System.out.print("\n");
     }
 
@@ -48,11 +48,65 @@ public class Chatbot {
         return text;
     }
 
-    private void storeTask(String taskDescription) {
-        storedTasks.add(new Task(taskDescription));
+    private int findIndex(String[] arr, String searchTerm) {
+        for (int i = 0; i < arr.length; ++i) {
+            if (arr[i].equals(searchTerm)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    private String strArrJoin(String[] arr, int startIndex, int endIndex, String delimiter) {
+        StringBuilder builder = new StringBuilder();
+
+        for (int i = startIndex; i < endIndex; ++i) {
+            builder.append(arr[i]);
+
+            // Do not add delimiter in final iteration
+            if (i != endIndex - 1) {
+                builder.append(delimiter);
+            }
+        }
+
+        return builder.toString();
+    }
+
+    private void storeTask(String[] args) {
+        Task newTask = null;
+        String description = "";
+
+        if (args[0].equals("todo")) {
+            description = strArrJoin(args, 1, args.length, " ");
+
+            newTask = new Todo(description);
+        } else if (args[0].equals("deadline")) {
+            String by = "";
+            int index = findIndex(args, "/by");
+
+            if (index != -1) {
+                description = strArrJoin(args, 1, index, " ");
+                by = strArrJoin(args, index + 1, args.length, " ");
+            }
+
+            newTask = new Deadline(description, by);
+        } else if (args[0].equals("event")) {
+            String at = "";
+            int index = findIndex(args, "/at");
+
+            if (index != -1) {
+                description = strArrJoin(args, 1, index, " ");
+                at = strArrJoin(args, index + 1, args.length, " ");
+            }
+
+            newTask = new Event(description, at);
+        }
+
+        storedTasks.add(newTask);
 
         printWithDecorations("sInCe yOu'rE So hElPlEsS, " +
-                "i'lL ReMeMbEr \""+ taskDescription + "\" FoR YoU.");
+                "i'lL ReMeMbEr \""+ newTask.toString() + "\" FoR YoU.");
     }
 
     private void list() {
@@ -60,8 +114,8 @@ public class Chatbot {
 
         printHeader();
         System.out.println(stylise("dO YoU ReAlLy nEeD Me tO NaMe tHeM OuT foR yOu?"));
-        for (Task t : storedTasks) {
-            System.out.println(stylise(String.format("%d. %s", ++i, t.toString())));
+        for (Task task : storedTasks) {
+            System.out.println(stylise(String.format("%d. %s", ++i, task.toString())));
         }
         printFooter();
     }
@@ -69,6 +123,7 @@ public class Chatbot {
     public void done(int index) {
         // Exception checking should be done here
         storedTasks.get(index).markAsDone();
+
         printWithDecorations("fInAlLy, I feLL AsLeEp wHiLe wAiTiNg fOr yOu tO FiNiSh: " +
                 storedTasks.get(index).toString());
     }
@@ -87,7 +142,7 @@ public class Chatbot {
             } else if (args[0].equals("done")) {
                 done(Integer.parseInt(args[1]) - 1);
             } else {
-                storeTask(text);
+                storeTask(args);
             }
         }
     }
