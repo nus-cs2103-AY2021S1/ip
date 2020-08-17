@@ -1,0 +1,13 @@
+list
+todo wake up
+list
+deadline do project /by Thursday
+deadline watch lecture /by Friday
+list
+done 1
+list
+event hangout with friends /at Sun 1-6pm
+event watch drama /at Sun 7-9pm
+done 3
+list
+bye
