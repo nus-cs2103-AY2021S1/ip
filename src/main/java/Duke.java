@@ -8,6 +8,20 @@ public class Duke {
     public static String addedMsg = "Alright, I've added a new order: ";
     public static ArrayList<Task> list = new ArrayList<>();
 
+    private static String getFirstWord(String text) {
+
+        int index = text.indexOf(' ');
+
+        if (index > -1) { // Check if there is more than one word.
+
+            return text.substring(0, index).trim(); // Extract first word.
+
+        } else {
+
+            return text; // Text is the first word itself.
+        }
+    }
+
     public static Task addItem(String input) throws DukeException {
         String arr[] = input.split(" ", 2);
         Task curr = new Task("");
@@ -36,6 +50,39 @@ public class Duke {
         return curr;
     }
 
+    public static Task deleteItem(String input) throws DukeException{
+        String info[] = input.split(" ", 2);
+        Task toBeDeleted = new Task("");
+        if (info.length == 1) {
+            throw new DukeException("Which item???");
+        } else {
+            int index = Integer.parseInt(info[1]);
+            if (index > list.size() || index <= 0) {
+                throw new DukeException("Excuse Moi???");
+            } else {
+                toBeDeleted = list.get(index - 1);
+                list.remove(index - 1);
+                return toBeDeleted;
+            }
+        }
+    }
+
+    public static Task doneItem(String input) throws DukeException {
+        String info[] = input.split(" ", 2);
+        Task toBeRet = new Task("");
+        if (info.length == 1) {
+            throw new DukeException("Which item???");
+        } else {
+            int index = Integer.parseInt(info[1]);
+            if (index > list.size() || index <= 0) {
+                throw new DukeException("Excuse Moi???");
+            } else {
+                list.get(index-1).markAsDone();
+                toBeRet = list.get(index-1);
+            }
+        }
+        return toBeRet;
+    }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -49,7 +96,9 @@ public class Duke {
         nextLine = scanner.nextLine();
 
         while (!nextLine.equals("bye")) {
-            if (nextLine.contains("todo") || nextLine.contains("deadline") || nextLine.contains("event")) {
+            if (getFirstWord(nextLine).equals("todo") ||
+                    getFirstWord(nextLine).equals("deadline") ||
+                    getFirstWord(nextLine).equals("event")) {
                 try {
                     Task curr = addItem(nextLine);
 
@@ -64,19 +113,31 @@ public class Duke {
                     System.out.println(line);
                 }
                 nextLine = scanner.nextLine();
-            } else if (nextLine.contains("done")) { // Case 4: checking off an item
-                String arr[] = nextLine.split(" ", 2);
-                int index = Integer.parseInt(arr[1]);
-
-                if (index > list.size()) {
-                    System.out.println(defaultError);
-                } else {
-                    list.get(index - 1).markAsDone();
+            }
+            else if (getFirstWord(nextLine).equals("done")) { // Case 4: checking off an item
+                try {
+                    Task curr = doneItem(nextLine);
 
                     System.out.println(line);
                     System.out.println("Great choice! I have taken your order: ");
-                    System.out.println(list.get(index - 1));
+                    System.out.println(curr);
                     System.out.println(line);
+                } catch (DukeException ex1){
+                    System.out.println(line);
+                    System.out.println(ex1);
+                    System.out.println(line);
+                }
+                nextLine = scanner.nextLine();
+            } else if (getFirstWord(nextLine).equals("delete")) {
+                try {
+                    Task curr = deleteItem(nextLine);
+
+                    System.out.println(line);
+                    System.out.println("Too bad. I'll remove the following order: ");
+                    System.out.println(curr);
+                    System.out.println(line);
+                }  catch(DukeException ex1) {
+                    System.out.println(ex1);
                 }
                 nextLine = scanner.nextLine();
             } else if (nextLine.equals("list")) { // Case 5: Displaying List
@@ -94,7 +155,6 @@ public class Duke {
                 nextLine = scanner.nextLine();
             }
         }
-
 
         // Ending the bot
         System.out.println(line);
