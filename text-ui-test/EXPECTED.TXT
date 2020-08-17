@@ -4,7 +4,7 @@ What can I do for you today?
 Type "help" to see the available instructions!
 ____________________________________________________________
 How to use Duke:
-* Level 5: Adding Errors. Follow the Task Input Instructions for more
+* Level 6: Allowing Delete. Follow the Task Input Instructions for more
 * Do try to avoid ambiguous inputs, such as [keywords] + [random gibberish] as I cannot recognise them!
 	I'm not very smart (yet) :(
 
@@ -18,6 +18,7 @@ AVAILABLE INSTRUCTIONS:
  bye - Terminate Duke
  list - Display current DukeTasks
  done [Task Number] - Complete the specified task number (Specify in numeric format!) Eg: "done 3"
+ delete [Task Number] - Deletes the task number (Specify in numeric format!) Eg: "delete 3"
 ____________________________________________________________
 Your DukeTasks:
 You have no DukeTasks!
@@ -113,6 +114,12 @@ Alright! I'll mark this task as done!
 ____________________________________________________________
 Alright! I'll mark this task as done!
 [E][✓] CS2100 Lab (at: Monday 2pm-4pm)
+____________________________________________________________
+Your DukeTasks:
+1. [T][✓] homework
+2. [D][✓] CS2103 webcast (by: Saturday)
+3. [E][✓] CS2100 Lab (at: Monday 2pm-4pm)
+You now have 3 tasks done, and 0 tasks not done
 ____________________________________________________________
 Exception: InvalidInstructionException
 	Please key in a valid instruction!

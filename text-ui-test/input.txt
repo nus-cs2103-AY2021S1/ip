@@ -21,6 +21,7 @@ done -1
 done 1000
 done 2
 done 3
+list
 help me
 list all
 done all my homework

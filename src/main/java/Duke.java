@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -9,7 +10,7 @@ public class Duke {
                     + "|  _ \\ _   _| | _____ \n"
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";;
+                    + "|____/ \\__,_|_|\\_\\___|\n";
 
     // INSTRUCTIONS
     private static final String BYE = "bye";
@@ -22,6 +23,7 @@ public class Duke {
     private static final String EVENT = "event";
     private static final String AT_INDICATOR = "/at";
     private static final String UNKNOWN = "unknown";
+    private static final String DELETE = "delete";
 
     // User Interaction Text
     // Standardise by using only LINE here. NEWLINE to be used for functions
@@ -35,7 +37,7 @@ public class Duke {
 
     private static final String INSTRUCTIONS =
             "How to use Duke:\n" + // Guide to Duke
-                    "* Level 5: Adding Errors. Follow the Task Input Instructions for more\n" +
+                    "* Level 6: Allowing Delete. Follow the Task Input Instructions for more\n" +
                     "* Do try to avoid ambiguous inputs, " +
                         "such as [keywords] + [random gibberish] as I cannot recognise them!\n" +
                     "\tI'm not very smart (yet) :(\n\n" +
@@ -47,7 +49,8 @@ public class Duke {
                     " help - Display Available Instructions\n" +
                     " bye - Terminate Duke\n" +
                     " list - Display current DukeTasks\n" +
-                    " done [Task Number] - Complete the specified task number (Specify in numeric format!) Eg: \"done 3\""; // END OF INSTRUCTIONS
+                    " done [Task Number] - Complete the specified task number (Specify in numeric format!) Eg: \"done 3\"\n" +
+                    " delete [Task Number] - Deletes the task number (Specify in numeric format!) Eg: \"delete 3\""; // END OF INSTRUCTIONS
 
     private static final String OUTRO =
             "Goodbye. Hope to see you soon!\n" +
@@ -70,8 +73,7 @@ public class Duke {
 
         // Setup
         Scanner sc = new Scanner(System.in);
-        DukeTask[] inputList = new DukeTask[100];
-        int counter = 0;
+        ArrayList<DukeTask> inputList = new ArrayList<>();
 
         // User Instructions with internal error handling
         // With errors, the instructionLoop should still continue to run hence try-catch statements
@@ -101,13 +103,13 @@ public class Duke {
                     case LIST:
                         if (instrLen == 1) {
                             System.out.println("Your DukeTasks:");
-                            if (counter == 0) {
+                            if (inputList.size() == 0) {
                                 System.out.println("You have no DukeTasks!");
                             } else {
-                                for (int i = 0; i < counter; i++) {
-                                    System.out.println((i + 1) + ". " + inputList[i]);
+                                for (int i = 0; i < inputList.size(); i++) {
+                                    System.out.println((i + 1) + ". " + inputList.get(i));
                                 }
-                                System.out.println(getTaskStatus(inputList, counter));
+                                System.out.println(getTaskStatus(inputList, inputList.size()));
                             }
                         } else {
                             throw new InvalidInstructionException(LIST);
@@ -118,14 +120,14 @@ public class Duke {
                             if (isNumeric(instruction.split(" ")[1])) { // second word in instruction is an integer
                                 int idx = Integer.parseInt(instruction.split(" ")[1]) - 1; // get index in list
 
-                                if (idx < 0 || idx >= counter) { // check if loc is an existing DukeTask inside the array inputList
+                                if (idx < 0 || idx >= inputList.size()) { // check if loc is an existing DukeTask inside the array inputList
                                     throw new InvalidInstructionException(DONE + ": Invalid Task Number");
-                                } else if (inputList[idx].getDoneStatus()) { // check if inputList[loc] is already completed
+                                } else if (inputList.get(idx).getDoneStatus()) { // check if inputList[loc] is already completed
                                     throw new InvalidInstructionException(DONE + ": Task is already done!");
                                 } else {
                                     System.out.println("Alright! I'll mark this task as done!");
-                                    inputList[idx].markAsDone();
-                                    System.out.println(inputList[idx]);
+                                    inputList.get(idx).markAsDone();
+                                    System.out.println(inputList.get(idx));
                                 }
                                 break;
                             }
@@ -136,8 +138,7 @@ public class Duke {
                             throw new MissingFieldException(TODO + ": Description");
                         } else {
                             TodoTask todotask = new TodoTask(mergeArray(instructionArray, 1, instrLen));
-                            inputList[counter] = todotask;
-                            counter++;
+                            inputList.add(todotask);
                             System.out.println("Task Added: " + todotask.toString());
                         }
                         break;
@@ -154,8 +155,7 @@ public class Duke {
                                 throw new MissingFieldException(DEADLINE + ": Date and Time");
                             } else {
                                 DeadlineTask deadlinetask = new DeadlineTask(deadlineDesc, deadlineDatetime);
-                                inputList[counter] = deadlinetask;
-                                counter++;
+                                inputList.add(deadlinetask);
                                 System.out.println("Task Added: " + deadlinetask.toString());
                             }
                         }
@@ -173,8 +173,7 @@ public class Duke {
                                 throw new MissingFieldException(EVENT + ": Date and Time");
                             } else {
                                 EventTask eventTask = new EventTask(eventDesc, eventDatetime);
-                                inputList[counter] = eventTask;
-                                counter++;
+                                inputList.add(eventTask);
                                 System.out.println("Task Added: " + eventTask.toString());
                             }
                         }
@@ -198,7 +197,7 @@ public class Duke {
     // checks if the input string can be parsed into an Integer or not
     private static boolean isNumeric (String instruction) {
         try {
-            int output = Integer.parseInt(instruction);
+            Integer.parseInt(instruction);
         } catch (NumberFormatException nfe) {
             return false;
         }
@@ -223,11 +222,11 @@ public class Duke {
         return -1;
     }
 
-    private static String getTaskStatus(DukeTask[] tasks, int counter) {
+    private static String getTaskStatus(ArrayList<DukeTask> tasks, int counter) {
         int done = 0;
         int notDone = 0;
         for (int i = 0; i < counter; i++) {
-            if (tasks[i].getDoneStatus()) {
+            if (tasks.get(i).getDoneStatus()) {
                 done++;
             } else {
                 notDone++;
