@@ -25,14 +25,14 @@ public class InputHandler {
         String[] input = in.split(" ");
         String cmdWord = input[0];
         switch (cmdWord) {
-            case (LIST_CMD):
-                return handleList();
-            case (DONE_CMD):
-                return handleDone(Integer.parseInt(input[1]));
-            case (EXIT_CMD):
-                return handleExit();
-            default:
-                return handleOthers(in, cmdWord);
+        case (LIST_CMD):
+            return handleList();
+        case (DONE_CMD):
+            return handleDone(Integer.parseInt(input[1]));
+        case (EXIT_CMD):
+            return handleExit();
+        default:
+            return handleOthers(in, cmdWord);
         }
     }
 

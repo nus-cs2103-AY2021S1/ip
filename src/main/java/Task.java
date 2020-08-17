@@ -33,14 +33,14 @@ abstract class Task {
 
     public static Optional<Task> createTask(String type, String details) {
         switch (type) {
-            case (TODO):
-                return Optional.of(Todo.createTodo(details));
-            case(DEADLINE):
-                return Optional.of(Deadline.createDeadline(details));
-            case (EVENT):
-                return Optional.of(Event.createEvent(details));
-            default:
-                return Optional.empty();
+        case (TODO):
+            return Optional.of(Todo.createTodo(details));
+        case(DEADLINE):
+            return Optional.of(Deadline.createDeadline(details));
+        case (EVENT):
+            return Optional.of(Event.createEvent(details));
+        default:
+            return Optional.empty();
         }
     }
 
