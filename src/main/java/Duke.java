@@ -16,20 +16,28 @@ public class Duke {
 
     public void run() {
         Scanner scanner = new Scanner(System.in);
-        List<String> store = new ArrayList<>();
+        List<Task> store = new ArrayList<>();
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         while (true) {
             String input = scanner.nextLine();
-            if (input.equals("bye")) {
+            String[] splitted = input.split(" ");
+            String first = splitted[0];
+            if (first.equals("bye")) {
                 break;
-            } else if (input.equals("list")) {
+            } else if (first.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 int count = 0;
-                for (String text : store) {
+                for (Task task : store) {
                     count++;
-                    System.out.println(String.format("%d. %s", count, text));
+                    System.out.println(String.format("%d. %s", count, task));
                 }
+            } else if (first.equals("done")) {
+                int num = Integer.parseInt(splitted[1]);
+                store.get(num - 1).setDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(store.get(num - 1));
             } else {
-                store.add(input);
+                store.add(new Task(input));
                 System.out.println("added: " + input);
             }
         }
