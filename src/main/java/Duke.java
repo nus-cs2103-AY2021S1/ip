@@ -41,12 +41,32 @@ public class Duke {
                 System.out.println(chosen);
                 System.out.println(lines);
                 input = sc.nextLine();
-            } else {
+            } else if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
+                Task task = null;
+                if (input.contains("todo")) {
+                    task = new Todo(input.substring(5, input.length()));
+                } else if (input.contains("deadline")) {
+                    String desc = input.substring(9, input.indexOf("/") - 1);
+                    String by = input.substring(input.indexOf("/") + 4, input.length());
+                    task = new Deadline(desc, by);
+                } else if (input.contains("event")) {
+                    String desc = input.substring(6, input.indexOf("/") - 1);
+                    String at = input.substring(input.indexOf("/") + 4, input.length());
+                    task = new Event(desc, at);
+                }
+
                 System.out.println(lines);
-                list.add(new Task(input));
-                String outputLine = "added: " + input;
-                System.out.println(outputLine);
+                System.out.println(" Got it. I've added this task: ");
+
+                list.add(task);
+                System.out.println("  " + task);
+                int listCount = list.size();
+                System.out.println(" Now you have " + Integer.toString(listCount) + " tasks in the list.");
+                System.out.println(lines);
                 input = sc.nextLine();
+
+            } else {
+
             }
         }
 
