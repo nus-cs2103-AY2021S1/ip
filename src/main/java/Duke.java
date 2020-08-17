@@ -25,11 +25,11 @@ public class Duke {
         } else {
             try {
                 int taskNumber = Integer.parseInt(command.split(" ", 2)[1]);
-                Task task = taskList.get(taskNumber - 1);
-                task.markAsDone();
-                taskList.set(taskNumber - 1, task);
-                System.out.println("Nice! I've marked this task as done:\n" + "  " + task.toString());
-            } catch (IndexOutOfBoundsException indexException) {
+                Task completedTask = taskList.get(taskNumber - 1);
+                completedTask.markAsDone();
+                taskList.set(taskNumber - 1, completedTask);
+                System.out.println("Nice! I've marked this task as done:\n" + "  " + completedTask.toString());
+            } catch (IndexOutOfBoundsException | NumberFormatException indexException) {
                 throw new DukeException("OOPS!!! Please enter a valid task number.");
             }
         }
@@ -43,7 +43,7 @@ public class Duke {
         // If there is no taskBody available
         if (command.split(" ", 2).length == 1
                 || command.split(" ", 2)[1].equals("")) {
-            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a task cannot be empty.");
         } else {
             taskBody = command.split(" ", 2)[1];
         }
@@ -74,6 +74,22 @@ public class Duke {
         System.out.println("Got it. I've added this task:\n"
                 + "  " + task.toString() + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list");
+    }
+
+    public static void deleteTaskFromList(List<Task> taskList, String command) throws DukeException {
+        // If task number is not given
+        if (command == "delete" || command == "delete ") {
+            throw new DukeException("OOPS!!! Please indicate the number of the task you want to delete.");
+        } else {
+            try {
+                int taskNumber = Integer.parseInt(command.split(" ", 2)[1]);
+                Task removedTask = taskList.remove(taskNumber - 1);
+                System.out.println("Noted. I've removed this task:\n" + "  " + removedTask.toString() + "\n"
+                        + "Now you have " + taskList.size() + " tasks in the list.");
+            } catch (IndexOutOfBoundsException | NumberFormatException exception) {
+                throw new DukeException("OOPS!!! Please enter a valid task number.");
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -108,6 +124,10 @@ public class Duke {
                         || firstWordOfCommand.equals("deadline")
                         || firstWordOfCommand.equals("event")) {
                     addTaskToList(taskList, command);
+
+                // Delete task from task list
+                } else if (firstWordOfCommand.equals("delete")) {
+                    deleteTaskFromList(taskList, command);
 
                 // Unrecognizable commands
                 } else {
