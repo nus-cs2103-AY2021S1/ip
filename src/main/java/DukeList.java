@@ -50,7 +50,7 @@ public class DukeList {
                     newTask = new Todo(formattedItemString);
                     break;
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new DukeNoDescriptionException(String.format("OOPS!!! The description of a %s cannot be empty.", keyword));
+                    throw new DukeNoDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", keyword));
                 }
 
             case ("deadline"):
@@ -59,7 +59,7 @@ public class DukeList {
                     newTask = new Deadline(formattedItemString);
                     break;
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new DukeNoDescriptionException(String.format("OOPS!!! The description of a %s cannot be empty.", keyword));
+                    throw new DukeNoDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", keyword));
                 }
 
             case ("event"):
@@ -68,7 +68,7 @@ public class DukeList {
                     newTask = new Event(formattedItemString);
                     break;
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new DukeNoDescriptionException(String.format("OOPS!!! The description of a %s cannot be empty.", keyword));
+                    throw new DukeNoDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", keyword));
                 }
 
             default:

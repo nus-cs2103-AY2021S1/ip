@@ -62,6 +62,13 @@ public class Duke {
     }
 
 
+    private String markAsDone(String[] msgArr) throws IndexOutOfBoundsException {
+        int index = Integer.parseInt(msgArr[1]);
+        String statusMsg = this.list.markAsDone(index);
+        return statusMsg;
+    }
+
+
     /**
      * Logic framework of Duke.
      *
@@ -84,10 +91,17 @@ public class Duke {
                         break;
 
                     case ("done"):
-                        int index = Integer.parseInt(msgArr[1]);
-                        String statusMsg = this.list.markAsDone(index);
-                        Duke.printMessage(statusMsg);
-                        break;
+                        try {
+                            String statusMsg = this.markAsDone(msgArr);
+                            Duke.printMessage(statusMsg);
+                            break;
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            Duke.printMessage("OOPS!!! The index of `done` cannot be empty.");
+                            break;
+                        } catch (IndexOutOfBoundsException e) {
+                            Duke.printMessage("OOPS!!! The index given is invalid.");
+                            break;
+                        }
 
                     default:
                         try {
@@ -96,6 +110,7 @@ public class Duke {
                             break;
                         } catch (DukeException e) {
                             Duke.printMessage(e.getMessage());
+                            break;
                         }
                 }
             }
