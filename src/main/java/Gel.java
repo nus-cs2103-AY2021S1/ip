@@ -10,31 +10,38 @@ public class Gel {
 
         System.out.println("    Hello! I'm Gel\n    What can I do for you?\n");
 
+        label:
         while (sc.hasNextLine()) {
-            String line = sc.nextLine();
-            if (line.equals("bye")) {
-                System.out.println("\n    Bye. Hope to see you again soon!\n");
-                break;
-            } else if (line.equals("list")){
-                System.out.println("\n    Here are the task(s) in your list:");
-                for (int i = 1; i <= listOfText.size(); i++) {
-                    Task task = listOfText.get(i - 1);
-                    System.out.println("    "+ i + "." + task.getStatusIcon()
-                            + " " + task.getDescription());
-                }
-                System.out.println();
-            } else if (line.length() > 4 && line.substring(0, 4).equals("done")) {
-                int index = Integer.parseInt(line.substring(5)) - 1;
-                Task taskToBeDone = listOfText.remove(index);
-                taskToBeDone.markAsDone();
-                listOfText.add(index, taskToBeDone);
-                System.out.println("    Nice! I've marked this task as done:");
-                System.out.println("      " + taskToBeDone.getStatusIcon() + " "
-                        + taskToBeDone.getDescription());
-                System.out.println();
-            } else {
-                listOfText.add(new Task(line));
-                System.out.println("\n    added: " + line + "\n");
+            String input = sc.nextLine();
+            String[] inputArr = input.split(" ");
+            String keyword = inputArr[0];
+            switch (keyword) {
+                case "bye":  //bye
+                    System.out.println("\n    Bye. Hope to see you again soon!\n");
+                    break label;
+                case "list":  //list
+                    System.out.println("\n    Here are the task(s) in your list:");
+                    for (int i = 1; i <= listOfText.size(); i++) {
+                        Task task = listOfText.get(i - 1);
+                        System.out.println("    " + i + "." + task.getStatusIcon()
+                                + " " + task.getDescription());
+                    }
+                    System.out.println();
+                    break;
+                case "done":  //done
+                    int index = Integer.parseInt(input.substring(5)) - 1;
+                    Task taskToBeDone = listOfText.remove(index);
+                    taskToBeDone.markAsDone();
+                    listOfText.add(index, taskToBeDone);
+                    System.out.println("\n    Nice! I've marked this task as done:");
+                    System.out.println("      " + taskToBeDone.getStatusIcon() + " "
+                            + taskToBeDone.getDescription());
+                    System.out.println();
+                    break;
+                default:
+                    listOfText.add(new Task(input));
+                    System.out.println("\n    added: " + input + "\n");
+                    break;
             }
         }
     }
