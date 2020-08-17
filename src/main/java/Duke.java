@@ -1,6 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    private static List<String> items = new ArrayList<>();
+
     public static void printGreeting() {
         String LOGO = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -8,7 +12,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        Duke.printPrompt(LOGO
+        printPrompt(LOGO
                 + "Hello! I'm Duke\n"
                 + "What can I do for you?\n"
         );
@@ -30,21 +34,41 @@ public class Duke {
     }
 
     public static void printPrompt(String promptText) {
-        System.out.println(Duke.createPrompt(promptText));
+        System.out.println(createPrompt(promptText));
+    }
+
+    public static void addItem(String item) {
+        items.add(item);
+        printPrompt("added: " + item);
+    }
+
+    public static void listItems() {
+        StringBuilder output = new StringBuilder();
+
+        for (String item : items) {
+            output.append(items.indexOf(item) + 1).append(". ").append(item).append('\n');
+        }
+
+        printPrompt(output.toString());
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        Duke.printGreeting();
+        printGreeting();
 
         String command = scanner.nextLine();
 
         while (!command.equals("bye")) {
-            Duke.printPrompt(command);
+            if (command.equals("list")) {
+                listItems();
+            } else {
+                addItem(command);
+            }
+
             command = scanner.nextLine();
         }
 
-        Duke.printPrompt("Bye. Hope to see you again soon!");
+        printPrompt("Bye. Hope to see you again soon!");
     }
 }
