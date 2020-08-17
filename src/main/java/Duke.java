@@ -30,17 +30,23 @@ public class Duke {
         System.out.println("Hello from doge\n" + doge);
         System.out.println("What can this good boi do for you?");
         System.out.println("--------------------------------------");
-        LevelOne levelOne = new LevelOne();
+
+        TaskManager taskManager = new TaskManager();
         Scanner sc = new Scanner(System.in);
-        while(sc.hasNext()) {
-            String next = sc.next();
+
+        while(sc.hasNextLine()) {
+            String next = sc.nextLine();
 
             if(next.equals("bye") ) {
                 break;
             }
+            else if(next.equals("list")) {
+                taskManager.displayList();
+            }
             else {
                 System.out.println("--------------------------------------");
-                levelOne.echoPrint(next);
+                taskManager.addToList(next);
+                taskManager.taskPrint(next);
                 System.out.println("--------------------------------------");
             }
         }
