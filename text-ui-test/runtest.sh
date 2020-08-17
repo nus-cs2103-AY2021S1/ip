@@ -20,6 +20,8 @@ then
     exit 1
 fi
 
+export LC_ALL=en_GB.UTF-8
+
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
 java -classpath ../bin Duke < input.txt > ACTUAL.TXT
 

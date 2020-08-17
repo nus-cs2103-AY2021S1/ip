@@ -1,6 +1,6 @@
 Hello from
- ____        _
-|  _ \ _   _| | _____
+ ____        _        
+|  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
@@ -10,17 +10,17 @@ Hello from
 	 What can I do for you?
 	__________________________________________________
 	__________________________________________________
-	 Got it. I've added this task:
+	 Got it. I've added this task: 
 		[T][✘] read book
 	 Now you have 1 tasks in this list.
 	__________________________________________________
 	__________________________________________________
-	 Got it. I've added this task:
+	 Got it. I've added this task: 
 		[D][✘] return book  (by:  6 sep)
 	 Now you have 2 tasks in this list.
 	__________________________________________________
 	__________________________________________________
-	 Got it. I've added this task:
+	 Got it. I've added this task: 
 		[E][✘] meeting  (at:  mon 2-4 pm)
 	 Now you have 3 tasks in this list.
 	__________________________________________________
