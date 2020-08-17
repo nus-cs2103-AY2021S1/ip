@@ -21,6 +21,7 @@ public class Duke {
     private static final String BY_INDICATOR = "/by";
     private static final String EVENT = "event";
     private static final String AT_INDICATOR = "/at";
+    private static final String UNKNOWN = "unknown";
 
     // User Interaction Text
     // Standardise by using only LINE here. NEWLINE to be used for functions
@@ -34,10 +35,10 @@ public class Duke {
 
     private static final String INSTRUCTIONS =
             "How to use Duke:\n" + // Guide to Duke
-                    "* Level 4: Specific Tasks. Follow the Task Input Instructions for more\n" +
+                    "* Level 5: Adding Errors. Follow the Task Input Instructions for more\n" +
                     "* Do try to avoid ambiguous inputs, " +
                         "such as [keywords] + [random gibberish] as I cannot recognise them!\n" +
-                    "\tI'm not very smart (yet) :( \n\n" +
+                    "\tI'm not very smart (yet) :(\n\n" +
                     "TASK INPUT INSTRUCTIONS:\n" + // Task Input Instructions
                     " todo [Task Description] - Inputs a TODO DukeTask\n" +
                     " deadline [Task Description] /by [Date] - Inputs a DEADLINE DukeTask, along with INDICATOR /by\n" +
@@ -57,122 +58,139 @@ public class Duke {
         // Initialisation of Duke
         System.out.println(INTRODUCTION);
 
+        // Execute Duke
+        invokeDuke();
+
+        // OUTRO
+        System.out.println(OUTRO);
+    }
+
+    // HEAVY LIFTING LOGIC FOR DUKE BOT
+    private static void invokeDuke() {
+
+        // Setup
         Scanner sc = new Scanner(System.in);
         DukeTask[] inputList = new DukeTask[100];
         int counter = 0;
 
-        // User Instructions
+        // User Instructions with internal error handling
+        // With errors, the instructionLoop should still continue to run hence try-catch statements
+        // are to be handled the loop
         instructionLoop: while (sc.hasNextLine()) { // labelling of while-loop
+
+            // Instruction Setup
             String instruction = sc.nextLine().trim();
             String[] instructionArray = instruction.split(" ");
             int instrLen = instructionArray.length;
             String indicator = instruction.split(" ")[0]; // indicates if instruction or not
 
-            switch (indicator) {
-                case BYE:
-                    if (instrLen == 1) {
-                        break instructionLoop;
-                    } else {
-                        System.out.println("Please key in a valid instruction! (bye)");
-                    }
-                    break;
-                case HELP:
-                    if (instrLen == 1) {
-                        System.out.println(INSTRUCTIONS);
-                    } else {
-                        System.out.println("Please key in a valid instruction! (help)");
-                    }
-                    break;
-                case LIST:
-                    if (instrLen == 1) {
-                        System.out.println("Your DukeTasks:");
-                        if (counter == 0) {
-                            System.out.println("You have no DukeTasks!");
+            try {
+                switch (indicator) {
+                    case BYE:
+                        if (instrLen == 1) {
+                            break instructionLoop;
                         } else {
-                            for (int i = 0; i < counter; i++) {
-                                System.out.println((i + 1) + ". " + inputList[i]);
-                            }
-                            System.out.println(getTaskStatus(inputList, counter));
+                            throw new InvalidInstructionException(BYE);
                         }
-                    } else {
-                        System.out.println("Please key in a valid instruction! (list)");
-                    }
-                    break;
-                case DONE:
-                    if (instrLen == 2) {
-                        if (isNumeric(instruction.split(" ")[1])) { // second word in instruction is an integer
-                            int idx = Integer.parseInt(instruction.split(" ")[1]) - 1; // get index in list
-
-                            if (idx < 0 || idx >= counter) { // check if loc is an existing DukeTask inside the array inputList
-                                System.out.println("Invalid Task Number!");
-                            } else if (inputList[idx].getDoneStatus()) { // check if inputList[loc] is already completed
-                                System.out.println("Task is already done!");
+                    case HELP:
+                        if (instrLen == 1) {
+                            System.out.println(INSTRUCTIONS);
+                        } else {
+                            throw new InvalidInstructionException(HELP);                        }
+                        break;
+                    case LIST:
+                        if (instrLen == 1) {
+                            System.out.println("Your DukeTasks:");
+                            if (counter == 0) {
+                                System.out.println("You have no DukeTasks!");
                             } else {
-                                System.out.println("Alright! I'll mark this task as done!");
-                                inputList[idx].markAsDone();
-                                System.out.println(inputList[idx]);
+                                for (int i = 0; i < counter; i++) {
+                                    System.out.println((i + 1) + ". " + inputList[i]);
+                                }
+                                System.out.println(getTaskStatus(inputList, counter));
                             }
-                            break;
-                        }
-                    } // if len != 2 or the input is not an integer
-                    System.out.println("Please key in a valid instruction! (done)");
-                    break;
-                case TODO:
-                    if (instrLen == 1) {
-                        System.out.println("Please enter description!");
-                    } else {
-                        TodoTask todotask = new TodoTask(mergeArray(instructionArray, 1, instrLen));
-                        inputList[counter] = todotask;
-                        counter++;
-                        System.out.println("Task Added: " + todotask.toString());
-                    }
-                    break;
-                case DEADLINE:
-                    int byIndex = findIndex(instructionArray, BY_INDICATOR);
-                    if (byIndex == -1) {
-                        System.out.println("Please use correct format for deadline tasks! [/by]");
-                    } else {
-                        String deadlineDesc = mergeArray(instructionArray, 1, byIndex);
-                        String deadlineDatetime = mergeArray(instructionArray, byIndex + 1, instrLen);
-                        if (deadlineDesc.equals("")) {
-                            System.out.println("Please enter description");
-                        } else if (deadlineDatetime.equals("")) {
-                            System.out.println("Please enter date and time");
                         } else {
-                            DeadlineTask deadlinetask = new DeadlineTask(deadlineDesc, deadlineDatetime);
-                            inputList[counter] = deadlinetask;
-                            counter++;
-                            System.out.println("Task Added: " + deadlinetask.toString());
+                            throw new InvalidInstructionException(LIST);
                         }
-                    }
-                    break;
-                case EVENT:
-                    int atIndex = findIndex(instructionArray, AT_INDICATOR);
-                    if (atIndex == -1) {
-                        System.out.println("Please use correct format for deadline tasks! [/at]");
-                    } else {
-                        String eventDesc = mergeArray(instructionArray, 1, atIndex);
-                        String eventDatetime = mergeArray(instructionArray, atIndex + 1, instrLen);
-                        if (eventDesc.equals("")) {
-                            System.out.println("Please enter description");
-                        } else if (eventDatetime.equals("")) {
-                            System.out.println("Please enter date and time");
+                        break;
+                    case DONE:
+                        if (instrLen == 2) {
+                            if (isNumeric(instruction.split(" ")[1])) { // second word in instruction is an integer
+                                int idx = Integer.parseInt(instruction.split(" ")[1]) - 1; // get index in list
+
+                                if (idx < 0 || idx >= counter) { // check if loc is an existing DukeTask inside the array inputList
+                                    throw new InvalidInstructionException(DONE + ": Invalid Task Number");
+                                } else if (inputList[idx].getDoneStatus()) { // check if inputList[loc] is already completed
+                                    throw new InvalidInstructionException(DONE + ": Task is already done!");
+                                } else {
+                                    System.out.println("Alright! I'll mark this task as done!");
+                                    inputList[idx].markAsDone();
+                                    System.out.println(inputList[idx]);
+                                }
+                                break;
+                            }
+                        } // if len != 2 or the input is not an integer
+                        throw new InvalidInstructionException(DONE);
+                    case TODO:
+                        if (instrLen == 1) {
+                            throw new MissingFieldException(TODO + ": Description");
                         } else {
-                            EventTask eventTask = new EventTask(eventDesc, eventDatetime);
-                            inputList[counter] = eventTask;
+                            TodoTask todotask = new TodoTask(mergeArray(instructionArray, 1, instrLen));
+                            inputList[counter] = todotask;
                             counter++;
-                            System.out.println("Task Added: " + eventTask.toString());
+                            System.out.println("Task Added: " + todotask.toString());
                         }
-                    }
-                    break;
-                default:
-                    System.out.println("Please key in a valid instruction! (unknown)");
+                        break;
+                    case DEADLINE:
+                        int byIndex = findIndex(instructionArray, BY_INDICATOR);
+                        if (byIndex == -1) {
+                            throw new InvalidFormatException(DEADLINE);
+                        } else {
+                            String deadlineDesc = mergeArray(instructionArray, 1, byIndex);
+                            String deadlineDatetime = mergeArray(instructionArray, byIndex + 1, instrLen);
+                            if (deadlineDesc.equals("")) {
+                                throw new MissingFieldException(DEADLINE + ": Description");
+                            } else if (deadlineDatetime.equals("")) {
+                                throw new MissingFieldException(DEADLINE + ": Date and Time");
+                            } else {
+                                DeadlineTask deadlinetask = new DeadlineTask(deadlineDesc, deadlineDatetime);
+                                inputList[counter] = deadlinetask;
+                                counter++;
+                                System.out.println("Task Added: " + deadlinetask.toString());
+                            }
+                        }
+                        break;
+                    case EVENT:
+                        int atIndex = findIndex(instructionArray, AT_INDICATOR);
+                        if (atIndex == -1) {
+                            throw new InvalidFormatException(EVENT);
+                        } else {
+                            String eventDesc = mergeArray(instructionArray, 1, atIndex);
+                            String eventDatetime = mergeArray(instructionArray, atIndex + 1, instrLen);
+                            if (eventDesc.equals("")) {
+                                throw new MissingFieldException(EVENT + ": Description");
+                            } else if (eventDatetime.equals("")) {
+                                throw new MissingFieldException(EVENT + ": Date and Time");
+                            } else {
+                                EventTask eventTask = new EventTask(eventDesc, eventDatetime);
+                                inputList[counter] = eventTask;
+                                counter++;
+                                System.out.println("Task Added: " + eventTask.toString());
+                            }
+                        }
+                        break;
+                    default:
+                        throw new InvalidInstructionException(UNKNOWN);
+                }
+            } catch (InvalidInstructionException | InvalidFormatException | MissingFieldException exception) {
+                System.out.println(exception);
             }
+
             System.out.println(LINE);
         }
 
-        // OUTRO
-        System.out.println(OUTRO);
+        // Cleaning up before terminating invokeDuke()
+        sc.close();
     }
 
     // EXTRA FUNCTIONS FOR ASSISTANCE

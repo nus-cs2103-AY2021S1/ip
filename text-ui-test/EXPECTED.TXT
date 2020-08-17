@@ -4,9 +4,9 @@ What can I do for you today?
 Type "help" to see the available instructions!
 ____________________________________________________________
 How to use Duke:
-* Level 4: Specific Tasks. Follow the Task Input Instructions for more
+* Level 5: Adding Errors. Follow the Task Input Instructions for more
 * Do try to avoid ambiguous inputs, such as [keywords] + [random gibberish] as I cannot recognise them!
-	I'm not very smart (yet) :( 
+	I'm not very smart (yet) :(
 
 TASK INPUT INSTRUCTIONS:
  todo [Task Description] - Inputs a TODO DukeTask
@@ -24,7 +24,10 @@ You have no DukeTasks!
 ____________________________________________________________
 Task Added: [T][✘] homework
 ____________________________________________________________
-Please enter description!
+Exception: MissingFieldException
+	Please key in the missing fields
+	Fields Missing - todo: Description
+	See "help" for more
 ____________________________________________________________
 Your DukeTasks:
 1. [T][✘] homework
@@ -32,9 +35,15 @@ You now have 0 tasks done, and 1 task not done
 ____________________________________________________________
 Task Added: [D][✘] CS2103 webcast (by: Saturday)
 ____________________________________________________________
-Please enter description
+Exception: MissingFieldException
+	Please key in the missing fields
+	Fields Missing - deadline: Description
+	See "help" for more
 ____________________________________________________________
-Please enter date and time
+Exception: MissingFieldException
+	Please key in the missing fields
+	Fields Missing - deadline: Date and Time
+	See "help" for more
 ____________________________________________________________
 Your DukeTasks:
 1. [T][✘] homework
@@ -43,9 +52,15 @@ You now have 0 tasks done, and 2 tasks not done
 ____________________________________________________________
 Task Added: [E][✘] CS2100 Lab (at: Monday 2pm-4pm)
 ____________________________________________________________
-Please enter date and time
+Exception: MissingFieldException
+	Please key in the missing fields
+	Fields Missing - event: Date and Time
+	See "help" for more
 ____________________________________________________________
-Please enter description
+Exception: MissingFieldException
+	Please key in the missing fields
+	Fields Missing - event: Description
+	See "help" for more
 ____________________________________________________________
 Your DukeTasks:
 1. [T][✘] homework
@@ -53,9 +68,15 @@ Your DukeTasks:
 3. [E][✘] CS2100 Lab (at: Monday 2pm-4pm)
 You now have 0 tasks done, and 3 tasks not done
 ____________________________________________________________
-Please use correct format for deadline tasks! [/by]
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline
+	See "help" for more
 ____________________________________________________________
-Please use correct format for deadline tasks! [/at]
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event
+	See "help" for more
 ____________________________________________________________
 Your DukeTasks:
 1. [T][✘] homework
@@ -66,7 +87,10 @@ ____________________________________________________________
 Alright! I'll mark this task as done!
 [T][✓] homework
 ____________________________________________________________
-Task is already done!
+Exception: InvalidInstructionException
+	Please key in a valid instruction!
+	Source - done: Task is already done!
+	See "help" for more
 ____________________________________________________________
 Your DukeTasks:
 1. [T][✓] homework
@@ -74,9 +98,15 @@ Your DukeTasks:
 3. [E][✘] CS2100 Lab (at: Monday 2pm-4pm)
 You now have 1 task done, and 2 tasks not done
 ____________________________________________________________
-Invalid Task Number!
+Exception: InvalidInstructionException
+	Please key in a valid instruction!
+	Source - done: Invalid Task Number
+	See "help" for more
 ____________________________________________________________
-Invalid Task Number!
+Exception: InvalidInstructionException
+	Please key in a valid instruction!
+	Source - done: Invalid Task Number
+	See "help" for more
 ____________________________________________________________
 Alright! I'll mark this task as done!
 [D][✓] CS2103 webcast (by: Saturday)
@@ -84,13 +114,25 @@ ____________________________________________________________
 Alright! I'll mark this task as done!
 [E][✓] CS2100 Lab (at: Monday 2pm-4pm)
 ____________________________________________________________
-Please key in a valid instruction! (help)
+Exception: InvalidInstructionException
+	Please key in a valid instruction!
+	Source - help
+	See "help" for more
 ____________________________________________________________
-Please key in a valid instruction! (list)
+Exception: InvalidInstructionException
+	Please key in a valid instruction!
+	Source - list
+	See "help" for more
 ____________________________________________________________
-Please key in a valid instruction! (done)
+Exception: InvalidInstructionException
+	Please key in a valid instruction!
+	Source - done
+	See "help" for more
 ____________________________________________________________
-Please key in a valid instruction! (bye)
+Exception: InvalidInstructionException
+	Please key in a valid instruction!
+	Source - bye
+	See "help" for more
 ____________________________________________________________
 Goodbye. Hope to see you soon!
  ____        _        
