@@ -1,0 +1,6 @@
+event Scheduled meeting /at 10:00 tomorrow
+deadline project work /by Tuesday
+todo complete survey
+done 1
+list
+bye

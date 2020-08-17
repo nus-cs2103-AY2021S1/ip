@@ -107,6 +107,7 @@ public class Tickbot {
                 timeMarker == null ? null : time.get());
             tasks.add(task);
             printMessage(taskName + " added: " + task);
+            printMessage("You have " + tasks.size() + " task(s) in task list.");
         } catch (IndexOutOfBoundsException err) {
             printMessage("Please input valid time after " + timeMarker + ".");
             printMessage(String.format("Usage: %s <content> %s <time>",
