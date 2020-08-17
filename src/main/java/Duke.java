@@ -4,9 +4,11 @@ public class Duke {
     private String line = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     private String outputFormat = "  %s\n";
     private boolean ongoing;
+    private ArrayList<String> todoList;
 
     Duke() {
         ongoing = false;
+        todoList = new ArrayList<>();
     }
 
     public void run() {
@@ -29,13 +31,25 @@ public class Duke {
         if (input.equals("bye")) {
             ongoing = false;
             goodBye();
+        } else if (input.equals("list")) {
+            showList();
         } else {
-            echo(input);
+            addItem(input);
         }
     }
 
-    public void echo(String input) {
-        System.out.printf(outputFormat, input);
+    public void showList() {
+        int count = 1;
+        System.out.printf(outputFormat, "The tasks in your Todo List: ");
+        for (String item : todoList) {
+            System.out.printf(outputFormat, Integer.toString(count) + ". " + item);
+            count += 1;
+        }
+    }
+
+    public void addItem(String input) {
+        todoList.add(input);
+        System.out.printf(outputFormat, "New todo item added: " + input);
     }
 
     public void greeting() {
