@@ -1,7 +1,7 @@
-public class Task {
+abstract class Task {
 
-    private final String name;
-    private final boolean isDone;
+    protected final String name;
+    protected final boolean isDone;
 
     public Task (String name , boolean isDone){
         this.name = name;
@@ -16,7 +16,14 @@ public class Task {
         return this.isDone;
     }
 
-    public Task setDone(){
-        return new Task(this.name, true);
+    public abstract Task setToTrue();
+
+    @Override
+    public String toString(){
+        if (isDone) {
+            return "[✓] " + this.getName();
+        } else {
+            return "[✗] " + this.getName();
+        }
     }
 }
