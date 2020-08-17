@@ -1,51 +1,83 @@
+import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
+import java.util.List;
 
 public class Chatbot {
     private BufferedReader textParser;
+    private List<String> storedText;
 
     Chatbot(InputStream in) {
         textParser = new BufferedReader(new InputStreamReader(in));
+        storedText = new ArrayList<String>();
     }
 
     private String stylise(String textToStyle) {
-        String styledText = String.format("\t!%s!\n", " @ . ".repeat(20));
-        styledText += String.format("\t %s \n", textToStyle);
-        styledText += String.format("\t!%s!\n", " @ . ".repeat(20));
+        return String.format("\t %s", textToStyle);
+    }
 
-        return styledText;
+    private void printHeader() {
+        System.out.print(String.format("\t|%s|\n", " @ . ".repeat(20)));
+        System.out.print("\n");
+    }
+
+    private void printFooter() {
+        System.out.print("\n");
+        System.out.print(String.format("\t|%s|\n", " @ . ".repeat(20)));
+        System.out.print("\n");
     }
 
     private void greet() {
-        System.out.print(stylise("yOu HavE nO cOnTrOL ovEr ME!"));
+        printHeader();
+        System.out.println(stylise("yOu HavE nO cOnTrOL ovEr ME!"));
+        printFooter();
     }
 
-    private String parseCommand() {
-        String command = "";
+    private String parseText() {
+        String text = "";
 
         try {
-            command = textParser.readLine();
+            text = textParser.readLine();
         } catch(IOException e) {
             System.err.println("ERROR: Unable to parse input stream!\n");
             e.printStackTrace();
             System.exit(1);
         }
 
-        return command;
+        return text;
+    }
+
+    private void storeText(String textToStore) {
+        storedText.add(textToStore);
+
+        printHeader();
+        System.out.println(stylise(
+                "sInCe yOu'rE So hElPlEsS, i'lL ReMeMbEr \""+ textToStore + "\" FoR YoU."));
+        printFooter();
+    }
+
+    private void printStoredText() {
+        printHeader();
+        for (String s : storedText) {
+            System.out.println(stylise(s));
+        }
+        printFooter();
     }
 
     public void start() {
-        String command = "";
+        String text = "";
 
         greet();
-        for (command = parseCommand(); ; command = parseCommand()) {
-            if (command.equals("bye")) {
+        for (text = parseText(); ; text = parseText()) {
+            if (text.equals("bye")) {
                 break;
+            } else if (text.equals("list")) {
+                printStoredText();
+            } else {
+                storeText(text);
             }
-
-            System.out.println(stylise(command));
         }
     }
 }
