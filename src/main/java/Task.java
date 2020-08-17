@@ -15,6 +15,10 @@ public class Task {
         return (done ? "\u2713" : "\u2718");
     }
 
+    public String getType() {
+        return this.type.toString();
+    }
+
     @Override
     public String toString() {
         return this.taskName;
