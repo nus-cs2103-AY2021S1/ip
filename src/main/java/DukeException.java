@@ -8,6 +8,8 @@ public class DukeException extends Exception {
         DEADLINE_BAD_FORMAT("very sorry sir, i cannot understand your input\n"
                 + "the format for new deadline is \"deadline DESCRIPTION /by DATE\" sir"),
         DONE_OUT_OF_RANGE("sir that number is too many for the list sir please\n"
+                + "choose a lower number for the list please sir"),
+        DELETE_OUT_OF_RANGE("sir that number is too many for the list sir please\n"
                 + "choose a lower number for the list please sir");
 
         private final String message;

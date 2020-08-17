@@ -27,6 +27,10 @@ public class Duke {
         selected.markAsDone();
         systemMessage("afternoon sir i have mark this task done sir:\n  " + selected);
     }
+    private void deleteItem(int idx) {
+        Task selected = this.items.remove(idx);
+        systemMessage("sir this task has been remove sir:\n  " + selected);
+    }
     private void parseAndRun(String input) throws DukeException {
         if (input.equals("list")) {
             this.printList();
@@ -35,6 +39,11 @@ public class Duke {
             if(itemIndex > this.items.size())
                 throw new DukeException(DukeException.Errors.DONE_OUT_OF_RANGE);
             this.markItem(itemIndex - 1);
+        } else if (input.matches("^delete \\d+")) {
+            int itemIndex = Integer.parseInt(input.substring(7));
+            if(itemIndex > this.items.size())
+                throw new DukeException(DukeException.Errors.DELETE_OUT_OF_RANGE);
+            this.deleteItem(itemIndex - 1);
         } else if (input.matches("^todo.*")) {
             String description = input.substring(4).trim();
             if(description.equals(""))
