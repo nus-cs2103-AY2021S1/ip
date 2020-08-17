@@ -49,8 +49,8 @@ public class Duke {
     }
 
     public static void replyDone(String input, Task[] list, int end) {
-        String doneMessage = "Nicee!! You've completed this task! \n";
-        String error = "Sorry! You don't have a task with that number! ><\n" +
+        String doneMessage = "Nicee!! You've completed this task!\n";
+        String error = "Oh no! You don't have a task with that number! ><\n" +
                 "Can you try a different number?";
         int i = input.charAt(5) - 48;
 
@@ -81,7 +81,7 @@ public class Duke {
     }
 
     public static void replyTask(Task task) {
-        String addedMessage = "Oki! I have added this task: \n" +
+        String addedMessage = "Oki! I have added this task:\n" +
                 task + "\n" + "Now you have " + Task.totalTasks +
                 " tasks in your list!";
         printReply(addedMessage);
@@ -94,12 +94,12 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("hElLoOOoOOoO! Welcome to \n" + logo);
+        System.out.println("hElLoOOoOOoO! Welcome to\n" + logo);
         System.out.println("How can I help you today? : D");
 
         handleInput();
