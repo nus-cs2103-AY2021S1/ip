@@ -1,7 +1,12 @@
 import task.Task;
+import task.Todo;
+import task.Event;
+import task.Deadline;
 import task.TaskManager;
 import utils.Formatter;
+
 import java.util.Scanner;
+import java.util.Arrays;
 
 /**
  * A command line interface application that reads user inputs, executes the input and prints out the
@@ -26,20 +31,36 @@ public class CommandLineInterface {
         formatter.print(welcomeMessage);
         while (scanner.hasNext()) {
             String userInput = scanner.nextLine();
-            String[] words = userInput.split(" ");
-            if(words[0].equals("done")){
+            String[] words = userInput.toLowerCase().split(" ");
+            if (words[0].equals("done")) {
                 int taskIndex = Integer.parseInt(words[1]);
                 formatter.print(taskManager.markTaskAsDone(taskIndex));
+            } else if (words[0].equals("todo")) {
+                String content = userInput.replaceFirst("todo ", " ");
+                Todo newTodoTask = new Todo(content);
+                formatter.print(taskManager.addTask(newTodoTask));
+            } else if (words[0].equals("deadline")) {
+                userInput = userInput.replaceFirst("deadline ", " ");
+                String[] userInputArgs = userInput.split("\\s*/by\\s*");
+                String content = userInputArgs[0];
+                String dateTime = userInputArgs[1];
+                Deadline newDeadlineTask = new Deadline(content, dateTime);
+                formatter.print(taskManager.addTask(newDeadlineTask));
+            } else if (words[0].equals("event")) {
+                userInput = userInput.replaceFirst("event ", " ");
+                String[] userInputArgs = userInput.split("\\s*/at\\s*");
+                String content = userInputArgs[0];
+                String dateTime = userInputArgs[1];
+                Event newEventTask = new Event(content, dateTime);
+                formatter.print(taskManager.addTask(newEventTask));
             } else if (userInput.toLowerCase().equals("bye")) {
                 formatter.print("Bye. Hope my service has been satisfactory. Hope to see you again soon.");
                 break;
             } else if (userInput.toLowerCase().equals("list")) {
                 formatter.print(taskManager.getAllTasks());
-            } else {
-                Task newUserTask = new Task(userInput);
-                formatter.print(taskManager.addTask(newUserTask));
             }
         }
         scanner.close();
     }
+
 }
