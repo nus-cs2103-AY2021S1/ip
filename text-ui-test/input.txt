@@ -3,4 +3,11 @@ deadline return book /by 6 sep
 event meeting /at mon 2-4 pm
 done 1
 list
+blah
+todo
+deadline do something
+event meeting /at
+event /at mon 9pm
+done 10
+done done
 bye
