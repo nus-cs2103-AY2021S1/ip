@@ -26,8 +26,8 @@
     ____________________________________________________________
 
     ____________________________________________________________
-     sorry sir i dont understand your command sir
-     please enter again sir thank you sir
+     very sorry sir, i cannot understand your input
+     the format for new deadline is "deadline DESCRIPTION /by DATE" sir
     ____________________________________________________________
 
     ____________________________________________________________
@@ -50,8 +50,8 @@
     ____________________________________________________________
 
     ____________________________________________________________
-     sorry sir i dont understand your command sir
-     please enter again sir thank you sir
+     apology mr sir, i dont not understand your input
+     the format for new event is "event DESCRIPTION /at DATE" sir
     ____________________________________________________________
 
     ____________________________________________________________

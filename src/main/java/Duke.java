@@ -27,39 +27,35 @@ public class Duke {
         selected.markAsDone();
         systemMessage("afternoon sir i have mark this task done sir:\n  " + selected);
     }
-    private void displayParseError() {
-        systemMessage("sorry sir i dont understand your command sir\n"
-                        + "please enter again sir thank you sir");
-    }
-    private void parseAndRun(String input) {
+    private void parseAndRun(String input) throws DukeException {
         if (input.equals("list")) {
             this.printList();
         } else if (input.matches("^done \\d+")) {
             int itemIndex = Integer.parseInt(input.substring(5));
+            if(itemIndex > this.items.size())
+                throw new DukeException(DukeException.Errors.DONE_OUT_OF_RANGE);
             this.markItem(itemIndex - 1);
-        } else if (input.matches("^todo .*")) {
-            String description = input.substring(5);
+        } else if (input.matches("^todo.*")) {
+            String description = input.substring(4).trim();
+            if(description.equals(""))
+                throw new DukeException(DukeException.Errors.TODO_EMPTY_DESCRIPTION);
             this.addItem(new Todo(description));
-        } else if (input.matches("^deadline .*")) {
-            String[] items = input.substring(9).split(" /by ");
-            if(items.length!=2) {
-                displayParseError();
-                return;
-            }
-            String description = items[0];
+        } else if (input.matches("^deadline.*")) {
+            String[] items = input.substring(8).split(" /by ");
+            String description = items[0].trim();
+            if(items.length!=2 || description.equals(""))
+                throw new DukeException(DukeException.Errors.DEADLINE_BAD_FORMAT);
             String time = items[1];
             this.addItem(new Deadline(description, time));
-        } else if (input.matches("^event .*")) {
-            String[] items = input.substring(6).split(" /at ");
-            if(items.length!=2) {
-                displayParseError();
-                return;
-            }
-            String description = items[0];
+        } else if (input.matches("^event.*")) {
+            String[] items = input.substring(5).split(" /at ");
+            String description = items[0].trim();
+            if(items.length!=2 || description.equals(""))
+                throw new DukeException(DukeException.Errors.EVENT_BAD_FORMAT);
             String time = items[1];
             this.addItem(new Event(description, time));
         } else {
-            displayParseError();
+            throw new DukeException(DukeException.Errors.UNKNOWN_COMMAND);
         }
     }
     public void run() {
@@ -67,7 +63,11 @@ public class Duke {
         systemMessage(logo);
         String input = scanner.nextLine();
         while (!input.equals("bye")) {
-            parseAndRun(input);
+            try {
+                parseAndRun(input);
+            } catch (DukeException e) {
+                systemMessage(e.getMessage());
+            }
             input = scanner.nextLine();
         }
         systemMessage("bye sir thanks for using me sir hope to see you again sir");
