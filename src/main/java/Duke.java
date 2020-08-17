@@ -163,13 +163,14 @@ public class Duke {
                         else {
                             String[] inputSplit = input.split("/at ");
                             try {
-                                if (inputSplit[0].split("event ").length >= 2) {
+                                if(inputSplit[0].split("event ").length < 2) {
+                                    throw new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.EVENT);
+                                } else{
                                     String name = inputSplit[0].split("event ")[1];
                                     String time = inputSplit[1];
                                     Task task = new EventTask(name, time);
                                     addTask(task);
                                 }
-                                throw new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.EVENT);
                             } catch(DukeException e){
                                 System.err.println(e);
                             }
