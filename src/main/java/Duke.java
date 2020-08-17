@@ -26,12 +26,16 @@ public class Duke {
             ToDo todo = new ToDo(next);
             storage.add(todo);
             toAdd = todo;
-
         } else if (s.equals("deadline")) {
             String[] ls = next.split("/by ");
             Deadline deadline = new Deadline(ls[0], ls[1]);
             storage.add(deadline);
             toAdd = deadline;
+        } else if(s.equals("event")) {
+            String[] ls = next.split("/at ");
+            Event event = new Event(ls[0], ls[1]);
+            storage.add(event);
+            toAdd = event;
         } else {
             Task task = new Task(s + " " + next);
             storage.add(task);
