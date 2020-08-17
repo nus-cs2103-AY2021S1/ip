@@ -58,6 +58,17 @@ public class Duke {
                             formatString("Now you have " + list.size() + " tasks in the list. \n");
                     System.out.println(addDividers(s));
                 }
+                //Add a new Event task
+                else if (inputArr[0].equals("event")) {
+                    String eventString = input.substring(6);
+                    String[] eventArr = eventString.split(" /at ");
+                    Event event = new Event(eventArr[0], eventArr[1]);
+                    list.add(event);
+                    String s = formatString("Got it. I've added this task: \n") +
+                            formatString(event.toString() + '\n') +
+                            formatString("Now you have " + list.size() + " tasks in the list. \n");
+                    System.out.println(addDividers(s));
+                }
                 //Add a normal task
                 else {
                     list.add(new Task(input));
