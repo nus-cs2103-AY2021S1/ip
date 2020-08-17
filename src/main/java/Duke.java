@@ -15,7 +15,7 @@ public class Duke {
 
     private static void interactWithUser() {
         boolean exitProgram = false;
-        List<String> listOfUserInput = new ArrayList<>();
+        List<Task> listOfTasks = new ArrayList<>();
         Scanner scn = new Scanner(System.in);
         while (!exitProgram) {
             System.out.println();
@@ -25,12 +25,19 @@ public class Duke {
                 System.out.println("Goodbye! Shutting down now...");
                 exitProgram = true;
             } else if (userInput.equals("list")) {
-                int n = listOfUserInput.size();
+                int n = listOfTasks.size();
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < n; i++) {
-                    System.out.println(String.format("%d. %s", i + 1, listOfUserInput.get(i)));
+                    System.out.println(String.format("%d.%s", i + 1, listOfTasks.get(i)));
                 }
+            } else if (userInput.split(" ")[0].equals("done")) {
+                int idx = Integer.parseInt(userInput.split(" ")[1]);
+                Task task = listOfTasks.get(idx - 1);
+                task.markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(task);
             } else {
-                listOfUserInput.add(userInput);
+                listOfTasks.add(new Task(userInput));
                 System.out.println("added: " + userInput);
             }
             Duke.printHorizontalLine();
