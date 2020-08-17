@@ -11,7 +11,7 @@ public class Duke {
             + INDENT + "| | | | | | | |/ / _ \\\n"
             + INDENT + "| |_| | |_| |   <  __/\n"
             + INDENT + "|____/ \\__,_|_|\\_\\___|\n";
-    private static ArrayList<String> lst = new ArrayList<>();
+    private static ArrayList<Task> lst = new ArrayList<>();
 
     private static void intro() {
         System.out.println(horizL + "\n" + logo + "\n" +
@@ -35,21 +35,37 @@ public class Duke {
         System.out.println(horizL);
     }
 
+    private static void addTask(String input) {
+        Task t1 = new Task(input);
+        lst.add(t1);
+    }
+
+    private static void checkTask(int ind) {
+        System.out.println(horizL);
+        Task t1 = lst.get(ind - 1);
+        t1.checked();
+        System.out.println(INDENT + "Nice! I've marked this task as done: \n" +
+                 INDENT + t1 + "\n" + horizL);
+    }
+
     public static void main(String[] args) {
         Duke.intro();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            if (input.toLowerCase().equals("bye")) {
+            if (input.equalsIgnoreCase("bye")) {
                 System.out.print(horizL);
                 break;
-            } else if (input.toLowerCase().equals("list")) {
+            } else if (input.equalsIgnoreCase("list")) {
                 Duke.displayList();
+            } else if (input.indexOf("done") == 0) {
+                int ind = Integer.parseInt(input.split(" ")[1]);
+                Duke.checkTask(ind);
             } else {
-                lst.add(input);
-                System.out.println(horizL);
-                System.out.println(INDENT + "Added: " + input);
-                System.out.println(horizL);
+                    Duke.addTask(input);
+                    System.out.println(horizL);
+                    System.out.println(INDENT + "Added: " + input);
+                    System.out.println(horizL);
             }
         }
         Duke.ending();
