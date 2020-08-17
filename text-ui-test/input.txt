@@ -1,6 +1,7 @@
 help
 list
 todo homework
+todo
 list
 deadline CS2103 webcast /by Saturday
 deadline /by Saturday
@@ -15,6 +16,7 @@ event CS1010X /by Saturday
 list
 done 1
 done 1
+list
 done -1
 done 1000
 done 2

@@ -118,10 +118,14 @@ public class Duke {
                     System.out.println("Please key in a valid instruction! (done)");
                     break;
                 case TODO:
-                    TodoTask todotask = new TodoTask(mergeArray(instructionArray, 1, instrLen));
-                    inputList[counter] = todotask;
-                    counter++;
-                    System.out.println("Task Added: " + todotask.toString());
+                    if (instrLen == 1) {
+                        System.out.println("Please enter description!");
+                    } else {
+                        TodoTask todotask = new TodoTask(mergeArray(instructionArray, 1, instrLen));
+                        inputList[counter] = todotask;
+                        counter++;
+                        System.out.println("Task Added: " + todotask.toString());
+                    }
                     break;
                 case DEADLINE:
                     int byIndex = findIndex(instructionArray, BY_INDICATOR);

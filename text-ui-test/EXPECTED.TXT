@@ -24,6 +24,8 @@ You have no DukeTasks!
 ____________________________________________________________
 Task Added: [T][✘] homework
 ____________________________________________________________
+Please enter description!
+____________________________________________________________
 Your DukeTasks:
 1. [T][✘] homework
 You now have 0 tasks done, and 1 task not done
@@ -65,6 +67,12 @@ Alright! I'll mark this task as done!
 [T][✓] homework
 ____________________________________________________________
 Task is already done!
+____________________________________________________________
+Your DukeTasks:
+1. [T][✓] homework
+2. [D][✘] CS2103 webcast (by: Saturday)
+3. [E][✘] CS2100 Lab (at: Monday 2pm-4pm)
+You now have 1 task done, and 2 tasks not done
 ____________________________________________________________
 Invalid Task Number!
 ____________________________________________________________
