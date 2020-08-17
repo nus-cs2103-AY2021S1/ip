@@ -1,21 +1,18 @@
 public class Task {
     protected String taskName;
     protected boolean done;
-    protected int taskNumber;
+    protected String taskType;
 
-    public Task(String taskName, int taskNumber) {
+    public Task(String taskName, String taskType) {
         this.taskName = taskName;
-        this.taskNumber = taskNumber;
         this.done = false;
+        this.taskType = taskType;
     }
 
     protected void setDone() {
         this.done = true;
     }
 
-    public int getTaskNumber() {
-        return this.taskNumber;
-    }
 
     public String getTaskName() {
         return this.taskName;
@@ -23,6 +20,10 @@ public class Task {
 
     public boolean checkDone() {
         return this.done;
+    }
+
+    public String getTaskType() {
+        return "[" + this.taskType + "]";
     }
 
     @Override
@@ -33,6 +34,6 @@ public class Task {
         } else {
             check = "✗";
         }
-        return taskNumber + ". [" + check + "] " + taskName;
+        return "[" + taskType + "][" + check + "]" + taskName;
     }
 }
