@@ -19,12 +19,12 @@ public class Duke {
                 "    ____________________________________________________________";
         System.out.println(greeting);
 
-        List<String> itemList = new ArrayList<String>();
+        List<Task> taskList = new ArrayList<Task>();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             System.out.println("    ____________________________________________________________");
-            respondToInput(input, itemList);
+            respondToInput(input, taskList);
             System.out.println("    ____________________________________________________________");
             input = sc.nextLine();
         }
@@ -33,17 +33,27 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
     }
 
-    private static void respondToInput(String input, List<String> itemList) {
-        if (!input.equals("list"))
-        {
-            itemList.add(input);
-            System.out.println("    added: " + input);
+    private static void respondToInput(String input, List<Task> taskList) {
+        if (input.equals("list")) {
+            for (int i = 0; i < taskList.size(); i++) {
+                System.out.print("    " + (i+1) + ". ");
+                System.out.println(taskList.get(i));
+            }
+        }
+        else if (input.contains("done")) {
+            int index = Integer.parseInt(input.split(" ")[1]) - 1;
+            if (index < 0 || index > taskList.size() - 1) {
+                System.out.println("    Error. Entry does not exist. Please try again.");
+            }
+            else {
+                taskList.get(index).setDone();
+                System.out.println("    Finally... about time you finished that. Marked this task as done: ");
+                System.out.println("      " + taskList.get(index));
+            }
         }
         else {
-            for (int i = 0; i < itemList.size(); i++) {
-                System.out.print("    " + (i+1) + ". ");
-                System.out.println(itemList.get(i));
-            }
+            taskList.add(new Task(input));
+            System.out.println("    added: " + input);
         }
     }
 }
