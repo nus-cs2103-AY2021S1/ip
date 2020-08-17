@@ -8,18 +8,35 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+        String[] storage = new String[100];
+        for (Integer i = 1; i < storage.length + 1; i++) {
+            storage[i - 1] = i.toString() + ". ";
+        }
         System.out.println("Hello from\n" + logo);
 
         System.out.println(divider);
         System.out.println("Beep Boop! Hello there!\n" + "What can I do for you?");
         System.out.println(divider);
 
-        // Takes in user inputs. Program terminates when the String "bye" is entered.
+        /* Takes in user inputs. Program terminates when the String "bye" is entered.
+        Program stores user inputs and returns the list when the String "list" is entered.
+         */
+        int pointer = 0;
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             System.out.println(divider);
-            System.out.println(input);
+
+            if (input.equals("list")) {
+                for (int i = 0; i < pointer; i++) {
+                    System.out.println(storage[i]);
+                }
+            } else {
+                System.out.println("Added: " + input);
+                storage[pointer] += input;
+                pointer++;
+            }
+
             System.out.println(divider);
             input = sc.nextLine();
         }
