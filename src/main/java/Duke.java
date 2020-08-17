@@ -5,7 +5,7 @@ public class Duke {
 
     static String line = "____________________________________________________________";
     static String userInput = "";
-    static ArrayList<String> lst = new ArrayList<>();
+    static ArrayList<Task> lst = new ArrayList<>();
 
     public static void main(String[] args) {
         DukeBot();
@@ -20,9 +20,12 @@ public class Duke {
         while (!userInput.equals("bye")) {
             if (userInput.equals("list")) {
                 formatLst();
+            } else if (userInput.startsWith("done")) {
+                int num = Integer.parseInt(userInput.substring(5));
+                formatMarkAsDone(num - 1);
             } else {
                 format("added: " + userInput);
-                lst.add(userInput);
+                lst.add(new Task(userInput));
             }
             userInput = input.nextLine();
         }
@@ -38,9 +41,18 @@ public class Duke {
 
     public static void formatLst() {
         System.out.println(line);
+        System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= lst.size(); i++) {
-            System.out.println(i + ". " + lst.get(i-1));
+            System.out.println(i + "." + lst.get(i-1));
         }
+        System.out.println(line);
+    }
+
+    public static void formatMarkAsDone(int num) {
+        lst.get(num).markAsDone();
+        System.out.println(line);
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(lst.get(num));
         System.out.println(line);
     }
 }
