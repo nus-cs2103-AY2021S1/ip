@@ -4,9 +4,14 @@ import java.util.Scanner;
 
 public class Duke {
     private static List<Task> items;
+
     private static final String DONE = "done";
     private static final String BYE = "bye";
     private static final String LIST = "list";
+
+    private static final String EVENT = "event";
+    private static final String DEADLINE = "deadline";
+    private static final String TODO = "todo";
 
 
     public static void main(String[] args) {
@@ -50,7 +55,6 @@ public class Duke {
     }
 
     private static void displayList() {
-        int size = items.size();
         int index = 1;
         System.out.println("Here are the tasks in your list: ");
         for (Task t : items) {
@@ -60,9 +64,37 @@ public class Duke {
     }
 
     private static void addItem(String input) {
-        items.add(new Task(input));
-        String text = "added: " + input;
-        System.out.println(text);
+        String[] inputArr = input.split(" ", 2);
+        String taskType = inputArr[0];
+        String taskDescription = inputArr[1];
+
+        Task newTask;
+
+        switch (taskType) {
+            case TODO:
+                newTask = new Todo(taskDescription);
+                break;
+            case DEADLINE:
+                String[] deadlineArr = taskDescription.split("/by", 2);
+                String deadlineName = deadlineArr[0];
+                String deadlineDate = deadlineArr[1];
+                newTask = new Deadline(deadlineName, deadlineDate);
+                break;
+            case EVENT:
+                String[] eventArr = taskDescription.split("/at", 2);
+                String eventName = eventArr[0];
+                String eventDuration = eventArr[1];
+                newTask = new Event(eventName, eventDuration);
+                break;
+            default:
+                System.out.println("Task type does not exist.");
+                return;
+        }
+
+        items.add(newTask);
+        String taskText = "Got it. I've added this task: " + "\n" + newTask + "\n";
+        String totalText = "Now you have " + items.size() + " tasks in the list.";
+        System.out.println(taskText + totalText);
     }
 
     private static void markAsDone(int itemsIdx) {
