@@ -32,6 +32,8 @@ public class Duke {
             } else {
                 if (str.startsWith("done")) {
                     completeTask(str, tasks);
+                } else if (str.startsWith("delete")) {
+                    deleteTask(str, tasks);
                 } else {
                     addTask(str, tasks);
                 }
@@ -115,6 +117,14 @@ public class Duke {
         System.out.println("You now have " + tasks.size() + " tasks in the list");
     }
 
+    public static void delete(int i, ArrayList<Task> tasks) {
+        Task t = tasks.get(i-1);
+        tasks.remove(i - 1);
+        System.out.println("Task has been removed.");
+        System.out.println(t.toString());
+        System.out.println("You now have " + tasks.size() + " tasks in the list");
+    }
+
     private static void completeTask(String str, ArrayList<Task> tasks) throws TaskCompletionException{
         if (!str.startsWith("done ")) {
             throw new TaskCompletionException(tasks.size());
@@ -132,7 +142,27 @@ public class Duke {
         }
     }
 
-    public static boolean isInteger(String str) {
+    private static void deleteTask(String str, ArrayList<Task> tasks) throws TaskDeletionException {
+        if (!str.startsWith("delete ")) {
+            throw new TaskDeletionException(tasks.size());
+        }
+        String val = str.substring(7);
+        if (isInteger(val)) {
+            int i = Integer.parseInt(val);
+            if (i > 0 && i <= tasks.size()) {
+                delete(i, tasks);
+            } else {
+                throw new TaskDeletionException(tasks.size());
+            }
+        } else {
+            throw new TaskDeletionException(tasks.size());
+        }
+    }
+
+
+
+
+        public static boolean isInteger(String str) {
         try {
             Integer.parseInt(str);
         } catch (NumberFormatException nfe) {
