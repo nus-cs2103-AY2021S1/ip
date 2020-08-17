@@ -29,7 +29,7 @@ public class Duke {
             if (next.equals("list")) {
                 System.out.println("    Here are the tasks in your list:");
                 for (int i = 0; i < tasks.size(); i++) {
-                    System.out.println("     " + (i + 1) + "." +  tasks.get(i));
+                    System.out.println("     " + (i + 1) + "." + tasks.get(i));
                 }
             } else if (next.startsWith("done")) {
                 int len = next.length();
@@ -51,9 +51,33 @@ public class Duke {
                 } else {
                     System.out.println("    Input format is invalid");
                 }
-            } else {
-                tasks.add(new Task(next));
-                System.out.println("    added: " + next);
+            } else { // Adding new task
+                Task newTask = null;
+                int startIndex;
+                String description;
+                String by;
+
+                if (next.startsWith("todo")) {
+                    startIndex = 5;
+                    description = next.substring(startIndex);
+                    newTask = new ToDo(description);
+                } else if (next.startsWith("deadline")) {
+                    int indexBy = next.indexOf(" /by ");
+                    startIndex = 9;
+                    description = next.substring(startIndex, indexBy);
+                    by = next.substring(indexBy + 5);
+                    newTask = new Deadline(description, by);
+                } else if (next.startsWith("event")) {
+                    int indexBy = next.indexOf(" /at ");
+                    startIndex = 6;
+                    description = next.substring(startIndex, indexBy);
+                    by = next.substring(indexBy + 5);
+                    newTask = new Event(description, by);
+                }
+                tasks.add(newTask);
+                System.out.println("    Got it. I've added this task:");
+                System.out.println("      " + newTask);
+                System.out.println("    Now you have " + tasks.size() + " tasks in your list.");
             }
             System.out.println(separator);
             System.out.println();
