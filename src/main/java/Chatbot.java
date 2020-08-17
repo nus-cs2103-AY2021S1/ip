@@ -9,7 +9,7 @@ public class Chatbot {
     private BufferedReader textParser;
     private List<String> storedText;
 
-    Chatbot(InputStream in) {
+    public Chatbot(InputStream in) {
         textParser = new BufferedReader(new InputStreamReader(in));
         storedText = new ArrayList<String>();
     }
