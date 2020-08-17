@@ -18,7 +18,16 @@ public class Duke {
         int listLen = storage.size();
         System.out.println(border.replace("\n", ""));
         for(int i = 1; i <= listLen; i++) {
-            System.out.println(i + ". " + storage.get(i - 1).getName());
+            Task curr = storage.get(i - 1);
+            String tickCross = "";
+
+            if (curr.isDone()) {
+                tickCross = "[✓] ";
+            } else {
+                tickCross = "[✗] ";
+            }
+
+            System.out.println(i + "."+ tickCross + curr.getName());
         }
         System.out.println(border);
     }
