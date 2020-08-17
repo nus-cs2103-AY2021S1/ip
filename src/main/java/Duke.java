@@ -4,7 +4,7 @@ public class Duke {
     private static final String line = "----------------------";
 
     // for the list
-    private static final String[] tasks = new String[100];
+    private static final Task[] tasks = new Task[100];
     private static int index = 0;
 
     public static void main(String[] args) {
@@ -17,44 +17,57 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String input = sc.nextLine();
-            if (input.equals("bye")) {
+            String[] splittedWords = input.split("\\s"); // splits string based on whitespace
+            String command = splittedWords[0];
+
+            if (command.equals("bye")) {
                 exit();
                 break;
-            } else if (input.equals("list")) {
+            } else if (command.equals("list")) {
                 displayList();
+            } else if (command.equals("done")){
+                int taskNo = Integer.parseInt(splittedWords[1]);
+                tasks[taskNo - 1].markAsCompleted();
+                displayCompletedTask(tasks[taskNo - 1]);
             } else {
-                addOnToList(input);
+                addOnToList(new Task(input));
             }
         }
     }
 
     private static void greet() {
-        System.out.println("Hello! I'm Duke" + "\n" +
+       format("Hello! I'm Duke" + "\n" +
                 "What can I do for you?");
     }
 
-    private static void echo(String input) {
-        System.out.println(line + "\n\t" + input + "\n" + line);
+    private static void format(String input) {
+        System.out.println(line + "\n" + input + "\n" + line);
     }
 
     private static void exit() {
-        echo("Bye. Hope to see you again soon!");
+        format("Bye. Hope to see you again soon!");
     }
 
-    private static void addOnToList(String task) {
+    private static void addOnToList(Task task) {
         tasks[index++] = task;
-        System.out.println("added: " + task);
+        format("added: " + task.details);
     }
 
     private static void displayList() {
+        StringBuilder sb = new StringBuilder();
         if (index == 0) {
-            System.out.println("No tasks!");
+            sb.append("No tasks!");
+            format(sb.toString());
             return;
         }
-
+        sb.append("Here are the tasks in your list:\n");
         for (int i = 0; i < index; i++) {
-            System.out.println(i + 1 + ". " + tasks[i]);
+            sb.append(i + 1 + "." + tasks[i] + "\n");
         }
+        format(sb.toString());
     }
 
+    private static void displayCompletedTask(Task task) {
+        format("Nice! I've marked this task as done:\n" + task);
+    }
 }
