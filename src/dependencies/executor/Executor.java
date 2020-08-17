@@ -26,47 +26,81 @@ public class Executor {
         this.commandState = c;
     }
 
-    private void exec(Commands c) {
-
-    }
-
-    /**
-     * Temporary function to satisfy the Level-2 requirements.
-     * @param command
-     * @return String indicating the finished command
-     */
+/*
     public String level2Exec(String command) {
         if (command.equals(LIST_COMMAND)) {
             return storage.getTodos();
         } else {
             // Level-2: only otehr comment is add.
-            // TODO: here man!!!
-            return null;
+            storage.add(command);
+            return String.format("added: %s", command);
         }
-    }
+    }*/
 
+    /**
+     * Executed the given command.
+     *
+     * @param command
+     * @return string specifying what happened/what was done
+     */
     public String receiveAndExec(String command) {
         switch(command) {
-            case ADD_COMMAND: {
-                setState(ADD);
-                break;
-            }
             case LIST_COMMAND: {
                 setState(LIST);
                 break;
             }
             default: {
-                setState(INVALID);
+                setState(INVALID);  // Should never reached this stage.
                 break;
             }
         }
-        exec(commandState);
-        return finishWith(commandState);
+        return execAndReturn();
     }
 
-    private String finishWith(Commands commands) {
-        return "";
+    /**
+     * Executed the given command on the given task.
+     *
+     * @param command
+     * @return string specifying what happened/what was done
+     */
+    public String receiveAndExec(String command, String task) {
+        switch(command) {
+            case ADD_COMMAND: {
+                setState(ADD);
+                break;
+            }
+            default: {
+                setState(INVALID);  // Should never reached this stage.
+                break;
+            }
+        }
+        return execAndReturn(task);
     }
+
+    private String execAndReturn() {
+        switch(commandState) {
+            case LIST: {
+                return storage.getTodosInList();
+            }
+            default: {
+                return "Error";
+            }
+        }
+    }
+
+    private String execAndReturn(String task) {
+        switch(commandState) {
+            case ADD: {
+                storage.add(task);
+                return String.format("Added: %s", task);
+            }
+            default: {
+                return "Error";
+            }
+        }
+    }
+
+
 
 
 
