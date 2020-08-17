@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Duke {
 
@@ -8,6 +7,7 @@ public class Duke {
     private final String name = "Bolot";
     private final String end = "bye";
     private ArrayList<Task> list = new ArrayList<>();
+    private final List<String> commands = Arrays.asList("todo", "deadline", "event", "done");
 
     public void printLogo() {
         System.out.println("Greetings, human. I am");
@@ -61,29 +61,62 @@ public class Duke {
         }
     }
 
-    private void addTask(String firstWord, String input) {
+    private String getFirstWord(String input) throws UnrecognizedTaskException {
+        if (input.contains(" ")) {
+            return input.substring(0, input.indexOf(" ")).toLowerCase();
+        } else {
 
-        String task = firstWord.equals("todo")
-                ? input.substring(firstWord.length() + 1)
-                : input.substring(firstWord.length() + 1, input.indexOf('/'));
+            if (!commands.contains(input.toLowerCase())) {
+                throw new UnrecognizedTaskException();
+            }
 
-        String date = firstWord.equals("todo")
-                ? null
-                : input.substring(input.indexOf('/') + 4);
+            return input.toLowerCase().trim();
+        }
+    }
 
-        System.out.println("Got it. I've added this task:");
+    private void addTask(String firstWord, String input) throws EmptyTaskException, InvalidDateException {
+
+        String task = "";
+        String date = "";
+
+        try {
+            task = input.substring(firstWord.length() + 1);
+        } catch (IndexOutOfBoundsException indexError) {
+            throw new EmptyTaskException();
+        }
 
         switch (firstWord) {
             case "todo":
                 list.add(new ToDo(task));
                 break;
-            case "deadline":
-                list.add(new Deadline(task, date));
-                break;
-            case "event":
-                list.add(new Event(task, date));
+
+            default:
+
+                try {
+                    task = task.substring(0, task.indexOf('/'));
+                    date = input.substring(input.indexOf('/') + 4);
+                } catch (IndexOutOfBoundsException indexError) {
+                    switch (firstWord) {
+                        case "deadline":
+                            throw new DeadlineInvalidDate();
+                        case "event":
+                            throw new EventInvalidDate();
+                    }
+                }
+
+                switch (firstWord) {
+                    case "deadline":
+                        list.add(new Deadline(task, date));
+                        break;
+                    case "event":
+                        list.add(new Event(task, date));
+                        break;
+                }
+
                 break;
         }
+
+        System.out.println("Got it. I've added this task:");
 
         System.out.println(list.get(list.size() - 1).toString());
 
@@ -112,19 +145,25 @@ public class Duke {
                 printList();
 
             } else {
-                String firstWord = input.contains(" ")
-                        ? input.substring(0, input.indexOf(" ")).toLowerCase()
-                        : input;
 
-                if (firstWord.equals("done")) {
+                String firstWord = "";
+                try {
 
-                    int taskNo = Integer.parseInt(input.substring(5)) - 1;
-                    markDone(taskNo);
+                    firstWord = getFirstWord(input);
 
-                } else {
+                    if (firstWord.equals("done")) {
 
-                    addTask(firstWord, input);
+                        int taskNo = Integer.parseInt(input.substring(5)) - 1;
+                        markDone(taskNo);
 
+                    } else {
+
+                        addTask(firstWord, input.trim());
+
+                    }
+
+                } catch (DukeException error) {
+                    System.out.println(error.getMessage());
                 }
             }
 

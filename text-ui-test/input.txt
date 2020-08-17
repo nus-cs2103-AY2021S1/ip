@@ -1,7 +1,15 @@
 todo sleep
 list
+bleh
+todo
+event
+event bfast
+event bfast /at
 event bfast /at 10am-1030am
 list
+deadline
+deadline project
+deadline project /by
 deadline project /by 20-08-2020 2359
 list
 done 2
