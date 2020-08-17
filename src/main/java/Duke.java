@@ -16,7 +16,7 @@ public class Duke {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < tasks.length; i++) {
                     if (tasks[i] != null) {
-                        System.out.println((i + 1) + ". " + tasks[i].getStatusIcon() + " " + tasks[i].getDescription());
+                        System.out.println((i + 1) + ". " + tasks[i].toString());
                     } else {
                         break;
                     }
@@ -25,7 +25,7 @@ public class Duke {
                 int index = Integer.parseInt(splitArr[1]);
                 tasks[index - 1].setDone();
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println(tasks[index -1].getStatusIcon() + " " + tasks[index - 1].getDescription());
+                System.out.println(tasks[index -1].toString());
             } else {
                 tasks[count] = new Task(input);
                 count ++;
