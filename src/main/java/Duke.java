@@ -4,6 +4,12 @@ import java.util.ArrayList;
 public class Duke {
     private static String longLine = "________________________________________________________________________________";
     private static ArrayList<Task> taskList = new ArrayList<>();
+    private static String bye_key = "bye";
+    private static String list_key = "list";
+    private static String done_key = "done";
+    private static String todo_key = "todo";
+    private static String deadline_key = "deadline";
+    private static String event_key = "event";
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -21,7 +27,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         while(scanner.hasNext()){
             String input = scanner.nextLine();
-            if(input.toLowerCase().equals("bye")){
+            if(input.toLowerCase().equals(bye_key)){
                 byeGreetings();
                 break;
             } else {
@@ -39,7 +45,8 @@ public class Duke {
             //splitting into list for easier comparison
             String[] inputList = input.trim().split(" ", 2);
 
-            if(inputList[0].toLowerCase().equals("list")){
+            // Case where input is list, to show the list of tasks
+            if(inputList[0].toLowerCase().equals(list_key)){
                 StringBuffer result = new StringBuffer();
                 //to add in the starting line of the section
                 result.append("Here are the tasks in your list: \n");
@@ -49,17 +56,17 @@ public class Duke {
                     Task currentTask = taskList.get(i);
 
                     // adding the current task into the tasklist
-                    result.append((i + 1)+ ". [" + currentTask.getStatusIcon() + "] " + currentTask.getTask() + "\n");
+                    result.append((i + 1)+ ". " + currentTask.toString() + "\n");
                 }
                 lineFormatter(result.toString());
 
-                //ending the process
-            } else if(inputList[0].toLowerCase().equals("bye")){
+                //ending the process with bye input
+            } else if(inputList[0].toLowerCase().equals(bye_key)){
                 byeGreetings();
                 break;
 
                 //checking for done
-            } else if(inputList[0].toLowerCase().equals("done") && isNum(inputList[1])){
+            } else if(inputList[0].toLowerCase().equals(done_key) && isNum(inputList[1])){
                 int currentIndex = Integer.parseInt(inputList[1]) - 1;
                 if(currentIndex + 1> taskList.size() || currentIndex + 1 <= 0){
                     lineFormatter("You do not have " + (currentIndex + 1) + " tasks!\n"
@@ -69,7 +76,7 @@ public class Duke {
                     // to check if the task is already done
                     if(task.getStatus()){
                         lineFormatter("This task is already done!\n" +
-                                "[" + task.getStatusIcon() + "] " + task.getTask());
+                                task.toString());
                     // if task is not done
                     } else {
                         taskList.get(currentIndex).markAsDone();
@@ -86,9 +93,30 @@ public class Duke {
 
     // method that adds tasks into the list of tasks
     public static void added_to_List(String printable) {
-        lineFormatter("added: " + printable);
-        Task newTask = new Task(printable);
-        taskList.add(newTask);
+        String[] nameList = printable.split(" ", 2);
+
+        if(nameList[0].toLowerCase().equals(deadline_key)){
+            String[] task_deadline = nameList[1].split("/by", 2);
+            Task newTask = new Deadline(task_deadline[0], task_deadline[1]);
+            taskList.add(newTask);
+            newTaskItem(newTask, deadline_key);
+
+        } else if(nameList[0].toLowerCase().equals(event_key)){
+            String[] task_event = nameList[1].split("/at", 2);
+            Task newTask = new Event(task_event[0], task_event[1]);
+            taskList.add(newTask);
+            newTaskItem(newTask, event_key);
+
+        } else if(nameList[0].toLowerCase().equals(todo_key)){
+            Task newTask = new ToDo(nameList[1]);
+            taskList.add(newTask);
+            newTaskItem(newTask, todo_key);
+
+        } else {
+            lineFormatter("Please enter an appropriate command!!");
+        }
+
+
 
 
     }
@@ -119,6 +147,13 @@ public class Duke {
         } catch (NumberFormatException e){
             return false;
         }
+    }
+
+    //method for formatting inputs into the taskList
+    public static void newTaskItem (Task task, String type){
+        lineFormatter("Now you have a new " + type + "! :\n" + task.toString() +
+                "\nYou currently have " + taskList.size() + " events in your list\n" +
+                "Type \'list\' to check your Task - list ");
     }
 
 
