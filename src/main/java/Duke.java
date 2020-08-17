@@ -103,7 +103,6 @@ public class Duke {
                     for (int i = 0; i < arrList.size(); i++) {
                         System.out.println((i+1)+"."+arrList.get(i).stringify());
                     }
-
                     //add todo
                 }else if(userinput.contains("delete")){
                     if(userinput.length()<6){
@@ -124,7 +123,7 @@ public class Duke {
                     Task task = new Task(description, false);
                     arrList.add(task);
 
-                    String reply = "I have added this task: \n"
+                    String reply = "I have added this task:\n"
                             + task.stringify() + "\n"
                             + "Now you have " + arrList.size() + " task(s) in the list.";
                     System.out.println(reply);
