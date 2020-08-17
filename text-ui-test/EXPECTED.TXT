@@ -15,28 +15,28 @@ Welcome to
         ----------------------------------------------------
         ----------------------------------------------------
         Gotcha! I've added this task:
-                [T][?] borrow book
+                [T][N] borrow book
         You have 1 tasks on the list now.
         ----------------------------------------------------
         ----------------------------------------------------
         Gotcha! I've added this task:
-                [D][?] return book (by: Sunday)
+                [D][N] return book (by: Sunday)
         You have 2 tasks on the list now.
         ----------------------------------------------------
         ----------------------------------------------------
         Gotcha! I've added this task:
-                [E][?] project meeting (at: Mon 2-4pm)
+                [E][N] project meeting (at: Mon 2-4pm)
         You have 3 tasks on the list now.
         ----------------------------------------------------
         ----------------------------------------------------
         Here are the tasks on your list:
-        1. [T][?] borrow book
-        2. [D][?] return book (by: Sunday)
-        3. [E][?] project meeting (at: Mon 2-4pm)
+        1. [T][N] borrow book
+        2. [D][N] return book (by: Sunday)
+        3. [E][N] project meeting (at: Mon 2-4pm)
         ----------------------------------------------------
         ----------------------------------------------------
         \(^O^)/ Good job! I've marked this task as done:
-                [T][?] borrow book
+                [T][Y] borrow book
         Keep going!
         ----------------------------------------------------
         ----------------------------------------------------
@@ -45,13 +45,13 @@ Welcome to
         ----------------------------------------------------
         ----------------------------------------------------
         Roger that! I've removed this task:
-                [D][?] return book (by: Sunday)
+                [D][N] return book (by: Sunday)
         You have 2 tasks on the list now.
         ----------------------------------------------------
         ----------------------------------------------------
         Here are the tasks on your list:
-        1. [T][?] borrow book
-        2. [E][?] project meeting (at: Mon 2-4pm)
+        1. [T][Y] borrow book
+        2. [E][N] project meeting (at: Mon 2-4pm)
         ----------------------------------------------------
         ----------------------------------------------------
         Please input an appropriate description!
