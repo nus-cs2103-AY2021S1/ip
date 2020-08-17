@@ -18,9 +18,9 @@ public class Task {
     @Override
     public String toString() {
         if (this.isDone) {
-            return taskType + "[\u2713] " + this.description;
+            return taskType + "[✓] " + this.description;
         } else {
-            return taskType + "[\u2718] " + this.description;
+            return taskType + "[✘] " + this.description;
         }
     }
 }

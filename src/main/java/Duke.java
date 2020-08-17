@@ -5,11 +5,7 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    public static final String LOGO = " ____        _        \n"
-                                    + "|  _ \\ _   _| | _____ \n"
-                                    + "| | | | | | | |/ / _ \\\n"
-                                    + "| |_| | |_| |   <  __/\n"
-                                    + "|____/ \\__,_|_|\\_\\___|\n";
+    public static final String LOGO = "Duke.";
     public static final Reader INPUTSTREAMREADER = new InputStreamReader(System.in);
     public static final BufferedReader READER = new BufferedReader(INPUTSTREAMREADER);
     public static final ArrayList<Task> STORAGE = new ArrayList<Task>();
@@ -27,7 +23,7 @@ public class Duke {
     }
 
     private static void printWelcomeMessage(String LOGO) {
-        System.out.println("Hello there! My name is\n" + LOGO + "\nWhat can I do for you?");
+        System.out.println("Hello there! My name is " + LOGO + "\nWhat can I do for you?");
     }
 
     private static void parseCommands(String command) throws Exception {
