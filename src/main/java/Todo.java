@@ -3,6 +3,15 @@ public class Todo extends Task {
         super(s);
     }
 
+    Todo(String name, boolean completed) {
+        super(name, completed);
+    }
+
+    @Override
+    Todo completeTask() {
+        return new Todo(this.name, true);
+    }
+
     @Override
     public String toString() {
         return "[todo]" + super.toString();

@@ -26,9 +26,9 @@ ______________________
 3. [event][x] hackathon (at: 30 august)
 ______________________
 gfy youve managed to finish the following...
-[o] eat
+[todo][o] eat
 ______________________
-1. [o] eat
+1. [todo][o] eat
 2. [deadline][x] cry (by: tonight)
 3. [event][x] hackathon (at: 30 august)
 ______________________

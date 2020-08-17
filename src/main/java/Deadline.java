@@ -6,6 +6,16 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    Deadline(String name, boolean completed, String deadline) {
+        super(name, completed);
+        this.deadline = deadline;
+    }
+
+    @Override
+    Deadline completeTask() {
+        return new Deadline(this.name, true, this.deadline);
+    }
+
     @Override
     public String toString() {
         return "[deadline]" + super.toString() + "(by: " + this.deadline + ")";
