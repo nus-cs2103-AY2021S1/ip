@@ -40,6 +40,9 @@ public class TaskManager {
             if(checkEmpty(input, "deadline")) {
                 throw new DukeException("Much error! You have to describe your mission!");
             }
+            if(checkPlan(input)) {
+                throw new DukeException("Oh no, you do not have a planned timing for your mission!");
+            }
             System.out.println("--------------------------------------");
             if(input.contains("/")) {
                 int notePos = input.indexOf("/") + 1;
@@ -59,6 +62,9 @@ public class TaskManager {
         else if (input.contains("event")) {
             if(checkEmpty(input, "event")) {
                 throw new DukeException("Much error! You have to describe your mission!");
+            }
+            if(checkPlan(input)) {
+                throw new DukeException("Oh no, you do not have a planned timing for your mission!");
             }
             System.out.println("--------------------------------------");
             if(input.contains("/")) {
@@ -91,8 +97,6 @@ public class TaskManager {
         int keywordLength = keyWord.length();
         String remainingDescription = input.substring(keywordLength, input.length());
         if (remainingDescription.length() == 0 ) {
-            //int i = remainingDescription.charAt(0);
-            //System.out.println(i);
             return true;
         }
         else if (remainingDescription.length() > 1 && remainingDescription.charAt(1) == 32) {
@@ -106,7 +110,17 @@ public class TaskManager {
         }
     }
 
-    
+    //returns true if there is a description
+    public Boolean checkPlan(String input) {
+        if(input.contains("/")) {
+            String remainingDescription = input.substring(input.indexOf("/") + 1, input.length());
+            if(remainingDescription.length() != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void addToList(Task task) {
         this.toDoList.add(task);
     }
