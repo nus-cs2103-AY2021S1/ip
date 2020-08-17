@@ -59,9 +59,11 @@ public class Chatbot {
     }
 
     private void printStoredText() {
+        int i = 0;
+
         printHeader();
         for (String s : storedText) {
-            System.out.println(stylise(s));
+            System.out.println(stylise(String.format("%d. %s", ++i, s)));
         }
         printFooter();
     }
