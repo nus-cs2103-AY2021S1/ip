@@ -43,6 +43,9 @@ public class Duke {
 
     public static boolean checkDone(Task task) {
         String[] name = task.getName().split(" ");
+        if (name.length < 2) {
+            return false;
+        }
         return name[0].equals("done") && name[1].matches("\\d+");
     }
 
