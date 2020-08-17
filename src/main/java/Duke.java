@@ -16,31 +16,40 @@ public class Duke {
         System.out.println("     ----------------------------------------");
     }
 
+    private static String[] parseInput(String str) {
+        String[] arr = str.split("\\W+", 2);
+        if (arr.length < 2) {
+            // TODO: handle error
+            return arr;
+        }
+        return arr;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String command;
+        String input;
         List<Task> todoList = new ArrayList<>();
 
         // Flow starts here
         respondStart();
 
         while (sc.hasNextLine()) {
-            command = sc.nextLine();
-            if (command.equals("bye")) {
+            input = sc.nextLine();
+            if (input.equals("bye")) {
                 break;
             }
 
             System.out.println("    ----------------------------------------");
 
-            if (command.equals("list")) {
+            if (input.equals("list")) {
                 System.out.println("     Here are the tasks in your list:");
                 for (int i = 0; i < todoList.size(); i++) {
                     System.out.printf("     %d. %s%n", i + 1, todoList.get(i).showTask());
                 }
-            } else if (command.startsWith("done")) {
-                if (command.matches("done(\\W+)(\\d)+")) {
+            } else if (input.startsWith("done")) {
+                if (input.matches("done\\W+\\d+")) {
                     // Only mark as done if the pattern is "done <positive number>"
-                    int done = Integer.parseInt(command.split("\\W+")[1]);
+                    int done = Integer.parseInt(input.split("\\W+")[1]);
                     if (done > 0 && done <= todoList.size()) {
                         todoList.get(done - 1).markAsDone();
                         System.out.println("     Good job! I've marked this task as done:");
@@ -55,8 +64,26 @@ public class Duke {
 
             } else {
                 // add instructions
-                todoList.add(new Task(command));
-                System.out.printf("     added: %s%n", command);
+                String[] parsed = parseInput(input);
+                String command = parsed[0];
+                if (command.equals("todo")) {
+                    todoList.add(new Todo(parsed[1]));
+                } else if (command.equals("deadline")) {
+                    String[] parsedDeadline = parsed[1].split(" /by ", 2);
+                    todoList.add(new Deadline(parsedDeadline[0], parsedDeadline[1]));
+                } else if (command.equals("event")) {
+                    String[] parsedEvent = parsed[1].split(" /at ", 2);
+                    todoList.add(new Event(parsedEvent[0], parsedEvent[1]));
+                } else {
+                    // TODO: handle unknown cases here
+                    System.out.println("Invalid command!");
+                    continue;
+                }
+
+                int size = todoList.size();
+                System.out.println("     Got it. I've added this task:");
+                System.out.printf("       %s%n", todoList.get(size - 1).showTask());
+                System.out.printf("     Now you have %d %s in the list%n", size, size > 1 ? "tasks" : "task");
             }
 
             System.out.println("    ----------------------------------------");

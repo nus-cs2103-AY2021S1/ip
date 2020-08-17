@@ -1,4 +1,4 @@
-public class Task {
+abstract class Task {
     protected String name;
     protected boolean isDone;
 
@@ -9,6 +9,7 @@ public class Task {
 
     /**
      * Represent task's name and status
+     *
      * @return a string that represents the task
      */
     public String showTask() {
@@ -17,10 +18,11 @@ public class Task {
 
     /**
      * Mark the task as done
+     *
      * @return true if it is not done before, otherwise false
      */
     public boolean markAsDone() {
-        if(this.isDone) {
+        if (this.isDone) {
             return false;
         } else {
             this.isDone = true;
@@ -28,7 +30,10 @@ public class Task {
         }
     }
 
+    //    private String getStatusIcon() {
+//        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+//    }
     private String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "V" : "X"); //return tick or X symbols
     }
 }
