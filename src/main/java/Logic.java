@@ -33,19 +33,29 @@ public class Logic {
             } else if (editted_answer.equals(EXIT_COMMAND)) {
                 return this.exit();
             } else if (answers[0].equals(TODO_COMMAND) || answers[0].equals(DEADLINE_COMMAND) || answers[0].equals(EVENT_COMMAND) ) {
-                if (answers.length > 1) {
-                    String[] command = answer.split(" ", 2);
-                    this.store.addToStore(command[0], command[1]);
-                } else {
-                    String instruction =  "<type of task> <description>" ;
-                    if (answers[0].equals(DEADLINE_COMMAND)) instruction = "<type of task> <description> / <due date>";
-                    else if (answers[0].equals(EVENT_COMMAND)) instruction = "<type of task> <description> / <date of event>";
-                    throw new DukeGotNoArgumentsException(instruction);
-                }
+                return this.understandingTask(answer);
             } else {
                 throw new DukeCannotUnderstandException();
             }
-        } catch (DukeGotNoArgumentsException | DukeCannotUnderstandException e) {
+        } catch (DukeCannotUnderstandException e) {
+            System.out.println(e.getMessage() + "\n" + line);
+        }
+        return true;
+    }
+
+    private boolean understandingTask(String answer) {
+        try {
+            String[] answers = answer.split(" ", 2);
+            if (answers.length > 1) {
+                this.store.addToStore(answers[0], answers[1]);
+            } else {
+                // no description
+                String instruction =  "<type of task> <description>" ;
+                if (answers[0].equals(DEADLINE_COMMAND)) instruction = "<type of task> <description> / <due date>";
+                else if (answers[0].equals(EVENT_COMMAND)) instruction = "<type of task> <description> / <date of event>";
+                throw new DukeGotNoArgumentsException(instruction);
+            }
+        } catch (DukeGotNoArgumentsException e) {
             System.out.println(e.getMessage() + "\n" + line);
         }
         return true;
