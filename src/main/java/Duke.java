@@ -20,16 +20,16 @@ public class Duke {
         DukePrint.print(greet());
 
         while (sc.hasNext()) {
-            String input = sc.nextLine().toLowerCase();
+            String input = sc.nextLine().toLowerCase().strip();
             try {
-                if (input.strip().equals("bye")) {
+                if (input.equals("bye")) {
                     DukePrint.print(exit());
                     System.exit(0);
                 } else {
-                    DukePrint.print(runCommand(input.strip()));
+                    DukePrint.print(runCommand(input));
                 }
             } catch (Exception ex) {
-                DukePrint.print("\t " + ex.toString());
+                DukePrint.print("\t " + ex.getMessage());
             }
         }
     }
