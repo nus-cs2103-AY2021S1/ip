@@ -1,10 +1,13 @@
-// LEVEL 1
+// LEVEL 2
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 
 // The chat bot class to handle the internal logic
 public class ChatBot {
+    List<String> list = new LinkedList<>();
 
     // The entry point to run the chat bot
     public void start() {
@@ -12,10 +15,24 @@ public class ChatBot {
         sendChat(welcome);
         String response = receiveChat();
         while (!response.equals("bye")) {
-            sendChat(response);
+            if (response.equals("list")) {
+                printList();
+            } else {
+                sendChat("Added: " + response);
+                list.add(response);
+            }
             response = receiveChat();
         }
         sendChat("Bye. Hope to see you again soon!");
+    }
+
+    // Return the list of tasks
+    private void printList() {
+        System.out.println("    ____________________________________________________________");
+        for (int i = 1; i <= list.size(); i++) {
+            System.out.println("    " + i + ". " + list.get(i - 1));
+        }
+        System.out.println("    ____________________________________________________________");
     }
 
     // Send specified content in a chat box

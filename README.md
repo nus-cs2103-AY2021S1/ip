@@ -25,10 +25,9 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    |____/ \__,_|_|\_\___|
    ```
 
-## Level 1 Greet, Echo, Exit
+## Level 2. Add, List
 
-Implement a *skeletal* version of Duke that starts by greeting the user, simply echos commands entered by the user, and
-exits when the user types 'bye'.
+Add the ability to store whatever text entered by the user and display them back to the user when requested.
 
 Example:
 ```
@@ -37,23 +36,26 @@ Example:
      What can I do for you?
     ____________________________________________________________
 
+read book
+    ____________________________________________________________
+     added: read book
+    ____________________________________________________________
+
+return book
+    ____________________________________________________________
+     added: return book
+    ____________________________________________________________
+
 list
     ____________________________________________________________
-     list
+     1. read book
+     2. return book
     ____________________________________________________________
-
-blah
-    ____________________________________________________________
-     blah
-    ____________________________________________________________
-
 bye
     ____________________________________________________________
      Bye. Hope to see you again soon!
     ____________________________________________________________
-```
-* The indentation and horizontal lines are optional.
 
-> You are strongly encouraged to customize the chatbot name,
->command/display formats, and even the personality of the chatbot
->to make your chatbot unique.
+```
+* There is no need to save the data to the hard disk.
+* Assume there will be no more than 100 tasks. If you wish, you may use a fixed size array (e.g., String[100]) to store the items.
