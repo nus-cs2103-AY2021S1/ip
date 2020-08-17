@@ -35,15 +35,33 @@ public class TaskManager {
 
         else if (input.contains("deadline")) {
             System.out.println("--------------------------------------");
-            this.addToList(new Deadline(input));
-            this.taskPrint(input);
+            if(input.contains("/")) {
+                int notePos = input.indexOf("/") + 1;
+                String note = input.substring(notePos, input.length());
+                String echo = input.substring(9, notePos - 1) + " ------> " + note;
+                this.taskPrint(echo);
+                this.addToList(new Deadline(echo));
+            }
+            else {
+                this.addToList(new Deadline(input.substring(9, input.length())));
+            }
             System.out.println("--------------------------------------");
+
+
         }
 
         else if (input.contains("event")) {
             System.out.println("--------------------------------------");
-            this.addToList(new Event(input));
-            this.taskPrint(input);
+            if(input.contains("/")) {
+                int notePos = input.indexOf("/") + 1;
+                String note = input.substring(notePos, input.length());
+                String echo = input.substring(6, notePos - 1) + " ------> " + note;
+                this.taskPrint(echo);
+                this.addToList(new Event(echo));
+            }
+            else {
+                this.addToList(new Event(input.substring(6, input.length())));
+            }
             System.out.println("--------------------------------------");
         }
 
@@ -64,7 +82,7 @@ public class TaskManager {
         System.out.println("Check out your missions!");
         int i = 1;
         for (Task s : this.toDoList) {
-            System.out.println(i + ". " + " [" + s.getType() + "]"
+            System.out.println(i + ". " + " [" + s.getType() + "] "
                     + s.toString() + " [" + s.getTaskStatusIcon() + "]");
             i += 1;
         }
