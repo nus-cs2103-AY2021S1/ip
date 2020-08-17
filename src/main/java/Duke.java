@@ -49,7 +49,7 @@ public class Duke {
     }
 
     public static void listTasks() {
-        StringBuilder output = new StringBuilder();
+        StringBuilder output = new StringBuilder("Here are the tasks in your list:\n");
 
         for (Task task : tasks) {
             output.append(tasks.indexOf(task) + 1).append(".").append(task).append('\n');
