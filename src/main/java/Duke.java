@@ -56,10 +56,10 @@ public class Duke {
                     tasks[numTasks] = new ToDo(inputData.split("todo ")[1]);
                 } else if (firstWord.equals("deadline")) {
                     // deadline task
-                    tasks[numTasks] = new Deadline(inputData.split("/by ")[0], inputData.split("/by ")[1]);
+                    tasks[numTasks] = new Deadline(inputData.split("deadline ")[1].split("/by ")[0], inputData.split("/by ")[1]);
                 } else {
                     // event task
-                    tasks[numTasks] = new Event(inputData.split("/at ")[0], inputData.split("/at ")[1]);
+                    tasks[numTasks] = new Event(inputData.split("event ")[1].split("/at ")[0], inputData.split("/at ")[1]);
                 }
 
                 System.out.println(" ____________________________________________________________\n " +
@@ -86,8 +86,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + " |  _ \\ _   _| | _____ \n"
+        String logo = " ____        _\n"
+                + " |  _ \\ _   _| | _____\n"
                 + " | | | | | | | |/ / _ \\\n"
                 + " | |_| | |_| |   <  __/\n"
                 + " |____/ \\__,_|_|\\_\\___|\n";
