@@ -141,6 +141,51 @@ Now you have 8 tasks in the list.
 ---------------------------------------------
 
 ---------------------------------------------
+The number of the task to be deleted has to be provided.
+---------------------------------------------
+
+---------------------------------------------
+The number of the task to be deleted has to be provided.
+---------------------------------------------
+
+---------------------------------------------
+The task cannot be found.
+---------------------------------------------
+
+---------------------------------------------
+The task cannot be found.
+---------------------------------------------
+
+---------------------------------------------
+Here are the tasks in your list:
+1.[T][✓] borrow book
+2.[D][✘] return book (by: 30 Aug 0000)
+3.[E][✘] dinner with friends (at: 25 Aug 1100)
+4.[E][✓] exercise (at: monday, wednesday, friday)
+5.[D][✘] CS2103 project tasks (by: this thursday)
+6.[T][✓] do my laundry
+7.[D][✘] buy coffee (by: 4 aug)
+8.[E][✘] watch movie (at: 5 aug)
+---------------------------------------------
+
+---------------------------------------------
+Noted. I've removed this task:
+  [E][✘] dinner with friends (at: 25 Aug 1100)
+Now you have 7 tasks in the list.
+---------------------------------------------
+
+---------------------------------------------
+Here are the tasks in your list:
+1.[T][✓] borrow book
+2.[D][✘] return book (by: 30 Aug 0000)
+3.[E][✓] exercise (at: monday, wednesday, friday)
+4.[D][✘] CS2103 project tasks (by: this thursday)
+5.[T][✓] do my laundry
+6.[D][✘] buy coffee (by: 4 aug)
+7.[E][✘] watch movie (at: 5 aug)
+---------------------------------------------
+
+---------------------------------------------
 I'm sorry, but I don't know what that means...
 ---------------------------------------------
 

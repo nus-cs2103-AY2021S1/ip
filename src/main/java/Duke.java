@@ -40,6 +40,11 @@ public class Duke {
                         Task task = markTaskDone(listOfTasks, userInputArgs);
                         System.out.println("Nice! I've marked this task as done:");
                         Duke.printWithIndent(task.toString());
+                    } else if (userInputArgs[0].equals("delete")) {
+                        Task task = deleteTask(listOfTasks, userInputArgs);
+                        System.out.println("Noted. I've removed this task:");
+                        Duke.printWithIndent(task.toString());
+                        System.out.println(String.format("Now you have %d tasks in the list.", listOfTasks.size()));
                     } else {
                         Task task = createTask(userInputArgs);
                         listOfTasks.add(task);
@@ -67,7 +72,20 @@ public class Duke {
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             throw new DukeException("The number of the task to be marked as done has to be provided.");
         }
+    }
 
+    private static Task deleteTask(List<Task> listOfTasks, String[] userInputArgs) throws DukeException {
+        try {
+            int idx = Integer.parseInt(userInputArgs[1]);
+            if (idx <= 0 || idx > listOfTasks.size()) {
+                throw new DukeException("The task cannot be found.");
+            }
+            Task task = listOfTasks.get(idx - 1);
+            listOfTasks.remove(idx - 1);
+            return task;
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("The number of the task to be deleted has to be provided.");
+        }
     }
 
     private static Task createTask(String[] userInputArgs) throws DukeException {
