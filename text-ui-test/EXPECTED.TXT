@@ -1,7 +1,48 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+    ----------------------------------------
+     Hellowww!! I'm Alexa, your personal todo manager!
+     How can I help you today?
+    ----------------------------------------
+    ----------------------------------------
+     Got it. I've added this task:
+       [T][X] read book
+     Now you have 1 task in the list
+    ----------------------------------------
+    ----------------------------------------
+     Got it. I've added this task:
+       [D][X] do homework (by: no idea :-p)
+     Now you have 2 tasks in the list
+    ----------------------------------------
+    ----------------------------------------
+     Good job! I've marked this task as done:
+      [T][V] read book
+    ----------------------------------------
+    ----------------------------------------
+     Got it. I've added this task:
+       [E][X] project meeting (at: Mon 2-4pm)
+     Now you have 3 tasks in the list
+    ----------------------------------------
+    ----------------------------------------
+     Got it. I've added this task:
+       [T][X] join sports club
+     Now you have 4 tasks in the list
+    ----------------------------------------
+    ----------------------------------------
+     Good job! I've marked this task as done:
+      [T][V] join sports club
+    ----------------------------------------
+    ----------------------------------------
+     Got it. I've added this task:
+       [T][X] borrow book
+     Now you have 5 tasks in the list
+    ----------------------------------------
+    ----------------------------------------
+     Here are the tasks in your list:
+     1. [T][V] read book
+     2. [D][X] do homework (by: no idea :-p)
+     3. [E][X] project meeting (at: Mon 2-4pm)
+     4. [T][V] join sports club
+     5. [T][X] borrow book
+    ----------------------------------------
+    ----------------------------------------
+     Bye? I hope it's not forever! Come back soon!
+    ----------------------------------------

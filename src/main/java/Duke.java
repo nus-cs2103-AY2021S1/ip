@@ -11,9 +11,9 @@ public class Duke {
     }
 
     private static void respondClose() {
-        System.out.println("     ----------------------------------------");
+        System.out.println("    ----------------------------------------");
         System.out.println("     Bye? I hope it's not forever! Come back soon!");
-        System.out.println("     ----------------------------------------");
+        System.out.println("    ----------------------------------------");
     }
 
     private static String[] parseInput(String str) {
