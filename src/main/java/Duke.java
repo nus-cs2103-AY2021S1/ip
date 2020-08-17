@@ -40,7 +40,7 @@ public class Duke {
                     System.out.println("You have keyed in an invalid number!");
                 }
 
-            } else if (userInput.startsWith("todo")){ //added
+            } else if (userInput.startsWith("todo")) { //added
                 ToDo newTask = new ToDo(userInput.substring(5));
                 tasks.add(newTask); //adds into tasks list
                 System.out.println(line);
@@ -50,6 +50,12 @@ public class Duke {
                 System.out.println(newTask);
                 System.out.println("Now you have " + tasks.size() + "tasks in the list.");
                 System.out.println(line);
+            } else if (userInput.startsWith("deadline")) {
+
+            } else if (userInput.startsWith("event")) {
+
+            } else { //invalid command
+                System.out.println("You have keyed in an invalid command! \n (Valid commands: todo, deadline, event, list, bye)");
             }
         }
 
