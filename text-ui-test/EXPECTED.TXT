@@ -1,4 +1,4 @@
- ____________________________________________________________
+  ____________________________________________________________
   Hello! I'm Duke
   What can I do for you?
   ____________________________________________________________
@@ -17,10 +17,10 @@ deadline return book /by June 6th
   Now you have 2 tasks in the list.
   ____________________________________________________________
 
-event project meeting /at Aug 2-4pm
+event project meeting /at Aug
   ____________________________________________________________
   Got it. I've added this task:
-  [E][✗] project meeting(at: Aug 2-4pm)
+  [E][✗] project meeting(at: Aug)
   Now you have 3 tasks in the list.
   ____________________________________________________________
 
@@ -30,32 +30,15 @@ done 1
    [T][✓] read book
   ____________________________________________________________
 
-todo join sports club
-  ____________________________________________________________
-  Got it. I've added this task:
-  [T][✗] join sports club
-  Now you have 4 tasks in the list.
-  ____________________________________________________________
-
-todo borrow book
-  ____________________________________________________________
-  Got it. I've added this task:
-  [T][✗] borrow book
-  Now you have 5 tasks in the list.
-  ____________________________________________________________
-
-done 4
-  ____________________________________________________________
-   Nice! I've marked this task as done:
-   [T][✓] join sports club
-  ____________________________________________________________
-
 list
   ____________________________________________________________
    Here are the tasks in your list:
   1.[T][✓] read book
   2.[D][✗] return book(by: June 6th)
-  3.[E][✗] project meeting(at: Aug 2-4pm)
-  4.[T][✓] join sports club
-  5.[T][✗] borrow book
+  3.[E][✗] project meeting(at: Aug)
+  ____________________________________________________________
+
+bye
+  ____________________________________________________________
+  Bye. Hope to see you again soon!
   ____________________________________________________________

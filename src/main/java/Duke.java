@@ -1,10 +1,21 @@
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class Duke {
     private static List<String> todos = new ArrayList<>();
+    public static void scan(){
+        Scanner sc = new Scanner(System.in);
+        if(sc.hasNext()) {
+            do {
+                todos.add(sc.nextLine());
+            } while (sc.hasNextLine());
+        }
+    }
     public static void scan(FileInputStream inputStream){
         try {
             int size = inputStream.available();
@@ -30,29 +41,28 @@ public class Duke {
     public static void output(){
         System.out.println("  ____________________________________________________________\n" + "  Hello! I'm Duke\n" + "  What can I do for you?\n" +
                 "  ____________________________________________________________");
-        try {
             for (String string : todos) {
                 if (string.equals("bye")) {
                     System.out.println("\n" + string + "\n  ____________________________________________________________");
                     System.out.println("  Bye. Hope to see you again soon!\n" + "  ____________________________________________________________");
                     break;
                 }
-                if (string.equals("list")) {
+                else if (string.equals("list")) {
                     System.out.println("\n" + string + "\n  ____________________________________________________________");
                     Task.listing();
-                } else if (string.substring(0, 4).equals("done")) {
+                }
+                else if (string.substring(0, 4).equals("done")) {
                     System.out.println("\n" + string + "\n  ____________________________________________________________");
                     int ID = Integer.parseInt(string.substring(5));
                     Task.tasks.get(ID - 1).setDone();
                     Task.tasks.get(ID - 1).donePrint();
-                } else if (string.substring(0, 4).equals("todo")) {
-                    if(string.length() == 4 || string.length() == 5){
-                        throw  new ToDoException();
-                    }
+                }
+                else if (string.substring(0, 4).equals("todo")) {
                     System.out.println("\n" + string + "\n  ____________________________________________________________");
-                    todo t = new todo(string.substring(5));
-                    t.output();
-                } else if (string.substring(0, 5).equals("event")) {
+                        todo t = new todo(string.substring(5));
+                        t.output();
+                }
+                else if (string.substring(0, 5).equals("event")) {
                     System.out.println("\n" + string + "\n  ____________________________________________________________");
                     String s = "";
                     int index = -1;
@@ -66,7 +76,9 @@ public class Duke {
                     event e = new event(s.substring(1, s.length() - 1), string.substring(index + 4));
                     e.output();
                     //event e = new event(string.substring())
-                } else if (string.substring(0, 8).equals("deadline")) {
+                }
+
+                else if (string.substring(0, 8).equals("deadline")) {
                     System.out.println("\n" + string + "\n  ____________________________________________________________");
                     String s = "";
                     int index = -1;
@@ -80,26 +92,15 @@ public class Duke {
                     deadline e = new deadline(s.substring(1, s.length() - 1), string.substring(index + 4));
                     e.output();
                 } else {
-                    throw new UnknownError();
+                    System.out.println("\n" + string + "\n  ____________________________________________________________");
                 }
+                //System.out.println(string);
             }
-        }catch (UnknownError u){
-            System.out.println("  ☹ OOPS!!! The description of a todo cannot be empty.\n" +
-                    "  ____________________________________________________________");
-        }catch (ToDoException t){
-            System.out.println("  ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                    "  ____________________________________________________________");
-        }
-    }
-    public static void main(String[] args) {
-        try {
-            String file = args[0];
-            FileInputStream inputStream = new FileInputStream(file);
-            scan(inputStream);
-           output();
-        }catch (Exception e){
 
-        }
+    }
+    public static void main(String[] args) throws FileNotFoundException {
+        scan();
+        output();
 
     }
 }

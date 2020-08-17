@@ -17,7 +17,7 @@ public class Task {
           //      "  ____________________________________________________________");
     }
     public void output(){
-        System.out.println("  Got it. I've added this task: \n  " + this.toString() + "\n" +
+        System.out.println("  Got it. I've added this task:\n  " + this.toString() + "\n" +
                 "  Now you have " + tasks.size() + " tasks in the list.\n" + "  ____________________________________________________________");
     }
     public void setDone(){
@@ -25,12 +25,12 @@ public class Task {
         tasks.get(this.ID - 1).done = true;
     }
     public void donePrint(){
-        System.out.println("   Nice! I've marked this task as done: ");
+        System.out.println("   Nice! I've marked this task as done:");
         System.out.println("   " + this.toString());
         System.out.println("  ____________________________________________________________");
     }
     public static void listing(){
-        System.out.println("   Here are the tasks in your list: ");
+        System.out.println("   Here are the tasks in your list:");
         for(Task task : tasks){
              System.out.println("  " + task.ID + "." + task.toString());
         }
