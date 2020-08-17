@@ -1,18 +1,42 @@
+import java.util.Scanner;
+
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
 
+    public static void greeting() {
         String greetingMsg = "\n___________________________________________________________"
-                + "\n Hello! I'm Duke"
-                + "\n What can I do for you?";
-
-        String byeMsg = "\n___________________________________________________________"
-                + "\n Bye. Hope to see you again soon!"
+                + "\n Hello! I'm DukeBT. (:"
+                + "\n What can I do for you?"
+                + "\n\n **Type 'bye' to exit (: "
                 + "\n___________________________________________________________\n";
-        System.out.println(logo + greetingMsg + byeMsg);
+        System.out.println(greetingMsg);
+    }
+
+    public static void echo(String inputMsg) {
+        String outputMsg = "\n___________________________________________________________"
+                + "\n "+ inputMsg
+                + "\n___________________________________________________________\n";
+
+        System.out.println(outputMsg);
+    }
+
+    public static void bye() {
+        String byeMsg = "\n___________________________________________________________"
+                +"\n Bye. Hope to see you again soon!"
+                + "\n___________________________________________________________\n";
+
+        System.out.println(byeMsg);
+    }
+
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        greeting();
+        String inputMsg = sc.nextLine();
+        while (!inputMsg.equals("bye")){
+            echo(inputMsg);
+            inputMsg = sc.nextLine();
+        }
+        bye();
     }
 }
