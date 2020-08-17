@@ -1,0 +1,11 @@
+todo study for CS2105
+deadline submit homework /by 17 August 5pm
+event watch movie /at 17 August 8pm-10pm
+list
+done 1
+list
+done 2
+list
+done 3
+list
+bye
