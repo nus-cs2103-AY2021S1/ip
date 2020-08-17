@@ -26,7 +26,7 @@ public class Duke {
      * @return output by Hal9000
      */
     public String get_output(Task taskInput) {
-        return String.format("Got it. I've added this task:\n  %s %s\nNow you have %d tasks in the list.\n", labels(taskInput), taskInput.toString(), this.tasks.size());
+        return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.\n", taskInput.toString(), this.tasks.size());
     }
 
     public static String format_response(String output_msg) {
@@ -36,30 +36,11 @@ public class Duke {
         "____________________________________________________________\n";
     }
 
-    public static String labels(Task t) {
-        String label = "";
-        if (t.getType() == TaskType.ToDo) {
-            label += "[T]";
-        } else if (t.getType() == TaskType.Deadline) {
-            label += "[D]";
-        } else {
-            label += "[E]";
-        }
-
-        if (t.isDone()) {
-            label += "[✓]";
-        } else {
-            label += "[✗]";
-        }
-
-        return label;
-    }
-
     public String summarize() {
         String all_tasks = "Here are the tasks in your list:\n";
         for (int i = 0; i < this.tasks.size(); i++) {
             Task t = tasks.get(i);
-            all_tasks += String.format("%d.%s %s\n", i+1, labels(t), t.toString());
+            all_tasks += String.format("%d.%s\n", i+1, t.toString());
         }
         return all_tasks;
     }
@@ -75,11 +56,11 @@ public class Duke {
 
     public String deleteTask(int index) {
         if (tasks.size() <= index) {
-            return "No such task";
+            return "No such task\n";
         }
         Task t = this.tasks.get(index);
         this.tasks.remove(index);
-        return String.format("Noted. I've removed this task:\n  %s %s\nNow you have %d tasks in the list.\n", labels(t), t.toString(), this.tasks.size());
+        return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.\n", t.toString(), this.tasks.size());
     }
 
     public static TaskType categorize(String[] input_parts) throws Exception {

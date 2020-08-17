@@ -1,4 +1,6 @@
 class Event extends Task {
+    static String SYMBOL = "[E]";
+
     private String details;
 
     public Event(String name, String details) {
@@ -12,6 +14,7 @@ class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("%s (at: %s)", name, details);
+        String tick = this.isDone() ? "[✓]" : "[✗]";
+        return String.format("%s%s %s", SYMBOL, tick, name);
     }
 }
