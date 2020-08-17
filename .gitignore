@@ -16,6 +16,7 @@ bin/
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
 
-CHANGELOG.md
+PRIVATE-CHANGELOG.md
+node_modules
 .vscode
 *.class
