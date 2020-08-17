@@ -1,0 +1,14 @@
+list
+todo borrow book
+done 1
+deadline return book /by 30 Aug 0000
+list
+event dinner with friends /at 25 Aug 1100
+event exercise /at monday, wednesday, friday
+deadline CS2103 project tasks /by this thursday
+todo do my laundry
+list
+done 6
+done 4
+list
+bye
