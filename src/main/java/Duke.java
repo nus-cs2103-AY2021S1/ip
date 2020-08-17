@@ -33,24 +33,24 @@ public class Duke {
         ToDos.createTodoTask(taskTitle, tasks);
     }
 
-    public static void addDeadlineTask(String taskTitle, String deadlineTime,ArrayList<Task> tasks) {
+    public static void addDeadlineTask(String taskTitle, String deadlineTime, ArrayList<Task> tasks) {
         String outputMsg = "\n___________________________________________________________"
                 + "\n (^.^)"
-                + "\n Deadline-Task added: " + taskTitle+" (by: "+deadlineTime+")"
+                + "\n Deadline-Task added: " + taskTitle + " (by: " + deadlineTime + ")"
                 + "\n___________________________________________________________\n";
         System.out.println(outputMsg);
 
-        Deadlines.createDeadline(taskTitle,deadlineTime,tasks);
+        Deadlines.createDeadline(taskTitle, deadlineTime, tasks);
     }
 
-    public static void addEventTask(String taskTitle, String eventTime,ArrayList<Task> tasks) {
+    public static void addEventTask(String taskTitle, String eventTime, ArrayList<Task> tasks) {
         String outputMsg = "\n___________________________________________________________"
                 + "\n (^.^)"
-                + "\n Event-Task added: " + taskTitle+" (by: "+eventTime+")"
+                + "\n Event-Task added: " + taskTitle + " (by: " + eventTime + ")"
                 + "\n___________________________________________________________\n";
         System.out.println(outputMsg);
 
-        Events.createEvent(taskTitle,eventTime,tasks);
+        Events.createEvent(taskTitle, eventTime, tasks);
     }
 
     public static void getAllTasks(ArrayList<Task> tasks) {
@@ -141,8 +141,27 @@ public class Duke {
                 } catch (IndexOutOfBoundsException e) {
                     invalidDoneTaskIndex(tasks.size());
                 }
+            } else if (inputMsg.startsWith("todo")) {
+                String taskTitle;
+                taskTitle = inputMsg.split("todo ")[1];
+
+                addTodoTask(taskTitle, tasks);
+            } else if (inputMsg.startsWith("deadline")) {
+                String taskTitle;
+                String deadlineTime;
+
+                taskTitle = inputMsg.split("deadline ")[1].split("/by")[0];
+                deadlineTime = inputMsg.split("deadline ")[1].split("/by")[1];
+                addDeadlineTask(taskTitle, deadlineTime, tasks);
+            } else if (inputMsg.startsWith("event")) {
+                String taskTitle;
+                String eventTime;
+
+                taskTitle = inputMsg.split("event ")[1].split("/at")[0];
+                eventTime = inputMsg.split("event ")[1].split("/at")[1];
+                addEventTask(taskTitle, eventTime, tasks);
             } else {
-                tasks = addTask(inputMsg, tasks);
+                addTask(inputMsg, tasks);
             }
             inputMsg = sc.nextLine();
         }
