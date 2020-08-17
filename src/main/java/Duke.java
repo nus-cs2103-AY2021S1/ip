@@ -94,9 +94,13 @@ public class Duke implements IDuke {
                 // Handle list command
                 handleDisplay();
                 return this;
-            } else if (command.matches("^done -?[0-9]+$")) {
+            } else if (command.matches("^done.*")) {
                 // Handle done command
-                int index = Integer.parseInt(command.split(" ")[1]);
+                if (!command.matches("^done -?[0-9]+$")) {
+                    throw new DukeIllegalArgumentException(
+                            "Wrong done command! Format: done <taskId>");
+                }
+                int index = Integer.parseInt(command.split(" ", 2)[1]);
                 return handleDone(index);
             } else if (command.matches("^todo.*")) {
                 // Handle todo command
@@ -122,6 +126,14 @@ public class Duke implements IDuke {
                 }
                 String[] params = command.split(" ", 2)[1].split(" /at ");
                 return handleEvent(params[0], params[1]);
+            } else if (command.matches("^delete.*")) {
+                // Handle delete command
+                if (!command.matches("^delete -?[0-9]+$")) {
+                    throw new DukeIllegalArgumentException(
+                            "Wrong delete command! Format: delete <taskId>");
+                }
+                int index = Integer.parseInt(command.split(" ")[1]);
+                return handleDelete(index);
             } else {
                 throw new DukeUnrecognizedArgumentException("Unrecognizable command!");
             }
@@ -155,6 +167,17 @@ public class Duke implements IDuke {
         IDuke newDuke = doneTask(index);
         System.out.println(TextFormatter.getFormattedText(
                 "Naisu! I've marked this task done!\n" + newDuke.getTask(index)));
+        return newDuke;
+    }
+
+    private IDuke handleDelete(int index) {
+        if (index < 1 || index > getNumTask()) {
+            throw new DukeIllegalArgumentException("Task index out of bound!");
+        }
+        IDuke newDuke = deleteTask(index);
+        System.out.println(TextFormatter.getFormattedText(
+                "Hmmm~! I've removed this task:\n\t" + getTask(index)
+                + "\n Now you have " + newDuke.getNumTask() + " task(s) in the list."));
         return newDuke;
     }
 
@@ -211,11 +234,13 @@ public class Duke implements IDuke {
     }
 
     /**
-     * {@inheritDoc}
-     * @throws DukeIllegalArgumentException
+     * Marks a specified task as done.
+     * Task to be done is specified by its index id.
+     *
+     * @return Duke with task done.
+     * @throws DukeIllegalArgumentException If index out of bound.
      */
-    @Override
-    public IDuke doneTask(int id) {
+    private IDuke doneTask(int id) throws DukeIllegalArgumentException {
         if (id - 1 > list.size() || id < 0) {
             throw new DukeIllegalArgumentException(
                     "Cannot done task! Task id out of bound!");
@@ -225,6 +250,23 @@ public class Duke implements IDuke {
         }
         ArrayList<ITask> newList = new ArrayList<>(this.list);
         newList.set(id - 1, newList.get(id - 1).markComplete());
+        return new Duke(newList);
+    }
+
+    /**
+     * Removes a specified task.
+     * Task to be removed is specified by its index id.
+     *
+     * @return Duke with task removed.
+     * @throws DukeIllegalArgumentException If index out of bound.
+     */
+    private IDuke deleteTask(int id) throws DukeIllegalArgumentException {
+        if (id - 1 > list.size() || id < 0) {
+            throw new DukeIllegalArgumentException(
+                    "Cannot delete task! Task id out of bound!");
+        }
+        ArrayList<ITask> newList = new ArrayList<>(this.list);
+        newList.remove(id - 1);
         return new Duke(newList);
     }
 

@@ -45,12 +45,4 @@ public interface IDuke {
      * @return Resulting Duke object.
      */
     IDuke handleCommand(String command);
-
-    /**
-     * Marks a specified task as done.
-     * Task to be done is specified by its index id.
-     *
-     * @return Duke with task done.
-     */
-    IDuke doneTask(int id);
 }
