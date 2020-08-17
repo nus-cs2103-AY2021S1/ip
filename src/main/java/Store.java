@@ -19,7 +19,7 @@ public class Store {
         try {
             String actual_item = item.strip();
         Task toAdd;
-        if (type.equals(TODO)) {
+            if (type.equals(TODO)) {
             toAdd = new Task(actual_item);
             this.addTask(toAdd);
         } else {
@@ -80,6 +80,20 @@ public class Store {
             Integer real_index = one_index - 1;
             Task toComplete = this.allItems.get(real_index);
             toComplete.finishTask();
+        } catch (NumberFormatException ex) {
+            System.out.println("I can't seem to understand what task you are referring to.\n" +
+                    "Please let me know in this format: done <number of task> \n" + line);
+        } catch (IndexOutOfBoundsException ex) {
+            System.out.println("Hmm... I don't have a task numbered " + answer + "\n" + line);
+        }
+        return true;
+    }
+    public boolean deleteTask(String answer) {
+        try {
+            int one_index = Integer.parseInt(answer);
+            int real_index = one_index - 1;
+            this.allItems.remove(real_index);
+            System.out.println("I have removed the task from your list.\n" + line);
         } catch (NumberFormatException ex) {
             System.out.println("I can't seem to understand what task you are referring to.\n" +
                     "Please let me know in this format: done <number of task> \n" + line);

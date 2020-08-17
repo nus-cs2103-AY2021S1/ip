@@ -17,6 +17,8 @@ public class Logic {
     private final String TODO_COMMAND = "todo";
     private final String DEADLINE_COMMAND = "deadline";
     private final String EVENT_COMMAND = "event";
+    private final String DELETE_COMMAND = "delete";
+
 
     public boolean digestString(String answer) {
         try {
@@ -24,7 +26,9 @@ public class Logic {
             String[] answers = answer.split(" ");
             if (answers.length == 2 && answers[0].equals(DONE_COMMAND)) {
                 return store.completeTask(answers[1]);
-            } else if (editted_answer.equals(LIST_COMMAND)) {
+            } else if (answers.length == 2 && answers[0].equals(DELETE_COMMAND)) {
+                return store.deleteTask(answers[1]);
+            }  else if (editted_answer.equals(LIST_COMMAND)) {
                 return this.store.printStore();
             } else if (editted_answer.equals(EXIT_COMMAND)) {
                 return this.exit();
