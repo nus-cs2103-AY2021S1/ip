@@ -25,23 +25,13 @@ public class Bot {
         } else if (next.equals("list")) {
             this.displayList();
             listen();
-        } else if (next.startsWith("done ")){
-            try {
-                this.markDone(next);
-            } catch (NumberFormatException e) {
-                this.printSection();
-                System.out.println("Please input a number");
-                this.printSection();
-            } catch (IndexOutOfBoundsException e) {
-                this.printSection();
-                System.out.println("Please input a valid number");
-                this.printSection();
-            } finally {
-                this.listen();
-            }
         } else {
             try {
-                if (next.startsWith("todo ")) {
+                if (next.startsWith("done ")) {
+                    this.markDone(next);
+                } else if (next.startsWith("delete ")) {
+                    this.delete(next);
+                } else if (next.startsWith("todo ")) {
                     this.addToDo(next);
                 } else if (next.startsWith("deadline ")) {
                     this.addDeadline(next);
@@ -53,6 +43,14 @@ public class Bot {
             } catch (DukeException e) {
                 this.printSection();
                 System.out.println(e.getMessage());
+                this.printSection();
+            } catch (NumberFormatException e) {
+                this.printSection();
+                System.out.println("Please input a number");
+                this.printSection();
+            } catch (IndexOutOfBoundsException e) {
+                this.printSection();
+                System.out.println("Please input a valid number");
                 this.printSection();
             } finally {
                 this.listen();
@@ -116,6 +114,15 @@ public class Bot {
         } else {
             throw new DukeException("Please input a time for the event");
         }
+    }
+
+    private void delete(String next) {
+        int i = Integer.valueOf(next.substring(7, next.length()));
+        this.printSection();
+        System.out.println("Noted. I've removed this task:\n\t" + list.get(i - 1));
+        list.remove(i - 1);
+        System.out.println("Now you have " + list.size() + " tasks in the list");
+        this.printSection();
     }
 
     private void printSection() {
