@@ -29,6 +29,15 @@ public class Bob {
             } catch (BobIncompleteEventDescriptionException e) {
                 System.out.println("The description for this event is incomplete. Please remember to include a brief description alongside the period of this event.");
                 System.out.println("Here's the format: event [brief description] /at [period]");
+            }  catch(IndexOutOfBoundsException e) {
+                if (list.isEmpty()) {
+                    System.out.println("There aren't any tasks on the list!");
+                } else {
+                    System.out.println("There are no tasks on the list with the provided index. Please check the list and try again!");
+                }
+            } catch (NumberFormatException e) {
+              System.out.println("Please provide the index of a task on the list to delete it.");
+              System.out.println("Here's the format: delete [index]");
             } catch (IllegalArgumentException e) {
                 System.out.println("Sorry, I do not understand your request. Please try again.");
             }
@@ -81,6 +90,13 @@ public class Bob {
             list.add(task);
             System.out.println("Got it! I have added a new task to the list.");
             System.out.println("added: " + task.toString());
+        } else if (command.contains("delete")) {
+            int index = Integer.parseInt(command.substring(command.length()-1));
+            Task removed = list.get(index-1);
+            list.remove(index-1);
+            System.out.println("Noted. I have removed the following task: ");
+            System.out.println("\t" + removed.toString());
+            System.out.println("There are now " + list.size() + " remaining tasks on the list.");
         } else {
             throw new IllegalArgumentException();
         }
