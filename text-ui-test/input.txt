@@ -6,3 +6,7 @@ todo
 event
 deadline
 --help
+done
+done 1
+delete
+delete 2

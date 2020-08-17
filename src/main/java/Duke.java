@@ -23,8 +23,9 @@ public class Duke {
     static final String DEADLINE_COMMAND =  "deadline";
     static final String EVENT_COMMAND = "event";
     static final String HELP_COMMAND = "--help";
+    static final String DELETE_COMMAND = "delete";
 
-    static final String LINE = "     ____________________________________________________________\n";
+    static final String LINE = "     ___________________________________________________________________________\n";
     static final String DOUBLE_TAB = "      ";
 
 
@@ -32,14 +33,18 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         greet();
         while (sc.hasNext()) {
-            String input = sc.nextLine();
+            String input = sc.nextLine().toLowerCase();
             if (input.equals(TERMINATE_COMMAND)) {
                 bye();
                 break;
             } else if (input.equals(LIST_COMMAND)) {
                 runList();
             } else if(input.contains(DONE_COMMAND)){
-                done(input);
+                try {
+                    done(input);
+                } catch (IndexOutOfBoundsException e){
+                    printException(new DoneException());
+                }
             } else if(input.contains(TODO_COMMAND)){
                 try {
                     todoTask(input);
@@ -60,10 +65,24 @@ public class Duke {
                 }
             } else if(input.contains(HELP_COMMAND)){
                 help();
+            } else if(input.contains(DELETE_COMMAND)){
+                try {
+                    delete(input);
+                } catch (IndexOutOfBoundsException e) {
+                    printException(new DeleteException());
+                }
             } else {
                 printException(new AnonymousException(input));
             }
         }
+    }
+
+    private void delete(String input) {
+        int index = Integer.parseInt(input.split(" ")[1]);
+        Task removedTask = list.remove(index-1);
+        printMessage("Noted. I've removed this task:\n"
+                +format( removedTask.toString()) + "\n"
+                + format("Now you have " + list.size() + " tasks in the list"));
     }
 
     private void help() {
@@ -71,11 +90,12 @@ public class Duke {
         printCommandList("todo","todo <TASK_NAME>");
         printCommandList("event","event <EVENT_NAME> / <EVENT_TIME>");
         printCommandList("deadline", "deadline <DEADLINE_NAME> / <DEADLINE_TIME>");
+        printCommandList("delete", "delete <TASK_NUMBER>");
+        printCommandList("done", "done <TASK_NUMBER>");
     }
 
     private void printCommandList(String command, String format) {
-        String indentation = "%-20s%s%n" ;
-        String SINGLE_TAB = "   ";
+        String indentation = "%-20s%s%n" ;  
         System.out.printf(indentation,command,format);
     }
 
@@ -93,6 +113,7 @@ public class Duke {
     private String format(String text) {
         return DOUBLE_TAB + text;
     }
+
     private void printMessage(String text) {
         System.out.print(LINE);
         System.out.println(format(text));
