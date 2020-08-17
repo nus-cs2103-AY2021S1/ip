@@ -30,6 +30,15 @@ public class Duke {
                         throw new InvalidTaskIndexException();
                     }
                     formatMarkAsDone(num - 1);
+                } else if (userInput.startsWith("delete")) {
+                    if (userInput.substring(6).isEmpty()) {
+                        throw new MissingTaskIndexException();
+                    }
+                    int num = Integer.parseInt(userInput.substring(7));
+                    if (num <= 0 || num > lst.size()) {
+                        throw new InvalidTaskIndexException();
+                    }
+                    formatDeleteTask(num - 1);
                 } else if (userInput.startsWith("todo")) {
                     if (userInput.substring(4).isEmpty()) {
                         throw new MissingTaskDescriptionException("todo");
@@ -94,6 +103,16 @@ public class Duke {
         System.out.println(line);
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
+        System.out.println(String.format("Now you have %d %s in the list.", size, size == 1 ? "task" : "tasks"));
+        System.out.println(line);
+    }
+
+    public static void formatDeleteTask(int num) {
+        System.out.println(line);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(lst.get(num));
+        lst.remove(num);
+        int size = lst.size();
         System.out.println(String.format("Now you have %d %s in the list.", size, size == 1 ? "task" : "tasks"));
         System.out.println(line);
     }
