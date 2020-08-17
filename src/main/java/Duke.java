@@ -1,11 +1,13 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     private static final String line = "----------------------";
 
     // for the list
-    private static final Task[] tasks = new Task[100];
-    private static int index = 0;
+    private static final List<Task> tasks = new ArrayList<>(); // not a fixed size anymore
     private static boolean dukeOn = true; // flag to indicate duke is ready to receive any query
 
     public static void main(String[] args) {
@@ -40,13 +42,13 @@ public class Duke {
             exit();
         } else if (command.equals("list")) { // 2. list
             displayList();
-        } else if (command.equals("done")){ // 3. done (needs an after command)
+        } else if (command.equals("done")){ // 3. done (needs a valid number)
             int taskNo = Integer.parseInt(afterCommand) - 1;
-            if (taskNo >= index || taskNo < 0) {
+            if (taskNo >= tasks.size() || taskNo < 0) {
                 throw new DukeException("Please enter a valid task no!");
             }
-            tasks[taskNo].markAsCompleted();
-            displayCompletedTask(tasks[taskNo]);
+            tasks.get(taskNo).markAsCompleted();
+            displayCompletedTask(tasks.get(taskNo));
         } else if (command.equals("todo")) { // 4. to do (needs an after command)
             if (afterCommand == null) {
                 throw new DukeException("Please do not leave the todo description empty!");
@@ -86,7 +88,14 @@ public class Duke {
             String details = splittedEvent[0].trim();
             String at = splittedEvent[1].split("\\s", 2)[1];
             addOnToList(new Event(details, at));
-        } else {
+        } else if (command.equals("delete")) { // 7. delete (needs a valid number)
+            int taskNo = Integer.parseInt(afterCommand) - 1;
+            if (taskNo >= tasks.size() || taskNo < 0) {
+                throw new DukeException("Please enter a valid task no!");
+            }
+            displayDeletedTask(taskNo);
+        }
+        else {
             // if a bad command is thrown at Duke
             throw new DukeException("Please key in a command I understand!");
         }
@@ -108,26 +117,32 @@ public class Duke {
     }
 
     private static void addOnToList(Task task) {
-        tasks[index++] = task;
+        tasks.add(task);
         format("Got it. I've added this task:\n" + task +  "\n"
-            + "Now you have " + index + " tasks in the list.");
+            + "Now you have " + tasks.size() + " tasks in the list.");
     }
 
     private static void displayList() {
         StringBuilder sb = new StringBuilder();
-        if (index == 0) {
+        if (tasks.size() == 0) {
             sb.append("No tasks!");
             format(sb.toString());
             return;
         }
         sb.append("Here are the tasks in your list:\n");
-        for (int i = 0; i < index; i++) {
-            sb.append(i + 1 + "." + tasks[i] + "\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append(i + 1 + "." + tasks.get(i) + "\n");
         }
         format(sb.toString());
     }
 
     private static void displayCompletedTask(Task task) {
         format("Nice! I've marked this task as done:\n" + task);
+    }
+
+    private static void displayDeletedTask(int index) {
+        format("Noted. I've removed this task:\n" + tasks.get(index) + "\n"
+                + "Now you have " + (tasks.size() - 1) + " tasks in the list.");
+        tasks.remove(index);
     }
 }
