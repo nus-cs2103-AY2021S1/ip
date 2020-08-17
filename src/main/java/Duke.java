@@ -40,9 +40,11 @@ public class Duke {
             if(next.equals("bye") ) {
                 break;
             }
+
             else if(next.equals("list")) {
                 taskManager.displayList();
             }
+
             else {
                 System.out.println("--------------------------------------");
                 taskManager.addToList(next);
