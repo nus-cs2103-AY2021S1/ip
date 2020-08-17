@@ -32,11 +32,37 @@ public class Duke {
         System.out.println(store.get(num - 1));
     }
 
-    public void addTask(Task task) {
+    public void addTaskToList(Task task) {
         store.add(task);
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
         System.out.println(String.format("Now you have %d tasks in the list", store.size()));
+    }
+
+    public void addTask(String command, String description) throws InvalidEventException, InvalidDeadlineException {
+        String splitted[];
+        switch (command) {
+            case "todo":
+                addTaskToList(new Todo(description));
+                break;
+            case "deadline":
+                splitted = description.split(" /by ", 2);
+                if (splitted.length == 1) {
+                    throw new InvalidDeadlineException();
+                }
+                addTaskToList(new Deadline(splitted[0], splitted[1]));
+                break;
+            case "event":
+                splitted = description.split(" /at ", 2);
+                if (splitted.length == 1) {
+                    throw new InvalidEventException();
+                }
+                addTaskToList(new Event(splitted[0], splitted[1]));
+                break;
+            default:
+                break;
+        }
+
     }
 
     public void run() {
@@ -48,31 +74,34 @@ public class Duke {
             String input = scanner.nextLine().trim();
             String[] splitString = input.split(" ", 2);
             String command = splitString[0];
-            switch (command) {
-                case "bye":
-                    running = false;
-                    break;
-                case "list":
-                    list();
-                    break;
-                case "todo":
-                    addTask(new Todo(splitString[1]));
-                    break;
-                case "deadline":
-                    String[] deadlineInfo = splitString[1].split(" /by ");
-                    addTask(new Deadline(deadlineInfo[0], deadlineInfo[1]));
-                    break;
-                case "event":
-                    String[] eventInfo = splitString[1].split(" /at ");
-                    addTask(new Event(eventInfo[0], eventInfo[1]));
-                    break;
-                case "done":
-                    int num = Integer.parseInt(splitString[1]);
-                    doneTask(num);
-                    break;
-                default:
-                    break;
+
+            try {
+                switch (command) {
+                    case "bye":
+                        running = false;
+                        break;
+                    case "list":
+                        list();
+                        break;
+                    case "todo":
+                    case "deadline":
+                    case "event":
+                        if (splitString.length == 1) {
+                            throw new InvalidDescriptionException();
+                        }
+                        addTask(command, splitString[1].trim());
+                        break;
+                    case "done":
+                        int num = Integer.parseInt(splitString[1]);
+                        doneTask(num);
+                        break;
+                    default:
+                        throw new InvalidCommandException();
+                }
+            } catch(DukeException e) {
+                System.out.println(e.getMessage());
             }
+
         }
         scanner.close();
         System.out.println("Bye. Hope to see you again soon!");
