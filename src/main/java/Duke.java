@@ -1,39 +1,46 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
-    private static Task[] lst = new Task[100];
-    private static int counter = 0;
+    private static ArrayList<Task> lst = new ArrayList<>();
 
     public static void showList() {
         System.out.println("-------------------------------------------------------------------------------------");
         System.out.println("Here are the tasks in your list: ");
-        for (int i = 0; i < counter; i++) {
-            System.out.println((i + 1) + "." + lst[i]);
+        for (int i = 0; i < lst.size(); i++) {
+            System.out.println((i + 1) + "." + lst.get(i));
         }
         System.out.println("-------------------------------------------------------------------------------------");
     }
 
     public static void markDone(int i) {
-        lst[i].markAsDone();
+        lst.get(i).markAsDone();
         System.out.println("-------------------------------------------------------------------------------------");
         System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("    " + lst[i]);
+        System.out.println("    " + lst.get(i));
         System.out.println("-------------------------------------------------------------------------------------");
     }
 
     public static void addTask(Task t) {
         System.out.println("-------------------------------------------------------------------------------------");
         System.out.println("Got it. I've added this task:");
-        lst[counter] = t;
-        System.out.println("    " + lst[counter]);
-        counter += 1;
-        System.out.println("Now you have " + counter + " tasks in the list.");
+        lst.add(t);
+        System.out.println("    " + lst.get(lst.size() - 1));
+        System.out.println("Now you have " + lst.size() + " tasks in the list.");
         System.out.println("-------------------------------------------------------------------------------------");
     }
 
+    public static void deleteTask(int i) {
+        System.out.println("-------------------------------------------------------------------------------------");
+        System.out.println("Noted. I've removed this task:");
+        Task t = lst.remove(i);
+        System.out.println("    " + t);
+        System.out.println("Now you have " + lst.size() + " tasks in the list.");
+        System.out.println("-------------------------------------------------------------------------------------");
+    }
     public static void processString(String st) throws InvalidDoneException, InvalidTaskArgumentException,
-            InvalidCommandException {
+            InvalidDeleteException, InvalidCommandException {
         if (st.equals("list")) {
             showList();
         } else if ((st.length() >= 4) && (st.substring(0, 4).equals("done"))) {
@@ -43,7 +50,7 @@ public class Duke {
             } else {
                 try {
                     int i = Integer.parseInt(st.substring(5)) - 1;
-                    if (i >= counter) {
+                    if ((i < 0) || (i >= lst.size())) {
                         throw new InvalidDoneException("\u2639" + " OOPS!!! The number specified does not represent " +
                                 "a valid task.");
                     }
@@ -86,6 +93,23 @@ public class Duke {
                     addTask(new Event(arr[0], arr[1]));
                 }
             }
+        } else if ((st.length() >= 6) && (st.substring(0, 6).equals("delete"))) {
+            if (st.length() <= 7) {
+                throw new InvalidDeleteException("\u2639" + " OOPS!!! The task to be deleted is not " +
+                        "specified.");
+            } else {
+                try {
+                    int i = Integer.parseInt(st.substring(7)) - 1;
+                    if ((i < 0) || (i >= lst.size())) {
+                        throw new InvalidDeleteException("\u2639" + " OOPS!!! The number specified does not " +
+                                "represent a valid task.");
+                    }
+                    deleteTask(i);
+                } catch (NumberFormatException e) {
+                    throw new InvalidDeleteException("\u2639" + " OOPS!!! The task to be deleted is not " +
+                            "specified by a valid number.");
+                }
+            }
         } else {
             throw new InvalidCommandException("\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -109,7 +133,8 @@ public class Duke {
         while (!s.equals("bye")) {
             try {
                 processString(s);
-            } catch (InvalidTaskArgumentException | InvalidDoneException | InvalidCommandException e) {
+            } catch (InvalidTaskArgumentException | InvalidDoneException | InvalidCommandException |
+                    InvalidDeleteException e) {
                 System.out.println("-------------------------------------------------------------------------------------");
                 System.out.println(e.getMessage());
                 System.out.println("-------------------------------------------------------------------------------------");
