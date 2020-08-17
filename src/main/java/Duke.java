@@ -23,6 +23,11 @@ public class Duke {
         System.out.println(border);
     }
 
+    public static void addTask(Task task) {
+        storage.add(task);
+        System.out.println(border + "added: " + task.getName() + "\n" + border);
+    }
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.println(border + "Hello! I'm Duke\n" + "What can I do for you?\n" + border);
@@ -34,8 +39,7 @@ public class Duke {
             } else if(input.getName().equals("list")) {
                 displayList();
             } else {
-                storage.add(input);
-                System.out.println(border + "added: " + input.getName() + "\n" + border);
+                addTask(input);
             }
         }
     }
