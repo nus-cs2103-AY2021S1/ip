@@ -10,8 +10,8 @@ public class TaskManager {
         this.tasks = new ArrayList<Task>();
     }
 
-    public void addTask(Task newTask) {
-        this.tasks.add(newTask);
+    public void addTask(String taskName) {
+        this.tasks.add(new Task(taskName));
     }
 
     @Override
