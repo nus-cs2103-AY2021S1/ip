@@ -20,35 +20,56 @@ public class ChatBot {
             } else if (response.startsWith("done")) {
                 int index = Integer.parseInt(response.split(" ")[1]) - 1;
                 list.get(index).markAsDone();
-                System.out.println("    ____________________________________________________________");
+                printHorizontal();
                 System.out.println("     Nice! I've marked this task as done: ");
                 System.out.println("       "+list.get(index));
-                System.out.println("    ____________________________________________________________");
+                printHorizontal();
             } else {
-                Task newTask = new Task(response);
-                sendChat(" added: " + response);
-                list.add(newTask);
+                addTask(response);
             }
             response = receiveChat();
         }
         sendChat(" Bye. Hope to see you again soon!");
     }
 
+    private void addTask(String command) {
+        printHorizontal();
+        System.out.println("     Got it. I've added this task: ");
+        Task newTask;
+        if (command.startsWith("todo")) {
+            newTask = new Todo(command.substring(5));
+        } else if (command.startsWith("deadline")) {
+            newTask = new Deadline(command.substring(9).split(" /by ")[0], command.substring(9).split(" /by ")[1]);
+        } else if (command.startsWith("event")) {
+            newTask = new Event(command.substring(6).split(" /at ")[0], command.substring(6).split(" /at ")[1]);
+        } else {
+            newTask = new Task(command);
+        }
+        list.add(newTask);
+        System.out.println("       " + newTask);
+        System.out.println("     Now you have " + list.size() + " tasks in the list.");
+        printHorizontal();
+    }
+
+    private void printHorizontal() {
+        System.out.println("    ____________________________________________________________");
+    }
+
     // Return the list of tasks
     private void printList() {
-        System.out.println("    ____________________________________________________________");
+        printHorizontal();
         System.out.println("     Here are the tasks in your list:");
         for (int i = 1; i <= list.size(); i++) {
             System.out.println("     " + i + "." + list.get(i - 1));
         }
-        System.out.println("    ____________________________________________________________");
+        printHorizontal();
     }
 
     // Send specified content in a chat box
     private void sendChat(String content) {
-        System.out.println("    ____________________________________________________________");
+        printHorizontal();
         System.out.println("    " + content);
-        System.out.println("    ____________________________________________________________");
+        printHorizontal();
     }
 
     // Scan for user's response and return the string

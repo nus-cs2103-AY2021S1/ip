@@ -31,62 +31,108 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
     
 2. Mark a task in the list as done.
 
+3. Add support for tracking three types of tasks:
+
+    * **ToDos**: tasks without any date/time attached to it e.g., visit new theme park
+    * **Deadlines**: tasks that need to be done before a specific date/time e.g., submit report by 11/10/2019 5pm
+    * **Events**: tasks that start at a specific time and ends at a specific time e.g., team project meeting on 2/10/2019 2-4pm
+
 ## Demo
    ```
        ____________________________________________________________
         Hello! I'm Duke 
         What can I do for you?
        ____________________________________________________________
-   read book
+   todo read book
        ____________________________________________________________
-        added: read book
+        Got it. I've added this task: 
+          [T][✘] read book
+        Now you have 1 tasks in the list.
        ____________________________________________________________
-   return book 
+   deadline return book /by June 6th
        ____________________________________________________________
-        added: return book 
+        Got it. I've added this task: 
+          [D][✘] return book (by: June 6th)
+        Now you have 2 tasks in the list.
        ____________________________________________________________
-   buy bread
+   event project meeting /at Aug 6th 2-4pm
        ____________________________________________________________
-        added: buy bread
+        Got it. I've added this task: 
+          [E][✘] project meeting (at: Aug 6th 2-4pm)
+        Now you have 3 tasks in the list.
+       ____________________________________________________________
+   todo join sports club
+       ____________________________________________________________
+        Got it. I've added this task: 
+          [T][✘] join sports club
+        Now you have 4 tasks in the list.
+       ____________________________________________________________
+   list
+       ____________________________________________________________
+        Here are the tasks in your list:
+        1.[T][✘] read book
+        2.[D][✘] return book (by: June 6th)
+        3.[E][✘] project meeting (at: Aug 6th 2-4pm)
+        4.[T][✘] join sports club
        ____________________________________________________________
    done 1
        ____________________________________________________________
         Nice! I've marked this task as done: 
-          [✓] read book
+          [T][✓] read book
        ____________________________________________________________
-   list
-       ____________________________________________________________
-        Here are the tasks in your list:
-        1.[✓] read book
-        2.[✘] return book 
-        3.[✘] buy bread
-       ____________________________________________________________
-   done 2
+   done 4
        ____________________________________________________________
         Nice! I've marked this task as done: 
-          [✓] return book 
+          [T][✓] join sports club
+       ____________________________________________________________
+   todo borrow book
+       ____________________________________________________________
+        Got it. I've added this task: 
+          [T][✘] borrow book
+        Now you have 5 tasks in the list.
        ____________________________________________________________
    list
        ____________________________________________________________
         Here are the tasks in your list:
-        1.[✓] read book
-        2.[✓] return book 
-        3.[✘] buy bread
+        1.[T][✓] read book
+        2.[D][✘] return book (by: June 6th)
+        3.[E][✘] project meeting (at: Aug 6th 2-4pm)
+        4.[T][✓] join sports club
+        5.[T][✘] borrow book
        ____________________________________________________________
-   done 3
+   deadline return book /by Sunday
        ____________________________________________________________
-        Nice! I've marked this task as done: 
-          [✓] buy bread
+        Got it. I've added this task: 
+          [D][✘] return book (by: Sunday)
+        Now you have 6 tasks in the list.
+       ____________________________________________________________
+   event project meeting /at Mon 2-4pm
+       ____________________________________________________________
+        Got it. I've added this task: 
+          [E][✘] project meeting (at: Mon 2-4pm)
+        Now you have 7 tasks in the list.
+       ____________________________________________________________
+   deadline do homework /by no idea :-p
+       ____________________________________________________________
+        Got it. I've added this task: 
+          [D][✘] do homework (by: no idea :-p)
+        Now you have 8 tasks in the list.
        ____________________________________________________________
    list
        ____________________________________________________________
         Here are the tasks in your list:
-        1.[✓] read book
-        2.[✓] return book 
-        3.[✓] buy bread
+        1.[T][✓] read book
+        2.[D][✘] return book (by: June 6th)
+        3.[E][✘] project meeting (at: Aug 6th 2-4pm)
+        4.[T][✓] join sports club
+        5.[T][✘] borrow book
+        6.[D][✘] return book (by: Sunday)
+        7.[E][✘] project meeting (at: Mon 2-4pm)
+        8.[D][✘] do homework (by: no idea :-p)
        ____________________________________________________________
    bye
        ____________________________________________________________
-       Bye. Hope to see you again soon!
+        Bye. Hope to see you again soon!
        ____________________________________________________________
+
    ```
