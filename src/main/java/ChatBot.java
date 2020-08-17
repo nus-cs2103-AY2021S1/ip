@@ -8,6 +8,7 @@ import java.util.Scanner;
 // The chat bot class to handle the internal logic
 public class ChatBot {
     List<Task> list = new LinkedList<>();
+    Scanner sc = new Scanner(System.in);
 
     // The entry point to run the chat bot
     public void start() {
@@ -21,7 +22,7 @@ public class ChatBot {
                 int index = Integer.parseInt(response.split(" ")[1]) - 1;
                 list.get(index).markAsDone();
                 printHorizontal();
-                System.out.println("     Nice! I've marked this task as done: ");
+                System.out.println("     Nice! I've marked this task as done:");
                 System.out.println("       "+list.get(index));
                 printHorizontal();
             } else {
@@ -34,7 +35,7 @@ public class ChatBot {
 
     private void addTask(String command) {
         printHorizontal();
-        System.out.println("     Got it. I've added this task: ");
+        System.out.println("     Got it. I've added this task:");
         Task newTask;
         if (command.startsWith("todo")) {
             newTask = new Todo(command.substring(5));
@@ -74,7 +75,7 @@ public class ChatBot {
 
     // Scan for user's response and return the string
     private String receiveChat() {
-        Scanner sc = new Scanner(System.in);
+//        Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
 }

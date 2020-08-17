@@ -136,3 +136,15 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
        ____________________________________________________________
 
    ```
+## Automated UI Testing
+1. Assume you are running a *nix operating system, e.g. macOS.
+1. Make sure you have `dos2unix` installed.
+1. Direct to directory `text-ui-text`.
+1. Run `chmod +x runtest.sh` to make the `.sh` file executable.
+1. Run command
+    ```
+    ./runtest.sh
+   ```
+1. If the actual output matches the `EXPECTED.TXT`, the test passes.
+
+   If the actual output differs from the `EXPECTED.TXT`, the script will report a failure.
