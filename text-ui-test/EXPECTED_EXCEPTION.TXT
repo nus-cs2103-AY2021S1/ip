@@ -27,20 +27,20 @@
 
 ∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
 ∴‥	Got it. I've added this task:
-∴‥		[T][✗] myTodo
+∴‥		[T][✗] correctTodo
 ∴‥	Now you have 1 task(s) in the list.
 ∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
 
 ∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
 ∴‥	Got it. I've added this task:
-∴‥		[T][✗] myTodo something extra
+∴‥		[T][✗] correctTodo something extra
 ∴‥	Now you have 2 task(s) in the list.
 ∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
 
 ∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
 ∴‥	Here are the tasks in your list:
-∴‥	 1. [T][✗] myTodo
-∴‥	 2. [T][✗] myTodo something extra
+∴‥	 1. [T][✗] correctTodo
+∴‥	 2. [T][✗] correctTodo something extra
 ∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
 
 ∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
@@ -63,15 +63,15 @@
 
 ∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
 ∴‥	Got it. I've added this task:
-∴‥		[D][✗] place (by: time)
+∴‥		[D][✗] correctDeadline (by: time)
 ∴‥	Now you have 3 task(s) in the list.
 ∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
 
 ∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
 ∴‥	Here are the tasks in your list:
-∴‥	 1. [T][✗] myTodo
-∴‥	 2. [T][✗] myTodo something extra
-∴‥	 3. [D][✗] place (by: time)
+∴‥	 1. [T][✗] correctTodo
+∴‥	 2. [T][✗] correctTodo something extra
+∴‥	 3. [D][✗] correctDeadline (by: time)
 ∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
 
 ∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
@@ -105,9 +105,9 @@
 
 ∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
 ∴‥	Here are the tasks in your list:
-∴‥	 1. [T][✗] myTodo
-∴‥	 2. [T][✗] myTodo something extra
-∴‥	 3. [D][✗] place (by: time)
+∴‥	 1. [T][✗] correctTodo
+∴‥	 2. [T][✗] correctTodo something extra
+∴‥	 3. [D][✗] correctDeadline (by: time)
 ∴‥	 4. [E][✗] correctEvent (at: today)
 ∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
 
@@ -121,12 +121,12 @@
 
 ∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
 ∴‥	Naisu! I've marked this task done!
-∴‥	[T][✓] myTodo
+∴‥	[T][✓] correctTodo
 ∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
 
 ∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
 ∴‥	Naisu! I've marked this task done!
-∴‥	[T][✓] myTodo something extra
+∴‥	[T][✓] correctTodo something extra
 ∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
 
 ∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
@@ -135,9 +135,9 @@
 
 ∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
 ∴‥	Here are the tasks in your list:
-∴‥	 1. [T][✓] myTodo
-∴‥	 2. [T][✓] myTodo something extra
-∴‥	 3. [D][✗] place (by: time)
+∴‥	 1. [T][✓] correctTodo
+∴‥	 2. [T][✓] correctTodo something extra
+∴‥	 3. [D][✗] correctDeadline (by: time)
 ∴‥	 4. [E][✗] correctEvent (at: today)
 ∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
 

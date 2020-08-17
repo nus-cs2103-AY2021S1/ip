@@ -1,13 +1,13 @@
 list 123
 todo  
-todo myTodo
-todo myTodo something extra
+todo correctTodo
+todo correctTodo something extra
 list
 deadline wrong command
 deadline place /at time
 deadline   /by time
 deadline place /by    
-deadline place /by time
+deadline correctDeadline /by time
 list
 event
 event wrong command	
