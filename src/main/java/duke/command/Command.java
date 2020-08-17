@@ -14,15 +14,6 @@ public abstract class Command {
     }
 
     /**
-     * Check if the command is an ExitCommand via its content.
-     *
-     * @return a boolean suggesting if the command is ExitCommand.
-     */
-    public boolean isExit() {
-        return this.content.equals("bye");
-    }
-
-    /**
      * Sending a request to the command agent.
      *
      * @return a String representing the request content.

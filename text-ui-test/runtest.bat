@@ -6,6 +6,8 @@ if not exist ..\bin mkdir ..\bin
 REM delete output from previous run
 if exist ACTUAL.TXT del ACTUAL.TXT
 
+set JAVA_TOOL_OPTIONS = -Dfile.encoding = UTF-8
+
 REM compile the code into the bin folder
 dir /s /B ..\src\main\java\*.java > sources.txt
 javac  -cp ..\src -Xlint:none -d ..\bin @sources.txt
@@ -15,7 +17,7 @@ IF ERRORLEVEL 1 (
 )
 REM no error here, errorlevel == 0
 
-set JAVA_TOOL_OPTIONS = -Dfile.encoding = UTF-8
+
 
 REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
 java -classpath ..\bin Duke < input.txt > ACTUAL.TXT

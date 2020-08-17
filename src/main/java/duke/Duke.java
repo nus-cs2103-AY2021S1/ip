@@ -3,6 +3,8 @@ package duke;
 import java.util.Scanner;
 
 import duke.command.Command;
+import duke.command.ExitCommand;
+
 /**
  * Driver class for duke.Duke chat bot called "Jarvis"
  */
@@ -29,6 +31,6 @@ public class Duke {
             command = reader.readCommand(userInput);
             String result = agent.handleCommand(command);
             System.out.println(result);
-        } while (!command.isExit());
+        } while (!ExitCommand.isExitCommand(command));
     }
 }
