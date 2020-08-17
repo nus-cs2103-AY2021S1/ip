@@ -6,4 +6,7 @@ deadline  /by
 event  /at
 deadline test  /by 2pm
 event test /at not sure :<
+done 1
+done 2
+done 7
 bye

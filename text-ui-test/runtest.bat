@@ -6,8 +6,11 @@ if not exist ..\bin mkdir ..\bin
 REM delete output from previous run
 del ACTUAL.TXT
 
+set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
+
 REM compile the code into the bin folder
-javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\*.java
+dir /s /B ..\src\main\java\*.java > sources.txt
+javac  -cp ..\src -Xlint:none -d ..\bin @sources.txt
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
