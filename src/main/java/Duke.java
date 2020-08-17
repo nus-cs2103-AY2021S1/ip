@@ -44,7 +44,10 @@ public class Duke {
                 store.list();
                 break;
             case "done":
-                store.markTaskAsDone(Integer.parseInt(splitInput[1]));
+                store.markTaskAsDone(Integer.parseInt(splitInput[1].trim()));
+                break;
+            case "delete":
+                store.delete(Integer.parseInt(splitInput[1].trim()));
                 break;
             case "todo":
             case "deadline":
