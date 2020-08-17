@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     private static final String LINEDIVIDER = "    ____________________________________________________________\n";
@@ -15,31 +16,50 @@ public class Duke {
 
     // Prints out the greeting
     private static void greet() {
-        System.out.println(prettyPrint("Hello! I'm Duke\n" +  "     What can I do for you?"));
+        prettyPrint("Hello! I'm Duke\n" +  "     What can I do for you?");
     }
 
     // Driver method to respond to user input
     private static void respondPicker() {
         Scanner scan = new Scanner(System.in);
+        ArrayList<String> userInputCollector = new ArrayList();
 
         greet();
 
         String userInput = scan.nextLine();
         while (!userInput.equals("bye")) {
-            System.out.println(prettyPrint(userInput));
+            if (userInput.equals("list")) {
+                prettyPrint(userInputCollector);
+            } else {
+                prettyPrint(userInput);
+            }
+
+            userInputCollector.add(userInput);
             userInput = scan.nextLine();
         }
 
-        System.out.println(prettyPrint("Bye. Hope to see you again soon!"));
+        prettyPrint("Bye. Hope to see you again soon!");
     }
 
     /**
-     * Returns the given string with additional wrappings
+     * Prints the given string with additional wrappings
      *
-     * @param string
-     * @return formatted string
+     * @param string String to print
      */
-    private static String prettyPrint(String string) {
-        return LINEDIVIDER + "     " + string + "\n" + LINEDIVIDER;
+    private static void prettyPrint(String string) {
+        System.out.println(LINEDIVIDER + "     " + string + "\n" + LINEDIVIDER);
+    }
+
+    /**
+     * Prints the given array list with additional effects
+     *
+     * @param array Array of strings to print
+     */
+    private static void prettyPrint(ArrayList array) {
+        System.out.println(LINEDIVIDER);
+        for (int i = 0; i < array.size(); i++) {
+            System.out.println("     " + (i + 1) + ". " + array.get(i));
+        }
+        System.out.println(LINEDIVIDER);
     }
 }
