@@ -25,7 +25,7 @@ public class Duke {
             try {
                 processInput(trimmedInput);
             } catch (DukeException ex) {
-                System.err.print(ex);
+                System.out.print(ex);
             }
             System.out.println("____________________________________________________________\n");
         }
@@ -39,7 +39,7 @@ public class Duke {
             }
         }
         // if no slashes found
-        throw new DukeException("\n Please indicate: \n '/by' - for Deadline, or \n '/at' - for Event.\n");
+        throw new DukeException("Please indicate:\n'/by' - for Deadline, or\n'/at' - for Event.\n");
     }
 
     // method to mark task as done
@@ -99,14 +99,14 @@ public class Duke {
             try {
                 markTaskDone(input);
             } catch (DukeException ex) {
-                System.err.print(ex); // catch if task does not exist
+                System.out.print(ex); // catch if task does not exist
             }
         } else if (input.startsWith("delete")) { // delete task
             // don't add new task, get task number to delete task
             try {
                 deleteTask(input);
             } catch (DukeException ex) {
-                System.err.print(ex); // catch if task does not exist
+                System.out.print(ex); // catch if task does not exist
             }
         } else {
             // add item to tasks stored (To-Do/Deadline/Event) depending on command keyword
