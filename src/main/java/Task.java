@@ -35,6 +35,13 @@ public class Task {
         database.get(index - 1).markAsDone();
     }
 
+    public static Task iRemove(int index) {
+        if (index <= 0 || index > database.size()) {
+            throw new IllegalArgumentException("Invalid argument for the LIST command.");
+        }
+        return database.remove(index - 1);
+    }
+
     public static int count() { return database.size();}
 
     @Override

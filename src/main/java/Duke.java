@@ -9,10 +9,10 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     private static void startMessage() {
-        System.out.println("┌────────────────────────────────────────────────┐");
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++");
     }
     private static void endMessage() {
-        System.out.println("└────────────────────────────────────────────────┘");
+        System.out.println("------------------------------------------");
     }
     private static void greet() {
         startMessage();
@@ -49,6 +49,15 @@ public class Duke {
                     System.out.println(e.getLocalizedMessage());
                 }
                 break;
+            case "remove":
+                try {
+                    int index = Integer.parseInt(tokens.get(1));
+                    Task task = Task.iRemove(index);
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println("    " + Task.getTask(index));
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getLocalizedMessage());
+                }
             default:
                 Task task;
                 switch (tokens.get(0)) {
