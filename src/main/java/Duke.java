@@ -1,4 +1,6 @@
 import main.java.Task;
+import main.java.ToDo;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -22,6 +24,7 @@ public class Duke {
         while (scanner.hasNext()) {
             String userInput = scanner.nextLine();
             int len = userInput.length();
+
             if (userInput.equals("bye")) {
                 System.out.println(line);
                 System.out.println(bot + "Goodbye! Hope to see you again soon! ^_^");
@@ -37,11 +40,15 @@ public class Duke {
                     System.out.println("You have keyed in an invalid number!");
                 }
 
-            } else { //added
-                tasks.add(new Task(userInput));
+            } else if (userInput.startsWith("todo")){ //added
+                ToDo newTask = new ToDo(userInput.substring(5));
+                tasks.add(newTask); //adds into tasks list
                 System.out.println(line);
                 System.out.print(bot);
-                System.out.println(addedText + userInput);
+                System.out.println("Got it! I've added this task:");
+                //System.out.println(addedText + userInput);
+                System.out.println(newTask);
+                System.out.println("Now you have " + tasks.size() + "tasks in the list.");
                 System.out.println(line);
             }
         }

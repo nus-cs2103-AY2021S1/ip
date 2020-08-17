@@ -1,7 +1,7 @@
 package main.java;
 
 public class Deadline extends Task {
-    protected String by;
+    protected String by; //deadline
 
     public Deadline(String description, String by) {
         super(description);
@@ -10,6 +10,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + " " + super.toString() + " (by: " + by + ")";
     }
 }
