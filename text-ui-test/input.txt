@@ -6,4 +6,13 @@ event celebrate birthday /at Aug 22nd 1000-2200hrs
 list
 done 1
 list
+done -3
+list
+done 10
+deadline
+event
+todo
+event missing time
+deadline missing duedate
+list
 bye
