@@ -58,18 +58,24 @@ public class Duke {
                 String date =  userInput.substring(indexOfSlash + 4);
                 Deadline deadline = new Deadline(description, date);
                 tasks.add(deadline);
+                System.out.println(line);
+                System.out.print(bot);
                 System.out.println("Got it! I've added this task:");
                 System.out.println(deadline);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                System.out.println(line);
             } else if (userInput.startsWith("event")) {
                 int indexOfSlash = userInput.indexOf('/');
                 String description = userInput.substring(6, indexOfSlash - 1);
                 String dateAndTime =  userInput.substring(indexOfSlash + 4);
                 Event event = new Event(description, dateAndTime);
                 tasks.add(event);
+                System.out.println(line);
+                System.out.print(bot);
                 System.out.println("Got it! I've added this task:");
                 System.out.println(event);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                System.out.println(line);
             } else { //invalid command
                 System.out.println("You have keyed in an invalid command! \n (Valid commands: todo, deadline, event, list, bye)");
             }
