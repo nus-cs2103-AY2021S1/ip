@@ -14,23 +14,23 @@ public class Duke {
                 break;
             } else if (input.toLowerCase().equals("list")) {
                 replyList(list, Task.totalTasks);
-            } else if (input.toLowerCase().substring(0, 4).equals("done")) {
+            } else if (input.toLowerCase().split(" ")[0].equals("done")) {
                 replyDone(input, list, Task.totalTasks);
             } else {
                 String inputTask;
                 Task task;
-                if (input.toLowerCase().substring(0, 4).equals("todo")) {
+                if (input.toLowerCase().split(" ")[0].equals("todo")) {
                     inputTask = input.substring(5);
                     task = new Todo(inputTask);
                     list[Task.totalTasks - 1] = task;
                     replyTask(task);
-                } else if (input.toLowerCase().substring(0, 5).equals("event")) {
+                } else if (input.toLowerCase().split(" ")[0].equals("event")) {
                     inputTask = input.substring(6);
                     String[] arr = inputTask.split("/");
                     task = new Event(arr[0].trim(), arr[1].substring(3));
                     list[Task.totalTasks - 1] = task;
                     replyTask(task);
-                } else if (input.toLowerCase().substring(0, 8).equals("deadline")) {
+                } else if (input.toLowerCase().split(" ")[0].equals("deadline")) {
                     inputTask = input.substring(9);
                     String[] arr = inputTask.split("/");
                     task = new Deadline(arr[0].trim(), arr[1].substring(3));
