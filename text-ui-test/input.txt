@@ -1,0 +1,19 @@
+list
+todo
+todo task 1
+done 0
+done 2
+done 1
+deadline
+deadline task 2
+deadline task 2 /by
+deadline /by next time
+deadline task 2 /by next time
+event
+event task 3
+event task 3 /at
+event /at now
+event task 3 /at now
+blah
+list
+bye

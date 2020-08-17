@@ -36,7 +36,7 @@ public class Duke {
     }
 
     private void addTask(String command, String taskDescription)
-            throws EmptyDeadlineException, EmptyEventTimeException {
+            throws InvalidDeadlineFormatException, InvalidEventFormatException {
         Task task;
         String[] nameAndTime;
         switch (command) {
@@ -46,13 +46,13 @@ public class Duke {
             case DEADLINE_COMMAND:
                 nameAndTime = taskDescription.split(" /by ", 2);
                 if (nameAndTime.length == 1)
-                    throw new EmptyDeadlineException();
+                    throw new InvalidDeadlineFormatException();
                 task = new Deadline(nameAndTime[0], nameAndTime[1]);
                 break;
             case EVENT_COMMAND:
                 nameAndTime = taskDescription.split(" /at ", 2);
                 if (nameAndTime.length == 1)
-                    throw new EmptyEventTimeException();
+                    throw new InvalidEventFormatException();
                 task = new Event(nameAndTime[0], nameAndTime[1]);
                 break;
             default:
@@ -128,7 +128,7 @@ public class Duke {
                     case DEADLINE_COMMAND:
                     case EVENT_COMMAND:
                         if (input.length == 1)
-                            throw new EmptyMessageException(true, command);
+                            throw new EmptyMessageException(command);
                         String taskDescription = input[1];
                         addTask(command, taskDescription);
                         break;
