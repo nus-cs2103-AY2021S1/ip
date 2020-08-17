@@ -73,18 +73,20 @@ public class Duke {
         }
     }
 
-    public static TaskType categorize(String[] input_parts) { // throw dukeexception: unknown task
+    public static TaskType categorize(String[] input_parts) throws Exception {
         if (input_parts[0].compareTo("todo") == 0) {
             return TaskType.ToDo;
         } else if (input_parts[0].compareTo("deadline") == 0) {
             return TaskType.Deadline;
-        } else {
+        } else if (input_parts[0].compareTo("event") == 0) {
             return TaskType.Event;
+        } else {
+            throw new UndefinedWordException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }
     }
 
     // Can be used to get the details too
-    public static String extractTask(String[] input_parts) { // throw exception: missing details
+    public static String extractTask(String[] input_parts) {
         String task = "";
         for (int i = 1; i < input_parts.length; i++) {
             task += input_parts[i] + " ";
@@ -92,20 +94,33 @@ public class Duke {
         return task.trim();
     }
     
-    public static Task getTask(String input) { // catch duke exception from extractTask and categorize, throw to op()
+    public static Task getTask(String input) throws Exception { // catch duke exception from extractTask and categorize, throw to op()
         String[] parts = input.split(" ");
-        TaskType type = categorize(parts);
+        TaskType type;
+        try {
+            type = categorize(parts);
+        } catch (UndefinedWordException e) {
+            throw e;
+        }
 
         if (type == TaskType.ToDo) {
             parts = input.split(" ");
+            if (parts.length <= 1) {
+                throw new NoDescriptionException("☹ OOPS!!! The description of a todo cannot be empty.\n");
+            } // if not, chillax and continue
             String name = extractTask(parts);
-
             return new ToDo(name);
         } else if (type == TaskType.Deadline) {
+            if (input.split("/").length <= 1) {
+                throw new NoDescriptionException("☹ OOPS!!! The description of a deadline cannot be empty.\n");
+            } // if not, chillax and continue
             String name = extractTask(input.split("/")[0].split(" "));
             String deadline = extractTask(input.split("/")[1].split(" "));
             return new Deadline(name, deadline); 
         } else {
+            if (input.split("/").length <= 1) {
+                throw new NoDescriptionException("☹ OOPS!!! The description of an event cannot be empty.\n");
+            } // if not, chillax and continue
             String name = extractTask(input.split("/")[0].split(" "));
             String details = extractTask(input.split("/")[1].split(" "));
             
@@ -127,7 +142,13 @@ public class Duke {
             } else if (parts[0].compareTo("done") == 0) {
                 System.out.println(format_response(this.mark_done(Integer.parseInt(parts[1]) - 1))); 
             } else {
-                Task taskInput = getTask(input); // catch duke exception from getTask(input)
+                Task taskInput;
+                try {
+                    taskInput = getTask(input); // catch duke exception from getTask(input)
+                } catch (Exception e) {
+                    System.out.println(format_response(e.getMessage()));
+                    continue;
+                }
 
                 // add task to list of tasks
                 this.tasks.add(taskInput);
