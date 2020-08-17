@@ -17,7 +17,7 @@ public class TodoList {
         if (command.equals("list")) {
             for (int i = 0; i < todoList.size(); i++) {
                 int index = i + 1;
-                System.out.println(index + ". " + todoList.get(i).returnTask());
+                System.out.println(index + ". " + todoList.get(i).toString());
             }
         } else if (command.equals("bye")) {
             TodoList.terminate = true;

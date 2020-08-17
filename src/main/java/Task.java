@@ -9,10 +9,11 @@ public class Task {
 
     public String completeTask() {
         this.taskCompleted = true;
-        return returnTask();
+        return this.toString();
     }
 
-    public String returnTask() {
+    @Override
+    public String toString() {
         if (taskCompleted) {
             return "[✓] " + taskName;
         } else {
