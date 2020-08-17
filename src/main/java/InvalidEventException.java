@@ -1,5 +1,6 @@
 public class InvalidEventException extends DukeException{
-    public InvalidEventException(String errorMessage) {
-        super(errorMessage);
+    public InvalidEventException() {
+        super("You entered the event command incorrectly :(\n"
+                + "The command format is \"event <task> /at <time>\"");
     }
 }
