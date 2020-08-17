@@ -8,6 +8,7 @@ public class Executor {
     private static final Store storage = Store.initStorage(100);
     private static final String ADD_COMMAND = "add";
     private static final String LIST_COMMAND = "list";
+    private static final String DONE_COMMAND = "done";
     private Commands commandState;
 
     /** Private constructor. */
@@ -69,6 +70,10 @@ public class Executor {
                 setState(ADD);
                 break;
             }
+            case DONE_COMMAND: {
+                setState(DONE);
+                break;
+            }
             default: {
                 setState(INVALID);  // Should never reached this stage.
                 break;
@@ -80,7 +85,13 @@ public class Executor {
     private String execAndReturn() {
         switch(commandState) {
             case LIST: {
-                return storage.getTodosInList();
+                String reply = storage.getTodosInList();
+                StringBuilder sb = new StringBuilder();
+                sb.append("Here are the task in your list:\n")
+                        .append(reply)
+                        .append("\n")
+                        .append("Stop whining and start rolling.");
+                return sb.toString();
             }
             default: {
                 return "Error";
@@ -91,8 +102,13 @@ public class Executor {
     private String execAndReturn(String task) {
         switch(commandState) {
             case ADD: {
-                storage.add(task);
+                String reply = storage.add(task);
                 return String.format("Added: %s", task);
+            }
+            case DONE: {
+                String reply = storage.done(task);
+                return String.format("Congratz! I will marked this task as completed for you!\n%s\n" +
+                        "Keep up the good work and continue to stay motivated.", reply);
             }
             default: {
                 return "Error";

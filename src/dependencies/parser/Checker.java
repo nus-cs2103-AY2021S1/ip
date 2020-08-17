@@ -15,14 +15,16 @@ class Checker {
             this.command = "list";
 
         }
-//        else if (s.contains("add") || s.contains("Add")) {
-//            this.command = "add";
-//            int x = s.indexOf("add");
-//            int y = s.indexOf("Add");
-//            this.task = s.substring((x >= 0 ? x : y) + 4);
-//            this.containsTask = true;
-//        }
+        else if (s.contains("done ") || s.contains("Done ")) {
+            this.command = "done";
+            int x = s.indexOf("done");
+            int y = s.indexOf("done");
+            String[] sArr = s.substring((x >= 0 ? x : y) + 5).split("\\s+");
+            this.task = sArr[0];
+            this.containsTask = true;
+        }
         else {
+            // TODO: add check here to ensure no gibberish is passed to todolist.
             this.command = "add";
             this.containsTask = true;
             this.task = s;
