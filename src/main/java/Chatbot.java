@@ -16,6 +16,10 @@ public class Chatbot {
 
             try {
                 if (input.startsWith("done")) {
+                    if (input.equals("done")) { // Input does not contain which task to mark as done
+                        throw new DukeException(indent + "Sorry sir you will have to try again and this time " +
+                                "tell me which task you want me to mark as done");
+                    }
                     int index = Integer.parseInt(input.split(" ")[1]);
                     Task curr = tasks.get(index - 1);
                     curr.markAsDone();
@@ -34,7 +38,7 @@ public class Chatbot {
                         tasks.add(curr);
                     } else if (input.startsWith("deadline")) { // Create Deadline task
                         // Input does not contain the required keyword
-                        if (input.equals("deadline") || !input.substring(5).contains("/by")) {
+                        if (input.equals("deadline") || !input.substring(9).contains("/by")) {
                             throw new DukeException(indent + "My apologies sir but you will have to use the correct " +
                                     "format to create a deadline :(");
                         }
@@ -43,7 +47,7 @@ public class Chatbot {
                         tasks.add(curr);
                     } else { // Create Event task
                         // Input does not contain the required keyword
-                        if (input.equals("event") || !input.substring(5).contains("/at")) {
+                        if (input.equals("event") || !input.substring(6).contains("/at")) {
                             throw new DukeException(indent + "My apologies sir but you will have to use the correct " +
                                     "format to create a event :(");
                         }
@@ -61,6 +65,17 @@ public class Chatbot {
                         Task curr = tasks.get(i);
                         System.out.println(indent + (i + 1) + "." + curr);
                     }
+                    System.out.println(divider);
+                } else if (input.startsWith("delete")) {
+                    if (input.equals("delete")) { // Input does not contain which task to mark as done
+                        throw new DukeException(indent + "Sorry sir you will have to try again and this time " +
+                                "tell me which task you want me to delete");
+                    }
+                    int index = Integer.parseInt(input.split(" ")[1]);
+                    Task deletedTask = tasks.remove(index - 1); // Subtract 1 due to offset
+                    System.out.println(indent + "Of course sir. I have removed this task:\n" +
+                            indent + "  " + deletedTask);
+                    System.out.println(indent + "Now you have " + tasks.size() + " tasks in the list.");
                     System.out.println(divider);
                 } else if (input.equals("bye")) { // Termination statement
                     System.out.println(indent + "Guess its time for us to part ways\n"
