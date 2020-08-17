@@ -9,6 +9,8 @@ public class Manager {
                 ListOfTasks.showList(tasks);
             } else if (input.startsWith("done")) {
                 Done.handleDone(input, tasks);
+            } else if (input.startsWith("delete")) {
+                Delete.handleDeletion(input, tasks);
             } else {
                 int idx = input.indexOf(' ');
                 String firstWord = idx == -1 ? input : input.substring(0, idx);

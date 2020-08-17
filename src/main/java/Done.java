@@ -1,22 +1,12 @@
 import java.util.List;
 
-public class Done {
-
-    public static boolean isValid(String s) {
-        try {
-            Integer.parseInt(s);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-        return true;
-    }
+public class Done extends NumberAction{
 
     public static void handleDone(String input, List<Task> tasks) throws DukeException{
         int len = input.length();
-        if (len >= 6 && isValid(input.substring(5, len))) {
+        if (len >= 6 && checkIfNumber(input.substring(5, len))) {
             int digit = Integer.parseInt(input.substring(5, len));
-
-            if (digit <= tasks.size() && digit > 0) {
+            if (checkIfValid(digit, tasks)) {
                 Task current = tasks.get(digit - 1);
                 if (current.checkIfDone()) {
                     throw new DukeException("OOPS!!! Task has already been mark as done!");

@@ -1,12 +1,14 @@
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
-todo borrow book
-todo
-deadline  /by
-event  /at
-deadline test  /by 2pm
+deadline test1  /by 2pm
 event test /at not sure :<
+deadline test2  /by 3pm
+deadline test3  /by 4pm
 done 1
 done 2
+list
+delete 1
+delete 2
+list
 done 7
 bye
