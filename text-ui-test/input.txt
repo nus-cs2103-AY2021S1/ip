@@ -11,4 +11,6 @@ done 3
 list
 done 4
 list
+delete 3
+delete 4
 bye
