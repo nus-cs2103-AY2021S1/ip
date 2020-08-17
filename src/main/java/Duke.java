@@ -3,46 +3,46 @@ import java.util.Scanner;
 
 public class Duke {
     private static final String DIVIDER = "____________________________________________________________";
-    private static final ArrayList<String> input_list = new ArrayList<>();
+    private static final ArrayList<String> inputList = new ArrayList<>();
 
     public static void main(String[] args) {
-        String start_msg =
+        String startMsg =
             DIVIDER + "\n" +
             "Hello! I'm Duke\n" +
             "What can I do for you?\n" +
             DIVIDER;
-        System.out.println(start_msg);
+        System.out.println(startMsg);
 
         Scanner sc = new Scanner(System.in);
         String input = sc.next();
         while(!input.equals("bye")) {
-            handle_input(input);
+            handleInput(input);
             input = sc.next();
         }
 
-        String exit_msg =
+        String exitMsg =
             DIVIDER + "\n" +
             "Bye. Hope to see you again soon!\n" +
             DIVIDER;
-        System.out.println(exit_msg);
+        System.out.println(exitMsg);
     }
 
-    private static String get_echo(String str) {
+    private static String getEcho(String str) {
         String text = "added: " + str + "\n";
         return DIVIDER + "\n" + text + DIVIDER;
     }
 
-    private static void handle_input(String in) {
+    private static void handleInput(String in) {
         if (in.equals("list")) {
-            int len = input_list.size();
+            int len = inputList.size();
             System.out.println(DIVIDER);
             for (int i = 0; i < len; i++) {
-                System.out.println(i + ". " + input_list.get(i));
+                System.out.println(i + ". " + inputList.get(i));
             }
             System.out.println(DIVIDER);
         } else {
-            input_list.add(in);
-            System.out.println(get_echo(in));
+            inputList.add(in);
+            System.out.println(getEcho(in));
         }
     }
 }
