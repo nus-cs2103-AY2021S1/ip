@@ -12,7 +12,7 @@ public class Tickbot {
         while (running) {
             System.out.print("==> ");
             if (!inputScanner.hasNextLine()) {
-                break;
+                break; // end of file
             }
             String command = inputScanner.nextLine();
             running = processCommand(command);
@@ -30,10 +30,21 @@ public class Tickbot {
                 return false; // end of input
             }
             case "done": {
-                int index = Integer.parseInt(args[1]) - 1;
-                Task task = tasks.get(index);
-                task.setCompleted(true);
-                printMessage("Task completed: " + task);
+                try {
+                    int index = Integer.parseInt(args[1]) - 1;
+                    Task task = tasks.get(index);
+                    if (task.isCompleted()) {
+                        printMessage("Task already completed.");
+                    } else {
+                        task.setCompleted(true);
+                        printMessage("Task completed: " + task);
+                    }
+                } catch (NumberFormatException err) {
+                    printMessage("Invalid Syntax.");
+                    printMessage("Usage: done <task_index>");
+                } catch (IndexOutOfBoundsException err) {
+                    printMessage("Sorry, No such task found.");
+                }
                 break;
             }
             case "list": {
