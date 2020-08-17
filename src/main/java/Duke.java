@@ -51,7 +51,7 @@ public class Duke {
                         currentList.add(newToDo);
                         System.out.println(lines + "\n" + "     Got it. I've added this task:");
                         System.out.println("       " + newToDo);
-                        System.out.println("     Now you have " + String.valueOf(currentList.size()) + " tasks in the list.");
+                        System.out.println("     Now you have " + String.valueOf(currentList.size()) + " task(s) in the list.");
                         System.out.println(lines);
                     } catch(StringIndexOutOfBoundsException ex) {
                         throw new invalidCommand("OOPS!!! Please specify your task.");
@@ -69,7 +69,7 @@ public class Duke {
                         currentList.add(newDeadline);
                         System.out.println(lines + "\n" + "     Got it. I've added this task:");
                         System.out.println("       " + newDeadline);
-                        System.out.println("     Now you have " + String.valueOf(currentList.size()) + " tasks in the list.");
+                        System.out.println("     Now you have " + String.valueOf(currentList.size()) + " task(s) in the list.");
                         System.out.println(lines);
                     } catch (StringIndexOutOfBoundsException ex) {
                         throw new invalidCommand("OOPS!!! Please specify your task.");
@@ -87,7 +87,7 @@ public class Duke {
                         currentList.add(newEvent);
                         System.out.println(lines + "\n" + "     Got it. I've added this task:");
                         System.out.println("       " + newEvent);
-                        System.out.println("     Now you have " + String.valueOf(currentList.size()) + " tasks in the list.");
+                        System.out.println("     Now you have " + String.valueOf(currentList.size()) + " task(s) in the list.");
                         System.out.println(lines);
                     } catch (StringIndexOutOfBoundsException ex) {
                         throw new invalidCommand("OOPS!!! Please specify your task.");
@@ -104,6 +104,24 @@ public class Duke {
                         System.out.println(currentLine);
                     }
                     System.out.println(lines);
+                } else if (input.contains("delete")) {
+                    try {
+                        String[] deleteInput = input.split(" ");
+                        if (deleteInput.length > 2) {
+                            throw new invalidCommand("Please only input 1 task number!");
+                        }
+                        int deleteIndex = Integer.parseInt(deleteInput[1]);
+                        Task removedTask = currentList.remove(deleteIndex - 1);
+                        System.out.println(lines);
+                        System.out.println("     Alright, the following task has been removed");
+                        System.out.println("     " + removedTask);
+                        System.out.println("     Now you have " + String.valueOf(currentList.size()) + " task(s) in the list.");
+                        System.out.println(lines);
+                    } catch(IndexOutOfBoundsException ex) {
+                        throw new invalidCommand("Please enter a valid task number.");
+                    } catch (NumberFormatException ex) {
+                        throw new invalidCommand("Please enter a valid task number");
+                    }
                 } else {
                     throw new invalidCommand("OOPS!!! I don't know what that means :-(");
                 }
