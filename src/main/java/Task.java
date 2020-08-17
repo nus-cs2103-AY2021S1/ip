@@ -1,4 +1,4 @@
-public class Task {
+abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -7,8 +7,12 @@ public class Task {
         this.isDone = false;
     }
 
-    public void completeTask() {
+    protected void completeTask() {
         this.isDone = true;
+    }
+
+    protected String getStatusIcon() {
+        return this.isDone ? "[✓] " : "[✗] ";
     }
 
     @Override

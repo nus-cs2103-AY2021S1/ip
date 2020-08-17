@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.function.UnaryOperator;
 
 public class Duke {
     static List<Task> taskList = new ArrayList<>();
@@ -20,13 +21,26 @@ public class Duke {
         System.out.println(wrapMessage(byeMessage));
     }
 
-    static void addTask(String desc) {
-        taskList.add(new Task(desc));
-        System.out.println(wrapMessage("added: " + desc));
+    static Task createTask(String taskType, String desc) {
+        if (taskType.equals("todo")) {
+            return new Todo(desc);
+        } else if (taskType.equals("deadline")) {
+            return new Deadline(desc);
+        } else {
+            return new Event(desc);
+        }
+    }
+
+    static void addTask(String taskType, String desc) {
+        Task task = createTask(taskType, desc);
+        taskList.add(task);
+        String message = "Got it. I've added this task: \n  " + task +
+                            "\n Now you have " + taskList.size() + " tasks in the list.";
+        System.out.println(wrapMessage(message));
     }
 
     static String formatTask(int num) {
-        String lineBreak = num != taskList.size() - 1 ? "\n " : "";
+        String lineBreak = num != taskList.size() - 1 ? "\n  " : "";
         return (num + 1) + "." + taskList.get(num) + lineBreak;
     }
 
@@ -49,9 +63,8 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNextLine()) {
-            String input = sc.nextLine();
-            String [] commands = input.split(" ");
-            switch (commands[0]) {
+            String [] input = sc.nextLine().split(" ", 2);
+            switch (input[0]) {
                 case "list":
                     list();
                     break;
@@ -59,10 +72,10 @@ public class Duke {
                     exit();
                     break;
                 case "done":
-                    completeTask(Integer.valueOf(commands[1]));
+                    completeTask(Integer.valueOf(input[1]));
                     break;
                 default:
-                    addTask(input);
+                    addTask(input[0], input[1]);
             }
         }
     }
