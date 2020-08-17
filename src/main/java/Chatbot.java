@@ -14,24 +14,24 @@ public class Chatbot {
         storedTasks = new ArrayList<>();
     }
 
-    private String stylise(String textToStyle) {
-        return String.format("\t %s", textToStyle);
+    private String indentText(String textToIndent) {
+        return String.format("\t %s", textToIndent);
     }
 
-    private void printHeader() {
+    private void printDecorations() {
         System.out.printf("\t|%s|\n", " @ . ".repeat(20));
         System.out.print("\n");
     }
 
-    private void printFooter() {
-        System.out.print("\n");
-        printHeader();
-    }
-
     private void printWithDecorations(String textToPrint) {
-        printHeader();
-        System.out.println(stylise(textToPrint));
-        printFooter();
+        String[] sentences = textToPrint.split("\n");
+
+        printDecorations();
+        for (String sentence : sentences) {
+            System.out.println(indentText(sentence));
+        }
+        System.out.print("\n");
+        printDecorations();
     }
 
     private String parseText() {
@@ -110,14 +110,15 @@ public class Chatbot {
     }
 
     private void list() {
+        StringBuilder builder = new StringBuilder();
         int i = 0;
 
-        printHeader();
-        System.out.println(stylise("dO YoU ReAlLy nEeD Me tO NaMe tHeM OuT foR yOu?"));
+        builder.append("dO YoU ReAlLy nEeD Me tO NaMe tHeM OuT foR yOu?\n");
         for (Task task : storedTasks) {
-            System.out.println(stylise(String.format("%d. %s", ++i, task.toString())));
+            builder.append(String.format("%d. %s\n", ++i, task.toString()));
         }
-        printFooter();
+
+        printWithDecorations(builder.toString());
     }
 
     public void done(int index) {
