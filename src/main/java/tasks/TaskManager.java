@@ -23,8 +23,24 @@ public class TaskManager {
      */
     public String addTask(Task task) {
         tasks.add(task);
-        String key = tasks.size() == 1 ? "taskManager.addTask.singular" : "taskManager.addTask.plural";
-        return MessageFormat.format(ResourceHandler.getString(key), task, tasks.size());
+        String taskCountKey = "taskManager.taskCount." + (tasks.size() == 1 ? "singular" : "plural");
+        String template = String.format("%s\n%s", ResourceHandler.getString("taskManager.addTask"),
+                ResourceHandler.getString(taskCountKey));
+        return MessageFormat.format(template, task, tasks.size());
+    }
+
+    /**
+     * Removes a {@code Task} from the {@code TaskManager}.
+     *
+     * @param listIndex the index of the {@code Task} in the {@code TaskManager} list.
+     * @return a string representation of the action of removing a {@code Task}.
+     */
+    public String removeTask(int listIndex) {
+        Task removedTask = tasks.remove(listIndex);
+        String taskCountKey = "taskManager.taskCount." + (tasks.size() == 1 ? "singular" : "plural");
+        String template = String.format("%s\n%s", ResourceHandler.getString("taskManager.removeTask"),
+                ResourceHandler.getString(taskCountKey));
+        return MessageFormat.format(template, removedTask, tasks.size());
     }
 
     /**

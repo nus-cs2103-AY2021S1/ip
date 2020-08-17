@@ -54,6 +54,28 @@ public enum Command {
     },
 
     /**
+     * Deletes a {@code Task} from the {@code TaskManager}.
+     */
+    DELETE {
+        /**
+         * Validates whether the user input is of the correct format for the 'delete' command.
+         *
+         * @param input the user input.
+         * @throws DukeException if the user input is invalid.
+         */
+        @Override
+        public void validate(String input) throws DukeException {
+            String regex = "^(?i)delete\\s+\\d+\\s*$";
+            if (!Pattern.matches(regex, input)) {
+                String template = String.format("%s\n%s", ResourceHandler.getString("exception.invalidArgs"),
+                        ResourceHandler.getString("command.deleteFormat"));
+                String message = MessageFormat.format(template, "delete");
+                throw new DukeException(message);
+            }
+        }
+    },
+
+    /**
      * Marks a {@code Task} as done.
      */
     DONE {

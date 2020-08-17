@@ -33,26 +33,37 @@ public class Repl {
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String firstToken = line.split(" ")[0];
-            Command command;
-            String[] args;
             try {
-                command = Command.valueOf(firstToken.toUpperCase());
+                Command command = Command.valueOf(firstToken.toUpperCase());
                 // Check that the user input is of the correct format for the command.
                 command.validate(line);
                 switch (command) {
                     case BYE:
                         prettyPrinter.print(ResourceHandler.getString("repl.farewell"));
                         return;
-                    case DEADLINE:
-                        line = line.replaceFirst("^deadline", "");
-                        args = line.split("/by", 2);
+                    case DEADLINE: {
+                        String lineWithoutCommand = line.replaceFirst("^deadline", "");
+                        String[] args = lineWithoutCommand.split("/by", 2);
                         String deadlineName = args[0].trim();
                         String dueDate = args[1].trim();
                         prettyPrinter.print(taskManager.addTask(new Deadline(deadlineName, dueDate)));
                         break;
-                    case DONE:
-                        line = line.replaceFirst("^done", "");
-                        String listIndexStr = line.trim();
+                    }
+                    case DELETE: {
+                        String lineWithoutCommand = line.replaceFirst("^delete", "");
+                        String listIndexStr = lineWithoutCommand.trim();
+                        // `listIndexStr` is guaranteed to be a string made up of only digit characters.
+                        int listIndex = Integer.parseInt(listIndexStr) - 1;
+                        try {
+                            prettyPrinter.print(taskManager.removeTask(listIndex));
+                        } catch (IndexOutOfBoundsException e) {
+                            prettyPrinter.print(ResourceHandler.getString("repl.invalidTaskIndex"));
+                        }
+                        break;
+                    }
+                    case DONE: {
+                        String lineWithoutCommand = line.replaceFirst("^done", "");
+                        String listIndexStr = lineWithoutCommand.trim();
                         // `listIndexStr` is guaranteed to be a string made up of only digit characters.
                         int listIndex = Integer.parseInt(listIndexStr) - 1;
                         try {
@@ -61,21 +72,25 @@ public class Repl {
                             prettyPrinter.print(ResourceHandler.getString("repl.invalidTaskIndex"));
                         }
                         break;
-                    case EVENT:
-                        line = line.replaceFirst("^event", "");
-                        args = line.split("/at", 2);
+                    }
+                    case EVENT: {
+                        String lineWithoutCommand = line.replaceFirst("^event", "");
+                        String[] args = lineWithoutCommand.split("/at", 2);
                         String eventName = args[0].trim();
                         String dateTime = args[1].trim();
                         prettyPrinter.print(taskManager.addTask(new Event(eventName, dateTime)));
                         break;
-                    case LIST:
+                    }
+                    case LIST: {
                         prettyPrinter.print(taskManager.toString());
                         break;
-                    case TODO:
-                        line = line.replaceFirst("^todo", "");
-                        String toDoName = line.trim();
+                    }
+                    case TODO: {
+                        String lineWithoutCommand = line.replaceFirst("^todo", "");
+                        String toDoName = lineWithoutCommand.trim();
                         prettyPrinter.print(taskManager.addTask(new ToDo(toDoName)));
                         break;
+                    }
                 }
             } catch (DukeException e) {
                 prettyPrinter.print(e.getMessage());
