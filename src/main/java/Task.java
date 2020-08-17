@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Optional;
 
 abstract class Task {
     protected String description;
@@ -30,16 +31,16 @@ abstract class Task {
         return taskTypes.contains(str);
     }
 
-    public static Task createTask(String type, String details) {
+    public static Optional<Task> createTask(String type, String details) {
         switch (type) {
             case (TODO):
-                return Todo.createTodo(details);
+                return Optional.of(Todo.createTodo(details));
             case(DEADLINE):
-                return Deadline.createDeadline(details);
+                return Optional.of(Deadline.createDeadline(details));
             case (EVENT):
-                return Event.createEvent(details);
+                return Optional.of(Event.createEvent(details));
             default:
-                return null;
+                return Optional.empty();
         }
     }
 

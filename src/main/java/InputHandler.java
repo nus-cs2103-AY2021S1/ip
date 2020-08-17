@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class InputHandler {
     private static ArrayList<Task> taskList = new ArrayList<>();
@@ -70,14 +71,17 @@ public class InputHandler {
     }
 
     private boolean handleOthers(String in, String cmdWord) {
-        if (Task.isTask(cmdWord)) {
-            String taskDetails = in.replaceFirst(cmdWord, "").trim();
-            Task task = Task.createTask(cmdWord, taskDetails);
-            taskList.add(task);
-            handleTaskCreated(task);
-        } else {
-            handleEcho(in);
-        }
+        String taskDetails = in.replaceFirst(cmdWord, "").trim();
+        Optional<Task> task = Task.createTask(cmdWord, taskDetails);
+        task.ifPresentOrElse(
+            (Task t) -> {
+                taskList.add(t);
+                handleTaskCreated(t);
+            },
+            () -> {
+                handleEcho(in);
+            }
+        );
         return true;
     }
 
