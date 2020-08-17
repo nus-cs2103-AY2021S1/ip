@@ -3,6 +3,83 @@ import java.util.Scanner;
 
 public class Duke {
 
+    public static ArrayList<Task> tasks = new ArrayList<>();
+
+    public static void sort (String next){
+        try {
+            if (next.equals("list")) {      //Listing out all the tasks
+                list();
+
+            } else if (next.startsWith("done ")) {    //When a task is done
+                done(next);
+
+            } else {         //Adding a to do, deadline, event
+                tasks(next);
+            }
+
+        } catch (IllegalArgumentException e) {
+            System.out.println ("Oops Sorry! >_< I don't know what that means... ");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Please specify a time!");
+        } catch (DukeException e) {
+            System.out.println ("Description of a task cannot be empty!!");
+        }
+    }
+
+
+    public static void list() {
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.printf("%d.%s \n", i + 1, tasks.get(i));
+        }
+    }
+
+
+    public static void done(String s) {
+        try {
+            int index = Integer.parseInt(s.replaceAll("[^0-9]", ""));
+            tasks.get(index - 1).markDone();
+            System.out.println(tasks.get(index - 1));
+
+        } catch (IndexOutOfBoundsException e){
+            System.out.println ("Sorry that task does not exist");
+        }
+    }
+
+
+    public static void tasks(String s) throws DukeException {
+        Task task;
+        if (s.contains("todo")) {
+            if (s.substring(4).trim().length() == 0) {
+                throw new DukeException();
+            }
+            task = new Todo(s.substring(5));
+
+        } else if (s.contains("deadline")) {
+            String[] str = s.split("/");
+            if (str[0].substring(8).trim().length() == 0) {
+                throw new DukeException();
+            }
+            task = new Deadline(str[0].substring(9), str[1].substring(3));
+
+        } else if (s.contains ("event")) {
+            String[] str = s.split ("/");
+            if (str[0].substring(5).trim().length() == 0) {
+                throw new DukeException();
+            }
+            task = new Event (str[0].substring(6), str[1].substring(3));
+
+        } else {
+            throw new IllegalArgumentException();
+        }
+
+        System.out.println ("Got it. I've added this task:");
+        tasks.add(task);
+        System.out.println(task);
+        System.out.printf ("Now you have %d tasks in the list.\n", tasks.size());
+    }
+
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
@@ -11,68 +88,20 @@ public class Duke {
                     + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-
-
         Scanner sc = new Scanner (System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
 
         //Greeting the user
-        System.out.println ("Hello! I'm Duke");
+        System.out.println ("Hello! I'm Duke  ^_^");
         System.out.println ("What can I do for you?");
 
         String next = sc.nextLine();
 
-
         while (!next.equals("bye")){
-
-            //Listing out all the tasks
-            if (next.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < tasks.size(); i++) {
-                    System.out.printf("%d.%s \n", i + 1, tasks.get(i));
-                }
-
-            //When a task is done
-            } else if (next.startsWith("done ")) {
-                int index = Integer.parseInt(next.replaceAll("[^0-9]", ""));
-                tasks.get(index - 1).markDone();
-                System.out.println(tasks.get(index - 1));
-
-
-            //Adding a to do, deadline, event
-            } else if (next.startsWith("todo ") || next.startsWith("deadline ") || next.startsWith("event ")) {
-                System.out.println ("Got it. I've added this task:");
-                Task task;
-
-                if (next.contains("todo")) {
-                    String s = next.substring(5);
-                    task = new Todo(s);
-
-                } else if (next.contains("deadline")) {
-                    String[] s = next.split("/");
-                    task = new Deadline(s[0].substring(9), s[1].substring(3));
-
-                } else {
-                    String[] s = next.split ("/");
-                    task = new Event (s[0].substring(6), s[1].substring(3));
-                }
-
-                tasks.add(task);
-                System.out.println(task);
-                System.out.printf ("Now you have %d tasks in the list.\n", tasks.size());
-
-
-            //adding a new task
-            } else {
-                Task t = new Task(next);
-                tasks.add(t);
-                System.out.printf("added: %s \n", next);
-            }
-
+            sort(next);
             next = sc.nextLine();
         }
 
         //Exit
-        System.out.println ("Bye. Hope to see you again soon!");
+        System.out.println ("Bye! Hope to see you again soon! :)");
     }
 }
