@@ -28,6 +28,10 @@ public class TaskManager {
         taskList.removeIf(task -> task == taskToRemove);
     }
 
+    public void removeTask(int taskIndex) {
+        taskList.remove(taskIndex);
+    }
+
     @Override
     public String toString() {
         String result = "";

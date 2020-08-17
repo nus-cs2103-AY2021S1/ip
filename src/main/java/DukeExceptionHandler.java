@@ -8,7 +8,8 @@ public class DukeExceptionHandler {
                     stringArr[0].contains("deadline") ||
                     stringArr[0].contains("event") ||
                     stringArr[0].contains("list") ||
-                    stringArr[0].contains("done")) {
+                    stringArr[0].contains("done") ||
+                    stringArr[0].contains("delete")) {
                 if (stringArr.length == 1 && !stringArr[0].equals("list")) {
                     NoDescriptionException errorMessage = new NoDescriptionException("", stringArr[0]);
                     return errorMessage.toString();

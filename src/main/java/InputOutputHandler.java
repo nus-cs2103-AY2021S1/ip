@@ -49,6 +49,14 @@ public class InputOutputHandler {
             String taskDone = indentation + taskManager.getTask(taskIndex).toString();
             fullReply = botReply + taskDone;
         }
+        else if (replyArr != null && replyArr[0].equals("delete")) {
+            int taskIndex = Integer.parseInt(replyArr[1]) - 1;
+            Task cacheTask = taskManager.getTask(taskIndex);
+            taskManager.removeTask(taskIndex);
+            String botReply = "Good good... Okay removed! Looks more apt for a lazy ass like you. \n";
+            String taskDone = indentation + cacheTask.toString();
+            fullReply = botReply + taskDone;
+        }
         // adding task to the list
         else {
             Task newTask = null;
