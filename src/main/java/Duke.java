@@ -7,29 +7,21 @@ public class Duke {
     public static void main(String[] args) {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         Scanner sc = new Scanner(System.in);
-        String separator = "   -------------------------------------------------";
+        String separator = "   ----------------------------------------------------------";
 
         List<Task> tasks = new ArrayList<>();
 
         while (sc.hasNextLine()) {
             String next = sc.nextLine();
             if (next.equals("bye")) {
+                System.out.println(separator);
+                System.out.println("    Bye. Hope to see you again soon!");
+                System.out.println(separator);
                 break;
+            } else {
+                Manager.manageInput(next, tasks);
             }
-            System.out.println(separator);
-            if (next.equals("list")) {
-                ListOfTasks.showList(tasks);
-            } else if (next.startsWith("done")) {
-                Done.handleDone(next, tasks);
-            } else { // Adding new task
-                Adding.AddTask(next, tasks);
-            }
-            System.out.println(separator);
-            System.out.println();
         }
         sc.close();
-        System.out.println(separator);
-        System.out.println("    Bye. Hope to see you again soon!");
-        System.out.println(separator);
     }
 }
