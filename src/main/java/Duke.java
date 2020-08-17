@@ -72,7 +72,13 @@ public class Duke {
                 String[] commandList = command.split("\\s+");
 
                 if (commandList[0].equals("done")) {
-                    doTask(tasks.get(Integer.parseInt(commandList[1]) - 1));
+                    int taskNo = Integer.parseInt(commandList[1]);
+
+                    if (taskNo > 0 && taskNo <= tasks.size()) {
+                        doTask(tasks.get(taskNo - 1));
+                    } else {
+                        printPrompt("Task " + taskNo + " does not exist.");
+                    }
                 } else {
                     addTask(command);
                 }
