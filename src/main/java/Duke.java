@@ -13,14 +13,22 @@ public class Duke {
         while(carryOn) {
             String inputString = input.nextLine();
             if (inputString.contains("done")) {
-                int itemNumber = Integer.parseInt(inputString.substring(inputString.length() - 1));
-                if (taskArray.size() < itemNumber || itemNumber <= 0) {
-                    System.out.println(divider + "Hey, no such task exists!" + "\n" + divider);
-                } else {
-                    Task task = taskArray.get(itemNumber - 1);
-                    task.updateTask(1);
-                    System.out.println(divider + "Nice! I have marked this task as done:");
-                    System.out.println(task + "\n" + divider);
+                try {
+                    int itemNumber = Integer.parseInt(inputString.substring(inputString.indexOf(" ") + 1));
+                    if (inputString.length() <= 5) {
+                        throw new DukeException("You did not specify which task you are done with!");
+                    } else if (numberOfItems < itemNumber || itemNumber <= 0) {
+                        throw new DukeException("Hey, no such task exists!");
+                    } else {
+                        Task task = taskArray.get(itemNumber - 1);
+                        task.updateTask(1);
+                        System.out.println(divider + "Nice! I have marked this task as done:");
+                        System.out.println(task + "\n" + divider);
+                    }
+                } catch (DukeException e) {
+                    System.out.println(divider + e.getMessage() + "\n" + divider);
+                } catch (NumberFormatException e) {
+                    System.out.println(divider + "Invalid input for done command!" + "\n" + divider);
                 }
             } else if (inputString.equals("list")) {
                 System.out.println(divider);
@@ -36,22 +44,60 @@ public class Duke {
                 carryOn = false;
                 input.close();
             } else {
-                Task task;
+                Task task = null;
                 if (inputString.indexOf("todo") == 0) {
-                    task = new Todo(inputString.substring(5));
-                } else if (inputString.indexOf("deadline") == 0 && inputString.contains("/by")) {
-                    int byIndex = inputString.indexOf("/by");
-                    task = new Deadline(inputString.substring(9, byIndex - 1), inputString.substring(byIndex + 4));
-                } else if (inputString.indexOf("event") == 0 && inputString.contains("/at")) {
-                    int atIndex = inputString.indexOf("/at");
-                    task = new Deadline(inputString.substring(6, atIndex - 1), inputString.substring(atIndex + 4));
+                    try {
+                        if (inputString.length() == 4 || inputString.length() == 5  && inputString.indexOf(" ") == 4) {
+                            throw new DukeException("Hey! Your Todo is empty >:(");
+                        } else if (inputString.indexOf(" ") != 4) {
+                            throw new DukeException("What are you even saying?!");
+                        } else {
+                            task = new Todo(inputString.substring(5));
+                        }
+                    } catch (DukeException e) {
+                        System.out.println(divider + e.getMessage() + "\n" + divider);
+                    }
+                } else if (inputString.indexOf("deadline") == 0) {
+                    try {
+                        if (!inputString.contains(" /by ") || inputString.substring(inputString.indexOf(" /by ")).length() == 5) {
+                            throw new DukeException("Oi, when is this deadline due??");
+                        }
+                        int byIndex = inputString.indexOf(" /by ");
+                        if (inputString.indexOf(" ") != 8) {
+                            throw new DukeException("What are you even saying?!");
+                        } else if (inputString.contains("deadline /by ")) {
+                            throw new DukeException("You aren't setting anything for your deadline?!");
+                        } else {
+                            task = new Deadline(inputString.substring(9, byIndex - 1), inputString.substring(byIndex + 4));
+                        }
+                    } catch (DukeException e) {
+                        System.out.println(divider + e.getMessage() + "\n" + divider);
+                    }
+                } else if (inputString.indexOf("event") == 0) {
+                    try {
+                        if (!inputString.contains(" /at ")
+                                || inputString.substring(inputString.indexOf(" /at ")).length() == 5) {
+                            throw new DukeException("Oi, when is this event on??");
+                        }
+                        int atIndex = inputString.indexOf(" /at ");
+                        if (inputString.indexOf(" ") != 5) {
+                            throw new DukeException("What are you even saying?!");
+                        } else if (inputString.contains("event /at ")) {
+                            throw new DukeException("You aren't setting anything as your event?!");
+                        } else {
+                            task = new Deadline(inputString.substring(6, atIndex - 1), inputString.substring(atIndex + 4));
+                        }
+                    } catch (DukeException e) {
+                        System.out.println(divider + e.getMessage() + "\n" + divider);
+                    }
                 } else {
-                    task = null;
+                    try {
+                        throw new DukeException("What are you even saying?!");
+                    } catch (DukeException e) {
+                        System.out.println(divider + e.getMessage() + "\n" + divider);
+                    }
                 }
-                if (task == null) {
-                    System.out.println(divider + "Hey, that is not a valid task!");
-                    System.out.println("You still have " + numberOfItems + " tasks left!");
-                } else {
+                if (task != null) {
                     if (numberOfItems < 100) {
                         taskArray.add(task);
                         numberOfItems += 1;

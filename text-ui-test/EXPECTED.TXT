@@ -17,14 +17,26 @@ Here are the tasks in your list!
 
 ************************************************
 Got it, I've added this task:
- [D][✘] return clothes (by: the day before tomorrow)
+ [D][✘] return clothe (by:  the day before tomorrow)
 Now you have 2 tasks in the list.
 ************************************************
 
 ************************************************
 Got it, I've added this task:
- [D][✘] project meeting (by: jurong bird park)
+ [D][✘] project meetin (by:  jurong bird park)
 Now you have 3 tasks in the list.
+************************************************
+
+************************************************
+Oi, when is this deadline due??
+************************************************
+
+************************************************
+Hey! Your Todo is empty >:(
+************************************************
+
+************************************************
+Hey, no such task exists!
 ************************************************
 
 ************************************************
