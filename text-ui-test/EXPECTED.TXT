@@ -1,7 +1,33 @@
-Hello from
+Hello, I am
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
-
+___________________________________________________
+Duke: What can i do for you?
+Got it. I've added this task:
+	[T][✘] CS2103T post-lecture quiz
+Now you have 1 task in the list.
+___________________________________________________
+Got it. I've added this task:
+	[D][✘] CS2103T ip (by: Thursday 2359)
+Now you have 2 tasks in the list.
+___________________________________________________
+Got it. I've added this task:
+	[E][✘] CS2103T Week 2 (at: Friday 12am)
+Now you have 3 tasks in the list.
+___________________________________________________
+Here are the tasks in your list:
+1. [T][✘] CS2103T post-lecture quiz
+2. [D][✘] CS2103T ip (by: Thursday 2359)
+3. [E][✘] CS2103T Week 2 (at: Friday 12am)
+---------------------------------------------------
+Nice! I've marked this task as done: [T][✓] CS2103T post-lecture quiz
+---------------------------------------------------
+Here are the tasks in your list:
+1. [T][✓] CS2103T post-lecture quiz
+2. [D][✘] CS2103T ip (by: Thursday 2359)
+3. [E][✘] CS2103T Week 2 (at: Friday 12am)
+---------------------------------------------------
+Bye. Hope to see you again soon!

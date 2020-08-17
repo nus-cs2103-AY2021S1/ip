@@ -1,0 +1,7 @@
+todo CS2103T post-lecture quiz
+deadline CS2103T ip /by Thursday 2359
+event CS2103T Week 2 /at Friday 12am
+list
+done 1
+list
+bye
