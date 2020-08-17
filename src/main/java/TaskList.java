@@ -10,18 +10,35 @@ public class TaskList {
             case "todo":
                 itemList.add(new Todo(item.split("todo")[1].trim()));
                 break;
+            case "deadline":
+                itemList.add(new Deadline(
+                        getItemDescription(item, type),
+                        getItemParameter(item, type)
+                ));
+                break;
             default:
                 break;
         }
     }
 
     String getItemType(String item) {
-        return item.split(" ")[0];
+        return item.split(" ")[0].trim();
+    }
+
+    String getItemDescription(String item, String itemType) {
+        // remove itemtype, which is the first word of the item literal
+        return splitItemLiteral(item, itemType)[0]
+                .split(itemType)[1]
+                .trim();
     }
 
     String getItemParameter(String item, String itemType) {
+        return splitItemLiteral(item, itemType)[1].trim();
+    }
+
+    String[] splitItemLiteral(String item, String itemType) {
         String delimiter = itemType.equals("deadline") ? "/by" : "/at";
-        return item.split(delimiter)[1];
+        return item.split(delimiter);
     }
 
     void markAsDone(int itemIndex) throws IllegalArgumentException {
