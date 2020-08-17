@@ -9,7 +9,9 @@
 //    }
 //}
 
+import java.util.List;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -27,10 +29,27 @@ public class Duke {
 
         String currInput = sc.next();
 
+        List<String> inputList = new ArrayList<>();
+
+
         while (!currInput.equals("bye")) {
-            System.out.println("____________________________________________________________");
-            System.out.println(currInput);
-            System.out.println("____________________________________________________________\n");
+
+            if (currInput.equals("list")) {
+                int i = 1;
+                System.out.println("____________________________________________________________");
+                for (String inputItem: inputList) {
+                    System.out.println(i + ". " + inputItem);
+                    i++;
+                }
+                System.out.println("____________________________________________________________");
+
+            } else {
+                inputList.add(currInput);
+                System.out.println("____________________________________________________________");
+                System.out.println(currInput);
+                System.out.println("____________________________________________________________\n");
+            }
+
 
             currInput = sc.next();
         }
