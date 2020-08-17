@@ -1,14 +1,26 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
+    static ArrayList<String> taskList = new ArrayList<>();
+
     public static void readUserInput() {
         Scanner sc = new Scanner(System.in);
-        String display = sc.next();
+        String display = sc.nextLine();
         if (display.equals("bye")) {
             System.out.println("Bye. Hope to see you again soon!");
+        } else if (display.equals("list")) {
+            for (int i = 0; i < taskList.size(); i++) {
+                String item = taskList.get(i);
+                System.out.println(
+                        "Here are the tasks in your list: \n"
+                        + (i + 1) + ". " + item + "\n");
+            }
+            readUserInput();
         } else {
-            System.out.println(display);
+            System.out.println("added: " + display);
+            taskList.add(display);
             readUserInput();
         }
     }
