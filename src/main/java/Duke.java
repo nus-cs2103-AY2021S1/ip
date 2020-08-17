@@ -58,7 +58,7 @@ public class Duke {
                             System.out.println(line);
                             System.out.println("Got it. I've added this task:");
                             System.out.println(item);
-                            System.out.println("Now you have " + ListOfItems.size() + " tasks in the list");
+                            System.out.println("Now you have " + ListOfItems.size() + " tasks in the list.");
                             System.out.println(line);
                             echo = sc.nextLine();
                         } catch (ArrayIndexOutOfBoundsException e) {
@@ -78,7 +78,7 @@ public class Duke {
                         System.out.println(line);
                         System.out.println("Got it. I've added this task:");
                         System.out.println(item);
-                        System.out.println("Now you have " + ListOfItems.size() + " tasks in the list");
+                        System.out.println("Now you have " + ListOfItems.size() + " tasks in the list.");
                         System.out.println(line);
                         echo = sc.nextLine();
                     } catch (ArrayIndexOutOfBoundsException e) {
@@ -96,13 +96,24 @@ public class Duke {
                         System.out.println(line);
                         System.out.println("Got it. I've added this task:");
                         System.out.println(item);
-                        System.out.println("Now you have " + ListOfItems.size() + " tasks in the list");
+                        System.out.println("Now you have " + ListOfItems.size() + " tasks in the list.");
                         System.out.println(line);
                         echo = sc.nextLine();
                     } catch (ArrayIndexOutOfBoundsException e) {
                         System.out.println(new DukeException("☹ OOPS!!! The description of a event cannot be empty.", e));
                         echo = sc.nextLine();
                     }
+                } else if (arr[0].equals("delete")) {
+                    int index = Integer.parseInt(arr[1]) - 1;
+                    Task taskToChange = ListOfItems.get(index);
+
+                    ListOfItems.remove(index);
+                    System.out.println(line);
+                    System.out.println("Noted. I've removed this task: \n" + taskToChange);
+                    System.out.println("Now you have " + ListOfItems.size() + " tasks in the list.");
+                    System.out.println(line);
+                    echo = sc.nextLine();
+
                 } else {
                     System.out.println(line);
                     System.out.println("DukeException: ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
