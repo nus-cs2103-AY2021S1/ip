@@ -1,7 +1,11 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        List<String> lst= new ArrayList<>();
+
         String logo =
                   " ____        _                    \n"
                 + "|  _ \\ _   _| | _____  ______ ______ ______  ___  _____\n"
@@ -16,14 +20,28 @@ public class Duke {
         System.out.println("____________________________________");
         System.out.println();
         Scanner sc = new Scanner(System.in);
-        String query = sc.next();
+        String query = sc.nextLine();
 
         while (!query.equals("bye")) {
+
             System.out.println("____________________________________");
-            System.out.println(query);
+
+            //handle and print query string
+            if (query.equals("list")) {
+                for (int i = 0; i <lst.size(); i++) {
+                    System.out.println((i + 1) + ". " + lst.get(i));
+                }
+            } else {
+                System.out.println("added: " + query);
+                lst.add(query);
+            }
+
+
             System.out.println("____________________________________");
             System.out.println();
-            query = sc.next();
+
+
+            query = sc.nextLine();
         }
 
         System.out.println("____________________________________");
