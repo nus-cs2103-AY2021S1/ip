@@ -36,13 +36,18 @@ public class Duke {
                 System.out.println("    ______________________________________");
 
             }  else if (userInput.startsWith("done")) {
-                int spacePosition = userInput.indexOf(" ");
-                int taskPosition = Integer.parseInt(userInput.substring(spacePosition+1));
-                list.get(taskPosition-1).markAsDone();
-                System.out.println("    ______________________________________");
-                System.out.println("        Nice! I've marked this task as done:");
-                System.out.println("        " + list.get(taskPosition-1));
-                System.out.println("    ______________________________________");
+                try {
+                    int taskPosition = Integer.parseInt(userInput.substring(5));
+                    list.get(taskPosition - 1).markAsDone();
+                    System.out.println("    ______________________________________");
+                    System.out.println("        Nice! I've marked this task as done:");
+                    System.out.println("            " + list.get(taskPosition - 1));
+                    System.out.println("    ______________________________________");
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("    ______________________________________");
+                    System.out.println("        ☹ OOPS!!! The description of a done cannot be empty or in wrong format");
+                    System.out.println("    ______________________________________");
+                }
 
             } else if (userInput.startsWith("todo")) {
                 try {
@@ -94,6 +99,19 @@ public class Duke {
                 } catch (StringIndexOutOfBoundsException e) {
                     System.out.println("    ______________________________________");
                     System.out.println("        ☹ OOPS!!! The description of an event cannot be empty or in wrong format.");
+                    System.out.println("    ______________________________________");
+                }
+            } else if (userInput.startsWith("delete")) {
+                try {
+                    int taskPosition = Integer.parseInt(userInput.substring(7));
+                    System.out.println("    ______________________________________");
+                    System.out.println("        Noted. I've removed this task:");
+                    System.out.println("            " + list.remove(taskPosition - 1));
+                    System.out.println("        Now you have " + list.size() + " tasks in the list.");
+                    System.out.println("    ______________________________________");
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("    ______________________________________");
+                    System.out.println("        ☹ OOPS!!! The description of a delete cannot be empty or in wrong format.");
                     System.out.println("    ______________________________________");
                 }
 
