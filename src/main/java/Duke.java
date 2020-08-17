@@ -19,15 +19,8 @@ public class Duke {
         System.out.println(border.replace("\n", ""));
         for(int i = 1; i <= listLen; i++) {
             Task curr = storage.get(i - 1);
-            String tickCross = "";
-
-            if (curr.isDone()) {
-                tickCross = "[✓] ";
-            } else {
-                tickCross = "[✗] ";
-            }
-
-            System.out.println(i + "."+ tickCross + curr.getName());
+            String statusIcon = "[" + curr.getStatusIcon() + "] ";
+            System.out.println(i + "." + statusIcon + curr.getName());
         }
         System.out.println(border);
     }
@@ -37,16 +30,27 @@ public class Duke {
         System.out.println(border + "added: " + task.getName() + "\n" + border);
     }
 
+    public static void doneTask(int i) {
+        Task t = storage.get(i - 1);
+        Task completed = t.setDone(true);
+        storage.set(i - 1, completed);
+        String statusIcon = "[" + completed.getStatusIcon() + "] ";
+        System.out.println("Nice! I've marked this task as done:\n" + "  " + statusIcon + completed.getName());
+    }
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.println(border + "Hello! I'm Duke\n" + "What can I do for you?\n" + border);
 
         while(scan.hasNext()) {
+
             Task input = new Task(scan.nextLine());
             if(checkBye(input)) {
                 return;
             } else if(input.getName().equals("list")) {
                 displayList();
+//            } else if(input.getName().contains("done")) {
+
             } else {
                 addTask(input);
             }
