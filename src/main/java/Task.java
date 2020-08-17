@@ -48,4 +48,8 @@ public class Task {
     public boolean checkIfDone() {
         return isDone;
     }
+
+    public String toString(){
+        return getStatusIcon() + " " + description;
+    }
 }

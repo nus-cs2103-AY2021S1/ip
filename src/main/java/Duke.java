@@ -17,11 +17,12 @@ public class Duke {
      **/
     public static void listStoredTasks() {
         if (stored_task.isEmpty()) {
-            System.out.println("No text stored...");
+            System.out.println("No tasks stored...");
         } else {
+            System.out.println("Quack! Here are the tasks in your list:");
             int count = 1;
             for (Task task : stored_task) {
-                System.out.println(count + ". " + task.getStatusIcon() + " " + task.getDescription());
+                System.out.println(count + ". " + task);
                 count++;
             }
         }
@@ -30,11 +31,17 @@ public class Duke {
     /**
      * Adds input task into stored_task.
      *
-     * @param input Input task from user to be stored.
+     * @param newTask Input task from user to be stored.
      **/
-    public static void addTask(String input) {
-        stored_task.add(new Task(input));
-        System.out.println("Quack! I have added: " + input + " \uD83C\uDF0A");
+    public static void addTask(Task newTask) {
+        stored_task.add(newTask);
+        System.out.println("Quack! I have added: " + newTask + " \uD83C\uDF0A");
+        int numOfTasks = stored_task.size();
+        if (numOfTasks == 1) {
+            System.out.println("My duck senses tell me you have 1 task in the list.");
+        } else {
+            System.out.println("My duck senses tell me you have " + numOfTasks + " tasks in the list.");
+        }
     }
 
     /**
@@ -52,7 +59,7 @@ public class Duke {
             } else {
                 t.markAsDone();
                 System.out.println("Quack! I have marked this task as done: \n" +
-                        t.getStatusIcon() + " " + t.getDescription() + " \uD83C\uDF0A");
+                        t + " \uD83C\uDF0A");
             }
         }
     }
@@ -88,9 +95,42 @@ public class Duke {
                 System.out.println(line);
                 markTaskAsDone(taskNumber);
                 System.out.println(line);
+            } else if (input.startsWith("todo ") && input.length() > 5) {
+                ToDo newTask = new ToDo(input.substring(5));
+                System.out.println(line);
+                addTask(newTask);
+                System.out.println(line);
+            } else if (input.startsWith("deadline ") && input.length() > 9){
+                int indexOfBy = input.indexOf("/by");
+                if (indexOfBy == -1) {
+                    System.out.println(line);
+                    System.out.println("Did you include /by?");
+                    System.out.println(line);
+                } else {
+                    String description = input.substring(9, indexOfBy);
+                    String by = input.substring(indexOfBy + 3);
+                    Deadline newTask = new Deadline(description, by);
+                    System.out.println(line);
+                    addTask(newTask);
+                    System.out.println(line);
+                }
+            } else if (input.startsWith("event ") && input.length() > 6) {
+                int indexOfAt = input.indexOf("/at");
+                if (indexOfAt == -1) {
+                    System.out.println(line);
+                    System.out.println("Did you include /at?");
+                    System.out.println(line);
+                } else {
+                    String description = input.substring(6, indexOfAt);
+                    String at = input.substring(indexOfAt + 3);
+                    Event newTask = new Event(description, at);
+                    System.out.println(line);
+                    addTask(newTask);
+                    System.out.println(line);
+                }
             } else {
                 System.out.println(line);
-                addTask(input);
+                System.out.println("My duck instincts tell me your input makes no sense...");
                 System.out.println(line);
             }
         }
