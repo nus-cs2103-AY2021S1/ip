@@ -5,7 +5,11 @@ abstract class Task {
     protected boolean isDone;
 
     // Constructor
-    public Task(String description) {
+    public Task(String description) throws EmptyBodyException {
+        if (description.isEmpty()) {
+            throw new EmptyBodyException("description", this.getClass().toString());
+        }
+
         this.description = description;
         this.isDone = false;
     }

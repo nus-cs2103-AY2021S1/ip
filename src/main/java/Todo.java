@@ -1,7 +1,7 @@
 public class Todo extends Task {
 
     // Constructor
-    public Todo(String description) {
+    public Todo(String description) throws EmptyBodyException {
         super(description);
     }
 

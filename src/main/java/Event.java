@@ -4,7 +4,7 @@ public class Event extends Task {
     protected String dateTime;
 
     // Constructor
-    public Event(String description, String dateTime) {
+    public Event(String description, String dateTime) throws EmptyBodyException {
         super(description);
         this.dateTime = dateTime;
     }

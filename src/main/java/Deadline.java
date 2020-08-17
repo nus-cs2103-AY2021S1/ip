@@ -4,7 +4,7 @@ public class Deadline extends Task {
     protected String deadline;
 
     // Constructor
-    public Deadline(String description, String deadline) {
+    public Deadline(String description, String deadline) throws EmptyBodyException {
         super(description);
         this.deadline = deadline;
     }
