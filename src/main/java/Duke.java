@@ -24,7 +24,10 @@ public class Duke {
                         processor.processorList(arraylst);
                     } else if (stringarr[0].equals("done")) {
                         int index = Integer.parseInt(stringarr[1]);
-                        processor.processorDone(arraylst, index);
+                        arraylst = processor.processorDone(arraylst, index);
+                    } else if (stringarr[0].equals("delete")) {
+                        int index = Integer.parseInt(stringarr[1]);
+                        arraylst = processor.processorDelete(arraylst, index);
                     } else {
                         arraylst = processor.processorAdd(cmd, arraylst);
                     }

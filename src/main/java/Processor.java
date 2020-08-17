@@ -14,13 +14,26 @@ public class Processor {
         System.out.println("_________________________________________");
     }
 
-    public void processorDone(ArrayList<Task> arraylst, int index) {
+    public ArrayList<Task> processorDone(ArrayList<Task> arraylst, int index) {
         int i = index - 1;
         arraylst.get(i).setDone();
         System.out.println("_________________________________________");
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(index + "." + arraylst.get(i).toString());
         System.out.println("_________________________________________");
+        return arraylst;
+    }
+
+    public ArrayList<Task> processorDelete(ArrayList<Task> arraylst, int index) {
+        int i = index - 1;
+        Task removed_task = arraylst.get(i);
+        arraylst.remove(i);
+        System.out.println("_________________________________________");
+        System.out.println("Noted, I've removed this task:");
+        System.out.println(removed_task.toString());
+        System.out.println("Now you have " + arraylst.size() + " tasks in the list.");
+        System.out.println("_________________________________________");
+        return arraylst;
     }
 
     public ArrayList<Task> processorAdd(String cmd, ArrayList<Task> arraylst) throws DukeException {
