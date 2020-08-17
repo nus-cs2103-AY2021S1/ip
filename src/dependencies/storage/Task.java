@@ -3,8 +3,8 @@ package dependencies.storage;
 import static dependencies.storage.CompletionState.*;
 
 public class Task {
-    private CompletionState state;
-    private String task;
+    protected CompletionState state;
+    protected String task;
 
     Task(String task) {
         this.task = task;
