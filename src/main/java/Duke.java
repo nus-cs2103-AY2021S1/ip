@@ -35,10 +35,7 @@ public class Duke {
 
     private static void respondToInput(String input, List<Task> taskList) {
         if (input.equals("list")) {
-            for (int i = 0; i < taskList.size(); i++) {
-                System.out.print("    " + (i+1) + ". ");
-                System.out.println(taskList.get(i));
-            }
+            printTaskList(taskList);
         }
         else if (input.contains("done")) {
             int index = Integer.parseInt(input.split(" ")[1]) - 1;
@@ -52,8 +49,34 @@ public class Duke {
             }
         }
         else {
-            taskList.add(new Task(input));
-            System.out.println("    added: " + input);
+            String command = input.split(" ")[0];
+            if (command.equals("todo")) {
+                String pattern = "(todo )(.+)";
+                taskList.add(new ToDoTask(input.replaceAll(pattern, "$2")));
+            } else if (command.equals("deadline")) {
+                String pattern = "(deadline )(.+)";
+                taskList.add(new DeadlineTask(input.replaceAll(pattern, "$2")));
+            } else if (command.equals("event")) {
+                String pattern = "(event )(.+)";
+                taskList.add(new EventTask(input.replaceAll(pattern, "$2")));
+            }
+            int size = taskList.size();
+            System.out.println("    Fine. I've added this task:") ;
+            System.out.println("      " + taskList.get(size - 1));
+            System.out.println("    Now you have a total of " + taskList.size() + (taskList.size() == 1 ? " task" : " tasks") +  " in your list.");
+        }
+    }
+
+    private static int getRemainingTaskCount(List<Task> taskList)
+    {
+        return (int) taskList.stream().filter(x -> !x.isDone()).count();
+    }
+
+    private static void printTaskList(List<Task> taskList) {
+        System.out.println("    Here are the tasks in your list:");
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.print("    " + (i+1) + ". ");
+            System.out.println(taskList.get(i));
         }
     }
 }
