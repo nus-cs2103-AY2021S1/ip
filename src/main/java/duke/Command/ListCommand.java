@@ -1,3 +1,7 @@
+package duke.Command;
+
+import duke.Command.Command;
+
 public class ListCommand extends Command {
 
     public String execute() {
