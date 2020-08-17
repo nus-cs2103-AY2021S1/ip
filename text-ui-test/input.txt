@@ -11,4 +11,8 @@ delete 1
 list
 not a command
 todo
+event no datetime
+deadline no date
+done 5
+delete 5
 bye

@@ -4,8 +4,8 @@ public abstract class Task {
     protected final String description;
     protected boolean completed;
 
-    protected static String TICK = "Y";
-    protected static String CROSS = "N";
+    protected static String TICK = "\u2713";
+    protected static String CROSS = "\u2717";
 
     Task(String description, boolean completed) {
         this.description = description;
@@ -13,11 +13,8 @@ public abstract class Task {
     }
 
     public String toStringSuffix() {
-        if (this.completed) {
-            return String.format("[%s] %s", TICK, this.description);
-        } else {
-            return String.format("[%s] %s", CROSS, this.description);
-        }
+        String symbol = this.completed ? TICK : CROSS;
+        return String.format("[%s] %s", symbol, this.description);
     }
 
     public void completeTask() {
