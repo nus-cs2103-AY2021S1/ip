@@ -34,6 +34,7 @@ public class Duke {
             } else if (inputString.equals("bye")) {
                 System.out.println(divider + "Bye! See you next time!" + "\n" + divider);
                 carryOn = false;
+                input.close();
             } else {
                 Task task;
                 if (inputString.indexOf("todo") == 0) {
@@ -54,9 +55,10 @@ public class Duke {
                     if (numberOfItems < 100) {
                         taskArray.add(task);
                         numberOfItems += 1;
-                        System.out.println(divider + "Got it, I've added this task: ");
+                        System.out.println(divider + "Got it, I've added this task:");
                         System.out.println(" " + task);
                         System.out.println("Now you have " + numberOfItems + " tasks in the list.");
+                        System.out.println(divider);
                     } else {
                         System.out.println(divider + "Sorry, the list is full!\n" + divider);
                     }
