@@ -3,17 +3,25 @@
 */
 public class Planner {
 
-    private String[] list;  // Stores and displays text added by the User
+    private Task[] list;  // Stores and displays text added by the User
     private int currIndex;  // Keeps track of current index for the list
 
     public Planner () {
-        this.list = new String[100];  // Size-of-100 as specified by task-requirements 
+        this.list = new Task[100];  // Size-of-100 as specified by task-requirements 
         this.currIndex = 0;
     }
 
     // This method is responsible for inserting text into list, and updating current index
-    public void addItem (String item) {
-        this.list[currIndex++] = item;
+    public void addTask (Task t) {
+        this.list[currIndex++] = t;
+    }
+
+    public void completeTask (int i) {
+        this.list[i-1].markAsDone();
+    }
+
+    public Task getTask (int i) {
+        return this.list[i-1];
     }
 
     // Overrides toString() method of Object Class to display contents of list neatly
@@ -23,7 +31,8 @@ public class Planner {
         if (this.currIndex != 0) {
             msg = "";
             for (int i = 0; i < this.currIndex; i++) {
-                msg += String.format("\t" + (i+1) + ". " + this.list[i] + "\n");
+                Task t = this.list[i];
+                msg += String.format("\t" + (i+1) + ". " + t + "\n");
             }
         }
         return msg;
