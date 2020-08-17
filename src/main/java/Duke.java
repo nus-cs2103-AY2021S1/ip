@@ -6,8 +6,8 @@ public class Duke {
     private static final List<Task> storage = new ArrayList<>();
     private static final String border = "____________________________________________________________\n";
 
-    public static boolean checkBye(Task task) {
-        if (task.getName().equals("bye")) {
+    public static boolean checkBye(String task) {
+        if (task.equals("bye")) {
             System.out.println(border + "Bye. Hope to see you again soon!\n" + border);
             return true;
         }
@@ -24,48 +24,58 @@ public class Duke {
         System.out.println(border);
     }
 
-    public static void addTask(Task task) {
+    public static void addTask(String s, String next) {
+        Task task = new Task(s + " " + next);
         storage.add(task);
         System.out.println(border + "added: " + task.getName() + "\n" + border);
     }
 
-    public static void doneTask(int i) {
-        Task t = storage.get(i - 1);
-        Task completed = t.setDone(true);
-        storage.set(i - 1, completed);
-        System.out.println(
-                border + "Nice! I've marked this task as done:\n" + "  "
-                        + completed + "\n" + border
-        );
+    public static boolean checkDone(String s) {
+        return s.equals("done");
     }
 
-    public static boolean checkDone(Task task) {
-        String[] name = task.getName().split(" ");
-        if (name.length < 2) {
-            return false;
+    public static void doneTask(String s) {
+        if (s.equals("")) {
+            addTask("done", "");
+            return;
         }
-        return name[0].equals("done") && name[1].matches("\\d+");
-    }
 
-    public static int doneTaskId(Task task) {
-        String[] name = task.getName().split(" ");
-        return Integer.parseInt(name[1]);
+        int i = Integer.parseInt(s);
+        if (i < 1 || i > storage.size()) {
+            System.out.println(
+                    border + "You have entered an invalid number: " + i
+                        + ". Please try again.\n" + border
+            );
+        } else {
+            Task t = storage.get(i - 1);
+            Task completed = t.setDone(true);
+            storage.set(i - 1, completed);
+            System.out.println(
+                    border + "Nice! I've marked this task as done:\n" + "  "
+                            + completed + "\n" + border
+            );
+        }
     }
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.println(border + "Hello! I'm Duke\n" + "What can I do for you?\n" + border);
 
-        while (scan.hasNext()) {
-            Task input = new Task(scan.nextLine());
-            if (checkBye(input)) {
-                return;
-            } else if (input.getName().equals("list")) {
-                displayList();
-            } else if (checkDone(input)) {
-                doneTask(doneTaskId(input));
+        while (true) {
+            String test = scan.next();
+            if (test.equals("bye")) {
+                checkBye("bye");
+                break;
             } else {
-                addTask(input);
+                String next = scan.nextLine().replaceFirst(" ", "");
+                if (test.equals("list")) {
+                    displayList();
+                } else if (checkDone(test)) {
+                    System.out.println(next);
+                    doneTask(next);
+                } else {
+                    addTask(test, next);
+                }
             }
         }
     }
