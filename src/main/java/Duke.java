@@ -5,12 +5,12 @@ import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        System.out.println("Hello from\n" + logo);
         System.out.println("    ______________________________________");
         System.out.println("        Hello! I'm Duke");
         System.out.println("        What can I do for you?");
@@ -50,7 +50,7 @@ public class Duke {
                 Task toDo = new Todo(description);
                 list.add(toDo);
                 System.out.println("    ______________________________________");
-                System.out.println("        Got it. I've added this task: ");
+                System.out.println("        Got it. I've added this task:");
                 System.out.println("            " + toDo);
                 System.out.println("        Now you have " + list.size() + " tasks in the list.");
                 System.out.println("    ______________________________________");
@@ -63,7 +63,7 @@ public class Duke {
                 Task deadline = new Deadline(description,by);
                 list.add(deadline);
                 System.out.println("    ______________________________________");
-                System.out.println("        Got it. I've added this task: ");
+                System.out.println("        Got it. I've added this task:");
                 System.out.println("            " + deadline);
                 System.out.println("        Now you have " + list.size() + " tasks in the list.");
                 System.out.println("    ______________________________________");
@@ -76,7 +76,7 @@ public class Duke {
                 Task event = new Event(description,at);
                 list.add(event);
                 System.out.println("    ______________________________________");
-                System.out.println("        Got it. I've added this task: ");
+                System.out.println("        Got it. I've added this task:");
                 System.out.println("            " + event);
                 System.out.println("        Now you have " + list.size() + " tasks in the list.");
                 System.out.println("    ______________________________________");
