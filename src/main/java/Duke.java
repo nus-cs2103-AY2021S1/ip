@@ -36,22 +36,29 @@ public class Duke {
         }
 
         String[] splitInput = input.split(" ");
-        String firstInput = splitInput[0];
+        String firstInput = splitInput[0].trim();
         String[] sections;
 
-        switch (firstInput) {
-            case "list":
+        Command command;
+        try {
+            command = Command.toCommand(firstInput);
+        } catch (DukeException e) {
+            throw e;
+        }
+
+        switch (command) {
+            case LIST:
                 store.list();
                 break;
-            case "done":
+            case DONE:
                 store.markTaskAsDone(Integer.parseInt(splitInput[1].trim()));
                 break;
-            case "delete":
+            case DELETE:
                 store.delete(Integer.parseInt(splitInput[1].trim()));
                 break;
-            case "todo":
-            case "deadline":
-            case "event":
+            case TODO:
+            case DEADLINE:
+            case EVENT:
                 try {
                     sections = StringUtils.parseInputSections(input, firstInput, getTaskBreakPt(firstInput));
                     store.add(sections, firstInput);
@@ -59,8 +66,6 @@ public class Duke {
                     throw e;
                 }
                 break;
-            default:
-                throw new DukeException("Aww! The first word of your input is wrong!");
         }
     }
 
