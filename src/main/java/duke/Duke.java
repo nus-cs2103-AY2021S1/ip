@@ -1,8 +1,8 @@
 package duke;
 
-import exception.UnknownCommandException;
-import exception.InvalidUsageException;
+import exception.*;
 
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,21 +64,21 @@ public class Duke {
                         try {
                             this.addTodo(parsed[1]);
                         } catch (ArrayIndexOutOfBoundsException ex) {
-                            throw new InvalidUsageException("The description of a todo cannot be empty.");
+                            throw new TodoInvalidUsageException("Todo description cannot be empty.");
                         }
                         break;
                     case "deadline":
                         try {
                             this.addDeadline(parsed[1]);
                         } catch (ArrayIndexOutOfBoundsException ex) {
-                            throw new InvalidUsageException("The description of a deadline cannot be empty.");
+                            throw new DeadlineInvalidUsageException("Deadline description cannot be empty.");
                         }
                         break;
                     case "event":
                         try {
                             this.addEvent(parsed[1]);
                         } catch (ArrayIndexOutOfBoundsException ex) {
-                            throw new InvalidUsageException("The description of an event cannot be empty.");
+                            throw new EventInvalidUsageException("Event description cannot be empty.");
                         }
                         break;
                     default:
@@ -122,7 +122,7 @@ public class Duke {
      * @return an array, first element is command, second element is input
      */
     private String[] parseInput(String input) {
-        return input.split("\\W+", 2);
+        return input.split("\\s+", 2);
     }
 
     private void addTodo(String todo) {
@@ -130,23 +130,33 @@ public class Duke {
         printAddConfirmation(todoList.size() - 1);
     }
 
-    private void addDeadline(String deadline) throws InvalidUsageException {
-        String[] parsedDeadline = deadline.split(" /by ", 2);
-        if (parsedDeadline.length < 2) {
-            String errorMsg = "Please ensure that the deadline description and date are not empty.\n"
-                    + "     Usage: deadline <deadline description> /by <deadline date>";
-            throw new InvalidUsageException(errorMsg);
+    private void addDeadline(String deadline) throws DeadlineInvalidUsageException {
+        String[] parsedDeadline = deadline.split("\\s*/by\\s*", 2);
+
+        if(parsedDeadline.length < 2) {
+            throw new DeadlineInvalidUsageException("You should specify the deadline by using `/by`");
+        }
+        if (parsedDeadline[0].equals("")) {
+            throw new DeadlineInvalidUsageException("Deadline description cannot be empty.");
+        }
+        if (parsedDeadline[1].equals("")) {
+            throw new DeadlineInvalidUsageException("Deadline date cannot be empty.");
         }
         todoList.add(new Deadline(parsedDeadline[0], parsedDeadline[1]));
         printAddConfirmation(todoList.size() - 1);
     }
 
-    private void addEvent(String event) throws InvalidUsageException {
-        String[] parsedEvent = event.split(" /at ", 2);
-        if (parsedEvent.length < 2) {
-            String errorMsg = "Please ensure that the event description and date are not empty.\n"
-                    + "     Usage: event <event description> /at <event date>";
-            throw new InvalidUsageException(errorMsg);
+    private void addEvent(String event) throws EventInvalidUsageException {
+        String[] parsedEvent = event.split("\\s*/at\\s*", 2);
+
+        if(parsedEvent.length < 2) {
+            throw new EventInvalidUsageException("You should specify a date by using `/at`");
+        }
+        if (parsedEvent[0].equals("")) {
+            throw new EventInvalidUsageException("Event description cannot be empty.");
+        }
+        if (parsedEvent[1].equals("")) {
+            throw new EventInvalidUsageException("Event date cannot be empty.");
         }
         todoList.add(new Event(parsedEvent[0], parsedEvent[1]));
         printAddConfirmation(todoList.size() - 1);
