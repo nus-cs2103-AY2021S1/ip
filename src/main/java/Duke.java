@@ -11,42 +11,65 @@ public class Duke {
     }
 
     public static void reply(String input) {
-        if (input.equals("list")) {
-            System.out.println("Here are the tasks in your list:");
-            for (int i = 1; i < list.size() + 1; i++) {
-                System.out.println(i + ". " + list.get(i - 1));
+        if (input.trim().equals("list")) {
+            if (list.size() == 0) {
+                System.out.println("There are no tasks in your list");
+            } else {
+                System.out.println("Here are the tasks in your list:");
+                for (int i = 1; i < list.size() + 1; i++) {
+                    System.out.println(i + ". " + list.get(i - 1));
+                }
             }
         } else if (input.startsWith("done ") || input.equals("done")) {
-            if (input.length() > 5) {
-                String item = input.substring(5);
-                markAsDone(item);
-            } else {
+            if (input.length() < 6 || input.substring(5).trim().isEmpty()) {
                 System.out.println("Which task do you want to mark as done?");
+            } else {
+                String item = input.substring(5).trim();
+                markAsDone(item);
             }
         } else {
-            addTask(input);
+            try {
+                addTask(input);
+            } catch (DukeException error) {
+                System.out.println(error.getMessage());
+            }
         }
     }
 
-    public static void addTask(String input) {
+    public static void addTask(String input) throws DukeException {
         Task task;
-        if (input.startsWith("todo ")) {
-            String name = input.substring(5);
+        if (input.startsWith("todo ") || input.equals("todo")) {
+            if (input.length() < 6 || input.substring(5).trim().isEmpty()) {
+                throw new DukeException("The description of a todo cannot be empty.");
+            }
+            String name = input.substring(5).trim();
             task = new ToDo(name);
-        } else if (input.startsWith("deadline ")) {
-            String details = input.substring(9);
+        } else if (input.startsWith("deadline ") || input.equals("deadline")) {
+            if (input.length() < 10 || input.substring(9).trim().isEmpty()) {
+                throw new DukeException("The description of a deadline cannot be empty.");
+            }
+            String details = input.substring(9).trim();
             String[] split = details.split("/by ");
+            if (split.length != 2) {
+                throw new DukeException("Please use the format: deadline (name) /by (when)");
+            }
             String name = split[0];
             String by = split[1];
             task = new Deadline(name, by);
-        } else if (input.startsWith("event ")) {
-            String details = input.substring(6);
-            String[] split = input.substring(6).split("/at ");
+        } else if (input.startsWith("event ") || input.equals("event")) {
+            if (input.length() < 7 || input.substring(6).trim().isEmpty()) {
+                throw new DukeException("The description of a deadline cannot be empty.");
+            }
+            String details = input.substring(6).trim();
+            String[] split = details.split("/at ");
+            if (split.length != 2) {
+                throw new DukeException("Please use the format: event (name) /at (what time)");
+            }
             String name = split[0];
             String duration = split[1];
             task = new Event(name, duration);
         } else {
-            System.out.println("Please specify type of task");
+            System.out.println("I'm sorry, but I don't know what that means.");
             return;
         }
         list.add(task);
@@ -60,13 +83,17 @@ public class Duke {
     }
 
     public static void markAsDone(String item) {
-        int index = Integer.parseInt(item) - 1;
-        if (index > -1 && index < list.size()) {
-            list.get(index).done();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(list.get(index));
-        } else {
-            System.out.println("This task is not in your list");
+        try {
+            int index = Integer.parseInt(item) - 1;
+            if (index > -1 && index < list.size()) {
+                list.get(index).done();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(list.get(index));
+            } else {
+                System.out.println("This task is not in your list");
+            }
+        } catch (NumberFormatException error) {
+            System.out.println("Please provide a valid task number to mark as done");
         }
     }
 
