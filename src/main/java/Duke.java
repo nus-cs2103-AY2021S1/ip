@@ -38,6 +38,7 @@ public class Duke {
             String next = sc.nextLine();
 
             if(next.equals("bye") ) {
+                System.out.println("Woof!");
                 break;
             }
 
