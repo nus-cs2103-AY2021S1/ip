@@ -12,6 +12,8 @@ public class Duke {
     private final String DONE_TASK_MARKED_MESSAGE = "    Nice! I've marked this task as done:";
     private final String NO_TASK_MESSAGE = "    Sorry the task does not exists";
     private final String ADDED_TASK_MESSAGE = "    Got it. I've added this task: ";
+    private final String INVALID_DONE_MESSAGE = "    Sorry done cannot be empty ";
+    private final String INVALID_TODO_MESSAGE = "    Sorry todo cannot be empty ";
 
     private List<Task> lstOfTask = new ArrayList<>();
 
@@ -42,13 +44,10 @@ public class Duke {
                     resultString = exit();
                     break;
                 case DONE:
-                    resultString = DONE_TASK_MARKED_MESSAGE + "\n"
-                            + outputIndent + done(parsedUserInput);
+                    resultString =  done(parsedUserInput);
                     break;
                 case TODO:
-                    resultString = ADDED_TASK_MESSAGE + "\n"
-                            + outputIndent + addToDo(parsedUserInput) + "\n"
-                            + getNumOfTaskMessage();
+                    resultString =  addToDo(parsedUserInput) ;
                     break;
                 case EVENT:
                     resultString = ADDED_TASK_MESSAGE + "\n" + outputIndent + addEvent(parsedUserInput) + "\n"
@@ -72,7 +71,12 @@ public class Duke {
         for (int i = 0; i < lstOfTask.size(); i++) {
             Task task = lstOfTask.get(i);
             int taskNumber = i + 1;
-            String s = outputIndent + taskNumber + "." + task.toString() +"\n";
+            String s="";
+            if (i == lstOfTask.size() -1) {
+                s = outputIndent + taskNumber + "." + task.toString();
+            } else {
+                s = outputIndent + taskNumber + "." + task.toString() + "\n";
+            }
             concat.append(s);
         }
         return concat.toString();
@@ -83,26 +87,35 @@ public class Duke {
     }
 
     private String done(String[] parsedUserInput) {
-        String doneTask = parsedUserInput[1];
-        int doneTaskNumber = Integer.parseInt(doneTask);
-        int identifierNumberInArrayList = doneTaskNumber - 1;
+
         try {
+            String doneTask = parsedUserInput[1];
+            int doneTaskNumber = Integer.parseInt(doneTask);
+            int identifierNumberInArrayList = doneTaskNumber - 1;
             Task task = this.lstOfTask.get(identifierNumberInArrayList);
             task.markAsDone();
-            return outputIndent+task.toString();
+            return DONE_TASK_MARKED_MESSAGE + "\n"
+                    + outputIndent + outputIndent + task.toString();
         } catch (IndexOutOfBoundsException e1) {
-            return NO_TASK_MESSAGE;
+            return INVALID_DONE_MESSAGE;
         }
     }
 
     private String addToDo(String[] parsedUserInput) {
-        String taskDescription ="";
-        for(int i = 1; i < parsedUserInput.length; i++) {
-            taskDescription += parsedUserInput[i] + " ";
+        try {
+            String test = parsedUserInput[1];
+            String taskDescription = "";
+            for (int i = 1; i < parsedUserInput.length; i++) {
+                taskDescription += parsedUserInput[i] + " ";
+            }
+            ToDo td = new ToDo(taskDescription);
+            lstOfTask.add(td);
+            return ADDED_TASK_MESSAGE + "\n"
+                    + outputIndent + outputIndent + td.toString() + "\n"
+                    + getNumOfTaskMessage();
+        } catch (IndexOutOfBoundsException e1) {
+            return INVALID_TODO_MESSAGE;
         }
-        ToDo td = new ToDo(taskDescription);
-        lstOfTask.add(td);
-        return outputIndent + td.toString();
     }
 
     private String addEvent(String[] parsedUserInput) {
@@ -143,9 +156,6 @@ public class Duke {
         return "    Now you have " + getNumOfTask() + " tasks in the list";
     }
 
-
-
-
     public static void main(String[] args) {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
@@ -158,9 +168,6 @@ public class Duke {
             String output = duke.processCommand(parsedString);
             System.out.println(output);
         }
-
-
-
 
     }
 }
