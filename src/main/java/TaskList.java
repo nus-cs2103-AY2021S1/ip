@@ -22,10 +22,8 @@ public class TaskList {
         String message = "";
         int count = 1;
         for (Task task : list) {
-            message += String.format("%d.[%s] %s\n"
-                    , count++
-                    , task.isDone() ? "\u2713" : "\u2717"
-                    , task);
+            message += String.format("%d.%s\n"
+                    , count++, task);
         }
         return message;
     }
