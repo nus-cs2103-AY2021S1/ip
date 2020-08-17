@@ -26,7 +26,7 @@ public class Duke {
                 } else if (splitArr.length == 2 && splitArr[0].equals("done") && Integer.parseInt(splitArr[1]) > 0) {
                     int index = Integer.parseInt(splitArr[1]);
                     if (index > count || index < 0) {
-                        throw new DukeException("OOPS!!! That task number does not exist!");
+                        throw new DukeException("OOPS!!! That task number does not exist.");
                     }
                     tasks[index - 1].setDone();
                     System.out.println("Nice! I've marked this task as done:");
