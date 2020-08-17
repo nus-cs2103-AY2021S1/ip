@@ -1,11 +1,8 @@
 import java.util.Scanner;
 
 public class Duke {
-
-    public static String dashedLineBreak() {
-        String dashedLine = "- ";
-        return dashedLine.repeat(24);
-    }
+    private static String[] tasks = new String[100];
+    private static int index = 0;
 
     public static void init() {
         String logo = " ____        _        \n"
@@ -19,18 +16,47 @@ public class Duke {
         System.out.println();
     }
 
+    public static String dashedLineBreak() {
+        String dashedLine = "- ";
+        return dashedLine.repeat(24);
+    }
+
+    public static void printTasks() {
+        if (index == 0) {
+            System.out.println("You have no outstanding tasks, milady.");
+        } else {
+            System.out.println(dashedLineBreak());
+            for (int i = 0; i < index; i++) {
+                System.out.printf("%s. %s", i + 1, tasks[i]);
+                System.out.println();
+            }
+            System.out.println(dashedLineBreak());
+        }
+        System.out.println();
+    }
+
+    public static void addTask(String task) {
+        tasks[index] = task;
+        index++;
+    }
+
     public static void main(String[] args) {
         init();
         Scanner sc = new Scanner(System.in);
         while(sc.hasNextLine()) {
             String userInput = sc.nextLine();
-            if (!userInput.equalsIgnoreCase("bye")) {
-                System.out.println(userInput);
-                System.out.println(dashedLineBreak());
-            } else {
+            if (userInput.equalsIgnoreCase("list")) {
+                printTasks();
+            } else if (userInput.equalsIgnoreCase("bye")){
                 System.out.println("Your wish is my command, milady. Till I see you again.");
                 sc.close();
                 System.exit(0);
+            } else {
+                addTask(userInput);
+                System.out.println(dashedLineBreak());
+                System.out.println("added: " + userInput);
+                System.out.println(dashedLineBreak());
+                System.out.println();
             }
         }
     }
