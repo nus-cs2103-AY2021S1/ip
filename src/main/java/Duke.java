@@ -18,7 +18,12 @@ public class Duke {
 
         userInput = input.nextLine();
         while (!userInput.equals("bye")) {
-            format(userInput);
+            if (userInput.equals("list")) {
+                formatLst();
+            } else {
+                format("added: " + userInput);
+                lst.add(userInput);
+            }
             userInput = input.nextLine();
         }
 
@@ -28,6 +33,14 @@ public class Duke {
     public static void format(String message) {
         System.out.println(line);
         System.out.println(message);
+        System.out.println(line);
+    }
+
+    public static void formatLst() {
+        System.out.println(line);
+        for (int i = 1; i <= lst.size(); i++) {
+            System.out.println(i + ". " + lst.get(i-1));
+        }
         System.out.println(line);
     }
 }
