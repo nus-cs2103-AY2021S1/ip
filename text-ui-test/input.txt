@@ -1,0 +1,11 @@
+todo sleep
+list
+event bfast /at 10am-1030am
+list
+deadline project /by 20-08-2020 2359
+list
+done 2
+list
+done 1
+list
+bye

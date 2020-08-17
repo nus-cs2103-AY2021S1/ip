@@ -87,7 +87,7 @@ public class Duke {
 
         System.out.println(list.get(list.size() - 1).toString());
 
-        String taskText = list.size() <= 1 ? " task " : " task ";
+        String taskText = list.size() < 1 ? " task " : " tasks ";
         System.out.println("Now you have " + list.size() + taskText + "in the list.");
     }
 
