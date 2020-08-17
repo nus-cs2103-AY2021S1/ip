@@ -2,6 +2,8 @@
 
 import java.util.Scanner;
 
+
+// The chat bot class to handle the internal logic
 public class ChatBot {
 
     // The entry point to run the chat bot

@@ -10,6 +10,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
          */
+        // initialise a new chatbot
         ChatBot bot = new ChatBot();
         bot.start();
     }
