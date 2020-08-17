@@ -64,6 +64,18 @@ public class Duke {
         System.out.println("\t\t" + newDeadline);
         System.out.println("\tNow you have " + list.size() + " tasks in the list.");
         System.out.println("\t" + divider);
+      } else if (command[0].equals("event")) {
+        String[] commandParam = command[1].split("/at");
+        String description = commandParam[0].trim();
+        String at = commandParam[1].trim();
+        Event newEvent = new Event(description, at);
+        list.add(newEvent);
+
+        System.out.println("\t" + divider);
+        System.out.println("\tGot it. I've added this task: ");
+        System.out.println("\t\t" + newEvent);
+        System.out.println("\tNow you have " + list.size() + " tasks in the list.");
+        System.out.println("\t" + divider);
       } else {
         list.add(new Task(input));
 
