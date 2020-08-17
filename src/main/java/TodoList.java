@@ -38,7 +38,10 @@ public class TodoList {
                 } else if (splitCommand[0].equals("deadline")) {
 
                 } else if (splitCommand[0].equals("todo")) {
-
+                    System.out.println("Got it. I've added this task:");
+                    TodoList.addTodo(splitCommand[1]);
+                    int size = todoList.size();
+                    System.out.println("Now you have " + size + " tasks in the list.");
                 } else if (splitCommand[0].equals("event")) {
 
                 }
@@ -56,5 +59,10 @@ public class TodoList {
         Task newTask = new Task(task);
         todoList.add(newTask);
         System.out.println("added: " + task);
+    }
+
+    private static void addTodo(String task) {
+        Todo newTodo = new Todo(task);
+        todoList.add(newTodo);
     }
 }
