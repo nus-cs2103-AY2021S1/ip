@@ -1,10 +1,5 @@
-package duke.Command;
-import duke.Message;
-import duke.Task;
-
 public class ListCommand extends Command {
 
-    @Override
     public String execute() {
 
         StringBuilder list = new StringBuilder();
@@ -17,10 +12,10 @@ public class ListCommand extends Command {
                     list.append(i).append(".").append(listArray.get(i - 1).toString());
                 } else {
                     list.append(i).append(".").append(listArray.get(i - 1).toString())
-                            .append("\n").append(Message.INDENT);
+                            .append("\n");
                 }
             }
-            return "Here are the tasks in your list:\n" + Message.INDENT + list.toString();
+            return "Here are the tasks in your list:\n" + list.toString();
         }
     }
 }

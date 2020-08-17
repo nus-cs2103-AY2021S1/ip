@@ -1,7 +1,3 @@
-package duke;
-
-import duke.Command.Command;
-
 import java.util.Scanner;
 
 public class Duke {
@@ -16,6 +12,7 @@ public class Duke {
     }
 
     private static void run() throws Exception {
+
         print(Message.MESSAGE_WELCOME);
 
         Scanner scanner = new Scanner(System.in);
@@ -31,14 +28,15 @@ public class Duke {
     }
 
     private static void print(String message) throws Exception {
+        String messageB = Message.BORDERS;
         if (message.equals(Message.MESSAGE_WELCOME)) {
-            System.out.println(Message.INDENT + Message.BORDERS + "\n"
-                    + Message.INDENT + Message.MESSAGE_WELCOME + "\n"
-                    + Message.INDENT + Message.BORDERS);
+            System.out.println(messageB + "\n"
+                    + Message.MESSAGE_WELCOME + "\n"
+                    + messageB);
         } else {
-            System.out.println(Message.INDENT + Message.BORDERS + "\n"
-                    + Message.INDENT + Command.parse(message) + "\n"
-                    + Message.INDENT + Message.BORDERS);
+            System.out.println(messageB + "\n"
+                    + Command.parse(message) + "\n"
+                    + messageB);
         }
     }
 }
