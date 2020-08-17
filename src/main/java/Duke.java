@@ -1,3 +1,5 @@
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -13,14 +15,32 @@ public class Duke {
                 "____________________________________________________________";
 
         System.out.println(greeting);
-        input = sc.next();
+        input = sc.nextLine();
+        String[] stringArray = new String[100];
+        int counter = 0;
 
         while (!input.equals("bye")) {
-            System.out.println(lines);
-            System.out.println(input);
-            System.out.println(lines);
-            input = sc.next();
+            if (input.equals("list")) {
+                System.out.println(lines);
+                for (int i = 0; i < counter; i++) {
+                    int index = i+1;
+                    String stringedIndex = Integer.toString(index);
+                    String item = stringArray[i];
+                    String outputLine = stringedIndex + ". " + item;
+                    System.out.println(outputLine);
+                }
+                System.out.println(lines);
+                input = sc.nextLine();
+            } else {
+                System.out.println(lines);
+                stringArray[counter] = input;
+                counter = counter + 1;
+                String outputLine = "added: " + input;
+                System.out.println(outputLine);
+                input = sc.nextLine();
+            }
         }
+
 
         System.out.println(lines);
         System.out.println("Bye. Hope to see you again soon!");
