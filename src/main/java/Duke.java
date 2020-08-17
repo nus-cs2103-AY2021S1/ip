@@ -62,9 +62,12 @@ public class Duke {
                 + "\n ┗( ⊙.⊙ )┛ "
                 + "\n These are all the commands you may use:"
                 + "\n     1.list -- show all tasks"
-                + "\n     2.help -- show all commands"
-                + "\n     3.bye -- exit the chatbot"
-                + "\n     4.done <task index> -- mark this task as done"
+                + "\n     2.todo <task name> -- add a task"
+                + "\n     3.deadline <task name> /by <task deadline> -- add a task with its deadline"
+                + "\n     4.event <event name> /at <event timing> -- add an event with its timing"
+                + "\n     5.done <task index> -- mark this task as done"
+                + "\n     6.help -- show all commands"
+                + "\n     7.bye -- exit the chatbot"
                 + "\n**************************************************************\n";
         System.out.println(commandList);
     }
