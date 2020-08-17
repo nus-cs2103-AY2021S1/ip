@@ -51,6 +51,21 @@ public class Tickbot {
                 }
                 break;
             }
+            case "delete": {
+                try {
+                    int index = Integer.parseInt(args[1]) - 1;
+                    Task task = tasks.get(index);
+                    tasks.remove(index);
+                    printMessage("Task removed: " + task);
+                    printMessage("You have " + tasks.size() + " task(s) in task list.");
+                } catch (NumberFormatException err) {
+                    printMessage("Invalid Syntax.");
+                    printMessage("Usage: delete <task_index>");
+                } catch (IndexOutOfBoundsException err) {
+                    printMessage("Sorry, No such task found.");
+                }
+                break;
+            }
             case "list": {
                 printMessage("Task list:");
                 for (int i = 0; i < tasks.size(); i++) {

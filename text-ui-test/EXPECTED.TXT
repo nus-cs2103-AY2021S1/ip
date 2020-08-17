@@ -10,6 +10,8 @@
   1. [E][✔︎] Scheduled meeting (at: 10:00 tomorrow)
   2. [D][✘] project work (by: Tuesday)
   3. [T][✘] complete survey
+==>   Task removed: [E][✔︎] Scheduled meeting (at: 10:00 tomorrow)
+  You have 2 task(s) in task list.
 ==>   Sorry, No such task found.
 ==>   Missing time for the event.
   Usage: event <content> /at <time>
