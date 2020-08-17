@@ -28,6 +28,12 @@ public class TaskManager {
                 String.format("\n    Now you have %d task(s) in the list.", count()));
     }
 
+    public void removeTask(int index) {
+        Task removed = this.tasks.remove(index);
+        taskPrinter.display("Alright. I've removed this task:\n        " + removed +
+                String.format("\n    Now you have %d task(s) in the list.", count()));
+    }
+
     public void listAll() {
         taskPrinter.list(this.tasks);
     }
