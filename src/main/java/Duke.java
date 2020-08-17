@@ -7,23 +7,27 @@ public class Duke {
         while(scanner.hasNextLine()) {
             String input = scanner.nextLine();
             String command = input.split(" ")[0];
-            switch(command) {
-                case "bye":
-                    PrintDuke.printExitMessage();
-                    System.exit(0);
-                case "list":
-                    PrintDuke.printList(list.tasks);
-                    break;
-                case "done":
-                    list.markTaskAsDone(input);
-                    break;
-                case "todo":
-                case "event":
-                case "deadline":
-                    list.addTask(command, input);
-                    break;
-                default:
-                    break;
+            try {
+                switch(command) {
+                    case "bye":
+                        PrintDuke.printExitMessage();
+                        System.exit(0);
+                    case "list":
+                        PrintDuke.printList(list.tasks);
+                        break;
+                    case "done":
+                        list.markTaskAsDone(input);
+                        break;
+                    case "todo":
+                    case "event":
+                    case "deadline":
+                        list.addTask(command, input);
+                        break;
+                    default:
+                        throw new UnknownInputException();
+                }
+            } catch (DukeException ex) {
+                PrintDuke.printException(ex);
             }
         }
         scanner.close();

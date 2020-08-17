@@ -45,4 +45,8 @@ public class PrintDuke {
     protected static void printMarkTaskAsDone(Task task) {
         printWithDashes(" Nice! I've marked this task as done:\n " + task);
     }
+
+    protected static void printException(DukeException ex) {
+        printWithDashes(" ERROR: " + ex.getMessage());
+    }
 }
