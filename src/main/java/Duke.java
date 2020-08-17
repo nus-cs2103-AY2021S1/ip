@@ -22,10 +22,10 @@ public class Duke {
 
         System.out.println("Hello I am\n" + logo + "What do you want to talk about?");
         Scanner in = new Scanner(System.in);
-        String answer = in.next();
+        String answer = in.nextLine();
         while (!answer.equals("bye")) {
             System.out.println(upperLine + answer + "\n" +lowerLine);
-            answer = in.next();
+            answer = in.nextLine();
         }
 
         System.out.println(upperLine + goodbye + "\n" +lowerLine);
