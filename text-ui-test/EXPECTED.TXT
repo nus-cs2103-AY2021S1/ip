@@ -1,7 +1,51 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+    _______________________________________________________
 
+    ███╗   ███╗     █████╗     ██████╗     ██╗     ██████╗ 
+    ████╗ ████║    ██╔══██╗    ██╔══██╗    ██║    ██╔═══██╗
+    ██╔████╔██║    ███████║    ██████╔╝    ██║    ██║   ██║
+    ██║╚██╔╝██║    ██╔══██║    ██╔══██╗    ██║    ██║   ██║
+    ██║ ╚═╝ ██║    ██║  ██║    ██║  ██║    ██║    ╚██████╔╝
+    ╚═╝     ╚═╝    ╚═╝  ╚═╝    ╚═╝  ╚═╝    ╚═╝     ╚═════╝ 
+    _______________________________________________________
+    It's a-me, Mario! how can I help you today?
+    _______________________________________________________
+    _______________________________________________________
+    What do you expect me to say when you didn't save any tasks?
+    _______________________________________________________
+    _______________________________________________________
+    Got it! I've added this task:
+        [T][✗]  Lorem ipsum dolor
+    Now you have 1 tasks in the list.
+    _______________________________________________________
+    _______________________________________________________
+    Got it! I've added this task:
+        [D][✗]  sit amet, consectetur adipiscing  (by: taskdate2 tasktime2)
+    Now you have 2 tasks in the list.
+    _______________________________________________________
+    _______________________________________________________
+    Got it! I've added this task:
+        [E][✗]  sed do eiusmod tempor incididunt  (at: taskdate3 i-jpm)
+    Now you have 3 tasks in the list.
+    _______________________________________________________
+    _______________________________________________________
+    As you wish, here's what you gotta do:
+        1.[T][✗]  Lorem ipsum dolor
+        2.[D][✗]  sit amet, consectetur adipiscing  (by: taskdate2 tasktime2)
+        3.[E][✗]  sed do eiusmod tempor incididunt  (at: taskdate3 i-jpm)
+    _______________________________________________________
+    _______________________________________________________
+    You did it! Good job little guy!
+        [T][✓]  Lorem ipsum dolor
+    _______________________________________________________
+    _______________________________________________________
+    As you wish, here's what you gotta do:
+        1.[T][✓]  Lorem ipsum dolor
+        2.[D][✗]  sit amet, consectetur adipiscing  (by: taskdate2 tasktime2)
+        3.[E][✗]  sed do eiusmod tempor incididunt  (at: taskdate3 i-jpm)
+    _______________________________________________________
+    _______________________________________________________
+    I don't understand anything you just said
+    _______________________________________________________
+    _______________________________________________________
+    Hey! Come back here! You big-a monkey!
+    _______________________________________________________

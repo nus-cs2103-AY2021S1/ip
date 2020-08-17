@@ -1,0 +1,9 @@
+list
+todo Lorem ipsum dolor
+deadline sit amet, consectetur adipiscing /by taskdate2 tasktime2
+event sed do eiusmod tempor incididunt /at taskdate3 i-jpm
+list
+done 1
+list
+Ut enim ad minim veniam
+bye
