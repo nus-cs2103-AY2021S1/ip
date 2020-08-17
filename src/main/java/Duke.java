@@ -18,27 +18,32 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         List<Task> store = new ArrayList<>();
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        while (true) {
+        boolean running = true;
+        while (running) {
             String input = scanner.nextLine();
             String[] splitted = input.split(" ", 2);
             String first = splitted[0];
-            if (first.equals("bye")) {
-                break;
-            } else if (first.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                int count = 0;
-                for (Task task : store) {
-                    count++;
-                    System.out.println(String.format("%d. %s", count, task));
-                }
-            } else if (first.equals("done")) {
-                int num = Integer.parseInt(splitted[1]);
-                store.get(num - 1).setDone();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(store.get(num - 1));
-            } else {
-                store.add(new Task(input));
-                System.out.println("added: " + input);
+            switch (first) {
+                case "bye":
+                    running = false;
+                    break;
+                case "list":
+                    System.out.println("Here are the tasks in your list:");
+                    int count = 0;
+                    for (Task task : store) {
+                        count++;
+                        System.out.println(String.format("%d. %s", count, task));
+                    }
+                    break;
+                case "done":
+                    int num = Integer.parseInt(splitted[1]);
+                    store.get(num - 1).setDone();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(store.get(num - 1));
+                    break;
+                default:
+                    store.add(new Task(input));
+                    System.out.println("added: " + input);
             }
         }
         scanner.close();
