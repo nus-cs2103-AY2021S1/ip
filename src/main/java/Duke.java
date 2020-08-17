@@ -1,17 +1,37 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
-    boolean echoInput(String input) {
+    ArrayList<Task> tasks;
+
+    Duke() {
+        this.tasks = new ArrayList<>();
+    }
+
+    boolean handleInput(String input) {
         if (input.equals("bye")) {
             exit();
             return true;
+        } else if (input.equals("list")) {
+            System.out.println("    ________________________________________________________");
+            for (Task task : tasks) {
+                System.out.println("    " + (tasks.indexOf(task) + 1) + ". " + task.toString()
+                );
+            }
+            if (tasks.size() == 0) {
+                System.out.println("    None");
+            }
+            System.out.println("    ________________________________________________________");
+            return false;
+        } else {
+            System.out.println(
+                    "    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n    "
+                    + "added: " + input
+                    + "\n    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+            );
+            tasks.add(new Task(input));
+            return false;
         }
-        System.out.println(
-            "    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n    "
-            + input
-            + "\n    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-        );
-        return false;
     }
 
     void exit() {
@@ -33,9 +53,9 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello my name\n" + logo + "\nHow may I help?");
 
-        while (scanner.hasNext()) {
-            String input = scanner.next();
-            boolean exit = duke.echoInput(input);
+        while (scanner.hasNextLine()) {
+            String input = scanner.nextLine();
+            boolean exit = duke.handleInput(input);
             if (exit) {
                 scanner.close();
                 System.exit(0);
