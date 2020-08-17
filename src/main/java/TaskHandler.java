@@ -63,6 +63,11 @@ public class TaskHandler {
         return parsed[0].equals("done") && parsed.length == 2;
     }
 
+    public boolean isDelete(String input) {
+        String[] parsed = input.split(" ", 2);
+        return parsed[0].equals("delete") && parsed.length == 2;
+    }
+
     public boolean isValidSize(String input, ArrayList<Task> task) {
         String[] parsed = input.split(" ", 2);
         return task.size() >= Integer.parseInt(parsed[1]) && Integer.parseInt(parsed[1]) > 0;

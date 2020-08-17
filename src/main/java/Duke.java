@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) throws DukeException {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Task> todoList = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
         TaskHandler handler = new TaskHandler();
 
         String greetText = "Hey There! What can I do for you?";
@@ -13,9 +13,15 @@ public class Duke {
 
         while (!handler.isBye(input)) {
             if (handler.isList(input)) {
-                printList(todoList);
+                printList(taskList);
             } else if (handler.isDone(input)) {
-                if (handler.isValidSize(input, todoList)) markAsDone(input, handler, todoList);
+                if (handler.isValidSize(input, taskList)) markAsDone(input, handler, taskList);
+                else {
+                    say("Please specify a correct task number!");
+                    throw new DukeException("Invalid task number");
+                }
+            } else if (handler.isDelete(input)) {
+                if (handler.isValidSize(input, taskList)) deleteTask(input, handler, taskList);
                 else {
                     say("Please specify a correct task number!");
                     throw new DukeException("Invalid task number");
@@ -26,15 +32,15 @@ public class Duke {
                 switch (type) {
                     case TODO:
                         valid = handler.checkTodo(input);
-                        if (valid) addToList(Task.Type.TODO, input, handler, todoList);
+                        if (valid) addToList(Task.Type.TODO, input, handler, taskList);
                         break;
                     case DEADLINE:
                         valid = handler.checkDeadline(input);
-                        if (valid) addToList(Task.Type.DEADLINE, input, handler, todoList);
+                        if (valid) addToList(Task.Type.DEADLINE, input, handler, taskList);
                         break;
                     case EVENT:
                         valid = handler.checkEvent(input);
-                        if (valid) addToList(Task.Type.EVENT, input, handler, todoList);
+                        if (valid) addToList(Task.Type.EVENT, input, handler, taskList);
                         break;
                     default: //
                 }
@@ -61,11 +67,14 @@ public class Duke {
     }
 
     private static void printList(ArrayList<Task> list) {
-        say("Here is your task list.");
-        int count = 1;
-        for (Task task : list) {
-            System.out.println(count + ". " + task);
-            count++;
+        if (list.size() == 0) say("Your task list is currently empty.");
+        else {
+            say("Here is your task list.");
+            int count = 1;
+            for (Task task : list) {
+                System.out.println(count + ". " + task);
+                count++;
+            }
         }
     }
 
@@ -75,6 +84,15 @@ public class Duke {
         task.markDone();
         say("I have marked it as done!");
         System.out.println(task);
+    }
+
+    private static void deleteTask(String input, TaskHandler handler, ArrayList<Task> list) {
+        int number = handler.getNumber(input);
+        Task task = list.get(number - 1);
+        list.remove(number - 1);
+        say("I have deleted this task!");
+        System.out.println(task);
+        say("You have " + list.size() + " items in your task list now.");
     }
 
     private static void addToList(Task.Type type, String input, TaskHandler handler, ArrayList<Task> list) {
@@ -96,5 +114,6 @@ public class Duke {
                 break;
             default: //
         }
+        say("You have " + list.size() + " items in your task list now.");
     }
 }
