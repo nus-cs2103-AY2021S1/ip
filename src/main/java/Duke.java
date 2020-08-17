@@ -4,10 +4,11 @@ import java.util.ArrayList;
 public class Duke {
 
     public static String line = "-------------------------------------";
-    public static ArrayList<String> list = new ArrayList<>();
+    public static String defaultError = "Wat talking you?";
+    public static ArrayList<Task> list = new ArrayList<>();
 
     public static void addItem(String input) {
-        list.add(input);
+        list.add(new Task(input));
     }
 
     public static void main(String[] args) {
@@ -22,7 +23,22 @@ public class Duke {
         nextLine = scanner.nextLine();
 
         while (!nextLine.equals("bye")) {
-            if (nextLine.equals("list")) {
+            if (nextLine.contains("done")) {
+                String arr[] = nextLine.split(" ", 2);
+                int index = Integer.parseInt(arr[1]);
+
+                if (index > list.size()) {
+                    System.out.println(defaultError);
+                } else {
+                    list.get(index-1).markAsDone();
+
+                    System.out.println(line);
+                    System.out.println("Great choice! I have taken your order: ");
+                    System.out.println(list.get(index-1));
+                    System.out.println(line);
+                }
+                nextLine = scanner.nextLine();
+            } else if (nextLine.equals("list")) {
                 System.out.println(line);
                 for(int k = 0; k < list.size(); k++) {
                     System.out.println((k+1) + ": " + list.get(k));
