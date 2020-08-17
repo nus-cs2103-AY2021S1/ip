@@ -3,11 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Duke {
-    private static final List<String> storage = new ArrayList<>();
+    private static final List<Task> storage = new ArrayList<>();
     private static final String border = "____________________________________________________________\n";
 
-    public static boolean checkBye(String s) {
-        if(s.equals("bye")) {
+    public static boolean checkBye(Task task) {
+        if(task.getName().equals("bye")) {
             System.out.println(border + "Bye. Hope to see you again soon!\n" + border);
             return true;
         }
@@ -18,7 +18,7 @@ public class Duke {
         int listLen = storage.size();
         System.out.println(border.replace("\n", ""));
         for(int i = 1; i <= listLen; i++) {
-            System.out.println(i + ". " + storage.get(i - 1));
+            System.out.println(i + ". " + storage.get(i - 1).getName());
         }
         System.out.println(border);
     }
@@ -28,14 +28,14 @@ public class Duke {
         System.out.println(border + "Hello! I'm Duke\n" + "What can I do for you?\n" + border);
 
         while(scan.hasNext()) {
-            String input = scan.nextLine();
+            Task input = new Task(scan.nextLine());
             if(checkBye(input)) {
                 return;
-            } else if(input.equals("list")) {
+            } else if(input.getName().equals("list")) {
                 displayList();
             } else {
                 storage.add(input);
-                System.out.println(border + "added: " + input + "\n" + border);
+                System.out.println(border + "added: " + input.getName() + "\n" + border);
             }
         }
     }
