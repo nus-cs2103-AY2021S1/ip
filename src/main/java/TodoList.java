@@ -23,13 +23,25 @@ public class TodoList {
         } else if (splitCommand[0].equals("bye")) {
             TodoList.terminate = true;
             System.out.println("Bye. Hope to see you again soon!");
-        } else if (splitCommand[0].equals("done")) {
+        } else if (!splitCommand[0].equals("done") && !splitCommand[0].equals("todo") &&
+                !splitCommand[0].equals("deadline") && !splitCommand[0].equals("event")) {
+            System.out.println(splitCommand[0]);
+            TodoList.addTask(command);
+        } else {
             try {
-                int index = Integer.parseInt(splitCommand[1]);
-                Task targetTask = todoList.get(index - 1);
-                String message = targetTask.completeTask();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(message);
+                if (splitCommand[0].equals("done")) {
+                    int index = Integer.parseInt(splitCommand[1]);
+                    Task targetTask = todoList.get(index - 1);
+                    String message = targetTask.completeTask();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(message);
+                } else if (splitCommand[0].equals("deadline")) {
+
+                } else if (splitCommand[0].equals("todo")) {
+
+                } else if (splitCommand[0].equals("event")) {
+
+                }
             } catch (NumberFormatException error) {
                 // When "done" is not followed by a valid number
                 System.out.println("Please enter a valid index!");
@@ -37,14 +49,6 @@ public class TodoList {
                 // When "done" is not followed by any number
                 System.out.println("Please let me know which task you are referring to!");
             }
-        } else if (splitCommand[0].equals("deadline")) {
-
-        } else if (splitCommand[0].equals("todo")) {
-
-        } else if (splitCommand[0].equals("event")) {
-
-        } else {
-            TodoList.addTask(command);
         }
     }
 
