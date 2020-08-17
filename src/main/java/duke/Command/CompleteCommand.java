@@ -1,3 +1,8 @@
+package duke.Command;
+
+import duke.Message;
+import duke.Task;
+
 public class CompleteCommand extends Command {
 
     private final int index;
