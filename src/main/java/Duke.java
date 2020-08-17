@@ -112,17 +112,14 @@ public class Duke {
             );
             printResponse(response);
         } catch (ArrayIndexOutOfBoundsException e) {
-            String response = "You entered the deadline command incorrectly :(\n"
-                    + "The command format is \"deadline <task> /by <time>\"";
-            throw new InvalidDeadlineException(response);
+            throw new InvalidDeadlineException();
         }
     }
 
     private static void handleDelete(String command) throws InvalidDeleteIndexException {
         int index = Integer.parseInt(command.split(" ")[1]);
         if (index > tasks.size() || index < 1) {
-            String response = String.format("No such task :(\nYou have %d tasks.", tasks.size());
-            throw new InvalidDeleteIndexException(response);
+            throw new InvalidDeleteIndexException(tasks.size());
         }
 
         Task task = tasks.remove(index-1);
@@ -135,8 +132,7 @@ public class Duke {
     private static void handleDone(String command) throws InvalidDoneIndexException {
         int index = Integer.parseInt(command.split(" ")[1]);
         if (index > tasks.size() || index < 1) {
-            String response = String.format("No such task :(\nYou have %d tasks.", tasks.size());
-            throw new InvalidDoneIndexException(response);
+            throw new InvalidDoneIndexException(tasks.size());
         }
 
         Task task = tasks.get(index-1);
@@ -158,9 +154,7 @@ public class Duke {
             );
             printResponse(response);
         } catch (ArrayIndexOutOfBoundsException e) {
-            String response = "You entered the event command incorrectly :(\n"
-                    + "The command format is \"event <task> /at <time>\"";
-            throw new InvalidEventException(response);
+            throw new InvalidEventException();
         }
     }
 
@@ -175,9 +169,7 @@ public class Duke {
     private static void handleToDo(String command) throws InvalidToDoException {
         String[] split = command.split(" ");
         if (split.length == 1) {
-            String response = "The description of a todo cannot be empty :(\n"
-                    + "The command format is \"todo <task>\"";
-            throw new InvalidToDoException(response);
+            throw new InvalidToDoException();
         }
 
         String[] descriptionArray = Arrays.copyOfRange(split, 1, split.length);
@@ -192,9 +184,7 @@ public class Duke {
     }
 
     private static void handleUnknown() throws DukeException{
-        String response = "OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                + "To see all commands, type \"commands\"";
-        throw new DukeException(response);
+        throw new DukeException();
     }
 
     // Wrapper method for printing with horizontal line borders and 1 tab indent

@@ -1,5 +1,6 @@
 public class InvalidDeadlineException extends DukeException {
-    public InvalidDeadlineException(String errorMessage) {
-        super(errorMessage);
+    InvalidDeadlineException() {
+        super("You entered the deadline command incorrectly :(\n"
+                + "The command format is \"deadline <task> /by <time>\"");
     }
 }
