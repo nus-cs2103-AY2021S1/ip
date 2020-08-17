@@ -1,6 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
 
 public class Duke {
+
     public static void main(String[] args) {
         String logo = "   ___      _      _ __   _              \n" +
                 "  /   \\    | |    | '_ \\ | |_     __ _   \n" +
@@ -16,21 +19,31 @@ public class Duke {
                 "    ____________________________________________________________";
         System.out.println(greeting);
 
+        List<String> itemList = new ArrayList<String>();
         Scanner sc = new Scanner(System.in);
-        String input = sc.next();
+        String input = sc.nextLine();
         while (!input.equals("bye")) {
             System.out.println("    ____________________________________________________________");
-            System.out.print("    ");
-            respondToInput(input);
+            respondToInput(input, itemList);
             System.out.println("    ____________________________________________________________");
-            input = sc.next();
+            input = sc.nextLine();
         }
         System.out.println("    ____________________________________________________________");
         System.out.println("    Bye. Try not to come again please... let me live.");
         System.out.println("    ____________________________________________________________");
     }
 
-    private static void respondToInput(String input) {
-        System.out.println(input);
+    private static void respondToInput(String input, List<String> itemList) {
+        if (!input.equals("list"))
+        {
+            itemList.add(input);
+            System.out.println("    added: " + input);
+        }
+        else {
+            for (int i = 0; i < itemList.size(); i++) {
+                System.out.print("    " + (i+1) + ". ");
+                System.out.println(itemList.get(i));
+            }
+        }
     }
 }
