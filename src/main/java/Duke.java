@@ -1,7 +1,6 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.function.UnaryOperator;
 
 public class Duke {
     static List<Task> taskList = new ArrayList<>();
