@@ -3,7 +3,7 @@ import java.util.*;
 public class Duke {
 
     // attributes for task storage
-    public static Task[] lib = new Task[100];
+    public static ArrayList<Task> lib = new ArrayList<>();
     public static int curr = 0;
     public static boolean takeInput = true;
 
@@ -53,16 +53,18 @@ public class Duke {
                     + "---------------");
             takeInput = false;
         } else if (echo.equals("list")) {
-            System.out.println("---------------\n" + "Here are the tasks in your list:");
+            System.out.println("---------------\n" + "Here are the task(s) in your list:");
 
-            for (int i = 1; i <= curr; i++) {
-                System.out.println(i + "." + lib[i - 1].toString());
+            for (int i = 1; i <= lib.size(); i++) {
+                System.out.println(i + "." + lib.get(i - 1).toString());
             }
             System.out.println("---------------");
         } else if (echo.equals("todo") || echo.equals("deadline") || echo.equals("event")) {
             throw new DukeException("Please enter a valid description for your task!");
         } else if (echo.equals("done")) {
             throw new DukeException("Please enter the ID of the task you would like to complete.");
+        } else if (echo.equals("delete")) {
+            throw new DukeException("Please retry and enter the ID of the task to be deleted.");
         } else {
             throw new DukeException("Please enter a valid command into the console.");
         }
@@ -82,22 +84,39 @@ public class Duke {
                 } else {
                     System.out.println("---------------\n" + "Nice! I've marked this task as done:");
 
-                    lib[index].finishTask();
-                    System.out.println(lib[index].toString());
-                    System.out.println("---------------\n");
+                    lib.get(index).finishTask();
+                    System.out.println(lib.get(index).toString() + "\n" + "---------------\n");
                 }
             }
 
+        } else if (task.equals("delete")) {
+            if (!isNumeric(modEcho[1])) {
+                throw new DukeException("Please enter a valid task number for deletion!");
+            } else {
+                int index = Integer.parseInt(modEcho[1]) - 1;
+
+                if (index >= curr || curr == 0 || index < 0) {
+                    throw new DukeException("This task ID does not exist in the database!");
+                } else {
+                    System.out.println("---------------\n" + "The following task has been deleted:\n" +
+                            lib.get(index).toString());
+
+                    lib.remove(index);
+                    curr--;
+                    System.out.println("Now you have " + curr + " task(s) in the list.\n" +
+                            "---------------");
+                }
+            }
         } else {
 
             if (task.equals("todo")) {
                 ToDo todo = new ToDo(modEcho[1]);
-                lib[curr] = todo;
+                lib.add(todo);
                 System.out.println("---------------\n" +
                         "Got it. I've added this task:");
                 System.out.println(todo.toString());
                 curr++;
-                System.out.println("Now you have " + curr + " tasks in the list.\n" +
+                System.out.println("Now you have " + curr + " task(s) in the list.\n" +
                         "---------------");
 
             } else if (task.equals("deadline") || task.equals("event")) {
@@ -128,16 +147,16 @@ public class Duke {
                 if (task.equals("deadline")) {
                     Deadline deadline = new Deadline(processTime[0].trim(),
                             time[1].trim());
-                    lib[curr] = deadline;
+                    lib.add(deadline);
                     System.out.println(deadline.toString());
                 } else {
                     Event event = new Event(processTime[0].trim(),
                             time[1].trim());
-                    lib[curr] = event;
+                    lib.add(event);
                     System.out.println(event.toString());
                 }
                 curr++;
-                System.out.println("Now you have " + curr + " tasks in the list.\n" +
+                System.out.println("Now you have " + curr + " task(s) in the list.\n" +
                         "---------------");
             }
         }
