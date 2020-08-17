@@ -20,32 +20,36 @@ public class Duke {
         Scanner scn = new Scanner(System.in);
         while (!exitProgram) {
             System.out.println();
-            String userInput = scn.nextLine();
-            String[] userInputArgs = userInput.split(" ");
-            Duke.printHorizontalLine();
-            if (userInput.equals("bye")) {
-                System.out.println("Goodbye! Shutting down now...");
+            if (!scn.hasNext()) {
                 exitProgram = true;
-            } else if (userInput.equals("list")) {
-                int n = listOfTasks.size();
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < n; i++) {
-                    System.out.println(String.format("%d.%s", i + 1, listOfTasks.get(i)));
-                }
-            } else if (userInputArgs[0].equals("done")) {
-                int idx = Integer.parseInt(userInputArgs[1]);
-                Task task = listOfTasks.get(idx - 1);
-                task.markAsDone();
-                System.out.println("Nice! I've marked this task as done:");
-                Duke.printWithIndent(task.toString());
             } else {
-                Task task = createTask(userInputArgs);
-                listOfTasks.add(task);
-                System.out.println("Got it. I've added this task:");
-                Duke.printWithIndent(task.toString());
-                System.out.println(String.format("Now you have %d tasks in the list.", listOfTasks.size()));
+                String userInput = scn.nextLine();
+                String[] userInputArgs = userInput.split(" ");
+                Duke.printHorizontalLine();
+                if (userInput.equals("bye")) {
+                    System.out.println("Goodbye! Shutting down now...");
+                    exitProgram = true;
+                } else if (userInput.equals("list")) {
+                    int n = listOfTasks.size();
+                    System.out.println("Here are the tasks in your list:");
+                    for (int i = 0; i < n; i++) {
+                        System.out.println(String.format("%d.%s", i + 1, listOfTasks.get(i)));
+                    }
+                } else if (userInputArgs[0].equals("done")) {
+                    int idx = Integer.parseInt(userInputArgs[1]);
+                    Task task = listOfTasks.get(idx - 1);
+                    task.markAsDone();
+                    System.out.println("Nice! I've marked this task as done:");
+                    Duke.printWithIndent(task.toString());
+                } else {
+                    Task task = createTask(userInputArgs);
+                    listOfTasks.add(task);
+                    System.out.println("Got it. I've added this task:");
+                    Duke.printWithIndent(task.toString());
+                    System.out.println(String.format("Now you have %d tasks in the list.", listOfTasks.size()));
+                }
+                Duke.printHorizontalLine();
             }
-            Duke.printHorizontalLine();
         }
     }
 
