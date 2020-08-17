@@ -1,6 +1,6 @@
 public class InvalidTaskNumberException extends InvalidInputException {
     InvalidTaskNumberException() {
-        super("The task to be marked as done does not exist!");
+        super("The task number is invalid!");
     }
 
     InvalidTaskNumberException(String message) {
