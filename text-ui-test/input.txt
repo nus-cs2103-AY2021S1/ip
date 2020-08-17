@@ -1,3 +1,5 @@
 todo slap ppl
+deadline slap ppl /by today
+deadline ssss
 list
 bye

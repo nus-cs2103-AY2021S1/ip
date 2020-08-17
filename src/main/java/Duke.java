@@ -1,71 +1,11 @@
+import main.java.Deadline;
+import main.java.Event;
+import main.java.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-
-    public static class Task{
-        String task;
-        boolean complete;
-        Task(String task, boolean complete){
-            this.task = task;
-            this.complete = complete;
-        }
-
-        public String stringify(){
-            if(this.complete == true) {
-                return "[T][[DONE] " + this.task;
-            }else{
-                return "[T][UNDONE] " + this.task;
-            }
-        }
-    }
-    public static class toDo extends Task{
-
-        toDo(String task, boolean complete) {
-            super(task, complete);
-        }
-
-        @Override
-        public String stringify(){
-            if(this.complete == true) {
-                return "[T][[DONE] " + this.task;
-            }else{
-                return "[T][UNDONE] " + this.task;
-            }
-        }
-    }
-    public static class Deadline extends Task{
-        String deadline;
-        Deadline(String task, boolean complete,String deadline) {
-            super(task, complete);
-            this.deadline = deadline;
-        }
-
-        @Override
-        public String stringify(){
-            if(this.complete == true) {
-                return "[D][DONE] " + this.task + " " +"(by: " +this.deadline+")" ;
-            }else{
-                return "[D][UNDONE] " + this.task + " " +"(by: " +this.deadline+")" ;
-            }
-        }
-    }
-
-    public static class Event extends Deadline{
-
-        Event(String task, boolean complete,String deadline) {
-            super(task, complete,deadline);
-        }
-
-        @Override
-        public String stringify(){
-            if(this.complete == true) {
-                return "[E][DONE] " + this.task + " " +"(at: " +this.deadline+")" ;
-            }else{
-                return "[E][UNDONE] " + this.task + " " +"(at: " +this.deadline+")" ;
-            }
-        }
-    }
 
     public static class DukeException extends Exception{
         public DukeException(String s){
@@ -85,6 +25,7 @@ public class Duke {
             userinput = scanner.nextLine();
             //if done
             if (userinput.contains("done")){
+
                 if(userinput.length()<6) {
                     throw new DukeException("Must include number after 'done'.");
                 }

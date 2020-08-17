@@ -4,14 +4,7 @@ I have added this task:
 [T][UNDONE] slap ppl
 Now you have 1 task(s) in the list.
 Input:
-Here are the tasks in your list:
-1.[T][UNDONE] slap ppl
+I have added this task:
+[D][UNDONE] slap ppl  (by: today)
+Now you have 2 task(s) in the list.
 Input:
-Please input:
-1)list - to access the list
-2)todo - to create a todo task
-3)deadline - to create a deadline
-4)event - to schedule an event
-5)done - to mark tasks as done
-6)delete - to delete tasks from the list
-Bye. Hope to see you again soon!
