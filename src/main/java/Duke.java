@@ -3,12 +3,12 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
-    private final List<String> items;
+    private final List<Task> items;
     public Duke() {
         this.items = new ArrayList<>();
     }
     private void addItem(String input) {
-        this.items.add(input);
+        this.items.add(new Task(input));
         systemMessage("morning sir i have added \""+input+"\" to the list sir");
     }
     private void printList() {
@@ -18,6 +18,11 @@ public class Duke {
         }
         systemMessage(numberedItems);
     }
+    private void markItem(int idx) {
+        Task selected = this.items.get(idx);
+        selected.markAsDone();
+        systemMessage("afternoon sir i have mark this task done sir:\n  " + selected);
+    }
     public void run() {
         Scanner scanner = new Scanner(System.in);
         systemMessage(logo);
@@ -25,6 +30,9 @@ public class Duke {
         while (!input.equals("bye")) {
             if (input.equals("list")) {
                 this.printList();
+            } else if (input.length() > 5 && input.substring(0,5).equals("done ")) {
+                int itemIndex = Integer.parseInt(input.substring(5));
+                this.markItem(itemIndex-1);
             } else {
                 this.addItem(input);
             }
