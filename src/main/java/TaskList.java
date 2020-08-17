@@ -9,6 +9,7 @@ public class TaskList {
 
     // sideffect: create & add task + return response
     protected String addEntry(String description) {
+
         String[] words = description.split(" ");
 
         if(isToDo(words)) {
@@ -28,7 +29,7 @@ public class TaskList {
             this.taskList.add(newEvent);
             return newEvent.toString();
         }
-        return "fuck";
+        return "ugh";
 
     }
 

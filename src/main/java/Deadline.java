@@ -7,6 +7,7 @@ public class Deadline extends Task{
         this.dateString = dateString;
     }
 
+    // example: deadline return book /by Sunday
     public static Deadline createDeadline(String input) {
         String[] separatedInput = input.split("/" + DELIMITER);
         String dateString = separatedInput[1];

@@ -15,7 +15,6 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Parser parser = new Parser();
         TaskList myTasks = new TaskList();
         greet();
         while (!terminate) {
@@ -33,33 +32,40 @@ public class Duke {
 
     // determines Duke's response and exit conditions:
     private static void respond(Scanner sc, TaskList myTasks) {
+        Parser parser = new Parser();
         String input = sc.nextLine();
-        ArrayList<String> response;
-
-        if (input.equals("bye")) {
-            response = exit();
-        } else if (Duke.mode.equals("echo")) {
-            response = echo(input);
-        } else {
-            response = handleTask(input, myTasks);
-        }
-        ;
-        printResponse(response);
-    }
-    ;
-
-    private static ArrayList<String> handleTask(String description, TaskList tasks) {
+        String[] parsedOutput = parser.parseCommand(input);
+        String command = parsedOutput[0];
         ArrayList<String> response = new ArrayList<>();
-        String[] words = description.split(" ");
 
-        // enumerates all tasks:
-        if (description.equals("list")) {
+        if (command.equals("bye")) {
+            response = exit();
+        } else if(command.equals("list")) {
             response.add("Here are the tasks in your list:");
-            ArrayList<Task> allTasks = tasks.getAllTasks();
+            ArrayList<Task> allTasks = myTasks.getAllTasks();
             for (Task t : allTasks) {
                 response.add(t.getID() + "." + t.toString());
             }
-        } else if (isDoneAction(words)) {
+        }
+
+        else if (Duke.mode.equals("echo")) {
+            response = echo(input);
+        } else {
+            response = handleTask(parsedOutput, input, myTasks);
+        }
+        ;
+        printResponse(prettify(response));
+    }
+    ;
+
+
+
+    private static ArrayList<String> handleTask(String[] parsedOutput, String description, TaskList tasks) {
+        String command = parsedOutput[0];
+        ArrayList<String> response = new ArrayList<>();
+        String[] words = description.split(" ");
+
+        if(command.equals("done")) {
             int taskID = Integer.parseInt(words[1]);
             response.add(doneMessage);
             response.add(tasks.completeTask(taskID));
@@ -69,7 +75,7 @@ public class Duke {
             response.add(reply);
             response.add(tasks.getCurrentStatus());
         }
-        return prettify(response);
+        return (response);
     }
 
 
@@ -77,14 +83,14 @@ public class Duke {
         Duke.terminate = true;
         ArrayList<String> response = new ArrayList<>();
         response.add(exitGreeting);
-        return prettify(response);
+        return (response);
 
     }
 
     private static ArrayList<String> echo(String output) {
         ArrayList<String> response = new ArrayList<>();
         response.add(output);
-        return prettify(response);
+        return (response);
     }
 
     // encapsulates and indents response lines:
