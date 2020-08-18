@@ -60,15 +60,19 @@ public class Duke {
     }
 
     void list() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Here are the tasks in your list:\n");
+        if (memory.size() > 0) {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("Here are the tasks in your list:\n");
 
-        for (int i = 0; i < memory.size(); i++) {
-            Task currentTask = memory.get(i);
-            stringBuilder.append((i + 1) + ". " + currentTask.toString() + "\n");
+            for (int i = 0; i < memory.size(); i++) {
+                Task currentTask = memory.get(i);
+                stringBuilder.append((i + 1) + ". " + currentTask.toString() + "\n");
+            }
+
+            printMessage(stringBuilder.toString());
+        } else {
+            printMessage("There are no tasks yet!");
         }
-
-        printMessage(stringBuilder.toString());
     }
 
     void done(int index) throws DukeException{
@@ -76,6 +80,17 @@ public class Duke {
             Task task = memory.get(index - 1);
             task.markAsDone();
             printDoneMessage(task);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Oops! Sorry, I couldn't find the task.");
+        }
+    }
+
+    void delete(int index) throws DukeException {
+        try {
+            Task task = memory.remove(index - 1);
+            printMessage("Noted. I've removed this task.\n" +
+                    task.toString() + "\n" +
+                    "Now you have " + memory.size() + " tasks in the list.");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Oops! Sorry, I couldn't find the task.");
         }
@@ -130,6 +145,10 @@ public class Duke {
                     splitString[0].equals("done") && stringIsInt(splitString[1])) {
                 int index = parseInt(splitString[1]);
                 done(index);
+            } else if (splitString.length == 2 &&
+                    splitString[0].equals("delete") && stringIsInt(splitString[1])) {
+                int index = parseInt(splitString[1]);
+                delete(index);
             } else if (splitString[0].equals("todo")) {
                 todo(splitString);
             } else if (splitString[0].equals("deadline")) {
