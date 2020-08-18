@@ -7,10 +7,10 @@ public class EventException extends Exception {
     }
     public String toString(){
         if(this.description){
-            return "  '\u2639' OOPS!!! The description of a todo cannot be empty\n" +
+            return "  '\u2639' OOPS!!! The description of an event cannot be empty.\n" +
                     "  ____________________________________________________________";
         }
-        return "  '\u2639' OOPS!!! The specific date cannot be empty\n" +
+        return "  '\u2639' OOPS!!! The specific date of an event cannot be empty.\n" +
                 "  ____________________________________________________________";
     }
 }

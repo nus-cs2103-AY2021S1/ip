@@ -79,7 +79,7 @@ public class Duke {
                 }else if (string.length() >= 8 && string.substring(0, 8).equals("deadline")) {
                     System.out.println("\n" + string + "\n  ____________________________________________________________");
                     if(string.length() == 8 || string.length() == 9){
-                        System.out.println(new EventException(true, false).toString());
+                        System.out.println(new DeadlineException(true, false).toString());
                         continue;
                     }
                     String s = "";
@@ -94,7 +94,7 @@ public class Duke {
                         s = s + string.charAt(i);
                     }
                     if(!time){
-                        System.out.println(new EventException(true, false).toString());
+                        System.out.println(new DeadlineException(true, false).toString());
                         continue;
                     }
                     deadline e = new deadline(s.substring(1, s.length() - 1), string.substring(index + 4));
