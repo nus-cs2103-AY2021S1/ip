@@ -1,10 +1,10 @@
 package main.java;
 
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
-    private static String[] exitWords = new String[] { "bye" };
     public static boolean exitLoop = false;
+    public static ArrayList<String> inputThings = new ArrayList<>();
 
     private static void greet() {
         UIPrint.drawLine(UIPrint.star, 50);
@@ -17,6 +17,14 @@ public class Duke {
         UIPrint.drawLine(UIPrint.star, 50);
         System.out.println(str);
         UIPrint.drawLine(UIPrint.star, 50);
+    }
+
+    private static void storeInput(String str) {
+        UIPrint.drawLine(UIPrint.star, 50);
+        System.out.println("added: " + str);
+        UIPrint.drawLine(UIPrint.star, 50);
+
+        inputThings.add(str);
     }
 
     private static boolean checkCommand(String str) {
@@ -48,7 +56,7 @@ public class Duke {
             boolean hasCommand = checkCommand(inputLine);
 
             if (!hasCommand) {
-                echo(inputLine);
+                storeInput(inputLine);
             }
         }
     }

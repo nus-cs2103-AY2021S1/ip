@@ -8,6 +8,12 @@ public class ListCommand extends Command {
 
     @Override
     public void execute() {
-        System.out.println(Duke.inputThings);
+        UIPrint.drawLine(UIPrint.star, 50);
+
+        for (int i = 0; i < Duke.inputThings.size(); i++) {
+            System.out.println(i + 1 + ". " + Duke.inputThings.get(i));
+        }
+
+        UIPrint.drawLine(UIPrint.star, 50);
     }
 }
