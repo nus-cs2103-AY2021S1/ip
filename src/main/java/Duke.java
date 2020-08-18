@@ -45,8 +45,27 @@ public class Duke {
     }
 
     private static void add(ArrayList<Task> tasks, String s){
-        tasks.add(new Task(s));
-        printNice("added: " + s);
+        Task toAdd = new Task("unrecognized");
+        String[] processed;
+        switch (s.split(" ")[0]) {
+            case "todo":
+                toAdd = new ToDoTask(s.substring(5));
+                break;
+            case "event":
+                processed = s.substring(6).split(" /at ");
+                toAdd = new EventTask(processed[0],processed[1]);
+                break;
+            case "deadline":
+                processed = s.substring(9).split(" /by ");
+                toAdd = new DeadlineTask(processed[0],processed[1]);
+                break;
+
+        }
+        tasks.add(toAdd);
+
+        printNice("Got it. I've added this task:\n" +
+                "        " + toAdd.toString() + "\n" +
+                "   Now you have " + tasks.size() + " task(s) in the list.");
     }
 
     public static void main(String[] args) {
