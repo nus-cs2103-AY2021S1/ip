@@ -1,8 +1,13 @@
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 // The bot that handles inputs and give responses
 public class Bot {
     private static final String divider = "\t____________________________________________________________\n";
+
+    List<Task> taskList = new LinkedList<>();
+
 
     //start the bot
     public void start() {
@@ -11,7 +16,11 @@ public class Bot {
         giveResponse(greeting);
         String input = getInput();
         while (!input.equals("bye")) {
-            giveResponse(input);
+            if (input.equals("list")) {
+                displayList();
+            } else {
+                addTask(input);
+            }
             input = getInput();
         }
         giveResponse("Bye. Hope to see you again soon!");
@@ -26,6 +35,27 @@ public class Bot {
     private String getInput() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
+    }
+
+    // add a task with a given description
+    private void addTask(String description) {
+        Task newTask = new Task(description);
+        taskList.add(newTask);
+        giveResponse("added: " + newTask);
+    }
+
+    // display the task list
+    private void displayList(){
+        String list = "";
+        for (int i = 1; i <= taskList.size(); i++) {
+            list += i + ". " + taskList.get(i - 1) + "\n\t ";
+        }
+
+        //remove the extra "\n\t "
+        if(!list.isEmpty()) {
+            list = list.substring(0, list.length() - 3);
+        }
+        giveResponse(list);
     }
 }
 
