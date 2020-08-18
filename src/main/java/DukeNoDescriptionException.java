@@ -1,4 +1,4 @@
-public class DukeNoDescriptionException extends DukeException {
+public class DukeNoDescriptionException extends DukeInvalidDescriptionException {
 
     public DukeNoDescriptionException() {
         super();
