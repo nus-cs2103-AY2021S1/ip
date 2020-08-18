@@ -11,7 +11,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo + "\n" + "I can be your friend who manages your task!");
         boolean exited = false;
-        ArrayList<String> arr = new ArrayList<>();
+        ArrayList<Task> arr = new ArrayList<>();
 
         while (!exited) {
             int counter = 1;
@@ -23,12 +23,19 @@ public class Duke {
                 System.out.println("Bye. Please come back soon :(");
                 exited = true;
             } else if (command.equals("list")) {
-                for (String s: arr) {
-                    System.out.println(counter + ". " + s);
+                for (Task s: arr) {
+                    System.out.println(counter + ". " + s.getIcon() + s.name);
                     counter++;
                 }
-            } else {
-                arr.add(command);
+            } else if (command.substring(0, 4).equals("done")) {
+                int taskNumber = Integer.parseInt(command.substring(5, command.length()));
+
+                Task t = arr.get(taskNumber - 1);
+                t.taskIsDone();
+                System.out.println("Nice! Duke has marked this task as done: " + "\n" + t.getIcon() + t.name);
+            }
+            else {
+                arr.add(new Task(command));
                 System.out.print("added: "+ command + "\n");
             }
         }
