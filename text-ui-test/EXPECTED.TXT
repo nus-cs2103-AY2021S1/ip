@@ -1,4 +1,5 @@
 Hello, I'm Duke
+I can help you keep track of all your tasks! ☆*:.｡.o(≧▽≦)o.｡.:*☆
 How to add tasks to the list:
 ToDo - type 'todo' followed by the description
 Deadline - type 'deadline' followed by the description,then '/by', then due date
