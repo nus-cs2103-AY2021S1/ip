@@ -1,0 +1,7 @@
+todo borrow books
+event Homecoming /at 5th Aug 2-4pm
+deadline quiz /by Monday
+list
+done 2
+list
+bye
