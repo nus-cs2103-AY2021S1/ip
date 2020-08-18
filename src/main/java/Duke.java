@@ -5,7 +5,7 @@ import java.util.List;
 public class Duke {
     private static List<Task> taskList = new ArrayList<>();
     public static void intro() {
-        System.out.println("Hi handsome! My name is Duck. What can I do for you?");
+        System.out.println("\tHi handsome! My name is Duck. What can I do for you?");
     }
     public static void addTask(Task task) {
         taskList.add(task);
@@ -13,7 +13,7 @@ public class Duke {
         System.out.println(String.format("\tNow you have %d tasks in the list.", taskList.size()));
     }
     public static void printList() {
-        System.out.println("Here are the tasks in your list:");
+        System.out.println("\tHere are the tasks in your list:");
         for(int i = 0; i < taskList.size(); i++) {
             System.out.println(String.format("\t%d. %s", i + 1, taskList.get(i)));
         }
@@ -32,15 +32,15 @@ public class Duke {
             String task = sc.nextLine();
             switch(task) {
                 case "bye" :
-                    System.out.print("Bye. Hope to see you again soon!");
-                    break;
+                    System.out.print("\tBye. Hope to see you again soon!");
+                    return;
                 case "list" :
                     Duke.printList();
                     break;
                 default :
                     if (task.startsWith("done")) {
                         int taskNo = Character.getNumericValue(task.charAt(5));
-                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println("\tNice! I've marked this task as done:");
                         markTaskDone(taskNo);
                     } else if (task.startsWith("todo")) {
                         Duke.addTask(new ToDos(task));
