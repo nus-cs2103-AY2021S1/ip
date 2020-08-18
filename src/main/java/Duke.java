@@ -17,6 +17,7 @@ public class Duke {
     private static final String DONE_COMMAND = "done";
     private static final String ADD_TODO = "todo";
     private static final String ADD_EVENT = "event";
+    private static final String ADD_DEADLINE = "deadline";
 
     private static void processCommand(String input) {
         String[] inputList = input.split(" ");
@@ -33,6 +34,9 @@ public class Duke {
                     break;
                 case ADD_EVENT:
                     addEvent(inputList);
+                    break;
+                case ADD_DEADLINE:
+                    addDeadline(inputList);
                     break;
                 default:
                     printWithDivider(ERROR_MESSAGE + "\nWas the command valid?");
@@ -82,9 +86,9 @@ public class Duke {
             String description = rejoinString(inputList);
             Todo todo = new Todo(description);
             taskList.add(todo);
-            printWithDivider("Successfully added:\n" + todo.toString());
+            printWithDivider("Successfully added todo:\n" + todo.toString());
         } else {
-            printWithDivider(ERROR_MESSAGE + "\nDid you provide any description for this ToDo task?");
+            printWithDivider(ERROR_MESSAGE + "\nDid you provide any description for this todo task?");
         }
     }
 
@@ -94,9 +98,21 @@ public class Duke {
         if (descWithArgs.length == 2) {
             Event event = new Event(descWithArgs[0], descWithArgs[1]);
             taskList.add(event);
-            printWithDivider("Successfully added:\n" + event.toString());
+            printWithDivider("Successfully added event:\n" + event.toString());
         } else {
             printWithDivider(ERROR_MESSAGE + "\nDid you provide a date and description for this event?");
+        }
+    }
+
+    private static void addDeadline(String[] inputList) {
+        String removeCommand = rejoinString(inputList);
+        String[] descWithArgs = removeCommand.split(" /by ");
+        if (descWithArgs.length == 2) {
+            Deadline deadline = new Deadline(descWithArgs[0], descWithArgs[1]);
+            taskList.add(deadline);
+            printWithDivider("Successfully added deadline:\n" + deadline.toString());
+        } else {
+            printWithDivider(ERROR_MESSAGE + "\nDid you provide a deadline and description for this deadline?");
         }
     }
 
