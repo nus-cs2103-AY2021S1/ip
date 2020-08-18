@@ -31,6 +31,10 @@ public class Chat {
             exit();
         } else if (input.equals("list")) {
             list();
+        } else if (input.length() >= 8 && input.substring(0, 7).equals("delete ")) {
+            delete(input);
+        } else if (input.equals("delete") || (input.length() >= 7 && input.substring(0, 7).equals("delete "))) {
+            throw new EmptyTaskNumberException();
         } else if (input.length() >= 6 && input.substring(0, 5).equals("done ")) {
             markAsDone(input);
         } else if (input.equals("done") || (input.length() >= 5 && input.substring(0, 5).equals("done "))) {
@@ -60,6 +64,26 @@ public class Chat {
         }
     }
 
+    void addToList(Task task) {
+        list.add(task);
+        int numOfTasks = list.size();
+        System.out.println(String.format("    ok! I've added this task:\n      %s\n    you now have %d task"
+                + (numOfTasks > 1 ? "s" : "") + " in your list\n", task, numOfTasks));
+    }
+
+    void delete(String input) {
+        try {
+            int id = Integer.parseInt(input.substring("delete ".length())) - 1;
+            Task task = list.get(id);
+            list.remove(id);
+            int numOfTasks = list.size();
+            System.out.println(String.format("    ok! I've removed this task:\n      %s\n    you now have "
+                    + "%d task" + (numOfTasks > 1 ? "s" : "") + " in your list\n", task, numOfTasks));
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            System.out.println("    oops! invalid task number!\n");
+        }
+    }
+
     void list() {
         if (list.size() <= 0) {
             System.out.println("    your list is empty!\n");
@@ -68,16 +92,9 @@ public class Chat {
         }
     }
 
-    void addToList(Task task) {
-        list.add(task);
-        int numOfTasks = list.size();
-        System.out.println(String.format("    ok! I've added this task:\n      %s\n    you now have %d task"
-                + (numOfTasks > 1 ? "s" : "") + " in your list\n", task, numOfTasks));
-    }
-
     void markAsDone(String input) {
         try {
-            int id = Integer.parseInt(input.substring(5)) - 1;
+            int id = Integer.parseInt(input.substring("done ".length())) - 1;
             Task task = list.get(id);
             task.markAsDone();
             System.out.println("    nice! I've marked this task as done:\n      " + task + "\n");
