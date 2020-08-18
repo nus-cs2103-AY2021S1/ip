@@ -1,0 +1,12 @@
+todo Read a book
+deadline Finish ES2660 Essay /by Tuesday
+event Dinner at Grandma's /at Monday 6PM
+list
+done 1
+done 4
+todo
+deadline
+event
+deadline CS2103T iP
+event CS2103T Tutorial
+bye

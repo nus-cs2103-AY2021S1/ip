@@ -12,13 +12,13 @@ public class Duke {
     private static String event_key = "event";
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        lineFormatter("Hello!!!! I'm Duke \nWhat can I do for you?!?!?!" );
+        lineFormatter("Hello!!!! I'm Duke\nWhat can I do for you?!?!?!" );
         add_input();
 
     }
@@ -37,84 +37,103 @@ public class Duke {
     }
 
 
-    public static void add_input(){
+    public static void add_input() {
         Scanner scanner = new Scanner(System.in);
 
         while(scanner.hasNext()){
-            String input = scanner.nextLine();
-            //splitting into list for easier comparison
-            String[] inputList = input.trim().split(" ", 2);
+            try{
+                String input = scanner.nextLine();
+                //splitting into list for easier comparison
+                String[] inputList = input.trim().split(" ", 2);
 
-            // Case where input is list, to show the list of tasks
-            if(inputList[0].toLowerCase().equals(list_key)){
-                StringBuffer result = new StringBuffer();
-                //to add in the starting line of the section
-                result.append("Here are the tasks in your list: \n");
+                // Case where input is list, to show the list of tasks
+                if(inputList[0].trim().toLowerCase().equals(list_key)){
+                    StringBuffer result = new StringBuffer();
+                    //to add in the starting line of the section
+                    result.append("Here are the tasks in your list:\n");
 
-                for(int i = 0; i < taskList.size(); i ++){
-                    // getting the current task
-                    Task currentTask = taskList.get(i);
+                    for(int i = 0; i < taskList.size(); i ++){
+                        // getting the current task
+                        Task currentTask = taskList.get(i);
 
-                    // adding the current task into the tasklist
-                    result.append((i + 1)+ ". " + currentTask.toString() + "\n");
-                }
-                lineFormatter(result.toString());
-
-                //ending the process with bye input
-            } else if(inputList[0].toLowerCase().equals(bye_key)){
-                byeGreetings();
-                break;
-
-                //checking for done
-            } else if(inputList[0].toLowerCase().equals(done_key) && isNum(inputList[1])){
-                int currentIndex = Integer.parseInt(inputList[1]) - 1;
-                if(currentIndex + 1> taskList.size() || currentIndex + 1 <= 0){
-                    lineFormatter("You do not have " + (currentIndex + 1) + " tasks!\n"
-                            + "Choose a number less than equals to " + taskList.size() + "!");
-                } else {
-                    Task task = taskList.get(currentIndex);
-                    // to check if the task is already done
-                    if(task.getStatus()){
-                        lineFormatter("This task is already done!\n" +
-                                task.toString());
-                    // if task is not done
-                    } else {
-                        taskList.get(currentIndex).markAsDone();
-                        taskDone(taskList.get(currentIndex));
+                        // adding the current task into the tasklist
+                        result.append((i + 1)+ ". " + currentTask.toString() + "\n");
                     }
-                }
+                    lineFormatter(result.toString());
 
+                    //ending the process with bye input
+                } else if(inputList[0].trim().toLowerCase().equals(bye_key)){
+                    byeGreetings();
+                    break;
+
+                    //checking for done
+                } else if(inputList[0].trim().toLowerCase().equals(done_key) && isNum(inputList[1])){
+                    int currentIndex = Integer.parseInt(inputList[1]) - 1;
+                    if(currentIndex + 1> taskList.size() || currentIndex + 1 <= 0){
+                        throw new DoneException(currentIndex, taskList.size());
+                    } else {
+                        Task task = taskList.get(currentIndex);
+                        // to check if the task is already done
+                        if(task.getStatus()){
+                            throw new TaskAlreadyDoneException(task);
+//                            lineFormatter("This task is already done!\n" +
+//                                    task.toString());
+                            // if task is not done
+                        } else {
+                            taskList.get(currentIndex).markAsDone();
+                            taskDone(taskList.get(currentIndex));
+                        }
+                    }
+
+                }
+                else {
+                    added_to_List(input);
+
+
+                }
+            } catch (DukeException e){
+                lineFormatter(e.getMessage());
             }
-            else {
-                added_to_List(input);
-            }
+
         }
     }
 
     // method that adds tasks into the list of tasks
-    public static void added_to_List(String printable) {
+    public static void added_to_List(String printable) throws DukeException{
         String[] nameList = printable.split(" ", 2);
 
-        if(nameList[0].toLowerCase().equals(deadline_key)){
-            String[] task_deadline = nameList[1].split("/by", 2);
-            Task newTask = new Deadline(task_deadline[0], task_deadline[1]);
-            taskList.add(newTask);
-            newTaskItem(newTask, deadline_key);
-
-        } else if(nameList[0].toLowerCase().equals(event_key)){
-            String[] task_event = nameList[1].split("/at", 2);
-            Task newTask = new Event(task_event[0], task_event[1]);
-            taskList.add(newTask);
-            newTaskItem(newTask, event_key);
-
-        } else if(nameList[0].toLowerCase().equals(todo_key)){
-            Task newTask = new ToDo(nameList[1]);
-            taskList.add(newTask);
-            newTaskItem(newTask, todo_key);
-
+        if(nameList.length < 2){
+            throw new IncompleteCommandException();
         } else {
-            lineFormatter("Please enter an appropriate command!!");
+            if(nameList[0].trim().toLowerCase().equals(deadline_key)){
+                String[] task_deadline = nameList[1].trim().split("/by", 2);
+                if(task_deadline.length != 2){
+                    throw new DeadlineException();
+                }
+                Task newTask = new Deadline(task_deadline[0].trim(), task_deadline[1].trim());
+                taskList.add(newTask);
+                newTaskItem(newTask, deadline_key);
+
+            } else if(nameList[0].trim().toLowerCase().equals(event_key)){
+                String[] task_event = nameList[1].trim().split("/at", 2);
+                if(task_event.length != 2){
+                    throw new EventException();
+                }
+                Task newTask = new Event(task_event[0].trim(), task_event[1].trim());
+                taskList.add(newTask);
+                newTaskItem(newTask, event_key);
+
+            } else if(nameList[0].toLowerCase().equals(todo_key)){
+                Task newTask = new ToDo(nameList[1].trim());
+                taskList.add(newTask);
+                newTaskItem(newTask, todo_key);
+
+            } else {
+                lineFormatter("Please enter an appropriate command!!");
+            }
         }
+
+
 
 
 
@@ -153,7 +172,7 @@ public class Duke {
     public static void newTaskItem (Task task, String type){
         lineFormatter("Now you have a new " + type + "! :\n" + task.toString() +
                 "\nYou currently have " + taskList.size() + " events in your list\n" +
-                "Type \'list\' to check your Task - list ");
+                "Type \'list\' to check your Tasklist");
     }
 
 
