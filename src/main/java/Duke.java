@@ -19,7 +19,7 @@ public class Duke {
         boolean terminated = false;
 
         while (!terminated) {
-            String userInput = scanner.next();
+            String userInput = scanner.nextLine();
             if (userInput.equals("bye")) {
                 terminated = true;
                 System.out.println("Duke says: Goodbye and have a nice day! :D");
