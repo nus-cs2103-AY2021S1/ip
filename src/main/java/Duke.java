@@ -15,6 +15,7 @@ public class Duke {
     private static final String EXIT_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
     private static final String DONE_COMMAND = "done";
+    private static final String ADD_TODO = "todo";
 
     private static void processCommand(String input) {
         String[] inputList = input.split(" ");
@@ -26,11 +27,27 @@ public class Duke {
                 case DONE_COMMAND:
                     completeTask(inputList);
                     break;
+                case ADD_TODO:
+                    addTodo(inputList);
+                    break;
                 default:
-                    addTask(input);
+                    printWithDivider(ERROR_MESSAGE + "\nWas the command valid?");
                     break;
             }
         }
+    }
+
+    private static String rejoinString(String[] inputList) {
+        StringBuilder rv = new StringBuilder();
+        for (int i = 0; i < inputList.length; i++) {
+            if (i != 0) {
+                rv.append(inputList[i]);
+                if (i != inputList.length - 1) {
+                    rv.append(" ");
+                }
+            }
+        }
+        return rv.toString();
     }
 
     private static void listTasks() {
@@ -56,9 +73,14 @@ public class Duke {
         }
     }
 
-    private static void addTask(String input) {
-        taskList.add(new ToDo(input));
-        printWithDivider("Successfully added: " + input);
+    private static void addTodo(String[] inputList) {
+        if (inputList.length > 1) {
+            ToDo todo = new ToDo(rejoinString(inputList));
+            taskList.add(todo);
+            printWithDivider("Successfully added:\n" + todo.toString());
+        } else {
+            printWithDivider(ERROR_MESSAGE + "\nDid you provide any description for this ToDo task?");
+        }
     }
 
     private static ArrayList<Task> taskList = new ArrayList<>();
