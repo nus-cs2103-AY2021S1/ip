@@ -43,6 +43,10 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
     * For commands that require a description, such as `todo`, `deadline`, `event`, if the response does not include a description, Duke will not accept.
     * For command `done` that takes an argument of particular format (i.e. integer), Duke will not receive illegal arguments.
     * For commands that takes in a time after some trigger words, such as `deadline` and `event`, Duke will not accept responses without a time.
+    
+5. Add delete feature:
+    1. Duke will recognise command `delete` followed by an applicable integer to delete the corresponding task.
+    2. For those `delete` commands that Duke does not accept, error handling is also implemented for this.
 ## Demo
    ```
        ____________________________________________________________
@@ -53,7 +57,11 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
        ____________________________________________________________
         ☹ OOPS!!! I cannot recognise the command "hi!" :-(
        ____________________________________________________________
-   todo 
+   list
+       ____________________________________________________________
+        You have no tasks in your list now! Type todo, event or deadline to add some!
+       ____________________________________________________________
+   todo
        ____________________________________________________________
         ☹ OOPS!!! The description of a todo cannot be empty.
        ____________________________________________________________
@@ -63,7 +71,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
           [T][✘] this task
         Now you have 1 tasks in the list.
        ____________________________________________________________
-   deadline   
+   deadline
        ____________________________________________________________
         ☹ OOPS!!! The description of a deadline cannot be empty.
        ____________________________________________________________
@@ -81,7 +89,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
           [D][✘] this (by: that)
         Now you have 2 tasks in the list.
        ____________________________________________________________
-   event     
+   event
        ____________________________________________________________
         ☹ OOPS!!! The description of a event cannot be empty.
        ____________________________________________________________
@@ -106,16 +114,20 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
         2.[D][✘] this (by: that)
         3.[E][✘] this (at: that)
        ____________________________________________________________
-   done  
+   done
+       ____________________________________________________________
         ☹ OOPS!!! The description of a done cannot be empty.
        ____________________________________________________________
    done x
+       ____________________________________________________________
         ☹ OOPS!!! The argument for a done command must be an integer within the range!!!
        ____________________________________________________________
    done the first task
+       ____________________________________________________________
         ☹ OOPS!!! The argument for a done command must be an integer within the range!!!
        ____________________________________________________________
    done 4
+       ____________________________________________________________
         ☹ OOPS!!! The argument for a done command must be an integer within the range!!!
        ____________________________________________________________
    done 1
@@ -130,12 +142,30 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
         2.[D][✘] this (by: that)
         3.[E][✘] this (at: that)
        ____________________________________________________________
+   delete
+       ____________________________________________________________
+        ☹ OOPS!!! The description of a delete cannot be empty.
+       ____________________________________________________________
+   delete first
+       ____________________________________________________________
+        ☹ OOPS!!! The argument for a delete command must be an integer within the range!!!
+       ____________________________________________________________
+   delete 1
+       ____________________________________________________________
+        Noted! I've removed this task:
+          [T][✓] this task
+        Now you have 2 tasks in the list.
+       ____________________________________________________________
+   list
+       ____________________________________________________________
+        Here are the tasks in your list:
+        1.[D][✘] this (by: that)
+        2.[E][✘] this (at: that)
+       ____________________________________________________________
    bye
        ____________________________________________________________
         Bye. Hope to see you again soon!
        ____________________________________________________________
-
-
    ```
 ## Automated UI Testing
 1. Assume you are running a *nix operating system, e.g. macOS.
