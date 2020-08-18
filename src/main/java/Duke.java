@@ -42,40 +42,59 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
         while (isRunning) {
-            String command = sc.next();
-            switch (command) {
-                case "bye": {
-                    exit();
-                    isRunning = false;
-                    break;
+            try {
+                String command = sc.next();
+                switch (command) {
+                    case "bye": {
+                        exit();
+                        isRunning = false;
+                        break;
+                    }
+                    case "list":
+                        list();
+                        break;
+                    case "done": {
+                        int taskNo = sc.nextInt();
+                        completeTask(taskNo);
+                        break;
+                    }
+                    case "todo": {
+                        String description = sc.nextLine().trim();
+                        if (description.length() == 0) {
+                            throw new EmptyInputException("The description of a todo cannot be empty.");
+                        }
+                        addTask(new Todo(description));
+                        break;
+                    }
+                    case "deadline": {
+                        String input = sc.nextLine().trim();
+                        String[] details = input.split(" /by ");
+                        if (details[0].length() == 0) {
+                            throw new EmptyInputException("The description of a deadline cannot be empty.");
+                        }
+                        if (details.length <= 1 || details[1].length() == 0) {
+                            throw new EmptyInputException("The due date of a deadline cannot be empty.");
+                        }
+                        addTask(new Deadline(details[0], details[1]));
+                        break;
+                    }
+                    case "event": {
+                        String input = sc.nextLine().trim();
+                        String[] details = input.split(" /at ");
+                        if (details[0].length() == 0) {
+                            throw new EmptyInputException("The description of an event cannot be empty.");
+                        }
+                        if (details.length <= 1 || details[1].length() == 0) {
+                            throw new EmptyInputException("The date of an event cannot be empty.");
+                        }
+                        addTask(new Event(details[0], details[1]));
+                        break;
+                    }
+                    default:
+                        throw new InvalidCommandException("Unknown command.");
                 }
-                case "list":
-                    list();
-                    break;
-                case "done": {
-                    int taskNo = sc.nextInt();
-                    completeTask(taskNo);
-                    break;
-                }
-                case "todo": {
-                    String description = sc.nextLine().trim();
-                    addTask(new Todo(description));
-                    break;
-                }
-                case "deadline": {
-                    String input = sc.nextLine().trim();
-                    String[] details = input.split(" /by ");
-                    addTask(new Deadline(details[0], details[1]));
-                    break;
-                }
-                case "event": {
-                    String input = sc.nextLine().trim();
-                    String[] details = input.split(" /at ");
-                    addTask(new Event(details[0], details[1]));
-                    break;
-                }
-                default:
-                    break;
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
         sc.close();
