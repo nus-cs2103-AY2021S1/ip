@@ -1,5 +1,7 @@
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
 
 public class Duke {
     public static void main(String[] args) {
@@ -11,8 +13,8 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you today?");
 
-        //Level 1, echo bot that echos everything except bye
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
+        List<String> itemList = new ArrayList<String>();
 
         while(true){
             String input = scanner.nextLine();
@@ -22,6 +24,7 @@ public class Duke {
             }
             else{
                 System.out.println("\t" + input);
+                itemList.add(input);
             }
         }
     }
