@@ -26,7 +26,7 @@ public class Duke {
                 for (int i = 0; i < ls.size(); i++) {
                     Task task = ls.get(i);
                     int num = i + 1;
-                    System.out.println(num + ". " + task.print());
+                    System.out.println(num + ". " + task.toString());
                 }
                 System.out.println(horizontalDiv);
             } else if (str.contains("done ")) {
@@ -41,7 +41,7 @@ public class Duke {
                     ls.set(numToBeMarkedAsDone, tsk);
                     System.out.println(horizontalDiv);
                     System.out.println("Nice! I've marked this task as done: ");
-                    System.out.println(tsk.print());
+                    System.out.println(tsk.toString());
                     System.out.println(horizontalDiv);
                 }
             } else {
