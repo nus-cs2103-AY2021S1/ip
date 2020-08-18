@@ -3,8 +3,10 @@ import java.util.*;
 public class Duke {
     private String line = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     private String outputFormat = "  %s\n";
+    private String taskFormat = "    %s\n";
     private boolean ongoing;
     private ArrayList<Task> todoList;
+    private int numberOfTasks;
 
     Duke() {
         ongoing = false;
@@ -37,8 +39,9 @@ public class Duke {
             String[] instructions = input.split(" ");
             if (instructions[0].equals("done")) {
                 completeItem(Integer.valueOf(instructions[1]) - 1);
-            } else {
-                addItem(input);
+            } else if (instructions[0].equals("todo") || instructions[0].equals("deadline") || instructions[0].equals("event")) {
+                String item = String.join(" ", Arrays.copyOfRange(instructions, 1, instructions.length));
+                addItem(instructions[0], item);
             }
         }
     }
@@ -47,7 +50,7 @@ public class Duke {
         int count = 1;
         System.out.printf(outputFormat, "The tasks in your Todo List: ");
         for (Task item : todoList) {
-            System.out.printf(outputFormat, Integer.toString(count) + ". " + item.getItem());
+            System.out.printf(taskFormat, Integer.toString(count) + ". " + item.getItem());
             count += 1;
         }
     }
@@ -60,10 +63,37 @@ public class Duke {
         System.out.printf(outputFormat, "  " + item.getItem());
     }
 
-    public void addItem(String input) {
-        Task newTask = new Task(input);
+    public void addItem(String instruction, String item) {
+        System.out.printf(outputFormat, "New todo item added to the list!");
+        if (instruction.equals("todo")) {
+            addTodoItem(item);
+        } else if (instruction.equals("deadline")) {
+            addDeadline(item);
+        } else {
+            addEvent(item);
+        }
+        numberOfTasks += 1;
+        System.out.printf(outputFormat, "There are now " + Integer.toString(numberOfTasks) + " todo items in the list");
+    }
+
+    public void addTodoItem(String item) {
+        Todo newTask = new Todo(item);
         todoList.add(newTask);
-        System.out.printf(outputFormat, "New todo item added: " + input);
+        System.out.printf(taskFormat, newTask.getItem());
+    }
+
+    public void addDeadline(String item) {
+        String[] splitItem = item.split("/by");
+        Deadline newTask = new Deadline(splitItem[0], splitItem[1]);
+        todoList.add(newTask);
+        System.out.printf(taskFormat, newTask.getItem());
+    }
+
+    public void addEvent(String item) {
+        String[] splitItem = item.split("/at");
+        Event newTask = new Event(splitItem[0], splitItem[1]);
+        todoList.add(newTask);
+        System.out.printf(taskFormat, newTask.getItem());
     }
 
     public void greeting() {
