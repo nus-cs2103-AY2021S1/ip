@@ -42,11 +42,31 @@ public class Bot {
         return sc.nextLine();
     }
 
-    // add a task with a given description
-    private void addTask(String description) {
-        Task newTask = new Task(description);
+    // add a task with a given command
+    private void addTask(String command) {
+        Task newTask;
+        if (command.startsWith("todo")) {
+            newTask = new Todo(command.substring(5));
+        } else if (command.startsWith("deadline")) {
+            String description = command.substring(9);
+            int index = description.indexOf("/by");
+            String by = description.substring(index + 4);
+            description = description.substring(0, index - 1);
+            newTask = new Deadline(description, by);
+        } else if (command.startsWith("event")) {
+            String description = command.substring(6);
+            int index = description.indexOf("/at");
+            String at = description.substring(index + 4);
+            description = description.substring(0, index - 1);
+            newTask = new Event(description, at);
+        } else {
+            newTask = new Task(command);
+        }
         taskList.add(newTask);
-        giveResponse("added: " + newTask);
+        giveResponse("Got it. I've added this task:\n       " +
+                newTask +
+                "\n\t Now you have " + taskList.size() +
+                " task" + (taskList.size() > 1 ? "s" : "") + " in the list.");
     }
 
     // display the task list
