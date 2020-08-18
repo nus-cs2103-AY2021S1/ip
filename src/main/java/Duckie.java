@@ -25,7 +25,13 @@ public class Duckie {
                 "Quack! Hope to see you again!\n" + horizL);
     }
 
-    private static void displayList() {
+    private static void displayList() throws DuckieException{
+        if (lst.size() == 0) {
+            throw new DuckieException(horizL + "\n" + INDENT
+                    + "You have no tasks in the list currently.\n"
+                    + horizL);
+        }
+
         int index = 1;
         System.out.println(horizL);
         System.out.println(INDENT + "Quack! These are the tasks in your list: ");
@@ -72,6 +78,14 @@ public class Duckie {
                  INDENT + t1 + "\n" + horizL);
     }
 
+    public static void deleteTask(int ind) {
+        System.out.println(horizL);
+        Task t1 = lst.get(ind - 1);
+        lst.remove(ind - 1);
+        System.out.println(INDENT + "Quack! I've remove this task: \n" +
+                INDENT + t1 + "\n" + horizL);
+    }
+
     //Check if a String only
     private static boolean is_word(String s) {
         return (s.length() > 0 && s.split("\\s+").length == 1);
@@ -89,7 +103,8 @@ public class Duckie {
                     break;
                 } else if (input.equalsIgnoreCase("list")) {
                     Duckie.displayList();
-                } else if (input.toLowerCase().indexOf("done") == 0) {
+                } else if (input.toLowerCase().indexOf("done") == 0
+                        || input.toLowerCase().indexOf("delete") == 0) {
                     if (lst.size() == 0) {
                         throw new DuckieException(horizL + "\n" + INDENT
                                 + "Quack! You have no list to start with!\n"
@@ -100,7 +115,18 @@ public class Duckie {
                                 + horizL);
                     }
                     int ind = Integer.parseInt(input.split(" ")[1]);
-                    Duckie.checkTask(ind);
+
+                    if (lst.size() < ind) {
+                        throw new DuckieException(horizL + "\n" + INDENT
+                                + "The list has no index " + ind + "!\n"
+                                + horizL);
+                    }
+
+                    if (input.toLowerCase().indexOf("done") == 0) {
+                        Duckie.checkTask(ind);
+                    } else {
+                        Duckie.deleteTask(ind);
+                    }
                 } else if (input.toLowerCase().indexOf("todo") == 0) {
                     Duckie.addTask(input, "todo");
                 } else if (input.toLowerCase().indexOf("deadline") == 0) {
