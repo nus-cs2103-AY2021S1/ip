@@ -1,7 +1,7 @@
 import java.util.ArrayList;
-import java.util.EmptyStackException;
 import java.util.Scanner;
 
+//Posh Version of Duke
 public class Duke {
     //Characteristics of Duke
     private boolean isChatting;
@@ -15,6 +15,7 @@ public class Duke {
         EVENT,
         DONE,
         BYE,
+        DELETE
     }
 
     //Constructor
@@ -27,7 +28,7 @@ public class Duke {
     //Initialise Duke
     private void startChat() {
         //Initialisation Message
-        String greeting = "Hello! I'm Duke\nWhat can I do for you?";
+        String greeting = "Golly! Who do we have here? The name's Duke, how can I be of assistance?";
         System.out.println(greeting);
 
         //Initialise scanner to prompt user
@@ -67,9 +68,13 @@ public class Duke {
                 else if (user_command.equals(Command.DONE)) {
                     markTaskDone(user_input);
                 }
+                //delete command
+                else if (user_command.equals(Command.DELETE)) {
+                    deleteTask(user_input);
+                }
                 //To catch inappropriate commands that have not been identified
                 else {
-                    System.out.println("UNKNOWN ERROR DETECTED");
+                    System.out.println("OH FIDDLESTICKS, WE SEEM TO HAVE HIT A BUMP ON THE ROAD HERE.");
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
@@ -89,7 +94,7 @@ public class Duke {
             }
         }
         String getListMsg = "Here are the tasks in your list:";
-        String emptyListMsg = "Your tasks list is empty!";
+        String emptyListMsg = "Oh dear, it seems that your tasks list is empty!";
         if (taskList.size() < 1) {
             System.out.println(emptyListMsg);
         } else {
@@ -99,26 +104,45 @@ public class Duke {
     }
 
     private void getTotalTasksMsg() {
-        System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
+        System.out.println("Marvellous! Now you have " + this.taskList.size() + " tasks in your list!");
     }
 
     //Done command
-    //Check if user input done keyword is located in the correct place
     //Then, check if user input contains apt integer
-    private void markTaskDone(String user_input) throws DukeException {
+    private void markTaskDone(String user_input) throws OutOfTaskListException, NotNumberException {
         //Get number after done keyword
         String int_substring = user_input.substring(5);
         try {
             int int_substring_converted = Integer.parseInt(int_substring);
             Task currentTask = this.taskList.get(int_substring_converted - 1);
             currentTask.markAsDone();
-            String markDoneMsg = "Nice! I've marked this task as done:";
+            String markDoneMsg = "Splendid! I've marked the following task as done:";
             System.out.println(markDoneMsg);
             System.out.println("  [" + currentTask.getStatusIcon() + "] " + currentTask.getDescription());
         } catch (NumberFormatException ex) {
-            throw new DoneNotNumberException();
+            throw new NotNumberException();
         } catch (IndexOutOfBoundsException ex) {
-            throw new DoneOutOfBoundException();
+            throw new OutOfTaskListException();
+        }
+    }
+
+    //Delete command
+    //Then, check if user input contains apt integer
+    private void deleteTask(String user_input) throws OutOfTaskListException, NotNumberException{
+        //Get number after done keyword
+        String int_substring = user_input.substring(7);
+        try {
+            int int_substring_converted = Integer.parseInt(int_substring);
+            Task currentTask = this.taskList.get(int_substring_converted - 1);
+            this.taskList.remove(currentTask);
+            String deleteMsg = "No worries, the following task has been deleted from your list:";
+            System.out.println(deleteMsg);
+            System.out.println("  [" + currentTask.getStatusIcon() + "] " + currentTask.getDescription());
+            getTotalTasksMsg();
+        } catch (NumberFormatException ex) {
+            throw new NotNumberException();
+        } catch (IndexOutOfBoundsException ex) {
+            throw new OutOfTaskListException();
         }
     }
 
@@ -132,9 +156,10 @@ public class Duke {
     }
 
     //Adds a Deadline task to the task list
-    private void addDeadline(String user_input) throws DukeException {
+    private void addDeadline(String user_input) throws InaptFollowUpCommandException,
+            MissingFollowUpCommandException {
         String dateTime = getDateTime(user_input, Command.DEADLINE);
-        Deadline newTask = new Deadline(user_input.substring(9, user_input.indexOf("/")), dateTime);
+        Deadline newTask = new Deadline(user_input.substring(9, user_input.indexOf("/")).trim(), dateTime);
         this.taskList.add(newTask);
         addedToListMsg();
         System.out.println("\t" + newTask);
@@ -142,9 +167,10 @@ public class Duke {
     }
 
     //Adds an Event task to the task list
-    private void addEvent(String user_input) throws  DukeException {
+    private void addEvent(String user_input) throws InaptFollowUpCommandException,
+            MissingFollowUpCommandException {
         String dateTime = getDateTime(user_input, Command.EVENT);
-        Event newTask = new Event(user_input.substring(6, user_input.indexOf("/")), dateTime);
+        Event newTask = new Event(user_input.substring(6, user_input.indexOf("/")).trim(), dateTime);
         this.taskList.add(newTask);
         addedToListMsg();
         System.out.println("\t" + newTask);
@@ -153,17 +179,18 @@ public class Duke {
 
     //To print out add to list message
     private void addedToListMsg() {
-        String add_to_listMsg = "Got it. I've added this task:";
+        String add_to_listMsg = "No worries, the following task has been added to your list:";
         System.out.println(add_to_listMsg);
     }
 
     //To obtain date and time that follows a /by or /at
-    private String getDateTime(String user_input, Command command) throws  DukeException {
+    private String getDateTime(String user_input, Command command) throws InaptFollowUpCommandException,
+            MissingFollowUpCommandException {
         int slashIndex = user_input.indexOf("/");
 
         if (slashIndex != -1) {
             if (checkFollowUpCommand(user_input, slashIndex, command)) {
-                return user_input.substring(slashIndex+ 3);
+                return user_input.substring(slashIndex + 4);
             } else {
                 throw new InaptFollowUpCommandException();
             }
@@ -175,10 +202,10 @@ public class Duke {
     //Use to check whether commands such as event and deadline have follow up '/' command
     private boolean checkFollowUpCommand(String user_input, int slashIndex, Command command) {
         if (user_input.charAt(slashIndex + 1) == 'b' && user_input.charAt(slashIndex + 2) == 'y'
-                && command.equals(Command.DEADLINE)) {
+                && user_input.charAt(slashIndex + 3) == ' ' && command.equals(Command.DEADLINE)) {
             return true;
         } else if (user_input.charAt(slashIndex + 1) == 'a' && user_input.charAt(slashIndex + 2) == 't'
-                && command.equals(Command.EVENT)) {
+                && user_input.charAt(slashIndex + 3) == ' ' && command.equals(Command.EVENT)) {
             return true;
         } else {
             return false;
@@ -186,26 +213,38 @@ public class Duke {
     }
 
     //To obtain first keyword of user input
-    private Command getCommand(String user_input) throws DukeException{
+    private Command getCommand(String user_input) throws InaptCommandException, EmptyTaskException,
+            UnspecifiedItemException{
         //For commands that have text following a keyword
         if (user_input.contains(" ")) {
             int indexOfFirstSpace = user_input.indexOf(' ');
+            String keyword;
             if (indexOfFirstSpace == 4) {
-                if (user_input.substring(0, 4).equals("todo")) {
+                keyword = user_input.substring(0, 4);
+                if (keyword.equals("todo")) {
                     return Command.TODO;
-                } else if (user_input.substring(0, 4).equals("done")) {
+                } else if (keyword.equals("done")) {
                     return Command.DONE;
                 } else {
                     throw new InaptCommandException();
                 }
             } else if (indexOfFirstSpace == 5) {
-                if (user_input.substring(0, 5).equals("event")) {
+                keyword = user_input.substring(0, 5);
+                if (keyword.equals("event")) {
                     return Command.EVENT;
                 } else {
                     throw new InaptCommandException();
                 }
+            } else if (indexOfFirstSpace == 6) {
+                keyword = user_input.substring(0, 6);
+                if (keyword.equals("delete")) {
+                    return Command.DELETE;
+                } else {
+                    throw new InaptCommandException();
+                }
             } else if (indexOfFirstSpace == 8){
-                if (user_input.substring(0, 8).equals("deadline")) {
+                keyword = user_input.substring(0, 8);
+                if (keyword.equals("deadline")) {
                     return Command.DEADLINE;
                 } else {
                     throw new InaptCommandException();
@@ -222,6 +261,8 @@ public class Duke {
                 return Command.BYE;
             } else if (user_input.equals("todo") || user_input.equals("deadline") || user_input.equals("event"))  {
                 throw new EmptyTaskException(user_input);
+            } else if (user_input.equals("delete") || user_input.equals("done")) {
+                throw new UnspecifiedItemException(user_input);
             }
             else {
                 throw new InaptCommandException();
@@ -230,7 +271,7 @@ public class Duke {
     }
 
     private void exitDuke() {
-        String parting = "Bye. Hope to see you again soon!";
+        String parting = "Well, I'm utterly knackered! Cheerios!";
         System.out.println(parting);
         this.isChatting = false;
     }

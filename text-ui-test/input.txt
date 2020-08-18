@@ -27,5 +27,13 @@ event fake event
 event fake event2 /atThisDay
 event fake event3 /byThatDay
 list
+delete 7
+delete 7
+delete 6
+done
+delete
+todo
+event
+deadline
 
 bye

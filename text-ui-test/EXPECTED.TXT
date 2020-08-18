@@ -1,37 +1,36 @@
-Hello! I'm Duke
-What can I do for you?
-Got it. I've added this task:
+Golly! Who do we have here? The name's Duke, how can I be of assistance?
+No worries, the following task has been added to your list:
 	[T][✘] read book
-Now you have 1 tasks in the list.
-Got it. I've added this task:
+Marvellous! Now you have 1 tasks in your list!
+No worries, the following task has been added to your list:
 	[D][✘] return book (by: June 6th)
-Now you have 2 tasks in the list.
-Got it. I've added this task:
+Marvellous! Now you have 2 tasks in your list!
+No worries, the following task has been added to your list:
 	[E][✘] project meeting (at: Aug 6th 2-4pm)
-Now you have 3 tasks in the list.
-Got it. I've added this task:
+Marvellous! Now you have 3 tasks in your list!
+No worries, the following task has been added to your list:
 	[T][✘] join sports club
-Now you have 4 tasks in the list.
-Got it. I've added this task:
+Marvellous! Now you have 4 tasks in your list!
+No worries, the following task has been added to your list:
 	[T][✘] borrow book
-Now you have 5 tasks in the list.
+Marvellous! Now you have 5 tasks in your list!
 Here are the tasks in your list:
 1.[T][✘] read book
 2.[D][✘] return book (by: June 6th)
 3.[E][✘] project meeting (at: Aug 6th 2-4pm)
 4.[T][✘] join sports club
 5.[T][✘] borrow book
-Nice! I've marked this task as done:
+Splendid! I've marked the following task as done:
   [✓] read book
-Please enter an appropriate command!
-That item does not exist in your list! The input number has exceeded your list size!
-Please key in an appropriate number!
-Please key in an appropriate number!
-Please key in an appropriate number!
-Please key in an appropriate number!
-Please key in an appropriate number!
-Please key in an appropriate number!
-Nice! I've marked this task as done:
+I beg you pardon, I did not catch what you are saying.
+Oh dear, it seems like that item does not exist in your list!
+My apologies, please key in an appropriate number!
+My apologies, please key in an appropriate number!
+My apologies, please key in an appropriate number!
+My apologies, please key in an appropriate number!
+My apologies, please key in an appropriate number!
+My apologies, please key in an appropriate number!
+Splendid! I've marked the following task as done:
   [✓] join sports club
 Here are the tasks in your list:
 1.[T][✓] read book
@@ -39,25 +38,21 @@ Here are the tasks in your list:
 3.[E][✘] project meeting (at: Aug 6th 2-4pm)
 4.[T][✓] join sports club
 5.[T][✘] borrow book
-Got it. I've added this task:
+No worries, the following task has been added to your list:
 	[D][✘] return book (by: Sunday)
-Now you have 6 tasks in the list.
-Got it. I've added this task:
+Marvellous! Now you have 6 tasks in your list!
+No worries, the following task has been added to your list:
 	[E][✘] project meeting (at: Mon 2-4pm)
-Now you have 7 tasks in the list.
-Please enter an appropriate command!
-Please enter an appropriate command!
-Please enter an appropriate command!
-Missing '/' command.
-Got it. I've added this task:
-	[D][✘] fake deadline2 (by:ThisDay)
-Now you have 8 tasks in the list.
-Please enter an appropriate '/' command!
-Missing '/' command.
-Got it. I've added this task:
-	[E][✘] fake event2 (at:ThisDay)
-Now you have 9 tasks in the list.
-Please enter an appropriate '/' command!
+Marvellous! Now you have 7 tasks in your list!
+I beg you pardon, I did not catch what you are saying.
+I beg you pardon, I did not catch what you are saying.
+I beg you pardon, I did not catch what you are saying.
+Oh dear, there seems to be a missing '/' command.
+My apologies, please enter an appropriate '/' command!
+My apologies, please enter an appropriate '/' command!
+Oh dear, there seems to be a missing '/' command.
+My apologies, please enter an appropriate '/' command!
+My apologies, please enter an appropriate '/' command!
 Here are the tasks in your list:
 1.[T][✓] read book
 2.[D][✘] return book (by: June 6th)
@@ -66,7 +61,17 @@ Here are the tasks in your list:
 5.[T][✘] borrow book
 6.[D][✘] return book (by: Sunday)
 7.[E][✘] project meeting (at: Mon 2-4pm)
-8.[D][✘] fake deadline2 (by:ThisDay)
-9.[E][✘] fake event2 (at:ThisDay)
-Please enter an appropriate command!
-Bye. Hope to see you again soon!
+No worries, the following task has been deleted from your list:
+  [✘] project meeting
+Marvellous! Now you have 6 tasks in your list!
+Oh dear, it seems like that item does not exist in your list!
+No worries, the following task has been deleted from your list:
+  [✘] return book
+Marvellous! Now you have 5 tasks in your list!
+My apologies, please specify an item when using the done command.
+My apologies, please specify an item when using the delete command.
+My apologies, the description of a todo cannot be empty.
+My apologies, the description of a event cannot be empty.
+My apologies, the description of a deadline cannot be empty.
+I beg you pardon, I did not catch what you are saying.
+Well, I'm utterly knackered! Cheerios!

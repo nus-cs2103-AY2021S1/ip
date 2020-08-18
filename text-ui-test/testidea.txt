@@ -27,5 +27,13 @@ test event command
 test event command (w/o space at)
 test event command (w/o space by)
 test list command
+test delete command
+test delete command
+test delete command
+test incomplete done command
+test incomplete delete command
+test incomplete todo command
+test incomplete event command
+test incomplete deadline command
 test empty command
 test bye
