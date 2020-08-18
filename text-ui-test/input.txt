@@ -19,5 +19,8 @@ list
 done 1
 done 2
 done 5
+delete 1
+delete 2
+delete 0
 list
 bye

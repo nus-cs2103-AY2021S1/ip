@@ -93,11 +93,22 @@
  ☹ ERROR: Please enter a valid task number.
  ____________________________________________________________
  ____________________________________________________________
+ Noted. I've removed this task:
+    [T][✓] borrow english book
+ Now you have 3 task(s) in the list.
+ ____________________________________________________________
+ ____________________________________________________________
+ Noted. I've removed this task:
+    [D][✘] return book  (by: Sunday 10pm)
+ Now you have 2 task(s) in the list.
+ ____________________________________________________________
+ ____________________________________________________________
+ ☹ ERROR: Please enter a valid task number.
+ ____________________________________________________________
+ ____________________________________________________________
  Task(s) in your list:
- 1. [T][✓] borrow english book
- 2. [T][✓] read book
- 3. [D][✘] return book  (by: Sunday 10pm)
- 4. [E][✘] book launch  (at: Monday 2-4pm)
+ 1. [T][✓] read book
+ 2. [E][✘] book launch  (at: Monday 2-4pm)
  ____________________________________________________________
  ____________________________________________________________
   Goodbye! See you again!
