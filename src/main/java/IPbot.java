@@ -1,20 +1,20 @@
 import java.util.Scanner;
 import java.util.stream.Stream;
 
-public class Duke {
+public class IPbot {
 
     /**
      * Entry point of the program.
      * @param args command line arguments
      */
     public static void main(String[] args) {
-        print("Hello from Duke, what can I do for you?");
+        print("Hello from iPbot, what can I do for you?");
 
         final Scanner sc = new Scanner(System.in);
 
         Stream.generate(sc::nextLine)
             .takeWhile(input -> !"bye".equals(input))
-            .forEach(Duke::print);
+            .forEach(IPbot::print);
 
         sc.close();
         print("Goodbye!");
