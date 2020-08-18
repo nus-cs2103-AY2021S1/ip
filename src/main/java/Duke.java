@@ -66,6 +66,12 @@ public class Duke {
                         new DoneCommand(index, list).execute();
                         break;
                     }
+                    case "delete": {
+                        if(remainingText == null) throw new DukeException("Please specify an item number.");
+                        int index = Integer.parseInt(remainingText) - 1;
+                        new DeleteCommand(index, list).execute();
+                        break;
+                    }
                     case "bye": {
                         if (remainingText != null) throw new DukeException("Did you mean to say \'bye\'?");
                         new ByeCommand().execute();
