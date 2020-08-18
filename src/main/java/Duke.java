@@ -27,6 +27,13 @@ public class Duke {
                     System.out.println("\t" + (i + 1) + ". " + taskList.get(i));
                 }
             }
+            else if(input.startsWith("done ")){
+                String indexStr = input.replaceAll("[^0-9]", "");
+                int index = Integer.parseInt(indexStr) - 1;
+                taskList.get(index).setDone();
+                System.out.println("\t" + "Nice! I've marked this task as done:");
+                System.out.println("\t\t" + taskList.get(index));
+            }
             else{
                 System.out.println("\t" + input);
                 Task newTask = new Task(input);
