@@ -1,7 +1,55 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+-------------------------------------
+Greetings! I am Duke.
+What can I do for you?
+-------------------------------------
+-------------------------------------
+Hmm I didn't quite catch that.
+Was the command valid?
+-------------------------------------
+-------------------------------------
+Successfully added todo:
+[✘] | T | test
+-------------------------------------
+-------------------------------------
+Successfully added todo:
+[✘] | T | read book
+-------------------------------------
+-------------------------------------
+Successfully added todo:
+[✘] | T | read spaces
+-------------------------------------
+-------------------------------------
+Successfully added event:
+[✘] | E | meeting | At: Mon
+-------------------------------------
+-------------------------------------
+Successfully added event:
+[✘] | E | lunch with friends | At: Mon 3 pm
+-------------------------------------
+-------------------------------------
+Hmm I didn't quite catch that.
+Did you provide a date and description for this event?
+-------------------------------------
+-------------------------------------
+Hmm I didn't quite catch that.
+Did you provide a date and description for this event?
+-------------------------------------
+-------------------------------------
+Successfully added deadline:
+[✘] | D | quiz1 | By: Tues
+-------------------------------------
+-------------------------------------
+Successfully added deadline:
+[✘] | D | quiz2 submission | By: Tues 2 pm
+-------------------------------------
+-------------------------------------
+Hmm I didn't quite catch that.
+Did you provide a deadline and description for this deadline?
+-------------------------------------
+-------------------------------------
+Hmm I didn't quite catch that.
+Did you provide a deadline and description for this deadline?
+-------------------------------------
+-------------------------------------
+Bye! See you around!
+-------------------------------------
