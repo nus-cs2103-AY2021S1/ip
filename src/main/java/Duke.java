@@ -10,15 +10,32 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("Duke: Hello! I'm Duke.");
-        System.out.println("Duke: What can I do for you?");
+        ArrayList<String> list = new ArrayList<>();
+
+        System.out.println("Hello! I'm Duke.");
+        System.out.println("What can I do for you?");
 
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
-            System.out.println("Duke: " + input);
+            if (input.equals("list")) {
+                int listSize = list.size();
+                if (listSize == 0) {
+                    System.out.println("Your list is empty.");
+                } else {
+                    System.out.println("Your list is as follows:");
+                    for (int i = 0; i < listSize; i++) {
+                        int index = i + 1;
+                        System.out.print(index + ". ");
+                        System.out.println(list.get(i));
+                    }
+                }
+            } else {
+                list.add(input);
+                System.out.println("I have added: " + input);
+            }
             input = sc.nextLine();
         }
-        System.out.println("Duke: Bye. Hope to see you again!");
+        System.out.println("Bye. Hope to see you again!");
     }
 }
