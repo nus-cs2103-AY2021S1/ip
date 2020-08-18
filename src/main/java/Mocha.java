@@ -4,7 +4,6 @@ import java.util.ArrayList;
 public class Mocha {
     public static void main(String[] args) throws MissingTaskNumberException {
         // Contains all tasks
-//        ArrayList<String> listOfTasks = new ArrayList<>();
         ArrayList<Task> listOfTasks = new ArrayList<>();
 
         // Introduction of Mocha
