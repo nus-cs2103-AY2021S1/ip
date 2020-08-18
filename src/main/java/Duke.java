@@ -22,26 +22,30 @@ public class Duke {
                 break;
             } else if (str.equals("list")) {
                 System.out.println(horizontalDiv);
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < ls.size(); i++) {
-                    Task task = ls.get(i);
-                    int num = i + 1;
-                    System.out.println(num + ". " + task.toString());
+                if (ls.isEmpty()) {
+                    System.out.println("Congratulations! You have currently no task.");
+                } else {
+                    System.out.println("Here are the tasks in your list:");
+                    for (int i = 0; i < ls.size(); i++) {
+                        Task task = ls.get(i);
+                        int num = i + 1;
+                        System.out.println(num + ". " + task.toString());
+                    }
                 }
                 System.out.println(horizontalDiv);
             } else if (arr[0].equals("done")) {
-                int numToBeMarkedAsDone = Integer.parseInt(str.substring(str.length() - 1)) - 1;
-                if(numToBeMarkedAsDone >= ls.size()) {
-                    System.out.println(horizontalDiv);
-                    System.out.println("Sorry! The number does not exist in the list!");
-                    System.out.println(horizontalDiv);
-                } else {
+                try {
+                    int numToBeMarkedAsDone = Integer.parseInt(str.substring(str.length() - 1)) - 1;
                     Task tsk = ls.get(numToBeMarkedAsDone);
                     tsk.markAsDone();
                     ls.set(numToBeMarkedAsDone, tsk);
                     System.out.println(horizontalDiv);
                     System.out.println("Nice! I've marked this task as done: ");
                     System.out.println(tsk.toString());
+                    System.out.println(horizontalDiv);
+                } catch (Exception ex) {
+                    System.out.println(horizontalDiv);
+                    System.out.println("Sorry! The number does not exist in the list!");
                     System.out.println(horizontalDiv);
                 }
             } else if (arr[0].equals("todo")) {
@@ -109,6 +113,25 @@ public class Duke {
                 } catch (Exception ex) {
                     System.out.println(horizontalDiv);
                     System.out.println("Sorry! The description of event cannot be empty!");
+                    System.out.println(horizontalDiv);
+                }
+            } else if (arr[0].equals("delete")) {
+                try {
+                    int numToBeDeleted = Integer.parseInt(str.substring(str.length() - 1)) - 1;
+                    Task tsk = ls.get(numToBeDeleted);
+                    ls.remove(numToBeDeleted);
+                    System.out.println(horizontalDiv);
+                    System.out.println("Successfully deleted this task:");
+                    System.out.println(tsk.toString());
+                    if (ls.size() > 1) {
+                        System.out.println("Now you have " + ls.size() + " tasks in the list.");
+                    } else {
+                        System.out.println("Now you have " + ls.size() + " task in the list.");
+                    }
+                    System.out.println(horizontalDiv);
+                } catch (Exception ex) {
+                    System.out.println(horizontalDiv);
+                    System.out.println("Sorry! The number to be deleted does not exist in the list!");
                     System.out.println(horizontalDiv);
                 }
             } else {
