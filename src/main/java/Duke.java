@@ -34,22 +34,54 @@ public class Duke {
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
+            // Show list
             if (input.equals("list")) {
                 System.out.println("Here is your to-do list:\n");
                 for (int i = 1; i <= list.size(); i++) {
                     System.out.println(i + ". " + list.get(i - 1).toString());
                 }
+
+            // Complete task
             } else if (input.contains("done")) {
-                int taskNumber = Integer.parseInt((input.split(" "))[1]);
+                int taskNumber = Integer.parseInt(input.substring(5));
                 list.get(taskNumber - 1).completed();
                 System.out.println("You've completed this task:\n");
                 System.out.println((list.get(taskNumber - 1)).toString());
 
+            // Add task
+            } else if (input.contains("todo")) {
+                String s = input.substring(5);
+                Task task = new Task(s);
+                list.add(task);
+                System.out.println(line);
+                System.out.println("I've added this task:\n");
+                System.out.println("[T]" + task.toString());
+                System.out.println("Now you have " + list.size() + " tasks in your list.");
+
+            // Add event
+            } else if (input.contains("event")) {
+                String task = input.substring(6, input.indexOf('/') - 1);
+                String date = input.substring(input.lastIndexOf("at"));
+                Event event = new Event(task, date);
+                list.add(event);
+                System.out.println(line);
+                System.out.println("I've added this task:\n");
+                System.out.println("[E]" + event.toString());
+                System.out.println("Now you have " + list.size() + " tasks in your list.");
+
+            // Add deadline
+            } else if (input.contains("deadline")) {
+                String task = input.substring(9, input.indexOf('/') - 1);
+                String date = input.substring(input.lastIndexOf("by"));
+                Deadline deadline = new Deadline(task, date);
+                list.add(deadline);
+                System.out.println(line);
+                System.out.println("I've added this task:\n");
+                System.out.println("[D]" + deadline.toString());
+                System.out.println("Now you have " + list.size() + " tasks in your list.");
+
             } else {
-                    Task task = new Task(input);
-                    list.add(task);
-                    System.out.println(line);
-                    System.out.println("added: " + input);
+                // error
             }
             System.out.println(line);
             input = sc.nextLine();

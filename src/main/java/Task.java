@@ -2,7 +2,7 @@ public class Task {
     String task;
     boolean isCompleted;
 
-    Task(String task) {
+    public Task(String task) {
         this.task = task;
         isCompleted = false;
     }
