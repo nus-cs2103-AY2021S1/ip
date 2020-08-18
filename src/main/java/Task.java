@@ -1,4 +1,5 @@
-public class Task {
+class Task {
+
     private String description;
     private boolean isCompleted;
 
@@ -8,14 +9,19 @@ public class Task {
     }
 
     private String getStatusIcon() {
-        if (isCompleted) {
+        if (this.isCompleted) {
             return "\u2713";
         } else {
             return "\u2718";
         }
     }
 
-    public String printTaskMessage() {
+    void completeTask() {
+        this.isCompleted = true;
+    }
+
+    @Override
+    public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }

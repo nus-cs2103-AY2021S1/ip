@@ -1,31 +1,34 @@
 import java.util.ArrayList;
 
-public class TaskList {
+class TaskList {
 
     private ArrayList<Task> taskArrayList;
 
     TaskList() {
-        taskArrayList = new ArrayList<>();
+        this.taskArrayList = new ArrayList<>();
     }
 
-    public boolean isEmpty() {
+    private boolean isEmpty() {
         return taskArrayList.size() == 0;
     }
 
-    public void addToList(Task addTask) {
-        taskArrayList.add(addTask);
+    void addToList(Task addTask) {
+        this.taskArrayList.add(addTask);
     }
 
-    public String printTaskList() {
-        if (this.taskArrayList.isEmpty()) {
+    Task getTaskAt(int taskIndex) {
+        return this.taskArrayList.get(taskIndex);
+    }
+
+    public String toString() {
+        if (this.isEmpty()) {
             return "No tasks found";
         } else {
             StringBuilder output = new StringBuilder();
             String textIndentation = "     ";
-            int listSize = taskArrayList.size();
+            int listSize = this.taskArrayList.size();
             for (int i = 0; i < listSize; i++) {
-
-                String eachTaskString = textIndentation + (i + 1) + ". " + taskArrayList.get(i).printTaskMessage() + "\n";
+                String eachTaskString = textIndentation + (i + 1) + ". " + this.taskArrayList.get(i) + "\n";
                 output.append(eachTaskString);
             }
             return output.toString();

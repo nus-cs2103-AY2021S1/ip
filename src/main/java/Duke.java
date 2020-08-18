@@ -7,7 +7,7 @@ public class Duke {
     private static String greetMessage = Duke.textIndentation + "Hello! I'm Duke\n" +
             Duke.textIndentation + "What can I do for you?";
     private static String exitMessage = Duke.textIndentation + "Bye. Hope to see you again soon!";
-
+    private static String completeTaskMessage = Duke.textIndentation + "Nice! I've marked this task as done:";
     private static TaskList taskList;
 
     public static void main(String[] args) {
@@ -19,15 +19,21 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNext()) {
-            String inputMessage = sc.next();
+            String inputMessage = sc.nextLine();
 
             if (inputMessage.toLowerCase().equals("bye")) {
                 Duke.printText(exitMessage);
                 break;
             } else if (inputMessage.toLowerCase().equals("list")) {
-                Duke.printText(Duke.taskList.printTaskList());
+                Duke.printText(Duke.taskList.toString());
+            } else if (inputMessage.toLowerCase().startsWith("done")) {
+                String taskQueryIndexString = inputMessage.substring(4).trim();
+                int taskQueryIndex = Integer.parseInt(taskQueryIndexString);
+                Task completedTask = Duke.taskList.getTaskAt(taskQueryIndex);
+                completedTask.completeTask();
+                Duke.printText(Duke.completeTaskMessage + "\n" + Duke.textIndentation + completedTask);
             } else {
-                taskList.addToList(new Task(inputMessage));
+                Duke.taskList.addToList(new Task(inputMessage));
                 Duke.printText(Duke.textIndentation + "added: " + inputMessage);
             }
         }
