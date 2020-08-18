@@ -54,7 +54,6 @@ public class InputHandler {
 
     private void handleList() {
         int len = taskList.size();
-        System.out.println(len);
         String firstLine = len == 0
             ? "There are no tasks in your list!"
             : "Here are the tasks in your list:";
