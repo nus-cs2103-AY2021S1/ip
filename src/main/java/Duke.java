@@ -33,7 +33,7 @@ public class Duke {
         ToDo temp = new ToDo(input.substring(5, input.length()));
         arr.add(temp);
         System.out.println(line);
-        System.out.println("     Got it. I've added this task: ");
+        System.out.println("     Got it. I've added this task:");
         System.out.println("      " + temp.getOutput());
         numTask();
         System.out.println(line);
