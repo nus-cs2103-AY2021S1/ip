@@ -147,7 +147,11 @@ public class Duke {
     private String addEvent(String[] parsedUserInput) {
         String taskDescription ="";
         for(int i = 1; i < parsedUserInput.length; i++) {
-            taskDescription += parsedUserInput[i] + " ";
+            if (i == parsedUserInput.length-1) {
+             taskDescription += parsedUserInput[i];
+            } else {
+                taskDescription += parsedUserInput[i] + " ";
+            }
         }
 
         String[] eventArray = taskDescription.split(" /at ");
@@ -162,6 +166,9 @@ public class Duke {
     private String addDeadline(String[] parsedUserInput) {
         String taskDescription ="";
         for(int i = 1; i < parsedUserInput.length; i++) {
+            if (i == parsedUserInput.length-1) {
+                taskDescription += parsedUserInput[i];
+            }
             taskDescription += parsedUserInput[i] + " ";
         }
 

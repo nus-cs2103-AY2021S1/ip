@@ -9,3 +9,32 @@
     Now you have 1 tasks in the list
     ___________________________________________________
 
+    ___________________________________________________
+    Got it. I've added this task:
+        [D][✘]return book (by: SundaySunday)
+    Now you have 2 tasks in the list
+    ___________________________________________________
+
+    ___________________________________________________
+    Got it. I've added this task:
+        [E][✘]project meeting (at: Mon 2-4pm)
+    Now you have 3 tasks in the list
+    ___________________________________________________
+
+    ___________________________________________________
+    1.[T][✘]borrow book
+    2.[D][✘]return book (by: SundaySunday)
+    3.[E][✘]project meeting (at: Mon 2-4pm)
+    ___________________________________________________
+
+    ___________________________________________________
+    Nice! I've marked this task as done:
+        [T][✓]borrow book
+    ___________________________________________________
+
+    ___________________________________________________
+    1.[T][✓]borrow book
+    2.[D][✘]return book (by: SundaySunday)
+    3.[E][✘]project meeting (at: Mon 2-4pm)
+    ___________________________________________________
+
