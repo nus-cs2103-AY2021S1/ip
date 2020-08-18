@@ -1,0 +1,7 @@
+todo book hotel
+event book hotel /tomorrow
+deadline book hotel /by tomorrow
+list
+blah
+todo
+bye

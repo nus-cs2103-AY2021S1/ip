@@ -64,7 +64,17 @@ public class Duke {
             } else {
                 return "    description cannot be empty~";
             }
-        } else {
+        } else if (order.length() >= 6 && order.substring(0, 6).equals("delete")) {
+            if (order.length() > 6) {
+                Integer toBeDeleted = Integer.valueOf(order.substring(7));
+                Task temp = list.get(toBeDeleted-1);
+                list.remove(toBeDeleted-1);
+                return "    I have removed this task: " + "\n" + temp;
+            } else {
+                return "    Sorry, you have not specified which task to be deleted.";
+            }
+        }
+        else {
             return "    Sorry, I don't understand.";
         }
     }
