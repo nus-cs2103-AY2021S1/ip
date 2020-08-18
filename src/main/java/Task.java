@@ -4,8 +4,12 @@ public class Task {
     private boolean isDone;
 
     Task(String description) {
+        this(description, false);
+    }
+
+    private Task(String description, boolean isDone) {
         this.description = description;
-        isDone = false;
+        this.isDone = isDone;
     }
 
     // Get status icon for the current task, tick = done, cross = no done
@@ -14,12 +18,13 @@ public class Task {
     }
 
     /**
-     * Update the status of the task
+     * Return updated task
      *
      * @param isDone New status for the task
+     * @return new task with updated status
      */
-    public void updateStatus(boolean isDone) {
-        this.isDone = isDone;
+    public Task updateStatus(boolean isDone) {
+        return new Task(description, isDone);
     }
 
     // Print the status of the task before the task description
