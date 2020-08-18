@@ -28,11 +28,13 @@ public class Duke {
       if (input.equals("bye")) {
         output = "\tBye. Hope to see you again soon!";
       } else if (input.equals("list")) {
-        output = "\tHere are the tasks in your list: ";
+        StringBuilder concat = new StringBuilder();
 
         for (int i = 0; i < list.size(); i++) {
-          output += String.format("\n\t%d. %s", i + 1, list.get(i));
+          concat.append(String.format("\n\t%d. %s", i + 1, list.get(i)));
         }
+
+        output = "\tHere are the tasks in your list: " + concat;
       } else if (command[0].equals("done")){
         int index = Integer.parseInt(command[1]) - 1;
         Task targetTask = list.get(index);
