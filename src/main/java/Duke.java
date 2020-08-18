@@ -35,11 +35,16 @@ public class Duke {
             throw new EmptyCommandException();
         }
         boolean bl;
-        if (tokens.get(0).equals("bye")){
+        DukeCommand command = DukeCommand.getCommand(tokens.get(0));
+        if (command == null) {
+            throw new InvalidCommandException("I do not recognise this command!");
+        }
+
+        if (command == DukeCommand.BYE){
             System.out.println("Bye. Hope to see you again!");
             bl = false;
         } else {
-            if (tokens.get(0).equals("done")) {
+            if (command == DukeCommand.DONE) {
                 if (tokens.size() < 2) {
                     throw new MissingArgumentException("Must provide number after done!");
                 }
@@ -54,14 +59,31 @@ public class Duke {
                 }
                 tasks.get(ind).completeTask();
                 System.out.println(tasks.get(ind).toString());
-            } else if (tokens.get(0).equals("list")) {
+            } else if (command == DukeCommand.DELETE) {
+                if (tokens.size() < 2) {
+                    throw new MissingArgumentException("Must provide number after delete!");
+                }
+                int ind;
+                try{
+                    ind = Integer.parseInt(tokens.get(1))-1;
+                } catch(Exception ex) {
+                    throw new InvalidCommandException(tokens.get(1)+" is not a number!");
+                }
+                if (tasks.size()<=ind || ind < 0) {
+                    throw new DukeException("Task "+ tokens.get(1) +" does not exist!");
+                }
+                Task task = tasks.remove(ind);
+                System.out.println("I have removed this task");
+                System.out.println(task.toString());
+                System.out.println("You now have " + tasks.size() +" tasks left!");
+            }else if (command == DukeCommand.LIST) {
                 System.out.println("Here are the tasks in your list:");
                 int i=0;
                 for(Task task:tasks){
                     System.out.println(String.format("%d.%s", ++i, task));
                 }
             } else {
-                Task task = addNewTask(tokens);
+                Task task = addNewTask(command, tokens);
                 tasks.add(task);
                 System.out.println(
                         String.format("I have added this task: \n\t%s\nYou now have %d tasks in the list",
@@ -73,13 +95,13 @@ public class Duke {
 
     }
 
-    public static Task addNewTask(ArrayList<String> tokens) throws DukeException {
-        if (tokens.get(0).equals("todo")) {
+    public static Task addNewTask(DukeCommand command, ArrayList<String> tokens) throws DukeException {
+        if (command == DukeCommand.TODO) {
             if (tokens.size() < 2) {
                 throw new MissingArgumentException("todo cannot be empty!");
             }
             return new ToDo(stringCombiner(tokens, 1, tokens.size()));
-        } else if (tokens.get(0).equals("deadline")) {
+        } else if (command == DukeCommand.DEADLINE) {
 
             int ind = 0;
             boolean found= false;
@@ -100,7 +122,7 @@ public class Duke {
             }
             return new Deadline(stringCombiner(tokens, 1, ind),
                     stringCombiner(tokens, ind+1, tokens.size()));
-        } else if (tokens.get(0).equals("event")){
+        } else {
             int ind = 0;
             boolean found= false;
             while (!found && ind < tokens.size()-1) {
@@ -120,8 +142,6 @@ public class Duke {
             }
             return new Event(stringCombiner(tokens, 1, ind),
                     stringCombiner(tokens, ind+1, tokens.size()));
-        } else {
-            throw new InvalidCommandException("I do not recognise this command!");
         }
     }
 

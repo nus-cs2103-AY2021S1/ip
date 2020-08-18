@@ -1,14 +1,21 @@
+tttt
 todo 123
 event help /at asd
 deadline uuu /by jjj
 done 2
-done 1
+done -5
+done 100
 list
-todo 345
+todo
 event help2 /at asd2
 deadline uuu2 /by jjj2
-done 3
-list
-todo 666
+event help2 /at
+event /at
+event 2223
+deadline
+deadline /by
+deadline 11
+delete -1
+delete 2
 list
 bye

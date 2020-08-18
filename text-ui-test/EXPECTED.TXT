@@ -7,6 +7,9 @@ Hello from
 
 What can I do for you?
 -----------------
+Invalid Command! I do not recognise this command!
+-----------------
+-----------------
 I have added this task: 
 	[T][✘] 123
 You now have 1 tasks in the list
@@ -25,55 +28,62 @@ You now have 3 tasks in the list
 [E][✓] help (at: asd)
 -----------------
 -----------------
-[T][✓] 123
+Invalid Command! Task -5 does not exist!
+-----------------
+-----------------
+Invalid Command! Task 100 does not exist!
 -----------------
 -----------------
 Here are the tasks in your list:
-1.[T][✓] 123
+1.[T][✘] 123
 2.[E][✓] help (at: asd)
 3.[D][T][✘] uuu (by: jjj)
 -----------------
 -----------------
-I have added this task: 
-	[T][✘] 345
-You now have 4 tasks in the list
+Invalid Command! Missing Argument: todo cannot be empty!
 -----------------
 -----------------
 I have added this task: 
 	[E][✘] help2 (at: asd2)
-You now have 5 tasks in the list
+You now have 4 tasks in the list
 -----------------
 -----------------
 I have added this task: 
 	[D][T][✘] uuu2 (by: jjj2)
-You now have 6 tasks in the list
+You now have 5 tasks in the list
 -----------------
 -----------------
-[D][T][✓] uuu (by: jjj)
+Invalid Command! Missing Argument: Event needs a event time!
+-----------------
+-----------------
+Invalid Command! Missing Argument: Event needs a name!
+-----------------
+-----------------
+Invalid Command! Missing Argument: Event need an /at time!
+-----------------
+-----------------
+Invalid Command! Missing Argument: Deadline need an /by time!
+-----------------
+-----------------
+Invalid Command! Missing Argument: Deadline needs a name!
+-----------------
+-----------------
+Invalid Command! Missing Argument: Deadline need an /by time!
+-----------------
+-----------------
+Invalid Command! Task -1 does not exist!
+-----------------
+-----------------
+I have removed this task
+[E][✓] help (at: asd)
+You now have 4 tasks left!
 -----------------
 -----------------
 Here are the tasks in your list:
-1.[T][✓] 123
-2.[E][✓] help (at: asd)
-3.[D][T][✓] uuu (by: jjj)
-4.[T][✘] 345
-5.[E][✘] help2 (at: asd2)
-6.[D][T][✘] uuu2 (by: jjj2)
------------------
------------------
-I have added this task: 
-	[T][✘] 666
-You now have 7 tasks in the list
------------------
------------------
-Here are the tasks in your list:
-1.[T][✓] 123
-2.[E][✓] help (at: asd)
-3.[D][T][✓] uuu (by: jjj)
-4.[T][✘] 345
-5.[E][✘] help2 (at: asd2)
-6.[D][T][✘] uuu2 (by: jjj2)
-7.[T][✘] 666
+1.[T][✘] 123
+2.[D][T][✘] uuu (by: jjj)
+3.[E][✘] help2 (at: asd2)
+4.[D][T][✘] uuu2 (by: jjj2)
 -----------------
 -----------------
 Bye. Hope to see you again!
