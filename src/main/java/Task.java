@@ -3,17 +3,17 @@ public class Task {
     protected Boolean done;
     protected String icon; //tick or cross
     protected String name;
-    public static int numberOfTasks = 1;
+    public static int numberOfTasks = 0;
 
     private static String tick = "[✓]";
     private static String cross = "[✗]";
 
     Task(String name) {
+        numberOfTasks++;
         this.number = numberOfTasks;
         this.name = name;
         this.done = false;
         this.icon = cross;
-        numberOfTasks++;
     }
 
     public String getName() {

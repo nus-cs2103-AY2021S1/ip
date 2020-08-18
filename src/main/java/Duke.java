@@ -10,6 +10,15 @@ public class Duke {
         System.out.println(horiLine + greeting + horiLine);
     }
 
+    private static void addTask(Task task) {
+        List.add(task);
+        System.out.println(horiLine
+                + "Got it. I've added this task: " + "\n"
+                + task.toString() + "\n"
+                + String.format("Now you have %s tasks in the list.", Task.numberOfTasks) + "\n"
+                + horiLine);
+    }
+
     private static void echo() {
         greet();
         Scanner sc = new Scanner(System.in);
@@ -22,15 +31,31 @@ public class Duke {
             } else if (input.equals("list")) {
                 System.out.println(horiLine + "Here are the tasks in your list:");
                 for (Task task : List) {
-                    System.out.println(task.getNumber() + "." + task.toString());
+                    //print out task with numbering
+                    System.out.println(String.format("%s.", task.getNumber()) + task.toString());
                 }
                 System.out.println(horiLine);
             } else if(input.startsWith("done")) {
                 String[] number = input.split("done ");
                 markDone(Integer.parseInt(number[1]));
-            } else {
-                List.add(new Task(input));
-                System.out.println(horiLine + "added: " + input + "\n" + horiLine);
+            } else if(input.startsWith("deadline")) {
+                //whatever is after deadline
+                String deadlineInput = (input.split("deadline "))[1];
+                String deadlineName = (deadlineInput.split(" /by "))[0];
+                String deadlineTime = (deadlineInput.split(" /by "))[1];
+                Deadline newDeadline = new Deadline(deadlineName, deadlineTime);
+                addTask(newDeadline);
+            } else if(input.startsWith("todo")) {
+                String[] todoInput = input.split("todo ");
+                String todoName = todoInput[1];
+                Todo newTodo = new Todo(todoName);
+                addTask(newTodo);
+            } else if(input.startsWith("event")) {
+                String eventInput = (input.split("event "))[1];
+                String eventName = (eventInput.split(" /at "))[0];
+                String eventTime = (eventInput.split(" /at "))[1];
+                Event newEvent = new Event(eventName, eventTime);
+                addTask(newEvent);
             }
         }
         sc.close();
