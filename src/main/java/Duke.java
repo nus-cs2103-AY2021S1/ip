@@ -57,12 +57,17 @@ public class Duke {
                 System.out.println("____________________________________________________________");
 
             } else {
-                Task currTask = StringProcessor.stringProcessor(currInput);
-                inputList.add(currTask);
-                System.out.println("____________________________________________________________");
-                System.out.print(currTask.toString());
-                System.out.println("____________________________________________________________\n");
+                try {
+                    Task currTask = StringProcessor.stringProcessor(currInput);
+                    inputList.add(currTask);
+                    System.out.println("____________________________________________________________");
+                    System.out.println(currTask.toString());
+                    System.out.println("____________________________________________________________\n");
+                } catch(Exception e) {
+                    System.out.println("DUKE DOES NOT UNDERSTAND YOU!!!@#%#$%^!@^%\n" + e + "\nTRY AGAIN!!!");
+                }
             }
+
 
 
             currInput = sc.nextLine();
