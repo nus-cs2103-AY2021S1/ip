@@ -1,42 +1,48 @@
-/** 
+import java.util.ArrayList;
+import java.util.List;
+
+/**
  * This class keeps track of, and manages the User's current list
-*/
+ */
 public class Planner {
 
-    private Task[] list;  // Stores and displays text added by the User
-    private int currIndex;  // Keeps track of current index for the list
+    private List<Task> lst;
 
     public Planner () {
-        this.list = new Task[100];  // Size-of-100 as specified by task-requirements 
-        this.currIndex = 0;
+        this.lst = new ArrayList<>();
     }
 
     // This method is responsible for inserting text into list, and updating current index
     public void addTask (Task t) {
-        this.list[currIndex++] = t;
+        this.lst.add(t);
     }
 
     public void completeTask (int i) {
-        this.list[i-1].markAsDone();
+        this.lst.get(i-1).markAsDone();
     }
 
     public Task getTask (int i) {
-        return this.list[i-1];
+        return this.lst.get(i-1);
     }
 
     public int getNumTasks () {
-        return currIndex;
+        return this.lst.size();
+    }
+
+    public void del (int i) {
+        this.lst.remove(i-1);
     }
 
     // Overrides toString() method of Object Class to display contents of list neatly
     @Override
     public String toString() {
         String msg = ". . . list is currently empty . . .";  // Default message given empty list
-        if (this.currIndex != 0) {
+        if (!this.lst.isEmpty()) {
             msg = "";
-            for (int i = 0; i < this.currIndex; i++) {
-                Task t = this.list[i];
-                msg += String.format("\t" + (i+1) + ". " + t + "\n");
+            int i = 1;
+            for (Task t: this.lst) {
+                // Task t = this.list[i];
+                msg += String.format("\t" + (i++) + ". " + t + "\n");
             }
         }
         return msg;

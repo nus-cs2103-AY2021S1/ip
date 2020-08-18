@@ -32,19 +32,25 @@ public class Jimmy {
                 break;
             } else if (msg.equals("list")) {
                 System.out.println(div + lst + div);
-            } else if (arr[0].equals("done")) {
+            } else if (arr[0].equals("done") || arr[0].equals("delete")) {
                 if (arr.length > 2 || arr.length == 1) {
-                    System.out.println(div + "\tError: The function \"done\" should be followed by a single number." + div);
-                    break;
+                    System.out.println(div + "\tError: The function \"" + arr[0] + "\" should be followed by a single number." + div);
+                    continue;
                 }
                 int i = Integer.parseInt(arr[1]);
                 if (i > lst.getNumTasks()+1 || i < 1) {
                     System.out.println(div + "\tError: Task #" + i + " is out of range." + div);
-                    break;
+                    continue;
                 }
-                lst.completeTask(i);
-                Task t = lst.getTask(i);
-                System.out.println(div + "\tNice! I've marked this task as done:" + "\n\t  " + t + div);
+                if (arr[0].equals("done")) {
+                    lst.completeTask(i);
+                    Task t = lst.getTask(i);
+                    System.out.println(div + "\tNice! I've marked this task as done:" + "\n\t  " + t + div);
+                } else {
+                    Task t = lst.getTask(i);
+                    lst.del(i);
+                    System.out.println(div + "\tNoted. I've removed this task:" + "\n\t  " + t + "\n\tNow you have " + lst.getNumTasks() + " tasks in the list." + div);
+                }
             } else if (arr.length > 1) {
                 Task t = null;
                 switch (arr[0]) {
@@ -58,7 +64,7 @@ public class Jimmy {
                         t = new Event(msg);
                         break;
                 }
-                if (t.equals(null)) {
+                if (t == null) {
                     System.out.println(div + "\tError: The function \"" + msg + "\" does not exist." + div);
                     continue;
                 }
