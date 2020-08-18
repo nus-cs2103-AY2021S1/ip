@@ -4,50 +4,32 @@ import java.util.Scanner;
 
 public class Duke {
     private static String[] exitWords = new String[] { "bye" };
-    private static boolean exitLoop = false;
-
-    private static void drawLine() {
-        char star = '*';
-        char lineLength = 50;
-
-        System.out.println();
-        for (int i = 0; i < lineLength; i++) {
-            System.out.print(star);
-        }
-        System.out.println();
-    }
+    public static boolean exitLoop = false;
 
     private static void greet() {
-        drawLine();
+        UIPrint.drawLine(UIPrint.star, 50);
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
-        drawLine();
+        UIPrint.drawLine(UIPrint.star, 50);
     }
 
     private static void echo(String str) {
-        drawLine();
+        UIPrint.drawLine(UIPrint.star, 50);
         System.out.println(str);
-        drawLine();
+        UIPrint.drawLine(UIPrint.star, 50);
     }
 
-    private static boolean checkExit(String str) {
-        for (String exitWord : exitWords) {
-            if (str.equals(exitWord)) {
-                return true;
-            }
+    private static boolean checkCommand(String str) {
+        String[] inputParts = str.split(" ", 2);
+        String possibleCommand = inputParts[0];
+        Command command = DukeCommandSet.getInstance().getCommand(possibleCommand);
+
+        if (command != null) {
+            command.execute();
+            return true;
+        } else {
+            return false;
         }
-
-        return false;
-    }
-
-    private static void exit() {
-        String exitWords = "Bye, hope to see you again soon!";
-
-        drawLine();
-        System.out.println(exitWords);
-        drawLine();
-
-        exitLoop = true;
     }
 
     public static void main(String[] args) {
@@ -63,9 +45,9 @@ public class Duke {
         while (!exitLoop) {
             String inputLine = UserInput.getOneLine();
 
-            if (checkExit(inputLine)) {
-                exit();
-            } else {
+            boolean hasCommand = checkCommand(inputLine);
+
+            if (!hasCommand) {
                 echo(inputLine);
             }
         }
