@@ -5,25 +5,24 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    public static final String LOGO = "Duke.";
-    public static final Reader INPUTSTREAMREADER = new InputStreamReader(System.in);
-    public static final BufferedReader READER = new BufferedReader(INPUTSTREAMREADER);
-    public static final ArrayList<Task> STORAGE = new ArrayList<Task>();
+    public static final Reader READER = new InputStreamReader(System.in);
+    public static final BufferedReader BUFFERED_READER = new BufferedReader(READER);
+    public static final ArrayList<Task> STORAGE = new ArrayList<>();
 
     public static void main(String[] args) throws Exception {
         executeProgram();
     }
 
     private static void executeProgram() throws Exception {
-        printWelcomeMessage(LOGO);
-        printBorder();
-        String command = READER.readLine();
+        printWelcomeMessage();
+        String command = BUFFERED_READER.readLine();
         parseCommands(command);
         printByeMessage();
     }
 
-    private static void printWelcomeMessage(String LOGO) {
-        System.out.println("Hello there! My name is " + LOGO + "\nWhat can I do for you?");
+    private static void printWelcomeMessage() {
+        System.out.println("Hello there! My name is Duke." + "\nHow may I assist you today?");
+        printBorder();
     }
 
     private static void parseCommands(String command) throws Exception {
@@ -37,7 +36,7 @@ public class Duke {
                 switch (commandCheck) {
                     case "list":
                         if (STORAGE.isEmpty()) {
-                            throw new DukeException("The list is empty.");
+                            throw new DukeException("There is nothing to list as the list is currently empty.");
                         } else {
                             int index = 1;
                             System.out.println("These are the tasks in your list:");
@@ -53,13 +52,13 @@ public class Duke {
                     case "done":
                         try {
                             if (numOfInput < 2) {
-                                throw new DukeException("Please specify which task you have completed.");
+                                throw new DukeException("Please specify which task you have completed. Eg. done 1");
                             }
 
                             try {
                                 Integer.parseInt(userInputArray[1]);
                             } catch (NumberFormatException error) {
-                                throw new DukeException("Input is not a valid integer.");
+                                throw new DukeException("Please input task index as a valid integer.");
                             }
 
                             String temp = command.split(" ")[1];
@@ -68,12 +67,12 @@ public class Duke {
 
                             if (currentTaskIndex < 0 || currentTaskIndex >= STORAGE.size()) {
                                 throw new DukeException("The task number" + " (" + (currentTaskIndex + 1) + ") " +
-                                                        "that you have input can not be found in your list.");
+                                                        "that you have input can not be found in the list.");
                             }
 
                             Task currentTask = STORAGE.get(currentTaskIndex);
                             STORAGE.get(currentTaskIndex).setDone();
-                            System.out.println("Nice! I've marked this task as done:");
+                            System.out.println("Great job! This task has been marked as done:");
                             System.out.println(" " + currentTask.toString());
                         } catch (DukeException error) {
                             System.err.println(error.getMessage());
@@ -84,9 +83,9 @@ public class Duke {
                     case "todo":
                         try {
                             if (numOfInput == 1) {
-                                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                                throw new DukeException("☹ Oh no! The description of a todo task cannot be empty.");
                             }
-                            StringBuilder todoString = new StringBuilder("");
+                            StringBuilder todoString = new StringBuilder();
                             int j = 1;
                             while (j < numOfInput) {
                                 todoString.append(userInputArray[j]);
@@ -106,23 +105,23 @@ public class Duke {
                     case "deadline":
                         try {
                             if (numOfInput == 1) {
-                                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                                throw new DukeException("☹ Oh no! The description of a deadline task cannot be empty.");
                             }
 
                             if (numOfInput < 4) {
-                                throw new DukeException("☹ OOPS!!! The correct way to log a deadline is: (deadline) "
+                                throw new DukeException("☹ Oh no! The correct way to log a deadline is: (deadline) "
                                                         + "(description) (/by) (date)");
                             }
 
-                            StringBuilder deadlineString = new StringBuilder("");
-                            StringBuilder deadlineDate = new StringBuilder("");
+                            StringBuilder deadlineString = new StringBuilder();
+                            StringBuilder deadlineDate = new StringBuilder();
                             boolean checkForDate = false;
                             int m = 1;
                             while (m < numOfInput) {
                                 if (userInputArray[m].equals("/by")) {
                                     checkForDate = true;
                                 } else {
-                                    if (checkForDate == false) {
+                                    if (!checkForDate) {
                                         deadlineString.append(userInputArray[m]);
                                         deadlineString.append(" ");
                                     } else {
@@ -145,15 +144,15 @@ public class Duke {
                     case "event":
                         try {
                             if (numOfInput == 1) {
-                                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                                throw new DukeException("☹ Oh no! The description of an event task cannot be empty.");
                             }
 
                             if (numOfInput < 4) {
-                                throw new DukeException("☹ OOPS!!! The correct way to log an event is: (event) " +
+                                throw new DukeException("☹ Oh no! The correct way to log an event is: (event) " +
                                                         "(description) (/at) (date)");
                             }
 
-                            StringBuilder eventString = new StringBuilder("");
+                            StringBuilder eventString = new StringBuilder();
                             StringBuilder eventDate = new StringBuilder(" ");
                             boolean checkForEvent = false;
                             int z = 1;
@@ -161,7 +160,7 @@ public class Duke {
                                 if (userInputArray[z].equals("/at")) {
                                     checkForEvent = true;
                                 } else {
-                                    if (checkForEvent == false) {
+                                    if (!checkForEvent) {
                                         eventString.append(userInputArray[z]);
                                         eventString.append(" ");
                                     } else {
@@ -184,13 +183,13 @@ public class Duke {
                     case "delete":
                         try {
                             if (numOfInput < 2) {
-                                throw new DukeException("Please specify which task you want to delete.");
+                                throw new DukeException("Please specify which task you want to delete. Eg. delete 1");
                             }
 
                             try {
                                 Integer.parseInt(userInputArray[1]);
                             } catch (NumberFormatException error) {
-                                throw new DukeException("Input is not a valid integer.");
+                                throw new DukeException("Please input task index as a valid integer.");
                             }
 
                             String tempStr = command.split(" ")[1];
@@ -199,7 +198,8 @@ public class Duke {
                             int arraySize = STORAGE.size();
 
                             if (indexToRemove < 0 || indexToRemove >= arraySize) {
-                                throw new DukeException("The task number" + " (" + (indexToRemove + 1) + ") " + "that you want to delete can not be found in your list.");
+                                throw new DukeException("The task number" + " (" + (indexToRemove + 1) + ") " +
+                                                        "that you want to delete can not be found in the list.");
                             } else {
                                 Task curr = STORAGE.get(indexToRemove);
                                 printDelete();
@@ -214,13 +214,13 @@ public class Duke {
                         break;
 
                     default:
-                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what '" + command
-                                                + "' means :-(");
+                        throw new DukeException("Catastrophe detected! I'm sorry, but '" + command
+                                                + "' is not within my realm of knowledge. ☹");
                 }
             } catch (DukeException error) {
                 System.err.println(error.getMessage());
             }
-            command = READER.readLine();
+            command = BUFFERED_READER.readLine();
         }
     }
 
@@ -229,14 +229,14 @@ public class Duke {
     }
 
     private static void printGotIt() {
-        System.out.println("Got it. I've added this task:");
+        System.out.println("Thank you for your input. The following task has been added to the list:");
     }
 
     private static void printTaskCount() {
         if (Task.totalTasks > 1) {
-            System.out.println("Now you have " + Task.totalTasks + " tasks in the list.");
+            System.out.println("You have a total of " + Task.totalTasks + " tasks in the list.");
         } else {
-            System.out.println("Now you have " + Task.totalTasks + " task in the list.");
+            System.out.println("You have a total of " + Task.totalTasks + " task in the list.");
         }
         printBorder();
     }
@@ -246,10 +246,10 @@ public class Duke {
     }
 
     private static void printDelete() {
-        System.out.println("Noted. I've removed this task:");
+        System.out.println("The following task has been successfully removed:");
     }
 
     private static void printByeMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("Goodbye. Hope to see you again soon!");
     }
 }

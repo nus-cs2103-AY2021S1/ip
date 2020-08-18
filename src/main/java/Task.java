@@ -4,7 +4,7 @@ public class Task {
     public static int totalTasks = 0;
     protected TaskType taskType;
 
-    Task(String description, TaskType taskType) {
+    public Task(String description, TaskType taskType) {
         this.isDone = false;
         this.description = description;
         this.taskType = taskType;

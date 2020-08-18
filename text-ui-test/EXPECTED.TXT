@@ -1,25 +1,25 @@
 Hello there! My name is Duke.
-What can I do for you?
+How may I assist you today?
 ---------------------------
-Got it. I've added this task:
+Thank you for your input. The following task has been added to the list:
  [T][✘] read book
-Now you have 1 task in the list.
+You have a total of 1 task in the list.
 ---------------------------
-Got it. I've added this task:
+Thank you for your input. The following task has been added to the list:
  [D][✘] return book (by: June 6th)
-Now you have 2 tasks in the list.
+You have a total of 2 tasks in the list.
 ---------------------------
-Got it. I've added this task:
+Thank you for your input. The following task has been added to the list:
  [E][✘] project meeting (at: Aug 6th 2-4pm)
-Now you have 3 tasks in the list.
+You have a total of 3 tasks in the list.
 ---------------------------
-Got it. I've added this task:
+Thank you for your input. The following task has been added to the list:
  [T][✘] join sports club
-Now you have 4 tasks in the list.
+You have a total of 4 tasks in the list.
 ---------------------------
-Got it. I've added this task:
+Thank you for your input. The following task has been added to the list:
  [T][✘] borrow book
-Now you have 5 tasks in the list.
+You have a total of 5 tasks in the list.
 ---------------------------
 These are the tasks in your list:
 1. [T][✘] read book
@@ -28,12 +28,12 @@ These are the tasks in your list:
 4. [T][✘] join sports club
 5. [T][✘] borrow book
 ---------------------------
-Got it. I've added this task:
+Thank you for your input. The following task has been added to the list:
  [D][✘] return book (by: Sunday)
-Now you have 6 tasks in the list.
+You have a total of 6 tasks in the list.
 ---------------------------
-Got it. I've added this task:
+Thank you for your input. The following task has been added to the list:
  [E][✘] project meeting (at: Mon 2-4pm)
-Now you have 7 tasks in the list.
+You have a total of 7 tasks in the list.
 ---------------------------
-Bye. Hope to see you again soon!
+Goodbye. Hope to see you again soon!
