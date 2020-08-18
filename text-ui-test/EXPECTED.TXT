@@ -7,11 +7,12 @@ Event - type 'event' followed by the description, then '/at', then timing
 Type 'done' followed by the task number and I'll mark it as done
 Type 'list' to see the list
 Type 'bye' to exit
-added: [T][✘] borrow book
+List is empty
+Added: [T][✘] borrow book
 Total tasks: 1
-added: [D][✘] return book (by: Sunday)
+Added: [D][✘] return book (by: Sunday)
 Total tasks: 2
-added: [E][✘] project meeting (at: Mon 2-4pm)
+Added: [E][✘] project meeting (at: Mon 2-4pm)
 Total tasks: 3
 Items in list:
 1. [T][✘] borrow book
@@ -23,4 +24,9 @@ Items in list:
 1. [T][✓] borrow book
 2. [D][✘] return book (by: Sunday)
 3. [E][✘] project meeting (at: Mon 2-4pm)
+Task deleted:
+[T][✓] borrow book
+Items in list:
+1. [D][✘] return book (by: Sunday)
+2. [E][✘] project meeting (at: Mon 2-4pm)
 Bye! :>

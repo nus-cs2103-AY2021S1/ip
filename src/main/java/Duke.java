@@ -26,17 +26,33 @@ public class Duke {
                     sc.close();
                     System.exit(0);
                 } else if (next.equalsIgnoreCase("list")) {
-                    System.out.println("Items in list:");
-                    for (int i = 0; i < list.size(); i++) {
-                        System.out.println((i + 1) + ". " + list.get(i).toString());
+                    if (list.size() == 0) {
+                        System.out.println("List is empty");
+                    } else {
+                        System.out.println("Items in list:");
+                        for (int i = 0; i < list.size(); i++) {
+                            System.out.println((i + 1) + ". " + list.get(i).toString());
+                        }
                     }
-                } else if (next.length() >= 4 &&
-                        next.substring(0, 4).equalsIgnoreCase("done")) {
+                } else if (next.length() >= 4 && next.substring(0, 4).equalsIgnoreCase("done")) {
                     int taskNo = Integer.parseInt(next.substring(5));
-                    Task completedTask = list.get(taskNo - 1);
-                    completedTask.markAsDone();
-                    System.out.println("Task marked complete:");
-                    System.out.println(completedTask.toString());
+                    if (taskNo > list.size()) {
+                        throw new DukeException("Task does not exist _(´ཀ`」 ∠)_");
+                    } else {
+                        Task completedTask = list.get(taskNo - 1);
+                        completedTask.markAsDone();
+                        System.out.println("Task marked complete:");
+                        System.out.println(completedTask.toString());
+                    }
+                } else if (next.length() >= 6 && next.substring(0, 6).equalsIgnoreCase("delete")) {
+                    int taskNo = Integer.parseInt(next.substring(7));
+                    if (taskNo > list.size()) {
+                        throw new DukeException("Task does not exist _(´ཀ`」 ∠)_");
+                    } else {
+                        Task deletedTask = list.remove(taskNo - 1);
+                        System.out.println("Task deleted:");
+                        System.out.println(deletedTask.toString());
+                    }
                 } else {
                     Task newTask;
                     if (next.length() >= 4 && next.substring(0, 4).equalsIgnoreCase("todo")) {
@@ -61,7 +77,7 @@ public class Duke {
                         throw new DukeException("I have no idea what that means ¯\\_(ツ)_/¯");
                     }
                     list.add(newTask);
-                    System.out.println("added: " + newTask.toString());
+                    System.out.println("Added: " + newTask.toString());
                     System.out.println("Total tasks: " + list.size());
                 }
             }
