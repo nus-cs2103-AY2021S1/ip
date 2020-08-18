@@ -1,0 +1,5 @@
+todo App
+deadline HW /by Thursday
+event Meeting /on Tuesday 10am
+list
+bye
