@@ -8,6 +8,7 @@ public class DukeLogic {
     }
 
     public void executeCommand(String command) {
+        command = command.trim();
         try {
             if(command.equals("list")){
                 printTaskList();
@@ -26,11 +27,11 @@ public class DukeLogic {
             System.out.println("    ____________________________________________________________");
         } catch (IncompleteTaskException e) {
             System.out.println("    ____________________________________________________________");
-            System.out.println("    Oh dear! Your task description seems to be incomplete ;A;");
+            System.out.println("    Oh dear! Your task description seems to be incomplete :<");
             System.out.println("    ____________________________________________________________");
         } catch (InvalidTaskException e) {
             System.out.println("    ____________________________________________________________");
-            System.out.println("    Oh noes! I don't think you specified a valid task index ;A;");
+            System.out.println("    Oh noes! I don't think you specified a valid task index :<");
             System.out.println("    ____________________________________________________________");
         }
     }

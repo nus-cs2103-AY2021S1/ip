@@ -16,7 +16,7 @@
     Oh noes! I'm not sure what that means ;A;
     ____________________________________________________________
     ____________________________________________________________
-    Oh dear! Your task description seems to be incomplete ;A;
+    Oh dear! Your task description seems to be incomplete :<
     ____________________________________________________________
     ____________________________________________________________
      Okies! I've added this task~
@@ -28,10 +28,10 @@
     1. [T][?] exercise
     ____________________________________________________________
     ____________________________________________________________
-    Oh dear! Your task description seems to be incomplete ;A;
+    Oh dear! Your task description seems to be incomplete :<
     ____________________________________________________________
     ____________________________________________________________
-    Oh dear! Your task description seems to be incomplete ;A;
+    Oh dear! Your task description seems to be incomplete :<
     ____________________________________________________________
     ____________________________________________________________
      Okies! I've added this task~
@@ -44,10 +44,10 @@
     2. [D][?] finish nekobot (by: 20 Aug)
     ____________________________________________________________
     ____________________________________________________________
-    Oh dear! Your task description seems to be incomplete ;A;
+    Oh dear! Your task description seems to be incomplete :<
     ____________________________________________________________
     ____________________________________________________________
-    Oh dear! Your task description seems to be incomplete ;A;
+    Oh dear! Your task description seems to be incomplete :<
     ____________________________________________________________
     ____________________________________________________________
      Okies! I've added this task~
@@ -71,7 +71,25 @@
     3. [E][?] sleep (at: tonight)
     ____________________________________________________________
     ____________________________________________________________
-    Oh noes! I don't think you specified a valid task index ;A;
+     Got it! I'll remove this task :>
+       [D][?] finish nekobot (by: 20 Aug)
+     Only 2 tasks left!!
+    ____________________________________________________________
+    ____________________________________________________________
+    Here are the tasks in your list!!
+    1. [T][?] exercise
+    2. [E][?] sleep (at: tonight)
+    ____________________________________________________________
+    ____________________________________________________________
+    Oh noes! I don't think you specified a valid task index :<
+    ____________________________________________________________
+    ____________________________________________________________
+    Here are the tasks in your list!!
+    1. [T][?] exercise
+    2. [E][?] sleep (at: tonight)
+    ____________________________________________________________
+    ____________________________________________________________
+    Oh noes! I don't think you specified a valid task index :<
     ____________________________________________________________
     ____________________________________________________________
      Yay! I've marked this task as done :3
@@ -80,8 +98,7 @@
     ____________________________________________________________
     Here are the tasks in your list!!
     1. [T][?] exercise
-    2. [D][?] finish nekobot (by: 20 Aug)
-    3. [E][?] sleep (at: tonight)
+    2. [E][?] sleep (at: tonight)
     ____________________________________________________________
     ____________________________________________________________
      Bye~ Hope to see you again soon ;w;

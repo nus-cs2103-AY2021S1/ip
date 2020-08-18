@@ -13,6 +13,10 @@ event sleep /at tonight
 list
 done 2
 list
+delete 2
+list
+delete 9
+list
 done 0
 done 1
 list
