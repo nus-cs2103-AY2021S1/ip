@@ -21,36 +21,38 @@ public class Commands {
         while (shouldBreak) {
             String[] inputArray = inputs.split(" ", 2);
             try {
-                switch (Input.valueOf(inputArray[0].toUpperCase())) {
-                case LIST:
-                    this.lst();
-                    inputs = scanner.nextLine().trim();
-                    break;
-                case BYE:
-                    System.out.println("~ \n I will be back \n~ ");
-                    shouldBreak = !shouldBreak;
-                    break;
-                case DONE:
-                    markDone(inputArray);
-                    inputs = scanner.nextLine().trim();
-                    break;
-                case TODO:
-                    addTodo(inputArray);
-                    inputs = scanner.nextLine().trim();
-                    break;
-                case DEADLINES:
-                    addDeadline(inputArray);
-                    inputs = scanner.nextLine().trim();
-                    break;
-                case EVENTS:
-                    addEvent(inputArray);
-                    inputs = scanner.nextLine().trim();
-                    break;
-                case DELETE:
-                    deleteItem(inputArray);
-                    inputs = scanner.nextLine().trim();
-                    break;
-                default:
+                if (find(inputArray[0])) {
+                    switch (Input.valueOf(inputArray[0].toUpperCase())) {
+                    case LIST:
+                        this.lst();
+                        inputs = scanner.nextLine().trim();
+                        break;
+                    case BYE:
+                        System.out.println("~ \n I will be back \n~ ");
+                        shouldBreak = !shouldBreak;
+                        break;
+                    case DONE:
+                        markDone(inputArray);
+                        inputs = scanner.nextLine().trim();
+                        break;
+                    case TODO:
+                        addTodo(inputArray);
+                        inputs = scanner.nextLine().trim();
+                        break;
+                    case DEADLINES:
+                        addDeadline(inputArray);
+                        inputs = scanner.nextLine().trim();
+                        break;
+                    case EVENTS:
+                        addEvent(inputArray);
+                        inputs = scanner.nextLine().trim();
+                        break;
+                    case DELETE:
+                        deleteItem(inputArray);
+                        inputs = scanner.nextLine().trim();
+                        break;
+                    }
+                } else {
                     throw new DukeException("~\n ERROR... INPUT NOT RECOGNIZED. \n PLEASE TRY AGAIN \n~");
                 }
             } catch (DukeException dukeException) {
@@ -60,7 +62,7 @@ public class Commands {
         }
     }
 
-    private void markDone(String[] inputs) throws DukeException {
+    public void markDone(String[] inputs) throws DukeException {
         if (inputs.length > 1 && Character.isDigit(inputs[1].charAt(0))) {
             int taskNumber = Character.getNumericValue(inputs[1].charAt(0)) - 1;
             if (!taskList.isEmpty() && taskNumber < taskList.size()) {
@@ -139,7 +141,7 @@ public class Commands {
         }
     }
 
-    private void deleteItem(String[] inputs) throws DukeException {
+    public void deleteItem(String[] inputs) throws DukeException {
         if (inputs.length > 1 && Character.isDigit(inputs[1].charAt(0))) {
             int taskNumber = Character.getNumericValue(inputs[1].charAt(0)) - 1;
             if (!taskList.isEmpty() && taskNumber < taskList.size()) {
@@ -153,5 +155,14 @@ public class Commands {
             throw new DukeException("~\n ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n " +
                     "PLEASE TRY AGAIN \n~");
         }
+    }
+
+    public static boolean find(String input) {
+        for (Input i : Input.values()) {
+            if (input.toUpperCase().equals(i.toString())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
