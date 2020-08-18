@@ -73,13 +73,13 @@ public class TodoList {
                 throw new InvalidIndexException("a");
             } catch (ArrayIndexOutOfBoundsException error) {
                 // When "done" is not followed by any number
-                System.out.println("Dukeexion");
-                System.out.println("Please let me know which task you are referring to!");
+                throw new InvalidIndexException("a");
             } catch (IndexOutOfBoundsException error) {
                 // When "done is followed by a number that is out of range
+                throw new DukeIndexOutOfBoundsException("a");
             }
         } catch (DukeException error) {
-            System.out.println("Dukeexception");
+            System.out.println(error.getMessage());
         }
     }
 

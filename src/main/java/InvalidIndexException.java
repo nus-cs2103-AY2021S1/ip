@@ -5,6 +5,6 @@ public class InvalidIndexException extends DukeException {
 
     @Override
     public String getMessage() {
-        return "OOPS!!! The description of a todo cannot be empty.";
+        return "OOPS!!! Please enter a valid index!";
     }
 }
