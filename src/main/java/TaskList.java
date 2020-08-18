@@ -3,7 +3,6 @@ import java.util.ArrayList;
 public class TaskList {
 
     private ArrayList<Task> taskArrayList;
-    private String textIndentation = "     ";
 
     TaskList() {
         taskArrayList = new ArrayList<>();
@@ -22,9 +21,11 @@ public class TaskList {
             return "No tasks found";
         } else {
             StringBuilder output = new StringBuilder();
+            String textIndentation = "     ";
             int listSize = taskArrayList.size();
             for (int i = 0; i < listSize; i++) {
-                String eachTaskString = textIndentation + (i + 1) + ". " + taskArrayList.get(i);
+
+                String eachTaskString = textIndentation + (i + 1) + ". " + taskArrayList.get(i).printTaskMessage() + "\n";
                 output.append(eachTaskString);
             }
             return output.toString();
