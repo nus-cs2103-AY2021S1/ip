@@ -7,7 +7,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public void execute(String str) {
         String exitWords = "Bye, hope to see you again soon!";
 
         UIPrint.drawLine(UIPrint.star, 50);
