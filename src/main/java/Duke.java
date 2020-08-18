@@ -29,7 +29,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
          System.out.println("Hello from\n" + logo);
          **/
-        String welcome = line + "     Hello! I'm Cartona\n" +
+        String welcome = line + "     Hello! I'm Cartona (no relation to Cortana).\n" +
                          "     What can I do for you?\n" + line;
 
         System.out.println(welcome);
