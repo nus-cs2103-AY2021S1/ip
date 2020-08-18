@@ -9,12 +9,14 @@ public class Task {
         this.description = description;
     }
 
-    public void completeTask() {
+    public Task completeTask() {
         isComplete = true;
+        return this;
     }
 
-    public void resetTask() {
+    public Task resetTask() {
         isComplete = false;
+        return this;
     }
 
     @Override
