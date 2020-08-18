@@ -10,7 +10,7 @@ public class Duke {
 
         // Create horizontal line.
         StringBuilder line = new StringBuilder();
-        line.append("_".repeat(50));
+        line.append("_".repeat(55));
 
         // Print greeting message.
         System.out.println(line + "\n" + " Hey there! I am Popi" + "\n"
@@ -28,7 +28,7 @@ public class Duke {
                 checkInput(input);
             } catch (UnknownInputException | TodoIncompleteException | EventIncompleteException
                 | DeadlineIncompleteException | DoneIncompleteException | NoInputException
-                    | DoneOutOfListException e) {
+                    | DoneOutOfListException | DeleteIncompleteException| DeleteOutOfListException e) {
                 System.out.println(line + "\n" + e.getMessage() + "\n" + line + "\n" + " ");
                 continue;
             }
@@ -51,6 +51,12 @@ public class Duke {
                 t.markAsDone();
                 System.out.println(line + "\n" + " Yay! I have marked this task as done: " + "\n"
                     + "   " + t.toString() + "\n" + line);
+            } else if (s[0].equals("delete")) {
+                Task t = storage.get(Integer.parseInt(s[1]) - 1);
+                storage.remove(Integer.parseInt(s[1]) - 1);
+                System.out.println(line + "\n" + " Okie! I have deleted this task: " + "\n"
+                    + "   " + t.toString() + "\n" + " Now you have " + storage.size() + (storage.size() > 1
+                        ? " tasks." : " task.") + "\n" + line);
             } else {
                 Task t;
                 if (s[0].equals("event")) {
@@ -72,8 +78,8 @@ public class Duke {
                 }
                 storage.add(t);
                 System.out.println(line + "\n" + " Okay! I have added this task:" + "\n" + "   "
-                    + t.toString() + "\n" + " Now you have " + storage.size() + (storage.size() > 1 ? " tasks"
-                        : " task") + "\n" + line);
+                    + t.toString() + "\n" + " Now you have " + storage.size() + (storage.size() > 1 ? " tasks."
+                        : " task.") + "\n" + line);
             }
         }
     }
@@ -81,7 +87,7 @@ public class Duke {
     // Method to check user input
     public static void checkInput(String line) throws UnknownInputException, TodoIncompleteException
         ,EventIncompleteException, DeadlineIncompleteException, DoneIncompleteException, NoInputException
-            ,DoneOutOfListException {
+            ,DoneOutOfListException, DeleteIncompleteException, DeleteOutOfListException {
 
         // Store all valid commands
         ArrayList<String> validCommand = new ArrayList<>();
@@ -90,26 +96,34 @@ public class Duke {
         validCommand.add("deadline");
         validCommand.add("event");
         validCommand.add("todo");
+        validCommand.add("delete");
         validCommand.add("bye");
         String[] input = line.split(" ");
 
-        if (input[0].equals("")) {
+        String command = input[0];
+        if (command.equals("")) {
             throw new NoInputException();
         } else if (!validCommand.contains(input[0])) {
             throw new UnknownInputException();
         } else if (input.length == 1) {
-            if (input[0].equals("done")) {
+            if (command.equals("done")) {
                 throw new DoneIncompleteException();
-            } else if (input[0].equals("deadline")) {
+            } else if (command.equals("deadline")) {
                 throw new DeadlineIncompleteException();
-            } else if (input[0].equals("event")) {
+            } else if (command.equals("event")) {
                 throw new EventIncompleteException();
-            } else if (input[0].equals("todo")) {
+            } else if (command.equals("todo")) {
                 throw new TodoIncompleteException();
+            } else if (command.equals("delete")) {
+                throw new DeleteIncompleteException();
             }
-        } else if (input[0].equals("done")) {
+        } else if (command.equals("done")) {
             if (Integer.parseInt(input[1]) < 1) {
                 throw new DoneOutOfListException();
+            }
+        } else if (command.equals("delete")) {
+            if (Integer.parseInt(input[1]) < 1) {
+                throw new DeleteOutOfListException();
             }
         }
     }

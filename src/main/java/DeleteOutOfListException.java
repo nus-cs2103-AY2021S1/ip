@@ -1,6 +1,6 @@
 package main.java;
 
-public class DoneOutOfListException extends Exception {
+public class DeleteOutOfListException extends Exception {
 
     @Override
     public String getMessage() {

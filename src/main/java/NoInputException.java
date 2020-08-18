@@ -4,6 +4,6 @@ public class NoInputException extends Exception{
 
     @Override
     public String getMessage() {
-        return "No input detected.";
+        return " No input detected.";
     }
 }
