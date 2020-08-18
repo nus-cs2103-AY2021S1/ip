@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,7 +22,10 @@ public class Duke {
         System.out.println(seperator);
     }
 
-    public static void completeTask(String newLine) {
+    public static void completeTask(String newLine) throws InvalidInputException {
+        if(newLine.length() <= 5) {
+            throw new InvalidInputException("\t☹ OOPS!!! Please specify which task you want to complete!");
+        }
         int completed = Integer.parseInt(newLine.substring(5));
         Task current = toDoList.get(completed - 1);
         current.completeTask();
@@ -31,13 +35,10 @@ public class Duke {
         System.out.println();
     }
 
-//    public static void addTask(String newLine) {
-//        System.out.println(seperator);
-//        System.out.println("\tadded: "+newLine);
-//        System.out.println(seperator);
-//        toDoList.add(new Task(newLine));
-//    }
-    private static void deadlineTask(String newLine) {
+    private static void deadlineTask(String newLine) throws InvalidInputException {
+        if(newLine.length() <= 9) {
+            throw new InvalidInputException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
+        }
         String[] splitWord = newLine.split("/");
         Deadlines task = new Deadlines(splitWord[0].substring(9),splitWord[1]);
         toDoList.add(task);
@@ -47,7 +48,10 @@ public class Duke {
         System.out.println("\tNow you have " + toDoList.size() + " tasks in the list.");
         System.out.println(seperator);
     }
-    private static void eventTask(String newLine) {
+    private static void eventTask(String newLine) throws  InvalidInputException{
+        if(newLine.length() <= 6) {
+            throw new InvalidInputException("\t☹ OOPS!!! The description of an event cannot be empty.");
+        }
         String[] splitWord = newLine.split("/");
         Events task = new Events(splitWord[0].substring(6),splitWord[1]);
         toDoList.add(task);
@@ -58,11 +62,31 @@ public class Duke {
         System.out.println(seperator);
     }
 
-    private static void todoTask(String newLine) {
+    private static void todoTask(String newLine) throws InvalidInputException {
+        if(newLine.length() <= 5) {
+            throw new InvalidInputException("\t☹ OOPS!!! The description of a todo cannot be empty.");
+        }
         ToDos task = new ToDos(newLine.substring(5));
         toDoList.add(task);
         System.out.println(seperator);
         System.out.println("\tGot it. I've added this task:");
+        System.out.println("\t"+task.toString());
+        System.out.println("\tNow you have " + toDoList.size() + " tasks in the list.");
+        System.out.println(seperator);
+    }
+
+    public static void deleteTask(String newLine) throws InvalidInputException{
+        if(newLine.length() <= 7) {
+            throw new InvalidInputException("\t☹ OOPS!!! The description of a delete operation cannot be empty / invalid index.");
+        }
+        int index = Integer.parseInt(newLine.substring(7));
+        if( index >= toDoList.size()) {
+            throw new InvalidInputException("\t☹ OOPS!!! The description of a delete operation cannot be empty / invalid index.");
+        }
+        Task task = toDoList.get(index-1);
+        toDoList.remove(index-1);
+        System.out.println(seperator);
+        System.out.println("\tNoted. I've removed this task:");
         System.out.println("\t"+task.toString());
         System.out.println("\tNow you have " + toDoList.size() + " tasks in the list.");
         System.out.println(seperator);
@@ -88,19 +112,20 @@ public class Duke {
                     System.out.println("\tBye. Hope to see you again soon!");
                     System.out.println(seperator);
                     break;
-
                 } else if (newLine.equals("list")) {
                     listTask();
-                } else if (newLine.length() > 5 && newLine.substring(0, 4).equals("done")) {
+                } else if (newLine.length() >= 4 && newLine.substring(0, 4).equals("done")) {
                     completeTask(newLine);
-                } else if (newLine.length() > 5 && newLine.substring(0, 4).equals("todo")) {
+                } else if (newLine.length() >= 4 && newLine.substring(0, 4).equals("todo")) {
                     todoTask(newLine);
-                } else if (newLine.length() > 9 && newLine.substring(0, 8).equals("deadline")) {
+                } else if (newLine.length() >= 8 && newLine.substring(0, 8).equals("deadline")) {
                     deadlineTask(newLine);
-                } else if (newLine.length() > 6 && newLine.substring(0, 5).equals("event")) {
+                } else if (newLine.length() >= 5 && newLine.substring(0, 5).equals("event")) {
                     eventTask(newLine);
+                } else if (newLine.length() >= 6 && newLine.substring(0, 6).equals("delete")) {
+                    deleteTask(newLine);
                 } else {
-                    throw new InvalidInputException(newLine);
+                    throw new InvalidInputException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (InvalidInputException e) {
                 System.out.println(seperator);
