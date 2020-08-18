@@ -37,21 +37,40 @@ public class Duke {
     }
 
     private static void addTask(String display) {
-        if (display.length() >= 4 && display.substring(0, 4).equals("todo")) {
-            tasks.add(new ToDo(display.substring(5)));
-        } else if (display.length() >= 8 && display.substring(0, 8).equals("deadline")) {
-            int idx = display.indexOf(" /by ");
-            tasks.add(new Deadline(display.substring(9, idx), display.substring(idx + 5)));
-        } else if (display.length() >= 5 && display.substring(0, 5).equals("event")) {
-            int idx = display.indexOf(" /at ");
-            tasks.add(new Event(display.substring(6, idx), display.substring(idx + 5)));
-        } else {
-            System.out.println("Could not identify task type.");
-            return;
-        }
+        try {
+            if (display.length() >= 4 && display.substring(0, 4).equals("todo")) {
+                if (display.length() == 4 || display.substring(4).isBlank()) {
+                    throw new TaskException(TaskType.TODO, "description",  "cannot be empty.");
+                } else {
+                    tasks.add(new ToDo(display.substring(5)));
+                }
+            } else if (display.length() >= 8 && display.substring(0, 8).equals("deadline")) {
+                int idx = display.indexOf(" /by ");
+                if (idx == -1 || display.length() == idx + 5 || display.substring(idx + 5).isBlank()) {
+                    throw new TaskException(TaskType.DEADLINE, "time", "cannot be identified.");
+                } else if (display.substring(9, idx).isBlank()) {
+                    throw new TaskException(TaskType.DEADLINE, "description", "cannot be empty.");
+                } else {
+                    tasks.add(new Deadline(display.substring(9, idx), display.substring(idx + 5)));
+                }
+            } else if (display.length() >= 5 && display.substring(0, 5).equals("event")) {
+                int idx = display.indexOf(" /at ");
+                if (idx == -1 || display.length() < idx + 5) {
+                    throw new TaskException(TaskType.EVENT, "time", "cannot be identified.");
+                } else if (display.substring(6, idx).isBlank()) {
+                    throw new TaskException(TaskType.EVENT, "description", "cannot be empty.");
+                } else {
+                    tasks.add(new Event(display.substring(6, idx), display.substring(idx + 5)));
+                }
+            } else {
+                throw new DukeException("I don't know what that means");
+            }
 
-        Task task = tasks.get(tasks.size() - 1);
-        formatResponse("Got it. I've added this task: ", INDENT + task.toString(), "Now you have " + tasks.size() + " task" + (tasks.size() == 1 ? "" : "s") + " in the list.");
+            Task task = tasks.get(tasks.size() - 1);
+            formatResponse("Got it. I've added this task: ", INDENT + task.toString(), "Now you have " + tasks.size() + " task" + (tasks.size() == 1 ? "" : "s") + " in the list.");
+        } catch (TaskException |  DukeException err) {
+            formatResponse(err.getMessage());
+        }
     }
 
     public static void main(String[] args) {
@@ -63,9 +82,13 @@ public class Duke {
             if (display.equals("list")) {
                 formatList(tasks);
             } else if (display.length() >= 4 && display.substring(0, 4).equals("done")) {
-                int idx = Integer.parseInt(String.valueOf(display.charAt(5))) - 1;
-                tasks.get(idx).markAsDone();
-                formatDoneTask(tasks.get(idx));
+                try {
+                    int idx = Integer.parseInt(String.valueOf(display.charAt(5))) - 1;
+                    tasks.get(idx).markAsDone();
+                    formatDoneTask(tasks.get(idx));
+                } catch (IndexOutOfBoundsException ex) {
+                    formatResponse("Task index is empty / out of bounds.");
+                }
             } else if (!display.equals("bye")) {
                 addTask(display);
             }

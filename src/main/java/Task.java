@@ -1,9 +1,33 @@
+enum TaskType {
+    TODO{
+        @Override
+        public String toString() {
+            return "todo";
+        }
+    },
+    DEADLINE{
+        @Override
+        public String toString() {
+            return "deadline";
+        }
+    },
+    EVENT{
+        @Override
+        public String toString() {
+            return "event";
+        }
+    }
+}
+
 public abstract class Task {
+
     protected String description;
     protected boolean isDone;
+    private final TaskType taskType;
 
-    public Task(String description) {
+    public Task(String description, TaskType taskType) {
         this.description = description;
+        this.taskType = taskType;
         this.isDone = false;
     }
 
