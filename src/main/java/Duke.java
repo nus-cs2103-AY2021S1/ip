@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 public class Duke {
     static Scanner scanner = new Scanner(System.in);
+    static ArrayList<Task> taskList = new ArrayList<>();
+
     public static void main(String[] args) {
         String line = "    ____________________________________________________________\n";
         String greeting = line
@@ -10,28 +12,29 @@ public class Duke {
                 + "      What do you want?\n"
                 + line;
         System.out.println(greeting);
-        ArrayList<String> list = new ArrayList<>();
+
         String command = scanner.nextLine();
         String message;
         while (!command.equals("bye")) {
             if (command.equals("list")) {
                 message = line;
-                for (int i = 0; i < list.size(); i++) {
+                for (int i = 0; i < taskList.size(); i++) {
                     message = message
                             + "      "
                             + (i + 1)
                             + ". "
-                            + list.get(i)
+                            + taskList.get(i)
                             + "\n";
                 }
                 message = message + line;
             } else {
+                Task task = new Task(command);
+                taskList.add(task);
                 message = line
                         + "      added: "
                         + command
                         + "\n"
                         + line;
-                list.add(command);
             }
             System.out.println(message);
             command = scanner.nextLine();
