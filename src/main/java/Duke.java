@@ -59,17 +59,17 @@ public class Duke {
         greet();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            String command = sc.next();
+            Command command = Command.valueOf(sc.next().toUpperCase());
             switch(command) {
-                case ("bye"): {
+                case BYE: {
                     exit();
                     break;
                 }
-                case ("list"): {
+                case LIST: {
                     listTasks();
                     break;
                 }
-                case ("todo"): {
+                case TODO: {
                     String task = sc.nextLine().trim();
                     if (task.isEmpty()) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -77,7 +77,7 @@ public class Duke {
                     addTodoTask(task);
                     break;
                 }
-                case ("deadline"): {
+                case DEADLINE: {
                     String[] task = sc.nextLine().trim().split(" /by ");
                     if (task[0].isEmpty()) {
                         throw new DukeException("☹ OOPS!!! The description of a deadline task cannot be empty.");
@@ -88,7 +88,7 @@ public class Duke {
                     addDeadlineTask(task[0], task[1]);
                     break;
                 }
-                case ("event"): {
+                case EVENT: {
                     String[] task = sc.nextLine().trim().split(" /at ");
                     if (task[0].isEmpty()) {
                         throw new DukeException("☹ OOPS!!! The description of an event task cannot be empty.");
@@ -99,7 +99,7 @@ public class Duke {
                     addEventTask(task[0], task[1]);
                     break;
                 }
-                case ("done"): {
+                case DONE: {
                     int index = sc.nextInt();
                     if (index > tasks.size() || index < 1) {
                         throw new DukeException("☹ OOPS!!! There is no such task.");
@@ -107,17 +107,13 @@ public class Duke {
                     completeTask(index);
                     break;
                 }
-                case ("delete"): {
+                case DELETE: {
                     int index = sc.nextInt();
                     if (index > tasks.size() || index < 1) {
                         throw new DukeException("☹ OOPS!!! There is no such task.");
                     }
                     deleteTask(index);
                     break;
-                }
-                default: {
-                    //Invalid commands
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
         }
@@ -130,6 +126,8 @@ public class Duke {
             duke.initializeChatbot();
         } catch (DukeException ex) {
             System.out.println(ex);
+        } catch (IllegalArgumentException e) {
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }
