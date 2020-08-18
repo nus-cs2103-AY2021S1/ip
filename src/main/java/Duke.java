@@ -4,17 +4,17 @@ public class Duke {
 
     private static String horizontalLine = "    ____________________________________________________________";
     private static String textIndentation = "     ";
-    private static String greetMessage = " Hello! I'm Duke\n" +
-            Duke.textIndentation + " What can I do for you?";
-    private static String exitMessage = "Bye. Hope to see you again soon!";
+    private static String greetMessage = Duke.textIndentation + "Hello! I'm Duke\n" +
+            Duke.textIndentation + "What can I do for you?";
+    private static String exitMessage = Duke.textIndentation + "Bye. Hope to see you again soon!";
 
-    private static TextList textList = new TextList();
+    private static TaskList taskList;
 
     public static void main(String[] args) {
 
-        Duke.textList = new TextList();
+        Duke.taskList = new TaskList();
 
-        Duke.printMessage(Duke.greetMessage);
+        Duke.printText(Duke.greetMessage);
 
         Scanner sc = new Scanner(System.in);
 
@@ -22,30 +22,20 @@ public class Duke {
             String inputMessage = sc.next();
 
             if (inputMessage.toLowerCase().equals("bye")) {
-                Duke.printMessage(exitMessage);
+                Duke.printText(exitMessage);
                 break;
             } else if (inputMessage.toLowerCase().equals("list")) {
-                Duke.printList();
+                Duke.printText(Duke.taskList.printTaskList());
             } else {
-                textList.addToList(inputMessage);
-                Duke.printMessage(inputMessage);
+                taskList.addToList(new Task(inputMessage));
+                Duke.printText(Duke.textIndentation + "added: " + inputMessage);
             }
         }
     }
 
-    static void printMessage(String message) {
+    static void printText(String text) {
         System.out.println(Duke.horizontalLine);
-        System.out.println(Duke.textIndentation + message);
+        System.out.println(text);
         System.out.println(Duke.horizontalLine);
-    }
-
-    static void printList() {
-        if (Duke.textList.isEmpty()) {
-            Duke.printMessage("No tasks found");
-        } else {
-            System.out.println(Duke.horizontalLine);
-            Duke.textList.printList();
-            System.out.println(Duke.horizontalLine);
-        }
     }
 }
