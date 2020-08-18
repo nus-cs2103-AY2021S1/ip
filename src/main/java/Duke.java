@@ -152,8 +152,9 @@ public class Duke {
                     case TASK:
                         Task task = generate(input);
                         list.add(count++, task);
+                        String temp = count <= 1 ? " task" : " tasks";
                         System.out.println(output("Got it. I've added this task:\n\t    " + task +
-                                "\n\t  Now you have " + count + " tasks in the list."));
+                                "\n\t  Now you have " + count + temp + " in the list."));
                         break;
                     case BYE:
                         flag = false;
