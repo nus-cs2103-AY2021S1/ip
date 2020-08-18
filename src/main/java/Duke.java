@@ -75,16 +75,16 @@ public class Duke {
             }
         }
         else {
-            return "    Sorry, I don't understand.";
+            return "    Sorry, I don't understand."; //handles all unexpected inputs
         }
     }
 
     private static String printList(List<Task> list) {
         int size = list.size();
-        String str = "";
+        String string = "";
         for (int i = 1; i <= size; i++) {
-            str += "\n"+i+". "+list.get(i-1);
+            string += "\n"+i+". "+list.get(i-1);
         }
-        return str;
+        return string;
     }
 }
