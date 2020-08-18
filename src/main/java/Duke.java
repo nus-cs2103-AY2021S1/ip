@@ -11,12 +11,14 @@ public class Duke {
     }
 
     private static void echo() {
+        greet();
         Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()) {
+        while (true) {
             String input = sc.nextLine();
             if (input.equals("bye")) { //exit condition
                 String goodbye = "Bye. Hope to see you again soon!";
                 System.out.println(horiLine + goodbye + "\n" + horiLine);
+                break;
             } else if (input.equals("list")) {
                 int counter = 1;
                 System.out.println(horiLine);
@@ -30,6 +32,7 @@ public class Duke {
                 System.out.println(horiLine + "added: " + input + "\n" + horiLine);
             }
         }
+        sc.close();
     }
 
     public static void main(String[] args) {
