@@ -44,6 +44,46 @@ public class Duke {
                     System.out.println(tsk.toString());
                     System.out.println(horizontalDiv);
                 }
+            } else if (arr[0].equals("todo")) {
+                assert arr.length == 2;
+                Task newTask = new Todo(arr[1]);
+                ls.add(newTask);
+                System.out.println(horizontalDiv);
+                System.out.println("Got it. I've added this task: \n" + newTask.toString());
+                if(ls.size() > 1) {
+                    System.out.println("Now you have " + ls.size() + " tasks in the list.");
+                } else {
+                    System.out.println("Now you have " + ls.size() + " task in the list.");
+                }
+                System.out.println(horizontalDiv);
+            } else if (arr[0].equals("deadline")) {
+                assert arr.length == 2;
+                String secondStr = arr[1];
+                String[] arrOfStr = secondStr.split(" /by ", 2);
+                Task newTask = new Deadline(arrOfStr[0], arrOfStr[1]);
+                ls.add(newTask);
+                System.out.println(horizontalDiv);
+                System.out.println("Got it. I've added this task: \n" + newTask.toString());
+                if(ls.size() > 1) {
+                    System.out.println("Now you have " + ls.size() + " tasks in the list.");
+                } else {
+                    System.out.println("Now you have " + ls.size() + " task in the list.");
+                }
+                System.out.println(horizontalDiv);
+            } else if (arr[0].equals("event")) {
+                assert arr.length == 2;
+                String secondStr = arr[1];
+                String[] arrOfStr = secondStr.split(" /at ", 2);
+                Task newTask = new Event(arrOfStr[0], arrOfStr[1]);
+                ls.add(newTask);
+                System.out.println(horizontalDiv);
+                System.out.println("Got it. I've added this task: \n" + newTask.toString());
+                if (ls.size() > 1) {
+                    System.out.println("Now you have " + ls.size() + " tasks in the list.");
+                } else {
+                    System.out.println("Now you have " + ls.size() + " task in the list.");
+                }
+                System.out.println(horizontalDiv);
             } else {
                 Task newTask = new Task(str);
                 ls.add(newTask);
