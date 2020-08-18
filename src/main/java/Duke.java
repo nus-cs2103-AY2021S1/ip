@@ -57,7 +57,7 @@ public class Duke {
     }
 
     private static void addTask(String input) {
-        taskList.add(new Task(input));
+        taskList.add(new ToDo(input));
         printWithDivider("Successfully added: " + input);
     }
 
