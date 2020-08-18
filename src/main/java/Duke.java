@@ -23,7 +23,7 @@ public class Duke {
     // Driver method to respond to user input
     private static void respondPicker() {
         Scanner scan = new Scanner(System.in);
-        ArrayList<Task> userInputCollector = new ArrayList();
+        ArrayList<Task> userInputCollector = new ArrayList<>();
 
         String userInput = scan.nextLine();
         while (!userInput.equals("bye")) {

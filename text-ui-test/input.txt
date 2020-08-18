@@ -1,0 +1,9 @@
+Walk the dog
+todo running
+list
+done 1
+event swimming /at sunday
+deadline do tests /by wednesday
+list
+done 2
+bye
