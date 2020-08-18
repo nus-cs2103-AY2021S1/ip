@@ -24,21 +24,36 @@ public class TaskList {
                 this.taskList.add(newEvent);
                 return newEvent.toString();
             default:
-                return "ugh";
+                return "ugh how did we get here";
         }
     }
 
     // side effect: completes task + returns string for completed task
     protected String completeTask(int taskID) throws DukeException {
-        if (taskID > taskList.size()) {
-            throw new DukeException("invalid done command: task id > list size");
-        } else if (taskID < 1) {
-            throw new DukeException("invalid done command: task id < 1");
-        }
+        verifyTaskValidity(taskID);
         taskList.set(taskID - 1, taskList.get(taskID - 1).complete());
         return taskList.get(taskID - 1).toString();
     }
+    public String deleteTask(int taskID) throws DukeException {
+        verifyTaskValidity(taskID);
+        Task toDelete = taskList.get(taskID - 1);
+        taskList.remove(toDelete);
+        for(int i = taskID - 1; i < taskList.size(); i ++) {
+            taskList.set(i, taskList.get(i).decrementID());
+        }
+        Task.decrementTaskCount();
+        return toDelete.toString();
+    }
 
+
+    private boolean verifyTaskValidity(int taskID) throws DukeException {
+        if (taskID > taskList.size()) {
+            throw new DukeException("invalid task: task id > list size");
+        } else if (taskID < 1) {
+            throw new DukeException("invalid task: task id < 1");
+        }
+        return true;
+    }
 
     public ArrayList<Task> getAllTasks() {
         return taskList;
@@ -52,7 +67,9 @@ public class TaskList {
             }
         }
         return "Now you have " + incompleteTasks
-                + ((incompleteTasks == 1) ? " task" :" tasks")
+                + ((incompleteTasks == 1) ? " undone task" :" undone tasks")
                 + " in the list.";
     }
+
+
 }

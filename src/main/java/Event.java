@@ -13,7 +13,6 @@ public class Event extends Task {
     }
 
     public static Event createEvent(String[] parsedOutput) {
-
         String description = parsedOutput[1];
         String dateString = parsedOutput[2];
         String startTime = parsedOutput[3];

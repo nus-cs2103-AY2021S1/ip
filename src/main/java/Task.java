@@ -1,13 +1,13 @@
 public class Task {
     private static int taskCount = 0;
-    private final int taskId;
+    private int taskID;
     private boolean completed;
     private final String description;
 
     private static final String TICK = "\u2713", CROSS = "\u2718";
 
     public Task(String description) {
-        this.taskId = ++taskCount;
+        this.taskID = ++taskCount;
         this.description = description;
         this.completed = false;
     }
@@ -17,11 +17,25 @@ public class Task {
         return this;
     }
 
+    protected int getTaskID() {
+        return this.taskID;
+    }
+
+    protected Task decrementID() {
+        // todo: figure out how to get the taskCount decremented...
+        --this.taskID;
+        return this;
+    }
+
+    protected static void decrementTaskCount() {
+        --Task.taskCount;
+    }
+
     protected boolean isComplete() {
         return this.completed;
     }
     public int getID() {
-        return this.taskId;
+        return this.taskID;
     }
 
     @Override

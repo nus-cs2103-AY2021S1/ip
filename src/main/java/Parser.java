@@ -21,8 +21,8 @@ public class Parser {
             return new String[]{"bye"};
         } else if (input.equals("list")) {
             return new String[]{"list"};
-        } else if (command.equals("done")) {
-            return parseDone(input);
+        } else if (command.equals("done") || command.equals("delete")) {
+            return parseDoneDelete(input);
         } else {
             switch (command) {
                 case "todo":
@@ -37,14 +37,14 @@ public class Parser {
         }
     }
 
-    private String[] parseDone(String input) throws DukeException {
+    private String[] parseDoneDelete(String input) throws DukeException {
         StringTokenizer st = new StringTokenizer(input);
         if (st.countTokens() != 2) {
-            throw new DukeException("invalid done command: do things one at a time pls!");
+            throw new DukeException("invalid done/delete command: do things one at a time pls!");
         }
         String command = st.nextToken(), taskID = st.nextToken();
         if (!isInteger(taskID)) {
-            throw new DukeException("invalid done command: you gotta pass an integer");
+            throw new DukeException("invalid done/delete command: you gotta pass an integer");
         }
         return new String[]{command, taskID};
     }

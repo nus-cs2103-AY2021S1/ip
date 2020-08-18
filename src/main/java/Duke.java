@@ -9,6 +9,7 @@ public class Duke {
     private static final String indent = "    ";
     private static final String mode = "list";
     private static final String doneMessage = "Nice! I've marked this task as done";
+    private static final String deleteMessage = "Noted. I've removed this task:";
     private static final String gotMessage = "Got it. I've added this task:";
 
     static boolean terminate = false;
@@ -61,10 +62,17 @@ public class Duke {
     private static ArrayList<String> handleTask(String[] parsedOutput, TaskList tasks) throws DukeException {
         String command = parsedOutput[0];
         ArrayList<String> response = new ArrayList<>();
-        if (command.equals("done")) {
+        if (command.equals("done") || command.equals("delete")) {
+            boolean toDelete = command.equals("delete");
             int taskID = Integer.parseInt(parsedOutput[1]);
-            response.add(doneMessage);
-            response.add(tasks.completeTask(taskID));
+            if(toDelete) {
+                response.add(deleteMessage);
+                response.add(tasks.deleteTask(taskID));
+                response.add(tasks.getCurrentStatus());
+            } else {
+                response.add(doneMessage);
+                response.add(tasks.completeTask(taskID));
+            }
         } else {
             response.add(gotMessage);
             String reply = tasks.addEntry(parsedOutput);

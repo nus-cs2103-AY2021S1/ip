@@ -21,4 +21,5 @@ deadline /by Sunday
 event
 event /at Mon
 event /at 2-4pm
+delete 7
 bye

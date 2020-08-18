@@ -5,27 +5,27 @@
     ____________________________________________________________
     Got it. I've added this task:
     [T][✘] read book
-    Now you have 1 task in the list.
+    Now you have 1 undone task in the list.
     ____________________________________________________________
     ____________________________________________________________
     Got it. I've added this task:
     [D][✘] return book (by: June 6th)
-    Now you have 2 tasks in the list.
+    Now you have 2 undone tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
     Got it. I've added this task:
     [E][✘] project meeting (at: Aug 6th 2-4pm)
-    Now you have 3 tasks in the list.
+    Now you have 3 undone tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
     Got it. I've added this task:
     [T][✘] join sports club
-    Now you have 4 tasks in the list.
+    Now you have 4 undone tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
     Got it. I've added this task:
     [T][✘] borrow book
-    Now you have 5 tasks in the list.
+    Now you have 5 undone tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
     Here are the tasks in your list:
@@ -38,12 +38,12 @@
     ____________________________________________________________
     Got it. I've added this task:
     [D][✘] return book (by: Sunday)
-    Now you have 6 tasks in the list.
+    Now you have 6 undone tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
     Got it. I've added this task:
     [E][✘] project meeting (at: Mon 2-4pm)
-    Now you have 7 tasks in the list.
+    Now you have 7 undone tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
     Nice! I've marked this task as done
@@ -74,16 +74,16 @@
     upset parser: unknown command
     ____________________________________________________________
     ____________________________________________________________
-    invalid done command: do things one at a time pls!
+    invalid done/delete command: do things one at a time pls!
     ____________________________________________________________
     ____________________________________________________________
-    invalid done command: task id > list size
+    invalid task: task id > list size
     ____________________________________________________________
     ____________________________________________________________
-    invalid done command: task id < 1
+    invalid task: task id < 1
     ____________________________________________________________
     ____________________________________________________________
-    invalid done command: you gotta pass an integer
+    invalid done/delete command: you gotta pass an integer
     ____________________________________________________________
     ____________________________________________________________
     invalid deadline command: bad format, try deadline <desc> /by <dateString>
@@ -99,6 +99,11 @@
     ____________________________________________________________
     ____________________________________________________________
     invalid event command: you didn't pass in the date!
+    ____________________________________________________________
+    ____________________________________________________________
+    Noted. I've removed this task:
+    [E][✘] project meeting (at: Mon 2-4pm)
+    Now you have 3 undone tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
     Bye. Hope to see you again soon!
