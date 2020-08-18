@@ -20,8 +20,12 @@ public abstract class Task {
      * @param delimiter  Delimiter used.
      * @return Task portion of the string.
      */
-    static String getTaskString(String taskString, String delimiter) {
-        return taskString.split(delimiter)[0];
+    static String getTaskString(String taskString, String delimiter) throws DukeInvalidDescriptionException {
+        try {
+            return taskString.split(delimiter)[0];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeNoDescriptionException("Description text not given.");
+        }
     }
 
 
@@ -32,8 +36,12 @@ public abstract class Task {
      * @param delimiter  Delimiter used.
      * @return Date portion of the string.
      */
-    static String getDateString(String taskString, String delimiter) {
-        return taskString.split(delimiter)[1];
+    static String getDateString(String taskString, String delimiter) throws DukeInvalidDescriptionException {
+        try {
+            return taskString.split(delimiter)[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeNoDateException("Date not given in description text.");
+        }
     }
 
 

@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.Scanner;
 
 
@@ -62,10 +63,52 @@ public class Duke {
     }
 
 
-    private String markAsDone(String[] msgArr) throws IndexOutOfBoundsException {
-        int index = Integer.parseInt(msgArr[1]);
-        String statusMsg = this.list.markAsDone(index);
-        return statusMsg;
+    /**
+     * Marks an item as done.
+     *
+     * @param inputTextArr String array of the input text, split by " ".
+     * @return statusMSg to be printed.
+     * @throws IndexOutOfBoundsException Invalid index given or input text array is invalid.
+     */
+    private String markAsDone(String[] inputTextArr) throws IndexOutOfBoundsException {
+        try {
+            int index = Integer.parseInt(inputTextArr[1]);
+            String statusMsg = this.list.markAsDone(index);
+            return statusMsg;
+        } catch (NullPointerException e) {
+            // exception thrown from DukeList.markAsDone()
+            // index given in input text is invalid.
+            throw new IndexOutOfBoundsException("Invalid index given.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            // forwards ArrayIndexOutOfBoundsException from Integer.parseInt()
+            // inputTextArr is invalid.
+            throw new ArrayIndexOutOfBoundsException("Invalid inputTextArr.");
+        }
+    }
+
+
+    /**
+     * Deletes an item from the list.
+     *
+     * @param inputTextArr String array of the input text, split by " "
+     * @return statusMsg to be printed.
+     * @throws IndexOutOfBoundsException Invalid index given or input text array is invalid.
+     */
+    private String delete(String[] inputTextArr) throws IndexOutOfBoundsException {
+        try {
+            int index = Integer.parseInt(inputTextArr[1]);
+            String statusMsg = this.list.delete(index);
+            return statusMsg;
+        } catch (NullPointerException e) {
+            // exception thrown from DukeList.delete()
+            // index given in input text is invalid.
+            throw new IndexOutOfBoundsException("Invalid index given.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            // forwards ArrayIndexOutOfBoundsException from Integer.parseInt()
+            // inputTextArr is invalid.
+            throw new ArrayIndexOutOfBoundsException("Invalid inputTextArr.");
+        }
+
     }
 
 
@@ -103,6 +146,20 @@ public class Duke {
                             break;
                         }
 
+                    case ("delete"):
+                        try {
+                            String statusMsg = this.delete(msgArr);
+                            Duke.printMessage(statusMsg);
+                            break;
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            Duke.printMessage("OOPS!!! The index of `delete` cannot be empty.");
+                            break;
+                        } catch (IndexOutOfBoundsException e) {
+                            Duke.printMessage("OOPS!!! The index given is invalid.");
+                            break;
+                        }
+
+
                     default:
                         try {
                             String statusString = this.list.add(msgInput);
@@ -128,6 +185,8 @@ public class Duke {
         this.dukeLogic(sc);
 
         Duke.printMessage("Bye. Hope to see you again soon!");
+        
+        sc.close();
     }
 
 
