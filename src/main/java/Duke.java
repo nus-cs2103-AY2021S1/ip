@@ -75,7 +75,7 @@ public class Duke {
 
     private static void addTodo(String[] inputList) {
         if (inputList.length > 1) {
-            ToDo todo = new ToDo(rejoinString(inputList));
+            Todo todo = new Todo(rejoinString(inputList));
             taskList.add(todo);
             printWithDivider("Successfully added:\n" + todo.toString());
         } else {
