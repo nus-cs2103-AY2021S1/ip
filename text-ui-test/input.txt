@@ -6,6 +6,13 @@ deadline return book /by Wednesday
 event project meeting
 event project meeting /at Sun 2-4pm
 done 2
+list
 done 5
+list
+delete 0
+list
+delete 1
+list
+delete 9
 list
 bye
