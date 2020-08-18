@@ -8,7 +8,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        String sign = isDone ? "\u2713" : "\u2718"; //return tick or X symbols
+        String sign = isDone ? "✓" : "✘"; //return tick or X symbols
         return (String.format("[%s]", sign));
     }
 

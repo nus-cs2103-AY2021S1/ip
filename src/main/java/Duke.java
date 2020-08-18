@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 public class Duke {
     static String line = "    ____________________________________________________________";
     static Scanner sc = new Scanner(System.in);
