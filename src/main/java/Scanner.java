@@ -42,10 +42,12 @@ public class Scanner {
                         userTaskList.printList();
                         break;
                     default:
-                        Task addedTask = userTaskList.addItem(line);
-                        System.out.println(addedTask == null
-                                           ? "Invalid task."
-                                           :"added: " + addedTask);
+                        try {
+                            Task addedTask = userTaskList.addItem(line);
+                            System.out.println("added: " + addedTask);
+                        } catch (DukeException ex) {
+                            System.out.println(ex.getMessage());
+                        }
                         break;
                 }
             }

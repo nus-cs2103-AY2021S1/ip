@@ -4,12 +4,18 @@ import java.util.ArrayList;
 public class TaskList {
     private final List<Task> itemList = new ArrayList<>();
 
-    Task addItem(String item) {
+    Task addItem(String item) throws DukeException {
         String type = getItemType(item);
         Task taskToAdd = null;
         switch(type) {
             case "todo":
-                taskToAdd = new Todo(item.split("todo")[1].trim());
+                if (item.trim().equals("todo")) {
+                    throw new DukeException("Todos must have non-empty " +
+                                                    "descriptions!");
+                }
+
+                String todoDescription = item.split("todo")[1].trim();
+                taskToAdd = new Todo(todoDescription);
                 break;
             case "deadline":
                 taskToAdd = new Deadline(
