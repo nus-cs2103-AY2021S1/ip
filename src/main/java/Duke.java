@@ -18,9 +18,9 @@ public class Duke {
 
             if (sc.hasNext()) {
                 String input = sc.nextLine();
-                while (!input.equals("bye")) {
+                while (!input.equals(TaskElement.BYE.label)) {
                     try{
-                    if (input.equals("list")) {
+                    if (input.equals(TaskElement.LIST.label)) {
                         printLine();
                         System.out.println(" Here are the tasks in your list:");
                         int sizeStore = stringStore.size();
@@ -28,13 +28,13 @@ public class Duke {
                             System.out.println(i + "." + stringStore.get(i - 1));
                         }
                         printLine();
-                    } else if (input.split(" ")[0].equals("done")) {
+                    } else if (input.split(" ")[0].equals(TaskElement.DONE.label)) {
                         int doneTask = Integer.parseInt(input.split(" ")[1]) - 1;
                         if(doneTask + 1 > stringStore.size() || doneTask < 0){
                             throw new DukeInvalidDoneNumException(input);
                         }
                         stringStore.get(doneTask).markAsDone();
-                    } else if (input.split(" ")[0].equals("todo")) {
+                    } else if (input.split(" ")[0].equals(TaskElement.TODO.label)) {
                         if (input.split(" ").length == 1) {
                             throw new DukeEmptyToDoException(input);
                         }
@@ -42,7 +42,7 @@ public class Duke {
                         Todo todoTask = new Todo(tasker);
                         stringStore.add(todoTask);
                         printer(todoTask);
-                    } else if (input.split(" ")[0].equals("deadline")) {
+                    } else if (input.split(" ")[0].equals(TaskElement.DEADLINE.label)) {
                         if (input.split(" ").length == 1) {
                             throw new DukeEmptyDeadlineException(input);
                         }
@@ -54,7 +54,7 @@ public class Duke {
                         Deadline deadlineTask = new Deadline(deadlinerparts[0], deadlinerparts[1]);
                         stringStore.add(deadlineTask);
                         printer(deadlineTask);
-                    } else if (input.split(" ")[0].equals("event")) {
+                    } else if (input.split(" ")[0].equals(TaskElement.EVENT.label)) {
                         if (input.split(" ").length == 1) {
                             throw new DukeEmptyEventException(input);
                         }
@@ -66,7 +66,7 @@ public class Duke {
                         Event eventTask = new Event(eventParts[0], eventParts[1]);
                         stringStore.add(eventTask);
                         printer(eventTask);
-                    } else if(input.split(" ")[0].equals("delete")){
+                    } else if(input.split(" ")[0].equals(TaskElement.DELETE.label)){
                         int deleteTask = Integer.parseInt(input.split(" ")[1]) - 1;
                         if(deleteTask + 1 > stringStore.size() || deleteTask < 0){
                             throw new DukeDeleteException(input);
