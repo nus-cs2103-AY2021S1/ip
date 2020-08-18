@@ -1,3 +1,4 @@
+list
 todo watch CS2105 Lecture 2
 event zoom meeting /at Wednesday 10pm
 list
@@ -8,5 +9,9 @@ list
 done 2
 done 100
 done 3
+deadline
 list
+todo
+event
+bhkd
 bye

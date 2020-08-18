@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
@@ -21,27 +21,28 @@ public class Duke {
         String input = sc.nextLine().trim();
 
         while (!type.equals("bye")) {
-            if (type.equals("list")) {
-                int listSize = list.size();
-                if (listSize == 0) {
-                    System.out.println("Your list is empty.");
-                } else {
-                    System.out.println("Here are the tasks in your list:");
-                    System.out.println(list);
-                }
-            } else if (type.equals("done")) {
-                int index = Integer.parseInt(input) - 1;
-                if (index > list.size() - 1) {
-                    System.out.println("Task number out of range.");
-                } else {
+            try {
+                if (type.equals("list")) {
+                    int listSize = list.size();
+                    if (listSize == 0) {
+                        throw new DukeException("OOPS!!! I'm sorry, your list is empty :<");
+                    } else {
+                        System.out.println("Here are the tasks in your list:");
+                        System.out.println(list);
+                    }
+                } else if (type.equals("done")) {
+                    int index = Integer.parseInt(input) - 1;
+                    Task task = list.markAsDone(index);
                     System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(list.markAsDone(index));
+                    System.out.println(task);
+                } else {
+                    Task task = list.addTask(type, input);
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println(task);
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
                 }
-            } else {
-                Task task = list.addTask(type, input);
-                System.out.println("Got it. I've added this task: ");
-                System.out.println(task);
-                System.out.println("Now you have " + list.size() + " tasks in the list.");
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
             System.out.println(line);
             type = sc.next();
