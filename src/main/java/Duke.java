@@ -28,10 +28,16 @@ public class Duke {
                 Duke.printText(Duke.taskList.toString());
             } else if (inputMessage.toLowerCase().startsWith("done")) {
                 String taskQueryIndexString = inputMessage.substring(4).trim();
-                int taskQueryIndex = Integer.parseInt(taskQueryIndexString);
-                Task completedTask = Duke.taskList.getTaskAt(taskQueryIndex);
-                completedTask.completeTask();
-                Duke.printText(Duke.completeTaskMessage + "\n" + Duke.textIndentation + completedTask);
+
+                try {
+                    int taskQueryIndex = Integer.parseInt(taskQueryIndexString);
+                    Task completedTask = Duke.taskList.getTaskAt(taskQueryIndex);
+                    completedTask.completeTask();
+                    Duke.printText(Duke.completeTaskMessage + "\n" + Duke.textIndentation + completedTask);
+                } catch (Exception e) {
+                    Duke.printText(Duke.textIndentation + "Please enter a valid task index");
+                }
+
             } else {
                 Duke.taskList.addToList(new Task(inputMessage));
                 Duke.printText(Duke.textIndentation + "added: " + inputMessage);
