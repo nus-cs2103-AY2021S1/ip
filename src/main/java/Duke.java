@@ -45,9 +45,9 @@ public class Duke {
             case "done":
                 handleDone(Integer.parseInt(tokens.get(1)));
                 break;
-//            case "remove":
-//                handleRemove(Integer.parseInt(tokens.get(1)));
-//                break;
+            case "delete":
+                handleRemove(Integer.parseInt(tokens.get(1)));
+                break;
             case "todo":
             case "deadline":
             case "event":
@@ -100,16 +100,17 @@ public class Duke {
             System.out.println(e.getMessage());
         }
     }
-//
-//    private static void handleRemove(int index) {
-//        try {
-//            Task task = Task.iRemove(index);
-//            System.out.println("Nice! I've marked this task as done:");
-//            System.out.println("    " + Task.getTask(index));
-//        } catch (IllegalArgumentException e) {
-//            System.out.println(e.getLocalizedMessage());
-//        }
-//    }
+
+    private static void handleRemove(int index) {
+        try {
+            Task task = Task.iRemove(index);
+            System.out.println("Noted. I've removed this task: ");
+            System.out.println("    " + task);
+            System.out.printf("Now you have %d tasks in the list. \n", Task.count());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     public static void main(String[] args) {
         greet();
