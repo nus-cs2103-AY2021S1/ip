@@ -11,15 +11,31 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Always at your service, \n" + logo);
+        System.out.println("\n Always at your service, \n" + logo + "\n");
         System.out.println("Your Majesty, I am your loyal Duke.");
-        System.out.println("How may I serve you?");
+        System.out.println("I offer a range of administrative services. Do type 'assist' to see the comprehensive list.");
         System.out.println();
     }
 
     public static String dashedLineBreak() {
         String dashedLine = "- ";
         return dashedLine.repeat(32);
+    }
+    
+    public static void assist() {
+        System.out.println(dashedLineBreak());
+        System.out.println("Greetings, Your Majesty. \n");
+        System.out.println("Use any of the commands on the left to access my quality services:");
+        System.out.println("\ttodo [TASK]: Adds a todo to your scroll");
+        System.out.println("\tdeadline [TASK] /by [DATE AND/OR TIME]: Adds a deadline to your scroll");
+        System.out.println("\tevent [TASK] /on [DATE AND/OR TIME]: Adds an event to your scroll");
+        System.out.println("\tscroll: Displays your scroll - your list of tasks");
+        System.out.println("\tconquer [NUMBER]: Marks the particular item on your scroll as DONE");
+        System.out.println("\tdelete [NUMBER]: Deletes the particular item from your scroll");
+        System.out.println("\tdismiss: This will be my cue to leave.");
+        System.out.println();
+        System.out.println("Now, how may I serve you?");
+        System.out.println(dashedLineBreak() + "\n");
     }
     
     public static void validateScannerInput(String input) throws DukeException {
@@ -55,9 +71,9 @@ public class Duke {
     public static void validateConquerDelete(String[] command) throws DukeException {
         try {
             Integer.parseInt(command[1]);
-        } catch (NumberFormatException err) {
+        } catch (Exception err) {
             throw new DukeException("Please enter valid numbers after your command, Your Majesty.");
-        }
+        } 
     }
 
     public static void printAllTasks() {
@@ -163,7 +179,7 @@ public class Duke {
             switch(splitUserInput[0].toLowerCase()) {
                 case "dismiss":
                     System.out.println(dashedLineBreak());
-                    System.out.println("Your wish is my command, Your Majesty. Till I see you again.");
+                    System.out.println("Your wish is my command, Your Majesty. Till I see you again. \n");
                     sc.close();
                     System.exit(0);
                     break;
@@ -175,6 +191,9 @@ public class Duke {
                     break;
                 case "delete":
                     deleteTask(splitUserInput);
+                    break;
+                case "assist":
+                    assist();
                     break;
                 default:
                     addTask(userInput);
