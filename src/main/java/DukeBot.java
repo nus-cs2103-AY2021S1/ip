@@ -3,9 +3,7 @@ import java.util.Scanner;
 
 public class DukeBot {
 
-    private ArrayList<String> tasks = new ArrayList<String>();
-    private ArrayList<String> taskstype = new ArrayList<String>();
-    private ArrayList<Boolean> tasksDone = new ArrayList<Boolean>();
+    private ArrayList<Task> tasks = new ArrayList<Task>();
 
     public void horizontalRule() {
         System.out.println("____________________________________________________________");
@@ -32,26 +30,31 @@ public class DukeBot {
     }
 
     public void addTask(String task, String type) {
-        this.tasks.add(task);
-        this.taskstype.add(type);
-        this.tasksDone.add(false);
-        System.out.println("added: " + task);
+
+        Task myTask = new Task(task,type);
+        this.tasks.add(myTask);
+        System.out.println("added: " + myTask);
+    }
+    public void addTask(String task, String type,String deadLine) {
+
+        Task myTask = new Task(task,type,deadLine);
+        this.tasks.add(myTask);
+        System.out.println("added: " + myTask);
     }
 
     public void deleteTask(int index) {
-        String task = "[✓] " + this.tasks.get(index);
+        Task myTask = this.tasks.get(index);
         this.tasks.remove(index);
-        this.taskstype.remove(index);
-        this.tasksDone.remove(index);
-        System.out.println("removed: " + task);
+        System.out.println("removed: " + myTask);
         numTask();
     }
 
     public void numTask() {
         int done = 0;
         int undone = 0;
-        for (int i = 0; i < tasksDone.size(); i++) {
-            if (tasksDone.get(i)) {
+        for (int i = 0; i < this.tasks.size(); i++) {
+            boolean finished = tasks.get(i).finished();
+            if (finished) {
                 done++;
             } else {
                 undone++;
@@ -84,7 +87,7 @@ public class DukeBot {
                 for (int i = 1; i < args1.length; i++) {
                     task += args1[i] + " ";
                 }
-                addTask(task, "[T]");
+                addTask( "[T]",task);
                 numTask();
             } else if (args1[0].equals("delete")) {
                 deleteTask(Integer.parseInt(args1[1]) - 1);
@@ -93,7 +96,7 @@ public class DukeBot {
                 for (int i = 1; i < args1.length; i++) {
                     task += args1[i] + " ";
                 }
-                addTask(task + "--- " + fullArg[1], "[D]");
+                addTask("[D]",task ,fullArg[1]);
                 numTask();
 
             } else if (args1[0].equals("event")) {
@@ -102,20 +105,16 @@ public class DukeBot {
                 for (int i = 1; i < args1.length; i++) {
                     task += args1[i] + " ";
                 }
-                addTask(task + "--- " + fullArg[1], "[E]");
+                addTask("[E]",task ,fullArg[1]);
                 numTask();
 
             } else if (currInput.equals("list")) {
                 for (int i = 0; i < this.tasks.size(); i++) {
-                    String checkBox = "[✗]";
-                    if (this.tasksDone.get(i)) {
-                        checkBox = "[✓]";
-                    }
-                    System.out.println("" + (i + 1) + "." + this.taskstype.get(i) + checkBox + " " + this.tasks.get(i));
+                    System.out.println("" + (i + 1)+"." + this.tasks.get(i));
                 }
             } else if (args1[0].equals("done")) {
                 int index = Integer.parseInt(args1[1]) - 1;
-                this.tasksDone.set(index, true);
+                this.tasks.get(index-1).setDone();
                 System.out.println("Nice I've marked this tasks as done");
                 System.out.println("[✓] " + this.tasks.get(index));
             } else {

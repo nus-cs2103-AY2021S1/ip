@@ -7,6 +7,14 @@ public class Task {
     private String details;
     private String deadLine = null;
 
+    public boolean finished(){
+        return this.done;
+    }
+
+    public void setDone(){
+        this.done=true;
+    }
+
     public Task(String type, String details) {
         this.type = type;
         this.details = details;
@@ -21,8 +29,8 @@ public class Task {
     @Override
     public String toString() {
         String checkbox = done? "[✓]":"[✗]" ;
-        String myDeadline = deadLine==null? "": deadLine;
+        String myDeadline = deadLine==null? "": "-------"+deadLine;
 
-        return this.type+checkbox+" "+ this.details+" "+ deadLine;
+        return this.type+checkbox+" "+ this.details+" "+ myDeadline;
     }
 }
