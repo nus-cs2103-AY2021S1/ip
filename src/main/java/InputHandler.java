@@ -38,8 +38,10 @@ public class InputHandler {
         switch (cmdWord) {
         case (CMD_LIST):
             handleList();
+            break;
         case (CMD_DONE):
             handleDone(Integer.parseInt(input[1]));
+            break;
         default:
             handleOthers(in, cmdWord);
         }
