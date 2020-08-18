@@ -2,80 +2,126 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Alice {
-    private final ArrayList<Task> ls;
+    private static final String prompt = "\n > ";
+    private final ArrayList<Task> tasks;
 
     public Alice() {
-        ls = new ArrayList<>();
-        greet();
-        prompt();
+        tasks = new ArrayList<>();
     }
 
-    public boolean reply(String s) {
-        if (s.equals("bye")) {
-            display("Goodbye. Hope to see you again soon!");
-            return false;
+    public String reply(String input) {
+        String[] arr = input.split(" ", 2);
+        try {
+            if (arr.length == 1) {
+                return frame_output(process_cmd(arr[0], "")) + prompt;
+            }
+            return frame_output(process_cmd(arr[0], arr[1])) + prompt;
+        } catch (AliceException ex) {
+            return frame_output(ex.getMessage()) + prompt;
         }
+    }
 
-        String[] arr = s.split(" ", 2);
-        if (arr[0].equals("list")) {
+    private String process_cmd(String cmd, String params) throws AliceException {
+        if (cmd.equals("list") && params.isBlank()) {
             // Display task list
-            print_list();
-        } else if (arr[0].equals("done")) {
+            return "Here are the tasks in your list:\n" + getTaskList();
+        } else if (cmd.equals("done")) {
             // Mark as done
-            try {
-                int index = Integer.parseInt(arr[1]) - 1;
-                ls.get(index).markAsDone();
-                display("Great work! I've marked this task as done:\n    " + ls.get(index));
-            } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                display("Sorry! I could not register that. Please use a valid number");
-            }
-        } else if (arr.length == 2 && arr[0].equals("todo")) {
+            return markTaskAsDone(params);
+        } else if (cmd.equals("todo")) {
             // Add to-do
-            addTask(new Todo(arr[1]));
-        } else if (arr.length == 2 && arr[0].equals("deadline")) {
-            String[] details = arr[1].split(" /by ", 2);
-            if (details.length == 2) {
-                addTask(new Deadline(details[0], details[1]));
-            } else {
-                display("Did you forget to include '/by'?");
-            }
-        } else if (arr.length == 2 && arr[0].equals("event")) {
-            String[] details = arr[1].split(" /at ", 2);
-            if (details.length == 2) {
-                addTask(new Event(details[0], details[1]));
-            } else {
-                display("Did you forget to include '/at'?");
-            }
+            return addTodo(params);
+        } else if (cmd.equals("deadline")) {
+            // Add deadline
+            return addDeadline(params);
+        } else if (cmd.equals("event")) {
+            // Add event
+            return addEvent(params);
+        } else if (cmd.isBlank()) {
+            // Empty command
+            throw new AliceException("Please give me something to do. T_T");
         } else {
-            display("Sorry! I could not register that.");
+            // Invalid command
+            throw new AliceException("That command is not in my dictionary!");
         }
-
-        prompt();
-        return true;
     }
 
-    private void addTask(Task t) {
-        ls.add(t);
-        display("Roger. I've added the task to your list:\n    " + t
-                + "\nNow you have " + ls.size() + " task in your list");
+    private String markTaskAsDone(String s_index) throws AliceException {
+        try {
+            int index = Integer.parseInt(s_index) - 1;
+            tasks.get(index).markAsDone();
+            return "Great work! I've marked this task as done:\n    " + tasks.get(index);
+        } catch (NumberFormatException e) {
+            throw new AliceException("That is not a valid number.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new AliceException("That task number is not in the list.");
+        }
     }
 
-    private void display(String s) {
-        System.out.println("____________________________________________________________\n"
+    private String addTodo(String details) throws AliceException {
+        if (!details.isBlank()) {
+            return addTask(new Todo(details));
+        } else {
+            throw new AliceException("The todo description cannot be left empty.");
+        }
+    }
+
+    private String addDeadline(String details) throws AliceException {
+        String[] desc_date = details.split(" /by ", 2);
+        if (desc_date.length == 2 && !desc_date[1].isBlank()) {
+            return addTask(new Deadline(desc_date[0], desc_date[1]));
+        } else if (details.isBlank()) {
+            // Empty description
+            throw new AliceException("The deadline description cannot be left empty.");
+        } else if (details.endsWith("/by")) {
+            // Empty date
+            throw new AliceException("You cannot create an deadline without the date.");
+        } else {
+            // No /by marker
+            throw new AliceException("I can't find the date. Did you forget to add '/by'?");
+        }
+    }
+
+    private String addEvent(String details) throws AliceException {
+        String[] desc_date = details.split(" /at ", 2);
+        if (desc_date.length == 2 && !desc_date[1].isBlank()) {
+            return addTask(new Event(desc_date[0], desc_date[1]));
+        } else if (details.isBlank()) {
+            // Empty event description
+            throw new AliceException("The event description cannot be left empty.");
+        } else if (details.endsWith("/at")) {
+            // Empty start-end time
+            throw new AliceException("You cannot create an event without the start and end time.");
+        } else {
+            // No /at marker
+            throw new AliceException("I can't find the start/end time. Did you forget to add '/at'?");
+        }
+    }
+
+    private String addTask(Task t) {
+        tasks.add(t);
+        return "Roger. I've added the task to your list:\n    " + t
+                + "\nNow you have " + tasks.size() + " task in your list";
+    }
+
+    private String frame_output(String s) {
+        return "____________________________________________________________\n"
                 + s
-                + "\n____________________________________________________________");
+                + "\n____________________________________________________________";
     }
 
-    private void print_list() {
-        System.out.println("____________________________________________________________" +
-                "\nHere are the tasks in your list:");
-        for (int i = 0; i < ls.size(); i++) {
-            System.out.println(i + 1 + ". " + ls.get(i));
+    private String getTaskList() {
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            s.append(i + 1).append(". ").append(tasks.get(i));
+            if (i < tasks.size() - 1) {
+                s.append("\n");
+            }
         }
-        System.out.println("____________________________________________________________");
+        return s.toString();
     }
 
-    private void greet() {
+    public String greet() {
         String logo = " _____  _     _____ _____  _____\n" +
                 "/  _  \\| |   |_   _/  __ \\|  ___|\n" +
                 "| |_| || |     | | | /  \\/| |__\n" +
@@ -83,23 +129,30 @@ public class Alice {
                 "| | | || |_____| |_| \\__/\\| |___\n" +
                 "\\_| |_/\\_____/\\___/ \\____/\\____/\n";
 
-        System.out.println(logo +
+        return logo +
                 "\nHello! I'm Alice\n" +
                 "How can I help you today?\n" +
-                "____________________________________________________________");
+                "____________________________________________________________" + prompt;
     }
 
-    private void prompt() {
-        System.out.print(" > ");
+    public String sayGoodbye() {
+        return frame_output("Goodbye. Hope to see you again soon!");
     }
 
     public static void main(String[] args) {
         Alice alice = new Alice();
+        System.out.print(alice.greet());
+
         Scanner sc = new Scanner(System.in);
 
-        String cmd = sc.nextLine();
-        while (alice.reply(cmd)) {
-            cmd = sc.nextLine();
+        String input;
+        while (sc.hasNextLine()) {
+            input = sc.nextLine();
+            if (input.equals("bye")) {
+                System.out.print(alice.sayGoodbye());
+                return;
+            }
+            System.out.print(alice.reply(input));
         }
     }
 }

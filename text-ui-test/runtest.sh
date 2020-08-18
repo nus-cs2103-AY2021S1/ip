@@ -13,11 +13,7 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if
-  ! (
-    find ../src/main/java -name "*.java" >sources.txt
-    javac -cp ../src -Xlint:none -d ../bin @sources.txt
-  )
+if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/*.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1
@@ -35,8 +31,8 @@ diff ACTUAL.TXT EXPECTED-UNIX.TXT
 if [ $? -eq 0 ]
 then
     echo "Test result: PASSED"
-#    exit 0
+    exit 0
 else
     echo "Test result: FAILED"
-#    exit 1
+    exit 1
 fi

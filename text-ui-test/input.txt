@@ -4,5 +4,17 @@ event project meeting /at Mon 2-4pm
 list
 done 3
 done 1
+error handling
+
+done 4
+done -1
+done NotANumber
+todo
+deadline
+deadline fake deadline /by
+deadline hello
+event
+event fake event /at
+event hello
 list
 bye
