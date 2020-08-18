@@ -6,30 +6,32 @@ public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Hi! I'm Duke" + "\n" + "What can I do for you?");
-        String current = scanner.nextLine();
-        List<String> storedText = new ArrayList<>();
+        String currInput = scanner.nextLine();
+        List<Task> storedTasks = new ArrayList<>();
 
-        while (isNotTerminateCommand(current)) {
-            if (!isListCommand(current) && !isDoneCommand(current)) {
-                storedText.add("[✗] " +  current);
-                System.out.println("added: " + current);
-            } else if (isDoneCommand(current)) {
-            //Mark item
+        while (isNotTerminateCommand(currInput)) {
+            if (isListCommand(currInput)) {
+                //List out all tasks' description
+                System.out.println(readList(storedTasks));
+            } else if (isDoneCommand(currInput)) {
 
-                //Getting the index
-                String[] parts = current.split(" ");
-                int index = Integer.parseInt(parts[1]) - 1;
+                if (isValidDoneCommand(currInput, storedTasks.size())) {
+                    String[] parts = currInput.split(" ");
+                    int index = Integer.parseInt(parts[1]) - 1;
 
-                if (index >= storedText.size() || index < 0) {
-                    System.out.println("Sorry, invalid command!");
+                    storedTasks.set(index, storedTasks.get(index).markDone());
+
+                    System.out.println("Nice! I've marked this task as done:" + "\n" + "[✓] " + storedTasks.get(index).readDescription());
                 } else {
-                    storedText = markDone(storedText, index);
-                    System.out.println("Nice! I've marked this task as done:" + "\n" + storedText.get(index));
+                    System.out.println("Sorry, invalid command");
                 }
             } else {
-                System.out.println(readList(storedText));
+                //Is a task
+               Task newTask = new Task(currInput);
+               storedTasks.add(newTask);
+               System.out.println("added: " + currInput);
             }
-                current = scanner.nextLine();
+                currInput = scanner.nextLine();
         }
 
         System.out.println("Bye. Hope to see you again soon!");
@@ -38,7 +40,13 @@ public class Duke {
 
     public static boolean isDoneCommand(String input) {
         String[] parts = input.split(" ");
-        return parts[0].equals("done");
+        return parts[0].equals("done") && parts.length == 2;
+    }
+
+    public static boolean isValidDoneCommand(String input, int numOfTasks) {
+        String[] parts = input.split(" ");
+        int index = Integer.parseInt(parts[1]) - 1;
+        return index > -1 && index < numOfTasks;
     }
 
     public static boolean isListCommand(String input) {
@@ -49,23 +57,24 @@ public class Duke {
         return !input.equals("bye");
     }
 
-    public static List<String> markDone(List<String> list, int position) {
-        String doneTask = list.get(position);
-        String[] parts = doneTask.split(" ", 2);
-        String markDone = "[✓] " + parts[1];
+    public static String readList(List<Task> list) {
+        String listOfTasks = "Here are the tasks in your list:";
 
-        list.set(position, markDone);
-        return list;
-    }
-
-    public static String readList(List<String> list) {
-        String listOfItems = "";
 
         for (int i = 1; i <= list.size(); i++) {
-            listOfItems = listOfItems + i + ". " + list.get(i - 1) + "\n";
+            Task currTask = list.get(i - 1);
+
+            if (currTask.isDone()) {
+                listOfTasks += "\n" + i + "." + "[✓] " + currTask.readDescription();
+            } else {
+                listOfTasks += "\n" + i + "." + "[✗] " + currTask.readDescription();
+            }
         }
 
-        return listOfItems;
+        if (list.size() == 0) {
+            return "Currently no tasks in you list";
+        }
+        return listOfTasks;
     }
 }
 
