@@ -30,6 +30,7 @@ public class Duke {
     private static final String MESSAGE_MISSING_DELIM = "There is no '/' in your task";
     private static final String MESSAGE_MISSING_DATETIME = "Did you casually forget to put in the date/time?";
     private static final String MESSAGE_ALR_DONE = "Do you happen to have short term memory?";
+    private static final String MESSAGE_DELETE = "Got it. I removed this task:";
 
     // processes the input and generates the output in the correct format.
     private static String displayOutput(String input) {
@@ -91,7 +92,18 @@ public class Duke {
             curr.markAsDone();
             return displayOutput(MESSAGE_DONE + "\n" + LEFT_MARGIN_DOUBLE + curr);
         }
+    }
 
+    public static String delete(ArrayList<Task> taskList, short id) {
+        Task curr;
+        try {
+            curr = taskList.get(id - 1);
+        } catch (IndexOutOfBoundsException e) { //change
+            return displayOutput(MESSAGE_INVALID_ID);
+        }
+        taskList.remove(id - 1);
+        return displayOutput(MESSAGE_DELETE + "\n" + LEFT_MARGIN_DOUBLE + curr + "\n"
+                + LEFT_MARGIN + String.format(MESSAGE_COUNT, taskList.size()));
     }
 
     public static void main(String[] args) {
@@ -118,6 +130,15 @@ public class Duke {
                     break;
                 }
                 System.out.print(markAsDone(taskList, taskId));
+                break;
+            case "delete":
+                try {
+                    taskId = Short.parseShort(sc.nextLine().trim());
+                } catch (NumberFormatException e) {
+                    System.out.print(displayOutput(MESSAGE_TASK_ID_MISSING));
+                    break;
+                }
+                System.out.print(delete(taskList, taskId));
                 break;
             case "todo":
                 try {

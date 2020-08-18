@@ -15,4 +15,8 @@ event lorem /at
 event       /at mon 9-10am
 event           ipsum                  /at           12/09 9-10am
 done 1
+delete 4
+list
+delete
+delete ff
 bye

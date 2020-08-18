@@ -76,5 +76,22 @@
     Do you happen to have short term memory?
     _______________________________________________________
     _______________________________________________________
+    Got it. I removed this task:
+        [E][✗] ipsum (at: 12/09 9-10am)
+    Now you have 3 tasks in the list.
+    _______________________________________________________
+    _______________________________________________________
+    As you wish, here's what you gotta do:
+        1.[T][✓] Lorem ipsum dolor
+        2.[D][✗] sit amet, consectetur adipiscing (by: taskdate2 tasktime2)
+        3.[E][✗] sed do eiusmod tempor incididunt (at: taskdate3 i-jpm)
+    _______________________________________________________
+    _______________________________________________________
+    You didn't give me the task number to work with...
+    _______________________________________________________
+    _______________________________________________________
+    You didn't give me the task number to work with...
+    _______________________________________________________
+    _______________________________________________________
     Hey! Come back here! You big-a monkey!
     _______________________________________________________
