@@ -1,8 +1,2 @@
-todo
-blah
-deadline
-deadline read book
-event
-event concert
 done 1
 bye

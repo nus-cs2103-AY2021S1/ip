@@ -36,12 +36,7 @@ public class Duke {
                         continue;
                     }
                     int ID = Integer.parseInt(string.substring(5));
-                    if(ID >= Task.tasks.size()){
-                        System.out.println(new DoneException(false).toString());
-                        continue;
-                    }
-                    Task.tasks.get(ID - 1).setDone();
-                    Task.tasks.get(ID - 1).donePrint();
+                    Task.setDone(ID);
                 }
                 else if (string.length() >= 4 && string.substring(0, 4).equals("todo")) {
                     System.out.println("\n" + string + "\n  ____________________________________________________________");
