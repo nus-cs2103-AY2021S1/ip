@@ -1,13 +1,13 @@
 // Group each action the user input as a task, with the description and status if the task is done
 public class Task {
-    private String description;
-    private boolean isDone;
+    protected String description;
+    protected boolean isDone;
 
     Task(String description) {
         this(description, false);
     }
 
-    private Task(String description, boolean isDone) {
+    protected Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }

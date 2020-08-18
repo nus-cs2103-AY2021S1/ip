@@ -11,6 +11,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        greet();
         respondPicker();
     }
 
@@ -24,22 +25,57 @@ public class Duke {
         Scanner scan = new Scanner(System.in);
         ArrayList<Task> userInputCollector = new ArrayList();
 
-        greet();
-
         String userInput = scan.nextLine();
         while (!userInput.equals("bye")) {
-            if (userInput.equals("list")) {
+            Task taskToUpdate ;
+
+            switch (userInput.split(" ", 2)[0]) {
+            case "":
+                break;
+
+            case "list":
                 prettyPrint(userInputCollector);
-            } else if (userInput.split(" ", 2)[0].equals("done")) {
-                System.out.println("here");
-                Task taskToUpdate = userInputCollector.get(Integer.parseInt(userInput.split(" ", 2)[1])
+                break;
+
+            case "done":
+                taskToUpdate = userInputCollector.get(Integer.parseInt(userInput.split(" ", 2)[1])
                         - 1);
-                taskToUpdate.updateStatus(true);
-                prettyPrint("Nice! I've marked this task as done: \n" + "       " + taskToUpdate);
-            }
-            else {
+                Task updatedTask = taskToUpdate.updateStatus(true);
+                userInputCollector.set(userInputCollector.indexOf(taskToUpdate), updatedTask);
+                prettyPrint("Nice! I've marked this task as done: \n" + "       " + updatedTask);
+                break;
+
+            case "todo":
+                taskToUpdate = new ToDo(userInput.split(" ", 2)[1]);
+                userInputCollector.add(taskToUpdate);
+                prettyPrint("Got it. I've added this task: \n" +
+                        "       " + taskToUpdate + "\n" +
+                        "     Now you have " + userInputCollector.size() +" tasks in the list.");
+                break;
+
+            case "event":
+                taskToUpdate = new Event(userInput.split("/at")[0].split(" ", 2)[1],
+                        userInput.split("/at")[1]);
+                userInputCollector.add(taskToUpdate);
+                prettyPrint("Got it. I've added this task: \n" +
+                        "       " + taskToUpdate + "\n" +
+                        "     Now you have " + userInputCollector.size() + " tasks in the list.");
+                break;
+
+            case "deadline":
+                taskToUpdate = new Deadline(userInput.split("/by")[0].split(" ", 2)[1],
+                        userInput.split("/by")[1]);
+                userInputCollector.add(taskToUpdate);
+                prettyPrint("Got it. I've added this task: \n" +
+                        "       " + taskToUpdate + "\n" +
+                        "     Now you have " + userInputCollector.size() + " tasks in the list.");
+                break;
+
+            default:
                 prettyPrint(userInput);
-                userInputCollector.add(new Task(userInput));
+                taskToUpdate = new Task(userInput);
+                userInputCollector.add(taskToUpdate);
+                break;
             }
 
             userInput = scan.nextLine();
