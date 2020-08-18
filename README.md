@@ -37,103 +37,104 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
     * **Deadlines**: tasks that need to be done before a specific date/time e.g., submit report by 11/10/2019 5pm
     * **Events**: tasks that start at a specific time and ends at a specific time e.g., team project meeting on 2/10/2019 2-4pm
 
+4. Add error handling features:
+
+    * Command that is not `todo`, `deadline`, `event`, `list`, `done` or `bye` cannot be recognised.
+    * For commands that require a description, such as `todo`, `deadline`, `event`, if the response does not include a description, Duke will not accept.
+    * For command `done` that takes an argument of particular format (i.e. integer), Duke will not receive illegal arguments.
+    * For commands that takes in a time after some trigger words, such as `deadline` and `event`, Duke will not accept responses without a time.
 ## Demo
    ```
        ____________________________________________________________
         Hello! I'm Duke 
         What can I do for you?
        ____________________________________________________________
-   todo read book
+   hi!
        ____________________________________________________________
-        Got it. I've added this task: 
-          [T][✘] read book
+        ☹ OOPS!!! I cannot recognise the command "hi!" :-(
+       ____________________________________________________________
+   todo 
+       ____________________________________________________________
+        ☹ OOPS!!! The description of a todo cannot be empty.
+       ____________________________________________________________
+   todo this task
+       ____________________________________________________________
+        Got it. I've added this task:
+          [T][✘] this task
         Now you have 1 tasks in the list.
        ____________________________________________________________
-   deadline return book /by June 6th
+   deadline   
        ____________________________________________________________
-        Got it. I've added this task: 
-          [D][✘] return book (by: June 6th)
+        ☹ OOPS!!! The description of a deadline cannot be empty.
+       ____________________________________________________________
+   deadline this
+       ____________________________________________________________
+        ☹ OOPS!!! The time of a deadline cannot be empty.
+       ____________________________________________________________
+   deadline this /by
+       ____________________________________________________________
+        ☹ OOPS!!! The time of a deadline cannot be empty.
+       ____________________________________________________________
+   deadline this /by that
+       ____________________________________________________________
+        Got it. I've added this task:
+          [D][✘] this (by: that)
         Now you have 2 tasks in the list.
        ____________________________________________________________
-   event project meeting /at Aug 6th 2-4pm
+   event     
        ____________________________________________________________
-        Got it. I've added this task: 
-          [E][✘] project meeting (at: Aug 6th 2-4pm)
+        ☹ OOPS!!! The description of a event cannot be empty.
+       ____________________________________________________________
+   event this /by that
+       ____________________________________________________________
+        ☹ OOPS!!! The time of a event cannot be empty.
+       ____________________________________________________________
+   event this /at
+       ____________________________________________________________
+        ☹ OOPS!!! The time of a event cannot be empty.
+       ____________________________________________________________
+   event this /at that
+       ____________________________________________________________
+        Got it. I've added this task:
+          [E][✘] this (at: that)
         Now you have 3 tasks in the list.
-       ____________________________________________________________
-   todo join sports club
-       ____________________________________________________________
-        Got it. I've added this task: 
-          [T][✘] join sports club
-        Now you have 4 tasks in the list.
        ____________________________________________________________
    list
        ____________________________________________________________
         Here are the tasks in your list:
-        1.[T][✘] read book
-        2.[D][✘] return book (by: June 6th)
-        3.[E][✘] project meeting (at: Aug 6th 2-4pm)
-        4.[T][✘] join sports club
+        1.[T][✘] this task
+        2.[D][✘] this (by: that)
+        3.[E][✘] this (at: that)
+       ____________________________________________________________
+   done  
+        ☹ OOPS!!! The description of a done cannot be empty.
+       ____________________________________________________________
+   done x
+        ☹ OOPS!!! The argument for a done command must be an integer within the range!!!
+       ____________________________________________________________
+   done the first task
+        ☹ OOPS!!! The argument for a done command must be an integer within the range!!!
+       ____________________________________________________________
+   done 4
+        ☹ OOPS!!! The argument for a done command must be an integer within the range!!!
        ____________________________________________________________
    done 1
        ____________________________________________________________
-        Nice! I've marked this task as done: 
-          [T][✓] read book
-       ____________________________________________________________
-   done 4
-       ____________________________________________________________
-        Nice! I've marked this task as done: 
-          [T][✓] join sports club
-       ____________________________________________________________
-   todo borrow book
-       ____________________________________________________________
-        Got it. I've added this task: 
-          [T][✘] borrow book
-        Now you have 5 tasks in the list.
+        Nice! I've marked this task as done:
+          [T][✓] this task
        ____________________________________________________________
    list
        ____________________________________________________________
         Here are the tasks in your list:
-        1.[T][✓] read book
-        2.[D][✘] return book (by: June 6th)
-        3.[E][✘] project meeting (at: Aug 6th 2-4pm)
-        4.[T][✓] join sports club
-        5.[T][✘] borrow book
-       ____________________________________________________________
-   deadline return book /by Sunday
-       ____________________________________________________________
-        Got it. I've added this task: 
-          [D][✘] return book (by: Sunday)
-        Now you have 6 tasks in the list.
-       ____________________________________________________________
-   event project meeting /at Mon 2-4pm
-       ____________________________________________________________
-        Got it. I've added this task: 
-          [E][✘] project meeting (at: Mon 2-4pm)
-        Now you have 7 tasks in the list.
-       ____________________________________________________________
-   deadline do homework /by no idea :-p
-       ____________________________________________________________
-        Got it. I've added this task: 
-          [D][✘] do homework (by: no idea :-p)
-        Now you have 8 tasks in the list.
-       ____________________________________________________________
-   list
-       ____________________________________________________________
-        Here are the tasks in your list:
-        1.[T][✓] read book
-        2.[D][✘] return book (by: June 6th)
-        3.[E][✘] project meeting (at: Aug 6th 2-4pm)
-        4.[T][✓] join sports club
-        5.[T][✘] borrow book
-        6.[D][✘] return book (by: Sunday)
-        7.[E][✘] project meeting (at: Mon 2-4pm)
-        8.[D][✘] do homework (by: no idea :-p)
+        1.[T][✓] this task
+        2.[D][✘] this (by: that)
+        3.[E][✘] this (at: that)
        ____________________________________________________________
    bye
        ____________________________________________________________
         Bye. Hope to see you again soon!
        ____________________________________________________________
+
 
    ```
 ## Automated UI Testing

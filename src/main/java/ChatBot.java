@@ -16,36 +16,87 @@ public class ChatBot {
         while (!response.equals("bye")) {
             if (response.equals("list")) {
                 printList();
-            } else if (response.startsWith("done")) {
-                int index = Integer.parseInt(response.split(" ")[1]) - 1;
-                list.get(index).markAsDone();
-                printHorizontal();
-                System.out.println("     Nice! I've marked this task as done:");
-                System.out.println("       "+list.get(index));
-                printHorizontal();
+            } else if (response.split(" ")[0].equals("done")) {
+                try {
+                    markAsDone(response);
+                } catch (Exception e) {
+                    System.out.println("     " + e.getMessage());
+                    printHorizontal();
+                }
             } else {
-                addTask(response);
+                try {
+                    addTask(response);
+                } catch (Exception e) {
+                    System.out.println("     " + e.getMessage());
+                    printHorizontal();
+                }
             }
             response = receiveChat();
         }
         sendChat(" Bye. Hope to see you again soon!");
     }
 
-    private void addTask(String command) {
-        printHorizontal();
-        System.out.println("     Got it. I've added this task:");
-        Task newTask;
-        if (command.startsWith("todo")) {
-            newTask = new Todo(command.substring(5));
-        } else if (command.startsWith("deadline")) {
-            newTask = new Deadline(command.substring(9).split(" /by ")[0], command.substring(9).split(" /by ")[1]);
-        } else if (command.startsWith("event")) {
-            newTask = new Event(command.substring(6).split(" /at ")[0], command.substring(6).split(" /at ")[1]);
-        } else {
-            newTask = new Task(command);
+    private void markAsDone(String command) throws Exception {
+        // here we already know that the first word is "done"
+        if (command.split(" ").length == 1) {
+            throw new NoDescriptionException("done");
         }
-        list.add(newTask);
+        if (command.split(" ").length != 2) {
+            throw new IllegalDoneArgument();
+        }
+        if (!command.split(" ")[1].matches("\\d+")) {
+            throw new IllegalDoneArgument();
+        }
+        int index = Integer.parseInt(command.split(" ")[1]) - 1;
+        if (index < 0 || index >= list.size()) {
+            throw new IllegalDoneArgument();
+        }
+        list.get(index).markAsDone();
+        printHorizontal();
+        System.out.println("     Nice! I've marked this task as done:");
+        System.out.println("       "+list.get(index));
+        printHorizontal();
+    }
+
+    private void addTask(String command) throws Exception {
+        printHorizontal();
+        String firstCmd = command.split(" ")[0];
+        Task newTask;
+        switch (firstCmd) {
+            case "todo":
+                if (command.split(" ").length == 1) {
+                    throw new NoDescriptionException("todo");
+                }
+                newTask = new Todo(command.substring(5));
+                break;
+            case "deadline": {
+                if (command.split(" ").length == 1) {
+                    throw new NoDescriptionException("deadline");
+                }
+                String nameAndTime = command.substring(9);
+                if (nameAndTime.split(" /by ").length == 1) {
+                    throw new NoTimeException("deadline");
+                }
+                newTask = new Deadline(command.substring(9).split(" /by ")[0], command.substring(9).split(" /by ")[1]);
+                break;
+            }
+            case "event": {
+                if (command.split(" ").length == 1) {
+                    throw new NoDescriptionException("event");
+                }
+                String nameAndTime = command.substring(6);
+                if (nameAndTime.split(" /at ").length == 1) {
+                    throw new NoTimeException("event");
+                }
+                newTask = new Event(command.substring(6).split(" /at ")[0], command.substring(6).split(" /at ")[1]);
+                break;
+            }
+            default:
+                throw new IllegalCommandException(command);
+        }
+        System.out.println("     Got it. I've added this task:");
         System.out.println("       " + newTask);
+        list.add(newTask);
         System.out.println("     Now you have " + list.size() + " tasks in the list.");
         printHorizontal();
     }
