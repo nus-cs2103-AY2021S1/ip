@@ -1,7 +1,102 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+    ____________________________________________________________
+    Hello! I'm Duke
+    What can I do for you?
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Got it. I've added this task:
+      [T][✘] read book
+    Now you have 1 task in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Got it. I've added this task:
+      [E][✘] project meeting (at: Friday 2 to 4pm)
+    Now you have 2 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Got it. I've added this task:
+      [D][✘] individual project (by: August 20)
+    Now you have 3 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Inputted command does not exist!
+    ____________________________________________________________
+
+    ____________________________________________________________
+    No arguments are accepted by command 'list'.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Here are the tasks in your list:
+    1. [T][✘] read book
+    2. [E][✘] project meeting (at: Friday 2 to 4pm)
+    3. [D][✘] individual project (by: August 20)
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Inputted task index does not exist!
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Invalid arguments specified for command 'done'.
+    The proper usage of the command is:
+    done <index of task>
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Invalid arguments specified for command 'done'.
+    The proper usage of the command is:
+    done <index of task>
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Nice! I've marked this task as done:
+      [E][✓] project meeting (at: Friday 2 to 4pm)
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Invalid arguments specified for command 'event'.
+    The proper usage of the command is:
+    event <name of task> /at <datetime>
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Invalid arguments specified for command 'deadline'.
+    The proper usage of the command is:
+    deadline <name of task> /by <due date>
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Here are the tasks in your list:
+    1. [T][✘] read book
+    2. [E][✓] project meeting (at: Friday 2 to 4pm)
+    3. [D][✘] individual project (by: August 20)
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Inputted task index does not exist!
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Invalid arguments specified for command 'delete'.
+    The proper usage of the command is:
+    delete <index of task>
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Noted. I've removed this task:
+     [E][✓] project meeting (at: Friday 2 to 4pm)
+    Now you have 2 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    No arguments are accepted by command 'bye'.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Bye. Hope to see you again soon!
+    ____________________________________________________________
 
