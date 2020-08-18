@@ -17,10 +17,10 @@ public class Task {
     }
 
     public String getDescription() {
-        return this.description.toString();
+        return this.description;
     }
 
-    public int getNumber() {
-        return i;
+    public String toString() {
+        return "[" + getStatusIcon() + "]" + getDescription();
     }
 }
