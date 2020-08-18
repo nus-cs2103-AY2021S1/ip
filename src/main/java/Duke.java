@@ -22,6 +22,11 @@ public class Duke {
                 System.out.println("\t" + "Bye. Hope to see you again soon!");
                 break;
             }
+            else if(input.contentEquals("list")){
+                for(int i = 0; i < itemList.size(); i++){
+                    System.out.println("\t" + (i + 1) + ". " + itemList.get(i));
+                }
+            }
             else{
                 System.out.println("\t" + input);
                 itemList.add(input);
