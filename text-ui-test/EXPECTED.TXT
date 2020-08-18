@@ -82,7 +82,7 @@ What can I do for you?
         [D][?] submit assignment (by: tues 9pm)
     You have 0 task(s) in the list.
 
-    Empty list, pls add tasks to list first
+DukeException: Empty list, pls add tasks to list first
 
     Successfully added:
         [T][?] final task

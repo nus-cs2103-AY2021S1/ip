@@ -3,6 +3,10 @@ import java.util.ArrayList;
 public class TaskHandler {
     protected ArrayList<Task> taskList;
 
+    enum operationType {
+        DONE, DELETE
+    }
+
     public TaskHandler() {
         this.taskList = new ArrayList<>();
     }
@@ -11,45 +15,10 @@ public class TaskHandler {
         return taskList;
     }
 
-    public Task doTask(String input, ArrayList<Task> list) throws DukeException {
-        try {
-            Task currentTask = findTaskByNum(input, list);
-            // Mark given task as done
-            currentTask.markAsDone();
-            return currentTask;
-        } catch (Exception e) {
-            throw new DukeException("Oops, pls enter a valid task to complete");
-        }
-    }
-
-    public Task deleteTask(String input, ArrayList<Task> list) throws DukeException {
-        Task currentTask = findTaskByNum(input, list);
-        try {
-            list.remove(currentTask);
-            return currentTask;
-        } catch (Exception e) {
-            throw new DukeException("Oops, pls enter a valid task to delete");
-        }
-    }
-
-    public Task findTaskByNum(String input, ArrayList<Task> list) throws DukeException {
-        try {
-            // Checking if only one task is given to complete/valid int
-            String[] stringArr = input.split(" ");
-            // Finding the actual task
-            int indexOfDone = Integer.parseInt(stringArr[1]) - 1;
-            return list.get(indexOfDone);
-        } catch (Exception e){
-            throw new DukeException("Oops, pls enter only one valid task");
-        }
-    }
-
-    public void printList() {
+    public void printList() throws DukeException {
         if (taskList.isEmpty()) {
             // Asks user for tasks when printing empty list
-            indent(1);
-            System.out.println("Empty list, pls add tasks to list first");
-            return;
+            throw new DukeException("Empty list, pls add tasks to list first");
         }
         int listPos = 1;
         indent(1);
@@ -62,10 +31,31 @@ public class TaskHandler {
         System.out.println("You have " + taskList.size() + " task(s) in the list");
     }
 
+    public Task modifyTask(String input, ArrayList<Task> list, TaskHandler.operationType currentOp) throws DukeException {
+        String[] stringArr = input.split(" ");
+        String lowerCaseOperation = currentOp.toString().toLowerCase();
+        if (stringArr.length != 2 ) {
+            // if multiple tasks are given as arguments
+            throw new DukeException("Oops, pls enter only one task number after " + lowerCaseOperation);
+        }
+        try {
+            // Finding the actual task
+            int indexOfDone = Integer.parseInt(stringArr[1]) - 1;
+            Task currentTask = list.get(indexOfDone);
+            if (currentOp == operationType.DELETE) {
+                list.remove(currentTask);
+            } else if (currentOp == operationType.DONE) {
+                currentTask.markAsDone();
+            }
+            return currentTask;
+        } catch (Exception e){
+            throw new DukeException("Oops, pls enter a valid task number after " + lowerCaseOperation);
+        }
+    }
 
-    public Task sortTask(String input, String tasktype) throws DukeException {
+    public Task processNewTask(String input, Task.taskType tasktype) throws DukeException {
         // Sorts the input into a task with or without time
-        if (tasktype.equals("todo")) {
+        if (tasktype == Task.taskType.TODO) {
             // Without time
             if (input.substring(4).trim().isEmpty()) {
                 // if given empty arguments or space as task
@@ -74,15 +64,13 @@ public class TaskHandler {
             String taskDesc = input.substring(5);
             return new Todo(taskDesc);
         }
-        if (tasktype.equals("deadline")) {
-            // With time
+        if (tasktype == Task.taskType.DEADLINE) {
             try {
                 return processTaskWithTime(input, tasktype, "/by");
             } catch (Exception e) {
                 throw new DukeException("Oops, use add deadline format: deadline [task] /by [time]");
             }
-        } else if (tasktype.equals("event")) {
-            // With time
+        } else if (tasktype == Task.taskType.EVENT) {
             try {
                 return processTaskWithTime(input, tasktype, "/at");
             } catch (Exception e) {
@@ -93,14 +81,14 @@ public class TaskHandler {
         }
     }
 
-    public static Task processTaskWithTime(String input, String tasktype, String separator) throws DukeException {
-        // String processing to find task description and time
-        String taskDesc = input.substring(tasktype.length() + 1, input.indexOf(separator));
+    public static Task processTaskWithTime(String input, Task.taskType tasktype, String separator) throws DukeException {
+        // Process string to find task description and time
+        String taskDesc = input.substring(tasktype.name().length() + 1, input.indexOf(separator));
         checkIsFieldEmpty("taskDesc", taskDesc);
         // +4 due to size of /by or /at with a space
         String time = input.substring(input.indexOf(separator) + 4);
         checkIsFieldEmpty("time", time);
-        if (tasktype.equals("deadline")) {
+        if (tasktype ==  Task.taskType.DEADLINE) {
             return new Deadline(taskDesc, time);
         } else {
             return new Event(taskDesc, time);
@@ -118,5 +106,9 @@ public class TaskHandler {
         for (int i=0; i<times; i++) {
             System.out.print("    ");
         }
+    }
+
+    public void receiveInvalidCommand() throws DukeException {
+        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 }
