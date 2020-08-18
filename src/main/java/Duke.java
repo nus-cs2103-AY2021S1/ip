@@ -21,15 +21,17 @@ public class Duke {
 
                     storedTasks.set(index, storedTasks.get(index).markDone());
 
-                    System.out.println("Nice! I've marked this task as done:" + "\n" + "[✓] " + storedTasks.get(index).readDescription());
+                    System.out.println("Nice! I've marked this task as done:" + "\n" + "[✓] " + storedTasks.get(index).toString());
                 } else {
                     System.out.println("Sorry, invalid command");
                 }
             } else {
                 //Is a task
-               Task newTask = new Task(currInput);
-               storedTasks.add(newTask);
-               System.out.println("added: " + currInput);
+               /*Task newTask = new Task(currInput);
+               storedTasks.add(newTask);*/
+                addTasks(currInput, storedTasks);
+               System.out.println("Got it. I've added this task: " + "\n" + "  " + storedTasks.get(storedTasks.size() - 1)
+               + "\n" + "Now you have " + storedTasks.size() + " tasks in the list.");
             }
                 currInput = scanner.nextLine();
         }
@@ -57,18 +59,38 @@ public class Duke {
         return !input.equals("bye");
     }
 
+    public static void addTasks(String input, List<Task> tasks) {
+        String[] parts = input.split(" ", 2);
+        String taskType = parts[0];
+        Task newTask;
+
+        if (taskType.equals("todo")) {
+            newTask = new Task(parts[1]);
+            tasks.add(newTask);
+        } else if (taskType.equals("deadline")) {
+            String[] split = parts[1].split("/by");
+            String desc = split[0];
+            String deadline = split[1];
+            newTask = new Deadlines(split[0], split[1]);
+            tasks.add(newTask);
+        } else if (taskType.equals("event")) {
+            String[] split = parts[1].split("/at");
+            String desc = split[0];
+            String startTime = split[1];
+            newTask = new Events(desc, startTime);
+            tasks.add(newTask);
+        } else {
+            System.out.println("Sorry, invalid command");
+        }
+    }
+
     public static String readList(List<Task> list) {
         String listOfTasks = "Here are the tasks in your list:";
 
 
         for (int i = 1; i <= list.size(); i++) {
             Task currTask = list.get(i - 1);
-
-            if (currTask.isDone()) {
-                listOfTasks += "\n" + i + "." + "[✓] " + currTask.readDescription();
-            } else {
-                listOfTasks += "\n" + i + "." + "[✗] " + currTask.readDescription();
-            }
+                listOfTasks += "\n" + i + "." + currTask.toString();
         }
 
         if (list.size() == 0) {

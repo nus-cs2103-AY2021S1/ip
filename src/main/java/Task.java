@@ -1,26 +1,27 @@
 public class Task {
-    private String description;
-    private boolean isComplete;
+    protected String description;
+    protected boolean isComplete;
 
     public Task(String description) {
         this.description = description;
         isComplete = false;
     }
 
-    private Task(String description, boolean bool) {
+    protected Task(String description, boolean bool) {
         this.description = description;
         isComplete = bool;
     }
 
-    public String readDescription() {
-        return this.description;
-    }
-
-    public boolean isDone() {
-        return this.isComplete;
-    }
-
     public Task markDone() {
         return new Task(this.description, true);
+    }
+
+    @Override
+    public String toString() {
+        if (this.isComplete) {
+            return "[T][✓] " + this.description;
+        } else {
+            return "[T][✗] " + this.description;
+        }
     }
 }
