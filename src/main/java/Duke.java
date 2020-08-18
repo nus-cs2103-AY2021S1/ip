@@ -20,14 +20,17 @@ public class Duke {
 
         while (!terminated) {
             String userInput = scanner.nextLine();
-            if (userInput.equals("bye")) {
+            //determining user input type via the first word
+            String[] splitInput = userInput.split(" ");
+
+            if (splitInput[0].equals("bye")) {
                 terminated = true;
                 System.out.println("Duke says: Goodbye and have a nice day! :D");
                 scanner.close();
-            } else if (userInput.equals("help")) {
+            } else if (splitInput[0].equals("help")) {
                 System.out.println("list: displays a sequential view of past inputs\n" +
                         "bye: terminates program");
-            } else if (userInput.equals("list")){
+            } else if (splitInput[0].equals("list")){
                 if (pastInputs.size() == 0) {
                     System.out.println("Duke says: No past inputs found");
                 } else {
@@ -37,17 +40,25 @@ public class Duke {
                     }
                     System.out.println("If you wish to mark a task as completed, input \"done <task number>\"");
                 }
-            } else if (userInput.substring(0,5).equals("done ")){
+            } else if (splitInput[0].equals("done")){
                 //checks the formatting of user input
-                try {
-                    int taskNumber = Integer.parseInt(userInput.substring(5,6));
-                    Task doneTask = pastInputs.get(taskNumber - 1);
-                    doneTask.markDone();
-                    pastInputs.set(taskNumber - 1, doneTask);
-                    System.out.println("Duke says: Good Job! I've marked this task as done:");
-                    System.out.println(doneTask);
-                } catch(Exception ex) {
-                    System.out.println("Duke says: Please try again with a valid task number");
+                if (splitInput.length <= 2) {
+                    try {
+                        int taskNumber = Integer.parseInt(splitInput[1]);
+                        Task doneTask = pastInputs.get(taskNumber - 1);
+                        doneTask.markDone();
+                        pastInputs.set(taskNumber - 1, doneTask);
+                        System.out.println("Duke says: Good Job! I've marked this task as done:");
+                        System.out.println(doneTask);
+                    } catch(NumberFormatException ex) {
+                        pastInputs.add(new Task(userInput));
+                        System.out.println("Duke added into your task list: " + userInput);
+                    } catch (Exception ex) {
+                        System.out.println("Duke says: Please try again with a valid task number");
+                    }
+                } else {
+                    pastInputs.add(new Task(userInput));
+                    System.out.println("Duke added into your task list: " + userInput);
                 }
             } else {
                 pastInputs.add(new Task(userInput));
@@ -57,4 +68,3 @@ public class Duke {
         }
     }
 }
-
