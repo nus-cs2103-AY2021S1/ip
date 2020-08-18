@@ -1,9 +1,7 @@
 import java.util.Scanner;
 
 public class PandaBot {
-
-    // main runs greetings
-
+    
     public static void main(String[] args) {
         String logo =
                  " ____                    _   \n"
@@ -18,8 +16,8 @@ public class PandaBot {
         // echoes command by user
         Scanner sc = new Scanner(System.in);
 
-        while (sc.hasNext()) {
-            String command = sc.next();
+        while (sc.hasNextLine()) {
+            String command = sc.nextLine();
             if (command.equals("bye")) {
                 // exits when user types bye
                 System.out.println("Bye! Remember to do your work! See you soon~");
@@ -28,7 +26,6 @@ public class PandaBot {
                 System.out.println(command + "\n");
             }
         }
-
         sc.close();
     }
 }

@@ -12,4 +12,6 @@ list
 
 blah
 
+read book
+
 Bye! Remember to do your work! See you soon~
