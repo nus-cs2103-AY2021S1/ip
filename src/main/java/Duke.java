@@ -21,12 +21,14 @@ public class Duke {
         System.out.println(intro);
         Scanner input =  new Scanner(System.in);
         String underscore = "____________________________________________________________ \n";
-        String line = "";
+        String line;
         ArrayList<Task> todo = new ArrayList<>();
-        while(!line.equals("bye")) {
+        while(input.hasNextLine()) {
             line = input.nextLine();
             if (line.equals("bye")) {
                 System.out.println(underscore + " Bye. Hope to see you again soon!" + "\n" + underscore);
+                input.close();
+                break;
             } else if (line.equals("list")) {
                 System.out.println(underscore);
                 for (int i = 0; i < todo.size(); i++) {
@@ -67,6 +69,6 @@ public class Duke {
                 }
             }
         }
-        input.close();
+
     }
 }
