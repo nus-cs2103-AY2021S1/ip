@@ -47,6 +47,8 @@ public class Duke {
                 System.out.println("____________________________________________________________");
 
             } else if (splitString[0].equals("done")) {
+                // can add error handling exception in case out of bounds
+                // can add error handling for exception already done
                 int index = Integer.parseInt(splitString[1]);
                 inputList.get(index - 1).markAsDone();
 
@@ -56,7 +58,18 @@ public class Duke {
                 }
                 System.out.println("____________________________________________________________");
 
-            } else {
+            } else if (splitString[0].equals("delete")) {
+                // can add error handling exception in case out of bounds
+                int index = Integer.parseInt(splitString[1]);
+                inputList.remove(index - 1);
+
+                System.out.println("____________________________________________________________");
+                for (int i = 0; i < inputList.size(); i++) {
+                    System.out.println(inputList.get(i).toString());
+                }
+                System.out.println("____________________________________________________________");
+
+            }else {
                 try {
                     Task currTask = StringProcessor.stringProcessor(currInput);
                     inputList.add(currTask);
