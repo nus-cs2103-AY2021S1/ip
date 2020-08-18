@@ -7,23 +7,40 @@ public class TaskList {
         return this.list.size();
     }
 
-    public Task addTask(String type, String input) {
+    public Task addTask(String type, String input) throws DukeException {
         Task task;
         if (type.equals("todo")) {
             task = new Todo(input);
         } else if (type.equals("deadline")) {
             String[] arr = input.split("/by");
-            task = new Deadline(arr[0].trim(), arr[1].trim());
-        } else { // event type
+            try {
+                task = new Deadline(arr[0].trim(), arr[1].trim());
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("OOPS!!! I'm sorry, when is the deadline? (/by...)");
+            }
+        } else if (type.equals("event")) {
             String[] arr = input.split("/at");
-            task = new Event(arr[0].trim(), arr[1].trim());
+            try {
+                task = new Event(arr[0].trim(), arr[1].trim());
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("OOPS!!! I'm sorry, when is the event? (/at...)");
+            }
+        } else {
+            throw new DukeException("OOPS!!! I'm sorry, I don't know what that means :<");
+        }
+        if (input.isEmpty()) {
+            throw new DukeException("OOPS!!! I'm sorry, the description cannot be empty :<");
         }
         this.list.add(task);
         return task;
     }
 
-    public Task markAsDone(int i) {
-        return this.list.get(i).markAsDone();
+    public Task markAsDone(int i) throws DukeException {
+        try {
+            return this.list.get(i).markAsDone();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! I'm sorry, the task number is out of range :<");
+        }
     }
 
     @Override

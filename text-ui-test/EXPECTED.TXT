@@ -8,6 +8,8 @@ Hello from
 Hello! I'm Duke.
 What can I do for you?
 ---------------------------------------------------------
+OOPS!!! I'm sorry, your list is empty :<
+---------------------------------------------------------
 Got it. I've added this task: 
 [T][✗] watch CS2105 Lecture 2
 Now you have 1 tasks in the list.
@@ -40,15 +42,23 @@ Here are the tasks in your list:
 Nice! I've marked this task as done:
 [E][✓] zoom meeting (at: Wednesday 10pm)
 ---------------------------------------------------------
-Task number out of range.
+OOPS!!! I'm sorry, the task number is out of range :<
 ---------------------------------------------------------
 Nice! I've marked this task as done:
 [T][✓] buy groceries
+---------------------------------------------------------
+OOPS!!! I'm sorry, when is the deadline? (/by...)
 ---------------------------------------------------------
 Here are the tasks in your list:
 1.[T][✓] watch CS2105 Lecture 2
 2.[E][✓] zoom meeting (at: Wednesday 10pm)
 3.[T][✓] buy groceries
 4.[D][✗] CS2103 iP Week 2 (by: Thursday 23.59pm)
+---------------------------------------------------------
+OOPS!!! I'm sorry, the description cannot be empty :<
+---------------------------------------------------------
+OOPS!!! I'm sorry, when is the event? (/at...)
+---------------------------------------------------------
+OOPS!!! I'm sorry, I don't know what that means :<
 ---------------------------------------------------------
 Bye. Hope to see you again!
