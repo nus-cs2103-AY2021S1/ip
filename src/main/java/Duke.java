@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<>();
         String lines = "____________________________________________________________";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -24,14 +24,22 @@ public class Duke {
                 list.forEach(x -> {
                     int i = 1;
                     System.out.println(i + ". " + x);
-                    i++;
+                    i = i + 1;
                 });
                 System.out.println(lines);
-            } else {
+            } else if (input.split(" ")[0].equals("done")){
+                int index = Integer.parseInt(input.split(" ")[1]) - 1;
+                list.get(index).setDone();
+                System.out.println(lines);
+                System.out.println(" Nice! I've marked this task as done:");
+                System.out.println(list.get(index));
+                System.out.println(lines);
+            }
+            else {
                 System.out.println(lines);
                 System.out.println("added: " + input);
                 System.out.println(lines);
-                list.add(input);
+                list.add(new Task(input, false));
             }
             input = sc.nextLine();
         }
