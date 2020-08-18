@@ -94,7 +94,7 @@ public class Duke {
                     if (task[0].isEmpty()) {
                         throw new InvalidInputException("☹ OOPS!!! The description of a deadline task cannot be empty.");
                     }
-                    if (task[1].isEmpty()) {
+                    if (task.length < 2) {
                         throw new InvalidInputException("☹ OOPS!!! The deadline of a deadline task cannot be empty.");
                     }
                     addTask(task[0], task[1], TaskType.DEADLINE);
@@ -105,7 +105,7 @@ public class Duke {
                     if (task[0].isEmpty()) {
                         throw new InvalidInputException("☹ OOPS!!! The description of an event task cannot be empty.");
                     }
-                    if (task[1].isEmpty()) {
+                    if (task.length < 2) {
                         throw new InvalidInputException("☹ OOPS!!! The timing of an event task cannot be empty.");
                     }
                     addTask(task[0], task[1], TaskType.EVENT);
