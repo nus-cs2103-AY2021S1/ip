@@ -7,12 +7,20 @@ public class Duke {
                 + "What can I do for you?");
 
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
         String terminate = "bye";
+        Tasks newTask = new Tasks();
+        String input;
 
-        while (!input.equals(terminate)) {
-            System.out.println(input);
-            input = sc.nextLine();
+        while (!(input = sc.nextLine()).equals(terminate)) {
+
+            if (input.equals("")) {
+                continue;
+            } else if (!input.equals("list")) {
+                newTask.addTask(input);
+            } else {
+                newTask.getList();
+            }
+
         }
 
         System.out.println("Bye. Hope to see you again soon!");
