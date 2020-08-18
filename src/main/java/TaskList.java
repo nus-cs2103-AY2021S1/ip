@@ -69,6 +69,16 @@ public class TaskList {
         itemList.get(itemIndex - 1).markAsDone();
     }
 
+    void removeItem(int itemIndex) throws IllegalArgumentException {
+        if (itemIndex > itemList.size()) {
+            throw new IllegalArgumentException("Item #" + itemIndex + " does " +
+                                                       "not exist and cannot " +
+                                                       "be removed.");
+        }
+        Task removed = itemList.remove(itemIndex - 1);
+        System.out.println("This task has been removed: " + removed);
+    }
+
     void printList() {
         for (int i = 1; i <= itemList.size(); i++) {
             System.out.println(i + ". " + itemList.get(i - 1));

@@ -6,7 +6,8 @@ import java.io.InputStreamReader;
 
 public class Scanner {
     // array of valid commands
-    private final static List<String> COMMANDS = Arrays.asList("done");
+    private final static List<String> COMMANDS = Arrays.asList("done",
+                                                               "delete");
 
     static void scan() throws IOException {
         BufferedReader reader =
@@ -24,6 +25,15 @@ public class Scanner {
                     case "done":
                         try {
                             userTaskList.markAsDone(
+                                    Integer.parseInt(line.split( " ")[1])
+                            );
+                        } catch (IllegalArgumentException ex) {
+                            System.out.println(ex.getMessage());
+                        }
+                        break;
+                    case "delete":
+                        try {
+                            userTaskList.removeItem(
                                     Integer.parseInt(line.split( " ")[1])
                             );
                         } catch (IllegalArgumentException ex) {
