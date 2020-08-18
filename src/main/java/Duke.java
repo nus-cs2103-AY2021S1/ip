@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    private static void printBorder(){
+    private static void printBorder() {
         System.out.println("____________________________________________________________\n");
     }
 
@@ -19,28 +19,42 @@ public class Duke {
         printBorder();
         String input = userInput.nextLine();
 
-        while(!input.equals("bye")){
-            if(input.equals("list")){
+        while (!input.equals("bye")) {
+            if (input.equals("list")) {
                 printBorder();
                 System.out.println("Here are the tasks in your list:");
-                for(int i = 0; i < tasks.size(); i++){
-                    System.out.println((i+1) + ". " + tasks.get(i).printTask());
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.println((i + 1) + ". " + tasks.get(i));
                 }
                 printBorder();
-            }
-            else if(input.contains("done")){
+            } else if (input.contains("done")) {
                 int index = Integer.parseInt(input.substring(5)) - 1;
                 tasks.get(index).markAsDone();
                 printBorder();
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println(tasks.get(index).printTask());
+                System.out.println(tasks.get(index));
                 printBorder();
-            }
-            else {
+            } else {
                 printBorder();
-                Task t = new Task(input);
-                tasks.add(t);
-                System.out.println("added: " + input + "\n");
+                System.out.println("Got it. I've added this task:");
+
+                if (input.contains("todo")) {
+                    Todo t = new Todo(input.substring(5));
+                    tasks.add(t);
+                    System.out.println(t);
+                } else {
+                    int due = input.indexOf("/");
+
+                    if (input.contains("deadline")) {
+                        Deadline dl = new Deadline(input.substring(9, due), input.substring(due + 4));
+                        tasks.add(dl);
+                    } else if (input.contains("event")) {
+                        Event e = new Event(input.substring(6, due), input.substring(due + 4));
+                        tasks.add(e);
+                    }
+                    System.out.println(tasks.get(tasks.size() - 1));
+                }
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.\n");
                 printBorder();
             }
             input = userInput.nextLine();

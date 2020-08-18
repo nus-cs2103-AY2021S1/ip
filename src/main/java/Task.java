@@ -17,7 +17,8 @@ public class Task {
         this.isDone = true;
     }
 
-    public String printTask(){
+    @Override
+    public String toString(){
         return "[" + getStatusIcon() + "] " + this.description;
     }
 }
