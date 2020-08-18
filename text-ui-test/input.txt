@@ -1,0 +1,31 @@
+todo read book
+deadline return book /by June 6th
+event project meeting /at Aug 6th 2-4pm
+todo join sports club
+todo borrow book
+list
+done 1
+done123
+done 123
+done done
+done todo
+done bye
+done list
+done event
+done deadline
+done 4
+list
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
+list123
+list list
+list 123
+deadline fake deadline
+deadline fake deadline2 /byThisDay
+deadline fake deadline3 /atThatDay
+event fake event
+event fake event2 /atThisDay
+event fake event3 /byThatDay
+list
+
+bye

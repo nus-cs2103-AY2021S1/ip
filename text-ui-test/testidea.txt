@@ -1,0 +1,31 @@
+test todo command
+test deadline command
+test event command
+test todo command
+test todo command
+test list command
+test done command
+test in apt done command
+test in apt done command (out of bound)
+test in apt done command
+test in apt done command
+test in apt done command
+test in apt done command
+test in apt done command
+test in apt done command
+test done command
+test list command
+test deadline command
+test event command
+test in apt list command
+test in apt list command
+test in apt list command
+test deadline command
+test deadline command (w/o space by)
+test deadline command (w/o space at)
+test event command
+test event command (w/o space at)
+test event command (w/o space by)
+test list command
+test empty command
+test bye
