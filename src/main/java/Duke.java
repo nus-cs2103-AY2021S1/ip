@@ -61,72 +61,77 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    void initializeChatbot() throws DukeException {
+    void initializeChatbot() {
         greet();
         Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()) {
+        boolean hasEnded = false;
+        while (!hasEnded) {
             Command command = Command.getCommand(sc.next());
+            try {
+                //Check if command is invalid
+                if (command == null ) {
+                    throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(.");
+                }
 
-            //Check if command is invalid
-            if (command == null ) {
-                throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(.");
-            }
-
-            switch(command) {
-                case BYE: {
-                    exit();
-                    break;
-                }
-                case LIST: {
-                    listTasks();
-                    break;
-                }
-                case TODO: {
-                    String task = sc.nextLine().trim();
-                    if (task.isEmpty()) {
-                        throw new InvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.");
+                switch(command) {
+                    case BYE: {
+                        exit();
+                        hasEnded = true;
+                        break;
                     }
-                    addTask(task,null,TaskType.TODO);
-                    break;
+                    case LIST: {
+                        listTasks();
+                        break;
+                    }
+                    case TODO: {
+                        String task = sc.nextLine().trim();
+                        if (task.isEmpty()) {
+                            throw new InvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.");
+                        }
+                        addTask(task,null,TaskType.TODO);
+                        break;
+                    }
+                    case DEADLINE: {
+                        String[] task = sc.nextLine().trim().split(" /by ");
+                        if (task[0].isEmpty()) {
+                            throw new InvalidInputException("☹ OOPS!!! The description of a deadline task cannot be empty.");
+                        }
+                        if (task.length < 2) {
+                            throw new InvalidInputException("☹ OOPS!!! The deadline of a deadline task cannot be empty.");
+                        }
+                        addTask(task[0], task[1], TaskType.DEADLINE);
+                        break;
+                    }
+                    case EVENT: {
+                        String[] task = sc.nextLine().trim().split(" /at ");
+                        if (task[0].isEmpty()) {
+                            throw new InvalidInputException("☹ OOPS!!! The description of an event task cannot be empty.");
+                        }
+                        if (task.length < 2) {
+                            throw new InvalidInputException("☹ OOPS!!! The timing of an event task cannot be empty.");
+                        }
+                        addTask(task[0], task[1], TaskType.EVENT);
+                        break;
+                    }
+                    case DONE: {
+                        int index = sc.nextInt();
+                        if (index > tasks.size() || index < 1) {
+                            throw new InvalidIndexException("☹ OOPS!!! There is no such task.");
+                        }
+                        completeTask(index);
+                        break;
+                    }
+                    case DELETE: {
+                        int index = sc.nextInt();
+                        if (index > tasks.size() || index < 1) {
+                            throw new InvalidIndexException("☹ OOPS!!! There is no such task.");
+                        }
+                        deleteTask(index);
+                        break;
+                    }
                 }
-                case DEADLINE: {
-                    String[] task = sc.nextLine().trim().split(" /by ");
-                    if (task[0].isEmpty()) {
-                        throw new InvalidInputException("☹ OOPS!!! The description of a deadline task cannot be empty.");
-                    }
-                    if (task.length < 2) {
-                        throw new InvalidInputException("☹ OOPS!!! The deadline of a deadline task cannot be empty.");
-                    }
-                    addTask(task[0], task[1], TaskType.DEADLINE);
-                    break;
-                }
-                case EVENT: {
-                    String[] task = sc.nextLine().trim().split(" /at ");
-                    if (task[0].isEmpty()) {
-                        throw new InvalidInputException("☹ OOPS!!! The description of an event task cannot be empty.");
-                    }
-                    if (task.length < 2) {
-                        throw new InvalidInputException("☹ OOPS!!! The timing of an event task cannot be empty.");
-                    }
-                    addTask(task[0], task[1], TaskType.EVENT);
-                    break;
-                }
-                case DONE: {
-                    int index = sc.nextInt();
-                    if (index > tasks.size() || index < 1) {
-                        throw new InvalidIndexException("☹ OOPS!!! There is no such task.");
-                    }
-                    completeTask(index);
-                    break;
-                }
-                case DELETE: {
-                    int index = sc.nextInt();
-                    if (index > tasks.size() || index < 1) {
-                        throw new InvalidIndexException("☹ OOPS!!! There is no such task.");
-                    }
-                    deleteTask(index);
-                    break;
-                }
+            } catch (DukeException ex) {
+                System.out.println(ex);
             }
         }
         sc.close();
@@ -134,10 +139,8 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke duke = new Duke();
-        try {
-            duke.initializeChatbot();
-        } catch (DukeException ex) {
-            System.out.println(ex);
-        }
+
+        duke.initializeChatbot();
+
     }
 }
