@@ -36,6 +36,10 @@ public class Duke {
         formatResponse("Nice! I've marked this task as done:", INDENT + task.toString());
     }
 
+    private static void formatDeletedTask(Task task) {
+        formatResponse("Noted. I've removed this task: ", INDENT + task, "Now you have " + (tasks.size() - 1) + " task" + (tasks.size() == 2 ? "" : "s") + " in the list.");
+    }
+
     private static void addTask(String display) {
         try {
             if (display.length() >= 4 && display.substring(0, 4).equals("todo")) {
@@ -55,7 +59,7 @@ public class Duke {
                 }
             } else if (display.length() >= 5 && display.substring(0, 5).equals("event")) {
                 int idx = display.indexOf(" /at ");
-                if (idx == -1 || display.length() < idx + 5) {
+                if (idx == -1 || display.length() < idx + 5 || display.substring(idx + 5).isBlank()) {
                     throw new TaskException(TaskType.EVENT, "time", "cannot be identified.");
                 } else if (display.substring(6, idx).isBlank()) {
                     throw new TaskException(TaskType.EVENT, "description", "cannot be empty.");
@@ -88,6 +92,14 @@ public class Duke {
                     formatDoneTask(tasks.get(idx));
                 } catch (IndexOutOfBoundsException ex) {
                     formatResponse("Task index is empty / out of bounds.");
+                }
+            } else if (display.length() >= 6 && display.substring(0, 6).equals("delete")) {
+                try {
+                    int idx = Integer.parseInt(String.valueOf(display.charAt(7))) - 1;
+                    formatDeletedTask(tasks.get(idx));
+                    tasks.remove(idx);
+                } catch (IndexOutOfBoundsException ex) {
+                    System.out.println("Task index is empty / out of bounds.");
                 }
             } else if (!display.equals("bye")) {
                 addTask(display);
