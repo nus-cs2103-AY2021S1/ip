@@ -11,17 +11,25 @@ public class Duke {
     boolean handleInput(String input) {
         if (input.equals("bye")) {
             exit();
-            return true;
         } else if (input.equals("list")) {
             System.out.println("    ________________________________________________________");
             for (Task task : tasks) {
-                System.out.println("    " + (tasks.indexOf(task) + 1) + ". " + task.toString()
+                System.out.println("    " + (tasks.indexOf(task) + 1) + "." + task.toString()
                 );
             }
             if (tasks.size() == 0) {
                 System.out.println("    None");
             }
             System.out.println("    ________________________________________________________");
+            return false;
+        } else if (input.startsWith("done ")) {
+            int index = Integer.parseInt(input.substring(5));
+            Task task = tasks.get(index - 1);
+            task.setDone();
+            System.out.println(
+                    "    ________________________________________________________\n"
+                    + "    The following task has been marked as done:\n    " + task.toString()
+                    + "\n    ________________________________________________________");
             return false;
         } else {
             System.out.println(
@@ -32,6 +40,7 @@ public class Duke {
             tasks.add(new Task(input));
             return false;
         }
+        return true;
     }
 
     void exit() {
