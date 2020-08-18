@@ -29,6 +29,7 @@ public class Duke {
     private static final String MESSAGE_TASK_ID_MISSING = "You didn't give me the task number to work with...";
     private static final String MESSAGE_MISSING_DELIM = "There is no '/' in your task";
     private static final String MESSAGE_MISSING_DATETIME = "Did you casually forget to put in the date/time?";
+    private static final String MESSAGE_ALR_DONE = "Do you happen to have short term memory?";
 
     // processes the input and generates the output in the correct format.
     private static String displayOutput(String input) {
@@ -78,12 +79,19 @@ public class Duke {
 
     // mark task as done
     public static String markAsDone(ArrayList<Task> taskList, short id) {
+        Task curr;
         try {
-            taskList.get(id - 1).markAsDone();
+            curr = taskList.get(id - 1);
         } catch (IndexOutOfBoundsException e) { //change
             return displayOutput(MESSAGE_INVALID_ID);
         }
-        return displayOutput(MESSAGE_DONE + "\n" + LEFT_MARGIN_DOUBLE + taskList.get(id - 1));
+        if (curr.isDone()) {
+            return displayOutput(MESSAGE_ALR_DONE);
+        } else {
+            curr.markAsDone();
+            return displayOutput(MESSAGE_DONE + "\n" + LEFT_MARGIN_DOUBLE + curr);
+        }
+
     }
 
     public static void main(String[] args) {
