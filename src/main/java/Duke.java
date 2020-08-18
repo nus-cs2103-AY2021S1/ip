@@ -4,16 +4,18 @@ import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        String catLogo = "        /\\_____/\\\n" +
+                "       /  o   o  \\\n" +
+                "      ( ==  ^  == )\n" +
+                "       )         (\n" +
+                "      (           )\n" +
+                "     ( (  )   (  ) )\n" +
+                "    (__(__)___(__)__)";
+        System.out.println(catLogo);
 
         System.out.println("    ____________________________________________________________");
-        System.out.println("    Hello! I'm Duke");
-        System.out.println("    What can I do for you?");
+        System.out.println("    Hello! I'm NEKOBOT!!");
+        System.out.println("    What can I do for you :>");
         System.out.println("    ____________________________________________________________");
 
         String command = sc.nextLine();
@@ -22,7 +24,7 @@ public class Duke {
         while(!command.equals("bye")) {
             if(command.equals("list")){
                 System.out.println("    ____________________________________________________________");
-                System.out.println("    Here are the tasks in your list:");
+                System.out.println("    Here are the tasks in your list!!");
                 Integer index = 1;
                 for(Task task: list) {
                     System.out.println("    " + index.toString() + ". " + task);
@@ -33,7 +35,7 @@ public class Duke {
                 Integer index = Integer.parseInt(command.substring(5));
                 Task task = list.get(index - 1).markAsDone();
                 System.out.println("    ____________________________________________________________");
-                System.out.println("     Nice! I've marked this task as done:");
+                System.out.println("     Yay! I've marked this task as done :3");
                 System.out.println("       " + task);
                 System.out.println("    ____________________________________________________________");
 
@@ -52,16 +54,16 @@ public class Duke {
                 }
 
                 System.out.println("    ____________________________________________________________");
-                System.out.println("     Got it. I've added this task: ");
+                System.out.println("     Okies! I've added this task~");
                 System.out.println("       " + list.get(list.size() - 1));
-                System.out.println("     Now you have " + list.size() + " tasks in the list.");
+                System.out.println("     Now you have " + list.size() + " tasks in the list uwu");
                 System.out.println("    ____________________________________________________________");
             }
             command = sc.nextLine();
         }
 
         System.out.println("    ____________________________________________________________");
-        System.out.println("     Bye. Hope to see you again soon!");
+        System.out.println("     Bye~ Hope to see you again soon ;w;");
         System.out.println("    ____________________________________________________________");
     }
 }
