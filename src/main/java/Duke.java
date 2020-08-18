@@ -36,6 +36,12 @@ public class Duke {
         System.out.println(ls.get(position-1));
     }
 
+    public static void printAddedTask(ArrayList<Task> ls) {
+        System.out.println("Got it. I've added this task:");
+        System.out.println(ls.get(ls.size() - 1));
+        System.out.println("Now you have " + ls.size() + " tasks in the list.");
+    }
+
     public static void addEvent(String input, ArrayList<Task> ls) throws DukeException {
         if (input.length() <= 6) {
             throw new DukeException("Exception occurred: Name not found for Event.");
@@ -44,6 +50,7 @@ public class Duke {
         String description = input.substring(6, pos);
         String at = input.substring(pos + 4);
         ls.add(new Event(description, at));
+        printAddedTask(ls);
     }
 
     public static void addDeadline(String input, ArrayList<Task> ls) throws DukeException {
@@ -54,6 +61,7 @@ public class Duke {
         String description = input.substring(9, pos);
         String by = input.substring(pos + 4);
         ls.add(new Deadline(description, by));
+        printAddedTask(ls);
     }
 
     public static void deleteTask(String input, ArrayList<Task> ls) throws DukeException {
@@ -64,6 +72,15 @@ public class Duke {
         System.out.println("Noted. I've removed this task:");
         System.out.println(ls.get(position-1));
         ls.remove(position-1);
+    }
+
+    public static String parseInput(String input) {
+        String arr[] = input.split(" ");
+        return arr[0].toUpperCase();
+    }
+
+    enum Choice {
+        DONE, LIST, TODO, EVENT, DEADLINE
     }
 
     public static void main(String[] args) throws DukeException {
@@ -88,27 +105,30 @@ public class Duke {
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
-            } else if (input.equals("list")) { // ability to list out tasks
-                listAllTasks(ls);
-            } else if (input.substring(0,4).equals("done")) { // ability to mark tasks as done
-                completeTask(input, ls);
-            } else {
-                if (input.substring(0,4).equals("todo")) {
-                    ls.add(new Todo(input.substring(5)));
-                } else if (input.length() > 5 && input.substring(0,5).equals("event")) {
-                    addEvent(input, ls);
-                } else if (input.length() > 8 && input.substring(0,8).equals("deadline")) {
+            } else if (input.length() > 5 && input.substring(0,6).equals("delete")) {
+                deleteTask(input, ls);
+                continue;
+            }
+            Choice choice = Choice.valueOf(parseInput(input));
+            switch (choice) {
+                case DONE:
+                    completeTask(input, ls);
+                    break;
+                case LIST:
+                    listAllTasks(ls);
+                    break;
+                case DEADLINE:
                     addDeadline(input, ls);
-                } else if (input.length() > 5 && input.substring(0,6).equals("delete")) {
-                    deleteTask(input, ls);
-                    continue;
-                } else {
-                    System.out.println("Please try again");
-                    continue;
-                }
-                System.out.println("Got it. I've added this task:");
-                System.out.println(ls.get(ls.size() - 1));
-                System.out.println("Now you have " + ls.size() + " tasks in the list.");
+                    break;
+                case EVENT:
+                    addEvent(input, ls);
+                    break;
+                case TODO:
+                    ls.add(new Todo(input.substring(5)));
+                    printAddedTask(ls);
+                    break;
+                default:
+                    System.out.println("Invalid input. Please try again.");
             }
             System.out.println("\n____________________________________________________________");
         }
