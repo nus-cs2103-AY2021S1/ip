@@ -11,8 +11,10 @@ public class DukeLogic {
         try {
             if(command.equals("list")){
                 printTaskList();
-            } else if (command.substring(0, 4).equals("done")){
+            } else if (command.length() >= 4 && command.substring(0, 4).equals("done")){
                 completeTask(command);
+            } else if (command.length() >= 6 && command.substring(0, 6).equals("delete")){
+                deleteTask(command);
             } else if (validAddTaskCommand(command)){
                 addTask(command);
             } else {
@@ -59,6 +61,29 @@ public class DukeLogic {
             System.out.println("    ____________________________________________________________");
             System.out.println("     Yay! I've marked this task as done :3");
             System.out.println("       " + task);
+            System.out.println("    ____________________________________________________________");
+        } catch (NumberFormatException e) {
+            throw new InvalidTaskException("Invalid task index specified");
+        }
+    }
+
+    private void deleteTask(String command) throws InvalidTaskException {
+        if (command.length() < 7) {
+            throw new InvalidTaskException("No task index specified");
+        }
+        try {
+            int index = Integer.parseInt(command.substring(7));
+
+            if(index > this.taskList.size() || index <= 0) {
+                throw new InvalidTaskException("Invalid task index specified");
+            }
+
+            Task task = this.taskList.get(index - 1);
+            this.taskList.remove(index - 1);
+            System.out.println("    ____________________________________________________________");
+            System.out.println("     Got it! I'll remove this task :>");
+            System.out.println("       " + task);
+            System.out.println("     Only " + this.taskList.size() + " tasks left!!");
             System.out.println("    ____________________________________________________________");
         } catch (NumberFormatException e) {
             throw new InvalidTaskException("Invalid task index specified");
