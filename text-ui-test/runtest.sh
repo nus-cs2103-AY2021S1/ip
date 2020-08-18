@@ -3,7 +3,7 @@
 # create bin directory if it doesn't exist
 if [ ! -d "./bin" ]
 then
-    mkdir ./bin
+    mkdir ../bin
 fi
 
 # delete output from previous run
@@ -20,7 +20,7 @@ then
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ./bin Duke < ./text-ui-test/input.txt > ./text-ui-test/ACTUAL.TXT
+java -classpath ../bin Duke < ./text-ui-test/input.txt > ./text-ui-test/ACTUAL.TXT
 
 # convert to UNIX format
 cp ./text-ui-test/EXPECTED.TXT ./text-ui-test/EXPECTED-UNIX.TXT
