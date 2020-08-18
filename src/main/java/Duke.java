@@ -27,9 +27,33 @@ public class Duke {
                 //Duke.echo(input);
                 if(!input.equals("list")){
 
-                    Task.write(input);
+                    if(!input.contains("done")) {
+
+                        Task.write(input);
+
+                    }else{
+
+                        int ref = Integer.parseInt(Character.toString(input.charAt(5))) - 1;
+
+                        if(Task.taskStorage[ref] != null) {
+
+                            Task done = Task.taskStorage[ref].markAsDone();
+                            Task.taskStorage[ref] = done;
+
+                            System.out.println("Nice! I've marked this task as done:\n"
+                                    + Task.taskStorage[ref]);
+
+                        }else{
+
+                            System.out.println("I am afraid that it is not possible" +
+                                    "to do an unknown task.");
+
+                        }
+
+                    }
 
                 }else{
+
                     Task.read();
                 }
             }else {
