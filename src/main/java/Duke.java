@@ -20,7 +20,7 @@ public class Duke {
                 System.out.println(horiLine + goodbye + "\n" + horiLine);
                 break;
             } else if (input.equals("list")) {
-                System.out.println(horiLine);
+                System.out.println(horiLine + "Here are the tasks in your list:");
                 for (Task task : List) {
                     System.out.println(task.getNumber() + "." + task.toString());
                 }
