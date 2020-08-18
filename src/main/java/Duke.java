@@ -1,3 +1,4 @@
+import main.java.Task;
 import main.java.TaskManager;
 
 import java.util.Scanner;
@@ -12,20 +13,51 @@ public class Duke {
         System.out.println(line + message + "\n" + line);
     }
 
+    public static void echoNewTask(Task task, int taskCount){
+        String first = String.format("Got it. I've added this task:\n");
+        String second = "    " + task.toString() + "\n";
+        String third = String.format("Now you have %d tasks in the list", taskCount);
+        echo(first + second + third);
+    }
+
+    public static String[] interpretInput(String input) {
+        String[] result = {"","",""};
+        String[] words = input.split("\\s+");
+        result[0] = words[0];
+        if (words.length > 1) {
+            int index = 1;
+            for (int i = 1; i < words.length; i++){
+                String current = words[i];
+                Character cha = current.charAt(0);
+                if (current.charAt(0) == '/' && index < 2){
+                    index++;
+                } else {
+                    result[index] += result[index] == "" ? current : " " + current;
+                }
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        String name = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|";
         TaskManager taskManager = new TaskManager();
-        echo("    Hello! I'm Duke\n    How can I help you?");
+        echo(name + " at your service. How may I help?");
         while (sc.hasNext()) {
             String input = sc.nextLine();
-            String[] words = input.split("\\s+");
+            String[] words = interpretInput(input);
             String command = words[0];
             switch (command) {
                 case "bye" :
                     echo("Bye. Hope to see you again, bro!");
                     break;
                 case "list":
-                    echo(taskManager.toString());
+                    echo("Here are the tasks in your list\n" + taskManager.toString());
                     break;
                 case "done":
                     try {
@@ -40,9 +72,9 @@ public class Duke {
                         echo("Error. You don't have task # " + words[1]);
                     }
                     break;
+
                 default:
-                    taskManager.addTask(input);
-                    echo("added: " + input);
+                    echo(input);
                     break;
             }
         }
