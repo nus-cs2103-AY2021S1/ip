@@ -8,7 +8,7 @@ public class Duke {
     }
 
     public static void initialMessage() {
-        String toPrint = "    Hello! I'm Hartina Menzel!\n" + "    What can I do for you?\n";
+        String toPrint = "    Hello! I'm Duke the Bad Dragon.\n" + "    What can I do for you?\n";
         printMessage(toPrint);
     }
 
@@ -68,6 +68,17 @@ public class Duke {
                 exitMessage();
                 break;
             }
+
+            else {
+                try {
+                    throw new DukeException("invalid message");
+                } catch (DukeException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            // TODO: 19/08/2020 make a parsing class
+            // TODO: 19/08/2020 separate the exceptions
         }
     }
 }
