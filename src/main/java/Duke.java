@@ -47,7 +47,7 @@ public class Duke {
                     System.out.println(servantSpeak
                             + "    As you wish Sire. I have marked this task as done:\n"
                             + "       [" + userTasks.get(index).getStatusIcon() + "] "
-                            + userTasks.get(index).getTask());
+                            + userTasks.get(index).getDescription());
                 } catch (IndexOutOfBoundsException err) {
                     System.out.println(servantSpeak
                             + "    There seems to be an error your Grace. "
@@ -66,7 +66,7 @@ public class Duke {
                     System.out.println("    "
                             + count + ". "
                             + "[" + i.getStatusIcon() + "] "
-                            + i.getTask());
+                            + i.getDescription());
                     count++;
                 }
                 System.out.println();

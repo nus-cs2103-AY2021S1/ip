@@ -1,14 +1,14 @@
 public class Task {
-    protected String task;
+    protected String description;
     protected boolean isDone;
 
     public Task(String task) {
-        this.task = task;
+        this.description = task;
         this.isDone = false;
     }
 
-    public String getTask() {
-        return this.task;
+    public String getDescription() {
+        return this.description;
     }
 
     public void setDone() {
