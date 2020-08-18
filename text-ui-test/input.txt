@@ -1,0 +1,8 @@
+list
+todo exercise
+deadline finish nekobot /by 20 Aug
+event sleep /at tonight
+list
+done 2
+list
+bye
