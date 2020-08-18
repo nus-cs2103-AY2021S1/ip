@@ -8,3 +8,4 @@
 ../src/main/java/Task.java
 ../src/main/java/Duke.java
 ../src/main/java/DoneCommand.java
+../src/main/java/DukeException.java

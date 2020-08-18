@@ -4,13 +4,17 @@ import java.util.List;
 public class ListCommand implements Command {
     List<Task> list;
 
-    public ListCommand(List<Task> list) {
+    public ListCommand(List<Task> list){
         this.list = list;
     }
 
     @Override
     public void execute() {
-        new Duke().print(itemize());
+        if(list.isEmpty()) {
+            new Duke().print("There are no items in the list right now.");
+        } else {
+            new Duke().print(itemize());
+        }
     }
 
     private List<String> itemize() {
