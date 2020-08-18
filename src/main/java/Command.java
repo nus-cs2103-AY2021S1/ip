@@ -4,5 +4,5 @@ public abstract class Command {
 
     public String[] names;
 
-    public abstract void execute();
+    public abstract void execute(String str);
 }
