@@ -7,7 +7,6 @@ public class Duke {
 
     static final String GREETING = "Hello! I'm Duke";
     static final String PROMPT = "What can I do for you?";
-    static final String EXIT = "Bye. Hope to see you again soon!";
 
 
     public static void main(String[] args) {
@@ -17,31 +16,39 @@ public class Duke {
     public void repl() {
         Scanner sc = new Scanner(System.in);
         String input;
-        List<String> taskHistory = new ArrayList<>();
+        List<Task> list = new ArrayList<>();
         boolean isActive = true;
 
         print(GREETING, PROMPT);
         while(isActive) {
             input = sc.nextLine().trim();
+            String arr[] = input.split(" ", 2);
+            String command = arr[0];
+            String remaining = arr.length == 1 ? null : arr[1];
             isActive = !input.equalsIgnoreCase("bye");
-            switch(input) {
+            switch(command) {
                 case "list": {
-                    print(itemize(taskHistory));
+                    new ListCommand(list).execute();
+                    break;
+                }
+                case "done": {
+                    int index = Integer.parseInt(remaining) - 1; // TODO: exception handling
+                    new DoneCommand(index, list).execute();
                     break;
                 }
                 case "bye": {
+                    new ByeCommand().execute();
                     break;
                 }
                 default: {
-                    taskHistory.add(input);
-                    print("added: " + input);
+                    Task task = new Task(input);
+                    new AddCommand(task, list).execute();
                 }
             }
         }
-        print(EXIT);
     }
 
-    private void print(List<String> strings) {
+    public static void print(List<String> strings) {
         final String INDENT = "\t";
         final String SEPARATOR = "_".repeat(69);
 
@@ -52,17 +59,7 @@ public class Duke {
         System.out.println(INDENT + SEPARATOR + "\n");
     }
 
-    private void print(String ...strings) {
+    public static void print(String ...strings) {
         print(Arrays.asList(strings));
-    }
-
-    private List<String> itemize(List<String> strings) {
-        int itemNumber = 1;
-        List<String> itemizedStrings = new ArrayList<>();
-        for(String s : strings) {
-            itemizedStrings.add(itemNumber + ". " + s);
-            itemNumber++;
-        }
-        return itemizedStrings;
     }
 }
