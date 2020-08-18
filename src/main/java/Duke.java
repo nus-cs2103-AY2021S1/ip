@@ -102,13 +102,48 @@ public class Duke {
     }
 
     public static void invalidDoneTaskIndex(int tasksSize) {
-        String warningMsg = "**************************************************************"
+        String warningMsg = "################################################################"
                 + "\n 【• ▂ •】What? "
                 + "\n I couldn't find this task, please re-enter a valid task index!"
                 + "\n And make sure you follow this format - 'done <Task_Index>'."
                 + "\n You have " + tasksSize + " tasks in total."
                 + "\n\n **Type 'help' to see what I can do. |^_^|"
-                + "\n**************************************************************";
+                + "\n################################################################";
+        System.out.println(warningMsg);
+    }
+    public static void invalidToDo() {
+        String warningMsg = "################################################################"
+                + "\n 【• ▂ •】What? "
+                + "\n OOPS!!! The description of a todo cannot be empty."
+                + "\n And make sure you follow this format - 'todo <task name>'."
+                + "\n\n **Type 'help' to see what I can do. |^_^|"
+                + "\n################################################################";
+        System.out.println(warningMsg);
+    }
+    public static void invalidDeadline() {
+        String warningMsg = "################################################################"
+                + "\n 【• ▂ •】What? "
+                + "\n OOPS!!! The description or/and deadline of a deadline task cannot be empty."
+                + "\n And make sure you follow this format - 'deadline <task name> /by <task deadline>'."
+                + "\n\n **Type 'help' to see what I can do. |^_^|"
+                + "\n################################################################";
+        System.out.println(warningMsg);
+    }
+    public static void invalidEvent() {
+        String warningMsg = "################################################################"
+                + "\n 【• ▂ •】What? "
+                + "\n OOPS!!! The description or/and event timing of a event task cannot be empty."
+                + "\n And make sure you follow this format - 'event <event name> /at <event timing>'."
+                + "\n\n **Type 'help' to see what I can do. |^_^|"
+                + "\n################################################################";
+        System.out.println(warningMsg);
+    }
+    public static void invalidInput() {
+        String warningMsg = "################################################################"
+                + "\n 【• ▂ •】What? "
+                + "\n OOPS!!! I'm sorry, but I don't know what that means."
+                + "\n\n **Type 'help' to see what I can do. |^_^|"
+                + "\n################################################################";
         System.out.println(warningMsg);
     }
 
@@ -142,25 +177,34 @@ public class Duke {
                 }
             } else if (inputMsg.startsWith("todo")) {
                 String taskTitle;
-                taskTitle = inputMsg.split("todo ")[1];
-
-                addTodoTask(taskTitle, tasks);
+                try {
+                    taskTitle = inputMsg.split("todo ")[1];
+                    addTodoTask(taskTitle, tasks);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    invalidToDo();
+                }
             } else if (inputMsg.startsWith("deadline")) {
                 String taskTitle;
                 String deadlineTime;
-
-                taskTitle = inputMsg.split("deadline ")[1].split("/by")[0];
-                deadlineTime = inputMsg.split("deadline ")[1].split("/by")[1];
-                addDeadlineTask(taskTitle, deadlineTime, tasks);
+                try {
+                    taskTitle = inputMsg.split("deadline ")[1].split("/by")[0];
+                    deadlineTime = inputMsg.split("deadline ")[1].split("/by")[1];
+                    addDeadlineTask(taskTitle, deadlineTime, tasks);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    invalidDeadline();
+                }
             } else if (inputMsg.startsWith("event")) {
                 String taskTitle;
                 String eventTime;
-
-                taskTitle = inputMsg.split("event ")[1].split("/at")[0];
-                eventTime = inputMsg.split("event ")[1].split("/at")[1];
-                addEventTask(taskTitle, eventTime, tasks);
+                try {
+                    taskTitle = inputMsg.split("event ")[1].split("/at")[0];
+                    eventTime = inputMsg.split("event ")[1].split("/at")[1];
+                    addEventTask(taskTitle, eventTime, tasks);
+                } catch (ArrayIndexOutOfBoundsException e){
+                    invalidEvent();
+                }
             } else {
-                addTask(inputMsg, tasks);
+                invalidInput();
             }
             inputMsg = sc.nextLine();
         }
