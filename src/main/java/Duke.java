@@ -23,7 +23,7 @@ public class Duke {
     void completeTask(int taskNo) {
         Task task = tasks.get(taskNo - 1);
         task.done();
-        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println("Nice! I've marked this task as done:");
         System.out.println(task);
     }
 
