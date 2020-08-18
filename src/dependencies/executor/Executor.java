@@ -8,7 +8,7 @@ import static dependencies.executable.CommandType.*;
 
 public class Executor {
 
-    private static final Store storage = Store.initStorage(100);
+    private static final Store storage = Store.initStorage();
     private static final String ADD_COMMAND = "add";
     private static final String LIST_COMMAND = "list";
     private static final String DONE_COMMAND = "done";

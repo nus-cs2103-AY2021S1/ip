@@ -11,6 +11,8 @@ public abstract class Task {
         this.state = UNFINISHED;
     }
 
+    abstract String getDateLine();
+
     public String showTask() {
         return this.task;
     }
@@ -19,11 +21,12 @@ public abstract class Task {
         return false;
     }
 
-    abstract String getDateLine();
-
-
     public void completed() {
         this.state = COMPLETED;
+    }
+
+    public boolean isCompleted() {
+        return state == COMPLETED;
     }
 
     /* -------------------------- Static facory methods to create different Tasks ----------------------- */
