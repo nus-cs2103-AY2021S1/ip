@@ -33,6 +33,17 @@ public class Duke {
                         chatPrint("Nice! I've marked this task as done:\n" +
                                 tab + "   " + doneTask);
                         break;
+                    case "delete":
+                        int idx2 = Integer.parseInt(input.split(" ")[1]) - 1;
+                        if (idx2 >= tasks.size()) {
+                            throw new DukeException("Oh dear! That task doesn't exist!");
+                        }
+                        Task rmTask = tasks.get(idx2);
+                        tasks.remove(idx2);
+                        chatPrint("Noted. I've removed this task:\n" +
+                                tab + "   " + rmTask + "\n" +
+                                tab + "Now you have " + tasks.size() + " tasks in the list.");
+                        break;
                     case "todo":
                     case "deadline":
                     case "event":
