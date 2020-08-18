@@ -30,28 +30,40 @@ public class Duke {
             } else {
                 return printList(list);
             }
-        } else if (order.substring(0, 4).equals("done")) {
+        } else if (order.length() >= 4 && order.substring(0, 4).equals("done")) {
             Integer index = Integer.valueOf(order.substring(5))-1;
             Task temp = list.get(index);
             temp.done();
             list.set(index, temp);
             return "    Great! I have marked this task as done:\n" + temp;
-        } else if (order.substring(0, 4).equals("todo")) {
-            String content = order.substring(5);
-            list.add(new Todo(content));
-            return "    added:" + content + "\n" + "    Now you have " + list.size() + " task(s) in the list";
-        } else if (order.substring(0, 8).equals("deadline")) {
-            Integer indexOfSlash = order.indexOf('/');
-            String content = order.substring(9, indexOfSlash);
-            String due = order.substring(indexOfSlash+1);
-            list.add(new Deadline(content, due));
-            return "    added:" + content + "\n" + "    Now you have " + list.size() + " task(s) in the list";
-        } else if (order.substring(0, 5).equals("event")) {
-            Integer indexOfSlash = order.indexOf('/');
-            String content = order.substring(6, indexOfSlash);
-            String time = order.substring(indexOfSlash+1);
-            list.add(new Event(content, time));
-            return "    added:" + content + "\n" + "    Now you have " + list.size() + " task(s) in the list";
+        } else if (order.length() >= 4 && order.substring(0, 4).equals("todo")) {
+            if (order.length()>4) {
+                String content = order.substring(5);
+                list.add(new Todo(content));
+                return "    added:" + content + "\n" + "    Now you have " + list.size() + " task(s) in the list";
+            } else {
+                return "    description cannot be empty~";
+            }
+        } else if (order.length() >= 8 && order.substring(0, 8).equals("deadline")) {
+            if (order.length() > 8) {
+                Integer indexOfSlash = order.indexOf('/');
+                String content = order.substring(9, indexOfSlash);
+                String due = order.substring(indexOfSlash + 1);
+                list.add(new Deadline(content, due));
+                return "    added:" + content + "\n" + "    Now you have " + list.size() + " task(s) in the list";
+            } else {
+                return "    description cannot be empty~";
+            }
+        } else if (order.length() >= 5 && order.substring(0, 5).equals("event")) {
+            if (order.length() > 5) {
+                Integer indexOfSlash = order.indexOf('/');
+                String content = order.substring(6, indexOfSlash);
+                String time = order.substring(indexOfSlash + 1);
+                list.add(new Event(content, time));
+                return "    added:" + content + "\n" + "    Now you have " + list.size() + " task(s) in the list";
+            } else {
+                return "    description cannot be empty~";
+            }
         } else {
             return "    Sorry, I don't understand.";
         }
