@@ -13,6 +13,9 @@ event run /at Utown 10pm
 event run at Utown 10pm
 event gym /at Utown 10pm
 event run /at
+event dance /at school
+list
+delete 3
 todo
 deadline
 event
