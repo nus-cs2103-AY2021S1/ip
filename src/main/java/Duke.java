@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
@@ -10,9 +11,23 @@ public class Duke {
         System.out.println(lineDivider + "\n");
     }
 
+    public static String showList(ArrayList<String> list) {
+        StringBuffer lst = new StringBuffer();
+        int listSize = list.size();
+        for (int i = 0; i < listSize; i++) {
+            if (i + 1 != listSize) {
+                lst.append((i + 1) + ". " + list.get(i) + "\n");
+            } else {
+                lst.append((i + 1) + ". " + list.get(i));
+            }
+        }
+        return lst.toString();
+    }
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        ArrayList<String> list = new ArrayList<>(2);
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -27,8 +42,11 @@ public class Duke {
             if (msg.equals("bye")) {
                 echo("Bye. Hope to see you again soon!");
                 break;
+            } else if (msg.equals("list")) {
+                echo(showList(list));
             } else {
-                echo(msg);
+                list.add(msg);
+                echo("added: " + msg);
             }
         }
     }
