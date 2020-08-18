@@ -43,7 +43,7 @@ public class Duke {
                         throw new DukeUnknownCommandException(ERROR_MESSAGE + "\nWas the command valid?");
                 }
             }
-        } catch (DukeUnknownCommandException | DukeIncompleteCommandException e) {
+        } catch (DukeUnknownCommandException | DukeIncompleteCommandException | DukeInvalidArgumentException e) {
             printWithDivider(e.getMessage());
         }
     }
@@ -69,7 +69,8 @@ public class Duke {
         printWithDivider(rv);
     }
 
-    private static void completeTask(String[] inputList) {
+    private static void completeTask(String[] inputList)
+            throws DukeInvalidArgumentException, DukeIncompleteCommandException {
         if (inputList.length > 1) {
             String taskIndex = inputList[1];
             try {
@@ -77,10 +78,10 @@ public class Duke {
                 Task task = taskList.get(index).completeTask();
                 printWithDivider("Nice! I've marked this task as done:\n" + task.toString());
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                printWithDivider(ERROR_MESSAGE + "\nDid you provide a valid index?");
+                throw new DukeInvalidArgumentException(ERROR_MESSAGE + "\nDid you provide a valid index?");
             }
         } else {
-            printWithDivider(ERROR_MESSAGE + "\nWas an index given?");
+            throw new DukeIncompleteCommandException(ERROR_MESSAGE + "\nWas an index given?");
         }
     }
 
