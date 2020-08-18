@@ -1,8 +1,8 @@
 package main.java;
 
-public class Exit extends Command {
+public class ExitCommand extends Command {
 
-    public Exit() {
+    public ExitCommand() {
         names = new String[] { "bye" };
     }
 

@@ -5,7 +5,6 @@ import java.util.HashMap;
 public class DukeCommandSet {
 
     private static DukeCommandSet instance;
-
     public static DukeCommandSet getInstance() {
         if (instance == null) {
             instance = new DukeCommandSet();
@@ -19,7 +18,8 @@ public class DukeCommandSet {
     public DukeCommandSet() {
         commandSet = new HashMap<>();
 
-        registerCommand(new Exit());
+        registerCommand(new ExitCommand());
+        registerCommand(new ListCommand());
     }
 
     private void registerCommand(Command command) {
