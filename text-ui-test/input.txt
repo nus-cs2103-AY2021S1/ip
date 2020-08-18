@@ -1,13 +1,13 @@
-todo study for exam
-deadline read a book /by October
-event eat lunch with girlfriend /at Mon 2-4pm
+todo read book
+event walk dog /Monday Morning
+deadline finish homework /8pm today
 done 1
-list
+delete 1
 done 2
 list
-done 0
-done 4
-done 3
 done 2
+delete 2
+done 1
+delete 1
 list
 bye

@@ -2,49 +2,60 @@ Hello I am Duke!
 How can I help you?
 
 Got it. This task is now added.
- [T][✘] todo study for exam
+ [T][✘] read book
 You have 1 tasks left in your list!
 
+
 Got it. This task is now added.
- [D][✘] deadline read a book  (by: October)
+ [E][✘] walk dog  (at: Monday Morning)
 You have 2 tasks left in your list!
 
+
 Got it. This task is now added.
- [E][✘] event eat lunch with girlfriend  (at: Mon 2-4pm)
+ [D][✘] finish homework (by: 8pm today)
 You have 3 tasks left in your list!
 
+
 Nice! I have completed this task!
- [T][✓] todo study for exam
+ [T][✓] read book
+
+
+Got it. Deleting task.....
+ [T][✓] read book
+You have 2 tasks left in your list!
+
+
+Nice! I have completed this task!
+ [D][✓] finish homework (by: 8pm today)
+
+
 
 Here are the tasks in your tasklist:
-1.[T][✓] todo study for exam
-2.[D][✘] deadline read a book  (by: October)
-3.[E][✘] event eat lunch with girlfriend  (at: Mon 2-4pm)
+1.[E][✘] walk dog  (at: Monday Morning)
+2.[D][✓] finish homework (by: 8pm today)
 
-Nice! I have completed this task!
- [D][✓] deadline read a book  (by: October)
 
-Here are the tasks in your tasklist:
-1.[T][✓] todo study for exam
-2.[D][✓] deadline read a book  (by: October)
-3.[E][✘] event eat lunch with girlfriend  (at: Mon 2-4pm)
-
-No such Task
-
-No such Task
-
-Nice! I have completed this task!
- [E][✓] event eat lunch with girlfriend  (at: Mon 2-4pm)
 
 This task has already been completed!
 
-Here are the tasks in your tasklist:
-1.[T][✓] todo study for exam
-2.[D][✓] deadline read a book  (by: October)
-3.[E][✓] event eat lunch with girlfriend  (at: Mon 2-4pm)
+
+Got it. Deleting task.....
+ [D][✓] finish homework (by: 8pm today)
+You have 1 tasks left in your list!
+
+
+Nice! I have completed this task!
+ [E][✓] walk dog  (at: Monday Morning)
+
+
+Got it. Deleting task.....
+ [E][✓] walk dog  (at: Monday Morning)
+You have 0 tasks left in your list!
+
+
+There are currently no tasks stored!
+
 
 Bye! Have a nice day!
-
-
 
 
