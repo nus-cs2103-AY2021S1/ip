@@ -2,30 +2,30 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static ArrayList<String> taskList = new ArrayList<>();
+    private static final ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String command;
-        boolean isDone = false;
-
         System.out.println("Hello! I'm Eggy\n" + "How may I help you?");
+        Scanner sc = new Scanner(System.in);
+        String command = sc.nextLine();
 
-        while (!isDone) {
-            command = sc.nextLine();
-            if (command.equals("bye")) {
-                isDone = true;
-                System.out.println("Bye. See you soon!");
-            } else if (command.equals("list")){
-                int i = 1;
-                for (String str : taskList) {
-                    System.out.println(i + ". " + str);
-                    i++;
+        while (!command.equals("bye")) {
+            if (command.equals("list")) {
+                for (int i = 0; i < taskList.size(); i++) {
+                    System.out.println((i + 1) + ": " + taskList.get(i));
                 }
+            } else if (command.startsWith("done ")) {
+                String str = command.substring(5);
+                int number = Integer.parseInt(str) - 1;
+                Task task = taskList.get(number);
+                task.completeTask();
+                System.out.println("Nice! I've marked this task as done: \n" + task);
             } else {
-                taskList.add(command);
+                taskList.add(new Task(command));
                 System.out.println("added: " + command);
             }
+            command = sc.nextLine();
         }
+        System.out.println("Bye. See you soon!");
     }
 }
