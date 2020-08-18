@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-  public static String process(String input, List<Task> list) {
+  public static String process(String input, List<Task> list) throws DukeException {
     String output;
     String[] command = input.split(" ", 2);
 
@@ -25,7 +25,7 @@ public class Duke {
       output = "\tNice! I've marked this task as done: \n\t\t" + targetTask;
     } else if (command[0].equals("todo")) {
       if (command.length < 2) {
-        output = "\t☹ OOPS!!! The description of a todo cannot be empty.";
+        throw new DukeException("\t☹ OOPS!!! The description of a todo cannot be empty.");
       } else {
         ToDo newToDo = new ToDo(command[1]);
 
@@ -54,7 +54,7 @@ public class Duke {
 
       output = "\tNoted. I've removed this task: \n\t\t" + targetTask + "\n\tNow you have " + list.size() + " tasks in the list.";
     } else {
-      output = "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+      throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     return output;
@@ -79,8 +79,13 @@ public class Duke {
 
     while (!input.equals("bye")) {
       input = sc.nextLine();
-      output = process(input, list);
-      
+
+      try {
+        output = process(input, list);
+      } catch (DukeException e) {
+        output = e.getMessage();
+      }
+
       System.out.println("\t" + divider);
       System.out.println(output);
       System.out.println("\t" + divider + "\n");
