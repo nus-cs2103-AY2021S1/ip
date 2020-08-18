@@ -125,5 +125,49 @@ You have 6 items.
 6: [✘] | D | quiz2 submission | By: Tues 2 pm
 -------------------------------------
 -------------------------------------
+Hmm I didn't quite catch that.
+Did you provide a valid index?
+-------------------------------------
+-------------------------------------
+Hmm I didn't quite catch that.
+Did you provide a valid index?
+-------------------------------------
+-------------------------------------
+Noted. I've deleted this task:
+[✓] | T | test
+-------------------------------------
+-------------------------------------
+You have 5 items.
+
+1: [✘] | T | read book
+2: [✓] | E | meeting | At: Mon
+3: [✘] | E | lunch with friends | At: Mon 3 pm
+4: [✘] | D | quiz1 | By: Tues
+5: [✘] | D | quiz2 submission | By: Tues 2 pm
+-------------------------------------
+-------------------------------------
+Noted. I've deleted this task:
+[✘] | E | lunch with friends | At: Mon 3 pm
+-------------------------------------
+-------------------------------------
+You have 4 items.
+
+1: [✘] | T | read book
+2: [✓] | E | meeting | At: Mon
+3: [✘] | D | quiz1 | By: Tues
+4: [✘] | D | quiz2 submission | By: Tues 2 pm
+-------------------------------------
+-------------------------------------
+Noted. I've deleted this task:
+[✘] | D | quiz1 | By: Tues
+-------------------------------------
+-------------------------------------
+You have 3 items.
+
+1: [✘] | T | read book
+2: [✓] | E | meeting | At: Mon
+3: [✘] | D | quiz2 submission | By: Tues 2 pm
+-------------------------------------
+-------------------------------------
 Bye! See you around!
 -------------------------------------
