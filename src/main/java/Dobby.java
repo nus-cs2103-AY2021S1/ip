@@ -15,9 +15,10 @@ public class Dobby {
     private static final String EVENT = "\n      event _description_ /at _event_scheduled_at_";
     private static final String LIST = "\n      list";
     private static final String DONE = "\n      done _task_number_";
+    private static final String DELETE = "\n      delete _task_number_";
     private static final String BYE = "\n      bye";
     private static final String ALL_COMMANDS = "\n    You can use the following commands in this chat bot:" +
-            TODO + DEADLINE + EVENT + LIST + DONE + BYE;
+            TODO + DEADLINE + EVENT + LIST + DONE + DELETE + BYE;
 
     public static void main(String[] args) {
 
@@ -59,12 +60,37 @@ public class Dobby {
             try {
                 text = text.substring(4).trim();
                 int index = Integer.parseInt(text);
+                if (tasks.size() < index) { // if index is out of range throw exception
+                    throw new DobbyException("\n    Incorrect usage of command. Task number must be within the correct range."
+                            + DONE + "\n    ");
+                }
                 Task task = tasks.get(index - 1);
                 task.setDone();
                 message = "\n    Great! I've marked this task as done:\n      " + task.getDescription() + "\n    ";
+            } catch (DobbyException e) { // if index is out of range return message
+                return e.getMessage();
             } catch (Exception e) { // missing number after done
                 throw new DobbyException("\n    Incorrect usage of command. Please enter a task number after done."
                         + DONE + "\n    ");
+            }
+
+        } else if (text.startsWith("delete")) { // delete command
+
+            try {
+                text = text.substring(6).trim();
+                int index = Integer.parseInt(text);
+                if (tasks.size() < index) { // if index is out of range throw exception
+                    throw new DobbyException("\n    Incorrect usage of command. Task number must be within the correct range."
+                            + DELETE + "\n    ");
+                }
+                Task task = tasks.get(index - 1);
+                tasks.remove(index - 1);
+                message = "\n    Noted. I've removed this task:\n      " + task.getDescription() + "\n    ";
+            } catch (DobbyException e) { // if index is out of range return message
+                return e.getMessage();
+            } catch (Exception e) { // missing number after done
+                throw new DobbyException("\n    Incorrect usage of command. Please enter a task number after delete."
+                        + DELETE + "\n    ");
             }
 
         } else if (text.startsWith("deadline")) { // deadline command

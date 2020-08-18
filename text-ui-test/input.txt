@@ -11,6 +11,12 @@ event lecture /at friday 4pm
 list
 done
 done n
+done 4
 done 2
+list
+delete
+delete n
+delete 4
+delete 2
 list
 bye
