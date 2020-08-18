@@ -72,7 +72,18 @@ public class Duke {
                         echo("Error. You don't have task # " + words[1]);
                     }
                     break;
-
+                case "deadline":
+                    Task addedDeadline = taskManager.addDeadLine(words[1], words[2]);
+                    echoNewTask(addedDeadline, taskManager.getTotalTask());
+                    break;
+                case "event":
+                    Task addedEvent = taskManager.addEvent(words[1], words[2]);
+                    echoNewTask(addedEvent, taskManager.getTotalTask());
+                    break;
+                case "todo":
+                    Task addedToDo = taskManager.addToDo(words[1]);
+                    echoNewTask(addedToDo, taskManager.getTotalTask());
+                    break;
                 default:
                     echo(input);
                     break;
