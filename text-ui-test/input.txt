@@ -1,6 +1,8 @@
+assist
 todo read book
 deadline return book /by Thursday
 scroll
+scROLL
 conquer 1
 scroll
 conquer 2
@@ -18,6 +20,13 @@ deadline
 event    
 conquer $$$
 delete fbeg
+conquer
+delete
+conquer 
+delete 
 todo   
        
+delete 2
+conquer 1
+scroll 
 dismiss
