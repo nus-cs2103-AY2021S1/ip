@@ -6,6 +6,11 @@ import java.util.stream.Stream;
 
 public class IPbot {
 
+    // command strings
+    private static final String EXIT_CMD = "bye";
+    private static final String LIST_CMD = "list";
+    private static final String DONE_CMD = "done ";
+
     /**
      * Entry point of the program.
      * @param args command line arguments
@@ -20,10 +25,10 @@ public class IPbot {
         final ArrayList<Task> tasks = new ArrayList<>();
 
         Stream.generate(sc::nextLine)
-            .takeWhile(input -> !"bye".equals(input))
+            .takeWhile(input -> !EXIT_CMD.equals(input))
             .forEach(input -> {
                 final String output;
-                if ("list".equals(input)) {
+                if (LIST_CMD.equals(input)) {
                     // list tasks
                     output = tasks.isEmpty()
                             ? "No tasks added."
@@ -35,9 +40,9 @@ public class IPbot {
                                     }
                                 })
                                 .collect(Collectors.joining("\n"));
-                } else if (input.startsWith("done ")) {
+                } else if (input.startsWith(DONE_CMD)) {
                     // mark a task as done
-                    final int id = Integer.parseInt(input.substring("done ".length()));
+                    final int id = Integer.parseInt(input.substring(DONE_CMD.length()));
                     final Task toComplete = tasks.get(id - 1);
                     if (toComplete.getDoneStatus()) {
                         // already done
