@@ -9,6 +9,7 @@
 //    }
 //}
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -27,31 +28,45 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
-        String currInput = sc.next();
+        String currInput = sc.nextLine();
 
         List<String> inputList = new ArrayList<>();
-
+        List<String> checkBox = new ArrayList<>();
 
         while (!currInput.equals("bye")) {
 
+            String toSplit = String.valueOf(currInput);
+            String[] splitString = toSplit.split(" ");
+
+
             if (currInput.equals("list")) {
-                int i = 1;
+
                 System.out.println("____________________________________________________________");
-                for (String inputItem: inputList) {
-                    System.out.println(i + ". " + inputItem);
-                    i++;
+                for (int i = 0; i < inputList.size(); i++) {
+                    System.out.println((i + 1) + ". " + "[" + checkBox.get(i) + "]" + inputList.get(i));
+                }
+                System.out.println("____________________________________________________________");
+
+            } else if (splitString[0].equals("done")) {
+                int index = Integer.parseInt(splitString[1]);
+                checkBox.set(index -1 , "✓");
+
+                System.out.println("____________________________________________________________");
+                for (int i = 0; i < inputList.size(); i++) {
+                    System.out.println((i + 1) + ". " + "[" + checkBox.get(i) + "]" + inputList.get(i));
                 }
                 System.out.println("____________________________________________________________");
 
             } else {
                 inputList.add(currInput);
+                checkBox.add("✗");
                 System.out.println("____________________________________________________________");
                 System.out.println(currInput);
                 System.out.println("____________________________________________________________\n");
             }
 
 
-            currInput = sc.next();
+            currInput = sc.nextLine();
         }
 
         String endMessage = (
