@@ -9,6 +9,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%c] [%s] %s", 'T', getStatusIcon(), name);
+        return String.format("[%c] [%s] %s", 'T', getStatusIcon(), description);
     }
 }

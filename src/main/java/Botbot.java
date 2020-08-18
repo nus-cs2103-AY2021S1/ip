@@ -6,7 +6,11 @@ public class Botbot {
         Chat chat = new Chat();
         while (chat.isRunning()) {
             String input = sc.nextLine();
-            chat.handleInput(input);
+            try {
+                chat.handleInput(input);
+            } catch (BotbotException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }

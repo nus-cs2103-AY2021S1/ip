@@ -25,29 +25,38 @@ public class Chat {
         return isRunning;
     }
 
-    void handleInput(String input) {
+    void handleInput(String input) throws EmptyTaskException, EmptyTaskNumberException,
+            InvalidFormatException, NoSuchCommandException {
         if (input.equals("bye")) {
             exit();
         } else if (input.equals("list")) {
             list();
         } else if (input.length() >= 6 && input.substring(0, 5).equals("done ")) {
             markAsDone(input);
+        } else if (input.equals("done") || (input.length() >= 5 && input.substring(0, 5).equals("done "))) {
+            throw new EmptyTaskNumberException();
         } else if (input.length() >= 6 && input.substring(0, 5).equals("todo ")) {
             addToList(new Todo(input));
+        } else if (input.equals("todo") || (input.length() >= 5 && input.substring(0, 5).equals("todo "))) {
+            throw new EmptyTaskException("a todo");
         } else if (input.length() >= 10 && input.substring(0, 9).equals("deadline ")) {
-            if (input.contains(" /by ")) {
-                addToList(new Deadline(input));
-            } else {
-                handleInvalidFormat(Deadline.FORMAT);
+            if (!input.contains(" /by ")) {
+                throw new InvalidFormatException(Deadline.FORMAT);
             }
+            addToList(new Deadline(input));
+        } else if (input.equals("deadline")
+                || (input.length() >= 9 && input.substring(0, 9).equals("deadline "))) {
+            throw new EmptyTaskException("a deadline");
         } else if (input.length() >= 7 && input.substring(0, 6).equals("event ")) {
-            if (input.contains(" /at ")) {
-                addToList(new Event(input));
-            } else {
-                handleInvalidFormat(Event.FORMAT);
+            if (!input.contains(" /at ")) {
+                throw new InvalidFormatException(Event.FORMAT);
             }
+            addToList(new Event(input));
+        } else if (input.equals("event")
+                || (input.length() >= 6 && input.substring(0, 6).equals("event "))) {
+            throw new EmptyTaskException("an event");
         } else {
-            System.out.println("    sorry, I don't know what that means!\n");
+            throw new NoSuchCommandException();
         }
     }
 
@@ -73,16 +82,12 @@ public class Chat {
             task.markAsDone();
             System.out.println("    nice! I've marked this task as done:\n      " + task + "\n");
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            System.out.println("    invalid task number!\n");
+            System.out.println("    oops! invalid task number!\n");
         }
     }
 
     void exit() {
         System.out.println("    bye! see you soon!");
         isRunning = false;
-    }
-
-    void handleInvalidFormat(String format) {
-        System.out.println(String.format("    invalid format! please follow '%s'\n", format));
     }
 }

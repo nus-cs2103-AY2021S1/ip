@@ -15,6 +15,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%c] [%s] %s (by: %s)", 'D', getStatusIcon(), name, by);
+        return String.format("[%c] [%s] %s (by: %s)", 'D', getStatusIcon(), description, by);
     }
 }
