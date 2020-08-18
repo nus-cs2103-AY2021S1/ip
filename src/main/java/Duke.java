@@ -9,7 +9,9 @@ public class Duke {
         DEADLINE,
         LIST,
         DONE,
-        BYE,c
+        BYE,
+        DELETE,
+        CLEAR,
     }
 
     public static void main(String[] args) {
@@ -46,13 +48,15 @@ public class Duke {
                 checkIllegalArgument(userInputArray[0]);
                 // Catch missing content
                 checkMissingArgument(userInputArray);
+                // Check indexing out of bounds
+                checkExistingTask(userInputArray, userInputCollector.size());
 
                 // Decide the actions
                 switch (userInputArray[0]) {
                     case "list":
                         prettyPrint(userInputCollector);
                         break;
-
+                        
                     case "done":
                         taskToUpdate = userInputCollector.get(Integer.parseInt(userInput.split(" ", 2)[1])
                                 - 1);
@@ -86,8 +90,20 @@ public class Duke {
                                 "\t" + taskToUpdate + "\n" +
                                 "\tNow you have " + userInputCollector.size() + " tasks in the list.");
                         break;
+
+                    case "delete":
+                        taskToUpdate = userInputCollector.get(Integer.parseInt(userInputArray[1]) - 1);
+                        userInputCollector.remove(taskToUpdate);
+                        prettyPrint("Noted. I've removed this task: \n" +
+                                "\t" + taskToUpdate + "\n" +
+                                "\tNow you have " + userInputCollector.size() + " tasks in the list.");
+                        break;
+
+                    case "clear":
+                        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                        break;
                 }
-            } catch (DukeIllegalArgument | DukeMissingArgument e) {
+            } catch (DukeIllegalCommandException | DukeMissingArgumentException | DukeTaskOutOfBoundsException e) {
                 System.out.println(e.toString());
             }
 
@@ -98,21 +114,33 @@ public class Duke {
     }
 
     // Check if command user input is valid
-    private static void checkIllegalArgument(String command) throws DukeIllegalArgument {
+    private static void checkIllegalArgument(String command) throws DukeIllegalCommandException {
         for (AcceptedCommands i : AcceptedCommands.values()) {
             if (command.equalsIgnoreCase(i.name())) {
                 return;
             }
         }
 
-        throw new DukeIllegalArgument();
+        throw new DukeIllegalCommandException();
     }
 
     // Check if command of user missing arguments
-    private static void checkMissingArgument(String[] command) throws DukeMissingArgument {
-        if (!(command[0].equalsIgnoreCase(AcceptedCommands.LIST.name()) || (command[0].equalsIgnoreCase(AcceptedCommands.BYE.name())))
-                && (command.length == 1)) {
-            throw new DukeMissingArgument(command[0]);
+    private static void checkMissingArgument(String[] command) throws DukeMissingArgumentException {
+        if (!(command[0].equalsIgnoreCase(AcceptedCommands.LIST.name())
+                || command[0].equalsIgnoreCase(AcceptedCommands.BYE.name())
+                || command[0].equalsIgnoreCase(AcceptedCommands.CLEAR.name()))
+                        && (command.length == 1)) {
+            throw new DukeMissingArgumentException(command[0]);
+        }
+    }
+
+    // Check if trying to access Tasks index out of the list
+    private static void checkExistingTask(String[] command, int max) throws DukeTaskOutOfBoundsException {
+        if ((command[0].equalsIgnoreCase(AcceptedCommands.DONE.name()))
+                || command[0].equalsIgnoreCase(AcceptedCommands.DELETE.name())) {
+            if ((Integer.parseInt(command[1]) < 1) || (Integer.parseInt(command[1]) >= (max + 1))) {
+                throw new DukeTaskOutOfBoundsException(command[0]);
+            }
         }
     }
 
