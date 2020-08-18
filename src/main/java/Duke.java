@@ -44,7 +44,16 @@ public class Duke {
         Task task = tasks.get(index - 1); // index - 1 to match the index in ArrayList
         task.markDone();
         System.out.println("Nice! I've marked this task as done:" +
-                "\n\t" + task );
+                "\n\t" + task);
+        System.out.println("---------------------------------------------------");
+    }
+
+    public static void deleteTask(int index) {
+        Task task = tasks.get(index - 1); // index -1 to match the index in ArrayList
+        tasks.remove(index - 1); // index - 1 to match the index in ArrayList
+        System.out.println("Noted. I've deleted this task:" +
+                "\n\t" + task);
+        printTotalNumberOfTasks();
         System.out.println("---------------------------------------------------");
     }
 
@@ -63,6 +72,18 @@ public class Duke {
             } catch (NumberFormatException e) {
                 throw new DukeException("Invalid format!");
             }
+        } else if (taskType.equals("delete")) {
+          try {
+              String taskIndex = input.split(" ")[1];
+              if (taskIndex.isBlank()) {
+                  throw new DukeException("Please include item number!");
+              }
+              deleteTask(Integer.parseInt(taskIndex));
+          } catch (IndexOutOfBoundsException e) {
+              throw new DukeException("Missing or invalid item number!");
+          } catch (NumberFormatException e) {
+              throw new DukeException("Invalid format!");
+          }
         } else {
             String taskName = "";
             if (taskType.equals("todo")) {

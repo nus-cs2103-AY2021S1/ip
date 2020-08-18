@@ -43,4 +43,14 @@ Here are the tasks in your list:
 2. [D][✘] CS2103T ip (by: Thursday 2359)
 3. [E][✘] CS2103T Week 2 (at: Friday 12am)
 ---------------------------------------------------
+Missing or invalid item number!
+___________________________________________________
+Noted. I've deleted this task:
+	[T][✓] CS2103T post-lecture quiz
+Now you have 2 tasks in the list.
+---------------------------------------------------
+Here are the tasks in your list:
+1. [D][✘] CS2103T ip (by: Thursday 2359)
+2. [E][✘] CS2103T Week 2 (at: Friday 12am)
+---------------------------------------------------
 Bye. Hope to see you again soon!

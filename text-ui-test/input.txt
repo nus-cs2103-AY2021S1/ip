@@ -10,4 +10,7 @@ done
 done 6
 done 1
 list
+delete 8
+delete 1
+list
 bye
