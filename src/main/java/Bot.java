@@ -18,6 +18,11 @@ public class Bot {
         while (!input.equals("bye")) {
             if (input.equals("list")) {
                 displayList();
+            } else if (input.startsWith("done")) {
+                int index = Integer.parseInt(input.substring(5)) - 1;
+                Task task = taskList.get(index);
+                task.markAsDone();
+                giveResponse("Nice! I've marked this task as done:\n       " + task);
             } else {
                 addTask(input);
             }
@@ -46,15 +51,16 @@ public class Bot {
 
     // display the task list
     private void displayList(){
-        String list = "";
+        String list = "Here are the tasks in your list:\n";
         for (int i = 1; i <= taskList.size(); i++) {
-            list += i + ". " + taskList.get(i - 1) + "\n\t ";
+            list += "\t " + i + ". " + taskList.get(i - 1) + "\n";
         }
 
-        //remove the extra "\n\t "
+        //remove the extra "\n"
         if(!list.isEmpty()) {
-            list = list.substring(0, list.length() - 3);
+            list = list.substring(0, list.length() - 1);
         }
+
         giveResponse(list);
     }
 }
