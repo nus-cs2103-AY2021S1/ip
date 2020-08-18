@@ -9,4 +9,9 @@ deadline
 event
 deadline CS2103T iP
 event CS2103T Tutorial
+done
+delete 1
+list
+list 2
+delete
 bye

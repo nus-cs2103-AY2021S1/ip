@@ -47,33 +47,38 @@ public class Duke {
                 //splitting into list for easier comparison
                 String[] inputList = input.trim().split(" ", 2);
 
-                //case where the command is incomplete
-                if(inputList.length < 2){
-                    throw new IncompleteCommandException();
+                // case where input is bye, and a case where the inputList is of length 1
+                if(inputList[0].trim().toLowerCase().equals(bye_key)){
+                    byeGreetings();
+                    break;
                 }
 
-                // Case where input is list, to show the list of tasks
-                if(inputList[0].trim().toLowerCase().equals(list_key)){
+                // Case where input is list, to show the list of tasks, and case where the inputList is of length 1
+                if(inputList[0].trim().toLowerCase().equals(list_key) && inputList.length > 1){
+                    throw new IncompleteCommandException();
+                }
+                if(inputList[0].trim().toLowerCase().equals(list_key)) {
                     StringBuffer result = new StringBuffer();
                     //to add in the starting line of the section
                     result.append("Here are the tasks in your list:\n");
 
-                    for(int i = 0; i < taskList.size(); i ++){
+                    for (int i = 0; i < taskList.size(); i++) {
                         // getting the current task
                         Task currentTask = taskList.get(i);
 
                         // adding the current task into the tasklist
-                        result.append((i + 1)+ ". " + currentTask.toString() + "\n");
+                        result.append((i + 1) + ". " + currentTask.toString() + "\n");
                     }
                     lineFormatter(result.toString());
+                }
 
-                    //ending the process with bye input
-                } else if(inputList[0].trim().toLowerCase().equals(bye_key)){
-                    byeGreetings();
-                    break;
+                //case where the command is incomplete, in the cases of done, todo, event, deadline and delete
+                else if(inputList.length < 2) {
+                    throw new IncompleteCommandException();
 
-                    //checking for done
-                } else if(inputList[0].trim().toLowerCase().equals(done_key) && isNum(inputList[1])){
+                }
+                // case where the input is done
+                else if(inputList[0].trim().toLowerCase().equals(done_key) && isNum(inputList[1])){
                     int currentIndex = Integer.parseInt(inputList[1]) - 1;
                     if(currentIndex + 1> taskList.size() || currentIndex + 1 <= 0){
                         throw new DoneException(currentIndex, taskList.size());
@@ -89,6 +94,14 @@ public class Duke {
                             taskList.get(currentIndex).markAsDone();
                             taskDone(taskList.get(currentIndex));
                         }
+                    }
+                } else if(inputList[0].trim().toLowerCase().equals(delete_key) && isNum(inputList[1])) {
+                    int currentIndex = Integer.parseInt(inputList[1]) - 1;
+                    if (currentIndex + 1 > taskList.size() || currentIndex + 1 <= 0) {
+                        throw new DeleteException(currentIndex, taskList.size());
+                    } else {
+                        Task deletedTask = taskList.remove(currentIndex);
+                        taskDeleted(deletedTask);
                     }
                 } else {
                     added_to_List(input);
@@ -151,6 +164,14 @@ public class Duke {
     //method to mark tasks as done
     public static void taskDone(Task task) {
         lineFormatter("Nice! This task is getting done!!\n" + "[" + task.getStatusIcon() + "] " + task.getTask());
+    }
+
+    //method to mark tasks as deleted
+    public static void taskDeleted(Task task) {
+        lineFormatter("The following Task is removed from the TaskList!!\n" + "[" + task.getStatusIcon() + "] "
+                        + task.getTask() + "\n" +
+                        "You have " + taskList.size() + " tasks left!"
+                );
     }
 
     // method to check for int in String
