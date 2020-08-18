@@ -1,15 +1,28 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String DIVIDER = "----------------------------";
+    private static final String DIVIDER = "-------------------------------------";
     private static final String EXIT_COMMAND = "bye";
+    private static final String LIST_COMMAND = "list";
+
+    private static ArrayList<String> taskList = new ArrayList<>();
 
     private static String sandwichWithDivider(String text) {
         return DIVIDER + "\n" + text + "\n" + DIVIDER;
     }
 
+    private static String prettyPrintTaskList() {
+        String rv = "You have " + taskList.size() + " items.\n";
+        for (int i = 0; i < taskList.size(); i++) {
+            rv += "\n" + (i + 1) + ": " + taskList.get(i);
+        }
+        return sandwichWithDivider(rv);
+    }
+
     private static String processCommand(String command) {
-        return sandwichWithDivider(command);
+        taskList.add(command);
+        return sandwichWithDivider("Successfully added: " + command);
     }
 
     private static final String HELLO_MESSAGE = sandwichWithDivider("Greetings! I am Duke."
@@ -25,6 +38,8 @@ public class Duke {
             if (command.equals(EXIT_COMMAND)) {
                 System.out.println(EXIT_MESSAGE);
                 break;
+            } else if (command.equals(LIST_COMMAND)) {
+                System.out.println(prettyPrintTaskList());
             } else {
                 System.out.println(processCommand(command));
             }
