@@ -68,6 +68,9 @@ public class Duke {
                         printer(eventTask);
                     } else if(input.split(" ")[0].equals("delete")){
                         int deleteTask = Integer.parseInt(input.split(" ")[1]) - 1;
+                        if(deleteTask + 1 > stringStore.size() || deleteTask < 0){
+                            throw new DukeDeleteException(input);
+                        }
                         deletePrinter(stringStore.get(deleteTask));
                         stringStore.remove(deleteTask);
                     } else {
@@ -100,6 +103,10 @@ public class Duke {
                     } catch (DukeEmptyEventTimeException e) {
                         printLine();
                         System.out.println("OOPS!!! The description of a event time cannot be empty.");
+                        printLine();
+                    } catch (DukeDeleteException e) {
+                        printLine();
+                        System.out.println("OOPS!!! The invalid delete number.");
                         printLine();
                     }
                     if (sc.hasNext()) {
