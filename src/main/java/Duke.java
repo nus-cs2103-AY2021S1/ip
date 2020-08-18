@@ -21,27 +21,30 @@ public class Duke {
 
     private static void processCommand(String input) {
         String[] inputList = input.split(" ");
-        if (inputList.length > 0) {
-            switch (inputList[0]) {
-                case LIST_COMMAND:
-                    listTasks();
-                    break;
-                case DONE_COMMAND:
-                    completeTask(inputList);
-                    break;
-                case ADD_TODO:
-                    addTodo(inputList);
-                    break;
-                case ADD_EVENT:
-                    addEvent(inputList);
-                    break;
-                case ADD_DEADLINE:
-                    addDeadline(inputList);
-                    break;
-                default:
-                    printWithDivider(ERROR_MESSAGE + "\nWas the command valid?");
-                    break;
+        try {
+            if (inputList.length > 0) {
+                switch (inputList[0]) {
+                    case LIST_COMMAND:
+                        listTasks();
+                        break;
+                    case DONE_COMMAND:
+                        completeTask(inputList);
+                        break;
+                    case ADD_TODO:
+                        addTodo(inputList);
+                        break;
+                    case ADD_EVENT:
+                        addEvent(inputList);
+                        break;
+                    case ADD_DEADLINE:
+                        addDeadline(inputList);
+                        break;
+                    default:
+                        throw new DukeUnknownCommandException(ERROR_MESSAGE + "\nWas the command valid?");
+                }
             }
+        } catch (DukeUnknownCommandException | DukeIncompleteCommandException e) {
+            printWithDivider(e.getMessage());
         }
     }
 
@@ -81,18 +84,19 @@ public class Duke {
         }
     }
 
-    private static void addTodo(String[] inputList) {
+    private static void addTodo(String[] inputList) throws DukeIncompleteCommandException {
         if (inputList.length > 1) {
             String description = rejoinString(inputList);
             Todo todo = new Todo(description);
             taskList.add(todo);
             printWithDivider("Successfully added todo:\n" + todo.toString());
         } else {
-            printWithDivider(ERROR_MESSAGE + "\nDid you provide any description for this todo task?");
+            throw new DukeIncompleteCommandException(ERROR_MESSAGE
+                    + "\nDid you provide any description for this todo task?");
         }
     }
 
-    private static void addEvent(String[] inputList) {
+    private static void addEvent(String[] inputList) throws DukeIncompleteCommandException {
         String removeCommand = rejoinString(inputList);
         String[] descWithArgs = removeCommand.split(" /at ");
         if (descWithArgs.length == 2) {
@@ -100,11 +104,12 @@ public class Duke {
             taskList.add(event);
             printWithDivider("Successfully added event:\n" + event.toString());
         } else {
-            printWithDivider(ERROR_MESSAGE + "\nDid you provide a date and description for this event?");
+            throw new DukeIncompleteCommandException(ERROR_MESSAGE
+                    + "\nDid you provide a date and description for this event?");
         }
     }
 
-    private static void addDeadline(String[] inputList) {
+    private static void addDeadline(String[] inputList) throws DukeIncompleteCommandException {
         String removeCommand = rejoinString(inputList);
         String[] descWithArgs = removeCommand.split(" /by ");
         if (descWithArgs.length == 2) {
@@ -112,7 +117,8 @@ public class Duke {
             taskList.add(deadline);
             printWithDivider("Successfully added deadline:\n" + deadline.toString());
         } else {
-            printWithDivider(ERROR_MESSAGE + "\nDid you provide a deadline and description for this deadline?");
+            throw new DukeIncompleteCommandException(ERROR_MESSAGE
+                    + "\nDid you provide a deadline and description for this deadline?");
         }
     }
 
