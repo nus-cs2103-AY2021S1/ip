@@ -43,6 +43,14 @@ public class TaskList {
         }
     }
 
+    public Task deleteTask(int i) throws DukeException {
+        try {
+            return this.list.remove(i);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! I'm sorry, the task number is out of range :<");
+        }
+    }
+
     @Override
     public String toString() {
         String listString = "";
