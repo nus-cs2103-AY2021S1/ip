@@ -7,12 +7,14 @@ REM delete output from previous run
 del ACTUAL.TXT
 
 REM compile the code into the bin folder
-javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\Duke.java
+javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\Task.java ..\src\main\java\Deadline.java ..\src\main\java\Todo.java ..\src\main\java\Event.java ..\src\main\java\Duke.java
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
 )
 REM no error here, errorlevel == 0
+
+set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 
 REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
 java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
