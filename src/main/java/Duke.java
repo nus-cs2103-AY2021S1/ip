@@ -26,35 +26,102 @@ public class Duke {
         ArrayList<Task> tasks = new ArrayList<>();
         while (!answer.equals("bye")) {
             String[] command = answer.split(" ");
+            String description, time;
+            int idx;
+            Task task;
 
+            System.out.println(upperLine);
             switch (command[0]) {
                 case "list":
-                    System.out.println(upperLine);
                     System.out.println("Here is your list of tasks:");
                     for (int i = 0; i < tasks.size(); i++) {
                         System.out.println((i + 1) + ". " + tasks.get(i) + "\n");
                     }
-                    System.out.println(lowerLine);
                     break;
 
                 case "done":
-                    int idx = Integer.parseInt(command[1]);
+                    idx = Integer.parseInt(command[1]);
                     tasks.get(idx - 1).markAsDone();
 
-                    System.out.println(upperLine);
                     System.out.println("Great job!\nI have marked the task as done");
                     System.out.println(tasks.get(idx - 1));
-                    System.out.println(lowerLine);
-
                     break;
-                default:
-                    System.out.println(
-                            upperLine + "I have added the task: " + answer + "\n" + lowerLine);
-                    tasks.add(new Task(answer));
+
+                case "todo":
+                    description = command[1];
+                    idx = 2;
+                    while (idx < command.length) {
+                        description += " " + command[idx];
+                        idx++;
+                    }
+
+                    task = new Todo(description);
+                    tasks.add(task);
+
+                    System.out.printf("Okay! I have added the task:\n%s\n", task);
+                    System.out.printf(
+                            "Currently you have %d tasks in your list, don't forget to do them!\n",
+                            tasks.size());
+                    break;
+
+                case "deadline":
+                    description = command[1];
+                    idx = 2;
+                    while (idx < command.length && !command[idx].equals("/by")) {
+                        description += " " + command[idx];
+                        idx++;
+                    }
+                    idx++;
+
+                    time = command[idx];
+                    idx++;
+                    while (idx < command.length) {
+                        time += " " + command[idx];
+                        idx++;
+                    }
+
+                    task = new Deadline(description, time);
+                    tasks.add(task);
+
+                    System.out.printf(
+                            "Okay! I have added the task:\n%s\nRemember to do it before the deadline!\n",
+                            task);
+                    System.out.printf(
+                            "Currently you have %d tasks in your list, don't forget to do them!\n",
+                            tasks.size());
+                    break;
+
+                case "event":
+                    description = command[1];
+                    idx = 2;
+                    while (idx < command.length && !command[idx].equals("/at")) {
+                        description += " " + command[idx];
+                        idx++;
+                    }
+                    idx++;
+
+                    time = command[idx];
+                    idx++;
+                    while (idx < command.length) {
+                        time += " " + command[idx];
+                        idx++;
+                    }
+
+                    task = new Event(description, time);
+                    tasks.add(task);
+
+                    System.out.printf("Okay! I have added the task:\n%s\nRemember to attend it!\n",
+                            task);
+                    System.out.printf(
+                            "Currently you have %d tasks in your list, don't forget to do them!\n",
+                            tasks.size());
+                    break;
             }
+            System.out.println(lowerLine);
             answer = in.nextLine();
         }
 
         System.out.println(upperLine + goodbye + "\n" + lowerLine);
+        in.close();
     }
 }
