@@ -1,6 +1,6 @@
 public class Task {
-    private String taskName;
-    private boolean taskDone;
+    protected String taskName;
+    protected boolean taskDone;
 
     public Task(String taskName) {
         this.taskName = taskName;
@@ -21,5 +21,11 @@ public class Task {
         } else {
             return "\u2718";
         }
+    }
+
+    @Override
+    public String toString() {
+        return "[" +
+                this.getStatusSymbol() + "] " + taskName;
     }
 }

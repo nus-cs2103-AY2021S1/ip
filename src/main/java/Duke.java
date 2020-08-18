@@ -68,8 +68,7 @@ public class Duke {
                 System.out.println(line);
                 for (int i = 0; i < noOfTasks; i++) {
                     Task task = listOfTasks.get(i);
-                    System.out.println("     " + (i + 1) + ".[" +
-                            task.getStatusSymbol() + "] " + task.getName());
+                    System.out.println("     " + (i + 1) + "." + task);
                 }
                 System.out.println(line);
             }
