@@ -10,6 +10,7 @@ public class Duke {
     private static String todo_key = "todo";
     private static String deadline_key = "deadline";
     private static String event_key = "event";
+    private static String delete_key = "delete";
 
     public static void main(String[] args) {
         String logo = " ____        _\n"
@@ -45,6 +46,11 @@ public class Duke {
                 String input = scanner.nextLine();
                 //splitting into list for easier comparison
                 String[] inputList = input.trim().split(" ", 2);
+
+                //case where the command is incomplete
+                if(inputList.length < 2){
+                    throw new IncompleteCommandException();
+                }
 
                 // Case where input is list, to show the list of tasks
                 if(inputList[0].trim().toLowerCase().equals(list_key)){
@@ -84,9 +90,7 @@ public class Duke {
                             taskDone(taskList.get(currentIndex));
                         }
                     }
-
-                }
-                else {
+                } else {
                     added_to_List(input);
 
 
@@ -101,41 +105,32 @@ public class Duke {
     // method that adds tasks into the list of tasks
     public static void added_to_List(String printable) throws DukeException{
         String[] nameList = printable.split(" ", 2);
-
-        if(nameList.length < 2){
-            throw new IncompleteCommandException();
-        } else {
-            if(nameList[0].trim().toLowerCase().equals(deadline_key)){
-                String[] task_deadline = nameList[1].trim().split("/by", 2);
-                if(task_deadline.length != 2){
-                    throw new DeadlineException();
-                }
-                Task newTask = new Deadline(task_deadline[0].trim(), task_deadline[1].trim());
-                taskList.add(newTask);
-                newTaskItem(newTask, deadline_key);
-
-            } else if(nameList[0].trim().toLowerCase().equals(event_key)){
-                String[] task_event = nameList[1].trim().split("/at", 2);
-                if(task_event.length != 2){
-                    throw new EventException();
-                }
-                Task newTask = new Event(task_event[0].trim(), task_event[1].trim());
-                taskList.add(newTask);
-                newTaskItem(newTask, event_key);
-
-            } else if(nameList[0].toLowerCase().equals(todo_key)){
-                Task newTask = new ToDo(nameList[1].trim());
-                taskList.add(newTask);
-                newTaskItem(newTask, todo_key);
-
-            } else {
-                lineFormatter("Please enter an appropriate command!!");
+        if(nameList[0].trim().toLowerCase().equals(deadline_key)){
+            String[] task_deadline = nameList[1].trim().split("/by", 2);
+            if(task_deadline.length != 2){
+                throw new DeadlineException();
             }
+            Task newTask = new Deadline(task_deadline[0].trim(), task_deadline[1].trim());
+            taskList.add(newTask);
+            newTaskItem(newTask, deadline_key);
+
+        } else if(nameList[0].trim().toLowerCase().equals(event_key)){
+            String[] task_event = nameList[1].trim().split("/at", 2);
+            if(task_event.length != 2){
+                throw new EventException();
+            }
+            Task newTask = new Event(task_event[0].trim(), task_event[1].trim());
+            taskList.add(newTask);
+            newTaskItem(newTask, event_key);
+
+        } else if(nameList[0].toLowerCase().equals(todo_key)){
+            Task newTask = new ToDo(nameList[1].trim());
+            taskList.add(newTask);
+            newTaskItem(newTask, todo_key);
+
+        } else {
+            lineFormatter("Please enter an appropriate command!!");
         }
-
-
-
-
 
 
     }
