@@ -8,6 +8,13 @@ public class Deadline extends Task {
     }
 
     @Override
+    public Task done() {
+        Task doneTask = new Deadline(this.desc, this.by);
+        doneTask.isDone = true;
+        return doneTask;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by + ")";
     }

@@ -8,6 +8,13 @@ public class Event extends Task {
     }
 
     @Override
+    public Task done() {
+        Task doneTask = new Event(this.desc, this.at);
+        doneTask.isDone = true;
+        return doneTask;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.at + ")";
     }

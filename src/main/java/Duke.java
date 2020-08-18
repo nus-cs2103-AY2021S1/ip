@@ -57,12 +57,12 @@ public class Duke {
                 newTask = new Todo(info);
                 break;
             case "deadline":
-                String dDesc = info.substring(0, info.indexOf('/'));
+                String dDesc = info.substring(0, info.indexOf('/') - 1);
                 String by = info.substring(info.indexOf('/') + 4);
                 newTask = new Deadline(dDesc, by);
                 break;
             default:
-                String eDesc = info.substring(0, info.indexOf('/'));
+                String eDesc = info.substring(0, info.indexOf('/') - 1);
                 String at = info.substring(info.indexOf('/') + 4);
                 newTask = new Event(eDesc, at);
                 break;
