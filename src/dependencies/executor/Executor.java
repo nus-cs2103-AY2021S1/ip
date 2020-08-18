@@ -82,7 +82,10 @@ public class Executor {
             case ADD: {
                 Task t = e.getTask();
                 reply = storage.add(t);
-                return String.format("Got it! I have added the task:\n%s", reply);
+                return String.format("Got it! I have added the task:\n%s\n"
+                        + "Now you have %d tasks in the list.",
+                        reply,
+                        storage.getListSize());
             }
             case DONE: {
                 // Done command would have a task of "1 2 3 4"
@@ -93,7 +96,10 @@ public class Executor {
                 }
                 reply = storage.done(arr);
                 return String.format("Congratz! I will marked this task as completed for you!\n%s\n" +
-                        "Keep up the good work and continue to stay motivated.", reply);
+                        "Keep up the good work and continue to stay motivated.\n"
+                        + "You've got %d task left to be completed!",
+                        reply,
+                        storage.getNumOfIncompleted());
             }
             default: {
                 return "Error";

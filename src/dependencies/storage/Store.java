@@ -96,6 +96,21 @@ public class Store {
         return c;
     }
 
+    /**
+     * Returns the number of incomplete tasks in the list.
+     *
+     * @return number of incomplete tasks
+     */
+    public int getNumOfIncompleted() {
+        int c = 0;
+        for (int i = 0; i < todoList.size(); i++) {
+            if (!todoList.get(i).isCompleted()) {
+                c++;
+            }
+        }
+        return c;
+    }
+
     public String deleteTask(Integer i) {
         return null;
     }

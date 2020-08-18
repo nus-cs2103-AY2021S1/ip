@@ -26,27 +26,27 @@ class Checker {
         else if (s.contains("done ") || s.contains("Done ")) {
             int x = s.indexOf("done");
             String task = s.substring((x) + 5);
-            Task t = Task.createDoneTask(task);
+            Task t = Task.createDoneTask(task.trim());
             e = Command.createDoneCommand(t);
         }
         else if (s.contains("todo ") || s.contains("Todo ")) {
             int x = s.indexOf("todo");
             String task = s.substring(x + 5);
-            Task t = Task.createTodo(task);
+            Task t = Task.createTodo(task.trim());
             e = Command.createAddCommand(t);
 
         } else if (s.contains("event ") || s.contains("Event ")) {
             int x = s.indexOf("event");
             String task = s.substring(x + 6);
             String[] arr = task.split("/at");
-            Task t = Task.createEvent(arr[0], arr[1]);
+            Task t = Task.createEvent(arr[0].trim(), arr[1].trim());
             e = Command.createAddCommand(t);
 
         } else  if (s.contains("deadline ") || s.contains("Deadline ")) {
             int x = s.indexOf("deadline");
             String task = s.substring(x + 9);
             String[] arr = task.split("/by");
-            Task t = Task.createEvent(arr[0], arr[1]);
+            Task t = Task.createEvent(arr[0].trim(), arr[1].trim());
             e = Command.createAddCommand(t);
 
         } else {
