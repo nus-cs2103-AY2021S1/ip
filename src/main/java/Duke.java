@@ -22,7 +22,7 @@ public class Duke {
         System.out.println(logo);
     }
 
-    private static void echo() {
+    private static void response() {
         Scanner scanner = new Scanner(System.in);
         String line = scanner.nextLine();
         while (true) {
@@ -30,16 +30,19 @@ public class Duke {
                 exit();
                 break;
             }
+            else if (line.equals("list")) {
+                ListFunction.printList();
+                line = scanner.nextLine();
+            }
             else {
-                System.out.println(line);
+                ListFunction.add(line);
                 line = scanner.nextLine();
             }
         }
-
     }
 
     public static void main(String[] args) {
         greet();
-        echo();
+        response();
     }
 }
