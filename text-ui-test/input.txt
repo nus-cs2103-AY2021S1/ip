@@ -1,0 +1,8 @@
+todo read a book
+deadline maths homework /by next tuesday
+list
+done 2
+event meet friends /at 5 pm
+done 1
+list
+bye
