@@ -1,0 +1,4 @@
+todo
+todo ip
+list
+bye
