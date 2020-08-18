@@ -31,14 +31,36 @@ public class Duke {
                         theTask.setTaskToBeDone();
                         System.out.println(line);
                         System.out.println("     Great! The task: [" + theTask.getName()
-                                + "] is marked as Done.\n" + "     [" + theTask.getStatusSymbol()
-                                + "] " + theTask.getName());
+                                + "] is marked as Done.\n" + "     " + theTask.toString());
                         System.out.println(line);
                     } else {
-                        Task newTask = new Task(userCommand);
+                        Task newTask;
+                        if (wordArray[0].equals("todo")) {
+                            String taskName = userCommand.split(" ", 2)[1];
+                            newTask = new Todo(taskName);
+                        } else if (wordArray[0].equals("deadline")) {
+                            String body = userCommand.split(" ", 2)[1];
+                            String taskName = body.split(" /by ")[0];
+                            String time = body.split(" /by ")[1];
+                            newTask = new Deadline(taskName, time);
+                        } else if (wordArray[0].equals("event")) {
+                            String body = userCommand.split(" ", 2)[1];
+                            String taskName = body.split(" /at ")[0];
+                            String time = body.split(" /at ")[1];
+                            newTask = new Event(taskName, time);
+                        } else {
+                            newTask = new Task(userCommand);
+                        }
                         listOfTasks.add(newTask);
                         System.out.println(line);
-                        System.out.println("     The task: [" + newTask.getName() + "] is added into the list!");
+                        System.out.println("     The task: [" + newTask.getName() + "] is added into the list!\n"
+                        + "        " + newTask);
+                        int noOfTasks = listOfTasks.size();
+                        if (noOfTasks == 1) {
+                            System.out.println("     There is 1 task in total in your list.");
+                        } else {
+                            System.out.println("     There are " + listOfTasks.size() + " tasks in total in your list.");
+                        }
                         System.out.println(line);;
                     }
                 }
@@ -66,6 +88,7 @@ public class Duke {
                 System.out.println(line);
             } else {
                 System.out.println(line);
+                System.out.println("     Here are the tasks in the list:");
                 for (int i = 0; i < noOfTasks; i++) {
                     Task task = listOfTasks.get(i);
                     System.out.println("     " + (i + 1) + "." + task);
