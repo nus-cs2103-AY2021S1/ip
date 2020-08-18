@@ -101,7 +101,7 @@ public class Duke {
                     }
 
                 } else if(temp.startsWith("event")) {
-                    pattern = Pattern.compile("event ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*) /by ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*)");
+                    pattern = Pattern.compile("event ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*) /at ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*)");
                     if(!pattern.matcher(temp).matches()) {
                         throw new DukeException("☹ OOPS!!! Wrong 'event' command format!\n");
                     } else {
