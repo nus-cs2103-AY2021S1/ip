@@ -21,6 +21,18 @@ public class Task {
         return firstWord;
     }
 
+    public boolean isTodo() {
+        return this.getFirstWord().equals("todo");
+    }
+
+    public boolean isDeadline() {
+        return this.getFirstWord().equals("deadline");
+    }
+
+    public boolean isEvent() {
+        return this.getFirstWord().equals("event");
+    }
+
     public int getNumber() {
         String[] arr = this.description.split(" ", 2);
         if (arr[0].equals("done")) {
@@ -34,8 +46,25 @@ public class Task {
         return this.description;
     }
 
+    public String getDate() {
+        String des = this.getDescription();
+        return des.substring(des.indexOf('/') + 4, des.length());
+    }
+
+    public String getDeadlineTask() {
+        String des = this.getDescription();
+        return des.substring(0, des.indexOf('/') - 1);
+    }
+
     @Override
     public String toString() {
-        return this.description;
+        String des = this.description;
+        String task = des.substring(des.indexOf(" "));
+        if (this.isTodo()) {
+            return "[" + this.getStatusIcon() + "] " + task;
+
+        } else {
+            return "[" + this.getStatusIcon() + "] " + task.substring(0, task.indexOf('/') - 1);
+        }
     }
 }
