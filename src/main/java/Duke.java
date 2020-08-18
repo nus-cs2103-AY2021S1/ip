@@ -62,7 +62,7 @@ public class Duke {
                     break;
                 }
                 default: {
-                    print("☹ OOPS!!! I'm sorry, but I don't know what that means :-("); // TODO: exception handling
+                    print("OOPS!!! I'm sorry, but I don't know what that means :-("); // TODO: exception handling
                 }
             }
         }
