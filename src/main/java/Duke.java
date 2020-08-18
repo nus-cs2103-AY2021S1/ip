@@ -19,13 +19,14 @@ public class Duke {
         UIPrint.drawLine(UIPrint.star, 50);
     }
 
-    private static void storeInput(String str) {
-        UIPrint.drawLine(UIPrint.star, 50);
-        System.out.println("added: " + str);
+    public static void reportNewTask(Task task) {
         UIPrint.drawLine(UIPrint.star, 50);
 
-        Task newTask = new Task(str);
-        tasks.add(newTask);
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(task);
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+
+        UIPrint.drawLine(UIPrint.star, 50);
     }
 
     private static boolean checkCommand(String str) {
@@ -59,7 +60,7 @@ public class Duke {
             boolean hasCommand = checkCommand(inputLine);
 
             if (!hasCommand) {
-                storeInput(inputLine);
+                // do nothing
             }
         }
     }
