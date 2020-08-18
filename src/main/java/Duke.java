@@ -1,8 +1,7 @@
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Duke {
     public static void main(String[] args){
@@ -16,146 +15,47 @@ public class Duke {
         System.out.println(init);
 
         Scanner sc = new Scanner(System.in);
-        StringBuilder sb;
         String temp;
-        List<Task> tasks = new ArrayList<>();
-
-        Pattern pattern;
+        DukeCommand.tasks = new ArrayList<>();
 
         while(!(temp = sc.nextLine()).equals("bye")) {
-            sb = new StringBuilder();
-            sb.append(gap);
-            sb.append("____________________________________________________________\n");
+            System.out.println("        ____________________________________________________________");
+            String comm = temp.split(" ")[0];
+            boolean flag = false;
 
-
-            try {
-                if(temp.equals("list")) {
-                    sb.append(gap);
-                    sb.append("Here are the tasks in your list:\n");
-
-                    int ctr = 1;
-
-                    for(Task task: tasks) {
-                        sb.append(gap);
-                        sb.append(ctr).append(".");
-                        sb.append(task);
-                        sb.append("\n");
-                        ctr++;
-                    }
-                } else if(temp.startsWith("done")) {
-
-                    pattern = Pattern.compile("done [1-9][0-9]{0,}");
-                    if(!pattern.matcher(temp).matches()) {
-                        throw new DukeException("\u2639 OOPS!!! Wrong 'done' command format!\n");
-                    } else {
-                        int index = Integer.parseInt(""+temp.charAt(5)) - 1;
-                        if(tasks.size() >= index && index >= 0) {
-                            Task tas = tasks.get(index);
-                            tas.markAsDone();
-
-                            sb.append(gap);
-                            sb.append("Nice! I've marked this task as done: \n");
-                            sb.append(gap).append("  ");
-                            sb.append(tas);
-                            sb.append("\n");
-                        }
-                    }
-
-                } else if(temp.startsWith("todo")) {
-
-                    pattern = Pattern.compile("todo ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*)");
-                    if(!pattern.matcher(temp).matches()) {
-                        throw new DukeException("\u2639 OOPS!!! Wrong 'todo' command format!\n");
-
-                    } else {
-                        Todo todo = new Todo(temp.substring(5));
-                        tasks.add(todo);
-
-                        sb.append(gap);
-                        sb.append("Got it. I've added this task: \n");
-
-                        sb.append(gap).append("  ").append(todo);
-                        sb.append("\n");
-
-                        sb.append(gap);
-                        sb.append("Now you have ").append(tasks.size()).append(" task(s) in the list.\n");
-                    }
-
-                } else if(temp.startsWith("deadline")) {
-                    pattern = Pattern.compile("deadline ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*) /by ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*)");
-                    if(!pattern.matcher(temp).matches()) {
-                        throw new DukeException("\u2639 OOPS!!! Wrong 'deadline' command format!\n");
-                    } else {
-                        String[] s = temp.substring(9).split(" /by ");
-                        Deadline deadline = new Deadline(s[0], s[1]);
-                        tasks.add(deadline);
-
-                        sb.append(gap);
-                        sb.append("Got it. I've added this task: \n");
-
-                        sb.append(gap).append("  ").append(deadline);
-                        sb.append("\n");
-
-                        sb.append(gap);
-                        sb.append("Now you have ").append(tasks.size()).append(" task(s) in the list.\n");
-                    }
-
-                } else if(temp.startsWith("event")) {
-                    pattern = Pattern.compile("event ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*) /at ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*)");
-                    if(!pattern.matcher(temp).matches()) {
-                        throw new DukeException("\u2639 OOPS!!! Wrong 'event' command format!\n");
-                    } else {
-                        String[] s = temp.substring(6).split(" /at ");
-                        Event event = new Event(s[0], s[1]);
-                        tasks.add(event);
-
-                        sb.append(gap);
-                        sb.append("Got it. I've added this task: \n");
-
-                        sb.append(gap).append("  ").append(event);
-                        sb.append("\n");
-
-                        sb.append(gap);
-                        sb.append("Now you have ").append(tasks.size()).append(" task(s) in the list.\n");
-                    }
-                } else if(temp.startsWith("delete")) {
-                    pattern = Pattern.compile("delete [1-9][0-9]{0,}");
-                    if(!pattern.matcher(temp).matches()) {
-                        throw new DukeException("\u2639 OOPS!!! Wrong 'delete' command format!\n");
-                    } else {
-                        int index = Integer.parseInt(""+temp.charAt(7)) - 1;
-                        if(tasks.size() > index && index >= 0) {
-                            Task tas = tasks.get(index);
-                            tasks.remove(index);
-
-                            sb.append(gap);
-                            sb.append("Noted. I've removed this task: \n");
-                            sb.append(gap).append("  ");
-                            sb.append(tas);
-                            sb.append("\n");
-                        } else {
-                            throw new DukeException("\u2639 OOPS!!! There isn't a task with that index!\n");
-                        }
-                    }
-                } else {
-                    throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(\n");
-                }
-            } catch (DukeException e) {
-                sb.append(gap);
-                sb.append(e.getMessage());
+            for(DukeCommand command: DukeCommand.values()) {
+                if(comm.equals(command.getCommand())) {
+                    flag = true;
+                    break;
+                };
             }
 
+            try {
+                if(flag) {
+                    Method[] methods = DukeCommand.class.getMethods();
+                    for(Method method: methods) {
+                        if(method.getName().equals(comm+"Comm")) {
+                            method.invoke(null, temp);
+                        }
+                    }
 
-            sb.append(gap);
-            sb.append("____________________________________________________________\n");
-            System.out.println(sb.toString());
+                } else {
+                    throw new DukeException("\u2639 OOPS!!! Unknown command!");
+                }
+            } catch (DukeException e) {
+                System.out.println("        " + e.getMessage());
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                System.out.println("        " + e.getTargetException().getMessage());
+            }
+            System.out.println("        ____________________________________________________________\n");
         }
 
-
-        String exit = "        ____________________________________________________________\n" +
+        String exit =
+                "        ____________________________________________________________\n" +
                 "        Bye. Hope to see you again soon!\n" +
                 "        ____________________________________________________________\n";
-
         System.out.println(exit);
     }
 }
