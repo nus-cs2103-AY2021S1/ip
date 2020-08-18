@@ -7,10 +7,6 @@ public class Task {
         this.completed = false;
     }
 
-    public String getName() {
-        return taskName;
-    }
-
     public boolean isCompleted() {
         return completed;
     }

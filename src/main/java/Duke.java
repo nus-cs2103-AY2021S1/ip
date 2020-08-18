@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class Duke {
     private static final String horizontalLine = "    ____________________________________________________________";
@@ -43,8 +44,20 @@ public class Duke {
                     System.out.println(horizontalLine);
                 } else {
                     System.out.println(horizontalLine);
-                    Task task = new Task(command);
-                    taskManager.addTask(task);
+                    String[] strArr = command.split(" ", 2);
+                    String taskType = strArr[0];
+                    if (taskType.equals("todo")) {
+                        Todo todo = new Todo(strArr[1]);
+                        taskManager.addTask(todo);
+                    } else if (taskType.equals("deadline")) {
+                        String[] deadlineArr = strArr[1].split(" /by ", 2);
+                        Deadline deadline = new Deadline(deadlineArr[0], deadlineArr[1]);
+                        taskManager.addTask(deadline);
+                    } else if (taskType.equals("event")) {
+                        String[] eventArr = strArr[1].split(" /at ", 2);
+                        Event event = new Event(eventArr[0], eventArr[1]);
+                        taskManager.addTask(event);
+                    }
                     System.out.println(horizontalLine);
                 }
             }

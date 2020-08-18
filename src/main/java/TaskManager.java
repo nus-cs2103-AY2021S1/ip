@@ -9,11 +9,14 @@ public class TaskManager {
     }
 
     public void addTask(Task task) {
+        System.out.println(indentation + "Got it. I've added this task: ");
         taskList.add(task);
-        System.out.println(indentation + "added: " + task.getName());
+        System.out.println(indentation + "  " + task.toString());
+        System.out.println(indentation + "Now you have "+ taskList.size() + " tasks in the list.");
     }
 
     public void printList() {
+        System.out.println(indentation + "Here are the tasks in your list:");
         for(int i = 0; i < taskList.size(); i++) {
             String s = indentation + (i + 1) + ". " + taskList.get(i).toString();
             System.out.println(s);
