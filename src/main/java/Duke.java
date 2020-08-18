@@ -45,50 +45,75 @@ public class Duke {
                     System.out.println(horizontalDiv);
                 }
             } else if (arr[0].equals("todo")) {
-                assert arr.length == 2;
-                Task newTask = new Todo(arr[1]);
-                ls.add(newTask);
-                System.out.println(horizontalDiv);
-                System.out.println("Got it. I've added this task: \n" + newTask.toString());
-                if(ls.size() > 1) {
-                    System.out.println("Now you have " + ls.size() + " tasks in the list.");
-                } else {
-                    System.out.println("Now you have " + ls.size() + " task in the list.");
+                try {
+                    Task newTask = new Todo(arr[1]);
+                    ls.add(newTask);
+                    System.out.println(horizontalDiv);
+                    System.out.println("Got it. I've added this task: \n" + newTask.toString());
+                    if(ls.size() > 1) {
+                        System.out.println("Now you have " + ls.size() + " tasks in the list.");
+                    } else {
+                        System.out.println("Now you have " + ls.size() + " task in the list.");
+                    }
+                    System.out.println(horizontalDiv);
+                } catch (Exception ex) {
+                    System.out.println(horizontalDiv);
+                    System.out.println("Sorry! The description of todo cannot be empty!!");
+                    System.out.println(horizontalDiv);
                 }
-                System.out.println(horizontalDiv);
             } else if (arr[0].equals("deadline")) {
-                assert arr.length == 2;
-                String secondStr = arr[1];
-                String[] arrOfStr = secondStr.split(" /by ", 2);
-                Task newTask = new Deadline(arrOfStr[0], arrOfStr[1]);
-                ls.add(newTask);
-                System.out.println(horizontalDiv);
-                System.out.println("Got it. I've added this task: \n" + newTask.toString());
-                if(ls.size() > 1) {
-                    System.out.println("Now you have " + ls.size() + " tasks in the list.");
-                } else {
-                    System.out.println("Now you have " + ls.size() + " task in the list.");
+                try {
+                    String secondStr = arr[1];
+                    String[] arrOfStr = secondStr.split(" /by ", 2);
+                    try {
+                        Task newTask = new Deadline(arrOfStr[0], arrOfStr[1]);
+                        ls.add(newTask);
+                        System.out.println(horizontalDiv);
+                        System.out.println("Got it. I've added this task: \n" + newTask.toString());
+                        if(ls.size() > 1) {
+                            System.out.println("Now you have " + ls.size() + " tasks in the list.");
+                        } else {
+                            System.out.println("Now you have " + ls.size() + " task in the list.");
+                        }
+                        System.out.println(horizontalDiv);
+                    } catch (Exception ex) {
+                        System.out.println(horizontalDiv);
+                        System.out.println("Sorry! Please enter a date for the deadline using the command '/by'!");
+                        System.out.println(horizontalDiv);
+                    }
+                } catch (Exception ex) {
+                    System.out.println(horizontalDiv);
+                    System.out.println("Sorry! The description of deadline cannot be empty!");
+                    System.out.println(horizontalDiv);
                 }
-                System.out.println(horizontalDiv);
             } else if (arr[0].equals("event")) {
-                assert arr.length == 2;
-                String secondStr = arr[1];
-                String[] arrOfStr = secondStr.split(" /at ", 2);
-                Task newTask = new Event(arrOfStr[0], arrOfStr[1]);
-                ls.add(newTask);
-                System.out.println(horizontalDiv);
-                System.out.println("Got it. I've added this task: \n" + newTask.toString());
-                if (ls.size() > 1) {
-                    System.out.println("Now you have " + ls.size() + " tasks in the list.");
-                } else {
-                    System.out.println("Now you have " + ls.size() + " task in the list.");
+                try {
+                    String secondStr = arr[1];
+                    String[] arrOfStr = secondStr.split(" /at ", 2);
+                    try {
+                        Task newTask = new Event(arrOfStr[0], arrOfStr[1]);
+                        ls.add(newTask);
+                        System.out.println(horizontalDiv);
+                        System.out.println("Got it. I've added this task: \n" + newTask.toString());
+                        if (ls.size() > 1) {
+                            System.out.println("Now you have " + ls.size() + " tasks in the list.");
+                        } else {
+                            System.out.println("Now you have " + ls.size() + " task in the list.");
+                        }
+                        System.out.println(horizontalDiv);
+                    } catch (Exception ex) {
+                        System.out.println(horizontalDiv);
+                        System.out.println("Sorry! Please enter a duration for the event using the command '/at'!");
+                        System.out.println(horizontalDiv);
+                    }
+                } catch (Exception ex) {
+                    System.out.println(horizontalDiv);
+                    System.out.println("Sorry! The description of event cannot be empty!");
+                    System.out.println(horizontalDiv);
                 }
-                System.out.println(horizontalDiv);
             } else {
-                Task newTask = new Task(str);
-                ls.add(newTask);
                 System.out.println(horizontalDiv);
-                System.out.println("added: " + str);
+                System.out.println("Sorry! But I don't know what that means!");
                 System.out.println(horizontalDiv);
             }
         }
