@@ -39,7 +39,7 @@ public class Duke {
 
                 case "done":
                     int idx = Integer.parseInt(command[1]);
-                    tasks.get(idx).markAsDone();
+                    tasks.get(idx - 1).markAsDone();
 
                     System.out.println(upperLine);
                     System.out.println("Great job!\nI have marked the task as done");
