@@ -1,5 +1,8 @@
 package service;
 
+import exceptions.DukeException;
+import exceptions.ServiceException;
+
 import java.util.ArrayList;
 
 public class DukeService {
@@ -9,9 +12,25 @@ public class DukeService {
         tasks = new ArrayList<>();
     }
 
+    private String numberOfElementsAnnouncement() {
+         return String.format("You have %d elements in the list", tasks.size());
+    }
+
     public DukeResponse addTask(Task toAdd) {
         tasks.add(toAdd);
-        return new DukeResponse("Added: " + toAdd + "\n");
+        return new DukeResponse("Added: " + toAdd + "\n" + numberOfElementsAnnouncement() + "\n");
+    }
+
+    public DukeResponse deleteTask(int position) throws ServiceException {
+        position--;
+        if (position < 0 || position >= tasks.size()) {
+            throw new ServiceException("Position to delete is not valid :(");
+        }
+        Task toRemove = tasks.get(position);
+        tasks.remove(position);
+        StringBuilder sb = new StringBuilder();
+        sb.append("A task has been deleted: \n").append(toRemove).append("\n").append(numberOfElementsAnnouncement());
+        return new DukeResponse(sb.toString());
     }
 
     public DukeResponse getAllJobs() {

@@ -1,5 +1,6 @@
 package commands;
 
+import exceptions.InvalidCommandException;
 import parser.TaskParser;
 import service.DukeResponse;
 import service.DukeService;
@@ -28,14 +29,14 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void parse() throws Exception {
+    public void parse() throws InvalidCommandException {
         if (taskParser == null) {
-            throw new Exception("Haven't set task parser");
+            throw new InvalidCommandException("Haven't set task parser");
         }
         String[] tokens = super.raw.split(" ");
 
         if (tokens.length <= 1) {
-            throw new Exception("Not enough arguments");
+            throw new InvalidCommandException("Not enough arguments");
         }
 
         String[] taskTokens = TokenUtils.dropFirst(tokens);

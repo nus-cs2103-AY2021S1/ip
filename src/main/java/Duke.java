@@ -31,6 +31,7 @@ public class Duke {
         parser.registerCommand(ByeCommand::new, ByeCommand.commandWord);
         parser.registerCommand(ListCommand::new, ListCommand.commandWord);
         parser.registerCommand(DoneCommand::new, DoneCommand.commandWord);
+        parser.registerCommand(DeleteCommand::new, DeleteCommand.commandWord);
 
         ///register tasks
         TaskParser taskParser = new TaskParser();

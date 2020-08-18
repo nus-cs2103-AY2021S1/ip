@@ -1,5 +1,6 @@
 package parser;
 
+import exceptions.InvalidCommandException;
 import service.Task;
 import utils.TokenUtils;
 
@@ -27,9 +28,9 @@ public class TaskParser {
         allTaskInstances.add(new TaskInstance(constructor, taskWord));
     }
 
-    public Task parse(String[] tokens) throws Exception {
+    public Task parse(String[] tokens) throws InvalidCommandException {
         if (tokens.length <= 1) {
-            throw new Exception("Should contain more tokens");
+            throw new InvalidCommandException("Should contain more tokens");
         }
         String word = tokens[0];
         String[] tailedTokens = TokenUtils.dropFirst(tokens);
@@ -38,6 +39,6 @@ public class TaskParser {
                 return instance.constructor.apply(tailedTokens);
             }
         }
-        throw new Exception("Task type not found");
+        throw new InvalidCommandException("Task type not found");
     }
 }
