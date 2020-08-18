@@ -16,7 +16,6 @@ public class TodoList {
 
     private static void handleCommand(String command) {
         String[] splitCommand = command.split(" ", 2);
-        System.out.println(splitCommand[0]);
         try {
             try {
                 switch (splitCommand[0]) {
@@ -58,25 +57,29 @@ public class TodoList {
                         break;
                     }
                     case "todo": {
-                        System.out.println("Got it. I've added this task:");
-                        TodoList.addTodo(splitCommand[1]);
-                        int size = todoList.size();
-                        System.out.println("Now you have " + size + " tasks in the list.");
+                        if (splitCommand.length <= 1) {
+                            throw new DukeException("OOPS!!! The description of a todo cannot be empty");
+                        } else {
+                            System.out.println("Got it. I've added this task:");
+                            TodoList.addTodo(splitCommand[1]);
+                            int size = todoList.size();
+                            System.out.println("Now you have " + size + " tasks in the list.");
+                        }
                         break;
                     }
                     default: {
-                        throw new UnknownCommandException("a");
+                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 }
             } catch (NumberFormatException error) {
                 // When "done" is not followed by a valid number
-                throw new InvalidIndexException("a");
+                throw new DukeException("OOPS!!! Please enter a valid index!");
             } catch (ArrayIndexOutOfBoundsException error) {
                 // When "done" is not followed by any number
-                throw new InvalidIndexException("a");
+                throw new DukeException("OOPS!!! Please enter a valid index!");
             } catch (IndexOutOfBoundsException error) {
                 // When "done is followed by a number that is out of range
-                throw new DukeIndexOutOfBoundsException("a");
+                throw new DukeException("OOPS!!! That index is out of range!");
             }
         } catch (DukeException error) {
             System.out.println(error.getMessage());
