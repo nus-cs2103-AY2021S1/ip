@@ -94,6 +94,17 @@ public class Duke {
         }
     }
 
+    private static void removeEntry(String input) {
+        int temp = Integer.parseInt(String.valueOf(input.charAt(7))) - 1;
+        System.out.println(temp);
+        Task removed = arr.remove(temp);
+        System.out.println(line);
+        System.out.println("     Noted. I've removed this task: ");
+        System.out.println("     " + removed.getOutput());
+         numTask();
+        System.out.println(line);
+    }
+
     public static void main(String[] args) {
         boolean on = true;
         System.out.println(line);
@@ -112,6 +123,8 @@ public class Duke {
                     markAsDone(input);
                 } else if (input.compareTo("list") == 0) {
                     printList();
+                } else if(input.indexOf("delete") == 0) {
+                    removeEntry(input);
                 } else {
                     addNewTask(input);
                 }
