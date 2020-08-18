@@ -30,8 +30,8 @@ public class Duke {
 
         String currInput = sc.nextLine();
 
-        List<String> inputList = new ArrayList<>();
-        List<String> checkBox = new ArrayList<>();
+        List<Task> inputList = new ArrayList<>();
+//        List<String> checkBox = new ArrayList<>();
 
         while (!currInput.equals("bye")) {
 
@@ -43,25 +43,25 @@ public class Duke {
 
                 System.out.println("____________________________________________________________");
                 for (int i = 0; i < inputList.size(); i++) {
-                    System.out.println((i + 1) + ". " + "[" + checkBox.get(i) + "]" + inputList.get(i));
+                    System.out.println(inputList.get(i).toString());
                 }
                 System.out.println("____________________________________________________________");
 
             } else if (splitString[0].equals("done")) {
                 int index = Integer.parseInt(splitString[1]);
-                checkBox.set(index -1 , "✓");
+                inputList.get(index - 1).markAsDone();
 
                 System.out.println("____________________________________________________________");
                 for (int i = 0; i < inputList.size(); i++) {
-                    System.out.println((i + 1) + ". " + "[" + checkBox.get(i) + "]" + inputList.get(i));
+                    System.out.println(inputList.get(i).toString());
                 }
                 System.out.println("____________________________________________________________");
 
             } else {
-                inputList.add(currInput);
-                checkBox.add("✗");
+                Task currTask = StringProcessor.stringProcessor(currInput);
+                inputList.add(currTask);
                 System.out.println("____________________________________________________________");
-                System.out.println(currInput);
+                System.out.print(currTask.toString());
                 System.out.println("____________________________________________________________\n");
             }
 
