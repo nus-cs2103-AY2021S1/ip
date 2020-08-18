@@ -17,7 +17,7 @@ public class Duckie {
     private static void intro() {
         System.out.println(horizL + "\n" + logo + "\n" +
                 INDENT + "Quack. Duckie is here to remember your tasks!\n" +
-                INDENT + "Please start!\n" + horizL);
+                INDENT + "You can begin by adding tasks!\n" + horizL);
     }
 
     private static void ending() {
@@ -27,14 +27,12 @@ public class Duckie {
 
     private static void displayList() throws DuckieException{
         if (lst.size() == 0) {
-            throw new DuckieException(horizL + "\n" + INDENT
-                    + "You have no tasks in the list currently.\n"
-                    + horizL);
+            throw new DuckieNoListException();
         }
 
         int index = 1;
         System.out.println(horizL);
-        System.out.println(INDENT + "Quack! These are the tasks in your list: ");
+        System.out.println(INDENT + "Quack! You have these in your list: ");
         for (Task task : lst) {
             System.out.println(INDENT + index + ". " + task);
             index++;
@@ -59,14 +57,12 @@ public class Duckie {
                 }
             }
         } catch (Exception e) {
-            throw new DuckieException(horizL + "\n" + INDENT
-                    + "Duckie is unable to add task without a description behind.\n"
-                    + horizL);
+            throw new DuckieNoInfoException();
         }
         lst.add(t1);
         System.out.println(horizL);
         System.out.println(INDENT + "Quack! Added: " + t1);
-        System.out.println(INDENT + "Now you have " + lst.size() + " tasks in the list.");
+        System.out.println(INDENT + "Now you have " + lst.size() + " task(s) in the list.");
         System.out.println(horizL);
     }
 
@@ -98,6 +94,7 @@ public class Duckie {
             try {
                 String initialInput = sc.nextLine();
                 String input = initialInput.strip();
+                System.out.println(input);
                 if (input.equalsIgnoreCase("bye")) {
                     System.out.print(horizL);
                     break;
@@ -106,20 +103,14 @@ public class Duckie {
                 } else if (input.toLowerCase().indexOf("done") == 0
                         || input.toLowerCase().indexOf("delete") == 0) {
                     if (lst.size() == 0) {
-                        throw new DuckieException(horizL + "\n" + INDENT
-                                + "Quack! You have no list to start with!\n"
-                                + horizL);
+                        throw new DuckieNoListException();
                     } else if (is_word(input)) {
-                        throw new DuckieException(horizL + "\n" + INDENT
-                                + "Duckie is unable to check the task for you without an index!\n"
-                                + horizL);
+                        throw new DuckieNoInfoException();
                     }
                     int ind = Integer.parseInt(input.split(" ")[1]);
 
                     if (lst.size() < ind) {
-                        throw new DuckieException(horizL + "\n" + INDENT
-                                + "The list has no index " + ind + "!\n"
-                                + horizL);
+                        throw new DuckieNoIndexException();
                     }
 
                     if (input.toLowerCase().indexOf("done") == 0) {
