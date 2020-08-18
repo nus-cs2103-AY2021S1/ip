@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Duke {
     static String bot = "Dave says:\n";
     //static String user = "Me: \n";
-    static String addedText = "added: ";
+    //static String addedText = "added: ";
     static String line = "_______________________________________________________________";
 
     public static void main(String[] args) {
