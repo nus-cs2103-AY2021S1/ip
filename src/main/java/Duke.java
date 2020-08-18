@@ -36,6 +36,23 @@ public class Duke {
                     throw new DukeException("Please enter a valid task number to mark as done (substring doesn't match regex)");
                 }
                 input = sc.nextLine();
+            } else if (input.toLowerCase().startsWith("delete")) {
+                int index;
+                if (!input.substring(6).trim().isEmpty()
+                        && input.substring(6).trim().matches("[0-9]+")) { //to make sure the input after "done" is a number
+                    index = Integer.parseInt(input.substring(6).trim()); //convert string to integer
+                    if (index >= 1) { //if input index is valid
+                        Task removed = list.get(index - 1);
+                        list.remove(index - 1);
+                        System.out.println("I have removed this task:\n" + removed
+                            + "\nNow you have " + list.size() + " task(s) in the list.");
+                    } else {
+                        throw new DukeException("Please enter a valid task number to delete (index is not valid)");
+                    }
+                } else {
+                    throw new DukeException("Please enter a valid task number to delete (substring doesn't match regex)");
+                }
+                input = sc.nextLine();
             } else if (input.toLowerCase().startsWith("todo")) {
                 if (!input.substring(4).trim().isEmpty()) { //to make sure to do task is not empty
                     String description = input.substring(4);
