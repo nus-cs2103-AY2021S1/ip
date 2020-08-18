@@ -13,7 +13,7 @@ public class Duke {
     private final String DELETE_TASK_MARKED_MESSAGE = "    Noted. I've removed this task:";
 
     private final String NO_TASK_MESSAGE = "    Sorry the task does not exists";
-    private final String ADDED_TASK_MESSAGE = "    Got it. I've added this task: ";
+    private final String ADDED_TASK_MESSAGE = "    Got it. I've added this task:";
     private final String INVALID_DONE_MESSAGE = "    Sorry done cannot be empty ";
     private final String INVALID_TODO_MESSAGE = "    Sorry todo cannot be empty ";
     private final String INVALID_DELETE_MESSAGE = "    Sorry delete cannot be empty ";
@@ -128,7 +128,11 @@ public class Duke {
             String test = parsedUserInput[1];
             String taskDescription = "";
             for (int i = 1; i < parsedUserInput.length; i++) {
-                taskDescription += parsedUserInput[i] + " ";
+                if (i == parsedUserInput.length -1) {
+                    taskDescription += parsedUserInput[i];
+                } else {
+                    taskDescription += parsedUserInput[i] + " ";
+                }
             }
             ToDo td = new ToDo(taskDescription);
             lstOfTask.add(td);
