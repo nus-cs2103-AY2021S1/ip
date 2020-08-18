@@ -56,7 +56,7 @@ public class Duke {
                 continue;
             }
 
-            // If user requests for list, display list
+            // If user requests for list, display list of tasks
             if (input.equals("list")) {
                 int count = 1;
                 System.out.println(servantSpeak
@@ -71,10 +71,27 @@ public class Duke {
                 continue;
             }
 
+            // Determine what kind of task it is
+            Task t;
+            String description;
+            switch (input.toLowerCase().split(" ")[0]) {
+                case "deadline":
+                    System.out.println("Deadline");
+                    String[] inputSplit = input.split("/by");
+                    String by = inputSplit[1];
+                    description = inputSplit[0].substring(8);
+                    t = new Deadline(description, by);
+                    userTasks.add(t);
+                    System.out.println(servantSpeak
+                            + "    I have added the task:\n       "
+                            + t.toString() + "\n");
+                    break;
+                case "todo":
+                    System.out.println("ToDo");
+                    break;
+            }
             // Default: Add input from user into the ArrayList
-            userTasks.add(new Task(input));
-            System.out.println(servantSpeak
-                    + "    I have added the task: " + input + "\n");
+
         } while (!input.equals("bye"));
 
     }
