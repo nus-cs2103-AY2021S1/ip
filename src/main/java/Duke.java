@@ -25,6 +25,9 @@ public class Duke {
                 } else if (command.equals("list")) {
                     this.printList();
                 } else if (command.split(" ")[0].equals("done")) {
+                    if (command.split(" ").length == 1) {
+                        throw new UnknownTaskException("No task number entered");
+                    }
                     int taskNo = Integer.parseInt(command.split(" ")[1]) - 1;
                     this.taskDone(taskNo);
                 } else if (command.split(" ")[0].equals("todo")) {
@@ -38,11 +41,11 @@ public class Duke {
                         throw new EmptyDescriptionException("No Description entered");
                     }
                     String[] splitArr = command.split("/");
-                    if(splitArr.length == 1) {
+                    if (splitArr.length == 1) {
                         throw new UnknownTimeException("No by time added");
                     }
                     String description = splitArr[0].substring(8);
-                    if(splitArr[1].length() <= 3) {
+                    if (splitArr[1].length() <= 3) {
                         throw new EmptyTimeException("No time entered");
                     }
                     String by = splitArr[1].substring(3);
@@ -52,15 +55,21 @@ public class Duke {
                         throw new EmptyDescriptionException("No Description entered");
                     }
                     String[] splitArr = command.split("/");
-                    if(splitArr.length == 1) {
+                    if (splitArr.length == 1) {
                         throw new UnknownTimeException("No by time added");
                     }
                     String description = splitArr[0].substring(5);
-                    if(splitArr[1].length() <= 3) {
+                    if (splitArr[1].length() <= 3) {
                         throw new EmptyTimeException("No time entered");
                     }
                     String at = splitArr[1].substring(3);
                     this.addToList(new Event(description, at));
+                } else if (command.split(" ")[0].equals("delete")) {
+                    if (command.split(" ").length == 1) {
+                        throw new UnknownTaskException("No task number entered");
+                    }
+                    int taskNo = Integer.parseInt(command.split(" ")[1]) - 1;
+                    this.removeFromList(taskNo);
                 } else {
                     throw new UnknownCommandException("Unknown command entered");
                 }
@@ -72,6 +81,8 @@ public class Duke {
                 System.out.println("You've gotta let me know the time.");
             } catch (EmptyTimeException at) {
                 System.out.println("There has to be a time, surely. Don't leave it blank!");
+            } catch (UnknownTaskException ex) {
+                System.out.println("C'mon, I don't live in your head, you gotta tell me the task number!");
             } finally {
                 System.out.println("___________________________________________________");
             }
@@ -93,6 +104,12 @@ public class Duke {
         this.list.set(taskNo, toBeDone);
         System.out.println("Good Job, this task is now done:");
         System.out.println(toBeDone);
+    }
+
+    void removeFromList(int taskNo) {
+        Task removedTask = this.list.remove(taskNo);
+        System.out.println("Well, if you insist. I've removed:");
+        System.out.println(removedTask);
     }
 
     void printList() {
