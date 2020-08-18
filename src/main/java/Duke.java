@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Duke {
     public static boolean exitLoop = false;
-    public static ArrayList<String> inputThings = new ArrayList<>();
+    public static ArrayList<Task> tasks = new ArrayList<>();
 
     private static void greet() {
         UIPrint.drawLine(UIPrint.star, 50);
@@ -24,16 +24,19 @@ public class Duke {
         System.out.println("added: " + str);
         UIPrint.drawLine(UIPrint.star, 50);
 
-        inputThings.add(str);
+        Task newTask = new Task(str);
+        tasks.add(newTask);
     }
 
     private static boolean checkCommand(String str) {
         String[] inputParts = str.split(" ", 2);
         String possibleCommand = inputParts[0];
+        String rest = inputParts.length == 2 ? inputParts[1] : "";
+
         Command command = DukeCommandSet.getInstance().getCommand(possibleCommand);
 
         if (command != null) {
-            command.execute();
+            command.execute(rest);
             return true;
         } else {
             return false;
