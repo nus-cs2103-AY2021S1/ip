@@ -34,6 +34,10 @@ public class Duke {
                 ListFunction.printList();
                 line = scanner.nextLine();
             }
+            else if (line.length() >= 4 && line.substring(0, 4).equals("done")) {
+                ListFunction.setDone(Integer.parseInt(line.substring(5)));
+                line = scanner.nextLine();
+            }
             else {
                 ListFunction.add(line);
                 line = scanner.nextLine();

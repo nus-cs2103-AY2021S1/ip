@@ -13,13 +13,19 @@ public class ListFunction {
         return taskList;
     }
 
+    public static void setDone(int index) {
+        taskList.get(index - 1).setDone();
+        System.out.println("Well done! I've marked this as done:");
+        System.out.println(taskList.get(index - 1));
+    }
+
     public static void printList() {
         int n = taskList.size();
         if (n == 0)
             System.out.println("There is no task in the list :)");
         else {
-            for (int i = 0; i < n; i++)
-                System.out.println((i + 1) + ". " + taskList.get(i).toString());
+            for (int i = 1; i <= n; i++)
+                System.out.println(i + ". " + taskList.get(i - 1).toString());
         }
     }
 
