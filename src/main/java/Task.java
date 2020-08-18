@@ -13,9 +13,9 @@ public class Task {
 
     public String getItem() {
         if (completed) {
-            return "[O] " + this.item;
+            return "[O]" + this.item;
         } else {
-            return "[X] " + this.item;
+            return "[X]" + this.item;
         }
     }
 }

@@ -47,11 +47,20 @@ public class Duke {
             case "done":
                 completeItem(input);
                 break;
+            case "delete":
+                deleteItem(input);
+                break;
             case "todo":
+                String todo = input.substring(4, input.length());
+                addItem(command, todo);
+                break;
             case "deadline":
+                String deadline = input.substring(8, input.length());
+                addItem(command, deadline);
+                break;
             case "event": {
-                String item = String.join(" ", Arrays.copyOfRange(instructions, 1, instructions.length));
-                addItem(command, item);
+                String event = input.substring(5, input.length());
+                addItem(command, event);
                 break;
             }
             default:
@@ -83,8 +92,23 @@ public class Duke {
         }
     }
 
+    public void deleteItem(String input) throws DukeException {
+        String indexString = input.split(" ")[1];
+        try {
+            int index = Integer.valueOf(indexString) - 1;
+            Task item = todoList.get(index);
+            System.out.printf(outputFormat, "Noted. This task has now been removed from the list:");
+            System.out.printf(outputFormat, "  " + item.getItem());
+            todoList.remove(index);
+            numberOfTasks -= 1;
+            System.out.printf(outputFormat, "There are now " + Integer.toString(numberOfTasks) + " todo items in the list");
+        } catch (Exception e) {
+            throw new DukeException("Oops! Invalid task number. Please try again >.<");
+        }
+    }
+
     public void addItem(String instruction, String item) throws DukeException {
-        if (item.equals("")) {
+        if (item.equals("") || item.equals(" ")) {
             throw new DukeException("Oops! The description cannot be empty >.<");
         }
         if (instruction.equals("todo")) {
