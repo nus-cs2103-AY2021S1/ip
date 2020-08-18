@@ -12,30 +12,47 @@ public class Duke {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             String command = input.split(" ")[0];
-            switch (command) {
-                case "list":
-                    int id = 1;
-                    String output = "Here are the tasks in your list:";
-                    for (Task task : tasks) {
-                        output += "\n" + tab + id + ". " + task;
-                        id++;
-                    }
-                    chatPrint(output);
-                    break;
-                case "done":
-                    int idx = Integer.parseInt(input.split(" ")[1]) - 1;
-                    Task doneTask = tasks.get(idx).done();
-                    tasks.set(idx, doneTask);
-                    chatPrint("Nice! I've marked this task as done:\n" +
-                            tab + "   " + doneTask);
-                    break;
-                case "todo":
-                case "deadline":
-                case "event":
-                    Task newTask = addTask(tasks, command, input.substring(input.indexOf(' ') + 1));
-                    chatPrint("Got it. I've added this task:\n" +
-                            tab + "   " + newTask + "\n" +
-                            tab + "Now you have " + tasks.size() + " tasks in the list.");
+            try {
+                switch (command) {
+                    case "list":
+                        int id = 1;
+                        String output = "Here are the tasks in your list:";
+                        for (Task task : tasks) {
+                            output += "\n" + tab + id + ". " + task;
+                            id++;
+                        }
+                        chatPrint(output);
+                        break;
+                    case "done":
+                        int idx = Integer.parseInt(input.split(" ")[1]) - 1;
+                        if (idx >= tasks.size()) {
+                            throw new DukeException("Oh dear! That task doesn't exist!");
+                        }
+                        Task doneTask = tasks.get(idx).done();
+                        tasks.set(idx, doneTask);
+                        chatPrint("Nice! I've marked this task as done:\n" +
+                                tab + "   " + doneTask);
+                        break;
+                    case "todo":
+                    case "deadline":
+                    case "event":
+                        int idxSpace = input.indexOf(' ');
+                        int idxMeta = input.indexOf('/');
+                        int infoLength = idxMeta - (idxSpace + 1);
+                        if (idxSpace == -1 ||
+                                (idxMeta != -1 && infoLength < 1)) {
+                            throw new DukeException("Oh dear! A task description cannot be empty!");
+                        }
+                        Task newTask = addTask(tasks, command, input.substring(input.indexOf(' ') + 1));
+                        chatPrint("Got it. I've added this task:\n" +
+                                tab + "   " + newTask + "\n" +
+                                tab + "Now you have " + tasks.size() + " tasks in the list.");
+                        break;
+                    default:
+                        throw new DukeException("Oh dear! I'm sorry, but I don't know what that means :((");
+                }
+            } catch (DukeException ex) {
+                chatPrint(ex.toString());
             }
             input = sc.nextLine();
         }
@@ -50,18 +67,27 @@ public class Duke {
         System.out.println(tab + line + "\n");
     }
 
-    public static Task addTask(List<Task> tasks, String type, String info) {
+    public static Task addTask(List<Task> tasks, String type, String info) throws DukeException {
         Task newTask;
-        switch(type) {
+        switch (type) {
             case "todo":
+                if (info.contains("/")) {
+                    throw new DukeException("Oh dear! A todo shouldn't contain a timestamp!");
+                }
                 newTask = new Todo(info);
                 break;
             case "deadline":
+                if (!info.contains("/by")) {
+                    throw new DukeException("Oh dear! A deadline must contain '/by'!");
+                }
                 String dDesc = info.substring(0, info.indexOf('/') - 1);
                 String by = info.substring(info.indexOf('/') + 4);
                 newTask = new Deadline(dDesc, by);
                 break;
             default:
+                if (!info.contains("/at")) {
+                    throw new DukeException("Oh dear! An event must contain '/at'!");
+                }
                 String eDesc = info.substring(0, info.indexOf('/') - 1);
                 String at = info.substring(info.indexOf('/') + 4);
                 newTask = new Event(eDesc, at);
