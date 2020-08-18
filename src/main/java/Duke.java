@@ -1,7 +1,7 @@
 import commands.*;
-import parser.Parser;
-import service.DukeResponse;
-import service.DukeService;
+import parser.CommandParser;
+import parser.TaskParser;
+import service.*;
 
 import java.util.Scanner;
 
@@ -26,11 +26,19 @@ public class Duke {
         DukeService service = new DukeService();
 
         ///register commands
-        Parser parser = new Parser();
+        CommandParser parser = new CommandParser();
         parser.registerCommand(AddCommand::new, AddCommand.commandWord);
         parser.registerCommand(ByeCommand::new, ByeCommand.commandWord);
         parser.registerCommand(ListCommand::new, ListCommand.commandWord);
         parser.registerCommand(DoneCommand::new, DoneCommand.commandWord);
+
+        ///register tasks
+        TaskParser taskParser = new TaskParser();
+        taskParser.registerTask(TodoTask::new, TodoTask.taskWord);
+        taskParser.registerTask(DeadlineTask::new, DeadlineTask.taskWord);
+        taskParser.registerTask(EventTask::new, EventTask.taskWord);
+        ///set task parser
+        AddCommand.setTaskParser(taskParser);
 
         ///start execution
         while (true) {

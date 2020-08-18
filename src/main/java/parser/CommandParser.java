@@ -5,7 +5,7 @@ import commands.Command;
 import java.util.ArrayList;
 import java.util.function.Function;
 
-public class Parser {
+public class CommandParser {
     ///helper class
     private static class CommandInstance {
         private Function<String, Command> constructor;
@@ -18,7 +18,7 @@ public class Parser {
     }
     ArrayList<CommandInstance> allCommandInstances;
 
-    public Parser() {
+    public CommandParser() {
         allCommandInstances = new ArrayList<>();
     }
 

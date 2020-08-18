@@ -1,12 +1,19 @@
 package commands;
 
+import parser.TaskParser;
 import service.DukeResponse;
 import service.DukeService;
+import service.Task;
+import utils.TokenUtils;
 
 public class AddCommand extends Command {
     public static final String commandWord = "add";
+    private static TaskParser taskParser = null;
+    private Task toAdd;
 
-    private String description;
+    public static void setTaskParser(TaskParser parser) {
+        AddCommand.taskParser = parser;
+    }
 
     public AddCommand(String raw) {
         super(raw);
@@ -17,25 +24,23 @@ public class AddCommand extends Command {
         if (!super.isParse) {
             throw new Exception("Command has not been parsed");
         }
-        return service.addTask(this.description);
+        return service.addTask(this.toAdd);
     }
 
     @Override
     public void parse() throws Exception {
+        if (taskParser == null) {
+            throw new Exception("Haven't set task parser");
+        }
         String[] tokens = super.raw.split(" ");
 
         if (tokens.length <= 1) {
             throw new Exception("Not enough arguments");
         }
 
-        StringBuilder sb = new StringBuilder();
-        for (int i = 1; i < tokens.length; i++) {
-            sb.append(tokens[i]);
-            if (i + 1 < tokens.length) {
-                sb.append(" ");
-            }
-        }
-        this.description = sb.toString();
+        String[] taskTokens = TokenUtils.dropFirst(tokens);
+        this.toAdd = taskParser.parse(taskTokens);
+        this.toAdd.parse();
         super.isParse = true;
     }
 

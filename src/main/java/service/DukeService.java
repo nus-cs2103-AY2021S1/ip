@@ -9,9 +9,9 @@ public class DukeService {
         tasks = new ArrayList<>();
     }
 
-    public DukeResponse addTask(String description) {
-        tasks.add(new Task(description));
-        return new DukeResponse("Added: " + description + "\n");
+    public DukeResponse addTask(Task toAdd) {
+        tasks.add(toAdd);
+        return new DukeResponse("Added: " + toAdd + "\n");
     }
 
     public DukeResponse getAllJobs() {
