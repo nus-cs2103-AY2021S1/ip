@@ -7,7 +7,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         while (strIden.isRunning()) {
-            String userInput = sc.next();
+            String userInput = sc.nextLine();
             strIden.checker(userInput);
         }
     }
