@@ -38,15 +38,14 @@ public class Duke {
     }
 
     private static void printAddTask(Task t) {
-        String[] output = new String[] {
-                "Got it. I've added this task: ", t.toString(), "Now you have " + taskList.size() + " tasks in the list."
-        };
-        println(output);
+        println(
+                "Got it. I've added this task: ", t.toString(),
+                "Now you have " + taskList.size() + " tasks in the list."
+        );
     }
 
     private static void intro() {
-        String[] msg = new String[] {"Hello! I'm KING!", "What can I do for you?"} ;
-        println(msg);
+        println("Hello! I'm KING!", "What can I do for you?");
     }
 
     private static void exit() {
@@ -56,8 +55,8 @@ public class Duke {
     private static void list() {
         if (taskList.size() == 0) {
             println("I can't find any task in your list...", "Try adding some task using \"todo\", \"deadline\" and \"event\" command");
+            return;
         }
-
 
         String[] output = new String[taskList.size() + 1];
         output[0] = " Here are the tasks in your list:";
@@ -74,8 +73,7 @@ public class Duke {
             int selected = Integer.parseInt(num.strip());
             taskList.get(selected-1).setDone();
 
-            String[] output = new String[] { "Nice! I've marked this task as done: ", taskList.get(selected-1).toString() };
-            println(output);
+            println("Nice! I've marked this task as done: ", taskList.get(selected-1).toString() );
         } catch (NumberFormatException nfe) {
             throw new DukeException("This is not a number for \"done\" command: " + num);
         } catch (IndexOutOfBoundsException iooob) {
@@ -118,9 +116,8 @@ public class Duke {
             int selected = Integer.parseInt(num.strip());
             Task task = taskList.remove(selected-1);
 
-            String[] output = new String[] { "Noted. I've removed this task: ", task.toString(),
-                    "Now you have " + taskList.size() + " tasks in the list." };
-            println(output);
+            println( "Noted. I've removed this task: ", task.toString(),
+                    "Now you have " + taskList.size() + " tasks in the list." );
         } catch (NumberFormatException nfe) {
             throw new DukeException("This is not a number for \"delete\" command: " + num);
         } catch (IndexOutOfBoundsException iooob) {
