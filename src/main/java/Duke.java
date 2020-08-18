@@ -14,7 +14,7 @@ public class Duke {
         System.out.println("What can I do for you today?");
 
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
-        List<String> itemList = new ArrayList<String>();
+        List<Task> itemList = new ArrayList<>();
 
         while(true){
             String input = scanner.nextLine();
@@ -29,7 +29,8 @@ public class Duke {
             }
             else{
                 System.out.println("\t" + input);
-                itemList.add(input);
+                Task newTask = new Task(input);
+                itemList.add(newTask);
             }
         }
     }
