@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     private static final String logo = " _   _       _   _ _            \n" +
@@ -45,12 +46,38 @@ public class Duke {
             "██████████░░                ▒▒                ██              ██              ██                ████      ██████            ██████████\n" +
             "████████████                ████            ████            ░░██            ████              ██████      ██████            ██████████\n" +
             "██████████████            ████████          ██████          ████          ██████            ████████      ██████            ██████████\n";
-    private static final String[] rememberedText = new String[100];
-    private static int textCount = 0;
+    private static final ArrayList<Task> tasks = new ArrayList<>();
+    private static int taskCount = 0;
 
     private static void greetings() {
         System.out.println(logo);
         System.out.println(welcomeMessage);
+    }
+
+    public static void list() {
+        System.out.println(divider);
+        if (taskCount == 0) {
+            System.out.println(" You've got no tasks now. \n" +
+                    "If you want to get busy add more task and I'll remember them for you :)");
+        }
+        System.out.println(" Let me list out all your tasks...");
+        for (int i = 0; i < taskCount; i++) {
+            System.out.println(" " + (i + 1) + "." + tasks.get(i));
+        }
+        System.out.println(divider);
+    }
+
+    public static void done(int index) {
+        System.out.println(divider);
+        if (index < 1 || taskCount < index) {
+            System.out.println(" Sorry I cannot find your specified task :(");
+        } else {
+            System.out.println(" Congratulations for finishing this task! \n" +
+                    " Let me mark this as done for you");
+            tasks.get(index - 1).completeTask();
+            System.out.println("   " + tasks.get(index - 1));
+        }
+        System.out.println(divider);
     }
 
     private static void echo() {
@@ -61,17 +88,13 @@ public class Duke {
                 System.out.println(goodbyeMessage);
                 break;
             } else if (currentCommand.equals("list")) {
-                System.out.println(divider);
-                if (textCount == 0) {
-                    System.out.println(" Sorry, no text exist inside my memory :(");
-                }
-                for (int i = 0; i < textCount; i++) {
-                    System.out.println(" " + (i + 1) + ". " + rememberedText[i]);
-                }
-                System.out.println(divider);
+                list();
+            } else if (currentCommand.length() >= 4 && currentCommand.substring(0, 4).equals("done")) {
+                int index = Integer.parseInt(currentCommand.substring(5));
+                done(index);
             } else {
-                rememberedText[textCount] = currentCommand;
-                textCount += 1;
+                tasks.add(new Task(currentCommand, false));
+                taskCount += 1;
                 System.out.println(divider + "\n added: " + currentCommand + "\n" + divider);
             }
         }
