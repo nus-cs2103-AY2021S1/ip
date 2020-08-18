@@ -11,6 +11,7 @@ javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\*.java
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
+    PAUSE
 )
 REM no error here, errorlevel == 0
 
@@ -19,3 +20,4 @@ java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
 
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT
+PAUSE
