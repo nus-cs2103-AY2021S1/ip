@@ -20,8 +20,7 @@ public class Duke {
             } catch (DukeException de) {
                 println(de.getMessage());
             }
-
-        } while (!input.equals("bye"));
+        } while (!(input.equals("bye") || input.equals("exit")));
 
     }
 
@@ -126,21 +125,38 @@ public class Duke {
     }
 
     private static void process(String msg) {
-        if (msg.equals("bye") || msg.equals("exit"))
-            exit();
-        else if (msg.equals("list"))
-            list();
-        else if (msg.startsWith("done"))
-            done(msg.substring(4));
-        else if (msg.startsWith("todo"))
-            todo(msg.substring(4));
-        else if (msg.startsWith("deadline"))
-            deadline(msg.substring(8));
-        else if (msg.startsWith("event"))
-            event(msg.substring(5));
-        else if (msg.startsWith("delete"))
-            delete(msg.substring(6));
-        else
+        int idx = msg.indexOf(' ');
+        CommandList command;
+
+        try {
+            command = (idx > 0) ? CommandList.valueOf(msg.substring(0, idx)) : CommandList.valueOf(msg);
+        } catch (IllegalArgumentException iae) {
             throw new DukeException("This is not in my command list");
+        }
+
+        switch (command) {
+            case bye:
+            case exit:
+                exit();
+                break;
+            case list:
+                list();
+                break;
+            case todo:
+                todo(msg.substring(4));
+                break;
+            case deadline:
+                deadline(msg.substring(8));
+                break;
+            case event:
+                event(msg.substring(5));
+                break;
+            case done:
+                done(msg.substring(4));
+                break;
+            case delete:
+                delete(msg.substring(6));
+                break;
+        }
     }
 }
