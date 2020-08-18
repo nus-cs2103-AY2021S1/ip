@@ -20,13 +20,14 @@ public class Duke {
                 System.out.println(horiLine + goodbye + "\n" + horiLine);
                 break;
             } else if (input.equals("list")) {
-                int counter = 1;
                 System.out.println(horiLine);
                 for (Task task : List) {
-                    System.out.println(counter + ". " + task.getName());
-                    counter++;
+                    System.out.println(task.getNumber() + "." + task.toString());
                 }
                 System.out.println(horiLine);
+            } else if(input.startsWith("done")) {
+                String[] number = input.split("done ");
+                markDone(Integer.parseInt(number[1]));
             } else {
                 List.add(new Task(input));
                 System.out.println(horiLine + "added: " + input + "\n" + horiLine);
@@ -35,9 +36,14 @@ public class Duke {
         sc.close();
     }
 
+    private static void markDone(int i) {
+        Task task = List.get(i - 1);
+        task.setDone();
+        System.out.println(horiLine + "Nice! I've marked this task as done:" +  "\n" +
+                task.toString() + "\n" + horiLine);
+    }
+
     public static void main(String[] args) {
         echo();
     }
 }
-
-
