@@ -3,7 +3,7 @@
 // 1) Content Description
 // 2) Status (isDone or not)
 
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
 
@@ -30,4 +30,8 @@ public class Task {
         this.isDone = true;
     }
 
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + this.description;
+    }
 }
