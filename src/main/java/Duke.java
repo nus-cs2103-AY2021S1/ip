@@ -15,18 +15,29 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
 
-        List<String> taskList = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
 
         while(!command.equals("bye")) {
             if(command.equals("list")) {
                 System.out.print(line);
+                System.out.println("Here are the tasks in your list:");
                 for(int i = 0; i < taskList.size(); i++) {
                     System.out.println((i + 1) + ". " + taskList.get(i));
                 }
                 System.out.println(line);
             } else {
-                System.out.println(line + "added: " + command + "\n" + line);
-                taskList.add(command);
+                String[] commands = command.split(" ");
+                if(commands[0].equals("done")) {
+                    int index = Integer.parseInt(commands[1]) - 1;
+                    taskList.get(index).markAsDone();
+                    System.out.println(line
+                            + "Nice! I've marked this task as done: "
+                            + "\n  " + taskList.get(index) + "\n"
+                            + line);
+                } else {
+                    System.out.println(line + "added: " + command + "\n" + line);
+                    taskList.add(new Task(command));
+                }
             }
             command = sc.nextLine();
         }
