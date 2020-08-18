@@ -8,27 +8,30 @@ public class Duke {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+    static String line = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
 
     public static void main(String[] args) {
-        repeat();
+        printWithLines("Hello! My name is Duketh Puketh III, but you can call me\n" + logo +
+                "\n How may I help you today? :)");
+        processInput();
+        printWithLines("Bye! I'll see you again next time!");
     }
 
-    private static void repeat() {
-        String line = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
-
-        System.out.println("Hello from\n" + logo + "\n How may I help you today? :)");
+    private static void processInput() {
 
         String nextInput = input.nextLine();
         boolean bye = nextInput.equals("bye");
 
         while (!bye) {
-            System.out.println(line + "\n" + nextInput + "\n" + line);
+            printWithLines(nextInput);
             nextInput = input.nextLine();
             bye = nextInput.equals("bye");
         }
 
-        System.out.println("Bye! I'll see you again next time!");
+    }
 
+    private static void printWithLines(String output) {
+        System.out.println(line + "\n" + output + "\n" + line);
     }
 
 }
