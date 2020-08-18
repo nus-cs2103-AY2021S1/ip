@@ -14,12 +14,10 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String command = sc.nextLine();
-            if (command.equals("bye")) {
+            if (command.equals("bye") || command.equals("Bye")) {
                 System.out.println("Bye! Let's talk again soon!");
                 sc.close();
                 break;
-            } else if (command.equals("list")) {
-                TaskManager.readList();
             } else {
                 TaskManager.manageTask(command);
             }

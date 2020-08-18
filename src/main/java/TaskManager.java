@@ -3,23 +3,27 @@ import static java.lang.Integer.parseInt;
 
 public class TaskManager {
 
-    private static ArrayList<Task> list = new ArrayList<>();
+    private static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void addToList(Task task) {
-        list.add(task);
+        taskList.add(task);
         System.out.println("New task added!");
         System.out.println(task);
-        System.out.println("You now have " + list.size() + " tasks.");
+        System.out.println("You now have " + taskList.size() + " tasks.");
     }
 
     public static void readList() {
-        System.out.println("Here's all your tasks to complete:");
-        int i = 1;
-        for (Task ele : list) {
-            System.out.println(i + ". " + ele);
-            i++;
+        if (taskList.isEmpty()) {
+            System.out.println("Looks like you don't have any tasks! Go on and add some!");
+        } else {
+            System.out.println("Here's all your tasks to complete:");
+            int i = 1;
+            for (Task ele : taskList) {
+                System.out.println(i + ". " + ele);
+                i++;
+            }
+            System.out.println("Time to get to work! :D");
         }
-        System.out.println("Time to get to work! :D");
     }
 
     public static void indexOutOfBounds() {
@@ -45,7 +49,7 @@ public class TaskManager {
         } else {
             try {
                 int i = parseInt(command.split(" ")[1]);
-                Task doneTask = list.get(i - 1);
+                Task doneTask = taskList.get(i - 1);
                 doneTask.markAsDone();
                 System.out.println("Task marked as done! Good job!");
                 System.out.println(doneTask);
@@ -64,11 +68,11 @@ public class TaskManager {
         } else {
             try {
                 int i = parseInt(command.split(" ")[1]);
-                Task deleteTask = list.get(i - 1);
-                list.remove(i - 1);
+                Task deleteTask = taskList.get(i - 1);
+                taskList.remove(i - 1);
                 System.out.println("This task has been deleted from the list:");
                 System.out.println(deleteTask);
-                System.out.println("You now have " + list.size() + " tasks.");
+                System.out.println("You now have " + taskList.size() + " tasks.");
             } catch (IndexOutOfBoundsException e) {
                 indexOutOfBounds();
             } catch (NumberFormatException e) {
@@ -129,18 +133,28 @@ public class TaskManager {
     public static void manageTask(String command) {
         try {
             String taskType = command.split(" ")[0];
-            if (taskType.equals("done")) {
-                setDoneTask(command);
-            } else if (taskType.equals("delete")) {
-                deleteTask(command);
-            } else if (taskType.equals("todo")) {
-                handleTodo(command);
-            } else if (taskType.equals("deadline")) {
-                handleDeadline(command);
-            } else if (taskType.equals("event")) {
-                handleEvent(command);
-            } else {
-                System.out.println("Sorry! I don't understand that command. Please try again!");
+            switch (taskType) {
+                case "list":
+                    readList();
+                    break;
+                case "done":
+                    setDoneTask(command);
+                    break;
+                case "delete":
+                    deleteTask(command);
+                    break;
+                case "todo":
+                    handleTodo(command);
+                    break;
+                case "deadline":
+                    handleDeadline(command);
+                    break;
+                case "event":
+                    handleEvent(command);
+                    break;
+                default:
+                    System.out.println("Sorry! I don't understand that command. Please try again!");
+                    break;
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
