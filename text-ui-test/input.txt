@@ -3,5 +3,12 @@ deadline return book /by Monday
 event project meeting /at Tue 10-12am
 list
 done 1
+delete 1
 list
+todo
+blah
+done
+done 7
+deadline get book
+event presentation preparation
 bye
