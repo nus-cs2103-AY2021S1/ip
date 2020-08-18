@@ -8,7 +8,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         // Initialize List for Duke to store stuff in
         /** Note: limit storage to 100 items **/
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<>();
 
         // Text Images
         String logo = " ____        _        \n"
@@ -28,26 +28,53 @@ public class Duke {
         System.out.println("\n" + lineBreaker);
         System.out.println();
 
-        // System Loop
         // Read user input
-        String instructions = scanner.nextLine();
+        String userInput = scanner.nextLine();
+        // System Loop
         // End only if user input is "bye"
-        while (!instructions.equals("bye")) {
-            switch(instructions) {
-                case("list") :
-                    printList(list);
-                    break;
-                default:
-                    // Store messages by default
+        while (!userInput.equals("bye")) {
+            // Process input
+            String[] instructions = userInput.split(" ", 2);
+
+            // React to commands
+            // Command: "list"
+            if (userInput.equals("list")) {
+                printList(list);
+            } else if (instructions[0].equals("done")){
+                // Command: "done <task>"
+                // If valid <task>, mark done
+                try {
+                    int taskNumber = Integer.parseInt(instructions[1]);
+                    list.get(taskNumber - 1).markedDone(true);
                     System.out.print(outputBreaker);
-                    list.add(instructions);
-                    System.out.println("added: " + instructions);
-                    break;
+                    System.out.println("Congratulations! I've helped you mark the task as done:");
+                    System.out.print("[✓] " + list.get(taskNumber - 1) + "\n");
+
+                } catch (NumberFormatException nfe) {
+                    // Store it as a task
+                    //System.out.println("Caught nfe");
+                    System.out.print(outputBreaker);
+                    list.add(new Task(userInput));
+                    System.out.println("added: " + userInput);
+
+                } catch (IndexOutOfBoundsException e) {
+                    // Store it as a task
+                    //System.out.println("Caught index out of bounds");
+                    System.out.print(outputBreaker);
+                    list.add(new Task(userInput));
+                    System.out.println("added: " + userInput);
+                }
+            } else {
+                //Default reaction to words
+                // Store tasks by default
+                System.out.print(outputBreaker);
+                list.add(new Task(userInput));
+                System.out.println("added: " + userInput);
             }
 
             System.out.println("\n" + lineBreaker + "\n");
             // Read user input once more
-            instructions = scanner.nextLine();
+            userInput = scanner.nextLine();
         }
 
         // Farewell message
@@ -57,10 +84,19 @@ public class Duke {
     }
 
     /** Prints all the contents of the list in order **/
-    public static void printList(ArrayList<String> list) {
+    public static void printList(ArrayList<Task> list) {
         System.out.print("\nHere is what I have! ^^\n");
         for (int i = 0; i < list.size(); i++) {
-            System.out.println((i+1) + ". " + list.get(i));
+            // Enumerator
+            System.out.print((i+1) + ".");
+            // Status
+            if (!list.get(i).getStatus()) {
+                System.out.print("[✗] ");
+            } else {
+                System.out.print("[✓] ");
+            }
+            // Actual Task
+            System.out.println(list.get(i));
         }
     }
 }
