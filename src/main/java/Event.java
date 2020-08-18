@@ -34,6 +34,10 @@ public class Event extends Task {
         return new Event(this.description, true, this.timing);
     }
 
+    /**
+     * Overriden toString() method
+     * @return custom String
+     */
     @Override
     public String toString() {
         return "[EVENT]"

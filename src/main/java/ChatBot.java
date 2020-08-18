@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Encapsulates the chatBot and its behavior.
  */
-class ChatBot {
+public class ChatBot {
     private String logo;
     private String user;
     private String botName;
@@ -22,7 +22,6 @@ class ChatBot {
                 + "#  #   ###### #   #    #      #  # #\n"
                 + "#   #  #    # #  #     #      #   ##\n"
                 + "#    # #    # # ###### ###### #    #\n";
-        user = "You: ";
         this.botName = botName;
         toDoList = new ArrayList<>();
     }
@@ -32,7 +31,7 @@ class ChatBot {
      */
     void welcome() {
          String welcomeMessage = "Konichiwa! Welcome to Kaizen\n"
-                 + "I am " + this.botName + " what can I do for you today?\n";
+                 + "I am " + this.botName + ", what can I do for you today?\n";
 
         System.out.println(this.logo
                 + "\n"
@@ -52,28 +51,23 @@ class ChatBot {
                 String input = sc.nextLine();
                 String[] inputArray = input.split(" ", 2); // separates the first word from the rest
                 String command = inputArray[0].toLowerCase();
-                switch(command) {
-                    case "bye":
-                        bye();
-                        exitProgram = true;
-                        break;
-                    case "list":
-                        showList();
-                        break;
-                    case "done":
-                        makeTaskDone(inputArray);
-                        break;
-                    case "todo":
-                        makeTodo(inputArray);
-                        break;
-                    case "deadline":
-                        makeDeadline(inputArray);
-                        break;
-                    case "event":
-                        makeEvent(inputArray);
-                        break;
-                    default:
-                        System.out.println("NANI??! Please say something that I can understand!");
+                if (command.equals(UserCommand.BYE.getCommand())) {
+                    bye();
+                    exitProgram = true;
+                } else if (command.equals(UserCommand.LIST.getCommand())) {
+                    showList();
+                } else if (command.equals(UserCommand.DONE.getCommand())) {
+                    makeTaskDone(inputArray);
+                } else if (command.equals(UserCommand.TODO.getCommand())) {
+                    makeTodo(inputArray);
+                } else if (command.equals(UserCommand.DEADLINE.getCommand())) {
+                    makeDeadline(inputArray);
+                } else if (command.equals(UserCommand.EVENT.getCommand())) {
+                    makeEvent(inputArray);
+                } else if (command.equals(UserCommand.DELETE.getCommand())) {
+                    deleteTask(inputArray);
+                } else {
+                    throw new DukeException("NANI??! Please say something that I can understand!\n");
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
@@ -116,7 +110,7 @@ class ChatBot {
             int taskNumber = Integer.parseInt(taskStringArray[1]);
             // check if taskNumber is valid
             if (taskNumber <= 0 || taskNumber > this.toDoList.size()) {
-                throw new DukeException("Sorry, no such task!\n");
+                throw new DukeException("Sorry, no such task to mark as done!\n");
             }
 
             Task currentTask = this.toDoList.get(taskNumber - 1);
@@ -130,6 +124,11 @@ class ChatBot {
         }
     }
 
+    /**
+     * Make a todo task
+     * @param inputArray the string that the user input
+     * @throws DukeException to handle input errors
+     */
     void makeTodo(String[] inputArray) throws DukeException {
         // if length is not 2, nothing was passed in after 'todo'
         if (inputArray.length != 2) {
@@ -141,6 +140,11 @@ class ChatBot {
         addTask(taskToAdd);
     }
 
+    /**
+     * Make a deadline task
+     * @param inputArray the string that the user input
+     * @throws DukeException to handle input errors
+     */
     void makeDeadline(String[] inputArray) throws DukeException {
         // if length is not 2, nothing was passed in after 'deadline'
         if (inputArray.length != 2) {
@@ -150,12 +154,12 @@ class ChatBot {
         // if description is lacking a /by keyword
         String description = inputArray[1];
         if (description.indexOf("/by") < 0) {
-            throw new DukeException("Please enter a valid deadline!\n");
+            throw new DukeException("Please enter a valid deadline! Remember to add '/by'\n");
         }
 
-        String[] descriptionArray = description.split("/by", 2);
+        String[] descriptionArray = description.split("/by");
         if (descriptionArray.length != 2) {
-            throw new DukeException("NANI??! Enter your deadline name & an end-time for your deadline!\n");
+            throw new DukeException("NANI??! Enter your deadline name & an end-time!\n");
         }
 
         String deadlineName = descriptionArray[0];
@@ -165,19 +169,24 @@ class ChatBot {
         addTask(taskToAdd);
     }
 
+    /**
+     * Make an event task
+     * @param inputArray the string that the user input
+     * @throws DukeException to handle input errors
+     */
     void makeEvent(String[] inputArray) throws DukeException {
         // if length is not 2, nothing was passed in after 'makeEvent'
         if (inputArray.length != 2) {
             throw new DukeException("NANI??! Enter a description for your event!\n");
         }
 
-        // if event is lacking a /by keyword
+        // if event is lacking a /at keyword
         String description = inputArray[1];
         if (description.indexOf("/at") < 0) {
-            throw new DukeException("Please enter a valid event!\n");
+            throw new DukeException("Please enter a valid event! Remember to add '/at'\n");
         }
 
-        String[] descriptionArray = description.split("/at", 2);
+        String[] descriptionArray = description.split("/at");
         if (descriptionArray.length != 2) {
             throw new DukeException("NANI??! Enter your event name & an event timing!\n");
         }
@@ -189,11 +198,51 @@ class ChatBot {
         addTask(taskToAdd);
     }
 
+    /**
+     * Adds a task to the todoList
+     * @param taskToAdd the task to add to the todoList
+     */
     void addTask(Task taskToAdd) {
         this.toDoList.add(taskToAdd);
         System.out.println(this.botName + ": "
                 + "Hai! I have added this task to your list:\n"
                 + taskToAdd);
+        printToDoListSize();
+    }
+
+    /**
+     * Delete a particular task from the todo list
+     * @param inputArray the string that the user input
+     * @throws DukeException to handle input errors
+     */
+    void deleteTask(String[] inputArray) throws DukeException {
+        try {
+            // if length is not 2, nothing was passed in after 'done'
+            if (inputArray.length != 2) {
+                throw new DukeException("Which task do you want to delete? Please key in the task number!\n");
+            }
+            // check if taskNumber is a number
+            int taskNumber = Integer.parseInt(inputArray[1]);
+            // check if taskNumber is valid
+            if (taskNumber <= 0 || taskNumber > this.toDoList.size()) {
+                throw new DukeException("Sorry, no such task to delete!\n");
+            }
+
+            Task currentTask = this.toDoList.get(taskNumber - 1);
+            System.out.println(this.botName + ": " + "Hai! This task has been deleted!");
+            this.toDoList.remove(currentTask);
+            System.out.println(currentTask);
+            printToDoListSize();
+
+        } catch (NumberFormatException e) {
+            throw new DukeException("'" + inputArray[1] + "'" + " is not an integer!\n");
+        }
+    }
+
+    /**
+     * Abstracted method to print out the list size
+     */
+    void printToDoListSize() {
         System.out.println("You now have "
                 + this.toDoList.size()
                 + " tasks in your list. Gambatte!\n");

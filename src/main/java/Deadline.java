@@ -34,6 +34,10 @@ public class Deadline extends Task {
         return new Deadline(this.description, true, this.endDate);
     }
 
+    /**
+     * Overriden toString() method
+     * @return custom String
+     */
     @Override
     public String toString() {
         return "[DEADLINE]"

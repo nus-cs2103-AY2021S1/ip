@@ -1,5 +1,5 @@
 /**
- * Encapsulates a ToDo item
+ * Encapsulates a stodo  ToDo item
  */
 public class ToDo extends Task {
 
@@ -30,6 +30,10 @@ public class ToDo extends Task {
         return new ToDo(this.description, true);
     }
 
+    /**
+     * Overriden toString() method
+     * @return custom String
+     */
     @Override
     public String toString() {
         return "[TODO]" + " " + super.toString();
