@@ -25,7 +25,6 @@ public class Duke {
             String[] inputArr = nextInput.split(" ", 2);
 
             System.out.println("____________________________________________________________");
-
             try {
                 if (nextInput.equals("bye")) {
                     sc.close();
@@ -43,8 +42,12 @@ public class Duke {
                     processDeadline(inputArr[1]);
                 } else if (inputArr[0].equals("event")) {
                     processEvent(inputArr[1]);
+                } else if (inputArr[0].equals("delete")) {
+                    processDelete(inputArr[1]);
+                } else {
+                    processNone();
                 }
-            } catch (DukeException e) {
+            } catch (Exception e) {
                 System.out.println(e);
             }
 
@@ -120,6 +123,22 @@ public class Duke {
             } catch (Exception e) {
                 throw new EventFormatException();
             }
+        }
+    }
+
+    public void processNone() throws DukeException {
+        throw new DukeException("Sorry, I don't know what that means~");
+    }
+
+    public void processDelete(String val) throws DeleteException {
+        try {
+            int deleteTask = Integer.parseInt(val);
+            Task deleted = tasks.get(deleteTask - 1);
+            tasks.remove(deleteTask - 1);
+            System.out.println("Alright~ I've removed this task:\n" +
+                    deleted);
+        } catch (Exception e) {
+            throw new DeleteException();
         }
     }
 
