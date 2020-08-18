@@ -2,10 +2,12 @@ package main.java;
 
 public class Task {
 
+    private String icon;
     private String description;
     private boolean isDone;
 
-    public Task(String description) {
+    protected Task(String icon, String description) {
+        this.icon = icon;
         this.description = description;
         isDone = false;
     }
@@ -16,8 +18,8 @@ public class Task {
 
     @Override
     public String toString() {
-        char statusIcon = isDone ? UIPrint.tick : UIPrint.cross;
+        String statusIcon = isDone ? UIPrint.tick : UIPrint.cross;
 
-        return statusIcon + " " + description;
+        return icon + statusIcon + " " + description;
     }
 }
