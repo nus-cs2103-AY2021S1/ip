@@ -41,10 +41,8 @@ public class Duke {
 
                 for(Task task: tasks) {
                     sb.append(gap);
-                    sb.append(ctr).append(".[");
-                    sb.append(task.getStatusIcon());
-                    sb.append("] ");
-                    sb.append(task.description);
+                    sb.append(ctr).append(".");
+                    sb.append(task);
                     sb.append("\n");
                     ctr++;
                 }
@@ -57,10 +55,53 @@ public class Duke {
                     sb.append(gap);
                     sb.append("Nice! I've marked this task as done: \n");
                     sb.append(gap).append("  ");
-                    sb.append("[").append(tas.getStatusIcon()).append("] ");
-                    sb.append(tas.description);
+                    sb.append(tas);
                     sb.append("\n");
                 }
+
+            } else if(temp.startsWith("todo")) {
+
+                Todo todo = new Todo(temp.substring(5));
+                tasks.add(todo);
+
+                sb.append(gap);
+                sb.append("Got it. I've added this task: \n");
+
+                sb.append(gap).append("  ").append(todo);
+                sb.append("\n");
+
+                sb.append(gap);
+                sb.append("Now you have ").append(tasks.size()).append(" task(s) in the list.\n");
+            } else if(temp.startsWith("deadline")) {
+
+                String[] s = temp.substring(9).split(" /by ");
+                Deadline deadline = new Deadline(s[0], s[1]);
+                tasks.add(deadline);
+
+                sb.append(gap);
+                sb.append("Got it. I've added this task: \n");
+
+                sb.append(gap).append("  ").append(deadline);
+                sb.append("\n");
+
+                sb.append(gap);
+                sb.append("Now you have ").append(tasks.size()).append(" task(s) in the list.\n");
+
+            } else if(temp.startsWith("event")) {
+
+                String[] s = temp.substring(6).split(" /at ");
+                Event event = new Event(s[0], s[1]);
+                tasks.add(event);
+
+                sb.append(gap);
+                sb.append("Got it. I've added this task: \n");
+
+                sb.append(gap).append("  ").append(event);
+                sb.append("\n");
+
+                sb.append(gap);
+                sb.append("Now you have ").append(tasks.size()).append(" task(s) in the list.\n");
+
             } else {
                 tasks.add(new Task(temp));
 
