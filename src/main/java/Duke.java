@@ -30,40 +30,58 @@ public class Duke {
     }
 
     static void addTodo(String input) {
-        ToDo temp = new ToDo(input.substring(5, input.length()));
-        arr.add(temp);
-        System.out.println(line);
-        System.out.println("     Got it. I've added this task:");
-        System.out.println("      " + temp.getOutput());
-        numTask();
-        System.out.println(line);
-        System.out.println();
+        try {
+            ToDo temp = new ToDo(input.substring(5, input.length()));
+            arr.add(temp);
+            System.out.println(line);
+            System.out.println("     Got it. I've added this task:");
+            System.out.println("      " + temp.getOutput());
+            numTask();
+            System.out.println(line);
+            System.out.println();
+        } catch (Exception e) {
+            System.out.println(line);
+            System.out.println("     ☹ OOPS!!! The description of a todo cannot be empty.");
+            System.out.println(line);
+        }
     }
 
     static void addDeadline(String input) {
-        int dash = input.indexOf('/');
-        Deadline temp = new Deadline(input.substring(9,dash),
-                input.substring(dash, input.length()));
-        arr.add(temp);
-        System.out.println(line);
-        System.out.println("     Got it. I've added this task: ");
-        System.out.println("      " + temp.getOutput());
-        numTask();
-        System.out.println(line);
-        System.out.println();
+        try {
+            int dash = input.indexOf('/');
+            Deadline temp = new Deadline(input.substring(9, dash),
+                    input.substring(dash, input.length()));
+            arr.add(temp);
+            System.out.println(line);
+            System.out.println("     Got it. I've added this task: ");
+            System.out.println("      " + temp.getOutput());
+            numTask();
+            System.out.println(line);
+            System.out.println();
+        } catch(Exception e) {
+            System.out.println(line);
+            System.out.println("     ☹ OOPS!!! The description of a deadline cannot be empty.");
+            System.out.println(line);
+        }
     }
 
     static void addEvent(String input) {
-        int dash = input.indexOf('/');
-        Deadline temp = new Deadline(input.substring(6,dash),
-                input.substring(dash, input.length()));
-        arr.add(temp);
-        System.out.println(line);
-        System.out.println("     Got it. I've added this task: ");
-        System.out.println("      " + temp.getOutput());
-        numTask();
-        System.out.println(line);
-        System.out.println();
+        try {
+            int dash = input.indexOf('/');
+            Deadline temp = new Deadline(input.substring(6, dash),
+                    input.substring(dash, input.length()));
+            arr.add(temp);
+            System.out.println(line);
+            System.out.println("     Got it. I've added this task: ");
+            System.out.println("      " + temp.getOutput());
+            numTask();
+            System.out.println(line);
+            System.out.println();
+        } catch(Exception e) {
+            System.out.println(line);
+            System.out.println("     ☹ OOPS!!! The description of a event cannot be empty.");
+            System.out.println(line);
+        }
     }
 
     private static void addNewTask(String input) {
@@ -83,18 +101,24 @@ public class Duke {
         System.out.println(line);
 
         while(on) {
-            String input = sc.nextLine();
-            if (input.compareTo("bye") == 0) {
-                on = false;
+            try {
+                String input = sc.nextLine();
+                if (input.compareTo("bye") == 0) {
+                    on = false;
+                    System.out.println(line);
+                    System.out.println("     Bye. Hope to see you again soon!");
+                    System.out.println(line);
+                } else if (input.indexOf("done") == 0) {
+                    markAsDone(input);
+                } else if (input.compareTo("list") == 0) {
+                    printList();
+                } else {
+                    addNewTask(input);
+                }
+            } catch (Exception e) {
                 System.out.println(line);
-                System.out.println("     Bye. Hope to see you again soon!");
+                System.out.println("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 System.out.println(line);
-            } else if (input.indexOf("done") == 0) {
-                markAsDone(input);
-            } else if (input.compareTo("list") == 0){
-                printList();
-            } else {
-                addNewTask(input);
             }
         }
     }
