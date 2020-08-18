@@ -14,7 +14,7 @@ public class Duke {
     }
 
     private static void repeat() {
-        String line = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
+        String line = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
 
         System.out.println("Hello from\n" + logo + "\n How may I help you today? :)");
 
