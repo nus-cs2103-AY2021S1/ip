@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -27,7 +28,7 @@ public class Duke {
             "That task wasn't even on the list! You can save the princess if you're that free...";
     private static final String MESSAGE_TASK_ID_MISSING = "You didn't give me the task number to work with...";
     private static final String MESSAGE_MISSING_DELIM = "There is no '/' in your task";
-    private static final String MESSAGE_MISSING_DATETIME = "Did you casually forget to put in the event date/time?";
+    private static final String MESSAGE_MISSING_DATETIME = "Did you casually forget to put in the date/time?";
 
     // processes the input and generates the output in the correct format.
     private static String displayOutput(String input) {
@@ -35,21 +36,21 @@ public class Duke {
     }
 
     // displays the task list in the correct format
-    public static String displayList(Task[] inputArr) {
-        if (Task.getCount() == 0) {
+    public static String displayList(ArrayList<Task> inputArr) {
+        if (inputArr.size() == 0) {
             return displayOutput(MESSAGE_EMPTY);
         } else {
             StringBuilder out = new StringBuilder(MESSAGE_TASKS).append("\n");
-            for (short i = 1; i <= Task.getCount(); i++) {
-                out.append(LEFT_MARGIN_DOUBLE).append(inputArr[i].getId())
-                        .append(".").append(inputArr[i]).append("\n");
+            for (short i = 0; i < inputArr.size(); i++) {
+                out.append(LEFT_MARGIN_DOUBLE).append(i + 1)
+                        .append(".").append(inputArr.get(i)).append("\n");
             }
             return displayOutput(out.substring(0, out.length() - 1));
         }
     }
 
     // adds task to list
-    public static String addToList(Task[] taskList, char taskType, String taskStr)
+    public static String addToList(ArrayList<Task> taskList, char taskType, String taskStr)
             throws BlankTaskException, MissingDelimiterException, MissingDateTimeException {
         Task inputTask;
         int delimiter = taskStr.indexOf("/");
@@ -70,25 +71,25 @@ public class Duke {
             inputTask = new ToDo(taskStr);
             break;
         }
-        taskList[inputTask.getId()] = inputTask;
+        taskList.add(inputTask);
         return displayOutput(MESSAGE_ADD + "\n" + LEFT_MARGIN_DOUBLE + inputTask + "\n"
-                + LEFT_MARGIN + String.format(MESSAGE_COUNT, Task.getCount()));
+                + LEFT_MARGIN + String.format(MESSAGE_COUNT, taskList.size()));
     }
 
     // mark task as done
-    public static String markAsDone(Task[] taskList, short id) {
+    public static String markAsDone(ArrayList<Task> taskList, short id) {
         try {
-            taskList[id].markAsDone();
-        } catch (NullPointerException e) {
+            taskList.get(id - 1).markAsDone();
+        } catch (IndexOutOfBoundsException e) { //change
             return displayOutput(MESSAGE_INVALID_ID);
         }
-        return displayOutput(MESSAGE_DONE + "\n" + LEFT_MARGIN_DOUBLE + taskList[id]);
+        return displayOutput(MESSAGE_DONE + "\n" + LEFT_MARGIN_DOUBLE + taskList.get(id - 1));
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         boolean terminate = false;
-        Task[] taskList = new Task[100];
+        ArrayList<Task> taskList = new ArrayList<>();
         System.out.print(BORDER + LOGO + displayOutput(MESSAGE_WELCOME));
         while (!terminate) {
             switch (sc.next()) {

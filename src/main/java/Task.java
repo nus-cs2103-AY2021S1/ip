@@ -1,7 +1,4 @@
 public class Task {
-
-    private static short count = 0;
-    private final short id;
     private final String name;
     private boolean Done = false;
     private static final String MESSAGE_BLANK_TASK = "Did you casually forget to put in the description of the task?";
@@ -11,19 +8,10 @@ public class Task {
             throw new BlankTaskException(MESSAGE_BLANK_TASK);
         }
         this.name = name.strip();
-        id = ++count;
-    }
-
-    public static short getCount() {
-        return count;
     }
 
     public String getName() {
         return name;
-    }
-
-    public short getId() {
-        return id;
     }
 
     @Override

@@ -14,37 +14,63 @@
     _______________________________________________________
     _______________________________________________________
     Got it! I've added this task:
-        [T][✗]  Lorem ipsum dolor
+        [T][✗] Lorem ipsum dolor
     Now you have 1 tasks in the list.
     _______________________________________________________
     _______________________________________________________
     Got it! I've added this task:
-        [D][✗]  sit amet, consectetur adipiscing  (by: taskdate2 tasktime2)
+        [D][✗] sit amet, consectetur adipiscing (by: taskdate2 tasktime2)
     Now you have 2 tasks in the list.
     _______________________________________________________
     _______________________________________________________
     Got it! I've added this task:
-        [E][✗]  sed do eiusmod tempor incididunt  (at: taskdate3 i-jpm)
+        [E][✗] sed do eiusmod tempor incididunt (at: taskdate3 i-jpm)
     Now you have 3 tasks in the list.
     _______________________________________________________
     _______________________________________________________
     As you wish, here's what you gotta do:
-        1.[T][✗]  Lorem ipsum dolor
-        2.[D][✗]  sit amet, consectetur adipiscing  (by: taskdate2 tasktime2)
-        3.[E][✗]  sed do eiusmod tempor incididunt  (at: taskdate3 i-jpm)
+        1.[T][✗] Lorem ipsum dolor
+        2.[D][✗] sit amet, consectetur adipiscing (by: taskdate2 tasktime2)
+        3.[E][✗] sed do eiusmod tempor incididunt (at: taskdate3 i-jpm)
     _______________________________________________________
     _______________________________________________________
     You did it! Good job little guy!
-        [T][✓]  Lorem ipsum dolor
+        [T][✓] Lorem ipsum dolor
     _______________________________________________________
     _______________________________________________________
     As you wish, here's what you gotta do:
-        1.[T][✓]  Lorem ipsum dolor
-        2.[D][✗]  sit amet, consectetur adipiscing  (by: taskdate2 tasktime2)
-        3.[E][✗]  sed do eiusmod tempor incididunt  (at: taskdate3 i-jpm)
+        1.[T][✓] Lorem ipsum dolor
+        2.[D][✗] sit amet, consectetur adipiscing (by: taskdate2 tasktime2)
+        3.[E][✗] sed do eiusmod tempor incididunt (at: taskdate3 i-jpm)
     _______________________________________________________
     _______________________________________________________
     I don't understand anything you just said
+    _______________________________________________________
+    _______________________________________________________
+    That task wasn't even on the list! You can save the princess if you're that free...
+    _______________________________________________________
+    _______________________________________________________
+    You didn't give me the task number to work with...
+    _______________________________________________________
+    _______________________________________________________
+    There is no '/' in your task
+    _______________________________________________________
+    _______________________________________________________
+    Did you casually forget to put in the date/time?
+    _______________________________________________________
+    _______________________________________________________
+    Did you casually forget to put in the description of the task?
+    _______________________________________________________
+    _______________________________________________________
+    Did you casually forget to put in the event date/time?
+    _______________________________________________________
+    _______________________________________________________
+    Did you casually forget to put in the description of the task?
+    _______________________________________________________
+    _______________________________________________________
+    Got it! I've added this task:
+        [E][✗] ipsum (at: 12/09 9-10am)
+    Now you have 4 tasks in the list.
     _______________________________________________________
     _______________________________________________________
     Hey! Come back here! You big-a monkey!
