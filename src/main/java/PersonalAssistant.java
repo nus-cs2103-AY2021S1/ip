@@ -1,13 +1,15 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
+
 public class PersonalAssistant {
-    private ArrayList<String> store;
+    private ArrayList<Task> store;
 
     /**
      * Initialize personal assistant with a store for user input
      */
     public PersonalAssistant() {
-        store = new ArrayList<String>();
+        store = new ArrayList<>();
     }
 
     public void run() {
@@ -16,15 +18,26 @@ public class PersonalAssistant {
     }
 
     /**
-     * Gets user input from STDIN
-     * If the input command is "bye"
-     * Exit and echo a farewell message
-     * Otherwise echoes the input
+     * Gets user input from STDIN, executes it
      */
     public void getUserCommands() {
         Scanner reader = new Scanner(System.in);
         System.out.println("Enter your command or \"bye\" to exit: ");
-        String cmd = reader.nextLine();
+
+        // Tokenize the input
+        String[] cmdTokens = reader.nextLine().split(" ");
+
+        // Handle inputs
+        this.execute(cmdTokens);
+    }
+
+    /**
+     * Handle commands from users
+     * @param cmdTokens
+     * The command tokens from users
+     */
+    public void execute(String[] cmdTokens) {
+        String cmd = cmdTokens[0];
         switch (cmd) {
             case "bye":
                 System.out.println("Goodbye!");
@@ -33,12 +46,49 @@ public class PersonalAssistant {
                 this.list();
                 getUserCommands();
                 break;
+
+            case "done":
+                // Handle incorrect argument lengths
+                if (cmdTokens.length != 2) {
+                    String errStatement = String.format("%s has invalid number of arguments", cmd);
+                    System.out.println(errStatement);
+                }
+
+                try {
+                    // The ACTUAL logic of the command
+                    Integer taskNumber = Integer.parseInt(cmdTokens[1]);
+                    // Set the task to done
+                    Task task = store.get(taskNumber - 1);
+                    task.done();
+                    System.out.println(task);
+                } catch (Exception e) {
+                    // Handle parsing errors
+                    String errStatement = String.format("%s should be supplied an integer as an argument", cmd);
+                    System.out.println(errStatement);
+                }
+
+                // Get the next command
+                this.getUserCommands();
+                break;
+
             default:
-                store.add(cmd);
-                System.out.println(cmd);
-                System.out.println("\n");
-                getUserCommands();
+                // Otherwise it is a task
+                String taskName = String.join(" ", cmdTokens);
+                Task task = new Task(false, taskName);
+
+                // Store the task
+                addTask(task);
+
+                // Get the next command
+                this.getUserCommands();
         }
+    }
+
+    public void addTask(Task task) {
+        store.add(task);
+        String message = String.format("Added: %s", task.getName());
+        System.out.println(message);
+        System.out.println("\n");
     }
 
     public void list() {
