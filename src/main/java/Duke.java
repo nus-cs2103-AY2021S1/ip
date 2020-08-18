@@ -43,6 +43,7 @@ public class Duke {
                         System.out.println("\tNice! I've marked this task as done:");
                         markTaskDone(taskNo);
                     } else if (task.startsWith("todo")) {
+                        task = task.replace("todo ", "");
                         Duke.addTask(new ToDos(task));
                     } else if (task.startsWith("deadline")) {
                         task = task.replace("deadline ", "");
@@ -57,7 +58,7 @@ public class Duke {
                         String at = stringArr[1];
                         Duke.addTask(new Events(task, at));
                     } else {
-                        Duke.addTask(new Task(task));
+                        System.out.println("\tSorry handsome but I'm not sure about this command :)");
                     }
                     break;
             }
