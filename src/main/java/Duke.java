@@ -7,6 +7,7 @@ public class Duke {
         // Using Scanner for reading inputs
         Scanner scanner = new Scanner(System.in);
         // Initialize List for Duke to store stuff in
+        /** Note: limit storage to 100 items **/
         ArrayList<String> list = new ArrayList<>();
 
         // Text Images
@@ -33,6 +34,10 @@ public class Duke {
         // End only if user input is "bye"
         while (!instructions.equals("bye")) {
             switch(instructions) {
+                case("list") :
+                    printList(list);
+                    System.out.println("\n" + lineBreaker + "\n");
+                    break;
                 default:
                     // Store messages by default
                     System.out.print(outputBreaker);
@@ -50,5 +55,12 @@ public class Duke {
         System.out.print(outputBreaker);
         System.out.println("Bye! Hoped I helped!");
         System.out.println("\n" + lineBreaker);
+    }
+
+    /** Prints all the contents of the list in order **/
+    public static void printList(ArrayList<String> list) {
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println((i+1) + ". " + list.get(i));
+        }
     }
 }
