@@ -44,6 +44,7 @@ public class StringIdentifier {
             System.out.println("     " + index + "." + this.lst.get(i));
             index ++;
         }
+        index ++;
     }
 
     public void markDone(int index) {
