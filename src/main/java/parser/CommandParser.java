@@ -1,6 +1,7 @@
 package parser;
 
 import commands.Command;
+import exceptions.InvalidCommandException;
 
 import java.util.ArrayList;
 import java.util.function.Function;
@@ -26,10 +27,10 @@ public class CommandParser {
         allCommandInstances.add(new CommandInstance(constructor, commandWord));
     }
 
-    public Command parse(String raw) throws Exception {
+    public Command parse(String raw) throws InvalidCommandException {
         String[] tokens = raw.split(" ");
         if (tokens.length <= 0) {
-            throw new Exception("Command not valid");
+            throw new InvalidCommandException("Command not valid");
         }
         String word = tokens[0];
         for (CommandInstance instance: allCommandInstances) {
@@ -37,6 +38,6 @@ public class CommandParser {
                 return instance.constructor.apply(raw);
             }
         }
-        throw new Exception("Command not found");
+        throw new InvalidCommandException("Command not found");
     }
 }

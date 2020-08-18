@@ -1,5 +1,6 @@
 package service;
 
+import exceptions.InvalidCommandException;
 import parser.Flag;
 
 import java.util.Map;
@@ -15,15 +16,15 @@ public class EventTask extends Task {
     }
 
     @Override
-    public void parse() throws Exception {
+    public void parse() throws InvalidCommandException {
         Map<Flag, String> flags = Flag.parseFlags(tokens);
 
         if (!flags.containsKey(Flag.AT)) {
-            throw new Exception("Flag \\at not found");
+            throw new InvalidCommandException("Flag \\at not found");
         }
 
         if (!flags.containsKey(Flag.NONFLAG)) {
-            throw new Exception("Need description");
+            throw new InvalidCommandException("Need description");
         }
 
         this.description = flags.get(Flag.NONFLAG);

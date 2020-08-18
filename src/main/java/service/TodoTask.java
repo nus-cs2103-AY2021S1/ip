@@ -1,5 +1,7 @@
 package service;
 
+import exceptions.InvalidCommandException;
+
 import java.util.Optional;
 
 public class TodoTask extends Task {
@@ -12,11 +14,11 @@ public class TodoTask extends Task {
     }
 
     @Override
-    public void parse() throws Exception {
+    public void parse() throws InvalidCommandException {
         Optional<String> optDesc = java.util.Arrays.stream(super.tokens, 0, super.tokens.length)
                                     .reduce((a, b) -> a + " " + b);
         if (optDesc.isEmpty()) {
-            throw new Exception("Description must not be empty");
+            throw new InvalidCommandException("Description must not be empty");
         } else {
             this.description = optDesc.get();
         }

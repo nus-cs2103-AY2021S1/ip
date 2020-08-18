@@ -50,7 +50,7 @@ public class Duke {
                 DukeResponse response = newCommand.execute(service);
                 printMessage(response.toString());
             } catch (Exception e) {
-                 printMessage(e.getMessage());
+                 printMessage(e.toString());
             }
 
             if (command.equals("bye")) {

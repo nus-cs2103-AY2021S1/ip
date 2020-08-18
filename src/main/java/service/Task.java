@@ -1,5 +1,7 @@
 package service;
 
+import exceptions.InvalidCommandException;
+
 public abstract class Task {
     String[] tokens;
     private boolean isDone;
@@ -14,7 +16,7 @@ public abstract class Task {
     }
 
     ///this should calculate description
-    public abstract void parse() throws Exception;
+    public abstract void parse() throws InvalidCommandException;
 
     public abstract String getDescription();
 

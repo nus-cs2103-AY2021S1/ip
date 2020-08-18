@@ -1,5 +1,6 @@
 package parser;
 
+import exceptions.InvalidCommandException;
 import utils.TokenUtils;
 
 import java.util.HashMap;
@@ -33,7 +34,7 @@ public enum Flag {
         return Optional.empty();
     }
 
-    public static Map<Flag, String> parseFlags(String[] tokens) throws Exception {
+    public static Map<Flag, String> parseFlags(String[] tokens) throws InvalidCommandException {
         StringBuilder sb = new StringBuilder();
         Flag currentFlag = NONFLAG;
         TokenUtils.printTokens(tokens);
@@ -42,7 +43,7 @@ public enum Flag {
             if (hasFormOfFlag(token)) {
                 Optional<Flag> flag = getFlags(token);
                 if (flag.isEmpty()) {
-                    throw new Exception("Invalid flag");
+                    throw new InvalidCommandException("Invalid flag");
                 }
                 if (sb.length() > 0) {
                     result.put(currentFlag, sb.toString());
