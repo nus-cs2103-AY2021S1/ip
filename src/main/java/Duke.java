@@ -29,18 +29,14 @@ public class Duke {
      * Prints output enclosed in top and bottom horizontal lines
      * @param message message to be output
      */
-    private static void println(String[] message) {
+    private static void println(String... message) {
         System.out.println("\t____________________________________________________________");
         for (String s : message) {
             System.out.println("\t" + s);
         }
         System.out.println("\t____________________________________________________________");
     }
-    private static void println(String message) {
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\t" + message);
-        System.out.println("\t____________________________________________________________");
-    }
+
     private static void printAddTask(Task t) {
         String[] output = new String[] {
                 "Got it. I've added this task: ", t.toString(), "Now you have " + taskList.size() + " tasks in the list."
@@ -58,6 +54,11 @@ public class Duke {
     }
 
     private static void list() {
+        if (taskList.size() == 0) {
+            println("I can't find any task in your list...", "Try adding some task using \"todo\", \"deadline\" and \"event\" command");
+        }
+
+
         String[] output = new String[taskList.size() + 1];
         output[0] = " Here are the tasks in your list:";
 
@@ -70,7 +71,7 @@ public class Duke {
 
     private static void done(String num) {
         try {
-            int selected = Integer.parseInt(num);
+            int selected = Integer.parseInt(num.strip());
             taskList.get(selected-1).setDone();
 
             String[] output = new String[] { "Nice! I've marked this task as done: ", taskList.get(selected-1).toString() };
@@ -78,7 +79,7 @@ public class Duke {
         } catch (NumberFormatException nfe) {
             throw new DukeException("This is not a number for \"done\" command: " + num);
         } catch (IndexOutOfBoundsException iooob) {
-            throw new DukeException("This is not available for selection for \"done\" command: " + num);
+            throw new DukeException("I cannot check this element: " + num);
         }
     }
 
@@ -112,6 +113,21 @@ public class Duke {
         printAddTask(event);
     }
 
+    private static void delete(String num) {
+        try {
+            int selected = Integer.parseInt(num.strip());
+            Task task = taskList.remove(selected-1);
+
+            String[] output = new String[] { "Noted. I've removed this task: ", task.toString(),
+                    "Now you have " + taskList.size() + " tasks in the list." };
+            println(output);
+        } catch (NumberFormatException nfe) {
+            throw new DukeException("This is not a number for \"delete\" command: " + num);
+        } catch (IndexOutOfBoundsException iooob) {
+            throw new DukeException("I cannot delete this element: " + num);
+        }
+    }
+
     private static void process(String msg) {
         if (msg.equals("bye") || msg.equals("exit"))
             exit();
@@ -125,6 +141,8 @@ public class Duke {
             deadline(msg.substring(8));
         else if (msg.startsWith("event"))
             event(msg.substring(5));
+        else if (msg.startsWith("delete"))
+            delete(msg.substring(6));
         else
             throw new DukeException("This is not in my command list");
     }
