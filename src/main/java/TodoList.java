@@ -67,6 +67,16 @@ public class TodoList {
                         }
                         break;
                     }
+                    case "delete": {
+                        int index = Integer.parseInt(splitCommand[1]);
+                        Task targetTask = todoList.get(index - 1);
+                        todoList.remove(index - 1);
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(targetTask.toString());
+                        int size = todoList.size();
+                        System.out.println("Now you have " + size + " tasks in the list.");
+                        break;
+                    }
                     default: {
                         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
