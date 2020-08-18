@@ -24,15 +24,36 @@ public class Duke {
             input = sc.nextLine().trim();
             String arr[] = input.split(" ", 2);
             String command = arr[0];
-            String remaining = arr.length == 1 ? null : arr[1];
+            String remainingText = arr.length == 1 ? null : arr[1].trim();
             isActive = !input.equalsIgnoreCase("bye");
             switch(command) {
                 case "list": {
                     new ListCommand(list).execute();
                     break;
                 }
+                case "todo": {
+                    Task task = new TodoTask(remainingText); // TODO: exception handling
+                    new AddCommand(task, list).execute();
+                    break;
+                }
+                case "deadline": {
+                    String taskItems[] = remainingText.split(" /by ");
+                    String description = taskItems[0];
+                    String by = taskItems[1];
+                    Task task = new DeadlineTask(description, by);
+                    new AddCommand(task, list).execute();
+                    break;
+                }
+                case "event": {
+                    String taskItems[] = remainingText.split(" /at ");
+                    String description = taskItems[0];
+                    String at = taskItems[1];
+                    Task task = new EventTask(description, at);
+                    new AddCommand(task, list).execute();
+                    break;
+                }
                 case "done": {
-                    int index = Integer.parseInt(remaining) - 1; // TODO: exception handling
+                    int index = Integer.parseInt(remainingText) - 1; // TODO: exception handling
                     new DoneCommand(index, list).execute();
                     break;
                 }
@@ -41,8 +62,7 @@ public class Duke {
                     break;
                 }
                 default: {
-                    Task task = new Task(input);
-                    new AddCommand(task, list).execute();
+                    print("☹ OOPS!!! I'm sorry, but I don't know what that means :-("); // TODO: exception handling
                 }
             }
         }

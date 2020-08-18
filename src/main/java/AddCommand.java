@@ -12,6 +12,7 @@ public class AddCommand implements Command {
     @Override
     public void execute() {
         list.add(task);
-        new Duke().print("added: " +  task.getDescription());
+        new Duke().print("Got it. I've added this task:", "\t" + task,
+                         "Now you have " + list.size() + " task(s) in the list");
     }
 }

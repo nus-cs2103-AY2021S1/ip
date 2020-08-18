@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -13,13 +13,5 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true; // TODO: exception handling + checking if task is already done.
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), description);
     }
 }

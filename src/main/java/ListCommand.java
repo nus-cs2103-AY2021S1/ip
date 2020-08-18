@@ -15,6 +15,7 @@ public class ListCommand implements Command {
 
     private List<String> itemize() {
         List<String> itemizedList = new ArrayList<>();
+        itemizedList.add("Here are the items in your list:");
         for(int i = 0; i < list.size(); i++) {
             itemizedList.add((i + 1) + ". " + list.get(i));
         }
