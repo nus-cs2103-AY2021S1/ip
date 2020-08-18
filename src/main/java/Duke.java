@@ -63,12 +63,14 @@ public class Duke {
         System.out.println("hi");
         Scanner s = new Scanner(System.in);
         List<Task> list = new ArrayList<>();
-        Task task = null;
+        Task task;
 
         // main loop
         mainLoop:
         while (true) {
             String input = s.next();
+
+            switchLabel:
             switch (input) {
                 case "bye":
                     break mainLoop;
@@ -89,7 +91,12 @@ public class Duke {
 
                     switch (input) {
                         case "todo":
-                            task = new Todo(s.nextLine());
+                            String param = s.nextLine();
+                            if (param.isEmpty()){
+                                System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                                break switchLabel;
+                            }
+                            task = new Todo(param);
                             break;
                         case "deadline":
                             params = s.nextLine().split(" /by ");
@@ -100,7 +107,8 @@ public class Duke {
                             task = new Event(params[0], params[1]);
                             break;
                         default:
-                            break;
+                            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                            break switchLabel;
                     }
 
                     list.add(task);
