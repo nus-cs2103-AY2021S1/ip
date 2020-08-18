@@ -5,17 +5,23 @@ public class Storage {
 
     public void addItem(Task i) {
         list.add(i);
-        System.out.println("  added: " + i);
+        String indents = "  ";
+        System.out.println(indents + "Got it, the following task has been added:\n" + indents + indents + i + this.displayTasksLeft());
     }
 
     public Task getItem(int index) {
         return list.get(index);
     }
 
+    public String displayTasksLeft() {
+        String indents = "  ";
+        return "\n" + indents + "Now you have " + this.list.size() + " tasks in the list.";
+    }
+
     public void print() {
         int counter = 1;
         for (Task i : list) {
-            System.out.println("  " + counter + ". " + i);
+            System.out.println("  " + counter + "." + i);
             counter++;
         }
     }

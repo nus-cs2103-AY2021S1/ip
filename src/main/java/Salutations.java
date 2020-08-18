@@ -10,16 +10,20 @@ public class Salutations {
         this.typeOfMessage = typeOfMessage;
     }
 
-    public void printMessage() {
+    public void printMessage(int numOfIndents) {
+        String indents = "  ";
+        for (int i = 1; i < numOfIndents; i++) {
+            indents = indents += indents;
+        }
         switch (typeOfMessage) {
             case WELCOME:
-                System.out.println("  Hello! I'm Duke\n  What can I do for you?");
+                System.out.println(indents + "Hello! I'm Duke\n" + indents + "What can I do for you?");
                 break;
             case GOODBYE:
-                System.out.println("  Bye!!! Hope to see you again real soon.");
+                System.out.println(indents + "Bye!!! Hope to see you again real soon.");
                 break;
             case TASKDONE:
-                System.out.println("  The following task has been marked done:");
+                System.out.println(indents + "The following task has been marked done:");
         }
 
     }

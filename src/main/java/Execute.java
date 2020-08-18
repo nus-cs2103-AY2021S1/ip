@@ -4,7 +4,7 @@ public class Execute {
     public static void output() {
         // Initial welcome message
         Salutations welcome = new Salutations(Salutations.type.WELCOME);
-        welcome.printMessage();
+        welcome.printMessage(1);
 
         // creation of List
         Storage listOfItems = new Storage();
@@ -29,17 +29,18 @@ public class Execute {
 
                 // printing part
                 Salutations markedDone = new Salutations(Salutations.type.TASKDONE);
-                markedDone.printMessage();
-                taskToChange.print();
+                markedDone.printMessage(1);
+                taskToChange.print(2);
 
 
             } else {
-                Task task = new Task(userInput);
+                // Task creation
+                Task task = TaskCreator.createTask(userInput);
                 listOfItems.addItem(task);
             }
         }
         // Exit message
         Salutations goodbye = new Salutations(Salutations.type.GOODBYE);
-        goodbye.printMessage();
+        goodbye.printMessage(1);
     }
 }
