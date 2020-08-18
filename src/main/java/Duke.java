@@ -4,9 +4,9 @@ import java.util.Scanner;
 public class Duke {
 
     // print all the content in the list
-    public static void printList(ArrayList<String> list){
+    public static void printList(ArrayList<Task> list){
         for(int i = 0; i < list.size(); i++){
-            System.out.println((i + 1) + ". " + list.get(i));
+            System.out.println((i + 1) + ".[" + list.get(i).getStatusIcon() + "] " + list.get(i).getDescription());
         }
     }
 
@@ -25,23 +25,38 @@ public class Duke {
                            "\n____________________________________________________________");
 
         // add command entered by the user to the list
-        ArrayList<String> list = new ArrayList<>();
-        String command;
+        ArrayList<Task> list = new ArrayList<>();
+        String[] command;
         Scanner sc = new Scanner(System.in);
         while(true){
-            command = sc.nextLine();
-            if(command.equals("bye")){
+            command = sc.nextLine().split(" ");
+            if(command.length <= 0){
+                continue;
+            }
+            if(command[0].equals("bye")){
                 break;
             }
-            else if(command.equals("list")){
+            else if(command[0].equals("list")){
                 System.out.println("____________________________________________________________");
                 printList(list);
                 System.out.println("____________________________________________________________");
             }
+            else if(command[0].equals("done")){
+                int taskNumber = Integer.parseInt(command[1]);
+                if(taskNumber > list.size()){
+                    System.out.println("no such task: task" + taskNumber + " as you only have " + list.size() + " in total");
+                }
+                else{
+                    Task task = list.get(taskNumber - 1);
+                    task.markAsDone();
+                    System.out.println("Nice! I've marked this task as done: ");
+                    System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
+                }
+            }
             else{
-                list.add(command);
+                list.add(new Task(command[0]));
                 System.out.println("____________________________________________________________\n" +
-                               "added: " + command +
+                               "added: " + command[0] +
                                "\n____________________________________________________________");
             }
         }
