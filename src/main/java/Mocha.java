@@ -3,8 +3,10 @@ import java.util.ArrayList;
 
 public class Mocha {
     public static void main(String[] args) {
+        // Contains all tasks
         ArrayList<String> listOfTasks = new ArrayList<>();
 
+        // Introduction of Mocha
         String horizontalLine = "_______________________________________________________";
         String nameIntro = "Hello, I'm Mocha!";
         String greeting = "What's up today!";
@@ -14,6 +16,7 @@ public class Mocha {
         Scanner userCommand = new Scanner(System.in);
 
         while (userCommand.hasNext()) {
+            // Any command other than "list" and "bye" - add into listOfTasks
             if (!userCommand.hasNext("list") && !userCommand.hasNext("bye")) {
                 String itemToBeAdded = userCommand.nextLine();
                 System.out.println(horizontalLine + "\r\n" + "added: "
@@ -21,6 +24,7 @@ public class Mocha {
                 listOfTasks.add(itemToBeAdded);
             }
 
+            // "list" command - displays all tasks
             if (userCommand.hasNext("list")) { // Process closing here
                 System.out.println(horizontalLine + " \r\n");
                 for (int i = 0; i < listOfTasks.size(); i++) {
@@ -30,6 +34,7 @@ public class Mocha {
                 userCommand.nextLine();
             }
 
+            // Mocha's farewell
             if (userCommand.hasNext("bye")) {
                 System.out.println(horizontalLine + "\r\n" + "Bye! See ya soon!" + "\r\n" + horizontalLine);
                 userCommand.nextLine();
