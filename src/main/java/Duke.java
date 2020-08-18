@@ -12,7 +12,6 @@ public class Duke {
 
         // Initialise list of tasks
         ArrayList<Task> taskList = new ArrayList<>();
-        int numTasks = 0;
 
         // Declare task tokens parsed from user input
         String[] taskTokens;
@@ -47,7 +46,7 @@ public class Duke {
                 // List the tasks available in taskList
                 case "list":
                     System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < numTasks; i++) {
+                    for (int i = 0; i < taskList.size(); i++) {
                         System.out.println(i + 1 + "." + taskList.get(i));
                     }
                     break;
@@ -63,9 +62,8 @@ public class Duke {
                     }
                     taskList.add(new Todo(userTask));
                     System.out.println("Got it. I've added this task:");
-                    System.out.println("  " + taskList.get(numTasks));
-                    System.out.println("Now you have " + (numTasks + 1) + " tasks in the list.");
-                    numTasks++;
+                    System.out.println("  " + taskList.get(taskList.size() - 1));
+                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                     break;
 
 
@@ -83,9 +81,8 @@ public class Duke {
                     String taskBy = taskTokens[1];
                     taskList.add(new Deadline(taskName, taskBy));
                     System.out.println("Got it. I've added this task:");
-                    System.out.println("  " + taskList.get(numTasks));
-                    System.out.println("Now you have " + (numTasks + 1) + " tasks in the list.");
-                    numTasks++;
+                    System.out.println("  " + taskList.get(taskList.size() - 1));
+                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                     break;
 
                 // Create a event task (contains "/at")
@@ -102,9 +99,8 @@ public class Duke {
                     String taskAt = taskTokens[1];
                     taskList.add(new Event(taskName, taskAt));
                     System.out.println("Got it. I've added this task:");
-                    System.out.println("  " + taskList.get(numTasks));
-                    System.out.println("Now you have " + (numTasks + 1) + " tasks in the list.");
-                    numTasks++;
+                    System.out.println("  " + taskList.get(taskList.size() - 1));
+                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                     break;
 
                 // Mark the identified task as done
@@ -114,6 +110,16 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("  " + taskList.get(id));
                     break;
+
+                // Delete a task
+                case "delete":
+                    if (userTokens.length == 2) {
+                        Task deletedTask = taskList.remove(Integer.parseInt(userTokens[1]) - 1);
+                        System.out.println("Noted. I have removed this task:");
+                        System.out.println("  " + deletedTask);
+                    }
+                    break;
+                default:
             }
         }
     }

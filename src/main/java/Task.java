@@ -15,6 +15,6 @@ public class Task {
 
     // Returns a ticked check-box if done else cross
     public String toString() {
-        return (this.isDone ? "[\u2713] " : "[\u2718] ") + this.taskName;
+        return (this.isDone ? "[✓] " : "[✘] ") + this.taskName;
     }
 }
