@@ -131,7 +131,7 @@ public class Duke {
                 + "What can I do for you?\n" + border
         );
 
-        while (true) {
+        while (scan.hasNext()) {
             String test = scan.next();
             if (checkBye(test)) {
                 exitLine();
