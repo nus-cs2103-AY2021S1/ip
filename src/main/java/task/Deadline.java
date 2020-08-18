@@ -5,6 +5,7 @@ public class Deadline extends Task {
 
     private static final String DEADLINE = "[D]";
     public static final String DEADLINE_BREAK = "/by";
+    public static final int COMMAND_LENGTH = 2;
 
     Deadline(String description, boolean completed, String datetime) {
         super(description, completed);

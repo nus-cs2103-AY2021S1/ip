@@ -13,6 +13,10 @@ public class TaskStorage {
         return this.storage.size();
     }
 
+    public boolean isValidIndex(int index) {
+        return index <= this.storage.size() && index > 0;
+    }
+
     public Task addTask(Task task) {
         this.storage.add(task);
         return task;

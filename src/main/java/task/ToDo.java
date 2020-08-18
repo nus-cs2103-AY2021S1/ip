@@ -2,6 +2,7 @@ package task;
 
 public class Todo extends Task {
     private static final String TODO = "[T]";
+    public static final int COMMAND_LENGTH = 1;
 
     Todo(String description, boolean completed) {
         super(description, completed);

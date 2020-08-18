@@ -15,6 +15,7 @@ import operation.ListOperation;
 import task.Deadline;
 import task.Event;
 import task.TaskStorage;
+import task.Todo;
 
 public class CommandParser {
     private static String concatenate(String[] arr, int start, int end) {
@@ -28,8 +29,14 @@ public class CommandParser {
         return builder.toString();
     }
 
+    private static final int INDEX_NOT_FOUND = -1;
+
     private static int getIndexOf(String[] arr, String target) {
         return Arrays.asList(arr).indexOf(target);
+    }
+
+    private static boolean isInteger(String str) {
+        return str.matches("\\d+");
     }
 
     private ExitOperation createExitOp() {
@@ -41,21 +48,18 @@ public class CommandParser {
     }
 
     private DoneOperation createDoneOp(String[] commands, TaskStorage storage) throws DukeException {
-        try {
-            int index = Integer.parseInt(commands[1]);
-            if (index <= storage.getCurrCapacity() && index > 0) {
-                return new DoneOperation(storage, index);
-            } else {
-               throw new DukeException(
-                       "The index you have passed in cannot be found in the list of tasks.");
-            }
-        } catch (NumberFormatException exception) {
+        if (!isInteger(commands[1])) {
             throw new DukeException("Ensure a number is passed after a done command.");
         }
+        int index = Integer.parseInt(commands[1]);
+        if (!storage.isValidIndex(index)) {
+            throw new DukeException("The index you have passed in cannot be found in the list of tasks.");
+        }
+        return new DoneOperation(storage, index);
     }
 
     private AddTodoOperation createTodoOp(String[] commands, TaskStorage storage) throws DukeException {
-        if (commands.length <= 1) {
+        if (commands.length <= Todo.COMMAND_LENGTH) {
             throw new DukeException("Ensure there is description for a todo item.");
         }
         String description = concatenate(commands, 1, commands.length);
@@ -64,11 +68,11 @@ public class CommandParser {
 
     private AddDeadlineOperation createDeadlineOp(
             String[] commands, TaskStorage storage) throws DukeException {
-        if (commands.length <= 2) {
+        if (commands.length <= Deadline.COMMAND_LENGTH) {
             throw new DukeException("Ensure there is a description and a datetime for a deadline command.");
         }
         int splitIndex = getIndexOf(commands, Deadline.DEADLINE_BREAK);
-        if (splitIndex == -1) {
+        if (splitIndex == INDEX_NOT_FOUND) {
             throw new DukeException("Ensure an indication of '/by' after a deadline command.");
         }
         String description = concatenate(commands, 1, splitIndex);
@@ -77,11 +81,11 @@ public class CommandParser {
     }
 
     private AddEventOperation createEventOp(String[] commands, TaskStorage storage) throws DukeException {
-        if (commands.length <= 2) {
+        if (commands.length <= Event.COMMAND_LENGTH) {
             throw new DukeException("Ensure there is a description and a time for an event command.");
         }
         int splitIndex = getIndexOf(commands, Event.EVENT_BREAK);
-        if (splitIndex == -1) {
+        if (splitIndex == INDEX_NOT_FOUND) {
             throw new DukeException("Ensure an indication of '/at' after an event command.");
         }
         String description = concatenate(commands, 1, splitIndex);
@@ -90,17 +94,14 @@ public class CommandParser {
     }
 
     private DeleteOperation createDeleteOp(String[] commands, TaskStorage storage) throws DukeException {
-        try {
-            int index = Integer.parseInt(commands[1]);
-            if (index <= storage.getCurrCapacity() && index > 0) {
-                return new DeleteOperation(storage, index);
-            } else {
-                throw new DukeException(
-                        "The index you have passed in cannot be found in the list of tasks.");
-            }
-        } catch (NumberFormatException exception) {
+        if (!isInteger(commands[1])) {
             throw new DukeException("Ensure a number is passed after a delete command.");
         }
+        int index = Integer.parseInt(commands[1]);
+        if (!storage.isValidIndex(index)) {
+            throw new DukeException("The index you have passed in cannot be found in the list of tasks.");
+        }
+        return new DeleteOperation(storage, index);
     }
 
     public Operation parse(String commandString, TaskStorage taskStorage) throws DukeException {

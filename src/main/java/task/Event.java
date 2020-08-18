@@ -5,6 +5,7 @@ public class Event extends Task{
 
     private static final String EVENT= "[D]";
     public static final String EVENT_BREAK = "/at";
+    public static final int COMMAND_LENGTH = 2;
 
     Event(String description, boolean completed, String time) {
         super(description, completed);
