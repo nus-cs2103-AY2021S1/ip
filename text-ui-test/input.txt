@@ -1,7 +1,15 @@
-read book
-todo write book
+todo read book
+list
 deadline return book /by Sunday
 list
 event project meeting /at Mon 2-4pm
+list
+deadline do homework /by no idea :-p
+list
+blah
+todo
+done 5
+done a
+done 1
 list
 bye
