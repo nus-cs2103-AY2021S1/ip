@@ -14,13 +14,16 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (true) {
             String command = sc.nextLine();
+
             if (command.equals("bye")) {
                 printMessage("Bye. Hope to see you again soon!");
                 return ;
             } else if (command.equals("list")) {
                 listTasks();
-            }
-            else {
+            } else if (command.startsWith("done")) {
+                int index = Integer.valueOf(command.split(" ")[1]);
+                completeTask(index);
+            } else {
                 addTask(command);
             }
 
@@ -35,7 +38,7 @@ public class Duke {
     public static void addTask(String task) {
         Task newTask = new Task(task);
         taskList.add(newTask);
-        printMessage("added: " + newTask);
+        printMessage("added: " + newTask.getName());
     }
 
     public static void listTasks() {
@@ -48,5 +51,12 @@ public class Duke {
             }
         }
         printMessage(output);
+    }
+
+    public static void completeTask(int index) {
+        taskList.get(index - 1).markAsDone();
+        String message = String.format("Nice! I've marked this task as done:\n       %s",
+                taskList.get(index - 1));
+        printMessage(message);
     }
 }
