@@ -69,7 +69,8 @@ public class Duke {
                     } catch (NumberFormatException err){
                         echo("Error. Please key in an integer after \"done\"");
                     } catch (IndexOutOfBoundsException err) {
-                        echo("Error. You don't have task # " + words[1]);
+                        echo("Error. You don't have task # " + words[1] +
+                                "Key in \"list\" to find out the tasks");
                     }
                     break;
                 case "deadline":
