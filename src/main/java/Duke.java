@@ -1,6 +1,17 @@
 package main.java;
 import java.util.*;
 
+enum Command {
+    BYE,
+    LIST,
+    DONE,
+    DELETE,
+    TODO,
+    DEADLINE,
+    EVENT;
+
+}
+
 public class Duke {
     private static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -34,27 +45,34 @@ public class Duke {
         startMessage();
         List<String> tokens = tokenize(cmd);
         Task task;
-        switch (tokens.get(0)) {
-            case "bye":
+        Command command;
+        try {
+            command = Command.valueOf(tokens.get(0).toUpperCase());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Sorry I don't understand what that means");
+            return;
+        }
+        switch (command) {
+            case BYE:
                 System.out.println("See you again!");
                 break;
-            case "list":
+            case LIST:
                 System.out.println("Here are the tasks in your list: ");
                 Task.printTasks();
                 break;
-            case "done":
+            case DONE:
                 handleDone(Integer.parseInt(tokens.get(1)));
                 break;
-            case "delete":
+            case DELETE:
                 handleRemove(Integer.parseInt(tokens.get(1)));
                 break;
-            case "todo":
-            case "deadline":
-            case "event":
+            case TODO:
+            case DEADLINE:
+            case EVENT:
                 handleAdd(tokens);
                 break;
             default:
-                System.out.println("Sorry, I don't know what that means.");
+                System.out.println("An expected error has occurred.");
         }
         endMessage();
     }
