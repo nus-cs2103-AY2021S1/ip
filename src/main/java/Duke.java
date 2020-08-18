@@ -31,7 +31,15 @@ public class Duke {
                 }
                 else if (string.length() >= 4 && string.substring(0, 4).equals("done")) {
                     System.out.println("\n" + string + "\n  ____________________________________________________________");
+                    if(string.length() == 4 || string.length() == 5){
+                        System.out.println(new DoneException(true).toString());
+                        continue;
+                    }
                     int ID = Integer.parseInt(string.substring(5));
+                    if(ID >= Task.tasks.size()){
+                        System.out.println(new DoneException(false).toString());
+                        continue;
+                    }
                     Task.tasks.get(ID - 1).setDone();
                     Task.tasks.get(ID - 1).donePrint();
                 }
@@ -46,30 +54,48 @@ public class Duke {
                 }
                 else if (string.length() >= 5 && string.substring(0, 5).equals("event")) {
                     System.out.println("\n" + string + "\n  ____________________________________________________________");
+                    if(string.length() == 5 || string.length() == 6){
+                        System.out.println(new EventException(true, false).toString());
+                        continue;
+                    }
                     String s = "";
                     int index = -1;
+                    boolean time = false;
                     for (int i = 5; i < string.length(); i++) {
                         if (string.charAt(i) == '/') {
                             index = i;
+                            time = true;
                             break;
                         }
                         s = s + string.charAt(i);
                     }
+                    if(!time){
+                        System.out.println(new EventException(true, false).toString());
+                        continue;
+                    }
                     event e = new event(s.substring(1, s.length() - 1), string.substring(index + 4));
                     e.output();
                     //event e = new event(string.substring())
-                }
-
-                else if (string.length() >= 8 && string.substring(0, 8).equals("deadline")) {
+                }else if (string.length() >= 8 && string.substring(0, 8).equals("deadline")) {
                     System.out.println("\n" + string + "\n  ____________________________________________________________");
+                    if(string.length() == 8 || string.length() == 9){
+                        System.out.println(new EventException(true, false).toString());
+                        continue;
+                    }
                     String s = "";
                     int index = -1;
+                    boolean time = false;
                     for (int i = 8; i < string.length(); i++) {
                         if (string.charAt(i) == '/') {
                             index = i;
+                            time = true;
                             break;
                         }
                         s = s + string.charAt(i);
+                    }
+                    if(!time){
+                        System.out.println(new EventException(true, false).toString());
+                        continue;
                     }
                     deadline e = new deadline(s.substring(1, s.length() - 1), string.substring(index + 4));
                     e.output();
