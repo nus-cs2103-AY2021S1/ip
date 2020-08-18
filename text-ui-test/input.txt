@@ -1,0 +1,21 @@
+todo CS2100
+todo CS2101
+event rotaract club presentation /at Sun 8am
+done 1
+list
+done -1
+done 5
+done 1
+deadline CS2103 quiz /by Mon 12am
+done 2
+list
+done s
+done
+todo
+event /at Tues 8am
+deadline /at Mon 12am
+done 3
+done 4
+list
+blah
+bye

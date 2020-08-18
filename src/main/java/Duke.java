@@ -24,9 +24,9 @@ public class Duke {
         string.append("Here are the tasks in your list:\n");
         for (int i =0; i < list.size(); i++){
             if (list.size() == i + 1) {
-                string.append((i + 1) + ". " + list.get(i).toString());
+                string.append(i + 1).append(". ").append(list.get(i).toString());
             } else {
-                string.append((i + 1) + ". " + list.get(i).toString() + "\n");
+                string.append(i + 1).append(". ").append(list.get(i).toString()).append("\n");
             }
         }
         return string.toString();
@@ -42,75 +42,99 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public void runDuke() {
         messageEcho("Hello! I'm Duke\nWhat can I do for you?");
 
         Scanner sc = new Scanner(System.in);
 
         ArrayList<Task> list = new ArrayList<>();
-
         while (sc.hasNext()) {
-            String word  = sc.nextLine();
-            if (word.equals(BYE_COMMAND)) {
-                messageEcho("Bye. Hope to see you again soon!");
-                break;
-            }
-            if (word.equals(LIST_COMMAND)) {
-                messageEcho(listIterator(list));
-                continue;
-            }
-
-            String[] tempArray = word.trim().split(" ");
-
-            if (tempArray.length == 2 && tempArray[0].equals(DONE_COMMAND) && isNumber(tempArray[1])) {
-                int itemIndex = Integer.parseInt(tempArray[1]) - 1;
-                if (itemIndex < 0 || Integer.parseInt(tempArray[1]) > list.size()) {
-                    messageEcho("Input number is out of range!");
+            String word = sc.nextLine();
+            try {
+                if (word.equals(BYE_COMMAND)) {
+                    messageEcho("Bye. Hope to see you again soon!");
+                    break;
+                }
+                if (word.equals(LIST_COMMAND)) {
+                    messageEcho(listIterator(list));
                     continue;
                 }
-                list.get(itemIndex).markAsDone();
-                messageEcho("Nice! I've marked this task as done:\n" + list.get(itemIndex).toString());
-                continue;
+
+                String[] tempArray = word.trim().split(" ");
+
+                if (tempArray[0].equals(DONE_COMMAND)) {
+                    if (tempArray.length != 2) {
+                        throw new InvalidDoneFormatException();
+                    }
+                    if (!isNumber(tempArray[1])) {
+                        throw new IncorrectDoneInputFormat(list.size());
+                    }
+
+                    int itemIndex = Integer.parseInt(tempArray[1]) - 1;
+                    if (itemIndex < 0 || Integer.parseInt(tempArray[1]) > list.size()) {
+                        throw new IncorrectDoneInputFormat(list.size());
+                    }
+                    list.get(itemIndex).markAsDone();
+                    messageEcho("Nice! I've marked this task as done:\n" + list.get(itemIndex).toString());
+                    continue;
+                }
+
+                if (tempArray[0].equals(DEADLINE_COMMAND)) {
+                    String deadlineAndDate = word.substring(9);
+                    String[] deadlineDateArray = deadlineAndDate.trim().split(" /by ");
+                    if (deadlineDateArray.length != 2) {
+                        throw new InvalidDeadlineFormatException();
+                    }
+                    Deadline newDeadlineTask = new Deadline(deadlineDateArray[0], deadlineDateArray[1]);
+                    list.add(newDeadlineTask);
+                    messageEcho(
+                            "Got it. I've added this task:\n" + newDeadlineTask.toString() +
+                                    "\nNow you have " + list.size() + " tasks in total"
+                    );
+                    continue;
+                }
+
+                if (tempArray[0].equals(TODO_COMMAND)) {
+                    if (!(tempArray.length > 1)) {
+                        throw new InvalidToDoFormatException();
+                    }
+                    String task = word.substring(5);
+                    ToDo newToDoTask = new ToDo(task);
+                    list.add(newToDoTask);
+                    messageEcho(
+                            "Got it. I've added this task:\n" + newToDoTask.toString() +
+                                    "\nNow you have " + list.size() + " tasks in total"
+                    );
+                    continue;
+                }
+
+                if (tempArray[0].equals(EVENT_COMMAND)) {
+                    String eventAndDate = word.substring(6);
+                    String[] eventDateArray = eventAndDate.trim().split(" /at ");
+                    if (eventDateArray.length != 2) {
+                        throw new InvalidEventFormatException();
+                    }
+                    Event newEventTask = new Event(eventDateArray[0], eventDateArray[1]);
+                    list.add(newEventTask);
+                    messageEcho(
+                            "Got it. I've added this task:\n" + newEventTask.toString() +
+                                    "\nNow you have " + list.size() + " tasks in the list."
+                    );
+                    continue;
+                }
+
+                throw new InvalidCommandException();
+
+                //            removed for now as this function does not meet task specification
+                //            list.add(new Task(word));
+                //            messageEcho("added: " + word);
+            } catch (DukeException e) {
+                messageEcho(e.getMessage());
             }
-
-            if (tempArray[0].equals(DEADLINE_COMMAND)) {
-                String[] eventDateArray = word.trim().split(" /by ");
-                Deadline newDeadlineTask = new Deadline(eventDateArray[0], eventDateArray[1]);
-                list.add(newDeadlineTask);
-                messageEcho(
-                        "Got it. I've added this task:\n" + newDeadlineTask.toString() +
-                                "\nNow you have " + list.size() + " in total"
-                );
-                continue;
-            }
-
-            if (tempArray[0].equals(TODO_COMMAND)) {
-                String task = word.substring(5);
-                ToDo newToDoTask = new ToDo(task);
-                list.add(newToDoTask);
-                messageEcho(
-                        "Got it. I've added this task:\n" + newToDoTask.toString() +
-                                "\nNow you have " + list.size() + " in total"
-                );
-                continue;
-            }
-
-            if (tempArray[0].equals(EVENT_COMMAND)) {
-                String[] eventDateArray = word.trim().split(" /at ");
-                Event newEventTask = new Event(eventDateArray[0], eventDateArray[1]);
-                list.add(newEventTask);
-                messageEcho(
-                        "Got it. I've added this task:\n" + newEventTask.toString() +
-                                "\nNow you have " + list.size() + " in the list."
-                );
-                continue;
-            }
-
-            messageEcho("Input Command does not match any command");
-
-//            removed for now as this function does not meet task specification
-//            list.add(new Task(word));
-//            messageEcho("added: " + word);
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke().runDuke();
     }
 }

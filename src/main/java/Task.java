@@ -20,11 +20,9 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public void markAsDone() {
+    public void markAsDone() throws TaskCompletedException {
         if (isDone) {
-            System.out.println("__________________________________________________________");
-            System.out.println("Task is already done!");
-            System.out.println("__________________________________________________________\n");
+            throw new TaskCompletedException();
         }
         this.isDone = true;
     }
