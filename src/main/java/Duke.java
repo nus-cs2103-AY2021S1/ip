@@ -13,33 +13,35 @@ public class Duke {
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            String[] splitOrder = input.split(" ", 2);
-            String command = splitOrder[0];
+
             try {
+                String[] splitOrder = input.split(" ", 2);
+                Command command = Validator.command(splitOrder[0]);
+
                 switch (command) {
-                    case "list":
+                    case LIST:
                         output = printDesign(lst.readWork());
                         break;
-                    case "bye":
+                    case BYE:
                         output = "** Bye. Hope to see you soon!! **";
                         break;
-                    case "done":
+                    case DONE:
                         Validator.info(command, splitOrder.length, false);
                         int doneTaskId = Validator.index(command, splitOrder[1], lst.workListLen(), splitOrder.length);
                         output = printDesign(lst.updateTaskStatus(doneTaskId));
                         break;
-                    case "delete":
+                    case DELETE:
                         Validator.info(command, splitOrder.length, false);
                         int deleteTaskId = Validator.index(command, splitOrder[1], lst.workListLen(), splitOrder.length);
                         output = printDesign(lst.deleteWork(deleteTaskId));
                         break;
-                    case "todo":
+                    case TODO:
                         Validator.info(command, splitOrder.length, false);
                         String todoInfo = splitOrder[1];
                         Todo newTodo = new Todo(todoInfo);
                         output = printDesign(lst.addWork(newTodo));
                         break;
-                    case "deadline":
+                    case DEADLINE:
                         Validator.info(command, splitOrder.length, false);
                         String deadlineInfo = splitOrder[1];
                         String[] dInfo = deadlineInfo.split(" /by ");
@@ -49,7 +51,7 @@ public class Duke {
                         Deadline newDeadline = new Deadline(deadlineEvent, deadlineTime);
                         output = printDesign(lst.addWork(newDeadline));
                         break;
-                    case "event":
+                    case EVENT:
                         Validator.info(command, splitOrder.length, false);
                         String eventInfo = splitOrder[1];
                         String[] eInfo = eventInfo.split(" /at ");
