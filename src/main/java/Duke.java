@@ -36,9 +36,24 @@ public class Duke {
             temp.done();
             list.set(index, temp);
             return "    Great! I have marked this task as done:\n" + temp;
+        } else if (order.substring(0, 4).equals("todo")) {
+            String content = order.substring(5);
+            list.add(new Todo(content));
+            return "    added:" + content + "\n" + "    Now you have " + list.size() + " task(s) in the list";
+        } else if (order.substring(0, 8).equals("deadline")) {
+            Integer indexOfSlash = order.indexOf('/');
+            String content = order.substring(9, indexOfSlash);
+            String due = order.substring(indexOfSlash+1);
+            list.add(new Deadline(content, due));
+            return "    added:" + content + "\n" + "    Now you have " + list.size() + " task(s) in the list";
+        } else if (order.substring(0, 5).equals("event")) {
+            Integer indexOfSlash = order.indexOf('/');
+            String content = order.substring(6, indexOfSlash);
+            String time = order.substring(indexOfSlash+1);
+            list.add(new Event(content, time));
+            return "    added:" + content + "\n" + "    Now you have " + list.size() + " task(s) in the list";
         } else {
-            list.add(new Task(order));
-            return "    added:"+order;
+            return "    Sorry, I don't understand.";
         }
     }
 
