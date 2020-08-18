@@ -55,11 +55,17 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    void initializeChatbot() throws DukeException{
+    void initializeChatbot() throws DukeException {
         greet();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            Command command = Command.valueOf(sc.next().toUpperCase());
+            Command command = Command.getCommand(sc.next());
+
+            //Check if command is invalid
+            if (command == null ) {
+                throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(.");
+            }
+
             switch(command) {
                 case BYE: {
                     exit();
@@ -126,8 +132,6 @@ public class Duke {
             duke.initializeChatbot();
         } catch (DukeException ex) {
             System.out.println(ex);
-        } catch (IllegalArgumentException e) {
-            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }
