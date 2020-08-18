@@ -78,7 +78,7 @@ public class Duke {
         } else {
             tasks[taskNumber - 1].markAsDone();
             System.out.println(dashedLineBreak());
-            System.out.println("As you wish, milady. I have marked this as done.");
+            System.out.println("As you wish, milady. I have marked this as conquered.");
             System.out.println(tasks[taskNumber - 1]);
             System.out.println(dashedLineBreak());
         }
