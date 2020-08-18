@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -13,6 +15,7 @@ public class Duke {
                 "=========================================================================");
 
         Scanner scanner = new Scanner(System.in);
+        List<String> pastInputs = new ArrayList<>();
         boolean terminated = false;
 
         while (!terminated) {
@@ -22,9 +25,19 @@ public class Duke {
                 System.out.println("Duke says: Goodbye and have a nice day! :D");
                 scanner.close();
             } else if (userInput.equals("help")) {
-                System.out.println("bye: terminates program");
+                System.out.println("list: displays a sequential view of past inputs\n" +
+                        "bye: terminates program");
+            } else if (userInput.equals("list")){
+                if (pastInputs.size() == 0) {
+                    System.out.println("Duke says: No past inputs found");
+                } else {
+                    for (int i = 1; i <= pastInputs.size(); i++) {
+                        System.out.println(i + ". " + pastInputs.get(i - 1));
+                    }
+                }
             } else {
-                System.out.println("Duke says: " + userInput);
+                pastInputs.add(userInput);
+                System.out.println("Duke added: " + userInput);
             }
             System.out.println("=========================================================================");
         }
