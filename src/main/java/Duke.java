@@ -29,6 +29,15 @@ public class Duke {
         }
     }
 
+    public static void displayTaskCount(){
+        int numOfTasks = stored_task.size();
+        if (numOfTasks == 1) {
+            System.out.println("My duck senses tell me you have 1 task in the list.");
+        } else {
+            System.out.println("My duck senses tell me you have " + numOfTasks + " tasks in the list.");
+        }
+    }
+
     /**
      * Adds input task into stored_task.
      *
@@ -37,12 +46,7 @@ public class Duke {
     public static void addTask(Task newTask) {
         stored_task.add(newTask);
         System.out.println("Quack! I have added: " + newTask);
-        int numOfTasks = stored_task.size();
-        if (numOfTasks == 1) {
-            System.out.println("My duck senses tell me you have 1 task in the list.");
-        } else {
-            System.out.println("My duck senses tell me you have " + numOfTasks + " tasks in the list.");
-        }
+        displayTaskCount();
     }
 
     /**
@@ -69,12 +73,33 @@ public class Duke {
     }
 
     /**
+     * Deletes input task from stored_task.
+     *
+     * @param taskNumber Task number of task to be deleted.
+     **/
+    public static void deleteTask(int taskNumber) {
+        try {
+            if (taskNumber <= 0 || taskNumber > stored_task.size()) {
+                throw new DukeException("Wrong task number!");
+            } else {
+                Task taskToDelete = stored_task.get(taskNumber - 1);
+                stored_task.remove(taskToDelete);
+                System.out.println("Quack! I have deleted this task: \n" + taskToDelete);
+                displayTaskCount();
+            }
+        } catch (DukeException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
      * Prints greeting message.
      * Scans for commands entered by the user, then stores input task into stored_task for 3 types of tasks:
      * ToDo, Deadline and Event.
      * Upon user command input "done " followed by the task number, task will be marked as done.
      * Upon user command input "list", stored task will be listed.
      * Upon user command input "bye", system is exited.
+     * Upon user command input "delete", task is deleted.
      **/
     public static void main(String[] args) {
         String greeting_message = line +
@@ -107,6 +132,19 @@ public class Duke {
                         }
                     } else {
                         throw new DukeException("You need to include your task number to mark done...");
+                    }
+                } else if (input.startsWith("delete")) {
+                    if (input.length() > 6) {
+                        if (!input.substring(6, 7).equals(" ")){
+                            throw new DukeException("My duck instincts tell me your input makes no sense...");
+                        } else {
+                            int taskNumber = Integer.parseInt(input.substring(7));
+                            System.out.println(line);
+                            deleteTask(taskNumber);
+                            System.out.println(line);
+                        }
+                    } else {
+                        throw new DukeException("You need to include your task number to delete...");
                     }
                 } else if (input.startsWith("todo")) {
                     if (input.length() > 4) {
@@ -161,6 +199,7 @@ public class Duke {
                     } else {
                         throw new DukeException("Your event description can't be empty...");
                     }
+
                 } else {
                     throw new DukeException("My duck instincts tell me your input makes no sense...");
                 }
@@ -168,7 +207,7 @@ public class Duke {
                 System.out.println(line);
                 System.out.println(e.getMessage());
                 System.out.println(line);
-            } catch (NumberFormatException e){ //when user does not input a number after "done" command
+            } catch (NumberFormatException e){ //when user does not input a number after "done" or "delete" command
                 System.out.println(line);
                 System.out.println("You need to input the task number!");
                 System.out.println(line);
