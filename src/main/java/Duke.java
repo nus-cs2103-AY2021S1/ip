@@ -19,7 +19,22 @@ public class Duke {
     }
 
     public void greet() {
+        String text =
+                "  ______  _____  __  ____     __     _______      \n" +
+                        " |__  __||  __ | | \\ |  |    /_ \\    |   ___|     \n" +
+                        "    | |  | | | | |  \\|  |   //_\\ \\   |  |___          \n" +
+                        " _  | |  | | | | | |\\   |  / ____ \\  |____  |   \n" +
+                        "| |_| |  | |_| | | | \\  | / /    \\ \\ _____| |         \n" +
+                        "|_____|  |_____| |_|  \\_|/_/      \\_\\|______|       \n" +
+                        "                  _____   ______  ________                            \n" +
+                        "                  |  _ \\ |  _  | |__   __|                  \n" +
+                        "                  | |_| || | | |    | |                      \n" +
+                        "                  |    / | | | |    | |         \n" +
+                        "                  |  _ \\ | |_| |    | |       \n" +
+                        "                  | |_| ||     |    | |         \n" +
+                        "                  |_____/|_____|    |_|                 \n";
         String greeting = "  Hello! I am JonasBot! Nice to meet you :) \n" +
+                text +
                 "  \n  I am a bot that will keep track of all your tasks. \n" +
                 "  \n  To view a list of all my commands, input '/commands' \n" +
                 "  \n  Now that you are familiar with the commands, how may I assist you today?";
@@ -67,6 +82,7 @@ public class Duke {
                 "3. event\n" +
                 "4. list\n" +
                 "5. done\n" +
+                "6. delete\n" +
                 "6. bye\n" +
                 "\nInput '/commands' for a list of all my commands. ";
         throw new InvalidFunctionException(err);
@@ -87,9 +103,12 @@ public class Duke {
     public void completeTask(String message) throws InvalidTaskException, InvalidFunctionException {
         try {
             int index = Integer.parseInt(message.split(" ")[1]);
-            if (index > this.list.size() || index <= 0) {
+            if (index > this.list.size()) {
                 String err = "Invalid Task! The task does not exist, try again.";
                 throw new InvalidTaskException(err);
+            } else if (index <= 0) {
+                String err = "Your input does not meet the requirements. Input '/commands' to view a list of my commands. ";
+                throw new InvalidFunctionException(err);
             } else {
                 if (this.list.get(index - 1).isDone) {
                     System.out.println("  This task has already been completed:");
@@ -102,15 +121,21 @@ public class Duke {
         } catch (ArrayIndexOutOfBoundsException ex) {
             String err = "No Task ID found! Please input the ID of the task you wish to mark as completed.";
             throw new InvalidFunctionException(err);
+        } catch (NumberFormatException ex) {
+            String err = "Your input does not meet the requirements. Input '/commands' to view a list of my commands. ";
+            throw new InvalidFunctionException(err);
         }
     }
 
     public void deleteTask(String message) throws InvalidTaskException, InvalidFunctionException {
         try {
             int index = Integer.parseInt(message.split(" ")[1]);
-            if (index > this.list.size() || index <= 0) {
+            if (index > this.list.size()) {
                 String err = "Invalid Task! The task does not exist, try again.";
                 throw new InvalidTaskException(err);
+            } else if (index <= 0) {
+                String err = "Your input does not meet the requirements. Input '/commands' to view a list of my commands. ";
+                throw new InvalidFunctionException(err);
             } else {
                 Task toRemove = this.list.get(index - 1);
                 System.out.println("  Found it! This task has been successfully deleted:");
@@ -120,6 +145,9 @@ public class Duke {
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
             String err = "No Task ID found! Please input the ID of the task you wish to delete.";
+            throw new InvalidFunctionException(err);
+        } catch (NumberFormatException ex) {
+            String err = "Your input does not meet the requirements. Input '/commands' to view a list of my commands. ";
             throw new InvalidFunctionException(err);
         }
     }
