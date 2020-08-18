@@ -38,14 +38,16 @@ public class Chat {
             if (input.contains(" /by ")) {
                 addToList(new Deadline(input));
             } else {
-                invalidFormatHandler(Deadline.FORMAT);
+                handleInvalidFormat(Deadline.FORMAT);
             }
         } else if (input.length() >= 7 && input.substring(0, 6).equals("event ")) {
             if (input.contains(" /at ")) {
                 addToList(new Event(input));
             } else {
-                invalidFormatHandler(Event.FORMAT);
+                handleInvalidFormat(Event.FORMAT);
             }
+        } else {
+            System.out.println("    sorry, I don't know what that means!\n");
         }
     }
 
@@ -80,7 +82,7 @@ public class Chat {
         isRunning = false;
     }
 
-    void invalidFormatHandler(String format) {
+    void handleInvalidFormat(String format) {
         System.out.println(String.format("    invalid format! please follow '%s'\n", format));
     }
 }
