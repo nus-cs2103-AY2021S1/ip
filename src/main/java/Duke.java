@@ -31,94 +31,126 @@ public class Duke {
             Task task;
 
             System.out.println(upperLine);
-            switch (command[0]) {
-                case "list":
-                    System.out.println("Here is your list of tasks:");
-                    for (int i = 0; i < tasks.size(); i++) {
-                        System.out.println((i + 1) + ". " + tasks.get(i) + "\n");
-                    }
-                    break;
+            try {
+                switch (command[0]) {
+                    case "list":
+                        System.out.println("Here is your list of tasks:");
+                        for (int i = 0; i < tasks.size(); i++) {
+                            System.out.println((i + 1) + ". " + tasks.get(i) + "\n");
+                        }
+                        break;
 
-                case "done":
-                    idx = Integer.parseInt(command[1]);
-                    tasks.get(idx - 1).markAsDone();
+                    case "done":
+                        idx = Integer.parseInt(command[1]);
+                        if (idx < 1 || idx > tasks.size()) {
+                            throw new DukeException(
+                                    "Sorry, but you inputted an invalid task index.");
+                        }
+                        tasks.get(idx - 1).markAsDone();
 
-                    System.out.println("Great job!\nI have marked the task as done");
-                    System.out.println(tasks.get(idx - 1));
-                    break;
+                        System.out.println("Great job!\nI have marked the task as done");
+                        System.out.println(tasks.get(idx - 1));
+                        break;
 
-                case "todo":
-                    description = command[1];
-                    idx = 2;
-                    while (idx < command.length) {
-                        description += " " + command[idx];
+                    case "todo":
+                        if (command.length < 2) {
+                            throw new DukeException("The description can't be blank :(.");
+                        }
+                        description = command[1];
+                        idx = 2;
+                        while (idx < command.length) {
+                            description += " " + command[idx];
+                            idx++;
+                        }
+
+                        task = new Todo(description);
+                        tasks.add(task);
+
+                        System.out.printf("Okay! I have added the task:\n%s\n", task);
+                        System.out.printf(
+                                "Currently you have %d tasks in your list, don't forget to do them!\n",
+                                tasks.size());
+                        break;
+
+                    case "deadline":
+                        if (command.length < 2) {
+                            throw new DukeException("The description can't be blank :(.");
+                        }
+                        description = command[1];
+                        idx = 2;
+                        while (idx < command.length && !command[idx].equals("/by")) {
+                            description += " " + command[idx];
+                            idx++;
+                        }
                         idx++;
-                    }
 
-                    task = new Todo(description);
-                    tasks.add(task);
+                        if (idx >= command.length) {
+                            throw new DukeException(
+                                    "Please specify deadline time in this format: \"/by <time>\". ");
+                        }
 
-                    System.out.printf("Okay! I have added the task:\n%s\n", task);
-                    System.out.printf(
-                            "Currently you have %d tasks in your list, don't forget to do them!\n",
-                            tasks.size());
-                    break;
-
-                case "deadline":
-                    description = command[1];
-                    idx = 2;
-                    while (idx < command.length && !command[idx].equals("/by")) {
-                        description += " " + command[idx];
+                        time = command[idx];
                         idx++;
-                    }
-                    idx++;
+                        while (idx < command.length) {
+                            time += " " + command[idx];
+                            idx++;
+                        }
 
-                    time = command[idx];
-                    idx++;
-                    while (idx < command.length) {
-                        time += " " + command[idx];
+                        task = new Deadline(description, time);
+                        tasks.add(task);
+
+                        System.out.printf(
+                                "Okay! I have added the task:\n%s\nRemember to do it before the deadline!\n",
+                                task);
+                        System.out.printf(
+                                "Currently you have %d tasks in your list, don't forget to do them!\n",
+                                tasks.size());
+                        break;
+
+                    case "event":
+                        if (command.length < 2) {
+                            throw new DukeException("The description can't be blank :(.");
+                        }
+                        description = command[1];
+                        idx = 2;
+                        while (idx < command.length && !command[idx].equals("/at")) {
+                            description += " " + command[idx];
+                            idx++;
+                        }
                         idx++;
-                    }
 
-                    task = new Deadline(description, time);
-                    tasks.add(task);
+                        if (idx >= command.length) {
+                            throw new DukeException(
+                                    "Please specify event time in this format: \"/at <time>\". ");
+                        }
 
-                    System.out.printf(
-                            "Okay! I have added the task:\n%s\nRemember to do it before the deadline!\n",
-                            task);
-                    System.out.printf(
-                            "Currently you have %d tasks in your list, don't forget to do them!\n",
-                            tasks.size());
-                    break;
-
-                case "event":
-                    description = command[1];
-                    idx = 2;
-                    while (idx < command.length && !command[idx].equals("/at")) {
-                        description += " " + command[idx];
+                        time = command[idx];
                         idx++;
-                    }
-                    idx++;
+                        while (idx < command.length) {
+                            time += " " + command[idx];
+                            idx++;
+                        }
 
-                    time = command[idx];
-                    idx++;
-                    while (idx < command.length) {
-                        time += " " + command[idx];
-                        idx++;
-                    }
+                        task = new Event(description, time);
+                        tasks.add(task);
 
-                    task = new Event(description, time);
-                    tasks.add(task);
+                        System.out.printf(
+                                "Okay! I have added the task:\n%s\nRemember to attend it!\n", task);
+                        System.out.printf(
+                                "Currently you have %d tasks in your list, don't forget to do them!\n",
+                                tasks.size());
+                        break;
 
-                    System.out.printf("Okay! I have added the task:\n%s\nRemember to attend it!\n",
-                            task);
-                    System.out.printf(
-                            "Currently you have %d tasks in your list, don't forget to do them!\n",
-                            tasks.size());
-                    break;
+                    default:
+                        throw new DukeException(
+                                "I'm sorry but I don't recognize your command T__T.");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            } finally {
+                System.out.println(lowerLine);
+                answer = in.nextLine();
             }
-            System.out.println(lowerLine);
-            answer = in.nextLine();
         }
 
         System.out.println(upperLine + goodbye + "\n" + lowerLine);
