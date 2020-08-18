@@ -1,0 +1,7 @@
+deadline cs2103t /by week8
+todo ip
+event lecture /at friday 4pm
+list
+done 2
+list
+bye
