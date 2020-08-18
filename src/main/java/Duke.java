@@ -24,6 +24,14 @@ public class Duke {
                 System.out.println("Nice, I have marked this task as done: " + "\n" + tasks.get(index).toString());
             } // if starts with done, mark this task as done then print it.
 
+            if(s.startsWith("delete")) {
+                int index = Integer.parseInt(s.split(" ")[1]);
+                Task t = tasks.get(index);
+                tasks.remove(index);
+                System.out.println("Nice, I have removed this task: " + "\n" + t.toString());
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            } // if starts with delete, delete the referred task by the index.
+
             if(s.startsWith("todo")) {
                 Todo t = new Todo(s.substring(5));
                 tasks.add(t);
