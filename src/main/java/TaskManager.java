@@ -10,8 +10,26 @@ public class TaskManager {
         this.tasks = new ArrayList<Task>();
     }
 
-    public void addTask(String taskName) {
-        this.tasks.add(new Task(taskName));
+    public Task addToDo(String name){
+        Task newTask = new ToDo(name);
+        tasks.add(newTask);
+        return newTask;
+    }
+
+    public Task addDeadLine(String name, String time){
+        Task newTask = new Deadline(name,time);
+        tasks.add(newTask);
+        return newTask;
+    }
+
+    public Task addEvent(String name, String time){
+        Task newTask = new Event(name, time);
+        tasks.add(newTask);
+        return newTask;
+    }
+
+    public int getTotalTask(){
+        return this.tasks.size();
     }
 
     public void doTask(int index) {
