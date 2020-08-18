@@ -75,6 +75,9 @@ public class Duke {
                     if (task[0].isEmpty()) {
                         throw new DukeException("☹ OOPS!!! The description of a deadline task cannot be empty.");
                     }
+                    if (task[1].isEmpty()) {
+                        throw new DukeException("☹ OOPS!!! The deadline of a deadline task cannot be empty.");
+                    }
                     addDeadlineTask(task[0], task[1]);
                     break;
                 }
@@ -83,11 +86,17 @@ public class Duke {
                     if (task[0].isEmpty()) {
                         throw new DukeException("☹ OOPS!!! The description of an event task cannot be empty.");
                     }
+                    if (task[1].isEmpty()) {
+                        throw new DukeException("☹ OOPS!!! The timing of an event task cannot be empty.");
+                    }
                     addEventTask(task[0], task[1]);
                     break;
                 }
                 case ("done"): {
                     int index = sc.nextInt();
+                    if (index > tasks.size() || index < 1) {
+                        throw new DukeException("☹ OOPS!!! There is no such task.");
+                    }
                     completeTask(index);
                     break;
                 }
