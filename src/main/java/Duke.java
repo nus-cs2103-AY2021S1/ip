@@ -51,6 +51,20 @@ public class Duke {
                         System.out.println("Great job!\nI have marked the task as done");
                         System.out.println(tasks.get(idx - 1));
                         break;
+                    case "delete":
+                        idx = Integer.parseInt(command[1]);
+                        if (idx < 1 || idx > tasks.size()) {
+                            throw new DukeException(
+                                    "Sorry, but you inputted an invalid task index.");
+                        }
+
+                        System.out.println("Noted!\nI have deleted this task from your task list.");
+                        System.out.println(tasks.get(idx - 1));
+                        tasks.remove(idx - 1);
+                        System.out.printf(
+                                "Currently you have %d tasks in your list, don't forget to do them!\n",
+                                tasks.size());
+                        break;
 
                     case "todo":
                         if (command.length < 2) {
