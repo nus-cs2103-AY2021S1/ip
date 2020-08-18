@@ -12,5 +12,13 @@ done 3
 list
 todo
 blah
-xxx
+done 4 5 6
+done 100
+done 0
+done a
+deadline
+deadline /by Sunday
+event
+event /at Mon
+event /at 2-4pm
 bye

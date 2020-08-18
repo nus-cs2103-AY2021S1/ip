@@ -4,51 +4,40 @@ public class TaskList {
     private final ArrayList<Task> taskList;
 
     public TaskList() {
-        this.taskList = new ArrayList<Task>();
+        this.taskList = new ArrayList<>();
     }
 
-    // sideffect: create & add task + return response
-    protected String addEntry(String description) {
-
-        String[] words = description.split(" ");
-
-        if(isToDo(words)) {
-            ToDo newToDo = ToDo.createToDo(words);
-            this.taskList.add(newToDo);
-            return newToDo.toString();
+    // side effect: create & add task + return response
+    protected String addEntry(String[] parsedOutput) {
+        String command = parsedOutput[0];
+        switch (command) {
+            case "T":
+                ToDo newToDo = new ToDo(parsedOutput[1]);
+                this.taskList.add(newToDo);
+                return newToDo.toString();
+            case "D":
+                Deadline newDeadline = Deadline.createDeadline(parsedOutput);
+                this.taskList.add(newDeadline);
+                return newDeadline.toString();
+            case "E":
+                Event newEvent = Event.createEvent(parsedOutput);
+                this.taskList.add(newEvent);
+                return newEvent.toString();
+            default:
+                return "ugh";
         }
-
-        if (isDeadlineAction(words)) {
-            Deadline newDeadline = Deadline.createDeadline(description);
-            this.taskList.add(newDeadline);
-            return newDeadline.toString();
-        }
-
-        if (isEventAction(words)) {
-            Event newEvent = Event.createEvent(description);
-            this.taskList.add(newEvent);
-            return newEvent.toString();
-        }
-        return "ugh";
-
     }
 
     // side effect: completes task + returns string for completed task
-    protected String completeTask(int taskID) {
+    protected String completeTask(int taskID) throws DukeException {
+        if (taskID > taskList.size()) {
+            throw new DukeException("invalid done command: task id > list size");
+        } else if (taskID < 1) {
+            throw new DukeException("invalid done command: task id < 1");
+        }
         taskList.set(taskID - 1, taskList.get(taskID - 1).complete());
         return taskList.get(taskID - 1).toString();
     }
-
-    private static boolean isToDo(String[] words) {
-        return words[0].equals("todo");
-    }
-    private static boolean isDeadlineAction(String[] words) {
-        return words[0].equals("deadline");
-    }
-    private static boolean isEventAction(String[] words) {
-        return words[0].equals("event");
-    }
-
 
 
     public ArrayList<Task> getAllTasks() {

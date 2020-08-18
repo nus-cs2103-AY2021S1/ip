@@ -30,52 +30,48 @@ public class Duke {
         printResponse(prettify(greeting));
     }
 
-    // determines Duke's response and exit conditions:
     private static void respond(Scanner sc, TaskList myTasks) {
         Parser parser = new Parser();
         String input = sc.nextLine();
-        String[] parsedOutput = parser.parseCommand(input);
-        String command = parsedOutput[0];
-        ArrayList<String> response = new ArrayList<>();
-
-        if (command.equals("bye")) {
-            response = exit();
-        } else if(command.equals("list")) {
-            response.add("Here are the tasks in your list:");
-            ArrayList<Task> allTasks = myTasks.getAllTasks();
-            for (Task t : allTasks) {
-                response.add(t.getID() + "." + t.toString());
+        ArrayList<String> response = new ArrayList<>(); // arraylist of lines
+        try {
+            String[] parsedOutput = parser.parseCommand(input);
+            String command = parsedOutput[0];
+            if (command.equals("bye")) {
+                response = exit();
+            } else if (command.equals("list")) {
+                response.add("Here are the tasks in your list:");
+                ArrayList<Task> allTasks = myTasks.getAllTasks();
+                for (Task t : allTasks) {
+                    response.add(t.getID() + "." + t.toString());
+                }
+            } else if (Duke.mode.equals("echo")) {
+                response = echo(input);
+            } else {
+                response = handleTask(parsedOutput, myTasks);
             }
+        } catch (DukeException e) {
+            response.add(e.getMessage());
+        } finally {
+            printResponse(prettify(response));
         }
-
-        else if (Duke.mode.equals("echo")) {
-            response = echo(input);
-        } else {
-            response = handleTask(parsedOutput, input, myTasks);
-        }
-        ;
-        printResponse(prettify(response));
     }
-    ;
 
 
-
-    private static ArrayList<String> handleTask(String[] parsedOutput, String description, TaskList tasks) {
+    private static ArrayList<String> handleTask(String[] parsedOutput, TaskList tasks) throws DukeException {
         String command = parsedOutput[0];
         ArrayList<String> response = new ArrayList<>();
-        String[] words = description.split(" ");
-
-        if(command.equals("done")) {
-            int taskID = Integer.parseInt(words[1]);
+        if (command.equals("done")) {
+            int taskID = Integer.parseInt(parsedOutput[1]);
             response.add(doneMessage);
             response.add(tasks.completeTask(taskID));
         } else {
             response.add(gotMessage);
-            String reply = tasks.addEntry(description);
+            String reply = tasks.addEntry(parsedOutput);
             response.add(reply);
             response.add(tasks.getCurrentStatus());
         }
-        return (response);
+        return response;
     }
 
 
@@ -115,10 +111,6 @@ public class Duke {
         }
     }
 
-    private static boolean isDoneAction(String[] words) {
-        return words[0].equals("done") && words.length == 2;
-    }
-
     private static void printLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -128,8 +120,9 @@ public class Duke {
         System.out.println(logo);
     }
 
-
 }
+
+//todo: create enums for messages, delims and commands/cases
 
 
 

@@ -8,16 +8,10 @@ public class Deadline extends Task{
     }
 
     // example: deadline return book /by Sunday
-    public static Deadline createDeadline(String input) {
-        String[] separatedInput = input.split("/" + DELIMITER);
-        String dateString = separatedInput[1];
-        String[] words = separatedInput[0].split(" ");
-        StringBuilder newDescription = new StringBuilder();
-        for(int i = 1; i < words.length - 1; i++) {
-            newDescription.append(words[i]).append(" ");
-        }
-        newDescription.append(words[words.length - 1]);
-        return new Deadline(newDescription.toString(), dateString);
+    public static Deadline createDeadline(String[] parsedOutput) {
+        String description = parsedOutput[1];
+        String dateString = parsedOutput[2];
+        return new Deadline(description, dateString);
     }
 
     @Override
