@@ -114,11 +114,21 @@ public class Duke {
         System.out.println(output("Hello! I'm Duke\n\t  What can I do for you?"));
         List<Task> list = new ArrayList<>();
         int count = 0;
-        String input = sc.nextLine();
-        String prefix = input.split(" ")[0];
-        Command type;
-        while (!input.equals("bye")) {
-            try {
+        try {
+            while (true) {
+                String input = sc.nextLine();
+                Command type;
+                if (input.equals("bye")) {
+                    type = Command.BYE;
+                } else if (input.equals("list")) {
+                    type = Command.LIST;
+                } else if (isDeleteCommand(input, count)) {
+                    type = Command.DELETE;
+                } else if (isDoneCommand(input, count)) {
+                    type = Command.DONE;
+                } else {
+                    type = Command.TASK;
+                }
                 if (input.equals("list")) {
                     System.out.println(horizontalLine + "\n\t  " + "Here are the tasks in your list:");
                     for (int i = 0; i < count; i++) {
@@ -140,10 +150,9 @@ public class Duke {
                     System.out.println(output("Got it. I've added this task:\n\t    " + task +
                             "\n\t  Now you have " + count + " tasks in the list."));
                 }
-            } catch (InvalidCommandException e) {
-                System.out.println(output(e.getMessage()));
             }
-            input = sc.nextLine();
+        } catch (InvalidCommandException e) {
+            System.out.println(output(e.getMessage()));
         }
         System.out.println(output("Bye. Hope to see you again soon!"));
     }
