@@ -14,7 +14,7 @@ public class Duke {
         System.out.println(horizontalDiv);
         while(in.hasNextLine()) {
             String str = in.nextLine();
-
+            String[] arr = str.split(" ", 2);
             if(str.equals("bye")) {
                 System.out.println(horizontalDiv);
                 System.out.println("Bye! Hope to see you again soon!");
@@ -29,7 +29,7 @@ public class Duke {
                     System.out.println(num + ". " + task.toString());
                 }
                 System.out.println(horizontalDiv);
-            } else if (str.contains("done ")) {
+            } else if (arr[0].equals("done")) {
                 int numToBeMarkedAsDone = Integer.parseInt(str.substring(str.length() - 1)) - 1;
                 if(numToBeMarkedAsDone >= ls.size()) {
                     System.out.println(horizontalDiv);
