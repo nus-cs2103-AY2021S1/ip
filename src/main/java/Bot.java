@@ -20,16 +20,21 @@ public class Bot {
         giveResponse(greeting);
         String input = getInput();
         while (!input.equals("bye")) {
-            if (input.equals("list")) {
-                displayList();
-            } else if (input.startsWith("done")) {
-                int index = Integer.parseInt(input.substring(5)) - 1;
-                Task task = taskList.get(index);
-                task.markAsDone();
-                giveResponse("Nice! I've marked this task as done:\n       " + task);
-            } else {
-                addTask(input);
+            try {
+                if (input.equals("list")) {
+                    displayList();
+                } else if (input.startsWith("done")) {
+                    int index = Integer.parseInt(input.substring(5)) - 1;
+                    Task task = taskList.get(index);
+                    task.markAsDone();
+                    giveResponse("Nice! I've marked this task as done:\n       " + task);
+                } else {
+                    addTask(input);
+                }
+            } catch (DukeException e) {
+                giveResponse(e.getMessage());
             }
+
             input = getInput();
         }
         giveResponse("Bye. Hope to see you again soon!");
@@ -46,24 +51,39 @@ public class Bot {
     }
 
     // add a task with a given command
-    private void addTask(String command) {
+    private void addTask(String command) throws DukeException {
         Task newTask;
         if (command.startsWith("todo")) {
+            if (command.length() <= 5) {
+                throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
+            }
             newTask = new Todo(command.substring(5));
         } else if (command.startsWith("deadline")) {
+            if (command.length() <= 9) {
+                throw new DukeException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
+            }
             String description = command.substring(9);
             int index = description.indexOf("/by");
+            if (index == -1 || description.length() - index <= 4 ) {
+                throw new DukeException("\u2639 OOPS!!! I don't know when the deadline is");
+            }
             String by = description.substring(index + 4);
             description = description.substring(0, index - 1);
             newTask = new Deadline(description, by);
         } else if (command.startsWith("event")) {
+            if (command.length() <= 6) {
+                throw new DukeException("\u2639 OOPS!!! The description of a event cannot be empty.");
+            }
             String description = command.substring(6);
             int index = description.indexOf("/at");
+            if (index == -1 || description.length() - index <= 4 ) {
+                throw new DukeException("\u2639 OOPS!!! I don't know when the event take place");
+            }
             String at = description.substring(index + 4);
             description = description.substring(0, index - 1);
             newTask = new Event(description, at);
         } else {
-            newTask = new Task(command);
+            throw new DukeException();
         }
         taskList.add(newTask);
         giveResponse("Got it. I've added this task:\n       " +
