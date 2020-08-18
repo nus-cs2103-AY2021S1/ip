@@ -29,7 +29,7 @@ public class TaskList {
             allTasks.append(listIndex + "." + task + "\n");
         }
 
-        return allTasks.toString();
+        return allTasks.substring(0, allTasks.length() - 1);
 
     }
 }

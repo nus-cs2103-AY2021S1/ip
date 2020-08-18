@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -26,7 +24,7 @@ public class Duke {
                 break;
             }
 
-            boolean markDone = description.substring(0, 4).equals("done");
+            boolean markDone = description.startsWith("done");
             boolean showListOfCommands = description.equals("list");
 
             // Mark indicated task as done
@@ -40,9 +38,9 @@ public class Duke {
             else if (showListOfCommands) {
                 displayTaskList(tasks);
 
-            // Add a new task to the list
+            // Add a new task (todos, deadlines or events) to the list
             } else {
-                updateTaskList(tasks, description);
+                handleUserCommands(tasks, description);
             }
 
             // Prompt user commands
@@ -60,19 +58,23 @@ public class Duke {
         System.out.println(SKIPLINE + CHATBOT);
 
         if (tasks.totalNumberOfTasks() == 0) {
+            // Bob's response
             System.out.println("List is empty :(");
         } else {
+            // Bob's response
             System.out.println("Here is your current list of tasks:");
             System.out.println(tasks);
         }
     }
 
-    private static void updateTaskList(TaskList tasks, String description) {
-        Task newTask = new Task(description);
+    private static void updateTaskList(TaskList tasks, Task newTask) {
         tasks.addNewTask(newTask);
 
+        // Bob's response
         System.out.println();
-        System.out.println(CHATBOT + "added '" + description + "'");
+        System.out.println(CHATBOT + SKIPLINE + "Noted! I have added the following task to your list:");
+        System.out.println(newTask);
+        System.out.println("You now have " + tasks.totalNumberOfTasks() + " task(s) in your list");
     }
 
     private static void markTaskAsDone(TaskList tasks, int index) {
@@ -81,8 +83,39 @@ public class Duke {
         Task doneTask = tasks.getTask(index);
         doneTask.markAsDone();
 
+        // Bob's response
         System.out.println("Good job completing this task! I've marked this task as done:");
         System.out.println(doneTask);
         System.out.println("Keep up the good work :)");
+    }
+
+    private static void handleUserCommands(TaskList tasks, String command) {
+        if (command.startsWith("deadline")) {
+            String[] deadlineInformation;
+
+            // Retrieve deadline description and deadline date
+            deadlineInformation = command.split("/by ");
+            String description = deadlineInformation[0].substring(9);
+            String deadline = deadlineInformation[1];
+
+            Deadline newDeadlineTask = new Deadline(description, deadline);
+            updateTaskList(tasks, newDeadlineTask);
+        } else if (command.startsWith("event")) {
+            String[] eventInformation;
+
+            // Retrieve event description and event date
+            eventInformation = command.split("/at ");
+            String description = eventInformation[0].substring(6);
+            String event = eventInformation[1];
+
+            Event newEventTask = new Event(description, event);
+            updateTaskList(tasks, newEventTask);
+        } else if (command.startsWith("todo")) {
+            // Retrieve todos description
+            String description = command.substring(5);
+
+            Todo newTodoTask = new Todo(description);
+            updateTaskList(tasks, newTodoTask);
+        }
     }
 }
