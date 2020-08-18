@@ -27,17 +27,35 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while(sc.hasNextLine()) {
             String userCommand = sc.nextLine();
+            String[] userWord = userCommand.split(" ");
+
             if (userCommand.equals("bye")) {
                 System.out.println(breakline);
                 System.out.println("    Bye. Hope to see you again soon!");
                 System.out.println(breakline);
                 break;
             }
-            switch (userCommand) {
+            switch (userWord[0]) {
                 case "list":
                     System.out.println(breakline);
                     listItems(listOfTask);
                     System.out.println(breakline);
+                    break;
+
+                case "done":
+                    int index = Integer.parseInt(userWord[1]) - 1;
+                    if (index >= 0 && index < listOfTask.size()) {
+                        Task temp = listOfTask.get(index);
+                        temp.completed();
+                        System.out.println(breakline);
+                        System.out.println("    Nice! I've marked this task as done:");
+                        System.out.println("    " + temp.toString());
+                        System.out.println(breakline);
+                    } else {
+                        System.out.println(breakline);
+                        System.out.println("    Invalid index entry");
+                        System.out.println(breakline);
+                    }
                     break;
 
                 default:
