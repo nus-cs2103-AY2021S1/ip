@@ -21,6 +21,7 @@ I've marked this task as done:
 1. [T] [✓] borrow book
 2. [D] [✓] return book (by: sunday)
 3. [E] [✓] meet friend (at: wed 2pm)
-Invalid task.
+Unrecognized task/command.
+Todos must have non-empty descriptions!
 Item #5 does not exist and cannot be marked as done.
 Bye. Hope to see you again
