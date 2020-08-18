@@ -30,8 +30,22 @@ public class Jimmy {
             if (msg.equals("bye")) {
                 System.out.println(div + "\tBye. Hope to see you again soon!" + div);
                 break;
-            } else if (!msg.equals("list") && !arr[0].equals("done")) {
-                System.out.println(div + "\tGot it. I've added this task:"); // + msg + div);
+            } else if (msg.equals("list")) {
+                System.out.println(div + lst + div);
+            } else if (arr[0].equals("done")) {
+                if (arr.length > 2 || arr.length == 1) {
+                    System.out.println(div + "\tError: The function \"done\" should be followed by a single number." + div);
+                    break;
+                }
+                int i = Integer.parseInt(arr[1]);
+                if (i > lst.getNumTasks()+1 || i < 1) {
+                    System.out.println(div + "\tError: Task #" + i + " is out of range." + div);
+                    break;
+                }
+                lst.completeTask(i);
+                Task t = lst.getTask(i);
+                System.out.println(div + "\tNice! I've marked this task as done:" + "\n\t  " + t + div);
+            } else if (arr.length > 1) {
                 Task t = null;
                 switch (arr[0]) {
                     case "todo":
@@ -44,15 +58,19 @@ public class Jimmy {
                         t = new Event(msg);
                         break;
                 }
+                if (t.equals(null)) {
+                    System.out.println(div + "\tError: The function \"" + msg + "\" does not exist." + div);
+                    continue;
+                }
+                System.out.println(div + "\tGot it. I've added this task:");
                 lst.addTask(t);
                 System.out.println("\t  " + t + "\n\tNow you have " + lst.getNumTasks() + " tasks in the list." + div);
-            } else if (arr[0].equals("done")) {
-                int i = Integer.parseInt(arr[1]);
-                lst.completeTask(i);
-                Task t = lst.getTask(i);
-                System.out.println(div + "\tNice! I've marked this task as done:" + "\n\t  " + t + div);
             } else {
-                System.out.println(div + lst + div);
+                if (msg.equals("todo") || msg.equals("deadline") || msg.equals("event")) {
+                    System.out.println(div + "\tError: The description of \"" + msg + "\" should not be empty." + div);
+                } else {
+                    System.out.println(div + "\tError: The function \"" + msg + "\" does not exist." + div);
+                }
             }
             
         }
