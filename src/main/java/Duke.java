@@ -15,7 +15,6 @@ public class Duke {
                 "->What can I do for you?" + "\n\n");
 
         while (!userInput.equals("bye")) {
-
             userInput = inputScanner.nextLine();
 
             if (userInput.equals("bye")) {
@@ -31,10 +30,11 @@ public class Duke {
                     }
                     System.out.println("\n");
                 } else {
-                    System.out.println("\n//////There is NO order in my list now//////\n");
+                    System.out.println("\n//////There is NO task in your list now//////\n");
                 }
 
             } else if (userInput.startsWith("done")) {
+
                 int doneNo = Integer.parseInt(userInput.substring(5));
                 if (doneNo <= 0 || doneNo - 1 >= taskList.size()) {
                     System.out.println("\n-> Sorry, this task does not exist...\n");
@@ -42,10 +42,46 @@ public class Duke {
                     taskList.get(doneNo - 1).done();
                     System.out.println("\n-> Good job! I have marked this task as done:\n" + taskList.get(doneNo - 1).toString() + "\n");
                 }
+
+            } else if (userInput.startsWith("todo")) {
+
+                Todo newTodo = new Todo(userInput.substring(5));
+                taskList.add(newTodo);
+                System.out.println(
+                        "\n-> I have added a Todo:\n" +
+                        newTodo.toString() +
+                        "\nYou have " + taskList.size() + " tasks in your list currently.\n"
+                );
+
+            } else if (userInput.startsWith("deadline")) {
+
+                String[] splited = userInput.substring(9).split("/");
+                Deadline newDdl = new Deadline(splited[0], splited[1]);
+                taskList.add(newDdl);
+                System.out.println(
+                        "\n-> I have added a Deadline:\n" +
+                        newDdl.toString() +
+                        "\nYou have " + taskList.size() + " tasks in your list currently.\n"
+                );
+
+            } else if (userInput.startsWith("event")) {
+
+                String[] splited = userInput.substring(9).split("/");
+                Deadline newEvent = new Deadline(splited[0], splited[1]);
+                taskList.add(newEvent);
+                System.out.println(
+                        "\n-> I have added an Event:\n" +
+                        newEvent.toString() +
+                        "\nYou have " + taskList.size() + " tasks in your list currently.\n"
+                );
+
             } else {
 
-                taskList.add(new Task(userInput));
-                System.out.println("\n-> Added: " + userInput + "\n");
+                System.out.println(
+                        "\n-> please tap in your order correctly." +
+                        "\n-> todo {task content}" +
+                        "\n-> deadline {task content} {time}" +
+                        "\n-> event {task content} {time} \n");
 
             }
         }

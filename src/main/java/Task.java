@@ -1,8 +1,8 @@
 package main.java;
 
 public class Task {
-    private boolean status; //false for Not done; true for done
-    private String content;
+    protected boolean status; //false for Not done; true for done
+    protected String content;
 
     public Task(String content) {
         this.status = false;
