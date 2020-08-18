@@ -22,9 +22,27 @@ public class StringIdentifier {
             String index = str.substring(5, length);
             markDone(Integer.parseInt(index));
 
+        } else if (str.substring(0, 5).equals("todo ")) {
+            int length = str.length();
+            Todo newTodo = new Todo(str.substring(5, length));
+            store(newTodo);
+
+        } else if (str.substring(0, 9).equals("deadline ")) {
+            int length = str.length();
+            int end = str.indexOf("/by");
+            Deadline newDeadline = new Deadline(str.substring(9, end),
+                                                str.substring(end + 3, length));
+            store(newDeadline);
+
+        } else if (str.substring(0, 6).equals("event ")) {
+            int length = str.length();
+            int end = str.indexOf("/at");
+            Event newEvent = new Event(str.substring(6, end),
+                                       str.substring(end + 3, length));
+            store(newEvent);
+
         } else {
-            Task newTask = new Task(str);
-            store(newTask);
+            System.out.println("Incorrect input");
         }
 
         System.out.println("    ____________________________________________________________\n");
@@ -32,7 +50,9 @@ public class StringIdentifier {
 
     public void store(Task task) {
         this.lst.add(task);
-        System.out.println("     added: " + task.getDescription());
+        System.out.println("     Got it. I've added this task:\n"
+                         + "       " + task);
+        System.out.println("     Now you have " + this.lst.size() + " task(s) in the list.");
     }
 
     public void displayList() {
