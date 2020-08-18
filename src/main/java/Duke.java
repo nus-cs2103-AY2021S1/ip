@@ -18,8 +18,8 @@ public class Duke {
         Scanner myObj = new Scanner(System.in);
         String input;
 
-        // Initialise ArrayList to store input from user
-        ArrayList<String> userTexts = new ArrayList<String>();
+        // Initialise ArrayList to store tasks from user
+        ArrayList<Task> userTasks = new ArrayList<Task>();
 
         // Start chat
         do {
@@ -36,14 +36,37 @@ public class Duke {
                 break;
             }
 
+            // If user marks "done" mark task as isDone = true
+            if (input.contains("done ")) {
+                // Get the index stated after "done" by parsing the string
+                int index = Integer.parseInt(input.substring(5)) - 1;
+
+                // Try catch block in case task was not found
+                try {
+                    userTasks.get(index).setDone();
+                    System.out.println(servantSpeak
+                            + "    As you wish Sire. I have marked this task as done:\n"
+                            + "       [" + userTasks.get(index).getStatusIcon() + "] "
+                            + userTasks.get(index).getTask());
+                } catch (IndexOutOfBoundsException err) {
+                    System.out.println(servantSpeak
+                            + "    There seems to be an error your Grace. "
+                            + "That task cannot be found!");
+                }
+                System.out.println();
+                continue;
+            }
+
             // If user requests for list, display list
             if (input.equals("list")) {
                 int count = 1;
-                System.out.print(servantSpeak);
-                for (String i : userTexts) {
+                System.out.println(servantSpeak
+                        + "    Here are your tasks your Majesty:");
+                for (Task i : userTasks) {
                     System.out.println("    "
                             + count + ". "
-                            + i);
+                            + "[" + i.getStatusIcon() + "] "
+                            + i.getTask());
                     count++;
                 }
                 System.out.println();
@@ -51,10 +74,10 @@ public class Duke {
             }
 
             // Default: Add input from user into the ArrayList
-            userTexts.add(input);
+            userTasks.add(new Task(input));
             System.out.println(servantSpeak
-                    + "    added: " + input + "\n");
-        } while (!input.equalsIgnoreCase("bye"));
+                    + "    I have added the task: " + input + "\n");
+        } while (!input.equals("bye"));
 
     }
 }
