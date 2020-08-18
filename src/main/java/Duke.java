@@ -11,9 +11,11 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
+        String line = "---------------------------------------------------------";
 
         System.out.println("Hello! I'm Duke.");
         System.out.println("What can I do for you?");
+        System.out.println(line);
 
         String type = sc.next();
         String input = sc.nextLine().trim();
@@ -56,6 +58,7 @@ public class Duke {
                 System.out.println(task);
                 System.out.println("Now you have " + list.size() + " tasks in the list.");
             }
+            System.out.println(line);
             type = sc.next();
             input = sc.nextLine().trim();
         }

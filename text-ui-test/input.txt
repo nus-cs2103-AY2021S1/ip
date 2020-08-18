@@ -1,0 +1,12 @@
+todo watch CS2105 Lecture 2
+event zoom meeting /at Wednesday 10pm
+list
+done 1
+todo buy groceries
+deadline CS2103 iP Week 2 /by Thursday 23.59pm
+list
+done 2
+done 100
+done 3
+list
+bye
