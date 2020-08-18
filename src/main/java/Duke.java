@@ -27,6 +27,14 @@ public class Duke {
         System.out.println(task);
     }
 
+    void deleteTask(int taskNo) {
+        Task task = tasks.get(taskNo - 1);
+        tasks.remove(task);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+    }
+
     void list() {
         System.out.println("Here are the tasks in your list:");
         for(int i = 1; i <= tasks.size(); i++) {
@@ -56,6 +64,11 @@ public class Duke {
                     case "done": {
                         int taskNo = sc.nextInt();
                         completeTask(taskNo);
+                        break;
+                    }
+                    case "delete": {
+                        int taskNo = sc.nextInt();
+                        deleteTask(taskNo);
                         break;
                     }
                     case "todo": {
