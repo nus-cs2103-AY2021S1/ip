@@ -103,10 +103,12 @@ public class Chatbot {
             newTask = new Event(description, at);
         }
 
-        storedTasks.add(newTask);
+        if (newTask != null) {
+            storedTasks.add(newTask);
 
-        printWithDecorations("sInCe yOu'rE So hElPlEsS, " +
-                "i'lL ReMeMbEr \""+ newTask.toString() + "\" FoR YoU.");
+            printWithDecorations("sInCe yOu'rE So hElPlEsS, " +
+                    "i'lL ReMeMbEr \""+ newTask.toString() + "\" FoR YoU.");
+        }
     }
 
     private void list() {
