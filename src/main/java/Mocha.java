@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
-public class Duke {
+public class Mocha {
     public static void main(String[] args) {
 
         String horizontalLine = "_______________________________________________________" + "\r\n";
-        String nameIntro = "Hello, I'm Duke!";
+        String nameIntro = "Hello, I'm Mocha!";
         String greeting = "What's up today!";
         System.out.println(horizontalLine + "\r\n" + nameIntro + "\r\n" + greeting + "\r\n" + horizontalLine + "\r\n");
 
