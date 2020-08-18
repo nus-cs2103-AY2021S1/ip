@@ -32,11 +32,10 @@ public class Duke {
      * @param input
      */
     public void takeInput(String input) {
-
         String cmd = cleanInput(input);
         String[] words = cmd.split(" ");
         cmd = cmd.replace(" [sep]", "");
-        System.out.println("word "+words[1]);
+
         if (cmd.contains("bye")) this.running = false;
         else if (cmd.contains("done")){
             checkList(words[1]);
@@ -49,7 +48,6 @@ public class Duke {
 
     private void checkList(String index) {
         int i = Integer.parseInt(index)-1;//0 indexing
-        System.out.println(index);
         this.list[i].doTask();
         System.out.print(this.linebreaker);
         System.out.println("Nice! I've marked this task as done: \n\t"+this.list[i]);
