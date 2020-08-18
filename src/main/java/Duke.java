@@ -2,10 +2,34 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static class Task {
+        protected String description;
+        protected boolean isDone;
 
-        ArrayList<String> ls = new ArrayList<>();
-        int counter = 1;
+        public Task(String description) {
+            this.description = description;
+            this.isDone = false;
+        }
+
+        public String getStatusIcon() {
+            return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void markAsDone() {
+            isDone = true;
+        }
+
+        public String print() {
+            return "[" + getStatusIcon() + "] " + getDescription();
+        }
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Task> ls = new ArrayList<>();
         String horizontalDiv = "____________________________________________________________";
 
         // Using Scanner for Getting Input from User
@@ -23,16 +47,35 @@ public class Duke {
                 System.out.println(horizontalDiv);
                 break;
             } else if (str.equals("list")) {
-                for (String l : ls) {
-                    System.out.println(l);
+                System.out.println(horizontalDiv);
+                System.out.println("Here are the tasks in your list:");
+                for (int i = 0; i < ls.size(); i++) {
+                    Task task = ls.get(i);
+                    int num = i + 1;
+                    System.out.println(num + ". " + task.print());
+                }
+                System.out.println(horizontalDiv);
+            } else if (str.contains("done ")) {
+                int numToBeMarkedAsDone = Integer.parseInt(str.substring(str.length() - 1)) - 1;
+                if(numToBeMarkedAsDone >= ls.size()) {
+                    System.out.println(horizontalDiv);
+                    System.out.println("Sorry! The number does not exist in the list!");
+                    System.out.println(horizontalDiv);
+                } else {
+                    Task tsk = ls.get(numToBeMarkedAsDone);
+                    tsk.markAsDone();
+                    ls.set(numToBeMarkedAsDone, tsk);
+                    System.out.println(horizontalDiv);
+                    System.out.println("Nice! I've marked this task as done: ");
+                    System.out.println(tsk.print());
+                    System.out.println(horizontalDiv);
                 }
             } else {
-                ls.add(counter + ". " + str);
+                Task newTask = new Task(str);
+                ls.add(newTask);
                 System.out.println(horizontalDiv);
                 System.out.println("added: " + str);
                 System.out.println(horizontalDiv);
-
-                counter++;
             }
         }
     }
