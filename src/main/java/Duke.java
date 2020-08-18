@@ -31,7 +31,6 @@ public class Duke {
         String currInput = sc.nextLine();
 
         List<Task> inputList = new ArrayList<>();
-//        List<String> checkBox = new ArrayList<>();
 
         while (!currInput.equals("bye")) {
 

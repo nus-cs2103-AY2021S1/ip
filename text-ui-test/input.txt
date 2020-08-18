@@ -1,0 +1,6 @@
+todo hello
+deadline hi /by today
+event hey /at tmr
+list
+done 2
+bye
