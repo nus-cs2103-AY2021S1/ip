@@ -48,10 +48,10 @@ Your current scroll, Your Majesty:
 	2.[D][✓] return book  (by: Thursday)
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-DukeException: Your Majesty, there's no such agenda in my detailed records.
+Your Majesty, there's no such agenda in my detailed records.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-DukeException: Use /on for events, Your Majesty.
+Use /on for events, Your Majesty.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -60,31 +60,40 @@ Your current scroll, Your Majesty:
 	2.[D][✓] return book  (by: Thursday)
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-DukeException: I'm afraid I do not understand that command, Your Majesty.
+I'm afraid I do not understand that command, Your Majesty.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-DukeException: Do give me more details about this event, Your Majesty.
+Do give me more details about this event, Your Majesty.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-DukeException: Do give me more details about this todo, Your Majesty.
+Do give me more details about this todo, Your Majesty.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-DukeException: Do give me more details about this deadline, Your Majesty.
+Do give me more details about this deadline, Your Majesty.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-DukeException: Use /by for deadlines, Your Majesty.
+Use /by for deadlines, Your Majesty.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-DukeException: Use /on for events, Your Majesty.
+Use /on for events, Your Majesty.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-DukeException: Do give me more details about this deadline, Your Majesty.
+Do give me more details about this deadline, Your Majesty.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-DukeException: Do give me more details about this event, Your Majesty.
+Do give me more details about this event, Your Majesty.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-DukeException: Do give me more details about this todo, Your Majesty.
+Please enter valid numbers after your command, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Please enter valid numbers after your command, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Do give me more details about this todo, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Come again, Your Majesty?
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 

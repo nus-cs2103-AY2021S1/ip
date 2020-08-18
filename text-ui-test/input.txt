@@ -16,5 +16,8 @@ deadline code /for Monday
 event hackathon /by Tuesday
 deadline     
 event    
-todo         
+conquer $$$
+delete fbeg
+todo   
+       
 dismiss
