@@ -1,6 +1,6 @@
 public class Task {
-    String description;
-    boolean done = false;
+    protected String description;
+    protected boolean done = false;
 
     public Task(String description) {
         this.description = description;
@@ -10,7 +10,7 @@ public class Task {
         return this.done;
     }
 
-    public Task done() {
+    public Task markAsDone() {
         this.done = true;
         return this;
     }
