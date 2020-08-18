@@ -18,6 +18,7 @@ public class Duke {
     private static final String ADD_TODO = "todo";
     private static final String ADD_EVENT = "event";
     private static final String ADD_DEADLINE = "deadline";
+    private static final String DELETE_TASK = "delete";
 
     private static void processCommand(String input) {
         String[] inputList = input.split(" ");
@@ -38,6 +39,9 @@ public class Duke {
                         break;
                     case ADD_DEADLINE:
                         addDeadline(inputList);
+                        break;
+                    case DELETE_TASK:
+                        deleteTask(inputList);
                         break;
                     default:
                         throw new DukeUnknownCommandException(ERROR_MESSAGE + "\nWas the command valid?");
@@ -120,6 +124,22 @@ public class Duke {
         } else {
             throw new DukeIncompleteCommandException(ERROR_MESSAGE
                     + "\nDid you provide a deadline and description for this deadline?");
+        }
+    }
+
+    private static void deleteTask(String[] inputList)
+            throws DukeInvalidArgumentException, DukeIncompleteCommandException {
+        if (inputList.length > 1) {
+            String taskIndex = inputList[1];
+            try {
+                int index = Integer.parseInt(taskIndex) - 1;
+                Task task = taskList.remove(index);
+                printWithDivider("Noted. I've deleted this task:\n" + task.toString());
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                throw new DukeInvalidArgumentException(ERROR_MESSAGE + "\nDid you provide a valid index?");
+            }
+        } else {
+            throw new DukeIncompleteCommandException(ERROR_MESSAGE + "\nWas an index given?");
         }
     }
 
