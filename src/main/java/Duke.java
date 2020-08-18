@@ -1,3 +1,5 @@
+import main.java.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,7 +17,7 @@ public class Duke {
     // Note that all the outputs are formatted with two spaces before.
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList tempStorage = new ArrayList();
+        ArrayList<Task> taskList = new ArrayList();
         // welcome message
         horiLine(60);
         System.out.println("  Hello! I'm IntelliGent!\n  What can I do for you?");
@@ -30,13 +32,24 @@ public class Duke {
                 break;
             } else if (nextInput.equals("list")) {
                 horiLine(60);
-                for (int i = 0; i < tempStorage.size(); i++) {
-                    System.out.println("  " + (i+1) + ". " + tempStorage.get(i));
+                for (int i = 0; i < taskList.size(); i++) {
+                    System.out.println("  " + (i+1) + ". " + taskList.get(i));
                 }
                 horiLine(60);
-            } else {
+            } else if (nextInput.contains("done")) {
                 horiLine(60);
-                tempStorage.add(nextInput);
+                String[] commandComponents = nextInput.split(" ");
+                int taskIndex = Integer.parseInt(commandComponents[1]) - 1;
+                Task toMark = taskList.get(taskIndex);
+                toMark.markDone();
+                System.out.println("  Nice! I've marked this task as done:");
+                System.out.println("    " + toMark.toString());
+                horiLine(60);
+            } else {
+                // adding tasks
+                horiLine(60);
+                Task taskToAdd = new Task(nextInput);
+                taskList.add(taskToAdd);
                 System.out.println("  added: " + nextInput);
                 horiLine(60);
             }
