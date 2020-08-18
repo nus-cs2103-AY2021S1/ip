@@ -8,9 +8,17 @@ public class Deadlines extends Task {
         this.deadlineTime = deadlineTime;
     }
 
-    public static void createDeadline(String taskTitle, String deadlineTime, ArrayList<Task> tasks) {
+    public static void addDeadlineTask(String taskTitle, String deadlineTime, ArrayList<Task> tasks) {
         Deadlines newDeadline = new Deadlines(taskTitle, deadlineTime);
         tasks.add(newDeadline);
+
+        String outputMsg = "\n___________________________________________________________"
+                + "\n (^.^)"
+                + "\n Got it. I've added this task:"
+                + "\n     " + tasks.size() + "." + tasks.get(tasks.size() - 1)
+                + "\n Now you have " + tasks.size() + " tasks in the list."
+                + "\n___________________________________________________________\n";
+        System.out.println(outputMsg);
     }
 
     @Override

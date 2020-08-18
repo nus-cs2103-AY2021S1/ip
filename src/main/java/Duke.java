@@ -13,90 +13,6 @@ public class Duke {
         System.out.println(greetingMsg);
     }
 
-    public static void addTodoTask(String taskTitle, ArrayList<Task> tasks) {
-        ToDos.createTodoTask(taskTitle, tasks);
-
-        String outputMsg = "\n___________________________________________________________"
-                + "\n (^.^)"
-                + "\n Got it. I've added this task:"
-                + "\n     " + tasks.size() + "." + tasks.get(tasks.size() - 1)
-                + "\n Now you have " + tasks.size() + " tasks in the list."
-                + "\n___________________________________________________________\n";
-        System.out.println(outputMsg);
-
-    }
-
-    public static void addDeadlineTask(String taskTitle, String deadlineTime, ArrayList<Task> tasks) {
-        Deadlines.createDeadline(taskTitle, deadlineTime, tasks);
-
-        String outputMsg = "\n___________________________________________________________"
-                + "\n (^.^)"
-                + "\n Got it. I've added this task:"
-                + "\n     " + tasks.size() + "." + tasks.get(tasks.size() - 1)
-                + "\n Now you have " + tasks.size() + " tasks in the list."
-                + "\n___________________________________________________________\n";
-        System.out.println(outputMsg);
-
-    }
-
-    public static void addEventTask(String taskTitle, String eventTime, ArrayList<Task> tasks) {
-        Events.createEvent(taskTitle, eventTime, tasks);
-
-        String outputMsg = "\n___________________________________________________________"
-                + "\n (^.^)"
-                + "\n Got it. I've added this task:"
-                + "\n     " + tasks.size() + "." + tasks.get(tasks.size() - 1)
-                + "\n Now you have " + tasks.size() + " tasks in the list."
-                + "\n___________________________________________________________\n";
-        System.out.println(outputMsg);
-
-
-    }
-
-    public static void getAllTasks(ArrayList<Task> tasks) {
-        String outputMsg = "";
-
-        if (tasks.isEmpty()) {
-            outputMsg = "___________________________________________________________"
-                    + "\n (⊙ ‿ ⊙)"
-                    + "\n Task list is empty, please try to add some tasks first."
-                    + "\n___________________________________________________________\n";
-        } else {
-            outputMsg = "___________________________________________________________"
-                    + "\n (⊙ ‿ ⊙)"
-                    + "\n You have " + tasks.size() + " tasks in total."
-                    + "\n Here they are:";
-            for (int i = 0; i < tasks.size(); i++) {
-                outputMsg += "\n      " + (i + 1) + ". " + tasks.get(i);
-            }
-            outputMsg += "\n___________________________________________________________\n";
-        }
-
-        System.out.println(outputMsg);
-    }
-
-    public static void doneTask(int index, ArrayList<Task> tasks) {
-        tasks.get(index - 1).markAsDone();
-        String outputMsg = "___________________________________________________________"
-                + "\n (ﾉﾟ0ﾟ)ﾉ~"
-                + "\n Congratulations from DukeBT! You have done 1 task!"
-                + "\n The task below has been marked as done:"
-                + "\n      Task #" + index + ". " + tasks.get(index - 1)
-                + "\n___________________________________________________________\n";
-        System.out.println(outputMsg);
-    }
-
-    public static void deleteTask(int index, ArrayList<Task> tasks) {
-        String outputMsg = "___________________________________________________________"
-                + "\n (ʘ‿ʘ)"
-                + "\n Noted. This task has been removed from your task list:"
-                + "\n      Task #" + index + ". " + tasks.get(index - 1)
-                + "\n Now you have "+(tasks.size()-1)+" tasks in the list."
-                + "\n___________________________________________________________\n";
-        tasks.remove(index - 1);
-        System.out.println(outputMsg);
-    }
-
     public static void help() {
         String commandList = "**************************************************************"
                 + "\n ┗( ⊙.⊙ )┛ "
@@ -176,7 +92,8 @@ public class Duke {
 
     public static void bye() {
         String byeMsg = "\n___________________________________________________________"
-                + "\n Bye. Hope to see you again soon! |^_^|┛"
+                + "\n |^_^|┛"
+                + "\n Bye. Hope to see you again soon!"
                 + "\n___________________________________________________________\n";
 
         System.out.println(byeMsg);
@@ -192,13 +109,13 @@ public class Duke {
 
         while (!inputMsg.equals("bye")) {
             if (inputMsg.equals("list")) {
-                getAllTasks(tasks);
+                Task.getAllTasks(tasks);
             } else if (inputMsg.equals("help")) {
                 help();
             } else if (inputMsg.startsWith("done")) {
                 try {
-                    int index = Integer.parseInt(inputMsg.split(" ")[1]);
-                    doneTask(index, tasks);
+                    int index = Integer.parseInt(inputMsg.split("done ")[1]);
+                    Task.doneTask(index, tasks);
                 } catch (IndexOutOfBoundsException e) {
                     invalidDoneTaskIndex(tasks.size());
                 }
@@ -206,7 +123,7 @@ public class Duke {
                 String taskTitle;
                 try {
                     taskTitle = inputMsg.split("todo ")[1];
-                    addTodoTask(taskTitle, tasks);
+                    ToDos.addTodoTask(taskTitle, tasks);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     invalidToDo();
                 }
@@ -216,7 +133,7 @@ public class Duke {
                 try {
                     taskTitle = inputMsg.split("deadline ")[1].split("/by")[0];
                     deadlineTime = inputMsg.split("deadline ")[1].split("/by")[1];
-                    addDeadlineTask(taskTitle, deadlineTime, tasks);
+                    Deadlines.addDeadlineTask(taskTitle, deadlineTime, tasks);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     invalidDeadline();
                 }
@@ -226,14 +143,14 @@ public class Duke {
                 try {
                     taskTitle = inputMsg.split("event ")[1].split("/at")[0];
                     eventTime = inputMsg.split("event ")[1].split("/at")[1];
-                    addEventTask(taskTitle, eventTime, tasks);
+                    Events.addEventTask(taskTitle, eventTime, tasks);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     invalidEvent();
                 }
             } else if (inputMsg.startsWith("delete")) {
                 try {
-                    int index = Integer.parseInt(inputMsg.split(" ")[1]);
-                    deleteTask(index, tasks);
+                    int index = Integer.parseInt(inputMsg.split("delete ")[1]);
+                    Task.deleteTask(index, tasks);
                 } catch (IndexOutOfBoundsException e) {
                     invalidDelete(tasks.size());
                 }

@@ -8,13 +8,21 @@ public class Events extends Task {
         this.eventTime = eventTime;
     }
 
-    public static void createEvent(String taskTitle, String eventTime, ArrayList<Task> tasks) {
+    public static void addEventTask(String taskTitle, String eventTime, ArrayList<Task> tasks) {
         Events newEvent = new Events(taskTitle, eventTime);
         tasks.add(newEvent);
+
+        String outputMsg = "\n___________________________________________________________"
+                + "\n (^.^)"
+                + "\n Got it. I've added this task:"
+                + "\n     " + tasks.size() + "." + tasks.get(tasks.size() - 1)
+                + "\n Now you have " + tasks.size() + " tasks in the list."
+                + "\n___________________________________________________________\n";
+        System.out.println(outputMsg);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString()+ " (at:" + eventTime + ")";
+        return "[E]" + super.toString() + " (at:" + eventTime + ")";
     }
 }
