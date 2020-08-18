@@ -13,7 +13,7 @@ public class Task {
 
     public String markAsDone() {
         this.isDone = true;
-        return "―――― Alright, marked the following task as done: \n" + this.toString();
+        return "----- Alright, marked the following task as done: \n" + this.toString();
     }
 
     @Override
