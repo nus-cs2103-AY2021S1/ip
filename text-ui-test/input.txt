@@ -1,18 +1,29 @@
 todo readbook
+todo
 deadline return book /by June 6th
 event project meeting /at Aug 6th 2-4pm
 todo join sports club
 done 1
 done 4
 done 8
+done3
+done
 todo borrow book
 list
+deadline
 deadline return book /by Sunday
+deadline      return home /by today
+ deadline go home /by tomorrow
 deadline homework /by
+event
+event meeting
 event project meeting /at Mon 2-4pm
+eventproject meeting/ at Mon
 event exam /at
 delete 2
 delete 3
 delete 7
+delete2
+delete
 bey
 bye

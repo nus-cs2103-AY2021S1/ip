@@ -1,5 +1,5 @@
 public class DukeException extends Exception {
-    String line = "____________________________________________________________";
+    String line = "___________________________________________________________________________________";
     String smallSpace = "    ";
     String bigSpace = "     ";
 
