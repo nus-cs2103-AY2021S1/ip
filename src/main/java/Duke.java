@@ -67,7 +67,7 @@ public class Duke {
                         break;
                 }
             } catch (ArrayIndexOutOfBoundsException
-                    | NumberFormatException ex){
+                    | IllegalArgumentException ex){
                 output = printDesign(ex.getMessage());
             }
 
