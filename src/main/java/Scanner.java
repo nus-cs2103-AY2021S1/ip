@@ -43,7 +43,9 @@ public class Scanner {
                         break;
                     default:
                         Task addedTask = userTaskList.addItem(line);
-                        System.out.println("added: " + addedTask);
+                        System.out.println(addedTask == null
+                                           ? "Invalid task."
+                                           :"added: " + addedTask);
                         break;
                 }
             }
