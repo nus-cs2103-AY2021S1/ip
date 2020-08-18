@@ -35,7 +35,7 @@ public class Duke {
      **/
     public static void addTask(Task newTask) {
         stored_task.add(newTask);
-        System.out.println("Quack! I have added: " + newTask + " \uD83C\uDF0A");
+        System.out.println("Quack! I have added: " + newTask);
         int numOfTasks = stored_task.size();
         if (numOfTasks == 1) {
             System.out.println("My duck senses tell me you have 1 task in the list.");
@@ -58,8 +58,7 @@ public class Duke {
                 System.out.println("This task is already done: " + t.getDescription());
             } else {
                 t.markAsDone();
-                System.out.println("Quack! I have marked this task as done: \n" +
-                        t + " \uD83C\uDF0A");
+                System.out.println("Quack! I have marked this task as done: \n" + t);
             }
         }
     }
@@ -74,10 +73,10 @@ public class Duke {
     public static void main(String[] args) {
         String line = "____________________________________________________________";
         String greeting_message = line +
-                "\n Quack! I am Duck \uD83E\uDD86" +
+                "\n Quack! I am Duck" +
                 "\n How can I help you today?\n" + line;
         String exit_message = line +
-                "\n Waddling off now. See you soon! \uD83D\uDC4B\uD83C\uDFFB \n" + line;
+                "\n Waddling off now. See you soon! \n" + line;
         Scanner sc = new Scanner(System.in);
 
         System.out.println(greeting_message);
