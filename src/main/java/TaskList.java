@@ -21,17 +21,17 @@ class TaskList {
     }
 
     public String toString() {
+        String textIndentation = "     ";
         if (this.isEmpty()) {
-            return "No tasks found";
+            return textIndentation + "No tasks found";
         } else {
             StringBuilder output = new StringBuilder();
-            String textIndentation = "     ";
             int listSize = this.taskArrayList.size();
             for (int i = 0; i < listSize; i++) {
                 String eachTaskString = textIndentation + (i + 1) + ". " + this.taskArrayList.get(i) + "\n";
                 output.append(eachTaskString);
             }
-            return output.toString();
+            return output.deleteCharAt(output.length()-1).toString();
         }
     }
 }

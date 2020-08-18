@@ -7,6 +7,7 @@ public class Duke {
     private static String greetMessage = Duke.textIndentation + "Hello! I'm Duke\n" +
             Duke.textIndentation + "What can I do for you?";
     private static String exitMessage = Duke.textIndentation + "Bye. Hope to see you again soon!";
+    private static String addTaskMessage = Duke.textIndentation + "Got it. I've added this task:";
     private static String completeTaskMessage = Duke.textIndentation + "Nice! I've marked this task as done:";
     private static TaskList taskList;
 
@@ -38,9 +39,21 @@ public class Duke {
                     Duke.printText(Duke.textIndentation + "Please enter a valid task index");
                 }
 
-            } else {
-                Duke.taskList.addToList(new Task(inputMessage));
-                Duke.printText(Duke.textIndentation + "added: " + inputMessage);
+            } else if (inputMessage.toLowerCase().startsWith("todo ")) {
+                ToDo newToDo = new ToDo(inputMessage);
+                Duke.taskList.addToList(newToDo);
+                Duke.printText(Duke.addTaskMessage + "\n  " + Duke.textIndentation + newToDo);
+
+            } else if (inputMessage.toLowerCase().startsWith("deadline ")) {
+                Deadline newDeadline = new Deadline(inputMessage);
+                Duke.taskList.addToList(newDeadline);
+                Duke.printText(Duke.addTaskMessage + "\n  " + Duke.textIndentation + newDeadline);
+
+            } else if (inputMessage.toLowerCase().startsWith("event ")) {
+                Event newEvent = new Event(inputMessage);
+                Duke.taskList.addToList(newEvent);
+                Duke.printText(Duke.addTaskMessage + "\n  " + Duke.textIndentation + newEvent);
+
             }
         }
     }
