@@ -11,6 +11,12 @@ public class IPbot {
     private static final String LIST_CMD = "list";
     private static final String DONE_CMD = "done ";
 
+    // user input
+    private static final Scanner sc = new Scanner(System.in);
+
+    // task list
+    private static final ArrayList<Task> tasks = new ArrayList<>();
+
     /**
      * Entry point of the program.
      * @param args command line arguments
@@ -18,50 +24,69 @@ public class IPbot {
     public static void main(String[] args) {
         print("Hello from iPbot, what can I do for you?");
 
-        // user input
-        final Scanner sc = new Scanner(System.in);
-
-        // task list
-        final ArrayList<Task> tasks = new ArrayList<>();
-
         Stream.generate(sc::nextLine)
             .takeWhile(input -> !EXIT_CMD.equals(input))
             .forEach(input -> {
                 final String output;
                 if (LIST_CMD.equals(input)) {
                     // list tasks
-                    output = tasks.isEmpty()
-                            ? "No tasks added."
-                            : tasks.stream()
-                                .map(new Function<Task, String>() {
-                                    int id = 1;
-                                    public String apply(Task t) {
-                                        return String.format("%d. %s", id++, t.toString());
-                                    }
-                                })
-                                .collect(Collectors.joining("\n"));
+                    output = listTasks();
                 } else if (input.startsWith(DONE_CMD)) {
                     // mark a task as done
                     final int id = Integer.parseInt(input.substring(DONE_CMD.length()));
-                    final Task toComplete = tasks.get(id - 1);
-                    if (toComplete.getDoneStatus()) {
-                        // already done
-                        output = "Task already done:\n" + toComplete;
-                    } else {
-                        // mark as done
-                        toComplete.markAsDone();
-                        output = "Task done:\n" + toComplete;
-                    }
+                    output = completeTask(tasks.get(id - 1));
                 } else {
                     // add task
-                    tasks.add(new Task(input));
-                    output = "added: " + input;
+                    output = addTasks(new Task(input));
                 }
                 print(output);
             });
 
         sc.close();
         print("Goodbye!");
+    }
+
+    /**
+     * Adds a task to the list of tasks.
+     * @param toAdd the task to be added
+     * @return String containing output generated from iPbot
+     */
+    private static String addTasks(Task toAdd) {
+        tasks.add(toAdd);
+        return "added: " + toAdd.getDescription();
+    }
+
+    /**
+     * Queries the list of tasks and displays them.
+     * @return String containing output generated from iPbot
+     */
+    private static String listTasks() {
+        return tasks.isEmpty()
+                ? "No tasks added."
+                : tasks.stream()
+                    .map(new Function<Task, String>() {
+                        int id = 1;
+                        public String apply(Task t) {
+                            return String.format("%d. %s", id++, t.toString());
+                        }
+                    })
+                    .collect(Collectors.joining("\n"));
+    }
+
+    /**
+     * Marks a task as done.
+     * @param toComplete the task to be marked as done
+     * @return String containing output generated from iPbot
+     */
+    private static String completeTask(Task toComplete) {
+        if (toComplete.getDoneStatus()) {
+            // already done
+            return "Task already done:\n" + toComplete;
+        } else {
+            // mark as done
+            toComplete.markAsDone();
+            return "Task done:\n" + toComplete;
+        }
     }
 
     /**
