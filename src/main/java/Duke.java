@@ -115,6 +115,8 @@ public class Duke {
         List<Task> list = new ArrayList<>();
         int count = 0;
         String input = sc.nextLine();
+        String prefix = input.split(" ")[0];
+        Command type;
         while (!input.equals("bye")) {
             try {
                 if (input.equals("list")) {
