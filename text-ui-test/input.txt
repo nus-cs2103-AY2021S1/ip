@@ -1,14 +1,19 @@
-todo read book
-deadline return book /by June 6th
-event project meeting /at Aug 6th 2-4pm
-todo join sports club
+hi!
+todo
+todo this task
+deadline
+deadline this
+deadline this /by
+deadline this /by that
+event
+event this /by that
+event this /at
+event this /at that
 list
-done 1
+done
+done x
+done the first task
 done 4
-todo borrow book
-list
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
-deadline do homework /by no idea :-p
+done 1
 list
 bye
