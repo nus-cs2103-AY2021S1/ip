@@ -24,7 +24,7 @@ public class Duke {
             throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid");
         }
         int taskNo = Character.getNumericValue(task.charAt(5));
-        if (task.length() <= 5 || taskNo < 0 || taskNo >= taskList.size()) {
+        if (taskNo < 1 || taskNo > taskList.size()) {
             throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid");
         }
         System.out.println("\tNice! I've marked this task as done:");
@@ -63,6 +63,7 @@ public class Duke {
         String at = stringArr[1];
         Duke.addTask(new Events(task, at));
     }
+
     public static void main(String[] args) throws DukeRunTimeException{
         Scanner sc = new Scanner(System.in);
         Duke.intro();
@@ -86,7 +87,6 @@ public class Duke {
                         } else if (task.startsWith("event")) {
                             handleEvent(task);
                         } else {
-                            //System.out.println("\tSorry handsome but I'm not sure about this command :)");
                             throw new DukeInvalidCommandException("Sorry handsome but I'm not sure about this command :)");
                         }
                         break;
