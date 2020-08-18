@@ -1,10 +1,34 @@
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        String welcomeGraphic = "                      .,,uod8B8bou,,.\n" +
+                "              ..,uod8BBBBBBBBBBBBBBBBRPFT?l!i:.\n" +
+                "         ,=m8BBBBBBBBBBBBBBBRPFT?!||||||||||||||\n" +
+                "         !...:!TVBBBRPFT||||||||||!!^^\"\"'   ||||\n" +
+                "         !.......:!?|||||!!^^\"\"'            ||||\n" +
+                "         !.........||||                     ||||\n" +
+                "         !.........||||       Welcome!      ||||\n" +
+                "         !.........||||                     ||||\n" +
+                "         !.........||||      I am your      ||||\n" +
+                "         !.........||||  personal assistant ||||\n" +
+                "         !.........||||       Zachary       ||||\n" +
+                "         `.........||||                    ,||||\n" +
+                "          .;.......||||               _.-!!|||||\n" +
+                "   .,uodWBBBBb.....||||       _.-!!|||||||||!:'\n" +
+                "!YBBBBBBBBBBBBBBb..!|||:..-!!|||||||!iof68BBBBBb....\n" +
+                "!..YBBBBBBBBBBBBBBb!!||||||||!iof68BBBBBBRPFT?!::   `.\n" +
+                "!....YBBBBBBBBBBBBBBbaaitf68BBBBBBRPFT?!:::::::::     `.\n" +
+                "!......YBBBBBBBBBBBBBBBBBBBRPFT?!::::::;:!^\"`;:::       `.\n" +
+                "!........YBBBBBBBBBBRPFT?!::::::::::^''...::::::;         iBBbo.\n" +
+                "`..........YBRPFT?!::::::::::::::::::::::::;iof68bo.      WBBBBbo.\n" +
+                "  `..........:::::::::::::::::::::::;iof688888888888b.     `YBBBP^'\n" +
+                "    `........::::::::::::::::;iof688888888888888888888b.     `\n" +
+                "      `......:::::::::;iof688888888888888888888888888888b.\n" +
+                "        `....:::;iof688888888888888888888888888888888899fT!\n" +
+                "          `..::!8888888888888888888888888888888899fT|!^\"'\n" +
+                "            `' !!988888888888888888888888899fT|!^\"'\n" +
+                "                `!!8888888888888888899fT|!^\"'\n" +
+                "                  `!988888888899fT|!^\"'\n" +
+                "                    `!9899fT|!^\"'";
+        System.out.println(welcomeGraphic);
     }
 }
