@@ -5,9 +5,13 @@ import java.util.Scanner;
 // The bot that handles inputs and give responses
 public class Bot {
     private static final String divider = "\t____________________________________________________________\n";
+    // Before A-TextUiTesting, scanner is defined in the getInput() method,
+    // and everything is fine if Duke.java is run directly in terminal.
+    // However, it might cause issues when we use script to automate text ui testing (I find that out when I implement TextUiTesting),
+    // From A-TextUiTesting onward, scanner is defined outside of the getInput() method.
 
+    Scanner sc = new Scanner(System.in);
     List<Task> taskList = new LinkedList<>();
-
 
     //start the bot
     public void start() {
@@ -38,7 +42,6 @@ public class Bot {
 
     //get the next input
     private String getInput() {
-        Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
 
