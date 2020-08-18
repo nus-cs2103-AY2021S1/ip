@@ -15,7 +15,7 @@ public class Duke {
                 "=========================================================================");
 
         Scanner scanner = new Scanner(System.in);
-        List<String> pastInputs = new ArrayList<>();
+        List<Task> pastInputs = new ArrayList<>();
         boolean terminated = false;
 
         while (!terminated) {
@@ -31,13 +31,27 @@ public class Duke {
                 if (pastInputs.size() == 0) {
                     System.out.println("Duke says: No past inputs found");
                 } else {
+                    System.out.println("Here are your tasks:");
                     for (int i = 1; i <= pastInputs.size(); i++) {
                         System.out.println(i + ". " + pastInputs.get(i - 1));
                     }
+                    System.out.println("If you wish to mark a task as completed, input \"done <task number>\"");
+                }
+            } else if (userInput.substring(0,5).equals("done ")){
+                //checks the formatting of user input
+                try {
+                    int taskNumber = Integer.parseInt(userInput.substring(5,6));
+                    Task doneTask = pastInputs.get(taskNumber - 1);
+                    doneTask.markDone();
+                    pastInputs.set(taskNumber - 1, doneTask);
+                    System.out.println("Duke says: Good Job! I've marked this task as done:");
+                    System.out.println(doneTask);
+                } catch(Exception ex) {
+                    System.out.println("Duke says: Please try again with a valid task number");
                 }
             } else {
-                pastInputs.add(userInput);
-                System.out.println("Duke added: " + userInput);
+                pastInputs.add(new Task(userInput));
+                System.out.println("Duke added into your task list: " + userInput);
             }
             System.out.println("=========================================================================");
         }
