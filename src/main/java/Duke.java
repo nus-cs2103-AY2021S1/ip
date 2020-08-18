@@ -1,8 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
 
-    // Constant variables
+    // Constants
     public static final String LOGO =
             " ____        _\n"
             + " |  _ \\ _   _| | _____\n"
@@ -13,7 +15,7 @@ public class Duke {
     public static final String BOTTOM_LINE = "\n ____________________________________________________________";
 
     // Static variables
-    public static Task[] tasks = new Task[100];
+    public static List<Task> tasks = new ArrayList<>();
     public static int numTasks = 0;
 
     // Add top and bottom lines to provided message
@@ -39,9 +41,9 @@ public class Duke {
             String tasksList = "";
             for (int i = 0; i < numTasks; i++) {
                 if (i == 0) {
-                    tasksList = " 1. " + tasks[i];
+                    tasksList = " 1. " + tasks.get(i);
                 } else {
-                    tasksList = tasksList + "\n " + (i + 1) + ". " + tasks[i];
+                    tasksList = tasksList + "\n " + (i + 1) + ". " + tasks.get(i);
                 }
             }
 
@@ -73,8 +75,34 @@ public class Duke {
                             // then check if the taskNumber provided is in range
                             if (taskNumber > numTasks || taskNumber <= 0) {
                                 throw new DukeException("Please enter a valid task number.");
+                            } else if (tasks.get(taskNumber - 1).isDone) {
+                                throw new DukeException("You have already marked this task as done!");
                             } else {
-                                tasks[taskNumber - 1] = tasks[taskNumber - 1].markAsDone();
+                                tasks.set(taskNumber - 1, tasks.get(taskNumber - 1).markAsDone());
+                            }
+
+                        } else {
+                            throw new DukeException("Please enter a valid task number.");
+                        }
+                    }
+
+                } else if (firstWord.equals("delete")) {
+                    if (inputDataWords.length != 2) {
+                        throw new DukeException("Invalid command provided. Please try again.");
+                    } else {
+                        // check if second word is an integer
+                        if (isInteger(inputDataWords[1])) {
+                            int taskNumber = Integer.parseInt(inputDataWords[1]);
+
+                            // then check if the taskNumber provided is in range
+                            if (taskNumber > numTasks || taskNumber <= 0) {
+                                throw new DukeException("Please enter a valid task number.");
+                            } else {
+                                numTasks--;
+                                System.out.println(formatMessage("Noted. I've removed this task:\n    " +
+                                        tasks.get(taskNumber - 1) +
+                                        "\n Now you have " + numTasks + " task(s) in the list."));
+                                tasks.remove(taskNumber - 1);
                             }
 
                         } else {
@@ -86,9 +114,9 @@ public class Duke {
                     if (inputDataWords.length < 2) {
                         throw new DukeException("The description of a " + firstWord + " cannot be empty.");
                     } else {
-                        tasks[numTasks] = new ToDo(inputData.split("todo ")[1]);
+                        tasks.add(numTasks, new ToDo(inputData.split("todo ")[1]));
                         System.out.println(formatMessage("Got it. I've added this task:\n    " +
-                                tasks[numTasks] +
+                                tasks.get(numTasks) +
                                 "\n Now you have " + (numTasks + 1) + " task(s) in the list."));
                         numTasks++;
                     }
@@ -101,11 +129,11 @@ public class Duke {
                                 "   Please re-enter the desired deadline task\n" +
                                 "   (e.g. deadline xxx /by zzz)");
                     } else {
-                        tasks[numTasks] = new Deadline(inputData.split("deadline ")[1].split("/by ")[0],
-                                inputData.split("/by ")[1]);
+                        tasks.add(numTasks, new Deadline(inputData.split("deadline ")[1].split("/by ")[0],
+                                inputData.split("/by ")[1]));
 
                         System.out.println(formatMessage("Got it. I've added this task:\n    " +
-                                tasks[numTasks] +
+                                tasks.get(numTasks) +
                                 "\n Now you have " + (numTasks + 1) + " task(s) in the list."));
                         numTasks++;
                     }
@@ -118,10 +146,10 @@ public class Duke {
                                 "   Please re-enter the desired event task\n" +
                                 "   (e.g. event xxx /at zzz)");
                     } else {
-                        tasks[numTasks] = new Event(inputData.split("event ")[1].split("/at ")[0],
-                                inputData.split("/at ")[1]);
+                        tasks.add(numTasks, new Event(inputData.split("event ")[1].split("/at ")[0],
+                                inputData.split("/at ")[1]));
                         System.out.println(formatMessage("Got it. I've added this task:\n    " +
-                                        tasks[numTasks] +
+                                        tasks.get(numTasks) +
                                         "\n Now you have " + (numTasks + 1) + " task(s) in the list."));
                         numTasks++;
                     }
