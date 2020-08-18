@@ -28,6 +28,7 @@ public class Duke {
     private static void displayList() {
         int index = 1;
         System.out.println(horizL);
+        System.out.println(INDENT + "Quack! These are the tasks in your list: ");
         for (Task task : lst) {
             System.out.println(INDENT + index + ". " + task);
             index++;
@@ -35,9 +36,31 @@ public class Duke {
         System.out.println(horizL);
     }
 
-    private static void addTask(String input) {
-        Task t1 = new Task(input);
+    private static void addTodo(String input) {
+        Task t1 = new Todo(input);
         lst.add(t1);
+        System.out.println(horizL);
+        System.out.println(INDENT + "Quack! Added: " + t1);
+        System.out.println(INDENT + "Now you have " + lst.size() + " tasks in the list.");
+        System.out.println(horizL);
+    }
+
+    //This method adds either Deadline or Event
+    private static void addDorE(String input, String type) {
+        String[] splitted = input.split("/");
+        String time = splitted[1].split(" ", 2)[1];
+        String description = splitted[0].split(" ", 2)[1];
+        Task t1;
+        if (type.equals("deadline")) {
+            t1 = new Deadline(description, time);
+        } else {
+            t1 = new Event(description, time);
+        }
+        lst.add(t1);
+        System.out.println(horizL);
+        System.out.println(INDENT + "Quack! Added: " + t1);
+        System.out.println(INDENT + "Now you have " + lst.size() + " tasks in the list.");
+        System.out.println(horizL);
     }
 
     private static void checkTask(int ind) {
@@ -52,20 +75,25 @@ public class Duke {
         Duke.intro();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
-            String input = sc.nextLine();
+            String initialInput = sc.nextLine();
+            String input = initialInput.strip();
             if (input.equalsIgnoreCase("bye")) {
                 System.out.print(horizL);
                 break;
             } else if (input.equalsIgnoreCase("list")) {
                 Duke.displayList();
-            } else if (input.indexOf("done") == 0) {
+            } else if (input.toLowerCase().indexOf("done") == 0) {
                 int ind = Integer.parseInt(input.split(" ")[1]);
                 Duke.checkTask(ind);
+            } else if (input.toLowerCase().indexOf("todo") == 0) {
+                String todo = input.split(" ", 2)[1];
+                Duke.addTodo(todo);
+            } else if (input.toLowerCase().indexOf("deadline") == 0) {
+                Duke.addDorE(input, "deadline");
+            } else if (input.toLowerCase().indexOf("event") == 0) {
+                Duke.addDorE(input, "event");
             } else {
-                    Duke.addTask(input);
-                    System.out.println(horizL);
-                    System.out.println(INDENT + "Quack! Added: " + input);
-                    System.out.println(horizL);
+
             }
         }
         Duke.ending();
