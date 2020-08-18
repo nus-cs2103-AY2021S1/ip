@@ -7,8 +7,9 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getDescription() {
-        return this.description;
+    public String toString() {
+        return "[" + getStatusIcon() + "] "
+                + this.description;
     }
 
     public void setDone() {
