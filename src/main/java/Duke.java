@@ -114,8 +114,9 @@ public class Duke {
         System.out.println(output("Hello! I'm Duke\n\t  What can I do for you?"));
         List<Task> list = new ArrayList<>();
         int count = 0;
-        try {
-            while (true) {
+        boolean flag = true;
+        while (flag) {
+            try {
                 String input = sc.nextLine();
                 Command type;
                 if (input.equals("bye")) {
@@ -129,30 +130,38 @@ public class Duke {
                 } else {
                     type = Command.TASK;
                 }
-                if (input.equals("list")) {
-                    System.out.println(horizontalLine + "\n\t  " + "Here are the tasks in your list:");
-                    for (int i = 0; i < count; i++) {
-                        System.out.println("\t  " + (i + 1) + "." + list.get(i));
-                    }
-                    System.out.println(horizontalLine + "\n");
-                } else if (isDoneCommand(input, count)) {
-                    list.get(n - 1).markAsDone();
-                    System.out.println(output("Nice! I've marked this task as done:\n\t    " + list.get(n - 1)));
-                } else if (isDeleteCommand(input, count)) {
-                    Task toDelete = list.get(m - 1);
-                    list.remove(toDelete);
-                    System.out.println(output("Noted. I've removed this task:\n\t    " + toDelete +
-                            "\n\t  Now you have " + list.size()));
-                    count--;
-                } else {
-                    Task task = generate(input);
-                    list.add(count++, task);
-                    System.out.println(output("Got it. I've added this task:\n\t    " + task +
-                            "\n\t  Now you have " + count + " tasks in the list."));
+                switch (type) {
+                    case LIST:
+                        System.out.println(horizontalLine + "\n\t  " + "Here are the tasks in your list:");
+                        for (int i = 0; i < count; i++) {
+                            System.out.println("\t  " + (i + 1) + "." + list.get(i));
+                        }
+                        System.out.println(horizontalLine + "\n");
+                        break;
+                    case DONE:
+                        list.get(n - 1).markAsDone();
+                        System.out.println(output("Nice! I've marked this task as done:\n\t    " + list.get(n - 1)));
+                        break;
+                    case DELETE:
+                        Task toDelete = list.get(m - 1);
+                        list.remove(toDelete);
+                        System.out.println(output("Noted. I've removed this task:\n\t    " + toDelete +
+                                "\n\t  Now you have " + list.size()));
+                        count--;
+                        break;
+                    case TASK:
+                        Task task = generate(input);
+                        list.add(count++, task);
+                        System.out.println(output("Got it. I've added this task:\n\t    " + task +
+                                "\n\t  Now you have " + count + " tasks in the list."));
+                        break;
+                    case BYE:
+                        flag = false;
+                        break;
                 }
+            } catch (InvalidCommandException e) {
+                System.out.println(output(e.getMessage()));
             }
-        } catch (InvalidCommandException e) {
-            System.out.println(output(e.getMessage()));
         }
         System.out.println(output("Bye. Hope to see you again soon!"));
     }
