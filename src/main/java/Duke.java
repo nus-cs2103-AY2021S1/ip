@@ -16,53 +16,35 @@ public class Duke {
             } while (sc.hasNextLine());
         }
     }
-    public static void scan(FileInputStream inputStream){
-        try {
-            int size = inputStream.available();
-            StringBuffer text = new StringBuffer();
-            for(int i = 0; i < size; i++){
-                char c = (char)inputStream.read();
-                text.append(c);
-            }
-            String s = " ";
-            for(int i = 0 ; i < size; i++){
-                if(text.toString().charAt(i) == 10){
-                    todos.add(s.substring(1));
-                    s = " ";
-                }else {
-                    s = s + text.toString().charAt(i);
-                }
-            }
-            todos.add(s.substring(1));
-        }catch (Exception e){
-            System.out.println();
-        }
-    }
     public static void output(){
         System.out.println("  ____________________________________________________________\n" + "  Hello! I'm Duke\n" + "  What can I do for you?\n" +
                 "  ____________________________________________________________");
             for (String string : todos) {
-                if (string.equals("bye")) {
+                if (string.length() >= 3 && string.equals("bye")) {
                     System.out.println("\n" + string + "\n  ____________________________________________________________");
                     System.out.println("  Bye. Hope to see you again soon!\n" + "  ____________________________________________________________");
                     break;
                 }
-                else if (string.equals("list")) {
+                else if (string.length() >= 4 && string.equals("list")) {
                     System.out.println("\n" + string + "\n  ____________________________________________________________");
                     Task.listing();
                 }
-                else if (string.substring(0, 4).equals("done")) {
+                else if (string.length() >= 4 && string.substring(0, 4).equals("done")) {
                     System.out.println("\n" + string + "\n  ____________________________________________________________");
                     int ID = Integer.parseInt(string.substring(5));
                     Task.tasks.get(ID - 1).setDone();
                     Task.tasks.get(ID - 1).donePrint();
                 }
-                else if (string.substring(0, 4).equals("todo")) {
+                else if (string.length() >= 4 && string.substring(0, 4).equals("todo")) {
                     System.out.println("\n" + string + "\n  ____________________________________________________________");
+                    if(string.length() == 4 || string.length() == 5){
+                        System.out.println(new TodoException().toString());
+                    }else {
                         todo t = new todo(string.substring(5));
                         t.output();
+                    }
                 }
-                else if (string.substring(0, 5).equals("event")) {
+                else if (string.length() >= 5 && string.substring(0, 5).equals("event")) {
                     System.out.println("\n" + string + "\n  ____________________________________________________________");
                     String s = "";
                     int index = -1;
@@ -78,7 +60,7 @@ public class Duke {
                     //event e = new event(string.substring())
                 }
 
-                else if (string.substring(0, 8).equals("deadline")) {
+                else if (string.length() >= 8 && string.substring(0, 8).equals("deadline")) {
                     System.out.println("\n" + string + "\n  ____________________________________________________________");
                     String s = "";
                     int index = -1;
@@ -93,6 +75,7 @@ public class Duke {
                     e.output();
                 } else {
                     System.out.println("\n" + string + "\n  ____________________________________________________________");
+                    System.out.println(new WrongInputException().toString());
                 }
                 //System.out.println(string);
             }
@@ -101,6 +84,5 @@ public class Duke {
     public static void main(String[] args) throws FileNotFoundException {
         scan();
         output();
-
     }
 }

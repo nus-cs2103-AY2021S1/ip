@@ -1,6 +1,3 @@
-todo read book
-deadline return book /by June 6th
-event project meeting /at Aug
-done 1
-list
+todo
+blah
 bye
