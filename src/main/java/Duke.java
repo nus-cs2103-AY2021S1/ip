@@ -29,7 +29,23 @@ public class Duke {
 
                     if(!input.contains("done")) {
 
-                        Task.write(input);
+                        if(input.contains("todo")) {
+
+                            Task.write(input, "todo", "");
+
+                        }else {
+                            String byOrAt = input.substring(input.indexOf("/") + 4);
+
+                            if(input.contains("deadline")){
+
+                                Task.write(input, "deadline", byOrAt);
+
+                            }else if(input.contains("event")){
+
+                                Task.write(input, "event", byOrAt);
+
+                            }
+                        }
 
                     }else{
 
