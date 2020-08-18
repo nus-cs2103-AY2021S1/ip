@@ -14,7 +14,7 @@ public class Deadline extends Task {
         } else {
             check = "✗";
         }
-        return "[" + taskType + "][" + check + "]" + taskName + "(by:" + deadlineDate + ")";
+        return "[" + taskType + "][" + check + "] " + taskName + "(by:" + deadlineDate + ")";
     }
 }
 

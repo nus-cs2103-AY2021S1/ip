@@ -14,6 +14,6 @@ public class Event extends Task {
         } else {
             check = "✗";
         }
-        return "[" + taskType + "][" + check + "]" + taskName + "(at:" + eventDate + ")";
+        return "[" + taskType + "][" + check + "] " + taskName + "(at:" + eventDate + ")";
     }
 }

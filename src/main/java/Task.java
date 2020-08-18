@@ -34,6 +34,6 @@ public class Task {
         } else {
             check = "✗";
         }
-        return "[" + taskType + "][" + check + "]" + taskName;
+        return "[" + taskType + "][" + check + "] " + taskName;
     }
 }
