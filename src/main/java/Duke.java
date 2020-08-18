@@ -35,6 +35,12 @@ public class Duke {
                     System.out.println(horizontalLine);
                     taskManager.printList();
                     System.out.println(horizontalLine);
+                } else if (command.contains("done")){
+                    System.out.println(horizontalLine);
+                    int index = command.length() - 1;
+                    int taskNumber = Integer.parseInt(command.substring(index));
+                    taskManager.markTaskAsDone(taskNumber);
+                    System.out.println(horizontalLine);
                 } else {
                     System.out.println(horizontalLine);
                     Task task = new Task(command);
