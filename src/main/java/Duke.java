@@ -6,38 +6,6 @@ public class Duke {
         return "**\n" + word + "\n**";
     }
 
-    private static void infoValidator(String command, int splitNum, boolean timeRelated) throws DukeException {
-        if(splitNum < 2) {
-            if(timeRelated
-                    && (command.equals("deadline") || command.equals("event"))) {
-                throw new DukeException("HEY!!! Feed me with time/date. I am hungry T_T");
-            } else {
-                throw new DukeException("HEY!!! Don't be stingy give me more information >.<");
-            }
-        }
-    }
-
-    private static int indexValidator(String command, String strIndex, int listLen, int splitNum)
-            throws DukeException, NumberFormatException {
-        try {
-            int index = Integer.parseInt(strIndex);
-
-            if (index > listLen) {
-                if(command.equals("done")){
-                    throw new DukeException("I don't have this work to mark as Done :>");
-                } else if (command.equals("delete")){
-                    throw new DukeException("I don't have this work to Delete @_@");
-                }
-            } else if (splitNum < 2) {
-                throw new DukeException("HEY!!! Don't be stingy give me more information >.<");
-            }
-            return index;
-        } catch ( NumberFormatException ex) {
-            throw new NumberFormatException("Please feed me with integer number ~_~");
-        }
-    }
-
-
     private static void order() {
         Scanner sc = new Scanner(System.in);
         String output;
@@ -56,36 +24,36 @@ public class Duke {
                         output = "** Bye. Hope to see you soon!! **";
                         break;
                     case "done":
-                        infoValidator(command, splitOrder.length, false);
-                        int doneTaskId = indexValidator(command, splitOrder[1], lst.workListLen(), splitOrder.length);
+                        Validator.info(command, splitOrder.length, false);
+                        int doneTaskId = Validator.index(command, splitOrder[1], lst.workListLen(), splitOrder.length);
                         output = printDesign(lst.updateTaskStatus(doneTaskId));
                         break;
                     case "delete":
-                        infoValidator(command, splitOrder.length, false);
-                        int deleteTaskId = indexValidator(command, splitOrder[1], lst.workListLen(), splitOrder.length);
+                        Validator.info(command, splitOrder.length, false);
+                        int deleteTaskId = Validator.index(command, splitOrder[1], lst.workListLen(), splitOrder.length);
                         output = printDesign(lst.deleteWork(deleteTaskId));
                         break;
                     case "todo":
-                        infoValidator(command, splitOrder.length, false);
+                        Validator.info(command, splitOrder.length, false);
                         String todoInfo = splitOrder[1];
                         Todo newTodo = new Todo(todoInfo);
                         output = printDesign(lst.addWork(newTodo));
                         break;
                     case "deadline":
-                        infoValidator(command, splitOrder.length, false);
+                        Validator.info(command, splitOrder.length, false);
                         String deadlineInfo = splitOrder[1];
                         String[] dInfo = deadlineInfo.split(" /by ");
-                        infoValidator(command, dInfo.length, true);
+                        Validator.info(command, dInfo.length, true);
                         String deadlineEvent = dInfo[0];
                         String deadlineTime = dInfo[1];
                         Deadline newDeadline = new Deadline(deadlineEvent, deadlineTime);
                         output = printDesign(lst.addWork(newDeadline));
                         break;
                     case "event":
-                        infoValidator(command, splitOrder.length, false);
+                        Validator.info(command, splitOrder.length, false);
                         String eventInfo = splitOrder[1];
                         String[] eInfo = eventInfo.split(" /at ");
-                        infoValidator(command, eInfo.length, true);
+                        Validator.info(command, eInfo.length, true);
                         String eventEvent = eInfo[0];
                         String EventTime = eInfo[1];
                         Event newEvent = new Event(eventEvent, EventTime);
@@ -96,7 +64,8 @@ public class Duke {
                         output = printDesign(errorCommand);
                         break;
                 }
-            } catch (ArrayIndexOutOfBoundsException | NumberFormatException ex){
+            } catch (ArrayIndexOutOfBoundsException
+                    | NumberFormatException ex){
                 output = printDesign(ex.getMessage());
             }
 
