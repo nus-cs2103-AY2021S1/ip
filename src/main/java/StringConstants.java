@@ -10,6 +10,5 @@ public class StringConstants {
     };
     public static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
-    // User commands
-    public static final String EXIT_COMMAND = "bye";
+
 }

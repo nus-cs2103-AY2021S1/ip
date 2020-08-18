@@ -4,13 +4,17 @@ public class Duke {
     public static void main(String[] args) {
         PrintFunctions.printGreeting();
         String userInput;
+        TaskList userTaskList = new TaskList();
         Scanner scanner = new Scanner(System.in);
         while (true) {
             userInput = scanner.nextLine();
-            if (userInput.equals(StringConstants.EXIT_COMMAND)) {
+
+            if (UserCommands.isExitCommand(userInput)) {
                 break;
+            } else if (UserCommands.isListCommand(userInput)) {
+                userTaskList.printTaskList();
             } else {
-                PrintFunctions.printMessageBetweenLines(userInput);
+                userTaskList.addTask(userInput);
             }
         }
 
