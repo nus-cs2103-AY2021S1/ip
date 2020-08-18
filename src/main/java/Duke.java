@@ -28,7 +28,8 @@ public class Duke {
                 "            `' !!988888888888888888888888899fT|!^\"'\n" +
                 "                `!!8888888888888888899fT|!^\"'\n" +
                 "                  `!988888888899fT|!^\"'\n" +
-                "                    `!9899fT|!^\"'";
+                "                    `!9899fT|!^\"'\n\n\n";
         System.out.println(welcomeGraphic);
+        PersonalAssistant.run();
     }
 }
