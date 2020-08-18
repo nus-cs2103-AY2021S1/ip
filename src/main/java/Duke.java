@@ -16,6 +16,12 @@ public class Duke {
     }
 
     private void greet() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|";
+        System.out.println("Hello from\n" + logo);
         System.out.printf(stringFormat, "Hello! I'm Duke\nWhat can I do for you?");
     }
 
@@ -28,7 +34,7 @@ public class Duke {
         String content = String.format("Got it. I've added this task:\n" +
                         "\t%1$s\n" +
                         "Now you have %2$d tasks in the list.",
-                        task.toString(), this.list.size());
+                task.toString(), this.list.size());
         System.out.printf(stringFormat, content);
     }
 
@@ -40,7 +46,8 @@ public class Duke {
         StringBuilder content = new StringBuilder();
         for (int i = 0; i < this.list.size(); i++) {
             content.append(i + 1);
-            content.append(". " + this.list.get(i).toString());
+            content.append(". ");
+            content.append(this.list.get(i).toString());
             if (i < this.list.size() - 1) {
                 content.append("\n");
             }
@@ -48,93 +55,98 @@ public class Duke {
         System.out.printf(stringFormat, content.toString());
     }
 
-    private void processDone(String action) {
+    private void processDone(String action) throws TaskNumberNotFoundException {
         String[] splitKeys = action.split(" ");
         if (splitKeys.length < 2) {
-            System.out.printf(stringFormat, "Please key in a valid task number after 'done'");
-            return;
+            throw new TaskNumberNotFoundException("☹ OOPS!!! Please enter a task number after 'done'.");
         }
 
         int taskIndex = Integer.parseInt(splitKeys[1]);
         if (taskIndex > this.list.size() || taskIndex < 1) {
-            System.out.printf(stringFormat, "Please key in a valid task number!");
-            return;
+            throw new TaskNumberNotFoundException("☹ OOPS!!! The task number is not valid.");
         }
         Task task = this.list.get(taskIndex - 1);
         task.markAsDone();
         System.out.printf(stringFormat, "Nice! I've marked this task as done:\n\t" + task.toString());
     }
 
-    private void createTodo(String action) {
+    private void createTodo(String action) throws TaskDescriptionNotFoundException {
         String description = new StringBuilder(action).substring(5);
-        System.out.println(description);
+        if (description.length() < 1) {
+            throw new TaskDescriptionNotFoundException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
         Todo newTodo = new Todo(description);
         this.processAdd(newTodo);
     }
 
-    private void createDeadline(String action) {
+    private void createDeadline(String action) throws TaskDetailsNotFound, TaskDescriptionNotFoundException {
         if (!action.contains(" /by ")) {
-            System.out.printf(stringFormat, "Invalid format, missing '/by' key!!");
-            return;
+            throw new TaskDetailsNotFound("Invalid format, missing '/by' key!!");
         }
         String[] taskDetails = new StringBuilder(action).substring(9).split(" /by ");
+        if (taskDetails[0].length() < 1) {
+            throw new TaskDescriptionNotFoundException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        }
+        if (taskDetails[1].length() < 1) {
+            throw new TaskDetailsNotFound("☹ OOPS!!! The deadline cannot be empty.");
+        }
         Deadline newDeadline = new Deadline(taskDetails[0], taskDetails[1]);
         this.processAdd(newDeadline);
     }
 
-    private void createEvent(String action) {
+    private void createEvent(String action) throws TaskDetailsNotFound, TaskDescriptionNotFoundException {
         if (!action.contains(" /at ")) {
-            System.out.printf(stringFormat, "Invalid format, missing '/at' key!!");
-            return;
+            throw new TaskDetailsNotFound("Invalid format, missing '/at' key!!");
         }
         String[] taskDetails = new StringBuilder(action).substring(6).split(" /at ");
+        if (taskDetails[0].length() < 1) {
+            throw new TaskDescriptionNotFoundException("☹ OOPS!!! The description of an event cannot be empty.");
+        }
+        if (taskDetails[1].length() < 1) {
+            throw new TaskDetailsNotFound("☹ OOPS!!! The event date cannot be empty.");
+        }
         Event newEvent = new Event(taskDetails[0], taskDetails[1]);
         this.processAdd(newEvent);
     }
 
     private boolean processAction() {
-        System.out.println("Type an action (list, done, todo, deadline, event, bye):");
-        String action = this.scanner.nextLine();
-        String key = action.split(" ")[0];
-        switch (key) {
-            case "bye":
-                this.processBye();
-                return false;
-            case "list":
-                this.processList();
-                break;
-            case "done":
-                this.processDone(action);
-                break;
-            case "todo":
-                this.createTodo(action);
-                break;
-            case "deadline":
-                this.createDeadline(action);
-                break;
-            case "event":
-                this.createEvent(action);
-                break;
-            default:
-                System.out.printf(stringFormat, "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                break;
+        try {
+            System.out.println("Type an action (list, done [task number], todo [description], deadline [description /by date], event [description /at date], bye):");
+            String action = this.scanner.nextLine();
+            String key = action.split(" ")[0];
+            switch (key) {
+                case "bye":
+                    this.processBye();
+                    return false;
+                case "list":
+                    this.processList();
+                    break;
+                case "done":
+                    this.processDone(action);
+                    break;
+                case "todo":
+                    this.createTodo(action);
+                    break;
+                case "deadline":
+                    this.createDeadline(action);
+                    break;
+                case "event":
+                    this.createEvent(action);
+                    break;
+                default:
+                    throw new UnknownActionException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+        } catch (Exception err) {
+            System.out.printf(stringFormat, err.getMessage());
         }
         return true;
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|";
-        System.out.println("Hello from\n" + logo);
-
         Duke duke = new Duke();
         boolean status;
         do {
             status = duke.processAction();
         } while (status);
-
     }
 }
