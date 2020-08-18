@@ -1,4 +1,7 @@
 import main.java.Task;
+import main.java.Deadline;
+import main.java.Event;
+import main.java.Todo;
 
 import java.util.*;
 
@@ -23,9 +26,29 @@ public class Duke {
     }
 
     private void addTask(String input) {
-        Task newTask = new Task(input);
+        Task newTask = getTaskType(input);
         this.taskList.add(newTask);
-        System.out.println("added: " + input);
+
+        System.out.println("Got it. I've added this task:");
+        System.out.println(newTask.toString());
+        System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
+    }
+
+    private Task getTaskType(String input) {
+        if (input.startsWith("deadline") && input.contains(" /by ")) {
+            String description = input.substring("deadline ".length(), input.indexOf(" /by "));
+            String endTime= input.substring(input.indexOf(" /by ") + " /by ".length());
+            return new Deadline(description, endTime);
+        } else if (input.startsWith("event") && input.contains(" /at ")) {
+            String description = input.substring("event ".length(), input.indexOf(" /at "));
+            String time= input.substring(input.indexOf(" /at ") + " /at ".length());
+            return new Event(description, time);
+        } else if (input.startsWith("todo")) {
+            String description = input.substring("todo ".length());
+            return new Todo(description);
+        } else {
+            return new Task(input);
+        }
     }
 
     private void markTaskAsDone(int index) {
