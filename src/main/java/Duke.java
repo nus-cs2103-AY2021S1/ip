@@ -6,7 +6,7 @@ public class Duke {
     public static String greeting = "Hello, I'm Duke, your personal assistant. \n What can I do for you?";
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        List<String> list = new ArrayList<>();
+        List<Task> list = new ArrayList<>();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -21,7 +21,7 @@ public class Duke {
         }
     }
 
-    public static String process(String order, List<String> list) {
+    public static String process(String order, List<Task> list) {
         if (order.equals("bye")) {
             return "    Bye-bye, see you next time!";
         } else if (order.equals("list")) {
@@ -30,13 +30,19 @@ public class Duke {
             } else {
                 return printList(list);
             }
+        } else if (order.substring(0, 4).equals("done")) {
+            Integer index = Integer.valueOf(order.substring(5))-1;
+            Task temp = list.get(index);
+            temp.done();
+            list.set(index, temp);
+            return "    Great! I have marked this task as done:\n" + temp;
         } else {
-            list.add(order);
+            list.add(new Task(order));
             return "    added:"+order;
         }
     }
 
-    private static String printList(List<String> list) {
+    private static String printList(List<Task> list) {
         int size = list.size();
         String str = "";
         for (int i = 1; i <= size; i++) {
