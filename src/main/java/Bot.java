@@ -24,10 +24,9 @@ public class Bot {
                 if (input.equals("list")) {
                     displayList();
                 } else if (input.startsWith("done")) {
-                    int index = Integer.parseInt(input.substring(5)) - 1;
-                    Task task = taskList.get(index);
-                    task.markAsDone();
-                    giveResponse("Nice! I've marked this task as done:\n       " + task);
+                    completeTask(input);
+                } else if (input.startsWith("delete")){
+                    deleteTask(input);
                 } else {
                     addTask(input);
                 }
@@ -88,6 +87,49 @@ public class Bot {
         taskList.add(newTask);
         giveResponse("Got it. I've added this task:\n       " +
                 newTask +
+                "\n\t Now you have " + taskList.size() +
+                " task" + (taskList.size() > 1 ? "s" : "") + " in the list.");
+    }
+
+    // mark a task as completed
+    private void completeTask(String command) throws DukeException {
+        if (command.length() <= 5) {
+            throw new DukeException("\u2639 OOPS!!! I don't know which task should be marked as completed.");
+        }
+        int index;
+        try {
+            index = Integer.parseInt(command.substring(5)) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException("\u2639 OOPS!!! The task index should be a number.");
+        }
+
+        if (index < 0) {
+            throw new DukeException("\u2639 OOPS!!! The task index should be a positive number.");
+        }
+        Task task = taskList.get(index);
+        task.markAsDone();
+        giveResponse("Nice! I've marked this task as done:\n       " + task);
+    }
+
+    // delete a task
+    private void deleteTask(String command) throws DukeException {
+        if (command.length() <= 7) {
+            throw new DukeException("\u2639 OOPS!!! I don't know which task should be deleted.");
+        }
+        int index;
+        try {
+            index = Integer.parseInt(command.substring(7)) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException("\u2639 OOPS!!! The task index should be a number.");
+        }
+
+        if (index < 0) {
+            throw new DukeException("\u2639 OOPS!!! The task index should be a positive number.");
+        }
+        Task task = taskList.get(index);
+        taskList.remove(index);
+        giveResponse(" Noted. I've removed this task:\n       " +
+                task +
                 "\n\t Now you have " + taskList.size() +
                 " task" + (taskList.size() > 1 ? "s" : "") + " in the list.");
     }
