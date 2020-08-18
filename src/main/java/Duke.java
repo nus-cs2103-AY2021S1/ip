@@ -2,32 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static class Task {
-        protected String description;
-        protected boolean isDone;
-
-        public Task(String description) {
-            this.description = description;
-            this.isDone = false;
-        }
-
-        public String getStatusIcon() {
-            return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void markAsDone() {
-            isDone = true;
-        }
-
-        public String print() {
-            return "[" + getStatusIcon() + "] " + getDescription();
-        }
-    }
-
     public static void main(String[] args) {
         ArrayList<Task> ls = new ArrayList<>();
         String horizontalDiv = "____________________________________________________________";
