@@ -1,9 +1,10 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static List<Task> tasks = new ArrayList<>();
+    private final static List<Task> tasks = new ArrayList<>();
 
     public static void printGreeting() {
         String LOGO = " ____        _        \n"
@@ -37,9 +38,36 @@ public class Duke {
         System.out.println(createPrompt(promptText));
     }
 
-    public static void addTask(String description) {
-        tasks.add(new Task(description));
-        printPrompt("added: " + description);
+    public static void printAddTask(Task task) {
+        printPrompt("Got it. I've added this task:\n  "
+                + task + "\n" + "Now you have " + tasks.size() + " tasks in the list.");
+    }
+
+    public static void addTodo(String description) {
+        Todo todo = new Todo(description);
+
+        tasks.add(todo);
+        printAddTask(todo);
+    }
+
+    public static void addDeadline(String input) {
+        int index = input.indexOf(" /by ");
+        String description = index == -1 ? input : input.substring(0, index);
+        String by = index == -1 ? "" : input.substring(index + 5);
+        Deadline deadline = new Deadline(description, by);
+
+        tasks.add(deadline);
+        printAddTask(deadline);
+    }
+
+    public static void addEvent(String input) {
+        int index = input.indexOf(" /at ");
+        String description = index == -1 ? input : input.substring(0, index);
+        String at = index == -1 ? "" : input.substring(index + 5);
+        Event event = new Event(description, at);
+
+        tasks.add(event);
+        printAddTask(event);
     }
 
     public static void doTask(Task task) {
@@ -63,28 +91,45 @@ public class Duke {
 
         printGreeting();
 
-        String command = scanner.nextLine();
+        String input = scanner.nextLine();
 
-        while (!command.equals("bye")) {
-            if (command.equals("list")) {
-                listTasks();
-            } else {
-                String[] commandList = command.split("\\s+");
+        while (!input.equals("bye")) {
+            int index = input.indexOf(" ");
+            String command = index == -1 ? input : input.substring(0, index);
+            String otherInput = input.substring(index + 1);
 
-                if (commandList[0].equals("done")) {
-                    int taskNo = Integer.parseInt(commandList[1]);
+            switch (command) {
+                case "list":
+                    listTasks();
+
+                    break;
+                case "done":
+                    int taskNo = Integer.parseInt(otherInput);
 
                     if (taskNo > 0 && taskNo <= tasks.size()) {
                         doTask(tasks.get(taskNo - 1));
                     } else {
                         printPrompt("Task " + taskNo + " does not exist.");
                     }
-                } else {
-                    addTask(command);
-                }
+
+                    break;
+                case "todo":
+                    addTodo(otherInput);
+
+                    break;
+                case "deadline":
+                    addDeadline(otherInput);
+
+                    break;
+                case "event":
+                    addEvent(otherInput);
+
+                    break;
+                default:
+                    break;
             }
 
-            command = scanner.nextLine();
+            input = scanner.nextLine();
         }
 
         printPrompt("Bye. Hope to see you again soon!");
