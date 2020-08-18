@@ -52,6 +52,13 @@ public class Duke {
                         System.out.println(e);
                     }
                     break;
+                case "delete":
+                    try {
+                        handleDelete();
+                    } catch (DukeException e) {
+                        System.out.println(e);
+                    }
+                    break;
                 default:
                     try {
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
@@ -84,5 +91,16 @@ public class Duke {
         tasks.get(index).markDone();
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println(tasks.get(index));
+    }
+
+    private static void handleDelete() throws DukeException {
+        int index = Integer.parseInt(inputs[1]) - 1;
+        if (index >= tasks.size() || index < 0) {
+            throw new DukeException("This task does not exist");
+        }
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println(tasks.get(index));
+        tasks.remove(index);
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 }
