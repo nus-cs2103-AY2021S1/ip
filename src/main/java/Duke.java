@@ -22,15 +22,7 @@ public class Duke {
                 } else {
                     System.out.println("Here are the tasks in your list: ");
                     for (int i = 0; i < index; i++) {
-                        if (list.get(i) instanceof Todo) {
-                            System.out.println(list.get(i).id + ".[T][" + list.get(i).getStatusIcon() + "] " + list.get(i).description);
-                        } else if (list.get(i) instanceof Deadline) {
-                            System.out.println(list.get(i).id + ".[D][" + list.get(i).getStatusIcon() + "] " + list.get(i).description +
-                                    "(" + ((Deadline) list.get(i)).dueDateTime + ")");
-                        } else if (list.get(i) instanceof Event) {
-                            System.out.println(list.get(i).id + ".[E][" + list.get(i).getStatusIcon() + "] " + list.get(i).description +
-                                    "(" + ((Event) list.get(i)).duration + ")");
-                        }
+                        System.out.println(list.get(i).id + "." + list.get(i));
                     }
                 }
                 System.out.println(divider);
@@ -46,6 +38,25 @@ public class Duke {
                         System.out.println(divider + "\n" + message + "\n" +
                                 "   [" + task.getStatusIcon() + "] " + task.description + "\n" + divider);
                     }
+                } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                    System.out.println(divider);
+                    System.out.println("Whoops, you did not enter a valid number.");
+                    System.out.println(divider);
+                }
+            } else if (input.contains("delete")) {
+                try {
+                    int number = Integer.parseInt(input.substring(7));
+                    Task task = list.get(number - 1);
+                    for (int i = number; i < list.size(); i++) {
+                        list.get(i).id = list.get(i).id - 1;
+                    }
+                    list.remove(task);
+                    index--;
+                    System.out.println(divider);
+                    System.out.println("Noted. I've removed this task: ");
+                    System.out.println(task);
+                    System.out.println("Now you have " + index + " tasks in the list.");
+                    System.out.println(divider);
                 } catch (IndexOutOfBoundsException | NumberFormatException e) {
                     System.out.println(divider);
                     System.out.println("Whoops, you did not enter a valid number.");
