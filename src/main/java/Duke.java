@@ -28,12 +28,14 @@ public class Duke {
         }
     }
 
-
-    void greet() {
-        indent();
-        System.out.println("Hello! I'm Duke.");
-        indent();
-        System.out.println("How can I help you today?");
+    void printMessage(String string) {
+        String[] splitByNewLine = string.split("\\r?\\n");
+        printLine();
+        for (String str : splitByNewLine) {
+            indent();
+            System.out.println(str);
+        }
+        printLine();
     }
 
     void printLine() {
@@ -49,59 +51,38 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        printLine();
-
-        greet();
-
-        printLine();
+        String opening = "Hello! I'm Duke.\nHow can I help you today?";
+        printMessage(opening);
     }
 
     void farewell() {
-        printLine();
-
-        indent();
-        System.out.println("Goodbye! Hope to see you again soon!");
-
-        printLine();
+        printMessage("Goodbye! Hope to see you again soon!");
     }
 
     void list() {
-        printLine();
-
-        indent();
-        System.out.println("Here are the tasks in your list:");
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Here are the tasks in your list:\n");
 
         for (int i = 0; i < memory.size(); i++) {
-            indent();
             Task currentTask = memory.get(i);
-            System.out.println((i + 1) + ". " + currentTask.toString());
+            stringBuilder.append((i + 1) + ". " + currentTask.toString() + "\n");
         }
 
-        printLine();
+        printMessage(stringBuilder.toString());
     }
 
-    void done(int index) {
+    void done(int index) throws DukeException{
         try {
             Task task = memory.get(index - 1);
             task.markAsDone();
             printDoneMessage(task);
         } catch (IndexOutOfBoundsException e) {
-            printLine();
-
-            indent();
-            System.out.println("No such task!");
-
-            printLine();
+            throw new DukeException("Oops! Sorry, I couldn't find the task.");
         }
     }
 
     void unknownCommandMessage() {
-        printLine();
-
-        indent();
-        System.out.println("Unknown command");
-
-        printLine();
+        printMessage("Oops! I'm sorry, I don't know what that means.");
     }
 
 
@@ -111,30 +92,14 @@ public class Duke {
 
 
     void printAddMessage(Task task) {
-        printLine();
-
-        indent();
-        System.out.println("Got it. I've added this task:");
-
-        indent();
-        System.out.println(task.toString());
-
-        indent();
-        System.out.println("Now you have " + memory.size() + " tasks in the list.");
-
-        printLine();
+        printMessage("Got it. I've added this task:\n" +
+                task.toString() + "\n" +
+                "Now you have " + memory.size() + " tasks in the list.");
     }
 
     void printDoneMessage(Task task) {
-        printLine();
-
-        indent();
-        System.out.println("Nice! I've marked this task as done:");
-
-        indent();
-        System.out.println(task.toString());
-
-        printLine();
+        printMessage("Nice! I've marked this task as done:\n" +
+                task.toString());
     }
 
     String stringArrayToString(String[] arr, int startIndex, int endIndex) {
@@ -155,28 +120,34 @@ public class Duke {
     }
 
     void checkAndPrint(String string) {
-        String[] splitString = string.split("\\s+");
-        if (string.equals("bye")) {
-            exit();
-        } else if (string.equals("list")) {
-            list();
-        } else if (splitString.length == 2 &&
-                splitString[0].equals("done") && stringIsInt(splitString[1])) {
-            int index = parseInt(splitString[1]);
-            done(index);
-        } else if (splitString[0].equals("todo")) {
-            todo(splitString);
-        } else if (splitString[0].equals("deadline")) {
-            deadline(splitString);
-        } else if (splitString[0].equals("event")) {
-            event(splitString);
-        } else {
-            unknownCommandMessage();
+        try {
+            String[] splitString = string.split("\\s+");
+            if (string.equals("bye")) {
+                exit();
+            } else if (string.equals("list")) {
+                list();
+            } else if (splitString.length == 2 &&
+                    splitString[0].equals("done") && stringIsInt(splitString[1])) {
+                int index = parseInt(splitString[1]);
+                done(index);
+            } else if (splitString[0].equals("todo")) {
+                todo(splitString);
+            } else if (splitString[0].equals("deadline")) {
+                deadline(splitString);
+            } else if (splitString[0].equals("event")) {
+                event(splitString);
+            } else {
+                unknownCommandMessage();
+            }
+        } catch (TaskException e) {
+            printMessage(e.getMessage());
+        } catch (DukeException e) {
+            printMessage(e.getMessage());
         }
     }
 
     // Takes the input as a string array, adds a new deadline to list, then prints the message
-    void deadline(String[] stringArray) {
+    void deadline(String[] stringArray) throws TaskException{
         int indexOfBy = -1;
         for (int i = 0; i < stringArray.length; i++) {
             if (stringArray[i].equals("/by")) {
@@ -184,25 +155,34 @@ public class Duke {
                 break;
             }
         }
-
-        String by = stringArrayToString(stringArray, indexOfBy + 1, stringArray.length);
-        String description = stringArrayToString(stringArray, 1, indexOfBy);
-        Deadline deadline = new Deadline(description, by);
-        addToMemory(deadline);
-        printAddMessage(deadline);
+        if (indexOfBy == 1 || stringArray.length == 1) {
+            throw new TaskException("Oops! A deadline task needs a description");
+        } else if (indexOfBy == stringArray.length - 1 || indexOfBy == -1) {
+            throw new TaskException("Oops! A deadline task needs a deadline");
+        } else {
+            String by = stringArrayToString(stringArray, indexOfBy + 1, stringArray.length);
+            String description = stringArrayToString(stringArray, 1, indexOfBy);
+            Deadline deadline = new Deadline(description, by);
+            addToMemory(deadline);
+            printAddMessage(deadline);
+        }
     }
 
     // Takes the input as a string array, then adds a new todo to list, then prints the message
-    void todo(String[] stringArray) {
-        String description = stringArrayToString(stringArray,
-                1, stringArray.length);
-        ToDo todo = new ToDo(description);
-        addToMemory(todo);
-        printAddMessage(todo);
+    void todo(String[] stringArray) throws TaskException {
+        if (stringArray.length == 1) {
+            throw new TaskException("Oops! A todo task needs a description.");
+        } else {
+            String description = stringArrayToString(stringArray,
+                    1, stringArray.length);
+            ToDo todo = new ToDo(description);
+            addToMemory(todo);
+            printAddMessage(todo);
+        }
     }
 
     // Takes input as a string array, then adds a new event to list, then prints the message
-    void event(String[] stringArray) {
+    void event(String[] stringArray) throws TaskException {
         int indexOfAt = -1;
         for (int i = 0; i < stringArray.length; i++) {
             if (stringArray[i].equals("/at")) {
@@ -210,12 +190,17 @@ public class Duke {
                 break;
             }
         }
-
-        String at = stringArrayToString(stringArray, indexOfAt + 1, stringArray.length);
-        String description = stringArrayToString(stringArray, 1, indexOfAt);
-        Event event = new Event(description, at);
-        addToMemory(event);
-        printAddMessage(event);
+        if (indexOfAt == 1 || stringArray.length == 1) {
+            throw new TaskException("Oops! An event task needs a description");
+        } else if (indexOfAt == stringArray.length - 1 || indexOfAt == -1) {
+            throw new TaskException("Oops! An event task needs a date");
+        } else {
+            String at = stringArrayToString(stringArray, indexOfAt + 1, stringArray.length);
+            String description = stringArrayToString(stringArray, 1, indexOfAt);
+            Event event = new Event(description, at);
+            addToMemory(event);
+            printAddMessage(event);
+        }
     }
 
 
@@ -232,7 +217,6 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         duke.opener();
-
         while (duke.isRunning()) {
             String str = sc.nextLine();
             duke.checkAndPrint(str);
