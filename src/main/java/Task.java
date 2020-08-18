@@ -16,11 +16,12 @@ public class Task {
     }
 
     public Task(String type, String details) {
+
         this.type = type;
         this.details = details;
     }
 
-    public Task(String type, String details,String deadLine) {
+    public Task(String type, String details,String deadLine)  {
         this.type = type;
         this.details = details;
         this.deadLine = deadLine;

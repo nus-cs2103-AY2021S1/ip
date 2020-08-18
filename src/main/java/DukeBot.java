@@ -29,15 +29,23 @@ public class DukeBot {
         }
     }
 
-    public void addTask(String task, String type) {
+    public void addTask( String type,String task) throws InSuffArgsException{
 
-        Task myTask = new Task(task,type);
+        if(task.equals("")){
+            throw new InSuffArgsException();
+        }
+
+        Task myTask = new Task(type,task);
         this.tasks.add(myTask);
         System.out.println("added: " + myTask);
     }
-    public void addTask(String task, String type,String deadLine) {
+    public void addTask(String type,String task,String deadLine) throws InSuffArgsException{
 
-        Task myTask = new Task(task,type,deadLine);
+        if(task.equals("")){
+            throw new InSuffArgsException();
+        }
+
+        Task myTask = new Task(type,task,deadLine);
         this.tasks.add(myTask);
         System.out.println("added: " + myTask);
     }
@@ -80,14 +88,17 @@ public class DukeBot {
                 break;
             }
 
-            if ((args1[0].equals("delete") || args1[0].equals("todo") || args1[0].equals("deadline") || args1[0].equals("event")) && args1.length == 1) {
-                System.out.println("☹ OOPS!!! The description of a " + args1[0] + " cannot be empty.");
-            } else if (args1[0].equals("todo")) {
+          if (args1[0].equals("todo")) {
                 String task = "";
                 for (int i = 1; i < args1.length; i++) {
                     task += args1[i] + " ";
                 }
-                addTask( "[T]",task);
+                try {
+                    addTask("[T]",task);
+                }
+                catch (InSuffArgsException E){
+                    System.out.println("☹ OOPS!!! The description of a " + args1[0] + " cannot be empty.");
+                }
                 numTask();
             } else if (args1[0].equals("delete")) {
                 deleteTask(Integer.parseInt(args1[1]) - 1);
@@ -96,7 +107,16 @@ public class DukeBot {
                 for (int i = 1; i < args1.length; i++) {
                     task += args1[i] + " ";
                 }
-                addTask("[D]",task ,fullArg[1]);
+                try {
+                    if(fullArg.length==1){
+                        throw new InSuffArgsException();
+                    }
+                    addTask("[D]",task ,fullArg[1]);
+                }
+                catch (InSuffArgsException E){
+                    System.out.println("☹ OOPS!!! The description of a " + args1[0] + " cannot be empty.");
+                }
+
                 numTask();
 
             } else if (args1[0].equals("event")) {
@@ -105,7 +125,15 @@ public class DukeBot {
                 for (int i = 1; i < args1.length; i++) {
                     task += args1[i] + " ";
                 }
-                addTask("[E]",task ,fullArg[1]);
+                try {
+                    if(fullArg.length==1){
+                        throw new InSuffArgsException();
+                    }
+                    addTask("[E]",task ,fullArg[1]);
+                }
+                catch (InSuffArgsException E){
+                    System.out.println("☹ OOPS!!! The description of a " + args1[0] + " cannot be empty.");
+                }
                 numTask();
 
             } else if (currInput.equals("list")) {
@@ -114,9 +142,9 @@ public class DukeBot {
                 }
             } else if (args1[0].equals("done")) {
                 int index = Integer.parseInt(args1[1]) - 1;
-                this.tasks.get(index-1).setDone();
+                this.tasks.get(index).setDone();
                 System.out.println("Nice I've marked this tasks as done");
-                System.out.println("[✓] " + this.tasks.get(index));
+                System.out.println( this.tasks.get(index));
             } else {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
