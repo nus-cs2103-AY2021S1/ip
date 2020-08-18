@@ -27,13 +27,31 @@ public class Duke {
         ArrayList<String> lst = new ArrayList<>();
         lst.add("Here are the tasks in your list:");
         for (int i = 0; i < response.size(); i++) {
-            lst.add((i + 1) + ". " + response.get(i));
+            lst.add((i + 1) + ". " + response.get(i).toString());
         }
         formatResponse(lst);
     }
 
     private static void formatDoneTask(Task task) {
         formatResponse("Nice! I've marked this task as done:", INDENT + task.toString());
+    }
+
+    private static void addTask(String display) {
+        if (display.length() >= 4 && display.substring(0, 4).equals("todo")) {
+            tasks.add(new ToDo(display.substring(5)));
+        } else if (display.length() >= 8 && display.substring(0, 8).equals("deadline")) {
+            int idx = display.indexOf(" /by ");
+            tasks.add(new Deadline(display.substring(9, idx), display.substring(idx + 5)));
+        } else if (display.length() >= 5 && display.substring(0, 5).equals("event")) {
+            int idx = display.indexOf(" /at ");
+            tasks.add(new Event(display.substring(6, idx), display.substring(idx + 5)));
+        } else {
+            System.out.println("Could not identify task type.");
+            return;
+        }
+
+        Task task = tasks.get(tasks.size() - 1);
+        formatResponse("Got it. I've added this task: ", INDENT + task.toString(), "Now you have " + tasks.size() + " task" + (tasks.size() == 1 ? "" : "s") + " in the list.");
     }
 
     public static void main(String[] args) {
@@ -49,8 +67,7 @@ public class Duke {
                 tasks.get(idx).markAsDone();
                 formatDoneTask(tasks.get(idx));
             } else if (!display.equals("bye")) {
-                formatResponse("added: " + display);
-                tasks.add(new Task(display));
+                addTask(display);
             }
         }
        formatResponse("Bye. Hope to see you again soon!");
