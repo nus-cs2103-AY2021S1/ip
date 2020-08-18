@@ -81,6 +81,16 @@ public class Duke {
                 System.out.println(event);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 System.out.println(line);
+            } else if (userInput.startsWith("delete")) {
+                String toDelete =  userInput.substring(7);
+                int index = Integer.parseInt(toDelete);
+                System.out.println(line);
+                System.out.print(bot);
+                System.out.println("Noted! I've deleted this task:");
+                System.out.println(tasks.get(index));
+                tasks.remove(index);
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                System.out.println(line);
             } else { //invalid command
                 System.out.println("You have keyed in an invalid command! \n (Valid commands: todo, deadline, event, list, bye)");
             }
