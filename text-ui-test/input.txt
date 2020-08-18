@@ -6,4 +6,10 @@ done 1
 done 2
 done 3
 list
+done
+todo
+deadline
+event
+done 0
+done -1
 bye

@@ -43,6 +43,30 @@ __________________________________________________
  3. [E][✓] project meeting (at: Tue 3-5PM)
 __________________________________________________
 __________________________________________________
+Oh no! Please specify which task to be mark as done.
+__________________________________________________
+ 
+__________________________________________________
+Oh no! Please specify the description of a todo.
+__________________________________________________
+ 
+__________________________________________________
+Oh no! Please specify the description of a todo.
+__________________________________________________
+ 
+__________________________________________________
+Oh no! Please specify the description of an event.
+__________________________________________________
+ 
+__________________________________________________
+Oh no! Task number cannot be zero or negative, please refer to your task list to find the appropriate task number :)
+__________________________________________________
+ 
+__________________________________________________
+Oh no! Task number cannot be zero or negative, please refer to your task list to find the appropriate task number :)
+__________________________________________________
+ 
+__________________________________________________
  Bye! Hope to see you again in the future!
 __________________________________________________
 
