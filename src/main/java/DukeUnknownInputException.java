@@ -1,5 +1,6 @@
 public class DukeUnknownInputException extends DukeException {
-    public DukeUnknownInputException(String s) {
-        super(s);
+    @Override
+    public String toString() {
+        return "ERROR: Unknown input! Try again.";
     }
 }

@@ -1,5 +1,6 @@
 public class DukeInvalidTaskDescriptionException extends DukeTaskException {
-    public DukeInvalidTaskDescriptionException(String s) {
-        super(s);
+    @Override
+    public String toString() {
+        return "ERROR: The description of a task cannot be empty!";
     }
 }
