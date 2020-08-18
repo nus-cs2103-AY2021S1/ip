@@ -8,10 +8,12 @@
 Hello! I'm PandaBot.
 What can I do for you?
 
-list
-
-blah
-
-read book
-
+Added: visit the library
+Added: read book
+1. visit the library
+2. read book
+Added: buy an umbrella
+1. visit the library
+2. read book
+3. buy an umbrella
 Bye! Remember to do your work! See you soon~

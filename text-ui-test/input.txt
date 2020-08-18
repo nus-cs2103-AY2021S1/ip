@@ -1,4 +1,7 @@
 list
-blah
+visit the library
 read book
+list
+buy an umbrella
+list
 bye
