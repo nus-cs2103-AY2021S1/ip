@@ -17,4 +17,8 @@ event
 event fake event /at
 event hello
 list
+todo return book
+list
+delete 1
+list
 bye

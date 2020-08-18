@@ -80,5 +80,28 @@ Here are the tasks in your list:
 3. [E][✓] project meeting (at: Mon 2-4pm)
 ____________________________________________________________
  > ____________________________________________________________
+Roger. I've added the task to your list:
+    [T][✘] return book
+Now you have 4 task in your list
+____________________________________________________________
+ > ____________________________________________________________
+Here are the tasks in your list:
+1. [T][✓] borrow book
+2. [D][✘] return book (by: Sunday)
+3. [E][✓] project meeting (at: Mon 2-4pm)
+4. [T][✘] return book
+____________________________________________________________
+ > ____________________________________________________________
+Roger. I've removed this task from your list:
+    [T][✓] borrow book
+Now you have 3 task in your list
+____________________________________________________________
+ > ____________________________________________________________
+Here are the tasks in your list:
+1. [D][✘] return book (by: Sunday)
+2. [E][✓] project meeting (at: Mon 2-4pm)
+3. [T][✘] return book
+____________________________________________________________
+ > ____________________________________________________________
 Goodbye. Hope to see you again soon!
 ____________________________________________________________

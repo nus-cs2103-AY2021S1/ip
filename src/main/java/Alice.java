@@ -28,6 +28,9 @@ public class Alice {
         } else if (cmd.equals("done")) {
             // Mark as done
             return markTaskAsDone(params);
+        } else if (cmd.equals("delete")) {
+            // Delete
+            return deleteTask(params);
         } else if (cmd.equals("todo")) {
             // Add to-do
             return addTodo(params);
@@ -51,6 +54,20 @@ public class Alice {
             int index = Integer.parseInt(s_index) - 1;
             tasks.get(index).markAsDone();
             return "Great work! I've marked this task as done:\n    " + tasks.get(index);
+        } catch (NumberFormatException e) {
+            throw new AliceException("That is not a valid number.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new AliceException("That task number is not in the list.");
+        }
+    }
+
+    private String deleteTask(String s_index) throws AliceException {
+        try {
+            int index = Integer.parseInt(s_index) - 1;
+            Task removed = tasks.remove(index);
+            return "Roger. I've removed this task from your list:\n    "
+                    + removed
+                    + "\nNow you have " + tasks.size() + " task in your list";
         } catch (NumberFormatException e) {
             throw new AliceException("That is not a valid number.");
         } catch (IndexOutOfBoundsException e) {
