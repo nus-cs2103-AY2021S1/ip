@@ -8,9 +8,18 @@ public class Duke {
         System.out.println("________________________________________");
     }
 
-    public static void main(String[] args) {
-        String greeting = "Hello! I'm Duke\n    What can I do for you?";
+    private static void greet() {
+        String greeting = "Hello! I'm duckmoon99's Duke\n    What can I do for you?";
         printNice(greeting);
+    }
+
+    private static void bye() {
+        String exit = "Bye. Hope to see you again soon!";
+        printNice(exit);
+    }
+
+    public static void main(String[] args) {
+        greet();
         Scanner scanner = new Scanner(System.in);
         String input;
         while(true){
@@ -20,8 +29,7 @@ public class Duke {
             else
                 printNice(input);
         }
-        String exit = "Bye. Hope to see you again soon!";
-        printNice(exit);
+        bye();
     }
 
 }
