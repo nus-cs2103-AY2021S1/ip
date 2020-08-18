@@ -1,5 +1,5 @@
 Hello! I'm Duke
- What can I do for you?
+What can I do for you?
 Got it. I've added this task:
 	[T][✘] read book
 Now you have 1 tasks in the list.
@@ -48,20 +48,16 @@ Now you have 7 tasks in the list.
 Please enter an appropriate command!
 Please enter an appropriate command!
 Please enter an appropriate command!
-Please enter an appropriate deadline.
+Missing '/' command.
 Got it. I've added this task:
 	[D][✘] fake deadline2 (by:ThisDay)
 Now you have 8 tasks in the list.
-Got it. I've added this task:
-	[D][✘] fake deadline3 (by:ThatDay)
-Now you have 9 tasks in the list.
-Please enter an appropriate event.
+Please enter an appropriate '/' command!
+Missing '/' command.
 Got it. I've added this task:
 	[E][✘] fake event2 (at:ThisDay)
-Now you have 10 tasks in the list.
-Got it. I've added this task:
-	[E][✘] fake event3 (at:ThatDay)
-Now you have 11 tasks in the list.
+Now you have 9 tasks in the list.
+Please enter an appropriate '/' command!
 Here are the tasks in your list:
 1.[T][✓] read book
 2.[D][✘] return book (by: June 6th)
@@ -71,8 +67,6 @@ Here are the tasks in your list:
 6.[D][✘] return book (by: Sunday)
 7.[E][✘] project meeting (at: Mon 2-4pm)
 8.[D][✘] fake deadline2 (by:ThisDay)
-9.[D][✘] fake deadline3 (by:ThatDay)
-10.[E][✘] fake event2 (at:ThisDay)
-11.[E][✘] fake event3 (at:ThatDay)
+9.[E][✘] fake event2 (at:ThisDay)
 Please enter an appropriate command!
 Bye. Hope to see you again soon!
