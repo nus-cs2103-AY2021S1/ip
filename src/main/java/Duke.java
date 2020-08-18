@@ -16,32 +16,54 @@ public class Duke {
         System.out.println("    What can I do for you?");
         System.out.println("    _________________________________");
 
-        ArrayList<Task> lst = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         while (!str.equals("bye")) {
             str = sc.nextLine();
-            Task newTask = new Task(str);
+            Task t = new Task(str);
 
             System.out.println("    _________________________________");
 
 
-            if (newTask.getDescription().equals("list")) {
+            if (t.getDescription().equals("list")) {
                 System.out.println("    Here are the tasks in your list:");
-                for (int i = 0; i < lst.size(); i++) {
-                    String item = (i + 1) + ". [" + lst.get(i).getStatusIcon() + "] " + lst.get(i);
+                for (int i = 0; i < tasks.size(); i++) {
+                    String item = (i + 1) + ". " + tasks.get(i);
                     System.out.println("    " + item);
                 }
 
-            } else if (newTask.getFirstWord().equals("done")) {
-                int taskNumber = newTask.getNumber();
-                lst.get(taskNumber - 1).markAsDone();
+            } else if (t.isTodo()) {
+                ToDo todo = new ToDo(t.getDescription());
+                tasks.add(todo);
+                System.out.println("    Got it. I've added this task:");
+                System.out.println("    " + todo);
+                System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
+
+            } else if (t.isDeadline()) {
+                String date = t.getDate();
+                Deadline deadline = new Deadline(t.getDescription(), date);
+                tasks.add(deadline);
+                System.out.println("    Got it. I've added this task:");
+                System.out.println("    " + deadline);
+                System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
+
+            } else if (t.isEvent()) {
+                String date = t.getDate();
+                Event event = new Event(t.getDescription(), date);
+                tasks.add(event);
+                System.out.println("    Got it. I've added this task:");
+                System.out.println("    " + event);
+                System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
+
+            } else if (t.getFirstWord().equals("done")) {
+                int taskNumber = t.getNumber();
+                tasks.get(taskNumber - 1).markAsDone();
                 System.out.println("    Nice! I've marked this task as done:");
-                System.out.println("    [" + lst.get(taskNumber - 1).getStatusIcon() + "] " + lst.get(taskNumber - 1));
+                System.out.println("    " + tasks.get(taskNumber - 1));
 
             } else if (!str.equals("bye")) {
-                System.out.println("    added: " + newTask.getDescription());
-                //System.out.println("    _________________________________");
-                lst.add(newTask);
+                System.out.println("    added: " + t.getDescription());
+                tasks.add(t);
             }
             System.out.println("    _________________________________");
         }
