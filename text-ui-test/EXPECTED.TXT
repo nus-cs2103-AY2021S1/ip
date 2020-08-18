@@ -21,6 +21,13 @@ I've marked this task as done:
 1. [T] [✓] borrow book
 2. [D] [✓] return book (by: sunday)
 3. [E] [✓] meet friend (at: wed 2pm)
+This task has been removed: [T] [✓] borrow book
+1. [D] [✓] return book (by: sunday)
+2. [E] [✓] meet friend (at: wed 2pm)
+This task has been removed: [D] [✓] return book (by: sunday)
+1. [E] [✓] meet friend (at: wed 2pm)
+Item #2 does not exist and cannot be removed.
+1. [E] [✓] meet friend (at: wed 2pm)
 Unrecognized task/command.
 Todos must have non-empty descriptions!
 Item #5 does not exist and cannot be marked as done.
