@@ -108,6 +108,27 @@ public class Duke {
                 + task);
     }
 
+    public static void deleteTask(String otherInput) throws DukeException {
+        if (otherInput.equals("")) {
+            throw new DukeException("Task number required for the delete command.");
+        } else if (!otherInput.chars().allMatch(Character::isDigit)) {
+            throw new DukeException("Only positive integers allowed for the delete command.");
+        }
+
+        int taskNo = Integer.parseInt(otherInput);
+
+        if (taskNo <= 0 || taskNo > tasks.size()) {
+            throw new DukeException("Task " + taskNo + " does not exist.");
+        }
+
+        Task task = tasks.get(taskNo - 1);
+
+        tasks.remove(task);
+        printPrompt("Noted. I've removed this task:\n  "
+                + task + "\n" + "Now you have " + tasks.size()
+                + (tasks.size() == 1 ? " task" : " tasks") + " in the list.");
+    }
+
     public static void listTasks() throws DukeException {
         if (tasks.size() == 0) {
             throw new DukeException("There are no tasks in your list.");
@@ -146,6 +167,10 @@ public class Duke {
                         break;
                     case "done":
                         doTask(otherInput);
+
+                        break;
+                    case "delete":
+                        deleteTask(otherInput);
 
                         break;
                     case "todo":
