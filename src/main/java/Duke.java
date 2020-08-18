@@ -16,6 +16,7 @@ public class Duke {
     private static final String LIST_COMMAND = "list";
     private static final String DONE_COMMAND = "done";
     private static final String ADD_TODO = "todo";
+    private static final String ADD_EVENT = "event";
 
     private static void processCommand(String input) {
         String[] inputList = input.split(" ");
@@ -29,6 +30,9 @@ public class Duke {
                     break;
                 case ADD_TODO:
                     addTodo(inputList);
+                    break;
+                case ADD_EVENT:
+                    addEvent(inputList);
                     break;
                 default:
                     printWithDivider(ERROR_MESSAGE + "\nWas the command valid?");
@@ -75,11 +79,24 @@ public class Duke {
 
     private static void addTodo(String[] inputList) {
         if (inputList.length > 1) {
-            Todo todo = new Todo(rejoinString(inputList));
+            String description = rejoinString(inputList);
+            Todo todo = new Todo(description);
             taskList.add(todo);
             printWithDivider("Successfully added:\n" + todo.toString());
         } else {
             printWithDivider(ERROR_MESSAGE + "\nDid you provide any description for this ToDo task?");
+        }
+    }
+
+    private static void addEvent(String[] inputList) {
+        String removeCommand = rejoinString(inputList);
+        String[] descWithArgs = removeCommand.split(" /at ");
+        if (descWithArgs.length == 2) {
+            Event event = new Event(descWithArgs[0], descWithArgs[1]);
+            taskList.add(event);
+            printWithDivider("Successfully added:\n" + event.toString());
+        } else {
+            printWithDivider(ERROR_MESSAGE + "\nDid you provide a date and description for this event?");
         }
     }
 
