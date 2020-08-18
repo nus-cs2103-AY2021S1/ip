@@ -34,4 +34,8 @@ public class Command implements Executable {
     public static Command createListCommand(Task task) {
         return new Command(CommandType.LIST, Task.createEmptyTask());
     }
+
+    public static Command createDeleteCommand(Task task) {
+        return new Command(CommandType.DELETE, task);
+    }
 }

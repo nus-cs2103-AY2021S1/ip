@@ -111,7 +111,7 @@ public class Store {
         return c;
     }
 
-    public String deleteTask(Integer i) {
+    public String deleteTask(Integer[] nums) {
         return null;
     }
 
