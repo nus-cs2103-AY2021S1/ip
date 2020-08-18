@@ -14,7 +14,7 @@ public class Duke {
         System.out.println("What can I do for you today?");
 
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
-        List<Task> itemList = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
 
         while(true){
             String input = scanner.nextLine();
@@ -23,14 +23,14 @@ public class Duke {
                 break;
             }
             else if(input.contentEquals("list")){
-                for(int i = 0; i < itemList.size(); i++){
-                    System.out.println("\t" + (i + 1) + ". " + itemList.get(i));
+                for(int i = 0; i < taskList.size(); i++){
+                    System.out.println("\t" + (i + 1) + ". " + taskList.get(i));
                 }
             }
             else{
                 System.out.println("\t" + input);
                 Task newTask = new Task(input);
-                itemList.add(newTask);
+                taskList.add(newTask);
             }
         }
     }
