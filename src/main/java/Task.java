@@ -16,7 +16,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String statusIcon = isDone ? "\u2713" : "\u2718";
+        char statusIcon = isDone ? UIPrint.tick : UIPrint.cross;
 
         return statusIcon + " " + description;
     }
