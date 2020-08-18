@@ -7,6 +7,10 @@ Hmm I didn't quite catch that.
 Was the command valid?
 -------------------------------------
 -------------------------------------
+Hmm I didn't quite catch that.
+Did you provide any description for this todo task?
+-------------------------------------
+-------------------------------------
 Successfully added todo:
 [✘] | T | test
 -------------------------------------
@@ -15,8 +19,10 @@ Successfully added todo:
 [✘] | T | read book
 -------------------------------------
 -------------------------------------
-Successfully added todo:
-[✘] | T | read spaces
+You have 2 items.
+
+1: [✘] | T | test
+2: [✘] | T | read book
 -------------------------------------
 -------------------------------------
 Successfully added event:
@@ -35,6 +41,14 @@ Hmm I didn't quite catch that.
 Did you provide a date and description for this event?
 -------------------------------------
 -------------------------------------
+You have 4 items.
+
+1: [✘] | T | test
+2: [✘] | T | read book
+3: [✘] | E | meeting | At: Mon
+4: [✘] | E | lunch with friends | At: Mon 3 pm
+-------------------------------------
+-------------------------------------
 Successfully added deadline:
 [✘] | D | quiz1 | By: Tues
 -------------------------------------
@@ -49,6 +63,66 @@ Did you provide a deadline and description for this deadline?
 -------------------------------------
 Hmm I didn't quite catch that.
 Did you provide a deadline and description for this deadline?
+-------------------------------------
+-------------------------------------
+You have 6 items.
+
+1: [✘] | T | test
+2: [✘] | T | read book
+3: [✘] | E | meeting | At: Mon
+4: [✘] | E | lunch with friends | At: Mon 3 pm
+5: [✘] | D | quiz1 | By: Tues
+6: [✘] | D | quiz2 submission | By: Tues 2 pm
+-------------------------------------
+-------------------------------------
+Hmm I didn't quite catch that.
+Did you provide a valid index?
+-------------------------------------
+-------------------------------------
+Hmm I didn't quite catch that.
+Did you provide a valid index?
+-------------------------------------
+-------------------------------------
+Nice! I've marked this task as done:
+[✓] | T | test
+-------------------------------------
+-------------------------------------
+You have 6 items.
+
+1: [✓] | T | test
+2: [✘] | T | read book
+3: [✘] | E | meeting | At: Mon
+4: [✘] | E | lunch with friends | At: Mon 3 pm
+5: [✘] | D | quiz1 | By: Tues
+6: [✘] | D | quiz2 submission | By: Tues 2 pm
+-------------------------------------
+-------------------------------------
+Nice! I've marked this task as done:
+[✓] | E | meeting | At: Mon
+-------------------------------------
+-------------------------------------
+You have 6 items.
+
+1: [✓] | T | test
+2: [✘] | T | read book
+3: [✓] | E | meeting | At: Mon
+4: [✘] | E | lunch with friends | At: Mon 3 pm
+5: [✘] | D | quiz1 | By: Tues
+6: [✘] | D | quiz2 submission | By: Tues 2 pm
+-------------------------------------
+-------------------------------------
+Nice! I've marked this task as done:
+[✓] | T | test
+-------------------------------------
+-------------------------------------
+You have 6 items.
+
+1: [✓] | T | test
+2: [✘] | T | read book
+3: [✓] | E | meeting | At: Mon
+4: [✘] | E | lunch with friends | At: Mon 3 pm
+5: [✘] | D | quiz1 | By: Tues
+6: [✘] | D | quiz2 submission | By: Tues 2 pm
 -------------------------------------
 -------------------------------------
 Bye! See you around!
