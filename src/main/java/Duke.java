@@ -36,17 +36,16 @@ public class Duke {
             switch(instructions) {
                 case("list") :
                     printList(list);
-                    System.out.println("\n" + lineBreaker + "\n");
                     break;
                 default:
                     // Store messages by default
                     System.out.print(outputBreaker);
                     list.add(instructions);
                     System.out.println("added: " + instructions);
-                    System.out.println("\n" + lineBreaker + "\n");
                     break;
             }
 
+            System.out.println("\n" + lineBreaker + "\n");
             // Read user input once more
             instructions = scanner.nextLine();
         }
@@ -59,6 +58,7 @@ public class Duke {
 
     /** Prints all the contents of the list in order **/
     public static void printList(ArrayList<String> list) {
+        System.out.print("\nHere is what I have! ^^\n");
         for (int i = 0; i < list.size(); i++) {
             System.out.println((i+1) + ". " + list.get(i));
         }
