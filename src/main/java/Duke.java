@@ -1,6 +1,11 @@
 package main.java;
 
+import java.util.Scanner;
+
 public class Duke {
+
+    private static char star = '*';
+    private static int lineLength = 50;
 
     private static void drawLine(char ch, int length) {
         System.out.println();
@@ -11,13 +16,16 @@ public class Duke {
     }
 
     private static void greet() {
-        char star = '*';
-        int length = 8;
-
-        drawLine(star, length);
+        drawLine(star, lineLength);
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
-        drawLine(star, length);
+        drawLine(star, lineLength);
+    }
+
+    private static void echo(String str) {
+        drawLine(star, lineLength);
+        System.out.println(str);
+        drawLine(star, lineLength);
     }
 
     public static void main(String[] args) {
@@ -29,5 +37,10 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         greet();
+
+        while (true) {
+            String inputLine = UserInput.getOneLine();
+            echo(inputLine);
+        }
     }
 }
