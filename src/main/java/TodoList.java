@@ -7,7 +7,7 @@ public class TodoList {
 
     public static void initialise() {
         Scanner sc = new Scanner(System.in);  // Create a Scanner object
-        while(!TodoList.terminate) {
+        while (!TodoList.terminate) {
             String command = sc.nextLine();  // Read user input
             TodoList.handleCommand(command); // Output user input
         }
@@ -16,51 +16,70 @@ public class TodoList {
 
     private static void handleCommand(String command) {
         String[] splitCommand = command.split(" ", 2);
-        if (splitCommand[0].equals("list")) {
-            for (int i = 0; i < todoList.size(); i++) {
-                int index = i + 1;
-                System.out.println(index + ". " + todoList.get(i).toString());
-            }
-        } else if (splitCommand[0].equals("bye")) {
-            TodoList.terminate = true;
-            System.out.println("Bye. Hope to see you again soon!");
-        } else if (!splitCommand[0].equals("done") && !splitCommand[0].equals("todo") &&
-                !splitCommand[0].equals("deadline") && !splitCommand[0].equals("event")) {
-            System.out.println(splitCommand[0]);
-            TodoList.addTask(command);
-        } else {
+        System.out.println(splitCommand[0]);
+        try {
             try {
-                if (splitCommand[0].equals("done")) {
-                    int index = Integer.parseInt(splitCommand[1]);
-                    Task targetTask = todoList.get(index - 1);
-                    String message = targetTask.completeTask();
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(message);
-                } else if (splitCommand[0].equals("deadline")) {
-                    String[] splitDeadline = splitCommand[1].split(" /by ");
-                    System.out.println("Got it. I've added this task:");
-                    TodoList.addDeadline(splitDeadline[0], splitDeadline[1]);
-                    int size = todoList.size();
-                    System.out.println("Now you have " + size + " tasks in the list.");
-                } else if (splitCommand[0].equals("todo")) {
-                    System.out.println("Got it. I've added this task:");
-                    TodoList.addTodo(splitCommand[1]);
-                    int size = todoList.size();
-                    System.out.println("Now you have " + size + " tasks in the list.");
-                } else if (splitCommand[0].equals("event")) {
-                    String[] splitEvent = splitCommand[1].split(" /at ");
-                    System.out.println("Got it. I've added this task:");
-                    TodoList.addEvent(splitEvent[0], splitEvent[1]);
-                    int size = todoList.size();
-                    System.out.println("Now you have " + size + " tasks in the list.");
+                switch (splitCommand[0]) {
+                    case "list": {
+                        for (int i = 0; i < todoList.size(); i++) {
+                            int index = i + 1;
+                            System.out.println(index + ". " + todoList.get(i).toString());
+                        }
+                        // break is necessary to prevent fall-through
+                        break;
+                    }
+                    case "bye": {
+                        TodoList.terminate = true;
+                        System.out.println("Bye. Hope to see you again soon!");
+                        break;
+                    }
+                    case "done": {
+                        int index = Integer.parseInt(splitCommand[1]);
+                        Task targetTask = todoList.get(index - 1);
+                        String message = targetTask.completeTask();
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println(message);
+                        break;
+                    }
+                    case "deadline": {
+                        String[] splitDeadline = splitCommand[1].split(" /by ");
+                        System.out.println("Got it. I've added this task:");
+                        TodoList.addDeadline(splitDeadline[0], splitDeadline[1]);
+                        int size = todoList.size();
+                        System.out.println("Now you have " + size + " tasks in the list.");
+                        break;
+                    }
+                    case "event": {
+                        String[] splitEvent = splitCommand[1].split(" /at ");
+                        System.out.println("Got it. I've added this task:");
+                        TodoList.addEvent(splitEvent[0], splitEvent[1]);
+                        int size = todoList.size();
+                        System.out.println("Now you have " + size + " tasks in the list.");
+                        break;
+                    }
+                    case "todo": {
+                        System.out.println("Got it. I've added this task:");
+                        TodoList.addTodo(splitCommand[1]);
+                        int size = todoList.size();
+                        System.out.println("Now you have " + size + " tasks in the list.");
+                        break;
+                    }
+                    default: {
+                        throw new UnknownCommandException("a");
+                    }
                 }
             } catch (NumberFormatException error) {
                 // When "done" is not followed by a valid number
-                System.out.println("Please enter a valid index!");
+                throw new InvalidIndexException("a");
             } catch (ArrayIndexOutOfBoundsException error) {
                 // When "done" is not followed by any number
+                System.out.println("Dukeexion");
                 System.out.println("Please let me know which task you are referring to!");
+            } catch (IndexOutOfBoundsException error) {
+                // When "done is followed by a number that is out of range
             }
+        } catch (DukeException error) {
+            System.out.println("Dukeexception");
         }
     }
 
@@ -85,3 +104,41 @@ public class TodoList {
         todoList.add(newEvent);
     }
 }
+//                } else if (!splitCommand[0].equals("done") && !splitCommand[0].equals("todo") &&
+//                        !splitCommand[0].equals("deadline") && !splitCommand[0].equals("event")) {
+//                    System.out.println(splitCommand[0]);
+//                    TodoList.addTask(command);
+//                } else {
+// try {
+//                        if (splitCommand[0].equals("done")) {
+//                            int index = Integer.parseInt(splitCommand[1]);
+//                            Task targetTask = todoList.get(index - 1);
+//                            String message = targetTask.completeTask();
+//                            System.out.println("Nice! I've marked this task as done:");
+//                            System.out.println(message);
+//                        } else if (splitCommand[0].equals("deadline")) {
+//                            String[] splitDeadline = splitCommand[1].split(" /by ");
+//                            System.out.println("Got it. I've added this task:");
+//                            TodoList.addDeadline(splitDeadline[0], splitDeadline[1]);
+//                            int size = todoList.size();
+//                            System.out.println("Now you have " + size + " tasks in the list.");
+//                        } else if (splitCommand[0].equals("todo")) {
+//                            System.out.println("Got it. I've added this task:");
+//                            TodoList.addTodo(splitCommand[1]);
+//                            int size = todoList.size();
+//                            System.out.println("Now you have " + size + " tasks in the list.");
+//                        } else if (splitCommand[0].equals("event")) {
+//                            String[] splitEvent = splitCommand[1].split(" /at ");
+//                            System.out.println("Got it. I've added this task:");
+//                            TodoList.addEvent(splitEvent[0], splitEvent[1]);
+//                            int size = todoList.size();
+//                            System.out.println("Now you have " + size + " tasks in the list.");
+//                        }
+//                    } catch (NumberFormatException error) {
+//                        // When "done" is not followed by a valid number
+//                        System.out.println("Please enter a valid index!");
+//                    } catch (ArrayIndexOutOfBoundsException error) {
+//                        // When "done" is not followed by any number
+//                        System.out.println("Please let me know which task you are referring to!");
+//                    }
+//                }
