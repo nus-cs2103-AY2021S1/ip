@@ -34,6 +34,20 @@ public class Duke {
         taskList.add(index, t);
     }
 
+    public static void deleteTask(String task) throws DukeIndexOutOfBoundsException{
+        if (task.length() <= 7) {
+            throw new DukeIndexOutOfBoundsException("The task you want to delete is invalid");
+        }
+        int taskNo = Character.getNumericValue(task.charAt(7));
+        if (taskNo < 1 || taskNo > taskList.size()) {
+            throw new DukeIndexOutOfBoundsException("The task you want to delete is invalid");
+        }
+        int index = taskNo - 1;
+        Task t = taskList.remove(index);
+        System.out.println("\tNoted. I've removed this task:" + "\n\t\t" + t);
+        System.out.println(String.format("\tNow you have %d tasks in the list.", taskList.size()));
+    }
+
     public static void handleToDo(String task) throws DukeInvalidCommandException{
         if (task.trim().equals("todo")) {
             throw new DukeInvalidCommandException("The command is incomplete handsome :D");
@@ -86,6 +100,8 @@ public class Duke {
                             handleDeadLine(task);
                         } else if (task.startsWith("event")) {
                             handleEvent(task);
+                        } else if (task.startsWith("delete")) {
+                            deleteTask(task);
                         } else {
                             throw new DukeInvalidCommandException("Sorry handsome but I'm not sure about this command :)");
                         }
