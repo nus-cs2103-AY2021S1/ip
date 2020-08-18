@@ -4,6 +4,18 @@ import static java.lang.Integer.parseInt;
 
 public class Duke {
 
+    enum TaskType {
+        TODO("todo"),
+        EVENT("event"),
+        DEADLINE("deadline");
+
+        public final String name;
+
+        private TaskType(String name) {
+            this.name = name;
+        }
+    }
+
     boolean running = false;
     ArrayList<Task> memory = new ArrayList<>();
 
@@ -149,11 +161,11 @@ public class Duke {
                     splitString[0].equals("delete") && stringIsInt(splitString[1])) {
                 int index = parseInt(splitString[1]);
                 delete(index);
-            } else if (splitString[0].equals("todo")) {
+            } else if (splitString[0].equals(TaskType.TODO.name)) {
                 todo(splitString);
-            } else if (splitString[0].equals("deadline")) {
+            } else if (splitString[0].equals(TaskType.DEADLINE.name)) {
                 deadline(splitString);
-            } else if (splitString[0].equals("event")) {
+            } else if (splitString[0].equals(TaskType.EVENT.name)) {
                 event(splitString);
             } else {
                 unknownCommandMessage();
