@@ -10,7 +10,8 @@ public class Duke {
         TODO,
         DEADLINE,
         EVENT,
-        DONE
+        DONE,
+        DELETE
     }
 
     // validate command format
@@ -77,6 +78,13 @@ public class Duke {
                         System.out.println("----- Received, added the following task:\n" + tasks.get(tasks.size() - 1));
                         System.out.println("You now have " + tasks.size() + " pending tasks.");
                         break;
+                    // delete task
+                    case DELETE:
+                        int taskIndex = Integer.parseInt(value) - 1;
+                        Task removedTask = tasks.get(taskIndex);
+                        tasks.remove(taskIndex);
+                        System.out.println("----- Received, deleted the following task:\n" + removedTask);
+                        System.out.println("You now have " + tasks.size() + " pending tasks.");
                 }
             }
             // catch error when command is invalid
