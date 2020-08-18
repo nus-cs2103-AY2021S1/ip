@@ -1,9 +1,10 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void handleInput() {
 
-        Task[] list = new Task[100];
+        ArrayList<Task> list = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNextLine()) {
@@ -19,7 +20,9 @@ public class Duke {
                 } else if (input.split(" ").length == 0) {
                     throw new DukeException("Sorry, I don't understand what you are saying! D=");
                 } else if (input.toLowerCase().split(" ")[0].equals("done")) {
-                    replyDone(input, list, Task.totalTasks);
+                    replyDone(input, list);
+                } else if (input.toLowerCase().split(" ")[0].equals("delete")) {
+                    replyDelete(input, list);
                 } else {
                     String inputTask;
                     Task task;
@@ -31,7 +34,7 @@ public class Duke {
 
                         inputTask = input.substring(5);
                         task = new Todo(inputTask);
-                        list[Task.totalTasks - 1] = task;
+                        list.add(task);
                         replyTask(task);
                     } else if (input.toLowerCase().split(" ")[0].equals("event")) {
                         if (input.split(" ").length == 1) {
@@ -46,8 +49,8 @@ public class Duke {
                                     + "eg event project meeting /at Mon 2-4pm");
                         }
 
-                        task = new Event(arr[0].trim(), arr[1].substring(3));
-                        list[Task.totalTasks - 1] = task;
+                        task = new Event(arr[0], arr[1]);
+                        list.add(task);
                         replyTask(task);
                     } else if (input.toLowerCase().split(" ")[0].equals("deadline")) {
                         if (input.split(" ").length == 1) {
@@ -62,8 +65,8 @@ public class Duke {
                                     + "eg deadline return book /by Sunday");
                         }
 
-                        task = new Deadline(arr[0].trim(), arr[1].substring(3));
-                        list[Task.totalTasks - 1] = task;
+                        task = new Deadline(arr[0], arr[1]);
+                        list.add(task);
                         replyTask(task);
                     } else {
                         throw new DukeException("Sorry, I don't understand what you are saying! D=");
@@ -80,30 +83,55 @@ public class Duke {
         printReply(exitMessage);
     }
 
-    public static void replyDone(String input, Task[] list, int end) throws DukeException{
+    public static void replyDone(String input, ArrayList<Task> list) throws DukeException{
         String doneMessage = "Nicee!! You've completed this task!\n";
         if (input.length() <= 5) {
             throw new DukeException("You need to specify which task to mark done! \n" +
                     "eg done 1");
         }
 
-        if (end == 0) {
+        if (Task.totalTasks == 0) {
             throw new DukeException("You don't have any tasks yet!");
         }
 
         int i = input.charAt(5) - 48;
 
-        if (i == 0 || i > end) {
+        if (i == 0 || i > Task.totalTasks) {
             throw new DukeException("You don't have a task with that number! ><\n" +
                 "Can you try a different number?");
         } else {
-            list[i - 1].markDone();
-            doneMessage += list[i - 1];
+            list.get(i - 1).markDone();
+            doneMessage += list.get(i - 1);
             printReply(doneMessage);
         }
     }
 
-    public static void replyList(Task[] list, int end) throws DukeException {
+    public static void replyDelete(String input, ArrayList<Task> list) throws DukeException{
+        String deleteMessage = "Oki! I've removed this task!\n";
+        if (input.length() <= 7) {
+            throw new DukeException("You need to specify which task to delete! \n" +
+                    "eg delete 1");
+        }
+
+        if (Task.totalTasks == 0) {
+            throw new DukeException("You don't have any tasks yet!");
+        }
+
+        int i = input.charAt(7) - 48;
+
+        if (i == 0 || i > Task.totalTasks) {
+            throw new DukeException("You don't have a task with that number! ><\n" +
+                    "Can you try a different number?");
+        } else {
+            Task.totalTasks--;
+            deleteMessage += list.get(i - 1) + "\n" + "Now you have " +
+                    Task.totalTasks + " tasks in your list!";;
+            list.remove(i - 1);
+            printReply(deleteMessage);
+        }
+    }
+
+    public static void replyList(ArrayList<Task> list, int end) throws DukeException {
         String numberedList = "Here are your tasks! JIAYOU! =D";
 
         if (end == 0) {
@@ -112,7 +140,7 @@ public class Duke {
 
         for (int i = 0; i < end; i++) {
                 int num = i + 1;
-                numberedList += "\n" + num + ". " + list[i];
+                numberedList += "\n" + num + ". " + list.get(i);
         }
 
         printReply(numberedList);
