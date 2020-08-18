@@ -17,7 +17,7 @@ public class Duke {
 
         String type = sc.next();
         String input = sc.nextLine().trim();
-        System.out.println(input);
+
         while (!type.equals("bye")) {
             if (type.equals("list")) {
                 int listSize = list.size();
