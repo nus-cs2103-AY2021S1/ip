@@ -31,10 +31,24 @@ public class Duke {
                         System.out.println(list);
                     }
                 } else if (type.equals("done")) {
-                    int index = Integer.parseInt(input) - 1;
-                    Task task = list.markAsDone(index);
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(task);
+                    try {
+                        int index = Integer.parseInt(input) - 1;
+                        Task task = list.markAsDone(index);
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println(task);
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("OOPS!!! I'm sorry, which task number?");
+                    }
+                } else if (type.equals("delete")) {
+                    try {
+                        int index = Integer.parseInt(input) - 1;
+                        Task task = list.deleteTask(index);
+                        System.out.println("Noted. I've removed this task: ");
+                        System.out.println(task);
+                        System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("OOPS!!! I'm sorry, which task number?");
+                    }
                 } else {
                     Task task = list.addTask(type, input);
                     System.out.println("Got it. I've added this task: ");

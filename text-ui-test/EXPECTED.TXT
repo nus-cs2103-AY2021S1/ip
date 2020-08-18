@@ -61,4 +61,12 @@ OOPS!!! I'm sorry, when is the event? (/at...)
 ---------------------------------------------------------
 OOPS!!! I'm sorry, I don't know what that means :<
 ---------------------------------------------------------
+OOPS!!! I'm sorry, which task number?
+---------------------------------------------------------
+Noted. I've removed this task: 
+[D][✗] CS2103 iP Week 2 (by: Thursday 23.59pm)
+Now you have 3 tasks in the list.
+---------------------------------------------------------
+OOPS!!! I'm sorry, which task number?
+---------------------------------------------------------
 Bye. Hope to see you again!

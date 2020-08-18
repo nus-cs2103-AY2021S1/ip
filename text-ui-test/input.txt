@@ -14,4 +14,7 @@ list
 todo
 event
 bhkd
+done all
+delete 4
+delete nothing
 bye
