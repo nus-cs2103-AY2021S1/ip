@@ -2,12 +2,13 @@ import main.java.Deadline;
 import main.java.Task;
 import main.java.ToDo;
 import main.java.Event;
+import main.java.DukeException;
 
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    static String bot = "Dave says: \n";
+    static String bot = "Dave says:\n";
     //static String user = "Me: \n";
     static String addedText = "added: ";
     static String line = "_______________________________________________________________";
@@ -17,7 +18,7 @@ public class Duke {
 
         //Initial greetings
         System.out.println(line);
-        System.out.println(bot + "Greetings from me, Dave! \n" + "How can I help you? ^_^");
+        System.out.println(bot + "Greetings from me, Dave!\n" + "How can I help you? ^_^");
         System.out.println(line);
 
         Scanner scanner = new Scanner(System.in);
@@ -43,15 +44,19 @@ public class Duke {
                 }
 
             } else if (userInput.startsWith("todo")) { //added
-                ToDo todo = new ToDo(userInput.substring(5));
-                tasks.add(todo); //adds into tasks list
-                System.out.println(line);
-                System.out.print(bot);
-                System.out.println("Got it! I've added this task:");
-                //System.out.println(addedText + userInput);
-                System.out.println(todo);
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                System.out.println(line);
+                if (userInput.matches("todo")) {
+                    System.out.println("The description of a todo cannot be empty!");
+                } else {
+                    ToDo todo = new ToDo(userInput.substring(5));
+                    tasks.add(todo); //adds into tasks list
+                    System.out.println(line);
+                    System.out.print(bot);
+                    System.out.println("Got it! I've added this task:");
+                    //System.out.println(addedText + userInput);
+                    System.out.println(todo);
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    System.out.println(line);
+                }
             } else if (userInput.startsWith("deadline")) {
                 int indexOfSlash = userInput.indexOf('/');
                 String description = userInput.substring(9, indexOfSlash - 1);
@@ -103,7 +108,7 @@ public class Duke {
         tasks.get(pos - 1).markAsDone(); //marking task as done
         System.out.println(line);
         System.out.print(bot);
-        System.out.println("Great work! I've marked this task as done: ");
+        System.out.println("Great work! I've marked this task as done:");
         //System.out.println("[" + tasks.get(pos - 1).getStatusIcon() + "]" + " " + tasks.get(pos - 1).getTask());
         System.out.println(tasks.get(pos - 1));
         System.out.println("Keep the ticks going! ^_^");
