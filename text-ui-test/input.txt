@@ -1,0 +1,13 @@
+todo borrow book
+deadline return book /by sunday
+event meet friend /at wed 2pm
+list
+done 1
+list
+done 2
+list
+done 3
+list
+hello world
+done 5
+bye
