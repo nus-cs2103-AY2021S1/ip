@@ -4,7 +4,7 @@ public class Duke {
     private String line = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     private String outputFormat = "  %s\n";
     private boolean ongoing;
-    private ArrayList<String> todoList;
+    private ArrayList<Task> todoList;
 
     Duke() {
         ongoing = false;
@@ -34,21 +34,35 @@ public class Duke {
         } else if (input.equals("list")) {
             showList();
         } else {
-            addItem(input);
+            String[] instructions = input.split(" ");
+            if (instructions[0].equals("done")) {
+                completeItem(Integer.valueOf(instructions[1]) - 1);
+            } else {
+                addItem(input);
+            }
         }
     }
 
     public void showList() {
         int count = 1;
         System.out.printf(outputFormat, "The tasks in your Todo List: ");
-        for (String item : todoList) {
-            System.out.printf(outputFormat, Integer.toString(count) + ". " + item);
+        for (Task item : todoList) {
+            System.out.printf(outputFormat, Integer.toString(count) + ". " + item.getItem());
             count += 1;
         }
     }
 
+    public void completeItem(Integer index) {
+        Task item = todoList.get(index);
+        item.completeTask();
+        System.out.printf(outputFormat, "   \\\\(^o^)/ *.*.* \\\\(^o^)/");
+        System.out.printf(outputFormat, "Yay! This task has been completed: ");
+        System.out.printf(outputFormat, "  " + item.getItem());
+    }
+
     public void addItem(String input) {
-        todoList.add(input);
+        Task newTask = new Task(input);
+        todoList.add(newTask);
         System.out.printf(outputFormat, "New todo item added: " + input);
     }
 

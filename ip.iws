@@ -10,6 +10,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -47,22 +54,22 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1379" height="217" key="GridCell.Tab.0.bottom" timestamp="1597680846020">
+    <state width="1379" height="217" key="GridCell.Tab.0.bottom" timestamp="1597681261105">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state width="1379" height="217" key="GridCell.Tab.0.bottom/4.23.1436.877@4.23.1436.877" timestamp="1597680846020" />
-    <state width="1379" height="217" key="GridCell.Tab.0.center" timestamp="1597680846018">
+    <state width="1379" height="217" key="GridCell.Tab.0.bottom/4.23.1436.877@4.23.1436.877" timestamp="1597681261105" />
+    <state width="1379" height="217" key="GridCell.Tab.0.center" timestamp="1597681261102">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state width="1379" height="217" key="GridCell.Tab.0.center/4.23.1436.877@4.23.1436.877" timestamp="1597680846018" />
-    <state width="1379" height="217" key="GridCell.Tab.0.left" timestamp="1597680846017">
+    <state width="1379" height="217" key="GridCell.Tab.0.center/4.23.1436.877@4.23.1436.877" timestamp="1597681261102" />
+    <state width="1379" height="217" key="GridCell.Tab.0.left" timestamp="1597681261101">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state width="1379" height="217" key="GridCell.Tab.0.left/4.23.1436.877@4.23.1436.877" timestamp="1597680846017" />
-    <state width="1379" height="217" key="GridCell.Tab.0.right" timestamp="1597680846019">
+    <state width="1379" height="217" key="GridCell.Tab.0.left/4.23.1436.877@4.23.1436.877" timestamp="1597681261101" />
+    <state width="1379" height="217" key="GridCell.Tab.0.right" timestamp="1597681261104">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state width="1379" height="217" key="GridCell.Tab.0.right/4.23.1436.877@4.23.1436.877" timestamp="1597680846019" />
+    <state width="1379" height="217" key="GridCell.Tab.0.right/4.23.1436.877@4.23.1436.877" timestamp="1597681261104" />
     <state x="356" y="245" key="NewModule_or_Project.wizard" timestamp="1597677490495">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
