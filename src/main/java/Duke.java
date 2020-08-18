@@ -70,24 +70,42 @@ public class Duke {
         System.out.printf(stringFormat, "Nice! I've marked this task as done:\n\t" + task.toString());
     }
 
-    private void createTodo(String action) throws TaskDescriptionNotFoundException {
-        String description = new StringBuilder(action).substring(5);
-        if (description.length() < 1) {
-            throw new TaskDescriptionNotFoundException("☹ OOPS!!! The description of a todo cannot be empty.");
+    private void processDelete(String action) throws TaskNumberNotFoundException {
+        String[] splitKeys = action.split(" ");
+        if (splitKeys.length < 2) {
+            throw new TaskNumberNotFoundException("☹ OOPS!!! Please enter a task number after 'delete'.");
         }
+
+        int taskIndex = Integer.parseInt(splitKeys[1]);
+        if (taskIndex > this.list.size() || taskIndex < 1) {
+            throw new TaskNumberNotFoundException("☹ OOPS!!! The task number is not valid.");
+        }
+        Task task = this.list.get(taskIndex - 1);
+        this.list.remove(taskIndex - 1);
+        String content = String.format("Got it. I've deleted this task:\n" +
+                        "\t%1$s\n" +
+                        "Now you have %2$d tasks in the list.",
+                task.toString(), this.list.size());
+        System.out.printf(stringFormat, content);
+    }
+
+    private void createTodo(String action) throws TaskDescriptionNotFoundException {
+        if (action.length() < 6) throw new TaskDescriptionNotFoundException("☹ OOPS!!! The description of a todo cannot be empty.");
+        String description = new StringBuilder(action).substring(5);
         Todo newTodo = new Todo(description);
         this.processAdd(newTodo);
     }
 
     private void createDeadline(String action) throws TaskDetailsNotFound, TaskDescriptionNotFoundException {
+        if (action.length() < 10) throw new TaskDescriptionNotFoundException("☹ OOPS!!! The description of a deadline cannot be empty.");
         if (!action.contains(" /by ")) {
-            throw new TaskDetailsNotFound("Invalid format, missing '/by' key!!");
+            throw new TaskDetailsNotFound("Invalid format, missing '/by' key or deadline!!");
         }
         String[] taskDetails = new StringBuilder(action).substring(9).split(" /by ");
         if (taskDetails[0].length() < 1) {
             throw new TaskDescriptionNotFoundException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
-        if (taskDetails[1].length() < 1) {
+        if (taskDetails.length < 2) {
             throw new TaskDetailsNotFound("☹ OOPS!!! The deadline cannot be empty.");
         }
         Deadline newDeadline = new Deadline(taskDetails[0], taskDetails[1]);
@@ -95,14 +113,15 @@ public class Duke {
     }
 
     private void createEvent(String action) throws TaskDetailsNotFound, TaskDescriptionNotFoundException {
+        if (action.length() < 7) throw new TaskDescriptionNotFoundException("☹ OOPS!!! The description of an event cannot be empty.");
         if (!action.contains(" /at ")) {
-            throw new TaskDetailsNotFound("Invalid format, missing '/at' key!!");
+            throw new TaskDetailsNotFound("Invalid format, missing '/at' key or event date!!");
         }
         String[] taskDetails = new StringBuilder(action).substring(6).split(" /at ");
         if (taskDetails[0].length() < 1) {
             throw new TaskDescriptionNotFoundException("☹ OOPS!!! The description of an event cannot be empty.");
         }
-        if (taskDetails[1].length() < 1) {
+        if (taskDetails.length < 2) {
             throw new TaskDetailsNotFound("☹ OOPS!!! The event date cannot be empty.");
         }
         Event newEvent = new Event(taskDetails[0], taskDetails[1]);
@@ -111,7 +130,7 @@ public class Duke {
 
     private boolean processAction() {
         try {
-            System.out.println("Type an action (list, done [task number], todo [description], deadline [description /by date], event [description /at date], bye):");
+            System.out.println("Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):");
             String action = this.scanner.nextLine();
             String key = action.split(" ")[0];
             switch (key) {
@@ -123,6 +142,9 @@ public class Duke {
                     break;
                 case "done":
                     this.processDone(action);
+                    break;
+                case "delete":
+                    this.processDelete(action);
                     break;
                 case "todo":
                     this.createTodo(action);

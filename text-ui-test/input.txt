@@ -1,11 +1,21 @@
-todo read book
-todo
-deadline submit assignment /by Mon, 16 Aug
-event project meeting /at Tue 2-4pm
-event project meeting
 list
-done
-done 4
+todo read book
+deadline submit assignment /by tmr
+event project meeting /at Wed 2-4pm
+list
 done 1
 list
+delete 1
+list
+todo
+deadline
+deadline submit homework
+event
+event project meeting
+done
+done 4
+delete
+delete 1
+list
+delete 2
 bye

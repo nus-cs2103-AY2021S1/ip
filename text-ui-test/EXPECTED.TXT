@@ -9,68 +9,123 @@ Hello! I'm Duke
 What can I do for you?
 --------------------------------------------------
 
-Type an action (list, done [task number], todo [description], deadline [description /by date], event [description /at date], bye):
+Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):
+--------------------------------------------------
+There is nothing in the list!!
+--------------------------------------------------
+
+Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):
 --------------------------------------------------
 Got it. I've added this task:
 	[T][✘] read book
 Now you have 1 tasks in the list.
 --------------------------------------------------
 
-Type an action (list, done [task number], todo [description], deadline [description /by date], event [description /at date], bye):
---------------------------------------------------
-☹ OOPS!!! The description of a todo cannot be empty.
---------------------------------------------------
-
-Type an action (list, done [task number], todo [description], deadline [description /by date], event [description /at date], bye):
+Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):
 --------------------------------------------------
 Got it. I've added this task:
-	[D][✘] submit assignment (by: Mon, 16 Aug)
+	[D][✘] submit assignment (by: tmr)
 Now you have 2 tasks in the list.
 --------------------------------------------------
 
-Type an action (list, done [task number], todo [description], deadline [description /by date], event [description /at date], bye):
+Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):
 --------------------------------------------------
 Got it. I've added this task:
-	[E][✘] project meeting (at: Tue 2-4pm)
+	[E][✘] project meeting (at: Wed, 2-4pm)
 Now you have 3 tasks in the list.
 --------------------------------------------------
 
-Type an action (list, done [task number], todo [description], deadline [description /by date], event [description /at date], bye):
---------------------------------------------------
-Invalid format, missing '/at' key!!
---------------------------------------------------
-
-Type an action (list, done [task number], todo [description], deadline [description /by date], event [description /at date], bye):
+Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):
 --------------------------------------------------
 1. [T][✘] read book
-2. [D][✘] submit assignment (by: Mon, 16 Aug)
-3. [E][✘] project meeting (at: Tue 2-4pm)
+2. [D][✘] submit assignment (by: tmr)
+3. [E][✘] project meeting (at: Wed, 2-4pm)
 --------------------------------------------------
 
-Type an action (list, done [task number], todo [description], deadline [description /by date], event [description /at date], bye):
---------------------------------------------------
-☹ OOPS!!! Please enter a task number after 'done'.
---------------------------------------------------
-
-Type an action (list, done [task number], todo [description], deadline [description /by date], event [description /at date], bye):
---------------------------------------------------
-☹ OOPS!!! The task number is not valid.
---------------------------------------------------
-
-Type an action (list, done [task number], todo [description], deadline [description /by date], event [description /at date], bye):
+Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):
 --------------------------------------------------
 Nice! I've marked this task as done:
 	[T][✓] read book
 --------------------------------------------------
 
-Type an action (list, done [task number], todo [description], deadline [description /by date], event [description /at date], bye):
+Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):
 --------------------------------------------------
 1. [T][✓] read book
-2. [D][✘] submit assignment (by: Mon, 16 Aug)
-3. [E][✘] project meeting (at: Tue 2-4pm)
+2. [D][✘] submit assignment (by: tmr)
+3. [E][✘] project meeting (at: Wed, 2-4pm)
 --------------------------------------------------
 
-Type an action (list, done [task number], todo [description], deadline [description /by date], event [description /at date], bye):
+Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):
+--------------------------------------------------
+Got it. I've deleted this task:
+	[T][✓] read book
+Now you have 2 tasks in the list.
+--------------------------------------------------
+
+Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):
+--------------------------------------------------
+1. [D][✘] submit assignment (by: tmr)
+2. [E][✘] project meeting (at: Wed, 2-4pm)
+--------------------------------------------------
+
+Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):
+--------------------------------------------------
+☹ OOPS!!! The description of a todo cannot be empty.
+--------------------------------------------------
+
+Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):
+--------------------------------------------------
+☹ OOPS!!! The description of a deadline cannot be empty.
+--------------------------------------------------
+
+Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):
+--------------------------------------------------
+Invalid format, missing '/by' key or deadline!!
+--------------------------------------------------
+
+Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):
+--------------------------------------------------
+☹ OOPS!!! The description of an event cannot be empty.
+--------------------------------------------------
+
+Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):
+--------------------------------------------------
+Invalid format, missing '/at' key or event date!!
+--------------------------------------------------
+
+Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):
+--------------------------------------------------
+☹ OOPS!!! Please enter a task number after 'done'.
+--------------------------------------------------
+
+Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):
+--------------------------------------------------
+☹ OOPS!!! The task number is not valid.
+--------------------------------------------------
+
+Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):
+--------------------------------------------------
+☹ OOPS!!! Please enter a task number after 'delete'.
+--------------------------------------------------
+
+Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):
+--------------------------------------------------
+Got it. I've deleted this task:
+	[D][✘] submit assignment (by: tmr)
+Now you have 1 tasks in the list.
+--------------------------------------------------
+
+Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):
+--------------------------------------------------
+1. [E][✘] project meeting (at: Wed, 2-4pm)
+--------------------------------------------------
+
+Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):
+--------------------------------------------------
+☹ OOPS!!! The task number is not valid.
+--------------------------------------------------
+
+Type an action (list, todo [description], deadline [description /by date], event [description /at date], done [task number], delete [task number], bye):
 --------------------------------------------------
 Bye. Hope to see you again soon!
 --------------------------------------------------
