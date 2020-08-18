@@ -20,6 +20,7 @@ public class DukeCommandSet {
 
         registerCommand(new ExitCommand());
         registerCommand(new ListCommand());
+        registerCommand(new DoneCommand());
     }
 
     private void registerCommand(Command command) {
