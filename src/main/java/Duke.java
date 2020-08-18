@@ -57,9 +57,9 @@ public class Duke {
                 Printer.printGeneralChatWindow("ERROR: Unknown input! Try again.");
             } catch (IndexOutOfBoundsException e) {
                 Printer.printGeneralChatWindow("ERROR: Invalid list number input!");
-            } catch (DukeEmptyTaskDescriptionException e){
+            } catch (DukeInvalidTaskDescriptionException e){
                 Printer.printGeneralChatWindow("ERROR: The description of a task cannot be empty!");
-            } catch (DukeEmptyTaskDurationException e) {
+            } catch (DukeInvalidTaskDurationException e) {
                 Printer.printGeneralChatWindow("ERROR: Please specify a date/time for this task!");
             } finally {
                 input = sc.nextLine();
@@ -88,7 +88,9 @@ public class Duke {
     }
 
     private static Task addTask(String tag, String input, List<Task> tasks)
-            throws DukeEmptyTaskDescriptionException, DukeEmptyTaskDurationException {
+            throws DukeInvalidTaskDescriptionException,
+                   DukeInvalidEventDurationException,
+                   DukeInvalidDeadlineDurationException {
         Task toAdd = null;
         try {
             switch (tag) {
@@ -102,6 +104,11 @@ public class Duke {
                 case "event":
                     String[] eventText = input.substring(6).split(" /at ");
                     String eventDescription = eventText[0];
+
+                    if (eventText.length == 1) {
+                        throw new DukeInvalidEventDurationException(input);
+                    }
+
                     String eventAt = eventText[1];
                     Event event = new Event(eventDescription, eventAt);
                     tasks.add(event);
@@ -111,6 +118,11 @@ public class Duke {
                 case "deadline":
                     String[] deadlineText = input.substring(9).split(" /by ");
                     String deadlineDescription = deadlineText[0];
+
+                    if (deadlineText.length == 1) {
+                        throw new DukeInvalidDeadlineDurationException(input);
+                    }
+
                     String deadlineBy = deadlineText[1];
                     Deadline deadline = new Deadline(deadlineDescription, deadlineBy);
                     tasks.add(deadline);
@@ -118,9 +130,7 @@ public class Duke {
                     break;
             }
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeEmptyTaskDescriptionException(input);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeEmptyTaskDurationException(input);
+            throw new DukeInvalidTaskDescriptionException(input);
         }
         return toAdd;
     } 
