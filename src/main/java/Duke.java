@@ -13,9 +13,7 @@ public class Duke {
         System.out.println("Hello! This is Duke.\nWhat can I do for you?");
     }
 
-    private static boolean isExit(String line) {
-        return line.toLowerCase().contains("bye");
-    }
+
 
     private static void exit() {
         System.out.println("Bye. Duke is always there for you!");
@@ -26,22 +24,28 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String line = scanner.nextLine();
         while (true) {
-            if (isExit(line)) {
+            if (Parser.isExit(line)) {
                 exit();
                 break;
             }
-            else if (line.equals("list")) {
-                ListFunction.printList();
+            else if (line.isEmpty()) {
                 line = scanner.nextLine();
+                continue;
             }
-            else if (line.length() >= 4 && line.substring(0, 4).equals("done")) {
+            else if (Parser.isList(line)) {
+                ListFunction.printList();
+            }
+            else if (Parser.isDone(line)) {
                 ListFunction.setDone(Integer.parseInt(line.substring(5)));
-                line = scanner.nextLine();
             }
             else {
-                ListFunction.add(line);
-                line = scanner.nextLine();
+                int type = Parser.taskType(line);
+                if (type == 1)
+                    ListFunction.add(type, line);
+                else
+                    ListFunction.add(type, Parser.getName(line), Parser.getTime(line));
             }
+            line = scanner.nextLine();
         }
     }
 

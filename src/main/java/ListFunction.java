@@ -4,9 +4,26 @@ import java.util.List;
 public class ListFunction {
     private static List<Task> taskList = new ArrayList<>();
 
-    public static void add(String taskName) {
-        taskList.add(new Task(taskName));
-        System.out.println("Task added: " + taskName);
+    public static void add(int type, String taskName) {
+        Todo todo = new Todo(taskName);
+        taskList.add(todo);
+        System.out.println("Got it. I've added the task:\n" + todo.toString());
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+    }
+
+    public static void add(int type, String taskName, String time) {
+        System.out.println("Got it. I've added the task:");
+        if (type == 2) {
+            Deadline deadline = new Deadline(taskName, time);
+            taskList.add(deadline);
+            System.out.println(deadline.toString());
+        }
+        else {
+            Event event = new Event(taskName, time);
+            taskList.add(event);
+            System.out.println(event.toString());
+        }
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
     public static List<Task> getList() {

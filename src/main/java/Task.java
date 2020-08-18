@@ -1,6 +1,6 @@
-public class Task {
-    private String name;
-    private boolean done;
+public abstract class Task {
+    protected String name;
+    protected boolean done;
 
     Task(String name) {
         this.name = name;
@@ -17,8 +17,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String status = "[" + (this.done ? "✓" : "✗") + "] ";
-        return status + this.getName();
+        return this.getName();
     }
 
 }
