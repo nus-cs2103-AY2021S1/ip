@@ -14,26 +14,43 @@ public class Duke {
                 + "                                                                          \n"
                 + "                                                                          \n"
                 + "                                                                          \n";
-        String lowerLine = "(¯`·._.·(¯`·._.· Zoroark ·._.·´¯)·._.·´¯)\n";
-        String upperLine = "    ♫♪.ılılıll|̲̅̅●̲̅̅|̲̅̅=̲̅̅|̲̅̅●̲̅̅|llılılı.♫♪\n";
+        String lowerLine = "\n(¯`·._.·(¯`·._.· Zoroark ·._.·´¯)·._.·´¯)\n";
+        String upperLine = "    ♫♪.ılılıll|̲̅̅●̲̅̅|̲̅̅=̲̅̅|̲̅̅●̲̅̅|llılılı.♫♪\n\n";
         String goodbye = " __   __   __   __   __       ___ \n"
                 + "/ _` /  \\ /  \\ |  \\ |__) \\ / |__  \n"
                 + "\\__> \\__/ \\__/ |__/ |__)  |  |___ \n" + "                                  ";
 
-        System.out.println("Hello I am\n" + logo + "What do you want to talk about?");
+        System.out.println("Hello I am\n" + logo + "How can I help you?");
         Scanner in = new Scanner(System.in);
         String answer = in.nextLine();
-        ArrayList<String> answers = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         while (!answer.equals("bye")) {
-            if (answer.equals("list")) {
-                System.out.println(upperLine);
-                for (int i = 0; i < answers.size(); i++) {
-                    System.out.println((i + 1) + ". " + answers.get(i) + "\n");
-                }
-                System.out.println(lowerLine);
-            } else {
-                System.out.println(upperLine + "Added: " + answer + "\n" + lowerLine);
-                answers.add(answer);
+            String[] command = answer.split(" ");
+
+            switch (command[0]) {
+                case "list":
+                    System.out.println(upperLine);
+                    System.out.println("Here is your list of tasks:");
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println((i + 1) + ". " + tasks.get(i) + "\n");
+                    }
+                    System.out.println(lowerLine);
+                    break;
+
+                case "done":
+                    int idx = Integer.parseInt(command[1]);
+                    tasks.get(idx).markAsDone();
+
+                    System.out.println(upperLine);
+                    System.out.println("Great job!\nI have marked the task as done");
+                    System.out.println(tasks.get(idx - 1));
+                    System.out.println(lowerLine);
+
+                    break;
+                default:
+                    System.out.println(
+                            upperLine + "I have added the task: " + answer + "\n" + lowerLine);
+                    tasks.add(new Task(answer));
             }
             answer = in.nextLine();
         }
