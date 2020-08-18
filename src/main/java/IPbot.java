@@ -35,6 +35,18 @@ public class IPbot {
                                     }
                                 })
                                 .collect(Collectors.joining("\n"));
+                } else if (input.startsWith("done ")) {
+                    // mark a task as done
+                    final int id = Integer.parseInt(input.substring("done ".length()));
+                    final Task toComplete = tasks.get(id - 1);
+                    if (toComplete.getDoneStatus()) {
+                        // already done
+                        output = "Task already done:\n" + toComplete;
+                    } else {
+                        // mark as done
+                        toComplete.markAsDone();
+                        output = "Task done:\n" + toComplete;
+                    }
                 } else {
                     // add task
                     tasks.add(new Task(input));
