@@ -26,7 +26,7 @@ public class Duke {
                 if (taskList.size() > 0) {
                     System.out.println("\n-> Current List:\n");
                     for (int i = 1; i <= taskList.size(); i++) {
-                        System.out.println(i + ". " + taskList.get(i - 1) + "  <-");
+                        System.out.println(i + ". " + taskList.get(i - 1));
                     }
                     System.out.println("\n");
                 } else {
@@ -86,7 +86,7 @@ public class Duke {
 
                 try {
                     String[] splited = userInput.substring(6).split("/");
-                    Deadline newEvent = new Deadline(splited[0], splited[1]);
+                    Event newEvent = new Event(splited[0], splited[1]);
                     taskList.add(newEvent);
                     System.out.println(
                             "\n-> I have added an Event:\n" +
@@ -97,6 +97,23 @@ public class Duke {
                     System.out.println("\n-> Oops, there is an error...\n" +
                             "-> please add correct description to \"event\" order\n" +
                             "-> event {task content} /{time}\n");
+                }
+
+            } else if (userInput.startsWith("delete")) {
+
+                try {
+                    int rmNo = Integer.parseInt(userInput.substring(7));
+                    if (rmNo <= 0 || rmNo - 1 >= taskList.size()) {
+                        System.out.println("\n-> Sorry, this task does not exist...\n");
+                    } else {
+                        System.out.println("\n-> I have removed this task:\n" + taskList.get(rmNo - 1).toString() + "\n");
+                        taskList.remove(rmNo - 1);
+                        System.out.println("Now you have " + taskList.size() + " tasks in your list." + "\n");
+                    }
+                } catch (Exception e) {
+                    System.out.println("\n-> Oops, there is an error...\n" +
+                            "-> please add correct description to \"done\" order\n" +
+                            "-> done {order of task in task list}\n");
                 }
 
             } else {
