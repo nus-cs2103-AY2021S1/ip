@@ -22,11 +22,11 @@ public class Duke {
             String userInput = sc.nextLine();
             String[] splitString = userInput.split(" ");
             String returnString = "";
+            if (splitString[0].equals("bye")) {
+                System.out.println("\u263A Bye. Hope to see you again soon!");
+                break;
+            }
             switch(splitString[0]) {
-                case "bye" :
-                    returnString = "\u263A Bye. Hope to see you again soon!";
-                    break;
-
                 case "list" :
                     returnString = "\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
                                     "\n\t Here are the tasks in your list:";
