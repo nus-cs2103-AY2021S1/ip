@@ -1,7 +1,60 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+   ___     ___    _  _     ___     ___
+  |   \   / _ \  | \| |   / __|   / _ \
+  | |) | | (_) | | .` |  | (_ |  | (_) |
+  |___/   \___/  |_|\_|   \___|   \___/
+_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|
+"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'
 
+Hola! I'm Dongo :)
+How can I help you?
+
+Okay~ I've added this task:
+[T][✘] read
+Now you have 1 task(s) in the list.
+Okay~ I've added this task:
+[D][✘] math homework (by: Monday)
+Now you have 2 task(s) in the list.
+Okay~ I've added this task:
+[D][✘] cs homework (by: Tuesday)
+Now you have 3 task(s) in the list.
+Okay~ I've added this task:
+[D][✘] sci homework (by: Wednesday)
+Now you have 4 task(s) in the list.
+Okay~ I've added this task:
+[E][✘] pillow party (at: 9th August 2020)
+Now you have 5 task(s) in the list.
+Okay~ I've added this task:
+[E][✘] funeral (at: 8th August 2020)
+Now you have 6 task(s) in the list.
+Okay~ I've added this task:
+[E][✘] eat (at: 10th August 2020)
+Now you have 7 task(s) in the list.
+Here are the task(s) in your list:
+1. [T][✘] read
+2. [D][✘] math homework (by: Monday)
+3. [D][✘] cs homework (by: Tuesday)
+4. [D][✘] sci homework (by: Wednesday)
+5. [E][✘] pillow party (at: 9th August 2020)
+6. [E][✘] funeral (at: 8th August 2020)
+7. [E][✘] eat (at: 10th August 2020)
+
+1
+YAYY! I've marked this task as done :
+[T][✓] read
+2
+YAYY! I've marked this task as done :
+[D][✓] math homework (by: Monday)
+Here are the task(s) in your list:
+1. [T][✓] read
+2. [D][✓] math homework (by: Monday)
+3. [D][✘] cs homework (by: Tuesday)
+4. [D][✘] sci homework (by: Wednesday)
+5. [E][✘] pillow party (at: 9th August 2020)
+6. [E][✘] funeral (at: 8th August 2020)
+7. [E][✘] eat (at: 10th August 2020)
+
+3
+YAYY! I've marked this task as done :
+[D][✓] cs homework (by: Tuesday)
+Time to say goodbye :(
+Have a great day!
