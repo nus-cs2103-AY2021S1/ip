@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Duke {
@@ -52,21 +54,21 @@ public class Duke {
     }
 
     // adds task to list
-    public static String addToList(ArrayList<Task> taskList, char taskType, String taskStr)
+    public static String addToList(ArrayList<Task> taskList, TaskType taskType, String taskStr)
             throws BlankTaskException, MissingDelimiterException, MissingDateTimeException {
         Task inputTask;
         int delimiter = taskStr.indexOf("/");
-        if (taskType != 'T' && delimiter == -1) {
+        if (taskType != TaskType.T && delimiter == -1) {
             throw new MissingDelimiterException(MESSAGE_MISSING_DELIM);
         }
-        if (taskType != 'T' && delimiter + 3 > taskStr.length()) {
+        if (taskType != TaskType.T && delimiter + 3 > taskStr.length()) {
             throw new MissingDateTimeException(MESSAGE_MISSING_DATETIME);
         }
         switch (taskType) {
-        case 'D':
+        case D:
             inputTask = new Deadline(taskStr.substring(0, delimiter), taskStr.substring(delimiter + 3));
             break;
-        case 'E':
+        case E:
             inputTask = new Event(taskStr.substring(0, delimiter), taskStr.substring(delimiter + 3));
             break;
         default:
@@ -110,9 +112,14 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         boolean terminate = false;
         ArrayList<Task> taskList = new ArrayList<>();
+        HashMap<String, TaskType> taskTypeMap = new HashMap<>(Map.of(
+                "event", TaskType.E,
+                "deadline", TaskType.D,
+                "todo", TaskType.T));
         System.out.print(BORDER + LOGO + displayOutput(MESSAGE_WELCOME));
         while (!terminate) {
-            switch (sc.next()) {
+            String input = sc.next();
+            switch (input) {
             case "bye":
                 System.out.print(displayOutput(MESSAGE_EXIT));
                 terminate = true;
@@ -140,30 +147,18 @@ public class Duke {
                 }
                 System.out.print(delete(taskList, taskId));
                 break;
-            case "todo":
-                try {
-                    System.out.print(addToList(taskList, 'T', sc.nextLine()));
-                } catch (BlankTaskException | MissingDelimiterException | MissingDateTimeException e) {
-                    System.out.print(displayOutput(e.getMessage()));
-                }
-                break;
-            case "event":
-                try {
-                    System.out.print(addToList(taskList, 'E', sc.nextLine()));
-                } catch (BlankTaskException | MissingDelimiterException | MissingDateTimeException e) {
-                    System.out.print(displayOutput(e.getMessage()));
-                }
-                break;
-            case "deadline":
-                try {
-                    System.out.print(addToList(taskList, 'D', sc.nextLine()));
-                } catch (BlankTaskException | MissingDelimiterException | MissingDateTimeException e) {
-                    System.out.print(displayOutput(e.getMessage()));
-                }
-                break;
             default:
-                sc.nextLine();
-                System.out.print(displayOutput(MESSAGE_INVALID));
+                TaskType currType = taskTypeMap.get(input);
+                if (currType == null) {
+                    System.out.print(displayOutput(MESSAGE_INVALID));
+                    sc.nextLine();
+                    break;
+                }
+                try {
+                    System.out.print(addToList(taskList, currType, sc.nextLine()));
+                } catch (BlankTaskException | MissingDelimiterException | MissingDateTimeException e) {
+                    System.out.print(displayOutput(e.getMessage()));
+                }
                 break;
             }
         }
