@@ -10,25 +10,31 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
 
-    void addTodoTask(String task){
-        TodoTask t = new TodoTask(task);
-        tasks.add(t);
-        System.out.println("Got it. I've added this task:\n " + t);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-    }
+    void addTask(String task, String date, TaskType taskType) throws DukeException {
+        Task t;
+        switch(taskType) {
+            case TODO: {
+                t = new TodoTask(task);
+                tasks.add(t);
+                break;
+            }
+            case DEADLINE: {
+                t = new DeadlineTask(task, date);
+                tasks.add(t);
+                break;
+            }
+            case EVENT: {
+                t = new EventTask(task, date);
+                tasks.add(t);
+                break;
+            }
+            default:
+                throw new DukeException("Invalid Task Type");
+        }
 
-    void addDeadlineTask(String task, String deadline) {
-        DeadlineTask t = new DeadlineTask(task, deadline);
-        tasks.add(t);
         System.out.println("Got it. I've added this task:\n " + t);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-    }
 
-    void addEventTask(String task, String timing) {
-        EventTask t = new EventTask(task, timing);
-        tasks.add(t);
-        System.out.println("Got it. I've added this task:\n " + t);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
     void listTasks() {
@@ -80,7 +86,7 @@ public class Duke {
                     if (task.isEmpty()) {
                         throw new InvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
-                    addTodoTask(task);
+                    addTask(task,null,TaskType.TODO);
                     break;
                 }
                 case DEADLINE: {
@@ -91,7 +97,7 @@ public class Duke {
                     if (task[1].isEmpty()) {
                         throw new InvalidInputException("☹ OOPS!!! The deadline of a deadline task cannot be empty.");
                     }
-                    addDeadlineTask(task[0], task[1]);
+                    addTask(task[0], task[1], TaskType.DEADLINE);
                     break;
                 }
                 case EVENT: {
@@ -102,7 +108,7 @@ public class Duke {
                     if (task[1].isEmpty()) {
                         throw new InvalidInputException("☹ OOPS!!! The timing of an event task cannot be empty.");
                     }
-                    addEventTask(task[0], task[1]);
+                    addTask(task[0], task[1], TaskType.EVENT);
                     break;
                 }
                 case DONE: {
