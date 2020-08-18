@@ -11,12 +11,12 @@ public class Duke {
     }
 
     static void greet() {
-        String greeting = "Hello! I'm Duke\n What can I do for you?";
+        String greeting = "Hello! I'm Duke\n What can I do for you? (◠ ‿ ◠✿)";
         System.out.println(wrapMessage(greeting));
     }
 
     static void exit() {
-        String byeMessage = "Bye. Hope to see you again soon!";
+        String byeMessage = "Bye! ( ´ ▽ ` )/";
         System.out.println(wrapMessage(byeMessage));
     }
 
@@ -63,6 +63,12 @@ public class Duke {
 
         while (sc.hasNextLine()) {
             String [] input = sc.nextLine().split(" ", 2);
+            handleInput(input);
+        }
+    }
+
+    static void handleInput(String[] input) {
+        try {
             switch (input[0]) {
                 case "list":
                     list();
@@ -73,9 +79,20 @@ public class Duke {
                 case "done":
                     completeTask(Integer.valueOf(input[1]));
                     break;
+                case "todo":
+                case "event":
+                case "deadline":
+                    if (input.length == 1) {
+                        throw new MissingDescriptionException(input[0]);
+                    } else {
+                        addTask(input[0], input[1]);
+                    }
+                    break;
                 default:
-                    addTask(input[0], input[1]);
+                    throw new UnknownCommandException();
             }
+        } catch (DukeException e) {
+            System.out.println(e);
         }
     }
     public static void main(String[] args) {
