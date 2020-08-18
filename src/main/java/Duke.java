@@ -51,27 +51,30 @@ public class Duke {
         boolean isRunning = true;
         while (isRunning) {
             try {
-                String command = sc.next();
+                Command command = Command.getValue(sc.next());
+                if(command == null) {
+                    throw new InvalidCommandException("Unknown command.");
+                }
                 switch (command) {
-                    case "bye": {
+                    case BYE: {
                         exit();
                         isRunning = false;
                         break;
                     }
-                    case "list":
+                    case LIST:
                         list();
                         break;
-                    case "done": {
+                    case DONE: {
                         int taskNo = sc.nextInt();
                         completeTask(taskNo);
                         break;
                     }
-                    case "delete": {
+                    case DELETE: {
                         int taskNo = sc.nextInt();
                         deleteTask(taskNo);
                         break;
                     }
-                    case "todo": {
+                    case TODO: {
                         String description = sc.nextLine().trim();
                         if (description.length() == 0) {
                             throw new EmptyInputException("The description of a todo cannot be empty.");
@@ -79,7 +82,7 @@ public class Duke {
                         addTask(new Todo(description));
                         break;
                     }
-                    case "deadline": {
+                    case DEADLINE: {
                         String input = sc.nextLine().trim();
                         String[] details = input.split(" /by ");
                         if (details[0].length() == 0) {
@@ -91,7 +94,7 @@ public class Duke {
                         addTask(new Deadline(details[0], details[1]));
                         break;
                     }
-                    case "event": {
+                    case EVENT: {
                         String input = sc.nextLine().trim();
                         String[] details = input.split(" /at ");
                         if (details[0].length() == 0) {
