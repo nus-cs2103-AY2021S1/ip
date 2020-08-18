@@ -3,29 +3,51 @@ package main.java;
 import java.util.Scanner;
 
 public class Duke {
+    private static String[] exitWords = new String[] { "bye" };
+    private static boolean exitLoop = false;
 
-    private static char star = '*';
-    private static int lineLength = 50;
+    private static void drawLine() {
+        char star = '*';
+        char lineLength = 50;
 
-    private static void drawLine(char ch, int length) {
         System.out.println();
-        for (int i = 0; i < length; i++) {
-            System.out.print(ch);
+        for (int i = 0; i < lineLength; i++) {
+            System.out.print(star);
         }
         System.out.println();
     }
 
     private static void greet() {
-        drawLine(star, lineLength);
+        drawLine();
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
-        drawLine(star, lineLength);
+        drawLine();
     }
 
     private static void echo(String str) {
-        drawLine(star, lineLength);
+        drawLine();
         System.out.println(str);
-        drawLine(star, lineLength);
+        drawLine();
+    }
+
+    private static boolean checkExit(String str) {
+        for (String exitWord : exitWords) {
+            if (str.equals(exitWord)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static void exit() {
+        String exitWords = "Bye, hope to see you again soon!";
+
+        drawLine();
+        System.out.println(exitWords);
+        drawLine();
+
+        exitLoop = true;
     }
 
     public static void main(String[] args) {
@@ -38,9 +60,14 @@ public class Duke {
 
         greet();
 
-        while (true) {
+        while (!exitLoop) {
             String inputLine = UserInput.getOneLine();
-            echo(inputLine);
+
+            if (checkExit(inputLine)) {
+                exit();
+            } else {
+                echo(inputLine);
+            }
         }
     }
 }
