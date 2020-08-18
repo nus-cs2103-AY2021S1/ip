@@ -87,8 +87,8 @@ public class Duke {
                 System.out.println(line);
                 System.out.print(bot);
                 System.out.println("Noted! I've deleted this task:");
-                System.out.println(tasks.get(index));
-                tasks.remove(index);
+                System.out.println(tasks.get(index - 1));
+                tasks.remove(index - 1);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 System.out.println(line);
             } else { //invalid command
