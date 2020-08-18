@@ -10,12 +10,16 @@ public class Duke {
         String line = "----------------------------------------------------";
         String botName = "Duke";
         String userName = "You";
+
+        //commands
         String exitStr = "bye";
+        String listStr = "list";
 
         Scanner scanner = new Scanner(System.in);
         String userInput = "";
 
-        System.out.println("Hello, I'm\n" + logo + "\nWhat can I do for you?\n" + line);
+        System.out.println("привет, меня зовут \n" + logo + "\n\n" +
+                "Что ты хочешь?\n" + line);
 
         System.out.print(userName + " said: ");
 
@@ -30,7 +34,8 @@ public class Duke {
         }
 
         System.out.println(line);
-        System.out.println(botName + " said: Bye! Hope to see you again!");
+        System.out.println(botName + " said: \n" +
+                "Пока, надеюсь никогда больше не увидеть тебя!");
         System.out.println(line);
     }
 }
