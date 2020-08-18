@@ -30,11 +30,11 @@ public class TaskList {
                 );
                 break;
             default:
-                break;
+                throw new DukeException("Unrecognized task/command.");
         }
 
 
-        if (taskToAdd != null) itemList.add(taskToAdd);
+        itemList.add(taskToAdd);
         return taskToAdd;
     }
 
