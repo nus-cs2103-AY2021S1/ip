@@ -55,12 +55,11 @@ public class PersonalAssistant {
                 }
 
                 try {
-                    // The ACTUAL logic of the command
-                    Integer taskNumber = Integer.parseInt(cmdTokens[1]);
-                    // Set the task to done
-                    Task task = store.get(taskNumber - 1);
-                    task.done();
-                    System.out.println(task);
+                    /**
+                     * ACTUAL COMMAND LOGIC HERE
+                     */
+                    Integer taskIndex = Integer.parseInt(cmdTokens[1]) - 1;
+                    completeTask(taskIndex);
                 } catch (Exception e) {
                     // Handle parsing errors
                     String errStatement = String.format("%s should be supplied an integer as an argument", cmd);
@@ -89,6 +88,14 @@ public class PersonalAssistant {
         String message = String.format("Added: %s", task.getName());
         System.out.println(message);
         System.out.println("\n");
+    }
+
+    public void completeTask(Integer taskNumber) {
+        // Set the task to done
+        Task task = store.get(taskNumber);
+        task.done();
+        System.out.println("Task marked as complete:");
+        System.out.println(task);
     }
 
     public void list() {
