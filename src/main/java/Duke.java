@@ -60,12 +60,16 @@ public class Duke {
                         }
                         String eventer = stringBuilder(input.split(" "), 1, input.split(" ").length - 1);
                         String[] eventParts = eventer.split("/at");
-                        if(eventParts.length == 1){
+                        if (eventParts.length == 1) {
                             throw new DukeEmptyEventTimeException(input);
                         }
                         Event eventTask = new Event(eventParts[0], eventParts[1]);
                         stringStore.add(eventTask);
                         printer(eventTask);
+                    } else if(input.split(" ")[0].equals("delete")){
+                        int deleteTask = Integer.parseInt(input.split(" ")[1]) - 1;
+                        deletePrinter(stringStore.get(deleteTask));
+                        stringStore.remove(deleteTask);
                     } else {
                         throw new DukeUnknownInputException(input);
                     }
@@ -131,6 +135,15 @@ public class Duke {
         printLine();
 
     }
+
+    public static void deletePrinter(Task task){
+        printLine();
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + String.valueOf(stringStore.size() - 1) + " tasks in the list.");
+        printLine();
+    }
+
     public static void printLine(){
         System.out.println(" ____________________________________________________________");
     }
