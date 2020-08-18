@@ -25,46 +25,68 @@ public class Duke {
 
     public void systemOutput(String input) {
         System.out.println(line + "\n");
-        scenarios(input);
+        try {
+            scenarios(input);
+        } catch (DukeException e) {
+            System.out.printf(outputFormat, e.getMessage());
+        }
         System.out.println("\n" + line);
     }
 
-    public void scenarios(String input) {
-        if (input.equals("bye")) {
-            ongoing = false;
-            goodBye();
-        } else if (input.equals("list")) {
-            showList();
-        } else {
-            String[] instructions = input.split(" ");
-            if (instructions[0].equals("done")) {
-                completeItem(Integer.valueOf(instructions[1]) - 1);
-            } else if (instructions[0].equals("todo") || instructions[0].equals("deadline") || instructions[0].equals("event")) {
+    public void scenarios(String input) throws DukeException {
+        String[] instructions = input.split(" ");
+        String command = instructions[0];
+        switch (command) {
+            case "bye":
+                ongoing = false;
+                goodBye();
+                break;
+            case "list":
+                showList();
+                break;
+            case "done":
+                completeItem(input);
+                break;
+            case "todo":
+            case "deadline":
+            case "event": {
                 String item = String.join(" ", Arrays.copyOfRange(instructions, 1, instructions.length));
-                addItem(instructions[0], item);
+                addItem(command, item);
+                break;
             }
+            default:
+                throw new DukeException("Oops! I'm sorry but I have no idea what that means >.<");
+
         }
     }
 
     public void showList() {
         int count = 1;
-        System.out.printf(outputFormat, "The tasks in your Todo List: ");
+        System.out.printf(outputFormat, "The tasks in your Todo List:");
         for (Task item : todoList) {
             System.out.printf(taskFormat, Integer.toString(count) + ". " + item.getItem());
             count += 1;
         }
     }
 
-    public void completeItem(Integer index) {
-        Task item = todoList.get(index);
-        item.completeTask();
-        System.out.printf(outputFormat, "   \\\\(^o^)/ *.*.* \\\\(^o^)/");
-        System.out.printf(outputFormat, "Yay! This task has been completed: ");
-        System.out.printf(outputFormat, "  " + item.getItem());
+    public void completeItem(String input) throws DukeException {
+        String indexString = input.split(" ")[1];
+        try {
+            int index = Integer.valueOf(indexString) - 1;
+            Task item = todoList.get(index);
+            item.completeTask();
+            System.out.printf(outputFormat, "   \\\\(^o^)/ *.*.* \\\\(^o^)/");
+            System.out.printf(outputFormat, "Yay! This task has been completed:");
+            System.out.printf(outputFormat, "  " + item.getItem());
+        } catch (Exception e) {
+            throw new DukeException("Oops! Invalid task number. Please try again >.<");
+        }
     }
 
-    public void addItem(String instruction, String item) {
-        System.out.printf(outputFormat, "New todo item added to the list!");
+    public void addItem(String instruction, String item) throws DukeException {
+        if (item.equals("")) {
+            throw new DukeException("Oops! The description cannot be empty >.<");
+        }
         if (instruction.equals("todo")) {
             addTodoItem(item);
         } else if (instruction.equals("deadline")) {
@@ -72,6 +94,7 @@ public class Duke {
         } else {
             addEvent(item);
         }
+        System.out.printf(outputFormat, "New todo item added to the list!");
         numberOfTasks += 1;
         System.out.printf(outputFormat, "There are now " + Integer.toString(numberOfTasks) + " todo items in the list");
     }
@@ -82,22 +105,28 @@ public class Duke {
         System.out.printf(taskFormat, newTask.getItem());
     }
 
-    public void addDeadline(String item) {
+    public void addDeadline(String item) throws DukeException {
         String[] splitItem = item.split("/by");
+        if (splitItem.length == 1) {
+            throw new DukeException("Incorrect format. Please add a deadline to finish task by.");
+        }
         Deadline newTask = new Deadline(splitItem[0], splitItem[1]);
         todoList.add(newTask);
         System.out.printf(taskFormat, newTask.getItem());
     }
 
-    public void addEvent(String item) {
+    public void addEvent(String item) throws DukeException {
         String[] splitItem = item.split("/at");
+        if (splitItem.length == 1) {
+            throw new DukeException("Incorrect format. Please add a time/date the event is held at.");
+        }
         Event newTask = new Event(splitItem[0], splitItem[1]);
         todoList.add(newTask);
         System.out.printf(taskFormat, newTask.getItem());
     }
 
     public void greeting() {
-        System.out.printf(outputFormat, line + "\n         (^v^)");
+        System.out.println(line + "\n         (^v^)");
         System.out.printf(outputFormat, "Hey there! I'm JavaDuke");
         System.out.printf(outputFormat, "What can I do for you?\n" + line);
     }
@@ -110,12 +139,12 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println(logo);
 
         Duke duke = new Duke();
         duke.run();
