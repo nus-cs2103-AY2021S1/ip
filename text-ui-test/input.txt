@@ -2,4 +2,16 @@ todo read book
 deadline return book /by tonight
 event play games /at tomorrow 9-11pm
 list
+wrongcommand
+todo
+todo things /at that time
+deadline
+deadline eat food
+event
+event shower /by next year
+list
+todo illegal stuff Kappa
+delete 5
+delete 4
+list
 bye

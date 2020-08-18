@@ -46,7 +46,7 @@ public class Duke {
 
                     pattern = Pattern.compile("done [1-9][0-9]{0,}");
                     if(!pattern.matcher(temp).matches()) {
-                        throw new DukeException("☹ OOPS!!! Wrong 'done' command format!\n");
+                        throw new DukeException("\u2639 OOPS!!! Wrong 'done' command format!\n");
                     } else {
                         int index = Integer.parseInt(""+temp.charAt(5)) - 1;
                         if(tasks.size() >= index && index >= 0) {
@@ -65,7 +65,7 @@ public class Duke {
 
                     pattern = Pattern.compile("todo ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*)");
                     if(!pattern.matcher(temp).matches()) {
-                        throw new DukeException("☹ OOPS!!! Wrong 'todo' command format!\n");
+                        throw new DukeException("\u2639 OOPS!!! Wrong 'todo' command format!\n");
 
                     } else {
                         Todo todo = new Todo(temp.substring(5));
@@ -84,7 +84,7 @@ public class Duke {
                 } else if(temp.startsWith("deadline")) {
                     pattern = Pattern.compile("deadline ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*) /by ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*)");
                     if(!pattern.matcher(temp).matches()) {
-                        throw new DukeException("☹ OOPS!!! Wrong 'deadline' command format!\n");
+                        throw new DukeException("\u2639 OOPS!!! Wrong 'deadline' command format!\n");
                     } else {
                         String[] s = temp.substring(9).split(" /by ");
                         Deadline deadline = new Deadline(s[0], s[1]);
@@ -103,7 +103,7 @@ public class Duke {
                 } else if(temp.startsWith("event")) {
                     pattern = Pattern.compile("event ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*) /at ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*)");
                     if(!pattern.matcher(temp).matches()) {
-                        throw new DukeException("☹ OOPS!!! Wrong 'event' command format!\n");
+                        throw new DukeException("\u2639 OOPS!!! Wrong 'event' command format!\n");
                     } else {
                         String[] s = temp.substring(6).split(" /at ");
                         Event event = new Event(s[0], s[1]);
@@ -118,8 +118,27 @@ public class Duke {
                         sb.append(gap);
                         sb.append("Now you have ").append(tasks.size()).append(" task(s) in the list.\n");
                     }
+                } else if(temp.startsWith("delete")) {
+                    pattern = Pattern.compile("delete [1-9][0-9]{0,}");
+                    if(!pattern.matcher(temp).matches()) {
+                        throw new DukeException("\u2639 OOPS!!! Wrong 'delete' command format!\n");
+                    } else {
+                        int index = Integer.parseInt(""+temp.charAt(7)) - 1;
+                        if(tasks.size() > index && index >= 0) {
+                            Task tas = tasks.get(index);
+                            tasks.remove(index);
+
+                            sb.append(gap);
+                            sb.append("Noted. I've removed this task: \n");
+                            sb.append(gap).append("  ");
+                            sb.append(tas);
+                            sb.append("\n");
+                        } else {
+                            throw new DukeException("\u2639 OOPS!!! There isn't a task with that index!\n");
+                        }
+                    }
                 } else {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+                    throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(\n");
                 }
             } catch (DukeException e) {
                 sb.append(gap);
