@@ -1,3 +1,5 @@
+package main;
+
 public class DoneException extends DukeException {
 
     public DoneException() {

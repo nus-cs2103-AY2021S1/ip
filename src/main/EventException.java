@@ -1,3 +1,5 @@
+package main;
+
 public class EventException extends DukeException {
 
     public EventException() {

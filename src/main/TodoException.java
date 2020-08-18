@@ -1,3 +1,5 @@
+package main;
+
 public class TodoException extends DukeException {
 
     public TodoException() {
