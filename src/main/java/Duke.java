@@ -26,7 +26,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         StringBuilder sb;
         String temp;
-        List<String> list = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
 
         while(!(temp = sc.nextLine()).equals("bye")) {
             sb = new StringBuilder();
@@ -34,17 +34,35 @@ public class Duke {
             sb.append("____________________________________________________________\n");
 
             if(temp.equals("list")) {
+                sb.append(gap);
+                sb.append("Here are the tasks in your list:\n");
+
                 int ctr = 1;
 
-                for(String item: list) {
+                for(Task task: tasks) {
                     sb.append(gap);
-                    sb.append(ctr).append(". ");
-                    sb.append(item);
+                    sb.append(ctr).append(".[");
+                    sb.append(task.getStatusIcon());
+                    sb.append("] ");
+                    sb.append(task.description);
                     sb.append("\n");
                     ctr++;
                 }
+            } else if(temp.startsWith("done")) {
+                int index = Integer.parseInt(""+temp.charAt(5)) - 1;
+                if(tasks.size() >= index && index >= 0) {
+                    Task tas = tasks.get(index);
+                    tas.markAsDone();
+
+                    sb.append(gap);
+                    sb.append("Nice! I've marked this task as done: \n");
+                    sb.append(gap).append("  ");
+                    sb.append("[").append(tas.getStatusIcon()).append("] ");
+                    sb.append(tas.description);
+                    sb.append("\n");
+                }
             } else {
-                list.add(temp);
+                tasks.add(new Task(temp));
 
                 sb.append(gap);
                 sb.append("added: ");
