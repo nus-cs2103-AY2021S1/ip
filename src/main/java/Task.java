@@ -13,9 +13,9 @@ public class Task {
 
     public String getCheckBox() {
         if (this.done) {
-            return "[✓]";
+            return "[\u2713]";
         } else {
-            return "[✗]";
+            return "[\u2718]";
         }
     }
 

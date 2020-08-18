@@ -59,7 +59,7 @@ public class TaskList {
         try {
             Task task = this.list.get(listIndex);
             task.markDone();
-            System.out.println("Nice! I've marked this task as done: \n" + task);
+            System.out.println("Nice! I've marked this task as done:\n" + task);
         } catch (IndexOutOfBoundsException ex2) {
             System.out.println("You do not have this task yet! Type 'list' to check out your tasks.");
         }
