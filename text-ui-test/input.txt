@@ -1,4 +1,6 @@
 read
+todo
+blah
 todo borrow book
 list
 deadline return book /by Sunday
@@ -6,5 +8,8 @@ event project /at Mon 2-4pm
 deadline do hw /by no idea
 list
 done 3
+list
+delete two
+delete 2
 list
 bye

@@ -1,5 +1,6 @@
 C:\Users\Admin\Desktop\CS2103T\repos\ip\src\main\java\Deadline.java
 C:\Users\Admin\Desktop\CS2103T\repos\ip\src\main\java\Duke.java
+C:\Users\Admin\Desktop\CS2103T\repos\ip\src\main\java\DukeException.java
 C:\Users\Admin\Desktop\CS2103T\repos\ip\src\main\java\Event.java
 C:\Users\Admin\Desktop\CS2103T\repos\ip\src\main\java\Task.java
 C:\Users\Admin\Desktop\CS2103T\repos\ip\src\main\java\ToDo.java
