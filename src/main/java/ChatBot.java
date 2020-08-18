@@ -23,6 +23,13 @@ public class ChatBot {
                     System.out.println("     " + e.getMessage());
                     printHorizontal();
                 }
+            } else if (response.split(" ")[0].equals("delete")) {
+                try {
+                    delete(response);
+                } catch (Exception e) {
+                    System.out.println("     " + e.getMessage());
+                    printHorizontal();
+                }
             } else {
                 try {
                     addTask(response);
@@ -38,6 +45,7 @@ public class ChatBot {
 
     private void markAsDone(String command) throws Exception {
         // here we already know that the first word is "done"
+        printHorizontal();
         if (command.split(" ").length == 1) {
             throw new NoDescriptionException("done");
         }
@@ -52,9 +60,31 @@ public class ChatBot {
             throw new IllegalDoneArgument();
         }
         list.get(index).markAsDone();
-        printHorizontal();
         System.out.println("     Nice! I've marked this task as done:");
         System.out.println("       "+list.get(index));
+        printHorizontal();
+    }
+
+    private void delete(String command) throws Exception {
+        // here we already know that the first word is "done"
+        printHorizontal();
+        if (command.split(" ").length == 1) {
+            throw new NoDescriptionException("delete");
+        }
+        if (command.split(" ").length != 2) {
+            throw new IllegalDeleteArgument();
+        }
+        if (!command.split(" ")[1].matches("\\d+")) {
+            throw new IllegalDeleteArgument();
+        }
+        int index = Integer.parseInt(command.split(" ")[1]) - 1;
+        if (index < 0 || index >= list.size()) {
+            throw new IllegalDeleteArgument();
+        }
+        Task deleted = list.remove(index);
+        System.out.println("     Noted! I've removed this task:");
+        System.out.println("       " + deleted);
+        System.out.println("     Now you have " + list.size() + " tasks in the list.");
         printHorizontal();
     }
 
@@ -108,9 +138,13 @@ public class ChatBot {
     // Return the list of tasks
     private void printList() {
         printHorizontal();
-        System.out.println("     Here are the tasks in your list:");
-        for (int i = 1; i <= list.size(); i++) {
-            System.out.println("     " + i + "." + list.get(i - 1));
+        if (list.size() == 0) {
+            System.out.println("     You have no tasks in your list now! Type todo, event or deadline to add some!");
+        } else {
+            System.out.println("     Here are the tasks in your list:");
+            for (int i = 1; i <= list.size(); i++) {
+                System.out.println("     " + i + "." + list.get(i - 1));
+            }
         }
         printHorizontal();
     }

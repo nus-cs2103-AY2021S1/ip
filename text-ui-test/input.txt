@@ -1,4 +1,5 @@
 hi!
+list
 todo
 todo this task
 deadline
@@ -15,5 +16,9 @@ done x
 done the first task
 done 4
 done 1
+list
+delete
+delete first
+delete 1
 list
 bye
