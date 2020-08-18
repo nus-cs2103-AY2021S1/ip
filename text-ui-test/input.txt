@@ -1,0 +1,10 @@
+list
+todo Todo
+deadline Deadline /by deadline
+event Event /at event
+list
+done 1
+list
+delete 2
+list
+bye

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Duke {
@@ -41,19 +42,23 @@ public class Duke {
         boolean exit = false;
         Scanner sc = new Scanner(System.in);
         while (!exit) {
-            String input = sc.nextLine().trim();
-            String[] parsedInput = readCommand(input);
             try {
+                String input = sc.nextLine().trim();
+                String[] parsedInput = readCommand(input);
                 switch (parsedInput[0]) {
                     case BYE:
                         exit = true;
                         break;
                     case LIST:
+                        if (!list.isEmpty()) {
                         String result = "";
                         for (int i = 0; i < list.size(); i++) {
                             result += String.format("%d. %s\n", i + 1, list.get(i));
                         }
                         reply(result);
+                        } else {
+                            reply("List is empty.");
+                        }
                         break;
                     case DONE:
                         try {
@@ -119,6 +124,9 @@ public class Duke {
                 }
             } catch (DukeException e) {
                 System.out.println(String.format("DukeException: %s", e.getMessage()));
+            } catch (NoSuchElementException e) {
+                System.out.println(e.getMessage());
+                break;
             }
         }
         reply("Goodbye.");
