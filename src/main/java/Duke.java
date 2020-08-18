@@ -34,7 +34,7 @@ public class Duke {
                         if (wordArray[0].equals("done")) {
                             if (noOfWords == 1) {
                                 throw new InvalidRequestException("Please tell me which task you want " +
-                                        "to be marked as DONE.");
+                                        "to be marked as done.");
                             }
                             if (noOfWords > 2) {
                                 throw new InvalidRequestException("I can only handle one request to " +
@@ -48,9 +48,36 @@ public class Duke {
                             Task theTask = listOfTasks.get(index - 1);
                             theTask.setTaskToBeDone();
                             System.out.println(line);
-                            System.out.println("     Great! The task: [" + theTask.getName()
-                                    + "] is marked as Done.\n" + "     " + theTask.toString());
+                            System.out.println("     Great! The task below is marked as done:\n"
+                                    + "        " + theTask.toString());
                             System.out.println(line);
+                        } else if (wordArray[0].equals("delete")) {
+                            if (noOfWords == 1) {
+                                throw new InvalidRequestException("Please tell me which task you want " +
+                                        "to delete!");
+                            }
+                            if (noOfWords > 2) {
+                                throw new InvalidRequestException("I can only handle one request to " +
+                                        "delete a task at once! Please check your command.");
+                            }
+                            Integer index = Integer.parseInt(wordArray[1]);
+                            if (listOfTasks.size() < index || index < 0) {
+                                throw new InvalidRequestException("You have entered an invalid task " +
+                                        "number! Please try again.");
+                            }
+                            Task theTask = listOfTasks.get(index - 1);
+                            listOfTasks.remove(index - 1);
+                            System.out.println(line);
+                            System.out.println("     Okay. The task below is deleted from your list:\n"
+                                    + "        " + theTask.toString());
+                            if (listOfTasks.size() == 1) {
+                                System.out.println("     Now there is 1 task in total in your list.");
+                            } else {
+                                System.out.println("     Now there are " + listOfTasks.size() + " tasks " +
+                                        "in total in your list.");
+                            }
+                            System.out.println(line);
+
                         } else {
                             Task newTask;
                             if (wordArray[0].equals("todo")) {
@@ -95,7 +122,7 @@ public class Duke {
                             }
                             listOfTasks.add(newTask);
                             System.out.println(line);
-                            System.out.println("     The task: [" + newTask.getName() + "] is added into the list!\n"
+                            System.out.println("     Noted! The task below is added into the list:\n"
                                     + "        " + newTask);
                             int noOfTasks = listOfTasks.size();
                             if (noOfTasks == 1) {
