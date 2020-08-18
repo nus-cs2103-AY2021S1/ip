@@ -24,9 +24,9 @@ public class Task {
     // Return the appropriate icon for this task
     public String getIcon() {
         if (isDone) {
-            return "\u2713";
+            return "✓";
         } else {
-            return "\u2718";
+            return "✘";
         }
     }
 

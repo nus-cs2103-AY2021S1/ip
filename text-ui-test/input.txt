@@ -1,0 +1,9 @@
+todo read book
+deadline watch anime /by Sunday
+event project meeting /at Tue 3-5PM
+list
+done 1
+done 2
+done 3
+list
+bye
