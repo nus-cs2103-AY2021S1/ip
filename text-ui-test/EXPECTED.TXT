@@ -1,7 +1,66 @@
-Hello from
+Always at your service, 
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Your Majesty, I am your loyal Duke.
+How may I serve you?
+
+- - - - - - - - - - - - - - - - - - - - - - - - 
+Milady, I've added the writing:
+	[T][✘] read book
+You have 1 writing(s) on your scroll as of now. 
+- - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - 
+Milady, I've added the writing:
+	[D][✘] return book  (by: Thursday)
+You have 2 writing(s) on your scroll as of now. 
+- - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - 
+Your current scroll, milady:
+1.[T][✘] read book
+2.[D][✘] return book  (by: Thursday)
+- - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - 
+As you wish, milady. I have marked this as conquered.
+[T][✓] read book
+- - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - 
+Your current scroll, milady:
+1.[T][✓] read book
+2.[D][✘] return book  (by: Thursday)
+- - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - 
+As you wish, milady. I have marked this as conquered.
+[D][✓] return book  (by: Thursday)
+- - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - 
+Your current scroll, milady:
+1.[T][✓] read book
+2.[D][✓] return book  (by: Thursday)
+- - - - - - - - - - - - - - - - - - - - - - - - 
+
+Milady, there's no such agenda in my detailed records.
+
+- - - - - - - - - - - - - - - - - - - - - - - - 
+Milady, I've added the writing:
+	[E][✘] arts experience  (at: Friday 5-6pm)
+You have 3 writing(s) on your scroll as of now. 
+- - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - 
+Your current scroll, milady:
+1.[T][✓] read book
+2.[D][✓] return book  (by: Thursday)
+3.[E][✘] arts experience  (at: Friday 5-6pm)
+- - - - - - - - - - - - - - - - - - - - - - - - 
+
+Your wish is my command, milady. Till I see you again.

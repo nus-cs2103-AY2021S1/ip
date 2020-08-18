@@ -1,0 +1,11 @@
+todo read book
+deadline return book /by Thursday
+scroll
+conquer 1
+scroll
+conquer 2
+scroll 
+conquer 3
+event arts experience /at Friday 5-6pm
+scroll
+dismiss
