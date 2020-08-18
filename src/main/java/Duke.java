@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Duke {
 
@@ -16,15 +19,29 @@ public class Duke {
             + "|  .  | |  | |  |  ||     |    |     ||     ||     |\n"
             + "|__|\\_||____||__|__||___,_|    |_____| \\___/ |_____|\n";
 
+    public static List<String> list = new ArrayList<>();
+
     public static void byeMessage() {
         System.out.println(divider);
         System.out.println("   Banana! King Bob is sad to see you go. Farewell my friend!");
         System.out.println(divider);
     }
 
-    public static void repeatInput(String nextLine) {
+    public static void inputMessage(String input) {
         System.out.println(divider);
-        System.out.println("   " + nextLine);
+        System.out.println("   added: " + input);
+        System.out.println(divider + "\n");
+    }
+
+    public static void addList(String input) {
+        list.add(input);
+    }
+
+    public static void showList() {
+        System.out.println(divider);
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("   " + (i + 1) + ". " + list.get(i));
+        }
         System.out.println(divider + "\n");
     }
 
@@ -41,8 +58,11 @@ public class Duke {
             if (nextLine.equals("bye")) {
                 byeMessage();
                 break;
+            } else if (nextLine.equals("list")) {
+                showList();
             } else {
-                repeatInput(nextLine);
+                inputMessage(nextLine);
+                addList(nextLine);
             }
         }
         scanner.close();
