@@ -19,26 +19,31 @@ public class Duke {
         System.out.println(border + greeting + border);
 
         Scanner sc = new Scanner(System.in); //scans for input
-        DisplayList displayList = new DisplayList();
-        String input = sc.next();
+        TaskList taskList = new TaskList();
+        String command = sc.next();
+        String parameters = sc.nextLine();
 
-        while (!input.equals("bye")) {
-            if (input.equals("list")) {
-                System.out.println(border + displayList.toString() + border);
-            } else if (input.equals("done")) {
-                int index = Integer.valueOf(sc.next()) - 1;
-                displayList.completeTask(index);
+        while (!command.equals("bye")) {
+            if (command.equals("list")) {
+                System.out.println(border + taskList.toString() + border);
+            } else if (command.equals("done")) {
+                int index = Integer.parseInt(parameters.strip()) - 1;
+                taskList.completeTask(index);
                 System.out.println(border
                         + "Making great progress master.\n"
-                        + displayList.getTask(index) + "\n"
+                        + taskList.getTask(index) + "\n"
                         + border
                 );
             } else {
-                String task = input + sc.nextLine();
-                displayList.addTask(task);
-                System.out.println(border + "Added: " + task + "\n" + border);
+                Task newTask = taskList.addTask(command, parameters);
+                System.out.println(border
+                    + "Yes master. I've added the task to the list: \n"
+                    + newTask.toString() + "\n"
+                    + "You now have " + taskList.getNoTask() + " task in the list master.\n"
+                    + border);
             }
-            input = sc.next();
+            command = sc.next();
+            parameters = sc.nextLine();
         }
 
         System.out.println(border + farewell + border);
