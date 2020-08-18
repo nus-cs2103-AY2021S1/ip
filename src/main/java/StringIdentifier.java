@@ -32,6 +32,7 @@ public class StringIdentifier {
         for (int i = 0; i < size; i++) {
             System.out.println("     " + index + ". " + this.lst.get(i));
         }
+        index ++;
     }
 
     public void close() {
