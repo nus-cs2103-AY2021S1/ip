@@ -30,7 +30,13 @@ public class DeadlineTask extends Task {
         this.time = flags.get(Flag.AT);
     }
 
+    @Override
     public String getDescription() {
         return this.description + " (by" + this.time + ")";
+    }
+
+    @Override
+    public String toString() {
+        return "[D]" + this.getStatusIcon() + " " + this.description;
     }
 }

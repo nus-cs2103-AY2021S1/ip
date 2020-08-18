@@ -2,7 +2,6 @@ package service;
 
 public abstract class Task {
     String[] tokens;
-    protected String description;
     private boolean isDone;
 
     public Task(String[] tokens) {
@@ -19,9 +18,7 @@ public abstract class Task {
 
     public abstract String getDescription();
 
-    @Override
-    public String toString() {
-        String status = (!this.isDone ? "[x] ": "[v] ");
-        return status + this.getDescription();
+    public String getStatusIcon() {
+        return (isDone ? "[\u2713]" : "[\u2718]");
     }
 }

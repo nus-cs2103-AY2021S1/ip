@@ -27,4 +27,8 @@ public class TodoTask extends Task {
         return this.description;
     }
 
+    @Override
+    public String toString() {
+        return "[T]" + this.getStatusIcon() + " " + this.description;
+    }
 }

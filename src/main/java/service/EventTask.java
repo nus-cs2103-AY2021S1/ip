@@ -30,7 +30,13 @@ public class EventTask extends Task {
         this.time = flags.get(Flag.AT);
     }
 
+    @Override
     public String getDescription() {
         return this.description + " (at" + this.time + ")";
+    }
+
+    @Override
+    public String toString() {
+        return "[E]" + this.getStatusIcon() + " " + this.description;
     }
 }
