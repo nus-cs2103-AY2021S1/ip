@@ -45,6 +45,8 @@ public class Duke {
             "██████████░░                ▒▒                ██              ██              ██                ████      ██████            ██████████\n" +
             "████████████                ████            ████            ░░██            ████              ██████      ██████            ██████████\n" +
             "██████████████            ████████          ██████          ████          ██████            ████████      ██████            ██████████\n";
+    private static final String[] rememberedText = new String[100];
+    private static int textCount = 0;
 
     private static void greetings() {
         System.out.println(logo);
@@ -58,8 +60,19 @@ public class Duke {
             if (currentCommand.equals("bye")) {
                 System.out.println(goodbyeMessage);
                 break;
+            } else if (currentCommand.equals("list")) {
+                System.out.println(divider);
+                if (textCount == 0) {
+                    System.out.println(" Sorry, no text exist inside my memory :(");
+                }
+                for (int i = 0; i < textCount; i++) {
+                    System.out.println(" " + (i + 1) + ". " + rememberedText[i]);
+                }
+                System.out.println(divider);
             } else {
-                System.out.println(divider + "\n " + currentCommand + "\n" + divider + "\n");
+                rememberedText[textCount] = currentCommand;
+                textCount += 1;
+                System.out.println(divider + "\n added: " + currentCommand + "\n" + divider);
             }
         }
     }
