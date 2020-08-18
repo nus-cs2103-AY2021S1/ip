@@ -2,6 +2,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    enum Command {
+        list, done, delete, todo, deadline, event
+    }
+
     public static void main(String[] args) {
         String logo = "\n"
                 + " oooooooooooo                                                 oooo        \n"
@@ -32,15 +36,23 @@ public class Duke {
 
             System.out.println(upperLine);
             try {
-                switch (command[0]) {
-                    case "list":
+                Command commandEnum;
+
+                try {
+                    commandEnum = Command.valueOf(command[0]);
+                } catch (Exception e) {
+                    throw new DukeException("I'm sorry but I don't recognize your command T__T.");
+                }
+
+                switch (commandEnum) {
+                    case list:
                         System.out.println("Here is your list of tasks:");
                         for (int i = 0; i < tasks.size(); i++) {
                             System.out.println((i + 1) + ". " + tasks.get(i) + "\n");
                         }
                         break;
 
-                    case "done":
+                    case done:
                         idx = Integer.parseInt(command[1]);
                         if (idx < 1 || idx > tasks.size()) {
                             throw new DukeException(
@@ -51,7 +63,7 @@ public class Duke {
                         System.out.println("Great job!\nI have marked the task as done");
                         System.out.println(tasks.get(idx - 1));
                         break;
-                    case "delete":
+                    case delete:
                         idx = Integer.parseInt(command[1]);
                         if (idx < 1 || idx > tasks.size()) {
                             throw new DukeException(
@@ -66,7 +78,7 @@ public class Duke {
                                 tasks.size());
                         break;
 
-                    case "todo":
+                    case todo:
                         if (command.length < 2) {
                             throw new DukeException("The description can't be blank :(.");
                         }
@@ -86,7 +98,7 @@ public class Duke {
                                 tasks.size());
                         break;
 
-                    case "deadline":
+                    case deadline:
                         if (command.length < 2) {
                             throw new DukeException("The description can't be blank :(.");
                         }
@@ -121,7 +133,7 @@ public class Duke {
                                 tasks.size());
                         break;
 
-                    case "event":
+                    case event:
                         if (command.length < 2) {
                             throw new DukeException("The description can't be blank :(.");
                         }
@@ -155,9 +167,6 @@ public class Duke {
                                 tasks.size());
                         break;
 
-                    default:
-                        throw new DukeException(
-                                "I'm sorry but I don't recognize your command T__T.");
                 }
             } catch (Exception e) {
                 System.out.println(e);
