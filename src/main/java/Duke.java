@@ -1,7 +1,19 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
+    private static void listItems(ArrayList<Task> xs){
+        int counter = 1;
+        for (Task t: xs) {
+            System.out.println("    " + counter + ": " + t.toString());
+            counter += 1;
+        }
+    }
+
+
     public static void main(String[] args) {
+        ArrayList<Task> listOfTask = new ArrayList<>();
         String breakline = "    ______________________________________________________";
         String logo = "     ____        _        \n"
                 + "    |  _ \\ _   _| | _____ \n"
@@ -22,9 +34,17 @@ public class Duke {
                 break;
             }
             switch (userCommand) {
-                default:
+                case "list":
                     System.out.println(breakline);
-                    System.out.println("    " + userCommand);
+                    listItems(listOfTask);
+                    System.out.println(breakline);
+                    break;
+
+                default:
+                    Task newT = new Task(userCommand);
+                    listOfTask.add(newT);
+                    System.out.println(breakline);
+                    System.out.println("    added: " + userCommand);
                     System.out.println(breakline);
                     break;
             }
