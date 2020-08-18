@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
+
     public static void main(String[] args) {
         String logo = "     ____        _        \n"
                 + "    |  _ \\ _   _| | _____ \n"
@@ -35,7 +37,6 @@ public class Duke {
 
 
     private static final ArrayList<Task> toDoList = new ArrayList<>();
-
     private static boolean startCommand(String input) throws DukeException {
 
         if (input.equals("")) {
