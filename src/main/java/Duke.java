@@ -44,6 +44,13 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done:\n " + completedTask);
     }
 
+    void deleteTask (int index) {
+        Task deletedTask = tasks.get(index - 1);
+        tasks.remove(index - 1);
+        System.out.println("Noted. I've removed this task:\n" + deletedTask);
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+    }
+
     void exit() {
         System.out.println("Bye. Hope to see you again soon!");
     }
@@ -98,6 +105,14 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! There is no such task.");
                     }
                     completeTask(index);
+                    break;
+                }
+                case ("delete"): {
+                    int index = sc.nextInt();
+                    if (index > tasks.size() || index < 1) {
+                        throw new DukeException("☹ OOPS!!! There is no such task.");
+                    }
+                    deleteTask(index);
                     break;
                 }
                 default: {
