@@ -13,4 +13,8 @@ public class Task {
         return (finished ? "\u2713" : "\u2718");
     }
 
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + this.description;
+    }
 }

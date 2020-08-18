@@ -26,8 +26,7 @@ public class Emily {
                 System.out.println("    " + divider);
                 for(int i = 1; i<counter; i++){
                     current = store[i];
-                    String block = "[" + current.getStatusIcon() + "] " + current.description;
-                    String item = "    "+ i + "." + block;
+                    String item = "    "+ i + ". " +current;
 
                     System.out.println(item);
                 }
@@ -40,9 +39,8 @@ public class Emily {
                 current = store[index];
                 current.finished = true;
 
-                String block = "[" + current.getStatusIcon() + "] " + current.description;
                 String item = "Nice work! I have marked the task as done:\n" +
-                        "     " + block;
+                        "     " + current;
 
                 System.out.println("    " + divider +
                         "\n    " + item +
