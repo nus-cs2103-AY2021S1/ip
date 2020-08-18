@@ -1,7 +1,9 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     private static String horiLine = "____________________________________________________________" + "\n";
+    private static ArrayList<Task> List = new ArrayList<>();
 
     private static void greet() {
         String greeting = "Hello! I'm Duke" + "\n" + "What can I do for you?" + "\n";
@@ -10,33 +12,29 @@ public class Duke {
 
     private static void echo() {
         Scanner sc = new Scanner(System.in);
-        while(true) {
+        while (sc.hasNext()) {
             String input = sc.nextLine();
-            if(input.equals("bye")) { //exit condition
+            if (input.equals("bye")) { //exit condition
                 String goodbye = "Bye. Hope to see you again soon!";
                 System.out.println(horiLine + goodbye + "\n" + horiLine);
-                break;
+            } else if (input.equals("list")) {
+                int counter = 1;
+                System.out.println(horiLine);
+                for (Task task : List) {
+                    System.out.println(counter + ". " + task.getName());
+                    counter++;
+                }
+                System.out.println(horiLine);
             } else {
-                System.out.println(horiLine + input + "\n" + horiLine);
+                List.add(new Task(input));
+                System.out.println(horiLine + "added: " + input + "\n" + horiLine);
             }
         }
-        sc.close();
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        greet();
         echo();
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
     }
 }
+
+
