@@ -8,59 +8,84 @@ Always at your service,
 Your Majesty, I am your loyal Duke.
 How may I serve you?
 
-- - - - - - - - - - - - - - - - - - - - - - - - 
-Milady, I've added the writing:
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your Majesty, I've added the writing:
 	[T][✘] read book
 You have 1 writing(s) on your scroll as of now. 
-- - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-- - - - - - - - - - - - - - - - - - - - - - - - 
-Milady, I've added the writing:
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your Majesty, I've added the writing:
 	[D][✘] return book  (by: Thursday)
 You have 2 writing(s) on your scroll as of now. 
-- - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-- - - - - - - - - - - - - - - - - - - - - - - - 
-Your current scroll, milady:
-1.[T][✘] read book
-2.[D][✘] return book  (by: Thursday)
-- - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your current scroll, Your Majesty:
+	1.[T][✘] read book
+	2.[D][✘] return book  (by: Thursday)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-- - - - - - - - - - - - - - - - - - - - - - - - 
-As you wish, milady. I have marked this as conquered.
-[T][✓] read book
-- - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+As you wish, Your Majesty. I have marked this as conquered.
+	[T][✓] read book
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-- - - - - - - - - - - - - - - - - - - - - - - - 
-Your current scroll, milady:
-1.[T][✓] read book
-2.[D][✘] return book  (by: Thursday)
-- - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your current scroll, Your Majesty:
+	1.[T][✓] read book
+	2.[D][✘] return book  (by: Thursday)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-- - - - - - - - - - - - - - - - - - - - - - - - 
-As you wish, milady. I have marked this as conquered.
-[D][✓] return book  (by: Thursday)
-- - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+As you wish, Your Majesty. I have marked this as conquered.
+	[D][✓] return book  (by: Thursday)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-- - - - - - - - - - - - - - - - - - - - - - - - 
-Your current scroll, milady:
-1.[T][✓] read book
-2.[D][✓] return book  (by: Thursday)
-- - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your current scroll, Your Majesty:
+	1.[T][✓] read book
+	2.[D][✓] return book  (by: Thursday)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-Milady, there's no such agenda in my detailed records.
+DukeException: Your Majesty, there's no such agenda in my detailed records.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-- - - - - - - - - - - - - - - - - - - - - - - - 
-Milady, I've added the writing:
-	[E][✘] arts experience  (at: Friday 5-6pm)
-You have 3 writing(s) on your scroll as of now. 
-- - - - - - - - - - - - - - - - - - - - - - - - 
+DukeException: Use /on for events, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-- - - - - - - - - - - - - - - - - - - - - - - - 
-Your current scroll, milady:
-1.[T][✓] read book
-2.[D][✓] return book  (by: Thursday)
-3.[E][✘] arts experience  (at: Friday 5-6pm)
-- - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your current scroll, Your Majesty:
+	1.[T][✓] read book
+	2.[D][✓] return book  (by: Thursday)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-Your wish is my command, milady. Till I see you again.
+DukeException: I'm afraid I do not understand that command, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+DukeException: Do give me more details about this event, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+DukeException: Do give me more details about this todo, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+DukeException: Do give me more details about this deadline, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+DukeException: Use /by for deadlines, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+DukeException: Use /on for events, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+DukeException: Do give me more details about this deadline, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+DukeException: Do give me more details about this event, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+DukeException: Do give me more details about this todo, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your wish is my command, Your Majesty. Till I see you again.

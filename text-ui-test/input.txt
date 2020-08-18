@@ -8,4 +8,13 @@ scroll
 conquer 3
 event arts experience /at Friday 5-6pm
 scroll
+list
+event
+todo
+deadline
+deadline code /for Monday
+event hackathon /by Tuesday
+deadline     
+event    
+todo         
 dismiss
