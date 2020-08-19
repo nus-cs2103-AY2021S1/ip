@@ -73,6 +73,19 @@ public class Store {
     }
 
     /**
+     * Finds all given task specified and deletes it from
+     * list.
+     *
+     * @param nums
+     * @return
+     */
+    public String deleteTask(Integer nums) {
+        Task t = todoList.get(nums);
+        todoList.remove(nums);
+        return t.toString();
+    }
+
+    /**
      * Returns the number of tasks in the todoList. Includes completed task.
      *
      * @return size of the list as a String
@@ -110,12 +123,5 @@ public class Store {
         }
         return c;
     }
-
-    public String deleteTask(Integer[] nums) {
-        return null;
-    }
-
-
-
 
 }

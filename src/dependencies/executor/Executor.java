@@ -102,12 +102,12 @@ public class Executor {
                         storage.getNumOfIncompleted());
             }
             case DELETE: {
-                String[] nums = e.getTask().showTask().split("[\\D]+");
-                Integer[] arr = new Integer[nums.length];
-                for (int i = 0; i < nums.length; i++) {
-                    arr[i] = Integer.valueOf(nums[i]);
-                }
-                reply = storage.deleteTask()
+                String nums = e.getTask().showTask();
+                reply = storage.deleteTask(Integer.valueOf(nums));
+                return String.format("Noted. I've removed this task:\n%s\n"
+                        + "Now you have %d tasks left in the list.",
+                        reply,
+                        storage.getListSize());
             }
             default: {
                 return "Error";
