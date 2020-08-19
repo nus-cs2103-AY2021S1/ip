@@ -16,26 +16,43 @@ public class Duke {
         String bye = "bye";
         String list = "list";
 
-        String[] taskList = new String[100];
+        Task[] taskList = new Task[100];
         int taskSize = 0;
 
         do {
-            if (input.equals(list)) {
+            if (input.startsWith("done")) {
+                String taskStr = input.substring(5);
+                int taskNum = 0;
+
+                try {
+                    taskNum = Integer.parseInt(taskStr);
+                }
+                catch (NumberFormatException nfe) {
+                    taskNum = 0;
+                }
+
+                if (taskNum > 0 && taskNum <= taskSize) {
+                    taskList[taskNum - 1].markAsDone();
+                    System.out.println("Wow!! Good job!!\n" + taskList[taskNum - 1]);
+                }
+                else {
+                    System.out.println("hmm.. I don't think thats a valid task, try again?");
+                }
+            }
+            else if (input.equals(list)) {
                 int curr = 0;
                 while (curr < taskSize) {
                     System.out.println((curr + 1) + ". " + taskList[curr]);
                     curr += 1;
                 }
-                System.out.println("_________________________________________");
-                input = sc.nextLine();
             }
             else {
-                taskList[taskSize] = input;
-                System.out.println("I have added: " + input
-                        + "\n_________________________________________");
-                input = sc.nextLine();
+                taskList[taskSize] = new Task(input);
+                System.out.println("I have added: " + input);
                 taskSize += 1;
             }
+            System.out.println("_________________________________________");
+            input = sc.nextLine();
         }
         while (!input.equals(bye));
 
