@@ -10,6 +10,24 @@ public class Duke {
         return line + string + "\n" + line;
     }
 
+    private static void list() {
+        StringBuilder taskListString = new StringBuilder();
+        taskListString.append("     Here are the tasks in your list:\n");
+        for (int i = 1; i < taskList.size() + 1; i++) {
+            taskListString.append("     ").append(i).append(".").append(taskList.get(i - 1)).append("\n");
+        }
+        System.out.println(format(taskListString.toString()));
+    }
+
+    private static void done(String input) {
+        int index = Integer.parseInt(input.substring(5));
+        if (index <= taskList.size()) {
+            Task current = taskList.get(index - 1);
+            current.markAsDone();
+            System.out.println(format("     Nice! I've marked this task as done:\n       " + current));
+        }
+    }
+
     private static void addNewTask(String input) {
         boolean newTaskCreated = false;
         Task newTask = null;
@@ -26,7 +44,7 @@ public class Duke {
             int index = input.indexOf("/");
             String description = input.substring(6, index);
             String time = input.substring(index + 4);
-            newTask = new Deadline(description, time);
+            newTask = new Event(description, time);
             newTaskCreated = true;
         } else {
             System.out.println(format("invalid input"));
@@ -37,7 +55,7 @@ public class Duke {
             System.out.println(format("     Got it. I've added this task:\n       " + newTask +
                     "\n     Now you have " + taskList.size() + " tasks in the list."));
         }
-     }
+    }
 
     private static void chat() {
         String input = sc.nextLine();
@@ -45,19 +63,9 @@ public class Duke {
             System.out.println(format("     Bye. Hope to see you again soon!"));
         } else {
             if (input.equals("list")) {
-                StringBuilder taskListString = new StringBuilder();
-                taskListString.append("     Here are the tasks in your list:\n");
-                for (int i = 1; i < taskList.size() + 1; i++) {
-                    taskListString.append("     ").append(i).append(".").append(taskList.get(i - 1)).append("\n");
-                }
-                System.out.println(format(taskListString.toString()));
+                list();
             } else if (input.startsWith("done ")) {
-                int index = Integer.parseInt(input.substring(5));
-                if (index <= taskList.size()) {
-                    Task current = taskList.get(index - 1);
-                    current.markAsDone();
-                    System.out.println(format("     Nice! I've marked this task as done:\n       " + current));
-                }
+                done(input);
             } else {
                 addNewTask(input);
             }
