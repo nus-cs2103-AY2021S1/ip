@@ -1,3 +1,5 @@
+import jdk.jfr.Event;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -5,50 +7,71 @@ import java.util.List;
 public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        processInput(scanner);
+    }
+
+    public static void processInput(Scanner scanner) {
         System.out.println("Hi! I'm Duke" + "\n" + "What can I do for you?");
         String currInput = scanner.nextLine();
         List<Task> storedTasks = new ArrayList<>();
 
-        while (isNotTerminateCommand(currInput)) {
-            if (isListCommand(currInput)) {
-                //List out all tasks' description
-                System.out.println(readList(storedTasks));
-            } else if (isDoneCommand(currInput)) {
+            while (isNotTerminateCommand(currInput)) {
+                try {
+                if (isListCommand(currInput)) {
+                    //List out all tasks' description
+                    System.out.println(readList(storedTasks));
+                } else if (isDoneCommand(currInput)) {
+                    if (isValidDoneCommand(currInput, storedTasks.size())) {
+                        String[] parts = currInput.split(" ");
+                        int index = Integer.parseInt(parts[1]) - 1;
 
-                if (isValidDoneCommand(currInput, storedTasks.size())) {
-                    String[] parts = currInput.split(" ");
-                    int index = Integer.parseInt(parts[1]) - 1;
+                        storedTasks.set(index, storedTasks.get(index).markDone());
 
-                    storedTasks.set(index, storedTasks.get(index).markDone());
-
-                    System.out.println("Nice! I've marked this task as done:" + "\n" + "  " + storedTasks.get(index).toString());
+                        System.out.println("Nice! I've marked this task as done:" + "\n" + "  " + storedTasks.get(index).toString());
+                    } else {
+                        System.out.println("Sorry, invalid command");
+                    }
                 } else {
-                    System.out.println("Sorry, invalid command");
+                    //handle task commands
+                    addTasks(currInput, storedTasks);
+                    System.out.println("Got it. I've added this task:" + "\n" + "  " + storedTasks.get(storedTasks.size() - 1)
+                            + "\n" + "Now you have " + storedTasks.size() + " tasks in the list.");
                 }
-            } else {
-                //Is a task
-               /*Task newTask = new Task(currInput);
-               storedTasks.add(newTask);*/
-                addTasks(currInput, storedTasks);
-               System.out.println("Got it. I've added this task:" + "\n" + "  " + storedTasks.get(storedTasks.size() - 1)
-               + "\n" + "Now you have " + storedTasks.size() + " tasks in the list.");
-            }
                 currInput = scanner.nextLine();
-        }
+                } catch (InvalidCommandException e) {
+                    System.out.println(e + "\n" + "Please enter a valid command");
+                    currInput = scanner.nextLine();
+                    //Should continue to run the program as it is
+                } catch (InvalidInputException e) {
+                    System.out.println(e + "\n" + "Please enter a valid input");
+                    currInput = scanner.nextLine();
+                    //Should continue to run the program as it is
+                }
 
-        System.out.println("Bye. Hope to see you again soon!");
-        scanner.close();
-    }
+            }
+
+            System.out.println("Bye. Hope to see you again soon!");
+            scanner.close();
+        }
 
     public static boolean isDoneCommand(String input) {
         String[] parts = input.split(" ");
         return parts[0].equals("done") && parts.length == 2;
     }
 
-    public static boolean isValidDoneCommand(String input, int numOfTasks) {
-        String[] parts = input.split(" ");
-        int index = Integer.parseInt(parts[1]) - 1;
-        return index > -1 && index < numOfTasks;
+    public static boolean isValidDoneCommand(String input, int numOfTasks) throws InvalidCommandException {
+        try {
+            String[] parts = input.split(" ");
+            int index = Integer.parseInt(parts[1]) - 1;
+            boolean result = index > -1 && index < numOfTasks;
+            if (result) {
+                return true;
+            } else {
+                throw new InvalidCommandException("Number is invalid!");
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException(("Please input number after the done command!"));
+        }
     }
 
     public static boolean isListCommand(String input) {
@@ -59,28 +82,85 @@ public class Duke {
         return !input.equals("bye");
     }
 
-    public static void addTasks(String input, List<Task> tasks) {
+    public static void addTasks(String input, List<Task> tasks) throws InvalidInputException, InvalidCommandException {
         String[] parts = input.split(" ", 2);
-        String taskType = parts[0];
-        Task newTask;
 
-        if (taskType.equals("todo")) {
-            newTask = new Task(parts[1]);
-            tasks.add(newTask);
-        } else if (taskType.equals("deadline")) {
-            String[] split = parts[1].split("/by");
-            String desc = split[0];
-            String deadline = split[1];
-            newTask = new Deadlines(split[0], split[1]);
-            tasks.add(newTask);
-        } else if (taskType.equals("event")) {
-            String[] split = parts[1].split("/at");
-            String desc = split[0];
-            String startTime = split[1];
-            newTask = new Events(desc, startTime);
-            tasks.add(newTask);
+        try {
+            if (input.startsWith("todo")) {
+                //Verify the todo command
+                verifyTodo(input);
+                tasks.add(new Task(parts[1]));
+            } else if (input.startsWith("deadline")) {
+                //Verify the deadline command
+                verifyDeadline(input);
+                String[] split = parts[1].split("/by");
+                tasks.add(new Deadlines(split[0], split[1]));
+            } else if (input.startsWith("event")) {
+                //Verify the event command
+                verifyEvent(input);
+                String[] split = parts[1].split("/at");
+                tasks.add(new Events(split[0], split[1]));
+            } else {
+                throw new InvalidInputException("Sorry, I don't know what that means :(");
+            }
+        } catch (InvalidCommandException e) {
+            throw e;
+        } catch (InvalidInputException e) {
+            throw e;
+        }
+    }
+
+    public static void verifyTodo(String input) throws InvalidCommandException{
+        String[] parts = input.split(" ");
+
+        if (parts.length <= 1) {
+            throw new InvalidCommandException("Sorry, the description of a todo cannot be empty :(");
+        }
+    }
+
+    public static void verifyDeadline(String input) throws InvalidCommandException {
+        if (input.contains(" /by ")) {
+            if (input.charAt(8) == ' ') {
+                String[] parts = input.split(" ", 2);
+                if (parts[1].startsWith("/by")) {
+                    throw new InvalidCommandException("Sorry, missing deadline description :(");
+                } else {
+                    String[] split = parts[1].split("/by");
+                    if (split.length <= 1 || split[1].isBlank()) {
+                        throw new InvalidCommandException("Sorry, missing deadline time :(");
+                    } else if (split[0].isBlank()) {
+                        throw new InvalidCommandException("Sorry, missing deadline description :(");
+                    }
+                }
+            } else {
+                throw new InvalidCommandException("Sorry please leave a space after the deadline command!");
+            }
         } else {
-            System.out.println("Sorry, invalid command");
+            throw new InvalidCommandException("Sorry, missing /by keyword, make sure to leave a space before " +
+                    "and after the /by keyword!");
+        }
+    }
+
+    public static void verifyEvent(String input) throws InvalidCommandException {
+        if (input.contains(" /at ")) {
+            if (input.charAt(5) == ' ') {
+                String[] parts = input.split(" ", 2);
+                if (parts[1].startsWith("/at")) {
+                    throw new InvalidCommandException("Sorry, missing event description :(");
+                } else {
+                    String[] split = parts[1].split("/at");
+                    if (split.length <= 1 || split[1].isBlank()) {
+                        throw new InvalidCommandException("Sorry, missing event time :(");
+                    } else if (split[0].isBlank()) {
+                        throw new InvalidCommandException("Sorry, missing event description :(");
+                    }
+                }
+            } else {
+                throw new InvalidCommandException("Sorry please leave a space after the event command!");
+            }
+        } else {
+            throw new InvalidCommandException("Sorry, missing /at keyword, make sure to leave a space before " +
+                    "and after the /at keyword!");
         }
     }
 

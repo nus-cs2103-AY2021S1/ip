@@ -1,4 +1,6 @@
+../src/main/java/InvalidCommandException.java
 ../src/main/java/Task.java
+../src/main/java/InvalidInputException.java
 ../src/main/java/Events.java
 ../src/main/java/Duke.java
 ../src/main/java/Deadlines.java
