@@ -3,7 +3,7 @@ import java.util.*;
 public class Duke {
     private static ArrayList<Task> userList = new ArrayList<>();
 
-    private static Task processEventOrDeadline(String input) throws EventException, DeadlineException {
+    private static void processEventOrDeadline(String input) throws EventException, DeadlineException {
         String[] temp = input.split("/");
         String[] commandTemp = temp[0].split(" ");
         String command = commandTemp[0];
@@ -37,16 +37,17 @@ public class Duke {
         if (command.equals("deadline")) {
             Task task = new Deadline(description, timeDescription);
             userList.add(task);
-            return task;
+            System.out.println(task);
+            System.out.println("Now you have " + userList.size() + " tasks in the list.");
         } else if (command.equals("event")) {
             Task task = new Event(description, timeDescription);
             userList.add(task);
-            return task;
+            System.out.println(task);
+            System.out.println("Now you have " + userList.size() + " tasks in the list.");
         }
-        return null;
     }
 
-    private static Task processToDo(String input) throws ToDoException {
+    private static void processToDo(String input) throws ToDoException {
         String[] temp = input.split(" ");
 
         String command = temp[0];
@@ -64,11 +65,11 @@ public class Duke {
         userList.add(task);
 
         System.out.println("Got it. I've added this task:");
-
-        return task;
+        System.out.println(task);
+        System.out.println("Now you have " + userList.size() + " tasks in the list.");
     }
 
-    private static Task processDelete(String input) throws DeletionException {
+    private static void processDelete(String input) throws DeletionException {
         String[] temp = input.split(" ");
         if (temp.length == 1) {
             throw new DeletionException("Please input index after delete! Example of input would be 'delete 1' which deletes 1st item from list");
@@ -87,7 +88,35 @@ public class Duke {
         Task task = userList.get(index);
         userList.remove(index);
 
-        return task;
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + userList.size() + " tasks in the list.");
+    }
+
+    private static void processDone(String input) throws DoneException {
+        String[] temp = input.split(" ");
+        if (temp.length == 1) {
+            throw new DoneException("Please input number after done! Example of input would be 'done 2' checks item number 2 from list");
+        }
+        if (temp.length > 2) {
+            throw new DoneException("Too many arguements! Example of input would be 'done 2' which checks item number 2 from list");
+        }
+        int listNumber = Integer.parseInt(temp[1]);
+        if (listNumber > userList.size()) {
+            throw new DoneException("Item number " + listNumber + " does not exist in list!");
+        }
+        userList.get(listNumber - 1).completedTask();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(userList.get(listNumber - 1).toString());
+    }
+
+    private static void processList() {
+        System.out.println("Here are the tasks in your list:");
+        int index = 1;
+        for (Task task : userList) {
+            System.out.println(index + ". " + task.toString());
+            index++;
+        }
     }
 
     public static void main(String[] args) {
@@ -106,21 +135,16 @@ public class Duke {
             } else if (input.equals("list")) {
                 // when user wants to print list of task
 
-                System.out.println("Here are the tasks in your list:");
-                int index = 1;
-                for (Task task : userList) {
-                    System.out.println(index + ". " + task.toString());
-                    index++;
-                }
+                processList();
 
             } else if (input.startsWith("done")) {
                 // when user completes task
 
-                String[] temp = input.split(" ");
-                int listNumber = Integer.parseInt(temp[1]);
-                userList.get(listNumber - 1).completedTask();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(userList.get(listNumber - 1).toString());
+                try {
+                    processDone(input);
+                } catch (DoneException e) {
+                    System.out.println(e.getMessage());
+                }
 
             } else if ((input.startsWith("deadline") || input.startsWith("event")) || input.startsWith("todo")) {
                 // user trying to input to List
@@ -129,34 +153,30 @@ public class Duke {
                     // input starts with deadline or event
 
                     try {
-                        Task task = processEventOrDeadline(input);
-                        System.out.println(task);
-                        System.out.println("Now you have " + userList.size() + " tasks in the list.");
+                        processEventOrDeadline(input);
                     } catch (EventException | DeadlineException e) {
                         System.out.println(e.getMessage());
                     }
+
                 } else if (input.startsWith("todo")){
                     // input starts with todo
 
                     try {
-                        Task task = processToDo(input);
-                        System.out.println(task);
-                        System.out.println("Now you have " + userList.size() + " tasks in the list.");
+                        processToDo(input);
                     } catch (ToDoException e) {
                         System.out.println(e.getMessage());
                     }
                 }
+
             } else if (input.startsWith("delete")) {
                 // if input starts with delete
 
                 try {
-                    Task task = processDelete(input);
-                    System.out.println("Noted. I've removed this task:");
-                    System.out.println(task);
-                    System.out.println("Now you have " + userList.size() + " tasks in the list.");
+                    processDelete(input);
                 } catch (DeletionException e) {
                     System.out.println(e.getMessage());
                 }
+
             } else {
                 // invalid input
 
@@ -165,6 +185,7 @@ public class Duke {
                 } catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
                 }
+
             }
         }
     }

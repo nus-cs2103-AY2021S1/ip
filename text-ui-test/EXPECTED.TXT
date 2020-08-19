@@ -20,6 +20,9 @@ Now you have 4 tasks in the list.
 Got it. I've added this task:
 [T][?] borrow book 
 Now you have 5 tasks in the list.
+Please input number after done! Example of input would be 'done 2' checks item number 2 from list
+Too many arguements! Example of input would be 'done 2' which checks item number 2 from list
+Item number 213123 does not exist in list!
 Nice! I've marked this task as done:
 [T][?] read book 
 Nice! I've marked this task as done:
