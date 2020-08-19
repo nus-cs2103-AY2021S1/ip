@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Duke {
+public class Chatterbox {
     public static void main(String[] args) {
         System.out.println("Hello I'm Chatterbox. What can I do for you?");
 
