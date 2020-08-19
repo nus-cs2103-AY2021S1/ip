@@ -1,0 +1,18 @@
+invalidinput
+list
+todo todo1
+deadline deadline1 /by datetime1
+event event1 /at datetime2
+list
+done 1
+done 2
+done 2
+done3
+done invalid
+list
+todo
+deadline deadline2without/by
+deadline deadline3 /by baddatetime1 /by baddatetime2
+event event2without/at
+event event 3 /at baddatetime3 /at baddatetime4
+bye
