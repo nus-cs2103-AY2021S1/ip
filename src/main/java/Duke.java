@@ -1,18 +1,30 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    private Storage storage;
+    private List<Task> tasks;
+
+    public Duke(String filePath) {
+        try {
+            this.storage = new Storage(filePath);
+            tasks = new ArrayList<>(storage.load());
+        } catch (IOException e) {
+            Printer.printGeneralChatWindow("ERROR: Loading error");
+            tasks = new ArrayList<>();
+        }
+    }
+
     public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
+
+    public void run() {
         // Initial greeting, prompt user for commands
         Printer.printLogo();
         Printer.printGeneralChatWindow("Greetings! I'm Awesome-O.", "What can I do for you?");
-
-        // Assuming no more than 100 tasks
-        final int taskCapacity = 100;
-
-        // Initialise a fixed array of tasks to store
-        List<Task> tasks = new ArrayList<>(taskCapacity);
 
         // Start scanning for user input
         Scanner sc = new Scanner(System.in);
@@ -47,6 +59,12 @@ public class Duke {
                     default:
                         throw new DukeUnknownInputException();
                 }
+
+                // Save tasks in a save-file with each command
+                storage.save(tasks);
+
+            } catch (IOException e) {
+                Printer.printGeneralChatWindow("ERROR: Loading error!");
             } catch (DukeUnknownInputException e) {
                 Printer.printGeneralChatWindow(e.toString());
             } catch (IndexOutOfBoundsException e) {

@@ -2,19 +2,19 @@ public enum TaskType {
     TODO {
         @Override
         public String toString() {
-            return "[T]";
+            return "T";
         }
     },
     EVENT {
         @Override
         public String toString() {
-            return "[E]";
+            return "E";
         }
     },
     DEADLINE {
         @Override
         public String toString() {
-            return "[D]";
+            return "D";
         }
     }
 }

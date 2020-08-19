@@ -6,6 +6,16 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public Deadline(String description, boolean isDone, String by) {
+        super(description, isDone, TaskType.DEADLINE);
+        this.by = by;
+    }
+
+    @Override
+    public String getTime() {
+        return by;
+    }
+
     @Override
     public String toString() {
         return String.format("%s (by: %s)", super.toString(), by);
