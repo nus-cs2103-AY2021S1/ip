@@ -1,0 +1,10 @@
+deadline prepare for presentation /by today 7pm
+todo go cycling
+list
+event watch horror movie with friends /at 12am
+done 2
+deadline do homework /by Monday 6pm
+list
+done 3
+list
+bye

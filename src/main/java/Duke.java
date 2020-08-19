@@ -82,7 +82,12 @@ public class Duke {
             } else {
                 addTask(input);
             }
-            input = sc.nextLine();
+
+            if (sc.hasNextLine()) {
+                input = sc.nextLine();
+            } else {
+                break;
+            }
         }
         sc.close();
         printGoodbye();
