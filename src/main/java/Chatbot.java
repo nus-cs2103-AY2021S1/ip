@@ -27,10 +27,20 @@ public class Chatbot {
     }
     public void generateList() {
         System.out.println(line);
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             Task t = list.get(i);
             System.out.println((i + 1) + ". " + t.printTask());
         }
+        System.out.println(line);
+    }
+
+    public void delete(int i) {
+        System.out.println(line);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(list.get(i - 1).printTask());
+        list.remove(i - 1);
+        System.out.println("Now you have " + list.size() + (list.size() > 1 ? " tasks" : " task") + " on the list");
         System.out.println(line);
     }
 
@@ -46,7 +56,7 @@ public class Chatbot {
             return true;
         }
 
-        if (s.contains("done")) {
+        if (s.startsWith("done")) {
             char x = s.charAt(s.length() - 1);
             int i = Character.getNumericValue(x);
             Task t = list.get(i - 1);
@@ -57,6 +67,13 @@ public class Chatbot {
             System.out.println(t.printTask());
             System.out.println(line);
 
+            return true;
+        }
+
+        if (s.startsWith("delete")) {
+            char x = s.charAt(s.length() - 1);
+            int i = Character.getNumericValue(x);
+            delete(i);
             return true;
         }
 
