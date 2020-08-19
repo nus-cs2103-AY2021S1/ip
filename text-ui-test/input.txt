@@ -5,4 +5,6 @@ deadline finish quiz /by tonight
 list
 done 3
 list
+todo
+blank
 bye

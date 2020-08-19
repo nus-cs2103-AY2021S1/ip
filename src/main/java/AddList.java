@@ -19,9 +19,12 @@ public class AddList {
         System.out.println(this.line);
     }
 
-    public Task handleInput(String input) {
+    public Task handleInput(String input) throws InvalidDescriptionException, InvalidTypeException {
         String type = input.split(" ")[0];
         if (type.equals("todo")) {
+            if (input.substring(4).equals("") || input.substring(5).equals("")) {
+                throw new InvalidDescriptionException();
+            }
             return new Todo(input.substring(5));
         } else if (type.equals("deadline")) {
             String[] dl = input.split(" /by ");
@@ -30,16 +33,21 @@ public class AddList {
             String[] e = input.split(" /at ");
             return new Event(e[0].substring(6), e[1]);
         } else {
-            System.out.println("Erroneous type");
-            return new Task("");
+            throw new InvalidTypeException();
         }
     }
 
     public void add(String input) {
-        Task toAdd = this.handleInput(input);
-        this.items[this.idx] = toAdd;
-        this.idx++;
-        this.addLines(String.format("    Got it. I've added this task:\n    %s\n    Now you have %d tasks in the list.", toAdd, this.idx));
+        try {
+            Task toAdd = this.handleInput(input);
+            this.items[this.idx] = toAdd;
+            this.idx++;
+            this.addLines(String.format("    Got it. I've added this task:\n    %s\n    Now you have %d tasks in the list.", toAdd, this.idx));
+        } catch (InvalidDescriptionException e) {
+            this.addLines(e.toString());
+        } catch (InvalidTypeException e) {
+            this.addLines(e.toString());
+        }
     }
 
     public void display() {
