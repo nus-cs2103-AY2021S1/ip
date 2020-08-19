@@ -1,12 +1,20 @@
 import java.util.List;
 
 public class Printer {
+    private static final String logo = "     ___   ____    __    ____  _______     _______.  ______   .___  ___.  _______          ______\n"
+            + "    /   \\  \\   \\  /  \\  /   / |   ____|   /       | /  __  \\  |   \\/   | |   ____|        /  __  \\\n"
+            + "   /  ^  \\  \\   \\/    \\/   /  |  |__     |   (----`|  |  |  | |  \\  /  | |  |__    ______|  |  |  |\n"
+            + "  /  /_\\  \\  \\            /   |   __|     \\   \\    |  |  |  | |  |\\/|  | |   __|  |______|  |  |  |\n"
+            + " /  _____  \\  \\    /\\    /    |  |____.----)   |   |  `--'  | |  |  |  | |  |____        |  `--'  |\n"
+            + "/__/     \\__\\  \\__/  \\__/     |_______|_______/     \\______/  |__|  |__| |_______|        \\______/\n";
     private static final String indent = "    ";
     private static final String doubleIndent = indent + indent;
     private static final String border = "_________________________________________________";
 
-    private static final String tickedBox = box("✓");
-    private static final String crossedBox = box("✘");
+    // Prints Duke logo
+    public static void printLogo() {
+        System.out.println(logo);
+    }
 
     // Prints a chat window showing the list of tasks
     public static void printTasksChatWindow(List<Task> tasks) {

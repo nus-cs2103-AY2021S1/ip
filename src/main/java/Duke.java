@@ -5,13 +5,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         // Initial greeting, prompt user for commands
-        String logo = "     ___   ____    __    ____  _______     _______.  ______   .___  ___.  _______          ______\n"
-                + "    /   \\  \\   \\  /  \\  /   / |   ____|   /       | /  __  \\  |   \\/   | |   ____|        /  __  \\\n"
-                + "   /  ^  \\  \\   \\/    \\/   /  |  |__     |   (----`|  |  |  | |  \\  /  | |  |__    ______|  |  |  |\n"
-                + "  /  /_\\  \\  \\            /   |   __|     \\   \\    |  |  |  | |  |\\/|  | |   __|  |______|  |  |  |\n"
-                + " /  _____  \\  \\    /\\    /    |  |____.----)   |   |  `--'  | |  |  |  | |  |____        |  `--'  |\n"
-                + "/__/     \\__\\  \\__/  \\__/     |_______|_______/     \\______/  |__|  |__| |_______|        \\______/\n";
-        System.out.println(logo);
+        Printer.printLogo();
         Printer.printGeneralChatWindow("Greetings! I'm Awesome-O.", "What can I do for you?");
 
         // Assuming no more than 100 tasks
@@ -66,7 +60,7 @@ public class Duke {
 
         // Print goodbye chat window
         Printer.printGeneralChatWindow("Thank you for talking to Awesome-O.", "Have a nice day. Goodbye!");
-        System.out.println(logo);
+        Printer.printLogo();
     }
 
     private static Task completeTask(String input, List<Task> tasks) {
