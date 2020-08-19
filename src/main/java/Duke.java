@@ -48,6 +48,24 @@ public class Duke {
                     print("congrats on finishing your task :) it's marked as done:\n\t" + task);
 
                 }
+            } else if (in.startsWith("delete ")){
+                int current;
+                try {
+                    current = Integer.parseInt(in.substring(7));
+                } catch (Exception e){
+                    errorMsg("you haven't entered a task number to delete!");
+                    continue;
+                }
+                current--;
+                Task task;
+                if (current < 0 || current >= things.size()) {
+                    errorMsg("that is not the number of a task in the list!");
+                } else {
+                    task = things.get(current);
+                    things.remove(current);
+                    print("i've removed the following task from the list:\n\t" + task + "\nnow you have " + things.size() + " items in your tasklist.");
+
+                }
             } else if (in.startsWith("todo ")){
                 String taskname = in.substring(5);
                 if (taskname.length() == 0) {
