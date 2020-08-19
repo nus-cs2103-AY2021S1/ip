@@ -94,4 +94,36 @@ currently tracking 6 tasks (3 pending, 3 done, 50.0% complete)
 task 1 is already marked as done:
   [T] [✓] task two
 --------------------------------------
+>
+error: task description cannot be empty
+usage: deadline <description> /by <time>
+--------------------------------------
+>
+error: task description cannot be empty
+usage: deadline <description> /by <time>
+--------------------------------------
+>
+error: incorrect date specification
+usage: deadline <description> /by <time>
+--------------------------------------
+>
+error: deadline requires a date
+usage: deadline <description> /by <time>
+--------------------------------------
+>
+error: task description cannot be empty
+usage: event <description> /at <time>
+--------------------------------------
+>
+error: task description cannot be empty
+usage: event <description> /at <time>
+--------------------------------------
+>
+error: incorrect date specification
+usage: event <description> /at <time>
+--------------------------------------
+>
+error: event requires a date
+usage: event <description> /at <time>
+--------------------------------------
 > goodbye

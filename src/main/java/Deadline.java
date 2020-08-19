@@ -21,19 +21,22 @@ public class Deadline extends Task {
 
     public static Deadline parse(String input) throws InvalidInputException {
 
-        var sc = new Scanner(input);
+        var slash = input.indexOf('/');
 
-        sc.useDelimiter("/");
-        var item = sc.next().strip();
-        var when = sc.next().strip();
-
-        if (item.isEmpty()) {
-
+        if (slash == 0 || input.isEmpty()) {
             throw new InvalidInputException("task description cannot be empty", getUsage());
 
-        } else if (!when.startsWith("by ")) {
-
+        } else if (slash == -1) {
             throw new InvalidInputException("deadline requires a date", getUsage());
+        }
+
+        var item = input.substring(0, slash).strip();
+        var when = input.substring(slash + 1).strip();
+
+        assert !item.isEmpty();
+
+        if (!when.startsWith("by ")) {
+            throw new InvalidInputException("incorrect date specification", getUsage());
         }
 
         when = when.substring(3).strip();
