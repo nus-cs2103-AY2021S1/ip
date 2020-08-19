@@ -16,44 +16,77 @@ public class Duke {
         for (int i = 1; i < taskList.size() + 1; i++) {
             taskListString.append("     ").append(i).append(".").append(taskList.get(i - 1)).append("\n");
         }
+        taskListString.delete(taskListString.length() - 1, taskListString.length());
         System.out.println(format(taskListString.toString()));
     }
 
-    private static void done(String input) {
-        int index = Integer.parseInt(input.substring(5));
-        if (index <= taskList.size()) {
-            Task current = taskList.get(index - 1);
-            current.markAsDone();
-            System.out.println(format("     Nice! I've marked this task as done:\n       " + current));
+    private static void done(String input) throws DukeException{
+        if (input.equals("done") || input.equals("done ")) {
+            throw new InvalidTaskIndexException(input);
+        } else if (input.startsWith("done ") && input.length() > 5) {
+            try {
+                int index = Integer.parseInt(input.substring(5));
+                Task current = taskList.get(index - 1);
+                current.markAsDone();
+                System.out.println(format("     Nice! I've marked this task as done:\n       " + current));
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                throw new InvalidTaskIndexException(input);
+            }
+        } else {
+            throw new DukeException();
         }
     }
 
-    private static void addNewTask(String input) {
-        boolean newTaskCreated = false;
-        Task newTask = null;
-        if (input.startsWith("todo ")) {
-            newTask = new Todo(input.substring(5));
-            newTaskCreated = true;
-        } else if (input.startsWith("deadline ") && input.contains("/")) {
-            int index = input.indexOf("/");
-            String description = input.substring(9, index);
-            String time = input.substring(index + 4);
-            newTask = new Deadline(description, time);
-            newTaskCreated = true;
-        } else if (input.startsWith("event ")  && input.contains("/")) {
-            int index = input.indexOf("/");
-            String description = input.substring(6, index);
-            String time = input.substring(index + 4);
-            newTask = new Event(description, time);
-            newTaskCreated = true;
-        } else {
-            System.out.println(format("invalid input"));
-        }
+    private static void addNewTask(Task newTask) {
+        taskList.add(newTask);
+        System.out.println(format("     Got it. I've added this task:\n       " + newTask +
+                "\n     Now you have " + taskList.size() + " tasks in the list."));
+    }
 
-        if (newTaskCreated) {
-            taskList.add(newTask);
-            System.out.println(format("     Got it. I've added this task:\n       " + newTask +
-                    "\n     Now you have " + taskList.size() + " tasks in the list."));
+    private static void newTodo(String input) throws DukeException {
+        if (input.equals("todo") || input.equals("todo ")) {
+            throw new EmptyDescriptionException("todo");
+        } else if (input.startsWith("todo ") && input.length() > 5) {
+            Todo newTodo = new Todo(input.substring(5));
+            addNewTask(newTodo);
+        } else {
+            throw new DukeException();
+        }
+    }
+
+    private static void newDeadline(String input) throws DukeException {
+        if (input.equals("deadline") || input.equals("deadline ")) {
+            throw new EmptyDescriptionException("deadline");
+        } else if (input.startsWith("deadline ") && input.length() > 9) {
+            if (!input.contains("/by: ")) {
+                throw new InvalidDateTimeException("deadline");
+            } else {
+                int index = input.indexOf("/by: ");
+                String description = input.substring(9, index);
+                String time = input.substring(index + 4);
+                Deadline newDeadline = new Deadline(description, time);
+                addNewTask(newDeadline);
+            }
+        } else {
+            throw new DukeException();
+        }
+    }
+
+    private static void newEvent(String input) throws DukeException {
+        if (input.equals("event") || input.equals("event ")) {
+            throw new EmptyDescriptionException("event");
+        } else if (input.startsWith("event ") && input.length() > 6) {
+            if (!input.contains("/at: ")) {
+                throw new InvalidDateTimeException("event");
+            } else {
+                int index = input.indexOf("/at: ");
+                String description = input.substring(6, index);
+                String time = input.substring(index + 4);
+                Event newEvent = new Event(description, time);
+                addNewTask(newEvent);
+            }
+        } else {
+            throw new DukeException();
         }
     }
 
@@ -62,14 +95,25 @@ public class Duke {
         if (input.equals("bye")) {
             System.out.println(format("     Bye. Hope to see you again soon!"));
         } else {
-            if (input.equals("list")) {
-                list();
-            } else if (input.startsWith("done ")) {
-                done(input);
-            } else {
-                addNewTask(input);
+            try {
+                if (input.equals("list")) {
+                    list();
+                } else if (input.startsWith("done")) {
+                    done(input);
+                } else if (input.startsWith("todo")) {
+                    newTodo(input);
+                } else if (input.startsWith("deadline")) {
+                    newDeadline(input);
+                } else if (input.startsWith("event")) {
+                    newEvent(input);
+                } else {
+                    throw new DukeException();
+                }
+            } catch (DukeException e) {
+                System.out.println(format("     " + e.toString()));
+            } finally {
+                chat();
             }
-            chat();
         }
     }
 
