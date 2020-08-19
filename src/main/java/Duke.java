@@ -61,7 +61,8 @@ public class Duke {
 
         String end = "bye";
         String done = "done";
-        List<Task> tasks = new ArrayList<>();
+        String delete = "delete";
+        ArrayList<Task> tasks = new ArrayList<>();
         String echo = scan.nextLine();
         String listing = "list";
 
@@ -114,8 +115,6 @@ public class Duke {
                     System.out.println(e.getMessage());
                     System.out.println(line);
                 }
-
-
             }
             echo = scan.nextLine();
         }

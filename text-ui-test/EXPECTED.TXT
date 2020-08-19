@@ -1,7 +1,36 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello I'm Verzachtend
+What can I do for you?
+BE YOURSELF, NEVER SURRENDER AND KEEP A SMILE ON YOUR FACE
+________________________________________________
+Got it. I've added this task:
+ [D][✗] cs2103 project (by: 20)
+Now you have 1 tasks in the list.
+________________________________________________
+________________________________________________
+Got it. I've added this task:
+ [D][✗] welcome tea angklung (by: 17 from 7-9 p.m.)
+Now you have 2 tasks in the list.
+________________________________________________
+________________________________________________
+☹ OOPS!!! The description of a deadline cannot be empty.
+________________________________________________
+________________________________________________
+Got it. I've added this task:
+ [T][✗] read book
+Now you have 3 tasks in the list.
+________________________________________________
+________________________________________________
+☹ OOPS!!! The description of a todo cannot be empty.
+________________________________________________
+________________________________________________
+☹ OOPS!!! Please specify the deadline!
+________________________________________________
+________________________________________________
+Here are the tasks in your list:
+1. [D][✗] cs2103 project (by: 20)
+2. [D][✗] welcome tea angklung (by: 17 from 7-9 p.m.)
+3. [T][✗] read book
+________________________________________________
+________________________________________________
+Bye. Hope to see you again soon!
+________________________________________________
