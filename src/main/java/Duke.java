@@ -21,7 +21,8 @@ public class Duke {
 
 
             //add items to list
-            if (!userMessage.equals("bye") && !userMessage.equals("list") && !userMessage.contains("done")) {
+            if (!userMessage.equals("bye") && !userMessage.equals("list")
+                    && !userMessage.contains("done") && !userMessage.contains("delete")) {
                 Task newItem = new Task(userMessage, Task.Status.PENDING);
                 if (userMessage.startsWith("todo")) {
                     String name = userMessage.substring(4);
@@ -81,6 +82,15 @@ public class Duke {
                 System.out.println(task.toString());
             }
 
+            //delete task
+            if (userMessage.contains("delete")) {
+                int index = Character.getNumericValue(userMessage.charAt(7)) - 1;
+                Task task = itemList.get(index);
+                itemList.remove(index);
+                System.out.println("I have deleted this task for you: ");
+                System.out.println(task.toString());
+                System.out.println("You now have " + itemList.size() + " tasks in your list!");
+            }
 
             //exit
             if (userMessage.equals("bye")) {
