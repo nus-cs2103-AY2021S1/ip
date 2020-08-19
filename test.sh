@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-javac -target 11 -source 11 src/main/java/*.java -d bin/
+javac -target 11 -source 11 src/main/java/**.java -d bin/
 java -cp bin Main < text-ui-test/input.txt | diff -bu text-ui-test/EXPECTED.TXT -
 
 if [ $? -ne 0 ]; then

@@ -16,10 +16,10 @@ added: [E] [✘] event one (at: never)
 added: [E] [✘] event two (at: later)
 --------------------------------------
 >
-added: [E] [✘] super important submission (by: tomorrow)
+added: [D] [✘] super important submission (by: tomorrow)
 --------------------------------------
 >
-added: [E] [✘] not so important thing (by: next year)
+added: [D] [✘] not so important thing (by: next year)
 --------------------------------------
 >
 tracking 7 tasks (7 pending, 0 done, 0.0% complete)
@@ -28,8 +28,8 @@ tracking 7 tasks (7 pending, 0 done, 0.0% complete)
   3. [T] [✘] task three
   4. [E] [✘] event one (at: never)
   5. [E] [✘] event two (at: later)
-  6. [E] [✘] super important submission (by: tomorrow)
-  7. [E] [✘] not so important thing (by: next year)
+  6. [D] [✘] super important submission (by: tomorrow)
+  7. [D] [✘] not so important thing (by: next year)
 --------------------------------------
 >
 marked as done:
@@ -46,8 +46,8 @@ tracking 7 tasks (5 pending, 2 done, 28.6% complete)
   3. [T] [✘] task three
   4. [E] [✘] event one (at: never)
   5. [E] [✘] event two (at: later)
-  6. [E] [✘] super important submission (by: tomorrow)
-  7. [E] [✘] not so important thing (by: next year)
+  6. [D] [✘] super important submission (by: tomorrow)
+  7. [D] [✘] not so important thing (by: next year)
 --------------------------------------
 >
 marked as done:
@@ -64,8 +64,7 @@ tracking 7 tasks (3 pending, 4 done, 57.1% complete)
   3. [T] [✘] task three
   4. [E] [✓] event one (at: never)
   5. [E] [✓] event two (at: later)
-  6. [E] [✘] super important submission (by: tomorrow)
-  7. [E] [✘] not so important thing (by: next year)
+  6. [D] [✘] super important submission (by: tomorrow)
+  7. [D] [✘] not so important thing (by: next year)
 --------------------------------------
->
-goodbye
+> goodbye

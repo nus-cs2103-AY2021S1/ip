@@ -11,4 +11,16 @@ public class Todo extends Task {
     public String toString() {
         return String.format("[T] %s", super.toString());
     }
+
+    public static Todo parse(String input) throws InvalidInputException {
+        if (input.isEmpty()) {
+            throw new InvalidInputException("task description cannot be empty", getUsage());
+        }
+
+        return new Todo(input);
+    }
+
+    private static String getUsage() {
+        return "todo <description>";
+    }
 }
