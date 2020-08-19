@@ -1,3 +1,4 @@
+import java.security.InvalidParameterException;
 import java.util.Scanner;
 
 public class Duke {
@@ -37,13 +38,18 @@ public class Duke {
                 ListFunction.setDone(Integer.parseInt(line.substring(5)));
             }
             else {
-                int type = Parser.taskType(line);
-                if (type == -1)
-                    System.out.println("Sorry, can not figure out your meaning :(");
-                else if (type == 1)
-                    ListFunction.add(type, Parser.getName(line));
-                else
-                    ListFunction.add(type, Parser.getName(line), Parser.getTime(line));
+                try {
+                    int type = Parser.taskType(line);
+                    if (type == 1)
+                        ListFunction.add(type, Parser.getName(line));
+                    else
+                        ListFunction.add(type, Parser.getName(line), Parser.getTime(line));
+                }
+                catch (NullPointerException
+                        | ArrayIndexOutOfBoundsException
+                        | InvalidParameterException e) {
+                    System.out.println("Sorry, I do not know what that means :(");
+                }
             }
             line = scanner.nextLine();
         }
