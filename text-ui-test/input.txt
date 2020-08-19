@@ -3,7 +3,11 @@ deadline finish IP /by today
 event internship sharing /at tonight, 7-8pm
 list
 done 1
-done 2
-done 3
-list
+delete 1
+todo
+blah
+done 5
+delete a
+deadline /at
+event /by
 bye

@@ -13,13 +13,14 @@ Hello! I'm Clara! :D How may I help you? :)
 		2. [D][✘] finish IP (by: today)
 		3. [E][✘] internship sharing (at: tonight, 7-8pm)
 	Nice! I've marked this task as done:
-		[✓] borrow book
-	Nice! I've marked this task as done:
-		[✓] finish IP
-	Nice! I've marked this task as done:
-		[✓] internship sharing
-	These are the tasks in your list. Jiayous! :)
-		1. [✓] borrow book
-		2. [✓] finish IP
-		3. [✓] internship sharing
+		[T][✓] borrow book
+	Okay! I've removed this task:
+		[T][✓] borrow book
+	Now you have 2 tasks in the list. Jiayous! :D
+	Sorry! The description of a todo cannot be empty :')
+	Apologies! I do not understand what that means :')
+	Paise! :') The index is out of bounds!
+	Paise! :') Please use the correct format: delete <order of task in the list>
+	Paise! :') Please use the correct format: deadline <task> /by <time>
+	Paise! :') Please use the correct format: event <task> /at <time>
 	Bye! Have a great day and hope to see you soon! :D
