@@ -9,11 +9,4 @@ public class Task {
         done = true;
     }
 
-    public String toString() {
-        if (done) {
-            return "[✓] " + task;
-        } else {
-            return "[✗] " + task;
-        }
-    }
 }
