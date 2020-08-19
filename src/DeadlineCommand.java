@@ -1,5 +1,3 @@
-package main.java;
-
 public class DeadlineCommand extends Command {
 
     public DeadlineCommand() {

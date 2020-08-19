@@ -1,5 +1,3 @@
-package main.java;
-
 public class UIPrint {
 
     public static char star = '*';

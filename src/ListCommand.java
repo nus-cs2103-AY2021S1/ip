@@ -1,5 +1,3 @@
-package main.java;
-
 public class ListCommand extends Command {
 
     public ListCommand() {

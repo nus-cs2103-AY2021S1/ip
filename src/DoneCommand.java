@@ -1,5 +1,3 @@
-package main.java;
-
 public class DoneCommand extends Command {
 
     public DoneCommand() {

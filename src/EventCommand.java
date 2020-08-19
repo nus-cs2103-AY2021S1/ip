@@ -1,5 +1,3 @@
-package main.java;
-
 public class EventCommand extends Command {
 
     public EventCommand() {
