@@ -66,7 +66,7 @@ public class Duke {
                 System.out.println(" " + (i + 1) + "." + tasks.get(i));
             }
         }
-        System.out.println(divider);
+        System.out.println(divider + "\n");
     }
 
     public static void done(int index) {
@@ -79,13 +79,13 @@ public class Duke {
             tasks.get(index - 1).completeTask();
             System.out.println("   " + tasks.get(index - 1));
         }
-        System.out.println(divider);
+        System.out.println(divider + "\n");
     }
 
     public static void describe(int taskIndex) {
         System.out.println(divider + "\n Your task has been recorded. \n   " +
                 tasks.get(taskIndex) + "\n You have " + taskCount +
-                " tasks currently. \n" + divider);
+                " tasks currently. \n" + divider + "\n");
     }
 
     private static void echo() {
@@ -100,7 +100,6 @@ public class Duke {
                 list();
             } else if (command.equals("done")) {
                 int index = Integer.parseInt(input.substring(5));
-                System.out.println(index);
                 done(index);
             } else if (command.equals("todo")) {
                 String description = input.substring(5);

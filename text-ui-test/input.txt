@@ -1,0 +1,9 @@
+todo get good grades in CS2103T
+deadline individal project /by Thursday 20 Aug 2020
+event sleep /at 11:59pm
+list
+done 2
+list
+done 3
+list
+bye
