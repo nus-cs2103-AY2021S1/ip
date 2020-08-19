@@ -7,9 +7,8 @@ import java.util.ArrayList;
 
 public class Duke {
     private enum Messages {
-        WRONG_INPUT("    The Covenant are trying to plug up " +
-            "our list with meaningless garbage. " +
-            "Try again with commands this time."),
+        WRONG_INPUT("    A real Spartan would know  " +
+            "those commands don't work."),
         MISSING_INPUT("    The Covenant are trying to plug up " +
                 "our list with meaningless garbage. " +
                 "Try again with commands this time."),
@@ -79,7 +78,8 @@ public class Duke {
         }
     }
 
-    private static final Messages[] ERROR_MESSAGES = {Messages.MISSING_INPUT, Messages.MISSING_INPUT, Messages.DONE_ERROR};
+    private static final Messages[] ERROR_MESSAGES = {Messages.WRONG_INPUT, Messages.MISSING_INPUT,
+        Messages.MISSING_INPUT, Messages.DONE_ERROR};
 
     private static List<Task> thingsOnList = new ArrayList<>();
     protected static void printLine() {
