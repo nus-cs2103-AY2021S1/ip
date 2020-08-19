@@ -2,10 +2,10 @@ import java.util.*;
 
 public class Duke {
     public static void errorMsg(String msg) {
-        System.out.println(msg);
+        System.out.println("⚠ " + msg + " ⚠");
     }
     public static void print(String msg) {
-        System.out.println(msg);
+        System.out.println("✰ " + msg + " ✰");
     }
     public static void main(String[] args) {
         print("hi! im conundrum boy :)");
