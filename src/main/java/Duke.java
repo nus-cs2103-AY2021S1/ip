@@ -16,14 +16,14 @@ public class Duke {
     }
 
     public static void echoNewTask(Task task, int taskCount){
-        String first = String.format("Got it. I've added this task:\n");
+        String first = "Got it. I've added this task:\n";
         String second = "    " + task.toString() + "\n";
         String third = String.format("Now you have %d tasks in the list", taskCount);
         echo(first + second + third);
     }
 
     public static String[] interpretInput(String input) {
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
         int spaceIndex = input.indexOf(" ");
         int slashIndex = input.indexOf("/");
         int infoIndex = input.indexOf(" ", slashIndex);
@@ -60,9 +60,8 @@ public class Duke {
                     try {
                         int index = Integer.parseInt(words[1]);
                         taskManager.doTask(index);
-                        String returnMessage = "Nice! I've marked this task as done:\n";
-                        returnMessage += taskManager.getTaskStatus(index);
-                        echo(returnMessage);
+                        echo("Nice! I have marked this task as done:\n" +
+                                taskManager.getTaskStatus(index));
                     } catch (NumberFormatException err){
                         echo("Error. Please key in an integer after \"done\"");
                     } catch (IndexOutOfBoundsException err) {
@@ -90,10 +89,15 @@ public class Duke {
                     break;
                 case "todo":
                     try {
+                        if (words.length > 2 || words.length < 1) {
+                            throw new IllegalArgumentException();
+                        }
                         Task addedToDo = taskManager.addToDo(words[1]);
                         echoNewTask(addedToDo, taskManager.getTotalTask());
                     } catch (IndexOutOfBoundsException err) {
                         echo("Error: The description for ToDo can't be empty");
+                    } catch (IllegalArgumentException err) {
+                        echo("Error. Don't include / in the title of todo task");
                     }
                     break;
                 default:
