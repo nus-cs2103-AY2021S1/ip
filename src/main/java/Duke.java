@@ -13,7 +13,16 @@ public class Duke {
                 break;
             } else if (UserCommands.isListCommand(userInput)) {
                 userTaskList.printTaskList();
-            } else {
+            } else if (UserCommands.isDoneCommand(userInput)) {
+                try {
+                    int doneIndex = UserCommands.getDoneIndex(userInput);
+                    String[] doneMessages = userTaskList.markTaskDoneAtIndex(doneIndex);
+                    PrintFunctions.printMessagesBetweenLines(doneMessages);
+                } catch (UserCommands.InvalidCommandException | TaskList.InvalidIndexException exception) {
+                    PrintFunctions.printMessageBetweenLines(exception.getMessage());
+                }
+
+            } else if (!userInput.isBlank()){
                 userTaskList.addTask(userInput);
             }
         }
