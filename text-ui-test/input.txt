@@ -1,0 +1,6 @@
+deadline do 2103 homework /by Thursday
+event meet jason leo /at 5pm Monday
+list
+todo write resume
+done 2
+bye
