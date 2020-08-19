@@ -23,4 +23,5 @@ deadline /by sdigdfg
 delete 
 delete 2
 list
+add
 bye
