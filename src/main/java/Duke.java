@@ -21,13 +21,15 @@ public class Duke {
         input = sc.next();
         while(!input.equals("bye")) {
             if (input.equals("list")) {
+                System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
                 for (int i = 1; i <= list.size(); i++) {
-                    System.out.println(i + ". " + list.get(i - 1));
+                    System.out.println("     " + i + ". " + list.get(i - 1));
                 }
+                System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
                 input = sc.next();
             } else {
                 System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
-                System.out.println("    added: " + input);
+                System.out.println("     added: " + input);
                 System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
                 list.add(input);
                 input = sc.next();
