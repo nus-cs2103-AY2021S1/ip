@@ -10,6 +10,11 @@ done 1
 done 2
 done 3
 list
+delete
+delete haha
+delete 4
+delete 2
+list
 todo
 deadline
 deadline jog

@@ -22,8 +22,8 @@ public class Duke {
                     return;
                 } else if (command.equals("list")) {
                     listTasks();
-                } else if (command.equals("done")) {
-                    handleDone(commandArr);
+                } else if (command.equals("done") || command.equals("delete")) {
+                    handleCompleteStatus(command, commandArr);
                 } else if (command.equals("todo")) {
                     handleTask("todo", commandArr);
                 } else if (command.equals("deadline")) {
@@ -67,13 +67,17 @@ public class Duke {
         }
     }
 
-    public static void handleDone(String[] commandArr) {
+    public static void handleCompleteStatus(String status, String[] commandArr) {
         try {
             if (commandArr.length < 2 || commandArr[1].isBlank()) {
                 throw new MissingInformationException("Task number is missing!");
             }
             int index = Integer.valueOf(commandArr[1]);
-            completeTask(index);
+            if (status.equals("done")) {
+                completeTask(index);
+            } else {
+                deleteTask(index);
+            }
         } catch (MissingInformationException e) {
             printMessage(e.getMessage());
         } catch (NumberFormatException e) {
@@ -126,6 +130,18 @@ public class Duke {
             taskList.get(index - 1).markAsDone();
             String message = String.format("Nice! I've marked this task as done:\n       %s",
                     taskList.get(index - 1));
+            printMessage(message);
+        } catch (IndexOutOfBoundsException e) {
+            printMessage(String.format("Task number %d is invalid!", index));
+        }
+    }
+
+    public static void deleteTask(int index) {
+        try {
+            Task deletedTask = taskList.remove(index - 1);
+            int taskLen = taskList.size();
+            String message = String.format("Noted. I've removed this task:\n       %s\n     Now you have %d %s in the list.",
+                    deletedTask, taskLen, taskLen > 1 ? "tasks" : "task");
             printMessage(message);
         } catch (IndexOutOfBoundsException e) {
             printMessage(String.format("Task number %d is invalid!", index));
