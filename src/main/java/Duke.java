@@ -15,6 +15,7 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String userInput;
+        String[] s;
         ArrayList<Task> list = new ArrayList<>();
 
         startupMsg();
@@ -30,18 +31,18 @@ public class Duke {
             switch(userInput) {
                 case "list":
                     if (list.isEmpty()) {
-                        System.out.println(duke + "Your To-Do List is empty.");
+                        System.out.println(duke + "Your Task List is empty.");
                     } else {
-                        System.out.println(duke + "Here's your To-Do List:");
+                        System.out.println(duke + "Here's your Task List:");
                         for (Task t : list) {
-                            System.out.println(++idx + ". [" + t.getStatusIcon() + "] " + t.getTaskName());
+                            System.out.println(++idx + ". " + t.toString());
                         }
                     }
                 break;
                 case "done":
-                    System.out.println(duke + "Here's your To-Do List:");
+                    System.out.println(duke + "Here's your Task List:");
                     for (Task t : list) {
-                        System.out.println(++idx + ". [" + t.getStatusIcon() + "] " + t.getTaskName());
+                        System.out.println(++idx + ". " + t.toString());
                     }
                     System.out.println("Choose the tasks to be marked as 'Done'");
                     System.out.print(cmd);
@@ -53,13 +54,37 @@ public class Duke {
                     for (int index : tasksArray) {
                         Task t = list.get(index - 1);
                         t.setDone();
-                        System.out.println("[" + t.getStatusIcon() + "] " + t.getTaskName());
+                        System.out.println(t.toString());
                     }
                 break;
+                case "todo":
+                    System.out.println(duke + "Enter task details: ");
+                    System.out.print(cmd);
+                    Task toDo = new Todo(sc.nextLine());
+                    list.add(toDo);
+                    System.out.println(duke + "I've added '" + toDo.getTaskName() + "' to your Task List");
+                    break;
+                case "deadline":
+                    System.out.println(duke + "Enter task details: ");
+                    System.out.print(cmd);
+                    s = sc.nextLine().split(" /by ");
+                    Task deadLine = new Deadline(s[0], s[1]);
+                    list.add(deadLine);
+                    System.out.println(duke + "I've added '" + deadLine.getTaskName() + "' to your Task List");
+                    break;
+                case "event":
+                    System.out.println(duke + "Enter task details: ");
+                    System.out.print(cmd);
+                    s = sc.nextLine().split(" /at ");
+                    Task event = new Event(s[0], s[1]);
+                    list.add(event);
+                    System.out.println(duke + "I've added '" + event.getTaskName() + "' to your Task List");
+                    break;
+                case "help":
+                    showHelp();
+                    break;
                 default:
-                    Task newT = new Task(userInput);
-                    list.add(newT);
-                    System.out.println(duke + "I added '" + newT.getTaskName() + "' to your To-Do List");
+                    System.out.println(duke + "Unrecognised Command :(, type 'help' for available commands");
             }
         }
 
@@ -70,5 +95,11 @@ public class Duke {
         System.out.println(logo);
         System.out.println(duke + "Hi I'm Duke!");
         System.out.println(duke + "What can I do for you?");
+    }
+
+    private static void showHelp() {
+        String msg = "Available Commands: \n" + "'todo' \n" + "'deadline' \n" + "'event' \n" + "'list' \n" +
+                "'bye'";
+        System.out.println(msg);
     }
 }
