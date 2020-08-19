@@ -98,7 +98,25 @@ public class Duke {
                         System.out.println("    Nice! I've marked this task as done:");
                         System.out.println("    " + temp.toString());
                     } else {
-                        throw new DukeException("    Invalid index entry");
+                        throw new DukeException("    Invalid index entry for done command.");
+                    }
+                    System.out.println(breakline);
+                    break;
+
+                case "delete":
+                    if (userWord.length == 1 || userWord[1].equals("")) {
+                        throw new DukeException("   ☹ OOPS!!! The description of the command done cannot be empty.");
+                    }
+                    int index2 = Integer.parseInt(userWord[1]) - 1;
+                    if (index2 >= 0 && index2 < listOfTask.size()) {
+                        Task temp = listOfTask.get(index2);
+                        listOfTask.remove(index2);
+                        System.out.println(breakline);
+                        System.out.println("    Noted. I've removed this task:");
+                        System.out.println("    " + temp.toString());
+                        System.out.println("    Now you have " + listOfTask.size() + " tasks in the list.");
+                    } else {
+                        throw new DukeException("    Invalid index entry for delete command.");
                     }
                     System.out.println(breakline);
                     break;
