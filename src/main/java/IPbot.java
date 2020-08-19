@@ -1,3 +1,8 @@
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.function.Function;
@@ -10,6 +15,10 @@ public class IPbot {
     private static final String EXIT_CMD = "bye";
     private static final String LIST_CMD = "list";
     private static final String DONE_CMD = "done ";
+    private static final String TODO_CMD = "todo ";
+    private static final String EVENT_CMD = "event ";
+    private static final String DEADLINE_CMD = "deadline ";
+
 
     // user input
     private static final Scanner sc = new Scanner(System.in);
@@ -33,11 +42,25 @@ public class IPbot {
                     output = listTasks();
                 } else if (input.startsWith(DONE_CMD)) {
                     // mark a task as done
-                    final int id = Integer.parseInt(input.substring(DONE_CMD.length()));
+                    final String stripped = input.substring(DONE_CMD.length());
+                    final int id = Integer.parseInt(stripped);
                     output = completeTask(tasks.get(id - 1));
+                } else if (input.startsWith(TODO_CMD)) {
+                    // add to do task
+                    final String stripped = input.substring(TODO_CMD.length());
+                    output = addTasks(new Todo(stripped));
+                } else if (input.startsWith(EVENT_CMD)) {
+                    // add event task
+                    final String stripped = input.substring(EVENT_CMD.length());
+                    final String[] split = stripped.split(" /at ", 2);
+                    output = addTasks(new Event(split[0], split[1]));
+                } else if (input.startsWith(DEADLINE_CMD)) {
+                    // add deadline task
+                    final String stripped = input.substring(DEADLINE_CMD.length());
+                    final String[] split = stripped.split(" /by ", 2);
+                    output = addTasks(new Deadline(split[0], split[1]));
                 } else {
-                    // add task
-                    output = addTasks(new Task(input));
+                    output = "Unknown command";
                 }
                 print(output);
             });
