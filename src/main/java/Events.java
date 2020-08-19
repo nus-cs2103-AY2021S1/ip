@@ -11,14 +11,7 @@ public class Events extends Task {
     public static void addEventTask(String taskTitle, String eventTime, ArrayList<Task> tasks) {
         Events newEvent = new Events(taskTitle, eventTime);
         tasks.add(newEvent);
-
-        String outputMsg = "\n___________________________________________________________"
-                + "\n (^.^)"
-                + "\n Got it. I've added this task:"
-                + "\n     " + tasks.size() + "." + tasks.get(tasks.size() - 1)
-                + "\n Now you have " + tasks.size() + " tasks in the list."
-                + "\n___________________________________________________________\n";
-        System.out.println(outputMsg);
+        Feedbacks.addEventTaskMsg(tasks);
     }
 
     @Override
