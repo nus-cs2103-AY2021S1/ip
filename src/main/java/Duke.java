@@ -11,6 +11,7 @@ public class Duke {
     private final static String TODO_COMMAND = "todo";
     private final static String DEADLINE_COMMAND = "deadline";
     private final static String EVENT_COMMAND = "event";
+    private final static String DELETE_COMMAND = "delete";
 
 
     private static void messageEcho(String word) {
@@ -67,19 +68,41 @@ public class Duke {
                         throw new InvalidDoneFormatException();
                     }
                     if (!isNumber(tempArray[1])) {
-                        throw new IncorrectDoneInputFormat(list.size());
+                        throw new IncorrectDoneInputException(list.size());
                     }
 
                     int itemIndex = Integer.parseInt(tempArray[1]) - 1;
                     if (itemIndex < 0 || Integer.parseInt(tempArray[1]) > list.size()) {
-                        throw new IncorrectDoneInputFormat(list.size());
+                        throw new IncorrectDoneInputException(list.size());
                     }
                     list.get(itemIndex).markAsDone();
                     messageEcho("Nice! I've marked this task as done:\n" + list.get(itemIndex).toString());
                     continue;
                 }
 
+                if ((tempArray[0].equals(DELETE_COMMAND))) {
+                    if (tempArray.length != 2) {
+                        throw new InvalidDeleteFormatException();
+                    }
+                    if (!isNumber(tempArray[1])) {
+                        throw new IncorrectDeleteInputException(list.size());
+                    }
+
+                    int itemIndex = Integer.parseInt(tempArray[1]) - 1;
+                    if (itemIndex < 0 || Integer.parseInt(tempArray[1]) > list.size()) {
+                        throw new IncorrectDeleteInputException(list.size());
+                    }
+                    Task deletedTask = list.get(itemIndex);
+                    list.remove(itemIndex);
+                    messageEcho("Noted. I've removed this task:\n" + deletedTask.toString()
+                    + "\nNow you have " + list.size() + " tasks in the list.");
+                    continue;
+                }
+
                 if (tempArray[0].equals(DEADLINE_COMMAND)) {
+                    if (tempArray.length == 1) {
+                        throw new InvalidDeadlineFormatException();
+                    }
                     String deadlineAndDate = word.substring(9);
                     String[] deadlineDateArray = deadlineAndDate.trim().split(" /by ");
                     if (deadlineDateArray.length != 2) {
@@ -89,7 +112,7 @@ public class Duke {
                     list.add(newDeadlineTask);
                     messageEcho(
                             "Got it. I've added this task:\n" + newDeadlineTask.toString() +
-                                    "\nNow you have " + list.size() + " tasks in total"
+                                    "\nNow you have " + list.size() + " tasks in the list."
                     );
                     continue;
                 }
@@ -103,12 +126,15 @@ public class Duke {
                     list.add(newToDoTask);
                     messageEcho(
                             "Got it. I've added this task:\n" + newToDoTask.toString() +
-                                    "\nNow you have " + list.size() + " tasks in total"
+                                    "\nNow you have " + list.size() + " tasks in the list."
                     );
                     continue;
                 }
 
                 if (tempArray[0].equals(EVENT_COMMAND)) {
+                    if (tempArray.length == 1) {
+                        throw new InvalidEventFormatException();
+                    }
                     String eventAndDate = word.substring(6);
                     String[] eventDateArray = eventAndDate.trim().split(" /at ");
                     if (eventDateArray.length != 2) {
@@ -125,14 +151,12 @@ public class Duke {
 
                 throw new InvalidCommandException();
 
-                //            removed for now as this function does not meet task specification
-                //            list.add(new Task(word));
-                //            messageEcho("added: " + word);
             } catch (DukeException e) {
                 messageEcho(e.getMessage());
             }
         }
     }
+
 
     public static void main(String[] args) {
         new Duke().runDuke();

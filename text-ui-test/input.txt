@@ -11,11 +11,14 @@ done 2
 list
 done s
 done
+delete
+delete 5
 todo
 event /at Tues 8am
 deadline /at Mon 12am
 done 3
 done 4
+delete 3
 list
 blah
 bye

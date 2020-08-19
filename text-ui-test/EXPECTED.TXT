@@ -6,13 +6,13 @@ __________________________________________________________
 __________________________________________________________
 Got it. I've added this task:
 [T][✘] CS2100
-Now you have 1 tasks in total
+Now you have 1 tasks in the list.
 __________________________________________________________
 
 __________________________________________________________
 Got it. I've added this task:
 [T][✘] CS2101
-Now you have 2 tasks in total
+Now you have 2 tasks in the list.
 __________________________________________________________
 
 __________________________________________________________
@@ -34,11 +34,11 @@ Here are the tasks in your list:
 __________________________________________________________
 
 __________________________________________________________
-Input for done command is invalid! Input a number between 0 and 3.
+Input for done command is invalid! Input a number between 1 and 3.
 __________________________________________________________
 
 __________________________________________________________
-Input for done command is invalid! Input a number between 0 and 3.
+Input for done command is invalid! Input a number between 1 and 3.
 __________________________________________________________
 
 __________________________________________________________
@@ -48,7 +48,7 @@ __________________________________________________________
 __________________________________________________________
 Got it. I've added this task:
 [D][✘] CS2103 quiz (by: Mon 12am)
-Now you have 4 tasks in total
+Now you have 4 tasks in the list.
 __________________________________________________________
 
 __________________________________________________________
@@ -65,11 +65,19 @@ Here are the tasks in your list:
 __________________________________________________________
 
 __________________________________________________________
-Input for done command is invalid! Input a number between 0 and 4.
+Input for done command is invalid! Input a number between 1 and 4.
 __________________________________________________________
 
 __________________________________________________________
 ☹ OOPS!!! Format for done command doesnt seem to be correct. Eg. done 2
+__________________________________________________________
+
+__________________________________________________________
+☹ OOPS!!! Format for delete command doesnt seem to be correct. Eg. delete 2
+__________________________________________________________
+
+__________________________________________________________
+Input for delete command is invalid! Input a number between 1 and 4.
 __________________________________________________________
 
 __________________________________________________________
@@ -97,11 +105,16 @@ Nice! I've marked this task as done:
 __________________________________________________________
 
 __________________________________________________________
+Noted. I've removed this task:
+[E][✓] rotaract club presentation (at: Sun 8am)
+Now you have 3 tasks in the list.
+__________________________________________________________
+
+__________________________________________________________
 Here are the tasks in your list:
 1. [T][✓] CS2100
 2. [T][✓] CS2101
-3. [E][✓] rotaract club presentation (at: Sun 8am)
-4. [D][✓] CS2103 quiz (by: Mon 12am)
+3. [D][✓] CS2103 quiz (by: Mon 12am)
 __________________________________________________________
 
 __________________________________________________________
