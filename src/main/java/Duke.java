@@ -51,19 +51,25 @@ public class Duke {
                 }
 
             } else if (userInput.startsWith("todo")) { //added
-                if (userInput.matches("todo")) {
-                    throw new DukeException("The description cannot be empty!");
-                } else {
-                    ToDo todo = new ToDo(userInput.substring(5));
-                    tasks.add(todo); //adds into tasks list
-                    System.out.println(line);
-                    System.out.print(bot);
-                    System.out.println("Got it! I've added this task:");
-                    //System.out.println(addedText + userInput);
-                    System.out.println(todo);
-                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                    System.out.println(line);
+                try {
+                    if (!userInput.equals("todo")) {
+                        ToDo todo = new ToDo(userInput.substring(5));
+                        tasks.add(todo); //adds into tasks list
+                        System.out.println(line);
+                        System.out.print(bot);
+                        System.out.println("Got it! I've added this task:");
+                        //System.out.println(addedText + userInput);
+                        System.out.println(todo);
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                        System.out.println(line);
+                    } else {
+                        throw new DukeException("The description of a todo cannot be empty!");
+                    }
+
+                } catch (DukeException ex){
+                    System.err.println(ex.getMessage());
                 }
+
             } else if (userInput.startsWith("deadline")) {
                 int indexOfSlash = userInput.indexOf('/');
                 String description = userInput.substring(9, indexOfSlash - 1);
