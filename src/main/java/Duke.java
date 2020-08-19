@@ -53,9 +53,6 @@ public class Duke {
                 case "bye" :
                     echo("Bye. See you again, bro!");
                     break outerLoop;
-                case "list":
-                    echo("Here are the tasks in your list\n" + taskManager.toString());
-                    break;
                 case "done":
                     try {
                         int index = Integer.parseInt(words[1]);
@@ -71,6 +68,9 @@ public class Duke {
                         echo("The task is already done. No need to mark it as done again.");
                     }
                     break;
+                case "list":
+                    echo("Here are the tasks in your list\n" + taskManager.toString());
+                    break;
                 case "deadline":
                     try {
                         Task addedDeadline = taskManager.addDeadLine(words[1], words[2]);
@@ -79,6 +79,7 @@ public class Duke {
                         echo("Error: The description for deadline can't be empty");
                     }
                     break;
+                //3 different types of task
                 case "event":
                     try {
                         Task addedEvent = taskManager.addEvent(words[1], words[2]);
@@ -100,6 +101,22 @@ public class Duke {
                         echo("Error. Don't include / in the title of todo task");
                     }
                     break;
+
+                //Delete Task
+                case "delete":
+                    try {
+                        int index = Integer.parseInt(words[1]);
+                        Task deletedTask = taskManager.deleteTask(index);
+                        echo("Nice! I have deleted this task:\n" +
+                                deletedTask);
+                    } catch (NumberFormatException err){
+                        echo("Error. Please key in an integer after \"done\"");
+                    } catch (IndexOutOfBoundsException err) {
+                        echo("Error. You don't have task #" + words[1] +
+                                ".\nKey in \"list\" to find out the tasks on hand");
+                    }
+                    break;
+                //When command does not match any of those above
                 default:
                     echo("OOPS!!! I don't know what does it mean by: \"" + input + "\"" );
                     break;
