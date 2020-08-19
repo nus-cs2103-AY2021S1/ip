@@ -12,14 +12,18 @@ public class Duke {
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
-            if (input.equals("list")) {
-                listOfItems.getList();
-            } else if (input.contains("done")) {
-                listOfItems.doneItem(input);
-            } else if (input.contains("delete")) {
-                listOfItems.deleteItem(input);
-            } else {
-                listOfItems.addItem(input);
+            try {
+                if (input.equals("list")) {
+                    listOfItems.getList();
+                } else if (input.contains("done")) {
+                    listOfItems.doneItem(input);
+                } else if (input.contains("delete")) {
+                    listOfItems.deleteItem(input);
+                } else {
+                    listOfItems.addItem(input);
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
             input = sc.nextLine();
         }

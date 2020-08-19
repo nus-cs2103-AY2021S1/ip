@@ -11,10 +11,10 @@ public class ListOfItems {
         this.index = 0;
     }
 
-    void getList() {
+    void getList() throws DukeException {
         System.out.println(divider);
         if (list.size() == 0) {
-            System.out.println("List is empty, you have free time (for now)! YAY :D");
+            throw new DukeException("List is empty, you have free time (for now)! YAY :D" + "\n" + divider);
         } else {
             System.out.println("Here are the task(s) in your list: ");
             for (int i = 0; i < index; i++) {
@@ -24,7 +24,7 @@ public class ListOfItems {
         System.out.println(divider);
     }
 
-    void doneItem(String input) {
+    void doneItem(String input) throws DukeException {
         try {
             int number = Integer.parseInt(input.substring(5)); // retrieve number after "done "
             Task task = list.get(number - 1);
@@ -37,13 +37,12 @@ public class ListOfItems {
                         task + "\n" + divider);
             }
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            System.out.println(divider);
-            System.out.println("Sorry, you did not enter a valid number. Please try again.");
-            System.out.println(divider);
+            throw new DukeException("\n" + divider + "\n" + "Sorry, you did not enter a valid number. Please try again." +
+                    "\n" + divider);
         }
     }
 
-    void deleteItem(String input) {
+    void deleteItem(String input) throws DukeException {
         try {
             int number = Integer.parseInt(input.substring(7));
             Task task = list.get(number - 1);
@@ -58,13 +57,12 @@ public class ListOfItems {
             System.out.println("Now you have " + index + " tasks in the list.");
             System.out.println(divider);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            System.out.println(divider);
-            System.out.println("Whoops, you did not enter a valid number.");
-            System.out.println(divider);
+            throw new DukeException("\n" + divider + "\n" + "Whoops, you did not enter a valid number." +
+                    "\n" + divider);
         }
     }
 
-    void addItem(String input) {
+    void addItem(String input) throws DukeException {
         String addedMessage = "Got it. I've added this task: ";
         String totalMessage = "Now you have " + (index + 1) + " task(s) in the list.";
 
@@ -78,9 +76,9 @@ public class ListOfItems {
                 System.out.println(totalMessage + "\n" + divider);
                 index++;
             } catch (StringIndexOutOfBoundsException e) {
-                System.out.println(divider);
-                System.out.println("Whoops, you did not fill in the details of the Todo properly :(");
-                System.out.println(divider);
+                throw new DukeException("\n" + divider + "\n" +
+                        "Whoops, you did not fill in the details of the Todo properly :(" +
+                        "\n" + divider);
             }
         } else if (input.contains("deadline")) {
             try {
@@ -94,13 +92,13 @@ public class ListOfItems {
                 System.out.println(totalMessage + "\n" + divider);
                 index++;
             } catch (StringIndexOutOfBoundsException e) {
-                System.out.println(divider);
-                System.out.println("Whoops, you did not fill in the details of the Deadline properly :(");
-                System.out.println(divider);
+                throw new DukeException("\n" + divider + "\n" +
+                        "Whoops, you did not fill in the details of the Deadline properly :(" +
+                        "\n" + divider);
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println(divider);
-                System.out.println("Whoops, you did not fill in the due date/time of the Deadline.");
-                System.out.println(divider);
+                throw new DukeException("\n" + divider + "\n" +
+                        "Whoops, you did not fill in the due date/time of the Deadline." +
+                        "\n" + divider);
             }
         } else if (input.contains("event")) {
             try {
@@ -114,18 +112,18 @@ public class ListOfItems {
                 System.out.println(totalMessage + "\n" + divider);
                 index++;
             } catch (StringIndexOutOfBoundsException e) {
-                System.out.println(divider);
-                System.out.println("Whoops, you did not fill in the details of the Event properly :(");
-                System.out.println(divider);
+                throw new DukeException("\n" + divider + "\n" +
+                        "Whoops, you did not fill in the details of the Event properly :(" +
+                        "\n" + divider);
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println(divider);
-                System.out.println("Whoops, you did not fill in the duration of the Event.");
-                System.out.println(divider);
+                throw new DukeException("\n" + divider + "\n" +
+                        "Whoops, you did not fill in the duration of the Event." +
+                        "\n" + divider);
             }
         } else {
-            System.out.println(divider);
-            System.out.println("Sorry, you did not enter a valid command! Please try again.");
-            System.out.println(divider);
+            throw new DukeException("\n" + divider + "\n" +
+                    "Sorry, you did not enter a valid command! Please try again." +
+                    "\n" + divider);
         }
     }
 }
