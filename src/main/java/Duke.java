@@ -90,6 +90,16 @@ public class Duke {
                     }
                 }
 
+                catch (ArrayIndexOutOfBoundsException e) {
+                    // System.out.println("oops, the description of todo can't be empty!");
+                    try {
+                        throw new EmptyTodoException();
+                    } catch (EmptyTodoException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+                }                
+
 
                 continue;
             } // if starts with todo, the string after todo should be in the task.
@@ -105,7 +115,7 @@ public class Duke {
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 }
 
-                catch(StringIndexOutOfBoundsException e) {
+                catch(StringIndexOutOfBoundsException e){
                     try {
                         throw new EmptyDeadLineException();
                     }
@@ -114,6 +124,16 @@ public class Duke {
                         e1.printStackTrace();
                     }
                 }
+
+                catch(ArrayIndexOutOfBoundsException e){
+                    try {
+                        throw new EmptyDeadLineException();
+                    }
+
+                    catch(EmptyDeadLineException e1) {
+                        e1.printStackTrace();
+                    }
+                }                
 
                 continue;
             } // if starts with deadline, first split the string, then description should be
@@ -131,6 +151,16 @@ public class Duke {
                 }
 
                 catch (StringIndexOutOfBoundsException e) {
+                    try {
+                        throw new EmptyEventException();
+                    }
+
+                    catch(EmptyEventException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+
+                catch (ArrayIndexOutOfBoundsException e) {
                     try {
                         throw new EmptyEventException();
                     }
