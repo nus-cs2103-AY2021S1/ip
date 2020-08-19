@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
 
     //Store the messages
     private final String message;
