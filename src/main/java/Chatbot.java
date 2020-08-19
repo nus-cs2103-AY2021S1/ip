@@ -6,8 +6,9 @@ import java.io.IOException;
 import java.util.List;
 
 public class Chatbot {
-    public static final int COMMAND_STOP = -1;
-    public static final int COMMAND_SUCCESS = 1;
+    private enum CommandStatus {
+        STOP, SUCCESS
+    }
 
     private BufferedReader textParser;
     private List<Task> storedTasks;
@@ -76,48 +77,57 @@ public class Chatbot {
         return builder.toString();
     }
 
-    private int runCommand(String[] args)
+    private Command parseCommand(String[] args)
             throws IncorrectArgumentException, UnknownCommandException {
         if (args.length <= 0) {
             throw new IncorrectArgumentException("i hAtE YoU! "
                     + "sToP MaKiNg mE Do sOmEtHiNg iMpOsSiBlE.");
         }
 
+        Command command = Command.getCommand(args[0]);
+
+        if (command == null) {
+            throw new UnknownCommandException("sToP TrYiNg tO FoOl mE. \""
+                    + args[0] + "\" iS An uNkNoWn cOmMaNd.");
+        }
+
+        return command;
+    }
+
+    private CommandStatus runCommand(Command command, String[] args)
+            throws IncorrectArgumentException {
         try {
-            switch (args[0]) {
-            case "bye":
+            switch (command) {
+            case EXIT:
                 printWithDecorations("hOpE To sEe yOu aGaIn. NoT.");
-                return COMMAND_STOP;
-            case "list":
+                return CommandStatus.STOP;
+            case LIST:
                 list();
                 break;
-            case "done":
+            case MARK_AS_DONE:
                 done(args);
                 break;
-            case "delete":
+            case DELETE:
                 delete(args);
                 break;
-            case "todo":
+            case ADD_TODO:
                 Task task = createTodo(args);
                 storeTask(task);
                 break;
-            case "deadline":
+            case ADD_DEADLINE:
                 task = createDeadline(args);
                 storeTask(task);
                 break;
-            case "event":
+            case ADD_EVENT:
                 task = createEvent(args);
                 storeTask(task);
                 break;
-            default:
-                throw new UnknownCommandException("sToP TrYiNg tO FoOl mE. \""
-                        + args[0] + "\" iS An uNkNoWn cOmMaNd.");
             }
         } catch(IncorrectArgumentException e) {
             throw e;
         }
 
-        return COMMAND_SUCCESS;
+        return CommandStatus.SUCCESS;
     }
 
     private void storeTask(Task task) {
@@ -233,15 +243,16 @@ public class Chatbot {
     }
 
     public void start() {
-        int success = COMMAND_SUCCESS;
+        CommandStatus status = CommandStatus.SUCCESS;
 
         printWithDecorations("yOu HavE nO cOnTrOL ovEr ME!");
 
-        for (String text = parseText(); success != COMMAND_STOP; text = parseText()) {
+        for (String text = parseText(); status == CommandStatus.SUCCESS; text = parseText()) {
             String[] args = text.trim().split("\\s+");
 
             try {
-                success = runCommand(args);
+                Command command = parseCommand(args);
+                status = runCommand(command, args);
             } catch (IncorrectArgumentException | UnknownCommandException e) {
                 printWithDecorations(e.getMessage());
             }
