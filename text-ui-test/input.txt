@@ -8,3 +8,7 @@ done 1
 list
 done 3
 list
+todo 
+event
+deadline          
+hello
