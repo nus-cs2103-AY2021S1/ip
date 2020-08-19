@@ -1,5 +1,5 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import main.java.Task;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
