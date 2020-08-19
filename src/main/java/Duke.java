@@ -1,6 +1,6 @@
 import java.util.*;
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -23,17 +23,39 @@ public class Duke {
             //add items to list
             if (!userMessage.equals("bye") && !userMessage.equals("list") && !userMessage.contains("done")) {
                 Task newItem = new Task(userMessage, Task.Status.PENDING);
-                if (userMessage.contains("todo")) {
-                    String name = userMessage.substring(5);
-                    newItem = new TODO(name, Task.Status.PENDING);
+                if (userMessage.startsWith("todo")) {
+                    String name = userMessage.substring(4);
+                    if (!name.isEmpty() && !name.isBlank()) {
+                        newItem = new TODO(name, Task.Status.PENDING);
+                    } else {
+                        throw new DukeException("Oops, tasks cannot be empty");
+                    }
                 } else if (userMessage.startsWith("deadline")) {
-                    String name = userMessage.split("/by")[0].substring(9);
-                    String dueDate = userMessage.split("/by")[1];
-                    newItem = new Deadline(name, Task.Status.PENDING,dueDate);
+                    if (!userMessage.contains("/by")) {
+                        throw new DukeException("Sorry, incorrect format for Deadlines. \n Please specify a Due Date " +
+                                "(and task name)");
+                    } else {
+                        String name = userMessage.split("/by")[0].substring(8);
+                        if (name.isEmpty() || name.isBlank()) {
+                            throw new DukeException("Oops, tasks cannot be empty");
+                        }
+                        String dueDate = userMessage.split("/by")[1];
+                        newItem = new Deadline(name, Task.Status.PENDING,dueDate);
+                    }
                 } else if (userMessage.startsWith("event")) {
-                    String name = userMessage.split("/at")[0].substring(6);
-                    String time = userMessage.split("/at")[1];
-                    newItem = new Event(name, Task.Status.PENDING,time);
+                    if (!userMessage.contains("/at")) {
+                        throw new DukeException("Sorry, incorrect format for Events. \n Please specify a time " +
+                                "(and task name)");
+                    } else {
+                        String name = userMessage.split("/at")[0].substring(5);
+                        if (name.isEmpty() || name.isBlank()) {
+                            throw new DukeException("Oops, tasks cannot be empty");
+                        }
+                        String time = userMessage.split("/at")[1];
+                        newItem = new Event(name, Task.Status.PENDING,time);
+                    }
+                } else {
+                    throw new DukeException("Sorry, I do not understand this command");
                 }
                 itemList.add(newItem);
                 System.out.println("new task added: " + newItem.toString());
