@@ -24,7 +24,11 @@ public class Duke {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             System.out.println("    ____________________________________________________________");
-            respondToInput(input, taskList);
+            try {
+                respondToInput(input, taskList);
+            } catch (DukeException e) {
+                System.out.println("    " + e.getMessage());
+            }
             System.out.println("    ____________________________________________________________");
             input = sc.nextLine();
         }
@@ -33,14 +37,18 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
     }
 
-    private static void respondToInput(String input, List<Task> taskList) {
+    private static void respondToInput(String input, List<Task> taskList) throws DukeException {
         if (input.equals("list")) {
             printTaskList(taskList);
         }
         else if (input.contains("done")) {
+            if (input.split(" ").length < 2)
+            {
+                throw new DukeException("BLEHHHHHH. Tell me which task??");
+            }
             int index = Integer.parseInt(input.split(" ")[1]) - 1;
             if (index < 0 || index > taskList.size() - 1) {
-                System.out.println("    Error. Entry does not exist. Please try again.");
+                throw new DukeException(String.format("BLEHHHHHH. Task no. %d does not exist. Please try again.", index));
             }
             else {
                 taskList.get(index).setDone();
@@ -50,21 +58,45 @@ public class Duke {
         }
         else {
             String command = input.split(" ")[0];
+            List<String> validTasks = new ArrayList<String>() {
+                {
+                    add("todo");
+                    add("deadline");
+                    add("event");
+                }
+            };
+            if (validTasks.contains(command))
+            {
+                if (input.split(" ").length < 2) {
+                    throw new DukeException(String.format("☹ BLEHHHHHH!!! The description of a %s cannot be empty.", command));
+                }
+            }
+            else {
+                throw new DukeException("☹ BLEHHHHHH!!! I'm (not) sorry, but I don't know what that means :/");
+            }
+
             if (command.equals("todo")) {
                 String pattern = "(todo )(.+)";
                 taskList.add(new ToDoTask(input.replaceAll(pattern, "$2")));
+                printAddTaskListStatus(taskList);
             } else if (command.equals("deadline")) {
                 String pattern = "(deadline )(.+)";
                 taskList.add(new DeadlineTask(input.replaceAll(pattern, "$2")));
+                printAddTaskListStatus(taskList);
             } else if (command.equals("event")) {
                 String pattern = "(event )(.+)";
                 taskList.add(new EventTask(input.replaceAll(pattern, "$2")));
+                printAddTaskListStatus(taskList);
             }
-            int size = taskList.size();
-            System.out.println("    Fine. I've added this task:") ;
-            System.out.println("      " + taskList.get(size - 1));
-            System.out.println("    Now you have a total of " + taskList.size() + (taskList.size() == 1 ? " task" : " tasks") +  " in your list.");
         }
+    }
+
+    private static void printAddTaskListStatus(List<Task> taskList)
+    {
+        int size = taskList.size();
+        System.out.println("    Fine. I've added this task:") ;
+        System.out.println("      " + taskList.get(size - 1));
+        System.out.println("    Now you have a total of " + taskList.size() + (taskList.size() == 1 ? " task" : " tasks") +  " in your list.");
     }
 
     private static int getRemainingTaskCount(List<Task> taskList)
