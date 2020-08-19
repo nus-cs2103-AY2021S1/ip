@@ -45,14 +45,28 @@ public class Duke {
         System.out.println("\t\t" + task.toString());
         System.out.println(String.format("\tNow you have %d %s in the list. Jiayous! :D", size, size > 1 ? "tasks" : "task"));
     }
-
-    public void markTaskAsDone(int index) {
+    public void markTaskAsDone(int index) throws DukeException {
         String description = this.tasks.get(index).description;
         Task updatedTask = new Task(description, true);
-
-        this.tasks.set(index, updatedTask);
-
+        try {
+            this.tasks.set(index, updatedTask);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Sorry! THe index is out of bounds! :')");
+        }
         System.out.println("\tNice! I've marked this task as done:\n\t\t" + updatedTask);
+    }
+
+    public void deleteTask(int index) throws DukeException{
+        Task task = this.tasks.get(index);
+        int size = this.tasks.size();
+        try {
+            this.tasks.remove(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Sorry! The index is out of bounds! :')");
+        }
+        System.out.println("\tOkay! I've removed this task:\n\t\t" + task.toString());
+        System.out.println(String.format("\tNow you have %d %s in the list. Jiayous! :D", size-1, size-1 > 1 ? "tasks" : "task"));
+
     }
 
     public void displayTasks() {
@@ -116,6 +130,10 @@ public class Duke {
                             throw new DukeException("\tPaise! :') Please use the correct format: event <task> /at <time>");
                         }
                         addEvent(split[0], split[1]);
+                        break;
+                    case "delete":
+                        int num = Integer.parseInt(splitSpace[1]) - 1;
+                        deleteTask(num);
                         break;
                     default:
                         throw new DukeException("\tApologies! I do not understand what that means :')");
