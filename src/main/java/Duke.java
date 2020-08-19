@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -88,6 +89,21 @@ public class Duke {
                 " tasks currently. \n" + divider + "\n");
     }
     
+    public static void delete(int index) {
+        System.out.println(divider);
+        if (index < 1 || taskCount < index) {
+            System.out.println(" Sorry I cannot find your specified task :(");
+        } else {
+            System.out.println(" Okay, I will remove this task for you");
+            System.out.println("   " + tasks.get(index - 1));
+            tasks.remove(index - 1);
+            taskCount -= 1;
+            System.out.println(" You have " + taskCount +
+                    " tasks currently.");
+        }
+        System.out.println(divider + "\n");
+    }
+    
     public static String generateErrorMessage(String message) {
         return "\n" + divider + "\n" + message + divider + "\n";
     }
@@ -104,14 +120,18 @@ public class Duke {
                     break;
                 } else if (command.equals("list")) {
                     list();
-                } else if (command.equals("done")) {
+                } else if (command.equals("done") || command.equals("delete")) {
                     if (separated.length <= 1) {
                         throw new DukeException(generateErrorMessage(" Task index must be specified :( \n" +
                                 " Terminating Hotline... \n"));
                     }
                     try {
-                        int index = Integer.parseInt(input.substring(5));
-                        done(index);
+                        int index = Integer.parseInt(separated[1]);
+                        if (command.equals("done")) {
+                            done(index);
+                        } else if (command.equals("delete")) {
+                            delete(index);
+                        }
                     } catch(NumberFormatException error) {
                         throw new DukeException(generateErrorMessage(" Task index must be an integer :( \n" +
                                 " Terminating Hotline... \n"));
