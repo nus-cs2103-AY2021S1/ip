@@ -1,5 +1,7 @@
 package tasks;
 
+import exceptions.DataException;
+
 public abstract class Task {
 
     // task description
@@ -8,7 +10,10 @@ public abstract class Task {
     // indicates whether the task is done or not
     private boolean done;
 
-    public Task(String desc) {
+    public Task(String desc) throws DataException {
+        if (desc.isBlank()) {
+            throw new DataException("Task Description", "Cannot be blank");
+        }
         this.desc = desc;
         this.done = false;
     }
