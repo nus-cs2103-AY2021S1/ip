@@ -11,7 +11,8 @@ public class TaskList {
 
     public void addTask(Task task) {
         this.todoList.add(task);
-        System.out.println("     added: " + task.description);
+        System.out.println("     Got it. I've added this task:" + "\n" + "       " + task.toString());
+        System.out.println("     Now you have " + this.todoList.size() + " tasks in the list.");
     }
 
     public Task get(int index) {
@@ -24,7 +25,7 @@ public class TaskList {
             int listNumber = i + 1;
             Task currentTask = todoList.get(i);
             String taskStatus = currentTask.getStatusIcon();
-            System.out.println("     " + listNumber + "." + taskStatus + " " + currentTask.description);
+            System.out.println("     " + listNumber + "." + currentTask.toString());
         }
     }
 

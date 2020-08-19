@@ -22,7 +22,6 @@ public class Duke {
 
         while(sc.hasNext()) {
             String input = sc.nextLine();
-            Task newTask = new Task(input);
 
             if (input.equals("bye")) {
                 System.out.println(underscore);
@@ -36,14 +35,37 @@ public class Duke {
             } else if (input.contains("done")) {
                 String taskNumberString = input.substring(5);
                 int taskNumberInt = Integer.parseInt(taskNumberString) - 1;
-                System.out.println(taskNumberInt);
                 System.out.println(underscore);
                 newList.get(taskNumberInt).markDone();
                 System.out.println(underscore);
             } else {
-                System.out.println(underscore);
-                newList.addTask(newTask);
-                System.out.println(underscore);
+                if (input.contains("todo")) {
+                    String info = input.substring(5);
+                    Todos newTodo = new Todos(info);
+                    System.out.println(underscore);
+                    newList.addTask(newTodo);
+                    System.out.println(underscore);
+                } else if (input.contains("deadline")) {
+                    String info = input.substring(9);
+                    String[] information = info.split("/by ");
+                    String description = information[0];
+                    String by = information[1];
+                    Deadlines newDeadline = new Deadlines(description, by);
+                    System.out.println(underscore);
+                    newList.addTask(newDeadline);
+                    System.out.println(underscore);
+                } else if (input.contains("event")) {
+                    String info = input.substring(6);
+                    String[] information = info.split("/at ");
+                    String description = information[0];
+                    String at = information[1];
+                    Events newEvent = new Events(description,at);
+                    System.out.println(underscore);
+                    newList.addTask(newEvent);
+                    System.out.println(underscore);
+                } else {
+                    System.out.println("invalid");
+                }
 
             }
         }
