@@ -70,12 +70,12 @@ public class Duke {
     }
 
     public static void listTasks() {
-        String output = "Here are the tasks in your list:\n     ";
+        String output = "Here are the tasks in your list:\n";
         int taskLen = taskList.size();
         for (int i = 0; i < taskLen; i++) {
-            output += String.format("%d. %s", i + 1, taskList.get(i));
+            output += String.format("     %d. %s", i + 1, taskList.get(i));
             if (i != taskLen - 1) {
-                output += "\n     ";
+                output += "\n";
             }
         }
         printMessage(output);
