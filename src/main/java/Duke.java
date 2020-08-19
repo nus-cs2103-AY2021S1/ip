@@ -38,19 +38,19 @@ public class Duke {
                 System.out.println(linePrinter());
             } else {
                 String[] words = s.split(" ");
-                if (words.length > 1) { // the case where something is done
+                if (words[0].equals(doneCommand)) { // the case where something is done
                     int number = Integer.parseInt(words[1]);
 
-                    if (number > ls.size()) {
+                    if (number > ls.size()) { // if the task number does not exist
                         System.out.println(linePrinter() +
                                 "Can't find this task :(".replaceAll("(?m)^", "\t") +
                                 linePrinter());
                     } else {
-                        Task newTask = ls.get(number - 1);
-                        newTask.checkTask();
+                        Task oldTask = ls.get(number - 1);
+                        oldTask.checkTask();
                         System.out.println(linePrinter() +
                                 ("Nice! I've marked this task as done:\n" +
-                                        newTask.getStatus()).replaceAll("(?m)^", "\t") +
+                                        oldTask.getStatus()).replaceAll("(?m)^", "\t") +
                                 linePrinter());
                     }
                 } else { // the case where tasks are added
