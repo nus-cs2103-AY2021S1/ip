@@ -39,9 +39,9 @@ public class Bot {
                     }
                 } else if (firstWord.equals("deadline")) {
                     String[] details = getDetailsSpecial(arr, "/by");
-                    if (details[0] == null || details[1] == null){ //can be modified to do description AND time;
+                    if (details[0] == null || details[1] == null) { //can be modified to do description AND time;
                         throw new NoDescriptionException("deadline");
-                    } else{
+                    } else {
                         addListings("deadline", details);
                     }
                 } else if (firstWord.equals("event")) {
@@ -51,11 +51,15 @@ public class Bot {
                     } else {
                         addListings("event", details);
                     }
+                } else if (firstWord.equals("delete")) {
+                    Integer number = Integer.valueOf(arr[1]) - 1;
+                    deleteMessage(number);
+                    list.remove((int) number);
                 } else {
                     throw new UndefinedException();
                 }
             } catch (NoDescriptionException e) {
-              noDescriptionMessage(e.s);
+                noDescriptionMessage(e.s);
             } catch (UndefinedException e) {
                 undefinedExceptionMessage();
             }
@@ -146,6 +150,11 @@ public class Bot {
     public void noDescriptionMessage(String s) {
         System.out.println(line + "\n" + "     ☹ OOPS!!! The description of a " + s + " cannot be empty."
                 + "\n" + line);
+    }
+
+    public void deleteMessage(Integer num) {
+        System.out.println(line + "\n" +"     Noted. I've removed this task: \n" + whiteSpaceSeven +
+                list.get(num) + "\n" + "     Now you have " + (list.size() - 1) + " tasks in the list.\n" + line);
     }
 
 }
