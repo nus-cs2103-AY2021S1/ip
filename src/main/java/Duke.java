@@ -73,20 +73,6 @@ public class Duke {
                         arr.add(t);
                         print(arr, t);
                     }
-                } else if (command.substring(0, 6).equals("delete")) {
-                    if (command.length() == 6) {
-                        System.out.println("Provide the number of the todo that you want to delete!");
-                    } else {
-                        int taskNumber = Integer.parseInt(command.substring(7));
-                        if (taskNumber > arr.size()) {
-                            System.out.println("The specified todo does not exist!");
-                        } else {
-                            Task t = arr.get(taskNumber - 1);
-                            arr.remove(t);
-                            System.out.println("Nice! Duke has removed this task: " + "\n" + t.getIndicator() + t.getIcon() + " " + t.name + "\n" +
-                                    "Now you have " + arr.size() + " tasks in the list.");
-                        }
-                    }
                 } else if (command.substring(0, 5).equals("event")) {
                     if (indexOfSlash == -1 || command.length() == 5 || !command.substring(indexOfSlash + 1, indexOfSlash + 3).equals("at")) {
                         EventException ee = new EventException();
