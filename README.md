@@ -24,3 +24,11 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+
+## Testing
+
+```shell script
+cd text-ui-test
+# chmod +x # Only needed first time
+./runtest.sh
+```
