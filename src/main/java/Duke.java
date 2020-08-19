@@ -10,6 +10,72 @@ public class Duke {
         }
     }
 
+    // return the description of Event
+    public static String getEventDescription(String[] command, int ptr){
+        String res = "";
+        Boolean start = false;
+        for(int i = ptr; i < command.length; i++){
+            if(command[i].equals("/at")) break;
+            if(start){
+                res += (" " + command[i]);
+            }
+            else{
+                start = true;
+                res += command[i];
+            }
+        }
+        return res;
+    }
+
+    // return the description of Event
+    public static String getDeadlineDescription(String[] command, int ptr){
+        String res = "";
+        Boolean start = false;
+        for(int i = ptr; i < command.length; i++){
+            if(command[i].equals("/by")) break;
+            if(start){
+                res += (" " + command[i]);
+            }
+            else{
+                start = true;
+                res += command[i];
+            }
+        }
+        return res;
+    }
+
+    // return the string after the substring "/by" or "/at"
+    public static String getEventTime(String[] command){
+        int len = command.length;
+        if(len <= 0) return null;
+        int i = 0;
+        String res = "";
+        while(i < len && !command[i].equals("/at")){
+            i++;
+        }
+        i++;
+        while(i < len){
+            res += command[i++];
+        }
+        return res;
+    }
+
+    // return the string after the substring "/by" or "/at"
+    public static String getDeadlineTime(String[] command){
+        int len = command.length;
+        if(len <= 0) return null;
+        int i = 0;
+        String res = "";
+        while(i < len && !command[i].equals("/by")){
+            i++;
+        }
+        i++;
+        while(i < len){
+            res += command[i++];
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -62,11 +128,43 @@ public class Duke {
                     System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
                 }
             }
-            else{
-                list.add(new Task(inputCommand));
+            else if(command[ptr].equals("todo")){
+                Todo newTodo = new Todo(inputCommand);
+                list.add(newTodo);
                 System.out.println("____________________________________________________________\n" +
-                               "added: " + inputCommand +
-                               "\n____________________________________________________________");
+                        "Got it. I've added this task:\n" +
+                        newTodo.toString() + "\n" +
+                        String.format("Now you have %d tasks in the list.", list.size()) +
+                        "\n____________________________________________________________");
+            }
+            else if(command[ptr].equals("deadline")){
+                String by = getDeadlineTime(command), description = getDeadlineDescription(command, ptr + 1);
+                Deadline deadline = new Deadline(description, by);
+                list.add(deadline);
+                System.out.println("____________________________________________________________\n" +
+                        "Got it. I've added this task:\n" +
+                        deadline.toString() + "\n" +
+                        String.format("Now you have %d tasks in the list.", list.size()) +
+                        "\n____________________________________________________________");
+            }
+            else if(command[ptr].equals("event")){
+                String at = getEventTime(command), description = getEventDescription(command, ptr + 1);
+                Event event = new Event(description, at);
+                list.add(event);
+                System.out.println("____________________________________________________________\n" +
+                        "Got it. I've added this task:\n" +
+                        event.toString() + "\n" +
+                        String.format("Now you have %d tasks in the list.", list.size()) +
+                        "\n____________________________________________________________");
+            }
+            else{
+                Task task = new Task(inputCommand);
+                list.add(task);
+                System.out.println("____________________________________________________________\n" +
+                        "Got it. I've added this task:\n" +
+                        task.toString() + "\n" +
+                        String.format("Now you have %d tasks in the list.", list.size()) +
+                        "\n____________________________________________________________");
             }
         }
 
