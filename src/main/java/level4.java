@@ -26,6 +26,7 @@ public class level4 {
             int length = input.length();
             String[] isDone = input.split(" ");
             String firstChar = isDone[0];
+
 //            String lastChar = isDone[length - 1];
 
             if (input.equals("list")) {
@@ -50,14 +51,66 @@ public class level4 {
                 System.out.println("------------------------------------------");
                 input = sc.nextLine();
 
+            } else if (firstChar.equals("todo")) {
+
+                String content_todo = "[T]" + "[x] " + input.substring(firstChar.length() + 1);
+                list_Of_Content.add(content_todo);
+                System.out.println("------------------------------------------");
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(content_todo);
+                System.out.println("Now you have " + list_Of_Content.size() + " tasks in the list.");
+                System.out.println("------------------------------------------");
+                input = sc.nextLine();
+
+            } else if (firstChar.equals("deadline")) {
+
+                int index = input.indexOf("/by");
+                String content_deadline = "[D]" + "[x] "
+                        + input.substring(firstChar.length() + 1, index)
+                        + " (by: "
+                        + input.substring(index + 4)
+                        + ")";
+                list_Of_Content.add(content_deadline);
+                System.out.println("------------------------------------------");
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(content_deadline);
+                System.out.println("Now you have " + list_Of_Content.size() + " tasks in the list.");
+                System.out.println("------------------------------------------");
+                input = sc.nextLine();
+
+            } else if (firstChar.equals("event")) {
+
+                int index = input.indexOf("/at");
+                String content_event = "[E]" + "[x] "
+                        + input.substring(firstChar.length() + 1, index)
+                        + " (at: "
+                        + input.substring(index + 4)
+                        + ")";
+                list_Of_Content.add(content_event);
+                System.out.println("------------------------------------------");
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(content_event);
+                System.out.println("Now you have " + list_Of_Content.size() + " tasks in the list.");
+                System.out.println("------------------------------------------");
+                input = sc.nextLine();
+
             }
 
             else {
-                list_Of_Content.add("[x] " + input);
+//                list_Of_Content.add("[x] " + input);
+//                System.out.println("------------------------------------------");
+//                System.out.println("added: " + input);
+//                System.out.println("------------------------------------------");
+//                input = sc.nextLine();
+                String content_todo = "[T]" + "[x] " + input;
+                list_Of_Content.add(content_todo);
                 System.out.println("------------------------------------------");
-                System.out.println("added: " + input);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(content_todo);
+                System.out.println("Now you have " + list_Of_Content.size() + " tasks in the list.");
                 System.out.println("------------------------------------------");
                 input = sc.nextLine();
+
             }
         }
 
