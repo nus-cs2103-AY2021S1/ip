@@ -12,12 +12,16 @@ public class Duke {
         String command = inputArr[0];
 
         while (!command.equals("bye")) {
-            if (command.equals("list")) {
-                listCommand();
-            } else if (command.equals("done")) {
-                doneCommand(inputArr);
-            } else if (command.equals("deadline")) {
+            switch (command) {
+            case "list":
+                list();
+                break;
+            case "done":
+                done(inputArr);
+                break;
+            case "deadline":
                 addDeadline(inputArr);
+                break;
             }
             inputArr = getInputArr();
             command = inputArr[0];
@@ -45,13 +49,14 @@ public class Duke {
         System.out.println(message);
     }
 
-    public static void listCommand() {
+    public static void list() {
         String message;
         message = line;
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
             message = message
-                    + "      "
+                    + "    Here are the tasks in your list:\n"
+                    + "    "
                     + (i + 1)
                     + ". "
                     + task
@@ -82,14 +87,18 @@ public class Duke {
         taskList.add(new Deadline(desc, by));
 
         String message = line
-                + "      added: "
+                + "    Got it. I've added this task:\n"
+                + "      "
                 + deadline
                 + "\n"
+                + "    Now you have "
+                + taskList.size()
+                + " tasks in the list.\n"
                 + line;
         System.out.println(message);
     }
 
-    public static void doneCommand(String[] inputArr) {
+    public static void done(String[] inputArr) {
         String lastChar = inputArr[inputArr.length - 1];
         int i = Integer.parseInt(lastChar);
         i -= 1;

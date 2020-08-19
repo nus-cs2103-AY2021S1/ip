@@ -20,7 +20,9 @@ public class Task {
     }
 
     public String toString() {
-        return getStatusIcon()
+        return "["
+                + getStatusIcon()
+                + "]"
                 + " "
                 + getDescription();
     }
