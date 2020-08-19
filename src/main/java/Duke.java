@@ -38,16 +38,20 @@ public class Duke {
         return s.toLowerCase().equals("list");
     }
 
-    private static boolean isDone(String s){
+    private static boolean isDone(String s) {
         return s.length() >= 4 && s.substring(0, 4).toLowerCase().equals("done");
     }
 
-    private static void done(ArrayList<Task> tasks, int i){
+    private static boolean isDelete(String s){
+        return s.length() >= 6 && s.substring(0, 6).toLowerCase().equals("delete");
+    }
+
+    private static void done(ArrayList<Task> tasks, int i) {
         tasks.get(i).done();
         printNice("Nice! I've marked this task as done:\n      " + tasks.get(i).toString());
     }
 
-    private static void add(ArrayList<Task> tasks, String s){
+    private static void add(ArrayList<Task> tasks, String s) {
         try {
             String[] processed;
             Task toAdd;
@@ -70,12 +74,21 @@ public class Duke {
 
             printNice("Got it. I've added this task:\n" +
                     "        " + toAdd.toString() + "\n" +
-                    "   Now you have " + tasks.size() + " task(s) in the list.");
+                    "    Now you have " + tasks.size() + " task(s) in the list.");
         } catch (IndexOutOfBoundsException e) {
-            printNice("Please reformat the add task command properly");
+            printNice("Please reformat the add task command properly.");
         } catch (IllegalArgumentException e) {
-            printNice("Unrecognizable command");
+            printNice("Unrecognizable command.");
         }
+    }
+
+    private static void delete(ArrayList<Task> tasks, int i) {
+        printNice("Noted. I've removed this task:\n" +
+                "      " + tasks.get(i) +         "\n" +
+                "    Now you have " + (tasks.size() - 1) + " tasks in the list."
+        );
+        tasks.remove(i);
+
     }
 
     private static String genString(Random rng, int length){
@@ -87,18 +100,21 @@ public class Duke {
 
     // Run this once to generate input for testing, input.txt should be located at path
     public static void generateInput(String path){
-        Random rng = new Random(System.currentTimeMillis());
-        String[] action = {"list", "done", "todo", "deadline", "event"};
+        Random rng = new Random(500); //constant seed for regression test, or use Time as seed for new set of test cases
+        String[] action = {"list", "done", "delete", "todo", "deadline", "event"};
         int cnt = 0;
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path));
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < 30; i++) {
                 switch (action[rng.nextInt(action.length)]) {
                     case "list":
                         bufferedWriter.write("list");
                         break;
                     case "done":
-                        if (cnt > 0) bufferedWriter.write("done " + rng.nextInt(cnt));
+                        bufferedWriter.write("done " + (1 + rng.nextInt(cnt + cnt/10)));
+                        break;
+                    case "delete":
+                        bufferedWriter.write("delete " + (1 + rng.nextInt(cnt + cnt/10)));
                         break;
                     case "todo":
                         cnt++;
@@ -136,7 +152,17 @@ public class Duke {
             } else if (isList(input)) {
                 listOut(tasks);
             } else if (isDone(input)) {
-                done(tasks, Integer.parseInt(input.split(" ")[1]) - 1);
+                try {
+                    done(tasks, Integer.parseInt(input.split(" ")[1]) - 1);
+                } catch (IndexOutOfBoundsException e) {
+                    printNice("No such task.");
+                }
+            } else if (isDelete(input)) {
+                try {
+                    delete(tasks, Integer.parseInt(input.split(" ")[1]) - 1);
+                } catch (IndexOutOfBoundsException e) {
+                    printNice("No such task.");
+                }
             } else {
                 add(tasks, input);
             }

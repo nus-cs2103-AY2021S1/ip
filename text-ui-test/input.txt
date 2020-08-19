@@ -1,21 +1,31 @@
-todo rewuccgtmogxlwu
-list
-event dhilzccpnzzhrqp /at gcqpmdbkyq
-deadline bfklqdgrchpduyu /by ipmnswxxpl
-list
-todo pnvzbdpycbfsjyx
-event iqliyxllajjkdxj /at dvmnlgiglx
-event igxnlfwdoopvjxl /at yupiiknjva
-deadline kfjlhfrlvbfpkju /by wdmrrbaqii
+todo omanpqcdopxpmoj
+delete 1
+done 1
+event lawwhpyctjxwqfz /at tfmxowwugx
+event ybjbyomjlvfrrul /at akujwntuqw
+todo lwbssjwdswrlmxq
+todo mvtxnwvxhhxxunz
+deadline bplugnrsvfozqid /by oleonxhvvg
 done 4
-deadline ownokhqnznydnln /by ofkhvuteob
+todo ibgxbftdfnowuwf
+todo gawyhtvjlpoqgrq
+delete 6
 list
+todo ybzwwfgbnwoerbp
+deadline zndsdzdqcprvtge /by qfdhveiuhv
+deadline ascqiujaavkljun /by ugjawcyiwg
+delete 5
 list
-event pireoxtjsvkkfbt /at ytopzqvbxc
-todo xetlpxlmwrazmyb
-deadline okftpwfmjbiarek /by vvjqazgijx
-done 8
+done 11
+delete 4
+deadline plwzjygipzfuozr /by ystqvcnxdl
+done 6
 list
-deadline ajcqucpoblkrkgf /by lkipcedfen
+delete 4
+deadline uxpmimaywzsugwf /by trtlftiqis
+todo nsgjwvtxsspyopy
+delete 10
+delete 13
 list
+todo zjnghbhzkwvlixr
 bye
