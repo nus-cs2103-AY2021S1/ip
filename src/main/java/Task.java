@@ -9,7 +9,10 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public void setDone() {
+    public void setDone() throws TaskDoneException{
+        if (isDone == true) {
+            throw new TaskDoneException();
+        }
         this.isDone = true;
     }
 
