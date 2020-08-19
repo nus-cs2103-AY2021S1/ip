@@ -15,4 +15,11 @@ public class InvalidInputException extends Exception {
 
 		return this.usage;
 	}
+
+	@Override
+	public String toString() {
+
+		// don't include the exception name.
+		return this.getMessage();
+	}
 }
