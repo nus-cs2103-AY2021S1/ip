@@ -1,6 +1,10 @@
 import java.util.Scanner;
 
 public class Main {
+    /**
+     * Execution Class to contain main loop
+     * @param args
+     */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
