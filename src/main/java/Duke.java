@@ -25,11 +25,11 @@ public class Duke {
                 } else if (command.equals("done") || command.equals("delete")) {
                     handleCompleteStatus(command, commandArr);
                 } else if (command.equals("todo")) {
-                    handleTask("todo", commandArr);
+                    handleTask(TaskType.TODO, commandArr);
                 } else if (command.equals("deadline")) {
-                    handleTask("deadline", commandArr);
+                    handleTask(TaskType.DEADLINE, commandArr);
                 } else if (command.equals("event")) {
-                    handleTask("event", commandArr);
+                    handleTask(TaskType.EVENT, commandArr);
                 } else {
                     throw new DukeException("I am sorry, I don't know what that means :(");
                 }
@@ -39,15 +39,15 @@ public class Duke {
         }
     }
 
-    public static void handleTask(String taskType, String[] commandArr) {
+    public static void handleTask(TaskType taskType, String[] commandArr) {
         try {
             if (commandArr.length < 2 || commandArr[1].isBlank()) {
-                throw new MissingInformationException(String.format("The description of a %s cannot be empty.", taskType));
+                throw new MissingInformationException(String.format("The description of a %s cannot be empty.", taskType.name().toLowerCase()));
             }
-            if (taskType.equals("todo")) {
+            if (taskType == TaskType.TODO) {
                 String name = commandArr[1];
                 addTodo(name);
-            } else if (taskType.equals("deadline")) {
+            } else if (taskType == TaskType.DEADLINE) {
                 String details = commandArr[1];
                 String[] detailArr = details.split(" /by ", 2);
                 if (detailArr.length < 2 || detailArr[1].isBlank()) {
