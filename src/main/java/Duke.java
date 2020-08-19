@@ -18,6 +18,17 @@ public class Duke {
         System.out.println(lineDivider + "\n");
     }
 
+    public static void greet() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+
+        echo("Hello! I'm Duke\nWhat can I do for you?");
+    }
+
     /**
      * Arrange list of task into a more readable format.
      * @param list
@@ -59,92 +70,113 @@ public class Duke {
      */
     public static void main(String[] args) {
 
+        greet();
+
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
-
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-        echo("Hello! I'm Duke\nWhat can I do for you?");
 
         while (sc.hasNext()) {
             String msg = sc.nextLine();
 
-            if (msg.equals("bye")) {
-                echo("Bye. Hope to see you again soon!");
-                break;
-            }
+            try {
+                if (msg.equals("bye")) {
+                    echo("Bye. Hope to see you again soon!");
+                    break;
+                }
 
-            if (msg.equals("list")) {
-                echo(showList(list));
-                continue;
-            }
+                if (msg.equals("list")) {
+                    echo(showList(list));
+                    continue;
+                }
 
-            String[] msgArray = msg.split(" ");
-            if (msgArray.length == 2 && msgArray[0].equals("done") && isInt(msgArray[1])) {
-                 int index = Integer.parseInt(msgArray[1]) - 1;
+                String[] msgArray = msg.split(" ");
 
-                 if (index < 0 || index >= list.size()) {
-                     echo("Index out of range!");
-                 } else {
-                     list.get(index).markAsDone();
-                     echo("Nice! I've marked this task as done:\n" + list.get(index).toString());
-                 }
-                 continue;
-            }
+                if (msgArray[0].equals("done")) {
+                    if ((msgArray.length != 2) || (!isInt(msgArray[1]))) {
+                        throw new InvalidDoneInputException();
+                    }
+                    int index = Integer.parseInt(msgArray[1]) - 1;
+                    if (index < 0 || index >= list.size()) {
+                        throw new InvalidDoneInputException();
+                    } else {
+                        list.get(index).markAsDone();
+                        echo("Nice! I've marked this task as done:\n" + list.get(index).toString());
+                    }
+                    continue;
+                }
 
-            if (msgArray[0].equals("todo") || msgArray[0].equals("deadline") || msgArray[0].equals("event")) {
                 String taskS = " task ";
                 if (msgArray[0].equals("todo")) {
-                    String todoTask = msg.substring(5);
-                    ToDo todo = new ToDo(todoTask);
-                    list.add(todo);
-                    if (list.size() > 1) {
-                        taskS = " tasks ";
+                    if (msgArray.length < 2) {
+                        throw new InvalidTodoInputException();
+                    } else {
+                        String todoTask = msg.substring(5);
+                        ToDo todo = new ToDo(todoTask);
+                        list.add(todo);
+                        if (list.size() > 1) {
+                            taskS = " tasks ";
+                        }
+                        echo("Got it. I've added this task:\n"
+                                + todo.toString()
+                                + "\nNow you have "
+                                + list.size()
+                                + taskS
+                                + "in the list.");
                     }
-                    echo("Got it. I've added this task:\n"
-                            + todo.toString()
-                            + "\nNow you have "
-                            + list.size()
-                            + taskS
-                            + "in the list.");
-                } else if (msgArray[0].equals("deadline")) {
+                    continue;
+                }
+
+                if (msgArray[0].equals("deadline")) {
+                    if (msgArray.length < 2) {
+                        throw new NullDeadlineInputException();
+                    }
                     String deadlineTask = msg.substring(9);
                     String[] deadlineTaskArray = deadlineTask.split(" /by ");
-                    Deadline deadline = new Deadline(deadlineTaskArray[0], deadlineTaskArray[1]);
-                    list.add(deadline);
-                    if (list.size() > 1) {
-                        taskS = " tasks ";
+                    if (deadlineTaskArray.length != 2) {
+                        throw new InvalidDeadlineInputException();
+                    } else {
+                        Deadline deadline = new Deadline(deadlineTaskArray[0], deadlineTaskArray[1]);
+                        list.add(deadline);
+                        if (list.size() > 1) {
+                            taskS = " tasks ";
+                        }
+                        echo("Got it. I've added this task:\n"
+                                + deadline.toString()
+                                + "\nNow you have "
+                                + list.size()
+                                + taskS
+                                + "in the list.");
                     }
-                    echo("Got it. I've added this task:\n"
-                            + deadline.toString()
-                            + "\nNow you have "
-                            + list.size()
-                            + taskS
-                            + "in the list.");
-                } else {
+                    continue;
+                }
+
+                if (msgArray[0].equals("event")) {
+                    if (msgArray.length < 2) {
+                        throw new NullEventInputException();
+                    }
                     String eventTask = msg.substring(6);
                     String[] eventTaskArray = eventTask.split(" /at ");
-                    Event event = new Event(eventTaskArray[0], eventTaskArray[1]);
-                    list.add(event);
-                    if (list.size() > 1) {
-                        taskS = " tasks ";
+                    if (eventTaskArray.length != 2) {
+                        throw new InvalidEventInputException();
+                    } else {
+                        Event event = new Event(eventTaskArray[0], eventTaskArray[1]);
+                        list.add(event);
+                        if (list.size() > 1) {
+                            taskS = " tasks ";
+                        }
+                        echo("Got it. I've added this task:\n"
+                                + event.toString()
+                                + "\nNow you have "
+                                + list.size()
+                                + taskS
+                                + "in the list.");
                     }
-                    echo("Got it. I've added this task:\n"
-                            + event.toString()
-                            + "\nNow you have "
-                            + list.size()
-                            + taskS
-                            + "in the list.");
+                    continue;
                 }
-                continue;
+                throw new InvalidInputException();
+            } catch (DukeException e) {
+                echo(e.getMessage());
             }
-
-            echo("Invalid input.");
         }
     }
 }
