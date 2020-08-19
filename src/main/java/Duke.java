@@ -10,11 +10,13 @@ public class Duke {
     protected static final String CLOSING_MESSAGE = "Bye. Hope to see you again soon!";
     protected static final String MARKED_MESSAGE = "Nice! I've marked this task as done: ";
     protected static final String ADDED_MESSAGE = "Got it. I've added this task: ";
+    protected static final String REMOVED_MESSAGE = "Noted. I've removed this task: ";
     protected static final String LIST_HEADER = "Here are the tasks in your list: ";
 
     protected static final String CLOSING_STRING = "bye";
     protected static final String LIST_STRING = "list";
     protected static final String DONE_STRING = "done";
+    protected static final String DELETE_STRING = "delete";
 
     protected static final String TO_DO = "todo";
     protected static final String DEADLINE = "deadline";
@@ -47,6 +49,8 @@ public class Duke {
                     System.out.println(processString(getListString()));
                 } else if (firstWord.equals(DONE_STRING)) {
                     System.out.println(registerTaskDone(userInput));
+                } else if (firstWord.equals(DELETE_STRING)) {
+                    System.out.println(registerDeleteTask(userInput));
                 } else {
                     System.out.println(addTask(userInput));
                 }
@@ -56,6 +60,27 @@ public class Duke {
             }
         }
 
+
+    }
+
+    protected static String registerDeleteTask(String userInput) {
+        String[] details = userInput.split(" ", 2);
+        if (details.length == 1) {
+            throw new DukeException("Please specify a task to delete!");
+        }
+        int taskNumber;
+        try {
+            taskNumber = Integer.parseInt(details[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid number input!");
+        }
+        if (taskNumber > taskRecords.size()) {
+            throw new DukeException("No such task!");
+        }
+        Task taskRemoved = taskRecords.remove(taskNumber - 1);;
+        return processString(REMOVED_MESSAGE + '\n' +
+                PRESPACING + "   " + taskRemoved + '\n' +
+                PRESPACING + createTaskNumberCountMessage(taskRecords.size()));
 
     }
 
