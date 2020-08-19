@@ -52,18 +52,18 @@ public class Duke {
 
         this.tasks.set(index, updatedTask);
 
-        System.out.println("Nice! I've marked this task as done: \n\t" + updatedTask);
+        System.out.println("\tNice! I've marked this task as done:\n\t\t" + updatedTask);
     }
 
     public void displayTasks() {
         if (tasks.size() > 0) {
-            System.out.println("These are the tasks in your list. Jiayous! :)");
+            System.out.println("\tThese are the tasks in your list. Jiayous! :)");
         } else {
-            System.out.println("You have no task in your list. :D");
+            System.out.println("\tYou have no task in your list. :D");
         }
 
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(String.format("\t%d. %s", i+1, this.tasks.get(i).toString()));
+            System.out.println(String.format("\t\t%d. %s", i+1, this.tasks.get(i).toString()));
         }
     }
 
