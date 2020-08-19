@@ -11,11 +11,6 @@ public class TaskList {
         this.list = new ArrayList<Task>();
     }
 
-    public ArrayList<Task> getList(){
-        //Returns the list of tasks
-        return this.list;
-    }
-
     public void displayContent(){
 
         //Iterate through the list of tasks
