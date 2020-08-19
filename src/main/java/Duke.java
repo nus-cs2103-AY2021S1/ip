@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 public class Duke {
 
+    protected static int EVENT = 1, DEADLINE = 2;
+
     // print all the content in the list
     public static void printList(ArrayList<Task> list){
         for(int i = 0; i < list.size(); i++){
@@ -10,24 +12,18 @@ public class Duke {
         }
     }
 
-    // return the description of Event
-    public static String getEventDescription(String[] command, int ptr){
-        String res = "";
-        Boolean start = false;
-        for(int i = ptr; i < command.length; i++){
-            if(command[i].equals("/at")) break;
-            if(start){
-                res += (" " + command[i]);
-            }
-            else{
-                start = true;
-                res += command[i];
-            }
-        }
-        return res;
+    // return the description
+    public static String getDescription(String s, int type){
+        String firstWord = type == EVENT ? "event" : "deadline", secondWord = type == EVENT ? "/at" : "/by";
+        int start = 0, firstWordLen = type == EVENT ? 5 : 8;
+        while(!s.substring(start, start + firstWordLen).equals(firstWord)) start++;
+        start += (firstWordLen + 1);
+        int end = start + 1;
+        while(!s.substring(end, end + 3).equals(secondWord)) end++;
+        return s.substring(start, end - 1);
     }
 
-    // return the description of Event
+    /*// return the description of Event
     public static String getDeadlineDescription(String[] command, int ptr){
         String res = "";
         Boolean start = false;
@@ -42,22 +38,14 @@ public class Duke {
             }
         }
         return res;
-    }
+    }*/
 
     // return the string after the substring "/by" or "/at"
-    public static String getEventTime(String[] command){
-        int len = command.length;
-        if(len <= 0) return null;
-        int i = 0;
-        String res = "";
-        while(i < len && !command[i].equals("/at")){
-            i++;
-        }
-        i++;
-        while(i < len){
-            res += command[i++];
-        }
-        return res;
+    public static String getTime(String s, int type){
+        String word = type == EVENT ? "/at" : "/by";
+        int i = 0, len = s.length();
+        while(i + 3 < len && !s.substring(i, i + 3).equals(word)) i++;
+        return i + 3 == len ? "" : s.substring(i + 4);
     }
 
     // return the string after the substring "/by" or "/at"
@@ -138,7 +126,7 @@ public class Duke {
                         "\n____________________________________________________________");
             }
             else if(command[ptr].equals("deadline")){
-                String by = getDeadlineTime(command), description = getDeadlineDescription(command, ptr + 1);
+                String by = getTime(inputCommand, DEADLINE), description = getDescription(inputCommand, DEADLINE);
                 Deadline deadline = new Deadline(description, by);
                 list.add(deadline);
                 System.out.println("____________________________________________________________\n" +
@@ -148,7 +136,7 @@ public class Duke {
                         "\n____________________________________________________________");
             }
             else if(command[ptr].equals("event")){
-                String at = getEventTime(command), description = getEventDescription(command, ptr + 1);
+                String at = getTime(inputCommand, EVENT), description = getDescription(inputCommand, EVENT);
                 Event event = new Event(description, at);
                 list.add(event);
                 System.out.println("____________________________________________________________\n" +
