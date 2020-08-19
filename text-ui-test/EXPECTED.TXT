@@ -1,7 +1,130 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+________________________________________
+    Hello! I'm duckmoon99's Duke
+    What can I do for you?
+________________________________________
+________________________________________
+    Got it. I've added this task:
+        [T][✗] rewuccgtmogxlwu
+   Now you have 1 task(s) in the list.
+________________________________________
+________________________________________
+    1.[T][✗] rewuccgtmogxlwu
+________________________________________
+________________________________________
+    Got it. I've added this task:
+        [E][✗] dhilzccpnzzhrqp (at: gcqpmdbkyq)
+   Now you have 2 task(s) in the list.
+________________________________________
+________________________________________
+    Got it. I've added this task:
+        [D][✗] bfklqdgrchpduyu (by: ipmnswxxpl)
+   Now you have 3 task(s) in the list.
+________________________________________
+________________________________________
+    1.[T][✗] rewuccgtmogxlwu
+    2.[E][✗] dhilzccpnzzhrqp (at: gcqpmdbkyq)
+    3.[D][✗] bfklqdgrchpduyu (by: ipmnswxxpl)
+________________________________________
+________________________________________
+    Got it. I've added this task:
+        [T][✗] pnvzbdpycbfsjyx
+   Now you have 4 task(s) in the list.
+________________________________________
+________________________________________
+    Got it. I've added this task:
+        [E][✗] iqliyxllajjkdxj (at: dvmnlgiglx)
+   Now you have 5 task(s) in the list.
+________________________________________
+________________________________________
+    Got it. I've added this task:
+        [E][✗] igxnlfwdoopvjxl (at: yupiiknjva)
+   Now you have 6 task(s) in the list.
+________________________________________
+________________________________________
+    Got it. I've added this task:
+        [D][✗] kfjlhfrlvbfpkju (by: wdmrrbaqii)
+   Now you have 7 task(s) in the list.
+________________________________________
+________________________________________
+    Nice! I've marked this task as done:
+      [T][✓] pnvzbdpycbfsjyx
+________________________________________
+________________________________________
+    Got it. I've added this task:
+        [D][✗] ownokhqnznydnln (by: ofkhvuteob)
+   Now you have 8 task(s) in the list.
+________________________________________
+________________________________________
+    1.[T][✗] rewuccgtmogxlwu
+    2.[E][✗] dhilzccpnzzhrqp (at: gcqpmdbkyq)
+    3.[D][✗] bfklqdgrchpduyu (by: ipmnswxxpl)
+    4.[T][✓] pnvzbdpycbfsjyx
+    5.[E][✗] iqliyxllajjkdxj (at: dvmnlgiglx)
+    6.[E][✗] igxnlfwdoopvjxl (at: yupiiknjva)
+    7.[D][✗] kfjlhfrlvbfpkju (by: wdmrrbaqii)
+    8.[D][✗] ownokhqnznydnln (by: ofkhvuteob)
+________________________________________
+________________________________________
+    1.[T][✗] rewuccgtmogxlwu
+    2.[E][✗] dhilzccpnzzhrqp (at: gcqpmdbkyq)
+    3.[D][✗] bfklqdgrchpduyu (by: ipmnswxxpl)
+    4.[T][✓] pnvzbdpycbfsjyx
+    5.[E][✗] iqliyxllajjkdxj (at: dvmnlgiglx)
+    6.[E][✗] igxnlfwdoopvjxl (at: yupiiknjva)
+    7.[D][✗] kfjlhfrlvbfpkju (by: wdmrrbaqii)
+    8.[D][✗] ownokhqnznydnln (by: ofkhvuteob)
+________________________________________
+________________________________________
+    Got it. I've added this task:
+        [E][✗] pireoxtjsvkkfbt (at: ytopzqvbxc)
+   Now you have 9 task(s) in the list.
+________________________________________
+________________________________________
+    Got it. I've added this task:
+        [T][✗] xetlpxlmwrazmyb
+   Now you have 10 task(s) in the list.
+________________________________________
+________________________________________
+    Got it. I've added this task:
+        [D][✗] okftpwfmjbiarek (by: vvjqazgijx)
+   Now you have 11 task(s) in the list.
+________________________________________
+________________________________________
+    Nice! I've marked this task as done:
+      [D][✓] ownokhqnznydnln (by: ofkhvuteob)
+________________________________________
+________________________________________
+    1.[T][✗] rewuccgtmogxlwu
+    2.[E][✗] dhilzccpnzzhrqp (at: gcqpmdbkyq)
+    3.[D][✗] bfklqdgrchpduyu (by: ipmnswxxpl)
+    4.[T][✓] pnvzbdpycbfsjyx
+    5.[E][✗] iqliyxllajjkdxj (at: dvmnlgiglx)
+    6.[E][✗] igxnlfwdoopvjxl (at: yupiiknjva)
+    7.[D][✗] kfjlhfrlvbfpkju (by: wdmrrbaqii)
+    8.[D][✓] ownokhqnznydnln (by: ofkhvuteob)
+    9.[E][✗] pireoxtjsvkkfbt (at: ytopzqvbxc)
+    10.[T][✗] xetlpxlmwrazmyb
+    11.[D][✗] okftpwfmjbiarek (by: vvjqazgijx)
+________________________________________
+________________________________________
+    Got it. I've added this task:
+        [D][✗] ajcqucpoblkrkgf (by: lkipcedfen)
+   Now you have 12 task(s) in the list.
+________________________________________
+________________________________________
+    1.[T][✗] rewuccgtmogxlwu
+    2.[E][✗] dhilzccpnzzhrqp (at: gcqpmdbkyq)
+    3.[D][✗] bfklqdgrchpduyu (by: ipmnswxxpl)
+    4.[T][✓] pnvzbdpycbfsjyx
+    5.[E][✗] iqliyxllajjkdxj (at: dvmnlgiglx)
+    6.[E][✗] igxnlfwdoopvjxl (at: yupiiknjva)
+    7.[D][✗] kfjlhfrlvbfpkju (by: wdmrrbaqii)
+    8.[D][✓] ownokhqnznydnln (by: ofkhvuteob)
+    9.[E][✗] pireoxtjsvkkfbt (at: ytopzqvbxc)
+    10.[T][✗] xetlpxlmwrazmyb
+    11.[D][✗] okftpwfmjbiarek (by: vvjqazgijx)
+    12.[D][✗] ajcqucpoblkrkgf (by: lkipcedfen)
+________________________________________
+________________________________________
+    Bye. Hope to see you again soon!
+________________________________________

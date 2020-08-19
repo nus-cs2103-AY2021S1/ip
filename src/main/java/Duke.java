@@ -1,4 +1,7 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Duke {
@@ -68,13 +71,58 @@ public class Duke {
                 "   Now you have " + tasks.size() + " task(s) in the list.");
     }
 
+    private static String genString(Random rng, int length){
+        return rng.ints(97, 123)
+                .limit(length)
+                .mapToObj(x -> (char) x)
+                .reduce("", (a, b) -> a + b, (a, b) -> a + b);
+    }
+
+    // Run this once to generate input for testing, input.txt should be located at path
+    public static void generateInput(String path){
+        Random rng = new Random(System.currentTimeMillis());
+        String[] action = {"list", "done", "todo", "deadline", "event"};
+        int cnt = 0;
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path));
+            for (int i = 0; i < 20; i++) {
+                switch (action[rng.nextInt(action.length)]) {
+                    case "list":
+                        bufferedWriter.write("list");
+                        break;
+                    case "done":
+                        if (cnt > 0) bufferedWriter.write("done " + rng.nextInt(cnt));
+                        break;
+                    case "todo":
+                        cnt++;
+                        bufferedWriter.write("todo " + genString(rng, 15));
+                        break;
+                    case "deadline":
+                        cnt++;
+                        bufferedWriter.write("deadline " + genString(rng, 15) + " /by " + genString(rng, 10));
+                        break;
+                    case "event":
+                        cnt++;
+                        bufferedWriter.write("event " + genString(rng, 15) + " /at " + genString(rng, 10));
+                        break;
+                }
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.write("bye");
+            bufferedWriter.newLine();
+            bufferedWriter.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         greet();
         Scanner scanner = new Scanner(System.in);
         String input;
         ArrayList<Task> tasks = new ArrayList<>();
         while(true) {
-            input = scanner.nextLine();
+            input = scanner.nextLine().trim();
             if (isBye(input)) {
                 bye();
                 return;
