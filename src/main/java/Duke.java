@@ -23,7 +23,7 @@ public class Duke {
         final String EVENT_PHRASE = "event";
         final String DELETE_PHRASE = "delete";
 
-        displayStart();
+        Printer.displayStart();
 
         String command = sc.next();
 
@@ -32,10 +32,10 @@ public class Duke {
             try {
                 switch (command) {
                     case LIST_PHRASE:
-                        printList();
+                        Printer.printList(itemsList);
                         break;
                     case COMPLETE_TASK_PHRASE:
-                        displayCompleteTask();
+                        Printer.displayCompleteTask();
 
                         int index = sc.nextInt() - 1;
                         itemsList.get(index).doTask();
@@ -62,57 +62,10 @@ public class Duke {
             command = sc.next();
         }
 
-        displayExit();
+        Printer.displayExit();
     }
 
-    private static void displayStart() {
-        final String HELLO_MESSAGE = "Hello, and welcome to my humble abode. \n" +
-                "I'm supposed to help you but I'll be the judge of that. Anyway what do you want.";
 
-        System.out.println(HORIZONTAL_RULE);
-        System.out.println(HELLO_MESSAGE);
-        System.out.println(HORIZONTAL_RULE);
-    }
-
-    private static void displayExit() {
-        final String BYE_MESSAGE = "Thank you for that utter waste of time.\n" +
-                "Can't wait to see you again...";
-
-        System.out.println(HORIZONTAL_RULE);
-        System.out.println(BYE_MESSAGE);
-        System.out.println(HORIZONTAL_RULE);
-    }
-
-    private static void printList() {
-        final String CHECKMARK = "[✓]";
-        final String CROSS = "[✗]";
-
-        System.out.println(HORIZONTAL_RULE);
-        System.out.println("Here are all your burdens");
-
-        for (int i = 1; i <= itemsList.size(); i++) {
-            Task item = itemsList.get(i - 1);
-            String fullItem = i + ". " + item.toString();
-
-            System.out.println(fullItem);
-        }
-
-        System.out.println(HORIZONTAL_RULE);
-    }
-
-    private static void displayCompleteTask() {
-        System.out.println(HORIZONTAL_RULE);
-        System.out.println("Congratulations, you actually did something");
-        System.out.println(HORIZONTAL_RULE);
-    }
-
-    private static void displayAddTask(Task task) {
-        System.out.println(HORIZONTAL_RULE);
-        System.out.println("One more task added for you sire");
-        System.out.println(task);
-        System.out.println("You have " + itemsList.size() + " tasks. Enjoy!");
-        System.out.println(HORIZONTAL_RULE);
-    }
 
     private static void handleTodo() throws DukeException {
         String taskName = sc.nextLine();
@@ -121,7 +74,7 @@ public class Duke {
         }
         Task newTask = new ToDo(taskName);
         itemsList.add(newTask);
-        displayAddTask(newTask);
+        Printer.displayAddTask(newTask, itemsList.size());
     }
 
     private static void handleDeadline() throws DukeException {
@@ -142,7 +95,7 @@ public class Duke {
 
         Task newTask = new Deadline(taskAndDeadline[0], taskAndDeadline[1]);
         itemsList.add(newTask);
-        displayAddTask(newTask);
+        Printer.displayAddTask(newTask, itemsList.size());
     }
 
     private static void handleEvent() throws DukeException {
@@ -161,17 +114,12 @@ public class Duke {
 
         Task newTask = new Event(eventAndTime[0], eventAndTime[1]);
         itemsList.add(newTask);
-        displayAddTask(newTask);
+        Printer.displayAddTask(newTask, itemsList.size());
     }
 
     private static void handleDelete() {
         int taskIndex = sc.nextInt() - 1;
         Task removedTask = itemsList.remove(taskIndex);
-
-        System.out.println(HORIZONTAL_RULE);
-        System.out.println("Finished so soon? Fine I've removed the following task. Good day.");
-        System.out.println("    " + removedTask);
-        System.out.println("You have " + itemsList.size() + " tasks. Enjoy!");
-        System.out.println(HORIZONTAL_RULE);
+        Printer.displayDeleteTask(removedTask, itemsList.size());
     }
 }
