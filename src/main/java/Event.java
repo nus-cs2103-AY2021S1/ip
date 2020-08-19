@@ -21,26 +21,10 @@ public class Event extends Task {
 
     public static Event parse(String input) throws InvalidInputException {
 
-        var slash = input.indexOf('/');
+        var parts = DatedTask.parse("event", input, "at", getUsage());
+        assert parts.size() == 2;
 
-        if (slash == 0 || input.isEmpty()) {
-            throw new InvalidInputException("task description cannot be empty", getUsage());
-
-        } else if (slash == -1) {
-            throw new InvalidInputException("event requires a date", getUsage());
-        }
-
-        var item = input.substring(0, slash).strip();
-        var when = input.substring(slash + 1).strip();
-
-        assert !item.isEmpty();
-
-        if (!when.startsWith("at ")) {
-            throw new InvalidInputException("incorrect date specification", getUsage());
-        }
-
-        when = when.substring(3).strip();
-        return new Event(item, when);
+        return new Event(parts.get(0), parts.get(1));
     }
 
     private static String getUsage() {
