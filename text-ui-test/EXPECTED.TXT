@@ -21,7 +21,7 @@
     Now you have 1 tasks in the list.
     _________________________________________________
     _________________________________________________
-    ERROR: Please specify a date/time for this task!
+    ERROR: Usage: <deadline> <description> /by <time>
     _________________________________________________
     _________________________________________________
     Alright. I've added this task:
@@ -29,7 +29,7 @@
     Now you have 2 tasks in the list.
     _________________________________________________
     _________________________________________________
-    ERROR: Please specify a date/time for this task!
+    ERROR: Usage: <event> <description> /at <time>
     _________________________________________________
     _________________________________________________
     Alright. I've added this task:
