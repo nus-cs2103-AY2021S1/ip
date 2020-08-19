@@ -56,10 +56,6 @@ public class Task {
         return des.substring(des.indexOf('/') + 4, des.length());
     }
 
-    public String getDeadlineTask() {
-        String des = this.getDescription();
-        return des.substring(0, des.indexOf('/') - 1);
-    }
 
     public boolean isSingleWord() {
         return !this.description.contains(" ");
