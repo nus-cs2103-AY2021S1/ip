@@ -1,9 +1,10 @@
 public enum Command{
     INIT,
+    LIST,
     BYE,
     INVALID;
 
-    static private String originalCommand = "";
+    static private String originalCommand = ""; //originalCommand stores the original command (case sensitive)
 
     Command(){}
 
@@ -16,6 +17,12 @@ public enum Command{
         return originalCommand;
     }
 
+    /**
+     * Returns a Command object that enumerate original command
+     *
+     * @param command a string that contains the command
+     * @return enumerated command
+     */
     static Command getCommand(String command){
         originalCommand = command;
         try {
