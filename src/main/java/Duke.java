@@ -19,9 +19,9 @@ public class Duke {
                 greetExit.exit();
                 break;
             } else if (command.equals("list")) {
-                todoManager.listEvent();
+                todoManager.listTask();
             } else {
-                todoManager.addEvent(command);
+                todoManager.addTask(command);
             }
         }
     }

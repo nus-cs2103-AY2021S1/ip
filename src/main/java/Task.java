@@ -1,6 +1,6 @@
-public class Event {
+public class Task {
     public String name;
-    Event(String name) {
+    Task(String name) {
         this.name = name;
     }
 }
