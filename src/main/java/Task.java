@@ -1,10 +1,14 @@
 public class Task {
     protected final String description;
-    protected final boolean isDone;
+    protected boolean isDone;
 
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+    }
+
+    public void toggleIsDone() {
+        this.isDone = true;
     }
 
     @Override

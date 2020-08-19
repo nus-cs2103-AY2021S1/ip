@@ -57,15 +57,16 @@ public class Duke {
         System.out.println("\t\t" + task.toString());
         System.out.println(String.format("\tNow you have %d %s in the list. Jiayous! :D", size, size > 1 ? "tasks" : "task"));
     }
+
     public void markTaskAsDone(int index) throws DukeException {
-        String description = this.tasks.get(index).description;
-        Task updatedTask = new Task(description, true);
+        Task task = this.tasks.get(index);
+        task.toggleIsDone();
         try {
-            this.tasks.set(index, updatedTask);
+            this.tasks.set(index, task);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Sorry! THe index is out of bounds! :')");
         }
-        System.out.println("\tNice! I've marked this task as done:\n\t\t" + updatedTask);
+        System.out.println("\tNice! I've marked this task as done:\n\t\t" + task);
     }
 
     public void deleteTask(int index) throws DukeException{
