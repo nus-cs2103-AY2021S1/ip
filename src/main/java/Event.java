@@ -1,0 +1,14 @@
+public class Event extends Task{
+    // Events: tasks that start at a specific time and ends at a specific time e.g., team project meeting on 2/10/2019 2-4pm
+    private String duration;
+    
+    public Event(String description, String duration) {
+        super(description);
+        this.duration = duration;
+    }
+
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + " (at: " + duration + ")";
+    }
+}

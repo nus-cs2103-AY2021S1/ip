@@ -38,7 +38,7 @@ public class PandaBot {
             } else if (command.startsWith("done")) {
                 // done command
                 // search for the task done
-                String[] cmd = command.split("(?!<done) ");
+                String[] cmd = command.split("(?<=done) ", 2);
                 int taskNum = -1;
                 try {
                     taskNum = Integer.parseInt(cmd[1]) - 1;
@@ -56,9 +56,27 @@ public class PandaBot {
                 }
 
             } else {
-                System.out.println("Added: " + command);
-                tasks[counter] = new Task(command) ;
+                // adding tasks
+                if (command.startsWith("todo")) {
+                    String[] cmd = command.split("(?<=todo) ",2);
+                    tasks[counter] = new ToDo(cmd[1]);
+                } else if (command.startsWith("deadline")) {
+                    String[] cmd = command.split("(?<=deadline) ",2 );
+                    String[] taskDes = cmd[1].split("/by ");
+                    tasks[counter] = new Deadline(taskDes[0], taskDes[1]); // <- magic num?
+                } else if (command.startsWith("event")) {
+                    String[] cmd = command.split("(?<=event) ", 2);
+                    String[] taskDes = cmd[1].split("/at ");
+                    tasks[counter] = new Event(taskDes[0], taskDes[1]);
+                } else {
+                    System.out.println("Invalid command");
+                    continue;
+                }
+                
+                System.out.println("Noted! I've added this task: ");
+                System.out.println(tasks[counter].toString());
                 counter++;
+                System.out.println("Now you have " + counter + " tasks in this list.");
             }
         }
         sc.close();
