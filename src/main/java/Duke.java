@@ -26,6 +26,15 @@ public class Duke {
                 System.out.println(store.get(k-1));
                 command = sc.nextLine();
             }
+            else if (key.equals("delete")) {
+                int k = Integer.parseInt(command.split(" ")[1]);
+                Task remov = store.get(k-1);
+                store.remove(remov);
+                System.out.println("Meimei will forget about this task!");
+                System.out.println(remov);
+                System.out.println("Now you have " + store.size() + " tasks in the list.");
+                command = sc.nextLine();
+            }
             //adding of task
             else {
                 try {
@@ -33,19 +42,21 @@ public class Duke {
                     if (key.equals("todo")) {
                         store.add(new Todo(remain));
                         System.out.println("Got it. I've added this task:\n" + store.get(store.size() - 1));
-
                     } else {
                         String description = remain.split("/", 2)[0];
+                        Task task = new Task("");
 
                         if (key.equals("deadline")) {
                             String by = remain.split("/by", 2)[1];
-                            store.add(new Deadline(description, by));
+                            task = new Deadline(description, by);
+                            store.add(task);
                         }
                         if (key.equals("event")) {
                             String at = remain.split("/at", 2)[1];
-                            store.add(new Event(description, at));
+                            task = new Event(description, at);
+                            store.add(task);
                         }
-                        System.out.println("Got it. I've added this task:\n" + store.get(store.size() - 1));
+                        System.out.println("Got it. I've added this task:\n" + task.toString());
                     }
                     System.out.println("Now you have " + store.size() + " tasks in the list.");
                 } catch (ArrayIndexOutOfBoundsException e) {
@@ -58,15 +69,11 @@ public class Duke {
                     else if (key.equals("event")) {
                         System.out.println(new DukeException("event"));
                     } else {
-                        System.out.println("Oops! Meimei does not understand");
+                        System.out.println("Oops! Meimei does not understand this command");
                     }
                 }
                 command = sc.nextLine();
             }
-
-            //System.out.println("Got it. I've added this task:\n" + store.get(store.size() -1 ));
-
-
         }
         System.out.println("Bye. Meimei will miss you!");
     }
