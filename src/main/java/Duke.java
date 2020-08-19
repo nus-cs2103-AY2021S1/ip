@@ -21,7 +21,7 @@ public class Duke {
 
                     storedTasks.set(index, storedTasks.get(index).markDone());
 
-                    System.out.println("Nice! I've marked this task as done:" + "\n" + "[✓] " + storedTasks.get(index).toString());
+                    System.out.println("Nice! I've marked this task as done:" + "\n" + "  " + storedTasks.get(index).toString());
                 } else {
                     System.out.println("Sorry, invalid command");
                 }
@@ -30,7 +30,7 @@ public class Duke {
                /*Task newTask = new Task(currInput);
                storedTasks.add(newTask);*/
                 addTasks(currInput, storedTasks);
-               System.out.println("Got it. I've added this task: " + "\n" + "  " + storedTasks.get(storedTasks.size() - 1)
+               System.out.println("Got it. I've added this task:" + "\n" + "  " + storedTasks.get(storedTasks.size() - 1)
                + "\n" + "Now you have " + storedTasks.size() + " tasks in the list.");
             }
                 currInput = scanner.nextLine();

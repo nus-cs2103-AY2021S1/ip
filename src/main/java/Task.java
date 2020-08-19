@@ -19,9 +19,9 @@ public class Task {
     @Override
     public String toString() {
         if (this.isComplete) {
-            return "[T][✓] " + this.description;
+            return "[T][\u2713] " + this.description;
         } else {
-            return "[T][✗] " + this.description;
+            return "[T][\u2718] " + this.description;
         }
     }
 }

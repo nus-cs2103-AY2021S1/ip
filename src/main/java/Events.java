@@ -19,9 +19,9 @@ public class Events extends Task {
     @Override
     public String toString() {
         if (this.isComplete) {
-            return "[E][✓] " + this.description + "(at:" + this.startTime + ")";
+            return "[E][\u2713] " + this.description + "(at:" + this.startTime + ")";
         } else {
-            return "[E][✗] " + this.description + "(at:" + this.startTime + ")";
+            return "[E][\u2718] " + this.description + "(at:" + this.startTime + ")";
         }
     }
 }

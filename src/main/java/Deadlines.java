@@ -23,9 +23,9 @@ public class Deadlines extends Task {
     @Override
     public String toString() {
         if (this.isComplete) {
-            return "[D][✓] " + this.description + "(by:" + this.deadline + ")";
+            return "[D][\u2713] " + this.description + "(by:" + this.deadline + ")";
         } else {
-            return "[D][✗] " + this.description + "(by:" + this.deadline + ")";
+            return "[D][\u2718] " + this.description + "(by:" + this.deadline + ")";
         }
     }
 }
