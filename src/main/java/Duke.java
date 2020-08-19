@@ -3,13 +3,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
 
         //prints Greeting message
         printGreeting();
 
         //Initialize Task list
-        List<Task> lst= new ArrayList<>();
+        List<Task> lst = new ArrayList<>();
 
 
         //Take in Input
@@ -19,11 +19,23 @@ public class Duke {
         //main loop
         while (!query.equals("bye")) {
 
-            //get first word of String
-            String[] instruction = query.split(" ", 2);
+            System.out.println("_______________________________________________________________");
+
+            String[] instruction;
 
 
-            System.out.println("____________________________________");
+            //checks for exception
+            try {
+                instruction = readInstruction(lst, query);
+            } catch (DukeException e) {
+                System.out.println(e);
+                System.out.println("_______________________________________________________________");
+                System.out.println();
+                query = sc.nextLine();
+                continue;
+            }
+
+
 
             //list items
             if (instruction[0].equals("list")) {
@@ -32,7 +44,7 @@ public class Duke {
 
             //handle done items
             else if (instruction[0].equals("done")) {
-                Integer doneIndex = Integer.valueOf(instruction[1]);
+                int doneIndex = Integer.parseInt(instruction[1]);
                 if (doneIndex > lst.size()) {
                     return; //handle item does not exist exception; for now do nothing
                 } else {
@@ -41,7 +53,7 @@ public class Duke {
 
             } else {
                 switch (instruction[0]) {
-                    case "todo" :
+                    case "todo":
                         addTodo(lst, instruction[1]);
                         break;
                     case "deadline":
@@ -49,35 +61,69 @@ public class Duke {
                         break;
 
                     case "event":
-                        addEvent(lst,instruction[1].split(" /at ")[0], instruction[1].split(" /at ")[1] );
+                        addEvent(lst, instruction[1].split(" /at ")[0], instruction[1].split(" /at ")[1]);
                         break;
 
-
-                    default:
-//                        Task tsk = new Task(query);
-//                        System.out.println("added: " + query);
-//                        lst.add(tsk);
-//                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-()");
                 }
 
             }
 
 
-            System.out.println("____________________________________");
+            System.out.println("_______________________________________________________________");
             System.out.println();
 
 
             query = sc.nextLine();
         }
 
-
         //exit Dukenizer
-        System.out.println("____________________________________");
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("____________________________________");
+        printExit();
+        sc.close();
 
     }
 
+    private static String[] readInstruction(List<Task> lst, String query) throws DukeException {
+        String[] instruction = query.split(" ", 2);
+        switch (instruction[0]) {
+            case "list":
+                if (instruction.length == 1) {
+                    return instruction;
+                }
+                break;
+            case "done":
+                if (instruction.length == 1) {
+                    throw new DukeException("Please specify item number!");
+                }
+                if (Integer.parseInt(instruction[1])> lst.size()) {
+                    throw new DukeException("There is no such item in the list!");
+                }
+                break;
+            case "todo":
+                if (instruction.length == 1) {
+                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
+                break;
+            case "deadline":
+                if (instruction.length == 1) {
+                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                }
+                break;
+            case "event":
+                if (instruction.length == 1) {
+                    throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                }
+                break;
+            default:
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-()");
+        }
+        return instruction;
+    }
+
+    private static void printExit() {
+        System.out.println("_______________________________________________________________");
+        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("_______________________________________________________________");
+    }
 
     private static void printGreeting() {
         String logo =
@@ -87,14 +133,14 @@ public class Duke {
                         + "| |_| | |_| |   <  __/| |  | |__||__ /   /_<  __/|     /\n"
                         + "|____/ \\__,_|_|\\_\\___|| |  | |______|______|\\___||_|\\__\\ \n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("____________________________________");
+        System.out.println("_______________________________________________________________");
         System.out.println("Hello! I'm Dukenizer\nWhat can I do for you?");
-        System.out.println("____________________________________");
+        System.out.println("_______________________________________________________________");
         System.out.println();
     }
 
     private static void printList(List<Task> lst) {
-        for (int i = 0; i <lst.size(); i++) {
+        for (int i = 0; i < lst.size(); i++) {
             Task targetTask = lst.get(i);
             System.out.println((i + 1) + "." + targetTask.toString());
         }
@@ -131,8 +177,6 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(doneItem.toString());
     }
-
-
 
 
 }
