@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -8,6 +10,8 @@ public class Duke {
     private static final String closingMessage = "Bye. Hope to see you again soon!";
 
     private static final String CLOSING_STRING = "bye";
+
+    private static final List<String> stringRecords = new ArrayList<String>();
 
     public static void main(String[] args) {
         System.out.println(getOpeningText());
@@ -27,6 +31,16 @@ public class Duke {
 
 
     }
+
+    private static String getListString() {
+        StringBuilder builder = new StringBuilder();
+        int count = 1;
+        for (String string : stringRecords) {
+            builder.append(count++ + ". " + string);
+        }
+        return builder.toString();
+    }
+
 
     private static String processString(String string) {
         return lineBreak  + preSpacing + string + '\n' + lineBreak;
