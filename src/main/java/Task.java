@@ -35,7 +35,11 @@ public abstract class Task {
         return type;
     }
 
+    // Format: dd-MM-yyyy HH:mm
     public abstract String getTime();
+
+    // Format: d MMM yyyy, hh:mm a
+    public abstract String printTime();
 
     @Override
     public String toString() {

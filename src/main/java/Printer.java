@@ -21,9 +21,13 @@ public class Printer {
         printBorder();
         printIndentedMessage("Here are the tasks in your list:");
 
-        int index = 0;
-        for (Task task : tasks) {
-            System.out.printf("%s%d. %s\n", indent, ++index, task);
+        if (tasks.isEmpty()) {
+            printIndentedMessage("No tasks currently");
+        } else {
+            int index = 0;
+            for (Task task : tasks) {
+                System.out.printf("%s%d. %s\n", indent, ++index, task);
+            }
         }
 
         printBorder();

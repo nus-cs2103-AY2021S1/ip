@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -98,9 +99,7 @@ public class Duke {
     }
 
     private static Task addTask(String tag, String input, List<Task> tasks)
-            throws DukeInvalidTaskDescriptionException,
-            DukeInvalidEventTimeException,
-            DukeInvalidDeadlineTimeException {
+            throws DukeInvalidTaskDescriptionException, DukeInvalidTaskTimeException {
         Task toAdd = null;
         try {
             switch (tag) {
@@ -141,6 +140,8 @@ public class Duke {
             }
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeInvalidTaskDescriptionException();
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidTaskTimeException();
         }
         return toAdd;
     } 

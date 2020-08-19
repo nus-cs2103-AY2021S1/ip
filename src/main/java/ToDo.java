@@ -11,4 +11,9 @@ public class ToDo extends Task {
     public String getTime() {
         throw new IllegalStateException("Impossible method call");
     }
+
+    @Override
+    public String printTime() {
+        throw new IllegalStateException("Impossible method call");
+    }
 }
