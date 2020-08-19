@@ -88,6 +88,7 @@ public class Duke {
                     throw new DukeException("Extra inputs detected! Please only input 'list'.");
                 }
 
+            case "delete":
             case "done":
                 //done with no other arguments
                 if (instruction.length == 1) {
@@ -105,7 +106,7 @@ public class Duke {
 
                     //second argument wrong format
                     catch (NumberFormatException e) {
-                        throw new DukeException("Please only input 'done <item number>' with no other inputs!");
+                        throw new DukeException("Please only input '" + instruction[0] + " <item number>' with no other inputs!");
                     }
                 } else {
                     return instruction;
@@ -143,6 +144,10 @@ public class Duke {
                         throw new DukeException("Please input in the following format 'event <description> /at <time>' ");
                     }
                 }
+
+
+
+
 
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -214,6 +219,7 @@ public class Duke {
         Task item = lst.get(itemNumber - 1);
         System.out.println("Noted. I've removed this task:");
         System.out.println(item.toString());
+        lst.remove(item);
         System.out.println("Now you have " + lst.size() + " tasks in the list.");
     }
 
