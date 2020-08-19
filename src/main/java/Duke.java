@@ -16,14 +16,24 @@ public class Duke {
     private static class Task {
 
         private final String name;
+        private boolean done;
 
         Task(String name) {
             this.name = name;
+            this.done = false;
+        }
+
+        public String getStatusIcon() {
+            return (done ? "\u2713" : "\u2718"); //return tick or X symbols
+        }
+
+        public void complete() {
+            this.done = true;
         }
 
         @Override
         public String toString() {
-            return this.name;
+            return String.format("[%s] %s", this.getStatusIcon(), this.name);
         }
 
     }
@@ -35,14 +45,27 @@ public class Duke {
             printWithLines(this.toString());
         }
 
+        public void completeTask(int i) {
+            String prefix = "Roger roger! I'm gonna mark this task as done:\n";
+            Task task = super.get(i);
+            task.complete();
+            printWithLines(String.format("  %s%s\n", prefix, task));
+        }
+
+        public void addTask(Task newTask) {
+            super.add(newTask);
+            printWithLines(String.format("added: %s\n", newTask));
+        }
+
         @Override
         public String toString() {
             StringBuilder list = new StringBuilder();
+            StringBuilder prefix = new StringBuilder("Here are the tasks in your list:\n");
             int l = super.size();
             for (int i = 0; i < l; i++) {
-                list.append(i + 1).append(". ").append(super.get(i).toString()).append("\n");
+                list.append(i + 1).append(".").append(super.get(i).toString()).append("\n");
             }
-            return list.toString();
+            return prefix.append(list).toString();
         }
     }
 
@@ -57,18 +80,27 @@ public class Duke {
     private static void processInput() {
 
         String nextInput = input.nextLine();
+        String[] inputParts = nextInput.split(" ", 2);
+        String inputPrefix = inputParts[0];
+        String inputSuffix = inputParts.length == 1 ? "" : inputParts[1];
+
         while (!nextInput.equals("bye")) {
 
-            switch (nextInput) {
+            switch (inputPrefix) {
                 case "list":
                     taskList.printList();
                     break;
+                case "done":
+                    taskList.completeTask(Integer.parseInt(inputSuffix) - 1);
+                    break;
                 default:
-                    Task newTask = new Task(nextInput);
-                    taskList.add(newTask);
-                    printWithLines("added: " + newTask.toString() + "\n");
+                    taskList.addTask(new Task(nextInput));
+
             }
             nextInput = input.nextLine();
+            inputParts = nextInput.split(" ", 2);
+            inputPrefix = inputParts[0];
+            inputSuffix = inputParts.length == 1 ? "" : inputParts[1];
         }
 
     }
