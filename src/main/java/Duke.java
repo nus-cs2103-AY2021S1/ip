@@ -2,12 +2,18 @@ import java.util.Scanner;
 
 public class Duke {
 
+    private final Task task;
+
+    public Duke() {
+        task = new Task();
+    }
+
     public void greet() {
         System.out.println("Hello! I'm Duke.");
         System.out.println("What can I do for you?\n");
     }
 
-    public void echo() {
+    public void store() {
         boolean exit = false;
         Scanner sc = new Scanner(System.in);
         while (! exit) {
@@ -15,8 +21,11 @@ public class Duke {
             if (command.equals("bye")) {
                 exit = true;
                 sc.close();
+            } else if (command.equals("list")) {
+                System.out.println(task);
             } else {
-                System.out.println(command + "\n");
+                task.addTasks(command);
+                System.out.println("added: " + command + "\n");
             }
         }
     }
@@ -28,7 +37,7 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.greet();
-        duke.echo();
+        duke.store();
         duke.exit();
     }
 }
