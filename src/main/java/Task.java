@@ -1,5 +1,5 @@
 public class Task {
-    private String item;
+    protected String item;
     private boolean done;
     public Task(String item){
         this.item = item;
