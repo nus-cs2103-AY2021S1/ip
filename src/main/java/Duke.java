@@ -30,6 +30,7 @@ public class Duke {
                 case LIST_STRING:
                     System.out.println(processString(getListString()));
                 default:
+                    stringRecords.add(userInput);
                     System.out.println(processString(createAddedString(userInput)));
 
 
