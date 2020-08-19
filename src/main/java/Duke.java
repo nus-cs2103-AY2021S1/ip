@@ -23,7 +23,7 @@ public class Duke {
 
         @Override
         public String toString() {
-            return name;
+            return this.name;
         }
 
     }
