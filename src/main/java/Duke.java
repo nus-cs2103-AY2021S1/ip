@@ -13,11 +13,24 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Split the phrase into each individual word
+     * @param command
+     * @return String array contains each individual word
+     *
+     *
+     */
     public static String[] split(String command) {
         String[] array = command.split(" ");
         return array;
     }
 
+    /**
+     * Join each word in the input to form a proper phrase
+     * @param stringArray String array contains the splitted word
+     * @param index Position to start joining the words
+     * @return Phrase without the command word
+     */
     public static String join(String[] stringArray, int index) {
         String result = "";
         for (int i = index; i < stringArray.length; i++) {
@@ -26,26 +39,101 @@ public class Duke {
         return result;
     }
 
+    /**
+     * Find the time given in the input
+     * @param task Input from user
+     * @param keyword Keyword to specify whether it is deadline or event
+     * @return Time specified in the input
+     * @throws EmptyDateException
+     */
+    public static String findTime(String task, String keyword) throws EmptyDateException {
+        String[] array = task.split("/" + keyword);
+        if (array.length < 2) {
+            throw new EmptyDateException();
+        } else {
+            return array[1];
+        }
+    }
+
+    /**
+     * Parse the description of the input
+     * @param task Input
+     * @return Description of the task in String
+     * @throws EmptyTaskException
+     */
+    public static String findDescription(String task) throws EmptyTaskException {
+        String[] array = task.split("/");
+        if (array[0].equals("")) {
+            throw new EmptyTaskException();
+        } else {
+            return array[0];
+        }
+    }
+
+    /**
+     * Driver function
+     */
     public static void run() {
         TaskList taskList = new TaskList();
         Scanner scanner = new Scanner(System.in);
         String currentWord = scanner.nextLine();
         while (!currentWord.equals("bye")) {
-            if (currentWord.equals("list")) {
-                System.out.println(taskList.toString());
-            } else {
-                String command = split(currentWord)[0];
-                if (command.equals("done")) {
-                    int taskNumber = Integer.parseInt(join(split(currentWord), 1));
-                    taskList.getTask(taskNumber - 1).markAsDone();
+            try {
+                if (currentWord.equals("list")) {
+                    System.out.println(taskList.toString());
                 } else {
-                    String description = join(split(currentWord), 0);
-                    Task newTask = new Task(description);
-                    taskList.addList(newTask);
+                    String command = split(currentWord)[0];
+                    if (command.equals("done")) {
+                        String indexText = join(split(currentWord), 1);
+                        if (indexText.equals("")) {
+                            throw new InvalidIndexException();
+                        } else {
+                            int taskNumber = Integer.parseInt(indexText);
+                            taskList.getTask(taskNumber - 1).markAsDone();
+                        }
+                    } else if (command.equals("delete")) {
+                        String indexText = join(split(currentWord), 1);
+                        if (indexText.equals("")) {
+                            throw new InvalidIndexException();
+                        } else {
+                            int taskNumber = Integer.parseInt(indexText);
+                            taskList.deleteTask(taskNumber - 1);
+                        }
+
+                    } else if (command.equals("todo")) {
+                        String description = findDescription(join(split(currentWord), 1));
+                        Task newTask = new ToDo(description);
+                        taskList.addTask(newTask);
+
+                    } else if (command.equals("deadline")) {
+                        String detail = join(split(currentWord), 1);
+                        String description = findDescription(detail);
+                        String deadlineTime = findTime(detail, "by");
+                        Task newTask = new DeadLine(description, deadlineTime);
+                        taskList.addTask(newTask);
+                    } else if (command.equals("event")) {
+                        String detail = join(split(currentWord), 1);
+                        String description = findDescription(detail);
+                        String time = findTime(detail, "at");
+                        Task newTask = new Event(description, time);
+                        taskList.addTask(newTask);
+                    } else {
+                        throw new InvalidCommandException();
+                    }
                 }
+
+            } catch (InvalidIndexException err) {
+                System.out.println(err.toString());
+            } catch (EmptyTaskException err) {
+                System.out.println(err.toString());
+            } catch (EmptyDateException err) {
+                System.out.println(err.toString());
+            } catch (InvalidCommandException err) {
+                System.out.println(err.toString());
             }
             currentWord = scanner.nextLine();
         }
+
         System.out.println("Bye. Hope to see you again soon!");
     }
 
@@ -56,7 +144,7 @@ public class Duke {
 //                + "| |_| | |_| |   <  __/\n"
 //                + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("Hola! Duke reporting for duty\nWhat can I do for you sir?");
         run();
     }
 }

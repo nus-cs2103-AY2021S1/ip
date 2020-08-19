@@ -1,4 +1,10 @@
 package main.java;
 
-public class EmptyTaskException {
+public class EmptyTaskException extends DukeException {
+    private static String message = "OOPS!!! The description of a task cannot be empty.";
+
+    @Override
+    public String toString() {
+        return message;
+    }
 }

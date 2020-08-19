@@ -1,8 +1,8 @@
 package main.java;
 
 public class Task {
-    private String description;
-    private boolean isDone;
+    protected String description;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -20,6 +20,20 @@ public class Task {
 
     public String getDescription() {
         return this.description;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else {
+            if (obj instanceof Task) {
+                Task otherTask = (Task) obj;
+                return otherTask.getDescription().equals(this.description);
+            } else {
+                return false;
+            }
+        }
     }
 
     @Override
