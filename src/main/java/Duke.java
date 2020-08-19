@@ -1,4 +1,5 @@
 import main.java.Deadline;
+import main.java.DukeException;
 import main.java.Event;
 import main.java.Task;
 
@@ -7,11 +8,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static class DukeException extends Exception{
-        public DukeException(String s){
-            super(s);
-        }
-    }
+
     public static void main(String[] args) throws DukeException {
         ArrayList<Task> arrList= new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
