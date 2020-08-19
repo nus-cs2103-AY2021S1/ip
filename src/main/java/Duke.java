@@ -26,23 +26,31 @@ public class Duke {
 
         // add command entered by the user to the list
         ArrayList<Task> list = new ArrayList<>();
+        String inputCommand;
         String[] command;
+        int ptr;
         Scanner sc = new Scanner(System.in);
         while(true){
-            command = sc.nextLine().split(" ");
-            if(command.length <= 0){
+            inputCommand = sc.nextLine();
+            command = inputCommand.split(" ");
+            ptr = 0;
+            while(command[ptr].equals("")) ptr++;
+
+            // if the user input is empty, continue the loop
+            if(command.length <= 0 || inputCommand.equals("")){
                 continue;
             }
-            if(command[0].equals("bye")){
+
+            if(command[ptr].equals("bye")){
                 break;
             }
-            else if(command[0].equals("list")){
+            else if(command[ptr].equals("list")){
                 System.out.println("____________________________________________________________");
                 printList(list);
                 System.out.println("____________________________________________________________");
             }
-            else if(command[0].equals("done")){
-                int taskNumber = Integer.parseInt(command[1]);
+            else if(command[ptr].equals("done")){
+                int taskNumber = Integer.parseInt(command[ptr + 1]);
                 if(taskNumber > list.size()){
                     System.out.println("no such task: task" + taskNumber + " as you only have " + list.size() + " in total");
                 }
@@ -54,9 +62,9 @@ public class Duke {
                 }
             }
             else{
-                list.add(new Task(command[0]));
+                list.add(new Task(inputCommand));
                 System.out.println("____________________________________________________________\n" +
-                               "added: " + command[0] +
+                               "added: " + inputCommand +
                                "\n____________________________________________________________");
             }
         }
