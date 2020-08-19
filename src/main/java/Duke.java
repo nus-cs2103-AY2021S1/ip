@@ -53,7 +53,7 @@ public class Duke {
             } else if (keyWord.equals("event")){
                 addEvent(str);
             } else if(keyWord.equals("done")) {
-                completeTask(str);
+                addCompleteTask(str);
             } else {
                 try {
                     throw new DukeException("☹ OOPS!!! wait..... I don't understand you order my sir.");
@@ -111,7 +111,7 @@ public class Duke {
         }
     }
 
-    public void completeTask(String str) {
+    public void addCompleteTask(String str) {
         try {
             if (str.trim().length() == 4) {
                 throw new DukeException("☹ OOPS!!! Check done formatting, include which task to complete.");
@@ -125,7 +125,6 @@ public class Duke {
         }
     }
 
-
     public void completeTask(int index) {
         list.get(index-1).markAsDone();
         saySomthing("Nice! I've marked this task as done: \n" + list.get(index-1).toString());
@@ -135,6 +134,7 @@ public class Duke {
         list.add(task);
         saySomthing("Got it. I've added this task: \n" + task.toString() + "\n" + String.format("Now you have %d tasks in the list.", list.size()));
     }
+
     public void showList() {
         String print = "";
         for (int i = 0; i < list.size(); i++) {
@@ -146,6 +146,7 @@ public class Duke {
         }
         saySomthing(print);
     }
+
     public static void main(String[] args) {
         Duke bot = new Duke();
         bot.run();
