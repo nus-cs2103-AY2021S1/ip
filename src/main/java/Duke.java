@@ -29,9 +29,56 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done: \n" +
                         lst.get(Integer.parseInt(strArr[1]) - 1).toString());
             } else {
-                Task task = new Task(str);
-                lst.add(task);
-                System.out.println("added: " + task.toString());
+                if (strArr[0].equals("todo")) {
+                    Task task = new Todo(str);
+                    lst.add(task);
+                    System.out.println("Got it. I've added this task:\n" + task.toString() + "\n" +
+                            "Now you have " + lst.size() + " tasks in the list.");
+                } else if (strArr[0].equals("deadline")) {
+                    String sd = "";
+                    String sb = "";
+                    boolean b = true;
+                    for (int i = 1; i < strArr.length - 1; i++) {
+                        if (strArr[i].equals("/by")) {
+                            b = false;
+                        }
+                        if (b) {
+                            sd += strArr[i] + " ";
+                        } else {
+                            if(i == strArr.length - 2) {
+                                sb = sb + strArr[i + 1];
+                            } else {
+                                sb = sb + strArr[i + 1] + " ";
+                            }
+                        }
+                    }
+                    Task task = new Deadline(sd, sb);
+                    lst.add(task);
+                    System.out.println("Got it. I've added this task:\n" + task.toString() + "\n" +
+                            "Now you have " + lst.size() + " tasks in the list.");
+                } else if (strArr[0].equals("event")) {
+                    String sd = "";
+                    String sa = "";
+                    boolean b = true;
+                    for (int i = 1; i < strArr.length - 1; i++) {
+                        if (strArr[i].equals("/at")) {
+                            b = false;
+                        }
+                        if (b) {
+                            sd += strArr[i] + " ";
+                        } else {
+                            if(i == strArr.length - 2) {
+                                sa = sa + strArr[i + 1];
+                            } else {
+                                sa = sa + strArr[i + 1] + " ";
+                            }
+                        }
+                    }
+                    Task task = new Event(sd, sa);
+                    lst.add(task);
+                    System.out.println("Got it. I've added this task:\n" + task.toString() + "\n" +
+                            "Now you have " + lst.size() + " tasks in the list.");
+                }
             }
         }
         sc.close();
