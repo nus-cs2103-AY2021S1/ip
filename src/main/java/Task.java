@@ -15,9 +15,9 @@ public class Task {
     @Override
     public String toString(){
         if (done) {
-            return String.format ("[\u2713] %s", this.task);
+            return String.format ("[DONE] %s", this.task);
         } else {
-            return String.format ("[\u2718] %s", this.task);
+            return String.format ("[NOT DONE] %s", this.task);
         }
     }
 }

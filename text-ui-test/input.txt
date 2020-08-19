@@ -1,0 +1,13 @@
+todo sleep
+todo
+deadline project /by today
+event dog
+event eat ramen /at Thursday 7pm
+list
+done 1
+done 3
+list
+delete 2
+list
+blah
+bye
