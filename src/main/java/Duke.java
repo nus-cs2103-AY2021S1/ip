@@ -10,7 +10,51 @@ public class Duke {
         List<Task> taskList = new ArrayList<>();
 
         String input = sc.nextLine();
-        while (!input.equals("bye")) {
+        while (true) {
+            Scanner inputSc = new Scanner(input);
+            String task = inputSc.next();
+            switch (task) {
+            case "bye":
+                System.out.println("*You take your leave.*");
+                return;
+            case "list":
+                System.out.println("Here's the extent of our list so far:");
+                for (int i = 0; i < taskList.size(); i++) {
+                    System.out.println((i + 1) + ". " + taskList.get(i));
+                }
+                break;
+            case "done":
+                try {
+                    int taskIndex = inputSc.nextInt();
+                    Task markedTask = taskList.get(taskIndex - 1); // shown list is base 1, implemented list is base 0
+                    markedTask.markDone();
+                    System.out.println("Right. This task is now marked as done:" + markedTask);
+                } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                    System.out.println("Hmm? Please mention \"done\" followed by the number of the task we're marking as done.");
+                }
+                break;
+            case "todo":
+                Todo newTodo = new Todo(inputSc.nextLine().trim());
+                taskList.add(newTodo);
+                System.out.println("Fine. I added the following to the list: " + newTodo);
+                break;
+            case "deadline":
+                String[] nameAndDeadline = inputSc.nextLine().trim().split(" /by ");
+                Deadline newDeadline = new Deadline(nameAndDeadline[0], nameAndDeadline[1]);
+                taskList.add(newDeadline);
+                System.out.println("Fine. I added the following to the list: " + newDeadline);
+                break;
+            case "event":
+                String[] nameAndEvent = inputSc.nextLine().trim().split(" /at ");
+                Event newEvent = new Event(nameAndEvent[0], nameAndEvent[1]);
+                taskList.add(newEvent);
+                System.out.println("Fine. I added the following to the list: " + newEvent);
+                break;
+            default:
+                System.out.println("What's that? Please mention one of \"list\", \"done\", \"todo\", \"deadline\", \"event\", or \"bye\".");
+
+            }
+            /*
             if (input.equals("list")) {
                 System.out.println("Here's the extent of our list so far:");
                 for (int i = 0; i < taskList.size(); i++) {
@@ -25,14 +69,13 @@ public class Duke {
                 } catch (IndexOutOfBoundsException | NumberFormatException e) {
                     System.out.println("Hmm? Please mention \"done\" followed by the number of the task we're marking as done.");
                 }
-            } else {
+            } else if (input.startsWith("todo")) {
                 Task newTask = new Task(input);
                 taskList.add(newTask);
                 System.out.println("Fine. I added the following to the list: " + newTask);
-            }
+            }*/
+
             input = sc.nextLine();
         }
-
-        System.out.println("*You take your leave.*");
     }
 }
