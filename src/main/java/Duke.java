@@ -29,7 +29,7 @@ public class Duke {
         String input = s.nextLine();
         while (!input.equals("bye")) {
             try {
-                tasks.addTask(input);
+                tasks.processInput(input);
             } catch (DukeException e) {
                 System.out.println("\t___________________________________________________________________________");
                 System.out.println("\t " + e.getMessage());

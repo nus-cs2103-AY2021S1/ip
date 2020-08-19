@@ -50,7 +50,7 @@ public class Tasks {
         this.list = new ArrayList<>();
     }
 
-    void addTask(String input) throws DukeException {
+    void processInput(String input) throws DukeException {
         String[] inputArray = input.split(" ");
         input = input.strip();
         if (input.equals(Command.LIST.getCommand())) {
