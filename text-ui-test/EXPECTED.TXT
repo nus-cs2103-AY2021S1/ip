@@ -7,6 +7,13 @@ Hello from
 
 Hello! I'm Duke
 Let's have a conversation!
+Error: Unknown input
+Format: done {index}
+Format: done {index}
+Index Error: Invalid task index
+Format: delete {index}
+Format: delete {index}
+Index Error: Invalid task index
 Added: [T][✗]  readbook
 Added: [D][✗]  return book  (by: June 6th)
 Added: [E][✗]  project meeting  (at: Aug 6th 2-4pm)
@@ -31,4 +38,10 @@ Nice! I've marked this task as done:
 3. [E][✗]  project meeting  (at: Aug 6th 2-4pm)
 4. [T][✗]  join sports club
 5. [T][✓]  borrow book
+Noted. I've removed this task:
+    [E][✗]  project meeting  (at: Aug 6th 2-4pm)
+1. [T][✓]  readbook
+2. [D][✗]  return book  (by: June 6th)
+3. [T][✗]  join sports club
+4. [T][✓]  borrow book
 Bye. Hope to see you again soon!

@@ -1,3 +1,10 @@
+hello
+done
+done bro
+done 99
+delete
+delete bro
+delete 99
 todo readbook
 deadline return book /by June 6th
 event project meeting /at Aug 6th 2-4pm
@@ -7,5 +14,7 @@ list
 done 5
 list
 done 1
+list
+delete 3
 list
 bye

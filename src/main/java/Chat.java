@@ -22,17 +22,6 @@ public class Chat {
         }
     }
 
-    private void markDone(Task task) {
-        if (task.isCompleted()) {
-            System.out.println("The task was previously completed:");
-            System.out.println("    " + task.toString());
-        } else {
-            task.setCompleted(true);
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println("    " + task.toString());
-        }
-    }
-
     private boolean hasCharacter(String string) {
         return Pattern.compile("\\w").matcher(string).find();
     }
@@ -58,9 +47,26 @@ public class Chat {
             if (input.equals("done")) { // Mark task as completed
                 try {
                     int taskIndex = Integer.parseInt(scanner.nextLine().trim()) - 1;
-                    markDone(this.taskList.get(taskIndex));
+                    Task task = this.taskList.get(taskIndex);
+                    task.setCompleted(true);
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println("    " + task.toString());
                 } catch(NumberFormatException e) {
                     System.out.println("Format: done {index}");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Index Error: Invalid task index");
+                }
+                continue;
+            }
+
+            if (input.equals("delete")) { // Delete task
+                try {
+                    int taskIndex = Integer.parseInt(scanner.nextLine().trim()) - 1;
+                    Task task = this.taskList.remove(taskIndex);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println("    " + task.toString());
+                } catch(NumberFormatException e) {
+                    System.out.println("Format: delete {index}");
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Index Error: Invalid task index");
                 }
