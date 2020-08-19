@@ -1,7 +1,51 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+____________________________________________________________
+Hello, and welcome to my humble abode. 
+I'm supposed to help you but I'll be the judge of that. Anyway what do you want.
+____________________________________________________________
+____________________________________________________________
+One more task added for you sire
+[T][✗]  read book
+You have 1 tasks. Enjoy!
+____________________________________________________________
+____________________________________________________________
+One more task added for you sire
+[D][✗] return book (by: June 6th)
+You have 2 tasks. Enjoy!
+____________________________________________________________
+____________________________________________________________
+One more task added for you sire
+[E][✗] project meeting (at: Aug 6th 2-4pm)
+You have 3 tasks. Enjoy!
+____________________________________________________________
+____________________________________________________________
+One more task added for you sire
+[T][✗]  join sports club
+You have 4 tasks. Enjoy!
+____________________________________________________________
+____________________________________________________________
+One more task added for you sire
+[T][✗]  borrow book
+You have 5 tasks. Enjoy!
+____________________________________________________________
+____________________________________________________________
+Here are all your burdens
+1. [T][✗]  read book
+2. [D][✗] return book (by: June 6th)
+3. [E][✗] project meeting (at: Aug 6th 2-4pm)
+4. [T][✗]  join sports club
+5. [T][✗]  borrow book
+____________________________________________________________
+____________________________________________________________
+One more task added for you sire
+[D][✗] return book (by: Sunday)
+You have 6 tasks. Enjoy!
+____________________________________________________________
+____________________________________________________________
+One more task added for you sire
+[E][✗] project meeting (at: Mon 2-4pm)
+You have 7 tasks. Enjoy!
+____________________________________________________________
+____________________________________________________________
+Thank you for that utter waste of time.
+Can't wait to see you again...
+____________________________________________________________
