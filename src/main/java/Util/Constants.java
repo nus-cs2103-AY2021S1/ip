@@ -8,6 +8,8 @@ public class Constants {
             "What can I do for you?";
     public static final String DIVIDER = "____________________________";
 
-    public static final Pattern EXITPATTERN = Pattern.compile("^(b|B)(y|Y)(e|E)$");
+    public static final String EXITPATTERN = ("^(b|B)(y|Y)(e|E)$");
+
+    public static final String LISTPATTERN = ("^(l|L)(i|I)?(s|S)(t|T)?$");
 
 }
