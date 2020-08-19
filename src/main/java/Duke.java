@@ -4,18 +4,6 @@ import java.util.Scanner;
 public class Duke {
     private static ArrayList<Task> items;
 
-    private static final String DONE = "done";
-    private static final String DELETE = "delete";
-    private static final String BYE = "bye";
-    private static final String LIST = "list";
-
-    private static final String EVENT = "event";
-    private static final String DEADLINE = "deadline";
-    private static final String TODO = "todo";
-
-    private static final String EMPTY = "";
-
-
     public static void main(String[] args) {
         greeting();
         getUserInput();
@@ -32,18 +20,18 @@ public class Duke {
         while (!exit) {
             userInput = sc.nextLine();
             lineBreak();
-            if (userInput.equals(BYE)) {
+            if (userInput.equals(Instruction.BYE.getInstruction())) {
                 exit = true;
                 exit();
-            } else if (userInput.equals(LIST)) {
+            } else if (userInput.equals(Instruction.LIST.getInstruction())) {
                 displayList();
             } else {
                 String[] inputArr = userInput.split(" ");
                 try {
-                    if (inputArr[0].equals(DONE)) {
+                    if (inputArr[0].equals(Instruction.DONE.getInstruction())) {
                         int itemsIdx = Integer.parseInt(inputArr[1]) - 1;
                         markAsDone(itemsIdx);
-                    } else if (inputArr[0].equals(DELETE)) {
+                    } else if (inputArr[0].equals(Instruction.DELETE.getInstruction())) {
                         int itemsIdx = Integer.parseInt(inputArr[1]) - 1;
                         deleteItem(itemsIdx);
                     } else {
@@ -80,41 +68,37 @@ public class Duke {
 
         Task newTask;
 
-        switch (taskType) {
-            case TODO:
-                if (taskDescription.equals(EMPTY)) {
-                    throw new DukeException("Please key in a valid name for To Do");
-                }
-                newTask = new Todo(taskDescription);
-                break;
-            case DEADLINE:
-                String[] deadlineArr = taskDescription.split("/by", 2);
-                if (deadlineArr.length != 2) {
-                    throw new DukeException("Please key in a valid name and date for the Deadline");
-                }
-                String deadlineName = deadlineArr[0];
-                String deadlineDate = deadlineArr[1];
+        if (taskType.equals(Instruction.TODO.getInstruction())){
+            if (taskDescription.equals(Instruction.EMPTY.getInstruction())) {
+                throw new DukeException("Please key in a valid name for To Do");
+            }
+            newTask = new Todo(taskDescription);
+        } else if (taskType.equals(Instruction.DEADLINE.getInstruction())) {
+            String[] deadlineArr = taskDescription.split("/by", 2);
+            if (deadlineArr.length != 2) {
+                throw new DukeException("Please key in a valid name and date for the Deadline");
+            }
+            String deadlineName = deadlineArr[0];
+            String deadlineDate = deadlineArr[1];
 
-                if (deadlineDate.equals(EMPTY)) {
-                    throw new DukeException("Please key in a valid date for the Deadline");
-                }
-                newTask = new Deadline(deadlineName, deadlineDate);
-                break;
-            case EVENT:
-                String[] eventArr = taskDescription.split("/at", 2);
-                if (eventArr.length != 2) {
-                    throw new DukeException("Please key in a valid name and date for the Event");
-                }
-                String eventName = eventArr[0];
-                String eventDuration = eventArr[1];
+            if (deadlineDate.equals(Instruction.EMPTY.getInstruction())) {
+                throw new DukeException("Please key in a valid date for the Deadline");
+            }
+            newTask = new Deadline(deadlineName, deadlineDate);
+        } else if (taskType.equals(Instruction.EVENT.getInstruction())) {
+            String[] eventArr = taskDescription.split("/at", 2);
+            if (eventArr.length != 2) {
+                throw new DukeException("Please key in a valid name and date for the Event");
+            }
+            String eventName = eventArr[0];
+            String eventDuration = eventArr[1];
 
-                if (eventDuration.equals(EMPTY)) {
-                    throw new DukeException("Please key in a valid duration for the Event");
-                }
-                newTask = new Event(eventName, eventDuration);
-                break;
-            default:
-                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            if (eventDuration.equals(Instruction.EMPTY.getInstruction())) {
+                throw new DukeException("Please key in a valid duration for the Event");
+            }
+            newTask = new Event(eventName, eventDuration);
+        } else {
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
 
         items.add(newTask);
