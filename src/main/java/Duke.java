@@ -11,11 +11,12 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         Greet.main(null);
+        Echo echo = new Echo();
 
         while (sc.hasNextLine()) {
             String command = sc.nextLine();
-            Echo echo = new Echo(command);
-            String response = echo.getResponse();
+            echo.addCommand(command);
+            String response = echo.replyUser();
             System.out.println(response);
             if (echo.toExit()) {
                 break;
