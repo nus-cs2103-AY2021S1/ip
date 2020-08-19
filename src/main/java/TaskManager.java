@@ -18,14 +18,23 @@ public class TaskManager {
             try {
                 String intAtBack = input.substring(6, input.length());
                 checkInt = Integer.parseInt(intAtBack);
-                System.out.println(checkInt);
                 this.checkList(checkInt);
             }
             catch(Exception e) {
                 System.out.print(e);
             }
         }
-
+        else if (input.contains("remove")) {
+            int removeInt;
+            try {
+                String intAtBack = input.substring(7, input.length());
+                removeInt = Integer.parseInt(intAtBack);
+                this.removeFromList(removeInt);
+            }
+            catch(Exception e) {
+                System.out.print(e);
+            }
+        }
         else if (input.contains("todo")) {
             if(checkEmpty(input, "todo")) {
                 throw new DukeException("Much error! You have to describe your mission!");
@@ -123,6 +132,14 @@ public class TaskManager {
 
     public void addToList(Task task) {
         this.toDoList.add(task);
+    }
+
+    public void removeFromList(int taskId) {
+        Task tr = this.toDoList.get(taskId - 1);
+        System.out.println("Task successfully removed!");
+        System.out.println("-> " + tr.toString());
+        this.toDoList.remove(taskId - 1);
+
     }
 
     public void displayList() {
