@@ -37,12 +37,25 @@ public class Duke {
                         }
                     }
                     System.out.println(underscore);
-                } else if (line.indexOf("done") == 0) {
+                } else if (line.indexOf("done") == 0 || line.indexOf("delete") == 0) {
                     int number = Character.getNumericValue(line.charAt(line.length() - 1));
-                    todo.get(number - 1).checkOff();
-                    System.out.println(underscore + "Nice! I've marked this task as done: \n" +
-                            todo.get(number - 1) + "\n" + underscore
-                    );
+                    if(line.indexOf("done") == 0) {
+                        todo.get(number - 1).checkOff();
+                        System.out.println(underscore + "Nice! I've marked this task as done: \n" +
+                                todo.get(number - 1) + "\n" + underscore
+                        );
+                    } else {
+                        if (number - 1 > todo.size() || number - 1 < 0 || todo.size() == 0){
+                            throw new DukeException("Invalid task number");
+                        } else {
+                            int size = todo.size() - 1;
+                            System.out.println(underscore + "Noted. I've removed this task: \n"
+                                + todo.get(number - 1) + "\n" + "Now you have " + size + " task in the list \n"
+                                + underscore
+                            );
+                            todo.remove(number - 1);
+                        }
+                    }
                 } else {
                     if (line.indexOf("todo") == 0) {
                         String[] splits = line.split("todo");
@@ -85,8 +98,6 @@ public class Duke {
                         throw new DukeException("I'm sorry i don't know what you mean :(");
                     }
                 }
-//            } catch (ArrayIndexOutOfBoundsException err) {
-//                System.out.println("Task cannot be empty");
             } catch (DukeInvalidDateException err){
                 System.out.println(err.getMessage());
             } catch (DukeInvalidDayException err) {
