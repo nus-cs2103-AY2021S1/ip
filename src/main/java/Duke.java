@@ -75,6 +75,9 @@ public class Duke {
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid number input!");
         }
+        if (taskNumber > taskRecords.size()) {
+            throw new DukeException("No such task!");
+        }
         Task taskDone = taskRecords.get(taskNumber - 1);
         taskDone.markDone();
         return processString(MARKED_MESSAGE + '\n' + PRESPACING + "   " + taskDone);
@@ -93,7 +96,7 @@ public class Duke {
 
     protected static String addTask(String taskDescription) {
         String[] details = taskDescription.split(" ", 2);
-        if (details.length == 1) {
+        if (details.length == 1 && validTaskTypes.contains(details[0])) {
             throw new DukeException("The description of a " + details[0] + " cannot be empty.");
         }
         Task addedTask;
