@@ -196,8 +196,8 @@ public class Chatbot {
                     + " a dEaDlInE MuSt bE FoLlOwEd bY A DeScRiPtIoN AnD TiMe.");
         }
 
-        String description = "";
-        String by = "";
+        String description;
+        String by;
         int index = findIndex(args, "/by");
 
         if (index != -1) {
@@ -217,8 +217,8 @@ public class Chatbot {
                     + " aN EvEnT MuSt bE FoLlOwEd bY A DeScRiPtIoN AnD TiMe.");
         }
 
-        String description = "";
-        String at = "";
+        String description;
+        String at;
         int index = findIndex(args, "/at");
 
         if (index != -1) {
