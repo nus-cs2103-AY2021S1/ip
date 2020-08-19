@@ -76,7 +76,8 @@ public class IPbot {
      */
     private static String addTasks(Task toAdd) {
         tasks.add(toAdd);
-        return "added: " + toAdd;
+        return String.format("added: %s\nThere are now %d tasks.",
+                toAdd.toString(), tasks.size());
     }
 
     /**
