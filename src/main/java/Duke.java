@@ -78,7 +78,7 @@ public class Duke {
             switch (input.toLowerCase().split(" ")[0]) {
                 case "deadline":
                     //System.out.println("Deadline");
-                    inputSplit = input.split("/by");
+                    inputSplit = input.split(" /by ");
                     String by = inputSplit[1];
                     description = inputSplit[0].substring(8);
                     t = new Deadline(description, by);
@@ -92,7 +92,7 @@ public class Duke {
                     break;
                 case "event":
                     //System.out.println("Event");
-                    inputSplit = input.split("/at");
+                    inputSplit = input.split(" /at ");
                     String at = inputSplit[1];
                     description = inputSplit[0].substring(5);
                     t = new Event(description, at);
