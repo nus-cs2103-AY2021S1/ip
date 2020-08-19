@@ -38,6 +38,47 @@ public class Duke {
                                 currentTask.toString()+"\n"+
                         "_______________________________");
 
+            }else if(input.startsWith("todo")){
+                String task = input.substring(5);
+                ToDo currentTask = new ToDo(task);
+                myList.add(currentTask);
+
+                System.out.println(
+                                        "_______________________________\n" +
+                                        "Got it. I've added this task:\n"+
+                                        currentTask.toString()+"\n"+
+                                        "Now you have "+ myList.size() +" tasks in the list.\n"+
+                                        "_______________________________");
+
+
+            }else if(input.startsWith("deadline")){
+
+                String task = input.substring(9 ,input.indexOf("/"));
+                String by = input.substring(input.indexOf("/")+4);
+                Deadline currentTask = new Deadline(task, by);
+                myList.add(currentTask);
+
+                System.out.println(
+                                "_______________________________\n" +
+                                "Got it. I've added this task:\n"+
+                                currentTask.toString()+"\n"+
+                                "Now you have "+ myList.size() +" tasks in the list.\n"+
+                                "_______________________________");
+
+
+            }else if(input.startsWith("event")){
+                String task = input.substring(6 ,input.indexOf("/"));
+                String by = input.substring(input.indexOf("/")+4);
+                Event currentTask = new Event(task, by);
+                myList.add(currentTask);
+
+
+                System.out.println(
+                                "_______________________________\n" +
+                                "Got it. I've added this task:\n"+
+                                currentTask.toString()+"\n"+
+                                "Now you have "+ myList.size() +" tasks in the list.\n"+
+                                "_______________________________");
 
             }else {
                 System.out.println(
