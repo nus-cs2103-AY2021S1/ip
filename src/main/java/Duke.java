@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Duke {
 
     private final List<Task> list;
-    public static final String divider = "----------------------------------------";
+    public static final String DIVIDER = "----------------------------------------";
 
     public Duke() {
         this.list = new ArrayList<>();
@@ -38,9 +38,9 @@ public class Duke {
                 "  \n  I am a task manager bot that will keep track of all your tasks. \n" +
                 "  \n  To view a list of all my commands, input '/commands' \n" +
                 "  \n  Now that you are familiar with the commands, how may I assist you today?";
-        System.out.println(Duke.divider);
+        System.out.println(Duke.DIVIDER);
         System.out.println(greeting);
-        System.out.println(Duke.divider);
+        System.out.println(Duke.DIVIDER);
     }
 
     public void execute() {
@@ -50,7 +50,7 @@ public class Duke {
 
         while (!message.equals("bye")) {
             try {
-                System.out.println(Duke.divider);
+                System.out.println(Duke.DIVIDER);
                 if (message.equals("/commands")) {
                     commands();
                 } else if (message.isEmpty()) {
@@ -58,18 +58,20 @@ public class Duke {
                 } else if (message.equals("list")) {
                     retrieveList();
                 } else if (function.equals("done")) {
-                    completeTask(message);
+                    int index = Integer.parseInt(message.split(" ")[1]);
+                    completeTask(index);
                 } else if (function.equals("todo") || function.equals("deadline") || function.equals("event")){
                     createTask(message);
                 } else if (function.equals("delete")) {
-                    deleteTask(message);
+                    int index = Integer.parseInt(message.split(" ")[1]);
+                    deleteTask(index);
                 } else {
                     handleFailedFunction();
                 }
             } catch (DukeException ex) {
                 System.out.println(ex.getMessage());
             }
-            System.out.println(Duke.divider);
+            System.out.println(Duke.DIVIDER);
             message = sc.nextLine().trim();
             function = message.split(" ")[0];
         }
@@ -93,9 +95,8 @@ public class Duke {
         }
     }
 
-    public void completeTask(String message) throws InvalidTaskException, InvalidFunctionException {
+    public void completeTask(int index) throws InvalidTaskException, InvalidFunctionException {
         try {
-            int index = Integer.parseInt(message.split(" ")[1]);
             if (index > this.list.size()) {
                 String err = "Invalid Task! The task does not exist, try again.";
                 throw new InvalidTaskException(err);
@@ -115,14 +116,13 @@ public class Duke {
             String err = "No Task ID provided! Please input the ID of the task you wish to mark as completed.";
             throw new InvalidFunctionException(err);
         } catch (NumberFormatException ex) {
-            String err = "Your input does not meet the requirements. Input '/commands' to view a list of my commands. ";
+            String err = "Your input is not a recognised command. Input '/commands' to view a list of my commands. ";
             throw new InvalidFunctionException(err);
         }
     }
 
-    public void deleteTask(String message) throws InvalidTaskException, InvalidFunctionException {
+    public void deleteTask(int index) throws InvalidTaskException, InvalidFunctionException {
         try {
-            int index = Integer.parseInt(message.split(" ")[1]);
             if (index > this.list.size()) {
                 String err = "Invalid Task! The task does not exist, try again.";
                 throw new InvalidTaskException(err);
@@ -140,7 +140,7 @@ public class Duke {
             String err = "No Task ID provided! Please input the ID of the task you wish to delete.";
             throw new InvalidFunctionException(err);
         } catch (NumberFormatException ex) {
-            String err = "Your input does not meet the requirements. Input '/commands' to view a list of my commands. ";
+            String err = "Your input is not a recognised command. Input '/commands' to view a list of my commands. ";
             throw new InvalidFunctionException(err);
         }
     }
@@ -174,7 +174,7 @@ public class Duke {
                     System.out.println("\t" + toAdd);
                     System.out.println("  You have " + list.size() + " tasks in your list now.");
                 } else {
-                    String err = "Your todo task does not have the correct description format. \n" +
+                    String err = "Your todo task does not have a description. \n" +
                             "Type '/commands' to view the correct command for task creation! ";
                     throw new InvalidTaskException(err);
                 }
@@ -190,7 +190,7 @@ public class Duke {
                     System.out.println("\t" + toAdd);
                     System.out.println("  You have " + list.size() + " tasks in your list now.");
                 } else {
-                    String err = "Your deadline task does not have the correct description format. \n" +
+                    String err = "Your deadline task is missing a description. Please try again! \n" +
                             "Type '/commands' to view the correct command for task creation! ";
                     throw new InvalidTaskException(err);
                 }
@@ -206,14 +206,14 @@ public class Duke {
                     System.out.println("\t" + toAdd);
                     System.out.println("  You have " + list.size() + " tasks in your list now.");
                 } else {
-                    String err = "Your event task does not have the correct description format. \n" +
+                    String err = "Your event task is missing a description. Please try again! \n" +
                             "Type '/commands' to view the correct command for task creation! ";
                     throw new InvalidTaskException(err);
                 }
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
             String err = "Your task description is empty and/or does not follow the correct format. The task cannot be created. \n " +
-                    "Type '/commands' to view the correct command for task creation!";
+                    "Type '/commands' to view the correct command for task creation.";
             throw new InvalidTaskException(err);
         }
     }
