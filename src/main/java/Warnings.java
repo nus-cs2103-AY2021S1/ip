@@ -1,4 +1,4 @@
-public class Warnings extends Feedbacks{
+public class Warnings extends Feedbacks {
     public static void invalidDoneTaskIndex(int tasksSize) {
         String warningMsg = "################################################################"
                 + "\n [• ▂ •]What? "

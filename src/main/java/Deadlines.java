@@ -4,7 +4,7 @@ public class Deadlines extends Task {
     private String deadlineTime;
 
     public Deadlines(String taskTitle, String deadlineTime) {
-        super(taskTitle);
+        super(taskTitle, TaskTypes.DEADLINE);
         this.deadlineTime = deadlineTime;
     }
 
@@ -16,6 +16,6 @@ public class Deadlines extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by:" + deadlineTime + ")";
+        return super.toString() + " (by:" + deadlineTime + ")";
     }
 }

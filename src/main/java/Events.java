@@ -4,7 +4,7 @@ public class Events extends Task {
     private String eventTime;
 
     public Events(String taskTitle, String eventTime) {
-        super(taskTitle);
+        super(taskTitle, TaskTypes.EVENT);
         this.eventTime = eventTime;
     }
 
@@ -16,6 +16,6 @@ public class Events extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at:" + eventTime + ")";
+        return super.toString() + " (at:" + eventTime + ")";
     }
 }

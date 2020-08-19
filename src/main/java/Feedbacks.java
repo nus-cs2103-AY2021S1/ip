@@ -16,7 +16,7 @@ public class Feedbacks {
                 "\\ \\_______\\ \\__\\    \\ \\__\\ \\_______\\\n" +
                 "    \\|____________|\\|_______|\\|_______|\\|_______|\\|_______" +
                 "|\\|__|     \\|__|\\|_______|"
-                +"\n\n WELCOME to DukeBT!";
+                + "\n\n WELCOME to DukeBT!";
         System.out.println(logo);
     }
 
@@ -95,7 +95,7 @@ public class Feedbacks {
         System.out.println(outputMsg);
     }
 
-    public static void deleteTaskMsg(int index, int newSizeOfTasks,Task taskToDelete) {
+    public static void deleteTaskMsg(int index, int newSizeOfTasks, Task taskToDelete) {
         String outputMsg = "___________________________________________________________"
                 + "\n (ಠ‿↼)"
                 + "\n Noted. This task has been removed from your task list:"

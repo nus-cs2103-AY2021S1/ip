@@ -1,12 +1,14 @@
 import java.util.ArrayList;
 
 public class Task {
-    private String taskTitle;
-    private boolean isDone;
+    protected String taskTitle;
+    protected boolean isDone;
+    protected TaskTypes taskType;
 
-    public Task(String taskTitle) {
+    public Task(String taskTitle, TaskTypes taskType) {
         this.taskTitle = taskTitle;
         this.isDone = false;
+        this.taskType = taskType;
     }
 
     public void markAsDone() {
@@ -31,6 +33,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + getStatus() + "] " + taskTitle;
+        return "[" + this.taskType + "]" + "[" + getStatus() + "] " + taskTitle;
     }
 }
