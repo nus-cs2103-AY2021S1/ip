@@ -7,6 +7,9 @@ event some event without event time
 deadline submit assignment /by Friday
 deadline
 list
+delete 1
+delete abc
+delete 10
 todo eat lunch
 event project meeting /at 4pm
 list
@@ -14,5 +17,6 @@ some invalid command
 done 3
 done 2
 done 1
+delete 2
 list
 bye

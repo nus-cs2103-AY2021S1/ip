@@ -42,26 +42,40 @@ Here are the tasks in your list:
 4.[D][?] submit assignment (by: Friday)
 ____________________________________________________________
 ____________________________________________________________
+Noted. I've removed this task:
+  [T][?] wake up
+Now you have 3 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Please input a valid index.
+____________________________________________________________
+____________________________________________________________
+Please input a valid index.
+____________________________________________________________
+____________________________________________________________
 Got it. I've added this task: 
   [T][?] eat lunch
-Now you have 5 tasks in the list.
+Now you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task: 
   [E][?] project meeting (at: 4pm)
-Now you have 6 tasks in the list.
+Now you have 5 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1.[T][?] wake up
-2.[D][?] brush teeth (by: 10am)
-3.[E][?] online lecture (at: 10am-12pm)
-4.[D][?] submit assignment (by: Friday)
-5.[T][?] eat lunch
-6.[E][?] project meeting (at: 4pm)
+1.[D][?] brush teeth (by: 10am)
+2.[E][?] online lecture (at: 10am-12pm)
+3.[D][?] submit assignment (by: Friday)
+4.[T][?] eat lunch
+5.[E][?] project meeting (at: 4pm)
 ____________________________________________________________
 ____________________________________________________________
 I'm sorry, but I don't know what that means :-(
+____________________________________________________________
+____________________________________________________________
+Nice! I've marked this task as done
+  [D][?] submit assignment (by: Friday)
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done
@@ -72,17 +86,16 @@ Nice! I've marked this task as done
   [D][?] brush teeth (by: 10am)
 ____________________________________________________________
 ____________________________________________________________
-Nice! I've marked this task as done
-  [T][?] wake up
+Noted. I've removed this task:
+  [E][?] online lecture (at: 10am-12pm)
+Now you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1.[T][?] wake up
-2.[D][?] brush teeth (by: 10am)
-3.[E][?] online lecture (at: 10am-12pm)
-4.[D][?] submit assignment (by: Friday)
-5.[T][?] eat lunch
-6.[E][?] project meeting (at: 4pm)
+1.[D][?] brush teeth (by: 10am)
+2.[D][?] submit assignment (by: Friday)
+3.[T][?] eat lunch
+4.[E][?] project meeting (at: 4pm)
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!
