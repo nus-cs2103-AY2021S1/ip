@@ -109,6 +109,13 @@ public class Duke {
             printWithLines(prefix + newTask + "\n" + suffix);
         }
 
+        public void deleteTask(int index) {
+            Task task = taskList.get(index);
+            taskList.remove(index);
+            String prefix = "Very well! I shall delete this task:\n";
+            printWithLines(prefix + task + "\n");
+        }
+
         @Override
         public String toString() {
             StringBuilder list = new StringBuilder();
@@ -197,6 +204,9 @@ public class Duke {
                         break;
                     }
                 }
+            case "delete":
+                taskList.deleteTask(Integer.parseInt(inputSuffix) - 1);
+                break;
             default:
                 throw new DukeNoSuchInputException();
         }
