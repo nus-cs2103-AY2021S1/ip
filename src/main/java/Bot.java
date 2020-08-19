@@ -15,30 +15,50 @@ public class Bot {
 
     public void serve() {
         Scanner sc = new Scanner(System.in);
-        while (sc.hasNextLine()) {
-            String s = sc.nextLine();
-            String[] arr = s.split(" ");
-            String firstWord = arr[0];
-            if (firstWord.equals("bye")) {
-                return;
-            } else if (firstWord.equals("list")) {
-                returnListings(s);
-            } else if (firstWord.equals("done")) {
-                Integer value = Integer.valueOf(arr[1]);
-                doneListings(value);
-            } else if (firstWord.equals("todo")) {
-                String detail = getDetails(arr);
-                String[] details = new String[1];
-                details[0] = detail;
-                addListings("todo", details); //and type
-            } else if (firstWord.equals("deadline")) {
-                String[] details = getDetailsSpecial(arr, "/by");
-                addListings("deadline", details);
-            } else if (firstWord.equals("event")) {
-                String[] details = getDetailsSpecial(arr, "/at");
-                addListings("event", details);
-            }
 
+        while (sc.hasNextLine()) {
+            try {
+                String s = sc.nextLine();
+                String[] arr = s.split(" ");
+                String firstWord = arr[0];
+                if (firstWord.equals("bye")) {
+                    return;
+                } else if (firstWord.equals("list")) {
+                    returnListings(s);
+                } else if (firstWord.equals("done")) {
+                    Integer value = Integer.valueOf(arr[1]);
+                    doneListings(value);
+                } else if (firstWord.equals("todo")) {
+                    String detail = getDetails(arr);
+                    String[] details = new String[1];
+                    details[0] = detail;
+                    if (detail.isEmpty()) {
+                        throw new NoDescriptionException("todo");
+                    } else {
+                        addListings("todo", details);
+                    }
+                } else if (firstWord.equals("deadline")) {
+                    String[] details = getDetailsSpecial(arr, "/by");
+                    if (details[0] == null || details[1] == null){ //can be modified to do description AND time;
+                        throw new NoDescriptionException("deadline");
+                    } else{
+                        addListings("deadline", details);
+                    }
+                } else if (firstWord.equals("event")) {
+                    String[] details = getDetailsSpecial(arr, "/at");
+                    if (details[0] == null || details[1] == null) {
+                        throw new NoDescriptionException("event");
+                    } else {
+                        addListings("event", details);
+                    }
+                } else {
+                    throw new UndefinedException();
+                }
+            } catch (NoDescriptionException e) {
+              noDescriptionMessage(e.s);
+            } catch (UndefinedException e) {
+                undefinedExceptionMessage();
+            }
         }
     }
 
@@ -84,7 +104,7 @@ public class Bot {
     public void doneListings(Integer value) {
         Listing item = list.get(value - 1);
         item.complete(); //completes the list
-        String s = line + "\n" + "Nice! I've marked this task as done: \n" + item.doneness()
+        String s = line + "\n" + "     Nice! I've marked this task as done: \n" + "     "
                 + item.toString() + "\n" + line;
         System.out.println(s);
     }
@@ -116,6 +136,16 @@ public class Bot {
         }
         s[1] = s2;
         return s;
+    }
+
+    public void undefinedExceptionMessage() {
+        System.out.println(line + "\n" + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-("
+                + "\n" + line);
+    }
+
+    public void noDescriptionMessage(String s) {
+        System.out.println(line + "\n" + "     ☹ OOPS!!! The description of a " + s + " cannot be empty."
+                + "\n" + line);
     }
 
 }
