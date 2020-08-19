@@ -42,7 +42,7 @@ public class Duke {
                 System.out.println("\t\t" + newTask);
             }
             else{
-                System.out.println("I do not understand. D:");
+                System.out.println("\t" + "I do not understand. D:");
             }
         }
     }
