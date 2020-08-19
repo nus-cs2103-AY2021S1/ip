@@ -1,5 +1,6 @@
 package duke;
 
+import java.sql.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -50,6 +51,12 @@ public class Duke {
                 } catch (ArrayIndexOutOfBoundsException | DukeErrorException ex) {
                     System.out.println(ex);
                 }
+            } else if (splitted[0].equals("delete")){
+                try {
+                    this.deleteTask(Integer.parseInt(splitted[1]) - 1);
+                } catch (ArrayIndexOutOfBoundsException | DukeErrorException ex) {
+                    System.out.println(ex);
+                }
             } else if (splitted[0].equals("deadline")) {
                 try {
                     this.addDeadline(splitted[1]);
@@ -77,13 +84,29 @@ public class Duke {
         }
     }
 
+    private void deleteTask(int index) throws DukeErrorException {
+        if (index >= list.size() || index < 0) {
+            throw new DukeErrorException("Operation: delete " + (index + 1) + " fails ☹.");
+        }
+        Task deleted = list.remove(index);
+        buildChatSeparator();
+        System.out.println(" Noted. I've removed this task: ");
+        System.out.println(" " + deleted);
+        System.out.println(" Now you have " + (list.size() <= 1
+                ? list.size() + " task"
+                : list.size() + " tasks")
+                + " in the list.");
+        buildChatSeparator();
+    }
+
     public void processInput(String str) throws DukeErrorException {
         if (!str.equals("todo") &&
                 !str.equals("event") &&
                 !str.equals("deadline") &&
                 !str.equals("done") &&
                 !str.equals("list") &&
-                !str.equals("done")) {
+                !str.equals("done") &&
+                !str.equals("delete")) {
             throw new DukeErrorException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
@@ -113,14 +136,7 @@ public class Duke {
         String description = deadline[0].trim() + " (at: " + deadline[1].trim() + ")";
         Event curr = new Event(description, false);
         list.add(curr);
-        buildChatSeparator();
-        System.out.println(" Got it. I've added this task: ");
-        System.out.println(" " + curr);
-        System.out.println(" Now you have " + (list.size() == 1
-                ? list.size() + " task"
-                : list.size() + " tasks")
-                + " in the list.");
-        buildChatSeparator();
+        this.describeTask(curr);
     }
 
     private void addTodo(String str) throws InvalidTodoException {
@@ -131,13 +147,7 @@ public class Duke {
         Deadline curr = new Deadline(description, false);
         list.add(curr);
         buildChatSeparator();
-        System.out.println(" Got it. I've added this task: ");
-        System.out.println(" " + curr);
-        System.out.println(" Now you have " + (list.size() == 1
-                ? list.size() + " task"
-                : list.size() + " tasks")
-                + " in the list.");
-        buildChatSeparator();
+        this.describeTask(curr);
     }
 
     private void addDeadline(String str) throws InvalidDeadlineException {
@@ -154,6 +164,10 @@ public class Duke {
         String description = deadline[0].trim() + " (by: " + deadline[1].trim() + ")";
         Deadline curr = new Deadline(description, false);
         list.add(curr);
+        this.describeTask(curr);
+    }
+
+    public void describeTask(Task curr) {
         buildChatSeparator();
         System.out.println(" Got it. I've added this task: ");
         System.out.println(" " + curr);
