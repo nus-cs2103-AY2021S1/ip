@@ -16,4 +16,8 @@ public class Task {
         }
         return icon + " " + description;
     }
+
+    public void setCompleted() {
+        this.completed = true;
+    }
 }
