@@ -25,18 +25,17 @@ public class Duke {
         String input = sc.nextLine();
 
         while(!input.equals("bye")) {
-            if(input.equals("list")) {
-                int index = 1;
+            if (input.equals("list")) {
                 printDivider();
                 printOutput("Here are the tasks in your list:");
-                for(index = 0; index < taskList.size(); index++) {
+                for(int index = 0; index < taskList.size(); index++) {
                     printOutput((index + 1) + ": " + taskList.get(index));
                 }
                 printDivider();
             } else {
-                String[] inputs = input.split("\\s+");
-                if(inputs[0].equals("done")) {
-                    int index = Integer.valueOf(inputs[1]) - 1;
+                String[] inputs = input.split("\\s+", 2);
+                if (inputs[0].equals("done")) {
+                    int index = Integer.parseInt(inputs[1]) - 1;
                     taskList.set(index, taskList.get(index).completeTask());
                     printDivider();
                     printOutput("Nice! I've marked this task as done:");
@@ -44,10 +43,19 @@ public class Duke {
                     printDivider();
 
                 } else {
-                    Task task = new Task(input);
-                    taskList.add(task);
+                    if (inputs[0].equals("todo")){
+                        taskList.add(new Todo(inputs[1]));
+                    } else if (inputs[0].equals("deadline")) {
+                        String[] desc = inputs[1].split(" /by ", 2);
+                        taskList.add(new Deadline(desc[0], desc[1]));
+                    } else {
+                        String[] desc = inputs[1].split(" /at ", 2);
+                        taskList.add(new Event(desc[0], desc[1]));
+                    }
                     printDivider();
-                    printOutput("added: " + input);
+                    printOutput("Got it. I've added this task: ");
+                    printOutput(taskList.get(taskList.size() -1).toString());
+                    printOutput("Now you have " + taskList.size() + " tasks in the list.");
                     printDivider();
                 }
             }
