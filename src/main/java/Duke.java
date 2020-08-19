@@ -31,6 +31,7 @@ public class Duke {
                 } else if (keyWord.equals("help")) {
                     System.out.println("list: displays a sequential view of past inputs\n" +
                             "done <task number>: denotes a task as done by checking it\n" +
+                            "delete <task number>: deletes an existing task\n" +
                             "deadline <description> /by <date/time>: adds a deadline with desired date/time\n" +
                             "event <description> /at <date/time>: adds an event with desired date/time\n" +
                             "todo <description>: adds a todo task\n" +
@@ -66,6 +67,8 @@ public class Duke {
                         System.out.println("Duke added into your task list:\n" + userInput);
                         System.out.println("You now have " + pastInputs.size() + " task(s) in your list");
                     }
+                } else if (keyWord.equals("delete")) {
+                    pastInputs = deleteTask(pastInputs, splitInput);
                 } else {
                     String[] data = processInput(splitInput);
                     if (keyWord.equals("todo")) {
@@ -103,11 +106,12 @@ public class Duke {
         reservedKeyWords.add("help");
         reservedKeyWords.add("list");
         reservedKeyWords.add("done");
+        reservedKeyWords.add("delete");
         reservedKeyWords.add("deadline");
         reservedKeyWords.add("event");
         reservedKeyWords.add("todo");
         reservedKeyWords.add("bye");
-
+        
         if (!reservedKeyWords.contains(word)) {
             throw new InvalidKeyWordException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -116,15 +120,6 @@ public class Duke {
 
     //returns an array of description and date/time(if applicable)
     public static String[] processInput(String[] array) throws EmptyTaskException {
-        Set<String> reservedKeyWords = new HashSet<>();
-        reservedKeyWords.add("help");
-        reservedKeyWords.add("list");
-        reservedKeyWords.add("done");
-        reservedKeyWords.add("deadline");
-        reservedKeyWords.add("event");
-        reservedKeyWords.add("todo");
-        reservedKeyWords.add("bye");
-
         if (array.length <= 1) {
             if (array[0].equals("event")) {
                 throw new EmptyTaskException("☹ OOPS!!! The description of a event cannot be empty.");
@@ -188,4 +183,21 @@ public class Duke {
         return new String[] {};
     }
 
+    public static List<Task> deleteTask(List<Task> current, String[] input) throws DeleteFailureException {
+        try {
+            if (input.length == 2) {
+                List<Task> updated = current;
+                int taskNumber = Integer.parseInt(input[1]);
+                Task removedTask = current.get(taskNumber - 1);
+                current.remove(taskNumber - 1);
+                System.out.println("Successfully deleted the task!\n" + removedTask);
+                System.out.println("You now have " + updated.size() + " task(s) in your list");
+                return updated;
+            } else {
+                throw new DeleteFailureException("Duke says: Please try again with a valid format.");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new DeleteFailureException("Duke says: Please try again with a valid number.");
+        }
+    }
 }
