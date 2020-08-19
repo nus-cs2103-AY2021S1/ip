@@ -21,15 +21,13 @@ public class Duke {
         final String TODO_PHRASE = "todo";
         final String DEADLINE_PHRASE = "deadline";
         final String EVENT_PHRASE = "event";
+        final String DELETE_PHRASE = "delete";
 
         displayStart();
 
         String command = sc.next();
 
         while (!command.equals(TERMINATION_PHRASE)) {
-
-            Task newTask;
-            String taskName;
 
             try {
                 switch (command) {
@@ -43,51 +41,16 @@ public class Duke {
                         itemsList.get(index).doTask();
                         break;
                     case TODO_PHRASE:
-                        taskName = sc.nextLine();
-                        if (taskName.isBlank()) {
-                            throw DukeException.badToDo();
-                        }
-                        newTask = new ToDo(taskName);
-                        itemsList.add(newTask);
-                        displayAddTask(newTask);
+                        handleTodo();
                         break;
                     case DEADLINE_PHRASE:
-                        taskName = sc.nextLine();
-                        if (taskName.isBlank()) {
-                            throw DukeException.badDeadlineTask();
-                        }
-
-                        // String array whose first element is the task and second element is the deadline
-                        // substring(1) to remove the starting space
-                        String[] taskAndDeadline = taskName.substring(1).split(" /by ");
-
-                        if (taskAndDeadline[0].isBlank()) {
-                            throw DukeException.badDeadlineTask();
-                        } else if (taskAndDeadline.length < 2 || taskAndDeadline[1].isBlank()) {
-                            throw DukeException.badDeadlineDate();
-                        }
-
-                        newTask = new Deadline(taskAndDeadline[0], taskAndDeadline[1]);
-                        itemsList.add(newTask);
-                        displayAddTask(newTask);
+                        handleDeadline();
                         break;
                     case EVENT_PHRASE:
-                        taskName = sc.nextLine();
-                        if (taskName.isBlank()) {
-                            throw DukeException.badEventTask();
-                        }
-
-                        // String whose first element is task and second element is time of event
-                        String[] eventAndTime = taskName.substring(1).split(" /at ");
-                        if (eventAndTime[0].isBlank()) {
-                            throw DukeException.badEventTask();
-                        } else if (eventAndTime.length < 2 || eventAndTime[1].isBlank()) {
-                            throw DukeException.badEventDate();
-                        }
-
-                        newTask = new Event(eventAndTime[0], eventAndTime[1]);
-                        itemsList.add(newTask);
-                        displayAddTask(newTask);
+                        handleEvent();
+                        break;
+                    case DELETE_PHRASE:
+                        handleDelete();
                         break;
                     default:
                         throw DukeException.badCommand();
@@ -147,6 +110,67 @@ public class Duke {
         System.out.println(HORIZONTAL_RULE);
         System.out.println("One more task added for you sire");
         System.out.println(task);
+        System.out.println("You have " + itemsList.size() + " tasks. Enjoy!");
+        System.out.println(HORIZONTAL_RULE);
+    }
+
+    private static void handleTodo() throws DukeException {
+        String taskName = sc.nextLine();
+        if (taskName.isBlank()) {
+            throw DukeException.badToDo();
+        }
+        Task newTask = new ToDo(taskName);
+        itemsList.add(newTask);
+        displayAddTask(newTask);
+    }
+
+    private static void handleDeadline() throws DukeException {
+        String taskName = sc.nextLine();
+        if (taskName.isBlank()) {
+            throw DukeException.badDeadlineTask();
+        }
+
+        // String array whose first element is the task and second element is the deadline
+        // substring(1) to remove the starting space
+        String[] taskAndDeadline = taskName.substring(1).split(" /by ");
+
+        if (taskAndDeadline[0].isBlank()) {
+            throw DukeException.badDeadlineTask();
+        } else if (taskAndDeadline.length < 2 || taskAndDeadline[1].isBlank()) {
+            throw DukeException.badDeadlineDate();
+        }
+
+        Task newTask = new Deadline(taskAndDeadline[0], taskAndDeadline[1]);
+        itemsList.add(newTask);
+        displayAddTask(newTask);
+    }
+
+    private static void handleEvent() throws DukeException {
+        String taskName = sc.nextLine();
+        if (taskName.isBlank()) {
+            throw DukeException.badEventTask();
+        }
+
+        // String whose first element is task and second element is time of event
+        String[] eventAndTime = taskName.substring(1).split(" /at ");
+        if (eventAndTime[0].isBlank()) {
+            throw DukeException.badEventTask();
+        } else if (eventAndTime.length < 2 || eventAndTime[1].isBlank()) {
+            throw DukeException.badEventDate();
+        }
+
+        Task newTask = new Event(eventAndTime[0], eventAndTime[1]);
+        itemsList.add(newTask);
+        displayAddTask(newTask);
+    }
+
+    private static void handleDelete() {
+        int taskIndex = sc.nextInt() - 1;
+        Task removedTask = itemsList.remove(taskIndex);
+
+        System.out.println(HORIZONTAL_RULE);
+        System.out.println("Finished so soon? Fine I've removed the following task. Good day.");
+        System.out.println("    " + removedTask);
         System.out.println("You have " + itemsList.size() + " tasks. Enjoy!");
         System.out.println(HORIZONTAL_RULE);
     }
