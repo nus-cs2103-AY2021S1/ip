@@ -21,7 +21,7 @@
 
     ____________________________________________________________
      morning sir i have added this to the list sir:
-     [T][✗] test1
+     [T][ ] test1
      i counted all your number of tasks sir it is 1 sir
     ____________________________________________________________
 
@@ -32,20 +32,20 @@
 
     ____________________________________________________________
      morning sir i have added this to the list sir:
-     [D][✗] add tests (by: now)
+     [D][ ] add tests (by: now)
      i counted all your number of tasks sir it is 2 sir
     ____________________________________________________________
 
     ____________________________________________________________
      morning sir i have added this to the list sir:
-     [E][✗] commit changes (at: later)
+     [E][ ] commit changes (at: later)
      i counted all your number of tasks sir it is 3 sir
     ____________________________________________________________
 
     ____________________________________________________________
-     1. [T][✗] test1
-     2. [D][✗] add tests (by: now)
-     3. [E][✗] commit changes (at: later)
+     1. [T][ ] test1
+     2. [D][ ] add tests (by: now)
+     3. [E][ ] commit changes (at: later)
      
     ____________________________________________________________
 
@@ -56,44 +56,44 @@
 
     ____________________________________________________________
      morning sir i have added this to the list sir:
-     [D][✗] do tasks (by: now)
+     [D][ ] do tasks (by: now)
      i counted all your number of tasks sir it is 4 sir
     ____________________________________________________________
 
     ____________________________________________________________
      afternoon sir i have mark this task done sir:
-       [T][✓] test1
+       [T][X] test1
     ____________________________________________________________
 
     ____________________________________________________________
      afternoon sir i have mark this task done sir:
-       [E][✓] commit changes (at: later)
+       [E][X] commit changes (at: later)
     ____________________________________________________________
 
     ____________________________________________________________
-     1. [T][✓] test1
-     2. [D][✗] add tests (by: now)
-     3. [E][✓] commit changes (at: later)
-     4. [D][✗] do tasks (by: now)
+     1. [T][X] test1
+     2. [D][ ] add tests (by: now)
+     3. [E][X] commit changes (at: later)
+     4. [D][ ] do tasks (by: now)
      
     ____________________________________________________________
 
     ____________________________________________________________
      afternoon sir i have mark this task done sir:
-       [D][✓] do tasks (by: now)
+       [D][X] do tasks (by: now)
     ____________________________________________________________
 
     ____________________________________________________________
-     1. [T][✓] test1
-     2. [D][✗] add tests (by: now)
-     3. [E][✓] commit changes (at: later)
-     4. [D][✓] do tasks (by: now)
+     1. [T][X] test1
+     2. [D][ ] add tests (by: now)
+     3. [E][X] commit changes (at: later)
+     4. [D][X] do tasks (by: now)
      
     ____________________________________________________________
 
     ____________________________________________________________
      sir this task has been remove sir:
-       [E][✓] commit changes (at: later)
+       [E][X] commit changes (at: later)
     ____________________________________________________________
 
     ____________________________________________________________

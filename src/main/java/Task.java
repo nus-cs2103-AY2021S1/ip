@@ -11,7 +11,7 @@ public abstract class Task {
     }
     @Override
     public String toString() {
-        String checkMark = this.isDone ? "✓" : "✗";
+        String checkMark = this.isDone ? "X" : " ";
         return squareBox(this.getTaskIdentifier())
                 + squareBox(checkMark)
                 + " "
