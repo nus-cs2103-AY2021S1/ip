@@ -18,7 +18,7 @@ public class Duke {
 
     public static void printPart(String str) {
         System.out.println("\n" + "===================================================");
-        System.out.println(str + "");
+        System.out.println(str);
         System.out.println("===================================================" + "\n");
     }
 }
