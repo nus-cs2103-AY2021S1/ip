@@ -18,14 +18,32 @@ public class Duke {
                 doneTask(inputArr);
                 break;
             case "deadline":
-                addTask("deadline", inputArr);
+                try {
+                    addTask("deadline", inputArr);
+                } catch (DukeException e) {
+                    String message = "Sorry!! Deadline is missing description or date/time.";
+                    System.out.println(wrapMessage(message));
+                }
                 break;
             case "event":
-                addTask("event", inputArr);
+                try {
+                    addTask("event", inputArr);
+                } catch (DukeException e) {
+                    String message = "Sorry!! Event is missing description or date/time.";
+                    System.out.println(wrapMessage(message));
+                }
                 break;
             case "todo":
-                addTask("todo", inputArr);
+                try {
+                    addTask("todo", inputArr);
+                } catch (DukeException e) {
+                    String message = "Sorry!! The description of a todo cannot be empty.";
+                    System.out.println(wrapMessage(message));
+                }
                 break;
+            default:
+                String message = "Sorry I dont understand!! Please give a proper command.";
+                System.out.println(wrapMessage(message));
             }
             inputArr = getInputArr();
             command = inputArr[0];
@@ -61,24 +79,28 @@ public class Duke {
         System.out.println(wrapMessage(message));
     }
 
-    private static void addTask(String type, String[] inputArr) {
+    private static void addTask(String type, String[] inputArr) throws DukeException {
         String dateTime = "";
+        String desc = "";
         Task task;
 
-        String desc =  getTaskDescription(inputArr);
-
-        if (type.equals("deadline") || type.equals("event")) {
-            dateTime = getTaskTimeDate(inputArr);
+        if (inputArr.length < 2) {
+            throw new DukeException();
         }
 
         switch (type) {
         case "deadline":
+            desc =  getTaskDescription(inputArr);
+            dateTime = getTaskTimeDate(inputArr);
             task = new Deadline(desc, dateTime);
             break;
         case "event":
+            desc =  getTaskDescription(inputArr);
+            dateTime = getTaskTimeDate(inputArr);
             task = new Event(desc, dateTime);
             break;
         case "todo":
+            desc =  getTaskDescription(inputArr);
             task = new Todo(desc);
             break;
         default:
