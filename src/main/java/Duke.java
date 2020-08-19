@@ -1,7 +1,6 @@
 import Util.Constants;
-import Util.DukeCommandMatcher;
-import Util.UtilFunction;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 
@@ -12,9 +11,13 @@ public class Duke {
         while(scanner.hasNextLine()){
             String command = scanner.nextLine();
             System.out.println(Constants.DIVIDER);
-            dukeCommandMatcher.matchCommand(command);
+            String response = dukeCommandMatcher.matchCommand(command);
+            if(Objects.equals(response, "EXIT")){
+                break;
+            }
             System.out.println(Constants.DIVIDER);
         }
+        scanner.close();
     }
 
     private static void launchDuke() {

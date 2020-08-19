@@ -12,4 +12,6 @@ public class Constants {
 
     public static final String LISTPATTERN = ("^(l|L)(i|I)?(s|S)(t|T)?$");
 
+    public static final String DONEPATTERN = ("^(d|D)(o|O)(n|N)(e|E)$");
+
 }
