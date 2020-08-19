@@ -1,6 +1,43 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
+
+    private ArrayList<String> listOfTextEntered;
+
+    Duke() {
+        this.listOfTextEntered = new ArrayList<>(100);
+    }
+
+    // store user input and respond to different input
+    public void addAndRespond() {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLine()) {
+            String instruction = sc.nextLine();
+            if (instruction.equals("list")) {
+                String msgForList = "    ____________________________________________________________\n";
+                for (int i = 0; i < listOfTextEntered.size(); i++) {
+                    msgForList += "    " + (i + 1) + ". " + listOfTextEntered.get(i) + "\n";
+                }
+                msgForList += "    ____________________________________________________________\n";
+                System.out.println(msgForList);
+            } else if (instruction.equals("bye")) {
+                String msgForBye = "    ____________________________________________________________\n"
+                        + "    Bye. Hope to see you again soon! \n"
+                        + "    ____________________________________________________________\n";
+                System.out.println(msgForBye);
+                break;
+            } else {
+                listOfTextEntered.add(instruction);
+                String msgForAdd = "    ____________________________________________________________\n"
+                        + "    added: "
+                        + instruction + "\n"
+                        + "    ____________________________________________________________\n";
+                System.out.println(msgForAdd);
+            }
+        }
+        sc.close();
+    }
 
     //print welcome message
     public void printWelcomeMessage() {
@@ -43,6 +80,7 @@ public class Duke {
     public static void main(String[] args) {
         Duke myBot = new Duke();
         myBot.printWelcomeMessage();
-        myBot.respond();
+        //myBot.respond();
+        myBot.addAndRespond();
     }
 }
