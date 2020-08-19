@@ -1,10 +1,17 @@
 deadline prepare for presentation /by today 7pm
 todo go cycling
+hello
 list
 event watch horror movie with friends /at 12am
+deadline
 done 2
+todo
 deadline do homework /by Monday 6pm
+done 17
 list
+deadline learn how to cook /by
 done 3
 list
+event
+event go paragliding /at
 bye

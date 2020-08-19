@@ -1,7 +1,9 @@
-import main.java.Task;
-import main.java.Deadline;
-import main.java.Event;
-import main.java.Todo;
+import main.java.exceptions.InvalidCommandException;
+import main.java.exceptions.InvalidDoneNumberException;
+import main.java.tasks.Deadline;
+import main.java.tasks.Event;
+import main.java.tasks.Task;
+import main.java.tasks.Todo;
 
 import java.util.*;
 
@@ -27,27 +29,34 @@ public class Duke {
 
     private void addTask(String input) {
         Task newTask = getTaskType(input);
-        this.taskList.add(newTask);
+        if (newTask != null) {
+            this.taskList.add(newTask);
 
-        System.out.println("Got it. I've added this task:");
-        System.out.println(newTask.toString());
-        System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
+            System.out.println("Got it. I've added this task:");
+            System.out.println(newTask.toString());
+            System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
+        }
     }
 
     private Task getTaskType(String input) {
-        if (input.startsWith("deadline") && input.contains(" /by ")) {
-            String description = input.substring("deadline ".length(), input.indexOf(" /by "));
-            String endTime= input.substring(input.indexOf(" /by ") + " /by ".length());
-            return new Deadline(description, endTime);
-        } else if (input.startsWith("event") && input.contains(" /at ")) {
-            String description = input.substring("event ".length(), input.indexOf(" /at "));
-            String time= input.substring(input.indexOf(" /at ") + " /at ".length());
-            return new Event(description, time);
-        } else if (input.startsWith("todo")) {
-            String description = input.substring("todo ".length());
-            return new Todo(description);
-        } else {
-            return new Task(input);
+        try {
+            if (input.startsWith("deadline") && input.contains("/by")) {
+                String description = input.substring("deadline".length(), input.indexOf("/by")).trim();
+                String endTime = input.substring(input.indexOf("/by") + "/by".length()).trim();
+                return new Deadline(description, endTime);
+            } else if (input.startsWith("event") && input.contains("/at")) {
+                String description = input.substring("event".length(), input.indexOf("/at")).trim();
+                String time = input.substring(input.indexOf("/at") + "/at".length()).trim();
+                return new Event(description, time);
+            } else if (input.startsWith("todo")) {
+                String description = input.substring("todo".length()).trim();
+                return new Todo(description);
+            } else {
+                throw new InvalidCommandException("Not sure what you mean. Please ensure your command format is correct and try again.");
+            }
+        } catch (InvalidCommandException e) {
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 
@@ -64,7 +73,16 @@ public class Duke {
         if (checkBackNumber) {
             int index = Integer.parseInt(words[1]) - 1;
             boolean isValidNumber = index < this.taskList.size();
-            return words[0].equals("done") && isValidNumber;
+            try {
+                if (!isValidNumber) {
+                    throw new InvalidDoneNumberException("The number entered is invalid. " +
+                            "You have " + this.taskList.size() + " tasks in your list.");
+                }
+            } catch (InvalidDoneNumberException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+            return words[0].equals("done");
         } else {
             return false;
         }

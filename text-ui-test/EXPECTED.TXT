@@ -6,22 +6,28 @@ Now you have 1 tasks in the list.
 Got it. I've added this task:
 [T][✘] go cycling
 Now you have 2 tasks in the list.
+Not sure what you mean. Please ensure your command format is correct and try again.
 Here are the tasks in your list:
 1.[D][✘] prepare for presentation (by: today 7pm)
 2.[T][✘] go cycling
 Got it. I've added this task:
 [E][✘] watch horror movie with friends (at: 12am)
 Now you have 3 tasks in the list.
+Not sure what you mean. Please ensure your command format is correct and try again.
 Nice! I've marked this task as done:
 [T][✓] go cycling
+Hey! Todo description shouldn't be blank.
 Got it. I've added this task:
 [D][✘] do homework (by: Monday 6pm)
 Now you have 4 tasks in the list.
+The number entered is invalid. You have 4 tasks in your list.
+Not sure what you mean. Please ensure your command format is correct and try again.
 Here are the tasks in your list:
 1.[D][✘] prepare for presentation (by: today 7pm)
 2.[T][✓] go cycling
 3.[E][✘] watch horror movie with friends (at: 12am)
 4.[D][✘] do homework (by: Monday 6pm)
+Do try again by adding a time you need to get this done by.
 Nice! I've marked this task as done:
 [E][✓] watch horror movie with friends (at: 12am)
 Here are the tasks in your list:
@@ -29,4 +35,6 @@ Here are the tasks in your list:
 2.[T][✓] go cycling
 3.[E][✓] watch horror movie with friends (at: 12am)
 4.[D][✘] do homework (by: Monday 6pm)
+Not sure what you mean. Please ensure your command format is correct and try again.
+Do try again by adding a time where the event takes place.
 Bye. Hope to see you again soon!
