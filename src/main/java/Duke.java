@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -16,7 +17,7 @@ public class Duke {
         String bye = "bye";
         String list = "list";
 
-        Task[] taskList = new Task[100];
+        ArrayList<Task> taskList = new ArrayList<Task>();
         int taskSize = 0;
 
         if (input.equals(bye)) {
@@ -31,7 +32,7 @@ public class Duke {
                     System.out.println("Here is your current list of task(s)!");
                     int curr = 0;
                     while (curr < taskSize) {
-                        System.out.println((curr + 1) + ". " + taskList[curr]);
+                        System.out.println((curr + 1) + ". " + taskList.get(curr));
                         curr += 1;
                     }
                 }
@@ -39,8 +40,8 @@ public class Duke {
                 else if (input.startsWith("todo")) {
                     // to-do activity
                     input = input.substring(5);
-                    taskList[taskSize] = new Todo(input);
-                    System.out.println("Ok, To-do added: \n  " + taskList[taskSize]);
+                    taskList.add(new Todo(input));
+                    System.out.println("Ok, To-do added: \n  " + taskList.get(taskSize));
                     taskSize += 1;
                     System.out.println("You now have " + taskSize + " task(s) in your list!");
                 }
@@ -51,8 +52,8 @@ public class Duke {
 
                     if (temp.length == 2) {
                         // valid
-                        taskList[taskSize] = new Deadline(temp[0], temp[1]);
-                        System.out.println("Ok, Deadline added: \n  " + taskList[taskSize]);
+                        taskList.add(new Deadline(temp[0], temp[1]));
+                        System.out.println("Ok, Deadline added: \n  " + taskList.get(taskSize));
                         taskSize += 1;
                         System.out.println("You now have " + taskSize + " task(s) in your list!");
                     } else {
@@ -67,8 +68,8 @@ public class Duke {
 
                     if (temp.length == 2) {
                         // valid
-                        taskList[taskSize] = new Event(temp[0], temp[1]);
-                        System.out.println("Ok, Event added: \n  " + taskList[taskSize]);
+                        taskList.add(new Event(temp[0], temp[1]));
+                        System.out.println("Ok, Event added: \n  " + taskList.get(taskSize));
                         taskSize += 1;
                         System.out.println("You now have " + taskSize + " task(s) in your list!");
                     } else {
@@ -88,8 +89,29 @@ public class Duke {
                     }
 
                     if (taskNum > 0 && taskNum <= taskSize) {
-                        taskList[taskNum - 1].markAsDone();
-                        System.out.println("Wow!! Good job!!\n" + taskList[taskNum - 1]);
+                        taskList.get(taskNum - 1).markAsDone();
+                        System.out.println("Wow!! Good job!!\n  " + taskList.get(taskNum - 1));
+                    }
+                    else {
+                        System.out.println("hmm.. I don't think thats a valid task, try again?");
+                    }
+                }
+                // check for delete activity
+                else if (input.startsWith("delete")) {
+                    String delStr = input.substring(7);
+                    int delNum = 0;
+
+                    try {
+                        delNum = Integer.parseInt(delStr);
+                    }
+                    catch (NumberFormatException ignored) {
+                    }
+
+                    if (delNum > 0 && delNum <= taskSize) {
+                        System.out.println("Alright! I've deleted the task:\n  " + taskList.get(delNum - 1));
+                        taskList.remove(delNum-1);
+                        taskSize -= 1;
+                        System.out.println("You now have " + taskSize + " task(s) in your list!");
                     }
                     else {
                         System.out.println("hmm.. I don't think thats a valid task, try again?");
