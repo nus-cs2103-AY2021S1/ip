@@ -18,12 +18,15 @@ public class Sparkles {
             markAsDone(str);
         } else if (lowerCase.equals("bye")) {
             exit();
+        } else if (lowerCase.startsWith("delete")) {
+            delete(str);
         } else {
             addToList(str);
         }
 
         printDash();
     }
+
 
     private void showList() {
         if (storage.size() == 0) {
@@ -38,6 +41,7 @@ public class Sparkles {
 
     private void markAsDone(String str) {
         int index = -1;
+
         try {
             index = Integer.parseInt(String.valueOf(str.charAt(5)));
             Task task = storage.get(index - 1);
@@ -52,6 +56,25 @@ public class Sparkles {
         print("     Bye. Hope to see you again!");
         printDash();
         System.exit(0);
+    }
+
+    private void delete(String str) {
+        int index = -1;
+
+        if (storage.size() == 0) {
+            print("     OOPS!! List is empty");
+        } else {
+            try {
+                index = Integer.parseInt(String.valueOf(str.charAt(7)));
+                Task task = storage.get(index - 1);
+                print("     Noted, I have removed this task:");
+                task.printTask();
+                storage.remove(index - 1);
+                printListSize();
+            } catch (Exception ex) {
+                print("     OOPS!! Task in the list to be removed is not specified!");
+            }
+        }
     }
 
     private void addToList(String str) {
