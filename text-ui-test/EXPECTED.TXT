@@ -20,5 +20,5 @@ Alrighty, I'll put it on yer tab:
 You've got a total of 4 items right now.
 Sure thing baws! This right here is marked as done!
 [T][✓] buy milk 
-java.lang.IllegalStateException: Unexpected value: bleh
+Sorry, I didn't quite catch that!
 Well I'll see you around, pardner!!
