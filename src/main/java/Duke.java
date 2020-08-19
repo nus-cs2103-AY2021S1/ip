@@ -1,3 +1,4 @@
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -10,6 +11,14 @@ public class Duke {
     String byeLine;
     String errorLine;
     String indent;
+    
+    static String COMMAND_DONE = "done";
+    static String COMMAND_LIST = "list";
+    static String COMMAND_DELETE = "delete";
+    static String COMMAND_TODO = "todo";
+    static String COMMAND_EVENT = "event";
+    static String COMMAND_DEADLINE = "deadline";
+    static String COMMAND_EXIT = "bye";
 
     Duke() {
         tasks = new ArrayList<>();
@@ -21,11 +30,10 @@ public class Duke {
         indent = "    ";
     }
     
-    void displayNoDescriptionError(String input) {
-        DukeException e = new DukeNoDescriptionException(input);
+    void displayError(String errorMessage) {
         System.out.println(
                 indent + errorLine + "\n"
-                + indent + e.toString() + "\n"
+                + indent + errorMessage + "\n"
                 + indent + errorLine
         );
     }
@@ -42,10 +50,10 @@ public class Duke {
 
     public boolean handleInput(String input) {
         String[] processedInput = input.split(" ");
-        if (input.equals("bye")) {
+        if (input.equals(COMMAND_EXIT)) {
             exit();
             return true;
-        } else if (input.equals("list")) {
+        } else if (input.equals(COMMAND_LIST)) {
             System.out.println(indent + listTaskLine);
             for (Task task : tasks) {
                 System.out.println(indent + (tasks.indexOf(task) + 1) + "." + task.toString()
@@ -56,8 +64,18 @@ public class Duke {
             }
             System.out.println(indent + listTaskLine);
             return false;
-        } else if (processedInput[0].equals("done")) {
+        } else if (processedInput[0].equals(COMMAND_DONE)) {
+            if (processedInput.length == 1) {
+                DukeException e = new DukeNoItemToMarkDoneException(input);
+                displayError(e.toString());
+                return false;
+            }
             int index = Integer.parseInt(processedInput[1]);
+            if (index < 1 || index > tasks.size()) {
+                DukeException e = new DukeOutOfBoundsException(input);
+                displayError(e.toString());
+                return false;
+            }
             Task task = tasks.get(index - 1);
             task.setDone();
             System.out.println(
@@ -67,9 +85,10 @@ public class Duke {
                     + "\n" + indent + doneTaskLine
             );
             return false;
-        } else if (processedInput[0].equals("todo")) {
+        } else if (processedInput[0].equals(COMMAND_TODO)) {
             if (processedInput.length == 1) {
-                displayNoDescriptionError(input);
+                DukeException e = new DukeNoDescriptionException(input);
+                displayError(e.toString());
                 return false;
             }
             String taskDetails = input.substring(5);
@@ -77,9 +96,10 @@ public class Duke {
             tasks.add(task);
             displayAddTaskSuccess(task, tasks.size());
             return false;
-        } else if (processedInput[0].equals("deadline")) {
+        } else if (processedInput[0].equals(COMMAND_DEADLINE)) {
             if (processedInput.length == 1) {
-                displayNoDescriptionError(input);
+                DukeException e = new DukeNoDescriptionException(input);
+                displayError(e.toString());
                 return false;
             }
             String[] taskDetails = input.substring(9).split(" /by ");
@@ -87,9 +107,10 @@ public class Duke {
             tasks.add(task);
             displayAddTaskSuccess(task, tasks.size());
             return false;
-        } else if (input.startsWith("event")) {
+        } else if (processedInput[0].equals(COMMAND_EVENT)) {
             if (processedInput.length == 1) {
-                displayNoDescriptionError(input);
+                DukeException e = new DukeNoDescriptionException(input);
+                displayError(e.toString());
                 return false;
             }
             String[] taskDetails = input.substring(6).split(" /at ");
@@ -103,13 +124,31 @@ public class Duke {
                     + indent + addTaskLine
             );
             return false;
+        } else if (processedInput[0].equals(COMMAND_DELETE)) {
+            if (processedInput.length == 1) {
+                DukeException e = new DukeNoItemToDeleteException(input);
+                displayError(e.toString());
+                return false;
+            }
+            int index = Integer.parseInt(processedInput[1]);
+            if (index < 1 || index > tasks.size()) {
+                DukeException e = new DukeOutOfBoundsException(input);
+                displayError(e.toString());
+                return false;
+            }
+            Task task = tasks.get(index - 1);
+            tasks.remove(index - 1);
+            System.out.println(
+                    indent + doneTaskLine + "\n"
+                            + indent + "The following task has been removed:\n"
+                            + indent + task.toString() + "\n"
+                            + indent + "You now have " + tasks.size() + " task(s) in the list.\n"
+                            + indent + doneTaskLine
+            );
+            return false;
         } else {
             DukeException e = new DukeUnknownCommandException(input);
-            System.out.println(
-                    indent + errorLine + "\n"
-                    + indent + e.toString() + "\n"
-                    + indent + errorLine
-            );
+            displayError(e.toString());
             return false;
         }
     }

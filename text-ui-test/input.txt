@@ -10,5 +10,11 @@ done 3
 list
 todo 
 event
-deadline          
+deadline   
+done          
 hello
+delete 2
+list
+delete 3
+done 3
+bye
