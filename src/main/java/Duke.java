@@ -11,7 +11,7 @@ public class Duke {
     }
 
     static void greet() {
-        String greeting = "Hello! I'm Duke\n What can I do for you? (◠ ‿ ◠✿)";
+        String greeting = "Hello! I'm Duke\n What can I do for you? (◠  ◠✿)";
         System.out.println(wrapMessage(greeting));
     }
 
@@ -20,7 +20,7 @@ public class Duke {
         System.out.println(wrapMessage(byeMessage));
     }
 
-    static Task createTask(String taskType, String desc) {
+    static Task createTask(String taskType, String desc) throws MissingDeadlineException{
         if (taskType.equals("todo")) {
             return new Todo(desc);
         } else if (taskType.equals("deadline")) {
@@ -30,12 +30,14 @@ public class Duke {
         }
     }
 
-    static void addTask(String taskType, String desc) {
+    static void addTask(String taskType, String desc) throws MissingDeadlineException {
         Task task = createTask(taskType, desc);
-        taskList.add(task);
-        String message = "Got it. I've added this task: \n  " + task +
-                            "\n Now you have " + taskList.size() + " tasks in the list.";
-        System.out.println(wrapMessage(message));
+        if (task != null) {
+            taskList.add(task);
+            String message = "Got it. I've added this task: \n  " + task +
+                    "\n Now you have " + taskList.size() + " tasks in the list.";
+            System.out.println(wrapMessage(message));
+        }
     }
 
     static String formatTask(int num) {
@@ -51,11 +53,26 @@ public class Duke {
         System.out.println(wrapMessage(list));
     }
 
-    static void completeTask(int num) {
-        Task task = taskList.get(num - 1);
-        task.completeTask();
-        String message = "Nice! I've marked this task as done: \n  " + task;
-        System.out.println(wrapMessage(message));
+    static void completeTask(int num) throws MissingTaskException {
+        if (num > 0 && num <= taskList.size()) {
+            Task task = taskList.get(num - 1);
+            task.completeTask();
+            String message = "Nice! I've marked this task as done: \n  " + task;
+            System.out.println(wrapMessage(message));
+        } else {
+            throw new MissingTaskException(num);
+        }
+    }
+
+    static void deleteTask(int num) throws MissingTaskException {
+        if (num > 0 && num <= taskList.size()) {
+            Task task = taskList.remove(num - 1);
+            String message = "Noted. I've removed this task: \n " + task +
+                    "\n Now you have " + taskList.size() + " tasks in the list.";
+            System.out.println(wrapMessage(message));
+        } else {
+            throw new MissingTaskException(num);
+        }
     }
 
     static void readInput() {
@@ -79,6 +96,9 @@ public class Duke {
                 case "done":
                     completeTask(Integer.valueOf(input[1]));
                     break;
+                case "delete":
+                    deleteTask(Integer.valueOf(input[1]));
+                    break;
                 case "todo":
                 case "event":
                 case "deadline":
@@ -92,16 +112,10 @@ public class Duke {
                     throw new UnknownCommandException();
             }
         } catch (DukeException e) {
-            System.out.println(e);
+            System.out.println(wrapMessage(e.toString()));
         }
     }
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        //System.out.println("Hello from\n" + logo);
         greet();
         readInput();
     }

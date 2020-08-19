@@ -1,9 +1,14 @@
 public class Event extends Task {
     protected String eventTime;
 
-    Event(String desc) {
+    Event(String desc) throws MissingDeadlineException {
         super(desc.split(" /at ", 2)[0]);
-        this.eventTime = desc.split(" /at ", 2)[1];
+        String[] temp = desc.split(" /at ", 2);
+        if (temp.length == 1) {
+            throw new MissingDeadlineException("event");
+        } else {
+            this.eventTime = desc.split(" /at ", 2)[1];
+        }
     }
 
     @Override

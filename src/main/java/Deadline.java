@@ -1,9 +1,14 @@
 public class Deadline extends Task {
     protected String deadline;
 
-    Deadline(String desc) {
+    Deadline(String desc) throws MissingDeadlineException {
         super(desc.split(" /by ", 2)[0]);
-        this.deadline = desc.split(" /by ", 2)[1];
+        String[] temp = desc.split(" /by ", 2);
+        if (temp.length == 1) {
+            throw new MissingDeadlineException("deadline");
+        } else {
+            this.deadline = desc.split(" /by ", 2)[1];
+        }
     }
 
     @Override

@@ -1,5 +1,13 @@
 abstract class DukeException extends Exception {
+    protected String message;
+
     DukeException(String message) {
-        super("(・・;)ゞ Something went wrong... " + message);
+        this.message = "Something went wrong... \n " + message;
+    }
+
+    @Override
+    public String toString() {
+        return this.message;
     }
 }
+
