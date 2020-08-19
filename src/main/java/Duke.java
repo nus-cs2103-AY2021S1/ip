@@ -10,13 +10,14 @@ public class Duke {
 
     public static void printTasks() {
         System.out.println(
-                "    ____________________________________________________________");
+                "    ____________________________________________________________\n" +
+                "     Here are the tasks in your list:");
         for (int i = 0; i < numberOfTasks; i++) {
             Task t = tasks[i];
             System.out.format("     %d.%s\n", i + 1, t.toString());
         }
         System.out.println(
-                "    ____________________________________________________________\n");
+                "    ____________________________________________________________");
     }
 
     public static TaskType findTaskType(String input, String[] arr) {
@@ -50,14 +51,12 @@ public class Duke {
                     boolean hasSuffix = false;
                     int indexOfSuffix = -1;
                     for (int i = 0; i < arr.length; i++) {
-                        System.out.println(arr[i]);
                         if (arr[i].equals("/by")) {
                             indexOfSuffix = i;
                             hasSuffix = true;
                             break;
                         }
                     }
-                    System.out.println(indexOfSuffix);
                     if (hasSuffix && indexOfSuffix > 1 && arr.length - 1 > indexOfSuffix) {
                         return TaskType.DEADLINE;
                     } else {
@@ -104,8 +103,8 @@ public class Duke {
         boolean running = true;
 
         String logo =
-                "############################################################# \n" +
-                "###################################################   ####### \n" +
+                "#############################################################\n" +
+                "###################################################   #######\n" +
                 "###############################################   /~\\   #####\n" +
                 "############################################   _- `~~~', ####\n" +
                 "##########################################  _-~       )  ####\n" +
@@ -125,7 +124,7 @@ public class Duke {
                 "#####  /                `                    ; ##############\n" +
                 "###  /                                      ; ###############\n" +
                 "#                                            ################";
-        System.out.println("Hello from\n" + logo);
+        System.out.println(logo);
 
         System.out.println(
                 "    ____________________________________________________________\n" +
@@ -147,7 +146,7 @@ public class Duke {
                     String endMessage =
                             "    ____________________________________________________________\n" +
                                     "     Bye. Hope to see you again soon!\n" +
-                                    "    ____________________________________________________________\n";
+                                    "    ____________________________________________________________";
                     System.out.println(endMessage);
                     running = false;
                     break;
@@ -165,7 +164,7 @@ public class Duke {
                                     "     Got it. I've added this task:\n" +
                                     "       " + t.toString() + "\n" +
                                     "     Now you have " + numberOfTasks + " tasks in the list.\n" +
-                                    "    ____________________________________________________________\n";
+                                    "    ____________________________________________________________";
                     System.out.println(addTaskMessage);
                     break;
                 }
@@ -197,7 +196,7 @@ public class Duke {
                     tasks[numberOfTasks] = t;
                     numberOfTasks++;
                     String msg = "    ____________________________________________________________\n" +
-                            "     Got it. I've added this task: \n" +
+                            "     Got it. I've added this task:\n" +
                             "       " + t.toString() + "\n" +
                             "     Now you have " + numberOfTasks + " tasks in the list.\n" +
                             "    ____________________________________________________________";
@@ -232,7 +231,7 @@ public class Duke {
                     tasks[numberOfTasks] = t;
                     numberOfTasks++;
                     String msg = "    ____________________________________________________________\n" +
-                            "     Got it. I've added this task: \n" +
+                            "     Got it. I've added this task:\n" +
                             "       " + t.toString() + "\n" +
                             "     Now you have " + numberOfTasks + " tasks in the list.\n" +
                             "    ____________________________________________________________";
@@ -245,7 +244,7 @@ public class Duke {
                     t.markAsDone();
                     String doneTaskMessage =
                             "    ____________________________________________________________\n" +
-                                    "     Nice! I've marked this task as done: \n" +
+                                    "     Nice! I've marked this task as done:\n" +
                                     "       " + t.toString() + "\n" +
                                     "    ____________________________________________________________";
                     System.out.println(doneTaskMessage);
