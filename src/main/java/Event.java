@@ -1,7 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Event {
     public static void simulate(){
+        List<String> ls= new ArrayList<>();
         boolean hasBye = false;
         String input;
 
@@ -23,8 +26,20 @@ public class Event {
                 System.out.println("     Bye. Hope to see you again soon!");
                 System.out.println(line);
                 hasBye = true;
+            }else if(input.equals("list")){
+                if(ls.isEmpty()){
+                    System.out.println("     No tasks in the list");
+                }else{
+                    for(int i = 0; i < ls.size(); i++){
+                        int j = i+1;
+                        System.out.println("     " + j + "." + ls.get(i));
+                    }
+                }
+                System.out.println(line);
+                input = sc.nextLine();
             }else{
-                System.out.println("     " + input);
+                ls.add(input);
+                System.out.println("     added: " + input);
                 System.out.println(line);
                 input = sc.nextLine();
             }
