@@ -17,11 +17,19 @@ public class Duke {
                         System.out.println(iterator + "." + s.toString());
                         iterator++;
                     }
-                } else if (tempArray[0].equals("done")) {
+                }
+
+                else if (tempArray[0].equals("done")) {
                     int index = Integer.parseInt(tempArray[1]) - 1;
                     listOfItems.get(index).markDone();
                     System.out.println("Nice! I've marked this task as done: \n" + listOfItems.get(index).toString());
-                } else {
+                } else if(tempArray[0].equals("delete")) {
+                    int index = Integer.parseInt(tempArray[1]) - 1;
+                    Task tobeRemove = listOfItems.get(index);
+                    listOfItems.remove(index);
+                    System.out.println("Noted. I've removed this task: \n" + tobeRemove.toString() + "\nNow you have " + listOfItems.size() + " tasks in the list");
+                }
+                else {
                     if (tempArray[0].equals("todo")) {
                         if(tempArray.length == 1) {
                             throw new InvalidTodoException();
@@ -30,8 +38,9 @@ public class Duke {
                         listOfItems.add(newTodo);
                         System.out.println("Got it. I've added this task:\n" + newTodo.toString() +
                                 "\nNow you have " + listOfItems.size() + " tasks in total");
+
                     }
-                    if (tempArray[0].equals("deadline")) {
+                    else if (tempArray[0].equals("deadline")) {
                         if(tempArray.length == 1) {
                             throw new InvalidDeadlineException();
                         }
@@ -40,8 +49,9 @@ public class Duke {
                         listOfItems.add(newDeadline);
                         System.out.println("Got it. I've added this task:\n" + newDeadline.toString()
                                 + "\nNow you have " + listOfItems.size() + " tasks in total");
+
                     }
-                    if (tempArray[0].equals("event")) {
+                    else if (tempArray[0].equals("event")) {
                         if(tempArray.length == 1) {
                             throw new InvalidEventException();
                         }
@@ -51,7 +61,9 @@ public class Duke {
                         System.out.println("Got it. I've added this task:\n" + newEvent.toString()
                                 + "\nNow you have " + listOfItems.size() + " tasks in total");
                     }
-                    throw new InvalidInputException();
+                    else {
+                        throw new InvalidInputException();
+                    }
 
                 }
             } catch (DukeException e) {
