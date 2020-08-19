@@ -6,8 +6,7 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return this.complete
-                ? String.format("[T][\u2713] %s", this.title)
-                : String.format("[T][\u2717] %s", this.title);
+        String completeSymbol = this.complete ? "[/]" : "[X]";
+        return String.format("[T]%s %s", completeSymbol, this.title);
     }
 }

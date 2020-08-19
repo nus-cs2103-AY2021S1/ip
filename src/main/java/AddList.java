@@ -39,7 +39,7 @@ public class AddList {
         Task toAdd = this.handleInput(input);
         this.items[this.idx] = toAdd;
         this.idx++;
-        this.addLines(String.format("    Got it. I've I've added this task:\n    %s\n    Now you have %d tasks in the list.", toAdd, this.idx));
+        this.addLines(String.format("    Got it. I've added this task:\n    %s\n    Now you have %d tasks in the list.", toAdd, this.idx));
     }
 
     public void display() {

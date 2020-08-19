@@ -17,8 +17,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.complete
-                ? String.format("[\u2713] %s", this.title)
-                : String.format("[\u2717] %s", this.title);
+        String completeSymbol = this.complete ? "[/]" : "[X]";
+        return String.format("%s %s", completeSymbol, this.title);
     }
 }

@@ -8,8 +8,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return this.complete
-                ? String.format("[D][\u2713] %s (by: %s)", this.title, this.deadline)
-                : String.format("[D][\u2717] %s (by: %s)", this.title, this.deadline);
+        String completeSymbol = this.complete ? "[/]" : "[X]";
+        return String.format("[D]%s %s (by: %s)", completeSymbol, this.title, this.deadline);
     }
 }

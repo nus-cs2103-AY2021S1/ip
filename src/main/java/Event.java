@@ -8,8 +8,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return this.complete
-                ? String.format("[E][\u2713] %s (at: %s)", this.title, this.time)
-                : String.format("[E][\u2717] %s (at: %s)", this.title, this.time);
+        String completeSymbol = this.complete ? "[/]" : "[X]";
+        return String.format("[E]%s %s (at: %s)", completeSymbol, this.title, this.time);
     }
 }
