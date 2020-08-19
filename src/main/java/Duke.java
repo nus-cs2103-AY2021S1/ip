@@ -1,10 +1,31 @@
+import java.util.Scanner;
+
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        String open = "_______________________________________ \n"
+                + "Hello! I'm Duke \n"
+                + "What can I do for you? \n"
+                + "_______________________________________ \n";
+        String close = "_______________________________________ \n"
+                + "Bye. Hope to see you again soon! \n"
+                + "_______________________________________ \n";
+        String line = "_______________________________________";
+        System.out.println(open);
+
+        boolean run = true;
+        String user_input;
+        String output;
+        Scanner scanner = new Scanner(System.in);
+        while(run) {
+            user_input = scanner.next();
+            if (user_input == "bye") {
+                run = false;
+            } else {
+                System.out.println(line + "\n" +user_input + "\n" + line);
+            }
+        }
+
+        scanner.close();
+        System.out.println(close);
     }
 }
