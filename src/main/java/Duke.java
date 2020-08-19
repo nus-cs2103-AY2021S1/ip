@@ -22,17 +22,26 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String nextLine = sc.nextLine();
-            if (nextLine.equals("list")) {
+            if (nextLine.contains("done")) {
+                int number = Integer.parseInt(nextLine.substring(5));
+                Task task = tasks.get(number - 1);
+                task.markAsDone();
+                System.out.println("Nice! I've marked this as done:");
+                System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription() + "\n");
+            } else if (nextLine.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < tasks.size(); i++) {
                     int number = i + 1;
-                    System.out.println(number + ". " + tasks.get(i).getText());
+                    Task task = tasks.get(i);
+                    System.out.println(number + ".[" + task.getStatusIcon() + "] " + task.getDescription());
                 }
+                System.out.println();
             } else if (nextLine.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             } else {
                 tasks.add(new Task(nextLine));
-                System.out.println(add + nextLine);
+                System.out.println(add + nextLine + "\n");
             }
         }
     }
