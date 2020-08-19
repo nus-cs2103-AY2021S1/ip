@@ -1,11 +1,13 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
 
-    private final Task[] tasks;
+    private final List<Task> tasks;
 
     public Duke() {
-        this.tasks = new Task[100];
+        this.tasks = new ArrayList<>();
     }
 
     public void greet() {
@@ -48,32 +50,23 @@ public class Duke {
 
     public void addTask(Task task) {
         System.out.println("Okay! Task added for you!");
-        for (int i = 0; i < tasks.length; i++) {
-            if (tasks[i] == null) {
-                tasks[i] = task;
-                break;
-            }
-        }
-        System.out.println(task + "\n");
-        // System.out.println("Now you have " + task + " task in the list." + "\n");
+        tasks.add(task);
+        System.out.println(task);
+        System.out.println("Now you have " + tasks.size() + " task(s) in the list." + "\n");
     }
 
     public void displayTasks() {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.length; i++) {
-            if (tasks[i] != null) {
-                System.out.println(i + 1 + ". " + tasks[i]);
-            } else {
-                break;
-            }
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(i + 1 + ". " + tasks.get(i));
         }
         System.out.println("");
     }
 
     public void markTaskAsDone(int position) {
-        Task task = this.tasks[position - 1];
+        Task task = tasks.get(position - 1);
         task.markAsDone();
-        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("Good job! I've marked this task as done:");
         System.out.println(task + "\n");
     }
 
