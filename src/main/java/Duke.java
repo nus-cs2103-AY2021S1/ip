@@ -98,6 +98,10 @@ public class Duke {
                             (done[0].equals("deadline") && (task = s.split(" /by ")).length == 2)||
                             (done[0].equals("event") && (task = s.split(" /at ")).length == 2))){
                 if(done[0].equals("todo")) {
+                    if(done.length == 1) {
+                        print("\t☹ OOPS!!! The description of a todo cannot be empty.\n");
+                        continue;
+                    }
                     list.add(new Todo(s.replaceFirst("todo ", "")));
                 } else if(done[0].equals("deadline")) {
                     list.add(new Deadline(task[0].replaceFirst("deadline ", ""), task[1]));
@@ -108,7 +112,7 @@ public class Duke {
                         "\t" + list.get(list.size()-1) + "\n" +
                         "\tNow you have " + list.size() + " tasks in the list.\n");
             } else {
-                print("\ti ignore\n");
+                print("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
             }
         }
         print("\tBye. Hope to see you again soon!\n");
