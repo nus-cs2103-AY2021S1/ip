@@ -18,28 +18,54 @@ public class Duke {
         final String TERMINATION_PHRASE = "bye";
         final String LIST_PHRASE = "list";
         final String COMPLETE_TASK_PHRASE = "done";
+        final String TODO_PHRASE = "todo";
+        final String DEADLINE_PHRASE = "deadline";
+        final String EVENT_PHRASE = "event";
 
         displayStart();
 
-        String input = sc.nextLine();
-        while (!input.equals(TERMINATION_PHRASE)) {
+        String command = sc.next();
 
-            if (input.equals(LIST_PHRASE)) {
-                printList();
-            } else if (input.startsWith(COMPLETE_TASK_PHRASE)) {
-                displayCompleteTask();
+        while (!command.equals(TERMINATION_PHRASE)) {
 
-                int index = Integer.parseInt(input.substring(5)) - 1;
-                itemsList.get(index).doTask();
-            } else {
-                itemsList.add(new Task(input));
+            Task newTask;
 
-                System.out.println(HORIZONTAL_RULE);
-                System.out.println("added: " + input);
-                System.out.println(HORIZONTAL_RULE);
+            switch (command) {
+                case LIST_PHRASE:
+                    printList();
+                    break;
+                case COMPLETE_TASK_PHRASE:
+                    displayCompleteTask();
+
+                    int index = sc.nextInt() - 1;
+                    itemsList.get(index).doTask();
+                    break;
+                case TODO_PHRASE:
+                    newTask = new ToDo(sc.nextLine());
+                    itemsList.add(newTask);
+                    displayAddTask(newTask);
+                    break;
+                case DEADLINE_PHRASE:
+                    // String array whose first element is the task and second element is the deadline
+                    // substring(1) to remove the starting space
+                    String[] taskAndDeadline = sc.nextLine().substring(1).split(" /by ");
+                    newTask = new Deadline(taskAndDeadline[0], taskAndDeadline[1]);
+                    itemsList.add(newTask);
+                    displayAddTask(newTask);
+                    break;
+                case EVENT_PHRASE:
+                    // String whose first element is task and second element is time of event
+                    String[] eventAndTime = sc.nextLine().substring(1).split(" /at ");
+                    newTask = new Event(eventAndTime[0], eventAndTime[1]);
+                    itemsList.add(newTask);
+                    displayAddTask(newTask);
+                    break;
+                default:
+                    System.out.println("Invalid request");
+                    break;
             }
 
-            input = sc.nextLine();
+            command = sc.next();
         }
 
         displayExit();
@@ -68,6 +94,7 @@ public class Duke {
         final String CROSS = "[✗]";
 
         System.out.println(HORIZONTAL_RULE);
+        System.out.println("Here are all your burdens");
 
         for (int i = 1; i <= itemsList.size(); i++) {
             Task item = itemsList.get(i - 1);
@@ -82,6 +109,14 @@ public class Duke {
     private static void displayCompleteTask() {
         System.out.println(HORIZONTAL_RULE);
         System.out.println("Congratulations, you actually did something");
+        System.out.println(HORIZONTAL_RULE);
+    }
+
+    private static void displayAddTask(Task task) {
+        System.out.println(HORIZONTAL_RULE);
+        System.out.println("One more task added for you sire");
+        System.out.println(task);
+        System.out.println("You have " + itemsList.size() + " tasks. Enjoy!");
         System.out.println(HORIZONTAL_RULE);
     }
 }
