@@ -31,6 +31,13 @@ public class Duke {
                     lst.get(Integer.parseInt(strArr[1]) - 1).markAsDone();
                     System.out.println("Nice! I've marked this task as done: \n" +
                             lst.get(Integer.parseInt(strArr[1]) - 1).toString());
+                } else if (strArr[0].equals("delete")) {
+                    int i = Integer.parseInt(strArr[1]) - 1;
+                    Task t = lst.get(Integer.parseInt(strArr[1]) - 1);
+                    lst.remove(i);
+                    System.out.println("Noted. I've removed this task:\n" +
+                            t.toString() + "\n" +
+                            "Now you have " + lst.size() + " tasks in the list.");
                 } else {
                     if (strArr[0].equals("todo")) {
                         Task task = new Todo(str);
@@ -92,10 +99,10 @@ public class Duke {
 
     public static void check(String[] arr) throws DukeException {
         if (arr.length == 1 && (arr[0].equals("todo") || arr[0].equals("deadline") || arr[0].equals("event") ||
-                arr[0].equals("done"))) {
+                arr[0].equals("done") || arr[0].equals("delete"))) {
             throw new DukeException(arr[0]);
         } else if (!arr[0].equals("todo") && !arr[0].equals("deadline") && !arr[0].equals("event") &&
-                !arr[0].equals("list") && !arr[0].equals("bye") && !arr[0].equals("done")) {
+                !arr[0].equals("list") && !arr[0].equals("bye") && !arr[0].equals("done") && !arr[0].equals("delete")) {
             throw new DukeException("other");
         }
     }
