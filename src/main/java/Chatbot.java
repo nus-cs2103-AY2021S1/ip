@@ -18,6 +18,13 @@ public class Chatbot {
 //        System.out.println(line);
 //    }
 
+    public void addTask(Task t) {
+        System.out.println(line);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(t.printTask());
+        System.out.println("Now you have " + list.size() + (list.size() > 1 ? " tasks" : " task") + " on the list");
+        System.out.println(line);
+    }
     public void generateList() {
         System.out.println(line);
         for (int i = 0; i < list.size(); i++) {
@@ -53,10 +60,24 @@ public class Chatbot {
             return true;
         }
 
-        list.add(new Task(s));
-        System.out.println(line);
-        System.out.println("added: " + s);
-        System.out.println(line);
+        if (s.contains("/by")) {
+            String[] value = s.split("(?<=/by) ");
+            Deadline deadline = new Deadline(value[0].replace(" /by", ""), value[1]);
+            list.add(deadline);
+            addTask(deadline);
+            return true;
+        }
+
+        if (s.contains("/at")) {
+            String[] value = s.split("(?<=/at) ");
+            Event event = new Event(value[0].replace(" /at", ""), value[1]);
+            list.add(event);
+            addTask(event);
+            return true;
+        }
+
+        list.add(new ToDo(s));
+        addTask(new ToDo(s));
         return true;
     }
 
