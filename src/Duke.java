@@ -1,3 +1,7 @@
+import exception.DukeException;
+import exception.NoDescriptionException;
+import exception.UnknownCommandException;
+
 import java.util.ArrayList;
 
 public class Duke {
@@ -31,11 +35,21 @@ public class Duke {
         String[] inputParts = str.split(" ", 2);
         String possibleCommand = inputParts[0];
         String rest = inputParts.length == 2 ? inputParts[1] : "";
+        Command command = null;
 
-        Command command = DukeCommandSet.getInstance().getCommand(possibleCommand);
+        try {
+            command = DukeCommandSet.getInstance().getCommand(possibleCommand);
+        } catch (UnknownCommandException exception) {
+            System.out.println(exception.getMessage());
+        }
 
         if (command != null) {
-            command.execute(rest);
+            try {
+                command.execute(rest);
+            } catch (NoDescriptionException exception) {
+                System.out.println(exception.getMessage());
+            }
+
             return true;
         } else {
             return false;
