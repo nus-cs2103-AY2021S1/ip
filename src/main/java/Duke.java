@@ -7,7 +7,7 @@ public class Duke {
 
     public static void sort (String next){
         try {
-            if (next.equals("list")) {      //Listing out all the tasks
+            if (next.equalsIgnoreCase("list")) {      //Listing out all the tasks
                 list();
 
             } else if (next.startsWith("done ")) {    //When a task is done
@@ -111,7 +111,7 @@ public class Duke {
 
         //Greeting the user
         System.out.println ("Hello! I'm Duke  ^_^");
-        System.out.println ("What can I do for you?");
+        System.out.println ("What can I do for you??");
 
         String next = sc.nextLine();
 
