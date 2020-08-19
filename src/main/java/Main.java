@@ -5,10 +5,6 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static String LINE = "____________________________________________________________";
-
-
-
     public static void main(String[] args) {
         var bot = new Bot("ikurabowl");
 
