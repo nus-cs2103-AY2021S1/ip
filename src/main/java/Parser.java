@@ -18,29 +18,29 @@ public class Parser {
         return line.length() >= 6 && line.substring(0, 6).equals("delete");
     }
 
-    public static int taskType(String line) throws InvalidParameterException {
+    public static TaskType taskType(String line) throws InvalidParameterException {
         if (line.length() > 8
             && line.substring(0, 8).equals("deadline")
             && line.contains(" /by ")) {
-            return 2;
+            return TaskType.DEADLINE;
         }
         else if (line.length() > 5
                 && line.substring(0, 5).equals("event")
                 && line.contains(" /at ")) {
-            return 3;
+            return TaskType.EVENT;
         }
         else if (line.length() > 4 && line.substring(0, 4).equals("todo")) {
-            return 1;
+            return TaskType.TODO;
         }
         else throw new InvalidParameterException("Invalid input");
     }
 
     public static String getName(String line) throws NullPointerException{
         String name;
-        if (taskType(line) == 1) {
+        if (taskType(line) == TaskType.TODO) {
             name = line.substring(5);
         }
-        else if (taskType(line) == 2) {
+        else if (taskType(line) == TaskType.DEADLINE) {
             name = line.split(" /by ")[0].substring(9);
         }
         else {
@@ -54,7 +54,7 @@ public class Parser {
 
     public static String getTime(String line) throws ArrayIndexOutOfBoundsException{
         try {
-            if (taskType(line) == 2) {
+            if (taskType(line) == TaskType.DEADLINE) {
                 return line.split(" /by ")[1];
             } else {
                 return line.split(" /at ")[1];

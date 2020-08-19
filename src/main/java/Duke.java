@@ -58,8 +58,8 @@ public class Duke {
             }
             else {
                 try {
-                    int type = Parser.taskType(line);
-                    if (type == 1)
+                    TaskType type = Parser.taskType(line);
+                    if (type == TaskType.TODO)
                         ListFunction.add(type, Parser.getName(line));
                     else
                         ListFunction.add(type, Parser.getName(line), Parser.getTime(line));
