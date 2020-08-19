@@ -12,11 +12,11 @@ public class DukeCommandMatcher {
     private static final List<String> commandList = new ArrayList<>(Arrays.asList(Constants.LISTPATTERN,
                                                                   Constants.EXITPATTERN, Constants.DONEPATTERN,
                                                                   Constants.TODOPATTERN, Constants.DEADLINEPATTERN,
-                                                                  Constants.EVENTPATTERN));
+                                                                  Constants.EVENTPATTERN, Constants.DELETEPATTERN));
     private List<Task> taskList = new ArrayList<>();
 
     public String matchCommand(String command) throws CommandNotFoundException, NullCommandException,
-            LackOfTimeException, NullCommandContentException, DoneOutOfBoundException {
+            LackOfTimeException, NullCommandContentException, TaskOutOfBoundException, TaskNotSpecifyException {
         if(Objects.equals(command, "")){
             throw new NullCommandException(command);
         }
@@ -33,13 +33,15 @@ public class DukeCommandMatcher {
                    case Constants.LISTPATTERN:
                        return handleList();
                    case Constants.DONEPATTERN:
-                       return handleDone(splitCommand[1]);
+                       return handleDone(splitCommand);
                    case Constants.TODOPATTERN:
                        return handleTodo(splitCommand);
                    case Constants.DEADLINEPATTERN:
                        return handleDeadline(splitCommand);
                    case Constants.EVENTPATTERN:
                        return handleEvent(splitCommand);
+                   case Constants.DELETEPATTERN:
+                       return handleDelete(splitCommand);
                }
             }
         }
@@ -71,10 +73,13 @@ public class DukeCommandMatcher {
         return "List implemented";
     }
 
-    private String handleDone(String targetTask) throws DoneOutOfBoundException {
-        int targetTaskPos = Integer.parseInt(targetTask) - 1;
+    private String handleDone(String[] targetTask) throws TaskOutOfBoundException, TaskNotSpecifyException {
+        if(targetTask.length < 2){
+            throw new TaskNotSpecifyException("task to be done not specified", "DONE");
+        }
+        int targetTaskPos = Integer.parseInt(targetTask[1]) - 1;
         if(targetTaskPos >= this.taskList.size() ){
-            throw new DoneOutOfBoundException("Target number of task out of bound", targetTaskPos + 1);
+            throw new TaskOutOfBoundException("Target number of task out of bound", targetTaskPos + 1);
         }
         Task task = this.taskList.get(targetTaskPos);
         task.setStatus(true);
@@ -116,6 +121,21 @@ public class DukeCommandMatcher {
         }
         Event event = new Event(splitEventStr[0], splitEventStr[1]);
         return handleAdd(event);
+    }
+
+    private String handleDelete(String[] deleteStr) throws TaskNotSpecifyException, TaskOutOfBoundException {
+        if(deleteStr.length < 2){
+            throw new TaskNotSpecifyException("task to deletion not specified", "DELETE");
+        }
+        int taskToDelete = Integer.parseInt(deleteStr[1]);
+        if(taskToDelete > taskList.size()  ){
+            throw new TaskOutOfBoundException("task number out of bound", taskToDelete);
+        }
+        System.out.println("Noted. I've removed this task:\n" + "   " +
+                taskList.get(taskToDelete-1) + "\n" + "Now you have " + (taskList.size() -1 ) + " tasks in the list.");
+        taskList.remove(taskToDelete-1);
+        return "Task " + (taskToDelete -1) + " has been removed successfully";
+
     }
 
 }

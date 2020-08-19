@@ -1,8 +1,8 @@
 package Exceptions;
 
-public class DoneOutOfBoundException extends Exception{
+public class TaskOutOfBoundException extends Exception{
     private int taskNum;
-    public DoneOutOfBoundException(String err, int taskNum){
+    public TaskOutOfBoundException(String err, int taskNum){
         super(err);
         this.taskNum = taskNum;
     }
