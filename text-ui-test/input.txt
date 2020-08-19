@@ -1,0 +1,26 @@
+list
+done 1
+todo read the bible
+list
+done 1
+done 1
+todo 
+deadline 2103T homework /by tomorrow 2359
+list
+event 2101 tutorial /at :(
+list
+done 2
+done 2
+fgjdfgkjd
+todo
+done 
+event 
+event /at 
+deadline 
+deadline /by 
+event /at sljfhfg
+deadline /by sdigdfg
+delete 
+delete 2
+list
+bye
