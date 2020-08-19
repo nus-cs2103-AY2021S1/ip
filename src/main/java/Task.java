@@ -2,22 +2,29 @@ public class Task {
     private static final String tick = "\u2713";
     private static final String cross = "\u2718";
     private String description;
+    private String taskMarker = "";
     private boolean isDone = false;
 
     public Task(String description) {
         this.description = description;
     }
 
+    protected Task(String description, String taskMarker) {
+        this.description = description;
+        this.taskMarker = taskMarker;
+    }
+
     public void markDone() {
         this.isDone = true;
     }
 
+    @Override
     public String toString() {
         String status = isDone ? tick : cross;
-        return boxFormat(status) + " " + description;
+        return boxFormat(taskMarker) + boxFormat(status) + " " + description;
     }
 
-    private String boxFormat(String symbol) {
+    protected String boxFormat(String symbol) {
         return String.format("[%s]", symbol);
     }
 }
