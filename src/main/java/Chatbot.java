@@ -94,6 +94,9 @@ public class Chatbot {
             case "done":
                 done(args);
                 break;
+            case "delete":
+                delete(args);
+                break;
             case "todo":
                 Task task = createTodo(args);
                 storeTask(task);
@@ -122,7 +125,7 @@ public class Chatbot {
 
         printWithDecorations("sInCe yOu'rE So hElPlEsS, "
                 + "i'lL ReMeMbEr \""+ task.toString() + "\" FoR YoU.\n"
-                + "yOu hAvE MaDe mE ReMeMbEr " + storedTasks.size() +" tAsKs.");
+                + "yOu hAvE MaDe mE ReMeMbEr " + storedTasks.size() +" tAsK(s).");
     }
 
     private void list() {
@@ -152,6 +155,26 @@ public class Chatbot {
             }
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new IncorrectArgumentException("sToP TrYiNg tO FoOl mE. tHe \"done\" ComMand"
+                    + " mUsT Be FolLoWed bY tHe InDEx Of THe TAsK.");
+        }
+    }
+
+    public void delete(String[] args) throws IncorrectArgumentException {
+        try {
+            // The index provided by the user is off by one
+            int index = Integer.parseInt(args[1]) - 1;
+
+            try {
+                Task removedTask = storedTasks.remove(index);
+                printWithDecorations("gReAt! OnE FeWeR ThInG To rEmEmBeR: "
+                        + removedTask.toString() + "\n"
+                        + "i sTiLl nEeD To rEmEmBeR " + storedTasks.size() +" tAsK(s).");
+            } catch (IndexOutOfBoundsException e) {
+                throw new IncorrectArgumentException("sToP TrYiNg tO FoOl mE. taSK #"
+                        + (index + 1) + " dOeS NoT ExIsT.");
+            }
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new IncorrectArgumentException("sToP TrYiNg tO FoOl mE. tHe \"delete\" ComMand"
                     + " mUsT Be FolLoWed bY tHe InDEx Of THe TAsK.");
         }
     }
