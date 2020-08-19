@@ -2,4 +2,11 @@ todo return book
 deadline return book /by sunday
 event return book /at sunday 12pm
 list
+blah
+done 2
+todo
+deadline
+event
+deadline 321
+event 123
 bye
