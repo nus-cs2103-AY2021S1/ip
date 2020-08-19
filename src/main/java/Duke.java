@@ -17,55 +17,82 @@ public class Duke {
 
             while (isNotTerminateCommand(currInput)) {
                 try {
-                if (isListCommand(currInput)) {
-                    //List out all tasks' description
-                    System.out.println(readList(storedTasks));
-                } else if (isDoneCommand(currInput)) {
-                    if (isValidDoneCommand(currInput, storedTasks.size())) {
+                    if (isListCommand(currInput)) {
+                        //List out all tasks' description
+                        System.out.println(readList(storedTasks));
+                    } else if (isDoneCommand(currInput)) {
+                        verifyDoneCommand(currInput, storedTasks.size());
                         String[] parts = currInput.split(" ");
                         int index = Integer.parseInt(parts[1]) - 1;
 
                         storedTasks.set(index, storedTasks.get(index).markDone());
 
                         System.out.println("Nice! I've marked this task as done:" + "\n" + "  " + storedTasks.get(index).toString());
+                    } else if (isDeleteCommand(currInput)) {
+                      verifyDeleteCommand(currInput, storedTasks.size());
+
+                        String[] parts = currInput.split(" ");
+                        int index = Integer.parseInt(parts[1]) - 1;
+
+                        System.out.println("Noted. I've removed this task:" + "\n" + "  " + storedTasks.get(index)
+                                + "\n" + "Now you have " + (storedTasks.size() - 1) + " tasks in the list.");
+                        storedTasks.remove(index);
                     } else {
-                        System.out.println("Sorry, invalid command");
+                        //handle task commands
+                        addTasks(currInput, storedTasks);
+                        System.out.println("Got it. I've added this task:" + "\n" + "  " + storedTasks.get(storedTasks.size() - 1)
+                                + "\n" + "Now you have " + storedTasks.size() + " tasks in the list.");
                     }
-                } else {
-                    //handle task commands
-                    addTasks(currInput, storedTasks);
-                    System.out.println("Got it. I've added this task:" + "\n" + "  " + storedTasks.get(storedTasks.size() - 1)
-                            + "\n" + "Now you have " + storedTasks.size() + " tasks in the list.");
-                }
-                currInput = scanner.nextLine();
-                } catch (InvalidCommandException e) {
-                    System.out.println(e + "\n" + "Please enter a valid command");
+
                     currInput = scanner.nextLine();
-                    //Should continue to run the program as it is
-                } catch (InvalidInputException e) {
-                    System.out.println(e + "\n" + "Please enter a valid input");
-                    currInput = scanner.nextLine();
-                    //Should continue to run the program as it is
-                }
+
+                    } catch (InvalidCommandException e) {
+                        System.out.println(e + "\n" + "Please enter a valid command");
+                        currInput = scanner.nextLine();
+                        //Should continue to run the program as it is
+                    } catch (InvalidInputException e) {
+                        System.out.println(e + "\n" + "Please enter a valid input");
+                        currInput = scanner.nextLine();
+                        //Should continue to run the program as it is
+                    }
 
             }
-
             System.out.println("Bye. Hope to see you again soon!");
             scanner.close();
         }
+
+     public static boolean isDeleteCommand(String input) {
+         String[] parts = input.split(" ");
+         return parts[0].equals("delete") && parts.length == 2;
+     }
+
+    public static void verifyDeleteCommand(String input, int numOfTasks) throws InvalidCommandException {
+        try {
+            String[] parts = input.split(" ");
+            int index = Integer.parseInt(parts[1]) - 1;
+            boolean result = index > -1 && index < numOfTasks;
+            if (result) {
+
+            } else {
+                throw new InvalidCommandException("Number is invalid!");
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException(("Please input number after the delete command!"));
+        }
+    }
 
     public static boolean isDoneCommand(String input) {
         String[] parts = input.split(" ");
         return parts[0].equals("done") && parts.length == 2;
     }
 
-    public static boolean isValidDoneCommand(String input, int numOfTasks) throws InvalidCommandException {
+    public static void verifyDoneCommand(String input, int numOfTasks) throws InvalidCommandException {
         try {
             String[] parts = input.split(" ");
             int index = Integer.parseInt(parts[1]) - 1;
             boolean result = index > -1 && index < numOfTasks;
             if (result) {
-                return true;
+
             } else {
                 throw new InvalidCommandException("Number is invalid!");
             }
