@@ -14,7 +14,7 @@ public class Duke {
         System.out.println(LINE);
     }
 
-    // this function says bye to the user when Duke recieves the input "bye"
+    // this function says bye to the user when Duke receives the input "bye"
     public static void goodbye() {
         System.out.println(LINE);
         System.out.println("     Bye. Hope to see you again soon!");
@@ -22,6 +22,7 @@ public class Duke {
     }
 
     // calling this function will cause Duke to echo what the user inputs to Duke
+    // this function is only used in level 1 of the iP
     public static void echo(String s) {
         System.out.println(LINE);
         System.out.println("     " + s);
@@ -29,21 +30,30 @@ public class Duke {
     }
 
     // this function takes in the input from the user and adds it to the list of tasks Duke is tracking
-    public static void addTask(String s, ArrayList<String> tasks) {
-        tasks.add(s);
+    public static void addTask(String s, ArrayList<Task> tasks) {
+        tasks.add(new Task(s));
         System.out.println(LINE);
         System.out.println("     " + "added: " + s);
         System.out.println(LINE);
     }
 
     // this function lists the list of tasks Duke is tracking
-    public static void list(ArrayList<String> tasks) {
+    public static void list(ArrayList<Task> tasks) {
         int counter = 1;
         System.out.println(LINE);
-        for (String task : tasks) {
-            System.out.println("     " + counter + ". " + task);
+        for (Task task : tasks) {
+            System.out.println("     " + counter + ".[" + task.getStatusIcon() + "] " + task.description);
             counter++;
         }
+        System.out.println(LINE);
+    }
+
+    // this function prints the task that is completed
+    public static void printDone(ArrayList<Task> tasks, int doneTask) {
+        Task t = tasks.get(doneTask - 1);
+        System.out.println(LINE);
+        System.out.println("     Nice! I've marked this task as done: ");
+        System.out.println("       " + "[" + t.getStatusIcon() + "] " + t.description);
         System.out.println(LINE);
     }
 
@@ -57,7 +67,7 @@ public class Duke {
         greeting();
 
         // this field keeps track of the tasks given to Duke
-        ArrayList<String> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
@@ -72,11 +82,22 @@ public class Duke {
             if (sc.hasNext("list")) {
                 list(tasks);
                 sc.nextLine();
+                continue;
+            }
+
+            if (sc.hasNext("done")) {
+                sc.skip("done");
+                int taskNumber = Integer.parseInt(sc.next().trim());
+                sc.nextLine();
+                tasks.get(taskNumber - 1).markAsDone();
+                printDone(tasks, taskNumber);
+                continue;
             }
 
             else {
                 String input = sc.nextLine();
                 addTask(input, tasks);
+                continue;
             }
         }
     }
