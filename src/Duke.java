@@ -9,7 +9,7 @@ public class Duke {
             new Formating<>(
                 new Greet(Status.GREET.toString())));
 
-        Memory memory = new Memory();
+        Memory<String> memory = new Memory();
         String extract = input.nextLine();
         String nextLine = new Formating<>(extract).shorten();
         while (!nextLine.equals("bye")) {
