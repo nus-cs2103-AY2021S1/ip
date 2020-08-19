@@ -87,7 +87,7 @@ public class Duke {
                             + "    " + taskToAdd.toString() + "\n  Now you have "
                             + taskList.size() + " tasks in the list.");
                 } else {
-                    // if the command is any string, simply create a task.
+                    // if the command is single line, simply create a task.
                     taskToAdd = new Task(nextInput);
                     taskList.add(taskToAdd);
                     System.out.println("  Got it. I've added this task:\n"

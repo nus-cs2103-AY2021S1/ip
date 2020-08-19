@@ -1,0 +1,11 @@
+return book
+todo borrow book
+todo buy iPhone
+deadline return book /by Sunday
+deadline CS2103T Assignment /by Thursday 2359
+event project meeting /at Mon 2-4pm
+
+deadline do homework /by no idea :-p
+deadline sleep /by 3am
+list
+bye
