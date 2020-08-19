@@ -45,7 +45,8 @@ public class Duke {
             // Command Handling
             // Adding items
             if (echo.matches("^todo.*")) {
-                printAdd(tasks.add(new ToDo(echo)));
+                String res = echo.substring("todo".length());
+                printAdd(tasks.add(new ToDo(res)));
             } else if (echo.matches("^deadline.*\\/by.*")) {
                 String[] res = echo.substring("deadline".length()).split("/by");
                 printAdd(tasks.add(new Deadline(res[0], res[1])));
