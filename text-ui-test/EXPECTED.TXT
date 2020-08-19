@@ -1,4 +1,5 @@
 Buenos Dias! Soy Duke, como estas mi amigo?
+DukeExceptions: ☹ OOPS !!! La lista está vacía. ¡Agregue una nueva tarea!
 Entendido. He agregado esta tarea:
 [T][✗]  return book
 Ahora tienes 1 tareas en la lista. 

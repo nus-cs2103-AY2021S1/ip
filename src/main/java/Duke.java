@@ -26,9 +26,16 @@ public class Duke {
             String userInput = sc.next();
             switch (userInput) {
                 case ACTION_LIST:
-                    System.out.println("Estas son las tareas de su lista:");
-                    for (int i = 0; i < userInputsList.size(); i++) {
-                        System.out.println((i + 1) + ". " + userInputsList.get(i).toString());
+                    try {
+                        if (userInputsList.isEmpty()) {
+                            throw new DukeExceptions("☹ OOPS !!! La lista está vacía. ¡Agregue una nueva tarea!");
+                        }
+                        System.out.println("Estas son las tareas de su lista:");
+                        for (int i = 0; i < userInputsList.size(); i++) {
+                            System.out.println((i + 1) + ". " + userInputsList.get(i).toString());
+                        }
+                    } catch (DukeExceptions e) {
+                        System.out.println(e);
                     }
                     break;
                 case TERMINATION:
