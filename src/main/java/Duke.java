@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Duke {
 
     public static ArrayList<Task> taskList = new ArrayList<>();
+    public static Scanner sc = new Scanner(System.in);
 
     public static class Task {
         protected String description;
@@ -28,49 +29,8 @@ public class Duke {
         }
     }
 
-    public static class Deadline extends Task {
-
-        protected String by;
-
-        public Deadline(String description, String by) {
-            super(description);
-            this.by = by;
-        }
-
-        @Override
-        public String toString() {
-            return "[D]" + super.toString() + "(by:" + by + ")";
-        }
-    }
-
-    public static class Event extends Task {
-        protected String at;
-
-        public Event(String description, String at) {
-            super(description);
-            this.at = at;
-        }
-
-        @Override
-        public String toString() {
-            return "[E]" + super.toString() + "(at:" + at + ")";
-        }
-    }
-
-    public static class Todo extends Task {
-
-        public Todo(String description) {
-            super(description);
-        }
-
-        @Override
-        public String toString() {
-            return "[T]" + super.toString();
-        }
-    }
-
     public static void readUserInput() {
-        Scanner sc = new Scanner(System.in);
+        
         String display = sc.nextLine();
 
         if (display.equals("bye")) {
@@ -86,25 +46,34 @@ public class Duke {
             }
             readUserInput();
 
-        } else if (display.startsWith("done")) {
+        } else if (display.startsWith("done ")) {
             int index = Integer.parseInt(display.substring(5));
             Task task = taskList.get(index - 1);
             task.markAsDone();
             System.out.println("Nice! I've marked this task as done:\n" + task);
             readUserInput();
 
-        } else if (display.startsWith("todo")) {
+        } else if (display.startsWith("todo ")) {
             String description = display.substring(5);
+//            if (description.equals("")) {
+//                throw new IncompleteTodoException("☹ OOPS!!! The description of a todo cannot be empty.");
+//            }
             Todo todo = new Todo(description);
             taskList.add(todo);
             System.out.println("Got it. I've added this task:\n" + todo + "\n"
                     + "Now you have " + taskList.size() + " tasks in the list.");
             readUserInput();
 
-        } else if (display.startsWith("deadline")) {
+        } else if (display.startsWith("deadline ")) {
             int index = display.indexOf("/");
             String description = display.substring(9, index);
-            String deadlineDate = display.substring(index + 3);
+//            if (description.equals("")) {
+//                throw new IncompleteDeadlineException("☹ OOPS!!! The description of a deadline cannot be empty.");
+//            }
+            String deadlineDate = display.substring(index + 4);
+//            if (deadlineDate.equals("")) {
+//                throw new IncompleteDeadlineException("☹ OOPS!!! The date and time of a todo cannot be empty.");
+//            }
             Deadline deadline = new Deadline(description, deadlineDate);
             taskList.add(deadline);
             System.out.println("Got it. I've added this task:\n" + deadline + "\n"
@@ -114,7 +83,13 @@ public class Duke {
         } else if (display.startsWith("event")) {
             int index = display.indexOf("/");
             String description = display.substring(6, index);
-            String eventDate = display.substring(index + 3);
+//            if (description.equals("")) {
+//                throw new IncompleteEventException("☹ OOPS!!! The description of an event cannot be empty.");
+//            }
+            String eventDate = display.substring(index + 4);
+//            if (eventDate.equals("")) {
+//                throw new IncompleteEventException("☹ OOPS!!! The date and time of a todo cannot be empty.");
+//            }
             Event event = new Event(description, eventDate);
             taskList.add(event);
             System.out.println("Got it. I've added this task:\n" + event + "\n"
@@ -122,9 +97,6 @@ public class Duke {
             readUserInput();
 
         } else {
-            System.out.println("added: " + display);
-            Task task = new Task(display);
-            taskList.add(task);
             readUserInput();
         }
     }
