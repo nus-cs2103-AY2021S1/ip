@@ -12,7 +12,7 @@ public class Duke {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException{
         ArrayList<Task> listOfTask = new ArrayList<>();
         String breakline = "    ______________________________________________________";
         String logo = "     ____        _        \n"
@@ -43,6 +43,9 @@ public class Duke {
                     break;
 
                 case "todo":
+                    if (userWord.length == 1 || userWord[1].equals("")) {
+                        throw new DukeException("   ☹ OOPS!!! The description of the command todo cannot be empty.");
+                    }
                     ToDo newT = new ToDo(userWord[1]);
                     listOfTask.add(newT);
                     System.out.println(breakline);
@@ -52,7 +55,13 @@ public class Duke {
                     break;
 
                 case "deadline":
+                    if (userWord.length == 1 || userWord[1].equals("")) {
+                        throw new DukeException("   ☹ OOPS!!! The description of the command deadline cannot be empty.");
+                    }
                     String[] content = userWord[1].split("/by", 2);
+                    if (content.length == 1 || content[1].equals("")) {
+                        throw new DukeException("   ☹ OOPS!!! We can't seem to find your deadline. Please type /by before your preferred timing");
+                    }
                     Deadline newD = new Deadline(content[0], content[1]);
                     listOfTask.add(newD);
                     System.out.println(breakline);
@@ -62,7 +71,13 @@ public class Duke {
                     break;
 
                 case "event":
+                    if (userWord.length == 1 || userWord[1].equals("")) {
+                        throw new DukeException("   ☹ OOPS!!! The description of the command event cannot be empty.");
+                    }
                     String[] content2 = userWord[1].split("/at", 2);
+                    if (content2.length == 1 || content2[1].equals("")) {
+                        throw new DukeException("   ☹ OOPS!!! We can't seem to find your event time. Please type /at before your preferred timing");
+                    }
                     Event newE = new Event(content2[0], content2[1]);
                     listOfTask.add(newE);
                     System.out.println(breakline);
@@ -72,6 +87,9 @@ public class Duke {
                     break;
 
                 case "done":
+                    if (userWord.length == 1 || userWord[1].equals("")) {
+                        throw new DukeException("   ☹ OOPS!!! The description of the command done cannot be empty.");
+                    }
                     int index = Integer.parseInt(userWord[1]) - 1;
                     if (index >= 0 && index < listOfTask.size()) {
                         Task temp = listOfTask.get(index);
@@ -79,19 +97,14 @@ public class Duke {
                         System.out.println(breakline);
                         System.out.println("    Nice! I've marked this task as done:");
                         System.out.println("    " + temp.toString());
-                        System.out.println(breakline);
                     } else {
-                        System.out.println(breakline);
-                        System.out.println("    Invalid index entry");
-                        System.out.println(breakline);
+                        throw new DukeException("    Invalid index entry");
                     }
+                    System.out.println(breakline);
                     break;
 
                 default:
-                    System.out.println(breakline);
-                    System.out.println("    Sorry! I'm not really sure what to do with this command yet ☹");
-                    System.out.println(breakline);
-                    break;
+                    throw new DukeException("    Sorry! I'm not really sure what to do with this command yet ☹");
             }
         }
         sc.close();
