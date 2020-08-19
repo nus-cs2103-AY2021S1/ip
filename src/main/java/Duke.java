@@ -41,6 +41,13 @@ public class Duke {
                 System.out.println("\t" + "Got it. I've added this task: ");
                 System.out.println("\t\t" + newTask);
             }
+            else if(input.startsWith("deadline ")){
+                input = input.substring(8).trim();
+                Task newTask = new Deadline(input);
+                taskList.add(newTask);
+                System.out.println("\t" + "Got it. I've added this task: ");
+                System.out.println("\t\t" + newTask);
+            }
             else{
                 System.out.println("\t" + "I do not understand. D:");
             }
