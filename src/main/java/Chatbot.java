@@ -35,22 +35,23 @@ public class Chatbot {
                 System.out.println("Nice! I've marked this task as done:\n" +
                         tasksList[taskNumber - 1]);
             } else if (line.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 this.listTasks();
             } else {
                 Task currTask;
                 if (line.contains("todo")) {
                     Scanner s2 = new Scanner(line);
-                    s2.skip("todo");
+                    s2.skip("todo ");
                     currTask = new Todo(s2.nextLine());
                 } else if (line.contains("deadline")) {
                     Scanner s2 = new Scanner(line);
-                    s2.skip("deadline");
-                    s2.useDelimiter("/by");
+                    s2.skip("deadline ");
+                    s2.useDelimiter(" /by ");
                     currTask = new Deadline(s2.next(), s2.next());
                 } else {
                     Scanner s2 = new Scanner(line);
-                    s2.skip("event");
-                    s2.useDelimiter("/at");
+                    s2.skip("event ");
+                    s2.useDelimiter(" /at ");
                     currTask = new Event(s2.next(), s2.next());
                 }
                 this.add(currTask);
