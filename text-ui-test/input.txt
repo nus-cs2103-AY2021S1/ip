@@ -1,0 +1,9 @@
+todo borrow book
+deadline finish IP /by today
+event internship sharing /at tonight, 7-8pm
+list
+done 1
+done 2
+done 3
+list
+bye
