@@ -1,4 +1,6 @@
 public class Task {
+    // 3 types of tasks: todos, deadline, event
+    // use polymorphism to store all tasks in a DS containing Task obj
     protected String description;
     protected boolean isDone;
 

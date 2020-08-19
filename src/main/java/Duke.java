@@ -20,21 +20,12 @@ public class Duke {
                 + "\t" + line);
     }
 
-    public static void repeat(String input){
-        if (input.equals("bye")) {
-            bye();
-        } else {
-            System.out.println( "\t" + line + "\n"
-                    + "\t" + input + "\n"
-                    + "\t" + line);
-        }
-    }
-
     public static void addTask(Task task) {
         list[index] = task;
         index++;
-        System.out.println("\t" + line + "\n"
-                + "\t" + "added: " + task + "\n"
+        System.out.println("\t" + line + "\n\tGot it. I've added this task:\n"
+                + "\t  " + task + "\n"
+                + "\tNow you have " + index + " tasks in the list.\n"
                 + "\t" + line);
     }
 
@@ -72,7 +63,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (true) {
             String input = sc.nextLine();
-            // possible actions: type task, list, bye, done 2
+            // possible actions: type task (todos/deadline/event), list, bye, done 2
             if (input.equals("bye")) {
                 bye();
                 sc.close();
@@ -82,11 +73,22 @@ public class Duke {
             } else if (firstWord(input).equals("done")) {
                 int taskNum = getTaskNum(input);
                 markDone(taskNum);
-            } else {
-                Task newTask = new Task(input);
+            } else if (firstWord(input).equals("todo")) {
+                Task newTask = new Todo(input.substring(5)); // cut "todo "
+                addTask(newTask);
+            } else if (firstWord(input).equals("deadline")) {
+                String str = input.substring(9);
+                String description = str.split(" /by ")[0]; // split the stirng by "/by ", take first half
+                String time = str.split(" /by ")[1];
+                Task newTask = new Deadline(description,time);
+                addTask(newTask);
+            } else if (firstWord(input).equals("event")) {
+                String str = input.substring(6);
+                String description = str.split(" /at ")[0]; // split the stirng by "/by ", take first half
+                String time = str.split(" /at ")[1];
+                Task newTask = new Event(description, time);
                 addTask(newTask);
             }
         }
     }
-
 }
