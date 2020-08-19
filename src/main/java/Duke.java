@@ -2,9 +2,8 @@ package main.java;
 
 import java.util.Scanner;
 
-//javac -cp . main/java/Duke.java
-
 public class Duke {
+    public static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
         /*String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -25,7 +24,6 @@ public class Duke {
 
         boolean exit_bye = false;
         while (!exit_bye) {
-            Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
             if (input.equals("bye")) {
                 System.out.println(starting_line + "Bye. Hope to see you again soon!" +  ending_line);
@@ -64,8 +62,11 @@ public class Duke {
                     }
                 }
                 System.out.println(separation_line + "\n");
-                //System.out.println(starting_line + input + ending_line);
             }
         }
     }
 }
+
+//compile when current directory is at IndividualProject/text-ui-test
+//javac -cp ../src/ ../src/main/java/Task.java   etc. (Task, Deadline, Event, Todo, Duke)
+//sh runtest.sh
