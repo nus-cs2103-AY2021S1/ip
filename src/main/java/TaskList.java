@@ -69,7 +69,7 @@ public class TaskList {
 
     public static class InvalidIndexException extends Exception {
         public InvalidIndexException() {
-            super("Invalid task index");
+            super("☹ OOPS!!! Invalid task index");
         }
     }
 }

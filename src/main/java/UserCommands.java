@@ -29,7 +29,11 @@ public class UserCommands {
     public static String[] parseTask(String command) throws InvalidCommandException {
         String[] components = command.split(" ");
         String taskType = components[0];
+
         if (taskType.equals(TODO_COMMAND)) {
+            if (components.length < 2) {
+                throw new InvalidCommandException("The description of a todo cannot be empty.");
+            }
             return new String[]{
                     String.join(" ", Arrays.copyOfRange(components, 1, components.length))
             };
@@ -58,11 +62,11 @@ public class UserCommands {
 
     public static class InvalidCommandException extends Exception {
         public InvalidCommandException(String errorMessage) {
-            super("Invalid command: " + errorMessage);
+            super("☹ OOPS!!! " + errorMessage);
         }
 
         public InvalidCommandException() {
-            super("Invalid command");
+            super("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }
