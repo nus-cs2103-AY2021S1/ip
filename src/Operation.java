@@ -1,9 +1,10 @@
 public class Operation {
-    private Memory<Task> memory;
+    public static Memory<Task> memory;
 
     public Operation(Memory<Task> memory) {
         this.memory = memory;
     }
+
 
     public void run(String order) {
 
@@ -34,11 +35,46 @@ public class Operation {
             } else if (order.length() == 0) { }
 
             else {
-                memory.addMemory(new Task(order));
-                Formating<Response> formatedEcho =
-                        new Formating<>(new Echo(Status.ADD.toString() + order));
+                Task task = identifier(order);
+                memory.addMemory(task);
+                Formating<Task> formatedEcho =
+                        new Formating<>(task);
                 System.out.println(formatedEcho);
             }
         }
     }
+
+    public Task identifier(String description) {
+        int len = description.length();
+        int pointer = 0;
+
+        while (pointer < len && description.charAt(pointer) != ' ') {
+            pointer++;
+        }
+
+        String indetity = description.substring(0, pointer);
+
+        int separator = pointer;
+        while (separator < len && description.charAt(separator) != '/') {
+            separator++;
+        }
+
+        String detail = description.substring(pointer + 1, separator);
+
+        if (indetity.equals(Status.TODO.toString())) {
+            return new Task(detail);
+        } else {
+            while (separator < len && description.charAt(separator) != ' ') {
+                separator++;
+            }
+
+            String time = description.substring(separator + 1);
+            if (indetity.equals(Status.DEADLINE.toString())) {
+                return new Deadline(detail, time);
+            } else {
+                return new Event(detail, time);
+            }
+        }
+    }
+
 }

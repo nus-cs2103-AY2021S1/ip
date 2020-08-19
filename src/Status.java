@@ -59,10 +59,39 @@ public enum Status {
         }
     },
 
-    LIST {
+    TODO {
         @Override
         public String toString() {
-            return "    Here are the tasks in your list:\n";
+            return "todo";
+        }
+    },
+
+    DEADLINE {
+        @Override
+        public String toString() {
+            return "deadline";
+        }
+    },
+
+    EVENT {
+        @Override
+        public String toString() {
+            return "event";
+        }
+    },
+
+    TASKADDED {
+        @Override
+        public String toString() {
+            return "    Git it. I've added this task \n" +
+                    "      ";
+        }
+    },
+
+    REPORT {
+        @Override
+        public String toString() {
+            return "    Now you have %d tasks in the list.";
         }
     }
 

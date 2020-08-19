@@ -1,3 +1,5 @@
+import javax.swing.text.html.Option;
+
 public class Formating<T> {
     private final T content;
 
@@ -33,6 +35,17 @@ public class Formating<T> {
     public String toString() {
         String underscore =
                 "  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + "\n";
+
+        if (this.content instanceof Task) {
+
+            return underscore +
+                    Status.TASKADDED.toString() +
+                    content + "\n" +
+                    String.format(Status.REPORT.toString(), Operation.memory.getMemory().size()) +
+                    "\n" +
+                    underscore;
+        }
+
         return underscore +
                 content + "\n" +
                 underscore;
