@@ -1,3 +1,8 @@
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -38,21 +43,21 @@ public class Duke {
                 input = input.substring(4).trim();
                 Task newTask = new Todo(input);
                 taskList.add(newTask);
-                System.out.println("\t" + "Got it. I've added this task: ");
+                System.out.println("\t" + "Got it. I've added this task:");
                 System.out.println("\t\t" + newTask);
             }
             else if(input.startsWith("deadline ")){
                 input = input.substring(8).trim();
                 Task newTask = new Deadline(input);
                 taskList.add(newTask);
-                System.out.println("\t" + "Got it. I've added this task: ");
+                System.out.println("\t" + "Got it. I've added this task:");
                 System.out.println("\t\t" + newTask);
             }
             else if(input.startsWith("event ")){
                 input = input.substring(5).trim();
                 Task newTask = new Event(input);
                 taskList.add(newTask);
-                System.out.println("\t" + "Got it. I've added this task: ");
+                System.out.println("\t" + "Got it. I've added this task:");
                 System.out.println("\t\t" + newTask);
             }
             else{

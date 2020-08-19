@@ -1,6 +1,8 @@
+package task;
+
 public class Deadline extends Task{
     String time;
-    protected Deadline(String line) {
+    public Deadline(String line) {
         super();
         String[] command = line.split(" \\/by ");
         this.item = command[0];

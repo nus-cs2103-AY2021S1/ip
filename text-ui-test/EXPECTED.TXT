@@ -5,3 +5,19 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What can I do for you today?
+	Got it. I've added this task:
+		[T] [✗] eggs
+	Got it. I've added this task:
+		[D] [✗] egg (by: 20)
+	Got it. I've added this task:
+		[E] [✗] egger (at: 2019)
+	1. [T] [✗] eggs
+	2. [D] [✗] egg (by: 20)
+	3. [E] [✗] egger (at: 2019)
+	Nice! I've marked this task as done:
+		[D] [✓] egg (by: 20)
+	1. [T] [✗] eggs
+	2. [D] [✓] egg (by: 20)
+	3. [E] [✗] egger (at: 2019)
+	Bye. Hope to see you again soon!

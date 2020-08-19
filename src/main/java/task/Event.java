@@ -1,6 +1,8 @@
+package task;
+
 public class Event extends Task{
     String time;
-    protected Event(String line) {
+    public Event(String line) {
         super();
         String[] command = line.split(" \\/at ");
         this.item = command[0];

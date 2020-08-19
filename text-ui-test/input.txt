@@ -1,0 +1,7 @@
+todo eggs
+deadline egg /by 20
+event egger /at 2019
+list
+done 2
+list
+bye
