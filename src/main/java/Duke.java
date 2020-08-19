@@ -8,18 +8,26 @@ public class Duke {
 
     public static void main(String[] args) {
         greeting();
-        String command = scanner.nextLine();
+        String[] inputArr = getInputArr();
+        String command = inputArr[0];
+
         while (!command.equals("bye")) {
             if (command.equals("list")) {
                 listCommand();
-            } else if (command.contains("done")) {
-                doneCommand(command);
-            } else {
-                addCommand(command);
+            } else if (command.equals("done")) {
+                doneCommand(inputArr);
+            } else if (command.equals("deadline")) {
+                addDeadline(inputArr);
             }
-            command = scanner.nextLine();
+            inputArr = getInputArr();
+            command = inputArr[0];
         }
         goodbye();
+    }
+
+    public static String[] getInputArr() {
+        String input = scanner.nextLine();
+        return input.split("\\s+");
     }
 
     public static void greeting() {
@@ -46,28 +54,43 @@ public class Duke {
                     + "      "
                     + (i + 1)
                     + ". "
-                    + task.getStatusIcon()
-                    + " "
-                    + task.getDescription()
+                    + task
                     + "\n";
         }
         message = message + line;
         System.out.println(message);
     }
 
-    public static void addCommand(String command) {
-        Task task = new Task(command);
-        taskList.add(task);
+    public static void addDeadline(String[] inputArr) {
+        String desc = "";
+        String by = "";
+
+        int i = 1;
+        while (!inputArr[i].contains("/")) {
+            desc = desc + inputArr[i] + " ";
+            i++;
+        }
+        desc = desc.substring(0, desc.length() - 1);
+        i++;
+        while (i < inputArr.length) {
+            by = by + inputArr[i] + " ";
+            i++;
+        }
+        by = by.substring(0, by.length() - 1);
+
+        Deadline deadline = new Deadline(desc, by);
+        taskList.add(new Deadline(desc, by));
+
         String message = line
                 + "      added: "
-                + command
+                + deadline
                 + "\n"
                 + line;
         System.out.println(message);
     }
 
-    public static void doneCommand(String command) {
-        String lastChar = command.substring(command.length() - 1);
+    public static void doneCommand(String[] inputArr) {
+        String lastChar = inputArr[inputArr.length - 1];
         int i = Integer.parseInt(lastChar);
         i -= 1;
         Task task = taskList.get(i);
@@ -75,9 +98,7 @@ public class Duke {
         String message = line
                 + "      Nice! I've marked this task as done:\n"
                 + "      "
-                + task.getStatusIcon()
-                + " "
-                + task.getDescription()
+                + task
                 + "\n"
                 + line;
         System.out.println(message);

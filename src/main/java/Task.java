@@ -18,4 +18,10 @@ public class Task {
     public void markAsDone() {
         isDone = true;
     }
+
+    public String toString() {
+        return getStatusIcon()
+                + " "
+                + getDescription();
+    }
 }
