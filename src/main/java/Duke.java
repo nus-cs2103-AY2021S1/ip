@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -5,8 +7,9 @@ public class Duke {
         System.out.println("Hello I'm Duke!");
         System.out.println("What can I do for you?");
 
-        String userInput;
+        List savedItems = new ArrayList<String>();
 
+        String userInput;
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -18,7 +21,8 @@ public class Duke {
                     System.out.println("Bye. Hope to see you again soon!");
                     return;
                 default:
-                    System.out.println(userInput);
+                    savedItems.add(userInput);
+                    System.out.println("added: " + userInput);
             }
         }
     }
