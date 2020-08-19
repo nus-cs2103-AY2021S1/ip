@@ -1,3 +1,8 @@
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
+
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -30,31 +35,65 @@ public class Duke {
 
         printWithDecoration(strings.getString("output.greeting"));
 
-        String input, output;
+        String input, output = "", inputMainCommand;
 
         while (scanner.hasNext()) {
             input = scanner.nextLine();
+            inputMainCommand = input.split(" ")[0];
 
             if (input.equals(strings.getString("command.list"))) {
+                
                 output = IntStream.range(0, tasks.size())
                         .mapToObj(index -> (index + 1) + ". " + tasks.get(index) + "\t")
                         .reduce("", (x, y) -> x + y)
                         .strip();
 
-                printWithDecoration(output);
-            } else if (input.split(" ")[0].equals(strings.getString("command.done"))) {
+            } else if (inputMainCommand.equals(strings.getString("command.done"))) {
+                
                 int toMark = Integer.parseInt(input.split(" ")[1]) - 1;
                 tasks.get(toMark).markAsDone();
                 output = (strings.getString("output.done") + tasks.get(toMark)).strip();
+                
+            } else if (inputMainCommand.equals(strings.getString("command.todo"))) {
+                
+                Task toAdd = new Todo(input.replace(strings.getString("command.todo"), "").strip());
+                tasks.add(toAdd);
 
-                printWithDecoration(output);
+                output = String.format(strings.getString("output.added"), toAdd, tasks.size());
+                
+            } else if (inputMainCommand.equals(strings.getString("command.deadline"))) {
+                
+                String description = input.split("/by")[0]
+                        .replace(strings.getString("command.todo"), "")
+                        .strip();
+
+                String by = input.split("/by")[1]
+                        .strip();
+                
+                Task toAdd = new Deadline(description, by);
+                tasks.add(toAdd);
+                
+                output = String.format(strings.getString("output.added"), toAdd, tasks.size());
+                
+            } else if (inputMainCommand.equals(strings.getString("command.event"))) {
+
+                String description = input.split("/at")[0]
+                        .replace(strings.getString("command.deadline"), "")
+                        .strip();
+
+                String at = input.split("/at")[1]
+                        .strip();
+
+                Task toAdd = new Event(description, at);
+                tasks.add(toAdd);
+
+                output = String.format(strings.getString("output.added"), toAdd, tasks.size());
+
             } else if (input.equals(strings.getString("command.bye"))) {
                 break;
-            } else {
-                tasks.add(new Task(input));
-                printWithDecoration(strings.getString("output.added") + input);
             }
 
+            printWithDecoration(output);
         }
 
         printWithDecoration(strings.getString("output.bye"));
