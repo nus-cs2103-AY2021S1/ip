@@ -1,7 +1,73 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Rawr! I'm Dino ><
+ ____
+|  _ \ _ _____  ___
+| | | | |  _  |/   \
+| |_| | | | | | |_| |
+|____/|_|_| |_|\___/
 
+Get started on your task list by entering a task!
+To see how to format your task, input 'format'
+To see your list of tasks, input 'list'.
+____________________________________________________________
+Formats for the three task types Todo, Deadline and Event, are shown below.
+Todo: 'todo <task description>' (e.g., visit new theme park)
+Deadline: 'deadline <task description> /by <date/time>' (e.g., submit report by 11/10/2019 5pm)
+Event: 'event <task description> /at <date/start and end time>' (e.g., team project meeting on 2/10/2019 2-4pm)
+____________________________________________________________
+Rawr! Dino could not find any items in your task list.
+Get started by entering a task. Formats for a task can be found by entering 'format'.
+____________________________________________________________
+Dino has added to your list of tasks:
+[T][✘] swimming in sea
+Number of tasks in list: 1
+____________________________________________________________
+Dino has added to your list of tasks:
+[D][✘] 321  (by:  0)
+Number of tasks in list: 2
+____________________________________________________________
+Dino lists your tasks:
+1. [T][✘] swimming in sea
+2. [D][✘] 321  (by:  0)
+To mark off a task after completion, input 'done <task number>'.
+____________________________________________________________
+Dino has added to your list of tasks:
+[E][✘] 456  (at:  7)
+Number of tasks in list: 3
+____________________________________________________________
+Dino has added to your list of tasks:
+[T][✘] racing car
+Number of tasks in list: 4
+____________________________________________________________
+Dino lists your tasks:
+1. [T][✘] swimming in sea
+2. [D][✘] 321  (by:  0)
+3. [E][✘] 456  (at:  7)
+4. [T][✘] racing car
+To mark off a task after completion, input 'done <task number>'.
+____________________________________________________________
+Great! Dino has marked Task 1 as done:
+[T][✓] swimming in sea
+____________________________________________________________
+Great! Dino has marked Task 2 as done:
+[D][✓] 321  (by:  0)
+____________________________________________________________
+Dino lists your tasks:
+1. [T][✓] swimming in sea
+2. [D][✓] 321  (by:  0)
+3. [E][✘] 456  (at:  7)
+4. [T][✘] racing car
+To mark off a task after completion, input 'done <task number>'.
+____________________________________________________________
+Task 88 is not in your list of tasks!
+____________________________________________________________
+Rawr! Dino could not add your task. Make sure your format is correct.
+Formats to input a task can be found by entering 'format'.
+____________________________________________________________
+Rawr! Dino could not add your task. Make sure your format is correct.
+Formats to input a task can be found by entering 'format'.
+____________________________________________________________
+Rawr! Dino could not add your task. Make sure your format is correct.
+Formats to input a task can be found by entering 'format'.
+____________________________________________________________
+Rawr. Hope to see you again soon! ><
+____________________________________________________________

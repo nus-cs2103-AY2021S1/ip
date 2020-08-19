@@ -1,0 +1,16 @@
+format
+list
+todo swimming in sea
+deadline 321 /by 0
+list
+event 456 /at 7
+todo racing car
+list
+done 1
+done 2
+list
+done 88
+chasing elephants
+deadline eat by 2pm
+event party at 4pm
+bye

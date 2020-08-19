@@ -4,7 +4,14 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        System.out.println("Rawr! I'm Dino ><\n" + "Get started on your task list by entering a task!"
+        String logo = " ____\n"
+                + "|  _ \\ _ _____  ___\n"
+                + "| | | | |  _  |/   \\\n"
+                + "| |_| | | | | | |_| |\n"
+                + "|____/|_|_| |_|\\___/\n";
+        System.out.println("Rawr! I'm Dino ><\n"
+                +logo
+                + "\nGet started on your task list by entering a task!"
                 + "\nTo see how to format your task, input 'format'"
                 + "\nTo see your list of tasks, input 'list'."
                 + "\n____________________________________________________________");
@@ -12,7 +19,7 @@ public class Duke {
         boolean isBye = false;
         List<Task> tasks = new ArrayList<>();
 
-        while (!isBye) {
+        while (!isBye && scanner.hasNextLine()) {
             String input = scanner.nextLine();
             String[] inputWords = input.split(" ");
             if (input.equals("bye")) {
@@ -62,7 +69,7 @@ public class Duke {
                     Task doneTask = tasks.get(taskIndex);
                     doneTask.markAsDone();
                     System.out.println("Great! Dino has marked " + "Task " + taskNumber
-                            + " as done: \n" + doneTask
+                            + " as done:\n" + doneTask
                             + "\n____________________________________________________________");
                 }
             } else {
@@ -73,7 +80,7 @@ public class Duke {
                         String task = input.substring(5);
                         Todo todo = new Todo(task);
                         tasks.add(todo);
-                        System.out.println("Dino has added to your list of tasks: \n"
+                        System.out.println("Dino has added to your list of tasks:\n"
                                 + todo
                                 + "\nNumber of tasks in list: " + tasks.size()
                                 + "\n____________________________________________________________");
@@ -83,7 +90,7 @@ public class Duke {
                                 .split("/by");
                         Deadline deadline = new Deadline(taskBy[0], taskBy[1]);
                         tasks.add(deadline);
-                        System.out.println("Dino has added to your list of tasks: \n"
+                        System.out.println("Dino has added to your list of tasks:\n"
                                 + deadline
                                 + "\nNumber of tasks in list: " + tasks.size()
                                 + "\n____________________________________________________________");
@@ -93,7 +100,7 @@ public class Duke {
                                 .split("/at");
                         Event event = new Event(eventAt[0], eventAt[1]);
                         tasks.add(event);
-                        System.out.println("Dino has added to your list of tasks: \n"
+                        System.out.println("Dino has added to your list of tasks:\n"
                                 + event
                                 + "\nNumber of tasks in list: " + tasks.size()
                                 + "\n____________________________________________________________");
@@ -114,5 +121,6 @@ public class Duke {
                 }
             }
         }
+        scanner.close();
     }
 }
