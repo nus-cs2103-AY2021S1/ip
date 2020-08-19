@@ -7,9 +7,13 @@ public class Duke {
     public static ArrayList<Task> tasks = new ArrayList<>();
 
     private static void greet() {
+        System.out.println(UIPrint.logo);
+
         UIPrint.drawLine(UIPrint.star, 50);
+
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
+
         UIPrint.drawLine(UIPrint.star, 50);
     }
 
@@ -61,18 +65,10 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
         greet();
 
         while (!exitLoop) {
             String inputLine = UserInput.getOneLine();
-
             checkCommand(inputLine);
         }
     }

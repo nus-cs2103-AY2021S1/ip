@@ -1,5 +1,11 @@
 public class UIPrint {
 
+    public static String logo = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
     public static char star = '*';
     public static String tick = "[Done]";
     public static String cross = "[Not Done]";
