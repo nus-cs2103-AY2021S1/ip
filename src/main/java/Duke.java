@@ -45,7 +45,7 @@ public class Duke {
         System.out.println(LINE);
         System.out.println("     Here are the tasks in your list:");
         for (Task task : tasks) {
-            System.out.println("     " + counter + ".[" + task.getStatusIcon() + "] " + task.description);
+            System.out.println("     " + counter + "." + task.toString());
             counter++;
         }
         System.out.println(LINE);
@@ -56,7 +56,7 @@ public class Duke {
         Task t = tasks.get(doneTask - 1);
         System.out.println(LINE);
         System.out.println("     Nice! I've marked this task as done: ");
-        System.out.println("       " + "[" + t.getStatusIcon() + "] " + t.description);
+        System.out.println("       " + t.toString());
         System.out.println(LINE);
     }
 
