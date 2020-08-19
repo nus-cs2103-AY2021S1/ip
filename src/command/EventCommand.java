@@ -1,5 +1,10 @@
+package command;
+
 import exception.IncorrectFormatException;
-import exception.NoDescriptionException;
+import task.Event;
+import ui.UIPrint;
+import data.DukeData;
+import function.DukeFunction;
 
 public class EventCommand extends Command {
 
@@ -22,7 +27,7 @@ public class EventCommand extends Command {
         String time = splitStr[1];
 
         Event newEvent = new Event(UIPrint.eventIcon, description, time);
-        Duke.tasks.add(newEvent);
-        Duke.reportNewTask(newEvent);
+        DukeData.tasks.add(newEvent);
+        DukeFunction.reportNewTask(newEvent);
     }
 }

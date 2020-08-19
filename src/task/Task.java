@@ -1,3 +1,7 @@
+package task;
+
+import ui.UIPrint;
+
 public class Task {
 
     private String icon;

@@ -1,3 +1,5 @@
+package ui;
+
 public class UIPrint {
 
     public static String logo = " ____        _        \n"

@@ -1,4 +1,10 @@
+package command;
+
 import exception.NoDescriptionException;
+import task.ToDo;
+import ui.UIPrint;
+import data.DukeData;
+import function.DukeFunction;
 
 public class TodoCommand extends Command {
 
@@ -17,7 +23,7 @@ public class TodoCommand extends Command {
         }
 
         ToDo newToDo = new ToDo(UIPrint.todoIcon, str);
-        Duke.tasks.add(newToDo);
-        Duke.reportNewTask(newToDo);
+        DukeData.tasks.add(newToDo);
+        DukeFunction.reportNewTask(newToDo);
     }
 }

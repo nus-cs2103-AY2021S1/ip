@@ -1,3 +1,8 @@
+package command;
+
+import ui.UIPrint;
+import data.DukeData;
+
 public class ExitCommand extends Command {
 
     public ExitCommand() {
@@ -12,6 +17,6 @@ public class ExitCommand extends Command {
         System.out.println(exitWords);
         UIPrint.drawLine(UIPrint.star, 50);
 
-        Duke.exitLoop = true;
+        DukeData.exitLoop = true;
     }
 }
