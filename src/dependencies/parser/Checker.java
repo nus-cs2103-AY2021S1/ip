@@ -26,7 +26,7 @@ class Checker {
         else if (s.contains("done ") || s.contains("Done ")) {
             int x = s.indexOf("done");
             String task = s.substring((x) + 5);
-            Task t = Task.createDoneTask(task.trim());
+            Task t = Task.createMiscTask(task.trim());
             e = Command.createDoneCommand(t);
         }
         else if (s.contains("todo ") || s.contains("Todo ")) {
@@ -49,11 +49,21 @@ class Checker {
             Task t = Task.createEvent(arr[0].trim(), arr[1].trim());
             e = Command.createAddCommand(t);
 
+        } else if (s.contains("delete") || s.contains("Delete")) {
+            int x = s.indexOf("delete");
+            String task = s.substring(x + 7);
+            Task t = Task.createMiscTask(task);
+            e = Command.createDeleteCommand(t);
         } else {
+            //TODO: Throw exceptions if command is unrecognised/invalid.
             e = null;
         }
 
         return new Checker(e);
+    }
+
+    private static boolean checkForError() {
+        return false;
     }
 
     private boolean isEvent(String s) {

@@ -38,6 +38,13 @@ public class Store {
             if (i != todoList.size() - 1) {
                 sb.append("\n");
             }
+            if (i == todoList.size() - 1) {
+                sb.append("So stop procrastinating!");
+            }
+        }
+        if (todoList.size() == 0) {
+            sb.append("Theres's nothing here!\n")
+                    .append("Try adding something to your list?");
         }
 
         return sb.toString();
@@ -80,8 +87,8 @@ public class Store {
      * @return
      */
     public String deleteTask(Integer nums) {
-        Task t = todoList.get(nums);
-        todoList.remove(nums);
+        Task t = todoList.get(nums - 1);
+        todoList.remove(nums - 1);
         return t.toString();
     }
 

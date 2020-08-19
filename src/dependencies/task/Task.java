@@ -31,7 +31,7 @@ public abstract class Task {
 
     /* -------------------------- Static facory methods to create different Tasks ----------------------- */
 
-    public static Task createDoneTask(String task) { return new DoneTask(task); }
+    public static Task createMiscTask(String task) { return new DoneTask(task); }
 
     public static Task createEmptyTask(){
         return new EmptyTask();

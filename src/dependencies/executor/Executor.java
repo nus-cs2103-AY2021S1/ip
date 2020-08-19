@@ -36,7 +36,7 @@ public class Executor {
      * Executed the given command.
      *
      * @param executable
-     * @return string specifying what happened/what was done
+     * @return string specifying what happened/what was done (no newline character at end of reply)
      */
     public String receiveAndExec(Executable executable) {
         // TODO: Adding of new commands is to be done here.
@@ -65,18 +65,15 @@ public class Executor {
         return execAndReturn(executable);
     }
 
-
-
+    // TODO: Ideally this class should not be returning strings. String should be returned in the Parser
     private String execAndReturn(Executable e) {
         String reply;
         switch(commandState) {
             case LIST: {
                 reply = storage.getTodosInList();
                 StringBuilder sb = new StringBuilder();
-                sb.append("Here are the task in your list:\n")
-                        .append(reply)
-                        .append("\n")
-                        .append("Stop whining and start rolling.");
+                sb.append("Here are the tasks in your list:\n")
+                        .append(reply);
                 return sb.toString();
             }
             case ADD: {
