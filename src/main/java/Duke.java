@@ -44,14 +44,15 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         TaskManager taskManager = new TaskManager();
         echo("Duke at your service. How may I help?");
+        outerLoop:
         while (sc.hasNext()) {
             String input = sc.nextLine();
             String[] words = interpretInput(input);
             String command = words[0];
             switch (command) {
                 case "bye" :
-                    echo("Bye. Hope to see you again, bro!");
-                    break;
+                    echo("Bye. See you again, bro!");
+                    break outerLoop;
                 case "list":
                     echo("Here are the tasks in your list\n" + taskManager.toString());
                     break;
@@ -65,8 +66,8 @@ public class Duke {
                     } catch (NumberFormatException err){
                         echo("Error. Please key in an integer after \"done\"");
                     } catch (IndexOutOfBoundsException err) {
-                        echo("Error. You don't have task # " + words[1] +
-                                "Key in \"list\" to find out the tasks");
+                        echo("Error. You don't have task #" + words[1] +
+                                ".\nKey in \"list\" to find out the tasks on hand");
                     } catch (TaskDoneException err) {
                         echo("The task is already done. No need to mark it as done again.");
                     }
@@ -96,7 +97,7 @@ public class Duke {
                     }
                     break;
                 default:
-                    echo("OOPS!!! I don't know what that means");
+                    echo("OOPS!!! I don't know what does it mean by: \"" + input + "\"" );
                     break;
             }
         }
