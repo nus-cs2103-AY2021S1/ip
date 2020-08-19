@@ -41,6 +41,9 @@ public class Duke {
                     System.out.println(wrapMessage(message));
                 }
                 break;
+            case "delete":
+                deleteTask(inputArr);
+                break;
             default:
                 String message = "Sorry I dont understand!! Please give a proper command.";
                 System.out.println(wrapMessage(message));
@@ -142,6 +145,20 @@ public class Duke {
             i++;
         }
         return dateTime.substring(0, dateTime.length() - 1);
+    }
+
+    private static void deleteTask(String[] inputArr) {
+        String lastChar = inputArr[inputArr.length - 1];
+        int i = Integer.parseInt(lastChar);
+        Task task = taskList.get(i - 1);
+        taskList.remove(task);
+        String message = "Noted! I've removed this task:\n"
+                + task
+                + "\n"
+                + "Now you have "
+                + taskList.size()
+                + " tasks in the list.";
+        System.out.println(wrapMessage(message));
     }
 
     private static void doneTask(String[] inputArr) {
