@@ -8,12 +8,13 @@
 Hello! I'm PandaBot.
 What can I do for you?
 
-Added: visit the library
 Added: read book
-1. visit the library
-2. read book
-Added: buy an umbrella
-1. visit the library
-2. read book
-3. buy an umbrella
-Bye! Remember to do your work! See you soon~
+Added: return book
+Added: buy bread
+These are the tasks you have: 
+1. [✘] read book
+2. [✘] return book
+3. [✘] buy bread
+Great! I've marked this task as done:
+[✓] return book
+Bye! Remember to finish the rest of your work! See you soon~

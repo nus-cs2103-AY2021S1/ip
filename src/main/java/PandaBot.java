@@ -1,17 +1,17 @@
 import java.util.Scanner;
 
 public class PandaBot {
-    private static String[] tasks = new String[100];
+    private static Task[] tasks = new Task[100];
     private static int counter = 0;
 
 
     public static void main(String[] args) {
         String logo =
-                 " ____                    _   \n"
-               + "|  _ \\                  | |  \n"
+                 " ____                    _\n"
+               + "|  _ \\                  | |\n"
                + "| |_| |___  _ _  __  ___| | ___  _\n"
-               + "| ___/  _ \\| | |/  |/ _   |/ _ \\| | \n"
-               + "| |  | |_|   |  _  | |_|  | |_|   | \n"
+               + "| ___/  _ \\| | |/  |/ _   |/ _ \\| |\n"
+               + "| |  | |_|   |  _  | |_|  | |_|   |\n"
                + "|_|  \\____,__|_| |_|\\___,_|\\___,__|" + " bot\n\n";
 
         System.out.println(logo + "Hello! I'm PandaBot.\n" + "What can I do for you?\n");
@@ -22,9 +22,12 @@ public class PandaBot {
         while (sc.hasNextLine()) {
             String command = sc.nextLine();
             if (command.equals("bye")) {
-                System.out.println("Bye! Remember to do your work! See you soon~");
+                // exit the app when the user types bye
+                System.out.println("Bye! Remember to finish the rest of your work! See you soon~");
                 break;
             } else if (command.equals("list")) {
+                // list command
+                System.out.println("These are the tasks you have: ");
                 for (int i = 0; i < tasks.length; i++) {
                     if (tasks[i] != null) {
                         System.out.println((i + 1) + ". " + tasks[i]);
@@ -32,9 +35,29 @@ public class PandaBot {
                         break;
                     }
                 }
+            } else if (command.startsWith("done")) {
+                // done command
+                // search for the task done
+                String[] cmd = command.split("(?!<done) ");
+                int taskNum = -1;
+                try {
+                    taskNum = Integer.parseInt(cmd[1]) - 1;
+                    // mark the task as done
+                    tasks[taskNum].markTaskDone();
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid task number.");
+                } finally {
+                    System.out.println("Great! I've marked this task as done:");
+                    if (taskNum >= 0) {
+                        System.out.println(tasks[taskNum]);
+                    } else {
+                        System.out.println("Error with task number");
+                    }
+                }
+
             } else {
                 System.out.println("Added: " + command);
-                tasks[counter] = command;
+                tasks[counter] = new Task(command) ;
                 counter++;
             }
         }

@@ -1,7 +1,6 @@
-list
-visit the library
 read book
+return book
+buy bread
 list
-buy an umbrella
-list
+done 2
 bye
