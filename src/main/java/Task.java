@@ -21,6 +21,13 @@ public class Task {
                 task, taskList.size(), taskList.size() > 1 ? "s": ""));
     }
 
+    public static void deleteTask(int num) {
+        Task deletedTask = taskList.get(num - 1);
+        taskList.remove(num - 1);
+        Print.formatPrint(String.format("Got it. I've deleted this task: \n   %s\nNow you have %d task%s in the list.",
+                deletedTask, taskList.size(), taskList.size() > 1 ? "s": ""));
+    }
+
     public static void printList() {
         String output = "Here are the tasks in your list:\n";
         int count = taskList.size();

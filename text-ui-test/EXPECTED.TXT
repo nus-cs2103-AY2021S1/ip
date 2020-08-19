@@ -5,20 +5,20 @@
    
    ----------------------------
    Got it. I've added this task: 
-      [D][✘] do 2103 homework (by: thursday)
+      [D][✘] do 2103 homework (by: Thursday)
    Now you have 1 task in the list.
    ----------------------------
    
    ----------------------------
    Got it. I've added this task: 
-      [E][✘] meet jason leo (at: 5pm monday)
+      [E][✘] meet jason leo (at: 5pm Monday)
    Now you have 2 tasks in the list.
    ----------------------------
    
    ----------------------------
    Here are the tasks in your list:
-   1. [D][✘] do 2103 homework (by: thursday)
-   2. [E][✘] meet jason leo (at: 5pm monday)
+   1. [D][✘] do 2103 homework (by: Thursday)
+   2. [E][✘] meet jason leo (at: 5pm Monday)
    ----------------------------
    
    ----------------------------
@@ -29,7 +29,7 @@
    
    ----------------------------
    Nice! I've marked this task as done: 
-      [E][✓] meet jason leo (at: 5pm monday)
+      [E][✓] meet jason leo (at: 5pm Monday)
    ----------------------------
    
    ----------------------------
@@ -46,6 +46,26 @@
    
    ----------------------------
    OOPS! I'm sorry, but I don't know what that means :-(
+   ----------------------------
+   
+   ----------------------------
+   OOPS! Task number is invalid!
+   ----------------------------
+   
+   ----------------------------
+   OOPS! Task number is invalid!
+   ----------------------------
+   
+   ----------------------------
+   Got it. I've deleted this task: 
+      [E][✓] meet jason leo (at: 5pm Monday)
+   Now you have 2 tasks in the list.
+   ----------------------------
+   
+   ----------------------------
+   Here are the tasks in your list:
+   1. [D][✘] do 2103 homework (by: Thursday)
+   2. [T][✘] write resume
    ----------------------------
    
    ----------------------------

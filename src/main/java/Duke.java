@@ -9,7 +9,7 @@ public class Duke {
         Print.formatPrint(greeting);
 
         while (sc.hasNextLine()) {
-            String input = sc.nextLine().strip().toLowerCase();
+            String input = sc.nextLine().strip();
             String[] inputs = input.split("\\s", 2);
             String command = inputs[0];
 
@@ -23,12 +23,22 @@ public class Duke {
                         break;
                     case "done":
                         if (inputs.length <= 1) {
-                            throw new DukeException("OOPS! Task number cannot be empty!");
+                            throw new DukeException("OOPS! Task number cannot be empty for done action!");
                         }
                         try {
                             Task.markTaskAsDone(Integer.parseInt(inputs[1]));
                         } catch (NumberFormatException | IndexOutOfBoundsException ex) {
-                            throw new DukeException("OOPS! Task number format is invalid!");
+                            throw new DukeException("OOPS! Task number is invalid!");
+                        }
+                        break;
+                    case "delete":
+                        if (inputs.length <= 1) {
+                            throw new DukeException("OOPS! Task number cannot be empty for delete action!");
+                        }
+                        try {
+                            Task.deleteTask(Integer.parseInt(inputs[1]));
+                        } catch (NumberFormatException | IndexOutOfBoundsException ex) {
+                            throw new DukeException("OOPS! Task number is invalid!");
                         }
                         break;
                     case "todo":
