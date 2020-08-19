@@ -5,7 +5,11 @@ public class Formating<T> {
         this.content = content;
     }
 
-    public String shorten() {
+    public T getContent() {
+        return this.content;
+    }
+
+    public Formating<String> shorten() {
         try {
             String input = (String) content;
             int length = input.length();
@@ -18,9 +22,10 @@ public class Formating<T> {
             while (backPos >= 0 && input.charAt(backPos) == ' ') {
                 backPos--;
             }
-            return input.substring(frontPos, backPos + 1);
+            return new Formating<String>(input.substring(frontPos, backPos + 1));
         } catch (ClassCastException e) {
-            return "the content is not of data type of String";
+            System.out.println(new Formating<>(Status.CLASSCASTEXCEPTION.toString()));
+            return null;
         }
     }
 

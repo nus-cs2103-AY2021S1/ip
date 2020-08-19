@@ -9,21 +9,45 @@ public class Duke {
             new Formating<>(
                 new Greet(Status.GREET.toString())));
 
-        Memory<String> memory = new Memory();
+        Memory<Task> memory = new Memory<>();
         String extract = input.nextLine();
-        String nextLine = new Formating<>(extract).shorten();
-        while (!nextLine.equals("bye")) {
-            if (nextLine.equals("list")) {
-                Formating<Memory> formatedMemo = new Formating<>(memory);
-                System.out.println(formatedMemo);
+        String nextLine = new Formating<>(extract).shorten().getContent();
+        while (!nextLine.equals(Status.BYE.name().toLowerCase())) {
+            if (nextLine.equals(Status.LIST.name().toLowerCase())) {
+                System.out.println(
+                        new Formating<>(Status.LIST.toString() + memory)
+                );
             } else {
-                memory.addMemory(nextLine);
-                Formating<Response> formatedEecho =
-                        new Formating<>(new Echo(Status.ADD.toString() + nextLine));
-                System.out.println(formatedEecho);
+                if (nextLine.length() >= 6
+                        && nextLine.substring(0, 4).equals(Status.DONE.name().toLowerCase())) {
+
+                    try {
+                        int num =
+                                Integer.parseInt(new Formating<>(nextLine.substring(4)).shorten().getContent());
+
+                        if (num > memory.getMemory().size()) {
+                            System.out.println(new Formating<>(Status.EXCESS.toString()));
+                        } else {
+                            Task task = memory.getMemory().get(num - 1);
+                            task.setDone();
+                            System.out.println(
+                                    new Formating<>(new Echo(Status.DONE.toString() + task)));
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println(new Formating<>(Status.NUMBERFORMATEXCEPTION.toString()));
+                    }
+
+                } else if (nextLine.length() == 0) { }
+
+                else {
+                    memory.addMemory(new Task(nextLine));
+                    Formating<Response> formatedEcho =
+                            new Formating<>(new Echo(Status.ADD.toString() + nextLine));
+                    System.out.println(formatedEcho);
+                }
             }
             extract = input.nextLine();
-            nextLine = new Formating<>(extract).shorten();
+            nextLine = new Formating<>(extract).shorten().getContent();
         }
 
         input.close();
