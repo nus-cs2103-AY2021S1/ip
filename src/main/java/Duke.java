@@ -52,6 +52,15 @@ public class Duke {
                 System.out.println("  Nice! I've marked this task as done:");
                 System.out.println("    " + toMark.toString());
                 horiLine(60);
+            } else if (commandComponents[0].equals("delete")) {
+                horiLine(60);
+                int taskIndex = Integer.parseInt(commandComponents[1]) - 1;
+                Task toDisplay = taskList.get(taskIndex);
+                taskList.remove(taskIndex);
+                System.out.println("  Noted. I've removed this task:");
+                System.out.println("    " + toDisplay.toString());
+                System.out.println("  Now you have " + taskList.size() + " tasks in the list.");
+                horiLine(60);
             } else {
                 // 1. split the input based on the first word(task type)
                 // 2. if there is a valid string after the first word, work as intended
@@ -69,12 +78,11 @@ public class Duke {
                             taskToAdd = new Event(commandComponents[1]);
                             System.out.println("  Got it. I've added this task:\n"
                                     + "    " + taskToAdd.toString() + "\n  Now you have "
-                                    + taskList.size() + " tasks in the list.");
+                                    + (taskList.size()+1) + " tasks in the list.");
                             taskList.add(taskToAdd);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             invalidInput("  \u2639 OOPS!!! An event task must be input with a forward slash and the deadline");
                         }
-
                     }
                 } else if (taskType.equals("deadline")) {
                     // Deadline Task
@@ -87,7 +95,7 @@ public class Duke {
                             taskToAdd = new Deadline(commandComponents[1]);
                             System.out.println("  Got it. I've added this task:\n"
                                     + "    " + taskToAdd.toString() + "\n  Now you have "
-                                    + taskList.size() + " tasks in the list.");
+                                    + (taskList.size()+1) + " tasks in the list.");
                             taskList.add(taskToAdd);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             invalidInput("  \u2639 OOPS!!! A deadline task must be input with a forward slash and the deadline");
@@ -102,7 +110,7 @@ public class Duke {
                         taskToAdd = new Todo(commandComponents[1]);
                         System.out.println("  Got it. I've added this task:\n"
                                 + "    " + taskToAdd.toString() + "\n  Now you have "
-                                + taskList.size() + " tasks in the list.");
+                                + (taskList.size()+1) + " tasks in the list.");
                         taskList.add(taskToAdd);
                     }
                 } else {
