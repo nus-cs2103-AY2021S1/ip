@@ -19,12 +19,49 @@ public class Duke {
 
     }
 
+    static class Todo extends Task {
+        Todo(String name) {
+            super(name);
+        }
+
+        @Override
+        public String toString() {
+            return "[T]" + super.toString();
+        }
+    }
+
+    static class Deadline extends Task {
+        String deadline;
+        Deadline(String name, String deadline) {
+            super(name);
+            this.deadline = deadline;
+        }
+
+        @Override
+        public String toString() {
+            return "[D]" + super.toString() + " (by: " + deadline + ")";
+        }
+    }
+
+    static class Event extends Task {
+        String time;
+        Event(String name, String time) {
+            super(name);
+            this.time = time;
+        }
+
+        @Override
+        public String toString() {
+            return "[T]" + super.toString() + " (at: " + time + ")";
+        }
+    }
+
     static boolean isNum(String s) {
         if (s == null) {
             return false;
         }
         try {
-            int d = Integer.parseInt(s);
+            Integer.parseInt(s);
         } catch (NumberFormatException nfe) {
             return false;
         }
@@ -32,40 +69,48 @@ public class Duke {
     }
 
     static void print(String s) {
-        System.out.println("    ____________________________________________________________\n" +
+        System.out.println("\t____________________________________________________________\n" +
                 s +
-                "    ____________________________________________________________\n");
+                "\t____________________________________________________________\n");
     }
     static ArrayList<Task> list = new ArrayList<>();
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String s;
-        print("     Hello! I'm Duke\n" +
-                "     What can I do for you?\n");
+        print("\tHello! I'm Duke\n" +
+                "\tWhat can I do for you?\n");
         while(!(s = scanner.nextLine()).equals("bye")) {
             String[] done = s.split(" ");
+            String[] task = new String[2];
             if (done.length == 2 && done[0].equals("done") && isNum(done[1])
                     && Integer.parseInt(done[1]) <= list.size() && Integer.parseInt(done[1]) > 0) {
                 list.get(Integer.parseInt(done[1]) - 1).setCompleted();
-                print("     Nice! I've marked this task as done:\n" +
-                        "     " + list.get(Integer.parseInt(done[1]) - 1) + "\n");
+                print("\tNice! I've marked this task as done:\n" +
+                        "\t" + list.get(Integer.parseInt(done[1]) - 1) + "\n");
             } else if(s.equals("list")) {
                 String temp = "";
                 for(int i = 0; i < list.size(); i++) {
-                    temp += "     " + (i+1) + ". " + list.get(i) + "\n";
+                    temp += "\t" + (i+1) + ". " + list.get(i) + "\n";
                 }
-                print("     Here are the tasks in your list:\n" + temp);
+                print("\tHere are the tasks in your list:\n" + temp);
+            } else if (done.length > 0 &&
+                    (done[0].equals("todo") ||
+                            (done[0].equals("deadline") && (task = s.split(" /by ")).length == 2)||
+                            (done[0].equals("event") && (task = s.split(" /at ")).length == 2))){
+                if(done[0].equals("todo")) {
+                    list.add(new Todo(s.replaceFirst("todo ", "")));
+                } else if(done[0].equals("deadline")) {
+                    list.add(new Deadline(task[0].replaceFirst("deadline ", ""), task[1]));
+                } else {
+                    list.add(new Event(task[0].replaceFirst("event ", ""), task[1]));
+                }
+                print("Got it. I've added this task: \n" +
+                        "\t" + list.get(list.size()-1) + "\n" +
+                        "\tNow you have " + list.size() + " tasks in the list.\n");
             } else {
-                list.add(new Task(s));
-                print("    added: " + s + "\n");
+                print("\ti ignore\n");
             }
         }
         print("     Bye. Hope to see you again soon!\n");
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
     }
 }
