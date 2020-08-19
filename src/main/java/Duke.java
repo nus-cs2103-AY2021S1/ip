@@ -6,7 +6,7 @@ public class Duke {
     // print all the content in the list
     public static void printList(ArrayList<Task> list){
         for(int i = 0; i < list.size(); i++){
-            System.out.println((i + 1) + ".[" + list.get(i).getStatusIcon() + "] " + list.get(i).getDescription());
+            System.out.println((i + 1) + list.get(i).toString());
         }
     }
 
@@ -34,12 +34,13 @@ public class Duke {
             inputCommand = sc.nextLine();
             command = inputCommand.split(" ");
             ptr = 0;
-            while(command[ptr].equals("")) ptr++;
 
             // if the user input is empty, continue the loop
             if(command.length <= 0 || inputCommand.equals("")){
                 continue;
             }
+
+            while(/*ptr < command.length && */command[ptr].equals("")) ptr++;
 
             if(command[ptr].equals("bye")){
                 break;
