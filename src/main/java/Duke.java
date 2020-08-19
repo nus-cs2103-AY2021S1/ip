@@ -26,10 +26,13 @@ public class Duke {
         int spaceIndex = input.indexOf(" ");
         int slashIndex = input.indexOf("/");
         int infoIndex = input.indexOf(" ", slashIndex);
-        list.add(input.substring(0,spaceIndex));
-        if (slashIndex == -1) {
+        if (spaceIndex == -1) {
+            list.add(input);
+        } else if (slashIndex == -1) {
+            list.add(input.substring(0,spaceIndex));
             list.add(input.substring(spaceIndex+1));
         } else {
+            list.add(input.substring(0,spaceIndex));
             list.add(input.substring(spaceIndex+1,slashIndex));
             list.add(input.substring(infoIndex+1));
         }
