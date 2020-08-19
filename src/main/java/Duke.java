@@ -35,7 +35,7 @@ public class Duke {
                         "                  |_____/|_____|    |_|                 \n";
         String greeting = "  Hello! I am JonasBot! Nice to meet you :) \n" +
                 text +
-                "  \n  I am a bot that will keep track of all your tasks. \n" +
+                "  \n  I am a task manager bot that will keep track of all your tasks. \n" +
                 "  \n  To view a list of all my commands, input '/commands' \n" +
                 "  \n  Now that you are familiar with the commands, how may I assist you today?";
         System.out.println(Duke.divider);
@@ -45,17 +45,17 @@ public class Duke {
 
     public void execute() {
         Scanner sc = new Scanner(System.in);
-        String message = sc.nextLine();
+        String message = sc.nextLine().trim();
         String function = message.split(" ")[0];
 
-        while (!function.equals("bye")) {
+        while (!message.equals("bye")) {
             try {
                 System.out.println(Duke.divider);
-                if (function.equals("/commands")) {
+                if (message.equals("/commands")) {
                     commands();
-                } else if (function.isEmpty()) {
+                } else if (message.isEmpty()) {
                     System.out.println("Please enter something!");
-                } else if (function.equals("list")) {
+                } else if (message.equals("list")) {
                     retrieveList();
                 } else if (function.equals("done")) {
                     completeTask(message);
@@ -70,21 +70,14 @@ public class Duke {
                 System.out.println(ex.getMessage());
             }
             System.out.println(Duke.divider);
-            message = sc.nextLine();
+            message = sc.nextLine().trim();
             function = message.split(" ")[0];
         }
+        sc.close();
     }
 
     public void handleFailedFunction() throws InvalidFunctionException {
-        String err = "Invalid Function! Your input has to begin with the following: \n" +
-                "1. todo\n" +
-                "2. deadline\n" +
-                "3. event\n" +
-                "4. list\n" +
-                "5. done\n" +
-                "6. delete\n" +
-                "6. bye\n" +
-                "\nInput '/commands' for a list of all my commands. ";
+        String err = "Invalid Function! Input '/commands' for a list of all my commands. ";
         throw new InvalidFunctionException(err);
     }
 
@@ -107,7 +100,7 @@ public class Duke {
                 String err = "Invalid Task! The task does not exist, try again.";
                 throw new InvalidTaskException(err);
             } else if (index <= 0) {
-                String err = "Your input does not meet the requirements. Input '/commands' to view a list of my commands. ";
+                String err = "The task ID you provided is not valid. Input '/commands' to view a list of my commands. ";
                 throw new InvalidFunctionException(err);
             } else {
                 if (this.list.get(index - 1).isDone) {
@@ -119,7 +112,7 @@ public class Duke {
                 System.out.println("\t" + this.list.get(index - 1));
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
-            String err = "No Task ID found! Please input the ID of the task you wish to mark as completed.";
+            String err = "No Task ID provided! Please input the ID of the task you wish to mark as completed.";
             throw new InvalidFunctionException(err);
         } catch (NumberFormatException ex) {
             String err = "Your input does not meet the requirements. Input '/commands' to view a list of my commands. ";
@@ -134,7 +127,7 @@ public class Duke {
                 String err = "Invalid Task! The task does not exist, try again.";
                 throw new InvalidTaskException(err);
             } else if (index <= 0) {
-                String err = "Your input does not meet the requirements. Input '/commands' to view a list of my commands. ";
+                String err = "The task ID you provided is not valid. Input '/commands' to view a list of my commands. ";
                 throw new InvalidFunctionException(err);
             } else {
                 Task toRemove = this.list.get(index - 1);
@@ -144,7 +137,7 @@ public class Duke {
                 System.out.println("  You have " + this.list.size() + " tasks in your list now.");
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
-            String err = "No Task ID found! Please input the ID of the task you wish to delete.";
+            String err = "No Task ID provided! Please input the ID of the task you wish to delete.";
             throw new InvalidFunctionException(err);
         } catch (NumberFormatException ex) {
             String err = "Your input does not meet the requirements. Input '/commands' to view a list of my commands. ";
@@ -169,31 +162,67 @@ public class Duke {
 
     public void createTask(String message) throws InvalidTaskException {
         String taskType = message.split(" ")[0];
-        String description;
-        String time;
-        Task toAdd = null;
+        String description = "";
+        String time = "";
         try {
             if (taskType.equals("todo")) {
                 description = message.split("todo")[1];
-                toAdd = new Todo(description);
+                if (taskChecker("todo", description, time)) {
+                    Task toAdd = new Todo(description);
+                    this.list.add(toAdd);
+                    System.out.println("  Success! This todo task has been added:");
+                    System.out.println("\t" + toAdd);
+                    System.out.println("  You have " + list.size() + " tasks in your list now.");
+                } else {
+                    String err = "Your todo task does not have the correct description format. \n" +
+                            "Type '/commands' to view the correct command for task creation! ";
+                    throw new InvalidTaskException(err);
+                }
             } else if (taskType.equals("deadline")) {
-                String info = message.split("deadline")[1];
-                description = info.split("/by")[0];
-                time = info.split("/by")[1];
-                toAdd = new Deadline(description, time);
+                String taskInfo = message.split("deadline")[1];
+                String[] taskArray = taskInfo.split("/by");
+                description = taskArray[0];
+                time = taskArray[1];
+                if (taskChecker("deadline", description, time)) {
+                    Task toAdd = new Deadline(description, time);
+                    this.list.add(toAdd);
+                    System.out.println("  Success! This deadline task has been added:");
+                    System.out.println("\t" + toAdd);
+                    System.out.println("  You have " + list.size() + " tasks in your list now.");
+                } else {
+                    String err = "Your deadline task does not have the correct description format. \n" +
+                            "Type '/commands' to view the correct command for task creation! ";
+                    throw new InvalidTaskException(err);
+                }
             } else if (taskType.equals("event")) {
-                String info = message.split("event")[1];
-                description = info.split("/at")[0];
-                time = info.split("/at")[1];
-                toAdd = new Event(description, time);
+                String taskInfo = message.split("event")[1];
+                String[] taskArray = taskInfo.split("/at");
+                description = taskArray[0];
+                time = taskArray[1];
+                if (taskChecker("event", description, time)) {
+                    Task toAdd = new Event(description, time);
+                    this.list.add(toAdd);
+                    System.out.println("  Success! This event task has been added:");
+                    System.out.println("\t" + toAdd);
+                    System.out.println("  You have " + list.size() + " tasks in your list now.");
+                } else {
+                    String err = "Your event task does not have the correct description format. \n" +
+                            "Type '/commands' to view the correct command for task creation! ";
+                    throw new InvalidTaskException(err);
+                }
             }
-            this.list.add(toAdd);
-            System.out.println("  Success! This task has been added:");
-            System.out.println("\t" + toAdd);
-            System.out.println("  You have " + list.size() + " tasks in your list now.");
         } catch (ArrayIndexOutOfBoundsException ex) {
-            String err = "Your input does not meet the requirements. Input '/commands' to view a list of my commands. ";
+            String err = "Your task description is empty and/or does not follow the correct format. The task cannot be created. \n " +
+                    "Type '/commands' to view the correct command for task creation!";
             throw new InvalidTaskException(err);
+        }
+    }
+
+    public boolean taskChecker(String taskType, String description, String time) {
+        if (taskType.equals("todo")) {
+            return !description.isBlank();
+        } else {
+            return !description.isBlank() && !time.isBlank();
         }
     }
 

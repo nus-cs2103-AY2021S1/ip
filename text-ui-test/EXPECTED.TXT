@@ -1,7 +1,20 @@
 ----------------------------------------
   Hello! I am JonasBot! Nice to meet you :)
+  ______  _____  __  ____     __     _______
+ |__  __||  __ | | \ |  |    /_ \    |   ___|
+    | |  | | | | |  \|  |   //_\ \   |  |___
+ _  | |  | | | | | |\   |  / ____ \  |____  |
+| |_| |  | |_| | | | \  | / /    \ \ _____| |
+|_____|  |_____| |_|  \_|/_/      \_\|______|
+                  _____   ______  ________
+                  |  _ \ |  _  | |__   __|
+                  | |_| || | | |    | |
+                  |    / | | | |    | |
+                  |  _ \ | |_| |    | |
+                  | |_| ||     |    | |
+                  |_____/|_____|    |_|
 
-  I am a bot that will keep track of all your tasks.
+  I am a task manager bot that will keep track of all your tasks.
 
   To view a list of all my commands, input '/commands'
 
