@@ -7,8 +7,9 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         // Introduction messages
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+        System.out.println("Hello! I'm Duke! I'm a chatbot-based To-Do list manager.");
+        System.out.println("My available commands are: todo, deadline, event, done, list, delete, bye");
+        System.out.println("What can I do for you today? :)");
 
         // Initialise list of tasks
         ArrayList<Task> taskList = new ArrayList<>();
@@ -32,7 +33,7 @@ public class Duke {
             try {
                 InputValidation.validateCommand(userCommand);
             } catch (DukeException e) {
-                System.out.println("Sorry, I can't do that command!");
+                System.out.println("Sorry, that looks like an invalid command! " + e.getMessage());
             }
 
             switch(userCommand) {
@@ -40,14 +41,18 @@ public class Duke {
                 // Exit the program
                 case "bye":
                     isSpeaking = false;
-                    System.out.println("Bye. Hope to see you again soon!");
+                    System.out.println("Bye! Hope to see you again soon!");
                     break;
 
                 // List the tasks available in taskList
                 case "list":
-                    System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < taskList.size(); i++) {
-                        System.out.println(i + 1 + "." + taskList.get(i));
+                    if (taskList.isEmpty()) {
+                        System.out.println("You have no remaining tasks! Cheers!");
+                    } else {
+                        System.out.println("Here are the tasks in your list:");
+                        for (int i = 0; i < taskList.size(); i++) {
+                            System.out.println(i + 1 + "." + taskList.get(i));
+                        }
                     }
                     break;
 
@@ -57,7 +62,7 @@ public class Duke {
                     try {
                         InputValidation.validateTask(userCommand, userTask);
                     } catch (DukeException e) {
-                        System.out.println("Sorry, I can't do that task!");
+                        System.out.println("Sorry, I can't add that task! " + e.getMessage());
                         break;
                     }
                     taskList.add(new Todo(userTask));
@@ -73,7 +78,7 @@ public class Duke {
                     try {
                         InputValidation.validateDeadline(userCommand, userTask);
                     } catch (DukeException e) {
-                        System.out.println("Sorry, I can't do that deadline!");
+                        System.out.println("Sorry, I can't add that deadline! " + e.getMessage());
                         break;
                     }
                     taskTokens = userTask.split(" /by ");
@@ -91,7 +96,7 @@ public class Duke {
                     try {
                         InputValidation.validateEvent(userCommand, userTask);
                     } catch (DukeException e) {
-                        System.out.println("Sorry, I can't do that event!");
+                        System.out.println("Sorry, I can't add that event! " + e.getMessage());
                         break;
                     }
                     taskTokens = userTask.split(" /at ");
@@ -105,6 +110,12 @@ public class Duke {
 
                 // Mark the identified task as done
                 case "done":
+                    try {
+                        InputValidation.validateIdentifier(userInput, userTokens);
+                    } catch (DukeException e) {
+                        System.out.println("Sorry, I can't mark that as done! " + e.getMessage());
+                        break;
+                    }
                     int id = Integer.parseInt(userTokens[1]) - 1;
                     taskList.get(id).setDone();
                     System.out.println("Nice! I've marked this task as done:");
@@ -113,11 +124,15 @@ public class Duke {
 
                 // Delete a task
                 case "delete":
-                    if (userTokens.length == 2) {
-                        Task deletedTask = taskList.remove(Integer.parseInt(userTokens[1]) - 1);
-                        System.out.println("Noted. I have removed this task:");
-                        System.out.println("  " + deletedTask);
+                    try {
+                        InputValidation.validateIdentifier(userInput, userTokens);
+                    } catch (DukeException e) {
+                        System.out.println("Sorry, I can't delete that task! " + e.getMessage());
+                        break;
                     }
+                    Task deletedTask = taskList.remove(Integer.parseInt(userTokens[1]) - 1);
+                    System.out.println("Noted. I have removed this task:");
+                    System.out.println("  " + deletedTask);
                     break;
                 default:
             }

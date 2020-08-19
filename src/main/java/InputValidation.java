@@ -31,5 +31,16 @@ public class InputValidation {
         }
     }
 
-
+    // Implement validation for identifier commands, e.g. 'done 1', 'delete 2'
+    static void validateIdentifier(String userInput, String[] userTokens) throws DukeException {
+        if (userTokens.length != 2) {
+            throw new DukeException("Invalid identifier, requires 2 tokens: " + userInput);
+        } else {
+            try {
+                Integer.parseInt(userTokens[1]);
+            } catch (NumberFormatException nfe) {
+                throw new DukeException("Invalid identifier, requires integer: " + userInput);
+            }
+        }
+    }
 }
