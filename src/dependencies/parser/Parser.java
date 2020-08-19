@@ -42,7 +42,7 @@ public class Parser {
 //        } catch (EmptyTaskException e) {
 //            return e.toString();
         } catch (DukeException e) {
-            return e.toString();
+            return e.getMessage();
         }
     }
 

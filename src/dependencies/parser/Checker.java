@@ -59,9 +59,7 @@ class Checker {
         }
         else if (checkForWord(s, "done")) {
             String task = cutOutTheWord(s, "done");
-            if (task.isBlank() || task.isEmpty()) {
-                throw new EmptyTaskException("You have to tell me which task you've com");
-            }
+
             Task t = Task.createMiscTask(task);
             e = Command.createDoneCommand(t);
 
@@ -127,7 +125,7 @@ class Checker {
         String c2 = cmd.toUpperCase(Locale.UK);
         String l2 = line.toUpperCase(Locale.UK);
         int idx = l2.indexOf(c2);
-        return line.substring(idx).trim();
+        return line.substring(idx + cmd.length()).trim();
     }
 
     private boolean isTodo(String s) {return false;}

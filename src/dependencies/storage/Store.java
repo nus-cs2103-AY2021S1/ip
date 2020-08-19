@@ -39,7 +39,7 @@ public class Store {
                 sb.append("\n");
             }
             if (i == todoList.size() - 1) {
-                sb.append("So stop procrastinating!");
+                sb.append("\nSo stop procrastinating!");
             }
         }
         if (todoList.size() == 0) {
@@ -72,8 +72,9 @@ public class Store {
         for (int i = 0; i < nums.length; i++) {
             Task t = todoList.get(nums[i] - 1);
             t.completed();
+            sb.append(t.toString());
             if (i != nums.length - 1) {
-                sb.append(t.toString()).append("\n");
+                sb.append("\n");
             }
         }
         return sb.toString();
