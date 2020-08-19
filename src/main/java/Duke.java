@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.lang.StringBuilder;
 
 public class Duke {
     protected List<Task> tasks;
@@ -19,9 +20,30 @@ public class Duke {
         System.out.println("\tBye! Have a great day and hope to see you soon! :D");
     }
 
-    public void addTask(String description) {
-        this.tasks.add(new Task(description, false));
-        System.out.println("\tadded: " + description);
+    public void addTodo(String description) {
+        ToDo task = new ToDo(description, false);
+        this.tasks.add(task);
+        printAddedConfirmation(task);
+    }
+
+    public void addDeadline(String description, String doBy) {
+        Deadline task = new Deadline(description, false, doBy);
+        this.tasks.add(task);
+        printAddedConfirmation(task);
+
+    }
+
+    public void addEvent(String description, String time) {
+        Event task = new Event(description, false, time);
+        this.tasks.add(task);
+        printAddedConfirmation(task);
+    }
+
+    public void printAddedConfirmation(Task task) {
+        int size = this.tasks.size();
+        System.out.println("\tOkay! I've added this task:");
+        System.out.println("\t\t" + task.toString());
+        System.out.println(String.format("\tNow you have %d %s in the list. Jiayous! :D", size, size > 1? "tasks":"task"));
     }
 
     public void markTaskAsDone(int index) {
@@ -48,9 +70,18 @@ public class Duke {
     public void serveClient() {
         sayHello();
         while (sc.hasNext()) {
-            String command = sc.nextLine();
-            String[] splitCommand = command.split(" ");
-            String keyword = splitCommand[0];
+            String input = sc.nextLine();
+            String[] splitSpace = input.split(" "); // to get keyword
+            String keyword = splitSpace[0];
+
+            StringBuilder rest = new StringBuilder();
+            for (int i = 1; i < splitSpace.length; i++) {
+                rest.append(splitSpace[i]);
+                if (i != splitSpace.length - 1) {
+                    rest.append(" ");
+                }
+            }
+            String restStr = rest.toString();
 
             switch(keyword) {
                 case "bye":
@@ -60,14 +91,25 @@ public class Duke {
                     displayTasks();
                     break;
                 case "done":
-                    int index = Integer.parseInt(splitCommand[1])-1;
+                    int index = Integer.parseInt(splitSpace[1])-1;
                     markTaskAsDone(index);
                     break;
+                case "todo":
+                    addTodo(restStr);
+                    break;
+                case "deadline":
+                    String[] splitSlash = restStr.split(" /by ");
+                    addDeadline(splitSlash[0], splitSlash[1]);
+                    break;
+                case "event":
+                    String[] split = restStr.split(" /at ");
+                    addEvent(split[0], split[1]);
+                    break;
                 default:
-                    addTask(command);
+                    break;
             }
 
-            if (command.equals("bye")) {
+            if (keyword.equals("bye")) {
                 break;
             }
         }
