@@ -12,10 +12,23 @@ public class Duke {
         System.out.println("Hello! Duke at your serve. Please name your request.");
         Scanner sc = new Scanner(System.in);
 
+        //Object to store the list
+        ArrayList<String> userList = new ArrayList<>();
         while (sc.hasNextLine()) {
             String userMessage = sc.nextLine();
-            if (!userMessage.equals("bye")) {
-                System.out.println(userMessage);
+
+            //add items to list
+            if (!userMessage.equals("bye") && !userMessage.equals("list")) {
+                userList.add(userMessage);
+                System.out.println("item added: " + userMessage);
+            }
+
+            //list down the contents in the list
+            if (userMessage.equals("list")) {
+                System.out.println("Here is your list: ");
+                for (int i = 0; i < userList.size(); i++) {
+                    System.out.println((i+1) + ". "+ userList.get(i));
+                }
             }
 
             if (userMessage.equals("bye")) {
