@@ -26,7 +26,12 @@ public class Chatterbox {
                 System.out.println(format("Your list is currently empty."));
             }
         } else if (command.equals("done")) {
-            int taskNo = Integer.parseInt(input.split(" ")[1]) - 1;
+            int taskNo;
+            try {
+                taskNo = Integer.parseInt(input.split(" ")[1]) - 1;
+            } catch (NumberFormatException e) {
+                throw new ChatterboxException("Please enter a number after the command.");
+            }
             if (taskNo < 0 || taskNo >= ITEMS.size()) {
                 throw new ChatterboxException("Invalid task number.");
             }
