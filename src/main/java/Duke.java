@@ -1,5 +1,5 @@
 import main.java.exceptions.InvalidCommandException;
-import main.java.exceptions.InvalidDoneNumberException;
+import main.java.exceptions.InvalidNumberException;
 import main.java.tasks.Deadline;
 import main.java.tasks.Event;
 import main.java.tasks.Task;
@@ -66,39 +66,53 @@ public class Duke {
         System.out.println(this.taskList.get(index).toString());
     }
 
-    private boolean isDoneCommand(String input) {
+    private boolean isNumberedCommand(String input) throws InvalidNumberException {
         String[] words = input.split(" ");
         boolean checkBackNumber = words.length == 2 &&
                 words[1].chars().allMatch(Character::isDigit);
         if (checkBackNumber) {
             int index = Integer.parseInt(words[1]) - 1;
             boolean isValidNumber = index < this.taskList.size();
-            try {
-                if (!isValidNumber) {
-                    throw new InvalidDoneNumberException("The number entered is invalid. " +
+            if (!isValidNumber) {
+                throw new InvalidNumberException("The number entered is invalid. " +
                             "You have " + this.taskList.size() + " tasks in your list.");
-                }
-            } catch (InvalidDoneNumberException e) {
-                System.out.println(e.getMessage());
-                return false;
             }
-            return words[0].equals("done");
+            return true;
         } else {
             return false;
         }
+    }
+
+    private void deleteTask(int index) {
+        Task removedTask = this.taskList.remove(index);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(removedTask.toString());
+        System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
     }
 
     private void handleUserInput() {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
-            if (input.equals("list")) {
-                listTasks();
-            } else if (isDoneCommand(input)) {
-                int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                markTaskAsDone(index);
-            } else {
-                addTask(input);
+            try {
+                if (input.equals("list")) {
+                    listTasks();
+                } else if (isNumberedCommand(input)) {
+                    String[] words = input.split(" ");
+                    if (words[0].equals("done")) {
+                        int index = Integer.parseInt(words[1]) - 1;
+                        markTaskAsDone(index);
+                    } else if (words[0].equals("delete")) {
+                        int index = Integer.parseInt(words[1]) - 1;
+                        deleteTask(index);
+                    } else {
+                        throw new InvalidCommandException("Command is invalid. Try again?");
+                    }
+                } else {
+                    addTask(input);
+                }
+            } catch (InvalidCommandException e) {
+                System.out.println(e.getMessage());
             }
 
             if (sc.hasNextLine()) {

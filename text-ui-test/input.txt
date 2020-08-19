@@ -4,14 +4,19 @@ hello
 list
 event watch horror movie with friends /at 12am
 deadline
+delete 10
 done 2
 todo
+deadline /by today
 deadline do homework /by Monday 6pm
 done 17
 list
 deadline learn how to cook /by
 done 3
+event /at Wednesday
 list
 event
 event go paragliding /at
+delete 1
+list
 bye
