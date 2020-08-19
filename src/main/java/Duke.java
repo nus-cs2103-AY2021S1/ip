@@ -82,11 +82,19 @@ public class Duke {
         while(!(s = scanner.nextLine()).equals("bye")) {
             String[] done = s.split(" ");
             String[] task = new String[2];
-            if (done.length == 2 && done[0].equals("done") && isNum(done[1])
+            if (done.length == 2 && (done[0].equals("done") || done[0].equals("delete")) && isNum(done[1])
                     && Integer.parseInt(done[1]) <= list.size() && Integer.parseInt(done[1]) > 0) {
-                list.get(Integer.parseInt(done[1]) - 1).setCompleted();
-                print("\tNice! I've marked this task as done:\n" +
-                        "\t" + list.get(Integer.parseInt(done[1]) - 1) + "\n");
+                if(done[0].equals("done")) {
+                    list.get(Integer.parseInt(done[1]) - 1).setCompleted();
+                    print("\tNice! I've marked this task as done:\n" +
+                            "\t" + list.get(Integer.parseInt(done[1]) - 1) + "\n");
+                } else {
+                    Task deleted = list.get(Integer.parseInt(done[1]) - 1);
+                    list.remove(Integer.parseInt(done[1]) - 1);
+                    print("\tNoted. I've removed this task:\n" +
+                            "\t" + deleted + "\n" +
+                            "\tNow you have " + list.size() + " tasks in the list.\n");
+                }
             } else if(s.equals("list")) {
                 String temp = "";
                 for(int i = 0; i < list.size(); i++) {
