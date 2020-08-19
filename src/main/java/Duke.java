@@ -18,8 +18,16 @@ public class Duke {
 
             switch(userInput) {
                 case "bye":
+                    // Fallthrough
+                case "exit":
                     System.out.println("Bye. Hope to see you again soon!");
                     return;
+                case "ls":
+                    System.out.println("Here are your saved items:");
+                    for (int i = 0; i < savedItems.size(); ++i) {
+                        System.out.println(i + 1 + ". " + savedItems.get(i));
+                    }
+                    break;
                 default:
                     savedItems.add(userInput);
                     System.out.println("added: " + userInput);
