@@ -1,5 +1,19 @@
+list
+lalala
+todo
 todo App
+deadline
+deadline HW
 deadline HW /by Thursday
+event
+event Meeting
 event Meeting /on Tuesday 10am
 list
+delete 2
+list
+done 1
+done 3
+done
+done 1 1
+done 2
 bye
