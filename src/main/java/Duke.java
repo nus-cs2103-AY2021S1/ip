@@ -22,10 +22,15 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> taskList = new ArrayList<>();
-        String input = sc.nextLine();
 
-        while(!input.equals("bye")) {
-            if (input.equals("list")) {
+        while(sc.hasNextLine()) {
+            String input = sc.nextLine();
+            if (input.equals("bye")) {
+                printDivider();
+                printOutput("Bye. See you again next time!" );
+                printDivider();
+                break;
+            } else if (input.equals("list")) {
                 printDivider();
                 printOutput("Here are the tasks in your list:");
                 for(int index = 0; index < taskList.size(); index++) {
@@ -59,11 +64,6 @@ public class Duke {
                     printDivider();
                 }
             }
-            input = sc.nextLine();
         }
-
-        printDivider();
-        printOutput("Bye. See you again next time!" );
-        printDivider();
     }
 }
