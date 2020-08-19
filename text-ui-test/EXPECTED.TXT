@@ -1,4 +1,3 @@
-Hello from
   _    _ _ _                   
  | |  | | | |                  
  | |  | | | |_ _ __ ___  _ __  
@@ -31,16 +30,20 @@ Finally! Making yourself useful
   [T][✓] read book
 ____________________________________________________________
 ____________________________________________________________
-Heh you cant even key in a correct command.
+Heh, you can't even type in a correct command
 'hello' is not a valid number
+I'll give u a pity tip
+Use 'help' for more information
 ____________________________________________________________
 ____________________________________________________________
 Finally! Making yourself useful
   [T][✓] join sports club
 ____________________________________________________________
 ____________________________________________________________
-Heh you cant even key in a correct command.
-There are no arguments supplied to todo command
+Heh, you can't even type in a correct command
+No arguments supplied for todo
+I'll give u a pity tip
+Use 'help' for more information
 ____________________________________________________________
 ____________________________________________________________
 Can't you keep track of '[T][✘] return book' yourself?
@@ -55,16 +58,20 @@ Heh, you cant even remember what you had
 5.[T][✘] return book
 ____________________________________________________________
 ____________________________________________________________
-Heh you cant even key in a correct command.
-There are no arguments supplied to deadline command
+Heh, you can't even type in a correct command
+No arguments supplied for deadline
+I'll give u a pity tip
+Use 'help' for more information
 ____________________________________________________________
 ____________________________________________________________
 Can't you keep track of '[D][✘] return book (by: Sunday)' yourself?
 Now you have 6 burdens
 ____________________________________________________________
 ____________________________________________________________
-Heh you cant even key in a correct command.
-There are no arguments supplied to event command
+Heh, you can't even type in a correct command
+No arguments supplied for event
+I'll give u a pity tip
+Use 'help' for more information
 ____________________________________________________________
 ____________________________________________________________
 Can't you keep track of '[E][✘] project meeting (at: Mon 2-4pm)' yourself?
