@@ -1,0 +1,15 @@
+list
+todo wake up
+deadline brush teeth /by 10am
+event online lecture /at 10am-12pm
+deadline submit assignment /by Friday
+list
+todo eat lunch
+event project meeting /at 4pm
+list
+some invalid command
+done 3
+done 2
+done 1
+list
+bye
