@@ -114,6 +114,7 @@ public class Duke {
             System.out.println(format("     Bye. Hope to see you again soon!"));
         } else if (input.equals("list")) {
             list();
+            chat();
         } else {
             try {
                 if (input.startsWith("done")) {
