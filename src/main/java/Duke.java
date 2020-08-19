@@ -22,6 +22,15 @@ public class Duke {
         System.out.println("Got it. I've added this task:");
         System.out.printf(todo.getStatus());
     }
+
+    private static void deadlineHandler(String userInput) {
+        String[] input = userInput.replaceFirst("deadline ", "").split(" /by ");
+        Deadline deadline = new Deadline(input[0], input[1]);
+        savedItems.add(deadline);
+        System.out.println("Got it. I've added this task:");
+        System.out.printf(deadline.getStatus());
+    }
+
     private static void lsHandler() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < savedItems.size(); ++i) {
@@ -54,6 +63,10 @@ public class Duke {
                     return;
                 case "todo":
                     todoHandler(userInput);
+                    printRemainingCount();
+                    break;
+                case "deadline":
+                    deadlineHandler(userInput);
                     printRemainingCount();
                     break;
                 case "done":
