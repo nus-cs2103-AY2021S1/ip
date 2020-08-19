@@ -5,7 +5,7 @@ public class Event extends Task{
 
     //Store the variables
     protected String at;
-    private static Pattern date_match = Pattern.compile("^(.*) (/at) (.*)$");
+    private static final Pattern date_match = Pattern.compile("^(.*) (/at) (.*)$");
 
     //Constructor for the event class
     public Event(String description, String at){
@@ -26,14 +26,14 @@ public class Event extends Task{
 
     public static Task parseCommand(String args) {
         //Create the matcher
-        Matcher m = date_match.matcher(args);
+        Matcher matcher = date_match.matcher(args);
 
         //Check for matches
-        m.find();
+        matcher.find();
 
         //Get the date and the name
-        String name = m.group(1);
-        String date = m.group(3);
+        String name = matcher.group(1);
+        String date = matcher.group(3);
 
         //Pass the 2 arguments into the function
         return new Event(name, date);
