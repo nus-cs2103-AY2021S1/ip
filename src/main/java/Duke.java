@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    static Scanner sc = new Scanner(System.in);
     static String line = "    ____________________________________________________________\n";
     static ArrayList<Task> taskList = new ArrayList<>();
 
@@ -39,15 +40,13 @@ public class Duke {
      }
 
     private static void chat() {
-        Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        String output = "";
         if (input.equals("bye")) {
             System.out.println(format("     Bye. Hope to see you again soon!"));
         } else {
             if (input.equals("list")) {
                 StringBuilder taskListString = new StringBuilder();
-                taskListString.append("Here are the tasks in your list:\n");
+                taskListString.append("     Here are the tasks in your list:\n");
                 for (int i = 1; i < taskList.size() + 1; i++) {
                     taskListString.append("     ").append(i).append(".").append(taskList.get(i - 1)).append("\n");
                 }
