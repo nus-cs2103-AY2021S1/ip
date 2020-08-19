@@ -17,7 +17,12 @@ public class Task {
     }
 
     public void printTask(int i) {
-        String output = "     " + i + "." + "[" + this.getStatusIcon() + "]" + " " + this.description;
+        String output = "     " + i + "." + this.toString();
+        System.out.println(output);
+    }
+
+    public void printTask() {
+        String output = "     " + this.toString();
         System.out.println(output);
     }
 
@@ -32,5 +37,10 @@ public class Task {
 
             return t.description.equals(this.description);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "[" + this.getStatusIcon() + "]" + " " + this.description;
     }
 }
