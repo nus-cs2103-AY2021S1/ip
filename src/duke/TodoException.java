@@ -1,9 +1,9 @@
-package main;
+package duke;
 
 public class TodoException extends DukeException {
 
     public TodoException() {
-        super("I don't know what you want to do, please elaborate :)");
+        super("Please specify what do you want to do~");
     }
 
 }

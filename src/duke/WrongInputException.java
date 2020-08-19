@@ -1,8 +1,8 @@
-package main;
+package duke;
 
 public class WrongInputException extends DukeException {
 
     public WrongInputException() {
-        super("I don't understand :((((");
+        super("Please enter a valid command.");
     }
 }
