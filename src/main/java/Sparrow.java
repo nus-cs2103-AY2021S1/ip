@@ -1,7 +1,36 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.lang.StringBuilder;
 
 public class Sparrow {
+    public static ArrayList<String> dataArr = new ArrayList<String>();
+
     public static void main(String[] args) {
+        greet();
+
+        Scanner sc = new Scanner(System.in);
+        String command = sc.nextLine();
+        while (handle(command)) {
+            command = sc.nextLine();
+        }
+        sc.close();
+    }
+
+    public static boolean handle(String command) {
+        switch (command) {
+            case "bye":
+                reply("Bye. Hope t' see ye again soon!");
+                return false;
+            case "list":
+                displayList();
+                return true;
+            default:
+                add(command);
+                return true;
+        }
+    }
+
+    public static void greet() {
         String welcome = "  _  _ _   ___ _                    \n" +
                 " | || (_) |_ _( )_ __               \n" +
                 " | __ | |  | ||/| '  \\              \n" +
@@ -12,25 +41,31 @@ public class Sparrow {
                 "     |_|                            ";
         System.out.println(welcome);
         reply("How can I help ye?");
-        echo();
     }
 
     public static void reply(String message) {
         System.out.println("    ________________________________________");
-        System.out.println("      " + message);
-        System.out.println("    ________________________________________");
-    }
-
-    public static void echo() {
-        Scanner sc = new Scanner(System.in);
-        String message = sc.nextLine();
-        while (!message.equals("bye")) {
-            reply(message);
-            message = sc.nextLine();
+        Scanner sc = new Scanner(message);
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+            System.out.println("      " + line);
         }
-        reply("Bye. Hope t' see ye again soon!");
+        System.out.println("    ________________________________________");
+        sc.close();
     }
 
+    public static void add(String data) {
+        dataArr.add(data);
+        reply("added: " + data);
+    }
 
+    public static void displayList() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < dataArr.size(); i++) {
+            String temp = String.format("%d. %s\n", i+1, dataArr.get(i));
+            sb.append(temp);
+        }
+        reply(sb.toString());
+    }
 
 }
