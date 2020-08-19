@@ -2,6 +2,8 @@
 read book
 return book
 list
+done 2
+list
 bye
 */
 import java.util.*;
@@ -20,6 +22,8 @@ public class Duke {
                 break;
             } else if (command.equals("list")) {
                 todoManager.listTask();
+            } else if (command.startsWith("done")) {
+                todoManager.markDone(command);
             } else {
                 todoManager.addTask(command);
             }
