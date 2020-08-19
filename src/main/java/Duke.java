@@ -36,7 +36,7 @@ public class Duke {
             }
             else{
                 System.out.println("\t" + input);
-                Task newTask = new Task(input);
+                Task newTask = new Todo(input);
                 taskList.add(newTask);
             }
         }

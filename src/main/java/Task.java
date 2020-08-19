@@ -1,7 +1,8 @@
-public class Task {
+public abstract class Task {
     protected String item;
     private boolean done;
-    public Task(String item){
+    protected String taskType;
+    protected Task(String item){
         this.item = item;
         this.done = false;
     }
@@ -12,6 +13,7 @@ public class Task {
 
     @Override
     public String toString() {
+        String typeString = "[" + taskType + "]";
         String doneString = "";
         if(done){
             doneString = "[✓]";
@@ -19,6 +21,6 @@ public class Task {
         else{
             doneString = "[✗]";
         }
-        return doneString + " " + item;
+        return typeString + " " + doneString + " " + item;
     }
 }
