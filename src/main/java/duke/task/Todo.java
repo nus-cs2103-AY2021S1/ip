@@ -14,6 +14,12 @@ public class Todo extends Task {
     }
 
     @Override
+    public String format() {
+        int isDoneSignal = this.isDoneTask() ? 1 : 0;
+        return "T | " + isDoneSignal + " | " + name;
+    }
+
+    @Override
     public String toString() {
         String taskString = super.toString();
         return "[T]" + taskString;

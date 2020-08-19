@@ -21,6 +21,12 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String format() {
+        int isDoneSignal = this.isDoneTask() ? 1 : 0;
+        return "D | " + isDoneSignal + " | " + name + " | " + this.getSchedule();
+    }
+
+    @Override
     public String toString() {
         String taskString = super.toString();
         return "[D]" + taskString + " (by: " + this.getSchedule() + ")";
