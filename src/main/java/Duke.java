@@ -32,24 +32,59 @@ public class Duke {
                     System.out.println(i + ". " + task[i - 1]);
                 }
             } else if (input.startsWith("done")) {
-                int taskToMark = Integer.parseInt(input.substring(5)) - 1;
-                task[taskToMark].markAsDone();
-                System.out.println("Task Accomplished! I've marked this task as done:");
-                System.out.println(task[taskToMark]);
-            } else {
-                System.out.println("Got it! I've added this task:");
-                if (input.startsWith("todo")) {
-                    task[pointer - 1] = new ToDo(input.substring(5));
-                } else if (input.startsWith("deadline")) {
-                    int endIndex = input.indexOf("/by") - 1;
-                    task[pointer - 1] = new Deadline(input.substring(9, endIndex), input.substring(endIndex + 5));
+                if (input.length() == 4) {
+                    System.out.println(new DukeException("Hold up! Please specify which task is done.").getMessage());
                 } else {
-                    int endIndex = input.indexOf("/at") - 1;
-                    task[pointer - 1] = new Event(input.substring(6, endIndex), input.substring(endIndex + 5));
+                    int taskToMark = Integer.parseInt(input.substring(5)) - 1;
+                    task[taskToMark].markAsDone();
+                    System.out.println("Task Accomplished! I've marked this task as done:");
+                    System.out.println(task[taskToMark]);
                 }
-                System.out.println(task[pointer - 1]);
-                System.out.println("Now you have " + pointer + " tasks in your list.");
-                pointer++;
+            } else {
+                if (!input.startsWith("todo") && !input.startsWith("deadline") && !input.startsWith("event")) {
+                    System.out.println(new DukeException("Sorry, I'm not sure what you mean by that :(").getMessage());
+                } else {
+
+                    if (input.startsWith("todo")) {
+                        if (input.length() == 4) {
+                            System.out.println(new DukeException("Hold up! The description of todo cannot be empty...").getMessage());
+                        } else {
+                            System.out.println("Got it! I've added this task:");
+                            task[pointer - 1] = new ToDo(input.substring(5));
+                            System.out.println(task[pointer - 1]);
+                            System.out.println("Now you have " + pointer + " tasks in your list.");
+                            pointer++;
+                        }
+
+                    } else if (input.startsWith("deadline")) {
+                        if (input.length() == 8) {
+                            System.out.println(new DukeException("Hold up! The description of deadline cannot be empty...").getMessage());
+                        } else if (!input.contains("/by")) {
+                            System.out.println(new DukeException("Please specify deadline using: /by (deadline)").getMessage());
+                        } else {
+                            System.out.println("Got it! I've added this task:");
+                            int endIndex = input.indexOf("/by") - 1;
+                            task[pointer - 1] = new Deadline(input.substring(9, endIndex), input.substring(endIndex + 5));
+                            System.out.println(task[pointer - 1]);
+                            System.out.println("Now you have " + pointer + " tasks in your list.");
+                            pointer++;
+                        }
+
+                    } else {
+                        if (input.length() == 5) {
+                            System.out.println(new DukeException("Hold up! The description of event cannot be empty...").getMessage());
+                        } else if (!input.contains("/at")) {
+                            System.out.println(new DukeException("Please specify timing using: /at (timing)").getMessage());
+                        } else {
+                            System.out.println("Got it! I've added this task:");
+                            int endIndex = input.indexOf("/at") - 1;
+                            task[pointer - 1] = new Event(input.substring(6, endIndex), input.substring(endIndex + 5));
+                            System.out.println(task[pointer - 1]);
+                            System.out.println("Now you have " + pointer + " tasks in your list.");
+                            pointer++;
+                        }
+                    }
+                }
             }
 
             System.out.println(divider);
