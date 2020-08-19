@@ -10,6 +10,7 @@ public class Duke {
     private static final String closingMessage = "Bye. Hope to see you again soon!";
 
     private static final String CLOSING_STRING = "bye";
+    private static final String LIST_STRING = "list";
 
     private static final List<String> stringRecords = new ArrayList<String>();
 
@@ -22,10 +23,16 @@ public class Duke {
 
         while (!userInput.equals(CLOSING_STRING)) {
             userInput = scanner.next();
-            if (!userInput.equals(CLOSING_STRING)) {
-                System.out.println(processString(userInput));
-            } else {
-                System.out.println(getClosingText());
+            switch (userInput) {
+                case CLOSING_STRING:
+                    System.out.println(getClosingText());
+                    break;
+                case LIST_STRING:
+                    System.out.println(processString(getListString()));
+                default:
+                    System.out.println(processString(createAddedString(userInput)));
+
+
             }
         }
 
@@ -39,6 +46,10 @@ public class Duke {
             builder.append(count++ + ". " + string);
         }
         return builder.toString();
+    }
+
+    private static String createAddedString(String addedString) {
+        return "added: " + addedString;
     }
 
 
