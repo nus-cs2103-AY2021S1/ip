@@ -76,12 +76,4 @@ public class Duke {
         System.out.println(line + "\n" + output + line);
     }
 
-    private static void addToList() {
-
-    }
-
-
-
-
-
 }
