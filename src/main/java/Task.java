@@ -23,7 +23,8 @@ public abstract class Task {
         this.done = true;
     }
 
-    protected String getCheckboxString() {
-        return String.format("[%s]", this.done ? "\u2713" : "\u2718");
+    @Override
+    public String toString() {
+        return String.format("[%s] %s", this.done ? "\u2713" : "\u2718", this.name);
     }
 }

@@ -12,10 +12,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E] %s %s (by: %s)",
-            this.getCheckboxString(),
-            this.getName(),
-			this.deadline
-        );
+        return String.format("[D] %s (by: %s)", super.toString(), this.deadline);
     }
 }
