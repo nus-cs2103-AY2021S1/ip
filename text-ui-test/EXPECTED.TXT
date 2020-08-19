@@ -92,9 +92,23 @@ Here are the tasks in your list:
 4. [T][✘] return book
 ____________________________________________________________
  > ____________________________________________________________
+These are the commands in my dictionary:
+    [list, ls]                         Lists all tasks
+    [done] <task number>               Mark a task as done
+    [delete] <task number>             Delete a task
+    [todo] <desc>                      Create a todo task
+    [deadline] <desc> /by <datetime>   Create a task with a deadline
+    [event] <desc> /at <datetime>      Create an event
+    [help]                             Gets the list of commands
+    [bye, exit]                        Exits the program
+____________________________________________________________
+ > ____________________________________________________________
 Roger. I've removed this task from your list:
     [T][✓] borrow book
 Now you have 3 task in your list
+____________________________________________________________
+ > ____________________________________________________________
+Oh no! That is not a valid number.
 ____________________________________________________________
  > ____________________________________________________________
 Here are the tasks in your list:
@@ -105,3 +119,4 @@ ____________________________________________________________
  > ____________________________________________________________
 Goodbye. Hope to see you again soon!
 ____________________________________________________________
+

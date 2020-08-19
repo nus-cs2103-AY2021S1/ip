@@ -4,11 +4,11 @@ event project meeting /at Mon 2-4pm
 list
 done 3
 done 1
-error handling
+blah
 
 done 4
 done -1
-done NotANumber
+done one
 todo
 deadline
 deadline fake deadline /by
@@ -18,7 +18,9 @@ event fake event /at
 event hello
 list
 todo return book
-list
+ls
+help
 delete 1
+delete one
 list
 bye

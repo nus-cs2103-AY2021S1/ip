@@ -2,45 +2,57 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Alice {
-    private static final String prompt = "\n > ";
+    private static final String PROMPT = " > ";
+    private static final String DIVIDER = "____________________________________________________________\n";
     private final ArrayList<Task> tasks;
 
     public Alice() {
         tasks = new ArrayList<>();
     }
 
-    public String reply(String input) {
+    public boolean reply(String input) {
         String[] arr = input.split(" ", 2);
         try {
-            if (arr.length == 1) {
-                return frame_output(process_cmd(arr[0], "")) + prompt;
+            Command cmd = Command.getCommandType(arr[0]);
+            if (cmd == Command.BYE) {
+                System.out.println(sayGoodbye());
+                return false;
             }
-            return frame_output(process_cmd(arr[0], arr[1])) + prompt;
+            if (arr.length == 1) {
+                System.out.print(frame_output(process_cmd(cmd, "")) + PROMPT);
+                return true;
+            }
+            System.out.print(frame_output(process_cmd(cmd, arr[1])) + PROMPT);
+            return true;
         } catch (AliceException ex) {
-            return frame_output(ex.getMessage()) + prompt;
+            System.out.print(frame_output(ex.getMessage()) + PROMPT);
+            return true;
         }
     }
 
-    private String process_cmd(String cmd, String params) throws AliceException {
-        if (cmd.equals("list") && params.isBlank()) {
+    private String process_cmd(Command cmd, String params) throws AliceException {
+        if (cmd == Command.LIST && params.isBlank()) {
             // Display task list
-            return "Here are the tasks in your list:\n" + getTaskList();
-        } else if (cmd.equals("done")) {
+            return getTaskList();
+        } else if (cmd == Command.HELP) {
+            // Get help
+            return Command.getCommandList();
+        } else if (cmd == Command.DONE) {
             // Mark as done
             return markTaskAsDone(params);
-        } else if (cmd.equals("delete")) {
+        } else if (cmd == Command.DELETE) {
             // Delete
             return deleteTask(params);
-        } else if (cmd.equals("todo")) {
+        } else if (cmd == Command.TODO) {
             // Add to-do
             return addTodo(params);
-        } else if (cmd.equals("deadline")) {
+        } else if (cmd == Command.DEADLINE) {
             // Add deadline
             return addDeadline(params);
-        } else if (cmd.equals("event")) {
+        } else if (cmd == Command.EVENT) {
             // Add event
             return addEvent(params);
-        } else if (cmd.isBlank()) {
+        } else if (cmd == Command.EMPTY) {
             // Empty command
             throw new AliceException("Please give me something to do. T_T");
         } else {
@@ -122,13 +134,15 @@ public class Alice {
     }
 
     private String frame_output(String s) {
-        return "____________________________________________________________\n"
-                + s
-                + "\n____________________________________________________________";
+        return DIVIDER + s + "\n" + DIVIDER;
     }
 
     private String getTaskList() {
-        StringBuilder s = new StringBuilder();
+        if (tasks.isEmpty()) {
+            return "You have no tasks at the moment.";
+        }
+
+        StringBuilder s = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             s.append(i + 1).append(". ").append(tasks.get(i));
             if (i < tasks.size() - 1) {
@@ -149,7 +163,7 @@ public class Alice {
         return logo +
                 "\nHello! I'm Alice\n" +
                 "How can I help you today?\n" +
-                "____________________________________________________________" + prompt;
+                DIVIDER + PROMPT;
     }
 
     public String sayGoodbye() {
@@ -163,13 +177,13 @@ public class Alice {
         Scanner sc = new Scanner(System.in);
 
         String input;
+        boolean exiting;
         while (sc.hasNextLine()) {
             input = sc.nextLine();
-            if (input.equals("bye")) {
-                System.out.print(alice.sayGoodbye());
+            exiting = !alice.reply(input);
+            if (exiting) {
                 return;
             }
-            System.out.print(alice.reply(input));
         }
     }
 }
