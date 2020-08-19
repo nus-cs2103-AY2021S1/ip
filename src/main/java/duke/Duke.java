@@ -12,7 +12,7 @@ public class Duke {
 
     /**
      * Executes the "Jarvis" bot to run.
-     * The bot has a reader to parse user input
+     * The bot has a reader to parse user input, a data storage manager
      * and an agent to handle the duke.command parsed from user input
      *
      * @param args main() function arguments.
@@ -20,7 +20,8 @@ public class Duke {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         CommandReader reader = new CommandReader();
-        CommandAgent agent = new CommandAgent();
+        Storage storage = new Storage();
+        CommandAgent agent = new CommandAgent(storage);
         Command command;
 
         System.out.println("Hello! I'm Jarvis\n"
