@@ -17,7 +17,6 @@ public class TodoCommand extends Command {
         }
 
         ToDo newToDo = new ToDo(UIPrint.todoIcon, str);
-
         Duke.tasks.add(newToDo);
         Duke.reportNewTask(newToDo);
     }

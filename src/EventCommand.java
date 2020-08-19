@@ -22,7 +22,6 @@ public class EventCommand extends Command {
         String time = splitStr[1];
 
         Event newEvent = new Event(UIPrint.eventIcon, description, time);
-
         Duke.tasks.add(newEvent);
         Duke.reportNewTask(newEvent);
     }

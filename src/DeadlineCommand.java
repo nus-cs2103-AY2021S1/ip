@@ -1,5 +1,4 @@
 import exception.IncorrectFormatException;
-import exception.NoDescriptionException;
 
 public class DeadlineCommand extends Command {
 
@@ -22,7 +21,6 @@ public class DeadlineCommand extends Command {
         String deadline = splitStr[1];
 
         Deadline newDeadline = new Deadline(UIPrint.deadlineIcon, description, deadline);
-
         Duke.tasks.add(newDeadline);
         Duke.reportNewTask(newDeadline);
     }

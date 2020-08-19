@@ -29,6 +29,16 @@ public class Duke {
         UIPrint.drawLine(UIPrint.star, 50);
     }
 
+    public static void reportDeleteTask(Task task) {
+        UIPrint.drawLine(UIPrint.star, 50);
+
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println(task);
+        System.out.println("Now you have " + Duke.tasks.size() + " tasks in the list");
+
+        UIPrint.drawLine(UIPrint.star, 50);
+    }
+
     private static void checkCommand(String str) {
         String[] inputParts = str.split(" ", 2);
         String possibleCommand = inputParts[0];
