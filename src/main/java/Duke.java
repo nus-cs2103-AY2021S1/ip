@@ -77,7 +77,7 @@ public class Duke {
             String description;
             switch (input.toLowerCase().split(" ")[0]) {
                 case "deadline":
-                    System.out.println("Deadline");
+                    //System.out.println("Deadline");
                     inputSplit = input.split("/by");
                     String by = inputSplit[1];
                     description = inputSplit[0].substring(8);
@@ -85,13 +85,13 @@ public class Duke {
                     userTasks.add(t);
                     break;
                 case "todo":
-                    System.out.println("ToDo");
+                    //System.out.println("ToDo");
                     description = input.substring(4);
                     t = new ToDo(description);
                     userTasks.add(t);
                     break;
                 case "event":
-                    System.out.println("Event");
+                    //System.out.println("Event");
                     inputSplit = input.split("/at");
                     String at = inputSplit[1];
                     description = inputSplit[0].substring(5);
