@@ -22,14 +22,18 @@ public class Storage {
 
     public String displayTasksLeft() {
         String indents = "  ";
-        return "\n" + indents + "Now you have " + this.list.size() + " tasks in the list.";
+            return "\n" + indents + "Now you have " + this.list.size() + " tasks in the list.";
     }
 
     public void print() {
-        int counter = 1;
-        for (Task i : list) {
-            System.out.println("  " + counter + "." + i);
-            counter++;
+        if (this.list.size() > 0) {
+            int counter = 1;
+            for (Task i : list) {
+                System.out.println("  " + counter + "." + i);
+                counter++;
+            }
+        } else {
+            System.out.println("No tasks found, add a task now!");
         }
     }
 }
