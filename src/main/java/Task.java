@@ -1,8 +1,8 @@
-public class Task {
+public abstract class Task {
     protected boolean completed = false;
     protected String name;
 
-    Task (String name) {
+    protected Task (String name) {
         this.name = name;
     }
 

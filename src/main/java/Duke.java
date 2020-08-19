@@ -9,29 +9,54 @@ public class Duke {
         List<Task> taskList = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
-        while (!command.equals("bye")) {
-            if (command.equals("list")) {
-                displayTaskList(taskList);
-            } else if (command.startsWith("done")) {
-                String[] commandArray = command.split(" ", 2);
-                int taskNumber = Integer.parseInt(commandArray[1]);
-                Task doneTask = taskList.get(taskNumber - 1);
-                doneTask.markDone();
-                displayMarkDoneMessage(doneTask);
-            } else {
-                echoAddCommand(command);
-                Task task = new Task(command);
-                taskList.add(task);
-            }
+        while (handleCommand(command, taskList)) {
             command = scanner.nextLine();
         }
-        sayBye();
     }
 
-    private static void displayMarkDoneMessage(Task task) {
+    private static boolean handleCommand(String commandLine, List<Task> taskList) {
+        String[] commands = commandLine.split(" ", 2);
+        switch (commands[0]) {
+            case "todo":
+                addTask(new Todo(commands[1]), taskList);
+                break;
+            case "deadline":
+                addTask(Deadline.create(commands[1]), taskList);
+                break;
+            case "event":
+                addTask(Event.create(commands[1]), taskList);
+                break;
+            case "list":
+                displayTaskList(taskList);
+                break;
+            case "done":
+
+                markTaskDone(commands[1], taskList);
+                break;
+            case "bye":
+                sayBye();
+                return false;
+        }
+        return true;
+    }
+
+    private static void addTask(Task task, List<Task> taskList) {
+        taskList.add(task);
         System.out.println(wrapDivider(
-                        "     Nice! I've marked this task as done: \n" +
-                        "       "+ task.toString() + "\n"
+                "     Got it. I've added this task: \n" +
+                "       " + task.toString() + "\n" +
+                "     Now you have "+ taskList.size() + " tasks in the list.\n"
+        ));
+
+    }
+
+    private static void markTaskDone(String selection, List<Task> taskList) {
+        int index = Integer.parseInt(selection);
+        Task task = taskList.get(index - 1);
+        task.markDone();
+        System.out.println(wrapDivider(
+            "     Nice! I've marked this task as done: \n" +
+            "       "+ task.toString() + "\n"
         ));
     }
 
@@ -41,13 +66,13 @@ public class Duke {
 
     private static void sayHello() {
         System.out.println(wrapDivider(
-                "      ____        _        \n" +
-                "     |  _ \\ _   _| | _____ \n" +
-                "     | | | | | | | |/ / _ \\\n" +
-                "     | |_| | |_| |   <  __/\n" +
-                "     |____/ \\__,_|_|\\_\\___|\n" +
-                "     Hello! I'm Thuya\n" +
-                "     What may I do for you, sir/madam?\n")
+            "      ____        _        \n" +
+            "     |  _ \\ _   _| | _____ \n" +
+            "     | | | | | | | |/ / _ \\\n" +
+            "     | |_| | |_| |   <  __/\n" +
+            "     |____/ \\__,_|_|\\_\\___|\n" +
+            "     Hello! I'm Thuya\n" +
+            "     What may I do for you, sir/madam?\n")
         );
     }
 
