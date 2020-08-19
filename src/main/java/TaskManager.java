@@ -36,6 +36,10 @@ public class TaskManager {
         this.tasks.get(index-1).setDone();
     }
 
+    public Task deleteTask(int index) {
+        return this.tasks.remove(index-1);
+    }
+
     public String getTaskStatus(int index) {
         return tasks.get(index-1).toString();
     }
