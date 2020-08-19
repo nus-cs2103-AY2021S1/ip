@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -8,7 +9,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        Task[] task = new Task[100];
+        ArrayList<Task> task = new ArrayList<>();
         System.out.println("Hello from\n" + logo);
 
         System.out.println(divider);
@@ -19,8 +20,8 @@ public class Duke {
         Program stores user inputs as Tasks and returns the list when the String "list" is entered.
         Tasks are categorised into "todo", "deadline" (to specify "by") and "event"  (to specify "at").
         When "done xx" is entered, Task xx in the list is marked as done.
+        When "delete xx" is entered, Task xx in the list is removed from the list.
          */
-        int pointer = 1;
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
@@ -28,17 +29,26 @@ public class Duke {
 
             if (input.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
-                for (int i = 1; i < pointer; i++) {
-                    System.out.println(i + ". " + task[i - 1]);
+                for (int i = 1; i < task.size() + 1; i++) {
+                    System.out.println(i + ". " + task.get(i - 1));
                 }
             } else if (input.startsWith("done")) {
                 if (input.length() == 4) {
                     System.out.println(new DukeException("Hold up! Please specify which task is done.").getMessage());
                 } else {
                     int taskToMark = Integer.parseInt(input.substring(5)) - 1;
-                    task[taskToMark].markAsDone();
+                    task.get(taskToMark).markAsDone();
                     System.out.println("Task Accomplished! I've marked this task as done:");
-                    System.out.println(task[taskToMark]);
+                    System.out.println(task.get(taskToMark));
+                }
+            } else if (input.startsWith("delete")) {
+                if (input.length() == 6) {
+                    System.out.println(new DukeException("Hold up! Please specify which task to delete.").getMessage());
+                } else {
+                    int taskToDelete = Integer.parseInt(input.substring(7)) - 1;
+                    System.out.println("Alright! I've removed this task:");
+                    System.out.println(task.remove(taskToDelete));
+                    System.out.println("Now you have " + task.size() + " tasks in your list.");
                 }
             } else {
                 if (!input.startsWith("todo") && !input.startsWith("deadline") && !input.startsWith("event")) {
@@ -50,10 +60,9 @@ public class Duke {
                             System.out.println(new DukeException("Hold up! The description of todo cannot be empty...").getMessage());
                         } else {
                             System.out.println("Got it! I've added this task:");
-                            task[pointer - 1] = new ToDo(input.substring(5));
-                            System.out.println(task[pointer - 1]);
-                            System.out.println("Now you have " + pointer + " tasks in your list.");
-                            pointer++;
+                            task.add(new ToDo(input.substring(5)));
+                            System.out.println(task.get(task.size() - 1));
+                            System.out.println("Now you have " + task.size() + " tasks in your list.");
                         }
 
                     } else if (input.startsWith("deadline")) {
@@ -64,10 +73,9 @@ public class Duke {
                         } else {
                             System.out.println("Got it! I've added this task:");
                             int endIndex = input.indexOf("/by") - 1;
-                            task[pointer - 1] = new Deadline(input.substring(9, endIndex), input.substring(endIndex + 5));
-                            System.out.println(task[pointer - 1]);
-                            System.out.println("Now you have " + pointer + " tasks in your list.");
-                            pointer++;
+                            task.add(new Deadline(input.substring(9, endIndex), input.substring(endIndex + 5)));
+                            System.out.println(task.get(task.size() - 1));
+                            System.out.println("Now you have " + task.size() + " tasks in your list.");
                         }
 
                     } else {
@@ -78,10 +86,9 @@ public class Duke {
                         } else {
                             System.out.println("Got it! I've added this task:");
                             int endIndex = input.indexOf("/at") - 1;
-                            task[pointer - 1] = new Event(input.substring(6, endIndex), input.substring(endIndex + 5));
-                            System.out.println(task[pointer - 1]);
-                            System.out.println("Now you have " + pointer + " tasks in your list.");
-                            pointer++;
+                            task.add(new Event(input.substring(6, endIndex), input.substring(endIndex + 5)));
+                            System.out.println(task.get(task.size() - 1));
+                            System.out.println("Now you have " + task.size() + " tasks in your list.");
                         }
                     }
                 }

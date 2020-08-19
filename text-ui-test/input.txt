@@ -1,14 +1,8 @@
-todo
 todo read book
-deadline
-deadline return book
 deadline return book /by Monday
-event
-event book fair
 event book fair /at Tuesday 2-4pm
-done
-done 1
+todo write report
 done 2
+delete 3
 list
-blah
 bye
