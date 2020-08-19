@@ -1,6 +1,6 @@
 public class ToDo extends Task {
 // ToDos: tasks without any date/time attached to it e.g., visit new theme park
-    public ToDo(String description) {
+    public ToDo(String description) throws PandaBotEmptyTaskDescriptionException {
         super(description);
     }
     
