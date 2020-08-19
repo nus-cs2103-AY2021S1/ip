@@ -22,6 +22,7 @@ public class Duke {
 
         while(sc.hasNext()) {
             String input = sc.nextLine();
+            Task newTask = new Task(input);
 
             if (input.equals("bye")) {
                 System.out.println(underscore);
@@ -32,9 +33,16 @@ public class Duke {
                 System.out.println(underscore);
                 newList.listTasks();
                 System.out.println(underscore);
+            } else if (input.contains("done")) {
+                String taskNumberString = input.substring(5);
+                int taskNumberInt = Integer.parseInt(taskNumberString) - 1;
+                System.out.println(taskNumberInt);
+                System.out.println(underscore);
+                newList.get(taskNumberInt).markDone();
+                System.out.println(underscore);
             } else {
                 System.out.println(underscore);
-                newList.addTask(input);
+                newList.addTask(newTask);
                 System.out.println(underscore);
 
             }
