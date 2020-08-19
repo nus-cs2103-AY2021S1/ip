@@ -2,10 +2,10 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private final Task task;
+    private final Task[] tasks;
 
     public Duke() {
-        task = new Task();
+        this.tasks = new Task[100];
     }
 
     public void greet() {
@@ -13,7 +13,7 @@ public class Duke {
         System.out.println("What can I do for you?\n");
     }
 
-    public void store() {
+    public void handleInput() {
         boolean exit = false;
         Scanner sc = new Scanner(System.in);
         while (! exit) {
@@ -22,12 +22,35 @@ public class Duke {
                 exit = true;
                 sc.close();
             } else if (command.equals("list")) {
-                System.out.println(task);
+                this.displayTasks();
             } else {
-                task.addTasks(command);
+                Task task = new Task(command);
+                this.addTask(task);
                 System.out.println("added: " + command + "\n");
             }
         }
+    }
+
+    public void addTask(Task task) {
+        for (int i = 0; i < tasks.length; i++) {
+            if (tasks[i] == null) {
+                tasks[i] = task;
+                break;
+            }
+        }
+    }
+
+    public void displayTasks() {
+        for (int i = 0; i < tasks.length; i++) {
+            if (tasks[i] != null) {
+                Task task = tasks[i];
+                String symbol = task.getStatusIcon();
+                System.out.println(i + 1 + ".[" + symbol + "] " + task);
+            } else {
+                break;
+            }
+        }
+        System.out.println("");
     }
 
     public void exit() {
@@ -37,7 +60,7 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.greet();
-        duke.store();
+        duke.handleInput();
         duke.exit();
     }
 }
