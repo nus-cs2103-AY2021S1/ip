@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Bot {
@@ -5,18 +7,22 @@ public class Bot {
     }
 
     String line = "____________________________________________________________";
-    String[] list = new String[100];
-    int listSize = 0;
+    ArrayList<Listing> list = new ArrayList<Listing>();
 
 
     public void serve() {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String s = sc.nextLine();
-            if (s.equals("bye")) {
+            String[] arr = s.split(" ");
+            String firstWord = arr[0];
+            if (firstWord.equals("bye")) {
                 return;
-            } else if (s.equals("list")) {
+            } else if (firstWord.equals("list")) {
                 returnListings(s);
+            } else if (firstWord.equals("done")) {
+                Integer value = Integer.valueOf(arr[1]);
+                doneListings(value);
             } else {
                 addListings(s);
             }
@@ -24,20 +30,29 @@ public class Bot {
         }
     }
 
-    public void addListings(String listing) {
-        listing = "added: " + listing;
-        list[listSize] = listing;
-        listSize++;
-        System.out.println(line + "\n" + listing + "\n" + line);
+    public void addListings(String title) {
+        Listing newListing = new Listing(title);
+        list.add(newListing);
+        System.out.println(line + "\n" + "added: " + newListing.toString() + "\n" + line);
 
     }
 
     public void returnListings(String listing) {
         System.out.println(line);
-        for (int i = 0; i < listSize; i++) {
-            System.out.println((i + 1) + ". " + list[i]);
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < list.size(); i++) {
+            String s = (i + 1) + "." + list.get(i).doneness() + list.get(i).toString();
+            System.out.println(s);
         }
         System.out.println(line);
+    }
+
+    public void doneListings(Integer value) {
+        Listing item = list.get(value - 1);
+        item.complete(); //completes the list
+        String s = line + "\n" + "Nice! I've marked this task as done: \n" + item.doneness()
+                + item.toString() +"\n" + line;
+        System.out.println(s);
     }
 
 
