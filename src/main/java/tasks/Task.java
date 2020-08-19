@@ -1,4 +1,6 @@
-public class Task {
+package tasks;
+
+public abstract class Task {
 
     // task description
     private final String desc;
@@ -19,6 +21,8 @@ public class Task {
         return done;
     }
 
+    protected abstract char getTaskType();
+
     public void markAsDone() {
         this.done = true;
     }
@@ -30,7 +34,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[%c] %s", getStatusIcon(), getDescription());
+        return String.format("[%c][%c] %s", getTaskType(), getStatusIcon(), getDescription());
     }
 
 }
