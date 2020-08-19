@@ -1,0 +1,12 @@
+list
+todo task1
+deadline task2 /by 22Aug2020
+event task3 /at Fri 1~6pm
+list
+hahaha
+done 2
+delete 2
+done 45
+delete 45
+list
+bye
