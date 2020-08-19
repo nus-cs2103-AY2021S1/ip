@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.lang.StringBuilder;
 
 public class Sparrow {
-    public static ArrayList<String> dataArr = new ArrayList<String>();
+    public static ArrayList<Task> taskList = new ArrayList<Task>();
 
     public static void main(String[] args) {
         greet();
@@ -17,17 +17,27 @@ public class Sparrow {
     }
 
     public static boolean handle(String command) {
-        switch (command) {
+        String[] commandArr = command.trim().split("\\s+");
+        switch (commandArr[0]) {
             case "bye":
                 reply("Bye. Hope t' see ye again soon!");
                 return false;
             case "list":
                 displayList();
-                return true;
+                break;
+            case "done":
+                try {
+                    markAsDone(commandArr[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Please enter a task number after \"done\".");
+                } finally {
+                    break;
+                }
             default:
                 add(command);
-                return true;
+                break;
         }
+        return true;
     }
 
     public static void greet() {
@@ -55,17 +65,33 @@ public class Sparrow {
     }
 
     public static void add(String data) {
-        dataArr.add(data);
+        taskList.add(new Task(data));
         reply("added: " + data);
     }
 
     public static void displayList() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < dataArr.size(); i++) {
-            String temp = String.format("%d. %s\n", i+1, dataArr.get(i));
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list: \n");
+        for (int i = 0; i < taskList.size(); i++) {
+            String temp = String.format("%d. %s\n", i+1, taskList.get(i));
             sb.append(temp);
         }
         reply(sb.toString());
+    }
+
+    public static void markAsDone(String taskNum) {
+        try {
+            int taskNumber = Integer.parseInt(taskNum);
+            System.out.println(taskNumber);
+            if (taskNumber <= taskList.size()) {
+                taskList.get(taskNumber - 1).markAsDone();
+                reply("Jolly riddance! I've marked this task as done:\n" + taskList.get(taskNumber - 1));
+            } else {
+                System.out.println("Please enter a valid task number.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter a valid task number.");
+        }
+
     }
 
 }
