@@ -12,13 +12,12 @@ public class Duke {
     static String line = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
     static TaskList taskList = new TaskList();
 
-
     private static class Task {
 
         private final String name;
         private boolean done;
 
-        Task(String name) {
+        public Task(String name) {
             this.name = name;
             this.done = false;
         }
@@ -38,6 +37,49 @@ public class Duke {
 
     }
 
+    private static class Todo extends Task {
+
+        public Todo(String name) {
+            super(name);
+        }
+
+        @Override
+        public String toString() {
+            return "[T]" + super.toString();
+        }
+    }
+
+    private static class Deadline extends Task {
+
+        protected String by;
+
+        public Deadline(String name, String by) {
+            super(name);
+            this.by = by;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("[D]%s(by:%s)", super.toString(), by);
+        }
+    }
+
+    private static class Event extends Task {
+
+        protected String at;
+
+        public Event(String name, String at) {
+            super(name);
+            this.at = at;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("[E]%s(at:%s)", super.toString(), at);
+        }
+    }
+
+
 
     private static class TaskList extends ArrayList<Task> {
 
@@ -54,7 +96,10 @@ public class Duke {
 
         public void addTask(Task newTask) {
             super.add(newTask);
-            printWithLines(String.format("added: %s\n", newTask));
+            String prefix = "Okay! I shall add this task:\n";
+            String suffix = String.format("Now you got a total of %s task%s in your list!\n", super.size(),
+                    super.size() == 1 ? "" : "s");
+            printWithLines(prefix + newTask + "\n" + suffix);
         }
 
         @Override
@@ -93,14 +138,31 @@ public class Duke {
                 case "done":
                     taskList.completeTask(Integer.parseInt(inputSuffix) - 1);
                     break;
+                case "todo":
+                    taskList.addTask(new Todo(inputSuffix));
+                    break;
+                case "deadline":
+                    String[] deadlineParts = inputSuffix.split("/by",2);
+                    String deadlineName = deadlineParts[0];
+                    String by = deadlineParts.length == 1 ? "" : deadlineParts[1];
+                    taskList.addTask(new Deadline(deadlineName, by));
+                    break;
+                case "event":
+                    String[] eventParts = inputSuffix.split("/at",2);
+                    String eventName = eventParts[0];
+                    String at = eventParts.length == 1 ? "" : eventParts[1];
+                    taskList.addTask(new Event(eventName, at));
+                    break;
                 default:
                     taskList.addTask(new Task(nextInput));
 
             }
+
             nextInput = input.nextLine();
             inputParts = nextInput.split(" ", 2);
             inputPrefix = inputParts[0];
             inputSuffix = inputParts.length == 1 ? "" : inputParts[1];
+
         }
 
     }
