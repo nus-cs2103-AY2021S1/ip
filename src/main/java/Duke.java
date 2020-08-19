@@ -20,9 +20,15 @@ public class Duke {
             user_input = scanner.nextLine();
             if (user_input.equals("bye")) {
                 break;
+            } else if (user_input.equals("list")){
+                String output = "";
+                for (int i = 1; i <= user_list.size(); i++) {
+                    output = output + i + ". " + user_list.get(i-1) + "\n";
+                }
+                System.out.println(line + "\n" + output + line);
             } else {
                 user_list.add(user_input);
-                System.out.println(line + "\n" +user_input + "\n" + line);
+                System.out.println(line + "\n added: " +user_input + "\n" + line);
             }
         }
 
