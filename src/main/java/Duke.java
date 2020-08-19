@@ -25,8 +25,27 @@ public class Duke {
             }
 
             else {
-                System.out.println("added: " + echo);
-                listOfItems.add(new Task(echo));
+                if (tempArray[0].equals("todo")) {
+                    Todo newTodo = new Todo(echo.substring(5));
+                    listOfItems.add(newTodo);
+                    System.out.println("Got it. I've added this task:\n" + newTodo.toString() +
+                            "\nNow you have " + listOfItems.size() + " tasks in total");
+                }
+                if (tempArray[0].equals("deadline")) {
+                    String[] tempString = echo.substring(9).split(" /by");
+                    Deadline newDeadline = new Deadline(tempString[0], tempString[1]);
+                    listOfItems.add(newDeadline);
+                    System.out.println("Got it. I've added this task:\n" + newDeadline.toString()
+                            + "\nNow you have " + listOfItems.size() + " tasks in total");
+                }
+                if (tempArray[0].equals("event")) {
+                    String[] tempString = echo.substring(7).split(" /at");
+                    Event newEvent = new Event(tempString[0], tempString[1]);
+                    listOfItems.add(newEvent);
+                    System.out.println("Got it. I've added this task:\n" + newEvent.toString()
+                            + "\nNow you have " + listOfItems.size() + " tasks in total");
+                }
+
             }
             echo = sc.nextLine();
         }
