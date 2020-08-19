@@ -6,7 +6,7 @@ public class Duke {
 
     private static final String HORIZONTAL_RULE = "____________________________________________________________";
     private static Scanner sc;
-    private static List<String> itemsList;
+    private static List<Task> itemsList;
 
     public static void main(String[] args) {
         sc = new Scanner(System.in);
@@ -17,6 +17,7 @@ public class Duke {
     private static void executeProgramme() {
         final String TERMINATION_PHRASE = "bye";
         final String LIST_PHRASE = "list";
+        final String COMPLETE_TASK_PHRASE = "done";
 
         displayStart();
 
@@ -25,8 +26,13 @@ public class Duke {
 
             if (input.equals(LIST_PHRASE)) {
                 printList();
+            } else if (input.startsWith(COMPLETE_TASK_PHRASE)) {
+                displayCompleteTask();
+
+                int index = Integer.parseInt(input.substring(5)) - 1;
+                itemsList.get(index).doTask();
             } else {
-                itemsList.add(input);
+                itemsList.add(new Task(input));
 
                 System.out.println(HORIZONTAL_RULE);
                 System.out.println("added: " + input);
@@ -58,10 +64,25 @@ public class Duke {
     }
 
     private static void printList() {
+        final String CHECKMARK = "[✓]";
+        final String CROSS = "[✗]";
+
         System.out.println(HORIZONTAL_RULE);
+
         for (int i = 1; i <= itemsList.size(); i++) {
-            System.out.println(i + ". " + itemsList.get(i - 1));
+            Task item = itemsList.get(i - 1);
+            String checkbox = item.isDone() ? CHECKMARK : CROSS;
+            String fullItem = i + ". " + checkbox + " " + item.getTaskName();
+
+            System.out.println(fullItem);
         }
+
+        System.out.println(HORIZONTAL_RULE);
+    }
+
+    private static void displayCompleteTask() {
+        System.out.println(HORIZONTAL_RULE);
+        System.out.println("Congratulations, you actually did something");
         System.out.println(HORIZONTAL_RULE);
     }
 }
