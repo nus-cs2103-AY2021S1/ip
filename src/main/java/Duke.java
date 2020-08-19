@@ -26,7 +26,7 @@ public class Duke {
                 break;
             }
         }
-        System.out.println("Got it. I've added this task: \n" + task +
+        System.out.println("Got it. I've added this task:\n" + task +
                 "\nNow you have " + String.valueOf(len)  + " tasks in the list.");
     }
 
