@@ -7,14 +7,12 @@ public class Task {
         this.isDone = isDone;
     }
 
-    public Task markAsDone() {
-        Task task = new Task(this.description, true);
-        return task;
-    }
-
     @Override
     public String toString() {
         String box = this.isDone ? "\u2713" : "\u2718";
         return String.format("[%s] %s", box, this.description);
     }
 }
+
+
+
