@@ -7,7 +7,7 @@ public class Duke {
         System.out.println("Hello I'm Duke!");
         System.out.println("What can I do for you?");
 
-        List savedItems = new ArrayList<String>();
+        List<Task> savedItems = new ArrayList<>();
 
         String userInput;
         Scanner scanner = new Scanner(System.in);
@@ -25,11 +25,12 @@ public class Duke {
                 case "ls":
                     System.out.println("Here are your saved items:");
                     for (int i = 0; i < savedItems.size(); ++i) {
-                        System.out.println(i + 1 + ". " + savedItems.get(i));
+                        Task task = savedItems.get(i);
+                        System.out.println(i + 1 + ". " + task.getDescription());
                     }
                     break;
                 default:
-                    savedItems.add(userInput);
+                    savedItems.add(new Task(userInput));
                     System.out.println("added: " + userInput);
             }
         }
