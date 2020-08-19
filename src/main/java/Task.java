@@ -1,6 +1,6 @@
 public class Task {
-    private String name;
-    private boolean done;
+    protected String name;
+    protected boolean done;
 
     Task(String name) {
         this.name = name;
@@ -13,7 +13,7 @@ public class Task {
 
     @Override
     public String toString() {
-        if (done) {
+        if (this.done) {
             return String.format("[✓] %s", name);
         } else {
             return String.format("[✗] %s", name);
