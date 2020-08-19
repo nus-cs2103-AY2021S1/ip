@@ -99,25 +99,25 @@ public class Duke {
         }
     }
     
-//    public static void delete(String display) {
-//        try {
-//            if (display.length() == 6 || display.length() == 7) {
-//                throw new DukeException("ERROR: Specify the task number which you want to delete.");
-//            }
-//            int index = Integer.parseInt(display.substring(7));
-//            if (index > taskList.size()) {
-//                throw new DukeException("ERROR: Task does not exist");
-//            }
-//            Task task = taskList.get(index - 1);
-//            taskList.remove(index - 1);
-//            System.out.println("Noted. I've removed this task:\n" + task + "\n" 
-//                    + "Now you have " + taskList.size() + " tasks in the list.");
-//        } catch (DukeException ex) {
-//            System.out.println(ex.getMessage());
-//        } finally {
-//            readUserInput();
-//        }
-//    }
+    public static void delete(String display) {
+        try {
+            if (display.length() == 6 || display.length() == 7) {
+                throw new DukeException("ERROR: Specify the task number which you want to delete.");
+            }
+            int index = Integer.parseInt(display.substring(7));
+            if (index > taskList.size()) {
+                throw new DukeException("ERROR: Task does not exist");
+            }
+            Task task = taskList.get(index - 1);
+            taskList.remove(index - 1);
+            System.out.println("Noted. I've removed this task:\n" + task + "\n" 
+                    + "Now you have " + taskList.size() + " tasks in the list.");
+        } catch (DukeException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            readUserInput();
+        }
+    }
 
     public static void readUserInput() {
         
@@ -141,8 +141,8 @@ public class Duke {
         } else if (display.startsWith("event")) {
             inputEvent(display);
 
-//        } else if (display.startsWith("delete")) {
-//            delete(display);
+        } else if (display.startsWith("delete")) {
+            delete(display);
         } else {
             try {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
