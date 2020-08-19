@@ -53,7 +53,11 @@ public class Mocha {
             if (userCommand.hasNext("list")) { // Process closing here
                 System.out.println(horizontalLine + " \r\n" + "Here's all the tasks in your list: ");
                 for (int i = 0; i < listOfTasks.size(); i++) {
-                    System.out.println((i + 1) + "." + listOfTasks.get(i).toString());
+                    System.out.println((i + 1)
+                            + ".["
+                            + listOfTasks.get(i).getStatusIcon()
+                            + "] "
+                            + listOfTasks.get(i).getDescription());
                 }
                 System.out.println(horizontalLine + " \r\n");
                 userCommand.nextLine();
