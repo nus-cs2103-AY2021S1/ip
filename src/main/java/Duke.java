@@ -20,6 +20,7 @@ public class Duke {
         int taskSize = 0;
 
         do {
+            // check for done activity
             if (input.startsWith("done")) {
                 String taskStr = input.substring(5);
                 int taskNum = 0;
@@ -39,6 +40,7 @@ public class Duke {
                     System.out.println("hmm.. I don't think thats a valid task, try again?");
                 }
             }
+            // check for list command
             else if (input.equals(list)) {
                 int curr = 0;
                 while (curr < taskSize) {
@@ -46,10 +48,52 @@ public class Duke {
                     curr += 1;
                 }
             }
-            else {
-                taskList[taskSize] = new Task(input);
-                System.out.println("I have added: " + input);
+            // input tasks
+            else if (input.startsWith("todo")) {
+                // to-do activity
+                input = input.substring(5);
+                taskList[taskSize] = new Todo(input);
+                System.out.println("Ok, To-do added: \n  " + taskList[taskSize]);
                 taskSize += 1;
+                System.out.println("You now have " + taskSize + " task(s) in your list!");
+            }
+            else if (input.startsWith("deadline")) {
+                // deadline
+                input = input.substring(9);
+                String[] temp = input.split(" /by "); // create array of [task desc, task date]
+
+                if (temp.length == 2) {
+                    // valid
+                    taskList[taskSize] = new Deadline(temp[0], temp[1]);
+                    System.out.println("Ok, Deadline added: \n  " + taskList[taskSize]);
+                    taskSize += 1;
+                    System.out.println("You now have " + taskSize + " task(s) in your list!");
+                }
+                else {
+                    // no valid date
+                    System.out.println("Due date not detected, try again!");
+                }
+            }
+            else if (input.startsWith("event")) {
+                // event
+                input = input.substring(6);
+                String[] temp = input.split(" /at "); // create array of [task desc, task date]
+
+                if (temp.length == 2) {
+                    // valid
+                    taskList[taskSize] = new Event(temp[0], temp[1]);
+                    System.out.println("Ok, Event added: \n  " + taskList[taskSize]);
+                    taskSize += 1;
+                    System.out.println("You now have " + taskSize + " task(s) in your list!");
+                }
+                else {
+                    // no valid date
+                    System.out.println("Event date not detected, try again!");
+                }
+            }
+            else {
+                // not valid task
+                System.out.println("Sorry what?");
             }
             System.out.println("_________________________________________");
             input = sc.nextLine();
