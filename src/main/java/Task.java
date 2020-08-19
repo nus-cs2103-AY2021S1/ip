@@ -1,3 +1,4 @@
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -8,6 +9,7 @@ public abstract class Task {
         this.isDone = isCompleted;
         this.total ++;
     }
+
 
     public static int remainingTasks() {
         return Task.total;
