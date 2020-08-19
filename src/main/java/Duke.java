@@ -104,13 +104,13 @@ public class Duke {
                 } else {
                     list.add(new Event(task[0].replaceFirst("event ", ""), task[1]));
                 }
-                print("Got it. I've added this task: \n" +
+                print("\tGot it. I've added this task: \n" +
                         "\t" + list.get(list.size()-1) + "\n" +
                         "\tNow you have " + list.size() + " tasks in the list.\n");
             } else {
                 print("\ti ignore\n");
             }
         }
-        print("     Bye. Hope to see you again soon!\n");
+        print("\tBye. Hope to see you again soon!\n");
     }
 }
