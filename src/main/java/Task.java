@@ -16,7 +16,12 @@ public class Task {
     }
 
     public void markAsDone(){
-        System.out.println("Nice! I've marked this task as done: " + "\n" + "[\u2713]" + this.description);
         this.isDone = true;
+        System.out.println("Nice! I've marked this task as done: " + "\n" + "[\u2713]" + this.description);
+    }
+
+    @Override
+    public String toString() {
+        return description;
     }
 }

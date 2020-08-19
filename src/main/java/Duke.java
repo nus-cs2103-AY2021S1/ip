@@ -26,7 +26,7 @@ public class Duke {
                 case "list":
                     System.out.println("____________________________________________________________");
                     for (int x = 0; x < ls.size(); x++) {
-                        System.out.println(x + 1 + ":" + ls.get(x).getStatusIcon() + ls.get(x).description);
+                        System.out.println(x + 1 + ":" + ls.get(x).toString());
                     }
                     System.out.println("____________________________________________________________");
                     break;
@@ -36,12 +36,54 @@ public class Duke {
                             String x = line.split(" ")[1];
                             try {
                                 int y = Integer.parseInt(x);
-                                ls.get(y-1).markAsDone();
+                                ls.get(y - 1).markAsDone();
                             } catch (Exception exception) {
                                 System.out.println("Please mark a valid item as done");
-                            }finally {
+                            } finally {
                                 break;
                             }
+                        case "todo":
+                            String todoString = line.substring(5);
+                            ToDo todo = new ToDo(todoString);
+                            ls.add(todo);
+                            System.out.println("____________________________________________________________");
+                            System.out.println("Got it. I've added this task: ");
+                            System.out.println(todo.toString());
+                            System.out.format("Now you have %d tasks in the list \n", ls.size());
+                            System.out.println("____________________________________________________________");
+                            break;
+
+                        case "deadline":
+                            String by = line.split("/")[1];
+                            String by2 = by.substring(by.indexOf("by") + 3);
+                            String deadlineString = line.split("/")[0].substring(9);
+
+
+                            Deadline deadline = new Deadline(deadlineString,by2);
+                            ls.add(deadline);
+                            System.out.println("____________________________________________________________");
+                            System.out.println(" Got it. I've added this task: ");
+                            System.out.println(deadline.toString());
+                            System.out.format("Now you have %d tasks in the list \n", ls.size());
+                            System.out.println("____________________________________________________________");
+                            break;
+
+                        case "event":
+                            String at = line.split("/")[1];
+                            String at2 = at.substring(at.indexOf("at") + 3);
+
+                            String eventString = line.split("/")[0].substring(6);
+                            Event event = new Event(eventString,at2);
+
+                            System.out.println("____________________________________________________________");
+                            System.out.println(" Got it. I've added this task: ");
+                            System.out.println(event.toString());
+                            System.out.format("Now you have %d tasks in the list \n", ls.size());
+                            System.out.println("____________________________________________________________");
+                            break;
+
+
+
 
                         default:
                             ls.add(new Task(line));
