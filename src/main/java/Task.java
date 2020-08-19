@@ -1,4 +1,5 @@
 public class Task {
+    //This class manages the information of each task within Dukes Task List
     private final String task;
     private final boolean isDone;
 

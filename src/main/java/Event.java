@@ -1,12 +1,12 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Event {
+    //This class handles the simulation of the Duke chat bot
     public static void simulate(){
         TaskList ls= new TaskList();
         boolean hasBye = false;
         String input;
+        String[] splitList;
 
         String line = "     ___________________________________________________________________";
         String introText1 = "     Hello! I'm Duke";
@@ -21,6 +21,7 @@ public class Event {
         input = sc.nextLine();
 
         while(!hasBye){
+            splitList = input.split(" ", 2);
             System.out.println(line);
             if(input.equals("bye")){
                 System.out.println("     Bye. Hope to see you again soon!");
@@ -34,6 +35,15 @@ public class Event {
                 }
                 System.out.println(line);
                 input = sc.nextLine();
+            }else if(splitList[0].equals("done")){
+                try{
+                    ls.setDone(Integer.parseInt(splitList[1]) - 1);
+                }catch (Exception e){
+                    System.out.println(e.toString());
+                }finally {
+                    System.out.println(line);
+                    input = sc.nextLine();
+                }
             }else{
                 ls.add(input);
                 System.out.println("     added: " + input);
