@@ -59,56 +59,65 @@ public class Duke {
                 try {
                     Task task = tasks.get(index);
                     task.markAsDone();
-                    System.out.println(SPACE_BEFORE_TEXT + "Understood, I've marked this task as done:" +
-                            "\n" + SPACE_FOR_ADDING + task);
+                    System.out.println(SPACE_BEFORE_TEXT + "Understood, I've marked this " +
+                            "task as done:" + "\n" + SPACE_FOR_ADDING + task);
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println(SPACE_BEFORE_TEXT + "Sorry, I can't seem to find the task...");
+                    System.out.println(SPACE_BEFORE_TEXT + "Sorry, I can't seem " +
+                            "to find the task...");
                 }
-                continue;
-            }
-
-            if (process.length == 1) {
-                System.out.println(SPACE_BEFORE_TEXT + "Empty content!");
                 continue;
             }
 
             String firstWord = process[0];
             Task current;
-            switch (firstWord) {
-                case "todo":
-                    current = new ToDo(process[1].trim());
-                    break;
-                case "deadline": {
-                    int byIndex = process[1].indexOf(" /by ");
-                    if (byIndex == -1 ) {
-                        System.out.println(SPACE_BEFORE_TEXT + "I can't find the description of the task!");
-                        continue;
+            try {
+                switch (firstWord) {
+                    case "todo":
+                        current = new ToDo(process[1].trim());
+                        break;
+                    case "deadline": {
+                        int byIndex = process[1].indexOf(" /by ");
+                        if (byIndex == -1) {
+                            throw new DukeException("better description");
+                        }
+                        String deadline = process[1].substring(byIndex + 4).trim();
+                        String description = process[1].substring(0, byIndex).trim();
+                        current = new Deadline(description, deadline);
+                        break;
                     }
-                    String deadline = process[1].substring(byIndex + 4).trim();
-                    String description = process[1].substring(0, byIndex).trim();
-                    current = new Deadline(description, deadline);
-                    break;
-                }
-                case "event": {
-                    int atIndex = process[1].indexOf(" /at ");
-                    if (atIndex == -1 ) {
-                        System.out.println(SPACE_BEFORE_TEXT + "I can't find the description of the task!");
-                        continue;
+                    case "event": {
+                        int atIndex = process[1].indexOf(" /at ");
+                        if (atIndex == -1) {
+                            throw new DukeException("better description");
+                        }
+                        String deadline = process[1].substring(atIndex + 4).trim();
+                        String description = process[1].substring(0, atIndex).trim();
+                        current = new Event(description, deadline);
+                        break;
                     }
-                    String deadline = process[1].substring(atIndex + 4).trim();
-                    String description = process[1].substring(0, atIndex).trim();
-                    current = new Event(description, deadline);
-                    break;
+                    default:
+                        throw new DukeException("nothing understood");
                 }
-                default:
-                    System.out.println(SPACE_BEFORE_TEXT + "Invalid input detected!");
-                    continue;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println(SPACE_BEFORE_TEXT + "The description of " +
+                        "a task cannot be empty!");
+                continue;
+            } catch (DukeException e) {
+                String type = e.getMessage();
+                if (type.equals("better description")) {
+                    System.out.println(SPACE_BEFORE_TEXT + "I need a better " +
+                            "description of the task such as the time or date!");
+                } else if (type.equals("nothing understood")) {
+                    System.out.println(SPACE_BEFORE_TEXT + "I don't understand you at all...");
+                }
+                continue;
             }
 
             tasks.add(current);
             System.out.println(SPACE_BEFORE_TEXT + "Understood! I've added this task: " +
                     "\n" + SPACE_FOR_ADDING + current);
-            System.out.println(SPACE_BEFORE_TEXT + "You have " + tasks.size() + " tasks in your list now!");
+            System.out.println(SPACE_BEFORE_TEXT + "You have " +
+                    tasks.size() + " tasks in your list now!");
             System.out.println(LINE_BREAK);
         }
     }
