@@ -21,16 +21,31 @@ public class Duke {
 
         System.out.println(line + greeting + line);
         Scanner sc = new Scanner(System.in);
+        String[] list = new String[100];
+        int count = 0;
 
         while (sc.hasNextLine()) {
             String temp = sc.nextLine();
             if (temp.equals("bye")) {
                 System.out.println(line + bye + line);
                 return;
+            } else if (temp.equals("list")) {
+                System.out.println(line);
+                for (int i = 1; i < count + 1; i++) {
+                    System.out.println("" + i + "." + list[i-1]);
+                }
+                System.out.println(line);
             } else {
-                System.out.println(line + temp + "\n" + line);
+                System.out.println(line);
+                System.out.println("added: " + temp);
+                System.out.println(line);
+                list[count] = temp;
+                count++;
+            }
+                //echo
+                //System.out.println(line + temp + "\n" + line);
             }
 
         }
     }
-}
+
