@@ -25,7 +25,7 @@ public class Chatterbox {
             } else {
                 System.out.println(format("Your list is currently empty."));
             }
-        } else if (command.equals("done")) {
+        } else if (command.equals("done") || command.equals("delete")) {
             int taskNo;
             try {
                 taskNo = Integer.parseInt(input.split(" ")[1]) - 1;
@@ -35,9 +35,17 @@ public class Chatterbox {
             if (taskNo < 0 || taskNo >= ITEMS.size()) {
                 throw new ChatterboxException("Invalid task number.");
             }
-            Task t = ITEMS.get(taskNo);
-            t.markDone();
-            System.out.println(format("Nice! I've marked this task as done: \n" + t));
+
+            if (command.equals("done")) {
+                Task t = ITEMS.get(taskNo);
+                t.markDone();
+                System.out.println(format("Nice! I've marked this task as done: \n" + t));
+            } else {
+                Task t = ITEMS.remove(taskNo);
+                System.out.println(format("Noted! I've removed this task from your list: \n"
+                        + t + "\n"
+                        + " Now you have " + ITEMS.size() + " tasks in the list."));
+            }
         } else if (command.equals("deadline") || command.equals("todo") || command.equals("event")) {
             if (!input.contains(" ") || input.substring(input.indexOf(' ')).strip().equals("")) {
                 throw new ChatterboxException("The description of a " + command + " cannot be empty");
