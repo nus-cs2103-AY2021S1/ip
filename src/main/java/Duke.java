@@ -35,6 +35,10 @@ public class Duke {
                     System.out.println("Hmm? Please mention \"done\" followed by the number of the task we're marking as done.");
                 }
                 break;
+            case "delete":
+                Task deletedTask = taskList.remove(inputSc.nextInt() - 1); // shown list is base 1, implemented list is base 0
+                System.out.println("Begone! This task is now removed: " + deletedTask);
+                break;
             case "todo":
                 try {
                     String name = inputSc.nextLine();
