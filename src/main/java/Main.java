@@ -7,14 +7,10 @@ public class Main {
         Chatbot bot = new Chatbot();
         bot.greeting();
 
-        while (sc.hasNext()) {
-            String next = sc.next();
-            if (!next.equals("bye")) {
-                bot.echo(next);
-            } else {
-                bot.exit();
-                sc.close();
-            }
+        while (sc.hasNext() && bot.chat(sc.nextLine())) {
+//            String next = sc.next();
+//            bot.chat(next);
         }
+        sc.close();
     }
 }
