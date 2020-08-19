@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
@@ -15,7 +16,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Task[] orderList = new Task[100];
+        ArrayList<Task> orderList = new ArrayList<Task>();
         Scanner sc =  new Scanner(System.in);
         String seperateLine = "    _______________________________________";
         String spaceBeforeOder = "      ";
@@ -31,20 +32,41 @@ public class Duke {
                     System.out.println(spaceBeforeOder + "Here are the tasks in your list:");
                     for (int i = 0; i < numOfOders; i++){
                         System.out.println(spaceBeforeOder + (i + 1) + ". " +
-                                orderList[i]);
+                                orderList.get(i));
                     }
                     System.out.println(seperateLine);
                 } else if (order != null){
                     String[] command = order.split(" ", 2);
-                    if(command[0].equals("done") && isInteger(command[1])
-                            && Integer.parseInt(command[1]) <= numOfOders) {
-                        int toMark = Integer.parseInt(command[1]) - 1;
-                        orderList[toMark] = orderList[toMark].markDone();
-                        System.out.println(seperateLine);
-                        System.out.println(spaceBeforeOder + "Nice! I've marked this task as done:");
-                        System.out.println(spaceBeforeOder + "  " + orderList[toMark]);
-                        System.out.println(seperateLine);
-                    } else {
+                    if(command[0].equals("done")) {
+                        if(command.length == 1) {
+                            throw new NoTaskChosenException(command[0]);
+                        } else if(!isInteger(command[1]) || Integer.parseInt(command[1]) > numOfOders){
+                            throw new NoThisNumOfTaskException();
+                        } else {
+                            int toMark = Integer.parseInt(command[1]) - 1;
+                            orderList.get(toMark).markDone();
+                            System.out.println(seperateLine);
+                            System.out.println(spaceBeforeOder + "Nice! I've marked this task as done:");
+                            System.out.println(spaceBeforeOder + "  " + orderList.get(toMark));
+                            System.out.println(spaceBeforeOder + "Now you have " + numOfOders + " tasks in the list.");
+                            System.out.println(seperateLine);
+                        }
+                    } else if(command[0].equals("delete")) {
+                        if(command.length == 1) {
+                            throw new NoTaskChosenException(command[0]);
+                        } else if(!isInteger(command[1]) || Integer.parseInt(command[1]) > numOfOders){
+                            throw new NoThisNumOfTaskException();
+                        } else {
+                            Task removed = orderList.remove(Integer.parseInt(command[1]) - 1);
+                            System.out.println(seperateLine);
+                            System.out.println(spaceBeforeOder + "Noted. I've removed this task:");
+                            System.out.println(spaceBeforeOder + "  " + removed);
+                            System.out.println(spaceBeforeOder + "Now you have " + (numOfOders - 1) + " tasks in the list.");
+                            System.out.println(seperateLine);
+                            numOfOders--;
+                        }
+                    }
+                    else {
                         if(command.length == 1) {
                             throw new NoDescriptionException(command[0]);
                         }else if(command[0].equals("deadline")) {
@@ -52,22 +74,22 @@ public class Duke {
                             if (splitAgain.length == 1) {
                                 throw new NoTimeException(command[0]);
                             }
-                            orderList[numOfOders] = new Deadline(splitAgain[0], splitAgain[1]);
+                            orderList.add(new Deadline(splitAgain[0], splitAgain[1]));
                         } else if(command[0].equals("event")) {
                             String[] splitAgain = command[1].split("/by ");
                             if (splitAgain.length == 1) {
                                 throw new NoTimeException(command[0]);
                             }
-                            orderList[numOfOders] = new Event(splitAgain[0], splitAgain[1]);
+                            orderList.add(new Event(splitAgain[0], splitAgain[1]));
                         } else if(command[0].equals("todo")) {
-                            orderList[numOfOders] = new Todo(command[1]);
+                            orderList.add( new Todo(command[1]));
                         } else {
                             throw new NoSuchOrderException();
                         }
 
                         System.out.println(seperateLine);
                         System.out.println(spaceBeforeOder + "Got it. I've added this task: ");
-                        System.out.println(spaceBeforeOder + "  " + orderList[numOfOders]);
+                        System.out.println(spaceBeforeOder + "  " + orderList.get(numOfOders));
                         System.out.println(spaceBeforeOder + "Now you have " + (numOfOders + 1) + " tasks in the list.");
                         System.out.println(seperateLine);
                         numOfOders++;
@@ -77,7 +99,7 @@ public class Duke {
 
                 order = sc.nextLine();
             }
-        } catch (NoDescriptionException | NoTimeException | NoSuchOrderException e) {
+        } catch (NoDescriptionException | NoTimeException | NoSuchOrderException | NoTaskChosenException | NoThisNumOfTaskException e) {
             e.printStackTrace();
         }
 
