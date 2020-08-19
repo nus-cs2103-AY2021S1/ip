@@ -1,0 +1,16 @@
+todo read book
+done -1
+deadline return book /by June 6th
+event project meeting /at Aug 6th
+list
+done 1
+carrots
+todo join sports club
+todo borrow book
+done 4
+list
+event cca meeting /at June 13th 3-4am
+deadline go to bed /by 10pm
+done 3
+list
+bye

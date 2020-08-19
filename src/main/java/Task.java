@@ -14,6 +14,6 @@ public class Task {
 
     @Override
     public String toString(){
-        return (isDone ? "[\u2713]" : "[\u2718]") + " " + name;
+        return (isDone ? "[\u2705]" : "[\u2718]") + " " + name;
     }
 }
