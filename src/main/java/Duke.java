@@ -1,19 +1,20 @@
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     public static Scanner sc = new Scanner(System.in);
-    public static Task[] tasks = new Task[100];
+    public static List<Task> tasks = new ArrayList<>(100);
     public static int numberOfTasks = 0;
 
-    public enum TaskType { EXIT, TODO, DEADLINE, EVENT, DONE, LIST, INVALID };
+    public enum TaskType { EXIT, TODO, DEADLINE, EVENT, DONE, LIST, INVALID, DELETE };
 
     public static void printTasks() {
         System.out.println(
                 "    ____________________________________________________________\n" +
                 "     Here are the tasks in your list:");
         for (int i = 0; i < numberOfTasks; i++) {
-            Task t = tasks[i];
+            Task t = tasks.get(i);
             System.out.format("     %d.%s\n", i + 1, t.toString());
         }
         System.out.println(
@@ -28,6 +29,21 @@ public class Duke {
         } else {
             String firstWord = arr[0];
             switch (firstWord) {
+                case "delete": {
+                    if (arr.length != 2 || !arr[1].matches("\\d+")) {
+                        String errorMsg = "    ____________________________________________________________\n" +
+                                "     ☹ OOPS!!! The description of a done needs can only be a single integer.\n" +
+                                "    ____________________________________________________________";
+                        System.out.println(errorMsg);
+                    } else if (Integer.parseInt(arr[1]) < 1 || Integer.parseInt(arr[1]) > numberOfTasks) {
+                        String errorMsg = "    ____________________________________________________________\n" +
+                                "     ☹ OOPS!!! You cant delete a task that does not exist.\n" +
+                                "    ____________________________________________________________";
+                        System.out.println(errorMsg);
+                    } else {
+                        return TaskType.DELETE;
+                    }
+                }
                 case "done":
                     if (arr.length != 2 || !arr[1].matches("\\d+")) {
                         String errorMsg = "    ____________________________________________________________\n" +
@@ -156,7 +172,7 @@ public class Duke {
                     String[] arr = input.split(" ", 2);
                     String description = arr[1];
                     Task t = new Todo(description);
-                    tasks[numberOfTasks] = t;
+                    tasks.add(t);
                     numberOfTasks++;
 
                     String addTaskMessage =
@@ -193,7 +209,7 @@ public class Duke {
                         }
                     }
                     Task t = new Deadline(description.toString(), doBy.toString());
-                    tasks[numberOfTasks] = t;
+                    tasks.add(t);
                     numberOfTasks++;
                     String msg = "    ____________________________________________________________\n" +
                             "     Got it. I've added this task:\n" +
@@ -228,7 +244,7 @@ public class Duke {
                         }
                     }
                     Task t = new Event(description.toString(), date.toString());
-                    tasks[numberOfTasks] = t;
+                    tasks.add(t);
                     numberOfTasks++;
                     String msg = "    ____________________________________________________________\n" +
                             "     Got it. I've added this task:\n" +
@@ -240,7 +256,7 @@ public class Duke {
                 }
                 case DONE: {
                     int taskIndex = Integer.parseInt(arrayForm[1]) - 1;
-                    Task t = tasks[taskIndex];
+                    Task t = tasks.get(taskIndex);
                     t.markAsDone();
                     String doneTaskMessage =
                             "    ____________________________________________________________\n" +
@@ -248,6 +264,20 @@ public class Duke {
                                     "       " + t.toString() + "\n" +
                                     "    ____________________________________________________________";
                     System.out.println(doneTaskMessage);
+                    break;
+                }
+                case DELETE: {
+                    int deleteIndex = Integer.parseInt(arrayForm[1]) - 1;
+                    Task t = tasks.get(deleteIndex);
+                    tasks.remove(deleteIndex);
+                    numberOfTasks--;
+                    String deleteMessage =
+                            "    ____________________________________________________________\n" +
+                                    "     Noted. I've removed this task:\n" +
+                                    "       " + t.toString() + "\n" +
+                                    "     Now you have " + numberOfTasks + " tasks in the list.\n" +
+                                    "    ____________________________________________________________";
+                    System.out.println(deleteMessage);
                     break;
                 }
                 default:
