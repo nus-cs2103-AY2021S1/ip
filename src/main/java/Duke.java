@@ -1,4 +1,7 @@
+import main.java.Deadline;
+import main.java.Event;
 import main.java.Task;
+import main.java.Todo;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -35,7 +38,7 @@ public class Duke {
 //                for (int i = 0; i < iter; i++) {
 //                    System.out.println(i+1 + ". " + tasks[i]);
                 for (int i = 0; i < tasks.size(); i++) {
-                    System.out.println(i+1 + ". " + tasks.get(i));
+                    System.out.println(i + 1 + ". " + tasks.get(i));
                 }
                 System.out.println("I wouldn't bother doing them if I were you.");
             } else if (getFirstWord(command).equals("done")) {
@@ -43,9 +46,30 @@ public class Duke {
                 tasks.get(taskNumber).markAsDone();
                 System.out.println("Oh goody... You actually accomplished something!!\n" +
                         tasks.get(taskNumber));
+            } else if (getFirstWord(command).equals("todo")) {
+                String toAdd = command.split(" ", 2)[1];
+                tasks.add(new Todo(toAdd));
+                int length = tasks.size();
+                System.out.println("You're making me feel tired... But if you insist:\n  " + tasks.get(length-1) +
+                    "\nYou now have " + length + (length == 1 ? " thing" : " things") + " in your list");
+            } else if (getFirstWord(command).equals("deadline")) {
+                String wholeTask = command.split(" ",2)[1];
+                String[] descAndDeadline = wholeTask.split(" /by ");
+                tasks.add(new Deadline(descAndDeadline[0], descAndDeadline[1]));
+                int length = tasks.size();
+                System.out.println("You're making me feel tired... But if you insist:\n  " + tasks.get(length-1) +
+                        "\nYou now have " + length + (length == 1 ? " thing" : " things") + " in your list");
+            } else if (getFirstWord(command).equals("event")) {
+                String wholeTask = command.split(" ",2)[1];
+                String[] descAndTime = wholeTask.split(" /at ");
+                tasks.add(new Event(descAndTime[0], descAndTime[1]));
+                int length = tasks.size();
+                System.out.println("You're making me feel tired... But if you insist:\n  " + tasks.get(length-1) +
+                        "\nYou now have " + length + (length == 1 ? " thing" : " things") + " in your list");
             } else {
-                System.out.println("You're making me feel tired... " + command);
-                tasks.add(new Task(command));
+                System.out.println("I don't understand what you mean");
+//                System.out.println("You're making me feel tired... " + command);
+//                tasks.add(new Task(command));
 //                tasks[iter] = command;
 //                iter++;
             }
