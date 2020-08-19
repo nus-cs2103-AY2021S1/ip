@@ -6,16 +6,16 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) throws DukeException, IOException {
-          String logo = " ____        _        \n"
-                  + "|  _ \\ _   _| | _____ \n"
-                  + "| | | | | | | |/ / _ \\\n"
-                  + "| |_| | |_| |   <  __/\n"
-                  + "|____/ \\__,_|_|\\_\\___|\n";
-          System.out.println("Hello from\n" + logo);
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
 
         System.out.println("-------------------------------------------\n" +
-                                "Hello! I'm Duke\n" + "What can I do for you?" +
-                                        "\n-------------------------------------------\n");
+                "Hello! I'm Duke\n" + "What can I do for you?" +
+                "\n-------------------------------------------\n");
 
         Scanner sc = new Scanner(System.in);
         String input = "";
@@ -23,6 +23,8 @@ public class Duke {
         int i = 1;
         String done = "done x";
         char[] doneArray = done.toCharArray();
+        String delete = "delete x";
+        char[] deleteArray = delete.toCharArray();
         int number = 0;
         String t = "t";
         char[] todoChar = t.toCharArray();
@@ -79,72 +81,93 @@ public class Duke {
                             taskList.get(number - 1).getStatusIcon() + "] " +
                             taskList.get(number - 1).getDescription());
                 }
-            } else {
-                //if it is a todo
-                try {
-                    if (chars[0] == todoChar[0]) {
-                        try {
-                            taskList.add(i - 1, task);
-                            Todo taskTodo = new Todo(task.getDescription());
-                            System.out.println("-------------------------------------------\n" +
-                                    "Got it. I've added this task: \n" + taskTodo.toString() + "\n" +
-                                    String.format("Now you have %d tasks in the list.\n", taskList.size())
-                                    + "-------------------------------------------\n");
-                            i++;
-                        } catch (ArrayIndexOutOfBoundsException ex) {
-                            System.out.println("-------------------------------------------\n" +
-                                               "☹ OOPS!!! The description of a todo cannot be empty. Try again! \n" +
-                                                        "-------------------------------------------\n");
-                        }
-                        // if it is a deadline
-                    } else if (chars[0] == deadlineChar[0]) {
-                        try {
-                            taskList.add(i - 1, task);
-                            String taskName = task.getDescription();
-                            String[] parts = taskName.split("/by ");
+            }
+                // delete method
+                else if (chars.length == deleteArray.length) {
+                    if (chars[0] == deleteArray[0] && chars[1] == deleteArray[1] &&
+                            chars[2] == deleteArray[2] && chars[3] == deleteArray[3] &&
+                            chars[4] == deleteArray[4] && chars[5] == deleteArray[5] &&
+                            chars[6] == deleteArray[6] && Character.isDigit(chars[7])) {
 
-                            Deadline taskDeadline = new Deadline(task.getDescription(), parts[1]);
-                            System.out.println("-------------------------------------------------------------\n" +
-                                    "Got it. I've added this task: \n" + taskDeadline.toString() + "\n" +
-                                    String.format("Now you have %d tasks in the list.\n", taskList.size())
-                                    + "-------------------------------------------------------------\n");
-                            i++;
-                            if (chars.length == 8) {
-                                throw new ArrayIndexOutOfBoundsException("Cannot be empty");
-                            }
-                        } catch (ArrayIndexOutOfBoundsException ex) {
-                            System.out.println("-------------------------------------------------------------\n" +
-                                    "☹ OOPS!!! The description of a deadline cannot be empty. Try again! \n" +
-                                    "-------------------------------------------------------------\n");
-                        }
-                    } else if (chars[0] == eventChar[0]){
-                        try {
-                            // if it is an event
-                            taskList.add(i - 1, task);
-                            String taskName = task.getDescription();
-                            String[] parts = taskName.split("/at ");
+                        number = Character.getNumericValue(chars[chars.length - 1]);
 
-                            Event taskEvent = new Event(task.getDescription(), parts[1]);
-                            System.out.println("-------------------------------------------------------------\n" +
-                                    "Got it. I've added this task: \n" + taskEvent.toString() + "\n" +
-                                    String.format("Now you have %d tasks in the list.\n", taskList.size())
-                                    + "-------------------------------------------------------------\n");
-                            i++;
-                        } catch (ArrayIndexOutOfBoundsException ex) {
-                             System.out.println("-------------------------------------------------------------\n" +
-                                     "☹ OOPS!!! The description of an event cannot be empty. Try again! \n" +
-                                     "-------------------------------------------------------------\n");
-                        }
+                        System.out.println("-------------------------------------------\n" +
+                                " Noted. I've removed this task:\n" + "[" +
+                                taskList.get(number - 1).getStatusIcon() + "] " +
+                                taskList.get(number - 1).getDescription() + "\n" +
+                                String.format("Now you have %d tasks in the list.\n", taskList.size() -1)
+                                + "-------------------------------------------------------------\n");
+
+                        taskList.remove(number - 1);
                     }
-                } catch (ArrayIndexOutOfBoundsException ex) {
-                    System.out.println("-------------------------------------------------------------\n" +
-                                          "☹ OOPS!!! I'm sorry, but I don't know what that means :-( \n" +
-                                            "-------------------------------------------------------------\n");
+                } else {
+                    //if it is a todo
+                    try {
+                        if (chars[0] == todoChar[0]) {
+                            try {
+                                taskList.add(i - 1, task);
+                                Todo taskTodo = new Todo(task.getDescription());
+                                System.out.println("-------------------------------------------\n" +
+                                        "Got it. I've added this task: \n" + taskTodo.toString() + "\n" +
+                                        String.format("Now you have %d tasks in the list.\n", taskList.size())
+                                        + "-------------------------------------------\n");
+                                i++;
+                            } catch (ArrayIndexOutOfBoundsException ex) {
+                                System.out.println("-------------------------------------------\n" +
+                                        "☹ OOPS!!! The description of a todo cannot be empty. Try again! \n" +
+                                        "-------------------------------------------\n");
+                            }
+                            // if it is a deadline
+                        } else if (chars[0] == deadlineChar[0]) {
+                            try {
+                                taskList.add(i - 1, task);
+                                String taskName = task.getDescription();
+                                String[] parts = taskName.split("/by ");
+
+                                Deadline taskDeadline = new Deadline(task.getDescription(), parts[1]);
+                                System.out.println("-------------------------------------------------------------\n" +
+                                        "Got it. I've added this task: \n" + taskDeadline.toString() + "\n" +
+                                        String.format("Now you have %d tasks in the list.\n", taskList.size())
+                                        + "-------------------------------------------------------------\n");
+                                i++;
+                                if (chars.length == 8) {
+                                    throw new ArrayIndexOutOfBoundsException("Cannot be empty");
+                                }
+                            } catch (ArrayIndexOutOfBoundsException ex) {
+                                System.out.println("-------------------------------------------------------------\n" +
+                                        "☹ OOPS!!! The description of a deadline cannot be empty. Try again! \n" +
+                                        "-------------------------------------------------------------\n");
+                            }
+                        } else if (chars[0] == eventChar[0]) {
+                            try {
+                                // if it is an event
+                                taskList.add(i - 1, task);
+                                String taskName = task.getDescription();
+                                String[] parts = taskName.split("/at ");
+
+                                Event taskEvent = new Event(task.getDescription(), parts[1]);
+                                System.out.println("-------------------------------------------------------------\n" +
+                                        "Got it. I've added this task: \n" + taskEvent.toString() + "\n" +
+                                        String.format("Now you have %d tasks in the list.\n", taskList.size())
+                                        + "-------------------------------------------------------------\n");
+                                i++;
+                            } catch (ArrayIndexOutOfBoundsException ex) {
+                                System.out.println("-------------------------------------------------------------\n" +
+                                        "☹ OOPS!!! The description of an event cannot be empty. Try again! \n" +
+                                        "-------------------------------------------------------------\n");
+                            }
+                        }
+                    } catch (ArrayIndexOutOfBoundsException ex) {
+                        System.out.println("-------------------------------------------------------------\n" +
+                                "☹ OOPS!!! I'm sorry, but I don't know what that means :-( \n" +
+                                "-------------------------------------------------------------\n");
+                        System.exit(0);
+                    }
                 }
             }
         }
     }
-}
+
 
 
 

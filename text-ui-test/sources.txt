@@ -1,5 +1,5 @@
 ../src/main/java/Event.java
-../src/main/java/Main.java
+../src/main/java/TodoException.java
 ../src/main/java/Task.java
 ../src/main/java/Duke.java
 ../src/main/java/Deadline.java
