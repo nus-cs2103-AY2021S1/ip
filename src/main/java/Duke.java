@@ -76,10 +76,10 @@ public class Duke {
         if (input.equals("deadline") || input.equals("deadline ")) {
             throw new EmptyDescriptionException("deadline");
         } else if (input.startsWith("deadline ") && input.length() > 9) {
-            if (!input.contains("/by: ")) {
+            if (!input.contains("/by ")) {
                 throw new InvalidDateTimeException("deadline");
             } else {
-                int index = input.indexOf("/by: ");
+                int index = input.indexOf("/by ");
                 String description = input.substring(9, index);
                 String time = input.substring(index + 4);
                 Deadline newDeadline = new Deadline(description, time);
@@ -94,10 +94,10 @@ public class Duke {
         if (input.equals("event") || input.equals("event ")) {
             throw new EmptyDescriptionException("event");
         } else if (input.startsWith("event ") && input.length() > 6) {
-            if (!input.contains("/at: ")) {
+            if (!input.contains("/at ")) {
                 throw new InvalidDateTimeException("event");
             } else {
-                int index = input.indexOf("/at: ");
+                int index = input.indexOf("/at ");
                 String description = input.substring(6, index);
                 String time = input.substring(index + 4);
                 Event newEvent = new Event(description, time);
@@ -112,11 +112,11 @@ public class Duke {
         String input = sc.nextLine();
         if (input.equals("bye")) {
             System.out.println(format("     Bye. Hope to see you again soon!"));
+        } else if (input.equals("list")) {
+            list();
         } else {
             try {
-                if (input.equals("list")) {
-                    list();
-                } else if (input.startsWith("done")) {
+                if (input.startsWith("done")) {
                     done(input);
                 } else if (input.startsWith("delete")) {
                     delete(input);
