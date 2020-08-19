@@ -1,0 +1,15 @@
+todo task one
+todo task two
+todo task three
+event event one /at never
+event event two /at later
+deadline super important submission /by tomorrow
+deadline not so important thing /by next year
+list
+done 1
+done 2
+list
+done 5
+done 4
+list
+bye

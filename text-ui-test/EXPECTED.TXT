@@ -1,7 +1,71 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello, I'm ikurabowl
+What can I do for you?
+>
+added: [T] [✘] task one
+--------------------------------------
+>
+added: [T] [✘] task two
+--------------------------------------
+>
+added: [T] [✘] task three
+--------------------------------------
+>
+added: [E] [✘] event one (at: never)
+--------------------------------------
+>
+added: [E] [✘] event two (at: later)
+--------------------------------------
+>
+added: [E] [✘] super important submission (by: tomorrow)
+--------------------------------------
+>
+added: [E] [✘] not so important thing (by: next year)
+--------------------------------------
+>
+tracking 7 tasks (7 pending, 0 done, 0.0% complete)
+  1. [T] [✘] task one
+  2. [T] [✘] task two
+  3. [T] [✘] task three
+  4. [E] [✘] event one (at: never)
+  5. [E] [✘] event two (at: later)
+  6. [E] [✘] super important submission (by: tomorrow)
+  7. [E] [✘] not so important thing (by: next year)
+--------------------------------------
+>
+marked as done:
+  [T] [✓] task one
+--------------------------------------
+>
+marked as done:
+  [T] [✓] task two
+--------------------------------------
+>
+tracking 7 tasks (5 pending, 2 done, 28.6% complete)
+  1. [T] [✓] task one
+  2. [T] [✓] task two
+  3. [T] [✘] task three
+  4. [E] [✘] event one (at: never)
+  5. [E] [✘] event two (at: later)
+  6. [E] [✘] super important submission (by: tomorrow)
+  7. [E] [✘] not so important thing (by: next year)
+--------------------------------------
+>
+marked as done:
+  [E] [✓] event two (at: later)
+--------------------------------------
+>
+marked as done:
+  [E] [✓] event one (at: never)
+--------------------------------------
+>
+tracking 7 tasks (3 pending, 4 done, 57.1% complete)
+  1. [T] [✓] task one
+  2. [T] [✓] task two
+  3. [T] [✘] task three
+  4. [E] [✓] event one (at: never)
+  5. [E] [✓] event two (at: later)
+  6. [E] [✘] super important submission (by: tomorrow)
+  7. [E] [✘] not so important thing (by: next year)
+--------------------------------------
+>
+goodbye
