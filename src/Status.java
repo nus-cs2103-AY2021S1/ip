@@ -57,6 +57,13 @@ public enum Status {
         public String toString() {
             return "    Oops, the format of your index number is incorrect";
         }
+    },
+
+    LIST {
+        @Override
+        public String toString() {
+            return "    Here are the tasks in your list:\n";
+        }
     }
 
 
