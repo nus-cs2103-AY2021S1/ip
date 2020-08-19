@@ -3,7 +3,7 @@ package main.java;
 public class Event extends Task {
     protected String at;
 
-    public Deadline(String description, String at) {
+    public Event(String description, String at) {
         super(description);
         this.at = at;
     }
