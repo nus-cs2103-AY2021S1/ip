@@ -7,6 +7,5 @@ public class Duke {
         bot.serve();
         greetingsFarewell.farewell();
 
-
     }
 }
