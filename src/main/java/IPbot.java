@@ -43,6 +43,10 @@ public class IPbot {
         Stream.generate(sc::nextLine)
             .takeWhile(input -> !EXIT_CMD.equals(input))
             .forEach(input -> {
+                if (input.isBlank()) {
+                    return;
+                }
+
                 try {
                     final String output;
                     if (LIST_CMD.equals(input)) {
