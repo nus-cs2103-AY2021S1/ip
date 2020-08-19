@@ -7,6 +7,10 @@ public class Memory<T> {
         this.memory = new ArrayList<>();
     }
 
+    public ArrayList<T> getMemory() {
+        return this.memory;
+    }
+
     public void addMemory(T event) {
         this.memory.add(event);
     }
@@ -20,6 +24,10 @@ public class Memory<T> {
                 results += "    " + i + ". " + memory.get(i - 1) + "\n";
             }
             results += "    " + size + ". " + memory.get(size - 1);
+<<<<<<< HEAD
+=======
+            return results;
+>>>>>>> 6b6b3daee88ae887d705e111bebd7b4ac11543ff
         }
         return results;
     }
