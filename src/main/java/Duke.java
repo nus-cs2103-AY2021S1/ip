@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> store = new ArrayList<>();
 
@@ -20,7 +20,6 @@ public class Duke {
                 command = sc.nextLine();
             }
             else if (key.equals("done")) {
-                //System.out.println("what");
                 int k = Integer.parseInt(command.split(" ")[1]);
                 store.get(k-1).markAsDone();
                 System.out.println("Nice! This task is marked as done!");
@@ -29,26 +28,42 @@ public class Duke {
             }
             //adding of task
             else {
-                String remain = command.split(" ", 2)[1];
-                if (key.equals("todo")) {
-                    store.add(new Todo(remain));
-                    System.out.println("Got it. I've added this task:\n" + store.get(store.size() -1 ));
-                } else {
-                    String description = remain.split("/", 2)[0];
+                try {
+                    String remain = command.split(" ", 2)[1];
+                    if (key.equals("todo")) {
+                        store.add(new Todo(remain));
+                        System.out.println("Got it. I've added this task:\n" + store.get(store.size() - 1));
 
-                    if (key.equals("deadline")) {
-                        String by = remain.split("/by", 2)[1];
-                        store.add(new Deadline(description, by));
+                    } else {
+                        String description = remain.split("/", 2)[0];
+
+                        if (key.equals("deadline")) {
+                            String by = remain.split("/by", 2)[1];
+                            store.add(new Deadline(description, by));
+                        }
+                        if (key.equals("event")) {
+                            String at = remain.split("/at", 2)[1];
+                            store.add(new Event(description, at));
+                        }
+                        System.out.println("Got it. I've added this task:\n" + store.get(store.size() - 1));
                     }
-                    if (key.equals("event")) {
-                        String at = remain.split("/at", 2)[1];
-                        store.add(new Event(description, at));
+                    System.out.println("Now you have " + store.size() + " tasks in the list.");
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    if (key.equals("todo")) {
+                        System.out.println(new DukeException("todo"));
                     }
-                    System.out.println("Got it. I've added this task:\n" + store.get(store.size() -1 ));
+                    else if (key.equals("deadline")) {
+                        System.out.println(new DukeException("deadline"));
+                    }
+                    else if (key.equals("event")) {
+                        System.out.println(new DukeException("event"));
+                    } else {
+                        System.out.println("Oops! Meimei does not understand");
+                    }
                 }
-                System.out.println("Now you have " + store.size() + " tasks in the list.");
                 command = sc.nextLine();
             }
+
             //System.out.println("Got it. I've added this task:\n" + store.get(store.size() -1 ));
 
 
