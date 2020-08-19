@@ -18,6 +18,7 @@ public class TodoManager {
     }
     public void listTask() {
         System.out.println(Helper.horiLine);
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < lst.size(); i++) {
             System.out.println((i + 1) + "." + lst.get(i));
         }
