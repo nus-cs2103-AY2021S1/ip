@@ -29,40 +29,71 @@ public class Duke {
         while (!command.equals(TERMINATION_PHRASE)) {
 
             Task newTask;
+            String taskName;
 
-            switch (command) {
-                case LIST_PHRASE:
-                    printList();
-                    break;
-                case COMPLETE_TASK_PHRASE:
-                    displayCompleteTask();
+            try {
+                switch (command) {
+                    case LIST_PHRASE:
+                        printList();
+                        break;
+                    case COMPLETE_TASK_PHRASE:
+                        displayCompleteTask();
 
-                    int index = sc.nextInt() - 1;
-                    itemsList.get(index).doTask();
-                    break;
-                case TODO_PHRASE:
-                    newTask = new ToDo(sc.nextLine());
-                    itemsList.add(newTask);
-                    displayAddTask(newTask);
-                    break;
-                case DEADLINE_PHRASE:
-                    // String array whose first element is the task and second element is the deadline
-                    // substring(1) to remove the starting space
-                    String[] taskAndDeadline = sc.nextLine().substring(1).split(" /by ");
-                    newTask = new Deadline(taskAndDeadline[0], taskAndDeadline[1]);
-                    itemsList.add(newTask);
-                    displayAddTask(newTask);
-                    break;
-                case EVENT_PHRASE:
-                    // String whose first element is task and second element is time of event
-                    String[] eventAndTime = sc.nextLine().substring(1).split(" /at ");
-                    newTask = new Event(eventAndTime[0], eventAndTime[1]);
-                    itemsList.add(newTask);
-                    displayAddTask(newTask);
-                    break;
-                default:
-                    System.out.println("Invalid request");
-                    break;
+                        int index = sc.nextInt() - 1;
+                        itemsList.get(index).doTask();
+                        break;
+                    case TODO_PHRASE:
+                        taskName = sc.nextLine();
+                        if (taskName.isBlank()) {
+                            throw DukeException.badToDo();
+                        }
+                        newTask = new ToDo(taskName);
+                        itemsList.add(newTask);
+                        displayAddTask(newTask);
+                        break;
+                    case DEADLINE_PHRASE:
+                        taskName = sc.nextLine();
+                        if (taskName.isBlank()) {
+                            throw DukeException.badDeadlineTask();
+                        }
+
+                        // String array whose first element is the task and second element is the deadline
+                        // substring(1) to remove the starting space
+                        String[] taskAndDeadline = taskName.substring(1).split(" /by ");
+
+                        if (taskAndDeadline[0].isBlank()) {
+                            throw DukeException.badDeadlineTask();
+                        } else if (taskAndDeadline.length < 2 || taskAndDeadline[1].isBlank()) {
+                            throw DukeException.badDeadlineDate();
+                        }
+
+                        newTask = new Deadline(taskAndDeadline[0], taskAndDeadline[1]);
+                        itemsList.add(newTask);
+                        displayAddTask(newTask);
+                        break;
+                    case EVENT_PHRASE:
+                        taskName = sc.nextLine();
+                        if (taskName.isBlank()) {
+                            throw DukeException.badEventTask();
+                        }
+
+                        // String whose first element is task and second element is time of event
+                        String[] eventAndTime = taskName.substring(1).split(" /at ");
+                        if (eventAndTime[0].isBlank()) {
+                            throw DukeException.badEventTask();
+                        } else if (eventAndTime.length < 2 || eventAndTime[1].isBlank()) {
+                            throw DukeException.badEventDate();
+                        }
+
+                        newTask = new Event(eventAndTime[0], eventAndTime[1]);
+                        itemsList.add(newTask);
+                        displayAddTask(newTask);
+                        break;
+                    default:
+                        throw DukeException.badCommand();
+                }
+            } catch (DukeException e) {
+                System.err.println(e);
             }
 
             command = sc.next();
