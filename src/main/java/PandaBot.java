@@ -35,6 +35,7 @@ public class PandaBot {
                         break;
                     }
                 }
+                System.out.print("\n");
             } else if (command.startsWith("done")) {
                 // done command
                 // search for the task done
@@ -45,11 +46,11 @@ public class PandaBot {
                     // mark the task as done
                     tasks[taskNum].markTaskDone();
                 } catch (NumberFormatException e) {
-                    System.out.println("Invalid task number.");
+                    System.out.println("Invalid task number: " + taskNum + "\n");
                 } finally {
                     System.out.println("Great! I've marked this task as done:");
                     if (taskNum >= 0) {
-                        System.out.println(tasks[taskNum]);
+                        System.out.println(tasks[taskNum] +"\n");
                     } else {
                         System.out.println("Error with task number");
                     }
@@ -69,14 +70,14 @@ public class PandaBot {
                     String[] taskDes = cmd[1].split("/at ");
                     tasks[counter] = new Event(taskDes[0], taskDes[1]);
                 } else {
-                    System.out.println("Invalid command");
+                    System.out.println("Invalid command\n");
                     continue;
                 }
                 
                 System.out.println("Noted! I've added this task: ");
                 System.out.println(tasks[counter].toString());
                 counter++;
-                System.out.println("Now you have " + counter + " tasks in this list.");
+                System.out.println("Now you have " + counter + " tasks in this list.\n");
             }
         }
         sc.close();
