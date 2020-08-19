@@ -1,8 +1,8 @@
-public class ToDos extends Task {
+public class ToDo extends Task {
     // ToDos: Tasks without any date/time attached to it
     // Example: Visit new theme park
 
-    public ToDos(String description) {
+    public ToDo(String description) {
         super(description);
     }
 
