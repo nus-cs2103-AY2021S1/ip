@@ -59,7 +59,7 @@ public class Duke {
                 System.out.println("Now you have " + Duke.count + (Duke.count==1?" task ":" tasks ") + "in the list.");
             } else if (userInput.equals("list")) {
                 for (int i = 0; i < Duke.count; i++) {
-                    System.out.println(i+1 + ". " + list[i]);
+                    System.out.println(i+1 + "." + list[i]);
                 }
             }
             System.out.println(Duke.bar);
