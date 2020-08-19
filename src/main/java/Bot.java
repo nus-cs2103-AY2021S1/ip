@@ -54,6 +54,7 @@ public class Bot {
         Optional.ofNullable(Map.<String, BiConsumer<String, String>>of(
             "done",     this::cmdDone,
             "list",     this::cmdList,
+            "delete",   this::cmdDelete,
             "todo",     this::cmdAddTask,
             "event",    this::cmdAddTask,
             "deadline", this::cmdAddTask
@@ -70,16 +71,12 @@ public class Bot {
 
 
 
+
     private void cmdList(String cmd, String input) {
 
         assert cmd.equals("list");
 
-        var doneTasks = this.tasks.stream().filter(x -> x.isDone()).count();
-        var pendingTasks = this.tasks.size() - doneTasks;
-
-        println("tracking %d task%s (%d pending, %d done, %.1f%% complete)",
-            this.tasks.size(), this.tasks.size() == 1 ? "" : "s", pendingTasks, doneTasks,
-            this.tasks.isEmpty() ? 100.0 : 100.0 * ((double) doneTasks / this.tasks.size()));
+        this.printTaskStatistics();
 
         Stream.iterate(0, x -> x + 1)
             .map(i -> String.format("  %d. %s", 1 + i, this.tasks.get(i)))
@@ -87,31 +84,46 @@ public class Bot {
             .forEach(Bot::println);
     }
 
+    private void cmdDelete(String cmd, String input) {
+
+        assert cmd.equals("delete");
+
+        this.parseTaskNumber(cmd, input)
+            .ifPresent(idx -> {
+
+                var task = this.tasks.remove((int) idx);
+
+                println("deleted task:");
+                println("  %s\n", task);
+
+                this.printTaskStatistics();
+            });
+    }
+
     private void cmdDone(String cmd, String input) {
 
         assert cmd.equals("done");
 
-        try {
-            // one-indexed
-            var idx = new Scanner(input).nextInt() - 1;
+        this.parseTaskNumber(cmd, input)
+            .ifPresent(idx -> {
 
-            this.tasks.get(idx).markAsDone();
+                var task = this.tasks.get(idx);
+                assert task != null;
 
-            println("marked as done:");
-            println("  %s", this.tasks.get(idx));
+                if (task.isDone()) {
 
-        } catch (InputMismatchException e) {
+                    println("task %d is already marked as done:", idx + 1);
+                    println("  %s", task);
 
-            println("error: expected an integer task number ('%s' invalid)", input);
+                } else {
+                    task.markAsDone();
 
-        } catch (NoSuchElementException e) {
+                    println("marked as done:");
+                    println("  %s\n", task);
 
-            println("error: expected a task number for 'done' command");
-
-        } catch (IndexOutOfBoundsException e) {
-
-            println("error: task number '%s' was out of bounds", input);
-        }
+                    this.printTaskStatistics();
+                }
+            });
     }
 
     private void cmdAddTask(String cmd, String input) {
@@ -147,6 +159,49 @@ public class Bot {
             println("usage: %s", e.getUsage());
         }
     }
+
+    private Optional<Integer> parseTaskNumber(String cmd, String input) {
+
+        try {
+            // one-indexed
+            var idx = new Scanner(input).nextInt() - 1;
+
+            if (idx < 0 || idx >= this.tasks.size())
+                throw new IndexOutOfBoundsException();
+
+            return Optional.of(idx);
+
+        } catch (InputMismatchException e) {
+
+            println("error: expected an integer task number ('%s' invalid)", input);
+
+        } catch (NoSuchElementException e) {
+
+            println("error: expected a task number for '%s' command", cmd);
+
+        } catch (IndexOutOfBoundsException e) {
+
+            println("error: task number '%s' was out of bounds", input);
+        }
+
+        return Optional.empty();
+    }
+
+    private void printTaskStatistics() {
+
+        var doneTasks = this.tasks.stream().filter(x -> x.isDone()).count();
+        var pendingTasks = this.tasks.size() - doneTasks;
+
+        println("currently tracking %d task%s (%d pending, %d done, %.1f%% complete)",
+            this.tasks.size(), this.tasks.size() == 1 ? "" : "s", pendingTasks, doneTasks,
+            this.tasks.isEmpty() ? 100.0 : 100.0 * ((double) doneTasks / this.tasks.size()));
+    }
+
+
+
+
+
+
 
     private static void println(String fmt, Object... args) {
 
