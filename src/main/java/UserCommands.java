@@ -3,12 +3,18 @@ public class UserCommands {
     private static final String DONE_COMMAND = "done";
     private static final String EXIT_COMMAND = "bye";
 
-    public static boolean isListCommand(String command) {
-        return command.equals(LIST_COMMAND);
-    }
-
-    public static boolean isDoneCommand(String command) {
-        return command.startsWith(DONE_COMMAND);
+    public static UserCommandType parseUserCommand(String command) throws InvalidCommandException {
+        if (command.equals(LIST_COMMAND)) {
+            return UserCommandType.LIST;
+        } else if (command.equals(EXIT_COMMAND)) {
+            return UserCommandType.EXIT;
+        } else if (command.startsWith(DONE_COMMAND)) {
+            return UserCommandType.DONE;
+        } else if (!command.isBlank()) {
+            return UserCommandType.TODO;
+        } else {
+            throw new InvalidCommandException();
+        }
     }
 
     public static int getDoneIndex(String command) throws InvalidCommandException {
@@ -19,17 +25,13 @@ public class UserCommands {
         return Integer.parseInt(components[1]) - 1;
     }
 
-    public static boolean isExitCommand(String command) {
-        return command.equals(EXIT_COMMAND);
-    }
-
     public static class InvalidCommandException extends Exception {
         public InvalidCommandException(String errorMessage) {
-            super("Invalid done command: " + errorMessage);
+            super("Invalid command: " + errorMessage);
         }
 
         public InvalidCommandException() {
-            super("Invalid done command");
+            super("Invalid command");
         }
     }
 }

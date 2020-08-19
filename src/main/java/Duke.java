@@ -6,27 +6,29 @@ public class Duke {
         String userInput;
         TaskList userTaskList = new TaskList();
         Scanner scanner = new Scanner(System.in);
-        while (true) {
+        loop: while (true) {
             userInput = scanner.nextLine();
-
-            if (UserCommands.isExitCommand(userInput)) {
-                break;
-            } else if (UserCommands.isListCommand(userInput)) {
-                userTaskList.printTaskList();
-            } else if (UserCommands.isDoneCommand(userInput)) {
-                try {
-                    int doneIndex = UserCommands.getDoneIndex(userInput);
-                    String[] doneMessages = userTaskList.markTaskDoneAtIndex(doneIndex);
-                    PrintFunctions.printMessagesBetweenLines(doneMessages);
-                } catch (UserCommands.InvalidCommandException | TaskList.InvalidIndexException exception) {
-                    PrintFunctions.printMessageBetweenLines(exception.getMessage());
+            try {
+                UserCommandType userCommandType = UserCommands.parseUserCommand(userInput);
+                switch (userCommandType) {
+                    case EXIT:
+                        PrintFunctions.printMessageBetweenLines(StringConstants.EXIT_MESSAGE);
+                        break loop;
+                    case LIST:
+                        userTaskList.printTaskList();
+                        break;
+                    case DONE:
+                        int doneIndex = UserCommands.getDoneIndex(userInput);
+                        String[] doneMessages = userTaskList.markTaskDoneAtIndex(doneIndex);
+                        PrintFunctions.printMessagesBetweenLines(doneMessages);
+                        break;
+                    case TODO:
+                        userTaskList.addTask(userInput);
+                        break;
                 }
-
-            } else if (!userInput.isBlank()){
-                userTaskList.addTask(userInput);
+            } catch (UserCommands.InvalidCommandException | TaskList.InvalidIndexException  exception) {
+                PrintFunctions.printMessageBetweenLines(exception.getMessage());
             }
         }
-
-        PrintFunctions.printMessageBetweenLines(StringConstants.EXIT_MESSAGE);
     }
 }
