@@ -1,8 +1,10 @@
+
+
 public class Task {
     private String taskName;
     private boolean completed;
 
-    Task(String taskName) {
+    public Task(String taskName) {
         this.taskName = taskName;
         this.completed = false;
     }

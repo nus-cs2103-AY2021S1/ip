@@ -1,0 +1,8 @@
+todo read book
+todo write review
+deadline return book /by Friday
+event play /at Tues 2-4pm
+list
+done 1
+list
+bye

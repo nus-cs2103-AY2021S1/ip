@@ -1,7 +1,8 @@
+
 public class Event extends Task {
     private String atTime;
 
-    Event(String eventTask, String atTime) {
+    public Event(String eventTask, String atTime) {
         super(eventTask);
         this.atTime = atTime;
     }

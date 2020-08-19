@@ -1,11 +1,9 @@
-import java.util.ArrayList;
+
 import java.util.Scanner;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class Duke {
     private static final String horizontalLine = "    ____________________________________________________________";
     private static final String indentation = "     ";
-    private static final ArrayList<String> listOfCommands = new ArrayList<>();
 
     public static void greet() {
         System.out.println(horizontalLine);
@@ -21,7 +19,14 @@ public class Duke {
         System.out.println(horizontalLine);
     }
 
+
     public static void main(String[] args) {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
         Scanner scanner = new Scanner(System.in);
         TaskManager taskManager = new TaskManager();
         greet();
@@ -36,17 +41,15 @@ public class Duke {
                     System.out.println(horizontalLine);
                     taskManager.printList();
                     System.out.println(horizontalLine);
-                } else if (command.contains("done")){
-                    System.out.println(horizontalLine);
-                    int index = command.length() - 1;
-                    int taskNumber = Integer.parseInt(command.substring(index));
-                    taskManager.markTaskAsDone(taskNumber);
-                    System.out.println(horizontalLine);
                 } else {
                     System.out.println(horizontalLine);
                     String[] strArr = command.split(" ", 2);
                     String taskType = strArr[0];
-                    if (taskType.equals("todo")) {
+                    if (taskType.equals("done")){
+                        int index = command.length() - 1;
+                        int taskNumber = Integer.parseInt(command.substring(index));
+                        taskManager.markTaskAsDone(taskNumber);
+                    } else if (taskType.equals("todo")) {
                         Todo todo = new Todo(strArr[1]);
                         taskManager.addTask(todo);
                     } else if (taskType.equals("deadline")) {

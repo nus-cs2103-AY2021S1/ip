@@ -1,6 +1,7 @@
+
 public class Todo extends Task {
 
-    Todo(String todo) {
+    public Todo(String todo) {
         super(todo);
     }
 
