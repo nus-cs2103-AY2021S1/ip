@@ -1,4 +1,3 @@
-
 public class Task {
     private final String name;
     private boolean doneState;
@@ -6,6 +5,11 @@ public class Task {
     public Task(String name) {
         this.name = name;
         doneState = false;
+    }
+
+    public Task(String name, boolean doneState) {
+        this.name = name;
+        this.doneState = doneState;
     }
 
     private String doneTag() {

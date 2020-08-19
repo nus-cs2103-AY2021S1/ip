@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -9,6 +10,8 @@ import java.nio.file.Files;
 public class Duke {
     private static final String SEPARATOR = "    ____________________________________"
         + "________________________\n";
+    private static final String ERROR_MESSAGE = String.format("     ☹ OOPS!!! "
+            + "Something went wrong!\n%s", SEPARATOR);
     private static final String EXIT_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
     private static final String DONE_COMMAND = "done";
@@ -18,9 +21,9 @@ public class Duke {
     private static final String DELETE_COMMAND = "delete";
 
     private final Scanner sc;
+    private final List<Task> tasks;
     private boolean hasCommand;
     private String[] input;
-    private List<Task> tasks;
 
     public Duke() {
         sc = new Scanner(System.in);
@@ -104,6 +107,43 @@ public class Duke {
     }
 
     private void setTasks() {
+        String currDir = System.getProperty("user.dir");
+        Path filePath = Paths.get(currDir, "data", "tasks.csv");
+        File file = filePath.toFile();
+
+        if (!file.exists()) return;
+
+        try {
+            BufferedReader br = Files.newBufferedReader(filePath);
+            br.readLine();
+            String line = br.readLine();
+
+            while (line != null) {
+                String[] task = line.split(",");
+                line = br.readLine();
+
+                String taskType = task[0];
+                String taskTime = task[1];
+                String taskName = task[3];
+                boolean taskDoneState = task[2].equals("1");
+
+                switch (taskType) {
+                    case "T":
+                        tasks.add(new Todo(taskName, taskDoneState));
+                        break;
+                    case "D":
+                        tasks.add(new Deadline(taskName, taskTime, taskDoneState));
+                        break;
+                    case "E":
+                        tasks.add(new Event(taskName, taskTime, taskDoneState));
+                        break;
+                    default:
+                        break;
+                }
+            }
+        } catch (IOException e) {
+            System.out.print(ERROR_MESSAGE);
+        }
     }
 
     private void write() {
@@ -122,20 +162,18 @@ public class Duke {
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write("Task Type,Task Time,Done State,Task Name\n");
 
-            for (Task task : tasks) {
-                bw.write(task.write());
-            }
+            for (Task task : tasks) bw.write(task.write());
 
             bw.close();
         } catch (IOException e) {
-            System.out.printf("     ☹ OOPS!!! Something went wrong!\n%s",
-                    SEPARATOR);
+            System.out.print(ERROR_MESSAGE);
         }
     }
 
     public void initialise() {
         hasCommand = true;
         printGreeting();
+        setTasks();
 
         while (hasCommand) {
             getCommand();

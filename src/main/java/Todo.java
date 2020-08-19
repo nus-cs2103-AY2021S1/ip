@@ -3,6 +3,10 @@ public class Todo extends Task {
         super(name);
     }
 
+    public Todo(String name, boolean doneState) {
+        super(name, doneState);
+    }
+
     @Override
     public String write() {
         return String.format("T,%s", super.write());
