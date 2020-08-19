@@ -1,32 +1,24 @@
 public class Task {
-    private String task;
-    private Boolean completed;
-    private int index;
+    protected String task;
+    protected Boolean completed;
 
-    Task(String task, int index) {
+    Task(String task) {
         this.task = task;
         this.completed = false;
-        this.index = index;
     }
 
-    Task(String task, int index, Boolean completed) {
+    Task(String task, Boolean completed) {
         this.task = task;
         this.completed = completed;
-        this.index = index;
     }
 
-    public Task updateStatus(Boolean completed) {
-        return new Task(this.task, this.index, completed);
+    public void updateStatus(Boolean completed) {
+        this.completed = completed;
     }
 
     @Override
     public String toString() {
-        String completedMarker;
-        if (completed) {
-            completedMarker = "✓";
-        } else {
-            completedMarker = "✗";
-        }
+        String completedMarker = this.completed ? "✓" : "✗";
         return String.format("[%s] %s", completedMarker, this.task);
     }
 }
