@@ -1,6 +1,7 @@
 package command;
 
 import exception.InvalidIndexException;
+import function.DukeFunction;
 import task.Task;
 import ui.UIPrint;
 import data.DukeData;
@@ -26,8 +27,7 @@ public class DoneCommand extends Command {
         } else {
             Task task = DukeData.tasks.get(taskIndex);
             task.markAsDone();
-            System.out.println("Nice, I've marked this task as done:");
-            System.out.println(task);
+            DukeFunction.reportDoneTask(task);
         }
 
         UIPrint.drawLine(UIPrint.star, 50);
