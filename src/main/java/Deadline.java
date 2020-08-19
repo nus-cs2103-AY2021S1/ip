@@ -7,7 +7,7 @@ public class Deadline extends Task {
     }
 
     public Task markAsDone() {
-        Task newTask = new Deadline(title, time);
+        Task newTask = new Deadline(title, by);
         newTask.isDone = true;
         return newTask;
     }

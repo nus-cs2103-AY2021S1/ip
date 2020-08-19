@@ -10,7 +10,7 @@ public class Duke {
     private void activate() {
         Scanner sc = new Scanner(System.in);
 
-        String greeting = "Hello! I'm Duke\nWhat can I do for you?\n\nMe: ";
+        String greeting = "Hello! I'm Duke\nWhat can I do for you?\n\n";
         System.out.print(greeting);
 
         String input = "";
@@ -34,7 +34,7 @@ public class Duke {
     }
 
     private void quit() {
-        System.out.println("Duke: Adios!\n");
+        System.out.println("Adios!");
     }
 
     private void showTasks() {
@@ -43,7 +43,7 @@ public class Duke {
             String message = String.valueOf(i + 1) + ". " + task;
             System.out.println(message);
         }
-        System.out.print("\nMe: ");
+        System.out.print("\n");
     }
 
     private void markAsDone(String input) {
@@ -53,13 +53,13 @@ public class Duke {
         if (taskId >= 0 && taskId < tasks.size()) {
             Task task = tasks.get(taskId).markAsDone();
             tasks.set(taskId, task);
-            message = "Duke: Nice! I've marked it done - " + task.toString();
+            message = "Nice! I've marked it done - " + task.toString();
         } else {
-            message = "Duke: 404 task not found. Please enter the correct task ID";
+            message = "404 task not found. Please enter the correct task ID";
         }
 
         System.out.println(message);
-        System.out.print("\nMe: ");
+        System.out.print("\n");
     }
 
     private void add(String input) {
@@ -76,9 +76,9 @@ public class Duke {
         }
 
         tasks.add(task);
-        System.out.println("Duke: Added '" + task.toString() + "' to list of tasks");
-        System.out.println("      Now you have " + tasks.size() + " tasks in the list");
-        System.out.print("\nMe: ");
+        System.out.println("Added '" + task.toString() + "' to list of tasks");
+        System.out.println("Now you have " + tasks.size() + " tasks in the list");
+        System.out.print("\n");
     }
 
     private Task createTodo(String[] input) {
