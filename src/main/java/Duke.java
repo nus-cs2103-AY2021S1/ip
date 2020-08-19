@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -49,6 +48,15 @@ public class Duke {
             "██████████████            ████████          ██████          ████          ██████            ████████      ██████            ██████████\n";
     private static final ArrayList<Task> tasks = new ArrayList<>();
     private static int taskCount = 0;
+    
+    private enum Errors {
+        UNDEFINED_INDEX,
+        UNDEFINED_DESCRIPTION,
+        UNDEFINED_DEADLINE_TIME,
+        UNDEFINED_EVENT_TIME,
+        WRONG_TYPE,
+        UNRECOGNIZED,
+    }
 
     private static void greetings() {
         System.out.println(logo);
@@ -104,8 +112,35 @@ public class Duke {
         System.out.println(divider + "\n");
     }
     
-    public static String generateErrorMessage(String message) {
-        return "\n" + divider + "\n" + message + divider + "\n";
+    public static String generateException(Errors type) throws DukeException {
+        String message = "";
+        switch (type) {
+            case WRONG_TYPE:
+                message = " Task index must be an integer :( \n" +
+                        " Terminating Hotline... \n";
+                break;
+            case UNDEFINED_DESCRIPTION:
+                message = " Task description cannot be empty :( \n" +
+                        " Terminating Hotline... \n";
+                break;
+            case UNDEFINED_INDEX:
+                message = " Task index must be specified :( \n" +
+                        " Terminating Hotline... \n";
+                break;
+            case UNDEFINED_DEADLINE_TIME:
+                message = " Deadline date cannot be empty :( \n" +
+                        " Terminating Hotline... \n";
+                break;    
+            case UNDEFINED_EVENT_TIME:
+                message = " Event date cannot be empty :( \n" +
+                        " Terminating Hotline... \n";
+                break;
+            default:
+                message = " Command not recognized :( \n" +
+                        " Terminating Hotline... \n";
+                break;
+        }
+        throw new DukeException("\n" + divider + "\n" + message + divider + "\n");
     }
 
     private static void echo() {
@@ -122,8 +157,7 @@ public class Duke {
                     list();
                 } else if (command.equals("done") || command.equals("delete")) {
                     if (separated.length <= 1) {
-                        throw new DukeException(generateErrorMessage(" Task index must be specified :( \n" +
-                                " Terminating Hotline... \n"));
+                        generateException(Errors.UNDEFINED_INDEX);
                     }
                     try {
                         int index = Integer.parseInt(separated[1]);
@@ -133,13 +167,11 @@ public class Duke {
                             delete(index);
                         }
                     } catch(NumberFormatException error) {
-                        throw new DukeException(generateErrorMessage(" Task index must be an integer :( \n" +
-                                " Terminating Hotline... \n"));
+                        generateException(Errors.WRONG_TYPE);
                     }
-                } else {
+                } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")){
                     if (separated.length <= 1) {
-                        throw new DukeException(generateErrorMessage(" Task description cannot be empty :( \n" +
-                                " Terminating Hotline... \n"));
+                        generateException(Errors.UNDEFINED_DESCRIPTION);
                     }
                     if (command.equals("todo")) {
                         String description = input.substring(5);
@@ -149,8 +181,7 @@ public class Duke {
                     } else if (command.equals("deadline")) {
                         String[] content = input.substring(9).split(" /by ");
                         if (content.length <= 1) {
-                            throw new DukeException(generateErrorMessage(" Deadline date cannot be empty :( \n" +
-                                    " Terminating Hotline... \n"));
+                            generateException(Errors.UNDEFINED_DEADLINE_TIME);
                         }
                         String description = content[0];
                         String time = content[1];
@@ -160,18 +191,16 @@ public class Duke {
                     } else if (command.equals("event")) {
                         String[] content = input.substring(6).split(" /at ");
                         if (content.length <= 1) {
-                            throw new DukeException(generateErrorMessage(" Event date cannot be empty :( \n" +
-                                    " Terminating Hotline... \n"));
+                            generateException(Errors.UNDEFINED_EVENT_TIME);
                         }
                         String description = content[0];
                         String time = content[1];
                         tasks.add(new Event(description, false, time));
                         taskCount += 1;
                         describe(taskCount - 1);
-                    } else {
-                        throw new DukeException(generateErrorMessage(" Command not recognized :( \n" +
-                                " Terminating Hotline... \n"));
-                    }
+                    } 
+                } else {
+                    generateException(Errors.UNRECOGNIZED);
                 }
             }
         } catch(DukeException error) {
