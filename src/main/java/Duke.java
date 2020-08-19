@@ -43,7 +43,7 @@ public class Duke {
         int size = this.tasks.size();
         System.out.println("\tOkay! I've added this task:");
         System.out.println("\t\t" + task.toString());
-        System.out.println(String.format("\tNow you have %d %s in the list. Jiayous! :D", size, size > 1? "tasks":"task"));
+        System.out.println(String.format("\tNow you have %d %s in the list. Jiayous! :D", size, size > 1 ? "tasks" : "task"));
     }
 
     public void markTaskAsDone(int index) {
@@ -63,7 +63,7 @@ public class Duke {
         }
 
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(String.format("\t\t%d. %s", i+1, this.tasks.get(i).toString()));
+            System.out.println(String.format("\t\t%d. %s", i + 1, this.tasks.get(i).toString()));
         }
     }
 
@@ -105,10 +105,16 @@ public class Duke {
                         break;
                     case "deadline":
                         String[] splitSlash = getRestOfString(splitSpace).split(" /by ");
+                        if (splitSlash.length != 2) {
+                            throw new DukeException("\tPaise! :') Please use the correct format: deadline <task> /by <time>");
+                        }
                         addDeadline(splitSlash[0], splitSlash[1]);
                         break;
                     case "event":
                         String[] split = getRestOfString(splitSpace).split(" /at ");
+                        if (split.length != 2) {
+                            throw new DukeException("\tPaise! :') Please use the correct format: event <task> /at <time>");
+                        }
                         addEvent(split[0], split[1]);
                         break;
                     default:
