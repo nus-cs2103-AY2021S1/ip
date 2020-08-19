@@ -20,7 +20,7 @@ public class Duke {
 
     void processInput() {
         Scanner sc = new Scanner(System.in);
-        String msg = sc.nextLine().toLowerCase();
+        String msg = sc.nextLine();
         while(!msg.equals("bye")) {
             if(msg.equals("list")) {
                 displayList();
@@ -28,8 +28,17 @@ public class Duke {
             else if(msg.contains("done")) {
                 done(msg);
             }
+            else if(msg.contains("todo")){
+                addToList(msg.replace("todo ", ""), Type.TODO);
+            }
+            else if(msg.contains("event")) {
+                addToList(msg.replace("event ", ""), Type.EVENT);
+            }
+            else if(msg.contains("deadline")) {
+                addToList(msg.replace("deadline ", ""), Type.DEADLINE);
+            }
             else {
-                addToList(msg);
+                System.out.println(sadFace + spacing + "Sorry, Poco does not understand. Try again?");
             }
 
             msg = sc.nextLine();
@@ -47,9 +56,20 @@ public class Duke {
         }
     }
 
-    void addToList(String msg) {
-        ls.add(new Task(msg));
-        System.out.println(face2 + spacing + "Poco has added " + msg + " to your list");
+    void addToList(String msg, Type type) {
+        String[] sp = new String[] {msg};;
+        switch(type) {
+            case TODO:
+                ls.add(new ToDo(msg)); break;
+            case EVENT:
+                sp = msg.split(" /");
+                ls.add(new Event(sp[0], sp[1])); break;
+            case DEADLINE:
+                sp = msg.split(" /");
+                ls.add(new Deadline(sp[0], sp[1])); break;
+        }
+        System.out.println(face2 + spacing + "Poco has added " + sp[0] + " to your list");
+        System.out.println("Pending Tasks: " + ls.size());
 
     }
 
@@ -63,4 +83,8 @@ public class Duke {
             System.out.println(ls.get(index).toString());
         }
     }
+}
+
+enum Type {
+    TODO, EVENT, DEADLINE
 }
