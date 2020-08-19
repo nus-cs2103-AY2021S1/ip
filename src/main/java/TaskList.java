@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class TaskList {
 
     //Store the internal list
-    private ArrayList<Task> list;
+    private final ArrayList<Task> list;
 
     public TaskList(){
 
