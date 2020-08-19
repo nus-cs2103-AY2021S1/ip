@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -133,7 +132,10 @@ public class Duke {
                         + " /by <date/time>' (e.g., submit report by 11/10/2019 5pm)\n"
                         + "Event: 'event <task description>"
                         + " /at <date/start and end time>' "
-                        + "(e.g., team project meeting on 2/10/2019 2-4pm)");
+                        + "(e.g., team project meeting on 2/10/2019 2-4pm)\n"
+                        + "\nAdditional Information:"
+                        + "\nTo mark a task as done, input 'done <task number>'."
+                        + "\nTo delete a task from your list, input 'delete <task number>'.");
             } else if (input.equals("list")) {
                 printList(tasks);
             } else if (inputWords[0].equals("done") && inputWords.length == 2
@@ -166,6 +168,8 @@ public class Duke {
                 + "\nGet started on your task list by entering a task!"
                 + "\nTo see how to format your task, input 'format'"
                 + "\nTo see your list of tasks, input 'list'."
+                + "\nTo mark a task as done, input 'done <task number>'."
+                + "\nTo delete a task from your list, input 'delete <task number>'."
                 + "\n____________________________________________________________");
         Scanner scanner = new Scanner(System.in);
         boolean isBye = false;

@@ -8,11 +8,17 @@ Rawr! I'm Dino ><
 Get started on your task list by entering a task!
 To see how to format your task, input 'format'
 To see your list of tasks, input 'list'.
+To mark a task as done, input 'done <task number>'.
+To delete a task from your list, input 'delete <task number>'.
 ____________________________________________________________
 Formats for the three task types Todo, Deadline and Event, are shown below.
 Todo: 'todo <task description>' (e.g., visit new theme park)
 Deadline: 'deadline <task description> /by <date/time>' (e.g., submit report by 11/10/2019 5pm)
 Event: 'event <task description> /at <date/start and end time>' (e.g., team project meeting on 2/10/2019 2-4pm)
+
+Additional Information:
+To mark a task as done, input 'done <task number>'.
+To delete a task from your list, input 'delete <task number>'.
 ____________________________________________________________
 Rawr! Dino could not find any items in your task list.
 Get started by entering a task. Formats for a task can be found by entering 'format'.
