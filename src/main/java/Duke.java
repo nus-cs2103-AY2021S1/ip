@@ -37,6 +37,24 @@ public class Duke {
         }
     }
 
+    private static void delete(String input) throws DukeException{
+        if (input.equals("delete") || input.equals("delete ")) {
+            throw new InvalidTaskIndexException(input);
+        } else if (input.startsWith("delete ") && input.length() > 7) {
+            try {
+                int index = Integer.parseInt(input.substring(7));
+                Task current = taskList.get(index - 1);
+                taskList.remove(current);
+                System.out.println(format("     Noted. I've removed this task:\n       " + current +
+                        "\n     Now you have " + taskList.size() + " tasks in the list."));
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                throw new InvalidTaskIndexException(input);
+            }
+        } else {
+            throw new DukeException();
+        }
+    }
+
     private static void addNewTask(Task newTask) {
         taskList.add(newTask);
         System.out.println(format("     Got it. I've added this task:\n       " + newTask +
@@ -100,6 +118,8 @@ public class Duke {
                     list();
                 } else if (input.startsWith("done")) {
                     done(input);
+                } else if (input.startsWith("delete")) {
+                    delete(input);
                 } else if (input.startsWith("todo")) {
                     newTodo(input);
                 } else if (input.startsWith("deadline")) {
