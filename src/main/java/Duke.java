@@ -1,6 +1,7 @@
 import main.java.Task;
 import main.java.TaskManager;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -21,22 +22,18 @@ public class Duke {
     }
 
     public static String[] interpretInput(String input) {
-        String[] result = {"","",""};
-        String[] words = input.split("\\s+");
-        result[0] = words[0];
-        if (words.length > 1) {
-            int index = 1;
-            for (int i = 1; i < words.length; i++){
-                String current = words[i];
-                Character cha = current.charAt(0);
-                if (current.charAt(0) == '/' && index < 2){
-                    index++;
-                } else {
-                    result[index] += result[index] == "" ? current : " " + current;
-                }
-            }
+        ArrayList<String> list = new ArrayList<String>();
+        int spaceIndex = input.indexOf(" ");
+        int slashIndex = input.indexOf("/");
+        int infoIndex = input.indexOf(" ", slashIndex);
+        list.add(input.substring(0,spaceIndex));
+        if (slashIndex == -1) {
+            list.add(input.substring(spaceIndex+1));
+        } else {
+            list.add(input.substring(spaceIndex+1,slashIndex));
+            list.add(input.substring(infoIndex+1));
         }
-        return result;
+        return list.toArray(new String[0]);
     }
 
     public static void main(String[] args) {
@@ -69,19 +66,31 @@ public class Duke {
                     }
                     break;
                 case "deadline":
-                    Task addedDeadline = taskManager.addDeadLine(words[1], words[2]);
-                    echoNewTask(addedDeadline, taskManager.getTotalTask());
+                    try {
+                        Task addedDeadline = taskManager.addDeadLine(words[1], words[2]);
+                        echoNewTask(addedDeadline, taskManager.getTotalTask());
+                    } catch (IndexOutOfBoundsException err) {
+                        echo("Error: The description for deadline can't be empty");
+                    }
                     break;
                 case "event":
-                    Task addedEvent = taskManager.addEvent(words[1], words[2]);
-                    echoNewTask(addedEvent, taskManager.getTotalTask());
+                    try {
+                        Task addedEvent = taskManager.addEvent(words[1], words[2]);
+                        echoNewTask(addedEvent, taskManager.getTotalTask());
+                    } catch (IndexOutOfBoundsException err) {
+                        echo("Error: The description for Event can't be empty");
+                    }
                     break;
                 case "todo":
-                    Task addedToDo = taskManager.addToDo(words[1]);
-                    echoNewTask(addedToDo, taskManager.getTotalTask());
+                    try {
+                        Task addedToDo = taskManager.addToDo(words[1]);
+                        echoNewTask(addedToDo, taskManager.getTotalTask());
+                    } catch (IndexOutOfBoundsException err) {
+                        echo("Error: The description for Event can't be empty");
+                    }
                     break;
                 default:
-                    echo(input);
+                    echo("OOPS!!! I don't know what that means");
                     break;
             }
         }
