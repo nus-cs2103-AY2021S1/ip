@@ -1,0 +1,10 @@
+diff a/src/main/java/Bot.java b/src/main/java/Bot.java	(rejected hunks)
+@@ -84,7 +84,7 @@
+     public void doneListings(Integer value) {
+         Listing item = list.get(value - 1);
+         item.complete(); //completes the list
+-        String s = line + "\n" + "Nice! I've marked this task as done: \n" + item.doneness()
++        String s = line + "\n" + "     Nice! I've marked this task as done: \n" + item.doneness()
+                 + item.toString() + "\n" + line;
+         System.out.println(s);
+     }
