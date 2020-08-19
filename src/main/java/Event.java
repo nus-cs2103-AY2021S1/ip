@@ -1,5 +1,14 @@
 public class Event extends Task {
-    public Event(String description) {
+    private String date;
+
+
+    public Event(String description, String date) {
         super(description, "E");
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + String.format(" (at: %s)", date);
     }
 }

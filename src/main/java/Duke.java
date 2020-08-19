@@ -67,10 +67,16 @@ public class Duke {
                     newTask = new Todo(description);
                     break;
                 case "deadline":
-                    newTask = new Deadline(description);
+                    String[] deadlineDetails = description.split("/by", 2);
+                    String deadlineDesc = deadlineDetails[0].trim();
+                    String deadlineTime = deadlineDetails[1].trim();
+                    newTask = new Deadline(deadlineDesc, deadlineTime);
                     break;
                 case "event":
-                    newTask = new Event(description);
+                    String[] eventDetails = description.split("/at", 2);
+                    String eventDesc = eventDetails[0].trim();
+                    String eventTime = eventDetails[1].trim();
+                    newTask = new Event(eventDesc, eventTime);
                     break;
             }
             taskList.add(newTask);
