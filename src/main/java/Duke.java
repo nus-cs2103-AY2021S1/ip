@@ -27,7 +27,7 @@ public class Duke {
             System.out.println(divider);
 
             if (input.equals("list")) {
-                System.out.println("Here are the tasks in your list: ");
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 1; i < pointer; i++) {
                     System.out.println(i + ". " + task[i - 1]);
                 }

@@ -1,0 +1,10 @@
+todo read book
+deadline return book /by Monday
+event book fair /at Tuesday 2-4pm
+done 1
+list
+done 2
+list
+deadline submit proposal /by Thursday
+list
+bye
