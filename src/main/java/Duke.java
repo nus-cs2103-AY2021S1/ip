@@ -97,10 +97,42 @@ public class Duke {
                 continue;
             }
 
+            if (sc.hasNext("event")) {
+                sc.skip("event");
+                sc.useDelimiter("/at");
+                String des = sc.next().trim();
+                sc.skip("/at");
+                String at = sc.nextLine().trim();
+                Event e = new Event(des, at);
+                addTask(e, tasks);
+                sc.reset();
+                continue;
+            }
+
+            if (sc.hasNext("deadline")) {
+                sc.skip("deadline");
+                sc.useDelimiter("/by");
+                String des = sc.next().trim();
+                sc.skip("/by");
+                String by = sc.nextLine().trim();
+                Deadline d = new Deadline(des, by);
+                addTask(d, tasks);
+                sc.reset();
+                continue;
+            }
+
+            if (sc.hasNext("todo")) {
+                sc.skip("todo");
+                sc.useDelimiter("/");
+                ToDo t = new ToDo(sc.nextLine().trim());
+                addTask(t, tasks);
+                sc.reset();
+                continue;
+            }
+
             else {
                 String input = sc.nextLine();
                 addTask(new Task(input), tasks);
-                continue;
             }
         }
     }
