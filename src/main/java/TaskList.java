@@ -20,6 +20,10 @@ class TaskList {
         return this.taskArrayList.get(taskIndex);
     }
 
+    void deleteTaskAt(int taskIndex) {
+        this.taskArrayList.remove(taskIndex);
+    }
+
     public int getNumOfTasks() {
         return this.taskArrayList.size();
     }

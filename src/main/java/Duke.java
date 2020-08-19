@@ -10,6 +10,7 @@ public class Duke {
     private static String addTaskMessage = Duke.textIndentation + "Got it. I've added this task:";
     private static String completeTaskMessage = Duke.textIndentation + "Nice! I've marked this task as done:";
     private static String invalidSyntaxMessage = Duke.textIndentation + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static String deleteTaskMessage = Duke.textIndentation + "Noted. I've removed this task:";
     private static TaskList taskList;
 
     public static void main(String[] args) {
@@ -62,6 +63,19 @@ public class Duke {
                     Duke.taskList.addToList(newEvent);
                     Duke.printText(Duke.addTaskMessage + "\n  " + Duke.textIndentation + newEvent + "\n" +
                             Duke.numOfTasksMessage());
+                }
+
+            } else if (inputMessage.toLowerCase().startsWith("delete ")) {
+                String taskQueryIndexString = inputMessage.substring(7).trim();
+
+                try {
+                    int taskQueryIndex = Integer.parseInt(taskQueryIndexString) - 1;
+                    Task deletedTask = Duke.taskList.getTaskAt(taskQueryIndex);
+                    Duke.taskList.deleteTaskAt(taskQueryIndex);
+                    Duke.printText(Duke.deleteTaskMessage + "\n  " + Duke.textIndentation + deletedTask + "\n" +
+                            Duke.numOfTasksMessage());
+                } catch (Exception e) {
+                    Duke.printText(Duke.textIndentation + "Please enter a valid task index.");
                 }
 
             } else {
