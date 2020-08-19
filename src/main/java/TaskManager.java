@@ -32,7 +32,7 @@ public class TaskManager {
         return this.tasks.size();
     }
 
-    public void doTask(int index) {
+    public void doTask(int index) throws TaskDoneException {
         this.tasks.get(index-1).setDone();
     }
 
