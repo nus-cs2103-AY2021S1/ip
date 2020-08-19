@@ -5,8 +5,8 @@ public class Task {
     protected String name;
     public static int numberOfTasks = 0;
 
-    private static String tick = "[✓]";
-    private static String cross = "[✗]";
+    private static String tick = "O";
+    private static String cross = "X";
 
     Task(String name) {
         numberOfTasks++;
@@ -35,6 +35,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("%s %s", icon, name);
+        return String.format("[%s] %s", icon, name);
     }
 }
