@@ -1,0 +1,11 @@
+list
+deadline poot /by tis
+event bonk /at omic punch
+todo cap
+list
+this is not a command
+done 2
+done 3
+done done done done
+list
+bye

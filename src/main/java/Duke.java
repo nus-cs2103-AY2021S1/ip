@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -29,7 +30,7 @@ public class Duke {
                     Task markedTask = taskList.get(taskIndex - 1); // shown list is base 1, implemented list is base 0
                     markedTask.markDone();
                     System.out.println("Right. This task is now marked as done:" + markedTask);
-                } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                } catch (IndexOutOfBoundsException | NumberFormatException | InputMismatchException e) {
                     System.out.println("Hmm? Please mention \"done\" followed by the number of the task we're marking as done.");
                 }
                 break;
