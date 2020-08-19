@@ -36,6 +36,10 @@ public class Duke {
             } else if(checker.equals("done")) {
                 int num = Character.getNumericValue(input.charAt(5));
                 done(num);
+            } else if (checker.equals("dele")) {
+                //System.out.println("character: " + input.charAt(7));
+                int num = Character.getNumericValue(input.charAt(7));
+                delete(num);
             } else {
                 add(input);
             }
@@ -102,6 +106,23 @@ public class Duke {
         for (Task t : list) {
             System.out.println("        " + counter +  "." + t.toString());
             counter++;
+        }
+    }
+
+    public void delete(int num) {
+        try {
+            if (num < 0 || num > list.size()) {
+                throw new DukeException("☹ OOPS!!! there is no such task");
+            } else {
+                Task deleted = list.remove(num - 1);
+                System.out.println("        Noted I've removed this task");
+                System.out.println("        " + deleted);
+                System.out.println("        you now have " + list.size() + " tasks on the list");
+            }
+        } catch (DukeException e) {
+            System.out.println("------------------------------------------------------");
+            System.out.println(e.getMessage());
+            System.out.println("------------------------------------------------------");
         }
     }
 
