@@ -1,0 +1,19 @@
+todo read book
+todo      buy milk
+deadline return book /by Sunday
+list
+event                  project meeting /at Mon 2-4pm
+list
+deadline where is my by
+event go to sleep/at 8pm
+list
+event
+todo
+list
+done 1
+done 8
+list
+why are you so cute ?
+list
+bye
+

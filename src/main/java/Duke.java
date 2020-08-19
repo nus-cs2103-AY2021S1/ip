@@ -17,19 +17,26 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+
         List<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
         System.out.println(LINE_BREAK);
-        System.out.println(SPACE_BEFORE_TEXT + "Hey, I'm Emilia!" + "\n" +
-                SPACE_BEFORE_TEXT + "What can I do for you ♥ ?");
+        System.out.println(SPACE_BEFORE_TEXT + "Hey, I'm Emilia \u2764 !" + "\n" +
+                SPACE_BEFORE_TEXT + "What can I do for you?");
         System.out.println(LINE_BREAK);
 
         while (sc.hasNext()) {
             String input = sc.nextLine().trim().toLowerCase();
             System.out.println(LINE_BREAK);
             if (input.equals("bye")) {
-                System.out.println(SPACE_BEFORE_TEXT + "Welcome back, master ♥ !" + "\n" +
+                System.out.println(SPACE_BEFORE_TEXT + "Welcome back \u2764 !" + "\n" +
                         LINE_BREAK);
                 break;
 
@@ -53,10 +60,15 @@ public class Duke {
                     Task task = tasks.get(index);
                     task.markAsDone();
                     System.out.println(SPACE_BEFORE_TEXT + "Understood, I've marked this task as done:" +
-                            "\n" + task);
+                            "\n" + SPACE_FOR_ADDING + task);
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Sorry, I can't seem to find the task...");
+                    System.out.println(SPACE_BEFORE_TEXT + "Sorry, I can't seem to find the task...");
                 }
+                continue;
+            }
+
+            if (process.length == 1) {
+                System.out.println(SPACE_BEFORE_TEXT + "Empty content!");
                 continue;
             }
 
@@ -64,10 +76,14 @@ public class Duke {
             Task current;
             switch (firstWord) {
                 case "todo":
-                    current = new ToDo(process[1]);
+                    current = new ToDo(process[1].trim());
                     break;
                 case "deadline": {
                     int byIndex = process[1].indexOf(" /by ");
+                    if (byIndex == -1 ) {
+                        System.out.println(SPACE_BEFORE_TEXT + "I can't find the description of the task!");
+                        continue;
+                    }
                     String deadline = process[1].substring(byIndex + 4).trim();
                     String description = process[1].substring(0, byIndex).trim();
                     current = new Deadline(description, deadline);
@@ -75,13 +91,17 @@ public class Duke {
                 }
                 case "event": {
                     int atIndex = process[1].indexOf(" /at ");
+                    if (atIndex == -1 ) {
+                        System.out.println(SPACE_BEFORE_TEXT + "I can't find the description of the task!");
+                        continue;
+                    }
                     String deadline = process[1].substring(atIndex + 4).trim();
                     String description = process[1].substring(0, atIndex).trim();
                     current = new Event(description, deadline);
                     break;
                 }
                 default:
-                    System.out.println("Invalid input detected!");
+                    System.out.println(SPACE_BEFORE_TEXT + "Invalid input detected!");
                     continue;
             }
 
