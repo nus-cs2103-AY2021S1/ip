@@ -1,6 +1,8 @@
+package duke;
+
 public class Event extends Task {
 
-    Event(String description, boolean isDone) {
+    public Event(String description, boolean isDone) {
         super(description, isDone);
     }
 
