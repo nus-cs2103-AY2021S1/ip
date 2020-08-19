@@ -34,10 +34,6 @@ public class Chat {
         while(true) {
 
             // Prompt for input
-<<<<<<< HEAD
-=======
-            System.out.print("> ");
->>>>>>> 1ea3482927e1caa579893bb31a68583d55b5a3b0
             input = scanner.next();
 
             if (input.equals("bye")) { // Exit
