@@ -26,11 +26,23 @@ public class Duke {
                 }
 
                 catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("oops, the description of done can't be empty!");
+                    try {
+                        throw new EmptyDoneException();
+                    } catch (EmptyDoneException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+                    // System.out.println("oops, the description of done can't be empty!");
                 }
 
                 catch (IndexOutOfBoundsException e) {
-                    System.out.println("You entered an invalid index!");
+                    try {
+                        throw new InvalidNumberException();
+                    } catch (InvalidNumberException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+                    // System.out.println("You entered an invalid index!");
                 }
                 continue;
             } // if starts with done, mark this task as done then print it.
@@ -45,7 +57,13 @@ public class Duke {
                 }
 
                 catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("oops, the description of delete can't be empty!");
+                    // System.out.println("oops, the description of delete can't be empty!");
+                    try {
+                        throw new EmptyDeleteException();
+                    } catch (EmptyDeleteException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
                 }
 
                 catch (IndexOutOfBoundsException e) {
@@ -63,31 +81,64 @@ public class Duke {
                 }
 
                 catch (StringIndexOutOfBoundsException e) {
-                    System.out.println("oops, the description of todo can't be empty!");
+                    // System.out.println("oops, the description of todo can't be empty!");
+                    try {
+                        throw new EmptyTodoException();
+                    } catch (EmptyTodoException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
                 }
+
+
                 continue;
             } // if starts with todo, the string after todo should be in the task.
 
             if (s.startsWith("deadline")) {
-                String[] divide = s.substring(9).split(" /by ");
-                String description = divide[0];
-                String ddl = divide[1];
-                Deadline d = new Deadline(description, ddl);
-                tasks.add(d);
-                System.out.println("Got it. I've added this task: " + "\n" + d.toString());
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                try {
+                    String[] divide = s.substring(9).split(" /by ");
+                    String description = divide[0];
+                    String ddl = divide[1];
+                    Deadline d = new Deadline(description, ddl);
+                    tasks.add(d);
+                    System.out.println("Got it. I've added this task: " + "\n" + d.toString());
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                }
+
+                catch(StringIndexOutOfBoundsException e) {
+                    try {
+                        throw new EmptyDeadLineException();
+                    }
+
+                    catch(EmptyDeadLineException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+
                 continue;
             } // if starts with deadline, first split the string, then description should be
               // the first string, ddl should be the last string.
 
             if (s.startsWith("event")) {
-                String[] divide = s.substring(6).split(" /at ");
-                String description = divide[0];
-                String time = divide[1];
-                Event e = new Event(description, time);
-                tasks.add(e);
-                System.out.println("Got it. I've added this task: " + "\n" + e.toString());
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                try{
+                    String[] divide = s.substring(6).split(" /at ");
+                    String description = divide[0];
+                    String time = divide[1];
+                    Event e = new Event(description, time);
+                    tasks.add(e);
+                    System.out.println("Got it. I've added this task: " + "\n" + e.toString());
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                }
+
+                catch (StringIndexOutOfBoundsException e) {
+                    try {
+                        throw new EmptyEventException();
+                    }
+
+                    catch(EmptyEventException e1) {
+                        e1.printStackTrace();
+                    }
+                }
                 continue;
             } // if starts with event, first split the string, then description should be the
               // first string, actual time should be the last string.
@@ -101,7 +152,13 @@ public class Duke {
             }
 
             else {
-                System.out.println(new InvalidCommandException().toString());
+                // System.out.println(new InvalidCommandException().toString());
+                try {
+                    throw new InvalidCommandException();
+                } catch (InvalidCommandException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
 
         }
