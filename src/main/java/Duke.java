@@ -18,7 +18,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         while(run) {
             user_input = scanner.next();
-            if (user_input == "bye") {
+            if (user_input.equals("bye")) {
                 run = false;
             } else {
                 System.out.println(line + "\n" +user_input + "\n" + line);
