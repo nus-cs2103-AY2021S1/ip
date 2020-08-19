@@ -9,6 +9,10 @@ public class Task {
         this.num = num;
     }
 
+    public int getNum() {
+        return this.num;
+    }
+
     public String getIcon() {
         return (isDone ? "[✓]" : "[✗]");
     }
@@ -23,7 +27,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("%s.%s %s", num, this.getIcon(), description);
+        return String.format("%s %s", this.getIcon(), description);
     }
 
 }
