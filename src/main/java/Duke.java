@@ -19,20 +19,19 @@ public class Duke {
         System.out.println(introduction);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
+            String[] splitted = input.split(" ", 2);
             if (input.equals("list")) {
                 System.out.println(lines);
-                list.forEach(x -> {
-                    int i = 1;
-                    System.out.println(i + ". " + x);
-                    i = i + 1;
-                });
+                for (int i = 1; i <= list.size(); i++) {
+                    System.out.println(" " + i + ". " + list.get(i - 1));
+                }
                 System.out.println(lines);
-            } else if (input.split(" ")[0].equals("done")){
-                int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                list.get(index).setDone();
+            } else if (splitted[0].equals("done")){
+                int index = Integer.parseInt(splitted[1]) - 1;
+                list.set(index, list.get(index).completeTask());
                 System.out.println(lines);
                 System.out.println(" Nice! I've marked this task as done:");
-                System.out.println(list.get(index));
+                System.out.println(" " + list.get(index));
                 System.out.println(lines);
             }
             else {

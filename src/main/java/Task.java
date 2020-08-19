@@ -7,12 +7,12 @@ public class Task {
         this.isDone = isDone;
     }
 
-    public void setDone() {
-        this.isDone = true;
+    public Task completeTask() {
+        return new Task(this.description, true);
     }
 
     @Override
     public String toString() {
-        return isDone ? "[✓]" : "[✗]" + " " + description;
+        return (isDone ? "[✓]" : "[✗]")+ " " + description;
     }
 }
