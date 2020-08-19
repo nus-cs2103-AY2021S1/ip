@@ -5,3 +5,22 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm Duke
+What can I do for you today? (type: "help" to view list of commands)
+=========================================================================
+Duke added into your task list:
+[T][✘] borrow book
+You now have 1 task(s) in your list
+=========================================================================
+Here are your tasks:
+1. [T][✘] borrow book
+If you wish to mark a task as completed, input "done <task number>"
+=========================================================================
+Duke added into your task list:
+[D][✘] return book (by: Sunday)
+You now have 2 task(s) in your list
+=========================================================================
+Duke added into your task list:
+[E][✘] project meeting (at: Mon 2-4pm)
+You now have 3 task(s) in your list
+=========================================================================
