@@ -147,6 +147,31 @@ Your current scroll, Your Majesty:
 	1.[T][✓] read book
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
+Do give me more details about this todo, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your Majesty, I've added the writing:
+	[T][✘] return book
+You have 2 writing(s) on your scroll as of now. 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+As you wish, Your Majesty. I have marked this as conquered.
+	[T][✓] return book
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+As you wish, Your Majesty. I have removed this writing.
+	[T][✓] read book
+You have 1 writing(s) on your scroll as of now. 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your current scroll, Your Majesty:
+	1.[T][✓] return book
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Your wish is my command, Your Majesty. Till I see you again. 
 
