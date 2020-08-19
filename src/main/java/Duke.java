@@ -3,12 +3,35 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Duke is a personal chatbot with the following functionalities:
+ * (i) Adding and removing of Tasks to a list
+ * (ii) Checking Tasks as completed
+ * (iii) Viewing current task list
+ *
+ * @author Andy Wu
+ */
+
 public class Duke {
 
+    /**
+     * The implementation and main driver of the chatbot.
+     */
+
+    /** The name of the bot */
     private final String name;
+
+    /** Flag which functions as a switch for the program. */
     private boolean isRunning;
+
+    /** List which stores the Tasks. */
     private final List<Task> list;
 
+    /**
+     * Constructor for initializing the bot.
+     * Creates a new empty list and sends a greetings message.
+     * @param name the string name of the bot.
+     */
     public Duke(String name) {
         this.name = name;
         this.isRunning = true;
@@ -16,11 +39,21 @@ public class Duke {
         sendMessage("Hello! " + this.name + " lives to serve :)");
     }
 
+    /**
+     *  Flags the bot as no longer running and sends an exit message.
+     */
     public void exit() {
         isRunning = false;
         sendMessage("Bye :(");
     }
 
+    /**
+     * Formats all messages with the following:
+     * 1) Enclose messages with two lines
+     * 2) Indents messages
+     * and prints the formatted output.
+     * @param message the raw string to be formatted.
+     */
     public void sendMessage(String message) {
         // Pads all messages with 4-spaces indentation
         String line = "    ________________________________________________________";
@@ -38,6 +71,27 @@ public class Duke {
         System.out.println(line + "\n    " + sb + "\n" + line);
     }
 
+    /**
+     * Private method to generate the message for informing number of Tasks in list.
+     * @return the String message.
+     */
+    private String getNumberOfTasks() {
+        int size = list.size();
+        String task = size == 1 ? "task" : "tasks";
+        String num = size == 0 ? "no" : String.valueOf(size);
+        return "Now you have " + num + " " + task + " in the list!";
+    }
+
+    /**
+     * Creates a Task and adds to the list. Tasks have the following subtypes:
+     * 1) todo - a task with a description
+     * 2) event - a task with a description and occurrence time
+     * 3) deadline - a task with a deadline time
+     * Task creation fails if the user input is of an incorrect format.
+     * @param type the type of task as extracted from user input.
+     * @param description the description of task as extracted from user input.
+     * @throws DukeException
+     */
     public void addToList(String type, String description) throws DukeException {
         Task task;
         String[] split;
@@ -58,7 +112,7 @@ public class Duke {
                     task = new Deadline(desc, by);
                     break;
                 } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("Invalid deadline description!");
+                    throw new DukeException("Invalid " + type + " description!");
                 }
             case "event":
                 try {
@@ -68,7 +122,7 @@ public class Duke {
                     task = new Event(desc, at);
                     break;
                 } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("Invalid event description!");
+                    throw new DukeException("Invalid " + type + " description!");
                 }
             default:
                 task = new Task(description);
@@ -76,10 +130,15 @@ public class Duke {
         }
         list.add(task);
         String msg = "Okay I've added:\n    " + task + "\n";
-        msg += String.format("Now you have %d tasks in the list.", list.size());
+        msg += getNumberOfTasks();
         sendMessage(msg);
     }
 
+    /**
+     * Marks the Task of the given task number as completed.
+     * @param si the task number as extracted from user input.
+     * @throws DukeException
+     */
     public void markTaskDone(String si) throws DukeException {
         try {
             int i = Integer.parseInt(si);
@@ -98,6 +157,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Removes the Task of the given task number from the list.
+     * @param si the task number as extracted from user input.
+     * @throws DukeException
+     */
     public void deleteTask(String si) throws DukeException {
         try {
             int i = Integer.parseInt(si);
@@ -105,7 +169,7 @@ public class Duke {
             Task task = list.get(index);
             list.remove(task);
             String msg = "Okay I've deleted:\n    " + task + "\n";
-            msg += String.format("Now you have %d tasks in the list.", list.size());
+            msg += getNumberOfTasks();
             sendMessage(msg);
         } catch (NumberFormatException e) {
             throw new DukeException("Sorry, I don't know what that means :(");
@@ -114,6 +178,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Sends the user a formatted message of the tasks in the list.
+     */
     public void displayList() {
         if (list.isEmpty()) {
             sendMessage("Your list is empty!");
@@ -133,6 +200,11 @@ public class Duke {
         }
     }
 
+    /**
+     * The main algorithm of the bot which runs indefinitely as long as
+     * the running flag is true. The bot takes in user input, processes
+     * it and detects command/keywords.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
 
@@ -189,6 +261,11 @@ public class Duke {
         sc.close();
     }
 
+    /**
+     * Prints a display of the bot's logo, level, and name,
+     * before instantiating and running the bot.
+     * @param args optional and will be treated as the first user input.
+     */
     public static void main(String[] args) {
         String lvl = "6";
         String logo = "                                                 _     _\n"
