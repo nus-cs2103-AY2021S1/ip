@@ -1,6 +1,6 @@
 package command;
 
-import ui.UIPrint;
+import function.DukeFunction;
 import data.DukeData;
 
 public class ExitCommand extends Command {
@@ -11,11 +11,7 @@ public class ExitCommand extends Command {
 
     @Override
     public void execute(String str) {
-        String exitWords = "Bye, hope to see you again soon!";
-
-        UIPrint.drawLine(UIPrint.star, 50);
-        System.out.println(exitWords);
-        UIPrint.drawLine(UIPrint.star, 50);
+        DukeFunction.reportExit();
 
         DukeData.exitLoop = true;
     }

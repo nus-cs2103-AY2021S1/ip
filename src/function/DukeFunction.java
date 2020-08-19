@@ -58,6 +58,15 @@ public class DukeFunction {
         UIPrint.drawLine(UIPrint.star, 50);
     }
 
+    public static void reportExit() {
+        UIPrint.drawLine(UIPrint.star, 50);
+
+        String exitWords = "Bye, hope to see you again soon!";
+        System.out.println(exitWords);
+
+        UIPrint.drawLine(UIPrint.star, 50);
+    }
+
     public static void checkCommand(String str) {
         String[] inputParts = str.split(" ", 2);
         String possibleCommand = inputParts[0];
