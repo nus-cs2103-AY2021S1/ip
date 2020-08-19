@@ -15,11 +15,13 @@ public class Emily {
 
         String input = sc.nextLine();
 
+
             if(input.trim().isEmpty()){
                 throw new DukeException("input cannot be empty");
             }
 
             while (!input.equals("bye")) {
+                System.out.println(input);
 
 
                 if (input.equals("list")) {
@@ -86,7 +88,7 @@ public class Emily {
 
                         Task item = new Task("");
                         System.out.println(divider
-                                + "\n    Got it! I have added this task: ");
+                                + "\n    Got it! I have added this task:");
 
                         if (input.contains("todo")) {
                             String describe = input.substring(5);
@@ -138,7 +140,8 @@ public class Emily {
                 System.out.println("    OOPS! " + e.getMessage() + "\n" + divider);
             }
         }
-        System.out.println(divider + "\nBye~, hope to see you again!");
+
+        System.out.println("bye\n" + divider + "\nBye~, hope to see you again!");
 
 
     }
