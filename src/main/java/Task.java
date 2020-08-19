@@ -7,17 +7,17 @@ public class Task {
         this.complete = false;
     }
 
-    public isDone() {
+    public boolean isDone() {
         return this.complete;
     }
 
-    public complete() {
+    public void complete() {
         this.complete = true;
     }
 
     public String toString() {
         return this.complete
-                ? String.format("[✓] %s", this.title)
-                : String.format("[✗] %s", this.title)
+                ? String.format("[&#x2713] %s", this.title)
+                : String.format("[&#x2717] %s", this.title);
     }
 }

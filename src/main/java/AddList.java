@@ -2,11 +2,11 @@ public class AddList {
     String intro = "Hello I am Duke!\nWhat can I help you with?";
     String goodbye = "Goodbye. See you soon!";
     String line = "---------------------------------------------";
-    String[] items;
+    Task[] items;
     int idx;
 
     public AddList() {
-        this.items = new String[100];
+        this.items = new Task[100];
         this.idx = 0;
         System.out.println(this.line);
         System.out.println(this.intro);
@@ -20,24 +20,39 @@ public class AddList {
     }
 
     public void add(String input) {
-        this.items[this.idx] = input;
+        this.items[this.idx] = new Task(input);
         this.idx++;
         this.addLines(String.format("   Added: %s", input));
     }
 
     public void display() {
-        System.out.println(this.line);
+        String res = "Here are your tasks:\n";
         for (int i = 0; i < this.idx; i++) {
-            System.out.println(String.format("    %d. %s", i + 1, this.items[i]));
+            res += String.format("    %d.%s\n", i + 1, this.items[i]);
         }
-        System.out.println(this.line);
+        this.addLines(res);
+    }
+
+    public void completeTask(int idx) {
+        Task t = this.items[idx];
+        t.complete();
+        this.addLines(String.format("    Nice! I've marked this task as done:\n    %s", t));
     }
 
     public void allocate(String input) {
-        if (input.equals("bye")) {
+        String[] arr = input.split(" ");
+
+        if (arr[0].equals("bye")) {
             this.addLines(this.goodbye);
-        } else if (input.equals("list")) {
+        } else if (arr[0].equals("list")) {
             this.display();
+        } else if (arr[0].equals("done")) {
+            int idx = Integer.parseInt(arr[1]) - 1;
+            if (idx >= 0 && idx < this.idx) {
+                this.completeTask(idx);
+            } else {
+                this.addLines("Please choose a valid index");
+            }
         } else {
             this.add(input);
         }
