@@ -4,67 +4,97 @@ public class Duke {
     public static void errorMsg(String msg) {
         System.out.println(msg);
     }
+    public static void print(String msg) {
+        System.out.println(msg);
+    }
     public static void main(String[] args) {
-        System.out.println("hi! im conundrum boy :)");
+        print("hi! im conundrum boy :)");
         List<Task> things = new ArrayList<Task>();
         Scanner input = new Scanner(System.in);
 
         String in;
-        label:
         while (true) {
             in = input.nextLine();
             if ("bye".equals(in)) {
-                break label;
+                break;
             } else if ("".equals(in)) {
                 continue;
             } else if ("list".equals(in)) {
-                for (int i = 1; i <= things.size(); i++) {
-                    System.out.println(i + ". " + things.get(i - 1));
+                if (things.size() == 0) {
+                    print("you haven't added any tasks to the list yet!");
                 }
-            } else if (in.matches("done -?\\d+")){
-                int current = Integer.parseInt(in.substring(5)) - 1;
+                for (int i = 1; i <= things.size(); i++) {
+                    print(i + ". " + things.get(i - 1));
+                }
+            } else if (in.startsWith("done ")){
+                int current;
+                try {
+                    current = Integer.parseInt(in.substring(5));
+                } catch (Exception e){
+                    errorMsg("you haven't entered a task number to complete!");
+                    continue;
+                }
+                current--;
                 Task task;
-                if (current < 0 || current > things.size()) {
+                if (current < 0 || current >= things.size()) {
                     errorMsg("that is not the number of a task in the list!");
                 } else {
                     task = things.get(current);
                     if (task.done) {
                         errorMsg("you have already completed " + task.task + "!");
-                    } else {
-                        task.complete();
-                        System.out.println("congrats on finishing your task :) it's marked as done:\n\t" + task);
+                        continue;
                     }
+                    task.complete();
+                    print("congrats on finishing your task :) it's marked as done:\n\t" + task);
+
                 }
-            } else if (in.startsWith("todo")){
-                Task temp = new ToDo(in.substring(5));
+            } else if (in.startsWith("todo ")){
+                String taskname = in.substring(5);
+                if (taskname.length() == 0) {
+                    errorMsg("the task description cannot be nothing D:");
+                    continue;
+                }
+                Task temp = new ToDo(taskname);
                 things.add(temp);
-                System.out.println("i've added this task for you: \n\t" + temp + "\nnow you have " + things.size() + " items in your tasklist.");
-            } else if (in.startsWith("deadline")){
-                int ind = in.indexOf("/by");
-                if (ind < 0) {
+                print("i've added this task for you: \n\t" + temp + "\nnow you have " + things.size() + " items in your tasklist.");
+            } else if (in.startsWith("deadline ")){
+                int ind = in.indexOf("/by ");
+                if (ind < 0 || ind == in.length() - 4) {
+                    errorMsg("you haven't entered a time that this task is due by. you can do that by typing \"deadline xxx /by yyy\".");
+                    continue;
+                }
+
+                if (ind - 1 <= 9) {
+                    errorMsg("the task description cannot be nothing D:");
                     continue;
                 }
                 String taskname = in.substring(9,ind - 1);
                 String dead = in.substring(ind + 4);
                 Task temp = new Deadline(taskname,dead);
                 things.add(temp);
-                System.out.println("i've added this task for you: \n\t" + temp + "\nnow you have " + things.size() + " items in your tasklist.");
-            } else if (in.startsWith("event")){
-                int ind = in.indexOf("/at");
-                if (ind < 0) {
+                print("i've added this task for you: \n\t" + temp + "\nnow you have " + things.size() + " items in your tasklist.");
+            } else if (in.startsWith("event ")){
+                int ind = in.indexOf("/at ");
+                if (ind < 0 || ind == in.length() - 4) {
+                    errorMsg("you haven't entered a time that this task happens at. you can do that by typing \"event xxx /at yyy\".");
+                    continue;
+                }
+
+                if (ind - 1 <= 6) {
+                    errorMsg("the task description cannot be nothing D:");
                     continue;
                 }
                 String taskname = in.substring(6,ind - 1);
                 String time = in.substring(ind + 4);
                 Task temp = new Event(taskname,time);
                 things.add(temp);
-                System.out.println("i've added this task for you: \n\t" + temp + "\nnow you have " + things.size() + " items in your tasklist.");
+                print("i've added this task for you: \n\t" + temp + "\nnow you have " + things.size() + " items in your tasklist.");
             } else {
-                continue;
+                errorMsg("i dont know what that means :(");
             }
 
         }
-        System.out.println("bye bye!");
+        print("bye bye!");
 
     }
 }
