@@ -9,7 +9,7 @@ public class TodoManager {
         System.out.println(Helper.horiLine);
     }
     public void markDone(String command) {
-        int num = Integer.parseInt(command.substring(5, command.length())) - 1;
+        int num = Integer.parseInt(command) - 1;
         lst.get(num).markDone();
         System.out.println(Helper.horiLine);
         System.out.println("Nice! I've marked this task as done:");

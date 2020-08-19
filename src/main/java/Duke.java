@@ -23,7 +23,7 @@ public class Duke {
             } else if (command.equals("list")) {
                 todoManager.listTask();
             } else if (command.startsWith("done")) {
-                todoManager.markDone(command);
+                todoManager.markDone(command.substring(5));
             } else {
                 todoManager.addTask(command);
             }
