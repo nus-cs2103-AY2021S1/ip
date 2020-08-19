@@ -24,10 +24,14 @@ public class Task {
     public static void printList() {
         String output = "Here are the tasks in your list:\n";
         int count = taskList.size();
-        for (int i = 0; i < count; i++) {
-            output += (i + 1) + ". " + taskList.get(i) + "\n";
+        if (count <= 0) {
+            Print.formatPrint("There is no task in your list currently. ");
+        } else {
+            for (int i = 0; i < count; i++) {
+                output += (i + 1) + ". " + taskList.get(i) + "\n";
+            }
+            Print.formatPrint(output.strip());
         }
-        Print.formatPrint(output.strip());
     }
 
     public void markAsDone() {

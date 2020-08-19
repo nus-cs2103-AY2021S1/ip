@@ -3,4 +3,8 @@ event meet jason leo /at 5pm Monday
 list
 todo write resume
 done 2
+deadline
+event meet babe
+todo
+blah blab
 bye
