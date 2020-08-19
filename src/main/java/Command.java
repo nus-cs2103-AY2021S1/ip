@@ -1,6 +1,6 @@
 import java.util.function.Function;
 
-public enum States{
+public enum Command {
 
     //The main State of tasks
     TODO(Todo::parseCommand),
@@ -8,16 +8,16 @@ public enum States{
     DEADLINE(Deadline::parseCommand);
 
     //Create a variable to store the Function / Bi Function
-    protected Function<String, Task> taskSupplier = null;
+    protected Function<String, Task> commandParser = null;
 
     //Constructor for the function
-    States(Function<String, Task> taskSupplier){
-        this.taskSupplier = taskSupplier;
+    Command(Function<String, Task> commandParser){
+        this.commandParser = commandParser;
     }
 
     //Get the task given description
     public Task createTask(String description){
-        return taskSupplier.apply(description);
+        return commandParser.apply(description);
     }
 
 
