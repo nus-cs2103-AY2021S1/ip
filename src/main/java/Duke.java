@@ -53,7 +53,8 @@ public class Duke {
 
     // this function prints the task that is completed
     public static void printDone(ArrayList<Task> tasks, int doneTask) {
-        Task t = tasks.get(doneTask - 1);
+        Task t = tasks.get(doneTask);
+        t.markAsDone();
         System.out.println(LINE);
         System.out.println("     Nice! I've marked this task as done: ");
         System.out.println("       " + t.toString());
@@ -90,9 +91,8 @@ public class Duke {
 
             if (sc.hasNext("done")) {
                 sc.skip("done");
-                int taskNumber = Integer.parseInt(sc.next().trim());
+                int taskNumber = Integer.parseInt(sc.next().trim()) - 1;
                 sc.nextLine();
-                tasks.get(taskNumber - 1).markAsDone();
                 printDone(tasks, taskNumber);
                 continue;
             }
