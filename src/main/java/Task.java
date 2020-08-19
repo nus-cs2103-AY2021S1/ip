@@ -12,7 +12,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? TICK : CROSS);
     }
 
     public void markAsDone() {
@@ -21,10 +21,6 @@ public class Task {
 
     @Override
     public String toString() {
-        if (isDone) {
-            return TICK + " " + this.description;
-        } else {
-            return CROSS + " " + this.description;
-        }
+        return this.getStatusIcon() + " " + this.description;
     }
 }

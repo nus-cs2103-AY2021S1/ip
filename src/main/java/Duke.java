@@ -25,13 +25,21 @@ public class Duke {
             }
 
             boolean markDone = description.startsWith("done");
+            boolean deleteTask = description.startsWith("delete");
             boolean showListOfCommands = description.equals("list");
 
             // Mark indicated task as done
             if (markDone) {
-                int lengthOfCommand = description.length();
-                int index = Integer.parseInt(description.substring(5, lengthOfCommand));
-                markTaskAsDone(tasks, index - 1);
+                try {
+                    int lengthOfCommand = description.length();
+                    int index = Integer.parseInt(description.substring(5, lengthOfCommand));
+                    markTaskAsDone(tasks, index);
+                } catch (TaskDoesNotExistException e) {
+                    System.out.println(e.getMessage());
+                } catch (NumberFormatException e) {
+                    System.out.println(SKIPLINE + CHATBOT);
+                    System.out.println("OOPS! Please enter a numerical number to mark tasks as done :)");
+                }
             }
 
             // Display list of tasks to user
@@ -40,7 +48,15 @@ public class Duke {
 
             // Add a new task (todos, deadlines or events) to the list
             } else {
-                handleUserCommands(tasks, description);
+                try {
+                    handleUserCommands(tasks, description);
+                } catch (InvalidUserCommandException e) {
+                    System.out.println(e.getMessage());
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(SKIPLINE + CHATBOT);
+                    System.out.println("Sorry I am unable to create this task :(");
+                    System.out.println("Please make sure that the task has a description and has the correct format");
+                }
             }
 
             // Prompt user commands
@@ -77,19 +93,28 @@ public class Duke {
         System.out.println("You now have " + tasks.totalNumberOfTasks() + " task(s) in your list");
     }
 
-    private static void markTaskAsDone(TaskList tasks, int index) {
+    private static void markTaskAsDone(TaskList tasks, int index) throws TaskDoesNotExistException {
         System.out.println(SKIPLINE + CHATBOT);
+        if (index > 0 && index <= tasks.totalNumberOfTasks()) {
+            Task doneTask = tasks.getTask(index -1);
+            if (doneTask.isDone) {
+                System.out.println("OOPS. It seems like this task has already been completed:");
+                System.out.println(doneTask);
+            } else {
+                doneTask.markAsDone();
 
-        Task doneTask = tasks.getTask(index);
-        doneTask.markAsDone();
-
-        // Bob's response
-        System.out.println("Good job completing this task! I've marked this task as done:");
-        System.out.println(doneTask);
-        System.out.println("Keep up the good work :)");
+                // Bob's response
+                System.out.println("Good job completing this task! I've marked this task as done:");
+                System.out.println(doneTask);
+                System.out.println("Keep up the good work :)");
+            }
+        } else {
+            throw new TaskDoesNotExistException(
+                    "OOPS! Task " + index + " does not exist." + SKIPLINE + "Please make sure task index is correct.");
+        }
     }
 
-    private static void handleUserCommands(TaskList tasks, String command) {
+    private static void handleUserCommands(TaskList tasks, String command) throws InvalidUserCommandException{
         if (command.startsWith("deadline")) {
             String[] deadlineInformation;
 
@@ -116,6 +141,9 @@ public class Duke {
 
             Todo newTodoTask = new Todo(description);
             updateTaskList(tasks, newTodoTask);
+        } else {
+            System.out.println(SKIPLINE + CHATBOT);
+            throw new InvalidUserCommandException("Sorry but I don't understand what this means :(");   
         }
     }
 }

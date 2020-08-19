@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class InvalidUserCommandException {
+public class InvalidUserCommandException extends IllegalArgumentException {
+    public InvalidUserCommandException(String message) {
+        super(message);
+    }
 }

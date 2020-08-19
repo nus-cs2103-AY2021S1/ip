@@ -46,10 +46,50 @@ Keep up the good work :)
 You: 
 
 Bob: 
+OOPS. It seems like this task has already been completed:
+[D][✓] return book (by: Sunday)
+
+You: 
+
+Bob: 
 Here is your current list of tasks:
 1.[T][✘] borrow book
 2.[D][✓] return book (by: Sunday)
 3.[E][✘] project meeting (at: Mon 2-4pm)
+
+You: 
+
+Bob: 
+OOPS! Task 10 does not exist.
+Please make sure task index is correct.
+
+You: 
+
+Bob: 
+Sorry I am unable to create this task :(
+Please make sure that the task has a description and has the correct format
+
+You: 
+
+Bob: 
+Sorry I am unable to create this task :(
+Please make sure that the task has a description and has the correct format
+
+You: 
+
+Bob: 
+Noted! I have added the following task to your list:
+[D][✘] independent project (by: monday)
+You now have 4 task(s) in your list
+
+You: 
+
+Bob: 
+Here is your current list of tasks:
+1.[T][✘] borrow book
+2.[D][✓] return book (by: Sunday)
+3.[E][✘] project meeting (at: Mon 2-4pm)
+4.[D][✘] independent project (by: monday)
 
 You: 
 
