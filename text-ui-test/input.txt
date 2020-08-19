@@ -1,8 +1,11 @@
 list
 todo wake up
 deadline brush teeth /by 10am
+todo
 event online lecture /at 10am-12pm
+event some event without event time
 deadline submit assignment /by Friday
+deadline
 list
 todo eat lunch
 event project meeting /at 4pm
