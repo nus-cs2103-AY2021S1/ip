@@ -6,6 +6,6 @@ public class Task {
         this.done = done;
     }
     public String toString(){
-        return text + "\n";
+        return "[" + (done ? "✓" : "✗" + "] ") + text + "\n";
     }
 }

@@ -43,7 +43,7 @@ public class Duke {
     public static void print_tasks(ArrayList<Task> tasks){
         System.out.print(LINE);
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.print(i + ". " + tasks.get(i));
+            System.out.print((i+1) + "." + tasks.get(i));
         }
         System.out.print(LINE);
     }
