@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Duke {
     private static final String LINE_BREAK = "   ____________________________________________________________";
-    private static final String SPACE_BEFORE_TEXT = "    ";
-    private static final String SPACE_FOR_ADDING = "     ";
+    private static final String SPACE1 = "    ";
+    private static final String SPACE2 = "     ";
 
     private static boolean isInteger (String str) {
         try {
@@ -28,25 +28,24 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         System.out.println(LINE_BREAK);
-        System.out.println(SPACE_BEFORE_TEXT + "Hey, I'm Emilia \u2764 !" + "\n" +
-                SPACE_BEFORE_TEXT + "What can I do for you?");
+        System.out.println(SPACE1 + "Hey, I'm Emilia \u2764 ! \n" + SPACE1 +
+                "What can I do for you?");
         System.out.println(LINE_BREAK);
 
         while (sc.hasNext()) {
             String input = sc.nextLine().trim().toLowerCase();
             System.out.println(LINE_BREAK);
             if (input.equals("bye")) {
-                System.out.println(SPACE_BEFORE_TEXT + "Welcome back \u2764 !" + "\n" +
-                        LINE_BREAK);
+                System.out.println(SPACE1 + "Welcome back \u2764 !\n" + LINE_BREAK);
                 break;
 
             }
 
             if (input.equals("list")) {
-                System.out.println(SPACE_BEFORE_TEXT + "Please take a look at the tasks:");
+                System.out.println(SPACE1 + "Please take a look at the tasks:");
                 int count = 1;
                 for (Task task : tasks) {
-                    System.out.println(SPACE_BEFORE_TEXT + count + ". " + task);
+                    System.out.println(SPACE1 + count + ". " + task);
                     count++;
                 }
                 System.out.println(LINE_BREAK);
@@ -54,19 +53,32 @@ public class Duke {
             }
 
             String[] process = input.split(" ", 2);
-            if (process[0].equals("done") && isInteger(process[1])) {
-                int index = Integer.parseInt(process[1]) - 1;
-                try {
+
+            try {
+                if (process[0].equals("done") && isInteger(process[1])) {
+                    int index = Integer.parseInt(process[1]) - 1;
                     Task task = tasks.get(index);
                     task.markAsDone();
-                    System.out.println(SPACE_BEFORE_TEXT + "Understood, I've marked this " +
-                            "task as done:" + "\n" + SPACE_FOR_ADDING + task);
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println(SPACE_BEFORE_TEXT + "Sorry, I can't seem " +
-                            "to find the task...");
+                    System.out.println(SPACE1 + "Understood, I've marked this " +
+                            "task as done:\n" + SPACE2 + task);
+
+                    continue;
                 }
+
+                if (process[0].equals("delete") && isInteger(process[1])) {
+                    int index = Integer.parseInt(process[1]) - 1;
+                    Task task = tasks.get(index);
+                    tasks.remove(index);
+                    System.out.println(SPACE1 + "Understood, I've deleted this task \n" +
+                             SPACE2 + task + "\n" + SPACE1 + "You have " + tasks.size() + " tasks in your list now!");
+                    continue;
+                }
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println(SPACE1 + "Sorry, I can't seem " +
+                        "to find the task...");
                 continue;
             }
+
 
             String firstWord = process[0];
             Task current;
@@ -99,24 +111,24 @@ public class Duke {
                         throw new DukeException("nothing understood");
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println(SPACE_BEFORE_TEXT + "The description of " +
+                System.out.println(SPACE1 + "The description of " +
                         "a task cannot be empty!");
                 continue;
             } catch (DukeException e) {
                 String type = e.getMessage();
                 if (type.equals("better description")) {
-                    System.out.println(SPACE_BEFORE_TEXT + "I need a better " +
+                    System.out.println(SPACE1 + "I need a better " +
                             "description of the task such as the time or date!");
                 } else if (type.equals("nothing understood")) {
-                    System.out.println(SPACE_BEFORE_TEXT + "I don't understand you at all...");
+                    System.out.println(SPACE1 + "I don't understand you at all...");
                 }
                 continue;
             }
 
             tasks.add(current);
-            System.out.println(SPACE_BEFORE_TEXT + "Understood! I've added this task: " +
-                    "\n" + SPACE_FOR_ADDING + current);
-            System.out.println(SPACE_BEFORE_TEXT + "You have " +
+            System.out.println(SPACE1 + "Understood! I've added this task: \n" +
+                    SPACE2 + current);
+            System.out.println(SPACE1 + "You have " +
                     tasks.size() + " tasks in your list now!");
             System.out.println(LINE_BREAK);
         }

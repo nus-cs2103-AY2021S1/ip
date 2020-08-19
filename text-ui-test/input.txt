@@ -15,5 +15,9 @@ done 8
 list
 why are you so cute ?
 list
+delete 10
+delete 3
+delete 2
+list
 bye
 

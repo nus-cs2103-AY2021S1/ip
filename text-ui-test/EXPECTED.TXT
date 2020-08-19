@@ -43,9 +43,9 @@ Hello from
     4. [E][✘] project meeting (at: mon 2-4pm)
    ____________________________________________________________
    ____________________________________________________________
-    I can't find the description of the task!
+    I need a better description of the task such as the time or date!
    ____________________________________________________________
-    I can't find the description of the task!
+    I need a better description of the task such as the time or date!
    ____________________________________________________________
     Please take a look at the tasks:
     1. [T][✘] read book
@@ -54,9 +54,9 @@ Hello from
     4. [E][✘] project meeting (at: mon 2-4pm)
    ____________________________________________________________
    ____________________________________________________________
-    Empty content!
+    The description of a task cannot be empty!
    ____________________________________________________________
-    Empty content!
+    The description of a task cannot be empty!
    ____________________________________________________________
     Please take a look at the tasks:
     1. [T][✘] read book
@@ -77,13 +77,28 @@ Hello from
     4. [E][✘] project meeting (at: mon 2-4pm)
    ____________________________________________________________
    ____________________________________________________________
-    Invalid input detected!
+    I don't understand you at all...
    ____________________________________________________________
     Please take a look at the tasks:
     1. [T][✓] read book
     2. [T][✘] buy milk
     3. [D][✘] return book (by: sunday)
     4. [E][✘] project meeting (at: mon 2-4pm)
+   ____________________________________________________________
+   ____________________________________________________________
+    Sorry, I can't seem to find the task...
+   ____________________________________________________________
+    Understood, I've deleted this task
+     [D][✘] return book (by: sunday)
+    You have 3 tasks in your list now!
+   ____________________________________________________________
+    Understood, I've deleted this task
+     [T][✘] buy milk
+    You have 2 tasks in your list now!
+   ____________________________________________________________
+    Please take a look at the tasks:
+    1. [T][✓] read book
+    2. [E][✘] project meeting (at: mon 2-4pm)
    ____________________________________________________________
    ____________________________________________________________
     Welcome back ❤ !
