@@ -12,6 +12,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[%c] %s", done ? '✓' : '✗', desc);
+        return String.format("[%c] %s", done ? '\u2713' : '\u2717', desc);
     }
 }
