@@ -17,12 +17,13 @@ public class Task {
         this.isDone = true;
     }
 
-    public static void getListOfTasks(ArrayList<Task> tasks) {
+    public static void getListOfTasks(ArrayList<Task> tasks) throws DukeException {
         if (tasks.isEmpty()) {
-            String nothing = "   ____________________________________________________________"
-                    + "\n    Can't seem to find any task hmm..."
-                    + "\n   ____________________________________________________________\n";
-            System.out.println(nothing);
+            try {
+                throw new DukeException("", DukeExceptionType.EMPTY_LIST);
+            } catch (DukeException e) {
+                System.err.println(e);
+            }
         } else {
             String lst = "   ____________________________________________________________"
                     + "\n    Here are the tasks in your list:";
@@ -33,17 +34,6 @@ public class Task {
             lst += "\n   ____________________________________________________________\n";
             System.out.println(lst);
         }
-    }
-
-    public static void createTask(ArrayList<Task> tasks, String task) {
-        Task newTask = new Task(task);
-        tasks.add(newTask);
-        String str = "   ____________________________________________________________"
-                + "\n    Got it. I've added this task:"
-                + "\n      " + tasks.get(tasks.size() - 1)
-                + "\n    Now you have " + tasks.size() + " task(s) in the list."
-                + "\n   ____________________________________________________________\n";
-        System.out.println(str);
     }
 
     public static void done(ArrayList<Task> tasks, Integer index) {
@@ -60,13 +50,6 @@ public class Task {
                 + "\n    Noted. I've removed this task:\n      "
                 + tasks.remove(index - 1)
                 + "\n    Now you have " + tasks.size() + " task(s) in the list."
-                + "\n   ____________________________________________________________\n";
-        System.out.println(str);
-    }
-
-    public static void invalid_input(String invalid) {
-        String str = "   ____________________________________________________________"
-                + "\n    Invalid input: " + invalid
                 + "\n   ____________________________________________________________\n";
         System.out.println(str);
     }

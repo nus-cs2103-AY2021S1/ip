@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 public class Duke {
 
+    static ArrayList<Task> tasks = new ArrayList<>();
+
     public static void greeting() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -35,25 +37,18 @@ public class Duke {
         System.out.println(bye);
     }
 
-    public static void invalid_index() {
+    public static void addTask(Task task) {
+        tasks.add(task);
         String str = "   ____________________________________________________________"
-                + "\n    This index does not exist. Please try again!"
-                + "\n   ____________________________________________________________";
-        System.out.println(str);
-
-    }
-
-    public static void unknown() {
-        String str = "   ____________________________________________________________"
-                + "\n    Sorry? I didn't get what you want me to do."
-                + "\n    Type help to see all available commands."
+                + "\n    Got it. I've added this task:"
+                + "\n      " + task
+                + "\n    Now you have " + tasks.size() + " task(s) in the list."
                 + "\n   ____________________________________________________________\n";
         System.out.println(str);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
 
         greeting();
         String input = sc.nextLine();
@@ -69,34 +64,91 @@ public class Duke {
                 String task;
                 try {
                     task = input.split("todo")[1];
-                    ToDos.createTask(tasks, task);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    ToDos.invalid_input();
+                    Task newTask = new ToDos(task);
+                    addTask(newTask);
+                } catch (ArrayIndexOutOfBoundsException exception) {
+                    try {
+                        throw new DukeException("", DukeExceptionType.MISSING_DESCRIPTION, DukeCommandType.TODO);
+                    } catch (DukeException e) {
+                        System.err.println(e);
+                    }
                 }
             } else if (input.startsWith("deadline")) {
-                String task;
-                String due;
                 try {
-                    task = input.split("deadline")[1].split("/by")[0];
-                    due = input.split("deadline")[1].split("/by")[1];
-                    Deadlines.createTask(tasks, task, due);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    Deadlines.invalid_input();
+                    if (input.split("deadline ").length < 2) {
+                        throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.DEADLINE);
+                    } else if (!input.contains("/by ")) {
+                        if (input.equals("deadline /by")) {
+                            throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.DEADLINE);
+                        } else {
+                            throw new DukeException("", DukeExceptionType.MISSING_TIMING, DukeCommandType.DEADLINE);
+                        }
+                    } else if (input.split("/by ").length < 2) {
+                        throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.DEADLINE);
+                    } else {
+                        try {
+                            String task = input.split("deadline ")[1].split("/by")[0];
+                            String due = input.split("deadline ")[1].split("/by")[1];
+                            if (task.equals("") && due.equals("")) {
+                                throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.DEADLINE);
+                            } else if (task.equals("")) {
+                                throw new DukeException("", DukeExceptionType.MISSING_DESCRIPTION, DukeCommandType.DEADLINE);
+                            } else if (due.equals("")) {
+                                throw new DukeException("", DukeExceptionType.MISSING_TIMING, DukeCommandType.DEADLINE);
+                            } else {
+                                Task newTask = new Deadlines(task, due);
+                                addTask(newTask);
+                            }
+                        } catch (DukeException e){
+                            System.err.println(e);
+                        }
+                    }
+                } catch (DukeException e) {
+                    System.err.println(e);
                 }
             } else if (input.startsWith("event")) {
                 try {
-                    String event = input.split("event")[1].split("/at")[0];
-                    String scheduled = input.split("event")[1].split("/at")[1];
-                    Events.createTask(tasks, event, scheduled);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    Events.invalid_input();
+                    if (input.split("event ").length < 2) {
+                        throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.EVENT);
+                    } else if (!input.contains("/at ")) {
+                        if (input.equals("event /at")) {
+                            throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.EVENT);
+                        } else {
+                            throw new DukeException("", DukeExceptionType.MISSING_TIMING, DukeCommandType.EVENT);
+                        }
+                    } else if (input.split("/at ").length < 2) {
+                        throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.EVENT);
+                    } else {
+                        try {
+                            String task = input.split("event ")[1].split("/at")[0];
+                            String due = input.split("event ")[1].split("/at")[1];
+                            if (task.equals("") && due.equals("")) {
+                                throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.EVENT);
+                            } else if (task.equals("")) {
+                                throw new DukeException("", DukeExceptionType.MISSING_DESCRIPTION, DukeCommandType.DEADLINE);
+                            } else if (due.equals("")) {
+                                throw new DukeException("", DukeExceptionType.MISSING_TIMING, DukeCommandType.DEADLINE);
+                            } else {
+                                Task newTask = new Events(task, due);
+                                addTask(newTask);
+                            }
+                        } catch (DukeException e){
+                            System.err.println(e);
+                        }
+                    }
+                } catch (DukeException e) {
+                    System.err.println(e);
                 }
             } else if (input.startsWith("done")) {
                 try {
                     int index = Integer.parseInt(input.split(" ")[1]);
                     Task.done(tasks, index);
-                } catch (IndexOutOfBoundsException e) {
-                    invalid_index();
+                } catch (IndexOutOfBoundsException exception) {
+                    try {
+                        throw new DukeException("", DukeExceptionType.INVALID_INDEX, DukeCommandType.DONE);
+                    } catch (DukeException e) {
+                        System.err.println(e);
+                    }
                 }
                 input = sc.nextLine();
                 continue;
@@ -104,13 +156,21 @@ public class Duke {
                 try {
                     int index = Integer.parseInt(input.split(" ")[1]);
                     Task.delete(tasks, index);
-                } catch (IndexOutOfBoundsException e) {
-                    invalid_index();
+                } catch (IndexOutOfBoundsException exception) {
+                    try {
+                        throw new DukeException("", DukeExceptionType.INVALID_INDEX, DukeCommandType.DELETE);
+                    } catch (DukeException e) {
+                        System.err.println(e);
+                    }
                 }
                 input = sc.nextLine();
                 continue;
             } else {
-                unknown();
+                try {
+                    throw new DukeException("", DukeExceptionType.UNKNOWN);
+                } catch (DukeException e) {
+                    System.err.println(e);
+                }
                 input = sc.nextLine();
                 continue;
             }
