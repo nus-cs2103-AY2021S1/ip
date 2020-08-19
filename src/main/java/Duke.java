@@ -1,4 +1,5 @@
 import main.java.Task;
+import main.java.TaskDoneException;
 import main.java.TaskManager;
 
 import java.util.ArrayList;
@@ -66,6 +67,8 @@ public class Duke {
                     } catch (IndexOutOfBoundsException err) {
                         echo("Error. You don't have task # " + words[1] +
                                 "Key in \"list\" to find out the tasks");
+                    } catch (TaskDoneException err) {
+                        echo("The task is already done. No need to mark it as done again.");
                     }
                     break;
                 case "deadline":
