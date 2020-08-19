@@ -8,7 +8,13 @@ public class Task {
     }
 
     public Task completeTask() {
-        return new Task(this.description, true);
+        if (this instanceof Deadline) {
+            return new Deadline(this.description, true);
+        } else if (this instanceof Event) {
+            return new Event(this.description, true);
+        } else {
+            return new Todo(this.description, true);
+        }
     }
 
     @Override
