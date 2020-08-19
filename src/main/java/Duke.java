@@ -20,32 +20,55 @@ public class Duke {
     private static final String ADD_DEADLINE = "deadline";
     private static final String DELETE_TASK = "delete";
 
+    private static DukeCommand getDukeCommand(String input) {
+        String[] inputList = input.split(" ");
+        if (inputList.length > 0) {
+            switch (inputList[0]) {
+                case LIST_COMMAND:
+                    return DukeCommand.LIST;
+                case DELETE_TASK:
+                    return DukeCommand.DELETE;
+                case DONE_COMMAND:
+                    return DukeCommand.DONE;
+                case ADD_TODO:
+                    return DukeCommand.ADD_TODO;
+                case ADD_EVENT:
+                    return DukeCommand.ADD_EVENT;
+                case ADD_DEADLINE:
+                    return DukeCommand.ADD_DEADLINE;
+                default:
+                    return DukeCommand.UNKNOWN;
+            }
+        } else {
+            return DukeCommand.UNKNOWN;
+        }
+    }
+
     private static void processCommand(String input) {
         String[] inputList = input.split(" ");
+        DukeCommand command = getDukeCommand(input);
         try {
-            if (inputList.length > 0) {
-                switch (inputList[0]) {
-                    case LIST_COMMAND:
-                        listTasks();
-                        break;
-                    case DONE_COMMAND:
-                        completeTask(inputList);
-                        break;
-                    case ADD_TODO:
-                        addTodo(inputList);
-                        break;
-                    case ADD_EVENT:
-                        addEvent(inputList);
-                        break;
-                    case ADD_DEADLINE:
-                        addDeadline(inputList);
-                        break;
-                    case DELETE_TASK:
-                        deleteTask(inputList);
-                        break;
-                    default:
-                        throw new DukeUnknownCommandException(ERROR_MESSAGE + "\nWas the command valid?");
-                }
+            switch (command) {
+                case LIST:
+                    listTasks();
+                    break;
+                case DONE:
+                    completeTask(inputList);
+                    break;
+                case ADD_TODO:
+                    addTodo(inputList);
+                    break;
+                case ADD_EVENT:
+                    addEvent(inputList);
+                    break;
+                case ADD_DEADLINE:
+                    addDeadline(inputList);
+                    break;
+                case DELETE:
+                    deleteTask(inputList);
+                    break;
+                default:
+                    throw new DukeUnknownCommandException(ERROR_MESSAGE + "\nWas the command valid?");
             }
         } catch (DukeUnknownCommandException | DukeIncompleteCommandException | DukeInvalidArgumentException e) {
             printWithDivider(e.getMessage());
