@@ -15,6 +15,10 @@ public class Task {
         this.done = true;
     }
 
+    public boolean isDone() {
+        return this.done;
+    }
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("[").append(this.getStatus()).append("] ").append(this.description);
