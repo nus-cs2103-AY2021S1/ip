@@ -48,6 +48,13 @@ public class Duke {
                 System.out.println("\t" + "Got it. I've added this task: ");
                 System.out.println("\t\t" + newTask);
             }
+            else if(input.startsWith("event ")){
+                input = input.substring(5).trim();
+                Task newTask = new Event(input);
+                taskList.add(newTask);
+                System.out.println("\t" + "Got it. I've added this task: ");
+                System.out.println("\t\t" + newTask);
+            }
             else{
                 System.out.println("\t" + "I do not understand. D:");
             }
