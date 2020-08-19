@@ -151,9 +151,7 @@ switch (comm) {
         }
         break;
     case gibberish:
-        System.out.println(line);
-        System.out.println("DukeException: ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        System.out.println(line);
+        System.out.println(new DukeException("DukeException: ☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
         echo = sc.nextLine();
 }
 
