@@ -33,13 +33,14 @@ public class Duke {
             + "░░░░░░░░░░░░░█▓▓░░░░█░░░░░░░░░█░░░░▓▓█░░░░░░░░░░░░░\n"
             + "░░░░░░░░░░░░░░░█░░░░█░░░░░░░░░█░░░░█░░░░░░░░░░░░░░░\n"
             + "░░░░░░░░░░░░░░░░██████▓▓▓▓▓▓▓██████░░░░░░░░░░░░░░░░\n";;
-    private static List<Task> toDo = new ArrayList<>();
+    private static List<Task> thingsOnList = new ArrayList<>();
     private static void viewList() {
-        for (int i = 0; i < toDo.size(); i++) {
-            System.out.println("    " + (i + 1) + ". " + toDo.get(i));
+        for (int i = 0; i < thingsOnList.size(); i++) {
+            System.out.println("    " + (i + 1) + ". " + thingsOnList.get(i));
         }
     }
     private static void Echo() {
+        int startingSize = thingsOnList.size();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         if (!input.isEmpty()) {
@@ -50,17 +51,33 @@ public class Duke {
                 viewList();
             } else if (!input.isEmpty()) {
                 int spaceIndex = input.indexOf(" ");
-                if ((spaceIndex != -1 && input.substring(0, spaceIndex).equals(DONE)) || input.equals("done")) {
+                if ((spaceIndex != -1 && spaceIndex != input.length() - 1 && input.substring(0, spaceIndex).equals(DONE)) || input.equals("done")) {
                     try {
                         int x = Integer.parseInt(input.substring(spaceIndex + 1)) - 1;
-                        toDo.get(x).markAsDone();
+                        thingsOnList.get(x).markAsDone();
                         viewList();
                     } catch (NumberFormatException | IndexOutOfBoundsException e) {
                         System.out.println(ERROR);
                     }
                 } else {
-                    toDo.add(new Task(input));
-                    System.out.println("    added: " + input);
+                    int cmdIndex = input.indexOf("/");
+                    if (cmdIndex != -1 && cmdIndex != input.length() - 1) {
+                        String cmd = input.substring(cmdIndex, cmdIndex + 3);
+                        System.out.println(cmd);
+                        if (cmd.equals("/by")) {
+                            thingsOnList.add(new Deadlines(input));
+                        } else if (cmd.equals("/at")) {
+                            thingsOnList.add(new Events(input));
+                        }
+                    } else if (input.contains("todo")){
+                        thingsOnList.add(new ToDos(input));
+                    }
+
+                    System.out.println(thingsOnList.size() == startingSize ? "The Covenant are trying to plug up " +
+                        "our list with meaningless garbage again. " +
+                            "Try again with commands this time." :("    Roger. I've added this task:\n    " +
+                            thingsOnList.get(thingsOnList.size() - 1) + "\n    " +
+                                "Now you have " + thingsOnList.size() + " tasks in the list."));
                 }
             }
             System.out.println("    ************************************************************");
