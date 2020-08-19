@@ -17,7 +17,7 @@ public class Duke {
 
     public static void markDone(String inputMsg) throws DukeException {
         int taskNumber = Integer.valueOf(inputMsg.split(" ")[1]); // gets the done task number
-        if (userInputs.size() < taskNumber) {
+        if (userInputs.size() < taskNumber || taskNumber <= 0) {
             throw new DukeException("There is no such task number!");
         } else {
             Task currTask = userInputs.get(taskNumber - 1);
@@ -27,6 +27,20 @@ public class Duke {
                 currTask.markAsComplete();
                 System.out.println("Nice! I've marked this task as done:\n" + currTask.toString());
             }
+        }
+    }
+
+    public static void deleteFromList(String inputMsg) throws DukeException {
+        int taskNumber = Integer.valueOf(inputMsg.split(" ")[1]); // gets the deleted task number
+        if (userInputs.size() < taskNumber || taskNumber <= 0) {
+            throw new DukeException("There is no such task number!");
+        } else {
+            Task currTask = userInputs.get(taskNumber - 1);
+            userInputs.remove(taskNumber - 1);
+            String output = "Noted. I've removed this task:\n"
+                    + currTask.toString()
+                    + "\nNow you have " + userInputs.size() + " tasks in the list.";
+            System.out.println(output);
         }
     }
 
@@ -80,6 +94,12 @@ public class Duke {
             } else if (actionType.equals("done")) { // mark task as done
                 try {
                     markDone(inputMsg);
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
+            } else if (actionType.equals("delete")) {
+                try {
+                    deleteFromList(inputMsg);
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
