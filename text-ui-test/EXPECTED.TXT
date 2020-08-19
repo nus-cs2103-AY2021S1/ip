@@ -12,7 +12,7 @@
 
 	____________________________________________________________
 	 Got it. I've added this task:
-	 [T][o] read book
+	 [T][✘] read book
 	 Now you have 1 tasks in the list.
 	____________________________________________________________
 
@@ -22,19 +22,19 @@
 
 	____________________________________________________________
 	 Got it. I've added this task:
-	 [D][o] return book (by: Friday 9pm)
+	 [D][✘] return book (by: Friday 9pm)
 	 Now you have 2 tasks in the list.
 	____________________________________________________________
 
 	____________________________________________________________
 	 Here are the tasks in your list:
-	 1.[T][o] read book
-	 2.[D][o] return book (by: Friday 9pm)
+	 1.[T][✘] read book
+	 2.[D][✘] return book (by: Friday 9pm)
 	____________________________________________________________
 
 	____________________________________________________________
 	 Nice! I've marked this task as done:
-	   [D][x] return book (by: Friday 9pm)
+	   [D][✓] return book (by: Friday 9pm)
 	____________________________________________________________
 
 	____________________________________________________________
@@ -43,27 +43,27 @@
 
 	____________________________________________________________
 	 Got it. I've added this task:
-	 [E][o] book visiting (at: June 13th 3-4am)
+	 [E][✘] book visiting (at: June 13th 3-4am)
 	 Now you have 3 tasks in the list.
 	____________________________________________________________
 
 	____________________________________________________________
 	 Got it. I've added this task:
-	 [T][o] go to bed
+	 [T][✘] go to bed
 	 Now you have 4 tasks in the list.
 	____________________________________________________________
 
 	____________________________________________________________
 	 Nice! I've marked this task as done:
-	   [E][x] book visiting (at: June 13th 3-4am)
+	   [E][✓] book visiting (at: June 13th 3-4am)
 	____________________________________________________________
 
 	____________________________________________________________
 	 Here are the tasks in your list:
-	 1.[T][o] read book
-	 2.[D][x] return book (by: Friday 9pm)
-	 3.[E][x] book visiting (at: June 13th 3-4am)
-	 4.[T][o] go to bed
+	 1.[T][✘] read book
+	 2.[D][✓] return book (by: Friday 9pm)
+	 3.[E][✓] book visiting (at: June 13th 3-4am)
+	 4.[T][✘] go to bed
 	____________________________________________________________
 
 	____________________________________________________________

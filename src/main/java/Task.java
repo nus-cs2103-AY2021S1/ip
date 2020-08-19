@@ -8,7 +8,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "x" : "o"); //return x or o symbols
+        return (isDone ? "\u2713" : "\u2718"); //return x or o symbols
     }
 
     public void markAsDone() {
