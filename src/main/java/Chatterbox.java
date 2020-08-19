@@ -3,8 +3,26 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Chatterbox {
+
+    private static class Task {
+        private final String contents;
+        private boolean done = false;
+
+        public Task(String contents) {
+            this.contents = contents;
+        }
+
+        public void markDone() {
+            done = true;
+        }
+
+        public String toString() {
+            return (done ? "[✓]" : "[✗]") + " " + contents;
+        }
+    }
+
     private static final String SEPARATOR = "++++++++++++++++++++++++++++++++++++++++++++++++++++++";
-    private static final List<String> ITEMS = new ArrayList<>();
+    private static final List<Task> ITEMS = new ArrayList<>();
 
     private static String format(String s) {
         return SEPARATOR + "\n" + s + "\n" + SEPARATOR;
@@ -25,10 +43,19 @@ public class Chatterbox {
                     }
                     System.out.println(format(fullList.toString()));
                 } else {
-                    System.out.println(format("Your list is currently empty"));
+                    System.out.println(format("Your list is currently empty."));
+                }
+            } else if (input.split(" ")[0].equals("done")) {
+                int taskNo = Integer.parseInt(input.split(" ")[1]) - 1;
+                if (taskNo < 0 || taskNo >= ITEMS.size()) {
+                    System.out.println(format("Invalid task number."));
+                } else {
+                    Task t = ITEMS.get(taskNo);
+                    t.markDone();
+                    System.out.println(format("Nice! I've marked this task as done: \n" + t));
                 }
             } else {
-                ITEMS.add(input);
+                ITEMS.add(new Task(input));
                 System.out.println(format("added: " + input));
             }
             input = s.nextLine();
