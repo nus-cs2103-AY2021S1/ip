@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class InputHandler {
@@ -80,16 +79,26 @@ public class InputHandler {
 
     private void handleOthers(String in, String cmdWord) {
         String taskDetails = in.replaceFirst(cmdWord, "").trim();
-        Optional<Task> task = Task.createTask(cmdWord, taskDetails);
-        task.ifPresentOrElse(
-            (Task t) -> {
-                taskList.add(t);
-                handleTaskCreated(t);
-            },
-            () -> {
+        switch (cmdWord) {
+            case "deadline":
+                addNewTask(TaskType.Deadline, taskDetails);
+                break;
+            case "event":
+                addNewTask(TaskType.Event, taskDetails);
+                break;
+            case "todo":
+                addNewTask(TaskType.Todo, taskDetails);
+                break;
+            default:
                 handleEcho(in);
-            }
-        );
+        }
+    }
+
+    private void addNewTask(TaskType type, String taskDetails) {
+        Task task = Task.createTask(type, taskDetails);
+        taskList.add(task);
+        handleTaskCreated(task);
+
     }
 
     private void handleTaskCreated(Task task) {
