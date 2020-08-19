@@ -2,7 +2,6 @@ public class Task {
 
     private boolean completed;
     private String name;
-    public String line = "____________________________________________________________";
 
     public Task(String name) {
         this.name = name;

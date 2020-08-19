@@ -34,7 +34,7 @@ public class Chatbot {
         System.out.println(line);
     }
 
-    public boolean chat(String s) {
+    public boolean chat(String s) throws IncorrectInputException {
 
         if (s.equals("bye")) {
             exit();
@@ -60,25 +60,46 @@ public class Chatbot {
             return true;
         }
 
-        if (s.contains("/by")) {
-            String[] value = s.split("(?<=/by) ");
-            Deadline deadline = new Deadline(value[0].replace(" /by", ""), value[1]);
-            list.add(deadline);
-            addTask(deadline);
-            return true;
-        }
+        try {
+            if (s.startsWith("deadline")) {
+                if (s.length() != "deadline".length()) {
+                    String[] value = s.split("(?<=/by) ");
+                    Deadline deadline = new Deadline(value[0].replace(" /by", ""), value[1]);
+                    list.add(deadline);
+                    addTask(deadline);
+                    return true;
+                } else {
+                    throw new IncorrectInputException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                }
+            }
 
-        if (s.contains("/at")) {
-            String[] value = s.split("(?<=/at) ");
-            Event event = new Event(value[0].replace(" /at", ""), value[1]);
-            list.add(event);
-            addTask(event);
-            return true;
-        }
+            if (s.startsWith("event")) {
+                if (s.length() != "event".length()) {
+                    String[] value = s.split("(?<=/at) ");
+                    Event event = new Event(value[0].replace(" /at", ""), value[1]);
+                    list.add(event);
+                    addTask(event);
+                    return true;
+                } else {
+                    throw new IncorrectInputException("☹ OOPS!!! The description of an event cannot be empty.");
+                }
+            }
 
-        list.add(new ToDo(s));
-        addTask(new ToDo(s));
-        return true;
+            if (s.startsWith("todo")) {
+                if (s.length() != "todo".length()) {
+                    list.add(new ToDo(s));
+                    addTask(new ToDo(s));
+                    return true;
+                } else {
+                    throw new IncorrectInputException("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
+            }
+
+            throw new IncorrectInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 
     public void exit() {
