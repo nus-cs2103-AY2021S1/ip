@@ -1,6 +1,6 @@
 public class Task {
-    private static final String tick = "[✓]";
-    private static final String cross = "[✗]";
+    private static final String tick = "\u2713";
+    private static final String cross = "\u2718";
     private String description;
     private boolean isDone = false;
 
@@ -14,6 +14,10 @@ public class Task {
 
     public String toString() {
         String status = isDone ? tick : cross;
-        return status + " " + description;
+        return boxFormat(status) + " " + description;
+    }
+
+    private String boxFormat(String symbol) {
+        return String.format("[%s]", symbol);
     }
 }
