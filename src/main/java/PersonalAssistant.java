@@ -4,12 +4,14 @@ import java.util.Scanner;
 
 public class PersonalAssistant {
     private ArrayList<Task> store;
+    private Scanner reader;
 
     /**
      * Initialize personal assistant with a store for user input
      */
     public PersonalAssistant() {
         store = new ArrayList<>();
+        reader = new Scanner(System.in);
     }
 
     public void run() {
@@ -21,7 +23,6 @@ public class PersonalAssistant {
      * Gets user input from STDIN, executes it
      */
     public void getUserCommands() {
-        Scanner reader = new Scanner(System.in);
         System.out.println("\nEnter your command or \"bye\" to exit: ");
 
         // Tokenize the input
