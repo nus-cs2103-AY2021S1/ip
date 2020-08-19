@@ -1,6 +1,7 @@
 @ECHO OFF
 
 SET MY_PATH=C:\Users\Rui Ling\Desktop\uni y2s1\cs2103t\ip
+SET JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 
 REM create bin directory if it doesn't exist
 if not exist "%MY_PATH%\bin" mkdir "%MY_PATH%\bin"
