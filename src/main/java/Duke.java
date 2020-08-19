@@ -10,7 +10,7 @@ public class Duke {
 
     public static void echo() {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<>();
         while (scanner.hasNextLine()) {
             String line =scanner.nextLine();
             if (line.equals("bye")) {
@@ -18,13 +18,22 @@ public class Duke {
                 break;
             } else if (line.equals("list")) {
                 int count = 1;
-                for (String item: list) {
-                    System.out.println(count + ". " + item);
+                for (Task task : list) {
+                    System.out.println(count + "." + task.toString());
                     count++;
                 }
             } else {
-                list.add(line);
-                System.out.println("added: " + line);
+                String[] words = line.split("\\s+");
+                if (words[0].equals("done") && words.length > 1) {
+                    int index = Integer.parseInt(words[1]) - 1;
+                    list.get(index).done();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(list.get(index).toString());
+                } else {
+                    Task task = new Task(line);
+                    list.add(task);
+                    System.out.println("added: " + line);
+                }
             }
         }
     }
