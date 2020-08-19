@@ -3,6 +3,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    public static boolean isNumeric(String str){
+        for (int i = str.length(); --i >= 0;) {
+            if (!Character.isDigit(str.charAt(i))) {
+                return false;
+            }
+        } return true;
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -33,56 +41,76 @@ public class Duke {
                 } else {
                     String[] commands = command.split(" ", 2);
                     //command = done
-                    if (commands[0].equals("done")) {
-                        int index = Integer.parseInt(commands[1]) - 1;
-                        taskList.get(index).markAsDone();
-                        System.out.println(line
-                                + " Nice! I've marked this task as done: "
-                                + "\n   " + taskList.get(index) + "\n"
-                                + line);
-                    } else if (commands[0].equals("todo")
-                            || commands[0].equals("deadline")
-                            || commands[0].equals("event")) { //add tasks
-                        Task task = null;
-                        //toDos
-                        if (commands[0].equals("todo")) {
-                            if(commands[1].isBlank()) {
-                                throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
+                    switch (commands[0]) {
+                        case "done": {
+                            if (!isNumeric(commands[1])) {
+                                throw new DukeException(" ☹ OOPS!!! The usage of done command is incorrect.");
                             }
-                            task = new Todo(commands[1]);
+                            int index = Integer.parseInt(commands[1]) - 1;
+                            taskList.get(index).markAsDone();
+                            System.out.println(line
+                                    + " Nice! I've marked this task as done: "
+                                    + "\n   " + taskList.get(index) + "\n"
+                                    + line);
+                            break;
                         }
-                        //deadline
-                        if (commands[0].equals("deadline")) {
-                            String key = " /by ";
-                            if(commands[1].isBlank()) {
-                                throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+                        case "delete": {
+                            if (!isNumeric(commands[1])) {
+                                throw new DukeException(" ☹ OOPS!!! The usage of delete command is incorrect.");
                             }
-                            if(commands[1].indexOf(key) == -1) {
-                                throw new DukeException(" ☹ OOPS!!! The description of a deadline must include /by keywords");
-                            }
-                            String[] arguments = commands[1].split(key);
-                            task = new Deadline(arguments[0], arguments[1]);
+                            int index = Integer.parseInt(commands[1]) - 1;
+                            System.out.println(line
+                                    + " Noted. I've removed this task: "
+                                    + "\n   " + taskList.get(index)
+                                    + "\n Now you have " + (taskList.size() - 1) + " tasks in the list.\n"
+                                    + line);
+                            taskList.remove(index);
+                            break;
                         }
-                        //event
-                        if (commands[0].equals("event")) {
-                            String key = " /at ";
-                            if(commands[1].isBlank()) {
-                                throw new DukeException(" ☹ OOPS!!! The description of a event cannot be empty.");
+                        case "todo":
+                        case "deadline":
+                        case "event":  //add tasks
+                            Task task = null;
+                            //toDos
+                            if (commands[0].equals("todo")) {
+                                if (commands.length < 2 || commands[1].isBlank()) {
+                                    throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
+                                }
+                                task = new Todo(commands[1]);
                             }
-                            if(commands[1].indexOf(key) == -1) {
-                                throw new DukeException(" ☹ OOPS!!! The description of a event must include /at keywords");
+                            //deadline
+                            if (commands[0].equals("deadline")) {
+                                String key = " /by ";
+                                if (commands[1].isBlank()) {
+                                    throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+                                }
+                                if (!commands[1].contains(key)) {
+                                    throw new DukeException(" ☹ OOPS!!! The description of a deadline must include /by keywords");
+                                }
+                                String[] arguments = commands[1].split(key);
+                                task = new Deadline(arguments[0], arguments[1]);
                             }
-                            String[] arguments = commands[1].split(key);
-                            task = new Event(arguments[0], arguments[1]);
-                        }
-                        System.out.println(line
-                                + " Got it. I've added this task: ");
-                        taskList.add(task);
-                        System.out.println("   " + task
-                                + "\n Now you have " + taskList.size() + " tasks in the list.\n"
-                                + line);
-                    } else { //meaningless command
-                        throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                            //event
+                            if (commands[0].equals("event")) {
+                                String key = " /at ";
+                                if (commands[1].isBlank()) {
+                                    throw new DukeException(" ☹ OOPS!!! The description of a event cannot be empty.");
+                                }
+                                if (!commands[1].contains(key)) {
+                                    throw new DukeException(" ☹ OOPS!!! The description of a event must include /at keywords");
+                                }
+                                String[] arguments = commands[1].split(key);
+                                task = new Event(arguments[0], arguments[1]);
+                            }
+                            System.out.println(line
+                                    + " Got it. I've added this task: ");
+                            taskList.add(task);
+                            System.out.println("   " + task
+                                    + "\n Now you have " + taskList.size() + " tasks in the list.\n"
+                                    + line);
+                            break;
+                        default:  //meaningless command
+                            throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 }
             } catch (DukeException e) {
@@ -93,6 +121,6 @@ public class Duke {
             command = sc.nextLine();
         }
 
-        System.out.println(line + "Bye. Hope to see you again soon!\n" + line);
+        System.out.println(line + " Bye. Hope to see you again soon!\n" + line);
     }
 }
