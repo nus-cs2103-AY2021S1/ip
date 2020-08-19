@@ -59,7 +59,7 @@ public class Duke {
                     try {
                         int index = Integer.parseInt(words[1]);
                         taskManager.doTask(index);
-                        String returnMessage = "Nice! I've marked this task as done: \n";
+                        String returnMessage = "Nice! I've marked this task as done:\n";
                         returnMessage += taskManager.getTaskStatus(index);
                         echo(returnMessage);
                     } catch (NumberFormatException err){
@@ -92,7 +92,7 @@ public class Duke {
                         Task addedToDo = taskManager.addToDo(words[1]);
                         echoNewTask(addedToDo, taskManager.getTotalTask());
                     } catch (IndexOutOfBoundsException err) {
-                        echo("Error: The description for Event can't be empty");
+                        echo("Error: The description for ToDo can't be empty");
                     }
                     break;
                 default:

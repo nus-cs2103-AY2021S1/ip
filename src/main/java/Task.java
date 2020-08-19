@@ -18,7 +18,8 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        String icon = isDone ? "\u2713" : "\u2718";
+        //String icon = isDone ? "\u2713" : "\u2718";
+        String icon = isDone ? "X" : " ";
         return "[" + icon + "] " + name;
     }
 }
