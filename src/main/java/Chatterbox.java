@@ -3,24 +3,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Chatterbox {
-
-    private static class Task {
-        private final String contents;
-        private boolean done = false;
-
-        public Task(String contents) {
-            this.contents = contents;
-        }
-
-        public void markDone() {
-            done = true;
-        }
-
-        public String toString() {
-            return (done ? "[✓]" : "[✗]") + " " + contents;
-        }
-    }
-
     private static final String SEPARATOR = "++++++++++++++++++++++++++++++++++++++++++++++++++++++";
     private static final List<Task> ITEMS = new ArrayList<>();
 
@@ -35,6 +17,7 @@ public class Chatterbox {
         String input = s.nextLine();
 
         while (!input.equals("bye")) {
+            String command = input.split(" ")[0];
             if (input.equals("list")) {
                 if (ITEMS.size() != 0) {
                     StringBuilder fullList = new StringBuilder("\n");
@@ -45,7 +28,7 @@ public class Chatterbox {
                 } else {
                     System.out.println(format("Your list is currently empty."));
                 }
-            } else if (input.split(" ")[0].equals("done")) {
+            } else if (command.equals("done")) {
                 int taskNo = Integer.parseInt(input.split(" ")[1]) - 1;
                 if (taskNo < 0 || taskNo >= ITEMS.size()) {
                     System.out.println(format("Invalid task number."));
@@ -54,9 +37,24 @@ public class Chatterbox {
                     t.markDone();
                     System.out.println(format("Nice! I've marked this task as done: \n" + t));
                 }
+            } else if (command.equals("deadline") || command.equals("todo") || command.equals("event")) {
+                String contents = input.substring(input.indexOf(' '));
+                switch (command) {
+                    case "deadline":
+                        ITEMS.add(new Deadline(contents));
+                        break;
+                    case "todo":
+                        ITEMS.add(new ToDo(contents));
+                        break;
+                    case "event":
+                        ITEMS.add(new Event(contents));
+                        break;
+                }
+                System.out.println(format("Got it. I've added this task: \n"
+                        + ITEMS.get(ITEMS.size() - 1) + "\n"
+                        + "Now you have " + ITEMS.size() + " tasks in the list"));
             } else {
-                ITEMS.add(new Task(input));
-                System.out.println(format("added: " + input));
+                System.out.println(format("Invalid command."));
             }
             input = s.nextLine();
         }
