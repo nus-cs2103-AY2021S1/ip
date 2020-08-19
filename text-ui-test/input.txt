@@ -1,3 +1,2 @@
-deadline join meeting /by 6pm
-todo read book
+
 
