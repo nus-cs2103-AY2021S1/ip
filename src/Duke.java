@@ -3,7 +3,8 @@ import java.util.ArrayList;
 
 public class Duke {
     public static String horizontal = "________________________" + "\n";
-    public static ArrayList<String> list = new ArrayList<>();
+    public static ArrayList<Task> list = new ArrayList<>();
+    public static int counter = 1;
 
     public static void action() {
         Scanner sc = new Scanner(System.in);
@@ -14,15 +15,21 @@ public class Duke {
                 System.out.println(horizontal + bye + horizontal);
                 break;
             } else if (input.equals("list")) {
-                System.out.println(horizontal);
-                int counter = 1;
-                for (String str: list) {
-                    System.out.println(counter + ". " + str);
-                    counter++;
+                System.out.println(horizontal + "Here are the tasks in your list:" + "\n");
+                for (Task task : list) {
+                    System.out.println(task.toString());
                 }
                 System.out.println(horizontal);
+            } else if (input.startsWith("done")) {
+                String[] number = input.split("done ");
+                int num = Integer.parseInt(number[1]);
+                Task task = list.get(num - 1);
+                task.markAsDone();
+                System.out.println(horizontal + "Nice! I've marked this task as done:" + "\n" +
+                        task.toString() + "\n" + horizontal);
             } else {
-                list.add(input);
+                list.add(new Task(input, counter));
+                counter++;
                 System.out.println(horizontal + "added: " + input + "\n" + horizontal);
             }
         }
@@ -32,6 +39,7 @@ public class Duke {
         String hello = "Hello! I'm Duke" + "\n" + "What can I do for you?" + "\n";
         System.out.println(horizontal + hello + horizontal);
     }
+
 
     public static void main(String[] args) {
         greet();
@@ -45,3 +53,4 @@ public class Duke {
         //System.out.println("Hello from\n" + logo);
     }
 }
+
