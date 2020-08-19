@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class Duke {
                 "    ____________________________________________________________";
         System.out.println(greeting);
 
-        List<Task> taskList = new ArrayList<Task>();
+        List<Task> taskList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
@@ -40,18 +41,11 @@ public class Duke {
     private static void respondToInput(String input, List<Task> taskList) throws DukeException {
         String[] inputList = input.split(" ");
         String command = inputList[0];
-        List<String> validTasks = new ArrayList<String>() {
-            {
-                add("todo");
-                add("deadline");
-                add("event");
-            }
-        };
 
-        if (input.equals("list")) {
+        if (input.equalsIgnoreCase(Command.LIST.name())) {
             printTaskList(taskList);
         }
-        else if (command.equals("done")) {
+        else if (command.equalsIgnoreCase(Command.DONE.name())) {
             int index = checkDoneDeleteException(inputList, taskList);
 
             taskList.get(index).setDone();
@@ -59,7 +53,7 @@ public class Duke {
             System.out.println("      " + taskList.get(index));
 
         }
-        else if (command.equals("delete"))
+        else if (command.equalsIgnoreCase(Command.DELETE.name()))
         {
             int index = checkDoneDeleteException(inputList, taskList);
 
@@ -67,20 +61,23 @@ public class Duke {
             System.out.println("      " + taskList.remove(index));
         }
 
-        else if (validTasks.contains(command)){
+        else if (command.equalsIgnoreCase(Command.DEADLINE.name()) ||
+            command.equalsIgnoreCase(Command.EVENT.name()) ||
+            command.equalsIgnoreCase(Command.TODO.name())) {
+
             if (inputList.length < 2) {
                 throw new DukeException(String.format("☹ BLEHHHHHH!!! The description of a %s cannot be empty.", command));
             }
 
-            if (command.equals("todo")) {
+            if (command.equalsIgnoreCase(Command.TODO.name())) {
                 String pattern = "(todo )(.+)";
                 taskList.add(new ToDoTask(input.replaceAll(pattern, "$2")));
                 printAddTaskListStatus(taskList);
-            } else if (command.equals("deadline")) {
+            } else if (command.equalsIgnoreCase(Command.DEADLINE.name())) {
                 String pattern = "(deadline )(.+)";
                 taskList.add(new DeadlineTask(input.replaceAll(pattern, "$2")));
                 printAddTaskListStatus(taskList);
-            } else if (command.equals("event")) {
+            } else if (command.equalsIgnoreCase(Command.EVENT.name())) {
                 String pattern = "(event )(.+)";
                 taskList.add(new EventTask(input.replaceAll(pattern, "$2")));
                 printAddTaskListStatus(taskList);
