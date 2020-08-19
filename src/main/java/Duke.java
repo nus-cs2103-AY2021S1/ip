@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,7 +12,7 @@ public class Duke {
             + "What can I do for you?";
     private final static String goodbye = "Bye. Hope to see you again soon!";
     //----- level 3 here -----
-    private static Task[] list = new Task[100];
+    private static ArrayList<Task> list = new ArrayList<>();
     private static int count = 0;
     private final static String done = "Nice! I've marked this task as done:";
     //----- level 4 here -----
@@ -33,12 +34,26 @@ public class Duke {
                         throw new MissingDoneArgumentException();
                     }
                     int index = Integer.parseInt(userInput.substring(5)) - 1;
-                    if (index >= Duke.count || index <= 0) {
+                    if (index >= Duke.count || index < 0) {
                         throw new DoneOutOfRangeException();
                     }
-                    list[index].markAsDone();
+                    Duke.list.get(index).markAsDone();
                     System.out.println(Duke.done);
-                    System.out.println("  " + list[index]);
+                    System.out.println("  " + Duke.list.get(index));
+                } else if (userInput.length() >= 6 && userInput.substring(0, 6).equals("delete")) {
+                    if (userInput.length() <= 7) {
+                        throw new MissingDeleteArgumentException();
+                    }
+                    int index = Integer.parseInt(userInput.substring(7)) - 1;
+                    if (index >= Duke.count || index < 0) {
+                        throw new DeleteOutOfRangeException();
+                    }
+                    Task toDelete = Duke.list.get(index);
+                    Duke.list.remove(index);
+                    Duke.count--;
+                    System.out.println();
+                    System.out.println("  " + toDelete);
+                    System.out.println("Now you have " + Duke.count + (Duke.count==1?" task ":" tasks ") + "in the list.");
                 } else if (userInput.length() >= 4 && userInput.substring(0, 4).equals("todo")) {
                     if (userInput.length() == 4) {
                         throw new EmptyTodoException();
@@ -48,7 +63,8 @@ public class Duke {
                         throw new EmptyTodoException();
                     }
                     ToDo taskToAdd = new ToDo(description);
-                    Duke.list[Duke.count++] = taskToAdd;
+                    Duke.count++;
+                    Duke.list.add(taskToAdd);
                     System.out.println(add);
                     System.out.println("  " + taskToAdd);
                     System.out.println("Now you have " + Duke.count + (Duke.count==1?" task ":" tasks ") + "in the list.");
@@ -69,7 +85,8 @@ public class Duke {
                         throw new MissingDeadlineDateException();
                     }
                     Deadline taskToAdd = new Deadline(description, date);
-                    Duke.list[Duke.count++] = taskToAdd;
+                    Duke.count++;
+                    Duke.list.add(taskToAdd);
                     System.out.println(add);
                     System.out.println("  " + taskToAdd);
                     System.out.println("Now you have " + Duke.count + (Duke.count==1?" task ":" tasks ") + "in the list.");
@@ -90,13 +107,14 @@ public class Duke {
                         throw new MissingEventDateException();
                     }
                     Event taskToAdd = new Event(description, date);
-                    Duke.list[Duke.count++] = taskToAdd;
+                    Duke.count++;
+                    Duke.list.add(taskToAdd);
                     System.out.println(add);
                     System.out.println("  " + taskToAdd);
                     System.out.println("Now you have " + Duke.count + (Duke.count==1?" task ":" tasks ") + "in the list.");
                 } else if (userInput.equals("list")) {
                     for (int i = 0; i < Duke.count; i++) {
-                        System.out.println(i+1 + ". " + list[i]);
+                        System.out.println(i+1 + ". " + list.get(i));
                     }
                 } else {
                     throw new UnknownCommandException();
@@ -116,6 +134,10 @@ public class Duke {
             } catch (EmptyTodoException e) {
                 System.out.println(e);
             } catch (DoneOutOfRangeException e) {
+                System.out.println(e);
+            } catch (MissingDeleteArgumentException e) {
+                System.out.println(e);
+            } catch (DeleteOutOfRangeException e) {
                 System.out.println(e);
             }
 
