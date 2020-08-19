@@ -42,13 +42,16 @@ public class InputHandler {
             handleDone(Integer.parseInt(input[1]));
             break;
         default:
-            handleOthers(in, cmdWord);
+            try {
+                handleOthers(in, cmdWord);
+            } catch (DukeException e) {
+                System.out.println(
+                    DIVIDER + "\n" +
+                    e.getMessage() + "\n" +
+                    DIVIDER
+                );
+            }
         }
-    }
-
-    private void handleEcho(String str) {
-        String msg = DIVIDER + "\n" + str + "\n" + DIVIDER;
-        System.out.println(msg);
     }
 
     private void handleList() {
@@ -77,28 +80,28 @@ public class InputHandler {
         );
     }
 
-    private void handleOthers(String in, String cmdWord) {
+    private void handleOthers(String in, String cmdWord) throws DukeException {
         String taskDetails = in.replaceFirst(cmdWord, "").trim();
         switch (cmdWord) {
-            case "deadline":
-                addNewTask(TaskType.Deadline, taskDetails);
-                break;
-            case "event":
-                addNewTask(TaskType.Event, taskDetails);
-                break;
-            case "todo":
-                addNewTask(TaskType.Todo, taskDetails);
-                break;
-            default:
-                handleEcho(in);
+        case "deadline":
+            addNewTask(TaskType.Deadline, taskDetails);
+            break;
+        case "event":
+            addNewTask(TaskType.Event, taskDetails);
+            break;
+        case "todo":
+            addNewTask(TaskType.Todo, taskDetails);
+            break;
+        default:
+            String errMsg = "I'm sorry, but I don't know what that means :-(";
+            throw new InvalidCommandException(errMsg);
         }
     }
 
-    private void addNewTask(TaskType type, String taskDetails) {
+    private void addNewTask(TaskType type, String taskDetails) throws InvalidTaskException {
         Task task = Task.createTask(type, taskDetails);
         taskList.add(task);
         handleTaskCreated(task);
-
     }
 
     private void handleTaskCreated(Task task) {

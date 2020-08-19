@@ -3,8 +3,11 @@ public class Todo extends Task {
         super(desc);
     }
 
-    protected static Todo createTodo(String desc) {
-        return new Todo(desc);
+    protected static Todo createTodo(String details) throws InvalidTodoException {
+        if (details.equals("")) {
+            throw new InvalidTodoException();
+        }
+        return new Todo(details);
     }
 
     @Override

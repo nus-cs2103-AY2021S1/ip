@@ -6,8 +6,11 @@ public class Event extends Task {
         this.at = at;
     }
 
-    protected static Event createEvent(String details) {
+    protected static Event createEvent(String details) throws InvalidEventException {
         String[] info = details.split("/");
+        if (info.length == 1) {
+            throw new InvalidEventException();
+        }
         String desc = info[0];
         String at = info[1].replaceFirst("at ", "");
         return new Event(desc, at);
