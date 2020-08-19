@@ -54,6 +54,8 @@ public class Duke {
                 addEvent(str);
             } else if(keyWord.equals("done")) {
                 addCompleteTask(str);
+            } else if(keyWord.equals("delete")) {
+                addDeleteTask(str);
             } else {
                 try {
                     throw new DukeException("☹ OOPS!!! wait..... I don't understand you order my sir.");
@@ -64,7 +66,25 @@ public class Duke {
         }
         byeMessage();
     }
+    public void addDeleteTask(String str) {
+        try {
+            if (str.trim().length() == 6) {
+                throw new DukeException("☹ OOPS!!! Check delete formatting, include which task to delete.");
+            } else if (Character.getNumericValue(str.charAt(7)) > list.size()) {
+                throw new DukeException("☹ OOPS!!! Task not in the list");
+            }
+            int index = Character.getNumericValue(str.charAt(7));
+            deleteTask(index);
+        } catch (DukeException e) {
+            this.saySomthing(e.getMessage());
+        }
+    }
 
+    public void deleteTask(int index) {
+        Task toRemove = list.get(index-1);
+        list.remove(index-1);
+        saySomthing("Noted. I've removed this task: \n" + toRemove.toString() + "\n" + String.format("Now you have %d tasks in the list.", list.size()));
+    }
     public void addDeadline(String str) {
         try {
             if (str.trim().length() == 8) {
