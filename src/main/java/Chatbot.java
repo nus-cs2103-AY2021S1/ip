@@ -1,24 +1,30 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Chatbot {
-    private Task[] tasksList;
+    private ArrayList<Task> tasksList;
     private int totalTasks;
     private Scanner scanner;
 
     public Chatbot(Scanner scanner) {
-        this.tasksList = new Task[100];
+        this.tasksList = new ArrayList<>();
         this.totalTasks = 0;
         this.scanner = scanner;
     }
 
     private void add(Task task) {
-        tasksList[totalTasks] = task;
+        tasksList.add(task);
         totalTasks++;
     }
 
+    private void delete(int taskNumber) {
+        tasksList.remove(taskNumber - 1);
+        totalTasks--;
+    }
+
     private void listTasks() {
-        for (int i = 1; tasksList[i - 1] != null; i++) {
-            System.out.println(i + "." + tasksList[i - 1]);
+        for (int i = 1; i <= totalTasks; i++) {
+            System.out.println(i + "." + tasksList.get(i - 1));
         }
     }
 
@@ -32,12 +38,21 @@ public class Chatbot {
                     Scanner s2 = new Scanner(line);
                     s2.skip("done");
                     int taskNumber = s2.nextInt();
-                    tasksList[taskNumber - 1].markAsDone();
+                    tasksList.get(taskNumber - 1).markAsDone();
                     System.out.println("Nice! I've marked this task as done:\n" +
-                            tasksList[taskNumber - 1]);
+                            tasksList.get(taskNumber - 1));
                 } else if (line.equals("list")) {
                     System.out.println("Here are the tasks in your list:");
                     this.listTasks();
+                } else if (line.contains("delete")) {
+                    Scanner s2 = new Scanner(line);
+                    s2.skip("delete");
+                    int taskNumber = s2.nextInt();
+                    Task taskToDelete = tasksList.get(taskNumber - 1);
+                    this.delete(taskNumber);
+                    System.out.println("Noted. I've removed this task:\n" +
+                            taskToDelete +
+                            "\nNow you have " + this.totalTasks + " tasks in the list.");
                 } else {
                     Task currTask;
                     if (line.contains("todo")) {
