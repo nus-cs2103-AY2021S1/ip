@@ -10,4 +10,8 @@ deadline
 event
 deadline 321
 event 123
+delete
+delete 2
+list
+delete a
 bye

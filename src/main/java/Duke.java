@@ -14,6 +14,7 @@ public class Duke {
     private final static String TASK_TODO = "todo";
     private final static String TASK_DEADLINE = "deadline";
     private final static String TASK_EVENT = "event";
+    private final static String DELETE_EVENT = "delete";
     private final static String DEADLINE_DATE = "/by";
     private final static String EVENT_DATE = "/at";
     private static ArrayList<Task> userInputsList = new ArrayList<>();
@@ -44,8 +45,19 @@ public class Duke {
                     break;
                 case TASK_COMPLETED:
                     try {
-                        int positionDone = sc.nextInt() - 1;
-                        if (positionDone < userInputsList.size()) {
+                        userInput = sc.nextLine();
+                        int positionDone = -1;
+                        if (!userInput.isEmpty()) {
+                            try {
+                                positionDone = Integer.parseInt(userInput.substring(1));
+                            } catch (NumberFormatException e) {
+                                System.out.println("☹ OOPS !!! Incapaz de completar");
+                            }
+                        } else {
+                            throw new DukeExceptions("☹ OOPS !!! Incapaz de completar");
+                        }
+                        positionDone = positionDone - 1;
+                        if (positionDone < userInputsList.size() && positionDone > 0) {
                             System.out.println("Agradable! He marcado esta tarea como hecha:");
                             userInputsList.get(positionDone).completeTask();
                             System.out.println(userInputsList.get(positionDone));
@@ -121,6 +133,32 @@ public class Duke {
                                 newEvent +
                                 "\nAhora tienes " + userInputsList.size() + " tareas en la lista. ");
                     } catch(DukeExceptions e) {
+                        System.out.println(e);
+                    }
+                    break;
+                case DELETE_EVENT:
+                    try {
+                        userInput = sc.nextLine();
+                        int positionDone = -1;
+                        if (!userInput.isEmpty()) {
+                            try {
+                                positionDone = Integer.parseInt(userInput.substring(1));
+                            } catch (NumberFormatException e) {
+                                System.out.println("☹ OOPS !!! No se puede borrar");
+                            }
+                        } else {
+                            throw new DukeExceptions("☹ OOPS !!! No se puede borrar");
+                        }
+                        positionDone = positionDone - 1;
+                        if (positionDone < userInputsList.size() && positionDone > 0) {
+                            System.out.println("Célebre. He eliminado esta tarea:");
+                            System.out.println(userInputsList.get(positionDone));
+                            userInputsList.remove(positionDone);
+                            System.out.println("Ahora tienes " + userInputsList.size() + " tareas en la lista. ");
+                        } else {
+                            throw new DukeExceptions("☹ OOPS !!! ¡Esta tarea aún no existe!");
+                        }
+                    } catch (DukeExceptions e) {
                         System.out.println(e);
                     }
                     break;
