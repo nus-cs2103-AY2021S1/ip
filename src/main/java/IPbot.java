@@ -53,7 +53,7 @@ public class IPbot {
      */
     private static String addTasks(Task toAdd) {
         tasks.add(toAdd);
-        return "added: " + toAdd.getDescription();
+        return "added: " + toAdd;
     }
 
     /**
