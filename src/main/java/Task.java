@@ -2,9 +2,15 @@ public abstract class Task {
     protected String item;
     private boolean done;
     protected String taskType;
-    protected Task(String item){
-        this.item = item;
+    protected Task(){
+        this.item = "";
         this.done = false;
+        this.taskType = "-";
+    }
+
+    protected Task(String item){
+        this();
+        this.item = item;
     }
 
     public void setDone() {
