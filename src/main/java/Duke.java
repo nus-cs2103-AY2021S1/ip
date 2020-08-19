@@ -82,15 +82,19 @@ public class Duke {
                     description = inputSplit[0].substring(8);
                     t = new Deadline(description, by);
                     userTasks.add(t);
-                    System.out.println(servantSpeak
-                            + "    I have added the task:\n       "
-                            + t.toString() + "\n");
                     break;
                 case "todo":
                     System.out.println("ToDo");
+                    description = input.substring(4);
+                    t = new ToDo(description);
+                    userTasks.add(t);
                     break;
             }
-            // Default: Add input from user into the ArrayList
+
+            // Standard reply from Duke for adding a task
+            System.out.println(servantSpeak
+                    + "    I have added the task:\n       "
+                    + userTasks.get(userTasks.size() - 1).toString() + "\n");
 
         } while (!input.equals("bye"));
 
