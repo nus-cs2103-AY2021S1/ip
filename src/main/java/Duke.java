@@ -58,11 +58,13 @@ public class Duke {
         System.out.println(divider);
         if (taskCount == 0) {
             System.out.println(" You've got no tasks now. \n" +
-                    "If you want to get busy add more task and I'll remember them for you :)");
-        }
-        System.out.println(" Let me list out all your tasks...");
-        for (int i = 0; i < taskCount; i++) {
-            System.out.println(" " + (i + 1) + "." + tasks.get(i));
+                    " If you want to get busy add more task. \n" +
+                    " I'll remember them for you :)");
+        } else {
+            System.out.println(" Let me list out all your tasks...");
+            for (int i = 0; i < taskCount; i++) {
+                System.out.println(" " + (i + 1) + "." + tasks.get(i));
+            }
         }
         System.out.println(divider);
     }
@@ -73,29 +75,56 @@ public class Duke {
             System.out.println(" Sorry I cannot find your specified task :(");
         } else {
             System.out.println(" Congratulations for finishing this task! \n" +
-                    " Let me mark this as done for you");
+                    " Let me mark this as done for you.");
             tasks.get(index - 1).completeTask();
             System.out.println("   " + tasks.get(index - 1));
         }
         System.out.println(divider);
     }
 
+    public static void describe(int taskIndex) {
+        System.out.println(divider + "\n Your task has been recorded. \n   " +
+                tasks.get(taskIndex) + "\n You have " + taskCount +
+                " tasks currently. \n" + divider);
+    }
+
     private static void echo() {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            String currentCommand = sc.nextLine();
-            if (currentCommand.equals("bye")) {
+            String input = sc.nextLine();
+            String command = input.split("\\s+", 2)[0];
+            if (command.equals("bye")) {
                 System.out.println(goodbyeMessage);
                 break;
-            } else if (currentCommand.equals("list")) {
+            } else if (command.equals("list")) {
                 list();
-            } else if (currentCommand.length() >= 4 && currentCommand.substring(0, 4).equals("done")) {
-                int index = Integer.parseInt(currentCommand.substring(5));
+            } else if (command.equals("done")) {
+                int index = Integer.parseInt(input.substring(5));
+                System.out.println(index);
                 done(index);
-            } else {
-                tasks.add(new Task(currentCommand, false));
+            } else if (command.equals("todo")) {
+                String description = input.substring(5);
+                tasks.add(new ToDo(description, false));
                 taskCount += 1;
-                System.out.println(divider + "\n added: " + currentCommand + "\n" + divider);
+                describe(taskCount - 1);
+            } else if (command.equals("deadline")) {
+                String[] content = input.substring(9).split(" /by ");
+                String description = content[0];
+                String time = content[1];
+                tasks.add(new Deadline(description, false, time));
+                taskCount += 1;
+                describe(taskCount - 1);
+            } else if (command.equals("event")) {
+                String[] content = input.substring(6).split(" /at ");
+                String description = content[0];
+                String time = content[1];
+                tasks.add(new Event(description, false, time));
+                taskCount += 1;
+                describe(taskCount - 1);
+            } else {
+                System.out.println(divider + "\n Command not recognized :( \n" +
+                        " Terminating Hotline... \n" + divider);
+                break;
             }
         }
     }
