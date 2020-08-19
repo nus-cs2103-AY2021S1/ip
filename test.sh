@@ -2,7 +2,7 @@
 set -e
 
 javac -target 11 -source 11 src/main/java/**.java -d bin/
-java -cp bin Main < text-ui-test/input.txt | diff -bu text-ui-test/EXPECTED.TXT -
+java -cp bin Main < tests/input.txt | diff -bu tests/EXPECTED.TXT -
 
 if [ $? -ne 0 ]; then
 	echo "test failed"

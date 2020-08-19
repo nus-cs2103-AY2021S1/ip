@@ -12,4 +12,9 @@ list
 done 5
 done 4
 list
+done 10
+done -19
+done asdf
+delete 1
+done 1
 bye

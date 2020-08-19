@@ -22,7 +22,7 @@ added: [D] [✘] super important submission (by: tomorrow)
 added: [D] [✘] not so important thing (by: next year)
 --------------------------------------
 >
-tracking 7 tasks (7 pending, 0 done, 0.0% complete)
+currently tracking 7 tasks (7 pending, 0 done, 0.0% complete)
   1. [T] [✘] task one
   2. [T] [✘] task two
   3. [T] [✘] task three
@@ -34,13 +34,17 @@ tracking 7 tasks (7 pending, 0 done, 0.0% complete)
 >
 marked as done:
   [T] [✓] task one
+
+currently tracking 7 tasks (6 pending, 1 done, 14.3% complete)
 --------------------------------------
 >
 marked as done:
   [T] [✓] task two
+
+currently tracking 7 tasks (5 pending, 2 done, 28.6% complete)
 --------------------------------------
 >
-tracking 7 tasks (5 pending, 2 done, 28.6% complete)
+currently tracking 7 tasks (5 pending, 2 done, 28.6% complete)
   1. [T] [✓] task one
   2. [T] [✓] task two
   3. [T] [✘] task three
@@ -52,13 +56,17 @@ tracking 7 tasks (5 pending, 2 done, 28.6% complete)
 >
 marked as done:
   [E] [✓] event two (at: later)
+
+currently tracking 7 tasks (4 pending, 3 done, 42.9% complete)
 --------------------------------------
 >
 marked as done:
   [E] [✓] event one (at: never)
+
+currently tracking 7 tasks (3 pending, 4 done, 57.1% complete)
 --------------------------------------
 >
-tracking 7 tasks (3 pending, 4 done, 57.1% complete)
+currently tracking 7 tasks (3 pending, 4 done, 57.1% complete)
   1. [T] [✓] task one
   2. [T] [✓] task two
   3. [T] [✘] task three
@@ -66,5 +74,24 @@ tracking 7 tasks (3 pending, 4 done, 57.1% complete)
   5. [E] [✓] event two (at: later)
   6. [D] [✘] super important submission (by: tomorrow)
   7. [D] [✘] not so important thing (by: next year)
+--------------------------------------
+>
+error: task number '10' was out of bounds
+--------------------------------------
+>
+error: task number '-19' was out of bounds
+--------------------------------------
+>
+error: expected an integer task number ('asdf' invalid)
+--------------------------------------
+>
+deleted task:
+  [T] [✓] task one
+
+currently tracking 6 tasks (3 pending, 3 done, 50.0% complete)
+--------------------------------------
+>
+task 1 is already marked as done:
+  [T] [✓] task two
 --------------------------------------
 > goodbye
