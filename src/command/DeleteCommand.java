@@ -7,6 +7,7 @@ import data.DukeData;
 import function.DukeFunction;
 
 public class DeleteCommand extends Command {
+
     public DeleteCommand() {
         names = new String[] { "delete" };
     }

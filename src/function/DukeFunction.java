@@ -12,6 +12,7 @@ import exception.NoDescriptionException;
 import exception.UnknownCommandException;
 
 public class DukeFunction {
+
     public static void greet() {
         System.out.println(UIPrint.logo);
 
