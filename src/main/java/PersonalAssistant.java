@@ -88,8 +88,12 @@ public class PersonalAssistant {
              */
             case "todo": {
                 // Otherwise it is a task
-                String taskName = String.join(" ", cmdTokens);
-                Task task = new Task(false, taskName, TaskTypes.TODO);
+                StringBuilder taskName = new StringBuilder();
+                for (int i = 1; i < cmdTokens.length; i++) {
+                    String token = cmdTokens[i];
+                    taskName.append(" " + token);
+                }
+                Task task = new TodoTask(false, taskName.toString());
 
                 // Store the task
                 addTask(task);
@@ -101,8 +105,30 @@ public class PersonalAssistant {
 
             case "deadline": {
                 // Otherwise it is a task
-                String taskName = String.join(" ", cmdTokens);
-                Task task = new Task(false, taskName, TaskTypes.DEADLINE);
+                StringBuilder taskName = new StringBuilder();
+                // Collate the first segment (taskName)
+                int i = 1;
+                for (; i < cmdTokens.length; i++) {
+                    String token = cmdTokens[i];
+                    if (token == "/by") {
+                        break;
+                    }
+                    taskName.append(" " + token);
+                }
+
+                // Collate the second segment (taskTime)
+                StringBuilder taskTime = new StringBuilder();
+                for (; i < cmdTokens.length; i++) {
+                    String token = cmdTokens[i];
+                    taskTime.append(" " + token);
+                }
+
+                Task task = new DeadlineTask(
+                        false,
+                        taskName.toString(),
+                        taskTime.toString()
+                );
+
                 // Store the task
                 addTask(task);
 
@@ -113,8 +139,29 @@ public class PersonalAssistant {
 
             case "event": {
                 // Otherwise it is a task
-                String taskName = String.join(" ", cmdTokens);
-                Task task = new Task(false, taskName, TaskTypes.EVENT);
+                StringBuilder taskName = new StringBuilder();
+                // Collate the first segment (taskName)
+                int i = 1;
+                for (; i < cmdTokens.length; i++) {
+                    String token = cmdTokens[i];
+                    if (token == "/at") {
+                        break;
+                    }
+                    taskName.append(" " + token);
+                }
+
+                // Collate the second segment (taskTime)
+                StringBuilder taskTime = new StringBuilder();
+                for (; i < cmdTokens.length; i++) {
+                    String token = cmdTokens[i];
+                    taskTime.append(" " + token);
+                }
+
+                Task task = new DeadlineTask(
+                        false,
+                        taskName.toString(),
+                        taskTime.toString()
+                );
 
                 // Store the task
                 addTask(task);
