@@ -12,4 +12,6 @@ list
 done
 todo
 blah
+done 10
+delete 7
 bye

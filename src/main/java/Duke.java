@@ -38,41 +38,38 @@ public class Duke {
     }
 
     private static void respondToInput(String input, List<Task> taskList) throws DukeException {
+        String[] inputList = input.split(" ");
+        String command = inputList[0];
+        List<String> validTasks = new ArrayList<String>() {
+            {
+                add("todo");
+                add("deadline");
+                add("event");
+            }
+        };
+
         if (input.equals("list")) {
             printTaskList(taskList);
         }
-        else if (input.contains("done")) {
-            if (input.split(" ").length < 2)
-            {
-                throw new DukeException("☹ BLEHHHHHH. Tell me which task??");
-            }
-            int index = Integer.parseInt(input.split(" ")[1]) - 1;
-            if (index < 0 || index > taskList.size() - 1) {
-                throw new DukeException(String.format("BLEHHHHHH. Task no. %d does not exist. Please try again.", index));
-            }
-            else {
-                taskList.get(index).setDone();
-                System.out.println("    Finally... about time you finished that. Marked this task as done: ");
-                System.out.println("      " + taskList.get(index));
-            }
+        else if (command.equals("done")) {
+            int index = checkDoneDeleteException(inputList, taskList);
+
+            taskList.get(index).setDone();
+            System.out.println("    Finally... about time you finished that. Marked this task as done: ");
+            System.out.println("      " + taskList.get(index));
+
         }
-        else {
-            String command = input.split(" ")[0];
-            List<String> validTasks = new ArrayList<String>() {
-                {
-                    add("todo");
-                    add("deadline");
-                    add("event");
-                }
-            };
-            if (validTasks.contains(command))
-            {
-                if (input.split(" ").length < 2) {
-                    throw new DukeException(String.format("☹ BLEHHHHHH!!! The description of a %s cannot be empty.", command));
-                }
-            }
-            else {
-                throw new DukeException("☹ BLEHHHHHH!!! I'm (not) sorry, but I don't know what that means :/");
+        else if (command.equals("delete"))
+        {
+            int index = checkDoneDeleteException(inputList, taskList);
+
+            System.out.println("    Feeling weak? Giving up? Well done... Removed this task: ");
+            System.out.println("      " + taskList.remove(index));
+        }
+
+        else if (validTasks.contains(command)){
+            if (inputList.length < 2) {
+                throw new DukeException(String.format("☹ BLEHHHHHH!!! The description of a %s cannot be empty.", command));
             }
 
             if (command.equals("todo")) {
@@ -89,6 +86,21 @@ public class Duke {
                 printAddTaskListStatus(taskList);
             }
         }
+        else {
+            throw new DukeException("☹ BLEHHHHHH!!! I'm (not) sorry, but I don't know what that means :/");
+        }
+    }
+
+    private static int checkDoneDeleteException(String[] inputList, List<Task> taskList) {
+        if (inputList.length < 2)
+        {
+            throw new DukeException("☹ BLEHHHHHH. Tell me which task??");
+        }
+        int index = Integer.parseInt(inputList[1]) - 1;
+        if (index < 0 || index > taskList.size() - 1) {
+            throw new DukeException(String.format("☹ BLEHHHHHH. Task no. %d does not exist. Please try again.", (index + 1)));
+        }
+        return index;
     }
 
     private static void printAddTaskListStatus(List<Task> taskList)
