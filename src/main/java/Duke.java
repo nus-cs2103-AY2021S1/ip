@@ -110,9 +110,7 @@ public class Duke {
         System.out.println("\t<CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE>\n");
     }
 
-    public static void main(String[] args) throws IndexOutOfBoundsException {
-        Duke.summonSupremeLeader();
-        Duke.greet();
+    public static void run() {
         Scanner sc = new Scanner(System.in);
         TaskManager taskManager = new TaskManager();
         String userCommand;
@@ -134,6 +132,12 @@ public class Duke {
                 DukeException.genericTask();
             }
         }
+    }
+
+    public static void main(String[] args) {
+        Duke.summonSupremeLeader();
+        Duke.greet();
+        Duke.run();
         Duke.farewell();
     }
 }
