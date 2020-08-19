@@ -1,7 +1,7 @@
 public class ToDos extends Task {
 
-    public ToDos(String description, int number) {
-        super(description, number);
+    public ToDos(String description) {
+        super(description);
     }
 
     @Override

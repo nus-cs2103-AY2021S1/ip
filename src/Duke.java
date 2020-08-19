@@ -4,7 +4,6 @@ import java.util.ArrayList;
 public class Duke {
     public static String horizontal = "________________________________" + "\n";
     public static ArrayList<Task> list = new ArrayList<>();
-    public static int counter = 1;
 
     public static void action() {
         Scanner sc = new Scanner(System.in);
@@ -17,8 +16,10 @@ public class Duke {
                     break;
                 } else if (input.equals("list")) {
                     System.out.println(horizontal + "Here are the tasks in your list:" + "\n");
+                    int counter = 1;
                     for (Task task : list) {
-                        System.out.println(task.getNum() + "." + task.toString());
+                        System.out.println(counter + "." + task.toString());
+                        counter++;
                     }
                     System.out.println(horizontal);
                 } else if (input.startsWith("done")) {
@@ -28,9 +29,17 @@ public class Duke {
                     task.markAsDone();
                     System.out.println(horizontal + "Nice! I've marked this task as done:" + "\n" +
                             task.toString() + "\n" + horizontal);
+                } else if (input.startsWith("delete")) {
+                    String[] number = input.split("delete ");
+                    int num = Integer.parseInt(number[1]);
+                    Task task = list.get(num - 1);
+                    list.remove(task);
+                    System.out.println(horizontal + "Noted. I've removed this task:" + "\n" +
+                            task.toString() + "\n" + "Now you have " + list.size() + " tasks in the list." + "\n" + horizontal);
                 } else {
-                    addTask(input, list, counter);
-                    counter++;
+                    Task task = new Task(input);
+                    list.add(task);
+                    addTask(input, list);
                 }
             } catch (DukeException e) {
                 System.out.println(horizontal + "Oops!!! " + e.getMessage() + "\n" + horizontal);
@@ -43,17 +52,16 @@ public class Duke {
         System.out.println(horizontal + hello + horizontal);
     }
 
-    public static void addTask(String input, ArrayList<Task> list, int counter) throws DukeException {
+    public static void addTask(String input, ArrayList<Task> list) throws DukeException {
         if (input.startsWith("todo")) {
             String[] array = input.split("todo ");
             if (array.length == 1) {
                 throw new DukeException("The description of a todo cannot be empty!");
             } else {
                 String des = array[1];
-                ToDos todo = new ToDos(des, counter);
-                list.add(todo);
+                ToDos todo = new ToDos(des);
                 System.out.println(horizontal + "Got it. I've added this task:" + "\n" + todo.toString() + "\n" +
-                        "Now you have " + counter + " tasks in the list." + "\n" + horizontal);
+                        "Now you have " + list.size() + " tasks in the list." + "\n" + horizontal);
             }
         } else if (input.startsWith("deadline")) {
             String[] array = input.split("deadline ");
@@ -66,10 +74,9 @@ public class Duke {
                     throw new DukeException("The deadline of the task cannot be empty!");
                 } else {
                     String due = arr[1];
-                    Deadline dl = new Deadline(des, counter, due);
-                    list.add(dl);
+                    Deadline dl = new Deadline(des, due);
                     System.out.println(horizontal + "Got it. I've added this task:" + "\n" + dl.toString() + "\n" +
-                            "Now you have " + counter + " tasks in the list." + "\n" + horizontal);
+                            "Now you have " + list.size() + " tasks in the list." + "\n" + horizontal);
                 }
             }
         } else if (input.startsWith("event")) {
@@ -83,10 +90,9 @@ public class Duke {
                     throw new DukeException("The date of the event cannot be empty!");
                 } else {
                     String date = arr[1];
-                    Events event = new Events(des, counter, date);
-                    list.add(event);
+                    Events event = new Events(des, date);
                     System.out.println(horizontal + "Got it. I've added this task:" + "\n" + event.toString() + "\n" +
-                            "Now you have " + counter + " tasks in the list." + "\n" + horizontal);
+                            "Now you have " + list.size() + " tasks in the list." + "\n" + horizontal);
                 }
             }
         } else {
