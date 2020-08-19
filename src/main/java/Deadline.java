@@ -1,12 +1,10 @@
 class Deadline extends Task {
 
-    String dateTime;
+    final String dateTime;
 
-    Deadline(String inputText) {
-        super("");
-        String[] refinedInputText = inputText.substring(9).split(" /by ");
-        super.description = refinedInputText[0];
-        this.dateTime = refinedInputText[1];
+    Deadline(String description, String datetime) {
+        super(description);
+        this.dateTime = datetime;
     }
 
     @Override

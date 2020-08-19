@@ -1,14 +1,14 @@
 class Task {
 
-    protected String description;
-    protected boolean isCompleted;
+    final String description;
+    boolean isCompleted;
 
     Task(String description) {
         this.description = description;
         this.isCompleted = false;
     }
 
-    protected String getStatusIcon() {
+    String getStatusIcon() {
         if (this.isCompleted) {
             return "\u2713";
         } else {

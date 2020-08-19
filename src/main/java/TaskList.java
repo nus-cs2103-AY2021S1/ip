@@ -20,12 +20,16 @@ class TaskList {
         return this.taskArrayList.get(taskIndex);
     }
 
+    public int getNumOfTasks() {
+        return this.taskArrayList.size();
+    }
+
     public String toString() {
         String textIndentation = "     ";
         if (this.isEmpty()) {
-            return textIndentation + "No tasks found";
+            return textIndentation + "Your task list is currently empty. YAY!!! :D";
         } else {
-            StringBuilder output = new StringBuilder();
+            StringBuilder output = new StringBuilder(textIndentation + "Here are the tasks in your list:\n");
             int listSize = this.taskArrayList.size();
             for (int i = 0; i < listSize; i++) {
                 String eachTaskString = textIndentation + (i + 1) + ". " + this.taskArrayList.get(i) + "\n";

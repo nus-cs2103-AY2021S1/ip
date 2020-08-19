@@ -1,12 +1,10 @@
 class Event extends Task {
 
-    String dateTime;
+    final String dateTime;
 
-    Event(String inputText) {
-        super("");
-        String[] refinedInputText = inputText.substring(6).split(" /at ");
-        super.description = refinedInputText[0];
-        this.dateTime = refinedInputText[1];
+    Event(String description, String datetime) {
+        super(description);
+        this.dateTime = datetime;
     }
 
     @Override
