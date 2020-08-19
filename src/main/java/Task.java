@@ -17,7 +17,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        //return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
-        return (isDone ? "Done" : "Not Done"); // for manual testing
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        //return (isDone ? "Done" : "Not Done"); // for manual testing
     }
 }

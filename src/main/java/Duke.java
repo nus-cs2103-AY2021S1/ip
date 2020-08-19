@@ -73,11 +73,12 @@ public class Duke {
 
             // Determine what kind of task it is
             Task t;
+            String[] inputSplit;
             String description;
             switch (input.toLowerCase().split(" ")[0]) {
                 case "deadline":
                     System.out.println("Deadline");
-                    String[] inputSplit = input.split("/by");
+                    inputSplit = input.split("/by");
                     String by = inputSplit[1];
                     description = inputSplit[0].substring(8);
                     t = new Deadline(description, by);
@@ -89,12 +90,26 @@ public class Duke {
                     t = new ToDo(description);
                     userTasks.add(t);
                     break;
+                case "event":
+                    System.out.println("Event");
+                    inputSplit = input.split("/at");
+                    String at = inputSplit[1];
+                    description = inputSplit[0].substring(5);
+                    t = new Event(description, at);
+                    userTasks.add(t);
+                    break;
+                default:
+                    System.out.println(servantSpeak
+                            + "    I am sorry my Lord. I do not recognise that command.\n");
+                    continue;
             }
 
             // Standard reply from Duke for adding a task
             System.out.println(servantSpeak
-                    + "    I have added the task:\n       "
-                    + userTasks.get(userTasks.size() - 1).toString() + "\n");
+                    + "    As you wish Sire. I have added the task:\n       "
+                    + userTasks.get(userTasks.size() - 1).toString() + "\n"
+                    + "    Now you have " + userTasks.size()
+                    + " tasks in the list.");
 
         } while (!input.equals("bye"));
 
