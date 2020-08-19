@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class TodoException {
+public class TodoException {
+    String errorMessage = "OOPS!!! The description of a todo cannot be empty.";
+    TodoException() {}
+
 }
