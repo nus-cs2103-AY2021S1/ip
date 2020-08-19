@@ -5,7 +5,7 @@ public class Duke {
     public static void main(String[] args) {
 
         Scanner userInput = new Scanner(System.in);
-        ArrayList<Task> toDoList = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -29,24 +29,62 @@ public class Duke {
 
                 System.out.println("Here's yer current list of thingymajigs");
 
-                for(int i = 0; i < toDoList.size();i++ ) {
-                    Task task = toDoList.get(i);
-                    System.out.println(i + 1 + ". " + "[" + task.getStatusIcon() + "] " + task.description);
+                for(int i = 0; i < taskList.size();i++ ) {
+                    Task task = taskList.get(i);
+                    System.out.println(i + 1 + ". " + task.toString());
                 }
 
             } else if (firstWord.toLowerCase().equals("done")) {
                 int index = Integer.parseInt(inputArray[1]);
-                Task task = toDoList.get(index - 1);
+                Task task = taskList.get(index - 1);
                 task.markAsDone();
-                System.out.println("Sure thing baws! This right here is marked as done!\n" + index + ". " + "[" + task.getStatusIcon() + "] " + task.description);
+                System.out.println("Sure thing baws! This right here is marked as done!\n" + task.toString());
 
             } else { // to add task to list
-
-                Task task = new Task(input);
-                toDoList.add(task);
-                System.out.println("Alright, I'll put it on yer tab: " + input);
+                try {
+                    Task task;
+                    int index;
+                    switch (firstWord.toLowerCase()) {
+                        case "todo":
+                            String desc = stringCombiner(inputArray, 1, inputArray.length - 1);
+                            task = new Todo(desc);
+                            break;
+                        case "event":
+                            String[] eventSplit = input.split("/at");
+                            index = indexFinder(inputArray, "/at");
+                            task = new Event(stringCombiner(inputArray, 1, index - 1), eventSplit[1]);
+                            break;
+                        case "deadline":
+                            String[] deadlineSplit = input.split("/by");
+                            index = indexFinder(inputArray, "/by");
+                            task = new Deadline(stringCombiner(inputArray, 1, index - 1), deadlineSplit[1]);
+                            break;
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + firstWord.toLowerCase());
+                    }
+                    taskList.add(task);
+                    System.out.println("Alrighty, I'll put it on yer tab:\n" + task.toString() + "\n" + "You've got a total of " + taskList.size() + " items right now.");
+                } catch (IllegalStateException e) {
+                    System.out.println(e.toString());
+                }
 
             }
         }
+    }
+
+    private static String stringCombiner(String[] arr, int start, int end) {
+        StringBuffer str = new StringBuffer();
+        for (int i = start; i <= end; i ++) {
+            str.append(arr[i] + " ");
+        }
+        return str.toString();
+    }
+
+    private static int indexFinder(String[] arr, String exp) {
+        int index = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i].equals(exp)) index = i;
+        }
+        return index;
     }
 }
