@@ -1,30 +1,25 @@
-import java.io.*;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Ultron {
-    //Task list to store the tasks
-    private TaskList taskList;
 
-    //Logo for the mascot
-    private String logo="  _    _ _ _                   \n" +
-                        " | |  | | | |                  \n" +
-                        " | |  | | | |_ _ __ ___  _ __  \n" +
-                        " | |  | | | __| '__/ _ \\| '_ \\ \n" +
-                        " | |__| | | |_| | | (_) | | | |\n" +
-                        "  \\____/|_|\\__|_|  \\___/|_| |_|";
+    //Task list to store the tasks
+    private final TaskList taskList;
 
     //Get the pattern for the regex for parsing the command
-    private Pattern pattern = Pattern.compile("(^\\s?\\w+\\b) ?(.*)?$");
+    private final Pattern pattern = Pattern.compile("(^\\s?\\w+\\b) ?(.*)?$");
 
     // Create the scanner object
-    private Scanner rd = new Scanner(System.in);
+    private final Scanner scanner;
 
     public Ultron(){
 
         //Create a new task list
         this.taskList = new TaskList();
+
+        //Create a new scanner
+        this.scanner = new Scanner(System.in);
 
     }
     private String getInput() {
@@ -33,16 +28,34 @@ public class Ultron {
         String input;
 
         // Take in input
-        input = this.rd.nextLine();
+        input = this.scanner.nextLine();
 
         //Return the input
         return input;
     }
 
+    private String wrapper(String message){
+        //Wrapper when printing the error message
+        return "Heh, you can't even type in a correct command\n"
+                + message
+                + "\nI'll give u a pity tip\n"
+                + "Use 'help' for more information";
+    }
+
     public void printIntro(){
         // Print the intro messages
-        System.out.println("Hello from\n" + this.getLogo());
-        System.out.println("____________________________________________________________\n"
+
+        //Logo for the mascot
+        String LOGO = "  _    _ _ _                   \n" +
+                " | |  | | | |                  \n" +
+                " | |  | | | |_ _ __ ___  _ __  \n" +
+                " | |  | | | __| '__/ _ \\| '_ \\ \n" +
+                " | |__| | | |_| | | (_) | | | |\n" +
+                "  \\____/|_|\\__|_|  \\___/|_| |_|";
+
+        //Print the intro
+        System.out.println(LOGO
+                + "\n____________________________________________________________\n"
                 + "Hello lesser being, I am Ultron\n"
                 + "What do you want?\n"
                 + "____________________________________________________________\n");
@@ -55,19 +68,13 @@ public class Ultron {
                 + "____________________________________________________________");
     }
 
-    public String getLogo(){
-
-        //Get the logo of Ultron
-        return this.logo;
-    }
-
     private void helpMessage(){
         System.out.println("Heh I guess I could help an insect like you:\n" +
                         "- help                      : Get help for the commands\n" +
                         "- todo (name)               : Adds a todo to the list\n" +
                         "- event (name) /at (date)   : Adds an event at date\n" +
-                        "- deadline (name) /by (date): Adds a deadline which expires by date\n"
-
+                        "- deadline (name) /by (date): Adds a deadline which expires by date\n" +
+                        "- delete (number)           : Removes a todo from the list\n"
                 );
     }
 
@@ -81,7 +88,7 @@ public class Ultron {
         }catch(NumberFormatException e){
 
             //Throw a new Ultron exception
-            throw new UltronException(String.format("'%s' is not a valid number", args));
+            throw new UltronException(args, ExceptionType.INVALID_NUMBER);
         }
     }
 
@@ -94,18 +101,18 @@ public class Ultron {
         //Find the items in the group
         if(!inputs.find()){
 
-            errorMessage(new UltronException(String.format("Invalid command", input)));
-            return false;
+            //Throw an invalid command error if it is unable to find any matches
+            throw new UltronException(input, ExceptionType.INVALID_COMMAND);
         }
 
         //Get the command
-        String command = inputs.group(1);
+        String inputCommand = inputs.group(1);
 
         //Get the other arguments
-        String args = inputs.group(2);
+        String arguments = inputs.group(2);
 
         //Switch case to process the commands
-        switch (command) {
+        switch (inputCommand) {
 
             //If the user keys in bye
             case "bye": {
@@ -133,13 +140,13 @@ public class Ultron {
 
             case "delete":{
                 //Initialise index
-                int index = this.parseInteger(args);
+                int index = this.parseInteger(arguments);
 
                 //Check if the index is out of range
                 if (index >= this.taskList.size()){
 
                     //Throw an Ultron exception if it is out of range
-                    throw new UltronException(String.format("Invalid value of delete with '%s'", index + 1));
+                    throw new UltronException(inputCommand, Integer.toString(index + 1), ExceptionType.INVALID_ARGUMENT);
                 }
 
                 //Get the task
@@ -157,13 +164,13 @@ public class Ultron {
             case "done":{
 
                 //Initialise index
-                int index = this.parseInteger(args);
+                int index = this.parseInteger(arguments);
 
                 //Mark the task as done
                 if (!this.taskList.markDone(index)){
 
                     //Throw an error if the method return false
-                    throw new UltronException(String.format("Invalid value of done '%s'", index));
+                    throw new UltronException(inputCommand, Integer.toString(index), ExceptionType.INVALID_ARGUMENT);
                 }
 
                 //Print the done message
@@ -174,53 +181,47 @@ public class Ultron {
             default: {
 
                 //Init the enum states
-                States val;
-                Task tsk;
+                Command command;
+                Task task;
 
                 try{
                     //Get the state
-                    val = States.valueOf(command.toUpperCase());
+                    command = Command.valueOf(inputCommand.toUpperCase());
 
                 }catch (IllegalArgumentException e){
 
                     //Throw a Duke exception
-                    throw new UltronException(String.format("'%s' is not a valid command", command));
+                    throw new UltronException(inputCommand, ExceptionType.INVALID_COMMAND);
                 }
 
                 //Trim the args
-                if (args.trim().length() == 0){
+                if (arguments.trim().length() == 0){
 
                     //Throw an exception when there is nothing supplied
-                    throw new UltronException(String.format("There are no arguments supplied to %s command", command));
+                    throw new UltronException(inputCommand, ExceptionType.NO_ARGUMENTS_SUPPLIED);
                 }
 
                 try{
                     //Create a new task
-                    tsk = val.createTask(args);
+                    task = command.createTask(arguments);
 
                 }catch(IllegalStateException e){
 
                     //Throw a Duke exception
-                    throw new UltronException(String.format("Invalid %s command syntax\nUse 'help' for more information",command));
+                    throw new UltronException(inputCommand, ExceptionType.INVALID_COMMAND);
                 }
 
                 //Add the task to the task list
-                this.taskList.add(tsk);
+                this.taskList.add(task);
 
                 //Print out the message
-                System.out.println(String.format("Can't you keep track of '%s' yourself?\nNow you have %d burdens", tsk, this.taskList.size()));
+                System.out.println(String.format("Can't you keep track of '%s' yourself?\nNow you have %d burdens", task, this.taskList.size()));
 
             }
         }
 
         //Do not quit
         return false;
-    }
-
-    public void errorMessage(UltronException e){
-
-        //Prints the error message
-        System.out.println(String.format("Heh you cant even key in a correct command.\n%s", e.getMessage()));
     }
 
     public void mainLoop(){
@@ -250,7 +251,7 @@ public class Ultron {
             }catch(UltronException e){
 
                 //Print the error message
-                this.errorMessage(e);
+                System.out.println(this.wrapper(e.getMessage()));
             }
 
             //Print the separator
