@@ -14,7 +14,7 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
 
-        String userInput = null;
+        String userInput = "";
 
         while (!userInput.equals(CLOSING_STRING)) {
             userInput = scanner.next();
