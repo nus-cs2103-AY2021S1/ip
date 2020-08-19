@@ -30,10 +30,12 @@ public class Duke {
     }
 
     // this function takes in the input from the user and adds it to the list of tasks Duke is tracking
-    public static void addTask(String s, ArrayList<Task> tasks) {
-        tasks.add(new Task(s));
+    public static void addTask(Task t, ArrayList<Task> tasks) {
+        tasks.add(t);
         System.out.println(LINE);
-        System.out.println("     " + "added: " + s);
+        System.out.println("     Got it. I've added this task: ");
+        System.out.println("     " + t.toString());
+        System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
         System.out.println(LINE);
     }
 
@@ -96,7 +98,7 @@ public class Duke {
 
             else {
                 String input = sc.nextLine();
-                addTask(input, tasks);
+                addTask(new Task(input), tasks);
                 continue;
             }
         }
