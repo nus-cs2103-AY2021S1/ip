@@ -1,11 +1,11 @@
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static List<Task> items;
+    private static ArrayList<Task> items;
 
     private static final String DONE = "done";
+    private static final String DELETE = "delete";
     private static final String BYE = "bye";
     private static final String LIST = "list";
 
@@ -43,6 +43,9 @@ public class Duke {
                     if (inputArr[0].equals(DONE)) {
                         int itemsIdx = Integer.parseInt(inputArr[1]) - 1;
                         markAsDone(itemsIdx);
+                    } else if (inputArr[0].equals(DELETE)) {
+                        int itemsIdx = Integer.parseInt(inputArr[1]) - 1;
+                        deleteItem(itemsIdx);
                     } else {
                         addItem(userInput);
                     }
@@ -118,6 +121,19 @@ public class Duke {
         String taskText = "Got it. I've added this task:" + "\n" + newTask + "\n";
         String totalText = "Now you have " + items.size() + " tasks in the list";
         System.out.println(taskText + totalText);
+    }
+
+    private static void deleteItem(int itemsIdx) throws DukeException{
+        if (itemsIdx < 0 || itemsIdx > items.size() - 1) {
+            throw new DukeException("Sorry, the task does not exist");
+        } else {
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(items.get(itemsIdx));
+
+            items.remove(itemsIdx);
+
+            System.out.println("Now you have " + items.size() + " tasks in the list");
+        }
     }
 
     private static void markAsDone(int itemsIdx) throws DukeException{
