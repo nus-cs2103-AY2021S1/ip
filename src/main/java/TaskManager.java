@@ -30,4 +30,12 @@ public class TaskManager {
         task.markAsDone();
         System.out.println(indentation + "  " + task.toString());
     }
+
+    public void deleteTask(int n) {
+        System.out.println(indentation + "Noted. I've removed this task:");
+        Task task = taskList.get(n - 1);
+        System.out.println(indentation + "  " + task.toString());
+        taskList.remove(n - 1);
+        System.out.println(indentation + "Now you have "+ taskList.size() + " tasks in the list.");
+    }
 }

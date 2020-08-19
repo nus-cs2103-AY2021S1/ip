@@ -27,10 +27,14 @@ public class Duke {
         } else {
             String[] strArr = command.split(" ", 2);
             String taskType = strArr[0];
-            if (taskType.equals("done")){
+            if (taskType.equals("done")) {
                 int index = command.length() - 1;
-                int taskNumber = Integer.parseInt(command.substring(index));
+                int taskNumber = Integer.parseInt(strArr[1]);
                 taskManager.markTaskAsDone(taskNumber);
+            } else if (taskType.equals("delete")) {
+                int index = command.length() - 1;
+                int taskNumber = Integer.parseInt(strArr[1]);
+                taskManager.deleteTask(taskNumber);
             } else if (taskType.equals("todo")) {
                 if (strArr.length == 1) {
                     throw new DukeException(indentation + "☹ OOPS!!! The description of a todo cannot be empty.");
