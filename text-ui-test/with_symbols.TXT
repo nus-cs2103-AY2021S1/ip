@@ -1,0 +1,32 @@
+  Hello! I'm Duke
+  What can I do for you?
+  Got it, the following task has been added:
+    [T][✘] read book
+  Now you have 1 tasks in the list.
+  Got it, the following task has been added:
+    [D][✘] return book  (by:  Sunday)
+  Now you have 2 tasks in the list.
+  Got it, the following task has been added:
+    [E][✘] project meeting  (at:  Mon 2-4pm)
+  Now you have 3 tasks in the list.
+  Got it, the following task has been added:
+    [T][✘] join SIA app challenge
+  Now you have 4 tasks in the list.
+  Got it, the following task has been added:
+    [T][✘] run 70 mile Iron man
+  Now you have 5 tasks in the list.
+  1.[T][✘] read book
+  2.[D][✘] return book  (by:  Sunday)
+  3.[E][✘] project meeting  (at:  Mon 2-4pm)
+  4.[T][✘] join SIA app challenge
+  5.[T][✘] run 70 mile Iron man
+  The following task has been marked done:
+    [E][✓] project meeting  (at:  Mon 2-4pm)
+  The following task has been marked done:
+    [T][✓] run 70 mile Iron man
+  1.[T][✘] read book
+  2.[D][✘] return book  (by:  Sunday)
+  3.[E][✓] project meeting  (at:  Mon 2-4pm)
+  4.[T][✘] join SIA app challenge
+  5.[T][✓] run 70 mile Iron man
+  Bye!!! Hope to see you again real soon.
