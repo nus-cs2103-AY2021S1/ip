@@ -47,13 +47,44 @@ public class Task {
     }
 
     public String getDate() {
+
         String des = this.getDescription();
+
+        if (des.indexOf('/') == -1) {
+
+        }
         return des.substring(des.indexOf('/') + 4, des.length());
     }
 
     public String getDeadlineTask() {
         String des = this.getDescription();
         return des.substring(0, des.indexOf('/') - 1);
+    }
+
+    public boolean isSingleWord() {
+        return !this.description.contains(" ");
+    }
+
+    public boolean isInvalidTask() {
+        String firstWord = this.getFirstWord();
+        return !(firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event"));
+    }
+
+    public void validate() throws DukeException {
+        if (this.isInvalidTask()) { // checks if input is not to do, deadline, or event
+            throw new DukeException("   ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+        if (this.isSingleWord()) { // checks if input is only the type of task, but no description
+            throw new DukeException("   ☹ OOPS!!! The description of a " + this.getFirstWord() + " cannot be empty.");
+        }
+
+        if (!this.getDescription().contains("/by") && this.isDeadline()) { // "/by" is not in the description, i.e no date
+            throw new DukeException("   ☹ OOPS!!! The description of a deadline must contain a date.");
+        }
+
+        if (!this.getDescription().contains("/at") && this.isEvent()) { // "/at" is not in the description, i.e no date
+            throw new DukeException("   ☹ OOPS!!! The description of an event must contain a date.");
+        }
     }
 
     @Override
