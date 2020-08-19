@@ -26,7 +26,7 @@ public class Duke {
             int index = input.indexOf("/");
             String description = input.substring(6, index);
             String time = input.substring(index + 4);
-            newTask = new Deadline(description, time);
+            newTask = new Event(description, time);
             newTaskCreated = true;
         } else {
             System.out.println(format("invalid input"));
