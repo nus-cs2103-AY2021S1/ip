@@ -17,12 +17,16 @@ public class Duke {
 
     public static void markDone(String inputMsg) throws DukeException {
         int taskNumber = Integer.valueOf(inputMsg.split(" ")[1]); // gets the done task number
-        Task currTask = userInputs.get(taskNumber - 1);
-        if (currTask.getStatus()) { // task has already marked done before
-            throw new DukeException("Task has already been completed earlier on!");
+        if (userInputs.size() < taskNumber) {
+            throw new DukeException("There is no such task number!");
         } else {
-            currTask.markAsComplete();
-            System.out.println("Nice! I've marked this task as done:\n" + currTask.toString());
+            Task currTask = userInputs.get(taskNumber - 1);
+            if (currTask.getStatus()) { // task has already marked done before
+                throw new DukeException("Task has already been completed earlier on!");
+            } else {
+                currTask.markAsComplete();
+                System.out.println("Nice! I've marked this task as done:\n" + currTask.toString());
+            }
         }
     }
 
