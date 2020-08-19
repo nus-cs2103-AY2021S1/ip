@@ -1,6 +1,4 @@
-import exception.DukeException;
-import exception.NoDescriptionException;
-import exception.UnknownCommandException;
+import exception.*;
 
 import java.util.ArrayList;
 
@@ -31,7 +29,7 @@ public class Duke {
         UIPrint.drawLine(UIPrint.star, 50);
     }
 
-    private static boolean checkCommand(String str) {
+    private static void checkCommand(String str) {
         String[] inputParts = str.split(" ", 2);
         String possibleCommand = inputParts[0];
         String rest = inputParts.length == 2 ? inputParts[1] : "";
@@ -46,13 +44,9 @@ public class Duke {
         if (command != null) {
             try {
                 command.execute(rest);
-            } catch (NoDescriptionException exception) {
+            } catch (NoDescriptionException | IncorrectFormatException | InvalidIndexException exception) {
                 System.out.println(exception.getMessage());
             }
-
-            return true;
-        } else {
-            return false;
         }
     }
 
@@ -69,11 +63,7 @@ public class Duke {
         while (!exitLoop) {
             String inputLine = UserInput.getOneLine();
 
-            boolean hasCommand = checkCommand(inputLine);
-
-            if (!hasCommand) {
-                // do nothing
-            }
+            checkCommand(inputLine);
         }
     }
 }
