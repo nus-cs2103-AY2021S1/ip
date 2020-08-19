@@ -27,6 +27,14 @@ public class Duke {
                 case "list":
                     print_tasks(tasks);
                     break;
+                case "done":
+                    int i = Integer.parseInt(words[1]) - 1;
+                    assert i >= 0;
+                    assert i < tasks.size();
+                    Task task = tasks.get(i);
+                    task.done = true;
+                    print("Nice! I've marked this task as done: \n" + task);
+                    break;
                 default:
                     Task newTask = new Task(input, false);
                     print("added: " + newTask.toString());
