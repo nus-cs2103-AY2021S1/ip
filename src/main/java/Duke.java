@@ -89,12 +89,12 @@ public class Duke {
             }
             // catch error when command is invalid
             catch (IllegalArgumentException ex) {
-                System.err.println("----- I can't help you with that request, try something else.");
+                System.out.println("----- I can't help you with that request, try something else.");
             }
             // catch invalid command description errors
             catch (DukeException ex) {
                 String result = "----- You entered a valid command but I can't carry it out. " + ex.getMessage();
-                System.err.println(result);
+                System.out.println(result);
             }
         }
     }
