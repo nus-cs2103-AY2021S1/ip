@@ -13,12 +13,12 @@ This command creates a to-do task.
 
 Example of usage: 
 
-todo borrow book
+` todo borrow book`
 
 Expected outcome:
 
 ` Got it. I've added this task: 
-       [T][?] borrow book
+       [T][DONE] borrow book
      Now you have 5 tasks in the list.
 `
 
