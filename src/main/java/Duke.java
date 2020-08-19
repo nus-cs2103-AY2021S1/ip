@@ -9,7 +9,9 @@ public class Duke {
             "What can I do for you?";
     private static final String task_read = "Here are the tasks in your list: \n";
     private static final String task_completed = "Nice! I've marked this task as complete. \n";
+    private static final String task_index_out_of_bounds = "That task does not exist.";
     private static final String farewell = "Bye. Hope to see you again soon.";
+    private static final String task_number_format = "Invalid. Please try with the following format: done[space][task number in numerals]";
     private boolean running = true;
     private List<Task> taskList = new ArrayList<>(100);
 
@@ -33,19 +35,39 @@ public class Duke {
     }
 
     private void respondToInput(String rawInput) {
+        //Remove leading and trailing whitespaces
         String input = rawInput.trim();
         String[] breakdown = input.split(" ", 2);
-        if (input.equals("bye")) {
-            running = false;
-            System.out.println(
-                    constructMessage(farewell));
-        } else if (input.equals("list")) {
-            System.out.println(
-                    constructMessage(task_read + printAsString(taskList)));
-        } else if (!input.isEmpty()) {
-            Task newTask = new Task(input);
-            taskList.add(newTask);
-            System.out.println(constructMessage("added: " + input));
+        if (!input.isEmpty()) {
+            if (input.equals("bye")) {
+                running = false;
+                System.out.println(
+                        constructMessage(farewell));
+            } else if (input.equals("list")) {
+                System.out.println(
+                        constructMessage(task_read + printAsString(taskList)));
+            } else if (breakdown[0].equals("done")) {
+                markTaskAsDone(breakdown);
+            } else {
+                Task newTask = new Task(input);
+                taskList.add(newTask);
+                System.out.println(constructMessage("added: " + input));
+            }
+        }
+    }
+
+    private void markTaskAsDone(String[] breakdown) {
+        try {
+            int taskNumber = Integer.parseInt(breakdown[1]);
+            Task completedTask = taskList.get(taskNumber - 1);
+            completedTask.markDone();
+            System.out.println(constructMessage(
+                    task_completed + completedTask.toString()
+            ));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(constructMessage(task_index_out_of_bounds));
+        } catch (NumberFormatException e) {
+            System.out.println(constructMessage(task_number_format));
         }
     }
 
