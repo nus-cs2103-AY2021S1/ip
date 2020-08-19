@@ -38,12 +38,14 @@ public class Duke {
         System.out.println(dashedLineBreak() + "\n");
     }
     
+    // Handles cases where user enters empty input
     public static void validateScannerInput(String input) throws DukeException {
         if (input.trim().length() == 0) {
             throw new DukeException("Come again, Your Majesty?");
         }
     }
-
+    
+    // Handles cases where user does not enter a valid description for tasks
     public static void validateAdd(String[] task) throws DukeException {
         if ((task.length == 1 || task[1].trim().length() == 0) &&
                 (task[0].equalsIgnoreCase("todo") ||
@@ -53,7 +55,8 @@ public class Duke {
             throw new DukeException("Do give me more details about this " + task[0] + ", Your Majesty.");
         }
     }
-
+    
+    // Handles cases where user does not enter the correct / commands (i.e. /by for deadlines, /on for events)
     public static void validateSlashCommands(String[] task) throws DukeException {
         if(task[0].equalsIgnoreCase("deadline") && task[1].split("/by ", 2).length == 1){
             throw new DukeException("Use /by for deadlines, Your Majesty.");
@@ -61,19 +64,26 @@ public class Duke {
             throw new DukeException("Use /on for events, Your Majesty.");
         }
     }
-
+    
+    // Handles cases where user enters a number that does not correspond to an existing task
     public static void validateIndex(int taskNumber) throws DukeException{
         if(taskNumber > tasks.size() || taskNumber <= 0) {
             throw new DukeException("Your Majesty, there's no such agenda in my detailed records.");
         }
     }
 
+    // Handles cases where user does not input a valid number after conquer/delete commands
     public static void validateConquerDelete(String[] command) throws DukeException {
         try {
-            Integer.parseInt(command[1]);
+            Integer.parseInt(sanitiseInput(command[1]));
         } catch (Exception err) {
             throw new DukeException("Please enter valid numbers after your command, Your Majesty.");
         } 
+    }
+    
+    // Removes leading whitespaces in a String
+    public static String sanitiseInput(String input) {
+        return input.stripLeading();
     }
 
     public static void printAllTasks() {
@@ -135,7 +145,7 @@ public class Duke {
     public static void conquerTask(String[] command) {
         try {
             validateConquerDelete(command);
-            int taskNumber = Integer.parseInt(command[1]);
+            int taskNumber = Integer.parseInt(sanitiseInput(command[1]));
             validateIndex(taskNumber);
             
             tasks.get(taskNumber - 1).markAsDone();
@@ -153,7 +163,7 @@ public class Duke {
     public static void deleteTask(String[] command) {
         try {
             validateConquerDelete(command);
-            int taskNumber = Integer.parseInt(command[1]);
+            int taskNumber = Integer.parseInt(sanitiseInput(command[1]));
             validateIndex(taskNumber);
             
             Task deletedTask = tasks.get(taskNumber - 1);
@@ -176,6 +186,13 @@ public class Duke {
         while(sc.hasNextLine()) {
             String userInput = sc.nextLine();
             String[] splitUserInput = userInput.split(" ", 2);
+            
+            // Handle cases where there are leading whitespaces in user input
+            if (splitUserInput[0].isBlank()) { 
+                userInput = sanitiseInput(userInput);
+                splitUserInput = userInput.split(" ", 2);
+            }
+
             switch(splitUserInput[0].toLowerCase()) {
                 case "dismiss":
                     System.out.println(dashedLineBreak());
