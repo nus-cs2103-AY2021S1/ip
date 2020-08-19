@@ -1,7 +1,13 @@
-public class Exit {
+public class Exit extends Task {
     static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+    static final String TYPE = "bye";
 
-    public static String getExitMessage() {
+    Exit() {
+        super(EXIT_MESSAGE, TYPE);
+    }
+
+    @Override
+    public String toString() {
         return EXIT_MESSAGE;
     }
 }

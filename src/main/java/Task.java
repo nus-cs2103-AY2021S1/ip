@@ -1,9 +1,11 @@
 public class Task {
     protected String description;
+    protected String type;
     protected boolean isDone;
 
-    Task(String description) {
+    Task(String description, String type) {
         this.description = description;
+        this.type = type;
         this.isDone = false;
     }
 
@@ -19,6 +21,10 @@ public class Task {
 
     public String getDescription() {
         return this.description;
+    }
+
+    public String getType() {
+        return this.type;
     }
 
     @Override

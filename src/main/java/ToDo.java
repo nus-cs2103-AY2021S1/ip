@@ -1,6 +1,8 @@
 public class ToDo extends Task {
+    static final String TYPE = "todo";
+
     ToDo(String description) {
-        super(description);
+        super(description, TYPE);
     }
 
     @Override

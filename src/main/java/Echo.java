@@ -4,64 +4,52 @@ public class Echo {
     private ArrayList<Task> tasks;
     private boolean shouldExit;
 
+    static final String GREET = "greet";
+    static final String EXIT = "bye";
+    static final String LIST = "list";
+    static final String DONE = "done";
+    static final String TODO = "todo";
+    static final String EVENT = "event";
+    static final String DEADLINE = "deadline";
+
     Echo() {
         this.tasks = new ArrayList<>();
         this.shouldExit = false;
     }
 
-    public void addTask(String description) {
-        Task task;
-        String[] command = description.split(" ", 2);
-        String type;
-        String descOfTask;
-
-        if (command.length > 1) {
-            type = command[0];
-            descOfTask = command[1];
-        } else {
-            type = "";
-            descOfTask = "";
-        }
-
-        if (type.equals("todo")) {
-            task = new ToDo(descOfTask);
-        } else if (type.equals("event")) {
-            String[] s = descOfTask.split(" /at ");
-            String desc = s[0];
-            String at = s[1];
-            task = new Event(desc, at);
-        } else if (type.equals("deadline")) {
-            String[] s = descOfTask.split(" /by ");
-            String desc = s[0];
-            String by = s[1];
-            task = new Deadline(desc, by);
-        } else {
-            task = new Task(description);
-        }
-
+    public void addTask(Task task) {
         this.tasks.add(task);
     }
 
     public String replyUser() {
-        Task task = this.tasks.get(this.tasks.size() - 1);
-        String command = task.getDescription();
+        int curr = this.tasks.size() - 1;
+        Task task = this.tasks.get(curr);
+        String type = task.getType();
 
-        if (command.equals("bye")) {
+        if (type.equals(GREET)) {
+            this.tasks.remove(curr);
+            return task.toString();
+        } else if (type.equals(EXIT)) {
             this.shouldExit = true;
-            return Exit.getExitMessage();
-        } else if (command.equals("list")) {
-            tasks.remove(tasks.size() - 1);
-            String response = tasks.size() <= 1
+            this.tasks.remove(curr);
+            return task.toString();
+        } else if (type.equals(LIST)) {
+            this.tasks.remove(curr);
+            String response = curr <= 0
                 ? "Here is the task in your list:\n"
                 : "Here are the tasks in your list:\n";
-            for (int i = 0; i < tasks.size(); i++) {
-                response += String.format("%d. %s%n", i + 1, tasks.get(i).toString());
+            for (int i = 0; i < curr; i++) {
+                response += String.format(
+                    "%d. %s%n",
+                    i + 1,
+                    this.tasks.get(i).toString()
+                );
             }
             return response;
-        } else if (command.split(" ", 2)[0].equals("done")) {
-            tasks.remove(tasks.size() - 1);
-            int taskNum = Integer.parseInt(command.split(" ")[1]) - 1;
-            Task t = tasks.get(taskNum);
+        } else if (type.equals(DONE)) {
+            this.tasks.remove(curr);
+            Done d = (Done) task;
+            Task t = tasks.get(d.getTaskNum());
             return t.markAsDone();
         } else {
             String message1 = "Got it. I've added this task:\n";
