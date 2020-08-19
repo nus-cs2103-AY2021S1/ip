@@ -18,7 +18,7 @@ public class Duke {
         System.out.println(underscore);
 
         Scanner sc = new Scanner(System.in);
-        TodoList newList = new TodoList();
+        TaskList newList = new TaskList();
 
         while(sc.hasNext()) {
             String input = sc.nextLine();

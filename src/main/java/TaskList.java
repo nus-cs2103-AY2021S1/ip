@@ -2,10 +2,10 @@ package main.java;
 
 import java.util.ArrayList;
 
-public class TodoList {
+public class TaskList {
     private ArrayList<Task> todoList;
 
-    public TodoList() {
+    public TaskList() {
         this.todoList = new ArrayList<>();
     }
 
