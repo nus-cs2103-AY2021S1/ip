@@ -1,7 +1,7 @@
 public class Echo {
-    String intro = "Hello I am Duke!\nWhat can I help you with?";
-    String goodbye = "Goodbye. See you soon!";
-    String line = "---------------------------------------------";
+    private final String intro = "Hello I am Duke!\nWhat can I help you with?";
+    private final String goodbye = "Goodbye. See you soon!";
+    private final String line = "---------------------------------------------";
 
     public Echo() {
         System.out.println(this.line);

@@ -1,9 +1,9 @@
 public class AddList {
-    String intro = "Hello I am Duke!\nWhat can I help you with?";
-    String goodbye = "Goodbye. See you soon!";
-    String line = "---------------------------------------------";
-    Task[] items;
-    int idx;
+    private final String intro = "Hello I am Duke!\nWhat can I help you with?";
+    private final String goodbye = "Goodbye. See you soon!";
+    private final String line = "---------------------------------------------";
+    private Task[] items;
+    private int idx;
 
     public AddList() {
         this.items = new Task[100];
@@ -19,10 +19,27 @@ public class AddList {
         System.out.println(this.line);
     }
 
+    public Task handleInput(String input) {
+        String type = input.split(" ")[0];
+        if (type.equals("todo")) {
+            return new Todo(input.substring(5));
+        } else if (type.equals("deadline")) {
+            String[] dl = input.split(" /by ");
+            return new Deadline(dl[0].substring(9), dl[1]);
+        } else if (type.equals("event")) {
+            String[] e = input.split(" /at ");
+            return new Event(e[0].substring(6), e[1]);
+        } else {
+            System.out.println("Erroneous type");
+            return new Task("");
+        }
+    }
+
     public void add(String input) {
-        this.items[this.idx] = new Task(input);
+        Task toAdd = this.handleInput(input);
+        this.items[this.idx] = toAdd;
         this.idx++;
-        this.addLines(String.format("   Added: %s", input));
+        this.addLines(String.format("    Got it. I've I've added this task:\n    %s\n    Now you have %d tasks in the list.", toAdd, this.idx));
     }
 
     public void display() {
