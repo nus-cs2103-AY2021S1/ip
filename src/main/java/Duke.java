@@ -20,6 +20,14 @@ public class Duke {
     protected static final String DEADLINE = "deadline";
     protected static final String EVENT = "event";
 
+    protected static final List<String> validTaskTypes;
+    static {
+        validTaskTypes = new ArrayList<>();
+        validTaskTypes.add(TO_DO);
+        validTaskTypes.add(DEADLINE);
+        validTaskTypes.add(EVENT);
+    }
+
     protected static final List<Task> taskRecords = new ArrayList<Task>();
 
     public static void main(String[] args) {
@@ -32,23 +40,41 @@ public class Duke {
         while (!userInput.equals(CLOSING_STRING)) {
             userInput = scanner.nextLine();
             String firstWord = userInput.split(" ")[0];
-            if (userInput.equals(CLOSING_STRING)) {
-                System.out.println(getClosingText());
-            } else if (userInput.equals(LIST_STRING)) {
-                System.out.println(processString(getListString()));
-            } else if (firstWord.equals(DONE_STRING)) {
-                int index = Integer.parseInt(userInput.substring(5));
-                System.out.println(registerTaskDone(index));
-            } else {
-                System.out.println(addTask(userInput));
-            }
+            try {
+                if (userInput.equals(CLOSING_STRING)) {
+                    System.out.println(getClosingText());
+                } else if (userInput.equals(LIST_STRING)) {
+                    System.out.println(processString(getListString()));
+                } else if (firstWord.equals(DONE_STRING)) {
+                    System.out.println(registerTaskDone(userInput));
+                } else {
+                    System.out.println(addTask(userInput));
+                }
 
+            } catch (DukeException e) {
+                System.out.println(processErrorString(e));
+            }
         }
 
 
     }
 
-    protected static String registerTaskDone(int taskNumber) {
+    protected static String processErrorString(DukeException e) {
+        String message = e.getMessage();
+        return processString(message);
+    }
+
+    protected static String registerTaskDone(String userInput) {
+        String[] details = userInput.split(" ", 2);
+        if (details.length == 1) {
+            throw new DukeException("Please specify a task to complete!");
+        }
+        int taskNumber;
+        try {
+            taskNumber = Integer.parseInt(details[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid number input!");
+        }
         Task taskDone = taskRecords.get(taskNumber - 1);
         taskDone.markDone();
         return processString(MARKED_MESSAGE + '\n' + PRESPACING + "   " + taskDone);
@@ -67,6 +93,9 @@ public class Duke {
 
     protected static String addTask(String taskDescription) {
         String[] details = taskDescription.split(" ", 2);
+        if (details.length == 1) {
+            throw new DukeException("The description of a " + details[0] + " cannot be empty.");
+        }
         Task addedTask;
         switch(details[0]) {
             case TO_DO:
@@ -79,7 +108,7 @@ public class Duke {
                 addedTask = new Events(details[1]);
                 break;
             default:
-                addedTask = new Task(taskDescription);
+                throw new DukeException("Not a valid command!");
         }
 
         taskRecords.add(addedTask);
@@ -93,10 +122,6 @@ public class Duke {
 
     protected static String createTaskNumberCountMessage(int count) {
         return "Now you have " + count + " tasks in the list.";
-    }
-
-    protected static String createAddedString(String addedString) {
-        return "added: " + addedString;
     }
 
 
