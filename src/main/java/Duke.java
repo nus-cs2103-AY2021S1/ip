@@ -1,7 +1,4 @@
-import main.java.Deadline;
-import main.java.DukeException;
-import main.java.Event;
-import main.java.Task;
+import main.java.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -23,16 +20,23 @@ public class Duke {
             //if done
             if (userinput.contains("done")){
 
-                if(userinput.length()<6) {
-                    throw new DukeException("Must include number after 'done'.");
+                try {
+                    if (userinput.length() < 6) {
+                        throw new DukeException();
+                    }
+                    int taskNumber = Integer.parseInt(userinput.substring(5)) - 1;
+
+                    if (taskNumber >= arrList.size()) {
+                        throw new DukeArrayException();
+                    }
+                    Task taskCompleted = arrList.get(taskNumber);
+                    taskCompleted.complete = true;
+                    System.out.println("Nice! I've marked this task as done:\n" + "[DONE] " + taskCompleted.task);
+                }catch(DukeArrayException e){
+                    System.out.println("Number cannot be longer than list.");
+                }catch(DukeException e) {
+                    System.out.println("Must include number after 'done'.");
                 }
-                int taskNumber = Integer.parseInt(userinput.substring(5)) - 1 ;
-                if(taskNumber>arrList.size()){
-                    throw new DukeException("Number cannot be longer than list.");
-                }
-                Task taskCompleted = arrList.get(taskNumber);
-                taskCompleted.complete = true;
-                System.out.println("Nice! I've marked this task as done:\n"+"[DONE] "+taskCompleted.task);
             } else {
                 //if list
                 if (userinput.equals("list")) {
@@ -43,60 +47,83 @@ public class Duke {
                     }
                     //add todo
                 }else if(userinput.contains("delete")){
-                    if(userinput.length()<6){
-                        throw new DukeException(("Must include number after 'delete'"));
+                    try {
+                        if (userinput.length() <= 6) {
+                            throw new DukeException();
+                        }
+                        int taskNumber = Integer.parseInt(userinput.substring(7)) - 1;
+                        if(taskNumber>arrList.size()){
+                            throw new DukeArrayException();
+                        }
+                        Task taskDeleted = arrList.get(taskNumber);
+                        arrList.remove(taskNumber);
+                        System.out.println("I have removed the task:\n" + taskDeleted.stringify() + "\n" + "Now you have " +
+                                arrList.size() + " tasks in the list.");
+                    }catch(DukeArrayException e){
+                        System.out.println("Number cannot be longer than the list.");
+                    }catch(DukeException e){
+                        System.out.println("Must include number after 'delete'");
+                    }catch(NumberFormatException e){
+                        System.out.println("Must include number after 'delete'");
                     }
-                    int taskNumber = Integer.parseInt(userinput.substring(7)) - 1 ;
-                    Task taskDeleted = arrList.get(taskNumber);
-                    arrList.remove(taskNumber);
-                    System.out.println("I have removed the task:\n"+taskDeleted.stringify()+"\n"+"Now you have " +
-                            arrList.size()+" tasks in the list.");
                 }
                 else if(userinput.contains("todo")){
-                    if(userinput.length()<5){
-                        throw new DukeException("Must include description for todo");
+                    try {
+                        if (userinput.length() < 5) {
+                            throw new DukeException();
+                        }
+                        String description = userinput.substring(5);
+
+                        Task task = new Task(description, false);
+                        arrList.add(task);
+
+                        String reply = "I have added this task:\n"
+                                + task.stringify() + "\n"
+                                + "Now you have " + arrList.size() + " task(s) in the list.";
+                        System.out.println(reply);
+                    }catch(DukeException e){
+                        System.out.println("Must include description for todo");
                     }
-                    String description = userinput.substring(5);
-
-                    Task task = new Task(description, false);
-                    arrList.add(task);
-
-                    String reply = "I have added this task:\n"
-                            + task.stringify() + "\n"
-                            + "Now you have " + arrList.size() + " task(s) in the list.";
-                    System.out.println(reply);
 
                 }
                 //add deadline
                 else if(userinput.contains("deadline")){
-                    if(!userinput.contains("/by")){
-                        throw new DukeException("deadline must include '/by'");
-                    }else {
-                        int index = userinput.indexOf("/by");
-                        String deadlineDate = userinput.substring(index + 4);
-                        Deadline deadline = new Deadline(userinput.substring(9, index), false, deadlineDate);
-                        arrList.add(deadline);
+                    try {
+                        if (!userinput.contains("/by")) {
+                            throw new DukeException();
+                        } else {
+                            int index = userinput.indexOf("/by");
+                            String deadlineDate = userinput.substring(index + 4);
+                            Deadline deadline = new Deadline(userinput.substring(9, index), false, deadlineDate);
+                            arrList.add(deadline);
 
-                        String reply = "I have added this task:\n"
-                                + deadline.stringify() + "\n"
-                                + "Now you have " + arrList.size() + " task(s) in the list.";
-                        System.out.println(reply);
+                            String reply = "I have added this task:\n"
+                                    + deadline.stringify() + "\n"
+                                    + "Now you have " + arrList.size() + " task(s) in the list.";
+                            System.out.println(reply);
+                        }
+                    }catch(DukeException e){
+                        System.out.println("deadline must include '/by'");
                     }
                 }
                 //add event
                 else if(userinput.contains("event")){
-                    if(!userinput.contains("/at")){
-                        throw new DukeException("event must include '/at'");
-                    }else {
-                        int index = userinput.indexOf("/at");
-                        String eventDate = userinput.substring(index + 4);
-                        Event event = new Event(userinput.substring(6, index), false, eventDate);
-                        arrList.add(event);
+                    try {
+                        if (!userinput.contains("/at")) {
+                            throw new DukeException();
+                        } else {
+                            int index = userinput.indexOf("/at");
+                            String eventDate = userinput.substring(index + 4);
+                            Event event = new Event(userinput.substring(6, index), false, eventDate);
+                            arrList.add(event);
 
-                        String reply = "I have added this task:"
-                                + event.stringify() + "\n"
-                                + "Now you have " + arrList.size() + " task(s) in the list.";
-                        System.out.println(reply);
+                            String reply = "I have added this task:"
+                                    + event.stringify() + "\n"
+                                    + "Now you have " + arrList.size() + " task(s) in the list.";
+                            System.out.println(reply);
+                        }
+                    }catch(DukeException e){
+                        System.out.println("event must include '/at'");
                     }
                 }
                 else{
