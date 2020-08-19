@@ -9,7 +9,7 @@ public class Duke {
     private final String PADDING = "      ";
     private final String EXIT_COMMAND = "BYE";
     private final String MESSAGE_TEMPLATE = HORIZONTAL_LINE + NEW_LINE + PADDING + "Deuk: %s"
-            + NEW_LINE + HORIZONTAL_LINE + NEW_LINE;
+            + NEW_LINE + HORIZONTAL_LINE + NEW_LINE + NEW_LINE;
 
     public void init() {
         sayHello();
