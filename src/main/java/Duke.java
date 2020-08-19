@@ -43,6 +43,7 @@ public class Duke {
     public static void list(ArrayList<Task> tasks) {
         int counter = 1;
         System.out.println(LINE);
+        System.out.println("     Here are the tasks in your list:");
         for (Task task : tasks) {
             System.out.println("     " + counter + ".[" + task.getStatusIcon() + "] " + task.description);
             counter++;
