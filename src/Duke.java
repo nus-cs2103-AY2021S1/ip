@@ -9,12 +9,19 @@ public class Duke {
             new Formating<>(
                 new Greet(Status.GREET.toString())));
 
+        Memory memory = new Memory();
         String extract = input.nextLine();
         String nextLine = new Formating<>(extract).shorten();
         while (!nextLine.equals("bye")) {
-            System.out.println(
-                new Formating<>(
-                    new Echo(nextLine)));
+            if (nextLine.equals("list")) {
+                Formating<Memory> formatedMemo = new Formating<>(memory);
+                System.out.println(formatedMemo);
+            } else {
+                memory.addMemory(nextLine);
+                Formating<Response> formatedEecho =
+                        new Formating<>(new Echo(Status.ADD.toString() + nextLine));
+                System.out.println(formatedEecho);
+            }
             extract = input.nextLine();
             nextLine = new Formating<>(extract).shorten();
         }

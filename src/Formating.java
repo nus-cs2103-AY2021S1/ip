@@ -26,11 +26,9 @@ public class Formating<T> {
 
     @Override
     public String toString() {
-        String indentation = "   ";
         String underscore =
                 "  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + "\n";
         return underscore +
-                indentation +
                 content + "\n" +
                 underscore;
     }
