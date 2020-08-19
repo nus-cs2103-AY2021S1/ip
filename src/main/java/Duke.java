@@ -1,28 +1,24 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.*;
 
 public class Duke {
 
-    public static void displayMessage(String msg) {
+    public static void displayBar() {
         System.out.println("––––––––––––––––––––– *** –––––––––––––––––––––");
-        System.out.println(msg);
-        System.out.println("––––––––––––––––––––– *** –––––––––––––––––––––\n");
     }
 
-    public static String getOrders(List<String> orders) {
-        int index = 1;
-        String orderMessage = "TO-DO LIST:";
-        for (String order : orders) {
-            orderMessage += String.format("\n   " + index + ". " + order);
-            index++;
+    public static void displayTasks(List<Task> tasks) {
+        System.out.println("TO-DO LIST:");
+        for (Task task : tasks) {
+            System.out.println(task.toString());
         }
-        return orderMessage;
     }
 
     public static void main(String[] args) {
 
-        List<String> orders = new ArrayList<>(100);
+        List<Task> tasks = new ArrayList<>(100);
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -35,32 +31,58 @@ public class Duke {
                 "How can I help you?\n" +
                 "Type in your orders below.";
 
-        displayMessage(welcome);
+        displayBar();
+        System.out.println(welcome);
+        displayBar();
+        System.out.println();
+
         Scanner sc = new Scanner(System.in);
+        int currId = 1;
 
         while (sc.hasNextLine()) {
 
-            String order = sc.nextLine();
-            if (order.equalsIgnoreCase("bye")) {
+            displayBar();
 
-                String goodbye = "Alright, see you soon!";
-                displayMessage(goodbye);
+            String task = sc.nextLine();
+            if (task.equalsIgnoreCase("bye")) {
+
+                System.out.println("Alright, see you soon!");
                 sc.close();
+                displayBar();
                 break;
 
-            } else if (order.equalsIgnoreCase("list")) {
+            } else if (task.equalsIgnoreCase("list")) {
 
-                displayMessage(getOrders(orders));
+                displayTasks(tasks);
+
+            } else if (task.startsWith("done")){
+
+                Pattern p = Pattern.compile("\\d+");
+                Matcher m = p.matcher(task);
+                int id = Integer.parseInt(m.find() ? m.group() : null);
+
+                try {
+                    int target = id - 1;
+                    tasks.get(target).markAsDone();
+                    System.out.println("Good job! This task is now marked done:");
+                    System.out.println(tasks.get(target));
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
 
             } else {
 
-                String orderMessage = "You typed: " + order + "\n"
-                        + "'" + order + "' added to list!";
+                Task newTask = new Task(currId, task);
+                tasks.add(newTask);
+                currId++;
 
-                orders.add(order);
-                displayMessage(orderMessage);
+                System.out.println("'" + task + "' added to list!");
+                System.out.println(newTask);
 
             }
+
+            displayBar();
+            System.out.println();
         }
     }
 }
