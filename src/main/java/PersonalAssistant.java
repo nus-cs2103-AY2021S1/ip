@@ -22,7 +22,7 @@ public class PersonalAssistant {
      */
     public void getUserCommands() {
         Scanner reader = new Scanner(System.in);
-        System.out.println("Enter your command or \"bye\" to exit: ");
+        System.out.println("\nEnter your command or \"bye\" to exit: ");
 
         // Tokenize the input
         String[] cmdTokens = reader.nextLine().split(" ");
@@ -110,7 +110,8 @@ public class PersonalAssistant {
                 int i = 1;
                 for (; i < cmdTokens.length; i++) {
                     String token = cmdTokens[i];
-                    if (token == "/by") {
+                    if (token.equals("/by")) {
+                        i++;
                         break;
                     }
                     taskName.append(" " + token);
@@ -144,7 +145,8 @@ public class PersonalAssistant {
                 int i = 1;
                 for (; i < cmdTokens.length; i++) {
                     String token = cmdTokens[i];
-                    if (token == "/at") {
+                    if (token.equals("/at")) {
+                        i++;
                         break;
                     }
                     taskName.append(" " + token);
@@ -173,14 +175,14 @@ public class PersonalAssistant {
 
             default:
                 System.out.println("Invalid command");
+                this.getUserCommands();
         }
     }
 
     public void addTask(Task task) {
         store.add(task);
-        String message = String.format("Added: %s", task.getName());
+        String message = String.format("Added: %s", task.toString());
         System.out.println(message);
-        System.out.println("\n");
     }
 
     public void completeTask(Integer taskNumber) {
