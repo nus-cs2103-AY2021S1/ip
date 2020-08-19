@@ -1,3 +1,5 @@
+import Exceptions.CommandNotFoundException;
+import Exceptions.NullCommandException;
 import Util.Constants;
 
 import java.util.Objects;
@@ -8,15 +10,20 @@ public class Duke {
 
     private static void respond(Scanner scanner) throws IllegalStateException{
         DukeCommandMatcher dukeCommandMatcher = new DukeCommandMatcher();
-        while(scanner.hasNextLine()){
-            String command = scanner.nextLine();
-            System.out.println(Constants.DIVIDER);
-            String response = dukeCommandMatcher.matchCommand(command);
-            if(Objects.equals(response, "EXIT")){
-                break;
+            while (scanner.hasNextLine()) {
+                String command = scanner.nextLine();
+                try {
+                    System.out.println(Constants.DIVIDER);
+                    String response = dukeCommandMatcher.matchCommand(command);
+                    if (Objects.equals(response, "EXIT")) {
+                        break;
+                    }
+                    System.out.println(Constants.DIVIDER);
+                }catch(Exception err){
+                    System.out.println(err);
+                    System.out.println(Constants.DIVIDER);
+                }
             }
-            System.out.println(Constants.DIVIDER);
-        }
         scanner.close();
     }
 
