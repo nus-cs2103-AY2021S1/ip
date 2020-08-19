@@ -54,15 +54,30 @@ public class Duke {
     }
 
     public void add(String input) {
-        this.list.add(new Task(input));
-        System.out.println("        added: " + input);
+        String[] type = input.split(" ", 2);
+        Task task;
+        if (type[0].equals("todo")) {
+            task = new Todo(type[1]);
+        } else if (type[0].equals("deadline")) {
+            String second = type[1];
+            String[] secondSplit = second.split(" /by ", 2);
+            task = new Deadline(secondSplit[0], secondSplit[1]);
+        } else {
+            String second = type[1];
+            String[] secondSplit = second.split(" /at ", 2);
+            task = new Event(secondSplit[0], secondSplit[1]);
+        }
+        this.list.add(task);
+        System.out.println("        Got it I have added this task:");
+        System.out.println("        " + task.toString());
+        System.out.println("        you now have " + list.size() + " tasks on the list");
     }
 
     public void showList() {
         System.out.println("        Here are the tasks in your list:");
         int counter = 1;
         for (Task t : list) {
-            System.out.println("        " + counter +  ".[" + t.isDone + "]" + t.description);
+            System.out.println("        " + counter +  "." + t.toString());
             counter++;
         }
     }
