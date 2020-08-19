@@ -16,9 +16,11 @@ Got it. I've added this task:
 	[T][?] borrow book
 You now have 1 tasks in the list.
 1. [T][?] borrow book
+:( OOPS!!! Please key in a valid deadline command!
 Got it. I've added this task:
 	[D][?] return book (by: Sunday)
 You now have 2 in the list.
 Got it. I've added this task:
 	[E][?] project meeting (at: Mon 2-4pm)
 You now have 3 in the list.
+Bye, hope to chat again soon!

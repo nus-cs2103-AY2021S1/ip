@@ -20,83 +20,71 @@ public class Duke {
         String input = scanner.nextLine();
         while(!input.equals("bye")) {
             String[] strings = input.split(" ");
-            switch (strings[0]) {
-                case "list":
-                    if (tasks.isEmpty()) {
-                        System.out.println("Theres currently nothing in your list.");
-                    } else {
-                        for (int i = 0; i < tasks.size() ; i++) {
-                            System.out.printf("%d. %s%n", i + 1, tasks.get(i));
+            try {
+                switch (strings[0]) {
+                    case "list":
+                        if (tasks.isEmpty()) {
+                            throw new DukeException("Theres currently nothing in your list.");
+                        } else {
+                            for (int i = 0; i < tasks.size(); i++) {
+                                System.out.printf("%d. %s%n", i + 1, tasks.get(i));
+                            }
                         }
-                    }
-                    break;
-                case "done":
-                    try {
-                        int itemNumber = Integer.parseInt(input.split(" ")[1]);
-                        tasks.get(itemNumber - 1).isDone = true;
-                        System.out.println("Nice, I've marked this item as done:");
-                        System.out.println("\t" + tasks.get(itemNumber - 1));
-                    } catch (NumberFormatException | IndexOutOfBoundsException ex) {
-                        System.out.println("Please key in a valid number for \"done\"");
-                    }
-                    break;
-                case "todo":
-                    String task = String.join(" ", Arrays.copyOfRange(strings, 1, strings.length));
-                    Task todoTask = new Todo(task);
-                    tasks.add(todoTask);
-                    System.out.println("Got it. I've added this task:\n\t" + todoTask);
-                    System.out.println("You now have " + tasks.size() + " tasks in the list.");
-                    break;
-                case "deadline":
-                    task = String.join(" ", Arrays.copyOfRange(strings, 1, strings.length));
-                    String description = task.split(" /by ")[0];
-                    String by = task.split(" /by ")[1];
-                    Task deadlineTask = new Deadline(description, by);
-                    tasks.add(deadlineTask);
-                    System.out.println("Got it. I've added this task:\n\t" + deadlineTask);
-                    System.out.println("You now have " + tasks.size() + " in the list.");
-                    break;
-                case "event":
-                    task = String.join(" ", Arrays.copyOfRange(strings, 1, strings.length));
-                    description = task.split(" /at ")[0];
-                    String at = task.split(" /at ")[1];
-                    Task eventTask = new Event(description, at);
-                    tasks.add(eventTask);
-                    System.out.println("Got it. I've added this task:\n\t" + eventTask);
-                    System.out.println("You now have " + tasks.size() + " in the list.");
-                    break;
-                default:
-                    System.out.println("Please key in a correct command.");
+                        break;
+                    case "done":
+                        try {
+                            int itemNumber = Integer.parseInt(input.split(" ")[1]);
+                            tasks.get(itemNumber - 1).isDone = true;
+                            System.out.println("Nice, I've marked this item as done:");
+                            System.out.println("\t" + tasks.get(itemNumber - 1));
+                        } catch (NumberFormatException | IndexOutOfBoundsException ex) {
+                            throw new DukeException("Please key in a valid number for \"done\"");
+                        }
+                        break;
+                    case "todo":
+                        String task = String.join(" ", Arrays.copyOfRange(strings, 1, strings.length));
+                        if (task.isEmpty()) {
+                            throw new DukeException("The description of a todo cannot be empty.");
+                        }
+                        Task todoTask = new Todo(task);
+                        tasks.add(todoTask);
+                        System.out.println("Got it. I've added this task:\n\t" + todoTask);
+                        System.out.println("You now have " + tasks.size() + " tasks in the list.");
+                        break;
+                    case "deadline":
+                        try {
+                            task = String.join(" ", Arrays.copyOfRange(strings, 1, strings.length));
+                            String description = task.split(" /by ")[0];
+                            String by = task.split(" /by ")[1];
+                            Task deadlineTask = new Deadline(description, by);
+                            tasks.add(deadlineTask);
+                            System.out.println("Got it. I've added this task:\n\t" + deadlineTask);
+                            System.out.println("You now have " + tasks.size() + " in the list.");
+                        } catch (ArrayIndexOutOfBoundsException ex) {
+                            throw new DukeException("Please key in a valid deadline command!");
+                        }
+                        break;
+                    case "event":
+                        try {
+                            task = String.join(" ", Arrays.copyOfRange(strings, 1, strings.length));
+                            String description = task.split(" /at ")[0];
+                            String at = task.split(" /at ")[1];
+                            Task eventTask = new Event(description, at);
+                            tasks.add(eventTask);
+                            System.out.println("Got it. I've added this task:\n\t" + eventTask);
+                            System.out.println("You now have " + tasks.size() + " in the list.");
+                        } catch (ArrayIndexOutOfBoundsException ex) {
+                            throw new DukeException("Please key in a valid event command!");
+                        }
+                        break;
+                    default:
+                        throw new DukeException("Please key in a correct command.");
+                }
+            } catch (DukeException ex) {
+                System.err.println(ex.getMessage());
+            } finally {
+                input = scanner.nextLine();
             }
-            input = scanner.nextLine();
-
-
-        /* if(input.equals("list")) {
-                if (tasks.isEmpty()) {
-                    System.out.println("Theres currently nothing in your list.");
-                } else {
-                    for (int i = 0; i < tasks.size() ; i++) {
-                        System.out.printf("%d. %s%n", i + 1, tasks.get(i));
-                    }
-                }
-                input = scanner.nextLine();
-            } else if (input.split(" ")[0].equals("done")) {
-                try {
-                    int itemNumber = Integer.parseInt(input.split(" ")[1]);
-                    tasks.get(itemNumber - 1).isDone = true;
-                    System.out.println("Nice, I've marked this item as done:");
-                    System.out.println("\t" + tasks.get(itemNumber - 1));
-                } catch (NumberFormatException | IndexOutOfBoundsException ex) {
-                    System.out.println("Please key in a valid number for \"done\"");
-                } finally {
-                    input = scanner.nextLine();
-                }
-
-            } else {
-                tasks.add(new Task(input));
-                System.out.println("added: " + input);
-                input = scanner.nextLine();
-            }*/
         }
         System.out.println("Bye, hope to chat again soon!");
     }
