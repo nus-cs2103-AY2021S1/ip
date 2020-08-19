@@ -25,11 +25,12 @@ public class Duke {
 
         while (!userInput.equals(CLOSING_STRING)) {
             userInput = scanner.nextLine();
+            String firstWord = userInput.split(" ")[0];
             if (userInput.equals(CLOSING_STRING)) {
                 System.out.println(getClosingText());
             } else if (userInput.equals(LIST_STRING)) {
                 System.out.println(processString(getListString()));
-            } else if (userInput.substring(0, 4).equals(DONE_STRING)) {
+            } else if (firstWord.equals(DONE_STRING)) {
                 int index = Integer.parseInt(userInput.substring(5));
                 System.out.println(registerTaskDone(index));
             } else {
