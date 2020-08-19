@@ -24,6 +24,14 @@ public class TaskList {
         return taskList.size();
     }
 
+    public String getAllTasksAsString() {
+        String output = "Here are the tasks in your list: \n";
+        for (int i = 0; i < taskList.size(); i++) {
+            output = output + ((i + 1) + ". " + taskList.get(i)) + "\n";
+        }
+        return output;
+    }
+
     public void displayTasks() {
         System.out.println("Here are the tasks in your list: ");
         for (int i = 0; i < taskList.size(); i++) {
