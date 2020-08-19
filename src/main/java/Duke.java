@@ -64,8 +64,9 @@ public class Duke {
                     taskList.printList();
                     break;
                 default:
-                    taskList.add(new Task(nextInput));
-                    printWithLines("added: " + nextInput + "\n");
+                    Task newTask = new Task(nextInput);
+                    taskList.add(newTask);
+                    printWithLines("added: " + newTask.toString() + "\n");
             }
             nextInput = input.nextLine();
         }
