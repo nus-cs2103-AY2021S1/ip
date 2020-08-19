@@ -18,10 +18,7 @@ public class Duke {
      * The implementation and main driver of the chatbot.
      */
 
-    /** The name of the bot */
-    private final String name;
-
-    /** Flag which functions as a switch for the program. */
+    /** Flag which acts as a switch for the program. */
     private boolean isRunning;
 
     /** List which stores the Tasks. */
@@ -32,11 +29,10 @@ public class Duke {
      * Creates a new empty list and sends a greetings message.
      * @param name the string name of the bot.
      */
-    public Duke(String name) {
-        this.name = name;
+    public Duke() {
         this.isRunning = true;
         this.list = new ArrayList<>();
-        sendMessage("Hello! " + this.name + " lives to serve :)");
+        sendMessage("Hello! Tebby lives to serve :)");
     }
 
     /**
@@ -44,7 +40,7 @@ public class Duke {
      */
     public void exit() {
         isRunning = false;
-        sendMessage("Bye :(");
+        sendMessage("Bye!");
     }
 
     /**
@@ -75,7 +71,7 @@ public class Duke {
      * Private method to generate the message for informing number of Tasks in list.
      * @return the String message.
      */
-    private String getNumberOfTasks() {
+    private String getTaskReportMessage() {
         int size = list.size();
         String task = size == 1 ? "task" : "tasks";
         String num = size == 0 ? "no" : String.valueOf(size);
@@ -93,6 +89,25 @@ public class Duke {
      * @throws DukeException
      */
     public void addToList(String type, String description) throws DukeException {
+        try {
+            Task task = createTask(type, description);
+            list.add(task);
+            String msg = "Okay I've added:\n    " + task + "\n";
+            msg += getTaskReportMessage();
+            sendMessage(msg);
+        } catch (DukeException de) {
+            throw de;
+        }
+    }
+
+    /**
+     * Helper method to create valid Task objects.
+     * @param type the subtype of Task
+     * @param description the description of the task
+     * @return new Task object
+     * @throws DukeException
+     */
+    private Task createTask(String type, String description) throws DukeException {
         Task task;
         String[] split;
         String desc;
@@ -128,10 +143,7 @@ public class Duke {
                 task = new Task(description);
                 break;
         }
-        list.add(task);
-        String msg = "Okay I've added:\n    " + task + "\n";
-        msg += getNumberOfTasks();
-        sendMessage(msg);
+        return task;
     }
 
     /**
@@ -169,7 +181,7 @@ public class Duke {
             Task task = list.get(index);
             list.remove(task);
             String msg = "Okay I've deleted:\n    " + task + "\n";
-            msg += getNumberOfTasks();
+            msg += getTaskReportMessage();
             sendMessage(msg);
         } catch (NumberFormatException e) {
             throw new DukeException("Sorry, I don't know what that means :(");
@@ -250,6 +262,12 @@ public class Duke {
                     } catch (DukeException e) {
                         sendMessage(e.getMessage());
                         break;
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        sendMessage(
+                                new DukeException("Give me a task number to delete!")
+                                .getMessage()
+                        );
+                        break;
                     }
                 default:
                     sendMessage(
@@ -280,7 +298,7 @@ public class Duke {
                 + "Level: " + lvl;
         System.out.println(logo);
 
-        Duke duke = new Duke("Tebby");
+        Duke duke = new Duke();
         duke.run();
     }
 }
