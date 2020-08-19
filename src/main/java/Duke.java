@@ -20,23 +20,35 @@ public class Duke {
         System.out.println("\tBye! Have a great day and hope to see you soon! :D");
     }
 
-    public void addTodo(String description) {
-        ToDo task = new ToDo(description, false);
-        this.tasks.add(task);
-        printAddedConfirmation(task);
-    }
 
-    public void addDeadline(String description, String doBy) {
-        Deadline task = new Deadline(description, false, doBy);
-        this.tasks.add(task);
-        printAddedConfirmation(task);
-
-    }
-
-    public void addEvent(String description, String time) {
-        Event task = new Event(description, false, time);
-        this.tasks.add(task);
-        printAddedConfirmation(task);
+    public void addTask(String keyword, String description) throws DukeException{
+        switch (keyword) {
+            case "todo":
+                Task task = new ToDo(description, false);
+                this.tasks.add(task);
+                printAddedConfirmation(task);
+                break;
+            case "deadline":
+                String[] splitSlash = description.split(" /by ");
+                if (splitSlash.length != 2) {
+                    throw new DukeException("\tPaise! :') Please use the correct format: deadline <task> /by <time>");
+                }
+                task = new Deadline(splitSlash[0], false, splitSlash[1]);
+                this.tasks.add(task);
+                printAddedConfirmation(task);
+                break;
+            case "event":
+                splitSlash = description.split(" /at ");
+                if (splitSlash.length != 2) {
+                    throw new DukeException("\tPaise! :') Please use the correct format: event <task> /at <time>");
+                }
+                task = new Event(splitSlash[0], false, splitSlash[1]);
+                this.tasks.add(task);
+                printAddedConfirmation(task);
+                break;
+            default:
+                break;
+        }
     }
 
     public void printAddedConfirmation(Task task) {
@@ -81,29 +93,14 @@ public class Duke {
         }
     }
 
-    public String getRestOfString(String[] splitSpace) throws DukeException {
-        if (splitSpace.length == 1) {
-            throw new DukeException("\tSorry! The description of a todo cannot be empty :')");
-        }
-        StringBuilder rest = new StringBuilder();
-        for (int i = 1; i < splitSpace.length; i++) {
-            rest.append(splitSpace[i]);
-            if (i != splitSpace.length - 1) {
-                rest.append(" ");
-            }
-        }
-        return rest.toString();
-    }
-
     public void serveClient() {
         sayHello();
         while (sc.hasNext()) {
             try {
                 String input = sc.nextLine();
-                String[] splitSpace = input.split(" ");
-                String keyword = splitSpace[0];
+                String[] split = input.split(" ",2);
 
-                switch (keyword) {
+                switch (split[0]) {
                     case "bye":
                         sayBye();
                         break;
@@ -111,35 +108,26 @@ public class Duke {
                         displayTasks();
                         break;
                     case "done":
-                        int index = Integer.parseInt(splitSpace[1]) - 1;
+                        int index = Integer.parseInt(split[1]) - 1;
                         markTaskAsDone(index);
                         break;
                     case "todo":
-                        addTodo(getRestOfString(splitSpace));
-                        break;
                     case "deadline":
-                        String[] splitSlash = getRestOfString(splitSpace).split(" /by ");
-                        if (splitSlash.length != 2) {
-                            throw new DukeException("\tPaise! :') Please use the correct format: deadline <task> /by <time>");
-                        }
-                        addDeadline(splitSlash[0], splitSlash[1]);
-                        break;
                     case "event":
-                        String[] split = getRestOfString(splitSpace).split(" /at ");
-                        if (split.length != 2) {
-                            throw new DukeException("\tPaise! :') Please use the correct format: event <task> /at <time>");
+                        if (split.length < 2) {
+                            throw new DukeException("\tSorry! The description of a todo cannot be empty :')");
                         }
-                        addEvent(split[0], split[1]);
+                        addTask(split[0], split[1]);
                         break;
                     case "delete":
-                        int num = Integer.parseInt(splitSpace[1]) - 1;
-                        deleteTask(num);
+                        index = Integer.parseInt(split[1]) - 1;
+                        deleteTask(index);
                         break;
                     default:
                         throw new DukeException("\tApologies! I do not understand what that means :')");
                 }
 
-                if (keyword.equals("bye")) {
+                if (split[0].equals("bye")) {
                     break;
                 }
             } catch (DukeException e) {
