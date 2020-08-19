@@ -5,7 +5,7 @@ public class Duke {
     public static void main(String[] args) {
 
         Scanner userInput = new Scanner(System.in);
-        ArrayList<String> toDoList = new ArrayList<>();
+        ArrayList<Task> toDoList = new ArrayList<>();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -18,18 +18,34 @@ public class Duke {
 
         while (true) {
             String input = userInput.nextLine();
-            if (input.toLowerCase().equals("bye")) {
+            String[] inputArray = input.split(" ");
+            String firstWord = inputArray[0];
+            if (firstWord.toLowerCase().equals("bye")) { // for termination
+
                 System.out.println("Well I'll see you around, pardner!!");
                 break;
-            } else if (input.toLowerCase().equals("list")) {
+
+            } else if (firstWord.toLowerCase().equals("list")) { // to display list of tasks
+
                 System.out.println("Here's yer current list of thingymajigs");
+
                 for(int i = 0; i < toDoList.size();i++ ) {
-                    String index = Integer.toString(i + 1);
-                    System.out.println(i + 1 + ". " + toDoList.get(i));
+                    Task task = toDoList.get(i);
+                    System.out.println(i + 1 + ". " + "[" + task.getStatusIcon() + "] " + task.description);
                 }
-            } else {
+
+            } else if (firstWord.toLowerCase().equals("done")) {
+                int index = Integer.parseInt(inputArray[1]);
+                Task task = toDoList.get(index - 1);
+                task.markAsDone();
+                System.out.println("Sure thing baws! This right here is marked as done!\n" + index + ". " + "[" + task.getStatusIcon() + "] " + task.description);
+
+            } else { // to add task to list
+
+                Task task = new Task(input);
+                toDoList.add(task);
                 System.out.println("Alright, I'll put it on yer tab: " + input);
-                toDoList.add(input);
+
             }
         }
     }
