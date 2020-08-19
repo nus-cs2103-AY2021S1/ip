@@ -39,15 +39,27 @@ public class PersonalAssistant {
     public void execute(String[] cmdTokens) {
         String cmd = cmdTokens[0];
         switch (cmd) {
-            case "bye":
+            /**
+             * EXIT
+             */
+            case "bye": {
                 System.out.println("Goodbye!");
                 break;
-            case "list":
+            }
+
+            /**
+             * LIST TASKS
+             */
+            case "list": {
                 this.list();
                 getUserCommands();
                 break;
+            }
 
-            case "done":
+            /**
+             * UPDATE TASKS
+             */
+            case "done": {
                 // Handle incorrect argument lengths
                 if (cmdTokens.length != 2) {
                     String errStatement = String.format("%s has invalid number of arguments", cmd);
@@ -69,17 +81,51 @@ public class PersonalAssistant {
                 // Get the next command
                 this.getUserCommands();
                 break;
+            }
 
-            default:
+            /**
+             * TASK COMMANDS
+             */
+            case "todo": {
                 // Otherwise it is a task
                 String taskName = String.join(" ", cmdTokens);
-                Task task = new Task(false, taskName);
+                Task task = new Task(false, taskName, TaskTypes.TODO);
 
                 // Store the task
                 addTask(task);
 
                 // Get the next command
                 this.getUserCommands();
+                break;
+            }
+
+            case "deadline": {
+                // Otherwise it is a task
+                String taskName = String.join(" ", cmdTokens);
+                Task task = new Task(false, taskName, TaskTypes.DEADLINE);
+                // Store the task
+                addTask(task);
+
+                // Get the next command
+                this.getUserCommands();
+                break;
+            }
+
+            case "event": {
+                // Otherwise it is a task
+                String taskName = String.join(" ", cmdTokens);
+                Task task = new Task(false, taskName, TaskTypes.EVENT);
+
+                // Store the task
+                addTask(task);
+
+                // Get the next command
+                this.getUserCommands();
+                break;
+            }
+
+            default:
+                System.out.println("Invalid command");
         }
     }
 
