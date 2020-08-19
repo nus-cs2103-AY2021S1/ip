@@ -6,6 +6,6 @@ public class DukeException {
 
     @Override
     public String toString() {
-        return "┐(￣ヘ￣)┌ " + this.message;
+        return this.message;
     }
 }
