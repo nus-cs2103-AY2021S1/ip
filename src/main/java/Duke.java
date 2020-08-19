@@ -24,38 +24,47 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (true) {
             String input = sc.nextLine();
-            if (input.equals("bye")) { //exit condition
-                String goodbye = "Bye. Hope to see you again soon!";
-                System.out.println(horiLine + goodbye + "\n" + horiLine);
-                break;
-            } else if (input.equals("list")) {
-                System.out.println(horiLine + "Here are the tasks in your list:");
-                for (Task task : List) {
-                    //print out task with numbering
-                    System.out.println(String.format("%s.", task.getNumber()) + task.toString());
+            try {
+                if (input.equals("bye")) { //exit condition
+                    String goodbye = "Bye. Hope to see you again soon!";
+                    System.out.println(horiLine + goodbye + "\n" + horiLine);
+                    break;
+                } else if (input.equals("list")) {
+                    System.out.println(horiLine + "Here are the tasks in your list:");
+                    for (Task task : List) {
+                        //print out task with numbering
+                        System.out.println(String.format("%s.", task.getNumber()) + task.toString());
+                    }
+                    System.out.println(horiLine);
+                } else if (input.startsWith("done")) {
+                    String[] number = input.split("done ");
+                    markDone(Integer.parseInt(number[1]));
+                } else if (input.startsWith("deadline")) {
+                    //whatever is after deadline
+                    String deadlineInput = (input.split("deadline "))[1];
+                    String deadlineName = (deadlineInput.split(" /by "))[0];
+                    String deadlineTime = (deadlineInput.split(" /by "))[1];
+                    Deadline newDeadline = new Deadline(deadlineName, deadlineTime);
+                    addTask(newDeadline);
+                } else if (input.startsWith("todo")) {
+                    String[] todoInput = input.split("todo ");
+                    if(todoInput.length < 2) {
+                        throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                    }
+                    String todoName = todoInput[1];
+                    Todo newTodo = new Todo(todoName);
+                    addTask(newTodo);
+                } else if (input.startsWith("event")) {
+                    String eventInput = (input.split("event "))[1];
+                    String eventName = (eventInput.split(" /at "))[0];
+                    String eventTime = (eventInput.split(" /at "))[1];
+                    Event newEvent = new Event(eventName, eventTime);
+                    addTask(newEvent);
+                } else {
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-                System.out.println(horiLine);
-            } else if(input.startsWith("done")) {
-                String[] number = input.split("done ");
-                markDone(Integer.parseInt(number[1]));
-            } else if(input.startsWith("deadline")) {
-                //whatever is after deadline
-                String deadlineInput = (input.split("deadline "))[1];
-                String deadlineName = (deadlineInput.split(" /by "))[0];
-                String deadlineTime = (deadlineInput.split(" /by "))[1];
-                Deadline newDeadline = new Deadline(deadlineName, deadlineTime);
-                addTask(newDeadline);
-            } else if(input.startsWith("todo")) {
-                String[] todoInput = input.split("todo ");
-                String todoName = todoInput[1];
-                Todo newTodo = new Todo(todoName);
-                addTask(newTodo);
-            } else if(input.startsWith("event")) {
-                String eventInput = (input.split("event "))[1];
-                String eventName = (eventInput.split(" /at "))[0];
-                String eventTime = (eventInput.split(" /at "))[1];
-                Event newEvent = new Event(eventName, eventTime);
-                addTask(newEvent);
+            } catch (Exception e) {
+                System.out.println(horiLine + e + "\n" + horiLine);
             }
         }
         sc.close();
