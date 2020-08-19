@@ -52,7 +52,7 @@ public class Duke {
                 
                 int toMark = Integer.parseInt(input.split(" ")[1]) - 1;
                 tasks.get(toMark).markAsDone();
-                output = (strings.getString("output.done") + tasks.get(toMark)).strip();
+                output = String.format(strings.getString("output.done"), tasks.get(toMark)).strip();
                 
             } else if (inputMainCommand.equals(strings.getString("command.todo"))) {
                 
@@ -64,7 +64,7 @@ public class Duke {
             } else if (inputMainCommand.equals(strings.getString("command.deadline"))) {
                 
                 String description = input.split("/by")[0]
-                        .replace(strings.getString("command.todo"), "")
+                        .replace(strings.getString("command.deadline"), "")
                         .strip();
 
                 String by = input.split("/by")[1]
@@ -78,7 +78,7 @@ public class Duke {
             } else if (inputMainCommand.equals(strings.getString("command.event"))) {
 
                 String description = input.split("/at")[0]
-                        .replace(strings.getString("command.deadline"), "")
+                        .replace(strings.getString("command.event"), "")
                         .strip();
 
                 String at = input.split("/at")[1]

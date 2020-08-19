@@ -6,8 +6,15 @@ if not exist ..\bin mkdir ..\bin
 REM delete output from previous run
 del ACTUAL.TXT
 
+REM move resources into the bin folder
+rmdir ..\bin\resources\ /s /q
+xcopy /s ..\src\main\java\resources ..\bin\resources\
+
+set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
+
 REM compile the code into the bin folder
-javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\Duke.java
+javac -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\tasks\*.java
+javac -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\Duke.java
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1

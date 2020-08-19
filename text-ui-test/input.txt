@@ -1,0 +1,6 @@
+todo test 1
+deadline test 2 /by 8th
+event test 3 /at 9th
+done 2
+list
+bye
