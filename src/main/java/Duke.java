@@ -33,28 +33,27 @@ public class Duke {
         showGoodbye();
     }
 
-    static String[] getInputArr() {
+    private static String[] getInputArr() {
         String input = scanner.nextLine();
         return input.split("\\s+");
     }
 
-    public static void showGreeting() {
-        String message = "      Eh what's up\n"
-                + "      What do you want?";
+    private static void showGreeting() {
+        String message = "Eh what's up\n"
+                + "What do you want?";
         System.out.println(wrapMessage(message));
     }
 
-    public static void showGoodbye() {
-        String message = "     Alright I'll see you around!";
+    private static void showGoodbye() {
+        String message = "Alright I'll see you around!";
         System.out.println(wrapMessage(message));
     }
 
-    public static void showList() {
-        String message = "    Here are the tasks in your list:\n";
+    private static void showList() {
+        String message = "Here are the tasks in your list:\n";
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
-            message += "    "
-                    + (i + 1)
+            message += (i + 1)
                     + ". "
                     + task
                     +"\n";
@@ -62,7 +61,7 @@ public class Duke {
         System.out.println(wrapMessage(message));
     }
 
-    public static void addTask(String type, String[] inputArr) {
+    private static void addTask(String type, String[] inputArr) {
         String dateTime = "";
         Task task;
 
@@ -72,27 +71,32 @@ public class Duke {
             dateTime = getTaskTimeDate(inputArr);
         }
 
-        if (type.equals("deadline")) {
+        switch (type) {
+        case "deadline":
             task = new Deadline(desc, dateTime);
-        } else if (type.equals("event")) {
+            break;
+        case "event":
             task = new Event(desc, dateTime);
-        } else {
+            break;
+        case "todo":
             task = new Todo(desc);
+            break;
+        default:
+            throw new IllegalStateException("Unexpected type value: " + type);
         }
 
         taskList.add(task);
 
-        String message = "    Got it. I've added this task:\n"
-                + "      "
+        String message = "Got it. I've added this task:\n"
                 + task
                 + "\n"
-                + "    Now you have "
+                + "Now you have "
                 + taskList.size()
                 + " tasks in the list.";
         System.out.println(wrapMessage(message));
     }
 
-    public static String getTaskDescription(String[] inputArr) {
+    private static String getTaskDescription(String[] inputArr) {
         String desc = "";
         int i = 1;
         while ((i < inputArr.length) && (!inputArr[i].contains("/"))) {
@@ -103,7 +107,7 @@ public class Duke {
         return desc.substring(0, desc.length() - 1);
     }
 
-    public static String getTaskTimeDate(String[] inputArr) {
+    private static String getTaskTimeDate(String[] inputArr) {
         String dateTime = "";
         int i = 0;
         while (!inputArr[i].contains("/")) {
@@ -118,23 +122,23 @@ public class Duke {
         return dateTime.substring(0, dateTime.length() - 1);
     }
 
-    public static void doneTask(String[] inputArr) {
+    private static void doneTask(String[] inputArr) {
         String lastChar = inputArr[inputArr.length - 1];
         int i = Integer.parseInt(lastChar);
         Task task = taskList.get(i - 1);
         task.markAsDone();
-        String message = "      Nice! I've marked this task as done:\n"
-                + "        "
+        String message = "Nice! I've marked this task as done:\n"
                 + task;
         System.out.println(wrapMessage(message));
     }
 
-    public static String wrapMessage(String message) {
+    private static String wrapMessage(String message) {
         if (message.endsWith("\n")) {
+            // If the message ends with a newline, remove the newline
             message = message.substring(0, message.length() - 1);
-        } // If the message ends with a newline, remove the newline
+        }
 
-        String line = "    ____________________________________________________________\n";
+        String line = "____________________________________________________________\n";
         return line
                 + message
                 + "\n"
