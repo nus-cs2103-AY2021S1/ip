@@ -12,14 +12,20 @@ public class Duke {
     static String line = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
     static TaskList taskList = new TaskList();
 
+
+
     private static class Task {
 
         private final String name;
         private boolean done;
 
-        public Task(String name) {
-            this.name = name;
-            this.done = false;
+        public Task(String name, TaskType taskType) throws DukeEmptyDescException {
+            if (isBlankString(name)) {
+                throw new DukeEmptyDescException(taskType);
+            } else {
+                this.name = name;
+                this.done = false;
+            }
         }
 
         public String getStatusIcon() {
@@ -39,8 +45,8 @@ public class Duke {
 
     private static class Todo extends Task {
 
-        public Todo(String name) {
-            super(name);
+        public Todo(String name) throws DukeEmptyDescException {
+            super(name, TaskType.TODO);
         }
 
         @Override
@@ -53,8 +59,8 @@ public class Duke {
 
         protected String by;
 
-        public Deadline(String name, String by) {
-            super(name);
+        public Deadline(String name, String by) throws DukeEmptyDescException {
+            super(name, TaskType.DEADLINE);
             this.by = by;
         }
 
@@ -68,8 +74,8 @@ public class Duke {
 
         protected String at;
 
-        public Event(String name, String at) {
-            super(name);
+        public Event(String name, String at) throws DukeEmptyDescException {
+            super(name, TaskType.EVENT);
             this.at = at;
         }
 
@@ -132,32 +138,12 @@ public class Duke {
 
         while (!nextInput.equals("bye")) {
 
-            switch (inputPrefix) {
-                case "list":
-                    taskList.printList();
-                    break;
-                case "done":
-                    taskList.completeTask(Integer.parseInt(inputSuffix) - 1);
-                    break;
-                case "todo":
-                    taskList.addTask(new Todo(inputSuffix));
-                    break;
-                case "deadline":
-                    String[] deadlineParts = inputSuffix.split("/by",2);
-                    String deadlineName = deadlineParts[0];
-                    String by = deadlineParts.length == 1 ? "" : deadlineParts[1];
-                    taskList.addTask(new Deadline(deadlineName, by));
-                    break;
-                case "event":
-                    String[] eventParts = inputSuffix.split("/at",2);
-                    String eventName = eventParts[0];
-                    String at = eventParts.length == 1 ? "" : eventParts[1];
-                    taskList.addTask(new Event(eventName, at));
-                    break;
-                default:
-                    taskList.addTask(new Task(nextInput));
-
+            try {
+                handleInput(inputPrefix, inputSuffix);
+            } catch (DukeException dukeException) {
+                printWithLines(dukeException + "\n");
             }
+
 
             nextInput = input.nextLine();
             inputParts = nextInput.split(" ", 2);
@@ -170,6 +156,63 @@ public class Duke {
 
     private static void printWithLines(String output) {
         System.out.println(line + "\n" + output + line);
+    }
+
+    private static void handleInput(String inputPrefix, String inputSuffix) throws DukeException {
+        switch (inputPrefix) {
+            case "list":
+                taskList.printList();
+                break;
+            case "done":
+                taskList.completeTask(Integer.parseInt(inputSuffix) - 1);
+                break;
+            case "todo":
+                taskList.addTask(new Todo(inputSuffix));
+                break;
+            case "deadline":
+                String[] deadlineParts = inputSuffix.split("/by",2);
+                String deadlineName = deadlineParts[0];
+                if (deadlineParts.length == 1) {
+                    throw new DukeEmptyDescException(TaskType.EVENT);
+                } else {
+                    String by = deadlineParts[1];
+                    if (isBlankString(by)) {
+                        throw new DukeEmptyDescException(TaskType.EVENT);
+                    } else {
+                        taskList.addTask(new Deadline(deadlineName, by));
+                        break;
+                    }
+                }
+            case "event":
+                String[] eventParts = inputSuffix.split("/at",2);
+                String eventName = eventParts[0];
+                if (eventParts.length == 1) {
+                    throw new DukeEmptyDescException(TaskType.EVENT);
+                } else {
+                    String at = eventParts[1];
+                    if (isBlankString(at)) {
+                        throw new DukeEmptyDescException(TaskType.EVENT);
+                    } else {
+                        taskList.addTask(new Event(eventName, at));
+                        break;
+                    }
+                }
+            default:
+                throw new DukeNoSuchInputException();
+        }
+    }
+
+
+
+    public static boolean isBlankString(String string) {
+        if (string.length() != 0) {
+            for (char c : string.toCharArray()) {
+                if (c != ' ') {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 }
