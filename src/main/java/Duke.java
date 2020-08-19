@@ -2,6 +2,8 @@ package main.java;
 
 import java.util.Scanner;
 
+//javac -cp . main/java/Duke.java
+
 public class Duke {
     public static void main(String[] args) {
         /*String logo = " ____        _        \n"
@@ -34,18 +36,32 @@ public class Duke {
                     int temp = 1;
                     System.out.println(indent + "Here are the tasks in your list:");
                     while (task_arr[temp - 1] != null) {
-                        System.out.println(indent + temp + ".[" + task_arr[temp - 1].getStatusIcon() + "] " + task_arr[temp - 1].getDescription());
+                        System.out.println(indent + temp + "." + task_arr[temp - 1]);
                         temp++;
                     }
-                } else if (input.substring(0, 4).equals("done")) {
-                    int done_number = Integer.parseInt(input.substring(5, input.length()));
-                    task_arr[count - 1].markAsDone();
-                    System.out.println(indent + "Nice! I've marked this task as done:");
-                    System.out.println(indent + "  [\u2713] " + task_arr[count - 1].getDescription());
                 } else {
-                    System.out.println(indent + "added: " + input);
-                    task_arr[count] = new Task(input);
-                    count++;
+                    String[] input_split_arr = input.split(" ", 2);
+                    String type = input_split_arr[0];
+                    if (type.equals("done")) {
+                        int done_number = Integer.parseInt(input_split_arr[1]);
+                        task_arr[done_number - 1].markAsDone();
+                        System.out.println(indent + "Nice! I've marked this task as done:");
+                        System.out.println(indent + "  [\u2713] " + task_arr[done_number - 1].toString().split("] ", 2)[1]);
+                    } else if (type.equals("deadline") || type.equals("event") || type.equals("todo")){
+                        if (type.equals("todo")) {
+                            task_arr[count] = new Todo(input_split_arr[1]);
+                        } else if (type.equals("deadline")) {
+                            input_split_arr = input_split_arr[1].split(" /", 2);
+                            task_arr[count] = new Deadline(input_split_arr[0], input_split_arr[1].split(" ", 2)[1]);
+                        } else if (type.equals("event")) {
+                            input_split_arr = input_split_arr[1].split(" /", 2);
+                            task_arr[count] = new Event(input_split_arr[0], input_split_arr[1].split(" ", 2)[1]);
+                        }
+                        System.out.println(indent + "Got it. I've added ths task:");
+                        System.out.println(indent + "  " + task_arr[count]);
+                        count++;
+                        System.out.println(indent + "Now you have " + count + " tasks in the list.");
+                    }
                 }
                 System.out.println(separation_line + "\n");
                 //System.out.println(starting_line + input + ending_line);
