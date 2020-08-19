@@ -9,13 +9,17 @@ public class Echo {
         System.out.println(this.line);
     }
 
+    public void addLines(String input) {
+        System.out.println(this.line);
+        System.out.println(input);
+        System.out.println(this.line);
+    }
+
     public void echo(String input) {
-        System.out.println(this.line);
         if (input.equals("bye")) {
-            System.out.println(this.goodbye);
+            this.addLines(String.format("   %s",this.goodbye));
         } else {
-            System.out.println("    " + input);
+            this.addLines(String.format("   %s",input));
         }
-        System.out.println(this.line);
     }
 }

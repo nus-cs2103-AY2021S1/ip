@@ -11,13 +11,13 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        Echo e = new Echo();
+        AddList a = new AddList();
 
         String input = "";
 
         while (!input.equals("bye")) {
             input = sc.nextLine();
-            e.echo(input);
+            a.allocate(input);
         }
     }
 }
