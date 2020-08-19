@@ -17,7 +17,7 @@ public class Sparrow {
     }
 
     public static boolean handle(String command) {
-        String[] commandArr = command.trim().split("\\s+");
+        String[] commandArr = command.trim().split("\\s+", 2);
         switch (commandArr[0]) {
             case "bye":
                 reply("Bye. Hope t' see ye again soon!");
@@ -30,11 +30,19 @@ public class Sparrow {
                     markAsDone(commandArr[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Please enter a task number after \"done\".");
-                } finally {
-                    break;
                 }
+                break;
+            case "todo":
+                addTask("todo", commandArr[1]);
+                break;
+            case "deadline":
+                addTask("deadline", commandArr[1]);
+                break;
+            case "event":
+                addTask("event", commandArr[1]);
+                break;
             default:
-                add(command);
+                addTask(command, "");
                 break;
         }
         return true;
@@ -64,9 +72,35 @@ public class Sparrow {
         sc.close();
     }
 
-    public static void add(String data) {
-        taskList.add(new Task(data));
-        reply("added: " + data);
+    public static void addTask(String type, String details) {
+        StringBuilder sb = new StringBuilder("Aye Aye Captain! I've added this task:\n  " );
+        switch (type) {
+            case "todo":
+                Todo todo = new Todo(details);
+                taskList.add(todo);
+                sb.append(todo);
+                break;
+            case "deadline":
+                String[] taskDetails = details.trim().split("/by");
+                String description = taskDetails[0];
+
+                Deadline deadline = new Deadline(description, taskDetails[1].trim());
+                taskList.add(deadline);
+                sb.append(deadline);
+                break;
+            case "event":
+                taskDetails = details.trim().split("/at");
+                description = taskDetails[0];
+
+                Event event = new Event(description, taskDetails[1].trim());
+                taskList.add(event);
+                sb.append(event);
+                break;
+
+        }
+        String summary = String.format("\nNow you have %d task(s) in the list.", taskList.size());
+        sb.append(summary);
+        reply(sb.toString());
     }
 
     public static void displayList() {
