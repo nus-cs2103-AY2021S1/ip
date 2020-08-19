@@ -60,6 +60,7 @@ public class Task {
         tasks.remove(index - 1);
         System.out.println(outputMsg);
     }
+
     @Override
     public String toString() {
         return "[" + getStatus() + "] " + taskTitle;

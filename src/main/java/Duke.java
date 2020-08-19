@@ -118,6 +118,8 @@ public class Duke {
                     Task.doneTask(index, tasks);
                 } catch (IndexOutOfBoundsException e) {
                     invalidDoneTaskIndex(tasks.size());
+                } catch (NumberFormatException e) {
+                    invalidDoneTaskIndex(tasks.size());
                 }
             } else if (inputMsg.startsWith("todo")) {
                 String taskTitle;
@@ -153,7 +155,10 @@ public class Duke {
                     Task.deleteTask(index, tasks);
                 } catch (IndexOutOfBoundsException e) {
                     invalidDelete(tasks.size());
+                } catch (NumberFormatException e) {
+                    invalidDelete(tasks.size());
                 }
+
             } else {
                 invalidInput();
             }
