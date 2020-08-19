@@ -1,6 +1,7 @@
 public class Task{
     private String name;        // stores the name of this task
     private Boolean closed = false;     //indicates the status of this task
+    private String taskType = " ";
 
     Task(){}
 
@@ -27,6 +28,10 @@ public class Task{
      */
     Boolean checkDone(){
         return this.closed;
+    }
+
+    public String getTaskType(){
+        return this.taskType;
     }
 
     @Override

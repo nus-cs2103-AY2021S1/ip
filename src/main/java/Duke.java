@@ -6,6 +6,7 @@ public class Duke {
                         "    _|      _|    _|              _|    _|  _|    _|       \n" +
                         "    _|        _|_|                _|_|_|      _|_|     _|  ";
         System.out.println("Hello from\n" + logo);
+        System.out.println("This is a Duke Project.\n");
 
         System.out.println("What you are going to do today?");
 

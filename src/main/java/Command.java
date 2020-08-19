@@ -8,6 +8,7 @@ public enum Command{
     TODO,
     DEADLINE,
     EVENT,
+    DELETE,
     INVALID;
 
     static private String originalCommand = ""; //originalCommand stores the original command (case sensitive)

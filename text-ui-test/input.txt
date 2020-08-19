@@ -1,0 +1,8 @@
+todo t1
+todo t2
+deadline t3 /by 1
+event t4 /at 2
+list
+done 2
+list
+hello
