@@ -6,7 +6,8 @@ public class Todo extends Task {
     public Todo(String description) throws InvalidDescriptionException {
         super(description);
         if (description.isBlank()) {
-            throw new InvalidDescriptionException("Hey! Todo description shouldn't be blank.");
+            throw new InvalidDescriptionException("Hey! " +
+                    "Todo description shouldn't be blank.");
         }
     }
 
