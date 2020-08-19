@@ -18,7 +18,7 @@ public class Duke {
         List<Task> pastInputs = new ArrayList<>();
         boolean terminated = false;
 
-        while (!terminated) {
+        while (!terminated && scanner.hasNext()) {
             String userInput = scanner.nextLine();
             //determining user input type via the first word
             String[] splitInput = userInput.split(" ");
@@ -62,7 +62,7 @@ public class Duke {
                     }
                 } else {
                     pastInputs.add(new Task(userInput));
-                    System.out.println("Duke added into your task list: \n" + userInput);
+                    System.out.println("Duke added into your task list:\n" + userInput);
                     System.out.println("You now have " + pastInputs.size() + " task(s) in your list");
                 }
             } else if (splitInput[0].equals("todo")) {
@@ -75,7 +75,7 @@ public class Duke {
                 }
                 ToDo toDo = new ToDo(des);
                 pastInputs.add(toDo);
-                System.out.println("Duke added into your task list: \n" + toDo);
+                System.out.println("Duke added into your task list:\n" + toDo);
                 System.out.println("You now have " + pastInputs.size() + " task(s) in your list");
 
             } else if (splitInput[0].equals("deadline")) {
@@ -97,7 +97,7 @@ public class Duke {
                 }
                 Deadline deadline = new Deadline(des, dateAndOrTime);
                 pastInputs.add(deadline);
-                System.out.println("Duke added into your task list: \n" + deadline);
+                System.out.println("Duke added into your task list:\n" + deadline);
                 System.out.println("You now have " + pastInputs.size() + " task(s) in your list");
             } else if (splitInput[0].equals("event")) {
                 String des = "";
@@ -118,11 +118,11 @@ public class Duke {
                 }
                 Event event = new Event(des, dateAndOrTime);
                 pastInputs.add(event);
-                System.out.println("Duke added into your task list: \n" + event);
+                System.out.println("Duke added into your task list:\n" + event);
                 System.out.println("You now have " + pastInputs.size() + " task(s) in your list");
             } else {
                 pastInputs.add(new Task(userInput));
-                System.out.println("Duke added into your task list: \n" + userInput);
+                System.out.println("Duke added into your task list:\n" + userInput);
                 System.out.println("You now have " + pastInputs.size() + " task(s) in your list");
             }
             System.out.println("=========================================================================");
