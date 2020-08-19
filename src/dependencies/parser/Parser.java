@@ -2,7 +2,6 @@ package dependencies.parser;
 
 import dependencies.executor.Executor;
 import dependencies.dukeexceptions.*;
-import dependencies.executable.*;
 
 /**
  * Parser class which parses the given input. Checks if any command is given
@@ -34,10 +33,17 @@ public class Parser {
      * @return reply: what was done
      */
     public String parseAndExec(String command) {
-        Checker checker = Checker.parseAndCheck(command);
-        String reply;
-        reply = executor.receiveAndExec(checker.getExecutable());
-        return reply;
+        Checker checker = null;
+        try {
+            checker = Checker.parseAndCheck(command);
+            String reply;
+            reply = executor.receiveAndExec(checker.getExecutable());
+            return reply;
+//        } catch (EmptyTaskException e) {
+//            return e.toString();
+        } catch (DukeException e) {
+            return e.toString();
+        }
     }
 
 

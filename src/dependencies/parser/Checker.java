@@ -1,8 +1,15 @@
 package dependencies.parser;
 
+import dependencies.dukeexceptions.DukeException;
+import dependencies.dukeexceptions.EmptyTaskException;
+import dependencies.dukeexceptions.UnknownCommandException;
 import dependencies.executable.Command;
 import dependencies.executable.Executable;
 import dependencies.task.Task;
+
+import java.util.Locale;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 class Checker {
     private Executable command;
@@ -24,72 +31,103 @@ class Checker {
      * @param s command
      * @return Checker object
      */
-    public static Checker parseAndCheck(String s) {
-        return parseExplicitCommand(s);
+    public static Checker parseAndCheck(String s) throws DukeException {
+        try {
+            return parseExplicitCommand(s);
+        } catch (DukeException e) {
+            throw e;
+        }
     }
 
 
     /* -------------------------------------- END OF PUBLIC METHODS ----------------------------------------------- */
 
     /**
+     * Checks for command that is passed in explicit format.
+     * eg.
+     * 1) "event (task) /at (date)"
+     * 2) "todo (task)"
+     * 3) "deadline (task) /by (date)"
      *
-     * @param s
-     * @return
+     * @param s input
+     * @return Checker object
      */
-    private static Checker parseExplicitCommand(String s) {
+    private static Checker parseExplicitCommand(String s) throws DukeException {
         Executable e;
         if (s.contains("list") || s.contains("List")) {
             e = Command.createListCommand(null);
         }
-        else if (s.contains("done ") || s.contains("Done ")) {
-            int x = s.indexOf("done");
-            String task = s.substring((x) + 5);
-            Task t = Task.createMiscTask(task.trim());
+        else if (checkForWord(s, "done")) {
+            String task = cutOutTheWord(s, "done");
+            if (task.isBlank() || task.isEmpty()) {
+                throw new EmptyTaskException("You have to tell me which task you've com");
+            }
+            Task t = Task.createMiscTask(task);
             e = Command.createDoneCommand(t);
-        }
-        else if (s.contains("todo ") || s.contains("Todo ")) {
-            int x = s.indexOf("todo");
-            String task = s.substring(x + 5);
-            Task t = Task.createTodo(task.trim());
+
+        } else if (checkForWord(s, "todo")) {
+            String task = cutOutTheWord(s, "todo");
+            Task t = Task.createTodo(task);
+            if (task.isEmpty() || task.isBlank()) {
+                throw new EmptyTaskException("Sorry, but your description of a task cannot be empty. -_-");
+            }
             e = Command.createAddCommand(t);
 
-        } else if (s.contains("event ") || s.contains("Event ")) {
-            int x = s.indexOf("event");
-            String task = s.substring(x + 6);
+        } else if (checkForWord(s, "event")) {
+            String task = cutOutTheWord(s, "event");
+            if (task.isBlank() || task.isEmpty()) {
+                throw new EmptyTaskException("Please tell me the event that will be happening!");
+            }
             String[] arr = task.split("/?at");
             Task t = Task.createEvent(arr[0].trim(), arr[1].trim());
             e = Command.createAddCommand(t);
 
-        } else  if (s.contains("deadline ") || s.contains("Deadline ")) {
-            int x = s.indexOf("deadline");
-            String task = s.substring(x + 9);
-            String[] arr = task.split("/by");
+        } else  if (checkForWord(s, "deadline")) {
+            String task = cutOutTheWord(s, "deadline");
+            if (task.isEmpty() || task.isBlank()) {
+                throw new EmptyTaskException("Please describe what you need to do.");
+            }
+            String[] arr = task.split("/?by");
             Task t = Task.createEvent(arr[0].trim(), arr[1].trim());
             e = Command.createAddCommand(t);
 
-        } else if (s.contains("delete") || s.contains("Delete")) {
-            int x = s.indexOf("delete");
-            String task = s.substring(x + 7);
+        } else if (checkForWord(s, "delete")) {
+            String task = cutOutTheWord(s, "delete");
+            if (task.isEmpty() || task.isBlank()) {
+                throw new EmptyTaskException("You have to tell me what to delete! LOL");
+            }
             Task t = Task.createMiscTask(task);
             e = Command.createDeleteCommand(t);
+
         } else {
-            //TODO: Throw exceptions if command is unrecognised/invalid.
-            e = null;
+            throw new UnknownCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         return new Checker(e);
     }
 
-    private static boolean checkForError() {
-        return false;
+    /**
+     * Case insensitive check for a word.
+     * @param line
+     * @param word
+     * @return
+     */
+    private static boolean checkForWord(String line, String word) {
+        return Pattern.compile(Pattern.quote(word), Pattern.CASE_INSENSITIVE).matcher(line).find();
     }
 
-    private boolean isEvent(String s) {
-        return s.contains("/at");
-    }
-
-    private boolean isDeadline(String s) {
-        return s.contains("/by");
+    /**
+     * Case Insensitive cutting out of the word.
+     * @param line
+     * @param cmd
+     * @return
+     */
+    private static String cutOutTheWord(String line, String cmd) {
+        // TODO: Should I use ENGLISH or UK????
+        String c2 = cmd.toUpperCase(Locale.UK);
+        String l2 = line.toUpperCase(Locale.UK);
+        int idx = l2.indexOf(c2);
+        return line.substring(idx).trim();
     }
 
     private boolean isTodo(String s) {return false;}
