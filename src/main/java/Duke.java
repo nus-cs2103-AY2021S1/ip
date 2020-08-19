@@ -23,10 +23,12 @@ public class Duke {
                         PrintFunctions.printMessagesBetweenLines(doneMessages);
                         break;
                     case TODO:
-                        userTaskList.addTask(userInput);
+                    case DEADLINE:
+                    case EVENT:
+                        userTaskList.addTask(userInput, userCommandType);
                         break;
                 }
-            } catch (UserCommands.InvalidCommandException | TaskList.InvalidIndexException  exception) {
+            } catch (UserCommands.InvalidCommandException | TaskList.InvalidIndexException exception) {
                 PrintFunctions.printMessageBetweenLines(exception.getMessage());
             }
         }

@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
@@ -11,10 +11,30 @@ public class TaskList {
         tasks.add(task);
     }
 
-    public void addTask(String taskName) {
-        Task task = new Task(taskName);
+    public void addTask(String command, UserCommandType userCommandType) throws UserCommands.InvalidCommandException {
+        Task task;
+        String[] taskComponents = UserCommands.parseTask(command);
+
+        switch (userCommandType) {
+            case TODO:
+                task = new Todo(taskComponents[0]);
+                break;
+            case DEADLINE:
+                task = new Deadline(taskComponents[0], taskComponents[1]);
+                break;
+            case EVENT:
+                task = new Event(taskComponents[0], taskComponents[1]);
+                break;
+            default:
+                throw new UserCommands.InvalidCommandException();
+        }
+
         addTask(task);
-        PrintFunctions.printMessageBetweenLines("added: " + task.getName());
+        PrintFunctions.printMessagesBetweenLines(new String[] {
+                "Got it. I've added this task: ",
+                "  " + task.toString(),
+                String.format("Now you have %d tasks in the list.", tasks.size())
+        });
     }
 
     public String[] markTaskDoneAtIndex(int index) throws InvalidIndexException {
