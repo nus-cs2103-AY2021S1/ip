@@ -1,8 +1,10 @@
 package tasks;
 
+import exceptions.DataException;
+
 public class Todo extends Task {
 
-    public Todo(String desc) {
+    public Todo(String desc) throws DataException {
         super(desc);
     }
 

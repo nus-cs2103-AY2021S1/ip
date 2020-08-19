@@ -1,12 +1,17 @@
 package tasks;
 
+import exceptions.DataException;
+
 public class Event extends Task {
 
     // event held at this time
     private final String at;
 
-    public Event(String desc, String at) {
+    public Event(String desc, String at) throws DataException {
         super(desc);
+        if (at.isBlank()) {
+            throw new DataException("Event Time", "Cannot be blank");
+        }
         this.at = at;
     }
 

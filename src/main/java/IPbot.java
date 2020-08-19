@@ -1,3 +1,5 @@
+import exceptions.CommandException;
+import exceptions.IPException;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
@@ -14,10 +16,10 @@ public class IPbot {
     // command strings
     private static final String EXIT_CMD = "bye";
     private static final String LIST_CMD = "list";
-    private static final String DONE_CMD = "done ";
-    private static final String TODO_CMD = "todo ";
-    private static final String EVENT_CMD = "event ";
-    private static final String DEADLINE_CMD = "deadline ";
+    private static final String DONE_CMD = "done";
+    private static final String TODO_CMD = "todo";
+    private static final String EVENT_CMD = "event";
+    private static final String DEADLINE_CMD = "deadline";
 
 
     // user input
@@ -33,36 +35,59 @@ public class IPbot {
     public static void main(String[] args) {
         print("Hello from iPbot, what can I do for you?");
 
+        if (!sc.hasNextLine()) {
+            print("No input found. Exiting!");
+            return;
+        }
+
         Stream.generate(sc::nextLine)
             .takeWhile(input -> !EXIT_CMD.equals(input))
             .forEach(input -> {
-                final String output;
-                if (LIST_CMD.equals(input)) {
-                    // list tasks
-                    output = listTasks();
-                } else if (input.startsWith(DONE_CMD)) {
-                    // mark a task as done
-                    final String stripped = input.substring(DONE_CMD.length());
-                    final int id = Integer.parseInt(stripped);
-                    output = completeTask(tasks.get(id - 1));
-                } else if (input.startsWith(TODO_CMD)) {
-                    // add to do task
-                    final String stripped = input.substring(TODO_CMD.length());
-                    output = addTasks(new Todo(stripped));
-                } else if (input.startsWith(EVENT_CMD)) {
-                    // add event task
-                    final String stripped = input.substring(EVENT_CMD.length());
-                    final String[] split = stripped.split(" /at ", 2);
-                    output = addTasks(new Event(split[0], split[1]));
-                } else if (input.startsWith(DEADLINE_CMD)) {
-                    // add deadline task
-                    final String stripped = input.substring(DEADLINE_CMD.length());
-                    final String[] split = stripped.split(" /by ", 2);
-                    output = addTasks(new Deadline(split[0], split[1]));
-                } else {
-                    output = "Unknown command";
+                try {
+                    final String output;
+                    if (LIST_CMD.equals(input)) {
+                        // list tasks
+                        output = listTasks();
+                    } else if (input.startsWith(DONE_CMD)) {
+                        // mark a task as done
+                        final String stripped = input.substring(DONE_CMD.length()).strip();
+                        try {
+                            final int id = Integer.parseInt(stripped);
+                            output = completeTask(tasks.get(id - 1));
+                        } catch (NumberFormatException e) {
+                            throw new CommandException(input, "Could not read the task ID");
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new CommandException(input, "Task ID does not exist");
+                        }
+                    } else if (input.startsWith(TODO_CMD)) {
+                        // add to do task
+                        final String stripped = input.substring(TODO_CMD.length()).strip();
+                        output = addTasks(new Todo(stripped));
+                    } else if (input.startsWith(EVENT_CMD)) {
+                        // add event task
+                        final String stripped = input.substring(EVENT_CMD.length()).strip();
+                        final String[] split = stripped.split("/at", 2);
+                        if (split.length < 2) {
+                            throw new CommandException(input,
+                                    "Events should have a time specified with /at");
+                        }
+                        output = addTasks(new Event(split[0].strip(), split[1].strip()));
+                    } else if (input.startsWith(DEADLINE_CMD)) {
+                        // add deadline task
+                        final String stripped = input.substring(DEADLINE_CMD.length()).strip();
+                        final String[] split = stripped.split("/by", 2);
+                        if (split.length < 2) {
+                            throw new CommandException(input,
+                                    "Deadlines should have a time due specified with /by");
+                        }
+                        output = addTasks(new Deadline(split[0].strip(), split[1].strip()));
+                    } else {
+                        throw new CommandException(input, "Unknown command");
+                    }
+                    print(output);
+                } catch (IPException e) {
+                    print(e.toString());
                 }
-                print(output);
             });
 
         sc.close();
