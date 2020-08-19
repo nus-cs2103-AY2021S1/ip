@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Duke {
 
-    List<String> list;
+    List<Task> list;
 
 
     public Duke(){
@@ -37,22 +37,39 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while(sc.hasNextLine()) {
             String str = sc.nextLine();
-            if (str.equalsIgnoreCase("bye")) {
+            String arr[] = str.split(" ", 100);
+            String keyWord = arr[0];
+            if (keyWord.equals("bye")) {
                 break;
-            } else if (str.equalsIgnoreCase("list")) {
+            } else if (keyWord.equals("list")) {
                 showList();
-            } else {
-                addToList(str);
+            } else if(str.length() >= 6 && keyWord.equals("todo")) {
+                Task task = new Task(str.substring(5));
+                addToList(task);
+            } else if(str.length() >= 6 && keyWord.equals("done")) {
+                int index = Character.getNumericValue(str.charAt(5));
+                completeTask(index);
             }
         }
         byeMessage();
     }
 
-    public void addToList(String task) {
+    public void completeTask(int index) {
+        list.get(index-1).markAsDone();
+        System.out.println("---------------------------");
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(list.get(index-1).toString());
+        System.out.println("---------------------------");
+    }
+
+    public void addToList(Task task) {
         list.add(task);
         System.out.println("---------------------------");
-        System.out.println("added: " + task);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task.toString());
+        System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
         System.out.println("---------------------------");
+
     }
     public void showList() {
         System.out.println("---------------------------");
