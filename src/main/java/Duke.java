@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static void Respond(Scanner scanner) throws IllegalStateException{
+    private static void respond(Scanner scanner) throws IllegalStateException{
         DukeCommandMatcher dukeCommandMatcher = new DukeCommandMatcher();
         while(scanner.hasNextLine()){
             String command = scanner.nextLine();
@@ -25,7 +25,7 @@ public class Duke {
         System.out.println(Constants.GREETING);
         System.out.println(Constants.DIVIDER);
         Scanner dukeScanner = new Scanner(System.in);
-        Respond(dukeScanner);
+        respond(dukeScanner);
     }
 
 

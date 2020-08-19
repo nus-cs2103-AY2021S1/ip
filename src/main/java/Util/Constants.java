@@ -14,4 +14,10 @@ public class Constants {
 
     public static final String DONEPATTERN = ("^(d|D)(o|O)(n|N)(e|E)$");
 
+    public static final String TODOPATTERN = ("^(t|T)(o|O)(d|D)(o|O)$");
+
+    public static final String DEADLINEPATTERN = ("^(d|D)(e|E)(a|A)(d|D)(l|L)(i|I)(n|N)(e|E)$");
+
+    public static final String EVENTPATTERN = ("^(e|E)(v|V)(e|E)(n|N)(t|T)$");
+
 }
