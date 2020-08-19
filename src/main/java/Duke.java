@@ -65,7 +65,7 @@ public class Duke {
             String next = sc.nextLine();
 
             if(next.equals("bye") ) {
-                System.out.println("Woof!");
+                System.out.println("Bye! Woof!");
                 break;
             }
 
