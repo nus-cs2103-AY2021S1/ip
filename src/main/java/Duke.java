@@ -8,6 +8,6 @@ public class Duke {
     while (!(input = sc.next()).equals("bye")) {
       System.out.println(input);
     }
-    System.out.println("Bye. Hope to see you again!");
+    System.out.println("Bye. Hope to see you again.");
   }
 }
