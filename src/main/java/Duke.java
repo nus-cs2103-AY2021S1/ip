@@ -6,14 +6,15 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
 
-        Feedbacks.greeting();
+        Feedbacks.logoMsg();
+        Feedbacks.greetingMsg();
         String inputMsg = sc.nextLine();
 
         while (!inputMsg.equals("bye")) {
             if (inputMsg.equals("list")) {
                 Feedbacks.getAllTasksMsg(tasks);
             } else if (inputMsg.equals("help")) {
-                Feedbacks.help();
+                Feedbacks.helpMsg();
             } else if (inputMsg.startsWith("done")) {
                 try {
                     int index = Integer.parseInt(inputMsg.split("done ")[1]);
@@ -64,6 +65,6 @@ public class Duke {
             }
             inputMsg = sc.nextLine();
         }
-        Feedbacks.bye();
+        Feedbacks.byeMsg();
     }
 }

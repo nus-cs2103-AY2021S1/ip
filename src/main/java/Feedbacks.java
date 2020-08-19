@@ -1,7 +1,26 @@
 import java.util.ArrayList;
 
 public class Feedbacks {
-    public static void greeting() {
+    public static void logoMsg() {
+        String logo = " ___       __   _______   ___       ________  " +
+                "________  _____ ______   _______      \n" +
+                "|\\  \\     |\\  \\|\\  ___ \\ |\\  \\     " +
+                "|\\   ____\\|\\   __  \\|\\   _ \\  _   \\|\\  ___ \\     \n" +
+                "\\ \\  \\    \\ \\  \\ \\   __/|\\ \\  \\    \\ \\  \\___|" +
+                "\\ \\  \\|\\  \\ \\  \\\\\\__\\ \\  \\ \\   __/|    \n" +
+                " \\ \\  \\  __\\ \\  \\ \\  \\_|/_\\ \\  \\    \\ \\  \\    " +
+                "\\ \\  \\\\\\  \\ \\  \\\\|__| \\  \\ \\  \\_|/__  \n" +
+                "  \\ \\  \\|\\__\\_\\  \\ \\  \\_|\\ \\ \\  \\____\\ \\  \\____" +
+                "\\ \\  \\\\\\  \\ \\  \\    \\ \\  \\ \\  \\_|\\ \\ \n" +
+                "   \\ \\____________\\ \\_______\\ \\_______\\ \\_______" +
+                "\\ \\_______\\ \\__\\    \\ \\__\\ \\_______\\\n" +
+                "    \\|____________|\\|_______|\\|_______|\\|_______|\\|_______" +
+                "|\\|__|     \\|__|\\|_______|"
+                +"\n\n WELCOME to DukeBT!";
+        System.out.println(logo);
+    }
+
+    public static void greetingMsg() {
         String greetingMsg = "\n___________________________________________________________"
                 + "\n |°‿°|"
                 + "\n Hello! I'm DukeBT."
@@ -11,7 +30,7 @@ public class Feedbacks {
         System.out.println(greetingMsg);
     }
 
-    public static void help() {
+    public static void helpMsg() {
         String commandList = "**************************************************************"
                 + "\n ┗( ⊙.⊙ )┛ "
                 + "\n These are all the commands you may use:"
@@ -27,7 +46,7 @@ public class Feedbacks {
         System.out.println(commandList);
     }
 
-    public static void bye() {
+    public static void byeMsg() {
         String byeMsg = "\n___________________________________________________________"
                 + "\n |^_^|┛"
                 + "\n Bye. Hope to see you again soon!"
