@@ -69,7 +69,11 @@ public class Duke {
                     }
                     break;
                 case "list":
-                    echo("Here are the tasks in your list\n" + taskManager.toString());
+                    if (taskManager.getTotalTask() == 0) {
+                        echo("Currently, you have no tasks on hand");
+                    } else {
+                        echo("Here are the tasks in your list\n" + taskManager.toString());
+                    }
                     break;
                 case "deadline":
                     try {
