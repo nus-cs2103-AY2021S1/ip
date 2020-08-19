@@ -19,16 +19,12 @@ public class DoneCommand extends Command {
         boolean canParseInt = tryParseInt(str);
         int taskIndex = canParseInt ? Integer.parseInt(str) - 1 : -1;
 
-        if (DukeData.tasks.size() <= taskIndex || taskIndex < 0) {
-            String line = UIPrint.getLine(UIPrint.star, 50);
-            String errMessage =
-                    line + "\nSorry " + str + " is not a valid index\n" + line;
-            throw new InvalidIndexException(errMessage);
-        } else {
-            Task task = DukeData.tasks.get(taskIndex);
-            task.markAsDone();
-            DukeFunction.reportDoneTask(task);
-        }
+        checkException(taskIndex, str);
+
+        Task task = DukeData.tasks.get(taskIndex);
+        task.markAsDone();
+
+        DukeFunction.reportDoneTask(task);
 
         UIPrint.drawLine(UIPrint.star, 50);
     }
@@ -39,6 +35,15 @@ public class DoneCommand extends Command {
             return true;
         } catch (NumberFormatException exception) {
             return false;
+        }
+    }
+
+    private void checkException(int taskIndex, String str) {
+        if (DukeData.tasks.size() <= taskIndex || taskIndex < 0) {
+            String line = UIPrint.getLine(UIPrint.star, 50);
+            String errMessage =
+                    line + "\nSorry " + str + " is not a valid index\n" + line;
+            throw new InvalidIndexException(errMessage);
         }
     }
 }

@@ -16,15 +16,11 @@ public class DeleteCommand extends Command {
         boolean canParseInt = tryParseInt(str);
         int taskIndex = canParseInt ? Integer.parseInt(str) - 1 : -1;
 
-        if (DukeData.tasks.size() <= taskIndex || taskIndex < 0) {
-            String line = UIPrint.getLine(UIPrint.star, 50);
-            String errMessage =
-                    line + "\nSorry " + str + " is not a valid index\n" + line;
-            throw new InvalidIndexException(errMessage);
-        } else {
-            Task task = DukeData.tasks.remove(taskIndex);
-            DukeFunction.reportDeleteTask(task);
-        }
+        checkException(taskIndex, str);
+
+        Task task = DukeData.tasks.remove(taskIndex);
+
+        DukeFunction.reportDeleteTask(task);
     }
 
     private boolean tryParseInt(String str) {
@@ -33,6 +29,15 @@ public class DeleteCommand extends Command {
             return true;
         } catch (NumberFormatException exception) {
             return false;
+        }
+    }
+
+    private void checkException(int taskIndex, String str) {
+        if (DukeData.tasks.size() <= taskIndex || taskIndex < 0) {
+            String line = UIPrint.getLine(UIPrint.star, 50);
+            String errMessage =
+                    line + "\nSorry " + str + " is not a valid index\n" + line;
+            throw new InvalidIndexException(errMessage);
         }
     }
 }
