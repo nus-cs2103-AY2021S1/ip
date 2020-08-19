@@ -1,23 +1,37 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
 
     private static final String HORIZONTAL_RULE = "____________________________________________________________";
     private static Scanner sc;
+    private static List<String> itemsList;
 
     public static void main(String[] args) {
         sc = new Scanner(System.in);
-        displayStart();
+        itemsList = new ArrayList<>();
         executeProgramme();
     }
 
     private static void executeProgramme() {
         final String TERMINATION_PHRASE = "bye";
+        final String LIST_PHRASE = "list";
+
+        displayStart();
+
         String input = sc.nextLine();
         while (!input.equals(TERMINATION_PHRASE)) {
-            System.out.println(HORIZONTAL_RULE);
-            System.out.println(input);
-            System.out.println(HORIZONTAL_RULE);
+
+            if (input.equals(LIST_PHRASE)) {
+                printList();
+            } else {
+                itemsList.add(input);
+
+                System.out.println(HORIZONTAL_RULE);
+                System.out.println("added: " + input);
+                System.out.println(HORIZONTAL_RULE);
+            }
 
             input = sc.nextLine();
         }
@@ -40,6 +54,14 @@ public class Duke {
 
         System.out.println(HORIZONTAL_RULE);
         System.out.println(BYE_MESSAGE);
+        System.out.println(HORIZONTAL_RULE);
+    }
+
+    private static void printList() {
+        System.out.println(HORIZONTAL_RULE);
+        for (int i = 1; i <= itemsList.size(); i++) {
+            System.out.println(i + ". " + itemsList.get(i - 1));
+        }
         System.out.println(HORIZONTAL_RULE);
     }
 }
