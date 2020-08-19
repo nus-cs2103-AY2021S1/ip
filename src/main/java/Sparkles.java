@@ -37,19 +37,38 @@ public class Sparkles {
     }
 
     private void respond(String str) {
-        System.out.println("\n" + str);
-        printDash();
         String lowerCase = str.toLowerCase();
-        if (lowerCase.equals("bye")) {
-            System.out.println("     Bye. Hope to see you again!");
+        if (lowerCase.equals("list")) {
+            showList();
         } else {
-            addToList(str);
+            System.out.println("\n" + str);
+            printDash();
+
+            if (lowerCase.equals("bye")) {
+                System.out.println("     Bye. Hope to see you again!");
+            } else {
+                addToList(str);
+            }
+            printDash();
         }
+    }
+
+    private void showList() {
+        System.out.println("Your task:");
+        printDash();
+
+        for(int i = 1; i < storage.size() + 1; i++) {
+            String item = storage.get(i - 1);
+            String output = "     " + i + ": " + item;
+            System.out.println(output);
+        }
+
         printDash();
     }
 
     private void addToList(String str) {
         System.out.println("     added to list: " + str);
+        storage.add(str);
     }
 
     public static void main(String[] args) {
