@@ -1,7 +1,9 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         String input;
 
@@ -18,10 +20,18 @@ public class Duke {
 
         input = sc.next();
         while(!input.equals("bye")) {
-            System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
-            System.out.println("    " + input);
-            System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
-            input = sc.next();
+            if (input.equals("list")) {
+                for (int i = 1; i <= list.size(); i++) {
+                    System.out.println(i + ". " + list.get(i - 1));
+                }
+                input = sc.next();
+            } else {
+                System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
+                System.out.println("    added: " + input);
+                System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
+                list.add(input);
+                input = sc.next();
+            }
         }
 
         System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
