@@ -5,15 +5,22 @@ public class Duke {
 
         Scanner input = new Scanner(System.in);
 
-        System.out.println(new Greet(Greet.defaultGreet));
+        System.out.println(
+            new Formating<>(
+                new Greet(Status.GREET.toString())));
 
-        String nextLine = input.nextLine();
+        String extract = input.nextLine();
+        String nextLine = new Formating<>(extract).shorten();
         while (!nextLine.equals("bye")) {
-            System.out.println(new Echo(nextLine));
-            nextLine = input.nextLine();
+            System.out.println(
+                new Formating<>(
+                    new Echo(nextLine)));
+            extract = input.nextLine();
+            nextLine = new Formating<>(extract).shorten();
         }
 
         input.close();
-        System.out.println(new Exit(Exit.defaultExiting));
+        System.out.println(new Formating<>(
+            new Exit(Status.BYE.toString())));
     }
 }
