@@ -89,4 +89,17 @@ public class TaskList {
 
         return result;
     }
+
+    /**
+     * Format the tasks in task list to the style specified in level-7.
+     *
+     * @return a list of string, each representing a formatted task in the task list.
+     */
+    public List<String> formatTaskList() {
+        List<String> formattedTaskList = new ArrayList<>();
+        for (Task t: this.tasks) {
+            formattedTaskList.add(t.format());
+        }
+        return formattedTaskList;
+    }
 }

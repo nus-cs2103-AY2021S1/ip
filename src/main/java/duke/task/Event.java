@@ -21,6 +21,12 @@ public class Event extends Task {
     }
 
     @Override
+    public String format() {
+        int isDoneSignal = this.isDoneTask() ? 1 : 0;
+        return "E | " + isDoneSignal + " | " + name + " | " + this.getSchedule();
+    }
+
+    @Override
     public String toString() {
         String taskString = super.toString();
         return "[E]" + taskString + " (at: " + this.getSchedule() + ")";

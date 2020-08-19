@@ -43,6 +43,13 @@ public abstract class Task {
     public abstract Task complete();
 
     /**
+     * Format the task for data output display in the duke.txt file.
+     *
+     * @return a string to represent the task.
+     */
+    public abstract String format();
+
+    /**
      * Display the task object as a string
      *
      * @return the status of the task followed by the name

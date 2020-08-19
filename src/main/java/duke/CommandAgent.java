@@ -13,18 +13,38 @@ import duke.task.Todo;
  * An agent to process incoming command and return the feedback.
  */
 public class CommandAgent {
-    private static TaskList taskList = new TaskList();
+    private static Storage storage;
+    private static TaskList taskList;
+
+    public CommandAgent(Storage storage) {
+        CommandAgent.storage = storage;
+        CommandAgent.taskList = storage.load();
+    }
 
     public static int listSize() {
         return taskList.getSize();
     }
+
     /**
-     * Takes in the command and handle it based on the request from the command.
+     * Handle the command taken from user input, execute it
+     * and save the updated task list data to hard disk.
+     *
+     * @param command the command parsed from user input.
+     * @return the feedback generated from executing the command;
+     */
+    public String handleCommand(Command command) {
+        String feedback = executeCommand(command);
+        storage.save(this.taskList);
+        return feedback;
+    }
+
+    /**
+     * Takes in the command and execute it based on the request from the command.
      *
      * @param command the command parsed from user input.
      * @return a String feedback for the user.
      */
-    public String handleCommand(Command command) {
+    public String executeCommand(Command command) {
         String feedback = "____________________________________________________________\n";
         int taskId;
         switch (command.sendRequest()) {
