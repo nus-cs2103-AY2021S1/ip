@@ -1,10 +1,10 @@
 public class Task {
-    public String name;
-    public boolean isDone;
+    protected String name;
+    protected boolean isDone;
 
-    public Task(String name, boolean isDone) {
+    public Task(String name) {
         this.name = name;
-        this.isDone= isDone;
+        this.isDone= false;
     }
 
     public String getStatusIcon() {
@@ -12,8 +12,11 @@ public class Task {
     }
 
     public Task markDone() {
-        Task done = new Task(this.name, true);
-        return done;
+        this.isDone = true;
+        return this;
     }
 
+    public String toString() {
+        return "[" + this.getStatusIcon() +"] " + this.name;
+    }
 }

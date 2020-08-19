@@ -29,27 +29,44 @@ public class Duke {
                 System.out.println(seperateLine);
                 System.out.println(spaceBeforeOder + "Here are the tasks in your list:");
                 for (int i = 0; i < numOfOders; i++){
-                    String checkbox = "[" + orderList[i].getStatusIcon() +"] ";
                     System.out.println(spaceBeforeOder + (i + 1) + ". " +
-                            checkbox + orderList[i].name);
+                            orderList[i]);
                 }
                 System.out.println(seperateLine);
-            } else {
-                if(order.split(" ")[0].equals("done") && isInteger(order.split(" ")[1])
+            } else if (order != null){
+                String command = order.split(" ")[0];
+                if(command.equals("done") && isInteger(order.split(" ")[1])
                     && Integer.parseInt(order.split(" ")[1]) <= numOfOders) {
                     int toMark = Integer.parseInt(order.split(" ")[1]) - 1;
                     orderList[toMark] = orderList[toMark].markDone();
                     System.out.println(seperateLine);
                     System.out.println(spaceBeforeOder + "Nice! I've marked this task as done:");
-                    System.out.println(spaceBeforeOder + "  [" + orderList[toMark].getStatusIcon() + "] " + orderList[toMark].name);
+                    System.out.println(spaceBeforeOder + "  " + orderList[toMark]);
                     System.out.println(seperateLine);
                 } else {
+                    if(command.equals("deadline")) {
+                        String sub = order.substring(9);
+                        String by = sub.split("/by ")[1];
+                        String description = sub.split("/by ")[0];
+                        orderList[numOfOders] = new Deadline(description, by);
+                    } else if(command.equals("event")) {
+                        String sub = order.substring(6);
+                        String at = sub.split("/at ")[1];
+                        String description = sub.split("/at ")[0];
+                        orderList[numOfOders] = new Event(description, at);
+                    } else if(command.equals("todo")) {
+                        String sub = order.substring(5);
+                        orderList[numOfOders] = new Todo(sub);
+                    }
+
                     System.out.println(seperateLine);
-                    System.out.println(spaceBeforeOder + "added: " + order);
+                    System.out.println(spaceBeforeOder + "Got it. I've added this task: ");
+                    System.out.println(spaceBeforeOder + "  " + orderList[numOfOders]);
+                    System.out.println(spaceBeforeOder + "Now you have " + (numOfOders + 1) + " tasks in the list.");
                     System.out.println(seperateLine);
-                    orderList[numOfOders] = new Task(order, false);
                     numOfOders++;
                 }
+
             }
 
             order = sc.nextLine();
