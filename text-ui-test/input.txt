@@ -22,4 +22,7 @@ deadline homework /by
 todo
 deadline
 event
+delete 3
+list
+delete 10
 bye

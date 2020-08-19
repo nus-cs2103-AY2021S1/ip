@@ -98,5 +98,19 @@ ____________________________________________________________
 Rawr! Dino could not add your task. Make sure your format is correct.
 Formats to input a task can be found by entering 'format'.
 ____________________________________________________________
+Rawr! Dino has deleted Task 3 from your list:
+[E][✘] 456  (at:  7)
+Number of tasks in list:5
+____________________________________________________________
+Dino lists your tasks:
+1. [T][✓] swimming in sea
+2. [D][✓] 321  (by:  0)
+3. [T][✘] racing car
+4. [D][✘] eat  (by:  10am /by june)
+5. [E][✘] travel to japan  (at:  10 June /at 2pm /at airport)
+To mark off a task after completion, input 'done <task number>'.
+____________________________________________________________
+Task 10 is not in your list of tasks!
+____________________________________________________________
 Rawr. Hope to see you again soon! ><
 ____________________________________________________________

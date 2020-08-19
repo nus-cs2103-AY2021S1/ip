@@ -106,6 +106,22 @@ public class Duke {
         }
     }
 
+    public static void deleteTask(List<Task> tasks, String input) throws DukeException {
+        int taskNumber = Integer.parseInt(input.split(" ")[1]);
+        if (taskNumber > tasks.size() || taskNumber < 1) {
+            // task number is not valid
+            throw new DukeException("Task " + taskNumber + " is not in your list of tasks!");
+        } else {
+            // Dino deletes task from list
+            int taskIndex = taskNumber - 1;
+            Task toDelete = tasks.get(taskIndex);
+            tasks.remove(taskIndex);
+            System.out.println("Rawr! Dino has deleted " + "Task " + taskNumber
+                    + " from your list:\n" + toDelete
+                    + "\nNumber of tasks in list:" + tasks.size());
+        }
+    }
+
     public static void processInputs(List<Task> tasks, String input, String[] inputWords) {
         try {
             if (input.equals("format")) {
@@ -124,6 +140,10 @@ public class Duke {
                     && inputWords[1].matches("[0-9]+")) {
                 // condition checks that user input is in the format "done X" where X is a numeric
                 markDone(tasks, input);
+            } else if (inputWords[0].equals("delete") && inputWords.length == 2
+                    && inputWords[1].matches("[0-9]+")) {
+                // condition checks that user input is in the format "delete X" where X is a numeric
+                deleteTask(tasks, input);
             } else {
                 // Dino adds task to list
                 addTask(tasks, input, inputWords);
