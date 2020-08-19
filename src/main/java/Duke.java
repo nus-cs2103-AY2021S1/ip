@@ -42,17 +42,18 @@ public class Duke {
 //                } else {
 //                    System.out.println("You have keyed in an invalid number!");
 //                }
-
                 try { //if(pos <= tasks.size() && pos > 0)
                     taskIsDone(tasks, pos);
-
                 } catch (DukeException ex) {
+                    System.out.println(line);
+                    System.out.print(bot);
                     System.out.println(ex.getMessage());
+                    System.out.println(line);
                 }
 
             } else if (userInput.startsWith("todo")) { //added
                 try {
-                    if (!userInput.equals("todo")) {
+                    if (!userInput.substring(4).isBlank()) { //if got space behind, it will add also
                         ToDo todo = new ToDo(userInput.substring(5));
                         tasks.add(todo); //adds into tasks list
                         System.out.println(line);
@@ -67,12 +68,15 @@ public class Duke {
                     }
 
                 } catch (DukeException ex){
+                    System.out.println(line);
+                    System.out.print(bot);
                     System.out.println(ex.getMessage());
+                    System.out.println(line);
                 }
 
             } else if (userInput.startsWith("deadline")) {
                 try {
-                    if (!userInput.equals("deadline")) {
+                    if (!userInput.substring(8).isBlank()) {
                         int indexOfSlash = userInput.indexOf('/');
                         String description = userInput.substring(9, indexOfSlash - 1);
                         String date =  userInput.substring(indexOfSlash + 4);
@@ -88,11 +92,14 @@ public class Duke {
                         throw new DukeException("The description of a deadline cannot be empty!");
                     }
                 } catch (DukeException ex){
+                    System.out.println(line);
+                    System.out.print(bot);
                     System.out.println(ex.getMessage());
+                    System.out.println(line);
                 }
             } else if (userInput.startsWith("event")) {
                 try {
-                    if (!userInput.equals("event")) {
+                    if (!userInput.substring(5).isBlank()) {
                         int indexOfSlash = userInput.indexOf('/');
                         String description = userInput.substring(6, indexOfSlash - 1);
                         String dateAndTime =  userInput.substring(indexOfSlash + 4);
@@ -108,11 +115,14 @@ public class Duke {
                         throw new DukeException("The description of an event cannot be empty!");
                     }
                 } catch (DukeException ex){
+                    System.out.println(line);
+                    System.out.print(bot);
                     System.out.println(ex.getMessage());
+                    System.out.println(line);
                 }
             } else if (userInput.startsWith("delete")) {
                 try {
-                    if (!userInput.equals("delete")) {
+                    if (!userInput.substring(6).isBlank()) {
                         String toDelete =  userInput.substring(7);
                         int index = Integer.parseInt(toDelete);
                         System.out.println(line);
@@ -126,13 +136,19 @@ public class Duke {
                         throw new DukeException("The description of an delete cannot be empty!");
                     }
                 } catch (DukeException ex){
+                    System.out.println(line);
+                    System.out.print(bot);
                     System.out.println(ex.getMessage());
+                    System.out.println(line);
                 }
             } else { //invalid command
                 try {
                     throw new DukeException("You have keyed in an invalid command!\n(Valid commands: todo, deadline, event, list, delete, bye)");
                 } catch (DukeException ex) {
+                    System.out.println(line);
+                    System.out.print(bot);
                     System.out.println(ex.getMessage());
+                    System.out.println(line);
                 }
             }
         }
