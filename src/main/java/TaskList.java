@@ -31,9 +31,9 @@ public class TaskList {
 
         addTask(task);
         PrintFunctions.printMessagesBetweenLines(new String[] {
-                "Got it. I've added this task: ",
+                StringConstants.ADD_MESSAGE,
                 "  " + task.toString(),
-                String.format("Now you have %d tasks in the list.", tasks.size())
+                String.format(StringConstants.COUNT_MESSAGE, tasks.size())
         });
     }
 
@@ -44,6 +44,20 @@ public class TaskList {
             return new String[] {
                     StringConstants.DONE_MESSAGE,
                     "  " + task.toString()
+            };
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidIndexException();
+        }
+    }
+
+    public String[] deleteTaskAtIndex(int index) throws InvalidIndexException {
+        try {
+            Task task = tasks.get(index);
+            tasks.remove(index);
+            return new String[] {
+                    StringConstants.DELETE_MESSAGE,
+                    "  " + task.toString(),
+                    String.format(StringConstants.COUNT_MESSAGE, tasks.size())
             };
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException();

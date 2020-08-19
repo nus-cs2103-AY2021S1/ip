@@ -18,9 +18,14 @@ public class Duke {
                         userTaskList.printTaskList();
                         break;
                     case DONE:
-                        int doneIndex = UserCommands.getDoneIndex(userInput);
+                        int doneIndex = UserCommands.getTaskIndex(userInput);
                         String[] doneMessages = userTaskList.markTaskDoneAtIndex(doneIndex);
                         PrintFunctions.printMessagesBetweenLines(doneMessages);
+                        break;
+                    case DELETE:
+                        int deleteIndex = UserCommands.getTaskIndex(userInput);
+                        String[] deleteMessages = userTaskList.deleteTaskAtIndex(deleteIndex);
+                        PrintFunctions.printMessagesBetweenLines(deleteMessages);
                         break;
                     case TODO:
                     case DEADLINE:

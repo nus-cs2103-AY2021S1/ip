@@ -9,6 +9,9 @@ public class StringConstants {
             "What can I do for you?"
     };
     public static final String DONE_MESSAGE = "Nice! I've marked this task as done:";
+    public static final String ADD_MESSAGE = "Got it. I've added this task: ";
+    public static final String DELETE_MESSAGE = "Noted. I've removed this task:";
+    public static final String COUNT_MESSAGE = "Now you have %d tasks in the list.";
     public static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
 

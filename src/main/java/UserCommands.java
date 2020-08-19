@@ -6,6 +6,7 @@ public class UserCommands {
     private static final String EVENT_COMMAND = "event";
     private static final String LIST_COMMAND = "list";
     private static final String DONE_COMMAND = "done";
+    private static final String DELETE_COMMAND = "delete";
     private static final String EXIT_COMMAND = "bye";
 
     public static UserCommandType parseUserCommand(String command) throws InvalidCommandException {
@@ -15,6 +16,8 @@ public class UserCommands {
             return UserCommandType.EXIT;
         } else if (command.startsWith(DONE_COMMAND)) {
             return UserCommandType.DONE;
+        } else if (command.startsWith(DELETE_COMMAND)) {
+            return UserCommandType.DELETE;
         } else if (command.startsWith(TODO_COMMAND)) {
             return UserCommandType.TODO;
         } else if (command.startsWith(DEADLINE_COMMAND)) {
@@ -52,7 +55,7 @@ public class UserCommands {
         }
     }
 
-    public static int getDoneIndex(String command) throws InvalidCommandException {
+    public static int getTaskIndex(String command) throws InvalidCommandException {
         String[] components = command.split(" ");
         if (components.length != 2) {
             throw new InvalidCommandException("Done command should have 2 components");
