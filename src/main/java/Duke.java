@@ -44,7 +44,7 @@ public class Duke {
         else if (input.contains("done")) {
             if (input.split(" ").length < 2)
             {
-                throw new DukeException("BLEHHHHHH. Tell me which task??");
+                throw new DukeException("☹ BLEHHHHHH. Tell me which task??");
             }
             int index = Integer.parseInt(input.split(" ")[1]) - 1;
             if (index < 0 || index > taskList.size() - 1) {
