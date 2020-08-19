@@ -5,3 +5,30 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm Duke
+Let's have a conversation!
+Added: [T][✗]  readbook
+Added: [D][✗]  return book  (by: June 6th)
+Added: [E][✗]  project meeting  (at: Aug 6th 2-4pm)
+Added: [T][✗]  join sports club
+Added: [T][✗]  borrow book
+1. [T][✗]  readbook
+2. [D][✗]  return book  (by: June 6th)
+3. [E][✗]  project meeting  (at: Aug 6th 2-4pm)
+4. [T][✗]  join sports club
+5. [T][✗]  borrow book
+Nice! I've marked this task as done:
+    [T][✓]  borrow book
+1. [T][✗]  readbook
+2. [D][✗]  return book  (by: June 6th)
+3. [E][✗]  project meeting  (at: Aug 6th 2-4pm)
+4. [T][✗]  join sports club
+5. [T][✓]  borrow book
+Nice! I've marked this task as done:
+    [T][✓]  readbook
+1. [T][✓]  readbook
+2. [D][✗]  return book  (by: June 6th)
+3. [E][✗]  project meeting  (at: Aug 6th 2-4pm)
+4. [T][✗]  join sports club
+5. [T][✓]  borrow book
+Bye. Hope to see you again soon!
