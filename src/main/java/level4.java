@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class level3 {
+public class level4 {
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -42,7 +42,6 @@ public class level3 {
                 String lastChar = isDone[isDone.length - 1];
                 int index = Integer.parseInt(lastChar);
                 String current = String.valueOf(list_Of_Content.get(index - 1));
-//                String replaced = "[✓]" + current.substring(3);
                 String replaced = current.replace("[x]", "[✓]");
                 list_Of_Content.set(index - 1, replaced);
                 System.out.println("------------------------------------------");
