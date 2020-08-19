@@ -1,7 +1,3 @@
-import javafx.util.Pair;
-import java.util.ArrayList;
-import java.util.List;
-
 public class Task {
     protected int taskNum;
     protected String taskName;

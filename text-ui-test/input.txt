@@ -1,0 +1,11 @@
+list
+todo call mom
+todo call dad
+event project meeting /at 3pm
+deadline homework /by Monday
+todo clean fridge
+done 3
+done 4
+done 2
+list
+bye

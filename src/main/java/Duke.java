@@ -19,8 +19,9 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        String welcome = "Duke at your service!\n"
-                + logo + "\n" +
+        String welcome = "Duke at your service!\n" +
+                // logo + "\n" +
+                // commented out due to runtest failures, for some reason.
                 "How can I help you?\n" +
                 "Type in your orders below.\n\n" +
                 "(command list: 'list', 'deadline', 'event', 'todo', 'done', 'bye')";
