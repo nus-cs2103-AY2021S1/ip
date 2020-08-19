@@ -13,7 +13,7 @@ public class Duke {
     //static String addedText = "added: ";
     static String line = "_______________________________________________________________";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
 
         //Initial greetings
@@ -37,15 +37,22 @@ public class Duke {
                 showTaskList(tasks);
             } else if (userInput.substring(0,4).equals("done")) { //mark as done
                 int pos = Integer.parseInt(userInput.substring(5, len));
-                if(pos <= tasks.size() && pos > 0) {
+//                if(pos <= tasks.size() && pos > 0) {
+//                    taskIsDone(tasks, pos);
+//                } else {
+//                    System.out.println("You have keyed in an invalid number!");
+//                }
+
+                try { //if(pos <= tasks.size() && pos > 0)
                     taskIsDone(tasks, pos);
-                } else {
-                    System.out.println("You have keyed in an invalid number!");
+
+                } catch (DukeException ex) {
+                    System.err.println(ex.getMessage());
                 }
 
             } else if (userInput.startsWith("todo")) { //added
                 if (userInput.matches("todo")) {
-                    System.out.println("The description of a todo cannot be empty!");
+                    throw new DukeException("The description cannot be empty!");
                 } else {
                     ToDo todo = new ToDo(userInput.substring(5));
                     tasks.add(todo); //adds into tasks list
@@ -114,14 +121,25 @@ public class Duke {
         }
     }
 
-    static void taskIsDone(ArrayList<Task> tasks, int pos) {
-        tasks.get(pos - 1).markAsDone(); //marking task as done
-        System.out.println(line);
-        System.out.print(bot);
-        System.out.println("Great work! I've marked this task as done:");
-        //System.out.println("[" + tasks.get(pos - 1).getStatusIcon() + "]" + " " + tasks.get(pos - 1).getTask());
-        System.out.println(tasks.get(pos - 1));
-        System.out.println("Keep the ticks going! ^_^");
-        System.out.println(line);
+    static void taskIsDone(ArrayList<Task> tasks, int pos) throws DukeException {
+        if (pos <= tasks.size() && pos > 0) {
+            tasks.get(pos - 1).markAsDone(); //marking task as done
+            System.out.println(line);
+            System.out.print(bot);
+            System.out.println("Great work! I've marked this task as done:");
+            //System.out.println("[" + tasks.get(pos - 1).getStatusIcon() + "]" + " " + tasks.get(pos - 1).getTask());
+            System.out.println(tasks.get(pos - 1));
+            System.out.println("Keep the ticks going! ^_^");
+            System.out.println(line);
+        } else {
+            throw new DukeException("You have keyed in an invalid number!");
+        }
     }
+
+    static void
+
 }
+
+
+
+
