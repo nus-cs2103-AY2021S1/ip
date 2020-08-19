@@ -2,8 +2,12 @@ public class Task {
     private boolean isDone;
     private String taskName;
 
-    Task(String name) {
-        this.taskName = name;
+    Task(String name) throws DukeException{
+
+        if (name.trim().equals("")) {
+            throw new DukeException("Charming, but we can't have nothing as a task.");
+        }
+        this.taskName = name.trim();
     }
 
     // returns false if task is already done

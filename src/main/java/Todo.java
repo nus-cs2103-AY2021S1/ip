@@ -1,6 +1,6 @@
 public class Todo extends Task {
 
-    Todo(String taskName) {
+    Todo(String taskName) throws DukeException {
         super(taskName);
     }
 

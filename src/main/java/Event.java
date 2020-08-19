@@ -1,9 +1,9 @@
 public class Event extends Task {
     String eventTime;
 
-    Event(String taskName, String eventTime) {
+    Event(String taskName, String eventTime) throws DukeException {
         super(taskName);
-        this.eventTime = eventTime;
+        this.eventTime = eventTime.trim();
     }
 
     @Override

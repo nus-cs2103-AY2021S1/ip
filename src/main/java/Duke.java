@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Duke {
@@ -35,21 +36,34 @@ public class Duke {
                 }
                 break;
             case "todo":
-                Todo newTodo = new Todo(inputSc.nextLine().trim());
-                taskList.add(newTodo);
-                System.out.println("Fine. I added the following to the list: " + newTodo);
+                try {
+                    String name = inputSc.nextLine();
+                    Todo newTodo = new Todo(name);
+                    taskList.add(newTodo);
+                    System.out.println("Fine. I added the following to the list: " + newTodo);
+                } catch (DukeException |NoSuchElementException e) {
+                    System.out.println(e);
+                }
                 break;
             case "deadline":
-                String[] nameAndDeadline = inputSc.nextLine().trim().split(" /by ");
-                Deadline newDeadline = new Deadline(nameAndDeadline[0], nameAndDeadline[1]);
-                taskList.add(newDeadline);
-                System.out.println("Fine. I added the following to the list: " + newDeadline);
+                try {
+                    String[] nameAndDeadline = inputSc.nextLine().split(" /by ");
+                    Deadline newDeadline = new Deadline(nameAndDeadline[0], nameAndDeadline[1]);
+                    taskList.add(newDeadline);
+                    System.out.println("Fine. I added the following to the list: " + newDeadline);
+                } catch (DukeException e) {
+                    System.out.println(e);
+                }
                 break;
             case "event":
-                String[] nameAndEvent = inputSc.nextLine().trim().split(" /at ");
-                Event newEvent = new Event(nameAndEvent[0], nameAndEvent[1]);
-                taskList.add(newEvent);
-                System.out.println("Fine. I added the following to the list: " + newEvent);
+                try {
+                    String[] nameAndEvent = inputSc.nextLine().split(" /at ");
+                    Event newEvent = new Event(nameAndEvent[0], nameAndEvent[1]);
+                    taskList.add(newEvent);
+                    System.out.println("Fine. I added the following to the list: " + newEvent);
+                } catch (DukeException e) {
+                    System.out.println(e);
+                }
                 break;
             default:
                 System.out.println("What's that? Please mention one of \"list\", \"done\", \"todo\", \"deadline\", \"event\", or \"bye\".");

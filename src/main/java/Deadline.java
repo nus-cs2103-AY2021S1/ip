@@ -1,9 +1,9 @@
 public class Deadline extends Task {
     String deadlineTime;
 
-    Deadline(String taskName, String deadlineTime) {
+    Deadline(String taskName, String deadlineTime) throws DukeException {
         super (taskName);
-        this.deadlineTime = deadlineTime;
+        this.deadlineTime = deadlineTime.trim();
     }
 
     @Override
