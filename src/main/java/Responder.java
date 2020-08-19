@@ -1,9 +1,13 @@
 public class Responder {
     public static void responder() {
-        String echo = Echo.echo();
-        while (echo != Exit.exit()) {
-            System.out.println(echo);
-            echo = Echo.echo();
+        String input = ReadIn.readIn();
+        while (!input.equals("bye")) {
+            if (!input.equals("list")) {
+                System.out.println(MyList.addTask(input));
+            } else {
+                System.out.println(MyList.returnList());
+            }
+            input = ReadIn.readIn();
         }
         System.out.println(Exit.exit());
     }
