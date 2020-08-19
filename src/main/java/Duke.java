@@ -13,31 +13,71 @@ public class Duke {
         System.out.println("What can I do for you?");
         Scanner sc = new Scanner(System.in);
         while (true) {
-            String command = sc.nextLine();
-
-            if (command.equals("bye")) {
-                printMessage("Bye. Hope to see you again soon!");
-                return ;
-            } else if (command.equals("list")) {
-                listTasks();
-            } else if (command.startsWith("done")) {
-                int index = Integer.valueOf(command.split(" ")[1]);
-                completeTask(index);
-            } else if (command.startsWith("todo")){
-                String name = command.split(" ", 2)[1];
-                addTodo(name);
-            } else if (command.startsWith("deadline")) {
-                String details = command.split(" ", 2)[1];
-                String[] detailArr = details.split(" /by ", 2);
-                addDeadline(detailArr[0], detailArr[1]);
-            } else if (command.startsWith("event")) {
-                String details = command.split(" ", 2)[1];
-                String[] detailArr = details.split(" /at ", 2);
-                addEvent(detailArr[0], detailArr[1]);
-            } else {
-                printMessage("Invalid command");
+            String line = sc.nextLine();
+            String[] commandArr = line.split(" ", 2);
+            String command = commandArr[0];
+            try {
+                if (command.equals("bye")) {
+                    printMessage("Bye. Hope to see you again soon!");
+                    return;
+                } else if (command.equals("list")) {
+                    listTasks();
+                } else if (command.equals("done")) {
+                    handleDone(commandArr);
+                } else if (command.equals("todo")) {
+                    handleTask("todo", commandArr);
+                } else if (command.equals("deadline")) {
+                    handleTask("deadline", commandArr);
+                } else if (command.equals("event")) {
+                    handleTask("event", commandArr);
+                } else {
+                    throw new DukeException("I am sorry, I don't know what that means :(");
+                }
+            } catch (DukeException e) {
+                printMessage(e.getMessage());
             }
+        }
+    }
 
+    public static void handleTask(String taskType, String[] commandArr) {
+        try {
+            if (commandArr.length < 2 || commandArr[1].isBlank()) {
+                throw new MissingInformationException(String.format("The description of a %s cannot be empty.", taskType));
+            }
+            if (taskType.equals("todo")) {
+                String name = commandArr[1];
+                addTodo(name);
+            } else if (taskType.equals("deadline")) {
+                String details = commandArr[1];
+                String[] detailArr = details.split(" /by ", 2);
+                if (detailArr.length < 2 || detailArr[1].isBlank()) {
+                    throw new MissingInformationException("Deadline is missing a date.");
+                }
+                addDeadline(detailArr[0], detailArr[1]);
+            } else {
+                String details = commandArr[1];
+                String[] detailArr = details.split(" /at ", 2);
+                if (detailArr.length < 2 || detailArr[1].isBlank()) {
+                    throw new MissingInformationException("Event is missing a date.");
+                }
+                addEvent(detailArr[0], detailArr[1]);
+            }
+        } catch (MissingInformationException e) {
+            printMessage(e.getMessage());
+        }
+    }
+
+    public static void handleDone(String[] commandArr) {
+        try {
+            if (commandArr.length < 2 || commandArr[1].isBlank()) {
+                throw new MissingInformationException("Task number is missing!");
+            }
+            int index = Integer.valueOf(commandArr[1]);
+            completeTask(index);
+        } catch (MissingInformationException e) {
+            printMessage(e.getMessage());
+        } catch (NumberFormatException e) {
+            printMessage("Invalid task number!");
         }
     }
 
@@ -82,9 +122,13 @@ public class Duke {
     }
 
     public static void completeTask(int index) {
-        taskList.get(index - 1).markAsDone();
-        String message = String.format("Nice! I've marked this task as done:\n       %s",
-                taskList.get(index - 1));
-        printMessage(message);
+        try {
+            taskList.get(index - 1).markAsDone();
+            String message = String.format("Nice! I've marked this task as done:\n       %s",
+                    taskList.get(index - 1));
+            printMessage(message);
+        } catch (IndexOutOfBoundsException e) {
+            printMessage(String.format("Task number %d is invalid!", index));
+        }
     }
 }
