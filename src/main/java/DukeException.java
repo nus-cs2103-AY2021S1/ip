@@ -1,10 +1,9 @@
 package main.java;
 
 public class DukeException extends Exception{
-    public DukeException(){
+
+    public DukeException(String string){
+        super(string);
     }
-    @Override
-    public String toString(){
-        return "exception bros";
-    }
+
 }
