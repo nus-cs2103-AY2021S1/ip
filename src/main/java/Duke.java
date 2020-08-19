@@ -33,14 +33,15 @@ public class Duke {
                 System.out.println(Duke.done);
                 System.out.println("  " + list[index]);
             } else if (userInput.length() >= 4 && userInput.substring(0, 4).equals("todo")) {
-                ToDo taskToAdd = new ToDo(userInput);
+                String description = userInput.substring(5);
+                ToDo taskToAdd = new ToDo(description);
                 Duke.list[Duke.count++] = taskToAdd;
                 System.out.println(add);
                 System.out.println("  " + taskToAdd);
                 System.out.println("Now you have " + Duke.count + (Duke.count==1?" task ":" tasks ") + "in the list.");
             } else if (userInput.length() >= 8 && userInput.substring(0, 8).equals("deadline")) {
                 int index = userInput.indexOf("/");
-                String description = userInput.substring(0,index-1);
+                String description = userInput.substring(9,index-1);
                 String date = userInput.substring(index+4);
                 Deadline taskToAdd = new Deadline(description, date);
                 Duke.list[Duke.count++] = taskToAdd;
@@ -49,7 +50,7 @@ public class Duke {
                 System.out.println("Now you have " + Duke.count + (Duke.count==1?" task ":" tasks ") + "in the list.");
             } else if (userInput.length() >= 5 && userInput.substring(0, 5).equals("event")) {
                 int index = userInput.indexOf("/");
-                String description = userInput.substring(0,index-1);
+                String description = userInput.substring(6,index-1);
                 String date = userInput.substring(index+4);
                 Event taskToAdd = new Event(description, date);
                 Duke.list[Duke.count++] = taskToAdd;
