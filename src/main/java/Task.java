@@ -1,7 +1,8 @@
 public class Task {
-    private int position;
-    private String taskDescription;
-    private boolean taskCompleted;
+    protected int position;
+    protected String taskDescription;
+    protected boolean taskCompleted;
+    protected String date;
 
     public Task(int position, String taskDescription) {
         this.position = position;
@@ -15,14 +16,5 @@ public class Task {
 
     public String getTaskDescription() {
         return taskDescription;
-    }
-
-    @Override
-    public String toString() {
-        if (!taskCompleted) {
-            return position + ". [✗] " + taskDescription;
-        } else {
-            return position + ". [✓] " + taskDescription;
-        }
     }
 }
