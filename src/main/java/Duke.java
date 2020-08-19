@@ -34,10 +34,15 @@ public class Duke {
                 System.out.println("\t" + "Nice! I've marked this task as done:");
                 System.out.println("\t\t" + taskList.get(index));
             }
-            else{
-                System.out.println("\t" + input);
+            else if(input.startsWith("todo ")){
+                input = input.substring(4).trim();
                 Task newTask = new Todo(input);
                 taskList.add(newTask);
+                System.out.println("\t" + "Got it. I've added this task: ");
+                System.out.println("\t\t" + newTask);
+            }
+            else{
+                System.out.println("I do not understand. D:");
             }
         }
     }
