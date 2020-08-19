@@ -31,6 +31,14 @@ public class Duke {
         System.out.println(deadline);
     }
 
+    private static void eventHandler(String userInput) {
+        String[] input = userInput.replaceFirst("event ", "").split(" /at ");
+        Event event = new Event(input[0], input[1]);
+        savedItems.add(event);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(event);
+    }
+
     private static void lsHandler() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < savedItems.size(); ++i) {
@@ -67,6 +75,10 @@ public class Duke {
                     break;
                 case "deadline":
                     deadlineHandler(userInput);
+                    printRemainingCount();
+                    break;
+                case "event":
+                    eventHandler(userInput);
                     printRemainingCount();
                     break;
                 case "done":
