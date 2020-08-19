@@ -7,6 +7,7 @@ public class InputHandler {
     private static final String CMD_EXIT = "bye";
     private static final String CMD_LIST = "list";
     private static final String CMD_DONE = "done";
+    private static final String CMD_DELETE = "delete";
     private Scanner sc;
 
     public InputHandler(Scanner sc) {
@@ -41,9 +42,12 @@ public class InputHandler {
         case (CMD_DONE):
             handleDone(Integer.parseInt(input[1]));
             break;
-        default:
+        case (CMD_DELETE):
+            handleDelete(in);
+            break;    
+        default: // for invalid commands and adding of tasks
             try {
-                handleOthers(in, cmdWord);
+                handleTask(in, cmdWord);
             } catch (DukeException e) {
                 System.out.println(
                     DIVIDER + "\n" +
@@ -51,6 +55,30 @@ public class InputHandler {
                     DIVIDER
                 );
             }
+        }
+    }
+
+    private void handleDelete(String in) {
+        try {
+            int index =
+                Integer.parseInt(
+                    in.replaceFirst(CMD_DELETE, "").trim()
+                );
+            Task task = taskList.remove(index - 1);
+            int len = taskList.size();
+            String msg =
+                    DIVIDER + "\n" +
+                    "Noted. I've removed this task:\n" +
+                    "  " + task.toString() + "\n" +
+                    "Now you have " + len + " task" + (len == 1 ? "" : "s") + " in the list.\n" +
+                    DIVIDER;
+            System.out.println(msg);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            System.out.println(
+                DIVIDER + "\n" +
+                "Please input a valid index." + "\n" +
+                DIVIDER
+            );
         }
     }
 
@@ -80,7 +108,7 @@ public class InputHandler {
         );
     }
 
-    private void handleOthers(String in, String cmdWord) throws DukeException {
+    private void handleTask(String in, String cmdWord) throws DukeException {
         String taskDetails = in.replaceFirst(cmdWord, "").trim();
         switch (cmdWord) {
         case "deadline":
