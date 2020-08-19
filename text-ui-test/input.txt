@@ -1,0 +1,12 @@
+todo feed doge
+deadline east coast plan /by monday
+event covid19 /by september
+todo
+list
+check 1
+list
+remove 2
+list
+check 2
+list
+bye
