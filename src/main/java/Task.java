@@ -15,6 +15,10 @@ public class Task {
         this.done = false;
         this.icon = cross;
     }
+    
+    public static void reduceTaskCount() {
+        numberOfTasks--;
+    }
 
     public String getName() {
         return name;

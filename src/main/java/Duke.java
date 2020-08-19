@@ -18,6 +18,17 @@ public class Duke {
                 + String.format("Now you have %s tasks in the list.", Task.numberOfTasks) + "\n"
                 + horiLine);
     }
+    
+    private static void deleteTask(int i) {
+        Task task = List.get(i - 1);
+        List.remove(i - 1);
+        Task.reduceTaskCount();
+        System.out.println(horiLine
+                + "Noted. I've removed this task: " + "\n"
+                + task.toString() + "\n"
+                + String.format("Now you have %s tasks in the list.", Task.numberOfTasks) + "\n"
+                + horiLine);
+    }
 
     private static void echo() {
         greet();
@@ -60,6 +71,9 @@ public class Duke {
                     String eventTime = (eventInput.split(" /at "))[1];
                     Event newEvent = new Event(eventName, eventTime);
                     addTask(newEvent);
+                } else if (input.startsWith("delete")) {
+                    String deleteNumber = (input.split("delete "))[1];
+                    deleteTask(Integer.parseInt(deleteNumber));
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
