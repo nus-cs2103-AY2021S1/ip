@@ -50,10 +50,29 @@ public class Duke {
     }
 
     public static void storeInput(String command, List<Task> tasks) {
-        Task task = new Task(command,false);
-        tasks.add(task);
-        Printable userReply = () -> String.format("added: %s",task);
-        speak(userReply);
+        String cmd1 = command.split("\\s+")[0];
+        String cmd2 = command.substring(cmd1.length()+1); //remove the +1 incase of overslice
+        Task task =null;
+        if (cmd1.equals("deadline")) {
+            task = parseDeadline(cmd2);
+        } else if (cmd1.equals("todo")) {
+            task = new Todo(cmd2,false);
+        } else if (cmd1.equals("event")) {
+            task = parseEvent(cmd2);
+        } else {
+            System.out.println("Invalid command");
+            return;
+        }
+
+        if (task != null) {
+            tasks.add(task);
+            String taskSymbol = task.getTaskSymbol();
+            String symbol = task.getSymbol();
+            String toString = task.toString();
+            Printable userReply = () -> String.format("Got it. i've added this task:\n %s%s %s\n" +
+                    "Now you have %d tasks in the list.", taskSymbol, symbol, toString, Task.remainingTasks());
+            speak(userReply);
+        }
         return;
     }
 
@@ -73,5 +92,43 @@ public class Duke {
         return;
      }
 
+     private static Deadline parseDeadline(String input) {
+        String[] arr = input.split("\\s+");
+        String description="";
+        String deadline="";
+        boolean flag = false;
+        for (int i = 0; i<arr.length;i++) {
+            if (arr[i].equals("/by")) {
+                flag = true;
+                continue;
+            }
+            if (!flag) {
+                description += arr[i] + " ";
+            } else {
+                deadline += arr[i] + " ";
+            }
+        }
 
+        return new Deadline (description.substring(0,description.length()-1),false,deadline.substring(0,deadline.length()-1));
+     }
+
+     private static Event parseEvent (String input) {
+         String[] arr = input.split("\\s+");
+         String description="";
+         String duration="";
+         boolean flag = false;
+         for (int i = 0; i<arr.length;i++) {
+             if (arr[i].equals("/at")) {
+                 flag = true;
+                 continue;
+             }
+             if (!flag) {
+                 description += arr[i] + " ";
+             } else {
+                 duration += arr[i] + " ";
+             }
+         }
+
+         return new Event (description.substring(0,description.length()-1),false,duration.substring(0,duration.length()-1));
+     }
 }

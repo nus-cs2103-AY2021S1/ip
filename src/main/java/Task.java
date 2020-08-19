@@ -1,10 +1,16 @@
-public class Task {
-    private String description;
-    private boolean isDone;
+public abstract class Task {
+    protected String description;
+    protected boolean isDone;
+    protected static int total = 0;
 
     public Task(String name, boolean isCompleted) {
         this.description = name;
         this.isDone = isCompleted;
+        this.total ++;
+    }
+
+    public static int remainingTasks() {
+        return Task.total;
     }
 
     public String toString() {
@@ -16,11 +22,16 @@ public class Task {
     }
 
     public void setDone() {
+        if (!this.isDone) {
+            this.total--;
+        }
         this.isDone = true;
     }
 
     public String getSymbol() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "[\u2713]" : "[\u2718]");
     }
+
+    public abstract String getTaskSymbol();
 
 }
