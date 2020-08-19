@@ -14,7 +14,7 @@ public class Duke {
         System.out.println(open);
 
         String user_input;
-        ArrayList<String> user_list = new ArrayList<>();
+        ArrayList<Task> user_list = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         while(true) {
             user_input = scanner.nextLine();
@@ -25,9 +25,9 @@ public class Duke {
                 for (int i = 1; i <= user_list.size(); i++) {
                     output = output + i + ". " + user_list.get(i-1) + "\n";
                 }
-                System.out.println(line + "\n" + output + line);
+                System.out.println(line + "\n Here are the tasks in your list: \n" + output + line);
             } else {
-                user_list.add(user_input);
+                user_list.add(new Task(user_input));
                 System.out.println(line + "\n added: " +user_input + "\n" + line);
             }
         }
