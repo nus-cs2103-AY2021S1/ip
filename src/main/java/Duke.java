@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 public class Duke {
 
@@ -62,9 +63,52 @@ public class Duke {
     }
 
     private void add(String input) {
-        tasks.add(new Task(input));
-        System.out.println("Duke: Added '" + input + "' to list of tasks");
+        String[] splited = input.split("\\s+");
+        Task task;
+        if (splited[0].equals("todo")) {
+            task = createTodo(splited);
+        } else if (splited[0].equals("deadline")) {
+            task = createDeadline(splited);
+        } else if (splited[0].equals("event")) {
+            task = createEvent(splited);
+        } else {
+            task = new Task(input);
+        }
+
+        tasks.add(task);
+        System.out.println("Duke: Added '" + task.toString() + "' to list of tasks");
+        System.out.println("      Now you have " + tasks.size() + " tasks in the list");
         System.out.print("\nMe: ");
+    }
+
+    private Task createTodo(String[] input) {
+        String[] title = Arrays.copyOfRange(input, 1, input.length);
+        return new Todo(String.join(" ", title));
+    }
+
+    private Task createDeadline(String[] input) {
+        int separator = getIndex(input, "/by");
+        String[] titles = Arrays.copyOfRange(input, 1, separator);
+        String[] deadlines = Arrays.copyOfRange(input, separator + 1, input.length);
+        String title = String.join(" ", titles);
+        String deadline = String.join(" ", deadlines);
+        return new Deadline(title, deadline);
+    }
+
+    private int getIndex(String[] words, String target) {
+        for (int i = 0; i < words.length; i++) {
+            if (words[i].equals(target)) return i;
+        }
+        return -1;
+    }
+
+    private Task createEvent(String[] input) {
+        int separator = getIndex(input, "/at");
+        String[] titles = Arrays.copyOfRange(input, 1, separator);
+        String[] times = Arrays.copyOfRange(input, separator + 1, input.length);
+        String title = String.join(" ", titles);
+        String time = String.join(" ", times);
+        return new Event(title, time);
     }
 
     public static void main(String[] args) {
