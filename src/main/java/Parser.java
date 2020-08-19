@@ -1,5 +1,5 @@
 import java.util.regex.Matcher;
-import java.util.regex.MatchResult;
+import java.util.Optional;
 
 public class Parser {
     private TaskList taskList;
@@ -8,8 +8,9 @@ public class Parser {
     }
     public void parseAndRun(String input) throws DukeException {
         for (Command command : Command.values()) {
-            Matcher matcher = command.matcher(input);
-            if (matcher == null) continue;
+            Optional<Matcher> maybeMatcher = command.matcher(input);
+            if(maybeMatcher.isEmpty()) continue;
+            Matcher matcher = maybeMatcher.get();
             // Should we throw a more specific error here?
             if (!matcher.find()) throw command.matchError();
             int count = matcher.groupCount();

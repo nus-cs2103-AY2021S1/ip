@@ -1,5 +1,6 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Optional;
 
 public enum Command {
     TODO (Todo::todoCommand,
@@ -39,12 +40,13 @@ public enum Command {
         this.name = name;
     }
 
-    Matcher matcher(String rawInput) {
-        if(!rawInput.startsWith(this.name)) return null;
-        return this.format.matcher(rawInput.substring(this.name.length()).trim());
+    Optional<Matcher> matcher(String rawInput) {
+        if(!rawInput.startsWith(this.name)) return Optional.empty();
+        Matcher matcher =  this.format.matcher(rawInput.substring(this.name.length()).trim());
+        return Optional.of(matcher);
     }
 
-    public void dispatch(TaskList taskList, String[] args) throws  DukeException {
+    public void dispatch(TaskList taskList, String[] args) throws DukeException {
         this.exec.run(taskList, args);
     }
 
