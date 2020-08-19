@@ -3,9 +3,13 @@ package main.java;
 public class Event extends Task {
     String day;
 
-    public Event(String taskName, String day) {
+    public Event(String taskName, String day) throws DukeInvalidDayException, DukeInvalidTaskException {
         super(taskName);
-        this.day = day;
+        if(!day.equals(null) && !day.equals(" ")) {
+            this.day = day;
+        } else {
+            throw new DukeInvalidDayException();
+        }
     }
 
     @Override

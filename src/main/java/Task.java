@@ -4,9 +4,13 @@ public class Task {
     String taskName;
     Boolean done;
 
-    public Task(String taskName) {
-        this.taskName = taskName;
-        this.done = false;
+    public Task(String taskName) throws DukeInvalidTaskException {
+        if (!taskName.equals(null) && !taskName.equals(" ")) {
+            this.taskName = taskName;
+            this.done = false;
+        } else {
+            throw new DukeInvalidTaskException();
+        }
     }
 
     public void checkOff() {

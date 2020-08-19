@@ -1,14 +1,13 @@
 package main.java;
 
 public class Todo extends Task {
-    public Todo(String taskName) {
+    public Todo(String taskName) throws DukeInvalidTaskException{
         super(taskName);
     }
 
     @Override
     public String toString() {
         String finished = this.done ? "✓" : "✗";
-        String toReturn = "[T]" + "[" + finished + "]" + taskName;
-        return toReturn;
+        return "[T]" + "[" + finished + "]" + taskName;
     }
 }

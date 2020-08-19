@@ -3,9 +3,13 @@ package main.java;
 public class Deadline extends Task{
     String date;
 
-    public Deadline(String taskName, String date) {
+    public Deadline(String taskName, String date) throws DukeInvalidDateException, DukeInvalidTaskException {
         super(taskName);
-        this.date = date;
+        if(!date.equals(null) && !date.equals(" ")){
+            this.date = date;
+        } else {
+            throw new DukeInvalidDateException();
+        }
     }
 
     @Override

@@ -1,2 +1,7 @@
-todo do work
+todo work
+todo return books
+deadline this friday /by sunday
+done 1
+done 2
+done 3
 bye
