@@ -7,7 +7,7 @@ public class Duke {
                 + "| | | || | | | \n"
                 + "| |_| || |_| | \n"
                 + "|____/ |____/ \n";
-        System.out.println("Hi! I'm\n" + logo + "How can I help you :)\n"
+        System.out.println("Hi! I'm\n" + logo + "How can I help you? :)\n"
                 + "_________________________________________");
 
         Scanner sc = new Scanner(System.in);
