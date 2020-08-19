@@ -1,6 +1,10 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 
 public class Duke {
     private static final String SEPARATOR = "    ____________________________________"
@@ -99,6 +103,36 @@ public class Duke {
                 tasks.size() == 1 ? "task" : "tasks", SEPARATOR);
     }
 
+    private void setTasks() {
+    }
+
+    private void write() {
+        String currDir = System.getProperty("user.dir");
+        Path folderPath = Paths.get(currDir, "data");
+
+        try {
+            if (!Files.exists(folderPath)) Files.createDirectories(folderPath);
+
+            Path filePath = Paths.get(currDir, "data", "tasks.csv");
+            File file = filePath.toFile();
+
+            if (!file.exists()) file.createNewFile();
+
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write("Task Type,Task Time,Done State,Task Name\n");
+
+            for (Task task : tasks) {
+                bw.write(task.write());
+            }
+
+            bw.close();
+        } catch (IOException e) {
+            System.out.printf("     ☹ OOPS!!! Something went wrong!\n%s",
+                    SEPARATOR);
+        }
+    }
+
     public void initialise() {
         hasCommand = true;
         printGreeting();
@@ -139,6 +173,8 @@ public class Duke {
                 System.out.printf("%s\n%s", e.getMessage(), SEPARATOR);
             }
         }
+
+        write();
 
         printExit();
     }

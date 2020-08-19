@@ -16,6 +16,10 @@ public class Task {
         doneState = true;
     }
 
+    public String write() {
+        return String.format(",%d,%s\n", doneState ? 1 : 0, name);
+    }
+
     @Override
     public String toString() {
         return String.format("%s %s", doneTag(), name);
