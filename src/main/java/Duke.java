@@ -74,7 +74,7 @@ public class Duke {
 
                             String eventString = line.split("/")[0].substring(6);
                             Event event = new Event(eventString,at2);
-
+                            ls.add(event);
                             System.out.println("____________________________________________________________");
                             System.out.println(" Got it. I've added this task: ");
                             System.out.println(event.toString());
