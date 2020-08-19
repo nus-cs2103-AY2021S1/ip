@@ -15,13 +15,16 @@ public class Duke {
                 showList();
                 break;
             case "done":
-                done(inputArr);
+                doneTask(inputArr);
                 break;
             case "deadline":
                 addTask("deadline", inputArr);
                 break;
             case "event":
                 addTask("event", inputArr);
+                break;
+            case "todo":
+                addTask("todo", inputArr);
                 break;
             }
             inputArr = getInputArr();
@@ -30,7 +33,7 @@ public class Duke {
         showGoodbye();
     }
 
-    public static String[] getInputArr() {
+    static String[] getInputArr() {
         String input = scanner.nextLine();
         return input.split("\\s+");
     }
@@ -60,32 +63,21 @@ public class Duke {
     }
 
     public static void addTask(String type, String[] inputArr) {
-        String desc = "";
         String dateTime = "";
         Task task;
 
-        int i = 1;
-        System.out.println("inputArr.length = " + inputArr.length);
-        while (!inputArr[i].contains("/") || i < inputArr.length - 1) {
-            desc = desc + inputArr[i] + " ";
-            i++;
-            System.out.println("i = " + i);
-        }
-        desc = desc.substring(0, desc.length() - 1);
+        String desc =  getTaskDescription(inputArr);
 
         if (type.equals("deadline") || type.equals("event")) {
-            i++;
-            while (i < inputArr.length) {
-                dateTime = dateTime + inputArr[i] + " ";
-                i++;
-            }
-            dateTime = dateTime.substring(0, dateTime.length() - 1);
+            dateTime = getTaskTimeDate(inputArr);
         }
 
         if (type.equals("deadline")) {
             task = new Deadline(desc, dateTime);
         } else if (type.equals("event")) {
             task = new Event(desc, dateTime);
+        } else {
+            task = new Todo(desc);
         }
 
         taskList.add(task);
@@ -100,14 +92,39 @@ public class Duke {
         System.out.println(wrapMessage(message));
     }
 
-    public static void done(String[] inputArr) {
+    public static String getTaskDescription(String[] inputArr) {
+        String desc = "";
+        int i = 1;
+        while ((i < inputArr.length) && (!inputArr[i].contains("/"))) {
+            // Get description of the task, which is after the command in inputArr
+            desc = desc + inputArr[i] + " ";
+            i++;
+        }
+        return desc.substring(0, desc.length() - 1);
+    }
+
+    public static String getTaskTimeDate(String[] inputArr) {
+        String dateTime = "";
+        int i = 0;
+        while (!inputArr[i].contains("/")) {
+            // Get description of the task, which is after the command in inputArr
+            i++;
+        }
+        i++;
+        while (i < inputArr.length) {
+            dateTime = dateTime + inputArr[i] + " ";
+            i++;
+        }
+        return dateTime.substring(0, dateTime.length() - 1);
+    }
+
+    public static void doneTask(String[] inputArr) {
         String lastChar = inputArr[inputArr.length - 1];
         int i = Integer.parseInt(lastChar);
-        i -= 1;
-        Task task = taskList.get(i);
+        Task task = taskList.get(i - 1);
         task.markAsDone();
         String message = "      Nice! I've marked this task as done:\n"
-                + "      "
+                + "        "
                 + task;
         System.out.println(wrapMessage(message));
     }
