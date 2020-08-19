@@ -1,3 +1,5 @@
+import exception.UnknownCommandException;
+
 import java.util.HashMap;
 
 public class DukeCommandSet {
@@ -30,7 +32,15 @@ public class DukeCommandSet {
         }
     }
 
-    public Command getCommand(String commandName) {
+    public Command getCommand(String commandName) throws UnknownCommandException {
+        if (!commandSet.containsKey(commandName)) {
+            String line = UIPrint.getLine(UIPrint.star, 50);
+            String errMessage =
+                    line + "OOPS!!! I'm sorry, but I don't know what that means :-(" + line;
+
+            throw new UnknownCommandException(errMessage);
+        }
+
         return commandSet.get(commandName);
     }
 }
