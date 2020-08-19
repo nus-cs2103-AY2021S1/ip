@@ -41,13 +41,8 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String name = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|";
         TaskManager taskManager = new TaskManager();
-        echo(name + " at your service. How may I help?");
+        echo("Duke at your service. How may I help?");
         while (sc.hasNext()) {
             String input = sc.nextLine();
             String[] words = interpretInput(input);
