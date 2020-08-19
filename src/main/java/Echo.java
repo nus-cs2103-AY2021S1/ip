@@ -56,19 +56,20 @@ public class Echo {
             this.tasks.remove(curr);
             Delete del = (Delete) task;
             Task t = tasks.remove(del.getTaskNum());
-            String message1 = "Noted. I've removed this task:\n";
-            String taskWord = tasks.size() <= 1 ? "task" : "tasks";
-            String message2 = String.format("Now you have %d %s in your list.%n", tasks.size(), taskWord);
-            return message1 + "   " + t.toString() + "\n" + message2;
+            String message = "Noted. I've removed this task:\n";
+            return message + "   " + t.toString() + "\n" + getNumTasks();
         } else {
-            String message1 = "Got it. I've added this task:\n";
-            String taskWord = tasks.size() <= 1 ? "task" : "tasks";
-            String message2 = String.format("Now you have %d %s in your list.%n", tasks.size(), taskWord);
-            return message1 + "   " + task.toString() + "\n" + message2;
+            String message = "Got it. I've added this task:\n";
+            return message + "   " + task.toString() + "\n" + getNumTasks();
         }
     }
 
     public boolean toExit() {
         return this.shouldExit;
+    }
+
+    protected String getNumTasks() {
+        int numTasks = tasks.size();
+        return String.format("Now you have %d %s in your list.%n", numTasks, numTasks <= 1 ? "task" : "tasks");
     }
 }

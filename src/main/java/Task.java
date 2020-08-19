@@ -19,10 +19,6 @@ public class Task {
         return String.format("%s%n   %s%n", message, this.toString());
     }
 
-    public String getDescription() {
-        return this.description;
-    }
-
     public String getType() {
         return this.type;
     }
