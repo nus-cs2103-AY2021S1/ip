@@ -22,7 +22,11 @@ public class Task {
     @Override
     public String toString() {
         String completedMarker;
-
-        return String.format("%s", this.task);
+        if (completed) {
+            completedMarker = "✓";
+        } else {
+            completedMarker = "✗";
+        }
+        return String.format("[%s] %s", completedMarker, this.task);
     }
 }

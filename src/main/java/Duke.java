@@ -38,6 +38,13 @@ public class Duke {
                 System.out.println(messageFormatter(listMessage));
 
 //            Check if message is in the format of "done %d"
+            } else if (msg.matches("^done \\d+$")) {
+                int updateTaskIndex = Integer.valueOf(msg.substring(5, msg.length())) - 1;
+                Task completedTask = taskList[updateTaskIndex].updateStatus(true);
+                taskList[updateTaskIndex] = completedTask;
+                String completedMessage = "Nice! I've marked this task as done:\n" + "  " + completedTask.toString();
+                System.out.printf(messageFormatter(completedMessage));
+
             } else {
                 Task newTask = new Task(msg, taskIndex);
                 taskList[taskIndex] = newTask;
