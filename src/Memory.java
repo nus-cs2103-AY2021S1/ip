@@ -15,10 +15,12 @@ public class Memory<T> {
     public String toString() {
         String results = "";
         int size = this.memory.size();
-        for (int i = 1; i < size; i++) {
-            results += "    " + i + ". " + memory.get(i - 1) + "\n";
+        if (size != 0) {
+            for (int i = 1; i < size; i++) {
+                results += "    " + i + ". " + memory.get(i - 1) + "\n";
+            }
+            results += "    " + size + ". " + memory.get(size - 1);
         }
-        results += "    " + size + ". " + memory.get(size - 1);
         return results;
     }
 }

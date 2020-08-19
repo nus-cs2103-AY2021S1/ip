@@ -20,5 +20,12 @@ public enum Status {
         public String toString() {
             return "   added: ";
         }
+    },
+
+    LIST {
+        @Override
+        public String toString() {
+            return "    Here are the tasks in your list:\n";
+        }
     }
 }

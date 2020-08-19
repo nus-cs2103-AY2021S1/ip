@@ -12,8 +12,8 @@ public class Duke {
         Memory<String> memory = new Memory();
         String extract = input.nextLine();
         String nextLine = new Formating<>(extract).shorten();
-        while (!nextLine.equals("bye")) {
-            if (nextLine.equals("list")) {
+        while (!nextLine.equals(Status.BYE.name().toLowerCase())) {
+            if (nextLine.equals(Status.LIST.name().toLowerCase())) {
                 Formating<Memory> formatedMemo = new Formating<>(memory);
                 System.out.println(formatedMemo);
             } else {
