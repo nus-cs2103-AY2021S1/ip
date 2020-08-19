@@ -17,7 +17,26 @@ class Checker {
         this.command = e;
     }
 
+    /**
+     * Static factory method for constructing the checker object.
+     * The Checker should have an Executable containing the task.
+     *
+     * @param s command
+     * @return Checker object
+     */
     public static Checker parseAndCheck(String s) {
+        return parseExplicitCommand(s);
+    }
+
+
+    /* -------------------------------------- END OF PUBLIC METHODS ----------------------------------------------- */
+
+    /**
+     *
+     * @param s
+     * @return
+     */
+    private static Checker parseExplicitCommand(String s) {
         Executable e;
         if (s.contains("list") || s.contains("List")) {
             e = Command.createListCommand(null);
@@ -37,7 +56,7 @@ class Checker {
         } else if (s.contains("event ") || s.contains("Event ")) {
             int x = s.indexOf("event");
             String task = s.substring(x + 6);
-            String[] arr = task.split("/at");
+            String[] arr = task.split("/?at");
             Task t = Task.createEvent(arr[0].trim(), arr[1].trim());
             e = Command.createAddCommand(t);
 
