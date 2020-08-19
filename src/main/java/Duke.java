@@ -67,53 +67,60 @@ public class Duke {
         }
     }
 
+    public String getRestOfString(String[] splitSpace) throws DukeException {
+        if (splitSpace.length == 1) {
+            throw new DukeException("\tSorry! The description of a todo cannot be empty :')");
+        }
+        StringBuilder rest = new StringBuilder();
+        for (int i = 1; i < splitSpace.length; i++) {
+            rest.append(splitSpace[i]);
+            if (i != splitSpace.length - 1) {
+                rest.append(" ");
+            }
+        }
+        return rest.toString();
+    }
+
     public void serveClient() {
         sayHello();
         while (sc.hasNext()) {
-            String input = sc.nextLine();
-            String[] splitSpace = input.split(" "); // to get keyword
-            String keyword = splitSpace[0];
+            try {
+                String input = sc.nextLine();
+                String[] splitSpace = input.split(" ");
+                String keyword = splitSpace[0];
 
-            StringBuilder rest = new StringBuilder();
-            for (int i = 1; i < splitSpace.length; i++) {
-                rest.append(splitSpace[i]);
-                if (i != splitSpace.length - 1) {
-                    rest.append(" ");
+                switch (keyword) {
+                    case "bye":
+                        sayBye();
+                        break;
+                    case "list":
+                        displayTasks();
+                        break;
+                    case "done":
+                        int index = Integer.parseInt(splitSpace[1]) - 1;
+                        markTaskAsDone(index);
+                        break;
+                    case "todo":
+                        addTodo(getRestOfString(splitSpace));
+                        break;
+                    case "deadline":
+                        String[] splitSlash = getRestOfString(splitSpace).split(" /by ");
+                        addDeadline(splitSlash[0], splitSlash[1]);
+                        break;
+                    case "event":
+                        String[] split = getRestOfString(splitSpace).split(" /at ");
+                        addEvent(split[0], split[1]);
+                        break;
+                    default:
+                        throw new DukeException("\tApologies! I do not understand what that means :')");
                 }
-            }
-            String restStr = rest.toString();
 
-            switch(keyword) {
-                case "bye":
-                    sayBye();
+                if (keyword.equals("bye")) {
                     break;
-                case "list":
-                    displayTasks();
-                    break;
-                case "done":
-                    int index = Integer.parseInt(splitSpace[1])-1;
-                    markTaskAsDone(index);
-                    break;
-                case "todo":
-                    addTodo(restStr);
-                    break;
-                case "deadline":
-                    String[] splitSlash = restStr.split(" /by ");
-                    addDeadline(splitSlash[0], splitSlash[1]);
-                    break;
-                case "event":
-                    String[] split = restStr.split(" /at ");
-                    addEvent(split[0], split[1]);
-                    break;
-                default:
-                    break;
-            }
-
-            if (keyword.equals("bye")) {
-                break;
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
-
-
     }
 }
