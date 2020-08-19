@@ -27,7 +27,7 @@ public class Duke {
 
                 if (!input.equals("list")) {
 
-                    if (!input.contains("done")) {
+                    if (!input.contains("done") && !input.contains("delete")) {
 
                         if (input.contains("todo") || input.contains("event")
                                 || input.contains("deadline")) {
@@ -112,22 +112,31 @@ public class Duke {
 
                     } else {
 
-                        int ref = Integer.parseInt(Character.toString(
-                                input.charAt("done 1".length() - 1))) - 1;
+                        if(input.contains("done")) {
 
-                        if (Task.taskStorage[ref] != null) {
+                            int ref = Integer.parseInt(Character.toString(
+                                    input.charAt("done 1".length() - 1))) - 1;
 
-                            Task done = Task.taskStorage[ref].markAsDone();
-                            Task.taskStorage[ref] = done;
+                            if (Task.taskStorage.get(ref) != null) {
 
-                            System.out.println("Nice! I've marked this task as done:\n"
-                                    + Task.taskStorage[ref]);
+                                Task done = Task.taskStorage.get(ref).markAsDone();
+                                Task.taskStorage.add(ref, done);
 
-                        } else {
+                                System.out.println("Nice! I've marked this task as done:\n"
+                                        + Task.taskStorage.get(ref));
 
-                            System.out.println("I am afraid that it is not possible" +
-                                    "to do an unknown task.");
+                            } else {
 
+                                System.out.println("I am afraid that it is not possible" +
+                                        "to do an unknown task.");
+
+                            }
+
+                        }else{
+                            int ref = Integer.parseInt(Character.toString(
+                                    input.charAt("delete 1".length() - 1))) - 1;
+
+                            Task.delete(ref);
                         }
 
                     }

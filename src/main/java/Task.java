@@ -1,9 +1,11 @@
+import java.util.ArrayList;
+
 public class Task {
 
     protected String description;
     protected boolean isDone;
 
-    public static Task[] taskStorage = new Task[100];
+    public static ArrayList<Task> taskStorage = new ArrayList<>();
 
     public Task(String description){
         this.description = description;
@@ -34,32 +36,36 @@ public class Task {
     }
 
     public static void write(String input, String type, String byOrAt){
-
-            for (int i = 0; i < 100; i++) {
-                if (taskStorage[i] == null) {
-                    if(type.equals( "todo")) {
-                        taskStorage[i] = new ToDo(input);
-                    }else if(type.equals( "deadline")){
-                        taskStorage[i] = new Deadline(input, byOrAt);
-                    }else{
-                        taskStorage[i] = new Event(input, byOrAt);
-                    }
-                    System.out.println("Got it. I've added this task: \n" + taskStorage[i]);
-                    System.out.println("Now you have " + (i + 1) + " tasks in the list.");
-                    break;
-                }
-            }
-
+        Task toBeAdded;
+        if(type.equals( "todo")) {
+            toBeAdded = new ToDo(input);
+            taskStorage.add(toBeAdded);
+        }else if(type.equals( "deadline")){
+            toBeAdded = new Deadline(input, byOrAt);
+            taskStorage.add(toBeAdded);
+        }else{
+            toBeAdded = new Event(input, byOrAt);
+            taskStorage.add(toBeAdded);
+        }
+        System.out.println("Got it. I've added this task: \n" + toBeAdded);
+        System.out.println("Now you have " + taskStorage.size() + " tasks in the list.");
     }
 
     public static void read(){
         System.out.println("Here are the tasks in your list:");
-        for(int i = 0; i < 100; i ++){
-            if(taskStorage[i] != null){
-                System.out.println(String.valueOf(i + 1 ) +"."+ taskStorage[i]);
-            }else{
-                break;
-            }
+        for(int i = 0; i < taskStorage.size(); i ++){
+            System.out.println(String.valueOf(i + 1 ) +"."+ taskStorage.get(i));
+        }
+    }
+
+    public static void delete(int ref){
+        if(ref >= taskStorage.size()){
+            System.out.println("I am afraid that it is not possible to delete an unknown task.");
+        }else{
+            Task temp = taskStorage.get(ref);
+            taskStorage.remove(ref);
+            System.out.println("Noted. I've removed this task:\n " +
+                    temp + "\nNow you have " + taskStorage.size() + " tasks in the list.");
         }
     }
 
