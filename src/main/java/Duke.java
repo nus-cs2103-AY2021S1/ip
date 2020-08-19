@@ -62,7 +62,7 @@ public class Duke {
                         output = printDesign(lst.addWork(newEvent));
                         break;
                     default:
-                        String errorCommand = "Hey!!! I'm sorry, but I don't know what that means :-()";
+                        String errorCommand = "Hey!!! I'm sorry, but MUG don't know what that means :-()";
                         output = printDesign(errorCommand);
                         break;
                 }
@@ -91,7 +91,7 @@ public class Duke {
         String welcome = logo
                 + "\n"
                 + "** Hello! I'm MUG  **\n"
-                + "** What can I do for you ?_? **";
+                + "** What can MUG do for you ?_? **";
 
         System.out.println(welcome);
     }

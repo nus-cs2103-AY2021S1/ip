@@ -9,7 +9,7 @@ public class WorkList {
 
     public String addWork(Task work) {
         this.workList.add(work);
-        return "Got it. I've added this task:\n"
+        return "Got it. MUG has added this task:\n"
                 + work
                 + "\nNow you have "
                 + this.workList.size()
@@ -18,7 +18,10 @@ public class WorkList {
 
     public String readWork() {
         StringBuilder results = new StringBuilder();
-        for(int i = 0; i < this.workList.size(); i ++) {
+        if (this.workListLen() <= 0) {
+            return "MUG don't have any of your task \"_\"";
+        }
+        for(int i = 0; i < this.workListLen(); i ++) {
             results.append(i + 1);
             results.append(". ");
             results.append(this.workList.get(i));
@@ -31,10 +34,14 @@ public class WorkList {
 
     public String updateTaskStatus(int taskId) {
         Task tsk =  this.workList.get(taskId - 1);
-        this.workList.set(taskId - 1, tsk.markAsDone());
-
-        return  "Congratz! I've marked this task as done:\n"
-                + this.workList.get(taskId - 1);
+        if(tsk.getIsDone()) {
+            return "Mug had marked this task as done:\n"
+                    + this.workList.get(taskId - 1);
+        } else {
+            this.workList.set(taskId - 1, tsk.markAsDone());
+            return "Congratz! MUG has marked this task as done:\n"
+                    + this.workList.get(taskId - 1);
+        }
     }
 
     public int workListLen() {
@@ -44,10 +51,10 @@ public class WorkList {
     public String deleteWork(int taskId) {
         Task tsk = this.workList.get(taskId - 1);
         this.workList.remove(taskId - 1);
-        return "Noted. I've removed this task: \n"
+        return "Noted. MUG has removed this task: \n"
                 + tsk
                 + "\nNow you have "
                 + this.workList.size()
-                + " tasks in the list.";
+                + " tasks left in the list.";
     }
 }

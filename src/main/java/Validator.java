@@ -4,9 +4,9 @@ public class Validator {
         if(splitNum < 2) {
             if(timeRelated
                     && (command == Command.DEADLINE || command == Command.EVENT)) {
-                throw new DukeException("HEY!!! Feed me with time/date. I am hungry T_T");
+                throw new DukeException("HEY!!! Feed me with time/date. MUG is hungry T_T");
             } else {
-                throw new DukeException("HEY!!! Don't be stingy give me more information >.<");
+                throw new DukeException("HEY!!! Don't be stingy give MUG more information >.<");
             }
         }
     }
@@ -15,7 +15,7 @@ public class Validator {
         try {
             return Command.valueOf(command.toUpperCase());
         } catch (IllegalArgumentException ex) {
-            throw new IllegalArgumentException("Hey!!! I'm sorry, but I don't know what that means :-()");
+            throw new IllegalArgumentException("Hey!!! I'm sorry, but MUG don't know what that means :-()");
         }
     }
 
@@ -26,16 +26,16 @@ public class Validator {
 
             if (index > listLen) {
                 if(command == Command.DONE){
-                    throw new DukeException("I don't have this work to mark as Done :>");
+                    throw new DukeException("MUG don't have this work to mark as Done :>");
                 } else if (command == Command.DELETE){
-                    throw new DukeException("I don't have this work to Delete @_@");
+                    throw new DukeException("MUG don't have this work to Delete @_@");
                 }
             } else if (splitNum < 2) {
-                throw new DukeException("HEY!!! Don't be stingy give me more information >.<");
+                throw new DukeException("HEY!!! Don't be stingy give MUG more information >.<");
             }
             return index;
         } catch ( NumberFormatException ex) {
-            throw new NumberFormatException("Please feed me with integer number ~_~");
+            throw new NumberFormatException("Please feed MUG an integer number ~_~");
         }
     }
 }
