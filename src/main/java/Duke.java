@@ -84,15 +84,18 @@ public class Duke {
                     System.out.println("    Nice! I've marked this task as done:");
                     System.out.println("    " + tasks.get(taskNumber - 1));
 
-//                } else if (!str.equals("bye")) {
-//                    System.out.println("    added: " + t.getDescription());
-//                    tasks.add(t);
-//                    break;
+
                 } else if (str.equals("bye")) {
 
                     System.out.println("    Bye. Hope to see you again soon!");
                     System.out.println("    _________________________________");
                     break;
+                } else if (t.getFirstWord().equals("delete")) {
+                    int taskNumber = t.getNumber();
+                    System.out.println("    Noted. I've removed this task:");
+                    System.out.println("        " + tasks.get(taskNumber - 1));
+                    tasks.remove(taskNumber - 1);
+                    System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
                 } else {
                     try {
                         t.validate();
