@@ -7,7 +7,7 @@ public class Event extends Task {
     private String dateTime;
 
     @Override
-    public String getStatus() {
-        return super.getStatus() + " (at: " + dateTime + ")";
+    public String toString() {
+        return super.toString() + " (at: " + dateTime + ")";
     }
 }

@@ -15,11 +15,12 @@ public class Task {
         return description;
     }
 
-    public String getStatus() {
-        return "[" + getStatusIcon() + "] " + getDescription();
-    }
-
     public void markAsDone() {
         isDone = true;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + getDescription();
     }
 }

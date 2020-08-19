@@ -7,7 +7,7 @@ public class Deadline extends Task {
     private String deadline;
 
     @Override
-    public String getStatus() {
-        return super.getStatus() + " (by: " + deadline + ")";
+    public String toString() {
+        return super.toString() + " (by: " + deadline + ")";
     }
 }
