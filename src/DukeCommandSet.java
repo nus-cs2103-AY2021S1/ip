@@ -36,7 +36,7 @@ public class DukeCommandSet {
         if (!commandSet.containsKey(commandName)) {
             String line = UIPrint.getLine(UIPrint.star, 50);
             String errMessage =
-                    line + "OOPS!!! I'm sorry, but I don't know what that means :-(" + line;
+                    line + "\nOOPS!!! I'm sorry, but I don't know what that means :-(\n" + line;
 
             throw new UnknownCommandException(errMessage);
         }

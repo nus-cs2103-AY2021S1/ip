@@ -11,7 +11,7 @@ public class TodoCommand extends Command {
         if (str.isBlank()) {
             String line = UIPrint.getLine(UIPrint.star, 50);
             String errMessage =
-                    line + "OOPS!!! The description of a todo cannot be empty." + line;
+                    line + "\nOOPS!!! The description of a todo cannot be empty.\n" + line;
 
             throw new NoDescriptionException(errMessage);
         }
