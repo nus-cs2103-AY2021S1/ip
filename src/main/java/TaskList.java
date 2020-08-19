@@ -45,7 +45,7 @@ public class TaskList {
                     StringConstants.DONE_MESSAGE,
                     "  " + task.toString()
             };
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException();
         }
     }
