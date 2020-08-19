@@ -21,22 +21,35 @@ public class Duke {
         printDivider();
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> inputData = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
         String input = sc.nextLine();
 
         while(!input.equals("bye")) {
             if(input.equals("list")) {
                 int index = 1;
                 printDivider();
-                for(index = 0; index < inputData.size(); index++) {
-                    printOutput((index + 1) + ": " + inputData.get(index));
+                printOutput("Here are the tasks in your list:");
+                for(index = 0; index < taskList.size(); index++) {
+                    printOutput((index + 1) + ": " + taskList.get(index));
                 }
                 printDivider();
             } else {
-                inputData.add(input);
-                printDivider();
-                printOutput("added: " + input);
-                printDivider();
+                String[] inputs = input.split("\\s+");
+                if(inputs[0].equals("done")) {
+                    int index = Integer.valueOf(inputs[1]) - 1;
+                    taskList.set(index, taskList.get(index).completeTask());
+                    printDivider();
+                    printOutput("Nice! I've marked this task as done:");
+                    printOutput(taskList.get(index).toString());
+                    printDivider();
+
+                } else {
+                    Task task = new Task(input);
+                    taskList.add(task);
+                    printDivider();
+                    printOutput("added: " + input);
+                    printDivider();
+                }
             }
             input = sc.nextLine();
         }
