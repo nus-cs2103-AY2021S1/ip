@@ -1,19 +1,29 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+
 public class Duke {
     public static String horizontal = "________________________" + "\n";
+    public static ArrayList<String> list = new ArrayList<>();
 
     public static void action() {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String input = sc.nextLine();
-            if (input.equals("list")) {
-                System.out.println(horizontal + input + "\n" + horizontal);
-            } else if (input.equals("blah")) {
-                System.out.println(horizontal + input + "\n" + horizontal);
-            } else if (input.equals("bye")) {
+            if  (input.equals("bye")) {
                 String bye = "Bye. Hope to see you again soon!" + "\n";
                 System.out.println(horizontal + bye + horizontal);
                 break;
+            } else if (input.equals("list")) {
+                System.out.println(horizontal);
+                int counter = 1;
+                for (String str: list) {
+                    System.out.println(counter + ". " + str);
+                    counter++;
+                }
+                System.out.println(horizontal);
+            } else {
+                list.add(input);
+                System.out.println(horizontal + "added: " + input + "\n" + horizontal);
             }
         }
     }
