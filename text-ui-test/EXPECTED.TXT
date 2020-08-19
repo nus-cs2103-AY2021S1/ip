@@ -93,4 +93,25 @@ Here is your current list of tasks:
 
 You: 
 
+Bob: 
+Noted! I have deleted this task from your list:
+[D][✓] return book (by: Sunday)
+You now have 3 task(s) in your list
+
+You: 
+
+Bob: 
+Here is your current list of tasks:
+1.[T][✘] borrow book
+2.[E][✘] project meeting (at: Mon 2-4pm)
+3.[D][✘] independent project (by: monday)
+
+You: 
+
+Bob: 
+OOPS! Task 10 does not exist.
+Please make sure task index is correct.
+
+You: 
+
 Bob: Goodbye! Have a nice day :D

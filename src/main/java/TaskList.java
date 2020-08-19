@@ -20,6 +20,10 @@ public class TaskList {
         return this.listOfTasks.get(index);
     }
 
+    public Task deleteTask(int index) {
+        return this.listOfTasks.remove(index);
+    }
+
     @Override
     public String toString() {
         StringBuilder allTasks = new StringBuilder();

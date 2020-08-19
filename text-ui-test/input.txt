@@ -11,4 +11,7 @@ todo
 deadline independent project /bymonday
 deadline independent project /by monday
 list
+delete 2
+list
+delete 10
 bye

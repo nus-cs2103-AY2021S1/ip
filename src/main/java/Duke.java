@@ -40,6 +40,19 @@ public class Duke {
                     System.out.println(SKIPLINE + CHATBOT);
                     System.out.println("OOPS! Please enter a numerical number to mark tasks as done :)");
                 }
+                
+            // Delete indicated task    
+            } else if (deleteTask) {
+                try {
+                    int lengthOfCommand = description.length();
+                    int index = Integer.parseInt(description.substring(7, lengthOfCommand));
+                    deleteTaskFromList(tasks, index);
+                } catch (TaskDoesNotExistException e) {
+                    System.out.println(e.getMessage());
+                } catch (NumberFormatException e) {
+                    System.out.println(SKIPLINE + CHATBOT);
+                    System.out.println("OOPS! Please enter a numerical number to delete tasks from your list :)");
+                }
             }
 
             // Display list of tasks to user
@@ -73,9 +86,12 @@ public class Duke {
     private static void displayTaskList(TaskList tasks) {
         System.out.println(SKIPLINE + CHATBOT);
 
+        // If list is empty, notify users that list if empty
         if (tasks.totalNumberOfTasks() == 0) {
             // Bob's response
             System.out.println("List is empty :(");
+            
+        // Else display the list to users
         } else {
             // Bob's response
             System.out.println("Here is your current list of tasks:");
@@ -84,17 +100,19 @@ public class Duke {
     }
 
     private static void updateTaskList(TaskList tasks, Task newTask) {
+        System.out.println(SKIPLINE + CHATBOT);
         tasks.addNewTask(newTask);
 
         // Bob's response
-        System.out.println();
-        System.out.println(CHATBOT + SKIPLINE + "Noted! I have added the following task to your list:");
+        System.out.println("Noted! I have added the following task to your list:");
         System.out.println(newTask);
         System.out.println("You now have " + tasks.totalNumberOfTasks() + " task(s) in your list");
     }
 
     private static void markTaskAsDone(TaskList tasks, int index) throws TaskDoesNotExistException {
         System.out.println(SKIPLINE + CHATBOT);
+        
+        // Check if index is valid
         if (index > 0 && index <= tasks.totalNumberOfTasks()) {
             Task doneTask = tasks.getTask(index -1);
             if (doneTask.isDone) {
@@ -109,9 +127,26 @@ public class Duke {
                 System.out.println("Keep up the good work :)");
             }
         } else {
-            throw new TaskDoesNotExistException(
-                    "OOPS! Task " + index + " does not exist." + SKIPLINE + "Please make sure task index is correct.");
+            throw new TaskDoesNotExistException(index);
         }
+    }
+    
+    private static void deleteTaskFromList(TaskList tasks, int index) throws TaskDoesNotExistException{
+        System.out.println(SKIPLINE + CHATBOT);
+        
+        // Checks if index is valid
+        if (index > 0 && index <= tasks.totalNumberOfTasks()) {
+            Task deletedTask = tasks.getTask(index - 1);
+            tasks.deleteTask(index - 1);
+
+            // Bob's response
+            System.out.println("Noted! I have deleted this task from your list:");
+            System.out.println(deletedTask);
+            System.out.println("You now have " + tasks.totalNumberOfTasks() + " task(s) in your list");
+        } else {
+            throw new TaskDoesNotExistException(index);
+        }
+        
     }
 
     private static void handleUserCommands(TaskList tasks, String command) throws InvalidUserCommandException{
