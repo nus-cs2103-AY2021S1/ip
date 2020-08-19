@@ -15,9 +15,10 @@ public class Task {
         return (isDone ? "[\u2713]" : "[\u2718]");
     }
 
-    public static void addTask(String description) {
-        taskList.add(new Task(description));
-        Print.formatPrint("Added: " + description);
+    public static void addTask(Task task) {
+        taskList.add(task);
+        Print.formatPrint(String.format("Got it. I've added this task: \n   %s\nNow you have %d task%s in the list.",
+                task, taskList.size(), taskList.size() > 1 ? "s": ""));
     }
 
     public static void printList() {
