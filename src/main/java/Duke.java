@@ -5,6 +5,11 @@ import java.util.Scanner;
 public class Duke {
     private final List<Task> listOfTask = new ArrayList<>();
     private final String lines = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
+    private final static String ignoreCase = "(?i)";
+
+    enum Command {
+        LIST, DONE, BYE, TODO, DEADLINE, EVENT, DELETE,
+    }
 
     Duke() {
         String welcome = " Hello! I'm Yuki *Woof*\n What can I do for you? *Woof woof*\n";
@@ -30,7 +35,7 @@ public class Duke {
             String errMessage = Print.printFormat(" *Woof!* This task does not exist!\n");
             throw new DukeException(errMessage);
         } catch (NumberFormatException e) {
-            String errMessage = Print.printFormat(" *Woof!* Please enter an integer value\n");
+            String errMessage = Print.printFormat(" *Woof!* Please enter an integer value! I can't really read...\n");
             throw new DukeException(errMessage);
         }
     }
@@ -42,17 +47,16 @@ public class Duke {
 
     public void checkAction(String message) throws DukeException{
         Task t;
-        String messageLowerCase = message.toLowerCase();
-        if (messageLowerCase.contains("deadline")) {
+        if (message.matches(ignoreCase + Command.DEADLINE.name() + "(.*)")) {
             t = Deadline.createTask(message);
             addTask(t);
-        } else if (messageLowerCase.contains("event")) {
+        } else if (message.matches(ignoreCase + Command.EVENT.name() + "(.*)")) {
             t = Event.createTask(message);
             addTask(t);
-        } else if (messageLowerCase.contains("todo")) {
+        } else if (message.matches(ignoreCase + Command.TODO.name() + "(.*)")) {
             t = Todo.createTask(message);
             addTask(t);
-        } else if (messageLowerCase.contains("delete")) {
+        } else if (message.matches(ignoreCase + Command.DELETE.name() + "(.*)")) {
             deleteTask(message);
         } else {
             String errMessage = Print.printFormat(" I'm sorry but i do not know what you want to do. *woof*\n");
@@ -93,14 +97,13 @@ public class Duke {
         while (input.hasNextLine()) {
             try {
                 String query = input.nextLine();
-                String queryLowerCase = query.toLowerCase();
-                if (queryLowerCase.equals("bye")) {
+                if (query.matches(ignoreCase + Command.BYE.name())) {
                     duke.goodBye();
                     input.close();
                     break;
-                } else if (queryLowerCase.equals("list")) {
+                } else if (query.matches(ignoreCase + Command.LIST.name())) {
                     duke.printToDos();
-                } else if (queryLowerCase.matches("done (.*)")) {
+                } else if (query.matches(ignoreCase + Command.DONE.name() +"(.*)")) {
                     int taskInd = Integer.parseInt(query.substring(5));
                     duke.markAsDone(taskInd - 1);
                 } else {
