@@ -2,10 +2,36 @@ import java.util.*;
 
 public class TodoManager {
     List<Task> lst = new ArrayList<>();
-    public void addTask(String name) {
-        lst.add(new Task(name));
+
+    private void addTodo(String desc) {
+        lst.add(new Todo(desc));
+    }
+
+    private void addDeadline(String desc) {
+        String newDesc = desc.substring(0, desc.indexOf('/') - 1);
+        String time = desc.substring(desc.indexOf('/') + 4);
+        System.out.println(newDesc);
+        System.out.println(time);
+        lst.add(new Deadline(newDesc, time));
+
+    }
+
+    public void addEvent(String desc) {
+        String newDesc = desc.substring(0, desc.indexOf('/') - 1);
+        String time = desc.substring(desc.indexOf('/') + 4);
+        System.out.println(newDesc);
+        System.out.println(time);
+        lst.add(new Event(newDesc, time));
+    }
+
+    public void addTask(String command) {
+        if (command.startsWith("todo")) addTodo(command.substring(5));
+        else if (command.startsWith("deadline")) addDeadline(command.substring(9));
+        else if (command.startsWith("event")) addEvent(command.substring(6));
         System.out.println(Helper.horiLine);
-        System.out.println("added: " + name);
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(" " + lst.get(lst.size() - 1));
+        System.out.println(String.format("Now you have %d tasks in the list.", lst.size()));
         System.out.println(Helper.horiLine);
     }
     public void markDone(String command) {

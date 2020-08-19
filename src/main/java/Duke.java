@@ -1,8 +1,7 @@
 /*input
-read book
-return book
-list
-done 2
+todo borrow book
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
 list
 bye
 */
@@ -24,7 +23,7 @@ public class Duke {
                 todoManager.listTask();
             } else if (command.startsWith("done")) {
                 todoManager.markDone(command.substring(5));
-            } else {
+            } else if (command.startsWith("deadline") || command.startsWith("event") || command.startsWith("todo")) {
                 todoManager.addTask(command);
             }
         }

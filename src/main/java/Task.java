@@ -1,8 +1,8 @@
 public class Task {
-    private String name;
+    private String desc;
     private boolean done;
-    Task(String name) {
-        this.name = name;
+    Task(String desc) {
+        this.desc = desc;
         this.done = false;
     }
 
@@ -12,6 +12,6 @@ public class Task {
     @Override
     public String toString() {
         char sign = (done == true ? '✓' : '✗');
-        return String.format("[%c] %s", sign, name);
+        return String.format("[%c] %s", sign, desc);
     }
 }
