@@ -46,4 +46,29 @@ what would you like me to do?
       3. [E] [✘] project meeting  (at: Mon 2-4pm)
       4. [T] [✓] join sports club
 
+    ok! I've removed this task:
+      [D] [✘] return book  (by: Sunday)
+    you now have 3 tasks in your list
+
+    here's your list:
+      1. [T] [✓] borrow book
+      2. [E] [✘] project meeting  (at: Mon 2-4pm)
+      3. [T] [✓] join sports club
+
+    oops! sorry, I don't know what that means!
+
+    oops! the description of a todo cannot be empty!
+
+    oops! the description of an event cannot be empty!
+
+    oops! the description of a deadline cannot be empty!
+
+    oops! the task number to be marked as done cannot be empty!
+
+    oops! invalid task number!
+
+    oops! the task number to be marked as done cannot be empty!
+
+    oops! invalid task number!
+
     bye! see you soon!

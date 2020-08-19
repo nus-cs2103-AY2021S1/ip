@@ -6,4 +6,14 @@ list
 done 1
 done 4
 list
+delete 2
+list
+blah
+todo
+event 
+deadline
+done
+done 100
+delete
+delete 100
 bye
