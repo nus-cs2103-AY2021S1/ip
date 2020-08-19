@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
@@ -27,6 +28,25 @@ public class Duke {
         System.out.println(LINE);
     }
 
+    // this function takes in the input from the user and adds it to the list of tasks Duke is tracking
+    public static void addTask(String s, ArrayList<String> tasks) {
+        tasks.add(s);
+        System.out.println(LINE);
+        System.out.println("     " + "added: " + s);
+        System.out.println(LINE);
+    }
+
+    // this function lists the list of tasks Duke is tracking
+    public static void list(ArrayList<String> tasks) {
+        int counter = 1;
+        System.out.println(LINE);
+        for (String task : tasks) {
+            System.out.println("     " + counter + ". " + task);
+            counter++;
+        }
+        System.out.println(LINE);
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -36,6 +56,9 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         greeting();
 
+        // this field keeps track of the tasks given to Duke
+        ArrayList<String> tasks = new ArrayList<>();
+
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             // if the user inputs a "bye", we simply break out of the Duke program
@@ -44,9 +67,16 @@ public class Duke {
                 break;
             }
 
+            // if the user inputs a "list", Duke will iterate through the added text and print them in the order
+            // they were given to Duke.
+            if (sc.hasNext("list")) {
+                list(tasks);
+                sc.nextLine();
+            }
+
             else {
                 String input = sc.nextLine();
-                echo(input);
+                addTask(input, tasks);
             }
         }
     }
