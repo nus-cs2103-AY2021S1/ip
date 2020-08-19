@@ -49,6 +49,9 @@ Here is a list of all your tasks:
 Oh no! Invalid Task! The task does not exist, try again.
 ----------------------------------------
 ----------------------------------------
+Oh no! Invalid Task! The task does not exist, try again.
+----------------------------------------
+----------------------------------------
 Oh no! Invalid Function! Input '/commands' for a list of all my commands. 
 ----------------------------------------
 ----------------------------------------
@@ -76,11 +79,22 @@ Oh no! Invalid Function! Input '/commands' for a list of all my commands.
   You have 3 tasks in your list now.
 ----------------------------------------
 ----------------------------------------
-Oh no! Your task description is empty and/or does not follow the correct format. The task cannot be created. 
- Type '/commands' to view the correct command for task creation!
+Oh no! Your deadline task description is empty and/or is missing a time stamp. The task cannot be created. 
+ Type '/commands' to view the correct command for task creation.
+----------------------------------------
+----------------------------------------
+Oh no! Your deadline task description is empty and/or is missing a time stamp. The task cannot be created. 
+ Type '/commands' to view the correct command for task creation.
+----------------------------------------
+----------------------------------------
+Oh no! Your deadline task is missing a description. Please try again! 
+Type '/commands' to view the correct command for task creation! 
 ----------------------------------------
 ----------------------------------------
 Oh no! Invalid Task! The task does not exist, try again.
+----------------------------------------
+----------------------------------------
+Oh no! The task ID you provided is not valid. Input '/commands' to view a list of my commands. 
 ----------------------------------------
 ----------------------------------------
 Here is a list of all your tasks:

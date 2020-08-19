@@ -4,6 +4,7 @@ event cs2103T lecture /at Fri 4-6pm
 list
 done 2
 done 4
+done 10
 blah
 deadline finish week 1 post lecture quiz /by Saturday
 todo read up on week 2 topics
@@ -11,6 +12,9 @@ done 4
 delete 2
 delete 1
 deadline
+deadline eat /by
+deadline /by Sunday
 delete 5
+done 0
 list
 bye
