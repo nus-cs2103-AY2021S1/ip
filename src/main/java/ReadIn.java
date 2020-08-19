@@ -1,16 +1,12 @@
 import java.util.Scanner;
 
-public class Echo {
-    public static String echo() {
+public class ReadIn {
+    public static String readIn() {
         String input;
         Scanner scan = new Scanner(System.in);
 
         input = scan.nextLine();
 
-        if (input.equals("bye")) {
-            return Exit.exit();
-        } else {
-            return input;
-        }
+        return input;
     }
 }
