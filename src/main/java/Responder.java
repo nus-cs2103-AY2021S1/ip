@@ -1,8 +1,11 @@
 public class Responder {
     public static void responder() {
         String input = ReadIn.readIn();
-        while (!input.equals("bye")) {
-            if (input.equals("list")) {
+        while (true) {
+            if(input.equals("bye")) {
+                System.out.println(Exit.exit());
+                break;
+            } else if (input.equals("list")) {
                 System.out.println(TaskManager.returnList());
             } else if (input.substring(0,5).equals("done ")) {
                 int i = Integer.valueOf(input.substring(5));
@@ -12,6 +15,5 @@ public class Responder {
             }
             input = ReadIn.readIn();
         }
-        System.out.println(Exit.exit());
     }
 }
