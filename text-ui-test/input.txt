@@ -8,4 +8,11 @@ event project meeting /at Mon 2-4pm
 deadline do homework /by no idea :-p
 deadline sleep /by 3am
 list
+deadline invalid with no \by ...
+event invalid with no \by ...
+todo
+blah
+1 done
+done 1
+list
 bye

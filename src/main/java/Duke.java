@@ -1,8 +1,6 @@
-import main.java.Deadline;
-import main.java.Event;
-import main.java.Task;
-import main.java.Todo;
+import main.java.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,10 +14,9 @@ public class Duke {
         }
     }
 
-    public static void invalidInput() {
-        System.out.println("  Invalid input, please type a valid command\n" +
-                "   * todo -task\n   * deadline -task with deadline\n   * event -task with deadline\n" +
-                "   * any string description");
+    public static void invalidInput(String errMsg) {
+        DukeException exception = new DukeException(errMsg);
+        System.out.println(exception.getMessage());
     }
 
 
@@ -33,6 +30,8 @@ public class Duke {
         horiLine(60);
         while (sc.hasNextLine()) {
             String nextInput = sc.nextLine();
+            String[] commandComponents = nextInput.split(" ", 2);
+            String taskType = commandComponents[0];
             if (nextInput.equals("bye")) {
                 horiLine(60);
                 System.out.println("  Bye. Hope to see you again soon!");
@@ -45,9 +44,8 @@ public class Duke {
                     System.out.println("  " + (i+1) + "." + taskList.get(i));
                 }
                 horiLine(60);
-            } else if (nextInput.contains("done")) {
+            } else if (commandComponents[0].equals("done")) {
                 horiLine(60);
-                String[] commandComponents = nextInput.split(" ", 2);
                 int taskIndex = Integer.parseInt(commandComponents[1]) - 1;
                 Task toMark = taskList.get(taskIndex);
                 toMark.markDone();
@@ -55,45 +53,64 @@ public class Duke {
                 System.out.println("    " + toMark.toString());
                 horiLine(60);
             } else {
-
+                // 1. split the input based on the first word(task type)
+                // 2. if there is a valid string after the first word, work as intended
+                // 3. else display corresponding error.
                 // adding tasks
                 horiLine(60);
-                String[] commandComponents = nextInput.split(" ", 2);
-                String taskType = commandComponents[0];
                 Task taskToAdd;
-                if (nextInput.equals("")) {
-                    // empty string as input
-                    taskToAdd = new Todo("");
-                    invalidInput();
-                } else if (taskType.equals("event")) {
+                if (taskType.equals("event")) {
                     // Event task
-                    taskToAdd = new Event(commandComponents[1]);
-                    taskList.add(taskToAdd);
-                    System.out.println("  Got it. I've added this task:\n"
-                            + "    " + taskToAdd.toString() + "\n  Now you have "
-                            + taskList.size() + " tasks in the list.");
+                    if (commandComponents.length == 1) {
+                        // description is empty
+                        invalidInput("  \u2639 OOPS!!! The description of a todo cannot be empty.");
+                    } else {
+                        try {
+                            taskToAdd = new Event(commandComponents[1]);
+                            System.out.println("  Got it. I've added this task:\n"
+                                    + "    " + taskToAdd.toString() + "\n  Now you have "
+                                    + taskList.size() + " tasks in the list.");
+                            taskList.add(taskToAdd);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            invalidInput("  \u2639 OOPS!!! An event task must be input with a forward slash and the deadline");
+                        }
+
+                    }
                 } else if (taskType.equals("deadline")) {
                     // Deadline Task
-                    taskToAdd = new Deadline(commandComponents[1]);
-                    taskList.add(taskToAdd);
-                    System.out.println("  Got it. I've added this task:\n"
-                            + "    " + taskToAdd.toString() + "\n  Now you have "
-                            + taskList.size() + " tasks in the list.");
+                    if (commandComponents.length == 1) {
+                        // description is empty
+                        invalidInput("  \u2639 OOPS!!! The description of a todo cannot be empty.");
+                    } else {
+                        try {
+                            // the exception is thrown when we call the toString method.
+                            taskToAdd = new Deadline(commandComponents[1]);
+                            System.out.println("  Got it. I've added this task:\n"
+                                    + "    " + taskToAdd.toString() + "\n  Now you have "
+                                    + taskList.size() + " tasks in the list.");
+                            taskList.add(taskToAdd);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            invalidInput("  \u2639 OOPS!!! A deadline task must be input with a forward slash and the deadline");
+                        }
+                    }
                 } else if (taskType.equals("todo")){
                     // Todo task
-                    taskToAdd = new Todo(commandComponents[1]);
-                    taskList.add(taskToAdd);
-                    System.out.println("  Got it. I've added this task:\n"
-                            + "    " + taskToAdd.toString() + "\n  Now you have "
-                            + taskList.size() + " tasks in the list.");
+                    if (commandComponents.length == 1) {
+                        // description is empty
+                        invalidInput("  \u2639 OOPS!!! The description of a todo cannot be empty.");
+                    } else {
+                        taskToAdd = new Todo(commandComponents[1]);
+                        System.out.println("  Got it. I've added this task:\n"
+                                + "    " + taskToAdd.toString() + "\n  Now you have "
+                                + taskList.size() + " tasks in the list.");
+                        taskList.add(taskToAdd);
+                    }
                 } else {
-                    // if the command is single line, simply create a task.
-                    taskToAdd = new Task(nextInput);
-                    taskList.add(taskToAdd);
-                    System.out.println("  Got it. I've added this task:\n"
-                            + "    " + taskToAdd.toString() + "\n  Now you have "
-                            + taskList.size() + " tasks in the list.");
+                    // invalid input, detect it and create a DukeException,
+                    // display the error message.
+                    invalidInput("  \u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
+                // include done to the test cases
                 horiLine(60);
             }
         }

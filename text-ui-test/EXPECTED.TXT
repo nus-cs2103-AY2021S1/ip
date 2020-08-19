@@ -3,61 +3,82 @@
   What can I do for you?
 ------------------------------------------------------------
 ------------------------------------------------------------
-  Got it. I've added this task:
-    [?] return book
-  Now you have 1 tasks in the list.
+  ? OOPS!!! I'm sorry, but I don't know what that means :-(
 ------------------------------------------------------------
 ------------------------------------------------------------
   Got it. I've added this task:
     [T][?] borrow book
-  Now you have 2 tasks in the list.
+  Now you have 0 tasks in the list.
 ------------------------------------------------------------
 ------------------------------------------------------------
   Got it. I've added this task:
     [T][?] buy iPhone
-  Now you have 3 tasks in the list.
+  Now you have 1 tasks in the list.
 ------------------------------------------------------------
 ------------------------------------------------------------
   Got it. I've added this task:
     [D][?] return book (by: Sunday)
-  Now you have 4 tasks in the list.
+  Now you have 2 tasks in the list.
 ------------------------------------------------------------
 ------------------------------------------------------------
   Got it. I've added this task:
     [D][?] CS2103T Assignment (by: Thursday 2359)
-  Now you have 5 tasks in the list.
+  Now you have 3 tasks in the list.
 ------------------------------------------------------------
 ------------------------------------------------------------
   Got it. I've added this task:
     [E][?] project meeting (at: Mon 2-4pm)
-  Now you have 6 tasks in the list.
+  Now you have 4 tasks in the list.
 ------------------------------------------------------------
 ------------------------------------------------------------
-  Invalid input, please type a valid command
-   * todo -task
-   * deadline -task with deadline
-   * event -task with deadline
-   * any string description
+  ? OOPS!!! I'm sorry, but I don't know what that means :-(
 ------------------------------------------------------------
 ------------------------------------------------------------
   Got it. I've added this task:
     [D][?] do homework (by: no idea :-p)
-  Now you have 7 tasks in the list.
+  Now you have 5 tasks in the list.
 ------------------------------------------------------------
 ------------------------------------------------------------
   Got it. I've added this task:
     [D][?] sleep (by: 3am)
-  Now you have 8 tasks in the list.
+  Now you have 6 tasks in the list.
 ------------------------------------------------------------
 ------------------------------------------------------------
-  1.[?] return book
-  2.[T][?] borrow book
-  3.[T][?] buy iPhone
-  4.[D][?] return book (by: Sunday)
-  5.[D][?] CS2103T Assignment (by: Thursday 2359)
-  6.[E][?] project meeting (at: Mon 2-4pm)
-  7.[D][?] do homework (by: no idea :-p)
-  8.[D][?] sleep (by: 3am)
+  1.[T][?] borrow book
+  2.[T][?] buy iPhone
+  3.[D][?] return book (by: Sunday)
+  4.[D][?] CS2103T Assignment (by: Thursday 2359)
+  5.[E][?] project meeting (at: Mon 2-4pm)
+  6.[D][?] do homework (by: no idea :-p)
+  7.[D][?] sleep (by: 3am)
+------------------------------------------------------------
+------------------------------------------------------------
+  ? OOPS!!! A deadline task must be input with a forward slash and the deadline
+------------------------------------------------------------
+------------------------------------------------------------
+  ? OOPS!!! An event task must be input with a forward slash and the deadline
+------------------------------------------------------------
+------------------------------------------------------------
+  ? OOPS!!! The description of a todo cannot be empty.
+------------------------------------------------------------
+------------------------------------------------------------
+  ? OOPS!!! I'm sorry, but I don't know what that means :-(
+------------------------------------------------------------
+------------------------------------------------------------
+  ? OOPS!!! I'm sorry, but I don't know what that means :-(
+------------------------------------------------------------
+------------------------------------------------------------
+  Nice! I've marked this task as done:
+    [T][?] borrow book
+------------------------------------------------------------
+------------------------------------------------------------
+  1.[T][?] borrow book
+  2.[T][?] buy iPhone
+  3.[D][?] return book (by: Sunday)
+  4.[D][?] CS2103T Assignment (by: Thursday 2359)
+  5.[E][?] project meeting (at: Mon 2-4pm)
+  6.[D][?] do homework (by: no idea :-p)
+  7.[D][?] sleep (by: 3am)
 ------------------------------------------------------------
 ------------------------------------------------------------
   Bye. Hope to see you again soon!
