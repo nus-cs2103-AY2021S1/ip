@@ -8,10 +8,16 @@ public class Task {
     }
 
     public String getStatus() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (done ? "\u2713" : "\u2718");
     }
 
     public void markAsDone() {
         this.done = true;
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[").append(this.getStatus()).append("] ").append(this.description);
+        return sb.toString();
     }
 }
