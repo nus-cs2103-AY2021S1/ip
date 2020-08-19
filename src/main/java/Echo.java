@@ -11,6 +11,7 @@ public class Echo {
     static final String TODO = "todo";
     static final String EVENT = "event";
     static final String DEADLINE = "deadline";
+    static final String DELETE = "delete";
 
     Echo() {
         this.tasks = new ArrayList<>();
@@ -51,6 +52,14 @@ public class Echo {
             Done d = (Done) task;
             Task t = tasks.get(d.getTaskNum());
             return t.markAsDone();
+        } else if (type.equals(DELETE)) {
+            this.tasks.remove(curr);
+            Delete del = (Delete) task;
+            Task t = tasks.remove(del.getTaskNum());
+            String message1 = "Noted. I've removed this task:\n";
+            String taskWord = tasks.size() <= 1 ? "task" : "tasks";
+            String message2 = String.format("Now you have %d %s in your list.%n", tasks.size(), taskWord);
+            return message1 + "   " + t.toString() + "\n" + message2;
         } else {
             String message1 = "Got it. I've added this task:\n";
             String taskWord = tasks.size() <= 1 ? "task" : "tasks";

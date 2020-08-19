@@ -1,9 +1,9 @@
-public class Done extends Task {
+public class Delete extends Task {
     protected int taskNum;
 
-    static final String TYPE = "done";
+    static final String TYPE = "delete";
 
-    Done(int taskNum) {
+    Delete(int taskNum) {
         super(null, TYPE);
         this.taskNum = taskNum;
     }

@@ -8,6 +8,7 @@ public class Duke {
     static final String TODO = "todo";
     static final String EVENT = "event";
     static final String DEADLINE = "deadline";
+    static final String DELETE = "delete";
 
     protected static Task assignTask(String[] command) throws DukeException {
         Task t;
@@ -30,6 +31,9 @@ public class Duke {
                 String desc = s[0];
                 String by = s[1];
                 t = new Deadline(desc, by);
+            } else if (type.equals(DELETE)) {
+                int taskNum = Integer.parseInt(description) - 1;
+                t = new Delete(taskNum);
             } else {
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :(\n");
             }
