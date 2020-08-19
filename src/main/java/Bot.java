@@ -44,7 +44,7 @@ public class Bot {
 
             println("tracking %d tasks (%d pending, %d done, %.1f%% complete)",
                 this.tasks.size(), pendingTasks, doneTasks,
-                100.0 * ((double) doneTasks / this.tasks.size()));
+                this.tasks.isEmpty() ? 100.0 : 100.0 * ((double) doneTasks / this.tasks.size()));
 
             Stream.iterate(0, x -> x + 1)
                 .map(i -> String.format("  %d. %s", 1 + i, this.tasks.get(i)))
