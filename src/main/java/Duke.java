@@ -8,7 +8,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         // Initialize List for Duke to store stuff in
         /** Note: limit storage to 100 items **/
-        ArrayList<Task> list = new ArrayList<>();
+        Task[] list = new Task[100];
 
         // Text Images
         String logo = " ____        _        \n"
@@ -40,35 +40,69 @@ public class Duke {
             // Command: "list"
             if (userInput.equals("list")) {
                 printList(list);
+            } else if (instructions[0].equals("todo")){
+                // Command for to do Tasks creation
+                System.out.print(outputBreaker);
+                list[Task.quantity] = new Todo(instructions[1]);
+                Task.quantity++;
+                System.out.println("added: " + list[Task.quantity - 1]);
+                System.out.println("There is now " + Task.quantity + " tasks in the list!");
+
+            } else if (instructions[0].equals("deadline")){
+                // Command: "deadline <taskName> /by <deadline>"
+                System.out.print(outputBreaker);
+                // Extract Details from command
+                String[] details = instructions[1].split(" /by ", 2);
+                list[Task.quantity] = new Deadline(details[0], details[1]);
+                Task.quantity++;
+                System.out.println("added: " + list[Task.quantity - 1]);
+                System.out.println("There is now " + Task.quantity + " tasks in the list!");
+
+            } else if (instructions[0].equals("event")){
+                // Command: "deadline <taskName> /by <deadline>"
+                System.out.print(outputBreaker);
+                // Extract Details from command
+                String[] details = instructions[1].split(" /at ", 2);
+                list[Task.quantity] = new Event(details[0], details[1]);
+                Task.quantity++;
+                System.out.println("added: " + list[Task.quantity - 1]);
+                System.out.println("There is now " + Task.quantity + " tasks in the list!");
+
             } else if (instructions[0].equals("done")){
                 // Command: "done <task>"
                 // If valid <task>, mark done
                 try {
                     int taskNumber = Integer.parseInt(instructions[1]);
-                    list.get(taskNumber - 1).markedDone(true);
-                    System.out.print(outputBreaker);
-                    System.out.println("Congratulations! I've helped you mark the task as done:");
-                    System.out.print("[✓] " + list.get(taskNumber - 1) + "\n");
 
+                    // Only add if entry exist entry exist at index
+                    if (checkList(list, taskNumber)) {
+                        list[taskNumber - 1].markedDone(true);
+                        System.out.print(outputBreaker);
+                        System.out.println("Congratulations! I've helped you mark the task as done:");
+                        System.out.print("\t" + list[taskNumber - 1].toString() + "\n");
+                    }
                 } catch (NumberFormatException nfe) {
                     // Store it as a task
                     //System.out.println("Caught nfe");
                     System.out.print(outputBreaker);
-                    list.add(new Task(userInput));
+                    list[Task.quantity] = new Task(userInput);
+                    Task.quantity++;
                     System.out.println("added: " + userInput);
 
                 } catch (IndexOutOfBoundsException e) {
                     // Store it as a task
                     //System.out.println("Caught index out of bounds");
                     System.out.print(outputBreaker);
-                    list.add(new Task(userInput));
+                    list[Task.quantity] = new Task(userInput);
+                    Task.quantity++;
                     System.out.println("added: " + userInput);
                 }
             } else {
                 //Default reaction to words
                 // Store tasks by default
                 System.out.print(outputBreaker);
-                list.add(new Task(userInput));
+                list[Task.quantity] = new Task(userInput);
+                Task.quantity++;
                 System.out.println("added: " + userInput);
             }
 
@@ -84,19 +118,22 @@ public class Duke {
     }
 
     /** Prints all the contents of the list in order **/
-    public static void printList(ArrayList<Task> list) {
+    public static void printList(Task[] list) {
         System.out.print("\nHere is what I have! ^^\n");
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < Task.quantity; i++) {
             // Enumerator
             System.out.print((i+1) + ".");
-            // Status
-            if (!list.get(i).getStatus()) {
-                System.out.print("[✗] ");
-            } else {
-                System.out.print("[✓] ");
-            }
             // Actual Task
-            System.out.println(list.get(i));
+            System.out.println(list[i]);
+        }
+    }
+
+    /** Checks if index is valid **/
+    public static boolean checkList(Task[] list, int id) {
+        if (id <= 0 || id > Task.quantity) {
+            return false;
+        } else {
+            return true;
         }
     }
 }

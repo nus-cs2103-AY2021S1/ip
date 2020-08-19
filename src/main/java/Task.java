@@ -1,7 +1,13 @@
 public class Task {
-    private String name;
-    private boolean isDone;
+    public static int quantity = 0;
+    // Variables
+    protected String name;
+    protected boolean isDone;
 
+    // Constructors
+    public Task() {
+
+    }
     public Task(String name) {
         this.name = name;
         this.isDone = false;
@@ -17,9 +23,18 @@ public class Task {
         this.isDone = status;
     }
 
+    // Gets name of task
+    public String getDescription() {
+        return this.name;
+    }
+
     @Override
     public String toString() {
-        // By default print task name
-        return this.name;
+        // By default print task name and status
+        if(isDone) {
+            return "[✓] " + this.name;
+        } else {
+            return "[✗] " + this.name;
+        }
     }
 }
