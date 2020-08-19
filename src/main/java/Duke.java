@@ -87,44 +87,75 @@ public class Duke {
                 tasks.get(taskIndex) + "\n You have " + taskCount +
                 " tasks currently. \n" + divider + "\n");
     }
+    
+    public static String generateErrorMessage(String message) {
+        return "\n" + divider + "\n" + message + divider + "\n";
+    }
 
     private static void echo() {
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()) {
-            String input = sc.nextLine();
-            String command = input.split("\\s+", 2)[0];
-            if (command.equals("bye")) {
-                System.out.println(goodbyeMessage);
-                break;
-            } else if (command.equals("list")) {
-                list();
-            } else if (command.equals("done")) {
-                int index = Integer.parseInt(input.substring(5));
-                done(index);
-            } else if (command.equals("todo")) {
-                String description = input.substring(5);
-                tasks.add(new ToDo(description, false));
-                taskCount += 1;
-                describe(taskCount - 1);
-            } else if (command.equals("deadline")) {
-                String[] content = input.substring(9).split(" /by ");
-                String description = content[0];
-                String time = content[1];
-                tasks.add(new Deadline(description, false, time));
-                taskCount += 1;
-                describe(taskCount - 1);
-            } else if (command.equals("event")) {
-                String[] content = input.substring(6).split(" /at ");
-                String description = content[0];
-                String time = content[1];
-                tasks.add(new Event(description, false, time));
-                taskCount += 1;
-                describe(taskCount - 1);
-            } else {
-                System.out.println(divider + "\n Command not recognized :( \n" +
-                        " Terminating Hotline... \n" + divider);
-                break;
+        try {
+            Scanner sc = new Scanner(System.in);
+            while (sc.hasNext()) {
+                String input = sc.nextLine().trim();
+                String[] separated = input.split("\\s+");
+                String command = separated[0];
+                if (command.equals("bye")) {
+                    System.out.println(goodbyeMessage);
+                    break;
+                } else if (command.equals("list")) {
+                    list();
+                } else if (command.equals("done")) {
+                    if (separated.length <= 1) {
+                        throw new DukeException(generateErrorMessage(" Task index must be specified :( \n" +
+                                " Terminating Hotline... \n"));
+                    }
+                    try {
+                        int index = Integer.parseInt(input.substring(5));
+                        done(index);
+                    } catch(NumberFormatException error) {
+                        throw new DukeException(generateErrorMessage(" Task index must be an integer :( \n" +
+                                " Terminating Hotline... \n"));
+                    }
+                } else {
+                    if (separated.length <= 1) {
+                        throw new DukeException(generateErrorMessage(" Task description cannot be empty :( \n" +
+                                " Terminating Hotline... \n"));
+                    }
+                    if (command.equals("todo")) {
+                        String description = input.substring(5);
+                        tasks.add(new ToDo(description, false));
+                        taskCount += 1;
+                        describe(taskCount - 1);
+                    } else if (command.equals("deadline")) {
+                        String[] content = input.substring(9).split(" /by ");
+                        if (content.length <= 1) {
+                            throw new DukeException(generateErrorMessage(" Deadline date cannot be empty :( \n" +
+                                    " Terminating Hotline... \n"));
+                        }
+                        String description = content[0];
+                        String time = content[1];
+                        tasks.add(new Deadline(description, false, time));
+                        taskCount += 1;
+                        describe(taskCount - 1);
+                    } else if (command.equals("event")) {
+                        String[] content = input.substring(6).split(" /at ");
+                        if (content.length <= 1) {
+                            throw new DukeException(generateErrorMessage(" Event date cannot be empty :( \n" +
+                                    " Terminating Hotline... \n"));
+                        }
+                        String description = content[0];
+                        String time = content[1];
+                        tasks.add(new Event(description, false, time));
+                        taskCount += 1;
+                        describe(taskCount - 1);
+                    } else {
+                        throw new DukeException(generateErrorMessage(" Command not recognized :( \n" +
+                                " Terminating Hotline... \n"));
+                    }
+                }
             }
+        } catch(DukeException error) {
+            System.out.println(error);
         }
     }
 
