@@ -1,33 +1,38 @@
-public class Userinput {
-    private final String input;
-    private boolean terminate;
+import java.util.ArrayList;
 
-    public Userinput(String input) {
-        this.input = input;
+public class Userinput {
+    private boolean terminate;
+    ArrayList<String> tasks =  new ArrayList<>();
+
+    public Userinput() {
         this.terminate = false;
     }
 
-    String getDukeResponse(){
-        String listResponse = "    ____________________________________________________________\n" +
-                "     list\n" +
-                "    ____________________________________________________________";
-        String blahResponse = "    ____________________________________________________________\n" +
-                "     blah\n" +
-                "    ____________________________________________________________";
-        String byeResponse = "    ____________________________________________________________\n" +
-                "     Bye. Hope to see you again soon!\n" +
-                "    ____________________________________________________________";
-        if (this.input.equals("list")){
+    String getDukeResponse(String input){
+        String blahResponse = "____________________________________________________________\n" +
+                "blah\n" +
+                "____________________________________________________________";
+        String byeResponse = "____________________________________________________________\n" +
+                "Bye. Hope to see you again soon!\n" +
+                "____________________________________________________________";
+        if (input.equals("list")) {
+          String listResponse = "____________________________________________________________\n" ;
+          for (int i = 0; i < this.tasks.size(); i++ ){
+              String number = Integer.toString(1+i);
+              listResponse = listResponse + number + ". " + this.tasks.get(i) + "\n";
+          }
+          listResponse = listResponse + "____________________________________________________________";
           return listResponse;
-        } else if (this.input.equals("blah")){
+        } else if (input.equals("blah")){
             return blahResponse;
-        } else if (this.input.equals("bye")){
+        } else if (input.equals("bye")){
             this.terminate = true;
             return byeResponse;
         } else {
-            return  "    ____________________________________________________________\n" +
-                    "     Sorry. I do not understand what you have said.\n" +
-                    "    ____________________________________________________________";
+            this.tasks.add(input);
+            return "____________________________________________________________\n" +
+                    "added: " + input +"\n" +
+                    "____________________________________________________________\n";
         }
     }
 
