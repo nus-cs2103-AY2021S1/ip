@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Event {
     public static void simulate(){
-        List<String> ls= new ArrayList<>();
+        TaskList ls= new TaskList();
         boolean hasBye = false;
         String input;
 
@@ -30,10 +30,7 @@ public class Event {
                 if(ls.isEmpty()){
                     System.out.println("     No tasks in the list");
                 }else{
-                    for(int i = 0; i < ls.size(); i++){
-                        int j = i+1;
-                        System.out.println("     " + j + "." + ls.get(i));
-                    }
+                    ls.printTask();
                 }
                 System.out.println(line);
                 input = sc.nextLine();
