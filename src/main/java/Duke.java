@@ -15,7 +15,7 @@ public class Duke {
 
         while (sc.hasNextLine()) {
             String command = sc.nextLine();
-            echo.addCommand(command);
+            echo.addTask(command);
             String response = echo.replyUser();
             System.out.println(response);
             if (echo.toExit()) {
