@@ -15,15 +15,23 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        String userInput;
+        greeting();
+        getUserInput();
+    }
+
+    private static void getUserInput() {
+        Scanner sc = new Scanner(System.in);
+        boolean exit = false;
+
         items = new ArrayList<>();
 
-        greeting();
+        String userInput;
 
-        do {
-            userInput = getUserInput();
-
+        while (!exit) {
+            userInput = sc.nextLine();
+            lineBreak();
             if (userInput.equals(BYE)) {
+                exit = true;
                 exit();
             } else if (userInput.equals(LIST)) {
                 displayList();
@@ -37,8 +45,7 @@ public class Duke {
                     addItem(userInput);
                 }
             }
-
-        } while (!userInput.equals(BYE));
+        }
     }
 
     public static void greeting() {
@@ -49,14 +56,9 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    private static String getUserInput() {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
-    }
-
     private static void displayList() {
         int index = 1;
-        System.out.println("Here are the tasks in your list: ");
+        System.out.println("Here are the tasks in your list:");
         for (Task t : items) {
             System.out.println(index + ". " + t);
             index++;
@@ -92,7 +94,7 @@ public class Duke {
         }
 
         items.add(newTask);
-        String taskText = "Got it. I've added this task: " + "\n" + newTask + "\n";
+        String taskText = "Got it. I've added this task:" + "\n" + newTask + "\n";
         String totalText = "Now you have " + items.size() + " tasks in the list.";
         System.out.println(taskText + totalText);
     }
@@ -102,9 +104,13 @@ public class Duke {
             System.out.println("Sorry, task does not exist");
         } else {
             items.get(itemsIdx).setDone();
-            System.out.println("Nice! I've marked this task as done: ");
+            System.out.println("Nice! I've marked this task as done:");
             System.out.println(items.get(itemsIdx));
         }
+    }
+
+    private static void lineBreak() {
+        System.out.println("---");
     }
 
 }
