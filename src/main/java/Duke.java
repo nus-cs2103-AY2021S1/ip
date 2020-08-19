@@ -19,6 +19,10 @@ public class Duke {
         System.out.println(logo);
     }
 
+    private static void error() {
+        System.out.println("Sorry, I do not know what that means :(");
+    }
+
     private static void response() {
         Scanner scanner = new Scanner(System.in);
         String line = scanner.nextLine();
@@ -35,7 +39,22 @@ public class Duke {
                 ListFunction.printList();
             }
             else if (Parser.isDone(line)) {
-                ListFunction.setDone(Integer.parseInt(line.substring(5)));
+                try {
+                    int index = Integer.parseInt(line.substring(5));
+                    ListFunction.setDone(index);
+                }
+                catch (Exception e) {
+                    error();
+                }
+            }
+            else if (Parser.isDelete(line)) {
+                try {
+                    int index = Integer.parseInt(line.substring(7));
+                    ListFunction.delete(index);
+                }
+                catch (Exception e) {
+                    error();
+                }
             }
             else {
                 try {
@@ -48,7 +67,7 @@ public class Duke {
                 catch (NullPointerException
                         | ArrayIndexOutOfBoundsException
                         | InvalidParameterException e) {
-                    System.out.println("Sorry, I do not know what that means :(");
+                    error();
                 }
             }
             line = scanner.nextLine();

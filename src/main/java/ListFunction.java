@@ -1,8 +1,9 @@
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListFunction {
-    private static List<Task> taskList = new ArrayList<>();
+    private static final List<Task> taskList = new ArrayList<>();
 
     public static void add(int type, String taskName) {
         Todo todo = new Todo(taskName);
@@ -30,10 +31,21 @@ public class ListFunction {
         return taskList;
     }
 
-    public static void setDone(int index) {
+    public static void setDone(int index) throws InvalidParameterException {
+        if (index > taskList.size() || index <= 0)
+            throw new InvalidParameterException("Out of bound");
         taskList.get(index - 1).setDone();
         System.out.println("Well done! I've marked this as done:");
         System.out.println(taskList.get(index - 1));
+    }
+
+    public static void delete(int index) throws InvalidParameterException {
+        if (index > taskList.size() || index <= 0)
+            throw new InvalidParameterException("Out of bound");
+        System.out.println("Noted! I've removed this task:");
+        System.out.println(taskList.get(index - 1));
+        taskList.remove(index - 1);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
     public static void printList() {
