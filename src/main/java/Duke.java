@@ -50,7 +50,7 @@ public class Duke {
             tasks.add(task);
             System.out.println(
                     indent + addTaskLine + "\n"
-                    + indent + "Added task: " +"\n"
+                    + indent + "Added task:" +"\n"
                     + indent + indent + task.toString() + "\n"
                     + indent + "You now have " + tasks.size() + " task(s) in the list.\n"
                     + indent + addTaskLine
@@ -62,7 +62,7 @@ public class Duke {
             tasks.add(task);
             System.out.println(
                     indent + addTaskLine + "\n"
-                    + indent + "Added task: " +"\n"
+                    + indent + "Added task:" +"\n"
                     + indent + indent + task.toString() + "\n"
                     + indent + "You now have " + tasks.size() + " task(s) in the list.\n"
                     + indent + addTaskLine
@@ -74,7 +74,7 @@ public class Duke {
             tasks.add(task);
             System.out.println(
                     indent + addTaskLine + "\n"
-                    + indent + "Added task: " +"\n"
+                    + indent + "Added task:" +"\n"
                     + indent + indent + task.toString() + "\n"
                     + indent + "You now have " + tasks.size() + " task(s) in the list.\n"
                     + indent + addTaskLine
@@ -85,7 +85,7 @@ public class Duke {
             tasks.add(task);
             System.out.println(
                     indent + addTaskLine + "\n"
-                    + indent + "Added task: " +"\n"
+                    + indent + "Added task:" +"\n"
                     + indent + indent + task.toString() + "\n"
                     + indent + "You now have " + tasks.size() + " task(s) in the list.\n"
                     + indent + addTaskLine
