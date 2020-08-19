@@ -13,6 +13,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + (this.done ? "✓" : "✗") + "] " + task;
+        return "[" + (this.done ? "✓" : "✗") + "] " + this.task;
     }
 }

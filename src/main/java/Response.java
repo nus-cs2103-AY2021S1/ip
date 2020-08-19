@@ -7,15 +7,17 @@ public class Response {
     public Task[] tasks;
     public String[] texts;
     public Tag tag;
+    public int numOfTasks;
 
     public Response(String[] texts) {
         this.texts = texts;
         this.tag = Tag.NORMAL;
     }
 
-    public Response(String[] texts, Tag tag) {
-        this.texts = texts;
+    public Response(Task[] tasks, Tag tag, int numOfTasks) {
+        this.tasks = tasks;
         this.tag = tag;
+        this.numOfTasks = numOfTasks;
     }
 
     public Response(Task[] tasks, Tag tag) {
@@ -30,9 +32,20 @@ public class Response {
             for (int i = 0; i < this.tasks.length; i++) {
                 linesOfText += "     " + String.format("%d. ", i + 1) + this.tasks[i] + "\n";
             }
+        } else if (this.tag == Tag.ADD) {
+            for (int i = 0; i < this.tasks.length; i++) {
+                    linesOfText += "     "
+                            + "Got it. I've added this task: \n"
+                            + "       "
+                            + this.tasks[i]
+                            + "\n"
+                            + "     "
+                            + String.format("Now you have %d tasks in the list. \n", numOfTasks);
+            }
         } else {
             for (int i = 0; i < this.texts.length; i++) {
-                linesOfText += "     " + (this.tag == Tag.ADD ? "added: " : "") + this.texts[i] + "\n";
+                linesOfText += "     "
+                        + this.texts[i] + "\n";
             }
         }
         String output = line + linesOfText + line;

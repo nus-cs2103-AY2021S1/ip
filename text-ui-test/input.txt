@@ -1,0 +1,11 @@
+todo Ask for help
+list
+deadline IP /by Thursday 2359
+event Go to Singapore /at Friday 9pm
+list
+done 2
+list
+done 1
+done 3
+list
+bye
