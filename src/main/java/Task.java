@@ -2,11 +2,13 @@ public class Task {
 
     public String description;
     public boolean isDone;
+    public String type;
 
     public Task(String task, boolean isDone) {
 
         description = task;
         this.isDone = isDone;
+        type = null;
 
     }
 
@@ -16,6 +18,10 @@ public class Task {
 
     public String getDescription() {
         return this.description;
+    }
+
+    public String getType() {
+        return this.type;
     }
 
     public String getStatusIcon() {
