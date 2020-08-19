@@ -47,7 +47,7 @@ public class Duke {
                     taskIsDone(tasks, pos);
 
                 } catch (DukeException ex) {
-                    System.err.println(ex.getMessage());
+                    System.out.println(ex.getMessage());
                 }
 
             } else if (userInput.startsWith("todo")) { //added
@@ -67,45 +67,73 @@ public class Duke {
                     }
 
                 } catch (DukeException ex){
-                    System.err.println(ex.getMessage());
+                    System.out.println(ex.getMessage());
                 }
 
             } else if (userInput.startsWith("deadline")) {
-                int indexOfSlash = userInput.indexOf('/');
-                String description = userInput.substring(9, indexOfSlash - 1);
-                String date =  userInput.substring(indexOfSlash + 4);
-                Deadline deadline = new Deadline(description, date);
-                tasks.add(deadline);
-                System.out.println(line);
-                System.out.print(bot);
-                System.out.println("Got it! I've added this task:");
-                System.out.println(deadline);
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                System.out.println(line);
+                try {
+                    if (!userInput.equals("deadline")) {
+                        int indexOfSlash = userInput.indexOf('/');
+                        String description = userInput.substring(9, indexOfSlash - 1);
+                        String date =  userInput.substring(indexOfSlash + 4);
+                        Deadline deadline = new Deadline(description, date);
+                        tasks.add(deadline);
+                        System.out.println(line);
+                        System.out.print(bot);
+                        System.out.println("Got it! I've added this task:");
+                        System.out.println(deadline);
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                        System.out.println(line);
+                    } else {
+                        throw new DukeException("The description of a deadline cannot be empty!");
+                    }
+                } catch (DukeException ex){
+                    System.out.println(ex.getMessage());
+                }
             } else if (userInput.startsWith("event")) {
-                int indexOfSlash = userInput.indexOf('/');
-                String description = userInput.substring(6, indexOfSlash - 1);
-                String dateAndTime =  userInput.substring(indexOfSlash + 4);
-                Event event = new Event(description, dateAndTime);
-                tasks.add(event);
-                System.out.println(line);
-                System.out.print(bot);
-                System.out.println("Got it! I've added this task:");
-                System.out.println(event);
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                System.out.println(line);
+                try {
+                    if (!userInput.equals("event")) {
+                        int indexOfSlash = userInput.indexOf('/');
+                        String description = userInput.substring(6, indexOfSlash - 1);
+                        String dateAndTime =  userInput.substring(indexOfSlash + 4);
+                        Event event = new Event(description, dateAndTime);
+                        tasks.add(event);
+                        System.out.println(line);
+                        System.out.print(bot);
+                        System.out.println("Got it! I've added this task:");
+                        System.out.println(event);
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                        System.out.println(line);
+                    } else {
+                        throw new DukeException("The description of an event cannot be empty!");
+                    }
+                } catch (DukeException ex){
+                    System.out.println(ex.getMessage());
+                }
             } else if (userInput.startsWith("delete")) {
-                String toDelete =  userInput.substring(7);
-                int index = Integer.parseInt(toDelete);
-                System.out.println(line);
-                System.out.print(bot);
-                System.out.println("Noted! I've deleted this task:");
-                System.out.println(tasks.get(index - 1));
-                tasks.remove(index - 1);
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                System.out.println(line);
+                try {
+                    if (!userInput.equals("delete")) {
+                        String toDelete =  userInput.substring(7);
+                        int index = Integer.parseInt(toDelete);
+                        System.out.println(line);
+                        System.out.print(bot);
+                        System.out.println("Noted! I've deleted this task:");
+                        System.out.println(tasks.get(index - 1));
+                        tasks.remove(index - 1);
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                        System.out.println(line);
+                    } else {
+                        throw new DukeException("The description of an delete cannot be empty!");
+                    }
+                } catch (DukeException ex){
+                    System.out.println(ex.getMessage());
+                }
             } else { //invalid command
-                System.out.println("You have keyed in an invalid command! \n (Valid commands: todo, deadline, event, list, bye)");
+                try {
+                    throw new DukeException("You have keyed in an invalid command!\n(Valid commands: todo, deadline, event, list, delete, bye)");
+                } catch (DukeException ex) {
+                    System.out.println(ex.getMessage());
+                }
             }
         }
 
@@ -141,9 +169,6 @@ public class Duke {
             throw new DukeException("You have keyed in an invalid number!");
         }
     }
-
-    static void
-
 }
 
 
