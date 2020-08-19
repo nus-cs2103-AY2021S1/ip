@@ -26,14 +26,17 @@ public class Duke {
                     for (int i = 0; i < tasks.size(); i++) {
                         System.out.println((i + 1) + ". " + tasks.get(i));
                     }
-                    printBorder();
                 } else if (input.contains("done")) {
-                    int index = Integer.parseInt(input.substring(5)) - 1;
-                    tasks.get(index).markAsDone();
-                    printBorder();
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(tasks.get(index));
-                    printBorder();
+                    try {
+                        int index = Integer.parseInt(input.substring(5)) - 1;
+                        tasks.get(index).markAsDone();
+                        printBorder();
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println(tasks.get(index));
+                    }
+                    catch(Exception e){
+                        throw new DukeException(" ☹ OOPS!!! What task did you complete?");
+                    }
                 } else {
                     printBorder();
                     if (input.contains("todo")) {
@@ -43,9 +46,9 @@ public class Duke {
                             System.out.println("Got it. I've added this task:");
                             System.out.println(t);
                         } catch (Exception e) {
-                            throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
+                            throw new DukeException(" ☹ Insufficient details! The description of a todo cannot be empty.");
                         }
-                    } else if (input.contains("deadline") || input.contains("event")){
+                    } else if (input.contains("deadline") || input.contains("event") || input.contains("delete")) {
                         int due = input.indexOf("/");
 
                         if (input.contains("deadline")) {
@@ -53,20 +56,30 @@ public class Duke {
                                 Deadline dl = new Deadline(input.substring(9, due), input.substring(due + 4));
                                 System.out.println("Got it. I've added this task:");
                                 tasks.add(dl);
+                                System.out.println(dl);
                             } catch (Exception e) {
-                                throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+                                throw new DukeException(" ☹ Insufficient details! The description of a deadline cannot be empty.");
                             }
                         } else if (input.contains("event")) {
                             try {
                                 Event e = new Event(input.substring(6, due), input.substring(due + 4));
                                 System.out.println("Got it. I've added this task:");
                                 tasks.add(e);
+                                System.out.println(e);
                             } catch (Exception e) {
-                                throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
+                                throw new DukeException(" ☹ Insufficient details! The description of a todo cannot be empty.");
+                            }
+                        } else if (input.contains("delete")) {
+                            try {
+                                int index = Integer.parseInt(input.substring(7)) - 1;
+                                Task t = tasks.get(index);
+                                tasks.remove(index);
+                                System.out.println("Noted. I've removed this task:\n" + t);
+                            } catch (Exception e) {
+                                throw new DukeException("Please provide the index of the task you would like to remove.");
                             }
                         }
                         try {
-                            System.out.println(tasks.get(tasks.size() - 1));
                             System.out.println("Now you have " + tasks.size() + " tasks in the list.\n");
                         } catch (Exception e) {
                             throw new DukeException("failed to provide task info sufficiently");
