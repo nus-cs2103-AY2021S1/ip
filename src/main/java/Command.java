@@ -1,11 +1,18 @@
+import java.util.Arrays;
+
 public enum Command{
     INIT,
     LIST,
     BYE,
+    DONE,
+    TODO,
+    DEADLINE,
+    EVENT,
     INVALID;
 
     static private String originalCommand = ""; //originalCommand stores the original command (case sensitive)
-
+    static private String action;
+    static private String taskContent;
     Command(){}
 
 //    Command(String command){
@@ -17,6 +24,10 @@ public enum Command{
         return originalCommand;
     }
 
+    static String getTaskContent(){
+        return taskContent;
+    }
+
     /**
      * Returns a Command object that enumerate original command
      *
@@ -25,8 +36,17 @@ public enum Command{
      */
     static Command getCommand(String command){
         originalCommand = command;
+        String[] splitedCommand = command.split(" ");
+        action = splitedCommand[0];
+        if (splitedCommand.length > 1) {
+            taskContent = String.join("",
+                    Arrays.copyOfRange(splitedCommand,
+                                1,
+                                splitedCommand.length)
+            );
+        }
         try {
-            return Command.valueOf(command.toUpperCase());
+            return Command.valueOf(action.toUpperCase());
         } catch (Exception e){
             return Command.INVALID;
         }

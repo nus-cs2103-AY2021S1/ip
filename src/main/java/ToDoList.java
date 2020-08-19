@@ -24,14 +24,19 @@ public class ToDoList{
     private void runCommand(Command command) {
         switch (command) {
             case BYE:
-                System.out.println("Bye. Hope to see you again soon!");
+                print("Bye. Hope to see you again soon!");
                 break;
             case LIST:
                 printList();
                 break;
+            case DONE:
+                print(command.getTaskContent());
+                int index = Integer.parseInt(command.getTaskContent())-1;
+                finishTask(index);
+                break;
             default:
                 Task task = new Task(command.echo());
-                System.out.println("added: " + task.getName());
+                print("added: " + task.getName());
                 todoList.add(task);
                 break;
         }
@@ -39,7 +44,26 @@ public class ToDoList{
 
     private void printList(){
         for (int i = 0; i < todoList.size(); i++){
-            System.out.println(i+1 + ". " + todoList.get(i).getName());
+            Task task = todoList.get(i);
+            if (task.checkDone())
+                print(i+1 + ". [X] " + task.getName());
+            else
+                print(i+1 + ". [ ] " + task.getName());
         }
+    }
+
+    private void finishTask(int index){
+        print("Nice! I've marked following task as done: ");
+        Task task = todoList.get(index);
+        task.closeTask();
+        print("  [x] "+ task.getName());
+    }
+
+    private void print(String str){
+        System.out.println("    " + str);
+    }
+
+    private void print(String prefix, String str){
+        System.out.println(prefix+str);
     }
 }
