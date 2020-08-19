@@ -10,6 +10,7 @@ public class Duke {
     protected static final String CLOSING_MESSAGE = "Bye. Hope to see you again soon!";
     protected static final String MARKED_MESSAGE = "Nice! I've marked this task as done: ";
     protected static final String ADDED_MESSAGE = "Got it. I've added this task: ";
+    protected static final String LIST_HEADER = "Here are the tasks in your list: ";
 
     protected static final String CLOSING_STRING = "bye";
     protected static final String LIST_STRING = "list";
@@ -39,8 +40,7 @@ public class Duke {
                 int index = Integer.parseInt(userInput.substring(5));
                 System.out.println(registerTaskDone(index));
             } else {
-                taskRecords.add(new Task(userInput));
-                System.out.println(processString(createAddedString(userInput)));
+                System.out.println(addTask(userInput));
             }
 
         }
@@ -56,12 +56,10 @@ public class Duke {
 
     protected static String getListString() {
         StringBuilder builder = new StringBuilder();
+        builder.append(LIST_HEADER);
         int count = 1;
-        boolean first = true;
         for (Task task : taskRecords) {
-            if (!first) {
-                builder.append('\n' + PRESPACING);
-            } else first = false;
+            builder.append('\n' + PRESPACING);
             builder.append(count++ + "." + task.toString());
         }
         return builder.toString();
