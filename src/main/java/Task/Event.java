@@ -1,5 +1,7 @@
-public class Deadline extends Task {
-    public Deadline(int position, String taskDescription) {
+package Task;
+
+public class Event extends Task {
+    public Event(int position, String taskDescription) {
         super(position, taskDescription);
     }
 
@@ -9,13 +11,13 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String base = "[D]";
+        String base = "[E]";
         if (taskCompleted) {
             base = base + "[✓] ";
         } else {
             base = base + "[✗] ";
         }
-        base = base + taskDescription + "(by:" + date + ")";
+        base = base + taskDescription + "(at:" + date + ")";
         return base;
     }
 }

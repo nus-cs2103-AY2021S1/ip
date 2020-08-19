@@ -1,5 +1,9 @@
+import Task.Event;
+import Task.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+import Task.*;
 
 public class Duke {
     private final static String GREETING_MESSAGE = "Buenos Dias! Soy Duke, como estas mi amigo?";
@@ -13,7 +17,6 @@ public class Duke {
     private final static String DEADLINE_DATE = "/by";
     private final static String EVENT_DATE = "/at";
     private static ArrayList<Task> userInputsList = new ArrayList<>();
-    //throw errors when the output wrong but other than that no errors
 
     public static void main(String[] args) {
         System.out.println(GREETING_MESSAGE);
