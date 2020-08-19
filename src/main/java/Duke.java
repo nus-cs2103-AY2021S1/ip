@@ -212,8 +212,8 @@ public class Duke {
                 }
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
-            String err = "Your task description is empty and/or does not follow the correct format. The task cannot be created. \n " +
-                    "Type '/commands' to view the correct command for task creation.";
+            String err = "Your " + taskType + " task description is empty and/or is missing a time stamp. " +
+                    "The task cannot be created. \n " + "Type '/commands' to view the correct command for task creation.";
             throw new InvalidTaskException(err);
         }
     }
