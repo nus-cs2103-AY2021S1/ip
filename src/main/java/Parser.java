@@ -7,21 +7,18 @@ public class Parser {
     private static final String TIME_DELIMITER = "-";
 
 
-    public Parser() {
-
-    }
-
     // takes in the input and returns a string arr, does exception checking here as well:
     public String[] parseCommand(String input) throws DukeException {
         input = input.trim();
         String[] words = input.split(" ");
-        String command = words[0].toLowerCase();
+        String command = words[0].toLowerCase().trim();
 
-        if (input.equals("bye")) {
-            return new String[]{"bye"};
-        } else if (input.equals("list")) {
-            return new String[]{"list"};
-        } else if (command.equals("done") || command.equals("delete")) {
+        if (input.equals(Command.EXIT_CMD.getCmd())) {
+            return new String[]{command};
+        } else if (input.equals(Command.LIST_CMD.getCmd())) {
+            return new String[]{command};
+        } else if (command.equals(Command.DONE_CMD.getCmd())
+                || command.equals(Command.DELETE_CMD.getCmd())) {
             return parseDoneDelete(input);
         } else {
             switch (command) {
@@ -32,7 +29,7 @@ public class Parser {
                 case "event":
                     return parseEvent(input);
                 default:
-                    throw new DukeException("upset parser: unknown command");
+                    throw new DukeException(Message.ERROR_UNKNOWN_CMD.getMsg());
             }
         }
     }
@@ -40,11 +37,11 @@ public class Parser {
     private String[] parseDoneDelete(String input) throws DukeException {
         StringTokenizer st = new StringTokenizer(input);
         if (st.countTokens() != 2) {
-            throw new DukeException("invalid done/delete command: do things one at a time pls!");
+            throw new DukeException(Message.ERROR_DONEDELETE_ARGS.getMsg());
         }
         String command = st.nextToken(), taskID = st.nextToken();
         if (!isInteger(taskID)) {
-            throw new DukeException("invalid done/delete command: you gotta pass an integer");
+            throw new DukeException(Message.ERROR_DONEDELETE_NOTINT.getMsg());
         }
         return new String[]{command, taskID};
     }
@@ -53,9 +50,8 @@ public class Parser {
         StringTokenizer st = new StringTokenizer(input);
         st.nextToken();
         if (!st.hasMoreTokens()) {
-            throw new DukeException("invalid todo command: do what?");
+            throw new DukeException(Message.ERROR_TODO_DESC.getMsg());
         }
-
         StringBuilder description = new StringBuilder();
         while (st.hasMoreTokens()) {
             description.append(st.nextToken()).append(" ");
@@ -67,7 +63,7 @@ public class Parser {
     private String[] parseDeadline(String input) throws DukeException {
         String[] separatedInput = input.split(DEADLINE_DELIMITER);
         if (separatedInput.length <= 1) {
-            throw new DukeException("invalid deadline command: bad format, try deadline <desc> /by <dateString>");
+            throw new DukeException(Message.ERROR_DEADLINE_FORMAT.getMsg());
         }
         String dateString = separatedInput[1];
         StringTokenizer st = new StringTokenizer(separatedInput[0]);
@@ -78,7 +74,7 @@ public class Parser {
         }
         String description = newDescription.toString().stripTrailing();
         if (description.isEmpty()) {
-            throw new DukeException("invalid deadline command: bro, where's the deadline description at?");
+            throw new DukeException(Message.ERROR_DEADLINE_DESC.getMsg());
         }
         return new String[]{"D",
                 description,
@@ -87,22 +83,22 @@ public class Parser {
 
     // e.g. event project meeting /at Mon 2-4pm
     // todo: refactor this later
-    public String[] parseEvent(String input) throws DukeException {
+    private String[] parseEvent(String input) throws DukeException {
         String[] separatedInput = input.split(EVENT_DELIMITER); //  <words> /at <timeInfo>
         if (separatedInput.length <= 1) {
-            throw new DukeException("invalid event command: bad format, try event <desc> /at <dateString> <startTime>-<endTime>");
+            throw new DukeException(Message.ERROR_EVENT_FORMAT.getMsg());
         }
         String[] words = separatedInput[0].split(" ");
         String[] timeInfo = separatedInput[1].split(" ");
 
-        if(timeInfo.length <= 1) {
-            throw new DukeException("invalid event command: ???");
-        }
+//        if(timeInfo.length <= 1) {
+//            throw new DukeException("invalid event command: ???");
+//        }
 
         String duration = timeInfo[timeInfo.length - 1];
         String[] separatedTime = duration.split(TIME_DELIMITER);
         if(separatedTime.length <= 1) {
-            throw new DukeException("invalid event command: you need to pass in a start and end time for your event");
+            throw new DukeException(Message.ERROR_EVENT_TIME.getMsg());
         }
 
         StringBuilder dateStringBuilder = new StringBuilder();
@@ -113,7 +109,7 @@ public class Parser {
         dateStringBuilder.append(timeInfo[timeInfo.length - 2]);
         String dateString = dateStringBuilder.toString();
         if(dateString.isEmpty()) {
-            throw new DukeException("invalid event command: you didn't pass in the date!");
+            throw new DukeException(Message.ERROR_EVENT_DATE.getMsg());
         }
         String startTime = separatedTime[0],
                 endTime = separatedTime[1];

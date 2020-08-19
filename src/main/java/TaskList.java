@@ -46,13 +46,12 @@ public class TaskList {
     }
 
 
-    private boolean verifyTaskValidity(int taskID) throws DukeException {
+    private void verifyTaskValidity(int taskID) throws DukeException {
         if (taskID > taskList.size()) {
             throw new DukeException("invalid task: task id > list size");
         } else if (taskID < 1) {
             throw new DukeException("invalid task: task id < 1");
         }
-        return true;
     }
 
     public ArrayList<Task> getAllTasks() {

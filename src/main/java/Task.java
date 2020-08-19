@@ -17,12 +17,7 @@ public class Task {
         return this;
     }
 
-    protected int getTaskID() {
-        return this.taskID;
-    }
-
     protected Task decrementID() {
-        // todo: figure out how to get the taskCount decremented...
         --this.taskID;
         return this;
     }

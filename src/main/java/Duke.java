@@ -5,12 +5,8 @@ public class Duke {
 
     // constant strings:
     private static final String lineBreak = "____________________________________________________________";
-    private static final String exitGreeting = "Bye. Hope to see you again soon!";
     private static final String indent = "    ";
     private static final String mode = "list";
-    private static final String doneMessage = "Nice! I've marked this task as done";
-    private static final String deleteMessage = "Noted. I've removed this task:";
-    private static final String gotMessage = "Got it. I've added this task:";
 
     static boolean terminate = false;
 
@@ -38,15 +34,15 @@ public class Duke {
         try {
             String[] parsedOutput = parser.parseCommand(input);
             String command = parsedOutput[0];
-            if (command.equals("bye")) {
+            if (command.equals(Command.EXIT_CMD.getCmd())) {
                 response = exit();
-            } else if (command.equals("list")) {
-                response.add("Here are the tasks in your list:");
+            } else if (command.equals(Command.LIST_CMD.getCmd())) {
+                response.add(Message.FETCHING_MSG.getMsg());
                 ArrayList<Task> allTasks = myTasks.getAllTasks();
                 for (Task t : allTasks) {
                     response.add(t.getID() + "." + t.toString());
                 }
-            } else if (Duke.mode.equals("echo")) {
+            } else if (Duke.mode.equals(Command.ECHO_MODE.getCmd())) {
                 response = echo(input);
             } else {
                 response = handleTask(parsedOutput, myTasks);
@@ -62,19 +58,20 @@ public class Duke {
     private static ArrayList<String> handleTask(String[] parsedOutput, TaskList tasks) throws DukeException {
         String command = parsedOutput[0];
         ArrayList<String> response = new ArrayList<>();
-        if (command.equals("done") || command.equals("delete")) {
-            boolean toDelete = command.equals("delete");
+        if (command.equals(Command.DELETE_CMD.getCmd())
+                || command.equals(Command.DONE_CMD.getCmd())) {
+            boolean toDelete = command.equals(Command.DELETE_CMD.getCmd());
             int taskID = Integer.parseInt(parsedOutput[1]);
             if(toDelete) {
-                response.add(deleteMessage);
+                response.add(Message.DELETE_MSG.getMsg());
                 response.add(tasks.deleteTask(taskID));
                 response.add(tasks.getCurrentStatus());
             } else {
-                response.add(doneMessage);
+                response.add(Message.DONE_MSG.getMsg());
                 response.add(tasks.completeTask(taskID));
             }
         } else {
-            response.add(gotMessage);
+            response.add(Message.CONFIRMATION_MSG.getMsg());
             String reply = tasks.addEntry(parsedOutput);
             response.add(reply);
             response.add(tasks.getCurrentStatus());
@@ -86,7 +83,7 @@ public class Duke {
     private static ArrayList<String> exit() {
         Duke.terminate = true;
         ArrayList<String> response = new ArrayList<>();
-        response.add(exitGreeting);
+        response.add(Message.EXIT_GREETING.getMsg());
         return (response);
 
     }
