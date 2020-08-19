@@ -3,17 +3,19 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        //constant
-        String tab = "  ";
-        String lineBreaker = tab + "___________________________________________________________";
-        String greet = tab + "Hello! I'm Duke" + "\n" + tab + "What can I do for you?";
-        String end = tab + "Bye. Hope to see you again soon!";
-        String listNotification = tab + "Here are the tasks in your list:";
-        String doneNotification = tab + "Nice! I've marked this task as done:";
-
         //Setup
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> listOfTasks = new ArrayList<>();
+        ArrayList<Task> listOfTasks = new ArrayList<>(100);
+
+        //constant
+        String tab = "  ";
+        String lineBreaker = tab + "_________________________________________________________________";
+        String greet = tab + " Hello! I'm Duke" + "\n" + tab + " What can I do for you?";
+        String end = tab + " Bye. Hope to see you again soon!";
+        String addTaskTitle = tab + " Got it. I've added this task:";
+        String listTitle = tab + " Here are the tasks in your list:";
+        String doneTitle = tab + " Nice! I've marked this task as done:";
+
 
         //Greeting
         System.out.println(lineBreaker);
@@ -31,9 +33,9 @@ public class Duke {
 
             } else if(input.equals("list")) {
                 int i = 1;
-                System.out.println(listNotification);
+                System.out.println(listTitle);
                 for (Task task : listOfTasks) {
-                    System.out.println(tab + i++ + ". " + "  [" + task.getStatusIcon() + "] " + task.getDescription());
+                    System.out.println(tab + " " + i++ + "." + task);
                 }
 
             } else if(input.length() >= 6 && input.substring(0, 4).equals("done")) {
@@ -42,13 +44,34 @@ public class Duke {
                 Task markedTask = markingTask.markAsDone();
                 listOfTasks.set(indexOfMarkingTask, markedTask);
 
-                System.out.println(doneNotification);
-                System.out.println(tab + "  [" + markedTask.getStatusIcon() + "] " + markedTask.getDescription());
+                System.out.println(doneTitle);
+                System.out.println(tab + "   " + markedTask);
 
-            } else {
-                Task newTask = new Task(input);
-                listOfTasks.add(newTask);
-                System.out.println(tab + "added: " + input);
+            } else { //add task
+                String firstWord = input.substring(0, input.indexOf(' '));
+                System.out.println(addTaskTitle);
+
+                if (firstWord.equals("todo")) {
+                    String description = input.substring(input.indexOf(' ') + 1);
+                    Todo newTask = new Todo(description);
+                    listOfTasks.add(newTask);
+                    System.out.println(tab + "   " +  newTask);
+
+                } else { //event or deadline task
+                    String description = input.substring(input.indexOf(' ') + 1, input.indexOf('/'));
+                    String time = input.substring(input.indexOf('/') + 4);
+                    if (firstWord.equals("deadline")) {
+                        Deadline newTask = new Deadline(description, time);
+                        listOfTasks.add(newTask);
+                        System.out.println(tab + "   " +  newTask);
+                    } else { //event task
+                        Event newTask = new Event(description, time);
+                        listOfTasks.add(newTask);
+                        System.out.println(tab + "   " +  newTask);
+                    }
+                }
+
+                System.out.println(tab + " Now you have " + listOfTasks.size() + " tasks in the list.");
             }
 
             System.out.println(lineBreaker);
