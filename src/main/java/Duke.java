@@ -4,13 +4,11 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-
         //prints Greeting message
         printGreeting();
 
         //Initialize Task list
         List<Task> lst = new ArrayList<>();
-
 
         //Take in Input
         Scanner sc = new Scanner(System.in);
@@ -23,10 +21,9 @@ public class Duke {
 
             String[] instruction;
 
-
             //checks for exception
             try {
-                instruction = readInstruction(lst, query);
+                instruction = parseInstruction(lst, query);
             } catch (DukeException e) {
                 System.out.println(e);
                 System.out.println("_______________________________________________________________");
@@ -34,8 +31,6 @@ public class Duke {
                 query = sc.nextLine();
                 continue;
             }
-
-
 
             //list items
             if (instruction[0].equals("list")) {
@@ -45,13 +40,14 @@ public class Duke {
             //handle done items
             else if (instruction[0].equals("done")) {
                 int doneIndex = Integer.parseInt(instruction[1]);
-                if (doneIndex > lst.size()) {
-                    return; //handle item does not exist exception; for now do nothing
-                } else {
-                    doneItem(lst, doneIndex);
-                }
+                doneItem(lst, doneIndex);
+
+            } else if (instruction[0].equals("delete")) {
+                int itemNum = Integer.parseInt(instruction[1]);
+                deleteItem(lst, itemNum);
 
             } else {
+                //already tested for correctness
                 switch (instruction[0]) {
                     case "todo":
                         addTodo(lst, instruction[1]);
@@ -59,13 +55,10 @@ public class Duke {
                     case "deadline":
                         addDeadline(lst, instruction[1].split(" /by ")[0], instruction[1].split(" /by ")[1]);
                         break;
-
                     case "event":
                         addEvent(lst, instruction[1].split(" /at ")[0], instruction[1].split(" /at ")[1]);
                         break;
-
                 }
-
             }
 
 
@@ -82,40 +75,79 @@ public class Duke {
 
     }
 
-    private static String[] readInstruction(List<Task> lst, String query) throws DukeException {
-        String[] instruction = query.split(" ", 2);
+    private static String[] parseInstruction(List<Task> lst, String query) throws DukeException {
+
+        //take away leading and trailing white spaces
+        String[] instruction = query.strip().split(" ", 2);
+
         switch (instruction[0]) {
             case "list":
                 if (instruction.length == 1) {
                     return instruction;
+                } else {
+                    throw new DukeException("Extra inputs detected! Please only input 'list'.");
                 }
-                break;
+
             case "done":
+                //done with no other arguments
                 if (instruction.length == 1) {
                     throw new DukeException("Please specify item number!");
                 }
-                if (Integer.parseInt(instruction[1])> lst.size()) {
-                    throw new DukeException("There is no such item in the list!");
+                //done with exactly 2 inputs
+                else if (instruction.length == 2) {
+
+                    //check if second argument is integer
+                    try {
+                        if ((Integer.parseInt(instruction[1]) < 1) || (Integer.parseInt(instruction[1]) > lst.size())) {
+                            throw new DukeException("Please enter a valid item number from the list!");
+                        }
+                    }
+
+                    //second argument wrong format
+                    catch (NumberFormatException e) {
+                        throw new DukeException("Please only input 'done <item number>' with no other inputs!");
+                    }
+                } else {
+                    return instruction;
                 }
+
                 break;
+
             case "todo":
                 if (instruction.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
                 break;
+
             case "deadline":
                 if (instruction.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                } else {
+                    //check if contains deadline " /by "
+                    if (instruction[1].contains(" /by ")) {
+                        return instruction;
+                    } else {
+                        throw new DukeException("Please input in the following format 'deadline <description> /by <time>' ");
+                    }
                 }
-                break;
+
+
             case "event":
                 if (instruction.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                } else {
+                    //check if contains event " /at "
+                    if (instruction[1].contains(" /at ")) {
+                        return instruction;
+                    } else {
+                        throw new DukeException("Please input in the following format 'event <description> /at <time>' ");
+                    }
                 }
-                break;
+
             default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-()");
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+
         return instruction;
     }
 
@@ -176,6 +208,13 @@ public class Duke {
         doneItem.markAsDone();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(doneItem.toString());
+    }
+
+    private static void deleteItem(List<Task> lst, int itemNumber) {
+        Task item = lst.get(itemNumber - 1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(item.toString());
+        System.out.println("Now you have " + lst.size() + " tasks in the list.");
     }
 
 
