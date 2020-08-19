@@ -15,18 +15,17 @@ public class Duke {
         System.out.println(horiLine
                 + "Got it. I've added this task: " + "\n"
                 + task.toString() + "\n"
-                + String.format("Now you have %s tasks in the list.", Task.numberOfTasks) + "\n"
+                + String.format("Now you have %s tasks in the list.", List.size()) + "\n"
                 + horiLine);
     }
     
     private static void deleteTask(int i) {
         Task task = List.get(i - 1);
         List.remove(i - 1);
-        Task.reduceTaskCount();
         System.out.println(horiLine
                 + "Noted. I've removed this task: " + "\n"
                 + task.toString() + "\n"
-                + String.format("Now you have %s tasks in the list.", Task.numberOfTasks) + "\n"
+                + String.format("Now you have %s tasks in the list.", List.size()) + "\n"
                 + horiLine);
     }
 
@@ -42,9 +41,11 @@ public class Duke {
                     break;
                 } else if (input.equals("list")) {
                     System.out.println(horiLine + "Here are the tasks in your list:");
+                    int i = 1;
                     for (Task task : List) {
                         //print out task with numbering
-                        System.out.println(String.format("%s.", task.getNumber()) + task.toString());
+                        System.out.println(String.format("%s.", i) + task.toString());
+                        i++;
                     }
                     System.out.println(horiLine);
                 } else if (input.startsWith("done")) {
