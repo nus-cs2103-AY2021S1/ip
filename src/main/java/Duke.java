@@ -13,8 +13,6 @@ public class Duke {
         System.out.println("Hello! This is Duke.\nWhat can I do for you?");
     }
 
-
-
     private static void exit() {
         System.out.println("Bye. Duke is always there for you!");
         System.out.println(logo);
@@ -40,8 +38,10 @@ public class Duke {
             }
             else {
                 int type = Parser.taskType(line);
-                if (type == 1)
-                    ListFunction.add(type, line);
+                if (type == -1)
+                    System.out.println("Sorry, can not figure out your meaning :(");
+                else if (type == 1)
+                    ListFunction.add(type, Parser.getName(line));
                 else
                     ListFunction.add(type, Parser.getName(line), Parser.getTime(line));
             }

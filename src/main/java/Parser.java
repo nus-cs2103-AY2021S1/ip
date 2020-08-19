@@ -19,11 +19,17 @@ public class Parser {
         else if (line.length() >= 5 && line.substring(0, 5).equals("event")) {
             return 3;
         }
-        else return 1;
+        else if (line.length() >= 4 && line.substring(0, 4).equals("todo")) {
+            return 1;
+        }
+        else return -1;
     }
 
     public static String getName(String line) {
-        if (taskType(line) == 2) {
+        if (taskType(line) == 1) {
+            return line.substring(5);
+        }
+        else if (taskType(line) == 2) {
             return line.split(" /by ")[0].substring(9);
         }
         else {
