@@ -11,7 +11,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         Scanner scan1 = new Scanner(System.in);
-        ArrayList<String> storage = new ArrayList<>();
+        ArrayList<Task> storage = new ArrayList<>();
         int count = 1;
 
 
@@ -22,17 +22,24 @@ public class Duke {
         /* level 2 */
         while (scan1.hasNext()) {
             String input = scan1.nextLine();
-            if (!input.equals("bye") && !input.equals("list")) {
-                storage.add(input);
+            if (!input.equals("bye") && !input.equals("list") && !input.equals("done")) {
+                Task task = new Task(input);
+                storage.add(task);
                 String added = "added: " + input;
                 System.out.println(added);
             } else if (input.equals("list")) {
-                for (String item: storage) {
-                    System.out.println(count + ". " + item);
+                for (Task item: storage) {
+                    System.out.println(count + ".[" + item.getStatusIcon() + "] " + item.getDescription());
                     count++;
                 }
-
-            } else {
+            } else if (input.equals("done")) {
+                int number = scan1.nextInt();
+                Task current = storage.get(number - 1);
+                current.setDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(current.getStatusIcon() + " " + current.getDescription());
+            }
+            else {
                 String bye = "Bye. Hope to see you again soon!";
                 System.out.println(bye);
                 scan1.close();
