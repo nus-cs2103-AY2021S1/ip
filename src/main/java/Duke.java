@@ -26,28 +26,28 @@ public class Duke {
         terminationCommands.add("farewell");
         terminationCommands.add("sayonara");
 
-//        ArrayList<Task> tasks = new ArrayList<Task>();
-        String[] tasks = new String[100];
-        int iter = 0;
+        ArrayList<Task> tasks = new ArrayList<Task>();
+//        String[] tasks = new String[100];
+//        int iter = 0;
 //        while (!command.equals("bye")) {
         while (!terminationCommands.contains(command)) {
             if (command.equals("list")) {
-                for (int i = 0; i < iter; i++) {
-                    System.out.println(i+1 + ". " + tasks[i]);
-//                for (int i = 0; i < tasks.size(); i++) {
-//                    System.out.println(i+1 + ". " + tasks.get(i));
+//                for (int i = 0; i < iter; i++) {
+//                    System.out.println(i+1 + ". " + tasks[i]);
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.println(i+1 + ". " + tasks.get(i));
                 }
                 System.out.println("I wouldn't bother doing them if I were you.");
-//            } else if (getFirstWord(command).equals("done")) {
-//                int taskNumber = parseInt(command.split(" ")[1]) - 1;
-//                tasks.get(taskNumber).markAsDone();
-//                System.out.println("Oh goody... You actually accomplished something!!\n" +
-//                        tasks.get(taskNumber));
+            } else if (getFirstWord(command).equals("done")) {
+                int taskNumber = parseInt(command.split(" ")[1]) - 1;
+                tasks.get(taskNumber).markAsDone();
+                System.out.println("Oh goody... You actually accomplished something!!\n" +
+                        tasks.get(taskNumber));
             } else {
                 System.out.println("You're making me feel tired... " + command);
-//                tasks.add(new Task(command));
-                tasks[iter] = command;
-                iter++;
+                tasks.add(new Task(command));
+//                tasks[iter] = command;
+//                iter++;
             }
             command = sc.nextLine();
         }
