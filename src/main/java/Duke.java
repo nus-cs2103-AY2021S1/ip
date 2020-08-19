@@ -23,8 +23,21 @@ public class Duke {
             //add items to list
             if (!userMessage.equals("bye") && !userMessage.equals("list") && !userMessage.contains("done")) {
                 Task newItem = new Task(userMessage, Task.Status.PENDING);
+                if (userMessage.contains("todo")) {
+                    String name = userMessage.substring(5);
+                    newItem = new TODO(name, Task.Status.PENDING);
+                } else if (userMessage.startsWith("deadline")) {
+                    String name = userMessage.split("/by")[0].substring(9);
+                    String dueDate = userMessage.split("/by")[1];
+                    newItem = new Deadline(name, Task.Status.PENDING,dueDate);
+                } else if (userMessage.startsWith("event")) {
+                    String name = userMessage.split("/at")[0].substring(6);
+                    String time = userMessage.split("/at")[1];
+                    newItem = new Event(name, Task.Status.PENDING,time);
+                }
                 itemList.add(newItem);
-                System.out.println("item added: " + newItem.name);
+                System.out.println("new task added: " + newItem.toString());
+                System.out.println("You now have " + itemList.size() + " tasks in your list!");
             }
 
             //list down the contents in the list
@@ -32,7 +45,7 @@ public class Duke {
                 System.out.println("Here is your list: ");
                 for (int i = 0; i < itemList.size(); i++) {
                     Task task = itemList.get(i);
-                    System.out.println((i+1) + ". "+ task.status.statusToSymbol() + task.name);
+                    System.out.println((i+1) + ". "+ task.toString());
                 }
             }
 
@@ -43,7 +56,7 @@ public class Duke {
                 Task task = itemList.get(index);
                 task.markAsDone();
                 System.out.println("Good job! You have finished this task!");
-                System.out.println(task.status.statusToSymbol() + task.name);
+                System.out.println(task.toString());
             }
 
 
