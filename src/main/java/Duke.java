@@ -21,12 +21,14 @@ public class Duke {
             if (command.equals("bye")) {
                 exit = true;
                 sc.close();
+            } else if (command.startsWith("done")) {
+                int position = Integer.parseInt(command.substring(5));
+                this.markTaskAsDone(position);
             } else if (command.equals("list")) {
                 this.displayTasks();
             } else {
                 Task task = new Task(command);
                 this.addTask(task);
-                System.out.println("added: " + command + "\n");
             }
         }
     }
@@ -38,9 +40,11 @@ public class Duke {
                 break;
             }
         }
+        System.out.println("added: " + task + "\n");
     }
 
     public void displayTasks() {
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.length; i++) {
             if (tasks[i] != null) {
                 Task task = tasks[i];
@@ -51,6 +55,14 @@ public class Duke {
             }
         }
         System.out.println("");
+    }
+
+    public void markTaskAsDone(int position) {
+        Task task = this.tasks[position - 1];
+        task.markAsDone();
+        String symbol = task.getStatusIcon();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("[" + symbol + "] " + task + "\n");
     }
 
     public void exit() {
