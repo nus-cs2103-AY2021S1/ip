@@ -13,4 +13,13 @@ done 88
 chasing elephants
 deadline eat by 2pm
 event party at 4pm
+deadline eat /by 10am /by june
+event travel to japan /at 10 June /at 2pm /at airport
+event travel to japan /at
+event /at 2pm
+deadline /by 2pm
+deadline homework /by
+todo
+deadline
+event
 bye

@@ -69,5 +69,34 @@ ____________________________________________________________
 Rawr! Dino could not add your task. Make sure your format is correct.
 Formats to input a task can be found by entering 'format'.
 ____________________________________________________________
+Dino has added to your list of tasks:
+[D][✘] eat  (by:  10am /by june)
+Number of tasks in list: 5
+____________________________________________________________
+Dino has added to your list of tasks:
+[E][✘] travel to japan  (at:  10 June /at 2pm /at airport)
+Number of tasks in list: 6
+____________________________________________________________
+Rawr! Dino could not add your task. Make sure your format is correct.
+Formats to input a task can be found by entering 'format'.
+____________________________________________________________
+Rawr! Dino could not add your task. Make sure your format is correct.
+Formats to input a task can be found by entering 'format'.
+____________________________________________________________
+Rawr! Dino could not add your task. Make sure your format is correct.
+Formats to input a task can be found by entering 'format'.
+____________________________________________________________
+Rawr! Dino could not add your task. Make sure your format is correct.
+Formats to input a task can be found by entering 'format'.
+____________________________________________________________
+Rawr! Dino could not add your task. Make sure your format is correct.
+Formats to input a task can be found by entering 'format'.
+____________________________________________________________
+Rawr! Dino could not add your task. Make sure your format is correct.
+Formats to input a task can be found by entering 'format'.
+____________________________________________________________
+Rawr! Dino could not add your task. Make sure your format is correct.
+Formats to input a task can be found by entering 'format'.
+____________________________________________________________
 Rawr. Hope to see you again soon! ><
 ____________________________________________________________
