@@ -25,10 +25,6 @@ public class Duke {
         System.out.println(line);
     }
 
-    public static void readInput() {
-
-    }
-
     public static void main(String[] args) {
         // Start
         start();
@@ -40,18 +36,17 @@ public class Duke {
         while (!input.equals("bye")) {
             try {
                 // Show list
-                if (input.equals("list")) {
-                    System.out.println("Here is your to-do list:\n");
-                    for (int i = 1; i <= list.size(); i++) {
-                        System.out.println(i + ". " + list.get(i - 1).toString());
-                    }
+                System.out.println(line);
 
-                    // Complete task
-                } else if (input.contains("done")) {
-                    int taskNumber = Integer.parseInt(input.substring(5));
-                    list.get(taskNumber - 1).completed();
-                    System.out.println("You've completed this task:\n");
-                    System.out.println((list.get(taskNumber - 1)).toString());
+                if (input.equals("list")) {
+                    if (list.isEmpty()) {
+                        System.out.println("You have no tasks, go out and have fun! ~");
+                    } else {
+                        System.out.println("Here is your to-do list:\n");
+                        for (int i = 1; i <= list.size(); i++) {
+                            System.out.println(i + ". " + list.get(i - 1).toString());
+                        }
+                    }
 
                     // Add task
                 } else if (input.contains("todo")) {
@@ -61,7 +56,6 @@ public class Duke {
                         String s = input.substring(5);
                         Task task = new Task(s);
                         list.add(task);
-                        System.out.println(line);
                         System.out.println("I've added this task:\n");
                         System.out.println("[T]" + task.toString());
                         System.out.println("Now you have " + list.size() + " tasks in your list.");
@@ -76,7 +70,6 @@ public class Duke {
                         String date = input.substring(input.lastIndexOf("at") + 3);
                         Event event = new Event(task, date);
                         list.add(event);
-                        System.out.println(line);
                         System.out.println("I've added this task:\n");
                         System.out.println("[E]" + event.toString());
                         System.out.println("Now you have " + list.size() + " tasks in your list.");
@@ -91,9 +84,32 @@ public class Duke {
                         String date = input.substring(input.lastIndexOf("by") + 3);
                         Deadline deadline = new Deadline(task, date);
                         list.add(deadline);
-                        System.out.println(line);
                         System.out.println("I've added this task:\n");
                         System.out.println("[D]" + deadline.toString());
+                        System.out.println("Now you have " + list.size() + " tasks in your list.");
+                    }
+
+                    // Complete task
+                } else if (input.contains("done")) {
+                    if (input.length() < 6) {
+                        throw new MissingNumberException();
+                    } else {
+                        int taskNumber = Integer.parseInt(input.substring(5));
+                        list.get(taskNumber - 1).completed();
+                        System.out.println("You've completed this task:");
+                        System.out.println((list.get(taskNumber - 1)).toString());
+                    }
+
+                    // Delete task
+                } else if (input.contains("delete")) {
+                    if (input.length() < 8) {
+                        throw new MissingNumberException();
+                    } else {
+                        int taskNumber = Integer.parseInt(input.substring(7));
+                        String deleted = (list.get(taskNumber - 1)).toString();
+                        list.remove(taskNumber - 1);
+                        System.out.println("Ok, this task has been kicked off your to-do list:");
+                        System.out.println(deleted);
                         System.out.println("Now you have " + list.size() + " tasks in your list.");
                     }
 
