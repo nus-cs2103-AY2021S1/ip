@@ -1,6 +1,7 @@
 import task.*;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -22,9 +23,18 @@ public class Chat {
     }
 
     private void markDone(Task task) {
-        task.setCompleted(true);
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("    " + task.toString());
+        if (task.isCompleted()) {
+            System.out.println("The task was previously completed:");
+            System.out.println("    " + task.toString());
+        } else {
+            task.setCompleted(true);
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println("    " + task.toString());
+        }
+    }
+
+    private boolean hasCharacter(String string) {
+        return Pattern.compile("\\w").matcher(string).find();
     }
 
     public void run() {
@@ -46,30 +56,49 @@ public class Chat {
             }
 
             if (input.equals("done")) { // Mark task as completed
-                // TODO: Catch IndexOutOfBoundsException
-                int taskIndex = scanner.nextInt() - 1;
-                markDone(this.taskList.get(taskIndex));
+                try {
+                    int taskIndex = Integer.parseInt(scanner.nextLine().trim()) - 1;
+                    markDone(this.taskList.get(taskIndex));
+                } catch(NumberFormatException e) {
+                    System.out.println("Format: done {index}");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Index Error: Invalid task index");
+                }
                 continue;
             }
 
             Task task = null;
 
             if (input.equals("todo")) {
-                task = new ToDo(scanner.nextLine());
+                String description = scanner.nextLine();
+                if (hasCharacter(description)) {
+                    task = new ToDo(description);
+                } else {
+                    System.out.println("Format: todo {description}");
+                    continue;
+                }
             }
 
             if (input.equals("deadline")) {
                 Pattern p = Pattern.compile("^(.+)\\s*\\/by\\s*(.+)$");
                 Matcher m = p.matcher(scanner.nextLine());
-                m.matches();
-                task = new Deadline(m.group(1), m.group(2));
+                if (m.matches() && hasCharacter(m.group(1)) && hasCharacter(m.group(2))) {
+                    task = new Deadline(m.group(1), m.group(2));
+                } else {
+                    System.out.println("Format: deadline {description} /by {deadline}");
+                    continue;
+                }
             }
 
             if (input.equals("event")) {
                 Pattern p = Pattern.compile("^(.+)\\s*\\/at\\s*(.+)$");
                 Matcher m = p.matcher(scanner.nextLine());
-                m.matches();
-                task = new Event(m.group(1), m.group(2));
+                if (m.matches() && hasCharacter(m.group(1)) && hasCharacter(m.group(2))) {
+                    task = new Event(m.group(1), m.group(2));
+                } else {
+                    System.out.println("Format: Event {description} /at {time}");
+                    continue;
+                }
             }
 
             if (task != null) {
@@ -78,7 +107,7 @@ public class Chat {
                 continue;
             }
 
-            System.out.println("Error: Invalid input!");
+            System.out.println("Error: Unknown input");
 
         }
     }
