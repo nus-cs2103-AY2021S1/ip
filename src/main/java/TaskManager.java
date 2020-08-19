@@ -6,7 +6,14 @@ public class TaskManager {
     static List tasks = new ArrayList<>();
 
     public static String addTask(String string) {
-        Task task = new Task(string);
+        Task task = null;
+        if (string.substring(0,5).equals("todo ")) {
+            task = new ToDo(string);
+        } else if (string.substring(0, 9).equals("deadline ")) {
+            task = new Deadline(string);
+        } else if (string.substring(0, 6).equals("event ")) {
+            task = new Event(string);
+        }
         TaskManager.tasks.add(task);
         return "yay! i have added this task to your list: \n    " + task;
     }
