@@ -12,6 +12,8 @@ public class Duke {
         while (!command.equals("bye")) {
             if (command.equals("list")) {
                 listCommand();
+            } else if (command.contains("done")) {
+                doneCommand(command);
             } else {
                 addCommand(command);
             }
@@ -39,11 +41,14 @@ public class Duke {
         String message;
         message = line;
         for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
             message = message
                     + "      "
                     + (i + 1)
                     + ". "
-                    + taskList.get(i)
+                    + task.getStatusIcon()
+                    + " "
+                    + task.getDescription()
                     + "\n";
         }
         message = message + line;
@@ -56,6 +61,23 @@ public class Duke {
         String message = line
                 + "      added: "
                 + command
+                + "\n"
+                + line;
+        System.out.println(message);
+    }
+
+    public static void doneCommand(String command) {
+        String lastChar = command.substring(command.length() - 1);
+        int i = Integer.parseInt(lastChar);
+        i -= 1;
+        Task task = taskList.get(i);
+        task.markAsDone();
+        String message = line
+                + "      Nice! I've marked this task as done:\n"
+                + "      "
+                + task.getStatusIcon()
+                + " "
+                + task.getDescription()
                 + "\n"
                 + line;
         System.out.println(message);
