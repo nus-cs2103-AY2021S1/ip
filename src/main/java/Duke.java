@@ -42,9 +42,9 @@ public class Duke {
                 + "    | |  | |/ _ \\ | | | |/ /\n"
                 + "    | |__| |  __/ |_| |   < \n"
                 + "    |_____/ \\___|\\__,_|_|\\_\\  v" + VERSION_NUMBER + "\n";
-        String intro_message = "I'm Deuk, nice to meet you\n" + PADDING +
+        String introMessage = "I'm Deuk, nice to meet you\n" + PADDING +
                 "How can I be of service today?";
-        System.out.printf(logo + MESSAGE_TEMPLATE, intro_message);
+        System.out.printf(logo + MESSAGE_TEMPLATE, introMessage);
     }
 
     public static void main(String[] args) {
