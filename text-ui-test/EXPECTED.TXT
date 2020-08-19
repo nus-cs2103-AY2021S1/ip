@@ -1,42 +1,42 @@
-hi! im conundrum boy :)
-you haven't added any tasks to the list yet!
-that is not the number of a task in the list!
-i've added this task for you: 
+✰ hi! im conundrum boy :) ✰
+✰ you haven't added any tasks to the list yet! ✰
+⚠ that is not the number of a task in the list! ⚠
+✰ i've added this task for you: 
 	[T] [✗] read the bible
-now you have 1 items in your tasklist.
-1. [T] [✗] read the bible
-congrats on finishing your task :) it's marked as done:
-	[T] [✓] read the bible
-you have already completed read the bible!
-the task description cannot be nothing D:
-i've added this task for you: 
+now you have 1 items in your tasklist. ✰
+✰ 1. [T] [✗] read the bible ✰
+✰ congrats on finishing your task :) it's marked as done:
+	[T] [✓] read the bible ✰
+⚠ you have already completed read the bible! ⚠
+⚠ the task description cannot be nothing D: ⚠
+✰ i've added this task for you: 
 	[D] [✗] 2103T homework (by: tomorrow 2359)
-now you have 2 items in your tasklist.
-1. [T] [✓] read the bible
-2. [D] [✗] 2103T homework (by: tomorrow 2359)
-i've added this task for you: 
+now you have 2 items in your tasklist. ✰
+✰ 1. [T] [✓] read the bible ✰
+✰ 2. [D] [✗] 2103T homework (by: tomorrow 2359) ✰
+✰ i've added this task for you: 
 	[E] [✗] 2101 tutorial (at: :()
-now you have 3 items in your tasklist.
-1. [T] [✓] read the bible
-2. [D] [✗] 2103T homework (by: tomorrow 2359)
-3. [E] [✗] 2101 tutorial (at: :()
-congrats on finishing your task :) it's marked as done:
+now you have 3 items in your tasklist. ✰
+✰ 1. [T] [✓] read the bible ✰
+✰ 2. [D] [✗] 2103T homework (by: tomorrow 2359) ✰
+✰ 3. [E] [✗] 2101 tutorial (at: :() ✰
+✰ congrats on finishing your task :) it's marked as done:
+	[D] [✓] 2103T homework (by: tomorrow 2359) ✰
+⚠ you have already completed 2103T homework! ⚠
+⚠ i dont know what that means :( ⚠
+⚠ i dont know what that means :( ⚠
+⚠ you haven't entered a task number to complete! ⚠
+⚠ you haven't entered a time that this task happens at. you can do that by typing "event xxx /at yyy". ⚠
+⚠ you haven't entered a time that this task happens at. you can do that by typing "event xxx /at yyy". ⚠
+⚠ you haven't entered a time that this task is due by. you can do that by typing "deadline xxx /by yyy". ⚠
+⚠ you haven't entered a time that this task is due by. you can do that by typing "deadline xxx /by yyy". ⚠
+⚠ the task description cannot be nothing D: ⚠
+⚠ the task description cannot be nothing D: ⚠
+⚠ you haven't entered a task number to delete! ⚠
+✰ i've removed the following task from the list:
 	[D] [✓] 2103T homework (by: tomorrow 2359)
-you have already completed 2103T homework!
-i dont know what that means :(
-i dont know what that means :(
-you haven't entered a task number to complete!
-you haven't entered a time that this task happens at. you can do that by typing "event xxx /at yyy".
-you haven't entered a time that this task happens at. you can do that by typing "event xxx /at yyy".
-you haven't entered a time that this task is due by. you can do that by typing "deadline xxx /by yyy".
-you haven't entered a time that this task is due by. you can do that by typing "deadline xxx /by yyy".
-the task description cannot be nothing D:
-the task description cannot be nothing D:
-you haven't entered a task number to delete!
-i've removed the following task from the list:
-	[D] [✓] 2103T homework (by: tomorrow 2359)
-now you have 2 items in your tasklist.
-1. [T] [✓] read the bible
-2. [E] [✗] 2101 tutorial (at: :()
-i dont know what that means :(
-bye bye!
+now you have 2 items in your tasklist. ✰
+✰ 1. [T] [✓] read the bible ✰
+✰ 2. [E] [✗] 2101 tutorial (at: :() ✰
+⚠ i dont know what that means :( ⚠
+✰ bye bye! ✰
