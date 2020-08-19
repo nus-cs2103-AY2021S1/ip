@@ -43,34 +43,57 @@ public class Duke {
     }
 
     public void done(int number) {
-        if (number <= list.size()) {
-            Task current = list.get(number - 1);
-            current.markAsDone();
-            System.out.println("        I have marked this as done:");
-            System.out.println("        [" + current.isDone + "] " + current.description);
-        } else {
-            System.out.println("        no such task");
+        try {
+            if (number <= list.size()) {
+                Task current = list.get(number - 1);
+                current.markAsDone();
+                System.out.println("        I have marked this as done:");
+                System.out.println("        [" + current.isDone + "] " + current.description);
+            } else {
+                throw new DukeException("☹ OOPS!!! there is no such task");
+            }
+        } catch (DukeException e) {
+            System.out.println("------------------------------------------------------");
+            System.out.println(e.getMessage());
+            System.out.println("------------------------------------------------------");
         }
     }
 
     public void add(String input) {
-        String[] type = input.split(" ", 2);
-        Task task;
-        if (type[0].equals("todo")) {
-            task = new Todo(type[1]);
-        } else if (type[0].equals("deadline")) {
-            String second = type[1];
-            String[] secondSplit = second.split(" /by ", 2);
-            task = new Deadline(secondSplit[0], secondSplit[1]);
-        } else {
-            String second = type[1];
-            String[] secondSplit = second.split(" /at ", 2);
-            task = new Event(secondSplit[0], secondSplit[1]);
+        try {
+            String[] type = input.split(" ", 2);
+            Task task;
+            if (type[0].equals("todo")) {
+                if(type.length == 1) {
+                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
+                task = new Todo(type[1]);
+            } else if (type[0].equals("deadline")) {
+                if(type.length == 1) {
+                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                }
+                String second = type[1];
+                String[] secondSplit = second.split(" /by ", 2);
+                task = new Deadline(secondSplit[0], secondSplit[1]);
+            } else if (type[0].equals("event")) {
+                if(type.length == 1) {
+                    throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                }
+                String second = type[1];
+                String[] secondSplit = second.split(" /at ", 2);
+                task = new Event(secondSplit[0], secondSplit[1]);
+            } else {
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+            this.list.add(task);
+            System.out.println("        Got it I have added this task:");
+            System.out.println("        " + task.toString());
+            System.out.println("        you now have " + list.size() + " tasks on the list");
+        } catch (DukeException e) {
+            System.out.println("------------------------------------------------------");
+            System.out.println(e.getMessage());
+            System.out.println("------------------------------------------------------");
         }
-        this.list.add(task);
-        System.out.println("        Got it I have added this task:");
-        System.out.println("        " + task.toString());
-        System.out.println("        you now have " + list.size() + " tasks on the list");
     }
 
     public void showList() {
