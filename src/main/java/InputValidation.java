@@ -35,12 +35,11 @@ public class InputValidation {
     static void validateIdentifier(String userInput, String[] userTokens) throws DukeException {
         if (userTokens.length != 2) {
             throw new DukeException("Invalid identifier, requires 2 tokens: " + userInput);
-        } else {
-            try {
-                Integer.parseInt(userTokens[1]);
-            } catch (NumberFormatException nfe) {
-                throw new DukeException("Invalid identifier, requires integer: " + userInput);
-            }
+        }
+        try {
+            Integer.parseInt(userTokens[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid identifier, requires integer: " + userInput);
         }
     }
 }

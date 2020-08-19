@@ -125,6 +125,7 @@ public class Duke {
                 // Delete a task
                 case "delete":
                     try {
+                        System.out.println("validating delete");
                         InputValidation.validateIdentifier(userInput, userTokens);
                     } catch (DukeException e) {
                         System.out.println("Sorry, I can't delete that task! " + e.getMessage());
