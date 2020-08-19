@@ -36,15 +36,15 @@ public class Duke {
                 } else if (inputArr[0].equals("list")) {
                     listTasks();
                 } else if (inputArr[0].equals("done")) {
-                    processDone(inputArr[1]);
+                    processDone(inputArr);
                 } else if (inputArr[0].equals("todo")) {
-                    processToDo(inputArr[1]);
+                    processToDo(inputArr);
                 } else if (inputArr[0].equals("deadline")) {
-                    processDeadline(inputArr[1]);
+                    processDeadline(inputArr);
                 } else if (inputArr[0].equals("event")) {
-                    processEvent(inputArr[1]);
+                    processEvent(inputArr);
                 } else if (inputArr[0].equals("delete")) {
-                    processDelete(inputArr[1]);
+                    processDelete(inputArr);
                 } else {
                     processNone();
                 }
@@ -70,10 +70,9 @@ public class Duke {
         }
     }
 
-    public void processDone(String val) throws DoneException {
+    public void processDone(String[] valArr) throws DoneException {
         try {
-            int doneTask = Integer.parseInt(val);
-            System.out.println(tasks.size());
+            int doneTask = Integer.parseInt(valArr[1]);
             tasks.get(doneTask - 1).setDone();
             System.out.println("Nice! I've set this task as done~\n" +
                     tasks.get(doneTask - 1));
@@ -82,25 +81,25 @@ public class Duke {
         }
     }
 
-    public void processToDo(String val) throws TodoException {
-        if (val.isEmpty()) {
-            throw new TodoException();
-        } else {
-            Todo newTask = new Todo(val);
-            tasks.add(newTask);
-            System.out.println("Got it~ I've added this task:\n"
-                    + newTask + "\n" + "You now have " + tasks.size() + " tasks in the list~");
-        }
+    public void processToDo(String[] valArr) throws TodoException {
+            try {
+                Todo newTask = new Todo(valArr[1]);
+                tasks.add(newTask);
+                System.out.println("Got it~ I've added this task:\n"
+                        + newTask + "\n" + "You now have " + tasks.size() + " tasks in the list~");
+            } catch (Exception e) {
+                throw new TodoException();
+            }
     }
 
-    public void processDeadline(String val) throws DeadlineException, DeadlineFormatException {
+    public void processDeadline(String[] valArr) throws DeadlineException, DeadlineFormatException {
 
-        if (val.isEmpty()) {
+        if (valArr.length < 2) {
             throw new DeadlineException();
         } else {
             try {
 
-                String[] deadlineSplit = val.split("/by");
+                String[] deadlineSplit = valArr[1].split("/by");
                 Deadline newTask = new Deadline(deadlineSplit[0], deadlineSplit[1]);
                 tasks.add(newTask);
                 System.out.println("Got it~ I've added this task:\n"
@@ -111,12 +110,12 @@ public class Duke {
         }
     }
 
-    public void processEvent(String val) throws EventException, EventFormatException {
-        if (val.isEmpty()) {
+    public void processEvent(String[] valArr) throws EventException, EventFormatException {
+        if (valArr.length < 2) {
             throw new EventException();
         } else {
             try {
-                String[] eventSplit = val.split("/at");
+                String[] eventSplit = valArr[1].split("/at");
                 Event newTask = new Event(eventSplit[0], eventSplit[1]);
                 tasks.add(newTask);
                 System.out.println("Got it~ I've added this task:\n"
@@ -131,9 +130,9 @@ public class Duke {
         throw new DukeException("Sorry, I don't know what that means~");
     }
 
-    public void processDelete(String val) throws DeleteException {
+    public void processDelete(String[] valArr) throws DeleteException {
         try {
-            int deleteTask = Integer.parseInt(val);
+            int deleteTask = Integer.parseInt(valArr[1]);
             Task deleted = tasks.get(deleteTask - 1);
             tasks.remove(deleteTask - 1);
             System.out.println("Alright~ I've removed this task:\n" +
