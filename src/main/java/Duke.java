@@ -35,8 +35,23 @@ public class Duke {
                         + user_list.get(task_id - 1) + "\n" + line);
 
             } else {  // For adding new items into to do list
-                user_list.add(new Task(user_input));
-                System.out.println(line + "\n added: " +user_input + "\n" + line);
+                if (input_split[0].equals("todo")) { // Add new to do
+                    user_list.add(new ToDo(input_split[1]));
+
+                } else if (input_split[0].equals("deadline")) { // Add new deadline
+                    String[] details = input_split[1].split(" /by ", 2);
+                    user_list.add(new Deadline(details[0], details[1]));
+
+                } else if (input_split[0].equals("event")) { // Add new event
+                    String[] details = input_split[1].split(" /at ", 2);
+                    user_list.add(new Event(details[0], details[1]));
+
+                }
+                String output = line + "\n" + "Got it. I've added this task: \n"
+                        + user_list.get(user_list.size()-1) + "\n"
+                        + "Now you have " + user_list.size() + " tasks in the list."
+                        + "\n" + line;
+                System.out.println(output);
 
             }
         }
