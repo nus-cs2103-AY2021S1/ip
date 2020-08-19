@@ -35,11 +35,11 @@ public class Task {
 
     public int getNumber() {
         String[] arr = this.description.split(" ", 2);
-        if (arr[0].equals("done")) {
+        if (arr[0].equals("done") || arr[0].equals("delete")) {
             String stringNum = arr[1];
             return Integer.parseInt(stringNum);
         }
-        return -1; // this is return when user did not input a 'done' statement
+        return -1; // this is return when user did not input a 'done' or 'delete statement
     }
 
     public String getDescription() {
@@ -78,11 +78,13 @@ public class Task {
             throw new DukeException("   ☹ OOPS!!! The description of a " + this.getFirstWord() + " cannot be empty.");
         }
 
-        if (!this.getDescription().contains("/by") && this.isDeadline()) { // "/by" is not in the description, i.e no date
+        if (!this.getDescription().contains("/by") && this.isDeadline()) {
+            // "/by" is not in the description, i.e no date
             throw new DukeException("   ☹ OOPS!!! The description of a deadline must contain a date.");
         }
 
-        if (!this.getDescription().contains("/at") && this.isEvent()) { // "/at" is not in the description, i.e no date
+        if (!this.getDescription().contains("/at") && this.isEvent()) {
+            // "/at" is not in the description, i.e no date
             throw new DukeException("   ☹ OOPS!!! The description of an event must contain a date.");
         }
     }
