@@ -14,9 +14,9 @@ public class Task {
     @Override
     public String toString() {
         if (isCompleted) {
-            return "[✓] " + task;
+            return "[\u2713] " + task;
         } else {
-            return "[✗] " + task;
+            return "[\u2718] " + task;
         }
     }
 }

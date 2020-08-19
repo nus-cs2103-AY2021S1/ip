@@ -26,10 +26,10 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        //start
+        // Start
         start();
 
-        // take in inputs
+        // Take in inputs
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
@@ -61,7 +61,7 @@ public class Duke {
             // Add event
             } else if (input.contains("event")) {
                 String task = input.substring(6, input.indexOf('/') - 1);
-                String date = input.substring(input.lastIndexOf("at"));
+                String date = input.substring(input.lastIndexOf("at") + 3);
                 Event event = new Event(task, date);
                 list.add(event);
                 System.out.println(line);
@@ -72,7 +72,7 @@ public class Duke {
             // Add deadline
             } else if (input.contains("deadline")) {
                 String task = input.substring(9, input.indexOf('/') - 1);
-                String date = input.substring(input.lastIndexOf("by"));
+                String date = input.substring(input.lastIndexOf("by") + 3);
                 Deadline deadline = new Deadline(task, date);
                 list.add(deadline);
                 System.out.println(line);
@@ -87,7 +87,7 @@ public class Duke {
             input = sc.nextLine();
         }
 
-        // end
+        // End
         end();
     }
 }
