@@ -1,15 +1,17 @@
 package main.java;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Emily {
+    static ArrayList<Task> store = new ArrayList<>(100);
+
 
     static public void interacting() throws DukeException {
 
         Task current;
-        Task[] store = new Task[100];
 
         String divider = "    ---------------";
-        int counter = 1;
+        int counter = 0;
         Scanner sc = new Scanner(System.in);
 
         String input = sc.nextLine();
@@ -20,23 +22,23 @@ public class Emily {
 
             while (!input.equals("bye")) {
 
+
                 if (input.equals("list")) {
 
                     System.out.println(divider);
 
-                    for (int i = 1; i < counter; i++) {
-                        current = store[i];
-                        String item = "    " + i + ". " + current;
-
+                    int num = 1;
+                    for (Task c: store) {
+                        String item = "    " + num + ". " + c;
+                        num++;
                         System.out.println(item);
                     }
                     System.out.println(divider);
 
-
                 } else if (input.contains("done")) {
 
-                    int index = Character.getNumericValue(input.charAt(5));
-                    current = store[index];
+                    int index = Character.getNumericValue(input.charAt(5)) - 1;
+                    current = store.get(index);
                     current.finished = true;
 
                     String item = "Nice work! I have marked the task as done:\n" +
@@ -52,7 +54,8 @@ public class Emily {
                     String shorten = input.trim();
 
                     //empty description
-                    if(shorten.equals("todo") || shorten.equals("deadline") || shorten.equals("event")){
+                    if(shorten.equals("todo") || shorten.equals("deadline") || shorten.equals("event")
+                    || shorten.equals("deadline/by") || shorten.equals("event/at")){
                         System.out.println(divider);
                         throw new DukeException("The description of " + input + " cannot be empty");
                     }
@@ -75,11 +78,11 @@ public class Emily {
                             item = new Event(temp[0], temp[1]);
                         }
 
-                    store[counter] = item;
+                    store.add(item);
                     counter++;
 
                     System.out.println("        " + item);
-                    System.out.println("    Now you have " + (counter-1) + " tasks in the list" +
+                    System.out.println("    Now you have " + (counter) + " tasks in the list" +
                             "\n" + divider);
 
 
@@ -97,21 +100,22 @@ public class Emily {
 
     public static void main(String[] args) throws DukeException {
         String divider = "-------------------";
-
+        boolean end = false;
 
 
         System.out.println("Hello, I am Emily\n" +
                 "What can i do for you?\n"+
                 divider);
 
-        try{
-            interacting();
-            System.out.println(divider + "\nBye~, hope to see you again!");
-        } catch(DukeException e){
-            System.out.println("OOPS! " + e.getMessage() + "\n" + divider);
-
+        while(!end){
+            try{
+                interacting();
+                end = true;
+            } catch(DukeException e){
+                System.out.println("    OOPS! " + e.getMessage() + "\n" + divider);
+            }
         }
-
+        System.out.println(divider + "\nBye~, hope to see you again!");
 
 
     }
