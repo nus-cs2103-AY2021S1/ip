@@ -11,10 +11,9 @@ public class Listing {
 
     public String doneness() {
         if (done) {
-            //not the extra whitespace
-            return "[✓] ";
+            return "[✓]";
         } else {
-            return "[✗] ";
+            return "[✗]";
         }
     }
 
