@@ -8,6 +8,50 @@ public class Duke {
         System.out.println("How may I be of assistance to you?");
     }
 
+    public static Task taskClassify(String str) {
+        String[] words = str.split("\\s+");
+        int len = words.length;
+
+        if (words[0].equals("todo")) {
+            String desc = "";
+            for (int i = 1; i < len; i++) {
+                desc += " " + words[i];
+            }
+            return new ToDo(desc);
+        } else if (words[0].equals("deadline")) {
+            String desc = "";
+            String time = "";
+            int count = 0;
+            for (int i = 1; i < len; i++) {
+                if (words[i].equals("/by")) {
+                    count = i + 1;
+                    break;
+                }
+                desc += " " + words[i];
+            }
+            for (int j = count; j < len; j++) {
+                time += " " + words[j];
+            }
+            return new Deadline(desc, time);
+        } else if (words[0].equals("event")) {
+            String desc = "";
+            String time = "";
+            int count = 0;
+            for (int i = 1; i < len; i++) {
+                if (words[i].equals("/at")) {
+                    count = i + 1;
+                    break;
+                }
+                desc += " " + words[i];
+            }
+            for (int j = count; j < len; j++) {
+                time += " " + words[j];
+            }
+            return new Event(desc, time);
+        }
+        return new Task(str);
+    }
+
     public static void echo() {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
@@ -30,9 +74,11 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(list.get(index).toString());
                 } else {
-                    Task task = new Task(line);
+                    Task task = taskClassify(line);
                     list.add(task);
-                    System.out.println("added: " + line);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + task.toString());
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
                 }
             }
         }
