@@ -1,0 +1,10 @@
+todo read book
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
+todo join SIA app challenge
+todo run 70 mile Iron man
+list
+done 3
+done 5
+list
+bye
