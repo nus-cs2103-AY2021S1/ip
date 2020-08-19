@@ -11,7 +11,6 @@ public class Emily {
         Task current;
 
         String divider = "    ---------------";
-        int counter = 0;
         Scanner sc = new Scanner(System.in);
 
         String input = sc.nextLine();
@@ -49,7 +48,8 @@ public class Emily {
                             "\n" + divider);
 
 
-                } else if(input.contains("todo") || input.contains("deadline") || input.contains("event")) { //case to add task
+                } else if(input.contains("todo") || input.contains("deadline") || input.contains("event")
+                || input.contains("delete")) {
 
                     String shorten = input.trim();
 
@@ -60,9 +60,33 @@ public class Emily {
                         throw new DukeException("The description of " + input + " cannot be empty");
                     }
 
-                    Task item = new Task("");
-                    System.out.println(divider
-                            + "\n    Got it! I have added this task: ");
+                    //deleting task
+                    if(shorten.contains("delete")){
+                        if(shorten.equals("delete")){
+                            throw new DukeException("Missing index");
+                        } else{
+
+                            int index = Character.getNumericValue(input.charAt(7)) - 1;
+
+                            if((index+1) > store.size()){
+                                throw new DukeException("Invalid index");
+                            }
+
+                            current = store.get(index);
+                            store.remove(index);
+
+                            System.out.println(divider +
+                                    "\n    Got it! I have removed this task: " +
+                                    "\n    "+ current);
+
+                            System.out.println("    Now you have " + (store.size()) + " tasks in the list" +
+                                    "\n" + divider);
+                        }
+                    }else { //normal addition
+
+                        Task item = new Task("");
+                        System.out.println(divider
+                                + "\n    Got it! I have added this task: ");
 
                         if (input.contains("todo")) {
                             String describe = input.substring(5);
@@ -78,14 +102,13 @@ public class Emily {
                             item = new Event(temp[0], temp[1]);
                         }
 
-                    store.add(item);
-                    counter++;
+                        store.add(item);
 
-                    System.out.println("        " + item);
-                    System.out.println("    Now you have " + (counter) + " tasks in the list" +
-                            "\n" + divider);
+                        System.out.println("        " + item);
+                        System.out.println("    Now you have " + (store.size()) + " tasks in the list" +
+                                "\n" + divider);
 
-
+                    }
                 } else{
                     //invalid input
                     System.out.println(divider);
