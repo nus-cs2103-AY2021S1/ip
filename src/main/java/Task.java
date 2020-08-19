@@ -21,4 +21,13 @@ public class Task {
     public void undoTask() {
         isDone = false;
     }
+
+    @Override
+    public String toString() {
+        final String CHECKMARK = "[✓]";
+        final String CROSS = "[✗]";
+        return isDone
+                ? CHECKMARK + " " + taskName
+                : CROSS + " " + taskName;
+    }
 }

@@ -71,8 +71,7 @@ public class Duke {
 
         for (int i = 1; i <= itemsList.size(); i++) {
             Task item = itemsList.get(i - 1);
-            String checkbox = item.isDone() ? CHECKMARK : CROSS;
-            String fullItem = i + ". " + checkbox + " " + item.getTaskName();
+            String fullItem = i + ". " + item.toString();
 
             System.out.println(fullItem);
         }
