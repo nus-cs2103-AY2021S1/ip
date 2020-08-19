@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    static String line = "—————————————————————————————————————————————————————————————————";
+    static String line = "_________________________________________________________________";
     static Task[] list = new Task[100];
     static int index = 0;
 
