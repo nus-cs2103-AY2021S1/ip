@@ -18,7 +18,7 @@ public class Duke {
 
         while (!userInput.equals(CLOSING_STRING)) {
             userInput = scanner.next();
-            if (userInput.equals(CLOSING_STRING)) {
+            if (!userInput.equals(CLOSING_STRING)) {
                 System.out.println(processString(userInput));
             } else {
                 System.out.println(getClosingText());
