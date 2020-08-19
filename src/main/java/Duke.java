@@ -157,10 +157,12 @@ public class Duke {
                     taskList.addTask(new Task(nextInput));
 
             }
+
             nextInput = input.nextLine();
             inputParts = nextInput.split(" ", 2);
             inputPrefix = inputParts[0];
             inputSuffix = inputParts.length == 1 ? "" : inputParts[1];
+
         }
 
     }
