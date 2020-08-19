@@ -9,6 +9,13 @@ public class Storage {
         System.out.println(indents + "Got it, the following task has been added:\n" + indents + indents + i + this.displayTasksLeft());
     }
 
+    public void deleteItem(int itemIndex) {
+        Task t = list.get(itemIndex);
+        list.remove(itemIndex);
+        String indents = " ";
+        System.out.println(indents + "Noted. I have removed this task:\n" + indents + indents + t + this.displayTasksLeft());
+    }
+
     public Task getItem(int index) {
         return list.get(index);
     }

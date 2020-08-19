@@ -1,10 +1,17 @@
 todo read book
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
+deadline get 6 packs /by eternity
 todo join SIA app challenge
+event strongman challenge /at daily
 todo run 70 mile Iron man
 list
 done 3
 done 5
+list
+delete 3
+list
+done 1
+delete 1
 list
 bye
