@@ -110,6 +110,20 @@ public class Duke {
         return String.format(strings.getString("output.added"), toAdd, tasks.size());
     }
 
+    private static String handleDelete(HashMap<String, String> parameters) throws DukeException {
+        if (!parameters.containsKey("argument")) {
+            throw new DukeInvalidParameterException(strings.getString("error.delete"), parameters);
+        }
+        try {
+            int toDelete = Integer.parseInt(parameters.get("argument")) - 1;
+            return String.format(strings.getString("output.delete"), tasks.remove(toDelete), tasks.size()).strip();
+        } catch (NumberFormatException e) {
+            throw new DukeInvalidParameterException(strings.getString("error.deleteNum"), parameters);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeInvalidParameterException(strings.getString("error.deleteOut"), parameters);
+        }
+    }
+
     public static void main(String[] args) {
 
         initializeDuke();
@@ -135,7 +149,10 @@ public class Duke {
                     output = handleDeadline(parameters);
                 } else if (inputMainCommand.equals(strings.getString("command.event"))) {
                     output = handleEvent(parameters);
-                } else if (input.equals(strings.getString("command.bye"))) {
+                } else if (inputMainCommand.equals(strings.getString("command.delete"))) {
+                    output = handleDelete(parameters);
+                }
+                else if (input.equals(strings.getString("command.bye"))) {
                     break;
                 } else {
                     throw new DukeUnrecognisedCommandException("Cannot Recognise Command ", inputMainCommand);
