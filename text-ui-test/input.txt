@@ -1,3 +1,18 @@
-hello
-echo
+blah
+todoffjslfsdj
+todo make tea
+event party
+deadline homework
+event birthday party /at 9 April 2020
+deadline homework /by 13 Aug 2020 2359
+list
+done 1
+delete 1
+list
+done 5
+done fdjsfklsd
+delete 9
+delete fdjsfds
+delete all
+list
 bye
