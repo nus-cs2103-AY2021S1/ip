@@ -1,4 +1,4 @@
-Hello from
+Hello from Bill 
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
@@ -11,43 +11,73 @@ What Can I do for you?
 ------------------------------------------
 ------------------------------------------
 Got it. I've added this task: 
-[T][x] borrow book
+[T][✘] hi
 Now you have 1 tasks in the list.
 ------------------------------------------
 ------------------------------------------
 Got it. I've added this task: 
-[D][x] return book  (by: Monday)
+[T][✘] k
 Now you have 2 tasks in the list.
 ------------------------------------------
 ------------------------------------------
 Got it. I've added this task: 
-[E][x] project meeting  (at: Tue 10-12am)
+[T][✘] h
 Now you have 3 tasks in the list.
-------------------------------------------
-Here are the tasks in your list: 
-1. [T][x] borrow book
-2. [D][x] return book  (by: Monday)
-3. [E][x] project meeting  (at: Tue 10-12am)
-------------------------------------------
-Nice! I've marked this task as done: 
-[T][✓] borrow book
 ------------------------------------------
 ------------------------------------------
 Got it. I've added this task: 
-[T][x] blah
+[T][✘] l
+Now you have 4 tasks in the list.
+------------------------------------------
+Here are the tasks in your list: 
+------------------------------------------
+1. [T][✘] hi
+2. [T][✘] k
+3. [T][✘] h
+4. [T][✘] l
+------------------------------------------
+------------------------------------------
+ Noted. I've removed this task:  
+[T][✘] l
+ Now you have 3 tasks in the list. 
+------------------------------------------
+Here are the tasks in your list: 
+------------------------------------------
+1. [T][✘] hi
+2. [T][✘] k
+3. [T][✘] h
+------------------------------------------
+------------------------------------------
+There are only 3 tasks in the list; Please restate the task to be deleted
+------------------------------------------
+------------------------------------------
+Nice! I've marked this task as done: 
+[T][✓] h
+------------------------------------------
+------------------------------------------
+There are only 3 tasks in the list; Please restate the task to be mark as done
+------------------------------------------
+Here are the tasks in your list: 
+------------------------------------------
+1. [T][✘] hi
+2. [T][✘] k
+3. [T][✓] h
+------------------------------------------
+------------------------------------------
+Got it. I've added this task: 
+[D][✘] return book  (by: Sunday)
 Now you have 4 tasks in the list.
 ------------------------------------------
 ------------------------------------------
 Got it. I've added this task: 
-[T][x] return book
+[E][✘] project meeting  (at: Mon 2-4pm)
 Now you have 5 tasks in the list.
 ------------------------------------------
 Here are the tasks in your list: 
-1. [T][✓] borrow book
-2. [D][x] return book  (by: Monday)
-3. [E][x] project meeting  (at: Tue 10-12am)
-4. [T][x] blah
-5. [T][x] return book
 ------------------------------------------
-Bye. Hope to see you again soon!
+1. [T][✘] hi
+2. [T][✘] k
+3. [T][✓] h
+4. [D][✘] return book  (by: Sunday)
+5. [E][✘] project meeting  (at: Mon 2-4pm)
 ------------------------------------------

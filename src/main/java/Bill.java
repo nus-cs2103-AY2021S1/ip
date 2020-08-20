@@ -72,9 +72,9 @@ public class Bill {
                         String lastChar = isDone[isDone.length - 1];
                         int index = Integer.parseInt(lastChar);
                         
-                        if (index > isDone.length) {
+                        if (index > list_of_Content.size()) {
                             int no_of_tasks = list_of_Content.size();
-                            throw new InvalidException("There are only " + no_of_tasks + "tasks in the list; Please restate" +
+                            throw new InvalidException("There are only " + no_of_tasks + " tasks in the list; Please restate" +
                                     " the task to be mark as done");
                         }
                         
@@ -97,10 +97,12 @@ public class Bill {
 
                         String lastChar = isDone[isDone.length - 1];
                         int index = Integer.parseInt(lastChar);
+//                        System.out.println(index);
+//                        System.out.println(isDone.length);
 
-                        if (index > isDone.length) {
+                        if (index > list_of_Content.size()) {
                             int no_of_tasks = list_of_Content.size();
-                            throw new InvalidException("There are only " + no_of_tasks + "tasks in the list; Please restate" +
+                            throw new InvalidException("There are only " + no_of_tasks + " tasks in the list; Please restate" +
                                     " the task to be deleted");
                         }
                         Task toBeRemove = list_of_Content.get(index - 1);
