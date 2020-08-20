@@ -34,7 +34,10 @@ public class Duke {
      * @return: returns boolean of whether or not to continue
      */
     private static boolean inputHandler(String input) {
-        String action = input.split(" ")[0];
+        String[] parts = input.split(" ", 2);
+        String action = parts[0];
+        Task task;
+        String second;
         switch(action) {
             case "list":
                 listTasks();
@@ -42,12 +45,32 @@ public class Duke {
             case "done":
                 done(input);
                 return true;
+            case "todo":
+                String todoTask = parts[1];
+                task = handleTodo(todoTask);
+                handleTask(task);
+                return true;
+            case "deadline":
+                second = parts[1];
+                String[] secondDeadlineParts = second.split(" /by ", 2);
+                String deadlineTask = secondDeadlineParts[0];
+                String deadlineBy = secondDeadlineParts[1];
+                task = handleDeadline(deadlineTask, deadlineBy);
+                handleTask(task);
+                return true;
+            case "event":
+                second = parts[1];
+                String[] secondEventParts = second.split(" /at ", 2);
+                String eventTask = secondEventParts[0];
+                String eventAt = secondEventParts[1];
+                task = handleEvent(eventTask, eventAt);
+                handleTask(task);
+                return true;
             case "bye":
                 exit();
                 return false;
             default:
-                handleTask(input);
-                return true; 
+                return true;
         }
     }
 
@@ -58,17 +81,36 @@ public class Duke {
         printOutput("     Bye. Hope to see you again soon!", true);
     }
 
-    private static void handleTask(String input) {
-        Task task = new Task(input);
-        taskList.add(task);
-        printOutput("     added: " + task.getDescription(), true);
+    private static Task handleTodo(String todoTask) {
+        Task todo = new Todo(todoTask);
+        taskList.add(todo);
+        return todo;
+    }
+
+    private static Task handleDeadline(String deadlineTask, String deadlineBy) {
+        Task deadline = new Deadline(deadlineTask, deadlineBy);
+        taskList.add(deadline);
+        return deadline;
+    }
+
+    private static Task handleEvent(String eventTask, String eventAt) {
+        Task event = new Event(eventTask, eventAt);
+        taskList.add(event);
+        return event;
+    }
+
+    private static void handleTask(Task task) {
+        int len = taskList.size();
+        printOutput("     Got it. I've added this task:\n       " +
+                        task.toString() + "\n     Now you have " + len +
+                        " tasks in the list.", true);
     }
 
     private static void listTasks() {
         String output = "     Here are the tasks in your list:\n";
         int index = 1;
         for (Task task : taskList) {
-            output += "     " + index + "." + task.strTask() + "\n";
+            output += "     " + index + "." + task.toString() + "\n";
             index++;
         }
         printOutput(output, false);
@@ -80,7 +122,7 @@ public class Duke {
         Task task = taskList.get(index - 1);
         task.setDone(true);
         String output = "     Nice! I've marked this task as done: \n" +
-                                "       " + task.strTask();
+                                "       " + task.toString();
         printOutput(output, true);
     }
 
