@@ -106,7 +106,7 @@ public class Duke {
                     + "    As you wish Sire. I have added the task:\n       "
                     + userTasks.get(userTasks.size() - 1).toString() + "\n"
                     + "    Now you have " + userTasks.size()
-                    + " tasks in the list.");
+                    + " tasks in the list.\n");
 
         }
 
