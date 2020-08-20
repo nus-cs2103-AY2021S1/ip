@@ -4,6 +4,7 @@ enum Command {
     START,
     LIST,
     DONE,
+    DELETE,
     BYE,
     TODO,
     DEADLINE,
@@ -59,6 +60,21 @@ public class Message {
                 System.out.println("Can, I help you mark this as done liao:" +
                         "\n  " +
                         item.toString());
+            } catch (Exception e) {
+                throw new WrongItemIndexException("done", list.size());
+            }
+        } else if (this.cmd == Command.DELETE) {
+            try {
+                String[] words = message.split(" ", 2);
+                int index = Integer.parseInt(words[1]);
+                Task item = list.get(index - 1);
+                list.remove(index - 1);
+                System.out.println("Okay, I deleted this liao:" +
+                        "\n  " +
+                        item.toString() +
+                        "\nNow left " +
+                        list.size() +
+                        " things in the list.");
             } catch (Exception e) {
                 throw new WrongItemIndexException("done", list.size());
             }
