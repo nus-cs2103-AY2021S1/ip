@@ -14,15 +14,33 @@ public class TaskManager {
             String[] temp = command.split(" ");
             int doneIndex = Integer.parseInt(temp[1]) - 1;
             markTaskDone(doneIndex);;
-        } else {
-            addNewTask(command);
+        } else if (command.startsWith("deadline ")) {
+            addNewDeadline(command.substring(8));
+        } else if (command.startsWith("event ")) {
+            addNewEvent(command.substring(6));
+        } else if (command.startsWith("todo ")) {
+            addNewTodo(command.substring(5));
         }
     }
 
-    public void addNewTask(String description) {
-        Task task = new Task(description);
-        taskList.add(task);
-        System.out.println("\n Task added: " + description);
+    public void addNewDeadline(String task) {
+        String[] temp = task.split(" /by ");
+        Deadline deadline = new Deadline(temp[0], temp[1]);
+        taskList.add(deadline);
+        System.out.println("\n Task added: " + deadline);
+    }
+
+    public void addNewEvent(String task) {
+        String[] temp = task.split(" /at ");;
+        Event event = new Event(temp[0], temp[1]);
+        taskList.add(event);
+        System.out.println("\n Task added: " + event);
+    }
+
+    public void addNewTodo(String task) {
+        ToDo todo = new ToDo(task);
+        taskList.add(todo);
+        System.out.println("\n Task added: " + todo);
     }
 
     public void markTaskDone(int index) {
