@@ -1,10 +1,16 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    private String type;
 
     public Task(String description) {
-        this.description = description;
-        this.isDone = false;
+        this.type="task";
+            this.description = description.substring(1);
+            this.isDone = false;
+    }
+
+    public void setType(String type){
+        this.type = type;
     }
 
     public String getStatusIcon() {

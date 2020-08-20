@@ -6,17 +6,18 @@ public class Duke {
         Scanner scan = new Scanner(System.in);
         ArrayList<Task> myList = new ArrayList<>();
 
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(
-                "_______________________________"+
-                        "Hello! I'm Duke\n"+
-                        "What can I do for you?\n"+
-                        "_______________________________"
-        );
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+//        System.out.println(
+//                "_______________________________"+
+//                        "Hello! I'm Duke\n"+
+//                        "What can I do for you?\n"+
+//                        "_______________________________"
+//        );
         String input = scan.nextLine();
         while(!input.equals("bye")) {
             if (input.equals("list")) {
@@ -39,7 +40,7 @@ public class Duke {
                         "_______________________________");
 
             }else if(input.startsWith("todo")){
-                String task = input.substring(5);
+                String task = input.substring(3);
                 ToDo currentTask = new ToDo(task);
                 myList.add(currentTask);
 
@@ -52,22 +53,20 @@ public class Duke {
 
 
             }else if(input.startsWith("deadline")){
+                    String task = input.substring(7, input.indexOf("/"));
+                    String by = input.substring(input.indexOf("/") + 4);
+                    Deadline currentTask = new Deadline(task, by);
+                    myList.add(currentTask);
 
-                String task = input.substring(9 ,input.indexOf("/"));
-                String by = input.substring(input.indexOf("/")+4);
-                Deadline currentTask = new Deadline(task, by);
-                myList.add(currentTask);
-
-                System.out.println(
-                                "_______________________________\n" +
-                                "Got it. I've added this task:\n"+
-                                currentTask.toString()+"\n"+
-                                "Now you have "+ myList.size() +" tasks in the list.\n"+
-                                "_______________________________");
-
+                    System.out.println(
+                            "_______________________________\n" +
+                                    "Got it. I've added this task:\n" +
+                                    currentTask.toString() + "\n" +
+                                    "Now you have " + myList.size() + " tasks in the list.\n" +
+                                    "_______________________________");
 
             }else if(input.startsWith("event")){
-                String task = input.substring(6 ,input.indexOf("/"));
+                String task = input.substring(4 ,input.indexOf("/"));
                 String by = input.substring(input.indexOf("/")+4);
                 Event currentTask = new Event(task, by);
                 myList.add(currentTask);
