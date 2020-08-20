@@ -1,8 +1,19 @@
-todo borrow textbook
+command
 list
+todo
+todo borrow textbook
+deadline
+deadline return book
 deadline return book /by Sunday
+event
+event project meeting
 event project meeting /at Mon 10-12pm
 deadline do homework /by no idea :-p
+list
 done 1
+done 1
+done 5
+delete 3
+delete 5
 list
 bye

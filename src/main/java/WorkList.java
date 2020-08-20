@@ -51,7 +51,7 @@ public class WorkList {
     public String deleteWork(int taskId) {
         Task tsk = this.workList.get(taskId - 1);
         this.workList.remove(taskId - 1);
-        return "Noted. MUG has removed this task: \n"
+        return "Noted. MUG has removed this task:\n"
                 + tsk
                 + "\nNow you have "
                 + this.workList.size()
