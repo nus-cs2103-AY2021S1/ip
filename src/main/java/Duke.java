@@ -58,14 +58,14 @@ public class Duke {
                     }
                 break;
                 case "todo":
-                    System.out.println(duke + "Enter task details: ");
+                    System.out.println(duke + "Enter task details:");
                     System.out.print(cmd);
                     Task toDo = new Todo(sc.nextLine());
                     list.add(toDo);
                     System.out.println(duke + "I've added '" + toDo.getTaskName() + "' to your Task List");
                     break;
                 case "deadline":
-                    System.out.println(duke + "Enter task details: ");
+                    System.out.println(duke + "Enter task details:");
                     System.out.print(cmd);
                     s = sc.nextLine().split(" /by ");
                     Task deadLine = new Deadline(s[0], s[1]);
@@ -73,7 +73,7 @@ public class Duke {
                     System.out.println(duke + "I've added '" + deadLine.getTaskName() + "' to your Task List");
                     break;
                 case "event":
-                    System.out.println(duke + "Enter task details: ");
+                    System.out.println(duke + "Enter task details:");
                     System.out.print(cmd);
                     s = sc.nextLine().split(" /at ");
                     Task event = new Event(s[0], s[1]);
