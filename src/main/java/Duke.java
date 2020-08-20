@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
         String horizontalLine = "\t-------------------------------------------------------";
+        String errorPrefix = "\t\u2639" + " OOPS!!! ";
         System.out.println(horizontalLine);
         System.out.println("\tHello! I'm Duke\n" + "\t" + "What can I do for you?");
         System.out.println(horizontalLine);
@@ -36,14 +37,25 @@ public class Duke {
                     task.markAsDone();
                     System.out.println("\tNice! I've marked this as done:");
                     System.out.println("\t  " + task.toString());
-                } else {
-                    System.out.println("\tGot it. I've added this task:");
-                    if (cmd.equalsIgnoreCase("todo")) {
+                }
+                else if (cmd.equalsIgnoreCase("todo")) {
+                    if (!scanner2.hasNext()) {
+                        System.out.println(errorPrefix
+                                + "The description of a todo cannot be empty.");
+                    } else {
+                        System.out.println("\tGot it. I've added this task:");
                         ToDo todo = new ToDo(scanner2.nextLine());
                         list.add(todo);
                         System.out.println("\t  " + todo.toString());
+                        System.out.println("\tNow you have " + list.size() + " task(s) in the list.");
                     }
-                    else if (cmd.equalsIgnoreCase("deadline")) {
+                }
+                else if (cmd.equalsIgnoreCase("deadline")) {
+                    if (!scanner2.hasNext()) {
+                        System.out.println(errorPrefix
+                                + "The description of a deadline cannot be empty.");
+                    } else {
+                        System.out.println("\tGot it. I've added this task:");
                         scanner2.useDelimiter("( /by )");
                         String description = scanner2.next();
                         scanner2.reset();
@@ -52,8 +64,15 @@ public class Duke {
                         Deadline deadline = new Deadline(description, by);
                         list.add(deadline);
                         System.out.println("\t  " + deadline.toString());
+                        System.out.println("\tNow you have " + list.size() + " task(s) in the list.");
                     }
-                    else if (cmd.equalsIgnoreCase("event")) {
+                }
+                else if (cmd.equalsIgnoreCase("event")) {
+                    if (!scanner2.hasNext()) {
+                        System.out.println(errorPrefix
+                                + "The description of an event cannot be empty.");
+                    } else {
+                        System.out.println("\tGot it. I've added this task:");
                         scanner2.useDelimiter("( /at )");
                         String description = scanner2.next();
                         scanner2.reset();
@@ -62,12 +81,12 @@ public class Duke {
                         Event event = new Event(description, at);
                         list.add(event);
                         System.out.println("\t  " + event.toString());
-                    } else {
-                        Task task = new Task(userInput);
-                        list.add(task);
-                        System.out.println("\t  " + task.toString());
+                        System.out.println("\tNow you have " + list.size() + " task(s) in the list.");
                     }
-                    System.out.println("\tNow you have " + list.size() + " task(s) in the list.");
+                }
+                else {
+                    System.out.println(errorPrefix
+                            + "I'm sorry, but I don't know what that means :-(");
                 }
             }
             System.out.println(horizontalLine);
