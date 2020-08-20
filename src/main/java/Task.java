@@ -14,7 +14,7 @@ public class Task {
     public String markAsDone () {
         this.isDone = true;
         String doneString = "____________________________________________________________\n" +
-                " Nice! I've marked this task as done: \n" +
+                " Nice! I've marked this task as done:\n" +
                 "  "+ this.getStatusIcon() + "  " + this.description + "\n" +
                 "____________________________________________________________";
         return doneString;

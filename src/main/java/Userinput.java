@@ -73,10 +73,11 @@ public class Userinput {
                             deadlineDate = deadlineDate + words[k];
                         }
                     }
+                    deadlineTask = deadlineTask.trim();
                     Deadline newDeadline = new Deadline(deadlineTask, deadlineDate);
                     this.tasks.add(newDeadline);
                     DukeOutput = "____________________________________________________________\n" +
-                            "     Got it. I've added this task: \n" +
+                            "     Got it. I've added this task:\n" +
                             "       " + newDeadline.toString() + "\n" +
                             "     Now you have " + this.tasks.size() + " " + taskGrammar + " in the list.\n" +
                             "____________________________________________________________\n";
@@ -90,12 +91,16 @@ public class Userinput {
                 } else {
                     String todoTask = "";
                     for (int i = 1; i < words.length; i++) {
-                        todoTask = todoTask + words[i] + " ";
+                        if (i != words.length -1) {
+                            todoTask = todoTask + words[i] + " ";
+                        } else {
+                            todoTask = todoTask + words[i];
+                        }
                     }
                     ToDo newToDo = new ToDo(todoTask);
                     this.tasks.add(newToDo);
                     DukeOutput = "____________________________________________________________\n" +
-                            "     Got it. I've added this task: \n" +
+                            "     Got it. I've added this task:\n" +
                             "       " + newToDo.toString() + "\n" +
                             "     Now you have " + this.tasks.size() + " " + taskGrammar + " in the list.\n" +
                             "____________________________________________________________\n";
@@ -129,7 +134,7 @@ public class Userinput {
                     Event newEvent = new Event(eventTask, eventDate);
                     this.tasks.add(newEvent);
                     DukeOutput = "____________________________________________________________\n" +
-                            "     Got it. I've added this task: \n" +
+                            "     Got it. I've added this task:\n" +
                             "       " + newEvent.toString() + "\n" +
                             "     Now you have " + this.tasks.size() + " " + taskGrammar + " in the list.\n" +
                             "____________________________________________________________\n";
@@ -145,7 +150,7 @@ public class Userinput {
                 Task removed = this.tasks.get(index);
                 this.tasks.remove(index);
                 DukeOutput = "____________________________________________________________\n" +
-                        "     Noted. I've removed this task: \n" +
+                        "     Noted. I've removed this task:\n" +
                         "       " + removed.toString() + "\n" +
                         "     Now you have "+ this.tasks.size() + " tasks in the list.\n" +
                         "____________________________________________________________";
