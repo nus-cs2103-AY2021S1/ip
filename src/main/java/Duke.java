@@ -79,6 +79,9 @@ public class Duke {
                     }
                     case "delete": {
                         int index = Integer.parseInt(taskDescription) - 1;
+                        if(index < 0 || index > tasks.size() - 1){
+                            throw new DukeException("please give a correct task index");
+                        }
                         tasks.get(index).printDeleteTask();
                         tasks.remove(index);
                         printNumberOfTask(tasks.size());
