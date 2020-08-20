@@ -22,7 +22,7 @@ public class Duke {
         ArrayList<Task> userTasks = new ArrayList<Task>();
 
         // Start chat
-        do {
+        while (true) {
             // Get input from user
             System.out.println(masterSpeak);
             input = myObj.nextLine();
@@ -77,7 +77,6 @@ public class Duke {
             String description;
             switch (input.toLowerCase().split(" ")[0]) {
                 case "deadline":
-                    //System.out.println("Deadline");
                     inputSplit = input.split(" /by ");
                     String by = inputSplit[1];
                     description = inputSplit[0].substring(8);
@@ -85,13 +84,11 @@ public class Duke {
                     userTasks.add(t);
                     break;
                 case "todo":
-                    //System.out.println("ToDo");
                     description = input.substring(4);
                     t = new ToDo(description);
                     userTasks.add(t);
                     break;
                 case "event":
-                    //System.out.println("Event");
                     inputSplit = input.split(" /at ");
                     String at = inputSplit[1];
                     description = inputSplit[0].substring(5);
@@ -111,7 +108,7 @@ public class Duke {
                     + "    Now you have " + userTasks.size()
                     + " tasks in the list.");
 
-        } while (!input.equals("bye"));
+        }
 
     }
 }
