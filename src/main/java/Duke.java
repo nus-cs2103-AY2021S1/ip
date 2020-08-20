@@ -14,8 +14,7 @@ public class Duke {
 
     public static void main(String[] args) throws DukeException{
         Scanner scanner = new Scanner(System.in);
-        Task[] taskList = new Task[100];
-        int taskIndex = 0;
+        ArrayList<Task> taskList = new ArrayList<Task>();
 
         messagePrint(
                 "Hello! I'm Duke\n" +
@@ -30,10 +29,10 @@ public class Duke {
                     //          PRINTING LIST
                 } else if (msg.equals("list")) {
                     String listMessage = "";
-                    for (int i = 0; i < taskIndex; i++) {
-                        listMessage += (i + 1) + ". " + taskList[i].toString();
+                    for (int i = 0; i < taskList.size(); i++) {
+                        listMessage += (i + 1) + ". " + taskList.get(i).toString();
                         // If is not last object, add a new line at the end of the item
-                        if (i != taskIndex - 1) {
+                        if (i != taskList.size() - 1) {
                             listMessage += "\n";
                         }
                     }
@@ -42,8 +41,10 @@ public class Duke {
                     //          UPDATING STATUS OF EVENTS
                 } else if (msg.matches("^done \\d+$")) {
                     int updateTaskIndex = Integer.valueOf(msg.substring(5, msg.length())) - 1;
-                    taskList[updateTaskIndex].updateStatus(true);
-                    String completedMessage = "Nice! I've marked this task as done:\n" + "  " + taskList[updateTaskIndex].toString();
+                    Task taskToUpdate = taskList.get(updateTaskIndex);
+                    taskToUpdate.updateStatus(true);
+                    taskList.set(updateTaskIndex, taskToUpdate);
+                    String completedMessage = "Nice! I've marked this task as done:\n" + "  " + taskList.get(updateTaskIndex).toString();
                     messagePrint(completedMessage);
 
                     //          CREATING NEW TASKS
@@ -62,7 +63,7 @@ public class Duke {
                         String date = msg.substring(atIndex + 4, msg.length());
                         newTask = new Event(task, date);
                         //              TODOS
-                    } else if (msg.matches("^todo \\S* .*$")) {
+                    } else if (msg.matches("^todo \\S.*$")) {
                         String task = msg.substring(5, msg.length()); //Number 5 = starting index of todo string.
                         newTask = new ToDo(task);
 //                        Checks for empty TODO
@@ -88,12 +89,11 @@ public class Duke {
                         newTask = null;
                         throw new DukeException(DukeExceptionType.INVALID_INPUT);
                     }
-                    taskList[taskIndex] = newTask;
-                    taskIndex++;
+                    taskList.add(newTask);
                     String newTaskMsg = String.format(
                             "Got it. I've added this task:\n" +
                                     "  %s\n" +
-                                    "Now you have %d tasks in the list.", newTask.toString(), taskIndex);
+                                    "Now you have %d tasks in the list.", newTask.toString(), taskList.size());
                     messagePrint(newTaskMsg);
                 }
             } catch (DukeException e) {
