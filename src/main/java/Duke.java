@@ -11,8 +11,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         Scanner myScanner = new Scanner(System.in);
-        Task tasks[] = new Task[100];
-        int numTask = 0;
+        ArrayList<Task> tasks = new ArrayList<Task>();
         while(true) {
             String cmd = myScanner.nextLine();
             if(cmd.equals("bye")) {
@@ -21,8 +20,8 @@ public class Duke {
             }
             else if(cmd.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
-                for(int i = 1; i <= numTask; ++i) {
-                    System.out.println(i + "." + tasks[i - 1].getStatus());
+                for(int i = 1; i <= tasks.size(); ++i) {
+                    System.out.println(i + "." + tasks.get(i - 1).getStatus());
                 }
             }
             else if(cmd.length() >= 4 && cmd.substring(0, 4).equals("done")) {
@@ -31,8 +30,8 @@ public class Duke {
                     c = c * 10 + cmd.charAt(i) - '0';
                 }
                 System.out.println("Nice! I've marked this task as done:");
-                tasks[c - 1].done();
-                System.out.println(tasks[c - 1].getStatus());
+                tasks.get(c - 1).done();
+                System.out.println(tasks.get(c - 1).getStatus());
             }
             else if(cmd.length() >= 4 && cmd.substring(0, 4).equals("todo")) {
                 try {
@@ -41,9 +40,8 @@ public class Duke {
                     Todo tmp = new Todo(getName);
                     System.out.println("Got it. I've added this task: ");
                     System.out.println("  " + tmp.getStatus());
-                    tasks[numTask] = tmp;
-                    numTask++;
-                    System.out.println("Now you have " + numTask + " tasks in the list.");
+                    tasks.add(tmp);
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 }
                 catch (DukeException ex) {
                     System.out.println(ex.getMessage());
@@ -63,9 +61,8 @@ public class Duke {
                     Deadline tmp = new Deadline(getName, getDeadline);
                     System.out.println("Got it. I've added this task: ");
                     System.out.println("  " + tmp.getStatus());
-                    tasks[numTask] = tmp;
-                    numTask++;
-                    System.out.println("Now you have " + numTask + " tasks in the list.");
+                    tasks.add(tmp);
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 }
                 catch (DukeException ex) {
                     System.out.println(ex.getMessage());
@@ -85,14 +82,23 @@ public class Duke {
                     Event tmp = new Event(getName, getTime);
                     System.out.println("Got it. I've added this task: ");
                     System.out.println("  " + tmp.getStatus());
-                    tasks[numTask] = tmp;
-                    numTask++;
-                    System.out.println("Now you have " + numTask + " tasks in the list.");
+                    tasks.add(tmp);
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     //
                 }
                 catch (DukeException ex) {
                     System.out.println(ex.getMessage());
                 }
+            }
+            else if(cmd.length() >= 6 && cmd.substring(0, 6).equals("delete")){
+                int c = 0;
+                for(int i = 7; i < cmd.length(); ++i) {
+                    c = c * 10 + cmd.charAt(i) - '0';
+                }
+                System.out.println("Noted. I've removed this task: ");
+                System.out.println(tasks.get(c - 1).getStatus());
+                tasks.remove(c - 1);
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             }
             else System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
