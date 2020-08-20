@@ -8,7 +8,7 @@ public class DukeExceptionHandler {
             return error.toString();
 
         } else if (!input.contains("todo") && !input.contains("deadline") && !input.contains("event")
-                && !input.contains("done") && !input.equals("list")) {
+                && !input.contains("done") && !input.equals("list") && !input.contains("delete")) {
             WrongInputException error = new WrongInputException(input);
             return error.toString();
         }
