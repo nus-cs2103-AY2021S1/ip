@@ -24,77 +24,141 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
         String input;
-        String line = "____________________________________________________________\n";
         String[] strings;
         ArrayList<Task> list = new ArrayList<>();
         Task task;
-        int num;
+        int num, index;
         while(isRunning){
-            input = sc.next();
+            input = sc.nextLine();
+
             if(input.equals("list")){
-                System.out.println(line);
-                System.out.println("Here are the tasks in your list:");
-                for(int i = 1; i <= list.size(); i++){
-                    task = list.get(i-1);
-                    System.out.println(i + "." + task.getTypeString() + task.getDoneString() + task.getString());
-                }
-                System.out.println(line);
+                list(list);
             }
             else if(input.equals("bye")){
-                System.out.println(line);
-                System.out.println("Bye. Hope to see you again soon!");
-                System.out.println(line);
-                isRunning = false;
+                isRunning = bye();
             }
-            else if(input.equals("done")){
+            else if(getWord(input).equals("done")){ //incomplete
                 num = sc.nextInt();
                 task = list.get(num-1).done();
                 list.add(num-1, task); //update task in list to done
-                System.out.println(line);
+                printLine();
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println(" " + task.getDoneString() + task.getString());
-                System.out.println(line);
+                printLine();
 
             }
-            else if(input.equals("todo")){
-                input = sc.nextLine();
-                task = new Task(TaskType.TODO,false, input);
-                list.add(task);
-                System.out.println(line);
-                System.out.println("Got it. I've added this task: ");
-                System.out.println(" " + task.getTypeString() + task.getDoneString() + input);
-                System.out.println("Now you have " + list.size() +" tasks in the list.");
-                System.out.println(line);
+            else if(getWord(input).equals("todo")){
+                todo(input, list);
             }
-            else if(input.equals("deadline")) {
-                input = sc.nextLine();
-                strings = input.split("/by");
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append(strings[0]).append("(by:").append(strings[1]).append(")");
-                input = stringBuilder.toString();
-                task = new Task(TaskType.DEADLINE,false, input);
-                list.add(task);
-                System.out.println(line);
-                System.out.println("Got it. I've added this task: ");
-                System.out.println(" " + task.getTypeString() + task.getDoneString() + input);
-                System.out.println("Now you have " + list.size() +" tasks in the list.");
-                System.out.println(line);
+            else if(getWord(input).equals("deadline")) {
+                deadline(input, list);
             }
-            else if(input.equals("event")) {
-                input = sc.nextLine();
-                strings = input.split("/at");
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append(strings[0]).append("(at:").append(strings[1]).append(")");
-                input = stringBuilder.toString();
-                task = new Task(TaskType.EVENT,false, input);
-                list.add(task);
-                System.out.println(line);
-                System.out.println("Got it. I've added this task: ");
-                System.out.println(" " + task.getTypeString() + task.getDoneString() + input);
-                System.out.println("Now you have " + list.size() +" tasks in the list.");
-                System.out.println(line);
+            else if(getWord(input).equals("event")) {
+                event(input, list);
+            }
+            else{
+                error();
             }
         }
+    }
+
+    public static String getWord(String string){
+
+        int firstSpaceIndex = string.indexOf(' ');
+        if(firstSpaceIndex == -1){
+            return string;
+        }
+        return string.substring(0, firstSpaceIndex);
+    }
+
+    public static void list(ArrayList<Task> list){
+        printLine();
+        Task task;
+        System.out.println("Here are the tasks in your list:");
+        for(int i = 1; i <= list.size(); i++){
+            task = list.get(i-1);
+            System.out.println(i + "." + task.getTypeString() + task.getDoneString() + task.getString());
+        }
+        printLine();
+    }
+
+    public static boolean bye(){
+        printLine();
+        System.out.println("Bye. Hope to see you again soon!");
+        printLine();
+        return false;
+    }
+
+    public static void todo(String input, ArrayList<Task> list){
+        printLine();
+        input = input.substring(4);
+        if(input.isEmpty()){
+            System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+        else {
+            Task task = new Task(TaskType.TODO, false, input);
+            list.add(task);
+            System.out.println("Got it. I've added this task: ");
+            System.out.println(" " + task.getTypeString() + task.getDoneString() + input);
+            System.out.println("Now you have " + list.size() + " tasks in the list.");
+        }
+        printLine();
+    }
+
+    public static void deadline(String input, ArrayList<Task> list){
+        input = input.substring(8);
+        printLine();
+        if(input.isEmpty()){
+            System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
+        }else {
+            int index = input.indexOf("/by");
+            if (index == -1) {
+                System.out.println("☹ OOPS!!! The description of a deadline must have a indicated deadline.");
+            } else {
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append(input.substring(0, index)).append("(by:").append(input.substring(index + 3)).append(")");
+                input = stringBuilder.toString();
+                Task task = new Task(TaskType.DEADLINE, false, input);
+                list.add(task);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(" " + task.getTypeString() + task.getDoneString() + input);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+            }
+        }
+        printLine();
+    }
+
+    public static void event(String input, ArrayList<Task> list){
+        input = input.substring(5);
+        printLine();
+        if(input.isEmpty()){
+            System.out.println("☹ OOPS!!! The description of a event cannot be empty.");
+        }else {
+            int index = input.indexOf("/at");
+            if (index == -1) {
+                System.out.println("☹ OOPS!!! The description of a event must have a indicated deadline.");
+            } else {
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append(input.substring(0, index)).append("(at:").append(input.substring(index + 3)).append(")");
+                input = stringBuilder.toString();
+                Task task = new Task(TaskType.DEADLINE, false, input);
+                list.add(task);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(" " + task.getTypeString() + task.getDoneString() + input);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+            }
+        }
+        printLine();
+    }
+
+    public static void printLine(){
+        System.out.println("____________________________________________________________\n");
+    }
+
+    public static void error(){
+        printLine();
+        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        printLine();
     }
 }
 class Task{
