@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+  
   public static String process(String input, List<Task> list) throws DukeException {
     String output;
     String[] command = input.split(" ", 2);
@@ -10,6 +11,9 @@ public class Duke {
     if (input.equals("bye")) {
       output = "\tBye. Hope to see you again soon!";
     } else if (input.equals("list")) {
+      if (list.isEmpty()) {
+        throw new DukeException("\t☹ OOPS!!! There is no task in the list.");
+      }
       StringBuilder concat = new StringBuilder();
 
       for (int i = 0; i < list.size(); i++) {
@@ -18,6 +22,10 @@ public class Duke {
 
       output = "\tHere are the tasks in your list: " + concat;
     } else if (command[0].equals("done")){
+      if (command.length < 2) {
+        throw new DukeException("\t☹ OOPS!!! The description of a done cannot be empty.");
+      }
+      
       int index = Integer.parseInt(command[1]) - 1;
       Task targetTask = list.get(index);
 
@@ -33,6 +41,10 @@ public class Duke {
         output = "\tGot it. I've added this task: \n\t\t" + newToDo + "\n\tNow you have " + list.size() + " tasks in the list.";
       }
     } else if (command[0].equals("deadline")) {
+      if (command.length < 2) {
+        throw new DukeException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
+      }
+      
       String[] commandParam = command[1].split("/by");
       String description = commandParam[0].trim();
       String by = commandParam[1].trim();
@@ -41,6 +53,10 @@ public class Duke {
       list.add(newDeadline);
       output = "\tGot it. I've added this task: \n\t\t" + newDeadline + "\n\tNow you have " + list.size() + " tasks in the list.";
     } else if (command[0].equals("event")) {
+      if (command.length < 2) {
+        throw new DukeException("\t☹ OOPS!!! The description of a event cannot be empty.");
+      }
+      
       String[] commandParam = command[1].split("/at");
       String description = commandParam[0].trim();
       String at = commandParam[1].trim();
@@ -49,6 +65,10 @@ public class Duke {
       list.add(newEvent);
       output = "\tGot it. I've added this task: \n\t\t" + newEvent + "\n\tNow you have " + list.size() + " tasks in the list.";
     } else if (command[0].equals("delete")) {
+      if (command.length < 2) {
+        throw new DukeException("\t☹ OOPS!!! The description of a delete cannot be empty.");
+      }
+      
       int index = Integer.parseInt(command[1]) - 1;
       Task targetTask = list.remove(index);
 
