@@ -34,7 +34,7 @@ public class Duke {
 
     public static void main(String[] args) {
         System.out.println("————————————————————————————————————————————————————————————");
-        System.out.println("Hello! I'm Duke! \nWhat can I do for you?");
+        System.out.println("Hello! I'm Duke!\nWhat can I do for you?");
         System.out.println("————————————————————————————————————————————————————————————");
 
         Scanner sc = new Scanner(System.in);
@@ -63,7 +63,7 @@ public class Duke {
                     if (command_lst.length == 2) {
                         Task newTask = new ToDo(command_lst[1]);
                         tasks.add(newTask);
-                        System.out.println("Got it. I've added this task: \n" + newTask.toString());
+                        System.out.println("Got it. I've added this task:\n" + newTask.toString());
                         System.out.println("Now you have " + numTasks(tasks) + " in the list.");
                     } else {
                         System.out.println("You have entered an invalid todo.");
