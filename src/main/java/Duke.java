@@ -24,11 +24,6 @@ public class Duke {
         System.out.println(farewell);
     }
 
-//    private static void add(String toAdd) {
-//        texts.add(new Task(toAdd));
-//        System.out.println("added: " + toAdd);
-//    }
-
     private static void add(String toAdd, TaskType taskType) {
         Task task = null;
         String[] splitDeadline = toAdd.split("/", 2 );
@@ -95,34 +90,37 @@ public class Duke {
         }
     }
 
+    private static boolean testNextLine(String nextLine) {
+        switch (nextLine) {
+            case "bye":
+                farewell();
+                return true;
+            case "list":
+                int num = 1;
+                System.out.println("Here yur tasks faggit: ");
+                for (Task i : texts) {
+                    System.out.println(num + "." + i.toString());
+                    num++;
+                }
+                return false;
+            default:
+                try {
+                    testNextLineSplit(nextLine);
+                } catch (UnknownCommandException | EmptyDescriptionException e) {
+                    System.out.println(e.toString());
+                }
+                return false;
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         greet();
-        boolean cont = true;
-        String nextLine = sc.nextLine();
-        while (cont) {
-            switch (nextLine) {
-                case "bye":
-                    farewell();
-                    cont = false;
-                    break;
-                case "list":
-                    int num = 1;
-                    System.out.println("Here yur tasks faggit: ");
-                    for (Task i : texts) {
-                        System.out.println(num + "." + i.toString());
-                        num++;
-                    }
-                    nextLine = sc.nextLine();
-                    break;
-                default:
-                    try {
-                        testNextLineSplit(nextLine);
-                    } catch (UnknownCommandException | EmptyDescriptionException e) {
-                        System.out.println(e.toString());
-                    }
-                    nextLine = sc.nextLine();
-            }
+        boolean saidBye = false;
+        while (!saidBye) {
+            String nextLine = "";
+            if (!saidBye) nextLine = sc.nextLine();
+            saidBye = testNextLine(nextLine);
         }
         sc.close();
     }
