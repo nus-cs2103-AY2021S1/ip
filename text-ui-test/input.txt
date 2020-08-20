@@ -12,4 +12,8 @@ deadline ewff /at ewsf
 comment
 event cwfwe /by
 event ffwef /at
+delete 0
+delete 6
+delete 1
+list
 bye

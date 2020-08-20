@@ -21,7 +21,7 @@ public class Butler {
             if (input.equals("list")) {
                 String listString = "\nHere are your list of tasks, Master.\n"
                         + "You have " + taskList.size()
-                        + (taskList.size() == 0 ? " task" : " tasks")
+                        + (taskList.size() > 1 ? " tasks" : " task")
                         + " in total.\n";
                 int index = 0;
                 for (Task task : taskList) {
@@ -39,7 +39,7 @@ public class Butler {
                 for (String index : indexList) {
                     try {
                         int i = Integer.parseInt(index);
-                        taskList.get(i-1).markComplete();
+                        taskList.get(i - 1).markComplete();
                         reply += "Task " + i + " has been marked as complete.\n";
                     } catch (Exception e) {
                         reply += "Please give a valid index. \""
@@ -50,6 +50,19 @@ public class Butler {
                 if (indexList.length == 0) {
                     reply += "No index was given. Please provide a valid index.\n";
                 }
+                System.out.println(reply);
+
+            // Delete from list
+            } else if (input.split(" ")[0].equals("delete")) {
+                String reply;
+                try {
+                    int index = Integer.parseInt(input.split(" ")[1]);
+                    taskList.remove(index-1);
+                    reply = "\nTask " + index + " has been deleted.\n";
+                } catch (Exception e) {
+                    reply = "\nPlease provide a valid index.\n";
+                }
+
                 System.out.println(reply);
 
             // Add to list

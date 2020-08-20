@@ -68,5 +68,21 @@ Excuse me, please provide a summary and time of event using the tag /at.
 Excuse me, please provide a summary and time of event using the tag /at.
 
 
+Please provide a valid index.
+
+
+Please provide a valid index.
+
+
+Task 1 has been deleted.
+
+
+Here are your list of tasks, Master.
+You have 2 tasks in total.
+
+1: [D][Y] do this (by: this date)
+2: [E][Y] conduct event (at: this location)
+
+
 It is my honor to have served you.
 Please come back again.
