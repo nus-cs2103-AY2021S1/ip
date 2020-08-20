@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Duke {
 
-    public static String divider = "_________________________________________________________________";
-    public static String logo = "             *\n"
+    private static String divider = "_________________________________________________________________";
+    private static String logo = "             *\n"
             + "      o  o  / \\  o  o\n"
             + "      |\\/ \\/   \\/ \\/|\n"
             + "      |             |\n"
@@ -18,43 +18,29 @@ public class Duke {
             + "|  .  | |  | |  |  ||     |    |     ||     ||     |\n"
             + "|__|\\_||____||__|__||___,_|    |_____| \\___/ |_____|\n";
 
-    public static List<Task> list = new ArrayList<>();
+    private static List<Task> list = new ArrayList<>();
 
-    public static void byeMessage() {
-        System.out.println(divider);
-        System.out.println("   Banana! King Bob is sad to see you go. Farewell my friend!");
-        System.out.println(divider);
+
+    private static void addList(Task task) {
+        list.add(task);
     }
 
-    public static void addedMessage(String input) {
-        System.out.println(divider);
-        System.out.println("   " + "added: " + input);
-        System.out.println(divider + "\n");
-    }
-
-    public static void doneMessage(Task task) {
-        System.out.println(divider);
-        System.out.println("   Banana! I've marked this task as done:");
-        System.out.println("      " + "[" + task.getStatusIcon() + "] " + task.getDescription());
-        System.out.println(divider + "\n");
-    }
-
-    public static void addList(String input) {
-        list.add(new Task(input));
-    }
-
-    public static void showList() {
+    private static void showList() {
         System.out.println(divider);
         System.out.println("   Banana! So many tasks?");
         Task task;
         for (int i = 0; i < list.size(); i++) {
             task = list.get(i);
-            System.out.println("   " + (i + 1) + ".[" + task.getStatusIcon() + "] " + task.getDescription());
+            System.out.println("   " + (i + 1) + ". " + task.toString());
         }
         System.out.println(divider + "\n");
     }
 
-    public static boolean isDoneCommand(String input) {
+    private static int getListSize() {
+        return list.size();
+    }
+
+    private static boolean isDoneCommand(String input) {
         if (input.length() < 5) {
             return false;
         } else {
@@ -62,7 +48,7 @@ public class Duke {
         }
     }
 
-    public static boolean isValidIndex(String input) {
+    private static boolean isValidIndex(String input) {
         String[] stringArray = input.split(" ");
         int index;
         try {
@@ -74,12 +60,64 @@ public class Duke {
         return index <= listSize && index > 0;
     }
 
-    public static int getIndex(String input) {
+    private static int getIndex(String input) {
         String[] stringArray = input.split(" ");
         return Integer.parseInt(stringArray[1]) - 1;
     }
 
-    public static void errorMessage() {
+    private static boolean isTodo(String input) {
+        String[] stringArray = input.split(" ");
+        return stringArray[0].equals("todo");
+    }
+
+    private static String getTodoDescription(String input) {
+        return input.substring(5);
+    }
+
+    private static boolean isDeadline(String input) {
+        String[] stringArray = input.split(" ");
+        return stringArray[0].equals("deadline");
+    }
+
+    private static String[] getDeadlineStrings(String input) {
+        String[] stringArray = input.split(" /by ");
+        stringArray[0] = stringArray[0].substring(9);
+        return stringArray;
+    }
+
+    private static boolean isEvent(String input) {
+        String[] stringArray = input.split(" ");
+        return stringArray[0].equals("event");
+    }
+
+    private static String[] getEventTimeStrings(String input) {
+        String[] stringArray = input.split(" /at ");
+        stringArray[0] = stringArray[0].substring(6);
+        return stringArray;
+    }
+
+    private static void byeMessage() {
+        System.out.println(divider);
+        System.out.println("   Banana! King Bob is sad to see you go. Farewell my friend!");
+        System.out.println(divider);
+    }
+
+    private static void addedMessage(Task task) {
+        System.out.println(divider);
+        System.out.println("   Banana! Banana has been added to your list!");
+        System.out.println("      " + task.toString());
+        System.out.println("   Now you have " + getListSize() + " banana(s) in your list! Nom nom..");
+        System.out.println(divider + "\n");
+    }
+
+    private static void doneMessage(Task task) {
+        System.out.println(divider);
+        System.out.println("   Banana! I've marked this task as done:");
+        System.out.println("      " + task.toString());
+        System.out.println(divider + "\n");
+    }
+
+    private static void errorMessage() {
         System.out.println(divider);
         System.out.println("   Apple Pineapple! Something is wrong with your command...");
         System.out.println(divider + "\n");
@@ -110,8 +148,16 @@ public class Duke {
                     errorMessage();
                 }
             } else {
-                addedMessage(nextLine);
-                addList(nextLine);
+                Task task;
+                task = isTodo(nextLine)
+                        ? new Todo(getTodoDescription(nextLine))
+                        : isDeadline(nextLine)
+                        ? new Deadline(getDeadlineStrings(nextLine)[0], getDeadlineStrings(nextLine)[1])
+                        : isEvent(nextLine)
+                        ? new Event(getEventTimeStrings(nextLine)[0], getEventTimeStrings(nextLine)[1])
+                        : new Task(nextLine);
+                addList(task);
+                addedMessage(task);
             }
         }
         scanner.close();
