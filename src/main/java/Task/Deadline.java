@@ -1,6 +1,10 @@
+package Task;
+
+import Task.Task;
+
 public class Deadline extends Task {
     private String deadline;
-    Deadline(String content, String deadline) {
+    public Deadline(String content, String deadline) {
         super(content);
         this.deadline = deadline;
     }

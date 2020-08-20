@@ -3,57 +3,55 @@
 
     ----------------------------------------
     ----------------------------------------
-    hello
+    OOPS!!! CAN YOU PLEASE TYPE SOMETHING MEANINGFUL?
 
     ----------------------------------------
     ----------------------------------------
     Got it. I've added this task:
-      [D][?] goeat (by: 2pm)
+      [D][?] go eat( by: Sunday 2pm)
+    Now you have 1 tasks in the list.
+
+    ----------------------------------------
+    ----------------------------------------
+    Got it. I've added this task:
+      [E][?] huhuh( at: Hihi 3pm 9pm)
     Now you have 2 tasks in the list.
 
     ----------------------------------------
     ----------------------------------------
     Got it. I've added this task:
-      [E][?] huhuh (at: 9pm)
+      [T][?] huhuhuhuhu
     Now you have 3 tasks in the list.
 
     ----------------------------------------
     ----------------------------------------
-    Got it. I've added this task:
-      [T][?] huhuhuhuhu
-    Now you have 4 tasks in the list.
+    Nice! I've marked this task as done:
+      [E][?] huhuh( at: Hihi 3pm 9pm)
 
     ----------------------------------------
     ----------------------------------------
     Nice! I've marked this task as done:
-      [D][?] goeat (by: 2pm)
+      [D][?] go eat( by: Sunday 2pm)
 
     ----------------------------------------
     ----------------------------------------
-    Nice! I've marked this task as done:
-      [?] hello
-
-    ----------------------------------------
-    ----------------------------------------
-    return something duh
+    OOPS!!! CAN YOU PLEASE TYPE SOMETHING MEANINGFUL?
 
     ----------------------------------------
     ----------------------------------------
     Here are the tasks in your list:
-    1.[?] hello
-    2.[D][?] goeat (by: 2pm)
-    3.[E][?] huhuh (at: 9pm)
-    4.[T][?] huhuhuhuhu
-    5.[?] return something duh
+    1.[D][?] go eat( by: Sunday 2pm)
+    2.[E][?] huhuh( at: Hihi 3pm 9pm)
+    3.[T][?] huhuhuhuhu
 
     ----------------------------------------
     ----------------------------------------
-    masaka hahahha kqjdnska
+    OOPS!!! CAN YOU PLEASE TYPE SOMETHING MEANINGFUL?
 
     ----------------------------------------
     ----------------------------------------
     Got it. I've added this task:
-      [D][?] study (by: years)
-    Now you have 7 tasks in the list.
+      [D][?] study( by: 100000000 years)
+    Now you have 4 tasks in the list.
 
     ----------------------------------------

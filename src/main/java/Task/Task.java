@@ -1,7 +1,9 @@
+package Task;
+
 public class Task {
     private String content;
     private Boolean isDone;
-    Task(String content) {
+    public Task(String content) {
         this.isDone = false;
         this.content = content;
     }

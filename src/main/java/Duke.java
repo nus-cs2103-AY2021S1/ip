@@ -1,3 +1,5 @@
+import Task.*;
+import Exception.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -27,6 +29,7 @@ public class Duke {
         String main_content = "";
         String deadline = "";
         for(int i = 1;i < tokens.length; i++) {
+            if(tokens[i].length() == 0) continue;
             if(tokens[i].charAt(0) == '/') {
                 for(int j = i + 1; j < tokens.length;j++) {
                     deadline += tokens[j] + " ";
@@ -36,8 +39,11 @@ public class Duke {
 
             content += tokens[i] + " ";
         }
+        deadline = deadline.strip();
+        content = content.strip();
         if(content.equals("")) throw new DukeException("Description cannot be empty PLEASE!!!");
-        if(deadline.equals("") && (commandType == Commands.DEADLINE || commandType == Commands.EVENT)) throw new DukeException("NOT ENOUGH INFORMATION!!!");
+        if(deadline.equals("") && (commandType == Commands.DEADLINE || commandType == Commands.EVENT))
+            throw new DukeInvalidArgumentException("NOT ENOUGH INFORMATION!!!");
 
         if(commandType == Commands.DEADLINE) {
 
@@ -64,7 +70,7 @@ public class Duke {
                 dk.deleteTask(mark_number - 1);
                 return "Noted. I've removed this task:\n      " + marked.returnStringForm() + "\n    Now you have " + dk.taskStorage.size() + " task(s) in the list.";
             } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("Invalid number");
+                throw new DukeInvalidArgumentException("Invalid number");
             }
 
         } else if(commandType == Commands.DONE) {
@@ -74,13 +80,14 @@ public class Duke {
                 marked.markAsDone();
                 return "Nice! I've marked this task as done:\n      " + marked.returnStringForm();
             } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("Invalid number");
+                throw new DukeInvalidArgumentException("Invalid number");
             }
         }
         return result_prefix + main_content + "\n    " + result_subfix;
     }
 
     static String processedCommand(String command, Duke dk) throws DukeException {
+        command = command.strip();
         if(command.equals("")) return "";
         String[] tokens = command.split(" ");
         try {

@@ -1,5 +1,9 @@
+package Task;
+
+import Task.Task;
+
 public class Todo extends Task {
-    Todo(String content) {
+    public Todo(String content) {
         super(content);
     }
 

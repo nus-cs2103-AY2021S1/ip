@@ -1,6 +1,10 @@
+package Task;
+
+import Task.Task;
+
 public class Event extends Task {
     private String time;
-    Event(String content, String time) {
+    public Event(String content, String time) {
         super(content);
         this.time = time;
     }
