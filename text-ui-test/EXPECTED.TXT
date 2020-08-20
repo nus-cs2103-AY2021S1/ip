@@ -73,5 +73,18 @@ Here are the tasks in your list:
 
 ----------------------
 ----------------------
+Noted. I've removed this task:
+[E][✗] watch drama (at: Sun 7-9pm)
+Now you have 4 tasks in the list.
+----------------------
+----------------------
+Here are the tasks in your list:
+1.[T][✓] wake up
+2.[D][✗] do project (by: Thursday)
+3.[D][✓] watch lecture (by: Friday)
+4.[E][✗] hangout with friends (at: Sun 1-6pm)
+
+----------------------
+----------------------
 Bye. Hope to see you again soon!
 ----------------------

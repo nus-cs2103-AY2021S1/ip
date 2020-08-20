@@ -10,4 +10,6 @@ event hangout with friends /at Sun 1-6pm
 event watch drama /at Sun 7-9pm
 done 3
 list
+delete 5
+list
 bye
