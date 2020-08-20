@@ -1,16 +1,16 @@
+import java.util.ArrayList;
+
 public class AddList {
     private final String intro = "Hello I am Duke!\nWhat can I help you with?";
     private final String goodbye = "Goodbye. See you soon!";
     private final String line = "---------------------------------------------";
-    private Task[] items;
-    private int idx;
+    private ArrayList<Task> items;
+    private int total;
 
     public AddList() {
-        this.items = new Task[100];
-        this.idx = 0;
-        System.out.println(this.line);
-        System.out.println(this.intro);
-        System.out.println(this.line);
+        this.items = new ArrayList<>();
+        this.total = 0;
+        this.addLines(this.intro);
     }
 
     public void addLines(String input) {
@@ -40,9 +40,9 @@ public class AddList {
     public void add(String input) {
         try {
             Task toAdd = this.handleInput(input);
-            this.items[this.idx] = toAdd;
-            this.idx++;
-            this.addLines(String.format("    Got it. I've added this task:\n    %s\n    Now you have %d tasks in the list.", toAdd, this.idx));
+            this.items.add(toAdd);
+            this.total++;
+            this.addLines(String.format("    Got it. I've added this task:\n    %s\n    Now you have %d tasks in the list.", toAdd, this.total));
         } catch (InvalidDescriptionException e) {
             this.addLines(e.toString());
         } catch (InvalidTypeException e) {
@@ -52,16 +52,29 @@ public class AddList {
 
     public void display() {
         String res = "Here are your tasks:\n";
-        for (int i = 0; i < this.idx; i++) {
-            res += String.format("    %d.%s\n", i + 1, this.items[i]);
+        for (int i = 0; i < this.total; i++) {
+            res += String.format("    %d.%s\n", i + 1, this.items.get(i));
         }
         this.addLines(res);
     }
 
-    public void completeTask(int idx) {
-        Task t = this.items[idx];
+    public void completeTask(int idx) throws InvalidIndexException {
+        if (idx < 0 || idx >= this.total) {
+            throw new InvalidIndexException();
+        }
+        Task t = this.items.get(idx);
         t.complete();
         this.addLines(String.format("    Nice! I've marked this task as done:\n    %s", t));
+    }
+
+    public void deleteTask(int idx) throws InvalidIndexException {
+        if (idx < 0 || idx >= this.total) {
+            throw new InvalidIndexException();
+        }
+        Task t = this.items.get(idx);
+        this.items.remove(idx);
+        this.total--;
+        this.addLines(String.format("    Nice! I've removed this task:\n    %s\n    Now you have %d tasks in the list.", t, this.total));
     }
 
     public void allocate(String input) {
@@ -73,10 +86,17 @@ public class AddList {
             this.display();
         } else if (arr[0].equals("done")) {
             int idx = Integer.parseInt(arr[1]) - 1;
-            if (idx >= 0 && idx < this.idx) {
+            try {
                 this.completeTask(idx);
-            } else {
-                this.addLines("Please choose a valid index");
+            } catch (InvalidIndexException e) {
+                this.addLines(e.toString());
+            }
+        } else if (arr[0].equals("delete")) {
+            int idx = Integer.parseInt(arr[1]) - 1;
+            try {
+                this.deleteTask(idx);
+            } catch (InvalidIndexException e) {
+                this.addLines(e.toString());
             }
         } else {
             this.add(input);

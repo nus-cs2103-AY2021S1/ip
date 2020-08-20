@@ -53,5 +53,22 @@ InvalidDescriptionException: OOPS!!! The description of a todo cannot be empty
 InvalidTypeException: OOPS!!! I'm sorry, but I don't know what that means :-(
 ---------------------------------------------
 ---------------------------------------------
+InvalidIndexException: OOPS!!! The index you have chosen is out of bounds
+---------------------------------------------
+---------------------------------------------
+InvalidIndexException: OOPS!!! The index you have chosen is out of bounds
+---------------------------------------------
+---------------------------------------------
+    Nice! I've removed this task:
+    [E][X] eat dinner (at: 7pm)
+    Now you have 2 tasks in the list.
+---------------------------------------------
+---------------------------------------------
+Here are your tasks:
+    1.[T][X] return book
+    2.[D][/] finish quiz (by: tonight)
+
+---------------------------------------------
+---------------------------------------------
 Goodbye. See you soon!
 ---------------------------------------------

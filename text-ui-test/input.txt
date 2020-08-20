@@ -7,4 +7,8 @@ done 3
 list
 todo
 blank
+done 5
+delete -1
+delete 2
+list
 bye
