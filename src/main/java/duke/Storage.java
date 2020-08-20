@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -44,7 +45,7 @@ public class Storage {
             List<String> tasksInFile = Files.readAllLines(filePath, Charset.defaultCharset());
             taskList = this.loadTaskList(tasksInFile);
         } catch (IOException e) {
-            throw new DukeException("I/O Error" + e.getStackTrace());
+            throw new DukeException("I/O Error" + Arrays.toString(e.getStackTrace()));
         }
         return taskList;
     }
