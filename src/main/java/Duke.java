@@ -132,6 +132,31 @@ public class Duke {
         System.out.println("You now have " + savedItems.size() + " tasks in the list.");
     }
 
+    private static CommandType getCommandType(String command) {
+        switch(command) {
+        case "bye":
+            // Fallthrough
+        case "exit":
+            return CommandType.EXIT;
+        case "todo":
+            return CommandType.TODO;
+        case "deadline":
+            return CommandType.DEADLINE;
+        case "event":
+            return CommandType.EVENT;
+        case "rm":
+            // Fallthrough
+        case "delete":
+            return CommandType.DELETE;
+        case "done":
+            return CommandType.DONE;
+        case "ls":
+            return CommandType.LIST;
+        default:
+            return CommandType.UNRECOGNISED;
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("Hello I'm Duke!");
         System.out.println("What can I do for you?");
@@ -144,33 +169,31 @@ public class Duke {
             userInput = scanner.nextLine();
             String command = userInput.split(" ")[0];
 
-            switch (command) {
-            case "bye":
-                // Fallthrough
-            case "exit":
+            CommandType commandType = getCommandType(command);
+
+            switch (commandType) {
+            case EXIT:
                 System.out.println("Bye. Hope to see you again soon!");
                 return;
-            case "todo":
+            case TODO:
                 todoHandler(userInput);
                 break;
-            case "deadline":
+            case DEADLINE:
                 deadlineHandler(userInput);
                 break;
-            case "event":
+            case EVENT:
                 eventHandler(userInput);
                 break;
-            case "rm":
-                // Fallthrough
-            case "delete":
+            case DELETE:
                 deleteHandler(userInput);
                 break;
-            case "done":
+            case DONE:
                 doneHandler(userInput);
                 break;
-            case "ls":
+            case LIST:
                 lsHandler();
                 break;
-            default:
+            case UNRECOGNISED:
                 System.out.println("ERROR: Unrecognised command. Did you make a typo?");
                 break;
             }
