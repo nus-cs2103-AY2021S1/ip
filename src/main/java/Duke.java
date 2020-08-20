@@ -34,6 +34,13 @@ public class Duke {
         printMessage(toPrint);
     }
 
+    public static void printDelete(Pair<String, Integer> msg) {
+        String toPrint = "     Noted. I've removed this task: \n"
+                + "       " + msg.getT()
+                + "     Now you have " + msg.getU() + " tasks in the list.\n";
+        printMessage(toPrint);
+    }
+
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -65,6 +72,15 @@ public class Duke {
                     int index = 0;
                     index = parser.parseDone(echo, tasks.length());
                     printDone(tasks.markAsDone(index));
+                }
+
+                // Checks if it matches done and an integer
+                else if (echo.matches("delete.*")) {
+                    // Strip the done, leaving the integer
+                    // TODO: 20/8/20 Cleanup
+                    int index = 0;
+                    index = parser.parseDelete(echo, tasks.length());
+                    printDelete(tasks.delete(index));
                 }
 
                 // Add items

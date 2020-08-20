@@ -29,11 +29,17 @@ public class Task {
 
     public String markAsDone(int i) {
         this.thingsToDo.get(i - 1).done = true;
-        String message = "       [✓] " + thingsToDo.get(i - 1).description + "\n";
+        String message = "       " + this.thingsToDo.get(i - 1).toString() + "\n";
         return message;
     }
 
     public int length() {
         return thingsToDo.size();
+    }
+
+    public Pair<String, Integer> delete(int i) {
+        String desc = this.thingsToDo.get(i - 1).toString();
+        this.thingsToDo.remove(i - 1);
+        return new Pair<>(desc + "\n", thingsToDo.size());
     }
 }

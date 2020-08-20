@@ -66,10 +66,28 @@ public class Parser {
 
         int toBeRemoved = Integer.parseInt(res); // No error: regex above guarantees that.
 
-        if (toBeRemoved >= listLength) {
+        if (toBeRemoved > listLength || toBeRemoved <= 0) {
             throw new DukeException("The task does not exist! (Index out of bounds)");
         }
 
         return toBeRemoved;
     }
+
+    public int parseDelete(String echo, int listLength) throws DukeException {
+        String res = "";
+        if (echo.matches("delete\\s+[0-9]+")) {
+            res = echo.replaceFirst("delete\\s+", "");
+        } else {
+            throw new DukeException("Delete must be followed by a space and an integer!");
+        }
+
+        int toBeRemoved = Integer.parseInt(res); // No error: regex above guarantees that.
+
+        if (toBeRemoved > listLength || toBeRemoved <= 0) {
+            throw new DukeException("The task does not exist! (Index out of bounds)");
+        }
+
+        return toBeRemoved;
+    }
+    // TODO: 20/8/20 lowercase handling
 }
