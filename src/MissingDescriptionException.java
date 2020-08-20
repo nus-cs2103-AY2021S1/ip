@@ -1,4 +1,6 @@
-package PACKAGE_NAME;
+public class MissingDescriptionException extends Exception {
 
-public class MissingDescriptionException {
+    public MissingDescriptionException(String s) {
+        super("☹ OOPS!!! The description of a " + s + " cannot be empty.");
+    }
 }

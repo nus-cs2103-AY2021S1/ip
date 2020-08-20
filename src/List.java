@@ -28,6 +28,15 @@ public class List {
                 "  " + t.toString();
     }
 
+    public String remove(int i) {
+        Task t = this.list.get(i-1);
+        this.list.remove(i-1);
+        this.count = this.count - 1;
+        return "Noted. I've removed this task:\n\t" +
+                "  " + t.toString() +
+                "\n\tNow you have " + count + " tasks in the list.";
+    }
+
     @Override
     public String toString() {
         if (this.count == 0) {

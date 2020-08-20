@@ -1,4 +1,7 @@
-package PACKAGE_NAME;
+public class MissingDurationException extends Exception{
 
-public class MissingDurationException {
+    public MissingDurationException(String s) {
+        super("☹ OOPS!!! The time of a " + s + " must be specified.");
+    }
+
 }
