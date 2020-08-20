@@ -4,7 +4,7 @@ public class Deadline extends Task {
     
     public Deadline(String description, String dueBy) throws PandaBotEmptyTaskDescriptionException {
         super(description);
-        this.dueBy = dueBy;
+        this.dueBy = dueBy.strip();
     }
     
     @Override
