@@ -4,7 +4,8 @@ public class Duke {
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+                + "|____/ \\__,_|_|\\_\\___|\n"
+                + "this is me testing stuff out\n";
         System.out.println("Hello from\n" + logo);
         // testing out stuff
     }
