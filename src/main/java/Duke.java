@@ -161,5 +161,6 @@ public class Duke {
                 }
             }
         }
+        scan.close();
     }
 }
