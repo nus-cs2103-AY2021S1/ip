@@ -1,1 +1,18 @@
-ad
+list
+todo task1
+todo task1
+todo
+todo task1 2 3 4
+wrong command
+event event1 /at I dunno what time
+event event2 /at
+event
+event event3
+deadline dl1 /by I dunno what time
+deadline dl2 /by
+deadline
+deadline dl3
+done 1
+list
+delete 3
+list
