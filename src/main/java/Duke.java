@@ -15,6 +15,8 @@ public class Duke {
                     replyBye();
                     sc.close();
                     break;
+                } else if (input.toLowerCase().equals("help")) {
+                    replyHelp();
                 } else if (input.toLowerCase().equals("list")) {
                     replyList(list, Task.totalTasks);
                 } else if (input.split(" ").length == 0) {
@@ -131,6 +133,27 @@ public class Duke {
         }
     }
 
+    public static void replyHelp() {
+        System.out.println("---------------------------------------------------------");
+        System.out.println("Here are the list of commands you can use! =D");
+        System.out.println("help: displays the list of commands available\n");
+        System.out.println("list: displays the list of tasks you have\n");
+        System.out.println("todo *task description*: adds a task without " +
+                "any\ndate/time attached to it\n" + "eg todo read book\n");
+        System.out.println("deadline *task description* /by *date/time*: " +
+                "adds a\ntask that needs to be done before a specific date/time\n" +
+                "eg deadline return book /by June 5 10pm\n");
+        System.out.println("event *task description* /at *time*: " +
+                "adds a task that\nstarts at a specific time and ends at a specific time\n" +
+                "eg event meeting /at 2-4pm\n");
+        System.out.println("done *task number*: marks the task with that number as\n" +
+                "done eg done 1\n");
+        System.out.println("delete *task number*: deletes the task with that number\n" +
+                "from the list eg delete 1\n");
+        System.out.println("bye: ends the session");
+        System.out.println("---------------------------------------------------------");
+    }
+
     public static void replyList(ArrayList<Task> list, int end) throws DukeException {
         String numberedList = "Here are your tasks! JIAYOU! =D";
 
@@ -167,6 +190,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("hElLoOOoOOoO! Welcome to\n" + logo);
         System.out.println("How can I help you today? : D");
+        System.out.println("Type \"help\" to view the list of commands you can use!");
 
         handleInput();
     }
