@@ -128,7 +128,9 @@ public class PersonalAssistant {
 
                 // Arguments
                 String[] arguments = cmdTokens[1].split("/by", 2);
-                if (arguments.length <= 1) {
+                if (arguments.length <= 1
+                        || arguments[0].equals("")
+                        || arguments[1].equals("")) {
                     throw new CommandMissingArgumentException();
                 }
 
@@ -155,7 +157,9 @@ public class PersonalAssistant {
 
                 // Arguments
                 String[] arguments = cmdTokens[1].split("/at", 2);
-                if (arguments.length <= 1) {
+                if (arguments.length <= 1
+                        || arguments[0].equals("")
+                        || arguments[1].equals("")) {
                     throw new CommandMissingArgumentException();
                 }
 

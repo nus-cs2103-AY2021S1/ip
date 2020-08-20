@@ -33,40 +33,64 @@
 > What can I do for you?
 
 Enter your command or "bye" to exit: 
-Added: [T][?]  one
+Added: [T][?] one
 
 Enter your command or "bye" to exit: 
-Added: [D][?]  x (by:  two)
+Added: [E][?] x  (at:  two)
 
 Enter your command or "bye" to exit: 
-Added: [D][?]  y (by:  three)
+Added: [D][?] y  (by:  three)
 
 Enter your command or "bye" to exit: 
-1. [T][?]  one
-2. [D][?]  x (by:  two)
-3. [D][?]  y (by:  three)
-
-Enter your command or "bye" to exit: 
-Task marked as complete:
-[T][?]  one
-
-Enter your command or "bye" to exit: 
-1. [T][?]  one
-2. [D][?]  x (by:  two)
-3. [D][?]  y (by:  three)
+1. [T][?] one
+2. [E][?] x  (at:  two)
+3. [D][?] y  (by:  three)
 
 Enter your command or "bye" to exit: 
 Task marked as complete:
-[D][?]  x (by:  two)
+[T][?] one
 
 Enter your command or "bye" to exit: 
-1. [T][?]  one
-2. [D][?]  x (by:  two)
-3. [D][?]  y (by:  three)
+1. [T][?] one
+2. [E][?] x  (at:  two)
+3. [D][?] y  (by:  three)
 
 Enter your command or "bye" to exit: 
 Task marked as complete:
-[D][?]  y (by:  three)
+[E][?] x  (at:  two)
+
+Enter your command or "bye" to exit: 
+1. [T][?] one
+2. [E][?] x  (at:  two)
+3. [D][?] y  (by:  three)
+
+Enter your command or "bye" to exit: 
+Task marked as complete:
+[D][?] y  (by:  three)
+
+Enter your command or "bye" to exit: 
+Invalid command
+
+Enter your command or "bye" to exit: 
+Missing arguments!
+
+Enter your command or "bye" to exit: 
+Missing arguments!
+
+Enter your command or "bye" to exit: 
+Missing arguments!
+
+Enter your command or "bye" to exit: 
+Missing arguments!
+
+Enter your command or "bye" to exit: 
+Missing arguments!
+
+Enter your command or "bye" to exit: 
+Missing arguments!
+
+Enter your command or "bye" to exit: 
+Missing arguments!
 
 Enter your command or "bye" to exit: 
 Goodbye!
