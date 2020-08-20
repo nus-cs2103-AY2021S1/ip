@@ -9,6 +9,8 @@ public class DukeException {
             + "A deadline must have a specific date/time.\n";
     protected final String MESSAGE_EVENT_NO_START_END = "    I am sorry my Lord. "
             + "An event must have a start and end time.\n";
+    protected final String MESSAGE_INDEX_OUT_OF_BOUNDS = "    I am sorry my Lord. "
+            + "That task cannot be found!";
 
     public String emptyInputMessage() {
         return MESSAGE_ALL_TASKS_EMPTY_INPUT;
