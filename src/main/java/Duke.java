@@ -8,9 +8,9 @@ public class Duke {
     }
 
     public static boolean isValidCommand(String input) {
-        return input.toLowerCase().startsWith("todo") ||
-                input.toLowerCase().startsWith("deadline") ||
-                input.toLowerCase().startsWith("event");
+        return input.toLowerCase().startsWith("todo")
+                || input.toLowerCase().startsWith("deadline")
+                || input.toLowerCase().startsWith("event");
     }
 
     public static boolean isEmptyDescription(String input) {
@@ -25,8 +25,8 @@ public class Duke {
     public static boolean hasEventStartEndTime(String input) {
         return input.contains("/at")
                 && input.split(" /at ").length == 2
-                        && input.split(" /at ")[1].contains("-")
-                                && input.split(" /at ")[1].split("-").length == 2;
+                && input.split(" /at ")[1].contains("-")
+                && input.split(" /at ")[1].split("-").length == 2;
     }
 
     public static void main(String[] args) {
@@ -44,6 +44,9 @@ public class Duke {
         // Initialise the Scanner object to get input from user
         Scanner myObj = new Scanner(System.in);
         String input;
+
+        // Initialise DukeException object
+        DukeException dE = new DukeException();
 
         // Initialise ArrayList to store tasks from user
         ArrayList<Task> userTasks = new ArrayList<Task>();
@@ -68,16 +71,15 @@ public class Duke {
                 // Get the index stated after "done" by parsing the string
                 int index = Integer.parseInt(input.substring(5)) - 1;
 
-                // Try catch block in case task was not found
-                try {
+                // Check if index is out of bounds
+                if (index >= userTasks.size()) {
+                    System.out.println(servantSpeak
+                            + dE.MESSAGE_INDEX_OUT_OF_BOUNDS);
+                } else {
                     userTasks.get(index).setDone();
                     System.out.println(servantSpeak
                             + "    As you wish Sire. I have marked this task as done:\n"
                             + "       " + userTasks.get(index).toString());
-                } catch (IndexOutOfBoundsException err) {
-                    System.out.println(servantSpeak
-                            + "    There seems to be an error your Grace. "
-                            + "That task cannot be found!");
                 }
                 System.out.println();
                 continue;
@@ -99,7 +101,6 @@ public class Duke {
             }
 
             // Check validity of input command
-            DukeException dE = new DukeException();
             if (isEmptyInput(input)) {
                 System.out.println(servantSpeak
                         + dE.MESSAGE_ALL_TASKS_EMPTY_INPUT);
