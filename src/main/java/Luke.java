@@ -9,12 +9,12 @@ public class Luke {
         System.out.printf("Luke:\n\tHey there! I'm Luke.\n\tPlease tell me what to add to your to-do list.\nYou:\n\t");
         while (true) {
             String input = sc.nextLine().toLowerCase();
-            if (Pattern.matches("^(task) +.*$", input)){
-                String task = input.replaceAll("task ", "");
-                Task newTask = new Task(task);
-                todo.add(newTask);
+            if (Pattern.matches("^(todo) +.*$", input)){
+                String whatTodo = input.replaceAll("todo ", "");
+                Task newTodo = new Task(whatTodo);
+                todo.add(newTodo);
                 String number = countTasks(todo);
-                System.out.printf("Luke:\n\tThe following task has been successfully added.\n\t%s\n\tNow you have %s in your to-do list.\nYou:\n\t", newTask, number);
+                System.out.printf("Luke:\n\tThe following task has been successfully added.\n\t%s\n\tNow you have %s in your to-do list.\nYou:\n\t", newTodo, number);
             } else if (Pattern.matches("^(deadline) +.*$", input)){
                 String[] deadline = input.split("deadline | /by ");
                 Deadline newDeadline = new Deadline(deadline[1], deadline[2]);
