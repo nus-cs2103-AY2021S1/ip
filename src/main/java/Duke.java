@@ -2,9 +2,14 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    enum Instruction {
+        BYE, LIST, DONE, DELETE, DEADLINE, EVENT, TODO, OTHERS;
+    }
+    
     public static void main(String[] args) {
         ArrayList<Task> list = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
+        Instruction thisInstruction;
         String thisTaskname;
         String thisTime;
         Task thisTask;
@@ -25,53 +30,68 @@ public class Duke {
         input = sc.nextLine();
         while(!input.equals("bye")) {
             System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
+            if (input.equals("list")) {
+                thisInstruction = Instruction.LIST;
+            } else if (input.startsWith("done")) {
+                thisInstruction = Instruction.DONE;
+            } else if (input.startsWith("delete")) {
+                thisInstruction = Instruction.DELETE;
+            } else if (input.startsWith("deadline")) {
+                thisInstruction = Instruction.DEADLINE;
+            } else if (input.startsWith("event")) {
+                thisInstruction = Instruction.EVENT;
+            } else if (input.startsWith("todo")) {
+                thisInstruction = Instruction.TODO;
+            } else {
+                thisInstruction = Instruction.OTHERS;
+            }
             try {
-                if (input.equals("list")) {
+                if (thisInstruction == Instruction.LIST) {
                     System.out.println("     Here are the tasks in your list:");
                     for (int i = 1; i <= list.size(); i++) {
                         thisTask = list.get(i - 1);
                         System.out.println("     " + i + "." + thisTask.toString());
                     }
-                } else if (input.startsWith("done")) {
+                } else if (thisInstruction == Instruction.DONE) {
                     number = Character.getNumericValue(input.charAt(input.length() - 1));
                     System.out.println("     Nice! I've marked this task as done:");
                     thisTask = list.get(number - 1);
                     thisTask.markAsDone();
                     list.set(number - 1, thisTask);
                     System.out.println("       " + thisTask.toString());
-                } else if (input.startsWith("delete")) {
+                } else if (thisInstruction == Instruction.DELETE) {
                     number = Character.getNumericValue(input.charAt(input.length() - 1));
-                    System.out.println("     Noted! I've removed this task:");
+                    System.out.println("     Sure! I've removed this task for you:");
                     thisTask = list.get(number - 1);
                     list.remove(number - 1);
                     System.out.println("       " + thisTask.toString());
                     System.out.println("     Now you have " + list.size() + " tasks in the list.");
                 } else {
-                    if (input.startsWith("deadline")) {
+                    if (thisInstruction == Instruction.DEADLINE) {
                         if (input.length() < 10) {
-                            throw new EmptyTaskNameException("     OOPS! The taskname of a deadline cannot be empty.");
+                            throw new EmptyTaskNameException("     The taskname of a deadline cannot be empty.");
                         }
-                        System.out.println("     Got it. I've added this task:");
+                        System.out.println("     No problem! I've added this task to the list:");
                         thisTaskname = input.substring(9, input.indexOf('/') - 1);
                         thisTime = input.substring(input.indexOf('/') + 4);
                         list.add(new Deadline(thisTaskname, thisTime));
-                    } else if (input.startsWith("event")) {
+                    } else if (thisInstruction == Instruction.EVENT) {
                         if (input.length() < 7) {
-                            throw new EmptyTaskNameException("     OOPS! The taskname of a event cannot be empty.");
+                            throw new EmptyTaskNameException("     The taskname of a event cannot be empty.");
                         }
-                        System.out.println("     Got it. I've added this task:");
+                        System.out.println("     No problem! I've added this task to the list:");
                         thisTaskname = input.substring(6, input.indexOf('/') - 1);
                         thisTime = input.substring(input.indexOf('/') + 4);
                         list.add(new Event(thisTaskname, thisTime));
-                    } else if (input.startsWith("todo")) {
+                    } else if (thisInstruction == Instruction.TODO) {
                         if (input.length() < 6) {
-                            throw new EmptyTaskNameException("     OOPS! The taskname of a todo cannot be empty.");
+                            throw new EmptyTaskNameException("     The taskname of a todo cannot be empty.");
                         }
-                        System.out.println("     Got it. I've added this task:");
+                        System.out.println("     No problem! I've added this task to the list:");
                         thisTaskname = input.substring(5);
                         list.add(new Todo(thisTaskname));
                     } else {
-                        throw new UnknownInstructionException("     OOPS! I'm sorry, but I don't know what that means :-(");
+                        throw new UnknownInstructionException("     I'm sorry, but I don't know what that means :-(");
                     }
                     System.out.println("       " + list.get(list.size() - 1));
                     System.out.println("     Now you have " + list.size() + " tasks in the list.");
