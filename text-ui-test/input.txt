@@ -1,0 +1,8 @@
+hi
+todo read book
+list
+done 1
+delete 1
+deadline homework
+deadline homework /by today
+bye
