@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+export LC_ALL=en_GB.UTF-8
 # create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
 then
