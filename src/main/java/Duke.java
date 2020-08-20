@@ -104,18 +104,35 @@ public class Duke {
                     doneTask.markAsDone();
                     System.out.println(horizontalLine
                             + "\r\n Nice! One thing done: \r\n"
-                            + listOfTasks.get(taskNumber).toString()
+                            + doneTask.toString()
                             + "\r\n"
                             + horizontalLine);
                 } catch (Exception e) {
                     throw new MissingTaskNumberException();
                 }
+
             } else if (commandParts[0].contains("bye")) {
                 System.out.println(horizontalLine
                         + "\r\n"
                         + "Bye! See ya soon!"
                         + "\r\n"
                         + horizontalLine);
+            } else if (commandParts[0].contains("delete")) {
+
+                int taskNumber = Integer.parseInt(commandParts[1].trim()) - 1;
+                Task deleteTask = listOfTasks.get(taskNumber);
+                listOfTasks.remove(taskNumber);
+                System.out.println(horizontalLine
+                        + "\r\n"
+                        + "Noted. Removing the following task:"
+                        + "\r\n"
+                        + deleteTask.toString()
+                        + "\r\n"
+                        + "Total number of tasks left in the list: "
+                        + listOfTasks.size()
+                        + "\r\n"
+                        + horizontalLine);
+
             } else {
                 throw new CommandNotRecognisedException();
             }
