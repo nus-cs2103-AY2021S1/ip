@@ -32,6 +32,8 @@ public class Duke {
             showTasks();
         } else if (command.equals("done")){
             markAsDone(input);
+        } else if (command.equals("delete")) {
+            delete(input);
         } else {
             add(input);
         }
@@ -46,6 +48,7 @@ public class Duke {
                                          "",
                                          "list - show all added tasks",
                                          "done <taskId> - mark the task as done",
+                                         "delete <taskId> - delete the task",
                                          "bye - close Duke");
         System.out.println(msg + "\n");
     }
@@ -84,6 +87,27 @@ public class Duke {
         }
     }
 
+    private void delete(String input) {
+        String rawNum = input.replaceAll("[^0-9]", "");
+        int taskId = Integer.parseInt(rawNum) - 1;
+        String message;
+
+        try {
+            if (taskId < 0 || taskId >= tasks.size())
+                throw new InvalidTaskIdException(rawNum);
+
+            Task task = tasks.get(taskId);
+            tasks.remove(taskId);
+            message = "Noted! I've removed this task - " + task.toString();
+            System.out.println(message);
+            summary();
+            System.out.print("\n");
+
+        } catch (DukeException e) {
+            System.out.println(e + "\n");
+        }
+    }
+
     private void add(String input) {
         String[] splitted = input.split("\\s+");
         String command = splitted[0];
@@ -102,7 +126,7 @@ public class Duke {
 
             tasks.add(task);
             System.out.println("Added '" + task.toString() + "' to list of tasks");
-            System.out.println("Now you have " + tasks.size() + " tasks in the list");
+            summary();
             System.out.print("\n");
         } catch (DukeException e) {
             System.out.println(e + "\n");
@@ -155,6 +179,10 @@ public class Duke {
         String title = String.join(" ", titles);
         String time = String.join(" ", times);
         return new Event(title, time);
+    }
+
+    private void summary() {
+        System.out.println("Now you have " + tasks.size() + " tasks in the list");
     }
 
     public static void main(String[] args) {
