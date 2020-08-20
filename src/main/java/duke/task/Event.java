@@ -1,18 +1,27 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 /**
  * Represents an event task
  */
 public class Event extends Task {
-    private final String schedule;
+    private final LocalDate schedule;
 
     public Event(String name, boolean isDone, String schedule) {
+        super(name, isDone);
+        this.schedule = LocalDate.parse(schedule);
+    }
+
+    public Event(String name, boolean isDone, LocalDate schedule) {
         super(name, isDone);
         this.schedule = schedule;
     }
 
     public String getSchedule() {
-        return this.schedule;
+        return this.schedule.format(DateTimeFormatter.ofPattern("MMM d yyyy", Locale.ENGLISH));
     }
 
     @Override

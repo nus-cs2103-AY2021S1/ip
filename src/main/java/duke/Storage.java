@@ -5,8 +5,11 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -67,21 +70,26 @@ public class Storage {
      */
     public TaskList loadTaskList(List<String> tasksInFile) {
         List<Task> tasksLoaded = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy", Locale.ENGLISH);
+
         for (String s : tasksInFile) {
             String[] taskContentArr = s.split(" [|] ");
             String taskSchedule;
             boolean taskIsDone = taskContentArr[1].equals("1");
+
             switch(taskContentArr[0]) {
             case ("T"):
                 tasksLoaded.add(new Todo(taskContentArr[2], taskIsDone));
                 break;
             case ("D"):
                 taskSchedule = taskContentArr[3];
-                tasksLoaded.add(new Deadline(taskContentArr[2], taskIsDone, taskSchedule));
+                LocalDate deadlineTime = LocalDate.parse(taskSchedule, formatter);
+                tasksLoaded.add(new Deadline(taskContentArr[2], taskIsDone, deadlineTime));
                 break;
             case ("E"):
                 taskSchedule = taskContentArr[3];
-                tasksLoaded.add(new Event(taskContentArr[2], taskIsDone, taskSchedule));
+                LocalDate eventTime = LocalDate.parse(taskSchedule, formatter);
+                tasksLoaded.add(new Event(taskContentArr[2], taskIsDone, eventTime));
                 break;
             default:
                 break;
