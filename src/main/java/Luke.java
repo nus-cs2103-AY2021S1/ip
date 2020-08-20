@@ -59,6 +59,14 @@ public class Luke {
                } catch (DoneIndexOutofboundsException e) {
                    System.out.printf("Luke:%s\nYou:\n\t", e.getMessage());
                }
+            } else if (Pattern.matches("^(delete) *[0-9]*$", input)) {
+                try {
+                    deleteTask(input, list);
+                } catch (InvalidDeleteException e) {
+                    System.out.printf("Luke:%s\nYou:\n\t", e.getMessage());
+                } catch (DeleteIndexOutofboundsException e) {
+                    System.out.printf("Luke:%s\nYou:\n\t", e.getMessage());
+                }
             } else if (input.equals("bye")) {
                 System.out.println("Luke:\n\tOh, are you leaving? Hope to see you soon!");
                 break;
@@ -108,7 +116,7 @@ public class Luke {
 
     private static void completeTask(String input, ArrayList<Task> arrayList) throws InvalidDoneException, DoneIndexOutofboundsException {
         if (input.equals("done") || input.equals("done ")) {
-            throw new InvalidDoneException("\n\tThe index of done task cannot be empty.\n\tPlease make sure you follow the correct format.");
+            throw new InvalidDoneException("\n\tThe index of done cannot be empty.\n\tPlease make sure you follow the correct format.");
         }
         String numbering = input.replaceAll("\\D+", ""); //extract only the digits from the input
         int index = Integer.parseInt(numbering) - 1;
@@ -118,6 +126,21 @@ public class Luke {
             Task done = arrayList.get(index);
             done.markAsDone();
             System.out.printf("Luke:\n\tThe following task has successfully been marked as done!\n\t\t%s\nYou:\n\t", done);
+        }
+    }
+
+    private static void deleteTask(String input, ArrayList<Task> arrayList) throws InvalidDeleteException, DeleteIndexOutofboundsException {
+        if (input.equals("delete") || input.equals("delete ")) {
+            throw new InvalidDeleteException("\n\tThe index of delete cannot be empty.\n\tPlease make sure you follow the correct format.");
+        }
+        String numbering = input.replaceAll("\\D+", ""); //extract only the digits from the input
+        int index = Integer.parseInt(numbering) - 1;
+        if (index < 0 || index >= arrayList.size()) {
+            throw new DeleteIndexOutofboundsException("\n\tYou have typed in an invalid number.\n\tPlease check your list again.");
+        } else {
+            Task delete = arrayList.get(index);
+            arrayList.remove(index);
+            System.out.printf("Luke:\n\tThe following task has successfully been deleted!\n\t\t%s\nYou:\n\t", delete);
         }
     }
 }
