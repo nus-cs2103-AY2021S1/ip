@@ -1,9 +1,10 @@
-public class MissingTaskNumberException extends Exception{
-    public MissingTaskNumberException() {
+public class CommandNotRecognisedException extends Exception{
+    public CommandNotRecognisedException() {
+
         String horizontalLine = "_______________________________________________________";
         System.out.println(horizontalLine
                 + "\r\n"
-                + "Oops! The task number cannot be missing :("
+                + "Oops! I couldn't understand what you mean :("
                 + "\r\n"
                 + horizontalLine);
     }
