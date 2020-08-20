@@ -23,8 +23,8 @@ public class Duke {
         System.out.println(divider);
 
         Scanner sc = new Scanner(System.in);
-        List<String> strArr = new ArrayList<>();
-        String[] cmdArr = {"help", "add", "list", "bye"};
+        List<Task> taskArr = new ArrayList<>();
+        String[] cmdArr = {"help", "add", "list", "done", "bye"};
 
         String input = sc.nextLine().toLowerCase();
 
@@ -38,22 +38,40 @@ public class Duke {
             } else if (input.equals("add")) {
                 System.out.println("What would you like to add?");
                 String inputToAdd = sc.nextLine();
-                strArr.add(inputToAdd);
+                taskArr.add(new Task(inputToAdd));
                 System.out.println("Added: " + inputToAdd);
             } else if (input.equals("list")) {
-                if (strArr.isEmpty()) {
-                    System.out.println("There are no items on your list");
-                    System.out.println("Use the 'add' command to start adding items!");
+                if (taskArr.isEmpty()) {
+                    System.out.println("There are no tasks on your list");
+                    System.out.println("Use the 'add' command to start adding tasks!");
                 } else {
-                    System.out.println("These are the items on your list:");
-                    for (int j = 0; j < strArr.size(); j++) {
-                        System.out.println((j + 1) + ". " + strArr.get(j));
+                    System.out.println("These are the tasks on your list:");
+                    for (int j = 0; j < taskArr.size(); j++) {
+                        System.out.println((j + 1)
+                                + ". "
+                                + "["
+                                + taskArr.get(j).getStatusIcon()
+                                + "]"
+                                + taskArr.get(j).getDescription());
                     }
                 }
+            } else if (input.equals("done")) {
+                System.out.println("Which task do you want to mark as done?");
+                int taskNum = sc.nextInt();
+
+                    System.out.println("Good job! This task is now marked as done:");
+                    taskArr.get(taskNum - 1).markAsDone();
+                    System.out.println("["
+                            + taskArr.get(taskNum - 1).getStatusIcon()
+                            + "]"
+                            + taskArr.get(taskNum - 1).getDescription());
+                    sc.nextLine();
             } else {
                 System.out.println("Sorry I didn't understand that :(");
                 System.out.println("How about entering 'help' instead?");
             }
+            System.out.println(divider);
+            System.out.println("What else would you like to do?");
             System.out.println(divider);
             input = sc.nextLine().toLowerCase();
         }
