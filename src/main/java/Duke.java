@@ -1,7 +1,5 @@
 import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Duke {
 
@@ -10,7 +8,6 @@ public class Duke {
     private final String name = "Bolot";
     private final String end = "bye";
     private ArrayList<Task> list = new ArrayList<>();
-    private final List<String> commands = Arrays.asList("todo", "deadline", "event", "done", "delete");
 
     public void printLogo() {
         System.out.println("Greetings, human. I am");
@@ -30,7 +27,7 @@ public class Duke {
 
     public void bye() {
         System.out.println(line);
-        System.out.println("Bye! Thank you for chatting with Bolot!");
+        System.out.println("Bye! Thank you for chatting with " + name + "!");
         System.out.println("Hope to see you again soon!");
         System.out.println(line);
     }
@@ -58,58 +55,54 @@ public class Duke {
         }
 
         int i = 1;
-        for (Task todo: list) {
+        for (Task todo : list) {
             System.out.println(i + ". " + todo);
             i++;
         }
     }
 
-    private String getFirstWord(String input) throws UnrecognizedTaskException {
+    private Command getFirstWord(String input) throws UnrecognizedTaskException {
 
         String firstWord = input.contains(" ")
                 ? input.substring(0, input.indexOf(" ")).toLowerCase()
                 : input.toLowerCase();
 
-        if (!commands.contains(firstWord)) {
+        try {
+            return Command.valueOf(firstWord);
+        } catch (IllegalArgumentException illegalArg) {
             throw new UnrecognizedTaskException();
-        } else {
-            return firstWord;
         }
     }
 
-    private void addTask(String firstWord, String input) throws EmptyTaskException, InvalidDateException {
+    private void addTask(Command firstWord, String input) throws EmptyTaskException, InvalidDateException {
 
-        String task = "";
+        String task;
         String date = "";
 
         try {
-            task = input.substring(firstWord.length() + 1);
+            task = input.substring(firstWord.toString().length() + 1);
         } catch (StringIndexOutOfBoundsException indexError) {
             throw new EmptyTaskException();
         }
 
-        if ("todo".equals(firstWord)) {
+        if (firstWord == Command.todo) {
             list.add(new ToDo(task));
         } else {
             try {
                 task = task.substring(0, task.indexOf('/'));
                 date = input.substring(input.indexOf('/') + 4);
             } catch (StringIndexOutOfBoundsException indexError) {
-                switch (firstWord) {
-                    case "deadline":
-                        throw new DeadlineInvalidDate();
-                    case "event":
-                        throw new EventInvalidDate();
+                if (firstWord == Command.deadline) {
+                    throw new DeadlineInvalidDate();
+                } else if (firstWord == Command.event) {
+                    throw new EventInvalidDate();
                 }
             }
 
-            switch (firstWord) {
-                case "deadline":
-                    list.add(new Deadline(task, date));
-                    break;
-                case "event":
-                    list.add(new Event(task, date));
-                    break;
+            if (firstWord == Command.deadline) {
+                list.add(new Deadline(task, date));
+            } else if (firstWord == Command.event) {
+                list.add(new Event(task, date));
             }
         }
 
@@ -145,55 +138,52 @@ public class Duke {
 
             System.out.println(line);
 
-            if (input.trim().equalsIgnoreCase("list")) {
+            try {
 
-                printList();
+                Command firstWord = getFirstWord(input.trim());
 
-            } else {
+                if (firstWord == Command.list) {
 
-                try {
+                    printList();
 
-                    String firstWord = getFirstWord(input.trim());
+                } else if (firstWord == Command.done || firstWord == Command.delete) {
 
-                    if (firstWord.equals("done") || firstWord.equals("delete")) {
+                    if (input.equals(firstWord.toString())) {
+                        System.out.print("Invalid format. After ");
+                        System.out.print("\"" + firstWord + "\", ");
+                        System.out.println("you need to put a positive integer");
+                    } else {
 
-                        if (input.equals(firstWord)) {
+                        try {
+                            int taskNo = firstWord == Command.done
+                                    ? Integer.parseInt(input.substring(5)) - 1
+                                    : Integer.parseInt(input.substring(7)) - 1;
+
+                            if (firstWord == Command.done) {
+                                markDone(taskNo);
+                            } else {
+                                deleteTask(taskNo);
+                            }
+
+                        } catch (NumberFormatException numError) {
                             System.out.print("Invalid format. After ");
                             System.out.print("\"" + firstWord + "\", ");
                             System.out.println("you need to put a positive integer");
-                        } else {
-
-                            try {
-                                int taskNo = firstWord.equals("done")
-                                        ? Integer.parseInt(input.substring(5)) - 1
-                                        : Integer.parseInt(input.substring(7)) - 1;
-
-                                if (firstWord.equals("done")) {
-                                    markDone(taskNo);
-                                } else {
-                                    deleteTask(taskNo);
-                                }
-
-                            } catch (NumberFormatException numError) {
-                                System.out.print("Invalid format. After ");
-                                System.out.print("\"" + firstWord + "\", ");
-                                System.out.println("you need to put a positive integer");
-                            }
                         }
-
-                    } else {
-
-                        addTask(firstWord, input.trim());
-
                     }
 
-                } catch (DukeException error) {
-                    System.out.println(error.getMessage());
-                } catch (IndexOutOfBoundsException indexError) {
-                    System.out.println("Invalid index.");
-                    String taskText = list.size() == 1 ? " task " : " tasks ";
-                    System.out.println("You have " + list.size() + taskText + "on your list.");
+                } else {
+
+                    addTask(firstWord, input.trim());
+
                 }
+
+            } catch (DukeException error) {
+                System.out.println(error.getMessage());
+            } catch (IndexOutOfBoundsException indexError) {
+                System.out.println("Invalid index.");
+                String taskText = list.size() == 1 ? " task " : " tasks ";
+                System.out.println("You have " + list.size() + taskText + "on your list.");
             }
 
             System.out.println(line);
@@ -202,6 +192,7 @@ public class Duke {
         }
 
         bye();
+
     }
 
     public static void main(String[] args) {
