@@ -3,7 +3,11 @@ import java.util.Scanner;
 
 public class Duke {
 
-    protected static int EVENT = 1, DEADLINE = 2, TODO = 3;
+    enum TaskType{
+        TODO,
+        DEADLINE,
+        EVENT
+    }
 
     // print all the content in the list
     public static void printList(ArrayList<Task> list){
@@ -13,15 +17,15 @@ public class Duke {
     }
 
     // return the description
-    public static String getDescription(String s, int type){
-        if(type == TODO){
+    public static String getDescription(String s, TaskType type){
+        if(type == TaskType.TODO){
             int start = 0;
             while(!s.substring(start, start + 4).equals("todo")) start++;
             System.out.println(start + 4);
             return s.substring(start + 4);
         }
-        String firstWord = type == EVENT ? "event" : "deadline", secondWord = type == EVENT ? "/at" : "/by";
-        int start = 0, firstWordLen = type == EVENT ? 5 : 8, len = s.length();
+        String firstWord = type == TaskType.EVENT ? "event" : "deadline", secondWord = type == TaskType.EVENT ? "/at" : "/by";
+        int start = 0, firstWordLen = type == TaskType.EVENT ? 5 : 8, len = s.length();
         while(!s.substring(start, start + firstWordLen).equals(firstWord)) start++;
         start += (firstWordLen + 1);
         if(start >= len) return s.substring(len);
@@ -49,8 +53,8 @@ public class Duke {
     }*/
 
     // return the string after the substring "/by" or "/at"
-    public static String getTime(String s, int type){
-        String word = type == EVENT ? "/at" : "/by";
+    public static String getTime(String s, TaskType type){
+        String word = type == TaskType.EVENT ? "/at" : "/by";
         int i = 0, len = s.length();
         while(i + 3 < len && !s.substring(i, i + 3).equals(word)) i++;
         return i + 3 == len ? "" : s.substring(i + 4);
@@ -155,7 +159,7 @@ public class Duke {
                 }
             }
             else if(command[ptr].equals("todo")){
-                String description = getDescription(inputCommand, TODO);
+                String description = getDescription(inputCommand, TaskType.TODO);
                 if(description.equals("") || ptr == command.length - 1){
                     System.out.println("____________________________________________________________");
                     System.out.println("\uD83D\uDE43 OOPS!!! The description of a todo cannot be empty.");
@@ -171,7 +175,7 @@ public class Duke {
                         "\n____________________________________________________________");
             }
             else if(command[ptr].equals("deadline")){
-                String by = getTime(inputCommand, DEADLINE), description = getDescription(inputCommand, DEADLINE);
+                String by = getTime(inputCommand, TaskType.DEADLINE), description = getDescription(inputCommand, TaskType.DEADLINE);
                 if(description.equals("") || by.equals("") || command[command.length - 1].equals("/by") || ptr == command.length - 1){
                     System.out.println("____________________________________________________________");
                     System.out.println("\uD83D\uDE43 OOPS!!! The description and time of a deadline cannot be empty." +
@@ -188,7 +192,7 @@ public class Duke {
                         "\n____________________________________________________________");
             }
             else if(command[ptr].equals("event")){
-                String at = getTime(inputCommand, EVENT), description = getDescription(inputCommand, EVENT);
+                String at = getTime(inputCommand, TaskType.EVENT), description = getDescription(inputCommand, TaskType.EVENT);
                 if(description.equals("") || at.equals("") || command[command.length - 1].equals("/at") || ptr == command.length - 1){
                     System.out.println("____________________________________________________________");
                     System.out.println("\uD83D\uDE43 OOPS!!! The description and time of a event cannot be empty." +
