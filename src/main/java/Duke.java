@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+
     public static void main(String[] args) {
         //prints Greeting message
         printGreeting();
@@ -19,46 +20,15 @@ public class Duke {
 
             System.out.println("_______________________________________________________________");
 
-            String[] instruction;
-
-            //checks for exception
+            //execute instruction & checks for exception
             try {
-                instruction = parseInstruction(lst, query);
+                parseInstruction(lst, query);
             } catch (DukeException e) {
                 System.out.println(e);
                 System.out.println("_______________________________________________________________");
                 System.out.println();
                 query = sc.nextLine();
                 continue;
-            }
-
-            //list items
-            if (instruction[0].equals("list")) {
-                printList(lst);
-            }
-
-            //handle done items
-            else if (instruction[0].equals("done")) {
-                int doneIndex = Integer.parseInt(instruction[1]);
-                doneItem(lst, doneIndex);
-
-            } else if (instruction[0].equals("delete")) {
-                int itemNum = Integer.parseInt(instruction[1]);
-                deleteItem(lst, itemNum);
-
-            } else {
-                //already tested for correctness
-                switch (instruction[0]) {
-                    case "todo":
-                        addTodo(lst, instruction[1]);
-                        break;
-                    case "deadline":
-                        addDeadline(lst, instruction[1].split(" /by ")[0], instruction[1].split(" /by ")[1]);
-                        break;
-                    case "event":
-                        addEvent(lst, instruction[1].split(" /at ")[0], instruction[1].split(" /at ")[1]);
-                        break;
-                }
             }
 
 
@@ -75,7 +45,7 @@ public class Duke {
 
     }
 
-    private static String[] parseInstruction(List<Task> lst, String query) throws DukeException {
+    private static void parseInstruction(List<Task> lst, String query) throws DukeException {
 
         //take away leading and trailing white spaces
         String[] instruction = query.strip().split(" ", 2);
@@ -83,13 +53,13 @@ public class Duke {
         switch (instruction[0]) {
             case "list":
                 if (instruction.length == 1) {
-                    return instruction;
+                    printList(lst);
                 } else {
                     throw new DukeException("Extra inputs detected! Please only input 'list'.");
                 }
+                break;
 
             case "delete":
-            case "done":
                 //done with no other arguments
                 if (instruction.length == 1) {
                     throw new DukeException("Please specify item number!");
@@ -106,17 +76,44 @@ public class Duke {
 
                     //second argument wrong format
                     catch (NumberFormatException e) {
-                        throw new DukeException("Please only input '" + instruction[0] + " <item number>' with no other inputs!");
+                        throw new DukeException("Please only input 'delete <item number>' with no other inputs!");
                     }
-                } else {
-                    return instruction;
+
+                    int itemNum = Integer.parseInt(instruction[1]);
+                    deleteItem(lst, itemNum);
+                }
+                break;
+
+            case "done":
+
+                //done with no other arguments
+                if (instruction.length == 1) {
+                    throw new DukeException("Please specify item number!");
                 }
 
+                //done with exactly 2 inputs
+                else if (instruction.length == 2) {
+
+                    //check if second argument is integer
+                    try {
+                        if ((Integer.parseInt(instruction[1]) < 1) || (Integer.parseInt(instruction[1]) > lst.size())) {
+                            throw new DukeException("Please enter a valid item number from the list!");
+                        }
+                    }
+                    //second argument wrong format
+                    catch (NumberFormatException e) {
+                        throw new DukeException("Please only input 'done <item number>' with no other inputs!");
+                    }
+                    int doneIndex = Integer.parseInt(instruction[1]);
+                    doneItem(lst, doneIndex);
+                }
                 break;
 
             case "todo":
                 if (instruction.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                } else {
+                    addTodo(lst, instruction[1]);
                 }
                 break;
 
@@ -124,13 +121,16 @@ public class Duke {
                 if (instruction.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                 } else {
+
                     //check if contains deadline " /by "
                     if (instruction[1].contains(" /by ")) {
-                        return instruction;
+                        addDeadline(lst, instruction[1].split(" /by ")[0], instruction[1].split(" /by ")[1]);
+
                     } else {
                         throw new DukeException("Please input in the following format 'deadline <description> /by <time>' ");
                     }
                 }
+                break;
 
 
             case "event":
@@ -139,21 +139,17 @@ public class Duke {
                 } else {
                     //check if contains event " /at "
                     if (instruction[1].contains(" /at ")) {
-                        return instruction;
+                        addEvent(lst, instruction[1].split(" /at ")[0], instruction[1].split(" /at ")[1]);
                     } else {
                         throw new DukeException("Please input in the following format 'event <description> /at <time>' ");
                     }
                 }
-
-
-
-
+                break;
 
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
-        return instruction;
     }
 
     private static void printExit() {
