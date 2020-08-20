@@ -10,7 +10,7 @@ public class Duke {
         Message start = new Message("start", list);
         try {
             start.reply();
-        } catch (Exception e) {
+        } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
 
@@ -18,7 +18,7 @@ public class Duke {
             Message msg = new Message(sc.nextLine(), list);
             try {
                 msg.reply();
-            } catch (Exception e) {
+            } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
             if (msg.getCmd() == Command.BYE) {
