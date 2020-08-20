@@ -19,6 +19,10 @@ public class TaskList {
         return this.todoList.get(index);
     }
 
+    public int getLength() {
+        return this.todoList.size();
+    }
+
     public void listTasks() {
         System.out.println("     Here are the tasks in your list:");
         for (int i = 0; i < this.todoList.size(); i++) {
