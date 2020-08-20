@@ -16,6 +16,10 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.instructions;
+        if (this.isComplete) {
+            return "[✓] " +  this.instructions;
+        } else {
+            return "[✗] " + this.instructions;
+        }
     }
 }
