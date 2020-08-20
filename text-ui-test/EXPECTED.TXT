@@ -1,4 +1,9 @@
 ----------Bot made by Hendey Fan----------
+This is a chat bot made by Hendey Fan.
+What can this magnificent bot do for you?
+------------------------------------------
+
+----------Bot made by Hendey Fan----------
 Error: command does not exist :(
 Type '!command' for list of commands
 ------------------------------------------
