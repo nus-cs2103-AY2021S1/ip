@@ -1,7 +1,20 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+
+
 public class Duke {
+
+    enum CMD {
+        BYE,
+        LIST,
+        TODO,
+        DEADLINE,
+        EVENT,
+        DONE,
+        DELETE,
+        DEFAULT
+    }
 
     private static final String logo =
             "       ,\n" +
@@ -37,15 +50,7 @@ public class Duke {
 
     private static final String line = "-------------------------------------------------------------------------------";
 
-    //commands
-    private static final String CMD_EXIT = "bye";
-    private static final String CMD_LIST = "list";
-    private static final String CMD_DONE = "done";
 
-    private static final String CMD_TODO = "todo";
-    private static final String CMD_DEADLINE = "deadline";
-    private static final String CMD_EVENT = "event";
-    private static final String CMD_DELETE = "delete";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -63,18 +68,24 @@ public class Duke {
             try {
                 //split command
                 int space_idx = userInput.indexOf(' ');
-                String command = space_idx  == -1 ? userInput : userInput.substring(0, space_idx);
+                CMD command;
+
+                try {
+                    command = CMD.valueOf((space_idx  == -1 ? userInput : userInput.substring(0, space_idx)).toUpperCase());
+                } catch (IllegalArgumentException e) {
+                    command = CMD.DEFAULT;
+                }
                 String rest = space_idx == -1 ? "" : userInput.substring(space_idx + 1).trim();
 
                 String item, date;
                 int date_idx;
 
                 switch(command) {
-                    case CMD_EXIT:
+                    case BYE:
                         running = false;
                         break;
 
-                    case CMD_TODO:
+                    case TODO:
                         tasks.add(new Todo(rest));
                         if (rest.isEmpty()) {
                             throw new DukeException("ME FINKZ DAT U NED 2 ENTR NAYM 4 UR TODO ITEM LULZ");
@@ -85,7 +96,7 @@ public class Duke {
 
                         break;
 
-                    case CMD_DEADLINE:
+                    case DEADLINE:
                         if (rest.isEmpty()) {
                             throw new DukeException("ME FINKZ DAT U NED 2 ENTR NAYM 4 UR DEDLINE ITEM LULZ");
                         } else {
@@ -109,7 +120,7 @@ public class Duke {
                         }
                         break;
 
-                    case CMD_EVENT:
+                    case EVENT:
                         date_idx = rest.indexOf("/at");
 
                         if (rest.isEmpty()) {
@@ -136,7 +147,7 @@ public class Duke {
 
                         break;
 
-                    case CMD_LIST:
+                    case LIST:
                         if (tasks.isEmpty()) {
                             System.out.println(fmtMsg("UR LIST HAZ NUTHIN LOLOL"));
                         } else {
@@ -148,7 +159,7 @@ public class Duke {
                         }
                         break;
 
-                    case CMD_DONE:
+                    case DONE:
                         try {
                             int idx = Integer.parseInt(rest) - 1;
                             if (idx < 0 || idx >= tasks.size()) {
@@ -163,7 +174,7 @@ public class Duke {
                         }
                         break;
 
-                    case CMD_DELETE:
+                    case DELETE:
                         try {
                             int idx = Integer.parseInt(rest) - 1;
                             if (tasks.isEmpty()) {
@@ -181,8 +192,9 @@ public class Duke {
                         }
                         break;
 
-                    default:
+                    case DEFAULT:
                         System.out.println(fmtMsg("NOTD WIF THX."));
+                        break;
                 }
 
             } catch (DukeException e) {
