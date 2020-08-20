@@ -11,9 +11,9 @@ public class Duke {
     private final String PADDING = "      ";
 
     private enum Commands {
-        EXIT("BYE"), ADD("ADD"), LIST("LIST"),
-        DONE("DONE"), TODO("TODO"), EVENT("EVENT"),
-        DEADLINE("DEADLINE");
+        EXIT("BYE"), DELETE("DELETE "), LIST("LIST"),
+        DONE("DONE "), TODO("TODO "), EVENT("EVENT "),
+        DEADLINE("DEADLINE "), DELETEALL("DELETE ALL");
         private final String str;
         Commands(String str){
             this.str = str;
@@ -45,9 +45,9 @@ public class Duke {
                 if (input.toUpperCase().equals(Commands.LIST.getString())) {
                     displayStorageList();
                 }
-                else if (input.length() >= 4 && input.substring(0,4).toUpperCase().equals(Commands.DONE.getString())) {
+                else if (input.length() >= 5 && input.substring(0,5).toUpperCase().equals(Commands.DONE.getString())) {
                     try {
-                        int index = Integer.parseInt(input.substring(4).trim());
+                        int index = Integer.parseInt(input.substring(5).trim());
                         setTaskDone(index);
                     } catch (NumberFormatException ex) {
                         printError("Please input an Integer for the \"Done\" command.");
@@ -55,21 +55,38 @@ public class Duke {
                         printError(ex.getMessage());
                     }
                 }
-                else if (input.length() >= 4 && input.substring(0,4).toUpperCase().equals(Commands.TODO.getString())) {
+                else if (input.toUpperCase().equals(Commands.DELETEALL.getString())) {
                     try {
-                        String name = input.substring(4).trim();
+                        deleteAllTasks();
+                    } catch (DukeException ex) {
+                        printError(ex.getMessage());
+                    }
+                }
+                else if (input.length() >= 7 && input.substring(0,7).toUpperCase().equals(Commands.DELETE.getString())) {
+                    try {
+                        int index = Integer.parseInt(input.substring(7).trim());
+                        deleteTask(index);
+                    } catch (NumberFormatException ex) {
+                        printError("Please input an Integer for the \"Delete\" command.");
+                    } catch (DukeException ex) {
+                        printError(ex.getMessage());
+                    }
+                }
+                else if (input.length() >= 5 && input.substring(0,5).toUpperCase().equals(Commands.TODO.getString())) {
+                    try {
+                        String name = input.substring(5).trim();
                         addToStorageList(new Todo(name));
                     } catch (DukeException ex) {
                         printError(ex.getMessage());
                     }
                 }
-                else if (input.length() >= 5 && input.substring(0,5).toUpperCase().equals(Commands.EVENT.getString())) {
+                else if (input.length() >= 6 && input.substring(0,6).toUpperCase().equals(Commands.EVENT.getString())) {
                     try {
                         int limiterPosition = input.indexOf(" /at ");
                         String name;
                         String timing;
                         if (limiterPosition != -1) {
-                            name = input.substring(5, limiterPosition).trim();
+                            name = input.substring(6, limiterPosition).trim();
                             timing = input.substring(limiterPosition + 5).trim();
                         } else {
                             throw new DukeException("Missing date/time for Event task");
@@ -79,14 +96,14 @@ public class Duke {
                         printError(ex.getMessage());
                     }
                 }
-                else if (input.length() >= 8 && input.substring(0,8).toUpperCase().equals(Commands.DEADLINE.getString())) {
+                else if (input.length() >= 9 && input.substring(0,9).toUpperCase().equals(Commands.DEADLINE.getString())) {
                     try {
                         int limiterPosition = input.indexOf(" /by ");
                         String name;
                         String dueDate;
 
                         if (limiterPosition != -1) {
-                            name = input.substring(8, limiterPosition).trim();
+                            name = input.substring(9, limiterPosition).trim();
                             dueDate = input.substring(limiterPosition + 5).trim();
                         } else {
                             throw new DukeException("Missing deadline for Deadline task");
@@ -139,7 +156,30 @@ public class Duke {
             throw new DukeException("Invalid index, cannot find task.");
         }
         this.storageList.get(index-1).setDoneness(true);
-        String message = "Nice job! I'll mark that as done:" + NEW_LINE + PADDING + this.storageList.get(index-1).toString();
+        String message = "Nice job! I'll mark that as done:" + NEW_LINE + PADDING
+                + "  " + this.storageList.get(index-1).toString();
+        System.out.printf(MESSAGE_TEMPLATE, message);
+    }
+
+    private void deleteTask(int index) throws DukeException {
+        if (index <= 0 || index > this.storageList.size()) {
+            throw new DukeException("Invalid index, cannot find task.");
+        }
+        Task task = this.storageList.get(index-1);
+        this.storageList.remove(index-1);
+        String numOfTasks = this.storageList.size() == 1 ? "1 task" : this.storageList.size() + " tasks";
+        String message = "Noted. The following task has been removed:"
+                + NEW_LINE + PADDING + "  " + task.toString() + NEW_LINE
+                + PADDING + "Now you have "  + numOfTasks + " left.";;
+        System.out.printf(MESSAGE_TEMPLATE, message);
+    }
+
+    private void deleteAllTasks() throws DukeException {
+        if (this.storageList.size() == 0) {
+            throw new DukeException("Your list is already empty.");
+        }
+        this.storageList.clear();
+        String message = "Noted. All tasks have been removed.";
         System.out.printf(MESSAGE_TEMPLATE, message);
     }
 
