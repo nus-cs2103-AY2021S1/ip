@@ -31,14 +31,14 @@ public class Duke {
                 try {
                     int task_id = Integer.parseInt(input_split[1]);
                     if (task_id <=0 || task_id > user_list.size()) {
-                        System.out.println("Invalid input! That task does not exist!");
+                        System.out.println(line + "Invalid input! That task does not exist! \n" + line);
                     } else {
                         user_list.get(task_id - 1).setCompleted();
                         System.out.println(line + "Nice! I've marked this task as done: \n"
                                 + user_list.get(task_id - 1) + "\n" + line);
                     }
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Invalid input! Please specify which task you have completed!");
+                    System.out.println(line + "Invalid input! Please specify which task you have completed! \n" + line);
                 }
 
             } else if (input_split[0].equals("todo")) { // Add new todo
@@ -50,7 +50,7 @@ public class Duke {
                             + "\n" + line;
                     System.out.println(output);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Invalid input! Please specify what your todo is!");
+                    System.out.println(line + "Invalid input! Please specify your todo description! \n" + line);
                 }
 
             } else if (input_split[0].equals("deadline")) { // Add new deadline
@@ -63,7 +63,7 @@ public class Duke {
                             + "\n" + line;
                     System.out.println(output);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Invalid input! Please specify what your deadline!");
+                    System.out.println(line + "Invalid input! Please specify your deadline description and details! \n" + line);
                 }
 
             } else if (input_split[0].equals("event")) { // Add new event
@@ -76,11 +76,11 @@ public class Duke {
                             + "\n" + line;
                     System.out.println(output);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Invalid input! Please specify what your event is!");
+                    System.out.println(line + "Invalid input! Please specify your event description and details! \n" + line);
                 }
 
             } else {
-                System.out.println("Invalid input! Please try again!");
+                System.out.println(line + "Invalid input! Please try again! \n" + line);
             }
         }
 
