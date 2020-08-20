@@ -1,10 +1,11 @@
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        HashSet<String> list = new HashSet<>();
+        List<String> list = new ArrayList<>();
 
         Message start = new Message("start", list);
         start.reply();

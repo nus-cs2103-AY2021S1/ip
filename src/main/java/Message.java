@@ -1,4 +1,4 @@
-import java.util.HashSet;
+import java.util.List;
 
 enum Command {
     START,
@@ -9,10 +9,10 @@ enum Command {
 public class Message {
     private final String message;
     private Command cmd;
-    private HashSet<String> list;
+    private List<String> list;
 
     // public constructor
-    public Message(String message, HashSet<String> list) {
+    public Message(String message, List<String> list) {
         this.message = message;
         String[] words = message.split(" ");
         String cmdString = words[0];
