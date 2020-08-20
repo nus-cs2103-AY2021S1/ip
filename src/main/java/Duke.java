@@ -18,7 +18,7 @@ public class Duke {
                 + "    |____/ \\__,_|_|\\_\\___|\n";
         System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
         System.out.println("    Hello from\n" + logo);
-        System.out.println("    Hey there! This is Duke here(๑´•.̫ • `๑)~");
+        System.out.println("    Hey there! This is Duke here~");
         System.out.println("    How may I help you today?");
         System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
 
