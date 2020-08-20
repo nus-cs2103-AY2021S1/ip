@@ -16,32 +16,71 @@ public class Duke {
 
     public static void bot(){
         Scanner sc = new Scanner(System.in);
-        while(sc.hasNext()) {
-            String input = sc.nextLine();
-            if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            } else if (input.equals("list")) {
-                printlist();
-            } else if (input.split(" ")[0].equals("done")) {
-               done(Integer.parseInt(input.split(" ")[1]));
-            } else if (input.split(" ")[0].equals("todo")) {
-                add(new ToDo(input.split(" ")[1]));
-            } else if (input.split(" ")[0].equals("deadline")) {
-                add(new Deadlines(input.split(" ")[1], input.split("/by")[1]));
-            } else if (input.split(" ")[0].equals("event")) {
-                add(new Events(input.split(" ")[1], input.split("/at")[1]));
-            } else {
-                System.out.println("error");
+        try {
+            while (sc.hasNext()) {
+                String input = sc.nextLine();
+                String first = input.split(" ")[0];
+                if (input.equals("bye")) {
+                    System.out.println("Bye. Hope to see you again soon!");
+                    break;
+                } else if (input.equals("list")) {
+                    printlist();
+                } else if (input.split(" ")[0].equals("done")) {
+                    done(Integer.parseInt(input.split(" ")[1]));
+                } else if (first.equals("todo")|| first.equals("deadline") || first.equals("event")) {
+                  add(input);
+                } else {
+                    throw new DukeException("Sorry I don't know what you mean");
+                }
             }
+        }
+        catch (DukeException ex){
+            System.out.println(ex.getMessage());
         }
     }
 
-    public static void add(Task newTask){
-        list[index] = newTask;
-        index += 1;
-        System.out.println("added: " + newTask.toString());
-        System.out.println("Now you have "+index+" tasks in the list.");
+    public static void add(String input) throws DukeException{
+
+        if (input.split(" ")[0].equals("todo")) {
+            String[] temp = input.split(" ",2);
+            if (temp.length == 1) {
+                throw new DukeException("Description of todo cannot be empty!");
+            }
+            Task newTask = new ToDo(input.split(" ")[1]);
+            list[index] = newTask;
+            index += 1;
+            System.out.println("added: " + newTask.toString());
+            System.out.println("Now you have "+index+" tasks in the list.");
+        } else if (input.split(" ")[0].equals("deadline")) {
+            String[] temp = input.split(" ",2);
+            if (temp.length == 1) {
+                throw new DukeException("Description of deadline cannot be empty!");
+            }
+            String[] temp2 = input.split("/by",2);
+            if (temp2.length <= 1){
+                throw new DukeException("You need to specify a time!");
+            }
+            Task newTask = new Deadlines(input.split(" ")[1], input.split("/by")[1]);
+            list[index] = newTask;
+            index += 1;
+            System.out.println("added: " + newTask.toString());
+            System.out.println("Now you have "+index+" tasks in the list.");
+        } else if (input.split(" ")[0].equals("event")) {
+            String[] temp = input.split(" ",2);
+            if (temp.length == 1) {
+                throw new DukeException("Description of event cannot be empty!");
+            }
+            String[] temp2 = input.split("/by",2);
+            if (temp2.length <= 1){
+                throw new DukeException("You need to specify a time!");
+            }
+            Task newTask = new Events(input.split(" ")[1], input.split("/at")[1]);
+            list[index] = newTask;
+            index += 1;
+            System.out.println("added: " + newTask.toString());
+            System.out.println("Now you have "+index+" tasks in the list.");
+        }
+
     }
 
     public static void done(int num){
