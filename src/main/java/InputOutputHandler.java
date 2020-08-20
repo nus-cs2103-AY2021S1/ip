@@ -9,7 +9,7 @@ public class InputOutputHandler {
     String[] replyArr;
 
     String topPartOfBotReplyMessage = separationLine + indentation;
-    String botPartOfBotReplyMessage = "\n" + separationLine;
+    String botPartOfBotReplyMessage = "\n" + separationLine.substring(0, separationLine.length() - 1);
 
     TaskManager taskManager = new TaskManager();
 
