@@ -1,6 +1,8 @@
 Hello I'm Duke!
 What can I do for you?
 $ No tasks found. Start adding your first few tasks!
+$ ERROR: Description of todo cannot be empty.
+$ No tasks found. Start adding your first few tasks!
 $ Got it. I've added this task:
 [T][✘] eat lunch later
 You now have 1 tasks in the list.
@@ -16,6 +18,21 @@ $ Here are the tasks in your list:
 You now have 2 tasks in the list.
 $ Nice! I've marked this task as done:
 1. [T][✓] eat lunch later
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [T][✘] eat dinner later
+You now have 2 tasks in the list.
+$ ERROR: Description of deadline cannot be empty.
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [T][✘] eat dinner later
+You now have 2 tasks in the list.
+$ ERROR: Deadline not found. Did you input a deadline with `/by`?
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [T][✘] eat dinner later
+You now have 2 tasks in the list.
+$ ERROR: Multiple deadlines found. Please only input one deadline.
 $ Here are the tasks in your list:
 1. [T][✓] eat lunch later
 2. [T][✘] eat dinner later
@@ -39,6 +56,27 @@ $ Here are the tasks in your list:
 You now have 4 tasks in the list.
 $ Nice! I've marked this task as done:
 3. [D][✓] finish ip (by: today 2359hrs)
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [T][✘] eat dinner later
+3. [D][✓] finish ip (by: today 2359hrs)
+4. [D][✘] watch cs2100 lecture (by: tomorrow 7am)
+You now have 4 tasks in the list.
+$ ERROR: Description of event cannot be empty.
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [T][✘] eat dinner later
+3. [D][✓] finish ip (by: today 2359hrs)
+4. [D][✘] watch cs2100 lecture (by: tomorrow 7am)
+You now have 4 tasks in the list.
+$ ERROR: Date/time not found. Did you input a date/time with `/at`?
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [T][✘] eat dinner later
+3. [D][✓] finish ip (by: today 2359hrs)
+4. [D][✘] watch cs2100 lecture (by: tomorrow 7am)
+You now have 4 tasks in the list.
+$ ERROR: Multiple date/times found. Please only input one date/time.
 $ Here are the tasks in your list:
 1. [T][✓] eat lunch later
 2. [T][✘] eat dinner later
@@ -89,4 +127,88 @@ $ Here are the tasks in your list:
 6. [E][✓] submit temperature declaration (at: 11am)
 7. [T][✘] collect stuff from hackerspace nus
 You now have 7 tasks in the list.
+$ ERROR: No task no. found. Did you input the task no. of the task you'd like to mark as done?
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [T][✘] eat dinner later
+3. [D][✓] finish ip (by: today 2359hrs)
+4. [D][✘] watch cs2100 lecture (by: tomorrow 7am)
+5. [E][✘] go eat lunch with jingyen (at: 12 noon today)
+6. [E][✓] submit temperature declaration (at: 11am)
+7. [T][✘] collect stuff from hackerspace nus
+You now have 7 tasks in the list.
+$ ERROR: Unrecognized task. Please input the task no. of the task you'd like to mark as done.
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [T][✘] eat dinner later
+3. [D][✓] finish ip (by: today 2359hrs)
+4. [D][✘] watch cs2100 lecture (by: tomorrow 7am)
+5. [E][✘] go eat lunch with jingyen (at: 12 noon today)
+6. [E][✓] submit temperature declaration (at: 11am)
+7. [T][✘] collect stuff from hackerspace nus
+You now have 7 tasks in the list.
+$ ERROR: Task no. not found. Does that task exist?
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [T][✘] eat dinner later
+3. [D][✓] finish ip (by: today 2359hrs)
+4. [D][✘] watch cs2100 lecture (by: tomorrow 7am)
+5. [E][✘] go eat lunch with jingyen (at: 12 noon today)
+6. [E][✓] submit temperature declaration (at: 11am)
+7. [T][✘] collect stuff from hackerspace nus
+You now have 7 tasks in the list.
+$ ERROR: Unrecognised command. Did you make a typo?
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [T][✘] eat dinner later
+3. [D][✓] finish ip (by: today 2359hrs)
+4. [D][✘] watch cs2100 lecture (by: tomorrow 7am)
+5. [E][✘] go eat lunch with jingyen (at: 12 noon today)
+6. [E][✓] submit temperature declaration (at: 11am)
+7. [T][✘] collect stuff from hackerspace nus
+You now have 7 tasks in the list.
+$ Noted. I've removed this task:
+2. [T][✘] eat dinner later
+You now have 6 tasks in the list.
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [D][✓] finish ip (by: today 2359hrs)
+3. [D][✘] watch cs2100 lecture (by: tomorrow 7am)
+4. [E][✘] go eat lunch with jingyen (at: 12 noon today)
+5. [E][✓] submit temperature declaration (at: 11am)
+6. [T][✘] collect stuff from hackerspace nus
+You now have 6 tasks in the list.
+$ Noted. I've removed this task:
+2. [D][✓] finish ip (by: today 2359hrs)
+You now have 5 tasks in the list.
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [D][✘] watch cs2100 lecture (by: tomorrow 7am)
+3. [E][✘] go eat lunch with jingyen (at: 12 noon today)
+4. [E][✓] submit temperature declaration (at: 11am)
+5. [T][✘] collect stuff from hackerspace nus
+You now have 5 tasks in the list.
+$ Noted. I've removed this task:
+4. [E][✓] submit temperature declaration (at: 11am)
+You now have 4 tasks in the list.
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [D][✘] watch cs2100 lecture (by: tomorrow 7am)
+3. [E][✘] go eat lunch with jingyen (at: 12 noon today)
+4. [T][✘] collect stuff from hackerspace nus
+You now have 4 tasks in the list.
+$ ERROR: Unrecognized task. Please input the task no. of the task you'd like to delete.
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [D][✘] watch cs2100 lecture (by: tomorrow 7am)
+3. [E][✘] go eat lunch with jingyen (at: 12 noon today)
+4. [T][✘] collect stuff from hackerspace nus
+You now have 4 tasks in the list.
+$ ERROR: Task no. not found. Does that task exist?
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [D][✘] watch cs2100 lecture (by: tomorrow 7am)
+3. [E][✘] go eat lunch with jingyen (at: 12 noon today)
+4. [T][✘] collect stuff from hackerspace nus
+You now have 4 tasks in the list.
 $ Bye. Hope to see you again soon!

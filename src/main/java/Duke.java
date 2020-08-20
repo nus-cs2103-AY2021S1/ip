@@ -103,6 +103,31 @@ public class Duke {
         printRemainingCount();
     }
 
+    private static void deleteHandler(String userInput) {
+        int taskNo;
+        try {
+            taskNo = Integer.parseInt(userInput.split(" ")[1]);
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
+            System.out.println("ERROR: No task no. found. Did you input the task no. of the task you'd like to delete?");
+            return;
+        } catch (NumberFormatException nfe) {
+            System.out.println("ERROR: Unrecognized task. Please input the task no. of the task you'd like to delete.");
+            return;
+        }
+
+        Task task;
+        try {
+            task = savedItems.remove(taskNo - 1);
+        } catch (IndexOutOfBoundsException ioobe) {
+            System.out.println("ERROR: Task no. not found. Does that task exist?");
+            return;
+        }
+
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(taskNo + ". " + task);
+        printRemainingCount();
+    }
+
     private static void printRemainingCount() {
         System.out.println("You now have " + savedItems.size() + " tasks in the list.");
     }
@@ -133,6 +158,11 @@ public class Duke {
                 break;
             case "event":
                 eventHandler(userInput);
+                break;
+            case "rm":
+                // Fallthrough
+            case "delete":
+                deleteHandler(userInput);
                 break;
             case "done":
                 doneHandler(userInput);
