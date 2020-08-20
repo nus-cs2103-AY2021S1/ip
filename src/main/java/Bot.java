@@ -35,7 +35,10 @@ public class Bot {
             case "bye":
                 return responseWrapper("Bye. Hope to see you again soon!");
             default:
-                return responseWrapper(input);
+
+                return responseWrapper("added: "+ input);
         }
     }
+
+    private
 }

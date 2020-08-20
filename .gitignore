@@ -15,8 +15,8 @@ src/main/resources/docs/
 bin/
 
 #user-added
-.jar
-.xml
+*.jar
+*.xml
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
