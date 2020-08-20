@@ -1,9 +1,10 @@
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
-    public static Task[] tasks = new Task[100];
+    public static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void greeting() {
         String greeting = "Hello! I'm Duke\nWhat can I do for you?";
@@ -13,21 +14,15 @@ public class Duke {
     public static void printAllTask() {
         int numTask = 0;
         System.out.println("Here are the tasks in your list:");
-        while (tasks[numTask] != null) {
-            System.out.println(Integer.valueOf(numTask + 1) + "." + tasks[numTask]);
+        while (numTask < tasks.size()) {
+            System.out.println(Integer.valueOf(numTask + 1) + "." + tasks.get(numTask));
             numTask++;
         }
     }
 
     public static void printAddedTask(Task task) {
-        int len;
-        for(len = 0; len < tasks.length; len++) {
-            if (tasks[len] == null) {
-                break;
-            }
-        }
         System.out.println("Got it. I've added this task:\n" + task +
-                "\nNow you have " + String.valueOf(len)  + " tasks in the list.");
+                "\nNow you have " + String.valueOf(tasks.size())  + " tasks in the list.");
     }
 
     public static String[] removeFirst(String[] arr) {
@@ -89,8 +84,8 @@ public class Duke {
                 throw new InvalidTodoDescripDukeException();
             }
             String[] modifiedTask = removeFirst(task);
-            tasks[pos] = new Todo(joinString(modifiedTask));
-            printAddedTask(tasks[pos]);
+            tasks.add(new Todo(joinString(modifiedTask))) ;
+            printAddedTask(tasks.get(pos));
         } else if (task[0].equals("deadline")) {
             if (task.length == 1) {
                 throw new InvalidDeadlineDescripDukeException();
@@ -98,8 +93,8 @@ public class Duke {
             String[] modifiedTask = removeFirst(task);
             String[] upper = removeAfterWord(modifiedTask, "/by");
             String[] lower = keepAfterWord(modifiedTask, "/by");
-            tasks[pos] = new Deadline(joinString(upper), joinString(lower));
-            printAddedTask(tasks[pos]);
+            tasks.add(new Deadline(joinString(upper), joinString(lower)));
+            printAddedTask(tasks.get(pos));
         } else if (task[0].equals("event")) {
             if (task.length == 1) {
                 throw new InvalidEventDescripDukeException();
@@ -107,11 +102,17 @@ public class Duke {
             String[] modifiedTask = removeFirst(task);
             String[] upper = removeAfterWord(modifiedTask, "/at");
             String[] lower = keepAfterWord(modifiedTask, "/at");
-            tasks[pos] = new Event(joinString(upper), joinString(lower));
-            printAddedTask(tasks[pos]);
+            tasks.add(new Event(joinString(upper), joinString(lower)));
+            printAddedTask(tasks.get(pos));
         } else {
             throw new InvalidFirstDukeException();
         }
+    }
+
+    public static void deleteTask(int pos) {
+        System.out.println("Noted. I've removed this task: \n" + tasks.get(pos) +
+               "\n" + "Now you have " + Integer.valueOf(tasks.size() - 1) + " tasks in the list.");
+        tasks.remove(pos);
     }
 
     public static void main(String[] args) {
@@ -135,7 +136,10 @@ public class Duke {
                     printAllTask();
                 } else if (inputArr[0].equals("done")) {
                     int counter =  Integer.parseInt(inputArr[1]);
-                    tasks[counter - 1].markAsDone();
+                    tasks.get(counter - 1).markAsDone();
+                } else if (inputArr[0].equals("delete")) {
+                    int counter =  Integer.parseInt(inputArr[1]);
+                    deleteTask(counter - 1);
                 } else {
                     addNewTask(input.split(" "), numTask);
                     numTask++;
