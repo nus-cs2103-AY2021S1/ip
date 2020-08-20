@@ -44,7 +44,6 @@ public class Duke {
                         temp++;
                     }*/
                     while (task_iter.hasNext()) {
-                        //System.out.println(indent + temp + "." + task_collections.get(temp - 1));
                         System.out.println(indent + temp + "." + task_iter.next());
                         temp++;
                     }
@@ -57,7 +56,8 @@ public class Duke {
                             done_number = Integer.parseInt(input_split_arr[1]);
                         } catch (Exception ex) {
                             exception_absent = false;
-                            DukeException de = new DukeException("done", null, "empty");
+                            //DukeException de = new DukeException("done", null, "empty");
+                            DukeException de = new DukeException(DukeException.ExceptionType.empty_illegal);
                             System.out.println(de);
                         }
                         if (exception_absent) {
@@ -65,7 +65,8 @@ public class Duke {
                                 task_collections.get(done_number - 1).markAsDone();
                             } catch (Exception ex) {
                                 exception_absent = false;
-                                DukeException de = new DukeException("done", null, "illegal");
+                                //DukeException de = new DukeException("done", null, "illegal");
+                                DukeException de = new DukeException(DukeException.ExceptionType.empty_illegal);
                                 System.out.println(de);
                             }
                         }
@@ -80,7 +81,8 @@ public class Duke {
                             delete_number = Integer.parseInt(input_split_arr[1]);
                         } catch (Exception ex) {
                             exception_absent = false;
-                            DukeException de = new DukeException("delete", null, "empty");
+                            //DukeException de = new DukeException("delete", null, "empty");
+                            DukeException de = new DukeException(DukeException.ExceptionType.empty_illegal);
                             System.out.println(de);
                         }
                         if (exception_absent) {
@@ -89,7 +91,8 @@ public class Duke {
                                 task_collections.remove(delete_number - 1);
                             } catch (Exception ex) {
                                 exception_absent = false;
-                                DukeException de = new DukeException("delete", null, "illegal");
+                                //DukeException de = new DukeException("delete", null, "illegal");
+                                DukeException de = new DukeException(DukeException.ExceptionType.empty_illegal);
                                 System.out.println(de);
                             }
                         }
@@ -104,7 +107,8 @@ public class Duke {
                                 task_collections.add(new Todo(input_split_arr[1]));
                             } catch (Exception ex) {
                                 exception_absent = false;
-                                DukeException de = new DukeException("todo", null, "empty");
+                                //DukeException de = new DukeException("todo", null, "empty");
+                                DukeException de = new DukeException(DukeException.ExceptionType.todo_empty);
                                 System.out.println(de);
                             }
                         } else if (type.equals("deadline")) {
@@ -112,14 +116,16 @@ public class Duke {
                                 input_split_arr = input_split_arr[1].split(" /", 2);
                             } catch (Exception ex) {
                                 exception_absent = false;
-                                DukeException de = new DukeException("deadline", "content", "empty");
+                                //DukeException de = new DukeException("deadline", "content", "empty");
+                                DukeException de = new DukeException(DukeException.ExceptionType.deadline_empty_incomplete);
                                 System.out.println(de);
                             } if (exception_absent) {
                                 try {
                                     task_collections.add(new Deadline(input_split_arr[0], input_split_arr[1].split(" ", 2)[1]));
                                 } catch (Exception ex) {
                                     exception_absent = false;
-                                    DukeException de = new DukeException("deadline", "date", "empty");
+                                    //DukeException de = new DukeException("deadline", "date", "empty");
+                                    DukeException de = new DukeException(DukeException.ExceptionType.deadline_empty_incomplete);
                                     System.out.println(de);
                                 }
                             }
@@ -128,7 +134,8 @@ public class Duke {
                                 input_split_arr = input_split_arr[1].split(" /", 2);
                             } catch (Exception ex) {
                                 exception_absent = false;
-                                DukeException de = new DukeException("event", "content", "empty");
+                                //DukeException de = new DukeException("event", "content", "empty");
+                                DukeException de = new DukeException(DukeException.ExceptionType.event_empty_incomplete);
                                 System.out.println(de);
                             }
                             if (exception_absent) {
@@ -136,7 +143,8 @@ public class Duke {
                                     task_collections.add(new Event(input_split_arr[0], input_split_arr[1].split(" ", 2)[1]));
                                 } catch (Exception ex) {
                                     exception_absent = false;
-                                    DukeException de = new DukeException("event", "date", "empty");
+                                    //DukeException de = new DukeException("event", "date", "empty");
+                                    DukeException de = new DukeException(DukeException.ExceptionType.event_empty_incomplete);
                                     System.out.println(de);
                                 }
                             }
@@ -148,7 +156,8 @@ public class Duke {
                             System.out.println(indent + "Now you have " + task_collections.size() + " tasks in the list.");
                         }
                     } else {
-                        DukeException de = new DukeException("input", null, "no_meaning");
+                        //DukeException de = new DukeException("input", null, "no_meaning");
+                        DukeException de = new DukeException(DukeException.ExceptionType.no_meaning);
                         System.out.println(de);
                     }
                 }

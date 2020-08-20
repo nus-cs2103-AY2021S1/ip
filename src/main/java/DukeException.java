@@ -1,7 +1,55 @@
 package main.java;
 
 public class DukeException {
-    protected String type;
+    protected ExceptionType et;
+
+    public DukeException(ExceptionType et) {
+        this.et = et;
+    }
+
+    public enum ExceptionType {
+        no_meaning,
+        empty_illegal,
+        todo_empty,
+        deadline_empty_incomplete,
+        event_empty_incomplete
+    }
+
+    @Override
+    public String toString() {
+        String output = "";
+        String full_guide = "\n     Please follow the format:" +
+                "\n     'list'" + "\n     'done TASK_NUMBER' or 'delete TASK_NUMBER'" + "\n     'todo MY_TASK'" +
+                "\n     'deadline MY_TASK /by DATE_OR_TIME'" + "\n     'event MY_TASK /at DATE_OR_TIME'" +
+                "\n     'bye'";
+        switch(et) {
+            case no_meaning:
+                output = "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(" + full_guide;
+                break;
+            case empty_illegal:
+                output = "     ☹ OOPS!!! Your number input is empty or invalid." +
+                            "\n     Please follow the format: 'done TASK_NUMBER' or 'delete TASK_NUMBER'";
+                break;
+            case todo_empty:
+                output = "     ☹ OOPS!!! The description of a todo cannot be empty." +
+                            "\n     Please follow the format: 'todo MY_TASK'";
+                break;
+            case deadline_empty_incomplete:
+                output = "     ☹ OOPS!!! The description of a deadline cannot be empty or incomplete." +
+                            "\n     Please follow the format: 'deadline MY_TASK /by DATE_OR_TIME'";
+                break;
+            case event_empty_incomplete:
+                output = "     ☹ OOPS!!! The description of an event cannot be empty or incomplete." +
+                            "\n     Please follow the format: 'event MY_TASK /at DATE_OR_TIME'";
+                break;
+            default:
+                output = "     ☹ OOPS!!! Unspecified problem detected!" + full_guide;
+                break;
+        }
+        return output;
+    }
+
+    /*protected String type;
     protected String exact;
     protected String problem;
 
@@ -46,5 +94,5 @@ public class DukeException {
             msg += "Unspecified Exception Detected";
         }
         return msg;
-    }
+    }*/
 }
