@@ -10,37 +10,41 @@ public class Duke {
         String input = sc.nextLine();
 
        while (!input.equals("bye")) {
-           if (!input.contains("done") && !input.contains("list")) {
-               if (input.contains("todo")) {
-                   String[] textArray = input.split(" ", 2);
-                   Todo todo = new Todo(textArray[1]);
-                   TaskList.add(todo);
-                   add(todo, TaskList);
-               }
-               if (input.contains("deadline")) {
-                   String[] textArray = input.split(" ", 2);
-                   Deadline deadline = new Deadline(textArray[1]);
-                   TaskList.add(deadline);
-                   add(deadline, TaskList);
-               }
-               if (input.contains("event")) {
-                   String[] textArray = input.split(" ", 2);
-                   Event event = new Event(textArray[1]);
-                   TaskList.add(event);
-                   add(event, TaskList);
-               }
-           }
-           else if (input.equals("list")) {
-                   printList(TaskList);
-           }
-           else if (input.contains("done")) {
-               String[] textArray = input.split(" ", 2);
-               int taskNum = Integer.parseInt(textArray[1]);
-               Task doneTask = TaskList.get(taskNum - 1);
-               doneTask.markAsDone();
-               System.out.println("Nice! I've marked this task as done:\n" + doneTask);
-           }
 
+           String errorMessage = DukeExceptionHandler.handleException(input);
+           if (errorMessage != null) {
+               System.out.println(errorMessage);
+           }
+           else {
+               if (!input.contains("done") && !input.contains("list")) {
+                   if (input.contains("todo")) {
+                       String[] textArray = input.split(" ", 2);
+                       Todo todo = new Todo(textArray[1]);
+                       TaskList.add(todo);
+                       add(todo, TaskList);
+                   }
+                   if (input.contains("deadline")) {
+                       String[] textArray = input.split(" ", 2);
+                       Deadline deadline = new Deadline(textArray[1]);
+                       TaskList.add(deadline);
+                       add(deadline, TaskList);
+                   }
+                   if (input.contains("event")) {
+                       String[] textArray = input.split(" ", 2);
+                       Event event = new Event(textArray[1]);
+                       TaskList.add(event);
+                       add(event, TaskList);
+                   }
+               } else if (input.equals("list")) {
+                   printList(TaskList);
+               } else if (input.contains("done")) {
+                   String[] textArray = input.split(" ", 2);
+                   int taskNum = Integer.parseInt(textArray[1]);
+                   Task doneTask = TaskList.get(taskNum - 1);
+                   doneTask.markAsDone();
+                   System.out.println("Nice! I've marked this task as done:\n" + doneTask);
+               }
+           }
            input = sc.nextLine();
        }
        Bye();
