@@ -37,13 +37,22 @@ public class Duke {
                 } else if (command.equals("done") || command.startsWith("done ")) {
                     String str = command.substring(5);
                     int number = Integer.parseInt(str) - 1;
-                    if (number < taskList.size() && number > -1){
-                        Task task = taskList.get(number);
-                        task.completeTask();
-                        System.out.println("Nice! I've marked this task as done: \n" + task);
-                    } else {
-                        System.out.println("Task not found in list");
+                    if ((number < 0) || number + 1 > taskList.size()) {
+                        throw new DukeException("Please provide valid index of the task to be completed");
                     }
+                    Task task = taskList.get(number);
+                    task.completeTask();
+                    System.out.println("Nice! I've marked this task as done: \n" + task);
+                } else if (command.equals("delete") || command.startsWith("delete ")) {
+                    String str = command.substring(7);
+                    int number = Integer.parseInt(str) - 1;
+                    if ((number < 0) || number + 1 > taskList.size()) {
+                        throw new DukeException("Please provide valid index of the task to be deleted");
+                    }
+                    Task task = taskList.get(number);
+                    taskList.remove(task);
+                    System.out.println("Noted. Removed task: \n" + task);
+                    System.out.println("You currently have " + taskList.size() + " tasks in your list");
                 } else {
                     if (command.equals("todo") || command.startsWith("todo ")) {
                         if (command.length() <= 5 || command.substring(5).trim().isEmpty()) {
