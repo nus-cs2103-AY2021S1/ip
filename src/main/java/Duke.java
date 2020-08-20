@@ -2,10 +2,27 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-//    public boolean checkValid(String input) {
-//
-//        return true;
+
+    public static boolean isEmptyInput(String input) {
+        return input.isEmpty();
+    }
+
+    public static boolean isValidTask(String input) {
+        return input.toLowerCase().startsWith("todo") |
+                input.toLowerCase().startsWith("deadline") |
+                input.toLowerCase().startsWith("event");
+    }
+
+    public static boolean isEmptyDescription(String input) {
+        return input.split(" ").length == 1;
+    }
+
+//    public static boolean isValidInput(String input) {
+//        return !isEmptyInput(input) &
+//                isValidTask(input) &
+//                        !isEmptyDescription(input);
 //    }
+
     public static void main(String[] args) {
 
         // Initialise strings to separate messages from Duke
@@ -75,8 +92,25 @@ public class Duke {
                 continue;
             }
 
-            // Variable to check validity of command. True by default
-            boolean valid = true;
+            // Check validity of input command
+            if (isEmptyInput(input)) {
+                System.out.println(servantSpeak
+                        + "    I am sorry my Lord. " +
+                        "You have to give a command.\n");
+                continue;
+            }
+            if (!isValidTask(input)) {
+                System.out.println(servantSpeak
+                        + "    I am sorry my Lord. " +
+                        "I do not recognise that command.\n");
+                continue;
+            }
+            if (isEmptyDescription(input)) {
+                System.out.println(servantSpeak
+                        + "    I am sorry my Lord. " +
+                        "Your description cannot be empty.\n");
+                continue;
+            }
 
             // Determine what kind of task it is
             Task t;
@@ -85,10 +119,6 @@ public class Duke {
             switch (input.toLowerCase().split(" ")[0]) {
                 case "deadline":
                     inputSplit = input.split(" /by ");
-//                    if (inputSplit.length == 1) {
-//                        valid = false;
-//                        break;
-//                    }
                     String by = inputSplit[1];
                     description = inputSplit[0].substring(8);
                     t = new Deadline(description, by);
@@ -101,19 +131,16 @@ public class Duke {
                     break;
                 case "event":
                     inputSplit = input.split(" /at ");
-//                    if (inputSplit.length == 1) {
-//                        valid = false;
-//                        break;
-//                    }
-                    String at = inputSplit[1];
+                    String start = inputSplit[1].split("-")[0];
+                    String end = inputSplit[1].split("-")[1];
                     description = inputSplit[0].substring(5);
-                    t = new Event(description, at);
+                    t = new Event(description, start, end);
                     userTasks.add(t);
                     break;
-                default:
-                    System.out.println(servantSpeak
-                            + "    I am sorry my Lord. I do not recognise that command.\n");
-                    continue;
+//                default:
+//                    System.out.println(servantSpeak
+//                            + "    I am sorry my Lord. I do not recognise that command.\n");
+//                    continue;
             }
 
             // Standard reply from Duke for adding a task
