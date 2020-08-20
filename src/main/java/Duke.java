@@ -4,6 +4,12 @@ import java.util.Scanner;
 
 public class Duke {
 
+    public enum TaskType {
+        TODOS,
+        DEADLINE,
+        EVENT
+    }
+
     private static List<Task> texts = new ArrayList<>();
 
     private static void greet() {
@@ -18,27 +24,27 @@ public class Duke {
         System.out.println(farewell);
     }
 
-    private static void add(String toAdd) {
-        texts.add(new Task(toAdd));
-        System.out.println("added: " + toAdd);
-    }
+//    private static void add(String toAdd) {
+//        texts.add(new Task(toAdd));
+//        System.out.println("added: " + toAdd);
+//    }
 
-    private static void add(String toAdd, int type) {
+    private static void add(String toAdd, TaskType taskType) {
         Task task = null;
         String[] splitDeadline = toAdd.split("/", 2 );
         String[] content;
         if (splitDeadline.length == 2) content = splitDeadline[1].split(" ", 2);
         else content = null;
-        switch (type) {
-            case 1:
+        switch (taskType) {
+            case TODOS:
                 if (splitDeadline.length == 2) task = new ToDos(splitDeadline[0].trim(), content[1]);
                 else task = new ToDos(splitDeadline[0]);
                 break;
-            case 2:
+            case DEADLINE:
                 if (splitDeadline.length == 2) task = new Deadline(splitDeadline[0].trim(), content[1]);
                 else task = new Deadline(splitDeadline[0]);
                 break;
-            case 3:
+            case EVENT:
                 if (splitDeadline.length == 2) task = new Event(splitDeadline[0].trim(), content[1]);
                 else task = new Event(splitDeadline[0]);
                 break;
@@ -55,24 +61,34 @@ public class Duke {
         System.out.println(texts.get(Integer.parseInt(s) - 1).markAsDone());
     }
 
+    private static void processDelete(String s) {
+        System.out.println("okcan done:");
+        System.out.println(texts.remove(Integer.parseInt(s) - 1));
+        System.out.println("Now you have " + texts.size() + " tasks in the list.");
+    }
+
     private static void testNextLineSplit(String nextLine) throws EmptyDescriptionException, UnknownCommandException {
         String[] nextLineSplit = nextLine.split(" ", 2);
         switch (nextLineSplit[0]) {
             case "todo":
                 if (nextLineSplit.length < 2) throw new EmptyDescriptionException("Description empty la oi");
-                add(nextLineSplit[1], 1);
+                add(nextLineSplit[1], TaskType.TODOS);
                 break;
             case "deadline":
                 if (nextLineSplit.length < 2) throw new EmptyDescriptionException("Description empty la oi");
-                add(nextLineSplit[1], 2);
+                add(nextLineSplit[1], TaskType.DEADLINE);
                 break;
             case "event":
                 if (nextLineSplit.length < 2) throw new EmptyDescriptionException("Description empty la oi");
-                add(nextLineSplit[1], 3);
+                add(nextLineSplit[1], TaskType.EVENT);
                 break;
             case "done":
                 if (nextLineSplit.length < 2) throw new EmptyDescriptionException("Description empty la oi");
                 processDone(nextLineSplit[1]);
+                break;
+            case "delete":
+                if (nextLineSplit.length < 2) throw new EmptyDescriptionException("Description empty la oi");
+                processDelete(nextLineSplit[1]);
                 break;
             default:
                 throw new UnknownCommandException("Don't understand...");
@@ -102,9 +118,7 @@ public class Duke {
                 default:
                     try {
                         testNextLineSplit(nextLine);
-                    } catch (UnknownCommandException e) {
-                        System.out.println(e.toString());
-                    } catch (EmptyDescriptionException e) {
+                    } catch (UnknownCommandException | EmptyDescriptionException e) {
                         System.out.println(e.toString());
                     }
                     nextLine = sc.nextLine();
