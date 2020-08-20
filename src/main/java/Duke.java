@@ -45,11 +45,28 @@ public class Duke {
                     list.add(task);
                     noOfTasks--;
                 }
-            } else { //Echo
-                Task newTask = new Task(text);
+            } else {
+                Task newTask;
+                String newText;
+                if (text.matches("(todo .+)")) {
+                    newText = text.replace("todo ", "");
+                    newTask = new Todo(newText);
+                } else if (text.matches("deadline .+")) {
+                    newText = text.replace("deadline ", "");
+                    String pair[] = newText.split(" /by ", 2);
+                    newTask = new Deadline(pair[0], pair[1]);
+                } else if (text.matches("event .+")) {
+                    newText = text.replace("event ", "");
+                    String pair[] = newText.split(" /at ", 2);
+                    newTask = new Event(pair[0], pair[1]);
+                } else { //Echo
+                    newTask = new Task(text);
+                }
                 list.add(noOfTasks, newTask);
                 noOfTasks++;
                 System.out.println("\tadded: " + newTask);
+                System.out.println("\tYou have " + list.size() + " tasks to do, " + noOfTasks + " undone!");
+                printList(list, true);
             }
         }
     }
