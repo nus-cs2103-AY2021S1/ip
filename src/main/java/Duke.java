@@ -32,6 +32,12 @@ public class Duke {
                 Task task = list.get(index);
                 task.markDone();
                 System.out.println("Nice! I've marked this task as done:\n" + task);
+            }else if( input_split[0].equals("delete")){
+                // Parse int
+                int index = Integer.parseInt(input_split[1]) - 1;
+                Task removed = list.remove(index);
+                System.out.println("Noted. I've removed this task:\n" + removed.toString() +
+                        "\nNow you have " + list.size() + " tasks in the list.");
             } else {
                 // Adds item to list
                 String type = input_split[0];
