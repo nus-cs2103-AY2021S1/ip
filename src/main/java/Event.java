@@ -1,32 +1,33 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Event extends Task{
+public class Event extends Task {
 
     //Store the variables
-    protected final String at;
-    private static final Pattern date_match = Pattern.compile("^(.*) (/at) (.*)$");
+    private final String at;
+    private static final Pattern DATEMATCH =
+            Pattern.compile("^(.*) (/at) (.*)$");
 
     //Constructor for the event class
-    public Event(String description, String at){
+    public Event(final String description, final String by) {
 
         //Call the superclass constructor
         super(description);
 
         //Store the at variable
-        this.at = at;
+        at = by;
     }
 
     //Getter for the date of the
-    public String getDate(){
+    public String getDate() {
 
         //Return the date
         return this.at;
     }
 
-    public static Task parseCommand(String args) {
+    public static Task parseCommand(final String args) {
         //Create the matcher
-        Matcher matcher = date_match.matcher(args);
+        Matcher matcher = DATEMATCH.matcher(args);
 
         //Check for matches
         matcher.find();
@@ -41,6 +42,8 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + String.format(" (at: %s)", this.getDate());
+        return "[E]"
+                + super.toString()
+                + String.format(" (at: %s)", this.getDate());
     }
 }

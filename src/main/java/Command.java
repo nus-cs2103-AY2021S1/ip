@@ -11,12 +11,12 @@ public enum Command {
     protected final Function<String, Task> commandParser;
 
     //Constructor for the function
-    Command(Function<String, Task> commandParser){
+    Command(final Function<String, Task> commandParser) {
         this.commandParser = commandParser;
     }
 
     //Get the task given description
-    public Task createTask(String description){
+    public Task createTask(final String description) {
         return commandParser.apply(description);
     }
 
