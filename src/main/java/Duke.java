@@ -25,10 +25,8 @@ public class Duke {
                     System.out.println((1 + i) + "." + list.get(i));
                 }
             } else if (input_split[0].equals("done") && input_split.length == 2) {
-                // Marks number as done
-                int index;
                 // Parse int
-                index = Integer.parseInt(input_split[1]) - 1;
+                int index = Integer.parseInt(input_split[1]) - 1;
 
                 // Mark task as done
                 Task task = list.get(index);
@@ -39,8 +37,13 @@ public class Duke {
                 String type = input_split[0];
                 String name;
                 if (type.equals("todo")){
+                    if(input_split.length<2) {
+                        System.out.println( "\u2639 OOPS!!! The description of a todo cannot be empty." );
+                        continue;
+                    }
                     name = input.split("todo ")[1];
                     list.add(new ToDo(name));
+
                 }else if(type.equals("deadline")){
                     name = input.split(" /by ")[0].split("deadline ")[1];
                     String by = input.split(" /by ")[1];
@@ -50,8 +53,8 @@ public class Duke {
                     String at = input.split(" /at ")[1];
                     list.add(new Event(name, at));
                 }else{
-                    list.add(new Task(input));
-                    name = input;
+                    System.out.println("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    continue;
                 }
 
                 System.out.println("Go it. I've added this task:\n" + list.get(list.size()-1).toString());
