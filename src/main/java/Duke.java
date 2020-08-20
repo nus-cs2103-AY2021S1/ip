@@ -44,10 +44,19 @@ public class Duke {
         );
     }
 
+    public void printDeleteTask(Task task, int noTask) {
+        System.out.println(this.border
+                + "Yes master. I've deleted the task from the list: \n"
+                + task.toString() + "\n"
+                + "You now have " + noTask + " task in the list master.\n"
+                + this.border
+        );
+    }
+
     public void noIndexKeyedError() {
         System.out.println(
             this.border
-            + "Master please enter a task number so that I know which to mark done.\n"
+            + "Master please enter a task number so that I know which to handle.\n"
             + this.border
         );
     }
@@ -84,6 +93,14 @@ public class Duke {
         );
     }
 
+    public void printNoTaskToDeleteError() {
+        System.out.println(
+            this.border
+            + "I am sorry master but the task list is empty.\n"
+            + this.border
+        );
+    }
+
     public void doneHandler(String parameters) throws DukeExceptions.NoUndoneTaskException {
         if (!this.taskList.isEmpty() || this.taskList.allDone()) {
             int index = Integer.parseInt(parameters.strip()) - 1;
@@ -100,6 +117,16 @@ public class Duke {
             this.printAddedNewTask(newTask, this.taskList.getNoTask());
         } else {
             throw new DukeExceptions.IncompleteCommandException(command);
+        }
+    }
+
+    public void deleteTaskHandler(String parameters) throws  DukeExceptions.NoTaskToDeleteException {
+        if (!this.taskList.isEmpty()) {
+            int index = Integer.parseInt(parameters.strip()) - 1;
+            Task task = this.taskList.deleteTask(index);
+            this.printDeleteTask(task, this.taskList.getNoTask());
+        } else {
+            throw new DukeExceptions.NoTaskToDeleteException();
         }
     }
 
@@ -122,11 +149,21 @@ public class Duke {
             } catch (NumberFormatException e) {
                 this.noIndexKeyedError();
             }
-        } else if (command.equals("todo")||command.equals("event")||command.equals("deadline")){
+        } else if (command.equals("todo")||command.equals("event")||command.equals("deadline")) {
             try {
                 this.addTaskHadler(command, parameters);
             } catch (DukeExceptions.IncompleteCommandException e) {
                 this.printIncompleteCommandError(command);
+            }
+        } else if (command.equals("delete")){
+            try {
+                this.deleteTaskHandler(parameters);
+            } catch (DukeExceptions.NoTaskToDeleteException e) {
+                this.printNoTaskToDeleteError();
+            } catch (IndexOutOfBoundsException e) {
+                this.printIndexSizeMismatchError();
+            } catch (NumberFormatException e) {
+                this.noIndexKeyedError();
             }
         } else {
             throw new DukeExceptions.UnrecognizableCommandException();

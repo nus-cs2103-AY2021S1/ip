@@ -29,4 +29,14 @@ public class DukeExceptions {
             return "Master the list is empty";
         }
     }
+
+    public static class NoTaskToDeleteException extends Exception {
+        public NoTaskToDeleteException() {
+            super();
+        }
+
+        public String toString() {
+            return "Master the list is empty";
+        }
+    }
 }

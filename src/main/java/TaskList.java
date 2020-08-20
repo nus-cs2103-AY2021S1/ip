@@ -16,9 +16,14 @@ public class TaskList {
         return newTask;
     }
 
-
     public void completeTask(int index){
          this.taskList.get(index).markDone();
+    }
+
+    public Task deleteTask(int index) {
+        Task task = this.taskList.get(index);
+        this.taskList.remove(index);
+        return task;
     }
 
     public Task getTask(int index) {
