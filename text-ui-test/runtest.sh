@@ -25,7 +25,7 @@ fi
 java -classpath ../bin Duke < input.txt > ACTUAL.TXT
 
 # convert to UNIX format
-cp EXPECTED.TXT EXPECTED-UNIX.TXT
+# cp EXPECTED.TXT EXPECTED-UNIX.TXT
 dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
 
 # compare the output to the expected output
