@@ -29,6 +29,14 @@ public class Duke {
                     System.out.println("\t" + (i + 1) + ". " + taskList.get(i));
                 }
             }
+            else if(input.startsWith("remove ")){
+                String indexStr = input.replaceAll("[^0-9]", "");
+                int index = Integer.parseInt(indexStr) - 1;
+                Task t = taskList.remove(index);
+                System.out.println("\t" + "Noted. I've removed this task:");
+                System.out.println("\t\t" + t);
+                System.out.println("\t" + "Now you have " + taskList.size() + " tasks in the list.");
+            }
             else if(input.startsWith("done ")){
                 String indexStr = input.replaceAll("[^0-9]", "");
                 int index = Integer.parseInt(indexStr) - 1;
