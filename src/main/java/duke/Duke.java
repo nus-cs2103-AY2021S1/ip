@@ -12,6 +12,13 @@ public class Duke {
     private final CommandAgent agent;
     private final Ui ui;
 
+    /**
+     * Constructor for Duke class.
+     * Takes in a file path to initialize storage.
+     * Initialize a command agent and a user interface.
+     *
+     * @param filePath the path of task list data stored in the hard disk.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

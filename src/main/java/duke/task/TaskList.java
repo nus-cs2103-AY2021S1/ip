@@ -18,6 +18,11 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Get the number of elements in the task list.
+     *
+     * @return the number of elements in the task list.
+     */
     public int getSize() {
         return this.tasks.size();
     }
