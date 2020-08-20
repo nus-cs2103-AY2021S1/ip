@@ -43,6 +43,23 @@ public class Duke {
                     Task task = tasks.get(Integer.parseInt(command.split("\\s+")[1]) - 1);
                     task.setDone();
                     speak(() -> "Nice! I've marked this task as done:\n[✓] " + task.toString());
+                }else if (command.split("\\s+")[0].equals("delete")){
+                    if (command.split("\\s+").length != 2) {
+                        throw new IllegalUserInputException("PLease specify the correct argument number");
+                    }
+                    try {
+                        int i = Integer.parseInt(command.split("\\s+")[1]);
+                        Task.decrementTask();
+                        Task task = tasks.get(i-1);
+                        tasks.remove(i-1);
+                        speak(() -> String.format("Noted. I've removed this task:\n" +
+                                "%s%s %s\n" +
+                                "Now you have %d tasks in the list.",task.getTaskSymbol(),task.getSymbol(),task.toString(),Task.remainingTasks()));
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Please choose a valid task number to delete");
+                        continue;
+                    }
+
                 } else {
                     storeInput(command, tasks);
                 }
