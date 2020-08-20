@@ -1,6 +1,6 @@
-public class RangeDoneIndexException extends DukeException {
+public class RangeIndexException extends DukeException {
 
-    public RangeDoneIndexException(String command) {
+    public RangeIndexException(String command) {
         super(command);
     }
 

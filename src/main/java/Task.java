@@ -1,11 +1,9 @@
 public class Task {
-    protected int taskNum;
     protected String taskName;
     protected boolean isDone;
 
-    public Task(int taskNum, String taskName) {
-        this.taskNum = taskNum;
-        this.taskName = taskName;
+    public Task(String taskName) {
+        this.taskName = taskName.trim();
         this.isDone = false;
     }
 
@@ -18,6 +16,6 @@ public class Task {
     }
 
     public String toString() {
-        return String.format("%d. [%s] %s", taskNum, getStatusIcon(), taskName);
+        return String.format("[%s] %s", getStatusIcon(), taskName);
     }
 }

@@ -1,10 +1,10 @@
 public class ToDo extends Task {
 
-    public ToDo(int taskNum, String taskName) {
-        super(taskNum, taskName);
+    public ToDo(String taskName) {
+        super(taskName);
     }
 
     public String toString() {
-        return String.format("%d. [T][%s] %s", taskNum, getStatusIcon(), taskName);
+        return String.format("[T][%s] %s", getStatusIcon(), taskName);
     }
 }

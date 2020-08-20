@@ -1,12 +1,12 @@
 public class Event extends Task {
     protected String taskDate;
 
-    public Event(int taskNum, String taskName, String taskDate) {
-        super(taskNum, taskName);
+    public Event(String taskName, String taskDate) {
+        super(taskName);
         this.taskDate = taskDate;
     }
 
     public String toString() {
-        return String.format("%d. [E][%s] %s (at: %s)", taskNum, getStatusIcon(), taskName, taskDate);
+        return String.format("[E][%s] %s (at: %s)", getStatusIcon(), taskName, taskDate);
     }
 }

@@ -32,7 +32,6 @@ public class Duke {
         System.out.println();
 
         Scanner sc = new Scanner(System.in);
-        int currId = 1;
         int done = 0;
 
         while (sc.hasNextLine()) {
@@ -49,12 +48,14 @@ public class Duke {
 
             } else if (task.equals("list")) {
 
+                int currId = 1;
+
                 System.out.println("TO-DO LIST:");
                 System.out.println(String.format("%d pending", tasks.size() - done));
                 for (Task t : tasks) {
-                    System.out.println("   " + t.toString());
+                    System.out.println(String.format("   %d. %s", currId, t));
+                    currId++;
                 }
-
 
             } else if (task.startsWith("done")){
 
@@ -72,7 +73,7 @@ public class Duke {
                     }
 
                     if (id < 1 || id > tasks.size()) {
-                        throw new RangeDoneIndexException(task);
+                        throw new RangeIndexException(task);
                     }
 
                     int target = id - 1;
@@ -85,10 +86,36 @@ public class Duke {
                     done++;
                     System.out.println("Good job! This task is now marked done:");
                     System.out.println(tasks.get(target));
-                } catch (NullDoneIndexException | RangeDoneIndexException | AlreadyDoneIndexException | EmptyTasksException e) {
+                } catch (NullDoneIndexException | RangeIndexException | AlreadyDoneIndexException | EmptyTasksException e) {
                     System.out.println(e);
                 }
 
+            } else if (task.startsWith("delete")) {
+                Pattern p = Pattern.compile("\\d+");
+                Matcher m = p.matcher(task);
+                Integer id = m.find() ? Integer.parseInt(m.group()) : null;
+
+                try {
+                    if (tasks.isEmpty()) {
+                        throw new EmptyTasksException(task);
+                    }
+
+                    if (id == null) {
+                        throw new NullDoneIndexException(task);
+                    }
+
+                    if (id < 1 || id > tasks.size()) {
+                        throw new RangeIndexException(task);
+                    }
+
+                    int target = id - 1;
+
+                    System.out.println("Alright! This task is now deleted:");
+                    System.out.println(tasks.get(target));
+                    tasks.remove(target);
+                } catch (NullDoneIndexException | RangeIndexException | EmptyTasksException e) {
+                    System.out.println(e);
+                }
             } else {
 
                 try {
@@ -102,22 +129,21 @@ public class Duke {
                         case "deadline":
                             if (taskName.isBlank()) throw new NullTaskNameException("deadline");
                             if (taskDate.isBlank()) throw new NullTaskDateException("deadline");
-                            tasks.add(new Deadline(currId, taskName, taskDate));
+                            tasks.add(new Deadline(taskName, taskDate));
                             break;
                         case "event":
                             if (taskName.isBlank()) throw new NullTaskNameException("event");
                             if (taskDate.isBlank()) throw new NullTaskDateException("event");
-                            tasks.add(new Event(currId, taskName, taskDate));
+                            tasks.add(new Event(taskName, taskDate));
                             break;
                         case "todo":
                             if (taskName.isBlank()) throw new NullTaskNameException("todo");
-                            tasks.add(new ToDo(currId, taskName));
+                            tasks.add(new ToDo(taskName));
                             break;
                         default:
                             throw new DukeException(taskType);
                     }
 
-                    currId++;
                     int size = tasks.size();
 
                     System.out.println("'" + taskName + "' added to list!");
