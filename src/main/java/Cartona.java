@@ -37,7 +37,7 @@ public class Cartona {
      * Helper function that parses the "add ..." argument into the console to add a Task to the taskList
      * @param consoleArg the exact string entered into the console
      */
-    private static void addTask(String consoleArg) {
+    private static void addTask(String consoleArg) throws EmptyTaskDescriptionException, InvalidTaskTimeException, UnknownCommandException {
         String[] parsedArr = consoleArg.substring(4).split(" ");
         String keyword = parsedArr[0];
         if (keyword.equals("todo")) {
@@ -45,6 +45,9 @@ public class Cartona {
 
             for (int i = 1; i < parsedArr.length; i++) {
                 name += parsedArr[i] + " ";
+            }
+            if (name.equals("")) {
+                throw new EmptyTaskDescriptionException("");
             }
             taskList.add(new Todo(name));
         } else if (keyword.equals("deadline")) {
@@ -54,6 +57,9 @@ public class Cartona {
             for (int i = 1; i < parsedArr.length; i++) {
                 if (nameOrTime) {
                     if (parsedArr[i].contains("/by")) {
+                        if (name.equals("")) {
+                            throw new EmptyTaskDescriptionException("");
+                        }
                         nameOrTime = false;
                         continue;
                     } else {
@@ -66,6 +72,12 @@ public class Cartona {
                         time += parsedArr[i];
                     }
                 }
+            }
+            if (name.equals("")) {
+                throw new EmptyTaskDescriptionException("");
+            }
+            if (time.equals("")) {
+                throw new InvalidTaskTimeException("");
             }
 
             taskList.add(new Deadline(name, time));
@@ -91,9 +103,16 @@ public class Cartona {
                 }
             }
 
+            if (name.equals("")) {
+                throw new EmptyTaskDescriptionException("");
+            }
+            if (timeRange.equals("")) {
+                throw new InvalidTaskTimeException("");
+            }
+
             taskList.add(new Event(name, timeRange));
         } else {
-            System.out.println("Invalid keyword after \"add\"");
+            throw new UnknownCommandException("");
         }
     }
 
@@ -121,15 +140,38 @@ public class Cartona {
                 break;
             } else if (nextInput.equals("list")) {
                 printList();
+            } else if (nextInput.length() < 4) {
+                System.out.printf("%s     Error: Invalid keyword! Please try again%n%s",
+                        line, line);
             } else if (nextInput.substring(0, 4).equals("done")) {
-                String[] doneArr = nextInput.split(" ");
-                int taskNum = Integer.parseInt(doneArr[1]);
-                finishTask(taskList.get(taskNum - 1));
+                try {
+                    String[] doneArr = nextInput.split(" ");
+                    int taskNum = Integer.parseInt(doneArr[1]);
+                    finishTask(taskList.get(taskNum - 1));
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.printf("%s     Error: Invalid input! Did you mean: \"done TASK_NUM\"%n%s",
+                                        line, line);
+                }
             } else if (nextInput.substring(0, 3).equals("add")) {
-                addTask(nextInput);
-                System.out.printf("%s     Got it. I've added this task:%n       %s%n     " +
-                                  "Now you have %d tasks in the list.%n%s", line, taskList.get(taskList.size() - 1),
-                                    taskList.size(), line);
+                try {
+                    addTask(nextInput);
+                    System.out.printf("%s     Got it. I've added this task:%n       %s%n     " +
+                                    "Now you have %d tasks in the list.%n%s", line, taskList.get(taskList.size() - 1),
+                            taskList.size(), line);
+                } catch (EmptyTaskDescriptionException e1){
+                    System.out.printf("%s     Error: Empty task description!%n%s",
+                            line, line);
+                } catch (InvalidTaskTimeException e2) {
+                    System.out.printf("%s     Error: Empty deadline/event time - please enter the time after /by " +
+                                    "or /at keywords respectively%n%s",
+                                    line, line);
+                } catch (UnknownCommandException e3) {
+                    System.out.printf("%s     Error: Unknown keyword after \"add\"%n%s",
+                            line, line);
+                }
+            } else {
+                System.out.printf("%s     Error: Invalid keyword! Please try again%n%s",
+                        line, line);
             }
         }
 
