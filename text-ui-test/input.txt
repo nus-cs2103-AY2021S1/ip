@@ -1,0 +1,6 @@
+nothing
+todo event
+deadline event
+deadline homework /by 7pm
+event meeting /at will confirm later
+bye

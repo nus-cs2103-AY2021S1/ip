@@ -5,3 +5,31 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+─────
+Hello! I'm Duke 
+What can I do for you?
+─────
+─────
+Invalid, no task description provided.
+─────
+─────
+Got it. I've added this task: 
+[T][✘] event
+Now you have 1 tasks in the list
+─────
+─────
+Invalid, no task description provided.
+─────
+─────
+Got it. I've added this task: 
+[D][✘] homework (by: 7pm)
+Now you have 2 tasks in the list
+─────
+─────
+Got it. I've added this task: 
+[E][✘] meeting (at: will confirm later)
+Now you have 3 tasks in the list
+─────
+─────
+Bye. Hope to see you again soon.
+─────

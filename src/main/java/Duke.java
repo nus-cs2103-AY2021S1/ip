@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static final String dash = String.valueOf('\u2500').repeat(5);
+    private static final String dash = ("\u2500").repeat(5);
     private static final String greeting = "Hello! I'm Duke \n" +
             "What can I do for you?";
     private static final String task_read = "Here are the tasks in your list: \n";
