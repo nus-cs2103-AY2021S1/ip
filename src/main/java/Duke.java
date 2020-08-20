@@ -2,25 +2,34 @@ import java.util.Scanner;
 
 public class Duke {
     private final String border = "----------------------------------------------------------------------------\n";
-    private final String greeting = "Sorry :( Duke is getting some upgrades at the moment.\n"
-            + "This is Tron, temporarily standing in for Duke, how may I assist you ?\n";
-    private final String farewell = "Adios, pleasure to serve you!\n";
-    private final String logo =
-                      " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
     private boolean isRunning = true;
-    private TaskList taskList = new TaskList();
+    private final TaskList taskList = new TaskList();
+    enum commands {
+        BYE,
+        DONE,
+        DELETE,
+        LIST,
+        TODO,
+        EVENT,
+        DEADLINE,
+    }
 
     public void printGreeting() {
+        String logo =
+                  " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println(this.border + this.greeting + this.border);
+        String greeting = "Sorry :( Duke is getting some upgrades at the moment.\n"
+                + "This is Tron, temporarily standing in for Duke, how may I assist you ?\n";
+        System.out.println(this.border + greeting + this.border);
     }
 
     public void printFarewell() {
-        System.out.println(this.border + this.farewell + this.border);
+        String farewell = "Adios, pleasure to serve you!\n";
+        System.out.println(this.border + farewell + this.border);
     }
 
     public void printTaskList(TaskList taskList) {
@@ -134,12 +143,12 @@ public class Duke {
         return this.isRunning;
     }
 
-    public void run(String command, String parameters) throws DukeExceptions.UnrecognizableCommandException {
-        if (command.equals("bye")) {
+    public void run(commands command, String parameters) {
+        if (command == commands.BYE) {
             this.isRunning = false;
-        } else if (command.equals("list")) {
+        } else if (command == commands.LIST) {
             this.printTaskList(this.taskList);
-        } else if (command.equals("done")) {
+        } else if (command == commands.DONE) {
             try {
                 this.doneHandler(parameters);
             } catch (DukeExceptions.NoUndoneTaskException e) {
@@ -149,13 +158,13 @@ public class Duke {
             } catch (NumberFormatException e) {
                 this.noIndexKeyedError();
             }
-        } else if (command.equals("todo")||command.equals("event")||command.equals("deadline")) {
+        } else if (command == commands.EVENT || command == commands.TODO || command == commands.DEADLINE) {
             try {
-                this.addTaskHadler(command, parameters);
+                this.addTaskHadler(command.toString().toLowerCase(), parameters);
             } catch (DukeExceptions.IncompleteCommandException e) {
-                this.printIncompleteCommandError(command);
+                this.printIncompleteCommandError(command.toString().toLowerCase());
             }
-        } else if (command.equals("delete")){
+        } else if (command == commands.DELETE){
             try {
                 this.deleteTaskHandler(parameters);
             } catch (DukeExceptions.NoTaskToDeleteException e) {
@@ -165,8 +174,6 @@ public class Duke {
             } catch (NumberFormatException e) {
                 this.noIndexKeyedError();
             }
-        } else {
-            throw new DukeExceptions.UnrecognizableCommandException();
         }
     }
 
@@ -180,16 +187,14 @@ public class Duke {
         String parameters;
 
         while (duke.isRunning()){
-            command = sc.next().toLowerCase();
+            command = sc.next().toUpperCase();
             parameters = sc.nextLine().toLowerCase();
             try {
-                duke.run(command, parameters);
-            } catch (DukeExceptions.UnrecognizableCommandException e) {
+                duke.run(Duke.commands.valueOf(command), parameters);
+            } catch (IllegalArgumentException e) {
                 duke.printUnrecognizableCommandError();
             }
         }
-
+        duke.printFarewell();
     }
-
-
 }

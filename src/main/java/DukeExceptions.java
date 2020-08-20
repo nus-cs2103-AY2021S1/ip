@@ -1,15 +1,5 @@
 public class DukeExceptions {
 
-    public static class UnrecognizableCommandException extends Exception {
-        public UnrecognizableCommandException() {
-            super("");
-        }
-
-        public String toString() {
-            return "I am terribly sorry master but I do not recognise that command";
-        }
-    }
-
     public static class IncompleteCommandException extends Exception {
         public IncompleteCommandException(String commandName) {
             super(commandName);
