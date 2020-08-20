@@ -7,7 +7,6 @@ public class TaskManager {
     TaskManager(String lb){
         this.list = new ArrayList<>();
         this.linebreaker = lb.repeat(50)+"\n";
-
     }
     /**
      * Parses the current list and prints the output
@@ -29,7 +28,7 @@ public class TaskManager {
         int i = Integer.parseInt(index)-1;//0 indexing
         this.get(i).doTask();
         System.out.print(this.linebreaker);
-        System.out.println("Nice! I've marked this task as done: \n\t"+this.get(i));
+        System.out.println("\tNice! I've marked this task as done: \n\t"+this.get(i));
         System.out.println(this.linebreaker);
     }
 
@@ -85,8 +84,6 @@ public class TaskManager {
         String[] c = new String[2];
         c[0] = cmd.substring(0,i);
         c[1] = cmd.substring(i+3);
-        System.out.println(c[0]);
-        System.out.
         return c;
     }
 }
