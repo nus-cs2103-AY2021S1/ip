@@ -1,4 +1,5 @@
-# User Guide
+### User Guide
+# Individual Project DUKE
 
 ## Features 
 

@@ -1,13 +1,9 @@
 public class IntroModule {
-    private static String logo = "     ____        _        \n"
-                               + "    |  _ \\ _   _| | _____ \n"
-                               + "    | | | | | | | |/ / _ \\\n"
-                               + "    | |_| | |_| |   <  __/\n"
-                               + "    |____/ \\__,_|_|\\_\\___|\n";
+    private static String title = "     CS2103T Individual Project 1\n";
 
     public static void display() {
-        System.out.println("    ____________________________________________________________\n     Welcome to\n"
-                            + logo
+        System.out.println("    ____________________________________________________________\n     ***Welcome to Project DUKE***\n"
+                            + title
                             + "\n     Hello! I'm Duke"
                             + "\n     What can I do for you?"
                             + "\n    ____________________________________________________________\n");
