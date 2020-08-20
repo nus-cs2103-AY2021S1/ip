@@ -21,7 +21,10 @@ public abstract class Task {
         return this.description;
     }
 
-    public void markAsDone() {
+    public void markAsDone() throws DukeException {
+        if (isDone) {
+            throw new DukeException("This task is already completed!");
+        }
         this.isDone = true;
     }
 
