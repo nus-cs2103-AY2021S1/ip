@@ -83,7 +83,7 @@ public class Ultron {
         try{
 
             //Get the index of the items
-            return Integer.valueOf(args) - 1;
+            return Integer.parseInt(args) - 1;
 
         }catch(NumberFormatException e){
 
@@ -156,7 +156,7 @@ public class Ultron {
                 this.taskList.remove(index);
 
                 //Print the delete message
-                System.out.println(String.format("What are you doing removing this?!?!\n  %s\nNow you have %d burdens", tsk, this.taskList.size()));
+                System.out.printf("What are you doing removing this?!?!\n  %s\nNow you have %d burdens%n", tsk, this.taskList.size());
                 break;
             }
 
@@ -174,7 +174,7 @@ public class Ultron {
                 }
 
                 //Print the done message
-                System.out.println(String.format("Finally! Making yourself useful\n  %s", this.taskList.get(index)));
+                System.out.printf("Finally! Making yourself useful\n  %s%n", this.taskList.get(index));
                 break;
             }
             //Otherwise it will be a task to be added
@@ -215,7 +215,7 @@ public class Ultron {
                 this.taskList.add(task);
 
                 //Print out the message
-                System.out.println(String.format("Can't you keep track of '%s' yourself?\nNow you have %d burdens", task, this.taskList.size()));
+                System.out.printf("Can't you keep track of '%s' yourself?\nNow you have %d burdens%n", task, this.taskList.size());
 
             }
         }
