@@ -1,6 +1,7 @@
-public class Task {
+public abstract class Task {
     protected String desc;
     protected boolean isDone;
+    protected TypeOfTask typeOfTask;
 
     public Task(String desc) {
         this.desc = desc;
@@ -17,5 +18,10 @@ public class Task {
 
     public String getDesc() {
         return desc;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + desc;
     }
 }

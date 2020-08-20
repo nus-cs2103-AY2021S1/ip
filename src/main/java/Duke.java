@@ -34,50 +34,66 @@ public class Duke {
     }
 
     private void greet() {
-        System.out.println("    ______________________________________________________\n" +
+        System.out.println("    ____________________________________________________________\n" +
                 "     Hello! I'm Duke \n     What can I do for you?\n" +
-                "    ______________________________________________________");
+                "    ____________________________________________________________");
     }
 
     private void echo(String command) {
-        System.out.println("    ______________________________________________________\n" +
+        System.out.println("    ____________________________________________________________\n" +
                 "     " + command + "\n" +
-                "    ______________________________________________________");
+                "    ____________________________________________________________");
     }
 
     private void exit() {
-        System.out.println("    ______________________________________________________\n" +
+        System.out.println("    ____________________________________________________________\n" +
                 "     Bye. Hope to see you again soon!\n" +
-                "    ______________________________________________________");
+                "    ____________________________________________________________");
     }
 
     private void add(String input) {
-        Task newTask = new Task(input);
+        Task newTask;
+        if (input.startsWith("todo")) {
+            newTask = new ToDo(input.substring(5));
+        } else if (input.startsWith("deadline")) {
+            int indexOfSeparator = input.indexOf("/");
+            newTask = new Deadline(input.substring(9, indexOfSeparator - 1),
+                    input.substring(indexOfSeparator + 4));
+        } else {
+            int indexOfSeparator = input.indexOf("/");
+            newTask = new Event(input.substring(6, indexOfSeparator - 1),
+                    input.substring(indexOfSeparator + 4));
+        }
+
         taskList.add(newTask);
-        System.out.println("    ______________________________________________________\n" +
-                "     added: " + newTask.getDesc() + "\n" +
-                "    ______________________________________________________");
+        System.out.println("    ____________________________________________________________\n" +
+                "     Got it. I've added this task: \n" +
+                "       " + newTask + "\n" +
+                "     Now you have " + taskList.size() +
+                (taskList.size() == 1 ? " task in the list.\n" : " tasks in the list.\n") +
+                "    ____________________________________________________________");
+
     }
 
     private void list() {
-        System.out.println("    ______________________________________________________\n" +
+        System.out.println("    ____________________________________________________________\n" +
                 "     Here are the tasks in your list:");
         ListIterator<Task> listIterator = taskList.listIterator();
         int i = 1;
         while (listIterator.hasNext()) {
             Task t = listIterator.next();
-            System.out.println("     " + i + ". [" + t.getStatusIcon() + "] " + t.getDesc());
+            System.out.println("     " + i + ". " + t);
             i++;
         }
-        System.out.println("    ______________________________________________________");
+        System.out.println("    ____________________________________________________________");
     }
 
     private void markAsDone(int indexOfDoneTask) {
         Task doneTask = taskList.get(indexOfDoneTask - 1);
         doneTask.markAsDone();
-        System.out.println("    ______________________________________________________\n" +
+        System.out.println("    ____________________________________________________________\n" +
                 "     Nice! I've marked this task as done:\n" +
-                "       [" + doneTask.getStatusIcon() + "] " + doneTask.getDesc() + "\n" +
-                "    ______________________________________________________");
+                "       " + doneTask + "\n" +
+                "    ____________________________________________________________");
     }
 }
