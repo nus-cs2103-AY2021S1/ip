@@ -7,112 +7,147 @@ public class Duke {
     public static List<Task> tasks = new ArrayList<>(100);
     public static int numberOfTasks = 0;
 
-    public enum TaskType { EXIT, TODO, DEADLINE, EVENT, DONE, LIST, INVALID, DELETE };
+    public static List<String> getResponse(String s, String prefix, String[] suffix) throws DukeException {
+        List<String> response = new ArrayList<>();
 
-    public static void printTasks() {
-        System.out.println(
-                "    ____________________________________________________________\n" +
-                "     Here are the tasks in your list:");
-        for (int i = 0; i < numberOfTasks; i++) {
-            Task t = tasks.get(i);
-            System.out.format("     %d.%s\n", i + 1, t.toString());
-        }
-        System.out.println(
-                "    ____________________________________________________________");
-    }
-
-    public static TaskType findTaskType(String input, String[] arr) {
-        if (input.equals("bye")) {
-            return TaskType.EXIT;
-        } else if (input.equals("list")) {
-            return TaskType.LIST;
-        } else {
-            String firstWord = arr[0];
-            switch (firstWord) {
-                case "delete": {
-                    if (arr.length != 2 || !arr[1].matches("\\d+")) {
-                        String errorMsg = "    ____________________________________________________________\n" +
-                                "     ☹ OOPS!!! The description of a done needs can only be a single integer.\n" +
-                                "    ____________________________________________________________";
-                        System.out.println(errorMsg);
-                    } else if (Integer.parseInt(arr[1]) < 1 || Integer.parseInt(arr[1]) > numberOfTasks) {
-                        String errorMsg = "    ____________________________________________________________\n" +
-                                "     ☹ OOPS!!! You cant delete a task that does not exist.\n" +
-                                "    ____________________________________________________________";
-                        System.out.println(errorMsg);
-                    } else {
-                        return TaskType.DELETE;
-                    }
-                }
-                case "done":
-                    if (arr.length != 2 || !arr[1].matches("\\d+")) {
-                        String errorMsg = "    ____________________________________________________________\n" +
-                                "     ☹ OOPS!!! The description of a done needs can only be a single integer.\n" +
-                                "    ____________________________________________________________";
-                        System.out.println(errorMsg);
-                    } else {
-                        return TaskType.DONE;
-                    }
-                case "todo":
-                    if (arr.length < 2) {
-                        String errorMsg = "    ____________________________________________________________\n" +
-                                "     ☹ OOPS!!! The description of a todo cannot be empty.\n" +
-                                "    ____________________________________________________________";
-                        System.out.println(errorMsg);
-                        return TaskType.INVALID;
-                    } else {
-                        return TaskType.TODO;
-                    }
-                case "deadline": {
-                    boolean hasSuffix = false;
-                    int indexOfSuffix = -1;
-                    for (int i = 0; i < arr.length; i++) {
-                        if (arr[i].equals("/by")) {
-                            indexOfSuffix = i;
-                            hasSuffix = true;
-                            break;
-                        }
-                    }
-                    if (hasSuffix && indexOfSuffix > 1 && arr.length - 1 > indexOfSuffix) {
-                        return TaskType.DEADLINE;
-                    } else {
-                        String errorMsg = "    ____________________________________________________________\n" +
-                                "     ☹ OOPS!!! Ensure that deadlines have a description\n" +
-                                "     followed by suffix '/by' and a date after it\n" +
-                                "    ____________________________________________________________";
-                        System.out.println(errorMsg);
-                        return TaskType.INVALID;
-                    }
-                }
-                case "event": {
-                    boolean hasSuffix = false;
-                    int indexOfSuffix = -1;
-                    for (int i = 0; i < arr.length; i++) {
-                        if (arr[i].equals("/at")) {
-                            indexOfSuffix = i;
-                            hasSuffix = true;
-                            break;
-                        }
-                    }
-                    if (hasSuffix && indexOfSuffix > 1 && arr.length - 1 > indexOfSuffix) {
-                        return TaskType.EVENT;
-                    } else {
-                        String errorMsg = "    ____________________________________________________________\n" +
-                                "     ☹ OOPS!!! Ensure that events have a description\n" +
-                                "     followed by suffix '/at' and a time after it\n" +
-                                "    ____________________________________________________________";
-                        System.out.println(errorMsg);
-                        return TaskType.INVALID;
-                    }
-                }
-                default:
-                    String errorMsg = "    ____________________________________________________________\n" +
-                            "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                            "    ____________________________________________________________";
-                    System.out.println(errorMsg);
-                    return TaskType.INVALID;
+        if (prefix.equals("bye")) {
+            if (suffix.length != 0) {
+                throw new DukeException("the 'bye' command shouldn't have anything behind.");
+            } else {
+                response.add("Bye. Hope to see you again soon!");
             }
+        } else if (prefix.equals("list")) {
+            if (suffix.length != 0) {
+                throw new DukeException("the 'list' command shouldn't have anything behind.");
+            } else {
+                response.add("Here are the tasks in your list:");
+                for (int i = 0; i < numberOfTasks; i++) {
+                    Task t = tasks.get(i);
+                    response.add(String.format("%d.%s", i + 1, t.toString()));
+                }
+            }
+        } else if (prefix.equals("todo")) {
+            if (suffix.length == 0) {
+                throw new DukeException("The description of a todo cannot be empty.");
+            } else {
+                String[] arr = s.split(" ", 2);
+                String description = arr[1];
+                Task t = new Todo(description);
+                tasks.add(t);
+                numberOfTasks++;
+                response.add("Got it. I've added this task:");
+                response.add("  " + t.toString());
+                response.add("Now you have " + numberOfTasks + " tasks in the list.");
+            }
+        } else if (prefix.equals("deadline")) {
+            boolean hasIdentifier = false;
+            int index = -1;
+            for (int i = 0; i < suffix.length; i++) {
+                if (suffix[i].equals("/by")) {
+                    index = i;
+                    hasIdentifier = true;
+                    break;
+                }
+            }
+            if (hasIdentifier && index > 1 && suffix.length - 1 > index) {
+                StringBuilder description = new StringBuilder();
+                for (int i = 0; i < index; i++) {
+                    if (i == 0) {
+                        description.append(suffix[i]);
+                    } else {
+                        description.append(" ").append(suffix[i]);
+                    }
+                }
+                StringBuilder doBy = new StringBuilder();
+                for (int j = index + 1; j < suffix.length; j++) {
+                    if (j == index + 1) {
+                        doBy.append(suffix[j]);
+                    } else {
+                        doBy.append(" ").append(suffix[j]);
+                    }
+                }
+                Task t = new Deadline(description.toString(), doBy.toString());
+                tasks.add(t);
+                numberOfTasks++;
+                response.add("Got it. I've added this task:");
+                response.add("  " + t.toString());
+                response.add("Now you have " + numberOfTasks + " tasks in the list.");
+            } else {
+                throw new DukeException("Ensure that deadlines have correct description.");
+            }
+        } else if (prefix.equals("event")) {
+            boolean hasIdentifier = false;
+            int index = -1;
+            for (int i = 0; i < suffix.length; i++) {
+                if (suffix[i].equals("/at")) {
+                    index = i;
+                    hasIdentifier = true;
+                    break;
+                }
+            }
+            if (hasIdentifier && index > 1 && suffix.length - 1 > index) {
+                StringBuilder description = new StringBuilder();
+                for (int i = 0; i < index; i++) {
+                    if (i == 0) {
+                        description.append(suffix[i]);
+                    } else {
+                        description.append(" ").append(suffix[i]);
+                    }
+                }
+                StringBuilder when = new StringBuilder();
+                for (int j = index + 1; j < suffix.length; j++) {
+                    if (j == index + 1) {
+                        when.append(suffix[j]);
+                    } else {
+                        when.append(" ").append(suffix[j]);
+                    }
+                }
+                Task t = new Event(description.toString(), when.toString());
+                tasks.add(t);
+                numberOfTasks++;
+                response.add("Got it. I've added this task:");
+                response.add("  " + t.toString());
+                response.add("Now you have " + numberOfTasks + " tasks in the list.");
+            } else {
+                throw new DukeException("Ensure that events have correct description.");
+            }
+        } else if (prefix.equals("done")) {
+            if (suffix.length != 1) {
+                throw new DukeException("done should be followed by a single task number.");
+            } else {
+                int taskIndex =Integer.parseInt(suffix[0]) - 1;
+                if (taskIndex < 0 || taskIndex > numberOfTasks - 1) {
+                    throw new DukeException("Task does not exist/invalid task number.");
+                } else {
+                    Task t = tasks.get(taskIndex);
+                    t.markAsDone();
+                    response.add("Nice! I've marked this task as done:");
+                    response.add("  " + t.toString());
+                }
+            }
+        } else if (prefix.equals("delete")) {
+            if (suffix.length != 1) {
+                throw new DukeException("delete should be followed by a single task number.");
+            } else {
+                int deleteIndex = Integer.parseInt(suffix[0]) - 1;
+                if (deleteIndex < 0 || deleteIndex > numberOfTasks - 1) {
+                    throw new DukeException("Task does not exist/invalid task number.");
+                } else {
+                    Task t = tasks.get(deleteIndex);
+                    tasks.remove(deleteIndex);
+                    numberOfTasks--;
+
+                    assert numberOfTasks == tasks.size();
+
+                    response.add("Noted. I've removed this task:") ;
+                    response.add("  " + t.toString());
+                    response.add("Now you have " + numberOfTasks + " tasks in the list.");
+                }
+            }
+        } else {
+            throw new DukeException();
         }
+        return response;
     }
 
     public static void main(String[] args) {
@@ -120,12 +155,12 @@ public class Duke {
 
         String logo =
                 "#############################################################\n" +
-                "###################################################   #######\n" +
-                "###############################################   /~\\   #####\n" +
-                "############################################   _- `~~~', ####\n" +
-                "##########################################  _-~       )  ####\n" +
-                "#######################################  _-~          |  ####\n" +
-                "####################################  _-~            ;  #####\n" +
+                "###|░██╗░░░░░░░██╗██╗░░░██╗███████╗|###############   #######\n" +
+                "###|░██║░░██╗░░██║██║░░░██║██╔════╝|###########   /~\\   #####\n" +
+                "###|░╚██╗████╗██╔╝██║░░░██║█████╗░░|########   _- `~~~', ####\n" +
+                "###|░░████╔═████║░██║░░░██║██╔══╝░░|######  _-~       )  ####\n" +
+                "###|░░╚██╔╝░╚██╔╝░╚██████╔╝██║░░░░░|###  _-~          |  ####\n" +
+                "###|░░░╚═╝░░░╚═╝░░░╚═════╝░╚═╝░░░░░#  _-~            ;  #####\n" +
                 "##########################  __---___-~              |   #####\n" +
                 "#######################   _~   ,,                  ;  `,,  ##\n" +
                 "#####################  _-~    ;'                  |  ,'  ; ##\n" +
@@ -143,145 +178,39 @@ public class Duke {
         System.out.println(logo);
 
         System.out.println(
-                "    ____________________________________________________________\n" +
-                "     Henlo! I am Woolf,\n" +
-                "     here to help you track those delicious tasks!\n" +
-                "     Am I a good boy yet?\n" +
-                "    ____________________________________________________________\n");
+                "#############################################################\n" +
+                "#     Henlo! I am WUF,\n" +
+                "#     here to help you track yowr tasks!\n" +
+                "#############################################################\n");
 
-        while(running) {
+        while (running) {
             String input = sc.nextLine();
-            String[] arrayForm = input.split(" ", 0);
-            TaskType type = findTaskType(input, arrayForm);
 
-            switch (type) {
-                case INVALID: {
-                    break;
+            String[] arr = input.split(" ", 2);
+            String prefix = arr[0];
+            String[] suffix = new String[0];
+            if (arr.length > 1) {
+                suffix = arr[1].split(" ", 0);
+            }
+
+            try {
+                List<String> response = getResponse(input, prefix, suffix);
+                StringBuilder str = new StringBuilder();
+                for (int i = 0; i < response.size(); i++) {
+                    str.append("#    ").append(response.get(i)).append("\n");
                 }
-                case EXIT: {
-                    String endMessage =
-                            "    ____________________________________________________________\n" +
-                                    "     Bye. Hope to see you again soon!\n" +
-                                    "    ____________________________________________________________";
-                    System.out.println(endMessage);
+                String reply = "#############################################################\n" +
+                        str.toString() +
+                        "#############################################################";
+                System.out.println(reply);
+                if (prefix.equals("bye")) {
                     running = false;
-                    break;
                 }
-                case LIST: { printTasks(); break; }
-                case TODO: {
-                    String[] arr = input.split(" ", 2);
-                    String description = arr[1];
-                    Task t = new Todo(description);
-                    tasks.add(t);
-                    numberOfTasks++;
-
-                    String addTaskMessage =
-                            "    ____________________________________________________________\n" +
-                                    "     Got it. I've added this task:\n" +
-                                    "       " + t.toString() + "\n" +
-                                    "     Now you have " + numberOfTasks + " tasks in the list.\n" +
-                                    "    ____________________________________________________________";
-                    System.out.println(addTaskMessage);
-                    break;
-                }
-                case DEADLINE: {
-                    int index = -1;
-                    for (int i = 0; i < arrayForm.length; i++) {
-                        if (arrayForm[i].equals("/by")) {
-                            index = i;
-                            break;
-                        }
-                    }
-                    StringBuilder description = new StringBuilder();
-                    for (int i = 1; i < index; i++) {
-                        if (i == 1) {
-                            description.append(arrayForm[i]);
-                        } else {
-                            description.append(" ").append(arrayForm[i]);
-                        }
-                    }
-                    StringBuilder doBy = new StringBuilder();
-                    for (int j = index + 1; j < arrayForm.length; j++) {
-                        if (j == index + 1) {
-                            doBy.append(arrayForm[j]);
-                        } else {
-                            doBy.append(" ").append(arrayForm[j]);
-                        }
-                    }
-                    Task t = new Deadline(description.toString(), doBy.toString());
-                    tasks.add(t);
-                    numberOfTasks++;
-                    String msg = "    ____________________________________________________________\n" +
-                            "     Got it. I've added this task:\n" +
-                            "       " + t.toString() + "\n" +
-                            "     Now you have " + numberOfTasks + " tasks in the list.\n" +
-                            "    ____________________________________________________________";
-                    System.out.println(msg);
-                    break;
-                }
-                case EVENT: {
-                    int index = -1;
-                    for (int i = 0; i < arrayForm.length; i++) {
-                        if (arrayForm[i].equals("/at")) {
-                            index = i;
-                            break;
-                        }
-                    }
-                    StringBuilder description = new StringBuilder();
-                    for (int i = 1; i < index; i++) {
-                        if (i == 1) {
-                            description.append(arrayForm[i]);
-                        } else {
-                            description.append(" ").append(arrayForm[i]);
-                        }
-                    }
-                    StringBuilder date = new StringBuilder();
-                    for (int j = index + 1; j < arrayForm.length; j++) {
-                        if (j == index + 1) {
-                            date.append(arrayForm[j]);
-                        } else {
-                            date.append(" ").append(arrayForm[j]);
-                        }
-                    }
-                    Task t = new Event(description.toString(), date.toString());
-                    tasks.add(t);
-                    numberOfTasks++;
-                    String msg = "    ____________________________________________________________\n" +
-                            "     Got it. I've added this task:\n" +
-                            "       " + t.toString() + "\n" +
-                            "     Now you have " + numberOfTasks + " tasks in the list.\n" +
-                            "    ____________________________________________________________";
-                    System.out.println(msg);
-                    break;
-                }
-                case DONE: {
-                    int taskIndex = Integer.parseInt(arrayForm[1]) - 1;
-                    Task t = tasks.get(taskIndex);
-                    t.markAsDone();
-                    String doneTaskMessage =
-                            "    ____________________________________________________________\n" +
-                                    "     Nice! I've marked this task as done:\n" +
-                                    "       " + t.toString() + "\n" +
-                                    "    ____________________________________________________________";
-                    System.out.println(doneTaskMessage);
-                    break;
-                }
-                case DELETE: {
-                    int deleteIndex = Integer.parseInt(arrayForm[1]) - 1;
-                    Task t = tasks.get(deleteIndex);
-                    tasks.remove(deleteIndex);
-                    numberOfTasks--;
-                    String deleteMessage =
-                            "    ____________________________________________________________\n" +
-                                    "     Noted. I've removed this task:\n" +
-                                    "       " + t.toString() + "\n" +
-                                    "     Now you have " + numberOfTasks + " tasks in the list.\n" +
-                                    "    ____________________________________________________________";
-                    System.out.println(deleteMessage);
-                    break;
-                }
-                default:
-                    System.out.println("Something must have gone wrong.");
+            } catch (DukeException e) {
+                String reply = "#############################################################\n" +
+                        "#    " + e.toString() + "\n" +
+                        "#############################################################";
+                System.out.println(reply);
             }
         }
     }

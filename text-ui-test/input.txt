@@ -10,4 +10,10 @@ deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 delete 3
 list
+done 5000
+delete 0
+blah
+todo
+deadline
+event 123456 1234 1123
 bye
