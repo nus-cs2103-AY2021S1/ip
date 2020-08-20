@@ -88,7 +88,7 @@ public class Duke {
                                 list.remove(index);
                                 break;
                             case "todo": {
-                                if (command.split(" ", 2).length < 3) {
+                                if (command.split(" ", 2).length == 1) {
                                     throw new EmptyDescriptionException("The description of " + line + " cannot be empty. Please re-enter");
                                 }
                                 Task task = new Todo(command.split(" ", 2)[1]);
@@ -98,7 +98,7 @@ public class Duke {
                                 break;
                             }
                             case "deadline": {
-                                if (command.split(" ", 2).length < 3) {
+                                if (command.split(" ", 2).length == 1) {
                                     throw new EmptyDescriptionException("The description of " + line + " cannot be empty. Please re-enter");
                                 }
                                 String str = command.split(" ", 2)[1].split(" /", 2)[0];
@@ -110,7 +110,7 @@ public class Duke {
                                 break;
                             }
                             case "event": {
-                                if (command.split(" ", 2).length < 3) {
+                                if (command.split(" ", 2).length == 1) {
                                     throw new EmptyDescriptionException("The description of " + line + " cannot be empty. Please re-enter");
                                 }
                                 String str = command.split(" ", 2)[1].split(" /", 2)[0];
