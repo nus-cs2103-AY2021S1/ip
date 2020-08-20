@@ -24,7 +24,11 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String nextInput = sc.nextLine();
-            processInput(nextInput);
+            try {
+                processInput(nextInput);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
 
             // Exit the program if user says bye
             if (nextInput.equals("bye")) {
@@ -38,22 +42,19 @@ public class Duke {
      * Processes the input fed to Duke.
      *
      * @param input Input string to be processed.
+     * @throws DukeException If input is invalid.
      */
-    private static void processInput(String input) {
+    private static void processInput(String input) throws DukeException {
         if (input.equals("bye")) {
             System.out.println("Bye. Hope to see you again soon!");
         } else if (input.equals("list")) {
             printList();
         } else if (input.contains("done")) {
-            int number = Integer.parseInt(input.substring(5));
-            Task task = tasks.get(number - 1);
-            task.markAsDone();
-            System.out.println("Nice! I've marked this as done:");
-            System.out.println(task.toString() + "\n");
+            markAsDone(input);
         } else if (input.contains("todo") || input.contains("event") || input.contains("deadline")) {
             createTask(input);
         } else {
-            // Other unrecognized commands
+            throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }
     }
 
@@ -61,12 +62,37 @@ public class Duke {
      * Prints the list of tasks stored in Duke.
      */
     private static void printList() {
-        System.out.println("Here are the task(s) in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            int number = i + 1;
-            System.out.println(number + "." + tasks.get(i).toString());
+        int numOfTasks = tasks.size();
+        if (numOfTasks == 0) {
+            System.out.println("There are no tasks in your list.\n");
+        } else {
+            System.out.println("Here are the task(s) in your list:");
+            for (int i = 0; i < numOfTasks; i++) {
+                int number = i + 1;
+                System.out.println(number + "." + tasks.get(i).toString());
+            }
+            System.out.println();
         }
-        System.out.println();
+    }
+
+    /**
+     * Marks a task as done.
+     *
+     * @param input Input string describing which task's index is done.
+     * @throws DukeException If input is invalid.
+     */
+    private static void markAsDone(String input) throws DukeException {
+        try {
+            int number = Integer.parseInt(input.substring(5));
+            Task task = tasks.get(number - 1);
+            task.markTaskAsDone();
+            System.out.println("Nice! I've marked this as done:");
+            System.out.println(task.toString() + "\n");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("\u2639 OOPS!!! Which task have you done?\n");
+        } catch (NumberFormatException e) {
+            throw new DukeException("\u2639 OOPS!!! Enter the index of the task done.\n");
+        }
     }
 
     /***
@@ -74,22 +100,38 @@ public class Duke {
      * Either a todo, an event or a deadline.
      *
      * @param input Input string describing a task.
+     * @throws DukeException If inout is invalid.
      */
-    private static void createTask(String input) {
+    private static void createTask(String input) throws DukeException {
         Task task;
         String taskString;
 
-        if (input.contains("todo")) {   // todo
-            taskString = input.substring(5);
-            task = new Todo(taskString);
-        } else if (input.contains("event")) {   // event
-            taskString = input.substring(6);
-            String[] arr = taskString.split(" /at ", 2);
-            task = new Event(arr[0], arr[1]);
-        } else {    // deadline
-            taskString = input.substring(9);
-            String[] arr = taskString.split(" /by ", 2);
-            task = new Deadline(arr[0], arr[1]);
+        try {
+            if (input.contains("todo")) {   // todo
+                taskString = input.substring(5);
+                task = new Todo(taskString);
+            } else if (input.contains("event")) {   // event
+                taskString = input.substring(6);
+                String[] arr = taskString.split(" /at ", 2);
+                if (arr.length < 2 || arr[1].equals("")) {
+                    throw new DukeException("\u2639 OOPS!!! Enter the date and/or time of the event after \"/at\".\n");
+                }
+                task = new Event(arr[0], arr[1]);
+            } else {    // deadline
+                taskString = input.substring(9);
+                String[] arr = taskString.split(" /by ", 2);
+                if (arr.length < 2 || arr[1].equals("")) {
+                    throw new DukeException("\u2639 OOPS!!! Enter the date and/or time of the deadline after \"/by\".\n");
+                }
+                task = new Deadline(arr[0], arr[1]);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            String typeOfTask = input.contains("todo")
+                    ? "a todo"
+                    : input.contains("event")
+                    ? "an event"
+                    : "a deadline";
+            throw new DukeException("\u2639 OOPS!!! The description of " + typeOfTask + " cannot be empty.\n");
         }
 
         tasks.add(task);
