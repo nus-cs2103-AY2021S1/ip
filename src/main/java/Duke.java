@@ -12,7 +12,7 @@ public class Duke {
     private static final String task_completed = "Nice! I've marked this task as complete. \n";
     private static final String farewell = "Bye. Hope to see you again soon.";
     private static final String task_index_out_of_bounds = "That task does not exist.";
-    private static final String task_number_format = "Invalid. Please try with the following format: done[space][task number in numerals]";
+    private static final String task_number_format = "Invalid. Please try with the following format: done [task number in numerals]";
     public static final String task_no_description = "Invalid, no task description provided.";
     public static final String task_invalid_type = "Invalid, not an accepted task type";
     private boolean running = true;
@@ -60,6 +60,9 @@ public class Duke {
     private void addTask(String[] breakdown) {
         try {
             String taskType = breakdown[0];
+            if (!(taskType.equals("todo") || taskType.equals("deadline") || taskType.equals("event"))) {
+                throw new DukeException(taskType);
+            }
             String description = breakdown[1];
             Task newTask = null;
             switch (taskType) {
@@ -86,8 +89,8 @@ public class Duke {
             ));
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(constructMessage(task_no_description));
-        } catch (NullPointerException e) {
-            System.out.println(constructMessage(task_invalid_type));
+        } catch (DukeException e) {
+            System.err.println(constructMessage(e.toString()));
         }
     }
 
