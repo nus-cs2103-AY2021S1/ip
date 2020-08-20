@@ -30,10 +30,21 @@ public class Duke {
         System.out.println("added: " + s);
     }
 
+    public Task getTask(int i) {
+        return storage.get(i-1);
+    }
+
+    public void doTask(int i) {
+        Task temp = this.getTask(i);
+        temp.doTask();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("\t" + temp.toString());
+    }
+
     public void printList() {
         for (int i = 0; i < storage.size(); i++) {
-            String printtext = Integer.toString(i+1) + ". " + storage.get(i).toString();
-            System.out.println(printtext);
+            String printText = Integer.toString(i+1) + ". " + storage.get(i).toString();
+            System.out.println(printText);
         }
     }
 
@@ -51,6 +62,8 @@ public class Duke {
                 break;
             } else if (s.equals("list")) {
                 duke.printList();
+            } else if (s.split(" ")[0].equals("done")) {
+                duke.doTask(Integer.parseInt(s.split(" ")[1]));
             } else {
                 duke.store(s);
             }
