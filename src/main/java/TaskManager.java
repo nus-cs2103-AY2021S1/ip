@@ -43,7 +43,7 @@ public class TaskManager {
     public void deleteTask(int index) throws DukeException {
         int size = tasks.size();
         if (index > size) {
-            throw new DukeException("☹ OOPS!!! Seems the index you provided is not in the list.");
+            throw new DukeException(Messenger.INDEX_OUT_OF_BOUND_ERROR);
         }
 
         System.out.println("Noted. I've removed this task:");
