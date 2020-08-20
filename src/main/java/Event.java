@@ -16,4 +16,8 @@ public class Event extends Task {
         time = t;
     }
 
+    @Override
+    public String toString() {
+        return "[E]" + "[" + (super.isDone() ? "O" : "X") + "] " + super.getName() + " (at: " + time + ")";
+    }
 }

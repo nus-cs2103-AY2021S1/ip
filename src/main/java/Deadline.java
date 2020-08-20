@@ -16,4 +16,8 @@ public class Deadline extends Task {
         end = e;
     }
 
+    @Override
+    public String toString() {
+        return "[D]" + "[" + (super.isDone() ? "O" : "X") + "] " + super.getName() + " (by: " + end + ")";
+    }
 }
