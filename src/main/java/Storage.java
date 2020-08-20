@@ -41,4 +41,18 @@ public class Storage {
             Text.printTaskNotFoundError();
         }
     }
+
+    public void deleteTask(int position) {
+        try {
+
+            Task task = storage.get(position - 1);
+            storage.remove(position - 1);
+            Text.normalPrint("Noted. I've removed this task:\n  " +
+                    task.toString() + "\n" +
+                    "Now you have " + size() + " tasks in the list.");
+
+        } catch (IndexOutOfBoundsException e) {
+            Text.printTaskNotFoundError();
+        }
+    }
 }

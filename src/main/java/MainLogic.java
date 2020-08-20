@@ -33,6 +33,9 @@ public class MainLogic {
             case "done":
                 doneLogic();
                 return true;
+            case "delete":
+                deleteLogic();
+                return true;
             case "todo":
                 toDoLogic();
                 return true;
@@ -49,11 +52,19 @@ public class MainLogic {
     }
 
     private void doneLogic() {
-        storage.markDone(Integer.parseInt(current[1]));
+        if (current.length == 1) {
+            Text.printTaskNumNotSpecifiedError();
+        } else {
+            storage.markDone(Integer.parseInt(current[1]));
+        }
     }
 
     private void toDoLogic() {
-        storage.addTask(new TodoTask(current[1]));
+        if (current.length == 1) {
+            Text.printDescriptionNotFoundError();
+        } else {
+            storage.addTask(new TodoTask(current[1]));
+        }
     }
 
     private void deadlineLogic() {
@@ -79,6 +90,14 @@ public class MainLogic {
             } else {
                 storage.addTask(new EventTask(details[0], details[1]));
             }
+        }
+    }
+
+    private void deleteLogic() {
+        if (current.length == 1) {
+            Text.printTaskNumNotSpecifiedError();
+        } else {
+            storage.deleteTask(Integer.parseInt(current[1]));
         }
     }
 }

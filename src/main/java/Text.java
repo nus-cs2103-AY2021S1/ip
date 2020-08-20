@@ -4,10 +4,12 @@ public class Text {
     private static String bottom = "------------------------------------------";
     private static String startMessage = "This is a chat bot made by Hendey Fan.\n" +
             "What can this magnificent bot do for you?";
-    private static String endMessage = "    Oi don run away from ur tasks hor    ";
-    private static String taskNotFound = "Error: No task found :(";
-    private static String commandNotFound = "Error: Command does not exist :(\n Type '!command]' for list of commands";
+    private static String endMessage = "    oi don run away from ur tasks hor    ";
+    private static String taskNotFound = "Error: task not found :(";
+    private static String commandNotFound = "Error: command does not exist :(\n" +
+            "Type '!command' for list of commands";
     private static String descriptionNotFound = "Error: description of task cannot be empty";
+    private static String taskNumNotSpecified = "Error: task number not specified";
 
     public static void normalPrint(String middle) {
         System.out.println(top + "\n" + middle + "\n" + bottom+ "\n");
@@ -31,5 +33,9 @@ public class Text {
 
     public static void printDescriptionNotFoundError() {
         normalPrint(descriptionNotFound);
+    }
+
+    public static void printTaskNumNotSpecifiedError() {
+        normalPrint(taskNumNotSpecified);
     }
 }
