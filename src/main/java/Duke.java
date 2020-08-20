@@ -69,6 +69,16 @@ public class Duke {
             System.out.println(borders + addedMessage + thisTask.toString() + "\n" +
                     "Now got " + taskList.size() + " task in the list\n" + borders);
             Duke.response(scanner, taskList);
+        } else if (userInput.startsWith("delete")) {
+            if (userInput.equals("delete")) throw new deleteException();
+            int indexDeleted = Integer.parseInt(userInput.replace("delete ", ""));
+            if (indexDeleted > taskList.size()) throw new deleteException();
+            else {
+                Task thisTask = taskList.get(indexDeleted - 1);
+                taskList.remove(indexDeleted - 1);
+                System.out.println(borders + "ok delete this task alr:\n" + thisTask + "\nNow you left " + taskList.size() + " task(s) left\n" + borders);
+                Duke.response(scanner, taskList);
+            }
         } else {
             throw new DukeException();
         }
