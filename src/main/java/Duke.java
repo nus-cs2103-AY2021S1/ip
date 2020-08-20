@@ -4,12 +4,10 @@ import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
+        // Opening
         String open = "_______________________________________ \n"
                 + "Hello! I'm Duke \n"
                 + "What can I do for you? \n"
-                + "_______________________________________ \n";
-        String close = "_______________________________________ \n"
-                + "Bye. Hope to see you again soon! \n"
                 + "_______________________________________ \n";
         String line = "_______________________________________\n";
         System.out.println(open);
@@ -25,39 +23,72 @@ public class Duke {
             } else if (user_input.equals("list")){  // For viewing items in to do list
                 String output = "";
                 for (int i = 1; i <= user_list.size(); i++) {
-                    output = output + i + ". " + user_list.get(i-1) + "\n";
+                    output = output + i + ". " + user_list.get(i - 1) + "\n";
                 }
                 System.out.println(line + "Here are the tasks in your list: \n" + output + line);
 
             } else if (input_split[0].equals("done")) {  // For marking items in the to do list as done
-                int task_id = Integer.parseInt(input_split[1]);
-                user_list.get(task_id - 1).setCompleted();
-                System.out.println(line + "Nice! I've marked this task as done: \n"
-                        + user_list.get(task_id - 1) + "\n" + line);
+                try {
+                    int task_id = Integer.parseInt(input_split[1]);
+                    if (task_id <=0 || task_id > user_list.size()) {
+                        System.out.println("Invalid input! That task does not exist!");
+                    } else {
+                        user_list.get(task_id - 1).setCompleted();
+                        System.out.println(line + "Nice! I've marked this task as done: \n"
+                                + user_list.get(task_id - 1) + "\n" + line);
+                    }
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Invalid input! Please specify which task you have completed!");
+                }
 
-            } else {  // For adding new items into to do list
-                if (input_split[0].equals("todo")) { // Add new to do
+            } else if (input_split[0].equals("todo")) { // Add new todo
+                try {
                     user_list.add(new ToDo(input_split[1]));
+                    String output = line + "Got it. I've added this task: \n"
+                            + user_list.get(user_list.size() - 1) + "\n"
+                            + "Now you have " + user_list.size() + " tasks in the list."
+                            + "\n" + line;
+                    System.out.println(output);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Invalid input! Please specify what your todo is!");
+                }
 
-                } else if (input_split[0].equals("deadline")) { // Add new deadline
+            } else if (input_split[0].equals("deadline")) { // Add new deadline
+                try {
                     String[] details = input_split[1].split(" /by ", 2);
                     user_list.add(new Deadline(details[0], details[1]));
+                    String output = line + "Got it. I've added this task: \n"
+                            + user_list.get(user_list.size() - 1) + "\n"
+                            + "Now you have " + user_list.size() + " tasks in the list."
+                            + "\n" + line;
+                    System.out.println(output);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Invalid input! Please specify what your deadline!");
+                }
 
-                } else if (input_split[0].equals("event")) { // Add new event
+            } else if (input_split[0].equals("event")) { // Add new event
+                try {
                     String[] details = input_split[1].split(" /at ", 2);
                     user_list.add(new Event(details[0], details[1]));
-
+                    String output = line + "Got it. I've added this task: \n"
+                            + user_list.get(user_list.size() - 1) + "\n"
+                            + "Now you have " + user_list.size() + " tasks in the list."
+                            + "\n" + line;
+                    System.out.println(output);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Invalid input! Please specify what your event is!");
                 }
-                String output = line + "Got it. I've added this task: \n"
-                        + user_list.get(user_list.size()-1) + "\n"
-                        + "Now you have " + user_list.size() + " tasks in the list."
-                        + "\n" + line;
-                System.out.println(output);
 
+            } else {
+                System.out.println("Invalid input! Please try again!");
             }
         }
 
+        // Closing
         scanner.close();
+        String close = "_______________________________________ \n"
+                + "Bye. Hope to see you again soon! \n"
+                + "_______________________________________ \n";
         System.out.println(close);
     }
 }
