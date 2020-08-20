@@ -8,7 +8,7 @@ public class Duke {
         System.out.println("How may I be of assistance to you?");
     }
 
-    public static int completer(String str, int numTask) throws DukeException {
+    public static int compDel(String str, int numTask) throws DukeException {
         String[] words = str.split("\\s+");
         int len = words.length;
         if (len == 2) {
@@ -107,10 +107,21 @@ public class Duke {
                 String[] words = line.split("\\s+");
                 if (words[0].equals("done")) {
                     try {
-                        int index = completer(line, list.size());
+                        int index = compDel(line, list.size());
                         list.get(index).done();
                         System.out.println("Nice! I've marked this task as done:");
                         System.out.println(list.get(index).toString());
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else if (words[0].equals("delete")) {
+                    try {
+                        int index = compDel(line, list.size());
+                        Task task = list.get(index);
+                        list.remove(index);
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(task.toString());
+                        System.out.println("Now you have " + list.size() + " tasks in the list.");
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
