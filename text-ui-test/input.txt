@@ -1,4 +1,5 @@
 list
+blah
 delete 0
 delete 1
 todo
