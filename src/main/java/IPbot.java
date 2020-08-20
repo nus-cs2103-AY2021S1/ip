@@ -13,16 +13,6 @@ import java.util.stream.Stream;
 
 public class IPbot {
 
-    // command strings
-    private static final String EXIT_CMD = "bye";
-    private static final String LIST_CMD = "list";
-    private static final String DONE_CMD = "done";
-    private static final String TODO_CMD = "todo";
-    private static final String EVENT_CMD = "event";
-    private static final String DEADLINE_CMD = "deadline";
-    private static final String DELETE_CMD = "delete";
-
-
     // user input
     private static final Scanner sc = new Scanner(System.in);
 
@@ -42,7 +32,7 @@ public class IPbot {
         }
 
         Stream.generate(sc::nextLine)
-            .takeWhile(input -> !EXIT_CMD.equals(input))
+            .takeWhile(input -> !Command.EXIT_CMD.getCmdString().equals(input))
             .forEach(input -> {
                 if (input.isBlank()) {
                     return;
@@ -50,55 +40,54 @@ public class IPbot {
 
                 try {
                     final String output;
-                    if (LIST_CMD.equals(input)) {
-                        // list tasks
-                        output = listTasks();
-                    } else if (input.startsWith(DONE_CMD)) {
-                        // mark a task as done
-                        final String stripped = input.substring(DONE_CMD.length()).strip();
-                        try {
-                            final int id = Integer.parseInt(stripped);
-                            output = completeTask(tasks.get(id - 1));
-                        } catch (NumberFormatException e) {
-                            throw new CommandException(input, "Could not read the task ID");
-                        } catch (IndexOutOfBoundsException e) {
-                            throw new CommandException(input, "Task ID does not exist");
-                        }
-                    } else if (input.startsWith(TODO_CMD)) {
-                        // add to do task
-                        final String stripped = input.substring(TODO_CMD.length()).strip();
-                        output = addTasks(new Todo(stripped));
-                    } else if (input.startsWith(EVENT_CMD)) {
-                        // add event task
-                        final String stripped = input.substring(EVENT_CMD.length()).strip();
-                        final String[] split = stripped.split("/at", 2);
-                        if (split.length < 2) {
-                            throw new CommandException(input,
-                                    "Events should have a time specified with /at");
-                        }
-                        output = addTasks(new Event(split[0].strip(), split[1].strip()));
-                    } else if (input.startsWith(DEADLINE_CMD)) {
-                        // add deadline task
-                        final String stripped = input.substring(DEADLINE_CMD.length()).strip();
-                        final String[] split = stripped.split("/by", 2);
-                        if (split.length < 2) {
-                            throw new CommandException(input,
-                                    "Deadlines should have a time due specified with /by");
-                        }
-                        output = addTasks(new Deadline(split[0].strip(), split[1].strip()));
-                     } else if (input.startsWith(DELETE_CMD)) {
-                        // delete task
-                        final String stripped = input.substring(DELETE_CMD.length()).strip();
-                        try {
-                            final int id = Integer.parseInt(stripped);
-                            output = deleteTask(tasks.get(id - 1));
-                        } catch (NumberFormatException e) {
-                            throw new CommandException(input, "Could not read the task ID");
-                        } catch (IndexOutOfBoundsException e) {
-                            throw new CommandException(input, "Task ID does not exist");
-                        }
-                    } else {
-                        throw new CommandException(input, "Unknown command");
+                    final Command cmd = Command.parseCommand(input);
+                    final String stripped = cmd.strip(input);
+                    final String[] split;
+                    switch (cmd) {
+                        case LIST_CMD:
+                            output = listTasks();
+                            break;
+                        case DONE_CMD:
+                            try {
+                                final int id = Integer.parseInt(stripped);
+                                output = completeTask(tasks.get(id - 1));
+                            } catch (NumberFormatException e) {
+                                throw new CommandException(input, "Could not read the task ID");
+                            } catch (IndexOutOfBoundsException e) {
+                                throw new CommandException(input, "Task ID does not exist");
+                            }
+                            break;
+                        case TODO_CMD:
+                            output = addTasks(new Todo(stripped));
+                            break;
+                        case EVENT_CMD:
+                            split = stripped.split("/at", 2);
+                            if (split.length < 2) {
+                                throw new CommandException(input,
+                                        "Events should have a time specified with /at");
+                            }
+                            output = addTasks(new Event(split[0].strip(), split[1].strip()));
+                            break;
+                        case DEADLINE_CMD:
+                            split = stripped.split("/by", 2);
+                            if (split.length < 2) {
+                                throw new CommandException(input,
+                                        "Deadlines should have a time due specified with /by");
+                            }
+                            output = addTasks(new Deadline(split[0].strip(), split[1].strip()));
+                            break;
+                        case DELETE_CMD:
+                            try {
+                                final int id = Integer.parseInt(stripped);
+                                output = deleteTask(tasks.get(id - 1));
+                            } catch (NumberFormatException e) {
+                                throw new CommandException(input, "Could not read the task ID");
+                            } catch (IndexOutOfBoundsException e) {
+                                throw new CommandException(input, "Task ID does not exist");
+                            }
+                            break;
+                        default:
+                            throw new IllegalStateException("Unexpected state");
                     }
                     print(output);
                 } catch (IPException e) {
