@@ -42,36 +42,59 @@ public class Duke {
                 printList();
             } else if (response.split("\\s+")[0].equals(DONE_COMMAND)) {
                 try {
-                    String[] components = response.split("\\s+");
-                    if (components.length == 2) {
-                        int parameter = Integer.parseInt(response.split("\\s+")[1]);
+                    String[] components = response.split("\\s+", 2);
+                        int parameter = Integer.parseInt(components[1]);
                         markTaskDone(parameter - 1);
-                    }
-                } catch (Exception e) {
-
+                } catch (NumberFormatException exception) {
+                    printResponse("☹ OOPS!!! the task number has to be a postive integer.");
+                } catch (IndexOutOfBoundsException exception) {
+                    printResponse("☹ OOPS!!! the task number has to be valid");
                 }
             } else if (response.split("\\s+")[0].equals(TODO_COMMAND)) {
-                Task task = new ToDoTask(response.split("\\s+", 2)[1]);
-                addToList(task);
-                outputTask(task);
+                try {
+                    Task task = new ToDoTask(response.split("\\s+", 2)[1]);
+                    addToList(task);
+                    outputTask(task);
+                } catch (IndexOutOfBoundsException exception) {
+                    printResponse("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
             } else if (response.split("\\s+")[0].equals(DEADLINE_COMMAND)) {
-                String title = response.split("\\s+", 2)[1];
-                String[] titleComponents = title.split("/", 2);
-                title = String.format("%s (%s)", titleComponents[0], titleComponents[1]);
-                Task task = new DeadlineTask(title);
-                addToList(task);
-                outputTask(task);
+                String title;
+                try {
+                    title = response.split("\\s+", 2)[1];
+                } catch (IndexOutOfBoundsException exception) {
+                    printResponse("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    continue;
+                }
+                try {
+                    String [] titleComponents = title.split("/", 2);
+                    title = String.format("%s (%s)", titleComponents[0], titleComponents[1]);
+                    Task task = new DeadlineTask(title);
+                    addToList(task);
+                    outputTask(task);
+                } catch (IndexOutOfBoundsException exception) {
+                    printResponse("☹ OOPS!!! The date of a deadline cannot be empty.");
+                }
             } else if (response.split("\\s+")[0].equals(EVENT_COMMAND)) {
-                String title = response.split("\\s+", 2)[1];
-                String[] titleComponents = title.split("/", 2);
-                title = String.format("%s (%s)", titleComponents[0], titleComponents[1]);
-                Task task = new EventTask(title);
-                addToList(task);
-                outputTask(task);
+                String title;
+                try {
+                    title = response.split("\\s+", 2)[1];
+                } catch (IndexOutOfBoundsException exception) {
+                    printResponse("☹ OOPS!!! The description of an event cannot be empty.");
+                    continue;
+                }
+                try {
+                    String[] titleComponents = title.split("/", 2);
+                    title = String.format("%s (%s)", titleComponents[0], titleComponents[1]);
+                    Task task = new EventTask(title);
+                    addToList(task);
+                    outputTask(task);
+                } catch (IndexOutOfBoundsException exception) {
+                    printResponse("☹ OOPS!!! The start and end time of an event cannot be empty.");
+                }
             }
             else {
-                addToList(response);
-                printResponse("added: " + response);
+                printResponse("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
@@ -97,9 +120,6 @@ public class Duke {
         System.out.println(LINE);
     }
 
-    private static void addToList(String response) {
-        TASK_LIST.add(new Task(response));
-    }
 
     private static void addToList(Task task) {
         TASK_LIST.add(task);
