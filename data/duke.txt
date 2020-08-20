@@ -1,0 +1,3 @@
+T | ✘ | test1
+E | ✘ | test2 | sun 2-4pm
+D | ✘ | test3 | sun
