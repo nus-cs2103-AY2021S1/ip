@@ -33,35 +33,56 @@ public class TaskList {
         Task newTask;
         switch(taskType) {
             case "todo":
-                newTask = new Todo(splitInput[1]);
-                break;
+                if (input.matches("todo (\\S+\\s?)+")) {
+                    newTask = new Todo(splitInput[1]);
+                    break;
+                } else if (input.matches("todo\\s?")) {
+                    throw new IllegalArgumentException("OOPS! The description of a todo cannot be empty.");
+                } else {
+                    throw new IllegalArgumentException("OOPS! Invalid syntax. To add a todo, use:\n         " + Todo.getFormat());
+                }
             case "deadline":
-                String[] splitDeadline = splitInput[1].split(" /by ");
-                String deadlineDesc = splitDeadline[0];
-                String by = splitDeadline[1];
-                newTask = new Deadline(deadlineDesc, by);
-                break;
+                if (input.matches("deadline (\\S+\\s?)+ /by (\\S+\\s?)+")) {
+                    String[] splitDeadline = splitInput[1].split(" /by ");
+                    String deadlineDesc = splitDeadline[0];
+                    String by = splitDeadline[1];
+                    newTask = new Deadline(deadlineDesc, by);
+                    break;
+                } else if (input.matches("deadline\\s?") || !input.contains("by")){
+                    throw new IllegalArgumentException("OOPS! The description/deadline of a deadline cannot be empty.");
+                } else {
+                    throw new IllegalArgumentException("OOPS! Invalid syntax. To add a deadline, use:\n         " + Deadline.getFormat());
+                }
             case "event":
-                String[] splitEvent = splitInput[1].split(" /at ");
-                String eventDesc = splitEvent[0];
-                String at = splitEvent[1];
-                newTask = new Event(eventDesc, at);
-                break;
+                if (input.matches("event (\\S+\\s?)+ /at (\\S+\\s?)+")) {
+                    String[] splitEvent = splitInput[1].split(" /at ");
+                    String eventDesc = splitEvent[0];
+                    String at = splitEvent[1];
+                    newTask = new Event(eventDesc, at);
+                    break;
+                } else if (input.matches("event\\s?") || !input.contains("at")) {
+                    throw new IllegalArgumentException("OOPS! The description/location of an event cannot be empty.\n");
+                } else {
+                    throw new IllegalArgumentException("OOPS! Invalid syntax. To add an event, use:\n         " + Event.getFormat());
+                }
             default:
-                newTask = new Task(input);
-                break;
+                throw new IllegalArgumentException("OOPS! There is no task of type " + taskType + "!");
         }
         this.list.add(newTask);
         echo(newTask.toString());
     }
 
-    public void markTaskAsDone(int listIndex) {
+    public void markTaskAsDone(String listIndexString) {
         try {
-            Task task = this.list.get(listIndex);
+            int listIndexNumber = Integer.parseInt(listIndexString);
+            Task task = this.list.get(listIndexNumber - 1);
             task.markDone();
             System.out.println("Nice! I've marked this task as done:\n" + task);
-        } catch (IndexOutOfBoundsException ex2) {
-            System.out.println("You do not have this task yet! Type 'list' to check out your tasks.");
+        } catch (IndexOutOfBoundsException ex) { // if list index is not in the list
+            System.out.println("OOPS! This task index does not exist! Type 'list' to check out your tasks.");
+        } catch (NumberFormatException ex) { // if list index string is not an integer
+            System.out.println("OOPS! The keyword 'done' is used to check off tasks as follows:" +
+                    "   done <task index>");
         }
     }
 }

@@ -1,16 +1,19 @@
-public class Task {
+import java.util.regex.Pattern;
+
+public abstract class Task {
     private final String description;
     private Boolean done;
-
+    protected static String format = "<task description>";
+    
     public Task(String description) {
         this.description = description;
         this.done = false;
     }
-
-    public String getDescription() {
-        return this.description;
+    
+    public static String getFormat() {
+        return format;
     }
-
+    
     public String getCheckBox() {
         if (this.done) {
             return "[\u2713]";
@@ -25,6 +28,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return getCheckBox() + " " + this.getDescription();
+        return getCheckBox() + " " + this.description;
     }
 }

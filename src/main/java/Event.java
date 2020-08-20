@@ -1,5 +1,9 @@
 public class Event extends Task {
     protected String at;
+    
+    static {
+        format = "event <event description> /at <event location>";
+    }
 
     public Event(String description, String at) {
         super(description);

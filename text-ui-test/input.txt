@@ -1,3 +1,4 @@
+hello
 todo eat chocolate
 deadline project /by tonight
 event meeting tomorrow /at home
@@ -11,5 +12,11 @@ todo wash dishes
 done 5
 done 6
 done 10
+list
+todo
+event
+deadline
+event event without location
+deadline deadline without date
 list
 bye

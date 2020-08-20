@@ -6,11 +6,16 @@ Welcome! I am
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 Here are some magic words to get you going:
+To add a todo, say 'todo <task description>'.
+To add a deadline, say 'deadline <task description> /by <task deadline>'.
+To add an event, say 'event <event description> /at <event location>'
 To view your tasks, say 'list'.
 To check off a task, say 'done <task number>'.
 To leave, say 'bye'.
-Otherwise, send me new tasks to add them to your todo list!
 **************************************************************************
+--------------------------------------------------------------------------
+☹ Sorry I don't know what that means!
+--------------------------------------------------------------------------
 added: [T][✘] eat chocolate
 Now you have 1 tasks in the list.
 added: [D][✘] project (by: tonight)
@@ -43,7 +48,34 @@ Nice! I've marked this task as done:
 [D][✓] code website (by: 15 August 2020)
 Nice! I've marked this task as done:
 [T][✓] throw chocolate wrapper
-You do not have this task yet! Type 'list' to check out your tasks.
+OOPS! This task index does not exist! Type 'list' to check out your tasks.
+**************************************************************************
+Here are the tasks in your list:
+1.[T][✘] eat chocolate
+2.[D][✓] project (by: tonight)
+3.[E][✘] meeting tomorrow (at: home)
+4.[E][✘] run a marathon (at: sentosa)
+5.[D][✓] code website (by: 15 August 2020)
+6.[T][✓] throw chocolate wrapper
+7.[T][✘] wash dishes
+**************************************************************************
+--------------------------------------------------------------------------
+☹ OOPS! The description of a todo cannot be empty.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+☹ OOPS! The description/location of an event cannot be empty.
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+☹ OOPS! The description/deadline of a deadline cannot be empty.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+☹ OOPS! Invalid syntax. To add an event, use:
+         event <event description> /at <event location>
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+☹ OOPS! The description/deadline of a deadline cannot be empty.
+--------------------------------------------------------------------------
 **************************************************************************
 Here are the tasks in your list:
 1.[T][✘] eat chocolate

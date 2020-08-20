@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Duke {
     private static final TaskList taskList = new TaskList();
     private static final String starline = "**************************************************************************";
+    private static final String dashline = "--------------------------------------------------------------------------";
     private static final String logo =
               " ____        _   \n"
             + "|  _ \\ _   _| | _____\n"
@@ -14,10 +15,12 @@ public class Duke {
         System.out.println(starline +
                 "\nWelcome! I am\n" + logo +
                 "\nHere are some magic words to get you going:" +
+                "\nTo add a todo, say 'todo <task description>'." +
+                "\nTo add a deadline, say 'deadline <task description> /by <task deadline>'." +
+                "\nTo add an event, say 'event <event description> /at <event location>'" +
                 "\nTo view your tasks, say 'list'." +
                 "\nTo check off a task, say 'done <task number>'." +
-                "\nTo leave, say 'bye'." +
-                "\nOtherwise, send me new tasks to add them to your todo list!\n" +
+                "\nTo leave, say 'bye'.\n" +
                 starline);
     }
 
@@ -25,7 +28,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String next = sc.nextLine();
 
-        // "bye" breaks the while loop and the program to exit
+        // "bye" breaks the while loop and causes the program to exit()
         while (!next.equals("bye")){
             String[] splitNext = next.split(" ", 2);
 
@@ -36,16 +39,20 @@ public class Duke {
             // "done" checks off boxes, need to check for input errors
             } else if (splitNext[0].equals("done")) {
                 try {
-                    int index = Integer.parseInt(splitNext[1]);
-                    taskList.markTaskAsDone(index - 1);
-                } catch (NumberFormatException | IndexOutOfBoundsException ex) {
-                    System.out.println("The magic word 'done' is reserved for checking off tasks! " +
-                            "Please avoid using it at the start of a task name.");
+                    taskList.markTaskAsDone(splitNext[1]);
+                } catch (IndexOutOfBoundsException ex) {
+                    System.out.println(dashline + "\n\u2639 Please indicate which task you'd like to check off!");
                 }
 
-            // for Tasks, ToDos, Deadlines and Events
+            // for ToDos, Deadlines, Events
+            } else if (splitNext[0].equals("todo") || splitNext[0].equals("deadline") || splitNext[0].equals("event")){
+                try {
+                    taskList.add(next);
+                } catch (IllegalArgumentException ex) {
+                    System.out.println(dashline + "\n\u2639 " + ex.getMessage() + "\n" + dashline);
+                }
             } else {
-                taskList.add(next);
+                System.out.println(dashline + "\n\u2639 Sorry I don't know what that means!\n" + dashline);
             }
             next = sc.nextLine();
         }
