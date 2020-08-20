@@ -112,5 +112,6 @@ public class Duke {
 }
 
 enum Type {
+    //hello this is enum
     TODO, EVENT, DEADLINE
 }
