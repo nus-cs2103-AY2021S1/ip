@@ -1,3 +1,7 @@
+something
+todo
+deadline
+event
 list
 todo read book
 deadline return book /by June 6th

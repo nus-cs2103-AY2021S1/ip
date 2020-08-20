@@ -4,6 +4,22 @@ What can I help you with today?
 
 --.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
 
+>>> Sorry, I don't recognize what you just entered...
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+>>> Whoops! I think you forgot to finish your todo command. Sorry but I need it. D:
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+>>> Whoops! I think you forgot to finish your deadline command. Sorry but I need it. D:
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+>>> Whoops! I think you forgot to finish your event command. Sorry but I need it. D:
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
 Here is what I have! ^^
 Whoops! I don't have anything of note yet...
 

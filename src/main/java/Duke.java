@@ -1,7 +1,11 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    /** Constants **/
+    public static String outputBreaker = ">>> ";
+
     public static void main(String[] args) {
         /** Initialize objects required **/
         // Using Scanner for reading inputs
@@ -19,8 +23,6 @@ public class Duke {
 
         String lineBreaker = "--.--.--.--.--.--.--.--.--.--.--." +
                 "--.--.--.--.--.--.--.--.--.--.--";
-        String outputBreaker = ">>> ";
-
 
         // Greetings
         System.out.println("\nHello, I'm Duke!");
@@ -33,84 +35,105 @@ public class Duke {
         // System Loop
         // End only if user input is "bye"
         while (!userInput.equals("bye")) {
-            // Process input
-            String[] instructions = userInput.split(" ", 2);
 
-            // React to commands
-            // Command: "list"
-            if (userInput.equals("list")) {
-                printList(list);
-            } else if (instructions[0].equals("todo")){
-                // Command for to do Tasks creation
-                System.out.print(outputBreaker);
-                list[Task.quantity] = new Todo(instructions[1]);
-                Task.quantity++;
-                System.out.println("added: " + list[Task.quantity - 1]);
-                System.out.println("There is now " + Task.quantity + " tasks in the list!");
+            try {
+                // Process input
+                String[] instructions = userInput.split(" ", 2);
 
-            } else if (instructions[0].equals("deadline")){
-                // Command: "deadline <taskName> /by <deadline>"
-                System.out.print(outputBreaker);
-                // Extract Details from command
-                String[] details = instructions[1].split(" /by ", 2);
-                list[Task.quantity] = new Deadline(details[0], details[1]);
-                Task.quantity++;
-                System.out.println("added: " + list[Task.quantity - 1]);
-                System.out.println("There is now " + Task.quantity + " tasks in the list!");
+                // React to commands
+                if (userInput.equals("list")) {
+                    /** Command: "list" **/
+                    printList(list);
 
-            } else if (instructions[0].equals("event")){
-                // Command: "deadline <taskName> /by <deadline>"
-                System.out.print(outputBreaker);
-                // Extract Details from command
-                String[] details = instructions[1].split(" /at ", 2);
-                list[Task.quantity] = new Event(details[0], details[1]);
-                Task.quantity++;
-                System.out.println("added: " + list[Task.quantity - 1]);
-                System.out.println("There is now " + Task.quantity + " tasks in the list!");
-
-            } else if (instructions[0].equals("done")){
-                // Command: "done <task>"
-                // If valid <task>, mark done
-                try {
-                    int taskNumber = Integer.parseInt(instructions[1]);
-
-                    // Only add if entry exist entry exist at index
-                    if (checkList(list, taskNumber)) {
-                        list[taskNumber - 1].markedDone(true);
+                } else if (instructions[0].equals("todo")) {
+                    /** Command for to do Tasks creation **/
+                    // Add check for command details
+                    if (hasCmdDetails(instructions)) {
+                        // If command has details, add task to list
                         System.out.print(outputBreaker);
-                        System.out.println("Congratulations! I've helped you mark the task as done:");
-                        System.out.print("\t" + list[taskNumber - 1].toString() + "\n");
+                        list[Task.quantity] = new Todo(instructions[1]);
+                        Task.quantity++;
+                        System.out.println("added: " + list[Task.quantity - 1]);
+                        System.out.println("There is now " + Task.quantity + " tasks in the list!");
+                    } else {
+                        // Command has no details, throw exception
+                        throw new DukeException(outputBreaker +
+                                "Whoops! I think you forgot to finish your "
+                                + instructions[0] + " command. Sorry but I need it. D:");
                     }
-                } catch (NumberFormatException nfe) {
-                    // Store it as a task
-                    //System.out.println("Caught nfe");
-                    System.out.print(outputBreaker);
-                    list[Task.quantity] = new Task(userInput);
-                    Task.quantity++;
-                    System.out.println("added: " + userInput);
 
-                } catch (IndexOutOfBoundsException e) {
-                    // Store it as a task
-                    //System.out.println("Caught index out of bounds");
+                } else if (instructions[0].equals("deadline")) {
+                    /** Command: "deadline <taskName> /by <deadline>" **/
+                    if (hasCmdDetails(instructions)) {
+                        System.out.print(outputBreaker);
+                        // Extract Details from command
+                        String[] details = instructions[1].split(" /by ", 2);
+                        list[Task.quantity] = new Deadline(details[0], details[1]);
+                        Task.quantity++;
+                        System.out.println("added: " + list[Task.quantity - 1]);
+                        System.out.println("There is now " + Task.quantity + " tasks in the list!");
+                    } else {
+                        // Command has no details, throw exception
+                        throw new DukeException(outputBreaker +
+                                "Whoops! I think you forgot to finish your "
+                                + instructions[0] + " command. Sorry but I need it. D:");
+                    }
+
+                } else if (instructions[0].equals("event")) {
+                    /** Command: "deadline <taskName> /by <deadline>" **/
+                    if (hasCmdDetails(instructions)) {
+                        System.out.print(outputBreaker);
+                        // Extract Details from command
+                        String[] details = instructions[1].split(" /at ", 2);
+                        list[Task.quantity] = new Event(details[0], details[1]);
+                        Task.quantity++;
+                        System.out.println("added: " + list[Task.quantity - 1]);
+                        System.out.println("There is now " + Task.quantity + " tasks in the list!");
+                    } else {
+                        // Command has no details, throw exception
+                        throw new DukeException(outputBreaker +
+                                "Whoops! I think you forgot to finish your "
+                                + instructions[0] + " command. Sorry but I need it. D:");
+                    }
+
+                } else if (instructions[0].equals("done")) {
+                    // Command: "done <task>"
+                    // If valid <task>, mark done
+                    try {
+                        int taskNumber = Integer.parseInt(instructions[1]);
+
+                        // Only add if entry exist at index
+                        if (checkList(list, taskNumber)) {
+                            list[taskNumber - 1].markedDone(true);
+                            System.out.print(outputBreaker);
+                            System.out.println("Congratulations! I've helped you mark the task as done:");
+                            System.out.print("\t" + list[taskNumber - 1].toString() + "\n");
+                        } else {
+                            // Index don't exist so throw exception
+                            System.out.print(outputBreaker);
+                            throw new DukeException("Sorry, I don't think that's a valid index...");
+                        }
+                    } catch (NumberFormatException e) {
+                        //System.out.println("Caught nfe");
+                        System.out.print(outputBreaker);
+                        throw new DukeException("Sorry, I don't think that's a valid number...");
+                    }
+
+                } else {
+                    // Default
+                    // Duke does not recognize the commands
                     System.out.print(outputBreaker);
-                    list[Task.quantity] = new Task(userInput);
-                    Task.quantity++;
-                    System.out.println("added: " + userInput);
+                    throw new DukeException("Sorry, I don't recognize what you just entered...");
                 }
-            } else {
-                //Default reaction to words
-                // Store tasks by default
-                System.out.print(outputBreaker);
-                list[Task.quantity] = new Task(userInput);
-                Task.quantity++;
-                System.out.println("added: " + userInput);
+
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
 
             System.out.println("\n" + lineBreaker + "\n");
             // Read user input once more
             userInput = scanner.nextLine();
         }
-
         // Farewell message
         System.out.print(outputBreaker);
         System.out.println("Bye! Hoped I helped!");
@@ -138,6 +161,26 @@ public class Duke {
             return false;
         } else {
             return true;
+        }
+    }
+
+    public static boolean hasCmdDetails(String[] cmd) throws DukeException {
+        try {
+            if (cmd[1].equals("") || cmd[1].trim().length() == 0) {
+                /** Make sure command has follow up details **/
+                // Check if there is second word
+                // Check if second word is just whitespace
+                // If so, command has no details
+                return false;
+            }
+            return true;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            // Check if there is even anything after command
+            // Exception thrown if userInput.split() fails
+            // Command has no details, throw exception
+            throw new DukeException(outputBreaker +
+                    "Whoops! I think you forgot to finish your "
+                    + cmd[0] + " command. Sorry but I need it. D:");
         }
     }
 }
