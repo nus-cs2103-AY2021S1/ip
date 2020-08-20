@@ -22,18 +22,18 @@ public class Duke {
                 }
 
                 // Querying items
-                else if (echo.matches("list\\s*")) {
+                else if (echo.matches("(?i)list\\s*")) {
                     Printer.printList(tasks.printTodoList());
                 }
 
                 // Checks if it matches done and an integer
-                else if (echo.matches("done.*")) {
+                else if (echo.matches("(?i)done.*")) {
                     int index = parser.parseDone(echo, tasks.length());
                     Printer.printDone(tasks.markAsDone(index));
                 }
 
                 // Checks if it matches done and an integer
-                else if (echo.matches("delete.*")) {
+                else if (echo.matches("(?i)delete.*")) {
                     int index = parser.parseDelete(echo, tasks.length());
                     Printer.printDelete(tasks.delete(index));
                 }

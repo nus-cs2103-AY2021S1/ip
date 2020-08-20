@@ -6,20 +6,20 @@ public class Parser {
 
     // TODO: 20/8/20 CHANGE ALL MATCHES TO matcher.find 
     public Pair<TaskType, ArrayList<String>> parseAdd(String echo) throws DukeException {
-        if (echo.matches("^todo.*")) {
-            if (echo.matches("^todo\\s+\\S+.*")) {
-                String text = echo.replaceFirst("^todo\\s*", "");
+        if (echo.matches("(?i)^todo.*")) {
+            if (echo.matches("(?i)^todo\\s+\\S+.*")) {
+                String text = echo.replaceFirst("(?i)^todo\\s*", "");
                 ArrayList<String> boxed = new ArrayList<>();
                 boxed.add(text);
                 return new Pair<TaskType, ArrayList<String>>(TaskType.TODO, boxed);
-            } else if (echo.matches("^todo\\s*")) {
+            } else if (echo.matches("(?i)^todo\\s*")) {
                 throw new DukeException("Please put a description to your task.");
             } else {
                 throw new DukeException("Please put a space between the command and description.");
             }
-        } else if (echo.matches("^deadline.*")) {
-            if (echo.matches("^deadline\\s+\\S+.*\\s+\\/by\\s+\\S+.*")) {
-                String[] res = echo.replaceFirst("deadline\\s+", "").strip().split("/by", 2);
+        } else if (echo.matches("(?i)^deadline.*")) {
+            if (echo.matches("(?i)^deadline\\s+\\S+.*\\s+\\/by\\s+\\S+.*")) {
+                String[] res = echo.replaceFirst("(?i)deadline\\s+", "").strip().split("(?i)/by", 2);
                 ArrayList<String> boxed = new ArrayList<String>(Arrays.asList(res));
                 return new Pair<TaskType, ArrayList<String>>(TaskType.DEADLINE, boxed);
             } else {
@@ -35,9 +35,9 @@ public class Parser {
                 }
             }
             // TODO: 20/8/20 errors: no by, no space inbetween, no desc, no date
-        } else if (echo.matches("^event.*")) {
-            if (echo.matches("^event\\s+\\S+.*\\s+\\/at\\s+\\S+.*")) {
-                String[] res = echo.replaceFirst("event\\s+", "").strip().split("/at", 2);
+        } else if (echo.matches("(?i)^event.*")) {
+            if (echo.matches("(?i)^event\\s+\\S+.*\\s+\\/at\\s+\\S+.*")) {
+                String[] res = echo.replaceFirst("(?i)event\\s+", "").strip().split("(?i)/at", 2);
                 ArrayList<String> boxed = new ArrayList<String>(Arrays.asList(res));
                 return new Pair<TaskType, ArrayList<String>>(TaskType.EVENT, boxed);
             } else {
@@ -46,7 +46,7 @@ public class Parser {
                     throw new DukeException("bruh you don't have spaces");
                 }
                 String badCommand = badText[1];
-                if (badCommand.matches(".*\\/at.*")) { // The command contains by.
+                if (badCommand.matches("(?i).*\\/at.*")) { // The command contains by.
                     throw new DukeException("Did you miss the description or date? Remember to put spaces.");
                 } else {
                     throw new DukeException("Please put /at followed by the date.");
@@ -58,7 +58,7 @@ public class Parser {
 
     public int parseDone(String echo, int listLength) throws DukeException {
         String res = "";
-        if (echo.matches("done\\s+[0-9]+")) {
+        if (echo.matches("(?i)done\\s+[0-9]+")) {
             res = echo.replaceFirst("done\\s+", "");
         } else {
             throw new DukeException("Done must be followed by a space and an integer!");
@@ -75,8 +75,8 @@ public class Parser {
 
     public int parseDelete(String echo, int listLength) throws DukeException {
         String res = "";
-        if (echo.matches("delete\\s+[0-9]+")) {
-            res = echo.replaceFirst("delete\\s+", "");
+        if (echo.matches("(?i)delete\\s+[0-9]+")) {
+            res = echo.replaceFirst("(?i)delete\\s+", "");
         } else {
             throw new DukeException("Delete must be followed by a space and an integer!");
         }
@@ -89,5 +89,4 @@ public class Parser {
 
         return toBeRemoved;
     }
-    // TODO: 20/8/20 lowercase handling
 }
