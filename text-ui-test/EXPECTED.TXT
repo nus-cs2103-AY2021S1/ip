@@ -1,7 +1,78 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+//////////
+->Hello! I'm Duke
+->What can I do for you?
 
+
+-> I have added a Todo:
+[T][×] go to fairprice  <-
+You have 1 tasks in your list currently.
+
+
+-> I have added an Event:
+[E][×]CS2103 lecture (at FRI 12:00)  <-
+You have 2 tasks in your list currently.
+
+
+-> I have added a Deadline:
+[D][×]CS2103 project submission (before FRI 2359)  <-
+You have 3 tasks in your list currently.
+
+
+-> Current List:
+
+1. [T][×] go to fairprice  <-
+2. [E][×]CS2103 lecture (at FRI 12:00)  <-
+3. [D][×]CS2103 project submission (before FRI 2359)  <-
+
+
+
+-> Good job! I have marked this task as done:
+[T][√] go to fairprice  <-
+
+
+-> Current List:
+
+1. [T][√] go to fairprice  <-
+2. [E][×]CS2103 lecture (at FRI 12:00)  <-
+3. [D][×]CS2103 project submission (before FRI 2359)  <-
+
+
+
+-> I have added a Todo:
+[T][×]   <-
+You have 4 tasks in your list currently.
+
+
+-> Oops, there is an error...
+-> please add correct description to "event" order
+-> event {task content} /{time}
+
+
+-> Oops, there is an error...
+-> please add correct description to "deadline" order
+-> deadline {task content} /{time}
+
+
+-> Oops, there is an error...
+-> please add correct description to "done" order
+-> done {order of task in task list}
+
+
+-> Sorry I cannot understand, please tap in your order correctly.
+-> todo {task content}   || add a todo task
+-> deadline {task content} /{time}   || add a deadline task
+-> event {task content} /{time} || add an event task
+-> list   || list all tasks
+-> done {order of task in task list}   || mark a task as done
+
+
+-> Current List:
+
+1. [T][√] go to fairprice  <-
+2. [E][×]CS2103 lecture (at FRI 12:00)  <-
+3. [D][×]CS2103 project submission (before FRI 2359)  <-
+4. [T][×]   <-
+
+
+
+Bye. Hope to see you again soon!

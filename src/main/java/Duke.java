@@ -12,7 +12,7 @@ public class Duke {
         List<Task> taskList = new ArrayList<>();
 
         System.out.println("//////////\n" + "->Hello! I'm Duke\n" +
-                "->What can I do for you?" + "\n\n");
+                "->What can I do for you?" + "\n");
 
         while (!userInput.equals("bye")) {
             userInput = inputScanner.nextLine();
@@ -128,5 +128,6 @@ public class Duke {
 
             }
         }
+        inputScanner.close();
     }
 }
