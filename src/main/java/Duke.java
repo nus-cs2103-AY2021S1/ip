@@ -1,11 +1,16 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
         System.out.println("Hello! I'm Yoo ( ﾟ▽ﾟ)/ \nWhat can I do for you?");
         Scanner sc = new Scanner(System.in);
-        RunYoo.run(sc);
+        try {
+            RunYoo.run(sc);
+        } catch (YooException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         sc.close();
     }
 }
