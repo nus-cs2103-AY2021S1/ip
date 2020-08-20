@@ -1,7 +1,4 @@
-import main.java.Deadline;
-import main.java.Event;
-import main.java.Task;
-import main.java.Todo;
+import main.java.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,76 +8,89 @@ import java.util.Set;
 import static java.lang.Integer.parseInt;
 
 public class Duke {
+//    private enum Commands {
+//        LIST, DONE, TODO, DEADLINE, EVENT, BYE
+//    }
+
     public static String getFirstWord(String command) {
         return command.contains(" ") ? command.split(" ")[0] : command;
     }
 
+    public static void readCommands(ArrayList<Task> tasks) {
+        try {
+            Scanner sc = new Scanner(System.in);
+            String command = sc.nextLine();
+            command = command.trim();
+
+            // allow multiple termination commands
+            Set<String> terminationCommands = new HashSet<String>();
+            terminationCommands.add("bye");
+            terminationCommands.add("toodles");
+            terminationCommands.add("farewell");
+            terminationCommands.add("sayonara");
+
+            while (!terminationCommands.contains(command)) {
+                if (command.equals("list")) {
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println(i + 1 + ". " + tasks.get(i));
+                    }
+                    System.out.println("I wouldn't bother doing them if I were you.");
+                } else if (getFirstWord(command).equals("done")) {
+                    try {
+                        int taskNumber = parseInt(command.split(" ")[1]) - 1;
+                        tasks.get(taskNumber).markAsDone();
+                        System.out.println("Oh goody... You actually accomplished something!!\n" +
+                                tasks.get(taskNumber));
+                    } catch (Exception e) {
+                        throw new DukeException("Invalid input, dummy. Specify the task number correctly.");
+                    }
+                } else if (getFirstWord(command).equals("todo")) {
+                    try {
+                        String toAdd = command.split(" ", 2)[1];
+                        tasks.add(new Todo(toAdd));
+                        int length = tasks.size();
+                        System.out.println("You're making me feel tired... But if you insist:\n  " + tasks.get(length-1) +
+                                "\nYou now have " + length + (length == 1 ? " thing" : " things") + " in your list");
+                    } catch (Exception e) {
+                        throw new DukeException("Invalid input, dummy. Did you put your task after a space?");
+                    }
+                } else if (getFirstWord(command).equals("deadline")) {
+                    try {
+                        String wholeTask = command.split(" ",2)[1];
+                        String[] descAndDeadline = wholeTask.split(" /by ");
+                        tasks.add(new Deadline(descAndDeadline[0], descAndDeadline[1]));
+                        int length = tasks.size();
+                        System.out.println("You're making me feel tired... But if you insist:\n  " + tasks.get(length-1) +
+                                "\nYou now have " + length + (length == 1 ? " thing" : " things") + " in your list");
+                    } catch (Exception e) {
+                        throw new DukeException("Invalid input, dummy. Did you put a task before and deadline after ' /by '?");
+                    }
+                } else if (getFirstWord(command).equals("event")) {
+                    try {
+                        String wholeTask = command.split(" ",2)[1];
+                        String[] descAndTime = wholeTask.split(" /at ");
+                        tasks.add(new Event(descAndTime[0], descAndTime[1]));
+                        int length = tasks.size();
+                        System.out.println("You're making me feel tired... But if you insist:\n  " + tasks.get(length-1) +
+                                "\nYou now have " + length + (length == 1 ? " thing" : " things") + " in your list");
+                    } catch (Exception e) {
+                        throw new DukeException("Invalid input, dummy. Did you put a task before and time after ' /at '?");
+                    }
+                } else {
+                    throw new DukeException("I don't understand what you mean.");
+                }
+                command = sc.nextLine();
+                command = command.trim();
+            }
+            System.out.println("Finally... don't come back if you can possibly help it, please.");
+        } catch (DukeException e) {
+            System.out.println("Jesus, what are you doing? " + e.getMessage());
+            readCommands(tasks);
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("My name? You don't need to know that. \nStop bothering me already... What do you want??");
-//        BufferedReader reader =
-//                new BufferedReader(new InputStreamReader(System.in));
-        Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
-
-        // allow multiple termination commands
-        Set<String> terminationCommands = new HashSet<String>();
-        terminationCommands.add("bye");
-        terminationCommands.add("toodles");
-        terminationCommands.add("farewell");
-        terminationCommands.add("sayonara");
-
-        ArrayList<Task> tasks = new ArrayList<Task>();
-//        String[] tasks = new String[100];
-//        int iter = 0;
-//        while (!command.equals("bye")) {
-        while (!terminationCommands.contains(command)) {
-            if (command.equals("list")) {
-//                for (int i = 0; i < iter; i++) {
-//                    System.out.println(i+1 + ". " + tasks[i]);
-                for (int i = 0; i < tasks.size(); i++) {
-                    System.out.println(i + 1 + ". " + tasks.get(i));
-                }
-                System.out.println("I wouldn't bother doing them if I were you.");
-            } else if (getFirstWord(command).equals("done")) {
-                int taskNumber = parseInt(command.split(" ")[1]) - 1;
-                tasks.get(taskNumber).markAsDone();
-                System.out.println("Oh goody... You actually accomplished something!!\n" +
-                        tasks.get(taskNumber));
-            } else if (getFirstWord(command).equals("todo")) {
-                String toAdd = command.split(" ", 2)[1];
-                tasks.add(new Todo(toAdd));
-                int length = tasks.size();
-                System.out.println("You're making me feel tired... But if you insist:\n  " + tasks.get(length-1) +
-                    "\nYou now have " + length + (length == 1 ? " thing" : " things") + " in your list");
-            } else if (getFirstWord(command).equals("deadline")) {
-                String wholeTask = command.split(" ",2)[1];
-                String[] descAndDeadline = wholeTask.split(" /by ");
-                tasks.add(new Deadline(descAndDeadline[0], descAndDeadline[1]));
-                int length = tasks.size();
-                System.out.println("You're making me feel tired... But if you insist:\n  " + tasks.get(length-1) +
-                        "\nYou now have " + length + (length == 1 ? " thing" : " things") + " in your list");
-            } else if (getFirstWord(command).equals("event")) {
-                String wholeTask = command.split(" ",2)[1];
-                String[] descAndTime = wholeTask.split(" /at ");
-                tasks.add(new Event(descAndTime[0], descAndTime[1]));
-                int length = tasks.size();
-                System.out.println("You're making me feel tired... But if you insist:\n  " + tasks.get(length-1) +
-                        "\nYou now have " + length + (length == 1 ? " thing" : " things") + " in your list");
-            } else {
-                System.out.println("I don't understand what you mean");
-//                System.out.println("You're making me feel tired... " + command);
-//                tasks.add(new Task(command));
-//                tasks[iter] = command;
-//                iter++;
-            }
-            command = sc.nextLine();
-        }
-        System.out.println("Finally... don't come back if you can possibly help it, please.");
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
+        readCommands(new ArrayList<Task>());
     }
 }
