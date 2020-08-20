@@ -30,6 +30,7 @@ public class Duke {
     }
 
     // this function takes in the input from the user and adds it to the list of tasks Duke is tracking
+    // helper function
     public static void addTask(Task t, ArrayList<Task> tasks) {
         tasks.add(t);
         System.out.println(LINE);
@@ -230,6 +231,7 @@ public class Duke {
                     System.out.println(LINE);
                     System.out.println("     ☹ OOPS!!! The description of a todo cannot be empty.");
                     System.out.println(LINE);
+                    continue;
                 }
             }
 
