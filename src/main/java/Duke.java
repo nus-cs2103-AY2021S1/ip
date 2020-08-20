@@ -40,6 +40,7 @@ public class Duke {
         savedItems.add(todo);
         System.out.println("Got it. I've added this task:");
         System.out.println(todo);
+        printRemainingCount();
     }
 
     private static void deadlineHandler(String userInput) {
@@ -62,6 +63,7 @@ public class Duke {
         savedItems.add(deadline);
         System.out.println("Got it. I've added this task:");
         System.out.println(deadline);
+        printRemainingCount();
     }
 
     private static void eventHandler(String userInput) {
@@ -85,6 +87,7 @@ public class Duke {
         savedItems.add(event);
         System.out.println("Got it. I've added this task:");
         System.out.println(event);
+        printRemainingCount();
     }
 
     private static void lsHandler() {
@@ -97,6 +100,7 @@ public class Duke {
             Task task = savedItems.get(i);
             System.out.println(i + 1 + ". " + task);
         }
+        printRemainingCount();
     }
 
     private static void printRemainingCount() {
@@ -123,22 +127,18 @@ public class Duke {
                     return;
                 case "todo":
                     todoHandler(userInput);
-                    printRemainingCount();
                     break;
                 case "deadline":
                     deadlineHandler(userInput);
-                    printRemainingCount();
                     break;
                 case "event":
                     eventHandler(userInput);
-                    printRemainingCount();
                     break;
                 case "done":
                     doneHandler(userInput);
                     break;
                 case "ls":
                     lsHandler();
-                    printRemainingCount();
                     break;
                 default:
                     System.out.println("ERROR: Unrecognised command. Did you make a typo?");

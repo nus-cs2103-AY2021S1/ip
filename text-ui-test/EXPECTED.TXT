@@ -1,7 +1,6 @@
 Hello I'm Duke!
 What can I do for you?
 $ No tasks found. Start adding your first few tasks!
-You now have 0 tasks in the list.
 $ Got it. I've added this task:
 [T][✘] eat lunch later
 You now have 1 tasks in the list.
