@@ -1,4 +1,6 @@
 public class Deadline extends Task {
+    private static final String STRING_FORMAT = "[D][%s] %s (by: %s)";
+
     protected String dueDate;
 
     public Deadline(String description, String dueDate) {
@@ -8,6 +10,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D][%s] %s (by: %s)", this.getStatusIcon(), this.description, this.dueDate);
+        return String.format(Deadline.STRING_FORMAT, getStatusIcon(), description, dueDate);
     }
 }

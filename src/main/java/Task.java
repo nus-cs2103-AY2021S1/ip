@@ -1,4 +1,6 @@
 public class Task {
+    private static final String STRING_FORMAT = "[%s] %s";
+
     protected String description;
     protected boolean isDone;
 
@@ -7,17 +9,17 @@ public class Task {
         this.isDone = false;
     }
 
-    public void check() {
-        this.isDone = true;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     public String getStatusIcon() {
-        return (this.isDone ? "\u2713" : "\u2718");
+        return (isDone ? "\u2713" : "\u2718");
         //return tick or X symbols
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), this.description);
+        return String.format(Task.STRING_FORMAT, getStatusIcon(), description);
     }
 }

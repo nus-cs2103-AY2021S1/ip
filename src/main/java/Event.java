@@ -1,4 +1,6 @@
 public class Event extends Task {
+    private static final String STRING_FORMAT = "[E][%s] %s (at: %s)";
+
     protected String eventTime;
 
     public Event(String description, String eventTime) {
@@ -8,6 +10,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (at: %s)", this.getStatusIcon(), this.description, this.eventTime);
+        return String.format(Event.STRING_FORMAT, getStatusIcon(), description, eventTime);
     }
 }

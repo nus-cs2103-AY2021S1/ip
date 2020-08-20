@@ -13,7 +13,7 @@ public class Viscount {
             "   \\_/ |_|_____/ \\_____\\___/ \\__,_|_| |_|\\__|";
     private static final String HORIZONTAL_LINE = "__________________________________________________";
 
-    private static List<Task> taskList = new ArrayList<>();
+    private static List<Task> tasks = new ArrayList<>();
 
     private static void printLogo() {
         System.out.println(Viscount.VISCOUNT_LOGO);
@@ -26,35 +26,38 @@ public class Viscount {
         System.out.println();
     }
 
-    private static String taskListToString() {
+    private static String convertTaskListToString() {
         String result = "";
 
-        for (int i = 0; i < taskList.size(); i++) {
-            result += (i == taskList.size() - 1)
-                ? String.format("%d.%s", i + 1, taskList.get(i).toString())
-                : String.format("%d.%s\n", i + 1, taskList.get(i).toString());
+        for (int i = 0; i < tasks.size(); i++) {
+            result += (i == tasks.size() - 1)
+                ? String.format("%d.%s", i + 1, tasks.get(i).toString())
+                : String.format("%d.%s\n", i + 1, tasks.get(i).toString());
         }
 
         return result;
     }
 
     private static void addToTaskList(Task task) {
-        taskList.add(task);
+        tasks.add(task);
+
         Viscount.speak("Very well. I've added this task:\n"
                 + task.toString()
-                + String.format("\nNow you have %d tasks in the list.", taskList.size()));
+                + String.format("\nNow you have %d tasks in the list.", tasks.size()));
     }
 
     private static void removeFromTaskList(int taskIndex) {
-        Task task = taskList.get(taskIndex);
-        taskList.remove(taskIndex);
+        Task task = tasks.get(taskIndex);
+        tasks.remove(taskIndex);
+
         Viscount.speak("Very well. I've removed this task:\n"
                 + task.toString()
-                + String.format("\nNow you have %d tasks in the list.", taskList.size()));
+                + String.format("\nNow you have %d tasks in the list.", tasks.size()));
     }
 
     private static void markAsDone(Task task) {
-        task.check();
+        task.setDone(true);
+        
         Viscount.speak("Very good! I have marked this task as done:\n" + task.toString());
     }
 
@@ -62,7 +65,7 @@ public class Viscount {
         String command = arguments.get(0);
 
         if (command.equals("list")) {
-            Viscount.speak("Here are the tasks in your list:\n" + Viscount.taskListToString());
+            Viscount.speak("Here are the tasks in your list:\n" + Viscount.convertTaskListToString());
         } else if (command.equals("todo")) {
             String description = String.join(" ", arguments.subList(1, arguments.size()));
 
@@ -116,7 +119,7 @@ public class Viscount {
 
                 try {
                     indexOfTask = Integer.parseInt(arguments.get(1));
-                    Viscount.markAsDone(taskList.get(indexOfTask - 1));
+                    Viscount.markAsDone(tasks.get(indexOfTask - 1));
                 } catch (NumberFormatException e) {
                     throw new ViscountNumberFormatException(arguments.get(1));
                 } catch (IndexOutOfBoundsException e) {

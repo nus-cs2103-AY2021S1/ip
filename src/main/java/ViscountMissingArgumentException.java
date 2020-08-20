@@ -1,6 +1,7 @@
 public class ViscountMissingArgumentException extends ViscountException {
-    private String missingArgument;
     private static final String ERROR_MESSAGE = "Alas, you need to specify the %s argument.";
+
+    private String missingArgument;
 
     public ViscountMissingArgumentException(String missingArgument) {
         super();
@@ -9,6 +10,6 @@ public class ViscountMissingArgumentException extends ViscountException {
 
     @Override
     public String toString() {
-        return String.format(ViscountMissingArgumentException.ERROR_MESSAGE, this.missingArgument);
+        return String.format(ViscountMissingArgumentException.ERROR_MESSAGE, missingArgument);
     }
 }

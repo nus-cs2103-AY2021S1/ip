@@ -1,6 +1,7 @@
 public class ViscountNumberFormatException extends ViscountException {
-    private String argument;
     private static final String ERROR_MESSAGE = "Alas, '%s' is not a valid task number.";
+
+    private String argument;
 
     public ViscountNumberFormatException(String argument) {
         super();
@@ -9,6 +10,6 @@ public class ViscountNumberFormatException extends ViscountException {
 
     @Override
     public String toString() {
-        return String.format(ViscountNumberFormatException.ERROR_MESSAGE, this.argument);
+        return String.format(ViscountNumberFormatException.ERROR_MESSAGE, argument);
     }
 }
