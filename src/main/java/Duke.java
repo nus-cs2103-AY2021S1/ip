@@ -1,12 +1,7 @@
 /*input
 todo borrow book
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
-list
-mark 2
-list
-mark 1
-list
+todo borrow store
+delete 1
 bye
 */
 import java.util.*;
@@ -18,18 +13,31 @@ public class Duke {
         TodoManager todoManager = new TodoManager();
         Helper.init();
         greetExit.greet();
+
         while (in.hasNextLine()) {
-            String command = in.nextLine();
-            if (command.equals("bye")) {
-                greetExit.exit();
-                break;
-            } else if (command.equals("list")) {
-                todoManager.listTask();
-            } else if (command.startsWith("done")) {
-                todoManager.markDone(command.substring(5));
-            } else if (command.startsWith("deadline") || command.startsWith("event") || command.startsWith("todo")) {
-                todoManager.addTask(command);
+            try {
+                String command = in.nextLine();
+                if (command.equals("bye")) {
+                    greetExit.exit();
+                    break;
+                } else if (command.equals("list")) {
+                    todoManager.listTask();
+                } else if (command.startsWith("done")) {
+                    todoManager.markDone(command.substring(5));
+                } else if (command.startsWith("deadline") || command.startsWith("event") || command.startsWith("todo")) {
+                    todoManager.addTask(command);
+                } else if (command.startsWith("delete")) {
+                    todoManager.delete(command.substring(7));
+                } else {
+                    throw new IllegalArgumentException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println(Helper.horiLine);
+                System.out.println(e.getMessage());
+                System.out.println(Helper.horiLine);
             }
         }
+
+
     }
 }
