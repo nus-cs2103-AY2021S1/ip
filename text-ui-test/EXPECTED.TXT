@@ -6,65 +6,109 @@ hElLoOOoOOoO! Welcome to
 |____/ \__,_|_|\_\___|
 
 How can I help you today? : D
---------------------------------------
-Sorry! I don't understand what you are saying! D=
---------------------------------------
---------------------------------------
-You don't have any tasks at the moment!
---------------------------------------
---------------------------------------
+Type "help" to view the list of commands you can use!
+DukeException: ------------------------------------------
+UHOH! Sorry, I don't understand what you are saying! D=
+Type "help" to view the list of commands you can use!
+---------------------------------------------------------
+---------------------------------------------------------
+Here are the list of commands you can use! =D
+help: displays the list of commands available
+
+list: displays the list of tasks you have
+
+todo *task description*: adds a task without any
+date/time attached to it
+eg todo read book
+
+deadline *task description* /by *date/time*: adds a
+task that needs to be done before a specific date/time
+eg deadline return book /by June 5 10pm
+
+event *task description* /at *time*: adds a task that
+starts at a specific time and ends at a specific time
+eg event meeting /at 2-4pm
+
+done *task number*: marks the task with that number as
+done eg done 1
+
+delete *task number*: deletes the task with that number
+from the list eg delete 1
+
+bye: ends the session
+---------------------------------------------------------
+DukeException: ------------------------------------------
+UHOH! You don't have any tasks yet!
+---------------------------------------------------------
+DukeException: ------------------------------------------
+UHOH! You need to specify your todo task!
+eg todo read book
+---------------------------------------------------------
+---------------------------------------------------------
 Oki! I have added this task:
 [T][✘] read book
 Now you have 1 tasks in your list!
---------------------------------------
---------------------------------------
+---------------------------------------------------------
+DukeException: ------------------------------------------
+UHOH! You need to use the proper format!
+eg deadline return book /by Sunday
+---------------------------------------------------------
+---------------------------------------------------------
 Oki! I have added this task:
 [D][✘] return book (by: June 6th)
 Now you have 2 tasks in your list!
---------------------------------------
---------------------------------------
+---------------------------------------------------------
+DukeException: ------------------------------------------
+UHOH! You need to use the proper format!
+eg event project meeting /at Mon 2-4pm
+---------------------------------------------------------
+---------------------------------------------------------
 Oki! I have added this task:
 [E][✘] project meeting (at: Mon 2-4pm)
 Now you have 3 tasks in your list!
---------------------------------------
---------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
 Oki! I have added this task:
 [D][✘] return book (by: Sunday)
 Now you have 4 tasks in your list!
---------------------------------------
---------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
 Here are your tasks! JIAYOU! =D
 1. [T][✘] read book
 2. [D][✘] return book (by: June 6th)
 3. [E][✘] project meeting (at: Mon 2-4pm)
 4. [D][✘] return book (by: Sunday)
---------------------------------------
---------------------------------------
-Oh no! You don't have a task with that number! ><
+---------------------------------------------------------
+DukeException: ------------------------------------------
+UHOH! You don't have a task with that number! ><
 Can you try a different number?
---------------------------------------
---------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
 Nicee!! You've completed this task!
 [T][✓] read book
---------------------------------------
---------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
 Here are your tasks! JIAYOU! =D
 1. [T][✓] read book
 2. [D][✘] return book (by: June 6th)
 3. [E][✘] project meeting (at: Mon 2-4pm)
 4. [D][✘] return book (by: Sunday)
---------------------------------------
---------------------------------------
-Nicee!! You've completed this task!
-[E][✓] project meeting (at: Mon 2-4pm)
---------------------------------------
---------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+Oki! I've removed this task!
+[E][✘] project meeting (at: Mon 2-4pm)
+Now you have 3 tasks in your list!
+---------------------------------------------------------
+DukeException: ------------------------------------------
+UHOH! You need to specify which task to delete!
+eg delete 1
+---------------------------------------------------------
+---------------------------------------------------------
 Here are your tasks! JIAYOU! =D
 1. [T][✓] read book
 2. [D][✘] return book (by: June 6th)
-3. [E][✓] project meeting (at: Mon 2-4pm)
-4. [D][✘] return book (by: Sunday)
---------------------------------------
---------------------------------------
+3. [D][✘] return book (by: Sunday)
+---------------------------------------------------------
+---------------------------------------------------------
 BYEEE!! SEE YOU AGAIN!!! >O<
---------------------------------------
+---------------------------------------------------------

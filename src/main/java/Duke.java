@@ -20,7 +20,8 @@ public class Duke {
                 } else if (input.toLowerCase().equals("list")) {
                     replyList(list, Task.totalTasks);
                 } else if (input.split(" ").length == 0) {
-                    throw new DukeException("Sorry, I don't understand what you are saying! D=");
+                    throw new DukeException("Sorry, I don't understand what you are saying! D=\n" +
+                            "Type \"help\" to view the list of commands you can use!");
                 } else if (input.toLowerCase().split(" ")[0].equals("done")) {
                     replyDone(input, list);
                 } else if (input.toLowerCase().split(" ")[0].equals("delete")) {
@@ -71,7 +72,8 @@ public class Duke {
                         list.add(task);
                         replyTask(task);
                     } else {
-                        throw new DukeException("Sorry, I don't understand what you are saying! D=");
+                        throw new DukeException("Sorry, I don't understand what you are saying! D=\n" +
+                                "Type \"help\" to view the list of commands you can use!");
                     }
                 }
             } catch (DukeException ex) {
@@ -111,7 +113,7 @@ public class Duke {
     public static void replyDelete(String input, ArrayList<Task> list) throws DukeException{
         String deleteMessage = "Oki! I've removed this task!\n";
         if (input.length() <= 7) {
-            throw new DukeException("You need to specify which task to delete! \n" +
+            throw new DukeException("You need to specify which task to delete!\n" +
                     "eg delete 1");
         }
 

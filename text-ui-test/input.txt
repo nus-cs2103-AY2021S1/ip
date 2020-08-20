@@ -1,13 +1,18 @@
 hello
+help
 list
+todo
 todo read book
+deadline return book
 deadline return book /by June 6th
+event project meeting /at
 event project meeting /at Mon 2-4pm
 deadline return book /by Sunday
 list
 done 0
 done 1
 LIST
-done 3
+delete 3
+delete
 list
 bye
