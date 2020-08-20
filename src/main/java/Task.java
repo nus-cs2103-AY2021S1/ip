@@ -32,4 +32,8 @@ public class Task {
         String message = "       [✓] " + thingsToDo.get(i - 1).description + "\n";
         return message;
     }
+
+    public int length() {
+        return thingsToDo.size();
+    }
 }

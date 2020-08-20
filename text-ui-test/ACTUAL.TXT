@@ -1,7 +1,136 @@
     ____________________________________________________________
-    Hello! I'm Hartina Menzel!
+    Hello! I'm Duke the Bad Dragon.
     What can I do for you?
     ____________________________________________________________
+bruh you don't have spaces
+bruh you don't have spaces
+Did you miss the description or date? Remember to put spaces.
+Did you miss the description or date? Remember to put spaces.
+Please put /by followed by the date.
+Did you miss the description or date? Remember to put spaces.
     ____________________________________________________________
-     added: uwu
+     Got it. I've added this task:
+       [D][✗]s      (by:      asdf)
+     Now you have 1 tasks in the list.
     ____________________________________________________________
+    ____________________________________________________________
+     Got it. I've added this task:
+       [D][✗]correct  (by: asdfg)
+     Now you have 2 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     Got it. I've added this task:
+       [D][✗]asdfasdfasdf  (by: asdfasdfas)
+     Now you have 3 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     Got it. I've added this task:
+       [T][✗] a
+     Now you have 4 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     Got it. I've added this task:
+       [T][✗] b
+     Now you have 5 tasks in the list.
+    ____________________________________________________________
+Please put a space between the command and description.
+    ____________________________________________________________
+     Got it. I've added this task:
+       [T][✗] d
+     Now you have 6 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     Got it. I've added this task:
+       [T][✗] e
+     Now you have 7 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     Got it. I've added this task:
+       [T][✗] f
+     Now you have 8 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     Got it. I've added this task:
+       [T][✗] deadline
+     Now you have 9 tasks in the list.
+    ____________________________________________________________
+Please put a space between the command and description.
+Please put /at followed by the date.
+    ____________________________________________________________
+     Got it. I've added this task:
+       [D][✗]event  (by: asdf /at asd)
+     Now you have 10 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[D][✗]s      (by:      asdf)
+     2.[D][✗]correct  (by: asdfg)
+     3.[D][✗]asdfasdfasdf  (by: asdfasdfas)
+     4.[T][✗] a
+     5.[T][✗] b
+     6.[T][✗] d
+     7.[T][✗] e
+     8.[T][✗] f
+     9.[T][✗] deadline
+     10.[D][✗]event  (by: asdf /at asd)
+    ____________________________________________________________
+1
+    ____________________________________________________________
+     Nice! I've marked this task as done:
+       [✓] s     
+    ____________________________________________________________
+2
+    ____________________________________________________________
+     Nice! I've marked this task as done:
+       [✓] correct 
+    ____________________________________________________________
+3
+    ____________________________________________________________
+     Nice! I've marked this task as done:
+       [✓] asdfasdfasdf 
+    ____________________________________________________________
+Done must be followed by a space and an integer!
+Done must be followed by a space and an integer!
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[D][✓]s      (by:      asdf)
+     2.[D][✓]correct  (by: asdfg)
+     3.[D][✓]asdfasdfasdf  (by: asdfasdfas)
+     4.[T][✗] a
+     5.[T][✗] b
+     6.[T][✗] d
+     7.[T][✗] e
+     8.[T][✗] f
+     9.[T][✗] deadline
+     10.[D][✗]event  (by: asdf /at asd)
+    ____________________________________________________________
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[D][✓]s      (by:      asdf)
+     2.[D][✓]correct  (by: asdfg)
+     3.[D][✓]asdfasdfasdf  (by: asdfasdfas)
+     4.[T][✗] a
+     5.[T][✗] b
+     6.[T][✗] d
+     7.[T][✗] e
+     8.[T][✗] f
+     9.[T][✗] deadline
+     10.[D][✗]event  (by: asdf /at asd)
+    ____________________________________________________________
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[D][✓]s      (by:      asdf)
+     2.[D][✓]correct  (by: asdfg)
+     3.[D][✓]asdfasdfasdf  (by: asdfasdfas)
+     4.[T][✗] a
+     5.[T][✗] b
+     6.[T][✗] d
+     7.[T][✗] e
+     8.[T][✗] f
+     9.[T][✗] deadline
+     10.[D][✗]event  (by: asdf /at asd)
+    ____________________________________________________________
+Invalid command.
+Invalid command.
+Invalid command.
+Invalid command.

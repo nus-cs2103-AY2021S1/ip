@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -37,49 +38,57 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Task tasks = new Task();
+        Parser parser = new Parser();
 
+        // TODO: 20/8/20 Improve runtime: keep an internal counter of task (for done.*)
         initialMessage();
         while(true) {
-            String echo = sc.nextLine();
+            try {
+                String echo = sc.nextLine();
 
-            // Command Handling
-            // Adding items
-            if (echo.matches("^todo.*")) {
-                String res = echo.substring("todo".length());
-                printAdd(tasks.add(new ToDo(res)));
-            } else if (echo.matches("^deadline.*\\/by.*")) {
-                String[] res = echo.substring("deadline".length()).split("/by");
-                printAdd(tasks.add(new Deadline(res[0], res[1])));
-            } else if (echo.matches("^event.*\\/at.*")) {
-                String[] res = echo.substring("event".length()).split("/at");
-                printAdd(tasks.add(new Event(res[0], res[1])));
-            }
-
-            // Querying items
-            else if (echo.equals("list")) {
-                printList(tasks.printTodoList());
-            } else if (echo.matches("done\\s[0-9]+")) { // Checks if it matches done and an integer
-                // Strip the done, leaving the integer
-                int index = Integer.parseInt(echo.replaceAll("done ", ""));
-                printDone(tasks.markAsDone(index));
-            }
-
-            // Exit command
-            else if (echo.equals("bye")) {
-                exitMessage();
-                break;
-            }
-
-            else {
-                try {
-                    throw new DukeException("invalid message");
-                } catch (DukeException e) {
-                    e.printStackTrace();
+                // Command Handling
+                // Exit
+                if (echo.equals("bye")) {
+                    exitMessage();
+                    break;
                 }
-            }
 
-            // TODO: 19/08/2020 make a parsing class
-            // TODO: 19/08/2020 separate the exceptions
+                // Querying items
+                else if (echo.matches("list\\s*")) {
+                    printList(tasks.printTodoList());
+                }
+
+                // Checks if it matches done and an integer
+                else if (echo.matches("done.*")) {
+                    // Strip the done, leaving the integer
+                    // TODO: 20/8/20 Cleanup
+                    int index = 0;
+                    index = parser.parseDone(echo, tasks.length());
+                    printDone(tasks.markAsDone(index));
+                }
+
+                // Add items
+                else {
+                    Pair<TaskType, ArrayList<String>> res = parser.parseAdd(echo);
+                    ArrayList<String> description = res.getU();
+                    TaskType type = res.getT();
+                    switch (type) {
+                        case TODO:
+                            printAdd(tasks.add(new ToDo(description.get(0))));
+                            break;
+                        case DEADLINE:
+                            printAdd(tasks.add(new Deadline(description.get(0), description.get(1))));
+                            break;
+                        case EVENT:
+                            printAdd(tasks.add(new Event(description.get(0), description.get(1))));
+                            break;
+                        case NONE:
+                            break;
+                    }
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }

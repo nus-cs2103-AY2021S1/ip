@@ -1,1 +1,32 @@
-uwu
+deadline
+deadline/by
+deadline /by
+deadline /by
+deadline /at
+deadline      /by
+deadline      s     /by      asdf
+deadline correct /by asdfg
+deadline      asdfasdfasdf /by asdfasdfas
+todo a
+todo b
+todoc
+todo         d
+todo e
+todo     f
+todo deadline
+todo event deadline
+event deadline
+deadline event /by asdf /at asd
+list
+done 1
+done 2
+done 3
+done -1
+done a
+list
+list
+list
+asdf
+lists
+liststst
+liststststs

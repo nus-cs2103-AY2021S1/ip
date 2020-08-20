@@ -10,6 +10,6 @@ public class Event extends TaskDetail {
     @Override
     public String toString() {
         String sign = done ? "✓" : "✗";
-        return "[E][" + sign + "]" + description + " (at:" + timeAt + ")";
+        return "[E][" + sign + "] " + description + " (at:" + timeAt + ")";
     }
 }

@@ -9,6 +9,6 @@ public class Deadline extends TaskDetail {
     @Override
     public String toString() {
         String sign = done ? "✓" : "✗";
-        return "[D][" + sign + "]" + description + " (by:" + timeBy + ")";
+        return "[D][" + sign + "] " + description + " (by:" + timeBy + ")";
     }
 }
