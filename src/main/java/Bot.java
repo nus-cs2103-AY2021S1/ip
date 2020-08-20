@@ -62,6 +62,8 @@ public class Bot {
                     return cmdEvent(words);
                 case DONE:
                     return cmdDone(words);
+                case DELETE:
+                    return cmdDelete(words);
                 default:
                     return "Valid cmd given however it is not supported yet";
             }
@@ -177,7 +179,7 @@ public class Bot {
     private String cmdDone(String[] words) throws InvalidInputException {
         try {
             if (words.length != 2) {
-                return responseWrapper("Please input 1 argument");
+                return responseWrapper("Please input 1 argument.");
             }
             Task task = this.taskList.get(Integer.parseInt(words[1]) - 1);
             task.markAsDone();
@@ -186,6 +188,20 @@ public class Bot {
         } catch (Exception e) {
             throw new InvalidInputException("Sorry, invalid argument(s) given.");
         }
+    }
 
+    private String cmdDelete(String[] words) throws InvalidInputException {
+        try {
+            if (words.length != 2) {
+                return responseWrapper("Please input 1 argument.");
+            }
+            Task task = this.taskList.get(Integer.parseInt(words[1]) - 1);
+            this.taskList.remove(Integer.parseInt(words[1]) - 1);
+            return responseWrapper("Noted. I've removed this task: \n    " +
+                    task + "\n    " +
+                    "Now you have " + taskList.size() + " tasks in the list.");
+        } catch (Exception e) {
+            throw new InvalidInputException("Sorry, invalid argument(s) given.");
+        }
     }
 }
