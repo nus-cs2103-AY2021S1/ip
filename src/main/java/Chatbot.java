@@ -9,15 +9,16 @@ public class Chatbot {
     protected List<Task> planner;
     protected final String INDENTATION = "     ";
     protected final String LINE = "    ____________________________________________________________";
-    protected final String INVALID_TASK = "⚠⚠⚠ I'm sorry, but I don't know what that means :-(";
-    protected final String INVALID_INDEX = "⚠⚠⚠ There appears to be a problem with your task number.";
-    protected final String EMPTY_ACTION_TASK = "⚠⚠⚠ Add the appropriate task number after the command 'done/delete'.";
-    protected final String EMPTY_TODO_TASK = "⚠⚠⚠ The description of a 'todo' cannot be empty.";
-    protected final String EMPTY_DEADLINE_TASK = "⚠⚠⚠ The description of a 'deadline' cannot be empty.";
-    protected final String EMPTY_EVENT_TASK = "⚠⚠⚠ The description of a 'event' cannot be empty.";
-    protected final String DEADLINE_FORMAT = "⚠⚠⚠ The description of 'deadline' should be accompanied"
+    protected final String ERROR_INVALID_TASK = "⚠⚠⚠ I'm sorry, but I don't know what that means :-(";
+    protected final String ERROR_INVALID_INDEX = "⚠⚠⚠ There appears to be a problem with your task number.";
+    protected final String ERROR_EMPTY_ACTION_TASK = "⚠⚠⚠ Add the appropriate task number after the command "
+            + "'done/delete'.";
+    protected final String ERROR_EMPTY_TODO_TASK = "⚠⚠⚠ The description of a 'todo' cannot be empty.";
+    protected final String ERROR_EMPTY_DEADLINE_TASK = "⚠⚠⚠ The description of a 'deadline' cannot be empty.";
+    protected final String ERROR_EMPTY_EVENT_TASK = "⚠⚠⚠ The description of a 'event' cannot be empty.";
+    protected final String ERROR_DEADLINE_FORMAT = "⚠⚠⚠ The description of 'deadline' should be accompanied"
             + '\n' + INDENTATION + "    by '/by' followed by the date";
-    protected final String EVENT_FORMAT = "⚠⚠⚠ The description of 'event' should be accompanied"
+    protected final String ERROR_EVENT_FORMAT = "⚠⚠⚠ The description of 'event' should be accompanied"
             + '\n' + INDENTATION + "    by '/at' followed by the date";
 
 
@@ -48,9 +49,8 @@ public class Chatbot {
                     } else if (inquiry.startsWith("delete")) {
                         taskAction(TaskType.DELETE, inquiry);
                     } else {
-                        throw new DukeInvalidTaskException(INVALID_TASK);
+                        throw new DukeInvalidTaskException(ERROR_INVALID_TASK);
                     }
-
                 } catch (DukeException e) {
                     reply(e.getMessage());
                 }
@@ -64,23 +64,31 @@ public class Chatbot {
     private void taskHandler(TaskType type, String body) throws DukeException {
             Task currentTask;
             if (type.equals(TaskType.TODO)) {
-                if (inquiry.equals("todo")) throw new DukeEmptyToDoException(EMPTY_TODO_TASK);
+                if (inquiry.equals("todo")) throw new DukeEmptyToDoException(ERROR_EMPTY_TODO_TASK);
                 currentTask = new ToDo(body.substring(5));
 
             } else if (type.equals(TaskType.DEADLINE)) {
-                if (inquiry.equals("deadline")) throw new DukeEmptyDeadlineException(EMPTY_DEADLINE_TASK);
+                if (inquiry.equals("deadline")) {
+                    throw new DukeEmptyDeadlineException(ERROR_EMPTY_DEADLINE_TASK);
+                }
                 String[] arrOfString = (body.substring(9)).split("/by ", 2);
 
-                if (arrOfString.length == 1) throw new DukeDeadlineFormatException(DEADLINE_FORMAT);
+                if (arrOfString.length == 1) {
+                    throw new DukeDeadlineFormatException(ERROR_DEADLINE_FORMAT);
+                }
 
                 String deadline = arrOfString[1];
                 String description = arrOfString[0];
                 currentTask = new Deadline(description, deadline);
             } else {
-                if (inquiry.equals("event")) throw new DukeEmptyEventException(EMPTY_EVENT_TASK);
+                if (inquiry.equals("event")) {
+                    throw new DukeEmptyEventException(ERROR_EMPTY_EVENT_TASK);
+                }
                 String[] arrOfString = (body.substring(6)).split("/at ", 2);
 
-                if (arrOfString.length == 1) throw new DukeEventFormatException(EVENT_FORMAT);
+                if (arrOfString.length == 1) {
+                    throw new DukeEventFormatException(ERROR_EVENT_FORMAT);
+                }
                 String eventDate = arrOfString[1];
                 String description = arrOfString[0];
                 currentTask = new Event(description, eventDate);
@@ -98,7 +106,7 @@ public class Chatbot {
             int num = Integer.parseInt(tokens[1]);
 
             if (num > planner.size() || num <= 0) {
-                throw new DukeInvalidIndexException(INVALID_INDEX);
+                throw new DukeInvalidIndexException(ERROR_INVALID_INDEX);
             }
             Task currentTask = planner.get(num - 1);
             if (type.equals(TaskType.DONE)) {
@@ -111,15 +119,11 @@ public class Chatbot {
                 reply("Noted. I've removed this task: ");
                 reply(INDENTATION + currentTask.toString());
                 reply("Now you have " + planner.size() + " tasks in the list.");
-
             }
-
-
-
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeInvalidIndexException(INVALID_INDEX);
+            throw new DukeInvalidIndexException(ERROR_INVALID_INDEX);
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            throw new DukeEmptyActionException(EMPTY_ACTION_TASK);
+            throw new DukeEmptyActionException(ERROR_EMPTY_ACTION_TASK);
         }
     }
 
