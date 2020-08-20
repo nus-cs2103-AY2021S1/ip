@@ -10,10 +10,10 @@ enum Command {
 public class Message {
     private final String message;
     private Command cmd;
-    private List<String> list;
+    private List<Task> list;
 
     // public constructor
-    public Message(String message, List<String> list) {
+    public Message(String message, List<Task> list) {
         this.message = message;
         String[] words = message.split(" ");
         String cmdString = words[0];
@@ -42,16 +42,20 @@ public class Message {
             case LIST:
                 System.out.println("Na, here is your list lah:");
                 int counter = 0;
-                for (String item : list) {
+                for (Task item : list) {
                     counter++;
-                    System.out.println(counter + ". " + item);
+                    System.out.println(counter +
+                            ".[" +
+                            item.getStatusIcon() +
+                            "] " +
+                            item.getTaskName());
                 }
                 break;
             case BYE:
                 System.out.println("Ok bye bye! C u again :P");
                 break;
             case ADD:
-                this.list.add(message);
+                this.list.add(new Task(message));
                 System.out.println("I added: " + message);
                 break;
         }
