@@ -59,7 +59,9 @@ class Checker {
         }
         else if (checkForWord(s, "done")) {
             String task = cutOutTheWord(s, "done");
-
+            if (task.isBlank() || task.isEmpty()) {
+                throw new EmptyTaskException("Sorry, you have to tell me which task you have completed.");
+            }
             Task t = Task.createMiscTask(task);
             e = Command.createDoneCommand(t);
 
