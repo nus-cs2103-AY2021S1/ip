@@ -1,10 +1,14 @@
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-
+    private static List<Task> toDoList;
 
     public static void main(String[] args) {
+
+
         String logo = "     ____        _        \n"
                 + "    |  _ \\ _   _| | _____ \n"
                 + "    | | | | | | | |/ / _ \\\n"
@@ -16,6 +20,15 @@ public class Duke {
         displayThis("Hello! I'm Duke\n    What can I remember for you?" +
                 "\n    I only accept list, done and" +
                 "\n    todo, deadline, events");
+
+        try {
+            toDoList = DukeFileHandler.readFile();
+            if (toDoList.size() > 0) {
+                displayList();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         Scanner scanner = new Scanner(System.in);
 
@@ -36,7 +49,6 @@ public class Duke {
     }
 
 
-    private static final ArrayList<Task> toDoList = new ArrayList<>();
     private static boolean startCommand(String input) throws DukeException {
 
         if (input.equals("")) {
@@ -50,6 +62,12 @@ public class Duke {
 
         switch (command) {
         case "bye":
+            try {
+                DukeFileHandler.writeToFile(toDoList);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             displayThis("Bye. Hope to see you again soon!");
             return false;
 
