@@ -37,7 +37,7 @@ public class Duke {
             else if(input.equals("bye")){
                 isRunning = bye();
             }
-            else if(getWord(input).equals("done")){ //incomplete
+            else if(getWord(input).equals("done")){
                 done(input, list);
 
             }
