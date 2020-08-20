@@ -6,7 +6,7 @@ public class Operation {
     }
 
 
-    public void run(String order) {
+    public void run(String order) throws Exception {
 
         if (order.equals(Status.LIST.name().toLowerCase())) {
             System.out.println(
@@ -44,7 +44,7 @@ public class Operation {
         }
     }
 
-    public Task identifier(String description) {
+    public Task identifier(String description) throws Exception {
         int len = description.length();
         int pointer = 0;
 
@@ -59,6 +59,9 @@ public class Operation {
             separator++;
         }
 
+        if (pointer == separator) {
+            throw new Exception("please do a todo/deadline/event");
+        }
         String detail = description.substring(pointer + 1, separator);
 
         if (indetity.equals(Status.TODO.toString())) {
@@ -68,11 +71,19 @@ public class Operation {
                 separator++;
             }
 
-            String time = description.substring(separator + 1);
+            String time;
+
+            if (separator < len - 1) {
+                time = description.substring(separator + 1);
+            } else {
+                time = description.substring(separator);
+            }
             if (indetity.equals(Status.DEADLINE.toString())) {
                 return new Deadline(detail, time);
-            } else {
+            } else if (indetity.equals(Status.EVENT.toString())){
                 return new Event(detail, time);
+            } else {
+                throw new Exception("wrong input");
             }
         }
     }

@@ -15,13 +15,6 @@ public enum Status {
         }
     },
 
-    ADD {
-        @Override
-        public String toString() {
-            return "    added: ";
-        }
-    },
-
     LIST {
         @Override
         public String toString() {
@@ -40,22 +33,22 @@ public enum Status {
     EXCESS {
         @Override
         public String toString() {
-            return "    Oops, seems like you don't have this option \n" +
-                    "    enter list to see options";
+            return "    OOPS!!! It seems like you don't have this option \n" +
+                    "    Enter list to see options";
         }
     },
 
     CLASSCASTEXCEPTION {
         @Override
         public String toString() {
-            return "    the content is not of data type of String";
+            return "    The content is not of data type of String";
         }
     },
 
     NUMBERFORMATEXCEPTION {
         @Override
         public String toString() {
-            return "    Oops, the format of your index number is incorrect";
+            return "    OOPS!!! The format of your index number is incorrect";
         }
     },
 
@@ -83,7 +76,7 @@ public enum Status {
     TASKADDED {
         @Override
         public String toString() {
-            return "    Git it. I've added this task \n" +
+            return "    Got it. I've added this task \n" +
                     "      ";
         }
     },
@@ -92,6 +85,27 @@ public enum Status {
         @Override
         public String toString() {
             return "    Now you have %d tasks in the list.";
+        }
+    },
+
+    INPUTFORMATEXCEPTION {
+        @Override
+        public String toString() {
+            return "    OOPS!!! I'm sorry, but U don't know what that means :-(";
+        }
+    },
+
+    INSUFFICIENTEXCEPTION {
+        @Override
+        public String toString() {
+            return "    OOPS!!! The description of todo/deadline/event cannot be empty";
+        }
+    },
+
+    NOTIMEEXCEPTION {
+        @Override
+        public String toString() {
+            return "    OOPS!!! The time of a deadline/event cannot be empty";
         }
     }
 
