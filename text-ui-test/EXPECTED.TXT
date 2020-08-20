@@ -16,7 +16,7 @@ bye - close Duke
 
 The ToDo should not be empty
 
-Added '[x][T] deep work' to list of tasks
+Added '[✗][T] deep work' to list of tasks
 Now you have 1 tasks in the list
 
 The Deadline should not be empty
@@ -25,7 +25,7 @@ The Deadline should not be empty
 
 The /by parameter should not be empty
 
-Added '[x][D] get a girlfriend (by: 2022)' to list of tasks
+Added '[✗][D] get a girlfriend (by: 2022)' to list of tasks
 Now you have 2 tasks in the list
 
 The Event should not be empty
@@ -34,21 +34,21 @@ The Event should not be empty
 
 The /at parameter should not be empty
 
-Added '[x][E] survive lesson (at: friday morning)' to list of tasks
+Added '[✗][E] survive lesson (at: friday morning)' to list of tasks
 Now you have 3 tasks in the list
 
 Here are the tasks in your list:
-1. [x][T] deep work
-2. [x][D] get a girlfriend (by: 2022)
-3. [x][E] survive lesson (at: friday morning)
+1. [✗][T] deep work
+2. [✗][D] get a girlfriend (by: 2022)
+3. [✗][E] survive lesson (at: friday morning)
 
-Nice! I've marked it done - [v][T] deep work
+Nice! I've marked it done - [✓][T] deep work
 
-Nice! I've marked it done - [v][D] get a girlfriend (by: 2022)
+Nice! I've marked it done - [✓][D] get a girlfriend (by: 2022)
 
 404 task with id 5 not found. Please enter a correct task id
 
-Noted! I've removed this task - [v][T] deep work
+Noted! I've removed this task - [✓][T] deep work
 Now you have 2 tasks in the list
 
 404 task with id 3 not found. Please enter a correct task id

@@ -13,7 +13,7 @@ public class Event extends Task {
     }
 
     public String toString() {
-        String status = isDone ? "[v]" : "[x]";
+        String status = isDone ? "[✓]" : "[✗]";
         return String.format("%s[E] %s (at: %s)", status, title, at);
     }
 }

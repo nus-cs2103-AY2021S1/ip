@@ -14,7 +14,7 @@ public class Task {
     }
 
     public String toString() {
-        String status = isDone ? "[v]" : "[x]";
+        String status = isDone ? "[✓]" : "[✗]";
         return status + " " + title;
     }
 }

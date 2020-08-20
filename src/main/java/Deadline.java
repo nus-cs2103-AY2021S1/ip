@@ -13,7 +13,7 @@ public class Deadline extends Task {
     }
 
     public String toString() {
-        String status = isDone ? "[v]" : "[x]";
+        String status = isDone ? "[✓]" : "[✗]";
         return String.format("%s[D] %s (by: %s)", status, title, by);
     }
 }
