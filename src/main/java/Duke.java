@@ -45,12 +45,16 @@ public class Duke {
             System.out.println(returnString + "\n" + borders);
             response(scanner, taskList);
         } else if (userInput.startsWith("todo")) {
+            if (userInput.equals("todo")) throw new ToDoException();
             Task thisTask = new Task(userInput);
             taskList.add(thisTask);
             System.out.println(borders + addedMessage + thisTask.toString().replace("todo ","") + "\n" +
                     "Now got " + taskList.size() + " task in the list\n" + borders);
             Duke.response(scanner, taskList);
         } else if (userInput.startsWith("deadline")) {
+            if (userInput.equals("deadline")) {
+                throw new deadlineException();
+            }
             String[] StringArr = userInput.split(" /by");
             Task thisTask = new Deadline(StringArr[0].replace("deadline ", ""), StringArr[1]);
             taskList.add(thisTask);
@@ -58,6 +62,7 @@ public class Duke {
                     "Now got " + taskList.size() + " task in the list\n" + borders);
             Duke.response(scanner, taskList);
         } else if (userInput.startsWith("event")) {
+            if (userInput.equals("event")) throw new eventException();
             String[] StringArr = userInput.split(" /at");
             Task thisTask = new Event(StringArr[0].replace("event ", ""), StringArr[1]);
             taskList.add(thisTask);
