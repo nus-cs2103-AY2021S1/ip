@@ -1,6 +1,13 @@
-buy books
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+this is an error
+deadline
+event
+todo
+deadline return books
+event return books
+deadline return books /by
+event return books /at
+deadline return books /by Sunday
+event return books /at Monday
 todo borrow book
 list
 done 2
