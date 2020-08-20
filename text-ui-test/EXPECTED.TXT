@@ -1,11 +1,37 @@
 Hello! I'm Duke
 What can I do for you?
 
+Hey buddy, that's an invalid command.
+Type help to see the available commands
+
+Adding task:
+todo <desc>
+deadline <desc> /by <desc>
+event <desc> /at <desc>
+
+list - show all added tasks
+done <taskId> - mark the task as done
+bye - close Duke
+
+The ToDo should not be empty
+
 Added '[x][T] deep work' to list of tasks
 Now you have 1 tasks in the list
 
+The Deadline should not be empty
+
+/by parameter is missing
+
+The /by parameter should not be empty
+
 Added '[x][D] get a girlfriend (by: 2022)' to list of tasks
 Now you have 2 tasks in the list
+
+The Event should not be empty
+
+/at parameter is missing
+
+The /at parameter should not be empty
 
 Added '[x][E] survive lesson (at: friday morning)' to list of tasks
 Now you have 3 tasks in the list
@@ -18,6 +44,6 @@ Nice! I've marked it done - [v][T] deep work
 
 Nice! I've marked it done - [v][D] get a girlfriend (by: 2022)
 
-404 task not found. Please enter the correct task ID
+404 task with id 5 not found. Please enter a correct task id
 
 Adios!

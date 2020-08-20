@@ -1,5 +1,14 @@
+blah
+help
+todo
 todo deep work
+deadline
+deadline get a girlfriend
+deadline get a girlfriend /by
 deadline get a girlfriend /by 2022
+event
+event survive lesson
+event survive lesson /at
 event survive lesson /at friday morning
 list
 done 1
