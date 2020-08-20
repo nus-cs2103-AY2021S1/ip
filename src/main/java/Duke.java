@@ -11,13 +11,13 @@ public class Duke {
         ArrayList<Task> storedItems = new ArrayList<>();
         String border = "____________________________________________________________";
 
-        String logo = " ____        ____  \n"
+        String logo = " ____        ____\n"
                 + "|  _ \\  ___ |  _ \\\n"
                 + "| | | |/ _ \\| | | |\n"
                 + "| |_| || __/| |_| |\n"
                 + "|____/ \\___||____/\n";
-        System.out.println("Hello I am\n" + logo + "\n" + "Feed me some input! :3\n");
-
+        System.out.println("Hello I am\n" + logo + "\n" + "Feed me some stuff! :3\n");
+        
         while (check) {
             String input = sc.nextLine();
             String arr[] = input.split(" ", 2);
@@ -63,7 +63,7 @@ public class Duke {
                     break;
                 case "deadline":
                     String temp1[] = arr[1].split(" /by ", 2);
-                    Task newTask1 = new Deadline(temp1[0], "by: " + temp1[1]);
+                    Task newTask1 = new Deadline(temp1[0], "best consumed by: " + temp1[1]);
                     storedItems.add(newTask1);
                     System.out.println(border + "\n"
                             + "*Gobble gobble* the following has been eated OwO:\n"
@@ -73,7 +73,7 @@ public class Duke {
                     break;
                 case "event":
                     String temp2[] = arr[1].split(" /at ", 2);
-                    Task newTask2 = new Event(temp2[0], "by: " + temp2[1]);
+                    Task newTask2 = new Event(temp2[0], "bought at: " + temp2[1]);
                     storedItems.add(newTask2);
                     System.out.println(border + "\n"
                             + "*Gobble gobble* the following has been eated OwO:\n"
