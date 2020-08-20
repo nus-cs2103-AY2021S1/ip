@@ -24,6 +24,13 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("\t" + currentTask);
 
+                } else if (input.length() >= 8 && input.substring(0, 6).equals("delete")) {
+                    int index = Integer.valueOf(input.substring(7)) - 1;
+                    Task currentTask = taskList.get(index);
+                    taskList.remove(index);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println("\t" + currentTask);
+                    System.out.println("Now you have " + String.valueOf(taskList.size()) + " tasks in the list.");
                 } else if (input.equals("bye")) {
                     System.out.println("Bye. Hope to see you again soon!");
                     break;
