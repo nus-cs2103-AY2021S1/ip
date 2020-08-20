@@ -3,7 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Duke {
-    private static final String LINE_BREAK = "   ____________________________________________________________";
+    private static final String LINE_BREAK = "   ____________________________" +
+            "________________________________";
     private static final String SPACE1 = "    ";
     private static final String SPACE2 = "     ";
 
@@ -17,8 +18,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
@@ -28,7 +29,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         System.out.println(LINE_BREAK);
-        System.out.println(SPACE1 + "Hey, I'm Emilia \u2764 ! \n" + SPACE1 +
+        System.out.println(SPACE1 + "Hey, I'm Emilia \u2764 !\n" + SPACE1 +
                 "What can I do for you?");
         System.out.println(LINE_BREAK);
 
@@ -69,8 +70,9 @@ public class Duke {
                     int index = Integer.parseInt(process[1]) - 1;
                     Task task = tasks.get(index);
                     tasks.remove(index);
-                    System.out.println(SPACE1 + "Understood, I've deleted this task \n" +
-                             SPACE2 + task + "\n" + SPACE1 + "You have " + tasks.size() + " tasks in your list now!");
+                    System.out.println(SPACE1 + "Understood, I've deleted this task\n" +
+                             SPACE2 + task + "\n" + SPACE1 + "You have " + tasks.size() +
+                            " tasks in your list now!");
                     continue;
                 }
             } catch (IndexOutOfBoundsException e) {
@@ -118,7 +120,7 @@ public class Duke {
                 String type = e.getMessage();
                 if (type.equals("better description")) {
                     System.out.println(SPACE1 + "I need a better " +
-                            "description of the task such as the time or date!");
+                            "description of the task and time!");
                 } else if (type.equals("nothing understood")) {
                     System.out.println(SPACE1 + "I don't understand you at all...");
                 }
@@ -126,7 +128,7 @@ public class Duke {
             }
 
             tasks.add(current);
-            System.out.println(SPACE1 + "Understood! I've added this task: \n" +
+            System.out.println(SPACE1 + "Understood! I've added this task:\n" +
                     SPACE2 + current);
             System.out.println(SPACE1 + "You have " +
                     tasks.size() + " tasks in your list now!");

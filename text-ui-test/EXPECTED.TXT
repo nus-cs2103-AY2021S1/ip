@@ -43,9 +43,9 @@ Hello from
     4. [E][✘] project meeting (at: mon 2-4pm)
    ____________________________________________________________
    ____________________________________________________________
-    I need a better description of the task such as the time or date!
+    I need a better description of the task and time!
    ____________________________________________________________
-    I need a better description of the task such as the time or date!
+    I need a better description of the task and time!
    ____________________________________________________________
     Please take a look at the tasks:
     1. [T][✘] read book
