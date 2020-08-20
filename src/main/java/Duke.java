@@ -23,6 +23,8 @@ public class Duke {
             }
             String[] words = input.split(" ");
             String command = words[0];
+            Task newTask;
+            String[] subst;
             switch (command) {
                 case "list":
                     print_tasks(tasks);
@@ -35,10 +37,22 @@ public class Duke {
                     task.done = true;
                     print("Nice! I've marked this task as done: \n" + task);
                     break;
+                case "todo":
+                    String text = input.substring(5);
+                    newTask = new Todo(text);
+                    addTask(newTask, tasks);
+                    break;
+                case "deadline":
+                    subst = input.substring(9).split(" /by ");
+                    newTask = new Deadline(subst[0], subst[1]);
+                    addTask(newTask, tasks);
+                    break;
+                case "event":
+                    subst = input.substring(6).split(" /at ");
+                    newTask = new Event(subst[0], subst[1]);
+                    addTask(newTask, tasks);
+                    break;
                 default:
-                    Task newTask = new Task(input, false);
-                    print("added: " + newTask.toString());
-                    tasks.add(newTask);
                     break;
             }
 
@@ -58,5 +72,11 @@ public class Duke {
 
     public static void print(String str){
         System.out.print(LINE + str + LINE);
+    }
+
+    public static void addTask(Task task, ArrayList<Task> tasks) {
+        tasks.add(task);
+        int size = tasks.size();
+        print("added: " + task.toString() + "You now have " + size + " task" + (size > 1 ? "s" : "") +" in the list.\n");
     }
 }
