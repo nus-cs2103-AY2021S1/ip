@@ -28,8 +28,21 @@ public class Duke {
                 storage.get(task).done = true;
                 System.out.println("\tNice! I've marked this task as done:\n\t" + storage.get(task));
             } else {
-                System.out.println("\tadded: " + in);
-                storage.add(new Task(in));
+                Task task;
+                if (in.contains("todo ")) {
+                    task = new Todo(in.replace("todo ", ""));
+                } else if (in.contains("deadline ")) {
+                    String[] split = in.replace("deadline ", "").split(" /by ");
+                    task = new Deadline(split[0], split[1]);
+                } else {
+                    String[] split = in.replace("event ", "").split(" /at ");
+                    task = new Event(split[0], split[1]);
+                }
+                storage.add(task);
+                System.out.println("\tGot it. I've added this task:");
+                System.out.println("\t\t" + task);
+                System.out.println("\tNow you have " + storage.size() + " tasks in the list.");
+
             }
             in = scan.nextLine();
         }
@@ -49,5 +62,43 @@ class Task {
     @Override
     public String toString() {
         return done ? ("[✓] " + task) : ("[✗] " + task);
+    }
+}
+
+class Todo extends Task {
+    Todo(String task) {
+        super(task);
+    }
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
+    }
+}
+
+class Deadline extends Task {
+    String deadline;
+
+    Deadline(String task, String deadline) {
+        super(task);
+        this.deadline = deadline;
+    }
+
+    @Override
+    public String toString() {
+        return "[D]" + super.toString() + " (by: " + this.deadline + ")";
+    }
+}
+
+class Event extends Task {
+    String duration;
+
+    Event(String task, String duration) {
+        super(task);
+        this.duration = duration;
+    }
+
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + " (at: " + this.duration + ")";
     }
 }
