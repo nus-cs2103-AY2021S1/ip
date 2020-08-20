@@ -8,7 +8,12 @@ public class Duke {
         System.out.println(logo +"Hello! I'm Duke\n" + "What can I do for you?");
 
         IOHandler handler = new IOHandler();
-        handler.handleIO();
+
+        try {
+            handler.handleIO();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         System.out.print("Bye. Hope to see you again soon!");
     }
