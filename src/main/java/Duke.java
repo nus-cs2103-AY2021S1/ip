@@ -1,6 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+
+    private static List<String> texts = new ArrayList<>();
 
     private static void greet() {
         String greeting = "Hello mah dud, itza handsome robo speakin\n" +
@@ -14,6 +18,10 @@ public class Duke {
         System.out.println(farewell);
     }
 
+    private static void add(String toAdd) {
+        texts.add(toAdd);
+        System.out.println("added: " + toAdd);
+    }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -26,16 +34,20 @@ public class Duke {
                     farewell();
                     cont = false;
                     break;
-//                case "bye":
-//                    //someth
-//                    break;
+                case "list":
+                    int num = 1;
+                    for (String i: texts) {
+                        System.out.println(num + ": " + i);
+                        num++;
+                    }
+                    nextLine = sc.nextLine();
+                    break;
 //                case "bye":
 //                    //someth
 //                    break;
                 default:
-                    System.out.println(nextLine);
+                    add(nextLine);
                     nextLine = sc.nextLine();
-
             }
         }
         sc.close();
