@@ -13,7 +13,7 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
+export LC_ALL=en_GB.UTF-8
 if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/*.java
 then
     echo "********** BUILD FAILURE **********"
