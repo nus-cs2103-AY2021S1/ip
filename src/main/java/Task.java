@@ -8,7 +8,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "✓" : "✗"); //return tick or X symbols
     }
 
     public void markAsDone() {
@@ -17,6 +17,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.isDone, this.description);
+        return String.format("[%s] %s", this.getStatusIcon(), this.description);
     }
 }

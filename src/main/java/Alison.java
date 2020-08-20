@@ -49,37 +49,53 @@ public class Alison {
         String[] words = input.split(" ");
         String command = words[0];
         if (words.length == 1) {
-            if (command.equals("bye")) {
-                printWithBorder("Bye. Hope to see you again soon!");
+            switch (command) {
+                case "bye" -> printWithBorder("Bye. Hope to see you again soon!");
+                case "list" -> showList();
+                case "todo", "deadline", "event" -> printWithBorder(" ☹ OOPS!!! The description of a " + command + " cannot be empty.");
+                default -> printWithBorder("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-            if (command.equals("list")) {
-                showList();
-            }
+
         }
         if (words.length > 1) {
             String description = input.split(" ", 2)[1];
-            if (command.equals("done")) {
-                int doneIndex = Integer.parseInt(description);
-                Task task = taskList.get(doneIndex - 1);
-                task.markAsDone();
-                printWithBorder("Nice! I've marked this task as done: \n" + task);
-            }
-            if (command.equals("todo")) {
-                ToDo todo = new ToDo(description);
-                taskList.add(todo);
-                addTaskMsg(todo);
-            }
-            if (command.equals("deadline")) {
-                String[] contentAndTime = description.split(" /by ");
-                Deadline ddl = new Deadline(contentAndTime[0], contentAndTime[1]);
-                taskList.add(ddl);
-                addTaskMsg(ddl);
-            }
-            if (command.equals("event")) {
-                String[] contentAndTime = description.split(" /at ");
-                Event e = new Event(contentAndTime[0], contentAndTime[1]);
-                taskList.add(e);
-                addTaskMsg(e);
+            switch (command) {
+                case "done" -> {
+                    int doneIndex = Integer.parseInt(description);
+                    Task task = taskList.get(doneIndex - 1);
+                    task.markAsDone();
+                    printWithBorder("Nice! I've marked this task as done: \n" + task);
+                }
+                case "todo" -> {
+                    ToDo todo = new ToDo(description);
+                    taskList.add(todo);
+                    addTaskMsg(todo);
+                }
+                case "deadline" -> {
+                    String[] contentAndTime = description.split(" /by ");
+                    if (contentAndTime.length == 1) {
+                        printWithBorder(" ☹ OOPS!!! You must provide a date " +
+                                "after '/by' for a deadline. \n" +
+                                "(i.e. deadline return book /by Sunday)");
+                    } else {
+                        Deadline ddl = new Deadline(contentAndTime[0], contentAndTime[1]);
+                        taskList.add(ddl);
+                        addTaskMsg(ddl);
+                    }
+                }
+                case "event" -> {
+                    String[] contentAndTime = description.split(" /at ");
+                    if (contentAndTime.length == 1) {
+                        printWithBorder(" ☹ OOPS!!! You must provide a time interval " +
+                                "after '/at' for an event. \n" +
+                                "(i.e. event project meeting /at Mon 2-4pm)");
+                    } else {
+                        Event e = new Event(contentAndTime[0], contentAndTime[1]);
+                        taskList.add(e);
+                        addTaskMsg(e);
+                    }
+                }
+                default -> printWithBorder("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
