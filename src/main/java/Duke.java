@@ -8,51 +8,88 @@ public class Duke {
         System.out.println("How may I be of assistance to you?");
     }
 
-    public static Task taskClassify(String str) {
+    public static int completer(String str, int numTask) throws DukeException {
+        String[] words = str.split("\\s+");
+        int len = words.length;
+        if (len == 2) {
+            String num = words[1];
+            boolean result = num.matches(".*\\d.*");
+            if (result) {
+                int index = Integer.parseInt(num) - 1;
+                if (index >= numTask || index < 0) {
+                    throw new DukeException("OOPS!!! Out of bounds of the list of tasks.");
+                }
+                return index;
+            }
+        }
+        throw new DukeException("OOPS!!! Invalid task provided.");
+    }
+
+    public static Task taskClassify(String str) throws DukeException {
         String[] words = str.split("\\s+");
         int len = words.length;
 
         if (words[0].equals("todo")) {
-            String desc = "";
-            for (int i = 1; i < len; i++) {
-                desc += " " + words[i];
+            if (len == 1) {
+                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            } else {
+                String desc = "";
+                for (int i = 1; i < len; i++) {
+                    desc += " " + words[i];
+                }
+                return new ToDo(desc);
             }
-            return new ToDo(desc);
         } else if (words[0].equals("deadline")) {
-            String desc = "";
-            String time = "";
-            int count = 0;
-            for (int i = 1; i < len; i++) {
-                if (words[i].equals("/by")) {
-                    count = i + 1;
-                    break;
+            if (len == 1) {
+                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+            } else {
+                String desc = "";
+                String time = "";
+                int count = 0;
+                for (int i = 1; i < len; i++) {
+                    if (words[i].equals("/by")) {
+                        count = i + 1;
+                        break;
+                    }
+                    desc += " " + words[i];
                 }
-                desc += " " + words[i];
+                if (count == 0 || count == len) {
+                    throw new DukeException("OOPS!!! The date/time of a deadline cannot be empty.");
+                }
+                for (int j = count; j < len; j++) {
+                    time += " " + words[j];
+                }
+                return new Deadline(desc, time);
             }
-            for (int j = count; j < len; j++) {
-                time += " " + words[j];
-            }
-            return new Deadline(desc, time);
         } else if (words[0].equals("event")) {
-            String desc = "";
-            String time = "";
-            int count = 0;
-            for (int i = 1; i < len; i++) {
-                if (words[i].equals("/at")) {
-                    count = i + 1;
-                    break;
+            if (len == 1) {
+                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+            } else {
+                String desc = "";
+                String time = "";
+                int count = 0;
+                for (int i = 1; i < len; i++) {
+                    if (words[i].equals("/at")) {
+                        count = i + 1;
+                        break;
+                    }
+                    desc += " " + words[i];
                 }
-                desc += " " + words[i];
+                if (count == 0 || count == len) {
+                    throw new DukeException("OOPS!!! The date/time of a deadline cannot be empty.");
+                }
+                for (int j = count; j < len; j++) {
+                    time += " " + words[j];
+                }
+                return new Event(desc, time);
             }
-            for (int j = count; j < len; j++) {
-                time += " " + words[j];
-            }
-            return new Event(desc, time);
+        } else {
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-        return new Task(str);
+
     }
 
-    public static void echo() {
+    public static void echo(){
         Scanner scanner = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
         while (scanner.hasNextLine()) {
@@ -68,17 +105,25 @@ public class Duke {
                 }
             } else {
                 String[] words = line.split("\\s+");
-                if (words[0].equals("done") && words.length > 1) {
-                    int index = Integer.parseInt(words[1]) - 1;
-                    list.get(index).done();
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(list.get(index).toString());
+                if (words[0].equals("done")) {
+                    try {
+                        int index = completer(line, list.size());
+                        list.get(index).done();
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println(list.get(index).toString());
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
                 } else {
-                    Task task = taskClassify(line);
-                    list.add(task);
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("  " + task.toString());
-                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    try {
+                        Task task = taskClassify(line);
+                        list.add(task);
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println("  " + task.toString());
+                        System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
             }
         }
