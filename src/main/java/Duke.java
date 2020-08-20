@@ -1,7 +1,36 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+enum actionType {
+    QUIT,
+    LIST,
+    MARK_DONE,
+    DELETE,
+    ADD_TODO,
+    ADD_DEADLINE,
+    ADD_EVENT,
+    WRONG_INPUT
+}
+
 public class Duke {
+    private static actionType getAction(String input) {
+        return input.equalsIgnoreCase("bye")
+                ? actionType.QUIT
+                : input.equalsIgnoreCase("list")
+                ? actionType.LIST
+                : input.length() >= 4 && input.substring(0, 4).equalsIgnoreCase("done")
+                ? actionType.MARK_DONE
+                : input.length() >= 6 && input.substring(0, 6).equalsIgnoreCase("delete")
+                ? actionType.DELETE
+                : input.length() >= 4 && input.substring(0, 4).equalsIgnoreCase("todo")
+                ? actionType.ADD_TODO
+                : input.length() >= 5 && input.substring(0, 5).equalsIgnoreCase("event")
+                ? actionType.ADD_EVENT
+                : input.length() >= 8 && input.substring(0, 8).equalsIgnoreCase("deadline")
+                ? actionType.ADD_DEADLINE
+                : actionType.WRONG_INPUT;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
@@ -21,64 +50,76 @@ public class Duke {
         try {
             while (true) {
                 next = sc.nextLine();
-                if (next.equalsIgnoreCase("bye")) {
-                    System.out.println("Bye! :>");
-                    sc.close();
-                    System.exit(0);
-                } else if (next.equalsIgnoreCase("list")) {
-                    if (list.size() == 0) {
-                        System.out.println("List is empty");
-                    } else {
-                        System.out.println("Items in list:");
-                        for (int i = 0; i < list.size(); i++) {
-                            System.out.println((i + 1) + ". " + list.get(i).toString());
+                actionType action = getAction(next);
+                switch(action) {
+                    case QUIT:
+                        System.out.println("Bye! :>");
+                        sc.close();
+                        System.exit(0);
+                        break;
+                    case LIST:
+                        if (list.size() == 0) {
+                            System.out.println("List is empty");
+                        } else {
+                            System.out.println("Items in list:");
+                            for (int i = 0; i < list.size(); i++) {
+                                System.out.println((i + 1) + ". " + list.get(i).toString());
+                            }
                         }
-                    }
-                } else if (next.length() >= 4 && next.substring(0, 4).equalsIgnoreCase("done")) {
-                    int taskNo = Integer.parseInt(next.substring(5));
-                    if (taskNo > list.size()) {
-                        throw new DukeException("Task does not exist _(´ཀ`」 ∠)_");
-                    } else {
-                        Task completedTask = list.get(taskNo - 1);
-                        completedTask.markAsDone();
-                        System.out.println("Task marked complete:");
-                        System.out.println(completedTask.toString());
-                    }
-                } else if (next.length() >= 6 && next.substring(0, 6).equalsIgnoreCase("delete")) {
-                    int taskNo = Integer.parseInt(next.substring(7));
-                    if (taskNo > list.size()) {
-                        throw new DukeException("Task does not exist _(´ཀ`」 ∠)_");
-                    } else {
-                        Task deletedTask = list.remove(taskNo - 1);
-                        System.out.println("Task deleted:");
-                        System.out.println(deletedTask.toString());
-                    }
-                } else {
-                    Task newTask;
-                    if (next.length() >= 4 && next.substring(0, 4).equalsIgnoreCase("todo")) {
+                        break;
+                    case MARK_DONE:
+                        int taskNo = Integer.parseInt(next.substring(5));
+                        if (taskNo > list.size()) {
+                            throw new DukeException("Task does not exist _(´ཀ`」 ∠)_");
+                        } else {
+                            Task completedTask = list.get(taskNo - 1);
+                            completedTask.markAsDone();
+                            System.out.println("Task marked complete:");
+                            System.out.println(completedTask.toString());
+                        }
+                        break;
+                    case DELETE:
+                        int deleteNo = Integer.parseInt(next.substring(7));
+                        if (deleteNo > list.size()) {
+                            throw new DukeException("Task does not exist _(´ཀ`」 ∠)_");
+                        } else {
+                            Task deletedTask = list.remove(deleteNo - 1);
+                            System.out.println("Task deleted:");
+                            System.out.println(deletedTask.toString());
+                        }
+                        break;
+                    case ADD_TODO:
                         if (next.length() < 6) {
                             throw new DukeException("Task cannot be empty _(´ཀ`」 ∠)_");
                         } else {
-                            newTask = new ToDo(next.substring(5));
+                            Task newTodo = new ToDo(next.substring(5));
+                            list.add(newTodo);
+                            System.out.println("Added: " + newTodo.toString());
+                            System.out.println("Total tasks: " + list.size());
                         }
-                    } else if (next.length() >= 5 && next.substring(0, 5).equalsIgnoreCase("event")) {
+                        break;
+                    case ADD_EVENT:
                         if (next.length() < 7) {
                             throw new DukeException("Event cannot be empty _(´ཀ`」 ∠)_");
                         } else {
-                            newTask = new Event(next.substring(6));
+                            Task newEvent = new Event(next.substring(6));
+                            list.add(newEvent);
+                            System.out.println("Added: " + newEvent.toString());
+                            System.out.println("Total tasks: " + list.size());
                         }
-                    } else if (next.length() >= 8 && next.substring(0, 8).equalsIgnoreCase("deadline")) {
+                        break;
+                    case ADD_DEADLINE:
                         if (next.length() < 10) {
                             throw new DukeException("Deadline cannot be empty _(´ཀ`」 ∠)_");
                         } else {
-                            newTask = new Deadline(next.substring(9));
+                            Task newDeadline = new Deadline(next.substring(9));
+                            list.add(newDeadline);
+                            System.out.println("Added: " + newDeadline.toString());
+                            System.out.println("Total tasks: " + list.size());
                         }
-                    } else {
+                        break;
+                    case WRONG_INPUT:
                         throw new DukeException("I have no idea what that means ¯\\_(ツ)_/¯");
-                    }
-                    list.add(newTask);
-                    System.out.println("Added: " + newTask.toString());
-                    System.out.println("Total tasks: " + list.size());
                 }
             }
         } catch (Exception e) {
