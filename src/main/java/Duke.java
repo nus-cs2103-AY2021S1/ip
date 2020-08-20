@@ -13,6 +13,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?\n\n");
 
         String[] store = new String[100];
+        boolean[] flag = new boolean[100];
         int count = 0;
         String input = sc.nextLine();
 
@@ -20,6 +21,10 @@ public class Duke {
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!\n");
                 return;
+            }
+
+            if (input.equals("done")) {
+
             }
 
             if (input.equals("list")) {
@@ -32,6 +37,7 @@ public class Duke {
 
                 System.out.println("\n added: " + input + "\n");
                 store[count] = input;
+                flag[count] = false;
                 count++;
                 input = sc.nextLine();
             }
