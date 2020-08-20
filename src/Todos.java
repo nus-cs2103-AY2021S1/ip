@@ -1,5 +1,3 @@
-package main.java;
-
 public class Todos extends Task {
 
     public Todos(String description) {

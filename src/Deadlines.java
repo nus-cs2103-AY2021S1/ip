@@ -1,5 +1,3 @@
-package main.java;
-
 public class Deadlines extends Task {
     protected String deadline;
 

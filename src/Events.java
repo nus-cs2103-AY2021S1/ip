@@ -1,5 +1,3 @@
-package main.java;
-
 public class Events extends Task {
     protected String at;
 
