@@ -149,12 +149,19 @@ public class Duke {
         int taskNum = sc.nextInt();
         sc.nextLine();
         try {
-            taskArr.get(taskNum - 1).markAsDone();
-            System.out.println("Good job! This task is now marked as done:");
-            System.out.println(taskArr.get(taskNum - 1).toString());
+            if (taskArr.get(taskNum - 1).isDone()) {
+                throw new InvalidDoneCommandException("This task is already done!");
+            } else {
+                taskArr.get(taskNum - 1).markAsDone();
+                System.out.println("Good job! This task is now marked as done:");
+                System.out.println(taskArr.get(taskNum - 1).toString());
+            }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Sorry that task doesn't exist :/");
             System.out.println("Try using 'list' to find out what tasks you have!");
+        } catch (InvalidDoneCommandException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Check out each task's status by using 'list'!");
         }
     }
 }
