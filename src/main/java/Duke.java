@@ -14,7 +14,11 @@ public class Duke {
             if (command.equals("bye")) {
                 break;
             } else if (command.equals("list")) {
-                System.out.println(printList(taskList));
+                printList(taskList);
+            } else if (command.startsWith("done ")) {
+                String[] temp = command.split(" ");
+                int doneIndex = Integer.parseInt(temp[1]) - 1;
+                markTaskDone(doneIndex, taskList);
             } else {
                 addNewTask(command, taskList);
             }
@@ -28,15 +32,21 @@ public class Duke {
         System.out.println("\n Task added: " + description);
     }
 
-    private static String printList(ArrayList<Task> al) {
+    private static void markTaskDone(int taskIndex, ArrayList<Task> taskList) {
+        Task doneTask = taskList.get(taskIndex);
+        doneTask.markAsDone();
+        System.out.println("The following task has been marked as done: \n" + doneTask);
+    }
+
+    private static void printList(ArrayList<Task> al) {
         if (al.isEmpty()) {
-            return "List is empty!";
+            System.out.println("List is empty!");
         } else {
             String s = "";
             for (int i = 0; i < al.size(); i++) {
-                s = s + String.valueOf(i+1) + ". " + al.get(i) + "\n";
+                s = s + (i + 1) + ". " + al.get(i) + "\n";
             }
-            return s;
+            System.out.println(s);
         }
     }
 }
