@@ -1,2 +1,10 @@
-done 1
-bye
+todo read book
+delete 1
+delete 1
+delete
+event
+event read book
+list
+delete 2
+deadline read book
+deadline
