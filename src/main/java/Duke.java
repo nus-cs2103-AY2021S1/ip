@@ -7,16 +7,24 @@ public class Duke {
 
         ArrayList<Task> todo = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
-        Task task = new Task(sc.nextLine());
+        String input = sc.nextLine();
 
-       while (!task.getDescription().equals("bye")) {
-           add(task);
-           todo.add(task);
-           task = new Task(sc.nextLine());
-           if (task.getDescription().equals("list")) {
-                printList(todo);
-                task = new Task(sc.nextLine());
+       while (!input.equals("bye")) {
+           if (!input.contains("done") && !input.equals("list")) {
+               add(new Task(input));
+               todo.add(new Task(input));
            }
+           if (input.equals("list")) {
+                   printList(todo);
+           }
+           if (input.contains("done")) {
+               String[] textArray = input.split(" ", 2);
+               int taskNum = Integer.parseInt(textArray[1]);
+               Task doneTask = todo.get(taskNum - 1);
+               doneTask.markAsDone();
+               System.out.println("Nice! I've marked this task as done:\n" + doneTask.getStatusIcon() + " " + doneTask.description);
+           }
+           input = sc.nextLine();
        }
        Bye();
 
@@ -27,11 +35,9 @@ public class Duke {
     }
 
     public static void printList(ArrayList<Task> todo) {
-        int taskNum = 0;
         System.out.println("    ____________________________________________________________");
         for (Task task : todo) {
-            taskNum++;
-            System.out.println("     " + taskNum + ".[" + task.getStatusIcon() + "] " + task.getDescription());
+            System.out.println("     " + (todo.indexOf(task) + 1) + ".[" + task.getStatusIcon() + "] " + task.getDescription());
         }
         System.out.println("    ____________________________________________________________");
     }
