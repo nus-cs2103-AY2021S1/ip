@@ -62,9 +62,22 @@ public class Bill {
                         print_the_list();
                     } else if (firstChar.equals("done")) {
 
-                        System.out.println("reach done");
+                        if (isDone.length == 1) {
+                            throw new InvalidDoneException("OOPS!!! please provide me with the task to be marked as done");
+                        }
+                        
+                        if (isDone.length > 2) {
+                            throw new InvalidDoneException("OOPS!!! I can only mark one task as done at a time");
+                        }
                         String lastChar = isDone[isDone.length - 1];
                         int index = Integer.parseInt(lastChar);
+                        
+                        if (index > isDone.length) {
+                            int no_of_tasks = list_of_Content.size();
+                            throw new InvalidException("There are only " + no_of_tasks + "tasks in the list; Please restate" +
+                                    " the task to be mark as done");
+                        }
+                        
                         Task current = list_of_Content.get(index - 1);
                         current.set_Task_As_Done();
                         System.out.println(horizontal_line);
@@ -74,6 +87,11 @@ public class Bill {
 
                     } else {
                         if (firstChar.equals("todo")) {
+                            
+                            if (isDone.length == 1) {
+                                throw new InvalidTodoException("OOPS!!! The description of a todo cannot be empty." +
+                                        "please provide me with the task to be completed");
+                            }
                             ToDo new_task = new ToDo(input.substring(firstChar.length() + 1));
                             list_of_Content.add(new_task);
                             System.out.println(horizontal_line);
@@ -82,6 +100,16 @@ public class Bill {
                             System.out.println("Now you have " + list_of_Content.size() + " tasks in the list.");
                             System.out.println(horizontal_line);
                         } else if (firstChar.equals("deadline")) {
+
+                            if (isDone.length == 1) {
+                                throw new InvalidDeadlineException("OOPS!!! The description of a task cannot be empty." +
+                                        "please provide me with the name and duration of the task to be completed");
+                            }
+
+                            if (input.split("/by").length < 2) {
+                                throw new InvalidDeadlineException("OOPS!!! please provide me with the" +
+                                        " duration of the task to be completed");
+                            }
                             int index = input.indexOf("/by");
                             String task = input.substring(firstChar.length() + 1, index);
                             String time = input.substring(index + 4);
@@ -93,6 +121,17 @@ public class Bill {
                             System.out.println("Now you have " + list_of_Content.size() + " tasks in the list.");
                             System.out.println(horizontal_line);
                         } else if (firstChar.equals("event")) {
+
+                            if (isDone.length == 1) {
+                                throw new InvalidDeadlineException("OOPS!!! The description of a task cannot be empty." +
+                                        "please provide me with the name and time of the task");
+                            }
+
+                            if (input.split("/at").length < 2) {
+                                throw new InvalidDeadlineException("OOPS!!! please provide me with the" +
+                                        " time of the task to be completed");
+                            }
+                            
                             int index = input.indexOf("/at");
                             String task = input.substring(firstChar.length() + 1, index);
                             String duration = input.substring(index + 4);
@@ -104,19 +143,26 @@ public class Bill {
                             System.out.println("Now you have " + list_of_Content.size() + " tasks in the list.");
                             System.out.println(horizontal_line);
                         } else {
-                            Task task = new Task(input);
-                            list_of_Content.add(task);
-                            System.out.println(horizontal_line);
-                            System.out.println("Got it. I've added this task: " + task);
-                            System.out.println("Now you have " + list_of_Content.size() + " tasks in the list.");
-                            System.out.println(horizontal_line);
+//                            Task task = new Task(input);
+//                            list_of_Content.add(task);
+//                            System.out.println(horizontal_line);
+//                            System.out.println("Got it. I've added this task: " + task);
+//                            System.out.println("Now you have " + list_of_Content.size() + " tasks in the list.");
+//                            System.out.println(horizontal_line);
+                            throw new InvalidException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                         }
                     }
                     
                 }
                 
+            } catch (InvalidException e){
+
+                System.out.println(horizontal_line);
+                System.out.println(e.getMessage());
+                System.out.println(horizontal_line);
+                
             } catch (Exception e) {
-                System.out.println(e);
+                System.out.println(e.getMessage());
             }
         }
     }
