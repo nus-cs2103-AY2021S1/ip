@@ -13,14 +13,13 @@ public class Cartona {
     private static void printList() {
         int counter = 0;
 
-        System.out.printf(line);
-
+        System.out.printf(line + "     Here are the tasks in your list:%n");
         for (Task task: taskList) {
             counter++;
             System.out.printf("     %d.%s%n", counter, task);
         }
 
-        System.out.println(line);
+        System.out.printf(line);
     }
 
     /**
@@ -31,6 +30,14 @@ public class Cartona {
         String completion = "     Nice! I've marked this task as done:\n" +
                             String.format("       %s%n", task);
         System.out.printf(line + completion + line);
+    }
+
+    private static void deleteTask(int taskNum) {
+        Task toDelete = taskList.get(taskNum - 1);
+        taskList.remove(taskNum - 1);
+        String deleteMsg = String.format("     Noted. I've removed this task:%n       %s%n", toDelete);
+        String countMsg = String.format("     Now you have %d tasks in the list.%n", taskList.size());
+        System.out.printf(line + deleteMsg + countMsg + line);
     }
 
     /**
@@ -44,7 +51,11 @@ public class Cartona {
             String name = "";
 
             for (int i = 1; i < parsedArr.length; i++) {
-                name += parsedArr[i] + " ";
+                if (i != parsedArr.length - 1) {
+                    name += parsedArr[i] + " ";
+                } else {
+                    name += parsedArr[i];
+                }
             }
             if (name.equals("")) {
                 throw new EmptyTaskDescriptionException("");
@@ -130,7 +141,7 @@ public class Cartona {
         String welcome = line + "     Hello! I'm Cartona.\n" +
                          "     What can I do for you?\n" + line;
 
-        System.out.println(welcome);
+        System.out.printf(welcome);
 
         String nextInput = "";
         while (true) {
@@ -158,15 +169,24 @@ public class Cartona {
                     System.out.printf("%s     Got it. I've added this task:%n       %s%n     " +
                                     "Now you have %d tasks in the list.%n%s", line, taskList.get(taskList.size() - 1),
                             taskList.size(), line);
-                } catch (EmptyTaskDescriptionException e1){
+                } catch (EmptyTaskDescriptionException e1) {
                     System.out.printf("%s     Error: Empty task description!%n%s",
                             line, line);
                 } catch (InvalidTaskTimeException e2) {
                     System.out.printf("%s     Error: Empty deadline/event time - please enter the time after /by " +
                                     "or /at keywords respectively%n%s",
-                                    line, line);
+                            line, line);
                 } catch (UnknownCommandException e3) {
                     System.out.printf("%s     Error: Unknown keyword after \"add\"%n%s",
+                            line, line);
+                }
+            } else if (nextInput.substring(0, 3).equals("del")) {
+                try {
+                    String[] doneArr = nextInput.split(" ");
+                    int taskNum = Integer.parseInt(doneArr[1]);
+                    deleteTask(taskNum);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.printf("%s     Error: Invalid input! Did you mean: \"del TASK_NUM\"%n%s",
                             line, line);
                 }
             } else {
@@ -176,6 +196,6 @@ public class Cartona {
         }
 
         String goodbye = line + "     Bye. Hope to see you again soon!\n" + line;
-        System.out.println(goodbye);
+        System.out.printf(goodbye);
     }
 }
