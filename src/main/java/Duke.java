@@ -3,13 +3,55 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
+    static final String SOCCAT =
+            "                                              .                         .                             \n" +
+            "                                             ...                       ...                            \n" +
+            "                                            /@@@&*                   (@@@@@&*                         \n" +
+            "                                           /@@@@@@@@&*            /@@@@@@@@@@#                        \n" +
+            "                                          *&@@@@@@@@@@@@*       /@@@@@@@@@@@@&/                       \n" +
+            "                                           %&@@@@@@@@@@@@@@%.  *@@@@@@@@@@@@@@@&/                     \n" +
+            "                                          /@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#                    \n" +
+            "                                        /@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,                   \n" +
+            "                                      .@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,                 \n" +
+            "                                     *@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.               \n" +
+            "                                    #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,              \n" +
+            "                                   %@@@@@@@@@@@@*,#@@@@@@@@@@@@@@@@@@@%..,&@@@@@@@@@@@@@/             \n" +
+            "                                  (@@@@@@@@@@@%    *@@@@@@@@@@@@@@@@@@    ,@@@@@@@@@@@@@&             \n" +
+            "                                  @@@@@@@@@@@@@@@   &@@@@@@@@@@@@@@@@@@&.  %@@@@@@@@@@@@@(            \n" +
+            "                                 (@@@@@@@@@@@@(     #@@@@@@@@@@@@@@@@@.    /@@@@@@@@@@@@&%            \n" +
+            "                                 *@&&&&&@@@@@@(     /@@@@@@@@@@@@@@@@@.    *@@@@@@&&&&&&&(            \n" +
+            "                                  %&&&&&&&&@@@&     (@@@@@@@@@@@@@@@@@*    #@@@&@&&&&&&&%             \n" +
+            "                                  .&&&&&&&&@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&&&&&&&&,             \n" +
+            "                                    ,&&&&&&@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&&&&(               \n" +
+            "                                      .(@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&&/                 \n" +
+            "                                          ,#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%*.                    \n" +
+            "                                                 ,/#@@@@@@@@@@@@@@@@@@@@@@#                           \n" +
+            "                                                   #&@@@@@@@@@@@@@@@@@@@&&&&.                         \n" +
+            "                                                  ,&@@@@@@@@@@@@@@@@@@@@@@@@@/                        \n" +
+            "                                                  #@@@@@@@@@@@@@@@@@@@@@@@@@@@@.                      \n" +
+            "                                                 ,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@(                     \n" +
+            "                                                 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&.                   \n" +
+            "                                                /@@@@@@@@@@@@@@@@@@@@@@&@@@@@@@@@@&,                  \n" +
+            "                                                %@@@@@@@@@@@@@@@@@@@@@&@@@@@@@@@@@@&.                 \n" +
+            "                                                @@@@@@@@@@@@@@@@@@@@@%&@@@@@@@@@@@@&&#*,.             \n" +
+            "                                               *@@@@@@@@@@@@@@@@@@@@@&&@@@@@@@@@@@&&*.,#&&@@@*        \n" +
+            "                                               ,@@@@@@@@@&@@@@@@@@@@&@@@@@@@@@@@@&&(       .(&@@(     \n" +
+            "                                                 ./#%&&%..,***////**(@@@@@@@@@&&%*            ,@@@*   \n" +
+            "                                                                                                 @@(  \n" +
+            "                                                                                    *%#*      &@&.    \n" +
+            "                                                                               /&@@@%##/&@@@@&,       \n" +
+            "                                                                             @@@@@@#&@@@@@@@@@        \n" +
+            "                                                                        .(@@&#&@&&&&&%@@@@@@@*        \n" +
+            "                                                                        &%&&&%&&&&&&&&&@@#            \n" +
+            "                                                                         .*%@@@%@@%, ..               \n" +
+            "                                                                               .                      ";
     static final String HORIZONTAL_LINE =
             "____________________________________________________________";
     static final String INDENT = "    ";
     static final String EMPTY_DESCRIPTION_ERROR(String task) {
-        return String.format("☹ OOPS!!! The description of a %s cannot be empty.", task);
+        return String.format("☹ OOPS!!! The description of s%s cannot be empty.", task);
     }
-    static final String UNKNOWN_TASK_ERROR = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    static final String UNKNOWN_TASK_ERROR = "☹ OOPS!!! I'm sorry, but I don't know what that meows :-(";
     static final String EMPTY_BY_ERROR = "☹ OOPS!!! The deadline cannot be empty.";
     static final String EMPTY_AT_ERROR = "☹ OOPS!!! The event time cannot be empty.";
     static final String NO_SUCH_TASK = "☹ OOPS!!! There is no such task.";
@@ -138,8 +180,9 @@ public class Duke {
         Duke duke = new Duke();
 
         System.out.println(INDENT + HORIZONTAL_LINE);
-        System.out.println("    Hello! I'm Duke\n" +
-                "    What can I do for you?");
+        System.out.println(duke.SOCCAT);
+        System.out.println("    Hello! I'm Soccat Duke\n" +
+                "    What do you meow?");
         System.out.println(INDENT + HORIZONTAL_LINE);
         while (sc.hasNext()) {
             String nextLine = sc.nextLine();
