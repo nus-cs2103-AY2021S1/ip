@@ -1,22 +1,40 @@
 Hello, I am Emily
 What can i do for you?
 -------------------
-deadline help /by Monday
+deadline return book /by Monday
     ---------------
     Got it! I have added this task:
-        [D][?] help (by: Monday)
+        [D][?] return book (by: Monday)
     Now you have 1 tasks in the list
     ---------------
-todo something
+todo Math
     ---------------
     Got it! I have added this task:
-        [T][?] something
+        [T][?] Math
     Now you have 2 tasks in the list
+    ---------------
+event book reading /at 430pm Tuesday
+    ---------------
+    Got it! I have added this task:
+        [E][?] book reading (at: 430pm Tuesday)
+    Now you have 3 tasks in the list
     ---------------
 list
     ---------------
-    1. [D][?] help (by: Monday)
-    2. [T][?] something
+    1. [D][?] return book (by: Monday)
+    2. [T][?] Math
+    3. [E][?] book reading (at: 430pm Tuesday)
+    ---------------
+done 1
+    ---------------
+    Nice work! I have marked the task as done:
+     [D][?] return book (by: Monday)
+    ---------------
+list
+    ---------------
+    1. [D][?] return book (by: Monday)
+    2. [T][?] Math
+    3. [E][?] book reading (at: 430pm Tuesday)
     ---------------
 bye
 -------------------
