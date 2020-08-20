@@ -12,10 +12,13 @@ public class Duke {
         System.out.println(logo + "\nHello im Eu Zin's Duke, he spent thursday afternoon creating me cuz he forgot abt the iP");
 
         ArrayList<Task> taskList = new ArrayList<>();
-        try {
-            Duke.response(new Scanner(System.in), taskList);
-        } catch (DukeException e) {
-            System.out.println(e.toString());
+        Scanner scanner = new Scanner(System.in);
+        while(scanner.hasNextLine()) {
+            try {
+                Duke.response(scanner, taskList);
+            } catch (DukeException e) {
+                System.out.println(e.toString());
+            }
         }
     }
 
