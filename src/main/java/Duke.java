@@ -103,7 +103,7 @@ public class Duke {
                                 }
                                 String str = command.split(" ", 2)[1].split(" /", 2)[0];
                                 String date = command.split(" ", 2)[1].split("/", 2)[1].split(" ", 2)[1];
-                                Task task = new Deadline(str, date);
+                                Task task = new Deadline(str, Parser.DateParser(date));
                                 list.add(task);
                                 printAddTask(task);
                                 writer.write(task.saveText() + "\n");
@@ -115,7 +115,7 @@ public class Duke {
                                 }
                                 String str = command.split(" ", 2)[1].split(" /", 2)[0];
                                 String date = command.split(" ", 2)[1].split("/", 2)[1].split(" ", 2)[1];
-                                Task task = new Event(str, date);
+                                Task task = new Event(str, Parser.DateParser(date));
                                 list.add(task);
                                 printAddTask(task);
                                 writer.write(task.saveText() + "\n");
