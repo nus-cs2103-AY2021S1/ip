@@ -12,6 +12,11 @@ then
     rm ACTUAL.TXT
 fi
 
+JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
+
+export JAVA_TOOL_OPTIONS
+# export LC_ALL=en_GB.UTF-8
+
 # compile the code into the bin folder, terminates if error occurred
 if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/Duke.java
 then
