@@ -86,30 +86,30 @@ public class Duke {
     }
 
     public boolean processInput(String input) throws DukeException {
-        if (input.equals("bye")) {
+        if (Commands.BYE.check(input)) {
             exit();
             return false;
-        } else if (input.equals("list")) {
+        } else if (Commands.LIST.check(input)) {
             listTasks();
         } else {
             String[] inputSplit = input.split(" ", 2);
 
-            if (inputSplit[0].equals("todo")) {
+            if (Commands.TODO.check(inputSplit[0])) {
                 if (inputSplit.length < 2) {
                     throw new DukeException("The description of a todo cannot be empty");
                 }
                 addTask(inputSplit[1]);
-            } else if (inputSplit[0].equals("deadline")) {
+            } else if (Commands.DEADLINE.check(inputSplit[0])) {
                 if (inputSplit.length < 2) {
                     throw new DukeException("The description of a deadline cannot be empty");
                 }
                 addTask(inputSplit[1], false);
-            } else if (inputSplit[0].equals("event")) {
+            } else if (Commands.EVENT.check(inputSplit[0])) {
                 if (inputSplit.length < 2) {
                     throw new DukeException("The description of an event cannot be empty");
                 }
                 addTask(inputSplit[1], true);
-            } else if (inputSplit[0].equals("done")){
+            } else if (Commands.DONE.check(inputSplit[0])) {
                 if (inputSplit.length < 2) {
                     throw new DukeException("Task number cannot be empty");
                 }
@@ -118,7 +118,7 @@ public class Duke {
                 } catch (NumberFormatException ex) {
                     throw new DukeException("Task number must be a valid integer");
                 }
-            } else if (inputSplit[0].equals("delete")){
+            } else if (Commands.DELETE.check(inputSplit[0])) {
                 if (inputSplit.length < 2) {
                     throw new DukeException("Task number cannot be empty");
                 }
@@ -127,7 +127,7 @@ public class Duke {
                 } catch (NumberFormatException ex) {
                     throw new DukeException("Task number must be a valid integer");
                 }
-            }else {
+            } else {
                 throw new DukeException("I'm sorry, but I don't know what that means :(");
             }
         }
