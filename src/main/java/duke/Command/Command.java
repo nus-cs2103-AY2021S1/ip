@@ -1,27 +1,13 @@
 package duke.Command;
 
-import duke.DukeException;
-import duke.Task;
-
-import java.util.ArrayList;
+import duke.*;
 
 public abstract class Command {
+    protected boolean isExit = false;
 
-    public abstract String execute() throws DukeException;
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
-    public static String parse(String str) throws DukeException {
-        if (str.equals("bye")) {
-            return new ExitCommand().execute();
-        } else if (str.equals("list")) {
-            return new ListCommand().execute();
-        } else if (str.contains("done")) {
-            int taskIndex = Integer.parseInt(str.split("\\s+")[1]);
-            return new CompleteCommand(taskIndex).execute();
-        } else if (str.contains("delete")) {
-            int taskIndex = Integer.parseInt(str.split("\\s+")[1]);
-            return new DeleteCommand(taskIndex).execute();
-        } else {
-            return new AddCommand(str).execute();
-        }
+    public boolean isExit() {
+        return isExit;
     }
 }

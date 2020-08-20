@@ -13,7 +13,6 @@ public class Event extends Task {
     private final LocalTime startTime;
     private final LocalTime endTime;
 
-    //event project meeting /at Mon 2-4pm
     public static final String delimiterAt = " /at ";
 
     public Event(String description, String at) {
@@ -38,7 +37,7 @@ public class Event extends Task {
     }
 
     private LocalDate parseDate(String dateString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
         return LocalDate.parse(dateString, formatter);
     }
 

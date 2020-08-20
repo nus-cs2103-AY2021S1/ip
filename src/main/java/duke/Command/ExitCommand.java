@@ -1,11 +1,15 @@
 package duke.Command;
 
-import duke.Command.Command;
-import duke.Message;
+import duke.*;
 
 public class ExitCommand extends Command {
 
-    public String execute() {
-        return Message.MESSAGE_EXIT;
+    public ExitCommand() {
+        this.isExit = true;
+    }
+
+    @Override
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
+        ui.showExit();
     }
 }
