@@ -13,9 +13,13 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Returns tick or cross symbols depending on whether the task is done.
+     *
+     * @return Tick or cross symbol
+     */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
-        //return tick or X symbols
     }
 
     @Override
