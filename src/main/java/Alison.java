@@ -2,10 +2,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Duke {
+public class Alison {
     public static List<Task> taskList = new ArrayList<>();
 
-    public static String horizontal_line = "____________________________________________________________";
+    public static String horizontal_line = "________________________________________________________________";
 
     public static void printWithBorder(String content) {
         System.out.println(horizontal_line);
@@ -14,12 +14,19 @@ public class Duke {
     }
 
     public static void greeting() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo =
+                "       d8888 888      8888888  .d8888b.   .d88888b.  888b    888 \n" +
+                "      d88888 888        888   d88P  Y88b d88P\" \"Y88b 8888b   888 \n" +
+                "     d88P888 888        888   Y88b.      888     888 88888b  888 \n" +
+                "    d88P 888 888        888    \"Y888b.   888     888 888Y88b 888 \n" +
+                "   d88P  888 888        888       \"Y88b. 888     888 888 Y88b888 \n" +
+                "  d88P   888 888        888         \"888 888     888 888  Y88888 \n" +
+                " d8888888888 888        888   Y88b  d88P Y88b. .d88P 888   Y8888 \n" +
+                "d88P     888 88888888 8888888  \"Y8888P\"   \"Y88888P\"  888    Y888";
+
         printWithBorder("Hello from\n" + logo);
+        String greet = "Hello! I'm Alison.\n" + "What can I do for you?\n" + horizontal_line;
+        System.out.println(greet);
     }
 
     public static void showList() {
