@@ -1,10 +1,39 @@
 Hello! I'm Duke. What can I do for you?
 Input:
+Must include description for todo
+Input:
 I have added this task:
 [T][UNDONE] slap ppl
 Now you have 1 task(s) in the list.
 Input:
+deadline must include '/by'
+Input:
+deadline must include '/by'
+Input:
 I have added this task:
-[D][UNDONE] slap ppl  (by: today)
+[D][UNDONE] homework  (by: Tuesday)
 Now you have 2 task(s) in the list.
 Input:
+event must include '/at'
+Input:
+event must include '/at'
+Input:
+I have added this task:[E][UNDONE] concert  (at: Wimbley Place,Tuesday)
+Now you have 3 task(s) in the list.
+Input:
+Please input:
+1)list - to access the list
+2)todo - to create a todo task
+3)deadline - to create a deadline
+4)event - to schedule an event
+5)done - to mark tasks as done
+6)delete - to delete tasks from the list
+Input:
+Please input:
+1)list - to access the list
+2)todo - to create a todo task
+3)deadline - to create a deadline
+4)event - to schedule an event
+5)done - to mark tasks as done
+6)delete - to delete tasks from the list
+Bye. Hope to see you again soon!

@@ -1,5 +1,10 @@
+todo
 todo slap ppl
-deadline slap ppl /by today
-deadline ssss
-list
+deadline
+deadline homework
+deadline homework /by Tuesday
+event
+event concert
+event concert /at Wimbley Place,Tuesday
+random string
 bye
