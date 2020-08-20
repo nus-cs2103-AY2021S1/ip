@@ -48,19 +48,33 @@ public class Bot {
         }
     }
 
+    private String firstWord(String word) {
+        String firstWord = "";
+        for (char c : word.toCharArray()) {
+            if (Character.isWhitespace(c)) {
+                return firstWord;
+            }
+            firstWord += c;
+        }
+        return firstWord;
+    }
+
     private String cmdAdd(String item) {
         this.taskList.add(item);
         return responseWrapper("added: " + item);
     }
 
     private String cmdList() {
-        int index = 1;
+        int index = 0;
         StringBuilder string = new StringBuilder();
         for (String item : taskList) {
-            string.append(index).append(". ").append(item).append("\n    ");
             index++;
+            string.append(index).append(". ").append(item).append("\n    ");
         }
-        string.delete(string.length() - 6, string.length());
+        if (index == 0) {
+            return responseWrapper("Nothing in the list");
+        }
+        string.delete(string.length() - 5, string.length());
         return responseWrapper(string.toString());
     }
 }
