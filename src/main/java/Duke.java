@@ -8,6 +8,7 @@ public class Duke {
         String open = "_______________________________________ \n"
                 + "Hello! I'm Duke \n"
                 + "What can I do for you? \n"
+                + "You can type 'help' to view commands \n"
                 + "_______________________________________ \n";
         String line = "_______________________________________\n";
         System.out.println(open);
@@ -82,7 +83,7 @@ public class Duke {
             } else if (input_split[0].equals("delete")) { // Delete task
                 try {
                     int task_id = Integer.parseInt(input_split[1]);
-                    if (task_id <=0 || task_id > user_list.size()) {
+                    if (task_id <= 0 || task_id > user_list.size()) {
                         System.out.println(line + "Invalid input! That task does not exist! \n" + line);
                     } else {
                         int new_size = user_list.size() - 1;
@@ -90,11 +91,22 @@ public class Duke {
                                 + user_list.get(task_id - 1) + "\n"
                                 + "Now you have " + new_size + " tasks in the list."
                                 + "\n" + line);
-                        user_list.remove(task_id-1);
+                        user_list.remove(task_id - 1);
                     }
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println(line + "Invalid input! Please specify which task you want to delete! \n" + line);
                 }
+
+            } else if (user_input.equals("help")) { // Additional help feature
+                String output = line  + "These are my available commands: \n"
+                        + "list: View entire list of task \n"
+                        + "todo <desciption>: Add new todo to list \n"
+                        + "deadline <description> <date/time>: Add new deadline to list \n"
+                        + "event <description> <date/time>: Add new event to list \n"
+                        + "done <task id>: Sets task as completed \n"
+                        + "delete <task id>: Deletes task from list \n"
+                        + "bye: Exits program \n" + line;
+                System.out.println(output);
 
             } else {
                 System.out.println(line + "Invalid input! Please try again! \n" + line);
@@ -104,7 +116,7 @@ public class Duke {
         // Closing
         scanner.close();
         String close = "_______________________________________ \n"
-                + "Bye. Hope to see you again soon! \n"
+                + "Goodbye! See you soon! \n"
                 + "_______________________________________ \n";
         System.out.println(close);
     }
