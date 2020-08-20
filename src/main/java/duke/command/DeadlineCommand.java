@@ -6,7 +6,7 @@ import java.util.List;
 import duke.DukeException;
 
 /**
- * A subclass of Command which adds a deadline to the taskList
+ * A subclass of Command which adds a deadline to the taskList.
  */
 public class DeadlineCommand extends AddCommand {
     private final String name;

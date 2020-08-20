@@ -10,16 +10,16 @@ import java.util.Locale;
 public class Deadline extends Task {
     private final LocalDate schedule;
 
-    public Deadline(String name, boolean isDone, String schedule) {
-        super(name, isDone);
-        this.schedule = LocalDate.parse(schedule);
-    }
-
     public Deadline(String name, boolean isDone, LocalDate schedule) {
         super(name, isDone);
         this.schedule = schedule;
     }
 
+    /**
+     * Return a string representation of the Deadline task's schedule in the pattern "MMM d yyyy".
+     *
+     * @return the string representation of the schedule.
+     */
     public String getSchedule() {
         return this.schedule.format(DateTimeFormatter.ofPattern("MMM d yyyy", Locale.ENGLISH));
     }

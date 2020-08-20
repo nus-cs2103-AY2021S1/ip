@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import duke.command.Command;
@@ -80,7 +81,7 @@ public class CommandAgent {
 
     /**
      * Create different types of tasks based on the identifier stored in the taskInfo.
-     * Set default option to todo task.
+     * Set default option to Todo task.
      * The CommandReader has ensured no erroneous keyword will be sent to agent.
      *
      * @param taskInfo a list of String containing all the relevant information for the task.
@@ -93,10 +94,12 @@ public class CommandAgent {
         switch (identifier) {
         case "E":
             schedule = taskInfo.get(2);
-            return new Event(name, false, schedule);
+            LocalDate eventTime = LocalDate.parse(schedule);
+            return new Event(name, false, eventTime);
         case "D":
             schedule = taskInfo.get(2);
-            return new Deadline(name, false, schedule);
+            LocalDate deadlineTime = LocalDate.parse(schedule);
+            return new Deadline(name, false, deadlineTime);
         default:
             return new Todo(name, false);
         }

@@ -20,6 +20,11 @@ public abstract class Command {
      */
     public abstract String sendRequest();
 
+    /**
+     * Check if the command is an ExitCommand by reviewing its content.
+     *
+     * @return a boolean value, 1 if it is an ExitCommand, 0 otherwise.
+     */
     public boolean isExit() {
         return this.getContent().get(0).equals("bye");
     }
