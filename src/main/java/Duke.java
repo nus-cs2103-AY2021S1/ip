@@ -38,12 +38,15 @@ public class Duke {
         String action = parts[0];
         Task task;
         String second;
+        int index;
         switch(action) {
             case "list":
                 listTasks();
                 return true;
             case "done":
-                done(input);
+                second = parts[1];
+                index = Integer.parseInt(second);
+                done(index);
                 return true;
             case "todo":
                 try {
@@ -51,6 +54,7 @@ public class Duke {
                     task = handleTodo(todoTask);
                     handleTask(task);
                 } catch (ArrayIndexOutOfBoundsException e) {
+                    // TODO: Raise DukeException
                     printOutput("     OOPS!!! The description of a todo cannot be empty.", true);
                 }
                 return true;
@@ -70,10 +74,16 @@ public class Duke {
                 task = handleEvent(eventTask, eventAt);
                 handleTask(task);
                 return true;
+            case "delete":
+                second = parts[1];
+                index = Integer.parseInt(second);
+                deleteTask(index);
+                return true;
             case "bye":
                 exit();
                 return false;
             default:
+                // TODO: Raise DukeException
                 printOutput("     OOPS!!! I'm sorry, but I don't know what that means :-(", true);
                 return true;
         }
@@ -84,6 +94,15 @@ public class Duke {
      */
     private static void exit() {
         printOutput("     Bye. Hope to see you again soon!", true);
+    }
+
+    private static void deleteTask(int index) {
+        Task task = taskList.get(index - 1);
+        taskList.remove(index - 1);
+        int len = taskList.size();
+        printOutput("     Noted. I've removed this task:\n       " +
+                task.toString() + "\n     Now you have " + len +
+                " tasks in the list.", true);
     }
 
     private static Task handleTodo(String todoTask) {
@@ -121,9 +140,7 @@ public class Duke {
         printOutput(output, false);
     }
 
-    private static void done(String input) {
-        String strIndex = input.split(" ")[1];
-        int index = Integer.parseInt(strIndex);
+    private static void done(int index) {
         Task task = taskList.get(index - 1);
         task.setDone(true);
         String output = "     Nice! I've marked this task as done: \n" +
