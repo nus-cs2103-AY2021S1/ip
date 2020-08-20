@@ -21,10 +21,14 @@ public class Duke {
             } else {
                 String[] arrOfStr = line.split(" ", 0);
                 String identifier = arrOfStr[0];
-//                mark as done
                 if (identifier.equals("done")) {
+//                    mark as done
                     int index = Integer.parseInt(arrOfStr[1]) - 1;
                     markDone(index);
+                } else if (identifier.equals("delete")) {
+//                    delete
+                    int index = Integer.parseInt(arrOfStr[1]) - 1;
+                    delete(index);
                 } else {
 //                    add to list
                     if ((identifier.equals("todo") || identifier.equals("deadline")
@@ -88,7 +92,7 @@ public class Duke {
         tasks.add(task);
         System.out.println(indentation + "Got it. I've added this task:");
         System.out.println(indentation + indentation + task);
-        System.out.println(indentation + "Now you have " + (tasks.size() > 1
+        System.out.println(indentation + "Now you have " + (tasks.size() != 1
                 ? tasks.size() + " tasks in the list."
                 : tasks.size() + " task in the list."));
         printBorder();
@@ -101,6 +105,18 @@ public class Duke {
         printBorder();
         System.out.println(indentation + "Nice! I've marked this task as done:");
         System.out.println(indentation + indentation + newTask.getStatusIcon() + " " + newTask.description);
+        printBorder();
+    }
+
+    public static void delete(int index) {
+        Task task = tasks.get(index);
+        tasks.remove(task);
+        printBorder();
+        System.out.println(indentation + "Noted. I've removed this task:");
+        System.out.println(indentation + indentation + task);
+        System.out.println(indentation + "Now you have " + (tasks.size() != 1
+                ? tasks.size() + " tasks in the list."
+                : tasks.size() + " task in the list."));
         printBorder();
     }
 
