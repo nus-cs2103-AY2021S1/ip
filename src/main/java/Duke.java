@@ -1,7 +1,4 @@
-import src.main.java.Deadline;
-import src.main.java.Event;
-import src.main.java.Task;
-import src.main.java.Todo;
+import src.main.java.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,7 +116,7 @@ public class Duke {
         System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
 
 //        String logo = "(>'-')> <('-'<) ^('-')^ v('-')v(>'-')> (^-^)";
         String logo = "     .\"\".    .\"\",\n" +
@@ -153,31 +150,75 @@ public class Duke {
         while (sc.hasNextLine()) {
             input = sc.nextLine();
 
-            if (input.equals("bye")) {
-                klaun.sayBye();
-                break;
-            } else if (input.equals("list")) { // if user calls for list
-                klaun.getList();
-            } else if (input.contains(" ") && input.split(" ")[0].equals("done") && parseInt(input.split(" ", 2)[1]) <= klaun.getIndex() && parseInt(input.split(" ", 2)[1]) > 0) { // if its "done x"
-                klaun.markDone(parseInt(input.split(" ", 2)[1]) - 1);
-            } else if (input.contains(" ") && input.split(" ")[0].equals("todo")) { // if task type is to-do
-                String[] arr = input.split(" ", 2);
+            try {
+                if (input.equals("bye")) {
+                    klaun.sayBye();
+                    break;
+                } else if (input.equals("list")) { // if user calls for list
+                    klaun.getList();
+                } else if (input.split(" ")[0].equals("done")) { // if its "done x"
+                    try {
+                        if (input.contains(" ") && parseInt(input.split(" ", 2)[1]) <= klaun.getIndex() && parseInt(input.split(" ", 2)[1]) > 0) {
+                            klaun.markDone(parseInt(input.split(" ", 2)[1]) - 1);
+                        } else {
+                            throw new DukeException("invalid input: " + input);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("??????????????????????????????????????????????????????????????\n");
+                        System.out.println("Oops ... you should provide a valid task number ~ \n");
+                        System.out.println("??????????????????????????????????????????????????????????????\n");
+                    }
+                } else if (input.split(" ")[0].equals("todo")) { // if task type is to-do
+                    try {
+                        if (input.contains(" ")) {
+                            String[] arr = input.split(" ", 2); // split input to get task item
 
-                // add item to list
-                klaun.addToList(new Todo(arr[1], "T"));
-            } else if (input.contains(" ") && input.split(" ")[0].equals("deadline") && input.contains("/")) { // if task type is deadline
-                String[] arr = input.split("/by", 2);
-                String item = arr[0].split(" ", 2)[1]; // get item and remove "deadline" from string
+                            // add item to list
+                            klaun.addToList(new Todo(arr[1], "T")); // add to-do task to ls
+                        } else {
+                            throw new DukeException("invalid input: " + input);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("??????????????????????????????????????????????????????????????\n");
+                        System.out.println("Oh no !! I think you forgot to add your todo description :O\n");
+                        System.out.println("??????????????????????????????????????????????????????????????\n");
+                    }
+                } else if (input.split(" ")[0].equals("deadline")) { // if task type is deadline
+                    try {
+                        if (input.contains(" ") && input.contains("/by")) {
+                            String[] arr = input.split("/by", 2); // split to get deadline of task
+                            String item = arr[0].split(" ", 2)[1]; // get item and remove "deadline" from string
 
-                // add item to list
-                klaun.addToList(new Deadline(item, "D", arr[1]));
-            } else if (input.contains(" ") && input.split(" ")[0].equals("event") && input.contains("/")) { // if task type is deadline
-                String[] arr = input.split("/at", 2);
-                String item = arr[0].split(" ", 2)[1]; // get item and remove "deadline" from string
+                            // add item to list
+                            klaun.addToList(new Deadline(item, "D", arr[1]));
+                        } else { // if format of deadline task is wrong
+                            throw new DukeException("invalid input: " + input);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("??????????????????????????????????????????????????????????????\n");
+                        System.out.println("Oh no !! Your format should be \"deadline ____ /by ____\" \n");
+                        System.out.println("??????????????????????????????????????????????????????????????\n");
+                    }
+                } else if (input.split(" ")[0].equals("event")) { // if task type is deadline
+                    try {
+                        if (input.contains(" ") && input.contains("/at")) {
+                            String[] arr = input.split("/at", 2); // split to get time of task
+                            String item = arr[0].split(" ", 2)[1]; // get item and remove "deadline" from string
 
-                // add item to list
-                klaun.addToList(new Event(item, "E", arr[1]));
-            } else {
+                            // add item to list
+                            klaun.addToList(new Event(item, "E", arr[1]));
+                        } else { // if format of event task is wrong
+                            throw new DukeException("invalid input: " + input);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("??????????????????????????????????????????????????????????????\n");
+                        System.out.println("Oh no !! Your format should be \"event ____ /at ____\" \n");
+                        System.out.println("??????????????????????????????????????????????????????????????\n");
+                    }
+                } else { // if input is not a task
+                    throw new DukeException(input);
+                }
+            } catch (Exception e) {
                 System.out.println("??????????????????????????????????????????????????????????????\n");
                 System.out.println("invalid input :(\n");
                 System.out.println("??????????????????????????????????????????????????????????????\n");
