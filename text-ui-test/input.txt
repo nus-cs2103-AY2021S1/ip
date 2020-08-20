@@ -1,5 +1,11 @@
-todo todo
-deadline ddl /by ddl
-event eve /at eve
-list
-bye
+blah
+todo
+deadline
+event
+done
+done -1
+done 2
+deadline ddl
+deadline ddl /by
+event eve
+event eve /at

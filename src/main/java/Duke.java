@@ -29,14 +29,24 @@ public class Duke {
         addTask(new Todo(task));
     }
 
-    private void addTask(String task, boolean isEvent) {
+    private void addTask(String task, boolean isEvent) throws DukeException {
         Task newTask;
         String[] taskSplit;
         if (isEvent) {
             taskSplit = task.split("/at");
+            if (taskSplit.length != 2) {
+                throw new DukeException("Invalid description for an event");
+            } else if (taskSplit[1].strip().equals("")) {
+                throw new DukeException("Event time cannot be empty");
+            }
             newTask = new Event(taskSplit[0].strip(), taskSplit[1].strip());
         } else {
             taskSplit = task.split("/by");
+            if (taskSplit.length != 2) {
+                throw new DukeException("Invalid description for a deadline");
+            } else if (taskSplit[1].strip().equals("")) {
+                throw new DukeException("Deadline cannot be empty");
+            }
             newTask = new Deadline(taskSplit[0].strip(), taskSplit[1].strip());
         }
         addTask(newTask);
@@ -57,13 +67,16 @@ public class Duke {
         writeOutput(taskOutputs);
     }
 
-    private void markDone(int position) {
+    private void markDone(int position) throws DukeException {
+        if (position < 0 || position > taskList.size()) {
+            throw new DukeException("Invalid task number provided");
+        }
         Task task = taskList.get(position - 1);
         task.markDone();
         writeOutput("Nice! I've marked this task as done:", "\t" + task.toString());
     }
 
-    public boolean processInput(String input) {
+    public boolean processInput(String input) throws DukeException {
         if (input.equals("bye")) {
             exit();
             return false;
@@ -71,14 +84,29 @@ public class Duke {
             listTasks();
         } else {
             String[] inputSplit = input.split(" ", 2);
+
             if (inputSplit[0].equals("todo")) {
+                if (inputSplit.length < 2) {
+                    throw new DukeException("The description of a todo cannot be empty");
+                }
                 addTask(inputSplit[1]);
             } else if (inputSplit[0].equals("deadline")) {
+                if (inputSplit.length < 2) {
+                    throw new DukeException("The description of a deadline cannot be empty");
+                }
                 addTask(inputSplit[1], false);
             } else if (inputSplit[0].equals("event")) {
+                if (inputSplit.length < 2) {
+                    throw new DukeException("The description of an event cannot be empty");
+                }
                 addTask(inputSplit[1], true);
             } else if (inputSplit[0].equals("done")){
+                if (inputSplit.length < 2) {
+                    throw new DukeException("Task number cannot be empty");
+                }
                 markDone(Integer.parseInt(inputSplit[1]));
+            } else {
+                throw new DukeException("I'm sorry, but I don't know what that means :(");
             }
         }
         return true;
@@ -95,7 +123,11 @@ public class Duke {
         boolean keepGoing = true;
         while (keepGoing) {
             input = duke.readInput();
-            keepGoing = duke.processInput(input);
+            try {
+                keepGoing = duke.processInput(input);
+            } catch (DukeException de) {
+                duke.writeOutput(de.getMessage());
+            }
         }
     }
 }

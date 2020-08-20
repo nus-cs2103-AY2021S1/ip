@@ -1,28 +1,37 @@
-	-----------------------------------------
+-----------------------------------------
 	Hello! I'm Duke
 	What can I do for you?
 	-----------------------------------------
 	-----------------------------------------
-	Got it. I've added this task:
-	[T][✗] todo
-	Now you have 1 tasks in the list.
+	☹ OOPS!!! I'm sorry, but I don't know what that means :(
 	-----------------------------------------
 	-----------------------------------------
-	Got it. I've added this task:
-	[D][✗] ddl (by: ddl)
-	Now you have 2 tasks in the list.
+	☹ OOPS!!! The description of a todo cannot be empty
 	-----------------------------------------
 	-----------------------------------------
-	Got it. I've added this task:
-	[E][✗] eve (at: eve)
-	Now you have 3 tasks in the list.
+	☹ OOPS!!! The description of a deadline cannot be empty
 	-----------------------------------------
 	-----------------------------------------
-	Here are the tasks in your list:
-	1. [T][✗] todo
-	2. [D][✗] ddl (by: ddl)
-	3. [E][✗] eve (at: eve)
+	☹ OOPS!!! The description of an event cannot be empty
 	-----------------------------------------
 	-----------------------------------------
-	Bye. Hope to see you again soon!
+	☹ OOPS!!! Task number cannot be empty
+	-----------------------------------------
+	-----------------------------------------
+	☹ OOPS!!! Invalid task number provided
+	-----------------------------------------
+	-----------------------------------------
+	☹ OOPS!!! Invalid task number provided
+	-----------------------------------------
+	-----------------------------------------
+	☹ OOPS!!! Invalid description for a deadline
+	-----------------------------------------
+	-----------------------------------------
+	☹ OOPS!!! Deadline cannot be empty
+	-----------------------------------------
+	-----------------------------------------
+	☹ OOPS!!! Invalid description for an event
+	-----------------------------------------
+	-----------------------------------------
+	☹ OOPS!!! Event time cannot be empty
 	-----------------------------------------
