@@ -34,7 +34,7 @@ public class CommandAgent {
      */
     public String handleCommand(Command command) {
         String feedback = executeCommand(command);
-        storage.save(this.taskList);
+        storage.save(taskList);
         return feedback;
     }
 
