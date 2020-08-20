@@ -20,6 +20,7 @@ public class DukeBot{
         Scanner sc = new Scanner(System.in);
         input = sc.nextLine();
 
+
         while(!hasBye){
             splitList = input.split(" ", 2);
             System.out.println(line);
@@ -85,6 +86,15 @@ public class DukeBot{
                     System.out.println("     Now you have " + ls.length() + " tasks in the list.");
                 }catch(Exception e){
                     System.out.println("     \u2639 OOPS!!! The description or the time duration of a event cannot be empty.");
+                }finally {
+                    System.out.println(line);
+                    input = sc.nextLine();
+                }
+            }else if(input.equals("blah")){
+                try{
+                    Blah.blahCreated();
+                }catch (DukeException e){
+                    System.out.println(e.toString());
                 }finally {
                     System.out.println(line);
                     input = sc.nextLine();
