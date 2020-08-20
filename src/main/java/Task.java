@@ -1,5 +1,4 @@
 public class Task {
-    public static int quantity = 0;
     // Variables
     protected String name;
     protected boolean isDone;

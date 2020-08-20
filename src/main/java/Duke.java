@@ -12,7 +12,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         // Initialize List for Duke to store stuff in
         /** Note: limit storage to 100 items **/
-        Task[] list = new Task[100];
+        ArrayList<Task> list = new ArrayList<>(100);
 
         // Text Images
         String logo = " ____        _        \n"
@@ -51,10 +51,9 @@ public class Duke {
                     if (hasCmdDetails(instructions)) {
                         // If command has details, add task to list
                         System.out.print(outputBreaker);
-                        list[Task.quantity] = new Todo(instructions[1]);
-                        Task.quantity++;
-                        System.out.println("added: " + list[Task.quantity - 1]);
-                        System.out.println("There is now " + Task.quantity + " tasks in the list!");
+                        list.add(new Todo(instructions[1]));
+                        System.out.println("added: " + list.get(list.size() - 1));
+                        System.out.println("There is now " + list.size() + " tasks in the list!");
                     } else {
                         // Command has no details, throw exception
                         throw new DukeException(outputBreaker +
@@ -68,10 +67,9 @@ public class Duke {
                         System.out.print(outputBreaker);
                         // Extract Details from command
                         String[] details = instructions[1].split(" /by ", 2);
-                        list[Task.quantity] = new Deadline(details[0], details[1]);
-                        Task.quantity++;
-                        System.out.println("added: " + list[Task.quantity - 1]);
-                        System.out.println("There is now " + Task.quantity + " tasks in the list!");
+                        list.add(new Deadline(details[0], details[1]));
+                        System.out.println("added: " + list.get(list.size() - 1));
+                        System.out.println("There is now " + list.size() + " tasks in the list!");
                     } else {
                         // Command has no details, throw exception
                         throw new DukeException(outputBreaker +
@@ -85,10 +83,9 @@ public class Duke {
                         System.out.print(outputBreaker);
                         // Extract Details from command
                         String[] details = instructions[1].split(" /at ", 2);
-                        list[Task.quantity] = new Event(details[0], details[1]);
-                        Task.quantity++;
-                        System.out.println("added: " + list[Task.quantity - 1]);
-                        System.out.println("There is now " + Task.quantity + " tasks in the list!");
+                        list.add(new Event(details[0], details[1]));
+                        System.out.println("added: " + list.get(list.size() - 1));
+                        System.out.println("There is now " + list.size() + " tasks in the list!");
                     } else {
                         // Command has no details, throw exception
                         throw new DukeException(outputBreaker +
@@ -104,10 +101,36 @@ public class Duke {
 
                         // Only add if entry exist at index
                         if (checkList(list, taskNumber)) {
-                            list[taskNumber - 1].markedDone(true);
+                            list.get(taskNumber - 1).markedDone(true);
                             System.out.print(outputBreaker);
                             System.out.println("Congratulations! I've helped you mark the task as done:");
-                            System.out.print("\t" + list[taskNumber - 1].toString() + "\n");
+                            System.out.print("\t" + list.get(taskNumber - 1).toString() + "\n");
+
+                        } else {
+                            // Index don't exist so throw exception
+                            System.out.print(outputBreaker);
+                            throw new DukeException("Sorry, I don't think that's a valid index...");
+                        }
+                    } catch (NumberFormatException e) {
+                        //System.out.println("Caught nfe");
+                        System.out.print(outputBreaker);
+                        throw new DukeException("Sorry, I don't think that's a valid number...");
+                    }
+
+                } else if (instructions[0].equals("delete")) {
+                    // Command: "delete <taskNumber>"
+                    // If valid <taskNumber>, remove from list
+                    try {
+                        int taskNumber = Integer.parseInt(instructions[1]);
+
+                        // Only delete if entry exist at index
+                        if (checkList(list, taskNumber)) {
+                            System.out.print(outputBreaker);
+                            System.out.println("Noted! I've helped you remove the following task:");
+                            System.out.print("\t" + list.get(taskNumber - 1).toString() + "\n");
+                            list.remove(taskNumber - 1);
+                            System.out.println("\tNow, there is " + list.size() + " tasks in the list!");
+
                         } else {
                             // Index don't exist so throw exception
                             System.out.print(outputBreaker);
@@ -141,23 +164,23 @@ public class Duke {
     }
 
     /** Prints all the contents of the list in order **/
-    public static void printList(Task[] list) {
+    public static void printList(ArrayList<Task> list) {
         System.out.print("Here is what I have! ^^\n");
         // Handles printing empty list
-        if (Task.quantity == 0) {
+        if (list.size() == 0) {
             System.out.println("Whoops! I don't have anything of note yet...");
         }
-        for (int i = 0; i < Task.quantity; i++) {
+        for (int i = 0; i < list.size(); i++) {
             // Enumerator
             System.out.print((i+1) + ".");
             // Actual Task
-            System.out.println(list[i]);
+            System.out.println(list.get(i));
         }
     }
 
     /** Checks if index is valid **/
-    public static boolean checkList(Task[] list, int id) {
-        if (id <= 0 || id > Task.quantity) {
+    public static boolean checkList(ArrayList<Task> list, int id) {
+        if (id <= 0 || id > list.size()) {
             return false;
         } else {
             return true;
