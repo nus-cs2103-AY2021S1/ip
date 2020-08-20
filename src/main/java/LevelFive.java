@@ -38,6 +38,8 @@ public class LevelFive {
                 } catch (TaskNumberExceededException taskNumberExceededException) {
                     //System.out.println(taskNumberExceededException.getMessage());
                     excecuteHandle(taskNumberExceededException);
+                } catch (TaskNotFoundException taskNotFoundException) {
+                    excecuteHandle(taskNotFoundException);
                 }
                 next = scanner.nextLine();
             }
@@ -87,10 +89,11 @@ public class LevelFive {
         System.out.println(Duke.makeBlock(exception.getMessage()));
     }
 
-    public static void excecuteDone(HashMap<String, String> map) {
+    public static void excecuteDone(HashMap<String, String> map) throws TaskNotFoundException {
         int count = Integer.parseInt(map.get("number"));
         if(count > numberOfTasks || count <= 0) {
-            System.out.println(Duke.makeBlock("There is no such task"));
+            //System.out.println(Duke.makeBlock("There is no such task"));
+            throw new TaskNotFoundException("There is no such task");
         } else {
             tasks[count - 1].markAsCompleted();
             System.out.println(Duke.makeBlock("Nice! I have marked this task as done:\n" + String.valueOf(count) + "." + tasks[count - 1].toString()));
@@ -104,95 +107,62 @@ public class LevelFive {
 
     public static HashMap<String, String> parsecommand(String command) throws CommandNotFoundException {
 
-            HashMap<String, String> map = new HashMap<>();
-            //map.put("type", "add");
-            command = command.strip();
-            if (command.equals("bye")) {
-                map.put("type", "exit");
-            } else if (command.equals("list")) {
-                map.put("type", "list");
-            } else if (command.split(" ")[0].equals("done")) {
-                try {
-                    if(command.split("done").length == 0) {
-                        throw new CommandNotFoundException("The done command needs to contain the number label of the task to be completed");
-                    }
-                    int number = Integer.parseInt(command.split("\\s+", 2)[1]);
-                    map.put("type", "done");
-                    map.put("number", String.valueOf(number));
-
-                } catch (NumberFormatException exception) {
-                    throw new CommandNotFoundException("The done command should be in the format:\n" + "done number label of the task to be completed");
+        HashMap<String, String> map = new HashMap<>();
+        //map.put("type", "add");
+        command = command.strip();
+        if (command.equals("bye")) {
+            map.put("type", "exit");
+        } else if (command.equals("list")) {
+            map.put("type", "list");
+        } else if (command.split(" ")[0].equals("done")) {
+            try {
+                if(command.split("done").length == 0) {
+                    throw new CommandNotFoundException("The done command needs to contain the number label of the task to be completed");
                 }
+                int number = Integer.parseInt(command.split("\\s+", 2)[1]);
+                map.put("type", "done");
+                map.put("number", String.valueOf(number));
 
-            } else if (command.split(" ")[0].equals("todo")) {
-                if (command.strip().split(" ").length == 1) {
-                    throw new CommandNotFoundException("The description for todo should not be empty");
-                } else {
-                    map.put("type", "todo");
-                    map.put("description", command.split("\\s+", 2)[1]);
-                }
-
-            } else if (command.split(" ")[0].equals("deadline")) {
-                evaluateAddCommand(map, " /by ", command);
-
-            } else if (command.split(" ")[0].equals("event")) {
-                evaluateAddCommand(map, " /at ", command);
-                /*
-                if(numberOfTasks >= 100) {
-                    throw new TaskNumberExceededException("The task list cannot have a length of more than 100");
-                } else if (command.strip().split(" ").length == 1) {
-                    throw new CommandNotFoundException("The description for event should not be empty");
-                } else if (command.split(" ")[0].equals("event")) {
-
-
-                        String content = (command.split("\\s+", 2)[1]);
-
-                        if (content.strip().split(" /at ").length <= 1) {
-                            throw new CommandNotFoundException("The description should be in the format:\n" + "event description /at time");
-                        } else {
-                            String time;
-                            String description = content.split("\\s+")[0];
-                            time = content.strip().split(" /at ", 2)[1];
-                            map.put("type", command.split(" ")[0]);
-                            map.put("description", description);
-                            map.put("time", time);
-                        }
-
-
-                    }
-                    */
-                } else {
-                    throw new CommandNotFoundException("The command is not found");
-                }
-
-                return map;
+            } catch (NumberFormatException exception) {
+                throw new CommandNotFoundException("The done command should be in the format:\n" + "done number label of the task to be completed");
             }
-        public static void evaluateAddCommand(HashMap<String, String> map, String string, String command) throws CommandNotFoundException {
-            if (command.split(" ").length == 1) {
-                throw new CommandNotFoundException("The description for event should not be empty");
-            } else if (command.split(" ")[0].equals("event") || command.split(" ")[0].equals("deadline")) {
-
-
-                String content = (command.split("\\s+", 2)[1]);
-
-                if (content.strip().split(string).length <= 1) {
-                    throw new CommandNotFoundException("The description should be in the format:\n" + command.split(" ")[0] + " description" + string + "time");
-                } else {
-                    String time;
-                    String description = content.split(string)[0];
-                    time = content.strip().split(string, 2)[1];
-                    map.put("type", command.split(" ")[0]);
-                    map.put("description", description);
-                    map.put("time", time);
-                }
-
-                    /*
-                    if (command.split(" ")[0].equals("deadline")) {
-                        time = content.split(" /by ", 2)[1];
-                    */
+        } else if (command.split(" ")[0].equals("todo")) {
+            if (command.strip().split(" ").length == 1) {
+                throw new CommandNotFoundException("The description for todo should not be empty");
             } else {
-                throw new CommandNotFoundException("The command is not found");
+                map.put("type", "todo");
+                map.put("description", command.split("\\s+", 2)[1]);
             }
-        }
 
+        } else if (command.split(" ")[0].equals("deadline")) {
+            evaluateAddCommand(map, " /by ", command);
+
+        } else if (command.split(" ")[0].equals("event")) {
+            evaluateAddCommand(map, " /at ", command);
+        } else {
+            throw new CommandNotFoundException("The command is not found");
+        }
+        return map;
+    }
+
+    public static void evaluateAddCommand(HashMap<String, String> map, String string, String command) throws CommandNotFoundException {
+        if (command.split(" ").length == 1) {
+            throw new CommandNotFoundException("The description for event should not be empty");
+        } else if (command.split(" ")[0].equals("event") || command.split(" ")[0].equals("deadline")) {
+
+            String content = (command.split("\\s+", 2)[1]);
+            if (content.strip().split(string).length <= 1) {
+                throw new CommandNotFoundException("The description should be in the format:\n" + command.split(" ")[0] + " description" + string + "time");
+            } else {
+                String time;
+                String description = content.split(string)[0];
+                time = content.strip().split(string, 2)[1];
+                map.put("type", command.split(" ")[0]);
+                map.put("description", description);
+                map.put("time", time);
+            }
+        } else {
+            throw new CommandNotFoundException("The command is not found");
+        }
+    }
 }
