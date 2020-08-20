@@ -13,4 +13,8 @@ done
 done one
 done 0
 done 1
+delete one
+delete
+delete 1
+delete 2
 bye
