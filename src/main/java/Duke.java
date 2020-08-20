@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
 
-        System.out.println("Hello! I am Duke\n"
-                + "What can I do for you?");
+        System.out.println("Wazzup! I am Duke the Nuke \uD83D\uDE08\n"
+                + "What do you want?");
 
         Scanner sc = new Scanner(System.in);
         String terminate = "bye";
@@ -28,7 +28,7 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done:");
                     String changed = tasks.get(id).getDescription();
                     String type = tasks.get(id).getType();
-                    System.out.println("[" + "\u2713" + "]" + changed);
+                    System.out.println("[" + type + "][" + "\u2713" + "]" + changed);
 
                     if (type.equals("T")) {
                         Todo updatedTask = new Todo(changed, true);
@@ -78,6 +78,19 @@ public class Duke {
 
                     break;
                 }
+                case "delete": {
+                    int index = Integer.parseInt(last) - 1;
+                    System.out.println("Noted. I've removed this task:");
+                    String deleted = tasks.get(index).getDescription();
+                    String deletedType = tasks.get(index).getType();
+                    String status = tasks.get(index).getStatusIcon();
+                    System.out.println("[" + deletedType + "][" + status + "] " + deleted);
+                    tasks.remove(index);
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+
+                    break;
+
+                }
                 case "list":
                     Iterator<Task> iter = tasks.iterator();
                     int index = 1;
@@ -95,6 +108,6 @@ public class Duke {
             }
         }
 
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("Sayonara!");
     }
 }
