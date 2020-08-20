@@ -119,12 +119,11 @@ public class Duke {
     }
 
     private static void addEvent(String args) throws DukeIncompleteCommandException {
-        String[] descWithArgs = args.split(" /at ");
-        if (descWithArgs.length == 2) {
-            Event event = new Event(descWithArgs[0], descWithArgs[1]);
+        try {
+            Event event = Event.create(args);
             taskList.add(event);
             printWithDivider("Successfully added event:\n" + event.toString());
-        } else {
+        } catch (TaskException e) {
             throw new DukeIncompleteCommandException(ERROR_MESSAGE
                     + "\nDid you provide a date and description for this event?");
         }
