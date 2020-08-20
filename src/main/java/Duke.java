@@ -13,7 +13,7 @@ public class Duke {
     }
 
     public static String[] command(String text) throws DukeException {
-        String commandList = "bye|list|done[\\s]+[\\d]+|todo.*|deadline.*|event.*";
+        String commandList = "bye|list|(done|delete)[\\s]+[\\d]+|todo.*|deadline.*|event.*";
         if (text.matches(commandList)) {
             String[] commandParaPair = text.split(" ", 2);
             return commandParaPair;
@@ -34,17 +34,21 @@ public class Duke {
                 printList(list, true);
                 break;
             case "done":
+            case "delete":
                 int taskNo = Integer.parseInt(commandParaPair[1].replaceAll("[\\s]+", ""));
                 if (taskNo > list.size()) { //If requested index is out of bound.
                     throw new DukeException("\tYou don't have that many tasks!!!");
                 } else { //If index can be found, set the task to be done and move it to the last.
                     Task task = list.get(taskNo - 1);
                     list.remove(task);
-                    task.setDone();
-                    System.out.println("\tYou have finished this task!\n\t" + task + "\n\tLet's move on to the next one!");
+                    if (commandParaPair[0].equals("done")) {
+                        task.setDone();
+                        list.add(task);
+                        activeTasks--;
+                    }
+                    System.out.println("\tYou have finished this task!\n\t" + task +
+                            "\n\tLet's move on to the next one!");
                     printList(list, false);
-                    list.add(task);
-                    activeTasks--;
                 }
                 break;
             case "todo":
