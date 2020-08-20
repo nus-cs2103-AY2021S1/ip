@@ -1,13 +1,19 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+
 import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+//        File f = new File("data/Duke.txt");
+//        FileHandler f = new FileHandler("data/Duke.txt");
+        // Test filehandler and see if it works or not~~
 
         Duke.echo("Hello! I'm Duke\nWhat can I do for you?");
-
+//
         Duke.checkCommands(sc);
     }
 
