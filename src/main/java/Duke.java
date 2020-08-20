@@ -137,9 +137,7 @@ public class Duke {
                     printRemainingCount();
                     break;
                 default:
-                    savedItems.add(new Task(userInput));
-                    System.out.println("added: " + userInput);
-                    printRemainingCount();
+                    System.out.println("ERROR: Unrecognised command. Did you make a typo?");
                     break;
             }
         }
