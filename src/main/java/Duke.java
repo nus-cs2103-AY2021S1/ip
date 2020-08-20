@@ -79,6 +79,23 @@ public class Duke {
                     System.out.println(line + "Invalid input! Please specify your event description and details! \n" + line);
                 }
 
+            } else if (input_split[0].equals("delete")) { // Delete task
+                try {
+                    int task_id = Integer.parseInt(input_split[1]);
+                    if (task_id <=0 || task_id > user_list.size()) {
+                        System.out.println(line + "Invalid input! That task does not exist! \n" + line);
+                    } else {
+                        int new_size = user_list.size() - 1;
+                        System.out.println(line + "Noted! I've deleted this task: \n"
+                                + user_list.get(task_id - 1) + "\n"
+                                + "Now you have " + new_size + " tasks in the list."
+                                + "\n" + line);
+                        user_list.remove(task_id-1);
+                    }
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println(line + "Invalid input! Please specify which task you want to delete! \n" + line);
+                }
+
             } else {
                 System.out.println(line + "Invalid input! Please try again! \n" + line);
             }
