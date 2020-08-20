@@ -17,27 +17,21 @@ public class TaskManager {
 
     public void markTaskAsDone(int index) {
         tasks.get(index - 1).markAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("    " + tasks.get(index - 1));
+        Messenger.markAsDoneMessage(tasks.get(index - 1));
     }
 
     public void addTask(String content, String status, String time) {
         Task newTask = new Task(content, status, time);
         tasks.add(newTask);
-        System.out.println("Got it. I've added this task:");
-        System.out.println("    " + newTask.toString());
         int size = tasks.size();
-        System.out.println(String.format("Now you have %s %s in the list.", size, (size > 1 ? "tasks" : "task")));
+        Messenger.addTaskMessage(newTask, size);
     }
 
     public void addTask(String content, String status) {
         Task newTask = new Task(content, status);
         tasks.add(newTask);
-        System.out.println("Got it. I've added this task:");
-        System.out.println("    " + newTask.toString());
         int size = tasks.size();
-        System.out.println(String.format("Now you have %s %s in the list.", size, (size > 1 ? "tasks" : "task")));
-
+        Messenger.addTaskMessage(newTask, size);
     }
 
     public void deleteTask(int index) throws DukeException {
@@ -45,10 +39,7 @@ public class TaskManager {
         if (index > size) {
             throw new DukeException(Messenger.INDEX_OUT_OF_BOUND_ERROR);
         }
-
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(tasks.get(index - 1));
+        Messenger.deleteTaskMessage(tasks.get(index - 1), size - 1);
         tasks.remove(index - 1);
-        System.out.println(String.format("Now you have %s tasks in the list.", tasks.size()));
     }
 }

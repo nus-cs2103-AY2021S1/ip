@@ -19,7 +19,7 @@ public class Evaluator {
 
         // no description supplied
         if (len == 1) {
-            throw new DukeException(Messenger.EMPTY_DESCRIPTION_ERROR(command));
+            throw new DukeException(Messenger.emptyDescriptionError(command));
         }
         return split;
     }
