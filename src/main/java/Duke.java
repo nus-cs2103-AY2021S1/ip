@@ -13,7 +13,7 @@ public class Duke {
     private enum Commands {
         EXIT("BYE"), ADD("ADD"), LIST("LIST"),
         DONE("DONE");
-        private String str;
+        private final String str;
         Commands(String str){
             this.str = str;
         }
@@ -25,6 +25,9 @@ public class Duke {
     private final String MESSAGE_TEMPLATE = HORIZONTAL_LINE + NEW_LINE + PADDING + "%s"
             + NEW_LINE + HORIZONTAL_LINE + NEW_LINE + NEW_LINE;
     private final String MESSAGE_TEMPLATE_VERBAL = HORIZONTAL_LINE + NEW_LINE + PADDING + "Deuk: %s"
+            + NEW_LINE + HORIZONTAL_LINE + NEW_LINE + NEW_LINE;
+    private final String MESSAGE_TEMPLATE_ERROR = HORIZONTAL_LINE + NEW_LINE + PADDING
+            + "☹ OOPS!!! %s"
             + NEW_LINE + HORIZONTAL_LINE + NEW_LINE + NEW_LINE;
     private final List<Task> storageList = new ArrayList<>();
 
@@ -42,8 +45,12 @@ public class Duke {
                     displayStorageList();
                 }
                 else if (input.length() >= 4 && input.substring(0,4).toUpperCase().equals(Commands.DONE.getString())) {
-                    int index = Integer.valueOf(input.substring(4).trim()); // TODO: CHECK IF INTEGER
-                    setTaskDone(index);
+                    try {
+                        int index = Integer.parseInt(input.substring(4).trim());
+                        setTaskDone(index);
+                    } catch (NumberFormatException ex) {
+                        System.out.printf(MESSAGE_TEMPLATE_ERROR, "Please input an Integer for the \"Done\" command.");
+                    }
                 }
                 else {
                     addToStorageList(new Task(input));
@@ -78,7 +85,11 @@ public class Duke {
     }
 
     private void setTaskDone(int index) {
-        // TODO: CHECK INDEX WITHIN BOUND
+        // TODO: throw DukeException instead
+        if (index <= 0 || index > this.storageList.size()) {
+            System.out.printf(MESSAGE_TEMPLATE_ERROR, "Invalid index, cannot find task.");
+            return;
+        }
         this.storageList.get(index-1).setDoneness(true);
         String message = "Nice job! I'll mark that as done:" + NEW_LINE + PADDING + this.storageList.get(index-1).toString();
         System.out.printf(MESSAGE_TEMPLATE, message);
