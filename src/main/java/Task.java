@@ -17,16 +17,12 @@ public class Task {
         return (isDone ? tick : cross); //return tick or X symbols
     }
 
-    public String getStatus() {
-        return "[" + getStatusIcon() + "] " + getDescription();
-    }
-
     public String markAsDone() {
         isDone = true;
-        return getStatus();
+        return toString();
     }
 
-//    public String toString() {
-//        return "";
-//    }
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + getDescription();
+    }
 }

@@ -23,6 +23,33 @@ public class Duke {
         System.out.println("added: " + toAdd);
     }
 
+    private static void add(String toAdd, int type) {
+        Task task = null;
+        String[] splitDeadline = toAdd.split("/", 2 );
+        String[] content;
+        if (splitDeadline.length == 2) content = splitDeadline[1].split(" ", 2);
+        else content = null;
+        switch (type) {
+            case 1:
+                if (splitDeadline.length == 2) task = new ToDos(splitDeadline[0].trim(), content[1]);
+                else task = new ToDos(splitDeadline[0]);
+                break;
+            case 2:
+                if (splitDeadline.length == 2) task = new Deadline(splitDeadline[0].trim(), content[1]);
+                else task = new Deadline(splitDeadline[0]);
+                break;
+            case 3:
+                if (splitDeadline.length == 2) task = new Event(splitDeadline[0].trim(), content[1]);
+                else task = new Event(splitDeadline[0]);
+                break;
+        }
+        texts.add(task);
+        System.out.println("Got it, here yur task bij");
+        System.out.println(task.toString());
+        System.out.println("Now you have " + texts.size() + " tasks in the list.");
+    }
+
+
     private static void processDone(String s) {
         System.out.println("okcan done:");
         System.out.println(texts.get(Integer.parseInt(s) - 1).markAsDone());
@@ -31,52 +58,48 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         greet();
-        String nextLine = sc.nextLine();
         boolean cont = true;
+        String nextLine = sc.nextLine();
+        String[] nextLineSplit = nextLine.split(" ", 1);
         while (cont) {
-            if (nextLine.length() >= 6) {
-                if (nextLine.substring(0, 5).equals("done ")) {
-                    processDone(nextLine.substring(5));
+            nextLineSplit = nextLine.split(" ", 2);
+            System.out.println(nextLineSplit[0]);
+            switch (nextLine) {
+                case "bye":
+                    farewell();
+                    cont = false;
+                    break;
+                case "list":
+                    int num = 1;
+                    System.out.println("Here yur tasks faggit: ");
+                    for (Task i : texts) {
+                        System.out.println(num + "." + i.toString());
+                        num++;
+                    }
                     nextLine = sc.nextLine();
-                } else {
-                    switch (nextLine) {
-                        case "bye":
-                            farewell();
-                            cont = false;
+                    break;
+                default:
+                    switch (nextLineSplit[0]) {
+                        case "todo":
+                            add(nextLineSplit[1], 1);
+                            nextLine = sc.nextLine();
                             break;
-                        case "list":
-                            int num = 1;
-                            System.out.println("Here yur tasks faggit: ");
-                            for (Task i : texts) {
-                                System.out.println(num + "." + i.getStatus());
-                                num++;
-                            }
+                        case "deadline":
+                            add(nextLineSplit[1], 2);
+                            nextLine = sc.nextLine();
+                            break;
+                        case "event":
+                            add(nextLineSplit[1], 3);
+                            nextLine = sc.nextLine();
+                            break;
+                        case "done":
+                            processDone(nextLineSplit[1]);
                             nextLine = sc.nextLine();
                             break;
                         default:
                             add(nextLine);
                             nextLine = sc.nextLine();
                     }
-                }
-            } else {
-                switch (nextLine) {
-                    case "bye":
-                        farewell();
-                        cont = false;
-                        break;
-                    case "list":
-                        int num = 1;
-                        System.out.println("Here yur tasks faggit: ");
-                        for (Task i : texts) {
-                            System.out.println(num + "." + i.getStatus());
-                            num++;
-                        }
-                        nextLine = sc.nextLine();
-                        break;
-                    default:
-                        add(nextLine);
-                        nextLine = sc.nextLine();
-                }
             }
         }
         sc.close();
