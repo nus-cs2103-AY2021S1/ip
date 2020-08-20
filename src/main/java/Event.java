@@ -1,7 +1,7 @@
 public class Event extends Task {
     protected String time; //deadline given
 
-    public Event(String taskName, String dl) {
+    public Event(String taskName, String time) {
         super(taskName);
         this.time = time;
     }
