@@ -8,7 +8,7 @@ public class TaskList {
     public TaskList(){
 
         //Create a new arraylist to store the tasks
-        this.list = new ArrayList<Task>();
+        this.list = new ArrayList<>();
     }
 
     public void displayContent(){
@@ -17,7 +17,7 @@ public class TaskList {
         for(int i = 0; i < this.list.size(); ++i){
 
             //Print the index and the message of the task
-            System.out.println(String.format("%d.%s", i + 1, this.get(i)));
+            System.out.printf("%d.%s%n", i + 1, this.get(i));
         }
 
     }
