@@ -11,14 +11,29 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("\n\n");
         System.out.println("Hello! I'm Duke\nWhat can I do for you?\n\n");
-        String input = sc.next();
 
-        while (!input.equals(("bye"))) {
-            System.out.println("\n" + input + "\n");
-            input = sc.next();
+        String[] store = new String[100];
+        int count = 0;
+        String input = sc.nextLine();
+
+        while (true) {
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!\n");
                 return;
+            }
+
+            if (input.equals("list")) {
+                for (int i = 0; i < count; i++) {
+                    System.out.println(Integer.toString(i + 1) + "." + store[i]);
+                }
+                System.out.println("\n");
+                input = sc.nextLine();
+            } else {
+
+                System.out.println("\n added: " + input + "\n");
+                store[count] = input;
+                count++;
+                input = sc.nextLine();
             }
         }
     }
