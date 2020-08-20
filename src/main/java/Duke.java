@@ -17,8 +17,8 @@ public class Duke {
         System.out.println(hello);
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> task_list = new ArrayList<>(); //List to keep track of tasks
-
+        ArrayList<Task> task_list = new ArrayList<Task>(); //List to keep track of tasks
+        int task_num = 0;
 
         while (sc.hasNextLine()) {
             String command = sc.nextLine();
@@ -27,9 +27,10 @@ public class Duke {
             if (command.equals("list")) {
                 String tasks = "";
                 for (int i = 0; i < task_list.size(); i++) {
-                    tasks += String.format("     %d. %s\n", i+1, task_list.get(i));
+                    tasks += "     " + task_list.get(i).toString() + "\n";
                 }
                 System.out.println("    ____________________________________________________________\n" +
+                        "     Here are the tasks in your list:\n" +
                         tasks +
                         "    ____________________________________________________________\n");
             }
@@ -47,10 +48,20 @@ public class Duke {
                         "    ____________________________________________________________\n");
                 break;
             }
+
+            else if (command.split(" ")[0].equals("done")) {
+                Task temp = task_list.get(Integer.parseInt(command.split(" ")[1]) - 1);
+                temp.completeTask();
+                System.out.println("    ____________________________________________________________\n" +
+                        "     Nice! I've marked this task as done: \n" +
+                        "       " + temp + "\n" +
+                        "    ____________________________________________________________");
+
+            }
             //Case: Any other Command -> Add task to the task_list
             else {
-                task_list.add(command);
-
+                task_num++;
+                task_list.add(new Task(task_num, command, false));
                 System.out.println(String.format("    ____________________________________________________________\n" +
                         "     added: %s\n" +
                         "    ____________________________________________________________\n", command));
