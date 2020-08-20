@@ -34,8 +34,12 @@ public class Duke {
                 System.out.println(hor_line + "Bye. Hope to see you again soon!\n" + hor_line);
                 sc.close();
                 break;
+            } else if (echo.equals("list")) {
+                System.out.println(hor_line + iterateToDo(todo_list) + "\n" + hor_line);
             } else {
-                System.out.println(hor_line + echo + "\n" + hor_line);
+                todo_list[counter] = new Task(false, counter + 1, echo);
+                counter++;
+                System.out.println(hor_line + "Added: " + echo + "\n" + hor_line);
             }
         }
     }
