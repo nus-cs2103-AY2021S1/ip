@@ -12,7 +12,8 @@ public class Duke {
 
     private enum Commands {
         EXIT("BYE"), ADD("ADD"), LIST("LIST"),
-        DONE("DONE");
+        DONE("DONE"), TODO("TODO"), EVENT("EVENT"),
+        DEADLINE("DEADLINE");
         private final String str;
         Commands(String str){
             this.str = str;
@@ -49,7 +50,15 @@ public class Duke {
                         int index = Integer.parseInt(input.substring(4).trim());
                         setTaskDone(index);
                     } catch (NumberFormatException ex) {
-                        System.out.printf(MESSAGE_TEMPLATE_ERROR, "Please input an Integer for the \"Done\" command.");
+                        printError("Please input an Integer for the \"Done\" command.");
+                    }
+                }
+                else if (input.length() >= 4 && input.substring(0,4).toUpperCase().equals(Commands.TODO.getString())) {
+                    try {
+                        String name = input.substring(4).trim();
+                        addToStorageList(new Todo(name));
+                    } catch (NumberFormatException ex) {
+                        printError("Please input an Integer for the \"Done\" command.");
                     }
                 }
                 else {
@@ -65,22 +74,21 @@ public class Duke {
 
     private void addToStorageList(Task obj) {
         this.storageList.add(obj);
-        System.out.printf(MESSAGE_TEMPLATE, "Added: " + obj.getName());
+        String numOfTasks = this.storageList.size() == 1 ? "1 task" : this.storageList.size() + " tasks";
+        String message = "Got it. I've added the following task: " + NEW_LINE
+                + PADDING + "  " + obj.toString() + NEW_LINE
+                + PADDING + "Now you have "  + numOfTasks + " in total.";
+        System.out.printf(MESSAGE_TEMPLATE, message);
     }
 
     private void displayStorageList() {
-        String output = "";
+        String output = "You have the following tasks in your list:" + NEW_LINE;
         int counter = 1;
         for (Task ele: this.storageList) {
-            if (counter == 1) {
-                output += counter + ". " + ele.toString() + NEW_LINE;
-                counter ++;
-                continue;
-            }
             output += PADDING + counter + ". " + ele.toString() + NEW_LINE;
             counter++;
         }
-        output = output.substring(0, output.length()-2);
+        output = output.substring(0, output.length()-1);
         System.out.printf(MESSAGE_TEMPLATE, output);
     }
 
@@ -93,6 +101,10 @@ public class Duke {
         this.storageList.get(index-1).setDoneness(true);
         String message = "Nice job! I'll mark that as done:" + NEW_LINE + PADDING + this.storageList.get(index-1).toString();
         System.out.printf(MESSAGE_TEMPLATE, message);
+    }
+
+    private void printError(String error) {
+        System.out.printf(MESSAGE_TEMPLATE_ERROR, error);
     }
 
     private void sayGoodbye() {

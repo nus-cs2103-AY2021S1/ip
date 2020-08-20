@@ -1,6 +1,6 @@
 public class Task {
-    private String name;
-    private Boolean isDone;
+    protected final String name;
+    protected Boolean isDone;
 
     Task(String name) {
         this.name = name;
@@ -11,7 +11,7 @@ public class Task {
         this.isDone = isDone;
     }
     public String getName() {
-        return this.name; // TODO: throw copy instead
+        return String.valueOf(this.name);
     }
 
     public String toString() {
