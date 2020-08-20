@@ -30,7 +30,7 @@ public class TodoManager {
         else if (command.startsWith("event")) addEvent(command.substring(6));
         System.out.println(Helper.horiLine);
         System.out.println("Got it. I've added this task: ");
-        System.out.println(" " + lst.get(lst.size() - 1));
+        System.out.println(lst.get(lst.size() - 1));
         System.out.println(String.format("Now you have %d tasks in the list.", lst.size()));
         System.out.println(Helper.horiLine);
     }
