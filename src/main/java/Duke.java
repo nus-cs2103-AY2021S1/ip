@@ -5,12 +5,12 @@ public class Duke {
         String start = "Hello! I'm Duke \nWhat can I do for you?";
         System.out.println(start);
         Scanner sc = new Scanner(System.in);
-        String in = sc.nextLine();
         while (true) {
-            System.out.println(in);
-            in = sc.nextLine();
-            if (in != "bye") {
+            String in = sc.next();
+            if (in.equals("bye")) {
                 break;
+            } else {
+                System.out.println(in);
             }
         }
         System.out.println("Bye. Hope to see you again soon!");
