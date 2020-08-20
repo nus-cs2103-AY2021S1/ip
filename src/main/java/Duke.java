@@ -2,6 +2,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    public static void invalidInput() throws DukeException {
+        throw new DukeException("I'm sorry, but I don't know what that means :-(");
+    }
 
     public static Task createTask(String firstWord, String input) throws DukeException {
         Task newTask;
@@ -19,9 +22,13 @@ public class Duke {
                 throw new DukeException("The description of a deadline cannot be empty.");
             } else {
                 String[] split = input.split("/by ");
-                String deadline = split[1];
-                String tsk = split[0].split("deadline ")[1];
-                newTask = new Deadline(tsk, deadline);
+                if (split.length == 1) {
+                    throw new DukeException("By when??? You didn't include your deadline.");
+                } else {
+                    String deadline = split[1];
+                    String tsk = split[0].split("deadline ")[1];
+                    newTask = new Deadline(tsk, deadline);
+                }
             }
 
         } else {
@@ -30,15 +37,18 @@ public class Duke {
                 throw new DukeException("The description of an event cannot be empty.");
             } else {
                 String[] split = input.split("/at ");
-                String at = split[1];
-                String tsk = split[0].split("event ")[1];
-                newTask = new Event(tsk, at);
+                if (split.length == 1) {
+                    throw new DukeException("At??? You didn't include the time of the event.");
+                } else {
+                    String at = split[1];
+                    String tsk = split[0].split("event ")[1];
+                    newTask = new Event(tsk, at);
+                }
             }
         }
         return newTask;
     }
-    public static void mainLogic(Scanner sc) throws DukeException {
-        ArrayList<Task> lst = new ArrayList<>();
+    public static void mainLogic(Scanner sc, ArrayList<Task> lst) {
 
         while (true) {
             String input = sc.nextLine();
@@ -69,14 +79,22 @@ public class Duke {
                 Task newTask;
                 try {
                     newTask = createTask(firstWord, input);
+                    lst.add(newTask);
+                    System.out.println("Got it. I've added this task:\n  " + newTask);
+                    System.out.println("Now you have " + lst.size() + " tasks in the list.");
                 } catch (DukeException e) {
-                    throw e;
+                    System.out.println("☹ OOPS!!! " + e.getMessage());
+                } finally {
+                    mainLogic(sc, lst);
                 }
-                lst.add(newTask);
-                System.out.println("Got it. I've added this task:\n  " + newTask);
-                System.out.println("Now you have " + lst.size() + " tasks in the list.");
             } else {
-                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                try {
+                    invalidInput();
+                } catch (DukeException e) {
+                    System.out.println("☹ OOPS!!! " + e.getMessage());
+                } finally {
+                    mainLogic(sc, lst);
+                }
             }
         }
 
@@ -87,11 +105,9 @@ public class Duke {
         String greetings = "Hello! I'm Duke\nWhat can I do for you?";
         System.out.println(greetings);
 
+        ArrayList<Task> lst = new ArrayList<>();
+
         Scanner sc = new Scanner(System.in);
-        try {
-            mainLogic(sc);
-        } catch (DukeException e) {
-            System.out.println("☹ OOPS!!! " + e.getMessage());
-        }
+        mainLogic(sc, lst);
     }
 }
