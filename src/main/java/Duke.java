@@ -1,4 +1,7 @@
-import java.util.*;
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Duke {
 
@@ -7,7 +10,7 @@ public class Duke {
     private final String name = "Bolot";
     private final String end = "bye";
     private ArrayList<Task> list = new ArrayList<>();
-    private final List<String> commands = Arrays.asList("todo", "deadline", "event", "done");
+    private final List<String> commands = Arrays.asList("todo", "deadline", "event", "done", "delete");
 
     public void printLogo() {
         System.out.println("Greetings, human. I am");
@@ -56,7 +59,7 @@ public class Duke {
 
         int i = 1;
         for (Task todo: list) {
-            System.out.println(i + ". " + " " + todo);
+            System.out.println(i + ". " + todo);
             i++;
         }
     }
@@ -81,7 +84,7 @@ public class Duke {
 
         try {
             task = input.substring(firstWord.length() + 1);
-        } catch (IndexOutOfBoundsException indexError) {
+        } catch (StringIndexOutOfBoundsException indexError) {
             throw new EmptyTaskException();
         }
 
@@ -91,7 +94,7 @@ public class Duke {
             try {
                 task = task.substring(0, task.indexOf('/'));
                 date = input.substring(input.indexOf('/') + 4);
-            } catch (IndexOutOfBoundsException indexError) {
+            } catch (StringIndexOutOfBoundsException indexError) {
                 switch (firstWord) {
                     case "deadline":
                         throw new DeadlineInvalidDate();
@@ -118,11 +121,19 @@ public class Duke {
         System.out.println("Now you have " + list.size() + taskText + "in the list.");
     }
 
-    private void markDone(int taskNo) {
+    private void markDone(int taskNo) throws IndexOutOfBoundsException {
         list.set(taskNo, list.get(taskNo).markDone());
 
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(list.get(taskNo));
+    }
+
+    private void deleteTask(int taskNo) throws IndexOutOfBoundsException {
+        Task deleted = list.get(taskNo);
+        list.remove(taskNo);
+
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(deleted);
     }
 
     public void addToList() {
@@ -144,10 +155,31 @@ public class Duke {
 
                     String firstWord = getFirstWord(input.trim());
 
-                    if (firstWord.equals("done")) {
+                    if (firstWord.equals("done") || firstWord.equals("delete")) {
 
-                        int taskNo = Integer.parseInt(input.substring(5)) - 1;
-                        markDone(taskNo);
+                        if (input.equals(firstWord)) {
+                            System.out.print("Invalid format. After ");
+                            System.out.print("\"" + firstWord + "\", ");
+                            System.out.println("you need to put a positive integer");
+                        } else {
+
+                            try {
+                                int taskNo = firstWord.equals("done")
+                                        ? Integer.parseInt(input.substring(5)) - 1
+                                        : Integer.parseInt(input.substring(7)) - 1;
+
+                                if (firstWord.equals("done")) {
+                                    markDone(taskNo);
+                                } else {
+                                    deleteTask(taskNo);
+                                }
+
+                            } catch (NumberFormatException numError) {
+                                System.out.print("Invalid format. After ");
+                                System.out.print("\"" + firstWord + "\", ");
+                                System.out.println("you need to put a positive integer");
+                            }
+                        }
 
                     } else {
 
@@ -157,6 +189,10 @@ public class Duke {
 
                 } catch (DukeException error) {
                     System.out.println(error.getMessage());
+                } catch (IndexOutOfBoundsException indexError) {
+                    System.out.println("Invalid index.");
+                    String taskText = list.size() == 1 ? " task " : " tasks ";
+                    System.out.println("You have " + list.size() + taskText + "on your list.");
                 }
             }
 
