@@ -17,21 +17,19 @@ public class RunYoo {
 
             } else {
                 try {
-                    if (temp[0].equals("done")) {
+                    if (temp[0].equals("done"))
                         markAsDone(al, temp);
-
-                    } else if (temp[0].equals("todo")) {
+                    else if (temp[0].equals("delete"))
+                        deleteTask(al, temp);
+                    else if (temp[0].equals("todo"))
                         addTodo(al, temp);
-
-                    } else if (temp[0].equals("deadline")) {
+                    else if (temp[0].equals("deadline"))
                         addDeadline(al, temp);
-
-                    } else if (temp[0].equals("event")) {
+                    else if (temp[0].equals("event"))
                         addEvent(al, temp);
-
-                    } else {
+                    else
                         throw new YooException("Sorry, I didn't get that (っ*´□`)っ");
-                    }
+
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("You're missing a task description (っ*´□`)っ");
                 }
@@ -58,14 +56,25 @@ public class RunYoo {
             System.out.println("Good job completing the task! ╭( ･ㅂ･)و");
             Task t = al.get(index - 1);
             t.markAsDone();
-            System.out.println(t);
+            System.out.println(index + ". " + t);
+        }
+    }
+
+    public static void deleteTask(ArrayList<Task> al, String[] temp) throws YooException {
+        int index = Integer.parseInt(temp[1]);
+        if (index > al.size()) {
+            throw new YooException("No such task (>_<)");
+        } else {
+            Task t = al.remove(index - 1);
+            System.out.println("I've deleted the following task! \n" + t);
+            System.out.println("Now you have " + al.size() + " tasks in the list (´・ω・｀)");
         }
     }
 
     public static void addTodo(ArrayList<Task> al, String[] temp) {
         Todo td = new Todo(temp[1]);
-        System.out.println("I've added the following task! \n" + td);
         al.add(td);
+        System.out.println("I've added the following task! \n" + td);
         System.out.println("Now you have " + al.size() + " tasks in the list (´・ω・｀)");
     }
 
@@ -73,8 +82,8 @@ public class RunYoo {
         try {
             String[] a = temp[1].split("/by ", 2);
             Deadline dl = new Deadline(a[0], a[1]);
-            System.out.println("I've added the following task! \n" + dl);
             al.add(dl);
+            System.out.println("I've added the following task! \n" + dl);
             System.out.println("Now you have " + al.size() + " tasks in the list (´・ω・｀)");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Sorry, your deadline time is missing (っ*´□`)っ");
@@ -85,8 +94,8 @@ public class RunYoo {
         try {
             String[] a = temp[1].split("/at ", 2);
             Event e = new Event(a[0], a[1]);
-            System.out.println("I've added the following task! \n" + e);
             al.add(e);
+            System.out.println("I've added the following task! \n" + e);
             System.out.println("Now you have " + al.size() + " tasks in the list (´・ω・｀)");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Sorry, your event time is missing (っ*´□`)っ");
