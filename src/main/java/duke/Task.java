@@ -1,6 +1,6 @@
 package duke;
 
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -13,6 +13,10 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    public int getStatusCode() {
+        return this.isDone ? 1 : 0;
+    }
+
     public String getDescription() {
         return this.description;
     }
@@ -20,6 +24,8 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public abstract String serialize();
 
     @Override
     public String toString() {
