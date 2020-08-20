@@ -2,7 +2,6 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Duke {
 
     public static String divider = "_________________________________________________________________";
@@ -19,7 +18,7 @@ public class Duke {
             + "|  .  | |  | |  |  ||     |    |     ||     ||     |\n"
             + "|__|\\_||____||__|__||___,_|    |_____| \\___/ |_____|\n";
 
-    public static List<String> list = new ArrayList<>();
+    public static List<Task> list = new ArrayList<>();
 
     public static void byeMessage() {
         System.out.println(divider);
@@ -27,21 +26,62 @@ public class Duke {
         System.out.println(divider);
     }
 
-    public static void inputMessage(String input) {
+    public static void addedMessage(String input) {
         System.out.println(divider);
-        System.out.println("   added: " + input);
+        System.out.println("   " + "added: " + input);
+        System.out.println(divider + "\n");
+    }
+
+    public static void doneMessage(Task task) {
+        System.out.println(divider);
+        System.out.println("   Banana! I've marked this task as done:");
+        System.out.println("      " + "[" + task.getStatusIcon() + "] " + task.getDescription());
         System.out.println(divider + "\n");
     }
 
     public static void addList(String input) {
-        list.add(input);
+        list.add(new Task(input));
     }
 
     public static void showList() {
         System.out.println(divider);
+        System.out.println("   Banana! So many tasks?");
+        Task task;
         for (int i = 0; i < list.size(); i++) {
-            System.out.println("   " + (i + 1) + ". " + list.get(i));
+            task = list.get(i);
+            System.out.println("   " + (i + 1) + ".[" + task.getStatusIcon() + "] " + task.getDescription());
         }
+        System.out.println(divider + "\n");
+    }
+
+    public static boolean isDoneCommand(String input) {
+        if (input.length() < 5) {
+            return false;
+        } else {
+            return input.substring(0, 5).equals("done ");
+        }
+    }
+
+    public static boolean isValidIndex(String input) {
+        String[] stringArray = input.split(" ");
+        int index;
+        try {
+            index = Integer.parseInt(stringArray[1]);
+        } catch(Exception e) {
+            return false;
+        }
+        int listSize = list.size();
+        return index <= listSize && index > 0;
+    }
+
+    public static int getIndex(String input) {
+        String[] stringArray = input.split(" ");
+        return Integer.parseInt(stringArray[1]) - 1;
+    }
+
+    public static void errorMessage() {
+        System.out.println(divider);
+        System.out.println("   Apple Pineapple! Something is wrong with your command...");
         System.out.println(divider + "\n");
     }
 
@@ -55,13 +95,22 @@ public class Duke {
 
         while (scanner.hasNext()) {
             nextLine = scanner.nextLine();
+
             if (nextLine.equals("bye")) {
                 byeMessage();
                 break;
             } else if (nextLine.equals("list")) {
                 showList();
+            } else if (isDoneCommand(nextLine)) {
+                if (isValidIndex(nextLine)) {
+                    Task task = list.get(getIndex(nextLine));
+                    task.markAsDone();
+                    doneMessage(task);
+                } else {
+                    errorMessage();
+                }
             } else {
-                inputMessage(nextLine);
+                addedMessage(nextLine);
                 addList(nextLine);
             }
         }
