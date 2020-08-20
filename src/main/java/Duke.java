@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Duke {
@@ -22,7 +23,7 @@ public class Duke {
                 System.out.println(border + "Bye. Hope to see you again!" + border);
                 break;
             } else if (command.equals("list")) {
-                System.out.println(border);
+                System.out.println(border + "Here are the tasks in your list:\n");
                 for (int i = 0; i < lst.size(); i++) {
                     System.out.println((i + 1) + ". " + lst.get(i));
                 }
