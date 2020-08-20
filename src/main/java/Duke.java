@@ -120,6 +120,10 @@ public class Duke {
     /** Prints all the contents of the list in order **/
     public static void printList(Task[] list) {
         System.out.print("Here is what I have! ^^\n");
+        // Handles printing empty list
+        if (Task.quantity == 0) {
+            System.out.println("Whoops! I don't have anything of note yet...");
+        }
         for (int i = 0; i < Task.quantity; i++) {
             // Enumerator
             System.out.print((i+1) + ".");
