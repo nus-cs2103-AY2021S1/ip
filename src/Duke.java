@@ -25,8 +25,26 @@ public class Duke {
                 String listString = list1.listToString();
                 displayMessage(listString);
             } else {
-                String addedMsg = list1.addToList(input);
-                displayMessage(addedMsg);
+                int i = input.indexOf(' ');
+                String pref = "";
+                String rest = "";
+                if (i > -1) {
+                    pref = input.substring(0,i);
+                    rest = input.substring(i+1);
+                } else {
+                    System.out.println("oops!");
+                }
+
+                switch(pref) {
+                    case "done":
+                        int n = Integer.parseInt(rest);
+                        displayMessage(list1.markAsDone(n));
+                        break;
+
+                    default:
+                        String addedMsg = list1.addToList(input);
+                        displayMessage(addedMsg);
+                }
             }
         }
     }
