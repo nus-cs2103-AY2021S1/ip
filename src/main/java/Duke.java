@@ -25,13 +25,17 @@ public class Duke {
         boolean isRunning = true;
         String input;
         String line = "____________________________________________________________\n";
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<>();
+        Task task;
+        int num;
         while(isRunning){
-            input = sc.nextLine();
+            input = sc.next();
             if(input.equals("list")){
                 System.out.println(line);
+                System.out.println("Here are the tasks in your list:");
                 for(int i = 1; i <= list.size(); i++){
-                    System.out.println(i + ". " + list.get(i-1));
+                    task = list.get(i-1);
+                    System.out.println(i + "." + task.getTypeString() + task.getDoneString() + " " + task.getString());
                 }
                 System.out.println(line);
             }
@@ -41,10 +45,44 @@ public class Duke {
                 System.out.println(line);
                 isRunning = false;
             }
-            else{
-                list.add(input);
+            else if(input.equals("done")){
+                num = sc.nextInt();
+                task = list.get(num-1).done();
+                list.add(num-1, task); //update task in list to done
                 System.out.println(line);
-                System.out.println("added: " + input);
+                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println(" " + task.getDoneString() + " " + task.getString());
+                System.out.println(line);
+
+            }
+            else if(input.equals("todo")){
+                input = sc.nextLine();
+                task = new Task(TaskType.TODO,false, input);
+                list.add(task);
+                System.out.println(line);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(" " + task.getTypeString() + task.getDoneString() + " " + input);
+                System.out.println("Now you have " + list.size() +" tasks in the list.");
+                System.out.println(line);
+            }
+            else if(input.equals("deadline")) {
+                input = sc.nextLine();
+                task = new Task(TaskType.DEADLINE,false, input);
+                list.add(task);
+                System.out.println(line);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(" " + task.getTypeString() + task.getDoneString() + " " + input);
+                System.out.println("Now you have " + list.size() +" tasks in the list.");
+                System.out.println(line);
+            }
+            else if(input.equals("event")) {
+                input = sc.nextLine();
+                task = new Task(TaskType.EVENT,false, input);
+                list.add(task);
+                System.out.println(line);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(" " + task.getTypeString() + task.getDoneString() + " " + input);
+                System.out.println("Now you have " + list.size() +" tasks in the list.");
                 System.out.println(line);
             }
         }
