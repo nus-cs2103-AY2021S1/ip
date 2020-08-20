@@ -30,11 +30,17 @@ public class Chatbot {
                 int ind = scan.nextInt() - 1;
                 arr.get(ind).markAsDone();
                 System.out.println(arr.get(ind));
+            } else if (in.equals("delete")) {
+                System.out.println("Noted. I've removed this task:");
+                int ind = scan.nextInt() - 1;
+                System.out.println(arr.get(ind));
+                arr.remove(ind);
+                System.out.println("Now you have " + arr.size() + " tasks in the list.");
             } else if (in.equals("todo")) {
                 if (!scan.hasNext()) {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
-                String desc = scan.next();
+                String desc = scan.nextLine().substring(1);
                 System.out.println("Got it. I've added this task:");
                 Todo curr = new Todo(desc);
                 System.out.println(curr);
