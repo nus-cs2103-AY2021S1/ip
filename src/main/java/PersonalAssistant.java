@@ -94,6 +94,26 @@ public class PersonalAssistant {
                 break;
             }
 
+            case "delete": {
+                // Handle incorrect argument lengths
+                if (cmdTokens.length <= 1) {
+                    throw new CommandMissingArgumentException();
+                }
+
+                Integer taskIndex = TokenParser.parseInt(cmdTokens[1]) - 1;
+
+                // If the task doesn't exist (It's index is missing)
+                if (taskIndex < 0 || taskIndex >= store.size()) {
+                    throw new MissingTaskException();
+                }
+                deleteTask(taskIndex);
+
+                // Get the next command
+                this.getUserCommands();
+                break;
+            }
+
+
             /**
              * TASK COMMANDS
              */
@@ -178,6 +198,7 @@ public class PersonalAssistant {
                 break;
             }
 
+
             default:
                 System.out.println("Invalid command");
                 this.getUserCommands();
@@ -190,11 +211,18 @@ public class PersonalAssistant {
         System.out.println(message);
     }
 
-    public void completeTask(Integer taskNumber) {
+    public void completeTask(Integer taskIndex) {
         // Set the task to done
-        Task task = store.get(taskNumber);
+        Task task = store.get(taskIndex);
         task.done();
         System.out.println("Task marked as complete:");
+        System.out.println(task);
+    }
+
+    public void deleteTask(int taskIndex) {
+        // Set the task to done
+        Task task = store.remove(taskIndex);
+        System.out.println("Task deleted:");
         System.out.println(task);
     }
 
