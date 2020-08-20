@@ -12,6 +12,7 @@ public class InvalidCommandException extends DukeException {
 			+ "\n2. deadline <deadline_desc> /by <time>"
 			+ "\n3. event <event_desc> /at <time>"
 			+ "\n4. done <task_no>"
-			+ "\n5. list";
+			+ "\n5. delete <task_no>"
+			+ "\n6. list";
 	}
 }

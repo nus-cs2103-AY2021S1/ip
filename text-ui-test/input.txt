@@ -10,6 +10,8 @@ deadline do homework /by no idea :-p
 list
 done 1
 done 3
+delete 5
+delete 2
 done 10
 todo swimming
 list

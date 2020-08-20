@@ -55,12 +55,21 @@ public class Duke {
         printDivider();
     }
 
+    public static void printDeleteTask(String task, int numberOfTask) {
+        printDivider();
+        printOutput("Noted. I've removed this task:");
+        printOutput(task);
+        printOutput("Now you have " + numberOfTask + " tasks in the list.");
+        printDivider();
+    }
+
     public static void checkCommands (String command) throws InvalidCommandException {
         if (!command.equals("todo")
             && !command.equals("deadline")
             && !command.equals("event")
             && !command.equals("list")
-            && !command.equals("done")) {
+            && !command.equals("done")
+            && !command.equals("delete")) {
             throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
@@ -118,6 +127,17 @@ public class Duke {
                             int index = Integer.parseInt(inputs[1]) - 1;
                             taskList.set(index, taskList.get(index).completeTask());
                             printCompleteTask(taskList.get(index).toString());
+                        } catch (InvalidIndexException ex) {
+                            printDivider();
+                            printOutput(ex.getMessage());
+                            printDivider();
+                        }
+                    } else if (inputs[0].trim().equals("delete")) {
+                        try {
+                            checkIndex(inputs, taskList.size());
+                            int index = Integer.parseInt(inputs[1]) - 1;
+                            printDeleteTask(taskList.get(index).toString(), taskList.size() - 1);
+                            taskList.remove(index);
                         } catch (InvalidIndexException ex) {
                             printDivider();
                             printOutput(ex.getMessage());
