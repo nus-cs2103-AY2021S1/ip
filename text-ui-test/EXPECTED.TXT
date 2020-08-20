@@ -11,6 +11,7 @@ event <desc> /at <desc>
 
 list - show all added tasks
 done <taskId> - mark the task as done
+delete <taskId> - delete the task
 bye - close Duke
 
 The ToDo should not be empty
@@ -46,5 +47,10 @@ Nice! I've marked it done - [v][T] deep work
 Nice! I've marked it done - [v][D] get a girlfriend (by: 2022)
 
 404 task with id 5 not found. Please enter a correct task id
+
+Noted! I've removed this task - [v][T] deep work
+Now you have 2 tasks in the list
+
+404 task with id 3 not found. Please enter a correct task id
 
 Adios!
