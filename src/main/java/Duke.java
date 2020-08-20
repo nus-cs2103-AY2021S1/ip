@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static String border = "-----------------------------------------------------";
+    public static String border = "-----------------------------------------------------------";
     public static String indentation = "    ";
     public static List<Task> tasks = new ArrayList<>();
 
-    public static void interact() {
+    public static void interact() throws DukeException {
         greet();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
@@ -27,24 +27,31 @@ public class Duke {
                     markDone(index);
                 } else {
 //                    add to list
-                    Task task;
-                    if (identifier.equals("todo")) {
-                        String[] newArrOfStr = line.split(" ", 2);
-                        task = new Todo(newArrOfStr[1]);
-                    } else if (identifier.equals("deadline")) {
-                        String[] firstSplit = line.split("/by ", 2);
-                        String time = firstSplit[1];
-                        String[] secondSplit = firstSplit[0].split(" ", 2);
-                        String description = secondSplit[1].substring(0, secondSplit[1].length() - 1);
-                        task = new Deadline(description, time);
+                    if ((identifier.equals("todo") || identifier.equals("deadline")
+                            || identifier.equals("event")) && arrOfStr.length < 2) {
+                        throw new DukeException("☹ OOPS!!! The description of a " + identifier + " cannot be empty.");
                     } else {
-                        String[] firstSplit = line.split("/at ", 2);
-                        String time = firstSplit[1];
-                        String[] secondSplit = firstSplit[0].split(" ", 2);
-                        String description = secondSplit[1].substring(0, secondSplit[1].length() - 1);
-                        task = new Event(description, time);
+                        Task task;
+                        if (identifier.equals("todo")) {
+                            String[] newArrOfStr = line.split(" ", 2);
+                            task = new Todo(newArrOfStr[1]);
+                        } else if (identifier.equals("deadline")) {
+                            String[] firstSplit = line.split("/by ", 2);
+                            String time = firstSplit[1];
+                            String[] secondSplit = firstSplit[0].split(" ", 2);
+                            String description = secondSplit[1].substring(0, secondSplit[1].length() - 1);
+                            task = new Deadline(description, time);
+                        } else if (identifier.equals("event")) {
+                            String[] firstSplit = line.split("/at ", 2);
+                            String time = firstSplit[1];
+                            String[] secondSplit = firstSplit[0].split(" ", 2);
+                            String description = secondSplit[1].substring(0, secondSplit[1].length() - 1);
+                            task = new Event(description, time);
+                        } else {
+                            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        }
+                        add(task);
                     }
-                    add(task);
                 }
             }
         }
@@ -98,6 +105,12 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        interact();
+        try {
+            interact();
+        } catch (Exception e) {
+            printBorder();
+            System.out.println(indentation + e.getMessage());
+            printBorder();
+        }
     }
 }
