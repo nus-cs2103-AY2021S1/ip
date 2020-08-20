@@ -45,6 +45,7 @@ public class Duke {
     private static final String CMD_TODO = "todo";
     private static final String CMD_DEADLINE = "deadline";
     private static final String CMD_EVENT = "event";
+    private static final String CMD_DELETE = "delete";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -139,7 +140,7 @@ public class Duke {
                         if (tasks.isEmpty()) {
                             System.out.println(fmtMsg("UR LIST HAZ NUTHIN LOLOL"));
                         } else {
-                            String msg = "\nU HAS DEES TINGS IN UR LIST:";
+                            String msg = "U HAS DEES TINGS IN UR LIST.";
                             for (int i = 0; i < tasks.size(); i++) {
                                 msg += "\n" +(i + 1) + ". " + tasks.get(i);
                             }
@@ -156,6 +157,24 @@ public class Duke {
                                 tasks.get(idx).setDone(true);
                                 System.out.println(fmtMsg("TASK IZ NAO DUNZ!!!!1!11!\n" +
                                         "  " + tasks.get(idx)));
+                            }
+                        } catch (NumberFormatException e) {
+                            throw new DukeException("U MUST ONLY PUT INDEX OV TASK LULS");
+                        }
+                        break;
+
+                    case CMD_DELETE:
+                        try {
+                            int idx = Integer.parseInt(rest) - 1;
+                            if (tasks.isEmpty()) {
+                                throw new DukeException("U CANT DELET ANYTHIN COZ U HAS NO TASKZ NAO LOLOL");
+                            }
+                            if (idx < 0 || idx >= tasks.size()) {
+                                throw new DukeException("U DOAN HAS TASK WIF DIS LABEL");
+                            } else {
+                                System.out.println(fmtMsg("TASK IZ NAO DELETZ!!!!1!11!\n" +
+                                        "  " + tasks.get(idx) + "\nNAO U HAS " +  (tasks.size() - 1) + " FINGS IN DA LIST LULZIES"));
+                                tasks.remove(idx);
                             }
                         } catch (NumberFormatException e) {
                             throw new DukeException("U MUST ONLY PUT INDEX OV TASK LULS");
