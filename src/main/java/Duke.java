@@ -58,6 +58,13 @@ public class Duke {
                         System.out.println("Got it. I've added this task:" + "\n" + " " + e.toString() + "\n"
                                 + "Now you have " + listOfStuff.size() + " tasks in the list");
                     }
+                }else if (ans.substring(0, 6).equals("delete")){
+                    int i = Integer.parseInt(ans.substring(7)) - 1;
+                    Task r = listOfStuff.get(i);
+                    listOfStuff.remove(i);
+                    System.out.println("Noted. I've removed this task: " + "\n" +
+                            r.toString() + "\n" + "Now you have " + listOfStuff.size() + " tasks in the list.");
+
                 }
             }catch (Exception ex){
                 System.out.println(new DukeException().toString());
