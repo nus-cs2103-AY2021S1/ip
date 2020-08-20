@@ -15,36 +15,56 @@ public class Duke {
 
         displayMessage("Hello! I'm Duke\n\tWhat can I do for you?");
         String input;
-        while (true) {
+        boolean cont = true;
+        while (cont) {
             input = sc.nextLine();
 
-            if (input.equalsIgnoreCase("bye")) {
-                displayMessage("Bye. Hope to see you again soon!");
-                break;
-            } else if (input.equalsIgnoreCase("list")) {
-                String listString = list1.listToString();
-                displayMessage(listString);
+            int i = input.indexOf(' ');
+            String pref;
+            String rest = "";
+            if (i > -1) {
+                pref = input.substring(0,i);
+                rest = input.substring(i+1);
             } else {
-                int i = input.indexOf(' ');
-                String pref = "";
-                String rest = "";
-                if (i > -1) {
-                    pref = input.substring(0,i);
-                    rest = input.substring(i+1);
-                } else {
-                    System.out.println("oops!");
-                }
+                pref = input;
+            }
 
-                switch(pref) {
-                    case "done":
-                        int n = Integer.parseInt(rest);
-                        displayMessage(list1.markAsDone(n));
-                        break;
+            String addedMsg;
+            switch(pref) {
+                case "bye":
+                    displayMessage("Bye. Hope to see you again soon!");
+                    cont = false;
+                    break;
 
-                    default:
-                        String addedMsg = list1.addToList(input);
-                        displayMessage(addedMsg);
-                }
+                case "list":
+                    String listString = list1.toString();
+                    displayMessage(listString);
+                    break;
+
+                case "done":
+                    int n = Integer.parseInt(rest);
+                    displayMessage(list1.markAsDone(n));
+                    break;
+
+                case "todo":
+                    addedMsg = list1.addToList(new Todo(rest));
+                    displayMessage(addedMsg);
+                    break;
+
+                case "deadline":
+                    String[] arr1 = rest.split("/by", 2);
+                    addedMsg = list1.addToList(new Deadline(arr1[0], arr1[1]));
+                    displayMessage(addedMsg);
+                    break;
+
+                case "event":
+                    String[] arr2 = rest.split("/at", 2);
+                    addedMsg = list1.addToList(new Event(arr2[0], arr2[1]));
+                    displayMessage(addedMsg);
+                    break;
+
+                default:
+                    displayMessage("oops!");
             }
         }
     }

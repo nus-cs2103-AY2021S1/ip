@@ -13,20 +13,23 @@ public class List {
         return new List();
     }
 
-    public String addToList(String s) {
+    public String addToList(Task t) {
         this.count = this.count + 1;
-        this.list.add(new Task(s));
+        this.list.add(t);
 
-        return "added: " + s;
+        return "Got it. I've added this task:\n\t" +
+                t.toString() +
+                "\n\tNow you have " + count + " tasks in the list.";
     }
 
     public String markAsDone(int i) {
         Task t = this.list.get(i-1).taskDone();
         return "Nice! I've marked this task as done:\n\t" +
-                "  " + t.taskToString();
+                "  " + t.toString();
     }
 
-    public String listToString() {
+    @Override
+    public String toString() {
         if (this.count == 0) {
             return "There are no tasks in your list";
         }
@@ -34,7 +37,7 @@ public class List {
         String msg = "Here are the tasks in your list:\n\t";
         int num = 1;
         for (Task s : this.list) {
-            msg = msg + num + ". " + s.taskToString() + "\n\t";
+            msg = msg + num + ". " + s.toString() + "\n\t";
             num++;
         }
         return msg;
