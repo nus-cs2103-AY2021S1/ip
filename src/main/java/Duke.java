@@ -27,6 +27,11 @@ public class Duke {
         }
     }
 
+    public static String numTasks(List<Task> lst) {
+        int numTasks = lst.size();
+        return numTasks == 1 ? "1 task" : numTasks + " tasks";
+    }
+
     public static void main(String[] args) {
         System.out.println("————————————————————————————————————————————————————————————");
         System.out.println("Hello! I'm Duke! \nWhat can I do for you?");
@@ -49,14 +54,47 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(tasks.get(taskId).toString());
                 } else {
-                    System.out.println("Task does not exist; Try another task number");
+                    System.out.println("Task does not exist; Try another task number.");
                 }
-
             } else {
-                Task newTask = new Task(command);
-                tasks.add(newTask);
-                System.out.println("added: " + command);
+                String[] command_lst = command.split(" ", 2);
+
+                if (command_lst[0].equals("todo")) {
+                    if (command_lst.length == 2) {
+                        Task newTask = new ToDo(command_lst[1]);
+                        tasks.add(newTask);
+                        System.out.println("Got it. I've added this task: \n" + newTask.toString());
+                        System.out.println("Now you have " + numTasks(tasks) + " in the list.");
+                    } else {
+                        System.out.println("You have entered an invalid todo.");
+                    }
+                } else if (command_lst[0].equals("deadline")) {
+                    if (command_lst[1].contains("/by")) {
+                        String desc = command_lst[1].split(" /by ")[0];
+                        String by = command_lst[1].split(" /by ")[1];
+                        Task newTask = new Deadline(desc, by);
+                        tasks.add(newTask);
+                        System.out.println("Got it. I've added this task: \n" + newTask.toString());
+                        System.out.println("Now you have " + numTasks(tasks) + " in the list.");
+                    } else {
+                        System.out.println("You have entered an invalid deadline.");
+                    }
+                } else if (command_lst[0].equals("event")) {
+                    if (command_lst[1].contains("/at")) {
+                        String desc = command_lst[1].split(" /at ")[0];
+                        String at = command_lst[1].split(" /at ")[1];
+                        Task newTask = new Event(desc, at);
+                        tasks.add(newTask);
+                        System.out.println("Got it. I've added this task: \n" + newTask.toString());
+                        System.out.println("Now you have " + numTasks(tasks) + " in the list.");
+                    } else {
+                        System.out.println("You have entered an invalid event.");
+                    }
+                } else {
+                    System.out.println("You have entered an invalid command.");
+                }
             }
+
             System.out.println("————————————————————————————————————————————————————————————");
             command = sc.nextLine();
         }
