@@ -1,7 +1,4 @@
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+import task.*;
 
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -39,29 +36,44 @@ public class Duke {
                 System.out.println("\t" + "Nice! I've marked this task as done:");
                 System.out.println("\t\t" + taskList.get(index));
             }
-            else if(input.startsWith("todo ")){
+            else if(input.startsWith("todo ") || input.equals("todo")){
                 input = input.substring(4).trim();
-                Task newTask = new Todo(input);
-                taskList.add(newTask);
-                System.out.println("\t" + "Got it. I've added this task:");
-                System.out.println("\t\t" + newTask);
+                try {
+                    Task newTask = new Todo(input);
+                    taskList.add(newTask);
+                    System.out.println("\t" + "Got it. I've added this task:");
+                    System.out.println("\t\t" + newTask);
+                }
+                catch(EmptyStringException e){
+                    System.out.println("\t" + "Todo cannot be empty.");
+                }
             }
-            else if(input.startsWith("deadline ")){
+            else if(input.startsWith("deadline ") || input.equals("deadline")){
                 input = input.substring(8).trim();
-                Task newTask = new Deadline(input);
-                taskList.add(newTask);
-                System.out.println("\t" + "Got it. I've added this task:");
-                System.out.println("\t\t" + newTask);
+                try {
+                    Task newTask = new Deadline(input);
+                    taskList.add(newTask);
+                    System.out.println("\t" + "Got it. I've added this task:");
+                    System.out.println("\t\t" + newTask);
+                }
+                catch(EmptyStringException e){
+                    System.out.println("\t" + "Deadline cannot be empty.");
+                }
             }
-            else if(input.startsWith("event ")){
+            else if(input.startsWith("event ") || input.equals("event")){
                 input = input.substring(5).trim();
-                Task newTask = new Event(input);
-                taskList.add(newTask);
-                System.out.println("\t" + "Got it. I've added this task:");
-                System.out.println("\t\t" + newTask);
+                try {
+                    Task newTask = new Event(input);
+                    taskList.add(newTask);
+                    System.out.println("\t" + "Got it. I've added this task:");
+                    System.out.println("\t\t" + newTask);
+                }
+                catch(EmptyStringException e){
+                    System.out.println("\t" + "Event cannot be empty.");
+                }
             }
             else{
-                System.out.println("\t" + "I do not understand. D:");
+                System.out.println("\t" + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }

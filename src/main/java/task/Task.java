@@ -10,8 +10,11 @@ public abstract class Task {
         this.taskType = "-";
     }
 
-    protected Task(String item){
+    protected Task(String item) throws EmptyStringException{
         this();
+        if(item.isBlank()){
+            throw new EmptyStringException("Task cannot be empty.");
+        }
         this.item = item;
     }
 
