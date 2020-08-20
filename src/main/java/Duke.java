@@ -51,13 +51,13 @@ public class Duke {
                                     } else {
                                         System.out.println(
                                                 new DukeException(
-                                                        "☹ OOPS!!! The description of a todo cannot be empty."));
+                                                        "OOPS!!! The description of a todo cannot be empty."));
                                     }
 
                                 }else{
                                     System.out.println(
                                             new DukeException(
-                                                    "☹ The description of a todo cannot be empty lah."));
+                                                    "The description of a todo cannot be empty lah."));
                                 }
 
                             } else if (input.contains("event")) {
@@ -74,11 +74,11 @@ public class Duke {
 
                                     } else {
                                         System.out.println(new DukeException(
-                                                "☹ The description of an event cannot be empty lah."));
+                                                "The description of an event cannot be empty lah."));
                                     }
                                 }else{
                                     System.out.println(new DukeException(
-                                            "☹ The description of an event cannot be empty lah."));
+                                            "The description of an event cannot be empty lah."));
                                 }
 
                             }else {
@@ -92,13 +92,13 @@ public class Duke {
                                     } else {
                                         System.out.println(
                                                 new DukeException(
-                                                        "☹ The description of a deadline cannot be empty lah.")
+                                                        "The description of a deadline cannot be empty lah.")
                                         );
                                     }
                                 }else{
                                     System.out.println(
                                             new DukeException(
-                                                    "☹ The description of a deadline cannot be empty lah.")
+                                                    "The description of a deadline cannot be empty lah.")
                                     );
                                 }
 
@@ -106,7 +106,7 @@ public class Duke {
 
                         } else {
                             System.out.println(
-                                    new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(")
+                                    new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(")
                             );
                         }
 

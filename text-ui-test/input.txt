@@ -1,0 +1,8 @@
+deadline askquestion /by Monday
+todo borrowbook
+event teammeeting /at Sunday
+list
+done 2
+todo
+blah
+bye
