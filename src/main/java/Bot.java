@@ -39,12 +39,17 @@ public class Bot {
     }
 
     private String parseUserInput(String input) {
-        switch (input) {
-            case "list":
-                return cmdList();
-            default:
-                return cmdAdd(input);
-
+        String firstWord = firstWord(input);
+        try {
+            Command cmd = Command.valueOf(firstWord.toUpperCase());
+            switch (cmd) {
+                case LIST:
+                    return cmdList();
+                default:
+                    return cmdAdd(input);
+            }
+        } catch (IllegalArgumentException e) {
+            return cmdAdd(input);
         }
     }
 
