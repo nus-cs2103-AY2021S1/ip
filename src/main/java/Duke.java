@@ -5,15 +5,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    private Ui ui;
     private Storage storage;
     private List<Task> tasks;
 
     public Duke(String filePath) {
+        ui = new Ui();
         try {
             this.storage = new Storage(filePath);
             tasks = new ArrayList<>(storage.load());
         } catch (IOException e) {
-            Printer.printGeneralChatWindow("ERROR: Loading error");
+            ui.printGeneralChatWindow("ERROR: Loading error");
             tasks = new ArrayList<>();
         }
     }
@@ -24,8 +26,7 @@ public class Duke {
 
     public void run() {
         // Initial greeting, prompt user for commands
-        Printer.printLogo();
-        Printer.printGeneralChatWindow("Greetings! I'm Awesome-O.", "What can I do for you?");
+        ui.printWelcome();
 
         // Start scanning for user input
         Scanner sc = new Scanner(System.in);
@@ -39,22 +40,22 @@ public class Duke {
             try {
                 switch (tag) {
                     case "list":
-                        Printer.printTasksChatWindow(tasks);
+                        ui.printTasksChatWindow(tasks);
                         break;
 
                     case "done":
-                        Printer.printDoneTaskChatWindow(completeTask(input, tasks));
+                        ui.printDoneTaskChatWindow(completeTask(input, tasks));
                         break;
 
                     case "delete":
-                        Printer.printDeleteTaskChatWindow(deleteTask(input, tasks), tasks.size());
+                        ui.printDeleteTaskChatWindow(deleteTask(input, tasks), tasks.size());
                         break;
 
                     case "todo":
                     case "event":
                     case "deadline":
                         Task toAdd = addTask(tag, input, tasks);
-                        Printer.printAddTaskChatWindow(toAdd, tasks.size());
+                        ui.printAddTaskChatWindow(toAdd, tasks.size());
                         break;
 
                     default:
@@ -65,21 +66,20 @@ public class Duke {
                 storage.save(tasks);
 
             } catch (IOException e) {
-                Printer.printGeneralChatWindow("ERROR: Loading error!");
+                ui.printGeneralChatWindow("ERROR: Loading error!");
             } catch (DukeUnknownInputException e) {
-                Printer.printGeneralChatWindow(e.toString());
+                ui.printGeneralChatWindow(e.toString());
             } catch (IndexOutOfBoundsException e) {
-                Printer.printGeneralChatWindow("ERROR: Invalid list number input!");
+                ui.printGeneralChatWindow("ERROR: Invalid list number input!");
             } catch (DukeInvalidTaskDescriptionException | DukeInvalidTaskTimeException e) {
-                Printer.printGeneralChatWindow(e.toString());
+                ui.printGeneralChatWindow(e.toString());
             } finally {
                 input = sc.nextLine();
             }
         }
 
         // Print goodbye chat window
-        Printer.printGeneralChatWindow("Thank you for talking to Awesome-O.", "Have a nice day. Goodbye!");
-        Printer.printLogo();
+        ui.printGoodbye();
     }
 
     private static Task completeTask(String input, List<Task> tasks) {
