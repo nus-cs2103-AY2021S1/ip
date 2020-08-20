@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
         Duke dk = new Duke();
-        ArrayList<Task> tasks = new ArrayList<Task>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         dk.greet();
         Scanner sc = new Scanner( System.in );
@@ -14,81 +14,105 @@ public class Duke {
             String input = sc.nextLine();
             try {
                 dk.respond(input, tasks);
-            } catch (CommandNotFoundException ex) {
-                System.out.println(ex);
-            } catch (EmptyTaskException ex) {
-                System.out.println(ex);
-            } catch (EmptyTimeException ex) {
-                System.out.println(ex);
+            } catch (CommandNotFoundException | EmptyTaskException | EmptyTimeException ex) {
+                System.out.println(ex.getMessage());
             }
             System.out.println("____________________________________________________________");
         }
     }
 
+    public enum Command {
+        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT
+    }
+
     public void respond(String input, ArrayList<Task> tasks) throws CommandNotFoundException, EmptyTaskException,
     EmptyTimeException {
-        String[] parseArray = input.split(" ", 2);
-        String type = parseArray[0];
-        if (input.equals("bye")) {
-            endConversation();
-        } else if (input.equals("list")) {
-            showTask(tasks);
-        } else if (type.equals("done")||type.equals("delete")||
-                type.equals("todo")||type.equals("deadline")||type.equals("event")) {
-            if (parseArray.length == 1 && (type.equals("done")||type.equals("delete"))){
-                throw new EmptyTaskException("Please specify task index. (´∀`)");
-            } else if (parseArray.length == 1 ){
-                throw new EmptyTaskException("Please specify task description. (´∀`)");
-            } else {
-                String rest = parseArray[1];
-                String description = "";
-                String time = "";
-
-                if (type.equals("done")) {
-                    int index = Integer.parseInt(rest) - 1;
-                    Task newTask = tasks.get(index).markAsDone();
-                    tasks.set(index, newTask);
-                } else if (type.equals("delete")) {
-                    int index = Integer.parseInt(rest) - 1;
-                    Task.reduceOneTasks();
-                    String message = tasks.get(index).deleteMessage();
-                    System.out.println(message);
-                    tasks.remove(index);
-
-                } else {
-                    switch (type) {
-                        case "todo":
-                            Todo newTodo = new Todo(rest);
-                            tasks.add(newTodo);
-                            System.out.println(newTodo);
-                            break;
-                        case "deadline":
-                            if (rest.split("/").length == 1 ) {
-                                throw new EmptyTimeException("Please specify deadline using \"/by\". (´∀`)");
-                            }
-                            description = rest.split(" /")[0];
-                            time = rest.split(" /")[1].split(" ", 2)[1];
-                            Deadline newDeadline = new Deadline(description, time);
-                            tasks.add(newDeadline);
-                            System.out.println(newDeadline);
-                            break;
-                        case "event":
-                            if (rest.split("/").length == 1 ) {
-                                throw new EmptyTimeException("Please specify deadline using \"/at\". (´∀`)");
-                            }
-                            description = rest.split(" /")[0];
-                            time = rest.split(" /")[1].split(" ", 2)[1];
-                            Event newEvent = new Event(description, time);
-                            tasks.add(newEvent);
-                            System.out.println(newEvent);
-                            break;
+        String[] parseArray = input.trim().split(" ", 2);
+        String type = parseArray[0].toUpperCase();
+        try {
+            Command command = Command.valueOf(type);
+            switch (command) {
+                case BYE:
+                    endConversation();
+                    break;
+                case LIST:
+                    showTask(tasks);
+                    break;
+                case DONE:
+                case DELETE:
+                    if (parseArray.length == 1) {
+                        throw new EmptyTaskException("Please specify task index. (´∀`)");
+                    } else {
+                        String rest = parseArray[1];
+                        int index = Integer.parseInt(rest) - 1;
+                        switch (command) {
+                            case DONE:
+                                Task newTask = tasks.get(index).markAsDone();
+                                tasks.set(index, newTask);
+                                break;
+                            case DELETE:
+                                Task.reduceOneTasks();
+                                String message = tasks.get(index).deleteMessage();
+                                System.out.println(message);
+                                tasks.remove(index);
+                                break;
+                        }
                     }
-                }
-                System.out.println("Now you have " + Task.numberOfTasks + " tasks in the list.");
+                    break;
+                case TODO:
+                case DEADLINE:
+                case EVENT:
+                    if (parseArray.length == 1) {
+                        throw new EmptyTaskException("Please specify task description. (´∀`)");
+                    } else {
+                        String rest = parseArray[1];
+                        switch (command) {
+                            case TODO:
+                                Todo newTodo = new Todo(rest);
+                                tasks.add(newTodo);
+                                System.out.println(newTodo);
+                                break;
+                            case DEADLINE:
+                                if (rest.split("/").length == 1) {
+                                    throw new EmptyTimeException("Please specify deadline using \"/by\". (´∀`)");
+                                } else {
+                                    String description = rest.split(" /")[0];
+                                    try{
+                                        String time = rest.split(" /")[1].split(" ", 2)[1];
+                                        Deadline newDeadline = new Deadline(description, time);
+                                        tasks.add(newDeadline);
+                                        System.out.println(newDeadline);
+                                    } catch (ArrayIndexOutOfBoundsException ex) {
+                                        throw new EmptyTimeException("Please don't leave the deadline blank~ (´∀`)");
+                                    }
+
+                                }
+                                break;
+                            case EVENT:
+                                if (rest.split("/").length == 1) {
+                                    throw new EmptyTimeException("Please specify event time using \"/at\". (´∀`)");
+                                } else {
+                                    String description = rest.split(" /")[0];
+                                    try{
+                                        String time = rest.split(" /")[1].split(" ", 2)[1];
+                                        Event newEvent = new Event(description, time);
+                                        tasks.add(newEvent);
+                                        System.out.println(newEvent);
+                                    } catch (ArrayIndexOutOfBoundsException ex) {
+                                        throw new EmptyTimeException("Please don't leave the event time blank~ (´∀`)");
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                    break;
+                default:
+                    throw new CommandNotFoundException();
             }
-        } else {
+        } catch (IllegalArgumentException e) {
             throw new CommandNotFoundException();
         }
+
     }
 
     public void greet(){
