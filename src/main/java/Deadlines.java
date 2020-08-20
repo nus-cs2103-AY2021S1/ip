@@ -14,9 +14,9 @@ public class Deadlines extends Task{
     public String toString(){
         if (time != null) {
             if (super.completed) {
-                return "[D]" + "[" + "✓" + "] " + name + "(by:" + time +")";
+                return "[D]" + "[" + "✓" + "] " + name + " (by:" + time +")";
             } else {
-                return "[D]" + "[" + "✗" + "] " + name + "(by:" + time +")";
+                return "[D]" + "[" + "✗" + "] " + name + " (by:" + time +")";
             }
         } else {
             if (super.completed) {

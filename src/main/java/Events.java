@@ -14,9 +14,9 @@ public class Events extends Task{
     public String toString(){
         if (time != null) {
             if (super.completed) {
-                return "[E]" + "[" + "✓" + "] " + name + "(at:" + time +")";
+                return "[E]" + "[" + "✓" + "] " + name + " (at:" + time +")";
             } else {
-                return "[E]" + "[" + "✗" + "] " + name + "(at:" + time +")";
+                return "[E]" + "[" + "✗" + "] " + name + " (at:" + time +")";
             }
         } else {
             if (super.completed) {
