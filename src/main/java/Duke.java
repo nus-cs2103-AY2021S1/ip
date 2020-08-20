@@ -28,6 +28,10 @@ public class Duke {
             String message = input.nextLine();
             Greet newMessage = new Greet(message);
             System.out.println(newMessage);
+            if (newMessage.toString().equals(newMessage.getExitGreeting())) {
+                System.out.println(newMessage.toString() == newMessage.getExitGreeting());
+                break;
+            }
         }
         input.close();
     }

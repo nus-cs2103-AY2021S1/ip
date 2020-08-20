@@ -1,40 +1,43 @@
 package actions;
 
 public class Greet {
-    String greetings;
-    String style = "___________________________________\n";
+    String originalGreeting;
+    String greeting;
+    String style = "\t___________________________________\n";
+    String startGreeting = "\tHello! I'm Duke \n" +
+            "\tWhat can I do for you?\n";
+    String exitGreeting = "\tBye! Hope to see you again soon:)\n";
 
     public Greet() {
-        this.greetings = null;
+        this.originalGreeting = null;
+        this.greeting = null;
     }
 
-    public Greet(String greetings) {
-        this.greetings = greetings;
+    public Greet(String greeting) {
+        this.originalGreeting = greeting;
+        this.greeting = "\t" + greeting;
     }
 
-    public boolean equal(Object ref) {
-        if (this == ref) {
-            return true;
-        }
-        if (this instanceof Object) {
-            if ((Object)(this.greetings) == ref) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-        return false;
+    public String getStartGreeting() {
+        return startGreeting;
+    }
+
+    public String getGreeting() {
+        return this.originalGreeting;
+    }
+
+    public String getExitGreeting() {
+        return exitGreeting;
     }
 
     @Override
     public String toString() {
-        if (greetings == null) {
-            greetings =  "Hello! I'm Duke \n" +
-                    "What can I do for you?\n";
+        if (originalGreeting == null) {
+            greeting =  startGreeting;
+        } else if (originalGreeting.equals("bye")) {
+            greeting = exitGreeting;
         }
-        if (greetings.equals("bye")) {
-            greetings = "Bye! Hope to see you again soon:)\n";
-        }
-        return style + greetings + "\n" + style;
+        String response = style + greeting + "\n" + style;
+        return response;
     }
 }
