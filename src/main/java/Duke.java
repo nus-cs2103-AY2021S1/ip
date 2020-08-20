@@ -4,25 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static class Task {
-        private String task;
-        private boolean done;
 
-        Task(String task) {
-            this.task = task;
-            this.done = false;
-        }
-
-        public void doTask() {
-            this.done = true;
-        }
-
-        @Override
-        public String toString() {
-            String check = done ? "✓" : "✗";
-            return String.format("[%s] %s", check, task);
-        }
-    }
     public static void main(String[] args) {
         boolean check = true;
         Scanner sc = new Scanner(System.in);
@@ -63,13 +45,43 @@ public class Duke {
                 case "uwu":
                     System.out.println(border + "\n" + "owo\n" + border);
                     break;
+                case "owo":
+                    System.out.println(border + "\n" + "uwu\n" + border);
+                    break;
                 case "exit":
                     System.out.println(border + "\n" + "bb cya again!\n" + border);
                     check = false;
                     break;
+                case "todo":
+                    Task newTask = new Todo(input);
+                    storedItems.add(newTask);
+                    System.out.println(border + "\n"
+                            + "*Gobble gobble* the following has been eated OwO:\n"
+                            + newTask.toString() + "\n"
+                            + "I now have " + storedItems.size() + " thing(s) in my belly\n"
+                            + border);
+                    break;
+                case "deadline":
+                    String temp1[] = arr[1].split(" /by ", 2);
+                    Task newTask1 = new Deadline(temp1[0], "by: " + temp1[1]);
+                    storedItems.add(newTask1);
+                    System.out.println(border + "\n"
+                            + "*Gobble gobble* the following has been eated OwO:\n"
+                            + newTask1.toString() + "\n"
+                            + "I now have " + storedItems.size() + " thing(s) in my belly\n"
+                            + border);
+                    break;
+                case "event":
+                    String temp2[] = arr[1].split(" /at ", 2);
+                    Task newTask2 = new Event(temp2[0], "by: " + temp2[1]);
+                    storedItems.add(newTask2);
+                    System.out.println(border + "\n"
+                            + "*Gobble gobble* the following has been eated OwO:\n"
+                            + newTask2.toString() + "\n"
+                            + "I now have " + storedItems.size() + " thing(s) in my belly\n"
+                            + border);
+                    break;
                 default:
-                    storedItems.add(new Task(input));
-                    System.out.println(border + "\n" + "*Gobble gobble* " + input + " has been eated OwO\n" + border);
             }
         }
     }
