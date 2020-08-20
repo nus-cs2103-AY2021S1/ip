@@ -6,7 +6,7 @@ public class Event extends Task {
     private Event(String taskName, String taskTime) {
         super(taskName);
         this.at = taskTime;
-        this.tag = "D";
+        this.tag = "E";
     }
 
     public static Event create(String taskDescription) throws DukeException{
@@ -15,12 +15,7 @@ public class Event extends Task {
         }
         String[] NameTimePair = taskDescription.split(" /at");
         String taskName = NameTimePair[0];
-        String taskTime;
-        if(NameTimePair.length <= 1){
-            throw new DukeException("Please specify a deadline for the task");
-        }else{
-            taskTime = NameTimePair[1];
-        }
+        String taskTime = NameTimePair[1];
         return new Event(taskName,taskTime);
     }
     @Override

@@ -10,7 +10,7 @@ public class Duke {
 
         Scanner Sc = new Scanner(System.in);
         String line = "____________________________\n"
-                     +"____________________________";
+                     +"____________________________\n";
 
         String logo = "****** ****** ****** ******\n"
                      +"   *   *      *      *\n"
@@ -95,6 +95,7 @@ public class Duke {
             catch(DukeException e){
                 System.out.println(e.getMessage());
             }
+            System.out.println(line);
         }
     }
 

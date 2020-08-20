@@ -14,12 +14,7 @@ public class Deadline extends Task {
             }
             String[] NameTimePair = taskDescription.split(" /by");
             String taskName = NameTimePair[0];
-            String taskTime;
-            if(NameTimePair.length <= 1){
-                throw new DukeException("Please specify a deadline for the task");
-            }else{
-                taskTime = NameTimePair[1];
-            }
+            String taskTime = NameTimePair[1];
             return new Deadline(taskName,taskTime);
     }
 
