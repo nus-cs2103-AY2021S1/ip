@@ -45,6 +45,23 @@ public class Duke {
                             throw new DukeException("What are you done with? Gotta specify a valid task number!");
                         }
                         break;
+                    case "delete":
+                        if (arr.length < 2) {
+                            throw new DukeException("The description of a delete cannot be empty!");
+                        }
+                        int deleteNum = Integer.parseInt(arr[1]);
+                        if (deleteNum > 0 && deleteNum <= storedItems.size()) {
+                            Task task = storedItems.get(deleteNum - 1);
+                            storedItems.remove((deleteNum - 1));
+                            System.out.println(border + "\n" + "Nooo you can't take away what you've already given me...\n"
+                                    + "Okay fine. It's in my stomach tho... ASDFGUUVHHH!!\n"
+                                    + "The following has been removed:\n"
+                                    + task + "\n" + "Now I'm feeling sick :( there's " + storedItems.size() + " thing(s) in my belly now...HUNGRY!\n"
+                                    + border);
+                        } else {
+                            throw new DukeException("What are you deleting? Gotta specify a valid task number!");
+                        }
+                        break;
                     case "uwu":
                         System.out.println(border + "\n" + "owo\n" + border);
                         break;
