@@ -1,5 +1,6 @@
 import jdk.jshell.spi.ExecutionControl;
 
+import java.nio.channels.NonWritableChannelException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.lang.StringBuilder;
@@ -12,6 +13,7 @@ public class Duke {
     private static final String todo = "todo";
     private static final String deadline = "deadline";
     private static final String event = "event";
+    private static final String delete = "delete";
     private ArrayList<Task> inputList;
 
     private Duke() {
@@ -55,6 +57,8 @@ public class Duke {
             } else if (commands[0].equals(deadline)) {
                 String[] arr = commands[1].split("/by");
                 return addDeadline(arr[0], arr[1]);
+            } else if (commands[0].equals(delete)) {
+                return deleteTask(Integer.valueOf(commands[1]));
             } else {
                 throw new InvalidCommandException("");
             }
@@ -124,6 +128,19 @@ public class Duke {
             return str.toString();
         } catch(IndexOutOfBoundsException e) {
             throw new InvalidArgumentException("Sorry! The task index you wanted to complete does not exist!");
+        }
+    }
+
+    private String deleteTask(int index) throws InvalidArgumentException {
+        try {
+            StringBuilder str = new StringBuilder();
+            str.append("Understood. I've removed this task:\n  ").append(
+                    inputList.get(index - 1).toString()).append("Now you have ").append(
+            inputList.size() - 1).append(" tasks in the list.");
+            inputList.remove(index - 1);
+            return str.toString();
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidArgumentException("Sorry! The index to be removed does not exist!");
         }
     }
 
