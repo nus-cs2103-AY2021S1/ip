@@ -47,7 +47,7 @@ public class Duke {
                 return false;
             default:
                 handleTask(input);
-                return true;
+                return true; 
         }
     }
 
