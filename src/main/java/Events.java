@@ -1,21 +1,24 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Events extends Task {
-    protected String on;
+    protected LocalDate at;
 
     /**
      * Creates a type of task with timing
      *
      * @param description detail of the task
-     * @param on          time the task is on
+     * @param at          time in yyyy-mm-dd
      */
-    public Events(String description, String on) {
+    public Events(String description, String at) {
         super(description);
-        this.on = on;
+        this.at = LocalDate.parse(at.trim());
     }
 
 
-    public Events(String description, boolean isDone, String on) {
+    public Events(String description, boolean isDone, String at) {
         super(description, isDone);
-        this.on = on;
+        this.at = LocalDate.parse(at.trim());
     }
 
 
@@ -26,13 +29,14 @@ public class Events extends Task {
      */
     @Override
     public String toString() {
-        return "[E][" + super.getStatusIcon() + "] " + super.description + " (at: " + this.on + ")";
+        return "[E][" + super.getStatusIcon() + "] " + super.description + " (at: "
+                + this.at.format(DateTimeFormatter.ofPattern("MMM dd yyy")) + ")";
     }
 
 
     // D | 0 | return book | June 6th
     public String toCustomString() {
-        return "E | " + (super.isDone ? 1 : 0) + " | " + super.description + " | " + on;
+        return "E | " + (super.isDone ? 1 : 0) + " | " + super.description + " | " + at;
     }
 
 
