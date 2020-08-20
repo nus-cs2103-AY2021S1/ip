@@ -39,15 +39,21 @@ public class Bot {
     }
 
     private String parseUserInput(String input) {
-        String[] words = input.split(" ");
-        if (words.length == 0) {
+        if (input.length() == 0) {
             return responseWrapper("Please input something");
         }
+        String[] words = input.split(" ");
         try {
             Command cmd = Command.valueOf(words[0].toUpperCase());
             switch (cmd) {
                 case LIST:
                     return cmdList();
+                case TODO:
+                    return cmdTodo(words);
+                case DEADLINE:
+                    return cmdDeadline(words);
+                case EVENT:
+                    return cmdEvent(words);
                 case DONE:
                     return cmdDone(words);
                 default:
@@ -58,8 +64,71 @@ public class Bot {
         }
     }
 
-    private String[] split(String word) {
-        return word.split(" ");
+    private String cmdTodo(String[] words) {
+        StringBuilder name = new StringBuilder();
+        for (int i = 1; i < words.length; i++) {
+            name.append(words[i]);
+            if (i != words.length - 1) {
+                name.append(" ");
+            }
+        }
+        Todo newTodo = new Todo(name.toString());
+        this.taskList.add(newTodo);
+        return responseWrapper("Got it. I've added this task:\n    " +
+                newTodo + "\n    " +
+                "Now you have " + taskList.size() + " tasks in the list.");
+    }
+
+    private String cmdDeadline(String[] words) {
+        StringBuilder name = new StringBuilder();
+        StringBuilder deadline = new StringBuilder();
+        Boolean deadlineWords = false;
+        for (int i = 1; i < words.length; i++) {
+            if (words[i].equals("/by")) {
+                name.deleteCharAt(name.length() - 1);
+                deadlineWords = true;
+                i++;
+            }
+            if (deadlineWords) {
+                deadline.append(words[i]);
+                deadline.append(" ");
+            } else {
+                name.append(words[i]);
+                name.append(" ");
+            }
+        }
+        deadline.deleteCharAt(deadline.length() - 1);
+        Deadline newTask = new Deadline(name.toString(), deadline.toString());
+        this.taskList.add(newTask);
+        return responseWrapper("Got it. I've added this task:\n    " +
+                newTask + "\n    " +
+                "Now you have " + taskList.size() + " tasks in the list.");
+    }
+
+    private String cmdEvent(String[] words) {
+        StringBuilder name = new StringBuilder();
+        StringBuilder deadline = new StringBuilder();
+        Boolean deadlineWords = false;
+        for (int i = 1; i < words.length; i++) {
+            if (words[i].equals("/at")) {
+                name.deleteCharAt(name.length() - 1);
+                deadlineWords = true;
+                i++;
+            }
+            if (deadlineWords) {
+                deadline.append(words[i]);
+                deadline.append(" ");
+            } else {
+                name.append(words[i]);
+                name.append(" ");
+            }
+        }
+        deadline.deleteCharAt(deadline.length() - 1);
+        Event newTask = new Event(name.toString(), deadline.toString());
+        this.taskList.add(newTask);
+        return responseWrapper("Got it. I've added this task:\n    " +
+                newTask + "\n    " +
+                "Now you have " + taskList.size() + " tasks in the list.");
     }
 
     private String cmdAdd(String item) {
