@@ -45,6 +45,12 @@ public class Alison {
                 + String.format("Now you have %d tasks in the list.", taskList.size()));
     }
 
+    public static void removeTaskMsg(Task task) {
+        printWithBorder("Noted. I've removed this task: \n "
+                + task + "\n"
+                + String.format("Now you have %d tasks in the list.", taskList.size()));
+    }
+
     public static void response(String input) {
         String[] words = input.split(" ");
         String command = words[0];
@@ -52,7 +58,11 @@ public class Alison {
             switch (command) {
                 case "bye" -> printWithBorder("Bye. Hope to see you again soon!");
                 case "list" -> showList();
-                case "todo", "deadline", "event" -> printWithBorder(" ☹ OOPS!!! The description of a " + command + " cannot be empty.");
+                case "done", "delete" -> printWithBorder(" ☹ OOPS!!! You must provided the index " +
+                        "of the task after "+ command + ".\n" +
+                        "(i.e. "+ command + " 3)");
+                case "todo", "deadline", "event" -> printWithBorder(" ☹ OOPS!!! The description of a "
+                        + command + " cannot be empty.");
                 default -> printWithBorder("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
@@ -61,10 +71,25 @@ public class Alison {
             String description = input.split(" ", 2)[1];
             switch (command) {
                 case "done" -> {
-                    int doneIndex = Integer.parseInt(description);
-                    Task task = taskList.get(doneIndex - 1);
-                    task.markAsDone();
-                    printWithBorder("Nice! I've marked this task as done: \n" + task);
+                    try {
+                        int doneIndex = Integer.parseInt(description);
+                        Task task = taskList.get(doneIndex - 1);
+                        task.markAsDone();
+                        printWithBorder("Nice! I've marked this task as done: \n" + task);
+                    } catch (Exception e) {
+                        String len = String.valueOf(taskList.size());
+                        printWithBorder("☹ OOPS!!! You entered an invalid index. " +
+                                "Your current task index ranges from 1 to " + len + ".");
+                    }
+                }
+                case "delete" -> {
+                    try {
+                        int deleteIdx = Integer.parseInt(description);
+                        Task deleteTask = taskList.remove(deleteIdx - 1);
+                        removeTaskMsg(deleteTask);
+                    } catch (Exception e) {
+                        printWithBorder("☹ OOPS!!! You entered an invalid index for deletion:-(");
+                    }
                 }
                 case "todo" -> {
                     ToDo todo = new ToDo(description);

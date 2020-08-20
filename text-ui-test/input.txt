@@ -1,10 +1,19 @@
-todo borrow book
-todo read book
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
-deadline do homework /by no idea :-p
+todo
+deadline
+delete
+done
+event
+hello
+todo finish ip
+deadline finish ip
+deadline finish ip /by tonight
+event 2101 op1 meeting
+event 2101 op1 meeting /at Tomorrow 2pm
 list
-done 2
-done 3
+done 1
+list
+delete 2
+delete 5
+done 5
 list
 bye

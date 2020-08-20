@@ -13,53 +13,79 @@ Hello! I'm Alison.
 What can I do for you?
 ________________________________________________________________
 ________________________________________________________________
+ ☹ OOPS!!! The description of a todo cannot be empty.
+________________________________________________________________
+________________________________________________________________
+ ☹ OOPS!!! The description of a deadline cannot be empty.
+________________________________________________________________
+________________________________________________________________
+ ☹ OOPS!!! You must provided the index of the task after delete.
+(i.e. delete 3)
+________________________________________________________________
+________________________________________________________________
+ ☹ OOPS!!! You must provided the index of the task after done.
+(i.e. done 3)
+________________________________________________________________
+________________________________________________________________
+ ☹ OOPS!!! The description of a event cannot be empty.
+________________________________________________________________
+________________________________________________________________
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+________________________________________________________________
+________________________________________________________________
 Got it. I've added this task:
- [T][✗] borrow book
+ [T][✗] finish ip
 Now you have 1 tasks in the list.
 ________________________________________________________________
 ________________________________________________________________
+ ☹ OOPS!!! You must provide a date after '/by' for a deadline.
+(i.e. deadline return book /by Sunday)
+________________________________________________________________
+________________________________________________________________
 Got it. I've added this task:
- [T][✗] read book
+ [D][✗] finish ip (by: tonight)
 Now you have 2 tasks in the list.
 ________________________________________________________________
 ________________________________________________________________
+ ☹ OOPS!!! You must provide a time interval after '/at' for an event.
+(i.e. event project meeting /at Mon 2-4pm)
+________________________________________________________________
+________________________________________________________________
 Got it. I've added this task:
- [D][✗] return book (by: Sunday)
+ [E][✗] 2101 op1 meeting (at: Tomorrow 2pm)
 Now you have 3 tasks in the list.
 ________________________________________________________________
 ________________________________________________________________
-Got it. I've added this task:
- [E][✗] project meeting (at: Mon 2-4pm)
-Now you have 4 tasks in the list.
-________________________________________________________________
-________________________________________________________________
-Got it. I've added this task:
- [D][✗] do homework (by: no idea :-p)
-Now you have 5 tasks in the list.
-________________________________________________________________
-________________________________________________________________
 Here are the tasks in your list:
-1.[T][✗] borrow book
-2.[T][✗] read book
-3.[D][✗] return book (by: Sunday)
-4.[E][✗] project meeting (at: Mon 2-4pm)
-5.[D][✗] do homework (by: no idea :-p)
+1.[T][✗] finish ip
+2.[D][✗] finish ip (by: tonight)
+3.[E][✗] 2101 op1 meeting (at: Tomorrow 2pm)
 ________________________________________________________________
 ________________________________________________________________
 Nice! I've marked this task as done:
-[T][✓] read book
-________________________________________________________________
-________________________________________________________________
-Nice! I've marked this task as done:
-[T][✓] return book (by: Sunday)
+[T][✓] finish ip
 ________________________________________________________________
 ________________________________________________________________
 Here are the tasks in your list:
-1.[T][✗] borrow book
-2.[T][✓] read book
-3.[D][✓] return book (by: Sunday)
-4.[E][✗] project meeting (at: Mon 2-4pm)
-5.[D][✗] do homework (by: no idea :-p)
+1.[T][✓] finish ip
+2.[D][✗] finish ip (by: tonight)
+3.[E][✗] 2101 op1 meeting (at: Tomorrow 2pm)
+________________________________________________________________
+________________________________________________________________
+Noted. I've removed this task:
+ [D][✗] finish ip (by: tonight)
+Now you have 2 tasks in the list.
+________________________________________________________________
+________________________________________________________________
+☹ OOPS!!! You entered an invalid index for deletion:-(
+________________________________________________________________
+________________________________________________________________
+☹ OOPS!!! You entered an invalid index. Your current task index ranges from 1 to 2.
+________________________________________________________________
+________________________________________________________________
+Here are the tasks in your list:
+1.[T][✓] finish ip
+2.[E][✗] 2101 op1 meeting (at: Tomorrow 2pm)
 ________________________________________________________________
 ________________________________________________________________
 Bye. Hope to see you again soon!
