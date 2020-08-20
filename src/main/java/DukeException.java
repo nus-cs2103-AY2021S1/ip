@@ -20,7 +20,13 @@ public class DukeException {
             if (problem.equals("empty")) {
                 msg += "☹ OOPS!!! Please indicate which one to mark.";
             } else if (problem.equals("illegal")) {
-                msg += "☹ OOPS!!! Please enter a valid number.";
+                msg += "☹ OOPS!!! You did not enter a valid number.";
+            }
+        } else if (type.equals("delete")) {
+            if (problem.equals("empty")) {
+                msg += "☹ OOPS!!! Please indicate which one to delete.";
+            } else if (problem.equals("illegal")) {
+                msg += "☹ OOPS!!! You did not enter a valid number.";
             }
         } else if (type.equals("todo") && problem.equals("empty")) {
             msg += "☹ OOPS!!! The description of a todo cannot be empty.";

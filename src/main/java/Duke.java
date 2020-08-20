@@ -1,5 +1,8 @@
 package main.java;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -16,8 +19,9 @@ public class Duke {
         String starting_line = separation_line + "\n" + indent;
         String ending_line = "\n" + separation_line + "\n";
 
-        Task[] task_arr = new Task[100];
-        int count = 0;
+        //Task[] task_arr = new Task[100];
+        List<Task> task_collections = new ArrayList<>();
+        //int count = 0;
 
         String greeting = starting_line + "Hello! This is J.A.R.V.I.S.\n" + indent + "How may I help you?" + ending_line;
         System.out.println(greeting);
@@ -34,8 +38,14 @@ public class Duke {
                 if (input.equals("list")) {
                     int temp = 1;
                     System.out.println(indent + "Here are the tasks in your list:");
-                    while (task_arr[temp - 1] != null) {
-                        System.out.println(indent + temp + "." + task_arr[temp - 1]);
+                    Iterator task_iter = task_collections.iterator();
+                    /*while (task_collections.get(temp - 1) != null) {
+                        System.out.println(indent + temp + "." + task_collections.get(temp - 1));
+                        temp++;
+                    }*/
+                    while (task_iter.hasNext()) {
+                        //System.out.println(indent + temp + "." + task_collections.get(temp - 1));
+                        System.out.println(indent + temp + "." + task_iter.next());
                         temp++;
                     }
                 } else {
@@ -52,7 +62,7 @@ public class Duke {
                         }
                         if (exception_absent) {
                             try {
-                                task_arr[done_number - 1].markAsDone();
+                                task_collections.get(done_number - 1).markAsDone();
                             } catch (Exception ex) {
                                 exception_absent = false;
                                 DukeException de = new DukeException("done", null, "illegal");
@@ -61,12 +71,37 @@ public class Duke {
                         }
                         if (exception_absent) {
                             System.out.println(indent + "Nice! I've marked this task as done:");
-                            System.out.println(indent + "  [\u2713] " + task_arr[done_number - 1].toString().split("] ", 2)[1]);
+                            System.out.println(indent + "  [\u2713] " + task_collections.get(done_number - 1).toString().split("] ", 2)[1]);
+                        }
+                    } else if (type.equals("delete")) {
+                        int delete_number = -1;
+                        String success_result = "";
+                        try {
+                            delete_number = Integer.parseInt(input_split_arr[1]);
+                        } catch (Exception ex) {
+                            exception_absent = false;
+                            DukeException de = new DukeException("delete", null, "empty");
+                            System.out.println(de);
+                        }
+                        if (exception_absent) {
+                            try {
+                                success_result = task_collections.get(delete_number - 1).toString();
+                                task_collections.remove(delete_number - 1);
+                            } catch (Exception ex) {
+                                exception_absent = false;
+                                DukeException de = new DukeException("delete", null, "illegal");
+                                System.out.println(de);
+                            }
+                        }
+                        if (exception_absent) {
+                            System.out.println(indent + "Noted. I've removed this task:");
+                            System.out.println(indent + success_result);
+                            System.out.println(indent + "Now you have " + task_collections.size() + " tasks in the list.");
                         }
                     } else if (type.equals("deadline") || type.equals("event") || type.equals("todo")){
                         if (type.equals("todo")) {
                             try {
-                                task_arr[count] = new Todo(input_split_arr[1]);
+                                task_collections.add(new Todo(input_split_arr[1]));
                             } catch (Exception ex) {
                                 exception_absent = false;
                                 DukeException de = new DukeException("todo", null, "empty");
@@ -81,7 +116,7 @@ public class Duke {
                                 System.out.println(de);
                             } if (exception_absent) {
                                 try {
-                                    task_arr[count] = new Deadline(input_split_arr[0], input_split_arr[1].split(" ", 2)[1]);
+                                    task_collections.add(new Deadline(input_split_arr[0], input_split_arr[1].split(" ", 2)[1]));
                                 } catch (Exception ex) {
                                     exception_absent = false;
                                     DukeException de = new DukeException("deadline", "date", "empty");
@@ -98,7 +133,7 @@ public class Duke {
                             }
                             if (exception_absent) {
                                 try {
-                                    task_arr[count] = new Event(input_split_arr[0], input_split_arr[1].split(" ", 2)[1]);
+                                    task_collections.add(new Event(input_split_arr[0], input_split_arr[1].split(" ", 2)[1]));
                                 } catch (Exception ex) {
                                     exception_absent = false;
                                     DukeException de = new DukeException("event", "date", "empty");
@@ -108,9 +143,9 @@ public class Duke {
                         }
                         if (exception_absent) {
                             System.out.println(indent + "Got it. I've added ths task:");
-                            System.out.println(indent + "  " + task_arr[count]);
-                            count++;
-                            System.out.println(indent + "Now you have " + count + " tasks in the list.");
+                            System.out.println(indent + "  " + task_collections.get(task_collections.size() - 1));
+                            //count++;
+                            System.out.println(indent + "Now you have " + task_collections.size() + " tasks in the list.");
                         }
                     } else {
                         DukeException de = new DukeException("input", null, "no_meaning");
