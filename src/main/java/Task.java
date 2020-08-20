@@ -13,8 +13,16 @@ public class Task {
         this.isDone = false;
     }
 
+
+    public Task(String description, boolean isDone){
+        this.description = description;
+        this.isDone = isDone;
+    }
+
+
     protected String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718");
     }
 
 
@@ -22,7 +30,7 @@ public class Task {
      * Changes the state of this task, isDone to true
      */
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
 
@@ -33,7 +41,8 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[T][" + this.getStatusIcon() + "] " + this.description;
+        return "[T][" + getStatusIcon() + "] " + description;
     }
+
 
 }

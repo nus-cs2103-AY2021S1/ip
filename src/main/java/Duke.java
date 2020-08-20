@@ -1,10 +1,19 @@
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-
+    private static List<Task> toDoList;
 
     public static void main(String[] args) {
+
+        try {
+            toDoList = DukeFileHandler.readFile();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
         String logo = "     ____        _        \n"
                 + "    |  _ \\ _   _| | _____ \n"
                 + "    | | | | | | | |/ / _ \\\n"
@@ -36,7 +45,6 @@ public class Duke {
     }
 
 
-    private static final ArrayList<Task> toDoList = new ArrayList<>();
     private static boolean startCommand(String input) throws DukeException {
 
         if (input.equals("")) {

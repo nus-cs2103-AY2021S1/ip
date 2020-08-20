@@ -13,6 +13,12 @@ public class Events extends Task {
     }
 
 
+    public Events(String description, boolean isDone, String on){
+        super(description, isDone);
+        this.on = on;
+    }
+
+
     /**
      * Overrides the toString method
      *
