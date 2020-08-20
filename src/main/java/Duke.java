@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class Mocha {
+public class Duke {
     public static void main(String[] args) {
         // Contains all tasks
         ArrayList<Task> listOfTasks= new ArrayList<>();
@@ -105,4 +105,3 @@ public class Mocha {
         }
     }
 }
-
