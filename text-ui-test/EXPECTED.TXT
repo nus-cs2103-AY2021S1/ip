@@ -57,6 +57,25 @@ These are the tasks you have:
 Insufficient arguments given.
 Are you missing a description or due by time?
 
+Will do! I've removed this task:
+[T][✓] return book
+Now you have 4 tasks in this list.
+
+These are the tasks you have: 
+1. [T][✘] read book
+2. [D][✘] cs2100 lab (by: mon 2359)
+3. [T][✓] buy bread
+4. [E][✘] project meeting (at: sun 4pm)
+
+Will do! I've removed this task:
+[T][✓] buy bread
+Now you have 3 tasks in this list.
+
+These are the tasks you have: 
+1. [T][✘] read book
+2. [D][✘] cs2100 lab (by: mon 2359)
+3. [E][✘] project meeting (at: sun 4pm)
+
 OOPS! I'm sorry, but I don't know what that means :c
 
 Bye! Remember to finish the rest of your work! See you soon~

@@ -61,6 +61,30 @@ public class PandaBot {
                         System.out.println("Invalid Format: " + cmd[1] + "\nWhat task number are you done with?\n");
                     } 
                     break;
+                case "delete":
+                    int taskToDel = -1;
+                    try {
+                        // verify the num of arguments first
+                        if (cmd.length == 2) {
+                            taskToDel = Integer.parseInt(cmd[1]) - 1;
+                            if (taskToDel < tasks.size()) {
+                                // store the task to delete
+                                String toDel = tasks.get(taskToDel).toString();
+                                tasks.remove(taskToDel);
+                                System.out.println("Will do! I've removed this task:");
+                                System.out.println(toDel);
+                                System.out.println("Now you have " + tasks.size() + " tasks in this list.\n");
+                            } else {
+                                System.out.println("Task number given is not in range. Please try again.\n");
+                                break;
+                            }
+                        } else {
+                            System.out.println("Insufficient arguments given. What task have you done?\n");
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid Format: " + cmd[1] + "\nWhat task number are you done with?\n");
+                    }
+                    break;
                 case "todo":
                     if (cmd.length == 2) {
                         try {

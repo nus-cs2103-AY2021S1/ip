@@ -11,5 +11,9 @@ done 2
 list
 event /at today
 deadline today
+delete 2
+list
+delete 3
+list
 bbye
 bye
