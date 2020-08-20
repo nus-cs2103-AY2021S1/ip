@@ -1,3 +1,5 @@
+import java.util.HashSet;
+
 enum Command {
     START,
     BYE,
@@ -7,9 +9,10 @@ enum Command {
 public class Message {
     private final String message;
     private Command cmd;
+    private HashSet<String> list;
 
     // public constructor
-    public Message(String message) {
+    public Message(String message, HashSet<String> list) {
         this.message = message;
         String[] words = message.split(" ");
         String cmdString = words[0];
@@ -24,6 +27,8 @@ public class Message {
         if (this.cmd == null) { // if not a recognised command
             this.cmd = Command.ADD;
         }
+
+        this.list = list;
     }
 
     public void reply() {

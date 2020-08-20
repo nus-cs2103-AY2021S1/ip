@@ -6,11 +6,11 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         HashSet<String> list = new HashSet<>();
 
-        Message start = new Message("start");
+        Message start = new Message("start", list);
         start.reply();
 
         while (sc.hasNext()) {
-            Message msg = new Message(sc.next());
+            Message msg = new Message(sc.next(), list);
             msg.reply();
             if (msg.getCmd() == Command.BYE) {
                 break;
