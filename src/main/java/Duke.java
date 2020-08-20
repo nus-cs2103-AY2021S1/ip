@@ -60,16 +60,33 @@ public class Duke {
 
                 Pattern p = Pattern.compile("\\d+");
                 Matcher m = p.matcher(task);
-                int id = Integer.parseInt(m.find() ? m.group() : null);
+                Integer id = m.find() ? Integer.parseInt(m.group()) : null;
 
                 try {
+                    if (tasks.isEmpty()) {
+                        throw new EmptyTasksException(task);
+                    }
+
+                    if (id == null) {
+                        throw new NullDoneIndexException(task);
+                    }
+
+                    if (id < 1 || id > tasks.size()) {
+                        throw new RangeDoneIndexException(task);
+                    }
+
                     int target = id - 1;
+
+                    if (tasks.get(target).isDone) {
+                        throw new AlreadyDoneIndexException(task);
+                    }
+
                     tasks.get(target).markAsDone();
                     done++;
                     System.out.println("Good job! This task is now marked done:");
                     System.out.println(tasks.get(target));
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
+                } catch (NullDoneIndexException | RangeDoneIndexException | AlreadyDoneIndexException | EmptyTasksException e) {
+                    System.out.println(e);
                 }
 
             } else {
@@ -78,19 +95,26 @@ public class Duke {
                     String[] inputs = task.split("/");
                     String[] taskDetails = inputs[0].split(" ", 2);
                     String taskType = taskDetails[0];
-                    String taskName = taskDetails[1];
-                    String taskDate = inputs.length == 1 ? null : inputs[1].split(" ", 2)[1];
+                    String taskName = taskDetails.length == 1 ? "" : taskDetails[1];
+                    String taskDate = inputs.length == 1 ? "" : inputs[1].split(" ", 2)[1];
 
                     switch (taskType) {
                         case "deadline":
+                            if (taskName.isBlank()) throw new NullTaskNameException("deadline");
+                            if (taskDate.isBlank()) throw new NullTaskDateException("deadline");
                             tasks.add(new Deadline(currId, taskName, taskDate));
                             break;
                         case "event":
+                            if (taskName.isBlank()) throw new NullTaskNameException("event");
+                            if (taskDate.isBlank()) throw new NullTaskDateException("event");
                             tasks.add(new Event(currId, taskName, taskDate));
                             break;
                         case "todo":
+                            if (taskName.isBlank()) throw new NullTaskNameException("todo");
                             tasks.add(new ToDo(currId, taskName));
                             break;
+                        default:
+                            throw new DukeException(taskType);
                     }
 
                     currId++;
@@ -98,10 +122,12 @@ public class Duke {
 
                     System.out.println("'" + taskName + "' added to list!");
                     System.out.println(tasks.get(size - 1));
-                    System.out.println("You now have " + size + " task(s) in your list.\n");
+                    System.out.println("\nYou now have " + size + " task(s) in your list.\n");
                     System.out.println("(Use 'list' command to see your updated list.)");
+                } catch (DukeException e) {
+                    System.out.println(e);
                 } catch (Exception e) {
-                    System.out.println("Sorry, we don't know what you mean...");
+                    System.out.println("I can't parse your order properly!");
                 }
             }
 
