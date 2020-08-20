@@ -58,7 +58,7 @@ public class AddCommand extends Command {
                 if (words.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
-                listArray.add(new ToDo(stringWithoutKeyword));
+                Duke.listArray.add(new ToDo(stringWithoutKeyword));
                 break;
             case "deadline":
                 if (words.length == 1 || (words[1].equals("/by") && words.length == 2)) {
@@ -67,7 +67,7 @@ public class AddCommand extends Command {
 
                 date = getDate(stringWithoutKeyword, Deadline.delimiterBy);
                 stringWithoutDelimiter = getWithoutDelimiter(stringWithoutKeyword, Deadline.delimiterBy);
-                listArray.add(new Deadline(stringWithoutDelimiter, date));
+                Duke.listArray.add(new Deadline(stringWithoutDelimiter, date));
                 break;
             case "event":
                 if (words.length == 1 || (words[1].equals("/at") && words.length == 2)) {
@@ -75,16 +75,16 @@ public class AddCommand extends Command {
                 }
                 date = getDate(stringWithoutKeyword, Event.delimiterAt);
                 stringWithoutDelimiter = getWithoutDelimiter(stringWithoutKeyword, Event.delimiterAt);
-                listArray.add(new Event(stringWithoutDelimiter, date));
+                Duke.listArray.add(new Event(stringWithoutDelimiter, date));
                 break;
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         // return the last added, which is the latest
-        return Message.ADDED + listArray.get((listArray.size()) - 1) + "\n" +
-                "Now you have " + listArray.size() +
-                (listArray.size() == 1 ? " task " : " tasks ")
+        return Message.ADDED + Duke.listArray.get((Duke.listArray.size()) - 1) + "\n" +
+                "Now you have " + Duke.listArray.size() +
+                (Duke.listArray.size() == 1 ? " task " : " tasks ")
                 + "in the list";
     }
 }

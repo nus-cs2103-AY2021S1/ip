@@ -9,8 +9,6 @@ public abstract class Command {
 
     public abstract String execute() throws DukeException;
 
-    public static ArrayList<Task> listArray = new ArrayList<>();
-
     public static String parse(String str) throws DukeException {
         if (str.equals("bye")) {
             return new ExitCommand().execute();
