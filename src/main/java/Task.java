@@ -29,7 +29,7 @@ public class Task {
             isDoneSymbol= "\u2718";
         }
 
-        return "[" + isDoneSymbol + "] " + name;
+        return name;
 
     }
 }
