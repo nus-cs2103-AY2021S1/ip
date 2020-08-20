@@ -2,7 +2,7 @@ public enum Exceptions {
     NUMBEREXCESSEXCEPTION {
         @Override
         public String toString() {
-            return "    OOPS!!! It seems like you don't have this option \n" +
+            return "    OOPS!!! It seems like you don't have this option\n" +
                     "    Enter list to see options";
         }
     },

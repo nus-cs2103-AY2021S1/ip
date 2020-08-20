@@ -2,7 +2,7 @@ public enum Status {
     GREET {
         @Override
         public String toString() {
-            return "    Wonderful! It is nice to see you! \n" +
+            return "    Wonderful! It is nice to see you!\n" +
                     "    Is there anything I can help?";
         }
     },
@@ -10,7 +10,7 @@ public enum Status {
     BYE {
         @Override
         public String toString() {
-            return "    It is nice to talk to you. \n" +
+            return "    It is nice to talk to you.\n" +
                     "    Hope to see you again!";
         }
     },
@@ -25,7 +25,7 @@ public enum Status {
     DONE {
         @Override
         public String toString() {
-            return "    Nice! I've marked this task as done: \n" +
+            return "    Nice! I've marked this task as done:\n" +
                     "      ";
         }
     },
@@ -33,7 +33,7 @@ public enum Status {
     DELETE {
         @Override
         public String toString() {
-            return "    Noted. I've removed this task: \n" +
+            return "    Noted. I've removed this task:\n" +
                     "      ";
         }
     },
@@ -64,7 +64,7 @@ public enum Status {
     TASKADDED {
         @Override
         public String toString() {
-            return "    Got it. I've added this task \n" +
+            return "    Got it. I've added this task\n" +
                     "      ";
         }
     },

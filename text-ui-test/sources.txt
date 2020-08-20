@@ -1,7 +1,9 @@
 C:\Users\zhang\OneDrive\文档\ip\src\Deadline.java
 C:\Users\zhang\OneDrive\文档\ip\src\Duke.java
+C:\Users\zhang\OneDrive\文档\ip\src\DukeException.java
 C:\Users\zhang\OneDrive\文档\ip\src\Echo.java
 C:\Users\zhang\OneDrive\文档\ip\src\Event.java
+C:\Users\zhang\OneDrive\文档\ip\src\Exceptions.java
 C:\Users\zhang\OneDrive\文档\ip\src\Exit.java
 C:\Users\zhang\OneDrive\文档\ip\src\Formating.java
 C:\Users\zhang\OneDrive\文档\ip\src\Greet.java
