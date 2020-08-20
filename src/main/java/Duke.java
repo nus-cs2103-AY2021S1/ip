@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -7,8 +8,7 @@ public class Duke {
         System.out.println("\tHello! I'm Duke\n" + "\t" + "What can I do for you?");
         System.out.println(horizontalLine);
         Scanner scanner = new Scanner(System.in);
-        String[] list = new String[100];
-        int index = 0;
+        ArrayList<Task> list = new ArrayList<>();
         while (scanner.hasNext()) {
             System.out.println(horizontalLine);
             String userInput = scanner.nextLine();
@@ -19,15 +19,48 @@ public class Duke {
                 break;
             }
             if (userInput.equalsIgnoreCase("list")) {
-                for (int i = 0; i < index; i++) {
-                    System.out.println("\t" + list[i]);
+                int index = 1;
+                for (Task task : list) {
+                    System.out.println("\t" + index++ + ". " + task.toString());
                 }
-                System.out.println(horizontalLine);
             } else {
-                list[index] = String.format("%d. %s", ++index, userInput);
-                System.out.println("\tadded: " + userInput);
-                System.out.println(horizontalLine);
+                Scanner scanner2 = new Scanner(userInput);
+                if (scanner2.next().equalsIgnoreCase("done")) {
+                    int index = scanner2.nextInt();
+                    Task task = list.get(index - 1);
+                    task.markAsDone();
+                    System.out.println("\tNice! I've marked this as done:");
+                    System.out.println("\t  " + task.toString());
+                } else{
+                    list.add(new Task(userInput));
+                    System.out.println("\tadded: " + userInput);
+                }
             }
+            System.out.println(horizontalLine);
         }
+    }
+
+}
+
+class Task {
+    protected String description;
+    protected boolean isDone;
+
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+    }
+
+    public void markAsDone() {
+        this.isDone = true;
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718");
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[%s] %s", this.getStatusIcon(), this.description);
     }
 }
