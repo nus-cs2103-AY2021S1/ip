@@ -22,8 +22,8 @@ public class Duke {
         while(!input.equals("bye")) {
             String[] strings = input.split(" ");
             try {
-                switch (strings[0]) {
-                    case "list":
+                switch (convertToEnum(strings[0])) {
+                    case LIST:
                         if (tasks.isEmpty()) {
                             System.out.println("Theres currently nothing in your list.");
                         } else {
@@ -32,7 +32,7 @@ public class Duke {
                             }
                         }
                         break;
-                    case "done":
+                    case DONE:
                         try {
                             int itemNumber = Integer.parseInt(input.split(" ")[1]);
                             tasks.get(itemNumber - 1).isDone = true;
@@ -42,7 +42,7 @@ public class Duke {
                             throw new DukeException("Please key in a valid number for \"done\"");
                         }
                         break;
-                    case "delete":
+                    case DELETE:
                         try {
                             int itemNumber = Integer.parseInt(input.split(" ")[1]);
                             System.out.println("Noted. I've removed this task:");
@@ -53,7 +53,7 @@ public class Duke {
                             throw new DukeException("Please key in a valid number for \"delete\"");
                         }
                         break;
-                    case "todo":
+                    case TODO:
                         String task = String.join(" ", Arrays.copyOfRange(strings, 1, strings.length));
                         if (task.isEmpty()) {
                             throw new DukeException("The description of a todo cannot be empty.");
@@ -63,7 +63,7 @@ public class Duke {
                         System.out.println("Got it. I've added this task:\n\t" + todoTask);
                         System.out.println("You now have " + tasks.size() + " tasks in the list.");
                         break;
-                    case "deadline":
+                    case DEADLINE:
                         try {
                             task = String.join(" ", Arrays.copyOfRange(strings, 1, strings.length));
                             String description = task.split(" /by ")[0];
@@ -76,7 +76,7 @@ public class Duke {
                             throw new DukeException("Please key in a valid deadline command!");
                         }
                         break;
-                    case "event":
+                    case EVENT:
                         try {
                             task = String.join(" ", Arrays.copyOfRange(strings, 1, strings.length));
                             String description = task.split(" /at ")[0];
@@ -94,10 +94,31 @@ public class Duke {
                 }
             } catch (DukeException ex) {
                 System.err.println(ex.getMessage());
-            } finally {
-                input = scanner.nextLine();
             }
+            input = scanner.nextLine();
+            
         }
         System.out.println("Bye, hope to chat again soon!");
+    }
+    
+    private static Command convertToEnum(String string) throws DukeException{
+        switch (string) {
+            case "bye":
+                return Command.BYE;
+            case "list":
+                return Command.LIST;
+            case "done":
+                return Command.DONE;
+            case "delete":
+                return Command.DELETE;
+            case "todo":
+                return Command.TODO;
+            case "deadline":
+                return Command.DEADLINE;
+            case "event":
+                return Command.EVENT;
+            default:
+                throw new DukeException("Please key in a correct command.");
+        }
     }
 }
