@@ -1,0 +1,55 @@
+Hi! I'm
+ ____   ____
+|  _ \ |  _ \
+| | | || | | |
+| |_| || |_| |
+|____/ |____/
+How can I help you? :)
+_________________________________________
+Sorry what?
+_________________________________________
+Ok, To-do added:
+  [T][?] read book
+You now have 1 task(s) in your list!
+_________________________________________
+Ok, Deadline added:
+  [D][?] return book (by: June 6th)
+You now have 2 task(s) in your list!
+_________________________________________
+Event date not detected, try again!
+_________________________________________
+Ok, Event added:
+  [E][?] project meeting (at: Aug 6th)
+You now have 3 task(s) in your list!
+_________________________________________
+Ok, To-do added:
+  [T][?] join sports club
+You now have 4 task(s) in your list!
+_________________________________________
+Here is your current list of task(s)!
+1. [T][?] read book
+2. [D][?] return book (by: June 6th)
+3. [E][?] project meeting (at: Aug 6th)
+4. [T][?] join sports club
+_________________________________________
+Wow!! Good job!!
+  [T][?] read book
+_________________________________________
+Alright! I've deleted the task:
+  [T][?] read book
+You now have 3 task(s) in your list!
+_________________________________________
+Wow!! Good job!!
+  [E][?] project meeting (at: Aug 6th)
+_________________________________________
+Here is your current list of task(s)!
+1. [D][?] return book (by: June 6th)
+2. [E][?] project meeting (at: Aug 6th)
+3. [T][?] join sports club
+_________________________________________
+hmm.. I don't think thats a valid task, try again?
+_________________________________________
+hmm.. I don't think thats a valid task, try again?
+_________________________________________
+You're leaving? Bye :( Come back soon!
+_________________________________________
