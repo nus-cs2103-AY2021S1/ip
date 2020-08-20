@@ -1,7 +1,72 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Welcome! I am your personal manager, Butler.
+How may I help you today, Master?
 
+
+Here are your list of tasks, Master.
+You have 0 tasks in total.
+
+
+
+I have added your ToDo task as follows:
+Added: [T][N] sth
+
+
+I have added your Deadline task as follows:
+Added: [D][N] do this (by: this date)
+
+
+I have added your Event task as follows:
+Added: [E][N] conduct event (at: this location)
+
+
+Here are your list of tasks, Master.
+You have 3 tasks in total.
+
+1: [T][N] sth
+2: [D][N] do this (by: this date)
+3: [E][N] conduct event (at: this location)
+
+
+Please give a valid index. "0" is not a valid index.
+Task 3 has been marked as complete.
+
+
+Here are your list of tasks, Master.
+You have 3 tasks in total.
+
+1: [T][N] sth
+2: [D][N] do this (by: this date)
+3: [E][Y] conduct event (at: this location)
+
+
+Task 1 has been marked as complete.
+Task 2 has been marked as complete.
+Task 3 has been marked as complete.
+Please give a valid index. "4" is not a valid index.
+
+
+Here are your list of tasks, Master.
+You have 3 tasks in total.
+
+1: [T][Y] sth
+2: [D][Y] do this (by: this date)
+3: [E][Y] conduct event (at: this location)
+
+
+Invalid command given.
+
+
+Invalid command given.
+
+
+Invalid command given.
+
+
+Invalid command given.
+
+
+Invalid command given.
+
+
+It is my honor to have served you.
+Please come back again.
