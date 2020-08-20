@@ -28,10 +28,12 @@ public class Responder {
                 } else if (firstWord.equals("event")) {
                     sb.append(new EventCommand(input).execute());
                 } else {
-                    throw new DukeException();
+                    throw new DukeException("oops! im sorry, but i do not know what that means :-(");
                 }
+            } catch (EmptyDescriptionException e) {
+                sb.append(e.getMessage());
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                sb.append(e.getMessage());
             }
             sb.append("\n--------------------------------------------------------------");
             System.out.println(sb.toString());

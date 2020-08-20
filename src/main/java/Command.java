@@ -17,14 +17,18 @@ public abstract class Command implements Execute {
     }
 
     public static String returnList() {
-        Iterator i = tasks.iterator();
-        StringBuilder sb = new StringBuilder();
-        int counter = 1;
-        sb.append(counter + ". ").append(i.next());
-        while (i.hasNext()) {
-            counter++;
-            sb.append("\n").append(counter + ". ").append(i.next());
+        if (Command.tasks.size() == 0) {
+            return "there are no tasks in the list";
+        } else {
+            Iterator i = tasks.iterator();
+            StringBuilder sb = new StringBuilder();
+            int counter = 1;
+            sb.append(counter + ". ").append(i.next());
+            while (i.hasNext()) {
+                counter++;
+                sb.append("\n").append(counter + ". ").append(i.next());
+            }
+            return sb.toString();
         }
-        return sb.toString();
     }
 }

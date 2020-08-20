@@ -1,3 +1,3 @@
 public interface Execute {
-    public String execute();
+    public String execute() throws EmptyDescriptionException;
 }
