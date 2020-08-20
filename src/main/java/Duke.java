@@ -1,9 +1,9 @@
-import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
+    public enum Verb {
+    }
     public static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void greeting() {
@@ -116,7 +116,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        try {
             Scanner sc = new Scanner(System.in);
             int numTask = 0;
 
@@ -127,26 +126,26 @@ public class Duke {
             while(true) {
                 input = sc.nextLine(); // original input line
                 inputArr = input.split(" "); // split input into string array
-
-                if (inputArr[0].equals("bye")) {
-                    System.out.println("Bye. Hope to see you again soon!");
-                    sc.close();
-                    break;
-                } else if (inputArr[0].equals("list")) {
-                    printAllTask();
-                } else if (inputArr[0].equals("done")) {
-                    int counter =  Integer.parseInt(inputArr[1]);
-                    tasks.get(counter - 1).markAsDone();
-                } else if (inputArr[0].equals("delete")) {
-                    int counter =  Integer.parseInt(inputArr[1]);
-                    deleteTask(counter - 1);
-                } else {
-                    addNewTask(input.split(" "), numTask);
-                    numTask++;
+                try{
+                    if (inputArr[0].equals("bye")) {
+                        System.out.println("Bye. Hope to see you again soon!");
+                        sc.close();
+                        break;
+                    } else if (inputArr[0].equals("list")) {
+                        printAllTask();
+                    } else if (inputArr[0].equals("done")) {
+                        int counter =  Integer.parseInt(inputArr[1]);
+                        tasks.get(counter - 1).markAsDone();
+                    } else if (inputArr[0].equals("delete")) {
+                        int counter =  Integer.parseInt(inputArr[1]);
+                        deleteTask(counter - 1);
+                    } else {
+                        addNewTask(input.split(" "), numTask);
+                        numTask++;
+                    }
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
                 }
             }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-        }
     }
 }
