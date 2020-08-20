@@ -4,21 +4,22 @@ public class Storage {
 
     private ArrayList<Task> storage = new ArrayList<>();
 
-    public void addTodo(String name) {
-        storage.add(new Task("[T]", name, ""));
+    public void addTask(Task task) {
+        storage.add(task);
+        Text.normalPrint("Got it. I've added this task:\n  " +
+                task.toString() + "\n" +
+                "Now you have " + size() + " tasks in the list.");
     }
 
-//    public void addDeadline(String name, String date) {
-//        storage.add(new Task(type, name, date));
-//    }
+    public int size() {
+        return storage.size();
+    }
 
     public void printOut() {
-        String temp = "";
+        String temp = "Here are the tasks in your list:";
         int counter = 1;
         for (Task item: storage) {
-            if (counter != 1) {
-                temp += "\n";
-            }
+            temp += "\n";
             temp += counter + ". " + item.toString();
             counter++;
         }
@@ -28,9 +29,13 @@ public class Storage {
     public void markDone(int position) {
         try {
 
-            storage.get(position - 1).markDone();
-            Text.normalPrint("beri gude, finish that thing liao\n" +
-                    storage.get(position - 1).toString());
+            if (storage.get(position - 1).markDone()) {
+                Text.normalPrint("beri gude, finish that thing liao\n  " +
+                        storage.get(position - 1).toString());
+            } else {
+                Text.normalPrint("Task alr finish liao\n  " +
+                        storage.get(position - 1).toString());
+            }
 
         } catch (IndexOutOfBoundsException e) {
             Text.printTaskNotFoundError();
