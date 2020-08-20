@@ -1,0 +1,7 @@
+todo read book
+done 1
+deadline return book /by Apr 10th
+event team meeting /at Tomorrow 1-2pm
+todo study
+done 3
+done 2

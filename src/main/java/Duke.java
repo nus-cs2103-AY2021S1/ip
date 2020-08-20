@@ -17,20 +17,26 @@ public class Duke {
     private void initialise() {
         Scanner sc = new Scanner(System.in);
         greet();
-        while (sc.hasNextLine()) {
-            String input = sc.nextLine();
-            if (input.equals("bye")) {
-                break;
-            } else if (input.equals("list")) {
-                list();
-            } else if (input.startsWith("done ")) {
-                int indexOfDoneTask = Integer.parseInt(input.substring(5));
-                markAsDone(indexOfDoneTask);
-            } else {
-                add(input);
+        try {
+            while (sc.hasNextLine()) {
+                String input = sc.nextLine();
+                if (input.equals("bye")) {
+                    break;
+                } else if (input.equals("list")) {
+                    list();
+                } else if (input.startsWith("done ")) {
+                    int indexOfDoneTask = Integer.parseInt(input.substring(5));
+                    markAsDone(indexOfDoneTask);
+                } else if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")) {
+                    add(input);
+                } else {
+
+                }
             }
+            exit();
+        } catch (Exception e) {
+            System.out.println(e);
         }
-        exit();
     }
 
     private void greet() {
