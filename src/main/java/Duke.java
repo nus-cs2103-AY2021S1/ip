@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
 
+    public static final String delete_task_number_missing = "Please enter a valid task number";
     private static final String dash = ("\u2500").repeat(5);
     private static final String greeting = "Hello! I'm Duke \n" +
             "What can I do for you?";
@@ -12,9 +13,11 @@ public class Duke {
     private static final String task_completed = "Nice! I've marked this task as complete. \n";
     private static final String farewell = "Bye. Hope to see you again soon.";
     private static final String task_index_out_of_bounds = "That task does not exist.";
-    private static final String task_number_format = "Invalid. Please try with the following format: done [task number in numerals]";
+    private static final String task_number_format = "Please enter the task number in numerals.";
     public static final String task_no_description = "Invalid, no task description provided.";
     public static final String task_invalid_type = "Invalid, not an accepted task type";
+    public static final String task_list_number = "\nNow you have %d tasks in the list";
+    public static final String task_removed = "Noted. I've removed this task";
     private boolean running = true;
     private List<Task> taskList = new ArrayList<>(100);
 
@@ -49,11 +52,32 @@ public class Duke {
             } else if (input.equals("list")) {
                 System.out.println(
                         constructMessage(task_read + printAsString(taskList)));
+            } else if (breakdown[0].equals("delete")) {
+                deleteTask(breakdown);
             } else if (breakdown[0].equals("done")) {
                 markTaskAsDone(breakdown);
             } else {
                 addTask(breakdown);
             }
+        }
+    }
+
+    private void deleteTask(String[] breakdown) {
+        try {
+            int taskNumber = Integer.parseInt(breakdown[1]);
+            Task deletedTask = taskList.get(taskNumber - 1);
+            taskList.remove(taskNumber - 1);
+            String count_text = String.format(task_list_number, taskList.size());
+            System.out.println(constructMessage(
+                    task_removed + deletedTask + count_text
+
+            ));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(constructMessage(delete_task_number_missing));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(constructMessage(task_index_out_of_bounds));
+        } catch (NumberFormatException e) {
+            System.out.println(constructMessage(task_number_format));
         }
     }
 
@@ -83,7 +107,7 @@ public class Duke {
                     break;
             }
             taskList.add(newTask);
-            String count_text = String.format("\nNow you have %d tasks in the list", taskList.size());
+            String count_text = String.format(task_list_number, taskList.size());
             System.out.println(constructMessage(
                     task_added + newTask.toString() + count_text
             ));
