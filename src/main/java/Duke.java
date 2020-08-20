@@ -1,10 +1,12 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
 
     static String line = "_________________________________________________________________";
-    static Task[] list = new Task[100];
-    static int index = 0;
+    static List<Task> list = new ArrayList<>();
+    //static int index = 0;
 
     public static void greeting() {
         String str = ("\t" + line + "\n"
@@ -21,18 +23,21 @@ public class Duke {
     }
 
     public static void addTask(Task task) {
-        list[index] = task;
-        index++;
+        //list[index] = task;
+        //index++;
+        list.add(task);
         System.out.println("\t" + line + "\n\tGot it. I've added this task:\n"
                 + "\t  " + task + "\n"
-                + "\tNow you have " + index + " tasks in the list.\n"
+                + "\tNow you have " + list.size() + " tasks in the list.\n"
                 + "\t" + line);
     }
 
     public static void showList(){
         System.out.println("\t" + line + "\n\tHere are the tasks in your list:");
-        for (int i = 0; i < index; i++){
-            System.out.println("\t" + (i+1) + ". " + list[i]);
+        int index = 1;
+        for (Task t : list){
+            System.out.println("\t" + index + ". " + t);
+            index++;
         }
         System.out.println("\t" + line);
     }
@@ -46,14 +51,18 @@ public class Duke {
     }
 
     public static void markDone(int num) {
-        if (list[num-1] == null) {
-            System.out.println("Error :("); // error catch
-        } else {
-            list[num - 1].markDone();
+            list.get(num-1).markDone();
             System.out.println("\t" + line + "\n\tNice! I've marked this task as done:\n\t  "
-                    + list[num - 1]
+                    + list.get(num-1)
                     + "\n\t" + line);
-        }
+    }
+
+    public static void delete(int num) {
+        System.out.println("\t" + line + "\n\tNoted. I've removed this task:\n\t  "
+                + list.get(num-1)
+                + "\n\tNow you have " + (list.size() - 1) + " tasks in the list."
+                + "\n\t" + line);
+        list.remove(num-1);
     }
 
 
@@ -75,6 +84,13 @@ public class Duke {
                     try {
                         int taskNum = getTaskNum(input);
                         markDone(taskNum);
+                    } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                        System.err.println("☹ OOPS!!! The task number is invalid.");
+                    }
+                } else if (firstWord(input).equals("delete")) {
+                    try {
+                        int taskNum = getTaskNum(input);
+                        delete(taskNum);
                     } catch (IndexOutOfBoundsException | NumberFormatException e) {
                         System.err.println("☹ OOPS!!! The task number is invalid.");
                     }
