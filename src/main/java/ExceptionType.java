@@ -2,7 +2,8 @@ public enum ExceptionType {
     NO_ARGUMENTS_SUPPLIED("No arguments supplied for %s"),
     INVALID_ARGUMENT("Invalid value of %s with '%s'"),
     INVALID_NUMBER("'%s' is not a valid number"),
-    INVALID_COMMAND("Invalid command '%s'");
+    INVALID_COMMAND("Invalid command '%s'"),
+    IO_EXCEPTION("How do I not have permission for %s");
 
     //Store the error message
     private final String errorMessage;
