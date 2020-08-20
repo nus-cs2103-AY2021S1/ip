@@ -6,7 +6,8 @@ public class Text {
             "What can this magnificent bot do for you?";
     private static String endMessage = "    Oi don run away from ur tasks hor    ";
     private static String taskNotFound = "Error: No task found :(";
-    private static String commandNotFound = "Error: Command does not exist :(";
+    private static String commandNotFound = "Error: Command does not exist :(\n Type '!command]' for list of commands";
+    private static String descriptionNotFound = "Error: description of task cannot be empty";
 
     public static void normalPrint(String middle) {
         System.out.println(top + "\n" + middle + "\n" + bottom+ "\n");
@@ -26,5 +27,9 @@ public class Text {
 
     public static void printCommandNotFoundError() {
         normalPrint(commandNotFound);
+    }
+
+    public static void printDescriptionNotFoundError() {
+        normalPrint(descriptionNotFound);
     }
 }

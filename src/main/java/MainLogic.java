@@ -57,20 +57,28 @@ public class MainLogic {
     }
 
     private void deadlineLogic() {
-        String[] details = current[1].split("/by", 2);
-        if (details.length == 1) {
-            storage.addTask(new DeadLineTask(details[0], "non specified date/time"));
+        if (current.length == 1) {
+            Text.printDescriptionNotFoundError();
         } else {
-            storage.addTask(new DeadLineTask(details[0], details[1]));
+            String[] details = current[1].split("/by", 2);
+            if (details.length == 1) {
+                storage.addTask(new DeadLineTask(details[0], "non specified date/time"));
+            } else {
+                storage.addTask(new DeadLineTask(details[0], details[1]));
+            }
         }
     }
 
     private void eventLogic() {
-        String[] details = current[1].split("/at", 2);
-        if (details.length == 1) {
-            storage.addTask(new EventTask(details[0], "non specified date/time"));
+        if (current.length == 1) {
+            Text.printDescriptionNotFoundError();
         } else {
-            storage.addTask(new EventTask(details[0], details[1]));
+            String[] details = current[1].split("/at", 2);
+            if (details.length == 1) {
+                storage.addTask(new EventTask(details[0], "non specified date/time"));
+            } else {
+                storage.addTask(new EventTask(details[0], details[1]));
+            }
         }
     }
 }
