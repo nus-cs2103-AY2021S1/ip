@@ -10,6 +10,12 @@
       So, tell me, what do you want, sweetie?
      _____________________________________________________
      _____________________________________________________
+      Sorry I don't specialise in gibberish.
+     _____________________________________________________
+     _____________________________________________________
+      The description of deadline cannot be empty.
+     _____________________________________________________
+     _____________________________________________________
       Wow, another task. Added. You sure you can finish them all?
       [T] [✘] borrow book
       Now you have a grand total of 1 tasks!
@@ -25,12 +31,15 @@
       Now you have a grand total of 3 tasks!
      _____________________________________________________
      _____________________________________________________
+      Wah finally. Wondering how long more I need to wait...
+      [E] [✓] project meeting  (at: Mon 2-4pm)
+     _____________________________________________________
+     _____________________________________________________
       Checking the whole list doesn't make you finish anything faster...
       1. [T] [✘] borrow book
       2. [D] [✘] return book  (by: Sunday)
-      3. [E] [✘] project meeting  (at: Mon 2-4pm)
+      3. [E] [✓] project meeting  (at: Mon 2-4pm)
      _____________________________________________________
      _____________________________________________________
       That's all? Sure. See you again (hopefully LOL).
      _____________________________________________________
-
