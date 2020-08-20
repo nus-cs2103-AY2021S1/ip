@@ -10,7 +10,7 @@ public class Duke {
             + "     | |_| | |_| |   <  __/\n"
             + "     |____/ \\__,_|_|\\_\\___|\n";
 
-//    static ArrayList<Task> listOfTasks = new ArrayList<>();
+    static ArrayList<Task> listOfTasks = new ArrayList<>();
 
     public static void greet(){
         System.out.println("Hello from\n" + logo);
@@ -40,9 +40,15 @@ public class Duke {
                 exit();
                 input.close();
                 break;
-            }else{
-                echo(command);
+            }else if(command.equals("list")){
+                for(Task task: listOfTasks){
+                    task.showName();
+                }
                 continue;
+            }else{
+                Task newTask = new Task(command);
+                listOfTasks.add(newTask);
+                System.out.println("added: " + command);
             }
         }
 

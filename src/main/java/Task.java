@@ -13,6 +13,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public void showName(){
+        System.out.println(this.name);
+    }
+
 
     @Override
     public String toString(){
