@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Greet();
-
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
@@ -14,7 +13,6 @@ public class Duke {
        Bye();
 
     }
-
     public static void Greet() {
         System.out.println("Hello, I'm Duke");
         System.out.println("What can I do for you?");
