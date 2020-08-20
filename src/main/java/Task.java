@@ -1,9 +1,16 @@
 public class Task {
     private String title;
     private boolean isDone;
+    private String type;
 
     public Task(String title) {
         this.title = title;
+        this.isDone = false;
+    }
+
+    public Task(String title, String type) {
+        this.title = title;
+        this.type = type;
         this.isDone = false;
     }
 
@@ -17,5 +24,10 @@ public class Task {
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[%s][%s] %s", type, this.getStatusIcon(), title);
     }
 }

@@ -11,10 +11,17 @@ public class Duke {
     private static final String EXIT_INPUT = "bye";
     private static final String EXIT_RESPONSE = "Bye. Hope to see you again soon!";
 
-    private static final String DONE_OUTPUT = "Nice! I've marked this task as done:";
-    private static final String LIST_OUTPUT = "Here are the tasks in your list:";
-    private static final String LIST_COMMAND = "list";
     private static final String DONE_COMMAND = "done";
+    private static final String DONE_OUTPUT = "Nice! I've marked this task as done:";
+    private static final String LIST_COMMAND = "list";
+    private static final String LIST_OUTPUT = "Here are the tasks in your list:";
+
+    private static final String TODO_COMMAND = "todo";
+    private static final String DEADLINE_COMMAND = "deadline";
+    private static final String EVENT_COMMAND = "event";
+
+    private static final String ADD_TASK_OUTPUT = "Got it. I've added this task:";
+
     private static final List<Task> TASK_LIST = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -43,7 +50,26 @@ public class Duke {
                 } catch (Exception e) {
 
                 }
-            } else {
+            } else if (response.split("\\s+")[0].equals(TODO_COMMAND)) {
+                Task task = new ToDoTask(response.split("\\s+", 2)[1]);
+                addToList(task);
+                outputTask(task);
+            } else if (response.split("\\s+")[0].equals(DEADLINE_COMMAND)) {
+                String title = response.split("\\s+", 2)[1];
+                String[] titleComponents = title.split("/", 2);
+                title = String.format("%s (%s)", titleComponents[0], titleComponents[1]);
+                Task task = new DeadlineTask(title);
+                addToList(task);
+                outputTask(task);
+            } else if (response.split("\\s+")[0].equals(EVENT_COMMAND)) {
+                String title = response.split("\\s+", 2)[1];
+                String[] titleComponents = title.split("/", 2);
+                title = String.format("%s (%s)", titleComponents[0], titleComponents[1]);
+                Task task = new EventTask(title);
+                addToList(task);
+                outputTask(task);
+            }
+            else {
                 addToList(response);
                 printResponse("added: " + response);
             }
@@ -63,8 +89,20 @@ public class Duke {
         System.out.println(LINE);
     }
 
+    private static void outputTask(Task task) {
+        System.out.println(LINE);
+        System.out.println(IDENT + ADD_TASK_OUTPUT);
+        System.out.printf("%s%s%s\n",IDENT, IDENT, task);
+        System.out.printf("%sNow you have %d tasks in the list.%n", IDENT, TASK_LIST.size());
+        System.out.println(LINE);
+    }
+
     private static void addToList(String response) {
         TASK_LIST.add(new Task(response));
+    }
+
+    private static void addToList(Task task) {
+        TASK_LIST.add(task);
     }
 
     private static void printList() {
@@ -73,7 +111,7 @@ public class Duke {
         int num = 0;
         for (Task output : TASK_LIST) {
             num++;
-            System.out.printf("%s%d.[%s] %s\n", IDENT, num, output.getStatusIcon(), output.getTitle());
+            System.out.printf("%s%d.%s\n", IDENT, num, output);
         }
         System.out.println(LINE);
     }
