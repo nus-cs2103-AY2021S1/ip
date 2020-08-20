@@ -4,6 +4,98 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Duke {
+
+    public static void emptyStringChecker(String taskString, boolean isTaskName) throws DukeException{
+        if (taskString.equals("")) {
+            if (isTaskName) {
+                throw new DukeException("☹ OOPS!!! The description of a task cannot be empty. ");
+            } else {
+                throw new DukeException("☹ OOPS!!! The time of a task cannot be empty. ");
+            }
+        }
+    }
+
+    public static int listCheck(ArrayList<Task> taskList, String[] taskString) throws DukeException{
+        if (taskString.length <= 1) {
+            throw new DukeException("Oops, please enter a task number after your command!");
+        }
+        try {
+            int taskNumber = Integer.parseInt(taskString[1]);
+            if (taskNumber <= 0 || taskNumber > taskList.size()) {
+                throw new DukeException("Oops, enter a task number that already exists in the list.");
+            }
+            return taskNumber;
+        } catch (NumberFormatException e) {
+            throw new DukeException("Task Number must be an Integer!");
+        }
+    }
+
+    public static void printList(ArrayList<Task> taskList) {
+        System.out.print("\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
+                "\n\t Here are the tasks in your list:");
+
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.print("\n\t " + (i + 1) + "." +  taskList.get(i).toString());
+        }
+        System.out.print("\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0\n");
+    }
+
+    public static void markDone(ArrayList<Task> taskList, String[] taskString) throws DukeException{
+        Task taskToMarkDone = taskList.get(listCheck(taskList, taskString) -1);
+        taskToMarkDone.markDone();
+        System.out.println("\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
+                "\n\t Nice! I've marked this task as done: " +
+                "\n\t   " + taskToMarkDone.toString() +
+                "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0");
+
+    }
+
+    public static void removeTask(ArrayList<Task> taskList, String[] taskString) throws DukeException{
+        int taskIndex = listCheck(taskList, taskString) -1;
+        Task taskToDelete = taskList.get(taskIndex);
+        taskList.remove(taskIndex);
+        System.out.println("\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
+                "\n\t Noted. I've removed this task: " +
+                "\n\t   " + taskToDelete.toString() +
+                "\n\t Now you have " + taskList.size() + " tasks in the list." +
+                "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0");
+    }
+
+    public static String processTaskName(String taskString, String delimeter) throws DukeException {
+        String taskName =  Arrays.stream(taskString.split(" ")).takeWhile(e -> !e.equals(delimeter)).collect(Collectors.joining(" "));
+        emptyStringChecker(taskName,true);
+        return taskName;
+    }
+
+    public static String processTaskTime(String taskString, String delimeter) throws DukeException {
+        String time = Arrays.stream(taskString.split(" ")).dropWhile(e -> !e.equals(delimeter)).skip(1).collect(Collectors.joining(" "));
+        emptyStringChecker(time,false);
+        return time;
+    }
+
+    public static void addTask(String taskString, String taskType, ArrayList<Task> taskList) throws DukeException {
+        emptyStringChecker(taskString, true);
+        Task taskToAdd;
+        if (taskType.equals("todo")) {
+            taskToAdd = new Todo(taskString);
+            taskList.add(taskToAdd);
+        } else if (taskType.equals("deadline")) {
+            String taskName =  processTaskName(taskString, "/by");
+            String deadline = processTaskTime(taskString,"/by");
+            taskToAdd = new Deadline(taskName, deadline);
+            taskList.add(taskToAdd);
+        } else {
+            String taskName =  processTaskName(taskString, "/at");
+            String time = processTaskTime(taskString,"/at");
+            taskToAdd = new Event(taskName, time);
+            taskList.add(taskToAdd);
+        }
+        System.out.println("\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
+                "\n\t Got it. I've added this task: " + "\n\t  " + taskToAdd.toString() +
+                "\n\t Now you have " + taskList.size() + " tasks in the list." +
+                "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0");
+    }
+
     public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -21,127 +113,45 @@ public class Duke {
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
             String[] splitString = userInput.split(" ");
-            String returnString = "";
             if (splitString[0].equals("bye")) {
                 System.out.println("\u263A Bye. Hope to see you again soon!");
                 break;
             }
             switch(splitString[0]) {
                 case "list" :
-                    returnString = "\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
-                                    "\n\t Here are the tasks in your list:";
-                    for (int i = 0; i < inputStore.size(); i++) {
-                        returnString += "\n\t " + (i + 1) + "." +  inputStore.get(i).toString();
-                    }
-                    returnString += "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0";
+                    printList(inputStore);
                     break;
 
                 case "todo" :
                     String todo =  Arrays.stream(splitString).skip(1).collect(Collectors.joining(" "));
-                    if (todo.equals("")) {
-                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty. ");
-                    } else {
-                        Todo newTodo = new Todo(todo);
-                        inputStore.add(newTodo);
-                        returnString = "\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
-                                "\n\t Got it. I've added this task: " + "\n\t  " + newTodo.toString() +
-                                "\n\t Now you have " + inputStore.size() + " tasks in the list." +
-                                "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0";
-                    }
-
+                    addTask(todo, "todo", inputStore);
                     break;
 
                 case "deadline" :
-                    String taskName =  Arrays.stream(splitString).skip(1).takeWhile(e -> !e.equals("/by")).collect(Collectors.joining(" "));
-                    if (taskName.equals("")) {
-                        throw new DukeException("☹ OOPS!!! The description of a deadline task cannot be empty. ");
-                    } else {
-                        String deadline = Arrays.stream(splitString).dropWhile(e -> !e.equals("/by")).skip(1).collect(Collectors.joining(" "));
-                        if (deadline.equals("")) {
-                            throw new DukeException("☹ OOPS!!! The time of a deadline task cannot be empty. Specify time after /by");
-                        } else {
-                            Deadline newDeadline = new Deadline(taskName, deadline);
-                            inputStore.add(newDeadline);
-                            returnString = "\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
-                                    "\n\t Got it. I've added this task: " + "\n\t  " + newDeadline.toString() +
-                                    "\n\t Now you have " + inputStore.size() + " tasks in the list." +
-                                    "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0";
-                        }
-                    }
+                    String deadlineNameTime = Arrays.stream(splitString).skip(1).collect(Collectors.joining(" "));
+                    addTask(deadlineNameTime, "deadline", inputStore);
                     break;
 
                 case "event" :
-                    String eventName =  Arrays.stream(splitString).skip(1).takeWhile(e -> !e.equals("/at")).collect(Collectors.joining(" "));
-                    if (eventName.equals("")) {
-                        throw new DukeException("☹ OOPS!!! The description of an event cannot be empty. ");
-                    } else {
-                        String eventTime = Arrays.stream(splitString).dropWhile(e -> !e.equals("/at")).skip(1).collect(Collectors.joining(" "));
-                        if (eventTime.equals("")) {
-                            throw new DukeException("☹ OOPS!!! The time of an event cannot be empty. Specify time after /at");
-                        } else {
-                            Event newEvent = new Event(eventName, eventTime);
-                            inputStore.add(newEvent);
-                            returnString = "\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
-                                    "\n\t Got it. I've added this task: " + "\n\t  " + newEvent.toString() +
-                                    "\n\t Now you have " + inputStore.size() + " tasks in the list." +
-                                    "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0";
-                        }
-                    }
+                    String eventNameTime = Arrays.stream(splitString).skip(1).collect(Collectors.joining(" "));
+                    addTask(eventNameTime, "event", inputStore);
                     break;
 
                 case "done" :
-                    if (splitString.length <= 1) {
-                        throw new DukeException("Oops, please enter the task number that you want to mark done!!");
-                    }
-                    try {
-                        int toBeDoneTask = Integer.parseInt(splitString[1]);
-                        if (toBeDoneTask <= 0 || toBeDoneTask > inputStore.size()) {
-                            throw new DukeException("Oops, enter a task number that already exists in the list.");
-                        } else {
-                            Task task = inputStore.get(Integer.parseInt(splitString[1]) - 1);
-                            task.markDone();
-                            returnString = "\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
-                                    "\n\t Nice! I've marked this task as done: " +
-                                    "\n\t   " + task.toString() +
-                                    "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0";
-                        }
-                    } catch(NumberFormatException e) {
-                        throw new DukeException("Task Number to be marked done must be an Integer!");
-                    }
+                    markDone(inputStore, splitString);
                     break;
 
                 case "delete" :
-                    if (splitString.length <= 1) {
-                        throw new DukeException("Oops, please enter the task number that you want to delete!");
-                    }
-                    try {
-                        int toBeDeletedTask = Integer.parseInt(splitString[1]);
-                        if (toBeDeletedTask <= 0 || toBeDeletedTask > inputStore.size()) {
-                            throw new DukeException("Oops, enter a task number that already exists in the list.");
-                        } else {
-                            Task deletedTask = inputStore.get(toBeDeletedTask - 1);
-                            inputStore.remove(toBeDeletedTask - 1);
-                            returnString = "\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0" +
-                                    "\n\t Noted. I've removed this task: " +
-                                    "\n\t   " + deletedTask.toString() +
-                                    "\n\t Now you have " + inputStore.size() + " tasks in the list." +
-                                    "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0";
-                        }
-                    }
-                    catch(NumberFormatException e) {
-                        throw new DukeException("Task Number to be deleted must be an Integer!");
-                    }
+                    removeTask(inputStore, splitString);
                     break;
 
                 case "" :
-                    throw new DukeException("Please enter something!");
+                    System.out.println("Please enter something! Or say bye to exit!");
+                    break;
 
                 default :
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    //returnString = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-
             }
-            System.out.println(returnString);
         }
     }
 }
