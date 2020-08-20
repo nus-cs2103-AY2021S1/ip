@@ -1,53 +1,88 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
     public static void main(String[] args) {
 
-        Task[] rubbishBin = new Task[100];
-        String add = "added: ";
-        int counter = 0;
+        ArrayList<Task> tasks = new ArrayList<>();
+
 
         Scanner Sc = new Scanner(System.in);
         String line = "____________________________\n"
-                +"____________________________";
+                     +"____________________________";
 
         String logo = "****** ****** ****** ******\n"
-                +"   *   *      *      *\n"
-                +"   *   ****** ****** ******\n"
-                +"*  *   *      *      *\n"
-                +"***    ****** *      *\n";
+                     +"   *   *      *      *\n"
+                     +"   *   ****** ****** ******\n"
+                     +"*  *   *      *      *\n"
+                     +"***    ****** *      *\n";
+
         System.out.println("My name is\n" + logo);
         System.out.println("What do you want?");
         System.out.println(line);
 
+        //noinspection InfiniteLoopStatement
         while(true){
-            String input = Sc.nextLine().trim();
-            System.out.println(input);
-            if(input.equals("bye")){
-                System.out.println("Bye, Have a great time! ");
-                break;
-            }else{
-
-                if(input.contains("done")){
-                    int index = Integer.parseInt(input.substring(5)) - 1;
-                    rubbishBin[index].complete();
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(rubbishBin[index]);
-                }else if(input.equals("list")){
-                    for(int i=0; i<counter; i++){
-                        System.out.println(rubbishBin[i]);
-                    }
-                }else{
-                    Task newTask = new Task(input);
-                    rubbishBin[counter] = newTask;
-                    System.out.println(add + input);
-                    counter++;
-                }
+            String[] inputs = Sc.nextLine().trim().split(" ",2);
+            String command = inputs[0];
+            String taskDescription = "";
+            if(inputs.length > 1) {
+                taskDescription = inputs[1];
             }
 
-            System.out.println(line);
-
+            switch(command){
+                case "done" : {
+                    int index = Integer.parseInt(taskDescription) - 1;
+                    Task doneTask = tasks.get(index);
+                    doneTask.complete();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(String.format("  %s", doneTask.toString()));
+                    break;
+                }
+                case "list" : {
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println(String.format("%d. %s", i + 1, tasks.get(i).toString()));
+                    }
+                    break;
+                }
+                case "bye" : {
+                    System.out.println("Bye, Have a Great Time!");
+                    break;
+                }
+                case "todo" : {
+                    Task newTask = new Todo(taskDescription);
+                    tasks.add(newTask);
+                    newTask.printAddTask();
+                    printNumberOfTask(tasks.size());
+                    break;
+                }
+                case "deadline" : {
+                    Task newTask = new Deadline(taskDescription.split(" /")[0]
+                                               ,taskDescription.split(" /")[1]);
+                    tasks.add(newTask);
+                    newTask.printAddTask();
+                    printNumberOfTask(tasks.size());
+                    break;
+                }
+                case "event" : {
+                    Task newTask = new Event(taskDescription.split(" /")[0]
+                                            ,taskDescription.split(" /")[1]);
+                    tasks.add(newTask);
+                    newTask.printAddTask();
+                    printNumberOfTask(tasks.size());
+                    break;
+                }
+                default : {
+                    System.out.println("Please enter a valid command.");
+                    break;
+                }
+            }
         }
     }
+
+    static void printNumberOfTask(int i){
+        System.out.println(String.format("Now you have %d tasks in the list.",i));
+    }
+
 }

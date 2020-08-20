@@ -1,7 +1,8 @@
-public class Task {
+public abstract class Task {
 
-    private boolean isDone = false;
-    private String taskName;
+    protected String tag;
+    protected boolean isDone = false;
+    protected String taskName;
 
     public Task(String taskName){
         this.taskName = taskName;
@@ -11,9 +12,9 @@ public class Task {
         this.isDone = true;
     }
 
-    @Override
-    public String toString(){
-        String symbol = isDone ? "\u2713" : "\u2718";
-        return "[" + symbol + "]" +  " " + taskName;
+    public void printAddTask(){
+        System.out.println(
+                String.format("Got it. I've added this task:\n  %s",this.toString())
+        );
     }
 }
