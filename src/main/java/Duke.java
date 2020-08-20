@@ -73,6 +73,8 @@ public class Duke {
         greet();
 
         Scanner sc = new Scanner(System.in);
+
+        // Arraylist used to store all tasks.
         ArrayList<Task> list = new ArrayList<>();
 
         while (sc.hasNext()) {
@@ -90,6 +92,7 @@ public class Duke {
                 }
 
                 String[] msgArray = msg.split(" ");
+                String taskS = " task ";
 
                 if (msgArray[0].equals("done")) {
                     if ((msgArray.length != 2) || (!isInt(msgArray[1]))) {
@@ -105,7 +108,29 @@ public class Duke {
                     continue;
                 }
 
-                String taskS = " task ";
+                if (msgArray[0].equals("delete")) {
+                    if ((msgArray.length != 2) || (!isInt(msgArray[1]))) {
+                        throw new InvalidDeleteInputException();
+                    }
+                    int index = Integer.parseInt(msgArray[1]) - 1;
+                    if (index < 0 || index >= list.size()) {
+                        throw new InvalidDeleteInputException();
+                    } else {
+                        String taskInfo = list.get(index).toString();
+                        list.remove(index);
+                        if (list.size() < 2) {
+                            taskS = " task ";
+                        }
+                        echo("Noted. I've removed this task:\n"
+                                + taskInfo
+                                + "\nNow you have "
+                                + list.size()
+                                + taskS
+                                + "in the list.");
+                    }
+                    continue;
+                }
+
                 if (msgArray[0].equals("todo")) {
                     if (msgArray.length < 2) {
                         throw new InvalidTodoInputException();
