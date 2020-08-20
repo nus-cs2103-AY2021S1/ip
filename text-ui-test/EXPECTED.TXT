@@ -55,11 +55,23 @@ Here are the task(s) in your list:
 Nice! I've marked this as done:
 [T][✓] borrow book
 
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+
+Got it. I've added this task:
+[T][✘] join sports club
+Now you have 4 tasks in the list.
+
+☹ OOPS!!! Which task do you want to delete?
+
+☹ OOPS!!! Enter the index of the task to be deleted.
+
+Noted. I've removed this task:
+[E][✓] project meeting (at: Mon 2-4pm)
+Now you have 3 tasks in the list.
+
 Here are the task(s) in your list:
 1.[T][✓] borrow book
 2.[D][✘] return book (by: Sunday)
-3.[E][✓] project meeting (at: Mon 2-4pm)
-
-☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+3.[T][✘] join sports club
 
 Bye. Hope to see you again soon!

@@ -49,8 +49,10 @@ public class Duke {
             System.out.println("Bye. Hope to see you again soon!");
         } else if (input.equals("list")) {
             printList();
+        } else if (input.contains("delete")) {
+            deleteTask(input);
         } else if (input.contains("done")) {
-            markAsDone(input);
+            markTaskAsDone(input);
         } else if (input.contains("todo") || input.contains("event") || input.contains("deadline")) {
             createTask(input);
         } else {
@@ -76,16 +78,50 @@ public class Duke {
     }
 
     /**
+     * Prints the number of tasks in the list.
+     */
+    private static void printNumOfTasks() {
+        int numOfTasks = tasks.size();
+        if (numOfTasks == 1) {
+            System.out.println("Now you have " + numOfTasks + " task in the list.\n");
+        } else {
+            System.out.println("Now you have " + numOfTasks + " tasks in the list.\n");
+        }
+    }
+
+    /**
+     * Deletes a task from the list.
+     *
+     * @param input Input string describing which task's index to be deleted.
+     * @throws DukeException If input is invalid.
+     */
+    private static void deleteTask(String input) throws DukeException {
+        try {
+            int number = Integer.parseInt(input.substring(7));
+            int index = number - 1;
+            Task task = tasks.get(index);
+            tasks.remove(index);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(task.toString());
+            printNumOfTasks();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("\u2639 OOPS!!! Which task do you want to delete?\n");
+        } catch (NumberFormatException e) {
+            throw new DukeException("\u2639 OOPS!!! Enter the index of the task to be deleted.\n");
+        }
+    }
+
+    /**
      * Marks a task as done.
      *
      * @param input Input string describing which task's index is done.
      * @throws DukeException If input is invalid.
      */
-    private static void markAsDone(String input) throws DukeException {
+    private static void markTaskAsDone(String input) throws DukeException {
         try {
             int number = Integer.parseInt(input.substring(5));
             Task task = tasks.get(number - 1);
-            task.markTaskAsDone();
+            task.markAsDone();
             System.out.println("Nice! I've marked this as done:");
             System.out.println(task.toString() + "\n");
         } catch (IndexOutOfBoundsException e) {
@@ -137,11 +173,6 @@ public class Duke {
         tasks.add(task);
         System.out.println("Got it. I've added this task:");
         System.out.println(task.toString());
-        int numOfTasks = tasks.size();
-        if (numOfTasks == 1) {
-            System.out.println("Now you have " + numOfTasks + " task in the list.\n");
-        } else {
-            System.out.println("Now you have " + numOfTasks + " tasks in the list.\n");
-        }
+        printNumOfTasks();
     }
 }

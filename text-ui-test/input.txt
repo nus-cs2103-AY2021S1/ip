@@ -14,7 +14,11 @@ done a
 done 3
 list
 done 1
-list
 blah
+todo join sports club
+delete
+delete a
+delete 3
+list
 bye
 blah
