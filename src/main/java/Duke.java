@@ -1,13 +1,24 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Duke {
+    enum Type {
+        TODO, DEADLINE, EVENT;
+    }
+
     static class Task {
         boolean completed = false;
+        Type type;
         String name;
 
         Task(String name) {
             this.name = name;
         }
+
+        Task(String name, Type type) {
+            this.name = name;
+            this.type = type;
+        }
+
         public void setCompleted() {
             completed = true;
         }
