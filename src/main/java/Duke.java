@@ -17,61 +17,72 @@ public class Duke {
         type = s.next();
 
         while(!type.equals("bye")) {
-            switch(type) {
-                case "list":
-                    System.out.println(line);
-                    System.out.println("Here are the tasks in your list:");
-                    for(int i = 0; i < number; i++) {
-                        System.out.println(String.format("  %d. ", i + 1) + tasks[i].toString());
-                    }
-                    System.out.println(line + "\n");
-                    break;
+            try {
+                switch (type) {
+                    case "list":
+                        System.out.println(line);
+                        System.out.println("Here are the tasks in your list:");
+                        for (int i = 0; i < number; i++) {
+                            System.out.println(String.format("  %d. ", i + 1) + tasks[i].toString());
+                        }
+                        System.out.println(line + "\n");
+                        break;
 
-                case "todo":
-                    input = s.nextLine().substring(1);
-                    tasks[number] = new Todo(input);
-                    printPart("Got it. I've added this task:\n"
-                             + "  " + tasks[number].toString()
-                             + "\nNow you have " + (number + 1) +" tasks in the list.");
-                    number++;
-                    break;
+                    case "todo":
+                        input = s.nextLine();
+                        if (!(input.length() > 1)) {
+                            throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
+                        } else {
+                            tasks[number] = new Todo(input);
+                            printPart("Got it. I've added this task:\n"
+                                    + "  " + tasks[number].toString()
+                                    + "\nNow you have " + (number + 1) + " tasks in the list.");
+                            number++;
+                        }
+                        break;
 
-                case "deadline":
-                    description = new StringBuilder();
-                    input = s.next();
-                    while(input.charAt(0) != '/') {
-                        description.append(input).append(" ");
+                    case "deadline":
+                        description = new StringBuilder();
                         input = s.next();
-                    }
-                    date = s.nextLine().substring(1);
-                    tasks[number] = new Deadline(description.toString(), date);
-                    printPart("Got it. I've added this task:\n"
-                            + "  " + tasks[number].toString()
-                            + "\nNow you have " + (number + 1) +" tasks in the list.");
-                    number++;
-                    break;
+                        while (input.charAt(0) != '/') {
+                            description.append(input).append(" ");
+                            input = s.next();
+                        }
+                        date = s.nextLine().substring(1);
+                        tasks[number] = new Deadline(description.toString(), date);
+                        printPart("Got it. I've added this task:\n"
+                                + "  " + tasks[number].toString()
+                                + "\nNow you have " + (number + 1) + " tasks in the list.");
+                        number++;
+                        break;
 
-                case "event":
-                    description = new StringBuilder();
-                    input = s.next();
-                    while(input.charAt(0) != '/') {
-                        description.append(input).append(" ");
+                    case "event":
+                        description = new StringBuilder();
                         input = s.next();
-                    }
-                    date = s.nextLine().substring(1);
-                    tasks[number] = new Event(description.toString(), date);
-                    printPart("Got it. I've added this task:\n"
-                            + "  " + tasks[number].toString()
-                            + "\nNow you have " + (number +1) +" tasks in the list.");
-                    number++;
-                    break;
+                        while (input.charAt(0) != '/') {
+                            description.append(input).append(" ");
+                            input = s.next();
+                        }
+                        date = s.nextLine().substring(1);
+                        tasks[number] = new Event(description.toString(), date);
+                        printPart("Got it. I've added this task:\n"
+                                + "  " + tasks[number].toString()
+                                + "\nNow you have " + (number + 1) + " tasks in the list.");
+                        number++;
+                        break;
 
-                case "done":
-                    input = s.nextLine();
-                    int n = Integer.parseInt(input.substring(1));
-                    tasks[n - 1].markAsDone();
-                    printPart("Nice! I've marked this task as done:\n" + "  " + tasks[n - 1].toString());
-                    break;
+                    case "done":
+                        input = s.nextLine();
+                        int n = Integer.parseInt(input.substring(1));
+                        tasks[n - 1].markAsDone();
+                        printPart("Nice! I've marked this task as done:\n" + "  " + tasks[n - 1].toString());
+                        break;
+
+                    default:
+                        throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException e) {
+                printPart(e.getMessage());
             }
 
             type = s.next();
