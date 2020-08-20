@@ -29,11 +29,44 @@ public class Duke {
             } else {
                 String[] test = received.split(" ");
                 if (test[0].equals("done")) {
-                    int idx = Integer.parseInt(test[1]) - 1;
-                    Task target = lists.get(idx);
-                    target.markDone();
-                    Response msg = new Response(new String[]{"Nice! I've marked this task as done:", "  " + target});
-                    System.out.println(msg.getResponse());
+                    try {
+                        if (lists.size() == 0) {
+                            throw new IndexOutOfBoundsException();
+                        }
+                        if (test.length == 1) {
+                            throw new MissingNumberException();
+                        }
+                        int idx = Integer.parseInt(test[1]) - 1;
+                        Task target = lists.get(idx);
+                        target.markDone();
+                        Response msg = new Response(new String[]{"Nice! I've marked this task as done:", "  " + target});
+                        System.out.println(msg.getResponse());
+                    } catch (IndexOutOfBoundsException e) {
+                        Response msg = new Response(new String[]{"No remaining tasks in the list!"});
+                        System.out.println(msg.getResponse());
+                    } catch (MissingNumberException e) {
+                        Response msg = new Response(new String[]{"Please select the task that you want to mark done!"});
+                        System.out.println(msg.getResponse());
+                    }
+                } else if (test[0].equals("delete")) {
+                    try {
+                        if (lists.size() == 0) {
+                            throw new IndexOutOfBoundsException();
+                        }
+                        if (test.length == 1) {
+                            throw new MissingNumberException();
+                        }
+                        int idx = Integer.parseInt(test[1]) - 1;
+                        Response msg = new Response(new Task[]{lists.get(idx)}, Response.Tag.REMOVE, lists.size() - 1);
+                        System.out.println(msg.getResponse());
+                        lists.remove(idx);
+                    } catch (IndexOutOfBoundsException e) {
+                        Response msg = new Response(new String[]{"No remaining tasks in the list!"});
+                        System.out.println(msg.getResponse());
+                    } catch (MissingNumberException e) {
+                        Response msg = new Response(new String[]{"Please select the task that you want to delete!"});
+                        System.out.println(msg.getResponse());
+                    }
                 } else {
                     if (test[0].equals("todo")) {
                         try {

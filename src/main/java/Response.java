@@ -2,6 +2,7 @@ public class Response {
     enum Tag {
         LIST,
         ADD,
+        REMOVE,
         NORMAL
     }
     public Task[] tasks;
@@ -41,6 +42,16 @@ public class Response {
                             + "\n"
                             + "     "
                             + String.format("Now you have %d tasks in the list. \n", numOfTasks);
+            }
+        } else if (this.tag == Tag.REMOVE) {
+            for (int i = 0; i < this.tasks.length; i++) {
+                linesOfText += "     "
+                        + "Got it. I've removed this task: \n"
+                        + "       "
+                        + this.tasks[i]
+                        + "\n"
+                        + "     "
+                        + String.format("Now you have %d tasks in the list. \n", numOfTasks);
             }
         } else {
             for (int i = 0; i < this.texts.length; i++) {
