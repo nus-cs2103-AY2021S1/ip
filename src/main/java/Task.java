@@ -6,6 +6,9 @@ public abstract class Task {
     protected boolean isComplete = false;
 
     protected Task(String description) {
+        if (description.equals("")) {
+            throw new TaskException("Did you provide any description for this todo task?");
+        }
         this.description = description;
     }
 

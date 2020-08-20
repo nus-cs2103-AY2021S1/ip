@@ -108,13 +108,14 @@ public class Duke {
     }
 
     private static void addTodo(String description) throws DukeIncompleteCommandException {
-        if (description.equals("")) {
+        try {
+            Todo todo = new Todo(description);
+            taskList.add(todo);
+            printWithDivider("Successfully added todo:\n" + todo.toString());
+        } catch (TaskException e) {
             throw new DukeIncompleteCommandException(ERROR_MESSAGE
                     + "\nDid you provide any description for this todo task?");
         }
-        Todo todo = new Todo(description);
-        taskList.add(todo);
-        printWithDivider("Successfully added todo:\n" + todo.toString());
     }
 
     private static void addEvent(String args) throws DukeIncompleteCommandException {
