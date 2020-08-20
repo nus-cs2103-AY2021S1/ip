@@ -16,11 +16,11 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(String content) throws DukeException {
         if (content.isEmpty()) {
-            throw new DukeException("OOPS!!! Please enter a value");
+            throw new DukeException("☹ OOPS!!! Please enter a value");
         } else if (!(Character.isDigit(content.charAt(0)))) {
-            throw new DukeException("OPS!!! Please enter a numerical value");
+            throw new DukeException("☹ OOPS!!! Please enter a numerical value");
         } else if (Integer.parseInt(content) > CommandAgent.listSize() | Integer.parseInt(content) <= 0) {
-            throw new DukeException("OOPS!!! Please enter a valid index");
+            throw new DukeException("☹ OOPS!!! Please enter a valid index");
         } else {
             this.content = content;
         }

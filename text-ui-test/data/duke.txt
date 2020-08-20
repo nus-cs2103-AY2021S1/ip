@@ -1,1 +1,5 @@
 T | 0 | read book
+D | 1 | return book | Apr 12 2020
+E | 1 | project meeting | Jan 11 2020
+T | 1 | borrow book
+D | 0 | do homework | Jan 1 1998

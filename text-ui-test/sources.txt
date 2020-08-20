@@ -11,6 +11,7 @@ C:\Users\22333\Desktop\CS2103\iP\src\main\java\duke\command\DeleteCommand.java
 C:\Users\22333\Desktop\CS2103\iP\src\main\java\duke\command\DoneCommand.java
 C:\Users\22333\Desktop\CS2103\iP\src\main\java\duke\command\EventCommand.java
 C:\Users\22333\Desktop\CS2103\iP\src\main\java\duke\command\ExitCommand.java
+C:\Users\22333\Desktop\CS2103\iP\src\main\java\duke\command\FindCommand.java
 C:\Users\22333\Desktop\CS2103\iP\src\main\java\duke\command\ListCommand.java
 C:\Users\22333\Desktop\CS2103\iP\src\main\java\duke\command\TodoCommand.java
 C:\Users\22333\Desktop\CS2103\iP\src\main\java\duke\task\Deadline.java
