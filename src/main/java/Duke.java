@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Duke {
     ArrayList<String> list = new ArrayList<>();
     String message;
-    static String lastGreeting = "\tBye! Hope to see you again soon:)\n";
+    static String lastGreeting = "bye";
 
     void addToList(String task) {
         list.add(task);
@@ -24,14 +24,18 @@ public class Duke {
 
         Scanner input = new Scanner(System.in);
         Greet startDuke = new Greet();
+        // prints out intro
         System.out.println(startDuke);
         while (input.hasNext()) {
             String message = input.nextLine();
             Greet newMessage = new Greet(message);
-            System.out.println(newMessage);
-            if (newMessage.getExitGreeting().equals(lastGreeting)) {
+            if (newMessage.getGreeting().equals(lastGreeting)) {
+                // prints out exit
+                System.out.println(newMessage);
                 break;
             }
+            // Echo
+            System.out.println(newMessage);
         }
         input.close();
     }
