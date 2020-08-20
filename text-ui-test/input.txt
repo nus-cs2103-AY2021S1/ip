@@ -4,4 +4,8 @@ event family dinner /at tonight 9pm
 list
 done 2
 list
+delete
+list
+delete 2
+list
 bye
