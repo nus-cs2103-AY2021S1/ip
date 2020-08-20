@@ -28,20 +28,31 @@ public class Duke {
                 storage.get(task).done = true;
                 System.out.println("\tNice! I've marked this task as done:\n\t" + storage.get(task));
             } else {
-                Task task;
-                if (in.contains("todo ")) {
-                    task = new Todo(in.replace("todo ", ""));
-                } else if (in.contains("deadline ")) {
-                    String[] split = in.replace("deadline ", "").split(" /by ");
-                    task = new Deadline(split[0], split[1]);
-                } else {
-                    String[] split = in.replace("event ", "").split(" /at ");
-                    task = new Event(split[0], split[1]);
+                try {
+                    Task task;
+                    if (in.contains("todo")) {
+                        String actTask = in.replace("todo", "").trim();
+                        if (actTask.equals("")) {
+                            throw new EmptyTodo();
+                        }
+                        task = new Todo(actTask);
+                    } else if (in.contains("deadline")) {
+                        String[] split = in.replace("deadline", "").trim().split(" /by ");
+                        task = new Deadline(split[0], split[1]);
+                    } else if (in.contains("event")){
+                        String[] split = in.replace("event", "").trim().split(" /at ");
+                        task = new Event(split[0], split[1]);
+                    } else {
+                        throw new InvalidInput();
+                    }
+                    storage.add(task);
+                    System.out.println("\tGot it. I've added this task:");
+                    System.out.println("\t\t" + task);
+                    System.out.println("\tNow you have " + storage.size() + " tasks in the list.");
+                } catch (DukeException e) {
+                    System.out.println("\t" + e.getMessage());
                 }
-                storage.add(task);
-                System.out.println("\tGot it. I've added this task:");
-                System.out.println("\t\t" + task);
-                System.out.println("\tNow you have " + storage.size() + " tasks in the list.");
+
 
             }
             in = scan.nextLine();
@@ -100,5 +111,21 @@ class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.duration + ")";
+    }
+}
+
+class DukeException extends Exception {
+    public DukeException(String errorMessage) {
+        super(errorMessage);
+    }
+}
+class EmptyTodo extends DukeException {
+    public EmptyTodo() {
+        super("☹ OOPS!!! The description of a todo cannot be empty.");
+    }
+}
+class InvalidInput extends DukeException {
+    public InvalidInput() {
+        super("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 }
