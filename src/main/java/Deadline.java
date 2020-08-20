@@ -13,7 +13,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String done = this.done ? "O" : "X";
+        String done = this.done ? "\u2713" : "\u2718";
         return "[D][" + done + "] " + this.task + "(by:" + this.deadline + ")";
     }
 }

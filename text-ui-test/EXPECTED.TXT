@@ -9,17 +9,17 @@ Yo what's up man, it's ya boi DUKE
 What can I do for you today, Sir?
 _________________________________________
 Got it. I've added this task:
-[T][X] borrow book
+[T][✘] borrow book
 Now you have 1 tasks in the list.
 _________________________________________
 _________________________________________
 Got it. I've added this task:
-[E][X] read book (at: Mon 2-4pm)
+[E][✘] read book (at: Mon 2-4pm)
 Now you have 2 tasks in the list.
 _________________________________________
 _________________________________________
 Got it. I've added this task:
-[D][X] return book (by: Sunday)
+[D][✘] return book (by: Sunday)
 Now you have 3 tasks in the list.
 _________________________________________
 _________________________________________
@@ -27,29 +27,29 @@ OOPS!!! I'm sorry, but I don't know what that means :-(
 _________________________________________
 _________________________________________
 Here are the tasks in your list:
-1.[T][X] borrow book
-2.[E][X] read book (at: Mon 2-4pm)
-3.[D][X] return book (by: Sunday)
+1.[T][✘] borrow book
+2.[E][✘] read book (at: Mon 2-4pm)
+3.[D][✘] return book (by: Sunday)
 _________________________________________
 _________________________________________
 Nice! I've marked this task as done:
-1.[T][O] borrow book
+1.[T][✓] borrow book
 _________________________________________
 _________________________________________
 Here are the tasks in your list:
-1.[T][O] borrow book
-2.[E][X] read book (at: Mon 2-4pm)
-3.[D][X] return book (by: Sunday)
+1.[T][✓] borrow book
+2.[E][✘] read book (at: Mon 2-4pm)
+3.[D][✘] return book (by: Sunday)
 _________________________________________
 _________________________________________
 Noted, I've removed this task:
-[T][O] borrow book
+[T][✓] borrow book
 Now you have 2 tasks in the list.
 _________________________________________
 _________________________________________
 Here are the tasks in your list:
-1.[E][X] read book (at: Mon 2-4pm)
-2.[D][X] return book (by: Sunday)
+1.[E][✘] read book (at: Mon 2-4pm)
+2.[D][✘] return book (by: Sunday)
 _________________________________________
 _________________________________________
 Bye. Hope to see you again soon!
