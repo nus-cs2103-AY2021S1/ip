@@ -20,6 +20,10 @@ public abstract class Command {
      */
     public abstract String sendRequest();
 
+    public boolean isExit() {
+        return this.getContent().get(0).equals("bye");
+    }
+
     /**
      * Return the content of the command.
      * Content differ for each type of command.

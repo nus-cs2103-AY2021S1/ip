@@ -25,25 +25,26 @@ public class Storage {
     private final Path filePath;
     private final Path folderPath;
 
-    public Storage() {
+    public Storage(String filePath) {
         String currentRelativePath = Paths.get(".").toString();
-        filePath = Paths.get(currentRelativePath, "data", "duke.txt");
-        folderPath = Paths.get(currentRelativePath, "data");
+        this.filePath = Paths.get(currentRelativePath, filePath);
+        this.folderPath = Paths.get(currentRelativePath, "data");
     }
 
     /**
      * Loads the TaskList that is stored in <kbd>data/duke.text</kbd> file.
      * Handles the cases where either file or folder is not created.
-     * @return a TaskList to be used by the program
+     * @return a TaskList to be used by the program.
+     * @throws DukeException if there are I/O exceptions occurred when reading the file.
      */
-    public TaskList load() {
-        TaskList taskList = new TaskList();
+    public TaskList load() throws DukeException {
+        TaskList taskList;
         try {
             createPath();
             List<String> tasksInFile = Files.readAllLines(filePath, Charset.defaultCharset());
             taskList = this.loadTaskList(tasksInFile);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new DukeException("I/O Error" + e.getStackTrace());
         }
         return taskList;
     }

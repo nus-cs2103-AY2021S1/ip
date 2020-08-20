@@ -13,12 +13,10 @@ import duke.task.Todo;
  * An agent to process incoming command and return the feedback.
  */
 public class CommandAgent {
-    private static Storage storage;
     private static TaskList taskList;
 
-    public CommandAgent(Storage storage) {
-        CommandAgent.storage = storage;
-        CommandAgent.taskList = storage.load();
+    public CommandAgent(TaskList taskList) {
+        CommandAgent.taskList = taskList;
     }
 
     public static int listSize() {
@@ -29,59 +27,55 @@ public class CommandAgent {
      * Handle the command taken from user input, execute it
      * and save the updated task list data to hard disk.
      *
-     * @param command the command parsed from user input.
-     * @return the feedback generated from executing the command;
+     * @param c the command parsed from user input.
+     * @param ui the user interface where response is sent to.
+     * @param storage the data storage handler.
      */
-    public String handleCommand(Command command) {
-        String feedback = executeCommand(command);
+    public void handleCommand(Command c, Ui ui, Storage storage) {
+        String response = executeCommand(c);
         storage.save(taskList);
-        return feedback;
+        ui.showResponse(response);
     }
 
     /**
      * Takes in the command and execute it based on the request from the command.
      *
      * @param command the command parsed from user input.
-     * @return a String feedback for the user.
+     * @return a String response for the user.
      */
-    public String executeCommand(Command command) {
-        String feedback = "____________________________________________________________\n";
+    public static String executeCommand(Command command) {
+        String response = "";
         int taskId;
         switch (command.sendRequest()) {
-        case "error":
-            List<String> errorMessage = command.getContent();
-            feedback += errorMessage.get(0);
-            break;
         case "end":
-            feedback += "Bye. Hope to see you again soon!";
+            response += "Bye. Hope to see you again soon!";
             break;
         case "create":
             List<String> taskInfo = command.getContent();
-            Task newTask = this.createTask(taskInfo);
+            Task newTask = createTask(taskInfo);
             taskList = taskList.addTask(newTask);
-            feedback += this.generateCreateFeedback();
+            response += generateCreateResponse();
             break;
         case "retrieval":
-            feedback += this.generateRetrievalFeedback();
+            response += generateRetrievalResponse();
             break;
         case "update":
             List<String> updateList = command.getContent();
             taskId = Integer.parseInt(updateList.get(0));
             taskList = taskList.markAsDone(taskId);
-            feedback += this.generateUpdateFeedback(taskId);
+            response += generateUpdateResponse(taskId);
             break;
         case "delete":
             List<String> deleteList = command.getContent();
             taskId = Integer.parseInt(deleteList.get(0));
             Task deletedTask = taskList.getTaskById(taskId);
             taskList = taskList.deleteTask(taskId);
-            feedback += this.generateDeleteFeedback(deletedTask);
+            response += generateDeleteResponse(deletedTask);
             break;
         default:
-            feedback += "";
+            break;
         }
-        feedback += "\n____________________________________________________________\n";
-        return feedback;
+        return response;
     }
 
     /**
@@ -92,7 +86,7 @@ public class CommandAgent {
      * @param taskInfo a list of String containing all the relevant information for the task.
      * @return a correct type of Task object.
      */
-    public Task createTask(List<String> taskInfo) {
+    public static Task createTask(List<String> taskInfo) {
         String identifier = taskInfo.get(0);
         String name = taskInfo.get(1);
         String schedule;
@@ -112,7 +106,7 @@ public class CommandAgent {
      * Generate the feedback for a task creation.
      * @return a String suggesting the completion of task creation.
      */
-    public String generateCreateFeedback() {
+    public static String generateCreateResponse() {
         int taskId = taskList.getSize();
         Task currentTask = taskList.getTaskById(taskId);
         String result = "Got it. I've added this task:\n  ";
@@ -127,7 +121,7 @@ public class CommandAgent {
      * @param taskId the displayed id in the taskList.
      * @return a String suggesting the completion of task update.
      */
-    public String generateUpdateFeedback(int taskId) {
+    public static String generateUpdateResponse(int taskId) {
         Task currentTask = taskList.getTaskById(taskId);
         return "Nice! I've marked this task as done:\n  " + currentTask;
     }
@@ -136,7 +130,7 @@ public class CommandAgent {
      * Generate the feedback for a retrieval of tasks information.
      * @return a String showing all the task information.
      */
-    public String generateRetrievalFeedback() {
+    public static String generateRetrievalResponse() {
         return taskList.printTasks();
     }
 
@@ -146,7 +140,7 @@ public class CommandAgent {
      * @param deletedTask the delete task.
      * @return a String suggesting the task has been deleted.
      */
-    public String generateDeleteFeedback(Task deletedTask) {
+    public static String generateDeleteResponse(Task deletedTask) {
         String result = "Noted. I've removed this task:\n  ";
         result += deletedTask;
         result += String.format("\nNow you have %d tasks in the list.", listSize());

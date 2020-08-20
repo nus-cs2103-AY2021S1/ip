@@ -1,10 +1,11 @@
 package duke;
 
+import java.time.format.DateTimeParseException;
+
 import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
-import duke.command.ErrorCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
@@ -13,18 +14,18 @@ import duke.command.TodoCommand;
 /**
  * A duke.CommandReader object to parse the user input.
  */
-public class CommandReader {
+public class Parser {
     /**
-     * Read in user input and identify the
-     * correct type of duke.command for the input.
+     * Read in user input and identify the correct type of duke.command for the input.
      *
      * @param userInput a String from user's input.
      * @return a Command to be processed by the agent.
+     * @throws DukeException if the command construction involves error or the DateTimeParsing involves error.
      */
-    public Command readCommand(String userInput) {
+    public static Command parse(String userInput) throws DukeException {
         String[] words = userInput.split(" ");
         String commandWord = words[0];
-        String content = words.length == 1 ? "" : CommandReader.generateContent(words);
+        String content = words.length == 1 ? "" : Parser.generateContent(words);
 
         try {
             switch (commandWord) {
@@ -45,8 +46,8 @@ public class CommandReader {
             default:
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-        } catch (DukeException e) {
-            return new ErrorCommand(e.getMessage());
+        } catch (DukeException | DateTimeParseException e) {
+            throw new DukeException(e.getMessage());
         }
     }
 

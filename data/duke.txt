@@ -2,3 +2,4 @@ T | 1 | read book
 E | 0 | project meeting | Oct 15 2019
 T | 1 | join sports club
 D | 1 | submit homework | Aug 12 2020
+T | 1 | get delivery

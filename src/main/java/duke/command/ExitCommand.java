@@ -12,8 +12,4 @@ public class ExitCommand extends Command {
     public String sendRequest() {
         return "end";
     }
-
-    public static boolean isExitCommand(Command c) {
-        return c instanceof ExitCommand;
-    }
 }
