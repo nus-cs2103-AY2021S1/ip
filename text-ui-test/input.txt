@@ -13,10 +13,16 @@ todo join sports club
 todo borrow book
 list
 done
+done a
+done 100
 done 1
-done 4
 list
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
+list
+delete
+delete 100
+delete 2
+delete 3
 list
 bye
