@@ -1,7 +1,93 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello I'm Duke!
+What can I do for you?
+$ Here are the tasks in your list:
+You now have 0 tasks in the list.
+$ Got it. I've added this task:
+[T][✘] eat lunch later
+You now have 1 tasks in the list.
+$ Here are the tasks in your list:
+1. [T][✘] eat lunch later
+You now have 1 tasks in the list.
+$ Got it. I've added this task:
+[T][✘] eat dinner later
+You now have 2 tasks in the list.
+$ Here are the tasks in your list:
+1. [T][✘] eat lunch later
+2. [T][✘] eat dinner later
+You now have 2 tasks in the list.
+$ Nice! I've marked this task as done:
+1. [T][✓] eat lunch later
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [T][✘] eat dinner later
+You now have 2 tasks in the list.
+$ Got it. I've added this task:
+[D][✘] finish ip (by: today 2359hrs)
+You now have 3 tasks in the list.
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [T][✘] eat dinner later
+3. [D][✘] finish ip (by: today 2359hrs)
+You now have 3 tasks in the list.
+$ Got it. I've added this task:
+[D][✘] watch cs2100 lecture (by: tomorrow 7am)
+You now have 4 tasks in the list.
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [T][✘] eat dinner later
+3. [D][✘] finish ip (by: today 2359hrs)
+4. [D][✘] watch cs2100 lecture (by: tomorrow 7am)
+You now have 4 tasks in the list.
+$ Nice! I've marked this task as done:
+3. [D][✓] finish ip (by: today 2359hrs)
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [T][✘] eat dinner later
+3. [D][✓] finish ip (by: today 2359hrs)
+4. [D][✘] watch cs2100 lecture (by: tomorrow 7am)
+You now have 4 tasks in the list.
+$ Got it. I've added this task:
+[E][✘] go eat lunch with jingyen (at: 12 noon today)
+You now have 5 tasks in the list.
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [T][✘] eat dinner later
+3. [D][✓] finish ip (by: today 2359hrs)
+4. [D][✘] watch cs2100 lecture (by: tomorrow 7am)
+5. [E][✘] go eat lunch with jingyen (at: 12 noon today)
+You now have 5 tasks in the list.
+$ Got it. I've added this task:
+[E][✘] submit temperature declaration (at: 11am)
+You now have 6 tasks in the list.
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [T][✘] eat dinner later
+3. [D][✓] finish ip (by: today 2359hrs)
+4. [D][✘] watch cs2100 lecture (by: tomorrow 7am)
+5. [E][✘] go eat lunch with jingyen (at: 12 noon today)
+6. [E][✘] submit temperature declaration (at: 11am)
+You now have 6 tasks in the list.
+$ Got it. I've added this task:
+[T][✘] collect stuff from hackerspace nus
+You now have 7 tasks in the list.
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [T][✘] eat dinner later
+3. [D][✓] finish ip (by: today 2359hrs)
+4. [D][✘] watch cs2100 lecture (by: tomorrow 7am)
+5. [E][✘] go eat lunch with jingyen (at: 12 noon today)
+6. [E][✘] submit temperature declaration (at: 11am)
+7. [T][✘] collect stuff from hackerspace nus
+You now have 7 tasks in the list.
+$ Nice! I've marked this task as done:
+6. [E][✓] submit temperature declaration (at: 11am)
+$ Here are the tasks in your list:
+1. [T][✓] eat lunch later
+2. [T][✘] eat dinner later
+3. [D][✓] finish ip (by: today 2359hrs)
+4. [D][✘] watch cs2100 lecture (by: tomorrow 7am)
+5. [E][✘] go eat lunch with jingyen (at: 12 noon today)
+6. [E][✓] submit temperature declaration (at: 11am)
+7. [T][✘] collect stuff from hackerspace nus
+You now have 7 tasks in the list.
+$ Bye. Hope to see you again soon!
