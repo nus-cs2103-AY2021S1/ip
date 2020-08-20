@@ -1,16 +1,23 @@
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This Duke class is the main class that prints out the relevant outputs by including all the subclasses of Task and
+ * taking in the input.
+ */
 public class Duke {
+    /**
+     * todos includes all the string being input into the input.txt file.
+     */
     private static List<String> todos = new ArrayList<>();
-    public static void scan(){
+
+    /**
+     * This is a static function because it adds all the string in a line into the todos list is static, which contains information
+     * of the action you want to do.
+     */
+    private static void scan(){
         Scanner sc = new Scanner(System.in);
         if(sc.hasNext()) {
             do {
@@ -18,7 +25,20 @@ public class Duke {
             } while (sc.hasNextLine());
         }
     }
-    public static void output(){
+
+    /**
+     * The output function is also static and it reads the input strings that is stored in the static list of todos. This
+     * then gives differently outputs and behaves differently depending on the input string.
+     * If bye is the first word, it breaks out the loop and gives by message
+     * If the first word is list, it lists out all the Tasks that are added
+     * If the first word is delete, it deletes the task with the number given following this, if task is present, previously not deleted and the number is present, else it prints out error message depending on situation
+     * If the first word is done, it marks the task with the number given following this as done, if task is present, previously not deleted and the number is present, else it prints out error message depending on situation
+     * If the first word is todo, it adds the todo task if the description is present and prints that the todo is added, if not error message saying that the task is absent is printed
+     * If the first word is deadline, it adds the description task if the description and day is present and prints that the deadline is added, else error message is printed depending on situation
+     * If the first word is event, it adds the event task if the description and daytime is present and prints that the event is added, else error message is printed depending on situation
+     * If the first word is neither of those listed above, then an error message is printed saying that it is incomprehensible
+     */
+    private static void output(){
         System.out.println("  ____________________________________________________________\n" + "  Hello! I'm Duke\n" + "  What can I do for you?\n" +
                 "  ____________________________________________________________");
         for (String string : todos) {
@@ -31,10 +51,19 @@ public class Duke {
                 System.out.println("\n" + string + "\n  ____________________________________________________________");
                 Task.listing();
             }
+            else if(string.length() >= 6 && string.substring(0, 6).equals("delete")){
+                System.out.println("\n" + string + "\n  ____________________________________________________________");
+                if(string.length() == 6 || string.length() == 7){
+                    System.out.println(new DeleteException(true, false).toString());
+                    continue;
+                }
+                int ID = Integer.parseInt(string.substring(7));
+                Task.deleteDone(ID);
+            }
             else if (string.length() >= 4 && string.substring(0, 4).equals("done")) {
                 System.out.println("\n" + string + "\n  ____________________________________________________________");
                 if(string.length() == 4 || string.length() == 5){
-                    System.out.println(new DoneException(true).toString());
+                    System.out.println(new DoneException(true, false).toString());
                     continue;
                 }
                 int ID = Integer.parseInt(string.substring(5));
@@ -52,7 +81,7 @@ public class Duke {
             else if (string.length() >= 5 && string.substring(0, 5).equals("event")) {
                 System.out.println("\n" + string + "\n  ____________________________________________________________");
                 if(string.length() == 5 || string.length() == 6){
-                    System.out.println(new EventException(true, false).toString());
+                    System.out.println(new EventException(true).toString());
                     continue;
                 }
                 String s = "";
@@ -67,16 +96,15 @@ public class Duke {
                     s = s + string.charAt(i);
                 }
                 if(!time){
-                    System.out.println(new EventException(true, false).toString());
+                    System.out.println(new EventException(false).toString());
                     continue;
                 }
                 event e = new event(s.substring(1, s.length() - 1), string.substring(index + 4));
                 e.output();
-                //event e = new event(string.substring())
             }else if (string.length() >= 8 && string.substring(0, 8).equals("deadline")) {
                 System.out.println("\n" + string + "\n  ____________________________________________________________");
                 if(string.length() == 8 || string.length() == 9){
-                    System.out.println(new DeadlineException(true, false).toString());
+                    System.out.println(new DeadlineException(true).toString());
                     continue;
                 }
                 String s = "";
@@ -91,7 +119,7 @@ public class Duke {
                     s = s + string.charAt(i);
                 }
                 if(!time){
-                    System.out.println(new DeadlineException(true, false).toString());
+                    System.out.println(new DeadlineException(false).toString());
                     continue;
                 }
                 deadline e = new deadline(s.substring(1, s.length() - 1), string.substring(index + 4));
@@ -104,7 +132,14 @@ public class Duke {
         }
 
     }
-    public static void main(String[] args) throws FileNotFoundException {
+
+    /**
+     *
+     * @param args of type String[]
+     * reads input using scan() and adds it to todos.
+     *  Then, prints out relevant information using the output() func.
+     */
+    public static void main(String[] args)  {
         scan();
         output();
     }

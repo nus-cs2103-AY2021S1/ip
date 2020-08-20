@@ -3,31 +3,57 @@
   What can I do for you?
   ____________________________________________________________
 
-done 1
+todo read book
+  ____________________________________________________________
+  Got it. I've added this task:
+  [T][✗] read book
+  Now you have 1 tasks in the list.
+  ____________________________________________________________
+
+list
+  ____________________________________________________________
+   Here are the tasks in your list:
+  1.[T][✗] read book
+  ____________________________________________________________
+
+delete 1
+  ____________________________________________________________
+   Noted. I've removed this task:
+   [T][✗] read book
+  Now you have 1 tasks in the list.
+  ____________________________________________________________
+
+delete 1
+  ____________________________________________________________
+  '☹' OOPS!!! This task is previously deleted.
+  ____________________________________________________________
+
+delete
+  ____________________________________________________________
+  '☹' OOPS!!! The description of delete cannot be empty.
+  ____________________________________________________________
+
+event
+  ____________________________________________________________
+  '☹' OOPS!!! The description of an event cannot be empty.
+  ____________________________________________________________
+
+event read book
+  ____________________________________________________________
+  '☹' OOPS!!! The specific date of an event cannot be empty.
+  ____________________________________________________________
+
+delete 2
   ____________________________________________________________
   '☹' OOPS!!! The ID is not yet defined.
   ____________________________________________________________
 
-blah
+deadline read book
   ____________________________________________________________
-  '☹ OOPS!!! I'm sorry, but I don't know what that means :-(
-  ____________________________________________________________
-
-event read book /at Aug  6th 2pm
-  ____________________________________________________________
-  Got it. I've added this task:
-  [E][✗] read book(at: Aug  6th 2pm)
-  Now you have 1 tasks in the list.
+  '☹' OOPS!!! The specific date/time of a deadline cannot be empty.
   ____________________________________________________________
 
-deadline read book /at Aug 6th
+deadline
   ____________________________________________________________
-  Got it. I've added this task:
-  [D][✗] read book(by: Aug 6th)
-  Now you have 2 tasks in the list.
-  ____________________________________________________________
-
-bye
-  ____________________________________________________________
-  Bye. Hope to see you again soon!
+  '☹' OOPS!!! The description of a deadline cannot be empty.
   ____________________________________________________________

@@ -1,5 +1,10 @@
-done 1
-blah
-event read book /at Aug  6th 2pm
-deadline read book /at Aug 6th
-bye
+todo read book
+list
+delete 1
+delete 1
+delete
+event
+event read book
+delete 2
+deadline read book
+deadline
