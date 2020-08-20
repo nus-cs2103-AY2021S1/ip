@@ -37,8 +37,10 @@ public class Duke {
         System.out.println("Hello I am\n" + logo + "\n" + "Feed me some input! :3\n");
 
         while (check) {
-            String input = sc.next();
-            switch (input) {
+            String input = sc.nextLine();
+            String arr[] = input.split(" ", 2);
+            String command = arr[0];
+            switch (command) {
                 case "list":
                     System.out.println(border);
                     for (int i = 0; i < storedItems.size(); i ++) {
@@ -47,7 +49,7 @@ public class Duke {
                     System.out.println(border);
                     break;
                 case "done":
-                    int taskNum = sc.nextInt();
+                    int taskNum = Integer.parseInt(arr[1]);
                     if (taskNum > 0 && taskNum <= storedItems.size()) {
                         Task task = storedItems.get(taskNum - 1);
                         task.doTask();
