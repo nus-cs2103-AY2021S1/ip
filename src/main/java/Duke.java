@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static List<String> texts = new ArrayList<>();
+    private static List<Task> texts = new ArrayList<>();
 
     private static void greet() {
         String greeting = "Hello mah dud, itza handsome robo speakin\n" +
@@ -19,8 +19,13 @@ public class Duke {
     }
 
     private static void add(String toAdd) {
-        texts.add(toAdd);
+        texts.add(new Task(toAdd));
         System.out.println("added: " + toAdd);
+    }
+
+    private static void processDone(String s) {
+        System.out.println("okcan done:");
+        System.out.println(texts.get(Integer.parseInt(s) - 1).markAsDone());
     }
 
     public static void main(String[] args) {
@@ -29,25 +34,49 @@ public class Duke {
         String nextLine = sc.nextLine();
         boolean cont = true;
         while (cont) {
-            switch (nextLine) {
-                case "bye":
-                    farewell();
-                    cont = false;
-                    break;
-                case "list":
-                    int num = 1;
-                    for (String i: texts) {
-                        System.out.println(num + ": " + i);
-                        num++;
+            if (nextLine.length() >= 6) {
+                if (nextLine.substring(0, 5).equals("done ")) {
+                    processDone(nextLine.substring(5));
+                    nextLine = sc.nextLine();
+                } else {
+                    switch (nextLine) {
+                        case "bye":
+                            farewell();
+                            cont = false;
+                            break;
+                        case "list":
+                            int num = 1;
+                            System.out.println("Here yur tasks faggit: ");
+                            for (Task i : texts) {
+                                System.out.println(num + "." + i.getStatus());
+                                num++;
+                            }
+                            nextLine = sc.nextLine();
+                            break;
+                        default:
+                            add(nextLine);
+                            nextLine = sc.nextLine();
                     }
-                    nextLine = sc.nextLine();
-                    break;
-//                case "bye":
-//                    //someth
-//                    break;
-                default:
-                    add(nextLine);
-                    nextLine = sc.nextLine();
+                }
+            } else {
+                switch (nextLine) {
+                    case "bye":
+                        farewell();
+                        cont = false;
+                        break;
+                    case "list":
+                        int num = 1;
+                        System.out.println("Here yur tasks faggit: ");
+                        for (Task i : texts) {
+                            System.out.println(num + "." + i.getStatus());
+                            num++;
+                        }
+                        nextLine = sc.nextLine();
+                        break;
+                    default:
+                        add(nextLine);
+                        nextLine = sc.nextLine();
+                }
             }
         }
         sc.close();
