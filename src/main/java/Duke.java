@@ -28,7 +28,7 @@ public class Duke {
     //Initialise Duke
     private void startChat() {
         //Initialisation Message
-        String greeting = "Golly! Who do we have here? The name's Duke, how can I be of assistance?";
+        String greeting = "Oh Golly! Who do we have here?\nThe name's Duke, how can I be of assistance?";
         System.out.println(greeting);
 
         //Initialise scanner to prompt user
@@ -157,24 +157,34 @@ public class Duke {
 
     //Adds a Deadline task to the task list
     private void addDeadline(String user_input) throws InaptFollowUpCommandException,
-            MissingFollowUpCommandException {
+            MissingFollowUpCommandException, EmptyTaskException {
         String dateTime = getDateTime(user_input, Command.DEADLINE);
-        Deadline newTask = new Deadline(user_input.substring(9, user_input.indexOf("/")).trim(), dateTime);
-        this.taskList.add(newTask);
-        addedToListMsg();
-        System.out.println("\t" + newTask);
-        getTotalTasksMsg();
+        String deadlineDescription = user_input.substring(9, user_input.indexOf("/")).trim();
+        if (deadlineDescription.isEmpty()) {
+            throw new EmptyTaskException("deadline");
+        } else {
+            Deadline newTask = new Deadline(deadlineDescription, dateTime);
+            this.taskList.add(newTask);
+            addedToListMsg();
+            System.out.println("\t" + newTask);
+            getTotalTasksMsg();
+        }
     }
 
     //Adds an Event task to the task list
     private void addEvent(String user_input) throws InaptFollowUpCommandException,
-            MissingFollowUpCommandException {
+            MissingFollowUpCommandException, EmptyTaskException {
         String dateTime = getDateTime(user_input, Command.EVENT);
-        Event newTask = new Event(user_input.substring(6, user_input.indexOf("/")).trim(), dateTime);
-        this.taskList.add(newTask);
-        addedToListMsg();
-        System.out.println("\t" + newTask);
-        getTotalTasksMsg();
+        String eventDescription = user_input.substring(6, user_input.indexOf("/")).trim();
+        if (eventDescription.isEmpty()) {
+            throw new EmptyTaskException("event");
+        } else {
+            Event newTask = new Event(eventDescription, dateTime);
+            this.taskList.add(newTask);
+            addedToListMsg();
+            System.out.println("\t" + newTask);
+            getTotalTasksMsg();
+        }
     }
 
     //To print out add to list message
@@ -185,12 +195,17 @@ public class Duke {
 
     //To obtain date and time that follows a /by or /at
     private String getDateTime(String user_input, Command command) throws InaptFollowUpCommandException,
-            MissingFollowUpCommandException {
+            MissingFollowUpCommandException, EmptyTaskException {
         int slashIndex = user_input.indexOf("/");
 
         if (slashIndex != -1) {
             if (checkFollowUpCommand(user_input, slashIndex, command)) {
-                return user_input.substring(slashIndex + 4);
+                String dateTime = user_input.substring(slashIndex + 4).trim();
+                if (dateTime.isEmpty()) {
+                    throw new EmptyTaskException("date and time");
+                } else {
+                    return dateTime;
+                }
             } else {
                 throw new InaptFollowUpCommandException();
             }
@@ -200,15 +215,19 @@ public class Duke {
     }
 
     //Use to check whether commands such as event and deadline have follow up '/' command
-    private boolean checkFollowUpCommand(String user_input, int slashIndex, Command command) {
-        if (user_input.charAt(slashIndex + 1) == 'b' && user_input.charAt(slashIndex + 2) == 'y'
-                && user_input.charAt(slashIndex + 3) == ' ' && command.equals(Command.DEADLINE)) {
-            return true;
-        } else if (user_input.charAt(slashIndex + 1) == 'a' && user_input.charAt(slashIndex + 2) == 't'
-                && user_input.charAt(slashIndex + 3) == ' ' && command.equals(Command.EVENT)) {
-            return true;
-        } else {
-            return false;
+    private boolean checkFollowUpCommand(String user_input, int slashIndex, Command command) throws  EmptyTaskException {
+        try {
+            if (user_input.charAt(slashIndex + 1) == 'b' && user_input.charAt(slashIndex + 2) == 'y'
+                    && user_input.charAt(slashIndex + 3) == ' ' && command.equals(Command.DEADLINE)) {
+                return true;
+            } else if (user_input.charAt(slashIndex + 1) == 'a' && user_input.charAt(slashIndex + 2) == 't'
+                    && user_input.charAt(slashIndex + 3) == ' ' && command.equals(Command.EVENT)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new EmptyTaskException("date and time");
         }
     }
 
