@@ -36,7 +36,7 @@ public class Message {
         this.list = list;
     }
 
-    public void reply() {
+    public void reply() throws NoDescriptionException, NoCommandException {
         System.out.println("____________________________________________________________");
         if (this.cmd == Command.START) {
             System.out.println("Eh what's up! I'm Meimei" +
@@ -68,7 +68,13 @@ public class Message {
                    this.cmd == Command.DEADLINE ||
                    this.cmd == Command.EVENT) {
             String[] words = message.split(" ", 2);
-            String taskString = words[1];
+            String taskString;
+
+            try {
+                taskString = words[1];
+            } catch (Exception e) {
+                throw new NoDescriptionException(cmd.toString().toLowerCase());
+            }
 
             Task t = null;
             if (this.cmd == Command.TODO) {
@@ -103,7 +109,7 @@ public class Message {
             }
 
         } else if (this.cmd == Command.NOT_FOUND) {
-            System.out.println("I cannot find this command leh. Try sth else?");
+            throw new NoCommandException();
         }
         System.out.println("____________________________________________________________");
     }

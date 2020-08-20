@@ -8,11 +8,19 @@ public class Duke {
         List<Task> list = new ArrayList<>();
 
         Message start = new Message("start", list);
-        start.reply();
+        try {
+            start.reply();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         while (sc.hasNext()) {
             Message msg = new Message(sc.nextLine(), list);
-            msg.reply();
+            try {
+                msg.reply();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
             if (msg.getCmd() == Command.BYE) {
                 break;
             }
