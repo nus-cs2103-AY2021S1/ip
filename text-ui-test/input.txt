@@ -1,0 +1,10 @@
+todo borrow book
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
+done 1
+done 2
+todo return book
+list
+deadline homework /by today
+event lesson /at Friday 10-12am
+bye

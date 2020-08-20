@@ -65,7 +65,7 @@ public class Duke {
                 list.add(noOfTasks, newTask);
                 noOfTasks++;
                 System.out.println("\tadded: " + newTask);
-                System.out.println("\tYou have " + list.size() + " tasks to do, " + noOfTasks + " undone!");
+                System.out.println("\tYou have " + list.size() + " tasks, " + noOfTasks + " undone!");
                 printList(list, true);
             }
         }
