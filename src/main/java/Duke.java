@@ -14,10 +14,44 @@ public class Duke {
         System.out.println(DIVIDER.concat("\t".concat(message.concat("\n"))).concat(DIVIDER));
     }
 
-    private static void addTask(String taskDescription) {
-        Task task = new Task(taskDescription);
+    private static String combineWords(List<String> words) {
+        StringBuilder message = new StringBuilder();
+        for (int i = 0; i < words.size(); i++) {
+            if (i == 0) {
+                message.append(words.get(i));
+            } else {
+                message.append((" ".concat(words.get(i))));
+            }
+        }
+        return message.toString();
+    }
+
+    private static void addTask(String command) {
+        List<String> words = Arrays.asList(command.split(" "));
+        String taskType = words.get(0);
+        Task task;
+        if (taskType.equalsIgnoreCase("todo")) {
+            String taskDescription = combineWords(words.subList(1, words.size()));
+            task = new Todo(taskDescription);
+        } else if (taskType.equalsIgnoreCase("deadline")) {
+            int index = words.indexOf("/by");
+            String taskDescription = combineWords(words.subList(1, index));
+            String by = combineWords(words.subList(index + 1, words.size()));
+            task = new Deadline(taskDescription, by);
+        } else if (taskType.equalsIgnoreCase("event")) {
+            int index = words.indexOf("/at");
+            String taskDescription = combineWords(words.subList(1, index));
+            String at = combineWords(words.subList(index + 1, words.size()));
+            task = new Event(taskDescription, at);
+        } else {
+            printResponse("Invalid command");
+            return;
+        }
         taskList.add(task);
-        printResponse("added: ".concat(taskDescription));
+        String message = "Got it. I've added this task:";
+        message += "\n\t\t".concat(task.toString());
+        message += String.format("\n\tNow you have %d tasks in the list.", taskList.size());
+        printResponse(message);
     }
 
     private static void listTasks() {
@@ -25,15 +59,13 @@ public class Duke {
             printResponse("No task added yet...");
             return;
         }
-        StringBuilder tasks = new StringBuilder();
+        StringBuilder taskMessage = new StringBuilder();
+        taskMessage.append("Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
-            String task = String.format("%d. %s", (i + 1), taskList.get(i));
-            if (i > 0) {
-                task = "\n\t".concat(task);
-            }
-            tasks.append(task);
+            String task = String.format("\n\t%d.%s", (i + 1), taskList.get(i));
+            taskMessage.append(task);
         }
-        printResponse(tasks.toString());
+        printResponse(taskMessage.toString());
     }
 
     private static int extractTaskNumber(String command) {
