@@ -5,3 +5,50 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+____________________________________
+Hello! I'm Duke
+What can I do for you?
+____________________________________
+
+____________________________________
+Got it. I've added this task: 
+[T][✗]wash car
+You now have 1 tasks in the list.
+____________________________________
+
+____________________________________
+Got it. I've added this task: 
+[D][✗] project (by: tonight 2359)
+You now have 2 tasks in the list.
+____________________________________
+
+____________________________________
+Here are the tasks in your list: 
+
+1. [T][✗]wash car
+2. [D][✗] project (by: tonight 2359)
+____________________________________
+
+____________________________________
+Got it. I've added this task: 
+[E][✗]  party (at: Orchard 10pm)
+You now have 3 tasks in the list.
+____________________________________
+
+____________________________________
+Nice! Now I will mark this as done: 
+[D][✓] project (by: tonight 2359)
+____________________________________
+
+____________________________________
+Here are the tasks in your list: 
+
+1. [T][✗]wash car
+2. [D][✓] project (by: tonight 2359)
+3. [E][✗]  party (at: Orchard 10pm)
+____________________________________
+
+____________________________________
+Bye. Hope to see you again soon!
+____________________________________
+

@@ -1,0 +1,7 @@
+todo wash car
+deadline project /by tonight 2359
+list
+event party /at Orchard 10pm
+done 2
+list
+bye
