@@ -7,7 +7,6 @@ public class Duke {
 
         ArrayList<Task> tasks = new ArrayList<>();
 
-
         Scanner Sc = new Scanner(System.in);
         String line = "____________________________\n"
                      +"____________________________";
@@ -70,6 +69,13 @@ public class Duke {
                                             ,taskDescription.split(" /")[1]);
                     tasks.add(newTask);
                     newTask.printAddTask();
+                    printNumberOfTask(tasks.size());
+                    break;
+                }
+                case "delete" : {
+                    int index = Integer.parseInt(taskDescription) - 1;
+                    tasks.get(index).printDeleteTask();
+                    tasks.remove(index);
                     printNumberOfTask(tasks.size());
                     break;
                 }

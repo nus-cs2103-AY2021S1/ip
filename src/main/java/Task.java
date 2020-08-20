@@ -17,4 +17,10 @@ public abstract class Task {
                 String.format("Got it. I've added this task:\n  %s",this.toString())
         );
     }
+
+    public void printDeleteTask(){
+        System.out.println(
+                String.format("Noted. I've removed this task:\n %s",this.toString())
+        );
+    }
 }
