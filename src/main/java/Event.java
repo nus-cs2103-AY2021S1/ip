@@ -2,9 +2,9 @@ public class Event extends Task{
 
     private String dateTime;
 
-    public Event(String description,String dateTime)  {
-        super(description);
-        this.dateTime = dateTime;
+    public Event(String description) throws DukeException {
+        super(description.substring(5),"event");
+        this.dateTime = description.substring(description.indexOf("/")+4);
         this.setType("event");
 
     }

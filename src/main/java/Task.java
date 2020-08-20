@@ -3,10 +3,24 @@ public class Task {
     protected boolean isDone;
     private String type;
 
-    public Task(String description) {
-        this.type="task";
-            this.description = description.substring(1);
+    public Task(String description,String type) throws DukeException{
+        this.type=type;
+        if(!description.isEmpty()) {
+            if(description.contains("/by")) {
+                this.type = "deadline";
+                this.description = description.substring(0, description.indexOf("/"));
+            }else if(description.contains("/at")){
+                this.type = "event";
+                this.description = description.substring(0, description.indexOf("/"));
+
+            }else{
+                this.type = "todo";
+                this.description = description;
+            }
             this.isDone = false;
+        }else{
+            throw new DukeException("OOPS!!! The description of a "+type+" cannot be empty.");
+        }
     }
 
     public void setType(String type){
