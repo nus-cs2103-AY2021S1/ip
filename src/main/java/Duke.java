@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,7 +50,7 @@ public class Duke {
                             System.out.println(++idx + ". " + t.toString());
                         }
                         do {
-                            System.out.println("Choose the tasks to be marked as 'Done'");
+                            System.out.println("Choose the task(s) to be marked as 'Done'");
                             System.out.print(cmd);
                             try {
                                 userInput = sc.nextLine();
@@ -61,11 +62,24 @@ public class Duke {
                                         .mapToInt(Integer::parseInt)
                                         .toArray();
 
-                                System.out.println(duke + "Nice! I've marked the following as done:");
+                                ArrayList<Task> doneTasks = new ArrayList<>();
                                 for (int index : tasksArray) {
-                                    Task t = list.get(index - 1);
-                                    t.setDone();
-                                    System.out.println(t.toString());
+                                    try {
+                                        if (index > list.size() || index <= 0) {
+                                            throw new DukeException("This task #" + index + " does not exist.");
+                                        }
+                                        Task t = list.get(index - 1);
+                                        t.setDone();
+                                        doneTasks.add(t);
+                                    } catch (DukeException e) {
+                                        System.out.println(duke + e.getMessage());
+                                    }
+                                }
+                                if (!doneTasks.isEmpty()) {
+                                    System.out.println(duke + "Nice! I've marked the following as done:");
+                                    for (Task t : doneTasks) {
+                                        System.out.println(t.toString());
+                                    }
                                 }
                                 validInput = true;
                             } catch (DukeException e) {
@@ -143,6 +157,54 @@ public class Duke {
                         }
                     } while (!validInput);
                     break;
+                case "delete":
+                    if (list.isEmpty()) {
+                        System.out.println(duke + "Your Task List is empty. There's nothing to be deleted.");
+                    } else {
+                        System.out.println(duke + "Here's your Task List:");
+                        for (Task t : list) {
+                            System.out.println(++idx + ". " + t.toString());
+                        }
+                        do {
+                            System.out.println("Choose the task(s) to be deleted.");
+                            System.out.print(cmd);
+                            try {
+                                userInput = sc.nextLine();
+                                if (userInput.isBlank()) {
+                                    validInput = false;
+                                    throw new DukeException("Yo! Enter the task number(s) to be deleted.");
+                                }
+                                int[] tasksArray = Arrays.stream(userInput.split(" "))
+                                        .sorted(Collections.reverseOrder())
+                                        .mapToInt(Integer::parseInt)
+                                        .toArray();
+
+                                ArrayList<Task> deletedTasks = new ArrayList<>();
+                                for (int index : tasksArray) {
+                                    try {
+                                        if (index > list.size() || index <= 0) {
+                                            throw new DukeException("This task #" + index + " does not exist.");
+                                        }
+                                        Task t = list.get(index - 1);
+                                        list.remove(index - 1);
+                                        deletedTasks.add(t);
+                                    } catch (DukeException e) {
+                                        System.out.println(duke + e.getMessage());
+                                    }
+                                }
+                                if (!deletedTasks.isEmpty()) {
+                                    System.out.println(duke + "I've deleted the task(s) you specified:");
+                                    for (Task t : deletedTasks) {
+                                        System.out.println(t.toString());
+                                    }
+                                }
+                                validInput = true;
+                            } catch (DukeException e) {
+                                System.out.println(duke + e.getMessage());
+                            }
+                        } while (!validInput);
+                    }
+                    break;
                 case "help":
                     showHelp();
                     break;
@@ -167,7 +229,7 @@ public class Duke {
     private static void showHelp() {
         String s = "Here's what I can do:\n";
         String msg = "Available Commands: \n" + "'todo' \n" + "'deadline' \n" + "'event' \n" + "'list' \n" +
-                "'bye'";
+                "'delete' \n" + "'bye'";
         System.out.println(s + msg);
     }
 }
