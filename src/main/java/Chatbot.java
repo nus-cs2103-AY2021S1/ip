@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Chatbot {
+
     public static void chat() throws DukeException {
         String start = "Hello! I'm Duke \nWhat can I do for you?";
         System.out.println(start);
