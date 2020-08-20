@@ -14,6 +14,10 @@ public class Task {
         return String.valueOf(this.name);
     }
 
+    public String missingNameError() {
+        return "The description of a task cannot be empty.";
+    }
+
     public String toString() {
         String marked = this.isDone ? "[✓] " : "[✗] ";
         return marked + this.name;

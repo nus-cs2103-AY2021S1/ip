@@ -57,12 +57,45 @@ public class Duke {
                     try {
                         String name = input.substring(4).trim();
                         addToStorageList(new Todo(name));
-                    } catch (NumberFormatException ex) {
-                        printError("Please input an Integer for the \"Done\" command.");
+                    } catch (DukeException ex) {
+                        printError(ex.getMessage());
+                    }
+                }
+                else if (input.length() >= 5 && input.substring(0,5).toUpperCase().equals(Commands.EVENT.getString())) {
+                    try {
+                        int limiterPosition = input.indexOf(" /at ");
+                        String name;
+                        String timing;
+                        if (limiterPosition != -1) {
+                            name = input.substring(5, limiterPosition).trim();
+                            timing = input.substring(limiterPosition + 5).trim();
+                        } else {
+                            throw new DukeException("Missing date/time for Event task");
+                        }
+                        addToStorageList(new Event(name, timing));
+                    } catch (DukeException ex) {
+                        printError(ex.getMessage());
+                    }
+                }
+                else if (input.length() >= 8 && input.substring(0,8).toUpperCase().equals(Commands.DEADLINE.getString())) {
+                    try {
+                        int limiterPosition = input.indexOf(" /by ");
+                        String name;
+                        String dueDate;
+
+                        if (limiterPosition != -1) {
+                            name = input.substring(8, limiterPosition).trim();
+                            dueDate = input.substring(limiterPosition + 5).trim();
+                        } else {
+                            throw new DukeException("Missing deadline for Deadline task");
+                        }
+                        addToStorageList(new Deadline(name, dueDate));
+                    } catch (DukeException ex) {
+                        printError(ex.getMessage());
                     }
                 }
                 else {
-                    addToStorageList(new Task(input));
+                    printError("Sorry I don't know what that means :(");
                 }
             }
         }
@@ -72,7 +105,10 @@ public class Duke {
         System.out.printf(MESSAGE_TEMPLATE_VERBAL, message);
     }
 
-    private void addToStorageList(Task obj) {
+    private void addToStorageList(Task obj) throws DukeException{
+        if (obj.getName().length() == 0) {
+            throw new DukeException(obj.missingNameError());
+        }
         this.storageList.add(obj);
         String numOfTasks = this.storageList.size() == 1 ? "1 task" : this.storageList.size() + " tasks";
         String message = "Got it. I've added the following task: " + NEW_LINE
