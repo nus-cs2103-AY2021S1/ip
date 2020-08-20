@@ -24,18 +24,29 @@ public class Duke {
             } else if (input.equals("list")) {
                 printlist();
             } else if (input.split(" ")[0].equals("done")) {
-                int num = Integer.parseInt(input.split(" ")[1]);
-                list[num-1] = list[num-1].completedTask();
+               done(Integer.parseInt(input.split(" ")[1]));
+            } else if (input.split(" ")[0].equals("todo")) {
+                add(new ToDo(input.split(" ")[1]));
+            } else if (input.split(" ")[0].equals("deadline")) {
+                add(new Deadlines(input.split(" ")[1], input.split("/by")[1]));
+            } else if (input.split(" ")[0].equals("event")) {
+                add(new Events(input.split(" ")[1], input.split("/at")[1]));
             } else {
-                add(input);
+                System.out.println("error");
             }
         }
     }
 
-    public static void add(String input){
-        list[index] = new Task(input);
+    public static void add(Task newTask){
+        list[index] = newTask;
         index += 1;
-        System.out.println("added: " + input);
+        System.out.println("added: " + newTask.toString());
+        System.out.println("Now you have "+index+" tasks in the list.");
+    }
+
+    public static void done(int num){
+        list[num-1] = list[num-1].completedTask();
+        System.out.println("Now you have "+index+" tasks in the list.");
     }
 
     public static void printlist(){

@@ -13,12 +13,4 @@ public class Task {
         return this;
     }
 
-    @Override
-    public String toString(){
-        if (completed){
-            return "[" + "✓" + "] " + name;
-        } else {
-            return "[" + "✗" + "] " + name;
-        }
-    }
 }
