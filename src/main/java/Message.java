@@ -42,6 +42,7 @@ public class Message {
                 System.out.println("Ok bye bye! C u again :P");
                 break;
             case ADD:
+                this.list.add(message);
                 System.out.println("added: " + message);
                 break;
         }
