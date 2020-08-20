@@ -24,7 +24,7 @@ public class InputOutputHandler {
                 replyArr = reply.split(" ");
             }
         } else {
-            printMessage(new UnexpectedInputException().toString());
+            // printMessage(new UnexpectedInputException().toString());
             replyArr = null;
         }
         return replyArr;
@@ -92,13 +92,11 @@ public class InputOutputHandler {
         {
             replyArr = splitReply();
 
-            if (replyArr != null) {
-                String errorMessage = DukeExceptionHandler.checkForException(replyArr);
-                if (errorMessage != null) {
-                    printMessage(errorMessage);
-                } else {
-                    handleUserInput();
-                }
+            DukeException exception = DukeExceptionHandler.checkForException(reply);
+            if (exception != null) {
+                printMessage(exception.toString());
+            } else {
+                handleUserInput();
             }
             reply = sc.nextLine();
         }
