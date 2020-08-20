@@ -13,14 +13,13 @@ public class MainLogic {
 
         while (!bye) {
 
-            current = sc.next();
+            current = sc.nextLine();
 
-            if (commandCheck(current)) {
-                // do nothing, isCommand handles command logic
-            } else {
+            if (!commandCheck(current)) {
                 Text.normalPrint("Added: " + current);
-                storage.addItem(current);
+                storage.addTodo(current);
             }
+
         }
         sc.close();
     }
@@ -35,14 +34,35 @@ public class MainLogic {
                 storage.printOut();
                 return true;
             case "done":
-                doneCommandLogic();
+                doneLogic();
+                return true;
+            case "todo":
+                toDoLogic();
+                return true;
+            case "deadline":
+                deadlineLogic();
+                return true;
+            case "event":
+                eventLogic();
                 return true;
             default:
+//                Text.printCommandNotFoundError();
                 return false;
         }
     }
 
-    private void doneCommandLogic() {
+    private void doneLogic() {
         storage.markDone(Integer.parseInt(sc.next()));
+    }
+
+    private void toDoLogic() {
+        storage.addTodo(sc.next());
+    }
+
+    private void deadlineLogic() {
+    }
+
+    private void eventLogic() {
+
     }
 }

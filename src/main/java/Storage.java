@@ -4,9 +4,13 @@ public class Storage {
 
     private ArrayList<Task> storage = new ArrayList<>();
 
-    public void addItem(String string) {
-        storage.add(new Task(string));
+    public void addTodo(String name) {
+        storage.add(new Task("[T]", name, ""));
     }
+
+//    public void addDeadline(String name, String date) {
+//        storage.add(new Task(type, name, date));
+//    }
 
     public void printOut() {
         String temp = "";
@@ -25,7 +29,7 @@ public class Storage {
         try {
 
             storage.get(position - 1).markDone();
-            Text.normalPrint("The following item has been marked as done\n" +
+            Text.normalPrint("beri gude, finish that thing liao\n" +
                     storage.get(position - 1).toString());
 
         } catch (IndexOutOfBoundsException e) {
