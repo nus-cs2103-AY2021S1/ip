@@ -54,11 +54,18 @@ public class Sparrow {
                         throw new EmptyEventDescriptionException("No description provided for event.", e);
                     }
                     break;
+                case "delete":
+                    try {
+                        deleteTask(commandArr[1]);
+                        break;
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new MissingTaskNumberException("No task number passed to delete command.", e);
+                    }
                 default:
                     throw new UnknownCommandException(commandArr[0]);
             }
         } catch (MissingTaskNumberException e) {
-            System.out.println(standardExceptionMessage() + "️ Please enter a task number after the \"done\" command.");
+            System.out.println(standardExceptionMessage() + "️ Please enter a task number after the \"done\"/\"delete\" command.");
         } catch (EmptyTodoDescriptionException e) {
             System.out.println(standardExceptionMessage() + "️ The description of a todo cannot be empty.");
         } catch (EmptyDeadlineDescriptionException e) {
@@ -152,7 +159,7 @@ public class Sparrow {
     public static void markAsDone(String taskNum) {
         try {
             int taskNumber = Integer.parseInt(taskNum);
-            if (taskNumber <= taskList.size()) {
+            if (taskNumber <= taskList.size() && taskNumber > 0) {
                 taskList.get(taskNumber - 1).markAsDone();
                 reply("Jolly riddance! I've marked this task as done:\n" + taskList.get(taskNumber - 1));
             } else {
@@ -165,5 +172,19 @@ public class Sparrow {
     
     public static String standardExceptionMessage() {
        return "ARR!\uD83C\uDFF4\u200D\u2620\uFE0F️ ";
+    }
+
+    public static void deleteTask(String taskNum) {
+        try {
+            int taskNumber = Integer.parseInt(taskNum);
+            if (taskNumber <= taskList.size() && taskNumber > 0) {
+                Task removedTask = taskList.remove(taskNumber - 1);
+                reply("Jolly riddance! I've deleted this task:\n" + "  " + removedTask.toString() + String.format("\nNow you have %d task(s) in the list.", taskList.size()));
+            } else {
+                System.out.println("Please enter a valid task number.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter a valid task number.");
+        }
     }
 }
