@@ -119,30 +119,30 @@ public class Duke {
             userInput = scanner.nextLine();
             String command = userInput.split(" ")[0];
 
-            switch(command) {
-                case "bye":
-                    // Fallthrough
-                case "exit":
-                    System.out.println("Bye. Hope to see you again soon!");
-                    return;
-                case "todo":
-                    todoHandler(userInput);
-                    break;
-                case "deadline":
-                    deadlineHandler(userInput);
-                    break;
-                case "event":
-                    eventHandler(userInput);
-                    break;
-                case "done":
-                    doneHandler(userInput);
-                    break;
-                case "ls":
-                    lsHandler();
-                    break;
-                default:
-                    System.out.println("ERROR: Unrecognised command. Did you make a typo?");
-                    break;
+            switch (command) {
+            case "bye":
+                // Fallthrough
+            case "exit":
+                System.out.println("Bye. Hope to see you again soon!");
+                return;
+            case "todo":
+                todoHandler(userInput);
+                break;
+            case "deadline":
+                deadlineHandler(userInput);
+                break;
+            case "event":
+                eventHandler(userInput);
+                break;
+            case "done":
+                doneHandler(userInput);
+                break;
+            case "ls":
+                lsHandler();
+                break;
+            default:
+                System.out.println("ERROR: Unrecognised command. Did you make a typo?");
+                break;
             }
         }
     }
