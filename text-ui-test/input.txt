@@ -7,5 +7,7 @@ list
 done 2
 deadline do homework /by 1998-01-01
 done 4
+bad call
 find homework
+find book
 bye

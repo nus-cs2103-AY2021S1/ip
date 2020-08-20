@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import duke.DukeException;
+
 /**
  * TaskList stores a list of tasks and the corresponding operations on it.
  */
@@ -63,15 +65,20 @@ public class TaskList {
      *
      * @param taskId the displayed id in the list.
      * @return a new TaskList containing all the update tasks.
+     * @throws DukeException if the task is already done.
      */
-    public TaskList markAsDone(int taskId) {
+    public TaskList markAsDone(int taskId) throws DukeException {
         Task currentTask = this.getTaskById(taskId);
-        Task doneTask = currentTask.complete();
+        if (currentTask.isDone) {
+            throw new DukeException("☹ OOPS!!! This task is already done!");
+        } else {
+            Task doneTask = currentTask.complete();
 
-        int index = taskId - 1;
-        List<Task> newTaskList = this.tasks;
-        newTaskList.set(index, doneTask);
-        return new TaskList(newTaskList);
+            int index = taskId - 1;
+            List<Task> newTaskList = this.tasks;
+            newTaskList.set(index, doneTask);
+            return new TaskList(newTaskList);
+        }
     }
 
     /**

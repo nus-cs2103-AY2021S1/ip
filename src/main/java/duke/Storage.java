@@ -44,7 +44,7 @@ public class Storage {
             List<String> tasksInFile = Files.readAllLines(filePath, Charset.defaultCharset());
             taskList = this.loadTaskList(tasksInFile);
         } catch (IOException e) {
-            throw new DukeException("I/O Error" + e.getStackTrace());
+            throw new DukeException("☹ OOPS!!! I/O Error" + e.getStackTrace());
         }
         return taskList;
     }
@@ -71,7 +71,7 @@ public class Storage {
      */
     public TaskList loadTaskList(List<String> tasksInFile) {
         List<Task> tasksLoaded = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy", Locale.ENGLISH);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy", Locale.ENGLISH);
 
         for (String s : tasksInFile) {
             String[] taskContentArr = s.split(" [|] ");

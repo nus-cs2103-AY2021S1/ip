@@ -10,11 +10,11 @@ public class FindCommand extends Command {
 
     public FindCommand(String content) throws DukeException {
         if (content.isEmpty()) {
-            throw new DukeException("OOPS!!! Please enter some keyword for me to find");
+            throw new DukeException("☹ OOPS!!! Please enter some keyword for me to find");
         } else {
             String[] contentParts = content.split(" ");
             if (contentParts.length > 1 | contentParts[0].equals("")) {
-                throw new DukeException("OOPS!!! Please enter one keyword at a time");
+                throw new DukeException("☹ OOPS!!! Please enter one keyword at a time");
             } else {
                 this.keyword = contentParts[0];
             }
