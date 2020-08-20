@@ -12,7 +12,7 @@ public class Duke {
         String border = "\n^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^\n";
         Scanner sc = new Scanner(System.in);
         String command;
-        //String original;
+        String availableCommands = "Available commands: bye, list, done, delete, todo, deadline, event";
         ArrayList<Task> tList = new ArrayList<>();
 
         String logo = " _       _ \n"
@@ -43,6 +43,16 @@ public class Duke {
                     tList.get(index).setStatus(true);
                     System.out.println(border + "Well done! I've marked this task as done:");
                     System.out.println("\t" + tList.get(index) + border);
+                } else if (command.substring(0, 6).equals("delete")) {
+                    int index = Integer.parseInt(command.substring(7)) - 1;
+                    if(index < tList.size()) {
+                        System.out.println(border + "Ooookay! I've removed this task:");
+                        System.out.println("\t" + tList.get(index));
+                        tList.remove(index);
+                        System.out.println("Now you have " + tList.size() + " task(s) in the list." + border);
+                    } else {
+                        System.out.println(border + "Sorry fam, you can't delete a nonexistent index!" + border);
+                    }
                 } else if (command.substring(0, 4).equals("todo")) {
                     String name = command.substring(5);
                     if (name.isEmpty()) {
@@ -55,7 +65,7 @@ public class Duke {
                     }
                 } else if (command.substring(0, 5).equals("event")) {
                     int escapeIndex = command.lastIndexOf("/");
-                    String name = command.substring(6, escapeIndex);
+                    String name = command.substring(6, escapeIndex - 1);
 
                     if (name.isEmpty()) {
                         System.out.println("Naw, you can't have a event with an empty name!");
@@ -67,7 +77,7 @@ public class Duke {
                     }
                 } else if (command.substring(0, 8).equals("deadline")) {
                     int escapeIndex = command.lastIndexOf("/");
-                    String name = command.substring(9, escapeIndex);
+                    String name = command.substring(9, escapeIndex - 1);
 
                     if (name.isEmpty()) {
                         System.out.println("Naw, you can't have a deadline with an empty name!");
@@ -78,12 +88,10 @@ public class Duke {
                         System.out.println("Now you have " + tList.size() + " task(s) in the list." + border);
                     }
                 } else {
-                    System.out.println(border + "Naw, this isn't an accepted command!\nAvailable commands: bye, list," +
-                            " done, todo, deadline, event" + border);
+                    System.out.println(border + "Naw, this isn't an accepted command!\n" + availableCommands + border);
                 }
             } catch (StringIndexOutOfBoundsException e) {
-                System.out.println(border + "Naw fam, not a legal command. :'(\nAvailable commands: bye, list, " +
-                        "done, todo, deadline, event" + border);
+                System.out.println(border + "Naw fam, not a legal command. :'(\n" + availableCommands + border);
             }
         }
     }
