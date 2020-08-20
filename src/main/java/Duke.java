@@ -15,9 +15,9 @@ public class Duke {
         System.out.println("What can I do for you?");
         Scanner sc = new Scanner(System.in);
         boolean hasNext = true;
-        while (hasNext){
+        while(hasNext) {
             System.out.println("-----------------");
-            try{
+            try {
                 hasNext = processLine(sc);
             }  catch(DukeException ex) {
                 System.out.println(ex);
@@ -27,7 +27,7 @@ public class Duke {
         }
     }
 
-    public static boolean processLine(Scanner sc) throws DukeException{
+    public static boolean processLine(Scanner sc) throws DukeException {
         String str;
         str = sc.nextLine();
         ArrayList<String> tokens = new ArrayList<String>(Arrays.asList(str.split(" ")));
@@ -65,17 +65,17 @@ public class Duke {
                 }
                 int ind;
                 try{
-                    ind = Integer.parseInt(tokens.get(1))-1;
+                    ind = Integer.parseInt(tokens.get(1)) - 1;
                 } catch(Exception ex) {
-                    throw new InvalidCommandException(tokens.get(1)+" is not a number!");
+                    throw new InvalidCommandException(tokens.get(1) + " is not a number!");
                 }
                 if (tasks.size()<=ind || ind < 0) {
-                    throw new DukeException("Task "+ tokens.get(1) +" does not exist!");
+                    throw new DukeException("Task " + tokens.get(1) + " does not exist!");
                 }
                 Task task = tasks.remove(ind);
                 System.out.println("I have removed this task");
                 System.out.println(task.toString());
-                System.out.println("You now have " + tasks.size() +" tasks left!");
+                System.out.println("You now have " + tasks.size() + " tasks left!");
             }else if (command == DukeCommand.LIST) {
                 System.out.println("Here are the tasks in your list:");
                 int i=0;
