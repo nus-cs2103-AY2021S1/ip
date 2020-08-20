@@ -36,17 +36,39 @@ public class Duke {
                     default:
                         switch (firstArg) {
                             case "done":
-                                String[] stringArray = line.split(" ");
-                                if (stringArray.length < 2) {
+                                String[] doneCommandArray = line.split(" ");
+                                if (doneCommandArray.length < 2) {
                                     throw new InvalidDoneCommandException();
                                 } else {
-                                    int itemToBeMarkedAsDone = Integer.parseInt(stringArray[1]);
-                                    if (itemToBeMarkedAsDone > ls.size()) {
+                                    int itemToBeMarkedAsDone = Integer.parseInt(doneCommandArray[1]);
+                                    if (itemToBeMarkedAsDone > ls.size() || itemToBeMarkedAsDone <=0) {
                                         throw new InvalidDoneCommandException();
                                     } else {
                                         ls.get(itemToBeMarkedAsDone - 1).markAsDone();
                                     }
                                 }
+                                break;
+                            case "delete":
+                                String[] deleteCommandArray = line.split(" ");
+                                if(deleteCommandArray.length <2){
+                                    throw new InvalidDeleteCommandException();
+                                }else{
+                                    int itemToBeDeleted = Integer.parseInt(deleteCommandArray[1]);
+                                    if(itemToBeDeleted > ls.size() || itemToBeDeleted <=0){
+                                        throw new InvalidDeleteCommandException();
+                                    }else{
+                                        Task item = ls.get(itemToBeDeleted-1);
+                                        ls.remove(itemToBeDeleted-1);
+                                        System.out.println("____________________________________________________________");
+                                        System.out.println("Noted. I've removed this task:");
+                                        System.out.println(item.toString());
+                                        System.out.format("Now you have %d tasks in the list\n", ls.size());
+                                        System.out.println("____________________________________________________________");
+
+                                    }
+                                }
+
+
                                 break;
 
                             case "todo":
