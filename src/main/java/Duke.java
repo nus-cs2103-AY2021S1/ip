@@ -34,7 +34,7 @@ public class Duke {
                     printMessage("This task is done, great job!\n" + tasks.get(number - 1));
                 }
             } else if (input.startsWith("todo")) {
-                String description = input.replace("todo ", "").trim();
+                String description = input.replace("todo", "").trim();
                 if (description.length() == 0) {
                     System.out.println(new ToDoMissingDescriptionException());
                 } else {
