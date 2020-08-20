@@ -13,6 +13,8 @@ public class Duke {
 
     private static final String DONE_COMMAND = "done";
     private static final String DONE_OUTPUT = "Nice! I've marked this task as done:";
+    private static final String DELETE_COMMAND = "delete";
+    private static final String DELETE_OUTPUT = "Noted. I've removed this task: ";
     private static final String LIST_COMMAND = "list";
     private static final String LIST_OUTPUT = "Here are the tasks in your list:";
 
@@ -50,7 +52,18 @@ public class Duke {
                 } catch (IndexOutOfBoundsException exception) {
                     printResponse("☹ OOPS!!! the task number has to be valid");
                 }
-            } else if (response.split("\\s+")[0].equals(TODO_COMMAND)) {
+            } else if (response.split("\\s+")[0].equals(DELETE_COMMAND)) {
+                try {
+                    String[] components = response.split("\\s+", 2);
+                    int parameter = Integer.parseInt(components[1]);
+                    deleteTask(parameter - 1);
+                } catch (NumberFormatException exception) {
+                    printResponse("☹ OOPS!!! the task number has to be a postive integer.");
+                } catch (IndexOutOfBoundsException exception) {
+                    printResponse("☹ OOPS!!! the task number has to be valid");
+                }
+            }
+            else if (response.split("\\s+")[0].equals(TODO_COMMAND)) {
                 try {
                     Task task = new ToDoTask(response.split("\\s+", 2)[1]);
                     addToList(task);
@@ -106,6 +119,20 @@ public class Duke {
                 task.getStatusIcon(), task.getTitle());
         printResponse(response);
     }
+
+    private static void printResponseWithListSize(String response) {
+        System.out.println(LINE);
+        System.out.printf("%s%s\n", IDENT, response);
+        System.out.printf("%sNow you have %d tasks in the list.%n", IDENT, TASK_LIST.size());
+        System.out.println(LINE);
+    }
+
+    private static void deleteTask(int idx) {
+        Task task = TASK_LIST.remove(idx);
+        String response = String.format("%s\n%s%s%s", DELETE_OUTPUT, IDENT, IDENT, task);
+        printResponseWithListSize(response);
+    }
+
     private static void printResponse(String response) {
         System.out.println(LINE);
         System.out.printf("%s%s\n", IDENT, response);
