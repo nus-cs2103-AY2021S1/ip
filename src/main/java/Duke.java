@@ -9,10 +9,11 @@ public class Duke {
     public static void main(String[] args) {
         Greeting();
 
-        while (true) {
-            Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine();
+        Scanner scanner = new Scanner(System.in);
 
+        while (true) {
+
+            String input = scanner.nextLine();
             if (input.startsWith("bye")) {
                 scanner.close();
                 printMessage("Bye! See you next time :)");
@@ -64,16 +65,7 @@ public class Duke {
     }
 
     private static void Greeting() {
-        String logo = "\n" +
-                "\n" +
-                "██████╗  █████╗ ███████╗██╗  ██╗\n" +
-                "██╔══██╗██╔══██╗██╔════╝██║  ██║\n" +
-                "██║  ██║███████║███████╗███████║\n" +
-                "██║  ██║██╔══██║╚════██║██╔══██║\n" +
-                "██████╔╝██║  ██║███████║██║  ██║\n" +
-                "╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝\n" +
-                "                                \n" +
-                "\n";
+        String logo = "Dash";
         System.out.println("Hello from\n" + logo);
         System.out.println("How can I help you today?");
         System.out.println(divider);

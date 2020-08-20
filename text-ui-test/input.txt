@@ -1,0 +1,7 @@
+deadline return book /by Sunday
+todo borrow book
+event watch Westworld /at June 20th 2pm
+list
+done 1
+list
+bye
