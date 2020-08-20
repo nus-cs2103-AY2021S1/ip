@@ -1,5 +1,6 @@
 import javax.swing.plaf.DesktopIconUI;
 import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -74,9 +75,18 @@ public class Duke {
         ls.remove(position-1);
     }
 
-    public static String parseInput(String input) {
+    public static String parseInput(String input) throws DukeException{
+        ArrayList<String> commands = new ArrayList<>(
+                Arrays.asList("DONE", "LIST", "DEADLINE", "EVENT", "TODO", "BYE", "DELETE"));
         String arr[] = input.split(" ");
-        return arr[0].toUpperCase();
+        String command = arr[0].toUpperCase();
+        if (!commands.contains(command)) {
+            String errMsg = "\n____________________________________________________________\n"
+                    + "I'm sorry, I don't understand what you're asking.\n"
+                    + "____________________________________________________________";
+            throw new DukeException(errMsg);
+        }
+        return command;
     }
 
     enum Choice {
