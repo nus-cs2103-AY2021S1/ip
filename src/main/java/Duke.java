@@ -76,6 +76,17 @@ public class Duke {
                     } catch (Exception e) {
                         throw new DukeException("Invalid input, dummy. Did you put a task before and time after ' /at '?");
                     }
+                } else if (getFirstWord(command).equals("delete")) {
+                    try {
+                        int taskNumber = parseInt(command.split(" ")[1]) - 1;
+                        Task deletedTask = tasks.get(taskNumber);
+                        tasks.remove(taskNumber);
+                        int length = tasks.size();
+                        System.out.println("Oh, getting lazy are we? I approve. I've removed this:\n  " + deletedTask +
+                                "\nYou now have " + length + (length == 1 ? " thing" : " things") + " in your list");
+                    } catch (Exception e) {
+                        throw new DukeException("Invalid input, dummy. Specify the task number correctly.");
+                    }
                 } else {
                     throw new DukeException("I don't understand what you mean.");
                 }
