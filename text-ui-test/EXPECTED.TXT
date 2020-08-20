@@ -1,3 +1,10 @@
+Hello from
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
     ______________________________________
         Hello! I'm Duke
         What can I do for you?
@@ -28,11 +35,11 @@
     ______________________________________
     ______________________________________
         Nice! I've marked this task as done:
-        [T][✓] borrow book
+            [T][✓] borrow book
     ______________________________________
     ______________________________________
         Nice! I've marked this task as done:
-        [D][✓] do homework (by: no idea :-p)
+            [D][✓] do homework (by: no idea :-p)
     ______________________________________
     ______________________________________
         Here are the tasks in your list:
