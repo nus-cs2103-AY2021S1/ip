@@ -27,6 +27,9 @@ public class Duke {
                         System.out.printf("%d. %s\n", i + 1, tasks.get(i));
                     }
                 } else if (input.startsWith("done")) {
+                    if (input.length() < 7) {
+                        throw new DukeException("\u2639 OOPS!!! Task index not found.");
+                    }
                     int index = Integer.parseInt(input.substring(5)) - 1;
                     if (index >= tasks.size()) {
                         throw new DukeException("\u2639 OOPS!!! Task index not found.");
@@ -34,6 +37,18 @@ public class Duke {
                     tasks.get(index).markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(tasks.get(index));
+                } else if (input.startsWith("delete")) {
+                    if (input.length() < 7) {
+                        throw new DukeException("\u2639 OOPS!!! Task index not found.");
+                    }
+                    int index = Integer.parseInt(input.substring(7)) - 1;
+                    if (index >= tasks.size()) {
+                        throw new DukeException("\u2639 OOPS!!! Task index not found.");
+                    }
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(tasks.get(index));
+                    tasks.remove(index);
+                    System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
                 } else {
                     Task newTask = null;
                     if (input.startsWith("todo")) {
