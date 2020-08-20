@@ -67,7 +67,10 @@ public class Duke {
                         "You now have " + Integer.toString(counter + 1) + " tasks in the list.\n" + hor_line);
                 counter++;
             }else {
-                
+                todo_list[counter] = new Task(false, counter + 1, echo);
+                System.out.println(hor_line + "Got it. I've added this task: \n" + todo_list[counter].toString() + "\n" +
+                        "You now have " + Integer.toString(counter + 1) + " tasks in the list.\n" + hor_line);
+                counter++;
             }
         }
     }

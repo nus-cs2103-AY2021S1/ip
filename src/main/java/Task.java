@@ -11,7 +11,15 @@ public class Task {
 
     // mark a task as complete
     public Task markDone() {
-        return new Task(true, this.index, this.instructions);
+        if (this instanceof Todo) {
+            return new Todo(true, this.index, this.instructions);
+        } else if (this instanceof  Deadline) {
+            return new Deadline(true, this.index, this.instructions, ((Deadline) this).getDate());
+        } else if (this instanceof  Event) {
+            return new Event(true, this.index, this.instructions, ((Event) this).getTime());
+        } else {
+            return new Task(true, this.index, this.instructions);
+        }
     }
 
     @Override
