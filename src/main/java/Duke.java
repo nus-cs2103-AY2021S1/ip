@@ -5,17 +5,17 @@ public class Duke {
     public static void main(String[] args) {
         Greet();
 
-        ArrayList<String> todo = new ArrayList<>();
+        ArrayList<Task> todo = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
+        Task task = new Task(sc.nextLine());
 
-       while (!input.equals("bye")) {
-           add(input);
-           todo.add(input);
-           input = sc.nextLine();
-           if (input.equals("list")) {
+       while (!task.getDescription().equals("bye")) {
+           add(task);
+           todo.add(task);
+           task = new Task(sc.nextLine());
+           if (task.getDescription().equals("list")) {
                 printList(todo);
-                input = sc.nextLine();
+                task = new Task(sc.nextLine());
            }
        }
        Bye();
@@ -26,19 +26,19 @@ public class Duke {
         System.out.println("What can I do for you?");
     }
 
-    public static void printList(ArrayList<String> todo) {
+    public static void printList(ArrayList<Task> todo) {
         int taskNum = 0;
         System.out.println("    ____________________________________________________________");
-        for (String task : todo) {
+        for (Task task : todo) {
             taskNum++;
-            System.out.println("     " + taskNum + ". " + task);
+            System.out.println("     " + taskNum + ".[" + task.getStatusIcon() + "] " + task.getDescription());
         }
         System.out.println("    ____________________________________________________________");
     }
 
-    public static void add(String todo) {
+    public static void add(Task task) {
         System.out.println("    ____________________________________________________________");
-        System.out.println("     added: " + todo);
+        System.out.println("     added: " + task.getDescription());
         System.out.println("    ____________________________________________________________");
     }
 
