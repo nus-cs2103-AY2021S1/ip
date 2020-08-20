@@ -19,16 +19,30 @@ public class Duke {
         System.out.println(horizontal_line);
     }
 
-    public static void reponse(String input) {
+    public static void showList() {
+        System.out.println(horizontal_line);
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            System.out.println(String.format("%d.%s", i+1, task));
+        }
+        System.out.println(horizontal_line);
+    }
+
+    public static void response(String input) {
         if (input.equals("bye")) {
             System.out.println(horizontal_line);
             System.out.println("Bye. Hope to see you again soon!");
             System.out.println(horizontal_line);
         } else if (input.equals("list")) {
+            showList();
+        } else if (input.split(" ").length == 2 && input.split(" ")[0].equals("done")){
+            int doneIndex = Integer.parseInt(input.split(" ")[1]);
+            Task task = taskList.get(doneIndex - 1);
+            task.markAsDone();
             System.out.println(horizontal_line);
-            for (int i = 0; i < taskList.size(); i++) {
-                System.out.println(String.format("%d. %s", i+1, taskList.get(i).description));
-            }
+            System.out.println("Nice! I've marked this task as done: ");
+            System.out.println(task);
             System.out.println(horizontal_line);
         } else {
             taskList.add(new Task(input));
@@ -45,10 +59,9 @@ public class Duke {
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
-            reponse(input);
+            response(input);
             input = sc.nextLine();
         }
-
-        reponse(input);
+        response(input);
     }
 }
