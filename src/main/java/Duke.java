@@ -62,32 +62,54 @@ public class Duke {
         greeting();
         Scanner sc = new Scanner(System.in);
         while (true) {
-            String input = sc.nextLine();
-            // possible actions: type task (todos/deadline/event), list, bye, done 2
-            if (input.equals("bye")) {
-                bye();
-                sc.close();
-                break;
-            } else if (input.equals("list")) {
-                showList();
-            } else if (firstWord(input).equals("done")) {
-                int taskNum = getTaskNum(input);
-                markDone(taskNum);
-            } else if (firstWord(input).equals("todo")) {
-                Task newTask = new Todo(input.substring(5)); // cut "todo "
-                addTask(newTask);
-            } else if (firstWord(input).equals("deadline")) {
-                String str = input.substring(9);
-                String description = str.split(" /by ")[0]; // split the stirng by "/by ", take first half
-                String time = str.split(" /by ")[1];
-                Task newTask = new Deadline(description,time);
-                addTask(newTask);
-            } else if (firstWord(input).equals("event")) {
-                String str = input.substring(6);
-                String description = str.split(" /at ")[0]; // split the stirng by "/by ", take first half
-                String time = str.split(" /at ")[1];
-                Task newTask = new Event(description, time);
-                addTask(newTask);
+            try {
+                String input = sc.nextLine().toLowerCase(); // everything in lower case
+                // possible actions: type task (todos/deadline/event), list, bye, done 2
+                if (input.equals("bye")) {
+                    bye();
+                    sc.close();
+                    break;
+                } else if (input.equals("list")) {
+                    showList();
+                } else if (firstWord(input).equals("done")) {
+                    try {
+                        int taskNum = getTaskNum(input);
+                        markDone(taskNum);
+                    } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                        System.err.println("☹ OOPS!!! The task number is invalid.");
+                    }
+                } else if (firstWord(input).equals("todo")) {
+                    try {
+                        Task newTask = new Todo(input.substring(5)); // cut "todo "
+                        addTask(newTask);
+                    } catch (IndexOutOfBoundsException e) {
+                        System.err.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
+                } else if (firstWord(input).equals("deadline")) {
+                    try {
+                        String str = input.substring(9);
+                        String description = str.split(" /by ")[0]; // split the stirng by "/by ", take first half
+                        String time = str.split(" /by ")[1];
+                        Task newTask = new Deadline(description, time);
+                        addTask(newTask);
+                    } catch (IndexOutOfBoundsException e) {
+                        System.err.println("☹ OOPS!!! The description or date of a deadline cannot be empty.");
+                    }
+                } else if (firstWord(input).equals("event")) {
+                    try {
+                        String str = input.substring(6);
+                        String description = str.split(" /at ")[0]; // split the stirng by "/by ", take first half
+                        String time = str.split(" /at ")[1];
+                        Task newTask = new Event(description, time);
+                        addTask(newTask);
+                    } catch (IndexOutOfBoundsException e) {
+                        System.err.println("☹ OOPS!!! The description or date of a event cannot be empty.");
+                    }
+                } else { // when input cannot be recognised
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException e) { // catch all the exception I manually throwed in the try block
+                System.err.println(e);
             }
         }
     }
