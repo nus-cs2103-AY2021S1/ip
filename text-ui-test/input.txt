@@ -1,15 +1,29 @@
 ls
+todo
+ls
 todo eat lunch later
 ls
 todo eat dinner later
 ls
 done 1
 ls
+deadline
+ls
+deadline finish ip
+ls
+deadline finish ip /by today 2359hrs /by today 2359hrs
+ls
 deadline finish ip /by today 2359hrs
 ls
 deadline watch cs2100 lecture /by tomorrow 7am
 ls
 done 3
+ls
+event
+ls
+event go eat lunch with jingyen
+ls
+event go eat lunch with jingyen /at 12 noon today /at 12 noon today
 ls
 event go eat lunch with jingyen /at 12 noon today
 ls
@@ -18,5 +32,13 @@ ls
 todo collect stuff from hackerspace nus
 ls
 done 6
+ls
+done
+ls
+done asdf
+ls
+done 9999999
+ls
+thiscommanddoesntexist
 ls
 exit

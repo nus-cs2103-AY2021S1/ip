@@ -69,7 +69,7 @@ public class Duke {
     private static void eventHandler(String userInput) {
         // Check for description
         if (userInput.split(" ").length < 2) {
-            System.out.println("ERROR: Description of deadline cannot be empty.");
+            System.out.println("ERROR: Description of event cannot be empty.");
             return;
         }
         String[] input = userInput.replaceFirst("event ", "").split(" /at ");
