@@ -1,6 +1,7 @@
 # IDEA files
 /.idea/
 /out/
+**/out/
 /*.iml
 
 # Gradle build files
@@ -12,6 +13,10 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+#user-added
+.jar
+.xml
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
