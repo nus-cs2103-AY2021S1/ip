@@ -6,9 +6,7 @@
 
 hello! i'm duke :-)
 how may i help you?
-
-yay! i have added this task to your list: 
-    [T][✘] read book
-you have [1] uncompleted task(s) and [0] completed task(s)
-
-
+--------------------------------------------------------------
+--------------------------------------------------------------
+byebye! hope to see you again soon :-)
+--------------------------------------------------------------
