@@ -113,15 +113,15 @@ public class Duke {
                     break;
                 } else if (newLine.equals("list")) {
                     listTask();
-                } else if (newLine.length() >= 4 && newLine.substring(0, 4).equals("done")) {
+                } else if (newLine.startsWith("done")) {
                     completeTask(newLine);
-                } else if (newLine.length() >= 4 && newLine.substring(0, 4).equals("todo")) {
+                } else if (newLine.startsWith("todo")) {
                     todoTask(newLine);
-                } else if (newLine.length() >= 8 && newLine.substring(0, 8).equals("deadline")) {
+                } else if (newLine.startsWith("deadline")) {
                     deadlineTask(newLine);
-                } else if (newLine.length() >= 5 && newLine.substring(0, 5).equals("event")) {
+                } else if (newLine.startsWith("event")) {
                     eventTask(newLine);
-                } else if (newLine.length() >= 6 && newLine.substring(0, 6).equals("delete")) {
+                } else if (newLine.startsWith("delete")) {
                     deleteTask(newLine);
                 } else {
                     throw new InvalidInputException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
