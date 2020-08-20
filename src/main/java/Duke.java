@@ -25,11 +25,6 @@ public class Duke {
         list.add(task);
     }
 
-    private static boolean isDeleteCommand(String input) {
-        String[] stringArray = input.split(" ");
-        return stringArray[0].equals("delete");
-    }
-
     private static void deleteTask(String input) throws DukeException {
         if (isValidIndex(input)) {
             list.remove(getIndex(input));
@@ -53,14 +48,6 @@ public class Duke {
         return list.size();
     }
 
-    private static boolean isDoneCommand(String input) {
-        if (input.length() < 5) {
-            return false;
-        } else {
-            return input.substring(0, 5).equals("done ");
-        }
-    }
-
     private static boolean isValidIndex(String input) {
         String[] stringArray = input.split(" ");
         int index;
@@ -78,11 +65,6 @@ public class Duke {
         return Integer.parseInt(stringArray[1]) - 1;
     }
 
-    private static boolean isTodo(String input) {
-        String[] stringArray = input.split(" ");
-        return stringArray[0].equals("todo");
-    }
-
     private static String getTodoDescription(String input) throws DukeException{
         try {
             return input.substring(5);
@@ -91,20 +73,10 @@ public class Duke {
         }
     }
 
-    private static boolean isDeadline(String input) {
-        String[] stringArray = input.split(" ");
-        return stringArray[0].equals("deadline");
-    }
-
     private static String[] getDeadlineStrings(String input) {
         String[] stringArray = input.split(" /by ");
         stringArray[0] = stringArray[0].substring(9);
         return stringArray;
-    }
-
-    private static boolean isEvent(String input) {
-        String[] stringArray = input.split(" ");
-        return stringArray[0].equals("event");
     }
 
     private static String[] getEventTimeStrings(String input) {
@@ -146,39 +118,53 @@ public class Duke {
         System.out.println("Banana! What can King Bob do for you?\n" + divider + "\n");
 
         Scanner scanner = new Scanner(System.in);
-        String nextLine = "";
 
         while (scanner.hasNext()) {
-            nextLine = scanner.nextLine();
+            String input = scanner.nextLine();
+            String command = input.split(" ")[0];
+            InputCommand inputCommand;
 
             try {
-                if (nextLine.equals("bye")) {
-                    byeMessage();
-                    break;
-                } else if (nextLine.equals("list")) {
-                    showList();
-                } else if (isDoneCommand(nextLine)) {
-                    if (isValidIndex(nextLine)) {
-                        Task task = list.get(getIndex(nextLine));
-                        task.markAsDone();
-                        doneMessage(task);
-                    } else {
-                        throw new DukeException("You don't have such task in your list...");
-                    }
-                } else if (isDeleteCommand(nextLine)) {
-                    deletedMessage(list.get(getIndex(nextLine)));
-                    deleteTask(nextLine);
-                } else if (isTodo(nextLine)) {
-                    addList(new Todo(getTodoDescription(nextLine)));
-                    addedMessage(new Todo(getTodoDescription(nextLine)));
-                } else if (isDeadline(nextLine)) {
-                    addList(new Deadline(getDeadlineStrings(nextLine)[0], getDeadlineStrings(nextLine)[1]));
-                    addedMessage(new Deadline(getDeadlineStrings(nextLine)[0], getDeadlineStrings(nextLine)[1]));
-                } else if (isEvent(nextLine)) {
-                    addList(new Event(getEventTimeStrings(nextLine)[0], getEventTimeStrings(nextLine)[1]));
-                    addedMessage(new Event(getEventTimeStrings(nextLine)[0], getEventTimeStrings(nextLine)[1]));
-                } else {
-                    throw new DukeException("Give me a valid banana (input)!");
+                inputCommand = InputCommand.valueOf(command.toUpperCase());
+            } catch (Exception e) {
+                inputCommand = InputCommand.INVALID;
+            }
+
+            try {
+                switch (inputCommand) {
+                    case BYE:
+                        byeMessage();
+                        return;
+                    case LIST:
+                        showList();
+                        break;
+                    case DONE:
+                        if (isValidIndex(input)) {
+                            Task task = list.get(getIndex(input));
+                            task.markAsDone();
+                            doneMessage(task);
+                        } else {
+                            throw new DukeException("You don't have such task in your list...");
+                        }
+                        break;
+                    case DELETE:
+                        deletedMessage(list.get(getIndex(input)));
+                        deleteTask(input);
+                        break;
+                    case TODO:
+                        addList(new Todo(getTodoDescription(input)));
+                        addedMessage(new Todo(getTodoDescription(input)));
+                        break;
+                    case DEADLINE:
+                        addList(new Deadline(getDeadlineStrings(input)[0], getDeadlineStrings(input)[1]));
+                        addedMessage(new Deadline(getDeadlineStrings(input)[0], getDeadlineStrings(input)[1]));
+                        break;
+                    case EVENT:
+                        addList(new Event(getEventTimeStrings(input)[0], getEventTimeStrings(input)[1]));
+                        addedMessage(new Event(getEventTimeStrings(input)[0], getEventTimeStrings(input)[1]));
+                        break;
+                    default:
+                        throw new DukeException("Give me a valid banana (input)!");
                 }
             } catch (DukeException e){
                 wrapMessage(e.toString());
