@@ -31,21 +31,35 @@ public class Duke {
         String taskType = words.get(0);
         Task task;
         if (taskType.equalsIgnoreCase("todo")) {
+            if (words.size() <= 1) {
+                throw new IllegalArgumentException(":( Oops!!! The description of a Todo task cannot be empty. :-(");
+            }
             String taskDescription = combineWords(words.subList(1, words.size()));
             task = new Todo(taskDescription);
         } else if (taskType.equalsIgnoreCase("deadline")) {
+            if (words.size() <= 1) {
+                throw new IllegalArgumentException(":( Oops!!! The description of a Deadline task cannot be empty. :-(");
+            }
             int index = words.indexOf("/by");
+            if (index == -1 || words.size() - index <= 1) {
+                throw new IllegalArgumentException(":( Oops!!! Please type \"deadline [task description] /by [deadline] \" to add a Deadline task");
+            }
             String taskDescription = combineWords(words.subList(1, index));
             String by = combineWords(words.subList(index + 1, words.size()));
             task = new Deadline(taskDescription, by);
         } else if (taskType.equalsIgnoreCase("event")) {
+            if (words.size() <= 1) {
+                throw new IllegalArgumentException(":( Oops!!! The description of a Event task cannot be empty. :-(");
+            }
             int index = words.indexOf("/at");
+            if (index == -1 || words.size() - index <= 1) {
+                throw new IllegalArgumentException(":( Oops!!! Please type \"event [task description] /at [event time] \" to add a Event task");
+            }
             String taskDescription = combineWords(words.subList(1, index));
             String at = combineWords(words.subList(index + 1, words.size()));
             task = new Event(taskDescription, at);
         } else {
-            printResponse("Invalid command");
-            return;
+            throw new IllegalArgumentException(":( Oops!!! I'm sorry, but I don't know what that means :-(");
         }
         taskList.add(task);
         String message = "Got it. I've added this task:";
@@ -108,7 +122,11 @@ public class Duke {
             } else if (command.startsWith("done")) {
                 doneTask(command);
             } else {
-                addTask(command);
+                try {
+                    addTask(command);
+                } catch (IllegalArgumentException illegalArgumentException) {
+                    printResponse(illegalArgumentException.getLocalizedMessage());
+                }
             }
             command = scanner.nextLine();
         }
