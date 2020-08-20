@@ -60,7 +60,7 @@ public class Duke {
             count++;
         }
         if(count == 1) {
-            System.out.println("No more tasks! Great job");
+            System.out.println("No more tasks! Poco is happy for you");
         }
     }
 
@@ -112,6 +112,5 @@ public class Duke {
 }
 
 enum Type {
-    //hello this is enum
     TODO, EVENT, DEADLINE
 }
