@@ -20,8 +20,9 @@ public class Duke {
             switch(type) {
                 case "list":
                     System.out.println(line);
+                    System.out.println("Here are the tasks in your list:");
                     for(int i = 0; i < number; i++) {
-                        System.out.println(String.format("%d. ", i + 1) + tasks[i].toString());
+                        System.out.println(String.format("  %d. ", i + 1) + tasks[i].toString());
                     }
                     System.out.println(line + "\n");
                     break;
@@ -69,7 +70,7 @@ public class Duke {
                     input = s.nextLine();
                     int n = Integer.parseInt(input.substring(1));
                     tasks[n - 1].markAsDone();
-                    printPart("Nice! I've marked this task as done:\n" + tasks[n - 1].toString());
+                    printPart("Nice! I've marked this task as done:\n" + "  " + tasks[n - 1].toString());
                     break;
             }
 
