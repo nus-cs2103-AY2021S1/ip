@@ -17,6 +17,8 @@ public class Task {
         this.status = Status.COMPLETED;
     }
 
+    public boolean isDone() { return this.status == Status.COMPLETED; }
+
     public String toString() {
         return (this.status == Status.COMPLETED ? "[\u2718]" : "[\u2713]") + this.description;
     }

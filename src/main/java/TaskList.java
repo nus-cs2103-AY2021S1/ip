@@ -12,27 +12,38 @@ public class TaskList {
         } else {
             newTask = new Deadline(taskDescription);
         }
-        taskList.add(newTask);
+        this.taskList.add(newTask);
         return newTask;
     }
 
 
     public void completeTask(int index){
-         taskList.get(index).markDone();
+         this.taskList.get(index).markDone();
     }
 
     public Task getTask(int index) {
-        return taskList.get(index);
+        return this.taskList.get(index);
     }
 
-    public int getNoTask() { return  taskList.size(); }
+    public int getNoTask() { return  this.taskList.size(); }
+
+    public boolean isEmpty() { return this.taskList.isEmpty();}
+
+    public boolean allDone() {
+        for (Task task : this.taskList) {
+            if (!task.isDone()) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     public String toString() {
         String output = "";
-        if (taskList.size() > 0) {
+        if (this.taskList.size() > 0) {
             output = "Here are the tasks in your list:\n";
-            for (int i = 1; i < taskList.size() + 1; i++) {
-                output += String.valueOf(i) + ". " + taskList.get(i - 1).toString() + "\n";
+            for (int i = 1; i < this.taskList.size() + 1; i++) {
+                output += String.valueOf(i) + ". " + this.taskList.get(i - 1).toString() + "\n";
             }
         }
         return output;
