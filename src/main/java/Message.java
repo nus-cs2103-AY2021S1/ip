@@ -36,7 +36,7 @@ public class Message {
         this.list = list;
     }
 
-    public void reply() throws NoDescriptionException, NoCommandException {
+    public void reply() throws NoDescriptionException, NoCommandException, WrongItemIndexException {
         System.out.println("____________________________________________________________");
         if (this.cmd == Command.START) {
             System.out.println("Eh what's up! I'm Meimei" +
@@ -51,16 +51,16 @@ public class Message {
                         item.toString());
             }
         } else if (this.cmd == Command.DONE) {
-            String[] words = message.split(" ");
             try {
+                String[] words = message.split(" ", 2);
                 int index = Integer.parseInt(words[1]);
                 Task item = list.get(index - 1);
                 item.markDone();
                 System.out.println("Can, I help you mark this as done liao:" +
                         "\n  " +
                         item.toString());
-            } catch (NumberFormatException e) {
-                System.out.println("Cannot find leh. Try typing \"done {index of list item}\".");
+            } catch (Exception e) {
+                throw new WrongItemIndexException("done", list.size());
             }
         } else if (this.cmd == Command.BYE) {
             System.out.println("Ok bye bye! C u again :P");
