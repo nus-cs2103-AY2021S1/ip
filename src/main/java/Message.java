@@ -1,7 +1,7 @@
 enum Command {
     START,
     BYE,
-    ECHO
+    ADD,
 }
 
 public class Message {
@@ -22,7 +22,7 @@ public class Message {
         }
 
         if (this.cmd == null) { // if not a recognised command
-            this.cmd = Command.ECHO;
+            this.cmd = Command.ADD;
         }
     }
 
@@ -36,8 +36,8 @@ public class Message {
             case BYE:
                 System.out.println("Ok bye bye! C u again :P");
                 break;
-            case ECHO:
-                System.out.println(message);
+            case ADD:
+                System.out.println("added: " + message);
                 break;
         }
         System.out.println("____________________________________________________________");
