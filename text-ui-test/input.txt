@@ -1,0 +1,13 @@
+todo t1
+list
+todo t2
+deadline d1 /by deadline1
+list
+done 2
+list
+event project meeting /at Mon 2-4pm
+list
+done 3
+done 4
+list
+bye
