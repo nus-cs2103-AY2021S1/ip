@@ -47,6 +47,8 @@ public class Duke {
                     Task task = new Deadline(description, dueDate);
                     tasks.add(task);
                     printMessage("Added " + task + String.format("\nNow you have %d tasks in the list", tasks.size()));
+                } else {
+                    System.out.println(new DeadlineMissingDateException());
                 }
 
             } else if (input.startsWith("event")) {
@@ -57,10 +59,10 @@ public class Duke {
                     Task task = new Event(description, time);
                     tasks.add(task);
                     printMessage("Added " + task + String.format("\nNow you have %d tasks in the list", tasks.size()));
+                } else {
+                    System.out.println(new EventMissingDateException());
                 }
-
             }
-
         }
     }
 
