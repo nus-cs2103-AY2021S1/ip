@@ -1,37 +1,38 @@
------------------------------------------
+	-----------------------------------------
 	Hello! I'm Duke
 	What can I do for you?
 	-----------------------------------------
 	-----------------------------------------
-	☹ OOPS!!! I'm sorry, but I don't know what that means :(
+	Got it. I've added this task:
+	[T][✗] eat
+	Now you have 1 tasks in the list.
 	-----------------------------------------
 	-----------------------------------------
-	☹ OOPS!!! The description of a todo cannot be empty
+	Got it. I've added this task:
+	[D][✗] finish eating (by: noon)
+	Now you have 2 tasks in the list.
 	-----------------------------------------
 	-----------------------------------------
-	☹ OOPS!!! The description of a deadline cannot be empty
+	Here are the tasks in your list:
+	1. [T][✗] eat
+	2. [D][✗] finish eating (by: noon)
 	-----------------------------------------
 	-----------------------------------------
-	☹ OOPS!!! The description of an event cannot be empty
+	Nice! I've marked this task as done:
+		[D][✓] finish eating (by: noon)
 	-----------------------------------------
 	-----------------------------------------
-	☹ OOPS!!! Task number cannot be empty
+	Noted. I've removed this task:
+		[D][✓] finish eating (by: noon)
+	Now you have 1 tasks in the list.
 	-----------------------------------------
 	-----------------------------------------
-	☹ OOPS!!! Invalid task number provided
+	Here are the tasks in your list:
+	1. [T][✗] eat
 	-----------------------------------------
 	-----------------------------------------
-	☹ OOPS!!! Invalid task number provided
+	☹ OOPS!!! Task number must be a valid integer
 	-----------------------------------------
 	-----------------------------------------
-	☹ OOPS!!! Invalid description for a deadline
-	-----------------------------------------
-	-----------------------------------------
-	☹ OOPS!!! Deadline cannot be empty
-	-----------------------------------------
-	-----------------------------------------
-	☹ OOPS!!! Invalid description for an event
-	-----------------------------------------
-	-----------------------------------------
-	☹ OOPS!!! Event time cannot be empty
+	Bye. Hope to see you again soon!
 	-----------------------------------------

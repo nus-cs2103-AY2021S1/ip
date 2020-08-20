@@ -1,11 +1,8 @@
-blah
-todo
-deadline
-event
-done
-done -1
+todo eat
+deadline finish eating /by noon
+list
 done 2
-deadline ddl
-deadline ddl /by
-event eve
-event eve /at
+delete 2
+list
+delete a
+bye
