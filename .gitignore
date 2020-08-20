@@ -15,7 +15,7 @@ bin/
 
 
 # Data files
-data/dukeData.txt
+data/
 
 # Test output
 /text-ui-test/ACTUAL.txt
