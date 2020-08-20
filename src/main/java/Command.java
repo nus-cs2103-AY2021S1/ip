@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public abstract class Command implements Execute {
-    public static List tasks = new ArrayList<>();
+    public static List<Task> tasks = new ArrayList<Task>();
     public static int completedTasks = 0;
     public static int uncompletedTasks = 0;
 
