@@ -9,8 +9,6 @@ public class Chatbot {
         String start = "Hello! I'm Duke \nWhat can I do for you?";
         System.out.println(start);
         Scanner sc = new Scanner(System.in);
-        String[] x = new String[]{"todo", "deadline", "event"};
-        List<String> all = Arrays.asList(x);
         ArrayList<Task> arr = new ArrayList<>();
         while (true) {
             String line = sc.nextLine();
