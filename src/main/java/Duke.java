@@ -97,7 +97,7 @@ public class Duke {
     }
 
     private static void completeTask(String doneIndex)
-            throws DukeInvalidArgumentException, DukeIncompleteCommandException {
+            throws DukeInvalidArgumentException {
         try {
             int index = Integer.parseInt(doneIndex) - 1;
             Task task = taskList.get(index).completeTask();
@@ -130,19 +130,18 @@ public class Duke {
     }
 
     private static void addDeadline(String args) throws DukeIncompleteCommandException {
-        String[] descWithArgs = args.split(" /by ");
-        if (descWithArgs.length == 2) {
-            Deadline deadline = new Deadline(descWithArgs[0], descWithArgs[1]);
+        try {
+            Deadline deadline = Deadline.create(args);
             taskList.add(deadline);
             printWithDivider("Successfully added deadline:\n" + deadline.toString());
-        } else {
+        } catch (TaskException e) {
             throw new DukeIncompleteCommandException(ERROR_MESSAGE
                     + "\nDid you provide a deadline and description for this deadline?");
         }
     }
 
     private static void deleteTask(String deleteIndex)
-            throws DukeInvalidArgumentException, DukeIncompleteCommandException {
+            throws DukeInvalidArgumentException {
         try {
             int index = Integer.parseInt(deleteIndex) - 1;
             Task task = taskList.remove(index);
