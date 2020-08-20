@@ -12,11 +12,12 @@ public class Duke {
         */
 
         String line = "____________________________________________________________\n";
-        String greeting = "Hello! I'm Duke from the chat bot universe ~ Nice to meet you (●´∀｀●) \n" +
-                           "I'll be your task manager from now onwards.\n";
+        String greeting = "Hello! I'm Duke from the chat bot universe ~ \n" +
+                          "Nice to meet you! \n" +
+                          "I'll be your task manager from now onwards.\n";
         String bye = "Awwww, I guess you are gonna leave... \n" +
                 "I'll keep track of your tasks nicely. \n" +
-                "Text me if you wanna talk again! Have a nice day ❤️\n ";
+                "Text me if you wanna talk again! Have a nice day!\n";
 
         System.out.println(line + greeting + line);
         Scanner sc = new Scanner(System.in);
