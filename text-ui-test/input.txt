@@ -1,0 +1,12 @@
+test
+list
+event event test /at test
+done 1
+list
+todo todo test
+deadline test /by test
+list
+done 2
+done 3
+list
+bye
