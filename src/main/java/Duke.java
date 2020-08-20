@@ -22,15 +22,32 @@ public class Duke {
     }
 
     private void reply(String input) {
-        if (input.equals("bye")) {
+        String[] splitted = input.split("\\s+");
+        String command = splitted[0];
+        if (input.equals("help")) {
+            help();
+        } else if (command.equals("bye")) {
             quit();
-        } else if (input.equals("list")) {
+        } else if (command.equals("list")) {
             showTasks();
-        } else if (input.contains("done")){
+        } else if (command.equals("done")){
             markAsDone(input);
         } else {
             add(input);
         }
+    }
+
+    private void help() {
+        String msg = String.join("\n",
+                                "Adding task:",
+                                         "todo <desc>",
+                                         "deadline <desc> /by <desc>",
+                                         "event <desc> /at <desc>",
+                                         "",
+                                         "list - show all added tasks",
+                                         "done <taskId> - mark the task as done",
+                                         "bye - close Duke");
+        System.out.println(msg + "\n");
     }
 
     private void quit() {
@@ -47,49 +64,69 @@ public class Duke {
     }
 
     private void markAsDone(String input) {
-        int taskId = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
+        String rawNum = input.replaceAll("[^0-9]", "");
+        int taskId = Integer.parseInt(rawNum) - 1;
         String message;
 
-        if (taskId >= 0 && taskId < tasks.size()) {
+        try {
+            if (taskId < 0 || taskId >= tasks.size())
+                throw new InvalidTaskIdException(rawNum);
+
             Task task = tasks.get(taskId).markAsDone();
             tasks.set(taskId, task);
             message = "Nice! I've marked it done - " + task.toString();
-        } else {
-            message = "404 task not found. Please enter the correct task ID";
-        }
+            System.out.println(message);
+            System.out.print("\n");
 
-        System.out.println(message);
-        System.out.print("\n");
+        } catch (DukeException e) {
+            System.out.println(e + "\n");
+        }
     }
 
     private void add(String input) {
-        String[] splited = input.split("\\s+");
+        String[] splitted = input.split("\\s+");
+        String command = splitted[0];
         Task task;
-        if (splited[0].equals("todo")) {
-            task = createTodo(splited);
-        } else if (splited[0].equals("deadline")) {
-            task = createDeadline(splited);
-        } else if (splited[0].equals("event")) {
-            task = createEvent(splited);
-        } else {
-            task = new Task(input);
+
+        try {
+            if (command.equals("todo")) {
+                task = createTodo(splitted);
+            } else if (command.equals("deadline")) {
+                task = createDeadline(splitted);
+            } else if (command.equals("event")) {
+                task = createEvent(splitted);
+            } else {
+                throw new InvalidCommandException();
+            }
+
+            tasks.add(task);
+            System.out.println("Added '" + task.toString() + "' to list of tasks");
+            System.out.println("Now you have " + tasks.size() + " tasks in the list");
+            System.out.print("\n");
+        } catch (DukeException e) {
+            System.out.println(e + "\n");
         }
 
-        tasks.add(task);
-        System.out.println("Added '" + task.toString() + "' to list of tasks");
-        System.out.println("Now you have " + tasks.size() + " tasks in the list");
-        System.out.print("\n");
     }
 
-    private Task createTodo(String[] input) {
+    private Task createTodo(String[] input) throws EmptyDescriptionException {
         String[] title = Arrays.copyOfRange(input, 1, input.length);
+        if (title.length == 0) throw new EmptyDescriptionException("ToDo");
         return new Todo(String.join(" ", title));
     }
 
-    private Task createDeadline(String[] input) {
+    private Task createDeadline(String[] input) throws EmptyDescriptionException, InvalidFormatException {
+        if (input.length == 1) throw new EmptyDescriptionException("Deadline");
+
         int separator = getIndex(input, "/by");
+
+        if (separator == -1) throw new InvalidFormatException("/by parameter");
+
         String[] titles = Arrays.copyOfRange(input, 1, separator);
         String[] deadlines = Arrays.copyOfRange(input, separator + 1, input.length);
+
+        if (deadlines.length == 0) throw new EmptyDescriptionException("/by parameter");
+
         String title = String.join(" ", titles);
         String deadline = String.join(" ", deadlines);
         return new Deadline(title, deadline);
@@ -102,10 +139,18 @@ public class Duke {
         return -1;
     }
 
-    private Task createEvent(String[] input) {
+    private Task createEvent(String[] input) throws EmptyDescriptionException, InvalidFormatException {
+        if (input.length == 1) throw new EmptyDescriptionException("Event");
+
         int separator = getIndex(input, "/at");
+
+        if (separator == -1) throw new InvalidFormatException("/at parameter");
+
         String[] titles = Arrays.copyOfRange(input, 1, separator);
         String[] times = Arrays.copyOfRange(input, separator + 1, input.length);
+
+        if (times.length == 0) throw new EmptyDescriptionException("/at parameter");
+
         String title = String.join(" ", titles);
         String time = String.join(" ", times);
         return new Event(title, time);
