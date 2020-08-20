@@ -1,4 +1,4 @@
-public class DeadlineTask extends Task{
+public class DeadlineTask extends Task {
     private String deadline;
 
     public DeadlineTask(String summary, String deadline) {
