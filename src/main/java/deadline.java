@@ -2,6 +2,7 @@
  * The deadline is a subclass of Task and it is used to describe tasks that has to be completed by a specific day.
  */
 public class deadline extends Task {
+
     private String day;
 
     /**
