@@ -35,20 +35,44 @@ public class Duke {
         String command;
 
         while(input.hasNext()){
+
             command = input.nextLine();
+
             if(command.equals("bye")){
+
                 exit();
+
                 input.close();
+
                 break;
+
             }else if(command.equals("list")){
+
                 for(Task task: listOfTasks){
-                    task.showName();
+
+                    task.showTask();
+
                 }
                 continue;
             }else{
-                Task newTask = new Task(command);
-                listOfTasks.add(newTask);
-                System.out.println("added: " + command);
+
+                String[] words = command.split(" ");
+
+                if(words[0].equals("done")){
+
+                    Integer index = Integer.parseInt(words[1]);
+
+                    listOfTasks.get(index - 1).markAsDone();
+
+                }else{
+
+                    Task newTask = new Task(command);
+
+                    listOfTasks.add(newTask);
+
+                    System.out.println("added: " + command);
+
+                }
             }
         }
 

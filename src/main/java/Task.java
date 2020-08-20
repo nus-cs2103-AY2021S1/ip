@@ -11,10 +11,16 @@ public class Task {
 
     public void markAsDone(){
         this.isDone = true;
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(this.toString());
     }
 
     public void showName(){
         System.out.println(this.name);
+    }
+
+    public void showTask(){
+        System.out.println(this.toString());
     }
 
 
@@ -29,7 +35,7 @@ public class Task {
             isDoneSymbol= "\u2718";
         }
 
-        return name;
+        return "[" + isDoneSymbol + "] " + name;
 
     }
 }
