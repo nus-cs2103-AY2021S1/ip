@@ -1,0 +1,12 @@
+todo read lecture notes
+deadline read lecture notes /by Sunday 23rd 11pm
+event statistic lecture /at Monday 24th 4-6pm
+list
+done 1
+done 2
+list
+todo buy new pens
+list
+done 3
+done 4
+bye

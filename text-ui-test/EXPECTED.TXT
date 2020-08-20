@@ -1,7 +1,93 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+____________________________________________________________
+Yo I'm Dood!!
+Anything I can do for you?
+____________________________________________________________
 
+todo read lecture notes
+____________________________________________________________
+Got it bro, I've added this task:
+  [T][✗] todo read lecture notes
+Now you have 1 tasks in the list.
+____________________________________________________________
+
+deadline read lecture notes /by Sunday 23rd 11pm
+____________________________________________________________
+Got it bro, I've added this task:
+  [D][✗] read lecture notes  (by:  Sunday 23rd 11pm)
+Now you have 2 tasks in the list.
+____________________________________________________________
+
+event statistic lecture /at Monday 24th 4-6pm
+____________________________________________________________
+Got it bro, I've added this task:
+  [D][✗] statistic lecture  (at:  Monday 24th 4-6pm)
+Now you have 3 tasks in the list.
+____________________________________________________________
+
+list
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][✗] todo read lecture notes
+2.[D][✗] read lecture notes  (by:  Sunday 23rd 11pm)
+3.[D][✗] statistic lecture  (at:  Monday 24th 4-6pm)
+
+____________________________________________________________
+
+done 1
+____________________________________________________________
+Solid bro!! I've marked this task as done:
+[T][✓] todo read lecture notes
+
+____________________________________________________________
+
+done 2
+____________________________________________________________
+Solid bro!! I've marked this task as done:
+[D][✓] read lecture notes  (by:  Sunday 23rd 11pm)
+
+____________________________________________________________
+
+list
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][✓] todo read lecture notes
+2.[D][✓] read lecture notes  (by:  Sunday 23rd 11pm)
+3.[D][✗] statistic lecture  (at:  Monday 24th 4-6pm)
+
+____________________________________________________________
+
+todo buy new pens
+____________________________________________________________
+Got it bro, I've added this task:
+  [T][✗] todo buy new pens
+Now you have 4 tasks in the list.
+____________________________________________________________
+
+list
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][✓] todo read lecture notes
+2.[D][✓] read lecture notes  (by:  Sunday 23rd 11pm)
+3.[D][✗] statistic lecture  (at:  Monday 24th 4-6pm)
+4.[T][✗] todo buy new pens
+
+____________________________________________________________
+
+done 3
+____________________________________________________________
+Solid bro!! I've marked this task as done:
+[D][✓] statistic lecture  (at:  Monday 24th 4-6pm)
+
+____________________________________________________________
+
+done 4
+____________________________________________________________
+Solid bro!! I've marked this task as done:
+[T][✓] todo buy new pens
+
+____________________________________________________________
+
+bye
+____________________________________________________________
+Cya!!
+____________________________________________________________
