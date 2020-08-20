@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -10,7 +11,7 @@ public class Duke {
         StringBuilder description;
         String date;
         String type;
-        Task[] tasks = new Task[100];
+        ArrayList<Task> tasks = new ArrayList<>();
         int number = 0;
 
         printPart("Hello! I'm Duke\n" + "What can I do for you?");
@@ -23,7 +24,7 @@ public class Duke {
                         System.out.println(line);
                         System.out.println("Here are the tasks in your list:");
                         for (int i = 0; i < number; i++) {
-                            System.out.println(String.format("  %d. ", i + 1) + tasks[i].toString());
+                            System.out.println(String.format("  %d. ", i + 1) + tasks.get(i).toString());
                         }
                         System.out.println(line + "\n");
                         break;
@@ -33,9 +34,9 @@ public class Duke {
                         if (!(input.length() > 1)) {
                             throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
                         } else {
-                            tasks[number] = new Todo(input);
+                            tasks.add(new Todo(input.substring(1)));
                             printPart("Got it. I've added this task:\n"
-                                    + "  " + tasks[number].toString()
+                                    + "  " + tasks.get(number).toString()
                                     + "\nNow you have " + (number + 1) + " tasks in the list.");
                             number++;
                         }
@@ -49,9 +50,9 @@ public class Duke {
                             input = s.next();
                         }
                         date = s.nextLine().substring(1);
-                        tasks[number] = new Deadline(description.toString(), date);
+                        tasks.add(new Deadline(description.toString(), date));
                         printPart("Got it. I've added this task:\n"
-                                + "  " + tasks[number].toString()
+                                + "  " + tasks.get(number).toString()
                                 + "\nNow you have " + (number + 1) + " tasks in the list.");
                         number++;
                         break;
@@ -64,9 +65,9 @@ public class Duke {
                             input = s.next();
                         }
                         date = s.nextLine().substring(1);
-                        tasks[number] = new Event(description.toString(), date);
+                        tasks.add(new Event(description.toString(), date));
                         printPart("Got it. I've added this task:\n"
-                                + "  " + tasks[number].toString()
+                                + "  " + tasks.get(number).toString()
                                 + "\nNow you have " + (number + 1) + " tasks in the list.");
                         number++;
                         break;
@@ -74,8 +75,19 @@ public class Duke {
                     case "done":
                         input = s.nextLine();
                         int n = Integer.parseInt(input.substring(1));
-                        tasks[n - 1].markAsDone();
-                        printPart("Nice! I've marked this task as done:\n" + "  " + tasks[n - 1].toString());
+                        tasks.get(n - 1).markAsDone();
+                        printPart("Nice! I've marked this task as done:\n" + "  " + tasks.get(n - 1).toString());
+                        break;
+
+
+                    case "delete":
+                        input = s.nextLine();
+                        int selected = Integer.parseInt(input.substring(1));
+                        printPart("Noted. I've removed this task:\n"
+                                 + "  " + tasks.get(selected - 1).toString()
+                                 + "\nNow you have " + (number - 1) + " tasks in the list.");
+                        tasks.remove(selected - 1);
+                        number--;
                         break;
 
                     default:
