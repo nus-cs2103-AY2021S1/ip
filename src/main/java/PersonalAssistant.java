@@ -42,8 +42,7 @@ public class PersonalAssistant {
         } catch (Exception e) {
             throw e;
         } finally {
-            // Continue
-            //this.getUserCommands();
+            this.getUserCommands();
         }
     }
 
@@ -60,6 +59,7 @@ public class PersonalAssistant {
              */
             case "bye": {
                 System.out.println("Goodbye!");
+                System.exit(0);
                 break;
             }
 
