@@ -18,6 +18,7 @@ export LC_ALL=en_GB.UTF-8
 if !(
 find ../src/main/java -name "*.java" > sources.txt
 javac -cp ../src -Xlint:none -d ../bin @sources.txt
+
 )
 then
     echo "********** BUILD FAILURE **********"
