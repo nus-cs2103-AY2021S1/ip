@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Duke {
     ArrayList<String> list = new ArrayList<>();
     String message;
+    static String lastGreeting = "\tBye! Hope to see you again soon:)\n";
 
     void addToList(String task) {
         list.add(task);
@@ -28,8 +29,7 @@ public class Duke {
             String message = input.nextLine();
             Greet newMessage = new Greet(message);
             System.out.println(newMessage);
-            if (newMessage.toString().equals(newMessage.getExitGreeting())) {
-                System.out.println(newMessage.toString() == newMessage.getExitGreeting());
+            if (newMessage.getExitGreeting().equals(lastGreeting)) {
                 break;
             }
         }
