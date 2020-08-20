@@ -14,8 +14,7 @@ public class Task {
     }
 
     public String toString() {
-        return name;
-//        return done ? doneText + name : notDoneText + name;
+        return done ? doneText + name : notDoneText + name;
     }
 
     public void markDone() {

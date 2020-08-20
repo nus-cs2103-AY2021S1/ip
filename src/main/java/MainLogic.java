@@ -15,7 +15,7 @@ public class MainLogic {
 
             current = sc.nextLine();
 
-            if (!commandCheck(current)) {
+            if (!commandCheck(current.split(" ", 2)[0])) {
                 Text.normalPrint("Added: " + current);
                 storage.addTodo(current);
             }
@@ -52,7 +52,7 @@ public class MainLogic {
     }
 
     private void doneLogic() {
-        storage.markDone(Integer.parseInt(sc.next()));
+        storage.markDone(Integer.parseInt(current.split(" ", 2)[1]));
     }
 
     private void toDoLogic() {
