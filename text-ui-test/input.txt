@@ -7,8 +7,10 @@ event return books
 deadline return books /by
 event return books /at
 deadline return books /by Sunday
+deadline return books /by Sunday Night
 event return books /at Monday
 todo borrow book
 list
 done 2
+delete 2
 list

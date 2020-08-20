@@ -41,11 +41,27 @@ public class Duke {
                     //          UPDATING STATUS OF EVENTS
                 } else if (msg.matches("^done \\d+$")) {
                     int updateTaskIndex = Integer.valueOf(msg.substring(5, msg.length())) - 1;
+                    if (updateTaskIndex >= taskList.size() || updateTaskIndex <= 0) {
+                        throw new DukeException(DukeExceptionType.TASK_NOT_FOUND);
+                    }
                     Task taskToUpdate = taskList.get(updateTaskIndex);
                     taskToUpdate.updateStatus(true);
                     taskList.set(updateTaskIndex, taskToUpdate);
                     String completedMessage = "Nice! I've marked this task as done:\n" + "  " + taskList.get(updateTaskIndex).toString();
                     messagePrint(completedMessage);
+
+                } else if (msg.matches("^delete \\d+$")) {
+                    int updateTaskIndex = Integer.valueOf(msg.substring(7, msg.length())) - 1;
+                    if (updateTaskIndex >= taskList.size() || updateTaskIndex <= 0) {
+                        throw new DukeException(DukeExceptionType.TASK_NOT_FOUND);
+                    }
+                    Task taskToUpdate = taskList.get(updateTaskIndex);
+                    taskList.remove(updateTaskIndex);
+                    String deletedMessage = "Noted. I've removed this task:\n" +
+                           "  " + taskToUpdate.toString() + "\n" +
+                                "Now you have " + taskList.size() + " tasks in the list.";
+                    messagePrint(deletedMessage);
+
 
                     //          CREATING NEW TASKS
                 } else {

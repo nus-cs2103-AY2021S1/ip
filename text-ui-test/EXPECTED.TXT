@@ -33,22 +33,33 @@
     ____________________________________________________________
     ____________________________________________________________
     Got it. I've added this task:
-      [E][?] return books  (at: Monday)
+      [D][?] return books  (by: Sunday Night)
     Now you have 2 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
     Got it. I've added this task:
-      [T][?] borrow book
+      [E][?] return books  (at: Monday)
     Now you have 3 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
+    Got it. I've added this task:
+      [T][?] borrow book
+    Now you have 4 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
     1. [D][?] return books  (by: Sunday)
-    2. [E][?] return books  (at: Monday)
-    3. [T][?] borrow book
+    2. [D][?] return books  (by: Sunday Night)
+    3. [E][?] return books  (at: Monday)
+    4. [T][?] borrow book
     ____________________________________________________________
     ____________________________________________________________
     Nice! I've marked this task as done:
-      [E][?] return books  (at: Monday)
+      [D][?] return books  (by: Sunday Night)
+    ____________________________________________________________
+    ____________________________________________________________
+    Noted. I've removed this task:
+      [D][?] return books  (by: Sunday Night)
+    Now you have 3 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
     1. [D][?] return books  (by: Sunday)
