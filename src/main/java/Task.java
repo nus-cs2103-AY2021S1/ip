@@ -13,6 +13,10 @@ public class Task {
 
     }
 
+    public boolean getIsDone(){
+        return this.isDone;
+    }
+
     public Task done() throws DukeException{
         return new Task(this.task, true);
     }
