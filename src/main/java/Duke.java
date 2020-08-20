@@ -60,10 +60,51 @@ public class Duke {
     }
 
     public static void processAdd(List<Task> taskArr, Scanner sc) {
-        System.out.println("What would you like to add?");
+        System.out.println("What kind of task is it?");
+        System.out.print(" - Todo\n"
+                + " - Deadline\n"
+                + " - Event\n");
+        String type = sc.nextLine().toLowerCase();
+        TaskType taskType = TaskType.TODO;
+        switch (type.toLowerCase()) {
+            case "todo":
+                taskType = TaskType.TODO;
+                System.out.println("Please enter the task");
+                break;
+            case "deadline":
+                taskType = TaskType.DEADLINE;
+                System.out.println("Please enter the task followed by the date and time of the deadline");
+                System.out.println("e.g., submit report ,11/10/2019 5pm");
+                break;
+            case "event":
+                taskType = TaskType.EVENT;
+                System.out.println("Please enter the event followed by the date and time of the event");
+                System.out.println("e.g., team project meeting ,2/10/2019 2-4pm");
+                break;
+            default:
+        }
+        processTaskType(taskArr, taskType, sc);
+    }
+
+    public static void processTaskType(List<Task> taskArr, TaskType taskType, Scanner sc) {
         String inputToAdd = sc.nextLine();
-        taskArr.add(new Task(inputToAdd));
-        System.out.println("Added: " + inputToAdd);
+        switch (taskType) {
+            case TODO:
+                taskArr.add(new Todo(inputToAdd, taskType));
+                break;
+            case DEADLINE:
+                String[] deadlineSplit = inputToAdd.split(",");
+                taskArr.add(new Deadline(deadlineSplit[0], deadlineSplit[1], taskType));
+                break;
+            case EVENT:
+                String[] eventSplit = inputToAdd.split(",");
+                taskArr.add(new Event(eventSplit[0], eventSplit[1], taskType));
+                break;
+            default:
+        }
+        System.out.println("Alright, I've added this task:");
+        System.out.println(taskArr.get(taskArr.size() - 1).toString());
+        System.out.println("You now have " + taskArr.size() + " tasks on your list");
     }
 
     public static void processList(List<Task> taskArr) {
@@ -85,10 +126,7 @@ public class Duke {
         int taskNum = sc.nextInt();
         System.out.println("Good job! This task is now marked as done:");
         taskArr.get(taskNum - 1).markAsDone();
-        System.out.println("["
-                + taskArr.get(taskNum - 1).getStatusIcon()
-                + "]"
-                + taskArr.get(taskNum - 1).getDescription());
+        System.out.println(taskArr.get(taskNum - 1).toString());
         sc.nextLine();
     }
 }
