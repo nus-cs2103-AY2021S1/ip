@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         ArrayList<Task> myList = new ArrayList<>();
 
@@ -85,6 +85,17 @@ public class Duke {
                 }catch(DukeException e){
                     System.out.println(e);
                 }
+            }else if(input.startsWith("delete")){
+                int taskNum = Character.getNumericValue(input.charAt(7));
+                Task currentTask = myList.get(taskNum-1);
+                myList.remove(taskNum);
+                System.out.println(
+                        "_______________________________\n" +
+                                "Noted. I've removed this task:\n" +
+                                currentTask.toString()+"\n"+
+                                "Now you have "+myList.size()+" tasks in the list.\n"+
+                                "_______________________________");
+
 
             }else {
 //                System.out.println(
