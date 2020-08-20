@@ -1,6 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    public static List<Task> taskList = new ArrayList<>();
+
     public static String horizontal_line = "____________________________________________________________";
 
     public static void greeting() {
@@ -20,9 +24,16 @@ public class Duke {
             System.out.println(horizontal_line);
             System.out.println("Bye. Hope to see you again soon!");
             System.out.println(horizontal_line);
-        } else {
+        } else if (input.equals("list")) {
             System.out.println(horizontal_line);
-            System.out.println(input);
+            for (int i = 0; i < taskList.size(); i++) {
+                System.out.println(String.format("%d. %s", i+1, taskList.get(i).description));
+            }
+            System.out.println(horizontal_line);
+        } else {
+            taskList.add(new Task(input));
+            System.out.println(horizontal_line);
+            System.out.println("added: "+ input);
             System.out.println(horizontal_line);
         }
     }
