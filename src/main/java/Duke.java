@@ -17,13 +17,19 @@ public class Duke {
         boolean stop = false;
         Userinput userinput = new Userinput();
         while(sc.hasNextLine()){
-            String input = sc.nextLine();
-            String output = userinput.getDukeResponse(input);
-            System.out.println(output);
-            stop = userinput.getTerminate();
-            if(stop){
-                sc.close();
-                break;
+            try {
+                String input = sc.nextLine();
+                String output = userinput.getDukeResponse(input);
+                System.out.println(output);
+                stop = userinput.getTerminate();
+                if (stop) {
+                    sc.close();
+                    break;
+                }
+            } catch (EmptyInputException ex) {
+                System.out.println(ex);
+            } catch (NoResponseException excep) {
+                System.out.println(excep);
             }
         }
     }
