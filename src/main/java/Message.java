@@ -42,4 +42,8 @@ public class Message {
         }
         System.out.println("____________________________________________________________");
     }
+
+    public Command getCmd() {
+        return this.cmd;
+    }
 }
