@@ -80,9 +80,7 @@ public class TaskList {
      * @return a String shows all tasks in a formatted way.
      */
     public String printTasks() {
-        String result = "Here are the tasks in your list:";
-
-        result += IntStream.range(0, this.getSize())
+        String result = IntStream.range(0, this.getSize())
                 .mapToObj((id) -> String.format("\n%d.%s", id + 1, tasks.get(id)))
                 .reduce((a, b) -> a + b)
                 .orElse("");

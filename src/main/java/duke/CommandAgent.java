@@ -134,7 +134,9 @@ public class CommandAgent {
      * @return a String showing all the task information.
      */
     public static String generateRetrievalResponse() {
-        return taskList.printTasks();
+        String result = "Here are the tasks in your list:";
+        result += taskList.printTasks();
+        return result;
     }
 
     /**
