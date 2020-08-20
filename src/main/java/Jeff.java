@@ -4,7 +4,7 @@ public class Jeff {
 
     public static void main(String[] args) {
 
-        String[] rubbishBin = new String[100];
+        Task[] rubbishBin = new Task[100];
         String add = "added: ";
         int counter = 0;
 
@@ -22,19 +22,26 @@ public class Jeff {
         System.out.println(line);
 
         while(true){
-            String input = Sc.nextLine();
-
+            String input = Sc.nextLine().trim();
+            System.out.println(input);
             if(input.equals("bye")){
                 System.out.println("Bye, Have a great time! ");
                 break;
             }else{
-                if(input.equals("list")){
+
+                if(input.contains("done")){
+                    int index = Integer.parseInt(input.substring(5)) - 1;
+                    rubbishBin[index].complete();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(rubbishBin[index]);
+                }else if(input.equals("list")){
                     for(int i=0; i<counter; i++){
-                        System.out.println( i+1 +"."+" "+ rubbishBin[i]);
+                        System.out.println(rubbishBin[i]);
                     }
                 }else{
-                    rubbishBin[counter] = input;
-                    System.out.println(add + rubbishBin[counter]);
+                    Task newTask = new Task(input);
+                    rubbishBin[counter] = newTask;
+                    System.out.println(add + input);
                     counter++;
                 }
             }
