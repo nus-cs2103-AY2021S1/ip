@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a personal assistant chatbot to help a person keep track of various things.
+ */
 public class Duke {
     public static void main(String[] args) {
         // Create an empty list of tasks

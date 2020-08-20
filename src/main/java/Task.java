@@ -1,3 +1,6 @@
+/**
+ * Encapsulates a task with a description and a completion status.
+ */
 public class Task {
 
     private String description;
@@ -8,14 +11,23 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or cross symbols
-    }
-
     public String getDescription() {
         return this.description;
     }
 
+    /**
+     * Returns the status of the task using UTF-8 encoding.
+     * Either a tick or a cross symbol.
+     *
+     * @return Status icon.
+     */
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718");
+    }
+
+    /**
+     * Marks the task as done.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
