@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    static String face = "(づ￣ ³￣)づ";
+    static String face = "/(*´∇｀*)/";
     static String face2 = "(~˘▾˘)~";
     static String face3 = "〆(・∀・＠)";
     static String sadFace = "(>人<)";
