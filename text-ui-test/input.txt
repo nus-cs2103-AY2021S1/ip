@@ -1,2 +1,8 @@
 todo read book
+todo
+deadline return book /by 2am
+done 1
+done 9
+delete 2
+list
 bye
