@@ -21,4 +21,5 @@ done 4
 delete 3
 list
 blah
+event
 bye
