@@ -8,10 +8,31 @@ import org.junit.jupiter.api.Test;
 
 public class EventTest {
     @Test
-    public void getDateString() {
-        LocalDate date = LocalDate.parse("2020-03-19");
-        Deadline deadline = new Deadline("name", false, date);
-        assertEquals("Mar 19 2020", deadline.getSchedule());
+    public void toStringTest() {
+        LocalDate schedule = LocalDate.parse("2020-08-20");
+        Event event = new Event("event1", false, schedule);
+        assertEquals("[E][✘] event1 (at: Aug 20 2020)", event.toString());
+    }
+
+    @Test
+    public void getScheduleTest() {
+        LocalDate schedule = LocalDate.parse("2020-08-20");
+        Event event = new Event("event1", false, schedule);
+        assertEquals("Aug 20 2020", event.getSchedule());
+    }
+
+    @Test
+    public void completeTest() {
+        LocalDate schedule = LocalDate.parse("2020-08-20");
+        Event nonCompletedEvent = new Event("event1", false, schedule);
+        Event completedEvent = new Event("event1", true, schedule);
+        assertEquals(completedEvent.toString(), nonCompletedEvent.complete().toString());
+    }
+
+    @Test
+    public void formatTest() {
+        LocalDate schedule = LocalDate.parse("2020-08-20");
+        Event event = new Event("event1", false, schedule);
+        assertEquals("E | 0 | event1 | Aug 20 2020", event.format());
     }
 }
-
