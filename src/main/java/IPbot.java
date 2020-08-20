@@ -20,6 +20,7 @@ public class IPbot {
     private static final String TODO_CMD = "todo";
     private static final String EVENT_CMD = "event";
     private static final String DEADLINE_CMD = "deadline";
+    private static final String DELETE_CMD = "delete";
 
 
     // user input
@@ -85,6 +86,17 @@ public class IPbot {
                                     "Deadlines should have a time due specified with /by");
                         }
                         output = addTasks(new Deadline(split[0].strip(), split[1].strip()));
+                     } else if (input.startsWith(DELETE_CMD)) {
+                        // delete task
+                        final String stripped = input.substring(DELETE_CMD.length()).strip();
+                        try {
+                            final int id = Integer.parseInt(stripped);
+                            output = deleteTask(tasks.get(id - 1));
+                        } catch (NumberFormatException e) {
+                            throw new CommandException(input, "Could not read the task ID");
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new CommandException(input, "Task ID does not exist");
+                        }
                     } else {
                         throw new CommandException(input, "Unknown command");
                     }
@@ -140,6 +152,17 @@ public class IPbot {
             toComplete.markAsDone();
             return "Task done:\n" + toComplete;
         }
+    }
+
+    /**
+     * Deletes a task from the task list.
+     * @param toDelete the task to be deleted
+     * @return String containing output generated from iPbot
+     */
+    private static String deleteTask(Task toDelete) {
+        tasks.remove(toDelete);
+        return String.format("Task deleted: %s\n%d task(s) left.",
+                toDelete.toString(), tasks.size());
     }
 
     /**
