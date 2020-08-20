@@ -139,7 +139,7 @@ public class Bot {
 
     private String cmdList() {
         int index = 0;
-        StringBuilder string = new StringBuilder();
+        StringBuilder string = new StringBuilder("Here are the tasks in your list:\n    ");
         for (Task item : taskList) {
             index++;
             string.append(index).append(".").append(item).append("\n    ");
