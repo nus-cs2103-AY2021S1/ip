@@ -4,27 +4,28 @@ public class MainLogic {
 
     Storage storage = new Storage();
     boolean bye = false;
+    String current;
+    Scanner sc = new Scanner(System.in);
 
     public void main() {
-        Scanner sc = new Scanner(System.in);
 
         Text.printStartMessage();
 
         while (!bye) {
 
-            String next = sc.next();
+            current = sc.next();
 
-            if (isCommand(next)) {
-                // do nothing, is command handles command logic
+            if (commandCheck(current)) {
+                // do nothing, isCommand handles command logic
             } else {
-                Text.normalPrint("Added: " + next);
-                storage.addItem(next);
+                Text.normalPrint("Added: " + current);
+                storage.addItem(current);
             }
         }
         sc.close();
     }
 
-    private boolean isCommand(String string) {
+    private boolean commandCheck(String string) {
         switch (string) {
             case "bye":
                 bye = true;
@@ -33,8 +34,15 @@ public class MainLogic {
             case "list":
                 storage.printOut();
                 return true;
+            case "done":
+                doneCommandLogic();
+                return true;
             default:
                 return false;
         }
+    }
+
+    private void doneCommandLogic() {
+        storage.markDone(Integer.parseInt(sc.next()));
     }
 }
