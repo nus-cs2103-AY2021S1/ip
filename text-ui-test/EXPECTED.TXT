@@ -2,6 +2,7 @@ Hello mah dud, itza handsome robo speakin
 What duh hell du yu wan?
 UnknownCommandException: Don't understand...
 Here yur tasks faggit: 
+empty
 EmptyDescriptionException: Description empty la oi
 Got it, here yur task bij
 [T][?] something (by: 1pm lol)

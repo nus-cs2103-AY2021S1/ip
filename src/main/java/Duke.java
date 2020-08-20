@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -9,8 +7,6 @@ public class Duke {
         DEADLINE,
         EVENT
     }
-
-    private static List<Task> texts = new ArrayList<>();
 
     private static void greet() {
         String greeting = "Hello mah dud, itza handsome robo speakin\n" +
@@ -23,45 +19,17 @@ public class Duke {
                 "dun wanna see yu ever agin";
         System.out.println(farewell);
     }
-
-    private static void add(String toAdd, TaskType taskType) {
-        //need to improve regex
-        Task task = null;
-        String[] splitDeadline = toAdd.split("/", 2 );
-        String[] content;
-        if (splitDeadline.length == 2) content = splitDeadline[1].split(" ", 2);
-        else content = null;
-        switch (taskType) {
-            case TODOS:
-                if (splitDeadline.length == 2) task = new ToDos(splitDeadline[0].trim(), content[1]);
-                else task = new ToDos(splitDeadline[0]);
-                break;
-            case DEADLINE:
-                if (splitDeadline.length == 2) task = new Deadline(splitDeadline[0].trim(), content[1]);
-                else task = new Deadline(splitDeadline[0]);
-                break;
-            case EVENT:
-                if (splitDeadline.length == 2) task = new Event(splitDeadline[0].trim(), content[1]);
-                else task = new Event(splitDeadline[0]);
-                break;
-        }
-        texts.add(task);
-        System.out.println("Got it, here yur task bij");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + texts.size() + " tasks in the list.");
-    }
-
-
+    
     private static void processDone(String s) throws InvalidIndexException {
         try {
             int num = Integer.parseInt(s) - 1;
-            if (num < 0 || num > texts.size() - 1) {
+            if (num < 0 || num > TaskList.getSize() - 1) {
                 throw new InvalidIndexException("Simi number lai de");
             } else {
                 System.out.println("okcan done:");
-                String i = texts.get(Integer.parseInt(s) - 1).markAsDone();
+                String i = TaskList.getTask(Integer.parseInt(s) - 1).markAsDone();
                 System.out.println(i);
-                System.out.println("Now you have " + texts.size() + " tasks in the list.");
+                System.out.println("Now you have " + TaskList.getSize() + " tasks in the list.");
             }
         } catch (NumberFormatException e) {
             System.out.println("Input is not number ley...");
@@ -71,13 +39,13 @@ public class Duke {
     private static void processDelete(String s) {
         try {
             int num = Integer.parseInt(s) - 1;
-            if (num < 0 || num > texts.size() - 1) {
+            if (num < 0 || num > TaskList.getSize() - 1) {
                 throw new InvalidIndexException("Simi number lai de");
             } else {
                 System.out.println("okcan done:");
-                String i = texts.remove(Integer.parseInt(s) - 1).toString();
+                String i = TaskList.removeTask(Integer.parseInt(s) - 1).toString();
                 System.out.println(i);
-                System.out.println("Now you have " + texts.size() + " tasks in the list.");
+                System.out.println("Now you have " + TaskList.getSize() + " tasks in the list.");
             }
         } catch (NumberFormatException e) {
             System.out.println("Input is not number ley...");
@@ -89,15 +57,15 @@ public class Duke {
         switch (nextLineSplit[0]) {
             case "todo":
                 if (nextLineSplit.length < 2) throw new EmptyDescriptionException("Description empty la oi");
-                add(nextLineSplit[1], TaskType.TODOS);
+                System.out.println(TaskList.addTask(TaskType.TODOS, nextLineSplit[1]));
                 break;
             case "deadline":
                 if (nextLineSplit.length < 2) throw new EmptyDescriptionException("Description empty la oi");
-                add(nextLineSplit[1], TaskType.DEADLINE);
+                System.out.println(TaskList.addTask(TaskType.DEADLINE, nextLineSplit[1]));
                 break;
             case "event":
                 if (nextLineSplit.length < 2) throw new EmptyDescriptionException("Description empty la oi");
-                add(nextLineSplit[1], TaskType.EVENT);
+                System.out.println(TaskList.addTask(TaskType.EVENT, nextLineSplit[1]));
                 break;
             case "done":
                 if (nextLineSplit.length < 2) throw new EmptyDescriptionException("Description empty la oi");
@@ -126,20 +94,14 @@ public class Duke {
                 farewell();
                 return true;
             case "list":
-                int num = 1;
                 System.out.println("Here yur tasks faggit: ");
-                for (Task i : texts) {
-                    System.out.println(num + "." + i.toString());
-//                    WriteFile.writeFinally(num + "." + i.toString());
-                    num++;
-                }
+                System.out.println(TaskList.toStr());
                 return false;
             default:
                 try {
                     testNextLineSplit(nextLine);
                 } catch (UnknownCommandException | EmptyDescriptionException e) {
                     System.out.println(e.toString());
-//                    WriteFile.writeFinally(e.toString());
                 }
                 return false;
         }
@@ -147,7 +109,6 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-//        WriteFile.reset();
         greet();
         boolean saidBye = false;
         while (!saidBye) {
