@@ -1,4 +1,3 @@
-list
 todo off myself
 todo
 deadline die /by next year
