@@ -39,6 +39,13 @@ public class Duke {
                     thisTask.markAsDone();
                     list.set(number - 1, thisTask);
                     System.out.println("       " + thisTask.toString());
+                } else if (input.startsWith("delete")) {
+                    number = Character.getNumericValue(input.charAt(input.length() - 1));
+                    System.out.println("     Noted! I've removed this task:");
+                    thisTask = list.get(number - 1);
+                    list.remove(number - 1);
+                    System.out.println("       " + thisTask.toString());
+                    System.out.println("     Now you have " + list.size() + " tasks in the list.");
                 } else {
                     if (input.startsWith("deadline")) {
                         if (input.length() < 10) {
