@@ -1,5 +1,6 @@
 import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Duke {
@@ -18,26 +19,32 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
-
-
-
-
             while (scan1.hasNext()) {
                 try {
                     String command = scan1.next();
                     if (command.equals("")) {
                         throw new DukeException(command);
                     } else if (command.equals("list")) {
+                        if (storage.isEmpty()) {
+                            throw new DukeException(command);
+                        }
                         for (Task item : storage) {
-                            System.out.println(count + "." + item);
-                            count++;
+                            int position = storage.indexOf(item) + 1;
+                            System.out.println(position + "." + item);
+
                         }
                     } else if (command.equals("done")) {
-                        int number = scan1.nextInt();
-                        Task current = storage.get(number - 1);
-                        current.setDone();
-                        System.out.println("Nice! I've marked this task as done:");
-                        System.out.println(current.getStatusIcon() + " " + current.getDescription());
+                        try {
+                            int number = scan1.nextInt();
+                            Task current = storage.get(number - 1);
+                            current.setDone();
+                            System.out.println("Nice! I've marked this task as done:");
+                            System.out.println(current.getStatusIcon() + " " + current.getDescription());
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException("delete2");
+                        } catch (InputMismatchException e) {
+                            throw new DukeException(command);
+                        }
                     } else if (command.equals("todo")) {
                         String desc = scan1.nextLine();
                         if (desc.equals("")) {
@@ -55,6 +62,9 @@ public class Duke {
                             throw new DukeException(command);
                         }
                         String[] string = desc.split("/by");
+                        if (string.length < 2) {
+                            throw new DukeException(command);
+                        }
                         Deadline deadline = new Deadline(string[0], string[1]);
                         storage.add(deadline);
                         int size = storage.size();
@@ -67,6 +77,9 @@ public class Duke {
                             throw new DukeException(command);
                         }
                         String[] string = desc.split("/at");
+                        if (string.length < 2) {
+                            throw new DukeException(command);
+                        }
                         Events event = new Events(string[0], string[1]);
                         storage.add(event);
                         int size = storage.size();
@@ -78,7 +91,22 @@ public class Duke {
                         System.out.println(bye);
                         scan1.close();
                         break;
-                    } else {
+                    } else if (command.equals("delete")) {
+                        try {
+                            int number = scan1.nextInt();
+                            Task task = storage.get(number - 1);
+                            storage.remove(number - 1);
+                            int size = storage.size();
+                            System.out.println("Noted. I've removed this task:");
+                            System.out.println("  " + task);
+                            System.out.println("Now you have " + size + " tasks in the list.");
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException("delete2");
+                        } catch (InputMismatchException e) {
+                            throw new DukeException(command);
+                        }
+                    }
+                    else {
                         throw new DukeException(command);
                     }
                 } catch (DukeException e) {
