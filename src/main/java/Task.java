@@ -30,14 +30,14 @@ public class Task {
 
     public static void iDone(int index) {
         if (index <= 0 || index > database.size()) {
-            throw new IllegalArgumentException("Invalid argument for the LIST command.");
+            throw new IllegalArgumentException("Out of range argument for DONE command.");
         }
         database.get(index - 1).markAsDone();
     }
 
     public static Task iRemove(int index) {
         if (index <= 0 || index > database.size()) {
-            throw new IllegalArgumentException("Invalid argument for the LIST command.");
+            throw new IllegalArgumentException("Out of range argument for DELETE command.");
         }
         return database.remove(index - 1);
     }
