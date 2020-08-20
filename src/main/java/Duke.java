@@ -31,13 +31,19 @@ public class Duke {
                         print_tasks(tasks);
                         break;
                     case "done":
+                    case "delete":
                         int i = Integer.parseInt(words[1]) - 1;
-                        if(i <= 0 || i > tasks.size()){
+                        if(i < 0 || i >= tasks.size()){
                             throw new DukeException("invalid task number");
                         }
                         Task task = tasks.get(i);
-                        task.done = true;
-                        print("Nice! I've marked this task as done: \n" + task);
+                        if(command.equals("done")){
+                            task.done = true;
+                            print("Nice! I've marked this task as done: \n" + task);
+                        } else if(command.equals("delete")) {
+                            tasks.remove(i);
+                            print("Noted. I've removed this task: \n" + task + numTasks(tasks));
+                        }
                         break;
                     case "todo":
                         if (input.length() < 6) {
@@ -97,7 +103,11 @@ public class Duke {
 
     public static void addTask(Task task, ArrayList<Task> tasks) {
         tasks.add(task);
+        print("added: " + task.toString() + numTasks(tasks));
+    }
+
+    public static String numTasks(ArrayList<Task> tasks) {
         int size = tasks.size();
-        print("added: " + task.toString() + "You now have " + size + " task" + (size > 1 ? "s" : "") + " in the list.\n");
+        return "You now have " + size + " task" + (size > 1 ? "s" : "") + " in the list.\n";
     }
 }
