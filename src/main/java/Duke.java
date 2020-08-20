@@ -1,7 +1,9 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Duke {
-    public static String iterateToDo(Task[] arr) {
+    public static String iterateToDo(List<Task> arr) {
         String output = "";
         int counter = 1;
         for (Task task : arr) {
@@ -37,10 +39,9 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         String hor_line = "____________________________________\n";
         System.out.println(hor_line + "Hello! I'm Duke\n" + "What can I do for you?\n" + hor_line);
-        Task[] todo_list = new Task[100];
+        List<Task> todo_list = new ArrayList<Task>();
         int counter = 0;
         Scanner sc = new Scanner(System.in);
-
         while (sc.hasNextLine()) {
             String echo = sc.nextLine();
             try {
@@ -52,28 +53,32 @@ public class Duke {
                     System.out.println(hor_line + "Here are the tasks in your list: \n");
                     System.out.println(iterateToDo(todo_list) + hor_line);
                 } else if (echo.startsWith("delete")) {
-                    String index = echo.substring(echo.length() - 1);
-                    int number = Integer.parseInt(index);
-                    todo_list = deleteTask(number, todo_list);
-                    System.out.println(hor_line + "Task deleted! You now have " + Integer.toString(counter - 1) + " tasks left. \n"
-                        + hor_line);
-                    counter --;
+                    if (echo.equals("delete")) {
+                        throw new ResponseException(hor_line + "☹ OOPS!!! Please state which task to delete. \n" + hor_line);
+                    } else {
+                        String index = echo.substring(echo.length() - 1);
+                        int number = Integer.parseInt(index);
+                        System.out.println(hor_line + "Task deleted: \n" + todo_list.get(number - 1).toString() + "\n" +
+                                "You now have " + Integer.toString(counter - 1) + " tasks left. \n" + hor_line);
+                        todo_list.remove(number - 1);
+                        counter --;
+                    }
                 } else if (echo.startsWith("done")) {
                     if (echo.equals("done")) {
                         throw new ResponseException(hor_line + "☹ OOPS!!! Please state which task is done. \n" + hor_line);
                     } else {
                         String index = echo.substring(echo.length() - 1);
                         int number = Integer.parseInt(index) - 1;
-                        todo_list[number] = todo_list[number].markDone();
-                        System.out.println(hor_line + "Nice! Now I will mark this as done: \n" + todo_list[number].toString() + "\n" + hor_line);
+                        todo_list.set(number, todo_list.get(number).markDone());
+                        System.out.println(hor_line + "Nice! Now I will mark this as done: \n" + todo_list.get(number).toString() + "\n" + hor_line);
                     }
                 } else if (echo.startsWith("todo")) {
                     if (echo.equals("todo")) {
                         throw new ResponseException(hor_line + "☹ OOPS!!! The description of a todo cannot be empty. \n" + hor_line);
                     } else {
                         String instructions = echo.substring(5);
-                        todo_list[counter] = new Todo(false, counter + 1, instructions);
-                        System.out.println(hor_line + "Got it. I've added this task: \n" + todo_list[counter].toString() + "\n" +
+                        todo_list.add(counter, new Todo(false, counter + 1, instructions));
+                        System.out.println(hor_line + "Got it. I've added this task: \n" + todo_list.get(counter).toString() + "\n" +
                                 "You now have " + Integer.toString(counter + 1) + " tasks in the list.\n" + hor_line);
                         counter++;
                     }
@@ -85,8 +90,8 @@ public class Duke {
                         String[] arr = instructions.split("/by");
                         instructions = arr[0].substring(0, arr[0].length() - 1);
                         String date = arr[1].substring(1);
-                        todo_list[counter] = new Deadline(false, counter + 1, instructions, date);
-                        System.out.println(hor_line + "Got it. I've added this task: \n" + todo_list[counter].toString() + "\n" +
+                        todo_list.add(counter, new Deadline(false, counter + 1, instructions, date));
+                        System.out.println(hor_line + "Got it. I've added this task: \n" + todo_list.get(counter).toString() + "\n" +
                                 "You now have " + Integer.toString(counter + 1) + " tasks in the list.\n" + hor_line);
                         counter++;
                     }
@@ -98,8 +103,8 @@ public class Duke {
                         String[] arr = instructions.split("/at");
                         instructions = arr[0].substring(0, arr[0].length() - 1);
                         String time = arr[1].substring(1);
-                        todo_list[counter] = new Event(false, counter + 1, instructions, time);
-                        System.out.println(hor_line + "Got it. I've added this task: \n" + todo_list[counter].toString() + "\n" +
+                        todo_list.add(counter, new Event(false, counter + 1, instructions, time));
+                        System.out.println(hor_line + "Got it. I've added this task: \n" + todo_list.get(counter).toString() + "\n" +
                                 "You now have " + Integer.toString(counter + 1) + " tasks in the list.\n" + hor_line);
                         counter++;
                     }

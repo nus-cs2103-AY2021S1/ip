@@ -8,7 +8,7 @@ public class Todo extends Task {
         if (this.isComplete) {
             return "[T][✓] " + this.instructions;
         } else {
-            return "[T][✗]" + this.instructions;
+            return "[T][✗] " + this.instructions;
         }
     }
 }
