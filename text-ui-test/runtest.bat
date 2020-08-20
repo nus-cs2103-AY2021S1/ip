@@ -1,13 +1,16 @@
 @ECHO OFF
 
+SET MY_PATH=C:\Users\zhang\OneDrive\文档\ip
+
 REM create bin directory if it doesn't exist
-if not exist ..\bin mkdir ..\bin
+if not exist "%MY_PATH%\bin" mkdir "%MY_PATH%\bin"
 
 REM delete output from previous run
 del ACTUAL.TXT
 
 REM compile the code into the bin folder
-javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\Duke.java
+dir /s /B ..\src\*.java > sources.txt
+javac  -cp "%MY_PATH%\src" -Xlint:none -d "%MY_PATH%\bin" @sources.txt
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
