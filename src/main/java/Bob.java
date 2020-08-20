@@ -36,8 +36,8 @@ public class Bob {
                     System.out.println("There are no tasks on the list with the provided index. Please check the list and try again!");
                 }
             } catch (NumberFormatException e) {
-              System.out.println("Please provide the index of a task on the list to delete it.");
-              System.out.println("Here's the format: delete [index]");
+              System.out.println("Please provide the index of a task on the list to mark it as done or to delete it.");
+              System.out.println("Here's the format: delete/done [index]");
             } catch (IllegalArgumentException e) {
                 System.out.println("Sorry, I do not understand your request. Please try again.");
             }
