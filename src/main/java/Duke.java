@@ -30,15 +30,9 @@ public class Duke {
             } else if (input.equals("list")) {
                 for (Task item: storage) {
                     int position = storage.indexOf(item) + 1;
-                    System.out.println(position + ".[" + item.getStatusIcon() + "] " + item.getDescription());
+                    System.out.println(position + ". " + item.getDescription());
 
                 }
-            } else if (input.startsWith("done")) {
-                int number = Integer.parseInt(input.split(" ")[1]);
-                Task current = storage.get(number - 1);
-                current.setDone();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(current.getStatusIcon() + " " + current.getDescription());
             }
             else {
                 String bye = "Bye. Hope to see you again soon!";
