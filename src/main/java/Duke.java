@@ -53,12 +53,18 @@ public class Duke {
                     String num = Integer.toString(i + 1);
                     System.out.println(num + "." + currentTask);
                 }
-            } else if (input.contains("done")) {
+            } else if (firstWord.matches("done|delete")) {
                 String[] splitted = input.split("\\s+");
                 int taskIndex = Integer.parseInt(splitted[1]) - 1;
                 Task selectedTask = lst.get(taskIndex);
-                selectedTask.markAsDone();
-                System.out.println("Nice! I've marked this task as done:\n  " + selectedTask);
+                if (firstWord.equals("done")) {
+                    selectedTask.markAsDone();
+                    System.out.println("Nice! I've marked this task as done:\n  " + selectedTask);
+                } else {
+                    lst.remove(taskIndex);
+                    System.out.println("Noted. I've removed this task:\n  " + selectedTask);
+                }
+                System.out.println("Now you have " + lst.size() + " tasks in the list.");
             } else if (firstWord.matches("todo|deadline|event")) {
                 Task newTask;
                 try {
