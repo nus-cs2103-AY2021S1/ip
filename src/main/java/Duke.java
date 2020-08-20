@@ -169,7 +169,7 @@ public class Duke {
 
                             String content = command.split(" ", 2)[1];
 
-                            if(content.split(" /by ").length < 2){
+                            if(content.split(" /at ").length < 2){
                                 throw new InvalidEventException("Please enter both the name as well as the due date of the deadline!");
                             }
 
@@ -193,7 +193,7 @@ public class Duke {
 
                         System.out.println(newTask.toString());
 
-                        System.out.println("Now you have" + taskSize + "tasks in the list.");
+                        System.out.println("Now you have " + taskSize + " tasks in the list.");
 
                     }
                 }
