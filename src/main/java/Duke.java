@@ -9,6 +9,7 @@ import java.util.List;
 public class Duke {
 
     static String newLine = System.lineSeparator();
+    static String tabOutput = "\t";
 
     public static void confused() {
         String str = "OOPS!!! I'm sorry, but I don't know what that means :-(";
