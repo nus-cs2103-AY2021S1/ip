@@ -35,10 +35,13 @@ public class Duke {
                 }
             } else if (input.startsWith("todo")) {
                 String description = input.replace("todo ", "").trim();
-
-                Task task = new ToDo(description);
-                tasks.add(task);
-                printMessage("Added: " + task + String.format("\nNow you have %d tasks in the list", tasks.size()));
+                if (description.length() == 0) {
+                    System.out.println(new ToDoMissingDescriptionException());
+                } else {
+                    Task task = new ToDo(description);
+                    tasks.add(task);
+                    printMessage("Added: " + task + String.format("\nNow you have %d tasks in the list", tasks.size()));
+                }
             } else if (input.startsWith("deadline")) {
                 if (input.contains("/by")) {
                     String description = input.replace("deadline ", "").split("/by")[0].trim();
@@ -62,6 +65,8 @@ public class Duke {
                 } else {
                     System.out.println(new EventMissingDateException());
                 }
+            } else {
+                System.out.println(new InvalidInputException());
             }
         }
     }
