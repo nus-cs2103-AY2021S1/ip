@@ -54,7 +54,7 @@ public class Storage {
     public List<Task> load() throws FileNotFoundException {
         Scanner sc = new Scanner(path.toFile());
 
-        List<Task> tasks = new ArrayList<Task>();
+        List<Task> tasks = new ArrayList<>();
 
         Task task = null;
         boolean isDone;
