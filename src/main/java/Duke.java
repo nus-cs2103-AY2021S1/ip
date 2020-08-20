@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -5,6 +6,7 @@ public class Duke {
         String border = "\n^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^\n";
         Scanner sc = new Scanner(System.in);
         String command;
+        ArrayList<String> lst = new ArrayList<>();
 
         String logo = " _       _ \n"
                 + "| |  _  | |_   _ ____ ___\n"
@@ -15,12 +17,19 @@ public class Duke {
 
         System.out.println(border + "Hi! I'm Wyre, your Personal Assistant Chatbot! :>\nWhat can I do for you today?" + border);
         while(true) {
-            command = sc.next();
+            command = sc.nextLine();
             if(command.equals("bye")) {
                 System.out.println(border + "Bye. Hope to see you again!" + border);
                 break;
+            } else if (command.equals("list")) {
+                System.out.println(border);
+                for (int i = 0; i < lst.size(); i++) {
+                    System.out.println((i + 1) + ". " + lst.get(i));
+                }
+                System.out.println(border);
             } else {
-                System.out.println(border + command + border);
+                lst.add(command);
+                System.out.println(border + "added: " + command + border);
             }
         }
 
