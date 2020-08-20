@@ -6,16 +6,16 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) throws DukeException, IOException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        System.out.println("Hello from\n" + logo);
 
         System.out.println("-------------------------------------------\n" +
-                "Hello! I'm Duke\n" + "What can I do for you?" +
-                "\n-------------------------------------------\n");
+                "Hello! I'm Duke\n" + "What can I do for you?\n" +
+                "-------------------------------------------\n");
 
         Scanner sc = new Scanner(System.in);
         String input = "";
@@ -40,7 +40,7 @@ public class Duke {
             if (task.getDescription().equals("bye")) {
                 System.out.println("-------------------------------------------\n" +
                         "Bye. Hope to see you again soon!" +
-                        "\n-------------------------------------------\n");
+                        "-------------------------------------------");
                 System.exit(0);
 
             } else if (task.getDescription().equals("list")) {
@@ -66,7 +66,7 @@ public class Duke {
                     }
                 }
                 System.out.println(String.format("Now you have %d tasks in the list.\n", taskList.size()) +
-                        "-------------------------------------------\n");
+                        "-------------------------------------------");
             }
             // done case
             else if (chars.length == doneArray.length) {
@@ -96,7 +96,7 @@ public class Duke {
                                 taskList.get(number - 1).getStatusIcon() + "] " +
                                 taskList.get(number - 1).getDescription() + "\n" +
                                 String.format("Now you have %d tasks in the list.\n", taskList.size() -1)
-                                + "-------------------------------------------------------------\n");
+                                + "-------------------------------------------------------------");
 
                         taskList.remove(number - 1);
                     }
@@ -108,14 +108,14 @@ public class Duke {
                                 taskList.add(i - 1, task);
                                 Todo taskTodo = new Todo(task.getDescription());
                                 System.out.println("-------------------------------------------\n" +
-                                        "Got it. I've added this task: \n" + taskTodo.toString() + "\n" +
+                                        "Got it. I've added this task:\n" + taskTodo.toString() + "\n" +
                                         String.format("Now you have %d tasks in the list.\n", taskList.size())
-                                        + "-------------------------------------------\n");
+                                        + "-------------------------------------------");
                                 i++;
                             } catch (ArrayIndexOutOfBoundsException ex) {
                                 System.out.println("-------------------------------------------\n" +
-                                        "☹ OOPS!!! The description of a todo cannot be empty. Try again! \n" +
-                                        "-------------------------------------------\n");
+                                        "☹ OOPS!!! The description of a todo cannot be empty. Try again!\n" +
+                                        "-------------------------------------------");
                             }
                             // if it is a deadline
                         } else if (chars[0] == deadlineChar[0]) {
@@ -126,17 +126,17 @@ public class Duke {
 
                                 Deadline taskDeadline = new Deadline(task.getDescription(), parts[1]);
                                 System.out.println("-------------------------------------------------------------\n" +
-                                        "Got it. I've added this task: \n" + taskDeadline.toString() + "\n" +
+                                        "Got it. I've added this task:\n" + taskDeadline.toString() + "\n" +
                                         String.format("Now you have %d tasks in the list.\n", taskList.size())
-                                        + "-------------------------------------------------------------\n");
+                                        + "-------------------------------------------------------------");
                                 i++;
                                 if (chars.length == 8) {
                                     throw new ArrayIndexOutOfBoundsException("Cannot be empty");
                                 }
                             } catch (ArrayIndexOutOfBoundsException ex) {
                                 System.out.println("-------------------------------------------------------------\n" +
-                                        "☹ OOPS!!! The description of a deadline cannot be empty. Try again! \n" +
-                                        "-------------------------------------------------------------\n");
+                                        "☹ OOPS!!! The description of a deadline cannot be empty. Try again!\n" +
+                                        "-------------------------------------------------------------");
                             }
                         } else if (chars[0] == eventChar[0]) {
                             try {
@@ -147,20 +147,20 @@ public class Duke {
 
                                 Event taskEvent = new Event(task.getDescription(), parts[1]);
                                 System.out.println("-------------------------------------------------------------\n" +
-                                        "Got it. I've added this task: \n" + taskEvent.toString() + "\n" +
+                                        "Got it. I've added this task:\n" + taskEvent.toString() + "\n" +
                                         String.format("Now you have %d tasks in the list.\n", taskList.size())
-                                        + "-------------------------------------------------------------\n");
+                                        + "-------------------------------------------------------------");
                                 i++;
                             } catch (ArrayIndexOutOfBoundsException ex) {
                                 System.out.println("-------------------------------------------------------------\n" +
-                                        "☹ OOPS!!! The description of an event cannot be empty. Try again! \n" +
-                                        "-------------------------------------------------------------\n");
+                                        "☹ OOPS!!! The description of an event cannot be empty. Try again!\n" +
+                                        "-------------------------------------------------------------");
                             }
                         }
                     } catch (ArrayIndexOutOfBoundsException ex) {
                         System.out.println("-------------------------------------------------------------\n" +
-                                "☹ OOPS!!! I'm sorry, but I don't know what that means :-( \n" +
-                                "-------------------------------------------------------------\n");
+                                "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                                "-------------------------------------------------------------");
                         System.exit(0);
                     }
                 }
