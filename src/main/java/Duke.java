@@ -11,17 +11,17 @@ public class Duke {
         while (sc.hasNextLine()) {
             String input = sc.nextLine().strip();
             String[] inputs = input.split("\\s", 2);
-            String command = inputs[0];
 
             try {
+                CommandType command = convertInputToEnum(inputs[0].toLowerCase());
                 switch (command) {
-                    case "bye":
+                    case BYE:
                         Print.formatPrint("Bye! Hope to see you again soon! ");
                         return;
-                    case "list":
+                    case LIST:
                         Task.printList();
                         break;
-                    case "done":
+                    case DONE:
                         if (inputs.length <= 1) {
                             throw new DukeException("OOPS! Task number cannot be empty for done action!");
                         }
@@ -31,7 +31,7 @@ public class Duke {
                             throw new DukeException("OOPS! Task number is invalid!");
                         }
                         break;
-                    case "delete":
+                    case DELETE:
                         if (inputs.length <= 1) {
                             throw new DukeException("OOPS! Task number cannot be empty for delete action!");
                         }
@@ -41,13 +41,13 @@ public class Duke {
                             throw new DukeException("OOPS! Task number is invalid!");
                         }
                         break;
-                    case "todo":
+                    case TODO:
                         if (inputs.length <= 1) {
                             throw new DukeException("OOPS! The description of a todo cannot be empty!");
                         }
                         Task.addTask(new ToDo(inputs[1]));
                         break;
-                    case "deadline":
+                    case DEADLINE:
                         if (inputs.length <= 1) {
                             throw new DukeException("OOPS! The description of a deadline cannot be empty!");
                         }
@@ -57,7 +57,7 @@ public class Duke {
                         }
                         Task.addTask(new Deadline(deadlineDetails[0], deadlineDetails[1]));
                         break;
-                    case "event":
+                    case EVENT:
                         if (inputs.length <= 1) {
                             throw new DukeException("OOPS! The description of an event cannot be empty!");
                         }
@@ -76,5 +76,26 @@ public class Duke {
         }
 
         sc.close();
+    }
+
+    private static CommandType convertInputToEnum(String input) throws DukeException {
+        switch (input) {
+            case "bye":
+                return CommandType.BYE;
+            case "list":
+                return CommandType.LIST;
+            case "done":
+                return CommandType.DONE;
+            case "delete":
+                return CommandType.DELETE;
+            case "todo":
+                return CommandType.TODO;
+            case "deadline":
+                return CommandType.DEADLINE;
+            case "event":
+                return CommandType.EVENT;
+            default:
+                throw new DukeException("OOPS! I'm sorry, but I don't know what that means :-(");
+        }
     }
 }
