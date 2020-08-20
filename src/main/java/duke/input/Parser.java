@@ -19,7 +19,7 @@ public class Parser {
       case CMD_TASK_LIST:
         return Duke.getInstance().getTasks();
       default:
-        return Duke.getInstance().addTask(args[1]);
+        return Duke.getInstance().addTask(s);
     }
   }
 }

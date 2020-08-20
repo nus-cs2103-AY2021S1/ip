@@ -14,7 +14,7 @@ public class Runner {
     Scanner sc = new Scanner(System.in);
 
     String input;
-    while (!Parser.isExitCommand(input = sc.next())) {
+    while (!Parser.isExitCommand(input = sc.nextLine())) {
       System.out.println(Parser.runCommand(input));
     }
 
