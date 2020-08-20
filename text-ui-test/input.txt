@@ -8,9 +8,18 @@ done 3
 done 5
 list
 todo
-todo
+ todo
 blah
 list
 delete 3
 list
+delete
+ delete 
+done 
+ done 
+deadline
+ deadline
+event
+ event
+lalala
 bye
