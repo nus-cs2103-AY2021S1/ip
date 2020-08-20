@@ -1,11 +1,1 @@
-../src/main/java/EventException.java
-../src/main/java/DeadlineException.java
-../src/main/java/DeleteException.java
-../src/main/java/event.java
-../src/main/java/DoneException.java
-../src/main/java/TodoException.java
-../src/main/java/Task.java
 ../src/main/java/Duke.java
-../src/main/java/deadline.java
-../src/main/java/todo.java
-../src/main/java/WrongInputException.java
