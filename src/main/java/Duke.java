@@ -3,7 +3,6 @@ import src.main.java.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Random;
 
 import static java.lang.Integer.parseInt;
 
@@ -13,7 +12,7 @@ public class Duke {
 
     public Duke() {
         this.index = 0;
-        this.ls = new ArrayList<Task>();
+        this.ls = new ArrayList<>();
     }
 
     // prints introduction of klaun
@@ -101,7 +100,7 @@ public class Duke {
         String taskType = task.getSign();
 
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
-        System.out.println("added: ");
+        System.out.println("Okie ! I've added this task for you : ");
         if (task instanceof Todo) { // if task is to-do
             System.out.println(taskType + " " + status + " " + item + "\n");
         } else if (task instanceof Deadline) { // if task is deadline
@@ -116,9 +115,34 @@ public class Duke {
         System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n");
     }
 
+    public void deleteTask(int index) {
+        Task task = this.ls.get(index);
+        String item = task.getItem();
+        String status = task.getStatus();
+        String taskType = task.getSign();
+        int num = index + 1;
+
+        // remove task from array
+        this.ls.remove(index);
+        this.index--;
+
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        System.out.println("I've removed this task for you : ");
+        if (task instanceof Todo) { // if task is to-do
+            System.out.println(num + ". " + taskType + " " + status + " " + item + "\n");
+        } else if (task instanceof Deadline) { // if task is deadline
+            Deadline actualTask = (Deadline) task;
+            System.out.println(taskType + " " +  status + " " + item + " -> by :" + actualTask.getDeadline() + "\n");
+        } else { // if task is event
+            Event actualTask = (Event) task;
+            System.out.println(taskType + " " + status + " " + item + " -> at :" + actualTask.getTime() + "\n");
+        }
+        System.out.println("You now have " + this.index + " task(s) in your list !\n");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+    }
+
     public static void main(String[] args) throws DukeException {
 
-//        String logo = "(>'-')> <('-'<) ^('-')^ v('-')v(>'-')> (^-^)";
         String logo = "     .\"\".    .\"\",\n" +
                 "     |  |   /  /\n" +
                 "     |  |  /  /\n" +
@@ -165,7 +189,7 @@ public class Duke {
                         }
                     } catch (Exception e) {
                         System.out.println("??????????????????????????????????????????????????????????????\n");
-                        System.out.println("Oops ... you should provide a valid task number ~ \n");
+                        System.out.println("Oops ... you should provide a valid task number to complete ~ \n");
                         System.out.println("??????????????????????????????????????????????????????????????\n");
                     }
                 } else if (input.split(" ")[0].equals("todo")) { // if task type is to-do
@@ -215,6 +239,18 @@ public class Duke {
                         System.out.println("Oh no !! Your format should be \"event ____ /at ____\" \n");
                         System.out.println("??????????????????????????????????????????????????????????????\n");
                     }
+                } else if (input.split(" ")[0].equals("delete")) {
+                    try {
+                        if (input.contains(" ") && parseInt(input.split(" ", 2)[1]) <= klaun.getIndex() && parseInt(input.split(" ", 2)[1]) > 0) {
+                            klaun.deleteTask(parseInt(input.split(" ", 2)[1]) - 1);
+                        } else {
+                            throw new DukeException("invalid input: " + input);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("??????????????????????????????????????????????????????????????\n");
+                        System.out.println("Oops ... you should provide a valid task number to delete ~ \n");
+                        System.out.println("??????????????????????????????????????????????????????????????\n");
+                    }
                 } else { // if input is not a task
                     throw new DukeException(input);
                 }
@@ -224,6 +260,5 @@ public class Duke {
                 System.out.println("??????????????????????????????????????????????????????????????\n");
             }
         }
-
     }
 }
