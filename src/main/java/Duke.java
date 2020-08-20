@@ -27,13 +27,12 @@ public class Duke {
                 Task task = tasks.get(number - 1);
                 task.markAsDone();
                 System.out.println("Nice! I've marked this as done:");
-                System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription() + "\n");
+                System.out.println(task.toString() + "\n");
             } else if (nextLine.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < tasks.size(); i++) {
                     int number = i + 1;
-                    Task task = tasks.get(i);
-                    System.out.println(number + ".[" + task.getStatusIcon() + "] " + task.getDescription());
+                    System.out.println(number + "." + tasks.get(i).toString());
                 }
                 System.out.println();
             } else if (nextLine.equals("bye")) {
