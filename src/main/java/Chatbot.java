@@ -16,6 +16,7 @@ public class Chatbot {
         String leading = text.split(" ")[0].trim();
         String trailing = text.substring(leading.length()).trim();
         Command cmd = Command.NONE;
+
         try {
              cmd = Command.valueOf(leading.toUpperCase());
         } catch (IllegalArgumentException e){
