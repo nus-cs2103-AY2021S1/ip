@@ -89,11 +89,11 @@ public class Duke {
     }
 
     private static void listTasks() {
-        String rv = "You have " + taskList.size() + " items.\n";
+        StringBuilder rv = new StringBuilder("You have " + taskList.size() + " items.\n");
         for (int i = 0; i < taskList.size(); i++) {
-            rv += "\n" + (i + 1) + ": " + taskList.get(i).toString();
+            rv.append("\n").append(i + 1).append(": ").append(taskList.get(i).toString());
         }
-        printWithDivider(rv);
+        printWithDivider(rv.toString());
     }
 
     private static void completeTask(String doneIndex)
