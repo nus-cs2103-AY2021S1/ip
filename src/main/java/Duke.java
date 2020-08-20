@@ -6,9 +6,23 @@ public class Duke {
     private static final List<Task> savedItems = new ArrayList<>();
 
     private static void doneHandler(String userInput) {
-        // TODO: input sanitization
-        int taskNo = Integer.parseInt(userInput.split(" ")[1]);
-        Task task = savedItems.get(taskNo - 1);
+        int taskNo;
+        try {
+            taskNo = Integer.parseInt(userInput.split(" ")[1]);
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
+            System.out.println("ERROR: No task no. found. Did you input the task no. of the task you'd like to mark as done?");
+            return;
+        } catch (NumberFormatException nfe) {
+            System.out.println("ERROR: Unrecognized task. Please input the task no. of the task you'd like to mark as done.");
+            return;
+        }
+        Task task;
+        try {
+            task = savedItems.get(taskNo - 1);
+        } catch (IndexOutOfBoundsException ioobe) {
+            System.out.println("ERROR: Task no. not found. Does that task exist?");
+            return;
+        }
         task.markAsDone();
 
         System.out.println("Nice! I've marked this task as done:");
@@ -16,6 +30,11 @@ public class Duke {
     }
 
     private static void todoHandler(String userInput) {
+        // Check for description
+        if (userInput.split(" ").length < 2) {
+            System.out.println("ERROR: Description of todo cannot be empty.");
+            return;
+        }
         String description = userInput.replaceFirst("todo ", "");
         Todo todo = new Todo(description);
         savedItems.add(todo);
@@ -24,7 +43,21 @@ public class Duke {
     }
 
     private static void deadlineHandler(String userInput) {
+        // Check for description
+        if (userInput.split(" ").length < 2) {
+            System.out.println("ERROR: Description of deadline cannot be empty.");
+            return;
+        }
         String[] input = userInput.replaceFirst("deadline ", "").split(" /by ");
+
+        // Check for deadline in description
+        if (input.length < 2) {
+            System.out.println("ERROR: Deadline not found. Did you input a deadline with `/by`?");
+            return;
+        } else if (input.length > 2) {
+            System.out.println("ERROR: Multiple deadlines found. Please only input one deadline.");
+            return;
+        }
         Deadline deadline = new Deadline(input[0], input[1]);
         savedItems.add(deadline);
         System.out.println("Got it. I've added this task:");
@@ -32,7 +65,22 @@ public class Duke {
     }
 
     private static void eventHandler(String userInput) {
+        // Check for description
+        if (userInput.split(" ").length < 2) {
+            System.out.println("ERROR: Description of deadline cannot be empty.");
+            return;
+        }
         String[] input = userInput.replaceFirst("event ", "").split(" /at ");
+
+        // Check for dateTime in description
+        if (input.length < 2) {
+            System.out.println("ERROR: Date/time not found. Did you input a date/time with `/at`?");
+            return;
+        } else if (input.length > 2) {
+            System.out.println("ERROR: Multiple date/times found. Please only input one date/time.");
+            return;
+        }
+
         Event event = new Event(input[0], input[1]);
         savedItems.add(event);
         System.out.println("Got it. I've added this task:");
