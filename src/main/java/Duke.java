@@ -107,17 +107,17 @@ public class Duke {
                     sc.skip("done");
                     String input = sc.nextLine().trim();
                     if (input.length() == 0) {
-                        throw new MissingNumberFromDoneCommandException();
+                        throw new MissingNumberFromCommandException();
                     }
                     int taskNumber = Integer.parseInt(input);
-                    if (taskNumber < 0 || taskNumber > tasks.size()) {
+                    if (taskNumber <= 0 || taskNumber > tasks.size()) {
                         throw new InvalidNumberFromDoneCommandException();
                     }
                     printDone(tasks, taskNumber - 1);
                     continue;
                 }
 
-                catch (MissingNumberFromDoneCommandException e) {
+                catch (MissingNumberFromCommandException e) {
                     System.out.println(LINE);
                     System.out.println("     ☹ OOPS!!! Please type in the \"done\" command followed by a valid task number.");
                     System.out.println(LINE);
@@ -145,11 +145,11 @@ public class Duke {
                     if (input.length() == 0) {
                         throw new MissingDescriptionException();
                     } else if (!input.contains("/at")) {
-                        throw new MissingTimingException();
+                        throw new MissingInfoException();
                     } else {
                         String[] split = input.split("/at");
                         if (split.length != 2) {
-                            throw new MissingTimingException();
+                            throw new MissingInfoException();
                         }
                         Event e = new Event(split[0], split[1]);
                         addTask(e, tasks);
@@ -166,7 +166,7 @@ public class Duke {
                     continue;
                 }
 
-                catch (MissingTimingException e) {
+                catch (MissingInfoException e) {
                     System.out.println(LINE);
                     System.out.println("     ☹ OOPS!!! The event you keyed in needs to have a timing!");
                     System.out.println("     You can key in a timing by typing \"/at\", followed by the event timing!");
@@ -183,11 +183,11 @@ public class Duke {
                     if (input.length() == 0) {
                         throw new MissingDescriptionException();
                     } else if (!input.contains("/by")) {
-                        throw new MissingDeadlineException();
+                        throw new MissingInfoException();
                     } else {
                         String[] split = input.split("/by");
                         if (split.length != 2) {
-                            throw new MissingDeadlineException();
+                            throw new MissingInfoException();
                         }
                         Deadline e = new Deadline(split[0], split[1]);
                         addTask(e, tasks);
@@ -203,7 +203,7 @@ public class Duke {
                     continue;
                 }
 
-                catch (MissingDeadlineException e) {
+                catch (MissingInfoException e) {
                     System.out.println(LINE);
                     System.out.println("     ☹ OOPS!!! The deadline you keyed in needs to have a deadline!");
                     System.out.println("     You can key in a timing by typing \"/by\", followed by the deadline's " +
@@ -236,23 +236,29 @@ public class Duke {
             if (sc.hasNext("delete")) {
                 try {
                     sc.skip("delete");
-                    if (!sc.hasNextInt()) {
-                        throw new MissingNumberFromDoneCommandException();
+                    String input = sc.nextLine().trim();
+                    if (input.length() == 0) {
+                        throw new MissingNumberFromCommandException();
                     }
-                    int taskNumber = Integer.parseInt(sc.next().trim()) - 1;
-                    if (taskNumber < 0 || taskNumber > tasks.size()) {
+                    int taskNumber = Integer.parseInt(input);
+                    if (taskNumber <= 0 || taskNumber > tasks.size()) {
                         throw new InvalidNumberFromDoneCommandException();
                     }
-                    deleteTask(tasks, taskNumber);
+                    deleteTask(tasks, taskNumber - 1);
                     continue;
                 }
 
-                catch (MissingNumberFromDoneCommandException e) {
+                catch (MissingNumberFromCommandException e) {
                     System.out.println(LINE);
                     System.out.println("     ☹ OOPS!!! Please type in the delete command followed by a task number.");
                     System.out.println(LINE);
                 }
                 catch (InvalidNumberFromDoneCommandException e) {
+                    System.out.println(LINE);
+                    System.out.println("     ☹ OOPS!!! The delete command must be followed by a valid task number.");
+                    System.out.println(LINE);
+                }
+                catch (NumberFormatException e) {
                     System.out.println(LINE);
                     System.out.println("     ☹ OOPS!!! The delete command must be followed by a valid task number.");
                     System.out.println(LINE);
