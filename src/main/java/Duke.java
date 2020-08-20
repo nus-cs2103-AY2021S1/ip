@@ -29,7 +29,7 @@ public class Duke {
                 && input.split(" /at ")[1].split("-").length == 2;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
 
         // Initialise strings to separate messages from Duke
         // and commands from CLI
@@ -46,7 +46,7 @@ public class Duke {
         String input;
 
         // Initialise DukeException object
-        DukeException dE = new DukeException();
+//        DukeException dE = new DukeException();
 
         // Initialise ArrayList to store tasks from user
         ArrayList<Task> userTasks = new ArrayList<Task>();
@@ -71,15 +71,19 @@ public class Duke {
                 // Get the index stated after "done" by parsing the string
                 int index = Integer.parseInt(input.substring(5)) - 1;
 
-                // Check if index is out of bounds
-                if (index >= userTasks.size()) {
-                    System.out.println(servantSpeak
-                            + dE.MESSAGE_INDEX_OUT_OF_BOUNDS);
-                } else {
-                    userTasks.get(index).setDone();
-                    System.out.println(servantSpeak
-                            + "    As you wish Sire. I have marked this task as done:\n"
-                            + "       " + userTasks.get(index).toString());
+                // Mark item as done
+                try {
+                    if (index >= userTasks.size()) {
+                        throw new DukeException("", ExceptionType.INDEX_OUT_OF_BOUNDS);
+                    } else {
+                        userTasks.get(index).setDone();
+                        System.out.println(servantSpeak
+                                + "    As you wish Sire. I have marked this task as done:\n"
+                                + "       " + userTasks.get(index).toString());
+                    }
+                } catch (DukeException ex) {
+                    System.out.print(servantSpeak);
+                    System.out.println(ex);
                 }
                 System.out.println();
                 continue;
@@ -90,15 +94,19 @@ public class Duke {
                 // Get the index stated after "delete" by parsing the string
                 int index = Integer.parseInt(input.substring(7)) - 1;
 
-                // Check if index is out of bounds
-                if (index >= userTasks.size()) {
-                    System.out.println(servantSpeak
-                            + dE.MESSAGE_INDEX_OUT_OF_BOUNDS);
-                } else {
-                    System.out.println(servantSpeak
-                            + "    As you wish Sire. I removed this task:\n"
-                            + "       " + userTasks.get(index).toString());
-                    userTasks.remove(index);
+                // Delete item
+                try {
+                    if (index >= userTasks.size()) {
+                        throw new DukeException("", ExceptionType.INDEX_OUT_OF_BOUNDS);
+                    } else {
+                        System.out.println(servantSpeak
+                                + "    As you wish Sire. I removed this task:\n"
+                                + "       " + userTasks.get(index).toString());
+                        userTasks.remove(index);
+                    }
+                } catch (DukeException ex) {
+                    System.out.print(servantSpeak);
+                    System.out.println(ex);
                 }
                 System.out.println();
                 continue;
@@ -120,19 +128,19 @@ public class Duke {
             }
 
             // Check validity of input command
-            if (isEmptyInput(input)) {
-                System.out.println(servantSpeak
-                        + dE.MESSAGE_ALL_TASKS_EMPTY_INPUT);
-                continue;
-            }
-            if (!isValidCommand(input)) {
-                System.out.println(servantSpeak
-                        + dE.MESSAGE_ALL_TASKS_INVALID_COMMAND);
-                continue;
-            }
-            if (isEmptyDescription(input)) {
-                System.out.println(servantSpeak
-                        + dE.MESSAGE_ALL_TASKS_EMPTY_DESCRIPTION);
+            try {
+                if (isEmptyInput(input)) {
+                    throw new DukeException("", ExceptionType.EMPTY_INPUT);
+                }
+                if (!isValidCommand(input)) {
+                    throw new DukeException("", ExceptionType.INVALID_COMMAND);
+                }
+                if (isEmptyDescription(input)) {
+                    throw new DukeException("", ExceptionType.EMPTY_DESCRIPTION);
+                }
+            } catch (DukeException ex) {
+                System.out.print(servantSpeak);
+                System.out.println(ex);
                 continue;
             }
 
@@ -147,30 +155,38 @@ public class Duke {
                     userTasks.add(t);
                     break;
                 case "deadline":
-                    if (!hasDeadlineBy(input)) {
-                        System.out.println(servantSpeak
-                                + dE.MESSAGE_DEADLINE_NO_BY);
+                    try {
+                        if (!hasDeadlineBy(input)) {
+                            throw new DukeException("", ExceptionType.DEADLINE_NO_BY);
+                        }
+                        inputSplit = input.split(" /by ");
+                        String by = inputSplit[1];
+                        description = inputSplit[0].substring(8);
+                        t = new Deadline(description, by);
+                        userTasks.add(t);
+                        break;
+                    } catch (DukeException ex) {
+                        System.out.print(servantSpeak);
+                        System.out.println(ex);
                         continue;
                     }
-                    inputSplit = input.split(" /by ");
-                    String by = inputSplit[1];
-                    description = inputSplit[0].substring(8);
-                    t = new Deadline(description, by);
-                    userTasks.add(t);
-                    break;
                 case "event":
-                    if (!hasEventStartEndTime(input)) {
-                        System.out.println(servantSpeak
-                                + dE.MESSAGE_EVENT_NO_START_END);
+                    try {
+                        if (!hasEventStartEndTime(input)) {
+                            throw new DukeException("", ExceptionType.EVENT_NO_START_END);
+                        }
+                        inputSplit = input.split(" /at ");
+                        String start = inputSplit[1].split("-")[0];
+                        String end = inputSplit[1].split("-")[1];
+                        description = inputSplit[0].substring(5);
+                        t = new Event(description, start, end);
+                        userTasks.add(t);
+                        break;
+                    } catch (DukeException ex) {
+                        System.out.print(servantSpeak);
+                        System.out.println(ex);
                         continue;
                     }
-                    inputSplit = input.split(" /at ");
-                    String start = inputSplit[1].split("-")[0];
-                    String end = inputSplit[1].split("-")[1];
-                    description = inputSplit[0].substring(5);
-                    t = new Event(description, start, end);
-                    userTasks.add(t);
-                    break;
             }
 
             // Standard reply from Duke for adding a task
@@ -179,8 +195,6 @@ public class Duke {
                     + userTasks.get(userTasks.size() - 1).toString() + "\n"
                     + "    Now you have " + userTasks.size()
                     + " tasks in the list.\n");
-
         }
-
     }
 }
