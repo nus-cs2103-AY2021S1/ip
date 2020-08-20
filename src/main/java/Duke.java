@@ -7,7 +7,7 @@ public class Duke {
     private List<Task> storage;
 
     public Duke() {
-        storage = new ArrayList<Task>();
+        storage = new ArrayList<>();
     }
 
     public void greet() {
@@ -23,12 +23,6 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    //stores and prints out command
-    public void store(String s) {
-        Task newTask = new Task(s);
-        this.store(newTask);
-    }
-
     public void store(Task t) {
         this.storage.add(t);
         System.out.println("Got it. I've added this task:");
@@ -36,18 +30,42 @@ public class Duke {
         System.out.println("Now you have " + storage.size() + " tasks in the list.");
     }
 
-    public void addToDo(String s) {
-        ToDo newToDo = new ToDo(s);
+    public void addToDo(String input) throws DukeInputException{
+        if (input.equals("")) {
+            throw new DukeInputException("'todo' requires parameters.\n" +
+                    "Use case: todo <name>");
+        }
+        ToDo newToDo = new ToDo(input);
         this.store(newToDo);
     }
 
-    public void addDeadline(String s, String deadline) {
-        Deadline newDeadline = new Deadline(s, deadline);
+    public void addDeadline(String input) throws DukeInputException{
+        if (input.equals("")) {
+            throw new DukeInputException("'deadline' requires parameters.\n" +
+                    "Use case: deadline <name> /by <deadline>");
+        }
+
+        String[] params = input.split("/by ", 2);
+        if (params.length != 2) {
+            throw new DukeInputException("<" + input + "> is not valid for the 'deadline' command.\n" +
+                    "Please add a /by deadline to the task.");
+        }
+        Deadline newDeadline = new Deadline(params[0], params[1]);
         this.store(newDeadline);
     }
 
-    public void addEvent(String s, String when) {
-        Event newEvent = new Event(s, when);
+    public void addEvent(String input) throws DukeInputException{
+        if (input.equals("")) {
+            throw new DukeInputException("'event' requires parameters.\n" +
+                    "Use case: event <name> /at <timing>");
+        }
+
+        String[] params = input.split("/at ", 2);
+        if (params.length != 2) {
+            throw new DukeInputException("<" + input + "> is not valid for the 'event' command.\n" +
+                    "Please add a /at timing to the task.");
+        }
+        Event newEvent = new Event(params[0], params[1]);
         this.store(newEvent);
     }
 
@@ -55,7 +73,18 @@ public class Duke {
         return this.storage.get(i-1);
     }
 
-    public void doTask(int i) {
+    public void doTask(String params) throws DukeInputException {
+        if (params.equals("")) {
+            throw new DukeInputException("'done' requires parameters.\n" +
+                    "Use case: done <task number>");
+        }
+        int i;
+        try {
+            i = Integer.parseInt(params);
+        } catch (NumberFormatException e) {
+            throw new DukeInputException("Please input number instead of <" + params + "> after a 'done' command!");
+        }
+
         Task temp = this.getTask(i);
         temp.doTask();
         System.out.println("Nice! I've marked this task as done:");
@@ -64,7 +93,7 @@ public class Duke {
 
     public void printList() {
         for (int i = 0; i < this.storage.size(); i++) {
-            String printText = Integer.toString(i+1) + ". " + this.storage.get(i).toString();
+            String printText = (i + 1) + ". " + this.storage.get(i).toString();
             System.out.println(printText);
         }
     }
@@ -79,23 +108,31 @@ public class Duke {
 
         while(true) {
             String s = sc.nextLine();
-            String command = s.split(" ")[0];
-            if (s.equals("bye")) {
-                break;
-            } else if (s.equals("list")) {
-                duke.printList();
-            } else if (command.equals("done")) {
-                duke.doTask(Integer.parseInt(s.split(" ")[1]));
-            } else if (command.equals("todo")) {
-                duke.addToDo(s.split(" ",2)[1]);
-            } else if (command.equals("deadline")) {
-                String[] params = s.split(" ", 2)[1].split("/by ");
-                duke.addDeadline(params[0], params[1]);
-            } else if (command.equals("event")) {
-                String[] params = s.split(" ", 2)[1].split("/at ");
-                duke.addEvent(params[0], params[1]);
-            } else {
-                duke.store(s);
+            String[] inputs = s.split(" ", 2);
+            String command = inputs[0];
+            String params = "";
+            if (inputs.length == 2) {
+                params = inputs[1];
+            }
+
+            try {
+                if (s.equals("bye")) {
+                    break;
+                } else if (s.equals("list")) {
+                    duke.printList();
+                } else if (command.equals("done")) {
+                    duke.doTask(params);
+                } else if (command.equals("todo")) {
+                    duke.addToDo(params);
+                } else if (command.equals("deadline")) {
+                    duke.addDeadline(params);
+                } else if (command.equals("event")) {
+                    duke.addEvent(params);
+                } else {
+                    throw new DukeInputException("Invalid command <" + s + "> given.");
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
 
         }
