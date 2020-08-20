@@ -11,6 +11,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (true) {
             String input = sc.nextLine();
+            String firstWord = input.split(" ")[0];
             if (input.equals("bye")) {
                 break;
             } else if (input.equals("list")) {
@@ -27,6 +28,25 @@ public class Duke {
                 Task selectedTask = lst.get(taskIndex);
                 selectedTask.markAsDone();
                 System.out.println("Nice! I've marked this task as done:\n  " + selectedTask);
+            } else if (firstWord.matches("todo|deadline|event")) {
+                Task newTask;
+                if (firstWord.equals("todo")) {
+                    String tsk = input.split("todo ")[1];
+                    newTask = new ToDo(tsk);
+                } else if (firstWord.equals("deadline")) {
+                    String[] split = input.split("/by ");
+                    String deadline = split[1];
+                    String tsk = split[0].split("deadline ")[1];
+                    newTask = new Deadline(tsk, deadline);
+                } else {
+                    String[] split = input.split("/at ");
+                    String at = split[1];
+                    String tsk = split[0].split("event ")[1];
+                    newTask = new Event(tsk, at);
+                }
+                lst.add(newTask);
+                System.out.println("Got it. I've added this task:\n  " + newTask);
+                System.out.println("Now you have " + lst.size() + " tasks in the list.");
             } else {
                 lst.add(new Task(input));
                 System.out.println("added: " + input);
