@@ -23,6 +23,9 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.
 _________________________________________
 _________________________________________
+OOPS!!! I'm sorry, but I don't know what that means :-(
+_________________________________________
+_________________________________________
 Here are the tasks in your list:
 1.[T][X] borrow book
 2.[E][X] read book (at: Mon 2-4pm)
@@ -37,6 +40,16 @@ Here are the tasks in your list:
 1.[T][O] borrow book
 2.[E][X] read book (at: Mon 2-4pm)
 3.[D][X] return book (by: Sunday)
+_________________________________________
+_________________________________________
+Noted, I've removed this task:
+[T][O] borrow book
+Now you have 2 tasks in the list.
+_________________________________________
+_________________________________________
+Here are the tasks in your list:
+1.[E][X] read book (at: Mon 2-4pm)
+2.[D][X] return book (by: Sunday)
 _________________________________________
 _________________________________________
 Bye. Hope to see you again soon!
