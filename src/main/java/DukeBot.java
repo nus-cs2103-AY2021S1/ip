@@ -74,6 +74,21 @@ public class DukeBot{
                     System.out.println(line);
                     input = sc.nextLine();
                 }
+            }else if(splitList[0].equals("event")){
+                try {
+                    String[] splitList2 = splitList[1].split("/at", 2);
+                    String[] splitList3 = splitList2[1].split("-", 2);
+                    Event event = new Event(splitList2[0], splitList3[0], splitList3[1], false);
+                    System.out.println("     Got it I've now added this Task:");
+                    System.out.println("       " + event.toString());
+                    ls.add(event);
+                    System.out.println("     Now you have " + ls.length() + " tasks in the list.");
+                }catch(Exception e){
+                    System.out.println("     \u2639 OOPS!!! The description or the time duration of a event cannot be empty.");
+                }finally {
+                    System.out.println(line);
+                    input = sc.nextLine();
+                }
             }else{
                 try {
                     Task task = new Task(input, false);
