@@ -18,6 +18,8 @@ public class Duke {
     static void response(Scanner scanner, ArrayList<Task> taskList) {
         String userInput = scanner.nextLine();
         String borders = "\n\n\\   / \\   / \\   / \\   / im not very creative \\   / \\   / \\   / \\   /\n \\ /   \\ /   \\ /   \\ /      EuZin's Duke      \\ /   \\ /   \\ /   \\ /\n\n";
+        String addedMessage = "ok can i've added it\n";
+        String countMessage = "Now got " + taskList.size() + " task in the list\n";
         if (userInput.equals("bye")) {
             System.out.println(borders + "Bye. Hope to see you again soon!" + borders);
         } else if (userInput.equals("list")) {
@@ -26,22 +28,38 @@ public class Duke {
             Iterator<Task> taskIterator = taskList.iterator();
             while (taskIterator.hasNext()) {
                 Task thisTask = taskIterator.next();
-                returnString += "\n" + (counter + 1) + ". " + thisTask.getStatusIcon() + " " + thisTask.description;
+                returnString += "\n" + (counter + 1) + ". " + thisTask.toString();
                 counter++;
             }
             System.out.println(returnString + borders);
             response(new Scanner(System.in), taskList);
-        } else if (userInput.length() >= 4 && userInput.substring(0,4).equals("done")) {
+        } else if (userInput.startsWith("done")) {
             String returnString = borders + "ok sure good job i guess\n";
             int taskDone = Integer.parseInt(userInput.substring(5));
-            Task thisTask = taskList.get(taskDone-1);
+            Task thisTask = taskList.get(taskDone - 1);
             thisTask.done();
-            returnString += thisTask.getStatusIcon() + " " + thisTask.description;
+            returnString += thisTask.getStatusIcon() + " " + thisTask.toString();
             System.out.println(returnString + borders);
             response(new Scanner(System.in), taskList);
-        } else {
-            taskList.add(new Task(userInput));
+        } else if (userInput.startsWith("todo")) {
+            Task thisTask = new Task(userInput);
+            taskList.add(thisTask);
             System.out.println(borders + "added: " + userInput + borders);
+            System.out.println(borders + addedMessage + thisTask.toString() + "\n" + countMessage + borders);
+            Duke.response((new Scanner(System.in)), taskList);
+        } else if (userInput.startsWith("deadline")) {
+            String[] StringArr = userInput.split(" /by");
+            Task thisTask = new Deadline(StringArr[0].replace("deadline", ""), StringArr[1]);
+            taskList.add(thisTask);
+            System.out.println(borders + addedMessage + thisTask.toString() + "\n" + countMessage + borders);
+            Duke.response((new Scanner(System.in)), taskList);
+        } else if (userInput.startsWith("event")) {
+            String[] StringArr = userInput.split(" /at");
+            Task thisTask = new Event(StringArr[0].replace("event", ""), StringArr[1]);
+            taskList.add(thisTask);
+            System.out.println(borders + addedMessage + thisTask.toString() + "\n" + countMessage + borders);
+            Duke.response((new Scanner(System.in)), taskList);
+        } else {
             Duke.response((new Scanner(System.in)), taskList);
         }
     }
