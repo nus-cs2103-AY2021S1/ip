@@ -3,6 +3,7 @@ import java.util.List;
 enum Command {
     START,
     LIST,
+    DONE,
     BYE,
     ADD,
 }
@@ -49,6 +50,21 @@ public class Message {
                             item.getStatusIcon() +
                             "] " +
                             item.getTaskName());
+                }
+                break;
+            case DONE:
+                String[] words = message.split(" ");
+                try {
+                    int index = Integer.parseInt(words[1]);
+                    Task item = list.get(index - 1);
+                    item.markDone();
+                    System.out.println("Can, I help you mark this as done liao:" +
+                            "\n  [" +
+                            item.getStatusIcon() +
+                            "] " +
+                            item.getTaskName());
+                } catch (NumberFormatException e) {
+                    System.out.println("Cannot find leh. Try typing \"done {index of list item}\".");
                 }
                 break;
             case BYE:
