@@ -57,19 +57,26 @@ public class Duke {
     }
 
     void addToList(String msg, Type type) {
-        String[] sp = new String[] {msg};;
-        switch(type) {
-            case TODO:
-                ls.add(new ToDo(msg)); break;
-            case EVENT:
-                sp = msg.split(" /");
-                ls.add(new Event(sp[0], sp[1])); break;
-            case DEADLINE:
-                sp = msg.split(" /");
-                ls.add(new Deadline(sp[0], sp[1])); break;
+        if(msg.trim().isEmpty()) {
+            System.out.println(sadFace + spacing + "Poco noticed that your task is empty");
+        } else {
+            String[] sp = new String[]{msg};
+            switch (type) {
+                case TODO:
+                    ls.add(new ToDo(msg));
+                    break;
+                case EVENT:
+                    sp = msg.split(" /");
+                    ls.add(new Event(sp[0], sp[1]));
+                    break;
+                case DEADLINE:
+                    sp = msg.split(" /");
+                    ls.add(new Deadline(sp[0], sp[1]));
+                    break;
+            }
+            System.out.println(face2 + spacing + "Poco has added " + sp[0] + " to your list");
+            System.out.println("Pending Tasks: " + ls.size());
         }
-        System.out.println(face2 + spacing + "Poco has added " + sp[0] + " to your list");
-        System.out.println("Pending Tasks: " + ls.size());
 
     }
 
