@@ -3,10 +3,10 @@ import java.util.ListIterator;
 import java.util.Scanner;
 
 public class Duke {
-    TextList textList;
+    ArrayList<Task> taskList;
 
     Duke() {
-        this.textList = new TextList();
+        this.taskList = new ArrayList<>();
     }
 
     public static void main(String[] args) {
@@ -18,52 +18,66 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         greet();
         while (sc.hasNextLine()) {
-            String text = sc.nextLine();
-            if (text.equals("bye")) {
+            String input = sc.nextLine();
+            if (input.equals("bye")) {
                 break;
-            } else if (text.equals("list")) {
+            } else if (input.equals("list")) {
                 list();
+            } else if (input.startsWith("done ")) {
+                int indexOfDoneTask = Integer.parseInt(input.substring(5));
+                markAsDone(indexOfDoneTask);
             } else {
-                add(text);
+                add(input);
             }
         }
         exit();
     }
 
     private void greet() {
-        System.out.println("    ------------------------------------------------------\n" +
+        System.out.println("    ______________________________________________________\n" +
                 "     Hello! I'm Duke \n     What can I do for you?\n" +
-                "    ------------------------------------------------------");
+                "    ______________________________________________________");
     }
 
     private void echo(String command) {
-        System.out.println("    ------------------------------------------------------\n" +
+        System.out.println("    ______________________________________________________\n" +
                 "     " + command + "\n" +
-                "    ------------------------------------------------------");
+                "    ______________________________________________________");
     }
 
     private void exit() {
-        System.out.println("    ------------------------------------------------------\n" +
+        System.out.println("    ______________________________________________________\n" +
                 "     Bye. Hope to see you again soon!\n" +
-                "    ------------------------------------------------------");
+                "    ______________________________________________________");
     }
 
-    private void add(String text) {
-        textList.acceptText(text);
-        System.out.println("    ------------------------------------------------------\n" +
-                "     added: " + text + "\n" +
-                "    ------------------------------------------------------");
+    private void add(String input) {
+        Task newTask = new Task(input);
+        taskList.add(newTask);
+        System.out.println("    ______________________________________________________\n" +
+                "     added: " + newTask.getDesc() + "\n" +
+                "    ______________________________________________________");
     }
 
     private void list() {
-        System.out.println("    ------------------------------------------------------");
-        ArrayList<String> texts = textList.retrieve();
-        ListIterator<String> listIterator = texts.listIterator();
+        System.out.println("    ______________________________________________________\n" +
+                "     Here are the tasks in your list:");
+        ListIterator<Task> listIterator = taskList.listIterator();
         int i = 1;
         while (listIterator.hasNext()) {
-            System.out.println("     " + i + ". " + listIterator.next());
+            Task t = listIterator.next();
+            System.out.println("     " + i + ". [" + t.getStatusIcon() + "] " + t.getDesc());
             i++;
         }
-        System.out.println("    ------------------------------------------------------");
+        System.out.println("    ______________________________________________________");
+    }
+
+    private void markAsDone(int indexOfDoneTask) {
+        Task doneTask = taskList.get(indexOfDoneTask - 1);
+        doneTask.markAsDone();
+        System.out.println("    ______________________________________________________\n" +
+                "     Nice! I've marked this task as done:\n" +
+                "       [" + doneTask.getStatusIcon() + "] " + doneTask.getDesc() + "\n" +
+                "    ______________________________________________________");
     }
 }
