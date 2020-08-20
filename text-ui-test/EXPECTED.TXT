@@ -36,12 +36,16 @@
      Now you have 5 tasks in the list
     ----------------------------------------
     ----------------------------------------
+     Noted. I've removed this task: 
+      [E][X] project meeting (at: Mon 2-4pm)
+     Now you have 4 tasks in the list
+    ----------------------------------------
+    ----------------------------------------
      Here are the tasks in your list:
      1. [T][V] read book
      2. [D][X] do homework (by: no idea :-p)
-     3. [E][X] project meeting (at: Mon 2-4pm)
-     4. [T][V] join sports club
-     5. [T][X] borrow book
+     3. [T][V] join sports club
+     4. [T][X] borrow book
     ----------------------------------------
     ----------------------------------------
      Bye? I hope it's not forever! Come back soon!

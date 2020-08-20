@@ -5,4 +5,5 @@ event project meeting /at Mon 2-4pm
 todo join sports club
 done 4
 todo borrow book
+delete 3
 list
