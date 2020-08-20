@@ -10,7 +10,7 @@
     How may I help you today?
     -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-
     -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-
-     Got it. I've added this task:
+     No problem! I've added this task to the list:
        [T][?] heyyy
      Now you have 1 tasks in the list.
     -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-
