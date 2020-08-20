@@ -2,6 +2,7 @@ import java.util.List;
 
 enum Command {
     START,
+    LIST,
     BYE,
     ADD,
 }
@@ -37,6 +38,13 @@ public class Message {
             case START:
                 System.out.println("Eh what's up! I'm Meimei" +
                         "\nWhat you want ah?");
+                break;
+            case LIST:
+                int counter = 0;
+                for (String item : list) {
+                    counter++;
+                    System.out.println(counter + ". " + item);
+                }
                 break;
             case BYE:
                 System.out.println("Ok bye bye! C u again :P");
