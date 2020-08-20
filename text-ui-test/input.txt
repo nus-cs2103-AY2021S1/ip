@@ -3,4 +3,12 @@ todo borrow book
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 list
+
+todo
+event return book /by Sunday
+deadline
+list
+delete 3
+delete 3
+list
 bye
