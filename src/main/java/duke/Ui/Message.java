@@ -1,4 +1,4 @@
-package duke;
+package duke.Ui;
 
 public class Message {
     public static final String MESSAGE_WELCOME = "Hello! I'm Duke\nWhat can I do for you?";
