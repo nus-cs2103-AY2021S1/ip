@@ -65,6 +65,19 @@ public class StringIdentifier {
         } else if (commandSpace <= 5) {
             throw new DukeException("       *Invalid command.*\n     Commands: bye, list, todo, event, deadline, delete\n");
 
+        } else if (str.substring(0, 7).equals("delete ")) {
+            int length = str.length();
+            String index = str.substring(7, length);
+            int realIndex = Integer.parseInt(index) - 1;
+
+            if (realIndex >= this.lst.size() || realIndex < 0) {
+                throw new DukeException("       *Invalid task index, please try again.*\n");
+            }
+            delete(realIndex);
+
+        } else if (commandSpace <= 6) {
+            throw new DukeException("       *Invalid command.*\n     Commands: bye, list, todo, event, deadline, delete\n");
+
         } else if (str.substring(0, 9).equals("deadline ")) {
             int length = str.length();
             if (length == 9) {
@@ -112,6 +125,15 @@ public class StringIdentifier {
         taskSubject.markAsDone();
         System.out.println("     Nice! I've marked this task as done:\n"
                          + "       " + taskSubject);
+    }
+
+    public void delete(int index) {
+        Task taskSubject = this.lst.get(index);
+        this.lst.remove(index);
+        System.out.println("     Noted. I've removed this task:\n"
+                + "       " + taskSubject
+                + "\n     Now you have " + this.lst.size() + " task(s) in the list.");
+
     }
 
     public void close() {

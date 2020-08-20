@@ -42,12 +42,6 @@
        *Invalid task index, please try again.*
 
     _______________________________________________________________________
-       *Please add in a space character after your command.*
-
-    _______________________________________________________________________
-       *Please add in a space character after your command.*
-
-    _______________________________________________________________________
        *Please fill in deadline completion time in the following format:*
      eg. deadline return book to Jurong Regional Library /by 6th June 2020
 
@@ -55,10 +49,10 @@
        *Please add in a space character after your command.*
 
     _______________________________________________________________________
-       *Please add in a space character after your command.*
-
+     Noted. I've removed this task:
+       [D][?] return book (by: June 6th)
+     Now you have 3 task(s) in the list.
     _______________________________________________________________________
-       *Please add in a space character after your command.*
 
     _______________________________________________________________________
        *Please add in a space character after your command.*
