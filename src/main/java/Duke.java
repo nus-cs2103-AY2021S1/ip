@@ -13,7 +13,7 @@ public class Duke {
     //static String addedText = "added: ";
     static String line = "_______________________________________________________________";
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<>();
 
         //Initial greetings
