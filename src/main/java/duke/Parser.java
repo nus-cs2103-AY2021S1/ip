@@ -59,10 +59,10 @@ public class Parser {
      * @return A String representing non-commandWord part of the user input.
      */
     public static String generateContent(String[] words) {
-        String result = words[1];
+        StringBuilder result = new StringBuilder(words[1]);
         for (int i = 2; i < words.length; i++) {
-            result = result + " " + words[i];
+            result.append(" ").append(words[i]);
         }
-        return result;
+        return result.toString();
     }
 }
