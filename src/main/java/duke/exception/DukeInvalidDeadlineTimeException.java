@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class DukeInvalidDeadlineTimeException extends DukeInvalidTaskTimeException {
     @Override
     public String toString() {

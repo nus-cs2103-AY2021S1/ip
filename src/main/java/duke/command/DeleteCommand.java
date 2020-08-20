@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.*;
+import duke.exception.*;
+
 public class DeleteCommand extends Command {
 
     public DeleteCommand(String input) {

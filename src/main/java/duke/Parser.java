@@ -1,3 +1,7 @@
+package duke;
+
+import duke.command.*;
+
 public class Parser {
 
     // Parses user input and returns corresponding Command

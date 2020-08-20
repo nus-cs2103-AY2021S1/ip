@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.*;
+import duke.exception.*;
 public class UnknownCommand extends Command {
 
     public UnknownCommand() {

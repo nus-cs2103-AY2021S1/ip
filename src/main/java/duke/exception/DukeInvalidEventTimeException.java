@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class DukeInvalidEventTimeException extends DukeInvalidTaskTimeException {
     @Override
     public String toString() {
