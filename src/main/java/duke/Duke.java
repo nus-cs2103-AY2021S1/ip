@@ -1,5 +1,6 @@
 package duke;
 
+import java.awt.color.CMMException;
 import java.sql.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -30,46 +31,49 @@ public class Duke {
         while (sc.hasNextLine()) {
             input = sc.nextLine();
             String[] splitted = input.split(" ", 2);
+            Commands command = null;
             try {
-                this.processInput(splitted[0].trim());
-            } catch (DukeErrorException ex) {
+                command = Commands.valueOf(splitted[0].toUpperCase());
+                this.processInput(command);
+            } catch (UnknownCommandException ex) {
                 System.out.println(ex);
                 continue;
             }
-            if (input.equals("bye")) {
+            
+            if (command.equals(Commands.BYE)) {
                 break;
-            } else if (input.equals("list")) {
+            } else if (command.equals(Commands.LIST)) {
                 buildChatSeparator();
                 System.out.println(" Here are the tasks in your list:");
                 for (int i = 1; i <= list.size(); i++) {
                     System.out.println(" " + i + ". " + list.get(i - 1));
                 }
                 buildChatSeparator();
-            } else if (splitted[0].equals("done")){
+            } else if (command.equals(Commands.DONE)){
                 try {
                     this.makeDone(Integer.parseInt(splitted[1]) - 1);
                 } catch (ArrayIndexOutOfBoundsException | DukeErrorException ex) {
                     System.out.println(ex);
                 }
-            } else if (splitted[0].equals("delete")){
+            } else if (command.equals(Commands.DELETE)){
                 try {
                     this.deleteTask(Integer.parseInt(splitted[1]) - 1);
                 } catch (ArrayIndexOutOfBoundsException | DukeErrorException ex) {
                     System.out.println(ex);
                 }
-            } else if (splitted[0].equals("deadline")) {
+            } else if (command.equals(Commands.DEADLINE)) {
                 try {
                     this.addDeadline(splitted[1]);
                 } catch (ArrayIndexOutOfBoundsException | InvalidDeadlineException ex) {
                     System.out.println(ex + ". ☹ Task deadline must be specified.");
                 }
-            } else if (splitted[0].equals("todo")) {
+            } else if (command.equals(Commands.TODO)) {
                 try {
                     this.addTodo(splitted[1]);
                 } catch (ArrayIndexOutOfBoundsException | InvalidTodoException ex) {
                     System.out.println(ex + ". ☹ The description of a todo cannot be empty.");
                 }
-            } else if (splitted[0].equals("event")) {
+            } else if (command.equals(Commands.EVENT)) {
                 try {
                     this.addEvent(splitted[1]);
                 } catch (ArrayIndexOutOfBoundsException | InvalidEventException ex) {
@@ -99,15 +103,15 @@ public class Duke {
         buildChatSeparator();
     }
 
-    public void processInput(String str) throws DukeErrorException {
-        if (!str.equals("todo") &&
-                !str.equals("event") &&
-                !str.equals("deadline") &&
-                !str.equals("done") &&
-                !str.equals("list") &&
-                !str.equals("done") &&
-                !str.equals("delete")) {
-            throw new DukeErrorException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    public void processInput(Commands cmd) throws UnknownCommandException {
+        if (!cmd.equals(Commands.BYE) &&
+                !cmd.equals(Commands.EVENT) &&
+                !cmd.equals(Commands.DEADLINE) &&
+                !cmd.equals(Commands.DONE) &&
+                !cmd.equals(Commands.LIST) &&
+                !cmd.equals(Commands.TODO) &&
+                !cmd.equals(Commands.DELETE)) {
+            throw new UnknownCommandException();
         }
     }
 
@@ -144,9 +148,8 @@ public class Duke {
         if (description.equals("")) {
             throw new InvalidTodoException("☹ Todo description must be specified.");
         }
-        Deadline curr = new Deadline(description, false);
+        Todo curr = new Todo(description, false);
         list.add(curr);
-        buildChatSeparator();
         this.describeTask(curr);
     }
 
