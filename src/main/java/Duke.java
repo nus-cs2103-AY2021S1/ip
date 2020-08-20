@@ -30,38 +30,56 @@ public class Duke {
                     Input inputType = inputs.get(numTaskDone - 1);
                     inputType.taskDone();
                     System.out.println("[/] " + inputType.content + " " + inputType.time);
-                } else {
-                    if (nextLine.startsWith("todo")) {
-                        if (nextLine.equals("todo") || nextLine.equals("todo ")) {
-                            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-                        }
-                        Todo todo = new Todo(nextLine.substring(5));
-                        inputs.add(todo);
-                        int count = inputs.size();
-                        System.out.println("Got it. I've added this task: \n" + "  [T][x] " + todo.content +
-                                "\n Now you have " + count + " tasks in the list");
-                    } else if (nextLine.startsWith("deadline")) {
-                        if (nextLine.equals("deadline") || nextLine.equals("deadline ")) {
-                            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-                        }
-                        int charLoc = nextLine.indexOf("/by");
-                        Deadline deadline = new Deadline(nextLine.substring(9, charLoc), nextLine.substring(charLoc + 3));
-                        inputs.add(deadline);
-                        int count = inputs.size();
-                        System.out.println("Got it. I've added this task: \n" + "  [D][x] " + deadline.content +
-                                deadline.time + "\n Now you have " + count + " tasks in the list");
-                    } else if (nextLine.startsWith("event")) {
-                        if (nextLine.equals("event") || nextLine.equals("event ")) {
-                            throw new DukeException("OOPS!!! The description of an event cannot be empty.");
-                        }
-                        int charLoc = nextLine.indexOf("/at");
-                        Event event = new Event(nextLine.substring(6, charLoc), nextLine.substring(charLoc + 3));
-                        inputs.add(event);
-                        int count = inputs.size();
-                        System.out.println("Got it. I've added this task: \n" + "  [E][x] " + event.content +
-                                event.time + "\n Now you have " + count + " tasks in the list");
-
-                    } else if (nextLine.equals("list")) {
+                } else if (nextLine.startsWith("remove")) {
+                    if (nextLine.equals("remove") || nextLine.equals("remove ")) {
+                        throw new DukeException("OOPS!!! The description of remove cannot be empty");
+                    }
+                    int numTaskDone = Integer.valueOf(nextLine.substring(7));
+                    if (numTaskDone > inputs.size()) {
+                        throw new DukeException("OOPS!!! Task does not exist.");
+                    }
+                    System.out.println("Noted. I've removed this task:");
+                    Input inputType = inputs.get(numTaskDone -1);
+                    if (inputType.done) {
+                        System.out.println("  " + inputType.id + "[/] " + inputType.content + inputType.time);
+                    } else {
+                        System.out.println("  " + inputType.id + "[x] " + inputType.content + inputType.time);
+                    }
+                    inputs.remove(numTaskDone -1);
+                    System.out.println("Now you have " + inputs.size() + " tasks in the list.");
+                } else if (nextLine.startsWith("todo")) {
+                     if (nextLine.equals("todo") || nextLine.equals("todo ")) {
+                         throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                     }
+                     Todo todo = new Todo(nextLine.substring(5));
+                     inputs.add(todo);
+                     int count = inputs.size();
+                     System.out.println("Got it. I've added this task: \n" + "  [T][x] " + todo.content +
+                             "\n Now you have " + count + " tasks in the list");
+                } else if (nextLine.startsWith("deadline")) {
+                    if (nextLine.equals("deadline") || nextLine.equals("deadline ")) {
+                        throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+                    }
+                    int charLoc = nextLine.indexOf("/by");
+                    Deadline deadline = new Deadline(nextLine.substring(9, charLoc), nextLine.substring(charLoc + 3));
+                    inputs.add(deadline);
+                    int count = inputs.size();
+                    System.out.println("Got it. I've added this task: \n" + "  [D][x] " + deadline.content +
+                            deadline.time + "\n Now you have " + count + " tasks in the list");
+                } else if (nextLine.startsWith("event")) {
+                    if (nextLine.equals("event") || nextLine.equals("event ")) {
+                        throw new DukeException("OOPS!!! The description of an event cannot be empty.");
+                    }
+                    int charLoc = nextLine.indexOf("/at");
+                    Event event = new Event(nextLine.substring(6, charLoc), nextLine.substring(charLoc + 3));
+                    inputs.add(event);
+                    int count = inputs.size();
+                    System.out.println("Got it. I've added this task: \n" + "  [E][x] " + event.content +
+                            event.time + "\n Now you have " + count + " tasks in the list");
+                } else if (nextLine.equals("list")) {
+                    if (inputs.size() == 0) {
+                        System.out.println("No tasks in list");
+                    } else {
                         System.out.println("Here are the tasks in your list:");
                         int len = inputs.size();
                         for (int i = 1; i <= len; i++) {
@@ -74,16 +92,16 @@ public class Duke {
                                         inputType.time);
                             }
                         }
-                    } else if (nextLine.equals("bye")) {
-                        System.out.println("Bye. Hope to see you again soon!");
-                        break;
-                    } else {
-                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
+                } else if (nextLine.equals("bye")) {
+                    System.out.println("Bye. Hope to see you again soon!");
+                    break;
+                } else {
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
-        }
-        catch (DukeException e) {
+        
+    } catch (DukeException e) {
             System.out.println(e.msg);
         }
     }
