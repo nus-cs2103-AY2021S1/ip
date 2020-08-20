@@ -51,6 +51,8 @@ public class Duke {
                         setTaskDone(index);
                     } catch (NumberFormatException ex) {
                         printError("Please input an Integer for the \"Done\" command.");
+                    } catch (DukeException ex) {
+                        printError(ex.getMessage());
                     }
                 }
                 else if (input.length() >= 4 && input.substring(0,4).toUpperCase().equals(Commands.TODO.getString())) {
@@ -118,6 +120,10 @@ public class Duke {
     }
 
     private void displayStorageList() {
+        if (this.storageList.size() == 0) {
+            System.out.printf(MESSAGE_TEMPLATE, "Your list is empty, try adding some tasks to it");
+            return;
+        }
         String output = "You have the following tasks in your list:" + NEW_LINE;
         int counter = 1;
         for (Task ele: this.storageList) {
@@ -128,11 +134,9 @@ public class Duke {
         System.out.printf(MESSAGE_TEMPLATE, output);
     }
 
-    private void setTaskDone(int index) {
-        // TODO: throw DukeException instead
+    private void setTaskDone(int index) throws DukeException {
         if (index <= 0 || index > this.storageList.size()) {
-            System.out.printf(MESSAGE_TEMPLATE_ERROR, "Invalid index, cannot find task.");
-            return;
+            throw new DukeException("Invalid index, cannot find task.");
         }
         this.storageList.get(index-1).setDoneness(true);
         String message = "Nice job! I'll mark that as done:" + NEW_LINE + PADDING + this.storageList.get(index-1).toString();
