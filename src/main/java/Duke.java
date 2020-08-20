@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String logo = "Duke Melvin";
 //
 //                " ____        _        \n"
@@ -18,9 +18,10 @@ public class Duke {
         String line = "";
         Scanner in = new Scanner(System.in);
 
-            while (!line.equals("bye") && in.hasNextLine()) {
-                line = in.nextLine();
-                String firstArg = line.split(" ")[0];
+        while (!line.equals("bye") && in.hasNextLine()) {
+            line = in.nextLine();
+            String firstArg = line.split(" ")[0];
+            try {
                 switch (line) {
                     case "bye":
                         System.out.println("Bye. Hope to see you again soon!");
@@ -35,32 +36,39 @@ public class Duke {
                     default:
                         switch (firstArg) {
                             case "done":
-                                String x = line.split(" ")[1];
-                                try {
-                                    int y = Integer.parseInt(x);
-                                    ls.get(y - 1).markAsDone();
-                                } catch (Exception exception) {
-                                    System.out.println("Please mark a valid item as done");
-                                } finally {
+                                String[] stringArray = line.split(" ");
+                                if (stringArray.length < 2) {
+                                    throw new InvalidDoneCommandException();
+                                } else {
+                                    int itemToBeMarkedAsDone = Integer.parseInt(stringArray[1]);
+                                    if (itemToBeMarkedAsDone > ls.size()) {
+                                        throw new InvalidDoneCommandException();
+                                    } else {
+                                        ls.get(itemToBeMarkedAsDone - 1).markAsDone();
+                                    }
+                                }
+                                break;
+
+                            case "todo":
+                                if (line.trim().length() <= 4) {
+                                    throw new EmptyToDoException();
+                                } else {
+                                    String todoString = line.substring(5);
+                                    ToDo todo = new ToDo(todoString);
+                                    ls.add(todo);
+                                    System.out.println("____________________________________________________________");
+                                    System.out.println("Got it. I've added this task:");
+                                    System.out.println(todo.toString());
+                                    System.out.format("Now you have %d tasks in the list\n", ls.size());
+                                    System.out.println("____________________________________________________________");
                                     break;
                                 }
-                            case "todo":
-                                String todoString = line.substring(5);
-                                ToDo todo = new ToDo(todoString);
-                                ls.add(todo);
-                                System.out.println("____________________________________________________________");
-                                System.out.println("Got it. I've added this task:");
-                                System.out.println(todo.toString());
-                                System.out.format("Now you have %d tasks in the list\n", ls.size());
-                                System.out.println("____________________________________________________________");
-                                break;
+
 
                             case "deadline":
                                 String by = line.split("/")[1];
                                 String by2 = by.substring(by.indexOf("by") + 3);
                                 String deadlineString = line.split("/")[0].substring(9);
-
-
                                 Deadline deadline = new Deadline(deadlineString, by2);
                                 ls.add(deadline);
                                 System.out.println("____________________________________________________________");
@@ -84,20 +92,18 @@ public class Duke {
                                 System.out.println("____________________________________________________________");
                                 break;
 
-
                             default:
-                                ls.add(new Task(line));
-                                System.out.println("____________________________________________________________");
-                                System.out.println("added: " + line);
-                                System.out.println("____________________________________________________________");
-
+                                throw new InvalidCommandException();
                         }
 
-
                 }
-
+            } catch (DukeException exception) {
+                System.out.println(exception.getMessage());
             }
+
+
         }
+    }
 
 }
 
