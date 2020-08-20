@@ -9,11 +9,7 @@ public class Duke {
 
         IOHandler handler = new IOHandler();
 
-        try {
-            handler.handleIO();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        handler.handleIO();
 
         System.out.print("Bye. Hope to see you again soon!");
     }

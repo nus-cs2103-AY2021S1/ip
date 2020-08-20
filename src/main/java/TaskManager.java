@@ -24,6 +24,10 @@ public class TaskManager {
         return taskList.size();
     }
 
+    public void removeTask(int taskNum) {
+        taskList.remove(taskNum - 1);
+    }
+
     @Override
     public String toString() {
         String result = "Here are the tasks in your list:\n";

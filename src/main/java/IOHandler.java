@@ -15,12 +15,15 @@ public class IOHandler {
 
         while (!text.equals("bye")) {
 
-            if (DukeExceptionHandler.handleException(text) != null) {
-
-                System.out.println(DukeExceptionHandler.handleException(text));
+            String error = DukeExceptionHandler.handleException(text);
+            System.out.println(text + "1");
+            if (error != null) {
+                //System.out.println(" if");
+                System.out.print(text + "2");
+                System.out.println(error);
 
             } else {
-
+                //System.out.println( " else");
                 if (text.equals("list")) {
                     System.out.print(taskManager);
 
@@ -31,6 +34,16 @@ public class IOHandler {
 
                     System.out.println("Nice! I've marked this task as done:\n"
                             + taskManager.getTask(taskNum - 1));
+
+                } else if (text.contains("delete")) {
+                    String[] textArray = text.split(" ", 2);
+                    int taskNum = Integer.parseInt(textArray[1]);
+                    Task deletedTask = taskManager.getTask(taskNum - 1);
+                    taskManager.removeTask(taskNum);
+
+                    System.out.println("Noted. I've removed this task:\n"
+                            + deletedTask + "\nNow you have " + taskManager.getNumTasks()
+                            + " tasks in the list");
 
                 } else if (text.length() > 0) {
 
