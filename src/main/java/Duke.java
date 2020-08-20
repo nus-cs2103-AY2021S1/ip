@@ -14,10 +14,30 @@ public class Duke {
         }
     }
 
-    private static void checkValidTaskCommand(String[] commands) throws DukeException {
+    public static void deleteTask(String[] commands, List<Task> taskList) throws DukeException {
+        int index = getTaskIndex(commands, taskList);
+        Task task = taskList.remove(index);
+        System.out.println(wrapDivider(
+                "     Noted. I've removed this task: \n" +
+                "       " + task.toString() + "\n" +
+                "     Now you have "+ taskList.size() +" tasks in the list.\n"
+        ));
+
+    }
+
+    private static int getTaskIndex(String[] commands, List<Task> taskList) throws DukeException {
         if (commands.length < 2) {
             throw new DukeException("☹ OOPS!!! Please put a number to select a task for the \"" +
                     commands[0] + "\" action!");
+        }
+        try {
+            int index = Integer.parseInt(commands[1]);
+            Task task = taskList.get(index - 1);
+            return index - 1;
+        }  catch (NumberFormatException nfe) {
+            throw new DukeException("☹ OOPS!!! Please input an actual number e.g. 1, 2, 3.");
+        } catch (IndexOutOfBoundsException iobe) {
+            throw new DukeException("☹ OOPS!!! Please select a valid task.");
         }
     }
 
@@ -47,8 +67,10 @@ public class Duke {
                     displayTaskList(taskList);
                     break;
                 case "done":
-                    checkValidTaskCommand(commands);
-                    markTaskDone(commands[1], taskList);
+                    markTaskDone(commands, taskList);
+                    break;
+                case "delete":
+                    deleteTask(commands, taskList);
                     break;
                 case "bye":
                     sayBye();
@@ -72,20 +94,14 @@ public class Duke {
 
     }
 
-    private static void markTaskDone(String selection, List<Task> taskList) throws DukeException {
-        try {
-            int index = Integer.parseInt(selection);
-            Task task = taskList.get(index - 1);
-            task.markDone();
-            System.out.println(wrapDivider(
-                    "     Nice! I've marked this task as done: \n" +
-                            "       "+ task.toString() + "\n"
-            ));
-        } catch (NumberFormatException nfe) {
-            throw new DukeException("☹ OOPS!!! Please input an actual number.");
-        } catch (IndexOutOfBoundsException iobe) {
-            throw new DukeException("☹ OOPS!!! Please select a valid task.");
-        }
+    private static void markTaskDone(String[] commands, List<Task> taskList) throws DukeException {
+        int index = getTaskIndex(commands,taskList);
+        Task task = taskList.get(index);
+        task.markDone();
+        System.out.println(wrapDivider(
+                "     Nice! I've marked this task as done: \n" +
+                        "       "+ task.toString() + "\n"
+        ));
     }
 
     private static void echoAddCommand(String command) {
