@@ -1,5 +1,22 @@
 hi
-nothing
-todo list
+list
+done
+todo something /by 1pm lol
+done 1
+list
+event exciting!! /at in da fuTureZ!!
+deadline homework /by idk whenz
+list
+event exciting!! yay
+deadline homework /by still idk
+todo even more homework omg
+list
+delete 8
+delete 4
+list
+done 4
+delete 0
+list
+done this
 list
 bye

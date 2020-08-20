@@ -16,17 +16,16 @@ public class Duke {
         String greeting = "Hello mah dud, itza handsome robo speakin\n" +
                 "What duh hell du yu wan?";
         System.out.println(greeting);
-//        WriteFile.writeInitial(greeting);
     }
 
     private static void farewell() {
         String farewell = "Never come back,\n" +
                 "dun wanna see yu ever agin";
         System.out.println(farewell);
-//        WriteFile.writeFinally(farewell);
     }
 
     private static void add(String toAdd, TaskType taskType) {
+        //need to improve regex
         Task task = null;
         String[] splitDeadline = toAdd.split("/", 2 );
         String[] content;
@@ -48,30 +47,41 @@ public class Duke {
         }
         texts.add(task);
         System.out.println("Got it, here yur task bij");
-//        WriteFile.writeFinally("Got it, here yur task bij");
         System.out.println(task.toString());
-//        WriteFile.writeFinally(task.toString());
         System.out.println("Now you have " + texts.size() + " tasks in the list.");
-//        WriteFile.writeFinally("Now you have " + texts.size() + " tasks in the list.");
     }
 
 
-    private static void processDone(String s) {
-        System.out.println("okcan done:");
-//        WriteFile.writeFinally("okcan done:");
-        String i = texts.get(Integer.parseInt(s) - 1).markAsDone();
-        System.out.println(i);
-//        WriteFile.writeFinally(i);
+    private static void processDone(String s) throws InvalidIndexException {
+        try {
+            int num = Integer.parseInt(s) - 1;
+            if (num < 0 || num > texts.size() - 1) {
+                throw new InvalidIndexException("Simi number lai de");
+            } else {
+                System.out.println("okcan done:");
+                String i = texts.get(Integer.parseInt(s) - 1).markAsDone();
+                System.out.println(i);
+                System.out.println("Now you have " + texts.size() + " tasks in the list.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Input is not number ley...");
+        }
     }
 
     private static void processDelete(String s) {
-        System.out.println("okcan done:");
-//        WriteFile.writeFinally("okcan done:");
-        String i = texts.remove(Integer.parseInt(s) - 1).toString();
-        System.out.println(i);
-//        WriteFile.writeFinally(i);
-        System.out.println("Now you have " + texts.size() + " tasks in the list.");
-//        WriteFile.writeFinally("Now you have " + texts.size() + " tasks in the list.");
+        try {
+            int num = Integer.parseInt(s) - 1;
+            if (num < 0 || num > texts.size() - 1) {
+                throw new InvalidIndexException("Simi number lai de");
+            } else {
+                System.out.println("okcan done:");
+                String i = texts.remove(Integer.parseInt(s) - 1).toString();
+                System.out.println(i);
+                System.out.println("Now you have " + texts.size() + " tasks in the list.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Input is not number ley...");
+        }
     }
 
     private static void testNextLineSplit(String nextLine) throws EmptyDescriptionException, UnknownCommandException {
@@ -91,11 +101,19 @@ public class Duke {
                 break;
             case "done":
                 if (nextLineSplit.length < 2) throw new EmptyDescriptionException("Description empty la oi");
-                processDone(nextLineSplit[1]);
+                try {
+                    processDone(nextLineSplit[1]);
+                } catch (InvalidIndexException e) {
+                    System.out.println(e.toString());
+                }
                 break;
             case "delete":
                 if (nextLineSplit.length < 2) throw new EmptyDescriptionException("Description empty la oi");
-                processDelete(nextLineSplit[1]);
+                try {
+                    processDelete(nextLineSplit[1]);
+                } catch (InvalidIndexException e) {
+                    System.out.println(e.toString());
+                }
                 break;
             default:
                 throw new UnknownCommandException("Don't understand...");
@@ -140,10 +158,3 @@ public class Duke {
         sc.close();
     }
 }
-
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
