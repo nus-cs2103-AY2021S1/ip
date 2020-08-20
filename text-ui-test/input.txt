@@ -1,10 +1,15 @@
 todo Ask for help
+todo
 list
+deadline
 deadline IP /by Thursday 2359
+event
 event Go to Singapore /at Friday 9pm
 list
+blah
 done 2
 list
+haha
 done 1
 done 3
 list
