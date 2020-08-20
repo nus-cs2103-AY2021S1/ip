@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Duke {
     public static void main(String[] args) {
@@ -21,7 +23,10 @@ public class Duke {
 
         System.out.println(line + greeting + line);
         Scanner sc = new Scanner(System.in);
-        Task[] list = new Task[100];
+        ArrayList<Task> list = new ArrayList<>();
+        String s = "";
+        String[] array = new String[1];
+        Task t = new Task("");
         int count = 0;
 
         while (sc.hasNextLine()) {
@@ -33,13 +38,13 @@ public class Duke {
                 System.out.println(line + bye + line);
                 return;
             } else if (temp.equals("list")) {
-                if (list[0] == null) {
+                if (list.isEmpty()) {
                     ex = new InvalidInputException("Oops, your list is currently empty. Add some tasks first!");
                     System.err.println(line + ex.getMessage() + "\n" + line);
                 } else {
                     System.out.println(line + "Here are the tasks in your list: \n");
                     for (int i = 1; i < count + 1; i++) {
-                        Task cur = list[i - 1];
+                        Task cur = list.get(i - 1);
                         String type = "";
                         if (cur instanceof ToDo) {
                             type = "[T]";
@@ -59,12 +64,12 @@ public class Duke {
                     ex = new InvalidInputException("Hey, you forgot to tell me which task is done!");
                     System.err.println(line + ex.getMessage() + "\n" + line);
                 } else {
-                    int task = Integer.valueOf(pieces[1]);
-                    if (list[task-1] == null) {
+                    int task = Integer.parseInt(pieces[1]);
+                    if (list.get(task-1) == null) {
                         ex = new InvalidInputException("Oops, this task has not been created yet!");
                         System.err.println(line + ex.getMessage() + "\n" + line);
                     } else {
-                        Task cur = list[task - 1];
+                        Task cur = list.get(task - 1);
                         cur.markAsDone();
                         System.out.println(line);
                         System.out.println("Nice! I've marked this task as done: \n" +
@@ -72,10 +77,34 @@ public class Duke {
                         System.out.println(line);
                     }
                 }
+            }  else if (pieces[0].equals("delete")){
+            if (pieces.length == 1) {
+                ex = new InvalidInputException("Hey, you forgot to tell me which task to delete");
+                System.err.println(line + ex.getMessage() + "\n" + line);
             } else {
-                String s = "";
-                String[] array = new String[1];
-                Task t = new Task("");
+                int num = Integer.valueOf(pieces[1]);
+                if (list.get(num-1) == null) {
+                    ex = new InvalidInputException("Oops, this task has not been created yet!");
+                    System.err.println(line + ex.getMessage() + "\n" + line);
+                } else {
+                    Task removed = list.get(num-1);
+                    count --;
+                    String type = "";
+                    if (removed instanceof ToDo) {
+                        type = "T";
+                    } else if (removed instanceof Deadline) {
+                        type = "D";
+                    } else {
+                        type = "E";
+                    }
+                    s = "[" + type + "]" + "[\u2718] " + removed;
+                    System.out.println(line);
+                    System.out.println("Got it. I've removed this task: \n" + s);
+                    System.out.println("Now you have " + count + " tasks in the list. ");
+                    System.out.println(line);
+                }
+            }
+        }else {
                 if (pieces.length == 1) {
                     switch (pieces[0]) {
                         case "todo":
@@ -96,7 +125,6 @@ public class Duke {
                     }
                     System.err.println(line + ex.getMessage() + "\n" + line);
                 } else {
-
                     switch (pieces[0]) {
                         case "todo":
                             t = new ToDo(pieces[1]);
@@ -131,7 +159,7 @@ public class Duke {
                             break;
                     }
                     if (t.description != "") {
-                        list[count] = t;
+                        list.add(t);
                         count++;
                         System.out.println(line);
                         System.out.println("Got it. I've added this task: \n" + s);
