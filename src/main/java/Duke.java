@@ -1,6 +1,15 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
+    private List storage;
+
+    public Duke() {
+        storage = new ArrayList();
+    }
 
     public void greet() {
         String logo = " ____        _        \n"
@@ -15,6 +24,19 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    //stores and prints out command
+    public void store(String s) {
+        storage.add(s);
+        System.out.println("added: " + s);
+    }
+
+    public void printList() {
+        for (int i = 0; i < storage.size(); i++) {
+            String printtext = Integer.toString(i+1) + ". " + storage.get(i);
+            System.out.println(printtext);
+        }
+    }
+
     public static void main(String[] args) {
         //initialize Duke and send welcome message
         Duke duke = new Duke();
@@ -27,8 +49,12 @@ public class Duke {
             String s = sc.nextLine();
             if (s.equals("bye")) {
                 break;
+            } else if (s.equals("list")) {
+                duke.printList();
+            } else {
+                duke.store(s);
             }
-            System.out.println(s);
+
         }
 
         //send exit message
