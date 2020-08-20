@@ -87,28 +87,38 @@ public class Emily {
                     }else { //normal addition
 
                         Task item = new Task("");
-                        System.out.println(divider
-                                + "\n    Got it! I have added this task:");
+                        String type = "";
 
-                        if (input.contains("todo")) {
-                            String describe = input.substring(5);
-                            item = new ToDos(describe);
+                        try {
+                                if (input.contains("todo")) {
+                                    String describe = input.substring(5);
+                                    item = new ToDos(describe);
 
-                        } else if (input.contains("deadline")) {
-                            String describe = input.substring(9);
-                            String[] temp = describe.split("/by ");
-                            item = new Deadline(temp[0], temp[1]);
-                        } else if (input.contains("event")) {
-                            String describe = input.substring(6);
-                            String[] temp = describe.split("/at ");
-                            item = new Event(temp[0], temp[1]);
+                                } else if (input.contains("deadline") && input.contains("/by")) {
+                                    type = "deadline";
+                                    String describe = input.substring(9);
+                                    String[] temp = describe.split("/by ");
+                                    item = new Deadline(temp[0], temp[1]);
+                                } else if (input.contains("event")) {
+                                    type = "event";
+                                    String describe = input.substring(6);
+                                    String[] temp = describe.split("/at ");
+                                    item = new Event(temp[0], temp[1]);
+                                } else{
+                                    throw new DukeException("invalid task");
+                                }
+
+                            store.add(item);
+
+                            System.out.println(divider
+                                    + "\n    Got it! I have added this task:");
+                            System.out.println("        " + item);
+                            System.out.println("    Now you have " + (store.size()) + " tasks in the list" +
+                                    "\n" + divider);
+                        }catch(ArrayIndexOutOfBoundsException e){
+                            throw new DukeException("missing or invalid timestamp for " + type + " task");
                         }
 
-                        store.add(item);
-
-                        System.out.println("        " + item);
-                        System.out.println("    Now you have " + (store.size()) + " tasks in the list" +
-                                "\n" + divider);
 
                     }
                 } else{
