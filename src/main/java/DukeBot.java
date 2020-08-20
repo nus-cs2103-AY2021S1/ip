@@ -99,6 +99,16 @@ public class DukeBot{
                     System.out.println(line);
                     input = sc.nextLine();
                 }
+            }else if(splitList[0].equals("delete")){
+                try{
+                    ls.delete(Integer.parseInt(splitList[1]));
+                    System.out.println("     Now you have " + ls.length() + " tasks in the list.");
+                }catch(DukeException e){
+                    System.out.println(e.toString());
+                }finally{
+                    System.out.println(line);
+                    input = sc.nextLine();
+                }
             }else{
                 try {
                     Task task = new Task(input, false);
