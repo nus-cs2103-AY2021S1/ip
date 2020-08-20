@@ -14,6 +14,8 @@ public class Duke {
         }
     }
     public static void output(){
+        System.out.println("  ____________________________________________________________\n" + "  Hello! I'm Duke\n" + "  What can I do for you?\n" +
+                "  ____________________________________________________________");
         for(String string : todos){
             System.out.println("\n" + string + "\n  ____________________________________________________________");
             if(string.equals("bye")){
@@ -21,24 +23,19 @@ public class Duke {
                 break;
             }
             if(string.equals("list")){
-                for(int i = 0; i < todos.size(); i++){
-                    if(!todos.get(i).equals("list") && !todos.get(i).equals("bye")) {
-                        System.out.println("  " + (i + 1) + ". " + todos.get(i));
-                    }
-
-                }
-                System.out.println("\n  ____________________________________________________________");
+                Task.listing();
+            }else if(string.substring(0,4).equals("done")){
+                int ID = Integer.parseInt(string.substring(5));
+                Task.tasks.get(ID - 1).setDone();
+                Task.tasks.get(ID - 1).donePrint();
             }else {
-                System.out.println("  " + "added: " + string + "\n" +
-                        "  ____________________________________________________________");
+                Task t = new Task(string);
             }
         }
-
     }
+
     public static void main(String[] args) {
         scan();
-        System.out.println("  ____________________________________________________________\n" + "  Hello! I'm Duke\n" + "  What can I do for you?\n"
-                + "  ____________________________________________________________");
         output();
     }
 }
