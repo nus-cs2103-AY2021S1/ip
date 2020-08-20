@@ -53,10 +53,44 @@ public class Butler {
 
             // Add to list
             } else {
-                taskList.add(new Task(input));
-                String reply = "\nI have added your task as follows:\n"
-                        + "Added: " + input + "\n";
-                System.out.println(reply);
+
+                String[] inputList = input.split(" ", 2);
+                String reply;
+                Task addedTask;
+                String summary;
+                try {
+                    switch (inputList[0]) {
+                        case "todo":
+                            addedTask = new ToDoTask(inputList[1]);
+                            taskList.add(addedTask);
+                            reply = "\nI have added your ToDo task as follows:\n"
+                                    + "Added: " + addedTask + "\n";
+                            System.out.println(reply);
+                            break;
+                        case "deadline":
+                            summary = inputList[1].split(" /by ", 2)[0];
+                            String deadline = inputList[1].split(" /by ", 2)[1];
+                            addedTask = new DeadlineTask(summary, deadline);
+                            taskList.add(addedTask);
+                            reply = "\nI have added your Deadline task as follows:\n"
+                                    + "Added: " + addedTask + "\n";
+                            System.out.println(reply);
+                            break;
+                        case "event":
+                            summary = inputList[1].split(" /at ", 2)[0];
+                            String time = inputList[1].split(" /at ", 2)[1];
+                            addedTask = new EventTask(summary, time);
+                            taskList.add(addedTask);
+                            reply = "\nI have added your Event task as follows:\n"
+                                    + "Added: " + addedTask + "\n";
+                            System.out.println(reply);
+                            break;
+                        default:
+                            System.out.println("\nInvalid command given.\n");
+                    }
+                } catch (Exception e) {
+                    System.out.println("\nInvalid command given.\n");
+                }
             }
 
             input = sc.nextLine();
