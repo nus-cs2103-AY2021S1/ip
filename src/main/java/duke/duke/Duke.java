@@ -1,5 +1,6 @@
 package duke.duke;
 
+import duke.task.Task;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 public class Duke {
 
   private static Duke duke = null;
-  private final List<String> tasks;
+  private final List<Task> tasks;
 
   private Duke() {
     tasks = new ArrayList<>();
@@ -25,12 +26,20 @@ public class Duke {
     return duke;
   }
 
-  public List<String> addTask(String description) {
-    tasks.add(description);
-    return Collections.singletonList(description);
+  public List<Task> addTask(String description) {
+    Task task = new Task(description);
+    tasks.add(task);
+    return Collections.singletonList(task);
   }
 
-  public List<String> getTasks() {
+  // TODO: FP. Method parameters is placeholder for now
+  public List<Task> editTask(int id, boolean isDone) {
+    Task task = tasks.get(id);
+    task.setIsDone(isDone);
+    return Collections.singletonList(task);
+  }
+
+  public List<Task> getTasks() {
     return tasks;
   }
 }
