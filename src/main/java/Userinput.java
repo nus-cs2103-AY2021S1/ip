@@ -104,9 +104,19 @@ public class Userinput {
             //done cases
             int number = Integer.parseInt(words[1]) - 1;
             return this.tasks.get(number).markAsDone();
+        } else if (words[0].equals("delete")){
+            //delete cases
+            int number = Integer.parseInt(words[1]) - 1;
+            Task removed = this.tasks.get(number);
+            this.tasks.remove(number);
+            String removalResponse = "____________________________________________________________\n" +
+                    "     Noted. I've removed this task: \n" +
+                    "       " + removed.toString() + "\n" +
+                    "     Now you have "+ this.tasks.size() + " tasks in the list.\n" +
+                    "____________________________________________________________";
+            return removalResponse;
         } else {
-            //normal list,bye,blah,normal task(not event, deadline or T0d0) cases
-
+            //normal list and bye cases
             String byeResponse = "____________________________________________________________\n" +
                     "Bye. Hope to see you again soon!\n" +
                     "____________________________________________________________";
