@@ -4,15 +4,28 @@ public class Duke {
     public static String iterateToDo(Task[] arr) {
         String output = "";
         int counter = 1;
-        for (int x = 0; x < arr.length; x++) {
-            if (arr[x] == null) {
+        for (Task task : arr) {
+            if (task == null) {
                 break;
             } else {
-                output += Integer.toString(counter) + ". " + arr[x].toString() + "\n";
+                output += Integer.toString(counter) + ". " + task.toString() + "\n";
                 counter++;
             }
         }
         return output;
+    }
+
+    public static Task[] deleteTask(int index, Task[] arr) {
+        arr[index - 1] = null;
+        for (int x = index; x < arr.length; x++) {
+            if (arr[x] == null) {
+                break;
+            } else {
+                arr[x - 1] = arr[x];
+                arr[x] = null;
+            }
+        }
+        return arr;
     }
 
     public static void main(String[] args) {
@@ -38,6 +51,13 @@ public class Duke {
                 } else if (echo.equals("list")) {
                     System.out.println(hor_line + "Here are the tasks in your list: \n");
                     System.out.println(iterateToDo(todo_list) + hor_line);
+                } else if (echo.startsWith("delete")) {
+                    String index = echo.substring(echo.length() - 1);
+                    int number = Integer.parseInt(index);
+                    todo_list = deleteTask(number, todo_list);
+                    System.out.println(hor_line + "Task deleted! You now have " + Integer.toString(counter - 1) + " tasks left. \n"
+                        + hor_line);
+                    counter --;
                 } else if (echo.startsWith("done")) {
                     if (echo.equals("done")) {
                         throw new ResponseException(hor_line + "☹ OOPS!!! Please state which task is done. \n" + hor_line);
