@@ -55,6 +55,7 @@ public class Duke {
     }
 
     private void showTasks() {
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             String task = tasks.get(i).toString();
             String message = String.valueOf(i + 1) + ". " + task;

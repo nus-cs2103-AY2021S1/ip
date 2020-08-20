@@ -36,6 +36,7 @@ The /at parameter should not be empty
 Added '[x][E] survive lesson (at: friday morning)' to list of tasks
 Now you have 3 tasks in the list
 
+Here are the tasks in your list:
 1. [x][T] deep work
 2. [x][D] get a girlfriend (by: 2022)
 3. [x][E] survive lesson (at: friday morning)
