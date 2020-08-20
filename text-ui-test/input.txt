@@ -3,6 +3,11 @@ deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 list
 done 2
+blah
+event project meeting at Mon 2-4pm
+todo
+deadline project
+done 3
 list
 done 1
 bye

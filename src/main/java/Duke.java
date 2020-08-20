@@ -14,28 +14,42 @@ public class Duke {
         }
     }
 
+    private static void checkValidTaskCommand(String[] commands) throws DukeException {
+        if (commands.length < 2) {
+            throw new DukeException("☹ OOPS!!! The description of a " + commands[0] + " cannot be empty.\n");
+        }
+    }
+
     private static boolean handleCommand(String commandLine, List<Task> taskList) {
         String[] commands = commandLine.split(" ", 2);
-        switch (commands[0]) {
-            case "todo":
-                addTask(new Todo(commands[1]), taskList);
-                break;
-            case "deadline":
-                addTask(Deadline.create(commands[1]), taskList);
-                break;
-            case "event":
-                addTask(Event.create(commands[1]), taskList);
-                break;
-            case "list":
-                displayTaskList(taskList);
-                break;
-            case "done":
-
-                markTaskDone(commands[1], taskList);
-                break;
-            case "bye":
-                sayBye();
-                return false;
+        try {
+            switch (commands[0]) {
+                case "todo":
+                    checkValidTaskCommand(commands);
+                    addTask(new Todo(commands[1]), taskList);
+                    break;
+                case "deadline":
+                    checkValidTaskCommand(commands);
+                    addTask(Deadline.create(commands[1]), taskList);
+                    break;
+                case "event":
+                    checkValidTaskCommand(commands);
+                    addTask(Event.create(commands[1]), taskList);
+                    break;
+                case "list":
+                    displayTaskList(taskList);
+                    break;
+                case "done":
+                    markTaskDone(commands[1], taskList);
+                    break;
+                case "bye":
+                    sayBye();
+                    return false;
+                default:
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-( \n");
+            }
+        } catch(DukeException dukeException) {
+            System.out.println(wrapDivider("     " + dukeException.getMessage()));
         }
         return true;
     }
