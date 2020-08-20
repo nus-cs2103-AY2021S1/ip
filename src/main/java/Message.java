@@ -5,7 +5,10 @@ enum Command {
     LIST,
     DONE,
     BYE,
-    ADD,
+    TODO,
+    DEADLINE,
+    EVENT,
+    NOT_FOUND
 }
 
 public class Message {
@@ -27,7 +30,7 @@ public class Message {
         }
 
         if (this.cmd == null) { // if not a recognised command
-            this.cmd = Command.ADD;
+            this.cmd = Command.NOT_FOUND;
         }
 
         this.list = list;
@@ -66,9 +69,9 @@ public class Message {
             case BYE:
                 System.out.println("Ok bye bye! C u again :P");
                 break;
-            case ADD:
+            case NOT_FOUND:
                 this.list.add(new Task(message));
-                System.out.println("I added: " + message);
+                System.out.println("I cannot find this command leh. Try sth else?");
                 break;
         }
         System.out.println("____________________________________________________________");
