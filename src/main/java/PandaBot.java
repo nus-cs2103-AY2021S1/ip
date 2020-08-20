@@ -51,14 +51,14 @@ public class PandaBot {
                                 System.out.println("Great! I've marked this task as done:");
                                 System.out.println(tasks.get(taskNum) + "\n");
                             } else {
-                                System.out.println("Task number given is invalid. Please try again.\n");
+                                System.out.println("Task number given is not in range. Please try again.\n");
                                 break;
                             }
                         } else {
-                            System.out.println("Insufficient arguments given. What task have you done?");
+                            System.out.println("Insufficient arguments given. What task have you done?\n");
                         }
                     } catch (NumberFormatException e) {
-                        System.out.println("Invalid Format: " + cmd[1] + "\n What task are you done with?");
+                        System.out.println("Invalid Format: " + cmd[1] + "\nWhat task number are you done with?\n");
                     } 
                     break;
                 case "todo":
@@ -72,7 +72,7 @@ public class PandaBot {
                             System.out.println(e.getMessage());
                         }
                     } else {
-                        System.out.println("Insufficient arguments given. What todo do you have?");
+                        System.out.println("Insufficient arguments given. What todo do you have?\n");
                     }
                     break;
                 case "deadline":
@@ -85,9 +85,12 @@ public class PandaBot {
                             System.out.println("Now you have " + tasks.size() + " tasks in this list.\n");
                         } catch (PandaBotEmptyTaskDescriptionException e) {
                             System.out.println(e.getMessage());
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println("Insufficient arguments given.\n" +
+                                    "Are you missing a description or due by time?\n");
                         }
                     } else {
-                        System.out.println("Insufficient arguments given. What deadline do you have?");
+                        System.out.println("Insufficient arguments given. What deadline do you have?\n");
                     }
                     break;
                 case "event":
@@ -100,9 +103,12 @@ public class PandaBot {
                             System.out.println("Now you have " + tasks.size() + " tasks in this list.\n");
                         } catch (PandaBotEmptyTaskDescriptionException e) {
                             System.out.println(e.getMessage());
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println("Insufficient arguments given.\n" +
+                                    "Are you missing a description or duration?\n");
                         }
                     } else {
-                        System.out.println("Insufficient arguments given. What event do you have?");
+                        System.out.println("Insufficient arguments given. What event do you have?\n");
                     }
                     break;
                 default:

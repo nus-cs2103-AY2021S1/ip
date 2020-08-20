@@ -16,8 +16,10 @@ Noted! I've added this task:
 [T][✘] return book
 Now you have 2 tasks in this list.
 
+Insufficient arguments given. What todo do you have?
+
 Noted! I've added this task: 
-[D][✘] cs2100 lab  (by: mon 2359)
+[D][✘] cs2100 lab (by: mon 2359)
 Now you have 3 tasks in this list.
 
 Noted! I've added this task: 
@@ -25,18 +27,20 @@ Noted! I've added this task:
 Now you have 4 tasks in this list.
 
 Noted! I've added this task: 
-[E][✘] project meeting  (at: sun 4pm)
+[E][✘] project meeting (at: sun 4pm)
 Now you have 5 tasks in this list.
 
 These are the tasks you have: 
 1. [T][✘] read book
 2. [T][✘] return book
-3. [D][✘] cs2100 lab  (by: mon 2359)
+3. [D][✘] cs2100 lab (by: mon 2359)
 4. [T][✘] buy bread
-5. [E][✘] project meeting  (at: sun 4pm)
+5. [E][✘] project meeting (at: sun 4pm)
 
 Great! I've marked this task as done:
 [T][✓] buy bread
+
+Task number given is not in range. Please try again.
 
 Great! I've marked this task as done:
 [T][✓] return book
@@ -44,8 +48,15 @@ Great! I've marked this task as done:
 These are the tasks you have: 
 1. [T][✘] read book
 2. [T][✓] return book
-3. [D][✘] cs2100 lab  (by: mon 2359)
+3. [D][✘] cs2100 lab (by: mon 2359)
 4. [T][✓] buy bread
-5. [E][✘] project meeting  (at: sun 4pm)
+5. [E][✘] project meeting (at: sun 4pm)
+
+:c OOPS! The description of the Event cannot be empty.
+
+Insufficient arguments given.
+Are you missing a description or due by time?
+
+OOPS! I'm sorry, but I don't know what that means :c
 
 Bye! Remember to finish the rest of your work! See you soon~
