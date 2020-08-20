@@ -55,15 +55,36 @@ public class Duke {
         System.out.println(texts.get(Integer.parseInt(s) - 1).markAsDone());
     }
 
+    private static void testNextLineSplit(String nextLine) throws EmptyDescriptionException, UnknownCommandException {
+        String[] nextLineSplit = nextLine.split(" ", 2);
+        switch (nextLineSplit[0]) {
+            case "todo":
+                if (nextLineSplit.length < 2) throw new EmptyDescriptionException("Description empty la oi");
+                add(nextLineSplit[1], 1);
+                break;
+            case "deadline":
+                if (nextLineSplit.length < 2) throw new EmptyDescriptionException("Description empty la oi");
+                add(nextLineSplit[1], 2);
+                break;
+            case "event":
+                if (nextLineSplit.length < 2) throw new EmptyDescriptionException("Description empty la oi");
+                add(nextLineSplit[1], 3);
+                break;
+            case "done":
+                if (nextLineSplit.length < 2) throw new EmptyDescriptionException("Description empty la oi");
+                processDone(nextLineSplit[1]);
+                break;
+            default:
+                throw new UnknownCommandException("Don't understand...");
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         greet();
         boolean cont = true;
         String nextLine = sc.nextLine();
-        String[] nextLineSplit = nextLine.split(" ", 1);
         while (cont) {
-            nextLineSplit = nextLine.split(" ", 2);
-            System.out.println(nextLineSplit[0]);
             switch (nextLine) {
                 case "bye":
                     farewell();
@@ -79,27 +100,14 @@ public class Duke {
                     nextLine = sc.nextLine();
                     break;
                 default:
-                    switch (nextLineSplit[0]) {
-                        case "todo":
-                            add(nextLineSplit[1], 1);
-                            nextLine = sc.nextLine();
-                            break;
-                        case "deadline":
-                            add(nextLineSplit[1], 2);
-                            nextLine = sc.nextLine();
-                            break;
-                        case "event":
-                            add(nextLineSplit[1], 3);
-                            nextLine = sc.nextLine();
-                            break;
-                        case "done":
-                            processDone(nextLineSplit[1]);
-                            nextLine = sc.nextLine();
-                            break;
-                        default:
-                            add(nextLine);
-                            nextLine = sc.nextLine();
+                    try {
+                        testNextLineSplit(nextLine);
+                    } catch (UnknownCommandException e) {
+                        System.out.println(e.toString());
+                    } catch (EmptyDescriptionException e) {
+                        System.out.println(e.toString());
                     }
+                    nextLine = sc.nextLine();
             }
         }
         sc.close();
