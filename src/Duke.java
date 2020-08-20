@@ -3,22 +3,17 @@ import java.util.Scanner;
 public class Duke {
 
     public static void greeting() {
-        String logo = "      ____        _        \n"
-                + "     |  _ \\ _   _| | _____ \n"
-                + "     | | | | | | | |/ / _ \\\n"
-                + "     | |_| | |_| |   <  __/\n"
-                + "     |____/ \\__,_|_|\\_\\___|\n";
 
         String underscore = "    ____________________________________________________________";
 
         System.out.println(underscore);
-        System.out.println(logo + "\n" + "    Hello! I'm Duke" + "\n" + "    What can I do for you?");
+        System.out.println("    Hello! I'm Duke" + "\n" + "    What can I do for you?");
         System.out.println(underscore);
     }
 
     public static void commandTask(String input, TaskList newList) throws NoDescriptionException, InvalidCommandException, InvalidTaskException {
 
-        String[] splitString = input.split(" ");
+        String[] splitString = input.split(" ",2);
 
         if (splitString[0].equals("todo")) {
             if(splitString.length == 1) {
@@ -34,7 +29,7 @@ public class Duke {
                 throw new NoDescriptionException("    ☹ OOPS!!! The description of a deadline cannot be empty.");
             } else {
                 String info = splitString[1];
-                String[] information = input.split("/by ");
+                String[] information = info.split("/by ");
                 if (information.length == 1) {
                     throw new InvalidTaskException("    ☹ OOPS!!! Please specify the deadline time");
                 } else {
@@ -51,7 +46,7 @@ public class Duke {
                 throw new NoDescriptionException("    ☹ OOPS!!! The description of an event cannot be empty.");
             } else {
                 String info = splitString[1];
-                String[] information = input.split("/at ");
+                String[] information = info.split("/at ");
 
                 if (information.length == 1) {
                     throw new InvalidTaskException("    ☹ OOPS!!! Please state the event time");
