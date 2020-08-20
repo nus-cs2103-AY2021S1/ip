@@ -18,9 +18,23 @@ public class Duke {
 
     public static void readList() {
         System.out.println(style);
+        System.out.println("\tHere are the tasks in your list:");
         for(int i = 0; i < list.size(); i++) {
-            System.out.println("\t" + (i+1) + ". " + list.get(i));
+            Task task = list.get(i);
+            System.out.println("\t" + (i+1) + ". " +
+                    "[" + task.getStatusIcon() + "] " +
+                    task);
         }
+        System.out.println(style);
+    }
+
+    public static void setTaskDone(int taskNum) {
+        int i = taskNum - 1;
+        Task task = list.get(i);
+        task.setTaskDone(true);
+        System.out.println(style);
+        System.out.println("\tNice! I've marked this task as done:");
+        System.out.println("\t   " + "[" + task.getStatusIcon() + "] " + task);
         System.out.println(style);
     }
 
@@ -46,6 +60,9 @@ public class Duke {
             if (message.equals("list")) {
                 // reads list
                 readList();
+            } else if (message.contains("done")) {
+                int taskNum = Integer.parseInt(message.substring(5));
+                setTaskDone(taskNum);
             } else {
                 Task newTask = new Task(message);
                 addToList(newTask);
