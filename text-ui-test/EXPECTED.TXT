@@ -10,6 +10,7 @@ To see how to format your task, input 'format'
 To see your list of tasks, input 'list'.
 To mark a task as done, input 'done <task number>'.
 To delete a task from your list, input 'delete <task number>'.
+To stop Dino, input 'bye'.
 ____________________________________________________________
 Formats for the three task types Todo, Deadline and Event, are shown below.
 Todo: 'todo <task description>' (e.g., visit new theme park)

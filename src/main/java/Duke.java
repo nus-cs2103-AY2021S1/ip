@@ -170,6 +170,7 @@ public class Duke {
                 + "\nTo see your list of tasks, input 'list'."
                 + "\nTo mark a task as done, input 'done <task number>'."
                 + "\nTo delete a task from your list, input 'delete <task number>'."
+                + "\nTo stop Dino, input 'bye'."
                 + "\n____________________________________________________________");
         Scanner scanner = new Scanner(System.in);
         boolean isBye = false;
