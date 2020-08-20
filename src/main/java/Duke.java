@@ -90,50 +90,139 @@ public class Duke {
             }
 
             if (sc.hasNext("done")) {
-                sc.skip("done");
-                int taskNumber = Integer.parseInt(sc.next().trim()) - 1;
-                sc.nextLine();
-                printDone(tasks, taskNumber);
-                continue;
+                try {
+                    sc.skip("done");
+                    if (!sc.hasNextInt()) {
+                        throw new MissingNumberFromDoneCommandException();
+                    }
+                    int taskNumber = Integer.parseInt(sc.next().trim()) - 1;
+                    if (taskNumber < 0 || taskNumber > tasks.size()) {
+                        throw new InvalidNumberFromDoneCommandException();
+                    }
+                    sc.nextLine();
+                    printDone(tasks, taskNumber);
+                    continue;
+                }
+
+                catch (MissingNumberFromDoneCommandException e) {
+                    System.out.println(LINE);
+                    System.out.println("     ☹ OOPS!!! Please type in the done command followed by a task number.");
+                    System.out.println(LINE);
+                }
+                catch (InvalidNumberFromDoneCommandException e) {
+                    System.out.println(LINE);
+                    System.out.println("     ☹ OOPS!!! The done command must be followed by a valid task number.");
+                    System.out.println(LINE);
+                }
             }
 
             if (sc.hasNext("event")) {
-                sc.skip("event");
-                sc.useDelimiter("/at");
-                String des = sc.next().trim();
-                sc.skip("/at");
-                String at = sc.nextLine().trim();
-                Event e = new Event(des, at);
-                addTask(e, tasks);
-                sc.reset();
-                continue;
+                try {
+                    sc.skip("event");
+                    String input = sc.nextLine().trim();
+                    if (input.length() == 0) {
+                        throw new MissingDescriptionException();
+                    } else if (!input.contains("/at")) {
+                        throw new MissingTimingException();
+                    } else {
+                        String[] split = input.split("/at");
+                        if (split.length != 2) {
+                            throw new MissingTimingException();
+                        }
+                        Event e = new Event(split[0], split[1]);
+                        addTask(e, tasks);
+                        sc.reset();
+                        continue;
+                    }
+
+                }
+
+                catch (MissingDescriptionException e) {
+                    System.out.println(LINE);
+                    System.out.println("     ☹ OOPS!!! The description of a event cannot be empty.");
+                    System.out.println(LINE);
+                    continue;
+                }
+
+                catch (MissingTimingException e) {
+                    System.out.println(LINE);
+                    System.out.println("     ☹ OOPS!!! The event you keyed in needs to have a timing!");
+                    System.out.println("     You can key in a timing by typing \"/at\", followed by the event timing!");
+                    System.out.println(LINE);
+                    continue;
+                }
+
             }
 
             if (sc.hasNext("deadline")) {
-                sc.skip("deadline");
-                sc.useDelimiter("/by");
-                String des = sc.next().trim();
-                sc.skip("/by");
-                String by = sc.nextLine().trim();
-                Deadline d = new Deadline(des, by);
-                addTask(d, tasks);
-                sc.reset();
-                continue;
+                try {
+                    sc.skip("deadline");
+                    String input = sc.nextLine().trim();
+                    if (input.length() == 0) {
+                        throw new MissingDescriptionException();
+                    } else if (!input.contains("/by")) {
+                        throw new MissingDeadlineException();
+                    } else {
+                        String[] split = input.split("/by");
+                        if (split.length != 2) {
+                            throw new MissingDeadlineException();
+                        }
+                        Deadline e = new Deadline(split[0], split[1]);
+                        addTask(e, tasks);
+                        sc.reset();
+                        continue;
+                    }
+                }
+
+                catch (MissingDescriptionException e) {
+                    System.out.println(LINE);
+                    System.out.println("     ☹ OOPS!!! The description of a deadline cannot be empty.");
+                    System.out.println(LINE);
+                    continue;
+                }
+
+                catch (MissingDeadlineException e) {
+                    System.out.println(LINE);
+                    System.out.println("     ☹ OOPS!!! The deadline you keyed in needs to have a deadline!");
+                    System.out.println("     You can key in a timing by typing \"/by\", followed by the deadline's " +
+                            "deadline!");
+                    System.out.println(LINE);
+                    continue;
+                }
+
             }
 
             if (sc.hasNext("todo")) {
-                sc.skip("todo");
-                sc.useDelimiter("/");
-                ToDo t = new ToDo(sc.nextLine().trim());
-                addTask(t, tasks);
-                sc.reset();
-                continue;
+                try {
+                    sc.skip("todo");
+                    String task = sc.nextLine().trim();
+                    if (task.length() == 0) {
+                        throw new MissingDescriptionException();
+                    }
+                    ToDo t = new ToDo(task);
+                    addTask(t, tasks);
+                }
+
+                catch (MissingDescriptionException e) {
+                    System.out.println(LINE);
+                    System.out.println("     ☹ OOPS!!! The description of a todo cannot be empty.");
+                    System.out.println(LINE);
+                }
             }
 
             else {
-                String input = sc.nextLine();
-                addTask(new Task(input), tasks);
+                try {
+                    String command = sc.nextLine();
+                    throw new UnknownCommandException(command);
+                }
+
+                catch (UnknownCommandException e) {
+                    System.out.println(LINE);
+                    System.out.println("     ☹ OOPS!!! I'm sorry, but I don't know what \"" + e.command + "\" means :-(");
+                    System.out.println(LINE);
+                }
             }
+
         }
     }
 }
