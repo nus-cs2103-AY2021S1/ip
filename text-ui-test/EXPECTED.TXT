@@ -19,7 +19,7 @@ What you are going to do today?
       [D][ ] t3 (by: 1)
     Now you have 3 tasks in your list.
     There are 3 tasks waiting to be done.
->     The following task has been added to your list: 
+>     The following task has been added to your list:
       [E][ ] t4 (at: 2)
     Now you have 4 tasks in your list.
     There are 4 tasks waiting to be done.
@@ -27,8 +27,8 @@ What you are going to do today?
     2.[T][ ] t2
     3.[D][ ] t3 (by: 1)
     4.[E][ ] t4 (at: 2)
->     Nice! I've marked following task as done: 
-      [x] t2
+>     Nice! I've marked following task as done:
+      [T][X] t2
     Now you have 3 tasks waiting to be done.
 >     1.[T][ ] t1
     2.[T][X] t2
@@ -37,7 +37,7 @@ What you are going to do today?
 >     hello is an invalid command.
     please try another one.
 >     Sorry, I can't do that for you.
-    You only have 4 tasks On your list.
+    You only have 4 tasks on your list.
 >     The format of 'deadline' is:
     > deadline TASK /by TIME
     Please re-enter your command.
@@ -48,4 +48,11 @@ What you are going to do today?
 >     The format of 'event' is:
     > event TASK /at TIME
     Please re-enter your command.
+>     Sorry, I can't do that for you.
+    You only have 4 tasks on your list.
+>         The description of 'delete' should not be empty.
+    Please re-enter your command.
+>     Nice! I've deleted following task as done:
+      [T][ ] t1
+    Now you have 2 tasks waiting to be done.
 >     Bye. Hope to see you again soon!
