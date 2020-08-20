@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Parser {
 
-    TaskList taskList = new TaskList();
+    Converter converter = new Converter();
 
     public void handleUserInput() {
 
@@ -19,25 +19,39 @@ public class Parser {
             try {
 
                 if (input.equals("list")) {
-                    this.taskList.listTasks();
+                    this.converter.convertAction(Commands.LIST, 0);
 
                 } else if (isNumberedCommand(input)) {
                     String[] words = input.split(" ");
 
                     if (words[0].equals("done")) {
                         int index = Integer.parseInt(words[1]) - 1;
-                        this.taskList.markTaskAsDone(index);
+                        this.converter.convertAction(Commands.DONE, index);
 
                     } else if (words[0].equals("delete")) {
                         int index = Integer.parseInt(words[1]) - 1;
-                        this.taskList.deleteTask(index);
+                        this.converter.convertAction(Commands.DELETE, index);
 
                     } else {
                         throw new InvalidCommandException("Command is invalid. Try again?");
                     }
 
                 } else {
-                    this.taskList.addTask(input);
+
+                    if (input.startsWith("deadline") && input.contains("/by")) {
+                        this.converter.passTask(this.converter.convertTask(Commands.DEADLINE, input));
+
+                    } else if (input.startsWith("event") && input.contains("/at")) {
+                        this.converter.passTask(this.converter.convertTask(Commands.EVENT, input));
+
+                    } else if (input.startsWith("todo")) {
+                        this.converter.passTask(this.converter.convertTask(Commands.TODO, input));
+
+                    } else {
+                        throw new InvalidCommandException("Not sure what you mean. " +
+                                "Please ensure your command format is correct and try again.");
+                    }
+
                 }
 
             } catch (InvalidCommandException e) {
@@ -62,11 +76,11 @@ public class Parser {
 
         if (checkBackNumber) {
             int index = Integer.parseInt(words[1]) - 1;
-            boolean isValidNumber = index < this.taskList.getNumberOfTasks();
+            boolean isValidNumber = index < this.converter.totalTasks();
 
             if (!isValidNumber) {
                 throw new InvalidNumberException("The number entered is invalid. " +
-                        "You have " + this.taskList.getNumberOfTasks() + " tasks in your list.");
+                        "You have " + this.converter.totalTasks() + " tasks in your list.");
             }
             return true;
 

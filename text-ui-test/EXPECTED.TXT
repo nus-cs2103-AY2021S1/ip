@@ -32,6 +32,7 @@ Do try again by adding a time you need to get this done by.
 Nice! I've marked this task as done:
 [E][✓] watch horror movie with friends (at: 12am)
 Hey! Event description shouldn't be blank.
+Not sure what you mean. Please ensure your command format is correct and try again.
 Here are the tasks in your list:
 1.[D][✘] prepare for presentation (by: today 7pm)
 2.[T][✓] go cycling

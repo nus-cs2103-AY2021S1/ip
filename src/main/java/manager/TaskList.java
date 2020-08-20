@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class TaskList {
 
     private List<Task> taskList = new ArrayList<>();
-    private Converter taskConverter = new Converter();
 
     public void listTasks() {
         System.out.println("Here are the tasks in your list:");
@@ -16,12 +15,11 @@ public class TaskList {
         }
     }
 
-    public void addTask(String input) {
-        Task newTask = this.taskConverter.getTaskType(input);
-        if (newTask != null) {
-            this.taskList.add(newTask);
+    public void addTask(Task task) {
+        if (task != null) {
+            this.taskList.add(task);
             System.out.println("Got it. I've added this task:");
-            System.out.println(newTask.toString());
+            System.out.println(task.toString());
             printNumberOfTasks();
         }
     }

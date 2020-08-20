@@ -1,6 +1,7 @@
 package main.java.manager;
 
-import main.java.exceptions.InvalidCommandException;
+import main.java.exceptions.InvalidDescriptionException;
+import main.java.exceptions.InvalidTimeException;
 import main.java.tasks.Deadline;
 import main.java.tasks.Event;
 import main.java.tasks.Task;
@@ -8,29 +9,48 @@ import main.java.tasks.Todo;
 
 public class Converter {
 
-    public Task getTaskType(String input) {
+    TaskList taskList = new TaskList();
+
+    public Task convertTask(Commands command, String input) {
         try {
-            if (input.startsWith("deadline") && input.contains("/by")) {
-                String description = input.substring("deadline".length(), input.indexOf("/by")).trim();
-                String endTime = input.substring(input.indexOf("/by") + "/by".length()).trim();
-                return new Deadline(description, endTime);
-
-            } else if (input.startsWith("event") && input.contains("/at")) {
-                String description = input.substring("event".length(), input.indexOf("/at")).trim();
-                String time = input.substring(input.indexOf("/at") + "/at".length()).trim();
-                return new Event(description, time);
-
-            } else if (input.startsWith("todo")) {
-                String description = input.substring("todo".length()).trim();
-                return new Todo(description);
-
-            } else {
-                throw new InvalidCommandException("Not sure what you mean. " +
-                        "Please ensure your command format is correct and try again.");
+            switch (command) {
+                case DEADLINE:
+                    String deadlineDesc = input.substring("deadline".length(), input.indexOf("/by")).trim();
+                    String endTime = input.substring(input.indexOf("/by") + "/by".length()).trim();
+                    return new Deadline(deadlineDesc, endTime);
+                case EVENT:
+                    String eventDesc = input.substring("event".length(), input.indexOf("/at")).trim();
+                    String time = input.substring(input.indexOf("/at") + "/at".length()).trim();
+                    return new Event(eventDesc, time);
+                case TODO:
+                    String todoDesc = input.substring("todo".length()).trim();
+                    return new Todo(todoDesc);
             }
-        } catch (InvalidCommandException e) {
+        } catch (InvalidDescriptionException | InvalidTimeException e) {
             System.out.println(e.getMessage());
-            return null;
         }
+        return null;
+    }
+
+    public void convertAction(Commands command, int index) {
+        switch (command) {
+            case LIST:
+                this.taskList.listTasks();
+                break;
+            case DONE:
+                this.taskList.markTaskAsDone(index);
+                break;
+            case DELETE:
+                this.taskList.deleteTask(index);
+                break;
+        }
+    }
+
+    public void passTask(Task task) {
+        this.taskList.addTask(task);
+    }
+
+    public int totalTasks() {
+        return this.taskList.getNumberOfTasks();
     }
 }

@@ -14,6 +14,7 @@ list
 deadline learn how to cook /by
 done 3
 event /at Wednesday
+done hahaha
 list
 event
 event go paragliding /at
