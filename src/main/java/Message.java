@@ -38,10 +38,10 @@ public class Message {
 
     public void reply() {
         System.out.println("____________________________________________________________");
-        if (cmd == Command.START) {
+        if (this.cmd == Command.START) {
             System.out.println("Eh what's up! I'm Meimei" +
                     "\nWhat you want ah?");
-        } else if (cmd == Command.LIST) {
+        } else if (this.cmd == Command.LIST) {
             System.out.println("Na, here is your list lah:");
             int counter = 0;
             for (Task item : list) {
@@ -50,7 +50,7 @@ public class Message {
                         "." +
                         item.toString());
             }
-        } else if (cmd == Command.DONE) {
+        } else if (this.cmd == Command.DONE) {
             String[] words = message.split(" ");
             try {
                 int index = Integer.parseInt(words[1]);
@@ -62,9 +62,47 @@ public class Message {
             } catch (NumberFormatException e) {
                 System.out.println("Cannot find leh. Try typing \"done {index of list item}\".");
             }
-        } else if (cmd == Command.BYE) {
+        } else if (this.cmd == Command.BYE) {
             System.out.println("Ok bye bye! C u again :P");
-        } else if (cmd == Command.NOT_FOUND) {
+        } else if (this.cmd == Command.TODO ||
+                   this.cmd == Command.DEADLINE ||
+                   this.cmd == Command.EVENT) {
+            String[] words = message.split(" ", 2);
+            String taskString = words[1];
+
+            Task t = null;
+            if (this.cmd == Command.TODO) {
+                t = new Todo(taskString);
+            } else if (this.cmd == Command.DEADLINE) {
+                String[] temp = taskString.split(" /by ");
+                if (temp.length == 2) {
+                    t = new Deadline(temp[0], temp[1]);
+                } else {
+                    System.out.println("Eh you type wrong lah!" +
+                            "\nTry \"deadline {description of task} /by {date/time}\"");
+                }
+            } else { // should be event
+                String[] temp = taskString.split(" /at ");
+                if (temp.length == 2) {
+                    t = new Event(temp[0], temp[1]);
+                } else {
+                    System.out.println("Eh you type wrong lah!" +
+                            "\nTry \"event {description of task} /at {date/time}\"");
+                }
+            }
+
+            if (t != null) {
+                list.add(t);
+
+                System.out.println("Orh. I added:" +
+                        "\n  " +
+                        t.toString() +
+                        "\nNow you got " +
+                        list.size() +
+                        " things in the list.");
+            }
+
+        } else if (this.cmd == Command.NOT_FOUND) {
             System.out.println("I cannot find this command leh. Try sth else?");
         }
         System.out.println("____________________________________________________________");
