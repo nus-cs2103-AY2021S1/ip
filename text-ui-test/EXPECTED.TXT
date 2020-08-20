@@ -38,5 +38,22 @@ Here's what you have ordered so far...
 3: [E][✘] project meeting  (at:  Mon 2-4pm)
 -------------------------------------
 -------------------------------------
+Too bad. I'll remove the following order:
+[T][✓] borrow book
+-------------------------------------
+-------------------------------------
+Here's what you have ordered so far...
+1: [D][✓] return book  (by:  Sunday)
+2: [E][✘] project meeting  (at:  Mon 2-4pm)
+-------------------------------------
+Sorry (not sorry)!!Which item???
+-------------------------------------
+Wat talking you?
+-------------------------------------
+Sorry (not sorry)!!Excuse Meee? number pls.
+-------------------------------------
+Sorry (not sorry)!!Deadline not provided!
+-------------------------------------
+-------------------------------------
 Bye! Please come again!
 -------------------------------------
