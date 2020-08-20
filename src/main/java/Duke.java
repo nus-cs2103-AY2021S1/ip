@@ -65,6 +65,12 @@ public class Duke {
                 } else {
                     System.out.println(new EventMissingDateException());
                 }
+            } else if (input.startsWith("delete")) {
+                int taskToDelete = Integer.parseInt(input.replace("delete ", "")) - 1;
+
+                printMessage("I have removed this task:\n" + tasks.get(taskToDelete) +
+                        String.format("\nNow you have %d tasks in the list", tasks.size() - 1));
+                tasks.remove(taskToDelete);
             } else {
                 System.out.println(new InvalidInputException());
             }
