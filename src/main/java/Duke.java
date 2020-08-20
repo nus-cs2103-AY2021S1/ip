@@ -11,11 +11,7 @@ public class Duke {
             + "     |____/ \\__,_|_|\\_\\___|\n";
 
 //    static ArrayList<Task> listOfTasks = new ArrayList<>();
-//
-    static Scanner input = new Scanner(System.in);
-//
-//    static boolean isExited = false;
-//
+
     public static void greet(){
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?");
@@ -23,7 +19,10 @@ public class Duke {
 
     public static void exit(){
         System.out.println("Bye. Hope to see you again soon!");
-        input.close();
+    }
+
+    public static void echo(String command){
+        System.out.println(command);
     }
 
 
@@ -31,18 +30,21 @@ public class Duke {
 
         greet();
 
+        Scanner input = new Scanner(System.in);
+
         String command;
 
         while(input.hasNext()){
             command = input.nextLine();
             if(command.equals("bye")){
                 exit();
+                input.close();
                 break;
             }else{
-                System.out.println(command);
+                echo(command);
                 continue;
             }
         }
-        
+
     }
 }
