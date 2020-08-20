@@ -44,28 +44,41 @@ public class Duke {
         }
     }
 
-    private static void processCommand(String input) {
-        String[] inputList = input.split(" ");
-        DukeCommand command = getDukeCommand(input);
+    private static void processInput(String input) {
+        StringBuilder commandInput = new StringBuilder();
+        StringBuilder argsInput = new StringBuilder();
+        boolean commandFound = false;
+        for (int i = 0; i < input.length(); i++) {
+            if (commandFound) {
+                argsInput.append(input.charAt(i));
+            } else if (input.charAt(i) == ' ') {
+                commandFound = true;
+            } else {
+                commandInput.append(input.charAt(i));
+            }
+        }
+
+        String args = argsInput.toString();
+        DukeCommand command = getDukeCommand(commandInput.toString());
         try {
             switch (command) {
                 case LIST:
                     listTasks();
                     break;
                 case DONE:
-                    completeTask(inputList);
+                    completeTask(args);
                     break;
                 case ADD_TODO:
-                    addTodo(inputList);
+                    addTodo(args);
                     break;
                 case ADD_EVENT:
-                    addEvent(inputList);
+                    addEvent(args);
                     break;
                 case ADD_DEADLINE:
-                    addDeadline(inputList);
+                    addDeadline(args);
                     break;
                 case DELETE:
-                    deleteTask(inputList);
+                    deleteTask(args);
                     break;
                 default:
                     throw new DukeUnknownCommandException(ERROR_MESSAGE + "\nWas the command valid?");
@@ -73,19 +86,6 @@ public class Duke {
         } catch (DukeUnknownCommandException | DukeIncompleteCommandException | DukeInvalidArgumentException e) {
             printWithDivider(e.getMessage());
         }
-    }
-
-    private static String rejoinString(String[] inputList) {
-        StringBuilder rv = new StringBuilder();
-        for (int i = 0; i < inputList.length; i++) {
-            if (i != 0) {
-                rv.append(inputList[i]);
-                if (i != inputList.length - 1) {
-                    rv.append(" ");
-                }
-            }
-        }
-        return rv.toString();
     }
 
     private static void listTasks() {
@@ -96,37 +96,29 @@ public class Duke {
         printWithDivider(rv);
     }
 
-    private static void completeTask(String[] inputList)
+    private static void completeTask(String doneIndex)
             throws DukeInvalidArgumentException, DukeIncompleteCommandException {
-        if (inputList.length > 1) {
-            String taskIndex = inputList[1];
-            try {
-                int index = Integer.parseInt(taskIndex) - 1;
-                Task task = taskList.get(index).completeTask();
-                printWithDivider("Nice! I've marked this task as done:\n" + task.toString());
-            } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                throw new DukeInvalidArgumentException(ERROR_MESSAGE + "\nDid you provide a valid index?");
-            }
-        } else {
-            throw new DukeIncompleteCommandException(ERROR_MESSAGE + "\nWas an index given?");
+        try {
+            int index = Integer.parseInt(doneIndex) - 1;
+            Task task = taskList.get(index).completeTask();
+            printWithDivider("Nice! I've marked this task as done:\n" + task.toString());
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeInvalidArgumentException(ERROR_MESSAGE + "\nDid you provide a valid index?");
         }
     }
 
-    private static void addTodo(String[] inputList) throws DukeIncompleteCommandException {
-        if (inputList.length > 1) {
-            String description = rejoinString(inputList);
-            Todo todo = new Todo(description);
-            taskList.add(todo);
-            printWithDivider("Successfully added todo:\n" + todo.toString());
-        } else {
+    private static void addTodo(String description) throws DukeIncompleteCommandException {
+        if (description.equals("")) {
             throw new DukeIncompleteCommandException(ERROR_MESSAGE
                     + "\nDid you provide any description for this todo task?");
         }
+        Todo todo = new Todo(description);
+        taskList.add(todo);
+        printWithDivider("Successfully added todo:\n" + todo.toString());
     }
 
-    private static void addEvent(String[] inputList) throws DukeIncompleteCommandException {
-        String removeCommand = rejoinString(inputList);
-        String[] descWithArgs = removeCommand.split(" /at ");
+    private static void addEvent(String args) throws DukeIncompleteCommandException {
+        String[] descWithArgs = args.split(" /at ");
         if (descWithArgs.length == 2) {
             Event event = new Event(descWithArgs[0], descWithArgs[1]);
             taskList.add(event);
@@ -137,9 +129,8 @@ public class Duke {
         }
     }
 
-    private static void addDeadline(String[] inputList) throws DukeIncompleteCommandException {
-        String removeCommand = rejoinString(inputList);
-        String[] descWithArgs = removeCommand.split(" /by ");
+    private static void addDeadline(String args) throws DukeIncompleteCommandException {
+        String[] descWithArgs = args.split(" /by ");
         if (descWithArgs.length == 2) {
             Deadline deadline = new Deadline(descWithArgs[0], descWithArgs[1]);
             taskList.add(deadline);
@@ -150,19 +141,14 @@ public class Duke {
         }
     }
 
-    private static void deleteTask(String[] inputList)
+    private static void deleteTask(String deleteIndex)
             throws DukeInvalidArgumentException, DukeIncompleteCommandException {
-        if (inputList.length > 1) {
-            String taskIndex = inputList[1];
-            try {
-                int index = Integer.parseInt(taskIndex) - 1;
-                Task task = taskList.remove(index);
-                printWithDivider("Noted. I've deleted this task:\n" + task.toString());
-            } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                throw new DukeInvalidArgumentException(ERROR_MESSAGE + "\nDid you provide a valid index?");
-            }
-        } else {
-            throw new DukeIncompleteCommandException(ERROR_MESSAGE + "\nWas an index given?");
+        try {
+            int index = Integer.parseInt(deleteIndex) - 1;
+            Task task = taskList.remove(index);
+            printWithDivider("Noted. I've deleted this task:\n" + task.toString());
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeInvalidArgumentException(ERROR_MESSAGE + "\nDid you provide a valid index?");
         }
     }
 
@@ -178,7 +164,7 @@ public class Duke {
                 printWithDivider(EXIT_MESSAGE);
                 break;
             } else {
-                processCommand(input);
+                processInput(input);
             }
         }
 
