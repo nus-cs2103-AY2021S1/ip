@@ -1,7 +1,4 @@
-import main.java.Deadline;
-import main.java.Event;
-import main.java.Task;
-import main.java.Todo;
+import main.java.*;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -52,13 +49,19 @@ public class Duke {
     }
 
     //mark a task as done
-    public void markAsDone(int num) {
-        listOfTaskEntered.get(num - 1).markAsDone();
-        String msgForDone = "    ____________________________________________________________\n"
-                + "    Nice! I 've marked this task as done: \n"
-                + "       " + listOfTaskEntered.get(num - 1).toString() + "\n"
-                + "    ____________________________________________________________\n";
-        System.out.println(msgForDone);
+    public void markAsDone(int num) throws DukeException {
+        if (num > 0 && num <= listOfTaskEntered.size()) {
+            listOfTaskEntered.get(num - 1).markAsDone();
+            String msgForDone = "    ____________________________________________________________\n"
+                    + "    Nice! I 've marked this task as done: \n"
+                    + "       " + listOfTaskEntered.get(num - 1).toString() + "\n"
+                    + "    ____________________________________________________________\n";
+            System.out.println(msgForDone);
+        } else {
+            throw new DukeException(
+                    "OOPS!!! The task is not found. Please try again."
+            );
+        }
     }
 
     //count number of tasks
@@ -119,6 +122,112 @@ public class Duke {
                 + "    ____________________________________________________________\n";
         System.out.println(invalidInput);
     }
+    
+    //list all the tasks
+    public void list() {
+        String msgForList = "    ____________________________________________________________\n";
+        msgForList += "    Here are the tasks in your list: \n";
+        for (int i = 0; i < listOfTaskEntered.size(); i++) {
+            msgForList += "    " + (i + 1) + ". "
+                    + listOfTaskEntered.get(i).toString() + "\n";
+        }
+        msgForList += "    ____________________________________________________________\n";
+        System.out.println(msgForList);
+    }
+    
+    //send bye message
+    public void stop() {
+        String msgForBye = "    ____________________________________________________________\n"
+                + "    Bye. Hope to see you again soon! \n"
+                + "    ____________________________________________________________\n";
+        System.out.println(msgForBye);
+    }
+    
+    //handle todo 
+    public void handleTodo(String instruction) throws DukeException {
+        if (instruction.substring(4).isBlank()) {
+            String emoji = new String(Character.toChars(0x1F609));
+            String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
+                    + "    You can do it by adding description after 'todo '." + emoji ;
+            throw new DukeException(exceptionMsg);
+        }
+        String toDoTitle = instruction.substring(5);
+        Todo newTodo = new Todo(toDoTitle);
+        this.addToDo(newTodo);
+    }
+    
+    //handle deadline
+    public void handleDeadline(String instruction) throws DukeException {
+        int index = instruction.indexOf("/by");
+        if (index == 8) {
+            String emoji = new String(Character.toChars(0x1F609));
+            String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
+                    + "    You can do it by adding description after 'event '." + emoji ;
+            throw new DukeException(exceptionMsg);
+        }
+        
+        if (index != -1) {
+            String by = instruction.substring(index + 3);
+            String description = instruction.substring(9, index);
+            if (description.isBlank()) {
+                String emoji = new String(Character.toChars(0x1F609));
+                String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
+                        + "    You can do it by adding description after 'deadline '." + emoji ;
+                throw new DukeException(exceptionMsg);
+            } else if (by.isBlank()) {
+                String emoji = new String(Character.toChars(0x1F609));
+                String exceptionMsg = "OOPS!!! I'm sorry, but the deadline cannot be empty. \n"
+                        + "    You can do it by adding deadline after '/by '." + emoji ;
+                throw new DukeException(exceptionMsg);
+            }
+            Deadline deadline = new Deadline(description, by);
+            this.addDeadline(deadline);
+        } else {
+            String emoji = new String(Character.toChars(0x1F609));
+            String exceptionMsg = "OOPS!!! I'm sorry, but you have to indicate the deadline. \n"
+                    + "    You can do it by adding '/by' after the description." + emoji ;
+            throw new DukeException(exceptionMsg);
+        }
+    }
+    
+    //handle event
+    public void handleEvent(String instruction) throws DukeException {
+        int index = instruction.indexOf("/at");
+        if (index == 5) {
+            String emoji = new String(Character.toChars(0x1F609));
+            String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
+                    + "    You can do it by adding description after 'event '." + emoji ;
+            throw new DukeException(exceptionMsg);
+        }
+        
+        if (index != -1) {
+            String time = instruction.substring(index + 3);
+            String description = instruction.substring(6, index);
+            if (description.isBlank()) {
+                String emoji = new String(Character.toChars(0x1F609));
+                String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
+                        + "    You can do it by adding description after 'event '." + emoji ;
+                throw new DukeException(exceptionMsg);
+            } else if (time.isBlank()) {
+                String emoji = new String(Character.toChars(0x1F609));
+                String exceptionMsg = "OOPS!!! I'm sorry, but the time cannot be empty. \n"
+                        + "    You can do it by adding time after '/at '." + emoji ;
+                throw new DukeException(exceptionMsg);
+            }
+            Event event = new Event(description, time);
+            this.addEvent(event);
+        } else {
+            String emoji = new String(Character.toChars(0x1F609));
+            String exceptionMsg = "OOPS!!! I'm sorry, but you have to indicate the time of the event. \n"
+                    + "    You can do it by adding '/at' after the description." + emoji ;
+            throw new DukeException(exceptionMsg);
+        }
+    }
+    
+    //handle invalid input
+    public void invalidInput() throws DukeException {
+        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
 
     //store user input and respond to different input
     public void run() {
@@ -127,48 +236,29 @@ public class Duke {
         while (sc.hasNextLine()) {
             String instruction = sc.nextLine();
             int len = instruction.length();
-            if (instruction.equals("list")) {
-                String msgForList = "    ____________________________________________________________\n";
-                msgForList += "    Here are the tasks in your list: \n";
-                for (int i = 0; i < listOfTaskEntered.size(); i++) {
-                    msgForList += "    " + (i + 1) + ". "
-                            + listOfTaskEntered.get(i).toString() + "\n";
+            try {
+                if (instruction.equals("list")) {
+                    this.list();
+                } else if (instruction.equals("bye")) {
+                    this.stop();
+                    break;
+                } else if (len >= 5 && instruction.substring(0, 5).equals("done ")) {
+                    int num = Integer.parseInt(instruction.substring(5));
+                    this.markAsDone(num);
+                } else if (len >= 4 && instruction.substring(0, 4).equals("todo")) {
+                    this.handleTodo(instruction);
+                } else if (len >= 8 && instruction.substring(0, 8).equals("deadline")) {
+                    this.handleDeadline(instruction);
+
+                } else if (len >= 5 && instruction.substring(0, 5).equals("event")) {
+                    this.handleEvent(instruction);
+                } else {
+                    this.invalidInput();
                 }
-                msgForList += "    ____________________________________________________________\n";
-                System.out.println(msgForList);
-
-            } else if (instruction.equals("bye")) {
-                String msgForBye = "    ____________________________________________________________\n"
-                        + "    Bye. Hope to see you again soon! \n"
-                        + "    ____________________________________________________________\n";
-                System.out.println(msgForBye);
-                break;
-
-            } else if (len >= 5 && instruction.substring(0, 5).equals("done ")) {
-                int num = Integer.parseInt(instruction.substring(5));
-                this.markAsDone(num);
-
-            } else if (len >= 5 && instruction.substring(0, 5).equals("todo ")) {
-                String toDoTitle = instruction.substring(5);
-                Todo newTodo = new Todo(toDoTitle);
-                this.addToDo(newTodo);
-
-            } else if (len >= 9 && instruction.substring(0, 9).equals("deadline ")) {
-                int index = instruction.indexOf("/by");
-                String by = instruction.substring(index + 3);
-                String description = instruction.substring(9, index);
-                Deadline deadline = new Deadline(description, by);
-                this.addDeadline(deadline);
-
-            } else if (len >= 6 && instruction.substring(0, 6).equals("event ")) {
-                int index = instruction.indexOf("/at");
-                String time = instruction.substring(index + 3);
-                String description = instruction.substring(6, index);
-                Event event = new Event(description, time);
-                this.addEvent(event);
-
-            } else {
-                this.check();
+            } catch (NumberFormatException ex) {
+                System.out.println(new DukeException("OOPS!!! I' m sorry, but you have to enter an integer"));
+            } catch (DukeException ex) {
+                System.out.println(ex);
             }
         }
         sc.close();
@@ -177,7 +267,6 @@ public class Duke {
     //run bot
     public static void main(String[] args) {
         Duke myBot = new Duke();
-        //myBot.respond();
         myBot.run();
     }
 }
