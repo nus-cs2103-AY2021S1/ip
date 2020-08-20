@@ -53,7 +53,7 @@ public class Duke {
                     check = false;
                     break;
                 case "todo":
-                    Task newTask = new Todo(input);
+                    Task newTask = new Todo(arr[1]);
                     storedItems.add(newTask);
                     System.out.println(border + "\n"
                             + "*Gobble gobble* the following has been eated OwO:\n"
