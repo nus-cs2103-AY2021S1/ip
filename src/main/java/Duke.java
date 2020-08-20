@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class Duke {
     private static final String spacing = "         ";
@@ -14,17 +13,17 @@ public class Duke {
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
 
-            if (input.equals("bye")) {
+            if (input.startsWith("bye")) {
                 scanner.close();
                 printMessage("Bye! See you next time :)");
                 System.exit(0);
-            } else if (input.equals("list")) {
+            } else if (input.startsWith("list")) {
                 String message = "";
                 for (int i = 0; i < tasks.size(); i++) {
                     message += (i + 1) + ": " + tasks.get(i) + "\n";
                 }
                 printMessage(message);
-            } else if (input.matches("done ([0-9]*)")) {
+            } else if (input.matches("done ([0-9]+)")) {
                 int number = Integer.parseInt(input.split(" ")[1]);
                 if (number > tasks.size()) {
                     printMessage("Task not found please choose another number!");
@@ -33,9 +32,32 @@ public class Duke {
                     tasks.get(number - 1).markAsDone();
                     printMessage("This task is done, great job!\n" + tasks.get(number - 1));
                 }
-            } else {
-                tasks.add(new Task(input));
-                printMessage("Added: " + input);
+            } else if (input.startsWith("todo")) {
+                String description = input.replace("todo ", "").trim();
+
+                Task task = new ToDo(description);
+                tasks.add(task);
+                printMessage("Added: " + task + String.format("\nNow you have %d tasks in the list", tasks.size()));
+            } else if (input.startsWith("deadline")) {
+                if (input.contains("/by")) {
+                    String description = input.replace("deadline ", "").split("/by")[0].trim();
+                    String dueDate = input.replace("deadline", "").split("/by")[1].trim();
+
+                    Task task = new Deadline(description, dueDate);
+                    tasks.add(task);
+                    printMessage("Added " + task + String.format("\nNow you have %d tasks in the list", tasks.size()));
+                }
+
+            } else if (input.startsWith("event")) {
+                if (input.contains("/at")) {
+                    String description = input.replace("event ", "").split("/at")[0].trim();
+                    String time = input.replace("event ", "").split("/at")[1].trim();
+
+                    Task task = new Event(description, time);
+                    tasks.add(task);
+                    printMessage("Added " + task + String.format("\nNow you have %d tasks in the list", tasks.size()));
+                }
+
             }
 
         }
