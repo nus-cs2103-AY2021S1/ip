@@ -1,5 +1,5 @@
 public class CommandException extends DukeException {
-    CommandException(String msg) {
-        super(msg);
+    CommandException() {
+        super("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 }

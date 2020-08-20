@@ -17,8 +17,8 @@ public class Duke {
     private void initialise() {
         Scanner sc = new Scanner(System.in);
         greet();
-        try {
-            while (sc.hasNextLine()) {
+        while (sc.hasNextLine()) {
+            try {
                 String input = sc.nextLine();
                 if (input.equals("bye")) {
                     break;
@@ -30,13 +30,15 @@ public class Duke {
                 } else if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")) {
                     add(input);
                 } else {
-
+                    throw new CommandException();
                 }
+            } catch (DukeException e) {
+                System.out.println("    ____________________________________________________________\n"
+                        + "     " + e + "\n"
+                        + "    ____________________________________________________________");
             }
-            exit();
-        } catch (Exception e) {
-            System.out.println(e);
         }
+        exit();
     }
 
     private void greet() {
@@ -57,15 +59,24 @@ public class Duke {
                 "    ____________________________________________________________");
     }
 
-    private void add(String input) {
+    private void add(String input) throws ToDoException, DeadlineException, EventException {
         Task newTask;
         if (input.startsWith("todo")) {
+            if (input.length() <= 5) {
+                throw new ToDoException();
+            }
             newTask = new ToDo(input.substring(5));
         } else if (input.startsWith("deadline")) {
+            if (input.length() <= 9) {
+                throw new DeadlineException();
+            }
             int indexOfSeparator = input.indexOf("/");
             newTask = new Deadline(input.substring(9, indexOfSeparator - 1),
                     input.substring(indexOfSeparator + 4));
         } else {
+            if (input.length() <= 6) {
+                throw new EventException();
+            }
             int indexOfSeparator = input.indexOf("/");
             newTask = new Event(input.substring(6, indexOfSeparator - 1),
                     input.substring(indexOfSeparator + 4));
