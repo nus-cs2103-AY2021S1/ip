@@ -26,15 +26,33 @@ public class Duke {
     }
 
     private void addTask(String task) {
-        taskList.add(new Task(task, taskList.size() + 1));
-        writeOutput("added: " + task);
+        addTask(new Todo(task));
+    }
+
+    private void addTask(String task, boolean isEvent) {
+        Task newTask;
+        String[] taskSplit;
+        if (isEvent) {
+            taskSplit = task.split("/at");
+            newTask = new Event(taskSplit[0].strip(), taskSplit[1].strip());
+        } else {
+            taskSplit = task.split("/by");
+            newTask = new Deadline(taskSplit[0].strip(), taskSplit[1].strip());
+        }
+        addTask(newTask);
+    }
+
+    private void addTask(Task task) {
+        taskList.add(task);
+        writeOutput("Got it. I've added this task:", task.toString(),
+                String.format("Now you have %d tasks in the list.", taskList.size()));
     }
 
     private void listTasks() {
         String[] taskOutputs = new String[taskList.size() + 1];
         taskOutputs[0] = "Here are the tasks in your list:";
         for (int i = 0; i < taskList.size(); i++) {
-            taskOutputs[i + 1] = taskList.get(i).toString();
+            taskOutputs[i + 1] = (i + 1) + ". " + taskList.get(i).toString();
         }
         writeOutput(taskOutputs);
     }
@@ -42,9 +60,7 @@ public class Duke {
     private void markDone(int position) {
         Task task = taskList.get(position - 1);
         task.markDone();
-        String[] outputs = new String[] { "Nice! I've marked this task as done:",
-                "\t" + task.toString() };
-        writeOutput(outputs);
+        writeOutput("Nice! I've marked this task as done:", "\t" + task.toString());
     }
 
     public boolean processInput(String input) {
@@ -53,10 +69,17 @@ public class Duke {
             return false;
         } else if (input.equals("list")) {
             listTasks();
-        } else if (input.startsWith("done ")) {
-            markDone(Integer.parseInt(input.split(" ")[1]));
         } else {
-            addTask(input);
+            String[] inputSplit = input.split(" ", 2);
+            if (inputSplit[0].equals("todo")) {
+                addTask(inputSplit[1]);
+            } else if (inputSplit[0].equals("deadline")) {
+                addTask(inputSplit[1], false);
+            } else if (inputSplit[0].equals("event")) {
+                addTask(inputSplit[1], true);
+            } else if (inputSplit[0].equals("done")){
+                markDone(Integer.parseInt(inputSplit[1]));
+            }
         }
         return true;
     }
