@@ -17,15 +17,17 @@ public class Duke {
         if(type == TODO){
             int start = 0;
             while(!s.substring(start, start + 4).equals("todo")) start++;
+            System.out.println(start + 4);
             return s.substring(start + 4);
         }
         String firstWord = type == EVENT ? "event" : "deadline", secondWord = type == EVENT ? "/at" : "/by";
         int start = 0, firstWordLen = type == EVENT ? 5 : 8, len = s.length();
         while(!s.substring(start, start + firstWordLen).equals(firstWord)) start++;
         start += (firstWordLen + 1);
+        if(start >= len) return s.substring(len);
         int end = start + 1;
         while(end + 3 < len && !s.substring(end, end + 3).equals(secondWord)) end++;
-        if(end + 3 >= len) end = end + 4;
+        if(end + 3 >= len) end = len + 1;
         return s.substring(start, end - 1);
     }
 
@@ -97,9 +99,9 @@ public class Duke {
 
             // if the user input is empty, continue the loop
             if(command.length <= 0 || inputCommand.equals("")){
-                /*System.out.println("____________________________________________________________");
+                System.out.println("____________________________________________________________");
                 System.out.println("\uD83D\uDE43 OOPS!!! input cannot be empty.");
-                System.out.println("____________________________________________________________");*/
+                System.out.println("____________________________________________________________");
                 continue;
             }
 
@@ -114,21 +116,32 @@ public class Duke {
                 System.out.println("____________________________________________________________");
             }
             else if(command[ptr].equals("done")){
-                int taskNumber = Integer.parseInt(command[ptr + 1]);
-                System.out.println("____________________________________________________________");
-                if(taskNumber > list.size()){
-                    System.out.println("no such task: task" + taskNumber + " as you only have " + list.size() + " in total");
+                try{
+                    int taskNumber = Integer.parseInt(command[ptr + 1]);
+                    System.out.println("____________________________________________________________");
+                    if(taskNumber > list.size()){
+                        System.out.println("no such task: task " + taskNumber + " as you only have " + list.size() + " in total");
+                    }
+                    else{
+                        Task task = list.get(taskNumber - 1);
+                        task.markAsDone();
+                        System.out.println("Nice! I've marked this task as done: ");
+                        System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
+                    }
+                    System.out.println("____________________________________________________________");
                 }
-                else{
-                    Task task = list.get(taskNumber - 1);
-                    task.markAsDone();
-                    System.out.println("Nice! I've marked this task as done: ");
-                    System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
+                catch (Exception e){
+                    System.out.println("\uD83D\uDE43 wrong input after the word \"done\"");
                 }
-                System.out.println("____________________________________________________________");
             }
             else if(command[ptr].equals("todo")){
                 String description = getDescription(inputCommand, TODO);
+                if(description.equals("") || ptr == command.length - 1){
+                    System.out.println("____________________________________________________________");
+                    System.out.println("\uD83D\uDE43 OOPS!!! The description of a todo cannot be empty.");
+                    System.out.println("____________________________________________________________");
+                    continue;
+                }
                 Todo newTodo = new Todo(description);
                 list.add(newTodo);
                 System.out.println("____________________________________________________________\n" +
@@ -139,6 +152,13 @@ public class Duke {
             }
             else if(command[ptr].equals("deadline")){
                 String by = getTime(inputCommand, DEADLINE), description = getDescription(inputCommand, DEADLINE);
+                if(description.equals("") || by.equals("") || command[command.length - 1].equals("/by") || ptr == command.length - 1){
+                    System.out.println("____________________________________________________________");
+                    System.out.println("\uD83D\uDE43 OOPS!!! The description and time of a deadline cannot be empty." +
+                            " Or maybe you used \"at\" instead of \"by\"?");
+                    System.out.println("____________________________________________________________");
+                    continue;
+                }
                 Deadline deadline = new Deadline(description, by);
                 list.add(deadline);
                 System.out.println("____________________________________________________________\n" +
@@ -149,6 +169,13 @@ public class Duke {
             }
             else if(command[ptr].equals("event")){
                 String at = getTime(inputCommand, EVENT), description = getDescription(inputCommand, EVENT);
+                if(description.equals("") || at.equals("") || command[command.length - 1].equals("/at") || ptr == command.length - 1){
+                    System.out.println("____________________________________________________________");
+                    System.out.println("\uD83D\uDE43 OOPS!!! The description and time of a event cannot be empty." +
+                            " Or maybe you used \"by\" instead of \"at\"?");
+                    System.out.println("____________________________________________________________");
+                    continue;
+                }
                 Event event = new Event(description, at);
                 list.add(event);
                 System.out.println("____________________________________________________________\n" +
@@ -158,15 +185,15 @@ public class Duke {
                         "\n____________________________________________________________");
             }
             else{
-                Task task = new Task(inputCommand);
+                /*Task task = new Task(inputCommand);
                 list.add(task);
                 System.out.println("____________________________________________________________\n" +
                         "Got it. I've added this task:\n" +
                         task.toString() + "\n" +
                         String.format("Now you have %d tasks in the list.", list.size()) +
-                        "\n____________________________________________________________");
-                /*System.out.println("\uD83D\uDE43 Sorry~ please specify whether this is a todo or a deadline or a event\n" +
-                        "put the word \"todo\" or \"deadline\" or \"event\" in front of your description");*/
+                        "\n____________________________________________________________");*/
+                System.out.println("\uD83D\uDE43 Sorry~ please specify whether this is a todo or a deadline or a event\n" +
+                        "put the word \"todo\" or \"deadline\" or \"event\" in front of your description");
             }
         }
 
