@@ -1,6 +1,7 @@
 public class Duke {
     public static void main(String[] args) {
-        Level1.main();
+        MainLogic logic = new MainLogic();
+        logic.main();
         // comments for testing
     }
 }
