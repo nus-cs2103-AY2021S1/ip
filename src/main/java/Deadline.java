@@ -1,3 +1,4 @@
+// a task that need to specify a date to be done before the date
 public class Deadline extends Task {
 
     protected String by;

@@ -79,53 +79,70 @@ public class Duke {
         return text;
     }
 
-    public static void addNewTask(String[] task, int pos) {
+    public static void addNewTask(String[] task, int pos)
+            throws InvalidTodoDescripDukeException, InvalidDeadlineDescripDukeException, InvalidEventDescripDukeException,
+            InvalidFirstDukeException {
+
+
         if (task[0].equals("todo")) {
+            if (task.length == 1) {
+                throw new InvalidTodoDescripDukeException();
+            }
             String[] modifiedTask = removeFirst(task);
             tasks[pos] = new Todo(joinString(modifiedTask));
             printAddedTask(tasks[pos]);
         } else if (task[0].equals("deadline")) {
+            if (task.length == 1) {
+                throw new InvalidDeadlineDescripDukeException();
+            }
             String[] modifiedTask = removeFirst(task);
             String[] upper = removeAfterWord(modifiedTask, "/by");
             String[] lower = keepAfterWord(modifiedTask, "/by");
             tasks[pos] = new Deadline(joinString(upper), joinString(lower));
             printAddedTask(tasks[pos]);
         } else if (task[0].equals("event")) {
+            if (task.length == 1) {
+                throw new InvalidEventDescripDukeException();
+            }
             String[] modifiedTask = removeFirst(task);
             String[] upper = removeAfterWord(modifiedTask, "/at");
             String[] lower = keepAfterWord(modifiedTask, "/at");
             tasks[pos] = new Event(joinString(upper), joinString(lower));
             printAddedTask(tasks[pos]);
         } else {
-            System.out.println("error");
+            throw new InvalidFirstDukeException();
         }
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int numTask = 0;
+        try {
+            Scanner sc = new Scanner(System.in);
+            int numTask = 0;
 
-        greeting();
-        String input;
-        String[] inputArr;
+            greeting();
+            String input;
+            String[] inputArr;
 
-        while(true) {
-            input = sc.nextLine(); // original input line
-            inputArr = input.split(" "); // split input into string array
+            while(true) {
+                input = sc.nextLine(); // original input line
+                inputArr = input.split(" "); // split input into string array
 
-            if (inputArr[0].equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                sc.close();
-                break;
-            } else if (inputArr[0].equals("list")) {
-                printAllTask();
-            } else if (inputArr[0].equals("done")) {
-                int counter =  Integer.parseInt(inputArr[1]);
-                tasks[counter - 1].markAsDone();
-            } else {
-                addNewTask(input.split(" "), numTask);
-                numTask++;
+                if (inputArr[0].equals("bye")) {
+                    System.out.println("Bye. Hope to see you again soon!");
+                    sc.close();
+                    break;
+                } else if (inputArr[0].equals("list")) {
+                    printAllTask();
+                } else if (inputArr[0].equals("done")) {
+                    int counter =  Integer.parseInt(inputArr[1]);
+                    tasks[counter - 1].markAsDone();
+                } else {
+                    addNewTask(input.split(" "), numTask);
+                    numTask++;
+                }
             }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
