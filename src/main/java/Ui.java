@@ -9,17 +9,18 @@ public class Ui {
             + "/__/     \\__\\  \\__/  \\__/     |_______|_______/     \\______/  |__|  |__| |_______|        \\______/\n";
     private static final String indent = "    ";
     private static final String doubleIndent = indent + indent;
-    private static final String border = "_________________________________________________";
+    private static final String border = "_________________________________________________________";
 
     // Initial greeting, prompt user for commands
     public void printWelcome() {
         printLogo();
+        printBorder();
         printGeneralChatWindow("Greetings! I'm Awesome-O.", "What can I do for you?");
+        printBorder();
     }
 
     // Prints a chat window showing the list of tasks
     public void printTasksChatWindow(List<Task> tasks) {
-        printBorder();
         printIndentedMessage("Here are the tasks in your list:");
 
         if (tasks.isEmpty()) {
@@ -30,51 +31,46 @@ public class Ui {
                 System.out.printf("%s%d. %s\n", indent, ++index, task);
             }
         }
-
-        printBorder();
     }
 
     // Prints a chat window that describes a task that is done
     public void printDoneTaskChatWindow(Task task) {
-        printBorder();
         printIndentedMessage("Great! I've marked this task as done:");
         printDoubleIndentedMessage(task.toString());
-        printBorder();
     }
 
     // Prints a chat window that describes a task that is deleted
     public void printDeleteTaskChatWindow(Task task, int numOfTotalTasks) {
-        printBorder();
         printIndentedMessage("Okay. I've removed this task:");
         printDoubleIndentedMessage(task.toString());
         printNumberOfTasks(numOfTotalTasks);
-        printBorder();
     }
 
     // Prints a chat window with a customised "add task" description
     public void printAddTaskChatWindow(Task task, int numOfTotalTasks) {
-        printBorder();
         printIndentedMessage("Alright. I've added this task:");
         printDoubleIndentedMessage(task.toString());
         printNumberOfTasks(numOfTotalTasks);
-        printBorder();
     }
 
     // Print goodbye chat window
     public void printGoodbye() {
+        printBorder();
         printGeneralChatWindow("Thank you for talking to Awesome-O.", "Have a nice day. Goodbye!");
+        printBorder();
         printLogo();
     }
 
     // Prints an indented chat window with a customised message
     public void printGeneralChatWindow(String... messages) {
-        printBorder();
-
         for (String message : messages) {
             printIndentedMessage(message);
         }
+    }
 
-        printBorder();
+    // Prints a border as in the chat window
+    public void printBorder() {
+        System.out.printf("%s%s\n", indent, border);
     }
 
     // Prints Duke logo
@@ -85,11 +81,6 @@ public class Ui {
     // Prints a box with the symbol inside, i.e. [s]
     private String box(String symbol) {
         return String.format("[%s]", symbol);
-    }
-
-    // Prints a border as in the chat window
-    private void printBorder() {
-        System.out.printf("%s%s\n", indent, border);
     }
 
     // Prints an indented generic message

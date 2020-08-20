@@ -17,20 +17,34 @@ public class TaskList {
         return tasks;
     }
 
-    public Task completeTask(String input) {
-        // Obtain index within list of tasks
-        int index = Integer.parseInt(input.substring(5)) - 1;
-        Task task = tasks.get(index);
-        task.markAsDone();
-        return task;
+    public int getTasksSize() {
+        return tasks.size();
     }
 
-    public Task deleteTask(String input) {
+    public Task completeTask(String input) throws DukeInvalidListNumberInputException {
+        // Obtain index within list of tasks
+        int index = Integer.parseInt(input.substring(5)) - 1;
+
+        try {
+            Task task = tasks.get(index);
+            task.markAsDone();
+            return task;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeInvalidListNumberInputException();
+        }
+    }
+
+    public Task deleteTask(String input) throws DukeInvalidListNumberInputException {
         // Obtain index within list of tasks
         int index = Integer.parseInt(input.substring(7)) - 1;
-        Task task = tasks.get(index);
-        tasks.remove(index);
-        return task;
+
+        try {
+            Task task = tasks.get(index);
+            tasks.remove(index);
+            return task;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeInvalidListNumberInputException();
+        }
     }
 
     public Task addTask(String tag, String input)

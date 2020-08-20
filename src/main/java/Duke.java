@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,8 +10,8 @@ public class Duke {
         try {
             this.storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
-        } catch (IOException e) {
-            ui.printGeneralChatWindow("ERROR: Loading error");
+        } catch (DukeException e) {
+            ui.printGeneralChatWindow(e.toString());
             tasks = new TaskList();
         }
     }
@@ -31,46 +30,19 @@ public class Duke {
 
         // Loop continues echoing input until input == "bye"
         while (!input.equals("bye")) {
-            // Tag refers to the command to perform
-            String tag = input.split(" ")[0];
+            // Print top border
+            ui.printBorder();
 
             try {
-                switch (tag) {
-                    case "list":
-                        ui.printTasksChatWindow(tasks.getTasks());
-                        break;
-
-                    case "done":
-                        ui.printDoneTaskChatWindow(tasks.completeTask(input));
-                        break;
-
-                    case "delete":
-                        ui.printDeleteTaskChatWindow(tasks.deleteTask(input), tasks.getTasks().size());
-                        break;
-
-                    case "todo":
-                    case "event":
-                    case "deadline":
-                        Task toAdd = tasks.addTask(tag, input);
-                        ui.printAddTaskChatWindow(toAdd, tasks.getTasks().size());
-                        break;
-
-                    default:
-                        throw new DukeUnknownInputException();
-                }
-
-                // Save tasks in a save-file with each command
-                storage.save(tasks.getTasks());
-
-            } catch (IOException e) {
-                ui.printGeneralChatWindow("ERROR: Loading error!");
-            } catch (DukeUnknownInputException e) {
-                ui.printGeneralChatWindow(e.toString());
-            } catch (IndexOutOfBoundsException e) {
-                ui.printGeneralChatWindow("ERROR: Invalid list number input!");
-            } catch (DukeInvalidTaskDescriptionException | DukeInvalidTaskTimeException e) {
+                Command c = Parser.parse(input);
+                c.execute(tasks, ui, storage);
+            } catch (DukeException e) {
                 ui.printGeneralChatWindow(e.toString());
             } finally {
+                // Print bottom border
+                ui.printBorder();
+
+                // Scan for any more inputs
                 input = sc.nextLine();
             }
         }

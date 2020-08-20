@@ -14,45 +14,59 @@ import java.util.Scanner;
 public class Storage {
     private final Path path;
 
-    public Storage(String filePath) throws IOException {
-        String home = System.getProperty("user.home");
-        path = Paths.get(home, filePath);
+    public Storage(String filePath) throws DukeLoadingErrorException {
+        try {
+            String home = System.getProperty("user.home");
+            path = Paths.get(home, filePath);
 
-        // If path doesn't exist, create one
-        if (Files.notExists(path)) {
-            File newDir = new File(String.valueOf(path));
-            newDir.createNewFile();
-        }
-    }
-
-    public void save(List<Task> tasks) throws IOException {
-        FileWriter fw = new FileWriter(String.valueOf(path));
-        for (Task task : tasks) {
-            String toSave = "";
-
-            String description = task.getDescription();
-            int isDone = task.isDone() ? 1 : 0;
-            TaskType type = task.getTaskType();
-
-            switch (type) {
-                case TODO:
-                    toSave += String.format("%s\t%d\t%s",
-                            type, isDone, description);
-                    break;
-                case EVENT:
-                case DEADLINE:
-                    toSave += String.format("%s\t%d\t%s\t%s",
-                            type, isDone, description, task.getTime());
-                    break;
+            // If path doesn't exist, create one
+            if (Files.notExists(path)) {
+                File newDir = new File(String.valueOf(path));
+                newDir.createNewFile();
             }
-
-            fw.write(String.format("%s\n", toSave));
+        } catch (IOException e) {
+            throw new DukeLoadingErrorException();
         }
-        fw.close();
     }
 
-    public List<Task> load() throws FileNotFoundException {
-        Scanner sc = new Scanner(path.toFile());
+    public void save(List<Task> tasks) throws DukeLoadingErrorException {
+        try {
+            FileWriter fw = new FileWriter(String.valueOf(path));
+            for (Task task : tasks) {
+                String toSave = "";
+
+                String description = task.getDescription();
+                int isDone = task.isDone() ? 1 : 0;
+                TaskType type = task.getTaskType();
+
+                switch (type) {
+                    case TODO:
+                        toSave += String.format("%s\t%d\t%s",
+                                type, isDone, description);
+                        break;
+                    case EVENT:
+                    case DEADLINE:
+                        toSave += String.format("%s\t%d\t%s\t%s",
+                                type, isDone, description, task.getTime());
+                        break;
+                }
+
+                fw.write(String.format("%s\n", toSave));
+            }
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeLoadingErrorException();
+        }
+    }
+
+    public List<Task> load() throws DukeFileNotFoundException {
+        Scanner sc;
+
+        try {
+            sc = new Scanner(path.toFile());
+        } catch (FileNotFoundException e) {
+            throw new DukeFileNotFoundException();
+        }
 
         List<Task> tasks = new ArrayList<>();
 
