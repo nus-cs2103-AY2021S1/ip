@@ -73,6 +73,7 @@ public class Duke {
                 tasks[numTask] = tmp;
                 numTask++;
                 System.out.println("Now you have " + numTask + " tasks in the list.");
+                //
             }
         }
     }
