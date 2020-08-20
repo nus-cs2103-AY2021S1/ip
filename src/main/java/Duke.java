@@ -66,7 +66,7 @@ public class Duke {
             }
             String taskName = inputMsg.split("/")[0].substring(6);
             String deadline = inputMsg.split("/")[1].substring(3);
-            newTask = new Deadline(taskName, false, deadline);
+            newTask = new Event(taskName, false, deadline);
         } else { // when user keys in unregistered action
             throw new DukeException("Specified action is not recognised.");
         }
