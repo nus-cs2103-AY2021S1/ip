@@ -13,22 +13,38 @@ todo read book
 deadline return book /by June 6th
   ____________________________________________________________
   Got it. I've added this task:
-  [D][✗] return book(by:  June 6th)
+  [D][✗] return book(by: June 6th)
   Now you have 2 tasks in the list.
   ____________________________________________________________
 
-event project meeting /at Aug 6th 2-4pm
+event project meeting /at Aug
   ____________________________________________________________
   Got it. I've added this task:
-  [E][✗] project meeting(at: at Aug 6th 2-4pm)
+  [E][✗] project meeting(at: Aug)
   Now you have 3 tasks in the list.
+  ____________________________________________________________
+
+done 1
+  ____________________________________________________________
+   Nice! I've marked this task as done:
+   [T][✓] read book
+  ____________________________________________________________
+
+done 2
+  ____________________________________________________________
+   Nice! I've marked this task as done:
+   [D][✓] return book(by: June 6th)
   ____________________________________________________________
 
 list
   ____________________________________________________________
    Here are the tasks in your list:
-  1.[T][✗] read book
-  2.[D][✗] return book(by:  June 6th)
-  3.[E][✗] project meeting(at: at Aug 6th 2-4pm)
+  1.[T][✓] read book
+  2.[D][✓] return book(by: June 6th)
+  3.[E][✗] project meeting(at: Aug)
+  ____________________________________________________________
 
+bye
+  ____________________________________________________________
+  Bye. Hope to see you again soon!
   ____________________________________________________________
