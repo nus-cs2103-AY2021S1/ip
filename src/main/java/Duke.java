@@ -31,41 +31,13 @@ public class Duke {
         while (!input.equals("bye")) {
             System.out.println(divider);
             if (input.equals("help")) {
-                System.out.println("Here are the commands you can use:");
-                for (int i = 0; i < cmdArr.length; i++) {
-                    System.out.println((i + 1) + ". " + cmdArr[i]);
-                }
+                processHelp(cmdArr);
             } else if (input.equals("add")) {
-                System.out.println("What would you like to add?");
-                String inputToAdd = sc.nextLine();
-                taskArr.add(new Task(inputToAdd));
-                System.out.println("Added: " + inputToAdd);
+                processAdd(taskArr, sc);
             } else if (input.equals("list")) {
-                if (taskArr.isEmpty()) {
-                    System.out.println("There are no tasks on your list");
-                    System.out.println("Use the 'add' command to start adding tasks!");
-                } else {
-                    System.out.println("These are the tasks on your list:");
-                    for (int j = 0; j < taskArr.size(); j++) {
-                        System.out.println((j + 1)
-                                + ". "
-                                + "["
-                                + taskArr.get(j).getStatusIcon()
-                                + "]"
-                                + taskArr.get(j).getDescription());
-                    }
-                }
+                processList(taskArr);
             } else if (input.equals("done")) {
-                System.out.println("Which task do you want to mark as done?");
-                int taskNum = sc.nextInt();
-
-                    System.out.println("Good job! This task is now marked as done:");
-                    taskArr.get(taskNum - 1).markAsDone();
-                    System.out.println("["
-                            + taskArr.get(taskNum - 1).getStatusIcon()
-                            + "]"
-                            + taskArr.get(taskNum - 1).getDescription());
-                    sc.nextLine();
+                processDone(taskArr, sc);
             } else {
                 System.out.println("Sorry I didn't understand that :(");
                 System.out.println("How about entering 'help' instead?");
@@ -79,5 +51,44 @@ public class Duke {
         System.out.println(divider);
         System.out.println("Bye! See you around :)");
         System.out.println(divider);
+    }
+    public static void processHelp(String[] cmdArr) {
+        System.out.println("Here are the commands you can use:");
+        for (int i = 0; i < cmdArr.length; i++) {
+            System.out.println((i + 1) + ". " + cmdArr[i]);
+        }
+    }
+
+    public static void processAdd(List<Task> taskArr, Scanner sc) {
+        System.out.println("What would you like to add?");
+        String inputToAdd = sc.nextLine();
+        taskArr.add(new Task(inputToAdd));
+        System.out.println("Added: " + inputToAdd);
+    }
+
+    public static void processList(List<Task> taskArr) {
+        if (taskArr.isEmpty()) {
+            System.out.println("There are no tasks on your list");
+            System.out.println("Use the 'add' command to start adding tasks!");
+        } else {
+            System.out.println("These are the tasks on your list:");
+            for (int j = 0; j < taskArr.size(); j++) {
+                System.out.println((j + 1)
+                        + ". "
+                        + taskArr.get(j).toString());
+            }
+        }
+    }
+
+    public static void processDone(List<Task> taskArr, Scanner sc) {
+        System.out.println("Which task do you want to mark as done?");
+        int taskNum = sc.nextInt();
+        System.out.println("Good job! This task is now marked as done:");
+        taskArr.get(taskNum - 1).markAsDone();
+        System.out.println("["
+                + taskArr.get(taskNum - 1).getStatusIcon()
+                + "]"
+                + taskArr.get(taskNum - 1).getDescription());
+        sc.nextLine();
     }
 }

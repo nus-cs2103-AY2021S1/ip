@@ -22,4 +22,12 @@ public class Task {
     public boolean isDone(){
         return isDone;
     }
+
+    @Override
+    public String toString() {
+        return "["
+                + this.getStatusIcon()
+                + "]"
+                + this.getDescription();
+    }
 }
