@@ -47,23 +47,28 @@ public class Duke {
     public static void addToList(String inputMsg, String actionType) throws DukeException {
         Task newTask;
         int numOfWords = inputMsg.split(" ").length;
-        if (numOfWords <= 1) {
-            throw new DukeException("Description of task cannot be empty!");
-        } else {
-            if (actionType.equals("todo")) {
-                String taskName = inputMsg.substring(5);
-                newTask = new Todo(taskName, false);
-            } else if (actionType.equals("deadline")) {
-                String taskName = inputMsg.split("/")[0].substring(9);
-                String deadline = inputMsg.split("/")[1].substring(3);
-                newTask = new Deadline(taskName, false, deadline);
-            } else if (actionType.equals("event")) {
-                String taskName = inputMsg.split("/")[0].substring(6);
-                String deadline = inputMsg.split("/")[1].substring(3);
-                newTask = new Deadline(taskName, false, deadline);
-            } else { // when user keys in unregistered action
-                throw new DukeException("Specified action is not recognised.");
+        if (actionType.equals("todo")) {
+            if (numOfWords <= 1) {
+                throw new DukeException("Description of task cannot be empty!");
             }
+            String taskName = inputMsg.substring(5);
+            newTask = new Todo(taskName, false);
+        } else if (actionType.equals("deadline")) {
+            if (numOfWords <= 1) {
+                throw new DukeException("Description of task cannot be empty!");
+            }
+            String taskName = inputMsg.split("/")[0].substring(9);
+            String deadline = inputMsg.split("/")[1].substring(3);
+            newTask = new Deadline(taskName, false, deadline);
+        } else if (actionType.equals("event")) {
+            if (numOfWords <= 1) {
+                throw new DukeException("Description of task cannot be empty!");
+            }
+            String taskName = inputMsg.split("/")[0].substring(6);
+            String deadline = inputMsg.split("/")[1].substring(3);
+            newTask = new Deadline(taskName, false, deadline);
+        } else { // when user keys in unregistered action
+            throw new DukeException("Specified action is not recognised.");
         }
         userInputs.add(newTask);
         String outputMsg = "Got it. I've added this task:\n"
