@@ -1,8 +1,8 @@
 package main.java;
 
 public class Task {
-    String name;
-    boolean isDone;
+    protected String name;
+    protected boolean isDone;
 
     public Task(String name){
         this.name = name;
@@ -19,8 +19,8 @@ public class Task {
         System.out.println(this.name);
     }
 
-    public void showTask(){
-        System.out.println(this.toString());
+    public void showTask(int index){
+        System.out.println(index + ". " +this.toString());
     }
 
 

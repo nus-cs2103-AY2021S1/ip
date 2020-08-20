@@ -48,9 +48,13 @@ public class Duke {
 
             }else if(command.equals("list")){
 
-                for(Task task: listOfTasks){
+                System.out.println("Here are the tasks in your list:");
 
-                    task.showTask();
+                int number = listOfTasks.size();
+
+                for(int i = 0; i < number; i++){
+
+                    listOfTasks.get(i).showTask(i+1);
 
                 }
                 continue;
@@ -66,11 +70,49 @@ public class Duke {
 
                 }else{
 
-                    Task newTask = new Task(command);
+                    Task newTask;
+
+                    if(words[0].equals("todo")){
+
+                        String name = command.split(" ", 2)[1];
+
+                        newTask = new Todo(name);
+
+                    }else if(words[0].equals("deadline")){
+
+                        String content = command.split(" ", 2)[1];
+
+                        String name = content.split(" /by ")[0];
+
+                        String dueDate = content.split(" /by ")[1];
+
+                        newTask = new Deadline(name, dueDate);
+
+                    }else if(words[0].equals("event")){
+
+                        String content = command.split(" ", 2)[1];
+
+                        String name = content.split(" /by ")[0];
+
+                        String timePeriod = content.split(" /by ")[1];
+
+                        newTask = new Deadline(name, timePeriod);
+
+                    }else{
+
+                        newTask = new Task(command);
+
+                    }
 
                     listOfTasks.add(newTask);
 
-                    System.out.println("added: " + command);
+                    int taskSize = listOfTasks.size();
+
+                    System.out.println("Got it. I've added this task: ");
+
+                    System.out.println(newTask.toString());
+
+                    System.out.println("Now you have" + taskSize + "tasks in the list.");
 
                 }
             }
