@@ -3,11 +3,11 @@ import java.util.Scanner;
 
 public class Bot {
     private String name;
-    private ArrayList<String> taskList;
+    private ArrayList<Task> taskList;
 
     public Bot(String name) {
         this.name = name;
-        this.taskList = new ArrayList<String>();
+        this.taskList = new ArrayList<Task>();
     }
 
     /**
@@ -39,12 +39,17 @@ public class Bot {
     }
 
     private String parseUserInput(String input) {
-        String firstWord = firstWord(input);
+        String[] words = input.split(" ");
+        if (words.length == 0) {
+            return responseWrapper("Please input something");
+        }
         try {
-            Command cmd = Command.valueOf(firstWord.toUpperCase());
+            Command cmd = Command.valueOf(words[0].toUpperCase());
             switch (cmd) {
                 case LIST:
                     return cmdList();
+                case DONE:
+                    return cmdDone(words);
                 default:
                     return cmdAdd(input);
             }
@@ -53,33 +58,37 @@ public class Bot {
         }
     }
 
-    private String firstWord(String word) {
-        String firstWord = "";
-        for (char c : word.toCharArray()) {
-            if (Character.isWhitespace(c)) {
-                return firstWord;
-            }
-            firstWord += c;
-        }
-        return firstWord;
+    private String[] split(String word) {
+        return word.split(" ");
     }
 
     private String cmdAdd(String item) {
-        this.taskList.add(item);
-        return responseWrapper("added: " + item);
+        Task newTask = new Task(item);
+        this.taskList.add(newTask);
+        return responseWrapper("added:" + newTask);
     }
 
     private String cmdList() {
         int index = 0;
         StringBuilder string = new StringBuilder();
-        for (String item : taskList) {
+        for (Task item : taskList) {
             index++;
-            string.append(index).append(". ").append(item).append("\n    ");
+            string.append(index).append(".").append(item).append("\n    ");
         }
         if (index == 0) {
             return responseWrapper("Nothing in the list");
         }
         string.delete(string.length() - 5, string.length());
         return responseWrapper(string.toString());
+    }
+
+    private String cmdDone(String[] words) {
+        if (words.length != 2) {
+            return responseWrapper("Please input 1 argument");
+        }
+        Task task = this.taskList.get(Integer.parseInt(words[1]) - 1);
+        task.markAsDone();
+        return responseWrapper("Nice! I've marked this task as done: \n    " +
+                task + "\n");
     }
 }
