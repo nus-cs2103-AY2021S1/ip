@@ -19,25 +19,46 @@ public class Duke {
         System.out.println("What can I do for you?");
 
 
-        /* level 2 */
+
         while (scan1.hasNext()) {
-            String input = scan1.nextLine();
-            if (!input.equals("bye") && !input.equals("list") && !input.equals("done")) {
-                Task task = new Task(input);
-                storage.add(task);
-                String added = "added: " + input;
-                System.out.println(added);
-            } else if (input.equals("list")) {
+            String command = scan1.next();
+            if (command.equals("list")) {
                 for (Task item: storage) {
-                    System.out.println(count + ".[" + item.getStatusIcon() + "] " + item.getDescription());
+                    System.out.println(count + "." + item);
                     count++;
                 }
-            } else if (input.equals("done")) {
+            } else if (command.equals("done")) {
                 int number = scan1.nextInt();
                 Task current = storage.get(number - 1);
                 current.setDone();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(current.getStatusIcon() + " " + current.getDescription());
+            } else if (command.equals("todo")) {
+                String desc = scan1.nextLine();
+                Todo todo = new Todo(desc);
+                storage.add(todo);
+                int size = storage.size();
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + todo);
+                System.out.println("Now you have " + size +  " tasks in the list.");
+            } else if (command.equals("deadline")) {
+                String desc = scan1.nextLine();
+                String[] string = desc.split("/by");
+                Deadline deadline = new Deadline(string[0], string[1]);
+                storage.add(deadline);
+                int size = storage.size();
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + deadline);
+                System.out.println("Now you have " + size +  " tasks in the list.");
+            } else if (command.equals("event")) {
+                String desc = scan1.nextLine();
+                String[] string = desc.split("/at");
+                Events event = new Events(string[0], string[1]);
+                storage.add(event);
+                int size = storage.size();
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + event);
+                System.out.println("Now you have " + size +  " tasks in the list.");
             }
             else {
                 String bye = "Bye. Hope to see you again soon!";
