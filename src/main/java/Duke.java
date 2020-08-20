@@ -27,6 +27,11 @@ public class Duke {
                 int task = Intger.parseInt(in.replace("done ", "")) - 1;
                 storage.get(task).done = true;
                 System.out.println("\tNice! I've marked this task as done:\n\t" + storage.get(task));
+            } else if (in.contains("delete ")) {
+                int task = Intger.parseInt(in.replace("delete ", "")) - 1;
+                System.out.println("\tNoted. I've removed this task:\n\t" + storage.get(task));
+                storage.remove(task);
+                System.out.println("\tNow you have " + storage.size() + " tasks in the list.");
             } else {
                 try {
                     Task task;
