@@ -7,31 +7,45 @@ _|_|_|_|_|    _|_|                _|_|_|      _|_|     _|
 This is a Duke Project.
 
 What you are going to do today?
-    The following task has been added to your list:
+>     The following task has been added to your list:
       [T][ ] t1
     Now you have 1 tasks in your list.
     There are 1 tasks waiting to be done.
-    The following task has been added to your list:
+>     The following task has been added to your list:
       [T][ ] t2
     Now you have 2 tasks in your list.
     There are 2 tasks waiting to be done.
-    The following task has been added to your list:
+>     The following task has been added to your list:
       [D][ ] t3 (by: 1)
     Now you have 3 tasks in your list.
     There are 3 tasks waiting to be done.
-    The following task has been added to your list: 
+>     The following task has been added to your list: 
       [E][ ] t4 (at: 2)
     Now you have 4 tasks in your list.
     There are 4 tasks waiting to be done.
-    1.[T][ ] t1
+>     1.[T][ ] t1
     2.[T][ ] t2
     3.[D][ ] t3 (by: 1)
     4.[E][ ] t4 (at: 2)
-    Nice! I've marked following task as done: 
+>     Nice! I've marked following task as done: 
       [x] t2
     Now you have 3 tasks waiting to be done.
-    1.[T][ ] t1
+>     1.[T][ ] t1
     2.[T][X] t2
     3.[D][ ] t3 (by: 1)
     4.[E][ ] t4 (at: 2)
-There is supposed to be an exception here.
+>     hello is an invalid command.
+    please try another one.
+>     Sorry, I can't do that for you.
+    You only have 4 tasks On your list.
+>     The format of 'deadline' is:
+    > deadline TASK /by TIME
+    Please re-enter your command.
+>     The description of 'deadline' should not be empty.
+    Please re-enter your command.
+>     The description of 'event' should not be empty.
+    Please re-enter your command.
+>     The format of 'event' is:
+    > event TASK /at TIME
+    Please re-enter your command.
+>     Bye. Hope to see you again soon!

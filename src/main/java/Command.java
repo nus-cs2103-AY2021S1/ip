@@ -12,8 +12,8 @@ public enum Command{
     INVALID;
 
     static private String originalCommand = ""; //originalCommand stores the original command (case sensitive)
-    static private String action;
-    static private String taskContent;
+    static private String action = "";
+    static private String taskContent = "";
     Command(){}
 
 //    Command(String command){
@@ -29,6 +29,8 @@ public enum Command{
         return taskContent;
     }
 
+    static String getAction(){return action;}
+
     /**
      * Returns a Command object that enumerate original command
      *
@@ -36,6 +38,9 @@ public enum Command{
      * @return enumerated command
      */
     static Command getCommand(String command){
+        taskContent = "";
+        action = "";
+        originalCommand = "";
         originalCommand = command;
         String[] splitedCommand = command.split(" ");
         action = splitedCommand[0];

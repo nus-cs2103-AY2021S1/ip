@@ -6,3 +6,9 @@ list
 done 2
 list
 hello
+done 100
+deadline 1
+deadline
+event
+event 1
+bye
