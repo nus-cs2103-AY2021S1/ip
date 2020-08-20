@@ -1,10 +1,10 @@
 todo read book
+list
 delete 1
 delete 1
 delete
 event
 event read book
-list
 delete 2
 deadline read book
 deadline
