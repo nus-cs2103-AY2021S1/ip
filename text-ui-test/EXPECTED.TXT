@@ -13,40 +13,45 @@
 	1. [T][✘] borrow book
 	2. [D][✘] return book (by: Sunday)
 	3. [E][✘] project meeting (at: Mon 2-4pm)
-	You have finished this task!
-	[T][✓] borrow book
-	Let's move on to the next one!
-	1. [D][✘] return book (by: Sunday)
-	2. [E][✘] project meeting (at: Mon 2-4pm)
-	You have finished this task!
-	[E][✓] project meeting (at: Mon 2-4pm)
-	Let's move on to the next one!
-	1. [D][✘] return book (by: Sunday)
-	added: [T][✘] return book
-	You have 4 tasks, 2 undone!
-	1. [D][✘] return book (by: Sunday)
-	2. [T][✘] return book
-	3. [T][✓] borrow book
-	4. [E][✓] project meeting (at: Mon 2-4pm)
-	Here are the tasks in your list:
-	1. [D][✘] return book (by: Sunday)
-	2. [T][✘] return book
-	3. [T][✓] borrow book
-	4. [E][✓] project meeting (at: Mon 2-4pm)
 	added: [D][✘] homework (by: today)
-	You have 5 tasks, 3 undone!
-	1. [D][✘] return book (by: Sunday)
-	2. [T][✘] return book
+	You have 4 tasks, 4 undone!
+	1. [T][✘] borrow book
+	2. [D][✘] return book (by: Sunday)
+	3. [E][✘] project meeting (at: Mon 2-4pm)
+	4. [D][✘] homework (by: today)
+	Here are the tasks in your list:
+	1. [T][✘] borrow book
+	2. [D][✘] return book (by: Sunday)
+	3. [E][✘] project meeting (at: Mon 2-4pm)
+	4. [D][✘] homework (by: today)
+	You don't have that many tasks!!!
+	You have finished this task!
+	[D][✓] return book (by: Sunday)
+	Let's move on to the next one!
+	1. [T][✘] borrow book
+	2. [E][✘] project meeting (at: Mon 2-4pm)
 	3. [D][✘] homework (by: today)
-	4. [T][✓] borrow book
-	5. [E][✓] project meeting (at: Mon 2-4pm)
+	added: [T][✘] return book
+	You have 5 tasks, 4 undone!
+	1. [T][✘] borrow book
+	2. [E][✘] project meeting (at: Mon 2-4pm)
+	3. [D][✘] homework (by: today)
+	4. [T][✘] return book
+	5. [D][✓] return book (by: Sunday)
 	added: [E][✘] lesson (at: Friday 10-12am)
-	You have 6 tasks, 4 undone!
-	1. [D][✘] return book (by: Sunday)
-	2. [T][✘] return book
+	You have 6 tasks, 5 undone!
+	1. [T][✘] borrow book
+	2. [E][✘] project meeting (at: Mon 2-4pm)
 	3. [D][✘] homework (by: today)
-	4. [E][✘] lesson (at: Friday 10-12am)
-	5. [T][✓] borrow book
-	6. [E][✓] project meeting (at: Mon 2-4pm)
+	4. [T][✘] return book
+	5. [E][✘] lesson (at: Friday 10-12am)
+	6. [D][✓] return book (by: Sunday)
+	Here are the tasks in your list:
+	1. [T][✘] borrow book
+	2. [E][✘] project meeting (at: Mon 2-4pm)
+	3. [D][✘] homework (by: today)
+	4. [T][✘] return book
+	5. [E][✘] lesson (at: Friday 10-12am)
+	6. [D][✓] return book (by: Sunday)
 	It was my pleasure assisting you.
 	See you next Time!

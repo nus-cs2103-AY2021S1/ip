@@ -45,10 +45,14 @@ public class Duke {
                         task.setDone();
                         list.add(task);
                         activeTasks--;
+                        System.out.println("\tYou have finished this task!\n\t" + task +
+                                "\n\tLet's move on to the next one!");
+                        printList(list, false);
+                    } else {
+                        System.out.println("\tYou have deleted this task!\n\t" + task +
+                                "\n\tHere are other tasks on your list:");
+                        printList(list, true);
                     }
-                    System.out.println("\tYou have finished this task!\n\t" + task +
-                            "\n\tLet's move on to the next one!");
-                    printList(list, false);
                 }
                 break;
             case "todo":
