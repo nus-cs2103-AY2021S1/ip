@@ -11,11 +11,11 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo + "\nHello im Eu Zin's Duke, he spent thursday afternoon creating me cuz he forgot abt the iP");
 
-        ArrayList<Task> taskList = new ArrayList<>();
+        ArrayList<String> taskList = new ArrayList<>();
         Duke.response(new Scanner(System.in), taskList);
     }
 
-    static void response(Scanner scanner, ArrayList<Task> taskList) {
+    static void response(Scanner scanner, ArrayList<String> taskList) {
         String userInput = scanner.nextLine();
         String borders = "\n\n\\   / \\   / \\   / \\   / im not very creative \\   / \\   / \\   / \\   /\n \\ /   \\ /   \\ /   \\ /      EuZin's Duke      \\ /   \\ /   \\ /   \\ /\n\n";
         if (userInput.equals("bye")) {
@@ -23,24 +23,14 @@ public class Duke {
         } else if (userInput.equals("list")) {
             int counter = 0;
             String returnString = borders + "faster do don't netflix already";
-            Iterator<Task> taskIterator = taskList.iterator();
-            while (taskIterator.hasNext()) {
-                Task thisTask = taskIterator.next();
-                returnString += "\n" + (counter + 1) + ". " + thisTask.getStatusIcon() + " " + thisTask.description;
+            Iterator<String> taskIterator = taskList.iterator();
+            while(taskIterator.hasNext()) {
+                returnString += "\n" + (counter+1) + ". " + taskIterator.next();
                 counter++;
             }
             System.out.println(returnString + borders);
-            response(new Scanner(System.in), taskList);
-        } else if (userInput.length() >= 4 && userInput.substring(0,4).equals("done")) {
-            String returnString = borders + "ok sure good job i guess\n";
-            int taskDone = Integer.parseInt(userInput.substring(5));
-            Task thisTask = taskList.get(taskDone-1);
-            thisTask.done();
-            returnString += thisTask.getStatusIcon() + " " + thisTask.description;
-            System.out.println(returnString + borders);
-            response(new Scanner(System.in), taskList);
         } else {
-            taskList.add(new Task(userInput));
+            taskList.add(userInput);
             System.out.println(borders + "added: " + userInput + borders);
             Duke.response((new Scanner(System.in)), taskList);
         }
