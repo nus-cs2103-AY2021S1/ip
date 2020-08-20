@@ -5,16 +5,24 @@ import main.java.TaskManager;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Responsible for interpreting the input and interacting with the User.
+ */
 public class Duke {
     /**
      * Print on screen the message wrapped with dotted lines.
-     * @param message Message to be printed out
+     * @param message Message to be printed out.
      */
     public static void echo(String message) {
         String line = "____________________________________________________________\n";
         System.out.println(line + message + "\n" + line);
     }
 
+    /**
+     * Print on the screen the new task created and the task count
+     * @param task The newly created task to be printed.
+     * @param taskCount The new count of the tasks.
+     */
     public static void echoNewTask(Task task, int taskCount){
         String first = "Got it. I've added this task:\n";
         String second = "    " + task.toString() + "\n";
@@ -22,6 +30,12 @@ public class Duke {
         echo(first + second + third);
     }
 
+    /**
+     * Take in the String input and split into the 3 parts, namely
+     * the command, the title and extra_descriptions.
+     * @param input The input from the users.
+     * @return a String array that contains different components of the input.
+     */
     public static String[] interpretInput(String input) {
         ArrayList<String> list = new ArrayList<>();
         int spaceIndex = input.indexOf(" ");
@@ -94,7 +108,7 @@ public class Duke {
                     break;
                 case "todo":
                     try {
-                        if (words.length > 2 || words.length < 1) {
+                        if (words.length > 2) {
                             throw new IllegalArgumentException();
                         }
                         Task addedToDo = taskManager.addToDo(words[1]);
