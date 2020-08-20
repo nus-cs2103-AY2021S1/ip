@@ -7,4 +7,12 @@ list
 done 2
 list
 done 3
+invalid command
+todo
+event
+deadline
+event x
+deadline y
+event /at
+deadline /by
 bye

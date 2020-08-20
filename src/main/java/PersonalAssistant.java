@@ -23,13 +23,28 @@ public class PersonalAssistant {
      * Gets user input from STDIN, executes it
      */
     public void getUserCommands() {
-        System.out.println("\nEnter your command or \"bye\" to exit: ");
+        try {
+            System.out.println("\nEnter your command or \"bye\" to exit: ");
 
-        // Tokenize the input
-        String[] cmdTokens = reader.nextLine().split(" ");
+            // Tokenize the input
+            String input = reader.nextLine();
+            String[] cmdTokens = TokenParser.tokenize(input);
 
-        // Handle inputs
-        this.execute(cmdTokens);
+            // Handle inputs
+            this.execute(cmdTokens);
+
+        } catch (CommandMissingArgumentException e) {
+            System.out.println("Missing arguments!");
+        } catch (CommandInvalidArgumentFormatException e) {
+            System.out.println("Invalid arguments!");
+        } catch (MissingTaskException e) {
+            System.out.println("Missing task!");
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            // Continue
+            //this.getUserCommands();
+        }
     }
 
     /**
@@ -62,22 +77,17 @@ public class PersonalAssistant {
              */
             case "done": {
                 // Handle incorrect argument lengths
-                if (cmdTokens.length != 2) {
-                    String errStatement = String.format("%s has invalid number of arguments", cmd);
-                    System.out.println(errStatement);
+                if (cmdTokens.length <= 1) {
+                    throw new CommandMissingArgumentException();
                 }
 
-                try {
-                    /**
-                     * ACTUAL COMMAND LOGIC HERE
-                     */
-                    Integer taskIndex = Integer.parseInt(cmdTokens[1]) - 1;
-                    completeTask(taskIndex);
-                } catch (Exception e) {
-                    // Handle parsing errors
-                    String errStatement = String.format("%s should be supplied an integer as an argument", cmd);
-                    System.out.println(errStatement);
+                Integer taskIndex = TokenParser.parseInt(cmdTokens[1]) - 1;
+
+                // If the task doesn't exist (It's index is missing)
+                if (taskIndex < 0 || taskIndex >= store.size()) {
+                    throw new MissingTaskException();
                 }
+                completeTask(taskIndex);
 
                 // Get the next command
                 this.getUserCommands();
@@ -88,13 +98,19 @@ public class PersonalAssistant {
              * TASK COMMANDS
              */
             case "todo": {
-                // Otherwise it is a task
-                StringBuilder taskName = new StringBuilder();
-                for (int i = 1; i < cmdTokens.length; i++) {
-                    String token = cmdTokens[i];
-                    taskName.append(" " + token);
+                // Handle missing inputs
+                if (cmdTokens.length <= 1) {
+                    throw new CommandMissingArgumentException();
                 }
-                Task task = new TodoTask(false, taskName.toString());
+
+                String taskName = cmdTokens[1];
+
+                if (taskName.equals("")) {
+                    throw new CommandMissingArgumentException();
+                }
+
+                // Create the task
+                Task task = new TodoTask(false, taskName);
 
                 // Store the task
                 addTask(task);
@@ -105,30 +121,22 @@ public class PersonalAssistant {
             }
 
             case "deadline": {
-                // Otherwise it is a task
-                StringBuilder taskName = new StringBuilder();
-                // Collate the first segment (taskName)
-                int i = 1;
-                for (; i < cmdTokens.length; i++) {
-                    String token = cmdTokens[i];
-                    if (token.equals("/by")) {
-                        i++;
-                        break;
-                    }
-                    taskName.append(" " + token);
+                // Handle missing inputs
+                if (cmdTokens.length <= 1) {
+                    throw new CommandMissingArgumentException();
                 }
 
-                // Collate the second segment (taskTime)
-                StringBuilder taskTime = new StringBuilder();
-                for (; i < cmdTokens.length; i++) {
-                    String token = cmdTokens[i];
-                    taskTime.append(" " + token);
+                // Arguments
+                String[] arguments = cmdTokens[1].split("/by", 2);
+                if (arguments.length <= 1) {
+                    throw new CommandMissingArgumentException();
                 }
 
+                // Otherwise create the task
                 Task task = new DeadlineTask(
                         false,
-                        taskName.toString(),
-                        taskTime.toString()
+                        arguments[0],
+                        arguments[1]
                 );
 
                 // Store the task
@@ -140,30 +148,22 @@ public class PersonalAssistant {
             }
 
             case "event": {
-                // Otherwise it is a task
-                StringBuilder taskName = new StringBuilder();
-                // Collate the first segment (taskName)
-                int i = 1;
-                for (; i < cmdTokens.length; i++) {
-                    String token = cmdTokens[i];
-                    if (token.equals("/at")) {
-                        i++;
-                        break;
-                    }
-                    taskName.append(" " + token);
+                // Handle missing inputs
+                if (cmdTokens.length <= 1) {
+                    throw new CommandMissingArgumentException();
                 }
 
-                // Collate the second segment (taskTime)
-                StringBuilder taskTime = new StringBuilder();
-                for (; i < cmdTokens.length; i++) {
-                    String token = cmdTokens[i];
-                    taskTime.append(" " + token);
+                // Arguments
+                String[] arguments = cmdTokens[1].split("/at", 2);
+                if (arguments.length <= 1) {
+                    throw new CommandMissingArgumentException();
                 }
 
-                Task task = new DeadlineTask(
+                // Otherwise create the task
+                Task task = new EventTask(
                         false,
-                        taskName.toString(),
-                        taskTime.toString()
+                        arguments[0],
+                        arguments[1]
                 );
 
                 // Store the task
