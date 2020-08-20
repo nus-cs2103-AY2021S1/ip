@@ -1,9 +1,11 @@
 todo read book
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+deadline return book /by 2020-04-12
+event project meeting /at 2020-01-11
 done 3
 todo borrow book
 list
 done 2
-deadline do homework /by no idea :-p
+deadline do homework /by 1998-01-01
+done 4
+find homework
 bye

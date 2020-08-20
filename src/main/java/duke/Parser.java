@@ -10,6 +10,7 @@ import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
+import duke.command.FindCommand;
 
 /**
  * A duke.CommandReader object to parse the user input.
@@ -29,6 +30,8 @@ public class Parser {
 
         try {
             switch (commandWord) {
+            case "find":
+                return new FindCommand(content);
             case "done":
                 return new DoneCommand(content);
             case "delete":
