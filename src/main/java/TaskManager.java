@@ -26,7 +26,7 @@ public class TaskManager {
 
     @Override
     public String toString() {
-        String result = "";
+        String result = "Here are the tasks in your list:\n";
         for (int i = 0; i < taskList.size(); i++) {
             result = result + (i+1) + ". " + taskList.get(i) + "\n";
         }

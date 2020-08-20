@@ -8,12 +8,16 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718");
+    }
+
     public void setDone() {
         this.isDone = true;
     }
 
     @Override
     public String toString() {
-        return this.description;
+        return getStatusIcon() + this.description;
     }
 }

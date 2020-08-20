@@ -18,6 +18,14 @@ public class IOHandler {
             if (text.equals("list")) {
                 System.out.print(taskManager);
 
+            } else if (text.contains("done")) {
+                String[] textArray = text.split(" ", 2);
+                int taskNum = Integer.parseInt(textArray[1]);
+                taskManager.setTaskDone(taskNum);
+
+                System.out.println("Nice! I've marked this task as done:\n"
+                        + taskManager.getTask(taskNum - 1));
+
             } else if (text.length() > 0) {
 
                 Task task = new Task(text);
