@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static List<Task> toDoList = new ArrayList<Task>();
+    public static List<Task> toDoList = new ArrayList<>();
     public static String seperator = "\t____________________________________________________________";
 
     public static void listTask() {
