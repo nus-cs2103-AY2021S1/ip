@@ -29,4 +29,10 @@ public class Deadline extends Task {
         return "[D][" + super.getStatusIcon() + "] " + super.description + " (by: " + this.by + ")";
     }
 
+
+    public String toCustomString() {
+        return "D | " + (super.isDone ? 1 : 0) + " | " + super.description + " | " + by;
+    }
+
+
 }

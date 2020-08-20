@@ -1,7 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,9 +10,10 @@ import java.util.Scanner;
  * Class to handle the saving of files
  */
 public class DukeFileHandler {
+    private static final String path = "data/dukeData.txt";
 
     public static List<Task> readFile() throws FileNotFoundException {
-        File file = new File("data/dukeData.txt");
+        File file = new File(path);
 
         if (!file.exists()) {
             return new ArrayList<>();
@@ -34,7 +36,6 @@ public class DukeFileHandler {
         String[] inputArr = input.split("\\|");
         boolean isDone = inputArr[1].trim().equals("1");
 
-        System.out.println("Task is: " + Arrays.toString(inputArr));
 
         switch (inputArr[0].trim()) {
         case "T":
@@ -47,6 +48,20 @@ public class DukeFileHandler {
         default:
             return null;
         }
+    }
+
+
+    public static void writeToFile(List<Task> list) throws IOException {
+        FileWriter fileWriter = new FileWriter(path);
+        StringBuilder content = new StringBuilder();
+
+        for(Task task : list){
+            content.append(task.toCustomString()).append(System.lineSeparator());
+        }
+
+
+        fileWriter.write(content.toString());
+        fileWriter.close();
     }
 
 }

@@ -45,4 +45,9 @@ public class Task {
     }
 
 
+    public String toCustomString() {
+        return "T | " + (isDone ? 1 : 0) + " | " + description;
+    }
+
+
 }

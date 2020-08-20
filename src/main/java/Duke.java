@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -6,12 +7,6 @@ public class Duke {
     private static List<Task> toDoList;
 
     public static void main(String[] args) {
-
-        try {
-            toDoList = DukeFileHandler.readFile();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
 
 
         String logo = "     ____        _        \n"
@@ -25,6 +20,15 @@ public class Duke {
         displayThis("Hello! I'm Duke\n    What can I remember for you?" +
                 "\n    I only accept list, done and" +
                 "\n    todo, deadline, events");
+
+        try {
+            toDoList = DukeFileHandler.readFile();
+            if (toDoList.size() > 0) {
+                displayList();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         Scanner scanner = new Scanner(System.in);
 
@@ -58,6 +62,12 @@ public class Duke {
 
         switch (command) {
         case "bye":
+            try {
+                DukeFileHandler.writeToFile(toDoList);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             displayThis("Bye. Hope to see you again soon!");
             return false;
 
