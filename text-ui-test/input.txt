@@ -3,4 +3,6 @@ todo borrow book
 todo read book
 todo join sports club
 list
+delete 1
+list
 bye
