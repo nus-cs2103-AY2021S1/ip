@@ -2,6 +2,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+//    public boolean checkValid(String input) {
+//
+//        return true;
+//    }
     public static void main(String[] args) {
 
         // Initialise strings to separate messages from Duke
@@ -25,7 +29,7 @@ public class Duke {
         while (true) {
             // Get input from user
             System.out.println(masterSpeak);
-            input = myObj.nextLine();
+            input = myObj.nextLine().trim();
             System.out.println();
 
             // If user inputs "bye" in any case, end the chat
@@ -71,6 +75,9 @@ public class Duke {
                 continue;
             }
 
+            // Variable to check validity of command. True by default
+            boolean valid = true;
+
             // Determine what kind of task it is
             Task t;
             String[] inputSplit;
@@ -78,6 +85,10 @@ public class Duke {
             switch (input.toLowerCase().split(" ")[0]) {
                 case "deadline":
                     inputSplit = input.split(" /by ");
+//                    if (inputSplit.length == 1) {
+//                        valid = false;
+//                        break;
+//                    }
                     String by = inputSplit[1];
                     description = inputSplit[0].substring(8);
                     t = new Deadline(description, by);
@@ -90,6 +101,10 @@ public class Duke {
                     break;
                 case "event":
                     inputSplit = input.split(" /at ");
+//                    if (inputSplit.length == 1) {
+//                        valid = false;
+//                        break;
+//                    }
                     String at = inputSplit[1];
                     description = inputSplit[0].substring(5);
                     t = new Event(description, at);
