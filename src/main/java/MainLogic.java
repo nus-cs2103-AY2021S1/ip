@@ -23,6 +23,9 @@ public class MainLogic {
 
     private boolean commandCheck(String string) {
         switch (string) {
+            case "!command":
+                Text.printCommands();
+                return true;
             case "bye":
                 bye = true;
                 Text.printEndMessage();
