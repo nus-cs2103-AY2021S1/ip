@@ -6,7 +6,7 @@ public class Duke {
         String welcome = "Hello. I am Claude! What may I do for you today?";
         String goodbye = "Goodbye! Hope to see you again soon!";
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> taskList = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
 
         System.out.println(welcome);
         while (sc.hasNext()) {
@@ -16,14 +16,19 @@ public class Duke {
             } else if (command.equals("list")) {
                 System.out.println(printList(taskList));
             } else {
-                taskList.add(command);
-                System.out.println("\n Task added: " + command);
+                addNewTask(command, taskList);
             }
         }
         System.out.println(goodbye);
     }
 
-    private static String printList(ArrayList<String> al) {
+    private static void addNewTask(String description, ArrayList<Task> taskList) {
+        Task task = new Task(description);
+        taskList.add(task);
+        System.out.println("\n Task added: " + description);
+    }
+
+    private static String printList(ArrayList<Task> al) {
         if (al.isEmpty()) {
             return "List is empty!";
         } else {
