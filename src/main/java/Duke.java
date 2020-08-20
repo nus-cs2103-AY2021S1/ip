@@ -24,7 +24,7 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         List<Task> taskArr = new ArrayList<>();
-        String[] cmdArr = {"help", "add", "list", "done", "bye"};
+        String[] cmdArr = {"help", "add", "list", "done", "delete", "bye"};
 
         String input = sc.nextLine().toLowerCase();
 
@@ -36,15 +36,29 @@ public class Duke {
                 } else if (input.equals("add")) {
                     processAdd(taskArr, sc);
                 } else if (input.equals("list")) {
+                    if (taskArr.isEmpty()) {
+                        throw new EmptyListException("There are no tasks on your list");
+                    }
                     processList(taskArr);
                 } else if (input.equals("done")) {
+                    if (taskArr.isEmpty()) {
+                        throw new EmptyListException("There are no tasks on your list");
+                    }
                     processDone(taskArr, sc);
+                } else if (input.equals("delete")) {
+                    if (taskArr.isEmpty()) {
+                        throw new EmptyListException("There are no tasks on your list");
+                    }
+                    processDelete(taskArr, sc);
                 } else {
                     throw new UnknownCommandException("Sorry I didn't understand that :(");
                 }
-            } catch (UnknownCommandException e) {
-                System.out.println(e.getMessage());
+            } catch (UnknownCommandException e1) {
+                System.out.println(e1.getMessage());
                 System.out.println("How about entering 'help' instead?");
+            } catch (EmptyListException e) {
+                System.out.println(e.getMessage());
+                System.out.println("Use the 'add' command to start adding tasks!");
             }
             System.out.println(divider);
             System.out.println("What else would you like to do?");
@@ -128,20 +142,12 @@ public class Duke {
     }
 
     public static void processList(List<Task> taskArr) {
-        try {
-            if (taskArr.isEmpty()) {
-                throw new EmptyListException("There are no tasks on your list");
-            }
             System.out.println("These are the tasks on your list:");
             for (int j = 0; j < taskArr.size(); j++) {
                 System.out.println((j + 1)
                         + ". "
                         + taskArr.get(j).toString());
             }
-        } catch (EmptyListException e) {
-            System.out.println(e.getMessage());
-            System.out.println("Use the 'add' command to start adding tasks!");
-        }
     }
 
     public static void processDone(List<Task> taskArr, Scanner sc) throws IndexOutOfBoundsException {
@@ -162,6 +168,22 @@ public class Duke {
         } catch (InvalidDoneCommandException e) {
             System.out.println(e.getMessage());
             System.out.println("Check out each task's status by using 'list'!");
+        }
+    }
+
+    public static void processDelete(List<Task> taskArr, Scanner sc) throws IndexOutOfBoundsException {
+        System.out.println("Which task do you want to delete?");
+        int taskNum = sc.nextInt();
+        sc.nextLine();
+        try {
+            Task task = taskArr.get(taskNum - 1);
+            taskArr.remove(taskNum - 1);
+            System.out.println("Alright, the following task has been removed:");
+            System.out.println(task.toString());
+            System.out.println("You now have " + taskArr.size() + " tasks on your list");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Sorry that task doesn't exist :/");
+            System.out.println("Try using 'list' to find out what tasks you have!");
         }
     }
 }
