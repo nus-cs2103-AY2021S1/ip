@@ -44,6 +44,9 @@ public class Duke {
                         String at = event[1].trim();
                         Task task = new Event(description, at);
                         addTask(task);
+                    } else if (command.startsWith("delete")) {
+                        int position = Integer.parseInt(command.substring(7));
+                        deleteTask(position);
                     } else {
                         errorMessage = "Sorry! I don't know what that means...";
                         throw new DukeException(errorMessage);
@@ -71,6 +74,13 @@ public class Duke {
     public static void addTask(Task task) {
         tasks.add(task);
         System.out.println("Okay! Task added for you!");
+        System.out.println(task);
+        System.out.println("Now you have " + tasks.size() + " task(s) in the list." + "\n");
+    }
+
+    public static void deleteTask(int index) {
+        Task task = tasks.remove(index - 1);
+        System.out.println("Noted. The following task is removed");
         System.out.println(task);
         System.out.println("Now you have " + tasks.size() + " task(s) in the list." + "\n");
     }
