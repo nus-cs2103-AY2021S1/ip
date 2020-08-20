@@ -27,6 +27,10 @@ public class Wish {
                     onDoneCommand(database, sc);
                     break;
 
+                case "delete":
+                    onDeleteCommand(database, sc);
+                    break;
+
                 case "todo":
                     onToDoCommand(database, sc);
                     break;
@@ -69,6 +73,31 @@ public class Wish {
                 System.out.println((i + 1) + ". " + database.get(i));
             }
         }
+    }
+
+    private static void onDeleteCommand(ArrayList<Task> database, Scanner sc) {
+        if (database.size() == 0) {
+            System.out.println("There are no tasks in the database to delete");
+        } else {
+            try {
+                int index = sc.nextInt();
+
+                if (index > database.size()) {
+                    throw new Exception("Index cannot be greater than size of database");
+                }
+
+                Task removedTask = database.remove(index - 1);
+                System.out.println("Noted! I have removed this task:");
+                System.out.println(removedTask);
+                System.out.println("Now you have " + database.size() + " tasks in your list");
+            } catch (InputMismatchException e) {
+                System.out.println("Index must be a number");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        sc.nextLine();
     }
 
     private static void onDoneCommand(ArrayList<Task> database, Scanner sc) {
