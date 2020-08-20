@@ -9,7 +9,7 @@ Duke> What can I do for you?
 >> Duke> Your Task List is empty.
 >> Duke> Enter task details:
 >> Duke> I've added 'go running' to your Task List
->> Duke> Enter task details:
+>> Duke> Enter Event details:
 >> Duke> I've added 'concert' to your Task List
 >> Duke> Enter task details:
 >> Duke> I've added 'cs2103 proj' to your Task List
@@ -21,7 +21,7 @@ Duke> What can I do for you?
 1. [T][✘] go running
 2. [E][✘] concert (at: Mon 2pm-3pm)
 3. [D][✘] cs2103 proj (by: Tues)
-Choose the tasks to be marked as 'Done'
+Choose the task(s) to be marked as 'Done'
 >> Duke> Nice! I've marked the following as done:
 [D][✓] cs2103 proj (by: Tues)
 [T][✓] go running
@@ -29,5 +29,38 @@ Choose the tasks to be marked as 'Done'
 1. [T][✓] go running
 2. [E][✘] concert (at: Mon 2pm-3pm)
 3. [D][✓] cs2103 proj (by: Tues)
->> Duke> Unrecognised Command :(, type 'help' for available commands
+>> Duke> Unrecognised Command :(, type 'help' for available commands.
+>> Duke> Here's your Task List:
+1. [T][✓] go running
+2. [E][✘] concert (at: Mon 2pm-3pm)
+3. [D][✓] cs2103 proj (by: Tues)
+Choose the task(s) to be deleted.
+>> Duke> This task #99 does not exist.
+Duke> I've deleted the task(s) you specified:
+[E][✘] concert (at: Mon 2pm-3pm)
+>> Duke> Here's your Task List:
+1. [T][✓] go running
+2. [D][✓] cs2103 proj (by: Tues)
+Choose the task(s) to be deleted.
+>> Duke> I've deleted the task(s) you specified:
+[D][✓] cs2103 proj (by: Tues)
+[T][✓] go running
+>> Duke> Your Task List is empty. There's nothing to be deleted.
+>> Duke> Your Task List is empty.
+>> Duke> Your Task List is empty. There's nothing to be done.
+>> Here's what I can do:
+Available Commands:
+'todo'
+'deadline'
+'event'
+'list'
+'delete'
+'bye'
+>> Duke> Enter Event details:
+>> Duke> Yo! Command Syntax Error. '<Event Details> /at <Event Time>'
+Duke> Enter Event details:
+>> Duke> Yo! Event details/time are missing.
+Duke> Enter Event details:
+>> Duke> I've added 'briefing' to your Task List
+>> Duke> Unrecognised Command :(, type 'help' for available commands.
 >> Duke> See you soon!

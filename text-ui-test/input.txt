@@ -10,4 +10,17 @@ done
 3 1
 list
 blah
+delete
+2 99
+delete
+1 2
+delete
+list
+done
+help
+event
+briefing at Monday 3pm
+briefing /at
+briefing /at Monday 3pm
+ls
 bye

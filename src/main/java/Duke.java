@@ -210,7 +210,7 @@ public class Duke {
                     break;
                 default:
                     try {
-                        throw new DukeException("Unrecognised Command :(, type 'help' for available commands");
+                        throw new DukeException("Unrecognised Command :(, type 'help' for available commands.");
                     } catch (DukeException e) {
                         System.out.println(duke + e.getMessage());
                     }
