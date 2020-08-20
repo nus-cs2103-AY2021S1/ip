@@ -1,0 +1,7 @@
+todo read book
+deadline return book /by next monday
+event family dinner /at tonight 9pm
+list
+done 2
+list
+bye
