@@ -52,12 +52,23 @@ public class Duke {
     }
 
     // this function prints the task that is completed
-    public static void printDone(ArrayList<Task> tasks, int doneTask) {
-        Task t = tasks.get(doneTask);
+    public static void printDone(ArrayList<Task> tasks, int taskNumber) {
+        Task t = tasks.get(taskNumber);
         t.markAsDone();
         System.out.println(LINE);
         System.out.println("     Nice! I've marked this task as done: ");
         System.out.println("       " + t.toString());
+        System.out.println(LINE);
+    }
+
+    // this function deletes the task
+    public static void deleteTask(ArrayList<Task> tasks, int taskNumber) {
+        Task t = tasks.get(taskNumber);
+        tasks.remove(taskNumber);
+        System.out.println(LINE);
+        System.out.println("     Noted. I've removed this task: ");
+        System.out.println("       " + t.toString());
+        System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
         System.out.println(LINE);
     }
 
@@ -75,13 +86,13 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            // if the user inputs a "bye", we simply break out of the Duke program
+            // if the user inputs a "bye" command, we simply break out of the Duke program
             if (sc.hasNext("bye")) {
                 goodbye();
                 break;
             }
 
-            // if the user inputs a "list", Duke will iterate through the added text and print them in the order
+            // if the user inputs a "list" command, Duke will iterate through the added text and print them in the order
             // they were given to Duke.
             if (sc.hasNext("list")) {
                 list(tasks);
@@ -89,30 +100,41 @@ public class Duke {
                 continue;
             }
 
+            // if the user inputs a "done" command followed by a valid number, Duke will change the valid numbered
+            // task to done
             if (sc.hasNext("done")) {
                 try {
                     sc.skip("done");
-                    if (!sc.hasNextInt()) {
+                    String input = sc.nextLine().trim();
+                    if (input.length() == 0) {
                         throw new MissingNumberFromDoneCommandException();
                     }
-                    int taskNumber = Integer.parseInt(sc.next().trim()) - 1;
+                    int taskNumber = Integer.parseInt(input);
                     if (taskNumber < 0 || taskNumber > tasks.size()) {
                         throw new InvalidNumberFromDoneCommandException();
                     }
-                    sc.nextLine();
-                    printDone(tasks, taskNumber);
+                    printDone(tasks, taskNumber - 1);
                     continue;
                 }
 
                 catch (MissingNumberFromDoneCommandException e) {
                     System.out.println(LINE);
-                    System.out.println("     ☹ OOPS!!! Please type in the done command followed by a task number.");
+                    System.out.println("     ☹ OOPS!!! Please type in the \"done\" command followed by a valid task number.");
                     System.out.println(LINE);
+                    continue;
                 }
+                catch (NumberFormatException e) {
+                    System.out.println(LINE);
+                    System.out.println("     ☹ OOPS!!! The \"done\" command must be followed by a valid task number.");
+                    System.out.println(LINE);
+                    continue;
+                }
+
                 catch (InvalidNumberFromDoneCommandException e) {
                     System.out.println(LINE);
-                    System.out.println("     ☹ OOPS!!! The done command must be followed by a valid task number.");
+                    System.out.println("     ☹ OOPS!!! The \"done\" command must be followed by a valid task number.");
                     System.out.println(LINE);
+                    continue;
                 }
             }
 
@@ -201,11 +223,38 @@ public class Duke {
                     }
                     ToDo t = new ToDo(task);
                     addTask(t, tasks);
+                    continue;
                 }
 
                 catch (MissingDescriptionException e) {
                     System.out.println(LINE);
                     System.out.println("     ☹ OOPS!!! The description of a todo cannot be empty.");
+                    System.out.println(LINE);
+                }
+            }
+
+            if (sc.hasNext("delete")) {
+                try {
+                    sc.skip("delete");
+                    if (!sc.hasNextInt()) {
+                        throw new MissingNumberFromDoneCommandException();
+                    }
+                    int taskNumber = Integer.parseInt(sc.next().trim()) - 1;
+                    if (taskNumber < 0 || taskNumber > tasks.size()) {
+                        throw new InvalidNumberFromDoneCommandException();
+                    }
+                    deleteTask(tasks, taskNumber);
+                    continue;
+                }
+
+                catch (MissingNumberFromDoneCommandException e) {
+                    System.out.println(LINE);
+                    System.out.println("     ☹ OOPS!!! Please type in the delete command followed by a task number.");
+                    System.out.println(LINE);
+                }
+                catch (InvalidNumberFromDoneCommandException e) {
+                    System.out.println(LINE);
+                    System.out.println("     ☹ OOPS!!! The delete command must be followed by a valid task number.");
                     System.out.println(LINE);
                 }
             }
