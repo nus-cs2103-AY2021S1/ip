@@ -19,9 +19,9 @@ public class Task {
     public String toString() {
         String check;
         if (this.done) {
-            check = "✓";
+            check = "\u2713";
         } else {
-            check = "✗";
+            check = "\u2718";
         }
         return "[" + check + "] " + this.name;
     }

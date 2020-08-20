@@ -1,2 +1,12 @@
-derp
+todo borrow book
+todo read book
+event book sharing /at Fri 2pm
+deadline return book /by Saturady all day anytime :D
+todo find new book
+deadline become rich /by soon
+list
+done 3
+list
+done 5
+list
 bye

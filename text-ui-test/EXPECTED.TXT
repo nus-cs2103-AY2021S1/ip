@@ -5,5 +5,44 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-derp
+Got it. I've added this task:
+	[T][?] borrow book
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+	[T][?] read book
+Now you have 2 tasks in the list.
+Got it. I've added this task:
+	[E][?] book sharing  (at: Fri 2pm)
+Now you have 3 tasks in the list.
+Got it. I've added this task:
+	[D][?] return book  (by: Saturady all day anytime :D)
+Now you have 4 tasks in the list.
+Got it. I've added this task:
+	[T][?] find new book
+Now you have 5 tasks in the list.
+Got it. I've added this task:
+	[D][?] become rich  (by: soon)
+Now you have 6 tasks in the list.
+1. [T][?] borrow book
+2. [T][?] read book
+3. [E][?] book sharing  (at: Fri 2pm)
+4. [D][?] return book  (by: Saturady all day anytime :D)
+5. [T][?] find new book
+6. [D][?] become rich  (by: soon)
+Nice! I've marked this task as done:
+	[E][?] book sharing  (at: Fri 2pm)
+1. [T][?] borrow book
+2. [T][?] read book
+3. [E][?] book sharing  (at: Fri 2pm)
+4. [D][?] return book  (by: Saturady all day anytime :D)
+5. [T][?] find new book
+6. [D][?] become rich  (by: soon)
+Nice! I've marked this task as done:
+	[T][?] find new book
+1. [T][?] borrow book
+2. [T][?] read book
+3. [E][?] book sharing  (at: Fri 2pm)
+4. [D][?] return book  (by: Saturady all day anytime :D)
+5. [T][?] find new book
+6. [D][?] become rich  (by: soon)
 Bye. Hope to see you again soon!
