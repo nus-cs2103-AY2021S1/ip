@@ -1,5 +1,3 @@
-package main.java;
-
 public class Task {
     protected String name;
     protected boolean isDone;

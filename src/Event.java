@@ -1,6 +1,4 @@
-package main.java;
-
-public class Event extends Task{
+public class Event extends Task {
 
     private String timePeriod;
 

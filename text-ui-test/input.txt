@@ -1,1 +1,6 @@
-list
+todo homework
+deadline return book/by Monday
+event team meeting/at Tuesday
+deadline project
+delete 1
+bye

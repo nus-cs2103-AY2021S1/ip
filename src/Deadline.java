@@ -1,6 +1,4 @@
-package main.java;
-
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     private String dueDate;
 
