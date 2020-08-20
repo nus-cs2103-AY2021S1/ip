@@ -35,10 +35,26 @@ public class DukeList {
         if (index >= this.list.size() || index < 0) {
             return "Please choose a valid task to mark as done";
         }
-        this.activeTasks -= 1;
-        this.completedTasks += 1;
-        return this.list.get(index).markDone() + "\nActive Tasks: " +
-                this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
+        if (!this.list.get(index).done) {
+            this.activeTasks -= 1;
+            this.completedTasks += 1;
+            return this.list.get(index).markDone() + "\nActive Tasks: " +
+                    this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
+        }
+        return "The task is already done!";
+    }
+
+    public String revertDone(int index) {
+        if (index >= this.list.size() || index < 0) {
+            return "Please choose a valid task to mark as not done";
+        }
+        if (this.list.get(index).done) {
+            this.activeTasks += 1;
+            this.completedTasks -= 1;
+            return this.list.get(index).revertDone() + "\nActive Tasks: " +
+                    this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
+        }
+        return "The task is not yet done!";
     }
 
     @Override

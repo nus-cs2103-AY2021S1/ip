@@ -21,6 +21,7 @@ public class Command {
 
 
             case ("list"):
+            case ("undo"):
             case ("done"):
             case ("delete"):
                 try {
@@ -81,6 +82,10 @@ public class Command {
                     return list.markDone(Integer.parseInt(stringList.get(0)) - 1);
                 } else {
                     throw new DukeException("Please choose a task to mark as done, with \"done <task number>\"");
+                }
+            case("undo"):
+                if (!stringList.isEmpty()) {
+                    return list.revertDone(Integer.parseInt(stringList.get(0)) - 1);
                 }
             case("delete"):
                 if (!stringList.isEmpty()) {

@@ -11,7 +11,12 @@ public abstract class Task {
     String markDone() {
         this.done = true;
         return "Great job, keep it up!\n" + this.toString();
-    };
+    }
+
+    String revertDone() {
+        this.done = false;
+        return "Guess you made a mistake huh?\n" + this.toString();
+    }
 
     @Override
     public String toString() {
