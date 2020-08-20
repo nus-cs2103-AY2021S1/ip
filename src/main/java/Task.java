@@ -5,9 +5,9 @@ public class Task {
 
         public String statusToSymbol() {
             if (this == DONE) {
-                return "[✓] ";
+                return "[\u2713] ";
             } else {
-                return "[✗] ";
+                return "[\u2718] ";
             }
         }
 

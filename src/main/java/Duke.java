@@ -9,7 +9,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         ////Beginning of my own code:
-        System.out.println("Hello! Duke at your serve. Please name your request.");
+        System.out.println("Hello! Duke at your service. Please name your request.");
         Scanner sc = new Scanner(System.in);
 
         //Object to store the list
