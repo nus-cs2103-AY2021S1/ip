@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Duke {
     private final Ui ui;
     private Storage storage;
@@ -23,31 +21,22 @@ public class Duke {
     public void run() {
         // Initial greeting, prompt user for commands
         ui.printWelcome();
+        boolean isExit = false;
 
-        // Start scanning for user input
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-
-        // Loop continues echoing input until input == "bye"
-        while (!input.equals("bye")) {
-            // Print top border
-            ui.printBorder();
-
+        while (!isExit) {
             try {
+                String input = ui.readInput();
+                ui.printBorder(); // Print top border
                 Command c = Parser.parse(input);
                 c.execute(tasks, ui, storage);
+                isExit = c.isExit();
             } catch (DukeException e) {
                 ui.printGeneralChatWindow(e.toString());
             } finally {
-                // Print bottom border
-                ui.printBorder();
-
-                // Scan for any more inputs
-                input = sc.nextLine();
+                ui.printBorder(); // Print bottom border
             }
         }
 
-        // Print goodbye chat window
-        ui.printGoodbye();
+        ui.printLogo();
     }
 }

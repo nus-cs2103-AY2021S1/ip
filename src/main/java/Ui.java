@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Scanner;
 
 public class Ui {
     private static final String logo = "     ___   ____    __    ____  _______     _______.  ______   .___  ___.  _______          ______\n"
@@ -10,6 +11,11 @@ public class Ui {
     private static final String indent = "    ";
     private static final String doubleIndent = indent + indent;
     private static final String border = "_________________________________________________________";
+    private final Scanner scanner;
+
+    public Ui() {
+        scanner = new Scanner(System.in);
+    }
 
     // Initial greeting, prompt user for commands
     public void printWelcome() {
@@ -17,6 +23,11 @@ public class Ui {
         printBorder();
         printGeneralChatWindow("Greetings! I'm Awesome-O.", "What can I do for you?");
         printBorder();
+    }
+
+    // Reads user input
+    public String readInput() {
+        return scanner.nextLine();
     }
 
     // Prints a chat window showing the list of tasks
@@ -55,10 +66,7 @@ public class Ui {
 
     // Print goodbye chat window
     public void printGoodbye() {
-        printBorder();
         printGeneralChatWindow("Thank you for talking to Awesome-O.", "Have a nice day. Goodbye!");
-        printBorder();
-        printLogo();
     }
 
     // Prints an indented chat window with a customised message
@@ -74,7 +82,7 @@ public class Ui {
     }
 
     // Prints Duke logo
-    private void printLogo() {
+    public void printLogo() {
         System.out.println(logo);
     }
 

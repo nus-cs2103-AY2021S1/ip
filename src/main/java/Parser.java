@@ -22,6 +22,9 @@ public class Parser {
             case "deadline":
                 return new AddTaskCommand("deadline", input);
 
+            case "bye":
+                return new ByeCommand();
+
             default:
                 return new UnknownCommand();
         }
