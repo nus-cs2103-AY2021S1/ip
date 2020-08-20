@@ -16,12 +16,14 @@ public class Duke {
         String greeting = "Hello mah dud, itza handsome robo speakin\n" +
                 "What duh hell du yu wan?";
         System.out.println(greeting);
+//        WriteFile.writeInitial(greeting);
     }
 
     private static void farewell() {
         String farewell = "Never come back,\n" +
                 "dun wanna see yu ever agin";
         System.out.println(farewell);
+//        WriteFile.writeFinally(farewell);
     }
 
     private static void add(String toAdd, TaskType taskType) {
@@ -46,20 +48,30 @@ public class Duke {
         }
         texts.add(task);
         System.out.println("Got it, here yur task bij");
+//        WriteFile.writeFinally("Got it, here yur task bij");
         System.out.println(task.toString());
+//        WriteFile.writeFinally(task.toString());
         System.out.println("Now you have " + texts.size() + " tasks in the list.");
+//        WriteFile.writeFinally("Now you have " + texts.size() + " tasks in the list.");
     }
 
 
     private static void processDone(String s) {
         System.out.println("okcan done:");
-        System.out.println(texts.get(Integer.parseInt(s) - 1).markAsDone());
+//        WriteFile.writeFinally("okcan done:");
+        String i = texts.get(Integer.parseInt(s) - 1).markAsDone();
+        System.out.println(i);
+//        WriteFile.writeFinally(i);
     }
 
     private static void processDelete(String s) {
         System.out.println("okcan done:");
-        System.out.println(texts.remove(Integer.parseInt(s) - 1));
+//        WriteFile.writeFinally("okcan done:");
+        String i = texts.remove(Integer.parseInt(s) - 1).toString();
+        System.out.println(i);
+//        WriteFile.writeFinally(i);
         System.out.println("Now you have " + texts.size() + " tasks in the list.");
+//        WriteFile.writeFinally("Now you have " + texts.size() + " tasks in the list.");
     }
 
     private static void testNextLineSplit(String nextLine) throws EmptyDescriptionException, UnknownCommandException {
@@ -100,6 +112,7 @@ public class Duke {
                 System.out.println("Here yur tasks faggit: ");
                 for (Task i : texts) {
                     System.out.println(num + "." + i.toString());
+//                    WriteFile.writeFinally(num + "." + i.toString());
                     num++;
                 }
                 return false;
@@ -108,6 +121,7 @@ public class Duke {
                     testNextLineSplit(nextLine);
                 } catch (UnknownCommandException | EmptyDescriptionException e) {
                     System.out.println(e.toString());
+//                    WriteFile.writeFinally(e.toString());
                 }
                 return false;
         }
@@ -115,6 +129,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+//        WriteFile.reset();
         greet();
         boolean saidBye = false;
         while (!saidBye) {
