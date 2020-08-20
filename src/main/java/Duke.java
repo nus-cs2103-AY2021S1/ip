@@ -4,16 +4,11 @@ import java.nio.channels.NonWritableChannelException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.lang.StringBuilder;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 public class Duke {
     private static final String line = "____________________________________________________________\n";
     private static final String bye = "bye";
-    private static final String list = "list";
-    private static final String done = "done";
-    private static final String todo = "todo";
-    private static final String deadline = "deadline";
-    private static final String event = "event";
-    private static final String delete = "delete";
     private ArrayList<Task> inputList;
 
     private Duke() {
@@ -44,23 +39,26 @@ public class Duke {
 
     private String inputHandler(String input) throws InvalidArgumentException, InvalidCommandException {
         String[] commands = input.split(" ", 2);
+        Commands current;
         try {
-            if (commands[0].equals(list)) {
-                return display();
-            } else if (commands[0].equals(done) && commands.length == 2) {
-                return updateTask(Integer.valueOf(commands[1]));
-            } else if (commands[0].equals(todo)) {
-                return addTodo(commands[1]);
-            } else if (commands[0].equals(event)) {
-                String[] arr = commands[1].split("/at");
-                return addEvent(arr[0], arr[1]);
-            } else if (commands[0].equals(deadline)) {
-                String[] arr = commands[1].split("/by");
-                return addDeadline(arr[0], arr[1]);
-            } else if (commands[0].equals(delete)) {
-                return deleteTask(Integer.valueOf(commands[1]));
-            } else {
-                throw new InvalidCommandException("");
+            current = Commands.valueOf(commands[0].toUpperCase());
+            switch(current) {
+                case LIST:
+                    return display();
+                case DONE:
+                    return updateTask(Integer.valueOf(commands[1]));
+                case TODO:
+                    return addTodo(commands[1]);
+                case EVENT:
+                    String[] arr = commands[1].split("/at");
+                    return addEvent(arr[0], arr[1]);
+                case DEADLINE:
+                    String[] arr2 = commands[1].split("/by");
+                    return addDeadline(arr2[0], arr2[1]);
+                case DELETE:
+                    return deleteTask(Integer.valueOf(commands[1]));
+                default:
+                    throw new InvalidCommandException("");
             }
         } catch (ArrayIndexOutOfBoundsException exception) {
             throw new InvalidArgumentException("Sorry, your argument cannot be empty!");
