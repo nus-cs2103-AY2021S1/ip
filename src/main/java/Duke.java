@@ -85,6 +85,25 @@ public class Duke {
                 continue;
             }
 
+            // If user requests delete, delete selected task
+            if (input.contains("delete ")) {
+                // Get the index stated after "delete" by parsing the string
+                int index = Integer.parseInt(input.substring(7)) - 1;
+
+                // Check if index is out of bounds
+                if (index >= userTasks.size()) {
+                    System.out.println(servantSpeak
+                            + dE.MESSAGE_INDEX_OUT_OF_BOUNDS);
+                } else {
+                    System.out.println(servantSpeak
+                            + "    As you wish Sire. I removed this task:\n"
+                            + "       " + userTasks.get(index).toString());
+                    userTasks.remove(index);
+                }
+                System.out.println();
+                continue;
+            }
+
             // If user requests for list, display list of tasks
             if (input.equals("list")) {
                 int count = 1;
