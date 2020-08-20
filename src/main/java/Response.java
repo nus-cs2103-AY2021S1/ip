@@ -25,7 +25,7 @@ public class Response {
         this.tag = tag;
     }
 
-    public void printResponse() {
+    public String getResponse() {
         String line = "    __________________________________________________________ \n";
         String linesOfText = "";
         if (this.tag == Tag.LIST) {
@@ -49,6 +49,6 @@ public class Response {
             }
         }
         String output = line + linesOfText + line;
-        System.out.println(output);
+        return output;
     }
 }
