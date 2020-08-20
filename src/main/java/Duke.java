@@ -26,7 +26,12 @@ public class Duke {
                 displayList();
             }
             else if(msg.contains("done")) {
-                done(msg);
+                int index = Integer.parseInt(msg.replace("done ", "").trim());
+                done(index);
+            }
+            else if(msg.contains("delete")) {
+                int index = Integer.parseInt(msg.replace("delete ", "").trim());
+                delete(index);
             }
             else if(msg.contains("todo")){
                 addToList(msg.replace("todo ", ""), Type.TODO);
@@ -54,6 +59,9 @@ public class Duke {
             System.out.println(count + ". " + todo.toString());
             count++;
         }
+        if(count == 1) {
+            System.out.println("No more tasks! Great job");
+        }
     }
 
     void addToList(String msg, Type type) {
@@ -80,14 +88,25 @@ public class Duke {
 
     }
 
-    void done(String msg) {
-        int index = Integer.parseInt(msg.split(" ")[1]) - 1;
+    void done(int index) {
+        index--;
         if(index < 0 || index >= ls.size()) {
             System.out.println(sadFace + spacing + "Poco cannot find the task: " + index);
         } else {
             ls.get(index).done();
             System.out.println(face2 + spacing + "Good job!");
             System.out.println(ls.get(index).toString());
+        }
+    }
+
+    void delete(int index) {
+        index--;
+        if(index < 0 || index >= ls.size()) {
+            System.out.println(sadFace + spacing + "Poco cannot find the task: " + index);
+        } else {
+            System.out.println(face3 + spacing + "Poco has deleted the task");
+            System.out.println(ls.get(index).toString());
+            ls.remove(index);
         }
     }
 }
