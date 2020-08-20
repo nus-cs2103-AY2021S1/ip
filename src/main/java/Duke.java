@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    private static final String logo = " ____        _        \n"
+    private static final String logo = " ____        _\n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -29,7 +29,7 @@ public class Duke {
 
         ArrayList<Task> tasks = new ArrayList<>();
 
-        System.out.println("Hi, my nmae is \n" + logo + "\n\n" +
+        System.out.println("Hi, my nmae is\n" + logo + "\n\n" +
                 "How can I hlep you taody?\n" + line);
 
         while (running) {
