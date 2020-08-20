@@ -11,7 +11,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         Scanner myScanner = new Scanner(System.in);
-        String str[] = new String[100];
+        Task tasks[] = new Task[100];
         int numTask = 0;
         while(true) {
             String cmd = myScanner.nextLine();
@@ -20,12 +20,22 @@ public class Duke {
                 break;
             }
             else if(cmd.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 for(int i = 1; i <= numTask; ++i) {
-                    System.out.println(i + ". " + str[i - 1]);
+                    System.out.println(i + ".[" + tasks[i - 1].getStatusIcon() + "] " + tasks[i - 1].getDescription());
                 }
             }
+            else if(cmd.substring(0, 5).equals("done ")) {
+                int c = 0;
+                for(int i = 5; i < cmd.length(); ++i) {
+                    c = c * 10 + cmd.charAt(i) - '0';
+                }
+                System.out.println("Nice! I've marked this task as done:");
+                tasks[c - 1].done();
+                System.out.println("[" + tasks[c - 1].getStatusIcon() + "] " + tasks[c - 1].getDescription());
+            }
             else {
-                str[numTask] = cmd;
+                tasks[numTask] = new Task(cmd);
                 numTask++;
                 System.out.println("added: " + cmd);
             }
