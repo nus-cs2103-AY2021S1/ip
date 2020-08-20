@@ -8,4 +8,5 @@ done 2
 list
 delete 200
 delete 1
+list
 bye
