@@ -1,7 +1,7 @@
 Mr Camel says hello. What can Mr Camel do for you today?
                   ,,__
         ..  ..   / o._)
-       /--'/--\  \-'||
+       /--'/--\  \-'|| 
       /        \_/ / |
     .'\  \__\  __.'.'
       )\ |  )\ |
@@ -9,37 +9,46 @@ Mr Camel says hello. What can Mr Camel do for you today?
     ||_  \\|_  \\_
     '--' '--'' '--'
 
+	_________________________________________
 
-    _________________________________________
+	Mr Camel has added: [T][ ] borrow book
+	Number of tasks: 1
+	_________________________________________
 
-      Mr Camel has added: [T][ ] borrow book
-      Number of tasks: 1
-    _________________________________________
+	_________________________________________
 
+	Tasks:
+	1. [T][ ] borrow book
+	_________________________________________
 
-    _________________________________________
+	_________________________________________
 
-      Mr Camel has added: [D][ ] return book (by:  Sunday)
-      Number of tasks: 2
-    _________________________________________
+	Mr Camel has added: [D][ ] return book (by: tmr)
+	Number of tasks: 2
+	_________________________________________
 
+	_________________________________________
 
-    _________________________________________
+	Mr Camel has added: [E][ ] project meeting (at: Mon 2-4pm)
+	Number of tasks: 3
+	_________________________________________
 
-      Mr Camel has added: [E][ ] project meeting (at:  Mon 2-4pm)
-      Number of tasks: 3
-    _________________________________________
+	_________________________________________
 
-    _________________________________________
+	Mr Camel will mark this task as done:
+	[D][X] return book (by: tmr)
+	_________________________________________
 
-      Tasks:
-      1. [T][ ] borrow book
-      2. [D][ ] return book (by:  Sunday)
-      3. [E][ ] project meeting (at:  Mon 2-4pm)
-    _________________________________________
+	_________________________________________
 
-    _________________________________________
+	Tasks:
+	1. [T][ ] borrow book
+	2. [D][X] return book (by: tmr)
+	3. [E][ ] project meeting (at: Mon 2-4pm)
+	_________________________________________
 
-      Mr Camel will mark this task as done:
-        [D][X] return book (by:  Sunday)
-    _________________________________________
+	_________________________________________
+
+	Bye. Mr Camel will miss you! :(
+	_________________________________________
+
