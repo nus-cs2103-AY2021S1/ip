@@ -88,13 +88,13 @@ public class CommandAgent {
 
     /**
      * Creates different types of tasks based on the identifier stored in the taskInfo.
-     * Sets default option to Todo task.
-     * The CommandReader has ensured no erroneous keyword will be sent to agent.
+     * The Parser has ensured no erroneous keyword will be sent to agent.
      *
      * @param taskInfo A list of String containing all the relevant information for the task.
      * @return A correct type of Task object.
      * @throws DateTimeParseException If any schedule cannot be parsed by the LocalDate formatter.
-     * @throws DukeException If the a task with the same name is already stored in the list.
+     * @throws DukeException If the a task with the same name is already stored in the list or
+     * the identifier is none of "E", "D" or "T".
      */
     public static Task createTask(List<String> taskInfo) throws DateTimeParseException, DukeException {
         String identifier = taskInfo.get(0);
@@ -112,14 +112,16 @@ public class CommandAgent {
                 schedule = taskInfo.get(2);
                 LocalDate deadlineTime = LocalDate.parse(schedule);
                 return new Deadline(name, false, deadlineTime);
-            default:
+            case "T":
                 return new Todo(name, false);
+            default:
+                throw new DukeException("☹ OOPS!!! This type of task cannot be created by me!");
             }
         }
     }
 
     /**
-     * Generates the feedback for a task creation.
+     * Generates the response for a task creation.
      *
      * @return A String suggesting the completion of task creation.
      */
@@ -133,7 +135,7 @@ public class CommandAgent {
     }
 
     /**
-     * Generates the feedback for an update of task status.
+     * Generates the response for an update of task status.
      *
      * @param taskId The displayed id in the taskList.
      * @return A String suggesting the completion of task update.
@@ -144,7 +146,7 @@ public class CommandAgent {
     }
 
     /**
-     * Generates the feedback for a retrieval of tasks information.
+     * Generates the response for a retrieval of tasks information.
      *
      * @return A String showing all the task information.
      */
@@ -155,7 +157,7 @@ public class CommandAgent {
     }
 
     /**
-     * Generates the feedback for a delete of task from the task list.
+     * Generates the response for a delete of task from the task list.
      *
      * @param deletedTask The delete task.
      * @return A String suggesting the task has been deleted.
@@ -167,6 +169,12 @@ public class CommandAgent {
         return result;
     }
 
+    /**
+     * Generates the response for the searching of all the tasks containing the specified keyword.
+     *
+     * @param keyword The keyword which must be present in the desired task name.
+     * @return A String showing the response to the user with all the tasks desired.
+     */
     public static String generateSearchResponse(String keyword) {
         String result = "Here are the matching tasks in your list:";
         result += taskList.findTasksByKeyword(keyword);

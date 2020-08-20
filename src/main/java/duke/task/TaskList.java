@@ -111,6 +111,12 @@ public class TaskList {
         return formattedTaskList;
     }
 
+    /**
+     * Finds all the tasks containing the keyword
+     *
+     * @param keyword The keyword which must be present in the desired task name.
+     * @return A String including all the tasks found whose name containing the keyword.
+     */
     public String findTasksByKeyword(String keyword) {
         return IntStream.range(0, this.getSize())
                 .mapToObj((id) -> String.format("\n%d.%s", id + 1, tasks.get(id)))

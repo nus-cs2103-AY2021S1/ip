@@ -28,8 +28,7 @@ public abstract class Command {
     }
 
     /**
-     * Returns the content of the command.
-     * Content differ for each type of command.
+     * Returns the content of the command; content differ for each type of command.
      * No content for the general Command.
      *
      * @return A list of String containing relevant content from the command.

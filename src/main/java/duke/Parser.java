@@ -19,7 +19,8 @@ public class Parser {
      *
      * @param userInput A String from user's input.
      * @return A Command to be processed by the agent.
-     * @throws DukeException If the command construction involves error or the DateTimeParsing involves error.
+     * @throws DukeException If the command construction involves error or
+     * the DateTime parsing involves error.
      */
     public static Command parse(String userInput) throws DukeException {
         String[] words = userInput.split(" ");
@@ -53,10 +54,10 @@ public class Parser {
     }
 
     /**
-     * Generates content for the input.
+     * Generates content for the input without the command word.
      *
      * @param words User input parsed into an array of string.
-     * @return A String representing non-commandWord part of the user input.
+     * @return A String representing the parts of the user input without the command word.
      */
     public static String generateContent(String[] words) {
         StringBuilder result = new StringBuilder(words[1]);

@@ -30,7 +30,7 @@ public class Duke {
 
     /**
      * Runs the program by taking in the command, handling them, storing data to
-     * hard disk, and return to users appropriate feedbacks.
+     * hard disk, and returning to users appropriate response.
      * The running will terminate when an ExitCommand is called.
      */
     public void run() {
@@ -52,8 +52,7 @@ public class Duke {
     }
 
     /**
-     * Executes the "Jarvis" bot to run.
-     * By loading the task list stored in <kbd>data/duke.txt</kbd>.
+     * Executes the "Jarvis" bot to run by loading the task list stored in <kbd>data/duke.txt</kbd>.
      *
      * @param args The main() function arguments.
      */

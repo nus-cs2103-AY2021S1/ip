@@ -9,6 +9,12 @@ import duke.DukeException;
 public class FindCommand extends Command {
     private final String keyword;
 
+    /**
+     * Creates a FindCommand.
+     *
+     * @param content The keyword supplied by the user.
+     * @throws DukeException If no keyword is supplied or more than 1 keyword is supplied.
+     */
     public FindCommand(String content) throws DukeException {
         if (content.isEmpty()) {
             throw new DukeException("☹ OOPS!!! Please enter some keyword for me to find");
