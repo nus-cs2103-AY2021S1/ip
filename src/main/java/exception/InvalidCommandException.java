@@ -13,6 +13,7 @@ public class InvalidCommandException extends DukeException {
 			+ "\n3. event <event_desc> /at <time>"
 			+ "\n4. done <task_no>"
 			+ "\n5. delete <task_no>"
-			+ "\n6. list";
+			+ "\n6. list"
+			+ "\n7. bye";
 	}
 }

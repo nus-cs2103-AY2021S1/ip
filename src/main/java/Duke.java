@@ -1,6 +1,7 @@
-import exception.*;
 import java.util.Scanner;
 import java.util.ArrayList;
+
+import exception.*;
 
 public class Duke {
     public static void printDivider() {
@@ -63,31 +64,28 @@ public class Duke {
         printDivider();
     }
 
-    public static void checkCommands (String command) throws InvalidCommandException {
-        if (!command.equals("todo")
-            && !command.equals("deadline")
-            && !command.equals("event")
-            && !command.equals("list")
-            && !command.equals("done")
-            && !command.equals("delete")) {
+    public static void checkCommands (String input) throws InvalidCommandException {
+        try {
+            Commands.valueOf(input.trim().toUpperCase());
+        } catch(IllegalArgumentException ex) {
             throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
-    public static void checkDescription (String[] task, String type) throws EmptyDescriptionException {
+    public static void checkDescription (String[] task, Commands type) throws EmptyDescriptionException {
         String usage = "Please input using the format: " +
-            (type.equals("todo") ? "todo <todo_desc>" :
-            type.equals("deadline") ? "deadline <deadline_desc> /by <time>" :
+            (type.equals(Commands.TODO) ? "todo <todo_desc>" :
+            type.equals(Commands.DEADLINE) ? "deadline <deadline_desc> /by <time>" :
                 "event <event_desc> /at <time>");
         if (task.length < 2 || task[1].trim().equals("")) {
             throw new EmptyDescriptionException("Please specify the task description\n" + usage);
         }
     }
 
-    public static void checkTime (String[] desc, String type) throws EmptyTimeException {
+    public static void checkTime (String[] desc, Commands type) throws EmptyTimeException {
         String usage = "Please input using the format: " +
-            (type.equals("todo") ? "todo <todo_desc>" :
-                type.equals("deadline") ? "deadline <deadline_desc> /by <time>" :
+            (type.equals(Commands.TODO) ? "todo <todo_desc>" :
+                type.equals(Commands.DEADLINE) ? "deadline <deadline_desc> /by <time>" :
                     "event <event_desc> /at <time>");
         if (desc.length < 2 || desc[1].trim().equals("")) {
             throw new EmptyTimeException("Please specify the time for the task\n" + usage);
@@ -112,93 +110,90 @@ public class Duke {
 
         while(sc.hasNextLine()) {
             String input = sc.nextLine();
-            if (input.equals("bye")) {
-                printGoodbye();
-                break;
-            } else if (input.equals("list")) {
-                printTaskList(taskList);
-            } else {
-                String[] inputs = input.split("\\s+", 2);
-                try {
-                    checkCommands(inputs[0].trim());
-                    if (inputs[0].trim().equals("done")) {
-                        try {
-                            checkIndex(inputs, taskList.size());
-                            int index = Integer.parseInt(inputs[1]) - 1;
-                            taskList.set(index, taskList.get(index).completeTask());
-                            printCompleteTask(taskList.get(index).toString());
-                        } catch (InvalidIndexException ex) {
-                            printDivider();
-                            printOutput(ex.getMessage());
-                            printDivider();
-                        }
-                    } else if (inputs[0].trim().equals("delete")) {
-                        try {
-                            checkIndex(inputs, taskList.size());
-                            int index = Integer.parseInt(inputs[1]) - 1;
-                            printDeleteTask(taskList.get(index).toString(), taskList.size() - 1);
-                            taskList.remove(index);
-                        } catch (InvalidIndexException ex) {
-                            printDivider();
-                            printOutput(ex.getMessage());
-                            printDivider();
-                        }
-                    } else {
-                        if (inputs[0].trim().equals("todo")){
-                            try {
-                                checkDescription(inputs, inputs[0].trim());
-                                taskList.add(new Todo(inputs[1]));
-                                printAddedTask(taskList.get(taskList.size() - 1).toString(), taskList.size());
-                            } catch (EmptyDescriptionException ex) {
-                                printDivider();
-                                printOutput(ex.getMessage());
-                                printDivider();
-                            }
-                        } else if (inputs[0].trim().equals("deadline")) {
-                            try {
-                                checkDescription(inputs, inputs[0].trim());
-                                String temp = " " + inputs[1];
-                                String[] desc = temp.split("/by", 2);
-                                inputs[1] = desc[0];
-                                checkDescription(inputs, inputs[0].trim());
-                                checkTime(desc, inputs[0].trim());
-                                taskList.add(new Deadline(desc[0].trim(), desc[1].trim()));
-                                printAddedTask(taskList.get(taskList.size() - 1).toString(), taskList.size());
-                            } catch (EmptyDescriptionException ex) {
-                                printDivider();
-                                printOutput(ex.getMessage());
-                                printDivider();
-                            } catch (EmptyTimeException ex) {
-                                printDivider();
-                                printOutput(ex.getMessage());
-                                printDivider();
-                            }
-                        } else {
-                            try {
-                                checkDescription(inputs, inputs[0].trim());
-                                String temp = " " + inputs[1];
-                                String[] desc = temp.split("/at", 2);
-                                inputs[1] = desc[0];
-                                checkDescription(inputs, inputs[0].trim());
-                                checkTime(desc, inputs[0].trim());
-                                taskList.add(new Event(desc[0].trim(), desc[1].trim()));
-                                printAddedTask(taskList.get(taskList.size() - 1).toString(), taskList.size());
-                            } catch (EmptyDescriptionException ex) {
-                                printDivider();
-                                printOutput(ex.getMessage());
-                                printDivider();
-                            } catch (EmptyTimeException ex) {
-                                printDivider();
-                                printOutput(ex.getMessage());
-                                printDivider();
-                            }
-                        }
+            String[] inputs = input.split("\\s+", 2);
+            try {
+                checkCommands(inputs[0]);
+                Commands command = Commands.valueOf(inputs[0].trim().toUpperCase());
+                if (command.equals(Commands.BYE)) {
+                    printGoodbye();
+                    break;
+                } else if (command.equals((Commands.LIST))) {
+                    printTaskList(taskList);
+                } else if (command.equals(Commands.DONE)) {
+                    try {
+                        checkIndex(inputs, taskList.size());
+                        int index = Integer.parseInt(inputs[1]) - 1;
+                        taskList.set(index, taskList.get(index).completeTask());
+                        printCompleteTask(taskList.get(index).toString());
+                    } catch (InvalidIndexException ex) {
+                        printDivider();
+                        printOutput(ex.getMessage());
+                        printDivider();
                     }
-                } catch (InvalidCommandException ex) {
-                    printDivider();
-                    printOutput(ex.getMessage());
-                    printDivider();
+                } else if (command.equals(Commands.DELETE)) {
+                    try {
+                        checkIndex(inputs, taskList.size());
+                        int index = Integer.parseInt(inputs[1]) - 1;
+                        printDeleteTask(taskList.get(index).toString(), taskList.size() - 1);
+                        taskList.remove(index);
+                    } catch (InvalidIndexException ex) {
+                        printDivider();
+                        printOutput(ex.getMessage());
+                        printDivider();
+                    }
+                } else if (command.equals(Commands.TODO)){
+                    try {
+                        checkDescription(inputs, command);
+                        taskList.add(new Todo(inputs[1]));
+                        printAddedTask(taskList.get(taskList.size() - 1).toString(), taskList.size());
+                    } catch (EmptyDescriptionException ex) {
+                        printDivider();
+                        printOutput(ex.getMessage());
+                        printDivider();
+                    }
+                } else if (command.equals(Commands.DEADLINE)) {
+                    try {
+                        checkDescription(inputs, command);
+                        String temp = " " + inputs[1];
+                        String[] desc = temp.split("/by", 2);
+                        inputs[1] = desc[0];
+                        checkDescription(inputs, command);
+                        checkTime(desc, command);
+                        taskList.add(new Deadline(desc[0].trim(), desc[1].trim()));
+                        printAddedTask(taskList.get(taskList.size() - 1).toString(), taskList.size());
+                    } catch (EmptyDescriptionException ex) {
+                        printDivider();
+                        printOutput(ex.getMessage());
+                        printDivider();
+                    } catch (EmptyTimeException ex) {
+                        printDivider();
+                        printOutput(ex.getMessage());
+                        printDivider();
+                    }
+                } else {
+                    try {
+                        checkDescription(inputs, command);
+                        String temp = " " + inputs[1];
+                        String[] desc = temp.split("/at", 2);
+                        inputs[1] = desc[0];
+                        checkDescription(inputs, command);
+                        checkTime(desc, command);
+                        taskList.add(new Event(desc[0].trim(), desc[1].trim()));
+                        printAddedTask(taskList.get(taskList.size() - 1).toString(), taskList.size());
+                    } catch (EmptyDescriptionException ex) {
+                        printDivider();
+                        printOutput(ex.getMessage());
+                        printDivider();
+                    } catch (EmptyTimeException ex) {
+                        printDivider();
+                        printOutput(ex.getMessage());
+                        printDivider();
+                    }
                 }
+            } catch (InvalidCommandException ex) {
+                printDivider();
+                printOutput(ex.getMessage());
+                printDivider();
             }
         }
     }
