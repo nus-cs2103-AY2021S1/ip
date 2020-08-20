@@ -7,9 +7,9 @@ public class Duke {
         return input.isEmpty();
     }
 
-    public static boolean isValidTask(String input) {
-        return input.toLowerCase().startsWith("todo") |
-                input.toLowerCase().startsWith("deadline") |
+    public static boolean isValidCommand(String input) {
+        return input.toLowerCase().startsWith("todo") ||
+                input.toLowerCase().startsWith("deadline") ||
                 input.toLowerCase().startsWith("event");
     }
 
@@ -17,11 +17,17 @@ public class Duke {
         return input.split(" ").length == 1;
     }
 
-//    public static boolean isValidInput(String input) {
-//        return !isEmptyInput(input) &
-//                isValidTask(input) &
-//                        !isEmptyDescription(input);
-//    }
+    public static boolean hasDeadlineBy(String input) {
+        return input.contains("/by")
+                && input.split(" /by ").length == 2;
+    }
+
+    public static boolean hasEventStartEndTime(String input) {
+        return input.contains("/at")
+                && input.split(" /at ").length == 2
+                        && input.split(" /at ")[1].contains("-")
+                                && input.split(" /at ")[1].split("-").length == 2;
+    }
 
     public static void main(String[] args) {
 
@@ -93,22 +99,20 @@ public class Duke {
             }
 
             // Check validity of input command
+            DukeException dE = new DukeException();
             if (isEmptyInput(input)) {
                 System.out.println(servantSpeak
-                        + "    I am sorry my Lord. " +
-                        "You have to give a command.\n");
+                        + dE.MESSAGE_ALL_TASKS_EMPTY_INPUT);
                 continue;
             }
-            if (!isValidTask(input)) {
+            if (!isValidCommand(input)) {
                 System.out.println(servantSpeak
-                        + "    I am sorry my Lord. " +
-                        "I do not recognise that command.\n");
+                        + dE.MESSAGE_ALL_TASKS_INVALID_COMMAND);
                 continue;
             }
             if (isEmptyDescription(input)) {
                 System.out.println(servantSpeak
-                        + "    I am sorry my Lord. " +
-                        "Your description cannot be empty.\n");
+                        + dE.MESSAGE_ALL_TASKS_EMPTY_DESCRIPTION);
                 continue;
             }
 
@@ -117,19 +121,29 @@ public class Duke {
             String[] inputSplit;
             String description;
             switch (input.toLowerCase().split(" ")[0]) {
+                case "todo":
+                    description = input.substring(4);
+                    t = new ToDo(description);
+                    userTasks.add(t);
+                    break;
                 case "deadline":
+                    if (!hasDeadlineBy(input)) {
+                        System.out.println(servantSpeak
+                                + dE.MESSAGE_DEADLINE_NO_BY);
+                        continue;
+                    }
                     inputSplit = input.split(" /by ");
                     String by = inputSplit[1];
                     description = inputSplit[0].substring(8);
                     t = new Deadline(description, by);
                     userTasks.add(t);
                     break;
-                case "todo":
-                    description = input.substring(4);
-                    t = new ToDo(description);
-                    userTasks.add(t);
-                    break;
                 case "event":
+                    if (!hasEventStartEndTime(input)) {
+                        System.out.println(servantSpeak
+                                + dE.MESSAGE_EVENT_NO_START_END);
+                        continue;
+                    }
                     inputSplit = input.split(" /at ");
                     String start = inputSplit[1].split("-")[0];
                     String end = inputSplit[1].split("-")[1];
@@ -137,10 +151,6 @@ public class Duke {
                     t = new Event(description, start, end);
                     userTasks.add(t);
                     break;
-//                default:
-//                    System.out.println(servantSpeak
-//                            + "    I am sorry my Lord. I do not recognise that command.\n");
-//                    continue;
             }
 
             // Standard reply from Duke for adding a task
