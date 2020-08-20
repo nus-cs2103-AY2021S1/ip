@@ -2,11 +2,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+enum ListChange
+{
+    ADD, DELETE
+}
+
 public class Duke {
 
     public static String numTasks(List<Task> lst) {
         int numTasks = lst.size();
         return numTasks == 1 ? "1 task" : numTasks + " tasks";
+    }
+    
+    public static void listChangePrint(Task task, List<Task> taskList, ListChange change) {
+        String keyword = "";
+        switch (change) {
+            case ADD:
+                keyword = "added";
+                break;
+            case DELETE:
+                keyword = "removed";
+        }
+
+        System.out.println("Noted. I've " + keyword + " this task:\n" + task.toString());
+        System.out.println("Now you have " + numTasks(taskList) + " in the list.");
     }
 
     public static void main(String[] args) {
@@ -26,49 +45,61 @@ public class Duke {
                 }
             } else {
                 String[] command_lst = command.split(" ", 2);
+                String action = command_lst[0];
                 
-                if (command_lst[0].equals("done")) {
-                    try {
-                        int taskId = Integer.parseInt(command.split(" ")[1]) - 1;
-                        tasks.get(taskId).markAsDone();
-                        System.out.println("Nice! I've marked this task as done:");
-                        System.out.println(tasks.get(taskId).toString());
-                    } catch (Exception e) {
-                        new DukeException("invalidMarkingDone");
-                    }
-                } else if (command_lst[0].equals("todo")) {
-                    try {
-                        Task newTask = new ToDo(command_lst[1]);
-                        tasks.add(newTask);
-                        System.out.println("Got it. I've added this task:\n" + newTask.toString());
-                        System.out.println("Now you have " + numTasks(tasks) + " in the list.");
-                    } catch (Exception e) {
-                        new DukeException("invalidTodo");
-                    }
-                } else if (command_lst[0].equals("deadline")) {
-                    try {
-                        String desc = command_lst[1].split(" /by ")[0];
-                        String by = command_lst[1].split(" /by ")[1];
-                        Task newTask = new Deadline(desc, by);
-                        tasks.add(newTask);
-                        System.out.println("Got it. I've added this task: \n" + newTask.toString());
-                        System.out.println("Now you have " + numTasks(tasks) + " in the list.");
-                    } catch (Exception e) {
-                        new DukeException("invalidDeadline");
-                    }
-                } else if (command_lst[0].equals("event")) {
-                    try {
-                        String desc = command_lst[1].split(" /at ")[0];
-                        String at = command_lst[1].split(" /at ")[1];
-                        Task newTask = new Event(desc, at);
-                        tasks.add(newTask);
-                        System.out.println("Got it. I've added this task: \n" + newTask.toString());
-                        System.out.println("Now you have " + numTasks(tasks) + " in the list.");
-                    } catch (Exception e) {
-                        new DukeException("invalidEvent");
-                    }
-                } else {
-                    new DukeException("invalidCommand");
+                switch (action) {
+                    case "done":
+                        try {
+                            int taskId = Integer.parseInt(command.split(" ")[1]) - 1;
+                            tasks.get(taskId).markAsDone();
+                            System.out.println("Nice! I've marked this task as done:");
+                            System.out.println(tasks.get(taskId).toString());
+                        } catch (Exception e) {
+                            new DukeException("invalidMarkingDone");
+                        }
+                        break;
+                    case "todo":
+                        try {
+                            Task newTask = new ToDo(command_lst[1]);
+                            tasks.add(newTask);
+                            listChangePrint(newTask, tasks, ListChange.ADD);
+                        } catch (Exception e) {
+                            new DukeException("invalidTodo");
+                        }
+                        break;
+                    case "deadline":
+                        try {
+                            String desc = command_lst[1].split(" /by ")[0];
+                            String by = command_lst[1].split(" /by ")[1];
+                            Task newTask = new Deadline(desc, by);
+                            tasks.add(newTask);
+                            listChangePrint(newTask, tasks, ListChange.ADD);
+                        } catch (Exception e) {
+                            new DukeException("invalidDeadline");
+                        }
+                        break;
+                    case "event":
+                        try {
+                            String desc = command_lst[1].split(" /at ")[0];
+                            String at = command_lst[1].split(" /at ")[1];
+                            Task newTask = new Event(desc, at);
+                            tasks.add(newTask);
+                            listChangePrint(newTask, tasks, ListChange.ADD);
+                        } catch (Exception e) {
+                            new DukeException("invalidEvent");
+                        }
+                        break;
+                    case "delete":
+                        try {
+                            int taskId = Integer.parseInt(command.split(" ")[1]) - 1;
+                            Task removedTask = tasks.remove(taskId);
+                            listChangePrint(removedTask, tasks, ListChange.DELETE);
+                        } catch (Exception e) {
+                            new DukeException("invalidDelete");
+                        }
+                        break;
+                    default:
+                        new DukeException("invalidCommand");
                 }
             }
             

@@ -10,6 +10,8 @@ public class DukeException extends Exception {
                 ? "☹ OOPS!!! The deadline is formatted wrongly."
                 : errorType.equals("invalidEvent")
                 ? "☹ OOPS!!! The event is formatted wrongly."
+                : errorType.equals("invalidDelete")
+                ? "☹ OOPS!!! Command to delete a task done is formatted wrongly."
                 : "Unknown error. Try something else.";
         System.out.println(errorMessage);
     }
