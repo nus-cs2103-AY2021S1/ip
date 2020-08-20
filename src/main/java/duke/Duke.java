@@ -3,21 +3,18 @@ package duke;
 import duke.command.Command;
 import duke.task.TaskList;
 
-/**
- * Driver class for duke.Duke chat bot called "Jarvis"
- */
+/** Driver class for duke.Duke chat bot called "Jarvis" */
 public class Duke {
-
     private final Storage storage;
     private final CommandAgent agent;
     private final Ui ui;
 
     /**
-     * Constructor for Duke class.
+     * Constructs an instance for Duke class.
      * Takes in a file path to initialize storage.
-     * Initialize a command agent and a user interface.
+     * Initializes a command agent and a user interface.
      *
-     * @param filePath the path of task list data stored in the hard disk.
+     * @param filePath The path of task list data stored in the hard disk.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -32,7 +29,7 @@ public class Duke {
     }
 
     /**
-     * Run the program by taking in the command, handling them, storing data to
+     * Runs the program by taking in the command, handling them, storing data to
      * hard disk, and return to users appropriate feedbacks.
      * The running will terminate when an ExitCommand is called.
      */
@@ -58,7 +55,7 @@ public class Duke {
      * Executes the "Jarvis" bot to run.
      * By loading the task list stored in <kbd>data/duke.txt</kbd>.
      *
-     * @param args main() function arguments.
+     * @param args The main() function arguments.
      */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();

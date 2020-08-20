@@ -5,9 +5,7 @@ import java.util.List;
 
 import duke.DukeException;
 
-/**
- * A subclass of Command which adds an event to the taskList
- */
+/** A subclass of Command which adds an event to the taskList */
 public class EventCommand extends AddCommand {
     private final String name;
     private final String schedule;
@@ -15,8 +13,8 @@ public class EventCommand extends AddCommand {
     /**
      * Creates a EventCommand.
      *
-     * @param content the task information supplied by the user.
-     * @throws DukeException if the content has missing name or schedule or the format does not contain /at.
+     * @param content The task information supplied by the user.
+     * @throws DukeException If the content has missing name or schedule or the format does not contain /at.
      */
     public EventCommand(String content) throws DukeException {
         if (!content.contains("/at")) {

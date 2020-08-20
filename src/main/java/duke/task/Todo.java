@@ -1,8 +1,6 @@
 package duke.task;
 
-/**
- * Represents a todo task
- */
+/** Represents a todo task */
 public class Todo extends Task {
     public Todo(String name, boolean isDone) {
         super(name, isDone);

@@ -5,9 +5,7 @@ import java.util.List;
 
 import duke.DukeException;
 
-/**
- * A subclass of Command which adds a deadline to the taskList.
- */
+/** A subclass of Command which adds a deadline to the taskList */
 public class DeadlineCommand extends AddCommand {
     private final String name;
     private final String schedule;
@@ -15,8 +13,8 @@ public class DeadlineCommand extends AddCommand {
     /**
      * Creates a DeadlineCommand.
      *
-     * @param content the task information supplied by the user.
-     * @throws DukeException if the content has missing name or schedule or the format does not contain /by.
+     * @param content The task information supplied by the user.
+     * @throws DukeException If the content has missing name or schedule or the format does not contain /by.
      */
     public DeadlineCommand(String content) throws DukeException {
         if (!content.contains("/by")) {

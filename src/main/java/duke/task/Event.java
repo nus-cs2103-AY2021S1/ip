@@ -4,9 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-/**
- * Represents an event task
- */
+/** Represents an event task */
 public class Event extends Task {
     private final LocalDate schedule;
 
@@ -16,9 +14,9 @@ public class Event extends Task {
     }
 
     /**
-     * Return a string representation of the Event task's schedule in the pattern "MMM d yyyy".
+     * Returns a string representation of the Event task's schedule in the pattern "MMM d yyyy".
      *
-     * @return the string representation of the schedule.
+     * @return The string representation of the schedule.
      */
     public String getSchedule() {
         return this.schedule.format(DateTimeFormatter.ofPattern("MMM d yyyy", Locale.ENGLISH));

@@ -17,9 +17,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 
-/**
- * Storage class to manage the saving of TaskList into hard disk.
- */
+/** Storage class to manage the saving of TaskList into hard disk */
 public class Storage {
 
     private final Path filePath;
@@ -35,8 +33,8 @@ public class Storage {
      * Loads the TaskList that is stored in <kbd>data/duke.text</kbd> file.
      * Handles the cases where either file or folder is not created.
      *
-     * @return a TaskList to be used by the program.
-     * @throws DukeException if there are I/O exceptions occurred when reading the file.
+     * @return A TaskList to be used by the program.
+     * @throws DukeException If there are I/O exceptions occurred when reading the file.
      */
     public TaskList load() throws DukeException {
         TaskList taskList;
@@ -53,7 +51,7 @@ public class Storage {
     /**
      * Creates the directory and/or file if they have not been created yet.
      *
-     * @throws IOException if folderPath or filePath are parsed wrongly.
+     * @throws IOException If folderPath or filePath are parsed wrongly.
      */
     public void createPath() throws IOException {
         if (Files.notExists(folderPath)) {
@@ -66,10 +64,10 @@ public class Storage {
 
     /**
      * Returns a loaded TaskList for program data storage.
-     * An empty TaskList is return if content in file is empty;
+     * An empty TaskList is return if content in file is empty.
      *
-     * @param tasksInFile the list of tasks stored in the file.
-     * @return a TaskList based on the tasks recorded in the file.
+     * @param tasksInFile The list of tasks stored in the file.
+     * @return A TaskList based on the tasks recorded in the file.
      */
     public TaskList loadTaskList(List<String> tasksInFile) {
         List<Task> tasksLoaded = new ArrayList<>();
@@ -104,7 +102,7 @@ public class Storage {
     /**
      * Stores a Task List in a predetermined filePath.
      *
-     * @param taskList the taskList object to be saved.
+     * @param taskList The taskList object to be saved.
      */
     public void save(TaskList taskList) {
         try {

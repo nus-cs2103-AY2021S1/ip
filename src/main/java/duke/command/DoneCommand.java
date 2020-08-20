@@ -3,16 +3,14 @@ package duke.command;
 import duke.CommandAgent;
 import duke.DukeException;
 
-/**
- * A subclass of Command which sends request to mark a task in list as done.
- */
+/** A subclass of Command which sends request to mark a task in list as done */
 public class DoneCommand extends Command {
 
     /**
      * Creates a DoneCommand.
      *
-     * @param content the task information supplied by the user.
-     * @throws DukeException if the content has no input or improper input.
+     * @param content The task information supplied by the user.
+     * @throws DukeException If the content has no input or improper input.
      */
     public DoneCommand(String content) throws DukeException {
         if (content.isEmpty()) {

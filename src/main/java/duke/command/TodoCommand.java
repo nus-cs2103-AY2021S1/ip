@@ -5,17 +5,15 @@ import java.util.List;
 
 import duke.DukeException;
 
-/**
- * A subclass of Command which adds a todo to the taskList
- */
+/** A subclass of Command which adds a todo to the taskList */
 public class TodoCommand extends AddCommand {
     private final String name;
 
     /**
      * Creates a TodoCommand.
      *
-     * @param content the task information supplied by the user.
-     * @throws DukeException if the content is missing.
+     * @param content The task information supplied by the user.
+     * @throws DukeException If the content is missing.
      */
     public TodoCommand(String content) throws DukeException {
         if (content.equals("")) {

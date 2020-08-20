@@ -6,9 +6,7 @@ import java.util.stream.IntStream;
 
 import duke.DukeException;
 
-/**
- * TaskList stores a list of tasks and the corresponding operations on it.
- */
+/** TaskList stores a list of tasks and the corresponding operations on it */
 public class TaskList {
     private final List<Task> tasks;
 
@@ -21,19 +19,19 @@ public class TaskList {
     }
 
     /**
-     * Get the number of elements in the task list.
+     * Gets the number of elements in the task list.
      *
-     * @return the number of elements in the task list.
+     * @return The number of elements in the task list.
      */
     public int getSize() {
         return this.tasks.size();
     }
 
     /**
-     * Get the task in the list by its id.
+     * Gets the task in the list by its id.
      *
-     * @param taskId the displayed id in the list.
-     * @return the Task associated with id.
+     * @param taskId The displayed id in the list.
+     * @return The Task associated with id.
      */
     public Task getTaskById(int taskId) {
         int index = taskId - 1;
@@ -41,10 +39,10 @@ public class TaskList {
     }
 
     /**
-     * Add a new task to the list of tasks.
+     * Adds a new task to the list of tasks.
      *
-     * @param newTask the new task to be added.
-     * @return a new TaskList containing all the old tasks and the new task.
+     * @param newTask The new task to be added.
+     * @return A new TaskList containing all the old tasks and the new task.
      */
     public TaskList addTask(Task newTask) {
         List<Task> newTaskList = this.tasks;
@@ -53,10 +51,10 @@ public class TaskList {
     }
 
     /**
-     * Delete a task in the list via its taskId .
+     * Deletes a task in the list via its taskId.
      *
-     * @param taskId the displayed id in the list.
-     * @return a new TaskList containing all the update tasks.
+     * @param taskId The displayed id in the list.
+     * @return A new TaskList containing all the update tasks.
      */
     public TaskList deleteTask(int taskId) {
         int index = taskId - 1;
@@ -66,11 +64,11 @@ public class TaskList {
     }
 
     /**
-     * Set a task with input id in the list as done.
+     * Sets a task with input id in the list as done.
      *
-     * @param taskId the displayed id in the list.
-     * @return a new TaskList containing all the update tasks.
-     * @throws DukeException if the task is already done.
+     * @param taskId The displayed id in the list.
+     * @return A new TaskList containing all the update tasks.
+     * @throws DukeException If the task is already done.
      */
     public TaskList markAsDone(int taskId) throws DukeException {
         Task currentTask = this.getTaskById(taskId);
@@ -87,9 +85,9 @@ public class TaskList {
     }
 
     /**
-     * Print all the tasks.
+     * Prints all the tasks.
      *
-     * @return a String shows all tasks in a formatted way.
+     * @return A String shows all tasks in a formatted way.
      */
     public String printTasks() {
         String result = IntStream.range(0, this.getSize())
@@ -101,9 +99,9 @@ public class TaskList {
     }
 
     /**
-     * Format the tasks in task list to the style specified in level-7.
+     * Formats the tasks in task list to the style specified in level-7.
      *
-     * @return a list of string, each representing a formatted task in the task list.
+     * @return A list of string, each representing a formatted task in the task list.
      */
     public List<String> formatTaskList() {
         List<String> formattedTaskList = new ArrayList<>();

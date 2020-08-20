@@ -5,6 +5,7 @@ import java.util.List;
 
 import duke.DukeException;
 
+/** A subclass of Command which find a task via a keyword */
 public class FindCommand extends Command {
     private final String keyword;
 

@@ -11,9 +11,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 
-/**
- * An agent to process incoming command and return the feedback.
- */
+/** An agent to process incoming command and return the feedback */
 public class CommandAgent {
     private static TaskList taskList;
 
@@ -26,12 +24,12 @@ public class CommandAgent {
     }
 
     /**
-     * Handle the command taken from user input, execute it
+     * Handles the command taken from user input, execute it
      * and save the updated task list data to hard disk.
      *
-     * @param c the command parsed from user input.
-     * @param ui the user interface where response is sent to.
-     * @param storage the data storage handler.
+     * @param c The command parsed from user input.
+     * @param ui The user interface where response is sent to.
+     * @param storage The data storage handler.
      */
     public void handleCommand(Command c, Ui ui, Storage storage) {
         String response = executeCommand(c);
@@ -42,8 +40,8 @@ public class CommandAgent {
     /**
      * Takes in the command and execute it based on the request from the command.
      *
-     * @param command the command parsed from user input.
-     * @return a String response for the user.
+     * @param command The command parsed from user input.
+     * @return A String response for the user.
      */
     public static String executeCommand(Command command) {
         String response = "";
@@ -89,14 +87,14 @@ public class CommandAgent {
     }
 
     /**
-     * Create different types of tasks based on the identifier stored in the taskInfo.
-     * Set default option to Todo task.
+     * Creates different types of tasks based on the identifier stored in the taskInfo.
+     * Sets default option to Todo task.
      * The CommandReader has ensured no erroneous keyword will be sent to agent.
      *
-     * @param taskInfo a list of String containing all the relevant information for the task.
-     * @return a correct type of Task object.
-     * @throws DateTimeParseException if any schedule cannot be parsed by the LocalDate formatter.
-     * @throws DukeException if the a task with the same name is already stored in the list.
+     * @param taskInfo A list of String containing all the relevant information for the task.
+     * @return A correct type of Task object.
+     * @throws DateTimeParseException If any schedule cannot be parsed by the LocalDate formatter.
+     * @throws DukeException If the a task with the same name is already stored in the list.
      */
     public static Task createTask(List<String> taskInfo) throws DateTimeParseException, DukeException {
         String identifier = taskInfo.get(0);
@@ -121,8 +119,9 @@ public class CommandAgent {
     }
 
     /**
-     * Generate the feedback for a task creation.
-     * @return a String suggesting the completion of task creation.
+     * Generates the feedback for a task creation.
+     *
+     * @return A String suggesting the completion of task creation.
      */
     public static String generateCreateResponse() {
         int taskId = taskList.getSize();
@@ -134,10 +133,10 @@ public class CommandAgent {
     }
 
     /**
-     * Generate the feedback for an update of task status.
+     * Generates the feedback for an update of task status.
      *
-     * @param taskId the displayed id in the taskList.
-     * @return a String suggesting the completion of task update.
+     * @param taskId The displayed id in the taskList.
+     * @return A String suggesting the completion of task update.
      */
     public static String generateUpdateResponse(int taskId) {
         Task currentTask = taskList.getTaskById(taskId);
@@ -145,8 +144,9 @@ public class CommandAgent {
     }
 
     /**
-     * Generate the feedback for a retrieval of tasks information.
-     * @return a String showing all the task information.
+     * Generates the feedback for a retrieval of tasks information.
+     *
+     * @return A String showing all the task information.
      */
     public static String generateRetrievalResponse() {
         String result = "Here are the tasks in your list:";
@@ -155,10 +155,10 @@ public class CommandAgent {
     }
 
     /**
-     * Generate the feedback for a delete of task from the task list.
+     * Generates the feedback for a delete of task from the task list.
      *
-     * @param deletedTask the delete task.
-     * @return a String suggesting the task has been deleted.
+     * @param deletedTask The delete task.
+     * @return A String suggesting the task has been deleted.
      */
     public static String generateDeleteResponse(Task deletedTask) {
         String result = "Noted. I've removed this task:\n  ";
@@ -166,7 +166,6 @@ public class CommandAgent {
         result += String.format("\nNow you have %d tasks in the list.", listSize());
         return result;
     }
-
 
     public static String generateSearchResponse(String keyword) {
         String result = "Here are the matching tasks in your list:";

@@ -8,20 +8,18 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
-import duke.command.FindCommand;
 
-/**
- * A duke.CommandReader object to parse the user input.
- */
+/** A Parser object to parse the user input */
 public class Parser {
     /**
-     * Read in user input and identify the correct type of duke.command for the input.
+     * Reads in user input and identify the correct type of duke.command for the input.
      *
-     * @param userInput a String from user's input.
-     * @return a Command to be processed by the agent.
-     * @throws DukeException if the command construction involves error or the DateTimeParsing involves error.
+     * @param userInput A String from user's input.
+     * @return A Command to be processed by the agent.
+     * @throws DukeException If the command construction involves error or the DateTimeParsing involves error.
      */
     public static Command parse(String userInput) throws DukeException {
         String[] words = userInput.split(" ");
@@ -30,8 +28,6 @@ public class Parser {
 
         try {
             switch (commandWord) {
-            case "find":
-                return new FindCommand(content);
             case "done":
                 return new DoneCommand(content);
             case "delete":
@@ -46,6 +42,8 @@ public class Parser {
                 return new DeadlineCommand(content);
             case "event":
                 return new EventCommand(content);
+            case "find":
+                return new FindCommand(content);
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
@@ -55,10 +53,10 @@ public class Parser {
     }
 
     /**
-     * Generate content for the input.
+     * Generates content for the input.
      *
-     * @param words user input parsed into an array of string.
-     * @return a String representing non-commandWord part of the user input
+     * @param words User input parsed into an array of string.
+     * @return A String representing non-commandWord part of the user input.
      */
     public static String generateContent(String[] words) {
         String result = words[1];
