@@ -89,7 +89,47 @@ public class Duke {
 
                         listOfTasks.get(index - 1).markAsDone();
 
-                    }else{
+                    }else if(words[0].equals("delete")){
+
+                        if (numberOfWords == 1) {
+                            throw new InvalidRequestException("What task would you like to delete from the list?");
+                        }
+
+                        if(numberOfWords > 2){
+                            throw new InvalidRequestException("Sorry, I can only handle one task at a time.");
+                        }
+
+                        Integer index = Integer.parseInt(words[1]);
+
+                        if(listOfTasks.size() < index){
+                            throw new InvalidRequestException("I could not find this task, please enter a valid task index.");
+                        }
+                        if(index < 0){
+                            throw new InvalidRequestException("Task index is invalid, please enter a valid one.");
+                        }
+
+                        Task toBeDeletedTask = listOfTasks.get(index-1);
+
+                        listOfTasks.remove(index-1);
+
+                        int size = listOfTasks.size();
+
+                        System.out.println("Noted. I've removed this task: ");
+
+                        System.out.println(toBeDeletedTask.toString());
+
+                        if(size == 0){
+                            System.out.println("Now your task list is empty.");
+                        }
+                        else if(size == 1){
+                            System.out.println("Now you have 1 task in the list.");
+                        }
+                        else{
+                            System.out.println("Now you have " + size + " tasks in the list");
+                        }
+
+                    }
+                    else{
 
                         Task newTask;
 
