@@ -15,7 +15,7 @@ public class Duke {
         String print();
 
     }
-    
+
     public static void main(String[] args) {
         List<Task> tasks = new ArrayList<>();
         String logo = " ____        _        \n"
@@ -31,19 +31,24 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         do {
-            input = getUserInput(sc);
-            String command = input.print();
-            if (command.toLowerCase().equals("bye")) {
-                speak(goodbye);
-                break;
-            } else if (command.toLowerCase().equals("list")) {
-                listTasks(tasks);
-            } else if (command.split("\\s+")[0].equals("done")){
-                Task task = tasks.get(Integer.parseInt(command.split("\\s+")[1])-1);
-                task.setDone();
-                speak(() -> "Nice! I've marked this task as done:\n[✓] " + task.toString());
-            } else {
-                storeInput(command,tasks);
+            try {
+                input = getUserInput(sc);
+                String command = input.print();
+                if (command.toLowerCase().equals("bye")) {
+                    speak(goodbye);
+                    break;
+                } else if (command.toLowerCase().equals("list")) {
+                    listTasks(tasks);
+                } else if (command.split("\\s+")[0].equals("done")) {
+                    Task task = tasks.get(Integer.parseInt(command.split("\\s+")[1]) - 1);
+                    task.setDone();
+                    speak(() -> "Nice! I've marked this task as done:\n[✓] " + task.toString());
+                } else {
+                    storeInput(command, tasks);
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println(e);
+                continue;
             }
         } while (true);
     }
@@ -60,17 +65,22 @@ public class Duke {
 
     public static void storeInput(String command, List<Task> tasks) {
         String cmd1 = command.split("\\s+")[0];
-        String cmd2 = command.substring(cmd1.length()+1); //remove the +1 incase of overslice
+        String cmd2 ;
         Task task =null;
         if (cmd1.equals("deadline")) {
+            cmd2 =  command.substring(cmd1.length()+1);
             task = parseDeadline(cmd2);
         } else if (cmd1.equals("todo")) {
+            if (command.split("\\s+").length == 1) {
+                throw new IllegalUserInputException("☹ OOPS!!! The description of a todo cannot be empty.");
+            }
+            cmd2 =  command.substring(cmd1.length()+1);
             task = new Todo(cmd2,false);
         } else if (cmd1.equals("event")) {
+            cmd2 =  command.substring(cmd1.length()+1);
             task = parseEvent(cmd2);
         } else {
-            System.out.println("Invalid command");
-            return;
+            throw new IllegalUserInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         if (task != null) {
