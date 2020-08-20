@@ -9,9 +9,13 @@ event run a marathon /at sentosa
 deadline code website /by 15 August 2020
 todo throw chocolate wrapper
 todo wash dishes
+done 4
+delete 5
+delete
+delete this task
 done 5
-done 6
 done 10
+delete 11
 list
 todo
 event

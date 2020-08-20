@@ -45,19 +45,24 @@ Now you have 6 tasks in the list.
 added: [T][✘] wash dishes
 Now you have 7 tasks in the list.
 Nice! I've marked this task as done:
-[D][✓] code website (by: 15 August 2020)
+[E][✓] run a marathon (at: sentosa)
+The following task has been deleted:
+[D][✘] code website (by: 15 August 2020)
+--------------------------------------------------------------------------
+☹ Please indicate which task you'd like to delete!
+OOPS! The keyword 'delete' is used to delete tasks as follows:   delete <task index>
 Nice! I've marked this task as done:
 [T][✓] throw chocolate wrapper
+OOPS! This task index does not exist! Type 'list' to check out your tasks.
 OOPS! This task index does not exist! Type 'list' to check out your tasks.
 **************************************************************************
 Here are the tasks in your list:
 1.[T][✘] eat chocolate
 2.[D][✓] project (by: tonight)
 3.[E][✘] meeting tomorrow (at: home)
-4.[E][✘] run a marathon (at: sentosa)
-5.[D][✓] code website (by: 15 August 2020)
-6.[T][✓] throw chocolate wrapper
-7.[T][✘] wash dishes
+4.[E][✓] run a marathon (at: sentosa)
+5.[T][✓] throw chocolate wrapper
+6.[T][✘] wash dishes
 **************************************************************************
 --------------------------------------------------------------------------
 ☹ OOPS! The description of a todo cannot be empty.
@@ -81,10 +86,9 @@ Here are the tasks in your list:
 1.[T][✘] eat chocolate
 2.[D][✓] project (by: tonight)
 3.[E][✘] meeting tomorrow (at: home)
-4.[E][✘] run a marathon (at: sentosa)
-5.[D][✓] code website (by: 15 August 2020)
-6.[T][✓] throw chocolate wrapper
-7.[T][✘] wash dishes
+4.[E][✓] run a marathon (at: sentosa)
+5.[T][✓] throw chocolate wrapper
+6.[T][✘] wash dishes
 **************************************************************************
  _____  ___  ___  _____
 |  __ \ \  \/  / |  ___|

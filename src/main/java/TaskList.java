@@ -85,4 +85,18 @@ public class TaskList {
                     "   done <task index>");
         }
     }
+    
+    public void deleteTask(String listIndexString) {
+        try {
+            int listIndexNumber = Integer.parseInt(listIndexString);
+            Task task = this.list.get(listIndexNumber - 1);
+            this.list.remove(listIndexNumber - 1);
+            System.out.println("The following task has been deleted:\n" + task);
+        } catch (IndexOutOfBoundsException ex) {
+            System.out.println("OOPS! This task index does not exist! Type 'list' to check out your tasks.");
+        } catch (NumberFormatException ex) { // if list index string is not an integer
+            System.out.println("OOPS! The keyword 'delete' is used to delete tasks as follows:" +
+                    "   delete <task index>");
+        }
+    }
 }
