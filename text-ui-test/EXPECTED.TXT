@@ -3,45 +3,28 @@
   What can I do for you?
   ____________________________________________________________
 
-todo read book
+done 1
+  ____________________________________________________________
+  '☹' OOPS!!! The ID is not yet defined.
+  ____________________________________________________________
+
+blah
+  ____________________________________________________________
+  '☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+  ____________________________________________________________
+
+event read book /at Aug  6th 2pm
   ____________________________________________________________
   Got it. I've added this task:
-  [T][✗] read book
+  [E][✗] read book(at: Aug  6th 2pm)
   Now you have 1 tasks in the list.
   ____________________________________________________________
 
-deadline return book /by June 6th
+deadline read book /at Aug 6th
   ____________________________________________________________
   Got it. I've added this task:
-  [D][✗] return book(by: June 6th)
+  [D][✗] read book(by: Aug 6th)
   Now you have 2 tasks in the list.
-  ____________________________________________________________
-
-event project meeting /at Aug
-  ____________________________________________________________
-  Got it. I've added this task:
-  [E][✗] project meeting(at: Aug)
-  Now you have 3 tasks in the list.
-  ____________________________________________________________
-
-done 1
-  ____________________________________________________________
-   Nice! I've marked this task as done:
-   [T][✓] read book
-  ____________________________________________________________
-
-done 2
-  ____________________________________________________________
-   Nice! I've marked this task as done:
-   [D][✓] return book(by: June 6th)
-  ____________________________________________________________
-
-list
-  ____________________________________________________________
-   Here are the tasks in your list:
-  1.[T][✓] read book
-  2.[D][✓] return book(by: June 6th)
-  3.[E][✗] project meeting(at: Aug)
   ____________________________________________________________
 
 bye
