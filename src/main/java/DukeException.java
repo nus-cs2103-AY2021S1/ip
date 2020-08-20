@@ -7,7 +7,7 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        String emoji = new String(Character.toChars(0x1F616));
+        String emoji = Emoji.ERROR.toString();
         String msgForException = "    ____________________________________________________________\n"
                 + "    " + emoji + this.getMessage() + "\n"
                 + "    ____________________________________________________________\n";

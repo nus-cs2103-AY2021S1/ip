@@ -1,3 +1,5 @@
+//package main.java;
+
 import main.java.*;
 
 import java.util.Scanner;
@@ -13,7 +15,7 @@ public class Duke {
 
     //print welcome message
     public void printWelcomeMessage() {
-        String emoji = new String(Character.toChars(0x1F423));
+        String emoji = Emoji.CHICKEN.toString();
         String welcomeMessage = "    ____________________________________________________________\n"
                 + "    Hello! I'm ByteMe " + emoji + emoji + emoji + "\n"
                 + "    What can I do for you? (Don't bite me!)\n"
@@ -163,7 +165,7 @@ public class Duke {
     //handle to-do 
     public void handleTodo(String instruction) throws DukeException {
         if (instruction.substring(4).isBlank()) {
-            String emoji = new String(Character.toChars(0x1F609));
+            String emoji = Emoji.SMILE.toString();
             String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
                     + "    You can do it by adding description after 'todo '." + emoji ;
             throw new DukeException(exceptionMsg);
@@ -177,7 +179,7 @@ public class Duke {
     public void handleDeadline(String instruction) throws DukeException {
         int index = instruction.indexOf("/by");
         if (index == 8) {
-            String emoji = new String(Character.toChars(0x1F609));
+            String emoji = Emoji.SMILE.toString();
             String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
                     + "    You can do it by adding description after 'event '." + emoji ;
             throw new DukeException(exceptionMsg);
@@ -187,12 +189,12 @@ public class Duke {
             String by = instruction.substring(index + 3);
             String description = instruction.substring(9, index);
             if (description.isBlank()) {
-                String emoji = new String(Character.toChars(0x1F609));
+                String emoji = Emoji.SMILE.toString();
                 String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
                         + "    You can do it by adding description after 'deadline '." + emoji ;
                 throw new DukeException(exceptionMsg);
             } else if (by.isBlank()) {
-                String emoji = new String(Character.toChars(0x1F609));
+                String emoji = Emoji.SMILE.toString();
                 String exceptionMsg = "OOPS!!! I'm sorry, but the deadline cannot be empty. \n"
                         + "    You can do it by adding deadline after '/by '." + emoji ;
                 throw new DukeException(exceptionMsg);
@@ -200,7 +202,7 @@ public class Duke {
             Deadline deadline = new Deadline(description, by);
             this.addDeadline(deadline);
         } else {
-            String emoji = new String(Character.toChars(0x1F609));
+            String emoji = Emoji.SMILE.toString();
             String exceptionMsg = "OOPS!!! I'm sorry, but you have to indicate the deadline. \n"
                     + "    You can do it by adding '/by' after the description." + emoji ;
             throw new DukeException(exceptionMsg);
@@ -211,7 +213,7 @@ public class Duke {
     public void handleEvent(String instruction) throws DukeException {
         int index = instruction.indexOf("/at");
         if (index == 5) {
-            String emoji = new String(Character.toChars(0x1F609));
+            String emoji = Emoji.SMILE.toString();
             String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
                     + "    You can do it by adding description after 'event '." + emoji ;
             throw new DukeException(exceptionMsg);
@@ -221,12 +223,12 @@ public class Duke {
             String time = instruction.substring(index + 3);
             String description = instruction.substring(6, index);
             if (description.isBlank()) {
-                String emoji = new String(Character.toChars(0x1F609));
+                String emoji = Emoji.SMILE.toString();
                 String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
                         + "    You can do it by adding description after 'event '." + emoji ;
                 throw new DukeException(exceptionMsg);
             } else if (time.isBlank()) {
-                String emoji = new String(Character.toChars(0x1F609));
+                String emoji = Emoji.SMILE.toString();
                 String exceptionMsg = "OOPS!!! I'm sorry, but the time cannot be empty. \n"
                         + "    You can do it by adding time after '/at '." + emoji ;
                 throw new DukeException(exceptionMsg);
@@ -234,7 +236,7 @@ public class Duke {
             Event event = new Event(description, time);
             this.addEvent(event);
         } else {
-            String emoji = new String(Character.toChars(0x1F609));
+            String emoji = Emoji.SMILE.toString();
             String exceptionMsg = "OOPS!!! I'm sorry, but you have to indicate the time of the event. \n"
                     + "    You can do it by adding '/at' after the description." + emoji ;
             throw new DukeException(exceptionMsg);
@@ -276,7 +278,7 @@ public class Duke {
                     this.invalidInput();
                 }
             } catch (NumberFormatException ex) {
-                System.out.println(new DukeException("OOPS!!! I' m sorry, but you have to enter an integer"));
+                System.out.println(new DukeException("OOPS!!! I' m sorry, but you have to enter an integer."));
             } catch (DukeException ex) {
                 System.out.println(ex);
             }
