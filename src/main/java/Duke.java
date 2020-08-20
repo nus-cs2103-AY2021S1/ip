@@ -1,14 +1,13 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
-    private List storage;
+    private List<Task> storage;
 
     public Duke() {
-        storage = new ArrayList();
+        storage = new ArrayList<Task>();
     }
 
     public void greet() {
@@ -26,13 +25,14 @@ public class Duke {
 
     //stores and prints out command
     public void store(String s) {
-        storage.add(s);
+        Task newTask = new Task(s);
+        storage.add(newTask);
         System.out.println("added: " + s);
     }
 
     public void printList() {
         for (int i = 0; i < storage.size(); i++) {
-            String printtext = Integer.toString(i+1) + ". " + storage.get(i);
+            String printtext = Integer.toString(i+1) + ". " + storage.get(i).toString();
             System.out.println(printtext);
         }
     }
