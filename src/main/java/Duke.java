@@ -11,7 +11,7 @@ public class Duke {
         start.reply();
 
         while (sc.hasNext()) {
-            Message msg = new Message(sc.next(), list);
+            Message msg = new Message(sc.nextLine(), list);
             msg.reply();
             if (msg.getCmd() == Command.BYE) {
                 break;
