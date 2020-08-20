@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -16,15 +17,20 @@ public class Duke {
         System.out.println(hello);
 
         Scanner sc = new Scanner(System.in);
+        ArrayList<String> task_list = new ArrayList<>(); //List to keep track of tasks
 
 
         while (sc.hasNextLine()) {
             String command = sc.nextLine();
 
-            //Case: List
+            //Case: List -> Print out all the tasks in the list
             if (command.equals("list")) {
+                String tasks = "";
+                for (int i = 0; i < task_list.size(); i++) {
+                    tasks += String.format("     %d. %s\n", i+1, task_list.get(i));
+                }
                 System.out.println("    ____________________________________________________________\n" +
-                        "     list\n" +
+                        tasks +
                         "    ____________________________________________________________\n");
             }
             //Case: Blah
@@ -34,12 +40,20 @@ public class Duke {
                         "    ____________________________________________________________\n");
 
             }
-            //Case: Bye
+            //Case: Bye -> Termination of Duke Program
             else if (command.equals("bye")) {
                 System.out.println("    ____________________________________________________________\n" +
                         "     Bye. Hope to see you again soon!\n" +
                         "    ____________________________________________________________\n");
                 break;
+            }
+            //Case: Any other Command -> Add task to the task_list
+            else {
+                task_list.add(command);
+
+                System.out.println(String.format("    ____________________________________________________________\n" +
+                        "     added: %s\n" +
+                        "    ____________________________________________________________\n", command));
             }
         }
     }
