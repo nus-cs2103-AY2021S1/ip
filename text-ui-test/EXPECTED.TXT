@@ -1,7 +1,25 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello! I am Wish
+What can I do for you?
+There are no tasks in the database
+There are no tasks in the database to mark as done
+There are no tasks in the database to mark as done
+There are no tasks in the database to mark as done
+The description of a todo cannot be empty
+Looking good! I have added this task:
+[T][✘] borrow book
+Now you have 1 tasks in your list
+Task description and deadline cannot be empty
+Please input the deadline in a valid format
+Please input the deadline in a valid format
+Looking good! I have added this task:
+[D][✘] IP (by: today 2359)
+Now you have 2 tasks in your list
+Task description, start time and end time cannot be empty
+Please input the start and end timing in a valid format
+Looking good! I have added this task:
+[E][✘] project meeting (at: 2pm-4pm)
+Now you have 3 tasks in your list
+Index must be a number
+Index cannot be greater than size of database
+Nice! I have marked this task as done!
+Goodbye! All the best and see you again soon!
