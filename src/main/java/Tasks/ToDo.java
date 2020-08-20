@@ -1,4 +1,8 @@
-public class ToDo extends Task {
+package Tasks;
+
+import Tasks.Task;
+
+class ToDo extends Task {
     ToDo(String desc){
         super(desc,false);
     }

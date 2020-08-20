@@ -1,5 +1,8 @@
+package Tasks;
 
-public abstract class TimedTask extends Task {
+import Tasks.Task;
+
+abstract class TimedTask extends Task {
     protected final String dateby;
     protected TimedTask(String desc, String date) {
         super(desc, false);

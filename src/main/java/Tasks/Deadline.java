@@ -1,4 +1,8 @@
-public class Deadline extends TimedTask{
+package Tasks;
+
+import Tasks.TimedTask;
+
+class Deadline extends TimedTask {
     Deadline(String desc,String date){
         super(desc, date);
     }

@@ -1,4 +1,8 @@
-public class Event extends TimedTask {
+package Tasks;
+
+import Tasks.TimedTask;
+
+class Event extends TimedTask {
     Event(String desc,String date){
         super(desc, date);
     }

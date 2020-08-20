@@ -1,4 +1,6 @@
-public abstract class Task {
+package Tasks;
+
+abstract class Task {
     protected String description;
     protected boolean done;
 
@@ -17,7 +19,7 @@ public abstract class Task {
     }
 
     /**
-     * Mark Task object as done
+     * Mark Tasks.Task object as done
      */
     public void doTask(){
         this.done = true;

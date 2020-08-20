@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
-public class Main {
+/**
+ * Front End Facing Script for the UI.
+ */
+public class ChatbotApplication {
     /**
      * Execution Class to contain main loop
      * @param args

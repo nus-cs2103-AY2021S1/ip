@@ -1,6 +1,14 @@
-import java.util.Scanner;
+import Exceptions.*;
+import Tasks.Command;
+import Tasks.TaskManager;
 
-public class Duke {
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
+/**
+ * Backend Object Class for the Duke Chatbot Interface
+ */
+class Duke {
     private final TaskManager list;
     private boolean running;
     private final String linebreaker;
@@ -16,46 +24,79 @@ public class Duke {
      * @param input
      */
     public void takeInput(String input) {
+        //To prevent an Security Concern or Code Injection Cleaning of text is first performed and authenticated
+        // by adding an ending token
+        //TODO eventually to convert the input -> Command with getter for task, deadline(if applicable)
         String cleaned = cleanInput(input);
-        String[] words = cleaned.split(" ");
+        // There is minimally a sep
+        String[] words = cleaned.split(" "); 
         cleaned = cleaned.replace(" [sep]", "");
-        // Take out command from the word
-        String cmd = cleaned.replaceFirst(words[0],"");
+        // Take out command from the words
+        String text_input = cleaned.replaceFirst(words[0],"");
         //Sep token is added to prevent index errors
-        switch (words[0]) {
-            case "bye":
-                this.running = false;
-                break;
-            case "help":
-                this.help();
-                break;
-            case "done":
-                this.list.doTask(words[1]);
-                break;
-            case "list":
-                this.list.parseoutput();
-                break;
-            default:
-                switch (words[0]) {
-                    case "todo":
-                        this.list.addToDo(cmd);
-                        break;
-                    case "deadline":
-                        this.list.addDeadline(cmd);
-                        break;
-                    case "event":
-                        this.list.addEvent(cmd);
-                        break;
-                    default:
-                        badCommand(input);
-                        break;
-                }
-                break;
-        }
+        Command c = parseCommand(words[0]);
 
+        try {
+            switch (c) {
+                case bye:
+                    this.running = false;
+                    break;
+                case help:
+                    print(this.help());
+                    break;
+                case done:
+                    print(list.doTask(words[1]));
+                    break;
+                case list:
+                    print(list.parseoutput());
+                    break;
+                case todo:
+                    print(this.list.addToDo(text_input));
+                    break;
+                case deadline:
+                    print(this.list.addDeadline(text_input));
+                    break;
+                case event:
+                    print(this.list.addEvent(text_input));
+                    break;
+                case blank:
+                    throw new DukeBlankCommandException("''");
+                case error:
+                    throw new DukeCommandException(words[0]);
+                default:
+                    throw new DukeUnknownException(text_input);
+
+            }
+        }catch (DukeUnknownException e){
+            print(e.toString());
+            //Shut down the application as this error appears to be program breaking
+            this.running = false;
+        } catch (DukeException e){
+            //an Expected exception that does not change the loop
+            print(e.toString());
+        } 
     }
 
-
+    /**
+     * Parse Command into the 
+     * @param cmd
+     * @return
+     */
+    
+    public Command parseCommand(String cmd){
+        String cleaned = cmd.toLowerCase();
+        Command given = null;
+        Command[] commandlst = Command.values();
+        for (Command c : Command.values()){
+            if (c.getCode().equals(cleaned)) {
+                given = c;
+                // if there is a match, there is no other command that would match
+                break;
+            }
+        }
+        given = given==null ? Command.error:given;
+        return given;
+    }
 
     /**
      * inputs string, processes and cleans the text for the chatbot
@@ -67,8 +108,8 @@ public class Duke {
         return s+" [sep]";
     }
 
-    public void help(){
-        StringBuilder b = new StringBuilder(linebreaker);
+    public String help(){
+        StringBuilder b = new StringBuilder();
         b.append("\t Need some help huh?\n");
         b.append("\t Heres a list of my commands!\n");
         b.append("\t- 'bye' to close the application\n");
@@ -79,8 +120,7 @@ public class Duke {
         b.append("\t- 'event' to list a timed event task, please structure with [event <task name> /at <time>\n");
         b.append("\t- 'help' to list these commands again\n");
         //eventually to add command help <command>
-        b.append(linebreaker);
-        System.out.println(b.toString());
+        return b.toString();
     }
 
     /**
@@ -91,16 +131,13 @@ public class Duke {
         return this.running;
     }
 
+    
+
     /**
-     * Handles bad command
-     * @param cmd
+     * Wraps all text output and prints to the console
+     * @param s
      */
-    private void badCommand(String cmd){
-        StringBuilder b = new StringBuilder(linebreaker);
-        b.append("\t Oops you used a invalid command! Not sure what you mean... by:\n");
-        b.append("\t ").append(cmd).append("\n");
-        b.append("\t Heres a tip, use the 'help' command to learn about my commands!\n");
-        b.append(linebreaker);
-        System.out.println(b.toString());
+    public void print(String s){
+        System.out.println(String.format("%s%s%s",linebreaker,s,linebreaker));
     }
 }
