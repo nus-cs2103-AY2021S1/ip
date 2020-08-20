@@ -9,13 +9,13 @@ public class Duke {
 
         Scanner Sc = new Scanner(System.in);
         String line = "____________________________\n"
-                     +"____________________________";
+                +"____________________________";
 
         String logo = "****** ****** ****** ******\n"
-                     +"   *   *      *      *\n"
-                     +"   *   ****** ****** ******\n"
-                     +"*  *   *      *      *\n"
-                     +"***    ****** *      *\n";
+                +"   *   *      *      *\n"
+                +"   *   ****** ****** ******\n"
+                +"*  *   *      *      *\n"
+                +"***    ****** *      *\n";
 
         System.out.println("My name is\n" + logo);
         System.out.println("What do you want?");
@@ -58,7 +58,7 @@ public class Duke {
                 }
                 case "deadline" : {
                     Task newTask = new Deadline(taskDescription.split(" /")[0]
-                                               ,taskDescription.split(" /")[1]);
+                            ,taskDescription.split(" /")[1]);
                     tasks.add(newTask);
                     newTask.printAddTask();
                     printNumberOfTask(tasks.size());
@@ -66,7 +66,7 @@ public class Duke {
                 }
                 case "event" : {
                     Task newTask = new Event(taskDescription.split(" /")[0]
-                                            ,taskDescription.split(" /")[1]);
+                            ,taskDescription.split(" /")[1]);
                     tasks.add(newTask);
                     newTask.printAddTask();
                     printNumberOfTask(tasks.size());
