@@ -88,6 +88,10 @@ public class Duke {
     }
 
     private static void lsHandler() {
+        if (savedItems.size() == 0) {
+            System.out.println("No tasks found. Start adding your first few tasks!");
+            return;
+        }
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < savedItems.size(); ++i) {
             Task task = savedItems.get(i);
