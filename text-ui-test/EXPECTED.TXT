@@ -1,6 +1,7 @@
 Hello I am Duke!
 How can I help you?
 
+
 Got it. This task is now added.
  [T][✘] read book
 You have 1 tasks left in your list!
@@ -57,5 +58,4 @@ There are currently no tasks stored!
 
 
 Bye! Have a nice day!
-
 
