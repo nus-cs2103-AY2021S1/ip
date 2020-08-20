@@ -103,7 +103,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);  // Create a Scanner object
         String welcomeMessage = "____________________________________________________________\n"
                 + "Hello I'm Duke\n"
-                + "What can I do for you?\n"
+                + "Your personal smart assistant?\n"
                 + "____________________________________________________________";
         System.out.println(welcomeMessage);
 
@@ -112,34 +112,39 @@ public class Duke {
         while (true) {
             String input = sc.nextLine();
             System.out.println("____________________________________________________________");
-            if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            } else if (input.length() > 5 && input.substring(0,6).equals("delete")) {
-                deleteTask(input, ls);
-                continue;
+            try {
+                if (input.equals("bye")) {
+                    System.out.println("Bye. Hope to see you again soon!");
+                    break;
+                } else if (input.length() > 5 && input.substring(0,6).equals("delete")) {
+                    deleteTask(input, ls);
+                    continue;
+                }
+                Choice choice = Choice.valueOf(parseInput(input));
+                switch (choice) {
+                    case DONE:
+                        completeTask(input, ls);
+                        break;
+                    case LIST:
+                        listAllTasks(ls);
+                        break;
+                    case DEADLINE:
+                        addDeadline(input, ls);
+                        break;
+                    case EVENT:
+                        addEvent(input, ls);
+                        break;
+                    case TODO:
+                        ls.add(new Todo(input.substring(5)));
+                        printAddedTask(ls);
+                        break;
+                    default:
+                        System.out.println("Invalid input. Please try again.");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
             }
-            Choice choice = Choice.valueOf(parseInput(input));
-            switch (choice) {
-                case DONE:
-                    completeTask(input, ls);
-                    break;
-                case LIST:
-                    listAllTasks(ls);
-                    break;
-                case DEADLINE:
-                    addDeadline(input, ls);
-                    break;
-                case EVENT:
-                    addEvent(input, ls);
-                    break;
-                case TODO:
-                    ls.add(new Todo(input.substring(5)));
-                    printAddedTask(ls);
-                    break;
-                default:
-                    System.out.println("Invalid input. Please try again.");
-            }
+
             System.out.println("\n____________________________________________________________");
         }
     }
