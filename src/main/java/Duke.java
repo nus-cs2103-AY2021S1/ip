@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Duke {
 
-    private static String divider = "_________________________________________________________________";
+    private static String divider = "______________________________________________________________________________";
     private static String logo = "             *\n"
             + "      o  o  / \\  o  o\n"
             + "      |\\/ \\/   \\/ \\/|\n"
@@ -23,6 +23,19 @@ public class Duke {
 
     private static void addList(Task task) {
         list.add(task);
+    }
+
+    private static boolean isDeleteCommand(String input) {
+        String[] stringArray = input.split(" ");
+        return stringArray[0].equals("delete");
+    }
+
+    private static void deleteTask(String input) throws DukeException {
+        if (isValidIndex(input)) {
+            list.remove(getIndex(input));
+        } else {
+            throw new DukeException("You don't have such task in your list...");
+        }
     }
 
     private static void showList() {
@@ -70,8 +83,12 @@ public class Duke {
         return stringArray[0].equals("todo");
     }
 
-    private static String getTodoDescription(String input) {
-        return input.substring(5);
+    private static String getTodoDescription(String input) throws DukeException{
+        try {
+            return input.substring(5);
+        } catch (Exception e){
+            throw new DukeException("Todo cannot be empty!");
+        }
     }
 
     private static boolean isDeadline(String input) {
@@ -96,31 +113,31 @@ public class Duke {
         return stringArray;
     }
 
+    private static void wrapMessage(String message) {
+        System.out.println(divider);
+        System.out.println("   " + message);
+        System.out.println(divider + "\n");
+    }
+
     private static void byeMessage() {
-        System.out.println(divider);
-        System.out.println("   Banana! King Bob is sad to see you go. Farewell my friend!");
-        System.out.println(divider);
+        wrapMessage("Banana! King Bob is sad to see you go. Farewell my friend!");
     }
 
     private static void addedMessage(Task task) {
-        System.out.println(divider);
-        System.out.println("   Banana! Banana has been added to your list!");
-        System.out.println("      " + task.toString());
-        System.out.println("   Now you have " + getListSize() + " banana(s) in your list! Nom nom..");
-        System.out.println(divider + "\n");
+        wrapMessage("Banana! Banana has been added to your list!\n"
+                + "      " + task.toString() + "\n"
+                + "   Now you have " + getListSize() + " banana(s) in your list! Nom nom..");
+    }
+
+    private static void deletedMessage(Task task) {
+        wrapMessage("Banana! Banana has been eaten. Burp!\n"
+                + "      " + task.toString() + "\n"
+                + "   Now you have " + getListSize() + " banana(s) in your list! Nom nom..");
     }
 
     private static void doneMessage(Task task) {
-        System.out.println(divider);
-        System.out.println("   Banana! I've marked this task as done:");
-        System.out.println("      " + task.toString());
-        System.out.println(divider + "\n");
-    }
-
-    private static void errorMessage() {
-        System.out.println(divider);
-        System.out.println("   Apple Pineapple! Something is wrong with your command...");
-        System.out.println(divider + "\n");
+        wrapMessage("Banana! I've marked this task as done:\n"
+                + "      " + task.toString());
     }
 
     public static void main(String[] args) {
@@ -134,30 +151,37 @@ public class Duke {
         while (scanner.hasNext()) {
             nextLine = scanner.nextLine();
 
-            if (nextLine.equals("bye")) {
-                byeMessage();
-                break;
-            } else if (nextLine.equals("list")) {
-                showList();
-            } else if (isDoneCommand(nextLine)) {
-                if (isValidIndex(nextLine)) {
-                    Task task = list.get(getIndex(nextLine));
-                    task.markAsDone();
-                    doneMessage(task);
+            try {
+                if (nextLine.equals("bye")) {
+                    byeMessage();
+                    break;
+                } else if (nextLine.equals("list")) {
+                    showList();
+                } else if (isDoneCommand(nextLine)) {
+                    if (isValidIndex(nextLine)) {
+                        Task task = list.get(getIndex(nextLine));
+                        task.markAsDone();
+                        doneMessage(task);
+                    } else {
+                        throw new DukeException("You don't have such task in your list...");
+                    }
+                } else if (isDeleteCommand(nextLine)) {
+                    deletedMessage(list.get(getIndex(nextLine)));
+                    deleteTask(nextLine);
+                } else if (isTodo(nextLine)) {
+                    addList(new Todo(getTodoDescription(nextLine)));
+                    addedMessage(new Todo(getTodoDescription(nextLine)));
+                } else if (isDeadline(nextLine)) {
+                    addList(new Deadline(getDeadlineStrings(nextLine)[0], getDeadlineStrings(nextLine)[1]));
+                    addedMessage(new Deadline(getDeadlineStrings(nextLine)[0], getDeadlineStrings(nextLine)[1]));
+                } else if (isEvent(nextLine)) {
+                    addList(new Event(getEventTimeStrings(nextLine)[0], getEventTimeStrings(nextLine)[1]));
+                    addedMessage(new Event(getEventTimeStrings(nextLine)[0], getEventTimeStrings(nextLine)[1]));
                 } else {
-                    errorMessage();
+                    throw new DukeException("Give me a valid banana (input)!");
                 }
-            } else {
-                Task task;
-                task = isTodo(nextLine)
-                        ? new Todo(getTodoDescription(nextLine))
-                        : isDeadline(nextLine)
-                        ? new Deadline(getDeadlineStrings(nextLine)[0], getDeadlineStrings(nextLine)[1])
-                        : isEvent(nextLine)
-                        ? new Event(getEventTimeStrings(nextLine)[0], getEventTimeStrings(nextLine)[1])
-                        : new Task(nextLine);
-                addList(task);
-                addedMessage(task);
+            } catch (DukeException e){
+                wrapMessage(e.toString());
             }
         }
         scanner.close();

@@ -1,3 +1,11 @@
-todo
-bla
-done 1
+todo read book
+deadline return book /by june
+event project meeting /at 3pm
+sdf
+todo join club
+todo borrow book
+done 3
+done 4
+list
+delete 4
+list
