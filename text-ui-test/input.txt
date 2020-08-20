@@ -9,5 +9,8 @@ todo
 deadline project
 done 3
 list
+done
+done one
+done 0
 done 1
 bye

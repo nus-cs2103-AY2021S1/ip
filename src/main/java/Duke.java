@@ -16,7 +16,14 @@ public class Duke {
 
     private static void checkValidTaskCommand(String[] commands) throws DukeException {
         if (commands.length < 2) {
-            throw new DukeException("☹ OOPS!!! The description of a " + commands[0] + " cannot be empty.\n");
+            throw new DukeException("☹ OOPS!!! Please put a number to select a task for the \"" +
+                    commands[0] + "\" action!");
+        }
+    }
+
+    private static void checkValidAddCommand(String[] commands) throws DukeException {
+        if (commands.length < 2) {
+            throw new DukeException("☹ OOPS!!! The description of a " + commands[0] + " cannot be empty.");
         }
     }
 
@@ -25,31 +32,32 @@ public class Duke {
         try {
             switch (commands[0]) {
                 case "todo":
-                    checkValidTaskCommand(commands);
+                    checkValidAddCommand(commands);
                     addTask(new Todo(commands[1]), taskList);
                     break;
                 case "deadline":
-                    checkValidTaskCommand(commands);
+                    checkValidAddCommand(commands);
                     addTask(Deadline.create(commands[1]), taskList);
                     break;
                 case "event":
-                    checkValidTaskCommand(commands);
+                    checkValidAddCommand(commands);
                     addTask(Event.create(commands[1]), taskList);
                     break;
                 case "list":
                     displayTaskList(taskList);
                     break;
                 case "done":
+                    checkValidTaskCommand(commands);
                     markTaskDone(commands[1], taskList);
                     break;
                 case "bye":
                     sayBye();
                     return false;
                 default:
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-( \n");
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch(DukeException dukeException) {
-            System.out.println(wrapDivider("     " + dukeException.getMessage()));
+            System.out.println(wrapDivider("     " + dukeException.getMessage() + "\n"));
         }
         return true;
     }
@@ -64,14 +72,20 @@ public class Duke {
 
     }
 
-    private static void markTaskDone(String selection, List<Task> taskList) {
-        int index = Integer.parseInt(selection);
-        Task task = taskList.get(index - 1);
-        task.markDone();
-        System.out.println(wrapDivider(
-            "     Nice! I've marked this task as done: \n" +
-            "       "+ task.toString() + "\n"
-        ));
+    private static void markTaskDone(String selection, List<Task> taskList) throws DukeException {
+        try {
+            int index = Integer.parseInt(selection);
+            Task task = taskList.get(index - 1);
+            task.markDone();
+            System.out.println(wrapDivider(
+                    "     Nice! I've marked this task as done: \n" +
+                            "       "+ task.toString() + "\n"
+            ));
+        } catch (NumberFormatException nfe) {
+            throw new DukeException("☹ OOPS!!! Please input an actual number.");
+        } catch (IndexOutOfBoundsException iobe) {
+            throw new DukeException("☹ OOPS!!! Please select a valid task.");
+        }
     }
 
     private static void echoAddCommand(String command) {
