@@ -1,6 +1,5 @@
 package main.java;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -72,7 +71,7 @@ public class Duke {
         }
     }
 
-    public static void commandHandler(String input, TaskList newList) throws InvalidDoneException {
+    public static void commandHandler(String input, TaskList newList) throws InvalidDoneDeleteException {
         String[] splitInput = input.split(" ");
 
         if (splitInput[0].equals("list")) {
@@ -80,20 +79,37 @@ public class Duke {
 
         } else if (splitInput[0].equals("done")) {
             if (splitInput.length == 1) {
-                throw new InvalidDoneException("    ☹ OOPS!!! Please specify which task is done");
+                throw new InvalidDoneDeleteException("    ☹ OOPS!!! Please specify which task is done");
             } else {
                 String taskNumberString = splitInput[1];
                 try {
                     int taskNumberInt = Integer.parseInt(taskNumberString) - 1;
 
                     if (taskNumberInt + 1 > newList.getLength()) {
-                        throw new InvalidDoneException("    ☹ OOPS!!! Your task number is out of bounds");
+                        throw new InvalidDoneDeleteException("    ☹ OOPS!!! Your task number is out of bounds");
                     } else {
                         newList.get(taskNumberInt).markDone();
                     }
                 } catch (NumberFormatException e) {
-                    throw new InvalidDoneException("    ☹ OOPS!!! Invalid task number.");
+                    throw new InvalidDoneDeleteException("    ☹ OOPS!!! Invalid task number.");
 
+                }
+            }
+        } else if (splitInput[0].equals("delete")) {
+            if (splitInput.length == 1) {
+                throw new InvalidDoneDeleteException("    ☹ OOPS!!! Please specify which task you want to delete");
+            } else {
+                String taskNumberString = splitInput[1];
+                try {
+                    int taskNumberInt = Integer.parseInt(taskNumberString) - 1;
+
+                    if (taskNumberInt + 1 > newList.getLength()) {
+                        throw new InvalidDoneDeleteException("    ☹ OOPS!!! Your task number is out of bounds");
+                    } else {
+                        newList.removeTask(taskNumberInt);
+                    }
+                } catch (NumberFormatException e) {
+                    throw new InvalidDoneDeleteException("    ☹ OOPS!!! Invalid task number.");
                 }
             }
         } else {
@@ -128,7 +144,7 @@ public class Duke {
                 } else {
                     commandHandler(input, newList);
                 }
-            } catch (InvalidDoneException e) {
+            } catch (InvalidDoneDeleteException e) {
                 System.out.println(e.getMessage());
             }
             System.out.println(underscore);

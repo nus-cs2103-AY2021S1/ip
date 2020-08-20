@@ -23,6 +23,13 @@ public class TaskList {
         return this.todoList.size();
     }
 
+    public void removeTask(int index) {
+        Task removedTask = this.todoList.get(index);
+        this.todoList.remove(index);
+        System.out.println("     Noted. I've removed this task:" + "\n" + "      " + removedTask.toString());
+        System.out.println("     Now you have " + this.todoList.size() + " tasks in the list.");
+    }
+
     public void listTasks() {
         System.out.println("     Here are the tasks in your list:");
         for (int i = 0; i < this.todoList.size(); i++) {
