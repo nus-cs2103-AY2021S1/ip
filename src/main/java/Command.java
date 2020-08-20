@@ -15,72 +15,82 @@ public class Command {
         List<String> stringList = new ArrayList<>(Arrays.asList(stringArray));
         String com = stringList.remove(0);
 
-        if (com.equals("hello")) {
-            return "Hi! I'm Duke! Pleasure to meet you :)";
+        switch(com) {
+            case ("hello"):
+                return "Hi! I'm Duke! Pleasure to meet you :)";
+
+
+            case ("list"):
+            case ("done"):
+            case ("delete"):
+                try {
+                    return this.processList(com, stringList);
+                } catch (Exception e) {
+                    return e.getMessage();
+                }
+
+            case ("todo"):
+            case ("deadline"):
+            case ("event"):
+                try {
+                    return this.processTask(com, stringList);
+                } catch (Exception e) {
+                    return e.getMessage();
+                }
+
+            default:
+                throw new DukeException("Sorry, I did not understand: " + command);
         }
-        if (com.equals("list") || com.equals("done") || com.equals("delete")) {
-            try {
-                return this.processList(com, stringList);
-            } catch (Exception e){
-                return e.getMessage();
-            }
-        }
-        if (com.equals("todo") || com.equals("deadline") || com.equals("event")) {
-            try {
-                return this.processTask(com, stringList);
-            } catch (Exception e) {
-                return e.getMessage();
-            }
-        }
-        throw new DukeException("Sorry, I did not understand: " + command);
     }
 
     private String processTask(String com, List<String> stringList) throws DukeException {
-        if (com.equals("todo")) {
-            if (!stringList.isEmpty()) {
-                return list.addItem(new Todo(String.join(" ", stringList)));
-            } else {
-                throw new DukeException("Please write a task to be done, with \"todo <task>\"");
-            }
+
+        switch(com) {
+            case("todo"):
+                if (!stringList.isEmpty()) {
+                    return list.addItem(new Todo(String.join(" ", stringList)));
+                } else {
+                    throw new DukeException("Please write a task to be done, with \"todo <task>\"");
+                }
+            case("deadline"):
+                if (!stringList.isEmpty()) {
+                    String[] taskAndDate = Command.getTaskAndDate(stringList);
+                    return list.addItem(new Deadline(taskAndDate[0], taskAndDate[1]));
+                } else {
+                    throw new DukeException("Please write a deadline, with \"deadline <task> /by <date>\"");
+                }
+            case("event"):
+                if (!stringList.isEmpty()) {
+                    String[] taskAndDate = Command.getTaskAndDate(stringList);
+                    return list.addItem(new Event(taskAndDate[0], taskAndDate[1]));
+                } else {
+                    throw new DukeException("Please write an event, with \"event <task> /at <date>\"");
+                }
+            default:
+                return null;
         }
-        if (com.equals("deadline")) {
-            if (!stringList.isEmpty()) {
-                String[] taskAndDate = Command.getTaskAndDate(stringList);
-                return list.addItem(new Deadline(taskAndDate[0], taskAndDate[1]));
-            } else {
-                throw new DukeException("Please write a deadline, with \"deadline <task> /by <date>\"");
-            }
-        }
-        if (com.equals("event")) {
-            if (!stringList.isEmpty()) {
-                String[] taskAndDate = Command.getTaskAndDate(stringList);
-                return list.addItem(new Event(taskAndDate[0], taskAndDate[1]));
-            } else {
-                throw new DukeException("Please write an event, with \"event <task> /at <date>\"");
-            }
-        }
-        return null;
     }
 
     private String processList(String com, List<String> stringList) throws DukeException {
-        if (com.equals("list")) {
-            return list.toString();
+
+        switch(com) {
+            case("list"):
+                return list.toString();
+            case("done"):
+                if (!stringList.isEmpty()) {
+                    return list.markDone(Integer.parseInt(stringList.get(0)) - 1);
+                } else {
+                    throw new DukeException("Please choose a task to mark as done, with \"done <task number>\"");
+                }
+            case("delete"):
+                if (!stringList.isEmpty()) {
+                    return list.deleteItem(Integer.parseInt(stringList.get(0)) - 1);
+                } else {
+                    throw new DukeException("Please choose a task to delete, with \"delete <task number>\"");
+                }
+            default:
+                return null;
         }
-        if (com.equals("done")) {
-            if (!stringList.isEmpty()) {
-                return list.markDone(Integer.parseInt(stringList.get(0)) - 1);
-            } else {
-                throw new DukeException("Please choose a task to mark as done, with \"done <task number>\"");
-            }
-        }
-        if (com.equals("delete")) {
-            if (!stringList.isEmpty()) {
-                return list.deleteItem(Integer.parseInt(stringList.get(0)) - 1);
-            } else {
-                throw new DukeException("Please choose a task to delete, with \"delete <task number>\"");
-            }
-        }
-        return null;
     }
 
     private static String[] getTaskAndDate(List<String> description) {
