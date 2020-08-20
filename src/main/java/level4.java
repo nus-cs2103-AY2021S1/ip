@@ -26,8 +26,7 @@ public class level4 {
             int length = input.length();
             String[] isDone = input.split(" ");
             String firstChar = isDone[0];
-
-//            String lastChar = isDone[length - 1];
+            
 
             if (input.equals("list")) {
 
