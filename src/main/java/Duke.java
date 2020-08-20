@@ -23,7 +23,7 @@ public class Duke {
 
 
         // Greetings
-        System.out.println("Hello, I'm\n" + logo);
+        System.out.println("\nHello, I'm Duke!");
         System.out.println("What can I help you with today?");
         System.out.println("\n" + lineBreaker);
         System.out.println();
@@ -119,7 +119,7 @@ public class Duke {
 
     /** Prints all the contents of the list in order **/
     public static void printList(Task[] list) {
-        System.out.print("\nHere is what I have! ^^\n");
+        System.out.print("Here is what I have! ^^\n");
         for (int i = 0; i < Task.quantity; i++) {
             // Enumerator
             System.out.print((i+1) + ".");
