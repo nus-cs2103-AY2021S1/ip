@@ -33,10 +33,25 @@ public class Duke {
                 String cmd = scanner2.next();
                 if (cmd.equalsIgnoreCase("done")) {
                     int index = scanner2.nextInt();
-                    Task task = list.get(index - 1);
-                    task.markAsDone();
-                    System.out.println("\tNice! I've marked this as done:");
-                    System.out.println("\t  " + task.toString());
+                    try {
+                        Task task = list.get(index - 1);
+                        task.markAsDone();
+                        System.out.println("\tNice! I've marked this as done:");
+                        System.out.println("\t  " + task.toString());
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(errorPrefix + "Sorry, that is not a valid task.");
+                    }
+
+                }
+                else if (cmd.equalsIgnoreCase("delete")) {
+                    int index = scanner2.nextInt();
+                    try {
+                        System.out.println("\tNoted. I've removed this task:");
+                        System.out.println("\t" + list.remove(index - 1).toString());
+                        System.out.println("\tNow you have " + list.size() + " task(s) in the list.");
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(errorPrefix + "Sorry, that is not a valid task.");
+                    }
                 }
                 else if (cmd.equalsIgnoreCase("todo")) {
                     if (!scanner2.hasNext()) {
