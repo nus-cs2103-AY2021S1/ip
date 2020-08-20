@@ -5,35 +5,32 @@ public class TaskList {
     //This class manages the list of Tasks that the user has added
     private List<Task> ls= new ArrayList<>();
 
-    public boolean isEmpty(){
-        return ls.isEmpty();
-    }
-
     public int length(){
         return ls.size();
     }
 
-    public void setDone(int task) throws Exception{
+    public void setDone(int task) throws DukeException{
         if(task>ls.size()){
-            throw new Exception("You dont have that many tasks");
+            throw new DukeException("You don't have that many tasks");
         }else {
             ls.set(task, ls.get(task).done());
             System.out.println("     Nice! I've marked this task as done: ");
-            System.out.println("       [" + "\u2713] " + ls.get(task).getTask());
+            System.out.println("       " + ls.get(task).toString());
         }
     }
 
-    public void add(String task){
-        ls.add(new Task(task, false));
+    public void add(Task task){
+        ls.add(task);
     }
 
-    public void printTask(){
-        for(int i = 0; i < ls.size(); i++){
-            int j = i+1;
-            if(ls.get(i).getIsDone()){
-                System.out.println("     " + j + ".[" + "\u2713] " + ls.get(i).getTask());
-            }else{
-                System.out.println("     " + j + ".[" + "\u2718] " + ls.get(i).getTask());
+    public void printTask() throws DukeException{
+        if(ls.isEmpty()){
+            throw new DukeException("Sorry you have no tasks in your list.");
+        }else {
+            System.out.println("     Here are the tasks in your list:");
+            for (int i = 0; i < ls.size(); i++) {
+                int j = i + 1;
+                System.out.println("     " + j + "." + ls.get(i).toString());
             }
         }
     }
