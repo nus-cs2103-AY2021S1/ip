@@ -46,9 +46,13 @@ public class Duke {
                 done(input);
                 return true;
             case "todo":
-                String todoTask = parts[1];
-                task = handleTodo(todoTask);
-                handleTask(task);
+                try {
+                    String todoTask = parts[1];
+                    task = handleTodo(todoTask);
+                    handleTask(task);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    printOutput("     OOPS!!! The description of a todo cannot be empty.", true);
+                }
                 return true;
             case "deadline":
                 second = parts[1];
@@ -70,6 +74,7 @@ public class Duke {
                 exit();
                 return false;
             default:
+                printOutput("     OOPS!!! I'm sorry, but I don't know what that means :-(", true);
                 return true;
         }
     }
