@@ -26,9 +26,30 @@ public class Duke {
             } else if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
+            } else if (input.length() >= 6 && input.substring(0, 4).equals("todo")){
+                Task newTask = new Task("todo", input);
+                taskList.add(newTask);
+                System.out.println("Got it. I've added this task:");
+                System.out.println("\t" + newTask);
+                System.out.println("Now you have " + String.valueOf(taskList.size()) + " tasks in your list.");
+
+            } else if (input.length() >= 10 && input.substring(0, 8).equals("deadline")) {
+                String[] descDue = input.substring(9).split("/");
+                Task newTask = new Task("deadline", descDue[0], descDue[1]);
+                taskList.add(newTask);
+                System.out.println("Got it. I've added this task:");
+                System.out.println("\t" + newTask);
+                System.out.println("Now you have " + String.valueOf(taskList.size()) + " tasks in your list.");
+
+            } else if (input.length() >= 7 && input.substring(0, 5).equals("event")) {
+                String[] descDue = input.substring(6).split("/");
+                Task newTask = new Task("event", descDue[0], descDue[1]);
+                taskList.add(newTask);
+                System.out.println("Got it. I've added this task:");
+                System.out.println("\t" + newTask);
+                System.out.println("Now you have " + String.valueOf(taskList.size()) + " tasks in your list.");
             } else {
-                //Add a new task in the list.
-                taskList.add(new Task(input));
+                System.out.println("unknown input");
             }
         }
     }
