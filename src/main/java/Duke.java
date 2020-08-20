@@ -24,7 +24,10 @@ public class Duke {
                     break;
                 } else if (input.equals("list")) {
                     list();
-                } else if (input.startsWith("done ")) {
+                } else if (input.startsWith("delete")) {
+                    int indexOfTaskToDelete = Integer.parseInt(input.substring(7));
+                    delete(indexOfTaskToDelete);
+                } else if (input.startsWith("done")) {
                     int indexOfDoneTask = Integer.parseInt(input.substring(5));
                     markAsDone(indexOfDoneTask);
                 } else if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")) {
@@ -111,6 +114,17 @@ public class Duke {
         System.out.println("    ____________________________________________________________\n" +
                 "     Nice! I've marked this task as done:\n" +
                 "       " + doneTask + "\n" +
+                "    ____________________________________________________________");
+    }
+
+    private void delete(int indexOfTaskToDelete) {
+        Task taskToDelete = taskList.get(indexOfTaskToDelete - 1);
+        taskList.remove(indexOfTaskToDelete - 1);
+        System.out.println("    ____________________________________________________________\n" +
+                "     Noted. I've removed this task: \n" +
+                "       " + taskToDelete + "\n" +
+                "     Now you have " + taskList.size() +
+                (taskList.size() == 1 ? " task in the list.\n" : " tasks in the list.\n") +
                 "    ____________________________________________________________");
     }
 }
