@@ -1,9 +1,11 @@
-public class Deadline extends Task {
-    protected String by;
+package Task;
 
-    public Deadline(String description, String by) {
+import Task.Task;
+
+public class ToDo extends Task {
+
+    public ToDo(String description) {
         super(description);
-        this.by = by;
     }
 
     public String toString() {
@@ -13,6 +15,6 @@ public class Deadline extends Task {
         } else {
             icon = "[" + "\u2718" + "]";
         }
-        return "[D]" + icon + " " + this.description + " (by: " + this.by + ")";
+        return "[T]" + icon + " " + this.description;
     }
 }

@@ -1,3 +1,4 @@
+import Task.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -10,7 +11,7 @@ public class Duke {
         String close = "_______________________________________ \n"
                 + "Bye. Hope to see you again soon! \n"
                 + "_______________________________________ \n";
-        String line = "_______________________________________";
+        String line = "_______________________________________\n";
         System.out.println(open);
 
         ArrayList<Task> user_list = new ArrayList<>();
@@ -26,12 +27,12 @@ public class Duke {
                 for (int i = 1; i <= user_list.size(); i++) {
                     output = output + i + ". " + user_list.get(i-1) + "\n";
                 }
-                System.out.println(line + "\n Here are the tasks in your list: \n" + output + line);
+                System.out.println(line + "Here are the tasks in your list: \n" + output + line);
 
             } else if (input_split[0].equals("done")) {  // For marking items in the to do list as done
                 int task_id = Integer.parseInt(input_split[1]);
                 user_list.get(task_id - 1).setCompleted();
-                System.out.println(line + "\n" + "Nice! I've marked this task as done: \n"
+                System.out.println(line + "Nice! I've marked this task as done: \n"
                         + user_list.get(task_id - 1) + "\n" + line);
 
             } else {  // For adding new items into to do list
@@ -47,7 +48,7 @@ public class Duke {
                     user_list.add(new Event(details[0], details[1]));
 
                 }
-                String output = line + "\n" + "Got it. I've added this task: \n"
+                String output = line + "Got it. I've added this task: \n"
                         + user_list.get(user_list.size()-1) + "\n"
                         + "Now you have " + user_list.size() + " tasks in the list."
                         + "\n" + line;

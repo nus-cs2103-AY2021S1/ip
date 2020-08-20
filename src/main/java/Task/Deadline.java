@@ -1,7 +1,11 @@
-public class ToDo extends Task{
+package Task;
 
-    public ToDo(String description) {
+public class Deadline extends Task {
+    protected String by;
+
+    public Deadline(String description, String by) {
         super(description);
+        this.by = by;
     }
 
     public String toString() {
@@ -11,6 +15,6 @@ public class ToDo extends Task{
         } else {
             icon = "[" + "\u2718" + "]";
         }
-        return "[T]" + icon + " " + this.description;
+        return "[D]" + icon + " " + this.description + " (by: " + this.by + ")";
     }
 }
