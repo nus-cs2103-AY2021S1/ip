@@ -23,6 +23,6 @@ public class Task {
 
     @Override
     public String toString(){
-        return task;
+        return "[" + getStatusIcon() + "]" + " " + task;
     }
 }
