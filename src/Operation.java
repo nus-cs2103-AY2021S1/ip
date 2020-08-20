@@ -6,7 +6,7 @@ public class Operation {
     }
 
 
-    public void run(String order) throws Exception {
+    public void run(String order) {
 
         if (order.equals(Status.LIST.name().toLowerCase())) {
             System.out.println(
@@ -14,37 +14,37 @@ public class Operation {
             );
         } else {
             if (order.length() >= 6
-                    && order.substring(0, 4).equals(Status.DONE.name().toLowerCase())) {
-
-                try {
-                    int num =
-                            Integer.parseInt(new Formating<>(order.substring(4)).shorten().getContent());
-
-                    if (num > memory.getMemory().size()) {
-                        System.out.println(new Formating<>(Status.EXCESS.toString()));
-                    } else {
-                        Task task = memory.getMemory().get(num - 1);
-                        task.setDone();
-                        System.out.println(
-                                new Formating<>(new Echo(Status.DONE.toString() + task)));
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println(new Formating<>(Status.NUMBERFORMATEXCEPTION.toString()));
-                }
-
+                        && order.substring(0, 4).equals(Status.DONE.name().toLowerCase())) {
+                done(order);
             } else if (order.length() == 0) { }
 
             else {
-                Task task = identifier(order);
-                memory.addMemory(task);
-                Formating<Task> formatedEcho =
-                        new Formating<>(task);
-                System.out.println(formatedEcho);
+                identifier(order);
             }
         }
     }
 
-    public Task identifier(String description) throws Exception {
+    public void done(String order) {
+        try {
+            int num =
+                    Integer.parseInt(new Formating<>(order.substring(4)).shorten().getContent());
+
+            if (num > memory.getMemory().size()) {
+                DukeException.numberExcessException();
+            } else {
+                Task task = memory.getMemory().get(num - 1);
+                task.setDone();
+                System.out.println(
+                        new Formating<>(new Echo(Status.DONE.toString() + task)));
+            }
+        } catch (NumberFormatException e) {
+            DukeException.numberFormatException();
+        }
+    }
+
+    
+
+    public void identifier(String description) {
         int len = description.length();
         int pointer = 0;
 
@@ -52,21 +52,40 @@ public class Operation {
             pointer++;
         }
 
-        String indetity = description.substring(0, pointer);
+        //the identity of the task has been found.
+        String idetity = description.substring(0, pointer);
 
+        //to check if the input is not a todo or event or deadline
+        if (!idetity.equals(Status.TODO.toString())
+            & !idetity.equals(Status.EVENT.toString())
+            & !idetity.equals(Status.DEADLINE.toString())) {
+            DukeException.inputFormatException();
+            return;
+        }
+
+
+        //pointer goes on to find details of the task
         int separator = pointer;
         while (separator < len && description.charAt(separator) != '/') {
             separator++;
         }
 
+        //situation that there is no detail of the task, throw error
         if (pointer == separator) {
-            throw new Exception("please do a todo/deadline/event");
+            DukeException.emptyTaskException();
+            return;
         }
+
+        //details of the task is found
         String detail = description.substring(pointer + 1, separator);
 
-        if (indetity.equals(Status.TODO.toString())) {
-            return new Task(detail);
+        Task task;
+        if (idetity.equals(Status.TODO.toString())) {
+
+            task = new Todo(detail);
+
         } else {
+
             while (separator < len && description.charAt(separator) != ' ') {
                 separator++;
             }
@@ -77,15 +96,20 @@ public class Operation {
                 time = description.substring(separator + 1);
             } else {
                 time = description.substring(separator);
+                DukeException.timeMissingException();
+
             }
-            if (indetity.equals(Status.DEADLINE.toString())) {
-                return new Deadline(detail, time);
-            } else if (indetity.equals(Status.EVENT.toString())){
-                return new Event(detail, time);
+
+            if (idetity.equals(Status.DEADLINE.toString())) {
+                task = new Deadline(detail, time);
             } else {
-                throw new Exception("wrong input");
+                task = new Event(detail, time);
             }
         }
+        memory.addMemory(task);
+        Formating<Task> formatedEcho =
+                new Formating<>(task);
+        System.out.println(formatedEcho);
     }
 
 }

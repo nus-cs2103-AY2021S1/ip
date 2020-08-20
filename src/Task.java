@@ -10,8 +10,8 @@ public class Task {
 
     public String getStatusIcon() {
         return isDone
-                ? "[" + "Y" + "]"
-                : "[" + "N" + "]";
+                ? "[" + "\u2713" + "]"
+                : "[" + "\u2718" + "]";
     }
 
 

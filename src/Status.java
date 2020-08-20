@@ -30,27 +30,15 @@ public enum Status {
         }
     },
 
-    EXCESS {
+    DELETE {
         @Override
         public String toString() {
-            return "    OOPS!!! It seems like you don't have this option \n" +
-                    "    Enter list to see options";
+            return "    Noted. I've removed this task: \n" +
+                    "      ";
         }
     },
 
-    CLASSCASTEXCEPTION {
-        @Override
-        public String toString() {
-            return "    The content is not of data type of String";
-        }
-    },
 
-    NUMBERFORMATEXCEPTION {
-        @Override
-        public String toString() {
-            return "    OOPS!!! The format of your index number is incorrect";
-        }
-    },
 
     TODO {
         @Override
@@ -88,26 +76,7 @@ public enum Status {
         }
     },
 
-    INPUTFORMATEXCEPTION {
-        @Override
-        public String toString() {
-            return "    OOPS!!! I'm sorry, but U don't know what that means :-(";
-        }
-    },
 
-    INSUFFICIENTEXCEPTION {
-        @Override
-        public String toString() {
-            return "    OOPS!!! The description of todo/deadline/event cannot be empty";
-        }
-    },
-
-    NOTIMEEXCEPTION {
-        @Override
-        public String toString() {
-            return "    OOPS!!! The time of a deadline/event cannot be empty";
-        }
-    }
 
 
 

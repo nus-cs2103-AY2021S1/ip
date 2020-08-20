@@ -26,7 +26,7 @@ public class Formating<T> {
             }
             return new Formating<String>(input.substring(frontPos, backPos + 1));
         } catch (ClassCastException e) {
-            System.out.println(new Formating<>(Status.CLASSCASTEXCEPTION.toString()));
+            DukeException.classCastException();
             return null;
         }
     }
