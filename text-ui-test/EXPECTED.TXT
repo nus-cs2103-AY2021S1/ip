@@ -3,14 +3,13 @@ What can I do for you?
 Got it. I've added this task:
 [T][✘] borrow book
 Now you have 1 task(s) in the list.
-1. [T][✘] borrow book
 Got it. I've added this task:
 [D][✘] return book (by: Sunday)
 Now you have 2 task(s) in the list.
 1. [T][✘] borrow book
 2. [D][✘] return book (by: Sunday)
 Nice! I've marked this task as done:
-[✓] return book
+[D][✓] return book (by: Sunday)
 1. [T][✘] borrow book
 2. [D][✓] return book (by: Sunday)
 Got it. I've added this task:
@@ -19,4 +18,12 @@ Now you have 3 task(s) in the list.
 1. [T][✘] borrow book
 2. [D][✓] return book (by: Sunday)
 3. [E][✘] project meeting (at: Mon 2-4pm)
+☹ OOPS! Description for command 'todo' not found, try again!
+☹ OOPS!!! Description of deadline unclear. Here's an example: 'deadline return book /by Sunday'
+Only existing tasks of index <= 3 can be marked as done!
+Noted. I've removed this task:
+[T][✘] borrow book
+Now you have 2 task(s) in the list.
+1. [D][✓] return book (by: Sunday)
+2. [E][✘] project meeting (at: Mon 2-4pm)
 Bye bye. See you again soon!

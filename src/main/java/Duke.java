@@ -2,109 +2,77 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) throws Exception {
+    public static ArrayList<Task> tasks = new ArrayList<>();
+
+    public static void main(String[] args) {
         System.out.println("Hi there, I'm TARS!\nWhat can I do for you?");
-
-        ArrayList<Task> tasks = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        String operation = "start";
-        Task task;
+        boolean stop = false;
 
-        while (!operation.equals("bye")) {
+        while (!stop) {
             String[] line = scanner.nextLine().split(" ", 2);
-            operation = line[0];
+            String operation = line[0];
             switch (operation) {
+                case "bye":
+                    stop = true;
+                    System.out.println("Bye bye. See you again soon!");
+                    break;
+
                 case "list":
-                    if (tasks.size() == 0) {
-                        System.out.println("The list is empty! Add in some new tasks!");
-                    }
-                    int counter = 1;
-                    for (Task item : tasks) {
-                        System.out.println(counter + ". " + item);
-                        counter++;
+                    try {
+                        Helper.showList();
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
                     }
                     break;
 
                 case "done":
-                    // Validate task index
-                    if (line.length == 1) {
-                        throw new DukeException("Tell me which task you have done!");
+                    try {
+                        Helper.markAsDone(line);
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
                     }
-                    if (line[1].isEmpty()) {
-                        throw new DukeException("Tell me which task you have done!");
-                    }
-                    int task_index = Integer.parseInt(line[1]);
-                    if (task_index > tasks.size()) {
-                        throw new DukeException("Only existing tasks of index <= " + tasks.size() + " can be marked as done!");
-                    }
-                    task = tasks.get(task_index - 1);
-                    task.markAsDone();
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(task);
                     break;
 
                 case "todo":
                 case "deadline":
                 case "event":
-                    // Validate descriptions
                     if (line.length == 1) {
-                        throw new DukeException("☹ OOPS!!! The description of " + operation +" cannot be empty.");
-                    }
-                    if (line[1].isEmpty()) {
-                        throw new DukeException("☹ OOPS!!! The description of " + operation +" cannot be empty.");
+                        System.out.println("☹ OOPS! Description for command '" + operation + "' not found, try again!");
+                        break;
                     } else if (operation.equals("todo")) {
-                        String description = line[1];
-                        task = new ToDo(description);
-                        tasks.add(task);
+                        try {
+                            Helper.addToDo(line);
+                        } catch (DukeException e) {
+                            System.out.println(e.getMessage());
+                        }
                     } else if (operation.equals("deadline")) {
-                        String[] description = line[1].split(" /by ");
-                        // Validate date/time
-                        if (description.length < 2) {
-                            throw new DukeException("When is it due? Give me a date/time!");
+                        try {
+                            Helper.addDeadline(line);
+                        } catch (DukeException e) {
+                            System.out.println(e.getMessage());
                         }
-                        task = new Deadline(description[0], description[1]);
-                        tasks.add(task);
                     } else {
-                        String[] description = line[1].split(" /at ");
-                        // Validate date/time
-                        if (description.length < 2) {
-                            throw new DukeException("When is it? Give me a date/time!");
+                        try {
+                            Helper.addEvent(line);
+                        } catch (DukeException e) {
+                            System.out.println(e.getMessage());
                         }
-                        task = new Event(description[0], description[1]);
-                        tasks.add(task);
                     }
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(task);
-                    System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
                     break;
 
                 case "delete":
-                    // Validate task index
-                    if (line.length == 1) {
-                        throw new DukeException("Tell me which task you want to delete!");
+                    try {
+                        Helper.deleteTask(line);
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
                     }
-                    if (line[1].isEmpty()) {
-                        throw new DukeException("Tell me which task you want to delete!");
-                    }
-                    task_index = Integer.parseInt(line[1]);
-                    // Validate task index
-                    if (task_index > tasks.size()) {
-                        throw new DukeException("Only existing tasks of index <= " + tasks.size() + " can be deleted!");
-                    }
-                    task = tasks.get(task_index - 1);
-                    tasks.remove(task);
-                    System.out.println("Noted. I've removed this task:");
-                    System.out.println(task);
-                    System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
                     break;
 
                 default:
                     // Handles all other inputs
-                    if (!operation.equals("bye")) {
-                        throw new DukeException("☹ Sorry, I don't recognise that command!");
-                    }
+                    System.out.println("☹ Sorry, I don't recognise that command! Try one of the following instead: todo, event, deadline, done or delete");
             }
         }
-        System.out.println("Bye bye. See you again soon!");
     }
 }
