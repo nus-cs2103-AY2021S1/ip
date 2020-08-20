@@ -49,7 +49,7 @@ public class Duke {
                     break;
                 }
             }
-            if (hasIdentifier && index > 1 && suffix.length - 1 > index) {
+            if (hasIdentifier && index > 0 && suffix.length - 1 > index) {
                 StringBuilder description = new StringBuilder();
                 for (int i = 0; i < index; i++) {
                     if (i == 0) {
@@ -85,7 +85,7 @@ public class Duke {
                     break;
                 }
             }
-            if (hasIdentifier && index > 1 && suffix.length - 1 > index) {
+            if (hasIdentifier && index > 0 && suffix.length - 1 > index) {
                 StringBuilder description = new StringBuilder();
                 for (int i = 0; i < index; i++) {
                     if (i == 0) {
