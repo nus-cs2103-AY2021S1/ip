@@ -112,6 +112,7 @@ public class Duke {
             }
             else if(command[ptr].equals("list")){
                 System.out.println("____________________________________________________________");
+                System.out.println("Here are the tasks in your list:");
                 printList(list);
                 System.out.println("____________________________________________________________");
             }
@@ -132,6 +133,25 @@ public class Duke {
                 }
                 catch (Exception e){
                     System.out.println("\uD83D\uDE43 wrong input after the word \"done\"");
+                }
+            }
+            else if(command[ptr].equals("delete")){
+                try{
+                    int taskNumber = Integer.parseInt(command[ptr + 1]);
+                    System.out.println("____________________________________________________________");
+                    if(taskNumber > list.size()){
+                        System.out.println("no such task: task " + taskNumber + " as you only have " + list.size() + " in total");
+                    }
+                    else{
+                        Task task = list.remove(taskNumber - 1);
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(task.toString());
+                        System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+                    }
+                    System.out.println("____________________________________________________________");
+                }
+                catch (Exception e){
+                    System.out.println("\uD83D\uDE43 wrong input after the word \"delete\"");
                 }
             }
             else if(command[ptr].equals("todo")){
