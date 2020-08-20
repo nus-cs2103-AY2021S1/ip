@@ -17,7 +17,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String symbol = this.done ? "\u2713" : "\u2717";
+        String symbol = this.done ? "✓" : "✘";
         return "[" + symbol + "] " + this.name;
     }
 }

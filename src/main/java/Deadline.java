@@ -8,7 +8,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String symbol = this.done ? "\u2713" : "\u2717";
+        String symbol = this.done ? "✓" : "✘";
         return String.format("[D][%s] %s (by: %s)", symbol, this.name, this.deadline);
     }
 }

@@ -23,8 +23,13 @@ public class Bot {
                 System.out.println(farewell);
                 return;
             }
-            String response = parseUserInput(input);
-            System.out.println(response);
+            try {
+                String response = parseUserInput(input);
+                System.out.println(response);
+            } catch (InvalidCommandException | InvalidInputException e) {
+                System.out.println(responseWrapper(e.getMessage()));
+            }
+
         }
     }
 
@@ -38,7 +43,8 @@ public class Bot {
         return TEXT_LINE + "\n    " + str + "\n" + TEXT_LINE;
     }
 
-    private String parseUserInput(String input) {
+    private String parseUserInput(String input) throws InvalidCommandException,
+            InvalidInputException {
         if (input.length() == 0) {
             return responseWrapper("Please input something");
         }
@@ -57,84 +63,101 @@ public class Bot {
                 case DONE:
                     return cmdDone(words);
                 default:
-                    return cmdAdd(input);
+                    return "Valid cmd given however it is not supported yet";
             }
         } catch (IllegalArgumentException e) {
-            return cmdAdd(input);
+            throw new InvalidCommandException("Sorry, I can't understand that.");
+        } catch (InvalidInputException e) {
+            throw new InvalidInputException("Sorry, invalid argument(s) given.");
         }
     }
 
-    private String cmdTodo(String[] words) {
-        StringBuilder name = new StringBuilder();
-        for (int i = 1; i < words.length; i++) {
-            name.append(words[i]);
-            if (i != words.length - 1) {
-                name.append(" ");
-            }
-        }
-        Todo newTodo = new Todo(name.toString());
-        this.taskList.add(newTodo);
-        return responseWrapper("Got it. I've added this task:\n    " +
-                newTodo + "\n    " +
-                "Now you have " + taskList.size() + " tasks in the list.");
-    }
-
-    private String cmdDeadline(String[] words) {
-        StringBuilder name = new StringBuilder();
-        StringBuilder deadline = new StringBuilder();
-        Boolean deadlineWords = false;
-        for (int i = 1; i < words.length; i++) {
-            if (words[i].equals("/by")) {
-                name.deleteCharAt(name.length() - 1);
-                deadlineWords = true;
-                i++;
-            }
-            if (deadlineWords) {
-                deadline.append(words[i]);
-                deadline.append(" ");
-            } else {
+    private String cmdTodo(String[] words) throws InvalidInputException {
+        try {
+            StringBuilder name = new StringBuilder();
+            for (int i = 1; i < words.length; i++) {
                 name.append(words[i]);
-                name.append(" ");
+                if (i != words.length - 1) {
+                    name.append(" ");
+                }
             }
+            if (name.length() == 0) {
+                throw new InvalidInputException("Sorry, invalid argument(s) given.");
+            }
+            Todo newTodo = new Todo(name.toString());
+            this.taskList.add(newTodo);
+            return responseWrapper("Got it. I've added this task:\n    " +
+                    newTodo + "\n    " +
+                    "Now you have " + taskList.size() + " tasks in the list.");
+        } catch (Exception e) {
+            throw new InvalidInputException("Sorry, invalid argument(s) given.");
         }
-        deadline.deleteCharAt(deadline.length() - 1);
-        Deadline newTask = new Deadline(name.toString(), deadline.toString());
-        this.taskList.add(newTask);
-        return responseWrapper("Got it. I've added this task:\n    " +
-                newTask + "\n    " +
-                "Now you have " + taskList.size() + " tasks in the list.");
     }
 
-    private String cmdEvent(String[] words) {
-        StringBuilder name = new StringBuilder();
-        StringBuilder deadline = new StringBuilder();
-        Boolean deadlineWords = false;
-        for (int i = 1; i < words.length; i++) {
-            if (words[i].equals("/at")) {
-                name.deleteCharAt(name.length() - 1);
-                deadlineWords = true;
-                i++;
+    private String cmdDeadline(String[] words) throws InvalidInputException {
+        try {
+            StringBuilder name = new StringBuilder();
+            StringBuilder deadline = new StringBuilder();
+            Boolean deadlineWords = false;
+            for (int i = 1; i < words.length; i++) {
+                if (words[i].equals("/by")) {
+                    name.deleteCharAt(name.length() - 1);
+                    deadlineWords = true;
+                    i++;
+                }
+                if (deadlineWords) {
+                    deadline.append(words[i]);
+                    deadline.append(" ");
+                } else {
+                    name.append(words[i]);
+                    name.append(" ");
+                }
             }
-            if (deadlineWords) {
-                deadline.append(words[i]);
-                deadline.append(" ");
-            } else {
-                name.append(words[i]);
-                name.append(" ");
+            if (name.length() == 0 || deadline.length() == 0) {
+                throw new InvalidInputException("Sorry, invalid argument(s) given.");
             }
+            deadline.deleteCharAt(deadline.length() - 1);
+            Deadline newTask = new Deadline(name.toString(), deadline.toString());
+            this.taskList.add(newTask);
+            return responseWrapper("Got it. I've added this task:\n    " +
+                    newTask + "\n    " +
+                    "Now you have " + taskList.size() + " tasks in the list.");
+        } catch (Exception e) {
+            throw new InvalidInputException("Sorry, invalid argument(s) given.");
         }
-        deadline.deleteCharAt(deadline.length() - 1);
-        Event newTask = new Event(name.toString(), deadline.toString());
-        this.taskList.add(newTask);
-        return responseWrapper("Got it. I've added this task:\n    " +
-                newTask + "\n    " +
-                "Now you have " + taskList.size() + " tasks in the list.");
     }
 
-    private String cmdAdd(String item) {
-        Task newTask = new Task(item);
-        this.taskList.add(newTask);
-        return responseWrapper("added:" + newTask);
+    private String cmdEvent(String[] words) throws InvalidInputException {
+        try {
+            StringBuilder name = new StringBuilder();
+            StringBuilder deadline = new StringBuilder();
+            Boolean deadlineWords = false;
+            for (int i = 1; i < words.length; i++) {
+                if (words[i].equals("/at")) {
+                    name.deleteCharAt(name.length() - 1);
+                    deadlineWords = true;
+                    i++;
+                }
+                if (deadlineWords) {
+                    deadline.append(words[i]);
+                    deadline.append(" ");
+                } else {
+                    name.append(words[i]);
+                    name.append(" ");
+                }
+            }
+            if (name.length() == 0 || deadline.length() == 0) {
+                throw new InvalidInputException("Sorry, invalid argument(s) given.");
+            }
+            deadline.deleteCharAt(deadline.length() - 1);
+            Event newTask = new Event(name.toString(), deadline.toString());
+            this.taskList.add(newTask);
+            return responseWrapper("Got it. I've added this task:\n    " +
+                    newTask + "\n    " +
+                    "Now you have " + taskList.size() + " tasks in the list.");
+        } catch (Exception e) {
+            throw new InvalidInputException("Sorry, invalid argument(s) given.");
+        }
     }
 
     private String cmdList() {
@@ -151,13 +174,18 @@ public class Bot {
         return responseWrapper(string.toString());
     }
 
-    private String cmdDone(String[] words) {
-        if (words.length != 2) {
-            return responseWrapper("Please input 1 argument");
+    private String cmdDone(String[] words) throws InvalidInputException {
+        try {
+            if (words.length != 2) {
+                return responseWrapper("Please input 1 argument");
+            }
+            Task task = this.taskList.get(Integer.parseInt(words[1]) - 1);
+            task.markAsDone();
+            return responseWrapper("Nice! I've marked this task as done: \n    " +
+                    task + "\n");
+        } catch (Exception e) {
+            throw new InvalidInputException("Sorry, invalid argument(s) given.");
         }
-        Task task = this.taskList.get(Integer.parseInt(words[1]) - 1);
-        task.markAsDone();
-        return responseWrapper("Nice! I've marked this task as done: \n    " +
-                task + "\n");
+
     }
 }

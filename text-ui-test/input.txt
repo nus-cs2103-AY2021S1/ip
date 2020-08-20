@@ -13,6 +13,8 @@ deadline dl2 /by
 deadline
 deadline dl3
 done 1
+done 12
+done 12 2
 list
 delete 3
 list
