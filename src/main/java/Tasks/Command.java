@@ -6,6 +6,7 @@ public enum Command {
     help("help"),
     list("list"),
     done("done"),
+    delete("delete"),
     todo("todo"),
     deadline("deadline"),
     event("event"),

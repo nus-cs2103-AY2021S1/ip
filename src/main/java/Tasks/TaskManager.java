@@ -47,6 +47,24 @@ public class TaskManager {
        
     }
 
+    public String deleteTask(String index) throws DukeCommandException, DukeIndexException {
+        try{
+            int i = Integer.parseInt(index)-1;//0 indexing
+            Task t = this.get(i);
+            this.list.remove(i);
+            return new StringBuilder().append("\tNoted! I've removed this task from your list: \n\t")
+                    .append(t)
+                    .append("\n\tNow you have ")
+                    .append(this.list.size())
+                    .append(" tasks in the list.\n").toString();
+        } catch (IllegalArgumentException e){
+            throw new DukeCommandException(index);
+        } catch (IndexOutOfBoundsException e){
+            throw new DukeIndexException(index, list.size());
+        }
+
+    }
+    
     /**
      * Get task from the internal list
      * @param i

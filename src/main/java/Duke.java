@@ -47,6 +47,9 @@ class Duke {
                 case done:
                     print(list.doTask(words[1]));
                     break;
+                case delete:
+                    print(list.deleteTask(words[1]));
+                    break;
                 case list:
                     print(list.parseoutput());
                     break;

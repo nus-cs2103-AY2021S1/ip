@@ -15,7 +15,7 @@ public class DukeIndexException extends DukeException {
         b.append("\t Oops you requested for a index ourside the list range:\n");
         b.append("\t ").append(bad_cmd).append("\n");
         b.append("\t ").append(s);
-        b.append(": ").append(code.toString()).append("out of ").append(size).append("\n");
+        b.append(": ").append(code.toString()).append(" out of ").append(size).append("\n");
         b.append("\t Heres a tip, use the 'list' command to see the current tasks!\n");
         return b.toString();
     }
