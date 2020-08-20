@@ -81,7 +81,7 @@ public class Duke {
     public void deleteTask(int index) {
         Task toRemove = list.get(index-1);
         list.remove(index-1);
-        saySomthing("Noted. I've removed this task: \n" + toRemove.toString() + "\n" + String.format("Now you have %d tasks in the list.", list.size()));
+        saySomthing("Noted. I've removed this task:\n" + toRemove.toString() + "\n" + String.format("Now you have %d tasks in the list.", list.size()));
     }
     public void addDeadline(String str) {
         try {
@@ -145,12 +145,12 @@ public class Duke {
 
     public void completeTask(int index) {
         list.get(index-1).markAsDone();
-        saySomthing("Nice! I've marked this task as done: \n" + list.get(index-1).toString());
+        saySomthing("Nice! I've marked this task as done:\n" + list.get(index-1).toString());
     }
 
     public void addToList(Task task) {
         list.add(task);
-        saySomthing("Got it. I've added this task: \n" + task.toString() + "\n" + String.format("Now you have %d tasks in the list.", list.size()));
+        saySomthing("Got it. I've added this task:\n" + task.toString() + "\n" + String.format("Now you have %d tasks in the list.", list.size()));
     }
 
     public void showList() {
