@@ -18,4 +18,9 @@ public class Task {
     public void markAsDone() {
         this.isDone = true; //mark the progress as done
     }
+
+    @Override
+    public String toString() {
+        return String.format("[T][%s] %s", this.getStatusIcon(), this.getDescription());
+    }
 }
