@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 public class Event extends Task{
 
     //Store the variables
-    protected String at;
+    protected final String at;
     private static final Pattern date_match = Pattern.compile("^(.*) (/at) (.*)$");
 
     //Constructor for the event class

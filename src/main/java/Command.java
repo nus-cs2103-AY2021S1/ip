@@ -7,8 +7,8 @@ public enum Command {
     EVENT(Event::parseCommand),
     DEADLINE(Deadline::parseCommand);
 
-    //Create a variable to store the Function / Bi Function
-    protected Function<String, Task> commandParser = null;
+    //Create a variable to store the Function
+    protected final Function<String, Task> commandParser;
 
     //Constructor for the function
     Command(Function<String, Task> commandParser){
