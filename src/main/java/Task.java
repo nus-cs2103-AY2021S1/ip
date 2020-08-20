@@ -1,7 +1,7 @@
 //Adapted from https://nus-cs2103-ay2021s1.github.io/website/schedule/week2/project.html
 public class Task {
-    private final String taskName;
-    private boolean isDone;
+    protected final String taskName;
+    protected boolean isDone;
 
     public Task(String taskName) {
         this.taskName = taskName;
@@ -12,7 +12,7 @@ public class Task {
         return taskName;
     }
 
-    private String getStatusIcon() {
+    protected String getStatusIcon() {
         return isDone ? "\u2713" : "\u2718"; //return tick or cross symbols
     }
 
