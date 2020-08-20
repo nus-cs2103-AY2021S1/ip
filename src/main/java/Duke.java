@@ -134,6 +134,23 @@ public class Duke {
         msgForList += "    ____________________________________________________________\n";
         System.out.println(msgForList);
     }
+
+    //delete a task
+    public void delete(int num) throws DukeException {
+        if (num > 0 && num <= listOfTaskEntered.size()) {
+            String msgForDelete = "    ____________________________________________________________\n"
+                    + "    Noted. I've removed this task: \n"
+                    + "       " + listOfTaskEntered.get(num - 1).toString() + "\n";
+            listOfTaskEntered.remove(num - 1);
+            msgForDelete += this.countNum() + "\n"
+                        + "    ____________________________________________________________\n";
+            System.out.println(msgForDelete);
+        } else {
+            throw new DukeException(
+                    "OOPS!!! The task is not found. Please try again."
+            );
+        }
+    }
     
     //send bye message
     public void stop() {
@@ -143,7 +160,7 @@ public class Duke {
         System.out.println(msgForBye);
     }
     
-    //handle todo 
+    //handle to-do 
     public void handleTodo(String instruction) throws DukeException {
         if (instruction.substring(4).isBlank()) {
             String emoji = new String(Character.toChars(0x1F609));
@@ -245,6 +262,9 @@ public class Duke {
                 } else if (len >= 5 && instruction.substring(0, 5).equals("done ")) {
                     int num = Integer.parseInt(instruction.substring(5));
                     this.markAsDone(num);
+                } else if (len >= 7 && instruction.substring(0, 7).equals("delete ")) {
+                    int num = Integer.parseInt(instruction.substring(7));
+                    this.delete(num);
                 } else if (len >= 4 && instruction.substring(0, 4).equals("todo")) {
                     this.handleTodo(instruction);
                 } else if (len >= 8 && instruction.substring(0, 8).equals("deadline")) {

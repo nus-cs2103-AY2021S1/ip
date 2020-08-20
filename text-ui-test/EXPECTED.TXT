@@ -52,17 +52,41 @@
     ____________________________________________________________
 
     ____________________________________________________________
-    Here are the tasks in your list: 
-    1. [T][✓] borrow book
-    2. [D][✓] return book (by: Sunday)
-    3. [E][✘] project meeting (at: Mon 2-4pm)
-    4. [T][✘] gym
-    5. [E][✘] consultation (at: Wed 11am)
+    😖OOPS!!! I'm sorry, but the description cannot be empty. 
+    You can do it by adding description after 'event '.😉
     ____________________________________________________________
 
     ____________________________________________________________
-    Instructions not found, please try again. 
-    Now you have 5 tasks in the list.
+    😖OOPS!!! I'm sorry, but you have to indicate the deadline. 
+    You can do it by adding '/by' after the description.😉
+    ____________________________________________________________
+
+    ____________________________________________________________
+    😖OOPS!!! I'm sorry, but the description cannot be empty. 
+    You can do it by adding description after 'deadline '.😉
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Noted. I've removed this task: 
+       [T][✓] borrow book
+    Now you have 4 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Noted. I've removed this task: 
+       [D][✓] return book (by: Sunday)
+    Now you have 3 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Here are the tasks in your list: 
+    1. [E][✘] project meeting (at: Mon 2-4pm)
+    2. [T][✘] gym
+    3. [E][✘] consultation (at: Wed 11am)
+    ____________________________________________________________
+
+    ____________________________________________________________
+    😖OOPS!!! I'm sorry, but I don't know what that means :-(
     ____________________________________________________________
 
     ____________________________________________________________

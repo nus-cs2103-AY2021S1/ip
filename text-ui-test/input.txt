@@ -6,6 +6,11 @@ done 2
 list
 event consultation /at Wed 11am
 done 1
+event /at
+deadline
+deadline /by
+delete 1
+delete 1
 list
 blah
 bye
