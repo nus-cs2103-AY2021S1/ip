@@ -1,2 +1,6 @@
-package PACKAGE_NAME;public class InvalidDeleteException {
+public class InvalidDeleteException extends InvalidException{
+
+    public InvalidDeleteException(String message) {
+        super(message);
+    }
 }

@@ -85,6 +85,32 @@ public class Bill {
                         System.out.println(current);
                         System.out.println(horizontal_line);
 
+                    } else if (firstChar.equals("delete")) {
+                        
+                        if (isDone.length == 1) {
+                            throw new InvalidDeleteException("OOPS!!! please provide me with the task to be deleted");
+                        }
+
+                        if (isDone.length > 2) {
+                            throw new InvalidDeleteException("OOPS!!! I can only delete one task at a time");
+                        }
+
+                        String lastChar = isDone[isDone.length - 1];
+                        int index = Integer.parseInt(lastChar);
+
+                        if (index > isDone.length) {
+                            int no_of_tasks = list_of_Content.size();
+                            throw new InvalidException("There are only " + no_of_tasks + "tasks in the list; Please restate" +
+                                    " the task to be deleted");
+                        }
+                        Task toBeRemove = list_of_Content.get(index - 1);
+                        list_of_Content.remove(index - 1);
+                        int no_of_tasks_left = list_of_Content.size();
+                        System.out.println(horizontal_line);
+                        System.out.println(" Noted. I've removed this task:  ");
+                        System.out.println(toBeRemove);
+                        System.out.println(" Now you have " + no_of_tasks_left + " tasks in the list. ");
+                        System.out.println(horizontal_line);
                     } else {
                         if (firstChar.equals("todo")) {
                             
