@@ -9,7 +9,11 @@ public class Duke {
 
         while (strIden.isRunning()) {
             String userInput = sc.nextLine();
-            strIden.checker(userInput);
+            try {
+                strIden.checker(userInput);
+            } catch(DukeException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }

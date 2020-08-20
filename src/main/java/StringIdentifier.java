@@ -9,43 +9,83 @@ public class StringIdentifier {
         return this.isProgramRunning;
     }
 
-    public void checker(String str) {
-        System.out.println("    ____________________________________________________________");
-        if (str.equals("bye")) {
+    public void checker(String str) throws DukeException {
+        System.out.println("    _______________________________________________________________________");
+
+        int commandSpace = str.indexOf(" ");
+        if (commandSpace < 0) {
+            throw new DukeException("       *Please add in a space character after your command.*\n");
+
+        } else if (str.equals("bye ")) {
             close();
 
-        } else if (str.equals("list")) {
+        } else if (commandSpace <= 3) {
+            throw new DukeException("       *Invalid command.*\n     Commands: bye, list, todo, event, deadline, delete\n");
+
+        } else if (str.equals("list ")) {
             displayList();
 
         } else if (str.substring(0, 5).equals("done ")) {
             int length = str.length();
             String index = str.substring(5, length);
-            markDone(Integer.parseInt(index));
+            int realIndex = Integer.parseInt(index) - 1;
+
+            if (realIndex >= this.lst.size() || realIndex < 0) {
+                throw new DukeException("       *Invalid task index, please try again.*\n");
+            }
+            markDone(realIndex);
 
         } else if (str.substring(0, 5).equals("todo ")) {
             int length = str.length();
+            if (length == 5) {
+                throw new DukeException("       *Please fill in todo description*\n");
+            }
+
             Todo newTodo = new Todo(str.substring(5, length));
             store(newTodo);
 
-        } else if (str.substring(0, 9).equals("deadline ")) {
-            int length = str.length();
-            int end = str.indexOf("/by");
-            Deadline newDeadline = new Deadline(str.substring(9, end),
-                                                str.substring(end + 3, length));
-            store(newDeadline);
+        } else if (commandSpace <= 4) {
+            throw new DukeException("       *Invalid command.*\n     Commands: bye, list, todo, event, deadline, delete\n");
 
         } else if (str.substring(0, 6).equals("event ")) {
             int length = str.length();
+            if (length == 6) {
+                throw new DukeException("       *Please fill in event description*\n");
+            }
+
             int end = str.indexOf("/at");
+            if (end < 0) {
+                throw new DukeException("       *Please fill in event completion time in the following format:*\n" +
+                        "     eg. event CCA meeting /at 4th July 2020\n");
+            }
             Event newEvent = new Event(str.substring(6, end),
-                                       str.substring(end + 3, length));
+                    str.substring(end + 3, length));
             store(newEvent);
 
+        } else if (commandSpace <= 5) {
+            throw new DukeException("       *Invalid command.*\n     Commands: bye, list, todo, event, deadline, delete\n");
+
+        } else if (str.substring(0, 9).equals("deadline ")) {
+            int length = str.length();
+            if (length == 9) {
+                throw new DukeException("       *Please fill in deadline description*\n");
+            }
+
+            int end = str.indexOf("/by");
+            if (end < 0) {
+                throw new DukeException("       *Please fill in deadline completion time in the following format:*\n" +
+                                        "     eg. deadline return book to Jurong Regional Library /by 6th June 2020\n");
+            }
+
+            Deadline newDeadline = new Deadline(str.substring(9, end),
+                    str.substring(end + 3, length));
+            store(newDeadline);
+
         } else {
-            System.out.println("Incorrect input");
+            throw new DukeException("       *Invalid command.*\n     Commands: bye, list, todo, event, deadline, delete\n");
         }
 
-        System.out.println("    ____________________________________________________________\n");
+        System.out.println("    _______________________________________________________________________\n");
     }
 
     public void store(Task task) {
@@ -68,8 +108,7 @@ public class StringIdentifier {
     }
 
     public void markDone(int index) {
-        int realIndex = index - 1;
-        Task taskSubject = this.lst.get(realIndex);
+        Task taskSubject = this.lst.get(index);
         taskSubject.markAsDone();
         System.out.println("     Nice! I've marked this task as done:\n"
                          + "       " + taskSubject);
