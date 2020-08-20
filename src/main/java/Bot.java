@@ -1,10 +1,13 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Bot {
     private String name;
+    private ArrayList<String> taskList;
 
     public Bot(String name) {
         this.name = name;
+        this.taskList = new ArrayList<String>();
     }
 
     /**
@@ -15,6 +18,11 @@ public class Bot {
         greet();
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
+            if (input.equals("bye")) {
+                String farewell = responseWrapper("Bye. Hope to see you again soon!");
+                System.out.println(farewell);
+                return;
+            }
             String response = parseUserInput(input);
             System.out.println(response);
         }
@@ -32,13 +40,27 @@ public class Bot {
 
     private String parseUserInput(String input) {
         switch (input) {
-            case "bye":
-                return responseWrapper("Bye. Hope to see you again soon!");
+            case "list":
+                return cmdList();
             default:
+                return cmdAdd(input);
 
-                return responseWrapper("added: "+ input);
         }
     }
 
-    private
+    private String cmdAdd(String item) {
+        this.taskList.add(item);
+        return responseWrapper("added: " + item);
+    }
+
+    private String cmdList() {
+        int index = 1;
+        StringBuilder string = new StringBuilder();
+        for (String item : taskList) {
+            string.append(index).append(". ").append(item).append("\n    ");
+            index++;
+        }
+        string.delete(string.length() - 6, string.length());
+        return responseWrapper(string.toString());
+    }
 }
