@@ -40,7 +40,7 @@ public class Wish {
                     break;
 
                 default:
-                    System.out.println("Oops! No such command exists. Please enter a valid command");
+                    noSuchCommand();
                     break;
             }
 
@@ -98,7 +98,11 @@ public class Wish {
         String description = sc.nextLine();
 
         if (description.equals("")) {
-            System.out.println("The description of a todo cannot be empty");
+            try {
+                throw new WishException("The description of a todo cannot be empty");
+            } catch (WishException e) {
+                System.out.println(e.getMessage());
+            }
         } else {
             ToDo toDo = new ToDo(description.trim());
             add(database, toDo);
@@ -142,6 +146,14 @@ public class Wish {
             }
         } else {
             System.out.println("Task description, start time and end time cannot be empty");
+        }
+    }
+
+    private static void noSuchCommand() {
+        try {
+            throw new WishException("Oops! I am sorry but I don't understand what that means");
+        } catch (WishException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
