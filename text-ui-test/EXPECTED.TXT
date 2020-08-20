@@ -3,7 +3,7 @@ How may I help you today, Master?
 
 
 Here are your list of tasks, Master.
-You have 0 tasks in total.
+You have 0 task in total.
 
 
 
@@ -53,19 +53,19 @@ You have 3 tasks in total.
 3: [E][Y] conduct event (at: this location)
 
 
-Invalid command given.
+I am sorry, but I do not understand this command.
 
 
-Invalid command given.
+Excuse me, please provide a summary and deadline using the tag /by.
 
 
-Invalid command given.
+I am sorry, but I do not understand this command.
 
 
-Invalid command given.
+Excuse me, please provide a summary and time of event using the tag /at.
 
 
-Invalid command given.
+Excuse me, please provide a summary and time of event using the tag /at.
 
 
 It is my honor to have served you.
