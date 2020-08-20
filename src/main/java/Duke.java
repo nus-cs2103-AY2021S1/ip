@@ -2,14 +2,11 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
+        String welcome = "Hello. I am Claude! What may I do for you today?";
+        String goodbye = "Goodbye! Hope to see you again soon!";
         Scanner sc = new Scanner(System.in);
-        System.out.println("Hello from\n" + logo);
+
+        System.out.println(welcome);
         while (sc.hasNext()) {
             String command = sc.nextLine();
             if (command.equals("bye")){
@@ -17,6 +14,7 @@ public class Duke {
             }
             System.out.println("\n" + command);
         }
-        System.out.println("Goodbye! See you again soon!");
+
+        System.out.println(goodbye);
     }
 }
