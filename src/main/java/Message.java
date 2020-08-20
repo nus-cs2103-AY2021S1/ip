@@ -46,10 +46,8 @@ public class Message {
                 for (Task item : list) {
                     counter++;
                     System.out.println(counter +
-                            ".[" +
-                            item.getStatusIcon() +
-                            "] " +
-                            item.getTaskName());
+                            "." +
+                            item.toString());
                 }
                 break;
             case DONE:
@@ -59,10 +57,8 @@ public class Message {
                     Task item = list.get(index - 1);
                     item.markDone();
                     System.out.println("Can, I help you mark this as done liao:" +
-                            "\n  [" +
-                            item.getStatusIcon() +
-                            "] " +
-                            item.getTaskName());
+                            "\n  " +
+                            item.toString());
                 } catch (NumberFormatException e) {
                     System.out.println("Cannot find leh. Try typing \"done {index of list item}\".");
                 }
