@@ -40,6 +40,7 @@ public class Message {
                         "\nWhat you want ah?");
                 break;
             case LIST:
+                System.out.println("Na, here is your list lah:");
                 int counter = 0;
                 for (String item : list) {
                     counter++;
@@ -51,7 +52,7 @@ public class Message {
                 break;
             case ADD:
                 this.list.add(message);
-                System.out.println("added: " + message);
+                System.out.println("I added: " + message);
                 break;
         }
         System.out.println("____________________________________________________________");
