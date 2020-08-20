@@ -2,6 +2,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    public static String printTask(Task tsk) {
+        return "[" + tsk.getStatusIcon() + "] " + tsk.getDescription();
+    }
     public static void main(String[] args) {
         String greetings = "Hello! I'm Duke\nWhat can I do for you?";
         System.out.println(greetings);
@@ -19,8 +22,14 @@ public class Duke {
                 for (int i = 0; i < lst.size(); i ++) {
                     Task currentTask = lst.get(i);
                     String num = Integer.toString(i + 1);
-                    System.out.println(num + ".[" + currentTask.getStatusIcon() + "] " + currentTask.getDescription());
+                    System.out.println(num + "." + printTask(currentTask));
                 }
+            } else if (input.contains("done")) {
+                String[] splitted = input.split("\\s+");
+                int taskIndex = Integer.parseInt(splitted[1]) - 1;
+                Task selectedTask = lst.get(taskIndex);
+                selectedTask.markAsDone();
+                System.out.println("Nice! I've marked this task as done:\n  " + printTask(selectedTask));
             } else {
                 lst.add(new Task(input));
                 System.out.println("added: " + input);
