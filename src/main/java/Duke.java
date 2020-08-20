@@ -15,15 +15,18 @@ public class Duke {
         String question = "What can I do for you?";
         System.out.println(hello + "\n" + question);
         String ans = sc.nextLine();
-        ArrayList<String> listOfStuff = new ArrayList<>();
+        ArrayList<Task> listOfStuff = new ArrayList<>();
         while (ans != null) {
             if (ans.equals("list")){
                 for(int i = 0; i <listOfStuff.size(); i++){
                     Integer listNum = i + 1;
-                    System.out.println(listNum.toString() + ". " + listOfStuff.get(i));
+                    System.out.println(listNum.toString() + ".[" +
+                            listOfStuff.get(i).getStatusIcon() + "] " + listOfStuff.get(i).description);
                 }
+            }else if (ans.substring(0, 4).equals("done")) {
+                listOfStuff.get(Integer.parseInt(ans.substring(5)) - 1).markAsDone();
             }else{
-                listOfStuff.add(ans);
+                listOfStuff.add(new Task(ans));
                 System.out.println("added: " + ans);
             }
             ans = sc.nextLine();
@@ -34,4 +37,3 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 }
-
