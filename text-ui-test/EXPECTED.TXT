@@ -11,30 +11,58 @@
     ________________________________________
     ________________________________________
       Aye Aye Captain! I've added this task:
-        [T][✘] go to library
+        [T][✘] buy ship
       Now you have 1 task(s) in the list.
     ________________________________________
     ________________________________________
       Aye Aye Captain! I've added this task:
-        [T][✘] borrow book
+        [T][✘] sail to Tortuga
       Now you have 2 task(s) in the list.
     ________________________________________
+ARR!🏴‍☠️️ ️ What be the meaning of this?
+ARR!🏴‍☠️️ ️ The description of a todo cannot be empty.
     ________________________________________
       Aye Aye Captain! I've added this task:
-        [D][✘] return book  (by: Aug 30th)
+        [T][✘] find treasure
       Now you have 3 task(s) in the list.
     ________________________________________
+ARR!🏴‍☠️️ ️ The description of a deadline cannot be empty.
+ARR!🏴‍☠️️ ️ Please pass a /by to the deadline
+ARR!🏴‍☠️️ ️ Please pass a /by to the deadline
     ________________________________________
       Aye Aye Captain! I've added this task:
-        [E][✘] CS2103T tutorial  (at: Aug 26th 3-4pm)
+        [D][✘] find a crew  (by: end of Aug)
+      Now you have 4 task(s) in the list.
+    ________________________________________
+ARR!🏴‍☠️️ ️ The description of an event cannot be empty.
+ARR!🏴‍☠️️ ️ Please pass a /at to the event
+ARR!🏴‍☠️️ ️ Please pass a /at to the event
+    ________________________________________
+      Aye Aye Captain! I've added this task:
+        [E][✘] brethren's court meeting  (at: next Wed 2-4pm)
+      Now you have 5 task(s) in the list.
+    ________________________________________
+ARR!🏴‍☠️️ ️ Please enter a task number after the "done"/"delete" command.
+Please enter a valid task number.
+Please enter a valid task number.
+    ________________________________________
+      Jolly riddance! I've marked this task as done:
+      [T][✓] buy ship
+    ________________________________________
+ARR!🏴‍☠️️ ️ Please enter a task number after the "done"/"delete" command.
+Please enter a valid task number.
+Please enter a valid task number.
+    ________________________________________
+      Jolly riddance! I've deleted this task:
+        [T][✘] find treasure
       Now you have 4 task(s) in the list.
     ________________________________________
     ________________________________________
       Here are the tasks in your list: 
-      1. [T][✘] go to library
-      2. [T][✘] borrow book
-      3. [D][✘] return book  (by: Aug 30th)
-      4. [E][✘] CS2103T tutorial  (at: Aug 26th 3-4pm)
+      1. [T][✓] buy ship
+      2. [T][✘] sail to Tortuga
+      3. [D][✘] find a crew  (by: end of Aug)
+      4. [E][✘] brethren's court meeting  (at: next Wed 2-4pm)
     ________________________________________
     ________________________________________
       Bye. Hope t' see ye again soon!
