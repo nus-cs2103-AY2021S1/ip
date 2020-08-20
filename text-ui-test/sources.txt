@@ -1,1 +1,5 @@
+../src/main/java/event.java
+../src/main/java/Task.java
 ../src/main/java/Duke.java
+../src/main/java/deadline.java
+../src/main/java/todo.java

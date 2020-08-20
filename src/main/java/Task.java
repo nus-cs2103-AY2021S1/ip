@@ -11,8 +11,12 @@ public class Task {
         this.name = name;
         this.ID = tasks.size() + 1;
         tasks.add(this);
-        System.out.println("  " + "added: " + this.name + "\n" +
-                "  ____________________________________________________________");
+        //System.out.println("  " + "added: " + this.name + "\n" +
+        //      "  ____________________________________________________________");
+    }
+    public void output(){
+        System.out.println("  Got it. I've added this task:\n  " + this.toString() + "\n" +
+                "  Now you have " + tasks.size() + " tasks in the list.\n" + "  ____________________________________________________________");
     }
     public void setDone(){
         this.done = true;
