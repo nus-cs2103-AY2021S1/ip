@@ -1,9 +1,23 @@
-public class Event extends Task {
-    private final String atTime;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String atTime) {
+public class Event extends Task {
+    private final LocalDateTime atTime;
+
+    public Event(String description, String atTime) throws InvalidCommandException {
         super(description);
-        this.atTime = atTime;
+        try {
+            this.atTime = LocalDateTime.parse(atTime,
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        } catch (Exception e) {
+            throw new InvalidCommandException("Invalid input datetime, please input as yyyy-MM-dd HH:mm.");
+        }
+    }
+
+    @Override
+    public boolean happenOnDate(LocalDate date) {
+        return date.isEqual(atTime.toLocalDate());
     }
 
     @Override
@@ -13,6 +27,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + atTime + ")";
+        return "[E]" + super.toString() + " (at: " +
+                atTime.format(DateTimeFormatter.ofPattern("hh:mm a   MMM d yyyy")) + ")";
     }
 }

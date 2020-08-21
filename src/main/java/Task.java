@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -20,6 +22,10 @@ public class Task {
 
     public String output() {
         return " | " + getStatusIcon() + " | " + description;
+    }
+
+    public boolean happenOnDate(LocalDate date) {
+        return false;
     }
 
     @Override
