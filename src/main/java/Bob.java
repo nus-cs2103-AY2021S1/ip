@@ -1,5 +1,6 @@
-// Package dependancies
-import java.util.*;
+// Package dependencies
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /*================== Welcome to BOB ==================*/
 /*
@@ -13,7 +14,7 @@ import java.util.*;
 public class Bob {
     private final String output;
     private final ArrayList<Task> list;
-    private final boolean exited;
+    private final boolean hasExited;
 
     /*================ Static fields ================*/
 
@@ -30,13 +31,13 @@ public class Bob {
     private Bob (String output, ArrayList<Task> list) {
         this.output = output;
         this.list = list;
-        this.exited = false;
+        this.hasExited = false;
     }
 
-    private Bob (String output, ArrayList<Task> list, boolean exited) {
+    private Bob (String output, ArrayList<Task> list, boolean hasExited) {
         this.output = output;
         this.list = list;
-        this.exited = exited;
+        this.hasExited = hasExited;
     }
 
     /*================ Private methods ================*/
@@ -45,7 +46,8 @@ public class Bob {
 
     // Generates message after adding task
     private String afterAdd(Task task) {
-        return "Yes boss, I have added this task to your list:\n" + "  " + task + "\n" + "Currently you have " + this.list.size() + " tasks in your list.";
+        return "Yes boss, I have added this task to your list:\n" + "  " + task + "\n" +
+                "Currently you have " + this.list.size() + " tasks in your list.";
     }
 
     // Adds an unfinished task to list and returns readable String
@@ -77,7 +79,7 @@ public class Bob {
         int taskCompleted = 0;
 
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).isitDone()) {
+            if (list.get(i).checkIsDone()) {
                 taskCompleted++;
             }
             int taskNumber = i + 1;
@@ -129,79 +131,92 @@ public class Bob {
     }
 
     // Executes action based on command with need for user input
-    private Bob execute(Command command, String input) throws BobListIndexOutOfBoundsException, BobEmptyDateException, BobInvalidNumberException {
+    private Bob execute(Command command, String input) throws BobListIndexOutOfBoundsException,
+            BobEmptyDateException, BobInvalidNumberException {
+        // for each case, treats return statement as break
         switch (command) {
-            // If the command given by user is todo
-            case TODO:
-                String outputTodo = addTodo(input.substring(5));
-                return new Bob(outputTodo, this.list);
 
-            // If the command given by user is deadline, handles empty date exception
-            case DEADLINE:
-                String[] split1 = input.split("/");
-                if (split1.length == 1) {
-                    throw new BobEmptyDateException();
-                }
-                String description1 = split1[0].substring(9);
-                String by1 = split1[1];
-                String outputDeadline = addDeadline(description1, by1);
-                return new Bob(outputDeadline, this.list);
+        // If the command given by user is todo
+        case TODO:
+            String outputTodo = addTodo(input.substring(5));
+            return new Bob(outputTodo, this.list);
 
-            // If the command given by user is event, handles empty date exception
-            case EVENT:
-                String[] split2 = input.split("/");
-                if (split2.length == 1) {
-                    throw new BobEmptyDateException();
-                }
-                String description2 = split2[0].substring(6);
-                String by2 = split2[1];
-                String outputEvent = addEvent(description2, by2);
-                return new Bob(outputEvent, this.list);
+        // If the command given by user is deadline, handles empty date exception
+        case DEADLINE:
+            String[] split1 = input.split("/");
+            if (split1.length == 1) {
+                throw new BobEmptyDateException();
+            }
+            String description1 = split1[0].substring(9);
+            String by1 = split1[1];
+            String outputDeadline = addDeadline(description1, by1);
+            return new Bob(outputDeadline, this.list);
 
-            // If the command given by user is done, handles invalid number and number out of range exceptions
-            case DONE:
-                try {
-                    int taskNumber = Integer.parseInt(input.substring(4).replaceAll("\\s+", ""));
-                    String out = markTaskDone(taskNumber);
-                    return new Bob(out, this.list);
-                } catch (BobListIndexOutOfBoundsException e){
-                    throw e;
-                } catch (NumberFormatException e) {
-                    throw new BobInvalidNumberException();
-                }
+        // If the command given by user is event, handles empty date exception
+        case EVENT:
+            String[] split2 = input.split("/");
+            if (split2.length == 1) {
+                throw new BobEmptyDateException();
+            }
+            String description2 = split2[0].substring(6);
+            String by2 = split2[1];
+            String outputEvent = addEvent(description2, by2);
+            return new Bob(outputEvent, this.list);
 
-                // If the command given by user is delete, handles invalid number and number out of range exceptions
-            case DELETE:
-                try {
-                    int taskNumber = Integer.parseInt(input.substring(6).replaceAll("\\s+", ""));
-                    String out = deleteTask(taskNumber);
-                    return new Bob(out, this.list);
-                } catch (BobListIndexOutOfBoundsException e){
-                    throw e;
-                } catch (NumberFormatException e) {
-                    throw new BobInvalidNumberException();
-                }
-            default:
-                return this;
+        // If the command given by user is done, handles invalid number and number out of range exceptions
+        case DONE:
+            try {
+                int taskNumber = Integer.parseInt(input.substring(4).replaceAll("\\s+", ""));
+                String out = markTaskDone(taskNumber);
+                return new Bob(out, this.list);
+            } catch (BobListIndexOutOfBoundsException e){
+                throw e;
+            } catch (NumberFormatException e) {
+                throw new BobInvalidNumberException();
+            }
+
+        // If the command given by user is delete, handles invalid number and number out of range exceptions
+        case DELETE:
+            try {
+                int taskNumber = Integer.parseInt(input.substring(6).replaceAll("\\s+", ""));
+                String out = deleteTask(taskNumber);
+                return new Bob(out, this.list);
+            } catch (BobListIndexOutOfBoundsException e){
+                throw e;
+            } catch (NumberFormatException e) {
+                throw new BobInvalidNumberException();
+            }
+
+        default:
+            return this;
         }
     }
 
     /*================ Public methods ================*/
 
-    // Chatbot's current output getter
+    /**
+     * Chatbot's current output getter.
+     * @return
+     */
     public String getOutput() {
         String divider = "========================================================\n";
         return divider + this.output + "\n" + divider;
     }
 
-    // Checks if Bob has ceased
-    public boolean hasExited() {
-        return this.exited;
+    /**
+     *Checks if Bob has ceased.
+     * @return
+     */
+    public boolean checkHasExited() {
+        return this.hasExited;
     }
 
-    // Initializes Bob to introduce itself
+    /**
+     * Initializes Bob to introduce itself
+     * @return
+     */
     public static Bob initializeBob() {
-        return new Bob(INTRO, new ArrayList<Task>());
+        return new Bob(INTRO, new ArrayList<>());
     }
 
 
@@ -214,21 +229,21 @@ public class Bob {
                 return execute(Command.EXIT);
             } else if (input.equals("list")) {
                 return execute(Command.LIST);
-            } else if (input.length() >= 4 && input.substring(0, 4).equals("done")) {
+            } else if (input.length() >= 4 && input.startsWith("done")) {
                 return execute(Command.DONE, input);
-            } else if (input.length() >= 6 && input.substring(0,6).equals("delete")) {
+            } else if (input.length() >= 6 && input.startsWith("delete")) {
                 return execute(Command.DELETE, input);
-            } else if (input.length() >= 4 && input.substring(0, 4).equals("todo")) {
+            } else if (input.length() >= 4 && input.startsWith("todo")) {
                 if (input.substring(4).replaceAll("\\s+", "").length() == 0) {
                     throw new BobEmptyTaskException();
                 }
                 return execute(Command.TODO, input);
-            } else if (input.length() >= 5 && input.substring(0, 5).equals("event")) {
+            } else if (input.length() >= 5 && input.startsWith("event")) {
                 if (input.substring(5).replaceAll("\\s+", "").length() == 0) {
                     throw new BobEmptyTaskException();
                 }
                 return execute(Command.EVENT, input);
-            } else if (input.length() >= 8 && input.substring(0, 8).equals("deadline")) {
+            } else if (input.length() >= 8 && input.startsWith("deadline")) {
                 if (input.substring(8).replaceAll("\\s+", "").length() == 0) {
                     throw new BobEmptyTaskException();
                 }
@@ -237,7 +252,7 @@ public class Bob {
             } else {
                 throw new BobInvalidCommandException();
             }
-        } catch (BobListIndexOutOfBoundsException e){
+        } catch (BobListIndexOutOfBoundsException e) {
             throw e;
         } catch (BobEmptyDateException e) {
             throw e;
@@ -247,7 +262,11 @@ public class Bob {
 
     }
 
-    // Main environment where Bob runs
+
+    /**
+     * Main environment where Bob runs
+     * @param args
+     */
     public static void main(String[] args) {
         // Initializing stage
         Bob chatbot = initializeBob();
@@ -256,7 +275,7 @@ public class Bob {
 
         Scanner sc = new Scanner(System.in);
 
-        while (!chatbot.hasExited()) {
+        while (!chatbot.checkHasExited()) {
             try {
                 String userInput = sc.nextLine();
                 chatbot = chatbot.nextCommand(userInput);
