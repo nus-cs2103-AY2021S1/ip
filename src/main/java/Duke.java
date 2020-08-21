@@ -1,5 +1,7 @@
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.regex.PatternSyntaxException;
 
 
 public class Duke {
@@ -56,9 +58,12 @@ public class Duke {
                     case ("deadline"):
                         if (!userInput.substring(8).isBlank()) {
                             try {
-                                int indexOfSlash = userInput.indexOf('/');
-                                String description = userInput.substring(9, indexOfSlash - 1);
-                                String date = userInput.substring(indexOfSlash + 4);
+//                                int indexOfSlash = userInput.indexOf('/');
+//                                String description = userInput.substring(9, indexOfSlash - 1);
+//                                String date = userInput.substring(indexOfSlash + 4);
+                                String de = String.join(" ", Arrays.copyOfRange(input, 1, input.length));
+                                String description = de.split(" /by ")[0];
+                                String date = de.split(" /by ")[1];
                                 Deadline deadline = new Deadline(description, date);
                                 tasks.add(deadline);
                                 System.out.println(line);
@@ -67,7 +72,7 @@ public class Duke {
                                 System.out.println(deadline);
                                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                                 System.out.println(line);
-                            } catch (StringIndexOutOfBoundsException ex) {
+                            } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException ex) {
                                 throw new DukeException("You have keyed in an invalid command for 'deadline'!");
                             }
                         } else {
@@ -77,9 +82,12 @@ public class Duke {
                     case ("event"):
                         if (!userInput.substring(5).isBlank()) {
                             try {
-                                int indexOfSlash = userInput.indexOf('/');
-                                String description = userInput.substring(6, indexOfSlash - 1);
-                                String dateAndTime = userInput.substring(indexOfSlash + 4);
+//                                int indexOfSlash = userInput.indexOf('/');
+//                                String description = userInput.substring(6, indexOfSlash - 1);
+//                                String dateAndTime = userInput.substring(indexOfSlash + 4);
+                                String ev = String.join(" ", Arrays.copyOfRange(input, 1, input.length));
+                                String description = ev.split(" /at ")[0];
+                                String dateAndTime = ev.split(" /at ")[1];
                                 Event event = new Event(description, dateAndTime);
                                 tasks.add(event);
                                 System.out.println(line);
@@ -88,7 +96,7 @@ public class Duke {
                                 System.out.println(event);
                                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                                 System.out.println(line);
-                            } catch (StringIndexOutOfBoundsException ex) {
+                            } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException ex ) {
                                 throw new DukeException("You have keyed in an invalid command for 'event'!");
                             }
                         } else {
