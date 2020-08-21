@@ -14,6 +14,7 @@ public class Duke {
             + "I've marked this task as done:\n";
     private static final String LIST_MESSAGE = "Here are the tasks in your list:";
     private static final String ADDED_MESSAGE = "Got it. I've added this task:";
+    private static final String DELETED_MESSAGE = "Noted. I've removed this task:\n";
     private static final String TASK_COUNT_FRONT = "Now you have ";
     private static final String TASK_COUNT_END = " task(s) in the list.";
 
@@ -24,6 +25,7 @@ public class Duke {
     private static final String TODO_COMMAND = "todo";
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String EVENT_COMMAND = "event";
+    private static final String DELETE_COMMAND = "delete";
 
     // static fields for the bot
     private static ArrayList<Task> store = new ArrayList<>(); // add input items here
@@ -43,9 +45,10 @@ public class Duke {
         }
         System.out.println(LINE_BREAK + "\n");
     }
-    private static void displayTasks(Task t) {
+    private static void displayModifiedTasks(Task t, boolean isAdding) {
+        String message = isAdding ? ADDED_MESSAGE : DELETED_MESSAGE;
         System.out.println(LINE_BREAK);
-        System.out.println("\t" + ADDED_MESSAGE);
+        System.out.println("\t" + message);
         System.out.println("\t  " + t);
         System.out.println("\t" + TASK_COUNT_FRONT + store.size() + TASK_COUNT_END);
         System.out.println(LINE_BREAK + "\n");
@@ -67,7 +70,7 @@ public class Duke {
                 // remove leading and trailing whitespace
                 Task newTodo = new ToDo(false, todoName.trim());
                 store.add(newTodo);
-                displayTasks(newTodo);
+                displayModifiedTasks(newTodo, true);
             } catch (StringIndexOutOfBoundsException noDesc) {
                 // case: No description
                 throw DukeException.emptyDescription("todo");
@@ -92,7 +95,7 @@ public class Duke {
                 // remove leading and trailing whitespace
                 Task newEvent = new Event(false, eventName.trim(), eventTime.trim());
                 store.add(newEvent);
-                displayTasks(newEvent);
+                displayModifiedTasks(newEvent, true);
             } catch (StringIndexOutOfBoundsException noDescOrTimeEvent) {
                 // case: Either no description or no timeline
                 throw DukeException.emptyDescription("event");
@@ -117,7 +120,7 @@ public class Duke {
                 // remove leading and trailing whitespace
                 Task newDeadline = new Deadline(false, deadlineName.trim(), deadlineTime.trim());
                 store.add(newDeadline);
-                displayTasks(newDeadline);
+                displayModifiedTasks(newDeadline, true);
             } catch (StringIndexOutOfBoundsException noDescOrTimeDeadline) {
                 // case: Either no description or no timeline
                 throw DukeException.emptyDescription("deadline");
@@ -140,6 +143,26 @@ public class Duke {
             Task toSet = store.get(index - 1);
             toSet.setTaskAsDone();
             displayToScreen(TOGGLE_MESSAGE + "\t " + toSet);
+        } catch (NumberFormatException e) {
+            throw DukeException.invalidNumberInput();
+        }
+    }
+
+    private static void deleteHandler(String number) throws DukeException {
+        // check for invalid input
+        try {
+            int index = Integer.parseInt(number);
+            // outside of valid range
+            if (index <= 0 || index > store.size()) {
+                throw DukeException.invalidNumberInput();
+            }
+
+            Task toDelete = store.remove(index - 1);
+            ArrayList<Task> newList = new ArrayList<>();
+            newList.addAll(store);
+            store = newList;
+            displayToScreen(DELETED_MESSAGE + "\t  " + toDelete
+                    + "\n\t" + TASK_COUNT_FRONT + store.size() + TASK_COUNT_END);
         } catch (NumberFormatException e) {
             throw DukeException.invalidNumberInput();
         }
@@ -182,6 +205,9 @@ public class Duke {
                         break;
                     case DONE_COMMAND:
                         doneHandler(words[1]);
+                        break;
+                    case DELETE_COMMAND:
+                        deleteHandler(words[1]);
                         break;
                     default:
                         throw DukeException.unknownOperation();
