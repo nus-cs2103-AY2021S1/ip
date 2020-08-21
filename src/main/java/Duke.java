@@ -18,6 +18,7 @@ public class Duke {
 
     public void run() {
         boolean flag = true;
+        ui.greeting();
         while (flag) {
             try {
                 String input = ui.readInput();
