@@ -6,11 +6,27 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * Creates a new Deadline object
+     *
+     * @param description details about the Deadline
+     * @param isDone whether Deadline is done or not
+     * @param by time/date the deadline is due by
+     * @return Deadline with a corresponding description and completed status.
+     */
+    public Deadline(String description, boolean isDone, String by) {
+        super(description, isDone);
+        this.by = by;
+    }
+
     /**
      * Overrides toString method of Task class
      *
      * @return Custom description of the deadline
      */
+>>>>>>> branch-Level-7
     @Override
     public String toString() {
         return "[D] " + super.toString() + " (by: " + by + ")";
