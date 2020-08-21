@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 public class EventCommand extends Command{
 
     public EventCommand(String command) {
@@ -5,10 +6,10 @@ public class EventCommand extends Command{
     }
 
     // Method to get the date for an event task
-    protected String getDateForTask() throws InvalidTaskDescriptionException {
+    protected LocalDate getDateForTask() throws InvalidTaskDescriptionException {
         try {
             String[] taskDetails = this.command.split("/");
-            return taskDetails[1];
+            return LocalDate.parse(taskDetails[1]);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskDescriptionException();
         }
