@@ -1,3 +1,0 @@
-T | 1 | yeobun
-D | 0 | roomba | 2012-03-23
-E | 0 | progamer move | 2034-05-12
