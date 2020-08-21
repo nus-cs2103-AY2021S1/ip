@@ -1,10 +1,20 @@
 package main.java;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+
+    private final static String FILE_PATH = "data/duke.txt";
+
     public static void main(String[] args) {
 
         String logo = " ____        _        \n"
@@ -20,7 +30,7 @@ public class Duke {
         System.out.println(line);
 
         Scanner sc = new Scanner(System.in);
-        List<Task> list = new ArrayList<>();
+        List<Task> list = readFile();
 
         String output = sc.nextLine();
         boolean added = false;
@@ -79,6 +89,7 @@ public class Duke {
                     System.out.println("☹ OOPS!!! Invalid parameter given :-(");
                 }
             }
+
             else {
 
                 if (output.indexOf("todo ") == 0 && output.length() > 5) {
@@ -121,8 +132,87 @@ public class Duke {
             output = sc.nextLine();
         }
 
+        saveFile(list);
+
         System.out.println(line);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(line);
+    }
+
+    private static List<Task> readFile() {
+
+        File file = new File(FILE_PATH);
+        List<Task> output = new ArrayList<Task>();
+
+        try {
+
+            if (!file.exists()) {
+                return output;
+            }
+            BufferedReader br = new BufferedReader(new FileReader(file));
+
+            String line;
+            while ((line = br.readLine()) != null){
+
+                String[] lineArr = line.split("\\s(\\|)\\s");
+
+                switch (lineArr[0]) {
+                    case "T":
+                        output.add(new ToDo(lineArr[2]));
+                        break;
+                    case "D":
+                        output.add(new Deadline(lineArr[2], lineArr[3]));
+                        break;
+                    case "E":
+                        output.add(new Event(lineArr[2], lineArr[3]));
+                        break;
+                }
+
+                if (lineArr[1].equals("1")) {
+                    output.get(output.size() - 1).completeTask();
+                }
+            }
+
+            br.close();
+
+        } catch (IOException e) {
+            System.out.println("Error occurred while reading data");
+        }
+
+        return output;
+    }
+
+    private static void saveFile(List<Task> tasks) {
+
+        File file = new File(FILE_PATH);
+
+        try {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+
+            int completed;
+
+            for (Task task : tasks) {
+                completed = task.isCompleted() ? 1 : 0;
+
+                if (task instanceof ToDo) {
+                    bw.write(String.format("T | %d | %s\n", completed, task.getMsg()));
+                }
+                else if (task instanceof Deadline) {
+                    bw.write(String.format("D | %d | %s | %s\n", completed, task.getMsg(),
+                            ((Deadline) task).getDeadline()));
+                }
+                else if (task instanceof Event) {
+                    bw.write(String.format("E | %d | %s | %s\n", completed, task.getMsg(),
+                            ((Event) task).getTime()));
+                }
+            }
+
+            bw.close();
+
+        } catch (IOException e) {
+            System.out.println("Error occurred while saving data");
+        }
     }
 }

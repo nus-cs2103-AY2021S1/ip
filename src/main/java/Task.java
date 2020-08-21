@@ -14,6 +14,14 @@ public abstract class Task {
         completed = true;
     }
 
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public String getMsg(){
+        return msg;
+    }
+
     @Override
     public String toString() {
         return "[" + (completed ? "✓" : "✗") + "] " + msg;

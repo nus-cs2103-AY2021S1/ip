@@ -1,0 +1,6 @@
+T | 0 | Read a book
+T | 0 | Exercise
+E | 1 | Birthday | 5th July
+E | 0 | Exam | 30th Nov
+D | 0 | Assignment 1 | ext Monday
+T | 1 | Sleep
