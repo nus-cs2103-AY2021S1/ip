@@ -1,14 +1,19 @@
-deadline return book /by Sunday
+todo test case
+todo
+list
+deadline
+deadline return book /bySunday
+deadline /by
+event /at 2 - 4pm
+event meeting /at
+deadline meeting /at
+deadline meeting /by
 event project meeting /at Mon 2-4pm
-deadline test1  /by 2pm
-event test /at not sure :<
-deadline test2  /by 3pm
-deadline test3  /by 4pm
 done 1
-done 2
+done 1
+done sdvgfdsg
+delete asbf
 list
 delete 1
-delete 2
-list
 done 7
-bye
+bye 5
