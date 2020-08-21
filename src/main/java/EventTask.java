@@ -17,6 +17,11 @@ public class EventTask extends Task {
     }
 
     @Override
+    public String printData() {
+        return "E|" + super.printData() + "|" + timePeriod;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + timePeriod + ")";
     }

@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -47,6 +48,13 @@ public class Duke {
         }
 
         switch (command) {
+            case SAVE:
+                try {
+                    store.save();
+                } catch (IOException e) {
+                    throw new DukeIOException(e.getMessage());
+                }
+                break;
             case LIST:
                 store.list();
                 break;

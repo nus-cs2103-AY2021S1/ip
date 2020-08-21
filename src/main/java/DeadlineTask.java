@@ -17,6 +17,11 @@ public class DeadlineTask extends Task {
     }
 
     @Override
+    public String printData() {
+        return "D|" + super.printData() + "|" + deadline;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + deadline + ")";
     }

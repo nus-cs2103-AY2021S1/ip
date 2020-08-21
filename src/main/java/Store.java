@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Store {
@@ -46,6 +49,28 @@ public class Store {
 
     public void list() {
         StringUtils.printWithWrapper(this.taskStore.toArray(new Task[]{}), true);
+    }
+
+    public void save() throws IOException {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < taskStore.size(); i++) {
+            Task t = taskStore.get(i);
+            sb.append(t.printData());
+            if (i != taskStore.size() - 1) {
+                sb.append('\n');
+            }
+        }
+
+        File dataDir = new File("data/");
+        if (!dataDir.exists()) {
+            dataDir.mkdir(); // if intellij is slow in displaying data dir, right click -> reload from disk
+        }
+
+        String textToPrint = sb.toString();
+        FileWriter fw = new FileWriter("data/duke.txt");
+        fw.write(textToPrint);
+        fw.close();
+        StringUtils.printWithWrapper(new String[]{"Saved successfully!"}, false);
     }
 
     private String getListStatus() {
