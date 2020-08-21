@@ -280,7 +280,7 @@ public class Ultron {
     public static void main(String[] args) {
 
         //Create a new duke
-        Ultron duke = new Ultron("data.txt");
+        Ultron duke = new Ultron("data/data.txt");
 
         //Run the main loop
         duke.mainLoop();
