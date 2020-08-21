@@ -7,13 +7,12 @@ public class Duke {
         Ui ui = new Ui();
         Storage storage = new Storage("../data/tasks.txt");
         TaskList list = new TaskList();
-        int count = 0;
         boolean flag = true;
         while (flag) {
             try {
                 String input = ui.readInput();
                 Input type = Parser.getType(input);
-                flag = Parser.dealCommand(type, ui, storage, input, count, list);
+                flag = Parser.dealCommand(type, ui, storage, input, list);
             } catch (InvalidCommandException e) {
                 ui.output(e.getMessage());
             }
