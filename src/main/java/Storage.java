@@ -19,6 +19,11 @@ public class Storage {
             int done = sc.nextInt();
             description = sc.next();
             description = sc.nextLine();
+            int i = 0;
+            while (description.charAt(i) == ' ') {
+                i++;
+            }
+            description = description.substring(i);
             Task toAdd;
             if (taskType.charAt(0) == 'T') {
                 toAdd = new ToDo(description);
