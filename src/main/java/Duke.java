@@ -1,10 +1,13 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.io.IOException;
 
 public class Duke {
     private static final List<Task> storage = new ArrayList<>();
     private static final String border = "____________________________________________________________\n";
+    protected static File file;
 
     public static boolean checkBye(String s) {
         return s.equals("bye");
@@ -124,6 +127,24 @@ public class Duke {
             );
         }
     }
+
+    public static void fileCheck() {
+        String pathname = "./data/duke.txt";
+        File f = new File(pathname);
+        if (f.exists() && f.canRead()) {
+            file = f;
+            System.out.println("Memory loaded from backup.");
+        } else {
+            try {
+                if (f.createNewFile()) {
+                    System.out.println("Backup file created.");
+                }
+            } catch (IOException e) {
+                System.out.println("Something went wrong! Backup could not be made.");
+            }
+        }
+    }
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.println(
