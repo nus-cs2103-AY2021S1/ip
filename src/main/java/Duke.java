@@ -1,4 +1,3 @@
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -159,19 +158,19 @@ public class Duke {
         while (flag) {
             try {
                 String input = sc.nextLine();
-                Command type;
+                Input type;
                 if (input.equals("bye")) {
-                    type = Command.BYE;
+                    type = Input.BYE;
                 } else if (input.equals("list")) {
-                    type = Command.LIST;
+                    type = Input.LIST;
                 } else if (isDeleteCommand(input, count)) {
-                    type = Command.DELETE;
+                    type = Input.DELETE;
                 } else if (isDoneCommand(input, count)) {
-                    type = Command.DONE;
+                    type = Input.DONE;
                 } else if (input.startsWith("happens on ")) {
-                    type = Command.HAPPENS;
+                    type = Input.HAPPENS;
                 } else {
-                    type = Command.TASK;
+                    type = Input.TASK;
                 }
                 switch (type) {
                     case LIST:
