@@ -2,6 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,6 +21,7 @@ public class Duke {
     private static final String INPUT_BYE = "bye";
     private static final String SAVED_DATA_PATHNAME = "./data";
     private static final String SAVED_DATA_FILENAME = "duke.txt";
+    private static final String GET_EVENTS = "getEvents";
 
     public static void main(String[] args) throws DukeException{
 
@@ -41,6 +45,8 @@ public class Duke {
                     taskDone(scanner, tasks);
                 } else if (command.equals(INPUT_DELETE)) {
                     deleteTask(scanner, tasks);
+                } else if (command.equals(GET_EVENTS)) {
+                    viewDeadlinesOnDate(scanner, tasks);
                 } else {
 
                     Task newTask = null;
@@ -153,7 +159,14 @@ public class Duke {
                     splitParts[1].strip().length() == 0) {
             throw new InvalidTaskFormat(TaskType.DEADLINE);
         } else {
-            Task newTask = new Deadline(splitParts[0].stripLeading(), splitParts[1]);
+            Task newTask;
+            LocalDate localDate = parseDate(splitParts[1].strip());
+            if (localDate != null) {
+                newTask = new Deadline(splitParts[0].stripLeading(), localDate);
+            } else {
+                newTask = new Deadline(splitParts[0].stripLeading(), splitParts[1].strip());
+            }
+
             return newTask;
         }
     }
@@ -165,7 +178,13 @@ public class Duke {
                     || splitParts[1].strip().length() == 0) {
             throw new InvalidTaskFormat(TaskType.EVENT);
         } else {
-            Task newTask = new Event(splitParts[0].strip(), splitParts[1].strip());
+            Task newTask;
+            LocalDate localDate = parseDate(splitParts[1].strip());
+            if (localDate != null) {
+                newTask = new Event(splitParts[0].stripLeading(), localDate);
+            } else {
+                newTask = new Event(splitParts[0].stripLeading(), splitParts[1].strip());
+            }
             return newTask;
         }
     }
@@ -250,5 +269,35 @@ public class Duke {
         fileWriter.write(lineToAdd);
         fileWriter.close();
     }
+
+    private static LocalDate parseDate(String date) {
+        LocalDate localDate;
+        try {
+            localDate = LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            localDate = null;
+        }
+        return localDate;
+    }
+
+
+    private static void viewDeadlinesOnDate(Scanner scanner, List<Task> tasks) {
+        String date = scanner.nextLine().strip();
+        try {
+            LocalDate localDate = LocalDate.parse(date);
+            System.out.println(HORIZONTAL_BREAK);
+            System.out.println("     " + "Here are your events on " +
+                                localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ":");
+            for (Task task : tasks) {
+                if (task.hasDate() && task.getDate().isEqual(localDate)) {
+                    System.out.println("     " + task);
+                }
+            }
+            System.out.println(HORIZONTAL_BREAK);
+        } catch (DateTimeParseException e) {
+            System.out.println("Please input a valid date format");
+        }
+    }
+
 
 }
