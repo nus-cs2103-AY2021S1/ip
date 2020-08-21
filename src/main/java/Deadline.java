@@ -2,18 +2,20 @@
 // Copyright (c) 2020, zhiayang, Apache License 2.0.
 
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    private final String deadline;
+    private final LocalDate deadline;
 
-    public Deadline(String name, String deadline) {
+    public Deadline(String name, LocalDate deadline) {
 
         super(name);
         this.deadline = deadline;
     }
 
-    public String getDeadline() {
+    public LocalDate getDeadline() {
         return this.deadline;
     }
 
@@ -28,11 +30,11 @@ public class Deadline extends Task {
         var parts = DatedTask.parse("deadline", input, "by", getUsage());
         assert parts.size() == 2;
 
-        return new Deadline(parts.get(0), parts.get(1));
+        return new Deadline(parts.get(0), DatedTask.parseDate(parts.get(1)));
     }
 
     private static String getUsage() {
 
-        return "deadline <description> /by <time>";
+        return "deadline <description> /by <date>";
     }
 }

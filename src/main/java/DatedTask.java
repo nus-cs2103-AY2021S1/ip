@@ -29,4 +29,15 @@ public class DatedTask {
         when = when.substring(3).strip();
         return Arrays.asList(item, when);
 	}
+
+    public static LocalDate parseDate(String date) throws InvalidInputException {
+        // TODO: handle more formats, eg dd/mm/yy, dd/mm/yyyy, dd/mm
+
+        try {
+            return LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE);
+        } catch (DateTimeParseException e) {
+            throw new InvalidInputException(String.format("invalid date format: %s", e.getMessage()),
+                "yyyy-mm-dd");
+        }
+    }
 }

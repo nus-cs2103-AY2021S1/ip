@@ -2,18 +2,19 @@
 // Copyright (c) 2020, zhiayang, Apache License 2.0.
 
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Event extends Task {
 
-	private final String eventDate;
+	private final LocalDate eventDate;
 
-    public Event(String name, String date) {
+    public Event(String name, LocalDate date) {
 
         super(name);
 		this.eventDate = date;
     }
 
-    public String getEventDate() {
+    public LocalDate getEventDate() {
         return this.eventDate;
     }
 
@@ -28,11 +29,11 @@ public class Event extends Task {
         var parts = DatedTask.parse("event", input, "at", getUsage());
         assert parts.size() == 2;
 
-        return new Event(parts.get(0), parts.get(1));
+        return new Event(parts.get(0), DatedTask.parseDate(parts.get(1)));
     }
 
     private static String getUsage() {
 
-        return "event <description> /at <time>";
+        return "event <description> /at <date>";
     }
 }
