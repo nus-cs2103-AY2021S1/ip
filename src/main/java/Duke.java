@@ -22,6 +22,7 @@ public class Duke {
         while (flag) {
             try {
                 String input = ui.readInput();
+                Command c = Parser.parse(input);
                 Input type = Parser.getType(input);
                 flag = Parser.dealCommand(type, ui, storage, input, list);
             } catch (InvalidCommandException e) {
