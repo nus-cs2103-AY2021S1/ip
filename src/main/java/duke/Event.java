@@ -10,7 +10,16 @@ public class Event extends Task {
 
     @Override
     public String showTask() {
-        return String.format("[E]%s (at: %s)", super.showTask(), this.at);
+        return String.format("[%s]%s (at: %s)", this.getType(), super.showTask(), this.at);
     }
 
+    @Override
+    public String getType() {
+        return "E";
+    }
+
+    @Override
+    public String getDescription() {
+        return super.getDescription() + " | " + this.at;
+    }
 }
