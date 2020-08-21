@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -5,7 +6,31 @@ import java.util.Scanner;
  * Main class for the Duke chatbot.
  */
 public class Duke {
-    public static void main(String[] args) {
+    private static ArrayList<Task> tasks;
+//    public static void markTaskDone(ArrayList<Task> tasks) {
+
+    public static void displayTasks(ArrayList<Task> tasks) {
+        System.out.println("________________________________________");
+        System.out.println("Here is your current list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println("    " + (i + 1) + ". " + tasks.get(i));
+        }
+        System.out.println("________________________________________");
+    }
+
+    public static void exitProgram(ArrayList<Task> tasks) throws IOException {
+        Storage.writeToFile(tasks);
+        display("Bye! Hope to see you again! :D");
+        System.exit(0);
+    }
+
+    public static void display(String s) {
+        System.out.println("________________________________________");
+        System.out.println(s);
+        System.out.println("________________________________________");
+    }
+
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -14,60 +39,41 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\n" +
                 "     What can I do for you?");
-        System.out.println("________________________________________");
+
+        tasks = Storage.readFile();
+        if (!tasks.isEmpty()) {
+            displayTasks(tasks);
+//            System.out.println(tasks.toString());
+        } else {
+            System.out.println("________________________________________");
+        }
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
+
         while (true) {
             String s = sc.next();
             if (s.equals("bye")) {
-                System.out.println("________________________________________");
-                System.out.println("Bye. Hope to see you again soon!");
-                System.out.println("________________________________________");
-                System.exit(0);
+                exitProgram(tasks);
             } else if (s.equals("list")) {
-                System.out.println("________________________________________");
-                System.out.println("Here is your current list:");
-                for (int i = 0; i < tasks.size(); i++) {
-                    System.out.println((i + 1) + "." + tasks.get(i).toString());
-                }
-                System.out.println("________________________________________");
+                displayTasks(tasks);
             } else if (s.equals("done")) {
                 try {
                     int index = Integer.parseInt(sc.next()) - 1;
-                    if (index < tasks.size() && index >= 0) {
-                        System.out.println("________________________________________");
-                        System.out.println("Nice! I've marked this task as done: ");
-                        tasks.get(index).markAsDone();
-                        System.out.println(tasks.get(index).toString());
-                    } else {
-                        System.out.println("________________________________________");
-                        System.out.println("Integer should have a corresponding task in the list.");
-                    }
+                    tasks.get(index).markAsDone();
+                    display("Nice! I've marked this task as done:\n   " + tasks.get(index));
+                    Storage.writeToFile(tasks);
                 } catch (Exception e) {
-                    System.out.println("________________________________________");
-                    System.out.println("Please key in this format: done <integer>");
-                } finally {
-                    System.out.println("________________________________________");
+                    display("Task does not exist!");
                 }
             } else if (s.equals("delete")) {
                 try {
                     int index = Integer.parseInt(sc.next()) - 1;
-                    if (index < tasks.size() && index >= 0) {
-                        System.out.println("________________________________________");
-                        System.out.println("Noted. I've removed this task: ");
-                        System.out.println(tasks.get(index).toString());
-                        tasks.remove(index);
-                        System.out.println("Now you have " + tasks.size() + " tasks in your list.");
-                    } else {
-                        System.out.println("________________________________________");
-                        System.out.println("Integer should have a corresponding task in the list.");
-                    }
+                    tasks.remove(index);
+                    display("Noted. I've removed this task:\n   " + tasks.get(index) +
+                            "\nNow you have " + tasks.size() + " tasks in your list.");
+                    Storage.writeToFile(tasks);
                 } catch (Exception e) {
-                    System.out.println("________________________________________");
-                    System.out.println("Please key in this format: done <integer>");
-                } finally {
-                    System.out.println("________________________________________");
+                    display("Task does not exist!");
                 }
             } else {
                 Task temp;
@@ -77,8 +83,9 @@ public class Duke {
                         if (s.isEmpty()) {
                             throw new EmptyDescriptionException("Description cannot be empty");
                         } else {
-                            temp = new ToDo(s);
+                            temp = new ToDo(s.trim());
                             tasks.add(temp);
+                            Storage.appendToFile(temp);
                         }
                     } else if (s.startsWith("deadline")) {
                         s = sc.nextLine();
@@ -86,8 +93,9 @@ public class Duke {
                             throw new EmptyDescriptionException("Description cannot be empty");
                         } else {
                             String[] parts = s.split("\\s*/by\\s*");
-                            temp = new Deadline(parts[0], parts[1]);
+                            temp = new Deadline(parts[0].trim(), parts[1].trim());
                             tasks.add(temp);
+                            Storage.appendToFile(temp);
                         }
                     } else if (s.startsWith("event")) {
                         s = sc.nextLine();
@@ -95,25 +103,21 @@ public class Duke {
                             throw new EmptyDescriptionException("Description cannot be empty");
                         } else {
                             String[] parts = s.split("\\s*/at\\s*");
-                            temp = new Event(parts[0], parts[1]);
+                            temp = new Event(parts[0].trim(), parts[1].trim());
                             tasks.add(temp);
+                            Storage.appendToFile(temp);
                         }
                     } else {
                         sc.nextLine();
                         throw new Exception("Wrong command.");
                     }
-                    System.out.println("________________________________________");
-                    System.out.println("Yay! New task added: ");
-                    System.out.println("   " + temp.toString());
-                    System.out.println("Now you have " + tasks.size() + " tasks in your list.");
+                    display("Yay! New task added:\n   " + temp +
+                            "\nNow you have " + tasks.size() + " tasks in your list.");
+
                 } catch (EmptyDescriptionException e) {
-                    System.out.println("________________________________________");
-                    System.out.println("Description cannot be empty!");
+                    display("Description cannot be empty!");
                 } catch (Exception e) {
-                        System.out.println("________________________________________");
-                        System.out.println("Start with either todo, deadline or event to add new task.");
-                } finally {
-                    System.out.println("________________________________________");
+                    display("Format is wrong!");
                 }
             }
         }
