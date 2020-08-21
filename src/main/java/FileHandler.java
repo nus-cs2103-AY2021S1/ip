@@ -1,4 +1,3 @@
-import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
@@ -14,13 +13,6 @@ public class FileHandler {
 
     public FileHandler(String filepath) {
         this.filepath = filepath;
-//        addTask("random stuff");
-        try {
-//            resetFile(filepath);
-//            System.out.println(getFileContents(filepath));
-        } catch (Exception e) {
-            System.out.println(e);
-        }
     }
 
     private void resetFile() throws IOException {
@@ -35,29 +27,36 @@ public class FileHandler {
         bw.close();
     }
 
-    private List<Task> getFileContents() throws IOException {
+    public List<Task> getFileContents() throws IOException {
         FileReader fr = new FileReader(filepath);
         BufferedReader br = new BufferedReader(fr);
         List<Task> lst = new ArrayList<>();
         String line = br.readLine();
         while (line != null) {
             String type = Character.toString(line.charAt(1));
+            boolean checked = (Character.toString(line.charAt(4))).equals("✓") ? true : false;
             String desc = Task.getDesc(line);
             switch (type) {
                 case "T":
                     Task todo = new Todo(desc);
+                    todo.setStatus(checked);
+
                     lst.add(todo);
                     break;
                 case "E":
                     String eventDesc = Event.parseFileDesc(desc);
                     String eventAt = Event.parseFileAt(desc);
                     Task event = new Event(eventDesc, eventAt);
+                    event.setStatus(checked);
+
                     lst.add(event);
                     break;
                 case "D":
                     String deadlineDesc = Deadline.parseFileDesc(desc);
                     String deadlineBy = Deadline.parseFileBy(desc);
                     Task deadline = new Deadline(deadlineDesc, deadlineBy);
+                    deadline.setStatus(checked);
+
                     lst.add(deadline);
                     break;
                 default:
@@ -79,23 +78,38 @@ public class FileHandler {
         }
     }
 
-    public void addTask(String description) {
-        try {
-            appendToFile(String.format("%s\n", description));
-        } catch (Exception e) {
-            System.out.println(e);
+    public Task getTask(int i) throws Exception {
+        List<Task> filecontents = getFileContents();
+        if (i <= 0 || i > filecontents.size()) {
+            throw new InvalidIndexException();
         }
+        return filecontents.get(i-1);
     }
 
-    public void completeTask(int i) {
-        try {
-//            List<Task> lst = getFileContents();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+    public int getSize() throws Exception {
+        List<Task> filecontents = getFileContents();
+        return filecontents.size();
     }
 
-    public void deleteTask(int i) {
+    public void addTask(String description) throws Exception {
+        appendToFile(String.format("%s\n", description));
+    }
 
+    public void completeTask(int i) throws Exception {
+        List<Task> filecontents = getFileContents();
+        if (i <= 0 || i > filecontents.size()) {
+            throw new InvalidIndexException();
+        }
+        filecontents.get(i-1).setStatus(true);
+        rewriteFileContents(filecontents);
+    }
+
+    public void deleteTask(int i) throws Exception {
+        List<Task> filecontents = getFileContents();
+        if (i <= 0 || i > filecontents.size()) {
+            throw new InvalidIndexException();
+        }
+        filecontents.remove(i-1);
+        rewriteFileContents(filecontents);
     }
 }
