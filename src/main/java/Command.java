@@ -5,5 +5,5 @@ public abstract class Command {
         isExit = false;
     }
 
-    abstract public void execute();
+    abstract public void execute(Ui ui, TaskList list);
 }
