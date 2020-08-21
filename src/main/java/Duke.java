@@ -1,4 +1,6 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 
 public class Duke {
@@ -24,49 +26,6 @@ public class Duke {
     }
 
     private static void parseCommands(String command) throws Exception {
-        FileReader fileToRead = new FileReader("data/duke.txt");
-        BufferedReader bufferedReader = new BufferedReader(fileToRead);
-        String inputData = bufferedReader.readLine();
-        File file = new File("data/duke.txt");
-        boolean flag = true;
-
-        while (inputData != null) {
-            if (flag) {
-                System.out.println("Loading data from duke.txt..." + "\n");
-                flag = false;
-            }
-
-            String taskDate;
-            String[] fileTokens = inputData.split("\\|");
-            int doneFlag = Integer.valueOf(fileTokens[1]);
-            String descriptions = fileTokens[2];
-
-            switch (fileTokens[0]) {
-
-                case "D":
-                    taskDate = fileTokens[3];
-                    Deadline newDeadline = new Deadline(descriptions, taskDate, doneFlag);
-                    STORAGE.add(newDeadline);
-                    break;
-
-                case "E":
-                    taskDate = fileTokens[3];
-                    Event newEvent = new Event(descriptions, taskDate, doneFlag);
-                    STORAGE.add(newEvent);
-                    break;
-
-                case "T":
-                    Todo newTodo = new Todo(descriptions, doneFlag);
-                    STORAGE.add(newTodo);
-                    break;
-
-                default:
-                    break;
-            }
-            inputData = bufferedReader.readLine();
-        }
-        bufferedReader.close();
-
         while (command != null && !command.equals("bye")) {
             String[] userInputArray = command.split(" ");
             String commandCheck = userInputArray[0];
@@ -146,7 +105,8 @@ public class Duke {
                     case "deadline":
                         try {
                             if (numOfInput == 1) {
-                                throw new DukeException("☹ Oh no! The description of a deadline task cannot be empty.");
+                                throw new DukeException("☹ Oh no! The description of a deadline task " +
+                                                        "cannot be empty.");
                             }
 
                             if (numOfInput < 4) {
@@ -155,7 +115,8 @@ public class Duke {
                             }
 
                             StringBuilder deadlineString = new StringBuilder();
-                            StringBuilder deadlineDate = new StringBuilder();
+                            StringBuilder dateField = new StringBuilder();
+                            StringBuilder timingField = new StringBuilder();
                             boolean checkForDate = false;
                             int m = 1;
                             while (m < numOfInput) {
@@ -166,13 +127,17 @@ public class Duke {
                                         deadlineString.append(userInputArray[m]);
                                         deadlineString.append(" ");
                                     } else {
-                                        deadlineDate.append(userInputArray[m]);
-                                        deadlineDate.append(" ");
+                                        if (m == numOfInput - 1) {
+                                            timingField.append(userInputArray[m]);
+                                        } else {
+                                            dateField.append(userInputArray[m]);
+                                        }
                                     }
                                 }
                                 m++;
                             }
-                            taskToAdd = new Deadline(deadlineString.toString().trim(), deadlineDate.toString().trim());
+                            taskToAdd = new Deadline(deadlineString.toString().trim(), dateField.toString().trim(),
+                                                     timingField.toString().trim());
                             printGotIt();
                             printTask(taskToAdd);
                             STORAGE.add(taskToAdd);
@@ -194,7 +159,8 @@ public class Duke {
                             }
 
                             StringBuilder eventString = new StringBuilder();
-                            StringBuilder eventDate = new StringBuilder(" ");
+                            StringBuilder eventDateField = new StringBuilder();
+                            StringBuilder eventTimingField = new StringBuilder();
                             boolean checkForEvent = false;
                             int z = 1;
                             while (z < numOfInput) {
@@ -205,13 +171,17 @@ public class Duke {
                                         eventString.append(userInputArray[z]);
                                         eventString.append(" ");
                                     } else {
-                                        eventDate.append(userInputArray[z]);
-                                        eventDate.append(" ");
+                                        if (z == numOfInput - 1) {
+                                            eventTimingField.append(userInputArray[z]);
+                                        } else {
+                                            eventDateField.append(userInputArray[z]);
+                                        }
                                     }
                                 }
                                 z++;
                             }
-                            taskToAdd = new Event(eventString.toString().trim(), eventDate.toString().trim());
+                            taskToAdd = new Event(eventString.toString().trim(), eventDateField.toString().trim(),
+                                                  eventTimingField.toString().trim());
                             printGotIt();
                             printTask(taskToAdd);
                             STORAGE.add(taskToAdd);
@@ -263,43 +233,7 @@ public class Duke {
             }
             command = BUFFERED_READER.readLine();
         }
-        READER.close();
-        String filePath = file.getAbsolutePath();
-        saveToDisk(filePath);
-    }
-
-    private static void saveToDisk(String path) throws IOException {
-        String outputLine = "";
-        FileWriter writer = new FileWriter(path);
-        int sizeOfArray = STORAGE.size();
-        int index = 0;
-        int isDone;
-
-        while (index < sizeOfArray) {
-            Task task = STORAGE.get(index);
-
-            if (task.isDone) {
-                isDone = 1;
-            } else {
-                isDone = 0;
-            }
-
-            if ((task.getClass().equals(Todo.class))) {
-                outputLine = "T" + "|" + isDone + "|" + task.description;
-            } else if ((task.getClass().equals(Deadline.class))) {
-                Deadline deadlineTask = (Deadline) task;
-                outputLine = "D" + "|" + isDone + "|" + deadlineTask.description + "|" + deadlineTask.date;
-            } else if ((task.getClass().equals(Event.class))) {
-                Event eventTask = (Event) task;
-                outputLine = "E" + "|" + isDone + "|" + eventTask.description + "|" + eventTask.timing;
-            } else {
-                // Do nothing
-            }
-            String separator = System.lineSeparator();
-            writer.write(outputLine + separator);
-            index++;
-        }
-        writer.close();
+        BUFFERED_READER.close();
     }
 
     private static void printTask(Task taskToAdd) {
