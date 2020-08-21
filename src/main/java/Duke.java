@@ -165,14 +165,17 @@ public class Duke {
                     break;
                 case TODO:
                     ToDo newTodo = ToDo.createNewToDo(argument);
+                    storage.writeLineToStorage(newTodo.generateStorageString());
                     printToConsole(addTaskToList(tasks, newTodo));
                     break;
                 case EVENT:
                     Event newEvent = Event.createNewEvent(argument);
+                    storage.writeLineToStorage(newEvent.generateStorageString());
                     printToConsole(addTaskToList(tasks, newEvent));
                     break;
                 case DEADLINE:
                     Deadline newDeadline = Deadline.createNewDeadline(argument);
+                    storage.writeLineToStorage(newDeadline.generateStorageString());
                     printToConsole(addTaskToList(tasks, newDeadline));
                     break;
                 case INVALID:
@@ -180,6 +183,8 @@ public class Duke {
                 }
             } catch (DukeException e) {
                 printToConsole(e.getMessage());
+            } catch (IOException e) {
+                printToConsole("Error: Task could not be saved.");
             }
         }
 

@@ -29,6 +29,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String generateStorageString() {
+        return String.format("DEADLINE | %s | %s /by %s", isDone ? "TRUE" : "FALSE", taskData, deadline);
+    }
+
+    @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(), deadline);
     }

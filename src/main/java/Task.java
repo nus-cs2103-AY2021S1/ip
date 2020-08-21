@@ -1,22 +1,24 @@
 public abstract class Task {
 
-    private String taskName;
-    private boolean isDone = false;
+    protected String taskData;
+    protected boolean isDone = false;
 
-    protected Task(String taskName) {
-        this.taskName = taskName;
+    protected Task(String taskData) {
+        this.taskData = taskData;
     }
 
     public void competeTask() {
         isDone = true;
     }
+    
+    public abstract String generateStorageString();
 
     @Override
     public String toString() {
         if (isDone) {
-            return "[\u2713] " + taskName;
+            return "[\u2713] " + taskData;
         } else {
-            return "[\u2718] " + taskName;
+            return "[\u2718] " + taskData;
         }
     }
 }
