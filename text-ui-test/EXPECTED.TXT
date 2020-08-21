@@ -4,6 +4,15 @@
 	=================================================================================
 
 	=================================================================================
+	  Here are the tasks in your list:
+	  1.[T][✘] borrow books
+	  2.[E][✓] cs2103 project meeting (at: 12:00 PM   Sep 30 2020)
+	  3.[D][✘] cs2102 tutorial 1 (by: Aug 25 2020)
+	  4.[T][✘] verify critical data
+	  5.[T][✘] return books
+	=================================================================================
+
+	=================================================================================
 	  ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 	=================================================================================
 
@@ -13,8 +22,8 @@
 
 	=================================================================================
 	  Got it. I've added this task:
-	    [T][✘] borrow books
-	  Now you have 1 task in the list.
+	    [T][✘] buy CD
+	  Now you have 6 tasks in the list.
 	=================================================================================
 
 	=================================================================================
@@ -26,49 +35,63 @@
 	=================================================================================
 
 	=================================================================================
+	  Invalid input date, please input as yyyy-mm-dd.
+	=================================================================================
+
+	=================================================================================
 	  Got it. I've added this task:
-	    [D][✘] assignment 1 (by: Thursday)
-	  Now you have 2 tasks in the list.
+	    [D][✘] cs3230 assignment 1 (by: Aug 22 2020)
+	  Now you have 7 tasks in the list.
 	=================================================================================
 
 	=================================================================================
 	  Here are the tasks in your list:
 	  1.[T][✘] borrow books
-	  2.[D][✘] assignment 1 (by: Thursday)
+	  2.[E][✓] cs2103 project meeting (at: 12:00 PM   Sep 30 2020)
+	  3.[D][✘] cs2102 tutorial 1 (by: Aug 25 2020)
+	  4.[T][✘] verify critical data
+	  5.[T][✘] return books
+	  6.[T][✘] buy CD
+	  7.[D][✘] cs3230 assignment 1 (by: Aug 22 2020)
 	=================================================================================
 
 	=================================================================================
 	  Got it. I've added this task:
-	    [E][✘] cs2103 project meeting (at: today)
-	  Now you have 3 tasks in the list.
+	    [E][✘] cs2101 op meeting (at: 12:00 PM   Aug 31 2020)
+	  Now you have 8 tasks in the list.
 	=================================================================================
 
 	=================================================================================
 	  Got it. I've added this task:
-	    [D][✘] tutorial 1 (by: 25 Aug)
-	  Now you have 4 tasks in the list.
+	    [D][✘] utw2001 final paper (by: Nov 3 2020)
+	  Now you have 9 tasks in the list.
 	=================================================================================
 
 	=================================================================================
 	  Got it. I've added this task:
-	    [T][✘] verify critical data
-	  Now you have 5 tasks in the list.
+	    [T][✘] clean room
+	  Now you have 10 tasks in the list.
 	=================================================================================
 
 	=================================================================================
 	  Got it. I've added this task:
-	    [T][✘] return books
-	  Now you have 6 tasks in the list.
+	    [T][✘] wash clothes
+	  Now you have 11 tasks in the list.
 	=================================================================================
 
 	=================================================================================
 	  Here are the tasks in your list:
 	  1.[T][✘] borrow books
-	  2.[D][✘] assignment 1 (by: Thursday)
-	  3.[E][✘] cs2103 project meeting (at: today)
-	  4.[D][✘] tutorial 1 (by: 25 Aug)
-	  5.[T][✘] verify critical data
-	  6.[T][✘] return books
+	  2.[E][✓] cs2103 project meeting (at: 12:00 PM   Sep 30 2020)
+	  3.[D][✘] cs2102 tutorial 1 (by: Aug 25 2020)
+	  4.[T][✘] verify critical data
+	  5.[T][✘] return books
+	  6.[T][✘] buy CD
+	  7.[D][✘] cs3230 assignment 1 (by: Aug 22 2020)
+	  8.[E][✘] cs2101 op meeting (at: 12:00 PM   Aug 31 2020)
+	  9.[D][✘] utw2001 final paper (by: Nov 3 2020)
+	  10.[T][✘] clean room
+	  11.[T][✘] wash clothes
 	=================================================================================
 
 	=================================================================================
@@ -77,17 +100,22 @@
 
 	=================================================================================
 	  Nice! I've marked this task as done:
-	    [E][✓] cs2103 project meeting (at: today)
+	    [D][✓] cs2102 tutorial 1 (by: Aug 25 2020)
 	=================================================================================
 
 	=================================================================================
 	  Here are the tasks in your list:
 	  1.[T][✘] borrow books
-	  2.[D][✘] assignment 1 (by: Thursday)
-	  3.[E][✓] cs2103 project meeting (at: today)
-	  4.[D][✘] tutorial 1 (by: 25 Aug)
-	  5.[T][✘] verify critical data
-	  6.[T][✘] return books
+	  2.[E][✓] cs2103 project meeting (at: 12:00 PM   Sep 30 2020)
+	  3.[D][✓] cs2102 tutorial 1 (by: Aug 25 2020)
+	  4.[T][✘] verify critical data
+	  5.[T][✘] return books
+	  6.[T][✘] buy CD
+	  7.[D][✘] cs3230 assignment 1 (by: Aug 22 2020)
+	  8.[E][✘] cs2101 op meeting (at: 12:00 PM   Aug 31 2020)
+	  9.[D][✘] utw2001 final paper (by: Nov 3 2020)
+	  10.[T][✘] clean room
+	  11.[T][✘] wash clothes
 	=================================================================================
 
 	=================================================================================
@@ -96,17 +124,45 @@
 
 	=================================================================================
 	  Noted. I've removed this task:
-	    [D][✘] assignment 1 (by: Thursday)
-	  Now you have 5
+	    [E][✓] cs2103 project meeting (at: 12:00 PM   Sep 30 2020)
+	  Now you have 10
 	=================================================================================
 
 	=================================================================================
 	  Here are the tasks in your list:
 	  1.[T][✘] borrow books
-	  2.[E][✓] cs2103 project meeting (at: today)
-	  3.[D][✘] tutorial 1 (by: 25 Aug)
-	  4.[T][✘] verify critical data
-	  5.[T][✘] return books
+	  2.[D][✓] cs2102 tutorial 1 (by: Aug 25 2020)
+	  3.[T][✘] verify critical data
+	  4.[T][✘] return books
+	  5.[T][✘] buy CD
+	  6.[D][✘] cs3230 assignment 1 (by: Aug 22 2020)
+	  7.[E][✘] cs2101 op meeting (at: 12:00 PM   Aug 31 2020)
+	  8.[D][✘] utw2001 final paper (by: Nov 3 2020)
+	  9.[T][✘] clean room
+	  10.[T][✘] wash clothes
+	=================================================================================
+
+	=================================================================================
+	  Got it. I've added this task:
+	    [D][✘] cs2101 email (by: Aug 31 2020)
+	  Now you have 11 tasks in the list.
+	=================================================================================
+
+	=================================================================================
+	  Got it. I've added this task:
+	    [E][✘] family party (at: 07:00 PM   Aug 31 2020)
+	  Now you have 12 tasks in the list.
+	=================================================================================
+
+	=================================================================================
+	  Invalid date format. Please use yyyy-MM-dd
+	=================================================================================
+
+	=================================================================================
+	  Here are the tasks happening on Aug 31 2020 in your list:
+	  7.[E][✘] cs2101 op meeting (at: 12:00 PM   Aug 31 2020)
+	  11.[D][✘] cs2101 email (by: Aug 31 2020)
+	  12.[E][✘] family party (at: 07:00 PM   Aug 31 2020)
 	=================================================================================
 
 	=================================================================================
@@ -117,23 +173,60 @@
 	=================================================================================
 	  Here are the tasks in your list:
 	  1.[T][✓] borrow books
-	  2.[E][✓] cs2103 project meeting (at: today)
-	  3.[D][✘] tutorial 1 (by: 25 Aug)
-	  4.[T][✘] verify critical data
-	  5.[T][✘] return books
+	  2.[D][✓] cs2102 tutorial 1 (by: Aug 25 2020)
+	  3.[T][✘] verify critical data
+	  4.[T][✘] return books
+	  5.[T][✘] buy CD
+	  6.[D][✘] cs3230 assignment 1 (by: Aug 22 2020)
+	  7.[E][✘] cs2101 op meeting (at: 12:00 PM   Aug 31 2020)
+	  8.[D][✘] utw2001 final paper (by: Nov 3 2020)
+	  9.[T][✘] clean room
+	  10.[T][✘] wash clothes
+	  11.[D][✘] cs2101 email (by: Aug 31 2020)
+	  12.[E][✘] family party (at: 07:00 PM   Aug 31 2020)
 	=================================================================================
 
 	=================================================================================
-	  The task [E][✓] cs2103 project meeting (at: today) has already been done.
+	  The task [D][✓] cs2102 tutorial 1 (by: Aug 25 2020) has already been done.
 	=================================================================================
 
 	=================================================================================
 	  Here are the tasks in your list:
 	  1.[T][✓] borrow books
-	  2.[E][✓] cs2103 project meeting (at: today)
-	  3.[D][✘] tutorial 1 (by: 25 Aug)
-	  4.[T][✘] verify critical data
-	  5.[T][✘] return books
+	  2.[D][✓] cs2102 tutorial 1 (by: Aug 25 2020)
+	  3.[T][✘] verify critical data
+	  4.[T][✘] return books
+	  5.[T][✘] buy CD
+	  6.[D][✘] cs3230 assignment 1 (by: Aug 22 2020)
+	  7.[E][✘] cs2101 op meeting (at: 12:00 PM   Aug 31 2020)
+	  8.[D][✘] utw2001 final paper (by: Nov 3 2020)
+	  9.[T][✘] clean room
+	  10.[T][✘] wash clothes
+	  11.[D][✘] cs2101 email (by: Aug 31 2020)
+	  12.[E][✘] family party (at: 07:00 PM   Aug 31 2020)
+	=================================================================================
+
+	=================================================================================
+	  Here are the tasks happening on Aug 31 2020 in your list:
+	  7.[E][✘] cs2101 op meeting (at: 12:00 PM   Aug 31 2020)
+	  11.[D][✘] cs2101 email (by: Aug 31 2020)
+	  12.[E][✘] family party (at: 07:00 PM   Aug 31 2020)
+	=================================================================================
+
+	=================================================================================
+	  Here are the tasks in your list:
+	  1.[T][✓] borrow books
+	  2.[D][✓] cs2102 tutorial 1 (by: Aug 25 2020)
+	  3.[T][✘] verify critical data
+	  4.[T][✘] return books
+	  5.[T][✘] buy CD
+	  6.[D][✘] cs3230 assignment 1 (by: Aug 22 2020)
+	  7.[E][✘] cs2101 op meeting (at: 12:00 PM   Aug 31 2020)
+	  8.[D][✘] utw2001 final paper (by: Nov 3 2020)
+	  9.[T][✘] clean room
+	  10.[T][✘] wash clothes
+	  11.[D][✘] cs2101 email (by: Aug 31 2020)
+	  12.[E][✘] family party (at: 07:00 PM   Aug 31 2020)
 	=================================================================================
 
 	=================================================================================
