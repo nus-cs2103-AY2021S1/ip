@@ -1,5 +1,9 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 public class Parser {
-    public static int isDoneCommand(String cmd, int count) throws InvalidCommandException {
+    public static int isValidDone(String cmd, int count) throws InvalidCommandException {
         if (cmd.startsWith("done ")) {
             if (cmd.length() < 6) {
                 throw new InvalidCommandException("\u2639 OOPS!!! The task to mark as done cannot be empty.");
@@ -20,7 +24,7 @@ public class Parser {
         }
     }
 
-    public static int isDeleteCommand(String cmd, int count) throws InvalidCommandException {
+    public static int isValidDelete(String cmd, int count) throws InvalidCommandException {
         if (cmd.startsWith("delete ")) {
             if (cmd.length() < 8) {
                 throw new InvalidCommandException("\u2639 OOPS!!! The task to mark to delete cannot be empty.");
@@ -110,5 +114,49 @@ public class Parser {
         } else {
             return Input.TASK;
         }
+    }
+
+    public static boolean dealCommand(Input type, Ui ui, Storage storage, String input, int count, List<Task> list)
+            throws InvalidCommandException{
+        switch (type) {
+            case LIST:
+                ui.printList(count, list, t -> true, "");
+                break;
+            case DONE:
+                int n = isValidDone(input, count) - 1;
+                list.get(n).markAsDone();
+                ui.output("Nice! I've marked this task as done:\n\t    " + list.get(n));
+                break;
+            case DELETE:
+                int m = isValidDelete(input, count) - 1;
+                Task toDelete = list.get(m);
+                list.remove(toDelete);
+                storage.deleteTask(list);
+                ui.output("Noted. I've removed this task:\n\t    " + toDelete +
+                        "\n\t  Now you have " + list.size());
+                count--;
+                break;
+            case HAPPENS:
+                try {
+                    LocalDate date = LocalDate.parse(input.substring(11),
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    ui.printList(count, list, t -> t.happenOnDate(date), "happening on " +
+                            date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " ");
+                } catch (Exception e) {
+                    throw new InvalidCommandException("Invalid date format. Please use yyyy-MM-dd");
+                }
+                break;
+            case TASK:
+                Task task = generate(input);
+                storage.addToList(task);
+                list.add(count++, task);
+                String temp = count <= 1 ? " task" : " tasks";
+                ui.output("Got it. I've added this task:\n\t    " + task +
+                        "\n\t  Now you have " + count + temp + " in the list.");
+                break;
+            case BYE:
+                return false;
+        }
+        return true;
     }
 }
