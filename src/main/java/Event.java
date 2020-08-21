@@ -26,6 +26,10 @@ public class Event extends Task{
 
     @Override
     public String getSaveFormat() {
-        return "E" + " | " + super.getSaveFormat() + " | " + eventDate;
+        return "E" + " | " +
+                super.getSaveFormat() + " | " +
+                (super.hasDate()
+                        ? localDate
+                        : eventDate);
     }
 }

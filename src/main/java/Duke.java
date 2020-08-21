@@ -126,6 +126,11 @@ public class Duke {
     private static void taskDone(Scanner scanner, List<Task> tasks) {
         System.out.println(HORIZONTAL_BREAK);
         int itemNumber = scanner.nextInt();
+        if (itemNumber > tasks.size()) {
+            System.out.println("     Invalid Command!");
+            System.out.println(HORIZONTAL_BREAK);
+            return;
+        }
         Task selectedTask = tasks.get(itemNumber - 1);
         selectedTask.setDone();
         System.out.println("     Nice! I've marked this task as done:");
@@ -136,6 +141,11 @@ public class Duke {
     private static void deleteTask(Scanner scanner, List<Task> tasks) {
         System.out.println(HORIZONTAL_BREAK);
         int itemNumber = scanner.nextInt();
+        if (itemNumber > tasks.size()) {
+            System.out.println("     Invalid Command!");
+            System.out.println(HORIZONTAL_BREAK);
+            return;
+        }
         Task selectedTask = tasks.remove(itemNumber - 1);
         System.out.println("     Noted. I've removed this task:");
         System.out.println("       " + selectedTask);
@@ -224,15 +234,26 @@ public class Duke {
             while(scanner.hasNextLine()) {
                 String[] line = scanner.nextLine().split("\\|");
                 Task newTask = null;
+                LocalDate localDate = null;
                 switch (line[0].strip()) {
                 case "T":
                     newTask = new ToDo(line[2].strip());
                     break;
                 case "D":
-                    newTask = new Deadline(line[2].strip(), line[3].strip());
+                    localDate = parseDate(line[3].strip());
+                    if (localDate != null) {
+                        newTask = new Deadline(line[0].stripLeading(), localDate);
+                    } else {
+                        newTask = new Deadline(line[2].strip(), line[3].strip());
+                    }
                     break;
                 case "E":
-                    newTask = new Event(line[2].strip(), line[3].strip());
+                    localDate = parseDate(line[3].strip());
+                    if (localDate != null) {
+                        newTask = new Event(line[0].stripLeading(), localDate);
+                    } else {
+                        newTask = new Event(line[2].strip(), line[3].strip());
+                    }
                     break;
                 }
                 if (line[1].strip().equals("1")) {

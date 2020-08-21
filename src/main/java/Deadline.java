@@ -26,6 +26,10 @@ public class Deadline extends Task {
 
     @Override
     public String getSaveFormat() {
-        return "D" + " | " + super.getSaveFormat() + " | " + deadlineDate;
+        return "D" + " | " +
+                super.getSaveFormat() + " | " +
+                (super.hasDate()
+                        ? localDate
+                        : deadlineDate);
     }
 }
