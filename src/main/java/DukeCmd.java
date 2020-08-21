@@ -1,5 +1,7 @@
 import task.Task;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -27,6 +29,23 @@ public class DukeCmd {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Store task list on disk
+     * @throws IOException if the named file exists but is a directory rather than a regular file, does not exist but
+     * cannot be created, or cannot be opened for any other reason
+     */
+    private void saveTaskList(String filePath) throws IOException {
+        // TODO: Make sure directory exists
+
+        // Open file for write/overwrite
+        FileWriter fileWriter = new FileWriter(filePath);
+        for (Task task : taskList) {
+            fileWriter.write(task.toCSV() + "\n");
+        }
+        fileWriter.flush();
+        fileWriter.close();
+    }
+
     public void run() {
 
         System.out.println("Hello from\n" + LOGO);
@@ -43,6 +62,13 @@ public class DukeCmd {
             // Look up command and execute
             DukeCmdEnum key = DukeCmdEnum.fromString(matcher.group(1));
             key.execute(this.taskList, matcher.group(2));
+
+            // Save on disk
+            try {
+                this.saveTaskList("save.txt");
+            } catch (IOException e) {
+                System.out.println("Internal Error: Failed to save file list");
+            }
 
             // Exit DukeCmd
             if (key.equals(DukeCmdEnum.BYE)) {
