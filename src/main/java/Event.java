@@ -33,7 +33,8 @@ public class Event extends Task {
     public String formatTask() {
         return ("E" + " | " + (isDone ? "V" : "X") + " | " + desc + " | "
                 + this.date.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + " "
-                + this.time.map(localTime -> localTime.format(DateTimeFormatter.ofPattern("HHmm"))));
+                + this.time.map(localTime -> localTime.format(DateTimeFormatter.ofPattern("HHmm")))
+                .orElse(""));
     }
 
     @Override

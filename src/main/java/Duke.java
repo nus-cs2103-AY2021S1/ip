@@ -28,56 +28,56 @@ public class Duke {
             String command = input.split(" ")[0];
             try {
                 switch (command) {
-                    case "list":
-                        int id = 1;
-                        String output = "Here are the tasks in your list:";
-                        for (Task task : tasks) {
-                            output += "\n" + tab + id + ". " + task;
-                            id++;
-                        }
-                        chatPrint(output);
-                        break;
-                    case "done":
-                        int idx = Integer.parseInt(input.split(" ")[1]) - 1;
-                        if (idx >= tasks.size()) {
-                            throw new DukeException("Oh dear! That task doesn't exist!");
-                        }
-                        Task doneTask = tasks.get(idx).setDone();
-                        tasks.set(idx, doneTask);
-                        saveTasks(tasks);
-                        chatPrint("Nice! I've marked this task as done:\n" +
-                                tab + "   " + doneTask);
-                        break;
-                    case "delete":
-                        int idx2 = Integer.parseInt(input.split(" ")[1]) - 1;
-                        if (idx2 >= tasks.size()) {
-                            throw new DukeException("Oh dear! That task doesn't exist!");
-                        }
-                        Task rmTask = tasks.get(idx2);
-                        tasks.remove(idx2);
-                        saveTasks(tasks);
-                        chatPrint("Noted. I've removed this task:\n" +
-                                tab + "   " + rmTask + "\n" +
-                                tab + "Now you have " + tasks.size() + " tasks in the list.");
-                        break;
-                    case "todo":
-                    case "deadline":
-                    case "event":
-                        int idxSpace = input.indexOf(' ');
-                        int idxMeta = input.indexOf('/');
-                        int infoLength = idxMeta - (idxSpace + 1);
-                        if (idxSpace == -1 ||
-                                (idxMeta != -1 && infoLength < 1)) {
-                            throw new DukeException("Oh dear! A task description cannot be empty!");
-                        }
-                        Task newTask = addTask(tasks, command, false, input.substring(input.indexOf(' ') + 1));
-                        saveTasks(tasks);
-                        chatPrint("Got it. I've added this task:\n" +
-                                tab + "   " + newTask + "\n" +
-                                tab + "Now you have " + tasks.size() + " tasks in the list.");
-                        break;
-                    default:
-                        throw new DukeException("Oh dear! I'm sorry, but I don't know what that means :((");
+                case "list":
+                    int id = 1;
+                    String output = "Here are the tasks in your list:";
+                    for (Task task : tasks) {
+                        output += "\n" + tab + id + ". " + task;
+                        id++;
+                    }
+                    chatPrint(output);
+                    break;
+                case "done":
+                    int idx = Integer.parseInt(input.split(" ")[1]) - 1;
+                    if (idx >= tasks.size()) {
+                        throw new DukeException("Oh dear! That task doesn't exist!");
+                    }
+                    Task doneTask = tasks.get(idx).setDone();
+                    tasks.set(idx, doneTask);
+                    saveTasks(tasks);
+                    chatPrint("Nice! I've marked this task as done:\n" +
+                            tab + "   " + doneTask);
+                    break;
+                case "delete":
+                    int idx2 = Integer.parseInt(input.split(" ")[1]) - 1;
+                    if (idx2 >= tasks.size()) {
+                        throw new DukeException("Oh dear! That task doesn't exist!");
+                    }
+                    Task rmTask = tasks.get(idx2);
+                    tasks.remove(idx2);
+                    saveTasks(tasks);
+                    chatPrint("Noted. I've removed this task:\n" +
+                            tab + "   " + rmTask + "\n" +
+                            tab + "Now you have " + tasks.size() + " tasks in the list.");
+                    break;
+                case "todo":
+                case "deadline":
+                case "event":
+                    int idxSpace = input.indexOf(' ');
+                    int idxMeta = input.indexOf('/');
+                    int infoLength = idxMeta - (idxSpace + 1);
+                    if (idxSpace == -1 ||
+                            (idxMeta != -1 && infoLength < 1)) {
+                        throw new DukeException("Oh dear! A task description cannot be empty!");
+                    }
+                    Task newTask = addTask(tasks, command, false, input.substring(input.indexOf(' ') + 1));
+                    saveTasks(tasks);
+                    chatPrint("Got it. I've added this task:\n" +
+                            tab + "   " + newTask + "\n" +
+                            tab + "Now you have " + tasks.size() + " tasks in the list.");
+                    break;
+                default:
+                    throw new DukeException("Oh dear! I'm sorry, but I don't know what that means :((");
                 }
             } catch (DukeException ex) {
                 chatPrint(ex.toString());
@@ -101,48 +101,48 @@ public class Duke {
             DateTimeParseException {
         Task newTask;
         switch (type) {
-            case "todo":
-                if (info.contains("/")) {
-                    throw new DukeException("Oh dear! A todo shouldn't contain a timestamp!");
-                }
-                newTask = new Todo(info, isDone);
-                break;
-            case "deadline":
-                if (!info.contains("/by")) {
-                    throw new DukeException("Oh dear! A deadline must contain '/by'!");
-                }
-                String dDesc = info.substring(0, info.indexOf('/') - 1);
-                String by = info.substring(info.indexOf('/') + 4);
-                LocalDate dDate;
-                if (by.contains(" ")) {
-                    dDate = LocalDate.parse(by.substring(0, by.indexOf(' ')),
-                            DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-                    LocalTime dTime = LocalTime.parse(by.substring(by.indexOf(' ') + 1),
-                            DateTimeFormatter.ofPattern("HHmm"));
-                    newTask = new Deadline(dDesc, isDone, dDate, dTime);
-                } else {
-                    dDate = LocalDate.parse(by, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-                    newTask = new Deadline(dDesc, isDone, dDate);
-                }
-                break;
-            default:
-                if (!info.contains("/at")) {
-                    throw new DukeException("Oh dear! An event must contain '/at'!");
-                }
-                String eDesc = info.substring(0, info.indexOf('/') - 1);
-                String at = info.substring(info.indexOf('/') + 4);
-                LocalDate eDate;
-                if (at.contains(" ")) {
-                    eDate = LocalDate.parse(at.substring(0, at.indexOf(' ')),
-                            DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-                    LocalTime eTime = LocalTime.parse(at.substring(at.indexOf(' ') + 1),
-                            DateTimeFormatter.ofPattern("HHmm"));
-                    newTask = new Event(eDesc, isDone, eDate, eTime);
-                } else {
-                    eDate = LocalDate.parse(at, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-                    newTask = new Event(eDesc, isDone, eDate);
-                }
-                break;
+        case "todo":
+            if (info.contains("/")) {
+                throw new DukeException("Oh dear! A todo shouldn't contain a timestamp!");
+            }
+            newTask = new Todo(info, isDone);
+            break;
+        case "deadline":
+            if (!info.contains("/by")) {
+                throw new DukeException("Oh dear! A deadline must contain '/by'!");
+            }
+            String dDesc = info.substring(0, info.indexOf('/') - 1);
+            String by = info.substring(info.indexOf('/') + 4);
+            LocalDate dDate;
+            if (by.contains(" ")) {
+                dDate = LocalDate.parse(by.substring(0, by.indexOf(' ')),
+                        DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+                LocalTime dTime = LocalTime.parse(by.substring(by.indexOf(' ') + 1),
+                        DateTimeFormatter.ofPattern("HHmm"));
+                newTask = new Deadline(dDesc, isDone, dDate, dTime);
+            } else {
+                dDate = LocalDate.parse(by, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+                newTask = new Deadline(dDesc, isDone, dDate);
+            }
+            break;
+        default:
+            if (!info.contains("/at")) {
+                throw new DukeException("Oh dear! An event must contain '/at'!");
+            }
+            String eDesc = info.substring(0, info.indexOf('/') - 1);
+            String at = info.substring(info.indexOf('/') + 4);
+            LocalDate eDate;
+            if (at.contains(" ")) {
+                eDate = LocalDate.parse(at.substring(0, at.indexOf(' ')),
+                        DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+                LocalTime eTime = LocalTime.parse(at.substring(at.indexOf(' ') + 1),
+                        DateTimeFormatter.ofPattern("HHmm"));
+                newTask = new Event(eDesc, isDone, eDate, eTime);
+            } else {
+                eDate = LocalDate.parse(at, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+                newTask = new Event(eDesc, isDone, eDate);
+            }
+            break;
         }
         tasks.add(newTask);
         return newTask;
@@ -188,30 +188,31 @@ public class Duke {
             String[] attr = line.split(" \\| ");
             try {
                 if (attr.length < 3 || (!attr[1].equals("V") && !attr[1].equals("X"))) {
-                    throw new DukeException("Corrupt file - Invalid task in line " + lineCounter);
+                    throw new DukeException("Corrupt file - Invalid task in line " + lineCounter+ ".");
                 }
                 switch (attr[0]) {
-                    case "T":
-                        addTask(tasks, "todo", attr[1].equals("V"), attr[2]);
-                        break;
-                    case "D":
-                        if (attr.length != 4) {
-                            throw new DukeException("Corrupt file - Invalid task in line " + lineCounter);
-                        }
-                        addTask(tasks, "deadline", attr[1].equals("V"),attr[2] + " /by " + attr[3]);
-                        break;
-                    case "E":
-                        if (attr.length != 4) {
-                            throw new DukeException("Corrupt file - Invalid task in line " + lineCounter);
-                        }
-                        addTask(tasks, "event", attr[1].equals("V"), attr[2] + " /at " + attr[3]);
-
-                        break;
-                    default:
-                        throw new DukeException("Corrupt file - invalid task format");
+                case "T":
+                    addTask(tasks, "todo", attr[1].equals("V"), attr[2]);
+                    break;
+                case "D":
+                    if (attr.length != 4) {
+                        throw new DukeException("Corrupt file - Invalid task in line " + lineCounter + ".");
+                    }
+                    addTask(tasks, "deadline", attr[1].equals("V"),attr[2] + " /by " + attr[3]);
+                    break;
+                case "E":
+                    if (attr.length != 4) {
+                        throw new DukeException("Corrupt file - Invalid task in line " + lineCounter+ ".");
+                    }
+                    addTask(tasks, "event", attr[1].equals("V"), attr[2] + " /at " + attr[3]);
+                    break;
+                default:
+                    throw new DukeException("Corrupt file - Invalid task format");
                 }
             } catch (DukeException ex) {
                 System.out.println(ex.toString());
+            } catch (DateTimeParseException ex) {
+                chatPrint("Corrupt file - Bad date and time format.");
             }
         }
     }
