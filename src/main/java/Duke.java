@@ -1,9 +1,16 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     private List<Task> tasks = new ArrayList<>();
+
+    private static String filePath = "../../../data/duke.txt";
 
     void greet() {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
@@ -45,8 +52,41 @@ public class Duke {
         }
     }
 
+    private void getLocalData() throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            String[] task = s.nextLine().split(" \\| ");
+            switch(task[0]) {
+                case "T": {
+                    tasks.add(new Todo(task[2], task[1].equals("1")));
+                    break;
+                }
+                case "E": {
+                    tasks.add(new Event(task[2], task[3], task[1].equals("1")));
+                    break;
+                }
+                case "D": {
+                    tasks.add(new Deadline(task[2], task[3], task[1].equals("1")));
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+        s.close();
+    }
+
     void start() {
         greet();
+
+        // Get local data and fill task list
+        try {
+            getLocalData();
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
         while (isRunning) {
