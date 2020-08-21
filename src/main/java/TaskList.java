@@ -2,7 +2,12 @@ import java.util.ArrayList;
 import java.util.function.Predicate;
 
 public class TaskList extends ArrayList<Task> {
-    int count;
+    public int count;
+
+    public TaskList() {
+        super();
+        count = 0;
+    }
 
     public void print(Predicate<Task> predicate) {
         for (int i = 0; i < count; i++) {
