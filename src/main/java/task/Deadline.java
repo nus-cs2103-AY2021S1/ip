@@ -1,3 +1,8 @@
+package task;
+
+import exception.EmptyTaskException;
+import exception.MissingDateException;
+
 public class Deadline extends Task {
     String dueDate;
 
@@ -6,7 +11,7 @@ public class Deadline extends Task {
         this.dueDate = dueDate;
     }
 
-    static Deadline create(String task)
+    public static Deadline create(String task)
             throws EmptyTaskException, MissingDateException {
         if (task.length() <= 9) throw new EmptyTaskException("deadline");
         String[] taskInfo = task.substring(9).split(" /by ", 2);

@@ -1,3 +1,8 @@
+package task;
+
+import exception.EmptyTaskException;
+import exception.MissingDateException;
+
 public class Event extends Task {
     String date;
 
@@ -6,7 +11,7 @@ public class Event extends Task {
         this.date = date;
     }
 
-    static Event create(String task)
+    public static Event create(String task)
             throws EmptyTaskException, MissingDateException {
         if (task.length() <= 6) throw new EmptyTaskException("event");
         String[] taskInfo = task.substring(6).split(" /at ", 2);
