@@ -49,7 +49,7 @@ public class TaskWriter {
         File oldFile = new File(this.filepath);
         File newFile = new File(tempFile);
         int taskTrack = 1;
-        String newLine;
+        String line;
 
         try {
             FileWriter fw = new FileWriter(tempFile, true);
@@ -59,9 +59,44 @@ public class TaskWriter {
             sc.useDelimiter("[\n]");
 
             while(sc.hasNext()) {
-                newLine = sc.next();
+                line = sc.next();
                 if(taskTrack != taskId) {
-                    pw.println(newLine);
+                    pw.println(line);
+                }
+                taskTrack++;
+            }
+            sc.close();
+            pw.flush();
+            pw.close();
+            oldFile.delete();
+            File renameFile = new File(this.filepath);
+            newFile.renameTo(renameFile);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void doneTask(int taskId) {
+        String tempFile = "temp.txt";
+        File oldFile = new File(this.filepath);
+        File newFile = new File(tempFile);
+        int taskTrack = 1;
+        String line;
+
+        try {
+            FileWriter fw = new FileWriter(tempFile, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            Scanner sc = new Scanner(new File(this.filepath));
+            sc.useDelimiter("[\n]");
+
+            while(sc.hasNext()) {
+                line = sc.next();
+                if(taskTrack != taskId) {
+                    pw.println(line);
+                } else {
+                    String[] newLine = line.split("[|]" , 3);
+                    pw.println(newLine[0] + "| " + 1 + " |" + newLine[2] );
                 }
                 taskTrack++;
             }

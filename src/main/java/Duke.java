@@ -31,6 +31,7 @@ public class Duke {
                     case DONE:
                         Validator.info(command, splitOrder.length, false);
                         int doneTaskId = Validator.index(command, splitOrder[1], lst.workListLen(), splitOrder.length);
+                        tw.doneTask(doneTaskId);
                         output = printDesign(lst.updateTaskStatus(doneTaskId));
                         break;
                     case DELETE:
