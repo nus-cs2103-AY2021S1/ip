@@ -128,12 +128,10 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InvalidCommandException {
         Ui ui = new Ui();
+        Storage storage = new Storage("../data/tasks.txt");
         List<Task> list = new ArrayList<>();
-        FileWriter fw = new FileWriter("../data/tasks.txt");
-        fw.write("");
-        fw.close();
         int count = 0;
         boolean flag = true;
         while (flag) {
