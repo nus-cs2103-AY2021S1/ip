@@ -21,7 +21,7 @@ public class Duke {
     public static void markTaskAsDone(List<Task> taskList, String command) throws DukeException {
         // If task number is not given
         if (command.equals("done") || command.equals("done ")) {
-            throw new DukeException("OOPS!!! Please indicate the number of the task you have completed.");
+            throw new DukeException("☹ OOPS!!! Please indicate the number of the task you have completed.");
         } else {
             try {
                 int taskNumber = Integer.parseInt(command.split(" ", 2)[1]);
@@ -30,7 +30,7 @@ public class Duke {
                 taskList.set(taskNumber - 1, completedTask);
                 System.out.println("Nice! I've marked this task as done:\n" + "  " + completedTask.toString());
             } catch (IndexOutOfBoundsException | NumberFormatException indexException) {
-                throw new DukeException("OOPS!!! Please enter a valid task number.");
+                throw new DukeException("☹ OOPS!!! Please enter a valid task number.");
             }
         }
     }
@@ -42,8 +42,8 @@ public class Duke {
 
         // If there is no taskBody available
         if (command.split(" ", 2).length == 1
-                || command.split(" ", 2)[1].equals("")) {
-            throw new DukeException("OOPS!!! The description of a task cannot be empty.");
+                || command.split(" ", 2)[1].isBlank()) {
+            throw new DukeException("☹ OOPS!!! You didn't provide any task details.");
         } else {
             taskBody = command.split(" ", 2)[1];
         }
@@ -51,25 +51,36 @@ public class Duke {
         // Generate task with appropriate type and add to taskList
         if (taskType.equals("todo")) {
             task = new Todo(taskBody);
+
+        } else if (taskType.equals("deadline")) {
+            if (taskBody.split("/by").length == 0) {
+                throw new DukeException("☹ OOPS!!! Please add a description and deadline for your task!");
+            } else if (taskBody.split("/by").length == 1
+                    || taskBody.split("/by")[1].isBlank()) {
+                throw new DukeException("☹ OOPS!!! Please add a deadline for your task!");
+            } else if (taskBody.split("/by")[0].isBlank()) {
+                throw new DukeException("☹ OOPS!!! Please add a task description!");
+            } else {
+                String description = taskBody.split("/by")[0];
+                String by = taskBody.split("/by")[1];
+                task = new Deadline(description.trim(), by.trim());
+            }
+
         } else {
-            if (taskType.equals("deadline")) {
-                try {
-                    String description = taskBody.split(" /by ")[0];
-                    String by = taskBody.split(" /by ")[1];
-                    task = new Deadline(description, by);
-                } catch (ArrayIndexOutOfBoundsException outOfBoundsException) {
-                    throw new DukeException("OOPS!!! Please add a deadline for your task.");
-                }
-            } else { // Events
-                try {
-                    String description = taskBody.split(" /at ")[0];
-                    String at = taskBody.split(" /at ")[1];
-                    task = new Event(description, at);
-                } catch (ArrayIndexOutOfBoundsException outOfBoundsException) {
-                    throw new DukeException("OOPS!!! Please add a date for your event.");
-                }
+            if (taskBody.split("/at").length == 0) {
+                throw new DukeException("☹ OOPS!!! Please add a description and date for your event!");
+            } else if (taskBody.split("/at").length == 1
+                    || taskBody.split("/at")[1].isBlank()) {
+                throw new DukeException("☹ OOPS!!! Please add a date for your event!");
+            } else if (taskBody.split("/at")[0].isBlank()) {
+                throw new DukeException("☹ OOPS!!! Please add an event description!");
+            } else {
+                String description = taskBody.split("/at")[0];
+                String by = taskBody.split("/at")[1];
+                task = new Deadline(description.trim(), by.trim());
             }
         }
+
         taskList.add(task);
         System.out.println("Got it. I've added this task:\n"
                 + "  " + task.toString() + "\n"
@@ -79,7 +90,7 @@ public class Duke {
     public static void deleteTaskFromList(List<Task> taskList, String command) throws DukeException {
         // If task number is not given
         if (command == "delete" || command == "delete ") {
-            throw new DukeException("OOPS!!! Please indicate the number of the task you want to delete.");
+            throw new DukeException("☹ OOPS!!! Please indicate the number of the task you want to delete.");
         } else {
             try {
                 int taskNumber = Integer.parseInt(command.split(" ", 2)[1]);
@@ -87,7 +98,7 @@ public class Duke {
                 System.out.println("Noted. I've removed this task:\n" + "  " + removedTask.toString() + "\n"
                         + "Now you have " + taskList.size() + " tasks in the list.");
             } catch (IndexOutOfBoundsException | NumberFormatException exception) {
-                throw new DukeException("OOPS!!! Please enter a valid task number.");
+                throw new DukeException("☹ OOPS!!! Please enter a valid task number.");
             }
         }
     }
@@ -131,7 +142,7 @@ public class Duke {
 
                 // Unrecognizable commands
                 } else {
-                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
 
             } catch (DukeException dukeException) {
