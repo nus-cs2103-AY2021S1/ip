@@ -1,9 +1,14 @@
+package duke.command;
+
+import duke.Bot;
+import duke.task.Task;
+
 import java.util.List;
 
-public class AddFunction implements Function {
+public class AddCommand implements Command {
     private Task task;
 
-    public AddFunction(Task task) {
+    public AddCommand(Task task) {
         this.task = task;
     }
 

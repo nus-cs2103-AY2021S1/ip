@@ -1,6 +1,11 @@
+package duke.command;
+
+import duke.Bot;
+import duke.task.Task;
+
 import java.util.List;
 
-public class ListFunction implements Function {
+public class ListCommand implements Command {
     @Override
     public void execute(Bot bot, List<Task> list) {
         if (list.isEmpty()) {
