@@ -1,4 +1,5 @@
 public enum Command {
+    SAVE("save"),
     LIST("list"),
     DONE("done"),
     DELETE("delete"),
@@ -14,6 +15,8 @@ public enum Command {
 
     static Command toCommand(String repr) throws DukeException {
         switch (repr) {
+            case "save":
+                return SAVE;
             case "list":
                 return LIST;
             case "done":
