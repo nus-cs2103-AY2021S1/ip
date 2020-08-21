@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class LevelSeven {
+public class LevelEight {
     public static ArrayList<Task> tasks = new ArrayList<>();
     public static final String FILE_PATH = "data/duke.txt";
     //static int numberOfTasks = 0;
@@ -25,10 +27,10 @@ public class LevelSeven {
                 readRecord(record);
             } catch (FileNotFoundException fileNotFoundException) {
                 writeRecord();
-                excecuteHandle(new FileNotFoundException("The previous record cannot be read. Cleaning the content for record"));
+                excecuteHandle(new FileNotFoundException(fileNotFoundException.getMessage() + "\nCleaning the content for record"));
             } catch (IllegalArgumentException illegalArgumentException) {
                 writeRecord();
-                excecuteHandle(new FileNotFoundException("The previous record cannot be read. Cleaning the content for record"));
+                excecuteHandle(new FileNotFoundException(illegalArgumentException.getMessage() + "\nCleaning the content for record"));
             }
 
             Scanner scanner = new Scanner(System.in);
@@ -39,6 +41,8 @@ public class LevelSeven {
                 try {
                     if (parsecommand(next).get("type").equals(Command.LIST)) {
                         excecuteList();
+                    } else if (parsecommand(next).get("type").equals(Command.LIST_DATE)) {
+                        excecuteListDate(parsecommand(next));
                     } else if (parsecommand(next).get("type").equals(Command.DONE)) {
                         excecuteDone(parsecommand(next));
                     } else if (parsecommand(next).get("type").equals(Command.DELETE)) {
@@ -77,6 +81,16 @@ public class LevelSeven {
         System.out.println(Duke.makeBlock(result));
     }
 
+    public static void excecuteListDate(HashMap<String, Object> map) {
+        String result = "";
+        for(int i = 0; i < tasks.size(); i = i + 1) {
+            if(tasks.get(i).isAt((LocalDate) map.get("time"))) {
+                result = result.concat(String.valueOf(i + 1) + "." + tasks.get(i).toString() + "\n");
+            }
+        }
+        System.out.println(Duke.makeBlock(result));
+    }
+
     public static void excecuteAdd(Task task) throws IOException {
         tasks.add(task);
         String result = "Got it. I have added this task:\n  " + task.toString() + "\nNow you have " + tasks.size() + " tasks in the list.";
@@ -91,12 +105,12 @@ public class LevelSeven {
     }
 
     static void excecuteDeadline(HashMap<String, Object> map) throws IOException {
-        excecuteAdd(new Deadline((String) map.get("description"), (String) map.get("time")));
+        excecuteAdd(new Deadline((String) map.get("description"), (LocalDate) map.get("time")));
     }
 
     static void excecuteEvent(HashMap<String, Object> map) throws IOException {
         //String result = "Got it. I have added this task:\n";
-        excecuteAdd(new Event((String) map.get("description"), (String) map.get("time")));
+        excecuteAdd(new Event((String) map.get("description"), (LocalDate) map.get("time")));
     }
 
     static void excecuteHandle(Exception exception) {
@@ -145,9 +159,10 @@ public class LevelSeven {
             map.put("type", "exit");
         } else if (command.equals("list")) {
             map.put("type", Command.LIST);
+        } else if (command.split(" ")[0].equals("list")) {
+            evaluateListDate(map, command);
         } else if (command.split(" ")[0].equals("done")) {
             evaluateCompleteOrDelete(map, command, Command.DONE);
-
         } else if (command.split(" ")[0].equals("delete")) {
             evaluateCompleteOrDelete(map, command, Command.DELETE);
         }  else if (command.split(" ")[0].equals("todo")) {
@@ -173,19 +188,22 @@ public class LevelSeven {
         if (command.split(" ").length == 1) {
             throw new CommandNotFoundException("The description should not be empty");
         } else if (command.split(" ")[0].equals("event") || command.split(" ")[0].equals("deadline")) {
-
-
             String content = (command.split("\\s+", 2)[1]);
 
             if (content.strip().split(string).length <= 1) {
                 throw new CommandNotFoundException("The description should be in the format:\n" + command.split(" ")[0] + " description" + string + "time");
             } else {
-                String time;
-                String description = content.split(string)[0];
-                time = content.strip().split(string, 2)[1];
-                map.put("type", commandtype);
-                map.put("description", description);
-                map.put("time", time);
+                try {
+                    String time;
+                    String description = content.split(string)[0];
+                    time = content.strip().split(string, 2)[1];
+                    map.put("type", commandtype);
+                    map.put("description", description);
+                    LocalDate localDate = LocalDate.parse(time.strip());
+                    map.put("time", localDate);
+                } catch (DateTimeParseException dateTimeParseExeption) {
+                    throw new CommandNotFoundException("the time should be in the format yyyy-MM-dd");
+                }
             }
         } else {
             throw new CommandNotFoundException("The command is not found");
@@ -209,45 +227,68 @@ public class LevelSeven {
         }
     }
 
+    public static void evaluateListDate(HashMap<String, Object> map, String command) throws CommandNotFoundException {
+        try {
+            map.put("type", Command.LIST_DATE);
+            if (command.split("\\s+").length != 2) {
+                throw new CommandNotFoundException("Type list to list all the tasks. Type list yyyy-MM-dd to list the tasks on a specific date");
+            } else {
+                LocalDate localDate = LocalDate.parse(command.split("\\s+")[1]);
+                map.put("time", localDate);
+            }
+        } catch (DateTimeParseException dateTimeParseException) {
+            throw new CommandNotFoundException("Type list yyyy-MM-dd to list the tasks on a specific date");
+        }
+    }
+
     public static void readRecord(File record) throws FileNotFoundException, IllegalArgumentException {
         Scanner scanner = new Scanner(record);
         String next;
-        while(scanner.hasNextLine()) {
-            next = scanner.nextLine();
-            String[] strings = next.split(" \\| ");
+        try {
+            while (scanner.hasNextLine()) {
+                next = scanner.nextLine();
+                String[] strings = next.split(" \\| ");
             /*
             for(int i = 0; i < strings.length; i = i + 1) {
                 System.out.println(strings[i]);
             }
             */
-            if(strings[1].equals("0") || strings[1].equals("1")) {
-                if(strings[0].equals("T") && strings.length == 3) {
-                    ToDo todo = new ToDo(strings[2]);
-                    if(strings[1].equals("1")) {
-                        todo.markAsCompleted();
-                    }
-                    tasks.add(todo);
-                } else if (strings[0].equals("D") && strings.length == 4) {
-                    Deadline deadline = new Deadline(strings[2], strings[3]);
-                    if(strings[1].equals("1")) {
-                        deadline.markAsCompleted();
-                    }
-                    tasks.add(deadline);
-                } else if (strings[0].equals("E") && strings.length == 4) {
-                    Event event = new Event(strings[2], strings[3]);
-                    if(strings[1].equals("1")) {
-                        event.markAsCompleted();
-                    }
-                    tasks.add(event);
-                } else {
-                    throw new IllegalArgumentException("The record cannot be read becuase the length is incorrect");
-                }
-            } else {
-                throw new IllegalArgumentException("The record cannot be read because the number is incorrect");
-            }
 
+                if (strings[1].equals("0") || strings[1].equals("1")) {
+
+                    if (strings[0].equals("T") && strings.length == 3) {
+                        ToDo todo = new ToDo(strings[2]);
+                        if (strings[1].equals("1")) {
+                            todo.markAsCompleted();
+                        }
+                        tasks.add(todo);
+                    } else if (strings[0].equals("D") && strings.length == 4) {
+                        Deadline deadline = new Deadline(strings[2], LocalDate.parse(strings[3]));
+                        if (strings[1].equals("1")) {
+                            deadline.markAsCompleted();
+                        }
+                        tasks.add(deadline);
+                    } else if (strings[0].equals("E") && strings.length == 4) {
+                        Event event = new Event(strings[2], LocalDate.parse(strings[3]));
+                        if (strings[1].equals("1")) {
+                            event.markAsCompleted();
+                        }
+                        tasks.add(event);
+                    } else {
+                        throw new IllegalArgumentException("The record cannot be read becuase the format of a task is incorrect");
+                    }
+
+                } else {
+                    throw new IllegalArgumentException("The record cannot be read because the complete state of a task is incorrect");
+                }
+
+            }
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            throw new IllegalArgumentException(exception.getMessage());
+        } finally {
+            scanner.close();
         }
-        scanner.close();
     }
 
     public static void writeRecord() throws IOException {

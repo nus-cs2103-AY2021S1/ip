@@ -26,6 +26,6 @@ public class Duke {
         //System.out.println("Hello from\n" + logo);
         System.out.println(makeBlock(logo + "\n" + GREETING));
         //System.out.println(("    1      ").split(" ").length);
-        LevelSeven.interact();
+        LevelEight.interact();
    }
 }
