@@ -1,5 +1,8 @@
 package duke;
 
+import duke.component.Storage;
+import duke.component.Ui;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 

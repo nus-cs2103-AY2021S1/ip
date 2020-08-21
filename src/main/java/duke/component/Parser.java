@@ -1,4 +1,6 @@
-package duke;
+package duke.component;
+
+import duke.*;
 
 public class Parser {
     public static int isValidDone(String cmd, int count) throws InvalidCommandException {

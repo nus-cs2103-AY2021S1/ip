@@ -1,5 +1,8 @@
 package duke;
 
+import duke.component.Storage;
+import duke.component.Ui;
+
 public abstract class Command {
     public boolean isExit;
     protected final String input;

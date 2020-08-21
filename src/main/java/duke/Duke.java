@@ -1,5 +1,9 @@
 package duke;
 
+import duke.component.Parser;
+import duke.component.Storage;
+import duke.component.Ui;
+
 public class Duke {
     private Storage storage;
     private TaskList list;
