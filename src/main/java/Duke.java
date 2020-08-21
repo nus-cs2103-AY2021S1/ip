@@ -109,7 +109,7 @@ public class Duke {
                     DeadlineTask newTask = new DeadlineTask(deadline, activity);
                     addToList(newTask);
                 } catch (Exception e){
-                    DukeException error = new DukeException("☹ OOPS!!! The description of deadline cannot be empty.");
+                    DukeException error = new DukeException("☹ OOPS!!! The description/deadline of the task is missing.");
                     System.out.println(error);
                 }
             }
@@ -122,7 +122,7 @@ public class Duke {
                     EventsTask newTask = new EventsTask(duration, activity);
                     addToList(newTask);
                 } catch (Exception e) {
-                    DukeException error = new DukeException("☹ OOPS!!! The description of deadline cannot be empty.");
+                    DukeException error = new DukeException("☹ OOPS!!! The description/timing of event is missing.");
                     System.out.println(error);
                 }
             }
