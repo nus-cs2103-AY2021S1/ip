@@ -4,7 +4,7 @@ public class Duke {
     public static void main(String[] args) throws IOException, InvalidCommandException {
         Ui ui = new Ui();
         Storage storage = new Storage("../data/tasks.txt");
-        TaskList list = new TaskList();
+        TaskList list = storage.list;
         boolean flag = true;
         while (flag) {
             try {
