@@ -1,10 +1,9 @@
-public class Event extends Task {
-
-    protected String at;
+public class Event extends TimedTask {
 
     public Event(String description, String at) {
-        super(description);
-        this.at = at.trim();
+        super(description,at);
+        this.connecting = " (at: ";
+        this.firstLetter = "[E]";
     }
 
     public static Event load(String str) {
@@ -18,11 +17,7 @@ public class Event extends Task {
 
     @Override
     public String store() {
-        return "E|" + super.store() + "|" + this.at;
+        return "E|" + super.store() + "|" + this.dateTime;
     }
 
-    @Override
-    public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
-    }
 }

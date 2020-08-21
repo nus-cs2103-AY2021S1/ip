@@ -1,10 +1,9 @@
-public class Deadline extends Task {
-
-    protected String by;
+public class Deadline extends TimedTask {
 
     public Deadline(String description, String by) {
-        super(description);
-        this.by = by.trim();
+        super(description, by);
+        this.connecting = " (by: ";
+        this.firstLetter = "[D]";
     }
 
     public static Deadline load(String str) {
@@ -18,11 +17,7 @@ public class Deadline extends Task {
 
     @Override
     public String store() {
-        return "D|" + super.store() + "|" + this.by;
+        return "D|" + super.store() + "|" + this.dateTime;
     }
 
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
-    }
 }

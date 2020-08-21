@@ -1,5 +1,5 @@
-deadline homework /by sunday
-event meeting /at 2-5pm
+deadline homework /by 2020-03-19 18:30
+event meeting /at 2021-02-24 05:00
 todo project
 list
 done 3
