@@ -2,6 +2,10 @@ package service;
 
 import exceptions.InvalidCommandException;
 import parser.Flag;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 
 import java.util.Map;
 
@@ -10,6 +14,7 @@ public class DeadlineTask extends Task {
 
     private String description;
     private String time;
+    private LocalDate date;
 
     public DeadlineTask(String[] tokens) {
         super(tokens, taskWord);
@@ -29,11 +34,12 @@ public class DeadlineTask extends Task {
 
         this.description = flags.get(Flag.NONFLAG);
         this.time = flags.get(Flag.AT);
+        this.date = LocalDate.parse(this.time);
     }
 
     @Override
     public String getDescription() {
-        return this.description + " (by" + this.time + ")";
+        return this.description + " (by" + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy") + ")";
     }
 
     @Override
