@@ -9,6 +9,11 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public String getStatusIcon() {
         String tick = "\u2713";
         String X = "\u2718";
@@ -29,4 +34,9 @@ public abstract class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public String simplifiedTaskString() {
+        return this.getTaskType() + " - " + (this.isDone ? "1" : "0") + " - " + this.getDescription();
+    }
+
 }

@@ -1,4 +1,7 @@
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -111,17 +114,25 @@ public class Duke {
     private void addDeadline(String text) {
         String description = text.split(" /by ", 2)[0];
         String deadline = text.split(" /by ", 2)[1];
-        Task toAdd = new Deadline(description, deadline);
-        this.tasks.add(toAdd);
-        sayAddedTask(toAdd);
+        try {
+            Task toAdd = new Deadline(description, LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
+            this.tasks.add(toAdd);
+            sayAddedTask(toAdd);
+        } catch (DateTimeParseException e) {
+            say("The date and time format must be: [dd/MM/yyyy HHmm]\nFor example, 02/12/2019 1800");
+        }
     }
 
     private void addEvent(String text) {
         String description = text.split(" /at ", 2)[0];
         String time = text.split(" /at ", 2)[1];
-        Task toAdd = new Event(description, time);
-        this.tasks.add(toAdd);
-        sayAddedTask(toAdd);
+        try {
+            Task toAdd = new Event(description, LocalDateTime.parse(time, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
+            this.tasks.add(toAdd);
+            sayAddedTask(toAdd);
+        } catch (DateTimeParseException e) {
+            say("The date and time format must be: [dd/MM/yyyy HHmm]\nFor example, 02/12/2019 1800");
+        }
     }
 
     private void sayAddedTask(Task task) {
