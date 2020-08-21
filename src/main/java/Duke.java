@@ -23,7 +23,7 @@ public class Duke {
 
         Duke newBot = new Duke(new ArrayList<Task>());
 
-        Storage storage = new Storage("data/duke.txt");
+        Storage storage = new Storage("data" + File.separator +  "duke.txt");
 
         newBot.taskList = storage.loadData();
 
