@@ -1,8 +1,7 @@
 package duke;
 
 import duke.command.*;
-import duke.exception.CommandException;
-import duke.exception.EmptyDescriptionException;
+import duke.exception.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,12 +14,12 @@ public class Parser {
     protected static List<String> inputFormat = Arrays.asList("dd/MM/yyyy HHmm", "yyyy-mm-dd Haaa");
     protected static SimpleDateFormat outputFormat = new SimpleDateFormat("MMM dd yyyy h:mma");
 
-    public static String DateParser(String str){
+    public static String DateParser(String str) throws DukeException {
         Date date = null;
         for (String input : inputFormat) {
             try {
                 date = new SimpleDateFormat(input).parse(str);
-            } catch (ParseException ignored) { }
+            } catch (ParseException ignore) { }
         }
         if (date == null) {
             return str;
@@ -29,14 +28,17 @@ public class Parser {
         }
     }
 
-    public static Command parse(String input) throws CommandException, EmptyDescriptionException {
+    public static Command parse(String input) throws DukeException {
+
         switch (input) {
             case "bye":
                 return new ByeCommand();
             case "list":
                 return new ListCommand();
         }
+
         String[] inputArray = input.split(" ", 2);
+
         if (inputArray.length == 1) {
             throw new EmptyDescriptionException(("The description of " + inputArray[0] + " cannot be empty. Please re-enter"));
         }
@@ -49,17 +51,36 @@ public class Parser {
                 return new TodoCommand(inputArray[1]);
             }
             case "deadline": {
+                formatChecker(inputArray);
                 String str = inputArray[1].split(" /", 2)[0];
                 String date = inputArray[1].split("/", 2)[1].split(" ", 2)[1];
                 return new DeadlineCommand(str,DateParser(date));
             }
             case "event": {
+                formatChecker(inputArray);
                 String str = inputArray[1].split(" /", 2)[0];
                 String date = inputArray[1].split("/", 2)[1].split(" ", 2)[1];
                 return new EventCommand(str, DateParser(date));
             }
             default:
                 throw new CommandException("Im sorry, I do not understand what you mean. Please re-enter:");
+        }
+    }
+
+    public static void formatChecker(String[] input) throws DukeException {
+        try {
+            String str = input[1].split(" /", 2)[1];
+            if(input[0].equals("deadline")) {
+                if (!input[1].split("/", 2)[1].split(" " ,2)[0].equals("by")) {
+                    throw new WrongFormatException("Incorrect format, Please re-enter");
+                }
+            } else {
+                if (!input[1].split("/", 2)[1].split(" ", 2)[0].equals("at")) {
+                    throw new WrongFormatException("Incorrect format, Please re-enter");
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new WrongFormatException("Incorrect format, Please re-enter:");
         }
     }
 
