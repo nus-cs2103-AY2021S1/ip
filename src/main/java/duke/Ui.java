@@ -68,6 +68,24 @@ public class Ui {
         printNumberOfTasks(numOfTotalTasks);
     }
 
+    /**
+     * Prints a chat window with a list of tasks matching the user input's keyword.
+     *
+     * @param tasks The list of matching tasks.
+     */
+    public void printFindTaskChatWindow(List<Task> tasks) {
+        printIndentedMessage("Here are the tasks that match the keyword:");
+
+        if (tasks.isEmpty()) {
+            printIndentedMessage("No matching tasks!");
+        } else {
+            int index = 0;
+            for (Task task : tasks) {
+                System.out.printf("%s%d. %s\n", indent, ++index, task);
+            }
+        }
+    }
+
     // Print goodbye chat window
     public void printGoodbye() {
         printGeneralChatWindow("Thank you for talking to Awesome-O.", "Have a nice day. Goodbye!");

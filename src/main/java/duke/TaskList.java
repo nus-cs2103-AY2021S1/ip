@@ -4,6 +4,7 @@ import duke.exception.*;
 import duke.task.*;
 
 import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +76,32 @@ public class TaskList {
         return toAdd;
     }
 
+    /**
+     * Finds all the tasks which match the keyword in the user input.
+     *
+     * @param input A string representing the user input.
+     * @return The list of tasks which match the keyword in the user input.
+     */
+    public List<Task> findTasks(String input) throws DukeInvalidKeywordException {
+        String keyword;
+
+        try {
+            keyword = input.substring(5);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeInvalidKeywordException();
+        }
+
+        List<Task> result = new ArrayList<>();
+
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                result.add(task);
+            }
+        }
+
+        return result;
+    }
+
     private Task addToDo(String input) {
         String toDoText = input.substring(5);
         ToDo toDo = new ToDo(toDoText);
@@ -109,4 +136,5 @@ public class TaskList {
         tasks.add(deadline);
         return deadline;
     }
+
 }

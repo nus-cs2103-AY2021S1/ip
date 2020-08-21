@@ -101,7 +101,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void deleteTask_validInput_sucess() throws DukeInvalidListNumberInputException {
+    public void deleteTask_validInput_success() throws DukeInvalidListNumberInputException {
         assertEquals(toDo.toString(),
                 createTaskList().deleteTask("delete 1").toString());
     }
@@ -113,6 +113,22 @@ public class TaskListTest {
                     createTaskList().deleteTask("delete 1000").toString());
         } catch (DukeInvalidListNumberInputException e) {
             assertEquals("ERROR: Invalid list number input!", e.toString());
+        }
+    }
+
+    @Test
+    public void findTask_validInput_success() throws DukeInvalidKeywordException {
+        assertEquals(event.toString(),
+                createTaskList().findTasks("find test").get(1).toString());
+    }
+
+    @Test
+    public void findTask_erroneousInput_exceptionThrown() {
+        try {
+            assertEquals(event.toString(),
+                    createTaskList().findTasks("find").toString());
+        } catch (DukeInvalidKeywordException e) {
+            assertEquals("ERROR: The keyword cannot be empty!", e.toString());
         }
     }
 

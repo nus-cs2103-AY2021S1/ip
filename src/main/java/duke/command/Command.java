@@ -31,9 +31,7 @@ public abstract class Command {
     }
 
     public abstract void execute(TaskList tasks, Ui ui, Storage storage)
-            throws DukeInvalidListNumberInputException,
-            DukeInvalidTaskTimeException,
-            DukeInvalidTaskDescriptionException,
-            DukeUnknownInputException,
-            DukeLoadingErrorException;
+            throws DukeInvalidListNumberInputException, DukeInvalidTaskTimeException,
+            DukeInvalidTaskDescriptionException, DukeUnknownInputException,
+            DukeLoadingErrorException, DukeInvalidKeywordException;
 }
