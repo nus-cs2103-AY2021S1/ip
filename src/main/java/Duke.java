@@ -36,6 +36,7 @@ public class Duke {
                     case DELETE:
                         Validator.info(command, splitOrder.length, false);
                         int deleteTaskId = Validator.index(command, splitOrder[1], lst.workListLen(), splitOrder.length);
+                        tw.deleteTask(deleteTaskId);
                         output = printDesign(lst.deleteWork(deleteTaskId));
                         break;
                     case TODO:
@@ -50,7 +51,7 @@ public class Duke {
                         String deadlineInfo = splitOrder[1];
                         tw.appendTask(command, deadlineInfo);
                         String[] dInfo = deadlineInfo.split(" /by ");
-                        //Validator.info(command, dInfo.length, true);
+                        Validator.info(command, dInfo.length, true);
                         String deadlineEvent = dInfo[0];
                         String deadlineTime = dInfo[1];
                         Deadline newDeadline = new Deadline(deadlineEvent, deadlineTime);

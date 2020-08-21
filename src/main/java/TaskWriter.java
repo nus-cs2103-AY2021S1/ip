@@ -1,7 +1,5 @@
-import java.io.FileWriter;
-import java.io.BufferedWriter;
-import java.io.PrintWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.Scanner;
 
 
 public class TaskWriter {
@@ -46,4 +44,35 @@ public class TaskWriter {
         }
     }
 
+    public void deleteTask(int taskId) {
+        String tempFile = "temp.txt";
+        File oldFile = new File(this.filepath);
+        File newFile = new File(tempFile);
+        int taskTrack = 1;
+        String newLine;
+
+        try {
+            FileWriter fw = new FileWriter(tempFile, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            Scanner sc = new Scanner(new File(this.filepath));
+            sc.useDelimiter("[\n]");
+
+            while(sc.hasNext()) {
+                newLine = sc.next();
+                if(taskTrack != taskId) {
+                    pw.println(newLine);
+                }
+                taskTrack++;
+            }
+            sc.close();
+            pw.flush();
+            pw.close();
+            oldFile.delete();
+            File renameFile = new File(this.filepath);
+            newFile.renameTo(renameFile);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
