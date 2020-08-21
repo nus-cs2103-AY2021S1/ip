@@ -1,6 +1,6 @@
 public abstract class Command {
     public boolean isExit;
-    private final String input;
+    protected final String input;
 
     public Command(String input) {
         isExit = false;
