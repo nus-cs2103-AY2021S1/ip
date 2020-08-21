@@ -1,5 +1,3 @@
-package main.java;
-
 public class ToDo extends Task { //added
 
     public ToDo(String description) {

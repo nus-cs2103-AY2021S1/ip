@@ -1,11 +1,6 @@
-import main.java.Deadline;
-import main.java.Task;
-import main.java.ToDo;
-import main.java.Event;
-import main.java.DukeException;
-
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.*;
 
 public class Duke {
     static String bot = "Dave says:\n";
@@ -13,7 +8,7 @@ public class Duke {
     //static String addedText = "added: ";
     static String line = "_______________________________________________________________";
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<>();
 
         //Initial greetings
