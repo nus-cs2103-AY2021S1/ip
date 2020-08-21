@@ -95,4 +95,20 @@ public class Parser {
             throw new InvalidCommandException();
         }
     }
+
+    public static Input getType(String input, int count) throws InvalidCommandException {
+        if (input.equals("bye")) {
+            return Input.BYE;
+        } else if (input.equals("list")) {
+            return Input.LIST;
+        } else if (input.startsWith("delete ")) {
+            return Input.DELETE;
+        } else if (input.startsWith("done ")) {
+            return Input.DONE;
+        } else if (input.startsWith("happens on ")) {
+            return Input.HAPPENS;
+        } else {
+            return Input.TASK;
+        }
+    }
 }
