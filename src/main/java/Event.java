@@ -5,22 +5,15 @@ import java.time.format.DateTimeParseException;
 public class Event extends Task {
     LocalDateTime date;
 
-    Event(String description, String date) throws InvalidDateTimeException{
+    Event(String description, String date) {
         super(description);
-        try {
-            this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
-        } catch (DateTimeParseException e) {
-            throw new InvalidDateTimeException("The date for your event cannot be parsed.");
-        }
+        this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+
     }
 
-    Event(String description, String date, boolean done) throws InvalidDateTimeException{
+    Event(String description, String date, boolean done) {
         super(description, done);
-        try {
-            this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
-        } catch (DateTimeParseException e) {
-            throw new InvalidDateTimeException("The date for your event cannot be parsed.");
-        }
+        this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 
     @Override

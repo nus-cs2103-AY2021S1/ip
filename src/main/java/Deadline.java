@@ -1,26 +1,17 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
     LocalDateTime date;
 
-    Deadline(String description, String date) throws InvalidDateTimeException{
+    Deadline(String description, String date) {
         super(description);
-        try {
-            this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
-        } catch (DateTimeParseException e) {
-            throw new InvalidDateTimeException("The date for your deadline cannot be parsed.");
-        }
+        this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 
-    Deadline(String description, String date, boolean done) throws InvalidDateTimeException{
+    Deadline(String description, String date, boolean done) {
         super(description, done);
-        try {
-            this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
-        } catch (DateTimeParseException e) {
-            throw new InvalidDateTimeException("The date for your deadline cannot be parsed.");
-        }
+        this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 
     @Override
