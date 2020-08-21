@@ -10,11 +10,11 @@
 >> Added the task:
 >> [D][✘] CS2103 (by: Aug 20 2020)
 >> You now have 3 tasks to do!
->> Oh no!!! I don't understand this input :(
+>> Oh no!!! I don't understand this input.
 >> Oh no!!! A todo must have a description!
 >> Oh no!!! A event must have an associated date!
 >> Oh no!!! A deadline must have an associated date!
->> Oh no!!! I don't understand this input :(
+>> Oh no!!! I don't understand this input.
 >> 1. [T][✘] eat cake
 >> 2. [E][✘] friend's birthday (at: Aug 23 2020)
 >> 3. [D][✘] CS2103 (by: Aug 20 2020)
