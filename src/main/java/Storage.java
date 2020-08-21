@@ -10,7 +10,7 @@ public class Storage {
     private final String filePath;
     public final List<Task> list;
 
-    public Storage(String filePath) throws FileNotFoundException {
+    public Storage(String filePath) throws FileNotFoundException, InvalidCommandException {
         this.filePath = filePath;
         list = new ArrayList<>();
         File file = new File(filePath);
@@ -31,6 +31,8 @@ public class Storage {
                     toAdd = new Deadline(description, time);
                 } else if (taskType == "E") {
                     toAdd = new Event(description, time);
+                } else {
+                    throw new InvalidCommandException("Invalid input file format");
                 }
             }
             if (done == 1) {
