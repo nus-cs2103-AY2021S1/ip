@@ -1,21 +1,19 @@
-import java.util.List;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static final Path filePath = Paths.get(".", "data", "duke.txt");
 
-    private List<Task> tasks;
+    private TaskList tasks;
     private final Database db;
 
     Duke() {
         this.db = new Database(Duke.filePath);
         try {
-            this.tasks = this.db.loadTasks();
+            this.tasks = new TaskList(this.db.loadTasks());
         } catch (DukeException e) {
-            this.tasks = new ArrayList<>();
+            this.tasks = new TaskList();
         }
     }
 
@@ -42,13 +40,7 @@ public class Duke {
 
         switch (command) {
             case LIST:
-                StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
-
-                for (int i = 0; i < this.tasks.size(); i++) {
-                    sb.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
-                }
-
-                this.speak(sb.toString().trim());
+                this.speak(String.format("Here are the tasks in your list:\n%s", this.tasks));
                 break;
 
             case DONE:
@@ -60,7 +52,7 @@ public class Duke {
 
                 try {
                     int taskId = Integer.parseInt(commandDetails);
-                    Task task = this.tasks.get(taskId - 1);
+                    Task task = this.tasks.getTask(taskId);
                     task.markAsDone();
 
                     this.db.updateExistingTask(taskId, task);
@@ -82,7 +74,7 @@ public class Duke {
 
                 try {
                     int taskId = Integer.parseInt(commandDetails);
-                    Task task = this.tasks.remove(taskId - 1);
+                    Task task = this.tasks.deleteTask(taskId);
 
                     this.db.deleteExistingTask(taskId);
 
@@ -132,7 +124,7 @@ public class Duke {
                     task = new Event(description, at);
                 }
 
-                this.tasks.add(task);
+                this.tasks.addTask(task);
 
                 this.db.saveNewTask(task);
 
