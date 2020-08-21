@@ -3,7 +3,7 @@ package main.java;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Duke {
+public class Willy {
     static ArrayList<Task> list = new ArrayList<>();
     static String message;
     static String lastGreeting = "bye";
@@ -13,26 +13,27 @@ public class Duke {
     public static void addToList(Task task) {
         list.add(task);
         System.out.println(style +
-                "\tGot it. I've added this task:\n" +
+                "\tAy here is the task you just added:\n" +
                 "\t  " + task + "\n" +
-                "\tNow you have " + list.size() + " tasks in the list.\n" +
+                "\tNow you have " + list.size() + " task(s) ah dun forget\n" +
                 style);
     }
 
     public static void removeTask(int taskNum) {
-        Task task = list.get(taskNum);
-        list.remove(taskNum);
+        int i = taskNum - 1;
+        Task task = list.get(i);
+        list.remove(i);
         System.out.println(style +
-                "\tNoted. I've removed this task:\n" +
+                "\tOkai here is the task you just deleted:\n" +
                 "\t  " + task + "\n" +
-                "\tNow you have " + list.size() + " tasks in the list.\n" +
+                "\tNow you have " + list.size() + " task(s) left ~\n" +
                 style);
     }
 
     // Reads through all the tasks in the list
     public static void readList() {
         System.out.println(style);
-        System.out.print("\tHere are the tasks in your list:\n");
+        System.out.print("\tHere are the tasks in your list to jolt ur memory:>\n");
         for(int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
             System.out.println("\t" + (i+1) + ". " + task);
@@ -46,18 +47,18 @@ public class Duke {
         Task task = list.get(i);
         task.setTaskDone(true);
         System.out.println(style);
-        System.out.println("\tNice! I've marked this task as done:");
+        System.out.println("\tNiceee I've marked this task as done!");
         System.out.println("\t   " + task);
         System.out.println(style);
     }
 
-    public static void main(String[] args) throws DukeException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    public static void main(String[] args) throws WillyException {
+        String logo = "__       ____       __\n"
+                    + "\\  \\    /    \\    /  /\n"
+                    + " \\  \\  /  /\\  \\  /  /\n"
+                    + "  \\  \\/  /  \\  \\/  /\n"
+                    + "   \\____/    \\____/ ILLY ~(^-^)~\n";
+        System.out.println(logo + "    Your personal life secretary");
 
         Scanner input = new Scanner(System.in);
         Greet startDuke = new Greet();
@@ -95,7 +96,7 @@ public class Duke {
                 ToDo newTask = new ToDo(activity);
                 addToList(newTask);
                 } catch (Exception e){
-                    DukeException error = new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    WillyException error = new WillyException("Hmmm what would you like to do?");
                     System.out.println(error);
                 }
 
@@ -109,7 +110,7 @@ public class Duke {
                     DeadlineTask newTask = new DeadlineTask(deadline, activity);
                     addToList(newTask);
                 } catch (Exception e){
-                    DukeException error = new DukeException("☹ OOPS!!! The description/deadline of the task is missing.");
+                    WillyException error = new WillyException("Hmmm the description/deadline of the task is missing... \n\tTry again with more details?");
                     System.out.println(error);
                 }
             }
@@ -122,13 +123,13 @@ public class Duke {
                     EventsTask newTask = new EventsTask(duration, activity);
                     addToList(newTask);
                 } catch (Exception e) {
-                    DukeException error = new DukeException("☹ OOPS!!! The description/timing of event is missing.");
+                    WillyException error = new WillyException("Hmmm the description/timing of event is missing... \n\tTry again with more details?");
                     System.out.println(error);
                 }
             }
             // else is nonsense which will produce error
             else {
-                DukeException error = new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                WillyException error = new WillyException("Hmmm sorry I'm not sure what you are saying, try something else?:(");
                 System.out.println(error);
             }
         }

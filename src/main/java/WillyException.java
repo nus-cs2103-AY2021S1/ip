@@ -1,10 +1,10 @@
 package main.java;
 
-public class DukeException extends Exception {
+public class WillyException extends Exception {
     String style = "\t______________________________________________________________\n";
     String error;
 
-    public DukeException(String errorMessage) {
+    public WillyException(String errorMessage) {
         super(errorMessage);
         this.error = errorMessage;
     }

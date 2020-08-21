@@ -4,9 +4,9 @@ public class Greet {
     String originalGreeting;
     String greeting;
     String style = "\t______________________________________________________________\n";
-    String startGreeting = "\tHello! I'm Duke \n" +
-            "\tWhat can I do for you?\n";
-    String exitGreeting = "\tBye! Hope to see you again soon:)\n";
+    String startGreeting = "\tHelloo I'm Willy and I am here for u! \n" +
+            "\tTell me wat u like to do and I will help u keep track of it ~\n";
+    String exitGreeting = "\tBye! See you again soon hoho\n";
 
     public Greet() {
         this.originalGreeting = null;
