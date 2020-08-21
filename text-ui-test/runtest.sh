@@ -20,7 +20,7 @@ then
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-/c/Program\ Files/Java/jdk-11.0.5/bin/java -classpath ../bin main.java.Duke < input.txt > ACTUAL.TXT
+/c/Program\ Files/Java/jdk-11.0.5/bin/java -classpath ../bin main.java.King < input.txt > ACTUAL.TXT
 
 # convert to UNIX format
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
