@@ -14,6 +14,7 @@ set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 
 REM compile the code into the bin folder
 javac -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\tasks\*.java
+javac -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\commands\*.java
 javac -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\exceptions\*.java
 javac -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\Duke.java
 IF ERRORLEVEL 1 (
