@@ -116,8 +116,9 @@ public class Parser {
         }
     }
 
-    public static boolean dealCommand(Input type, Ui ui, Storage storage, String input, int count, TaskList list)
+    public static boolean dealCommand(Input type, Ui ui, Storage storage, String input, TaskList list)
             throws InvalidCommandException{
+        int count = list.count;
         switch (type) {
             case LIST:
                 ui.printList(count, list, t -> true, "");
