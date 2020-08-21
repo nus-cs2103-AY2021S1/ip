@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -69,7 +74,67 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         List<Task> tasks = new ArrayList<>();
+        Path filePath = Paths.get("data","duke.txt");
+        
+        Storage storage;
+        
+        try {
+            storage = Storage.loadStorage(filePath);
+            
+            FileReader reader = new FileReader(filePath.toString());
+            BufferedReader bufferedReader = new BufferedReader(reader);
 
+            String line;
+
+            while ((line = bufferedReader.readLine()) != null) {
+                
+                String[] entry = line.split(" \\| ");
+                
+                if (entry.length == 3) {
+                    String taskType = entry[0];
+                    if (!entry[1].toUpperCase().equals("TRUE") && !entry[1].toUpperCase().equals("FALSE")) {
+                        throw new DukeException("One or more task statuses are not stored correctly");
+                    }
+                    boolean taskIsDone = Boolean.parseBoolean(entry[1]);
+                    String taskArgument = entry[2];
+                    
+                    Task newTask;
+
+                    switch (taskType) {
+                    case "TODO":
+                        newTask = ToDo.createNewToDo(taskArgument);
+                        break;
+                    case "EVENT":
+                        newTask = Event.createNewEvent(taskArgument);
+                        break;
+                    case "DEADLINE":
+                        newTask = Deadline.createNewDeadline(taskArgument);
+                        break;
+                    default:
+                        throw new DukeException("One or more task types are not stored correctly");
+                    }
+                    
+                    if (taskIsDone) {
+                        newTask.competeTask();
+                    }
+                    
+                    tasks.add(newTask);
+                    
+                } else {
+                    throw new DukeException("One or more entries have an invalid number of arguments");
+                }
+            }
+
+            reader.close();
+            
+        } catch (IOException e) {
+            printToConsole("File System Error");
+            return;
+        } catch (DukeException e) {
+            printToConsole("Stored file format is invalid\n" + e.getMessage());
+            return;
+        }
+        
         System.out.println(LOGO);
         printToConsole("Hi I'm Alfred! How can I help you today?");
 
