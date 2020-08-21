@@ -21,23 +21,27 @@ public class Duke {
         String input;
         while (sc.hasNext()) {
             input = sc.nextLine();
-            if (input.contains("todo")) { // add todo tasks
-                DukeCommandsHandler.addToDo(input);
-            } else if (input.contains("deadline")) { // add deadline tasks
-                DukeCommandsHandler.addDeadline(input);
-            } else if (input.contains("event")) { // add event tasks
-                DukeCommandsHandler.addEvent(input);
-            } else if (input.contains("delete")) { // delete tasks
-                DukeCommandsHandler.deleteTask(input);
-            } else if (input.contains("done")) { // mark tasks done
-                DukeCommandsHandler.markTaskDone(input);
-            } else if (input.equals("list")) { // list out the tasks
-                DukeCommandsHandler.listTasks();
-            } else if (input.equals("bye")) { // exit the bot
-                DukeCommandsHandler.exitFocus();
-                break;
-            } else { // handle invalid inputs
-                DukeException.invalidInput();
+            try {
+                if (input.startsWith("todo")) { // add todo tasks
+                    DukeCommandsHandler.addToDo(input);
+                } else if (input.startsWith("deadline")) { // add deadline tasks
+                    DukeCommandsHandler.addDeadline(input);
+                } else if (input.startsWith("event")) { // add event tasks
+                    DukeCommandsHandler.addEvent(input);
+                } else if (input.startsWith("delete")) { // delete tasks
+                    DukeCommandsHandler.deleteTask(input);
+                } else if (input.startsWith("done")) { // mark tasks done
+                    DukeCommandsHandler.markTaskDone(input);
+                } else if (input.equals("list")) { // list out the tasks
+                    DukeCommandsHandler.listTasks();
+                } else if (input.equals("bye")) { // exit the bot
+                    DukeCommandsHandler.exitFocus();
+                    break;
+                } else { // handle invalid inputs
+                    DukeCommandsHandler.invalidInput();
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
         sc.close();
