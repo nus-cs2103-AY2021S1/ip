@@ -1,3 +1,4 @@
+../src/main/java/TaskWriter.java
 ../src/main/java/Validator.java
 ../src/main/java/Command.java
 ../src/main/java/Event.java

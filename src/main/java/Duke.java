@@ -1,4 +1,6 @@
+import java.io.IOException;
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
 
@@ -10,6 +12,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String output;
         WorkList lst = new WorkList();
+        TaskWriter tw = new TaskWriter("mug.txt");
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
@@ -39,13 +42,15 @@ public class Duke {
                         Validator.info(command, splitOrder.length, false);
                         String todoInfo = splitOrder[1];
                         Todo newTodo = new Todo(todoInfo);
+                        tw.appendTask(command, todoInfo);
                         output = printDesign(lst.addWork(newTodo));
                         break;
                     case DEADLINE:
                         Validator.info(command, splitOrder.length, false);
                         String deadlineInfo = splitOrder[1];
+                        tw.appendTask(command, deadlineInfo);
                         String[] dInfo = deadlineInfo.split(" /by ");
-                        Validator.info(command, dInfo.length, true);
+                        //Validator.info(command, dInfo.length, true);
                         String deadlineEvent = dInfo[0];
                         String deadlineTime = dInfo[1];
                         Deadline newDeadline = new Deadline(deadlineEvent, deadlineTime);
@@ -54,6 +59,7 @@ public class Duke {
                     case EVENT:
                         Validator.info(command, splitOrder.length, false);
                         String eventInfo = splitOrder[1];
+                        tw.appendTask(command, eventInfo);
                         String[] eInfo = eventInfo.split(" /at ");
                         Validator.info(command, eInfo.length, true);
                         String eventEvent = eInfo[0];
@@ -66,8 +72,7 @@ public class Duke {
                         output = printDesign(errorCommand);
                         break;
                 }
-            } catch (ArrayIndexOutOfBoundsException
-                    | IllegalArgumentException ex){
+            } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException | IOException ex){
                 output = printDesign(ex.getMessage());
             }
 
@@ -97,7 +102,15 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke.welcome();
-        Duke.order();
+        try {
+            File workList = new File("mug.txt");
+            workList.createNewFile();
+            Duke.welcome();
+            Duke.order();
+        } catch (IOException e) {
+            System.out.println("An error occurred!!");
+            e.printStackTrace();
+        }
+
     }
 }
