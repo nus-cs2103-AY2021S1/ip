@@ -101,7 +101,7 @@ public class Parser {
 
     public static Command parse(String input) {
         if (input.equals("bye")) {
-            return Input.BYE;
+            return new ByeCommand();
         } else if (input.equals("list")) {
             return new ListCommand();
         } else if (input.startsWith("delete ")) {
