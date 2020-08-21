@@ -3,7 +3,7 @@ public class Todo extends Task {
         super(description);
     }
 
-    private Todo(String description, boolean isDone) {
+    public Todo(String description, boolean isDone) {
         super(description, isDone);
     }
 

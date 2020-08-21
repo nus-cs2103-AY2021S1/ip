@@ -23,7 +23,7 @@ public class Duke {
 
                 switch (command) {
                     case LIST:
-                        output = printDesign(lst.readWork());
+                        output = printDesign(tw.readTask());
                         break;
                     case BYE:
                         output = "** Bye. Hope to see you soon!! **";
@@ -43,7 +43,7 @@ public class Duke {
                     case TODO:
                         Validator.info(command, splitOrder.length, false);
                         String todoInfo = splitOrder[1];
-                        Todo newTodo = new Todo(todoInfo);
+                        Todo newTodo = new Todo(todoInfo, false);
                         tw.appendTask(command, todoInfo);
                         output = printDesign(lst.addWork(newTodo));
                         break;
@@ -55,7 +55,7 @@ public class Duke {
                         Validator.info(command, dInfo.length, true);
                         String deadlineEvent = dInfo[0];
                         String deadlineTime = dInfo[1];
-                        Deadline newDeadline = new Deadline(deadlineEvent, deadlineTime);
+                        Deadline newDeadline = new Deadline(deadlineEvent, deadlineTime, false);
                         output = printDesign(lst.addWork(newDeadline));
                         break;
                     case EVENT:
@@ -66,7 +66,7 @@ public class Duke {
                         Validator.info(command, eInfo.length, true);
                         String eventEvent = eInfo[0];
                         String EventTime = eInfo[1];
-                        Event newEvent = new Event(eventEvent, EventTime);
+                        Event newEvent = new Event(eventEvent, EventTime, false);
                         output = printDesign(lst.addWork(newEvent));
                         break;
                     default:

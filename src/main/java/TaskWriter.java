@@ -17,21 +17,21 @@ public class TaskWriter {
 
             switch(command) {
                 case TODO:
-                    pw.println("T | 0 | " + info);
+                    pw.println("TODO|0|" + info);
                     break;
                 case DEADLINE:
                     String[] dInfo = info.split(" /by ");
                     Validator.info(command, dInfo.length, true);
                     String deadlineEvent = dInfo[0];
                     String deadlineTime = dInfo[1];
-                    pw.println("D | 0 | " + deadlineEvent + " | " + deadlineTime);
+                    pw.println("DEADLINE|0|" + deadlineEvent + "|" + deadlineTime);
                     break;
                 case EVENT:
                     String[] eInfo = info.split(" /at ");
                     Validator.info(command, eInfo.length, true);
                     String eventEvent = eInfo[0];
                     String eventTime = eInfo[1];
-                    pw.println("E | 0 | " + eventEvent + " | " + eventTime);
+                    pw.println("EVENT|0|" + eventEvent + "|" + eventTime);
                     break;
                 default:
                     break;
@@ -96,7 +96,7 @@ public class TaskWriter {
                     pw.println(line);
                 } else {
                     String[] newLine = line.split("[|]" , 3);
-                    pw.println(newLine[0] + "| " + 1 + " |" + newLine[2] );
+                    pw.println(newLine[0] + "|" + 1 + "|" + newLine[2] );
                 }
                 taskTrack++;
             }
@@ -108,6 +108,42 @@ public class TaskWriter {
             newFile.renameTo(renameFile);
         } catch (IOException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    public String readTask() throws FileNotFoundException {
+        Scanner sc = new Scanner(new File(this.filepath));
+        sc.useDelimiter("[\n]");
+        String line;
+        StringBuilder results = new StringBuilder();
+        int taskId = 0;
+
+        while (sc.hasNext()) {
+            line = sc.next();
+            String[] newLine = line.split("[|]");
+            Command command = Validator.command(newLine[0]);
+            boolean taskStatus = Integer.parseInt(newLine[1]) == 1;
+            taskId++;
+
+            if(taskId != 1) {
+                results.append("\n");
+            }
+            results.append(taskId);
+            results.append(". ");
+
+            if (command == Command.TODO) {
+                results.append(new Todo(newLine[2], taskStatus));
+            } else if (command == Command.DEADLINE) {
+                results.append(new Deadline(newLine[2], newLine[3], taskStatus));
+            } else if (command == Command.EVENT) {
+                results.append(new Event(newLine[2], newLine[3], taskStatus));
+            }
+        }
+
+        if (taskId == 0) {
+            return "MUG don't have any of your task \"_\"";
+        } else {
+            return results.toString();
         }
     }
 }
