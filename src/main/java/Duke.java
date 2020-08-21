@@ -34,6 +34,12 @@ public class Duke {
         }
     }
 
+    public static void validateCommandDesc(int taskNum, Command type, List<Task> lst) throws DukeException {
+        if (taskNum > lst.size()) {
+            throw new DukeException("You have no such task. Please check your task number.");
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String welcomeMessage = "----- Serina here, what would you like to do?";
@@ -66,6 +72,7 @@ public class Duke {
                         break;
                     // mark task as done and print it
                     case DONE:
+                        validateCommandDesc(Integer.parseInt(value), Command.DONE, tasks);
                         int taskNum = Integer.parseInt(value) - 1;
                         System.out.println(tasks.get(taskNum).markAsDone());
                         break;
@@ -95,6 +102,7 @@ public class Duke {
                         break;
                     // delete task
                     case DELETE:
+                        validateCommandDesc(Integer.parseInt(value), Command.DELETE, tasks);
                         int taskIndex = Integer.parseInt(value) - 1;
                         Task removedTask = tasks.get(taskIndex);
                         tasks.remove(taskIndex);
