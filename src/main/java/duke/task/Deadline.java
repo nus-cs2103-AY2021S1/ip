@@ -7,9 +7,14 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public Deadline(String description, int status, String by) {
+        super(description, status);
+        this.by = by;
+    }
+
     @Override
-    public String saveText() {
-        return "D | " + getStatusIcon() + " | " + description + " | " + by;
+    public String saveText(int status) {
+        return "D | " + status + " | " + description + " | " + by;
     }
 
     @Override

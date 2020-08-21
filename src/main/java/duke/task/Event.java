@@ -7,9 +7,14 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public Event(String description, int status, String at) {
+        super(description, status);
+        this.at = at;
+    }
+
     @Override
-    public String saveText() {
-        return "E | " + getStatusIcon() + " | " + description + " | " + at;
+    public String saveText(int status) {
+        return "E | " + status + " | " + description + " | " + at;
     }
 
     @Override
