@@ -9,10 +9,12 @@ import java.util.Scanner;
 public class Storage {
     private final String filePath;
     public final List<Task> list;
+    public int count;
 
     public Storage(String filePath) throws FileNotFoundException, InvalidCommandException {
         this.filePath = filePath;
         list = new ArrayList<>();
+        count = 0;
         File file = new File(filePath);
         Scanner sc = new Scanner(file);
         while (sc.hasNext()) {
@@ -43,6 +45,7 @@ public class Storage {
                 toAdd.markAsDone();
             }
             list.add(toAdd);
+            count++;
         }
     }
 
