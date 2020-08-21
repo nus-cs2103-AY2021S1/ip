@@ -1,1 +1,4 @@
-D | 0 | efefgwe | 1998-08-04T15:40
+T | 0 | sleep
+T | 0 | help
+T | 0 | LASDA
+E | 1 | aefwerg | 2020-08-21T12:41

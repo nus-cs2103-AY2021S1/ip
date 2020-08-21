@@ -1,4 +1,2 @@
 T | 0 | sleep
-T | 1 | sleep again
-D | 1 | wake up | tmr
-E | 0 | sleep one more time | 9pm
+E | 1 | do work | 2020-08-21T10:45

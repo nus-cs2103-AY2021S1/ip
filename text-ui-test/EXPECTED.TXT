@@ -6,38 +6,34 @@ added: [T][✘] sleep
  Now you have 1 tasks in the list
 ***********************
 ***********************
-added: [T][✘] sleep again 
+added: [D][✘] wake up (by: 2020-08-21T10:00) 
  Now you have 2 tasks in the list
 ***********************
 ***********************
-added: [D][✘] wake up (by: tmr) 
+added: [E][✘] do work (at: 2020-08-21T10:45) 
  Now you have 3 tasks in the list
 ***********************
 ***********************
-added: [E][✘] sleep one more time (at: 9pm) 
- Now you have 4 tasks in the list
+Here are the tasks in your list: 
+1. [T][✘] sleep
+2. [D][✘] wake up (by: 2020-08-21T10:00)
+3. [E][✘] do work (at: 2020-08-21T10:45)
+***********************
+***********************
+Wrong datetime format provided, date and time should be specified as follows: DD MMM YYYY HHMM
+***********************
+***********************
+Nice! I've marked this task as done: 
+ [E][✓] do work (at: 2020-08-21T10:45)
+***********************
+***********************
+Noted. I've removed this task: 
+ [D][✘] wake up (by: 2020-08-21T10:00)
 ***********************
 ***********************
 Here are the tasks in your list: 
 1. [T][✘] sleep
-2. [T][✘] sleep again
-3. [D][✘] wake up (by: tmr)
-4. [E][✘] sleep one more time (at: 9pm)
-***********************
-***********************
-Nice! I've marked this task as done: 
- [T][✓] sleep again
-***********************
-***********************
-Nice! I've marked this task as done: 
- [D][✓] wake up (by: tmr)
-***********************
-***********************
-Here are the tasks in your list: 
-1. [T][✘] sleep
-2. [T][✓] sleep again
-3. [D][✓] wake up (by: tmr)
-4. [E][✘] sleep one more time (at: 9pm)
+2. [E][✓] do work (at: 2020-08-21T10:45)
 ***********************
 ***********************
 Bye! Hope to see you soon!

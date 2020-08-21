@@ -4,7 +4,7 @@ REM create bin directory if it doesn't exist
 if not exist ..\bin mkdir ..\bin
 
 REM delete output from previous run and delete storage file
-del test-data\duke.txt
+del data\duke.txt
 del ACTUAL.TXT
 
 REM compile the code into the bin folder
@@ -19,4 +19,4 @@ REM run the program, feed commands from input.txt file and redirect the output t
 java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
 
 REM compare the output to the expected output
-FC /U ACTUAL.TXT EXPECTED.TXT
+FC ACTUAL.TXT EXPECTED.TXT

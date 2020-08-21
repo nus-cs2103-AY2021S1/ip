@@ -1,9 +1,9 @@
 todo sleep
-todo sleep again
-deadline wake up /by tmr
-event sleep one more time /at 9pm
+deadline wake up /by 21 Aug 2020 1000
+event do work /at 21 Aug 2020 1045
 list
-done 2
+event efwfw /at 9pm
 done 3
+delete 2
 list
 bye
