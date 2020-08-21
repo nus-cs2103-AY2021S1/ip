@@ -1,4 +1,4 @@
-abstract class Task {
+abstract class Task implements Serialisable {
     private String description;
     private boolean isDone;
 
@@ -23,6 +23,11 @@ abstract class Task {
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
+    }
+
+    @Override
+    public String serialise() {
+        return String.format("%d | %s", this.isDone ? 1 : 0, this.description);
     }
 
 }
