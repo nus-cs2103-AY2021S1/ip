@@ -1,13 +1,19 @@
-import exceptions.*;
+import exceptions.DukeException;
+import exceptions.EmptyBodyException;
+import exceptions.NoSuchTaskException;
+import exceptions.WrongSyntaxException;
+import exceptions.UnknownCommandException;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
-import java.util.ArrayList;
 import java.lang.StringBuilder;
 
 public class Duke {
 
     private final String lineSeparator = "***********************";
+    private final Storage store = new Storage();
     private List<Task> taskList = new ArrayList<>();
 
     public void greet() {
@@ -51,58 +57,67 @@ public class Duke {
     public boolean handleInput(Scanner scanner) throws DukeException {
         String userInput = scanner.next();
         Command command = Command.getCommand(userInput);
+        boolean toContinue = true;
+        boolean updateRequired = true;
         switch (command) {
-            case BYE:
-                printMessage("Bye! Hope to see you soon!");
-                return false;
-            case LIST:
-                printList();
-                return true;
-            case DONE:
-                int taskNumber = scanner.nextInt();
-                if (taskNumber < 1 || taskNumber > taskList.size()) {
-                    throw new NoSuchTaskException();
-                }
-                completeTask(taskNumber);
-                return true;
-            case DELETE:
-                int toDelete = scanner.nextInt();
-                if (toDelete < 1 || toDelete > taskList.size()) {
-                    throw new NoSuchTaskException();
-                }
-                deleteTask(toDelete);
-                return true;
-            case DEADLINE:
-                String deadlineCommand = scanner.nextLine().trim();
-                String[] deadlineParts = deadlineCommand.split(" /by ");
-                if (deadlineParts.length != 2) {
-                    throw new WrongSyntaxException();
-                }
-                addTask(new Deadline(deadlineParts[0], deadlineParts[1]));
-                return true;
-            case EVENT:
-                String eventCommand = scanner.nextLine().trim();
-                String[] eventParts = eventCommand.split(" /at ");
-                if (eventParts.length != 2) {
-                    throw new WrongSyntaxException();
-                }
-                addTask(new Event(eventParts[0], eventParts[1]));
-                return true;
-            case TODO:
-                String task = scanner.nextLine().trim();
-                if (task.isBlank()) {
-                    throw(new EmptyBodyException());
-                }
-                addTask(new Todo(task));
-                return true;
-            case UNKNOWN:
-                // unknown command, skip the entire line
-                scanner.nextLine();
-                throw(new UnknownCommandException(userInput));
-            default:
-                scanner.nextLine();
-                return true;
+        case BYE:
+            printMessage("Bye! Hope to see you soon!");
+            toContinue = false;
+            updateRequired = false;
+            break;
+        case LIST:
+            printList();
+            updateRequired = false;
+            break;
+        case DONE:
+            int taskNumber = scanner.nextInt();
+            if (taskNumber < 1 || taskNumber > taskList.size()) {
+                throw new NoSuchTaskException();
+            }
+            completeTask(taskNumber);
+            break;
+        case DELETE:
+            int toDelete = scanner.nextInt();
+            if (toDelete < 1 || toDelete > taskList.size()) {
+                throw new NoSuchTaskException();
+            }
+            deleteTask(toDelete);
+            break;
+        case DEADLINE:
+            String deadlineCommand = scanner.nextLine().trim();
+            String[] deadlineParts = deadlineCommand.split(" /by ");
+            if (deadlineParts.length != 2) {
+                throw new WrongSyntaxException();
+            }
+            addTask(new Deadline(deadlineParts[0], deadlineParts[1]));
+            break;
+        case EVENT:
+            String eventCommand = scanner.nextLine().trim();
+            String[] eventParts = eventCommand.split(" /at ");
+            if (eventParts.length != 2) {
+                throw new WrongSyntaxException();
+            }
+            addTask(new Event(eventParts[0], eventParts[1]));
+            break;
+        case TODO:
+            String task = scanner.nextLine().trim();
+            if (task.isBlank()) {
+                throw(new EmptyBodyException());
+            }
+            addTask(new Todo(task));
+            break;
+        case UNKNOWN:
+            // unknown command, skip the entire line
+            scanner.nextLine();
+            throw(new UnknownCommandException(userInput));
+        default:
+            scanner.nextLine();
         }
+
+        if (updateRequired) {
+            store.updateTasks(taskList);
+        }
+        return toContinue;
     }
 
     public void start() {
@@ -111,7 +126,11 @@ public class Duke {
         boolean isRunning = true;
         while (isRunning) {
             try {
+                store.initializeStorage();
+                taskList = store.getTasks();
                 isRunning = handleInput(scanner);
+            } catch (IOException e) {
+                System.out.println("Error connecting to storage, actions made will not be saved");
             } catch (DukeException e) {
                 printMessage(e.getFriendlyMessage());
             }
@@ -120,7 +139,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.start();
+        Duke duke = new Duke();        duke.start();
     }
 }

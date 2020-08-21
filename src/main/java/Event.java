@@ -4,11 +4,13 @@ public class Event extends Task {
 
     public Event(String description, String date) {
         super(description);
+        super.symbol = 'E';
         this.date = date;
     }
 
     public Event(String description, String date, boolean isCompleted) {
         super(description, isCompleted);
+        super.symbol = 'E';
         this.date = date;
     }
 
@@ -18,7 +20,13 @@ public class Event extends Task {
     }
 
     @Override
+    public String getStorageString() {
+        String baseString = super.getStorageString();
+        return String.format("%s | %s", baseString, date);
+    }
+
+    @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), date);
+        return String.format("[%s]%s (at: %s)", symbol, super.toString(), date);
     }
 }

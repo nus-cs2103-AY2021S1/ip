@@ -2,11 +2,11 @@
 Hi! I'm Duke. What can I do for you?
 ***********************
 ***********************
-added: [T][✘]  sleep 
+added: [T][✘] sleep 
  Now you have 1 tasks in the list
 ***********************
 ***********************
-added: [T][✘]  sleep again 
+added: [T][✘] sleep again 
  Now you have 2 tasks in the list
 ***********************
 ***********************
@@ -19,14 +19,14 @@ added: [E][✘] sleep one more time (at: 9pm)
 ***********************
 ***********************
 Here are the tasks in your list: 
-1. [T][✘]  sleep
-2. [T][✘]  sleep again
+1. [T][✘] sleep
+2. [T][✘] sleep again
 3. [D][✘] wake up (by: tmr)
 4. [E][✘] sleep one more time (at: 9pm)
 ***********************
 ***********************
 Nice! I've marked this task as done: 
- [T][✓]  sleep again
+ [T][✓] sleep again
 ***********************
 ***********************
 Nice! I've marked this task as done: 
@@ -34,8 +34,8 @@ Nice! I've marked this task as done:
 ***********************
 ***********************
 Here are the tasks in your list: 
-1. [T][✘]  sleep
-2. [T][✓]  sleep again
+1. [T][✘] sleep
+2. [T][✓] sleep again
 3. [D][✓] wake up (by: tmr)
 4. [E][✘] sleep one more time (at: 9pm)
 ***********************
