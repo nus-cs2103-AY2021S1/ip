@@ -17,19 +17,23 @@ public class Storage {
         Scanner sc = new Scanner(file);
         while (sc.hasNext()) {
             String taskType = sc.next();
-            int done = sc.nextInt();
             String description = sc.next();
+            int done = sc.nextInt();
+            description = sc.next();
             description = sc.nextLine();
             Task toAdd;
-            if (taskType == "T") {
+            if (taskType.startsWith("T")) {
                 toAdd = new ToDo(description);
             } else {
                 int position = description.indexOf('|');
+                if (position < 0) {
+                    System.out.println(taskType + description + "error!");
+                }
                 String time = description.substring(position + 6);
                 description = description.substring(0, position - 1);
-                if (taskType == "D") {
+                if (taskType.startsWith("D")) {
                     toAdd = new Deadline(description, time);
-                } else if (taskType == "E") {
+                } else if (taskType.startsWith("E")) {
                     toAdd = new Event(description, time);
                 } else {
                     throw new InvalidCommandException("Invalid input file format");
@@ -62,5 +66,10 @@ public class Storage {
         } catch (IOException e) {
             throw new InvalidCommandException(e.getMessage());
         }
+    }
+
+    public static void main(String[] args) throws FileNotFoundException, InvalidCommandException {
+        Storage st = new Storage("data/tasks.txt");
+        System.out.println(st.list);
     }
 }
