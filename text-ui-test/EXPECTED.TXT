@@ -22,6 +22,17 @@ Now you have 3 tasks in the list.
 2. [D][✘] return book (by: Sunday)
 3. [D][✘] project meeting (at: Mon 2-4pm)
 ---------------------------------------------------
+FAILURE: The description of your event is empty.
+---------------------------------------------------
+added: work
+---------------------------------------------------
+Nice! I have marked this task as done:
+  [D][✓] project meeting (at: Mon 2-4pm)
+1. [T][✘] borrow book
+2. [D][✘] return book (by: Sunday)
+3. [D][✓] project meeting (at: Mon 2-4pm)
+4. [✘] work
+---------------------------------------------------
 Bye. Hope to see you again soon!
 ---------------------------------------------------
 

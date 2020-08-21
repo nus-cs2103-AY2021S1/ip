@@ -31,7 +31,7 @@ cp EXPECTED.TXT EXPECTED-UNIX.TXT
 dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
 
 # compare the output to the expected output
-diff --ignore-blank-lines ACTUAL.TXT EXPECTED-UNIX.TXT
+diff -u --ignore-space-change --strip-trailing-cr --ignore-blank-lines ACTUAL.TXT EXPECTED-UNIX.TXT
 if [ $? -eq 0 ]
 then
     echo "Test result: PASSED"
