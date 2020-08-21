@@ -11,13 +11,16 @@ public class Duke {
     private static final String EXIT_MESSAGE = "Bye. "
             + "Hope to see you again soon!";
     private static final String LIST_MESSAGE = "Here are the tasks in your list:";
+    private static final String TOGGLE_MESSAGE = "Nice! "
+            + "I've marked this task as done:\n";
 
     // Command constants for the bot
     private static final String EXIT_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
+    private static final String DONE_COMMAND = "done";
 
     // static fields for the bot
-    private static ArrayList<String> store = new ArrayList<>(); // add input items here
+    private static ArrayList<Task> store = new ArrayList<>(); // add input items here
     private static boolean isFirstRun = true; // is the bot run for the first time?
 
     // helper methods related to displaying
@@ -49,12 +52,20 @@ public class Duke {
         String input = sc.nextLine();
 
         while (!input.equals(EXIT_COMMAND)) {
-            switch (input) {
+            String[] words = input.split("\\s+");
+            String command = words[0];
+
+            switch (command) {
             case LIST_COMMAND:
                 displayStoreItems();
                 break;
+            case DONE_COMMAND:
+                Task toSet = store.get(Integer.parseInt(words[1]) - 1);
+                toSet.setTaskAsDone();
+                displayToScreen(TOGGLE_MESSAGE + "\t " + toSet);
+                break;
             default:
-                store.add(input);
+                store.add(new Task(false, input));
                 displayToScreen("added: " + input);
                 break;
             }
