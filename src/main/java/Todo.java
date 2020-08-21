@@ -1,4 +1,6 @@
 public class Todo extends Task {
+    private static final String identifier = "T";
+
     public Todo(String description) {
         super(description);
     }
@@ -9,11 +11,11 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return String.format("[T]%s", super.toString());
+        return String.format("[%s]%s", Todo.identifier, super.toString());
     }
 
     @Override
     public String serialise() {
-        return String.format("T | %s", super.serialise());
+        return String.format("%s | %s", Todo.identifier, super.serialise());
     }
 }
