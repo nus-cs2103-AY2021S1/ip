@@ -17,7 +17,7 @@ import java.util.NoSuchElementException;
 public class Bot {
 
     private final String name;
-    private final List<Task> tasks;
+    private List<Task> tasks;
 
     public Bot(String name) {
 
@@ -30,6 +30,15 @@ public class Bot {
         println("Hello, I'm %s", this.name);
         println("What can I do for you?");
     }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public List<Task> getTasks() {
+        return this.tasks;
+    }
+
 
     public boolean processCommand(String str) {
 
