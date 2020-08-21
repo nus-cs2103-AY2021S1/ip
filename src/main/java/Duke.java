@@ -114,7 +114,7 @@ public class Duke {
     private static void addToList(Task task) throws InvalidCommandException {
         try {
             FileWriter fw = new FileWriter("data/tasks.txt", true);
-            fw.write(task.toString());
+            fw.write(task.output());
             fw.close();
         } catch (IOException e) {
             throw new InvalidCommandException("Can't write to the file.");
