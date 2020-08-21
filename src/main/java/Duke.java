@@ -92,11 +92,18 @@ public class Duke {
                     printLine();
                     break;
                 case "delete":
-                    int deleteID = sc.nextInt() - 1;
-                    Task deleted = todo.get(deleteID);
-                    todo.remove(deleteID);
-                    System.out.println("Gotchu, I am removing \n" + deleted.toString());
-                    System.out.println("Now you got " + todo.size() + " task(s) waiting man");
+                    printLine();
+                    try {
+                        int deleteID = sc.nextInt() - 1;
+                        Task deleted = todo.get(deleteID);
+                        todo.remove(deleteID);
+                        System.out.println("Gotchu, I am removing \n" + deleted.toString());
+                        System.out.println("Now you got " + todo.size() + " task(s) waiting man");
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("the item you are trying to delete does not exist");
+                        e.printStackTrace();
+                    }
+                    printLine();
                     break;
                 default:
                     printLine();
