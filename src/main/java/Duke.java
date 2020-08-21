@@ -106,8 +106,8 @@ public class Duke {
             } catch (DukeIllegalCommandException | DukeMissingArgumentException | DukeTaskOutOfBoundsException e) {
                 System.out.println(e.toString());
             }
-	
-	    // Gets the new input
+
+	        // Gets the new input
             userInput = scan.nextLine();
         }
 
