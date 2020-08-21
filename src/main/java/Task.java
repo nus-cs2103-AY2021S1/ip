@@ -29,8 +29,9 @@ public class Task {
     /**
      * Changes the state of this task, isDone to true
      */
-    public void markAsDone() {
+    public Task markAsDone() {
         isDone = true;
+        return this;
     }
 
 

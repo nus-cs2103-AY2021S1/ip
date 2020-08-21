@@ -1,13 +1,14 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private List<Task> toDoList;
+    //    private List<Task> toDoList;
     private final Ui ui;
     private final DukeFileHandler fileHandler;
-
+    private TaskList tasks;
 
     private Duke() {
         ui = new Ui();
@@ -16,17 +17,20 @@ public class Duke {
         fileHandler = new DukeFileHandler("data/dukeData.txt");
 
 
-        // todo add storage
-        // todo add parse, a class to make sense of user commands
         // todo TaskList
 
+        // todo add parse, a class to make sense of user commands
+
+
         try {
-            toDoList = fileHandler.readFile();
-            if (toDoList.size() > 0) {
-                ui.displayList(toDoList);
+            tasks = new TaskList(fileHandler.readFile());
+//            toDoList = fileHandler.readFile();
+            if (!tasks.isNull()) {
+                ui.displayList(tasks.getList());
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            tasks = new TaskList(new ArrayList<>());
         }
 
         startListeningToCommand();
@@ -66,7 +70,7 @@ public class Duke {
         switch (command) {
         case "bye":
             try {
-                fileHandler.writeToFile(toDoList);
+                fileHandler.writeToFile(tasks.getList());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -74,19 +78,25 @@ public class Duke {
             ui.displayThis("Bye. Hope to see you again soon!");
             return false;
 
+        case "clear":
+            tasks.clear();
+            ui.displayThis("List is cleared");
+            break;
+
         case "list":
-            if (toDoList.size() == 0) {
+            if (tasks.isNull()) {
                 throw new DukeException("There's nothing in the list :-(");
+            } else {
+                ui.displayList(tasks.getList());
             }
-            ui.displayList(toDoList);
             break;
 
         case "done":
             try {
                 int entryDone = Integer.parseInt(input.substring(5)) - 1;
-                Task temp = toDoList.get(entryDone);
-                temp.markAsDone();
-                ui.displayThis("Nice! I've marked this task as done: \n        " + temp.toString());
+//                Task temp = toDoList.get(entryDone);
+//                temp.markAsDone();
+                ui.displayThis("Nice! I've marked this task as done: \n        " + tasks.done(entryDone));
 
             } catch (Exception ex) {
                 throw new DukeException("This task does not exist");
@@ -97,11 +107,11 @@ public class Duke {
         case "delete":
             try {
                 int entryDelete = Integer.parseInt(input.substring(7)) - 1;
-                Task temp = toDoList.get(entryDelete);
-                toDoList.remove(entryDelete);
+//                Task temp = toDoList.get(entryDelete);
+//                toDoList.remove(entryDelete);
 
-                ui.displayThis("OKay, I've remove this task: \n        " + temp.toString() +
-                        "\n    Now you have " + toDoList.size() + " tasks in the list");
+                ui.displayThis("OKay, I've remove this task: \n        " + tasks.delete(entryDelete) +
+                        "\n    Now you have " + tasks.size() + " tasks in the list");
 
             } catch (Exception ex) {
                 throw new DukeException("This task does not exist");
@@ -114,7 +124,7 @@ public class Duke {
                 int timing = input.indexOf(" /by");
                 String description = input.substring(9, timing);
                 String by = input.substring(timing + 5);
-                addTask(new Deadline(description, by));
+                tasks.addTask(new Deadline(description, by));
 
             } catch (Exception ex) {
                 throw new DukeException("Deadline format isn't correct");
@@ -128,7 +138,7 @@ public class Duke {
                 int timing = input.indexOf(" /at");
                 String description = input.substring(6, timing);
                 String at = input.substring(timing + 5);
-                addTask(new Events(description, at));
+                tasks.addTask(new Events(description, at));
 
             } catch (Exception ex) {
                 throw new DukeException("Event format isn't correct");
@@ -138,7 +148,7 @@ public class Duke {
 
         }
         case "todo":
-            addTask(new Task(input.substring(5)));
+            tasks.addTask(new Task(input.substring(5)));
             break;
 
         default:
@@ -149,28 +159,12 @@ public class Duke {
     }
 
 
-    private void addTask(Task task) {
-        toDoList.add(task);
-        ui.displayThis("Got it. I've added this task: \n         " + task +
-                "\n    Now you have " + toDoList.size() + " tasks in the list");
-    }
-
-
-//    private void displayThis(String s) {
-//        System.out.println("\n    ---------------------------------");
-//        System.out.println("    " + s);
-//        System.out.println("    ---------------------------------\n");
+//    private void addTask(Task task) {
+//        toDoList.add(task);
+//        ui.displayThis("Got it. I've added this task: \n         " + task +
+//                "\n    Now you have " + toDoList.size() + " tasks in the list");
 //    }
-//
-//
-//    private void displayList() {
-//        System.out.println("\n    ---------------------------------\n" +
-//                "    Here are the tasks in your list:");
-//        for (int i = 0; i < toDoList.size(); i++) {
-//            System.out.println("    " + (i + 1) + ". " + toDoList.get(i));
-//        }
-//        System.out.println("    ---------------------------------");
-//    }
+
 
     public static void main(String[] args) {
         new Duke();
