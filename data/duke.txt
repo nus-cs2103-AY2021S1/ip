@@ -2,3 +2,11 @@ asdasd
 asdasdsa
 asdasd
 asdas
+T | 0 | hello
+T | 1 | hello | NEVER
+T | 0 | hello
+T | 1 | hello | NEVER
+T | 0 | hello
+T | 1 | hello | NEVER
+T | 0 | hello
+D | 1 | hello | NEVER

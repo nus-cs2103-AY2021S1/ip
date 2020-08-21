@@ -2,6 +2,7 @@ public class Task {
 
     protected boolean isCompleted;
     protected String description;
+    protected char symbol = 'T';
 
     public Task(String description) {
         this.description = description;
@@ -15,6 +16,11 @@ public class Task {
 
     public Task markCompleted() {
         return new Task(description, true);
+    }
+
+    public String getStorageString() {
+        char done = isCompleted ? '1' : '0';
+        return String.format("%s | %s | %s", symbol, done, description);
     }
 
     @Override

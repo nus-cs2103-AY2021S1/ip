@@ -25,10 +25,11 @@ public class Storage {
         }
     }
 
-    public void addTasks(String taskLine) {
+    public void addTask(Task task) {
         try {
             FileWriter storageWriter = new FileWriter(storagePath, true);
-            storageWriter.write(taskLine);
+            storageWriter.write('\n');
+            storageWriter.write(task.getStorageString());
             storageWriter.close();
         } catch (IOException e) {
             System.out.println("Storage file not found");
@@ -38,6 +39,10 @@ public class Storage {
     public static void main(String[] args) {
         // temporary tests
         Storage s = new Storage();
+        Task todo = new Task("hello", false);
+        Task event = new Event("hello", "NEVER", true);
+        s.addTask(todo);
+        s.addTask(event);
         String[] result = s.getTasks();
         for (String str : result) {
             System.out.println(str);
