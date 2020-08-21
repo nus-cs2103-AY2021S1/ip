@@ -14,6 +14,11 @@ public class Event extends Task {
         }
     }
 
+    Event(String description, String date, boolean done) {
+        super(description, done);
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a")) + ")";

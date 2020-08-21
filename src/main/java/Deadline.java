@@ -14,6 +14,11 @@ public class Deadline extends Task {
         }
     }
 
+    Deadline(String description, String date, boolean done) {
+        super(description, done);
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a")) + ")";
