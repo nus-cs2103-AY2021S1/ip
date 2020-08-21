@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,13 +11,25 @@ public class Ultron {
     //Get the pattern for the regex for parsing the command
     private final Pattern pattern = Pattern.compile("(^\\s?\\w+\\b) ?(.*)?$");
 
+    //Get the storage
+    private final Storage storage;
+
     // Create the scanner object
     private final Scanner scanner;
 
-    public Ultron(){
+    public Ultron(String path){
 
-        //Create a new task list
-        this.taskList = new TaskList();
+        //Create the Storage object
+        storage = new Storage(path);
+
+        //Fetch the data
+        ArrayList<Task> taskArrayList = new ArrayList<>();
+        try {
+            taskArrayList = storage.fetchAll();
+        }catch (UltronException e){}
+
+        //Create a task list
+        taskList = new TaskList(taskArrayList);
 
         //Create a new scanner
         this.scanner = new Scanner(System.in);
@@ -116,6 +129,7 @@ public class Ultron {
 
             //If the user keys in bye
             case "bye": {
+                storage.writeAll(taskList.getList());
                 return true;
             }
 
@@ -266,7 +280,7 @@ public class Ultron {
     public static void main(String[] args) {
 
         //Create a new duke
-        Ultron duke = new Ultron();
+        Ultron duke = new Ultron("data.txt");
 
         //Run the main loop
         duke.mainLoop();
