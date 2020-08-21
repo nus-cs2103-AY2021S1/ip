@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.Command;
 import duke.component.Parser;
 import duke.component.Storage;
 import duke.component.Ui;
