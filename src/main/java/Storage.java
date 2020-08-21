@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -84,6 +86,16 @@ public class Storage {
     }
 
     public void writeAll(ArrayList<Task> taskArrayList) throws UltronException{
+
+        //Check if the directory exist
+        if(!f.exists()){
+            try{
+                Files.createDirectory(Path.of(this.f.getPath()));
+            }catch (IOException e){
+                throw new UltronException(this.f.getPath(), ExceptionType.DIRECTORY_NOT_CREATED);
+            }
+        }
+
         try {
             FileWriter fw = new FileWriter(f.getPath());
             for(Task task: taskArrayList){
