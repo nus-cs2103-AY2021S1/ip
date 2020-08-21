@@ -6,12 +6,22 @@ import java.util.Scanner;
 public class Duke {
     private List<Task> toDoList;
     private final Ui ui;
+    private final DukeFileHandler fileHandler;
+
 
     private Duke() {
         ui = new Ui();
         ui.welcome();
+
+        fileHandler = new DukeFileHandler("data/dukeData.txt");
+
+
+        // todo add storage
+        // todo add parse, a class to make sense of user commands
+        // todo TaskList
+
         try {
-            toDoList = DukeFileHandler.readFile();
+            toDoList = fileHandler.readFile();
             if (toDoList.size() > 0) {
                 ui.displayList(toDoList);
             }
@@ -19,7 +29,6 @@ public class Duke {
             e.printStackTrace();
         }
 
-        toDoList.clear();
         startListeningToCommand();
     }
 
@@ -57,7 +66,7 @@ public class Duke {
         switch (command) {
         case "bye":
             try {
-                DukeFileHandler.writeToFile(toDoList);
+                fileHandler.writeToFile(toDoList);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -145,7 +154,6 @@ public class Duke {
         ui.displayThis("Got it. I've added this task: \n         " + task +
                 "\n    Now you have " + toDoList.size() + " tasks in the list");
     }
-
 
 
 //    private void displayThis(String s) {

@@ -10,9 +10,13 @@ import java.util.Scanner;
  * Class to handle the saving of files
  */
 public class DukeFileHandler {
-    private static final String path = "data/dukeData.txt";
+    private final String path;
 
-    public static List<Task> readFile() throws FileNotFoundException {
+    public DukeFileHandler(String path) {
+        this.path = path;
+    }
+
+    public List<Task> readFile() throws FileNotFoundException {
         File file = new File(path);
 
         if (!file.exists()) {
@@ -32,7 +36,7 @@ public class DukeFileHandler {
 
 
     // input is of format TaskType | isDone | Detail | Date (can be null)
-    private static Task createTask(String input) {
+    private Task createTask(String input) {
         String[] inputArr = input.split("\\|");
         boolean isDone = inputArr[1].trim().equals("1");
 
@@ -51,7 +55,7 @@ public class DukeFileHandler {
     }
 
 
-    public static void writeToFile(List<Task> list) throws IOException {
+    public void writeToFile(List<Task> list) throws IOException {
         FileWriter fileWriter = new FileWriter(path);
         StringBuilder content = new StringBuilder();
 
