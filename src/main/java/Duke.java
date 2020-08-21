@@ -1,25 +1,22 @@
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
 public class Duke {
     private static final Path filePath = Paths.get(".", "data", "duke.txt");
 
     private TaskList tasks;
     private final Database db;
+    private final Ui ui;
 
     Duke() {
+        this.ui = new Ui();
         this.db = new Database(Duke.filePath);
         try {
             this.tasks = new TaskList(this.db.loadTasks());
         } catch (DukeException e) {
+            ui.showLoadingError();
             this.tasks = new TaskList();
         }
-    }
-
-    public void speak(String message) {
-        String horizontalLine = "____________________________________________________________";
-        System.out.printf("%s\n%s\n%s\n", horizontalLine, message, horizontalLine);
     }
 
     public void parseInputs(String userInput) throws DukeException {
@@ -40,7 +37,7 @@ public class Duke {
 
         switch (command) {
             case LIST:
-                this.speak(String.format("Here are the tasks in your list:\n%s", this.tasks));
+                this.ui.print(String.format("Here are the tasks in your list:\n%s", this.tasks));
                 break;
 
             case DONE:
@@ -57,7 +54,7 @@ public class Duke {
 
                     this.db.updateExistingTask(taskId, task);
 
-                    this.speak(String.format("Nice! I've marked this task as done:\n%s", task));
+                    this.ui.print(String.format("Nice! I've marked this task as done:\n%s", task));
                 } catch (NumberFormatException e) {
                     throw new DukeException(
                             "Please key in only the integer representing the task you want to mark as complete!");
@@ -78,8 +75,9 @@ public class Duke {
 
                     this.db.deleteExistingTask(taskId);
 
-                    this.speak(String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.",
-                            task, tasks.size()));
+                    this.ui.print(
+                            String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.",
+                                    task, tasks.size()));
                 } catch (NumberFormatException e) {
                     throw new DukeException("Please key in only the integer representing the task you want to delete!");
                 }
@@ -128,7 +126,7 @@ public class Duke {
 
                 this.db.saveNewTask(task);
 
-                this.speak(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
+                this.ui.print(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
                         task, this.tasks.size()));
                 break;
 
@@ -137,24 +135,23 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.speak("Hello! I'm Duke\nWhat can I do for you?");
-
-        Scanner scanner = new Scanner(System.in);
+    public void run() {
+        this.ui.print("Hello! I'm Duke\nWhat can I do for you?");
 
         String userInput;
-        while (!(userInput = scanner.nextLine()).equals("bye")) {
+        while (!(userInput = this.ui.readCommand()).equals("bye")) {
             try {
-                duke.parseInputs(userInput);
+                this.parseInputs(userInput);
             } catch (DukeException e) {
-                duke.speak(e.getMessage());
+                this.ui.showError(e.getMessage());
             }
         }
 
-        duke.speak("Bye. Hope to see you again soon!");
+        this.ui.print("Bye. Hope to see you again soon!");
+    }
 
-        scanner.close();
-
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
     }
 }
