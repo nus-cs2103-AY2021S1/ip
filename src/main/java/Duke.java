@@ -28,12 +28,12 @@ public class Duke {
         BufferedReader bufferedReader = new BufferedReader(fileToRead);
         String inputData = bufferedReader.readLine();
         File file = new File("data/duke.txt");
-        boolean flag = true;
+        boolean flagCheck = true;
 
         while (inputData != null) {
-            if (flag) {
+            if (flagCheck) {
                 System.out.println("Loading data from duke.txt..." + "\n");
-                flag = false;
+                flagCheck = false;
             }
 
             String taskDate;
