@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,8 +15,8 @@ public class Duke {
         List<Task> result = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
+        result = ListStorage.readFromFile();
         printAnswer("", greetings, "");
-
         while (sc.hasNextLine()) {
             String instruction = sc.nextLine();
             String command;
@@ -47,6 +48,7 @@ public class Duke {
                     throw new DukeException("I'm sorry, but I don't know what that means, there is a typo  :-(");
                 }
                 execute(enumCommand, instruction, result);
+                ListStorage.storeToFile(result);
             } catch (DukeException e) {
                 System.out.println(e.toString());
             }

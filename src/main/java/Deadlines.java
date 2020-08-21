@@ -5,6 +5,14 @@ public class Deadlines extends Task {
         this.by = cutTime;
     }
 
+    public String getBy() {
+        return by;
+    }
+
+    public void setBy(String by) {
+        this.by = by;
+    }
+
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
