@@ -13,7 +13,124 @@
     - event <task> /at <yyyy-mm-dd>
 
     -------------------------------------------------
+    Here are your current tasks:
+    1. [T][?] read book
+    2. [T][?] reading books /by
+    3. [T][?] deadline
+    4. [D][?] testDeadline (by: Mar 18 2020)
+    5. [D][?] testDeadline 4 (by: Mar 18 2020)
+    6. [E][?] testEvent2 (at: Mar 18 2020)
+    7. [D][?] testing legit deadline (by: Mar 18 2020)
+    8. [E][?] testing legit event (at: Mar 18 2020)
+    -------------------------------------------------
+    -------------------------------------------------
+    Here are your current tasks:
+    1. [T][?] read book
+    2. [T][?] reading books /by
+    3. [T][?] deadline
+    4. [D][?] testDeadline (by: Mar 18 2020)
+    5. [D][?] testDeadline 4 (by: Mar 18 2020)
+    6. [E][?] testEvent2 (at: Mar 18 2020)
+    7. [D][?] testing legit deadline (by: Mar 18 2020)
+    8. [E][?] testing legit event (at: Mar 18 2020)
+    -------------------------------------------------
+    -------------------------------------------------
+    OOPS! This task does not exist
+    -------------------------------------------------
+    -------------------------------------------------
+    OOPS! This task does not exist
+    -------------------------------------------------
+    -------------------------------------------------
+    Nice! I've marked this task as done: 
+        [D][?] testDeadline 4 (by: Mar 18 2020)
+    -------------------------------------------------
+    -------------------------------------------------
+    Here are your current tasks:
+    1. [T][?] read book
+    2. [T][?] reading books /by
+    3. [T][?] deadline
+    4. [D][?] testDeadline (by: Mar 18 2020)
+    5. [D][?] testDeadline 4 (by: Mar 18 2020)
+    6. [E][?] testEvent2 (at: Mar 18 2020)
+    7. [D][?] testing legit deadline (by: Mar 18 2020)
+    8. [E][?] testing legit event (at: Mar 18 2020)
+    -------------------------------------------------
+    -------------------------------------------------
+    Nice! I've marked this task as done: 
+        [D][?] testDeadline 4 (by: Mar 18 2020)
+    -------------------------------------------------
+    -------------------------------------------------
+    Nice! I've marked this task as done: 
+        [D][?] testDeadline 4 (by: Mar 18 2020)
+    -------------------------------------------------
+    -------------------------------------------------
+    Here are your current tasks:
+    1. [T][?] read book
+    2. [T][?] reading books /by
+    3. [T][?] deadline
+    4. [D][?] testDeadline (by: Mar 18 2020)
+    5. [D][?] testDeadline 4 (by: Mar 18 2020)
+    6. [E][?] testEvent2 (at: Mar 18 2020)
+    7. [D][?] testing legit deadline (by: Mar 18 2020)
+    8. [E][?] testing legit event (at: Mar 18 2020)
+    -------------------------------------------------
+    -------------------------------------------------
+    OKay, I've remove this task: 
+        [T][?] reading books /by
+    Now you have 7 tasks in the list
+    -------------------------------------------------
+    -------------------------------------------------
+    Here are your current tasks:
+    1. [T][?] read book
+    2. [T][?] deadline
+    3. [D][?] testDeadline (by: Mar 18 2020)
+    4. [D][?] testDeadline 4 (by: Mar 18 2020)
+    5. [E][?] testEvent2 (at: Mar 18 2020)
+    6. [D][?] testing legit deadline (by: Mar 18 2020)
+    7. [E][?] testing legit event (at: Mar 18 2020)
+    -------------------------------------------------
+    -------------------------------------------------
+    OOPS! This task does not exist
+    -------------------------------------------------
+    -------------------------------------------------
+    Here are your current tasks:
+    1. [T][?] read book
+    2. [T][?] deadline
+    3. [D][?] testDeadline (by: Mar 18 2020)
+    4. [D][?] testDeadline 4 (by: Mar 18 2020)
+    5. [E][?] testEvent2 (at: Mar 18 2020)
+    6. [D][?] testing legit deadline (by: Mar 18 2020)
+    7. [E][?] testing legit event (at: Mar 18 2020)
+    -------------------------------------------------
+    -------------------------------------------------
+    OOPS! This task does not exist
+    -------------------------------------------------
+    -------------------------------------------------
+    List is cleared
+    -------------------------------------------------
+    -------------------------------------------------
     OOPS! There's nothing in the list :-(
+    -------------------------------------------------
+    -------------------------------------------------
+    OOPS! This task does not exist
+    -------------------------------------------------
+    -------------------------------------------------
+    OOPS! This task does not exist
+    -------------------------------------------------
+    -------------------------------------------------
+    OOPS! This task does not exist
+    -------------------------------------------------
+    -------------------------------------------------
+    OOPS! There's nothing in the list :-(
+    -------------------------------------------------
+    -------------------------------------------------
+    OOPS! This task does not exist
+    -------------------------------------------------
+    -------------------------------------------------
+    OOPS! This task does not exist
+    -------------------------------------------------
+    -------------------------------------------------
+    OOPS! This task does not exist
     -------------------------------------------------
     -------------------------------------------------
     Got it. I've added this task: 
@@ -21,74 +138,116 @@
     Now you have 1 tasks in the list
     -------------------------------------------------
     -------------------------------------------------
+    Here are your current tasks:
+    1. [T][?] read book
+    -------------------------------------------------
+    -------------------------------------------------
     Got it. I've added this task: 
-         [T][?] return book
+         [T][?] reading books /by
     Now you have 2 tasks in the list
     -------------------------------------------------
     -------------------------------------------------
-    Here are your current tasks:
-    1. [T][?] read book
-    2. [T][?] return book
-    -------------------------------------------------
-    -------------------------------------------------
-    Nice! I've marked this task as done: 
-        [T][?] read book
-    -------------------------------------------------
-    -------------------------------------------------
-    Nice! I've marked this task as done: 
-        [T][?] return book
-    -------------------------------------------------
-    -------------------------------------------------
-    Here are your current tasks:
-    1. [T][?] read book
-    2. [T][?] return book
-    -------------------------------------------------
-    -------------------------------------------------
     Got it. I've added this task: 
-         [T][?] borrow book
+         [T][?] deadline
     Now you have 3 tasks in the list
     -------------------------------------------------
     -------------------------------------------------
     Here are your current tasks:
     1. [T][?] read book
-    2. [T][?] return book
-    3. [T][?] borrow book
+    2. [T][?] reading books /by
+    3. [T][?] deadline
     -------------------------------------------------
     -------------------------------------------------
     Got it. I've added this task: 
-         [D][?] return book (by: Feb 03 2019)
+         [D][?] testDeadline (by: Mar 18 2020)
     Now you have 4 tasks in the list
     -------------------------------------------------
     -------------------------------------------------
+    Here are your current tasks:
+    1. [T][?] read book
+    2. [T][?] reading books /by
+    3. [T][?] deadline
+    4. [D][?] testDeadline (by: Mar 18 2020)
+    -------------------------------------------------
+    -------------------------------------------------
+    OOPS! Deadline format isn't correct
+    -------------------------------------------------
+    -------------------------------------------------
+    OOPS! Deadline format isn't correct
+    -------------------------------------------------
+    -------------------------------------------------
+    Here are your current tasks:
+    1. [T][?] read book
+    2. [T][?] reading books /by
+    3. [T][?] deadline
+    4. [D][?] testDeadline (by: Mar 18 2020)
+    -------------------------------------------------
+    -------------------------------------------------
     Got it. I've added this task: 
-         [E][?] project meeting (at: Apr 02 2020)
+         [D][?] testDeadline 4 (by: Mar 18 2020)
     Now you have 5 tasks in the list
     -------------------------------------------------
     -------------------------------------------------
-    OKay, I've remove this task: 
-        [T][?] return book
-    Now you have 4 tasks in the list
+    OOPS! Deadline format isn't correct
+    -------------------------------------------------
+    -------------------------------------------------
+    OOPS! Deadline format isn't correct
     -------------------------------------------------
     -------------------------------------------------
     Here are your current tasks:
     1. [T][?] read book
-    2. [T][?] borrow book
-    3. [D][?] return book (by: Feb 03 2019)
-    4. [E][?] project meeting (at: Apr 02 2020)
+    2. [T][?] reading books /by
+    3. [T][?] deadline
+    4. [D][?] testDeadline (by: Mar 18 2020)
+    5. [D][?] testDeadline 4 (by: Mar 18 2020)
     -------------------------------------------------
     -------------------------------------------------
-    OOPS! This task does not exist
+    OOPS! Event format isn't correct
     -------------------------------------------------
     -------------------------------------------------
-    OKay, I've remove this task: 
-        [T][?] read book
-    Now you have 3 tasks in the list
+    Got it. I've added this task: 
+         [E][?] testEvent2 (at: Mar 18 2020)
+    Now you have 6 tasks in the list
+    -------------------------------------------------
+    -------------------------------------------------
+    OOPS! Event format isn't correct
     -------------------------------------------------
     -------------------------------------------------
     Here are your current tasks:
-    1. [T][?] borrow book
-    2. [D][?] return book (by: Feb 03 2019)
-    3. [E][?] project meeting (at: Apr 02 2020)
+    1. [T][?] read book
+    2. [T][?] reading books /by
+    3. [T][?] deadline
+    4. [D][?] testDeadline (by: Mar 18 2020)
+    5. [D][?] testDeadline 4 (by: Mar 18 2020)
+    6. [E][?] testEvent2 (at: Mar 18 2020)
+    -------------------------------------------------
+    -------------------------------------------------
+    OOPS! Event format isn't correct
+    -------------------------------------------------
+    -------------------------------------------------
+    OOPS! Event format isn't correct
+    -------------------------------------------------
+    -------------------------------------------------
+    OOPS! Event format isn't correct
+    -------------------------------------------------
+    -------------------------------------------------
+    Here are your current tasks:
+    1. [T][?] read book
+    2. [T][?] reading books /by
+    3. [T][?] deadline
+    4. [D][?] testDeadline (by: Mar 18 2020)
+    5. [D][?] testDeadline 4 (by: Mar 18 2020)
+    6. [E][?] testEvent2 (at: Mar 18 2020)
+    -------------------------------------------------
+    -------------------------------------------------
+    Got it. I've added this task: 
+         [D][?] testing legit deadline (by: Mar 18 2020)
+    Now you have 7 tasks in the list
+    -------------------------------------------------
+    -------------------------------------------------
+    Got it. I've added this task: 
+         [E][?] testing legit event (at: Mar 18 2020)
+    Now you have 8 tasks in the list
     -------------------------------------------------
     -------------------------------------------------
     Bye. Hope to see you again soon!
