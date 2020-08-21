@@ -3,6 +3,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -78,6 +83,8 @@ public class Duke {
                     }
                 } catch(DukeException e) {
                     System.err.println(e);
+                } catch (DateTimeParseException e) {
+                    System.err.println("Please input with the format dd/mm/yyyy HHmm");
                 }
             } else {
                 System.err.println(new CommandException());
@@ -120,8 +127,10 @@ public class Duke {
             }
         } else if(next[0].equals("deadline")) {
             try {
-                String[] str = next[1].split("/by", 2);
-                Task temp = new Deadline(str[0], str[1]);
+                String[] str = next[1].split("/by ", 2);
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                LocalDateTime date = LocalDateTime.parse(str[1],dateFormatter);
+                Task temp = new Deadline(str[0], date);
                 this.taskList.add(temp);
                 System.out.println("********************************************");
                 System.out.println("Added new task " + temp);
@@ -129,11 +138,15 @@ public class Duke {
                 System.out.println();
             } catch (IndexOutOfBoundsException e) {
                 throw new DeadlineException();
+            } catch (DateTimeParseException e) {
+                throw e;
             }
         } else {
             try {
-                String[] str = next[1].split("/at", 2);
-                Task temp = new Event(str[0], str[1]);
+                String[] str = next[1].split("/at ", 2);
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                LocalDateTime date = LocalDateTime.parse(str[1],dateFormatter);
+                Task temp = new Event(str[0], date);
                 this.taskList.add(temp);
                 System.out.println("********************************************");
                 System.out.println("Added new task " + temp);
@@ -141,6 +154,8 @@ public class Duke {
                 System.out.println();
             } catch (IndexOutOfBoundsException e) {
                 throw new DeadlineException();
+            } catch (DateTimeParseException e) {
+                throw e;
             }
         }
 
@@ -176,14 +191,20 @@ public class Duke {
                     if (res[1].equals("1")) {
                         isDone = true;
                     }
-                    Task cur = new Deadline(res[2], isDone, res[3]);
+                    String datePattern = "dd/MM/yyyy HH:mm";
+                    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(datePattern);
+                    LocalDateTime date =LocalDateTime.parse(res[3],dateFormatter);
+                    Task cur = new Deadline(res[2], isDone, date);
                     this.taskList.add(cur);
                 } else {
                     boolean isDone = false;
                     if (res[1].equals("1")) {
                         isDone = true;
                     }
-                    Task cur = new Event(res[2], isDone, res[3]);
+                    String datePattern = "dd/MM/yyyy HH:mm";
+                    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(datePattern);
+                    LocalDateTime date =LocalDateTime.parse(res[3],dateFormatter);
+                    Task cur = new Event(res[2], isDone, date);
                     this.taskList.add(cur);
                 }
             }
