@@ -36,8 +36,7 @@ public class Duke {
                     case DELETE:
                         Validator.info(command, splitOrder.length, false);
                         int deleteTaskId = Validator.index(command, splitOrder[1], splitOrder.length);
-                        tw.deleteTask(deleteTaskId);
-                        output = printDesign(lst.deleteWork(deleteTaskId));
+                        output = printDesign(tw.deleteTask(deleteTaskId));
                         break;
                     case TODO:
                     case DEADLINE:

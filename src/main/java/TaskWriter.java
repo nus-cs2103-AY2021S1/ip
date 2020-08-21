@@ -70,16 +70,17 @@ public class TaskWriter {
             return "Got it. MUG has added this task:\n"
                     + newTask;
         } catch (IOException ex) {
-            throw new IOException("Something went wrong. Mug fail to add the Task :_:");
+            throw new IOException("Something went wrong. MUG fail to add the Task :_:");
         }
     }
 
-    public void deleteTask(int taskId) {
+    public String deleteTask(int taskId) throws IOException {
         String tempFile = "temp.txt";
         File oldFile = new File(this.filepath);
         File newFile = new File(tempFile);
-        int taskTrack = 1;
+        int taskTrack = 0;
         String line;
+        Task deleteTask = null;
 
         try {
             FileWriter fw = new FileWriter(tempFile, true);
@@ -90,10 +91,15 @@ public class TaskWriter {
 
             while(sc.hasNext()) {
                 line = sc.next();
+                taskTrack++;
                 if(taskTrack != taskId) {
                     pw.println(line);
+                } else {
+                    String[] newLine = line.split("[|]" , 3);
+                    boolean isDone = Integer.parseInt(newLine[1]) == 1;
+                    Command command = Validator.command(newLine[0]);
+                    deleteTask = taskCreator(command, isDone, newLine[2], "[|]", "[|]");
                 }
-                taskTrack++;
             }
             sc.close();
             pw.flush();
@@ -102,7 +108,14 @@ public class TaskWriter {
             File renameFile = new File(this.filepath);
             newFile.renameTo(renameFile);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            throw new IOException("Something went wrong. MUG fail to delete the Task :_:");
+        }
+
+        if (taskId > taskTrack) {
+            return "MUG don't have this task to delete @_@";
+        } else {
+            return "Noted. MUG has removed this task:\n"
+                    + deleteTask;
         }
     }
 
@@ -146,7 +159,7 @@ public class TaskWriter {
         }
 
         if (taskId > taskTrack) {
-            return "MUG don't have this work to mark as Done :>";
+            return "MUG don't have this task to mark as Done :>";
         } else if(marked) {
             return "MUG had marked this task as done:\n"
                     + doneTask;
