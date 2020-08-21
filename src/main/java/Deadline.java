@@ -1,9 +1,15 @@
-public class Deadline extends Task {
-    private final String byTime;
+import java.time.LocalDate;
 
-    public Deadline(String description, String byTime) {
+public class Deadline extends Task {
+    private final LocalDate byTime;
+
+    public Deadline(String description, String byTime) throws InvalidCommandException {
         super(description);
-        this.byTime = byTime;
+        try {
+            this.byTime = LocalDate.parse(byTime);
+        } catch (Exception e) {
+            throw new InvalidCommandException("Invalid input date: " + e.getMessage());
+        }
     }
 
     @Override
