@@ -49,26 +49,38 @@ public class Duke {
         BufferedReader br = Files.newBufferedReader(filePath);
 
         List<Task> tasks = new ArrayList<>();
-        br.lines().forEach(line -> tasks.add(parseStorageData(line)));
+        br.lines().forEach(line -> {
+            try {
+                Task task = parseStorageData(line);
+                tasks.add(task);
+            } catch (StorageException ex) {
+                System.out.println(ex.getMessage());
+            }
+        });
         return tasks;
     }
 
-    private static Task parseStorageData(String line) {
-        // TODO: handle parse error
-
+    private static Task parseStorageData(String line) throws StorageException {
         // split by the pipe `|` token
         String[] tokens = line.split("(\\s)*(\\|)(\\s)*");
         Task task;
 
-        if (tokens[0].equals("T")) {
+        if (tokens.length < 2) {
+            throw new StorageException("Data" + line + "in wrong format! Skipping...");
+        }
+
+        switch (tokens[0]) {
+        case "T":
             task = new Todo(tokens[2]);
-        } else if (tokens[0].equals("D")) {
+            break;
+        case "D":
             task = new Deadline(tokens[2], tokens[3]);
-        } else if (tokens[0].equals("E")) {
+            break;
+        case "E":
             task = new Event(tokens[2], tokens[3]);
-        } else {
-            // TODO: throw error here.
-            task = null;
+            break;
+        default:
+            throw new StorageException("Unknown task identifier " + tokens[0] + "! Skipping...");
         }
 
         if (tokens[1].equals("1")) {
@@ -80,7 +92,7 @@ public class Duke {
 
     /**
      * Update the `duke.txt` file that is used for saving tasks
-     * 
+     *
      * @param tasks a list of task to save
      * @return true indicating storage is updated, or false indicating storage fails to update
      */
@@ -115,7 +127,7 @@ public class Duke {
             }
 
             buildChatFence();
-            
+
             // handle commands
             try {
                 String[] parsed = parseInput(input);
@@ -130,69 +142,69 @@ public class Duke {
                 }
 
                 switch (command) {
-                    case LIST:
-                        // we ignore the argument after `list`.
-                        System.out.println("     Here are the tasks in your list:");
-                        for (int i = 0; i < taskList.size(); i++) {
-                            System.out.printf("     %d. %s%n", i + 1, taskList.get(i).showTask());
+                case LIST:
+                    // we ignore the argument after `list`.
+                    System.out.println("     Here are the tasks in your list:");
+                    for (int i = 0; i < taskList.size(); i++) {
+                        System.out.printf("     %d. %s%n", i + 1, taskList.get(i).showTask());
+                    }
+                    break;
+                case DONE:
+                    try {
+                        int taskNumber = Integer.parseInt(parsed[1]) - 1;
+                        // Check that the task number makes sense.
+                        if (taskNumber >= 0 && taskNumber < taskList.size()) {
+                            taskList.get(taskNumber).markAsDone();
+                            Duke.updateStorage(this.taskList);
+                            System.out.println("     Good job! I've marked this task as done:");
+                            System.out.printf("      %s%n", taskList.get(taskNumber).showTask());
+                        } else {
+                            System.out.println("     Sorry, I can't find it in your list!");
                         }
-                        break;
-                    case DONE:
-                        try {
-                            int taskNumber = Integer.parseInt(parsed[1]) - 1;
-                            // Check that the task number makes sense.
-                            if (taskNumber >= 0 && taskNumber < taskList.size()) {
-                                taskList.get(taskNumber).markAsDone();
-                                Duke.updateStorage(this.taskList);
-                                System.out.println("     Good job! I've marked this task as done:");
-                                System.out.printf("      %s%n", taskList.get(taskNumber).showTask());
-                            } else {
-                                System.out.println("     Sorry, I can't find it in your list!");
-                            }
-                        } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
-                            throw new InvalidUsageException("Usage: done <task number>");
+                    } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
+                        throw new InvalidUsageException("Usage: done <task number>");
+                    }
+                    break;
+                case DELETE:
+                    try {
+                        int taskNumber = Integer.parseInt(parsed[1]) - 1;
+                        // Check that the task number makes sense.
+                        if (taskNumber >= 0 && taskNumber < taskList.size()) {
+                            System.out.println("     Noted. I've removed this task: ");
+                            System.out.printf("      %s%n", taskList.remove(taskNumber).showTask());
+                            System.out.printf("     Now you have %d %s in the list%n",
+                                    taskList.size(), taskList.size() > 1 ? "tasks" : "task");
+                            Duke.updateStorage(this.taskList);
+                        } else {
+                            System.out.println("     Sorry, I can't find it in your list!");
                         }
-                        break;
-                    case DELETE:
-                        try {
-                            int taskNumber = Integer.parseInt(parsed[1]) - 1;
-                            // Check that the task number makes sense.
-                            if (taskNumber >= 0 && taskNumber < taskList.size()) {
-                                System.out.println("     Noted. I've removed this task: ");
-                                System.out.printf("      %s%n", taskList.remove(taskNumber).showTask());
-                                System.out.printf("     Now you have %d %s in the list%n",
-                                        taskList.size(), taskList.size() > 1 ? "tasks" : "task");
-                                Duke.updateStorage(this.taskList);
-                            } else {
-                                System.out.println("     Sorry, I can't find it in your list!");
-                            }
-                        } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
-                            throw new InvalidUsageException("Usage: delete <task number>");
-                        }
-                        break;
-                    case TODO:
-                        try {
-                            this.addTodo(parsed[1]);
-                        } catch (ArrayIndexOutOfBoundsException ex) {
-                            throw new TodoInvalidUsageException("Todo description cannot be empty.");
-                        }
-                        break;
-                    case DEADLINE:
-                        try {
-                            this.addDeadline(parsed[1]);
-                        } catch (ArrayIndexOutOfBoundsException ex) {
-                            throw new DeadlineInvalidUsageException("Deadline description cannot be empty.");
-                        }
-                        break;
-                    case EVENT:
-                        try {
-                            this.addEvent(parsed[1]);
-                        } catch (ArrayIndexOutOfBoundsException ex) {
-                            throw new EventInvalidUsageException("Event description cannot be empty.");
-                        }
-                        break;
-                    default:
-                        throw new UnknownCommandException();
+                    } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
+                        throw new InvalidUsageException("Usage: delete <task number>");
+                    }
+                    break;
+                case TODO:
+                    try {
+                        this.addTodo(parsed[1]);
+                    } catch (ArrayIndexOutOfBoundsException ex) {
+                        throw new TodoInvalidUsageException("Todo description cannot be empty.");
+                    }
+                    break;
+                case DEADLINE:
+                    try {
+                        this.addDeadline(parsed[1]);
+                    } catch (ArrayIndexOutOfBoundsException ex) {
+                        throw new DeadlineInvalidUsageException("Deadline description cannot be empty.");
+                    }
+                    break;
+                case EVENT:
+                    try {
+                        this.addEvent(parsed[1]);
+                    } catch (ArrayIndexOutOfBoundsException ex) {
+                        throw new EventInvalidUsageException("Event description cannot be empty.");
+                    }
+                    break;
+                default:
+                    throw new UnknownCommandException();
                 }
             } catch (InvalidUsageException | UnknownCommandException ex) {
                 System.out.println(ex.getMessage());
