@@ -4,17 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.function.Predicate;
 
 public class Duke {
-    private static final String horizontalLine = "\t=================================================================================";
     private static int n = -1;
     private static int m = -1;
-
-    private static String output(String message) {
-        return horizontalLine + "\n\t  " + message + "\n" + horizontalLine + "\n";
-    }
 
     private static boolean isDoneCommand(String cmd, int count) throws InvalidCommandException {
         if (cmd.startsWith("done ")) {
@@ -133,17 +126,6 @@ public class Duke {
         } catch (IOException e) {
             throw new InvalidCommandException(e.getMessage());
         }
-    }
-
-    private static void printList(int count, List<Task> list, Predicate<Task> predicate, String note) {
-        System.out.println(horizontalLine + "\n\t  " + "Here are the tasks " + note + "in your list:");
-        for (int i = 0; i < count; i++) {
-            Task task = list.get(i);
-            if (predicate.test(task)) {
-                System.out.println("\t  " + (i + 1) + "." + list.get(i));
-            }
-        }
-        System.out.println(horizontalLine + "\n");
     }
 
     public static void main(String[] args) throws IOException {
