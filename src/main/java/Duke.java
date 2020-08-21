@@ -1,4 +1,7 @@
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,17 +16,24 @@ public class Duke {
     private final static String DEADLINE_COMMAND = "deadline";
     private final static String EVENT_COMMAND = "event";
     private final static String DELETE_COMMAND = "delete";
+    private final String DATA_DIRECTORY = "data";
+    private final String SAVED_FILE_PATH = "data/duke.txt";
     private List<Task> tasks;
 
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.hello();
-        duke.handle();
+        duke.start();
         duke.bye();
     }
 
     private Duke() {
         tasks = new ArrayList<>();
+    }
+
+    private void start() {
+        this.loadSavedFile();
+        this.handle();
     }
 
     private void handle() {
@@ -106,6 +116,11 @@ public class Duke {
         Task toAdd = new ToDo(description);
         this.tasks.add(toAdd);
         sayAddedTask(toAdd);
+        try {
+            this.save();
+        } catch (IOException e) {
+            this.sayException(e);
+        }
     }
 
     private void addDeadline(String text) {
@@ -114,6 +129,11 @@ public class Duke {
         Task toAdd = new Deadline(description, deadline);
         this.tasks.add(toAdd);
         sayAddedTask(toAdd);
+        try {
+            this.save();
+        } catch (IOException e) {
+            this.sayException(e);
+        }
     }
 
     private void addEvent(String text) {
@@ -122,6 +142,11 @@ public class Duke {
         Task toAdd = new Event(description, time);
         this.tasks.add(toAdd);
         sayAddedTask(toAdd);
+        try {
+            this.save();
+        } catch (IOException e) {
+            this.sayException(e);
+        }
     }
 
     private void sayAddedTask(Task task) {
@@ -141,6 +166,52 @@ public class Duke {
         say(text);
     }
 
+    private void loadSavedFile() {
+
+        File directory = new File(DATA_DIRECTORY);
+        directory.mkdir(); // create the directory if it not existed
+
+        File savedFile = new File(SAVED_FILE_PATH);
+        try {
+            savedFile.createNewFile();
+            Scanner sc = new Scanner(savedFile);
+            while (sc.hasNext()) {
+                String taskString = sc.nextLine();
+                String[] taskComponents = taskString.split(" - ");
+                String taskType = taskComponents[0];
+                boolean isDone = taskComponents[1].equals("1");
+                String description = taskComponents[2];
+
+                Task toAdd;
+                switch (taskType) {
+                    case "T":
+                        toAdd = new ToDo(description, isDone);
+                        break;
+                    case "D":
+                        toAdd = new Deadline(description, taskComponents[3], isDone);
+                        break;
+                    case "E":
+                        toAdd = new Event(description, taskComponents[3], isDone);
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Saved file contains incorrect format");
+                }
+                this.tasks.add(toAdd);
+            }
+        } catch (IOException e) {
+            sayException(e);
+        }
+
+    }
+
+    private void save() throws IOException {
+        FileWriter fw = new FileWriter(SAVED_FILE_PATH);
+        for (Task task : this.tasks) {
+            fw.write(task.simplifiedTaskString() + "\n");
+        }
+        fw.close();
+    }
+
     private void bye() {
         say("Bye. Hope to see you again soon!");
     }
@@ -152,6 +223,11 @@ public class Duke {
             toDone.markAsDone();
             String text = "Nice! I've marked this task as done:\n" + toDone;
             say(text);
+            try {
+                this.save();
+            } catch (IOException e) {
+                this.sayException(e);
+            }
         } catch (IndexOutOfBoundsException e) {
             sayException(new DoneOutOfBoundException(oneBasedIndex));
         }
