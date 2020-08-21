@@ -5,14 +5,14 @@ public class Duke {
     private static final Path filePath = Paths.get(".", "data", "duke.txt");
 
     private TaskList tasks;
-    private final Database db;
+    private final Storage storage;
     private final Ui ui;
 
     Duke() {
         this.ui = new Ui();
-        this.db = new Database(Duke.filePath);
+        this.storage = new Storage(Duke.filePath);
         try {
-            this.tasks = new TaskList(this.db.loadTasks());
+            this.tasks = new TaskList(this.storage.loadTasks());
         } catch (DukeException e) {
             ui.showLoadingError();
             this.tasks = new TaskList();
@@ -52,7 +52,7 @@ public class Duke {
                     Task task = this.tasks.getTask(taskId);
                     task.markAsDone();
 
-                    this.db.updateExistingTask(taskId, task);
+                    this.storage.updateExistingTask(taskId, task);
 
                     this.ui.print(String.format("Nice! I've marked this task as done:\n%s", task));
                 } catch (NumberFormatException e) {
@@ -73,7 +73,7 @@ public class Duke {
                     int taskId = Integer.parseInt(commandDetails);
                     Task task = this.tasks.deleteTask(taskId);
 
-                    this.db.deleteExistingTask(taskId);
+                    this.storage.deleteExistingTask(taskId);
 
                     this.ui.print(
                             String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.",
@@ -124,7 +124,7 @@ public class Duke {
 
                 this.tasks.addTask(task);
 
-                this.db.saveNewTask(task);
+                this.storage.saveNewTask(task);
 
                 this.ui.print(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
                         task, this.tasks.size()));

@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Database {
+public class Storage {
     private final Path filePath;
     private List<String> serialisedTasks;
 
-    public Database(Path filePath) {
+    public Storage(Path filePath) {
         this.filePath = filePath;
 
         try {
@@ -25,7 +25,7 @@ public class Database {
             this.serialisedTasks = Files.readAllLines(filePath);
         } catch (IOException e) {
             // TODO: add better error handling
-            System.out.println("Something went wrong reading the file");
+            System.out.println("Something went wrong when loading tasks from the storage!");
         }
     }
 
@@ -37,7 +37,7 @@ public class Database {
             String[] tokens = serialisedTask.split(" \\| ");
 
             if (tokens.length < 3) {
-                throw new DukeException("Database is corrupted!");
+                throw new DukeException("Storage is corrupted!");
             }
 
             String taskType = tokens[0];
@@ -51,7 +51,7 @@ public class Database {
                     break;
                 case "D":
                     if (tokens.length < 4) {
-                        throw new DukeException("Database is corrupted! Missing due date for Deadline");
+                        throw new DukeException("Storage is corrupted! Missing due date for Deadline");
                     }
                     String by = tokens[3];
                     tasks.add(new Deadline(desc, by, isDone));
@@ -59,7 +59,7 @@ public class Database {
                     break;
                 case "E":
                     if (tokens.length < 4) {
-                        throw new DukeException("Database is corrupted! Missing date for Event");
+                        throw new DukeException("Storage is corrupted! Missing date for Event");
                     }
                     String at = tokens[3];
                     tasks.add(new Event(desc, at, isDone));
@@ -82,7 +82,7 @@ public class Database {
         try {
             this.writeToFile();
         } catch (IOException e) {
-            throw new DukeException("Error saving new task to file!");
+            throw new DukeException("Error saving new task to storage!");
         }
     }
 
@@ -92,7 +92,7 @@ public class Database {
         try {
             this.writeToFile();
         } catch (IOException e) {
-            throw new DukeException("Error saving updated task to file!");
+            throw new DukeException("Error saving updated task to storage!");
         }
     }
 
@@ -102,7 +102,7 @@ public class Database {
         try {
             this.writeToFile();
         } catch (IOException e) {
-            throw new DukeException("Error saving deleted task to file!");
+            throw new DukeException("Error saving deleted task to storage!");
         }
     }
 }
