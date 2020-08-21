@@ -111,7 +111,7 @@ public class Parser {
         } else if (input.startsWith("happens on ")) {
             return new HappensCommand(input);
         } else {
-            return Input.TASK;
+            return new AddCommand(input);
         }
     }
 
