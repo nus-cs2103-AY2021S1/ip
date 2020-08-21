@@ -14,8 +14,13 @@ IF ERRORLEVEL 1 (
 )
 REM no error here, errorlevel == 0
 
-REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ..\bin Viscount < input.txt > ACTUAL.TXT
+REM run the program, feed commands from the input files and redirect the output to the ACTUAL.TXT
+java -classpath ..\bin Viscount < input1.txt >> ACTUAL.TXT
+java -classpath ..\bin Viscount < input2.txt >> ACTUAL.TXT
+java -classpath ..\bin Viscount < input3.txt >> ACTUAL.TXT
+
+REM delete data afterwards
+del data\viscount.txt
 
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT

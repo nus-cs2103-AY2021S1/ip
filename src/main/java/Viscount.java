@@ -1,3 +1,14 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,6 +23,7 @@ public class Viscount {
             "  \\ V /| |____) | |___| (_) | |_| | | | | |_  \n" +
             "   \\_/ |_|_____/ \\_____\\___/ \\__,_|_| |_|\\__|";
     private static final String HORIZONTAL_LINE = "__________________________________________________";
+    private static final String DATA_FILE_PATH = System.getProperty("user.dir") + "/data/viscount.txt";
 
     private static List<Task> tasks = new ArrayList<>();
 
@@ -40,6 +52,7 @@ public class Viscount {
 
     private static void addToTaskList(Task task) {
         tasks.add(task);
+        Viscount.saveToDisk();
 
         Viscount.speak("Very well. I've added this task:\n"
                 + task.toString()
@@ -49,6 +62,7 @@ public class Viscount {
     private static void removeFromTaskList(int taskIndex) {
         Task task = tasks.get(taskIndex);
         tasks.remove(taskIndex);
+        Viscount.saveToDisk();
 
         Viscount.speak("Very well. I've removed this task:\n"
                 + task.toString()
@@ -57,6 +71,7 @@ public class Viscount {
 
     private static void markAsDone(Task task) {
         task.setDone(true);
+        Viscount.saveToDisk();
         
         Viscount.speak("Very good! I have marked this task as done:\n" + task.toString());
     }
@@ -163,8 +178,70 @@ public class Viscount {
         }
     }
 
+    private static void loadFromDisk() {
+        Path path = Paths.get(Viscount.DATA_FILE_PATH);
+        boolean doesFileExist = Files.exists(path);
+
+        if (doesFileExist) {
+            try {
+                File f = new File(Viscount.DATA_FILE_PATH);
+                Scanner sc = new Scanner(f);
+                while (sc.hasNext()) {
+                    String line = sc.nextLine();
+                    if (line.isEmpty()) {
+                        // If the data file has empty lines, skip them
+                        continue;
+                    } else {
+                        List<String> taskData = Arrays.asList(line.split("\\|"));
+
+                        String taskType = taskData.get(0);
+                        boolean taskIsDone = !taskData.get(1).equals("0");
+                        String taskDescription = taskData.get(2);
+
+                        if (taskType.equals("T")) {
+                            tasks.add(new Todo(taskDescription, taskIsDone));
+                        } else if (taskType.equals("D")) {
+                            String dueDate = taskData.get(3);
+                            tasks.add(new Deadline(taskDescription, taskIsDone, dueDate));
+                        } else if (taskType.equals("E")) {
+                            String eventTime = taskData.get(3);
+                            tasks.add(new Event(taskDescription, taskIsDone, eventTime));
+                        }
+                    }
+                }
+            } catch (FileNotFoundException e) {
+                System.out.println(e.toString());
+                System.out.println("Error: file not found. Viscount shutting down.");
+            }
+        } else {
+            try {
+                Files.write(path, new ArrayList<String>(), StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
+            } catch (IOException e) {
+                System.out.println(e.toString());
+                System.out.println("Error: unable to create data file. Viscount shutting down.");
+            }
+        }
+    }
+
+    private static void saveToDisk() {
+        Path path = Paths.get(Viscount.DATA_FILE_PATH);
+        List<String> savedData = new ArrayList<>();
+
+        for (Task task : tasks) {
+            savedData.add(task.toTaskData());
+        }
+
+        try {
+            Files.write(path, savedData, StandardCharsets.UTF_8, StandardOpenOption.WRITE);
+        } catch (IOException e) {
+            System.out.println(e.toString());
+            System.out.println("Error: unable to write to data file. Viscount shutting down.");
+        }
+    }
+
     public static void main(String[] args) {
         Viscount.printLogo();
+        Viscount.loadFromDisk();
 
         Viscount.speak("Good day to you! I'm Viscount.\nWhat can I do for you on this blessed day?");
 

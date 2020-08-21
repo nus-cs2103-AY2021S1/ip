@@ -1,0 +1,8 @@
+blah
+todo
+todo read book
+deadline
+deadline /by
+deadline return book /by
+deadline return book /by wednesday
+bye
