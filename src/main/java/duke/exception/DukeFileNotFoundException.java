@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Represents a Duke exception in which a file cannot be loaded.
+ */
 public class DukeFileNotFoundException extends DukeException {
     @Override
     public String toString() {

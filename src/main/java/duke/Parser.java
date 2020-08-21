@@ -2,9 +2,17 @@ package duke;
 
 import duke.command.*;
 
+/**
+ * Deals with making sense of the user command.
+ */
 public class Parser {
 
-    // Parses user input and returns corresponding Command
+    /**
+     * Parses the user input and returns a corresponding command to be executed.
+     *
+     * @param input A string representing the user input.
+     * @return A command to be executed.
+     */
     public static Command parse(String input) {
         // Tag refers to the command to perform
         String tag = input.split(" ")[0];
