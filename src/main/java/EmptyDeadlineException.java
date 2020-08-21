@@ -3,6 +3,6 @@ package main.java;
 public class EmptyDeadlineException extends DukeException {
     @Override
     public String toString() {
-        return super.toString() + " " + "The description of a deadline cannot be empty.";
+        return super.toString() + " " + "The description or deadline of a deadline cannot be empty. Format: deadline [description] /by [deadline]";
     }
 }
