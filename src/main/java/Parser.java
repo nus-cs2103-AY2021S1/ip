@@ -96,7 +96,7 @@ public class Parser {
         }
     }
 
-    public static Input getType(String input, int count) throws InvalidCommandException {
+    public static Input getType(String input) throws InvalidCommandException {
         if (input.equals("bye")) {
             return Input.BYE;
         } else if (input.equals("list")) {
