@@ -10,7 +10,7 @@ public class Store {
         this.taskStore = new ArrayList<>();
     }
 
-    private Task processTaskType(String[] inputs, String type) {
+    private Task processTaskType(String[] inputs, String type) throws DukeException {
         switch (type) {
             case "todo":
                 return new TodoTask(inputs[0]);
@@ -23,7 +23,7 @@ public class Store {
         }
     }
 
-    public void add(String[] inputs, String type) {
+    public void add(String[] inputs, String type) throws DukeException {
         Task newTask = processTaskType(inputs, type);
         taskStore.add(newTask);
         StringUtils.printWithWrapper(new String[]{
@@ -32,7 +32,7 @@ public class Store {
                 getListStatus()}, false);
     }
 
-    public void markTaskAsDone(int i) {
+    public void markTaskAsDone(int i) throws DukeException {
         taskStore.set(i - 1, taskStore.get(i - 1).markAsDone());
         StringUtils.printWithWrapper(new String[]{
                 "OK! I have marked the following task as done:",

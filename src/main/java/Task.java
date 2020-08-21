@@ -20,7 +20,7 @@ public abstract class Task {
         return (isDone ? "1" : "0") + "|" + description;
     }
 
-    public abstract Task markAsDone();
+    public abstract Task markAsDone() throws DukeException;
 
     @Override
     public String toString() {
