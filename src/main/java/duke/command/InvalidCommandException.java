@@ -1,4 +1,4 @@
-package duke;
+package duke.command;
 
 public class InvalidCommandException extends Exception {
     public InvalidCommandException() {

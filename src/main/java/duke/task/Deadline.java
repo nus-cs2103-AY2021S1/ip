@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.InvalidCommandException;
+import duke.command.InvalidCommandException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

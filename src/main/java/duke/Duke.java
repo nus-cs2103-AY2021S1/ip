@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.InvalidCommandException;
 import duke.component.Parser;
 import duke.component.Storage;
 import duke.component.TaskList;

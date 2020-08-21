@@ -1,6 +1,5 @@
 package duke.component;
 
-import duke.*;
 import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
