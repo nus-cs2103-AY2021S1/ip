@@ -4,62 +4,46 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static List<Task> toDoList;
-    private Ui ui;
+    private List<Task> toDoList;
+    private final Ui ui;
 
     private Duke() {
         ui = new Ui();
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-
-
-        String logo = "     ____        _        \n"
-                + "    |  _ \\ _   _| | _____ \n"
-                + "    | | | | | | | |/ / _ \\\n"
-                + "    | |_| | |_| |   <  __/\n"
-                + "    |____/ \\__,_|_|\\_\\___|";
-
-        System.out.println(logo);
-
-        duke.displayThis("Hello! I'm Duke, your Windows Task Manager" +
-                "\n    Valid command:" +
-                "\n    - list" +
-                "\n    - done <num>" +
-                "\n    - todo <task>" +
-                "\n    - deadline <task> /by <yyyy-mm-dd>" +
-                "\n    - event <task> /at <yyyy-mm-dd>");
-
+        ui.welcome();
         try {
             toDoList = DukeFileHandler.readFile();
             if (toDoList.size() > 0) {
-                duke.displayList();
+                ui.displayList(toDoList);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        Scanner scanner = new Scanner(System.in);
+        toDoList.clear();
+        startListeningToCommand();
+    }
 
+    private void startListeningToCommand() {
+
+        Scanner scanner = new Scanner(System.in);
 
         while (true) {
             String input = scanner.nextLine().trim();
 
             try {
-                if (!duke.startCommand(input)) {
+                if (!command(input)) {
                     break;
                 }
 
             } catch (DukeException ex) {
-                duke.displayThis(ex.getMessage());
+                ui.displayThis(ex.getMessage());
             }
 
         }
     }
 
 
-    private boolean startCommand(String input) throws DukeException {
+    private boolean command(String input) throws DukeException {
 
         if (input.equals("")) {
             throw new DukeException("Please type a command");
@@ -78,14 +62,14 @@ public class Duke {
                 e.printStackTrace();
             }
 
-            displayThis("Bye. Hope to see you again soon!");
+            ui.displayThis("Bye. Hope to see you again soon!");
             return false;
 
         case "list":
             if (toDoList.size() == 0) {
                 throw new DukeException("There's nothing in the list :-(");
             }
-            displayList();
+            ui.displayList(toDoList);
             break;
 
         case "done":
@@ -93,7 +77,7 @@ public class Duke {
                 int entryDone = Integer.parseInt(input.substring(5)) - 1;
                 Task temp = toDoList.get(entryDone);
                 temp.markAsDone();
-                displayThis("Nice! I've marked this task as done: \n        " + temp.toString());
+                ui.displayThis("Nice! I've marked this task as done: \n        " + temp.toString());
 
             } catch (Exception ex) {
                 throw new DukeException("This task does not exist");
@@ -107,7 +91,7 @@ public class Duke {
                 Task temp = toDoList.get(entryDelete);
                 toDoList.remove(entryDelete);
 
-                displayThis("OKay, I've remove this task: \n        " + temp.toString() +
+                ui.displayThis("OKay, I've remove this task: \n        " + temp.toString() +
                         "\n    Now you have " + toDoList.size() + " tasks in the list");
 
             } catch (Exception ex) {
@@ -158,26 +142,30 @@ public class Duke {
 
     private void addTask(Task task) {
         toDoList.add(task);
-        displayThis("Got it. I've added this task: \n         " + task +
+        ui.displayThis("Got it. I've added this task: \n         " + task +
                 "\n    Now you have " + toDoList.size() + " tasks in the list");
     }
 
 
-    private void displayThis(String s) {
-        System.out.println("\n    ---------------------------------");
-        System.out.println("    " + s);
-        System.out.println("    ---------------------------------\n");
+
+//    private void displayThis(String s) {
+//        System.out.println("\n    ---------------------------------");
+//        System.out.println("    " + s);
+//        System.out.println("    ---------------------------------\n");
+//    }
+//
+//
+//    private void displayList() {
+//        System.out.println("\n    ---------------------------------\n" +
+//                "    Here are the tasks in your list:");
+//        for (int i = 0; i < toDoList.size(); i++) {
+//            System.out.println("    " + (i + 1) + ". " + toDoList.get(i));
+//        }
+//        System.out.println("    ---------------------------------");
+//    }
+
+    public static void main(String[] args) {
+        new Duke();
     }
-
-
-    private void displayList() {
-        System.out.println("\n    ---------------------------------\n" +
-                "    Here are the tasks in your list:");
-        for (int i = 0; i < toDoList.size(); i++) {
-            System.out.println("    " + (i + 1) + ". " + toDoList.get(i));
-        }
-        System.out.println("    ---------------------------------");
-    }
-
 
 }
