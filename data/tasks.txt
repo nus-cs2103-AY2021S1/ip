@@ -1,5 +1,5 @@
-T | ✘ | borrow books
-E | ✓ | cs2103 project meeting | At: today
-D | ✘ | tutorial 1 | by: 25 Aug
-T | ✘ | verify critical data
-T | ✘ | return books
+T | 0 | borrow books
+E | 1 | cs2103 project meeting | At: 2020-09-30 12:00
+D | 0 | tutorial 1 | By: 2020-08-25
+T | 0 | verify critical data
+T | 0 | return books
