@@ -190,7 +190,7 @@ public class Duke {
             if (folder.mkdir()) {
                 save(storage);
             } else {
-                System.out.println("folder does not exist, but making folder failed");
+                System.out.println("folder does not exist, while making folder failed");
             }
         }
     }
