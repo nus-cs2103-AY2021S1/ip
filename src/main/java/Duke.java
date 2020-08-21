@@ -173,25 +173,25 @@ public class Duke {
                 }
                 switch (type) {
                     case LIST:
-                        printList(count, list, t -> true, "");
+                        ui.printList(count, list, t -> true, "");
                         break;
                     case DONE:
                         list.get(n - 1).markAsDone();
-                        System.out.println(output("Nice! I've marked this task as done:\n\t    " + list.get(n - 1)));
+                        ui.output("Nice! I've marked this task as done:\n\t    " + list.get(n - 1));
                         break;
                     case DELETE:
                         Task toDelete = list.get(m - 1);
                         list.remove(toDelete);
                         deleteTask(list);
-                        System.out.println(output("Noted. I've removed this task:\n\t    " + toDelete +
-                                "\n\t  Now you have " + list.size()));
+                        ui.output("Noted. I've removed this task:\n\t    " + toDelete +
+                                "\n\t  Now you have " + list.size());
                         count--;
                         break;
                     case HAPPENS:
                         try {
                             LocalDate date = LocalDate.parse(input.substring(11),
                                     DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                            printList(count, list, t -> t.happenOnDate(date), "happening on " +
+                            ui.printList(count, list, t -> t.happenOnDate(date), "happening on " +
                                     date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " ");
                         } catch (Exception e) {
                             throw new InvalidCommandException("Invalid date format. Please use yyyy-MM-dd");
@@ -202,17 +202,17 @@ public class Duke {
                         addToList(task);
                         list.add(count++, task);
                         String temp = count <= 1 ? " task" : " tasks";
-                        System.out.println(output("Got it. I've added this task:\n\t    " + task +
-                                "\n\t  Now you have " + count + temp + " in the list."));
+                        ui.output("Got it. I've added this task:\n\t    " + task +
+                                "\n\t  Now you have " + count + temp + " in the list.");
                         break;
                     case BYE:
                         flag = false;
                         break;
                 }
             } catch (InvalidCommandException e) {
-                System.out.println(output(e.getMessage()));
+                ui.output(e.getMessage());
             }
         }
-        System.out.println(output("Bye. Hope to see you again soon!"));
+        ui.output("Bye. Hope to see you again soon!");
     }
 }
