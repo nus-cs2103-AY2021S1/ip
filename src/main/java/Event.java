@@ -10,7 +10,7 @@ public class Event extends Task {
             this.atTime = LocalDateTime.parse(atTime,
                     DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         } catch (Exception e) {
-            throw new InvalidCommandException("Invalid input datetime, please input as yyyy-MM-dd HH:mm." + e.getMessage());
+            throw new InvalidCommandException("Invalid input datetime, please input as yyyy-MM-dd HH:mm.");
         }
     }
 
