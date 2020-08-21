@@ -150,4 +150,53 @@ public class Database {
                 .collect(Collectors.toList());
         }
     }
+
+
+
+    public void saveTasks(List<Task> list) throws IOException {
+
+        var path = Path.of(this.databasePath);
+
+        if (!Files.exists(path)) {
+
+            if (!Files.exists(path.getParent())) {
+                // this is apparently equivalent to `mkdir -p`
+                Files.createDirectories(path.getParent());
+            }
+            Files.createFile(path);
+        }
+
+        Files.write(path,
+            Stream.concat(
+                Stream.of(String.format("%d", DATABASE_VERSION)),
+                list.stream()
+                    .map(task -> {
+                        if (task instanceof Todo) {
+
+                            return String.format("%c%c|%s", 'T',
+                                task.isDone() ? '1' : '0',
+                                task.getName());
+
+                        } else if (task instanceof Event) {
+
+                            return String.format("%c%c%s|%s", 'E',
+                                task.isDone() ? '1' : '0',
+                                ((Event) task).getEventDate(),
+                                task.getName());
+
+                        } else if (task instanceof Deadline) {
+
+                            return String.format("%c%c%s|%s", 'D',
+                                task.isDone() ? '1' : '0',
+                                ((Deadline) task).getDeadline(),
+                                task.getName());
+                        } else {
+                            // asdf?!
+                            return "";
+                        }
+                    })
+            )
+            .collect(Collectors.toList())
+        );
+    }
 }

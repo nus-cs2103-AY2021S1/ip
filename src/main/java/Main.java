@@ -31,5 +31,12 @@ public class Main {
         while (sc.hasNextLine() && bot.processCommand(sc.nextLine())) {
             System.out.printf("> ");
         }
+
+        try {
+            db.saveTasks(bot.getTasks());
+        } catch (IOException e) {
+            System.out.printf("failed to save task list to disk:\n%s\n", e);
+            System.exit(1);
+        }
     }
 }
