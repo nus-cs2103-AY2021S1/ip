@@ -1,4 +1,8 @@
 public class DeleteCommand extends Command {
+    public DeleteCommand(String input) {
+        super(input);
+    }
+
     @Override
     public void execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
         int count = list.count;
