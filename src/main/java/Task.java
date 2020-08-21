@@ -8,7 +8,12 @@ public class Task {
         this.description = description;
         this.isCompleted = false;
     }
-
+    /*
+    public Task(String description, boolean isCompleted) {
+        this.description = description;
+        this.isCompleted = isCompleted;
+    }
+    */
     public void markAsCompleted(){
         this.isCompleted = true;
     }
@@ -24,6 +29,10 @@ public class Task {
     @Override
     public String toString() {
         return "[" + getState() + "] " + description;
+    }
+
+    public String record() {
+        return "";
     }
 
 }

@@ -9,4 +9,13 @@ public class ToDo extends Task{
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public String record() {
+        if(this.isCompleted) {
+            return "T | 1 | " + description;
+        } else {
+            return "T | 0 | " + description;
+        }
+    }
 }
