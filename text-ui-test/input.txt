@@ -1,16 +1,8 @@
 todo borrow book
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
 list
 done 1
-done 2
-todo buy book
-list
-deadline sell book /by Monday
+deadline return book /by 29/08/2020 1800
+event study /at 29/08/2020 1800
 done 3
-done 4
-list
-delete 1
-delete 3
-list
+delete 2
 bye
