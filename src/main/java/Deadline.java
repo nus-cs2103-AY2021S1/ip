@@ -26,7 +26,7 @@ public class Deadline extends Task {
 
     @Override
     public String output() {
-        return "D" + super.output() + " | by: " + byTime + "\n";
+        return "D" + super.output() + " | By: " + byTime + "\n";
     }
 
     @Override
