@@ -7,6 +7,12 @@ public class Deadline extends Task {
         Task.totalTasks++;
     }
 
+    public Deadline(String description, String date, int doneFlag) {
+        super(description, TaskType.DEADLINE, doneFlag);
+        this.date = date;
+        Task.totalTasks++;
+    }
+
     public String getDate() {
         return date;
     }

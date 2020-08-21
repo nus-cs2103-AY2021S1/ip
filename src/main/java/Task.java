@@ -11,6 +11,15 @@ public class Task {
 
     }
 
+    public Task(String description, TaskType taskType, int done) {
+        this.description = description;
+        this.taskType = taskType;
+        this.isDone = false;
+        if (done == 1) {
+            this.isDone = true;
+        }
+    }
+
     void setDone() {
         isDone = true;
     }

@@ -4,6 +4,11 @@ public class Todo extends Task {
         Task.totalTasks++;
     }
 
+    public Todo(String description, int done) {
+        super(description, TaskType.TODO, done);
+        Task.totalTasks++;
+    }
+
     @Override
     public String toString() {
         return super.toString();
