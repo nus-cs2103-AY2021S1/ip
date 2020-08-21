@@ -8,7 +8,7 @@ public class Event extends Task {
     }
 
     @Override
-    public Task done() {
+    public Task setDone() {
         Task doneTask = new Event(this.desc, this.at);
         doneTask.isDone = true;
         return doneTask;

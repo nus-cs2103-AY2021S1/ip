@@ -8,7 +8,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public Task done() {
+    public Task setDone() {
         Task doneTask = new Deadline(this.desc, this.by);
         doneTask.isDone = true;
         return doneTask;

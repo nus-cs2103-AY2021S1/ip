@@ -8,7 +8,7 @@ public class Task {
         this.isDone = false;
     }
 
-    public Task done() {
+    public Task setDone() {
         Task doneTask = new Task(this.desc);
         doneTask.isDone = true;
         return doneTask;

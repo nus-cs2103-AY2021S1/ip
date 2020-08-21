@@ -14,53 +14,53 @@ public class Duke {
             String command = input.split(" ")[0];
             try {
                 switch (command) {
-                    case "list":
-                        int id = 1;
-                        String output = "Here are the tasks in your list:";
-                        for (Task task : tasks) {
-                            output += "\n" + tab + id + ". " + task;
-                            id++;
-                        }
-                        chatPrint(output);
-                        break;
-                    case "done":
-                        int idx = Integer.parseInt(input.split(" ")[1]) - 1;
-                        if (idx >= tasks.size()) {
-                            throw new DukeException("Oh dear! That task doesn't exist!");
-                        }
-                        Task doneTask = tasks.get(idx).done();
-                        tasks.set(idx, doneTask);
-                        chatPrint("Nice! I've marked this task as done:\n" +
-                                tab + "   " + doneTask);
-                        break;
-                    case "delete":
-                        int idx2 = Integer.parseInt(input.split(" ")[1]) - 1;
-                        if (idx2 >= tasks.size()) {
-                            throw new DukeException("Oh dear! That task doesn't exist!");
-                        }
-                        Task rmTask = tasks.get(idx2);
-                        tasks.remove(idx2);
-                        chatPrint("Noted. I've removed this task:\n" +
-                                tab + "   " + rmTask + "\n" +
-                                tab + "Now you have " + tasks.size() + " tasks in the list.");
-                        break;
-                    case "todo":
-                    case "deadline":
-                    case "event":
-                        int idxSpace = input.indexOf(' ');
-                        int idxMeta = input.indexOf('/');
-                        int infoLength = idxMeta - (idxSpace + 1);
-                        if (idxSpace == -1 ||
-                                (idxMeta != -1 && infoLength < 1)) {
-                            throw new DukeException("Oh dear! A task description cannot be empty!");
-                        }
-                        Task newTask = addTask(tasks, command, input.substring(input.indexOf(' ') + 1));
-                        chatPrint("Got it. I've added this task:\n" +
-                                tab + "   " + newTask + "\n" +
-                                tab + "Now you have " + tasks.size() + " tasks in the list.");
-                        break;
-                    default:
-                        throw new DukeException("Oh dear! I'm sorry, but I don't know what that means :((");
+                case "list":
+                    int id = 1;
+                    String output = "Here are the tasks in your list:";
+                    for (Task task : tasks) {
+                        output += "\n" + tab + id + ". " + task;
+                        id++;
+                    }
+                    chatPrint(output);
+                    break;
+                case "done":
+                    int idx = Integer.parseInt(input.split(" ")[1]) - 1;
+                    if (idx >= tasks.size()) {
+                        throw new DukeException("Oh dear! That task doesn't exist!");
+                    }
+                    Task doneTask = tasks.get(idx).setDone();
+                    tasks.set(idx, doneTask);
+                    chatPrint("Nice! I've marked this task as done:\n" +
+                            tab + "   " + doneTask);
+                    break;
+                case "delete":
+                    int idx2 = Integer.parseInt(input.split(" ")[1]) - 1;
+                    if (idx2 >= tasks.size()) {
+                        throw new DukeException("Oh dear! That task doesn't exist!");
+                    }
+                    Task rmTask = tasks.get(idx2);
+                    tasks.remove(idx2);
+                    chatPrint("Noted. I've removed this task:\n" +
+                            tab + "   " + rmTask + "\n" +
+                            tab + "Now you have " + tasks.size() + " tasks in the list.");
+                    break;
+                case "todo":
+                case "deadline":
+                case "event":
+                    int idxSpace = input.indexOf(' ');
+                    int idxMeta = input.indexOf('/');
+                    int infoLength = idxMeta - (idxSpace + 1);
+                    if (idxSpace == -1 ||
+                            (idxMeta != -1 && infoLength < 1)) {
+                        throw new DukeException("Oh dear! A task description cannot be empty!");
+                    }
+                    Task newTask = addTask(tasks, command, input.substring(input.indexOf(' ') + 1));
+                    chatPrint("Got it. I've added this task:\n" +
+                            tab + "   " + newTask + "\n" +
+                            tab + "Now you have " + tasks.size() + " tasks in the list.");
+                    break;
+                default:
+                    throw new DukeException("Oh dear! I'm sorry, but I don't know what that means :((");
                 }
             } catch (DukeException ex) {
                 chatPrint(ex.toString());
