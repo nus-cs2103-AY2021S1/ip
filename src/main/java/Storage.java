@@ -67,9 +67,4 @@ public class Storage {
             throw new InvalidCommandException(e.getMessage());
         }
     }
-
-    public static void main(String[] args) throws FileNotFoundException, InvalidCommandException {
-        Storage st = new Storage("data/tasks.txt");
-        System.out.println(st.list);
-    }
 }
