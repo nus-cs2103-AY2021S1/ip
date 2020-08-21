@@ -1,4 +1,86 @@
 package main.java;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Storage {
+    String path;
+    //Scanner scanner;
+
+    public Storage(String path) {
+        this.path = path;
+    }
+
+    public ArrayList<Task> readRecord() throws FileNotFoundException, LoadingException {
+        File record = new File(path);
+        Scanner scanner = new Scanner(record);
+        try {
+            ArrayList<Task> tasks = new ArrayList<>();
+            String next;
+            if (record.createNewFile()) {
+                throw new FileNotFoundException("Creating new record");
+            }
+
+            while (scanner.hasNextLine()) {
+                next = scanner.nextLine();
+                String[] strings = next.split(" \\| ");
+            /*
+            for(int i = 0; i < strings.length; i = i + 1) {
+                System.out.println(strings[i]);
+            }
+            */
+
+                if (strings[1].equals("0") || strings[1].equals("1")) {
+
+                    if (strings[0].equals("T") && strings.length == 3) {
+                        ToDo todo = new ToDo(strings[2]);
+                        if (strings[1].equals("1")) {
+                            todo.markAsCompleted();
+                        }
+                        tasks.add(todo);
+                    } else if (strings[0].equals("D") && strings.length == 4) {
+                        Deadline deadline = new Deadline(strings[2], LocalDate.parse(strings[3]));
+                        if (strings[1].equals("1")) {
+                            deadline.markAsCompleted();
+                        }
+                        tasks.add(deadline);
+                    } else if (strings[0].equals("E") && strings.length == 4) {
+                        Event event = new Event(strings[2], LocalDate.parse(strings[3]));
+                        if (strings[1].equals("1")) {
+                            event.markAsCompleted();
+                        }
+                        tasks.add(event);
+                    } else {
+                        throw new LoadingException("The previous record cannot be read becuase the format of a task is incorrect\nCleaning the record to start again");
+                    }
+                } else {
+                    throw new LoadingException("The previous record cannot be read because the complete state of a task is incorrect\nCleaning the record to start again");
+                }
+            }
+            return tasks;
+        } catch (FileNotFoundException fileNotFoundException) {
+            throw fileNotFoundException;
+        } catch (Exception exception) {
+            throw new LoadingException(exception.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+
+    public void writeRecord(TaskList taskList) throws IOException {
+        FileWriter fileWriter = new FileWriter(path);
+        ArrayList<Task> tasks = taskList.getTasks();
+        String string = "";
+        for(int i = 0; i < tasks.size(); i = i + 1) {
+            string = string.concat(tasks.get(i).record() + System.lineSeparator());
+        }
+        fileWriter.write(string);
+        fileWriter.close();
+    }
 }

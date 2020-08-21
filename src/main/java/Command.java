@@ -1,16 +1,12 @@
 package main.java;
 
-public enum Command {
-    LIST("list"), ADD_TODO("todo"), ADD_DEADLINE("deadline"), ADD_EVENT("event"), DONE("done"), DELETE("delete"), LIST_DATE("list date");
 
-    private String type;
+import java.io.IOException;
 
-    private Command(String type) {
-        this.type = type;
-    }
+public abstract class Command {
+    abstract void excecute(TaskList taskList, Ui ui, Storage storage) throws TaskNotFoundException, IOException;
 
-    @Override
-    public String toString() {
-        return this.type;
+    public boolean isContinuing() {
+        return true;
     }
 }
