@@ -19,6 +19,16 @@ public class Duke {
                 style);
     }
 
+    public static void removeTask(int taskNum) {
+        Task task = list.get(taskNum);
+        list.remove(taskNum);
+        System.out.println(style +
+                "\tNoted. I've removed this task:\n" +
+                "\t  " + task + "\n" +
+                "\tNow you have " + list.size() + " tasks in the list.\n" +
+                style);
+    }
+
     // Reads through all the tasks in the list
     public static void readList() {
         System.out.println(style);
@@ -72,6 +82,11 @@ public class Duke {
             else if (message.contains("done")) {
                 int taskNum = Integer.parseInt(message.substring(5));
                 setTaskDone(taskNum);
+            }
+            // take note of keyword "delete" to remove task from list
+            else if (message.contains("delete")) {
+                int taskNum = Integer.parseInt(message.substring(7));
+                removeTask(taskNum);
             }
             // take note of keyword "to-do" to add normal task
             else if (message.contains("todo")) {
