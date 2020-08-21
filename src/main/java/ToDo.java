@@ -4,6 +4,11 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String getInfo() {
+        return String.format("\nT | %d | %s", isDone ? 1 : 0, taskName);
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }
