@@ -133,10 +133,13 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         System.out.println(output("Hello! I'm Duke\n\t  What can I do for you?"));
         List<Task> list = new ArrayList<>();
+        FileWriter fw = new FileWriter("../data/tasks.txt");
+        fw.write("");
+        fw.close();
         int count = 0;
         boolean flag = true;
         while (flag) {
