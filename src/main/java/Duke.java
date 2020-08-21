@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -6,11 +9,13 @@ import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        FileHandler database = new FileHandler("data/Duke.txt");
-
-        Duke.echo("Hello! I'm Duke\nWhat can I do for you?");
-
-        Duke.checkCommands(sc, database);
+        LocalDate localDate = LocalDate.parse("2019-12-01");
+        System.out.println(localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+//        FileHandler database = new FileHandler("data/Duke.txt");
+//
+//        Duke.echo("Hello! I'm Duke\nWhat can I do for you?");
+//
+//        Duke.checkCommands(sc, database);
     }
 
     public static void echo(String s) {
@@ -26,6 +31,17 @@ public class Duke {
             s += (i == lst.size()) ? "" : "\n";
         }
         Duke.echo(s);
+    }
+
+    public static LocalDateTime strToDate(String by) throws Exception {
+        String[] arr = by.split("\\s+");
+        if (arr.length === 1) {
+
+        } else if (arr.length === 2) {
+
+        } else {
+            throw new InvalidCommandException();
+        }
     }
 
     public static void checkCommands(Scanner sc, FileHandler database) {
