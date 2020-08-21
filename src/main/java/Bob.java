@@ -2,31 +2,31 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/*================== Welcome to BOB ==================*/
-/*
-                    █▀▀▄ █▀▀█ █▀▀▄
-                    █▀▀▄ █  █ █▀▀▄
-                    ▀▀▀  ▀▀▀▀ ▀▀▀
-            Also known as BERY ORDINARY BOT
-*/
-
-
+/**
+ *
+ *
+ *
+ * /
+ */
 public class Bob {
     private final String output;
     private final ArrayList<Task> list;
     private final boolean hasExited;
 
-    /*================ Static fields ================*/
-
-    // Print when user first starts the program
+    // To print when user first starts the program
     public static String INTRO =
-            "█▀▀▄ █▀▀█ █▀▀▄\n" +
-            "█▀▀▄ █  █ █▀▀▄\n" +
-            "▀▀▀  ▀▀▀▀ ▀▀▀\n"  +
-            "Hi, my name is BOB.\n" +
-            "What can I do for you?";
-    // Print when user exits the program
+            "/*----------------- Welcome to BOB -----------------*/\n"
+            + "                    █▀▀▄ █▀▀█ █▀▀▄\n"
+            + "                    █▀▀▄ █  █ █▀▀▄\n"
+            + "                    ▀▀▀  ▀▀▀▀ ▀▀▀\n"
+            + "            Also known as BERY ORDINARY BOT\n"
+            + "Hi, my name is BOB.\n"
+            + "What can I do for you?";
+
+    // To print when user exits the program
     public static String OUTRO = "See you soon, maybe?";
+    public static String DIVIDER =  "========================================================\n";
+
 
     private Bob (String output, ArrayList<Task> list) {
         this.output = output;
@@ -40,14 +40,12 @@ public class Bob {
         this.hasExited = hasExited;
     }
 
-    /*================ Private methods ================*/
-
     /*---- Task methods ---- */
 
     // Generates message after adding task
     private String afterAdd(Task task) {
-        return "Yes boss, I have added this task to your list:\n" + "  " + task + "\n" +
-                "Currently you have " + this.list.size() + " tasks in your list.";
+        return "Yes boss, I have added this task to your list:\n" + "  " + task + "\n"
+                + "Currently you have " + this.list.size() + " tasks in your list.";
     }
 
     // Adds an unfinished task to list and returns readable String
@@ -70,8 +68,6 @@ public class Bob {
         this.list.add(event);
         return afterAdd(event);
     }
-
-    /*---- List methods ---- */
 
     // Converts list to readable String
     private String convertList() {
@@ -115,8 +111,6 @@ public class Bob {
         return "I have deleted the task.\n" + task + "\n";
     }
 
-
-    /*---- Command methods ---- */
 
     // Executes action based on command without need for user input
     private Bob execute(Command command) {
@@ -192,15 +186,12 @@ public class Bob {
         }
     }
 
-    /*================ Public methods ================*/
-
     /**
      * Chatbot's current output getter.
      * @return
      */
     public String getOutput() {
-        String divider = "========================================================\n";
-        return divider + this.output + "\n" + divider;
+        return DIVIDER + this.output + "\n" + DIVIDER;
     }
 
     /**
