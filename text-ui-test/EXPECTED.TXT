@@ -5,10 +5,13 @@
     |____/ \__,_|_|\_\___|
 
     ---------------------------------
-    Hello! I'm Duke
-    What can I remember for you?
-    I only accept list, done and
-    todo, deadline, events
+    Hello! I'm Duke, your Windows Task Manager
+    Valid command:
+    - list
+    - done <num>
+    - todo <task>
+    - deadline <task> /by <yyyy-mm-dd>
+    - event <task> /at <yyyy-mm-dd>
     ---------------------------------
 
 
@@ -71,14 +74,14 @@
 
     ---------------------------------
     Got it. I've added this task: 
-         [D][?] return book (by: Sunday)
+         [D][?] return book (by: Feb 03 2019)
     Now you have 4 tasks in the list
     ---------------------------------
 
 
     ---------------------------------
     Got it. I've added this task: 
-         [E][?] project meeting (at: Mon 2-4pm)
+         [E][?] project meeting (at: Apr 02 2020)
     Now you have 5 tasks in the list
     ---------------------------------
 
@@ -94,8 +97,8 @@
     Here are the tasks in your list:
     1. [T][?] read book
     2. [T][?] borrow book
-    3. [D][?] return book (by: Sunday)
-    4. [E][?] project meeting (at: Mon 2-4pm)
+    3. [D][?] return book (by: Feb 03 2019)
+    4. [E][?] project meeting (at: Apr 02 2020)
     ---------------------------------
 
     ---------------------------------
@@ -113,8 +116,8 @@
     ---------------------------------
     Here are the tasks in your list:
     1. [T][?] borrow book
-    2. [D][?] return book (by: Sunday)
-    3. [E][?] project meeting (at: Mon 2-4pm)
+    2. [D][?] return book (by: Feb 03 2019)
+    3. [E][?] project meeting (at: Apr 02 2020)
     ---------------------------------
 
     ---------------------------------
