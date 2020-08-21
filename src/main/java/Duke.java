@@ -6,6 +6,7 @@ import exceptions.UnknownCommandException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.List;
 import java.lang.StringBuilder;
@@ -89,7 +90,8 @@ public class Duke {
             if (deadlineParts.length != 2) {
                 throw new WrongSyntaxException();
             }
-            addTask(new Deadline(deadlineParts[0], deadlineParts[1]));
+            LocalDateTime dueDateTime = DateParser.parseString(deadlineParts[1]);
+            addTask(new Deadline(deadlineParts[0], dueDateTime));
             break;
         case EVENT:
             String eventCommand = scanner.nextLine().trim();
@@ -97,7 +99,8 @@ public class Duke {
             if (eventParts.length != 2) {
                 throw new WrongSyntaxException();
             }
-            addTask(new Event(eventParts[0], eventParts[1]));
+            LocalDateTime eventDateTime = DateParser.parseString(eventParts[1]);
+            addTask(new Event(eventParts[0], eventDateTime));
             break;
         case TODO:
             String task = scanner.nextLine().trim();
@@ -117,6 +120,7 @@ public class Duke {
         if (updateRequired) {
             store.updateTasks(taskList);
         }
+
         return toContinue;
     }
 
