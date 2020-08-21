@@ -48,7 +48,7 @@ public class Duke {
             }
             word = scan.nextLine();
         }
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(line + "\nBye. Hope to see you again soon!\n" + line);
     }
 
     public static void storeTask(String item) {
