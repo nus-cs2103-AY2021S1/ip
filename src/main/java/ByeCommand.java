@@ -4,7 +4,7 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, TaskList list) {
+    public void execute(Ui ui, TaskList list, Storage storage) {
         ui.printList(list, t -> true, "");
     }
 }
