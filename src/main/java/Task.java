@@ -7,8 +7,6 @@ public class Task {
         this.isDone = false;
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Creates a new Task object and set its isDone boolean
      *
@@ -26,7 +24,6 @@ public class Task {
      *
      * @return ✓ or ✘.
      */
->>>>>>> branch-Level-7
     public String getStatusIcon() {
         return (isDone ? "✓" : "✘"); //return tick or X symbols
     }
@@ -35,14 +32,11 @@ public class Task {
         this.isDone = true;
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Returns task description and its status icon.
      *
      * @return string containing its description and its status icon.
      */
->>>>>>> branch-Level-7
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }

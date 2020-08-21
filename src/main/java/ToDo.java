@@ -5,8 +5,7 @@ public class ToDo extends Task {
         super(description);
     }
 
-<<<<<<< HEAD
-=======
+
     /**
      * Creates a new Task object and set its isDone boolean
      *
@@ -25,7 +24,6 @@ public class ToDo extends Task {
      *
      * @return Custom description of the todo task
      */
->>>>>>> branch-Level-7
     @Override
     public String toString() {
         return "[T] " + super.toString();
