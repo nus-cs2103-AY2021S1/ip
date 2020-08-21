@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 import java.util.function.Function;
+import java.time.format.DateTimeFormatter;
 
 public class Database {
 
@@ -185,14 +186,14 @@ public class Database {
 
                             return String.format("%c%c%s|%s", 'E',
                                 task.isDone() ? '1' : '0',
-                                ((Event) task).getEventDate(),
+                                ((Event) task).getEventDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                                 task.getName());
 
                         } else if (task instanceof Deadline) {
 
                             return String.format("%c%c%s|%s", 'D',
                                 task.isDone() ? '1' : '0',
-                                ((Deadline) task).getDeadline(),
+                                ((Deadline) task).getDeadline().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                                 task.getName());
                         } else {
                             // asdf?!
