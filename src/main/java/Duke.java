@@ -5,8 +5,14 @@ import java.util.Scanner;
 
 public class Duke {
     private static List<Task> toDoList;
+    private Ui ui;
+
+    private Duke() {
+        ui = new Ui();
+    }
 
     public static void main(String[] args) {
+        Duke duke = new Duke();
 
 
         String logo = "     ____        _        \n"
@@ -17,7 +23,7 @@ public class Duke {
 
         System.out.println(logo);
 
-        displayThis("Hello! I'm Duke, your Windows Task Manager" +
+        duke.displayThis("Hello! I'm Duke, your Windows Task Manager" +
                 "\n    Valid command:" +
                 "\n    - list" +
                 "\n    - done <num>" +
@@ -28,7 +34,7 @@ public class Duke {
         try {
             toDoList = DukeFileHandler.readFile();
             if (toDoList.size() > 0) {
-                displayList();
+                duke.displayList();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -41,19 +47,19 @@ public class Duke {
             String input = scanner.nextLine().trim();
 
             try {
-                if (!startCommand(input)) {
+                if (!duke.startCommand(input)) {
                     break;
                 }
 
             } catch (DukeException ex) {
-                displayThis(ex.getMessage());
+                duke.displayThis(ex.getMessage());
             }
 
         }
     }
 
 
-    private static boolean startCommand(String input) throws DukeException {
+    private boolean startCommand(String input) throws DukeException {
 
         if (input.equals("")) {
             throw new DukeException("Please type a command");
@@ -150,21 +156,21 @@ public class Duke {
     }
 
 
-    private static void addTask(Task task) {
+    private void addTask(Task task) {
         toDoList.add(task);
         displayThis("Got it. I've added this task: \n         " + task +
                 "\n    Now you have " + toDoList.size() + " tasks in the list");
     }
 
 
-    private static void displayThis(String s) {
+    private void displayThis(String s) {
         System.out.println("\n    ---------------------------------");
         System.out.println("    " + s);
         System.out.println("    ---------------------------------\n");
     }
 
 
-    private static void displayList() {
+    private void displayList() {
         System.out.println("\n    ---------------------------------\n" +
                 "    Here are the tasks in your list:");
         for (int i = 0; i < toDoList.size(); i++) {
