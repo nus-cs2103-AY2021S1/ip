@@ -5,18 +5,25 @@ import java.util.Scanner;
 public class Duke {
     private Scanner scanner;
     private List<Task> taskList;
-    private String logo, exitMessage;
 
     public void initialise() {
         scanner = new Scanner(System.in);
         taskList = new ArrayList<>();
-        logo = "\t ____        _        \n"
-                + "\t|  _ \\ _   _| | _____ \n"
-                + "\t| | | | | | | |/ / _ \\\n"
-                + "\t| |_| | |_| |   <  __/\n"
-                + "\t|____/ \\__,_|_|\\_\\___|\n";
+        String logo = "\t    ,---,                                       \n" +
+                      "\t  .'  .' `\\                     ,---,           \n" +
+                      "\t,---.'     \\          ,--,    ,---.'|           \n" +
+                      "\t|   |  .`\\  |       ,'_ /|    |   | :           \n" +
+                      "\t:   : |  '  |  .--. |  | :    |   | |   ,---.   \n" +
+                      "\t|   ' '  ;  :,'_ /| :  . |  ,--.__| |  /     \\  \n" +
+                      "\t'   | ;  .  ||  ' | |  . . /   ,'   | /    /  | \n" +
+                      "\t|   | :  |  '|  | ' |  | |.   '  /  |.    ' / | \n" +
+                      "\t'   : | /  ; :  | : ;  ; |'   ; |:  |'   ;   /| \n" +
+                      "\t|   | '` ,/  '  :  `--'   \\   | '/  ''   |  / | \n" +
+                      "\t;   :  .'    :  ,      .-./   :    :||   :    | \n" +
+                      "\t|   ,.'       `--`----'    \\   \\  /   \\   \\  /  \n" +
+                      "\t'---'                       `----'     `----'   \n";
+        System.out.printf(logo);
         greet();
-        listenForCommands();
     }
     
     private void sendMessage(List<String> messages) {
@@ -28,11 +35,11 @@ public class Duke {
     }
 
     private void greet() {
-        System.out.printf(logo);
         List<String> messages = new ArrayList<>();
-        messages.add("Hello! My name is Duke.");
+        messages.add("Hello! My name is Dude.");
         messages.add("What can I do for you?");
         sendMessage(messages);
+        listenForCommands();
     }
 
     private void listAllTasks() {
@@ -142,53 +149,53 @@ public class Duke {
         String command = inputBreakdown[0];
         try {
             switch (command) {
-                case ("list"):
-                    listAllTasks();
-                    break;
-                case ("done"):
-                    if (inputBreakdown.length < 2) {
-                        throw new DukeException("Error! Note the syntax: done [task number]");
-                    } else {
-                        handleDoneCommand(inputBreakdown[1]);
-                    }
-                    break;
-                case ("todo"):
-                    if (inputBreakdown.length < 2) {
-                        throw new DukeException("Error! Note the syntax: todo [description]");
-                    } else {
-                        handleTodoCommand(inputBreakdown[1]);
-                    }
-                    break;
-                case ("deadline"):
-                    if (inputBreakdown.length < 2) {
-                        throw new DukeException("Error! Note the syntax: deadline [description] /by [date]");
-                    } else {
-                        handleDeadlineCommand(inputBreakdown[1]);
-                    }
-                    break;
-                case ("event"):
-                    if (inputBreakdown.length < 2) {
-                        throw new DukeException("Error! Note the syntax: event [description] /at [date]");
-                    } else {
-                        handleEventCommand(inputBreakdown[1]);
-                    }
-                    break;
-                case ("delete"):
-                    if (inputBreakdown.length < 2) {
-                        throw new DukeException("Error! Note the syntax: delete [task number]");
-                    } else {
-                        handleDeleteCommand(inputBreakdown[1]);
-                    }
-                    break;
-                case ("bye"):
-                    exit();
-                    break;
-                default:
-                    throw new DukeException("I'm sorry, but I don't know what that means \u2639");
+            case ("list"):
+                listAllTasks();
+                break;
+            case ("done"):
+                if (inputBreakdown.length < 2) {
+                    throw new DukeException("Error! Note the syntax: done [task number]");
+                } else {
+                    handleDoneCommand(inputBreakdown[1]);
+                }
+                break;
+            case ("todo"):
+                if (inputBreakdown.length < 2) {
+                    throw new DukeException("Error! Note the syntax: todo [description]");
+                } else {
+                    handleTodoCommand(inputBreakdown[1]);
+                }
+                break;
+            case ("deadline"):
+                if (inputBreakdown.length < 2) {
+                    throw new DukeException("Error! Note the syntax: deadline [description] /by [date]");
+                } else {
+                    handleDeadlineCommand(inputBreakdown[1]);
+                }
+                break;
+            case ("event"):
+                if (inputBreakdown.length < 2) {
+                    throw new DukeException("Error! Note the syntax: event [description] /at [date]");
+                } else {
+                    handleEventCommand(inputBreakdown[1]);
+                }
+                break;
+            case ("delete"):
+                if (inputBreakdown.length < 2) {
+                    throw new DukeException("Error! Note the syntax: delete [task number]");
+                } else {
+                    handleDeleteCommand(inputBreakdown[1]);
+                }
+                break;
+            case ("bye"):
+                exit();
+                break;
+            default:
+                throw new DukeException("I'm sorry, but I don't know what that means \u2639");
             }
-        } catch (DukeException e) {
+        } catch (DukeException exception) {
             List<String> messages = new ArrayList<>();
-            messages.add(e.getMessage());
+            messages.add(exception.getMessage());
             sendMessage(messages);
         }
         listenForCommands();
