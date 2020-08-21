@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
@@ -9,17 +10,28 @@ public class Duke {
             + "\tWhat can I do for you?";
     private static final String EXIT_MESSAGE = "Bye. "
             + "Hope to see you again soon!";
+    private static final String LIST_MESSAGE = "Here are the tasks in your list:";
 
     // Command constants for the bot
     private static final String EXIT_COMMAND = "bye";
+    private static final String LIST_COMMAND = "list";
 
     // static fields for the bot
+    private static ArrayList<String> store = new ArrayList<>(); // add input items here
     private static boolean isFirstRun = true; // is the bot run for the first time?
 
     // helper methods related to displaying
     private static void displayToScreen(String str) {
         System.out.println(LINE_BREAK);
         System.out.println("\t" + str);
+        System.out.println(LINE_BREAK + "\n");
+    }
+    private static void displayStoreItems() {
+        System.out.println(LINE_BREAK);
+        System.out.println("\t" + LIST_MESSAGE);
+        for (int ctr = 1; ctr <= store.size(); ctr++) {
+            System.out.println("\t" + ctr + ". " + store.get(ctr - 1));
+        }
         System.out.println(LINE_BREAK + "\n");
     }
 
@@ -37,7 +49,15 @@ public class Duke {
         String input = sc.nextLine();
 
         while (!input.equals(EXIT_COMMAND)) {
-            displayToScreen(input);
+            switch (input) {
+            case LIST_COMMAND:
+                displayStoreItems();
+                break;
+            default:
+                store.add(input);
+                displayToScreen("added: " + input);
+                break;
+            }
             input = sc.nextLine();
         }
 
