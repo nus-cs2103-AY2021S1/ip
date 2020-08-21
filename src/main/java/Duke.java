@@ -1,12 +1,22 @@
 import java.util.List;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private final List<Task> tasks;
+    private static final Path filePath = Paths.get(".", "data", "duke.txt");
+
+    private List<Task> tasks;
+    private final Database db;
 
     Duke() {
-        this.tasks = new ArrayList<>();
+        this.db = new Database(Duke.filePath);
+        try {
+            this.tasks = this.db.loadTasks();
+        } catch (DukeException e) {
+            this.tasks = new ArrayList<>();
+        }
     }
 
     public void speak(String message) {
@@ -53,6 +63,8 @@ public class Duke {
                     Task task = this.tasks.get(taskId - 1);
                     task.markAsDone();
 
+                    this.db.updateExistingTask(taskId, task);
+
                     this.speak(String.format("Nice! I've marked this task as done:\n%s", task));
                 } catch (NumberFormatException e) {
                     throw new DukeException(
@@ -71,6 +83,8 @@ public class Duke {
                 try {
                     int taskId = Integer.parseInt(commandDetails);
                     Task task = this.tasks.remove(taskId - 1);
+
+                    this.db.deleteExistingTask(taskId);
 
                     this.speak(String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.",
                             task, tasks.size()));
@@ -120,6 +134,8 @@ public class Duke {
 
                 this.tasks.add(task);
 
+                this.db.saveNewTask(task);
+
                 this.speak(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
                         task, this.tasks.size()));
                 break;
@@ -131,7 +147,6 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke duke = new Duke();
-
         duke.speak("Hello! I'm Duke\nWhat can I do for you?");
 
         Scanner scanner = new Scanner(System.in);
@@ -148,5 +163,6 @@ public class Duke {
         duke.speak("Bye. Hope to see you again soon!");
 
         scanner.close();
+
     }
 }
