@@ -1,3 +1,2 @@
-T | 0 | hello
-D | 1 | hello | NEVER
-E | 0 | BYEBYE | NEVER
+T | 0 | sleep
+D | 1 | sleeeep | 9pm

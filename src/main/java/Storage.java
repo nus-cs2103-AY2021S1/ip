@@ -8,7 +8,11 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private final String storagePath = "data/duke.txt";
+    private final String storagePath;
+
+    public Storage(String storagePath) {
+        this.storagePath = storagePath;
+    }
 
     public List<Task> getTasks() {
         File storageFile = new File(storagePath);
@@ -22,6 +26,19 @@ public class Storage {
         } catch (FileNotFoundException e) {
             System.out.println("Storage file not found");
             return tasks;
+        }
+    }
+
+    public void updateTasks(List<Task> taskList) {
+        try {
+            FileWriter storageWriter = new FileWriter(storagePath, true);
+            clearTasks();
+            for (Task t : taskList) {
+                addTask(storageWriter, t);
+            }
+            storageWriter.close();
+        } catch (IOException e) {
+            System.out.println("Problem accessing storage file");
         }
     }
 
@@ -40,23 +57,16 @@ public class Storage {
         }
     }
 
-    public void addTask(Task task) {
-        try {
-            FileWriter storageWriter = new FileWriter(storagePath, true);
-            storageWriter.write('\n');
-            storageWriter.write(task.getStorageString());
-            storageWriter.close();
-        } catch (IOException e) {
-            System.out.println("Storage file not found");
-        }
+    private void clearTasks() throws IOException {
+        FileWriter storageWriter = new FileWriter(storagePath, false);
+        // replace the original content with an empty string
+        storageWriter.write("");
+        storageWriter.close();
     }
 
-    public static void main(String[] args) {
-        // temporary tests
-        Storage s = new Storage();
-        List<Task> result = s.getTasks();
-        for (Task task : result) {
-            System.out.println(task.toString());
-        }
+    private void addTask(FileWriter storageWriter, Task task) throws IOException {
+        storageWriter.write(task.getStorageString());
+        storageWriter.write('\n');
     }
+
 }
