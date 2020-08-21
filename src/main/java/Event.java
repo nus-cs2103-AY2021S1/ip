@@ -1,9 +1,17 @@
-public class Event extends Task {
-    private final String atTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String atTime) {
+public class Event extends Task {
+    private final LocalDateTime atTime;
+
+    public Event(String description, String atTime) throws InvalidCommandException {
         super(description);
-        this.atTime = atTime;
+        try {
+            this.atTime = LocalDateTime.parse(atTime,
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        } catch (Exception e) {
+            throw new InvalidCommandException("Invalid input datetime, please input as yyyy-MM-dd HH:mm." + e.getMessage());
+        }
     }
 
     @Override
