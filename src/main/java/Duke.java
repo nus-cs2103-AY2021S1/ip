@@ -5,6 +5,7 @@ import java.util.List;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class Duke {
     private static final List<Task> storage = new ArrayList<>();
@@ -52,30 +53,22 @@ public class Duke {
             case "deadline": {
                 if (next.contains("/by ")) {
                     String[] ls = next.split(" /by ");
-                    Deadline deadline = new Deadline(ls[0], ls[1]);
+                    Deadline deadline = new Deadline(ls[0], LocalDate.parse(ls[1]));
                     storage.add(deadline);
                     toAdd = deadline;
                 } else {
                     throw new DukeException("Sorry, please specify expected deadline after \"/by\".");
-//                    System.out.println(
-//                            border + "Sorry, please specify expected deadline after \"/by\"\n"
-//                            + border
-//                    );
                 }
                 break;
             }
             case "event": {
                 if (next.contains("/at ")) {
                     String[] ls = next.split(" /at ");
-                    Event event = new Event(ls[0], ls[1]);
+                    Event event = new Event(ls[0], LocalDate.parse(ls[1]));
                     storage.add(event);
                     toAdd = event;
                 } else {
                     throw new DukeException("Sorry, please specify event date after \"/at\".");
-//                    System.out.println(
-//                            border + "Sorry, please specify event date after \"/at\"\n"
-//                            + border
-//                    );
                 }
                 break;
             }
@@ -96,26 +89,24 @@ public class Duke {
     }
 
     public static void doneTask(String s) throws DukeException {
-        if (s.equals("")) {
-            try {
-                addTask("done", "");
-            } catch (DukeException e) {
-                System.out.println(border + e.getMessage() + "\n" + border);
+        try {
+            int i = Integer.parseInt(s);
+            if (i < 1 || i > storage.size()) {
+                throw new DukeException("You have entered an invalid number: " + i
+                        + ". Please try again.");
+            } else {
+                Task t = storage.get(i - 1);
+                Task completed = t.setDone(true);
+                storage.set(i - 1, completed);
+                System.out.println(
+                        border + "Nice! I've marked this task as done:\n" + "  "
+                                + completed + "\n" + border
+                );
             }
-            return;
-        }
-
-        int i = Integer.parseInt(s);
-        if (i < 1 || i > storage.size()) {
-            throw new DukeException("You have entered an invalid number: " + i
-                                    + ". Please try again.");
-        } else {
-            Task t = storage.get(i - 1);
-            Task completed = t.setDone(true);
-            storage.set(i - 1, completed);
+        } catch (NumberFormatException nfe) {
             System.out.println(
-                    border + "Nice! I've marked this task as done:\n" + "  "
-                            + completed + "\n" + border
+                    border + "Please state the completed task number after \"done\".\n"
+                    + border
             );
         }
     }
@@ -213,7 +204,10 @@ public class Duke {
                 String type = data[0];
                 boolean done = Boolean.parseBoolean(data[1]);
                 String name = data[2];
-                String time = data[3];
+                LocalDate time = null;
+                if (!data[3].equals("mark")) {
+                    time = LocalDate.parse(data[3]);
+                }
 
                 switch (type) {
                     case "E": {
@@ -241,13 +235,13 @@ public class Duke {
     }
 
     public static void startUp() {
+        fileCheck();
         if (!file.exists() || file.length() == 0) {
             System.out.println(
                     border + "Hello! I'm Duke\n"
                     + "What can I do for you?\n" + border
             );
         } else {
-            fileCheck();
             System.out.println(
                     border + "Well come back!\n" + "You still have "
                     + storage.size() + " tasks left to clear.\n" + border
