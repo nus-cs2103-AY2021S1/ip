@@ -4,12 +4,12 @@
 public class Task {
 
     // constants (ticks and crosses)
-    private final String CROSS = "✗";
-    private final String CHECK = "✓";
+    protected final String CROSS = "✗";
+    protected final String CHECK = "✓";
 
     // instance variables
-    private boolean isDone; // state of task
-    private String taskName; // name of task
+    protected boolean isDone; // state of task
+    protected String taskName; // name of task
 
     // constructor
     Task(boolean isDone, String taskName) {
