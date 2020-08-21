@@ -1,5 +1,11 @@
 public class StringUtils {
     public static String[] parseInputSections(String input, String breakPt1, String breakPt2) throws DukeException {
+        try {
+            checkIllegalChar(input);
+        } catch (DukeException e) {
+            throw e;
+        }
+
         int size = 2;
         if (breakPt2.equals("")) {
             size = 1;
@@ -34,6 +40,15 @@ public class StringUtils {
         res[1] = splitByBP2[1].trim();
 
         return res;
+    }
+
+    private static void checkIllegalChar(String input) throws DukeException {
+        char[] illegalChar = {'|'};
+        for (char c : illegalChar) {
+            if (input.indexOf(c) != -1) {
+                throw new DukeException("Illegal Character: " + c);
+            }
+        }
     }
 
     public static <T> void printWithWrapper(T[] arr, boolean withNumbering) {
