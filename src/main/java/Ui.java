@@ -8,6 +8,7 @@ public class Ui {
 
     public Ui() {
         sc = new Scanner(System.in);
+        print(output("Hello! I'm Duke\n\t  What can I do for you?"));
     }
 
     public void print(String str) {
