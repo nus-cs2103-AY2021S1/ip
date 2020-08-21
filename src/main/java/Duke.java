@@ -73,6 +73,10 @@ public class Duke {
         return this.storage.get(i-1);
     }
 
+    public Task removeTask(int i) {
+        return this.storage.remove(i-1);
+    }
+
     public void doTask(String params) throws DukeInputException {
         if (params.equals("")) {
             throw new DukeInputException("'done' requires parameters.\n" +
@@ -96,6 +100,24 @@ public class Duke {
             String printText = (i + 1) + ". " + this.storage.get(i).toString();
             System.out.println(printText);
         }
+    }
+
+    public void deleteTask(String params) throws DukeInputException{
+        if (params.equals("")) {
+            throw new DukeInputException("'delete' requires parameters.\n" +
+                    "Use case: delete <task number>");
+        }
+        int i;
+        try {
+            i = Integer.parseInt(params);
+        } catch (NumberFormatException e) {
+            throw new DukeInputException("Please input number instead of <" + params + "> after a 'delete' command!");
+        }
+
+        Task temp = this.removeTask(i);
+        System.out.println("Alright. I've removed this task:");
+        System.out.println("\t" + temp.toString());
+        System.out.println("Now you have " + storage.size() + " tasks in the list.");
     }
 
     public static void main(String[] args) {
@@ -128,6 +150,8 @@ public class Duke {
                     duke.addDeadline(params);
                 } else if (command.equals("event")) {
                     duke.addEvent(params);
+                } else if (command.equals("delete")) {
+                    duke.deleteTask(params);
                 } else {
                     throw new DukeInputException("Invalid command <" + s + "> given.");
                 }
