@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -101,8 +103,12 @@ public class Duke {
                         conditionError(TaskTypes.deadline);
                         break;
                     }
-                    Task deadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
-                    addTask(deadline);
+                    try {
+                        Task deadline = new Deadline(deadlineInfo[0], LocalDate.parse(deadlineInfo[1]));
+                        addTask(deadline);
+                    } catch (DateTimeParseException e) {
+                        System.out.println(">> Please format your date in YYYY-MM-DD format!");
+                    }
                     break;
                 case event:
                     if (chunks.length < 2) {
@@ -114,8 +120,12 @@ public class Duke {
                         conditionError(TaskTypes.event);
                         break;
                     }
-                    Task event = new Event(eventInfo[0], eventInfo[1]);
-                    addTask(event);
+                    try {
+                        Task event = new Event(eventInfo[0], LocalDate.parse(eventInfo[1]));
+                        addTask(event);
+                    } catch (DateTimeParseException e) {
+                        System.out.println(">> Please format your date in YYYY-MM-DD format!");
+                    }
                     break;
                 default:
                     break;
