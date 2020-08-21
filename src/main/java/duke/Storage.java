@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
+
     private final Path path;
 
     public Storage(String filePath) throws DukeLoadingErrorException {

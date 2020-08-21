@@ -3,6 +3,7 @@ package duke.command;
 import duke.*;
 import duke.exception.*;
 import duke.task.Task;
+
 public class AddTaskCommand extends Command {
 
     public AddTaskCommand(String tag, String input) {

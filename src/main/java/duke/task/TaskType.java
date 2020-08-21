@@ -1,6 +1,7 @@
 package duke.task;
 
 public enum TaskType {
+
     TODO {
         @Override
         public String toString() {
@@ -19,4 +20,5 @@ public enum TaskType {
             return "D";
         }
     }
+
 }

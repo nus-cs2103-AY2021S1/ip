@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.*;
+
 public class ByeCommand extends Command {
 
     public ByeCommand() {
