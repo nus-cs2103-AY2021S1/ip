@@ -41,33 +41,11 @@ public class Duke {
                         output = printDesign(lst.deleteWork(deleteTaskId));
                         break;
                     case TODO:
-                        Validator.info(command, splitOrder.length, false);
-                        String todoInfo = splitOrder[1];
-                        Todo newTodo = new Todo(todoInfo, false);
-                        tw.appendTask(command, todoInfo);
-                        output = printDesign(lst.addWork(newTodo));
-                        break;
                     case DEADLINE:
-                        Validator.info(command, splitOrder.length, false);
-                        String deadlineInfo = splitOrder[1];
-                        tw.appendTask(command, deadlineInfo);
-                        String[] dInfo = deadlineInfo.split(" /by ");
-                        Validator.info(command, dInfo.length, true);
-                        String deadlineEvent = dInfo[0];
-                        String deadlineTime = dInfo[1];
-                        Deadline newDeadline = new Deadline(deadlineEvent, deadlineTime, false);
-                        output = printDesign(lst.addWork(newDeadline));
-                        break;
                     case EVENT:
                         Validator.info(command, splitOrder.length, false);
-                        String eventInfo = splitOrder[1];
-                        tw.appendTask(command, eventInfo);
-                        String[] eInfo = eventInfo.split(" /at ");
-                        Validator.info(command, eInfo.length, true);
-                        String eventEvent = eInfo[0];
-                        String EventTime = eInfo[1];
-                        Event newEvent = new Event(eventEvent, EventTime, false);
-                        output = printDesign(lst.addWork(newEvent));
+                        String info = splitOrder[1];
+                        output = printDesign(tw.appendTask(command, info));
                         break;
                     default:
                         String errorCommand = "Hey!!! I'm sorry, but MUG don't know what that means :-()";

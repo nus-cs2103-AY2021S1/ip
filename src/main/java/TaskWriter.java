@@ -9,15 +9,17 @@ public class TaskWriter {
         this.filepath = filepath;
     }
 
-    public void appendTask(Command command, String info) throws IOException {
+    public String appendTask(Command command, String info) throws IOException {
         try {
             FileWriter fw = new FileWriter(this.filepath, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
+            Task newTask = null;
 
             switch(command) {
                 case TODO:
                     pw.println("TODO|0|" + info);
+                    newTask = new Todo(info);
                     break;
                 case DEADLINE:
                     String[] dInfo = info.split(" /by ");
@@ -25,6 +27,7 @@ public class TaskWriter {
                     String deadlineEvent = dInfo[0];
                     String deadlineTime = dInfo[1];
                     pw.println("DEADLINE|0|" + deadlineEvent + "|" + deadlineTime);
+                    newTask = new Deadline(deadlineEvent, deadlineTime);
                     break;
                 case EVENT:
                     String[] eInfo = info.split(" /at ");
@@ -32,6 +35,7 @@ public class TaskWriter {
                     String eventEvent = eInfo[0];
                     String eventTime = eInfo[1];
                     pw.println("EVENT|0|" + eventEvent + "|" + eventTime);
+                    newTask = new Event(eventEvent, eventTime);
                     break;
                 default:
                     break;
@@ -39,8 +43,11 @@ public class TaskWriter {
 
             pw.flush();
             pw.close();
+
+            return "Got it. MUG has added this task:\n"
+                    + newTask;
         } catch (IOException ex) {
-            throw new IOException("Something wwnt wrong. Mug fail to add the Task :_:");
+            throw new IOException("Something went wrong. Mug fail to add the Task :_:");
         }
     }
 
