@@ -3,6 +3,7 @@ package storage;
 import duke.Deadline;
 import duke.Event;
 import duke.Task;
+import duke.TaskList;
 import duke.Todo;
 import exception.DeadlineInvalidUsageException;
 import exception.EventInvalidUsageException;
@@ -58,10 +59,10 @@ public class Storage {
      * @param tasks a list of task to save
      * @return true indicating storage is updated, or false indicating storage fails to update
      */
-    public boolean save(List<Task> tasks) {
+    public boolean save(TaskList tasks) {
         try {
             BufferedWriter bw = Files.newBufferedWriter(Path.of("data/duke.txt"));
-            for (Task task : tasks) {
+            for (Task task : tasks.getAll()) {
                 String storeFormat = String.format(
                         "%s | %d | %s",
                         task.getType(),

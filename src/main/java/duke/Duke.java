@@ -20,18 +20,17 @@ import java.util.stream.Collectors;
 public class Duke {
     Scanner sc;
     String input;
-    List<Task> taskList;
+    TaskList taskList;
     Storage storage = new Storage();
 
     public Duke() {
         sc = new Scanner(System.in);
         String input;
-        taskList = new ArrayList<>();
     }
 
     public void start() {
         try {
-            this.taskList = storage.load();
+            this.taskList = new TaskList(storage.load());
             Duke.hello();
             handleInteraction();
             Duke.bye();
@@ -71,7 +70,7 @@ public class Duke {
                     // we ignore the argument after `list`.
                     System.out.println("     Here are the tasks in your list:");
                     for (int i = 0; i < taskList.size(); i++) {
-                        System.out.printf("     %d. %s%n", i + 1, taskList.get(i).showTask());
+                        System.out.printf("     %d. %s%n", i + 1, taskList.show(i));
                     }
                     break;
                 case DONE:
@@ -79,10 +78,10 @@ public class Duke {
                         int taskNumber = Integer.parseInt(parsed[1]) - 1;
                         // Check that the task number makes sense.
                         if (taskNumber >= 0 && taskNumber < taskList.size()) {
-                            taskList.get(taskNumber).markAsDone();
+                            taskList.markAsDone(taskNumber);
                             storage.save(this.taskList);
                             System.out.println("     Good job! I've marked this task as done:");
-                            System.out.printf("      %s%n", taskList.get(taskNumber).showTask());
+                            System.out.printf("      %s%n", taskList.show(taskNumber));
                         } else {
                             System.out.println("     Sorry, I can't find it in your list!");
                         }
@@ -130,10 +129,10 @@ public class Duke {
                     break;
                 case VIEWALL:
                     try {
-                        List<Task> filtered = this.viewAll(parsed[1]);
+                        TaskList filtered = taskList.viewAll(parsed[1]);
                         System.out.println("     Here are the tasks on given date:");
                         for (int i = 0; i < filtered.size(); i++) {
-                            System.out.printf("     %d. %s%n", i + 1, filtered.get(i).showTask());
+                            System.out.printf("     %d. %s%n", i + 1, filtered.show(i));
                         }
                     } catch (DateTimeException | ArrayIndexOutOfBoundsException ex) {
                         throw new ViewallInvalidUsageException("Date should be in yyyy-mm-dd format.");
@@ -169,7 +168,7 @@ public class Duke {
     private void printAddConfirmation(int index) {
         int size = taskList.size();
         System.out.println("     Got it. I've added this task:");
-        System.out.printf("       %s%n", taskList.get(index).showTask());
+        System.out.printf("       %s%n", taskList.show(index));
         System.out.printf("     Now you have %d %s in the list%n", size, size > 1 ? "tasks" : "task");
     }
 
@@ -201,13 +200,5 @@ public class Duke {
         printAddConfirmation(taskList.size() - 1);
     }
 
-    private List<Task> viewAll(String dateStr) throws DateTimeException {
-        LocalDate date = LocalDate.parse(dateStr);
-        return this.taskList
-                .stream()
-                .filter(x ->
-                        (x instanceof Event && ((Event) x).at.equals(date))
-                                || (x instanceof Deadline && ((Deadline) x).by.equals(date)))
-                .collect(Collectors.toList());
-    }
+
 }
