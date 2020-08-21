@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -12,6 +13,11 @@ public class Event extends Task {
         } catch (Exception e) {
             throw new InvalidCommandException("Invalid input datetime, please input as yyyy-MM-dd HH:mm.");
         }
+    }
+
+    @Override
+    public boolean happenOnDate(LocalDate date) {
+        return date.isEqual(atTime.toLocalDate());
     }
 
     @Override
