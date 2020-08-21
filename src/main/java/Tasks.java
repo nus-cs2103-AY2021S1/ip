@@ -27,23 +27,23 @@ public class Tasks {
             }
     
             switch(type) {
-                case DEADLINE:
-                    if (date.equals("")) {
-                        throw new DukeException("Please specify a due date using /by");
-                    } else {
-                        task = new Deadline(description, date);
-                    }
-                    break;
-                case EVENT:
-                    if (date.equals("")) {
-                        throw new DukeException("Please specify an event date using /at");
-                    } else {
-                        task = new Event(description, date);   
-                    }
-                    break;
-                default: //case: todo
-                    task = new Todo(description);
-                    break;
+            case DEADLINE:
+                if (date.equals("")) {
+                    throw new DukeException("Please specify a due date using /by");
+                } else {
+                    task = new Deadline(description, date);
+                }
+                break;
+            case EVENT:
+                if (date.equals("")) {
+                    throw new DukeException("Please specify an event date using /at");
+                } else {
+                    task = new Event(description, date);   
+                }
+                break;
+            default: //case: todo
+                task = new Todo(description);
+                break;
             }
     
             tasks.add(task);

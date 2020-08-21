@@ -38,36 +38,36 @@ public class Duke {
         while(sc.hasNextLine()) {
             String [] arr = sc.nextLine().split(" ");
 
-            switch(arr[0]) {
-                case "bye":
-                    layout.print("Bye. Hope to see you again soon!");
-                    System.exit(0);
-                    sc.close();
-                    break;
-                case "list":
-                    tasks.showTasks();
-                    break;
-                case "done":
-                    tasks.modifyTask(Tasks.Action.DONE, arr[1]);
-                    break;
-                case "delete":
-                    tasks.modifyTask(Tasks.Action.DELETE, arr[1]);
-                    break;
-                case "help": 
-                    getCommands();
-                    break;
-                case "deadline":
-                    tasks.addTask(Tasks.Type.DEADLINE, arr);
-                    break;
-                case "event":
-                    tasks.addTask(Tasks.Type.EVENT, arr);
-                    break;
-                case "todo":
-                    tasks.addTask(Tasks.Type.TODO, arr);
-                    break;
-                default:
-                    DukeException e = new DukeException("I do not understand your command");
-                    layout.print(e.getMessage());
+            switch(arr[0]) { 
+            case "bye":
+                layout.print("Bye. Hope to see you again soon!");
+                System.exit(0);
+                sc.close();
+                break;
+            case "list":
+                tasks.showTasks();
+                break;
+            case "done":
+                tasks.modifyTask(Tasks.Action.DONE, arr[1]);
+                break;
+            case "delete":
+                tasks.modifyTask(Tasks.Action.DELETE, arr[1]);
+                break;
+            case "help": 
+                getCommands();
+                break;
+            case "deadline":
+                tasks.addTask(Tasks.Type.DEADLINE, arr);
+                break;
+            case "event":
+                tasks.addTask(Tasks.Type.EVENT, arr);
+                break;
+            case "todo":
+                tasks.addTask(Tasks.Type.TODO, arr);
+                break;
+            default:
+                DukeException e = new DukeException("I do not understand your command");
+                layout.print(e.getMessage());
             }
         }
     }
