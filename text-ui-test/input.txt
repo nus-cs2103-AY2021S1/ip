@@ -22,4 +22,9 @@ event
 delete 5
 delete 3
 delete 2
+deadline test1 /by 2020-05-21
+deadline test2 /by 2020-06-20
+event test3 /at 2020-05-21
+event test4 /at 2020-06-19
+getEvents 2020-05-21
 bye
