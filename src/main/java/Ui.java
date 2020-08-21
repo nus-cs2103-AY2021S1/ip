@@ -27,4 +27,8 @@ public class Ui {
     public String readInput() {
         return sc.nextLine();
     }
+
+    public void close() {
+        output("Bye. Hope to see you again soon!");
+    }
 }
