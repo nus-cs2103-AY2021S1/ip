@@ -3,3 +3,4 @@
 ../src/main/java/Duke.java
 ../src/main/java/Deadline.java
 ../src/main/java/Todo.java
+../src/main/java/DukeException.java

@@ -1,7 +1,11 @@
-public class Todo extends Task{
+public class Todo extends Task {
 
     Todo(String name) {
-        super(name);
+        super(name, Duke.TaskType.TODO);
+    }
+
+    Todo(String name, boolean done) {
+        super(name, Duke.TaskType.TODO, done);
     }
 
     @Override
