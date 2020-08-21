@@ -37,7 +37,7 @@ public class Duke {
     }
 
     public static void addTask(String s, String next) throws DukeException {
-        Task toAdd = new Task("");
+        Task toAdd = null;
         if (s.matches("todo|deadline|event|done|delete") && next.equals("")) {
             throw new DukeException("OOPS!!! The description of " + s + " cannot be empty.");
         }
@@ -50,17 +50,33 @@ public class Duke {
                 break;
             }
             case "deadline": {
-                String[] ls = next.split(" /by ");
-                Deadline deadline = new Deadline(ls[0], ls[1]);
-                storage.add(deadline);
-                toAdd = deadline;
+                if (next.contains("/by ")) {
+                    String[] ls = next.split(" /by ");
+                    Deadline deadline = new Deadline(ls[0], ls[1]);
+                    storage.add(deadline);
+                    toAdd = deadline;
+                } else {
+                    throw new DukeException("Sorry, please specify expected deadline after \"/by\".");
+//                    System.out.println(
+//                            border + "Sorry, please specify expected deadline after \"/by\"\n"
+//                            + border
+//                    );
+                }
                 break;
             }
             case "event": {
-                String[] ls = next.split(" /at ");
-                Event event = new Event(ls[0], ls[1]);
-                storage.add(event);
-                toAdd = event;
+                if (next.contains("/at ")) {
+                    String[] ls = next.split(" /at ");
+                    Event event = new Event(ls[0], ls[1]);
+                    storage.add(event);
+                    toAdd = event;
+                } else {
+                    throw new DukeException("Sorry, please specify event date after \"/at\".");
+//                    System.out.println(
+//                            border + "Sorry, please specify event date after \"/at\"\n"
+//                            + border
+//                    );
+                }
                 break;
             }
             default:
