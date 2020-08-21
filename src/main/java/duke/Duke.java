@@ -7,9 +7,14 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Files;
+
+import java.time.DateTimeException;
+import java.time.LocalDate;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Duke {
     Scanner sc;
@@ -65,29 +70,31 @@ public class Duke {
         String[] tokens = line.split("(\\s)*(\\|)(\\s)*");
         Task task;
 
-        if (tokens.length < 2) {
+        try {
+            switch (tokens[0]) {
+            case "T":
+                task = new Todo(tokens[2]);
+                break;
+            case "D":
+                task = Deadline.create(tokens[2], tokens[3]);
+                break;
+            case "E":
+                task = Event.create(tokens[2], tokens[3]);
+                break;
+            default:
+                throw new StorageException("Unknown task identifier " + tokens[0] + "! Skipping...");
+            }
+
+            if (tokens[1].equals("1")) {
+                task.markAsDone();
+            }
+
+            return task;
+        } catch (ArrayIndexOutOfBoundsException ex) {
             throw new StorageException("Data" + line + "in wrong format! Skipping...");
+        } catch (EventInvalidUsageException | DeadlineInvalidUsageException ex) {
+            throw new StorageException(ex.getMessage());
         }
-
-        switch (tokens[0]) {
-        case "T":
-            task = new Todo(tokens[2]);
-            break;
-        case "D":
-            task = new Deadline(tokens[2], tokens[3]);
-            break;
-        case "E":
-            task = new Event(tokens[2], tokens[3]);
-            break;
-        default:
-            throw new StorageException("Unknown task identifier " + tokens[0] + "! Skipping...");
-        }
-
-        if (tokens[1].equals("1")) {
-            task.markAsDone();
-        }
-
-        return task;
     }
 
     /**
@@ -203,6 +210,17 @@ public class Duke {
                         throw new EventInvalidUsageException("Event description cannot be empty.");
                     }
                     break;
+                case VIEWALL:
+                    try {
+                        List<Task> filtered = this.viewAll(parsed[1]);
+                        System.out.println("     Here are the tasks on given date:");
+                        for (int i = 0; i < filtered.size(); i++) {
+                            System.out.printf("     %d. %s%n", i + 1, filtered.get(i).showTask());
+                        }
+                    } catch (DateTimeException | ArrayIndexOutOfBoundsException ex) {
+                        throw new ViewallInvalidUsageException("Date should be in yyyy-mm-dd format.");
+                    }
+                    break;
                 default:
                     throw new UnknownCommandException();
                 }
@@ -254,37 +272,22 @@ public class Duke {
     }
 
     private void addDeadline(String deadline) throws DeadlineInvalidUsageException {
-        String[] parsedDeadline = deadline.split("\\s*/by\\s*", 2);
-
-        if (parsedDeadline.length < 2) {
-            throw new DeadlineInvalidUsageException("You should specify the deadline by using `/by`");
-        }
-        if (parsedDeadline[0].equals("")) {
-            throw new DeadlineInvalidUsageException("Deadline description cannot be empty.");
-        }
-        if (parsedDeadline[1].equals("")) {
-            throw new DeadlineInvalidUsageException("Deadline date cannot be empty.");
-        }
-        taskList.add(new Deadline(parsedDeadline[0], parsedDeadline[1]));
-        Duke.updateStorage(this.taskList);
+        taskList.add(Deadline.create(deadline));
         printAddConfirmation(taskList.size() - 1);
     }
 
     private void addEvent(String event) throws EventInvalidUsageException {
-        String[] parsedEvent = event.split("\\s*/at\\s*", 2);
-
-        if (parsedEvent.length < 2) {
-            throw new EventInvalidUsageException("You should specify a date by using `/at`");
-        }
-        if (parsedEvent[0].equals("")) {
-            throw new EventInvalidUsageException("Event description cannot be empty.");
-        }
-        if (parsedEvent[1].equals("")) {
-            throw new EventInvalidUsageException("Event date cannot be empty.");
-        }
-        taskList.add(new Event(parsedEvent[0], parsedEvent[1]));
-        Duke.updateStorage(this.taskList);
+        taskList.add(Event.create(event));
         printAddConfirmation(taskList.size() - 1);
     }
-}
 
+    private List<Task> viewAll(String dateStr) throws DateTimeException {
+        LocalDate date = LocalDate.parse(dateStr);
+        return this.taskList
+                .stream()
+                .filter(x ->
+                        (x instanceof Event && ((Event) x).at.equals(date))
+                                || (x instanceof Deadline && ((Deadline) x).by.equals(date)))
+                .collect(Collectors.toList());
+    }
+}
