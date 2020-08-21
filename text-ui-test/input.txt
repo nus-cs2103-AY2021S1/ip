@@ -1,14 +1,15 @@
 bash
 todo
-todo borrow books
-deadline assignment 1
-deadline assignment 1 /by
-deadline assignment 1 /by Thursday
+todo buy CD
+deadline cs3230 assignment 1
+deadline cs3230 assignment 1 /by
+deadline cs3230 assignment 1 /by Thursday
+deadline cs3230 assignment 1 /by 2020-08-22
 list
-event cs2103 project meeting /at today
-deadline tutorial 1 /by 25 Aug
-todo verify critical data
-todo return books
+event cs2101 op meeting /at 2020-08-31 12:00
+deadline utw2001 final paper /by 2020-11-03
+todo clean room
+todo wash clothes
 list
 done
 done 3
@@ -16,8 +17,13 @@ list
 delete
 delete 2
 list
+deadline cs2101 email /by 2020-08-31
+event family party /at 2020-08-31 19:00
+happens on today
+happens on 2020-08-31
 done 1
 list
 done 2
 list
+happens on 2020-08-31
 bye
