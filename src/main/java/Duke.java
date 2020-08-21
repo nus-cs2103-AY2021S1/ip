@@ -162,7 +162,7 @@ public class Duke {
                     case DELETE:
                         Task toDelete = list.get(m - 1);
                         list.remove(toDelete);
-                        deleteTask(list);
+                        storage.deleteTask(list);
                         ui.output("Noted. I've removed this task:\n\t    " + toDelete +
                                 "\n\t  Now you have " + list.size());
                         count--;
@@ -179,7 +179,7 @@ public class Duke {
                         break;
                     case TASK:
                         Task task = generate(input);
-                        addToList(task);
+                        storage.addToList(task);
                         list.add(count++, task);
                         String temp = count <= 1 ? " task" : " tasks";
                         ui.output("Got it. I've added this task:\n\t    " + task +
