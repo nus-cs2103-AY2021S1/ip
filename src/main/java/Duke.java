@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,6 +16,8 @@ public class Duke {
     private static final String INPUT_DEADLINE = "deadline";
     private static final String INPUT_EVENT = "event";
     private static final String INPUT_BYE = "bye";
+    private static final String SAVED_DATA_PATHNAME = "./data";
+    private static final String SAVED_DATA_FILENAME = "duke.txt";
 
     public static void main(String[] args) throws DukeException{
 
@@ -19,6 +25,8 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         List<Task> tasks = new ArrayList<>();
+        File retrievedFile = retrieveSavedData();
+        addRetrievedTasksToList(retrievedFile, tasks);
 
 
         while (!scanner.hasNext(INPUT_BYE)) {
@@ -62,6 +70,7 @@ public class Duke {
 
         }
 
+        saveData(tasks);
         System.out.println("    ____________________________________________________________");
         System.out.println("    Bye. Hope to see you again soon!");
         System.out.println("    ____________________________________________________________");
@@ -173,6 +182,73 @@ public class Duke {
         System.out.println("       " + newTask);
         System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
         System.out.println(HORIZONTAL_BREAK);
+    }
+
+    private static File retrieveSavedData() {
+        File directory = new File(SAVED_DATA_PATHNAME);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        File file = new File(SAVED_DATA_PATHNAME + "/" + SAVED_DATA_FILENAME);
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
+    }
+
+    private static void addRetrievedTasksToList(File file, List<Task> tasks) {
+        try {
+            Scanner scanner = new Scanner(file);
+
+            while(scanner.hasNextLine()) {
+                String[] line = scanner.nextLine().split("\\|");
+                Task newTask = null;
+                switch (line[0].strip()) {
+                case "T":
+                    newTask = new ToDo(line[2].strip());
+                    break;
+                case "D":
+                    newTask = new Deadline(line[2].strip(), line[3].strip());
+                    break;
+                case "E":
+                    newTask = new Event(line[2].strip(), line[3].strip());
+                    break;
+                }
+                if (line[1].strip().equals("1")) {
+                    newTask.setDone();
+                }
+                tasks.add(newTask);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void saveData(List<Task> tasks) {
+        File file = new File(SAVED_DATA_PATHNAME + "/" + SAVED_DATA_FILENAME);
+        try {
+            resetFileContents(SAVED_DATA_PATHNAME + "/" + SAVED_DATA_FILENAME);
+            for (Task task : tasks) {
+                appendToFile(SAVED_DATA_PATHNAME + "/" + SAVED_DATA_FILENAME,
+                        task.getSaveFormat() + "\n");
+            }
+        } catch (IOException e) {
+            System.out.println("Something went wrong while trying to save your data... :/");
+        }
+    }
+
+    private static void resetFileContents(String filePath) throws IOException {
+        FileWriter fileWriter = new FileWriter(filePath);
+        fileWriter.write("");
+        fileWriter.close();
+    }
+
+    private static void appendToFile(String filePath, String lineToAdd) throws IOException {
+        FileWriter fileWriter = new FileWriter(filePath, true);
+        fileWriter.write(lineToAdd);
+        fileWriter.close();
     }
 
 }
