@@ -121,8 +121,16 @@ public class Duke {
         }
     }
 
-    private static void deleteTask(List<Task> list) {
-
+    private static void deleteTask(List<Task> list) throws InvalidCommandException {
+        try {
+            FileWriter fw = new FileWriter("data/tasks.txt");
+            for (Task task : list) {
+                fw.write(task.output());
+            }
+            fw.close();
+        } catch (IOException e) {
+            throw new InvalidCommandException("Can't write to the file.");
+        }
     }
 
     public static void main(String[] args) {
