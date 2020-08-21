@@ -35,19 +35,20 @@ public class Logic {
 
 
     public boolean digestString(String answer) {
-
         try {
-            String editted_answer = answer.strip().toLowerCase();
+            String edittedAnswer = answer.strip().toLowerCase();
             String[] answers = answer.split(" ");
             if (answers.length == 2 && answers[0].equals(COMMANDS.DONE.text)) {
                 return store.completeTask(answers[1]);
             } else if (answers.length == 2 && answers[0].equals(COMMANDS.DELETE.text)) {
                 return store.deleteTask(answers[1]);
-            }  else if (editted_answer.equals(COMMANDS.LIST.text)) {
+            }  else if (edittedAnswer.equals(COMMANDS.LIST.text)) {
                 return this.store.printStore();
-            } else if (editted_answer.equals(COMMANDS.EXIT.text)) {
+            } else if (edittedAnswer.equals(COMMANDS.EXIT.text)) {
                 return this.exit();
-            } else if (answers[0].equals(COMMANDS.TODO.text) || answers[0].equals(COMMANDS.DEADLINE.text) || answers[0].equals(COMMANDS.EVENT.text) ) {
+            } else if (answers[0].equals(COMMANDS.TODO.text) ||
+                    answers[0].equals(COMMANDS.DEADLINE.text) ||
+                    answers[0].equals(COMMANDS.EVENT.text) ) {
                 return this.understandingTask(answer);
             } else {
                 throw new DukeCannotUnderstandException();

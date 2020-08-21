@@ -33,14 +33,14 @@ public class Store {
             toAdd = new Task(actual_item);
             this.addTask(toAdd);
         } else {
-            String[] parts_of_task = actual_item.split("/");
-            if (parts_of_task.length != 2) {
+            String[] partsOfTask = actual_item.split("/");
+            if (partsOfTask.length != 2) {
                 String instruction = "<type of task> <description> / <deadline>";
                 if (type.equals(TYPES.EVENT.text)) instruction = "<type of task> <description> / <date of event>";
                 throw new DukeGotNoArgumentsException(instruction);
             } else {
-                String description = parts_of_task[0];
-                String duedate = parts_of_task[1];
+                String description = partsOfTask[0];
+                String duedate = partsOfTask[1];
                 if (type.equals(TYPES.DEADLINE.text)) {
                     toAdd = new Deadline(description.strip(), duedate.strip());
                     this.addTask(toAdd);
@@ -86,28 +86,28 @@ public class Store {
 
     public boolean completeTask(String answer) {
         try {
-            Integer one_index = Integer.valueOf(answer);
-            Integer real_index = one_index - 1;
-            Task toComplete = this.allItems.get(real_index);
+            Integer oneIndex = Integer.valueOf(answer);
+            Integer realIndex = oneIndex - 1;
+            Task toComplete = this.allItems.get(realIndex);
             toComplete.finishTask();
-        } catch (NumberFormatException ex) {
+        } catch (NumberFormatException e) {
             System.out.println("I can't seem to understand what task you are referring to.\n" +
                     "Please let me know in this format: done <number of task>\n" + line);
-        } catch (IndexOutOfBoundsException ex) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Hmm... I don't have a task numbered " + answer + "\n" + line);
         }
         return true;
     }
     public boolean deleteTask(String answer) {
         try {
-            int one_index = Integer.parseInt(answer);
-            int real_index = one_index - 1;
-            this.allItems.remove(real_index);
+            int oneIndex = Integer.parseInt(answer);
+            int realIndex = oneIndex - 1;
+            this.allItems.remove(realIndex);
             System.out.println("I have removed the task from your list.\n" + line);
-        } catch (NumberFormatException ex) {
+        } catch (NumberFormatException e) {
             System.out.println("I can't seem to understand what task you are referring to.\n" +
                     "Please let me know in this format: done <number of task>\n" + line);
-        } catch (IndexOutOfBoundsException ex) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Hmm... I don't have a task numbered " + answer + "\n" + line);
         }
         return true;
