@@ -40,7 +40,7 @@ public class TaskWriter {
             FileWriter fw = new FileWriter(this.filepath, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            Task newTask = taskCreator(command, false, info, " /by", " /at");
+            Task newTask = taskCreator(command, false, info, " /by ", " /at ");
 
             switch(command) {
                 case TODO:
@@ -112,7 +112,7 @@ public class TaskWriter {
         }
 
         if (taskId > taskTrack) {
-            return "MUG don't have this task to delete @_@";
+            return "MUG don't have this task to Delete @_@";
         } else {
             return "Noted. MUG has removed this task:\n"
                     + deleteTask;

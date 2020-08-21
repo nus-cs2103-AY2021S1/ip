@@ -11,7 +11,6 @@ public class Duke {
     private static void order() {
         Scanner sc = new Scanner(System.in);
         String output;
-        WorkList lst = new WorkList();
         TaskWriter tw = new TaskWriter("mug.txt");
 
         while (sc.hasNextLine()) {
