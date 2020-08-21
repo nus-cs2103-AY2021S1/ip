@@ -1,9 +1,15 @@
-public class Event extends Task {
-    private String date;
-
+public class Event extends DatedTask {
     public Event(String name, String date) {
-        super(name);
-        this.date = date;
+        super(name, date);
+    }
+
+    public Event(String name, boolean completed, String date) {
+        super(name, completed, date);
+    }
+
+    @Override
+    public String format() {
+        return "E" + SAVE_DELIMITER + super.format();
     }
 
     @Override
