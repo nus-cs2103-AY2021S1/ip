@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,7 +18,30 @@ public class Duke {
         duke.run();
     }
 
-    public void list() {
+    public void saveToDisk() {
+        try {
+            new File("./data").mkdirs();
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("./data/duke.txt"));
+            oos.writeObject(store);
+            oos.flush();
+            oos.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void loadFromDisk() {
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("./data/duke.txt"));
+            store = (List<Task>) ois.readObject();
+            listTasks();
+            ois.close();
+        } catch (Exception e) {
+            store = new ArrayList<>();
+        }
+    }
+
+    public void listTasks() {
         System.out.println("Here are the tasks in your list:");
         int count = 0;
         for (Task task : store) {
@@ -75,8 +99,8 @@ public class Duke {
 
     public void run() {
         Scanner scanner = new Scanner(System.in);
-        store = new ArrayList<>();
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        loadFromDisk();
         boolean running = true;
         while (running) {
             String input = scanner.nextLine().trim();
@@ -90,7 +114,7 @@ public class Duke {
                         running = false;
                         break;
                     case "list":
-                        list();
+                        listTasks();
                         break;
                     case "todo":
                     case "deadline":
@@ -111,6 +135,7 @@ public class Duke {
                     default:
                         throw new InvalidCommandException();
                 }
+                saveToDisk();
             } catch(DukeException e) {
                 System.out.println(e.getMessage());
             }
