@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 public class Duke {
     public static List<Task> todoList = new ArrayList<>();
+    public static String line = "---------------------------------------------------";
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String line = "---------------------------------------------------";
         String welcome = line + "\nHello! I'm Duke!\n" +
                 "What can I do for you?\n" + line ;
         //System.out.println(logo + "\n" + welcome);
@@ -55,12 +55,17 @@ public class Duke {
                 task.isDone = true;
                 System.out.println(line + "\nNice! I have marked this task as done: \n  " + task.toString());
             } else {
-                try {
-                    storeTask(word);
-                    System.out.println(line + "\nadded: " + word);
-                } catch (BlahException e){
-                    System.out.println(e.toString());
-                };
+                if (word.length() > 6 && word.substring(0,7).equals("delete ")) {
+                    int taskNo = Character.getNumericValue(word.charAt(7)) - 1;
+                    delete(taskNo);
+                } else {
+                    try {
+                        storeTask(word);
+                        System.out.println(line + "\nadded: " + word);
+                    } catch (BlahException e){
+                        System.out.println(e.toString());
+                    }
+                }
             }
             word = scan.nextLine();
         }
@@ -115,5 +120,14 @@ public class Duke {
             todoList.add(curr);
             return curr;
         }
+    }
+
+    public static void delete(int n) {
+        Task task = todoList.remove(n);
+        for (int i = n; i < todoList.size(); i++) {
+            todoList.get(i).index = todoList.get(i).index - 1;
+        }
+        System.out.println(line + "\nNoted. I've removed this task:\n  " + task.toString()
+                + "\nNow you have " + todoList.size() + " tasks in the list.\n" + line);
     }
 }
