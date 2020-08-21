@@ -13,6 +13,10 @@ public class Event extends Task {
 		this.eventDate = date;
     }
 
+    public String getEventDate() {
+        return this.eventDate;
+    }
+
     @Override
     public String toString() {
 
