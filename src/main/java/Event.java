@@ -7,11 +7,21 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public Event(String desc, boolean isDone, String at) {
+        super(desc, isDone);
+        this.at = at;
+    }
+
     @Override
     public Task setDone() {
         Task doneTask = new Event(this.desc, this.at);
         doneTask.isDone = true;
         return doneTask;
+    }
+
+    @Override
+    public String formatTask() {
+        return ("E" + " | " + (isDone ? "V" : "X") + " | " + desc + " | " + this.at);
     }
 
     @Override

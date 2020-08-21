@@ -8,10 +8,19 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String desc, boolean isDone) {
+        this.desc = desc;
+        this.isDone = isDone;
+    }
+
     public Task setDone() {
         Task doneTask = new Task(this.desc);
         doneTask.isDone = true;
         return doneTask;
+    }
+
+    public String formatTask() {
+        return ("P" + " | " + (isDone ? "V" : "X") + " | " + desc);
     }
 
     @Override

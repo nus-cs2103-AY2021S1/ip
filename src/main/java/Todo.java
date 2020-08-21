@@ -4,11 +4,19 @@ public class Todo extends Task {
         super(desc);
     }
 
+    public Todo(String desc, boolean isDone) {
+        super(desc, isDone);
+    }
+
     @Override
     public Task setDone() {
         Task doneTask = new Todo(this.desc);
         doneTask.isDone = true;
         return doneTask;
+    }
+
+    public String formatTask() {
+        return ("T" + " | " + (isDone ? "V" : "X") + " | " + desc);
     }
 
     @Override
