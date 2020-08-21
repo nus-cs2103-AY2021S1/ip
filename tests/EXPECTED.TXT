@@ -1,6 +1,9 @@
 Hello, I'm ikurabowl
 What can I do for you?
 >
+cleared all tasks.
+--------------------------------------
+>
 added: [T] [✘] task one
 --------------------------------------
 >
@@ -10,26 +13,26 @@ added: [T] [✘] task two
 added: [T] [✘] task three
 --------------------------------------
 >
-added: [E] [✘] event one (at: never)
+added: [E] [✘] event one (at: 31 December 2020)
 --------------------------------------
 >
-added: [E] [✘] event two (at: later)
+added: [E] [✘] event two (at: 20 November 2020)
 --------------------------------------
 >
-added: [D] [✘] super important submission (by: tomorrow)
+added: [D] [✘] super important submission (by: 18 March 2025)
 --------------------------------------
 >
-added: [D] [✘] not so important thing (by: next year)
+added: [D] [✘] not so important thing (by: 31 December 9999)
 --------------------------------------
 >
 currently tracking 7 tasks (7 pending, 0 done, 0.0% complete)
   1. [T] [✘] task one
   2. [T] [✘] task two
   3. [T] [✘] task three
-  4. [E] [✘] event one (at: never)
-  5. [E] [✘] event two (at: later)
-  6. [D] [✘] super important submission (by: tomorrow)
-  7. [D] [✘] not so important thing (by: next year)
+  4. [E] [✘] event one (at: 31 December 2020)
+  5. [E] [✘] event two (at: 20 November 2020)
+  6. [D] [✘] super important submission (by: 18 March 2025)
+  7. [D] [✘] not so important thing (by: 31 December 9999)
 --------------------------------------
 >
 marked as done:
@@ -48,20 +51,20 @@ currently tracking 7 tasks (5 pending, 2 done, 28.6% complete)
   1. [T] [✓] task one
   2. [T] [✓] task two
   3. [T] [✘] task three
-  4. [E] [✘] event one (at: never)
-  5. [E] [✘] event two (at: later)
-  6. [D] [✘] super important submission (by: tomorrow)
-  7. [D] [✘] not so important thing (by: next year)
+  4. [E] [✘] event one (at: 31 December 2020)
+  5. [E] [✘] event two (at: 20 November 2020)
+  6. [D] [✘] super important submission (by: 18 March 2025)
+  7. [D] [✘] not so important thing (by: 31 December 9999)
 --------------------------------------
 >
 marked as done:
-  [E] [✓] event two (at: later)
+  [E] [✓] event two (at: 20 November 2020)
 
 currently tracking 7 tasks (4 pending, 3 done, 42.9% complete)
 --------------------------------------
 >
 marked as done:
-  [E] [✓] event one (at: never)
+  [E] [✓] event one (at: 31 December 2020)
 
 currently tracking 7 tasks (3 pending, 4 done, 57.1% complete)
 --------------------------------------
@@ -70,10 +73,10 @@ currently tracking 7 tasks (3 pending, 4 done, 57.1% complete)
   1. [T] [✓] task one
   2. [T] [✓] task two
   3. [T] [✘] task three
-  4. [E] [✓] event one (at: never)
-  5. [E] [✓] event two (at: later)
-  6. [D] [✘] super important submission (by: tomorrow)
-  7. [D] [✘] not so important thing (by: next year)
+  4. [E] [✓] event one (at: 31 December 2020)
+  5. [E] [✓] event two (at: 20 November 2020)
+  6. [D] [✘] super important submission (by: 18 March 2025)
+  7. [D] [✘] not so important thing (by: 31 December 9999)
 --------------------------------------
 >
 error: task number '10' was out of bounds
@@ -96,34 +99,34 @@ task 1 is already marked as done:
 --------------------------------------
 >
 error: task description cannot be empty
-usage: deadline <description> /by <time>
+usage: deadline <description> /by <date>
 --------------------------------------
 >
 error: task description cannot be empty
-usage: deadline <description> /by <time>
+usage: deadline <description> /by <date>
 --------------------------------------
 >
 error: incorrect date specification
-usage: deadline <description> /by <time>
+usage: deadline <description> /by <date>
 --------------------------------------
 >
 error: deadline requires a date
-usage: deadline <description> /by <time>
+usage: deadline <description> /by <date>
 --------------------------------------
 >
 error: task description cannot be empty
-usage: event <description> /at <time>
+usage: event <description> /at <date>
 --------------------------------------
 >
 error: task description cannot be empty
-usage: event <description> /at <time>
+usage: event <description> /at <date>
 --------------------------------------
 >
 error: incorrect date specification
-usage: event <description> /at <time>
+usage: event <description> /at <date>
 --------------------------------------
 >
 error: event requires a date
-usage: event <description> /at <time>
+usage: event <description> /at <date>
 --------------------------------------
 > goodbye

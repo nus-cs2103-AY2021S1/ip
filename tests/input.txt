@@ -1,10 +1,11 @@
+reset
 todo task one
 todo task two
 todo task three
-event event one /at never
-event event two /at later
-deadline super important submission /by tomorrow
-deadline not so important thing /by next year
+event event one /at 2020-12-31
+event event two /at 2020-11-20
+deadline super important submission /by 2025-03-18
+deadline not so important thing /by 9999-12-31
 list
 done 1
 done 2
@@ -18,11 +19,11 @@ done asdf
 delete 1
 done 1
 deadline
-deadline /at 30
-deadline ijkl /at 10
+deadline /at 1999-12-31
+deadline ijkl /at 1999-12-31
 deadline ijkl
 event
-event /by 30
-event asdf /by 10
+event /by 1999-12-31
+event asdf /by 1999-12-31
 event asdf
 bye
