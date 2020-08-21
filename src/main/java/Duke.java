@@ -111,10 +111,14 @@ public class Duke {
         }
     }
 
-    private static void addToList(Task task) throws IOException {
-        FileWriter fw = new FileWriter("data/tasks.txt", true);
-        fw.write(task.toString());
-        fw.close();
+    private static void addToList(Task task) throws InvalidCommandException {
+        try {
+            FileWriter fw = new FileWriter("data/tasks.txt", true);
+            fw.write(task.toString());
+            fw.close();
+        } catch (IOException e) {
+            throw new InvalidCommandException("Can't write to the file.");
+        }
     }
 
     public static void main(String[] args) {
