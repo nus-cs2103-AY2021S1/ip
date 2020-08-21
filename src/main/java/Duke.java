@@ -11,8 +11,7 @@ public class Duke {
         list = storage.list;
     }
 
-    public static void main(String[] args) {
-        String path = "../data/tasks.txt";
+    public void run() {
         boolean flag = true;
         while (flag) {
             try {
@@ -24,5 +23,10 @@ public class Duke {
             }
         }
         ui.close();
+    }
+
+    public static void main(String[] args) {
+        String path = "../data/tasks.txt";
+        new Duke(path).run();
     }
 }
