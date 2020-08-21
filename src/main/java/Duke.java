@@ -18,11 +18,12 @@ public class Duke {
         System.out.println(logo);
 
         displayThis("Hello! I'm Duke, your Windows Task Manager" +
-                "\n    Legal commands includes: " +
-                "\n    list, done <num>" +
-                "\n    todo <task>, " +
-                "\n    deadline <task> /by <yyyy-mm-dd>" +
-                "\n    event <task> /at <yyyy-mm-dd>");
+                "\n    Valid command:" +
+                "\n    - list" +
+                "\n    - done <num>" +
+                "\n    - todo <task>" +
+                "\n    - deadline <task> /by <yyyy-mm-dd>" +
+                "\n    - event <task> /at <yyyy-mm-dd>");
 
         try {
             toDoList = DukeFileHandler.readFile();
