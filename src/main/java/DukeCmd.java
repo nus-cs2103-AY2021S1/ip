@@ -41,11 +41,11 @@ public class DukeCmd {
             if (!matcher.matches()) continue;
 
             // Look up command and execute
-            DukeCmdKey key = DukeCmdKey.fromString(matcher.group(1));
+            DukeCmdEnum key = DukeCmdEnum.fromString(matcher.group(1));
             key.execute(this.taskList, matcher.group(2));
 
             // Exit DukeCmd
-            if (key.equals(DukeCmdKey.BYE)) {
+            if (key.equals(DukeCmdEnum.BYE)) {
                 break;
             }
         }

@@ -7,20 +7,19 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public enum DukeCmdKey {
+public enum DukeCmdEnum {
 
     BYE {
         @Override
         public void execute(List<Task> taskList, String cmdParam) {
             // Nothing to do
-            return;
         }
     },
 
     LIST {
         @Override
         public void execute(List<Task> taskList, String cmdParam) {
-            // Print all tasks in tasklist
+            // Print all tasks in taskList
             int i = 0;
             for (Task item : taskList) {
                 System.out.println(++i + ". " + item.toString());
@@ -48,7 +47,7 @@ public enum DukeCmdKey {
     DELETE {
         @Override
         public void execute(List<Task> taskList, String cmdParam) {
-            // Remove task from tasklist
+            // Remove task from taskList
             try {
                 int taskIndex = Integer.parseInt(cmdParam.trim()) - 1;
                 Task task = taskList.remove(taskIndex);
@@ -64,7 +63,7 @@ public enum DukeCmdKey {
     TODO {
         @Override
         public void execute(List<Task> taskList, String cmdParam) {
-            // Add todoTask to tasklist
+            // Add todoTask to taskList
             if (!cmdParam.isBlank()) {
                 Task task = new ToDo(cmdParam.trim());
                 taskList.add(task);
@@ -110,7 +109,6 @@ public enum DukeCmdKey {
         public void execute(List<Task> taskList, String cmdParam) {
             // Nothing to do
             System.out.println("Unknown Command!");
-            return;
         }
     };
 
@@ -128,12 +126,12 @@ public enum DukeCmdKey {
      * @param command The DukeCmd command
      * @return The corresponding DukeCmdKey
      */
-    public static DukeCmdKey fromString(String command) {
+    public static DukeCmdEnum fromString(String command) {
         String s = command.toUpperCase();
-        for (DukeCmdKey dukeCmdKey : DukeCmdKey.values()) {
-            if (s.equals(dukeCmdKey.toString())) return dukeCmdKey;
+        for (DukeCmdEnum dukeCmdEnum : DukeCmdEnum.values()) {
+            if (s.equals(dukeCmdEnum.toString())) return dukeCmdEnum;
         }
-        return DukeCmdKey.UNDEFINED;
+        return DukeCmdEnum.UNDEFINED;
     }
 
 }
