@@ -1,10 +1,18 @@
 import java.io.IOException;
 
 public class Duke {
-    public static void main(String[] args) throws IOException, InvalidCommandException {
-        Ui ui = new Ui();
-        Storage storage = new Storage("../data/tasks.txt");
-        TaskList list = storage.list;
+    private Storage storage;
+    private TaskList list;
+    private Ui ui;
+
+    public Duke(String filePath) throws IOException, InvalidCommandException {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        list = storage.list;
+    }
+
+    public static void main(String[] args) {
+        String path = "../data/tasks.txt";
         boolean flag = true;
         while (flag) {
             try {
