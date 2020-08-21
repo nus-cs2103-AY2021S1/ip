@@ -7,9 +7,9 @@ public class Deadline extends Task {
     public Deadline(String description, String byTime) throws InvalidCommandException {
         super(description);
         try {
-            this.byTime = LocalDate.parse(byTime, DateTimeFormatter.ofPattern("yyyy-mm-dd"));
+            this.byTime = LocalDate.parse(byTime, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         } catch (Exception e) {
-            throw new InvalidCommandException("Invalid input date: " + e.getMessage() + ", please input as yyyy-mm-dd");
+            throw new InvalidCommandException("Invalid input date, please input as yyyy-mm-dd.");
         }
     }
 
