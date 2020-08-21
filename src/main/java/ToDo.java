@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public class ToDo extends Task{
 
     public ToDo(String name) {
@@ -9,4 +11,10 @@ public class ToDo extends Task{
         return "[T]" + super.toString();
     }
 
+    @Override
+    public HashMap<String, String> convertToHashMap() {
+        HashMap<String, String> dict = super.convertToHashMap();
+        dict.put("type", "ToDo");
+        return dict;
+    }
 }

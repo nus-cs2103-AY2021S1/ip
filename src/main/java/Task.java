@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public class Task {
     private String name;
     private boolean done;
@@ -14,6 +16,14 @@ public class Task {
 
     public void doTask() {
         this.done = true;
+    }
+
+    public HashMap<String, String> convertToHashMap() {
+        HashMap<String, String> dict = new HashMap<>();
+        dict.put("type", "Task");
+        dict.put("name", this.name);
+        dict.put("done", this.done ? "true" : "false");
+        return dict;
     }
 
     public String toString() {

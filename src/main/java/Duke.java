@@ -1,3 +1,9 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -5,9 +11,24 @@ import java.util.Scanner;
 public class Duke {
 
     private List<Task> storage;
+    private Path filePath = Path.of("/data","data.txt");
 
     public Duke() {
         storage = new ArrayList<>();
+        try {
+            Files.createFile(this.filePath);
+        } catch (IOException e) {
+            try {
+                Files.createDirectory(Path.of("/data"));
+            } catch (IOException e2) {
+                //System.out.println(e2.toString());
+            }
+        }
+    }
+
+    public Duke(String filePath) {
+        storage = new ArrayList<>();
+        //TODO: Initialize storage with items
     }
 
     public void greet() {
@@ -19,8 +40,24 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
     }
 
-    public void bye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String saveDataGenerator() {
+        SaveManager sm = new SaveManager();
+        final String[] saveData = {""};
+
+        this.storage.forEach(task -> saveData[0] += sm.toSaveFormat(task.convertToHashMap()));
+        return saveData[0];
+    }
+
+    public void bye() throws DukeInputException{
+        try {
+            BufferedWriter bw = Files.newBufferedWriter(this.filePath);
+            bw.write(this.saveDataGenerator());
+            bw.close();
+        } catch (IOException e) {
+            throw new DukeInputException("Unable to write to file <" + this.filePath + "> when exiting");
+        } finally {
+            System.out.println("Bye. Hope to see you again soon!");
+        }
     }
 
     public void store(Task t) {
@@ -122,6 +159,7 @@ public class Duke {
 
     public static void main(String[] args) {
         //initialize Duke and send welcome message
+        //TODO: add File data support for new Duke(File file) and use in initialization
         Duke duke = new Duke();
         duke.greet();
 
@@ -162,7 +200,24 @@ public class Duke {
         }
 
         //send exit message
-        duke.bye();
+        //TODO: add saving to file on exit. Change duke.bye()
+        try {
+            duke.bye();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+
+        /*testing code to check if printout to savefile worked
+        try {
+            Scanner sc2 = new Scanner(new File("/data/data.txt"));
+            while (sc2.hasNext()) {
+                System.out.println(sc2.nextLine());
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
+         */
 
     }
 }
