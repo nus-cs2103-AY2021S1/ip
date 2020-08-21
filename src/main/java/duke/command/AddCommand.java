@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.InvalidCommandException;
 import duke.Task;
-import duke.TaskList;
+import duke.component.TaskList;
 import duke.component.Parser;
 import duke.component.Storage;
 import duke.component.Ui;

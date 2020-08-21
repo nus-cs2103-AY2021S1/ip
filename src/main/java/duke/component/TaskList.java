@@ -1,4 +1,6 @@
-package duke;
+package duke.component;
+
+import duke.Task;
 
 import java.util.ArrayList;
 import java.util.function.Predicate;

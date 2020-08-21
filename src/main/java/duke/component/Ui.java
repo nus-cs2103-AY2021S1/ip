@@ -1,7 +1,6 @@
 package duke.component;
 
 import duke.Task;
-import duke.TaskList;
 
 import java.util.Scanner;
 import java.util.function.Predicate;

@@ -3,6 +3,7 @@ package duke;
 import duke.command.Command;
 import duke.component.Parser;
 import duke.component.Storage;
+import duke.component.TaskList;
 import duke.component.Ui;
 
 public class Duke {
