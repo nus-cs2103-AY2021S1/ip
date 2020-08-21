@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    private final List<Task> list;
+    private final List<Task> tasks;
     public static final String DIVIDER = "----------------------------------------";
 
     public Duke() {
-        this.list = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     public static void main(String[] args) {
@@ -19,20 +19,19 @@ public class Duke {
     }
 
     public void greet() {
-        String text =
-                "  ______  _____  __  ____     __     _______      \n" +
-                        " |__  __||  __ | | \\ |  |    /_ \\    |   ___|     \n" +
-                        "    | |  | | | | |  \\|  |   //_\\ \\   |  |___          \n" +
-                        " _  | |  | | | | | |\\   |  / ____ \\  |____  |   \n" +
-                        "| |_| |  | |_| | | | \\  | / /    \\ \\ _____| |         \n" +
-                        "|_____|  |_____| |_|  \\_|/_/      \\_\\|______|       \n" +
-                        "                  _____   ______  ________                            \n" +
-                        "                  |  _ \\ |  _  | |__   __|                  \n" +
-                        "                  | |_| || | | |    | |                      \n" +
-                        "                  |    / | | | |    | |         \n" +
-                        "                  |  _ \\ | |_| |    | |       \n" +
-                        "                  | |_| ||     |    | |         \n" +
-                        "                  |_____/|_____|    |_|                 \n";
+        String text = "  ______  _____  __  ____     __     _______      \n" +
+                " |__  __||  __ | | \\ |  |    /_ \\    |   ___|     \n" +
+                "    | |  | | | | |  \\|  |   //_\\ \\   |  |___          \n" +
+                " _  | |  | | | | | |\\   |  / ____ \\  |____  |   \n" +
+                "| |_| |  | |_| | | | \\  | / /    \\ \\ _____| |         \n" +
+                "|_____|  |_____| |_|  \\_|/_/      \\_\\|______|       \n" +
+                "                  _____   ______  ________                            \n" +
+                "                  |  _ \\ |  _  | |__   __|                  \n" +
+                "                  | |_| || | | |    | |                      \n" +
+                "                  |    / | | | |    | |         \n" +
+                "                  |  _ \\ | |_| |    | |       \n" +
+                "                  | |_| ||     |    | |         \n" +
+                "                  |_____/|_____|    |_|                 \n";
         String greeting = "  Hello! I am JonasBot! Nice to meet you :) \n" +
                 text +
                 "  \n  I am a task manager bot that will keep track of all your tasks. \n" +
@@ -84,33 +83,33 @@ public class Duke {
     }
 
     public void retrieveList() {
-        if (this.list.isEmpty()) {
+        if (this.tasks.isEmpty()) {
             System.out.println("Your list is empty. Add a new task!");
         } else {
             System.out.println("Here is a list of all your tasks:");
-            for (int i = 0; i < this.list.size(); i++) {
+            for (int i = 0; i < this.tasks.size(); i++) {
                 int index = i + 1;
-                System.out.println("\t" + String.format("%d. %s", index, this.list.get(i)));
+                System.out.println("\t" + String.format("%d. %s", index, this.tasks.get(i)));
             }
         }
     }
 
     public void completeTask(int index) throws InvalidTaskException, InvalidFunctionException {
         try {
-            if (index > this.list.size()) {
+            if (index > this.tasks.size()) {
                 String err = "Invalid Task! The task does not exist, try again.";
                 throw new InvalidTaskException(err);
             } else if (index <= 0) {
                 String err = "The task ID you provided is not valid. Input '/commands' to view a list of my commands. ";
                 throw new InvalidFunctionException(err);
             } else {
-                if (this.list.get(index - 1).isDone) {
+                if (this.tasks.get(index - 1).isDone) {
                     System.out.println("  This task has already been completed:");
                 } else {
-                    this.list.get(index - 1).markAsDone();
+                    this.tasks.get(index - 1).markAsDone();
                     System.out.println("  Nice! I've marked this task as done:");
                 }
-                System.out.println("\t" + this.list.get(index - 1));
+                System.out.println("\t" + this.tasks.get(index - 1));
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
             String err = "No Task ID provided! Please input the ID of the task you wish to mark as completed.";
@@ -123,18 +122,18 @@ public class Duke {
 
     public void deleteTask(int index) throws InvalidTaskException, InvalidFunctionException {
         try {
-            if (index > this.list.size()) {
+            if (index > this.tasks.size()) {
                 String err = "Invalid Task! The task does not exist, try again.";
                 throw new InvalidTaskException(err);
             } else if (index <= 0) {
                 String err = "The task ID you provided is not valid. Input '/commands' to view a list of my commands. ";
                 throw new InvalidFunctionException(err);
             } else {
-                Task toRemove = this.list.get(index - 1);
+                Task toRemove = this.tasks.get(index - 1);
                 System.out.println("  Found it! This task has been successfully deleted:");
                 System.out.println("\t" + toRemove);
-                this.list.remove(index - 1);
-                System.out.println("  You have " + this.list.size() + " tasks in your list now.");
+                this.tasks.remove(index - 1);
+                System.out.println("  You have " + this.tasks.size() + " tasks in your list now.");
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
             String err = "No Task ID provided! Please input the ID of the task you wish to delete.";
@@ -169,10 +168,10 @@ public class Duke {
                 description = message.split("todo")[1];
                 if (taskChecker("todo", description, time)) {
                     Task toAdd = new Todo(description);
-                    this.list.add(toAdd);
+                    this.tasks.add(toAdd);
                     System.out.println("  Success! This todo task has been added:");
                     System.out.println("\t" + toAdd);
-                    System.out.println("  You have " + list.size() + " tasks in your list now.");
+                    System.out.println("  You have " + this.tasks.size() + " tasks in your list now.");
                 } else {
                     String err = "Your todo task does not have a description. \n" +
                             "Type '/commands' to view the correct command for task creation! ";
@@ -185,10 +184,10 @@ public class Duke {
                 time = taskArray[1];
                 if (taskChecker("deadline", description, time)) {
                     Task toAdd = new Deadline(description, time);
-                    this.list.add(toAdd);
+                    this.tasks.add(toAdd);
                     System.out.println("  Success! This deadline task has been added:");
                     System.out.println("\t" + toAdd);
-                    System.out.println("  You have " + list.size() + " tasks in your list now.");
+                    System.out.println("  You have " + this.tasks.size() + " tasks in your list now.");
                 } else {
                     String err = "Your deadline task is missing a description. Please try again! \n" +
                             "Type '/commands' to view the correct command for task creation! ";
@@ -201,10 +200,10 @@ public class Duke {
                 time = taskArray[1];
                 if (taskChecker("event", description, time)) {
                     Task toAdd = new Event(description, time);
-                    this.list.add(toAdd);
+                    this.tasks.add(toAdd);
                     System.out.println("  Success! This event task has been added:");
                     System.out.println("\t" + toAdd);
-                    System.out.println("  You have " + list.size() + " tasks in your list now.");
+                    System.out.println("  You have " + this.tasks.size() + " tasks in your list now.");
                 } else {
                     String err = "Your event task is missing a description. Please try again! \n" +
                             "Type '/commands' to view the correct command for task creation! ";
