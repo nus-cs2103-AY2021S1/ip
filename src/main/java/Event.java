@@ -29,6 +29,11 @@ public class Event extends Task{
         return "EVENT";
     }
 
+    @Override
+    public String getCommand() {
+        return String.format("%s /at %s", getMessage(), getDate());
+    }
+
     public static Task parseCommand(String args) {
         //Create the matcher
         Matcher matcher = date_match.matcher(args);

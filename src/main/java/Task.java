@@ -29,6 +29,7 @@ public abstract class Task {
     }
 
     public abstract String getType();
+    public abstract String getCommand();
 
     public void markDone(){
 

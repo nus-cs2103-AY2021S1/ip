@@ -29,6 +29,11 @@ public class Deadline extends Task{
         return "DEADLINE";
     }
 
+    @Override
+    public String getCommand() {
+        return String.format("%s /by %s", getMessage(), getDate());
+    }
+
     public static Task parseCommand(String args) {
         //Create the matcher
         Matcher matcher = date_match.matcher(args);
