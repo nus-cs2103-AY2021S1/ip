@@ -1,4 +1,8 @@
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,6 +19,12 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke duke = new Duke();
+
+        try {
+            duke.loadFile();
+        } catch (IOException e) {
+
+        }
         duke.hello();
         Scanner sc = new Scanner(System.in);
         String[] next = sc.nextLine().split(" ",2);
@@ -29,6 +39,11 @@ public class Duke {
                     System.out.println("This task has been mark as done.");
                     System.out.println(cur);
                     System.out.println();
+                    try {
+                        duke.saveFile();
+                    } catch (IOException e) {
+
+                    }
                 } catch (NumberFormatException e) {
                     System.err.println(new DoneUnknownException());
                 } catch (IndexOutOfBoundsException e) {
@@ -43,6 +58,11 @@ public class Duke {
                     System.out.println("This task has been deleted.");
                     System.out.println(cur);
                     System.out.println();
+                    try {
+                        duke.saveFile();
+                    } catch (IOException e) {
+
+                    }
                 } catch (NumberFormatException e) {
                     System.err.println(new DeleteUnknownException());
                 } catch (IndexOutOfBoundsException e) {
@@ -51,6 +71,11 @@ public class Duke {
             } else if (next[0].equals("event") || next[0].equals("todo") || next[0].equals("deadline")) {
                 try {
                     duke.addTask(next);
+                    try {
+                        duke.saveFile();
+                    } catch (IOException e) {
+
+                    }
                 } catch(DukeException e) {
                     System.err.println(e);
                 }
@@ -59,6 +84,7 @@ public class Duke {
             }
             next = sc.nextLine().split(" ",2);
         }
+
         duke.goodbyeMessage();
     }
 
@@ -128,5 +154,56 @@ public class Duke {
         }
         System.out.println();
     }
+
+
+
+    private void loadFile() throws IOException {
+        File f = new File("data/duke.txt");
+        if(f.exists()) {
+            Scanner sc = new Scanner(f);
+            while (sc.hasNext()) {
+                String temp = sc.nextLine();
+                String[] res = temp.split(" # ");
+                if (res[0].equals("T")) {
+                    boolean isDone = false;
+                    if(res[1].equals("1")) {
+                        isDone = true;
+                    }
+                    Task cur = new Task(res[2], isDone);
+                    this.taskList.add(cur);
+                } else if (res[0].equals("D")) {
+                    boolean isDone = false;
+                    if (res[1].equals("1")) {
+                        isDone = true;
+                    }
+                    Task cur = new Deadline(res[2], isDone, res[3]);
+                    this.taskList.add(cur);
+                } else {
+                    boolean isDone = false;
+                    if (res[1].equals("1")) {
+                        isDone = true;
+                    }
+                    Task cur = new Event(res[2], isDone, res[3]);
+                    this.taskList.add(cur);
+                }
+            }
+            sc.close();
+        } else {
+            f.createNewFile();
+        }
+    }
+
+    public void saveFile() throws IOException {
+        FileWriter fw = new FileWriter("data/duke.txt");
+        int len = this.taskList.size();
+        for (int i = 0; i < len;i++) {
+            Task current = this.taskList.get(i);
+            fw.write(current.writeToFile());
+            fw.write(System.lineSeparator());
+        }
+        fw.close();
+
+    }
+
 
 }
