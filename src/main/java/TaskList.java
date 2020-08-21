@@ -28,6 +28,10 @@ public class TaskList {
 
     }
 
+    public ArrayList<Task> getList(){
+        return list;
+    }
+
     public int size(){
 
         //Get the size of the list
