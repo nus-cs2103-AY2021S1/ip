@@ -3,33 +3,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    final static List<Task> tasks = new ArrayList<>();
+    private final List<Task> tasks;
 
-    public static void main(String[] args) {
-        speak("Hello! I'm Duke\nWhat can I do for you?");
-
-        Scanner scanner = new Scanner(System.in);
-
-        String userInput;
-        while (!(userInput = scanner.nextLine()).equals("bye")) {
-            try {
-                parseInputs(userInput);
-            } catch (DukeException e) {
-                speak(e.getMessage());
-            }
-        }
-
-        Duke.speak("Bye. Hope to see you again soon!");
-
-        scanner.close();
+    Duke() {
+        this.tasks = new ArrayList<>();
     }
 
-    public static void speak(String message) {
+    public void speak(String message) {
         String horizontalLine = "____________________________________________________________";
         System.out.printf("%s\n%s\n%s\n", horizontalLine, message, horizontalLine);
     }
 
-    public static void parseInputs(String userInput) throws DukeException {
+    public void parseInputs(String userInput) throws DukeException {
         String[] commandInputs = userInput.split(" ", 2);
 
         if (commandInputs.length == 0) {
@@ -49,11 +34,11 @@ public class Duke {
             case LIST:
                 StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
 
-                for (int i = 0; i < Duke.tasks.size(); i++) {
+                for (int i = 0; i < this.tasks.size(); i++) {
                     sb.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
                 }
 
-                Duke.speak(sb.toString().trim());
+                this.speak(sb.toString().trim());
                 break;
 
             case DONE:
@@ -65,10 +50,10 @@ public class Duke {
 
                 try {
                     int taskId = Integer.parseInt(commandDetails);
-                    Task task = tasks.get(taskId - 1);
+                    Task task = this.tasks.get(taskId - 1);
                     task.markAsDone();
 
-                    Duke.speak(String.format("Nice! I've marked this task as done:\n%s", task));
+                    this.speak(String.format("Nice! I've marked this task as done:\n%s", task));
                 } catch (NumberFormatException e) {
                     throw new DukeException(
                             "Please key in only the integer representing the task you want to mark as complete!");
@@ -85,9 +70,9 @@ public class Duke {
 
                 try {
                     int taskId = Integer.parseInt(commandDetails);
-                    Task task = tasks.remove(taskId - 1);
+                    Task task = this.tasks.remove(taskId - 1);
 
-                    Duke.speak(String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.",
+                    this.speak(String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.",
                             task, tasks.size()));
                 } catch (NumberFormatException e) {
                     throw new DukeException("Please key in only the integer representing the task you want to delete!");
@@ -133,14 +118,35 @@ public class Duke {
                     task = new Event(description, at);
                 }
 
-                tasks.add(task);
+                this.tasks.add(task);
 
-                Duke.speak(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
-                        task, tasks.size()));
+                this.speak(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
+                        task, this.tasks.size()));
                 break;
 
             case UNKNOWN:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+
+        duke.speak("Hello! I'm Duke\nWhat can I do for you?");
+
+        Scanner scanner = new Scanner(System.in);
+
+        String userInput;
+        while (!(userInput = scanner.nextLine()).equals("bye")) {
+            try {
+                duke.parseInputs(userInput);
+            } catch (DukeException e) {
+                duke.speak(e.getMessage());
+            }
+        }
+
+        duke.speak("Bye. Hope to see you again soon!");
+
+        scanner.close();
     }
 }
