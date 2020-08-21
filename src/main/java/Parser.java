@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 public class Parser {
     public static int isValidDone(String cmd, int count) throws InvalidCommandException {
@@ -100,7 +99,7 @@ public class Parser {
         }
     }
 
-    public static Input getType(String input) throws InvalidCommandException {
+    public static Input getType(String input) {
         if (input.equals("bye")) {
             return Input.BYE;
         } else if (input.equals("list")) {
