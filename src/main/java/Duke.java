@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -111,12 +113,13 @@ public class Duke {
 
 
     private static void addToList(Task task) throws IOException {
-
+        FileWriter fw = new FileWriter("data/tasks.txt", true);
+        fw.write(task.toString());
+        fw.close();
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
         System.out.println(output("Hello! I'm Duke\n\t  What can I do for you?"));
         List<Task> list = new ArrayList<>();
         int count = 0;
