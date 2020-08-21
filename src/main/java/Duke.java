@@ -100,14 +100,18 @@ public class Duke {
                             try {
                                 String toDelete = userInput.substring(7);
                                 int index = Integer.parseInt(toDelete);
-                                System.out.println(line);
-                                System.out.print(bot);
-                                System.out.println("Noted! I've deleted this task:");
-                                System.out.println(tasks.get(index - 1));
-                                tasks.remove(index - 1);
-                                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                                System.out.println(line);
-                            } catch (IndexOutOfBoundsException ex){
+                                if (index <= tasks.size() && index > 0) {
+                                    System.out.println(line);
+                                    System.out.print(bot);
+                                    System.out.println("Noted! I've deleted this task:");
+                                    System.out.println(tasks.get(index - 1));
+                                    tasks.remove(index - 1);
+                                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                                    System.out.println(line);
+                                } else {
+                                    throw new IndexOutOfBoundsException();
+                                }
+                            } catch (NumberFormatException | IndexOutOfBoundsException ex){
                                 throw new DukeException("The number keyed in is invalid!");
                             }
                         } else {
@@ -117,7 +121,6 @@ public class Duke {
                     default:
                         throw new DukeException("You have keyed in an invalid command!\n(Valid commands: todo, deadline, event, list, delete, bye)");
                 }
-
             } catch (DukeException ex) {
                 System.out.println(line);
                 System.out.print(bot);
