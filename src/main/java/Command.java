@@ -7,5 +7,5 @@ public abstract class Command {
         this.input = input;
     }
 
-    abstract public void execute(Ui ui, TaskList list, Storage storage);
+    abstract public void execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException;
 }

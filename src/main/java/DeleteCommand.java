@@ -1,6 +1,6 @@
 public class DeleteCommand extends Command {
     @Override
-    public void execute(Ui ui, TaskList list, Storage storage) {
+    public void execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
         int count = list.count;
         int m = Parser.isValidDelete(input, count) - 1;
         Task toDelete = list.get(m);
