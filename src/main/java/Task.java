@@ -14,6 +14,11 @@ public class Task {
         this.done = false;
     }
 
+    public Task(String name, boolean done) {
+        this.name = name;
+        this.done = done;
+    }
+
     public void doTask() {
         this.done = true;
     }

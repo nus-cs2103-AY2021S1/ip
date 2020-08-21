@@ -1,6 +1,6 @@
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,9 +26,27 @@ public class Duke {
         }
     }
 
-    public Duke(String filePath) {
+    public Duke(Path filePath) {
         storage = new ArrayList<>();
+
         //TODO: Initialize storage with items
+        try {
+            File saveFile = new File("/data/data.txt");
+            Scanner sc = new Scanner(saveFile);
+            SaveManager sm = new SaveManager();
+            while (sc.hasNext()) {
+                storage.add(sm.loadTaskFromSave(sc.nextLine()));
+            }
+        } catch (FileNotFoundException e) {
+            try {
+                Files.createFile(filePath);
+            } catch (IOException e2) {
+                System.out.println("Unable to create new Data File");
+                System.out.println(e2.toString());
+            }
+        } catch (DukeSaveDataException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void greet() {
@@ -160,7 +178,7 @@ public class Duke {
     public static void main(String[] args) {
         //initialize Duke and send welcome message
         //TODO: add File data support for new Duke(File file) and use in initialization
-        Duke duke = new Duke();
+        Duke duke = new Duke(Path.of("data/data.txt"));
         duke.greet();
 
         //input loop
@@ -200,7 +218,6 @@ public class Duke {
         }
 
         //send exit message
-        //TODO: add saving to file on exit. Change duke.bye()
         try {
             duke.bye();
         } catch (DukeException e) {

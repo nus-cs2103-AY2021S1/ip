@@ -9,6 +9,11 @@ public class Event extends Task {
         this.when = when;
     }
 
+    public Event(String name, String when, boolean done) {
+        super(name, done);
+        this.when = when;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.when + ")";
