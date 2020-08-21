@@ -1,3 +1,4 @@
+list
 bash
 todo
 todo buy CD
