@@ -1,7 +1,0 @@
-T | 1 | read book
-D | 0 | return book | 28-07-2020 12:00
-T | 1 | join sports club
-T | 1 | play
-T | 1 | eat
-T | 0 | sleep
-E | 0 | project meeting | 08-08-2020 15:00

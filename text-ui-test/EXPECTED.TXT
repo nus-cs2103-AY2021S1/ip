@@ -7,10 +7,10 @@ Got it. I've added this task:
 [T][✗] read book
 Now you have 2 tasks in the list.
 Got it. I've added this task:
-[D][✗] return book (by: June 6th)
+[D][✗] return book (by: 6 Jun 2020, 12:00 pm)
 Now you have 3 tasks in the list.
 Got it. I've added this task:
-[E][✗] project meeting (at: Aug 6th 2-4pm)
+[E][✗] project meeting (at: 8 Aug 2020, 03:00 pm)
 Now you have 4 tasks in the list.
 Got it. I've added this task:
 [T][✗] join sports club
@@ -18,15 +18,15 @@ Now you have 5 tasks in the list.
 Here are the tasks in your list:
 1.[T][✗] borrow book
 2.[T][✗] read book
-3.[D][✗] return book (by: June 6th)
-4.[E][✗] project meeting (at: Aug 6th 2-4pm)
+3.[D][✗] return book (by: 6 Jun 2020, 12:00 pm)
+4.[E][✗] project meeting (at: 8 Aug 2020, 03:00 pm)
 5.[T][✗] join sports club
 Nice! I've marked this task as done:
-[D][✓] return book (by: June 6th)
+[D][✓] return book (by: 6 Jun 2020, 12:00 pm)
 Here are the tasks in your list:
 1.[T][✗] borrow book
 2.[T][✗] read book
-3.[D][✓] return book (by: June 6th)
-4.[E][✗] project meeting (at: Aug 6th 2-4pm)
+3.[D][✓] return book (by: 6 Jun 2020, 12:00 pm)
+4.[E][✗] project meeting (at: 8 Aug 2020, 03:00 pm)
 5.[T][✗] join sports club
 Bye. Hope to see you soon!
