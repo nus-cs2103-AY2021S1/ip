@@ -1,0 +1,17 @@
+public class DeleteCommand extends Command {
+    int taskId;
+
+    DeleteCommand(int taskId) {
+        this.taskId = taskId;
+    }
+
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        Task task = tasks.deleteTask(taskId);
+
+        storage.deleteExistingTask(taskId);
+
+        ui.print(String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.", task,
+                tasks.size()));
+    }
+}
