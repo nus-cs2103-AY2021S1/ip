@@ -18,6 +18,10 @@ public class Task {
         isDone = true;
     }
 
+    public String output() {
+        return " | " + getStatusIcon() + " | " + description;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -108,11 +111,35 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    private static void addToList(Task task) throws InvalidCommandException {
+        try {
+            FileWriter fw = new FileWriter("../data/tasks.txt", true);
+            fw.write(task.output());
+            fw.close();
+        } catch (IOException e) {
+            throw new InvalidCommandException(e.getMessage());
+        }
+    }
 
+    private static void deleteTask(List<Task> list) throws InvalidCommandException {
+        try {
+            FileWriter fw = new FileWriter("../data/tasks.txt");
+            for (Task task : list) {
+                fw.write(task.output());
+            }
+            fw.close();
+        } catch (IOException e) {
+            throw new InvalidCommandException(e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(System.in);
         System.out.println(output("Hello! I'm Duke\n\t  What can I do for you?"));
         List<Task> list = new ArrayList<>();
+        FileWriter fw = new FileWriter("../data/tasks.txt");
+        fw.write("");
+        fw.close();
         int count = 0;
         boolean flag = true;
         while (flag) {
@@ -145,12 +172,14 @@ public class Duke {
                     case DELETE:
                         Task toDelete = list.get(m - 1);
                         list.remove(toDelete);
+                        deleteTask(list);
                         System.out.println(output("Noted. I've removed this task:\n\t    " + toDelete +
                                 "\n\t  Now you have " + list.size()));
                         count--;
                         break;
                     case TASK:
                         Task task = generate(input);
+                        addToList(task);
                         list.add(count++, task);
                         String temp = count <= 1 ? " task" : " tasks";
                         System.out.println(output("Got it. I've added this task:\n\t    " + task +
