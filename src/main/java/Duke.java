@@ -1,6 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Duke {
     // all valid commands
@@ -15,9 +16,21 @@ public class Duke {
     }
 
     // validate command format
-    public static void validateCommandDesc(String desc) throws DukeException {
-        if (desc.isEmpty()) {
+    public static void validateCommandDesc(String desc, Command type) throws DukeException {
+        // trim whitespaces
+        String result = desc.trim();
+        if (result.isEmpty()) {
             throw new DukeException("Command description cannot be empty.");
+        } 
+        if (type == Command.DEADLINE) {
+            if (!result.contains("/by") || result.split("/by").length <= 1 || result.split("/by")[0].isEmpty()) {
+                throw new DukeException("Be sure to include a task description and date in the correct format.");
+            }
+        }
+        if (type == Command.EVENT) {
+            if (!result.contains("/at") || result.split("/at").length <= 1 || result.split("/at")[0].isEmpty()) {
+                throw new DukeException("Be sure to include a task description and date in the correct format.");
+            }
         }
     }
 
@@ -58,7 +71,7 @@ public class Duke {
                         break;
                     // add toDoTask
                     case TODO:
-                        Duke.validateCommandDesc(value);
+                        Duke.validateCommandDesc(value, Command.TODO);
                         tasks.add(new ToDoTask(value));
                         System.out.println("----- Received, added the following task:\n" + tasks.get(tasks.size() - 1));
                         System.out.println("You now have " + tasks.size() + " pending tasks.");
@@ -69,9 +82,11 @@ public class Duke {
                     case EVENT:
                         String[] splitValue;
                         if (command == Command.DEADLINE) {
+                            Duke.validateCommandDesc(value, Command.DEADLINE);
                             splitValue = value.split("/by ");
                             tasks.add(new DeadlineTask(splitValue[0], splitValue[1]));
                         } else {
+                            Duke.validateCommandDesc(value, Command.EVENT);
                             splitValue = value.split("/at ");
                             tasks.add(new EventTask(splitValue[0], splitValue[1]));
                         }
