@@ -1,12 +1,15 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
     private final String filePath;
+    public final List<Task> list;
 
     public Storage(String filePath) {
         this.filePath = filePath;
+        list = new ArrayList<>();
     }
 
     public void addToList(Task task) throws InvalidCommandException {
