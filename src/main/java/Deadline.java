@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     private final LocalDate byTime;
@@ -6,9 +7,9 @@ public class Deadline extends Task {
     public Deadline(String description, String byTime) throws InvalidCommandException {
         super(description);
         try {
-            this.byTime = LocalDate.parse(byTime);
+            this.byTime = LocalDate.parse(byTime, DateTimeFormatter.ofPattern("yyyy-mm-dd"));
         } catch (Exception e) {
-            throw new InvalidCommandException("Invalid input date: " + e.getMessage());
+            throw new InvalidCommandException("Invalid input date: " + e.getMessage() + ", please input as yyyy-mm-dd");
         }
     }
 
