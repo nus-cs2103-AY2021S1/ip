@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,9 +17,14 @@ public class Duke {
         todo, deadline, event
     }
 
+    private enum TaskSymbols {
+        T, E, D
+    }
+
     public static void main(String[] args) {
         tasks = new ArrayList<>();
         greet();
+        retrieveTaskList();
         Scanner sc = new Scanner(System.in);
         converse(sc);
     }
@@ -24,15 +33,70 @@ public class Duke {
         System.out.println(">> Beep Boop. I am Aq-bot.\n>> How can I help?");
     }
 
+    private static void retrieveTaskList() {
+        try {
+            File directory = new File("data");
+            File file = new File("data/duke.txt");
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+            if (file.exists()) {
+                Scanner fr = new Scanner(file);
+                while (fr.hasNextLine()) {
+                    String ln = fr.nextLine();
+                    String[] taskInfo = ln.split(Task.ESCAPED_SAVE_DELIMITER);
+                    TaskSymbols type = TaskSymbols.valueOf(taskInfo[0]);
+                    switch(type) {
+                        case T:
+                            addTask(new Todo(taskInfo[1], Boolean.valueOf(taskInfo[2])));
+                            break;
+                        case E:
+                            addTask(new Event(taskInfo[1], Boolean.valueOf(taskInfo[2]), taskInfo[3]));
+                            break;
+                        case D:
+                            addTask(new Deadline(taskInfo[1], Boolean.valueOf(taskInfo[2]), taskInfo[3]));
+                            break;
+                    }
+                }
+            } else {
+                file.createNewFile();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(">> Oh no! I can't find your file :(");
+        } catch (IOException e) {
+            System.out.println(">> Oh no! The file couldn't be created for some reason!");
+        }
+    }
+
+    private static void saveTasksToFile() {
+        try {
+            FileWriter fw = new FileWriter("data/duke.txt");
+            for (Task t : tasks) {
+                fw.write(t.format() + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(">> Oh no! Your tasks could not be saved!");
+        }
+    }
+
     private static void addTask(Task task) {
         tasks.add(task);
+        saveTasksToFile();
         System.out.println(">> Added the task:\n>> " + task + "\n>> You now have " + tasks.size() + " tasks to do!");
     }
 
     private static void deleteTask(int idx) {
         Task task = tasks.get(idx);
         tasks.remove(idx);
+        saveTasksToFile();
         System.out.println(">> I've eradicated the task:\n>> " + task + "\n>> You now have " + tasks.size() + " tasks to do!");
+    }
+
+    private static void completeTask(int idx) {
+        tasks.get(idx).complete();
+        saveTasksToFile();
+        System.out.println(">> Yay! The following task is marked as done:\n>> " + tasks.get(idx));
     }
 
     private static void descriptionError(TaskTypes type) {
@@ -80,8 +144,7 @@ public class Duke {
                     break;
                 case done:
                     int index = Integer.parseInt(chunks[1]) - 1;
-                    tasks.get(index).complete();
-                    System.out.println(">> Yay! The following task is marked as done:\n>> " + tasks.get(index));
+                    completeTask(index);
                     break;
                 case todo:
                     if (chunks.length < 2) {
