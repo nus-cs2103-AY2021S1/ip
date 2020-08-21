@@ -2,18 +2,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
     private final String filePath;
-    public final List<Task> list;
+    public final TaskList list;
     public int count;
 
     public Storage(String filePath) throws FileNotFoundException, InvalidCommandException {
         this.filePath = filePath;
-        list = new ArrayList<>();
+        list = new TaskList();
         count = 0;
         File file = new File(filePath);
         Scanner sc = new Scanner(file);
@@ -59,7 +57,7 @@ public class Storage {
         }
     }
 
-    public void deleteTask(List<Task> list) throws InvalidCommandException {
+    public void deleteTask(TaskList list) throws InvalidCommandException {
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Task task : list) {
