@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,7 +14,8 @@ import java.util.Scanner;
 public class Duke {
     private List<Task> tasks = new ArrayList<>();
 
-    private static String filePath = "./data/duke.txt";
+    private static String filePathName = "./data/duke.txt";
+    private static Path filePath = Paths.get(filePathName);
 
     void greet() {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
@@ -25,6 +27,12 @@ public class Duke {
 
     void addTask(Task task) {
         tasks.add(task);
+        try {
+            writeToFile(FileWriterCommand.APPEND, task);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -33,6 +41,12 @@ public class Duke {
     void completeTask(int taskNo) {
         Task task = tasks.get(taskNo - 1);
         task.done();
+        try {
+            writeToFile(FileWriterCommand.EDIT, task);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(task);
     }
@@ -40,6 +54,12 @@ public class Duke {
     void deleteTask(int taskNo) {
         Task task = tasks.get(taskNo - 1);
         tasks.remove(task);
+        try {
+            writeToFile(FileWriterCommand.DELETE, task);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
         System.out.println("Noted. I've removed this task:");
         System.out.println(task);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -56,7 +76,7 @@ public class Duke {
     }
 
     private void getLocalData() throws FileNotFoundException {
-        File f = new File(filePath);
+        File f = new File(filePathName);
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
             String[] task = s.nextLine().split(" \\| ");
@@ -82,24 +102,55 @@ public class Duke {
 
     void loadFile() {
         // Initializes or loads file depending on whether it exists
-        Path txtPath = Paths.get(filePath);
         Path directory = Paths.get("./data/");
 
         try {
-            if (Files.exists(txtPath)) {
+            if (Files.exists(filePath)) {
                 // If duke.txt exists, read the file and fill task list
                 getLocalData();
             } else if (Files.exists(directory)) {
-                File txtFile = new File(filePath);
+                File txtFile = new File(filePathName);
                 txtFile.createNewFile();
             } else {
                 Files.createDirectory(directory);
-                File txtFile = new File(filePath);
+                File txtFile = new File(filePathName);
                 txtFile.createNewFile();
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    String parseTaskAsText(Task task) {
+        if(task instanceof Todo) {
+            return "T | " + (task.done ? "1" : "0") + " | " + task.description;
+        } else if(task instanceof Event) {
+            return "E | " + (task.done ? "1" : "0") + " | " + task.description + " | " + ((Event) task).date;
+        } else {
+            return "D | " + (task.done ? "1" : "0") + " | " + task.description + " | " + ((Deadline) task).date;
+        }
+    }
+
+    void writeToFile(FileWriterCommand command, Task task) throws IOException {
+        List<String> lines = Files.readAllLines(filePath, StandardCharsets.UTF_8);
+        switch(command) {
+            case APPEND: {
+                lines.add(parseTaskAsText(task));
+                break;
+            }
+            case EDIT: {
+                int lineNumber = tasks.indexOf(task);
+                lines.set(lineNumber, parseTaskAsText(task));
+                break;
+            }
+            case DELETE: {
+                int lineNumber = lines.indexOf(parseTaskAsText(task));
+                lines.remove(lineNumber);
+                break;
+            }
+        }
+
+        Files.write(filePath, lines, StandardCharsets.UTF_8);
     }
 
     void start() {
