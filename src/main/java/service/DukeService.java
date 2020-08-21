@@ -4,6 +4,7 @@ import exceptions.DukeException;
 import exceptions.ServiceException;
 
 import java.util.ArrayList;
+import java.util.function.Function;
 
 public class DukeService {
     private ArrayList<Task> tasks;
@@ -19,6 +20,18 @@ public class DukeService {
     public DukeResponse addTask(Task toAdd) {
         tasks.add(toAdd);
         return new DukeResponse("Added: " + toAdd + "\n" + numberOfElementsAnnouncement() + "\n");
+    }
+
+    public void addInitializedTasks(ArrayList<Task> otherTasks) {
+        this.tasks.addAll(otherTasks);
+    }
+
+    public String[] getParsedTasks(Function<Task, String> parser) {
+        String[] results = new String[this.tasks.size()];
+        for (int i = 0; i < tasks.size(); i++) {
+            results[i] = parser.apply(tasks.get(i));
+        }
+        return results;
     }
 
     public DukeResponse deleteTask(int position) throws ServiceException {

@@ -1,12 +1,15 @@
 import commands.*;
+import exceptions.DukeException;
 import parser.CommandParser;
 import parser.TaskParser;
 import service.*;
+import storage.Storage;
 
 import java.util.Scanner;
 
 public class Duke {
     private final static String SEPARATOR = "___________________________________________________________";
+    private final static String STORAGE = "./data/duke.txt";
 
     private static void printMessage(String message) {
         System.out.println(SEPARATOR);
@@ -40,6 +43,14 @@ public class Duke {
         taskParser.registerTask(EventTask::new, EventTask.taskWord);
         ///set task parser
         AddCommand.setTaskParser(taskParser);
+        ///initialize storage
+        Storage storage = new Storage(STORAGE, taskParser);
+        try {
+            storage.readFromFile(service);
+        } catch (DukeException e) {
+            System.out.println("Sorry I cannot load data from file");
+        }
+
 
         ///start execution
         while (true) {
@@ -57,6 +68,11 @@ public class Duke {
             if (command.equals("bye")) {
                 break;
             }
+        }
+
+        try {
+            storage.writeToFile(service);
+        } catch (DukeException ignored) {
         }
     }
 }

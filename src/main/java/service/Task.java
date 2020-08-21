@@ -3,12 +3,14 @@ package service;
 import exceptions.InvalidCommandException;
 
 public abstract class Task {
-    String[] tokens;
-    private boolean isDone;
+    public String[] tokens;
+    public String taskWord;
+    public boolean isDone;
 
-    public Task(String[] tokens) {
+    public Task(String[] tokens, String taskWord) {
         this.isDone = false;
         this.tokens = tokens;
+        this.taskWord = taskWord;
     }
 
     public void markAsDone() {

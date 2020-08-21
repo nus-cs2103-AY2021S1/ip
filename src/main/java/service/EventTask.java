@@ -12,7 +12,7 @@ public class EventTask extends Task {
     private String time;
 
     public EventTask(String[] tokens) {
-        super(tokens);
+        super(tokens, taskWord);
     }
 
     @Override

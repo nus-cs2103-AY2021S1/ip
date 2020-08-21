@@ -12,7 +12,7 @@ public class DeadlineTask extends Task {
     private String time;
 
     public DeadlineTask(String[] tokens) {
-        super(tokens);
+        super(tokens, taskWord);
     }
 
     @Override

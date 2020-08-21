@@ -10,7 +10,7 @@ public class TodoTask extends Task {
     private String description;
 
     public TodoTask(String[] tokens) {
-        super(tokens);
+        super(tokens, taskWord);
     }
 
     @Override
