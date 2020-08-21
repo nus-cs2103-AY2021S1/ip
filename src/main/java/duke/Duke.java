@@ -2,10 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.command.InvalidCommandException;
-import duke.component.Parser;
-import duke.component.Storage;
-import duke.component.TaskList;
-import duke.component.Ui;
+import duke.component.*;
 
 public class Duke {
     private Storage storage;
