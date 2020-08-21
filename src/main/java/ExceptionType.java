@@ -3,7 +3,8 @@ public enum ExceptionType {
     INVALID_ARGUMENT("Invalid value of %s with '%s'"),
     INVALID_NUMBER("'%s' is not a valid number"),
     INVALID_COMMAND("Invalid command '%s'"),
-    IO_EXCEPTION("How do I not have permission for %s");
+    IO_EXCEPTION("How do I not have permission for %s"),
+    DIRECTORY_NOT_CREATED("Unable to create directory %s");
 
     //Store the error message
     private final String errorMessage;
