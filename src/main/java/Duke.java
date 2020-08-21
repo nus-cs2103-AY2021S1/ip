@@ -1,7 +1,18 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    protected static Storage storage;
+
+    public Duke() {
+        // set up the things needed to start Duke
+        Storage.createFolder();
+        storage = new Storage();
+        if (storage.retrieveTextFile()) {
+            storage.loadData();
+        }
+    }
+
+    public void run() {
         Scanner sc = new Scanner(System.in);
         DukeCommandsHandler.greetings();
         String name = sc.nextLine();
@@ -30,5 +41,9 @@ public class Duke {
             }
         }
         sc.close();
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
     }
 }

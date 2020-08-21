@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class DukeCommandsHandler {
     private static final String divider =
             "\t----------------------------------------------------\n";
-    private static final ArrayList<Task> tasks = new ArrayList<>();
+    protected static ArrayList<Task> tasks = new ArrayList<>();
 
     protected static void greetings() {
         String logo =
@@ -28,7 +28,7 @@ public class DukeCommandsHandler {
         System.out.print(address);
     }
 
-    protected static void addToDo(String input) throws ArrayIndexOutOfBoundsException {
+    protected static void addToDo(String input) {
         String information;
         try { // user did not input description of to-do task
             information = input.split("todo")[1];
@@ -44,6 +44,7 @@ public class DukeCommandsHandler {
         String description = information.substring(1);
         Task toDo = new ToDo(description);
         tasks.add(toDo);
+        Duke.storage.saveData();
         String printing = divider
                 + "\tGotcha! I've added this task:\n\t\t"
                 + toDo + "\n\t" + "You have "
@@ -87,6 +88,7 @@ public class DukeCommandsHandler {
 
         Task deadline = new Deadline(description, by);
         tasks.add(deadline);
+        Duke.storage.saveData();
         String printing = divider
                 + "\tGotcha! I've added this task:\n\t\t"
                 + deadline + "\n\t" + "You have "
@@ -130,6 +132,7 @@ public class DukeCommandsHandler {
 
         Task event = new Event(description, at);
         tasks.add(event);
+        Duke.storage.saveData();
         String printing = divider
                 + "\tGotcha! I've added this task:\n\t\t"
                 + event + "\n\t" + "You have "
@@ -146,6 +149,7 @@ public class DukeCommandsHandler {
         }
         Task taskToBeDeleted = tasks.get(index - 1);
         tasks.remove(index - 1);
+        Duke.storage.saveData();
         String deletedTask = divider
                 + "\tRoger that! I've removed this task:\n\t\t"
                 + taskToBeDeleted
@@ -162,6 +166,7 @@ public class DukeCommandsHandler {
         }
         Task finishedTask = tasks.get(index - 1);
         finishedTask.markAsDone();
+        Duke.storage.saveData();
         String doneTask = divider
                 + "\t\\(^O^)/ Good job! I've marked this task as done:\n\t\t"
                 + finishedTask + "\n\tKeep going!\n" + divider;
@@ -170,10 +175,15 @@ public class DukeCommandsHandler {
 
     protected static void listTasks() {
         System.out.print(divider);
-        System.out.print("\tHere are the tasks on your list:\n");
-        for (int i = 0; i < tasks.size(); i++) {
-            int number = i + 1;
-            System.out.print("\t" + number + ". " + tasks.get(i) + "\n");
+        if (tasks.size() == 0) {
+            System.out.println("\tThere are currently no tasks on your list!\n"
+                    + "\tStart adding one now!");
+        } else {
+            System.out.print("\tHere are the tasks on your list:\n");
+            for (int i = 0; i < tasks.size(); i++) {
+                int number = i + 1;
+                System.out.print("\t" + number + ". " + tasks.get(i) + "\n");
+            }
         }
         System.out.print(divider);
     }
