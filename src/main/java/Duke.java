@@ -1,4 +1,8 @@
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -53,6 +57,8 @@ public class Duke {
                     duke.addTask(next);
                 } catch(DukeException e) {
                     System.err.println(e);
+                } catch (DateTimeParseException e) {
+                    System.err.println("Please input with the format dd/mm/yyyy HHmm");
                 }
             } else {
                 System.err.println(new CommandException());
@@ -94,8 +100,10 @@ public class Duke {
             }
         } else if(next[0].equals("deadline")) {
             try {
-                String[] str = next[1].split("/by", 2);
-                Task temp = new Deadline(str[0], str[1]);
+                String[] str = next[1].split("/by ", 2);
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                LocalDateTime date = LocalDateTime.parse(str[1],dateFormatter);
+                Task temp = new Deadline(str[0], date);
                 this.taskList.add(temp);
                 System.out.println("********************************************");
                 System.out.println("Added new task " + temp);
@@ -103,11 +111,15 @@ public class Duke {
                 System.out.println();
             } catch (IndexOutOfBoundsException e) {
                 throw new DeadlineException();
+            } catch (DateTimeParseException e) {
+                throw e;
             }
         } else {
             try {
-                String[] str = next[1].split("/at", 2);
-                Task temp = new Event(str[0], str[1]);
+                String[] str = next[1].split("/at ", 2);
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                LocalDateTime date = LocalDateTime.parse(str[1],dateFormatter);
+                Task temp = new Event(str[0], date);
                 this.taskList.add(temp);
                 System.out.println("********************************************");
                 System.out.println("Added new task " + temp);
@@ -115,6 +127,8 @@ public class Duke {
                 System.out.println();
             } catch (IndexOutOfBoundsException e) {
                 throw new DeadlineException();
+            } catch (DateTimeParseException e) {
+                throw e;
             }
         }
 
