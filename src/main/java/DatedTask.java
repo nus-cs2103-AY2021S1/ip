@@ -3,10 +3,14 @@
 
 import java.util.List;
 import java.util.Arrays;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class DatedTask {
 
-	public static List<String> parse(String kind, String input, String dateSpec, String usage) throws InvalidInputException {
+	public static List<String> parse(String kind, String input, String dateSpec, String usage)
+        throws InvalidInputException {
 
         var slash = input.indexOf('/');
 
@@ -29,4 +33,16 @@ public class DatedTask {
         when = when.substring(3).strip();
         return Arrays.asList(item, when);
 	}
+
+    public static LocalDate parseDate(String date) throws InvalidInputException {
+        // TODO: handle more formats, eg dd/mm/yy, dd/mm/yyyy, dd/mm
+        // TODO: handle offsets from now, eg. +7d or something like that
+
+        try {
+            return LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE);
+        } catch (DateTimeParseException e) {
+            throw new InvalidInputException(String.format("invalid date format: %s", e.getMessage()),
+                "yyyy-mm-dd");
+        }
+    }
 }
