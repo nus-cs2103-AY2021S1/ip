@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -48,8 +49,9 @@ public class Duke {
             if (order.length() > 8) {
                 Integer indexOfSlash = order.indexOf('/');
                 String content = order.substring(9, indexOfSlash);
-                String due = order.substring(indexOfSlash + 1);
-                list.add(new Deadline(content, due));
+                String due = order.substring(indexOfSlash + 4);
+                LocalDate ddl = LocalDate.parse(due);
+                list.add(new Deadline(content, ddl));
                 return "    added:" + content + "\n" + "    Now you have " + list.size() + " task(s) in the list";
             } else {
                 return "    description cannot be empty~";
@@ -58,8 +60,9 @@ public class Duke {
             if (order.length() > 5) {
                 Integer indexOfSlash = order.indexOf('/');
                 String content = order.substring(6, indexOfSlash);
-                String time = order.substring(indexOfSlash + 1);
-                list.add(new Event(content, time));
+                String time = order.substring(indexOfSlash + 4);
+                LocalDate ddl = LocalDate.parse(time);
+                list.add(new Event(content, ddl));
                 return "    added:" + content + "\n" + "    Now you have " + list.size() + " task(s) in the list";
             } else {
                 return "    description cannot be empty~";
