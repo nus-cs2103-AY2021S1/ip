@@ -7,10 +7,6 @@ public class Task {
         this.done = false;
     }
 
-    public static String getDesc(String s) {
-        return s.substring(7);
-    }
-
     public boolean getStatus() {
         return this.done;
     }
