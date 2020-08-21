@@ -15,7 +15,7 @@ public class Ui {
         System.out.println(str);
     }
 
-    private String output(String message) {
+    public String output(String message) {
         return horizontalLine + "\n\t  " + message + "\n" + horizontalLine + "\n";
     }
 
