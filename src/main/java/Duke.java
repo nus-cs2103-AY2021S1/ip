@@ -1,6 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.*;
+
 
 public class Duke {
     static String bot = "Dave says:\n";
