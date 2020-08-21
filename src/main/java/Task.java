@@ -25,9 +25,26 @@ public class Task {
         return this.isDone;
     }
 
+    private int getTaskStatus() {
+        return this.isDone ? 1 : 0;
+    }
+
     // Method to print a task
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+
+    protected String inputInFile() {
+        if (this instanceof Todo) {
+            return "T//" + this.getTaskStatus() + "//" + this.description;
+        }
+        if (this instanceof Event) {
+            return "E//" + this.getTaskStatus() + "//" + this.description + "//" + ((Event) this).at;
+        }
+        if (this instanceof Deadline) {
+            return "D//" + this.getTaskStatus() + "//" + this.description + "//" + ((Deadline) this).by;
+        }
+        return " ";
     }
 }
