@@ -1,27 +1,38 @@
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import static java.lang.Integer.parseInt;
 
 public class TaskManager {
 
-    private static ArrayList<Task> taskList = new ArrayList<>();
+    public static String processTasks(Task task) {
+        String result = "";
+        int isDone = task.getIsDone() == "[\u2713] " ? 1 : 0;
+        if (task instanceof Todo) {
+            result = "T | " + isDone + " | " + task.getTaskName();
+        } else if (task instanceof Deadline) {
+            result = "D | " + isDone + " | " + task.getTaskName() + " | " + ((Deadline) task).getBy();
+        } else if (task instanceof Event) {
+            result = "E | " + isDone + " | " + task.getTaskName() + " | " + ((Event) task).getAt();
+        } else {
+            ;
+        }
+        return result;
+    }
 
-    public static void addToList(Task task) {
-        taskList.add(task);
+    public static void addToFile(Task task) {
+        String taskString = processTasks(task);
+        WriteFile.saveData(taskString);
         System.out.println("New task added!");
         System.out.println(task);
-        System.out.println("You now have " + taskList.size() + " tasks.");
+        System.out.println("You now have " + WriteFile.getNumOfTasks() + " tasks.");
     }
 
     public static void readList() {
-        if (taskList.isEmpty()) {
+        if (WriteFile.getNumOfTasks() == 0) {
             System.out.println("Looks like you don't have any tasks! Go on and add some!");
         } else {
             System.out.println("Here's all your tasks to complete:");
-            int i = 1;
-            for (Task ele : taskList) {
-                System.out.println(i + ". " + ele);
-                i++;
-            }
+            WriteFile.readFile();
             System.out.println("Time to get to work! :D");
         }
     }
@@ -42,6 +53,10 @@ public class TaskManager {
         System.out.println("Oh no! Remember to write /at (time) after your task!");
     }
 
+    public static void fileError() {
+        System.out.println("Oops! There's been an error with the data file, please try again!");
+    }
+
     public static void setDoneTask(String command) throws DukeException{
         String[] doneCommand = command.split("\\W+");
         if (doneCommand.length == 1) {
@@ -49,14 +64,19 @@ public class TaskManager {
         } else {
             try {
                 int i = parseInt(command.split(" ")[1]);
-                Task doneTask = taskList.get(i - 1);
-                doneTask.markAsDone();
+                WriteFile.setDoneLine(i);
+                String doneTask = WriteFile.printLine(i);
+                doneTask = WriteFile.processLine(doneTask);
                 System.out.println("Task marked as done! Good job!");
                 System.out.println(doneTask);
             } catch (IndexOutOfBoundsException e) {
                 indexOutOfBounds();
             } catch (NumberFormatException e) {
                 numberFormat();
+            } catch (FileNotFoundException e) {
+                fileError();
+            } catch (IOException e) {
+                fileError();
             }
         }
     }
@@ -68,15 +88,20 @@ public class TaskManager {
         } else {
             try {
                 int i = parseInt(command.split(" ")[1]);
-                Task deleteTask = taskList.get(i - 1);
-                taskList.remove(i - 1);
+                String deletedTask = WriteFile.printLine(i);
+                deletedTask = WriteFile.processLine(deletedTask);
+                WriteFile.deleteFromFile(i);
                 System.out.println("This task has been deleted from the list:");
-                System.out.println(deleteTask);
-                System.out.println("You now have " + taskList.size() + " tasks.");
+                System.out.println(deletedTask);
+                System.out.println("You now have " + WriteFile.getNumOfTasks() + " tasks.");
             } catch (IndexOutOfBoundsException e) {
                 indexOutOfBounds();
             } catch (NumberFormatException e) {
                 numberFormat();
+            } catch (FileNotFoundException e) {
+                fileError();
+            } catch (IOException e) {
+                fileError();
             }
         }
     }
@@ -88,7 +113,7 @@ public class TaskManager {
         } else {
             String taskName = command.substring(command.indexOf("todo") + 5);
             Todo todo = new Todo(taskName);
-            addToList(todo);
+            addToFile(todo);
         }
     }
 
@@ -102,7 +127,7 @@ public class TaskManager {
                 taskName = taskName.substring(0, taskName.indexOf("/by") - 1);
                 String by = command.split("/by ")[1];
                 Deadline deadline = new Deadline(taskName, by);
-                addToList(deadline);
+                addToFile(deadline);
             } catch (StringIndexOutOfBoundsException e) {
                 deadlineByReminder();
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -121,7 +146,7 @@ public class TaskManager {
                 taskName = taskName.substring(0, taskName.indexOf("/at") - 1);
                 String at = command.split("/at ")[1];
                 Event event = new Event(taskName, at);
-                addToList(event);
+                addToFile(event);
             } catch (StringIndexOutOfBoundsException e) {
                 eventAtReminder();
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -134,27 +159,27 @@ public class TaskManager {
         try {
             String taskType = command.split(" ")[0];
             switch (taskType) {
-                case "list":
-                    readList();
-                    break;
-                case "done":
-                    setDoneTask(command);
-                    break;
-                case "delete":
-                    deleteTask(command);
-                    break;
-                case "todo":
-                    handleTodo(command);
-                    break;
-                case "deadline":
-                    handleDeadline(command);
-                    break;
-                case "event":
-                    handleEvent(command);
-                    break;
-                default:
-                    System.out.println("Sorry! I don't understand that command. Please try again!");
-                    break;
+            case "list":
+                readList();
+                break;
+            case "done":
+                setDoneTask(command);
+                break;
+            case "delete":
+                deleteTask(command);
+                break;
+            case "todo":
+                handleTodo(command);
+                break;
+            case "deadline":
+                handleDeadline(command);
+                break;
+            case "event":
+                handleEvent(command);
+                break;
+            default:
+                System.out.println("Sorry! I don't understand that command. Please try again!");
+                break;
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());

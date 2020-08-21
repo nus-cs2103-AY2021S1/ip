@@ -51,4 +51,7 @@ Time to get to work! :D
 Oh no! You must DELETE this! (The description of delete can't be empty!)
 Oh no! That number is not on the list! D:
 Oh no! Type only a number for the description!
+This task has been deleted from the list:
+[D][✘] return book (by: Sunday)
+You now have 0 tasks.
 Bye! Let's talk again soon!

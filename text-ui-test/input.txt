@@ -21,4 +21,5 @@ list
 delete
 delete 9
 delete u
+delete 1
 bye
