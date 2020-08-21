@@ -10,6 +10,7 @@ import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +23,8 @@ public class Duke {
     }
 
     private void run() {
+        Ui ui = new Ui();
+
         String logo =
             " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -29,7 +32,7 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
-        say("Hello, I'm Duke. What can I do for you?");
+        ui.say("Hello, I'm Duke. What can I do for you?");
 
         boolean stop = false;
         Scanner sc = new Scanner(System.in);
@@ -38,28 +41,12 @@ public class Duke {
             String input = sc.nextLine();
             BotClass bot = new BotClass();
             route(input).execute(bot, list);
-            say(bot.getLines());
+            ui.say(bot.getLines());
             if (bot.stopped()) {
                 stop = true;
             }
         }
         sc.close();
-    }
-
-    private void say(List<String> strings) {
-        final String indent = "  ";
-        final String separator = indent + "_".repeat(68);
-
-        System.out.println(separator);
-        for (String s : strings) {
-            System.out.println(indent + s);
-        }
-        System.out.println(separator);
-        System.out.println();
-    }
-
-    private void say(String string) {
-        say(Arrays.asList(string));
     }
 
     private Command route(String input) {
