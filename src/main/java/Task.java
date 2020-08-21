@@ -1,4 +1,4 @@
-public class Task {
+abstract class Task {
     private final String name;
     private final boolean done;
 
@@ -12,12 +12,10 @@ public class Task {
         this.done = done;
     }
 
+    abstract Task setDone(boolean b);
+
     public String getStatusIcon() {
         return (done ? "\u2713" : "\u2718");
-    }
-
-    public Task setDone(boolean b) {
-        return new Task(this.name, true);
     }
 
     public boolean isDone() {
