@@ -11,7 +11,7 @@ public class Duke {
     private static final String border = "____________________________________________________________\n";
     private static final String pathname = System.getProperty("user.dir")
             + File.separator + "data" + File.separator + "duke.txt";
-    protected static File file;
+    protected static File file = new File(pathname);
 
     public static boolean checkBye(String s) {
         return s.equals("bye");
@@ -138,10 +138,7 @@ public class Duke {
             File f = new File(pathname);
             f.getParentFile().mkdirs();
 
-            if (f.createNewFile()) {
-                System.out.println("Backup file created.");
-            } else {
-                file = f;
+            if (!f.createNewFile()) {
                 loadFile();
             }
         } catch (IOException e) {
@@ -216,10 +213,15 @@ public class Duke {
                     }
                 }
             }
-            System.out.println("Memory loaded from backup.");
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public static void updateFile() {
+        file.delete();
+        saveFile();
+        loadFile();
     }
 
     public static void main(String[] args) {
@@ -233,7 +235,6 @@ public class Duke {
         while (scan.hasNext()) {
             String test = scan.next();
             if (checkBye(test)) {
-                saveFile();
                 exitLine();
                 break;
             } else {
@@ -243,18 +244,21 @@ public class Duke {
                 } else if (checkDone(test)) {
                     try {
                         doneTask(next);
+                        updateFile();
                     } catch (DukeException e) {
                         System.out.println(border + e.getMessage() + "\n" + border);
                     }
                 } else if (checkDel(test)) {
                     try {
                         delTask(next);
+                        updateFile();
                     } catch (DukeException e) {
                         System.out.println(border + e.getMessage() + "\n" + border);
                     }
                 } else {
                     try {
                         addTask(test, next);
+                        updateFile();
                     } catch (DukeException e) {
                         System.out.println(border + e.getMessage() + "\n" + border);
                     }
