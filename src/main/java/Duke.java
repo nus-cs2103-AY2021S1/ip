@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 
 public class Duke {
     private static final List<Task> storage = new ArrayList<>();
@@ -43,14 +44,14 @@ public class Duke {
                 break;
             case "deadline": {
                 String[] ls = next.split("/by ");
-                Deadline deadline = new Deadline(ls[0], ls[1]);
+                Deadline deadline = new Deadline(ls[0], LocalDate.parse(ls[1]));
                 storage.add(deadline);
                 toAdd = deadline;
                 break;
             }
             case "event": {
                 String[] ls = next.split("/at ");
-                Event event = new Event(ls[0], ls[1]);
+                Event event = new Event(ls[0], LocalDate.parse(ls[1]));
                 storage.add(event);
                 toAdd = event;
                 break;
