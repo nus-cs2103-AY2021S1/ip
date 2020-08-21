@@ -80,6 +80,7 @@ public class Duke {
             } else {
                 throw new InvalidCommandException();
             }
+            newBot.writeFile();
         }
     }
 
@@ -138,7 +139,13 @@ public class Duke {
 
     }
 
-
+    public void writeFile() throws IOException {
+        FileWriter dukeWriter = new FileWriter("/Users/nigelng/Desktop/Y2S1/CS2103T/IndivProj/data/duke.txt", false);
+        for (Task task : this.taskList) {
+            dukeWriter.write(task.inputInFile() + "\n");
+        }
+        dukeWriter.close();
+    }
 
     public static void main(String[] args) throws Exception {
         startBot();
