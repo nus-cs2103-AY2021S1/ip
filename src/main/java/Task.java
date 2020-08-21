@@ -16,7 +16,7 @@ public abstract class Task {
         return "[" + (isDone ? "\u2713" : "\u2718") + "]";
     }
 
-    public abstract Task markAsDone();
+    public abstract Task markAsDone() throws DukeException;
 
     @Override
     public String toString() {
