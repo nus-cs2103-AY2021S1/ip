@@ -49,14 +49,14 @@ public class Duke {
                 break;
             }
             case "deadline": {
-                String[] ls = next.split("/by ");
+                String[] ls = next.split(" /by ");
                 Deadline deadline = new Deadline(ls[0], ls[1]);
                 storage.add(deadline);
                 toAdd = deadline;
                 break;
             }
             case "event": {
-                String[] ls = next.split("/at ");
+                String[] ls = next.split(" /at ");
                 Event event = new Event(ls[0], ls[1]);
                 storage.add(event);
                 toAdd = event;
@@ -158,8 +158,8 @@ public class Duke {
 
             while (!storageCopy.isEmpty()) {
                 Task curr = storageCopy.remove(index);
-                String currString = storageCopy.toString();
-                char type = currString.charAt(1);
+                String currString = curr.toString();
+                String type = currString.substring(currString.indexOf("[") + 1, currString.indexOf("]"));
                 boolean completed = curr.isDone();
                 String name = curr.getName();
 
@@ -168,12 +168,12 @@ public class Duke {
                 fw.write(name + split);
 
                 switch(type) {
-                    case 'E': {
+                    case "E": {
                         Event event = (Event) curr;
                         fw.write(event.getAt() + System.lineSeparator());
                         break;
                     }
-                    case 'D': {
+                    case "D": {
                         Deadline deadline = (Deadline) curr;
                         fw.write(deadline.getBy() + System.lineSeparator());
                         break;
