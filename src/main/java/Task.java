@@ -1,4 +1,4 @@
-package tasks;
+package main.java;
 
 public class Task {
     protected boolean done;

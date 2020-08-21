@@ -1,9 +1,9 @@
-package actions;
+package main.java;
 
 public class Greet {
     String originalGreeting;
     String greeting;
-    String style = "\t___________________________________\n";
+    String style = "\t______________________________________________________________\n";
     String startGreeting = "\tHello! I'm Duke \n" +
             "\tWhat can I do for you?\n";
     String exitGreeting = "\tBye! Hope to see you again soon:)\n";
