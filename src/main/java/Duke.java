@@ -6,7 +6,7 @@ public class Duke {
     public static void main(String[] args) throws IOException, InvalidCommandException {
         Ui ui = new Ui();
         Storage storage = new Storage("../data/tasks.txt");
-        List<Task> list = new ArrayList<>();
+        TaskList list = new TaskList();
         int count = 0;
         boolean flag = true;
         while (flag) {
