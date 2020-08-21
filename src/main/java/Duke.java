@@ -23,7 +23,7 @@ public class Duke {
 
         Duke newBot = new Duke(new ArrayList<Task>());
 
-        Storage storage = new Storage("/Users/nigelng/Desktop/Y2S1/CS2103T/IndivProj/data/duke.txt");
+        Storage storage = new Storage("data/duke.txt");
 
         newBot.taskList = storage.loadData();
 
@@ -140,7 +140,7 @@ public class Duke {
     }
 
     public void writeFile() throws IOException {
-        FileWriter dukeWriter = new FileWriter("/Users/nigelng/Desktop/Y2S1/CS2103T/IndivProj/data/duke.txt", false);
+        FileWriter dukeWriter = new FileWriter("data/duke.txt", false);
         for (Task task : this.taskList) {
             dukeWriter.write(task.inputInFile() + "\n");
         }

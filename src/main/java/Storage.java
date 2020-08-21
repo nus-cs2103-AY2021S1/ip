@@ -16,7 +16,7 @@ public class Storage {
 
     protected ArrayList<Task> loadData() throws IOException {
             ArrayList<Task> taskList = new ArrayList<>();
-            Files.createDirectories(Paths.get("/Users/nigelng/Desktop/Y2S1/CS2103T/IndivProj/Data"));
+            Files.createDirectories(Paths.get("data"));
             File dukeData = new File(this.filepath);
             if (dukeData.exists()) {
                 Scanner dukeScanner = new Scanner(dukeData);
