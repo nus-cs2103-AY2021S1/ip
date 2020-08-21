@@ -224,14 +224,24 @@ public class Duke {
         loadFile();
     }
 
+    public static void startUp() {
+        if (!file.exists() || file.length() == 0) {
+            System.out.println(
+                    border + "Hello! I'm Duke\n"
+                    + "What can I do for you?\n" + border
+            );
+        } else {
+            fileCheck();
+            System.out.println(
+                    border + "Well come back!\n" + "You still have "
+                    + storage.size() + " tasks left to clear.\n" + border
+            );
+        }
+    }
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        System.out.println(
-                border + "Hello! I'm Duke\n"
-                + "What can I do for you?\n" + border
-        );
-
-        fileCheck();
+        startUp();
         while (scan.hasNext()) {
             String test = scan.next();
             if (checkBye(test)) {
