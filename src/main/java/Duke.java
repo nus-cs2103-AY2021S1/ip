@@ -115,20 +115,7 @@ public class Duke {
         while (flag) {
             try {
                 String input = ui.readInput();
-                Input type;
-                if (input.equals("bye")) {
-                    type = Input.BYE;
-                } else if (input.equals("list")) {
-                    type = Input.LIST;
-                } else if (isDeleteCommand(input, count)) {
-                    type = Input.DELETE;
-                } else if (isDoneCommand(input, count)) {
-                    type = Input.DONE;
-                } else if (input.startsWith("happens on ")) {
-                    type = Input.HAPPENS;
-                } else {
-                    type = Input.TASK;
-                }
+                Input type = Parser.getType(input);
                 switch (type) {
                     case LIST:
                         ui.printList(count, list, t -> true, "");
