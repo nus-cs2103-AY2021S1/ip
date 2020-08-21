@@ -37,7 +37,6 @@ public enum Flag {
     public static Map<Flag, String> parseFlags(String[] tokens) throws InvalidCommandException {
         StringBuilder sb = new StringBuilder();
         Flag currentFlag = NONFLAG;
-        TokenUtils.printTokens(tokens);
         Map<Flag, String> result = new HashMap<>();
         for (String token : tokens) {
             if (hasFormOfFlag(token)) {
@@ -51,7 +50,7 @@ public enum Flag {
                 currentFlag = flag.get();
                 sb = new StringBuilder();
             } else {
-                if (sb.length() == 0) sb.append(" ");
+                if (sb.length() > 0) sb.append(" ");
                 sb.append(token);
             }
         }

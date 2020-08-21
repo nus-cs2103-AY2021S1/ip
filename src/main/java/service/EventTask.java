@@ -38,6 +38,6 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + this.getStatusIcon() + " " + this.description;
+        return "[E]" + this.getStatusIcon() + " " + this.getDescription();
     }
 }
