@@ -38,7 +38,10 @@ public class Duke {
             File directory = new File("data");
             File file = new File("data/duke.txt");
             if (!directory.exists()) {
-                directory.mkdir();
+                boolean success = directory.mkdir();
+                if (!success) {
+                    System.out.println(">> Something went wrong creating the data directory!");
+                }
             }
             if (file.exists()) {
                 Scanner fr = new Scanner(file);
@@ -48,18 +51,21 @@ public class Duke {
                     TaskSymbols type = TaskSymbols.valueOf(taskInfo[0]);
                     switch(type) {
                         case T:
-                            addTask(new Todo(taskInfo[1], Boolean.valueOf(taskInfo[2])));
+                            addTask(new Todo(taskInfo[1], Boolean.parseBoolean(taskInfo[2])));
                             break;
                         case E:
-                            addTask(new Event(taskInfo[1], Boolean.valueOf(taskInfo[2]), taskInfo[3]));
+                            addTask(new Event(taskInfo[1], Boolean.parseBoolean(taskInfo[2]), taskInfo[3]));
                             break;
                         case D:
-                            addTask(new Deadline(taskInfo[1], Boolean.valueOf(taskInfo[2]), taskInfo[3]));
+                            addTask(new Deadline(taskInfo[1], Boolean.parseBoolean(taskInfo[2]), taskInfo[3]));
                             break;
                     }
                 }
             } else {
-                file.createNewFile();
+                boolean success = file.createNewFile();
+                if (!success) {
+                    System.out.println(">> Something went wrong creating the data file!");
+                }
             }
         } catch (FileNotFoundException e) {
             System.out.println(">> Oh no! I can't find your file :(");
