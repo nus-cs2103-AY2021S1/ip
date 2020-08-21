@@ -1,8 +1,14 @@
 import java.util.List;
+import java.util.Scanner;
 import java.util.function.Predicate;
 
 public class Ui {
     private static final String horizontalLine = "\t=================================================================================";
+    private final Scanner sc;
+
+    public Ui() {
+        sc = new Scanner(System.in);
+    }
 
     public void print(String str) {
         System.out.println(str);
