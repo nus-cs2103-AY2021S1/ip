@@ -1,17 +1,17 @@
 	____________________________________________________________
-	Hello! I'm Duke
+	Hello! I'm Tusk
 	What can I do for you?
 	____________________________________________________________
 
 	____________________________________________________________
 	Got it. I've added this task:
-	  [T][✗] borrow book
+	  [T][✗] buy book
 	Now you have 1 task(s) in the list.
 	____________________________________________________________
 
 	____________________________________________________________
 	Got it. I've added this task:
-	  [D][✗] return book (by: Sunday)
+	  [D][✗] sell book (by: Sunday)
 	Now you have 2 task(s) in the list.
 	____________________________________________________________
 
