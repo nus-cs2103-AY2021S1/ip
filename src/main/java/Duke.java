@@ -5,10 +5,15 @@ public class Duke {
     private TaskList list;
     private Ui ui;
 
-    public Duke(String filePath) throws IOException, InvalidCommandException {
+    public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
-        list = storage.list;
+        try {
+            storage = new Storage(filePath);
+            list = storage.list;
+        } catch (Exception e) {
+            ui.output(e.getMessage());
+            list = new TaskList();
+        }
     }
 
     public void run() {
