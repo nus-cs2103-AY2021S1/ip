@@ -99,6 +99,22 @@ public class Parser {
         }
     }
 
+    public static Command parse(String input) {
+        if (input.equals("bye")) {
+            return Input.BYE;
+        } else if (input.equals("list")) {
+            return new ListCommand();
+        } else if (input.startsWith("delete ")) {
+            return Input.DELETE;
+        } else if (input.startsWith("done ")) {
+            return Input.DONE;
+        } else if (input.startsWith("happens on ")) {
+            return Input.HAPPENS;
+        } else {
+            return Input.TASK;
+        }
+    }
+
     public static Input getType(String input) {
         if (input.equals("bye")) {
             return Input.BYE;
