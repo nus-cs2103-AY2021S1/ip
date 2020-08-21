@@ -106,28 +106,6 @@ public class Duke {
         }
     }
 
-    private static void addToList(Task task) throws InvalidCommandException {
-        try {
-            FileWriter fw = new FileWriter("../data/tasks.txt", true);
-            fw.write(task.output());
-            fw.close();
-        } catch (IOException e) {
-            throw new InvalidCommandException(e.getMessage());
-        }
-    }
-
-    private static void deleteTask(List<Task> list) throws InvalidCommandException {
-        try {
-            FileWriter fw = new FileWriter("../data/tasks.txt");
-            for (Task task : list) {
-                fw.write(task.output());
-            }
-            fw.close();
-        } catch (IOException e) {
-            throw new InvalidCommandException(e.getMessage());
-        }
-    }
-
     public static void main(String[] args) throws IOException, InvalidCommandException {
         Ui ui = new Ui();
         Storage storage = new Storage("../data/tasks.txt");
