@@ -1,5 +1,7 @@
 package main.java;
 
+import java.time.LocalDate;
+
 public class Task {
     protected String description;
     protected boolean isCompleted;
@@ -33,6 +35,10 @@ public class Task {
 
     public String record() {
         return "";
+    }
+
+    public boolean isAt(LocalDate localDate) {
+        return false;
     }
 
 }
