@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -141,7 +142,7 @@ public class Duke {
                 System.out.println("Backup file created.");
             } else {
                 file = f;
-                System.out.println("Memory loaded from backup.");
+                loadFile();
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -179,7 +180,7 @@ public class Duke {
                         break;
                     }
                     default: {
-                        fw.write(System.lineSeparator());
+                        fw.write("mark" + System.lineSeparator());
                     }
                 }
             }
@@ -188,6 +189,37 @@ public class Duke {
             System.out.println("Oops. Something went wrong while saving data.");
         }
 
+    }
+
+    public static void loadFile() {
+        try {
+            Scanner scan = new Scanner(file);
+            while (scan.hasNext()) {
+                String curr = scan.nextLine();
+                String[] data = curr.split("_");
+                String type = data[0];
+                boolean done = Boolean.parseBoolean(data[1]);
+                String name = data[2];
+                String time = data[3];
+
+                switch (type) {
+                    case "E": {
+                        storage.add(new Event(name, done, time));
+                        break;
+                    }
+                    case "D": {
+                        storage.add(new Deadline(name, done, time));
+                        break;
+                    }
+                    default: {
+                        storage.add(new ToDo(name, done));
+                    }
+                }
+            }
+            System.out.println("Memory loaded from backup.");
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void main(String[] args) {
