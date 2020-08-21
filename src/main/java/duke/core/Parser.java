@@ -38,6 +38,8 @@ public class Parser {
 
         } else if (command.split(" ")[0].equals("event")) {
             parsedCommand = evaluateAddCommand(" /at ", command, CommandType.ADD_EVENT);
+        } else if (command.split(" ")[0].equals("find")) {
+            parsedCommand = evaluateSearchCommand(command);
         } else {
             throw new CommandNotFoundException("The command is not found");
         }
@@ -128,5 +130,10 @@ public class Parser {
         } catch (DateTimeParseException dateTimeParseException) {
             throw new CommandNotFoundException("Type list yyyy-MM-dd to list the tasks on a specific date");
         }
+    }
+
+    public static Command evaluateSearchCommand(String command) {
+        String key = command.split("\\s+", 2)[1];
+        return new SearchCommand(key);
     }
 }

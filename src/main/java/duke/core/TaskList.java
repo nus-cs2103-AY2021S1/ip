@@ -43,6 +43,16 @@ public class TaskList {
         return new TaskList(list);
     }
 
+    public TaskList findTaskWithDescription(String key) {
+        ArrayList<Task> list = new ArrayList<>();
+        for(int i = 0; i < tasks.size(); i = i + 1) {
+            if(tasks.get(i).getDescription().contains(key)) {
+                list.add(tasks.get(i));
+            }
+        }
+        return new TaskList(list);
+    }
+
     @Override
     public String toString() {
         String result = "";
