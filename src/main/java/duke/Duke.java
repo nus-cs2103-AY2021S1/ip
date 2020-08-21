@@ -1,6 +1,7 @@
 package duke;
 
 import exception.*;
+import storage.Storage;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -20,6 +21,7 @@ public class Duke {
     Scanner sc;
     String input;
     List<Task> taskList;
+    Storage storage = new Storage();
 
     public Duke() {
         sc = new Scanner(System.in);
@@ -29,100 +31,16 @@ public class Duke {
 
     public void start() {
         try {
-            this.taskList = Duke.loadStorage();
+            this.taskList = storage.load();
             Duke.hello();
             handleInteraction();
             Duke.bye();
-        } catch (IOException ex) {
+        } catch (StorageException ex) {
             ex.printStackTrace();
         }
     }
 
-    // file functions
-    private static List<Task> loadStorage() throws IOException {
-        Path folderPath = Path.of("data");
-        Path filePath = folderPath.resolve("duke.txt");
-
-        // create folders containing the file and its parents
-        Files.createDirectories(folderPath);
-
-        if (!Files.exists(filePath)) {
-            Files.createFile(filePath);
-        }
-
-        // read from file
-        BufferedReader br = Files.newBufferedReader(filePath);
-
-        List<Task> tasks = new ArrayList<>();
-        br.lines().forEach(line -> {
-            try {
-                Task task = parseStorageData(line);
-                tasks.add(task);
-            } catch (StorageException ex) {
-                System.out.println(ex.getMessage());
-            }
-        });
-        return tasks;
-    }
-
-    private static Task parseStorageData(String line) throws StorageException {
-        // split by the pipe `|` token
-        String[] tokens = line.split("(\\s)*(\\|)(\\s)*");
-        Task task;
-
-        try {
-            switch (tokens[0]) {
-            case "T":
-                task = new Todo(tokens[2]);
-                break;
-            case "D":
-                task = Deadline.create(tokens[2], tokens[3]);
-                break;
-            case "E":
-                task = Event.create(tokens[2], tokens[3]);
-                break;
-            default:
-                throw new StorageException("Unknown task identifier " + tokens[0] + "! Skipping...");
-            }
-
-            if (tokens[1].equals("1")) {
-                task.markAsDone();
-            }
-
-            return task;
-        } catch (ArrayIndexOutOfBoundsException ex) {
-            throw new StorageException("Data" + line + "in wrong format! Skipping...");
-        } catch (EventInvalidUsageException | DeadlineInvalidUsageException ex) {
-            throw new StorageException(ex.getMessage());
-        }
-    }
-
-    /**
-     * Update the `duke.txt` file that is used for saving tasks
-     *
-     * @param tasks a list of task to save
-     * @return true indicating storage is updated, or false indicating storage fails to update
-     */
-    private static boolean updateStorage(List<Task> tasks) {
-        try {
-            BufferedWriter bw = Files.newBufferedWriter(Path.of("data/duke.txt"));
-            for (Task task : tasks) {
-                String storeFormat = String.format(
-                        "%s | %d | %s",
-                        task.getType(),
-                        task.getStatus() ? 1 : 0,
-                        task.getDescription()
-                );
-                bw.write(storeFormat);
-                bw.newLine();
-            }
-            bw.close();
-            return true;
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
+    
 
     // interaction functions
     public void handleInteraction() {
@@ -162,7 +80,7 @@ public class Duke {
                         // Check that the task number makes sense.
                         if (taskNumber >= 0 && taskNumber < taskList.size()) {
                             taskList.get(taskNumber).markAsDone();
-                            Duke.updateStorage(this.taskList);
+                            storage.save(this.taskList);
                             System.out.println("     Good job! I've marked this task as done:");
                             System.out.printf("      %s%n", taskList.get(taskNumber).showTask());
                         } else {
@@ -181,7 +99,7 @@ public class Duke {
                             System.out.printf("      %s%n", taskList.remove(taskNumber).showTask());
                             System.out.printf("     Now you have %d %s in the list%n",
                                     taskList.size(), taskList.size() > 1 ? "tasks" : "task");
-                            Duke.updateStorage(this.taskList);
+                            storage.save(this.taskList);
                         } else {
                             System.out.println("     Sorry, I can't find it in your list!");
                         }
@@ -267,17 +185,19 @@ public class Duke {
 
     private void addTodo(String todo) {
         taskList.add(new Todo(todo));
-        Duke.updateStorage(this.taskList);
+        storage.save(this.taskList);
         printAddConfirmation(taskList.size() - 1);
     }
 
     private void addDeadline(String deadline) throws DeadlineInvalidUsageException {
         taskList.add(Deadline.create(deadline));
+        storage.save(this.taskList);
         printAddConfirmation(taskList.size() - 1);
     }
 
     private void addEvent(String event) throws EventInvalidUsageException {
         taskList.add(Event.create(event));
+        storage.save(this.taskList);
         printAddConfirmation(taskList.size() - 1);
     }
 
