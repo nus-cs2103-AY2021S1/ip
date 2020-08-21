@@ -15,4 +15,8 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+<<<<<<< HEAD
 text-ui-test/data/
+=======
+text-ui-test/data/
+>>>>>>> branch-Level-8

@@ -1,7 +1,11 @@
 
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -126,11 +130,14 @@ public class Duke {
     private void addDeadline(String text) {
         String description = text.split(" /by ", 2)[0];
         String deadline = text.split(" /by ", 2)[1];
-        Task toAdd = new Deadline(description, deadline);
-        this.tasks.add(toAdd);
-        sayAddedTask(toAdd);
         try {
+            Task toAdd = new Deadline(description, LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
+            this.tasks.add(toAdd);
+            sayAddedTask(toAdd);
             this.save();
+        } catch (DateTimeParseException e) {
+            say("The date and time format must be: [dd/MM/yyyy HHmm]\nFor example, 02/12/2019 1800");
+
         } catch (IOException e) {
             this.sayException(e);
         }
@@ -139,13 +146,16 @@ public class Duke {
     private void addEvent(String text) {
         String description = text.split(" /at ", 2)[0];
         String time = text.split(" /at ", 2)[1];
-        Task toAdd = new Event(description, time);
-        this.tasks.add(toAdd);
-        sayAddedTask(toAdd);
+
         try {
+            Task toAdd = new Event(description, LocalDateTime.parse(time, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
+            this.tasks.add(toAdd);
+            sayAddedTask(toAdd);
             this.save();
+        } catch (DateTimeParseException e) {
+            say("The date and time format must be: [dd/MM/yyyy HHmm]\nFor example, 02/12/2019 1800");
         } catch (IOException e) {
-            this.sayException(e);
+            sayException(e);
         }
     }
 
@@ -184,17 +194,17 @@ public class Duke {
 
                 Task toAdd;
                 switch (taskType) {
-                    case "T":
-                        toAdd = new ToDo(description, isDone);
-                        break;
-                    case "D":
-                        toAdd = new Deadline(description, taskComponents[3], isDone);
-                        break;
-                    case "E":
-                        toAdd = new Event(description, taskComponents[3], isDone);
-                        break;
-                    default:
-                        throw new IllegalArgumentException("Saved file contains incorrect format");
+                case "T":
+                    toAdd = new ToDo(description, isDone);
+                    break;
+                case "D":
+                    toAdd = new Deadline(description, LocalDateTime.parse(taskComponents[3], DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")), isDone);
+                    break;
+                case "E":
+                    toAdd = new Event(description, LocalDateTime.parse(taskComponents[3], DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")), isDone);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Saved file contains incorrect format");
                 }
                 this.tasks.add(toAdd);
             }
@@ -234,12 +244,16 @@ public class Duke {
     }
 
     private void deleteTask(int oneBasedIndex) {
+
         int zeroBasedIndex = oneBasedIndex - 1;
         try {
             Task toDelete = this.tasks.remove(zeroBasedIndex);
             sayDeletedTask(toDelete);
+            this.save();
         } catch (IndexOutOfBoundsException e) {
             sayException(new DeleteOutOfBoundException(oneBasedIndex));
+        } catch (IOException e) {
+            sayException(e);
         }
 
     }
