@@ -169,6 +169,7 @@ public class Duke {
                     case DELETE:
                         Task toDelete = list.get(m - 1);
                         list.remove(toDelete);
+                        deleteTask(list);
                         System.out.println(output("Noted. I've removed this task:\n\t    " + toDelete +
                                 "\n\t  Now you have " + list.size()));
                         count--;
