@@ -171,7 +171,7 @@ public class LevelSeven {
     }
     public static void evaluateAddCommand(HashMap<String, Object> map, String string, String command, Command commandtype) throws CommandNotFoundException {
         if (command.split(" ").length == 1) {
-            throw new CommandNotFoundException("The description for event should not be empty");
+            throw new CommandNotFoundException("The description should not be empty");
         } else if (command.split(" ")[0].equals("event") || command.split(" ")[0].equals("deadline")) {
 
 
