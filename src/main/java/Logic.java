@@ -35,6 +35,7 @@ public class Logic {
 
 
     public boolean digestString(String answer) {
+
         try {
             String editted_answer = answer.strip().toLowerCase();
             String[] answers = answer.split(" ");
