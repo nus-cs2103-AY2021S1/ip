@@ -1,14 +1,14 @@
 import exceptions.*;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.List;
-import java.util.ArrayList;
 import java.lang.StringBuilder;
 
 public class Duke {
 
     private final String lineSeparator = "***********************";
-    private final Storage store = new Storage("data/duke.txt");
+    private final Storage store = new Storage();
     private List<Task> taskList = store.getTasks();
 
     public void greet() {
@@ -121,7 +121,10 @@ public class Duke {
         boolean isRunning = true;
         while (isRunning) {
             try {
+                store.initializeStorage();
                 isRunning = handleInput(scanner);
+            } catch (IOException e) {
+                System.out.println("Error connecting to storage, actions made will not be saved");
             } catch (DukeException e) {
                 printMessage(e.getFriendlyMessage());
             }
@@ -130,7 +133,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.start();
+        Duke duke = new Duke();        duke.start();
     }
 }

@@ -1,2 +1,2 @@
-T | 0 | sleep
-D | 1 | sleeeep | 9pm
+T | 1 | byebye
+D | 0 | sleep | 9pm

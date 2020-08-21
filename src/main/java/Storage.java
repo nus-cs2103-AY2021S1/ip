@@ -8,14 +8,22 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private final String storagePath;
+    private final static String DIRECTORY_PATH = "data";
+    private final static String STORAGE_PATH = "data/duke.txt";
 
-    public Storage(String storagePath) {
-        this.storagePath = storagePath;
+    public void initializeStorage() throws IOException {
+        File storageDirectory = new File(DIRECTORY_PATH);
+        if (!storageDirectory.exists()) {
+            storageDirectory.mkdir();
+        }
+        File storagePath = new File(STORAGE_PATH);
+        if (!storagePath.exists()) {
+            storagePath.createNewFile();
+        }
     }
 
     public List<Task> getTasks() {
-        File storageFile = new File(storagePath);
+        File storageFile = new File(STORAGE_PATH);
         List<Task> tasks = new ArrayList<>();
         try {
             Scanner scanner = new Scanner(storageFile);
@@ -31,7 +39,7 @@ public class Storage {
 
     public void updateTasks(List<Task> taskList) {
         try {
-            FileWriter storageWriter = new FileWriter(storagePath, true);
+            FileWriter storageWriter = new FileWriter(STORAGE_PATH, true);
             clearTasks();
             for (Task t : taskList) {
                 addTask(storageWriter, t);
@@ -58,7 +66,7 @@ public class Storage {
     }
 
     private void clearTasks() throws IOException {
-        FileWriter storageWriter = new FileWriter(storagePath, false);
+        FileWriter storageWriter = new FileWriter(STORAGE_PATH, false);
         // replace the original content with an empty string
         storageWriter.write("");
         storageWriter.close();
