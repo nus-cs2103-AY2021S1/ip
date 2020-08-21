@@ -2,6 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +13,7 @@ import java.util.Scanner;
 public class Duke {
     private List<Task> tasks = new ArrayList<>();
 
-    private static String filePath = "../../../data/duke.txt";
+    private static String filePath = "./data/duke.txt";
 
     void greet() {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
@@ -44,7 +47,7 @@ public class Duke {
 
     void list() {
         System.out.println("Here are the tasks in your list:");
-        for(int i = 1; i <= tasks.size(); i++) {
+        for (int i = 1; i <= tasks.size(); i++) {
             Task task = tasks.get(i - 1);
             String message = String.valueOf(i) + ".";
             message += task;
@@ -57,7 +60,7 @@ public class Duke {
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
             String[] task = s.nextLine().split(" \\| ");
-            switch(task[0]) {
+            switch (task[0]) {
                 case "T": {
                     tasks.add(new Todo(task[2], task[1].equals("1")));
                     break;
@@ -77,22 +80,38 @@ public class Duke {
         s.close();
     }
 
-    void start() {
-        greet();
+    void loadFile() {
+        // Initializes or loads file depending on whether it exists
+        Path txtPath = Paths.get(filePath);
+        Path directory = Paths.get("./data/");
 
-        // Get local data and fill task list
         try {
-            getLocalData();
-        } catch (FileNotFoundException e) {
+            if (Files.exists(txtPath)) {
+                // If duke.txt exists, read the file and fill task list
+                getLocalData();
+            } else if (Files.exists(directory)) {
+                File txtFile = new File(filePath);
+                txtFile.createNewFile();
+            } else {
+                Files.createDirectory(directory);
+                File txtFile = new File(filePath);
+                txtFile.createNewFile();
+            }
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    void start() {
+        greet();
+        loadFile();
 
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
         while (isRunning) {
             try {
                 Command command = Command.getValue(sc.next());
-                if(command == null) {
+                if (command == null) {
                     throw new InvalidCommandException("Unknown command.");
                 }
                 switch (command) {
