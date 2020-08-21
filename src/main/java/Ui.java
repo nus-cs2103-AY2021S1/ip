@@ -30,5 +30,7 @@ public class Ui {
         System.out.println(horizontalLine + "\n");
     }
 
-
+    public String readInput() {
+        return sc.nextLine();
+    }
 }
