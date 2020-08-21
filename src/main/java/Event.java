@@ -1,18 +1,30 @@
-public class Event extends Task {
-    String date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-    Event(String description, String date) {
+public class Event extends Task {
+    LocalDateTime date;
+
+    Event(String description, String date) throws InvalidDateTimeException{
         super(description);
-        this.date = date;
+        try {
+            this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException("The date for your event cannot be parsed.");
+        }
     }
 
-    Event(String description, String date, boolean done) {
+    Event(String description, String date, boolean done) throws InvalidDateTimeException{
         super(description, done);
-        this.date = date;
+        try {
+            this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException("The date for your event cannot be parsed.");
+        }
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.date + ")";
+        return "[E]" + super.toString() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a")) + ")";
     }
 }

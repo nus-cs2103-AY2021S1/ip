@@ -1,18 +1,30 @@
-public class Deadline extends Task {
-    String date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-    Deadline(String description, String date) {
+public class Deadline extends Task {
+    LocalDateTime date;
+
+    Deadline(String description, String date) throws InvalidDateTimeException{
         super(description);
-        this.date = date;
+        try {
+            this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException("The date for your deadline cannot be parsed.");
+        }
     }
 
-    Deadline(String description, String date, boolean done) {
+    Deadline(String description, String date, boolean done) throws InvalidDateTimeException{
         super(description, done);
-        this.date = date;
+        try {
+            this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException("The date for your deadline cannot be parsed.");
+        }
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.date + ")";
+        return "[D]" + super.toString() + " (by: " + this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a")) + ")";
     }
 }
