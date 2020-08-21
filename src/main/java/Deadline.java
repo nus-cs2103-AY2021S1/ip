@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
@@ -14,9 +15,14 @@ public class Deadline extends Task {
         }
     }
 
+    public boolean isOverdue() {
+        return !isDone && byTime.isBefore(LocalDate.now());
+    }
+
     @Override
     public String toString() {
+        String overdue = isOverdue() ? "!!! This is overdue! The deadline has passed!" : "";
         return "[D]" + super.toString() + " (by: " +
-                byTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                byTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")" + overdue;
     }
 }
