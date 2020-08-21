@@ -121,7 +121,7 @@ public class Parser {
         int count = list.count;
         switch (type) {
             case LIST:
-                ui.printList(count, list, t -> true, "");
+                ui.printList(list, t -> true, "");
                 break;
             case DONE:
                 int n = isValidDone(input, count) - 1;
@@ -141,7 +141,7 @@ public class Parser {
                 try {
                     LocalDate date = LocalDate.parse(input.substring(11),
                             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                    ui.printList(count, list, t -> t.happenOnDate(date), "happening on " +
+                    ui.printList(list, t -> t.happenOnDate(date), "happening on " +
                             date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " ");
                 } catch (Exception e) {
                     throw new InvalidCommandException("Invalid date format. Please use yyyy-MM-dd");
