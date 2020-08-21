@@ -10,13 +10,12 @@ public class Duke {
             + "\tWhat can I do for you?";
     private static final String EXIT_MESSAGE = "Bye. "
             + "Hope to see you again soon!";
-    private static final String LIST_MESSAGE = "Here are the tasks in your list:";
     private static final String TOGGLE_MESSAGE = "Nice! "
             + "I've marked this task as done:\n";
+    private static final String LIST_MESSAGE = "Here are the tasks in your list:";
     private static final String ADDED_MESSAGE = "Got it. I've added this task:";
     private static final String TASK_COUNT_FRONT = "Now you have ";
     private static final String TASK_COUNT_END = " task(s) in the list.";
-
 
     // Command constants for the bot
     private static final String EXIT_COMMAND = "bye";
@@ -54,43 +53,97 @@ public class Duke {
 
     // helper methods related to commands
     // can consider using Enum for taskType
-    private static void taskHandler(String input, String taskType) {
+    private static void taskHandler(String input, String taskType) throws DukeException {
         switch (taskType) {
         case TODO_COMMAND:
-            String todoName = input.substring(input.indexOf("todo") + 5);
+            try {
+                String todoName = input.substring(input.indexOf("todo") + 5);
 
-            // remove leading and trailing whitespace
-            Task newTodo = new ToDo(false, todoName.strip());
-            store.add(newTodo);
-            displayTasks(newTodo);
+                // case: check for "whitespace description"
+                if (todoName.matches("\\s+")) {
+                    throw DukeException.emptyDescription("todo");
+                }
+
+                // remove leading and trailing whitespace
+                Task newTodo = new ToDo(false, todoName.trim());
+                store.add(newTodo);
+                displayTasks(newTodo);
+            } catch (StringIndexOutOfBoundsException noDesc) {
+                // case: No description
+                throw DukeException.emptyDescription("todo");
+            }
             break;
         case EVENT_COMMAND:
-            int eventMarker = input.indexOf("/at");
+            try {
+                int eventMarker = input.indexOf("/at");
+                // case: no tag
+                if (eventMarker == -1) {
+                    throw new DukeException("The '/at' tag is missing");
+                }
 
-            String eventTime = input.substring(eventMarker + 4);
-            String eventName = input.substring(6, eventMarker - 1);
+                String eventTime = input.substring(eventMarker + 4);
+                String eventName = input.substring(6, eventMarker - 1);
 
-            // remove leading and trailing whitespace
-            Task newEvent = new Event(false, eventName.strip(), eventTime.strip());
-            store.add(newEvent);
-            displayTasks(newEvent);
+                // case: check for "whitespace description or timeline"
+                if (eventTime.matches("\\s+") || eventName.matches("\\s+")) {
+                    throw DukeException.emptyDescription("event");
+                }
+
+                // remove leading and trailing whitespace
+                Task newEvent = new Event(false, eventName.trim(), eventTime.trim());
+                store.add(newEvent);
+                displayTasks(newEvent);
+            } catch (StringIndexOutOfBoundsException noDescOrTimeEvent) {
+                // case: Either no description or no timeline
+                throw DukeException.emptyDescription("event");
+            }
             break;
         case DEADLINE_COMMAND:
-            int deadlineMarker = input.indexOf("/by");
+            try {
+                int deadlineMarker = input.indexOf("/by");
+                // case: no tag
+                if (deadlineMarker == -1) {
+                    throw new DukeException("The '/by' tag is missing");
+                }
 
-            String deadlineTime = input.substring(deadlineMarker + 4);
-            String deadlineName = input.substring(9, deadlineMarker - 1);
+                String deadlineTime = input.substring(deadlineMarker + 4);
+                String deadlineName = input.substring(9, deadlineMarker - 1);
 
-            // remove leading and trailing whitespace
-            Task newDeadline = new Deadline(false, deadlineName.strip(), deadlineTime.strip());
-            store.add(newDeadline);
-            displayTasks(newDeadline);
+                // case: check for "whitespace description or timeline"
+                if (deadlineTime.matches("\\s+") || deadlineName.matches("\\s+")) {
+                    throw DukeException.emptyDescription("deadline");
+                }
+
+                // remove leading and trailing whitespace
+                Task newDeadline = new Deadline(false, deadlineName.trim(), deadlineTime.trim());
+                store.add(newDeadline);
+                displayTasks(newDeadline);
+            } catch (StringIndexOutOfBoundsException noDescOrTimeDeadline) {
+                // case: Either no description or no timeline
+                throw DukeException.emptyDescription("deadline");
+            }
             break;
         default:
             break;
         }
     }
 
+    private static void doneHandler(String number) throws DukeException {
+        // check for invalid input
+        try {
+            int index = Integer.parseInt(number);
+            // outside of valid range
+            if (index <= 0 || index > store.size()) {
+                throw DukeException.invalidNumberInput();
+            }
+
+            Task toSet = store.get(index - 1);
+            toSet.setTaskAsDone();
+            displayToScreen(TOGGLE_MESSAGE + "\t " + toSet);
+        } catch (NumberFormatException e) {
+            throw DukeException.invalidNumberInput();
+        }
+    }
 
     public static void main(String[] args) {
         // initialize scanner and add commands to set
@@ -105,34 +158,39 @@ public class Duke {
         // read input
         String input = sc.nextLine();
 
+        // add to store if the command is not "list" or "bye"
+        // if comment is "list", display added items using displayStoreItems
         while (!input.equals(EXIT_COMMAND)) {
-            String[] words = input.split("\\s+");
-            String command = words[0];
+            try {
+                // split input into individual words and get command
+                String[] words = input.split("\\s+");
+                String command = words[0];
 
-            switch (command) {
-            case TODO_COMMAND:
-                taskHandler(input, "todo");
-                break;
-            case EVENT_COMMAND:
-                taskHandler(input, "event");
-                break;
-            case DEADLINE_COMMAND:
-                taskHandler(input, "deadline");
-                break;
-            case LIST_COMMAND:
-                displayStoreItems();
-                break;
-            case DONE_COMMAND:
-                Task toSet = store.get(Integer.parseInt(words[1]) - 1);
-                toSet.setTaskAsDone();
-                displayToScreen(TOGGLE_MESSAGE + "\t " + toSet);
-                break;
-            default:
-                store.add(new Task(false, input));
-                displayToScreen("added: " + input);
-                break;
+                // handle for different commands
+                switch (command) {
+                    case LIST_COMMAND:
+                        displayStoreItems();
+                        break;
+                    case TODO_COMMAND:
+                        taskHandler(input, "todo");
+                        break;
+                    case EVENT_COMMAND:
+                        taskHandler(input, "event");
+                        break;
+                    case DEADLINE_COMMAND:
+                        taskHandler(input, "deadline");
+                        break;
+                    case DONE_COMMAND:
+                        doneHandler(words[1]);
+                        break;
+                    default:
+                        throw DukeException.unknownOperation();
+                }
+                input = sc.nextLine(); // continue reading input
+            } catch (DukeException e) {
+                displayToScreen(e.getMessage());
+                input = sc.nextLine(); // continue reading input
             }
-            input = sc.nextLine();
         }
 
         // line reached upon command "bye", at which point quit and echo exit message
