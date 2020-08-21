@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -106,6 +107,11 @@ public class Duke {
         } else {
             throw new InvalidCommandException();
         }
+    }
+
+
+    private static void addToList(Task task) throws IOException {
+
     }
 
     public static void main(String[] args) {
