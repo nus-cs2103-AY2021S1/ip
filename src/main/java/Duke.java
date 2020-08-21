@@ -3,11 +3,11 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____   ____  \n"
-                + "|  _ \\ |  _ \\ \n"
-                + "| | | || | | | \n"
-                + "| |_| || |_| | \n"
-                + "|____/ |____/ \n";
+        String logo = " ____   ____\n"
+                + "|  _ \\ |  _ \\\n"
+                + "| | | || | | |\n"
+                + "| |_| || |_| |\n"
+                + "|____/ |____/\n";
         System.out.println("Hi! I'm\n" + logo + "How can I help you? :)\n"
                 + "_________________________________________");
 
@@ -41,7 +41,7 @@ public class Duke {
                     // to-do activity
                     input = input.substring(5);
                     taskList.add(new Todo(input));
-                    System.out.println("Ok, To-do added: \n  " + taskList.get(taskSize));
+                    System.out.println("Ok, To-do added:\n  " + taskList.get(taskSize));
                     taskSize += 1;
                     System.out.println("You now have " + taskSize + " task(s) in your list!");
                 }
@@ -53,7 +53,7 @@ public class Duke {
                     if (temp.length == 2) {
                         // valid
                         taskList.add(new Deadline(temp[0], temp[1]));
-                        System.out.println("Ok, Deadline added: \n  " + taskList.get(taskSize));
+                        System.out.println("Ok, Deadline added:\n  " + taskList.get(taskSize));
                         taskSize += 1;
                         System.out.println("You now have " + taskSize + " task(s) in your list!");
                     } else {
@@ -69,7 +69,7 @@ public class Duke {
                     if (temp.length == 2) {
                         // valid
                         taskList.add(new Event(temp[0], temp[1]));
-                        System.out.println("Ok, Event added: \n  " + taskList.get(taskSize));
+                        System.out.println("Ok, Event added:\n  " + taskList.get(taskSize));
                         taskSize += 1;
                         System.out.println("You now have " + taskSize + " task(s) in your list!");
                     } else {
