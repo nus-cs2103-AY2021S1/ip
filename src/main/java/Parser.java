@@ -1,18 +1,18 @@
 import java.util.StringTokenizer;
 
 public class Parser {
-
+    
     private static final String DEADLINE_DELIMITER = "/by";
     private static final String EVENT_DELIMITER = "/at";
     private static final String TIME_DELIMITER = "-";
-
-
+    
+    
     // takes in the input and returns a string arr, does exception checking here as well:
     public String[] parseCommand(String input) throws DukeException {
         input = input.trim();
         String[] words = input.split(" ");
         String command = words[0].toLowerCase().trim();
-
+        
         if (input.equals(Command.EXIT_CMD.getCmd())) {
             return new String[]{command};
         } else if (input.equals(Command.LIST_CMD.getCmd())) {
@@ -22,18 +22,18 @@ public class Parser {
             return parseDoneDelete(input);
         } else {
             switch (command) {
-                case "todo":
-                    return parseToDo(input);
-                case "deadline":
-                    return parseDeadline(input);
-                case "event":
-                    return parseEvent(input);
-                default:
-                    throw new DukeException(Message.ERROR_UNKNOWN_CMD.getMsg());
+            case "todo":
+                return parseToDo(input);
+            case "deadline":
+                return parseDeadline(input);
+            case "event":
+                return parseEvent(input);
+            default:
+                throw new DukeException(Message.ERROR_UNKNOWN_CMD.getMsg());
             }
         }
     }
-
+    
     private String[] parseDoneDelete(String input) throws DukeException {
         StringTokenizer st = new StringTokenizer(input);
         if (st.countTokens() != 2) {
@@ -45,7 +45,7 @@ public class Parser {
         }
         return new String[]{command, taskID};
     }
-
+    
     private String[] parseToDo(String input) throws DukeException {
         StringTokenizer st = new StringTokenizer(input);
         st.nextToken();
@@ -58,8 +58,8 @@ public class Parser {
         }
         return new String[]{"T", description.toString().stripTrailing()};
     }
-
-
+    
+    
     private String[] parseDeadline(String input) throws DukeException {
         String[] separatedInput = input.split(DEADLINE_DELIMITER);
         if (separatedInput.length <= 1) {
@@ -77,10 +77,10 @@ public class Parser {
             throw new DukeException(Message.ERROR_DEADLINE_DESC.getMsg());
         }
         return new String[]{"D",
-                description,
-                dateString};
+                            description,
+                            dateString};
     }
-
+    
     // e.g. event project meeting /at Mon 2-4pm
     // todo: refactor this later
     private String[] parseEvent(String input) throws DukeException {
@@ -90,25 +90,21 @@ public class Parser {
         }
         String[] words = separatedInput[0].split(" ");
         String[] timeInfo = separatedInput[1].split(" ");
-
-//        if(timeInfo.length <= 1) {
-//            throw new DukeException("invalid event command: ???");
-//        }
-
+        
         String duration = timeInfo[timeInfo.length - 1];
         String[] separatedTime = duration.split(TIME_DELIMITER);
-        if(separatedTime.length <= 1) {
+        if (separatedTime.length <= 1) {
             throw new DukeException(Message.ERROR_EVENT_TIME.getMsg());
         }
-
+        
         StringBuilder dateStringBuilder = new StringBuilder();
         for (int i = 0; i < timeInfo.length - 2; i++) {
             dateStringBuilder.append(timeInfo[i]).append(" ");
         }
-
+        
         dateStringBuilder.append(timeInfo[timeInfo.length - 2]);
         String dateString = dateStringBuilder.toString();
-        if(dateString.isEmpty()) {
+        if (dateString.isEmpty()) {
             throw new DukeException(Message.ERROR_EVENT_DATE.getMsg());
         }
         String startTime = separatedTime[0],
@@ -119,14 +115,14 @@ public class Parser {
         }
         newDescription.append(words[words.length - 1]);
         return new String[]{"E",
-                newDescription.toString().stripTrailing(),
-                dateString,
-                startTime,
-                endTime};
+                            newDescription.toString().stripTrailing(),
+                            dateString,
+                            startTime,
+                            endTime};
     }
-
+    
     private boolean isInteger(String s) {
         return s.matches("\\d+");
     }
-
+    
 }

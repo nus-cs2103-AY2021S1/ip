@@ -17,44 +17,35 @@ public enum Message {
     ERROR_EVENT_FORMAT("invalid event command: bad format, try event <desc> /at <dateString> <startTime>-<endTime>"),
     ERROR_EVENT_TIME("invalid event command: you need to pass in a start and end time for your event"),
     ERROR_EVENT_DATE("invalid event command: you didn't pass in the date!"),
-
-
-
-
-
-
-
-
-
     INVALID;
-
-
+    
+    
     private String msg;
     private static Map<String, Message> keyableMap;
-
-    Message() {} // constructor for INVALID
-
+    
+    Message() {
+    } // constructor for INVALID
+    
     Message(String msg) {
         this.msg = msg;
     }
-
+    
     // init for the enums class: fills in the hashmap of message-label pairs
     static {
         Map<String, Message> messageLabelMap = new HashMap<>();
-        for(Message m : Message.values()) {
+        for (Message m : Message.values()) {
             messageLabelMap.put(m.getMsg(), m);
         }
         Message.keyableMap = messageLabelMap;
     }
-
+    
     public String getMsg() {
         return this.msg;
     }
-
+    
     public static Message getLabel(String msg) {
         return keyableMap.getOrDefault(msg, Message.INVALID);
     }
-
-
-
+    
+    
 }

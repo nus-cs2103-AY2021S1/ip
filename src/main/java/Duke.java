@@ -2,14 +2,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-
+    
     // constant strings:
     private static final String lineBreak = "____________________________________________________________";
     private static final String indent = "    ";
     private static final String mode = "list";
-
+    
     static boolean terminate = false;
-
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         TaskList myTasks = new TaskList();
@@ -19,14 +19,14 @@ public class Duke {
         }
         sc.close();
     }
-
+    
     private static void greet() {
         ArrayList<String> greeting = new ArrayList<>();
         greeting.add("Hello I'm Duke");
         greeting.add("What can I do for you?");
         printResponse(prettify(greeting));
     }
-
+    
     private static void respond(Scanner sc, TaskList myTasks) {
         Parser parser = new Parser();
         String input = sc.nextLine();
@@ -53,16 +53,15 @@ public class Duke {
             printResponse(prettify(response));
         }
     }
-
-
+    
+    
     private static ArrayList<String> handleTask(String[] parsedOutput, TaskList tasks) throws DukeException {
         String command = parsedOutput[0];
         ArrayList<String> response = new ArrayList<>();
-        if (command.equals(Command.DELETE_CMD.getCmd())
-                || command.equals(Command.DONE_CMD.getCmd())) {
+        if (command.equals(Command.DELETE_CMD.getCmd()) || command.equals(Command.DONE_CMD.getCmd())) {
             boolean toDelete = command.equals(Command.DELETE_CMD.getCmd());
             int taskID = Integer.parseInt(parsedOutput[1]);
-            if(toDelete) {
+            if (toDelete) {
                 response.add(Message.DELETE_MSG.getMsg());
                 response.add(tasks.deleteTask(taskID));
                 response.add(tasks.getCurrentStatus());
@@ -78,29 +77,29 @@ public class Duke {
         }
         return response;
     }
-
-
+    
+    
     private static ArrayList<String> exit() {
         Duke.terminate = true;
         ArrayList<String> response = new ArrayList<>();
         response.add(Message.EXIT_GREETING.getMsg());
         return (response);
-
+        
     }
-
+    
     private static ArrayList<String> echo(String output) {
         ArrayList<String> response = new ArrayList<>();
         response.add(output);
         return (response);
     }
-
+    
     // encapsulates and indents response lines:
     private static ArrayList<String> prettify(ArrayList<String> rawResponse) {
         rawResponse.add(0, lineBreak);
         rawResponse.add(rawResponse.size(), lineBreak);
         return indentLines(rawResponse);
     }
-
+    
     private static ArrayList<String> indentLines(ArrayList<String> responseLines) {
         ArrayList<String> result = new ArrayList<>();
         for (String current : responseLines) {
@@ -109,13 +108,13 @@ public class Duke {
         }
         return result;
     }
-
+    
     private static void printResponse(ArrayList<String> response) {
         for (String s : response) {
             System.out.println(s);
         }
     }
-
+    
     private static void printLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -124,7 +123,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
     }
-
+    
 }
 
 //todo: create enums for messages, delims and commands/cases
