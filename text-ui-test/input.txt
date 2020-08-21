@@ -1,20 +1,38 @@
 hello
 done
-done bro
-done 99
 delete
-delete bro
-delete 99
+todo
+deadline
+event
+done me too
+done 1
+delete me too
+delete 1
+deadline nope
+deadline wrong/athaha
+event nope
+event wrong/bywahaha
 todo readbook
 deadline return book /by June 6th
 event project meeting /at Aug 6th 2-4pm
 todo join sports club
 todo borrow book
+deadline drink coffee/by June 7th
+event drink tea/atAug 7th 4-6pm
 list
-done 5
+done 0
+done 8
+delete 0
+delete 8
 list
-done 1
+done 2
+list
+done 4
 list
 delete 3
+list
+delete 4
+list
+todo say goodbye
 list
 bye

@@ -6,7 +6,7 @@
 # Gradle build files
 /.gradle/
 /build/
-src/chat/resources/docs/
+src/dukeCmd/resources/docs/
 
 # MacOS custom attributes files created by Finder
 .DS_Store
