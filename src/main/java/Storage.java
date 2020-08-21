@@ -20,7 +20,7 @@ public class Storage {
             description = sc.next();
             description = sc.nextLine();
             Task toAdd;
-            if (taskType.startsWith("T")) {
+            if (taskType.charAt(0) == 'T') {
                 toAdd = new ToDo(description);
             } else {
                 int position = description.indexOf('|');
@@ -29,9 +29,9 @@ public class Storage {
                 }
                 String time = description.substring(position + 6);
                 description = description.substring(0, position - 1);
-                if (taskType.startsWith("D")) {
+                if (taskType.charAt(0) == 'D') {
                     toAdd = new Deadline(description, time);
-                } else if (taskType.startsWith("E")) {
+                } else if (taskType.charAt(0) == 'E') {
                     toAdd = new Event(description, time);
                 } else {
                     throw new InvalidCommandException("Invalid input file format");
