@@ -1,11 +1,14 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    public String due;
-    public Deadline(String description, String due) {
+    public LocalDate due;
+    public Deadline(String description, LocalDate due) {
         super(description);
         this.due = due;
     }
 
-    public Deadline(boolean done, String description, String due) {
+    public Deadline(boolean done, String description, LocalDate due) {
         super(done, description,'D');
         this.due = due;
         String unparseMessage = "D";
@@ -21,6 +24,6 @@ public class Deadline extends Task {
     }
 
     public String toString() {
-        return "[D]" + super.toString() + "(" + due + ")";
+        return "[D]" + super.toString() + "(" + due.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
