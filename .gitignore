@@ -6,7 +6,7 @@
 # Gradle build files
 /.gradle/
 /build/
-src/dukeCmd/resources/docs/
+src/main/resources/docs/
 
 # MacOS custom attributes files created by Finder
 .DS_Store
@@ -14,4 +14,3 @@ src/dukeCmd/resources/docs/
 bin/
 
 /text-ui-test/ACTUAL.txt
-text-ui-test/EXPECTED-UNIX.TXT
