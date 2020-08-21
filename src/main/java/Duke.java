@@ -2,10 +2,12 @@ public class Duke {
 
     private Ui ui;
     private TaskList taskList;
+    private Storage storage;
 
     public Duke() {
         this.ui = new Ui();
-        this.taskList = new TaskList();
+        this.storage = new Storage();
+        this.taskList = storage.load();
     }
 
     public static void main(String[] args) {
@@ -27,6 +29,9 @@ public class Duke {
                 ui.show("\t " + ex.getMessage());
             }
         }
+
+        storage.save(taskList);
+        System.exit(0);
 
     }
 }

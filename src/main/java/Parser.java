@@ -33,7 +33,7 @@ public class Parser {
                 task = new Todo(arguments);
                 break;
             case "deadline": {
-                String[] parsed = arguments.split("/by");
+                String[] parsed = arguments.split(" /by ");
                 if (parsed.length < 2) {
                     throw new EmptyDueDateException();
                 }
@@ -44,7 +44,7 @@ public class Parser {
                 break;
             }
             case "event": {
-                String[] parsed = arguments.split("/at");
+                String[] parsed = arguments.split(" /at ");
                 if (parsed.length < 2) {
                     throw new EmptyEventDateException();
                 }
