@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,6 +22,21 @@ public class Duke {
                 "  What can I do for you?\n" +
                 "____________________________________________________________\n";
         System.out.println(message);
+
+        File path = new File("data");
+        if (path.exists() && path.isDirectory()) {
+            File f = new File("data/duke.txt");
+            try {
+                Scanner s = new Scanner(f);
+                while (s.hasNext()) {
+                    System.out.println(s.nextLine());
+                }
+            } catch (FileNotFoundException e) {
+                System.out.println("File not found");
+            }
+        } else {
+            new File("data").mkdir();
+        }
 
         Scanner scanner = new Scanner(System.in);
         String string1 = scanner.nextLine();
@@ -101,6 +121,12 @@ public class Duke {
                 System.out.println("____________________________________________________________\n");
             }
 
+            try {
+                writeToFile(lists);
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
+
             string1 = scanner.nextLine();
         }
 
@@ -108,5 +134,18 @@ public class Duke {
                 "  Bye. Hope to see you again soon!\n" +
                 "____________________________________________________________";
         System.out.println(message1);
+    }
+
+    public static void writeToFile(List<Task> lists) throws IOException {
+        FileWriter fw = new FileWriter("data/duke.txt");
+        String textToAdd = "";
+
+        for (int i = 0; i < lists.size(); i++) {
+            Task task = lists.get(i);
+            textToAdd = textToAdd + task.toString() + System.lineSeparator();
+        }
+
+        fw.write(textToAdd);
+        fw.close();
     }
 }
