@@ -53,31 +53,29 @@ public class Duke {
             task = new Todo(taskBody);
 
         } else if (taskType.equals("deadline")) {
-            if (taskBody.split("/by").length == 0) {
-                throw new DukeException("☹ OOPS!!! Please add a description and deadline for your task!");
-            } else if (taskBody.split("/by").length == 1
-                    || taskBody.split("/by")[1].isBlank()) {
-                throw new DukeException("☹ OOPS!!! Please add a deadline for your task!");
-            } else if (taskBody.split("/by")[0].isBlank()) {
-                throw new DukeException("☹ OOPS!!! Please add a task description!");
-            } else {
+            try {
                 String description = taskBody.split("/by")[0];
                 String by = taskBody.split("/by")[1];
-                task = new Deadline(description.trim(), by.trim());
+                if (description.isBlank() || by.isBlank()) {
+                    throw new DukeException("☹ OOPS!!! Please add both a description and deadline for your task!");
+                } else {
+                    task = new Deadline(description.trim(), by.trim());
+                }
+            } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
+                throw new DukeException("☹ OOPS!!! Please add both a description and deadline for your task!");
             }
 
         } else {
-            if (taskBody.split("/at").length == 0) {
-                throw new DukeException("☹ OOPS!!! Please add a description and date for your event!");
-            } else if (taskBody.split("/at").length == 1
-                    || taskBody.split("/at")[1].isBlank()) {
-                throw new DukeException("☹ OOPS!!! Please add a date for your event!");
-            } else if (taskBody.split("/at")[0].isBlank()) {
-                throw new DukeException("☹ OOPS!!! Please add an event description!");
-            } else {
+            try {
                 String description = taskBody.split("/at")[0];
-                String by = taskBody.split("/at")[1];
-                task = new Deadline(description.trim(), by.trim());
+                String at = taskBody.split("/at")[1];
+                if (description.isBlank() || at.isBlank()) {
+                    throw new DukeException("☹ OOPS!!! Please add both a description and date for your event!");
+                } else {
+                    task = new Event(description.trim(), at.trim());
+                }
+            } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
+                throw new DukeException("☹ OOPS!!! Please add both a description and date for your event!");
             }
         }
 
