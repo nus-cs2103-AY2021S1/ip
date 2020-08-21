@@ -127,6 +127,8 @@ public class Duke {
                     type = Command.DELETE;
                 } else if (isDoneCommand(input, count)) {
                     type = Command.DONE;
+                } else if (input.startsWith("happens on")) {
+                    type = Command.HAPPENS;
                 } else {
                     type = Command.TASK;
                 }
