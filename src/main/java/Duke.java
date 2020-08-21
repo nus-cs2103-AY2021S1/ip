@@ -21,139 +21,106 @@ public class Duke {
         //Looping and echoing user inputs
         while (scanner.hasNext()) {
             String userInput = scanner.nextLine();
+            String[] input = userInput.split(" ");
             int len = userInput.length();
+            try {
+                switch (input[0]) {
+                    case ("bye"):
+                        System.out.println(line);
+                        System.out.println(bot + "Goodbye! Hope to see you again soon! ^_^");
+                        System.out.println(line);
+                        break;
+                    case ("list"):
+                        showTaskList(tasks);
+                        break;
+                    case ("done"):
+                        int pos = Integer.parseInt(userInput.substring(5, len));
+                        taskIsDone(tasks, pos);
+                        break;
+                    case ("todo"):
+                        if (!userInput.substring(4).isBlank()) { //if got space behind, it will add also
+                            ToDo todo = new ToDo(userInput.substring(5));
+                            tasks.add(todo); //adds into tasks list
+                            System.out.println(line);
+                            System.out.print(bot);
+                            System.out.println("Got it! I've added this task:");
+                            //System.out.println(addedText + userInput);
+                            System.out.println(todo);
+                            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                            System.out.println(line);
+                        } else {
+                            throw new DukeException("The description of a todo cannot be empty!");
+                        }
+                        break;
+                    case ("deadline"):
+                        if (!userInput.substring(8).isBlank()) {
+                            int indexOfSlash = userInput.indexOf('/');
+                            String description = userInput.substring(9, indexOfSlash - 1);
+                            String date = userInput.substring(indexOfSlash + 4);
+                            Deadline deadline = new Deadline(description, date);
+                            tasks.add(deadline);
+                            System.out.println(line);
+                            System.out.print(bot);
+                            System.out.println("Got it! I've added this task:");
+                            System.out.println(deadline);
+                            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                            System.out.println(line);
+                        } else {
+                            throw new DukeException("The description of a deadline cannot be empty!");
+                        }
+                        break;
+                    case ("event"):
+                        if (!userInput.substring(5).isBlank()) {
+                            int indexOfSlash = userInput.indexOf('/');
+                            String description = userInput.substring(6, indexOfSlash - 1);
+                            String dateAndTime = userInput.substring(indexOfSlash + 4);
+                            Event event = new Event(description, dateAndTime);
+                            tasks.add(event);
+                            System.out.println(line);
+                            System.out.print(bot);
+                            System.out.println("Got it! I've added this task:");
+                            System.out.println(event);
+                            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                            System.out.println(line);
+                        } else {
+                            throw new DukeException("The description of an event cannot be empty!");
+                        }
+                        break;
+                    case ("delete"):
+                        if (!userInput.substring(6).isBlank()) {
+                            String toDelete = userInput.substring(7);
+                            int index = Integer.parseInt(toDelete);
+                            System.out.println(line);
+                            System.out.print(bot);
+                            System.out.println("Noted! I've deleted this task:");
+                            System.out.println(tasks.get(index - 1));
+                            tasks.remove(index - 1);
+                            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                            System.out.println(line);
+                        } else {
+                            throw new DukeException("The description of an delete cannot be empty!");
+                        }
+                        break;
+                    default:
+                        throw new DukeException("You have keyed in an invalid command!\n(Valid commands: todo, deadline, event, list, delete, bye)");
+                }
 
-            if (userInput.equals("bye")) {
+            } catch (DukeException ex) {
                 System.out.println(line);
-                System.out.println(bot + "Goodbye! Hope to see you again soon! ^_^");
+                System.out.print(bot);
+                System.out.println(ex.getMessage());
                 System.out.println(line);
-                break;
-            } else if (userInput.equals("list")) {
-                showTaskList(tasks);
-            } else if (userInput.substring(0,4).equals("done")) { //mark as done
-                int pos = Integer.parseInt(userInput.substring(5, len));
-//                if(pos <= tasks.size() && pos > 0) {
-//                    taskIsDone(tasks, pos);
-//                } else {
-//                    System.out.println("You have keyed in an invalid number!");
-//                }
-                try { //if(pos <= tasks.size() && pos > 0)
-                    taskIsDone(tasks, pos);
-                } catch (DukeException ex) {
-                    System.out.println(line);
-                    System.out.print(bot);
-                    System.out.println(ex.getMessage());
-                    System.out.println(line);
-                }
-
-            } else if (userInput.startsWith("todo")) { //added
-                try {
-                    if (!userInput.substring(4).isBlank()) { //if got space behind, it will add also
-                        ToDo todo = new ToDo(userInput.substring(5));
-                        tasks.add(todo); //adds into tasks list
-                        System.out.println(line);
-                        System.out.print(bot);
-                        System.out.println("Got it! I've added this task:");
-                        //System.out.println(addedText + userInput);
-                        System.out.println(todo);
-                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                        System.out.println(line);
-                    } else {
-                        throw new DukeException("The description of a todo cannot be empty!");
-                    }
-
-                } catch (DukeException ex){
-                    System.out.println(line);
-                    System.out.print(bot);
-                    System.out.println(ex.getMessage());
-                    System.out.println(line);
-                }
-
-            } else if (userInput.startsWith("deadline")) {
-                try {
-                    if (!userInput.substring(8).isBlank()) {
-                        int indexOfSlash = userInput.indexOf('/');
-                        String description = userInput.substring(9, indexOfSlash - 1);
-                        String date =  userInput.substring(indexOfSlash + 4);
-                        Deadline deadline = new Deadline(description, date);
-                        tasks.add(deadline);
-                        System.out.println(line);
-                        System.out.print(bot);
-                        System.out.println("Got it! I've added this task:");
-                        System.out.println(deadline);
-                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                        System.out.println(line);
-                    } else {
-                        throw new DukeException("The description of a deadline cannot be empty!");
-                    }
-                } catch (DukeException ex){
-                    System.out.println(line);
-                    System.out.print(bot);
-                    System.out.println(ex.getMessage());
-                    System.out.println(line);
-                }
-            } else if (userInput.startsWith("event")) {
-                try {
-                    if (!userInput.substring(5).isBlank()) {
-                        int indexOfSlash = userInput.indexOf('/');
-                        String description = userInput.substring(6, indexOfSlash - 1);
-                        String dateAndTime =  userInput.substring(indexOfSlash + 4);
-                        Event event = new Event(description, dateAndTime);
-                        tasks.add(event);
-                        System.out.println(line);
-                        System.out.print(bot);
-                        System.out.println("Got it! I've added this task:");
-                        System.out.println(event);
-                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                        System.out.println(line);
-                    } else {
-                        throw new DukeException("The description of an event cannot be empty!");
-                    }
-                } catch (DukeException ex){
-                    System.out.println(line);
-                    System.out.print(bot);
-                    System.out.println(ex.getMessage());
-                    System.out.println(line);
-                }
-            } else if (userInput.startsWith("delete")) {
-                try {
-                    if (!userInput.substring(6).isBlank()) {
-                        String toDelete =  userInput.substring(7);
-                        int index = Integer.parseInt(toDelete);
-                        System.out.println(line);
-                        System.out.print(bot);
-                        System.out.println("Noted! I've deleted this task:");
-                        System.out.println(tasks.get(index - 1));
-                        tasks.remove(index - 1);
-                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                        System.out.println(line);
-                    } else {
-                        throw new DukeException("The description of an delete cannot be empty!");
-                    }
-                } catch (DukeException ex){
-                    System.out.println(line);
-                    System.out.print(bot);
-                    System.out.println(ex.getMessage());
-                    System.out.println(line);
-                }
-            } else { //invalid command
-                try {
-                    throw new DukeException("You have keyed in an invalid command!\n(Valid commands: todo, deadline, event, list, delete, bye)");
-                } catch (DukeException ex) {
-                    System.out.println(line);
-                    System.out.print(bot);
-                    System.out.println(ex.getMessage());
-                    System.out.println(line);
-                }
             }
         }
-
         scanner.close();
     }
 
     static void showTaskList(ArrayList<Task> tasks) {
-        if(tasks.isEmpty()) {
+        if (tasks.isEmpty()) {
+            System.out.println(line);
+            System.out.print(bot);
             System.out.println("There are no tasks in your list yet! >_<");
+            System.out.println(line);
         } else {
             System.out.println(line);
             System.out.print(bot);
