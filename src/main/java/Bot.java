@@ -63,6 +63,7 @@ public class Bot {
         Optional.ofNullable(Map.<String, BiConsumer<String, String>>of(
             "done",     this::cmdDone,
             "list",     this::cmdList,
+            "reset",    this::cmdReset,
             "delete",   this::cmdDelete,
             "todo",     this::cmdAddTask,
             "event",    this::cmdAddTask,
@@ -80,6 +81,13 @@ public class Bot {
 
 
 
+    private void cmdReset(String cmd, String input) {
+        assert cmd.equals("reset");
+
+        this.tasks.clear();
+
+        println("cleared all tasks.");
+    }
 
     private void cmdList(String cmd, String input) {
 
