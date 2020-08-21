@@ -1,5 +1,6 @@
 public class ByeCommand extends Command {
-    public ByeCommand() {
+    public ByeCommand(String input) {
+        super(input);
         isExit = true;
     }
 
