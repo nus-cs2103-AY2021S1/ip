@@ -133,6 +133,7 @@ public class Duke {
     }
 
     // appends task info to existing duke.txt file
+    // only can be used by add method
     public static void save(Task task) {
         try {
             FileWriter fw = new FileWriter(FILENAME, true); // true to mark fw to append line to existing file
@@ -144,6 +145,7 @@ public class Duke {
     }
 
     // rewrites duke.txt file by iterating though task list
+    // can be used by add, delete and done method
     public static void updateFile() {
         try {
             FileWriter fw = new FileWriter(FILENAME);
