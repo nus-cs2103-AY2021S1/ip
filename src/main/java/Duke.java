@@ -147,8 +147,7 @@ public class Duke {
     }
 
     public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        System.out.println(output("Hello! I'm Duke\n\t  What can I do for you?"));
+        Ui ui = new Ui();
         List<Task> list = new ArrayList<>();
         FileWriter fw = new FileWriter("../data/tasks.txt");
         fw.write("");
@@ -157,7 +156,7 @@ public class Duke {
         boolean flag = true;
         while (flag) {
             try {
-                String input = sc.nextLine();
+                String input = ui.readInput();
                 Input type;
                 if (input.equals("bye")) {
                     type = Input.BYE;
