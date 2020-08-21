@@ -116,44 +116,7 @@ public class Duke {
             try {
                 String input = ui.readInput();
                 Input type = Parser.getType(input);
-                switch (type) {
-                    case LIST:
-                        ui.printList(count, list, t -> true, "");
-                        break;
-                    case DONE:
-                        list.get(n - 1).markAsDone();
-                        ui.output("Nice! I've marked this task as done:\n\t    " + list.get(n - 1));
-                        break;
-                    case DELETE:
-                        Task toDelete = list.get(m - 1);
-                        list.remove(toDelete);
-                        storage.deleteTask(list);
-                        ui.output("Noted. I've removed this task:\n\t    " + toDelete +
-                                "\n\t  Now you have " + list.size());
-                        count--;
-                        break;
-                    case HAPPENS:
-                        try {
-                            LocalDate date = LocalDate.parse(input.substring(11),
-                                    DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                            ui.printList(count, list, t -> t.happenOnDate(date), "happening on " +
-                                    date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " ");
-                        } catch (Exception e) {
-                            throw new InvalidCommandException("Invalid date format. Please use yyyy-MM-dd");
-                        }
-                        break;
-                    case TASK:
-                        Task task = generate(input);
-                        storage.addToList(task);
-                        list.add(count++, task);
-                        String temp = count <= 1 ? " task" : " tasks";
-                        ui.output("Got it. I've added this task:\n\t    " + task +
-                                "\n\t  Now you have " + count + temp + " in the list.");
-                        break;
-                    case BYE:
-                        flag = false;
-                        break;
-                }
+                flag = Parser.dealCommand(type, ui, storage, input, count, list);
             } catch (InvalidCommandException e) {
                 ui.output(e.getMessage());
             }
