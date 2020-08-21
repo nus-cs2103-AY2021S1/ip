@@ -1,3 +1,5 @@
+import exceptions.WrongDateFormatException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -34,6 +36,9 @@ public class Storage {
         } catch (FileNotFoundException e) {
             System.out.println("Storage file not found");
             return tasks;
+        } catch (WrongDateFormatException e) {
+            System.out.println("Wrong date formatting in storage file");
+            return tasks;
         }
     }
 
@@ -50,18 +55,18 @@ public class Storage {
         }
     }
 
-    private Task parseStorageString(String storageString) {
+    private Task parseStorageString(String storageString) throws WrongDateFormatException {
         String[] taskComponents = storageString.trim().split(" \\| ");
-        final String type = taskComponents[0];
-        final boolean isCompleted = taskComponents[1].equals("1");
-        final String description = taskComponents[2];
+        final String type = taskComponents[0].trim();
+        final boolean isCompleted = taskComponents[1].trim().equals("1");
+        final String description = taskComponents[2].trim();
         if (type.equals("T")) {
             return new Todo(description, isCompleted);
         } else {
-            final String date = taskComponents[3];
+            final String date = taskComponents[3].trim();
             return type.equals("E")
-                    ? new Event(description, date, isCompleted)
-                    : new Deadline(description, date, isCompleted);
+                    ? new Event(description, DateParser.parseIso(date), isCompleted)
+                    : new Deadline(description, DateParser.parseIso(date), isCompleted);
         }
     }
 

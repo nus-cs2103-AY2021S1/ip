@@ -11,7 +11,7 @@ public class DateParser {
     private static final String readableFormat = "DD MMM YYYY HHMM";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
 
-    public static LocalDateTime parseString(String dateTime) throws DukeException {
+    public static LocalDateTime parseString(String dateTime) throws WrongDateFormatException {
         try {
             LocalDateTime result = LocalDateTime.parse(dateTime, DateParser.formatter);
             return result;
@@ -19,4 +19,14 @@ public class DateParser {
             throw new WrongDateFormatException(DateParser.readableFormat);
         }
     }
+
+    public static LocalDateTime parseIso(String isoString) throws WrongDateFormatException {
+        try {
+            LocalDateTime result = LocalDateTime.parse(isoString);
+            return result;
+        } catch (DateTimeParseException e) {
+            throw new WrongDateFormatException("YYYY-MM-DDTHH:MM");
+        }
+    }
+
 }
