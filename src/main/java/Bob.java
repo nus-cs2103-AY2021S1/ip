@@ -3,18 +3,16 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
- *
- *
- * /
+ * Represents the task-managing ChatBot.
+ * @author Lim Zi Yang
  */
 public class Bob {
     private final String output;
     private final ArrayList<Task> list;
     private final boolean hasExited;
 
-    // To print when user first starts the program
-    public static String INTRO =
+    /** Introduction message */
+    public static final String INTRO =
             "/*----------------- Welcome to BOB -----------------*/\n"
             + "                    █▀▀▄ █▀▀█ █▀▀▄\n"
             + "                    █▀▀▄ █  █ █▀▀▄\n"
@@ -23,53 +21,82 @@ public class Bob {
             + "Hi, my name is BOB.\n"
             + "What can I do for you?";
 
-    // To print when user exits the program
-    public static String OUTRO = "See you soon, maybe?";
-    public static String DIVIDER =  "========================================================\n";
+    /** Exit message */
+    public static final String OUTRO = "See you soon, maybe?";
+    public static final String DIVIDER =  "========================================================\n";
 
-
+    /**
+     * Creates an active Bob.
+     * @param output Current message to print to user.
+     * @param list List of tasks.
+     */
     private Bob (String output, ArrayList<Task> list) {
         this.output = output;
         this.list = list;
         this.hasExited = false;
     }
 
+    /**
+     * Creates a chatbot.
+     * @param output Current message to print to user.
+     * @param list List of tasks.
+     * @param hasExited Whether Bob has exited.
+     */
     private Bob (String output, ArrayList<Task> list, boolean hasExited) {
         this.output = output;
         this.list = list;
         this.hasExited = hasExited;
     }
 
-    /*---- Task methods ---- */
-
-    // Generates message after adding task
-    private String afterAdd(Task task) {
+    /**
+     * Returns message after adding task.
+     * @param task Task that was added to list.
+     * @return String message.
+     */
+    private String returnAddMessage(Task task) {
         return "Yes boss, I have added this task to your list:\n" + "  " + task + "\n"
                 + "Currently you have " + this.list.size() + " tasks in your list.";
     }
 
-    // Adds an unfinished task to list and returns readable String
+    /**
+     * Adds a task to the list.
+     * @param description Description of the task.
+     * @return String message regarding adding of task.
+     */
     private String addTodo(String description) {
         Task task = new Task(description);
         this.list.add(task);
-        return afterAdd(task);
+        return returnAddMessage(task);
     }
 
-    // Adds an unfinished deadline to list and returns readable String
+    /**
+     * Adds a deadline to the list.
+     * @param description Description of the deadline.
+     * @param timeAndDate Time and date of the deadline.
+     * @return String message regarding adding of deadline.
+     */
     private String addDeadline(String description, String timeAndDate) {
         Deadline deadline = new Deadline(description, timeAndDate);
         this.list.add(deadline);
-        return afterAdd(deadline);
+        return returnAddMessage(deadline);
     }
 
-    // Adds an unfinished event to list and returns readable String
+    /**
+     * Adds an event to the list.
+     * @param description Description of the event.
+     * @param time Time of the event.
+     * @return String message regarding adding of event.
+     */
     private String addEvent(String description, String time) {
         Event event = new Event(description, time);
         this.list.add(event);
-        return afterAdd(event);
+        return returnAddMessage(event);
     }
 
-    // Converts list to readable String
+    /**
+     * Converts the list as a readable String.
+     * @return String message regarding tasks in list.
+     */
     private String convertList() {
         String output = "";
         int taskCompleted = 0;
@@ -89,7 +116,12 @@ public class Bob {
                 : "You have " + (list.size() - taskCompleted) + " unfinished tasks.\n" + output;
     }
 
-    // Marks task as done
+    /**
+     * Marks task in a list as done.
+     * @param taskNum Task number.
+     * @return String message regarding marking of task.
+     * @throws BobListIndexOutOfBoundsException If taskNum is > list.size() or <= 0.
+     */
     private String markTaskDone(int taskNum) throws BobListIndexOutOfBoundsException {
         if (taskNum > list.size() || taskNum <= 0) {
             throw new BobListIndexOutOfBoundsException(list.size(), taskNum, "mark");
@@ -100,7 +132,12 @@ public class Bob {
         return "I have marked the task as done, good job.\n" + task + "\n";
     }
 
-    //Deletes the task from list
+    /**
+     * Deletes task from the list.
+     * @param taskNum Task number.
+     * @return String message regarding deleting of task.
+     * @throws BobListIndexOutOfBoundsException If taskNum is > list.size() or <= 0.
+     */
     private String deleteTask(int taskNum) throws BobListIndexOutOfBoundsException {
         if (taskNum > list.size() || taskNum <= 0) {
             throw new BobListIndexOutOfBoundsException(list.size(), taskNum, "delete");
@@ -111,8 +148,11 @@ public class Bob {
         return "I have deleted the task.\n" + task + "\n";
     }
 
-
-    // Executes action based on command without need for user input
+    /**
+     * Executes Bob's next action based on command.
+     * @param command User's command.
+     * @return Updated Bob with the next output.
+     */
     private Bob execute(Command command) {
         switch (command) {
             case EXIT:
@@ -124,7 +164,16 @@ public class Bob {
         }
     }
 
-    // Executes action based on command with need for user input
+    /**
+     * Executes Bob's next action based on command and other user input.
+     * @param command User's command.
+     * @param input User's input other than command.
+     * @return Updated Bob with the next output.
+     * @throws BobListIndexOutOfBoundsException If task number input > number of task in list or <= 0
+     * for DONE and DELETE commands.
+     * @throws BobEmptyDateException If no date is provided for DEADLINE and EVENT commands.
+     * @throws BobInvalidNumberException If task number input is not a valid integer for LIST and DELETE commands.
+     */
     private Bob execute(Command command, String input) throws BobListIndexOutOfBoundsException,
             BobEmptyDateException, BobInvalidNumberException {
         // for each case, treats return statement as break
@@ -187,24 +236,24 @@ public class Bob {
     }
 
     /**
-     * Chatbot's current output getter.
-     * @return
+     * Bob's current output getter.
+     * @return String message to be printed to the user.
      */
     public String getOutput() {
         return DIVIDER + this.output + "\n" + DIVIDER;
     }
 
     /**
-     *Checks if Bob has ceased.
-     * @return
+     * Checks if Bob has exited.
+     * @return Boolean value indicating whether Bob has exited.
      */
     public boolean checkHasExited() {
         return this.hasExited;
     }
 
     /**
-     * Initializes Bob to introduce itself
-     * @return
+     * Initializes Bob.
+     * @return Bob with INTRODUCTION as output.
      */
     public static Bob initializeBob() {
         return new Bob(INTRO, new ArrayList<>());
@@ -213,8 +262,19 @@ public class Bob {
 
 
     // Handles user input which decides which command Bob executes, handles all exceptions
-    public Bob nextCommand(String input) throws BobInvalidCommandException,
-            BobEmptyTaskException, BobListIndexOutOfBoundsException, BobEmptyDateException, BobInvalidNumberException {
+
+    /**
+     * Handles user input which decides which command Bob executes.
+     * @param input User input.
+     * @return Updated Bob.
+     * @throws BobInvalidCommandException If user input is not recognised.
+     * @throws BobEmptyTaskException If no task is specified after todo, deadline or event.
+     * @throws BobListIndexOutOfBoundsException If BobListIndexOutOfBoundsException is caught after execute.
+     * @throws BobEmptyDateException If BobEmptyDateException is caught after execute.
+     * @throws BobInvalidNumberException If BobInvalidNumberException is caught after execute.
+     */
+    public Bob nextCommand(String input) throws BobInvalidCommandException, BobEmptyTaskException,
+            BobListIndexOutOfBoundsException, BobEmptyDateException, BobInvalidNumberException {
         try {
             if (input.equals("bye")) {
                 return execute(Command.EXIT);
@@ -239,15 +299,11 @@ public class Bob {
                     throw new BobEmptyTaskException();
                 }
                 return execute(Command.DEADLINE, input);
-                // If user's command is invalid/ not recognisable by Bob
+                // If user's command is invalid/not recognisable by Bob
             } else {
                 throw new BobInvalidCommandException();
             }
-        } catch (BobListIndexOutOfBoundsException e) {
-            throw e;
-        } catch (BobEmptyDateException e) {
-            throw e;
-        } catch (BobInvalidNumberException e) {
+        } catch (BobListIndexOutOfBoundsException | BobEmptyDateException | BobInvalidNumberException e) {
             throw e;
         }
 
@@ -255,8 +311,8 @@ public class Bob {
 
 
     /**
-     * Main environment where Bob runs
-     * @param args
+     * The program initializes Bob and reads user inputs for Bob.
+     * @param args Command line arguments.
      */
     public static void main(String[] args) {
         // Initializing stage
@@ -283,7 +339,6 @@ public class Bob {
                 System.out.println(e.toString());
             }
         }
-
         sc.close();
     }
 }
