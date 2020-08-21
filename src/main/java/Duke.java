@@ -18,8 +18,13 @@ public class Duke {
         while (!word.equals("bye")) {
             if (word.equals("list")) {
                 for (Task task : todoList) {
-                    System.out.println(task.toString());
+                    System.out.println(task.getStatusWithIndex());
                 }
+            } else if (word.length() > 4 && word.substring(0,5).equals("done ")) {
+                int taskNo = Character.getNumericValue(word.charAt(5)) - 1;
+                Task task = todoList.get(taskNo);
+                task.isDone = true;
+                System.out.println("Nice! I have marked this task as done: \n  " + task.toString());
             } else {
                 System.out.println("added: " + word);
                 storeTask(word);

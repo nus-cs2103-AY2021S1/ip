@@ -9,7 +9,12 @@ public class Task {
         this.index = index;
     }
 
+    public String getStatusWithIndex() {
+        return isDone ? index + ". " + "[\u2713] " + this.description
+                : index + ". " + "[\u2718] " + this.description; //return tick or X symbols
+    }
+
     public String toString() {
-        return this.index + ". " + this.description;
+        return (isDone ? "[\u2713] " + this.description : "[\u2718] " + this.description);
     }
 }
