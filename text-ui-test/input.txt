@@ -1,6 +1,7 @@
 todo eat cake
-event friend's birthday /at 23 Aug 4pm
-deadline CS2103 /by 20 Aug
+event friend's birthday /at 2020-08-23
+deadline CS2103 /by Aug 10
+deadline CS2103 /by 2020-08-20
 hello
 todo
 event description-less event :(

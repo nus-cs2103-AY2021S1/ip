@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -54,10 +56,12 @@ public class Duke {
                             addTask(new Todo(taskInfo[1], Boolean.parseBoolean(taskInfo[2])));
                             break;
                         case E:
-                            addTask(new Event(taskInfo[1], Boolean.parseBoolean(taskInfo[2]), taskInfo[3]));
+                            addTask(new Event(taskInfo[1], Boolean.parseBoolean(taskInfo[2]),
+                                    LocalDate.parse(taskInfo[3])));
                             break;
                         case D:
-                            addTask(new Deadline(taskInfo[1], Boolean.parseBoolean(taskInfo[2]), taskInfo[3]));
+                            addTask(new Deadline(taskInfo[1], Boolean.parseBoolean(taskInfo[2]),
+                                    LocalDate.parse(taskInfo[3])));
                             break;
                     }
                 }
@@ -170,8 +174,12 @@ public class Duke {
                         conditionError(TaskTypes.deadline);
                         break;
                     }
-                    Task deadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
-                    addTask(deadline);
+                    try {
+                        Task deadline = new Deadline(deadlineInfo[0], LocalDate.parse(deadlineInfo[1]));
+                        addTask(deadline);
+                    } catch (DateTimeParseException e) {
+                        System.out.println(">> Please format your date in YYYY-MM-DD format!");
+                    }
                     break;
                 case event:
                     if (chunks.length < 2) {
@@ -183,8 +191,12 @@ public class Duke {
                         conditionError(TaskTypes.event);
                         break;
                     }
-                    Task event = new Event(eventInfo[0], eventInfo[1]);
-                    addTask(event);
+                    try {
+                        Task event = new Event(eventInfo[0], LocalDate.parse(eventInfo[1]));
+                        addTask(event);
+                    } catch (DateTimeParseException e) {
+                        System.out.println(">> Please format your date in YYYY-MM-DD format!");
+                    }
                     break;
                 default:
                     break;

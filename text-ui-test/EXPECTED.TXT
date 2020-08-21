@@ -4,10 +4,11 @@
 >> [T][✘] eat cake
 >> You now have 1 tasks to do!
 >> Added the task:
->> [E][✘] friend's birthday (at: 23 Aug 4pm)
+>> [E][✘] friend's birthday (at: Aug 23 2020)
 >> You now have 2 tasks to do!
+>> Please format your date in YYYY-MM-DD format!
 >> Added the task:
->> [D][✘] CS2103 (by: 20 Aug)
+>> [D][✘] CS2103 (by: Aug 20 2020)
 >> You now have 3 tasks to do!
 >> Oh no!!! I don't understand this input :(
 >> Oh no!!! A todo must have a description!
@@ -15,19 +16,19 @@
 >> Oh no!!! A deadline must have an associated date!
 >> Oh no!!! I don't understand this input :(
 >> 1. [T][✘] eat cake
->> 2. [E][✘] friend's birthday (at: 23 Aug 4pm)
->> 3. [D][✘] CS2103 (by: 20 Aug)
+>> 2. [E][✘] friend's birthday (at: Aug 23 2020)
+>> 3. [D][✘] CS2103 (by: Aug 20 2020)
 >> Yay! The following task is marked as done:
 >> [T][✓] eat cake
 >> Yay! The following task is marked as done:
->> [E][✓] friend's birthday (at: 23 Aug 4pm)
+>> [E][✓] friend's birthday (at: Aug 23 2020)
 >> 1. [T][✓] eat cake
->> 2. [E][✓] friend's birthday (at: 23 Aug 4pm)
->> 3. [D][✘] CS2103 (by: 20 Aug)
+>> 2. [E][✓] friend's birthday (at: Aug 23 2020)
+>> 3. [D][✘] CS2103 (by: Aug 20 2020)
 >> Oh no!!! That task does not exist!
 >> I've eradicated the task:
->> [D][✘] CS2103 (by: 20 Aug)
+>> [D][✘] CS2103 (by: Aug 20 2020)
 >> You now have 2 tasks to do!
 >> 1. [T][✓] eat cake
->> 2. [E][✓] friend's birthday (at: 23 Aug 4pm)
+>> 2. [E][✓] friend's birthday (at: Aug 23 2020)
 >> Bye! Hope I helped!
