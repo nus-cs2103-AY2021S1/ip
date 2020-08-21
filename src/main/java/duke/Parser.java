@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
     public static int isValidDone(String cmd, int count) throws InvalidCommandException {
         if (cmd.startsWith("done ")) {

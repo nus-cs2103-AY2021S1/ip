@@ -1,3 +1,5 @@
+package duke;
+
 public class ByeCommand extends Command {
     public ByeCommand(String input) {
         super(input);
