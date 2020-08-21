@@ -1,7 +1,9 @@
+package exception;
+
 public class EmptyTaskException extends Exception {
     String taskType;
 
-    EmptyTaskException(String taskType) {
+    public EmptyTaskException(String taskType) {
         this.taskType = taskType;
     }
 

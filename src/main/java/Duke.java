@@ -1,6 +1,16 @@
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import task.Task;
+import task.Deadline;
+import task.Event;
+import task.ToDo;
+
+import exception.EmptyTaskException;
+import exception.InvalidCommandException;
+import exception.InvalidIndexException;
+import exception.MissingDateException;
 
 public class Duke {
     private static final String LINES = "____________________\n";

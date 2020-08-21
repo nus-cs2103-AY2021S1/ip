@@ -1,3 +1,5 @@
+package exception;
+
 public class MissingDateException extends Exception {
     @Override
     public String toString() {
