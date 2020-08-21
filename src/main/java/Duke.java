@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -75,7 +76,7 @@ public class Duke {
         }
     }
 
-    private void getLocalData() throws FileNotFoundException {
+    private void getLocalData() throws FileNotFoundException, InvalidDateTimeException {
         File f = new File(filePathName);
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
@@ -125,9 +126,9 @@ public class Duke {
         if(task instanceof Todo) {
             return "T | " + (task.done ? "1" : "0") + " | " + task.description;
         } else if(task instanceof Event) {
-            return "E | " + (task.done ? "1" : "0") + " | " + task.description + " | " + ((Event) task).date;
+            return "E | " + (task.done ? "1" : "0") + " | " + task.description + " | " + ((Event) task).date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
         } else {
-            return "D | " + (task.done ? "1" : "0") + " | " + task.description + " | " + ((Deadline) task).date;
+            return "D | " + (task.done ? "1" : "0") + " | " + task.description + " | " + ((Deadline) task).date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
         }
     }
 

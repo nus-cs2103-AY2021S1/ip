@@ -14,9 +14,13 @@ public class Event extends Task {
         }
     }
 
-    Event(String description, String date, boolean done) {
+    Event(String description, String date, boolean done) throws InvalidDateTimeException{
         super(description, done);
-        this.date = date;
+        try {
+            this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException("The date for your event cannot be parsed.");
+        }
     }
 
     @Override
