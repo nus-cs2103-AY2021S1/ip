@@ -71,10 +71,7 @@ public abstract class Command {
      * @throws DukeLoadingErrorException           If the file containing the save data cannot be loaded.
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage)
-            throws DukeInvalidListNumberInputException,
-            DukeInvalidTaskTimeException,
-            DukeInvalidTaskDescriptionException,
-            DukeUnknownInputException,
-            DukeLoadingErrorException;
-
+            throws DukeInvalidListNumberInputException, DukeInvalidTaskTimeException,
+            DukeInvalidTaskDescriptionException, DukeUnknownInputException,
+            DukeLoadingErrorException, DukeInvalidKeywordException;
 }

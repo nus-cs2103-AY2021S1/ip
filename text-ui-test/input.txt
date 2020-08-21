@@ -12,4 +12,7 @@ list
 delete 2
 list
 delete 5
+find book
+find blah
+find
 bye

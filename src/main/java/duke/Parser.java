@@ -34,6 +34,9 @@ public class Parser {
             case "deadline":
                 return new AddTaskCommand("deadline", input);
 
+            case "find":
+                return new FindCommand(input);
+
             case "bye":
                 return new ByeCommand();
 

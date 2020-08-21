@@ -138,6 +138,32 @@ public class TaskList {
     }
 
     /**
+     * Finds all the tasks which match the keyword in the user input.
+     *
+     * @param input A string representing the user input.
+     * @return The list of tasks which match the keyword in the user input.
+     */
+    public List<Task> findTasks(String input) throws DukeInvalidKeywordException {
+        String keyword;
+
+        try {
+            keyword = input.substring(5);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeInvalidKeywordException();
+        }
+
+        List<Task> result = new ArrayList<>();
+
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                result.add(task);
+            }
+        }
+
+        return result;
+    }
+
+    /**
      * Adds an event to the list of tasks.
      *
      * @param input A string representing the event to be added.
