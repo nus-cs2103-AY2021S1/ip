@@ -58,7 +58,8 @@ public class TaskListTest {
             assertEquals(event.toString(),
                     tasks.addTask("event", "event /at blah").toString());
         } catch (DukeInvalidTaskTimeException e) {
-            assertEquals("ERROR: Usage: <event> <description> /at <time>", e.toString());
+            assertEquals("ERROR: Usage: <event> <description> /at <time>\n"
+                    + "    Time formatting: dd-MM-yyyy HH:mm", e.toString());
         }
     }
 
@@ -76,7 +77,8 @@ public class TaskListTest {
             assertEquals(deadline.toString(),
                     tasks.addTask("deadline", "deadline /by blah").toString());
         } catch (DukeInvalidTaskTimeException e) {
-            assertEquals("ERROR: Usage: <deadline> <description> /by <time>", e.toString());
+            assertEquals("ERROR: Usage: <deadline> <description> /by <time>\n"
+                    + "    Time formatting: dd-MM-yyyy HH:mm", e.toString());
         }
     }
 
