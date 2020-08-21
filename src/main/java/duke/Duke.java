@@ -2,6 +2,7 @@ package duke;
 
 import exception.*;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -155,34 +156,12 @@ public class Duke {
     }
 
     private void addDeadline(String deadline) throws DeadlineInvalidUsageException {
-        String[] parsedDeadline = deadline.split("\\s*/by\\s*", 2);
-
-        if (parsedDeadline.length < 2) {
-            throw new DeadlineInvalidUsageException("You should specify the deadline by using `/by`");
-        }
-        if (parsedDeadline[0].equals("")) {
-            throw new DeadlineInvalidUsageException("Deadline description cannot be empty.");
-        }
-        if (parsedDeadline[1].equals("")) {
-            throw new DeadlineInvalidUsageException("Deadline date cannot be empty.");
-        }
-        todoList.add(new Deadline(parsedDeadline[0], parsedDeadline[1]));
+        todoList.add(Deadline.create(deadline));
         printAddConfirmation(todoList.size() - 1);
     }
 
     private void addEvent(String event) throws EventInvalidUsageException {
-        String[] parsedEvent = event.split("\\s*/at\\s*", 2);
-
-        if (parsedEvent.length < 2) {
-            throw new EventInvalidUsageException("You should specify a date by using `/at`");
-        }
-        if (parsedEvent[0].equals("")) {
-            throw new EventInvalidUsageException("Event description cannot be empty.");
-        }
-        if (parsedEvent[1].equals("")) {
-            throw new EventInvalidUsageException("Event date cannot be empty.");
-        }
-        todoList.add(new Event(parsedEvent[0], parsedEvent[1]));
+        todoList.add(Event.create(event));
         printAddConfirmation(todoList.size() - 1);
     }
 }
