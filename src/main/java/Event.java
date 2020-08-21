@@ -9,7 +9,7 @@ public class Event extends Task {
 
     @Override
     public String getInfo() {
-        return String.format("\nE | %d | %s | %s", isDone ? 1 : 0, taskName, date);
+        return String.format("E | %d | %s | %s\n", isDone ? 1 : 0, taskName, date);
     }
 
     @Override

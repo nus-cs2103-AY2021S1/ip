@@ -5,7 +5,7 @@ public class ToDo extends Task {
 
     @Override
     public String getInfo() {
-        return String.format("\nT | %d | %s", isDone ? 1 : 0, taskName);
+        return String.format("T | %d | %s\n", isDone ? 1 : 0, taskName);
     }
 
     @Override

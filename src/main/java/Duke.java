@@ -129,7 +129,36 @@ public class Duke {
         list.add(task);
         System.out.printf("     Now you have %d tasks in the list.\n", list.size());
         System.out.println("    ____________________________________________________________");
-        save(task);
+        updateFile();
+    }
+
+    // appends task info to existing duke.txt file
+    public static void save(Task task) {
+        try {
+            FileWriter fw = new FileWriter(FILENAME, true); // true to mark fw to append line to existing file
+            fw.write(task.getInfo());
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("File is missing");
+        }
+    }
+
+    // rewrites duke.txt file by iterating though task list
+    public static void updateFile() {
+        try {
+            FileWriter fw = new FileWriter(FILENAME);
+            if (list.size() > 0) {
+                fw.write(list.get(0).getInfo());
+
+                FileWriter fw1 = new FileWriter(FILENAME, true);
+                for (int i = 1; i < list.size(); i++) {
+                    fw.write(list.get(i).getInfo());
+                }
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("File is missing");
+        }
     }
 
     public static void listOut() {
@@ -170,6 +199,7 @@ public class Duke {
             System.out.printf("     Now you have %d tasks in the list.\n", list.size());
             System.out.println("    ____________________________________________________________");
             System.out.println();
+            updateFile();
         }
     }
 
@@ -199,6 +229,21 @@ public class Duke {
             System.out.println("       " + task);
             System.out.println("    ____________________________________________________________");
             System.out.println();
+            updateFile();
+        }
+    }
+
+    public static void deleteFromFile(Task task) {
+        File f = new File(FILENAME);
+        if (f.exists()) {
+            try {
+                Scanner sc = new Scanner(f);
+                while (sc.hasNext()) {
+                    String line = sc.nextLine();
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -217,6 +262,10 @@ public class Duke {
                 while (sc.hasNext()) {
                     String line = sc.nextLine();
                     String[] split = line.split("\\|");
+                    if (split.length < 3) {
+                        // if after split, arr contains insufficient info, skip;
+                        continue;
+                    }
                     String taskType = split[0];
                     String status = split[1].strip();
                     String details = split[2].stripLeading();
@@ -254,16 +303,6 @@ public class Duke {
             } catch (IOException e) {
                 System.out.println("Missing input");
             }
-        }
-    }
-
-    public static void save(Task task) {
-        try {
-            FileWriter fw = new FileWriter(FILENAME, true); // true to mark fw to append line to existing file
-            fw.write(task.getInfo());
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("File is missing");
         }
     }
 

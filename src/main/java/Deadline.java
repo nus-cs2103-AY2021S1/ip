@@ -9,7 +9,7 @@ public class Deadline extends Task {
 
     @Override
     public String getInfo() {
-        return String.format("\nD | %d | %s | %s", isDone ? 1 : 0, taskName, date);
+        return String.format("D | %d | %s | %s\n", isDone ? 1 : 0, taskName, date);
     }
 
     @Override
