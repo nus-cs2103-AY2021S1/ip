@@ -21,7 +21,8 @@ public class Task {
     }
 
     public String output() {
-        return " | " + getStatusIcon() + " | " + description;
+        int done = isDone ? 1 : 0;
+        return " | " + done + " | " + description;
     }
 
     public boolean happenOnDate(LocalDate date) {
