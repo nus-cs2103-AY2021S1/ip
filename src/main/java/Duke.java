@@ -12,50 +12,55 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         String welcome = line + "\nHello! I'm Duke!\n" +
-                "What can I do for you?\n" + line ;
+                "What can I do for you?\n";
         //System.out.println(logo + "\n" + welcome);
         System.out.println(welcome);
         Scanner scan = new Scanner(System.in);
         String word = scan.nextLine();
+        int len = 0;
         while (!word.equals("bye")) {
+            len = word.length();
             if (word.equals("list")) {
+                System.out.println(line);
                 for (Task task : todoList) {
                     System.out.println(task.getStatusWithIndex());
                 }
-            } else if (word.length() >=4 && word.substring(0,4).equals("todo")) {
-                try {
-                    //String todo = word.substring(5);
-                    Todo toDo = storeTodo(word);
-                    System.out.println(toDo == null ? "Failed!" : "\nGot it. I've have added this task:\n   " + toDo.toString()
-                            + "\nNow you have " + todoList.size() + " tasks in the list.\n" + line);
-                } catch (EmptyDukeException e) {
-                    System.out.println(e.toString());
-                }
-            } else if (word.length() >=8 && word.substring(0,8).equals("deadline")) {
-                //String todo = word.substring(9);
-                try {
-                    Deadline toDo = storeDeadline(word);
-                    System.out.println(toDo == null ? "Failed!" : "\nGot it. I've have added this task:\n   " + toDo.toString()
-                            + "\nNow you have " + todoList.size() + " tasks in the list.\n" + line);
-                } catch (EmptyDukeException e) {
-                    System.out.println(e.toString());
-                }
-            } else if (word.length() >=5 && word.substring(0,5).equals("event")) {
-                //String todo = word.substring(6);
-                try {
-                    Event toDo = storeEvent(word);
-                    System.out.println(toDo == null ? "Failed!" : "\nGot it. I've have added this task:\n   " + toDo.toString()
-                            + "\nNow you have " + todoList.size() + " tasks in the list.\n" + line);
-                } catch (EmptyDukeException e) {
-                    System.out.println(e.toString());
-                }
-            } else if (word.length() > 4 && word.substring(0,5).equals("done ")) {
+            } else if (len >= 4 && word.substring(0,4).equals("todo")) {
+                processTask(word);
+            }
+//                try {
+//                    //String todo = word.substring(5);
+//                    Todo toDo = storeTodo(word);
+//                    System.out.println(toDo == null ? "Failed!" : line + "\nGot it. I've have added this task:\n   " + toDo.toString()
+//                            + "\nNow you have " + todoList.size() + " tasks in the list." );
+//                } catch (EmptyDukeException e) {
+//                    System.out.println(e.toString());
+//                }
+            else if (len >= 8 && word.substring(0,8).equals("deadline")) {
+                processTask(word);
+//                try {
+//                    Deadline toDo = storeDeadline(word);
+//                    System.out.println(toDo == null ? "Failed!" : line + "\nGot it. I've have added this task:\n   " + toDo.toString()
+//                            + "\nNow you have " + todoList.size() + " tasks in the list." );
+//                } catch (EmptyDukeException e) {
+//                    System.out.println(e.toString());
+//                }
+            } else if (len >= 5 && word.substring(0,5).equals("event")) {
+                processTask(word);
+//                try {
+//                    Event toDo = storeEvent(word);
+//                    System.out.println(toDo == null ? "Failed!" : line + "\nGot it. I've have added this task:\n   " + toDo.toString()
+//                            + "\nNow you have " + todoList.size() + " tasks in the list." );
+//                } catch (EmptyDukeException e) {
+//                    System.out.println(e.toString());
+//                }
+            } else if (len > 4 && word.substring(0,5).equals("done ")) {
                 int taskNo = Character.getNumericValue(word.charAt(5)) - 1;
                 Task task = todoList.get(taskNo);
                 task.isDone = true;
                 System.out.println(line + "\nNice! I have marked this task as done: \n  " + task.toString());
             } else {
-                if (word.length() > 6 && word.substring(0,7).equals("delete ")) {
+                if (len > 6 && word.substring(0,7).equals("delete ")) {
                     int taskNo = Character.getNumericValue(word.charAt(7)) - 1;
                     delete(taskNo);
                 } else {
@@ -122,12 +127,30 @@ public class Duke {
         }
     }
 
+    public static void processTask(String word) {
+        Task toDo = null;
+        try {
+            if (word.substring(0,4).equals("todo")) {
+                toDo = storeTodo(word);
+            } else if (word.substring(0,5).equals("event")) {
+                toDo = storeEvent(word);
+            } else if (word.substring(0,8).equals("deadline")) {
+                toDo = storeDeadline(word);
+            }
+            System.out.println(toDo == null ? "Failed!" : line + "\nGot it. I've added this task:\n   "
+                    + toDo.toString()
+                    + "\nNow you have " + todoList.size() + " tasks in the list." );
+        } catch (EmptyDukeException e) {
+            System.out.println(e.toString());
+        }
+    }
+
     public static void delete(int n) {
         Task task = todoList.remove(n);
         for (int i = n; i < todoList.size(); i++) {
             todoList.get(i).index = todoList.get(i).index - 1;
         }
         System.out.println(line + "\nNoted. I've removed this task:\n  " + task.toString()
-                + "\nNow you have " + todoList.size() + " tasks in the list.\n" + line);
+                + "\nNow you have " + todoList.size() + " tasks in the list.");
     }
 }

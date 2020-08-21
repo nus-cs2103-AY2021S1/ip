@@ -5,11 +5,10 @@ public class Todo extends Task {
     }
     @Override
     public String getStatusWithIndex() {
-        return isDone ? index + ". " + "[T][\u2713] " + this.description
-                : index + ". " + "[T][\u2718] " + this.description; //return tick or X symbols
+        return String.format("%s. %s%s%s", index, TaskType.TODO, isDone ? super.done : super.start, this.description);
     }
     @Override
     public String toString() {
-        return isDone ? "[T][\u2713] " + this.description : "[T][\u2718] " + this.description;
+        return String.format("%s%s%s", TaskType.TODO, isDone ? super.done : super.start, this.description);
     }
 }

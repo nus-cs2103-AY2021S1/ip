@@ -7,15 +7,13 @@ public class Deadline extends Task {
         int idx = this.description.indexOf('/');
         String task = this.description.substring(0, idx);
         String end = new StringBuilder(this.description.substring(idx + 1)).insert(2,':').toString();
-        return isDone ? index + ". " + "[D][\u2713] " + task + String.format("(%s)", end)
-                : index + ". " + "[D][\u2718] " + task + String.format("(%s)", end); //return tick or X symbols
+        return String.format("%s. %s%s%s(%s)", index, TaskType.DEADLINE, isDone ? super.done : super.start, task, end);
     }
     @Override
     public String toString() {
         int idx = this.description.indexOf('/');
         String task = this.description.substring(0, idx);
         String end = new StringBuilder(this.description.substring(idx + 1)).insert(2,':').toString();
-        return isDone ? "[D][\u2713] " + task + String.format("(%s)", end)
-                : "[D][\u2718] " + task + String.format("(%s)", end);
+        return String.format("%s%s%s(%s)", TaskType.DEADLINE, isDone ? super.done : super.start, task, end);
     }
 }
