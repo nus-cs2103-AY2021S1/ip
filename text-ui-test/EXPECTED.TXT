@@ -5,6 +5,7 @@ Hello! I'm duke. What can I do for you?
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Starting a new task list
 ───────────────────────────────────────────────────────────────────────────
 Task has been added:
 [D][✘] homework (by: sunday)

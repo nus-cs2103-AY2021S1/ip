@@ -1,0 +1,3 @@
+D|false|homework|sunday
+T|true|project
+D|false|lunch|noon

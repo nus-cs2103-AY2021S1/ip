@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,6 +13,7 @@ public class Duke {
         System.out.println("Hello! I'm duke. What can I do for you? \n" + logo);
 
         ArrayList<Task> tasks = new ArrayList<>();
+        loadTaskList(tasks);
 
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
@@ -37,9 +39,48 @@ public class Duke {
                 } else {
                     addTask(str, tasks);
                 }
+                saveTaskList(tasks);
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    private static void loadTaskList(ArrayList<Task> tasks) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("ip/../data/duke.txt"));
+            String str;
+            while ((str = reader.readLine()) != null) {
+                Task T;
+                if (str.startsWith("T")) {
+                    T = ToDo.load(str);
+                } else if (str.startsWith("E")) {
+                    T = Event.load(str);
+                } else if (str.startsWith("D")) {
+                    T = Deadline.load(str);
+                } else {
+                    break;
+                }
+                tasks.add(T);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Starting a new task list");
+            File file = new File("./data");
+            file.mkdir();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void saveTaskList(ArrayList<Task> tasks) {
+        try {
+            FileWriter fw = new FileWriter("./data/duke.txt");
+            for (Task t : tasks) {
+                fw.write(t.store() + "\n");
+            }
+            fw.close();
+        } catch (Exception e) {
+            System.out.println("error in saving");
         }
     }
 
@@ -118,14 +159,14 @@ public class Duke {
     }
 
     public static void delete(int i, ArrayList<Task> tasks) {
-        Task t = tasks.get(i-1);
+        Task t = tasks.get(i - 1);
         tasks.remove(i - 1);
         System.out.println("Task has been removed.");
         System.out.println(t.toString());
         System.out.println("You now have " + tasks.size() + " tasks in the list");
     }
 
-    private static void completeTask(String str, ArrayList<Task> tasks) throws TaskCompletionException{
+    private static void completeTask(String str, ArrayList<Task> tasks) throws TaskCompletionException {
         if (!str.startsWith("done ")) {
             throw new TaskCompletionException(tasks.size());
         }
@@ -160,9 +201,7 @@ public class Duke {
     }
 
 
-
-
-        public static boolean isInteger(String str) {
+    public static boolean isInteger(String str) {
         try {
             Integer.parseInt(str);
         } catch (NumberFormatException nfe) {
