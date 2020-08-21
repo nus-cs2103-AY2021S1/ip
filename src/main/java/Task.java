@@ -2,11 +2,11 @@ package main.java;
 
 public class Task {
     protected TaskStates state;
-    protected String task;
+    protected String description;
 
     Task(String task){
         state = TaskStates.UNDONE;
-        this.task = task;
+        this.description = task;
     }
 
     // set task as done
@@ -19,15 +19,16 @@ public class Task {
         return (state == TaskStates.DONE ? "\u2713" : "\u2718");
     }
 
+
     @Override
     public String toString() {
         switch(state){
             case DONE:
-                return "[\u2713] " + task;
+                return "[\u2713] " + description;
             case UNDONE:
-                return "[\u2718] " + task;
+                return "[\u2718] " + description;
             default:
-                return task;
+                return description;
         }
     }
 }
