@@ -109,7 +109,7 @@ public class Parser {
         } else if (input.startsWith("done ")) {
             return new DoneCommand(input);
         } else if (input.startsWith("happens on ")) {
-            return Input.HAPPENS;
+            return new HappensCommand(input);
         } else {
             return Input.TASK;
         }
