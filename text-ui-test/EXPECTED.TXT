@@ -7,41 +7,79 @@ Hello from
 
 Hello! I'm Duke
 Let's have a conversation!
-Error: Unknown input
-Format: done {index}
-Format: done {index}
-Index Error: Invalid task index
-Format: delete {index}
-Format: delete {index}
-Index Error: Invalid task index
-Added: [T][✗]  readbook
-Added: [D][✗]  return book  (by: June 6th)
-Added: [E][✗]  project meeting  (at: Aug 6th 2-4pm)
-Added: [T][✗]  join sports club
-Added: [T][✗]  borrow book
-1. [T][✗]  readbook
-2. [D][✗]  return book  (by: June 6th)
-3. [E][✗]  project meeting  (at: Aug 6th 2-4pm)
-4. [T][✗]  join sports club
-5. [T][✗]  borrow book
-Nice! I've marked this task as done:
-    [T][✓]  borrow book
-1. [T][✗]  readbook
-2. [D][✗]  return book  (by: June 6th)
-3. [E][✗]  project meeting  (at: Aug 6th 2-4pm)
-4. [T][✗]  join sports club
-5. [T][✓]  borrow book
-Nice! I've marked this task as done:
-    [T][✓]  readbook
-1. [T][✓]  readbook
-2. [D][✗]  return book  (by: June 6th)
-3. [E][✗]  project meeting  (at: Aug 6th 2-4pm)
-4. [T][✗]  join sports club
-5. [T][✓]  borrow book
-Noted. I've removed this task:
-    [E][✗]  project meeting  (at: Aug 6th 2-4pm)
-1. [T][✓]  readbook
-2. [D][✗]  return book  (by: June 6th)
-3. [T][✗]  join sports club
-4. [T][✓]  borrow book
+Unknown Command!
+Format Error: done {index}
+Format Error: delete {index}
+Format Error: todo {description}
+Format Error: deadline {description} /by {deadline}
+Format Error: Event {description} /at {time}
+Format Error: done {index}
+Index Error: done {index}
+Format Error: delete {index}
+Index Error: delete {index}
+Format Error: deadline {description} /by {deadline}
+Format Error: deadline {description} /by {deadline}
+Format Error: Event {description} /at {time}
+Format Error: Event {description} /at {time}
+	+ Add ToDo: [T][✗] readbook
+	+ Add Deadline: [D][✗] return book (by: June 6th)
+	+ Add Event: [E][✗] project meeting (at: Aug 6th 2-4pm)
+	+ Add ToDo: [T][✗] join sports club
+	+ Add ToDo: [T][✗] borrow book
+	+ Add Deadline: [D][✗] drink coffee (by: June 7th)
+	+ Add Event: [E][✗] drink tea (at: Aug 7th 4-6pm)
+1. [T][✗] readbook
+2. [D][✗] return book (by: June 6th)
+3. [E][✗] project meeting (at: Aug 6th 2-4pm)
+4. [T][✗] join sports club
+5. [T][✗] borrow book
+6. [D][✗] drink coffee (by: June 7th)
+7. [E][✗] drink tea (at: Aug 7th 4-6pm)
+Index Error: done {index}
+Index Error: done {index}
+Index Error: delete {index}
+Index Error: delete {index}
+1. [T][✗] readbook
+2. [D][✗] return book (by: June 6th)
+3. [E][✗] project meeting (at: Aug 6th 2-4pm)
+4. [T][✗] join sports club
+5. [T][✗] borrow book
+6. [D][✗] drink coffee (by: June 7th)
+7. [E][✗] drink tea (at: Aug 7th 4-6pm)
+	# Done: [D][✓] return book (by: June 6th)
+1. [T][✗] readbook
+2. [D][✓] return book (by: June 6th)
+3. [E][✗] project meeting (at: Aug 6th 2-4pm)
+4. [T][✗] join sports club
+5. [T][✗] borrow book
+6. [D][✗] drink coffee (by: June 7th)
+7. [E][✗] drink tea (at: Aug 7th 4-6pm)
+	# Done: [T][✓] join sports club
+1. [T][✗] readbook
+2. [D][✓] return book (by: June 6th)
+3. [E][✗] project meeting (at: Aug 6th 2-4pm)
+4. [T][✓] join sports club
+5. [T][✗] borrow book
+6. [D][✗] drink coffee (by: June 7th)
+7. [E][✗] drink tea (at: Aug 7th 4-6pm)
+	- Delete: [E][✗] project meeting (at: Aug 6th 2-4pm)
+1. [T][✗] readbook
+2. [D][✓] return book (by: June 6th)
+3. [T][✓] join sports club
+4. [T][✗] borrow book
+5. [D][✗] drink coffee (by: June 7th)
+6. [E][✗] drink tea (at: Aug 7th 4-6pm)
+	- Delete: [T][✗] borrow book
+1. [T][✗] readbook
+2. [D][✓] return book (by: June 6th)
+3. [T][✓] join sports club
+4. [D][✗] drink coffee (by: June 7th)
+5. [E][✗] drink tea (at: Aug 7th 4-6pm)
+	+ Add ToDo: [T][✗] say goodbye
+1. [T][✗] readbook
+2. [D][✓] return book (by: June 6th)
+3. [T][✓] join sports club
+4. [D][✗] drink coffee (by: June 7th)
+5. [E][✗] drink tea (at: Aug 7th 4-6pm)
+6. [T][✗] say goodbye
 Bye. Hope to see you again soon!
