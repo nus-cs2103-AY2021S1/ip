@@ -16,9 +16,18 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     private final Path path;
 
+    /**
+     * Class constructor.
+     *
+     * @param filePath A string representing the file path.
+     * @throws DukeLoadingErrorException If a loading error occurs.
+     */
     public Storage(String filePath) throws DukeLoadingErrorException {
         try {
             String home = System.getProperty("user.home");
@@ -34,6 +43,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the task list in a dedicated destination file.
+     *
+     * @param tasks The task list to be saved.
+     * @throws DukeLoadingErrorException If a loading error occurs.
+     */
     public void save(List<Task> tasks) throws DukeLoadingErrorException {
         try {
             FileWriter fw = new FileWriter(String.valueOf(path));
@@ -64,6 +79,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the task list saved in the file.
+     *
+     * @return The task list that has been loaded.
+     * @throws DukeFileNotFoundException If the file does not exist.
+     */
     public List<Task> load() throws DukeFileNotFoundException {
         Scanner sc;
 

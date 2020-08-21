@@ -3,11 +3,19 @@ package duke;
 import duke.command.*;
 import duke.exception.*;
 
+/**
+ * Represents the chat bot itself. Main class.
+ */
 public class Duke {
     private final Ui ui;
     private Storage storage;
     private TaskList tasks;
 
+    /**
+     * Class constructor.
+     *
+     * @param filePath A string representing the destination file path.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         try {
@@ -19,10 +27,16 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program. Main method.
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
 
+    /**
+     * Starts the chat bot, continuously takes in user input and executes the relevant command.
+     */
     public void run() {
         // Initial greeting, prompt user for commands
         ui.printWelcome();
