@@ -67,8 +67,10 @@ public class Duke {
                 default:
                     throw new DukeException("Oh dear! I'm sorry, but I don't know what that means :((");
                 }
-            } catch (DukeException | DateTimeParseException ex) {
+            } catch (DukeException ex) {
                 chatPrint(ex.toString());
+            } catch (DateTimeParseException ex) {
+                chatPrint("Bad format - Please format the date and time as yyyy/MM/dd HHmm.");
             }
             input = sc.nextLine();
         }
