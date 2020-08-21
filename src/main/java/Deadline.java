@@ -3,8 +3,8 @@ public class Deadline extends Task {
 
     protected String dueDate;
 
-    public Deadline(String description, String dueDate) {
-        super(description);
+    public Deadline(String description, boolean isDone, String dueDate) {
+        super(description, isDone);
         this.dueDate = dueDate;
     }
 

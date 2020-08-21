@@ -72,7 +72,7 @@ public class Viscount {
             if (description.isEmpty()) {
                 throw new ViscountMissingDescriptionException("todo");
             } else {
-                Todo todo = new Todo(description);
+                Todo todo = new Todo(description, false);
                 Viscount.addToTaskList(todo);
             }
         } else if (command.equals("deadline")) {
@@ -89,7 +89,7 @@ public class Viscount {
                 } else if (dueDate.isEmpty()) {
                     throw new ViscountMissingArgumentDescriptionException("/by");
                 } else {
-                    Deadline deadline = new Deadline(description, dueDate);
+                    Deadline deadline = new Deadline(description, false, dueDate);
                     Viscount.addToTaskList(deadline);
                 }
             }
@@ -107,7 +107,7 @@ public class Viscount {
                 } else if (eventTime.isEmpty()) {
                     throw new ViscountMissingArgumentDescriptionException("/at");
                 } else {
-                    Event event = new Event(description, eventTime);
+                    Event event = new Event(description, false, eventTime);
                     Viscount.addToTaskList(event);
                 }
             }
