@@ -1,5 +1,5 @@
 public class DukeException extends Exception{
-    public DukeException(String msg) {
-        super(msg);
+    protected DukeException(String msg) {
+        super(String.format("☹OOPS!!! %s", msg));
     }
 }

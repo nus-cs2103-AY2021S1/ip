@@ -1,9 +1,9 @@
 public class Event extends Task{
-    protected String by;
+    private final String by;
 
-    public Event(String description, String by) {
+    protected Event(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = by.trim();
     }
 
     @Override

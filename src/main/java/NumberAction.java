@@ -1,7 +1,7 @@
 import java.util.List;
 
-public class NumberAction {
-    public static boolean checkIfNumber(String s) {
+public abstract class NumberAction {
+    protected static boolean checkIfNumber(String s) {
         try {
             Integer.parseInt(s);
         } catch (NumberFormatException e) {
@@ -9,7 +9,7 @@ public class NumberAction {
         }
         return true;
     }
-    public static boolean checkIfValid(int digit, List<Task> tasks) {
+    protected static boolean checkIfValid(int digit, List<Task> tasks) {
         return digit <= tasks.size() && digit > 0;
     }
 }
