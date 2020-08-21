@@ -18,7 +18,7 @@ public class Ui {
         print(horizontalLine + "\n\t  " + message + "\n" + horizontalLine + "\n");
     }
 
-    public void printList(int count, TaskList list, Predicate<Task> predicate, String note) {
+    public void printList(TaskList list, Predicate<Task> predicate, String note) {
         System.out.println(horizontalLine + "\n\t  " + "Here are the tasks " + note + "in your list:");
         list.print(predicate);
         System.out.println(horizontalLine + "\n");
