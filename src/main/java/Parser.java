@@ -19,4 +19,25 @@ public class Parser {
             return -1;
         }
     }
+
+    public static int isDeleteCommand(String cmd, int count) throws InvalidCommandException {
+        if (cmd.startsWith("delete ")) {
+            if (cmd.length() < 8) {
+                throw new InvalidCommandException("\u2639 OOPS!!! The task to mark to delete cannot be empty.");
+            }
+            try {
+                int n = Integer.parseInt(cmd.substring(7));
+                if (n < 1) {
+                    throw new InvalidCommandException("\u2639 OOPS!!! The task index should be a positive integer.");
+                } else if (n > count) {
+                    throw new InvalidCommandException("\u2639 OOPS!!! The task index does not exist.");
+                }
+                return n;
+            } catch (NumberFormatException e) {
+                throw new InvalidCommandException("\u2639 OOPS!!! The task index should be a number.");
+            }
+        } else {
+            return -1;
+        }
+    }
 }
