@@ -8,7 +8,8 @@ import java.lang.StringBuilder;
 public class Duke {
 
     private final String lineSeparator = "***********************";
-    private List<Task> taskList = new ArrayList<>();
+    private final Storage store = new Storage();
+    private List<Task> taskList = store.getTasks();
 
     public void greet() {
         printMessage("Hi! I'm Duke. What can I do for you?");
