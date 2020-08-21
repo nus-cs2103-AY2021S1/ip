@@ -110,6 +110,14 @@ public class Duke {
         }
     }
 
+    private static void printList(int count, List<Task> list) {
+        System.out.println(horizontalLine + "\n\t  " + "Here are the tasks in your list:");
+        for (int i = 0; i < count; i++) {
+            System.out.println("\t  " + (i + 1) + "." + list.get(i));
+        }
+        System.out.println(horizontalLine + "\n");
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -136,11 +144,7 @@ public class Duke {
                 }
                 switch (type) {
                     case LIST:
-                        System.out.println(horizontalLine + "\n\t  " + "Here are the tasks in your list:");
-                        for (int i = 0; i < count; i++) {
-                            System.out.println("\t  " + (i + 1) + "." + list.get(i));
-                        }
-                        System.out.println(horizontalLine + "\n");
+                        printList(count, list);
                         break;
                     case DONE:
                         list.get(n - 1).markAsDone();
