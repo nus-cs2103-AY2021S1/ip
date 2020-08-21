@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -127,7 +129,7 @@ public class Duke {
                     type = Command.DELETE;
                 } else if (isDoneCommand(input, count)) {
                     type = Command.DONE;
-                } else if (input.startsWith("happens on")) {
+                } else if (input.startsWith("happens on ")) {
                     type = Command.HAPPENS;
                 } else {
                     type = Command.TASK;
@@ -150,6 +152,14 @@ public class Duke {
                         System.out.println(output("Noted. I've removed this task:\n\t    " + toDelete +
                                 "\n\t  Now you have " + list.size()));
                         count--;
+                        break;
+                    case HAPPENS:
+                        try {
+                            LocalDate date = LocalDate.parse(input.substring(11),
+                                    DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        } catch (Exception e) {
+                            throw new InvalidCommandException("Invalid date format. Please use yyyy-MM-dd");
+                        }
                         break;
                     case TASK:
                         Task task = generate(input);
