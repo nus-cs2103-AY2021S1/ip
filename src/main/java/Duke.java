@@ -15,6 +15,6 @@ public class Duke {
                 ui.output(e.getMessage());
             }
         }
-        ui.output("Bye. Hope to see you again soon!");
+        ui.close();
     }
 }
