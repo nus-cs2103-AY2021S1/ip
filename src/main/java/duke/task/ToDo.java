@@ -4,6 +4,7 @@ package duke.task;
  * Represents a task with a simple description.
  */
 public class ToDo extends Task {
+
     /**
      * Class constructor.
      *
@@ -33,4 +34,5 @@ public class ToDo extends Task {
     public String printTime() {
         throw new IllegalStateException("Impossible method call");
     }
+
 }

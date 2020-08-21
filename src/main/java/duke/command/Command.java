@@ -7,6 +7,7 @@ import duke.exception.*;
  * Represents an action to be taken depending on the <code>tag</code> and <code>input</code>.
  */
 public abstract class Command {
+
     protected String tag;
     protected String input;
     protected boolean isExit;
@@ -75,4 +76,5 @@ public abstract class Command {
             DukeInvalidTaskDescriptionException,
             DukeUnknownInputException,
             DukeLoadingErrorException;
+
 }

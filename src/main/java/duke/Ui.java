@@ -10,6 +10,7 @@ import java.util.Scanner;
  * Also prints the relevant responses and messages.
  */
 public class Ui {
+
     private static final String logo = "     ___   ____    __    ____  _______     _______.  ______   .___  ___.  _______          ______\n"
             + "    /   \\  \\   \\  /  \\  /   / |   ____|   /       | /  __  \\  |   \\/   | |   ____|        /  __  \\\n"
             + "   /  ^  \\  \\   \\/    \\/   /  |  |__     |   (----`|  |  |  | |  \\  /  | |  |__    ______|  |  |  |\n"
@@ -145,4 +146,5 @@ public class Ui {
     private void printNumberOfTasks(int n) {
         System.out.printf("%sNow you have %d tasks in the list.\n", indent, n);
     }
+
 }

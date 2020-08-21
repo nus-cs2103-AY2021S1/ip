@@ -4,6 +4,7 @@ package duke.task;
  * Represents a task that is to be completed.
  */
 public abstract class Task {
+
     protected String description;
     protected boolean isDone;
     protected TaskType type;
@@ -101,4 +102,5 @@ public abstract class Task {
     public String toString() {
         return String.format("[%s][%s] %s", type, getStatusIcon(), description);
     }
+
 }

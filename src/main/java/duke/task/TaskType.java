@@ -4,6 +4,7 @@ package duke.task;
  * Represents the different types a task can have.
  */
 public enum TaskType {
+
     /**
      * Represents the type of a todo.
      */
@@ -31,4 +32,5 @@ public enum TaskType {
             return "D";
         }
     }
+
 }

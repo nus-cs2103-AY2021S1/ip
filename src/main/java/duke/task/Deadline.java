@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents a task with a set deadline.
  */
 public class Deadline extends Task {
+
     protected LocalDateTime by;
 
     /**
@@ -47,4 +48,5 @@ public class Deadline extends Task {
     public String toString() {
         return String.format("%s (by: %s)", super.toString(), printTime());
     }
+
 }

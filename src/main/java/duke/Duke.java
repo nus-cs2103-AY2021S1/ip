@@ -7,6 +7,7 @@ import duke.exception.*;
  * Represents the chat bot itself. Main class.
  */
 public class Duke {
+
     private final Ui ui;
     private Storage storage;
     private TaskList tasks;
@@ -58,4 +59,5 @@ public class Duke {
 
         ui.printLogo();
     }
+
 }

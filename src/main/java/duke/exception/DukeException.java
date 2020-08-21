@@ -4,6 +4,7 @@ package duke.exception;
  * Represents a general exception specific to Duke.
  */
 public class DukeException extends Exception {
+
     /**
      * Standard <code>toString</code>.
      *
@@ -13,4 +14,5 @@ public class DukeException extends Exception {
     public String toString() {
         return "ERROR";
     }
+
 }
