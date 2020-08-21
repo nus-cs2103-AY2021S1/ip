@@ -111,7 +111,6 @@ public class Duke {
         }
     }
 
-
     private static void addToList(Task task) throws IOException {
         FileWriter fw = new FileWriter("data/tasks.txt", true);
         fw.write(task.toString());
@@ -160,6 +159,7 @@ public class Duke {
                         break;
                     case TASK:
                         Task task = generate(input);
+                        addToList(task);
                         list.add(count++, task);
                         String temp = count <= 1 ? " task" : " tasks";
                         System.out.println(output("Got it. I've added this task:\n\t    " + task +
