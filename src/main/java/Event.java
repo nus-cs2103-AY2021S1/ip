@@ -24,6 +24,11 @@ public class Event extends Task{
         return this.at;
     }
 
+    @Override
+    public String getType() {
+        return "EVENT";
+    }
+
     public static Task parseCommand(String args) {
         //Create the matcher
         Matcher matcher = date_match.matcher(args);

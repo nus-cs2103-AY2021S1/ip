@@ -28,6 +28,8 @@ public abstract class Task {
         return this.completed;
     }
 
+    public abstract String getType();
+
     public void markDone(){
 
         //Mark the task as complete
