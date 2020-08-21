@@ -1,3 +1,9 @@
+package duke;
+
+import duke.command.*;
+import duke.exception.CommandException;
+import duke.exception.EmptyDescriptionException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;

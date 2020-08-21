@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.*;
+import duke.exception.DukeException;
+import duke.task.Event;
+import duke.task.Task;
+
 public class EventCommand extends Command {
 
     String command, date;
