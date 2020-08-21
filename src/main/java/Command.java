@@ -1,5 +1,5 @@
 public abstract class Command {
-    public final boolean isExit;
+    public boolean isExit;
 
     public Command() {
         isExit = false;
