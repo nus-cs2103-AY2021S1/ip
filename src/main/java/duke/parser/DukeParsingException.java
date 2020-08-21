@@ -1,4 +1,4 @@
-package duke;
+package duke.parser;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,15 +6,15 @@ import java.util.List;
 /**
  * This exception is handled within the route function in the Duke class.
  */
-public class DukeRoutingException extends Exception {
+public class DukeParsingException extends Exception {
     private List<String> dukeMessage;
 
-    public DukeRoutingException(List<String> message) {
+    public DukeParsingException(List<String> message) {
         super(String.join("\n", message));
         this.dukeMessage = message;
     }
 
-    public DukeRoutingException(String message) {
+    public DukeParsingException(String message) {
         this(Arrays.asList(message));
     }
 
