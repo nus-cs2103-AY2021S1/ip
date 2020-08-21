@@ -106,12 +106,14 @@ public class TaskWriter {
         }
     }
 
-    public void doneTask(int taskId) {
+    public String doneTask(int taskId) {
         String tempFile = "temp.txt";
         File oldFile = new File(this.filepath);
         File newFile = new File(tempFile);
-        int taskTrack = 1;
+        int taskTrack = 0;
         String line;
+        Task doneTask = null;
+        boolean marked = false;
 
         try {
             FileWriter fw = new FileWriter(tempFile, true);
@@ -122,13 +124,16 @@ public class TaskWriter {
 
             while(sc.hasNext()) {
                 line = sc.next();
+                taskTrack++;
                 if(taskTrack != taskId) {
                     pw.println(line);
                 } else {
                     String[] newLine = line.split("[|]" , 3);
+                    marked = Integer.parseInt(newLine[1]) == 1;
                     pw.println(newLine[0] + "|" + 1 + "|" + newLine[2] );
+                    Command command = Validator.command(newLine[0]);
+                    doneTask = taskCreator(command, true, newLine[2], "[|]", "[|]");
                 }
-                taskTrack++;
             }
             sc.close();
             pw.flush();
@@ -138,6 +143,16 @@ public class TaskWriter {
             newFile.renameTo(renameFile);
         } catch (IOException ex) {
             ex.printStackTrace();
+        }
+
+        if (taskId > taskTrack) {
+            return "MUG don't have this work to mark as Done :>";
+        } else if(marked) {
+            return "MUG had marked this task as done:\n"
+                    + doneTask;
+        } else {
+            return "Congratz! MUG has marked this task as done:\n"
+                    + doneTask;
         }
     }
 

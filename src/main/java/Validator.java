@@ -19,18 +19,12 @@ public class Validator {
         }
     }
 
-    protected static int index(Command command, String strIndex, int listLen, int splitNum)
+    protected static int index(Command command, String strIndex, int splitNum)
             throws DukeException, NumberFormatException {
         try {
             int index = Integer.parseInt(strIndex);
 
-            if (index > listLen) {
-                if(command == Command.DONE){
-                    throw new DukeException("MUG don't have this work to mark as Done :>");
-                } else if (command == Command.DELETE){
-                    throw new DukeException("MUG don't have this work to Delete @_@");
-                }
-            } else if (splitNum < 2) {
+            if (splitNum < 2) {
                 throw new DukeException("HEY!!! Don't be stingy give MUG more information >.<");
             }
             return index;
