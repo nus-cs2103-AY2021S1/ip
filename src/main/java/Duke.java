@@ -1,5 +1,6 @@
-import java.io.File;
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
     static final String SOCCAT =
@@ -48,7 +49,7 @@ public class Duke {
             "____________________________________________________________";
     static final String INDENT = "    ";
     static final String EMPTY_DESCRIPTION_ERROR(String task) {
-        return String.format("☹ OOPS!!! The description of a %s cannot be empty.", task);
+        return String.format("☹ OOPS!!! The description of s%s cannot be empty.", task);
     }
     static final String UNKNOWN_TASK_ERROR = "☹ OOPS!!! I'm sorry, but I don't know what that meows :-(";
     static final String EMPTY_BY_ERROR = "☹ OOPS!!! The deadline cannot be empty.";
@@ -56,10 +57,10 @@ public class Duke {
     static final String NO_SUCH_TASK = "☹ OOPS!!! There is no such task.";
     static final String EMPTY_TASK_INDEX = "☹ OOPS!!! The task index cannot be empty.";
 
-    private Data data;
+    private List<Task> list;
 
-    public Duke(Data data) {
-        this.data = data;
+    public Duke() {
+        this.list = new ArrayList<Task>();
     }
 
     public String addTask(String t) throws DukeEmptyDescriptionException,
@@ -72,11 +73,11 @@ public class Duke {
             try {
                 des = t.substring(5);
                 toBeAdded = new Todo(des);
-                data.add(toBeAdded);
+                list.add(toBeAdded);
                 return "Got it. I've added this task:\n" +
                         INDENT + "  " + toBeAdded + "\n" +
                         INDENT +
-                        String.format("Now you have %d tasks in the in the list", data.getTasksList().size());
+                        String.format("Now you have %d tasks in the in the list", list.size());
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeEmptyDescriptionException(EMPTY_DESCRIPTION_ERROR("todo"));
             }
@@ -85,11 +86,11 @@ public class Duke {
             try {
                 des = tokens[0].substring(9);
                 toBeAdded = new Deadline(des, tokens[1]);
-                data.add(toBeAdded);
+                list.add(toBeAdded);
                 return "Got it. I've added this task:\n" +
                         INDENT + "  " + toBeAdded + "\n" +
                         INDENT +
-                        String.format("Now you have %d tasks in the in the list", data.getTasksList().size());
+                        String.format("Now you have %d tasks in the in the list", list.size());
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeEmptyDescriptionException(EMPTY_DESCRIPTION_ERROR("deadline"));
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -100,11 +101,11 @@ public class Duke {
                 tokens = t.split(" /at ");
                 des = tokens[0].substring(6);
                 toBeAdded = new Event(des, tokens[1]);
-                data.add(toBeAdded);
+                list.add(toBeAdded);
                 return "Got it. I've added this task:\n" +
                         INDENT + "  " + toBeAdded + "\n" +
                         INDENT +
-                        String.format("Now you have %d tasks in the in the list", data.getTasksList().size());
+                        String.format("Now you have %d tasks in the in the list", list.size());
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeEmptyDescriptionException(EMPTY_DESCRIPTION_ERROR("event"));
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -120,8 +121,8 @@ public class Duke {
         try {
             String[] tokens = md.split(" ");
             index = Integer.parseInt(tokens[1]);
-            data.markDone(index - 1);
-            Task task = data.getTasksList().get(index - 1);
+            Task task = list.get(index - 1);
+            task.markAsDone();
             return "Nice! I've marked this task as done: \n" +
                     "      " + task;
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -136,11 +137,10 @@ public class Duke {
         try {
             String[] tokens = dt.split(" ");
             index = Integer.parseInt(tokens[1]);
-            Task removedTask = data.getTasksList().get(index - 1);
-            data.delete(index - 1);
+            Task removedTask = list.remove(index - 1);
             return "Noted. I've removed this task: \n" +
                     "      " + removedTask +
-                    String.format("\n     Now you have %d tasks in the list.", data.getTasksList().size());
+                    String.format("\n     Now you have %d tasks in the list.", list.size());
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeEmptyDeleteIndexException(EMPTY_TASK_INDEX);
         } catch (IndexOutOfBoundsException e) {
@@ -149,22 +149,17 @@ public class Duke {
     }
 
     public void printList() {
-        String s = convertToList();
-        printWindow(s);
-    }
-
-    String convertToList() {
         String s = "";
-        for (int i = 0; i < data.getTasksList().size(); i ++) {
-            s += (i + 1) + "." + data.getTasksList().get(i);
-            if (i != data.getTasksList().size() - 1) {
+        for (int i = 0; i < list.size(); i ++) {
+            s += (i + 1) + "." + list.get(i);
+            if (i != list.size() - 1) {
                 s += '\n' + INDENT;
             }
         }
         if (s.equals("")) {
-            return "There is nothing in the list!";
+            printWindow("There is nothing in the list!");
         } else {
-            return s;
+            printWindow(s);
         }
     }
 
@@ -180,34 +175,14 @@ public class Duke {
         System.out.print(INDENT + HORIZONTAL_LINE);
     }
 
-    public static void main(String[] args) throws DukeInvalidData {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        Duke duke = new Duke();
 
-        String homePath = System.getProperty("user.home");
-        homePath += "\\data";
-        File file = new File(homePath);
-        boolean bool = file.mkdir(); //make directory if directory does not exist!
-        homePath += "\\duke.txt";
-        Data data;
-        System.out.printf("%b, %s", bool, homePath);
-        try {
-            data = new Data(homePath);
-        } catch (DukeInvalidData e) {
-            System.out.println(e.getMessage());
-            throw e;
-        }
-        Duke duke = new Duke(data);
         System.out.println(INDENT + HORIZONTAL_LINE);
-        System.out.println("    Hello! I'm Soccat Duke.");
         System.out.println(duke.SOCCAT);
-        if (bool) {
-            System.out.println("    I have made a directory for you at "
-                    + homePath);
-        } else {
-            System.out.println("    This is your current list:");
-            System.out.println(INDENT + duke.convertToList());
-        }
-        System.out.println("\n    What do you meow?");
+        System.out.println("    Hello! I'm Soccat Duke\n" +
+                "    What do you meow?");
         System.out.println(INDENT + HORIZONTAL_LINE);
         while (sc.hasNext()) {
             String nextLine = sc.nextLine();
