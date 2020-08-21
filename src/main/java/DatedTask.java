@@ -36,6 +36,7 @@ public class DatedTask {
 
     public static LocalDate parseDate(String date) throws InvalidInputException {
         // TODO: handle more formats, eg dd/mm/yy, dd/mm/yyyy, dd/mm
+        // TODO: handle offsets from now, eg. +7d or something like that
 
         try {
             return LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE);
