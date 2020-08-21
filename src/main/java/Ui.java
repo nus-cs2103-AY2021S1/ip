@@ -19,7 +19,7 @@ public class Ui {
         return horizontalLine + "\n\t  " + message + "\n" + horizontalLine + "\n";
     }
 
-    private static void printList(int count, List<Task> list, Predicate<Task> predicate, String note) {
+    public void printList(int count, List<Task> list, Predicate<Task> predicate, String note) {
         System.out.println(horizontalLine + "\n\t  " + "Here are the tasks " + note + "in your list:");
         for (int i = 0; i < count; i++) {
             Task task = list.get(i);
@@ -29,4 +29,6 @@ public class Ui {
         }
         System.out.println(horizontalLine + "\n");
     }
+
+
 }
