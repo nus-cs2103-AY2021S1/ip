@@ -22,7 +22,8 @@ public class Event extends Task {
 
     @Override
     public String output() {
-        return "E" + super.output() + " | At: " + atTime + "\n";
+        return "E" + super.output() + " | At: " +
+                atTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\n";
     }
 
     @Override
