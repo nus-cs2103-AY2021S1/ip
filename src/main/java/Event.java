@@ -3,6 +3,7 @@
 
 import java.util.Scanner;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
@@ -21,7 +22,8 @@ public class Event extends Task {
     @Override
     public String toString() {
 
-        return String.format("[E] %s (at: %s)", super.toString(), this.eventDate);
+        return String.format("[E] %s (at: %s)", super.toString(),
+            this.eventDate.format(DateTimeFormatter.ofPattern("d MMMM yyyy")));
     }
 
     public static Event parse(String input) throws InvalidInputException {
