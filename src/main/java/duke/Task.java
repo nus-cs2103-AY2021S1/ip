@@ -18,6 +18,16 @@ abstract class Task {
         return String.format("[%s] %s", getStatusIcon(), this.name);
     }
 
+    public boolean getStatus() {
+        return this.isDone;
+    }
+    
+    public String getDescription() {
+        return this.name;
+    }
+    
+    public abstract String getType();
+    
     /**
      * Mark the task as done
      *
@@ -32,10 +42,12 @@ abstract class Task {
         }
     }
 
-    //    private String getStatusIcon() {
+//    private String getStatusIcon() {
 //        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
 //    }
     private String getStatusIcon() {
         return (isDone ? "V" : "X"); //return tick or X symbols
     }
+    
+    
 }

@@ -10,7 +10,16 @@ public class Deadline extends Task {
 
     @Override
     public String showTask() {
-        return String.format("[D]%s (by: %s)", super.showTask(), this.by);
+        return String.format("[%s]%s (by: %s)", this.getType(), super.showTask(), this.by);
     }
 
+    @Override
+    public String getType() {
+        return "D";
+    }
+
+    @Override
+    public String getDescription() {
+        return super.getDescription() + " | " + this.by;
+    }
 }
