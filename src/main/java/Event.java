@@ -11,6 +11,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public String getAt() {
+        return this.at;
+    }
+
     @Override
     public Event setDone(boolean b) {
         return new Event(this.getName(), true, this.at);

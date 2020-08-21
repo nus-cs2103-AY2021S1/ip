@@ -11,6 +11,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public String getBy() {
+        return this.by;
+    }
+
     @Override
     public Deadline setDone(boolean b) {
         return new Deadline(this.getName(),true, this.by);

@@ -2,11 +2,14 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class Duke {
     private static final List<Task> storage = new ArrayList<>();
     private static final String border = "____________________________________________________________\n";
+    private static final String pathname = System.getProperty("user.dir")
+            + File.separator + "data" + File.separator + "duke.txt";
     protected static File file;
 
     public static boolean checkBye(String s) {
@@ -39,11 +42,12 @@ public class Duke {
         }
 
         switch (s) {
-            case "todo":
+            case "todo": {
                 ToDo todo = new ToDo(next);
                 storage.add(todo);
                 toAdd = todo;
                 break;
+            }
             case "deadline": {
                 String[] ls = next.split("/by ");
                 Deadline deadline = new Deadline(ls[0], ls[1]);
@@ -129,20 +133,61 @@ public class Duke {
     }
 
     public static void fileCheck() {
-        String pathname = "./data/duke.txt";
-        File f = new File(pathname);
-        if (f.exists() && f.canRead()) {
-            file = f;
-            System.out.println("Memory loaded from backup.");
-        } else {
-            try {
-                if (f.createNewFile()) {
-                    System.out.println("Backup file created.");
-                }
-            } catch (IOException e) {
-                System.out.println("Something went wrong! Backup could not be made.");
+        try {
+            File f = new File(pathname);
+            f.getParentFile().mkdirs();
+
+            if (f.createNewFile()) {
+                System.out.println("Backup file created.");
+            } else {
+                file = f;
+                System.out.println("Memory loaded from backup.");
             }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Something went wrong! Backup could not be made.");
         }
+}
+
+    public static void saveFile() {
+        try {
+            FileWriter fw = new FileWriter(pathname);
+            List<Task> storageCopy = storage;
+            String split = "_";
+            int index = 0;
+
+            while (!storageCopy.isEmpty()) {
+                Task curr = storageCopy.remove(index);
+                String currString = storageCopy.toString();
+                char type = currString.charAt(1);
+                boolean completed = curr.isDone();
+                String name = curr.getName();
+
+                fw.write(type + split);
+                fw.write(completed + split);
+                fw.write(name + split);
+
+                switch(type) {
+                    case 'E': {
+                        Event event = (Event) curr;
+                        fw.write(event.getAt() + System.lineSeparator());
+                        break;
+                    }
+                    case 'D': {
+                        Deadline deadline = (Deadline) curr;
+                        fw.write(deadline.getBy() + System.lineSeparator());
+                        break;
+                    }
+                    default: {
+                        fw.write(System.lineSeparator());
+                    }
+                }
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Oops. Something went wrong while saving data.");
+        }
+
     }
 
     public static void main(String[] args) {
@@ -152,9 +197,11 @@ public class Duke {
                 + "What can I do for you?\n" + border
         );
 
+        fileCheck();
         while (scan.hasNext()) {
             String test = scan.next();
             if (checkBye(test)) {
+                saveFile();
                 exitLine();
                 break;
             } else {
