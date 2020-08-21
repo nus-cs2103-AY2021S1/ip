@@ -121,6 +121,10 @@ public class Duke {
         }
     }
 
+    private static void deleteTask(List<Task> list) {
+
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println(output("Hello! I'm Duke\n\t  What can I do for you?"));
