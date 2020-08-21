@@ -20,4 +20,9 @@ public class Task {
             return "[" + "\u2717" + "] " + taskName;
         }
     }
+
+    public String getSaveFormat() {
+        String done = isDone ? "1" : "0";
+        return done + " | " + taskName;
+    }
 }
