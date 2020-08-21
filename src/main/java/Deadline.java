@@ -22,7 +22,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
 
-        return String.format("[D] %s (by: %s)", super.toString(), this.deadline);
+        return String.format("[D] %s (by: %s)", super.toString(),
+            this.deadline.format(DateTimeFormatter.ofPattern("d MMMM yyyy")));
     }
 
     public static Deadline parse(String input) throws InvalidInputException {
