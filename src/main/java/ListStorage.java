@@ -1,15 +1,16 @@
 import java.io.File;
 import java.io.FileWriter;
+import java.sql.SQLOutput;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class ListStorage {
-    static final String dirPath = "../data";
+    static final String dirPath = "..\\data";
     static final String filePath = "../data/duke.txt";
 
     public static List<Task> readFromFile() {
-        Task temp;
         List<Task> tasks = new ArrayList<>();
 
         try {
@@ -17,17 +18,15 @@ public class ListStorage {
             File file = new File(filePath);
             dir.mkdir();
             file.createNewFile();
-
             Scanner sc = new Scanner(file);
 
-
-            while (sc.hasNextLine()) {
+            while (sc.hasNext()) {
+                Task temp;
                 String line = sc.nextLine();
-                String[] instructions = line.split("\\|");
+                String[] instructions = line.split(" \\| ");
                 int num = instructions.length;
                 String type = instructions[0].strip();
-                switch (type) {
-                case "T":
+                if (type.equals("T")) {
                     if (num != 3) {
                         throw new DukeException("The data format of the file is incorrect\n");
                     }
@@ -36,31 +35,31 @@ public class ListStorage {
                         temp.markAsDone();
                     }
                     tasks.add(temp);
-                    break;
-                case "D":
+                } else if (type.equals("D")) {
                     if (num != 4) {
                         throw new DukeException("The data format of the file is incorrect\n");
                     }
-                    temp = new Deadlines(instructions[2].strip(), instructions[3].strip());
+                    System.out.println(num);
+                    LocalDateTime dtDeadline = LocalDateTime.parse(instructions[3].strip());
+                    temp = new Deadlines(instructions[2].strip(), dtDeadline);
                     if (instructions[1].strip().equals("1")) {
                         temp.markAsDone();
                     }
                     tasks.add(temp);
-                    break;
-                case "E":
+                } else if (type.equals("E")) {
                     if (num != 4) {
                         throw new DukeException("The data format of the file is incorrect\n");
                     }
-                    temp = new Events(instructions[2].strip(), instructions[3].strip());
+                    LocalDateTime dtEvent = LocalDateTime.parse(instructions[3].strip());
+                    temp = new Events(instructions[2].strip(), dtEvent);
                     if (instructions[1].strip().equals("1")) {
                         temp.markAsDone();
                     }
                     tasks.add(temp);
-                    break;
                 }
             }
-
-        } catch (Exception e) {
+        } catch (
+                Exception e) {
             System.out.println(e.toString());
         }
         return tasks;
@@ -69,7 +68,7 @@ public class ListStorage {
 
     public static void storeToFile(List<Task> tasks) {
         try {
-            String breaker = " \\| ";
+            String breaker = " | ";
             FileWriter fileWriter = new FileWriter(filePath);
             for (int i = 0; i < tasks.size(); i++) {
                 Task temp = tasks.get(i);

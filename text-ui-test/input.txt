@@ -1,3 +1,4 @@
+list
 todo readbook
 todo
 deadline return book /by June 6th
@@ -25,5 +26,16 @@ delete 3
 delete 7
 delete2
 delete
-bey
+deadline return book /by 1111-11-111212
+event project meeting /at 0909-09-09 09
+deadline return books /by 0808-0808 0808
+deadline return book again /by1111-11-11 1212
+event project meeting again /at 090-09-09 0909
+deadline return books again /by 0808-08-0 0808
+deadline return book /by 1111-11-11 1212
+deadline study hard /by      1111-11-11 0001
+      event project meeting /at 0909-09-09 0909
+deadline return books /by 0808-08-08 0808
+check 1111-11-11
+event work hard /at2020-12-12 1221
 bye

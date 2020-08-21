@@ -9,6 +9,6 @@ public class DukeException extends Exception {
 
     public String toString() {
         return smallSpace + line + "\n" + bigSpace + "☹ OOPS!!! " +
-                    this.getMessage() + "\n" + smallSpace + line + "\n";
+                this.getMessage() + "\n" + smallSpace + line + "\n";
     }
 }
