@@ -117,16 +117,20 @@ public class Database {
 
                     } else if (type == 'D' || type == 'E') {
 
-                        var date = line.substring(2, line.indexOf('|'));
-                        var desc = line.substring(line.indexOf('|') + 1);
+                        try {
+                            var date = DatedTask.parseDate(line.substring(2, line.indexOf('|')));
+                            var desc = line.substring(line.indexOf('|') + 1);
 
-                        if (type == 'D') {
-                            task = new Deadline(desc, date);
-                        } else {
-                            task = new Event(desc, date);
+                            if (type == 'D') {
+                                task = new Deadline(desc, date);
+                            } else {
+                                task = new Event(desc, date);
+                            }
+                        } catch (InvalidInputException e) {
+                            return Either.left(e.toString());
                         }
                     } else {
-                        Either.left(String.format("invalid type '%c' (expected one of 'T', 'D', 'E')", type));
+                        return Either.left(String.format("invalid type '%c' (expected one of 'T', 'D', 'E')", type));
                     }
 
                     assert task != null;
