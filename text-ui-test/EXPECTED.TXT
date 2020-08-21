@@ -36,4 +36,8 @@ Thank you for your input. The following task has been added to the list:
  [E][✘] project meeting (at: Mon 2-4pm)
 You have a total of 7 tasks in the list.
 ---------------------------
+The following task has been successfully removed:
+ [T][✘] read book
+You have a total of 6 tasks in the list.
+---------------------------
 Goodbye. Hope to see you again soon!
