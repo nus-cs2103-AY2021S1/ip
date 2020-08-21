@@ -239,7 +239,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public static void run() {
         Scanner scan = new Scanner(System.in);
         startUp();
         while (scan.hasNext()) {
@@ -276,5 +276,9 @@ public class Duke {
             }
         }
         scan.close();
+    }
+
+    public static void main(String[] args) {
+        run();
     }
 }
