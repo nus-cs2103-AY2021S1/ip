@@ -16,6 +16,10 @@ public abstract class Task {
         return "[" + (isDone ? "\u2713" : "\u2718") + "]";
     }
 
+    public String printData() {
+        return (isDone ? "1" : "0") + "|" + description;
+    }
+
     public abstract Task markAsDone();
 
     @Override
