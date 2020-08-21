@@ -23,7 +23,7 @@ public class Deadline extends Task {
         if (parsedDeadline[0].equals("")) {
             throw new DeadlineInvalidUsageException("Deadline description cannot be empty.");
         }
-        
+
         try {
             return new Deadline(parsedDeadline[0], parseDate(parsedDeadline[1]));
         } catch (DateTimeParseException ex) {
@@ -39,7 +39,7 @@ public class Deadline extends Task {
     private static LocalDate parseDate(String str) {
         return LocalDate.parse(str);
     }
-    
+
     private static String showDate(LocalDate date) {
         return date.format(DateTimeFormatter.ofPattern("MMM d, yyyy"));
     }

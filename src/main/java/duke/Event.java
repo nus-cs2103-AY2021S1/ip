@@ -23,7 +23,7 @@ public class Event extends Task {
         if (parsedEvent[0].equals("")) {
             throw new EventInvalidUsageException("Event description cannot be empty.");
         }
-        
+
         try {
             return new Event(parsedEvent[0], parseDate(parsedEvent[1]));
         } catch (DateTimeParseException ex) {

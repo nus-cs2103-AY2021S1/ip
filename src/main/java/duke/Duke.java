@@ -2,10 +2,12 @@ package duke;
 
 import exception.*;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Duke {
     Scanner sc;
@@ -41,7 +43,7 @@ public class Duke {
                 try {
                     // modify parsed[0] to uppercase to ensure that comparison with the commands enum is standardized
                     command = Commands.valueOf(parsed[0].toUpperCase());
-                } catch (IllegalArgumentException ex){
+                } catch (IllegalArgumentException ex) {
                     // if parsed[0] not amongst valid commands, will throw an IllegalArgumentException
                     throw new UnknownCommandException();
                 }
@@ -106,6 +108,17 @@ public class Duke {
                             throw new EventInvalidUsageException("Event description cannot be empty.");
                         }
                         break;
+                    case VIEWALL:
+                        try {
+                            List<Task> filtered = this.viewAll(parsed[1]);
+                            System.out.println("     Here are the tasks on given date:");
+                            for (int i = 0; i < filtered.size(); i++) {
+                                System.out.printf("     %d. %s%n", i + 1, filtered.get(i).showTask());
+                            }
+                        } catch (DateTimeException | ArrayIndexOutOfBoundsException ex) {
+                            throw new ViewallInvalidUsageException("Date should be in yyyy-mm-dd format.");
+                        }
+                        break;
                     default:
                         throw new UnknownCommandException();
                 }
@@ -163,6 +176,16 @@ public class Duke {
     private void addEvent(String event) throws EventInvalidUsageException {
         todoList.add(Event.create(event));
         printAddConfirmation(todoList.size() - 1);
+    }
+
+    private List<Task> viewAll(String dateStr) throws DateTimeException {
+        LocalDate date = LocalDate.parse(dateStr);
+        return this.todoList
+                .stream()
+                .filter(x ->
+                        (x instanceof Event && ((Event) x).at.equals(date))
+                                || (x instanceof Deadline && ((Deadline) x).by.equals(date)))
+                .collect(Collectors.toList());
     }
 }
 
