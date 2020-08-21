@@ -1,13 +1,15 @@
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
 
-    private String dueDate;
+    private LocalDateTime dueDate;
 
-    public Deadline(String description, String dueDate) {
+    public Deadline(String description, LocalDateTime dueDate) {
         super(description);
         this.dueDate = dueDate;
     }
 
-    public Deadline(String description, String dueDate, boolean isCompleted) {
+    public Deadline(String description, LocalDateTime dueDate, boolean isCompleted) {
         super(description, isCompleted);
         this.dueDate = dueDate;
     }
