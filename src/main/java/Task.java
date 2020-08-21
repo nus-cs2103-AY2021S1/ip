@@ -19,7 +19,7 @@ public class Task {
     }
 
     public String output() {
-        return "";
+        return " | " + getStatusIcon() + " | " + description;
     }
 
     @Override
