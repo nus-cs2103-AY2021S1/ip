@@ -4,13 +4,13 @@ public class Event extends Task {
 
     public Event(String description, String date) {
         super(description);
-        super.symbol = 'D';
+        super.symbol = 'E';
         this.date = date;
     }
 
     public Event(String description, String date, boolean isCompleted) {
         super(description, isCompleted);
-        super.symbol = 'D';
+        super.symbol = 'E';
         this.date = date;
     }
 

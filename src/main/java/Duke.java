@@ -1,6 +1,11 @@
-import exceptions.*;
+import exceptions.DukeException;
+import exceptions.EmptyBodyException;
+import exceptions.NoSuchTaskException;
+import exceptions.WrongSyntaxException;
+import exceptions.UnknownCommandException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
 import java.lang.StringBuilder;
@@ -9,7 +14,7 @@ public class Duke {
 
     private final String lineSeparator = "***********************";
     private final Storage store = new Storage();
-    private List<Task> taskList = store.getTasks();
+    private List<Task> taskList = new ArrayList<>();
 
     public void greet() {
         printMessage("Hi! I'm Duke. What can I do for you?");
@@ -122,6 +127,7 @@ public class Duke {
         while (isRunning) {
             try {
                 store.initializeStorage();
+                taskList = store.getTasks();
                 isRunning = handleInput(scanner);
             } catch (IOException e) {
                 System.out.println("Error connecting to storage, actions made will not be saved");

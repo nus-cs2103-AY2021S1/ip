@@ -3,11 +3,12 @@
 REM create bin directory if it doesn't exist
 if not exist ..\bin mkdir ..\bin
 
-REM delete output from previous run
+REM delete output from previous run and delete storage file
+del test-data\duke.txt
 del ACTUAL.TXT
 
 REM compile the code into the bin folder
-javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\*.java
+javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\*.java ..\src\main\java\exceptions\*.java
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
