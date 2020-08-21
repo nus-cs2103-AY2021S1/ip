@@ -8,15 +8,15 @@ public class Ui {
 
     public Ui() {
         sc = new Scanner(System.in);
-        print(output("Hello! I'm Duke\n\t  What can I do for you?"));
+        output("Hello! I'm Duke\n\t  What can I do for you?");
     }
 
     public void print(String str) {
         System.out.println(str);
     }
 
-    public String output(String message) {
-        return horizontalLine + "\n\t  " + message + "\n" + horizontalLine + "\n";
+    public void output(String message) {
+        print(horizontalLine + "\n\t  " + message + "\n" + horizontalLine + "\n");
     }
 
     public void printList(int count, List<Task> list, Predicate<Task> predicate, String note) {
