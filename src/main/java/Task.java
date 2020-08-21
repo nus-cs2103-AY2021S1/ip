@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -16,6 +18,10 @@ public class Task {
             throw new InvalidCommandException("The task " + this + " has already been done.");
         }
         isDone = true;
+    }
+
+    public boolean happenOnDate(LocalDate date) {
+        return false;
     }
 
     @Override
