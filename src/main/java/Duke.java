@@ -21,7 +21,7 @@ public class Duke {
     public static void markTaskAsDone(List<Task> taskList, String command) throws DukeException {
         // If task number is not given
         if (command.equals("done") || command.equals("done ")) {
-            throw new DukeException("☹ OOPS!!! Please indicate the number of the task you have completed.");
+            throw new DukeException("OOPS!!! Please indicate the number of the task you have completed.");
         } else {
             try {
                 int taskNumber = Integer.parseInt(command.split(" ", 2)[1]);
@@ -30,53 +30,57 @@ public class Duke {
                 taskList.set(taskNumber - 1, completedTask);
                 System.out.println("Nice! I've marked this task as done:\n" + "  " + completedTask.toString());
             } catch (IndexOutOfBoundsException | NumberFormatException indexException) {
-                throw new DukeException("☹ OOPS!!! Please enter a valid task number.");
+                throw new DukeException("OOPS!!! Please enter a valid task number.");
             }
         }
     }
 
     public static void addTaskToList(List<Task> taskList, String command) throws DukeException {
-        Task task;
+        Task task = null;
         String taskType = command.split(" ", 2)[0];
         String taskBody;
 
         // If there is no taskBody available
         if (command.split(" ", 2).length == 1
                 || command.split(" ", 2)[1].isBlank()) {
-            throw new DukeException("☹ OOPS!!! You didn't provide any task details.");
+            throw new DukeException("OOPS!!! You didn't provide any task details.");
         } else {
             taskBody = command.split(" ", 2)[1];
         }
 
         // Generate task with appropriate type and add to taskList
-        if (taskType.equals("todo")) {
+        switch (taskType) {
+        case "todo":
             task = new Todo(taskBody);
-
-        } else if (taskType.equals("deadline")) {
+            break;
+        case "deadline":
             try {
                 String description = taskBody.split("/by")[0];
                 String by = taskBody.split("/by")[1];
                 if (description.isBlank() || by.isBlank()) {
-                    throw new DukeException("☹ OOPS!!! Please add both a description and deadline for your task!");
+                    throw new DukeException("OOPS!!! Please add both a description and deadline for your task!");
                 } else {
                     task = new Deadline(description.trim(), by.trim());
                 }
             } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
-                throw new DukeException("☹ OOPS!!! Please add both a description and deadline for your task!");
+                throw new DukeException("OOPS!!! Please add both a description and deadline for your task!");
             }
-
-        } else {
+            break;
+        case "event":
             try {
                 String description = taskBody.split("/at")[0];
                 String at = taskBody.split("/at")[1];
                 if (description.isBlank() || at.isBlank()) {
-                    throw new DukeException("☹ OOPS!!! Please add both a description and date for your event!");
+                    throw new DukeException("OOPS!!! Please add both a description and date for your event!");
                 } else {
                     task = new Event(description.trim(), at.trim());
                 }
             } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
-                throw new DukeException("☹ OOPS!!! Please add both a description and date for your event!");
+                throw new DukeException("OOPS!!! Please add both a description and date for your event!");
             }
+            break;
+        default:
+            break;
         }
 
         taskList.add(task);
@@ -87,8 +91,8 @@ public class Duke {
 
     public static void deleteTaskFromList(List<Task> taskList, String command) throws DukeException {
         // If task number is not given
-        if (command == "delete" || command == "delete ") {
-            throw new DukeException("☹ OOPS!!! Please indicate the number of the task you want to delete.");
+        if (command.equals("delete") || command.equals("delete ")) {
+            throw new DukeException("OOPS!!! Please indicate the number of the task you want to delete.");
         } else {
             try {
                 int taskNumber = Integer.parseInt(command.split(" ", 2)[1]);
@@ -96,7 +100,7 @@ public class Duke {
                 System.out.println("Noted. I've removed this task:\n" + "  " + removedTask.toString() + "\n"
                         + "Now you have " + taskList.size() + " tasks in the list.");
             } catch (IndexOutOfBoundsException | NumberFormatException exception) {
-                throw new DukeException("☹ OOPS!!! Please enter a valid task number.");
+                throw new DukeException("OOPS!!! Please enter a valid task number.");
             }
         }
     }
@@ -117,30 +121,30 @@ public class Duke {
             String firstWordOfCommand = command.split(" ", 2)[0];
 
             try {
-                if (firstWordOfCommand.equals("list")) {
-                    printTaskList(taskList);
-
-                } else if (firstWordOfCommand.equals("bye")) {
-                    System.out.println("Bye. Hope to see you again soon!");
+                switch (firstWordOfCommand) {
+                case "":
                     break;
-
-                // Mark a task as done
-                } else if (firstWordOfCommand.equals("done")) {
+                case "list":
+                    printTaskList(taskList);
+                    break;
+                case "bye":
+                    System.out.println("Bye. Hope to see you again soon!");
+                    return;
+                case "done":
                     markTaskAsDone(taskList, command);
-
-                // Add task to task list
-                } else if (firstWordOfCommand.equals("todo")
-                        || firstWordOfCommand.equals("deadline")
-                        || firstWordOfCommand.equals("event")) {
+                    break;
+                case "todo":
+                    // Fallthrough
+                case "deadline":
+                    // Fallthrough
+                case "event":
                     addTaskToList(taskList, command);
-
-                // Delete task from task list
-                } else if (firstWordOfCommand.equals("delete")) {
+                    break;
+                case "delete":
                     deleteTaskFromList(taskList, command);
-
-                // Unrecognizable commands
-                } else {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    break;
+                default:
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
 
             } catch (DukeException dukeException) {
