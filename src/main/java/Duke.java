@@ -1,9 +1,4 @@
 package main.java;
-import actions.Greet;
-import tasks.DeadlineTask;
-import tasks.EventsTask;
-import tasks.Task;
-import tasks.ToDo;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -12,7 +7,7 @@ public class Duke {
     static ArrayList<Task> list = new ArrayList<>();
     static String message;
     static String lastGreeting = "bye";
-    static String style = "\t___________________________________\n";
+    static String style = "\t______________________________________________________________\n";
 
     // Add Tasks to list
     public static void addToList(Task task) {
@@ -27,7 +22,7 @@ public class Duke {
     // Reads through all the tasks in the list
     public static void readList() {
         System.out.println(style);
-        System.out.print("\tHere are the tasks in your list:");
+        System.out.print("\tHere are the tasks in your list:\n");
         for(int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
             System.out.println("\t" + (i+1) + ". " + task);
@@ -46,7 +41,7 @@ public class Duke {
         System.out.println(style);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -80,30 +75,46 @@ public class Duke {
             }
             // take note of keyword "to-do" to add normal task
             else if (message.contains("todo")) {
+                try {
                 String activity = message.substring(5);
                 ToDo newTask = new ToDo(activity);
                 addToList(newTask);
+                } catch (Exception e){
+                    DukeException error = new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    System.out.println(error);
+                }
+
             }
             // take note of keyword "deadline" to add task with deadline
             else if (message.contains("deadline")) {
-                int separatorIndex = message.indexOf("/");
-                String activity = message.substring(9, separatorIndex -1);
-                String deadline = message.substring(separatorIndex +4);
-                DeadlineTask newTask = new DeadlineTask(deadline, activity);
-                addToList(newTask);
+                try {
+                    int separatorIndex = message.indexOf("/");
+                    String activity = message.substring(9, separatorIndex - 1);
+                    String deadline = message.substring(separatorIndex + 4);
+                    DeadlineTask newTask = new DeadlineTask(deadline, activity);
+                    addToList(newTask);
+                } catch (Exception e){
+                    DukeException error = new DukeException("☹ OOPS!!! The description of deadline cannot be empty.");
+                    System.out.println(error);
+                }
             }
             // take note of keyword "event" to add task with duration
             else if (message.contains("event")) {
-                int separatorIndex = message.indexOf("/");
-                String activity = message.substring(6, separatorIndex -1);
-                String duration = message.substring(separatorIndex +4);
-                EventsTask newTask = new EventsTask(duration, activity);
-                addToList(newTask);
+                try {
+                    int separatorIndex = message.indexOf("/");
+                    String activity = message.substring(6, separatorIndex - 1);
+                    String duration = message.substring(separatorIndex + 4);
+                    EventsTask newTask = new EventsTask(duration, activity);
+                    addToList(newTask);
+                } catch (Exception e) {
+                    DukeException error = new DukeException("☹ OOPS!!! The description of deadline cannot be empty.");
+                    System.out.println(error);
+                }
             }
-            // add task to the list
+            // else is nonsense which will produce error
             else {
-                Task newTask = new Task(message);
-                addToList(newTask);
+                DukeException error = new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println(error);
             }
         }
         input.close();
