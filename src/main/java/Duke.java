@@ -3,6 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Predicate;
 
 public class Duke {
     private static final String horizontalLine = "\t=================================================================================";
@@ -110,10 +111,13 @@ public class Duke {
         }
     }
 
-    private static void printList(int count, List<Task> list) {
-        System.out.println(horizontalLine + "\n\t  " + "Here are the tasks in your list:");
+    private static void printList(int count, List<Task> list, Predicate<Task> predicate, String note) {
+        System.out.println(horizontalLine + "\n\t  " + "Here are the tasks " + note + "in your list:");
         for (int i = 0; i < count; i++) {
-            System.out.println("\t  " + (i + 1) + "." + list.get(i));
+            Task task = list.get(i);
+            if (predicate.test(task)) {
+                System.out.println("\t  " + (i + 1) + "." + list.get(i));
+            }
         }
         System.out.println(horizontalLine + "\n");
     }
@@ -144,7 +148,7 @@ public class Duke {
                 }
                 switch (type) {
                     case LIST:
-                        printList(count, list);
+                        printList(count, list, t -> true, "");
                         break;
                     case DONE:
                         list.get(n - 1).markAsDone();
