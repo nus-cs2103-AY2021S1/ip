@@ -8,7 +8,7 @@ public class UI {
                               + "| |_| | |_| |   <  __/\n"
                               + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private final Scanner in = new Scanner(System.in);
+    private Scanner in = new Scanner(System.in);
     private final String DIVIDER = "______________________________________________";
 
     public String prompt() {
