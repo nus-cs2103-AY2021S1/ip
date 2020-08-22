@@ -37,6 +37,22 @@ public class TaskList {
         return "Now you have " + taskList.size() + " task(s) in the list.";
     }
 
+    /**
+     * Searches the list for tasks that contain search query.
+     *
+     * @param query Term to be searched.
+     * @return List of matching tasks.
+     */
+    public List<Task> search(String query) {
+        List<Task> results = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.getName().contains(query)) {
+                results.add(task);
+            }
+        }
+        return results;
+    }
+
     public void markTaskDone(int taskNum) {
         Task task = taskList.get(taskNum);
         task.markDone();

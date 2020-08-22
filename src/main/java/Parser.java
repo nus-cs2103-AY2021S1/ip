@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Parser {
 
     private UI ui;
@@ -20,29 +22,32 @@ public class Parser {
         }
         String rest = parsedResponse.length == 1 ? null : parsedResponse[1];
         switch (command) {
-            case BYE:
-                saver.saveData(taskList);
-                ui.exit();
-            case LIST:
-                handleList();
-                break;
-            case DONE:
-                handleDone(rest);
-                break;
-            case TODO:
-                handleTodo(rest);
-                break;
-            case DEADLINE:
-                handleDeadline(rest);
-                break;
-            case EVENT:
-                handleEvent(rest);
-                break;
-            case DELETE:
-                handleDelete(rest);
-                break;
-            case INVALID:
-                throw new DukeException("Unrecognized command!");
+        case BYE:
+            saver.saveData(taskList);
+            ui.exit();
+        case LIST:
+            handleList();
+            break;
+        case DONE:
+            handleDone(rest);
+            break;
+        case TODO:
+            handleTodo(rest);
+            break;
+        case DEADLINE:
+            handleDeadline(rest);
+            break;
+        case EVENT:
+            handleEvent(rest);
+            break;
+        case DELETE:
+            handleDelete(rest);
+            break;
+        case FIND:
+            handleFind(rest);
+            break;
+        case INVALID:
+            throw new DukeException("Unrecognized command!");
         }
     }
 
@@ -142,4 +147,30 @@ public class Parser {
         ui.print("Noted. I've removed this task:\n" + taskToDelete + "\n" + taskList.taskSizeString());
     }
 
+    /**
+     * Handles the "find" command.
+     *
+     * @param rest Remaining string after the "find" command, which is query term.
+     * @throws DukeException Thrown when no search term is given.
+     */
+    private void handleFind(String rest) throws DukeException {
+        if (rest == null) {
+            throw new DukeException("Specify a search term!");
+        }
+
+        List<Task> matches = taskList.search(rest);
+
+        if (matches.isEmpty()) {
+            ui.print("No matching task.");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
+
+        for (int i = 0; i < matches.size(); ++i) {
+            sb.append((i + 1) + "." + matches.get(i) + "\n");
+        }
+        sb.setLength(sb.length() - 1);
+        ui.print(sb.toString());
+    }
 }

@@ -16,6 +16,15 @@ public class Task {
         return (this.isDone ? "1" : "0") + "|" + this.name;
     }
 
+    /**
+     * Retrieves name of task.
+     *
+     * @return Name.
+     */
+    public String getName() {
+        return name;
+    }
+
     public static Task parse(String serial) {
         Character type = serial.charAt(0);
         String[] split = serial.split("\\|");
