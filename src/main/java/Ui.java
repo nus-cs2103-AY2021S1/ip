@@ -1,16 +1,18 @@
 import java.util.Scanner;
 
 public class Ui {
-    public void run() {
+    private TaskList list;
 
+    public Ui(TaskList list) {
+        this.list = list;
+    }
+
+    public void run() {
         // initialize utilities
         Scanner sc = new Scanner(System.in);
-        TaskList list = new TaskList();
-        Storage storage = new Storage(list);
         Parser parser = new Parser();
 
         // start working
-        storage.readSavedFile();
         String next = sc.nextLine();
         while (!next.equals("bye")) {
             try {
@@ -50,6 +52,5 @@ public class Ui {
                 next = sc.nextLine();
             }
         }
-        storage.saveDataToFile();
     }
 }
