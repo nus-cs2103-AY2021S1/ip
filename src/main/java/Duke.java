@@ -27,27 +27,41 @@ public class Duke {
   public static void loadData(List<Task> list) {
     try {
       File file = new File("data/duke.txt");
-      Scanner sc = new Scanner(file);
       
-      while (sc.hasNext()) {
-        String[] data = sc.nextLine().split("/");
-        String taskType = data[0];
-        boolean status = data[1].equals("1");
-        String description = data[2];
-        String additional;
-        
-        if (taskType.equals("t")) {
-          list.add(new ToDo(description, status));
-        } else if (taskType.equals("d")) {
-          additional = data[3];
-          list.add(new Deadline(description, additional, status));
-        } else if (taskType.equals("e")) {
-          additional = data[3];
-          list.add(new Event(description, additional, status));
+      if (file.exists()) {
+        Scanner sc = new Scanner(file);
+
+        while (sc.hasNext()) {
+          String[] data = sc.nextLine().split("/");
+          String taskType = data[0];
+          boolean status = data[1].equals("1");
+          String description = data[2];
+          String additional;
+
+          switch (taskType) {
+            case "t":
+              list.add(new ToDo(description, status));
+              break;
+            case "d":
+              additional = data[3];
+              list.add(new Deadline(description, additional, status));
+              break;
+            case "e":
+              additional = data[3];
+              list.add(new Event(description, additional, status));
+              break;
+          }
         }
+      } else {
+        File dir = new File("data");
+        dir.mkdir();
+        file.createNewFile();
       }
+      
     } catch (FileNotFoundException e) {
       System.out.println("File not exists" + e.getMessage());
+    } catch (IOException e) {
+      System.out.println("Something went wrong " + e.getMessage());
     }
   }
   
