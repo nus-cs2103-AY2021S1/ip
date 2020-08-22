@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.time.TimePoint;
+
 import java.util.HashMap;
 
 public class Deadline extends Task {
@@ -22,7 +26,7 @@ public class Deadline extends Task {
     @Override
     public HashMap<String, String> convertToHashMap() {
         HashMap<String, String> dict = super.convertToHashMap();
-        dict.put("type", "Deadline");
+        dict.put("type", "duke.task.Deadline");
         dict.put("deadline", this.deadline.toSaveString());
         return dict;
     }

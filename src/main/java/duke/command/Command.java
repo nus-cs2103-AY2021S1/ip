@@ -1,4 +1,8 @@
-import java.util.HashMap;
+package duke.command;
+
+import duke.SaveManager;
+import duke.TaskManager;
+import duke.Ui;
 
 public abstract class Command {
 

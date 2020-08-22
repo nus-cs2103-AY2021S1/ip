@@ -1,3 +1,7 @@
+package duke.time;
+
+import duke.exception.DukeInputException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -9,7 +13,7 @@ public class DateTimeParser {
 
         String[] dateTimeSplit = text.split(" ", 2);
 
-        String errorMessage = "Entry not DateTime compatible\n"
+        String errorMessage = "Entry not duke.time.DateTime compatible\n"
                 + "Use <dd/MM/yyyy hh:mm> such as 12/5/2002 13:14";
 
         LocalDate date;
@@ -34,6 +38,7 @@ public class DateTimeParser {
                 time = LocalTime.parse(dateTimeSplit[1], DateTimeFormatter.ofPattern("H:m"));
                 return new DateTime(date, time);
             } catch (DateTimeParseException e) {
+                //if unable to parse as time, take it that there is no time entry.
             }
         }
         return new DateTime(date);

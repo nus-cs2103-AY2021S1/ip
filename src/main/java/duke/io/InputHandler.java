@@ -1,3 +1,5 @@
+package duke.io;
+
 import java.util.Scanner;
 
 public class InputHandler {

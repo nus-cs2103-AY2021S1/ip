@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.time.TimePoint;
+
 import java.util.HashMap;
 
 public class Event extends Task {
@@ -22,7 +26,7 @@ public class Event extends Task {
     @Override
     public HashMap<String, String> convertToHashMap() {
         HashMap<String, String> dict = super.convertToHashMap();
-        dict.put("type", "Event");
+        dict.put("type", "duke.task.Event");
         dict.put("when", this.when.toSaveString());
         return dict;
     }

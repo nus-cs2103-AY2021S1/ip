@@ -1,3 +1,7 @@
+package duke.time;
+
+import duke.exception.DukeInputException;
+
 public class TimePoint {
 
     private String timePoint;

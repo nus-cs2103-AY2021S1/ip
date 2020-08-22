@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.SaveManager;
+import duke.TaskManager;
+import duke.Ui;
+import duke.exception.DukeInputException;
+import duke.task.Deadline;
+
 public class DeadlineCommand extends ComplexCommand {
 
     public DeadlineCommand(String params) {

@@ -1,3 +1,11 @@
+package duke;
+
+import duke.exception.DukeSaveDataException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -15,7 +23,7 @@ public class SaveManager {
         this.saveFilePath = saveFilePath;
     }
 
-    public TaskManager load() throws DukeSaveDataException{
+    public TaskManager load() throws DukeSaveDataException {
 
         try {
             TaskManager taskManager = new TaskManager();
@@ -88,13 +96,13 @@ public class SaveManager {
         String type = params.get("type");
         String name = params.get("name");
         boolean isDone = params.get("done").equals("true");
-        if (type.equals("Task")) {
+        if (type.equals("duke.task.Task")) {
             return new Task(name, isDone);
-        } else if (type.equals("ToDo")) {
+        } else if (type.equals("duke.task.ToDo")) {
             return new ToDo(name, isDone);
-        } else if (type.equals("Deadline")) {
+        } else if (type.equals("duke.task.Deadline")) {
             return new Deadline(name, params.get("deadline"), isDone);
-        } else if (type.equals("Event")) {
+        } else if (type.equals("duke.task.Event")) {
             return new Event(name, params.get("when"), isDone);
         } else {
             throw new DukeSaveDataException("Save Data Error: " + params.toString());

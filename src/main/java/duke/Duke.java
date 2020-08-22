@@ -1,3 +1,11 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeInputException;
+import duke.exception.DukeSaveDataException;
+import duke.io.InputHandler;
+import duke.io.OutputHandler;
+
 import java.nio.file.Path;
 
 public class Duke {
@@ -43,7 +51,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        //initialize Duke with save data and send welcome message
+        //initialize duke.Duke with save data and send welcome message
         Duke duke = new Duke(Path.of("data/data.txt"));
         duke.ui.displayGreet();
 

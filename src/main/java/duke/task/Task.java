@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.util.HashMap;
 
 public class Task {
@@ -25,7 +27,7 @@ public class Task {
 
     public HashMap<String, String> convertToHashMap() {
         HashMap<String, String> dict = new HashMap<>();
-        dict.put("type", "Task");
+        dict.put("type", "duke.task.Task");
         dict.put("name", this.name);
         dict.put("done", this.done ? "true" : "false");
         return dict;

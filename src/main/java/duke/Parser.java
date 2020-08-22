@@ -1,6 +1,18 @@
+package duke;
+
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ListCommand;
+import duke.command.ToDoCommand;
+import duke.exception.DukeInputException;
+
 public class Parser {
 
-    public static Command parse(String userCommand) throws DukeInputException{
+    public static Command parse(String userCommand) throws DukeInputException {
         String[] inputs = userCommand.split(" ", 2);
         String command = inputs[0];
         String params = "";

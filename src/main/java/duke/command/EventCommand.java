@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.SaveManager;
+import duke.TaskManager;
+import duke.Ui;
+import duke.exception.DukeInputException;
+import duke.task.Event;
+
 public class EventCommand extends ComplexCommand {
 
     public EventCommand(String params) {

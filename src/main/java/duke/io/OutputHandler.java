@@ -1,3 +1,5 @@
+package duke.io;
+
 public class OutputHandler {
 
     public OutputHandler() {}
