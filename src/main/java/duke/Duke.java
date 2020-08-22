@@ -28,7 +28,7 @@ public class Duke {
                 String input = ui.readInput();
                 Command c = Parser.parse(input);
                 c.execute(ui, list, storage);
-                flag = !c.isExit;
+                flag = !c.isExit();
             } catch (InvalidCommandException e) {
                 ui.output(e.getMessage());
             }
