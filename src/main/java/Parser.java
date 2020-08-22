@@ -2,8 +2,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Evaluator {
-    public static String[] extractAction(String command) throws DukeException {
+public class Parser {
+    public String[] extractAction(String command) throws DukeException {
         String[] split = command.split(" ", 2);
         int len = split.length;
 
@@ -24,7 +24,7 @@ public class Evaluator {
         return split;
     }
 
-    public static String[] extractTime(String command) throws DukeException {
+    public String[] extractTime(String command) throws DukeException {
         String[] split = command.split(" /by | /at ", 2);
 
         // validate if there are two parts
@@ -42,7 +42,7 @@ public class Evaluator {
         return split;
     }
 
-    private static void validateFormat(String value) throws DukeException {
+    private void validateFormat(String value) throws DukeException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         try {
             LocalDate ld = LocalDate.parse(value, formatter);

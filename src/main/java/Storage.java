@@ -3,25 +3,30 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Scanner;
 
-public class FileLoader {
-    private static final String directoryPath = "data";
-    private static final String filePath = "data/duke.txt";
+public class Storage {
+    private static final String DIRECTORY_PATH = "data";
+    private static final String FILE_PATH = "data/duke.txt";
 
-    public static void readSavedFile(TaskManager taskManager) {
+    private TaskList taskList;
+
+    public Storage(TaskList list) {
+        this.taskList = list;
+    }
+
+    public void readSavedFile() {
         try {
             Messenger.greet();
             System.out.println(Messenger.FILE_LOADING);
-            File directory = new File(directoryPath);
+            File directory = new File(DIRECTORY_PATH);
 
             if (!directory.exists()) {
                 System.out.println(Messenger.DIRECTORY_NOT_FOUND);
                 directory.mkdir();
             }
 
-            File f = new File(filePath);
+            File f = new File(FILE_PATH);
             if (f.createNewFile()) {
                 System.out.println(Messenger.FILE_NOT_FOUND);
             } else {
@@ -34,9 +39,9 @@ public class FileLoader {
                     if (TaskStatus.hasTime(command)) {
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
                         LocalDate ld = LocalDate.parse(parsed[2], formatter);
-                        taskManager.getTasks().add(new Task(parsed[1], command, ld));
+                        taskList.getTasks().add(new Task(parsed[1], command, ld));
                     } else {
-                        taskManager.getTasks().add(new Task(parsed[1], command));
+                        taskList.getTasks().add(new Task(parsed[1], command));
                     }
                 }
                 System.out.println(Messenger.FILE_LOADED);
@@ -46,11 +51,11 @@ public class FileLoader {
         }
     }
 
-    public static void saveDataToFile(TaskManager taskManager) {
+    public void saveDataToFile() {
         try {
-            FileWriter writer = new FileWriter(filePath);
+            FileWriter writer = new FileWriter(FILE_PATH);
 
-            for (Task task : taskManager.getTasks()) {
+            for (Task task : taskList.getTasks()) {
                 writer.write(task.getStatus() + "|" + task.getContent() +
                         (TaskStatus.hasTime(task.getStatus()) ? "|" + task.getTime() : "") + System.lineSeparator());
             }

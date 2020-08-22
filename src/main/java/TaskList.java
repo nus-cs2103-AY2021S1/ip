@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
-public class TaskManager {
+public class TaskList {
     private ArrayList<Task> tasks; // a list of tasks
 
-    public TaskManager() {
+    public TaskList() {
         tasks = new ArrayList<>();
     }
 
