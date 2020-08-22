@@ -16,10 +16,6 @@ public class Events extends Task {
         return start;
     }
 
-    public void setStart(LocalDateTime start) {
-        this.start = start;
-    }
-
     public LocalDate getDate() {
         return start.toLocalDate();
     }
