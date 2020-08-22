@@ -1,6 +1,9 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class ToDo extends Task {
-    public ToDo(String name){
-        super(name);
+    public ToDo(String name, LocalDateTime date){
+        super(name, date);
     }
 
     @Override
