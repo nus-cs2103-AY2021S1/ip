@@ -137,4 +137,17 @@ public class EventTest {
             fail();
         }
     }
+
+    @Test
+    public void outputTest() {
+        try {
+            Event e = new Event("Project meeting", "2020-09-03 11:30");
+            assertEquals("E | 0 | Project meeting | At: 2020-09-03 11:30\n", e.output());
+
+            e.markAsDone();
+            assertEquals("E | 1 | Project meeting | At: 2020-09-03 11:30\n", e.output());
+        } catch (Exception e) {
+            fail();
+        }
+    }
 }
