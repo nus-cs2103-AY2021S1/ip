@@ -25,7 +25,25 @@ public class Ui {
         }
     }
 
-    public static String getBorder() {
+    public void addTaskLine(Task toAdd, int size) {
+        System.out.println(
+                BORDER + "Got it. I've added this task:\n"
+                + "  " + toAdd + "\n"
+                + "Now you have " + size + " tasks in the list.\n"
+                + BORDER);
+    }
+
+    public void removeTaskLine(Task toRemove, int size) {
+        System.out.println(
+                BORDER + "Noted. I've removed this task:\n" + "  "
+                        + toRemove + "\n"
+                        + "Now you have " + size + " tasks in the list.\n" + BORDER
+        );
+    }
+
+
+
+    public String getBorder() {
         return BORDER;
     }
 }
