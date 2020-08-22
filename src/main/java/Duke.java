@@ -1,11 +1,7 @@
-<<<<<<< HEAD
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-=======
-import java.time.LocalDate;
->>>>>>> branch-Level-8
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.FileWriter;
@@ -49,14 +45,14 @@ public class Duke {
             } else if (message.equals("event")) {
                 message += sc.nextLine();
                 EventCommand newEventCommand = new EventCommand(message);
-                LocalDate at = newEventCommand.getDateForTask();
+                String at = newEventCommand.getDateForTask();
                 String description = newEventCommand.getDescriptionForTask();
                 Event newEvent = new Event(description, at);
                 newBot.addTask(newEvent);
             } else if (message.equals("deadline")) {
                 message += sc.nextLine();
                 DeadlineCommand newDeadlineCommand = new DeadlineCommand(message);
-                LocalDate by = newDeadlineCommand.getDateForTask();
+                String by = newDeadlineCommand.getDateForTask();
                 String description = newDeadlineCommand.getDescriptionForTask();
                 Deadline newDeadline = new Deadline(description, by);
                 newBot.addTask(newDeadline);

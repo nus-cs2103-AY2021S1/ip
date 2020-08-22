@@ -1,6 +1,3 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 public class EventCommand extends Command{
 
     public EventCommand(String command) {
@@ -8,14 +5,12 @@ public class EventCommand extends Command{
     }
 
     // Method to get the date for an event task
-    protected LocalDate getDateForTask() throws InvalidTaskDescriptionException, WrongDateFormatException {
+    protected String getDateForTask() throws InvalidTaskDescriptionException {
         try {
             String[] taskDetails = this.command.split("/");
-            return LocalDate.parse(taskDetails[1]);
+            return taskDetails[1];
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskDescriptionException();
-        } catch (DateTimeParseException e) {
-            throw new WrongDateFormatException();
         }
     }
 
