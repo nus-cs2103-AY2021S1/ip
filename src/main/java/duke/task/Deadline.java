@@ -24,6 +24,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public boolean happenToday() {
+        return happenOnDate(LocalDate.now());
+    }
+
+    @Override
     public boolean happenBeforeDate(LocalDate date) {
         return byTime.isBefore(date);
     }

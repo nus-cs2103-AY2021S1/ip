@@ -25,6 +25,11 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean happenToday() {
+        return happenOnDate(LocalDate.now());
+    }
+
+    @Override
     public boolean happenBeforeDate(LocalDate date) {
         return atTime.toLocalDate().isBefore(date);
     }

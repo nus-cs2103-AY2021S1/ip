@@ -33,6 +33,10 @@ public abstract class Task {
         return false;
     }
 
+    public boolean happenToday() {
+        return false;
+    }
+
     public boolean happenBeforeDate(LocalDate date) {
         return false;
     }
