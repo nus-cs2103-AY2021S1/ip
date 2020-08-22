@@ -1,4 +1,4 @@
-package duke;
+package duke.Task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -19,11 +19,15 @@ public class Deadline extends Task {
 
         String[] dateTime = this.by.split(" ");
         this.date = parseDate(dateTime[0]);
-        this.time = parseTime(dateTime[1]);
+        if (dateTime.length == 1) {
+            this.time = null;
+        } else {
+            this.time = parseTime(dateTime[1]);
+        }
     }
 
     private LocalDate parseDate(String dateString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
         return LocalDate.parse(dateString, formatter);
     }
 
@@ -35,7 +39,17 @@ public class Deadline extends Task {
     private String byFormat() {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("EEE, d MMMM yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mma");
-        return String.format("%s, %s", dateFormatter.format(date), timeFormatter.format(time));
+
+        if (this.time == null) {
+            return String.format("%s", dateFormatter.format(date));
+        } else {
+            return String.format("%s, %s", dateFormatter.format(date), timeFormatter.format(time));
+        }
+    }
+
+    @Override
+    public String serialize() {
+        return String.format("D | %d | %s | %s", getStatusCode(), description , by);
     }
 
     @Override

@@ -1,17 +1,22 @@
 package duke.Command;
 
+<<<<<<< HEAD
 import duke.Command.Command;
 <<<<<<< HEAD
 import duke.Duke;
 =======
 >>>>>>> 7cf06867bc1780a8ba55bc5d6537869fa9988b2d
+=======
+import duke.Storage;
+>>>>>>> master
+
+import duke.Task.TaskList;
+
+import duke.Ui.Ui;
 
 public class ListCommand extends Command {
 
-    public String execute() {
-
-        StringBuilder list = new StringBuilder();
-
+<<<<<<< HEAD
 <<<<<<< HEAD
         if (Duke.listArray.isEmpty()) {
             return "list is empty";
@@ -36,5 +41,10 @@ public class ListCommand extends Command {
             }
             return "Here are the tasks in your list:\n" + list.toString();
         }
+=======
+    @Override
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
+        ui.showTaskList(taskList);
+>>>>>>> master
     }
 }

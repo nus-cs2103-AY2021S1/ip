@@ -1,14 +1,17 @@
 package duke.Command;
 
-import duke.DukeException;
-import duke.Task;
+import duke.Storage;
 
-import java.util.ArrayList;
+import duke.Exception.DukeException;
+
+import duke.Task.TaskList;
+
+import duke.Ui.Ui;
 
 public abstract class Command {
+    protected boolean isExit = false;
 
-    public abstract String execute() throws DukeException;
-
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
     public static ArrayList<Task> listArray = new ArrayList<>();
@@ -28,5 +31,11 @@ public abstract class Command {
         } else {
             return new AddCommand(str).execute();
         }
+=======
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+
+    public boolean isExit() {
+        return isExit;
+>>>>>>> master
     }
 }

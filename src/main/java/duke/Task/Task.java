@@ -1,6 +1,8 @@
-package duke;
+package duke.Task;
 
-public class Task {
+import duke.Exception.DukeException;
+
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -13,13 +15,22 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    public int getStatusCode() {
+        return this.isDone ? 1 : 0;
+    }
+
     public String getDescription() {
         return this.description;
     }
 
-    public void markAsDone() {
+    public void markAsDone() throws DukeException {
+        if (isDone) {
+            throw new DukeException("This task is already completed!");
+        }
         this.isDone = true;
     }
+
+    public abstract String serialize();
 
     @Override
     public String toString() {
