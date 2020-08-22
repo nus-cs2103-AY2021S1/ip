@@ -10,6 +10,7 @@ public class Messenger {
     public static final String EMPTY_TIME_ERROR = "☹ OOPS!!! Seems you forgot to supply the time!\n"
             + "Simply add '/by <time>' for deadline OR '/at <time>' for event behind your command";
     public static final String INDEX_OUT_OF_BOUND_ERROR = "☹ OOPS!!! Seems the index you provided is not in the list.";
+    public static final String DATE_FORMAT_ERROR = "☹ OOPS!!! The format for your date is incorrect. Use yyyy-MM-dd instead";
 
     public static String emptyDescriptionError(String command) {
         return String.format("☹ OOPS!!! The description of a %s cannot be empty.", command);
