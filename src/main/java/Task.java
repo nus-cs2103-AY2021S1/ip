@@ -1,6 +1,10 @@
+
 import java.time.LocalDate;
 
-public class Task {
+import java.io.Serializable;
+
+
+public class Task implements Serializable {
 
     private String type;// can be [T] [E] or [D]
     private boolean done = false;
