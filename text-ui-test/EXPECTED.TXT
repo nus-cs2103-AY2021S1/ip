@@ -7,12 +7,12 @@ Hello from
 
 No tasks added.
 New task added: [T][✗] buy textbook
-New task added: [D][✗] CS2103T project (by: thu)
-New task added: [E][✗] CS2100 lecture (at: tue 4-6pm)
+New task added: [D][✗] CS2103T project (by: 30 Aug 2020)
+Please provide date in yyyy-mm-dd format.
 Marked as done: [T][✓] buy textbook
 1. [T][✓] buy textbook
-2. [D][✗] CS2103T project (by: thu)
-3. [E][✗] CS2100 lecture (at: tue 4-6pm)
+2. [D][✗] CS2103T project (by: 30 Aug 2020)
+2. [D][✗] CS2103T project (by: 30 Aug 2020)
 ToDo cannot be empty.
 I'm not sure what you're talking about.
 Invalid task.

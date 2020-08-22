@@ -1,6 +1,7 @@
 package main.java;
 
 import java.util.List;
+import java.time.LocalDate;
 
 public class TaskList {
     private List<Task> tasks;
@@ -44,6 +45,26 @@ public class TaskList {
             for (Task task : this.tasks) {
                 System.out.println(position + ". " + task);
                 position++;
+            }
+        }
+    }
+
+    void list(LocalDate date) {
+        if (this.tasks.size() <= 0) {
+            System.out.println("No tasks added.");
+        } else {
+            int position = 1;
+            boolean hasTask = false;
+            for (Task task : this.tasks) {
+                if ((task instanceof Event || task instanceof Deadline)
+                        && task.getDate().equals(date)) {
+                    System.out.println(position + ". " + task);
+                    hasTask = true;
+                }
+                position++;
+            }
+            if (!hasTask) {
+                System.out.println("No tasks on that date.");
             }
         }
     }

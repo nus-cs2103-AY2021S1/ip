@@ -1,9 +1,10 @@
 list
 todo buy textbook
-deadline CS2103T project /by thu
+deadline CS2103T project /by 2020-08-30
 event CS2100 lecture /at tue 4-6pm
 done 1
 list
+list 2020-08-30
 todo
 hello :)
 done 100

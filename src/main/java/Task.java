@@ -1,5 +1,7 @@
 package main.java;
 
+import java.time.LocalDate;
+
 public abstract class Task {
     private String title;
     private boolean isDone;
@@ -32,4 +34,7 @@ public abstract class Task {
         String status = this.isDone ? "1" : "0";
         return status + " | " + this.title;
     }
+
+    abstract LocalDate getDate();
+
 }

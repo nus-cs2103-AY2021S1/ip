@@ -1,14 +1,18 @@
 package main.java;
 
-public class Event extends Task {
-    private String duration;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    Event(String title, String duration) {
+public class Event extends Task {
+    private LocalDate duration;
+
+    Event(String title, LocalDate duration) {
         super(title);
         this.duration = duration;
     }
 
-    Event(String title, boolean isDone, String duration) {
+    Event(String title, boolean isDone, LocalDate duration) {
         super(title, isDone);
         this.duration = duration;
     }
@@ -21,11 +25,22 @@ public class Event extends Task {
         if (split.length != 2) {
             throw new DukeException("Wrong format.");
         }
-        return new Event(split[0], split[1]);
+        try {
+            return new Event(split[0], LocalDate.parse(split[1]));
+        } catch (DateTimeException e) {
+            System.out.println("Please provide date in yyyy-mm-dd format.");
+            return null;
+        }
+    }
+
+    @Override
+    LocalDate getDate() {
+        return this.duration;
     }
 
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.duration + ")";
+        String date = this.duration.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+        return "[E]" + super.toString() + " (at: " + date + ")";
     }
 
     public String print() {

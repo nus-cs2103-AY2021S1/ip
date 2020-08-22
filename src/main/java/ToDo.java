@@ -1,5 +1,7 @@
 package main.java;
 
+import java.time.LocalDate;
+
 public class ToDo extends Task {
     ToDo(String title) {
         super(title);
@@ -22,5 +24,10 @@ public class ToDo extends Task {
 
     public String print() {
         return "T | " + super.print();
+    }
+
+    @Override
+    LocalDate getDate() {
+        return null;
     }
 }

@@ -3,6 +3,8 @@ package main.java;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -27,18 +29,20 @@ public class Storage {
                 boolean isDone = input[1].equals("1");
                 switch (input[0]) {
                 case "E":
-                    taskList.add(new Event(input[2], isDone, input[3]));
+                    taskList.add(new Event(input[2], isDone, LocalDate.parse(input[3])));
                     break;
                 case "T":
                     taskList.add(new ToDo(input[2], isDone));
                     break;
                 case "D":
-                    taskList.add(new Deadline(input[2], isDone, input[3]));
+                    taskList.add(new Deadline(input[2], isDone, LocalDate.parse(input[3])));
                     break;
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (DateTimeException e) {
+            System.out.println("Problem reading file.");
         }
         return taskList;
     }
