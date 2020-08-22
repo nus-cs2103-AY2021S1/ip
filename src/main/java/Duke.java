@@ -1,4 +1,5 @@
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -89,8 +90,13 @@ public class Duke {
     }
 
     private static ArrayList<Task> readFile(ArrayList<Task> tasks) {
-        File f = new File("data/tasks.txt");
         try {
+            File directory = new File("data");
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+            File f = new File("data/tasks.txt");
+            f.createNewFile();
             Scanner s = new Scanner(f);
             while (s.hasNextLine()) {
                 String[] data;
@@ -108,7 +114,9 @@ public class Duke {
                 }
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println(formatReply("OOPS!!! Can't access task data."));
+        } catch (IOException e) {
+            System.out.println(formatReply("OOPS!!! Something went wrong... Tasks not saved."));
         }
         return tasks;
     }
@@ -147,8 +155,8 @@ public class Duke {
             FileWriter fw = new FileWriter("data/tasks.txt");
             fw.write(taskString);
             fw.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println(formatReply("OOPS!!! Something went wrong... Tasks not saved."));
         }
     }
 
@@ -203,6 +211,7 @@ public class Duke {
                             typeOfTask = TypeOfTask.EVENT;
                             break;
                         default:
+                            input.nextLine();
                             throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                     Task newTask = getTask(command, typeOfTask, input);
