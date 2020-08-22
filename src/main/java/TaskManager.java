@@ -1,10 +1,14 @@
 import java.util.ArrayList;
 
 public class TaskManager {
-    ArrayList<Task> tasks; // a list of tasks
+    private ArrayList<Task> tasks; // a list of tasks
 
     public TaskManager() {
         tasks = new ArrayList<>();
+    }
+
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 
     public void printList() {

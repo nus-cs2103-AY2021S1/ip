@@ -9,11 +9,7 @@ public class Evaluator {
         }
 
         String status = split[0];
-        if (!(status.equals("todo") ||
-                status.equals("done") ||
-                status.equals("event") ||
-                status.equals("deadline") ||
-                status.equals("delete"))) {
+        if (TaskStatus.valueOfStatus(status) == null) {
             throw new DukeException(Messenger.SPELL_ERROR);
         }
 

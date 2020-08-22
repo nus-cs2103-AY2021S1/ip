@@ -1,10 +1,12 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Repl {
     public static void run() {
         Scanner sc = new Scanner(System.in);
-        Messenger.greet();
         TaskManager manager = new TaskManager();
+        FileLoader.readSavedFile(manager);
         String next = sc.nextLine();
         while (!next.equals("bye")) {
             try {
@@ -44,6 +46,6 @@ public class Repl {
                 next = sc.nextLine();
             }
         }
-        Messenger.close();
+        FileLoader.saveDataToFile(manager);
     }
 }

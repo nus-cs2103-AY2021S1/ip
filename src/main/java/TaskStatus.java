@@ -3,10 +3,18 @@ public enum TaskStatus {
     DEADLINE("deadline"),
     EVENT("event");
 
-    public final String status;
+    private final String status;
 
     TaskStatus(String status) {
         this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public static boolean hasTime(String status) {
+        return status.equals("event") || status.equals("deadline");
     }
 
     public static TaskStatus valueOfStatus(String status) {

@@ -1,5 +1,11 @@
 public class Messenger {
     /**
+     * Loading files
+     */
+    public static final String FILE_LOADING = "Welcome back! Trying to retrieve where you were last time...";
+    public static final String FILE_LOADED = "Great! We have successfully loaded the data. Enjoy~";
+
+    /**
      * Error handling messages
       */
     public static final String INDEX_FORMAT_ERROR = "☹ OOPS!!! Seems you have provided an invalid index :-(";
@@ -10,6 +16,8 @@ public class Messenger {
     public static final String EMPTY_TIME_ERROR = "☹ OOPS!!! Seems you forgot to supply the time!\n"
             + "Simply add '/by <time>' for deadline OR '/at <time>' for event behind your command";
     public static final String INDEX_OUT_OF_BOUND_ERROR = "☹ OOPS!!! Seems the index you provided is not in the list.";
+    public static final String FILE_NOT_FOUND = "Couldn't find a save file. You may start adding things from start!";
+    public static final String DIRECTORY_NOT_FOUND = "Couldn't find the data directory. Creating one for you...";
 
     public static String emptyDescriptionError(String command) {
         return String.format("☹ OOPS!!! The description of a %s cannot be empty.", command);
@@ -29,7 +37,7 @@ public class Messenger {
     }
 
     public static void close() {
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("Content Saved! Hope to see you again soon!");
     }
 
     /**
