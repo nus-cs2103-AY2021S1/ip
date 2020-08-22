@@ -1,7 +1,5 @@
 package duke.Task;
 
-import duke.Task.Task;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -21,7 +19,11 @@ public class Deadline extends Task {
 
         String[] dateTime = this.by.split(" ");
         this.date = parseDate(dateTime[0]);
-        this.time = parseTime(dateTime[1]);
+        if (dateTime.length == 1) {
+            this.time = null;
+        } else {
+            this.time = parseTime(dateTime[1]);
+        }
     }
 
     private LocalDate parseDate(String dateString) {
@@ -37,7 +39,12 @@ public class Deadline extends Task {
     private String byFormat() {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("EEE, d MMMM yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mma");
-        return String.format("%s, %s", dateFormatter.format(date), timeFormatter.format(time));
+
+        if (this.time == null) {
+            return String.format("%s", dateFormatter.format(date));
+        } else {
+            return String.format("%s, %s", dateFormatter.format(date), timeFormatter.format(time));
+        }
     }
 
     @Override

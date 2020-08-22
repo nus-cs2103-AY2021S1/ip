@@ -1,6 +1,6 @@
 package duke.Task;
 
-import duke.Task.Task;
+import duke.Exception.DukeException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -17,17 +17,21 @@ public class Event extends Task {
 
     public static final String delimiterAt = " /at ";
 
-    public Event(String description, String at) {
+    public Event(String description, String at) throws DukeException {
         super(description);
         this.at = at;
 
         String[] dateTime = this.at.split(" ");
 
-        // case if event last for days
+            // case if event last for days
         if (dateTime[0].contains("-")) {
             String[] dateSplit = dateTime[0].split("-");
             this.startDate = parseDate(dateSplit[0]);
             this.endDate = parseDate(dateSplit[1]);
+
+            if (this.startDate.compareTo(this.endDate) > 0) {
+                throw new DukeException("The start date cannot be after the end date");
+            }
         } else {
             this.startDate = parseDate(dateTime[0]);
         }
@@ -35,6 +39,10 @@ public class Event extends Task {
         String[] timeSplit = dateTime[1].split("-");
         this.startTime = parseTime(timeSplit[0]);
         this.endTime = parseTime(timeSplit[1]);
+
+        if (this.startTime.compareTo(this.endTime) > 0) {
+            throw new DukeException("The start time cannot be after the end time");
+        }
 
     }
 
@@ -71,5 +79,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + atFormat() + ")";
+
     }
 }
