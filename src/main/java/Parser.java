@@ -9,6 +9,7 @@ import Command.AddTodoCommand;
 import Command.ExitCommand;
 import Command.Command;
 import Command.UnknownCommand;
+import Command.FindCommand;
 
 /**
  * A class to deals with making sense of the input command.
@@ -36,7 +37,9 @@ public class Parser {
             return new AddTodoCommand(parsed);
         } else if (parsed[0].equals("bye")) {
             return new ExitCommand(parsed);
-        } else {
+        } else if (parsed[0].equals("find")) {
+            return new FindCommand(parsed);
+        } else  {
             return new UnknownCommand(parsed);
         }
 

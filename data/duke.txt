@@ -1,2 +1,5 @@
 D # 1 # study  # 29/08/2020 18:00
 T # 0 # borrow book
+T # 0 # return book
+D # 0 # return book  # 29/08/2020 18:00
+D # 0 # study  # 29/08/2020 18:00

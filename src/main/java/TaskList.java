@@ -69,6 +69,17 @@ public class TaskList {
         System.out.println("Added new task " + task);
     }
 
+    public void find(String search) {
+        int len = this.taskList.size();
+        int index = 1;
+        for(int i = 0; i<len;i++) {
+            if (this.taskList.get(i).toString().contains(search)) {
+               System.out.println(index + ". " + this.taskList.get(i).toString());
+               index++;
+            }
+        }
+    }
+
     /**
      * A function to return the number of all task.
      * @return int which is the size of the list.
