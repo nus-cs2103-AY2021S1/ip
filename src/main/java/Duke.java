@@ -51,6 +51,41 @@ public class Duke {
             String inputMessage = sc.nextLine();
 
             if (inputMessage.toLowerCase().equals("bye")) {
+
+                sc.close();
+
+                try {
+                    dukeData.delete();
+                    dukeData.createNewFile();
+                } catch (Exception e) {
+                    System.out.println("ERROR CREATING FILE");
+                    return;
+                }
+
+                FileWriter csvWriter = null;
+                try {
+                    csvWriter = new FileWriter(dukeData);
+                } catch (Exception e) {
+                    System.out.println("ERROR INITIALIZING WRITER");
+                    return;
+                }
+
+
+                for (Task eachTask : Duke.taskList.taskArrayList) {
+                    try {
+                        csvWriter.append(eachTask.toString());
+                    } catch (Exception e) {
+                        System.out.println("FAILED TO WRITE TASK");
+                    }
+                }
+
+                try {
+                    csvWriter.close();
+                    csvWriter.flush();
+                } catch (Exception e) {
+                    return;
+                }
+
                 Duke.printText(exitMessage);
                 return;
 
