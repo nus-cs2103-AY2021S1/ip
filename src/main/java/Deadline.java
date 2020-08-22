@@ -12,6 +12,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    String getTaskDetailsForSave() {
+        return "D | " + (isDone ? 1 : 0) + " | " + description + " | " + date;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + String.format(" (by: %s)", date);
     }

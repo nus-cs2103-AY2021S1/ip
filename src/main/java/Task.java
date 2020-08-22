@@ -1,7 +1,9 @@
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Task {
+abstract public class Task {
     public static List<Task> taskList = new ArrayList<>();
     protected String description;
     protected boolean isDone;
@@ -22,6 +24,7 @@ public class Task {
 
     public static void addTask(Task task) {
         taskList.add(task);
+        saveTaskListToFile();
         Print.formatPrint(String.format("Got it. I've added this task: \n   %s\nNow you have %d task%s in the list.",
                 task, taskList.size(), taskList.size() > 1 ? "s": ""));
     }
@@ -29,6 +32,7 @@ public class Task {
     public static void deleteTask(int num) {
         Task deletedTask = taskList.get(num - 1);
         taskList.remove(num - 1);
+        saveTaskListToFile();
         Print.formatPrint(String.format("Got it. I've deleted this task: \n   %s\nNow you have %d task%s in the list.",
                 deletedTask, taskList.size(), taskList.size() > 1 ? "s": ""));
     }
@@ -48,6 +52,7 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
+        saveTaskListToFile();
         Print.formatPrint("Nice! I've marked this task as done: \n   " + this);
     }
 
@@ -75,6 +80,31 @@ public class Task {
                     taskList.add(new Deadline(isDone, description, taskDetail[3]));
                     break;
             }
+        }
+    }
+
+    abstract String getTaskDetailsForSave();
+
+    public static void saveTaskListToFile() {
+        try {
+            PrintWriter writer = initialiseWriter();
+            String allTasks = "";
+            for (Task task : taskList) {
+                allTasks += task.getTaskDetailsForSave() + "\n";
+            }
+            writer.print(allTasks);
+            writer.close();
+        } catch (DukeException e) {
+            Print.formatPrint(e.getMessage());
+        }
+    }
+
+    public static PrintWriter initialiseWriter() throws DukeException {
+        try {
+            PrintWriter writer = new PrintWriter("data/TaskList.txt");
+            return writer;
+        } catch (IOException e) {
+            throw new DukeException("OOPS! I'm sorry, there is an error during initialisation :-(");
         }
     }
 

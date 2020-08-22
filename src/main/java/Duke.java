@@ -122,6 +122,9 @@ public class Duke {
             while ((task = br.readLine()) != null) {
                 tasks.add(task.strip());
             }
+            br.close();
+            fr.close();
+
             Task.generateTaskList(tasks);
 
         } catch (FileNotFoundException e) {
