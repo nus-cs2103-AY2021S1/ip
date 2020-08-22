@@ -29,12 +29,12 @@ public class Duke {
                         break;
                     case DONE:
                         Validator.info(command, splitOrder.length, false);
-                        int doneTaskId = Validator.index(command, splitOrder[1], splitOrder.length);
+                        int doneTaskId = Validator.index(splitOrder[1], splitOrder.length);
                         output = printDesign(tw.doneTask(doneTaskId));
                         break;
                     case DELETE:
                         Validator.info(command, splitOrder.length, false);
-                        int deleteTaskId = Validator.index(command, splitOrder[1], splitOrder.length);
+                        int deleteTaskId = Validator.index(splitOrder[1], splitOrder.length);
                         output = printDesign(tw.deleteTask(deleteTaskId));
                         break;
                     case TODO:

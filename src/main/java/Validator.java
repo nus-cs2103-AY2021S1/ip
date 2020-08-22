@@ -19,7 +19,7 @@ public class Validator {
         }
     }
 
-    protected static int index(Command command, String strIndex, int splitNum)
+    protected static int index(String strIndex, int splitNum)
             throws DukeException, NumberFormatException {
         try {
             int index = Integer.parseInt(strIndex);
