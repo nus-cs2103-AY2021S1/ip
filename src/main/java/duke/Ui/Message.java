@@ -7,4 +7,5 @@ public class Message {
     public static final String ADDED = "Got it. I've added this task:\n    ";
     public static final String DONE = "Nice! I've marked this task as done:\n   ";
     public static final String DELETE = "Noted. I've removed this task:\n    ";
+    public static final String FIND = "Here are the matching tasks in your list:";
 }

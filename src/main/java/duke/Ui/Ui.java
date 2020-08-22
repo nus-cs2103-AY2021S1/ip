@@ -1,5 +1,6 @@
 package duke.Ui;
 
+import duke.Exception.DukeException;
 import duke.Task.Task;
 import duke.Task.TaskList;
 
@@ -70,6 +71,18 @@ public class Ui {
 
     public void showCompletionMessage(Task task) {
         System.out.println(Message.DONE + task.toString());
+    }
+
+    public void showFindMessage(TaskList taskList) throws DukeException {
+        if (taskList.isEmpty()) {
+            showNoTasksMsg();
+        } else {
+            System.out.println(Message.FIND);
+            for (int i = 1; i <= taskList.size(); i++) {
+                Task task = taskList.get(i);
+                System.out.printf("%d.%s\n", i, task);
+            }
+        }
     }
 
     public void showExit() {
