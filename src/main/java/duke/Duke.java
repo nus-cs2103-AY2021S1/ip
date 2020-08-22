@@ -42,33 +42,6 @@ public class Duke {
 
     }
 
-<<<<<<< HEAD
-    private static void run() {
-        print(Message.MESSAGE_WELCOME);
-
-        Scanner scanner = new Scanner(System.in);
-        String input;
-
-        while (!(input = scanner.nextLine()).equals("bye")) {
-            print(input);
-        }
-
-        scanner.close();
-        print(input);
-    }
-
-    private static void print(String message) {
-        String messageB = Message.BORDERS;
-        try {
-            if (message.equals(Message.MESSAGE_WELCOME)) {
-                System.out.println(messageB + "\n"
-                        + Message.MESSAGE_WELCOME + "\n"
-                        + messageB);
-            } else {
-                System.out.println(messageB + "\n"
-                        + Command.parse(message) + "\n"
-                        + messageB);
-=======
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -83,7 +56,6 @@ public class Duke {
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();
->>>>>>> master
             }
         }
     }
