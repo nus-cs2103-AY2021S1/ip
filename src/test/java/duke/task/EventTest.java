@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class EventTest {
     @Test
-    public void newEventTest() {
+    public void constructor_invalidInput_throwException() {
         try {
             Event e = new Event("Project meeting", "2020-09-03 11");
             fail();
