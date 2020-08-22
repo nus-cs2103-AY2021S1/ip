@@ -1,3 +1,5 @@
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -85,7 +87,8 @@ public class Duke {
                 }
                 try {
                     String time = content.substring(index + 4);
-                    Task newTask = isDeadline ? new Deadline(taskName, time) : new Event(taskName, time);
+                    LocalDate dateTime = LocalDate.parse(time);
+                    Task newTask = isDeadline ? new Deadline(taskName, dateTime) : new Event(taskName, dateTime);
                     tasks.add(newTask);
                     printTopLine();
                     System.out.println("Got it. I've added this task:");
@@ -95,6 +98,10 @@ public class Duke {
                     printBottomLine();
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(new EmptyArgumentException("No task name given"));
+                    continue;
+                }
+                catch (DateTimeException e) {
+                    System.out.println(new InvalidArgumentException("Time given must be in the format yyyy-mm-dd"));
                     continue;
                 }
             } else if (word.startsWith("delete")) {
