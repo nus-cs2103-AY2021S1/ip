@@ -1,4 +1,9 @@
-package duke;
+package duke.command;
+
+import duke.TaskList;
+import duke.exception.DukeIOException;
+import duke.Storage;
+import duke.Ui;
 
 import java.util.ArrayList;
 import java.util.List;

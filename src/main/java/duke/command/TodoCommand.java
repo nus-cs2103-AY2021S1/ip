@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.*;
+import duke.task.Task;
+import duke.task.TodoTask;
 
 import java.util.ArrayList;
 import java.util.List;
