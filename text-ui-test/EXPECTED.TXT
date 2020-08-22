@@ -12,24 +12,24 @@ Hello from
 	___________________________________________________________________________
 	 Got it. I've added this task:
 		[T][✘] read book
-	 Now you have 1 tasks in the list
+	 Now you have 1 duke.tasks in the list
 	___________________________________________________________________________
 	___________________________________________________________________________
 	 Got it. I've added this task:
 		[D][✘] return book (by: 6 sep)
-	 Now you have 2 tasks in the list
+	 Now you have 2 duke.tasks in the list
 	___________________________________________________________________________
 	___________________________________________________________________________
 	 Got it. I've added this task:
 		[E][✘] meeting (at: mon 2-4 pm)
-	 Now you have 3 tasks in the list
+	 Now you have 3 duke.tasks in the list
 	___________________________________________________________________________
 	___________________________________________________________________________
 	 Nice! I've marked this task as done:
 		[T][✓] read book
 	___________________________________________________________________________
 	___________________________________________________________________________
-	 Here are the tasks in your list:
+	 Here are the duke.tasks in your list:
 	 1.[T][✓] read book
 	 2.[D][✘] return book (by: 6 sep)
 	 3.[E][✘] meeting (at: mon 2-4 pm)

@@ -1,0 +1,3 @@
+T | 0 | read book
+D | 1 | return book | 23 Aug 2020
+E | 0 | meeting | 22 Aug 2020 9:00 AM
