@@ -1,4 +1,10 @@
-package main.java;
+package command;
+
+import exception.DukeException;
+import exception.EmptyDeleteException;
+import exception.NoSuchTaskException;
+import main.java.*;
+import task.Task;
 
 import java.io.IOException;
 

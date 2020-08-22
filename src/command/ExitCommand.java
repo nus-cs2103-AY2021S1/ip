@@ -1,4 +1,9 @@
-package main.java;
+package command;
+
+import command.Command;
+import main.java.Storage;
+import main.java.TaskList;
+import main.java.Ui;
 
 public class ExitCommand extends Command {
 

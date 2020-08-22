@@ -1,4 +1,4 @@
-package main.java;
+package exception;
 
 public class EmptyDoneException extends DukeException {
     @Override

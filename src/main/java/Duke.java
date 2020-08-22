@@ -1,5 +1,7 @@
 import java.io.IOException;
 
+import command.Command;
+import exception.DukeException;
 import main.java.*;
 
 public class Duke {

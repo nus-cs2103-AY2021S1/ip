@@ -1,8 +1,0 @@
-T - 1 - one
-D - 1 - pr - 12/08/2020 1800
-T - 0 - one
-E - 1 - webinar - 22/01/2020 1000
-T - 1 - hi
-T - 0 - first todo
-D - 0 - return book - 18/09/2020 1600
-E - 0 - project meeting - 18/09/2020 1600

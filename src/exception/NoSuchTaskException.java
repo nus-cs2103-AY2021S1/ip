@@ -1,4 +1,6 @@
-package main.java;
+package exception;
+
+import exception.DukeException;
 
 public class NoSuchTaskException extends DukeException {
     @Override

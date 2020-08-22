@@ -1,5 +1,8 @@
 package main.java;
 
+import exception.NoSuchTaskException;
+import task.Task;
+
 import java.util.Scanner;
 
 public class Ui {

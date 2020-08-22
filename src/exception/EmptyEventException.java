@@ -1,4 +1,4 @@
-package main.java;
+package exception;
 
 public class EmptyEventException extends DukeException {
     @Override

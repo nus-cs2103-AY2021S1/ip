@@ -1,4 +1,4 @@
-package main.java;
+package exception;
 
 public class EmptyDeadlineException extends DukeException {
     @Override

@@ -1,5 +1,7 @@
 package main.java;
 
+import command.*;
+
 public class Parser {
     private final static String EXIT_COMMAND = "bye";
     private final static String MARK_DONE_COMMAND = "done";

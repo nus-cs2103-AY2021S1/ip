@@ -1,4 +1,10 @@
-package main.java;
+package command;
+
+import exception.DukeException;
+import main.java.Storage;
+import main.java.TaskList;
+import main.java.Ui;
+import exception.UnknownCommandException;
 
 public class UnknownCommand extends Command {
     public UnknownCommand(String[] splitCommand) {
