@@ -4,7 +4,7 @@ public class Duke {
 
     public static void main(String[] args) {
 
-        DK duke = new DK();
+        Ui duke = new Ui();
         duke.start();
         Scanner sc = new Scanner(System.in);
         int x = 1;
