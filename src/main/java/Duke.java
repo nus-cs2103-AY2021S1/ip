@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,6 +13,7 @@ public class Duke {
     private TaskManager taskManager;
     private Ui ui;
     private Path filePath = Path.of("/data","data.txt");
+    private SaveManager saveManager;
 
     public Duke() {
         this(Path.of("/data", "data.txt"));
@@ -23,61 +23,27 @@ public class Duke {
         //this.storage = new ArrayList<>();
         this.filePath = filePath;
         this.ui = new Ui(new InputHandler(), new OutputHandler());
-        this.taskManager = new TaskManager();
-
-        //initializes storage with save data
+        this.saveManager = new SaveManager(this.filePath);
         try {
-            BufferedReader br = Files.newBufferedReader(filePath);
-            SaveManager sm = new SaveManager();
-            String currLine = br.readLine();
-            while (currLine != null) {
-                //storage.add(sm.loadTaskFromSave(currLine));
-                taskManager.storeTask(sm.loadTaskFromSave(currLine));
-                currLine = br.readLine();
-            }
-        } catch (NoSuchFileException e) {
-            try {
-                Files.createFile(filePath);
-            } catch (IOException e2) {
-                try {
-                    Files.createDirectory(filePath.getParent());
-                    Files.createFile(filePath);
-                } catch (Exception e3) {
-                    System.out.println("Unable to create new Data File");
-                    System.out.println(e2.toString());
-                    System.out.println(e3.toString());
-                }
-            }
+            this.taskManager = saveManager.load();
         } catch (DukeSaveDataException e) {
-            System.out.println(e.getMessage());
-        } catch (IOException e) {
-            e.printStackTrace();
+            this.ui.displayException(e);
+            this.taskManager = new TaskManager();
         }
 
-        //this.taskManager = new TaskManager(this.storage);
     }
-
-    /*
-    public void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-    }
-
-     */
 
     public String saveDataGenerator() {
-        SaveManager sm = new SaveManager();
         final String[] saveData = {""};
 
-        this.taskManager.forEach(task -> saveData[0] += sm.toSaveFormat(task.convertToHashMap()));
+        this.taskManager.forEach(task -> saveData[0] += this.saveManager.toSaveFormat(task.convertToHashMap()));
         return saveData[0];
     }
 
-    public void bye() throws DukeInputException{
+    public void bye() throws DukeSaveDataException{
+        this.ui.displayGoodbye();
+        this.saveManager.save(this.taskManager);
+        /*
         try {
             BufferedWriter bw = Files.newBufferedWriter(this.filePath);
             bw.write(this.saveDataGenerator());
@@ -87,6 +53,8 @@ public class Duke {
         } finally {
             System.out.println("Bye. Hope to see you again soon!");
         }
+
+         */
     }
 
     public void store(Task t) {

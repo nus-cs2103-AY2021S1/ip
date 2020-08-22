@@ -15,11 +15,19 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        outputHandler.print("Hello from\n" + logo);
+        this.display("Hello from\n" + logo);
+    }
+
+    public void displayGoodbye() {
+        this.display("Bye. Hope to see you again soon!");
     }
 
     public void display(String output) {
         this.outputHandler.print(output);
+    }
+
+    public void displayException(Exception e) {
+        this.display(e.getMessage());
     }
 
     public String readCommand() {

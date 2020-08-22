@@ -1,8 +1,56 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SaveManager {
 
+    private Path saveFilePath;
+
+    public SaveManager(Path saveFilePath) {
+        this.saveFilePath = saveFilePath;
+    }
+
+    public TaskManager load() throws DukeSaveDataException{
+
+        try {
+            TaskManager taskManager = new TaskManager();
+            BufferedReader br = Files.newBufferedReader(this.saveFilePath);
+            String currLine = br.readLine();
+            while (currLine != null) {
+                taskManager.storeTask(this.loadTaskFromSave(currLine));
+                currLine = br.readLine();
+            }
+            return taskManager;
+        } catch (NoSuchFileException e) {
+            try {
+                Files.createDirectories(this.saveFilePath.getParent());
+                Files.createFile(this.saveFilePath);
+            } catch (IOException e2) {
+                throw new DukeSaveDataException("Unable to load from save file or create new save file");
+            }
+            throw new DukeSaveDataException("Unable to load from save file - " + e.toString());
+        } catch (IOException e) {
+            throw new DukeSaveDataException("Unable to load from save file - " + e.toString());
+        }
+    }
+
+    public void save(TaskManager taskManager) throws DukeSaveDataException{
+        final String[] saveData = {""};
+        taskManager.forEach(task -> saveData[0] += this.toSaveFormat(task.convertToHashMap()));
+
+        try {
+            BufferedWriter bw = Files.newBufferedWriter(this.saveFilePath);
+            bw.write(saveData[0]);
+            bw.close();
+        } catch (IOException e) {
+            throw new DukeSaveDataException("Unable to save to file at <" + this.saveFilePath + ">");
+        }
+    }
 
     public String keyValueToString(String key, String value) {
         return "{\"" + key + "\":\"" + value + "\"}";
