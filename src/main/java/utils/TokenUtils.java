@@ -49,4 +49,23 @@ public class TokenUtils {
         }
         System.out.println("");
     }
+
+    /**
+     * Test whether a string S is a subsequence of String t
+     * @param s the String s
+     * @param t the String t
+     * @return answer
+     */
+    public static boolean isSubsequence(String s, String t) {
+        int j = 0;
+        for (int i = 0; i < s.length(); i++) {
+            while (j + 1 < t.length() && t.charAt(j) != s.charAt(i)) {
+                j++;
+            }
+            if (j == t.length()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

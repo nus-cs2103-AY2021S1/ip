@@ -4,6 +4,7 @@ import exceptions.ServiceException;
 
 import java.util.ArrayList;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * Core of Duke
@@ -68,6 +69,25 @@ public class DukeService {
         tasks.remove(position);
         StringBuilder sb = new StringBuilder();
         sb.append("A task has been deleted: \n").append(toRemove).append("\n").append(numberOfElementsAnnouncement());
+        return new DukeResponse(sb.toString());
+    }
+
+    /**
+     * Find all tasks that satisfy a given prediate
+     * @param predicate: the given preidate
+     * @return dedicated message that contains all matched tasks.
+     */
+    public DukeResponse findTasks(Predicate<Task> predicate) {
+        if (tasks.stream().noneMatch(predicate)) {
+            return new DukeResponse("Sorry there is no match: (\n");
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are your matches\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            if (predicate.test(tasks.get(i))) {
+                sb.append(i + 1).append(". ").append(tasks.get(i));
+            }
+        }
         return new DukeResponse(sb.toString());
     }
 
