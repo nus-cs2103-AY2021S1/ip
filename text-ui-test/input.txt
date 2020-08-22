@@ -4,21 +4,28 @@ todo buy Books
 done 1
 done 2
 deadLine        complete project     /by
-deadLIne /by Tuesday
+deadLIne /by 2019/02/21
 deadLine
 DEADLINE complete project
-deadLine complete project /by Monday
+deadLine complete project /by 2019/02/21
+deadLine complete project /by 21/20/2019
+deadLine complete tutorial /by 2019/02/20 12:00
 Event      tutorial           /at
-Event /at Monday 2-4pm
-EVENT meeting /at      Monday 3-4pm
+Event /at 2019/02/20 12:00-18:00
+EVENT meeting /at      2019/20/02 16:00-18:00
+EVENT meeting /at      2019/02/20 16:00-18:00
 list
-done 3
-done 3
-deaLine complete chapter 1 /by Monday
+done 4
+done 4
+deaLine complete chapter 1 /by 2019/01/20
 list
 delete 1
 list
 delete a
 delete 8
 list
+CheCk 2019/02/20
+CheCk 2019/20/20
+CheCk 2019/20
+Check 2019/02/22
 bye
