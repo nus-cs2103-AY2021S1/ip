@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class MissingTimeException extends DukeException {
     private String cmd;
     public MissingTimeException(String cmd) {

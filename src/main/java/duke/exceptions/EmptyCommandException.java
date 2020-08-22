@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class EmptyCommandException extends DukeException {
     private String cmd;
     public EmptyCommandException (String cmd) {

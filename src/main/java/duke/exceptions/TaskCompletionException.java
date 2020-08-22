@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class TaskCompletionException extends DukeException {
     protected int size;
     public TaskCompletionException (int size) {

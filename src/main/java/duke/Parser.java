@@ -1,3 +1,7 @@
+package duke;
+
+import duke.exceptions.DukeException;
+
 public class Parser {
 
     public void command(String str, TaskList tasks, Storage storage) {

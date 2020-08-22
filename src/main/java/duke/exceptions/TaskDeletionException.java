@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class TaskDeletionException extends DukeException {
     protected int size;
     public TaskDeletionException(int size) {
