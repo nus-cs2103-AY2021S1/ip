@@ -11,32 +11,28 @@ import java.util.Scanner;
 public class Duke {
 
     private List<Task> storage;
+    private TaskManager taskManager;
+    private Ui ui;
     private Path filePath = Path.of("/data","data.txt");
-    //TODO: Hard code filePath in Duke() only.
+
     public Duke() {
-        storage = new ArrayList<>();
-        try {
-            Files.createFile(this.filePath);
-        } catch (IOException e) {
-            try {
-                Files.createDirectory(Path.of("/data"));
-            } catch (IOException e2) {
-                //System.out.println(e2.toString());
-            }
-        }
+        this(Path.of("/data", "data.txt"));
     }
 
     public Duke(Path filePath) {
-        storage = new ArrayList<>();
+        //this.storage = new ArrayList<>();
         this.filePath = filePath;
+        this.ui = new Ui(new InputHandler(), new OutputHandler());
+        this.taskManager = new TaskManager();
 
         //initializes storage with save data
         try {
-            BufferedReader br = Files.newBufferedReader(filePath); //new BufferedReader(new FileReader("/data/data22.txt"));
+            BufferedReader br = Files.newBufferedReader(filePath);
             SaveManager sm = new SaveManager();
             String currLine = br.readLine();
             while (currLine != null) {
-                storage.add(sm.loadTaskFromSave(currLine));
+                //storage.add(sm.loadTaskFromSave(currLine));
+                taskManager.storeTask(sm.loadTaskFromSave(currLine));
                 currLine = br.readLine();
             }
         } catch (NoSuchFileException e) {
@@ -57,8 +53,11 @@ public class Duke {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        //this.taskManager = new TaskManager(this.storage);
     }
 
+    /*
     public void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -68,11 +67,13 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
     }
 
+     */
+
     public String saveDataGenerator() {
         SaveManager sm = new SaveManager();
         final String[] saveData = {""};
 
-        this.storage.forEach(task -> saveData[0] += sm.toSaveFormat(task.convertToHashMap()));
+        this.taskManager.forEach(task -> saveData[0] += sm.toSaveFormat(task.convertToHashMap()));
         return saveData[0];
     }
 
@@ -101,7 +102,7 @@ public class Duke {
                     "Use case: todo <name>");
         }
         ToDo newToDo = new ToDo(input);
-        this.store(newToDo);
+        this.taskManager.storeTask(newToDo);
     }
 
     public void addDeadline(String input) throws DukeInputException{
@@ -116,7 +117,7 @@ public class Duke {
                     "Please add a /by deadline to the task.");
         }
         Deadline newDeadline = new Deadline(params[0], params[1]);
-        this.store(newDeadline);
+        this.taskManager.storeTask(newDeadline);
     }
 
     public void addEvent(String input) throws DukeInputException{
@@ -131,7 +132,7 @@ public class Duke {
                     "Please add a /at timing to the task.");
         }
         Event newEvent = new Event(params[0], params[1]);
-        this.store(newEvent);
+        this.taskManager.storeTask(newEvent);
     }
 
     public Task getTask(int i) {
@@ -154,17 +155,21 @@ public class Duke {
             throw new DukeInputException("Please input number instead of <" + params + "> after a 'done' command!");
         }
 
-        Task temp = this.getTask(i);
+        Task temp = this.taskManager.getTask(i);
         temp.doTask();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("\t" + temp.toString());
     }
 
     public void printList() {
+        /*
         for (int i = 0; i < this.storage.size(); i++) {
             String printText = (i + 1) + ". " + this.storage.get(i).toString();
             System.out.println(printText);
         }
+
+         */
+        this.ui.display(this.taskManager.toString());
     }
 
     public void deleteTask(String params) throws DukeInputException{
@@ -180,23 +185,23 @@ public class Duke {
         }
 
         //TODO: Throw DukeInputException for wrong out of bounds index
-        Task temp = this.removeTask(i);
+        Task temp = this.taskManager.removeTask(i);
         System.out.println("Alright. I've removed this task:");
         System.out.println("\t" + temp.toString());
-        System.out.println("Now you have " + storage.size() + " tasks in the list.");
+        System.out.println("Now you have " + this.taskManager.size() + " tasks in the list.");
     }
 
     public static void main(String[] args) {
         //initialize Duke with save data and send welcome message
         //TODO: Find where is this file???? Cannot find this file anywhere.
         Duke duke = new Duke(Path.of("data/data.txt"));
-        duke.greet();
+        duke.ui.displayGreet();
 
         //input loop
         Scanner sc = new Scanner(System.in);
 
         while(true) {
-            String s = sc.nextLine();
+            String s = duke.ui.readCommand();
             String[] inputs = s.split(" ", 2);
             String command = inputs[0];
             String params = "";
