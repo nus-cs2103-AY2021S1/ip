@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * A class that represents the a task that has a start date time.
  */
 public class Events extends Task {
-    private LocalDateTime start;
+    private LocalDateTime startTime;
 
     /**
      * Constructs the events class.
@@ -18,16 +18,17 @@ public class Events extends Task {
      */
     public Events(String description, LocalDateTime startTime) {
         super(description);
-        this.start = startTime;
+        this.startTime = startTime;
     }
+
 
     /**
      * Returns the start datetime of the task.
      *
      * @return the LocalDateTime object of start dateTime.
      */
-    public LocalDateTime getStart() {
-        return start;
+    public LocalDateTime getStartTime() {
+        return startTime;
     }
 
     /**
@@ -36,7 +37,7 @@ public class Events extends Task {
      * @return the localDate object of the task start time.
      */
     public LocalDate getDate() {
-        return start.toLocalDate();
+        return startTime.toLocalDate();
     }
 
     /**
@@ -46,6 +47,6 @@ public class Events extends Task {
      *         and description.
      */
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.start.format(DateTimeFormatter.ofPattern("MMM d yyyy HH : mm")) + ")";
+        return "[E]" + super.toString() + " (at: " + this.startTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH : mm")) + ")";
     }
 }

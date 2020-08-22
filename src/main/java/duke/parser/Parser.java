@@ -19,6 +19,7 @@ public class Parser {
     public Parser() {
     }
 
+
     /**
      * Converts user input to command enumerations.
      *

@@ -10,6 +10,7 @@ import duke.ui.Ui;
 
 import java.util.Scanner;
 
+
 /**
  * A class that represents the Duke application which contains the main method in the class.
  */

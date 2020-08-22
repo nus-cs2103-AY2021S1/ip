@@ -18,10 +18,10 @@ public class EventsTest {
     public void testGetStart() {
         assertEquals(LocalDateTime.of(2020, 11, 11, 11, 11),
                 new Events("study",
-                        LocalDateTime.of(2020, 11, 11, 11, 11)).getStart());
+                        LocalDateTime.of(2020, 11, 11, 11, 11)).getStartTime());
 
         assertEquals(LocalDateTime.of(1999, 8, 11, 01, 11),
                 new Events("study",
-                        LocalDateTime.of(1999, 8, 11, 01, 11)).getStart());
+                        LocalDateTime.of(1999, 8, 11, 01, 11)).getStartTime());
     }
 }

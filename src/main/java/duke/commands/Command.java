@@ -1,8 +1,8 @@
 package duke.commands;
 
-import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.tasks.*;
+import duke.ui.Ui;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -25,6 +25,7 @@ public class Command {
      */
     public static void executeCommand(EnumCommand enumCommand, String instruction, TaskList result) throws DukeException {
         Ui ui = new Ui();
+
         switch (enumCommand) {
         case TODO:
             if (instruction.substring(4).strip().equals("")) {
@@ -109,6 +110,7 @@ public class Command {
             if (instruction.substring(5).strip().equals("")) {
                 throw new DukeException("The \"check\" command is not entered correctly");
             }
+
             String dateTimeTmp = instruction.substring(5).strip();
             LocalDate dtCheck = dateProcessor(dateTimeTmp);
             TaskList occurings = searchTasksByTime(dtCheck, result);
@@ -126,6 +128,7 @@ public class Command {
      */
     public static TaskList searchTasksByTime(LocalDate localDate, TaskList tasks) {
         TaskList occurings = new TaskList();
+        
         for (int i = 0; i < tasks.getSize(); i++) {
             boolean check = false;
             Task temp = tasks.get(i);
