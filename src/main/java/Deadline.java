@@ -1,15 +1,20 @@
 package main.java;
 
-public class Deadline extends Task {
-    String time;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
-    Deadline(String description, String time) {
+public class Deadline extends Task {
+    LocalDate time;
+
+    Deadline(String description, LocalDate time) {
         super(description);
         this.time = time;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + time + ")";
+        String formattedTime = time.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
+        return "[D]" + super.toString() + " (by: " + formattedTime + ")";
     }
 }

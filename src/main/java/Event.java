@@ -1,15 +1,20 @@
 package main.java;
 
-public class Event extends Task {
-    String time;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
-    Event(String description, String time) {
+public class Event extends Task {
+    LocalDate time;
+
+    Event(String description, LocalDate time) {
         super(description);
         this.time = time;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time + ")";
+        String formattedTime = time.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
+        return "[E]" + super.toString() + " (at: " + formattedTime + ")";
     }
 }
