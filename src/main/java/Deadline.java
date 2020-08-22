@@ -1,20 +1,35 @@
 package main.java;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
-    private String deadline;
+    private LocalDate date;
+    private LocalTime time;
 
-    public Deadline(String msg, String deadline){
+    public Deadline(String msg, String date, String time){
         super(msg);
-        this.deadline = deadline;
+        this.date = LocalDate.parse(date);
+
+        if (!time.equals("") && !time.equals("NA")) {
+            this.time = LocalTime.parse(time);
+        }
     }
 
-    public String getDeadline() {
-        return deadline;
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getTime() {
+        return time;
     }
 
     @Override
-    public String toString(){
-        return "[D]" + super.toString() + " (by: " + deadline + ")";
+    public String toString() {
+        return "[D]" + super.toString() + " (by: " +  date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
+                ((time != null) ? " " + time.format(DateTimeFormatter.ofPattern("HH:mm")) : "") + ")";
     }
 }

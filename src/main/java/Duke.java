@@ -7,6 +7,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -76,10 +79,10 @@ public class Duke {
                     int index = Integer.parseInt(arr[1]) - 1;
 
                     if (index > -1 && index < list.size()) {
-                        list.remove(index);
                         System.out.println("Noted. I've removed this task:");
                         System.out.println(list.get(index));
                         System.out.println("Now you have " + list.size() + " tasks in the list.");
+                        list.remove(index);
                     }
                     else {
                         System.out.println("☹ OOPS!!! Invalid parameter given :-(");
@@ -87,6 +90,32 @@ public class Duke {
 
                 } catch (NumberFormatException nfe) {
                     System.out.println("☹ OOPS!!! Invalid parameter given :-(");
+                }
+            }
+
+            else if (output.indexOf("search ") == 0) {
+
+                if (output.contains("/on ")) {
+
+                    int index = output.indexOf("/on ");
+
+                    String dateString = output.substring(index + 4);
+
+                    try {
+                        LocalDate date = LocalDate.parse(dateString);
+                        
+                        for (int i = 0; i < list.size(); i++) {
+                            if (list.get(i) instanceof Event && ((Event) list.get(i)).getDate().equals(date)) {
+                                System.out.println((i + 1) + ". " + list.get(i));
+                            }
+                            else if (list.get(i) instanceof Deadline && ((Deadline) list.get(i)).getDate().equals(date)) {
+                                System.out.println((i + 1) + ". " + list.get(i));
+                            }
+                        }
+
+                    } catch (DateTimeException e) {
+                        System.out.println("Enter date in the following format: YYYY-MM-DD");
+                    }
                 }
             }
 
@@ -102,8 +131,22 @@ public class Duke {
                     int deadlineIndex = output.indexOf("/by ");
 
                     if (deadlineIndex != -1 && output.length() > deadlineIndex + 4) {
-                        list.add(new Deadline(output.substring(9, deadlineIndex - 1), output.substring(deadlineIndex + 4)));
-                        added = true;
+
+                        String datetime = output.substring(deadlineIndex + 4);
+
+                        try {
+                            if (datetime.contains(" ")) {
+                                String[] datetimeArr = datetime.split(" ");
+                                list.add(new Deadline(output.substring(9, deadlineIndex - 1), datetimeArr[0], datetimeArr[1]));
+                            }
+                            else {
+                                list.add(new Deadline(output.substring(9, deadlineIndex - 1), datetime, ""));
+                            }
+                            added = true;
+                        } catch (DateTimeException e) {
+                            System.out.println("Enter date in the following format: YYYY-MM-DD HH:mm(optional) " +
+                                    "(e.g. 2020-06-18 or 2020-07-20 18:00)");
+                        }
                     }
                 }
 
@@ -112,9 +155,27 @@ public class Duke {
                     int timeIndex = output.indexOf("/at ");
 
                     if (timeIndex != -1 && output.length() > timeIndex + 4) {
-                        list.add(new Event(output.substring(6, timeIndex - 1), output.substring(timeIndex + 4)));
-                        added = true;
+
+                        String datetime = output.substring(timeIndex + 4);
+
+                        try {
+                            if (datetime.contains(" ")) {
+                                String[] datetimeArr = datetime.split(" ");
+                                list.add(new Event(output.substring(6, timeIndex - 1), datetimeArr[0], datetimeArr[1]));
+                            }
+                            else {
+                                list.add(new Event(output.substring(6, timeIndex - 1), datetime, ""));
+                            }
+                            added = true;
+                        } catch (DateTimeException e) {
+                            System.out.println("Enter date in the following format: YYYY-MM-DD HH:mm(optional) " +
+                                    "(e.g. 2020-06-18 or 2020-07-20 18:00)");
+                        }
                     }
+                }
+
+                else {
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
 
                 if (added){
@@ -122,9 +183,6 @@ public class Duke {
                     System.out.println("Got it. I've added this task:");
                     System.out.println(list.get(list.size() - 1));
                     System.out.println("Now you have " + list.size() + " tasks in the list.");
-                }
-                else {
-                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
 
@@ -161,10 +219,10 @@ public class Duke {
                         output.add(new ToDo(lineArr[2]));
                         break;
                     case "D":
-                        output.add(new Deadline(lineArr[2], lineArr[3]));
+                        output.add(new Deadline(lineArr[2], lineArr[3], lineArr[4]));
                         break;
                     case "E":
-                        output.add(new Event(lineArr[2], lineArr[3]));
+                        output.add(new Event(lineArr[2], lineArr[3], lineArr[4]));
                         break;
                 }
 
@@ -200,12 +258,16 @@ public class Duke {
                     bw.write(String.format("T | %d | %s\n", completed, task.getMsg()));
                 }
                 else if (task instanceof Deadline) {
-                    bw.write(String.format("D | %d | %s | %s\n", completed, task.getMsg(),
-                            ((Deadline) task).getDeadline()));
+                    String time = (((Deadline) task).getTime() != null) ?
+                            ((Deadline) task).getTime().format(DateTimeFormatter.ofPattern("HH:mm")) : "NA";
+                    bw.write(String.format("D | %d | %s | %s | %s\n", completed, task.getMsg(),
+                            ((Deadline) task).getDate().format(DateTimeFormatter.ofPattern("YYYY-MM-dd")), time));
                 }
                 else if (task instanceof Event) {
-                    bw.write(String.format("E | %d | %s | %s\n", completed, task.getMsg(),
-                            ((Event) task).getTime()));
+                    String time = (((Event) task).getTime() != null) ?
+                            ((Event) task).getTime().format(DateTimeFormatter.ofPattern("HH:mm")) : "NA";
+                    bw.write(String.format("E | %d | %s | %s | %s\n", completed, task.getMsg(),
+                            ((Event) task).getDate().format(DateTimeFormatter.ofPattern("YYYY-MM-dd")), time));
                 }
             }
 

@@ -1,6 +1,6 @@
-T | 0 | Read a book
-T | 0 | Exercise
-E | 1 | Birthday | 5th July
-E | 0 | Exam | 30th Nov
-D | 0 | Assignment 1 | ext Monday
-T | 1 | Sleep
+E | 0 | birthday | 2020-08-22 | NA
+E | 0 | concert | 2020-08-24 | 18:00
+D | 0 | homework | 2020-08-22 | 23:59
+D | 0 | test | 2020-10-28 | NA
+E | 0 | anniversary | 2020-09-09 | NA
+T | 0 | sleep
