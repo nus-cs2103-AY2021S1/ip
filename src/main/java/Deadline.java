@@ -1,10 +1,12 @@
+import java.time.LocalDate;
+
 public class Deadline extends Task {
 
     // Attributes
-    protected String deadline;
+    protected LocalDate deadline;
 
     // Constructor
-    public Deadline(String description, String deadline) throws EmptyBodyException {
+    public Deadline(String description, LocalDate deadline) throws EmptyBodyException {
         super(description);
         this.deadline = deadline;
     }
