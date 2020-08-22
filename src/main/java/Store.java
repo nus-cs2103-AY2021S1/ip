@@ -1,13 +1,48 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Store {
     private ArrayList<Task> taskStore;
 
-    public Store() {
-        this.taskStore = new ArrayList<>();
+    public Store() throws FileNotFoundException, DukeException {
+        File f = new File("data/duke.txt");
+        if (f.exists()) {
+            this.taskStore = parseToStore(f);
+        } else {
+            this.taskStore = new ArrayList<>();
+        }
+    }
+
+    private static ArrayList<Task> parseToStore(File file) throws FileNotFoundException, DukeException {
+        Scanner sc = new Scanner(file);
+        ArrayList<Task> res = new ArrayList<>();
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+            String[] segments = line.split("\\|");
+            Task t;
+            boolean isDone = segments[1].equals("1");
+
+            switch (segments[0]) {
+                case "T":
+                    t = new TodoTask(segments[2], isDone);
+                    break;
+                case "D":
+                    t = new DeadlineTask(segments[2], isDone, LocalDate.parse(segments[3]));
+                    break;
+                case "E":
+                    t = new EventTask(segments[2], isDone, LocalDate.parse(segments[3]));
+                    break;
+                default:
+                    t = null;
+            }
+            res.add(t);
+        }
+        return res;
     }
 
     private Task processTaskType(String[] inputs, String type) throws DukeException {

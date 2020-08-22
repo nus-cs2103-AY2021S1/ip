@@ -1,10 +1,21 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Store store = new Store();
+        Store store;
+        try {
+            store = new Store();
+        } catch (DukeException e) {
+            e.printError();
+            return;
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
 
         String[] welcomeTexts = new String[]{
                 "Hello, my name is ",
