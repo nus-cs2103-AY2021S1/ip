@@ -1,6 +1,6 @@
 list
-deadline poot /by tis
-event bonk /at omic punch
+deadline poot /by 1919-03-03
+event bonk /at 8080-04-04
 todo cap
 list
 this is not a command

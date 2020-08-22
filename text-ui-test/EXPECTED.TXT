@@ -1,18 +1,19 @@
 Famed, of course, for my unique red skin and unparalleled skills as a general of the House of War, I, the Red Prince, was raised within the vast palaces of the fabled Forbidden City. I was destined to become the next emperor, but my ambitions suffered a bit of a setback when I fell from grace for cavorting with demons. Now I'm exiled and hunted by assassins, but I assure you: I remain undaunted - and as determined as ever to claim my rightful throne!
+save.txt not found. Creating empty list.
 Here's the extent of our list so far:
-Fine. I added the following to the list: [DEADLINE][✗] poot | by: tis
-Fine. I added the following to the list: [EVENT][✗] bonk | at: omic punch
-Fine. I added the following to the list: [TODO][✗] cap
+Fine. I added the following to the list: [DEADLINE] [✗] poot | by: 03-Mar-1919
+Fine. I added the following to the list: [EVENT] [✗] bonk | at: 04-Apr-8080
+Fine. I added the following to the list: [TODO] [✗] cap
 Here's the extent of our list so far:
-1. [DEADLINE] [✗] poot | by: tis
-2. [EVENT] [✗] bonk | at: omic punch
+1. [DEADLINE] [✗] poot | by: 03-Mar-1919
+2. [EVENT] [✗] bonk | at: 04-Apr-8080
 3. [TODO] [✗] cap
 What's that? Please mention one of "list", "done", "todo", "deadline", "event", or "bye".
-Right. This task is now marked as done:[EVENT] [✓] bonk | at: omic punch
+Right. This task is now marked as done:[EVENT] [✓] bonk | at: 04-Apr-8080
 Right. This task is now marked as done:[TODO] [✓] cap
 Hmm? Please mention "done" followed by the number of the task we're marking as done.
 Here's the extent of our list so far:
-1. [DEADLINE] [✗] poot | by: tis
-2. [EVENT] [✓] bonk | at: omic punch
+1. [DEADLINE] [✗] poot | by: 03-Mar-1919
+2. [EVENT] [✓] bonk | at: 04-Apr-8080
 3. [TODO] [✓] cap
 *You take your leave.*

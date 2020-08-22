@@ -2,7 +2,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -10,6 +13,8 @@ import java.util.Scanner;
 
 public class Duke {
     static final String SAVE_FILE = "save.txt";
+    static final SimpleDateFormat INPUT_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    static final SimpleDateFormat SAVE_DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy");
 
     public static void main(String[] args) {
         System.out.println("Famed, of course, for my unique red skin and unparalleled skills as a general of the House of War, I, the Red Prince, was raised within the vast palaces of the fabled Forbidden City. I was destined to become the next emperor, but my ambitions suffered a bit of a setback when I fell from grace for cavorting with demons. Now I'm exiled and hunted by assassins, but I assure you: I remain undaunted - and as determined as ever to claim my rightful throne!");
@@ -139,12 +144,22 @@ public class Duke {
             newTask = new Todo(taskDesc);
             break;
         case "[DEADLINE]":
-            String[] nameAndDeadline = taskDesc.split(" \\| by: ");
-            newTask = new Deadline(nameAndDeadline[0], nameAndDeadline[1]);
+            try {
+                String[] nameAndDeadline = taskDesc.split(" \\| by: ");
+                Date deadlineDate = SAVE_DATE_FORMAT.parse(nameAndDeadline[1]);
+                newTask = new Deadline(nameAndDeadline[0], INPUT_DATE_FORMAT.format(deadlineDate));
+            } catch (ParseException e) {
+                throw new DukeException("Loading date error: " + e);
+            }
             break;
         case "[EVENT]":
-            String[] nameAndEvent = taskDesc.split(" \\| at: ");
-            newTask = new Event(nameAndEvent[0], nameAndEvent[1]);
+            try {
+                String[] nameAndEvent = taskDesc.split(" \\| at: ");
+                Date eventDate = SAVE_DATE_FORMAT.parse(nameAndEvent[1]);
+                newTask = new Event(nameAndEvent[0], INPUT_DATE_FORMAT.format(eventDate));
+            } catch (ParseException e) {
+                throw new DukeException("Loading date error: " + e);
+            }
             break;
         default:
             throw new DukeException("Loading task failed: unrecognized task type: " + taskType);
