@@ -1,7 +1,11 @@
 import main.java.*;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
 
@@ -93,7 +97,9 @@ public class Duke {
                             throw new DukeException();
                         } else {
                             int index = userinput.indexOf("/by");
-                            String deadlineDate = userinput.substring(index + 4);
+                            String deadlineDateString = userinput.substring(index + 4);
+                            System.out.println(deadlineDateString);
+                            LocalDate deadlineDate = LocalDate.parse(deadlineDateString);
                             Deadline deadline = new Deadline(userinput.substring(9, index), false, deadlineDate);
                             arrList.add(deadline);
 
@@ -102,6 +108,8 @@ public class Duke {
                                     + "Now you have " + arrList.size() + " task(s) in the list.";
                             System.out.println(reply);
                         }
+                    }catch(DateTimeParseException e){
+                        System.out.println("Please input date in the format: YYYY-MM-DD");
                     }catch(DukeException e){
                         System.out.println("deadline must include '/by'");
                     }
@@ -113,7 +121,8 @@ public class Duke {
                             throw new DukeException();
                         } else {
                             int index = userinput.indexOf("/at");
-                            String eventDate = userinput.substring(index + 4);
+                            String eventDateString = userinput.substring(index + 4);
+                            LocalDate eventDate = LocalDate.parse(eventDateString);
                             Event event = new Event(userinput.substring(6, index), false, eventDate);
                             arrList.add(event);
 
@@ -122,6 +131,8 @@ public class Duke {
                                     + "Now you have " + arrList.size() + " task(s) in the list.";
                             System.out.println(reply);
                         }
+                    }catch(DateTimeParseException e){
+                        System.out.println("Please input date in the format: YYYY-MM-DD");
                     }catch(DukeException e){
                         System.out.println("event must include '/at'");
                     }
