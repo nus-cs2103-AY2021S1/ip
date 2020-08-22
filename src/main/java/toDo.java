@@ -9,9 +9,9 @@ public class toDo extends Task{
     @Override
     public String stringify(){
         if(this.complete == true) {
-            return "[T][[DONE] " + this.task;
+            return "[T][✓] " + this.task;
         }else{
-            return "[T][UNDONE] " + this.task;
+            return "[T][✗] " + this.task;
         }
     }
 }

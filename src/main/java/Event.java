@@ -9,9 +9,9 @@ public class Event extends Deadline{
     @Override
     public String stringify(){
         if(this.complete == true) {
-            return "[E][DONE] " + this.task + " " +"(at: " +this.deadline+")" ;
+            return "[E][✓] " + this.task + "(at:" +this.deadline+")" ;
         }else{
-            return "[E][UNDONE] " + this.task + " " +"(at: " +this.deadline+")" ;
+            return "[E][✗] " + this.task + "(at:" +this.deadline+")" ;
         }
     }
 }
