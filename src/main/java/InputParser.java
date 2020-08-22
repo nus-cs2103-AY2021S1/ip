@@ -1,3 +1,8 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class InputParser {
 
     public static boolean isDone(String input) {
@@ -43,26 +48,94 @@ public class InputParser {
     }
 
     public static Task parseTask(String[] arr) {
-        String taskCode = arr[0];
-        String isDoneStr = arr[1];
-        boolean isDone = isDoneStr.equals("1") ? true : false;
-        String task = arr[2];
+        try {
+            String taskCode = arr[0];
+            String isDoneStr = arr[1];
+            boolean isDone = isDoneStr.equals("1") ? true : false;
+            String task = arr[2];
 
-        //if toDo item
-        if (taskCode.equals("T")) {
-            ToDos todo = new ToDos(task, isDone);
-            return todo;
-        //if deadline item
-        } else if (taskCode.equals("D")) {
-            String date = arr[3];
-            Deadlines deadline = new Deadlines(task, date, isDone);
-            return deadline;
-        //if events item
-        } else {
-            String time = arr[3];
-            Events event = new Events(task, time, isDone);
-            return event;
+            //if toDo item
+            if (taskCode.equals("T")) {
+                ToDos todo = new ToDos(task, isDone);
+                return todo;
+                //if deadline item
+            } else if (taskCode.equals("D")) {
+                String date = arr[3];
+                date = parseDate(date);
+                Deadlines deadline = new Deadlines(task, date, isDone);
+                return deadline;
+                //if events item
+            } else {
+                String date = arr[3];
+                date = parseDate(date);
+                Events event = new Events(task, date, isDone);
+                return event;
+            }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            System.exit(1);
+            return null;
         }
     }
 
+    public static String parseDate(String date) throws DukeException {
+        //date input could be "at 2/12/2019 1800"
+        //returns "2019-12-02 1800"
+        try {
+            String errMessage = "Sorry! Format of date is wrong. " +
+                    "Example input should be " +
+                    "deadline return book /by 2/12/2019 1800.";
+
+            String[] strArr = date.split(" ");
+            if (strArr.length != 3 && strArr.length != 2) {
+                throw new DukeException(errMessage);
+            }
+
+            String[] dateArr = new String[0];
+            int dateIndex = -1;
+            int timeIndex = -1;
+            if (strArr.length == 2) {
+                dateArr = strArr[0].split("/");
+                dateIndex = 0;
+                timeIndex = 1;
+            } else if (strArr.length == 3) {
+                dateArr = strArr[1].split("/");
+                dateIndex = 1;
+                timeIndex = 2;
+            }
+
+            if (dateArr.length != 3) {
+                throw new DukeException(errMessage);
+            }
+
+            //if day < 10, add 0 in front
+            if (Integer.parseInt(dateArr[0]) < 10) {
+                dateArr[0] = "0" + dateArr[0];
+            }
+            //transform 2/12/2019 to 2019-12-02
+            date = dateArr[2] + "-" + dateArr[1] + "-" + dateArr[0];
+            strArr[dateIndex] = date;
+
+            String res = strArr[dateIndex] + " " + strArr[timeIndex];
+            return res;
+        } catch (DukeException e) {
+            throw e;
+        }
+    }
+
+    public static String[] splitTaskAndDate(String task) throws DukeException {
+        try {
+            // date = "at 2/12/2019 1800"
+            String date = task.substring(task.indexOf("/") + 1, task.length());
+            // date = 2019-12-02 1800
+            date = parseDate(date);
+
+            // task = project meeting
+            task = task.substring(0, task.indexOf("/") - 1);
+            String[] res = new String[]{task, date};
+            return res;
+        } catch (DukeException e) {
+            throw e;
+        }
+    }
 }
