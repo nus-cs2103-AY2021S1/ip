@@ -4,29 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
+    private static final String border = Ui.getBorder();
     private static List<Task> storage;
-    private static final String BORDER = "____________________________________________________________\n";
 
     public TaskList() {
         storage = new ArrayList<>();
     }
 
-    public static boolean checkList(String s) {
+    public boolean checkList(String s) {
         return s.equals("list");
     }
 
-    public static void displayList() {
+    public  void displayList() {
         int listLen = storage.size();
-        System.out.println(BORDER.replace("\n", ""));
+        System.out.println(border.replace("\n", ""));
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= listLen; i++) {
             Task curr = storage.get(i - 1);
             System.out.println(i + "." + curr);
         }
-        System.out.println(BORDER);
+        System.out.println(border);
     }
 
-    public static void addTask(String s, String next) throws DukeException {
+    public void addTask(String s, String next) throws DukeException {
         Task toAdd = null;
         if (s.matches("todo|deadline|event|done|delete") && next.equals("")) {
             throw new DukeException("OOPS!!! The description of " + s + " cannot be empty.");
@@ -59,8 +59,8 @@ public class TaskList {
                         storage.add(toAdd);
                     } catch (ParseException e) {
                         System.out.println(
-                                BORDER + "Please input the time and date in\n"
-                                        + dateParser.toPattern() + " or " + parser.toPattern() + "\n" + BORDER);
+                                border + "Please input the time and date in\n"
+                                        + dateParser.toPattern() + " or " + parser.toPattern() + "\n" + border);
                         return;
                     }
                 } else {
@@ -82,8 +82,8 @@ public class TaskList {
                         storage.add(toAdd);
                     } catch (ParseException e) {
                         System.out.println(
-                                BORDER + "Please input the time and date in\n" +
-                                        dateParser.toPattern() + " or " + parser.toPattern() + "\n" + BORDER);
+                                border + "Please input the time and date in\n" +
+                                        dateParser.toPattern() + " or " + parser.toPattern() + "\n" + border);
                         return;
                     }
                 } else {
@@ -96,18 +96,18 @@ public class TaskList {
         }
 
         System.out.println(
-                BORDER + "Got it. I've added this task:\n"
+                border + "Got it. I've added this task:\n"
                         + "  " + toAdd + "\n"
                         + "Now you have " + storage.size() + " tasks in the list.\n"
-                        + BORDER
+                        + border
         );
     }
 
-    public static boolean checkDone(String s) {
+    public boolean checkDone(String s) {
         return s.equals("done");
     }
 
-    public static void doneTask(String s) throws DukeException {
+    public void doneTask(String s) throws DukeException {
         try {
             int i = Integer.parseInt(s);
             if (i < 1 || i > storage.size()) {
@@ -118,28 +118,28 @@ public class TaskList {
                 Task completed = t.setDone(true);
                 storage.set(i - 1, completed);
                 System.out.println(
-                        BORDER + "Nice! I've marked this task as done:\n" + "  "
-                                + completed + "\n" + BORDER
+                        border + "Nice! I've marked this task as done:\n" + "  "
+                                + completed + "\n" + border
                 );
             }
         } catch (NumberFormatException nfe) {
             System.out.println(
-                    BORDER + "Please state the completed task number after \"done\".\n"
-                            + BORDER
+                    border + "Please state the completed task number after \"done\".\n"
+                            + border
             );
         }
     }
 
-    public static boolean checkDel(String s) {
+    public boolean checkDel(String s) {
         return s.equals("delete");
     }
 
-    public static void delTask(String s) throws DukeException {
+    public void delTask(String s) throws DukeException {
         if (s.equals("")) {
             try {
                 addTask("delete", "");
             } catch (DukeException e) {
-                System.out.println(BORDER + e.getMessage() + "\n" + BORDER);
+                System.out.println(border + e.getMessage() + "\n" + border);
             }
             return;
         }
@@ -152,14 +152,14 @@ public class TaskList {
             Task t = storage.get(i - 1);
             storage.remove(i - 1);
             System.out.println(
-                    BORDER + "Noted. I've removed this task:\n" + "  "
+                    border + "Noted. I've removed this task:\n" + "  "
                             + t + "\n"
-                            + "Now you have " + storage.size() + " tasks in the list.\n" + BORDER
+                            + "Now you have " + storage.size() + " tasks in the list.\n" + border
             );
         }
     }
 
-    public List<Task> getList() {
+    public static List<Task> getList() {
         return storage;
     }
 }
