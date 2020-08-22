@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -186,8 +188,15 @@ public class Chatbot {
             throw new DukeException(INDENT + "My apologies sir but you will have to use the correct " +
                     "format to create a deadline :(");
         }
+
         String[] splicedInput = input.substring(9).split(" /by ");
-        return new Deadline(splicedInput[0], splicedInput[1]);
+        LocalDate date = convertDate(splicedInput[1]);
+
+        if (date == null) {
+            return new Deadline(splicedInput[0], splicedInput[1]);
+        }
+
+        return new Deadline(splicedInput[0], date);
     }
 
     private Task createEvent(String input) throws DukeException {
@@ -196,8 +205,25 @@ public class Chatbot {
             throw new DukeException(INDENT + "My apologies sir but you will have to use the correct " +
                     "format to create a event :(");
         }
+
         String[] splicedInput = input.substring(6).split(" /at ");
-        return new Event(splicedInput[0], splicedInput[1]);
+        LocalDate date = convertDate(splicedInput[1]);
+
+        if (date == null) {
+            return new Event(splicedInput[0], splicedInput[1]);
+        }
+
+        return new Event(splicedInput[0], date);
+    }
+
+    private LocalDate convertDate(String dateString) {
+        LocalDate date = null;
+        try {
+            date = LocalDate.parse(dateString);
+        } catch (DateTimeParseException e) {
+            date = null;
+        }
+        return date;
     }
 
     private void invalidCommand() throws DukeException {
