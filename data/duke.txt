@@ -1,4 +1,3 @@
-T|0|read book
-D|0|return book|Sunday 6th Aug
-E|1|project meeting|Thursday 5th Sep
+D|1|return book|2/12/2019 1800
+E|0|singing contest|22/8/2020 1100
 T|0|read textbook

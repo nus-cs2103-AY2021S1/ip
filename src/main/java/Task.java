@@ -8,7 +8,6 @@ public class Task {
         this.isDone = false;
         this.description = description;
         this.taskType = taskType;
-
     }
 
     public Task(String description, TaskType taskType, int done) {

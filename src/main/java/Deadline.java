@@ -1,24 +1,37 @@
 public class Deadline extends Task {
-    String date;
+    public Date deadlineDate;
+    public Timing deadlineTime;
 
-    public Deadline(String description, String date) {
+    public Deadline(String description, String deadlineDate) {
         super(description, TaskType.DEADLINE);
-        this.date = date;
+        this.deadlineDate = new Date(deadlineDate);
         Task.totalTasks++;
     }
 
-    public Deadline(String description, String date, int doneFlag) {
-        super(description, TaskType.DEADLINE, doneFlag);
-        this.date = date;
+    public Deadline(String description, String deadlineDate, String deadlineTime) {
+        super(description, TaskType.DEADLINE);
+        this.deadlineDate = new Date(deadlineDate);
+        this.deadlineTime = new Timing(deadlineTime);
+        Task.totalTasks++;
+    }
+    public Deadline(int boolDone, String description, String deadlineDate, String deadlineTime) {
+        super(description, TaskType.DEADLINE, boolDone);
+        this.deadlineDate = new Date(deadlineDate);
+        this.deadlineTime = new Timing(deadlineTime);
         Task.totalTasks++;
     }
 
-    public String getDate() {
-        return date;
+
+    public Date getDate() {
+        return deadlineDate;
+    }
+
+    public Timing getTiming() {
+        return deadlineTime;
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + date.trim() + ")";
+        return super.toString() + " (by: " + deadlineDate.toString() + ", " + deadlineTime.toString() + ")";
     }
 }
