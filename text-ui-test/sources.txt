@@ -1,3 +1,4 @@
+../src/main/java/TaskList.java
 ../src/main/java/Event.java
 ../src/main/java/Task.java
 ../src/main/java/Duke.java
