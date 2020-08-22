@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Task {
     protected String description;
@@ -9,6 +10,10 @@ public class Task {
         this.description = description;
         this.isDone = false;
         this.date = null;
+    }
+
+    public String dateFormatted() {
+        return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     public String getStatusIcon() {

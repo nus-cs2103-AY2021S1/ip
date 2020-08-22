@@ -3,7 +3,9 @@ import org.w3c.dom.ls.LSOutput;
 import java.io.*;
 import java.sql.Array;
 import java.sql.SQLOutput;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -100,7 +102,7 @@ public class Duke {
     public static void event(String toPrint, ArrayList<Task> itemsLs) {
         try {
             toPrint = toPrint.substring(5);
-            String[] arrtoPrint = toPrint.split("/at");
+            String[] arrtoPrint = toPrint.split("/at ");
             Event taskEvent = new Event(arrtoPrint[0], arrtoPrint[1]);
             itemsLs.add(taskEvent);
 
@@ -108,36 +110,25 @@ public class Duke {
             System.out.println(taskEvent);
             System.out.println("Now you have " + itemsLs.size() + " tasks in the list.");
 
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
             Event.invalidInput();
-
         }
     }
 
     public static void deadline(String toPrint, ArrayList<Task> itemsLs) {
         try {
             toPrint = toPrint.substring(8);
-            String[] arrtoPrint = toPrint.split("/by");
+            String[] arrtoPrint = toPrint.split("/by ");
 
-            if (isValidDate(arrtoPrint[1])) {
-                Deadline taskDeadline = new Deadline(arrtoPrint[0], arrtoPrint[1], LocalDate.parse(arrtoPrint[1]));
-                itemsLs.add(taskDeadline);
+            Deadline taskDeadline = new Deadline(arrtoPrint[0], arrtoPrint[1]);
+            itemsLs.add(taskDeadline);
 
-                System.out.println("Got it. I've added this task:");
-                System.out.println(taskDeadline);
-                System.out.println("Now you have " + itemsLs.size() + " tasks in the list.");
-            } else {
-                Deadline taskDeadline = new Deadline(arrtoPrint[0], arrtoPrint[1]);
-                itemsLs.add(taskDeadline);
+            System.out.println("Got it. I've added this task:");
+            System.out.println(taskDeadline);
+            System.out.println("Now you have " + itemsLs.size() + " tasks in the list.");
 
-                System.out.println("Got it. I've added this task:");
-                System.out.println(taskDeadline);
-                System.out.println("Now you have " + itemsLs.size() + " tasks in the list.");
-            }
-
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
             Deadline.invalidInput();
-
         }
     }
 
