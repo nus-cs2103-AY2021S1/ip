@@ -3,7 +3,6 @@ package duke.task;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class DeadlineTest {
     @Test
-    public void newDeadlineTest() {
+    public void constructor_invalidInput_throwException() {
         try {
             Deadline d = new Deadline("Assignment 1", "2020/09/01");
             fail();
