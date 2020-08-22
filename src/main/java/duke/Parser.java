@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
 
     public static Command parse(String query) throws DukeException {
@@ -23,6 +25,8 @@ public class Parser {
             }
         } catch (NumberFormatException e) {
             throw new DukeException("Sorry, which task number?");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! I'm sorry, I don't know what that means :<");
         }
     }
 }

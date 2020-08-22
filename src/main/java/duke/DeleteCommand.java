@@ -1,12 +1,14 @@
-public class DoneCommand extends Command {
+package duke;
+
+public class DeleteCommand extends Command {
     private final int index;
 
-    public DoneCommand(int index) {
+    public DeleteCommand(int index) {
         this.index = index;
     }
 
     public void execute(TaskList list, Ui ui, Storage storage) throws DukeException {
-        Task task = list.markAsDone(this.index);
+        Task task = list.deleteTask(this.index);
         String textOutput = "Nice! I've marked this task as done:\n";
         textOutput += task;
         storage.updateTextFile(list);

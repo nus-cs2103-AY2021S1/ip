@@ -1,3 +1,5 @@
+package duke;
+
 public class Event extends TimedTask {
 
     public Event(String description, String datetime) {
