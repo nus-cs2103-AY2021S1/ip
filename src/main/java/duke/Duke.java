@@ -14,16 +14,15 @@ import java.util.Scanner;
 
 
 public class Duke {
-    //    private List<duke.task.Task> toDoList;
     private final Ui ui;
     private final DukeFileHandler fileHandler;
     private TaskList tasks;
 
-    private Duke() {
+    private Duke(String path) {
         ui = new Ui();
         ui.welcome();
 
-        fileHandler = new DukeFileHandler("data/dukeData.txt");
+        fileHandler = new DukeFileHandler(path);
 
         try {
             tasks = new TaskList(fileHandler.readFile());
@@ -62,7 +61,7 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        new Duke();
+        new Duke("data/dukeData.txt");
     }
 
 }

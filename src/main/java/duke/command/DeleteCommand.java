@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
         try {
             ui.displayThis("OKay, I've remove this task: \n        " + tasks.delete(entryDelete) +
                     "\n    Now you have " + tasks.size() + " tasks in the list");
-
+            fileHandler.writeToFile(tasks.getList());
         } catch (Exception ex) {
             throw new DukeException("This task does not exist");
         }

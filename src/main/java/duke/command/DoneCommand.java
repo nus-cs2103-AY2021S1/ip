@@ -19,6 +19,7 @@ public class DoneCommand extends Command {
     public void execute(TaskList tasks, Ui ui, DukeFileHandler fileHandler) throws DukeException {
         try {
             ui.displayThis("Nice! I've marked this task as done: \n        " + tasks.done(entryDone));
+            fileHandler.writeToFile(tasks.getList());
         } catch (Exception ex) {
             throw new DukeException("This task does not exist");
         }
