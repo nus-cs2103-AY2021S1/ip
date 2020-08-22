@@ -1,20 +1,7 @@
-public class Deadline extends Task{
-    private final String by;
-    private final String TAG = "[D]";
+public class Deadline extends TimedTask {
+    private static final String TAG = "[D]";
 
     public Deadline (String description, String by) {
-        super(description);
-        this.by = by;
+        super(description, by, TAG);
     }
-
-    @Override
-    public String getDescription() {
-        String message = TAG + super.getDescription() + " " + this.getBy();
-        return message;
-    }
-
-    public String getBy() {
-        return "(by: " + this.by + ")";
-    }
-
 }
