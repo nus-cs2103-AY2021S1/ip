@@ -4,6 +4,10 @@ import java.util.LinkedList;
 import java.util.List;
 import Exception.DoneOutOfBoundException;
 import Exception.DeleteOutOfBoundException;
+
+/**
+ * An object which consist of list to save all the task.
+ */
 public class TaskList {
     private List<Task> taskList;
 
@@ -25,6 +29,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * A function to mark a task as done.
+     * @param index which is the task to be marked as done.
+     * @throws DoneOutOfBoundException if there are no such task.
+     */
     public void changeIsDone(int index) throws DoneOutOfBoundException {
         try {
             this.taskList.get(index - 1).changeIsDone();
@@ -35,6 +44,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * A function to delete a task from the list.
+     * @param index the index of the task to be deleted.
+     * @throws DeleteOutOfBoundException if there are no such task.
+     */
     public void delete(int index) throws DeleteOutOfBoundException {
         try {
             Task cur = this.taskList.get(index - 1);
@@ -46,11 +60,19 @@ public class TaskList {
         }
     }
 
+    /**
+     * A function to add a task to the list.
+     * @param task task to be added to the list.
+     */
     public void addTask(Task task) {
         this.taskList.add(task);
         System.out.println("Added new task " + task);
     }
 
+    /**
+     * A function to return the number of all task.
+     * @return int which is the size of the list.
+     */
     public int size() {
         return this.taskList.size();
     }

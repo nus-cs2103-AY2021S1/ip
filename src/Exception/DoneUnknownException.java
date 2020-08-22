@@ -1,5 +1,8 @@
 package Exception;
 
+/**
+ * Represents the exception that the value given is not integer.
+ */
 public class DoneUnknownException extends DoneException {
     @Override
     public String toString(){

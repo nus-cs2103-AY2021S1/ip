@@ -5,7 +5,9 @@ import Command.Command;
 import main.java.*;
 import Exception.*;
 
-
+/**
+ * A chat bot to save the todo, deadline and event task in a list.
+ */
 public class Duke{
     private Storage storage;
     private TaskList tasks;
@@ -27,6 +29,9 @@ public class Duke{
         duke.run();
     }
 
+    /**
+     * A function which takes user input and never stops unless bye is called.
+     */
     public void run() {
         this.ui.hello();
         boolean isExit = false;
