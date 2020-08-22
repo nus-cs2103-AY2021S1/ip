@@ -8,6 +8,11 @@ public class EventTask extends Task {
         this.time = time;
     }
 
+    public EventTask(String description, String time, boolean isDone) {
+        super(description, isDone);
+        this.time = time;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.time + ")";

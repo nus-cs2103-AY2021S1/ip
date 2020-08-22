@@ -8,6 +8,11 @@ public class DeadlineTask extends Task {
         this.time = time;
     }
 
+    public DeadlineTask(String description, String time, boolean isDone) {
+        super(description, isDone);
+        this.time = time;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.time + ")";
