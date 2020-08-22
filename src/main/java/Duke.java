@@ -9,9 +9,13 @@ public class Duke {
                                     + "| |_| | |_| |   <  __/\n"
                                     + "|____/ \\__,_|_|\\_\\___|\n";
 
+    private static final String savePath = "data/duke.txt";
+    private static final DukeSaver saver = new DukeSaver(savePath);
+
     private static final List<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
+        saver.loadData(taskList);
         greet();
         while (true) {
             String response = DukeIn.prompt();
@@ -33,28 +37,29 @@ public class Duke {
         }
         String rest = parsedResponse.length == 1 ? null : parsedResponse[1];
         switch (command) {
-            case BYE:
-                exit();
-            case LIST:
-                handleList();
-                break;
-            case DONE:
-                handleDone(rest);
-                break;
-            case TODO:
-                handleTodo(rest);
-                break;
-            case DEADLINE:
-                handleDeadline(rest);
-                break;
-            case EVENT:
-                handleEvent(rest);
-                break;
-            case DELETE:
-                handleDelete(rest);
-                break;
-            case INVALID:
-                throw new DukeException("Unrecognized command!");
+        case BYE:
+            saver.saveData(taskList);
+            exit();
+        case LIST:
+            handleList();
+            break;
+        case DONE:
+            handleDone(rest);
+            break;
+        case TODO:
+            handleTodo(rest);
+            break;
+        case DEADLINE:
+            handleDeadline(rest);
+            break;
+        case EVENT:
+            handleEvent(rest);
+            break;
+        case DELETE:
+            handleDelete(rest);
+            break;
+        case INVALID:
+            throw new DukeException("Unrecognized command!");
         }
     }
 
