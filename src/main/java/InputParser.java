@@ -42,4 +42,27 @@ public class InputParser {
         return todoBool || deadlineBool || eventBool;
     }
 
+    public static Task parseTask(String[] arr) {
+        String taskCode = arr[0];
+        String isDoneStr = arr[1];
+        boolean isDone = isDoneStr.equals("1") ? true : false;
+        String task = arr[2];
+
+        //if toDo item
+        if (taskCode.equals("T")) {
+            ToDos todo = new ToDos(task, isDone);
+            return todo;
+        //if deadline item
+        } else if (taskCode.equals("D")) {
+            String date = arr[3];
+            Deadlines deadline = new Deadlines(task, date, isDone);
+            return deadline;
+        //if events item
+        } else {
+            String time = arr[3];
+            Events event = new Events(task, time, isDone);
+            return event;
+        }
+    }
+
 }
