@@ -2,25 +2,63 @@ package dependencies.storage;
 
 import dependencies.task.Task;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import java.util.ArrayList;
 
 
 public class Store {
+    
+    private static final String SEPARATOR = System.getProperty("file.separator");
+
+    private static final Path SRC_PATH = Paths.get("src");
+    private static final Path DIR_PATH = Paths.get("src", "data");
+    private static final Path FILE_PATH = Paths.get("src", "data").resolve("taskdata.txt");
+
+    private boolean doesDirExists;
+    private boolean doesFileExist;
+
+
     /** todoList that stores the tasks. */
-    private final ArrayList<Task> todoList;
+    private final ArrayList<Task> todoList = new ArrayList<>();
 
     /** Private constructor */
-    private Store() {
-        todoList = new ArrayList<>();
+    private Store() throws IOException{
+        if (Files.exists(DIR_PATH)) {
+            System.out.println("Dir exist");
+            if (Files.exists(FILE_PATH)) {
+                System.out.println("File exists");
+            } else {
+                Files.createFile(FILE_PATH);
+                System.out.println("File created");
+            }
+        } else {
+            Files.createDirectory(DIR_PATH);
+            System.out.println("Dir created");
+            Files.createFile(FILE_PATH);
+            System.out.println("File created");
+        }
     }
 
     /**
-     * Initializer for the Store object.
+     * Initialises and returns the Store object.
      *
      * @return the Store object
      */
     public static Store initStorage() {
-        return new Store();
+        try {
+            return new Store();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     /**
@@ -51,7 +89,8 @@ public class Store {
     }
 
     /**
-     * Adds the specified task to the todoList.
+     * Adds the specified task to the todoList. Returns a string representation
+     * of the task that was added as a reply.
      *
      * @param task
      * @return a string represenitng the newly added task
@@ -130,6 +169,10 @@ public class Store {
             }
         }
         return c;
+    }
+
+    public static void main(String[] args) {
+        Store s = initStorage();
     }
 
 }
