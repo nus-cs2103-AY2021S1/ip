@@ -5,7 +5,6 @@ import duke.task.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
 public class HappenCommand extends Command {
     public HappenCommand(String input) {
@@ -15,53 +14,42 @@ public class HappenCommand extends Command {
     @Override
     public void execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
         String description = input.substring(7);
-        Scanner sc = new Scanner(description);
+        String[] detail = description.split(" ");
         DateTimeFormatter parse = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter output = DateTimeFormatter.ofPattern("MMM d yyyy");
         try {
-            String type, detail;
-            try {
-                type = sc.next();
-                detail = sc.next();
-            } catch (Exception e) {
-                throw new InvalidCommandException("Invalid happen command input");
-            }
-            if (type.equals("on") && !sc.hasNext()) {
-                if (detail.equals("today")) {
+            if (detail[0].equals("on") && detail.length == 2) {
+                if (detail[1].equals("today")) {
                     ui.printList(list, Task::happenToday, "happening today ");
                 } else {
-                    LocalDate date = LocalDate.parse(detail, parse);
+                    LocalDate date = LocalDate.parse(detail[1], parse);
                     ui.printList(list, t -> t.happenOnDate(date), "happening on " + date.format(output) + " ");
                 }
-            } else if (type.equals("before") && !sc.hasNext()) {
-                if (detail.equals("today")) {
+            } else if (detail[0].equals("before") && detail.length == 2) {
+                if (detail[1].equals("today")) {
                     ui.printList(list, Task::happenBeforeToday, "happening before today ");
                 } else {
-                    LocalDate date = LocalDate.parse(detail, parse);
+                    LocalDate date = LocalDate.parse(detail[1], parse);
                     ui.printList(list, t -> t.happenBeforeDate(date),
                             "happening before " + date.format(output) + " ");
                 }
-            } else if (type.equals("after") && !sc.hasNext()) {
-                if (detail.equals("today")) {
+            } else if (detail[0].equals("after") && detail.length == 2) {
+                if (detail[1].equals("today")) {
                     ui.printList(list, Task::happenAfterToday, "happening after today ");
                 } else {
-                    LocalDate date = LocalDate.parse(detail, parse);
+                    LocalDate date = LocalDate.parse(detail[1], parse);
                     ui.printList(list, t -> t.happenAfterDate(date),
                             "happening after " + date.format(output) + " ");
                 }
-            } else if (type.equals("in") && sc.next().equals("days") && !sc.hasNext()) {
-                int n = Integer.parseInt(detail);
+            } else if (detail.length == 3 && detail[0].equals("in") && detail[2].equals("days")) {
+                int n = Integer.parseInt(detail[1]);
                 if (n <= 0) {
                     throw new InvalidCommandException("Please input a positive integer for happen in command");
                 }
                 ui.printList(list, t -> t.happenIn(n), "happening in " + n + " days");
-            } else if (type.equals("between") && sc.hasNext()) {
-                String detail2 = sc.next();
-                if (sc.hasNext()) {
-                    throw new InvalidCommandException("Invalid happen command input");
-                }
-                LocalDate date1 = LocalDate.parse(detail, parse);
-                LocalDate date2 = LocalDate.parse(detail2, parse);
+            } else if (detail[0].equals("between") && detail.length == 3) {
+                LocalDate date1 = LocalDate.parse(detail[1], parse);
+                LocalDate date2 = LocalDate.parse(detail[2], parse);
                 if (!date1.isBefore(date2)) {
                     throw new InvalidCommandException("Latter date is before former date for happen between");
                 }
