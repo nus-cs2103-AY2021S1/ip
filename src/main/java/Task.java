@@ -19,7 +19,7 @@ public class Task {
         }
     }
 
-    void setDone() {
+    public void setDone() {
         isDone = true;
     }
     

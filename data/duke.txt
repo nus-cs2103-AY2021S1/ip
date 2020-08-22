@@ -1,3 +1,2 @@
-D|1|return book|2/12/2019 1800
-E|0|singing contest|22/8/2020 1100
-T|0|read textbook
+E|0|project meeting|19/8/2020 1800
+D|0|submit project|30/8/2020 2359
