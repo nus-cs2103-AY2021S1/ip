@@ -1,6 +1,6 @@
 todo borrow book
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+deadline return book /by 2019-10-15 18:00
+event interview at Google /by 2021-01-31 21:00
 list
 event
 deadline
