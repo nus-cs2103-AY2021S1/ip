@@ -6,7 +6,7 @@ import main.java.duke.handle.TaskNotFoundException;
 import main.java.duke.task.*;
 
 /**
- * The AddCommand class represents a commmand that adds a task to the task list.
+ * The AddCommand class represents a command that adds a task to the task list.
  */
 public class AddCommand extends Command {
     private Task task;
@@ -21,14 +21,14 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Takes in the task list, the interface, and the storage compoenents, and adds a task to
+     * Takes in the task list, the interface, and the storage components, and adds a task to
      * the task list and updates the local record using storage.
      *
      * @param taskList The task list component.
      * @param ui The user interface component.
      * @param storage The storage component.
      * @throws TaskNotFoundException If there is no task corresponding to the count of the task.
-     * @throws IOException If the stroage process needs to be handled
+     * @throws IOException If the storage process needs to be handled
      */
     @Override
     public void excecute(TaskList taskList, Ui ui, Storage storage) throws IOException {

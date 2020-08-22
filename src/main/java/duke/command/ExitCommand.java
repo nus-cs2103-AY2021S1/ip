@@ -7,12 +7,12 @@ import main.java.duke.handle.*;
 import java.io.IOException;
 
 /**
- * The ExitCommand class represents a commmand that exits the program.
+ * The ExitCommand class represents a command that exits the program.
  */
 public class ExitCommand extends Command {
 
     /**
-     * Takes in the task list, the interface, and the storage compoenents, and exits
+     * Takes in the task list, the interface, and the storage components, and exits
      * the program.
      *
      * @param taskList The task list component.

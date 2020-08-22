@@ -6,15 +6,15 @@ import main.java.duke.core.*;
 import main.java.duke.handle.*;
 
 /**
- * The Command class represents a commmand that can be excecuted.
+ * The Command class represents a command that can be executed.
  *
  * The command class is an abstract class and the class has an abstract
- * method excecute.
+ * method execute.
  */
 public abstract class Command {
 
     /**
-     * Takes in the task list, the interface, and the storage compoenents, and excecute
+     * Takes in the task list, the interface, and the storage components, and execute
      * the command with these components.
      *
      * @param taskList The task list component.

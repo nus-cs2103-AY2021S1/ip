@@ -2,9 +2,7 @@ package main.java.duke.core;
 
 import java.util.Scanner;
 
-import main.java.duke.command.*;
 import main.java.duke.task.*;
-import main.java.duke.handle.*;
 
 /**
  * The Ui class interacts with the user by accpeting

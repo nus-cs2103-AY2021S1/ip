@@ -6,7 +6,7 @@ import main.java.duke.core.*;
 import main.java.duke.handle.*;
 
 /**
- * The ListDateCommand class represents a commmand that lists a task on a specific date in the taks list.
+ * The ListDateCommand class represents a command that lists a task on a specific date in the task list.
  */
 public class ListDateCommand extends Command{
     private LocalDate localDate;
@@ -21,14 +21,14 @@ public class ListDateCommand extends Command{
     }
 
     /**
-     * Takes in the task list, the interface, and the storage compoenents, and list
+     * Takes in the task list, the interface, and the storage components, and list
      * the tasks on a specific date in the task list.
      *
      * @param taskList The task list component.
      * @param ui The user interface component.
      * @param storage The storage component.
      * @throws TaskNotFoundException If there is no task corresponding to the count of the task.
-     * @throws IOException If the stroage process needs to be handled
+     * @throws IOException If the storage process needs to be handled
      */
     @Override
     public void excecute(TaskList taskList, Ui ui, Storage storage) throws TaskNotFoundException, IOException {

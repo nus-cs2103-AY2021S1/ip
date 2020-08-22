@@ -8,9 +8,10 @@ import main.java.duke.core.*;
 
 /**
  * The Duke class represents a duke bot that can interact with
- * the user and help the user to manage their tasks, which can help to store
- * the tasks entered by the user into a local record, add the tasks, remove the tasks,
- * read the tasks in the record and present them to the user, and help to
+ * the user and help the user to manage their tasks, which can
+ * help to store the tasks entered by the user into a local record, add
+ * the tasks, remove the tasks, read the tasks in the record and
+ * present them to the user, and help to
  * search for a specific task for the user.
  */
 public class Duke {

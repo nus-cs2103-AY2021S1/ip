@@ -5,7 +5,7 @@ import java.time.LocalDate;
 /**
  * The Task class describes a task which can be stored in a task list.
  * The instance of the Task class has the description of the task and
- * the state of whether the taks has been completed. There can be many types of task.
+ * the state of whether the task has been completed. There can be many types of task.
  */
 public class Task {
     protected String description;
