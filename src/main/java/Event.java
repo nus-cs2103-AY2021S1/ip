@@ -23,11 +23,11 @@ public class Event extends Task {
     @Override
     public String toString() {
         if(at.getMinute() >= 10) {
-            return "[E]" + super.toString() + " (at: " + at.getMonth().toString().substring(0, 3) + " " +
+            return "[E]" + super.toString() + "(at: " + at.getMonth().toString().substring(0, 3) + " " +
                     at.getDayOfMonth() + " " + at.getYear() + " " +
                     String.format("%d:%d)", at.getHour(), at.getMinute()) + ")";
         } else {
-            return "[E]" + super.toString() + " (at: " + at.getMonth().toString().substring(0, 3) + " " +
+            return "[E]" + super.toString() + "(at: " + at.getMonth().toString().substring(0, 3) + " " +
                     at.getDayOfMonth() + " " + at.getYear() + " " + at.getHour() + ":0" + at.getMinute() + ")";
         }
 

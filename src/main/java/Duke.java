@@ -48,6 +48,8 @@ public class Duke {
                     tasks.deadline(res, ui, storage);
                 } else if (res.startsWith(Operations.EVENT.name().toLowerCase())) {
                     tasks.event(res, ui, storage);
+                } else if (res.startsWith(Operations.FIND.name().toLowerCase())) {
+                    tasks.find(res, ui);
                 } else {
                     // Exception: eg. ???
                     throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

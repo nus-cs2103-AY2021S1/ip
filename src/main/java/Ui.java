@@ -135,6 +135,19 @@ public class Ui {
     }
 
     /**
+     * Displays the result of all the tasks that contains the keyword.
+     * @param data the list of the events.
+     */
+    public void printFind(List<Task> data) {
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Here are the matching tasks in your list:");
+        for (int i = 0; i < data.size(); i++) {
+            System.out.printf("     %d.%s\n", i + 1, data.get(i).toString());
+        }
+        System.out.println("    ____________________________________________________________");
+
+    }
+    /**
      * Displays the goodbye message.
      */
     public void bye() {

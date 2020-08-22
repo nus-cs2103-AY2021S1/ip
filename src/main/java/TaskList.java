@@ -144,14 +144,31 @@ public class TaskList {
             // Exception: eg. event meeting /Mon
             throw new DukeException("     ☹ OOPS!!! Please enter the time following the format: at XXX");
         }
-        Event t = new Event(ss[0].substring(9),
+        Event t = new Event(ss[0].substring(6),
                 LocalDateTime.of(Integer.parseInt(ss[3].split(" ")[0]), Integer.parseInt(ss[2]),
                         Integer.parseInt(ss[1].substring(3)),
                         Integer.parseInt(ss[3].split(" ")[1].substring(0, 2)),
                         Integer.parseInt(ss[3].split(" ")[1].substring(2))));
+        System.out.println(t.getDescription());
         data.add(t);
         ui.printEvent(data, t);
         storage.writeFile(data);
+    }
+
+    /**
+     * Finds all the tasks that contains the keyword.
+     * @param input the input from the user.
+     * @param ui user interaction object.
+     */
+    public void find(String input, Ui ui) {
+        String keyword = input.substring(5);
+        List<Task> filteredData = new ArrayList<>();
+        for(Task t : data) {
+            if(t.getDescription().contains(keyword)) {
+                filteredData.add(t);
+            }
+        }
+        ui.printFind(filteredData);
     }
 }
 

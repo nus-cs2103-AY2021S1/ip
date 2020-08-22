@@ -41,20 +41,32 @@ public class Storage {
                 data.add(t);
             } else if(type == 'D') {
                 String[] parts = line.substring(5).split(" ");
-                Deadline d = new Deadline(parts[1], LocalDateTime.of(Integer.parseInt(parts[5]), getMonth(parts[3]),
-                        Integer.parseInt(parts[4]), Integer.parseInt(parts[6].split(":")[0]),
-                        Integer.parseInt(parts[6].split(":")[1].substring(
-                                0, parts[6].split(":")[1].length() - 1))));
+                String description = "";
+                int length = parts.length;
+                for(int i = 1; i < length - 5; i++) {
+                    description += parts[i] + " ";
+                }
+                Deadline d = new Deadline(description, LocalDateTime.of(Integer.parseInt(parts[length - 2]),
+                        getMonth(parts[length - 4]), Integer.parseInt(parts[length - 3]),
+                        Integer.parseInt(parts[length - 1].split(":")[0]),
+                        Integer.parseInt(parts[length - 1].split(":")[1].substring(
+                                0, parts[length - 1].split(":")[1].length() - 1))));
                 if(isDone) {
                     d.done();
                 }
                 data.add(d);
             } else {
                 String[] parts = line.substring(5).split(" ");
-                Event e = new Event(parts[1], LocalDateTime.of(Integer.parseInt(parts[5]), getMonth(parts[3]),
-                        Integer.parseInt(parts[4]), Integer.parseInt(parts[6].split(":")[0]),
-                        Integer.parseInt(parts[6].split(":")[1].substring(
-                                0, parts[6].split(":")[1].length() - 1))));
+                String description = "";
+                int length = parts.length;
+                for(int i = 1; i < length - 5; i++) {
+                    description += parts[i] + " ";
+                }
+                Event e = new Event(description, LocalDateTime.of(Integer.parseInt(parts[length - 2]),
+                        getMonth(parts[length - 4]), Integer.parseInt(parts[length - 3]),
+                        Integer.parseInt(parts[length - 1].split(":")[0]),
+                        Integer.parseInt(parts[length - 1].split(":")[1].substring(
+                                0, parts[length - 1].split(":")[1].length() - 1))));
                 if(isDone) {
                     e.done();
                 }

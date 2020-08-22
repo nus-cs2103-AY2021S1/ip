@@ -9,4 +9,5 @@ public enum Operations {
     DEADLINE,
     EVENT,
     BYE,
+    FIND,
 }
