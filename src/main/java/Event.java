@@ -6,15 +6,15 @@ import java.time.format.DateTimeParseException;
 public class Event extends Task {
     public LocalDateTime time;
 
-    public Event(String description, int index) {
+    public Event(String description, int index) throws DukeInvalidTimeException {
         super(description, index);
         int idx = this.description.indexOf('/');
-        //try {
+        try {
             this.time = LocalDateTime.parse(this.description.substring(idx + 4, idx + 20),
                     DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        //} catch (DateTimeParseException | StringIndexOutOfBoundsException e){
-        //    throw new DukeInvalidTimeException();
-       // }
+        } catch (DateTimeParseException | StringIndexOutOfBoundsException e){
+            throw new DukeInvalidTimeException();
+        }
     }
 
     @Override

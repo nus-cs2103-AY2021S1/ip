@@ -1,14 +1,19 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
     public LocalDateTime time;
-    public Deadline(String description, int index) {
+    public Deadline(String description, int index) throws DukeInvalidTimeException {
         super(description, index);
         int idx = this.description.indexOf('/');
-        this.time = LocalDateTime.parse(this.description.substring(idx + 4, idx + 20),
-                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        try {
+            this.time = LocalDateTime.parse(this.description.substring(idx + 4, idx + 20),
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        } catch (DateTimeParseException | StringIndexOutOfBoundsException e){
+            throw new DukeInvalidTimeException();
+        }
     }
     @Override
     public String getStatusWithIndex() {

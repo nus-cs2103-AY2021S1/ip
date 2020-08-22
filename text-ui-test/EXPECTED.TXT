@@ -39,6 +39,9 @@ Nice! I have marked this task as done:
 4. [✘] workout
 5. [✓] run
 ---------------------------------------------------
+FAILURE: Your command has to be in a proper format like the one here
+	 <command> <activity> <by/at> <Year-Month-Day Hour:Minute>.
+---------------------------------------------------
 Noted. I've removed this task:
   [E][✓] interview at Google (by: 2021-01-31 21:00)
 Now you have 4 tasks in the list.

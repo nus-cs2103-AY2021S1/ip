@@ -100,7 +100,7 @@ public class Duke {
             return curr;
         }
     }
-    public static Deadline storeDeadline(String deadline) throws EmptyDukeException {
+    public static Deadline storeDeadline(String deadline) throws EmptyDukeException, DukeInvalidTimeException {
         int count = todoList.size() + 1;
         if (count > 100) {
             System.out.println("You have far too many pending tasks!");
@@ -113,7 +113,7 @@ public class Duke {
             return curr;
         }
     }
-    public static Event storeEvent(String event) throws EmptyDukeException {
+    public static Event storeEvent(String event) throws EmptyDukeException, DukeInvalidTimeException {
         int count = todoList.size() + 1;
         if (count > 100) {
             System.out.println("You have far too many pending tasks!");
@@ -140,7 +140,7 @@ public class Duke {
             System.out.println(toDo == null ? "Failed!" : line + "\nGot it. I've added this task:\n   "
                     + toDo.toString()
                     + "\nNow you have " + todoList.size() + " tasks in the list." );
-        } catch (EmptyDukeException e) {
+        } catch (EmptyDukeException | DukeInvalidTimeException e) {
             System.out.println(e.toString());
         }
     }
