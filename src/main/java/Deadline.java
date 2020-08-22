@@ -1,32 +1,27 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-
 public class Deadline extends Task {
 
     private LocalDate date;
     private LocalTime time;
 
-    Deadline(String name, LocalDate date, LocalTime time) {
-        super(name);
+    Deadline(String name, LocalDate date, LocalTime time, boolean done) {
+        super(name, done);
         this.time = time;
         this.date = date;
     }
 
-    Deadline(String name, LocalDate date) {
-        super(name);
+    Deadline(String name, LocalDate date, boolean done) {
+        super(name, done);
         this.time = null;
         this.date = date;
     }
 
-    Deadline(String name, String time, boolean done) {
-        super(name);
-        this.time = time;
-    }
-
     public String appendFile() {
         String doneString = (done == true ? "1" : "0");
-        return "DEADLINE" + " | " + doneString + " | " + this.name + " | " + this.time;
+        return "deadline" + " | " + doneString + " | " + this.name + " | " + this.date + " | "
+                + this.time.format(DateTimeFormatter.ofPattern("HHmm"));
     }
 
     @Override

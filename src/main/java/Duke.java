@@ -10,30 +10,42 @@ public class Duke {
 
     private static final String FILE_PATH = "data/tasklist.txt";
 
-    public static void readFile(ArrayList<Task> taskList) {
+    //Remove done string and add in delimeter
+    public static String[] editFileInput(String[] input) {
+        ArrayList<String> result = new ArrayList<>();
+        String taskType = input[0];
+        for (int i = 0; i < input.length; i++) {
+            if (taskType.equals("deadline") && i == 3) {
+                result.add("/by");
+            } else if (taskType.equals("event") && i == 3) {
+                result.add("/at");
+            }
+            if (i != 1) {
+                result.add(input[i]);
+            }
+        }
+        String returnArray[] = new String[result.size()];
+        return result.toArray(returnArray);
+    }
+
+    public static void readFile(ArrayList<Task> taskList) throws DukeException {
         try {
             File file = new File(FILE_PATH);
-            FileReader fr = new FileReader(file);
-            BufferedReader br = new BufferedReader(fr);
-            String line = br.readLine();
-            while (line != null) {
-                String[] splitLine = line.split(" \\| ");
-                boolean done = splitLine[1].equals("1") ? true : false;
-                switch (splitLine[0]) {
-                case "TODO":
-                    taskList.add(new Todo(splitLine[2], done));
-                    break;
-                case "DEADLINE":
-                    taskList.add(new Deadline(splitLine[2], splitLine[3], done));
-                    break;
-                case "EVENT":
-                    taskList.add(new Event(splitLine[2], splitLine[3], done));
-                    break;
+            if (file.exists()) {
+                FileReader fr = new FileReader(file);
+                BufferedReader br = new BufferedReader(fr);
+                String line = br.readLine();
+                while (line != null) {
+                    String[] splitLine = line.split(" \\| ");
+                    boolean isDone = splitLine[1].equals("1") ? true : false;
+                    System.out.println(isDone);
+                    StringProcessor stringProcessor = new StringProcessor(editFileInput(splitLine), taskList);
+                    stringProcessor.process(isDone);
+                    line = br.readLine();
                 }
-                line = br.readLine();
+                br.close();
+                fr.close();
             }
-            br.close();
-            fr.close();
         } catch (IOException e) {
             System.out.println (e.toString());
             System.out.println("Sorry, there were some issues opening the file located at: " + FILE_PATH);
@@ -92,7 +104,7 @@ public class Duke {
                 break;
             } else {
                 StringProcessor stringProcessor = new StringProcessor(splitString, inputStore);
-                stringProcessor.process();
+                stringProcessor.process(false);
             }
             writeToFile(inputStore);
         }

@@ -10,7 +10,7 @@ public class Todo extends Task {
 
     public String appendFile() {
         String doneString = (done == true ? "1" : "0");
-        return "TODO" + " | " + doneString + " | " + this.name;
+        return "todo" + " | " + doneString + " | " + this.name;
     }
 
     @Override

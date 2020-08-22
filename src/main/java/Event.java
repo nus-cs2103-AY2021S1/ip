@@ -2,31 +2,27 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task{
+public class Event extends Task {
 
     private LocalDate date;
     private LocalTime time;
 
-    Event(String name, LocalDate date, LocalTime time) {
-        super(name);
+    Event(String name, LocalDate date, LocalTime time, boolean done) {
+        super(name, done);
         this.time = time;
         this.date = date;
     }
 
-    Event(String name, LocalDate date) {
-        super(name);
+    Event(String name, LocalDate date, boolean done) {
+        super(name, done);
         this.time = null;
         this.date = date;
     }
 
-    Event(String name, String time, boolean done) {
-        super(name, done);
-        this.time = time;
-    }
-
     public String appendFile() {
         String doneString = (done == true ? "1" : "0");
-        return "EVENT" + " | " + doneString + " | " + this.name + " | " + this.time;
+        return "event" + " | " + doneString + " | " + this.name + " | " + this.date + " | "
+                + this.time.format(DateTimeFormatter.ofPattern("HHmm"));
     }
 
     @Override

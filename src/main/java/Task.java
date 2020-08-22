@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String name;
     protected boolean done;
 
@@ -16,10 +16,7 @@ public class Task {
         this.done = true;
     }
 
-    public String appendFile() {
-        String doneString = (done == true ? "1" : "0");
-        return "" + " | " + doneString + " | " + this.name;
-    }
+    public abstract String appendFile();
 
     @Override
     public String toString() {

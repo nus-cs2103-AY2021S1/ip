@@ -94,9 +94,9 @@ public class StringProcessor {
         return newArray;
     }
 
-    public void addTask(ArrayList<String> taskArray, String taskType) throws DukeException {
+    public void addTask(ArrayList<String> taskArray, String taskType, boolean isDone) throws DukeException {
         if (taskType.equals("todo")) {
-            addTaskToList(new Todo(taskArray.get(0)));
+            addTaskToList(new Todo(taskArray.get(0), isDone));
             return;
         }
         //Deadline / Event Tasks
@@ -118,11 +118,12 @@ public class StringProcessor {
                 if (todayDate.isEqual(taskDate) && taskTime.isBefore(timeNow)) {
                     throw new DukeException("The date/time combination you specified has already passed!");
                 }
-                addTaskToList(taskType.equals("deadline") ? new Deadline(taskArray.get(0), taskDate, taskTime)
-                        : new Event(taskArray.get(0), taskDate, taskTime));
+                addTaskToList(taskType.equals("deadline")
+                        ? new Deadline(taskArray.get(0), taskDate, taskTime, isDone)
+                        : new Event(taskArray.get(0), taskDate, taskTime, isDone));
             } else {
-                addTaskToList(taskType.equals("deadline") ? new Deadline(taskArray.get(0), taskDate)
-                        : new Event(taskArray.get(0), taskDate));
+                addTaskToList(taskType.equals("deadline") ? new Deadline(taskArray.get(0), taskDate, isDone)
+                        : new Event(taskArray.get(0), taskDate, isDone));
             }
         } catch (DateTimeParseException e) {
             throw new DukeException("All deadline/event tasks' date must be n yyyy-mm-dd format" +
@@ -137,7 +138,7 @@ public class StringProcessor {
                 "\n\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0");
     }
 
-    public void process() throws DukeException {
+    public void process(boolean isDone) throws DukeException {
         //String will not be empty as this is checked in Duke
         switch(returnIndex(0)) {
         case "list" :
@@ -145,17 +146,17 @@ public class StringProcessor {
             break;
 
         case "todo" :
-            addTask(processTask(""), "todo");
+            addTask(processTask(""), "todo", isDone);
             printAddTask();
             break;
 
         case "deadline" :
-            addTask(processTask("/by"), "deadline");
+            addTask(processTask("/by"), "deadline", isDone);
             printAddTask();
             break;
 
         case "event" :
-            addTask(processTask("/at"), "event");
+            addTask(processTask("/at"), "event", isDone);
             printAddTask();
             break;
 
