@@ -3,7 +3,9 @@ package Command;
 import main.java.Storage;
 import main.java.TaskList;
 import main.java.Ui;
+
 import org.junit.jupiter.api.Test;
+
 import Exception.DukeException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,7 +15,7 @@ public class AddEventTest {
         String[] command = {"event", ""};
         AddEventCommand test = new AddEventCommand(command);
         try {
-            TaskList list= new TaskList();
+            TaskList list = new TaskList();
             Ui ui = new Ui();
             Storage storage = new Storage("data/duke.txt");
             test.execute(list,ui,storage);

@@ -1,14 +1,22 @@
 package Command;
 
-import main.java.*;
+import main.java.Storage;
+import main.java.TaskList;
+import main.java.Ui;
+import main.java.Deadline;
+import main.java.Task;
+
+
 import Exception.DukeException;
 import Exception.DeadlineException;
 import Exception.WrongFormatException;
 
 import java.io.IOException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 import java.util.Arrays;
 
 /**
@@ -61,7 +69,7 @@ public class AddDeadlineCommand extends Command {
             return true;
         } else if (o instanceof AddDeadlineCommand) {
             AddDeadlineCommand cur = (AddDeadlineCommand) o;
-            if(Arrays.equals(this.command, cur.command)) {
+            if (Arrays.equals(this.command, cur.command)) {
                 return true;
             } else {
                 return false;

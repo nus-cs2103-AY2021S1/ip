@@ -1,6 +1,8 @@
 package Command;
 
-import main.java.*;
+import main.java.Storage;
+import main.java.TaskList;
+import main.java.Ui;
 
 import Exception.DukeException;
 import Exception.DeleteOutOfBoundException;
@@ -57,7 +59,7 @@ public class DeleteCommand extends Command {
             return true;
         } else if (o instanceof DeleteCommand) {
             DeleteCommand cur = (DeleteCommand) o;
-            if(Arrays.equals(this.command, cur.command)) {
+            if (Arrays.equals(this.command, cur.command)) {
                 return true;
             } else {
                 return false;

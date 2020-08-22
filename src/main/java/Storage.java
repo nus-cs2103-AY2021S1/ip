@@ -46,7 +46,7 @@ public class Storage {
                     }
                     String datePattern = "dd/MM/yyyy HH:mm";
                     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(datePattern);
-                    LocalDateTime date =LocalDateTime.parse(res[3],dateFormatter);
+                    LocalDateTime date = LocalDateTime.parse(res[3],dateFormatter);
                     Task cur = new Deadline(res[2], isDone, date);
                     result.add(cur);
                 } else {
@@ -56,7 +56,7 @@ public class Storage {
                     }
                     String datePattern = "dd/MM/yyyy HH:mm";
                     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(datePattern);
-                    LocalDateTime date =LocalDateTime.parse(res[3],dateFormatter);
+                    LocalDateTime date = LocalDateTime.parse(res[3],dateFormatter);
                     Task cur = new Event(res[2], isDone, date);
                     result.add(cur);
                 }

@@ -1,6 +1,7 @@
 package Command;
 
 import Exception.DukeException;
+
 import main.java.Storage;
 import main.java.TaskList;
 import main.java.Ui;
@@ -42,7 +43,7 @@ public class ExitCommand extends Command {
             return true;
         } else if (o instanceof ExitCommand) {
             ExitCommand cur = (ExitCommand) o;
-            if(Arrays.equals(this.command, cur.command)) {
+            if (Arrays.equals(this.command, cur.command)) {
                 return true;
             } else {
                 return false;

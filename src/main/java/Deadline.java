@@ -22,7 +22,7 @@ public class Deadline extends Task {
         String datePattern = "dd/MM/yyyy HH:mm";
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(datePattern);
         String date = this.deadline.format(dateFormatter);
-        return "[D]" +"[" + this.getStatusIcon()+"] " + this.description + "(by:" + date +")";
+        return "[D]" + "[" + this.getStatusIcon() + "] " + this.description + "(by:" + date + ")";
     }
 
     /**
@@ -33,14 +33,14 @@ public class Deadline extends Task {
     public String writeToFile() {
         String result = "D # ";
         if(isDone) {
-            result+="1 # ";
+            result += "1 # ";
         } else {
-            result+="0 # ";
+            result += "0 # ";
         }
-        result+=description;
+        result += description;
         String datePattern = "dd/MM/yyyy HH:mm";
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(datePattern);
-        result+=" # "+deadline.format(dateFormatter);
+        result += " # " + deadline.format(dateFormatter);
         return result;
     }
 

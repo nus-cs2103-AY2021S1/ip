@@ -1,8 +1,13 @@
 package Command;
 
-import main.java.*;
+import main.java.Storage;
+import main.java.TaskList;
+import main.java.Ui;
+import main.java.Task;
+
 import Exception.DukeException;
 import Exception.TaskException;
+
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -50,7 +55,7 @@ public class AddTodoCommand extends Command {
             return true;
         } else if (o instanceof AddTodoCommand) {
             AddTodoCommand cur = (AddTodoCommand) o;
-            if(Arrays.equals(this.command, cur.command)) {
+            if (Arrays.equals(this.command, cur.command)) {
                 return true;
             } else {
                 return false;
