@@ -24,7 +24,8 @@ public class Duke {
                 "list- list all tasks",
                 "todo <description> - add task",
                 "deadline <description> \\by <due date> -add task with deadline",
-                "event <description> \\at <event date> -add event with date",
+                "event <description> \\at <event date> -add event with date ",
+                "\t deadline and date can be formatted as : yyyy-mm-dd or dd/mm/yyyy and HHmm or HH.mm a",
                 "done <task number> - marks task as done",
                 "bye - goodbye!"
         };
