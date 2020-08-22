@@ -27,7 +27,7 @@ public class Storage {
      * @param list a task list for the storage object to populate with data.
      */
     public Storage(TaskList list) {
-        this.taskList = list;
+        taskList = list;
     }
 
     /**
