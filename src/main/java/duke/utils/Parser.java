@@ -10,13 +10,13 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
     public String[] extractAction(String command) throws DukeException {
-        String[] split = command.split(" ", 2);
-        int len = split.length;
-
         // command is empty
-        if (len == 0) {
+        if (command.equals("")) {
             throw new DukeException(Messenger.EMPTY_COMMAND_ERROR);
         }
+
+        String[] split = command.split(" ", 2);
+        int len = split.length;
 
         String status = split[0];
         if (TaskStatus.valueOfStatus(status) == null && !status.equals("done") && !status.equals("delete")) {
