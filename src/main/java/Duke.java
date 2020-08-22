@@ -4,6 +4,7 @@ import exceptions.DukeUnknownCommandException;
 import exceptions.DukeEmptyMessageException;
 
 import java.io.*;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
@@ -13,6 +14,9 @@ public class Duke {
     static final String BYE = "Bye Boss! Hope to see you again!";
     static final String SHOW_TASK = "Here are the tasks in your list:";
     static final String TAB = "   ";
+    public final static String FILEPATH = System.getProperty("user.dir") + (System.getProperty("user.dir").endsWith("text-ui-test")
+            ? "/saved-tasks.txt"
+            : "/text-ui-test/saved-tasks.txt");
 
     public static void main(String[] args) throws IOException {
 
@@ -20,7 +24,6 @@ public class Duke {
         System.out.println(GREETING);
         handleList();
         Scanner sc = new Scanner(System.in);
-
         while (sc.hasNext()) {
             try {
                 String toEcho = sc.nextLine();
@@ -62,7 +65,7 @@ public class Duke {
                     if (toEcho.length() == 6) {
                         throw new DukeEmptyMessageException("Delete");
                     } else if (Integer.parseInt(command[1]) > Task.tasks.size() ||
-                        Integer.parseInt(command[1]) < 0) {
+                            Integer.parseInt(command[1]) < 0) {
                         throw new DukeInvalidMessageException();
                     }
                     System.out.println("Noted. I've removed this task:");
@@ -74,6 +77,8 @@ public class Duke {
                 } else {
                     throw new DukeUnknownCommandException();
                 }
+            } catch (DateTimeParseException e) {
+                System.out.println(TAB + "Please enter date in the format yyyy-MM-dd HHmm");
             } catch (DukeException e) {
                 System.out.println(e.getMessage() + "\n" + HORIZONTAL_LINE);
             }
@@ -81,7 +86,7 @@ public class Duke {
     }
 
     public static void saveTasks() throws IOException {
-        BufferedWriter taskWriter = new BufferedWriter(new FileWriter(".//text-ui-test/saved-tasks.txt"));
+        BufferedWriter taskWriter = new BufferedWriter(new FileWriter(FILEPATH));
         String tasks = "";
         for (Task task: Task.tasks) {
             tasks += task.toSaveString() + "\n";
@@ -109,7 +114,7 @@ public class Duke {
     }
 
     public static void handleDeadline(String description) {
-        String[] strArr = description.split("/by", 2);
+        String[] strArr = description.split("/by ", 2);
         String todo = strArr[0];
         String time = strArr[1];
         Deadline deadline = new Deadline(todo, time);
@@ -121,7 +126,7 @@ public class Duke {
     }
 
     public static void handleEvent(String description) {
-        String[] strArr = description.split("/at", 2);
+        String[] strArr = description.split("/at ", 2);
         String todo = strArr[0];
         String time = strArr[1];
         Event event = new Event(todo, time);
@@ -133,7 +138,7 @@ public class Duke {
     }
 
     public static void handleLoad() throws IOException {
-        BufferedReader taskLoader = new BufferedReader(new FileReader(".//text-ui-test/saved-tasks.txt"));
+        BufferedReader taskLoader = new BufferedReader(new FileReader(FILEPATH));
         String longCommand = taskLoader.readLine();
         while (longCommand != null) {
             String[] keywords = longCommand.split(" \\|\\| ");
