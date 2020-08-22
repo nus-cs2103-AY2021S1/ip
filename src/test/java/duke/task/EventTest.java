@@ -3,6 +3,8 @@ package duke.task;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -32,10 +34,14 @@ public class EventTest {
     @Test
     public void happenTodayTest() {
         try {
-            Event e1 = new Event("Project meeting", "2020-08-22 11:30");
+            LocalDateTime today = LocalDateTime.now();
+            String td = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            Event e1 = new Event("Project meeting", td);
             assertEquals(true, e1.happenToday());
 
-            Event e2 = new Event("Project meeting", "2020-08-24 11:30");
+            LocalDateTime newDate = LocalDateTime.now().plusDays(2);
+            String newStr = newDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            Event e2 = new Event("Project meeting", newStr);
             assertEquals(false, e2.happenToday());
         } catch (Exception e) {
             fail();
@@ -57,10 +63,14 @@ public class EventTest {
     @Test
     public void happenBeforeTodayTest() {
         try {
-            Event e1 = new Event("Project meeting", "2020-08-22 11:30");
+            LocalDateTime today = LocalDateTime.now();
+            String td = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            Event e1 = new Event("Project meeting", td);
             assertEquals(false, e1.happenBeforeToday());
 
-            Event e2 = new Event("Project meeting", "2020-08-24 11:30");
+            LocalDateTime newDate = LocalDateTime.now().plusDays(2);
+            String newStr = newDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            Event e2 = new Event("Project meeting", newStr);
             assertEquals(false, e2.happenBeforeToday());
 
             Event e3 = new Event("Project meeting", "2020-08-01 11:30");
@@ -85,10 +95,14 @@ public class EventTest {
     @Test
     public void happenAfterTodayTest() {
         try {
-            Event e1 = new Event("Project meeting", "2020-08-22 11:30");
+            LocalDateTime today = LocalDateTime.now();
+            String td = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            Event e1 = new Event("Project meeting", td);
             assertEquals(false, e1.happenAfterToday());
 
-            Event e2 = new Event("Project meeting", "2020-08-24 11:30");
+            LocalDateTime newDate = LocalDateTime.now().plusDays(2);
+            String newStr = newDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            Event e2 = new Event("Project meeting", newStr);
             assertEquals(true, e2.happenAfterToday());
 
             Event e3 = new Event("Project meeting", "2020-08-01 11:30");
@@ -105,6 +119,20 @@ public class EventTest {
             assertEquals(false, e.happenBetween(LocalDate.parse("2020-08-01"), LocalDate.parse("2020-09-01")));
             assertEquals(true, e.happenBetween(LocalDate.parse("2020-09-01"), LocalDate.parse("2020-09-04")));
             assertEquals(true, e.happenBetween(LocalDate.parse("2020-09-03"), LocalDate.parse("2020-09-03")));
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void happenInTest() {
+        try {
+            LocalDateTime newDate = LocalDateTime.now().plusDays(2);
+            String newStr = newDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            Event e = new Event("Project meeting", newStr);
+            assertEquals(true, e.happenIn(3));
+            assertEquals(true, e.happenIn(2));
+            assertEquals(false, e.happenIn(1));
         } catch (Exception e) {
             fail();
         }
