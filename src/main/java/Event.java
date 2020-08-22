@@ -4,6 +4,9 @@ public class Event extends Task {
                 " (at: " + work.substring(work.indexOf("/") + 4) + ")");
     }
 
+    public Event(String work, String deadline){
+        super(work + "(at:" + deadline);
+    }
     public String toString(){
         return "[E]" + super.toString();
     }

@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -9,11 +12,11 @@ public class Duke {
         System.out.println("_____________________________");
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        ArrayList<Task> list = new ArrayList<>();
+        TaskList list = new TaskList();
         while(!input.equals("bye")){
             System.out.println("_____________________________");
             if (input.equals("list")){
-                print(list);
+                System.out.println(list);
                 System.out.println("_____________________________");
                 input = sc.nextLine();
                 continue;
@@ -25,9 +28,9 @@ public class Duke {
                     try {
                         int index = Integer.parseInt(request[1]);
                         isNumeric(index, list);
-                        list.get(index - 1).updateStatus();
-                        System.out.println("Nice! I've marked this task as done: \n " + list.get(index - 1));
-                        System.out.println("Now you have " + list.size() + " tasks in the list \n_____________________________");
+                        list.updateStatus(index);
+                        System.out.println("Nice! I've marked this task as done: \n " + list.get(index));
+                        System.out.println("Now you have " + list.getSize() + " tasks in the list \n_____________________________");
                         input = sc.nextLine();
                     } catch (NumberFormatException e){
                         System.out.println("You have not provided a valid number\n_____________________________");
@@ -41,8 +44,8 @@ public class Duke {
                         ToDos todo = getTodo(input);
                         System.out.println("Got it. I've added this task:");
                         System.out.println(todo);
-                        list.add(todo);
-                        System.out.println("Now you have " + list.size() + " tasks in the list.\n_____________________________");
+                        list.update(todo);
+                        System.out.println("Now you have " + list.getSize() + " tasks in the list.\n_____________________________");
                         input = sc.nextLine();
                     } catch (EmptyTodoException ex){
                         System.out.println("Oops!!! I'm sorry, but the description of a todo cannot be empty\n_____________________________");
@@ -53,8 +56,8 @@ public class Duke {
                         Deadline deadline = getDeadline(input);
                         System.out.println("Got it. I've added this task:");
                         System.out.println(deadline);
-                        list.add(deadline);
-                        System.out.println("Now you have " + list.size() + " tasks in the list.");
+                        list.update(deadline);
+                        System.out.println("Now you have " + list.getSize() + " tasks in the list.");
                         System.out.println("_____________________________");
                         input = sc.nextLine();
                     } catch (InvalidDeadlineException ex){
@@ -67,8 +70,8 @@ public class Duke {
                         Event event = getEvent(input);
                         System.out.println("Got it. I've added this task:");
                         System.out.println(event);
-                        list.add(event);
-                        System.out.println("Now you have " + list.size() + " tasks in the list.");
+                        list.update(event);
+                        System.out.println("Now you have " + list.getSize() + " tasks in the list.");
                         System.out.println("_____________________________");
                         input = sc.nextLine();
                     } catch (InvalidEventException ex){
@@ -80,9 +83,9 @@ public class Duke {
                     try {
                         int index = Integer.parseInt(request[1]);
                         isNumeric(index, list);
-                        System.out.println("The event has been removed as per your request: \n " + list.get(index - 1));
-                        list.remove(index - 1);
-                        System.out.println("Now you have " + list.size() + " tasks in the list+ \n_____________________________");
+                        System.out.println("The event has been removed as per your request: \n " + list.get(index));
+                        list.delete(index);
+                        System.out.println("Now you have " + list.getSize() + " tasks in the list+ \n_____________________________");
                         input = sc.nextLine();
                     } catch (NumberFormatException e){
                         System.out.println("You have not provided a valid number\n_____________________________");
@@ -97,12 +100,22 @@ public class Duke {
                 input = sc.nextLine();
             }
         }
+
+        try {
+            File file = new File("Data/duke.txt");
+            file.createNewFile();
+            FileWriter writer = new FileWriter(file);
+            writer.write(list.toString());
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("No File found");
+        }
         System.out.println("_____________________________");
         System.out.println("Bye. Hope to see you again soon!\n_____________________________");
     }
 
-    public static void isNumeric(int n, ArrayList<Task> list) throws InvalidNumberException{
-        if (list.size() < n || n <= 0){
+    public static void isNumeric(int n, TaskList list) throws InvalidNumberException{
+        if (list.getSize() < n || n <= 0){
             throw new InvalidNumberException("The number provided is bigger tha the list size");
         }
     }

@@ -4,6 +4,10 @@ public class Deadline extends Task {
                 " (by: " + work.substring(work.indexOf("/") + 4) + ")");
     }
 
+    public Deadline(String work, String end){
+        super(work + "(by: " + end);
+    }
+
     public String toString(){
         return "[D]" + super.toString();
     }
