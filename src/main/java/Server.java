@@ -1,14 +1,30 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class Server {
-    ArrayList<Task> taskList = new ArrayList<>();
+import java.io.File;
+import java.io.FileWriter;
 
+public class Server {
+    private ArrayList<Task> taskList;
+
+    public Server()  {
+        try {
+            this.taskList = FileHandler.load();
+        } catch (IOException e) {
+            taskList = new ArrayList<>();
+        }
+    }
     private void add(Task newTask) {
         StringBuilder out = new StringBuilder();
+
         this.taskList.add(newTask);
+
         out.append("Got it. I've added this task: ").append("\n\t\t")
                 .append(newTask.toString()).append("\n\t")
                 .append(String.format("Now you have %d tasks in the list.\n",taskList.size()));
+
+        FileHandler.save(this.taskList);
+
         System.out.print(Duke.formatOut(out.toString()));
     }
 
@@ -29,6 +45,7 @@ public class Server {
         out.append("Noted. I've removed this task: ").append("\n\t\t")
                 .append(removed.toString()).append("\n\t")
                 .append(String.format("Now you have %d tasks in the list.\n",taskList.size()));
+        FileHandler.save(this.taskList);
         System.out.print(Duke.formatOut(out.toString()));
     }
 
@@ -51,35 +68,37 @@ public class Server {
                         throw new DescriptionEmptyException(s[0]);
                     }
                 }
+
+                //Judge the action and execute
                 switch (s[0]) {
-                    case "todo":
-                        this.add(new Todo(s[1]));
-                        break;
-                    case "deadline": {
-                        String[] set = s[1].split(" /by ");
+                case "todo":
+                    this.add(new Todo(s[1]));
+                    break;
+                case "deadline": {
+                    String[] set = s[1].split(" /by ");
 
-                        if (set.length == 1) {
-                            throw new TimeEmptyException("deadline");
-                        }
+                    if (set.length == 1) {
+                        throw new TimeEmptyException("deadline");
+                    }
 
-                        this.add(new Deadline(set[0], set[1]));
+                    this.add(new Deadline(set[0], set[1]));
 
-                        break;
+                    break;
+                }
+                case "event": {
+                    String[] set = s[1].split(" /at ");
+                    if (set.length == 1) {
+                        throw new TimeEmptyException("event");
                     }
-                    case "event": {
-                        String[] set = s[1].split(" /at ");
-                        if (set.length == 1) {
-                            throw new TimeEmptyException("event");
-                        }
-                        this.add(new Event(set[0], set[1]));
-                        break;
-                    }
-                    case "delete": {
-                        this.delete(Integer.parseInt(s[1]) - 1);
-                        break;
-                    }
-                    default:
-                        throw new AmbiguousInputException();
+                    this.add(new Event(set[0], set[1]));
+                    break;
+                }
+                case "delete": {
+                    this.delete(Integer.parseInt(s[1]) - 1);
+                    break;
+                }
+                default:
+                    throw new AmbiguousInputException();
                 }
             }
         } catch (Exception e ) {
