@@ -1,0 +1,3 @@
+todo, 1, watch CS2105 Lecture 2
+event, 1, zoom meeting/atWednesday 10pm
+todo, 1, buy groceries
