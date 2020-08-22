@@ -1,5 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
 
@@ -8,15 +10,21 @@ public class Event extends Task {
     LocalTime endTime;
 
     public Event(String taskName, String date) {
+        // date format must be in YYYY-MM-DD e.g. 2020-08-22
+        // time format must by in XX:XX-YY:YY e.g. 14:00-16:00
         super(taskName.stripTrailing());
         String[] arr = date.split(" ");
         String eventDate = arr[0];
         String[] eventTime = arr[1].split("-");
         String eventStartTime = eventTime[0];
         String eventEndTime = eventTime[1];
-        this.date = LocalDate.parse(eventDate);
-        this.startTime = LocalTime.parse(eventStartTime);
-        this.endTime = LocalTime.parse(eventEndTime);
+        try {
+            this.date = LocalDate.parse(eventDate);
+            this.startTime = LocalTime.parse(eventStartTime);
+            this.endTime = LocalTime.parse(eventEndTime);
+        } catch (DateTimeParseException e) {
+            System.out.println("Date and time is in the wrong format");
+        }
     }
 
     @Override
@@ -26,7 +34,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + date + " " + startTime + " - " + endTime + ")";
+        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + startTime + " - " + endTime + ")";
     }
 
 }

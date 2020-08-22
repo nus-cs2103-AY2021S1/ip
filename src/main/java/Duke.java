@@ -77,6 +77,7 @@ public class Duke {
         sc.close();
     }
 
+    // example of event: event meeting /at 2020-08-22 14:00-16:00
     public static void handleEvent(String input) throws DukeException {
         // since input is confirmed to have "event", just need to ensure that stripped input > 5 letters
         // input needs to be stripped to prevent trailing whitespaces eg. "deadline    "
@@ -93,6 +94,7 @@ public class Duke {
         }
     }
 
+    // example of deadline: deadline return book /by 2020-08-22
     public static void handleDeadline(String input) throws DukeException {
         // since input is confirmed to have "deadline", just need to ensure that stripped input > 8 letters
         // input needs to be stripped to prevent trailing whitespaces eg. "deadline    "
@@ -109,6 +111,7 @@ public class Duke {
         }
     }
 
+    // example of To do: to do return book
     public static void handleToDo(String input) throws DukeException {
         // since input is confirmed to have "to do", just need to ensure that stripped input > 4 letters
         // input needs to be stripped to prevent trailing whitespaces eg. "deadline    "
