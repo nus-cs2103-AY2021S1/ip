@@ -7,7 +7,7 @@ import dependencies.dukeexceptions.*;
  * ends/closes program, terminating it immediately.
  *
  */
-class DK {
+class Ui {
     private static final String DIVIDER = "____________________________________________________________\n";
     private static final String GREETING = "Hello, I'm Duke\nwhat can I do for you?\n";
     private static final String LOGO = " ____        _        \n"
