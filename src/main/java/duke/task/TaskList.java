@@ -90,6 +90,11 @@ public class TaskList {
         tasks.remove(index - 1);
     }
 
+    /**
+     * Finds the tasks that have the keyword.
+     *
+     * @param keyword the keyword to be searched for.
+     */
     public void findTask(String keyword) {
         int index = 1;
         System.out.println("Here are the matching tasks in your list:");
