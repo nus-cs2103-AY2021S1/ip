@@ -22,25 +22,33 @@ public class Duke {
             String userInput = scanner.nextLine();
             String[] input = userInput.split(" ");
             int len = userInput.length();
+            Command command;
             try {
-                switch (input[0]) {
-                    case ("bye"):
+                //parse input into string -> enum
+                try {
+                    String com = input[0].toString();
+                    command = Command.valueOf(com.toUpperCase());
+                } catch (NullPointerException | IllegalArgumentException ex) {
+                    throw new DukeException("You have keyed in an invalid command!\n(Valid commands: todo, deadline, event, list, delete, bye, done)");
+                }
+                switch (command) {
+                    case BYE:
                         System.out.println(line);
                         System.out.println(bot + "Goodbye! Hope to see you again soon! ^_^");
                         System.out.println(line);
                         break;
-                    case ("list"):
+                    case LIST:
                         if (userInput.equals("list")) {
                             showTaskList(tasks);
                         } else {
                             throw new DukeException("You have keyed in an invalid format for command 'list'!");
                         }
                         break;
-                    case ("done"):
+                    case DONE:
                         int pos = Integer.parseInt(userInput.substring(5, len));
                         taskIsDone(tasks, pos);
                         break;
-                    case ("todo"):
+                    case TODO:
                         if (!userInput.substring(4).isBlank()) { //if got space behind, it will add also
                             ToDo todo = new ToDo(userInput.substring(5));
                             tasks.add(todo); //adds into tasks list
@@ -55,7 +63,7 @@ public class Duke {
                             throw new DukeException("The description of a todo cannot be empty!");
                         }
                         break;
-                    case ("deadline"):
+                    case DEADLINE:
                         if (!userInput.substring(8).isBlank()) {
                             try {
 //                                int indexOfSlash = userInput.indexOf('/');
@@ -79,7 +87,7 @@ public class Duke {
                             throw new DukeException("The description of a deadline cannot be empty!");
                         }
                         break;
-                    case ("event"):
+                    case EVENT:
                         if (!userInput.substring(5).isBlank()) {
                             try {
 //                                int indexOfSlash = userInput.indexOf('/');
@@ -103,7 +111,7 @@ public class Duke {
                             throw new DukeException("The description of an event cannot be empty!");
                         }
                         break;
-                    case ("delete"):
+                    case DELETE:
                         if (!userInput.substring(6).isBlank()) {
                             try {
                                 String toDelete = userInput.substring(7);
@@ -127,7 +135,7 @@ public class Duke {
                         }
                         break;
                     default:
-                        throw new DukeException("You have keyed in an invalid command!\n(Valid commands: todo, deadline, event, list, delete, bye)");
+                        throw new DukeException("You have keyed in an invalid command!\n(Valid commands: todo, deadline, event, list, delete, bye, done)");
                 }
             } catch (DukeException ex) {
                 System.out.println(line);
