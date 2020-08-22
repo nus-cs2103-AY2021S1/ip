@@ -20,12 +20,12 @@ delete 2
 list
 deadline cs2101 email /by 2020-08-31
 event family party /at 2020-08-31 19:00
-happen on today
-happen on 2020-08-31
 done 1
 list
 done 2
 list
+happen on today
+happen on 2020-08-31
 happen error
 happen before today
 happen before 2020-09-01
