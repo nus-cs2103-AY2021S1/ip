@@ -143,6 +143,7 @@ public class Duke {
         return this.storage.remove(i-1);
     }
 
+    //TODO: add exception for out of bounds index
     public void doTask(String params) throws DukeInputException {
         if (params.equals("")) {
             throw new DukeInputException("'done' requires parameters.\n" +
@@ -155,7 +156,7 @@ public class Duke {
             throw new DukeInputException("Please input number instead of <" + params + "> after a 'done' command!");
         }
 
-        Task temp = this.taskManager.getTask(i);
+        Task temp = this.taskManager.getTask(i-1);
         temp.doTask();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("\t" + temp.toString());
@@ -185,7 +186,7 @@ public class Duke {
         }
 
         //TODO: Throw DukeInputException for wrong out of bounds index
-        Task temp = this.taskManager.removeTask(i);
+        Task temp = this.taskManager.removeTask(i-1);
         System.out.println("Alright. I've removed this task:");
         System.out.println("\t" + temp.toString());
         System.out.println("Now you have " + this.taskManager.size() + " tasks in the list.");
