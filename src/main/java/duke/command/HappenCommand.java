@@ -24,11 +24,13 @@ public class HappenCommand extends Command {
                         date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " ");
             } else if (description.equals("before today")) {
                 ui.printList(list, Task::happenBeforeToday, "happening before today ");
-            } else if (description.equals("before ")) {
-                LocalDate date = LocalDate.parse(description.substring(3),
+            } else if (description.startsWith("before ")) {
+                LocalDate date = LocalDate.parse(description.substring(7),
                         DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 ui.printList(list, t -> t.happenBeforeDate(date), "happening before " +
                         date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " ");
+            } else if (description.equals("after today")) {
+
             } else {
                 throw new InvalidCommandException("Invalid happen command input");
             }
