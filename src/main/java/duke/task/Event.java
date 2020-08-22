@@ -25,6 +25,11 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean happenBeforeDate(LocalDate date) {
+        return atTime.toLocalDate().isBefore(date);
+    }
+
+    @Override
     public String output() {
         return "E" + super.output() + " | At: " +
                 atTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\n";
