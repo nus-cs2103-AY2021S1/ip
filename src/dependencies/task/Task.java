@@ -1,8 +1,10 @@
 package dependencies.task;
 
+import java.io.Serializable;
+
 import static dependencies.task.CompletionState.*;
 
-public abstract class Task {
+public abstract class Task implements Serializable {
     protected CompletionState state;
     protected String task;
 
