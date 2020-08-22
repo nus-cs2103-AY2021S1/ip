@@ -17,7 +17,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * return to do information to be stored locally.
+     * Return to do information to be stored locally.
      * @return to do information
      */
     @Override

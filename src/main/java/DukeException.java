@@ -1,6 +1,5 @@
 /**
- * Thrown to indicate that an exception with duke
- * has occurred.
+ * Thrown to indicate that an exception with duke has occurred.
  *
  * @author YanCheng
  */

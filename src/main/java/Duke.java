@@ -1,6 +1,6 @@
 /**
  * Duke class.
- * Driver class for Duke
+ * Driver class for Duke.
  *
  * @author YanCheng
  */
@@ -14,7 +14,7 @@ public class Duke {
 
 
     /**
-     * greeting used by Duke.
+     * Greeting used by Duke.
      */
     public static void greet() {
         System.out.println("    ____________________________________________________________");
@@ -25,7 +25,7 @@ public class Duke {
     }
 
     /**
-     * farewell used by Duke.
+     * Farewell used by Duke.
      */
     public static void exit() {
         System.out.println("    ____________________________________________________________");

@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 /**
  * Storage class.
- * Used to read and write files to the hard drive
- * whenever the task list is edited.
+ * Used to read and write files to the hard drive whenever the task list is edited.
+ * Will read and write to ./data/duke.txt.
  *
  * @author YanCheng
  */
@@ -60,7 +60,7 @@ public class Storage {
     }
 
     /**
-     * Initialises the TaskList if there is an existing duke.txt
+     * Initialises the TaskList if there is an existing duke.txt.
      */
     public void init() {
         File directory = new File(DIRECTORY_NAME);

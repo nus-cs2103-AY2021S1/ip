@@ -29,7 +29,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * return deadline information to be stored locally.
+     * Return deadline information to be stored locally.
      * @return deadline information
      */
     @Override

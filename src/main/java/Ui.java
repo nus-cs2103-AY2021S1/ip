@@ -13,7 +13,7 @@ public class Ui {
     public Parser parser;
 
     /**
-     * Constructor for Ui class
+     * Constructor for Ui class.
      * @param taskList A TaskList object
      * @param storage A Storage object
      * @param parser A Parser object
