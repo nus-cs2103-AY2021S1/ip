@@ -20,7 +20,7 @@ public class Deadline extends Task {
     public String getStatusWithIndex() {
         int idx = this.description.indexOf('/');
         String task = this.description.substring(0, idx);
-        String end = new StringBuilder(this.description.substring(idx + 1)).insert(2,':').toString();
+        String end = String.format("by: %s", this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a")));
         return String.format("%s. %s%s%s(%s)", index, super.type, isDone ? super.done : super.start, task, end);
     }
     @Override

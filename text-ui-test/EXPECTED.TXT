@@ -7,6 +7,7 @@ FAILURE: Unable to load data from local drive.
 Got it. I've added this task:
    [T][✘] borrow book
 Now you have 1 tasks in the list.
+12
 ---------------------------------------------------
 Got it. I've added this task:
    [D][✘] return book (by: 2019-10-15 18:00)
@@ -17,7 +18,7 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.
 ---------------------------------------------------
 1. [T][✘] borrow book
-2. [D][✘] return book (by: 2019-10-15 18:00)
+2. [D][✘] return book (by: Oct 15 2019, 6:00 pm)
 3. [E][✘] interview at Google (at: Jan 31 2021, 9:00 pm)
 ---------------------------------------------------
 FAILURE: The description of your event is empty.
@@ -35,7 +36,7 @@ Nice! I have marked this task as done:
   [✓] run
 ---------------------------------------------------
 1. [T][✘] borrow book
-2. [D][✘] return book (by: 2019-10-15 18:00)
+2. [D][✘] return book (by: Oct 15 2019, 6:00 pm)
 3. [E][✓] interview at Google (at: Jan 31 2021, 9:00 pm)
 4. [✘] workout
 5. [✓] run
@@ -48,7 +49,7 @@ Noted. I've removed this task:
 Now you have 4 tasks in the list.
 ---------------------------------------------------
 1. [T][✘] borrow book
-2. [D][✘] return book (by: 2019-10-15 18:00)
+2. [D][✘] return book (by: Oct 15 2019, 6:00 pm)
 3. [✘] workout
 4. [✓] run
 ---------------------------------------------------

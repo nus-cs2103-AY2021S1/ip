@@ -23,7 +23,7 @@ public class Event extends Task {
         int idx = this.description.indexOf('/');
         String task = this.description.substring(0, idx);
         String end = String.format("at: %s", this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a")));
-        return String.format("%s. %s%s%s(%s)", index, TaskType.EVENT, isDone ? super.done : super.start, task, end);
+        return String.format("%s. %s%s%s(%s)", index, super.type, isDone ? super.done : super.start, task, end);
     }
     @Override
     public String toString() {
