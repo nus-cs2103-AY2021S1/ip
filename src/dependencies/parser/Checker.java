@@ -139,6 +139,7 @@ class Checker {
         String l2 = line.toUpperCase(Locale.UK);
         int idx = l2.indexOf(c2);
         return line.substring(idx + cmd.length()).trim();
+
     }
 
     private boolean isTodo(String s) {return false;}
@@ -152,12 +153,15 @@ class Checker {
     /**
      * Instead of parsing just natural language, this function will be able to parse a natural sentence.
      * eg. "I have a meeting on Monday." -> "event meeting /at Monday"
+     * Remember to edit this only in the branch "add-ons".
      *
      * @param s
      * @return
      */
     private static Checker parseNaturalLanguage(String s) {
+
         return new Checker(null);
+
     }
 
 }

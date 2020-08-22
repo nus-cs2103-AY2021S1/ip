@@ -29,7 +29,7 @@ public abstract class Task {
         return state == COMPLETED;
     }
 
-    /* -------------------------- Static facory methods to create different Tasks ----------------------- */
+    /* -------------------------- Static factory methods to create different Tasks ----------------------- */
 
     public static Task createMiscTask(String task) { return new DoneTask(task); }
 
@@ -50,6 +50,7 @@ public abstract class Task {
     }
 
     /* ----------------------------------------- Subclasses--------------------------------------------- */
+
     private static class EmptyTask extends Task{
         private EmptyTask() {
             super(null);
