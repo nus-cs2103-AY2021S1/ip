@@ -1,7 +1,8 @@
 package exception;
 
-import exception.DukeException;
-
+/**
+ * Represents an exceptions stating the command is not defined.
+ */
 public class UnknownCommandException extends DukeException {
     @Override
     public String toString() {

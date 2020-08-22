@@ -11,12 +11,26 @@ import task.Task;
 import java.io.IOException;
 import java.util.Arrays;
 
+/**
+ * Represents a <code>Command</code> whose task is deleting a <code>Task</code> from the <code>TaskList</code>.
+ * The <code>DeleteCommand</code> object contains an array of <code>String</code> which is an array
+ * containing a command and the argument of the command (if any).
+ */
 public class DeleteCommand extends Command {
 
     public DeleteCommand(String[] splitCommand) {
         super(splitCommand);
     }
 
+    /**
+     * Deletes the <code>Task</code> from <code>tasks</code> and <code>storage</code>.
+     *
+     * @param tasks  Task list of the Duke.
+     * @param ui Ui of the Duke.
+     * @param storage Storage of the Duke.
+     * @throws DukeException If failed to save to <code>storage</code>, no command argument provided in
+     * <code>splitCommand</code>, or invalid command argument.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             String oneBasedIndex = splitCommand[1];
@@ -33,6 +47,11 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Returns false to indicate not to exit the Duke.
+     *
+     * @return false.
+     */
     public boolean isExit() {
         return false;
     }

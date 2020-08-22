@@ -1,5 +1,6 @@
 package duke;
 
+import exception.DukeException;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -14,15 +15,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents a <code>Storage</code> object that deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
-    String dataDirectoryPath;
-    String savedFilePath;
+    private String dataDirectoryPath;
+    private String savedFilePath;
 
     public Storage(String dataDirectoryPath, String savedFilePath) {
         this.dataDirectoryPath = dataDirectoryPath;
         this.savedFilePath = savedFilePath;
     }
 
+    /**
+     * Returns a List of <code>Task</code> loaded from the file containing the saved tasks.
+     *
+     * @return a List of <code>Task</code> loaded from the file containing the saved tasks.
+     * @throws DukeException If failed to load the file containing the saved tasks.
+     */
     public List<Task> loadSavedFile() throws IOException {
 
         File directory = new File(dataDirectoryPath);
@@ -63,6 +73,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes all the <code>Task</code> inside <code>tasks</code> into the destined file.
+     *
+     * @throws DukeException If failed to write the tasks into the destined file.
+     */
     public void save(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(savedFilePath);
         for (Task task : tasks.all()) {

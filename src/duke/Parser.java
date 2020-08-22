@@ -1,7 +1,11 @@
 package duke;
 
 import command.*;
+import exception.DukeException;
 
+/**
+ * Represents a <code>Parser</code> object that deals with making sense of the user command.
+ */
 public class Parser {
     private final static String EXIT_COMMAND = "bye";
     private final static String MARK_DONE_COMMAND = "done";
@@ -11,6 +15,11 @@ public class Parser {
     private final static String EVENT_COMMAND = "event";
     private final static String DELETE_COMMAND = "delete";
 
+    /**
+     * Returns the appropriate <code>Command</code> object according to the <code>fullCommand</code>.
+     *
+     * @return the appropriate <code>Command</code> object according to the <code>fullCommand</code>.
+     */
     public static Command parse(String fullCommand) {
         String[] splitCommand = fullCommand.split(" ", 2);
         switch (splitCommand[0]) {

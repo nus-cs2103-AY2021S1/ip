@@ -1,7 +1,8 @@
 package exception;
 
-import exception.DukeException;
-
+/**
+ * Represents an exception stating the task is not within the list.
+ */
 public class NoSuchTaskException extends DukeException {
     @Override
     public String toString() {
