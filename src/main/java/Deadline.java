@@ -8,12 +8,15 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) {
         super(description);
-        LocalDate dateBy;
+        LocalDate dateBy = null;
         try {
             dateBy = LocalDate.parse(by);
         } catch (DateTimeParseException ex) {
-            System.out.println(ex.getMessage());
-            return;
+            try {
+                dateBy = LocalDate.parse(by, DateTimeFormatter.ofPattern("MMM d yyyy"));
+            } catch (DateTimeParseException exc) {
+                System.out.println(exc.getMessage());
+            }
         }
         this.by = dateBy.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }

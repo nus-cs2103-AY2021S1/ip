@@ -1,37 +1,19 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.FileReader;
-import java.io.BufferedReader;
-
 public class Duke {
-    private static ArrayList<Task> tasks = new ArrayList<>();
-    private static String filePath = System.getProperty("user.dir") + "/data/duke.txt";
+    private static final ArrayList<Task> tasks = new ArrayList<>();
+    private static String filePath = "/data/duke.txt";
     private static Ui ui;
+    private static Storage storage;
 
     public static void readFile() {
-        String folderPath = System.getProperty("user.dir") + "/data";
-        File folder = new File(folderPath);
-        if (folder.mkdir()) {
-            return;
-        }
-        File file = new File(filePath);
-        FileReader fileReader;
+        String folderPath = "/data";
+        storage = new Storage(filePath, folderPath);
         try {
-            fileReader = new FileReader(filePath);
-        } catch (FileNotFoundException ex) {
-            System.out.println(ex.getMessage());
-            return;
-        }
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-        String line;
-        try {
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] taskLine = line.split("~");
+            ArrayList<String> taskList = storage.load();
+            for (String taskString : taskList) {
+                String[] taskLine = taskString.split("~");
                 Task task = null;
                 if (taskLine[0].equals("T")) {
                     task = new ToDo(taskLine[2]);
@@ -47,30 +29,13 @@ public class Duke {
                 }
                 tasks.add(task);
             }
-            bufferedReader.close();
-        } catch (IOException ex) {
+        } catch (DukeException ex) {
             ui.showLoadingError();
         }
     }
 
     public static void writeFile() {
-        File file = new File(filePath);
-        try {
-            file.createNewFile();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-        FileWriter fileWriter;
-        try {
-            fileWriter = new FileWriter(file);
-            for (Task task : tasks) {
-                String taskLine = task.toData();
-                fileWriter.write(taskLine);
-            }
-            fileWriter.close();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
+        storage.save(tasks);
     }
 
     private static void add(String task) throws DukeException{

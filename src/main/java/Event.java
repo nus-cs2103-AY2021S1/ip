@@ -8,15 +8,19 @@ public class Event extends Task {
 
     public Event(String description, String at) {
         super(description);
-        LocalDate dateStart;
-        LocalDate dateEnd;
+        LocalDate dateStart = null;
+        LocalDate dateEnd = null;
+        String[] startEnd = at.split(" to ");
         try {
-            String[] startEnd = at.split(" to ");
             dateStart = LocalDate.parse(startEnd[0]);
             dateEnd = LocalDate.parse(startEnd[1]);
         } catch (DateTimeParseException ex) {
-            System.out.println(ex.getMessage());
-            return;
+            try {
+                dateStart = LocalDate.parse(startEnd[0], DateTimeFormatter.ofPattern("MMM d yyyy"));
+                dateEnd = LocalDate.parse(startEnd[1], DateTimeFormatter.ofPattern("MMM d yyyy"));
+            } catch (DateTimeParseException exc) {
+                System.out.println(exc.getMessage());
+            }
         }
         this.at = dateStart.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + " to "
