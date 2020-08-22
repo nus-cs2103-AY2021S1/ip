@@ -1,6 +1,6 @@
 public class Command {
-    Category category;
-    String description;
+    private Category category;
+    private String description;
 
     public Command(Category category){
         this.category = category;

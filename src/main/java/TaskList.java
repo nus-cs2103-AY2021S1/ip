@@ -4,9 +4,15 @@ public class TaskList {
     ArrayList<Task> taskList = new ArrayList<>();
 
     public void showList(){
+        int counter = 1;
         for(Task task: taskList) {
-            System.out.println(task);
+            System.out.println(counter + ". " + task);
+            counter++;
         }
+    }
+
+    public Task getTask(int index){
+        return taskList.get(index-1);
     }
 
     public void addTask(Task task) {
