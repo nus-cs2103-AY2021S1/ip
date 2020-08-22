@@ -1,9 +1,12 @@
-import java.awt.desktop.SystemSleepEvent;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,7 +18,7 @@ public class Duke {
     private final static String ignoreCase = "(?i)";
 
     enum Command {
-        LIST, DONE, BYE, TODO, DEADLINE, EVENT, DELETE,
+        LIST, DONE, BYE, TODO, DEADLINE, EVENT, DELETE, CHECK
     }
 
     Duke(Path filePath) {
@@ -72,10 +75,10 @@ public class Duke {
             t = new Todo(s.substring(7), isDone);
         } else if (taskType.equals("[D]")){
             int indOfTime = s.lastIndexOf("(FINISH by: ");
-            t = new Deadline(s.substring(7, indOfTime), s.substring(indOfTime + 11, s.lastIndexOf(")")), isDone);
+            t = new Deadline(s.substring(7, indOfTime), s.substring(indOfTime + 11, s.lastIndexOf(")")).trim(), isDone);
         } else {
             int indOfTime = s.lastIndexOf("(APPEAR at: ");
-            t = new Event(s.substring(7, indOfTime), s.substring(indOfTime + 11, s.lastIndexOf(")")), isDone);
+            t = new Event(s.substring(7, indOfTime), s.substring(indOfTime + 11, s.lastIndexOf(")")).trim(), isDone);
         }
         listOfTask.add(t);
     }
@@ -101,7 +104,7 @@ public class Duke {
 
     public void deleteTask(String message) throws DukeException{
         try {
-            int ind = Integer.parseInt(message.substring(6).stripLeading().stripTrailing()) - 1;
+            int ind = Integer.parseInt(message.substring(6).trim()) - 1;
             Task t = listOfTask.get(ind);
             listOfTask.remove(ind);
             Print.print(" *WOOF* I have removed:\n   " + t + "\n" + printTotal());
@@ -164,6 +167,34 @@ public class Duke {
         }
     }
 
+    public void checkDate(String s) throws DukeException{
+        try {
+            String[] inputDate = s.trim().split("/");
+            String formatDate = inputDate[0] + "-" + inputDate[1] + "-" + inputDate[2];
+            LocalDate date = LocalDate.parse(formatDate);
+            int ind = 1;
+            String lines = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
+            System.out.print(lines);
+            for (Task t : listOfTask) {
+                if (t.compareDate(date)) {
+                    if (ind == 1) {
+                        System.out.println(" Here is the list of ongoing events on "
+                                + DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(date) + ":");
+                    }
+                    System.out.println("   " + ind + "." + t.toString());
+                    ind++;
+                }
+            }
+            if (ind == 1) {
+                System.out.println(" You have no event on this day! Have a good break! *Woof*");
+            }
+            System.out.println(lines);
+        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
+            String errMessage = Print.printFormat(" Please enter date in YYYY/MM/DD format! *Woof woof*\n");
+            throw new DukeException(errMessage);
+        }
+    }
+
     public static void main(String[] args) throws DukeException {
         Scanner input = new Scanner(System.in);
         Duke duke = Duke.createDuke();
@@ -177,9 +208,11 @@ public class Duke {
                     break;
                 } else if (query.matches(ignoreCase + Command.LIST.name())) {
                     duke.printToDos();
-                } else if (query.matches(ignoreCase + Command.DONE.name() +"(.*)")) {
+                } else if (query.matches(ignoreCase + Command.DONE.name() + "(.*)")) {
                     int taskInd = Integer.parseInt(query.substring(5));
                     duke.markAsDone(taskInd - 1);
+                } else if (query.matches(ignoreCase + Command.CHECK.name() + "(.*)")) {
+                    duke.checkDate(query.substring(5));
                 } else {
                     duke.checkAction(query);
                 }
