@@ -1,6 +1,10 @@
 /*
  * Duke is a retired old uncle who likes to speak in Singlish.
  */
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.Scanner;
 
@@ -25,7 +29,7 @@ public class Duke {
         System.out.println(bye);
     }
 
-    private void addTask(String input) throws NotTaskException, NoDescriptionException {
+    private void addTask(String input) throws NotTaskException, NoDescriptionException, InvalidDateAndTimeException {
         //Here, we do the classification & processing of tasks: to-do/deadline/event
         //input is from String from user
         //this function also processes the incorrect inputs by users
@@ -36,14 +40,26 @@ public class Duke {
             tsk = new Todo(input.replaceFirst(content[0] + " ", ""));
         } else if (content[0].toLowerCase().equals("deadline")) {
             if (content.length < 2) throw new NoDescriptionException(content[0]);
-            String[] splitBySlash = input.split("/");
-            tsk = new Deadline(splitBySlash[0].replaceFirst(content[0] + " ", ""),
-                    splitBySlash[1].replaceFirst("by ", ""));
+            try {
+                LocalDate deadlineDate = LocalDate.parse(content[content.length - 2], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                LocalTime deadlineTime = LocalTime.parse(content[content.length - 1], DateTimeFormatter.ofPattern("HHmm"));
+                String[] splitBySlash = input.split("/");
+                tsk = new Deadline(splitBySlash[0].replaceFirst(content[0] + " ", ""), deadlineDate, deadlineTime);
+            } catch (DateTimeParseException e) {
+                throw new InvalidDateAndTimeException();
+            }
         } else if (content[0].toLowerCase().equals("event")) {
             if (content.length < 2) throw new NoDescriptionException(content[0]);
-            String[] splitBySlash = input.split("/");
-            tsk = new Event(splitBySlash[0].replaceFirst(content[0] + " ", ""),
-                    splitBySlash[1].replaceFirst("at ", ""));
+            try {
+                LocalDate eventDate = LocalDate.parse(content[content.length - 2], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                LocalTime startTime = LocalTime.parse(content[content.length - 1].split("-")[0], DateTimeFormatter.ofPattern("HHmm"));
+                LocalTime endTime = LocalTime.parse(content[content.length - 1].split("-")[1], DateTimeFormatter.ofPattern("HHmm"));
+                String[] splitBySlash = input.split("/");
+                tsk = new Event(splitBySlash[0].replaceFirst(content[0] + " ", ""),
+                        eventDate, startTime, endTime);
+            } catch (DateTimeParseException e) {
+                throw new InvalidDateAndTimeException();
+            }
         } else {
             throw new NotTaskException();
         }
@@ -117,7 +133,7 @@ public class Duke {
                     //process input
                     try {
                         addTask(input);
-                    } catch (NotTaskException | NoDescriptionException e) {
+                    } catch (NotTaskException | NoDescriptionException  | InvalidDateAndTimeException e) {
                         System.out.println(e);
                     }
                 }
