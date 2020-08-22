@@ -1,9 +1,15 @@
 public class Event extends Task {
+    public static final String STORE_EVENT = "E";
     private static final String DELIMITER = " /at ";
     private String dateInfo;
 
-    private Event(String description, String dateInfo) {
+    public Event(String description, String dateInfo) {
         super(description);
+        this.dateInfo = dateInfo;
+    }
+
+    public Event(String description, String dateInfo, boolean isComplete) {
+        super(description, isComplete);
         this.dateInfo = dateInfo;
     }
 
@@ -14,6 +20,11 @@ public class Event extends Task {
         } else {
             return new Event(argsList[0], argsList[1]);
         }
+    }
+
+    @Override
+    public String toStorageString() {
+        return STORE_EVENT + " | " + description + " | " + dateInfo + " | " + getCompletionFlagStorage();
     }
 
     @Override
