@@ -7,7 +7,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner myObj = new Scanner(System.in);
         ArrayList<Task> taskList = new ArrayList<Task>();
-        String msgDivider = "____________________________________________________________";
+        String MSG_DIVIDER = "____________________________________________________________";
         System.out.println("Hello I'm batman\n");
 
         while (myObj.hasNext()) {
@@ -31,15 +31,16 @@ public class Duke {
                     String digitsOnlyInput = input.replaceAll("[^0-9]", "");
                     if (digitsOnlyInput.isEmpty()) {
                         throw new DukeException("Specify the task number to delete e.g. delete 12");
+                    } else {
+                        int taskNumberToMark = Integer.parseInt(digitsOnlyInput);
+                        if (taskNumberToMark > taskList.size() | taskNumberToMark < 1) {
+                            throw new DukeException("There is no such task number.");
+                        }
+                        Task taskToMark = taskList.get(taskNumberToMark - 1);
+                        taskToMark.markAsDone();
+                        System.out.println("Nicely done. I've marked this task as done:" +
+                                "\n" + taskToMark);
                     }
-                    int taskNumberToMark = Integer.parseInt(digitsOnlyInput);
-                    if (taskNumberToMark > taskList.size() | taskNumberToMark < 1 ) {
-                        throw new DukeException("There is no such task number.");
-                    }
-                    Task taskToMark = taskList.get(taskNumberToMark - 1);
-                    taskToMark.markAsDone();
-                    System.out.println("Nicely done. I've marked this task as done:" +
-                            "\n" + taskToMark);
                 } else if (taskCategory.equals("delete")) {
                     String digitsOnlyInput = input.replaceAll("[^0-9]", "");
                     if (digitsOnlyInput.isEmpty()) {
@@ -53,9 +54,8 @@ public class Duke {
                     String remainingTasksMsg = "\nNow you have " + taskList.size() + " tasks in the list.";
                     System.out.println("Noted. I've removed this task:\n" + taskToMark + remainingTasksMsg);
                 } else {
-                    boolean invalidTask = !taskCategory.equals("todo") &&
-                            !taskCategory.equals("event") &&
-                            !taskCategory.equals("deadline");
+                    boolean invalidTask = !(taskCategory.equals("todo") || taskCategory.equals("event")
+                            || taskCategory.equals("deadline"));
                     if (invalidTask) {
                         throw new CommandNotFoundException();
                     }
@@ -91,7 +91,7 @@ public class Duke {
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             } finally {
-                System.out.println(msgDivider);
+                System.out.println(MSG_DIVIDER);
             }
         }
         System.out.println("Bye bye");
