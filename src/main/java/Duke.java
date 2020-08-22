@@ -11,17 +11,11 @@ public class Duke {
      */
     private static ArrayList<Task> taskList = new ArrayList<>();
 
-    /**
-     * Prints Duke's welcome message.
-     */
     private static void welcome() {
         printOutput("     Hello! I'm Duke\n"
                 + "     What can I do for you?", true);
     }
 
-    /**
-     * Wraps input in dashes.
-     */
     private static void printOutput(String input, boolean hasLastNewLine) {
         if (hasLastNewLine) {
             System.out.println("    ____________________________________________________________\n"
@@ -40,9 +34,8 @@ public class Duke {
      * @param input String input from user.
      * @return returns boolean of whether or not to continue.
      */
-    private static boolean inputHandler(String input) {
+    private static boolean handleInput(String input) {
         // TODO: do this (exit) in a more elegant way, else boolean method would violate coding standards
-        Task task;
         String second;
         int index;
 
@@ -58,7 +51,7 @@ public class Duke {
             case DONE:
                 second = parts[1];
                 index = Integer.parseInt(second);
-                done(index);
+                markAsDone(index);
                 return true;
             case TODO:
                 // Fallthrough
@@ -77,7 +70,7 @@ public class Duke {
                 deleteTask(index);
                 return true;
             case BYE:
-                exit();
+                doExit();
                 return false;
             default:
                 return true;
@@ -88,6 +81,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Takes in task info and command and calls respective handler (e.g. handle event).
+     *
+     * @param inputs Task info, after removing first word from user input.
+     * @param command Command (e.g. Event), first word from user input.
+     * @throws DukeException If deadline date not input for deadline, or event date not input for event.
+     */
     private static void handleTask(String[] inputs, Command command) throws DukeException {
         try {
             String taskInfo = inputs[1];
@@ -136,10 +136,7 @@ public class Duke {
         }
     }
 
-    /**
-     * Does all necessary actions before exiting.
-     */
-    private static void exit() {
+    private static void doExit() {
         printOutput("     Bye. Hope to see you again soon!", true);
     }
 
@@ -180,7 +177,7 @@ public class Duke {
         printOutput(output.toString(), false);
     }
 
-    private static void done(int index) {
+    private static void markAsDone(int index) {
         Task task = taskList.get(index - 1);
         task.setDone(true);
         String output = "     Nice! I've marked this task as done: \n"
@@ -198,7 +195,7 @@ public class Duke {
 
         while (true) {
             String input = scanner.nextLine();
-            boolean shouldContinue = inputHandler(input);
+            boolean shouldContinue = handleInput(input);
             if (!shouldContinue) {
                 break;
             }
