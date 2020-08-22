@@ -1,3 +1,8 @@
-todo, 1, watch CS2105 Lecture 2
-event, 1, zoom meeting/atWednesday 10pm
-todo, 1, buy groceries
+todo, 0, cs2105 lecture
+event, 0, cs2030 TA meeting/at24-8-2020 16:00
+deadline, 0, cs2030/by27-8-2020 9:00
+event, 0, test/at27-8-2020 7:00
+event, 0, test/at27-8-2020 7:00
+event, 0, test/at27-8-2020 7:00
+event, 0, test/at27-8-2020 7:00
+event, 0, test/at7-8-2020 7:00

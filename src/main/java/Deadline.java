@@ -1,18 +1,16 @@
-public class Deadline extends Task {
-    private String datetime;
+public class Deadline extends TimedTask {
 
-    public Deadline(String description, String date) {
-        super(description);
-        this.datetime = date;
+    public Deadline(String description, String datetime) {
+        super(description, datetime);
     }
 
     @Override
-    public String textFormat() {
-        return "deadline, " + super.textFormat() + "/by" + this.datetime;
+    protected String textFormat() {
+        return "deadline, " + super.textFormat() + "/by" + this.datetime.format(Deadline.inputFormatter);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.datetime + ")";
+        return "[D]" + super.toString() + " (by: " + super.datetimeString() + ")";
     }
 }
