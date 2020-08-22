@@ -82,7 +82,7 @@ public class ListOfItems {
             }
         } else if (input.contains("deadline")) {
             try {
-                String[] info = input.split("/");
+                String[] info = input.split("/", 2);
                 String description = info[0].substring(9);
                 String dueDateTime = info[1];
 
@@ -102,7 +102,7 @@ public class ListOfItems {
             }
         } else if (input.contains("event")) {
             try {
-                String[] info = input.split("/");
+                String[] info = input.split("/", 2);
                 String description = info[0].substring(6);
                 String duration = info[1];
 
