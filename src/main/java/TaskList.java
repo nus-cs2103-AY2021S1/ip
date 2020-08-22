@@ -1,7 +1,7 @@
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class TaskList {
     private ArrayList<Task> list = new ArrayList<>();
@@ -41,6 +41,16 @@ public class TaskList {
         this.list.add(task);
         return task;
     }
+
+    /*
+    public String tasksOn(String dateString) { // input of form "dd-MM-yyyy"
+        String output = "";
+        LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        ArrayList<Task> timedTasks = new ArrayList<>(this.list);
+        timedTasks.removeIf(i -> i instanceof Todo);
+        for (Task i: task)
+    }
+     */
 
     public Task markAsDone(int i) throws DukeException {
         try {

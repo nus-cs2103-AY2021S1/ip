@@ -15,6 +15,7 @@ public abstract class Task {
         return this;
     }
 
+
     @Override
     public String toString() {
         String status = this.done ? "[✓]" : "[✗]";
