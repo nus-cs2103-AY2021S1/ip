@@ -22,9 +22,18 @@ public class DateTime extends TimePoint{
 
     @Override
     public String toString() {
-        String text = date.format(DateTimeFormatter.ofPattern("dd MMMM yyyy", new Locale("en")));
+        String text = this.date.format(DateTimeFormatter.ofPattern("dd MMMM yyyy", new Locale("en")));
         if (haveTime) {
-            text += " " + time.format(DateTimeFormatter.ofPattern("h:mma", new Locale("en")));
+            text += " " + this.time.format(DateTimeFormatter.ofPattern("h:mma", new Locale("en")));
+        }
+        return text;
+    }
+
+    @Override
+    public String toSaveString() {
+        String text = this.date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy", new Locale("en")));
+        if (haveTime) {
+            text += " " + this.time.format(DateTimeFormatter.ofPattern("HH:mm", new Locale("en")));
         }
         return text;
     }

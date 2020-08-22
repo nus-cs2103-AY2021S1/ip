@@ -11,7 +11,7 @@ public class Event extends Task {
 
     public Event(String name, String when, boolean done) {
         super(name, done);
-        this.when = when;
+        this.when = TimePoint.of(when);
     }
 
     @Override
@@ -23,7 +23,7 @@ public class Event extends Task {
     public HashMap<String, String> convertToHashMap() {
         HashMap<String, String> dict = super.convertToHashMap();
         dict.put("type", "Event");
-        dict.put("when", this.when);
+        dict.put("when", this.when.toSaveString());
         return dict;
     }
 }

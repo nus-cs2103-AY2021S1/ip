@@ -1,4 +1,6 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
@@ -30,14 +32,6 @@ public class Duke {
 
         //initializes storage with save data
         try {
-            /*
-            File saveFile = new File("/data/data.txt");
-            Scanner sc = new Scanner(saveFile);
-            SaveManager sm = new SaveManager();
-            while (sc.hasNext()) {
-                storage.add(sm.loadTaskFromSave(sc.nextLine()));
-            }
-            */
             BufferedReader br = Files.newBufferedReader(filePath); //new BufferedReader(new FileReader("/data/data22.txt"));
             SaveManager sm = new SaveManager();
             String currLine = br.readLine();
@@ -49,13 +43,11 @@ public class Duke {
             try {
                 Files.createFile(filePath);
             } catch (IOException e2) {
-                //System.out.println("Unable to create new Data File");
-                //System.out.println(e2.toString());
                 try {
                     Files.createDirectory(filePath.getParent());
                     Files.createFile(filePath);
                 } catch (Exception e3) {
-                    System.out.println("Unable to create new Data File Again");
+                    System.out.println("Unable to create new Data File");
                     System.out.println(e2.toString());
                     System.out.println(e3.toString());
                 }

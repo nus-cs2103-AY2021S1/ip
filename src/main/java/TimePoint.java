@@ -22,4 +22,8 @@ public class TimePoint {
     public String toString() {
         return this.timePoint;
     }
+
+    public String toSaveString() {
+        return this.timePoint;
+    }
 }
