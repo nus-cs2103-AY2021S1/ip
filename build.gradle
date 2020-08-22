@@ -40,6 +40,11 @@ run{
     standardInput = System.in
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'Duke'
+    }
+}
 
 test {
     // Use junit platform for unit tests
