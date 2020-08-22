@@ -100,7 +100,7 @@ public class Duke {
             try {
 
                 String[] deadlineSplit = valArr[1].split("/by");
-                Deadline newTask = new Deadline(deadlineSplit[0], deadlineSplit[1]);
+                Deadline newTask = new Deadline(deadlineSplit[0], deadlineSplit[1].strip());
                 tasks.add(newTask);
                 System.out.println("Got it~ I've added this task:\n"
                         + newTask + "\n" + "You now have " + tasks.size() + " tasks in the list~");
@@ -116,7 +116,7 @@ public class Duke {
         } else {
             try {
                 String[] eventSplit = valArr[1].split("/at");
-                Event newTask = new Event(eventSplit[0], eventSplit[1]);
+                Event newTask = new Event(eventSplit[0], eventSplit[1].strip());
                 tasks.add(newTask);
                 System.out.println("Got it~ I've added this task:\n"
                         + newTask + "\n" + "You now have " + tasks.size() + " tasks in the list~");
