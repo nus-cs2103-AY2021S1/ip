@@ -1,6 +1,6 @@
 package duke.parser;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import duke.exception.DukeException;
 import duke.task.Deadline;
@@ -31,13 +31,13 @@ public class StorageParser {
 
     private Deadline createDeadline(String[] storageTask) throws DukeException {
         boolean isCompleted = storageTask[1].equals(IS_COMPLETED);
-        LocalDate dateTime = Datetime.parseDateTimeString(storageTask[3], Deadline.DATE_FORMAT_OUTPUT);
+        LocalDateTime dateTime = Datetime.parseDateTimeString(storageTask[3], Deadline.DATE_FORMAT_OUTPUT);
         return new Deadline(storageTask[2], isCompleted, dateTime);
     }
 
     private Event createEvent(String[] storageTask) throws DukeException {
         boolean isCompleted = storageTask[1].equals(IS_COMPLETED);
-        LocalDate time = Datetime.parseDateTimeString(storageTask[3], Event.TIME_FORMAT_OUTPUT);
+        LocalDateTime time = Datetime.parseTimeString(storageTask[3], Event.TIME_FORMAT_OUTPUT);
         return new Event(storageTask[2], isCompleted, time);
     }
 

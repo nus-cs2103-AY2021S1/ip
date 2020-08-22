@@ -9,14 +9,19 @@ public abstract class Task {
     protected static String TICK = "\u2713";
     protected static String CROSS = "\u2717";
 
-    Task(String description, boolean completed) {
+    Task(String description, boolean isCompleted) {
         this.description = description;
-        this.isCompleted = completed;
+        this.isCompleted = isCompleted;
     }
 
     public String toStringSuffix() {
         String symbol = this.isCompleted ? TICK : CROSS;
         return String.format("[%s] %s", symbol, this.description);
+    }
+
+    protected boolean isEqual(Task task) {
+        return this.description.equals(task.getTaskDescription()) &&
+                this.isCompleted == task.isTaskCompleted();
     }
 
     public void completeTask() {

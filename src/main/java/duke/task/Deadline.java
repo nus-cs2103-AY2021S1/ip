@@ -3,7 +3,7 @@ package duke.task;
 import duke.utils.Datetime;
 
 import java.util.Optional;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Deadline extends Task {
     private final Datetime datetime;
@@ -14,12 +14,12 @@ public class Deadline extends Task {
     public static final String DEADLINE_BREAK = "/by";
     public static final int COMMAND_LENGTH = 2;
 
-    public Deadline(String description, boolean isCompleted, LocalDate datetime) {
+    public Deadline(String description, boolean isCompleted, LocalDateTime datetime) {
         super(description, isCompleted);
         this.datetime = new Datetime(datetime, DATE_FORMAT_INPUT, DATE_FORMAT_OUTPUT);
     }
 
-    public static Deadline createDeadline(String description , LocalDate datetime) {
+    public static Deadline createDeadline(String description , LocalDateTime datetime) {
         return new Deadline(description, false, datetime);
     }
 
@@ -28,6 +28,17 @@ public class Deadline extends Task {
         String stringDateTime = this.datetime.getOutputDatetimeString();
         String byDatetime = String.format("(by: %s)", stringDateTime);
         return "[" + DEADLINE_SYMBOL + "]" + toStringSuffix() + " " + byDatetime;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (other instanceof Deadline) {
+            Deadline otherDeadline = (Deadline) other;
+            return this.isEqual(otherDeadline);
+        }
+        return false;
     }
 
     @Override
