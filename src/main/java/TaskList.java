@@ -24,7 +24,7 @@ public class TaskList {
                 }
             }
         } catch (FileNotFoundException e) {
-            throw new DukeException("Text file not found.");
+            throw new DukeException("Sorry, " + e.getMessage());
         }
     }
 
@@ -38,7 +38,7 @@ public class TaskList {
             fw.write(text);
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("Text file not found.");
+            throw new DukeException("Sorry, " + e.getMessage());
         }
     }
 
