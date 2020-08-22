@@ -1,6 +1,9 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Scanner;
 
 public class FileLoader {
@@ -25,11 +28,13 @@ public class FileLoader {
                 Scanner sc = new Scanner(f);
                 while (sc.hasNextLine()) {
                     String line = sc.nextLine();
-                    String[] parsed = line.split(" ");
+                    String[] parsed = line.split("\\|");
 
                     String command = parsed[0];
                     if (TaskStatus.hasTime(command)) {
-                        taskManager.getTasks().add(new Task(parsed[1], command, parsed[2]));
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+                        LocalDate ld = LocalDate.parse(parsed[2], formatter);
+                        taskManager.getTasks().add(new Task(parsed[1], command, ld));
                     } else {
                         taskManager.getTasks().add(new Task(parsed[1], command));
                     }
@@ -46,8 +51,8 @@ public class FileLoader {
             FileWriter writer = new FileWriter(filePath);
 
             for (Task task : taskManager.getTasks()) {
-                writer.write(task.getStatus() + " " + task.getContent() +
-                        (TaskStatus.hasTime(task.getStatus()) ? " " + task.getTime() : "") + System.lineSeparator());
+                writer.write(task.getStatus() + "|" + task.getContent() +
+                        (TaskStatus.hasTime(task.getStatus()) ? "|" + task.getTime() : "") + System.lineSeparator());
             }
             writer.close();
             Messenger.close();

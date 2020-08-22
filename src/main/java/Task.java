@@ -18,6 +18,12 @@ public class Task {
         this.time = LocalDate.parse(time);
     }
 
+    public Task(String content, String status, LocalDate time) {
+        this.content = content;
+        this.status = TaskStatus.valueOfStatus(status);
+        this.time = time;
+    }
+
     public String getContent() {
         return content;
     }
