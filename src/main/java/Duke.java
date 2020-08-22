@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -5,11 +9,13 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Duke {
+    static final String SAVE_FILE = "save.txt";
+
     public static void main(String[] args) {
         System.out.println("Famed, of course, for my unique red skin and unparalleled skills as a general of the House of War, I, the Red Prince, was raised within the vast palaces of the fabled Forbidden City. I was destined to become the next emperor, but my ambitions suffered a bit of a setback when I fell from grace for cavorting with demons. Now I'm exiled and hunted by assassins, but I assure you: I remain undaunted - and as determined as ever to claim my rightful throne!");
 
         Scanner sc = new Scanner(System.in);
-        List<Task> taskList = new ArrayList<>();
+        List<Task> taskList = loadFile();
 
         String input = sc.nextLine();
         while (true) {
@@ -18,6 +24,7 @@ public class Duke {
             switch (task) {
             case "bye":
                 System.out.println("*You take your leave.*");
+                saveFile(taskList);
                 return;
             case "list":
                 System.out.println("Here's the extent of our list so far:");
@@ -45,7 +52,7 @@ public class Duke {
                     Todo newTodo = new Todo(name);
                     taskList.add(newTodo);
                     System.out.println("Fine. I added the following to the list: " + newTodo);
-                } catch (DukeException |NoSuchElementException e) {
+                } catch (DukeException | NoSuchElementException e) {
                     System.out.println(e);
                 }
                 break;
@@ -95,6 +102,70 @@ public class Duke {
             }*/
 
             input = sc.nextLine();
+        }
+    }
+
+    private static List<Task> loadFile() {
+        List<Task> taskList = new ArrayList<>();
+
+        try {
+            File save = new File(SAVE_FILE);
+            Scanner saveSc = new Scanner(save);
+            while (saveSc.hasNextLine()) {
+                String taskString = saveSc.nextLine();
+                Task loadedTask = stringToTask(taskString);
+                taskList.add(loadedTask);
+            }
+            saveSc.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("save.txt not found. Creating empty list.");
+        } catch (DukeException e) {
+            System.out.println(e);
+        }
+
+        return taskList;
+    }
+
+    private static Task stringToTask(String taskString) throws DukeException{
+        Task newTask;
+
+        Scanner taskSc = new Scanner(taskString);
+        String taskType = taskSc.next();
+        String taskCompletion = taskSc.next();
+        String taskDesc = taskSc.nextLine().trim();
+
+        switch (taskType) {
+        case "[TODO]":
+            newTask = new Todo(taskDesc);
+            break;
+        case "[DEADLINE]":
+            String[] nameAndDeadline = taskDesc.split(" \\| by: ");
+            newTask = new Deadline(nameAndDeadline[0], nameAndDeadline[1]);
+            break;
+        case "[EVENT]":
+            String[] nameAndEvent = taskDesc.split(" \\| at: ");
+            newTask = new Event(nameAndEvent[0], nameAndEvent[1]);
+            break;
+        default:
+            throw new DukeException("Loading task failed: unrecognized task type: " + taskType);
+        }
+
+        if (taskCompletion.equals("[✓]")) {
+            newTask.markDone();
+        }
+
+        return newTask;
+    }
+
+    private static void saveFile(List<Task> taskList) {
+        try {
+            FileWriter save = new FileWriter(SAVE_FILE);
+            for (Task task : taskList) {
+                save.write(task.toString() + "\n");
+            }
+            save.close();
+        } catch (IOException e) {
+            System.out.println("Saving failed!");
         }
     }
 }

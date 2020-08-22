@@ -4,15 +4,15 @@ Fine. I added the following to the list: [DEADLINE][✗] poot | by: tis
 Fine. I added the following to the list: [EVENT][✗] bonk | at: omic punch
 Fine. I added the following to the list: [TODO][✗] cap
 Here's the extent of our list so far:
-1. [DEADLINE][✗] poot | by: tis
-2. [EVENT][✗] bonk | at: omic punch
-3. [TODO][✗] cap
+1. [DEADLINE] [✗] poot | by: tis
+2. [EVENT] [✗] bonk | at: omic punch
+3. [TODO] [✗] cap
 What's that? Please mention one of "list", "done", "todo", "deadline", "event", or "bye".
-Right. This task is now marked as done:[EVENT][✓] bonk | at: omic punch
-Right. This task is now marked as done:[TODO][✓] cap
+Right. This task is now marked as done:[EVENT] [✓] bonk | at: omic punch
+Right. This task is now marked as done:[TODO] [✓] cap
 Hmm? Please mention "done" followed by the number of the task we're marking as done.
 Here's the extent of our list so far:
-1. [DEADLINE][✗] poot | by: tis
-2. [EVENT][✓] bonk | at: omic punch
-3. [TODO][✓] cap
+1. [DEADLINE] [✗] poot | by: tis
+2. [EVENT] [✓] bonk | at: omic punch
+3. [TODO] [✓] cap
 *You take your leave.*
