@@ -5,11 +5,18 @@ event
 event  /at time
 event name /at  
 event name /at time
+event name /at 2020-12-12 23:59
+event name /at 2020-12-12
+event name /at 2020-12-13 2359
 deadline
 deadline  /by time
 deadline name /by  
 deadline name /by time
+deadline name /by 2020-12-12 23:59
+deadline name /by 2020-12-13
+deadline name /by 2020-12-12 2359
 list
+date 2020-12-12
 done 999
 done 1
 done 2

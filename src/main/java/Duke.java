@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -6,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Duke {
 
@@ -78,6 +81,22 @@ public class Duke {
         tasks.add(task);
         return String.format("Got it. I've added this task: \n%s\nNow you have %d tasks in the list",
                 task.toString(), tasks.size());
+    }
+    
+    private static String taskListToDateFilteredString(List<Task> tasks, String dateString) throws DukeException {
+        LocalDate date;
+        
+        try {
+            date = LocalDate.parse(dateString);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("DateTime format is invalid.");
+        }
+        
+        List<Task> temp = tasks.stream()
+                .filter(task -> task.isOnSameDay(date))
+                .collect(Collectors.toList());
+        
+        return convertTaskListToString(temp);
     }
     
     private static void loadDataFromStorage(Path filePath, List<Task> tasks) throws DukeException, IOException {
@@ -168,6 +187,9 @@ public class Duke {
                     return;
                 case LIST:
                     printToConsole(convertTaskListToString(tasks));
+                    break;
+                case DATE:
+                    printToConsole(taskListToDateFilteredString(tasks, argument));
                     break;
                 case DONE:
                     printToConsole(markTaskAsDone(tasks, Integer.parseInt(inputList[1])));

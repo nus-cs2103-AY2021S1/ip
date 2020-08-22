@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public abstract class Task {
 
     protected String taskData;
@@ -9,6 +11,10 @@ public abstract class Task {
 
     public void competeTask() {
         isDone = true;
+    }
+    
+    public boolean isOnSameDay(LocalDate localDate) {
+        return false;
     }
     
     public abstract String generateStorageString();
