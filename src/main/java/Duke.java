@@ -57,13 +57,11 @@ public class Duke {
                 } else if (message.equals("list")) {
                     retrieveList();
                 } else if (function.equals("done")) {
-                    int index = Integer.parseInt(message.split(" ")[1]);
-                    completeTask(index);
+                    completeTask(message);
                 } else if (function.equals("todo") || function.equals("deadline") || function.equals("event")){
                     createTask(message);
                 } else if (function.equals("delete")) {
-                    int index = Integer.parseInt(message.split(" ")[1]);
-                    deleteTask(index);
+                    deleteTask(message);
                 } else {
                     handleFailedFunction();
                 }
@@ -94,8 +92,9 @@ public class Duke {
         }
     }
 
-    public void completeTask(int index) throws InvalidTaskException, InvalidFunctionException {
+    public void completeTask(String message) throws InvalidTaskException, InvalidFunctionException {
         try {
+            int index = Integer.parseInt(message.split(" ")[1]);
             if (index > this.tasks.size()) {
                 String err = "Invalid Task! The task does not exist, try again.";
                 throw new InvalidTaskException(err);
@@ -115,13 +114,15 @@ public class Duke {
             String err = "No Task ID provided! Please input the ID of the task you wish to mark as completed.";
             throw new InvalidFunctionException(err);
         } catch (NumberFormatException ex) {
-            String err = "Your input is not a recognised command. Input '/commands' to view a list of my commands. ";
+            String err = "Your input is not a recognised command. You have to provide the ID of " +
+                    "the task you wish to mark as done. \n" + "Input '/commands' to view a list of my commands. ";
             throw new InvalidFunctionException(err);
         }
     }
 
-    public void deleteTask(int index) throws InvalidTaskException, InvalidFunctionException {
+    public void deleteTask(String message) throws InvalidTaskException, InvalidFunctionException {
         try {
+            int index = Integer.parseInt(message.split(" ")[1]);
             if (index > this.tasks.size()) {
                 String err = "Invalid Task! The task does not exist, try again.";
                 throw new InvalidTaskException(err);
@@ -139,7 +140,8 @@ public class Duke {
             String err = "No Task ID provided! Please input the ID of the task you wish to delete.";
             throw new InvalidFunctionException(err);
         } catch (NumberFormatException ex) {
-            String err = "Your input is not a recognised command. Input '/commands' to view a list of my commands. ";
+            String err = "Your input is not a recognised command. You have to provide the ID of " +
+                    "the task you wish to delete. \n" + "Input '/commands' to view a list of my commands. ";
             throw new InvalidFunctionException(err);
         }
     }
@@ -160,69 +162,96 @@ public class Duke {
     }
 
     public void createTask(String message) throws InvalidTaskException {
+        String[] taskInfo = retrieveTaskInfo(message);
+        System.out.println("  Success! This " + taskInfo[0] + " task has been added:");
+        if (taskInfo[0].equals("todo")) {
+            Task toAdd = new Todo(taskInfo[1]);
+            this.tasks.add(toAdd);
+            System.out.println("\t" + toAdd);
+        } else if (taskInfo[0].equals("deadline")) {
+            Task toAdd = new Deadline(taskInfo[1], taskInfo[2]);
+            this.tasks.add(toAdd);
+            System.out.println("\t" + toAdd);
+        } else if (taskInfo[0].equals("event")) {
+            Task toAdd = new Event(taskInfo[1], taskInfo[2]);
+            this.tasks.add(toAdd);
+            System.out.println("\t" + toAdd);
+        }
+        System.out.println("  You have " + this.tasks.size() + " tasks in your list now.");
+    }
+
+    public String[] retrieveTaskInfo(String message) throws InvalidTaskException {
+        String[] taskInfo = new String[3];
         String taskType = message.split(" ")[0];
         String description = "";
         String time = "";
-        try {
-            if (taskType.equals("todo")) {
-                description = message.split("todo")[1];
-                if (taskChecker("todo", description, time)) {
-                    Task toAdd = new Todo(description);
-                    this.tasks.add(toAdd);
-                    System.out.println("  Success! This todo task has been added:");
-                    System.out.println("\t" + toAdd);
-                    System.out.println("  You have " + this.tasks.size() + " tasks in your list now.");
-                } else {
-                    String err = "Your todo task does not have a description. \n" +
-                            "Type '/commands' to view the correct command for task creation! ";
+
+        if (taskType.equals("todo")) {
+            String[] task = message.split("todo");
+            if (task.length == 0) {
+                String err = "Your todo task description is empty. The task cannot be created.\n" +
+                        "Type '/commands' to view the correct command for task creation! ";
+                throw new InvalidTaskException(err);
+            } else {
+                description = task[1];
+            }
+        } else if (taskType.equals("deadline")) {
+            String[] task = message.split("deadline");
+            if (task.length == 0) {
+                String err = "Your deadline task has missing arguments and has an incorrect format. " +
+                        "The task cannot be created.\n" +
+                        "Type '/commands' to view the correct command for task creation! ";
+                throw new InvalidTaskException(err);
+            } else if (!task[1].contains("/by")) {
+                String err = "Your deadline task does not have the correct format. The task cannot be created.\n" +
+                        "Type '/commands' to view the correct command for task creation!";
+                throw new InvalidTaskException(err);
+            } else {
+                String[] taskInputArray = task[1].split("/by");
+                if (taskInputArray.length == 0 || taskInputArray[0].isBlank()) {
+                    String err = "Your deadline task is missing a description. " +
+                            "The task cannot be created. Please try again!";
                     throw new InvalidTaskException(err);
-                }
-            } else if (taskType.equals("deadline")) {
-                String taskInfo = message.split("deadline")[1];
-                String[] taskArray = taskInfo.split("/by");
-                description = taskArray[0];
-                time = taskArray[1];
-                if (taskChecker("deadline", description, time)) {
-                    Task toAdd = new Deadline(description, time);
-                    this.tasks.add(toAdd);
-                    System.out.println("  Success! This deadline task has been added:");
-                    System.out.println("\t" + toAdd);
-                    System.out.println("  You have " + this.tasks.size() + " tasks in your list now.");
-                } else {
-                    String err = "Your deadline task is missing a description. Please try again! \n" +
-                            "Type '/commands' to view the correct command for task creation! ";
+                } else if (taskInputArray.length == 1){
+                    String err = "Your deadline task is missing a time stamp. " +
+                            "The task cannot be created. Please try again!";
                     throw new InvalidTaskException(err);
-                }
-            } else if (taskType.equals("event")) {
-                String taskInfo = message.split("event")[1];
-                String[] taskArray = taskInfo.split("/at");
-                description = taskArray[0];
-                time = taskArray[1];
-                if (taskChecker("event", description, time)) {
-                    Task toAdd = new Event(description, time);
-                    this.tasks.add(toAdd);
-                    System.out.println("  Success! This event task has been added:");
-                    System.out.println("\t" + toAdd);
-                    System.out.println("  You have " + this.tasks.size() + " tasks in your list now.");
                 } else {
-                    String err = "Your event task is missing a description. Please try again! \n" +
-                            "Type '/commands' to view the correct command for task creation! ";
-                    throw new InvalidTaskException(err);
+                    description = taskInputArray[0];
+                    time = taskInputArray[1];
                 }
             }
-        } catch (ArrayIndexOutOfBoundsException ex) {
-            String err = "Your " + taskType + " task description is empty and/or is missing a time stamp. " +
-                    "The task cannot be created. \n " + "Type '/commands' to view the correct command for task creation.";
-            throw new InvalidTaskException(err);
+        } else if (taskType.equals("event")) {
+            String[] task = message.split("event");
+            if (task.length == 0) {
+                String err = "Your event task has missing arguments and has an incorrect format. " +
+                        "The task cannot be created.\n" +
+                        "Type '/commands' to view the correct command for task creation! ";
+                throw new InvalidTaskException(err);
+            } else if (!task[1].contains("/at")) {
+                String err = "Your event task does not have the correct format. The task cannot be created.\n" +
+                        "Type '/commands' to view the correct command for task creation!";
+                throw new InvalidTaskException(err);
+            } else {
+                String[] taskInputArray = task[1].split("/at");
+                if (taskInputArray.length == 0 || taskInputArray[0].isBlank()) {
+                    String err = "Your event task is missing a description. " +
+                            "The task cannot be created. Please try again!";
+                    throw new InvalidTaskException(err);
+                } else if (taskInputArray.length == 1){
+                    String err = "Your event task is missing a time stamp. " +
+                            "The task cannot be created. Please try again!";
+                    throw new InvalidTaskException(err);
+                } else {
+                    description = taskInputArray[0];
+                    time = taskInputArray[1];
+                }
+            }
         }
-    }
-
-    public boolean taskChecker(String taskType, String description, String time) {
-        if (taskType.equals("todo")) {
-            return !description.isBlank();
-        } else {
-            return !description.isBlank() && !time.isBlank();
-        }
+        taskInfo[0] = taskType;
+        taskInfo[1] = description;
+        taskInfo[2] = time;
+        return taskInfo;
     }
 
     public void end() {
