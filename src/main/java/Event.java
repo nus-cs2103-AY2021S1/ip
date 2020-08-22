@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    protected LocalDateTime at;
+    private final LocalDateTime at;
 
     public Event(String description, LocalDateTime at) {
         super(description);
@@ -10,7 +10,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String taskToText() {
+    protected String taskToText() {
         return "E|" + super.completed + "|" + super.taskName + "|" + at;
     }
 

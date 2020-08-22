@@ -12,7 +12,7 @@ public class Storage {
         this.path = System.getProperty("user.dir") + "/data/duke.txt";
     }
 
-    public static void createFolder() {
+    protected static void createFolder() {
         String folderPath = System.getProperty("user.dir") + "/data";
         File folder = new File(folderPath);
         boolean isSuccessful = folder.mkdir();
@@ -23,7 +23,7 @@ public class Storage {
         }
     }
 
-    public boolean retrieveTextFile() {
+    protected boolean retrieveTextFile() {
         boolean hasTextFile = false;
         try {
             File data = new File(path);
@@ -40,7 +40,7 @@ public class Storage {
         return hasTextFile;
     }
 
-    public ArrayList<String> loadData() {
+    protected ArrayList<String> loadData() {
         String task;
         ArrayList<String> taskList = new ArrayList<>();
         try {
@@ -58,7 +58,7 @@ public class Storage {
         return taskList;
     }
 
-    public void saveData(ArrayList<Task> taskList) {
+    protected void saveData(ArrayList<Task> taskList) {
         try {
             FileWriter fileWriter = new FileWriter(path);
             for (Task item : taskList) {

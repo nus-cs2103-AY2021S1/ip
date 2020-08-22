@@ -4,7 +4,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String taskToText() {
+    protected String taskToText() {
         return "T|" + super.completed + "|" + super.taskName;
     }
 

@@ -1,9 +1,9 @@
 public class ExitCommand extends Command {
-    public boolean isExit() {
+    protected boolean isExit() {
         return true;
     }
 
-    public void execute(String input, TaskList taskList, Storage storage) throws DukeException {
-
+    protected void execute(String input, TaskList taskList, Storage storage) {
+        return;
     }
 }

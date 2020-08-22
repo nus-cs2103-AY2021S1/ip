@@ -8,11 +8,11 @@ public class AddCommand extends Command {
         this.taskType = taskType;
     }
 
-    public boolean isExit() {
+    protected boolean isExit() {
         return false;
     }
 
-    public void execute(String input, TaskList taskList, Storage storage) throws DukeException {
+    protected void execute(String input, TaskList taskList, Storage storage) throws DukeException {
         String information;
         switch (taskType) {
         case "todo": {

@@ -11,7 +11,7 @@ public class TaskList {
     public TaskList(ArrayList<String> tasks) {
         this.taskList = new ArrayList<>();
         for (String task : tasks) {
-            taskList.add(Task.textToTask(task));
+            taskList.add(Parser.textToTask(task));
         }
     }
 

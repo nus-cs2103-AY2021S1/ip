@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    protected LocalDateTime by;
+    private final LocalDateTime by;
 
     public Deadline(String description, LocalDateTime by) {
         super(description);
@@ -10,7 +10,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String taskToText() {
+    protected String taskToText() {
         return "D|" + super.completed + "|" + super.taskName + "|" + by;
     }
 
