@@ -18,8 +18,8 @@ public class DoneOperation extends Operation {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         Task completed = this.taskList.completeTask(this.index);
-        System.out.println("You have completed this task:\n" + completed);
+        return "You have completed this task:\n" + completed;
     }
 }

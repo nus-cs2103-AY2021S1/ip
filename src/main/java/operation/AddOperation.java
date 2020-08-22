@@ -20,12 +20,11 @@ public abstract class AddOperation extends Operation {
     public abstract Task createTask();
 
     @Override
-    public void execute() {
+    public String execute() {
         Task newTask = createTask();
         this.taskList.addTask(newTask);
-        System.out.println("I have added the task:\n" + newTask);
-        String capacity = String.format("You now have %d tasks.",
-                this.taskList.getCurrCapacity());
-        System.out.println(capacity);
+        String status = "I have added the task:\n" + newTask + "\n"
+                + String.format("You now have %d tasks.", this.taskList.getCurrCapacity());
+        return status;
     }
 }

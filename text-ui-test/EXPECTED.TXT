@@ -87,11 +87,11 @@ Apologies. Ensure an indication of '/by' after a deadline command.
 ---------------------------------------------------------
 
 ---------------------------------------------------------
-Apologies. Ensure the datetime you have passed in is of the form: 'HHmm'.
+Apologies. Ensure the datetime passed in is of the form: 'HHmm'.
 ---------------------------------------------------------
 
 ---------------------------------------------------------
-Apologies. Ensure the datetime you have passed in is of the form: 'dd-MM-yyyy HHmm'.
+Apologies. Ensure the datetime passed in is of the form: 'dd-MM-yyyy HHmm'.
 ---------------------------------------------------------
 
 ---------------------------------------------------------

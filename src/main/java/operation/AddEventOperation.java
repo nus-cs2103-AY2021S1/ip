@@ -1,9 +1,9 @@
 package operation;
 
+import java.util.Date;
+
 import task.TaskList;
 import task.Event;
-
-import java.util.Date;
 
 public class AddEventOperation extends AddOperation {
     private final Date time;

@@ -15,8 +15,7 @@ public class ListOperation extends Operation {
     }
 
     @Override
-    public void execute() {
-        System.out.println("Here are your tasks:");
-        this.taskList.printTaskList();
+    public String execute() {
+        return "Here are your tasks:\n" + this.taskList.toString();
     }
 }

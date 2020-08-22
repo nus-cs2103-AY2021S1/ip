@@ -30,7 +30,7 @@ public class TaskStorage {
         return new TaskStorage(actualFile);
     }
 
-    public TaskList loadTaskList() {
+    public TaskList loadTaskList() throws DukeException {
         TaskList taskList = new TaskList();
         try {
             Scanner s = new Scanner(this.file);
@@ -38,10 +38,12 @@ public class TaskStorage {
                 Task task = this.storageParser.convertStorageToTask(s.nextLine());
                 taskList.addTask(task);
             }
+            return taskList;
         } catch (DukeException exception) {
-            System.out.println(exception.getMessage());
-        } catch (IOException ignore) {}
-        return taskList;
+            throw exception;
+        } catch (IOException ignore) {
+            return taskList;
+        }
     }
 
     private void writeToFile(String text) throws IOException {

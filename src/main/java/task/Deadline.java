@@ -13,8 +13,8 @@ public class Deadline extends Task {
     public static final String DEADLINE_BREAK = "/by";
     public static final int COMMAND_LENGTH = 2;
 
-    public Deadline(String description, boolean completed, Date datetime) {
-        super(description, completed);
+    public Deadline(String description, boolean isCompleted, Date datetime) {
+        super(description, isCompleted);
         this.datetime = datetime;
     }
 

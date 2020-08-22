@@ -1,5 +1,7 @@
 package parser;
 
+import java.util.Date;
+
 import exception.DukeException;
 import task.Deadline;
 import task.Event;
@@ -7,11 +9,9 @@ import task.Task;
 import task.Todo;
 import utils.Utils;
 
-import java.util.Date;
-
 public class StorageParser {
-    private static final String IS_COMPLETED = "Y";
-    private static final String NOT_COMPLETED = "N";
+    private static final String IS_COMPLETED = "1";
+    private static final String NOT_COMPLETED = "0";
     private static final String DELIMITER = ";";
 
     public String convertTaskToStorage(Task task) {

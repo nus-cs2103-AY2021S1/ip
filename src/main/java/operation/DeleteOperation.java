@@ -18,11 +18,11 @@ public class DeleteOperation extends Operation {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         Task removed = this.taskList.removeTask(this.index);
-        String output = "Noted. I've removed this task:\n"
+        String status = "Noted. I've removed this task:\n"
                 + removed + "\n"
                 + String.format("You now have %d tasks in the list", this.taskList.getCurrCapacity());
-        System.out.println(output);
+        return status;
     }
 }

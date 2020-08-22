@@ -19,12 +19,13 @@ public class ExitOperation extends Operation {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
+        String status = "";
         try {
             this.storage.saveToDisk(this.taskList);
         } catch (DukeException exception) {
-           System.out.println("The list of tasks cannot be saved.");
+           status += "The list of tasks cannot be saved.\n";
         }
-        System.out.println("Goodbye. Hope to see you again soon.");
+        return status + "Goodbye. Hope to see you again soon.";
     }
 }

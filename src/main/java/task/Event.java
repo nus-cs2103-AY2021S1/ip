@@ -13,8 +13,8 @@ public class Event extends Task{
     public static final String EVENT_BREAK = "/at";
     public static final int COMMAND_LENGTH = 2;
 
-    public Event(String description, boolean completed, Date time) {
-        super(description, completed);
+    public Event(String description, boolean isCompleted, Date time) {
+        super(description, isCompleted);
         this.time = time;
     }
 

@@ -19,8 +19,6 @@ import task.TaskList;
 import utils.Utils;
 
 public class CommandParser {
-
-
     private ExitOperation createExitOp(TaskStorage storage, TaskList list) {
         return new ExitOperation(storage, list);
     }

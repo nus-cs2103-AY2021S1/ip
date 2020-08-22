@@ -38,10 +38,16 @@ public class TaskList implements Iterable<Task> {
         return this.taskList.remove(index - 1);
     }
 
-    public void printTaskList() {
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < this.taskList.size(); i++) {
-            String output = String.format("%d. %s", i + 1, this.taskList.get(i));
-            System.out.println(output);
+            String taskLine = String.format("%d. %s", i + 1, this.taskList.get(i));
+            sb.append(taskLine + "\n");
         }
+        if (sb.length() > 0) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        return sb.toString();
     }
 }

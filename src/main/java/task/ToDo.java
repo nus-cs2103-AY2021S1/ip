@@ -6,8 +6,8 @@ public class Todo extends Task {
     public static final String TODO_SYMBOL = "T";
     public static final int COMMAND_LENGTH = 1;
 
-    public Todo(String description, boolean completed) {
-        super(description, completed);
+    public Todo(String description, boolean isCompleted) {
+        super(description, isCompleted);
     }
 
     public static Todo createTodo(String description) {
