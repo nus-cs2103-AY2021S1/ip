@@ -58,7 +58,11 @@ public class AddCommand extends Command {
                 if (words.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
+<<<<<<< HEAD
+                Duke.listArray.add(new ToDo(stringWithoutKeyword));
+=======
                 listArray.add(new ToDo(stringWithoutKeyword));
+>>>>>>> 7cf06867bc1780a8ba55bc5d6537869fa9988b2d
                 break;
             case "deadline":
                 if (words.length == 1 || (words[1].equals("/by") && words.length == 2)) {
@@ -67,7 +71,11 @@ public class AddCommand extends Command {
 
                 date = getDate(stringWithoutKeyword, Deadline.delimiterBy);
                 stringWithoutDelimiter = getWithoutDelimiter(stringWithoutKeyword, Deadline.delimiterBy);
+<<<<<<< HEAD
+                Duke.listArray.add(new Deadline(stringWithoutDelimiter, date));
+=======
                 listArray.add(new Deadline(stringWithoutDelimiter, date));
+>>>>>>> 7cf06867bc1780a8ba55bc5d6537869fa9988b2d
                 break;
             case "event":
                 if (words.length == 1 || (words[1].equals("/at") && words.length == 2)) {
@@ -75,16 +83,26 @@ public class AddCommand extends Command {
                 }
                 date = getDate(stringWithoutKeyword, Event.delimiterAt);
                 stringWithoutDelimiter = getWithoutDelimiter(stringWithoutKeyword, Event.delimiterAt);
+<<<<<<< HEAD
+                Duke.listArray.add(new Event(stringWithoutDelimiter, date));
+=======
                 listArray.add(new Event(stringWithoutDelimiter, date));
+>>>>>>> 7cf06867bc1780a8ba55bc5d6537869fa9988b2d
                 break;
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         // return the last added, which is the latest
+<<<<<<< HEAD
+        return Message.ADDED + Duke.listArray.get((Duke.listArray.size()) - 1) + "\n" +
+                "Now you have " + Duke.listArray.size() +
+                (Duke.listArray.size() == 1 ? " task " : " tasks ")
+=======
         return Message.ADDED + listArray.get((listArray.size()) - 1) + "\n" +
                 "Now you have " + listArray.size() +
                 (listArray.size() == 1 ? " task " : " tasks ")
+>>>>>>> 7cf06867bc1780a8ba55bc5d6537869fa9988b2d
                 + "in the list";
     }
 }
