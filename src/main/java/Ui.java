@@ -1,17 +1,32 @@
 import java.util.Scanner;
 
+/**
+ * UI class.
+ * Handles input from user.
+ *
+ * @author YanCheng
+ */
 public class Ui {
 
     public TaskList taskList;
     public Storage storage;
     public Parser parser;
 
+    /**
+     * Constructor for Ui class
+     * @param taskList A TaskList object
+     * @param storage A Storage object
+     * @param parser A Parser object
+     */
     public Ui(TaskList taskList, Storage storage, Parser parser) {
         this.taskList = taskList;
         this.storage = storage;
         this.parser = parser;
     }
 
+    /**
+     * Prompts user for input and delegates input to Parser.
+     */
     public void echo() {
 
         Scanner sc = new Scanner(System.in);

@@ -1,3 +1,10 @@
+/**
+ * Duke class.
+ * Driver class for Duke
+ *
+ * @author YanCheng
+ */
+
 public class Duke {
 
     public static TaskList taskList = new TaskList();
@@ -6,6 +13,9 @@ public class Duke {
     public static Ui ui = new Ui(taskList, storage, parser);
 
 
+    /**
+     * greeting used by Duke.
+     */
     public static void greet() {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Hello! I'm Duke");
@@ -14,14 +24,19 @@ public class Duke {
         System.out.println();
     }
 
+    /**
+     * farewell used by Duke.
+     */
     public static void exit() {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Bye. Hope to see you again soon!");
         System.out.println("    ____________________________________________________________");
     }
 
-
-
+    /**
+     * Main method of Duke
+     * @param args Unused.
+     */
     public static void main(String[] args) {
 
         greet();

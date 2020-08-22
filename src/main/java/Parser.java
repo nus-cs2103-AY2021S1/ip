@@ -1,13 +1,30 @@
+/**
+ * Parser class.
+ * Used to parse commands input by user.
+ *
+ * @author YanCheng
+ */
+
 public class Parser {
 
     public TaskList taskList;
     public Storage storage;
 
+    /**
+     * Constructor for Parser class.
+     * @param taskList a TaskList object
+     * @param storage a Storage object
+     */
     public Parser(TaskList taskList, Storage storage) {
         this.taskList = taskList;
         this.storage = storage;
     }
 
+    /**
+     * Handles an event input.
+     * @param input Input from user
+     * @throws DukeException If description or date is missing
+     */
     // example of event: event meeting /at 2020-08-22 14:00-16:00
     public void handleEvent(String input) throws DukeException {
         // since input is confirmed to have "event", just need to ensure that stripped input > 5 letters
@@ -26,6 +43,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles a deadline input.
+     * @param input Input from user
+     * @throws DukeException If description or date is missing
+     */
     // example of deadline: deadline return book /by 2020-08-22
     public void handleDeadline(String input) throws DukeException {
         // since input is confirmed to have "deadline", just need to ensure that stripped input > 8 letters
@@ -44,6 +66,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles a to do input.
+     * @param input Input from user
+     * @throws DukeException If description is missing
+     */
     // example of To do: to do return book
     public void handleToDo(String input) throws DukeException {
         // since input is confirmed to have "to do", just need to ensure that stripped input > 4 letters

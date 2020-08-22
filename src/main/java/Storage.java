@@ -4,6 +4,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Storage class.
+ * Used to read and write files to the hard drive
+ * whenever the task list is edited.
+ *
+ * @author YanCheng
+ */
 public class Storage {
 
     public static final String FILENAME = "./data/duke.txt";
@@ -11,6 +18,10 @@ public class Storage {
 
     public TaskList list;
 
+    /**
+     * Constructor for Storage.
+     * @param list A TaskList object
+     */
     public Storage(TaskList list) {
         this.list = list;
     }
@@ -27,6 +38,9 @@ public class Storage {
     //        }
     //    }
 
+    /**
+     * Rewrites duke.txt file to the hard drive.
+     */
     // rewrites duke.txt file by iterating though task list
     // can be used by add, delete and done method
     public void save() {
@@ -45,6 +59,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Initialises the TaskList if there is an existing duke.txt
+     */
     public void init() {
         File directory = new File(DIRECTORY_NAME);
 

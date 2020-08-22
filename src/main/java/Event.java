@@ -3,12 +3,24 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Event class.
+ * Represents a event task.
+ * Extends from Task.
+ *
+ * @author YanCheng
+ */
 public class Event extends Task {
 
     LocalDate date;
     LocalTime startTime;
     LocalTime endTime;
 
+    /**
+     * Constructor for Deadline.
+     * @param taskName name of deadline
+     * @param date date of deadline
+     */
     public Event(String taskName, String date) {
         // date format must be in YYYY-MM-DD e.g. 2020-08-22
         // time format must by in XX:XX-YY:YY e.g. 14:00-16:00
@@ -27,6 +39,10 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * return deadline information to be stored locally.
+     * @return deadline information
+     */
     @Override
     public String getInfo() {
         return String.format("E | %d | %s | %s %s-%s\n", isDone ? 1 : 0, taskName, date.toString(), startTime.toString(), endTime.toString());
