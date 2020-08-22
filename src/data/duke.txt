@@ -1,0 +1,3 @@
+[T][O] task
+[D][O] cs3243 /by monday
+[E][O] cs2101 meeting /at 5pm
