@@ -1,5 +1,10 @@
 package main.java;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,6 +18,7 @@ public class Commands {
 
     public void start() {
         this.greet();
+        WriteData.getPreviousTask(taskList);
 
         Scanner scanner = new Scanner(System.in);
 
@@ -60,9 +66,10 @@ public class Commands {
                 inputs = scanner.nextLine().trim();
             }
         }
+        WriteData.writeToFile(taskList);
     }
 
-    public void markDone(String[] inputs) throws DukeException {
+    private void markDone(String[] inputs) throws DukeException {
         if (inputs.length > 1 && Character.isDigit(inputs[1].charAt(0))) {
             int taskNumber = Character.getNumericValue(inputs[1].charAt(0)) - 1;
             if (!taskList.isEmpty() && taskNumber < taskList.size()) {
@@ -78,11 +85,11 @@ public class Commands {
         }
     }
 
-    public void greet() {
+    private void greet() {
         System.out.println("~ \n Hello I'm the Terminator \n What can I do for you? \n~");
     }
 
-    public void lst() {
+    private void lst() {
         System.out.println("~ \n Here are targets in your kill list: ");
         if (!taskList.isEmpty()) {
             for (int i = 0; i < taskList.size(); i++) {
@@ -93,7 +100,7 @@ public class Commands {
         System.out.println("\n~ ");
     }
 
-    public void addTodo(String[] inputs) throws DukeException {
+    private void addTodo(String[] inputs) throws DukeException {
         if (inputs.length > 1) {
             System.out.println("~ \n Got it. I've added this task: ");
             ToDos toDo = new ToDos(inputs[1]);
@@ -105,7 +112,7 @@ public class Commands {
         }
     }
 
-    public void addDeadline(String[] inputs) throws DukeException {
+    private void addDeadline(String[] inputs) throws DukeException {
         if (inputs.length > 1) {
             String[] stringArray = inputs[1].split("/", 2);
             if (stringArray.length > 1 && stringArray[1].split(" ", 2).length > 1) {
@@ -123,7 +130,7 @@ public class Commands {
         }
     }
 
-    public void addEvent(String[] inputs) throws DukeException {
+    private void addEvent(String[] inputs) throws DukeException {
         if (inputs.length > 1) {
             String[] stringArray = inputs[1].split("/", 2);
             if (stringArray.length > 1 && stringArray[1].split(" ", 2).length > 1) {
@@ -141,7 +148,7 @@ public class Commands {
         }
     }
 
-    public void deleteItem(String[] inputs) throws DukeException {
+    private void deleteItem(String[] inputs) throws DukeException {
         if (inputs.length > 1 && Character.isDigit(inputs[1].charAt(0))) {
             int taskNumber = Character.getNumericValue(inputs[1].charAt(0)) - 1;
             if (!taskList.isEmpty() && taskNumber < taskList.size()) {
@@ -157,7 +164,7 @@ public class Commands {
         }
     }
 
-    public static boolean find(String input) {
+    private static boolean find(String input) {
         for (Input i : Input.values()) {
             if (input.toUpperCase().equals(i.toString())) {
                 return true;
