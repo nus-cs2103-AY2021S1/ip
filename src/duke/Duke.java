@@ -3,11 +3,10 @@ package duke;
 import java.io.IOException;
 
 import command.Command;
+
 import exception.DukeException;
 
 public class Duke {
-
-
     private final String DATA_DIRECTORY = "data";
     private final String SAVED_FILE_PATH = "data/duke.txt";
 
@@ -36,7 +35,7 @@ public class Duke {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                ui.showLine(); // show the divider line ("------")
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
@@ -47,12 +46,5 @@ public class Duke {
             }
         }
     }
-
-
-
-
-
-
-
 }
 

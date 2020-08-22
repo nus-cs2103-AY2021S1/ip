@@ -3,8 +3,10 @@ package command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+
 import exception.DukeException;
 import exception.EmptyTodoException;
+
 import task.Task;
 import task.ToDo;
 
@@ -21,6 +23,7 @@ public class AddToDoCommand extends Command {
         try {
             String description = splitCommand[1];
             Task toAdd = new ToDo(description);
+
             tasks.add(toAdd);
             ui.sayAddedTask(toAdd, tasks.size());
             storage.save(tasks);

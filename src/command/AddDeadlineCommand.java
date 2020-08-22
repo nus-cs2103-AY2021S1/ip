@@ -3,8 +3,10 @@ package command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+
 import exception.DukeException;
 import exception.EmptyDeadlineException;
+
 import task.Deadline;
 import task.Task;
 
@@ -25,7 +27,9 @@ public class AddDeadlineCommand extends Command {
             String argument = splitCommand[1];
             String description = argument.split(" /by ", 2)[0];
             String deadline = argument.split(" /by ", 2)[1];
-            Task toAdd = new Deadline(description, LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
+            Task toAdd = new Deadline(description, LocalDateTime.parse(deadline,
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
+
             tasks.add(toAdd);
             ui.sayAddedTask(toAdd, tasks.size());
             storage.save(tasks);

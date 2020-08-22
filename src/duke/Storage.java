@@ -24,7 +24,6 @@ public class Storage {
     }
 
     public List<Task> loadSavedFile() throws IOException {
-
         File directory = new File(dataDirectoryPath);
         directory.mkdir(); // create the directory if it not existed
 
@@ -40,20 +39,21 @@ public class Storage {
                 String taskType = taskComponents[0];
                 boolean isDone = taskComponents[1].equals("1");
                 String description = taskComponents[2];
-
                 Task toAdd;
                 switch (taskType) {
-                    case "T":
-                        toAdd = new ToDo(description, isDone);
-                        break;
-                    case "D":
-                        toAdd = new Deadline(description, LocalDateTime.parse(taskComponents[3], DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")), isDone);
-                        break;
-                    case "E":
-                        toAdd = new Event(description, LocalDateTime.parse(taskComponents[3], DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")), isDone);
-                        break;
-                    default:
-                        throw new IllegalArgumentException("Saved file contains incorrect format");
+                case "T":
+                    toAdd = new ToDo(description, isDone);
+                    break;
+                case "D":
+                    toAdd = new Deadline(description, LocalDateTime.parse(taskComponents[3],
+                            DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")), isDone);
+                    break;
+                case "E":
+                    toAdd = new Event(description, LocalDateTime.parse(taskComponents[3],
+                            DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")), isDone);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Saved file contains incorrect format");
                 }
                 tasks.add(toAdd);
             }

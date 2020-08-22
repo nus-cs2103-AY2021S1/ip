@@ -3,9 +3,11 @@ package command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+
 import exception.DukeException;
 import exception.EmptyDoneException;
 import exception.NoSuchTaskException;
+
 import task.Task;
 
 import java.io.IOException;
@@ -21,8 +23,8 @@ public class MarkDoneCommand extends Command {
         try {
             String oneBasedIndex = splitCommand[1];
             int zeroBasedIndex = Integer.parseInt(oneBasedIndex) - 1;
-
             Task toMark = tasks.get(zeroBasedIndex);
+
             toMark.markAsDone();
             ui.sayMarkedTask(toMark);
             storage.save(tasks);

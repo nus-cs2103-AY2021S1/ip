@@ -1,12 +1,14 @@
 package duke;
 
 import exception.NoSuchTaskException;
+
 import task.Task;
 
 import java.util.List;
 
 public class TaskList {
     List<Task> tasks;
+
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }

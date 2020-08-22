@@ -25,7 +25,9 @@ public class AddEventCommand extends Command {
             String argument = splitCommand[1];
             String description = argument.split(" /at ", 2)[0];
             String deadline = argument.split(" /at ", 2)[1];
-            Task toAdd = new Event(description, LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
+            Task toAdd = new Event(description, LocalDateTime.parse(deadline,
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
+
             tasks.add(toAdd);
             ui.sayAddedTask(toAdd, tasks.size());
             storage.save(tasks);
