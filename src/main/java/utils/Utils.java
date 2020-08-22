@@ -35,7 +35,10 @@ public final class Utils {
         }
     }
 
-    public static boolean isInteger(String str) {
-        return str.matches("\\d+");
+    public static boolean hasInteger(String[] command, int index) {
+        if (command.length <= index) {
+            return false;
+        }
+        return command[index].matches("\\d+");
     }
 }

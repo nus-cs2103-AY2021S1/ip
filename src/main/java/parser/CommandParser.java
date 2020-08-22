@@ -28,7 +28,7 @@ public class CommandParser {
     }
 
     private DoneOperation createDoneOp(String[] commands, TaskList list) throws DukeException {
-        if (!Utils.isInteger(commands[1])) {
+        if (!Utils.hasInteger(commands, 1)) {
             throw new DukeException("Ensure a number is passed after a done command.");
         }
         int index = Integer.parseInt(commands[1]);
@@ -76,7 +76,7 @@ public class CommandParser {
     }
 
     private DeleteOperation createDeleteOp(String[] commands, TaskList list) throws DukeException {
-        if (!Utils.isInteger(commands[1])) {
+        if (!Utils.hasInteger(commands, 1)) {
             throw new DukeException("Ensure a number is passed after a delete command.");
         }
         int index = Integer.parseInt(commands[1]);
