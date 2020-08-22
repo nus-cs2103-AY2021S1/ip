@@ -134,6 +134,7 @@ public class Duke {
                             | IndexOutOfBoundsException ex) {
                         throw new DukeException("☹ OOPS!!! The task number is not valid.");
                     }
+                    saveTasks();
                     break;
                 case DELETE:
                     try {
@@ -144,6 +145,7 @@ public class Duke {
                             | IndexOutOfBoundsException ex) {
                         throw new DukeException("☹ OOPS!!! The task number is not valid.");
                     }
+                    saveTasks();
                     break;
                 case TODO:
                     try {
@@ -152,6 +154,7 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
                     printAddTask(tasks.get(tasks.size() - 1));
+                    saveTasks();
                     break;
                 case DEADLINE:
                     try {
@@ -161,6 +164,7 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! The description or date of a deadline cannot be empty.");
                     }
                     printAddTask(tasks.get(tasks.size() - 1));
+                    saveTasks();
                     break;
                 case EVENT:
                     try {
@@ -170,6 +174,7 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! The description or date of an event cannot be empty.");
                     }
                     printAddTask(tasks.get(tasks.size() - 1));
+                    saveTasks();
                     break;
                 }
             } catch (DukeException ex) {
