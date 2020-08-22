@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
-    public LocalDateTime date;
+    private LocalDateTime date;
 
     public Event(String description, String date) {
         super(description);
@@ -13,8 +13,8 @@ public class Event extends Task {
 
     }
 
-    public Event(String description, String date, boolean done) {
-        super(description, done);
+    public Event(String description, String date, boolean isDone) {
+        super(description, isDone);
         this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 

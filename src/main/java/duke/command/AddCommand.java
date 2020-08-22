@@ -17,7 +17,7 @@ public class AddCommand extends Command {
         String uiMessage = String.format(
                 "Got it. I've added this task:\n%s\n%s",
                 task.toString(),
-                taskList.taskSizeMessage());
+                taskList.getTaskSizeMessage());
         ui.print(uiMessage);
 
     }

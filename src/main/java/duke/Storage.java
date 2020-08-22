@@ -42,18 +42,17 @@ public class Storage {
             while (s.hasNext()) {
                 String[] task = s.nextLine().split(" \\| ");
                 switch (task[0]) {
-                    case "T": {
-                        taskList.add(new Todo(task[2], task[1].equals("1")));
-                        break;
-                    }
-                    case "E": {
-                        taskList.add(new Event(task[2], task[3], task[1].equals("1")));
-                        break;
-                    }
-                    case "D": {
-                        taskList.add(new Deadline(task[2], task[3], task[1].equals("1")));
-                        break;
-                    }
+                case "T":
+                    taskList.add(new Todo(task[2], task[1].equals("1")));
+                    break;
+
+                case "E":
+                    taskList.add(new Event(task[2], task[3], task[1].equals("1")));
+                    break;
+
+                case "D":
+                    taskList.add(new Deadline(task[2], task[3], task[1].equals("1")));
+                    break;
                 }
             }
             s.close();
@@ -65,11 +64,11 @@ public class Storage {
 
     String parseTaskAsText(Task task) {
         if (task instanceof Todo) {
-            return "T | " + (task.done ? "1" : "0") + " | " + task.description;
+            return "T | " + (task.getStatus() ? "1" : "0") + " | " + task.getDescription();
         } else if (task instanceof Event) {
-            return "E | " + (task.done ? "1" : "0") + " | " + task.description + " | " + ((Event) task).getDate();
+            return "E | " + (task.getStatus() ? "1" : "0") + " | " + task.getDescription() + " | " + ((Event) task).getDate();
         } else {
-            return "D | " + (task.done ? "1" : "0") + " | " + task.description + " | " + ((Deadline) task).getDate();
+            return "D | " + (task.getStatus() ? "1" : "0") + " | " + task.getDescription() + " | " + ((Deadline) task).getDate();
         }
     }
 

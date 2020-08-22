@@ -4,15 +4,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    LocalDateTime date;
+    private LocalDateTime date;
 
     public Deadline(String description, String date) {
         super(description);
         this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 
-    public Deadline(String description, String date, boolean done) {
-        super(description, done);
+    public Deadline(String description, String date, boolean isDone) {
+        super(description, isDone);
         this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 

@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
         String uiMessage = String.format(
                 "Noted. I've removed this task:\n%s\n%s",
                 deletedTask.toString(),
-                taskList.taskSizeMessage());
+                taskList.getTaskSizeMessage());
         ui.print(uiMessage);
     }
 }
