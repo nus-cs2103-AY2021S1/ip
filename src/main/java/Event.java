@@ -18,7 +18,7 @@ public class Event extends task{
         else{
             done = "[X]";
         }
-        return this.index + ". " + this.type + done + " " + this.name + this.date;
+        return this.type + done + " " + this.name + this.date;
     }
 
     public String read2(){

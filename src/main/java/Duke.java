@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
 
 public class Duke {
     public static void main(String[] args) {
@@ -10,6 +12,19 @@ public class Duke {
 //                + "| |_| | |_| |   <  __/\n"
 //                + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
+        String fileDir = "./DukeTodoSave.txt";
+        File save = new File(fileDir);
+        if(!save.exists()){ // create the text file
+            System.out.println("Save file does not exist, creating it now!");
+            try{
+                save.createNewFile();
+            } catch(IOException e){
+                System.out.println("Error creating the save file!");
+                System.out.println(e);
+            }
+        }
+
+
         ArrayList<task> store = new ArrayList<>();
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
@@ -28,6 +43,11 @@ public class Duke {
                         Todo t = new Todo(name);
                         store.add(t);
                         t.print();
+                        try{
+                            FileManager.add(fileDir,t.read());
+                        } catch(IOException e){
+                            System.out.println(e);
+                        }
                     }
                     catch(NoSuchElementException e){
                         System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -42,6 +62,11 @@ public class Duke {
                             d.addDate(date);
                             store.add(d);
                             d.print();
+                            try{
+                                FileManager.add(fileDir,d.read());
+                            } catch(IOException e){
+                                System.out.println(e);
+                            }
                         }
                         catch(ErrorExceptions e){
                             System.out.println(e);
@@ -60,6 +85,11 @@ public class Duke {
                             e.addDate(date);
                             store.add(e);
                             e.print();
+                            try{
+                                FileManager.add(fileDir,e.read());
+                            } catch(IOException m){
+                                System.out.println(m);
+                            }
                         }
                         catch(ErrorExceptions m){
                             System.out.println(m);
@@ -73,7 +103,7 @@ public class Duke {
                     if(echo.equals("list")){
                         int count = 1;
                         for(task i : store){
-                            System.out.println(count + i.read());
+                            System.out.println(count + ". " + i.read());
                             count++;
                         }
                     }
@@ -83,6 +113,11 @@ public class Duke {
                             l.done();
                             System.out.println("Nice! I've marked this task as done: ");
                             System.out.println("  " + l.read2());
+                            try{
+                                FileManager.edit(fileDir,store);
+                            } catch(IOException e){
+                                System.out.println(e);
+                            }
                         }
                         catch(IndexOutOfBoundsException e){
                             System.out.println("There is no such task!");
@@ -94,6 +129,11 @@ public class Duke {
                             task d = store.get(actual-1);
                             d.delete();
                             store.remove(actual-1);
+                            try{
+                                FileManager.edit(fileDir,store);
+                            } catch(IOException e){
+                                System.out.println(e);
+                            }
                         }
                         catch(IndexOutOfBoundsException e){
                             System.out.println("There is no such task!");
