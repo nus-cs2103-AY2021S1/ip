@@ -6,7 +6,7 @@ public class Event extends TimedTask {
 
     @Override
     protected String textFormat() {
-        return "event, " + super.textFormat() + "/at" + this.datetime.format(Deadline.inputFormatter);
+        return "event, " + super.textFormat() + "/at" + this.datetime.format(Event.inputFormatter);
     }
 
     @Override
