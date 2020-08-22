@@ -1,10 +1,10 @@
 package main.java;
 
-public class Events extends Task {
+public class Event extends Task {
 
     protected String at;
 
-    public Events(String description, String at) {
+    public Event(String description, String at) {
         super(description);
         this.at = at;
     }

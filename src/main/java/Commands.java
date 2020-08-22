@@ -103,7 +103,7 @@ public class Commands {
     private void addTodo(String[] inputs) throws DukeException {
         if (inputs.length > 1) {
             System.out.println("~ \n Got it. I've added this task: ");
-            ToDos toDo = new ToDos(inputs[1]);
+            ToDo toDo = new ToDo(inputs[1]);
             taskList.add(toDo);
             System.out.println(String.format("   %s \n Now you have %d tasks in the list. \n~",
                     toDo, taskList.size()));
@@ -118,7 +118,7 @@ public class Commands {
             if (stringArray.length > 1 && stringArray[1].split(" ", 2).length > 1) {
                 String day = stringArray[1].split(" ", 2)[1];
                 System.out.println("~ \n Got it. I've added this task: ");
-                Deadlines deadline = new Deadlines(stringArray[0], day.trim());
+                Deadline deadline = new Deadline(stringArray[0], day.trim());
                 taskList.add(deadline);
                 System.out.println(String.format("   %s \n Now you have %d tasks in the list. \n~",
                         deadline, taskList.size()));
@@ -136,7 +136,7 @@ public class Commands {
             if (stringArray.length > 1 && stringArray[1].split(" ", 2).length > 1) {
                 String at = stringArray[1].split(" ", 2)[1];
                 System.out.println("~ \n Got it. I've added this task: ");
-                Events event = new Events(stringArray[0], at);
+                Event event = new Event(stringArray[0], at);
                 taskList.add(event);
                 System.out.println(String.format("   %s \n Now you have %d tasks in the list. \n~",
                         event, taskList.size()));
