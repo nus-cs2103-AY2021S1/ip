@@ -60,4 +60,22 @@ public class DeadlineTest {
             fail();
         }
     }
+
+    @Test
+    public void happenBeforeTodayTest() {
+        try {
+            LocalDate today = LocalDate.now();
+            String td = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            Deadline d1 = new Deadline("Assignment 1", td);
+            assertEquals(false, d1.happenBeforeToday());
+
+            Deadline d2 = new Deadline("Assignment 1", "2030-08-01");
+            assertEquals(false, d2.happenBeforeToday());
+
+            Deadline d3 = new Deadline("Assignment 1", "2020-08-01");
+            assertEquals(true, d3.happenBeforeToday());
+        } catch (Exception e) {
+            fail();
+        }
+    }
 }
