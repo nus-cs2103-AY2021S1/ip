@@ -15,7 +15,7 @@ public class Duke {
         TaskList taskList = this.taskList;
         Scanner scan = new Scanner(System.in);
         Storage storage = this.storage;
-        String border = Ui.getBorder();
+        String border = ui.getBorder();
 
         ui.startUp(taskList, storage);
 
