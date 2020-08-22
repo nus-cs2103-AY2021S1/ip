@@ -1,7 +1,6 @@
-package main.java;
+package main.java.farrell.duke;
 
 import java.time.LocalDate;
-import java.util.Scanner;
 
 public class Duke {
     static TaskList taskList;

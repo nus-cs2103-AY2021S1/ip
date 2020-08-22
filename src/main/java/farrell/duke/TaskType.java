@@ -1,4 +1,4 @@
-package main.java;
+package main.java.farrell.duke;
 
 public enum TaskType {
     TODO,
