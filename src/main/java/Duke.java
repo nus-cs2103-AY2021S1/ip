@@ -1,6 +1,10 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Duke {
 
@@ -52,16 +56,7 @@ public class Duke {
             throw new MissingInfoException("OOPS!!! The date/time of a " + command + " cannot be empty.");
         }
 
-        switch (typeOfTask) {
-            case TODO:
-                return new Todo(description);
-            case DEADLINE:
-                return new Deadline(description, timing);
-            case EVENT:
-                return new Event(description, timing);
-            default:
-                return new Task(description);
-        }
+        return createTask(typeOfTask, description, timing, false);
     }
 
     private static String getTiming(String command, String[] commandArray, int index) throws MissingInfoException {
@@ -80,9 +75,95 @@ public class Duke {
         return timing;
     }
 
+    private static Task createTask(TypeOfTask typeOfTask, String description, String timing, boolean done) {
+
+        switch (typeOfTask) {
+        case TODO:
+            return new Todo(description, done);
+        case DEADLINE:
+            return new Deadline(description, timing, done);
+        case EVENT:
+            return new Event(description, timing, done);
+        default:
+            return new Task(description, done);
+        }
+    }
+
+    private static ArrayList<Task> readFile(ArrayList<Task> tasks) {
+        try {
+            File directory = new File("data");
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+            File f = new File("data/tasks.txt");
+            f.createNewFile();
+            Scanner s = new Scanner(f);
+            while (s.hasNextLine()) {
+                String[] data;
+                data = s.nextLine().split(" \\| ");
+                switch (data[0]) {
+                case "T":
+                    tasks.add(createTask(TypeOfTask.TODO, data[2], "", data[1].equals("1") ? true : false));
+                    break;
+                case "D":
+                    tasks.add(createTask(TypeOfTask.DEADLINE, data[2], data[3], data[1].equals("1") ? true : false));
+                    break;
+                case "E":
+                    tasks.add(createTask(TypeOfTask.EVENT, data[2], data[3], data[1].equals("1") ? true : false));
+                    break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(formatReply("OOPS!!! Can't access task data."));
+        } catch (IOException e) {
+            System.out.println(formatReply("OOPS!!! Something went wrong... Tasks not saved."));
+        }
+        return tasks;
+    }
+
+    private static void writeFile(ArrayList<Task> tasks) {
+        String taskString = "";
+
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            String typeOfTask = task.getClass().getName();
+            String timing = "";
+
+            switch (typeOfTask) {
+                case "Todo":
+                    taskString = taskString + "T";
+                    break;
+                case "Deadline":
+                    taskString = taskString + "D";
+                    timing = timing + ((Deadline) task).getTiming();
+                    break;
+                case "Event":
+                    taskString = taskString + "E";
+                    timing = timing + ((Event) task).getTiming();
+                    break;
+            }
+
+            taskString = taskString + " | " + (task.getDone() ? "1" : "0") + " | " + task.getTaskDescription()
+                    + (typeOfTask.equals("Deadline") || typeOfTask.equals("Event")
+                    ? " | " + timing
+                    : "");
+
+            taskString = taskString + "\n";
+        }
+
+        try {
+            FileWriter fw = new FileWriter("data/tasks.txt");
+            fw.write(taskString);
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(formatReply("OOPS!!! Something went wrong... Tasks not saved."));
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println(formatReply("Hello! I'm Duke\nWhat can I do for you?"));
         ArrayList<Task> taskList = new ArrayList<>();
+        taskList = readFile(taskList);
         Scanner input = new Scanner(System.in);
         while (true) {
             String command = input.next();
@@ -94,6 +175,7 @@ public class Duke {
                 try {
                     Task task = taskList.get(input.nextInt() - 1);
                     task.completeTask();
+                    writeFile(taskList);
                     System.out.println(formatReply("This task has been marked as done:\n" + task.toString()));
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(formatReply("OOPS!!! Task number is invalid."));
@@ -106,6 +188,7 @@ public class Duke {
                     int taskNumber = input.nextInt();
                     Task task = taskList.get(taskNumber - 1);
                     taskList.remove(taskNumber - 1);
+                    writeFile(taskList);
                     System.out.println(formatReply("This task has been removed:\n" + task.toString()
                             + "\nNow you have " + taskList.size() + " in the list."));
                 } catch (IndexOutOfBoundsException e) {
@@ -128,10 +211,12 @@ public class Duke {
                             typeOfTask = TypeOfTask.EVENT;
                             break;
                         default:
+                            input.nextLine();
                             throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                     Task newTask = getTask(command, typeOfTask, input);
                     taskList.add(newTask);
+                    writeFile(taskList);
                     System.out.println(formatReply("Got it. I've added this task:\n" + newTask.toString()
                             + "\nNow you have " + taskList.size() + " tasks in the list."));
                 } catch (InvalidCommandException e) {
