@@ -2,6 +2,7 @@
 ../src/main/java/NoTaskContentException.java
 ../src/main/java/NoTaskDurationException.java
 ../src/main/java/InvalidCommandException.java
+../src/main/java/Data.java
 ../src/main/java/Event.java
 ../src/main/java/NoTaskException.java
 ../src/main/java/Divider.java
