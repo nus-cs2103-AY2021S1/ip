@@ -1,11 +1,12 @@
 import java.io.FileNotFoundException;
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
 
 public class Duke {
     private static final List<Task> storage = new ArrayList<>();
@@ -43,6 +44,12 @@ public class Duke {
             throw new DukeException("OOPS!!! The description of " + s + " cannot be empty.");
         }
 
+        SimpleDateFormat formater = new SimpleDateFormat("dd MMM yyyy h:mma");
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd HHmm");
+
+        SimpleDateFormat dateFormater = new SimpleDateFormat("dd MMM yyyy");
+        SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
+
         switch (s) {
             case "todo": {
                 ToDo todo = new ToDo(next);
@@ -53,9 +60,21 @@ public class Duke {
             case "deadline": {
                 if (next.contains("/by ")) {
                     String[] ls = next.split(" /by ");
-                    Deadline deadline = new Deadline(ls[0], LocalDate.parse(ls[1]));
-                    storage.add(deadline);
-                    toAdd = deadline;
+                    try {
+                        String date;
+                        if (ls[1].contains(" ")) {
+                            date = formater.format((parser.parse(ls[1])));
+                        } else {
+                            date = dateFormater.format(dateParser.parse(ls[1]));
+                        }
+                        toAdd = new Deadline(ls[0], date);
+                        storage.add(toAdd);
+                    } catch (ParseException e) {
+                        System.out.println(
+                                BORDER + "Please input the time and date in\n"
+                                + dateParser.toPattern() + " or " + parser.toPattern() + "\n" + BORDER);
+                        return;
+                    }
                 } else {
                     throw new DukeException("Sorry, please specify expected deadline after \"/by\".");
                 }
@@ -64,9 +83,21 @@ public class Duke {
             case "event": {
                 if (next.contains("/at ")) {
                     String[] ls = next.split(" /at ");
-                    Event event = new Event(ls[0], LocalDate.parse(ls[1]));
-                    storage.add(event);
-                    toAdd = event;
+                    try {
+                        String date;
+                        if (ls[1].contains(" ")) {
+                            date = formater.format((parser.parse(ls[1])));
+                        } else {
+                            date = dateFormater.format(dateParser.parse(ls[1]));
+                        }
+                        toAdd = new Event(ls[0], date);
+                        storage.add(toAdd);
+                    } catch (ParseException e) {
+                        System.out.println(
+                                BORDER + "Please input the time and date in\n" +
+                                dateParser.toPattern() + " or " + parser.toPattern() + "\n" + BORDER);
+                        return;
+                    }
                 } else {
                     throw new DukeException("Sorry, please specify event date after \"/at\".");
                 }
@@ -201,9 +232,9 @@ public class Duke {
                 String type = data[0];
                 boolean done = Boolean.parseBoolean(data[1]);
                 String name = data[2];
-                LocalDate time = null;
+                String time = null;
                 if (!data[3].equals("mark")) {
-                    time = LocalDate.parse(data[3]);
+                    time = data[3];
                 }
 
                 switch (type) {
