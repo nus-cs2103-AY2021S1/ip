@@ -11,11 +11,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-    String dirPath;
     String filePath;
 
-    public Storage(String filePath, String dirPath) {
-        this.dirPath = dirPath;
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -23,9 +21,7 @@ public class Storage {
         List<Task> tasks = new ArrayList<>();
 
         try {
-            File dir = new File(dirPath);
             File file = new File(filePath);
-            dir.mkdir();
             file.createNewFile();
             Scanner sc = new Scanner(file);
 

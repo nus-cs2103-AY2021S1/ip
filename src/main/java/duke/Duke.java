@@ -12,8 +12,7 @@ import java.util.Scanner;
 
 
 public class Duke {
-    static final String dirPath = "..\\data";
-    static final String filePath = "../data/duke.txt";
+    static final String filePath = "duke.txt";
     private Storage storage;
     private TaskList result;
     private Ui ui;
@@ -24,7 +23,7 @@ public class Duke {
 
     public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath, dirPath);
+        storage = new Storage(filePath);
         try {
             result = new TaskList(storage.readFromFile());
         } catch (DukeException e) {
