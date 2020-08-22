@@ -11,6 +11,10 @@ public class TaskList {
         }
     }
 
+    public int getTaskLength() {
+        return taskList.size();
+    }
+
     public Task getTask(int index){
         return taskList.get(index-1);
     }
@@ -23,7 +27,3 @@ public class TaskList {
         taskList.add(task);
     }
 }
-
-//1. display the elements
-// 2. add element
-//3. remove element(later)

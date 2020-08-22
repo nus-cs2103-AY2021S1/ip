@@ -2,9 +2,10 @@ public class Command {
     private Category category;
     private String description;
 
-    public Command(Category category){
+    public Command(Category category) {
         this.category = category;
     }
+
     public Command(Category category, String description) {
         this.category = category;
         this.description = description;
