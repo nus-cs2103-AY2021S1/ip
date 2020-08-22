@@ -1,17 +1,20 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Event extends Task {
 
-    protected LocalDateTime date;
+    protected Date date;
+    protected boolean isTime;
 
-    public Event (String description, LocalDateTime date) {
+    public Event (String description, Date date, boolean isTime) {
         super(description);
         this.date = date;
+        this.isTime = isTime;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm:a")) + ")";
+        String s = isTime ? "MMM dd yyyy hh:mma" : "MMM dd yyyy";
+        return "[E]" + super.toString() + " (at: " + new SimpleDateFormat(s).format(date) + ")";
     }
 }

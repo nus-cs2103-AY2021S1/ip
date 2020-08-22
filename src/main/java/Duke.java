@@ -1,13 +1,14 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 
 public class Duke {
-    private static final DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private static final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     public static void readAndEcho(List<Task> list) {
 
@@ -71,8 +72,17 @@ public class Duke {
                         if (deadlineArr.length < 2) {
                             throw new TaskException("☹ OOPS!!! The date of a deadline cannot be empty.\n");
                         }
-                        LocalDateTime dateTime = LocalDateTime.parse(deadlineArr[1], dateTimeFormat);
-                        Deadline deadline = new Deadline(deadlineArr[0], dateTime);
+
+                        Date date;
+                        boolean isTime;
+                        if (deadlineArr[1].split(" ").length == 1) {
+                            date = dateFormat.parse(deadlineArr[1]);
+                            isTime = false;
+                        } else {
+                            date = dateTimeFormat.parse(deadlineArr[1]);
+                            isTime = true;
+                        }
+                        Deadline deadline = new Deadline(deadlineArr[0], date, isTime);
                         list.add(deadline);
                         String s = formatString("Got it. I've added this task: \n") +
                                 formatString(deadline.toString() + '\n') +
@@ -89,8 +99,16 @@ public class Duke {
                         if (eventArr.length < 2) {
                             throw new TaskException("☹ OOPS!!! The date of an event cannot be empty.\n");
                         }
-                        LocalDateTime dateTime = LocalDateTime.parse(eventArr[1], dateTimeFormat);
-                        Event event = new Event(eventArr[0], dateTime);
+                        Date date;
+                        boolean isTime;
+                        if (eventArr[1].split(" ").length == 1) {
+                            date = dateFormat.parse(eventArr[1]);
+                            isTime = false;
+                        } else {
+                            date = dateTimeFormat.parse(eventArr[1]);
+                            isTime = true;
+                        }
+                        Event event = new Event(eventArr[0], date, isTime);
                         list.add(event);
                         String s = formatString("Got it. I've added this task: \n") +
                                 formatString(event.toString() + '\n') +
@@ -108,8 +126,8 @@ public class Duke {
                 System.out.println(addDividers(formatString(e.toString())));
             } catch (NumberFormatException e) {
                 System.out.println(addDividers(formatString("Please enter out a valid number\n")));
-            } catch (DateTimeParseException e) {
-                System.out.println(addDividers(formatString("Please enter a date and time in the format of dd/MM/2020 HHmm\n")));
+            } catch (ParseException e) {
+                System.out.println(addDividers(formatString("Please enter a date and time in the format of dd/MM/2020 HHmm or dd/MM/2020\n")));
             }
             input = sc.nextLine();
         }
