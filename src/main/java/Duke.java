@@ -1,5 +1,9 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import java.io.File;
+import java.io.FileWriter;
 
 /**
  * Main class that takes in user input.
@@ -10,6 +14,7 @@ public class Duke {
      * List used to store all tasks.
      */
     private static ArrayList<Task> taskList = new ArrayList<>();
+    private static final String FILEPATH = "data/duke.txt";
 
     private static void welcome() {
         printOutput("     Hello! I'm Duke\n"
@@ -185,11 +190,29 @@ public class Duke {
         printOutput(output, true);
     }
 
+    private static void createFile() {
+        File f = new File(FILEPATH);
+        f.getParentFile().mkdirs();
+        try {
+            f.createNewFile();
+            printOutput("     Creating new output file!", true);
+        } catch (IOException e) {
+            printOutput("     Output file already exists!", true);
+        }
+    }
+
+    private static void appendToFile(String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(FILEPATH, true); // create a FileWriter in append mode
+        fw.write(textToAppend);
+        fw.close();
+    }
+
     /**
      * Reads user input, and does corresponding action.
      */
     public static void main(String[] args) {
         welcome();
+        createFile();
 
         Scanner scanner = new Scanner(System.in);
 
