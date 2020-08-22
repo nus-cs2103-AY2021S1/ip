@@ -36,6 +36,8 @@ public class Ui {
                 break;
             } else if (input.equals("list")) {
                 taskList.listOut();
+            } else if (input.contains("find")) {
+                taskList.find(input);
             } else if (input.contains("done")) {
                 try {
                     taskList.done(input);

@@ -123,6 +123,26 @@ public class TaskList {
         }
     }
 
+    public void find(String input) {
+        String[] arr = input.split(" ");
+        String keyWord = arr[1];
+
+        ArrayList<Task> hits = new ArrayList<>();
+
+        for (Task task: list) {
+            if (task.getInfo().contains(keyWord)) {
+                hits.add(task);
+            }
+        }
+
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Here are the matching tasks in your list:");
+        for (int i = 0; i < hits.size(); i++) {
+            System.out.printf("     %d. %s \n", i + 1, hits.get(i));
+        }
+        System.out.println("    ____________________________________________________________");
+    }
+
     /**
      * Returns the current size of the Task List
      * @return
