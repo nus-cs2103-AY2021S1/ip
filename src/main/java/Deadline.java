@@ -1,12 +1,16 @@
 public class Deadline extends Task {
-    private final String deadline;
+    private final String timeDescription;
 
-    Deadline(String task, String deadline) {
-        super(task);
-        this.deadline = deadline;
+    Deadline(String taskDescription, String timeDescription) {
+        super(taskDescription);
+        this.timeDescription = timeDescription;
+    }
+
+    public String getTimeDescription() {
+        return timeDescription;
     }
 
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + this.deadline + ")";
+        return "[D]" + super.toString() + "(by: " + this.timeDescription + ")";
     }
 }

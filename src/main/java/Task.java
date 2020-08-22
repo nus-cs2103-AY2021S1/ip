@@ -1,17 +1,25 @@
 public class Task {
-    private final String task;
+    private final String taskDescription;
     private boolean isDone;
 
     Task(String task) {
-        this.task = task;
+        this.taskDescription = task;
         this.isDone = false;
     }
 
-    public void completedTask() {
+    public String getTaskDescription() {
+        return this.taskDescription;
+    }
+
+    public boolean isComepleted() {
+        return this.isDone;
+    }
+
+    public void completeTask() {
         this.isDone = true;
     }
 
     public String toString() {
-        return "[" + (this.isDone ? "\u2713" : "\u2717") + "] " + this.task;
+        return "[" + (this.isDone ? "\u2713" : "\u2717") + "] " + this.taskDescription;
     }
 }
