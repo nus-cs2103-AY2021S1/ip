@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDateTime;
@@ -6,7 +7,6 @@ import java.time.LocalDateTime;
 
 public class Duke {
     private static ArrayList<Task> taskList = new ArrayList<>();
-
 
     private static void processEventOrDeadline(String input) throws EventException, DeadlineException {
         String[] temp = input.split("/");
@@ -74,15 +74,28 @@ public class Duke {
         int hour = Integer.parseInt(HHHH.substring(0, 2));
         int min = Integer.parseInt(HHHH.substring(2, 4));
 
-        System.out.println("Got it. I've added this task:");
 
+        LocalDateTime dateTime = null;
+        try {
+            dateTime = LocalDateTime.of(year, month, day, hour, min);
+        } catch (DateTimeException e) {
+            if (command.equals("deadline")) {
+                throw new DeadlineException("Please input date time format in DD-MM-YYYY HHHH format!\n" +
+                        "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
+            } else if (command.equals("event")) {
+                throw new EventException("Please input date time format in DD-MM-YYYY HHHH format!\n" +
+                        "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
+            }
+        }
+
+        System.out.println("Got it. I've added this task:");
         if (command.equals("deadline")) {
-            Task task = new Deadline(description, LocalDateTime.of(year, month, day, hour, min));
+            Task task = new Deadline(description, dateTime);
             taskList.add(task);
             System.out.println(task);
             System.out.println("Now you have " + taskList.size() + " tasks in the list.");
         } else if (command.equals("event")) {
-            Task task = new Event(description, LocalDateTime.of(year, month, day, hour, min));
+            Task task = new Event(description, dateTime);
             taskList.add(task);
             System.out.println(task);
             System.out.println("Now you have " + taskList.size() + " tasks in the list.");
@@ -160,8 +173,6 @@ public class Duke {
             index++;
         }
     }
-
-
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

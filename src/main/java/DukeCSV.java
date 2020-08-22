@@ -5,7 +5,9 @@ import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DukeCSV {
     private static String pathToCSV = "data/duke.csv";
@@ -49,13 +51,27 @@ public class DukeCSV {
                     }
 
                     if (typeOfTask.equals("Event")) {
-                        Event event = new Event(taskDescription, timeDescription);
+                        String[] temp = timeDescription.split(" ");
+                        int day = Integer.parseInt(temp[0]);
+                        int month = Integer.parseInt(temp[1]);
+                        int year = Integer.parseInt(temp[2]);
+                        int hour = Integer.parseInt(temp[3]);
+                        int min = Integer.parseInt(temp[4]);
+
+                        Event event = new Event(taskDescription, LocalDateTime.of(year, month, day, hour, min));
                         if (isCompleted.equals("true")) {
                             event.completeTask();
                         }
                         taskList.add(event);
                     } else if (typeOfTask.equals("Deadline")) {
-                        Deadline dl = new Deadline(taskDescription, timeDescription);
+                        String[] temp = timeDescription.split(" ");
+                        int day = Integer.parseInt(temp[0]);
+                        int month = Integer.parseInt(temp[1]);
+                        int year = Integer.parseInt(temp[2]);
+                        int hour = Integer.parseInt(temp[3]);
+                        int min = Integer.parseInt(temp[4]);
+
+                        Deadline dl = new Deadline(taskDescription, LocalDateTime.of(year, month, day, hour, min));
                         if (isCompleted.equals("true")) {
                             dl.completeTask();
                         }
@@ -84,10 +100,10 @@ public class DukeCSV {
             String timeDescription = "";
             if (typeOfTask.equals("Deadline")) {
                 Deadline dl = (Deadline) task;
-                timeDescription = dl.getTimeDescription();
+                timeDescription = dl.getDateTime();
             } else if (typeOfTask.equals("Event")) {
                 Event event = (Event) task;
-                timeDescription = event.getTimeDescription();
+                timeDescription = event.getDateTime();
             }
             csvWriter.append(typeOfTask);
             csvWriter.append(",");
@@ -111,7 +127,7 @@ public class DukeCSV {
         csvWriter.append(",");
         csvWriter.append("taskDescription");
         csvWriter.append(",");
-        csvWriter.append("timeDescription");
+        csvWriter.append("timeDescriptionInDDMMYYYYHHMM");
         csvWriter.append("\n");
         return csvWriter;
     }

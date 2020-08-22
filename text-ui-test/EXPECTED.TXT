@@ -4,16 +4,36 @@ The description of a todo cannot be empty!
 Both time description and description of a deadline must be filled!
 Both time description and description of a event must be filled!
 Both time description and description of a deadline must be filled!
+Please input date time format in DD-MM-YYYY HHHH format!
+Eg: 2-12-2019 1800 OR 02-12-2019 1800
+Please input date time format in DD-MM-YYYY HHHH format!
+Eg: 2-12-2019 1800 OR 02-12-2019 1800
+Please input date time format in DD-MM-YYYY HHHH format!
+Eg: 2-12-2019 1800 OR 02-12-2019 1800
+Please input date time format in DD-MM-YYYY HHHH format!
+Eg: 2-12-2019 1800 OR 02-12-2019 1800
 Both time description and description of a event must be filled!
+Please input date time format in DD-MM-YYYY HHHH format!
+Eg: 2-12-2019 1800 OR 02-12-2019 1800
+Please input date time format in DD-MM-YYYY HHHH format!
+Eg: 2-12-2019 1800 OR 02-12-2019 1800
+Please input date time format in DD-MM-YYYY HHHH format!
+Eg: 2-12-2019 1800 OR 02-12-2019 1800
+Please input date time format in DD-MM-YYYY HHHH format!
+Eg: 2-12-2019 1800 OR 02-12-2019 1800
 Got it. I've added this task:
 [T][?] read book 
 Now you have 1 tasks in the list.
 Got it. I've added this task:
-[D][?] return book (by: June 6th)
+[D][?] return book (at: 22 AUG 2020, SAT @170)
 Now you have 2 tasks in the list.
 Got it. I've added this task:
-[E][?] project meeting (at: Aug 6th 2-4pm)
+[E][?] project meeting (at: 22 AUG 2020, SAT @190)
 Now you have 3 tasks in the list.
+Please input date time format in DD-MM-YYYY HHHH format!
+Eg: 2-12-2019 1800 OR 02-12-2019 1800
+Please input date time format in DD-MM-YYYY HHHH format!
+Eg: 2-12-2019 1800 OR 02-12-2019 1800
 Got it. I've added this task:
 [T][?] join sports club 
 Now you have 4 tasks in the list.
@@ -29,43 +49,39 @@ Nice! I've marked this task as done:
 [T][?] join sports club 
 Here are the tasks in your list:
 1. [T][?] read book 
-2. [D][?] return book (by: June 6th)
-3. [E][?] project meeting (at: Aug 6th 2-4pm)
+2. [D][?] return book (at: 22 AUG 2020, SAT @170)
+3. [E][?] project meeting (at: 22 AUG 2020, SAT @190)
 4. [T][?] join sports club 
 5. [T][?] borrow book 
-Got it. I've added this task:
-[D][?] return book (by: Sunday)
-Now you have 6 tasks in the list.
-Got it. I've added this task:
-[E][?] project meeting (at: Mon 2-4pm)
-Now you have 7 tasks in the list.
 Item does not exist in list!
 Item does not exist in list!
 Noted. I've removed this task:
 [T][?] read book 
-Now you have 6 tasks in the list.
-Here are the tasks in your list:
-1. [D][?] return book (by: June 6th)
-2. [E][?] project meeting (at: Aug 6th 2-4pm)
-3. [T][?] join sports club 
-4. [T][?] borrow book 
-5. [D][?] return book (by: Sunday)
-6. [E][?] project meeting (at: Mon 2-4pm)
-Noted. I've removed this task:
-[T][?] join sports club 
-Now you have 5 tasks in the list.
-Here are the tasks in your list:
-1. [D][?] return book (by: June 6th)
-2. [E][?] project meeting (at: Aug 6th 2-4pm)
-3. [T][?] borrow book 
-4. [D][?] return book (by: Sunday)
-5. [E][?] project meeting (at: Mon 2-4pm)
-Noted. I've removed this task:
-[E][?] project meeting (at: Mon 2-4pm)
 Now you have 4 tasks in the list.
 Here are the tasks in your list:
-1. [D][?] return book (by: June 6th)
-2. [E][?] project meeting (at: Aug 6th 2-4pm)
+1. [D][?] return book (at: 22 AUG 2020, SAT @170)
+2. [E][?] project meeting (at: 22 AUG 2020, SAT @190)
+3. [T][?] join sports club 
+4. [T][?] borrow book 
+Noted. I've removed this task:
+[T][?] join sports club 
+Now you have 3 tasks in the list.
+Here are the tasks in your list:
+1. [D][?] return book (at: 22 AUG 2020, SAT @170)
+2. [E][?] project meeting (at: 22 AUG 2020, SAT @190)
 3. [T][?] borrow book 
-4. [D][?] return book (by: Sunday)
+Item does not exist in list!
+Here are the tasks in your list:
+1. [D][?] return book (at: 22 AUG 2020, SAT @170)
+2. [E][?] project meeting (at: 22 AUG 2020, SAT @190)
+3. [T][?] borrow book 
+Noted. I've removed this task:
+[D][?] return book (at: 22 AUG 2020, SAT @170)
+Now you have 2 tasks in the list.
+Noted. I've removed this task:
+[E][?] project meeting (at: 22 AUG 2020, SAT @190)
+Now you have 1 tasks in the list.
+Noted. I've removed this task:
+[T][?] borrow book 
+Now you have 0 tasks in the list.
 Bye. Hope to see you again soon!
