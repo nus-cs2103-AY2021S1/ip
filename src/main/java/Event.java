@@ -1,14 +1,14 @@
 public class Event extends Task {
 
-    private String when = "";
+    private TimePoint when;
 
     public Event(String name, String when) {
         super(name);
-        this.when = when;
+        this.when = TimePoint.of(when);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.when + ")";
+        return "[E]" + super.toString() + " (at: " + this.when.toString() + ")";
     }
 }
