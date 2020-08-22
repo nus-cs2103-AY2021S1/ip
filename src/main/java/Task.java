@@ -25,11 +25,18 @@ public class Task {
         return this.task;
     }
 
+    public boolean getDone() { return this.done; }
+
     //format date from 'by Sunday' to '(by: Sunday)'
     public static String reformatDate(String input) {
         return "(" + input.substring(0, input.indexOf(" "))
                 + ":"
                 + input.substring(input.indexOf(" "))
                 + ")";
+    }
+
+    public String parseToSaveFormat() {
+        String isDoneStr = this.done ? "1" : "0";
+        return "Task - " + isDoneStr + " - " + this.task;
     }
 }

@@ -24,4 +24,12 @@ public class Deadlines extends Task {
         return "[D]" + doneIndicator + " " + this.task + " " + this.date;
     }
 
+    @Override
+    public String parseToSaveFormat() {
+        String res = "";
+        String isDoneStr = this.done ? "1" : "0";
+        res = "E - " + isDoneStr + " - " + this.task + " - " + this.date;
+        return res;
+    }
+
 }

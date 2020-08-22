@@ -24,4 +24,12 @@ public class Events extends Task {
         return "[E]" + doneIndicator + " " + this.task + " " + this.time;
     }
 
+    @Override
+    public String parseToSaveFormat() {
+        String res = "";
+        String isDoneStr = this.done ? "1" : "0";
+        res = "E - " + isDoneStr + " - " + this.task + " - " + this.time;
+        return res;
+    }
+
 }
