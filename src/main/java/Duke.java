@@ -1,14 +1,18 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     private final List<Task> listOfTask = new ArrayList<>();
-    private final String lines = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
     private final static String ignoreCase = "(?i)";
 
     enum Command {
-        LIST, DONE, BYE, TODO, DEADLINE, EVENT, DELETE,
+        LIST, DONE, BYE, TODO, DEADLINE, EVENT, DELETE, CHECK
     }
 
     Duke() {
@@ -27,7 +31,7 @@ public class Duke {
 
     public void deleteTask(String message) throws DukeException{
         try {
-            int ind = Integer.parseInt(message.substring(6).stripLeading().stripTrailing()) - 1;
+            int ind = Integer.parseInt(message.substring(6).trim()) - 1;
             Task t = listOfTask.get(ind);
             listOfTask.remove(ind);
             Print.print(" *WOOF* I have removed:\n   " + t + "\n" + printTotal());
@@ -79,6 +83,7 @@ public class Duke {
         if (listOfTask.size() == 0) {
             Print.print(" You have no task to complete! *WOOF*\n");
         } else {
+            String lines = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
             System.out.print(lines);
             System.out.println(" Here are the tasks in your list *Woof*:");
             listOfTask.forEach((task) -> {
@@ -86,6 +91,34 @@ public class Duke {
                 System.out.println("   " + ind + "." + task.toString());
             });
             System.out.println(lines);
+        }
+    }
+
+    public void checkDate(String s) throws DukeException{
+        try {
+            String[] inputDate = s.trim().split("/");
+            String formatDate = inputDate[0] + "-" + inputDate[1] + "-" + inputDate[2];
+            LocalDate date = LocalDate.parse(formatDate);
+            int ind = 1;
+            String lines = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
+            System.out.print(lines);
+            for (Task t : listOfTask) {
+                if (t.compareDate(date)) {
+                    if (ind == 1) {
+                        System.out.println(" Here is the list of ongoing events on "
+                                + DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(date) + ":");
+                    }
+                    System.out.println("   " + ind + "." + t.toString());
+                    ind++;
+                }
+            }
+            if (ind == 1) {
+                System.out.println(" You have no event on this day! Have a good break! *Woof*");
+            }
+            System.out.println(lines);
+        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
+            String errMessage = Print.printFormat(" Please enter date in YYYY/MM/DD format! *Woof woof*\n");
+            throw new DukeException(errMessage);
         }
     }
 
@@ -103,9 +136,11 @@ public class Duke {
                     break;
                 } else if (query.matches(ignoreCase + Command.LIST.name())) {
                     duke.printToDos();
-                } else if (query.matches(ignoreCase + Command.DONE.name() +"(.*)")) {
+                } else if (query.matches(ignoreCase + Command.DONE.name() + "(.*)")) {
                     int taskInd = Integer.parseInt(query.substring(5));
                     duke.markAsDone(taskInd - 1);
+                } else if (query.matches(ignoreCase + Command.CHECK.name() + "(.*)")) {
+                    duke.checkDate(query.substring(5));
                 } else {
                     duke.checkAction(query);
                 }

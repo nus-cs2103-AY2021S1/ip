@@ -1,9 +1,24 @@
-public class Deadline extends Task {
-    String toDoBy;
+import java.lang.reflect.Array;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
-    Deadline(String description, String toDoBy) {
+public class Deadline extends Task {
+    LocalDate toDoBy;
+    LocalTime time;
+
+    Deadline(String description, LocalDate toDoBy, LocalTime time) {
         super(description);
-        this.toDoBy = toDoBy.stripLeading().stripTrailing();
+        this.toDoBy = toDoBy;
+        this.time = time;
+    }
+
+    Deadline(String description, LocalDate toDoBy) {
+        super(description);
+        this.toDoBy = toDoBy;
+        this.time = null;
     }
 
     public static Deadline createTask(String message) throws DukeException{
@@ -16,7 +31,7 @@ public class Deadline extends Task {
             String messageLowerCase = message.toLowerCase();
             int indOfTime = messageLowerCase.indexOf("/by");
             String description = message.substring(9, indOfTime);
-            String deadline = message.substring(indOfTime + 3);
+            String deadline = message.substring(indOfTime + 3).trim();
             if (description.isBlank() && deadline.isBlank()) {
                 String exMessage = Print.printFormat(errMessage1);
                 throw new DukeException(exMessage);
@@ -27,7 +42,24 @@ public class Deadline extends Task {
                 String exMessage = Print.printFormat(errMessage2);
                 throw new DukeException(exMessage);
             } else {
-                return new Deadline(description, deadline);
+                String[] splitDeadline = deadline.split("\\s+");
+                try {
+                    String[] inputDate = splitDeadline[0].trim().split("/");
+                    String formatDate = inputDate[0] + "-" + inputDate[1] + "-" + inputDate[2];
+                    LocalDate date = LocalDate.parse(formatDate);
+
+                    if (splitDeadline.length != 1) {
+                        LocalTime time = LocalTime.parse(splitDeadline[1].trim());
+                        return new Deadline(description, date, time);
+                    } else {
+                        return new Deadline(description, date);
+                    }
+                } catch (Exception e) {
+                    String errMessage =
+                            Print.printFormat(" Please input deadline in following format:\n"
+                                    + "   YYYY/MM/DD HH:MM!\n" + " *Woof woof*\n");
+                    throw new DukeException(errMessage);
+                }
             }
         } catch (DukeException e) {
             throw e;
@@ -38,7 +70,18 @@ public class Deadline extends Task {
     }
 
     @Override
+    public boolean compareDate(LocalDate date) {
+        return toDoBy.compareTo(date) == 0;
+    }
+
+    @Override
     public String toString() {
-        return "[D]" + super.toString() + " (FINISH by: " + toDoBy + ")";
+        String s = "[D]" + super.toString() + " (FINISH by: "
+                + DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(toDoBy);
+        if (time == null) {
+            return s + ")";
+        } else {
+            return s + " " + time.toString() + ")";
+        }
     }
 }

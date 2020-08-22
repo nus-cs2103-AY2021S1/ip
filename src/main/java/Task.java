@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task{
     private String lines = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
     private String description;
@@ -21,6 +23,10 @@ public class Task{
             Print.print(" You have already completed this task! *Woof woof*\n");
         }
         return this;
+    }
+
+    public boolean compareDate(LocalDate date) {
+        return false;
     }
 
     @Override
