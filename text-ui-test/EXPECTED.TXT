@@ -10,76 +10,76 @@ Let's have a conversation!
 Unknown Command!
 Format Error: done {index}
 Format Error: delete {index}
-Format Error: todo {description}
-Format Error: deadline {description} /by {deadline}
-Format Error: Event {description} /at {time}
+Format Error: ToDo {description}
+Format Error: Deadline {description} /by {ddMMyyyy HHmm}
+Format Error: Event {description} /from {ddMMyyyy HHmm} /till {ddMMyyyy HHmm}
 Format Error: done {index}
 Index Error: done {index}
 Format Error: delete {index}
 Index Error: delete {index}
-Format Error: deadline {description} /by {deadline}
-Format Error: deadline {description} /by {deadline}
-Format Error: Event {description} /at {time}
-Format Error: Event {description} /at {time}
+Format Error: Deadline {description} /by {ddMMyyyy HHmm}
+Format Error: Deadline {description} /by {ddMMyyyy HHmm}
+Format Error: Event {description} /from {ddMMyyyy HHmm} /till {ddMMyyyy HHmm}
+Format Error: Event {description} /from {ddMMyyyy HHmm} /till {ddMMyyyy HHmm}
 	+ Add ToDo: [T][✗] readbook
-	+ Add Deadline: [D][✗] return book (by: June 6th)
-	+ Add Event: [E][✗] project meeting (at: Aug 6th 2-4pm)
+	+ Add Deadline: [D][✗] return book (by: 06 Jun 2020 11:59PM)
+	+ Add Event: [E][✗] project meeting (from: 06 Aug 2020 02:00PM till: 06 Aug 2020 04:00PM)
 	+ Add ToDo: [T][✗] join sports club
 	+ Add ToDo: [T][✗] borrow book
-	+ Add Deadline: [D][✗] drink coffee (by: June 7th)
-	+ Add Event: [E][✗] drink tea (at: Aug 7th 4-6pm)
+	+ Add Deadline: [D][✗] drink coffee (by: 07 Jun 2020 11:59PM)
+	+ Add Event: [E][✗] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
 1. [T][✗] readbook
-2. [D][✗] return book (by: June 6th)
-3. [E][✗] project meeting (at: Aug 6th 2-4pm)
+2. [D][✗] return book (by: 06 Jun 2020 11:59PM)
+3. [E][✗] project meeting (from: 06 Aug 2020 02:00PM till: 06 Aug 2020 04:00PM)
 4. [T][✗] join sports club
 5. [T][✗] borrow book
-6. [D][✗] drink coffee (by: June 7th)
-7. [E][✗] drink tea (at: Aug 7th 4-6pm)
+6. [D][✗] drink coffee (by: 07 Jun 2020 11:59PM)
+7. [E][✗] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
 Index Error: done {index}
 Index Error: done {index}
 Index Error: delete {index}
 Index Error: delete {index}
 1. [T][✗] readbook
-2. [D][✗] return book (by: June 6th)
-3. [E][✗] project meeting (at: Aug 6th 2-4pm)
+2. [D][✗] return book (by: 06 Jun 2020 11:59PM)
+3. [E][✗] project meeting (from: 06 Aug 2020 02:00PM till: 06 Aug 2020 04:00PM)
 4. [T][✗] join sports club
 5. [T][✗] borrow book
-6. [D][✗] drink coffee (by: June 7th)
-7. [E][✗] drink tea (at: Aug 7th 4-6pm)
-	# Done: [D][✓] return book (by: June 6th)
+6. [D][✗] drink coffee (by: 07 Jun 2020 11:59PM)
+7. [E][✗] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
+	# Done: [D][✓] return book (by: 06 Jun 2020 11:59PM)
 1. [T][✗] readbook
-2. [D][✓] return book (by: June 6th)
-3. [E][✗] project meeting (at: Aug 6th 2-4pm)
+2. [D][✓] return book (by: 06 Jun 2020 11:59PM)
+3. [E][✗] project meeting (from: 06 Aug 2020 02:00PM till: 06 Aug 2020 04:00PM)
 4. [T][✗] join sports club
 5. [T][✗] borrow book
-6. [D][✗] drink coffee (by: June 7th)
-7. [E][✗] drink tea (at: Aug 7th 4-6pm)
+6. [D][✗] drink coffee (by: 07 Jun 2020 11:59PM)
+7. [E][✗] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
 	# Done: [T][✓] join sports club
 1. [T][✗] readbook
-2. [D][✓] return book (by: June 6th)
-3. [E][✗] project meeting (at: Aug 6th 2-4pm)
+2. [D][✓] return book (by: 06 Jun 2020 11:59PM)
+3. [E][✗] project meeting (from: 06 Aug 2020 02:00PM till: 06 Aug 2020 04:00PM)
 4. [T][✓] join sports club
 5. [T][✗] borrow book
-6. [D][✗] drink coffee (by: June 7th)
-7. [E][✗] drink tea (at: Aug 7th 4-6pm)
-	- Delete: [E][✗] project meeting (at: Aug 6th 2-4pm)
+6. [D][✗] drink coffee (by: 07 Jun 2020 11:59PM)
+7. [E][✗] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
+	- Delete: [E][✗] project meeting (from: 06 Aug 2020 02:00PM till: 06 Aug 2020 04:00PM)
 1. [T][✗] readbook
-2. [D][✓] return book (by: June 6th)
+2. [D][✓] return book (by: 06 Jun 2020 11:59PM)
 3. [T][✓] join sports club
 4. [T][✗] borrow book
-5. [D][✗] drink coffee (by: June 7th)
-6. [E][✗] drink tea (at: Aug 7th 4-6pm)
+5. [D][✗] drink coffee (by: 07 Jun 2020 11:59PM)
+6. [E][✗] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
 	- Delete: [T][✗] borrow book
 1. [T][✗] readbook
-2. [D][✓] return book (by: June 6th)
+2. [D][✓] return book (by: 06 Jun 2020 11:59PM)
 3. [T][✓] join sports club
-4. [D][✗] drink coffee (by: June 7th)
-5. [E][✗] drink tea (at: Aug 7th 4-6pm)
+4. [D][✗] drink coffee (by: 07 Jun 2020 11:59PM)
+5. [E][✗] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
 	+ Add ToDo: [T][✗] say goodbye
 1. [T][✗] readbook
-2. [D][✓] return book (by: June 6th)
+2. [D][✓] return book (by: 06 Jun 2020 11:59PM)
 3. [T][✓] join sports club
-4. [D][✗] drink coffee (by: June 7th)
-5. [E][✗] drink tea (at: Aug 7th 4-6pm)
+4. [D][✗] drink coffee (by: 07 Jun 2020 11:59PM)
+5. [E][✗] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
 6. [T][✗] say goodbye
 Bye. Hope to see you again soon!

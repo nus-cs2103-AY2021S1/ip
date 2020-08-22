@@ -3,6 +3,9 @@ package task;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+/**
+ * Todo is a Task with no defined datetime
+ */
 public class ToDo extends Task {
 
     public ToDo(String description) {

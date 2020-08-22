@@ -1,3 +1,5 @@
+package cmd;
+
 import task.Task;
 
 import java.io.FileWriter;
@@ -5,10 +7,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DukeCmd {
+/**
+ * Command line application for Duke
+ */
+public class CDuke {
 
     private static final String LOGO = ""
             + " ____        _        \n"
@@ -24,7 +30,7 @@ public class DukeCmd {
     private final List<Task> taskList;
     private final Scanner scanner;
 
-    public DukeCmd() {
+    public CDuke() {
         this.taskList = new ArrayList<>(100);
         this.scanner = new Scanner(System.in);
     }
@@ -46,6 +52,9 @@ public class DukeCmd {
         fileWriter.close();
     }
 
+    /**
+     * Main logic for Duke commandline
+     */
     public void run() {
 
         System.out.println("Hello from\n" + LOGO);
@@ -54,14 +63,16 @@ public class DukeCmd {
         while(true) {
 
             // Prompt for input
-            Matcher matcher = INPUT_PATTERN.matcher(scanner.nextLine());
+            String input = scanner.nextLine();
+            Matcher matcher = INPUT_PATTERN.matcher(input);
 
             // No input received, skip
             if (!matcher.matches()) continue;
 
             // Look up command and execute
-            DukeCmdEnum key = DukeCmdEnum.fromString(matcher.group(1));
-            key.execute(this.taskList, matcher.group(2));
+            CommandType type = CommandType.get(matcher.group(1));
+            Consumer<List<Task>> exec = type.generate(matcher.group(2));
+            exec.accept(taskList);
 
             // Save on disk
             try {
@@ -70,8 +81,8 @@ public class DukeCmd {
                 System.out.println("Internal Error: Failed to save file list");
             }
 
-            // Exit DukeCmd
-            if (key.equals(DukeCmdEnum.BYE)) {
+            // Exit CDuke
+            if (type.equals(CommandType.BYE)) {
                 break;
             }
         }

@@ -1,5 +1,8 @@
 package task;
 
+/**
+ * A task is a is an item that has a description and is completable
+ */
 public abstract class Task implements CSVable<Task> {
 
     private static final String SYMBOL_DONE = "✓";
@@ -37,7 +40,6 @@ public abstract class Task implements CSVable<Task> {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     @Override
     public String toString() {

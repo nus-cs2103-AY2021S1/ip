@@ -1,3 +1,2 @@
-T,false,nothing!
-E,false,party,midnight
-D,false,homework,tonight
+T,true,manaajlsfke
+E,true,shopping,22082020 0900,23102021 1800

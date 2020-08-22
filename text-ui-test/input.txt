@@ -13,12 +13,12 @@ deadline wrong/athaha
 event nope
 event wrong/bywahaha
 todo readbook
-deadline return book /by June 6th
-event project meeting /at Aug 6th 2-4pm
+deadline return book /by 06062020 2359
+event project meeting /from 06082020 1400 /till 06082020 1600
 todo join sports club
 todo borrow book
-deadline drink coffee/by June 7th
-event drink tea/atAug 7th 4-6pm
+deadline drink coffee/by07062020 2359
+event drink tea/from07082020 1600/till07082020 1800
 list
 done 0
 done 8
