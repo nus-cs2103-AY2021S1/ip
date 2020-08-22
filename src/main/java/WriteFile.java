@@ -103,6 +103,7 @@ public class WriteFile {
         BufferedWriter bufferedWriter = new BufferedWriter(writer);
         bufferedWriter.write(text);
         bufferedWriter.newLine();
+        //bufferedWriter.write("\n");
         bufferedWriter.close();
         //PrintWriter printer = new PrintWriter(writer);
         //printer.printf("%s" + "%n", text);
@@ -141,7 +142,9 @@ public class WriteFile {
             if (trimLine.equals(lineToRemove)) {
                 continue;
             }
-            writer.write(currLine + System.getProperty("line.separator"));
+            //writer.write(currLine + System.getProperty("line.separator"));
+            writer.write(currLine + '\n');
+            //writer.append('\n');
         }
         writer.close();
         reader.close();
@@ -168,10 +171,13 @@ public class WriteFile {
         while((currLine = reader.readLine()) != null) {
             String trimLine = currLine.trim();
             if (trimLine.equals(lineToUpdate)) {
-                writer.append(doneLine);
-                writer.append('\n');
+                //writer.append(doneLine);
+                //writer.append('\n');
+                writer.write(doneLine + '\n');
             } else {
-                writer.write(currLine + System.getProperty("line.separator"));
+                //writer.write(currLine + System.getProperty("line.separator"));
+                writer.write(currLine + '\n');
+                //writer.append('\n');
             }
         }
         writer.close();

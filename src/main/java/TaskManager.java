@@ -7,15 +7,13 @@ public class TaskManager {
 
     public static String processTasks(Task task) {
         String result = "";
-        int isDone = task.getIsDone() == "[\u2713] " ? 1 : 0;
+        int isDone = task.getIsDone().equals("[\u2713] ") ? 1 : 0;
         if (task instanceof Todo) {
             result = "T | " + isDone + " | " + task.getTaskName();
         } else if (task instanceof Deadline) {
             result = "D | " + isDone + " | " + task.getTaskName() + " | " + ((Deadline) task).getBy();
         } else if (task instanceof Event) {
             result = "E | " + isDone + " | " + task.getTaskName() + " | " + ((Event) task).getAt();
-        } else {
-            ;
         }
         return result;
     }
