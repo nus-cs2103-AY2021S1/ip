@@ -37,6 +37,16 @@ public class Storage {
             // If path doesn't exist, create one
             if (Files.notExists(path)) {
                 File newDir = new File(String.valueOf(path));
+                String[] toCreate = filePath.split("/");
+
+                // Create folders for each directory specified in the filePath
+                for (int i = 0; i < toCreate.length - 1; i++) {
+                    String dir = toCreate[i];
+                    Path miniPath = Paths.get(home, dir);
+                    File miniDir = new File(String.valueOf(miniPath));
+                    miniDir.mkdir();
+                }
+
                 newDir.createNewFile();
             }
         } catch (IOException e) {
