@@ -3,13 +3,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static boolean isNumeric(String str){
-        for (int i = str.length(); --i >= 0;) {
-            if (!Character.isDigit(str.charAt(i))) {
-                return false;
-            }
-        } return true;
-    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -26,7 +19,8 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
 
-        List<Task> taskList = new ArrayList<>();
+        Storage storage = new Storage("data/duke.txt");
+        List<Task> taskList = storage.load();
 
         while(!command.equals("bye")) {
             try {
@@ -70,38 +64,7 @@ public class Duke {
                         case "todo":
                         case "deadline":
                         case "event":  //add tasks
-                            Task task = null;
-                            //toDos
-                            if (commands[0].equals("todo")) {
-                                if (commands.length < 2 || commands[1].isBlank()) {
-                                    throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
-                                }
-                                task = new Todo(commands[1]);
-                            }
-                            //deadline
-                            if (commands[0].equals("deadline")) {
-                                String key = " /by ";
-                                if (commands[1].isBlank()) {
-                                    throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
-                                }
-                                if (!commands[1].contains(key)) {
-                                    throw new DukeException(" ☹ OOPS!!! The description of a deadline must include /by keywords");
-                                }
-                                String[] arguments = commands[1].split(key);
-                                task = new Deadline(arguments[0], arguments[1]);
-                            }
-                            //event
-                            if (commands[0].equals("event")) {
-                                String key = " /at ";
-                                if (commands[1].isBlank()) {
-                                    throw new DukeException(" ☹ OOPS!!! The description of a event cannot be empty.");
-                                }
-                                if (!commands[1].contains(key)) {
-                                    throw new DukeException(" ☹ OOPS!!! The description of a event must include /at keywords");
-                                }
-                                String[] arguments = commands[1].split(key);
-                                task = new Event(arguments[0], arguments[1]);
-                            }
+                            Task task = createTask(commands);
                             System.out.println(line
                                     + " Got it. I've added this task: ");
                             taskList.add(task);
@@ -118,9 +81,53 @@ public class Duke {
                         + e.msg + "\n"
                         + line);
             }
+            storage.store(taskList);
             command = sc.nextLine();
         }
 
         System.out.println(line + " Bye. Hope to see you again soon!\n" + line);
+    }
+
+    private static boolean isNumeric(String str){
+        for (int i = str.length(); --i >= 0;) {
+            if (!Character.isDigit(str.charAt(i))) {
+                return false;
+            }
+        } return true;
+    }
+
+    private static Task createTask(String[] commands) throws DukeException{
+        switch (commands[0]) {
+            case "todo":
+                if (commands.length < 2 || commands[1].isBlank()) {
+                    throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
+                }
+                return new Todo(commands[1]);
+            case "deadline": {
+                String key = " /by ";
+                if (commands[1].isBlank()) {
+                    throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+                }
+                if (!commands[1].contains(key)) {
+                    throw new DukeException(" ☹ OOPS!!! The description of a deadline must contain /by keywords");
+                }
+                String[] arguments = commands[1].split(key);
+                return new Deadline(arguments[0], arguments[1]);
+            }
+            case "event": {
+                String key = " /at ";
+                if (commands[1].isBlank()) {
+                    throw new DukeException(" ☹ OOPS!!! The description of a event cannot be empty.");
+                }
+                if (!commands[1].contains(key)) {
+                    throw new DukeException(" ☹ OOPS!!! The description of a event must contain /at keywords");
+                }
+                String[] arguments = commands[1].split(key);
+                return new Event(arguments[0], arguments[1]);
+            }
+            default: {
+                return null;
+            }
+        }
     }
 }
