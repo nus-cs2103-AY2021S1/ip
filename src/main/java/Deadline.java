@@ -2,11 +2,11 @@ import java.util.HashMap;
 
 public class Deadline extends Task {
 
-    private String deadline = "";
+    private TimePoint deadline;
 
     public Deadline(String name, String deadline) {
         super(name);
-        this.deadline = deadline;
+        this.deadline = TimePoint.of(deadline);
     }
 
     public Deadline(String name, String deadline, boolean done) {
@@ -16,7 +16,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.deadline + ")";
+        return "[D]" + super.toString() + " (by: " + this.deadline.toString() + ")";
     }
 
     @Override
