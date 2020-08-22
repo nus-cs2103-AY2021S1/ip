@@ -47,18 +47,9 @@ public class Parser {
         } else if (command.split(" ")[0].equals("delete")) {
             parsedCommand = evaluateCompleteOrDelete(command, CommandType.DELETE);
         }  else if (command.split(" ")[0].equals("todo")) {
-            /*
-            if (command.strip().split(" ").length == 1) {
-                throw new CommandNotFoundException("The description for todo should not be empty");
-            } else {
-                map.put("type", Command.ADD_TODO);
-                map.put("description", command.split("\\s+", 2)[1]);
-            }
-            */
             parsedCommand = evaluateAddCommand("", command, CommandType.ADD_TODO);
         } else if (command.split(" ")[0].equals("deadline")) {
             parsedCommand = evaluateAddCommand(" /by ", command, CommandType.ADD_DEADLINE);
-
         } else if (command.split(" ")[0].equals("event")) {
             parsedCommand = evaluateAddCommand(" /at ", command, CommandType.ADD_EVENT);
         } else if (command.split(" ")[0].equals("find")) {
@@ -66,7 +57,6 @@ public class Parser {
         } else {
             throw new CommandNotFoundException("The command is not found");
         }
-
         return parsedCommand;
     }
 
@@ -85,10 +75,6 @@ public class Parser {
             if (command.strip().split(" ").length == 1) {
                 throw new CommandNotFoundException("The description for todo should not be empty");
             } else {
-                /*
-                map.put("type", Command.ADD_TODO);
-                map.put("description", command.split("\\s+", 2)[1]);
-                */
                 return new AddCommand(new ToDo(command.split("\\s+", 2)[1]));
             }
         } else if (command.split(" ").length == 1) {
@@ -103,10 +89,6 @@ public class Parser {
                     String time;
                     String description = content.split(string)[0];
                     time = content.strip().split(string, 2)[1];
-
-
-                    //map.put("type", commandtype);
-                    //map.put("description", description);
                     LocalDate localDate = LocalDate.parse(time.strip());
 
                     if(commandType == CommandType.ADD_DEADLINE) {
@@ -149,10 +131,6 @@ public class Parser {
             } else {
                 return new DeleteCommand(number);
             }
-            /*
-            map.put("type", commandType);
-            map.put("number", String.valueOf(number));
-            */
         } catch (NumberFormatException exception) {
             throw new CommandNotFoundException("The " + type + " command should be in the format:\n" + type + " number label of the task to be completed");
         }
@@ -167,12 +145,10 @@ public class Parser {
      */
     public static Command evaluateListDate(String command) throws CommandNotFoundException {
         try {
-            //map.put("type", Command.LIST_DATE);
             if (command.split("\\s+").length != 2) {
                 throw new CommandNotFoundException("Type list to list all the tasks. Type list yyyy-MM-dd to list the tasks on a specific date");
             } else {
                 LocalDate localDate = LocalDate.parse(command.split("\\s+")[1]);
-                //map.put("time", localDate);
                 return new ListDateCommand(localDate);
             }
         } catch (DateTimeParseException dateTimeParseException) {

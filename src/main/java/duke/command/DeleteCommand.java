@@ -39,9 +39,7 @@ public class DeleteCommand extends Command {
             throw new TaskNotFoundException("There is no such task");
         } else {
             Task task = taskList.remove(count - 1);
-
             ui.showDelete(task, count, taskList.getSize());
-
             storage.writeRecord(taskList);
         }
     }

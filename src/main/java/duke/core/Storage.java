@@ -13,14 +13,12 @@ import main.java.duke.task.ToDo;
 import main.java.duke.task.Deadline;
 import main.java.duke.handle.LoadingException;
 
-
 /**
  * The Storage class reads the local task record and the task list, and updates
  * the local record when the list of tasks is changed.
  */
 public class Storage {
     public String path;
-    //Scanner scanner;
 
     /**
      * Takes in the path of the local record and returns a storage manager.
@@ -51,14 +49,8 @@ public class Storage {
             while (scanner.hasNextLine()) {
                 next = scanner.nextLine();
                 String[] strings = next.split(" \\| ");
-            /*
-            for(int i = 0; i < strings.length; i = i + 1) {
-                System.out.println(strings[i]);
-            }
-            */
 
                 if (strings[1].equals("0") || strings[1].equals("1")) {
-
                     if (strings[0].equals("T") && strings.length == 3) {
                         ToDo todo = new ToDo(strings[2]);
                         if (strings[1].equals("1")) {

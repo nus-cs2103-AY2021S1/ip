@@ -88,12 +88,6 @@ public class Ui {
      * @param taskList The task list.
      */
     public void showList(TaskList taskList) {
-        /*
-        String result = "";
-        for(int i = 0; i < tasks.size(); i = i + 1) {
-            result = result.concat(String.valueOf(i + 1) + "." + tasks.get(i).toString() + "\n");
-        }
-        */
         System.out.println(makeBlock(taskList.toString()));
     }
 
