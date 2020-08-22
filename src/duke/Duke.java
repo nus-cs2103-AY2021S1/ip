@@ -4,10 +4,12 @@ import java.io.IOException;
 
 import command.Command;
 import exception.DukeException;
+import exception.NoSuchTaskException;
 
+/**
+ * Represents a <code>Duke</code> object which is a ChatBot that can keep track of several kinds of tasks.
+ */
 public class Duke {
-
-
     private final String DATA_DIRECTORY = "data";
     private final String SAVED_FILE_PATH = "data/duke.txt";
 
@@ -30,6 +32,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the <code>Duke</code> object.
+     */
     public void run() {
         ui.hello();
         boolean isExit = false;
@@ -47,12 +52,5 @@ public class Duke {
             }
         }
     }
-
-
-
-
-
-
-
 }
 

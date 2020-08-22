@@ -1,5 +1,8 @@
 package exception;
 
+/**
+ * Represents an exception stating the description of the <code>Event</code> to be added is empty.
+ */
 public class EmptyEventException extends DukeException {
     @Override
     public String toString() {
