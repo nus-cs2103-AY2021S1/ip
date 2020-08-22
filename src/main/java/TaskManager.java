@@ -1,9 +1,35 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import static java.lang.Integer.parseInt;
 
 public class TaskManager {
 
     private static ArrayList<Task> taskList = new ArrayList<>();
+
+
+    public static boolean containsWord(String text, String word) {
+        String REGEX_FIND_WORD="(?i).*?\\b%s\\b.*?";
+        String regex=String.format(REGEX_FIND_WORD, java.util.regex.Pattern.quote(word));
+        return text.matches(regex);
+    }
+
+    public static void findInList(String keyword) {
+        for (Task task : taskList) {
+            if (containsWord(task.getTaskName(), keyword)) {
+                System.out.println(task);
+            }
+        }
+    }
+
+    public static void handleFind(String command) throws DukeException {
+        String[] todoCommand = command.split("\\W+");
+        if (todoCommand.length == 1) {
+            throw new DukeException("ohno");
+        } else {
+            String taskName = command.substring(command.indexOf("find") + 5);
+            findInList(taskName);
+        }
+    }
 
     public static void addToList(Task task) {
         taskList.add(task);
@@ -40,6 +66,10 @@ public class TaskManager {
 
     public static void eventAtReminder() {
         System.out.println("Oh no! Remember to write /at (time) after your task!");
+    }
+
+    public static void incorrectTimeFormat() {
+        System.out.println("Oh no! Please only type in the date in this format: yyyy-mm-dd (eg, 2019-10-15).");
     }
 
     public static void setDoneTask(String command) throws DukeException{
@@ -107,6 +137,8 @@ public class TaskManager {
                 deadlineByReminder();
             } catch (ArrayIndexOutOfBoundsException e) {
                 deadlineByReminder();
+            } catch (DateTimeParseException e) {
+                incorrectTimeFormat();
             }
         }
     }
@@ -126,6 +158,8 @@ public class TaskManager {
                 eventAtReminder();
             } catch (ArrayIndexOutOfBoundsException e) {
                 eventAtReminder();
+            } catch (DateTimeParseException e) {
+                incorrectTimeFormat();
             }
         }
     }
@@ -151,6 +185,9 @@ public class TaskManager {
                     break;
                 case "event":
                     handleEvent(command);
+                    break;
+                case "find":
+                    handleFind(command);
                     break;
                 default:
                     System.out.println("Sorry! I don't understand that command. Please try again!");
