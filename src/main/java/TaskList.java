@@ -20,7 +20,7 @@ public class TaskList {
     /**
      * Adds task to the list.
      * Also prints out remaining tasks.
-     * @param task
+     * @param task Task to be added to task list
      */
     public void add(Task task) {
         System.out.println("    ____________________________________________________________");
@@ -34,7 +34,7 @@ public class TaskList {
     /**
      * Add method for use during Storage initialisation.
      * No output will be printed out.
-     * @param task
+     * @param task Task to be added to task list
      */
     // initAdd method for adding task to list during initialisation
     public void initAdd(Task task) {
@@ -125,8 +125,8 @@ public class TaskList {
     }
 
     /**
-     * Returns the current size of the Task List
-     * @return
+     * Returns the current size of the Task List.
+     * @return return size of task list
      */
     public int size() {
         return list.size();

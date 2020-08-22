@@ -35,5 +35,4 @@ public abstract class Task {
     public String toString() {
         return String.format("[%s] %s", isDone ? "\u2713" : "\u2718", taskName);
     }
-
 }

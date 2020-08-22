@@ -46,12 +46,16 @@ public class Event extends Task {
      */
     @Override
     public String getInfo() {
-        return String.format("E | %d | %s | %s %s-%s\n", isDone ? 1 : 0, taskName, date.toString(), startTime.toString(), endTime.toString());
+        return String.format("E | %d | %s | %s %s-%s\n", isDone ? 1 : 0,
+                taskName, date.toString(), startTime.toString(), endTime.toString());
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + startTime + " - " + endTime + ")";
+        return "[E]" + super.toString()
+                + " (at: "
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + " " + startTime + " - " + endTime + ")";
     }
 
 }

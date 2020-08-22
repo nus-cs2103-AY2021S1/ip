@@ -31,7 +31,8 @@ public class Storage {
     //    // only can be used by add method
     //    public static void save(Task task) {
     //        try {
-    //            FileWriter fw = new FileWriter(FILENAME, true); // true to mark fw to append line to existing file
+    //            FileWriter fw = new FileWriter(FILENAME, true);
+    //            // true to mark fw to append line to existing file
     //            fw.write(task.getInfo());
     //            fw.close();
     //        } catch (IOException e) {
@@ -67,7 +68,7 @@ public class Storage {
         File directory = new File(DIRECTORY_NAME);
 
         // checks if directory exists, else directory will be created
-        if (!directory.exists()){
+        if (!directory.exists()) {
             directory.mkdir();
         }
 

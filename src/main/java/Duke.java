@@ -35,7 +35,7 @@ public class Duke {
     }
 
     /**
-     * Main method of Duke
+     * Main method of Duke.
      * @param args Unused.
      */
     public static void main(String[] args) {
