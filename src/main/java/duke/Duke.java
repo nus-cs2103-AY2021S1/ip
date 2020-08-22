@@ -1,10 +1,13 @@
 package duke;
 
 import duke.Command.Command;
+
 import duke.Exception.DukeException;
+
 import duke.Parser.Parser;
 import duke.Task.Task;
 import duke.Task.TaskList;
+
 import duke.Ui.Ui;
 
 import java.util.ArrayList;

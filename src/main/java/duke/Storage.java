@@ -1,15 +1,18 @@
 package duke;
+import java.util.Scanner;
+
+import java.util.ArrayList;
 
 import duke.Exception.DukeException;
+
 import duke.Task.*;
+
 import duke.Ui.Message;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Storage {
     
