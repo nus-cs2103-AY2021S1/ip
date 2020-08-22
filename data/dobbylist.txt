@@ -1,3 +1,0 @@
-[E][✘] lecture   (at: friday 4pm)
-[D][✘] ip task for week 3 (by: Thursday midnight)
-[T][✘] push new levels to github

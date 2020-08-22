@@ -45,7 +45,7 @@ public class Dobby {
 
     private static void readFile () {
         try {
-            File file = new File("./data/dobbylist.txt");
+            File file = new File("../dobbylist.txt");
             Scanner scanner = new Scanner(file);
             while (scanner.hasNext()) {
                 String str = scanner.nextLine();
@@ -59,7 +59,7 @@ public class Dobby {
 
     private static void rewriteFile() {
         try {
-            FileWriter fw = new FileWriter("./data/dobbylist.txt");
+            FileWriter fw = new FileWriter("../dobbylist.txt");
             fw.flush();
             for (int i = 0; i < tasks.size() - 1; i++) {
                 Task task = tasks.get(i);
