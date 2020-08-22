@@ -7,7 +7,12 @@ public class Event extends Task {
     }
 
     @Override
+    public String textFormat() {
+        return "event, " + super.textFormat() + "/at" + this.datetime;
+    }
+
+    @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + datetime + ")";
+        return "[E]" + super.toString() + " (at: " + this.datetime + ")";
     }
 }

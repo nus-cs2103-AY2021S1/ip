@@ -5,6 +5,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public String textFormat() {
+        return "todo, " + super.textFormat();
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

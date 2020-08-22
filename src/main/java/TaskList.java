@@ -1,13 +1,60 @@
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class TaskList {
-    private ArrayList<Task> list = new ArrayList<>();
+    private ArrayList<Task> lst = new ArrayList<>();
+    private File file; // format: e.g. deadline, 1, description/byDATETIME\n
+
+
+    public TaskList() throws DukeException {
+        try {
+            this.file = new File("./data/duke.txt"); // main/data/duke.txt
+            Scanner sc = new Scanner(this.file);
+            while (sc.hasNext()) { // e.g. deadline, 1, description/by date
+                String[] arr = sc.nextLine().split(", ");
+                if (arr.length == 3) {
+                    this.addTask(arr[0], arr[2], arr[1].equals("1"), true);
+                } else {
+                    throw new DukeException("invalid format in file");
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new DukeException("Text file not found.");
+        }
+    }
+
+    public void updateTextFile() throws DukeException {
+        try {
+            String text = "";
+            FileWriter fw = new FileWriter(this.file);
+            for (Task t : lst) {
+                text += t.textFormat() + "\n";
+            }
+            fw.write(text);
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeException("Text file not found.");
+        }
+    }
 
     public int size() {
-        return this.list.size();
+        return this.lst.size();
     }
 
     public Task addTask(String type, String input) throws DukeException {
+        try {
+            return this.addTask(type, input, false, false);
+        } catch (DukeException e) {
+            throw e;
+        }
+    }
+
+    private Task addTask(String type, String input, boolean done, boolean fileRead) throws DukeException {
         Task task;
         if (type.equals("todo")) {
             task = new Todo(input);
@@ -31,13 +78,19 @@ public class TaskList {
         if (input.isEmpty()) {
             throw new DukeException("OOPS!!! I'm sorry, the description cannot be empty :<");
         }
-        this.list.add(task);
+        task = done ? task.markAsDone() : task;
+        this.lst.add(task);
+        if (!fileRead) { // if not called by constructor
+            this.updateTextFile();
+        }
         return task;
     }
 
     public Task markAsDone(int i) throws DukeException {
         try {
-            return this.list.get(i).markAsDone();
+            Task task = this.lst.get(i).markAsDone();
+            this.updateTextFile();
+            return task;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! I'm sorry, the task number is out of range :<");
         }
@@ -45,7 +98,9 @@ public class TaskList {
 
     public Task deleteTask(int i) throws DukeException {
         try {
-            return this.list.remove(i);
+            Task task = this.lst.remove(i);
+            this.updateTextFile();
+            return task;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! I'm sorry, the task number is out of range :<");
         }
@@ -57,7 +112,7 @@ public class TaskList {
         for (int i = 0; i < this.size(); i++) {
             int taskNum = i + 1;
             listString += taskNum + ".";
-            listString += this.list.get(i).toString();
+            listString += this.lst.get(i).toString();
             if (i < this.size() - 1) {
                 listString += '\n';
             }
