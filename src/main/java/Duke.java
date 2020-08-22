@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -11,6 +13,7 @@ public class Duke {
         String input = sc.nextLine();
         ArrayList<Task> list = new ArrayList<>();
         while(!input.equals("bye")){
+            input = input.trim().replaceAll("\\s{2,}", " ");
             System.out.println("_____________________________");
             if (input.equals("list")){
                 print(list);
@@ -109,7 +112,33 @@ public class Duke {
 
     public static Deadline getDeadline(String word) throws InvalidDeadlineException{
         if (word.contains("/by") && !word.substring(word.indexOf("/by") + 3).equals("")){
-            return new Deadline(word.substring(8));
+            word = word.substring(8);
+            int index = word.indexOf("/by");
+            String str = word.substring(index + 3).trim();
+            String datestr = str.replaceAll("-", "/");
+            String[] datearr = datestr.split("/");
+            if (datearr[0].length() < 2){
+                datestr = "0" + datestr;
+                datearr[0] = "0" + datearr[0];
+            }
+            if (datearr[1].length() < 2){
+                datestr = datearr[0] + "/0" + datearr[1] + "/" + datearr[2];
+            }
+            if (!datestr.contains(":")){
+                String[] arr = datestr.split(" ");
+                if (arr.length > 2){
+                    throw new InvalidDeadlineException();
+                }
+                arr[1] = arr[1].substring(0, 2) + ":" + arr[1].substring(2);
+                datestr = arr[0] + " " + arr[1];
+            }
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                LocalDateTime date = LocalDateTime.parse(datestr, formatter);
+                return new Deadline(word.substring(0, index), date);
+            } catch (Exception e){
+                throw new InvalidDeadlineException();
+            }
         } else {
             throw new InvalidDeadlineException();
         }
@@ -117,7 +146,34 @@ public class Duke {
 
     public static Event getEvent(String word) throws InvalidEventException{
         if (word.contains("/at") && !word.substring(word.indexOf("/at") + 3).equals("")){
-            return new Event(word.substring(5));
+            word = word.substring(5);
+            int index = word.indexOf("/at");
+            String str = word.substring(index + 3).trim();
+            String datestr = str.replaceAll("-", "/");
+            int j = 0;
+            String[] datearr = datestr.split("/");
+            if (datearr[0].length() < 2){
+                datestr = "0" + datestr;
+                datearr[0] = "0" + datearr[0];
+            }
+            if (datearr[1].length() < 2){
+                datestr = datearr[0] + "/0" + datearr[1] + "/" + datearr[2];
+            }
+            if (!datestr.contains(":")){
+                String[] arr = datestr.split(" ");
+                if (arr.length > 2){
+                    throw new InvalidEventException();
+                }
+                arr[1] = arr[1].substring(0, 2) + ":" + arr[1].substring(2);
+                datestr = arr[0] + " " + arr[1];
+            }
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                LocalDateTime date = LocalDateTime.parse(datestr, formatter);
+                return new Event(word.substring(0, index), date);
+            } catch (Exception e){
+                throw new InvalidEventException();
+            }
         } else {
             throw new InvalidEventException();
         }

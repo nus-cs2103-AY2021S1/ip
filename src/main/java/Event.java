@@ -1,10 +1,16 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    public Event(String work){
-        super(work.substring(0, work.indexOf("/") - 1) +
-                " (at: " + work.substring(work.indexOf("/") + 4) + ")");
+    LocalDateTime date;
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy hhmm");
+
+    public Event(String work, LocalDateTime date){
+        super(work);
+        this.date = date;
     }
 
     public String toString(){
-        return "[E]" + super.toString();
+        return "[E]" + super.toString() + "(at: " + date.format(format) + ")";
     }
 }
