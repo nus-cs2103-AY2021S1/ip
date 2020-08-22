@@ -1,161 +1,43 @@
-import java.io.*;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) throws IOException {
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.readFile());
+        } catch (IOException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
         Scanner sc = new Scanner(System.in);
         String res;
-        List<Task> data = new ArrayList<>();
-
-        //read file
-        String pathname = "./log.txt";
-        File filename = new File(pathname);
-        InputStreamReader reader = new InputStreamReader(new FileInputStream(filename));
-        BufferedReader br = new BufferedReader(reader);
-        String line;
-        line = br.readLine();
-        while (line != null) {
-            char type = line.charAt(8);
-            boolean isDone = line.charAt(11) == '✓';
-            if(type == 'T') {
-                Todo t = new Todo(line.substring(14));
-                if(isDone) {
-                    t.done();
-                }
-                data.add(t);
-            } else if(type == 'D') {
-                String[] parts = line.substring(5).split(" ");
-                Deadline d = new Deadline(parts[1], LocalDateTime.of(Integer.parseInt(parts[5]), getMonth(parts[3]),
-                        Integer.parseInt(parts[4]), Integer.parseInt(parts[6].split(":")[0]),
-                        Integer.parseInt(parts[6].split(":")[1].substring(
-                                0, parts[6].split(":")[1].length() - 1))));
-                if(isDone) {
-                    d.done();
-                }
-                data.add(d);
-            } else {
-                String[] parts = line.substring(5).split(" ");
-                Event e = new Event(parts[1], LocalDateTime.of(Integer.parseInt(parts[5]), getMonth(parts[3]),
-                        Integer.parseInt(parts[4]), Integer.parseInt(parts[6].split(":")[0]),
-                        Integer.parseInt(parts[6].split(":")[1].substring(
-                                0, parts[6].split(":")[1].length() - 1))));
-                if(isDone) {
-                    e.done();
-                }
-                data.add(e);
-            }
-            line = br.readLine();
-        }
-
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Hello! I'm Duke");
-        System.out.println("     What can I do for you?");
-        System.out.println("    ____________________________________________________________");
+        ui.welcome();
         while (true) {
             try {
                 res = sc.nextLine();
                 if (res.equalsIgnoreCase(Operations.BYE.name())) {
                     break;
                 } else if (res.equalsIgnoreCase(Operations.LIST.name())) {
-                    System.out.println("    ____________________________________________________________");
-                    System.out.println("     Here are the tasks in your list:");
-                    for (int i = 0; i < data.size(); i++) {
-                        System.out.printf("     %d.%s\n", i + 1, data.get(i).toString());
-                    }
-                    System.out.println("    ____________________________________________________________");
+                    ui.printList(tasks.getData());
                 } else if (res.startsWith(Operations.DONE.name().toLowerCase())) {
-                    if (res.length() <= 5) {
-                        // Exception: eg. done
-                        throw new DukeException("     ☹ OOPS!!! The description of done is incomplete.");
-                    }
-                    int n = Integer.parseInt(res.substring(5)) - 1;
-                    if (n > data.size() || n < 0) {
-                        //Exception: eg. done 999
-                        throw new DukeException("     ☹ OOPS!!! The index is out of bounds.");
-                    }
-                    data.get(n).done();
-                    System.out.println("    ____________________________________________________________");
-                    System.out.println("    Nice! I've marked this task as done: ");
-                    System.out.printf("     %s\n", data.get(n).toString());
-                    System.out.println("    ____________________________________________________________");
-                    writeFile(data);
+                    tasks.done(res, ui, storage);
                 } else if (res.startsWith(Operations.DELETE.name().toLowerCase())) {
-                    if (res.length() <= 7) {
-                        // Exception: eg. delete
-                        throw new DukeException("     ☹ OOPS!!! The description of delete is incomplete.");
-                    }
-                    int n = Integer.parseInt(res.substring(7)) - 1;
-                    if (n > data.size() || n < 0) {
-                        //Exception: eg. delete 999
-                        throw new DukeException("     ☹ OOPS!!! The index is out of bounds.");
-                    }
-                    System.out.println("    ____________________________________________________________");
-                    System.out.println("     Noted. I've removed this task: ");
-                    System.out.printf("     %s\n", data.get(n).toString());
-                    data.remove(n);
-                    System.out.printf("     Now you have %d tasks in the list.\n", data.size());
-                    System.out.println("    ____________________________________________________________");
-                    writeFile(data);
+                    tasks.delete(res, ui, storage);
                 } else if (res.startsWith(Operations.TODO.name().toLowerCase())) {
-                    if (res.length() <= 5) {
-                        // Exception: eg. todo
-                        throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
-                    }
-                    Todo t = new Todo(res.substring(5));
-                    data.add(t);
-                    System.out.println("    ____________________________________________________________");
-                    System.out.println("     Got it. I've added this task: ");
-                    System.out.printf("       %s\n", t.toString());
-                    System.out.printf("     Now you have %d tasks in the list.\n", data.size());
-                    System.out.println("    ____________________________________________________________");
-                    writeFile(data);
+                    tasks.todo(res, ui, storage);
                 } else if (res.startsWith(Operations.DEADLINE.name().toLowerCase())) {
-                    if (res.length() <= 9) {
-                        // Exception: eg. deadline
-                        throw new DukeException("     ☹ OOPS!!! The description of a deadline cannot be empty.");
-                    }
-                    String[] ss = res.split("/");
-                    if (!ss[1].startsWith("by ")) {
-                        // Exception: eg. deadline do homework /Mon
-                        throw new DukeException("     ☹ OOPS!!! Please enter the time following the format: by XXX");
-                    }
-                    Deadline t = new Deadline(ss[0].substring(9),
-                            LocalDateTime.of(Integer.parseInt(ss[3].split(" ")[0]), Integer.parseInt(ss[2]),
-                                    Integer.parseInt(ss[1].substring(3)),
-                                    Integer.parseInt(ss[3].split(" ")[1].substring(0, 2)),
-                                    Integer.parseInt(ss[3].split(" ")[1].substring(2))));
-                    data.add(t);
-                    System.out.println("    ____________________________________________________________");
-                    System.out.println("     Got it. I've added this task: ");
-                    System.out.printf("       %s\n", t.toString());
-                    System.out.printf("     Now you have %d tasks in the list.\n", data.size());
-                    System.out.println("    ____________________________________________________________");
-                    writeFile(data);
+                    tasks.deadline(res, ui, storage);
                 } else if (res.startsWith(Operations.EVENT.name().toLowerCase())) {
-                    if (res.length() <= 9) {
-                        // Exception: eg. event
-                        throw new DukeException("     ☹ OOPS!!! The description of an event cannot be empty.");
-                    }
-                    String[] ss = res.split("/");
-                    if (!ss[1].startsWith("at ")) {
-                        // Exception: eg. event meeting /Mon
-                        throw new DukeException("     ☹ OOPS!!! Please enter the time following the format: at XXX");
-                    }
-                    Event t = new Event(ss[0].substring(9),
-                            LocalDateTime.of(Integer.parseInt(ss[3].split(" ")[0]), Integer.parseInt(ss[2]),
-                                    Integer.parseInt(ss[1].substring(3)),
-                                    Integer.parseInt(ss[3].split(" ")[1].substring(0, 2)),
-                                    Integer.parseInt(ss[3].split(" ")[1].substring(2))));
-                    data.add(t);
-                    System.out.println("    ____________________________________________________________");
-                    System.out.println("     Got it. I've added this task: ");
-                    System.out.printf("       %s\n", t.toString());
-                    System.out.printf("     Now you have %d tasks in the list.\n", data.size());
-                    System.out.println("    ____________________________________________________________");
-                    writeFile(data);
+                    tasks.event(res, ui, storage);
                 } else {
                     // Exception: eg. ???
                     throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -163,47 +45,16 @@ public class Duke {
             } catch (NumberFormatException e) {
                 // Exception: eg. done some words
                 // Exception: eg. delete some words
-                System.out.println("    ____________________________________________________________");
-                System.out.println("     ☹ OOPS!!! Please enter a number");
-                System.out.println("    ____________________________________________________________");
+                ui.showNumberFormatError();
             } catch (DukeException e) {
-                System.out.println("    ____________________________________________________________");
-                System.out.println(e.toString().substring(14));
-                System.out.println("    ____________________________________________________________");
+                ui.showDukeError(e);
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                ui.showFileNotFoundError();
             }
         }
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Bye. Hope to see you again soon!");
-        System.out.println("    ____________________________________________________________");
+        ui.bye();
     }
-
-    public static void writeFile(List<Task> data) throws FileNotFoundException {
-        final PrintStream oldStdout = System.out;
-        PrintStream ps = new PrintStream("./log.txt");
-        System.setOut(ps);
-        for (int i = 0; i < data.size(); i++) {
-            System.out.printf("     %d.%s\n", i + 1, data.get(i).toString());
-        }
-        System.setOut(oldStdout);
-    }
-
-    public static int getMonth(String month) {
-        return switch (month) {
-            case "JAN" -> 1;
-            case "FEB" -> 2;
-            case "MAR" -> 3;
-            case "APR" -> 4;
-            case "MAY" -> 5;
-            case "JUN" -> 6;
-            case "JUL" -> 7;
-            case "AUG" -> 8;
-            case "SEP" -> 9;
-            case "OCT" -> 10;
-            case "NOV" -> 11;
-            case "DEC" -> 12;
-            default -> 0;
-        };
+    public static void main(String[] args) {
+        new Duke("./log.txt").run();
     }
 }
