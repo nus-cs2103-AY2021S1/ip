@@ -1,4 +1,4 @@
-package duke;
+package duke.types;
 
 /**
  * Encapsulate a enum class that represents the type of a task.
@@ -45,7 +45,7 @@ public enum TaskType {
      * @param type a string representing the type.
      * @return a TaskType object of the specified type and null if no such object exists.
      */
-    public static TaskType valueOfStatus(String type) {
+    public static TaskType valueOfType(String type) {
         for (TaskType e : values()) {
             if (e.type.equals(type)) {
                 return e;

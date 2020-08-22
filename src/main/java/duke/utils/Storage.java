@@ -3,7 +3,7 @@ package duke.utils;
 import duke.Messenger;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.TaskType;
+import duke.types.TaskType;
 
 import java.io.File;
 import java.io.FileWriter;

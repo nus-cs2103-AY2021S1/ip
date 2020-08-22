@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.TaskType;
+import duke.types.TaskType;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -22,7 +22,7 @@ public class Task {
      */
     public Task(String content, String type) {
         this.content = content;
-        this.type = TaskType.valueOfStatus(type);
+        this.type = TaskType.valueOfType(type);
     }
 
     /**
@@ -34,7 +34,7 @@ public class Task {
      */
     public Task(String content, String type, String date) {
         this.content = content;
-        this.type = TaskType.valueOfStatus(type);
+        this.type = TaskType.valueOfType(type);
         this.date = LocalDate.parse(date);
     }
 
@@ -47,7 +47,7 @@ public class Task {
      */
     public Task(String content, String type, LocalDate date) {
         this.content = content;
-        this.type = TaskType.valueOfStatus(type);
+        this.type = TaskType.valueOfType(type);
         this.date = date;
     }
 

@@ -2,7 +2,8 @@ package duke.utils;
 
 import duke.DukeException;
 import duke.Messenger;
-import duke.TaskType;
+import duke.types.ActionType;
+import duke.types.TaskType;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -29,8 +30,8 @@ public class Parser {
         String[] split = command.split(" ", 2);
         int len = split.length;
 
-        String status = split[0];
-        if (TaskType.valueOfStatus(status) == null && !status.equals("done") && !status.equals("delete") && !status.equals("find")) {
+        String type = split[0];
+        if (TaskType.valueOfType(type) == null && ActionType.valueOfType(type) == null) {
             throw new DukeException(Messenger.SPELL_ERROR);
         }
 
