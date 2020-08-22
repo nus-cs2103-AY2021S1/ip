@@ -1,9 +1,13 @@
 package main.java;
 
+import java.time.LocalDate;
+
 public class Event extends Deadline{
 
-    public Event(String task, boolean complete,String deadline) {
-        super(task, complete,deadline);
+    public LocalDate date;
+
+    public Event(String task, boolean complete,LocalDate date) {
+        super(task, complete,date);
     }
 
     @Override
