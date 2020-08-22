@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,13 +12,15 @@ public class Duke {
     private static final String EXIT = "Bye. Hope to see you again soon!";
     private static final String LINE = "    ____________________________________________________________";
 
-    private static final List<Task> lst = new ArrayList<>();
+    private static final Storage storage = new Storage("./data/todo.txt");
+    private static List<Task> lst;
 
     // Scanner
     private static final Scanner sc = new Scanner(System.in);
 
     // Greeting
     private static void greeting() {
+        lst = storage.read();
         System.out.println(wrapText(INTRODUCTION));
     }
 
@@ -54,7 +55,8 @@ public class Duke {
 
     // Exit
     private static void exit() {
-        System.out.println(wrapText(EXIT));
+        storage.save(lst);
+        System.out.println(wrapText(EXIT + "\n File saved!"));
     }
 
     public static void main(String[] args) {

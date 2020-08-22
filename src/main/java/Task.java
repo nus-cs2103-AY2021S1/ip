@@ -1,4 +1,6 @@
-abstract class Task {
+import java.io.Serializable;
+
+abstract class Task implements Serializable {
 
     // Attributes
     protected final String description;
