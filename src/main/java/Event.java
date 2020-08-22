@@ -8,6 +8,11 @@ public class Event extends Task {
         this.duration = duration;
     }
 
+    Event(String title, boolean isDone, String duration) {
+        super(title, isDone);
+        this.duration = duration;
+    }
+
     static Event of(String command) throws DukeException {
         if (command.length() <= 6) {
             throw new DukeException("Event cannot be empty.");
@@ -21,5 +26,9 @@ public class Event extends Task {
 
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.duration + ")";
+    }
+
+    public String print() {
+        return "E | " + super.print() + " | " + this.duration;
     }
 }

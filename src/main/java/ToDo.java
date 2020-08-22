@@ -4,6 +4,9 @@ public class ToDo extends Task {
     ToDo(String title) {
         super(title);
     }
+    ToDo(String title, boolean isDone) {
+        super(title, isDone);
+    }
 
     static ToDo of(String command) throws DukeException {
         if (command.length() <= 5) {
@@ -15,5 +18,9 @@ public class ToDo extends Task {
 
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    public String print() {
+        return "T | " + super.print();
     }
 }

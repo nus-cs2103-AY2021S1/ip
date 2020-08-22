@@ -8,6 +8,11 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    Deadline(String title, boolean isDone, String deadline) {
+        super(title, isDone);
+        this.deadline = deadline;
+    }
+
     static Deadline of(String command) throws DukeException {
         if (command.length() <= 9) {
             throw new DukeException("Deadline cannot be empty.");
@@ -21,5 +26,9 @@ public class Deadline extends Task {
 
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.deadline + ")";
+    }
+
+    public String print() {
+        return "D | " + super.print() + " | " + this.deadline;
     }
 }
