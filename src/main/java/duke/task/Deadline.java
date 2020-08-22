@@ -33,6 +33,11 @@ public class Deadline extends Task {
         return byTime.isBefore(date);
     }
 
+    @Override
+    public boolean happenBeforeToday() {
+        return happenBeforeDate(LocalDate.now());
+    }
+
     public boolean isOverdue() {
         return !isDone && byTime.isBefore(LocalDate.now());
     }

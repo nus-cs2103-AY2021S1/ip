@@ -41,6 +41,10 @@ public abstract class Task {
         return false;
     }
 
+    public boolean happenBeforeToday() {
+        return false;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

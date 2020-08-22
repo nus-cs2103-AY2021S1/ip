@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.component.*;
+import duke.task.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -15,14 +16,14 @@ public class HappenCommand extends Command {
         String description = input.substring(7);
         try {
             if (description.equals("on today")) {
-                ui.printList(list, t -> t.happenToday(), "happening today ");
+                ui.printList(list, Task::happenToday, "happening today ");
             } else if (description.startsWith("on ")) {
                 LocalDate date = LocalDate.parse(description.substring(3),
                         DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 ui.printList(list, t -> t.happenOnDate(date), "happening on " +
                         date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " ");
             } else if (description.equals("before today")) {
-
+                ui.printList(list, Task::happenBeforeToday, "happening before today ");
             } else if (description.equals("before ")) {
                 LocalDate date = LocalDate.parse(description.substring(3),
                         DateTimeFormatter.ofPattern("yyyy-MM-dd"));
