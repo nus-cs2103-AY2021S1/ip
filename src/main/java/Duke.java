@@ -33,6 +33,7 @@ public class Duke {
     
     public static void main(String[] args) {
         greet();
+        tasks.initTasks();
         
         Scanner sc = new Scanner(System.in);
         while(sc.hasNextLine()) {
@@ -40,9 +41,8 @@ public class Duke {
 
             switch(arr[0]) { 
             case "bye":
-                layout.print("Bye. Hope to see you again soon!");
-                System.exit(0);
                 sc.close();
+                tasks.closeDuke();
                 break;
             case "list":
                 tasks.showTasks();

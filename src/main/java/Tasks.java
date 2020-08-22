@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 public class Tasks {
     private ArrayList<Task> tasks = new ArrayList<Task>();
+    private String filePath = "data/duke.txt";
+    private FileManager fileManager = new FileManager(filePath);
+    
+    
     private Layout layout = new Layout();
     
     public enum Type {
@@ -16,43 +20,48 @@ public class Tasks {
         DONE, 
         DELETE
     }
+    
+    public void initTasks() {
+        fileManager.readFile(tasks);
+    }
 
     public void addTask(Type type, String [] arr) {
         Task task;
+        
         try {
             String date = getInfo(arr)[0];
             String description = getInfo(arr)[1];
             if (description.equals("") || arr.length == 1) {
                 throw new DukeException("The description of a " + type + " cannot be empty");
             }
-    
-            switch(type) {
-            case DEADLINE:
-                if (date.equals("")) {
-                    throw new DukeException("Please specify a due date using /by");
-                } else {
-                    task = new Deadline(description, date);
-                }
-                break;
-            case EVENT:
-                if (date.equals("")) {
-                    throw new DukeException("Please specify an event date using /at");
-                } else {
-                    task = new Event(description, date);   
-                }
-                break;
-            default: //case: todo
-                task = new Todo(description);
-                break;
+
+            switch (type) {
+                case DEADLINE:
+                    if (date.equals("")) {
+                        throw new DukeException("Please specify a due date using /by");
+                    } else {
+                        task = new Deadline(description, date);
+                    }
+                    break;
+                case EVENT:
+                    if (date.equals("")) {
+                        throw new DukeException("Please specify an event date using /at");
+                    } else {
+                        task = new Event(description, date);
+                    }
+                    break;
+                default: //case: todo
+                    task = new Todo(description);
+                    break;
             }
-    
+
             tasks.add(task);
             layout.printAddedMessage(task.toString(), tasks.size());
         } catch (DukeException e) {
             layout.print(e.getMessage());
         }
     }
-
+    
     public void showTasks() {
         layout.printTaskList(tasks);
     }
@@ -99,6 +108,12 @@ public class Tasks {
             }
         }
         return new String[]{date, description};
+    }
+    
+    public void closeDuke() {
+        fileManager.writeFile(tasks);
+        layout.print("Bye. Hope to see you again soon!");
+        System.exit(0);
     }
 
 }

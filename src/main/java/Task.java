@@ -16,8 +16,16 @@ public class Task {
     private String getStatusSymbol() {
         return done ? "[\u2713]" : "[\u2718]";
     }
+    
+    protected int getDoneInteger() {
+        return done ? 0 : 1;
+    }
 
     public String toString() {
         return getStatusSymbol() + " " + description;
+    }
+
+    public String toSave() {
+        return getDoneInteger() + " | " + description;
     }
 }

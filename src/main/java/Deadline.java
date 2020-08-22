@@ -1,7 +1,7 @@
 package ip.src.main.java;
 
 public class Deadline extends Task {
-    private String by;
+    protected String by;
 
     public Deadline(String description, String by) {
         super(description);
@@ -10,6 +10,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by + ")";
+    }
+    
+    @Override
+    public String toSave() {
+        return "D | " + getDoneInteger() + " | " + description + " | " + this.by;
     }
 }
