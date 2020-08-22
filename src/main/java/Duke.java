@@ -1,3 +1,5 @@
+import java.io.*;
+import java.nio.file.Files;
 import java.util.*;
 
 public class Duke {
@@ -11,23 +13,107 @@ public class Duke {
     public static final String DEADLINE = "deadline";
     public static final String DELETE = "delete";
 
-    public static void main(String[] args) {
-        List<Task> list = new ArrayList<>();
+    public static List<Task> list = new ArrayList<>();
+    public static final java.nio.file.Path path = java.nio.file.Paths.get(".", "data.txt");
 
+    public static void readData() {
+        boolean directoryExists = java.nio.file.Files.exists(path);
+        try {
+            if (directoryExists) {
+                FileReader fileReader = new FileReader(String.valueOf(path));
+                BufferedReader buffReader = new BufferedReader(fileReader);
+                while (buffReader.ready()) {
+                    String savedTask = buffReader.readLine();
+                    String type = savedTask.substring(0, 1);
+                    switch (type) {
+                        case "T":
+                            list.add(new ToDo(savedTask.substring(4).trim(), savedTask.substring(2, 3).equals("T")));
+                            break;
+                        case "D":
+                            String deadlineDetails = savedTask.substring(4);
+                            String[] deadlineArr = deadlineDetails.split("/by");
+                            Deadline deadline = new Deadline(
+                                    deadlineArr[0].trim(),
+                                    savedTask.substring(2, 3).equals("T"),
+                                    deadlineArr[1].trim());
+                            list.add(deadline);
+                            break;
+                        case "E":
+                            String eventDetails = savedTask.substring(4);
+                            String[] eventArr = eventDetails.split("/at");
+                            Event event = new Event(
+                                    eventArr[0].trim(),
+                                    savedTask.substring(2, 3).equals("T"),
+                                    eventArr[1].trim());
+                            list.add(event);
+                            break;
+                    }
+                }
+            } else {
+                Files.createFile(path);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void greet() {
         String greet = LINE + "    Hello! I'm Duke\n" + "    What can I do for you?\n" + LINE;
-
-        String exit = LINE + "     Bye. Hope to see you again soon!\n" + LINE;
-
         System.out.println(greet);
+    }
+
+    public static void bye() {
+        String exit = LINE + "     Bye. Hope to see you again soon!\n" + LINE;
+        System.out.println(exit);
+    }
+
+    public static void addData(String data) {
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(
+                    new FileOutputStream(String.valueOf(path), true), "UTF-8"));
+            bufferedWriter.write(data);
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateData(String data, int number) {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(String.valueOf(path)));
+            String newData = "";
+            String oldData;
+            int lineNumber = 1;
+            while (br.ready()) {
+                oldData = br.readLine();
+                if (lineNumber == number) {
+
+                    newData += data.equals("") ? data : data + "\n";
+                } else {
+                    newData += oldData + "\n";
+                }
+                lineNumber++;
+            }
+            BufferedWriter bw = new BufferedWriter(new FileWriter(String.valueOf(path)));
+            bw.write(newData);
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        readData();
+        greet();
 
         Scanner sc = new Scanner(System.in);
         label:
         while (sc.hasNext()) {
             try {
-                String input = sc.next();
-                switch (input) {
+                String command = sc.next();
+                switch (command) {
                     case BYE:
-                        System.out.println(exit);
+                        bye();
                         break label;
 
                     case LIST:
@@ -46,6 +132,7 @@ public class Duke {
                         if (list.size() >= taskNumber) {
                             Task task = list.get(taskNumber - 1);
                             task.markAsDone();
+                            updateData(task.store(), taskNumber);
                             System.out.println(LINE +
                                     "    Nice! I've marked this task as done:" + "\n" +
                                     "    " + task.toString() + "\n" +
@@ -60,6 +147,7 @@ public class Duke {
                         int taskNumber = sc.nextInt();
                         if (list.size() >= taskNumber && taskNumber > 0) {
                             Task task = list.remove(taskNumber - 1);
+                            updateData("", taskNumber);
                             System.out.println(LINE +
                                     "    Noted. I've removed this task:" + "\n" +
                                     "      " + task.toString() + "\n" +
@@ -77,6 +165,7 @@ public class Duke {
                             throw new DukeException("Oops! Todo cannot be empty");
                         }
                         ToDo toDo = new ToDo(detail);
+                        addData("T F " + detail + "\n");
                         list.add(toDo);
                         System.out.println(LINE +
                                 "    Got it! I have added this todo to the list!" + "\n" +
@@ -95,6 +184,7 @@ public class Duke {
                             throw new DukeException("Oops! You need to include both detail and time.");
                         }
                         Event event = new Event(arr[0], arr[1]);
+                        addData("E F " + s + "\n");
                         list.add(event);
                         System.out.println(LINE +
                                 "    Got it! I have added this event to the list!" + "\n" +
@@ -114,6 +204,7 @@ public class Duke {
                             throw new DukeException("Oops! You need to include both detail and time.");
                         }
                         Deadline deadline = new Deadline(arr[0], arr[1]);
+                        addData("D F " + s + "\n");
                         list.add(deadline);
                         System.out.println(LINE +
                                 "    Got it! I have added this deadline to the list!" + "\n" +
