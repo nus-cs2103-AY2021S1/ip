@@ -10,9 +10,8 @@ class Deadline extends Task {
     }
 
     Deadline(boolean isCompleted, String description, String datetime) {
-        super(description);
+        super(isCompleted, description);
         this.dateTime = datetime;
-        super.isCompleted = isCompleted;
     }
 
     @Override

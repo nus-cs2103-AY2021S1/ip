@@ -1,6 +1,6 @@
 package main.java;
 
-class Task {
+abstract class Task {
 
     final String description;
     boolean isCompleted;
@@ -8,6 +8,11 @@ class Task {
     Task(String description) {
         this.description = description;
         this.isCompleted = false;
+    }
+
+    Task(boolean isCompleted, String description) {
+        this.description = description;
+        this.isCompleted = isCompleted;
     }
 
     String getStatusIcon() {

@@ -7,8 +7,11 @@ class ToDo extends Task {
     }
 
     ToDo(boolean isCompleted, String description) {
-        super(description);
-        super.isCompleted = isCompleted;
+        super(isCompleted, description);
+    }
+
+    String[] getDataString() {
+        return new String[] {"todo", String.valueOf(isCompleted), description};
     }
 
     @Override
