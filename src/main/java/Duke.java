@@ -52,14 +52,15 @@ public class Duke {
       targetTask.setDone();
       output = "\tNice! I've marked this task as done: \n\t\t" + targetTask;
     } else if (command[0].equals("todo")) {
-      if (command.length < 2) {
+      if (command.length < 2 || command[1].isBlank()) {
         throw new DukeException("\t☹ OOPS!!! The description of a todo cannot be empty.");
-      } else {
-        ToDo newToDo = new ToDo(command[1]);
+      } 
+      
+      ToDo newToDo = new ToDo(command[1]);
 
-        list.add(newToDo);
-        output = "\tGot it. I've added this task: \n\t\t" + newToDo + "\n\tNow you have " + list.size() + " tasks in the list.";
-      }
+      list.add(newToDo);
+      output = "\tGot it. I've added this task: \n\t\t" + newToDo + "\n\tNow you have " + list.size() + " tasks in the list.";
+      
     } else if (command[0].equals("deadline")) {
       if (command.length < 2) {
         throw new DukeException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
