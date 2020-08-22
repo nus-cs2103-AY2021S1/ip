@@ -1,9 +1,19 @@
-public class Deadline extends Task {
-    protected String deadlineDate;
 
-    public Deadline(String taskName, String deadlineDate) {
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public class Deadline extends Task {
+    private LocalDate deadlineDate;
+    private String formatDeadlineDate;
+
+    public Deadline(String taskName, String deadlineDate) throws DukeException {
         super(taskName, "D");
-        this.deadlineDate = deadlineDate;
+        try {
+            this.deadlineDate = LocalDate.parse(deadlineDate);
+            this.formatDeadlineDate = this.deadlineDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        } catch (Exception e) {
+            throw new DukeException("Please use YYYY-MM-DD format for dates~");
+        }
     }
     
     public String getDeadlineDate() {
@@ -18,7 +28,7 @@ public class Deadline extends Task {
         } else {
             check = "✗";
         }
-        return "[" + taskType + "][" + check + "] " + taskName + "(by:" + deadlineDate + ")";
+        return "[" + taskType + "][" + check + "] " + taskName + "(by:" + formatDeadlineDate + ")";
     }
 }
 
