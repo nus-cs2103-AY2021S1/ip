@@ -32,6 +32,8 @@ public class Duke {
 
         while (sc.hasNextLine()) {
             String message = sc.next();
+            message += sc.nextLine();
+            Parser dukeParser = new Parser(message);
             if (message.equals("done")) {
                 message += sc.nextLine();
                 DoneCommand newDoneCommand = new DoneCommand(message, newBot.taskList.size());

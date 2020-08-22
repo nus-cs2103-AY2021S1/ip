@@ -1,10 +1,7 @@
 public class DoneCommand extends Command {
 
-    private int numOfTasks;
-
-    public DoneCommand(String command, int numOfTasks) {
+    public DoneCommand(String command) {
         super(command);
-        this.numOfTasks = numOfTasks;
     }
 
     // Method to get the index of the task that is already completed
@@ -12,7 +9,7 @@ public class DoneCommand extends Command {
         try {
             String[] doneCommand = this.command.split(" ");
             int taskIndex = Integer.parseInt(doneCommand[1]);
-            if (taskIndex > 0 && taskIndex <= this.numOfTasks) {
+            if (taskIndex > 0 && taskIndex <= TaskList.taskNum) {
                 return taskIndex;
             } else {
                 throw new InvalidTaskNumberException();

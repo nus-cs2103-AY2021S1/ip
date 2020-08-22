@@ -26,11 +26,20 @@ public class Storage {
                     String[] txtLineArr = txtLine.split("//");
                     Task task;
                     if (txtLineArr[0].equals("T")) {
-                        task = new Todo(txtLineArr[1]);
+                        task = new Todo(txtLineArr[2]);
+                        if (txtLineArr[1].equals("1")) {
+                            task.markAsDone();
+                        }
                     } else if (txtLineArr[0].equals("E")) {
                         task = new Event(txtLineArr[2], LocalDate.parse(txtLineArr[3]));
+                        if (txtLineArr[1].equals("1")) {
+                            task.markAsDone();
+                        }
                     } else {
                         task = new Deadline(txtLineArr[2], LocalDate.parse(txtLineArr[3]));
+                        if (txtLineArr[1].equals("1")) {
+                            task.markAsDone();
+                        }
                     }
                     taskList.add(task);
                 }

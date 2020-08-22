@@ -6,4 +6,6 @@ public class Command {
         this.command = command;
     }
 
+    public Command() {
+    }
 }
