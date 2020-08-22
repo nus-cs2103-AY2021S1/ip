@@ -1,2 +1,5 @@
-package duke.task;public class ToDoTest {
+package duke.task;
+
+public class ToDoTest {
+
 }
