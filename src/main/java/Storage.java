@@ -55,17 +55,17 @@ public class Storage {
                     String[] taskInfo = ln.split(Task.ESCAPED_SAVE_DELIMITER);
                     TaskSymbols type = TaskSymbols.valueOf("SYMBOL_" + taskInfo[0]);
                     switch(type) {
-                        case SYMBOL_T:
-                            tasks.add(new Todo(taskInfo[1], Boolean.parseBoolean(taskInfo[2])));
-                            break;
-                        case SYMBOL_E:
-                            tasks.add(new Event(taskInfo[1], Boolean.parseBoolean(taskInfo[2]),
-                                    LocalDate.parse(taskInfo[3])));
-                            break;
-                        case SYMBOL_D:
-                            tasks.add(new Deadline(taskInfo[1], Boolean.parseBoolean(taskInfo[2]),
-                                    LocalDate.parse(taskInfo[3])));
-                            break;
+                    case SYMBOL_T:
+                        tasks.add(new Todo(taskInfo[1], Boolean.parseBoolean(taskInfo[2])));
+                        break;
+                    case SYMBOL_E:
+                        tasks.add(new Event(taskInfo[1], Boolean.parseBoolean(taskInfo[2]),
+                                LocalDate.parse(taskInfo[3])));
+                        break;
+                    case SYMBOL_D:
+                        tasks.add(new Deadline(taskInfo[1], Boolean.parseBoolean(taskInfo[2]),
+                                LocalDate.parse(taskInfo[3])));
+                        break;
                     }
                 }
             } else {

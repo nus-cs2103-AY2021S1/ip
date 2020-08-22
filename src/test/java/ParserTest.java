@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserTest {
     @Test
-    public void testCommandTypeBye() {
+    public void parser_commandTypeBye_expectedBehaviour() {
         Parser parser = new Parser();
         try {
             Command byeCommand = parser.parse("bye");
@@ -15,7 +15,7 @@ public class ParserTest {
     }
 
     @Test
-    public void testCommandTypeList() {
+    public void parser_commandTypeList_expectedBehaviour() {
         Parser parser = new Parser();
         try {
             Command listCommand = parser.parse("list");
@@ -26,7 +26,7 @@ public class ParserTest {
     }
 
     @Test
-    public void testCommandTypeDone() {
+    public void parser_commandTypeDone_expectedBehaviour() {
         Parser parser = new Parser();
         try {
             Command doneCommand = parser.parse("done 2");
@@ -37,7 +37,7 @@ public class ParserTest {
     }
 
     @Test
-    public void testCommandTypeDelete() {
+    public void parser_commandTypeDelete_expectedBehaviour() {
         Parser parser = new Parser();
         try {
             Command deleteCommand = parser.parse("delete 2");
@@ -48,13 +48,13 @@ public class ParserTest {
     }
 
     @Test
-    public void testCommandTypeDelete_incompleteInput() {
+    public void parser_commandTypeDelete_exceptionThrown() {
         Parser parser = new Parser();
         assertThrows(DukeException.class, () -> parser.parse("delete"));
     }
 
     @Test
-    public void testCommandTypeAdd() {
+    public void parser_commandTypeAdd_expectedBehaviour() {
         Parser parser = new Parser();
         try {
             Command addTodoCommand = parser.parse("todo Test1");

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StorageTest {
     @Test
-    public void testLoad() {
+    public void storage_testLoad_expectedBehaviour() {
         Storage storage = new Storage("storageTest.txt");
         try {
             List<Task> tasks = storage.load();
@@ -18,7 +18,7 @@ public class StorageTest {
     }
 
     @Test
-    public void testLoad_badInput() {
+    public void storage_testLoad_exceptionThrown() {
         Storage storage = new Storage("storageTestException.txt");
         assertThrows(DukeException.class, () -> storage.load());
     }
