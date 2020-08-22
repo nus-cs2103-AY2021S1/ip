@@ -1,5 +1,7 @@
 package main.java;
 
+import java.time.LocalDate;
+
 public class Todo extends Task{
 
     public Todo(String description) {
@@ -13,6 +15,11 @@ public class Todo extends Task{
     @Override
     public String saveFormat() {
         return "T" + "~" + super.saveFormat();
+    }
+
+    @Override
+    public boolean hasSameDate(LocalDate theDate) {
+        return false;
     }
 
     @Override
