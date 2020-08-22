@@ -22,24 +22,24 @@ public class Duke {
     String input;
     TaskList taskList;
     Storage storage = new Storage();
+    Ui ui;
 
     public Duke() {
         sc = new Scanner(System.in);
-        String input;
+        ui = new Ui();
     }
 
     public void start() {
         try {
             this.taskList = new TaskList(storage.load());
-            Duke.hello();
+            ui.showWelcomeMessage();
             handleInteraction();
-            Duke.bye();
+            ui.showCloseMessage();
         } catch (StorageException ex) {
             ex.printStackTrace();
         }
     }
 
-    
 
     // interaction functions
     public void handleInteraction() {
@@ -50,7 +50,7 @@ public class Duke {
                 break;
             }
 
-            buildChatFence();
+            ui.buildChatFence();
 
             // handle commands
             try {
@@ -68,9 +68,9 @@ public class Duke {
                 switch (command) {
                 case LIST:
                     // we ignore the argument after `list`.
-                    System.out.println("     Here are the tasks in your list:");
+                    ui.print("Here are the tasks in your list:");
                     for (int i = 0; i < taskList.size(); i++) {
-                        System.out.printf("     %d. %s%n", i + 1, taskList.show(i));
+                        ui.print(String.format("%d. %s", i + 1, taskList.show(i)));
                     }
                     break;
                 case DONE:
@@ -80,10 +80,10 @@ public class Duke {
                         if (taskNumber >= 0 && taskNumber < taskList.size()) {
                             taskList.markAsDone(taskNumber);
                             storage.save(this.taskList);
-                            System.out.println("     Good job! I've marked this task as done:");
-                            System.out.printf("      %s%n", taskList.show(taskNumber));
+                            ui.print("Good job! I've marked this task as done:");
+                            ui.print(String.format("%s%n", taskList.show(taskNumber)));
                         } else {
-                            System.out.println("     Sorry, I can't find it in your list!");
+                            ui.print("Sorry, I can't find it in your list!");
                         }
                     } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
                         throw new InvalidUsageException("Usage: done <task number>");
@@ -94,13 +94,13 @@ public class Duke {
                         int taskNumber = Integer.parseInt(parsed[1]) - 1;
                         // Check that the task number makes sense.
                         if (taskNumber >= 0 && taskNumber < taskList.size()) {
-                            System.out.println("     Noted. I've removed this task: ");
-                            System.out.printf("      %s%n", taskList.remove(taskNumber).showTask());
-                            System.out.printf("     Now you have %d %s in the list%n",
-                                    taskList.size(), taskList.size() > 1 ? "tasks" : "task");
+                            ui.print("Noted. I've removed this task: ");
+                            ui.print(taskList.remove(taskNumber).showTask());
+                            ui.print(String.format("Now you have %d %s in the list%n",
+                                    taskList.size(), taskList.size() > 1 ? "tasks" : "task"));
                             storage.save(this.taskList);
                         } else {
-                            System.out.println("     Sorry, I can't find it in your list!");
+                            ui.print("Sorry, I can't find it in your list!");
                         }
                     } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
                         throw new InvalidUsageException("Usage: delete <task number>");
@@ -130,9 +130,9 @@ public class Duke {
                 case VIEWALL:
                     try {
                         TaskList filtered = taskList.viewAll(parsed[1]);
-                        System.out.println("     Here are the tasks on given date:");
+                        ui.print("Here are the tasks on given date:");
                         for (int i = 0; i < filtered.size(); i++) {
-                            System.out.printf("     %d. %s%n", i + 1, filtered.show(i));
+                            ui.print(String.format("%d. %s%n", i + 1, filtered.show(i)));
                         }
                     } catch (DateTimeException | ArrayIndexOutOfBoundsException ex) {
                         throw new ViewallInvalidUsageException("Date should be in yyyy-mm-dd format.");
@@ -144,32 +144,15 @@ public class Duke {
             } catch (InvalidUsageException | UnknownCommandException ex) {
                 System.out.println(ex.getMessage());
             }
-            buildChatFence();
+            ui.buildChatFence();
         }
     }
-
-    private static void hello() {
-        buildChatFence();
-        System.out.println("     Hellowww!! I'm Alexa, your personal todo manager!");
-        System.out.println("     How can I help you today?");
-        buildChatFence();
-    }
-
-    private static void bye() {
-        buildChatFence();
-        System.out.println("     Bye? I hope it's not forever! Come back soon!");
-        buildChatFence();
-    }
-
-    private static void buildChatFence() {
-        System.out.println("    ----------------------------------------");
-    }
-
+    
     private void printAddConfirmation(int index) {
         int size = taskList.size();
-        System.out.println("     Got it. I've added this task:");
-        System.out.printf("       %s%n", taskList.show(index));
-        System.out.printf("     Now you have %d %s in the list%n", size, size > 1 ? "tasks" : "task");
+        ui.print("Got it. I've added this task:");
+        ui.print(taskList.show(index));
+        ui.print(String.format("Now you have %d %s in the list%n", size, size > 1 ? "tasks" : "task"));
     }
 
     /**
