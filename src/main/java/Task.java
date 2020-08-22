@@ -1,4 +1,5 @@
-public class Task {
+import java.io.Serializable;
+public class Task implements Serializable {
     private static int taskCount = 0;
     private int taskID;
     private boolean completed;
