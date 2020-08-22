@@ -55,7 +55,6 @@ public class Duke {
                 }
                 break;
             }
-
             content += tokens[i] + " ";
         }
         LocalDate deadline = LocalDate.now();
