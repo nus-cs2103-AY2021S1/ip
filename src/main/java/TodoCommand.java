@@ -18,4 +18,8 @@ public class TodoCommand extends Command{
             throw new InvalidTaskDescriptionException();
         }
     }
+
+    protected boolean isExit() {
+        return false;
+    }
 }

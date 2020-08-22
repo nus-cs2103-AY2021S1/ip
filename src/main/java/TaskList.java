@@ -24,6 +24,10 @@ public class TaskList {
         this.taskList.add(task);
     }
 
+    protected void deleteTask(Task task) {
+        this.taskList.remove(task);
+    }
+
     protected ArrayList<Task> getTaskList() {
         return this.taskList;
     }

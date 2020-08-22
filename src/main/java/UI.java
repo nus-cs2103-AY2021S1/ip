@@ -30,4 +30,22 @@ public class UI {
         System.out.println("You have " + tasksLeft + " tasks left in your list!\n");
     }
 
+    protected void deleteTask(TaskList tasks, Task deletedTask) {
+        System.out.println("\nGot it. Deleting task.....");
+        System.out.println(" " + deletedTask);
+        System.out.println("You have " + tasks.getTaskList().size()  + " tasks left in your list!\n");
+    }
+
+    protected void displayTasks(TaskList taskList) {
+        int index = 1;
+        System.out.println("\n");
+        System.out.println("Here are the tasks in your tasklist:");
+        for (Task task: taskList.getTaskList()) {
+            System.out.println(index + "." + task);
+            index++;
+        }
+        System.out.println("\n");
+    }
+
+
 }

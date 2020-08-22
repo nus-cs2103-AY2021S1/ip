@@ -1,6 +1,11 @@
 public class ByeCommand extends Command {
 
-    public ByeCommand() {
-        System.out.println("Bye! Have a nice day!!");
+    @Override
+    void execute(TaskList tasks, UI ui) throws DukeException {
+        System.out.println("Bye! Have a nice day!");
+    }
+
+    protected boolean isExit() {
+        return true;
     }
 }

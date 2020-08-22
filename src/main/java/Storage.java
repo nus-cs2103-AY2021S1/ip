@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -9,7 +10,6 @@ import java.util.Scanner;
 public class Storage {
 
     private String filepath;
-
 
     public Storage(String filepath) {
         this.filepath = filepath;
@@ -48,8 +48,15 @@ public class Storage {
                 File newDukeData = new File(this.filepath);
                 newDukeData.createNewFile();
                 return taskList;
-
         }
+    }
+
+    protected void writeData(TaskList tasks) throws IOException {
+        FileWriter dukeWriter = new FileWriter("data/duke.txt", false);
+        for (Task task : tasks.getTaskList()) {
+            dukeWriter.write(task.inputInFile() + "\n");
+        }
+        dukeWriter.close();
     }
 
 }
