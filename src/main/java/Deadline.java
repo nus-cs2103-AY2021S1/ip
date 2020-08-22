@@ -13,7 +13,8 @@ public class Deadline extends Task {
 
     public Deadline(String name, String time, boolean doneState) {
         super(name, doneState);
-        this.time = time;
+        formatter = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
+        this.time = LocalDateTime.parse(time, formatter);
     }
 
     @Override

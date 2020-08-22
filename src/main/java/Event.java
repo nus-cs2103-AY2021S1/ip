@@ -13,12 +13,13 @@ public class Event extends Task {
 
     public Event(String name, String time, boolean taskDoneState) {
         super(name, taskDoneState);
-        this.time = time;
+        formatter = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
+        this.time = LocalDateTime.parse(time, formatter);
     }
 
     @Override
     public String write() {
-        return String.format("E,%s%s", time, super.write());
+        return String.format("E,%s%s", time.format(formatter), super.write());
     }
 
     @Override
