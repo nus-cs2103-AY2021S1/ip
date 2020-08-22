@@ -1,10 +1,5 @@
 package main.java;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,7 +13,7 @@ public class Commands {
 
     public void start() {
         this.greet();
-        WriteData.getPreviousTask(taskList);
+        Storage.getPreviousTask(taskList);
 
         Scanner scanner = new Scanner(System.in);
 
@@ -66,7 +61,7 @@ public class Commands {
                 inputs = scanner.nextLine().trim();
             }
         }
-        WriteData.writeToFile(taskList);
+        Storage.writeToFile(taskList);
     }
 
     private void markDone(String[] inputs) throws DukeException {
