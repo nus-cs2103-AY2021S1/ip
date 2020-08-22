@@ -12,7 +12,6 @@ public class Storage {
     }
 
     public static void createFolder() {
-        System.out.println("Present project directory is: "+ System.getProperty("user.dir"));
         String folderPath = System.getProperty("user.dir") + "/data";
         File folder = new File(folderPath);
         boolean isSuccessful = folder.mkdir();

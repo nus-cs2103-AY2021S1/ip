@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class DukeCommandsHandler {
     private static final String divider =
-            "\t----------------------------------------------------\n";
+            "\t------------------------------------------------------------------\n";
     protected static ArrayList<Task> tasks = new ArrayList<>();
 
     protected static void greetings() {
@@ -19,7 +19,7 @@ public class DukeCommandsHandler {
                 + "\t\"\\(*^O^*) I am Pocus, your personal assistant!"
                 + "\n\tBefore we start, may I know your name?\n"
                 + divider;
-        System.out.print(greetings);
+        System.out.println(greetings);
     }
 
     protected static void addressUser(String name) {
@@ -27,7 +27,7 @@ public class DukeCommandsHandler {
                 + "\tHi there, " + name + "!"
                 + "\n\tHow can I help you today?\n"
                 + divider;
-        System.out.print(address);
+        System.out.println(address);
     }
 
     protected static void addToDo(String input) throws DukeException {
@@ -54,7 +54,7 @@ public class DukeCommandsHandler {
                 + toDo + "\n\t" + "You have "
                 + tasks.size() + " tasks on your list now.\n"
                 + divider;
-        System.out.print(printing);
+        System.out.println(printing);
     }
 
     protected static void addDeadline(String input) throws DukeException {
@@ -65,14 +65,14 @@ public class DukeCommandsHandler {
             throw new DukeException(divider
                     + "\tPlease input an appropriate description!\n"
                     + "\tAn example would be:\n"
-                    + "\tdeadline return book /by Friday\n"
+                    + "\tdeadline return book /by 2020-12-09 08:00\n"
                     + divider);
         }
         if (information.isBlank()) {
             throw new DukeException(divider
                     + "\tPlease input an appropriate description!\n"
                     + "\tAn example would be:\n"
-                    + "\tdeadline return book /by Friday\n"
+                    + "\tdeadline return book /by 2020-12-09 08:00\n"
                     + divider);
         }
 
@@ -81,7 +81,7 @@ public class DukeCommandsHandler {
             throw new DukeException(divider
                     + "\tPlease input the appropriate command!\n"
                     + "\tAn example would be:\n"
-                    + "\tdeadline return book /by Friday\n"
+                    + "\tdeadline return book /by 2020-12-09 08:00\n"
                     + divider);
         }
 
@@ -93,14 +93,14 @@ public class DukeCommandsHandler {
             throw new DukeException(divider
                     + "\tPlease input the date!\n"
                     + "\tAn example would be:\n"
-                    + "\tdeadline return book /by Friday\n"
+                    + "\tdeadline return book /by 2020-12-09 08:00\n"
                     + divider);
         }
         if (by.isBlank()) {
             throw new DukeException(divider
                     + "\tPlease input the date!\n"
                     + "\tAn example would be:\n"
-                    + "\tdeadline return book /by Friday\n"
+                    + "\tdeadline return book /by 2020-12-09 08:00\n"
                     + divider);
         }
 
@@ -109,8 +109,11 @@ public class DukeCommandsHandler {
         try {
             date = LocalDateTime.parse(formattedBy);
         } catch (DateTimeParseException e) {
-            DukeException.deadlineInvalidDateFormat();
-            return;
+            throw new DukeException(divider
+                    + "\tPlease input the correct date format!\n"
+                    + "\tAn example would be:\n"
+                    + "\tdeadline return book /by YYYY-MM-DD HH:mm\n"
+                    + divider);
         }
         Task deadline = new Deadline(description, date);
         tasks.add(deadline);
@@ -120,7 +123,7 @@ public class DukeCommandsHandler {
                 + deadline + "\n\t" + "You have "
                 + tasks.size() + " tasks on your list now.\n"
                 + divider;
-        System.out.print(printing);
+        System.out.println(printing);
     }
 
     protected static void addEvent(String input) throws DukeException {
@@ -131,14 +134,14 @@ public class DukeCommandsHandler {
             throw new DukeException(divider
                     + "\tPlease input an appropriate description!\n"
                     + "\tAn example would be:\n"
-                    + "\tevent project meeting /at Aug 6th 2-4pm\n"
+                    + "\tevent Christmas party /at 2020-12-25 17:00\n"
                     + divider);
         }
         if (information.isBlank()) {
             throw new DukeException(divider
                     + "\tPlease input an appropriate description!\n"
                     + "\tAn example would be:\n"
-                    + "\tevent project meeting /at Aug 6th 2-4pm\n"
+                    + "\tevent Christmas party /at 2020-12-25 17:00\n"
                     + divider);
         }
 
@@ -147,7 +150,7 @@ public class DukeCommandsHandler {
             throw new DukeException(divider
                     + "\tPlease input the appropriate command!\n"
                     + "\tAn example would be:\n"
-                    + "\tevent project meeting /at Aug 6th 2-4pm\n"
+                    + "\tevent Christmas party /at 2020-12-25 17:00\n"
                     + divider);
         }
 
@@ -159,14 +162,14 @@ public class DukeCommandsHandler {
             throw new DukeException(divider
                     + "\tPlease input the date!\n"
                     + "\tAn example would be:\n"
-                    + "\tevent project meeting /at Aug 6th 2-4pm\n"
+                    + "\tevent Christmas party /at 2020-12-25 17:00\n"
                     + divider);
         }
         if (at.isBlank()) {
             throw new DukeException(divider
                     + "\tPlease input the date!\n"
                     + "\tAn example would be:\n"
-                    + "\tevent project meeting /at Aug 6th 2-4pm\n"
+                    + "\tevent Christmas party /at 2020-12-25 17:00\n"
                     + divider);
         }
 
@@ -175,8 +178,11 @@ public class DukeCommandsHandler {
         try {
             date = LocalDateTime.parse(formattedAt);
         } catch (DateTimeParseException e) {
-            DukeException.eventInvalidDateFormat();
-            return;
+            throw new DukeException(divider
+                    + "\tPlease input the correct date format!\n"
+                    + "\tAn example would be:\n"
+                    + "\tevent Christmas party /at YYYY-MM-DD HH:mm\n"
+                    + divider);
         }
         Task event = new Event(description, date);
         tasks.add(event);
@@ -186,7 +192,7 @@ public class DukeCommandsHandler {
                 + event + "\n\t" + "You have "
                 + tasks.size() + " tasks on your list now.\n"
                 + divider;
-        System.out.print(printing);
+        System.out.println(printing);
     }
 
     protected static void deleteTask(String input) throws DukeException {
@@ -221,7 +227,7 @@ public class DukeCommandsHandler {
                 + taskToBeDeleted
                 + "\n\tYou have " + tasks.size()
                 + " tasks on your list now.\n" + divider;
-        System.out.print(deletedTask);
+        System.out.println(deletedTask);
     }
 
     protected static void markTaskDone(String input) throws DukeException {
@@ -254,7 +260,7 @@ public class DukeCommandsHandler {
         String doneTask = divider
                 + "\t\\(^O^)/ Good job! I've marked this task as done:\n\t\t"
                 + finishedTask + "\n\tKeep going!\n" + divider;
-        System.out.print(doneTask);
+        System.out.println(doneTask);
     }
 
     protected static void listTasks() throws DukeException {
@@ -269,7 +275,7 @@ public class DukeCommandsHandler {
                 System.out.print("\t" + number + ". " + tasks.get(i) + "\n");
             }
         }
-        System.out.print(divider);
+        System.out.println(divider);
     }
 
     protected static void exitFocus() {

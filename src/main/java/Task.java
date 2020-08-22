@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     protected String taskName;
     protected boolean isDone;
@@ -31,13 +34,17 @@ public class Task {
             }
             break;
         case "D":
-            existingTask = new Deadline(task[2], task[3]);
+            DateTimeFormatter deadlineFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+            LocalDateTime by = LocalDateTime.parse(task[3], deadlineFormatter);
+            existingTask = new Deadline(task[2], by);
             if (task[1].equals("1")) {
                 existingTask.markAsDone();
             }
             break;
         case "E":
-            existingTask = new Event(task[2], task[3]);
+            DateTimeFormatter eventFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+            LocalDateTime at = LocalDateTime.parse(task[3], eventFormatter);
+            existingTask = new Event(task[2], at);
             if (task[1].equals("1")) {
                 existingTask.markAsDone();
             }

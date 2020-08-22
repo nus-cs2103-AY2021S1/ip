@@ -1,12 +1,13 @@
 sampleName
+list
 todo borrow book
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+deadline return book /by 2020-08-27 18:00
+event project meeting /at 2020-09-25 10:00
+done
 list
 done 1
 delete 4
-delete 2
 list
 deadline
-event interview /at
+event interview /at 2020-20-20
 bye
