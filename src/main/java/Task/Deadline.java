@@ -13,6 +13,11 @@ public class Deadline extends Task {
         this.deadline = deadline;
         this.exactTime = exactTime;
     }
+
+    public LocalDate getDeadline() {
+        return deadline;
+    }
+
     @Override
     public String returnStringForm() {
         return "[D]" + super.returnStringForm() + "( by: " + DateTimeHelper.getStringRep(this.deadline) + " " + this.exactTime + ")";

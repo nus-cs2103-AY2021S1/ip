@@ -20,8 +20,10 @@ public class DateTimeHelper {
             int minutes = time % 100;
 
             String identifier = time / 100 > 12 ? "pm" : "am";
-            if (time / 100 == 12)
+            if (time / 100 == 12) {
+                hours = 12;
                 identifier = "pm";
+            }
             else if (time / 100 == 24)
                 identifier = "am";
 

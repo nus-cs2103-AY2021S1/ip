@@ -24,7 +24,17 @@ public class Duke {
     private void deleteTask(int index) {
         this.taskStorage.remove(index);
     }
+    static DateTimeHelper processDateTime(String input) {
+        DateTimeHelper dtHelper = new DateTimeHelper(input.strip());
+        String result = dtHelper.processInput();
+        String resDate = dtHelper.processDateStr();
 
+        if (!result.equals("error") && !resDate.equals("error")) {
+            return dtHelper;
+        } else {
+            return null;
+        }
+    }
     static String furtherProcessing(Commands commandType, String[] tokens, Duke dk) throws DukeException {
         String content = "";
         String result_prefix = "Got it. I've added this task:\n      ";
@@ -48,16 +58,13 @@ public class Duke {
             throw new DukeInvalidArgumentException("NOT ENOUGH INFORMATION!!!");
 
         if(commandType == Commands.DEADLINE || commandType == Commands.EVENT) {
-            DateTimeHelper dtHelper = new DateTimeHelper(deadlineStr.strip());
-            String result = dtHelper.processInput();
-            String resDate = dtHelper.processDateStr();
-            String resTime = dtHelper.processTimeStr();
-            //System.out.println(result +" " + resDate + " " + resTime);
-            if (!result.equals("error") && !resDate.equals("error")) {
+            DateTimeHelper dtHelper = processDateTime(deadlineStr);
+            if (dtHelper != null) {
                 deadline = dtHelper.getDate();
+                String resTime = dtHelper.processTimeStr();
                 if (resTime.equals("success")) exactTime = dtHelper.getTime();
             } else {
-                return "Your date and time(optional) should be in this format:\n      yyyy-mm-dd HHmm\n    e.g: 2019-10-15 1800";
+                return "Wrong format\n    Your date and time(optional) should be in this format:\n      yyyy-mm-dd HHmm\n    e.g: 2019-10-15 1800 or 2019-10-15";
             }
         }
         content = content.strip();
@@ -81,6 +88,7 @@ public class Duke {
             main_content = todoTask.returnStringForm();
 
         } else if(commandType == Commands.DELETE) {
+
             int mark_number = Integer.parseInt(tokens[1]);
             try {
                 Task marked = dk.taskStorage.get(mark_number - 1);
@@ -91,6 +99,7 @@ public class Duke {
             }
 
         } else if(commandType == Commands.DONE) {
+
             int mark_number = Integer.parseInt(tokens[1]);
             try {
                 Task marked = dk.taskStorage.get(mark_number - 1);
@@ -98,6 +107,30 @@ public class Duke {
                 return "Nice! I've marked this task as done:\n      " + marked.returnStringForm();
             } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
                 throw new DukeInvalidArgumentException("Invalid number");
+            }
+
+        } else if(commandType == Commands.LIST) {
+            DateTimeHelper dtHelper = processDateTime(content);
+            if (dtHelper != null) {
+                deadline = dtHelper.getDate();
+                String res = "Here are the tasks in your list:\n    ";
+                for(int i = 0;i < dk.taskStorage.size();i++) {
+                    Task task = dk.taskStorage.get(i);
+                    if(task instanceof Deadline) {
+                        if(((Deadline)task).getDeadline().compareTo(deadline) == 0) {
+                            res += ((i + 1) + "." + task.returnStringForm());
+                            if (i < dk.taskStorage.size() - 1) res += "\n    ";
+                        }
+                    } else if(task instanceof Event) {
+                        if(((Event)task).getTime().compareTo(deadline) == 0) {
+                            res += ((i + 1) + "." + task.returnStringForm());
+                            if (i < dk.taskStorage.size() - 1) res += "\n    ";
+                        }
+                    }
+                }
+                return res;
+            } else {
+                return "Wrong format\n    Your date and time(optional) should be in this format:\n      yyyy-mm-dd HHmm\n    e.g: 2019-10-15 1800 or 2019-10-15";
             }
         }
         return result_prefix + main_content + "\n    " + result_subfix;
@@ -123,17 +156,26 @@ public class Duke {
     }
     public static void main(String[] args) {
         Duke dk = new Duke();
-        printDialog("Hello! I am the Dynamic Normalised Hand\n    What can WE do for you?");
+        printDialog("Hello! I'm the Riddle. Type 'help' if you know nothing HAHAHA\n    What can WE do for you?");
         Scanner sc = new Scanner(System.in);
         while(true) {
             String content = sc.nextLine();
+            content = content.strip();
             if(content.equals(Commands.BYE.getAction())) {
                 printDialog("Bye. Hope to see you again soon!");
                 break;//exit the program
             }
-            if(content.equals(Commands.LIST.getAction())) {
+            if(content.equals(Commands.HELP.getAction())) {
+                String res = "";
+                for(Commands command: Commands.values()) {
+                    res += command.getAction() + ": " + command.getDescription();
+                    res += "\n    ";
+                }
+                printDialog(res);
+            }
+            else if(content.equals(Commands.LIST.getAction())) {
                 dk.printStoredTasks();
-            } else  {
+            } else {
                 try {
                     String result = processedCommand(content, dk);
                     if (!result.equals("")) printDialog(result);

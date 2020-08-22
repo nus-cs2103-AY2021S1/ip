@@ -12,6 +12,11 @@ public class Event extends Task {
         this.time = time;
         this.exactTime = exactTime;
     }
+
+    public LocalDate getTime() {
+        return time;
+    }
+
     @Override
     public String returnStringForm() {
         return "[E]" + super.returnStringForm() + "( at: " + DateTimeHelper.getStringRep(time) + " " + this.exactTime + ")";
