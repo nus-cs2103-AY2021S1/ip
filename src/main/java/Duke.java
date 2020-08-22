@@ -1,41 +1,26 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static final String BORDER = "____________________________________________________________\n";
+    private Storage storage;
+    private TaskList taskList;
+    private Ui ui;
 
-    public static boolean checkBye(String s) {
-        return s.equals("bye");
+
+    public Duke(String name) {
+        this.ui = new Ui();
+        this.taskList = new TaskList();
+        this.storage = new Storage(taskList, name);
     }
-
-    public static void exitLine() {
-        System.out.println(BORDER + "Bye. Hope to see you again soon!\n" + BORDER);
-    }
-
-
-    public static void startUp(TaskList taskList, Storage storage) {
-        storage.fileCheck();
-        if (!storage.getFile().exists() || storage.getFile().length() == 0) {
-            System.out.println(
-                    BORDER + "Hello! I'm Duke\n"
-                    + "What can I do for you?\n" + BORDER
-            );
-        } else {
-            System.out.println(
-                    BORDER + "Well come back!\n" + "You still have "
-                    + taskList.getList().size() + " tasks left to clear.\n" + BORDER
-            );
-        }
-    }
-
-    public static void run() {
-        TaskList taskList = new TaskList();
+    public void run() {
+        TaskList taskList = this.taskList;
         Scanner scan = new Scanner(System.in);
-        Storage storage = new Storage(taskList, "duke");
-        startUp(taskList, storage);
+        Storage storage = this.storage;
+        String border = ui.getBorder();
+        ui.startUp(taskList, storage);
         while (scan.hasNext()) {
             String test = scan.next();
-            if (checkBye(test)) {
-                exitLine();
+            if (ui.checkBye(test)) {
+                ui.exitLine();
                 break;
             } else {
                 String next = scan.nextLine().replaceFirst(" ", "");
@@ -46,29 +31,28 @@ public class Duke {
                         TaskList.doneTask(next);
                         storage.updateFile();
                     } catch (DukeException e) {
-                        System.out.println(BORDER + e.getMessage() + "\n" + BORDER);
+                        System.out.println(border + e.getMessage() + "\n" + border);
                     }
                 } else if (TaskList.checkDel(test)) {
                     try {
                         TaskList.delTask(next);
                         storage.updateFile();
                     } catch (DukeException e) {
-                        System.out.println(BORDER + e.getMessage() + "\n" + BORDER);
+                        System.out.println(border + e.getMessage() + "\n" + border);
                     }
                 } else {
                     try {
                         TaskList.addTask(test, next);
                         storage.updateFile();
                     } catch (DukeException e) {
-                        System.out.println(BORDER + e.getMessage() + "\n" + BORDER);
+                        System.out.println(border + e.getMessage() + "\n" + border);
                     }
                 }
             }
         }
         scan.close();
     }
-
     public static void main(String[] args) {
-        run();
+        new Duke("duke").run();
     }
 }
