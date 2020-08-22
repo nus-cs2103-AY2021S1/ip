@@ -83,6 +83,10 @@ public class Duke {
             if (by.isBlank()) {
                 throw new DukeException("\t☹ OOPS!!! The /by description of a deadline cannot be empty.");
             }
+            
+            if (!by.matches("\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01])")) {
+                throw new DukeException("\t☹ OOPS!!! The date format must be yyyy-mm-dd.");
+            }
 
             Deadline newDeadline = new Deadline(description, by);
 
