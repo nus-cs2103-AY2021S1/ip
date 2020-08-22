@@ -70,7 +70,9 @@ class TaskListTest {
                     "[T][✗] test content1\n" +
                     "Now you have 1 task in the list.\n";
             assertEquals(expected, outContent.toString());
-        } catch (DukeException ignored) {}
+        } catch (DukeException e) {
+            fail();
+        }
     }
 
     @Test

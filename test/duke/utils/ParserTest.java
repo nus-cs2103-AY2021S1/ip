@@ -16,7 +16,9 @@ class ParserTest {
             String[] split = parser.extractAction(commandLine1);
             assertEquals(split[0], "todo");
             assertEquals(split[1], "borrow book");
-        } catch (DukeException ignored) {}
+        } catch (DukeException e) {
+            fail();
+        }
     }
 
     @Test
@@ -49,7 +51,9 @@ class ParserTest {
             String[] split = parser.extractTime(command);
             assertEquals("return book", split[0]);
             assertEquals("2020-08-23", split[1]);
-        } catch (DukeException ignored) {}
+        } catch (DukeException e) {
+            fail();
+        }
     }
 
     @Test

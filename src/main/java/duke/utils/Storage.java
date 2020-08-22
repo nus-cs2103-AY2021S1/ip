@@ -19,7 +19,7 @@ public class Storage {
     private TaskList taskList;
 
     public Storage(TaskList list) {
-        this.taskList = list;
+        taskList = list;
     }
 
     public void readSavedFile() {
