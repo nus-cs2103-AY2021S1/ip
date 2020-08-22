@@ -53,17 +53,11 @@ public abstract class Task {
         return false;
     }
 
-    public boolean happenBetween(LocalDate date1, LocalDate date2) throws InvalidCommandException {
-        if (!date1.isBefore(date2)) {
-            throw new InvalidCommandException("Latter date is before former date for happen between");
-        }
+    public boolean happenBetween(LocalDate date1, LocalDate date2) {
         return false;
     }
 
-    public boolean happenIn(int n) throws InvalidCommandException {
-        if (n <= 0) {
-            throw new InvalidCommandException("Please input a positive integer for happen in command");
-        }
+    public boolean happenIn(int n) {
         return false;
     }
 

@@ -50,14 +50,14 @@ public class Event extends Task {
     }
 
     @Override
-    public boolean happenBetween(LocalDate date1, LocalDate date2) throws InvalidCommandException {
+    public boolean happenBetween(LocalDate date1, LocalDate date2) {
         super.happenBetween(date1, date2);
         LocalDate date = atTime.toLocalDate();
         return !date.isAfter(date2) && date.isBefore(date1);
     }
 
     @Override
-    public boolean happenIn(int n) throws InvalidCommandException {
+    public boolean happenIn(int n) {
         super.happenIn(n);
         return happenBetween(LocalDate.now(), LocalDate.now().plusDays(n));
     }
