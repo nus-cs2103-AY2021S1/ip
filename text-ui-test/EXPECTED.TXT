@@ -61,34 +61,34 @@ Got it. I've added this task:
 Now you have 7 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Attempted to create new task without providing details!
+☹ OOPS!!! Failed to create task! Insufficient details provided!
 ____________________________________________________________
 ____________________________________________________________
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Attempted to create new task without providing details!
+☹ OOPS!!! Failed to create task! Insufficient details provided!
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Attempted to create new task without providing details!
+☹ OOPS!!! Failed to create task! Insufficient details provided!
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Attempted to create task with deadline without specifying deadline!
+☹ OOPS!!! Failed to create Deadline task! No deadline was specified!
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Attempted to create event without specifying time!
+☹ OOPS!!! Failed to create Event task! No time was specified!
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Attempted to mark a task as done, but no task was specified!
+☹ OOPS!!! Failed to mark task as complete! No task was specified!
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Please key in only the integer representing the task you want to mark as complete!
+☹ OOPS!!! Failed to mark task as complete! Please key in only the integer representing the task!
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Attempted to delete a task, but no task was specified!
+☹ OOPS!!! Failed to delete task! No task was specified!
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Please key in only the integer representing the task you want to delete!
+☹ OOPS!!! Failed to delete task! Please key in only the integer representing the task!
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
