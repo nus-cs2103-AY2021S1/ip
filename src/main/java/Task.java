@@ -3,9 +3,11 @@ package main.java;
 public class Task {
     protected boolean done;
     protected String task;
+    protected TaskSymbol taskType;
 
-    public Task(String task) {
+    public Task(String task, TaskSymbol taskType) {
         this.task = task;
+        this.taskType = taskType;
         this.done = false;
     }
 
@@ -23,6 +25,6 @@ public class Task {
 
     @Override
     public String toString(){
-        return "[" + getStatusIcon() + "]" + " " + task;
+        return taskType + "[" + getStatusIcon() + "]" + " " + task;
     }
 }

@@ -1,14 +1,13 @@
 package main.java;
 
 public class ToDo extends Task {
-    protected String symbol = "[T]";
 
-    public ToDo(String task) {
-        super(task);
+    public ToDo(String task, TaskSymbol taskType) {
+        super(task, taskType);
     }
 
     @Override
     public String toString() {
-        return symbol + super.toString();
+        return super.toString();
     }
 }

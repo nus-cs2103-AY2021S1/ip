@@ -93,7 +93,7 @@ public class Willy {
             else if (message.contains("todo")) {
                 try {
                 String activity = message.substring(5);
-                ToDo newTask = new ToDo(activity);
+                ToDo newTask = new ToDo(activity, TaskSymbol.TODO);
                 addToList(newTask);
                 } catch (Exception e){
                     WillyException error = new WillyException("Hmmm what would you like to do?");
@@ -107,7 +107,7 @@ public class Willy {
                     int separatorIndex = message.indexOf("/");
                     String activity = message.substring(9, separatorIndex - 1);
                     String deadline = message.substring(separatorIndex + 4);
-                    DeadlineTask newTask = new DeadlineTask(deadline, activity);
+                    DeadlineTask newTask = new DeadlineTask(deadline, activity, TaskSymbol.DEADLINE);
                     addToList(newTask);
                 } catch (Exception e){
                     WillyException error = new WillyException("Hmmm the description/deadline of the task is missing... \n\tTry again with more details?");
@@ -120,7 +120,7 @@ public class Willy {
                     int separatorIndex = message.indexOf("/");
                     String activity = message.substring(6, separatorIndex - 1);
                     String duration = message.substring(separatorIndex + 4);
-                    EventsTask newTask = new EventsTask(duration, activity);
+                    EventsTask newTask = new EventsTask(duration, activity, TaskSymbol.EVENT);
                     addToList(newTask);
                 } catch (Exception e) {
                     WillyException error = new WillyException("Hmmm the description/timing of event is missing... \n\tTry again with more details?");
