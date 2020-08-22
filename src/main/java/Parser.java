@@ -13,7 +13,7 @@ public class Parser {
         }
 
         String status = split[0];
-        if (TaskStatus.valueOfStatus(status) == null) {
+        if (TaskStatus.valueOfStatus(status) == null && !status.equals("done") && !status.equals("delete")) {
             throw new DukeException(Messenger.SPELL_ERROR);
         }
 
