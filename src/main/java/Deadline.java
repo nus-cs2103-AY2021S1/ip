@@ -2,19 +2,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
+    private static final DateTimeFormatter FORMATTER
+            = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
     private final LocalDateTime time;
-    private final DateTimeFormatter formatter;
 
     public Deadline(String name, LocalDateTime time) {
         super(name);
         this.time = time;
-        formatter = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
     }
 
     public Deadline(String name, String time, boolean doneState) {
         super(name, doneState);
-        formatter = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
-        this.time = LocalDateTime.parse(time, formatter);
+        this.time = LocalDateTime.parse(time);
     }
 
     @Override
@@ -25,6 +24,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(),
-                time.format(formatter));
+                time.format(FORMATTER));
     }
 }
