@@ -1,8 +1,8 @@
 package duke.exceptions;
 
-public class DukeDateTimeParseException extends IllegalArgumentException {
+public class DukeDateTimeParseException extends DukeException {
 
     public DukeDateTimeParseException() {
-        super("OOPS! Invalid date / time");
+        super("OOPS! Invalid date / time format!");
     }
 }

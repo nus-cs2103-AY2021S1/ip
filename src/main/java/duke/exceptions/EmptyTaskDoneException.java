@@ -1,9 +1,9 @@
 package duke.exceptions;
 
-public class EmptyTaskDoneException extends IllegalArgumentException {
+public class EmptyTaskDoneException extends DukeException {
 
    public EmptyTaskDoneException() {
-       super("OOPS! duke.tasks.Task done cannot be empty!");
+       super("OOPS! Task done cannot be empty!");
    }
 
 }
