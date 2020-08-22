@@ -26,37 +26,37 @@ public class Parser {
             throw new DukeException(">> Oh no!!! I don't understand this input.");
         }
         switch(command) {
-            case BYE:
-                return new ByeCommand();
-            case LIST:
-                return new ListCommand();
-            case DELETE:
-                if (chunks.length < 2) {
-                    throw new DukeException(">> Oh no!!! Delete must have the index of the task you're deleting!");
-                }
-                return new DeleteCommand(chunks);
-            case DONE:
-                if (chunks.length < 2) {
-                    throw new DukeException(">> Oh no!!! Done must have the index of the task you're completing!");
-                }
-                return new DoneCommand(chunks);
-            case TODO:
-                if (chunks.length < 2) {
-                    throw new DukeException(">> Oh no!!! A todo must have a description!");
-                }
-                return new AddTodoCommand(chunks);
-            case DEADLINE:
-                if (chunks.length < 2) {
-                    throw new DukeException(">> Oh no!!! A deadline must have a description and date!");
-                }
-                return new AddDeadlineCommand(chunks);
-            case EVENT:
-                if (chunks.length < 2) {
-                    throw new DukeException(">> Oh no!!! An event must have a description and date!");
-                }
-                return new AddEventCommand(chunks);
-            default:
-                throw new DukeException(">> Oh no!!! I don't understand this input.");
+        case BYE:
+            return new ByeCommand();
+        case LIST:
+            return new ListCommand();
+        case DELETE:
+            if (chunks.length < 2) {
+                throw new DukeException(">> Oh no!!! Delete must have the index of the task you're deleting!");
+            }
+            return new DeleteCommand(chunks);
+        case DONE:
+            if (chunks.length < 2) {
+                throw new DukeException(">> Oh no!!! Done must have the index of the task you're completing!");
+            }
+            return new DoneCommand(chunks);
+        case TODO:
+            if (chunks.length < 2) {
+                throw new DukeException(">> Oh no!!! A todo must have a description!");
+            }
+            return new AddTodoCommand(chunks);
+        case DEADLINE:
+            if (chunks.length < 2) {
+                throw new DukeException(">> Oh no!!! A deadline must have a description and date!");
+            }
+            return new AddDeadlineCommand(chunks);
+        case EVENT:
+            if (chunks.length < 2) {
+                throw new DukeException(">> Oh no!!! An event must have a description and date!");
+            }
+            return new AddEventCommand(chunks);
+        default:
+            throw new DukeException(">> Oh no!!! I don't understand this input.");
         }
     }
 }

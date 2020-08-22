@@ -10,8 +10,9 @@ public class Task {
 
     /** Name of task */
     protected String name;
+    
     /** Completion state of task */
-    protected boolean completed;
+    protected boolean isCompleted;
 
     /**
      * Constructor for Tasks.
@@ -19,7 +20,7 @@ public class Task {
      */
     public Task(String name) {
         this.name = name;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     /**
@@ -29,14 +30,14 @@ public class Task {
      */
     public Task(String name, boolean completed) {
         this.name = name;
-        this.completed = completed;
+        this.isCompleted = completed;
     }
 
     /**
      * Marks Task as complete.
      */
     public void complete() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     /**
@@ -44,7 +45,7 @@ public class Task {
      * @return Status icon.
      */
     public String getStatusIcon() {
-        return this.completed ? "\u2713" : "\u2718";
+        return this.isCompleted ? "\u2713" : "\u2718";
     }
 
     /**
@@ -52,7 +53,7 @@ public class Task {
      * @return Saved representation of Task object.
      */
     public String format() {
-        return this.name + SAVE_DELIMITER + this.completed;
+        return this.name + SAVE_DELIMITER + this.isCompleted;
     }
 
     /**
