@@ -1,8 +1,10 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
     private static final Divider divider = new Divider();
-    private static final TaskList list = new TaskList();
+    private static final Data data = new Data();
+    private static final TaskList list = data.load();
 
     public enum Command {
         BYE, LIST, DONE, TASK, DELETE, OTHERS
@@ -74,6 +76,7 @@ public class Duke {
 
     public static void handleByeCommand() {
         System.out.println(divider.wrapInDivider("Bye. Hope to see you again soon!"));
+        data.save(list);
         System.exit(0);
     }
 
@@ -95,6 +98,7 @@ public class Duke {
                 throw new InvalidTaskNumberException();
             } else {
                 list.doTask(taskNumber);
+                data.save(list);
                 System.out.println(divider.wrapInDivider("Nice! I've marked this task as done:\n\t   " +
                         list.getTask(taskNumber)));
             }
@@ -145,6 +149,7 @@ public class Duke {
         }
 
         list.addTask(task);
+        data.save(list);
         int noOfTask = list.getNumberOfTask();
         String taskDescription = getTaskDescription(noOfTask);
         System.out.println(divider.wrapInDivider("Got it. I've added this task: \n\t   " +
@@ -171,6 +176,7 @@ public class Duke {
                         taskDescription +
                         " in the list."));
                 list.removeTask(taskNumber);
+                data.save(list);
             }
         }
     }

@@ -1,0 +1,4 @@
+D | 0 | read book | August 24th
+T | 1 | ip
+T | 1 | play basketball
+E | 0 | project meeting | 6 August 2-4pm
