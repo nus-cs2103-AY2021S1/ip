@@ -1,7 +1,5 @@
-import java.time.format.DateTimeFormatter;
-
 public class Event extends Task {
-    protected String at;
+    private final String at;
 
     public Event(String name, String at) {
         super(name);

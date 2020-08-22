@@ -9,7 +9,6 @@ public class Ui {
         System.out.println(BORDER + "Bye. Hope to see you again soon!\n" + BORDER);
     }
 
-
     public void startUp(TaskList taskList, Storage storage) {
         storage.fileCheck();
         if (!storage.getFile().exists() || storage.getFile().length() == 0) {
@@ -40,8 +39,6 @@ public class Ui {
                         + "Now you have " + size + " tasks in the list.\n" + BORDER
         );
     }
-
-
 
     public String getBorder() {
         return BORDER;
