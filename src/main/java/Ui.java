@@ -1,9 +1,6 @@
 public class Ui {
     private static final String BORDER = "____________________________________________________________\n";
 
-    public Ui() {
-    }
-
     public boolean checkBye(String s) {
         return s.equals("bye");
     }
@@ -28,7 +25,7 @@ public class Ui {
         }
     }
 
-    public String getBorder() {
+    public static String getBorder() {
         return BORDER;
     }
 }
