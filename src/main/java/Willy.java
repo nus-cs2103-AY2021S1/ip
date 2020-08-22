@@ -7,7 +7,7 @@ public class Willy {
     static ArrayList<Task> list = new ArrayList<>();
     static String message;
     static String lastGreeting = "bye";
-    static String style = "\t______________________________________________________________\n";
+    static String style = "\t________________________________________________________________\n";
 
     // Add Tasks to list
     public static void addToList(Task task) {
