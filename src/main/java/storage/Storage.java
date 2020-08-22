@@ -13,11 +13,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage reads and writes data to a text file
+ */
 public class Storage {
     private String fileDirectory;
     private ArrayList<Task> tasks;
     private TaskParser parser;
 
+    /**
+     * Constructor
+     * @param fileDirectory: relative directory
+     * @param parser: task parser, a helper to parse tasks to strings vice and versa
+     */
     public Storage(String fileDirectory, TaskParser parser) {
         tasks = new ArrayList<>();
         this.fileDirectory = fileDirectory;
@@ -50,6 +58,10 @@ public class Storage {
         return newTask;
     }
 
+    /**
+     * @param service: DukeService to get all tasks
+     * @throws DukeException throws exception if reading error happens
+     */
     public void readFromFile(DukeService service) throws DukeException {
         try {
             File file = new File(fileDirectory);
@@ -68,6 +80,10 @@ public class Storage {
         }
     }
 
+    /**
+     * @param service: DukeService to put all tasks
+     * @throws DukeException: throws exception
+     */
     public void writeToFile(DukeService service) throws DukeException {
         String[] parsedStrings = service.getParsedTasks(this::taskToString);
         try {
@@ -82,7 +98,6 @@ public class Storage {
             }
             writer.close();
         } catch (IOException ignored) {
-
         }
     }
 }

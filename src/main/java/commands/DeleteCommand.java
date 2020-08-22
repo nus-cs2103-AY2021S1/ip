@@ -5,14 +5,29 @@ import exceptions.InvalidCommandException;
 import service.DukeResponse;
 import service.DukeService;
 
+
+/**
+ * This class represents Delete, which deletes task into the system.
+ * Syntax: delete + task_index
+ */
 public class DeleteCommand extends Command {
     public static final String commandWord = "delete";
     private int position;
 
+    /**
+     * Constructor.
+     * @param raw: raw command input by users
+     */
     public DeleteCommand(String raw) {
         super((raw));
     }
 
+    /**
+     * Overriden method, to execute the command given the service
+     * @param service: duke service
+     * @return a duke response
+     * @throws Exception if execution fails
+     */
     @Override
     public DukeResponse execute(DukeService service) throws DukeException {
         if (!super.isParse) {
@@ -21,6 +36,10 @@ public class DeleteCommand extends Command {
         return service.deleteTask(this.position);
     }
 
+    /**
+     * Overriden method, to parse the command.
+     * @throws InvalidCommandException when syntax is wrong, and report to users.
+     */
     @Override
     public void parse() throws InvalidCommandException {
         String[] tokens = super.raw.split(" ");

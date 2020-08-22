@@ -8,6 +8,9 @@ import java.time.format.DateTimeFormatter;
 
 import java.util.Map;
 
+/**
+ * A class represents a Deadline task
+ */
 public class DeadlineTask extends Task {
     public static final String taskWord = "deadline";
 
@@ -15,10 +18,18 @@ public class DeadlineTask extends Task {
     private String time;
     private LocalDate date;
 
+    /**
+     * Constructor
+     * @param tokens: an array of tokens starting with task name: todo meet Chau
+     */
     public DeadlineTask(String[] tokens) {
         super(tokens, taskWord);
     }
 
+    /**
+     * Overriden method, to explicitly parse the task
+     * @throws InvalidCommandException when its synax has problems, and to report to users
+     */
     @Override
     public void parse() throws InvalidCommandException {
         Map<Flag, String> flags = Flag.parseFlags(tokens);
@@ -36,6 +47,10 @@ public class DeadlineTask extends Task {
         this.date = LocalDate.parse(this.time);
     }
 
+    /**
+     * Get the description of the task
+     * @return a string denoting the description
+     */
     @Override
     public String getDescription() {
         return this.description + " (by " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";

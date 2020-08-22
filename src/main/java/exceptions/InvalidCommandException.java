@@ -1,5 +1,8 @@
 package exceptions;
 
+/**
+ * An exception results from invalid syntax
+ */
 public class InvalidCommandException extends DukeException {
     public InvalidCommandException(String message) {
         super(message);

@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Enum flags: flags that can be parsed by task parser.
+ */
 public enum Flag {
     BY("/by"),
     AT("/at"),
@@ -14,14 +17,29 @@ public enum Flag {
     ENDFLAG("/end");
 
     private final String value;
+
+    /**
+     * Constructor
+     * @param value return a flag
+     */
     Flag(String value) {
         this.value = value;
     }
 
+    /**
+     * Check whether a string has a form of a flag
+     * @param s the input string
+     * @return boolean answer
+     */
     public static boolean hasFormOfFlag(String s) {
         return s.length() > 0 && s.charAt(0) == '/';
     }
 
+    /**
+     * From a token, get the flag corresponding to the token
+     * @param token: raw token
+     * @return optional of flag. If cannot find any token matched, return Optional.empty()
+     */
     private static Optional<Flag> getFlags(String token) {
         if (token.length() == 0) {
             return  Optional.empty();
@@ -34,6 +52,12 @@ public enum Flag {
         return Optional.empty();
     }
 
+    /**
+     * Parse a list of tokens to a list of pair<flag, value>: <"/by", "2020-06-06">, ....
+     * @param tokens a list of tokens
+     * @return a map of pair(flag, value)
+     * @throws InvalidCommandException when that command is invalid
+     */
     public static Map<Flag, String> parseFlags(String[] tokens) throws InvalidCommandException {
         StringBuilder sb = new StringBuilder();
         Flag currentFlag = NONFLAG;

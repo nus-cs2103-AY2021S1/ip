@@ -5,6 +5,9 @@ import parser.Flag;
 
 import java.util.Map;
 
+/**
+ * A class represents a Event task
+ */
 public class EventTask extends Task {
     public static final String taskWord = "event";
 
@@ -15,6 +18,10 @@ public class EventTask extends Task {
         super(tokens, taskWord);
     }
 
+    /**
+     * Overriden method, to explicitly parse the task
+     * @throws InvalidCommandException when its synax has problems, and to report to users
+     */
     @Override
     public void parse() throws InvalidCommandException {
         Map<Flag, String> flags = Flag.parseFlags(tokens);
@@ -31,6 +38,10 @@ public class EventTask extends Task {
         this.time = flags.get(Flag.AT);
     }
 
+    /**
+     * Get the description of the task
+     * @return a string denoting the description
+     */
     @Override
     public String getDescription() {
         return this.description + " (at" + this.time + ")";
