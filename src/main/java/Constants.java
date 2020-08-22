@@ -1,9 +1,9 @@
 public class Constants {
     public enum TaskTypes {
-        todo, deadline, event
+        TODO, DEADLINE, EVENT
     }
 
     public enum CommandType {
-        bye, list, delete, done, todo, deadline, event
+        BYE, LIST, DELETE, DONE, TODO, DEADLINE, EVENT
     }
 }

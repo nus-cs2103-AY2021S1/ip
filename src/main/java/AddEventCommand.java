@@ -12,7 +12,7 @@ public class AddEventCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         String[] eventInfo = instructions[1].split(" /at ", 2); // [name, date]
         if (eventInfo.length < 2) {
-            ui.conditionError(Constants.TaskTypes.event);
+            ui.conditionError(Constants.TaskTypes.EVENT);
             return;
         }
         try {

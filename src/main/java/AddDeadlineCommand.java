@@ -12,7 +12,7 @@ public class AddDeadlineCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         String[] deadlineInfo = instructions[1].split(" /by ", 2); // [name, deadline]
         if (deadlineInfo.length < 2) {
-            ui.conditionError(Constants.TaskTypes.deadline);
+            ui.conditionError(Constants.TaskTypes.DEADLINE);
             return;
         }
         try {

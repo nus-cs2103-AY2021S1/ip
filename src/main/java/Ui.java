@@ -32,7 +32,7 @@ public class Ui {
     }
 
     public void conditionError(Constants.TaskTypes type) {
-        System.out.println(">> Oh no!!! A " + type + " must have an associated date!");
+        System.out.println(">> Oh no!!! A " + type.toString().toLowerCase() + " must have an associated date!");
     }
 
     public void deleteError() {

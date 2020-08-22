@@ -5,7 +5,7 @@ public class Parser {
 
     public Command parse(String input) throws DukeException {
         String[] chunks = input.split(" ", 2);
-        String action = chunks[0];
+        String action = chunks[0].toUpperCase();
         Constants.CommandType command;
         try {
             command = Constants.CommandType.valueOf(action);
@@ -13,31 +13,31 @@ public class Parser {
             throw new DukeException(">> Oh no!!! I don't understand this input.");
         }
         switch(command) {
-            case bye:
+            case BYE:
                 return new ByeCommand();
-            case list:
+            case LIST:
                 return new ListCommand();
-            case delete:
+            case DELETE:
                 if (chunks.length < 2) {
                     throw new DukeException(">> Oh no!!! Delete must have the index of the task you're deleting!");
                 }
                 return new DeleteCommand(chunks);
-            case done:
+            case DONE:
                 if (chunks.length < 2) {
                     throw new DukeException(">> Oh no!!! Done must have the index of the task you're completing!");
                 }
                 return new DoneCommand(chunks);
-            case todo:
+            case TODO:
                 if (chunks.length < 2) {
                     throw new DukeException(">> Oh no!!! A todo must have a description!");
                 }
                 return new AddTodoCommand(chunks);
-            case deadline:
+            case DEADLINE:
                 if (chunks.length < 2) {
                     throw new DukeException(">> Oh no!!! A deadline must have a description and date!");
                 }
                 return new AddDeadlineCommand(chunks);
-            case event:
+            case EVENT:
                 if (chunks.length < 2) {
                     throw new DukeException(">> Oh no!!! An event must have a description and date!");
                 }
