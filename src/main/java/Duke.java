@@ -1,8 +1,11 @@
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, FileNotFoundException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -40,6 +43,7 @@ public class Duke {
                             Task taskToSetToDone = list.get(num-1);
                             taskToSetToDone.setDone();
                             System.out.println("Nice! I've marked this task as done:" + "\n" + taskToSetToDone.toString());
+                            saveTaskToTxtFile(list);
                         }
                     } else if (firstWord.equals("delete")) {
                         // what if task is not in the list
@@ -51,23 +55,27 @@ public class Duke {
                             list.remove(num-1);
                             System.out.println("Noted. I've removed this task:" + "\n" + taskToDelete.toString() + "\n" + "Now you have " + list.size() +
                                     " tasks in the list.");
+                            saveTaskToTxtFile(list);
                         }
                     } else if (firstWord.equals("todo")) {
                         String todoName = taskName.substring(i+1);
                         Todo newTodo = new Todo(todoName);
                         addTasktoList(list, newTodo);
+                        saveTaskToTxtFile(list);
                     } else if (firstWord.equals("deadline")) {
                         int index = taskName.indexOf("/");
                         String deadlineName = taskName.substring(i+1, index);
                         String deadlineTime = taskName.substring(index+4);
                         Deadline newDeadline = new Deadline(deadlineName, deadlineTime);
                         addTasktoList(list, newDeadline);
+                        saveTaskToTxtFile(list);
                     } else if (firstWord.equals("event")) {
                         int index = taskName.indexOf("/");
                         String eventName = taskName.substring(i+1, index);
                         String eventTime = taskName.substring(index+4);
                         Event newEvent = new Event(eventName, eventTime);
                         addTasktoList(list, newEvent);
+                        saveTaskToTxtFile(list);
                     } else {
                         // throw exception
                         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means. Please enter your task with the " +
@@ -100,5 +108,18 @@ public class Duke {
         list.add(task);
         String strToPrint = "Got it. I've added this task:" + "\n" + task.toString() + "\n" + "Now you have " + list.size() + " task in the list.";
         System.out.println(strToPrint);
+    }
+
+    private static void saveTaskToTxtFile(ArrayList<Task> list) throws FileNotFoundException {
+        PrintWriter out = new PrintWriter("data/duke.txt");
+        StringBuilder listOutput = new StringBuilder();
+        for (int j = 0; j < list.size(); j++) {
+            int num = j + 1;
+            Task task = list.get(j);
+            listOutput.append(num + "." + task.toString() + "\n");
+        }
+        String text = listOutput.toString();
+        out.println(text);
+        out.close();
     }
 }
