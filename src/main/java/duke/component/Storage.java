@@ -55,7 +55,6 @@ public class Storage {
                 toAdd.markAsDone();
             }
             list.add(toAdd);
-            list.count++;
         }
     }
 
