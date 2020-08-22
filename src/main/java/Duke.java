@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -5,7 +7,7 @@ import java.util.Scanner;
 public class Duke {
     private Scanner scanner;
     private List<Task> taskList;
-
+    
     public void initialise() {
         scanner = new Scanner(System.in);
         taskList = new ArrayList<>();
@@ -108,7 +110,8 @@ public class Duke {
         } else {
             String description = inputBreakdown[0];
             String by = inputBreakdown[1];
-            Deadline deadline = new Deadline(description, by);
+            LocalDateTime localDateTime = parseDateTime(by);
+            Deadline deadline = new Deadline(description, localDateTime);
             addTask(deadline);
         }
     }
@@ -120,7 +123,8 @@ public class Duke {
         } else {
             String description = inputBreakdown[0];
             String at = inputBreakdown[1];
-            Event event = new Event(description, at);
+            LocalDateTime localDateTime = parseDateTime(at);
+            Event event = new Event(description, localDateTime);
             addTask(event);
         }
     }
@@ -136,6 +140,16 @@ public class Duke {
         }
     }
 
+    private LocalDateTime parseDateTime(String string) throws DukeException {
+        String pattern = "d/M/yyyy HHmm";
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+            return LocalDateTime.parse(string, formatter);
+        } catch (Exception e) {
+            throw new DukeException("Error! Note the date format: " + pattern);
+        }
+    }
+    
     private void exit() {
         List<String> messages = new ArrayList<>();
         messages.add("Bye. Hope to see you again soon!");
