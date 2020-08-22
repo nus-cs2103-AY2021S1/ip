@@ -2,6 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -26,10 +29,12 @@ public class FileHandler {
                     taskList.add(new Todo(taskComponents[1].equals("1"), taskComponents[2]));
                     break;
                 case "E":
-                    taskList.add(new Event(taskComponents[1].equals("1"),taskComponents[2],taskComponents[3]));
+                    taskList.add(new Event(taskComponents[1].equals("1"),taskComponents[2]
+                            ,LocalDateTime.parse(taskComponents[3])));
                     break;
                 case "D":
-                    taskList.add(new Deadline(taskComponents[1].equals("1"),taskComponents[2],taskComponents[3]));
+                    taskList.add(new Deadline(taskComponents[1].equals("1"),taskComponents[2]
+                            ,LocalDateTime.parse(taskComponents[3])));
                     break;
                 }
 
