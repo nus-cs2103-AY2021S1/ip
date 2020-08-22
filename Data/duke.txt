@@ -1,5 +1,0 @@
-[T][✓] help
-[T][✗] boost my bottom
-[D][✓] dance like (by: 2356)
-[D][✗] help ahain (by: 2333)
-[E][✗] sheep (at:1234)
