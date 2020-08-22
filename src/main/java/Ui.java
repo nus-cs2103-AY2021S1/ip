@@ -21,7 +21,7 @@ public class Ui {
     }
 
     /**
-     * Displays the potential errors when running the Duke bot.
+     * Displays the potential error when running the Duke bot.
      * @param e an exception object which contains the error message.
      */
     public void showDukeError(DukeException e) {
