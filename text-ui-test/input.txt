@@ -1,22 +1,27 @@
-deadline
-deadline /by week8
-deadline cs2103t /by
-deadline cs2103t /by week8
-todo
-todo ip
-event
-event /at friday 4pm
-event lecture /at
-event lecture /at friday 4pm
 list
 done
 done n
 done 4
-done 2
+done 1
 list
 delete
 delete n
 delete 4
-delete 2
+delete 1
+delete 1
+delete 1
+list
+deadline
+deadline /by 27/08/2020 11:59pm
+deadline ip task for week 3 /by
+deadline ip task for week 3 /by 27/08/2020 11:59pm
+list
+event
+event /at 28/08/2020 4pm
+event lecture /at
+event lecture /at 28/08/2020 4pm
+list
+todo
+todo push new levels to github
 list
 bye
