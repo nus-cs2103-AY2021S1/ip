@@ -36,7 +36,7 @@ public class Duke {
         while (scan.hasNext()) {
             String input = scan.nextLine();
             try {
-                if (input.length() >= 4 && input.substring(0, 4).equals("done")) {
+                if (input.startsWith("done")) {
                     if (input.length() == 4) {
                         throw new DukeException("☹ OOPS!!! Please select a task to be done.");
                     }
@@ -44,7 +44,7 @@ public class Duke {
                     Task done = taskList.get(index - 1);
                     done.markAsDone();
                     doneTask(done);
-                } else if (input.length() >= 6 && input.substring(0, 6).equals("delete")) {
+                } else if (input.startsWith("delete")) {
                     if (input.length() == 6) {
                         throw new DukeException("☹ OOPS!!! Please select a task to be deleted.");
                     }
@@ -53,7 +53,7 @@ public class Duke {
                     taskList.remove(delete);
                     deleteTask(delete);
                 }
-                else if (input.length() >= 4 && input.substring(0, 4).equals("todo")) {
+                else if (input.startsWith("todo")) {
                     if (input.length() == 4) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
@@ -61,7 +61,7 @@ public class Duke {
                     Task todo = new Todo(tasking);
                     taskList.add(todo);
                     addedReply(todo);
-                } else if (input.length() >= 8 && input.substring(0, 8).equals("deadline")) {
+                } else if (input.startsWith("deadline")) {
                     if (input.length() == 8) {
                         throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                     }
