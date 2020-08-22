@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
  * Deadline class.
  * Represents a deadline task.
  * Extends from Task.
+ * Contains deadline name and date.
  *
  * @author YanCheng
  */

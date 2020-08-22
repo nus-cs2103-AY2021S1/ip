@@ -1,6 +1,7 @@
 /**
  * Parser class.
  * Used to parse commands input by user.
+ * Contains task list and storage.
  *
  * @author YanCheng
  */

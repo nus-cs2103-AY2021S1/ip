@@ -7,7 +7,8 @@ import java.util.Scanner;
 /**
  * Storage class.
  * Used to read and write files to the hard drive whenever the task list is edited.
- * Will read and write to ./data/duke.txt.
+ * Reads and writes to ./data/duke.txt.
+ * Contains task list.
  *
  * @author YanCheng
  */

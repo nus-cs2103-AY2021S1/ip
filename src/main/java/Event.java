@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
  * Event class.
  * Represents a event task.
  * Extends from Task.
+ * Contains event name, date, start time and end time.
  *
  * @author YanCheng
  */
