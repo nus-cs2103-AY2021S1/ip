@@ -1,14 +1,12 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private static final String border = Ui.getBorder();
-    private static List<Task> storage;
+    private static final List<Task> storage = new ArrayList<>();
+    private final Ui ui;
 
     public TaskList() {
-        storage = new ArrayList<>();
+        this.ui = new Ui();
     }
 
     public boolean checkList(String s) {
@@ -17,13 +15,14 @@ public class TaskList {
 
     public  void displayList() {
         int listLen = storage.size();
-        System.out.println(border.replace("\n", ""));
+        System.out.println(ui.getBorder().replace("\n", ""));
         System.out.println("Here are the tasks in your list:");
+
         for (int i = 1; i <= listLen; i++) {
             Task curr = storage.get(i - 1);
             System.out.println(i + "." + curr);
         }
-        System.out.println(border);
+        System.out.println(ui.getBorder());
     }
 
     public void addTask(String s, String next) throws DukeException {
@@ -31,12 +30,6 @@ public class TaskList {
         if (s.matches("todo|deadline|event|done|delete") && next.equals("")) {
             throw new DukeException("OOPS!!! The description of " + s + " cannot be empty.");
         }
-
-        SimpleDateFormat formater = new SimpleDateFormat("dd MMM yyyy h:mma");
-        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd HHmm");
-
-        SimpleDateFormat dateFormater = new SimpleDateFormat("dd MMM yyyy");
-        SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
 
         switch (s) {
             case "todo": {
@@ -48,21 +41,8 @@ public class TaskList {
             case "deadline": {
                 if (next.contains("/by ")) {
                     String[] ls = next.split(" /by ");
-                    try {
-                        String date;
-                        if (ls[1].contains(" ")) {
-                            date = formater.format((parser.parse(ls[1])));
-                        } else {
-                            date = dateFormater.format(dateParser.parse(ls[1]));
-                        }
-                        toAdd = new Deadline(ls[0], date);
-                        storage.add(toAdd);
-                    } catch (ParseException e) {
-                        System.out.println(
-                                border + "Please input the time and date in\n"
-                                        + dateParser.toPattern() + " or " + parser.toPattern() + "\n" + border);
-                        return;
-                    }
+                    toAdd = new Deadline(ls[0], Parser.parseDateTime(ls[1]));
+                    storage.add(toAdd);
                 } else {
                     throw new DukeException("Sorry, please specify expected deadline after \"/by\".");
                 }
@@ -71,21 +51,8 @@ public class TaskList {
             case "event": {
                 if (next.contains("/at ")) {
                     String[] ls = next.split(" /at ");
-                    try {
-                        String date;
-                        if (ls[1].contains(" ")) {
-                            date = formater.format((parser.parse(ls[1])));
-                        } else {
-                            date = dateFormater.format(dateParser.parse(ls[1]));
-                        }
-                        toAdd = new Event(ls[0], date);
-                        storage.add(toAdd);
-                    } catch (ParseException e) {
-                        System.out.println(
-                                border + "Please input the time and date in\n" +
-                                        dateParser.toPattern() + " or " + parser.toPattern() + "\n" + border);
-                        return;
-                    }
+                    toAdd = new Event(ls[0], Parser.parseDateTime(ls[1]));
+                    storage.add(toAdd);
                 } else {
                     throw new DukeException("Sorry, please specify event date after \"/at\".");
                 }
@@ -95,12 +62,7 @@ public class TaskList {
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :(");
         }
 
-        System.out.println(
-                border + "Got it. I've added this task:\n"
-                        + "  " + toAdd + "\n"
-                        + "Now you have " + storage.size() + " tasks in the list.\n"
-                        + border
-        );
+        ui.addTaskLine(toAdd, storage.size());
     }
 
     public boolean checkDone(String s) {
@@ -118,14 +80,14 @@ public class TaskList {
                 Task completed = t.setDone(true);
                 storage.set(i - 1, completed);
                 System.out.println(
-                        border + "Nice! I've marked this task as done:\n" + "  "
-                                + completed + "\n" + border
+                        ui.getBorder() + "Nice! I've marked this task as done:\n" + "  "
+                                + completed + "\n" + ui.getBorder()
                 );
             }
         } catch (NumberFormatException nfe) {
             System.out.println(
-                    border + "Please state the completed task number after \"done\".\n"
-                            + border
+                    ui.getBorder() + "Please state the completed task number after \"done\".\n"
+                            + ui.getBorder()
             );
         }
     }
@@ -139,7 +101,7 @@ public class TaskList {
             try {
                 addTask("delete", "");
             } catch (DukeException e) {
-                System.out.println(border + e.getMessage() + "\n" + border);
+                System.out.println(ui.getBorder() + e.getMessage() + "\n" + ui.getBorder());
             }
             return;
         }
@@ -151,11 +113,7 @@ public class TaskList {
         } else {
             Task t = storage.get(i - 1);
             storage.remove(i - 1);
-            System.out.println(
-                    border + "Noted. I've removed this task:\n" + "  "
-                            + t + "\n"
-                            + "Now you have " + storage.size() + " tasks in the list.\n" + border
-            );
+            ui.removeTaskLine(t, storage.size());
         }
     }
 
