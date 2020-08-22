@@ -1,29 +1,26 @@
-package main.java;
+package Command;
 
+import main.java.*;
+import Exception.DukeException;
+import Exception.TaskException;
 import java.io.IOException;
 
-public class DeleteCommand extends Command {
-    public DeleteCommand(String[] command) {
+public class AddTodoCommand extends Command {
+    public AddTodoCommand(String[] command) {
         super(command);
     }
-
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            Integer toBeDeleted= Integer.valueOf(command[1]);
-            tasks.delete(toBeDeleted);
+            Task temp = new Task (command[1]);
+            tasks.addTask(temp);
             try {
                 storage.saveFile(tasks);
             } catch (IOException e) {
             }
-        } catch (DeleteOutOfBoundException e) {
-            throw e;
-        } catch (NumberFormatException e) {
-            throw new DeleteUnknownException();
         } catch (IndexOutOfBoundsException e) {
-            throw new DeleteUnknownException();
+            throw new TaskException();
         }
-
     }
 
     @Override

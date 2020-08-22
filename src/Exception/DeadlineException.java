@@ -1,4 +1,5 @@
-package main.java;
+package Exception;
+
 
 public class DeadlineException extends DukeException {
     @Override

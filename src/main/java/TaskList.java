@@ -2,6 +2,8 @@ package main.java;
 
 import java.util.LinkedList;
 import java.util.List;
+import Exception.DoneOutOfBoundException;
+import Exception.DeleteOutOfBoundException;
 public class TaskList {
     private List<Task> taskList;
 
@@ -18,7 +20,7 @@ public class TaskList {
     }
 
     public void printList() {
-        for(int i = 0; i < this.taskList.size(); i++) {
+        for (int i = 0; i < this.taskList.size(); i++) {
             System.out.println( (i+1) + ". " + this.taskList.get(i));
         }
     }

@@ -1,4 +1,4 @@
-package main.java;
+package Exception;
 
 public class DoneOutOfBoundException extends DoneException {
     @Override

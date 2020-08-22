@@ -1,4 +1,9 @@
-package main.java;
+package Command;
+
+import Exception.DukeException;
+import main.java.Storage;
+import main.java.TaskList;
+import main.java.Ui;
 
 public class ExitCommand extends Command {
     public ExitCommand(String[] command) {

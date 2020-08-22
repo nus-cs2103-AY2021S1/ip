@@ -1,5 +1,8 @@
-package main.java;
+package Command;
 
+import main.java.*;
+import Exception.DukeException;
+import Exception.CommandException;
 public class UnknownCommand extends Command {
     public UnknownCommand(String[] command) {
         super(command);

@@ -1,6 +1,6 @@
-package main.java;
+package Exception;
 
-public class EventException extends DukeException{
+public class EventException extends DukeException {
     @Override
     public String toString(){
         String s = "OOPS!!! The description of a event cannot be empty.\n";

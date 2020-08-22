@@ -1,4 +1,4 @@
-package main.java;
+package Exception;
 
 public class WrongFormatException extends DukeException {
     @Override

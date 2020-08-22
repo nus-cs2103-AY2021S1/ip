@@ -1,5 +1,9 @@
-package main.java;
+package Command;
 
+import main.java.*;
+import Exception.DukeException;
+import Exception.DoneOutOfBoundException;
+import Exception.DoneUnknownException;
 import java.io.IOException;
 
 public class DoneCommand extends Command {

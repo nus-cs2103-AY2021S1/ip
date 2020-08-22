@@ -1,4 +1,5 @@
-package main.java;
+package Exception;
+
 
 public class DeleteOutOfBoundException extends DukeException {
     @Override

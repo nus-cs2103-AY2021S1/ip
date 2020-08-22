@@ -1,4 +1,10 @@
-package main.java;
+package Command;
+
+import Exception.DukeException;
+
+import main.java.Storage;
+import main.java.TaskList;
+import main.java.Ui;
 
 public abstract class Command {
     public String[] command;
