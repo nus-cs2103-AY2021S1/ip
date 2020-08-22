@@ -1,8 +1,77 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+
 public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<>();
+    private static String filePath = System.getProperty("user.dir") + "/data/duke.txt";
+
+    public static void readFile() {
+        String folderPath = System.getProperty("user.dir") + "/data";
+        File folder = new File(folderPath);
+        if (folder.mkdir()) {
+            return;
+        }
+        File file = new File(filePath);
+        FileReader fileReader;
+        try {
+            fileReader = new FileReader(filePath);
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+            return;
+        }
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        String line;
+        try {
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] taskLine = line.split("~");
+                Task task = null;
+                if (taskLine[0].equals("T")) {
+                    task = new ToDo(taskLine[2]);
+
+                } else if (taskLine[0].equals("D")) {
+                    task = new Deadline(taskLine[2], taskLine[3]);
+                } else if (taskLine[0].equals("E")) {
+                    task = new Event(taskLine[2], taskLine[3]);
+                }
+                if (taskLine[1].equals("1")) {
+                    assert task != null;
+                    task.markAsDone();
+                }
+                tasks.add(task);
+            }
+            bufferedReader.close();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public static void writeFile() {
+        File file = new File(filePath);
+        try {
+            file.createNewFile();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        FileWriter fileWriter;
+        try {
+            fileWriter = new FileWriter(file);
+            for (Task task : tasks) {
+                String taskLine = task.toData();
+                fileWriter.write(taskLine);
+            }
+            fileWriter.close();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 
     private static void greet() {
         String greet = "\t____________________________________________________________\n"
@@ -65,6 +134,7 @@ public class Duke {
                 + "\t Bye. Hope to see you again soon!\n"
                 + "\t____________________________________________________________\n";
         System.out.print(goodbye);
+        writeFile();
         System.exit(0);
     }
 
@@ -106,6 +176,7 @@ public class Duke {
                 + "|__|   \\_____| |__|    |__|    |_________|\n";
         System.out.println(logo);
         greet();
+        readFile();
         Scanner sc = new Scanner(System.in);
         String input;
         while (sc.hasNext()) {

@@ -11,4 +11,11 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
+
+    @Override
+    public String toData() {
+        String isDone = super.isDone ? "1" : "0";
+        String separator = "~";
+        return "D" + separator + isDone + separator + super.description + separator + by + "\n";
+    }
 }
