@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -5,6 +9,8 @@ public class Chatbot {
 
     private final String DIVIDER = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     private final String INDENT = "        ";
+    private final String DATA_PATH_NAME = "./data";
+    private final String DATA_FILE_PATH = "./data/dukedata.txt";
     private final ArrayList<Task> tasks;
 
     public Chatbot() {
@@ -14,6 +20,8 @@ public class Chatbot {
     public void start() {
 
         Scanner scanner = new Scanner(System.in);
+        File savedData = getSavedData();
+        addSavedTasksToList(savedData, tasks);
         System.out.println(INDENT + "What can I do for you delightful human?\n" + DIVIDER);
 
         while(scanner.hasNext()) {
@@ -31,8 +39,10 @@ public class Chatbot {
                     printTasks();
                 } else if (input.startsWith("done")) {
                     markAsDone(input);
+                    saveTasks();
                 } else if (input.startsWith("delete")) {
                     deleteTask(input);
+                    saveTasks();
                 } else {
 
                     Task currTask = null;
@@ -49,6 +59,7 @@ public class Chatbot {
 
                     if (currTask != null) {
                         addTask(currTask);
+                        saveTasks();
                     }
                 }
             } catch (DukeException e) {
@@ -56,13 +67,80 @@ public class Chatbot {
                 System.out.println(DIVIDER);
             }
         }
+        scanner.close();
+    }
+
+    private File getSavedData() {
+        File folder = new File(DATA_PATH_NAME);
+
+        if (!folder.exists()) {
+           folder.mkdirs();
+        }
+
+        File file = new File(DATA_FILE_PATH);
+
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+
+        return file;
+    }
+
+    private void addSavedTasksToList(File savedData, ArrayList<Task> tasks) {
+        try {
+            Scanner sc = new Scanner(savedData);
+
+            while (sc.hasNextLine()) {
+                String[] components = sc.nextLine().split(" \\| ");
+
+                switch (components[0]) {
+                    case "T":
+                        tasks.add(new Todo(components[2], components[1].equals("1") ? true : false));
+                        break;
+                    case "D":
+                        tasks.add(new Deadline(components[2], components[3], components[1].equals("1") ? true : false));
+                        break;
+                    case "E":
+                        tasks.add(new Event(components[2], components[3], components[1].equals("1") ? true : false));
+                        break;
+                }
+            }
+
+            sc.close();
+        } catch (FileNotFoundException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    private void saveTasks() {
+        File file = new File(DATA_FILE_PATH);
+
+        try {
+            FileWriter writer = new FileWriter(file);
+            writer.write("");
+            writer.close();
+
+            for (Task task : tasks) {
+                FileWriter fileWriter = new FileWriter(file, true);
+                fileWriter.write(task.getSaveFormat() + "\n");
+                fileWriter.close();
+            }
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     private void printTasks() {
-        System.out.println(INDENT + "Here are your tasks for today:");
-        for (int i = 0; i < tasks.size(); i++) {
-            Task curr = tasks.get(i);
-            System.out.println(INDENT + (i + 1) + "." + curr);
+        if (tasks.size() == 0) {
+            System.out.println(INDENT + "Take a chill day sir you have no tasks left");
+        } else {
+            System.out.println(INDENT + "Here are your tasks for today:");
+            for (int i = 0; i < tasks.size(); i++) {
+                Task curr = tasks.get(i);
+                System.out.println(INDENT + (i + 1) + "." + curr);
+            }
         }
         System.out.println(DIVIDER);
     }
