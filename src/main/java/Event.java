@@ -6,6 +6,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public String getTiming() {
+        return this.at;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.at + ")";

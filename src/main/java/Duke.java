@@ -1,10 +1,9 @@
-import java.lang.reflect.Array;
+import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 public class Duke {
 
@@ -114,6 +113,45 @@ public class Duke {
         return tasks;
     }
 
+    private static void writeFile(ArrayList<Task> tasks) {
+        String taskString = "";
+
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            String typeOfTask = task.getClass().getName();
+            String timing = "";
+
+            switch (typeOfTask) {
+                case "Todo":
+                    taskString = taskString + "T";
+                    break;
+                case "Deadline":
+                    taskString = taskString + "D";
+                    timing = timing + ((Deadline) task).getTiming();
+                    break;
+                case "Event":
+                    taskString = taskString + "E";
+                    timing = timing + ((Event) task).getTiming();
+                    break;
+            }
+
+            taskString = taskString + " | " + (task.getDone() ? "1" : "0") + " | " + task.getTaskDescription()
+                    + (typeOfTask.equals("Deadline") || typeOfTask.equals("Event")
+                    ? " | " + timing
+                    : "");
+
+            taskString = taskString + "\n";
+        }
+
+        try {
+            FileWriter fw = new FileWriter("data/tasks.txt");
+            fw.write(taskString);
+            fw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println(formatReply("Hello! I'm Duke\nWhat can I do for you?"));
         ArrayList<Task> taskList = new ArrayList<>();
@@ -129,6 +167,7 @@ public class Duke {
                 try {
                     Task task = taskList.get(input.nextInt() - 1);
                     task.completeTask();
+                    writeFile(taskList);
                     System.out.println(formatReply("This task has been marked as done:\n" + task.toString()));
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(formatReply("OOPS!!! Task number is invalid."));
@@ -141,6 +180,7 @@ public class Duke {
                     int taskNumber = input.nextInt();
                     Task task = taskList.get(taskNumber - 1);
                     taskList.remove(taskNumber - 1);
+                    writeFile(taskList);
                     System.out.println(formatReply("This task has been removed:\n" + task.toString()
                             + "\nNow you have " + taskList.size() + " in the list."));
                 } catch (IndexOutOfBoundsException e) {
@@ -167,6 +207,7 @@ public class Duke {
                     }
                     Task newTask = getTask(command, typeOfTask, input);
                     taskList.add(newTask);
+                    writeFile(taskList);
                     System.out.println(formatReply("Got it. I've added this task:\n" + newTask.toString()
                             + "\nNow you have " + taskList.size() + " tasks in the list."));
                 } catch (InvalidCommandException e) {
