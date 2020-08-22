@@ -10,10 +10,10 @@ import java.io.FileWriter;
 
 public class Duke {
 
-    private ArrayList<Task> taskList;
+    private TaskList taskList;
 
     // Constructor for the bot
-    public Duke(ArrayList<Task> taskList) {
+    public Duke(TaskList taskList) {
         this.taskList = taskList;
     }
 
@@ -22,69 +22,80 @@ public class Duke {
         String welcome = "Hello I am Duke!\nHow can I help you?\n";
         System.out.println(welcome);
 
-        Duke newBot = new Duke(new ArrayList<Task>());
-
         Storage storage = new Storage("data" + File.separator +  "duke.txt");
 
-        newBot.taskList = storage.loadData();
+        TaskList dukeTaskList = new TaskList(storage.loadData());
 
-        Scanner sc = new Scanner(System.in);
+        Duke newBot = new Duke(dukeTaskList);
 
-        while (sc.hasNextLine()) {
-            String message = sc.next();
-            message += sc.nextLine();
-            Parser dukeParser = new Parser(message);
-            if (message.equals("done")) {
-                message += sc.nextLine();
-                DoneCommand newDoneCommand = new DoneCommand(message, newBot.taskList.size());
-                int taskIndex = newDoneCommand.getTaskIndex();
-                newBot.markDone(newBot.taskList.get(taskIndex - 1));
-            } else if (message.equals("todo")) {
-                message += sc.nextLine();
-                TodoCommand newTodoCommand = new TodoCommand(message);
-                String description = newTodoCommand.getTodoDescription();
-                Todo newTodo = new Todo(description);
-                newBot.addTask(newTodo);
-            } else if (message.equals("event")) {
-                message += sc.nextLine();
-                EventCommand newEventCommand = new EventCommand(message);
-                LocalDate at = newEventCommand.getDateForTask();
-                String description = newEventCommand.getDescriptionForTask();
-                Event newEvent = new Event(description, at);
-                newBot.addTask(newEvent);
-            } else if (message.equals("deadline")) {
-                message += sc.nextLine();
-                DeadlineCommand newDeadlineCommand = new DeadlineCommand(message);
-                LocalDate by = newDeadlineCommand.getDateForTask();
-                String description = newDeadlineCommand.getDescriptionForTask();
-                Deadline newDeadline = new Deadline(description, by);
-                newBot.addTask(newDeadline);
-            } else if (message.equals("list")) {
-                message += sc.nextLine();
-                ListCommand newListCommmand = new ListCommand(message);
-                newListCommmand.checkCommandValidity();
-                if (newBot.taskList.isEmpty()) {
-                    System.out.println("\nThere are currently no tasks stored!\n");
-                } else {
-                    newBot.displayTasks();
-                }
-            } else if (message.equals("bye")) {
-                System.out.println("\nBye! Have a nice day!\n");
-                break;
-            } else if (message.equals("delete")) {
-                message += sc.nextLine();
-                DeleteCommand newDeleteCommand = new DeleteCommand(message);
-                int taskIndex = newDeleteCommand.getDeletedTaskIndex();
-                if (taskIndex > newBot.taskList.size() || taskIndex < 1) {
-                    throw new InvalidTaskNumberException();
-                } else {
-                    newBot.deleteTask(newBot.taskList.get(taskIndex - 1));
-                }
-            } else {
-                throw new InvalidCommandException();
-            }
-            newBot.writeFile();
+        UI dukeUI = new UI();
+
+        Parser dukeParser = new Parser();
+
+        boolean isExit = false;
+
+        while (!isExit) {
+            String userCommand = dukeUI.readCommand();
+            Command cmd = dukeParser.parseCommand(userCommand);
+            cmd.execute(dukeTaskList, dukeUI);
         }
+
+
+//        while (sc.hasNextLine()) {
+//            String message = sc.next();
+//            message += sc.nextLine();
+//            Parser dukeParser = new Parser(message);
+//            if (message.equals("done")) {
+//                message += sc.nextLine();
+//                DoneCommand newDoneCommand = new DoneCommand(message, newBot.taskList.size());
+//                int taskIndex = newDoneCommand.getTaskIndex();
+//                newBot.markDone(newBot.taskList.get(taskIndex - 1));
+//            } else if (message.equals("todo")) {
+//                message += sc.nextLine();
+//                TodoCommand newTodoCommand = new TodoCommand(message);
+//                String description = newTodoCommand.getTodoDescription();
+//                Todo newTodo = new Todo(description);
+//                newBot.addTask(newTodo);
+//            } else if (message.equals("event")) {
+//                message += sc.nextLine();
+//                EventCommand newEventCommand = new EventCommand(message);
+//                LocalDate at = newEventCommand.getDateForTask();
+//                String description = newEventCommand.getDescriptionForTask();
+//                Event newEvent = new Event(description, at);
+//                newBot.addTask(newEvent);
+//            } else if (message.equals("deadline")) {
+//                message += sc.nextLine();
+//                DeadlineCommand newDeadlineCommand = new DeadlineCommand(message);
+//                LocalDate by = newDeadlineCommand.getDateForTask();
+//                String description = newDeadlineCommand.getDescriptionForTask();
+//                Deadline newDeadline = new Deadline(description, by);
+//                newBot.addTask(newDeadline);
+//            } else if (message.equals("list")) {
+//                message += sc.nextLine();
+//                ListCommand newListCommmand = new ListCommand(message);
+//                newListCommmand.checkCommandValidity();
+//                if (newBot.taskList.isEmpty()) {
+//                    System.out.println("\nThere are currently no tasks stored!\n");
+//                } else {
+//                    newBot.displayTasks();
+//                }
+//            } else if (message.equals("bye")) {
+//                System.out.println("\nBye! Have a nice day!\n");
+//                break;
+//            } else if (message.equals("delete")) {
+//                message += sc.nextLine();
+//                DeleteCommand newDeleteCommand = new DeleteCommand(message);
+//                int taskIndex = newDeleteCommand.getDeletedTaskIndex();
+//                if (taskIndex > newBot.taskList.size() || taskIndex < 1) {
+//                    throw new InvalidTaskNumberException();
+//                } else {
+//                    newBot.deleteTask(newBot.taskList.get(taskIndex - 1));
+//                }
+//            } else {
+//                throw new InvalidCommandException();
+//            }
+//            newBot.writeFile();
+//        }
     }
 
     // Method to display all messages
@@ -100,47 +111,47 @@ public class Duke {
     }
 
 
-    // Method to mark task as done
-    private void markDone(Task completedTask) {
-        if (!completedTask.getStatus()) {
-            System.out.println("\nNice! I have completed this task!");
-            completedTask.markAsDone();
-            System.out.println(" " + completedTask + "\n");
-            int indexOfTask = this.taskList.indexOf(completedTask);
-            this.taskList.get(indexOfTask).markAsDone();
-        } else {
-            System.out.println("\nThis task has already been completed!\n");
-        }
-    }
+//    // Method to mark task as done
+//    private void markDone(Task completedTask) {
+//        if (!completedTask.getStatus()) {
+//            System.out.println("\nNice! I have completed this task!");
+//            completedTask.markAsDone();
+//            System.out.println(" " + completedTask + "\n");
+//            int indexOfTask = this.taskList.indexOf(completedTask);
+//            this.taskList.get(indexOfTask).markAsDone();
+//        } else {
+//            System.out.println("\nThis task has already been completed!\n");
+//        }
+//    }
+//
+//    // Method to add an impending task to the bot's task list
+//    private void addTask(Task newTask) {
+//        this.taskList.add(newTask);
+//        System.out.println("\nGot it. This task is now added.");
+//        System.out.println(" " + newTask);
+//        int tasksLeft = checkTasksLeft();
+//        System.out.println("You have " + tasksLeft + " tasks left in your list!\n");
+//    }
 
-    // Method to add an impending task to the bot's task list
-    private void addTask(Task newTask) {
-        this.taskList.add(newTask);
-        System.out.println("\nGot it. This task is now added.");
-        System.out.println(" " + newTask);
-        int tasksLeft = checkTasksLeft();
-        System.out.println("You have " + tasksLeft + " tasks left in your list!\n");
-    }
+//    // Method to check how many tasks are not completed
+//    private int checkTasksLeft() {
+//        int index = 0;
+//        for (Task task: this.taskList) {
+//            if (!task.getStatus()) {
+//                index++;
+//            }
+//        }
+//        return index;
+//    }
 
-    // Method to check how many tasks are not completed
-    private int checkTasksLeft() {
-        int index = 0;
-        for (Task task: this.taskList) {
-            if (!task.getStatus()) {
-                index++;
-            }
-        }
-        return index;
-    }
-
-    private void deleteTask(Task deletedTask) {
-        this.taskList.remove(deletedTask);
-        System.out.println("\nGot it. Deleting task.....");
-        System.out.println(" " + deletedTask);
-        int tasksLeft = checkTasksLeft();
-        System.out.println("You have " + tasksLeft  + " tasks left in your list!\n");
-
-    }
+//    private void deleteTask(Task deletedTask) {
+//        this.taskList.remove(deletedTask);
+//        System.out.println("\nGot it. Deleting task.....");
+//        System.out.println(" " + deletedTask);
+//        int tasksLeft = checkTasksLeft();
+//        System.out.println("You have " + tasksLeft  + " tasks left in your list!\n");
+//
+//    }
 
     public void writeFile() throws IOException {
         FileWriter dukeWriter = new FileWriter("data/duke.txt", false);

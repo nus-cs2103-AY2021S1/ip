@@ -1,16 +1,23 @@
 public class DoneCommand extends Command {
 
+    private String command;
+
     public DoneCommand(String command) {
-        super(command);
+        this.command = command;
     }
 
-    // Method to get the index of the task that is already completed
-    protected int getTaskIndex() throws InvalidTaskNumberException {
+    @Override
+    protected void execute(TaskList tasks, UI dukeUI) throws InvalidTaskNumberException {
+        int taskIndex;
         try {
             String[] doneCommand = this.command.split(" ");
-            int taskIndex = Integer.parseInt(doneCommand[1]);
-            if (taskIndex > 0 && taskIndex <= TaskList.taskNum) {
-                return taskIndex;
+            taskIndex = Integer.parseInt(doneCommand[1]);
+            if (taskIndex > 0 && taskIndex <= tasks.getTaskList().size()) {
+                Task completedTask = tasks.getTaskList().get(taskIndex-1);
+                if (!completedTask.getStatus()) {
+                    completedTask.markAsDone();
+                }
+                dukeUI.doneTask(completedTask);
             } else {
                 throw new InvalidTaskNumberException();
             }

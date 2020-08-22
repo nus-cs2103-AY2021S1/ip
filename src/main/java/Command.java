@@ -1,11 +1,4 @@
-public class Command {
+public abstract class Command {
 
-    protected String command;
-
-    public Command(String command) {
-        this.command = command;
-    }
-
-    public Command() {
-    }
+    abstract void execute(TaskList tasks, UI ui) throws DukeException;
 }

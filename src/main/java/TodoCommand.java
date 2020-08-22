@@ -1,15 +1,19 @@
 public class TodoCommand extends Command{
 
+    private String command;
+
+
     public TodoCommand(String command) {
-        super(command);
+        this.command = command;
     }
 
-
-    // Method to get the description of a todo task
-    protected String getTodoDescription() throws InvalidTaskDescriptionException {
+    @Override
+    protected void execute(TaskList tasks, UI dukeUI) throws InvalidTaskDescriptionException {
         try {
             String[] todoDetails = this.command.split(" ", 2);
-            return todoDetails[1];
+            Todo newTodo = new Todo(todoDetails[1]);
+            tasks.addTask(newTodo);
+            dukeUI.addTask(tasks, newTodo);
         } catch (IndexOutOfBoundsException e){
             throw new InvalidTaskDescriptionException();
         }
