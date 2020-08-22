@@ -6,6 +6,9 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 What can I do for you?
+Welcome back! Trying to retrieve where you were last time...
+Couldn't find the data directory. Creating one for you...
+Couldn't find a save file. You may start adding things from start!
 Got it. I've added this task:
     [T][✗] borrow book
 Now you have 1 task in the list.
@@ -38,4 +41,4 @@ Here are the tasks in your list:
 ☹ OOPS!!! Seems you have provided an invalid index :-(
 ☹ OOPS!!! Seems you forgot to supply the time!
 Simply add '/by <time>' for deadline OR '/at <time>' for event behind your command
-Bye. Hope to see you again soon!
+Content Saved! Hope to see you again soon!

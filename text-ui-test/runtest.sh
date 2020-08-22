@@ -26,6 +26,9 @@ java -classpath ../bin Duke < input.txt > ACTUAL.TXT
 # cp EXPECTED.TXT EXPECTED-UNIX.TXT
 # dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
 
+# remove newly created data folder
+rm -r data
+
 # compare the output to the expected output
 # diff ACTUAL.TXT EXPECTED-UNIX.TXT
 diff ACTUAL.TXT EXPECTED.TXT
