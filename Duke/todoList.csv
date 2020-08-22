@@ -1,0 +1,7 @@
+todo,task1,0
+event,2020-08-23T03:40,ProjectDuke,1
+deadline,2020-08-23T05:00,ProjectDuke2,1
+event,2020-08-23T06:00,projectDuke2,0
+event,2020-08-23T23:59,ProjectDuke3,1
+deadline,2020-08-23T07:00,ProjectDuke3,0
+deadline,2020-08-23T23:59,ProjectDuke3,0

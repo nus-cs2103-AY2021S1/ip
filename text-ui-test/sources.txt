@@ -1,7 +1,16 @@
+../src/main/java/TaskList.java
+../src/main/java/ByeCommand.java
+../src/main/java/Storage.java
+../src/main/java/DeleteCommand.java
+../src/main/java/ListCommand.java
+../src/main/java/Parser.java
 ../src/main/java/InvalidFormatListException.java
 ../src/main/java/InvalidFormatByeException.java
 ../src/main/java/EmptyTextException.java
+../src/main/java/Command.java
 ../src/main/java/InvalidFormatDoneException.java
+../src/main/java/AddCommand.java
+../src/main/java/Ui.java
 ../src/main/java/Event.java
 ../src/main/java/InvalidFormatDeleteException.java
 ../src/main/java/InvalidFormatDeadlineException.java
@@ -11,6 +20,7 @@
 ../src/main/java/InvalidFormatDateException.java
 ../src/main/java/Duke.java
 ../src/main/java/Deadline.java
+../src/main/java/DoneCommand.java
 ../src/main/java/ToDo.java
 ../src/main/java/UnknownCommandException.java
 ../src/main/java/DukeException.java
