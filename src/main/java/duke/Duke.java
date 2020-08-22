@@ -51,7 +51,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        //initialize duke.Duke with save data and send welcome message
+        //initialize Duke with save data and send welcome message
         Duke duke = new Duke(Path.of("data/data.txt"));
         duke.ui.displayGreet();
 
