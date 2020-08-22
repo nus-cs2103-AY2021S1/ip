@@ -8,9 +8,9 @@ public class Event extends Task {
         super(content);
         this.time = time;
     }
-
+    public String getDeadline() { return this.time; }
     @Override
     public String returnStringForm() {
-        return "[E]" + super.returnStringForm() + "( at: " + this.time + ")";
+        return "[E]" + super.returnStringForm() + " (at: " + this.time + ")";
     }
 }

@@ -8,9 +8,9 @@ public class Deadline extends Task {
         super(content);
         this.deadline = deadline;
     }
-
+    public String getDeadline() { return this.deadline; }
     @Override
     public String returnStringForm() {
-        return "[D]" + super.returnStringForm() + "( by: " + this.deadline + ")";
+        return "[D]" + super.returnStringForm() + " (by: " + this.deadline + ")";
     }
 }

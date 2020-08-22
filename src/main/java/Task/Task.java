@@ -7,6 +7,8 @@ public class Task {
         this.isDone = false;
         this.content = content;
     }
+    public boolean getStatus() { return this.isDone; }
+    public String getContent() { return this.content; }
     public String returnStringForm() {
         return "[" + getStatusIcon() +"] " + this.content;
     }

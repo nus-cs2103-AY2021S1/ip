@@ -1,5 +1,9 @@
-import Task.*;
-import Exception.*;
+import Task.Deadline;
+import Task.Event;
+import Task.Task;
+import Task.Todo;
+import Exception.DukeException;
+import Exception.DukeInvalidArgumentException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,16 +26,19 @@ public class Duke {
         this.taskStorage.remove(index);
     }
 
-    static String furtherProcessing(Commands commandType, String[] tokens, Duke dk) throws DukeException {
+    static String furtherProcessing(Commands commandType, String[] tokens, Duke dk, boolean isLoaded) throws DukeException {
         String content = "";
         String result_prefix = "Got it. I've added this task:\n      ";
         String result_subfix = "Now you have " + (dk.taskStorage.size() + 1) + " tasks in the list.";
         String main_content = "";
         String deadline = "";
-        for(int i = 1;i < tokens.length; i++) {
+        SaveData saver = new SaveData();
+        int tokens_limit = isLoaded ? tokens.length - 1 : tokens.length;
+        boolean isDone = tokens[tokens.length - 1].equals("1");
+        for(int i = 1;i < tokens_limit; i++) {
             if(tokens[i].length() == 0) continue;
             if(tokens[i].charAt(0) == '/') {
-                for(int j = i + 1; j < tokens.length;j++) {
+                for(int j = i + 1; j < tokens_limit;j++) {
                     deadline += tokens[j] + " ";
                 }
                 break;
@@ -48,19 +55,25 @@ public class Duke {
         if(commandType == Commands.DEADLINE) {
 
             Deadline deadlineTask = new Deadline(content, deadline);
+            if(isLoaded && isDone) deadlineTask.markAsDone();
             dk.taskStorage.add(deadlineTask);
+            saver.saveData(dk.taskStorage);
             main_content = deadlineTask.returnStringForm();
 
         } else if(commandType == Commands.EVENT) {
 
             Event eventTask = new Event(content, deadline);
+            if(isLoaded && isDone) eventTask.markAsDone();
             dk.taskStorage.add(eventTask);
+            saver.saveData(dk.taskStorage);
             main_content = eventTask.returnStringForm();
 
         } else if(commandType == Commands.TODO) {
 
             Todo todoTask = new Todo(content);
+            if(isLoaded && isDone) todoTask.markAsDone();
             dk.taskStorage.add(todoTask);
+            saver.saveData(dk.taskStorage);
             main_content = todoTask.returnStringForm();
 
         } else if(commandType == Commands.DELETE) {
@@ -68,6 +81,7 @@ public class Duke {
             try {
                 Task marked = dk.taskStorage.get(mark_number - 1);
                 dk.deleteTask(mark_number - 1);
+                saver.saveData(dk.taskStorage);
                 return "Noted. I've removed this task:\n      " + marked.returnStringForm() + "\n    Now you have " + dk.taskStorage.size() + " task(s) in the list.";
             } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
                 throw new DukeInvalidArgumentException("Invalid number");
@@ -78,6 +92,7 @@ public class Duke {
             try {
                 Task marked = dk.taskStorage.get(mark_number - 1);
                 marked.markAsDone();
+                saver.saveData(dk.taskStorage);
                 return "Nice! I've marked this task as done:\n      " + marked.returnStringForm();
             } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
                 throw new DukeInvalidArgumentException("Invalid number");
@@ -86,12 +101,12 @@ public class Duke {
         return result_prefix + main_content + "\n    " + result_subfix;
     }
 
-    static String processedCommand(String command, Duke dk) throws DukeException {
+    static String processedCommand(String command, Duke dk, boolean isLoaded) throws DukeException {
         command = command.strip();
         if(command.equals("")) return "";
         String[] tokens = command.split(" ");
         try {
-            return furtherProcessing(Commands.valueOf(tokens[0].toUpperCase()), tokens, dk);
+            return furtherProcessing(Commands.valueOf(tokens[0].toUpperCase()), tokens, dk, isLoaded);
         } catch (IllegalArgumentException e) {
             throw new DukeException("OOPS!!! CAN YOU PLEASE TYPE SOMETHING MEANINGFUL?");
         }
@@ -106,14 +121,22 @@ public class Duke {
     }
     public static void main(String[] args) {
         Duke dk = new Duke();
-       /* String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);*/
         printDialog("What can I do for you?");
         Scanner sc = new Scanner(System.in);
+        LoadData loader = new LoadData();
+        ArrayList<String> savedTasks = loader.getSavedTasks();
+        if(savedTasks.size() > 0 && savedTasks.get(0).equals("000")) {
+            printDialog("This is the first time you use Duke!");
+        } else {
+            try {
+                for (String task : savedTasks) {
+                    processedCommand(task, dk, true);
+                    //if (!result.equals("")) printDialog(result);
+                }
+            } catch (DukeException e) {
+                printDialog("Something wrong happened while loading saved tasks");
+            }
+        }
         while(true) {
             String content = sc.nextLine();
             if(content.equals(Commands.BYE.getAction())) {
@@ -124,7 +147,7 @@ public class Duke {
                 dk.printStoredTasks();
             } else  {
                 try {
-                    String result = processedCommand(content, dk);
+                    String result = processedCommand(content, dk, false);
                     if (!result.equals("")) printDialog(result);
                 } catch (DukeException e) {
                     printDialog(e.getMessage());
