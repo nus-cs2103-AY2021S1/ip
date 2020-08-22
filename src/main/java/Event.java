@@ -6,8 +6,8 @@ import java.time.format.FormatStyle;
 
 public class Event extends Task {
 
-    private LocalDate startDate;
-    private LocalTime startTime;
+    private final LocalDate startDate;
+    private final LocalTime startTime;
 
     public static Event createNewEvent(String argument) throws DukeException {
         String[] eventArguments = argument.split(" /at ");
@@ -61,6 +61,11 @@ public class Event extends Task {
         super(taskName);
         this.startDate = startDate;
         this.startTime = startTime;
+    }
+
+    @Override
+    public boolean isOnSameDay(LocalDate localDate) {
+        return localDate.isEqual(this.startDate);
     }
 
     @Override

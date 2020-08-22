@@ -6,8 +6,8 @@ import java.time.format.FormatStyle;
 
 public class Deadline extends Task {
 
-    private LocalDate deadlineDate;
-    private LocalTime deadlineTime;
+    private final LocalDate deadlineDate;
+    private final LocalTime deadlineTime;
 
     public static Deadline createNewDeadline(String argument) throws DukeException {
         String[] deadlineArguments = argument.split(" /by ");
@@ -62,6 +62,11 @@ public class Deadline extends Task {
         }
 
         return output;
+    }
+
+    @Override
+    public boolean isOnSameDay(LocalDate localDate) {
+        return localDate.isEqual(this.deadlineDate);
     }
 
     @Override

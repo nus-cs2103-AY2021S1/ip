@@ -1,5 +1,6 @@
 public enum Command {
     BYE,
+    DATE,
     DEADLINE,
     DELETE,
     DONE,
