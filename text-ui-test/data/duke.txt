@@ -1,2 +1,0 @@
-T | 0 | read book
-E | 0 | lesson | 1-2pm

@@ -83,7 +83,7 @@ public class Duke {
             String type = entryBreakdown[0];
             boolean isDone = entryBreakdown[1].equals("1");
             String description = entryBreakdown[2];
-            
+
             Task task;
             switch (type) {
             case ("T"):
@@ -97,7 +97,7 @@ public class Duke {
                     throw new DukeException("Data file corrupted");
                 }
                 String by = entryBreakdown[3];
-                task = new Deadline(description, by);
+                task = new Deadline(description, LocalDateTime.parse(by));
                 if (isDone) {
                     task.markAsDone();
                 }
@@ -107,7 +107,7 @@ public class Duke {
                     throw new DukeException("Data file corrupted");
                 }
                 String at = entryBreakdown[3];
-                task = new Event(description, at);
+                task = new Event(description, LocalDateTime.parse(at));
                 if (isDone) {
                     task.markAsDone();
                 }

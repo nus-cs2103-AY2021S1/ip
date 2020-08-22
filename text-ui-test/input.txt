@@ -1,10 +1,14 @@
 test
 todo read book
 todo
-deadline homework /by Sunday
+deadline homework /by 2/12/2012 1000
+deadline homework /by 12.12.2012 1000
+deadline homework /by
 deadline homework
 deadline
-event lesson /at 1-2pm
+event lesson /at 2/12/2012 1000
+event lesson /at 12.12.2012 1000
+event lesson /at
 event lesson
 event
 list
@@ -13,9 +17,11 @@ done a
 done 0
 done -3
 list
-delete 2
 delete a
 delete 0
 delete -3
+delete 3
+delete 2
+delete 1
 list
 bye
