@@ -28,6 +28,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String generateStorageString() {
+        return String.format("EVENT | %s | %s /at %s", isDone ? "TRUE" : "FALSE", taskData, startTime);
+    }
+
+    @Override
     public String toString() {
         return String.format("[E]%s (at: %s)", super.toString(), startTime);
     }

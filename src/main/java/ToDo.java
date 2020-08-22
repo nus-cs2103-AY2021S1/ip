@@ -13,6 +13,11 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String generateStorageString() {
+        return String.format("TODO | %s | %s", isDone ? "TRUE" : "FALSE", taskData);
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }
