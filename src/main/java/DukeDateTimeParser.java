@@ -7,11 +7,11 @@ public class DukeDateTimeParser {
 
     private static final String[] PATTERNS = {"d/M/yyyy", "d MMM yyyy",
             "d MMMM yyyy", "d-M-yyyy", "yyyy-M-d"};
-    private static final String[] PATTERNS_WITH_TIME = {"d/M/yyyy HH:mm", "d/M/yyyy hh:mm a",
-            "d MMM yyyy H:mm", "d MMM yyyy h:mm a",
-            "d MMMM yyyy H:mm", "d MMMM yyyy h:mm a",
-            "d-M-yyyy H:mm", "d-M-yyyy h:mm a",
-            "yyyy-M-d H:mm", "yyyy-M-d h:mm a"};
+    private static final String[] PATTERNS_WITH_TIME = {"d/M/yyyy H:mm", "d/M/yyyy h:mm a", "d/M/yyyy Hmm",
+            "d MMM yyyy H:mm", "d MMM yyyy h:mm a", "d MMM yyyy Hmm",
+            "d MMMM yyyy H:mm", "d MMMM yyyy h:mm a", "d MMMM yyyy Hmm",
+            "d-M-yyyy H:mm", "d-M-yyyy h:mm a", "d-M-yyyy Hmm",
+            "yyyy-M-d H:mm", "yyyy-M-d h:mm a", "yyyy-M-d Hmm"};
 
     public static DukeDateTime parse(String input) throws DukeDateTimeParseException {
         int index = patternWithTimeIndex(input);

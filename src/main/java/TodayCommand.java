@@ -34,6 +34,7 @@ public class TodayCommand extends Command {
             if (i != tasks.size()) {
                 builder.append("\n");
             }
+            i++;
         }
         return builder.toString();
     }
