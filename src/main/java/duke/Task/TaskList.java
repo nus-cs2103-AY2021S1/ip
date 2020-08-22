@@ -30,7 +30,9 @@ public class TaskList {
         try {
             return tasks.get(taskId - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(String.format("Task No.%d is not in your list. Please enter a valid task ID.", taskId));
+            throw new DukeException(String.format("Task No.%d is not in your list. "
+                    + "Please enter a valid task ID.",
+                    taskId));
         }
     }
 
