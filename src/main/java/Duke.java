@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -5,24 +7,50 @@ import java.util.Scanner;
 public class Duke {
     private Scanner scanner;
     private List<Task> taskList;
+    private File dataDirectory, dataFile;
 
     public void initialise() {
+        String logo = "\t    ,---,                                     \n" +
+                "\t  .'  .' `\\                     ,---,              \n" +
+                "\t,---.'     \\          ,--,    ,---.'|              \n" +
+                "\t|   |  .`\\  |       ,'_ /|    |   | :              \n" +
+                "\t:   : |  '  |  .--. |  | :    |   | |   ,---.       \n" +
+                "\t|   ' '  ;  :,'_ /| :  . |  ,--.__| |  /     \\     \n" +
+                "\t'   | ;  .  ||  ' | |  . . /   ,'   | /    /  |     \n" +
+                "\t|   | :  |  '|  | ' |  | |.   '  /  |.    ' / |     \n" +
+                "\t'   : | /  ; :  | : ;  ; |'   ; |:  |'   ;   /|     \n" +
+                "\t|   | '` ,/  '  :  `--'   \\   | '/  ''   |  / |    \n" +
+                "\t;   :  .'    :  ,      .-./   :    :||   :    |     \n" +
+                "\t|   ,.'       `--`----'    \\   \\  /   \\   \\  /  \n" +
+                "\t'---'                       `----'     `----'       \n";
+        System.out.printf(logo);
+        System.out.println("\t Initializing...");
+        
         scanner = new Scanner(System.in);
         taskList = new ArrayList<>();
-        String logo = "\t    ,---,                                       \n" +
-                      "\t  .'  .' `\\                     ,---,           \n" +
-                      "\t,---.'     \\          ,--,    ,---.'|           \n" +
-                      "\t|   |  .`\\  |       ,'_ /|    |   | :           \n" +
-                      "\t:   : |  '  |  .--. |  | :    |   | |   ,---.   \n" +
-                      "\t|   ' '  ;  :,'_ /| :  . |  ,--.__| |  /     \\  \n" +
-                      "\t'   | ;  .  ||  ' | |  . . /   ,'   | /    /  | \n" +
-                      "\t|   | :  |  '|  | ' |  | |.   '  /  |.    ' / | \n" +
-                      "\t'   : | /  ; :  | : ;  ; |'   ; |:  |'   ;   /| \n" +
-                      "\t|   | '` ,/  '  :  `--'   \\   | '/  ''   |  / | \n" +
-                      "\t;   :  .'    :  ,      .-./   :    :||   :    | \n" +
-                      "\t|   ,.'       `--`----'    \\   \\  /   \\   \\  /  \n" +
-                      "\t'---'                       `----'     `----'   \n";
-        System.out.printf(logo);
+        dataDirectory = new File("data");
+        dataFile = new File("./data/duke.txt");
+        
+        try {
+            if (dataDirectory.mkdir()) {
+                System.out.println("\t Data directory created: " + dataDirectory.getName());
+            } else {
+                System.out.println("\t Data directory located.");
+            }
+            
+            if (dataFile.createNewFile()) {
+                System.out.println("\t Data file created: " + dataFile.getName());
+            } else {
+                System.out.println("\t Data file located.");
+            }
+        } catch (IOException e) {
+            System.out.println("\t An error occurred.");
+            e.printStackTrace();
+            System.exit(1);
+        }
+        
+        System.out.println("\t Initialization complete.");
+        
         greet();
     }
     
