@@ -4,7 +4,7 @@ import duke.task.Task;
 
 public class Messenger {
     /**
-     * Loading files
+     * Messages for loading files.
      */
     public static final String FILE_LOADING = "Welcome back! Trying to retrieve where you were last time...";
     public static final String FILE_LOADED = "Great! We have successfully loaded the data. Enjoy~";
@@ -29,7 +29,7 @@ public class Messenger {
     }
 
     /**
-     * Greeting messages
+     * Opening and closing messages
      */
     public static void greet() {
         String logo = " ____        _        \n"

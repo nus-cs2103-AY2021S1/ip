@@ -8,10 +8,19 @@ import java.util.Scanner;
 public class Ui {
     private TaskList list;
 
+    /**
+     * Constructs a Ui object that interacts with the user.
+     *
+     * @param list the task list the Ui uses to manipulate tasks.
+     */
     public Ui(TaskList list) {
         this.list = list;
     }
 
+    /**
+     * Runs the interactive environment.
+     * Deals with exceptions.
+     */
     public void run() {
         // initialize utilities
         Scanner sc = new Scanner(System.in);
@@ -39,7 +48,7 @@ public class Ui {
                     list.deleteTask(Integer.parseInt(body));
                     break;
                 default:
-                    String[] timeExtracted = parser.extractTime(body);
+                    String[] timeExtracted = parser.extractDate(body);
                     String content = timeExtracted[0];
                     String time = timeExtracted[1];
                     list.addTask(content, status, time);

@@ -2,13 +2,24 @@ package duke.utils;
 
 import duke.DukeException;
 import duke.Messenger;
-import duke.TaskStatus;
+import duke.TaskType;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Encapsulate a class that represent a parser to parse the command being passed to
+ * the program.
+ */
 public class Parser {
+    /**
+     * Extracts a line of command into the action and the main body.
+     *
+     * @param command the line of command.
+     * @return an array of string [action, main body].
+     * @throws DukeException throws a duke exception on empty command or spell error.
+     */
     public String[] extractAction(String command) throws DukeException {
         // command is empty
         if (command.equals("")) {
@@ -19,7 +30,7 @@ public class Parser {
         int len = split.length;
 
         String status = split[0];
-        if (TaskStatus.valueOfStatus(status) == null && !status.equals("done") && !status.equals("delete")) {
+        if (TaskType.valueOfStatus(status) == null && !status.equals("done") && !status.equals("delete")) {
             throw new DukeException(Messenger.SPELL_ERROR);
         }
 
@@ -30,7 +41,14 @@ public class Parser {
         return split;
     }
 
-    public String[] extractTime(String command) throws DukeException {
+    /**
+     * Extracts the date from the main body.
+     *
+     * @param command the main body of the line of command.
+     * @return an array of String [content, date].
+     * @throws DukeException throws a duke exception on empty content or time supplied.
+     */
+    public String[] extractDate(String command) throws DukeException {
         String[] split = command.split(" /by | /at ", 2);
 
         // validate if there are two parts

@@ -1,62 +1,113 @@
 package duke.task;
 
-import duke.TaskStatus;
+import duke.TaskType;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A class that encapsulates a task that the user adds in.
+ */
 public class Task {
     private final String content;
     private boolean completed = false;
-    private TaskStatus status;
-    private LocalDate time;
+    private TaskType type;
+    private LocalDate date;
 
-    public Task(String content, String status) {
+    /**
+     * Constructs a task object that has no date attached.
+     *
+     * @param content the content of the task
+     * @param type the type of the task
+     */
+    public Task(String content, String type) {
         this.content = content;
-        this.status = TaskStatus.valueOfStatus(status);
+        this.type = TaskType.valueOfStatus(type);
     }
 
-    public Task(String content, String status, String time) {
+    /**
+     * Constructs a task object that has a date attached.
+     *
+     * @param content the content of the task.
+     * @param type the type of the task.
+     * @param date the date of the task.
+     */
+    public Task(String content, String type, String date) {
         this.content = content;
-        this.status = TaskStatus.valueOfStatus(status);
-        this.time = LocalDate.parse(time);
+        this.type = TaskType.valueOfStatus(type);
+        this.date = LocalDate.parse(date);
     }
 
-    public Task(String content, String status, LocalDate time) {
+    /**
+     * Constructs a task object that has a date attached.
+     *
+     * @param content the content of the task.
+     * @param type the type of the task.
+     * @param date a LocalDate object representing the date of the task.
+     */
+    public Task(String content, String type, LocalDate date) {
         this.content = content;
-        this.status = TaskStatus.valueOfStatus(status);
-        this.time = time;
+        this.type = TaskType.valueOfStatus(type);
+        this.date = date;
     }
 
+    /**
+     * Gets the content of the task.
+     *
+     * @return a string representing the content of the task.
+     */
     public String getContent() {
         return content;
     }
 
+    /**
+     * Gets whether the task has been completed.
+     *
+     * @return true if the task is completed and false otherwise.
+     */
     public boolean isCompleted() {
         return completed;
     }
 
-    public String getStatus() {
-        return status.getStatus();
+    /**
+     * Gets the type of the task.
+     *
+     * @return a string representing the type of the task.
+     */
+    public String getType() {
+        return type.getType();
     }
 
+    /**
+     * Marks the task as completed.
+     */
     public void markAsDone() {
         completed = true;
     }
 
-    public String getTime() {
-        return time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    /**
+     * Gets the date of the task in the format of Month date Year.
+     *
+     * @return a string representing the date of the task in "MMM d yyyy".
+     */
+    public String getDate() {
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    /**
+     * Overrides the toString method to represent the task in the form [T][✓] content (on/at: date).
+     *
+     * @return a string representation of the task.
+     */
     @Override
     public String toString() {
-        String statusLabel = "[" + status.toString().substring(0, 1) + "]";
+        String statusLabel = "[" + type.toString().substring(0, 1) + "]";
         String mainBody = statusLabel + (completed ? "[✓]" : "[✗]") + " " + content;
-        if (status == TaskStatus.EVENT) {
-            mainBody += " (on: " + getTime() + ")";
+        if (type == TaskType.EVENT) {
+            mainBody += " (on: " + getDate() + ")";
         }
-        if (status == TaskStatus.DEADLINE) {
-            mainBody += " (by: " + getTime() + ")";
+        if (type == TaskType.DEADLINE) {
+            mainBody += " (by: " + getDate() + ")";
         }
         return mainBody;
     }

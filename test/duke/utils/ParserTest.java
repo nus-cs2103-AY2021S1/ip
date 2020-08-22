@@ -1,7 +1,6 @@
 package duke.utils;
 
 import duke.DukeException;
-import duke.Messenger;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,7 +45,7 @@ class ParserTest {
     void extractTime() {
         try {
             String command = "return book /by 2020-08-23";
-            String[] split = parser.extractTime(command);
+            String[] split = parser.extractDate(command);
             assertEquals("return book", split[0]);
             assertEquals("2020-08-23", split[1]);
         } catch (DukeException ignored) {}
@@ -56,7 +55,7 @@ class ParserTest {
     void extractTime_timeNotGiven_exceptionThrown() {
         try {
             String command = "return book";
-            parser.extractTime(command);
+            parser.extractDate(command);
             fail();
         } catch (DukeException e) {
             assertEquals(e.getMessage(), "☹ OOPS!!! Seems you forgot to supply the time!\n" +
@@ -68,7 +67,7 @@ class ParserTest {
     void extractTime_contentNotGiven_exceptionThrown() {
         try {
             String command = "/by 2020-08-23";
-            parser.extractTime(command);
+            parser.extractDate(command);
             fail();
         } catch (DukeException e) {
             assertEquals(e.getMessage(), "☹ OOPS!!! Seems you forgot to supply the main content!");
@@ -79,7 +78,7 @@ class ParserTest {
     void extractTime_wrongDateFormat_exceptionThrown() {
         try {
             String command = "return book /by tomorrow";
-            parser.extractTime(command);
+            parser.extractDate(command);
             fail();
         } catch (DukeException e) {
             assertEquals(e.getMessage(), "☹ OOPS!!! The format for your date is incorrect. Use yyyy-MM-dd instead");

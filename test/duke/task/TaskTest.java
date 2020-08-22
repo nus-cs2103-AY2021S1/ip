@@ -22,7 +22,7 @@ class TaskTest {
     @Test
     void getStatus() {
         Task task = new Task("test content", "todo");
-        assertEquals(task.getStatus(), "todo");
+        assertEquals(task.getType(), "todo");
     }
 
     @Test
@@ -35,7 +35,7 @@ class TaskTest {
     @Test
     void getTime() {
         Task task = new Task("test content", "deadline", "2020-08-23");
-        assertEquals(task.getTime(), "Aug 23 2020");
+        assertEquals(task.getDate(), "Aug 23 2020");
     }
 
     @Test
