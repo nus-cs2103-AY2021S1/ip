@@ -24,10 +24,10 @@ public class DukeSaver {
         }
     }
 
-    public void saveData(List<Task> taskList) {
+    public void saveData(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(savePath);
-            for (Task task : taskList) {
+            for (Task task : taskList.getList()) {
                 fw.write(task.serialize() + "\n");
             }
             fw.close();
@@ -36,13 +36,13 @@ public class DukeSaver {
         }
     }
 
-    public void loadData(List<Task> taskList) {
+    public void loadData(TaskList taskList) {
         try {
             File saveFile = new File(savePath);
             Scanner sc = new Scanner(saveFile);
             while (sc.hasNext()) {
                 String line = sc.nextLine();
-                taskList.add(Task.parse(line));
+                taskList.addTask(Task.parse(line));
             }
         } catch (IOException ex) {
             ex.printStackTrace();
