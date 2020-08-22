@@ -15,6 +15,10 @@ public abstract class Task {
         return this;
     }
 
+    public String textFormat() {
+        return (this.done ? "1, " : "0, ") + this.description;
+    }
+
     @Override
     public String toString() {
         String status = this.done ? "[✓]" : "[✗]";
