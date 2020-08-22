@@ -7,11 +7,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 
 public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<>();
     private static String filePath = System.getProperty("user.dir") + "/data/duke.txt";
+    private static Ui ui;
 
     public static void readFile() {
         String folderPath = System.getProperty("user.dir") + "/data";
@@ -49,7 +49,7 @@ public class Duke {
             }
             bufferedReader.close();
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            ui.showLoadingError();
         }
     }
 
@@ -71,14 +71,6 @@ public class Duke {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-    }
-
-    private static void greet() {
-        String greet = "\t____________________________________________________________\n"
-                + "\t Hello! I'm Nite, the Dark Knight\n"
-                + "\t What can I do for you?\n"
-                + "\t____________________________________________________________\n";
-        System.out.println(greet);
     }
 
     private static void add(String task) throws DukeException{
@@ -119,21 +111,18 @@ public class Duke {
     }
 
     private static void list() {
-        System.out.print("\t____________________________________________________________\n");
+        ui.showLine();
         System.out.print("\t Here are the tasks in your list:\n");
         Task t;
         for (int i = 0; i < tasks.size(); i++) {
             t = tasks.get(i);
             System.out.printf("\t %d.%s%n", i + 1, t);
         }
-        System.out.println("\t____________________________________________________________\n");
+        ui.showLine();
     }
 
     private static void exit() {
-        String goodbye = "\t____________________________________________________________\n"
-                + "\t Bye. Hope to see you again soon!\n"
-                + "\t____________________________________________________________\n";
-        System.out.print(goodbye);
+        ui.showFarewell();
         writeFile();
         System.exit(0);
     }
@@ -142,11 +131,8 @@ public class Duke {
         try {
             Task t = tasks.get(i - 1);
             t.markAsDone();
-            String done = "\t____________________________________________________________\n"
-                    + "\t Nice! I've marked this task as done:\n"
-                    + "\t   %s\n"
-                    + "\t____________________________________________________________\n";
-            System.out.printf((done) + "%n", t);
+            ui.showAction(String.format("\t Nice! I've marked this task as done:\n"
+                    + "\t   %s\n", t));
         } catch (IndexOutOfBoundsException ex) {
             throw new DukeException("Can't complete a task that does not exist.");
         }
@@ -156,26 +142,17 @@ public class Duke {
         try {
             Task t = tasks.get(i - 1);
             tasks.remove(i - 1);
-            String done = "\t____________________________________________________________\n"
-                    + "\t Noted. I've removed this task:\n"
+            ui.showAction(String.format("\t Noted. I've removed this task:\n"
                     + "\t   %s\n"
-                    + "\t Now you have %d tasks in the list.\n"
-                    + "\t____________________________________________________________\n";
-            System.out.printf((done) + "%n", t, tasks.size());
+                    + "\t Now you have %d tasks in the list.\n", t, tasks.size()));
         } catch (IndexOutOfBoundsException ex) {
             throw new DukeException("Can't delete a task that does not exist.");
         }
     }
 
     public static void main(String[] args) {
-        String logo = " _____     __   __   ________   _________\n"
-                + "|     \\   |  | |  | |__    __| |   ______|\n"
-                + "|  |\\  \\  |  | |  |    |  |    |  |______\n"
-                + "|  | \\  \\ |  | |  |    |  |    |   ______|\n"
-                + "|  |  \\  \\|  | |  |    |  |    |  |______\n"
-                + "|__|   \\_____| |__|    |__|    |_________|\n";
-        System.out.println(logo);
-        greet();
+        ui = new Ui();
+        ui.showWelcome();
         readFile();
         Scanner sc = new Scanner(System.in);
         String input;
@@ -195,7 +172,7 @@ public class Duke {
                     add(input);
                 }
             } catch (DukeException ex) {
-                System.out.println(ex.getMessage());
+                ui.showError(ex.getMessage());
             }
         }
     }

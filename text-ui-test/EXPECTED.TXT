@@ -6,7 +6,8 @@
 |__|   \_____| |__|    |__|    |_________|
 
 	____________________________________________________________
-	 Hello! I'm Nite, the Dark Knight
+	 Hello! I'm Nite, the Dark Knight,
+	 Here to help you track your tasks and achieve a great night.
 	 What can I do for you?
 	____________________________________________________________
 
@@ -67,5 +68,5 @@
 	____________________________________________________________
 
 	____________________________________________________________
-	 Bye. Hope to see you again soon!
+	 Good nite! Hope you have a good night's sleep. See you soon!
 	____________________________________________________________
