@@ -20,11 +20,20 @@ delete 2
 list
 deadline cs2101 email /by 2020-08-31
 event family party /at 2020-08-31 19:00
-happens on today
-happens on 2020-08-31
+happen on today
+happen on 2020-08-31
 done 1
 list
 done 2
 list
-happens on 2020-08-31
+happen error
+happen before today
+happen before 2020-09-01
+happen after today
+happen after 2020-08-25
+happen in 10 days
+happen in -3 days
+happen in x months
+happen between 2020-08-30 2020-09-10
+happen between 2020-09-10 2020-08-30
 bye
