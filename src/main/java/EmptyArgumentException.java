@@ -1,10 +1,13 @@
-import sun.invoke.empty.Empty;
 
-public class EmptyArgumentException extends Exception {
-    EmptyArgumentException(String errorMessage, Throwable err) {
-        super(errorMessage, err);
-    }
+
+public class EmptyArgumentException {
+    String errorMessage;
     EmptyArgumentException(String errorMessage) {
-        super(errorMessage);
+        this.errorMessage = errorMessage;
+    }
+
+    @Override
+    public String toString() {
+        return errorMessage;
     }
 }

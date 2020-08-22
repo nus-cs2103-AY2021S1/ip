@@ -6,7 +6,7 @@ public class Task {
         this.isCompleted = false;
     }
 
-    private Task(String task, boolean isCompleted) {
+    Task(String task, boolean isCompleted) {
         this.taskName = task;
         this.isCompleted = isCompleted;
     }
@@ -17,7 +17,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String tickOrCross  = isCompleted? "\u2713" : "\u2717";
+        String tickOrCross  = isCompleted? "DONE" : "NOT DONE";
         return String.format("%s %s %s %s", "[", tickOrCross, "] ", taskName);
     }
 }
