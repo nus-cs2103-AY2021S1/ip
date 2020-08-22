@@ -43,7 +43,6 @@ public class Duke {
                 storage.writeRecord(taskList);
             } catch (IOException ioException) {
             }
-
         } catch (LoadingException loadingException) {
             ui.handle(loadingException);
             taskList = new TaskList();
@@ -51,7 +50,6 @@ public class Duke {
                 storage.writeRecord(taskList);
             } catch (IOException ioException) {
             }
-
         }
     }
 

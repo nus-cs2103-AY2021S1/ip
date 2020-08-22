@@ -39,17 +39,16 @@ public class Storage {
     public ArrayList<Task> readRecord() throws FileNotFoundException, LoadingException {
         File record = new File(path);
         Scanner scanner = new Scanner(record);
+        
         try {
             ArrayList<Task> tasks = new ArrayList<>();
             String next;
             if (record.createNewFile()) {
                 throw new FileNotFoundException("Creating new record");
             }
-
             while (scanner.hasNextLine()) {
                 next = scanner.nextLine();
                 String[] strings = next.split(" \\| ");
-
                 if (strings[1].equals("0") || strings[1].equals("1")) {
                     if (strings[0].equals("T") && strings.length == 3) {
                         ToDo todo = new ToDo(strings[2]);
