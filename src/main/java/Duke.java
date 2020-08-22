@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import static java.lang.Integer.parseInt;
@@ -30,6 +33,8 @@ public class Duke {
     void indent() {
         System.out.print("    ");
     }
+
+    static String SAVED_TASK_PATH = "data/duke.txt";
 
     boolean stringIsInt(String string) {
         try {
@@ -92,6 +97,7 @@ public class Duke {
             Task task = memory.get(index - 1);
             task.markAsDone();
             printDoneMessage(task);
+            updateSaveFileWithMemory();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Oops! Sorry, I couldn't find the task.");
         }
@@ -103,6 +109,7 @@ public class Duke {
             printMessage("Noted. I've removed this task.\n" +
                     task.toString() + "\n" +
                     "Now you have " + memory.size() + " tasks in the list.");
+            updateSaveFileWithMemory();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Oops! Sorry, I couldn't find the task.");
         }
@@ -145,6 +152,150 @@ public class Duke {
             return null;
         }
     }
+
+    // ----------------------------- For methods reading and writing to saved file --------------------
+    void readAndLoadFromFile(String path) {
+        try {
+            if (fileExists(path)) {
+                File file = new File(path);
+                //System.out.println(file.getAbsolutePath());
+                Scanner s = new Scanner(file);
+                while (s.hasNext()) {
+                    String[] strArray = s.nextLine().split(" \\| ");
+                    Task task = createTaskFromFile(strArray);
+                    addToMemory(task);
+                }
+            } else {
+                // create file for user?
+            }
+        } catch (IOException e) {
+            printMessage(e.getMessage());
+        } catch (DukeException e) {
+            printMessage(e.getMessage());
+            fixInputFile();
+        }
+    }
+
+    boolean fileExists(String path) throws DukeException {
+        String fullPath = new File(path).getAbsolutePath();
+        String[] pathStringArray = path.split("/");
+        StringBuilder currentPath = new StringBuilder();
+        boolean directoryNotFound = false;
+        File fileInDirectory = null;
+        for (int i = 0; i < pathStringArray.length; i++) {
+            if (i == 0) {
+                currentPath.append(pathStringArray[i]);
+            } else {
+                currentPath.append("/" + pathStringArray[i]);
+            }
+            fileInDirectory = new File(currentPath.toString());
+            if (!fileInDirectory.exists()) {
+                directoryNotFound = true;
+                break;
+            }
+        }
+
+        if (directoryNotFound) {
+            printMessage("Tried to find " + fullPath + "\n"
+                    + "but File/Directory at path " + fileInDirectory.getAbsolutePath()
+                    + " could not be found.");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    void fixInputFile() {
+        // Do something to fix
+    }
+
+    Task createTaskFromFile(String[] strArray) throws DukeException {
+        try {
+            boolean done = strArray[1].equals("1") ? true : false;
+            String description = strArray[2];
+            Task task;
+            if (strArray[0].equals("T")) {
+                task = new ToDo(description);
+            } else if (strArray[0].equals("D")) {
+                String by = strArray[3];
+                task = new Deadline(description, by);
+            } else if (strArray[0].equals("E")) {
+                String at = strArray[3];
+                task = new Event(description, at);
+            } else {
+                throw new DukeException("Saved file task type cannot be understood.");
+            }
+
+            if (done) {
+                task.markAsDone();
+            }
+
+            return task;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Saved file text format error");
+        }
+    }
+
+
+    void updateFile(String path, String textToAdd) {
+        try {
+            FileWriter fw = new FileWriter(path);
+            fw.write(textToAdd);
+            fw.close();
+        } catch (IOException e) {
+            printMessage("Could not write to file");
+        }
+    }
+
+    String convertListToSaveFormat() throws DukeException {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < memory.size(); i++) {
+                Task task = memory.get(i);
+                String saveTaskString = convertTaskToSaveFormat(task);
+                stringBuilder.append(saveTaskString + "\n");
+            }
+
+            return stringBuilder.toString();
+    }
+
+    String convertTaskToSaveFormat(Task task) throws DukeException {
+        String taskType;
+        String description = task.getDescription();
+        int taskDone = task.isDone() ? 1 : 0;
+        String resultString;
+        if (task instanceof ToDo) {
+            taskType = "T";
+            resultString = taskType + " | " + taskDone + " | " + description;
+        } else if (task instanceof Deadline) {
+            Deadline deadline = (Deadline) task;
+            taskType = "D";
+            String by = deadline.getBy();
+            resultString = taskType + " | " + taskDone + " | " + description + " | " + by;
+        } else if (task instanceof Event) {
+            Event event = (Event) task;
+            taskType = "E";
+            String at = event.getAt();
+            resultString = taskType + " | " + taskDone + " | " + description + " | " + at;
+        } else {
+            throw new DukeException("Unable to save task, unknown task type");
+        }
+
+        return resultString;
+    }
+
+    void updateSaveFileWithMemory() {
+        try {
+            String updateString = convertListToSaveFormat();
+            updateFile(SAVED_TASK_PATH, updateString);
+        } catch (DukeException e) {
+            printMessage(e.getMessage());
+        }
+    }
+
+
+
+    //---------------------------------------------------------------------
+
 
     void checkAndPrint(String string) {
         try {
@@ -196,6 +347,7 @@ public class Duke {
             Deadline deadline = new Deadline(description, by);
             addToMemory(deadline);
             printAddMessage(deadline);
+            updateSaveFileWithMemory();
         }
     }
 
@@ -209,6 +361,7 @@ public class Duke {
             ToDo todo = new ToDo(description);
             addToMemory(todo);
             printAddMessage(todo);
+            updateSaveFileWithMemory();
         }
     }
 
@@ -231,6 +384,7 @@ public class Duke {
             Event event = new Event(description, at);
             addToMemory(event);
             printAddMessage(event);
+            updateSaveFileWithMemory();
         }
     }
 
@@ -240,12 +394,12 @@ public class Duke {
         farewell();
     }
 
-
-
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.setRunningState(true);
         Scanner sc = new Scanner(System.in);
+
+        duke.readAndLoadFromFile(SAVED_TASK_PATH);
 
         duke.opener();
         while (duke.isRunning()) {
