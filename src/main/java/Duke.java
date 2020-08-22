@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -27,14 +28,20 @@ public class Duke {
                 data.add(t);
             } else if(type == 'D') {
                 String[] parts = line.substring(5).split(" ");
-                Deadline d = new Deadline(parts[1], parts[3].substring(0, parts[3].length() - 1));
+                Deadline d = new Deadline(parts[1], LocalDateTime.of(Integer.parseInt(parts[5]), getMonth(parts[3]),
+                        Integer.parseInt(parts[4]), Integer.parseInt(parts[6].split(":")[0]),
+                        Integer.parseInt(parts[6].split(":")[1].substring(
+                                0, parts[6].split(":")[1].length() - 1))));
                 if(isDone) {
                     d.done();
                 }
                 data.add(d);
             } else {
                 String[] parts = line.substring(5).split(" ");
-                Event e = new Event(parts[1], parts[3].substring(0, parts[3].length() - 1));
+                Event e = new Event(parts[1], LocalDateTime.of(Integer.parseInt(parts[5]), getMonth(parts[3]),
+                        Integer.parseInt(parts[4]), Integer.parseInt(parts[6].split(":")[0]),
+                        Integer.parseInt(parts[6].split(":")[1].substring(
+                                0, parts[6].split(":")[1].length() - 1))));
                 if(isDone) {
                     e.done();
                 }
@@ -111,15 +118,15 @@ public class Duke {
                         throw new DukeException("     ☹ OOPS!!! The description of a deadline cannot be empty.");
                     }
                     String[] ss = res.split("/");
-                    if (ss.length != 2) {
-                        // Exception: eg. deadline do homework
-                        throw new DukeException("     ☹ OOPS!!! A deadline should contain a description and a time, separated by /.");
-                    }
                     if (!ss[1].startsWith("by ")) {
                         // Exception: eg. deadline do homework /Mon
                         throw new DukeException("     ☹ OOPS!!! Please enter the time following the format: by XXX");
                     }
-                    Deadline t = new Deadline(ss[0].substring(9), ss[1].substring(3));
+                    Deadline t = new Deadline(ss[0].substring(9),
+                            LocalDateTime.of(Integer.parseInt(ss[3].split(" ")[0]), Integer.parseInt(ss[2]),
+                                    Integer.parseInt(ss[1].substring(3)),
+                                    Integer.parseInt(ss[3].split(" ")[1].substring(0, 2)),
+                                    Integer.parseInt(ss[3].split(" ")[1].substring(2))));
                     data.add(t);
                     System.out.println("    ____________________________________________________________");
                     System.out.println("     Got it. I've added this task: ");
@@ -133,15 +140,15 @@ public class Duke {
                         throw new DukeException("     ☹ OOPS!!! The description of an event cannot be empty.");
                     }
                     String[] ss = res.split("/");
-                    if (ss.length != 2) {
-                        // Exception: eg. event meeting
-                        throw new DukeException("     ☹ OOPS!!! An event should contain a description and a time, separated by /.");
-                    }
                     if (!ss[1].startsWith("at ")) {
                         // Exception: eg. event meeting /Mon
                         throw new DukeException("     ☹ OOPS!!! Please enter the time following the format: at XXX");
                     }
-                    Event t = new Event(ss[0].substring(6), ss[1].substring(3));
+                    Event t = new Event(ss[0].substring(9),
+                            LocalDateTime.of(Integer.parseInt(ss[3].split(" ")[0]), Integer.parseInt(ss[2]),
+                                    Integer.parseInt(ss[1].substring(3)),
+                                    Integer.parseInt(ss[3].split(" ")[1].substring(0, 2)),
+                                    Integer.parseInt(ss[3].split(" ")[1].substring(2))));
                     data.add(t);
                     System.out.println("    ____________________________________________________________");
                     System.out.println("     Got it. I've added this task: ");
@@ -180,5 +187,23 @@ public class Duke {
             System.out.printf("     %d.%s\n", i + 1, data.get(i).toString());
         }
         System.setOut(oldStdout);
+    }
+
+    public static int getMonth(String month) {
+        return switch (month) {
+            case "JAN" -> 1;
+            case "FEB" -> 2;
+            case "MAR" -> 3;
+            case "APR" -> 4;
+            case "MAY" -> 5;
+            case "JUN" -> 6;
+            case "JUL" -> 7;
+            case "AUG" -> 8;
+            case "SEP" -> 9;
+            case "OCT" -> 10;
+            case "NOV" -> 11;
+            case "DEC" -> 12;
+            default -> 0;
+        };
     }
 }
