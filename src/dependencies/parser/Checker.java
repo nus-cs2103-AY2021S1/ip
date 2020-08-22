@@ -25,6 +25,16 @@ class Checker {
     }
 
     /**
+     * Returns the Executable object.
+     * Executable object holds the task inside.
+     *
+     * @return the executable object
+     */
+    public Executable getExecutable() {
+        return this.command;
+    }
+
+    /**
      * Static factory method for constructing the checker object.
      * The Checker should have an Executable containing the task.
      *
@@ -106,6 +116,7 @@ class Checker {
         return new Checker(e);
     }
 
+
     /**
      * Case insensitive check for a word.
      * @param line
@@ -132,12 +143,21 @@ class Checker {
 
     private boolean isTodo(String s) {return false;}
 
-    public Executable getExecutable() {
-        return this.command;
-    }
-
     public boolean isValidCommand(String s) {
         return false;
+    }
+
+    /* -------------------------------------- Additional Feature Section ---------------------------------- */
+
+    /**
+     * Instead of parsing just natural language, this function will be able to parse a natural sentence.
+     * eg. "I have a meeting on Monday." -> "event meeting /at Monday"
+     *
+     * @param s
+     * @return
+     */
+    private static Checker parseNaturalLanguage(String s) {
+        return new Checker(null);
     }
 
 }
