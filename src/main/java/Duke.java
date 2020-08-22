@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -67,8 +68,22 @@ public class Duke {
       }
       
       String[] commandParam = command[1].split("/by");
+      
+      if (commandParam.length < 2) {
+        throw new DukeException("\t☹ OOPS!!! Invalid Argument (\"/by\" String not found)");
+      }
+      
       String description = commandParam[0].trim();
       String by = commandParam[1].trim();
+      
+      if (description.isBlank()) {
+        throw new DukeException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
+      }
+      
+      if (by.isBlank()) {
+        throw new DukeException("\t☹ OOPS!!! The /by Date of a deadline cannot be empty.");
+      }
+      
       Deadline newDeadline = new Deadline(description, by);
 
       list.add(newDeadline);
