@@ -1,7 +1,11 @@
 package main.java;
 
-import jdk.jfr.Event;
-
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -24,59 +28,132 @@ public class Duke {
         tasks = new ArrayList<>();
     }
 
-    private void addTask(String task, TaskType taskType) {
+    private void addTaskCommand(String task, TaskType taskType) {
         Task newTask;
         String message;
 
         try {
             switch (taskType) {
-                case TODO:
-                    if (task == null) {
-                        throw new ToDoException();
-                    }
-                    newTask = new ToDoTask(task);
-                    break;
-                case DEADLINE:
-                    if (task == null) {
-                        throw new DeadlineException();
-                    }
+            case TODO:
+                if (task == null) {
+                    throw new ToDoException();
+                }
+                newTask = new ToDoTask(task);
+                break;
+            case DEADLINE:
+                if (task == null) {
+                    throw new DeadlineException();
+                }
+                String[] arrForDeadline = task.split("/by", 2);
 
-                    String[] arrForDeadline = task.split("/by", 2);
+                if (arrForDeadline.length == 1) {
+                    throw new DeadlineException();
+                }
 
-                    if (arrForDeadline.length == 1) {
-                        throw new DeadlineException();
-                    }
+                String taskForDeadline = arrForDeadline[0].trim();
+                String dateForDeadline = arrForDeadline[1].trim();
+                newTask = new DeadlineTask(taskForDeadline, dateForDeadline);
+                break;
+            case EVENT:
+                if (task == null) {
+                    throw new EventException();
+                }
+                String[] arrForEvent = task.split("/at", 2);
 
-                    String taskForDeadline = arrForDeadline[0].trim();
-                    String dateForDeadline = arrForDeadline[1].trim();
-                    newTask = new DeadlineTask(taskForDeadline, dateForDeadline);
-                    break;
-                case EVENT:
-                    if (task == null) {
-                        throw new EventException();
-                    }
-                    String[] arrForEvent = task.split("/at", 2);
-
-                    if (arrForEvent.length == 1) {
-                        throw new EventException();
-                    }
-                    String taskForEvent = arrForEvent[0].trim();
-                    String dateForEvent = arrForEvent[1].trim();
-                    newTask = new EventTask(taskForEvent, dateForEvent);
-                    break;
-                default:
-                    newTask = new Task(task);
-                    break;
+                if (arrForEvent.length == 1) {
+                    throw new EventException();
+                }
+                String taskForEvent = arrForEvent[0].trim();
+                String dateForEvent = arrForEvent[1].trim();
+                newTask = new EventTask(taskForEvent, dateForEvent);
+                break;
+            default:
+                newTask = new Task(task);
+                break;
             }
+            saveTaskToFile(newTask);
             tasks.add(newTask);
             message = "Okay. I will add this task:\n" + indentation + newTask + "\n" +
                     "Now you have " + tasks.size() + " " + (tasks.size() == 1 ? "task " : "tasks ") + "in the list.";
-        } catch (ToDoException | DeadlineException | EventException e) {
+        } catch (ToDoException | DeadlineException | EventException | IOException e) {
             message = e.getMessage();
         }
 
         sendMessage(message);
 
+    }
+
+    private void saveTaskToFile(Task task) throws IOException {
+        try {
+            Path path = Paths.get("data", "storage.txt");
+            FileWriter fw = new FileWriter(path.toString(), true);
+
+            String toBeAppend = Parser.parse(task);
+            fw.write(toBeAppend);
+            fw.close();
+        } catch (IOException e) {
+            throw new FailToReadFileException();
+        }
+    }
+
+    private void changeTaskInFile(int line) throws IOException {
+        try {
+            StringBuilder sb = new StringBuilder();
+            Path path = Paths.get("data", "storage.txt");
+            File file = new File(path.toString());
+
+            Scanner sc = new Scanner(file);
+
+            int count = 1;
+            while (sc.hasNext()) {
+                String taskLine = sc.nextLine() + "\n";
+
+                if (count == line) {
+                    if (taskLine.charAt(4) == '0') {
+                        taskLine = taskLine.replaceFirst("0", "1");
+                    }
+                }
+
+                sb.append(taskLine);
+                count++;
+            }
+
+            String tobeWritten = sb.toString();
+            FileWriter fw = new FileWriter(path.toString());
+
+            fw.write(tobeWritten);
+            fw.close();
+        } catch (IOException e) {
+            throw new FailToReadFileException();
+        }
+    }
+
+    private void deleteTaskInFile(int line) throws IOException {
+        try {
+            StringBuilder sb = new StringBuilder();
+            Path path = Paths.get("data", "storage.txt");
+            File file = new File(path.toString());
+
+            Scanner sc = new Scanner(file);
+
+            int count = 1;
+            while (sc.hasNext()) {
+                String taskLine = sc.nextLine() + "\n";
+
+                if (count != line) {
+                    sb.append(taskLine);
+                }
+                count++;
+            }
+
+            String tobeWritten = sb.toString();
+            FileWriter fw = new FileWriter(path.toString());
+
+            fw.write(tobeWritten);
+            fw.close();
+        } catch (IOException e) {
+
+        }
     }
 
     private void welcome() {
@@ -119,11 +196,14 @@ public class Duke {
             } else {
                 Task task = tasks.get(taskNum - 1);
                 task.setStatusToDone();
+                changeTaskInFile(taskNum);
                 message = "Sucessfully marked this task as done: \n" + indentation + task.toString();
             }
         } catch (NumberFormatException e) {
             message = "Please put a number!";
         } catch (DoneException e) {
+            message = e.getMessage();
+        } catch (IOException e) {
             message = e.getMessage();
         }
         sendMessage(message);
@@ -140,12 +220,15 @@ public class Duke {
                 message = "Invalid task number!";
             } else {
                 Task task = tasks.remove(taskNum - 1);
+                deleteTaskInFile(taskNum);
                 message = "Okay. I will delete this task:\n" + indentation + task + "\n" +
                         "Now you have " + tasks.size() + " " + (tasks.size() == 1 ? "task " : "tasks ") + "in the list.";
             }
         } catch (NumberFormatException e) {
             message = "Please put a number!";
         } catch (DeleteException e) {
+            message = e.getMessage();
+        } catch (IOException e) {
             message = e.getMessage();
         }
         sendMessage(message);
@@ -175,11 +258,11 @@ public class Duke {
                 } else if (command.equals(DELETE_COMMAND)) {
                     deleteTask(arg);
                 } else if (command.equals(TODO_COMMAND)) {
-                    addTask(arg, TaskType.TODO);
+                    addTaskCommand(arg, TaskType.TODO);
                 } else if (command.equals(DEADLINE_COMMAND)) {
-                    addTask(arg, TaskType.DEADLINE);
+                    addTaskCommand(arg, TaskType.DEADLINE);
                 } else if (command.equals(EVENT_COMMAND)) {
-                    addTask(arg, TaskType.EVENT);
+                    addTaskCommand(arg, TaskType.EVENT);
                 } else {
                     throw new NotACommandException();
                 }
@@ -210,11 +293,94 @@ public class Duke {
         return line + "\n" + sb.toString() + line;
     }
 
+
+    private void addTaskReadingList(String task, TaskType taskType, boolean isDone, String desc) {
+        Task newTask;
+        switch (taskType) {
+        case TODO:
+            newTask = new ToDoTask(task);
+            break;
+        case DEADLINE:
+            newTask = new DeadlineTask(task, desc);
+            break;
+        case EVENT:
+            newTask = new EventTask(task, desc);
+            break;
+        default:
+            newTask = new Task(task);
+            break;
+        }
+
+        if (isDone) {
+            newTask.setStatusToDone();
+        }
+
+        tasks.add(newTask);
+    }
+
+    private void createStorageFile() throws IOException {
+        try {
+            Path dataPath = Paths.get("data");
+            File dataFile = new File(dataPath.toString());
+
+            if (!dataFile.exists()) {
+                dataFile.mkdir();
+            }
+
+            Path storagePath = Paths.get("data", "storage.txt");
+            File storageFile = new File(storagePath.toString());
+
+
+            if (!storageFile.exists()) {
+                storageFile.createNewFile();
+            }
+        } catch (IOException e) {
+            throw new FailToReadFileException();
+        }
+
+    }
+
+    private void readList() throws IOException {
+        createStorageFile();
+
+        Path storagePath = Paths.get("data", "storage.txt");
+        File file = new File(storagePath.toString());
+
+        Scanner sc = new Scanner(file);
+
+        while (sc.hasNext()) {
+            String taskString = sc.nextLine();
+            String[] taskArr = taskString.split("\\|");
+
+            String taskType = taskArr[0].trim();
+            boolean isDone = taskArr[1].trim().equals("1");
+            String taskName = taskArr[2].trim();
+
+            if (taskType.equals("T")) {
+                addTaskReadingList(taskName, TaskType.TODO, isDone, null);
+            } else if (taskType.equals("D")) {
+                String date = taskArr[3];
+                addTaskReadingList(taskName, TaskType.DEADLINE, isDone, date);
+            } else {
+                String time = taskArr[3];
+                addTaskReadingList(taskName, TaskType.EVENT, isDone, time);
+            }
+        }
+    }
+
+    private void run() {
+        try {
+            readList();
+            welcome();
+            takeUserInput();
+            exit();
+        } catch (IOException e) {
+            sendMessage(e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         Duke duke = new Duke();
-
-        duke.welcome();
-        duke.takeUserInput();
-        duke.exit();
+        duke.run();
     }
 }

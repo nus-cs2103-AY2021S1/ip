@@ -9,7 +9,15 @@ public class Task {
 
     Task(String taskName) {
         this.taskName = taskName;
-        status = Status.ONGOING;
+        this.status = Status.ONGOING;
+    }
+
+    public String getTaskName() {
+        return this.taskName;
+    }
+
+    public boolean isDone() {
+        return this.status == Status.DONE;
     }
 
     public void setStatusToDone() {
