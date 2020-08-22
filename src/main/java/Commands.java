@@ -13,7 +13,7 @@ public class Commands {
     private ArrayList<Task> taskList = new ArrayList<>();
 
     enum Input {
-        LIST, BYE, DONE, TODO, DEADLINES, EVENTS, DELETE
+        LIST, BYE, DONE, TODO, DEADLINE, EVENT, DELETE
     }
 
     public void start() {
@@ -45,11 +45,11 @@ public class Commands {
                         addTodo(inputArray);
                         inputs = scanner.nextLine().trim();
                         break;
-                    case DEADLINES:
+                    case DEADLINE:
                         addDeadline(inputArray);
                         inputs = scanner.nextLine().trim();
                         break;
-                    case EVENTS:
+                    case EVENT:
                         addEvent(inputArray);
                         inputs = scanner.nextLine().trim();
                         break;
@@ -118,7 +118,7 @@ public class Commands {
             if (stringArray.length > 1 && stringArray[1].split(" ", 2).length > 1) {
                 String day = stringArray[1].split(" ", 2)[1];
                 System.out.println("~ \n Got it. I've added this task: ");
-                Deadlines deadline = new Deadlines(stringArray[0], day);
+                Deadlines deadline = new Deadlines(stringArray[0], day.trim());
                 taskList.add(deadline);
                 System.out.println(String.format("   %s \n Now you have %d tasks in the list. \n~",
                         deadline, taskList.size()));
