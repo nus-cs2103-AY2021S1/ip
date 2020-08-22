@@ -1,0 +1,3 @@
+T|1|buy bread
+D|0|finish project|tomorrow 9pm
+E|0|attend meeting|30 aug
