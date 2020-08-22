@@ -1,7 +1,9 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     protected LocalDateTime by;
 
@@ -16,6 +18,7 @@ public class Deadline extends Task{
         this.isDone = isDone;
     }
 
+    @Override
     public String toFileStringFormat() {
         return String.format("D / %d / %s / %s",isDone ? 1 : 0, this.desciption,this.by);
     }

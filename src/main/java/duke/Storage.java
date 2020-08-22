@@ -1,3 +1,12 @@
+package duke;
+
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.tool.TaskList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -8,10 +17,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FileHandler {
-    private static final String dataPath = "data/duke.txt";
+public class Storage {
+    protected String dataPath;
 
-    public static ArrayList<Task> load() throws IOException {
+    public Storage(String dataPath) {
+        this.dataPath = dataPath;
+    }
+
+    public ArrayList<Task> load() throws IOException {
         ArrayList<Task> taskList = new ArrayList<>();
 
         try {
@@ -41,19 +54,20 @@ public class FileHandler {
             }
         } catch (FileNotFoundException e) {
             if (!new File(dataPath).exists()) {
-                if (! new File("data").mkdir() || ! new File(dataPath).createNewFile()) {
-                    throw new IOException("Cannot access the file.");
+                if (!new File("data").mkdir() || !new File(dataPath).createNewFile()) {
+                    System.out.println("error");
                 }
             }
         }
+
         return taskList;
     }
 
-    public static void save(ArrayList<Task> taskList) {
+    public void save(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter("data/duke.txt", false);
 
-            for (Task task : taskList) {
+            for (Task task : taskList.getTasks()) {
                 writer.write(task.toFileStringFormat() + '\n');
             }
 

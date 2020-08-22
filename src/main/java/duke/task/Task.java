@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Task {
     protected String desciption;
     protected boolean isDone;
@@ -13,7 +15,6 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
-        System.out.print(Duke.formatOut(Duke.donegreet() + "\n\t" + this.toString()));
     }
 
     public String toFileStringFormat() {

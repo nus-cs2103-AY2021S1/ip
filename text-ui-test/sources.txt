@@ -1,6 +1,6 @@
 D:\Study\20-21Sem1\CS2103T\ip\src\main\java\Deadline.java
-D:\Study\20-21Sem1\CS2103T\ip\src\main\java\Duke.java
+D:\Study\20-21Sem1\CS2103T\ip\src\main\java\duke.Duke.java
 D:\Study\20-21Sem1\CS2103T\ip\src\main\java\Event.java
-D:\Study\20-21Sem1\CS2103T\ip\src\main\java\Server.java
+D:\Study\20-21Sem1\CS2103T\ip\src\main\java\TaskList.java
 D:\Study\20-21Sem1\CS2103T\ip\src\main\java\Task.java
 D:\Study\20-21Sem1\CS2103T\ip\src\main\java\Todo.java
