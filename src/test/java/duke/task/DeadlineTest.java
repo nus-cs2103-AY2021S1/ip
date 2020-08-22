@@ -108,4 +108,16 @@ public class DeadlineTest {
             fail();
         }
     }
+
+    @Test
+    public void happenBetweenTest() {
+        try {
+            Deadline d = new Deadline("Assignment 1", "2020-09-03");
+            assertEquals(false, d.happenBetween(LocalDate.parse("2020-08-01"), LocalDate.parse("2020-09-01")));
+            assertEquals(true, d.happenBetween(LocalDate.parse("2020-09-01"), LocalDate.parse("2020-09-04")));
+            assertEquals(true, d.happenBetween(LocalDate.parse("2020-09-03"), LocalDate.parse("2020-09-03")));
+        } catch (Exception e) {
+            fail();
+        }
+    }
 }
