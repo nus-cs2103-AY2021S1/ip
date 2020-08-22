@@ -1,8 +1,11 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+
 
 public class Storage {
     private final String fileName;
@@ -12,17 +15,13 @@ public class Storage {
     }
 
     //This function creates file if does not exit, else continue
-    private void createFile() {
+    private void createFile() throws IOException {
         File f = new File(this.fileName);
-        try {
-            f.createNewFile();
-        } catch (IOException e) {
-            System.out.println("error occured");
-        }
+        f.createNewFile();
     }
 
     //This function returns a list of tasks to be loaded into tasklist
-    public List<Task> load() throws FileNotFoundException {
+    public List<Task> load() throws IOException {
         this.createFile();
         File f = new File(this.fileName);
         Scanner sc = new Scanner(f);
@@ -73,18 +72,4 @@ public class Storage {
             System.out.println("Something went wrong");
         }
     }
-
-        /*
-        StringBuilder content = new StringBuilder();
-        for (int i = 0; i < taskList.size(); i++) {
-            content.append(taskList.get(i));
-            content.append(System.lineSeparator());
-        }
-        try {
-            writeToFile(this.file, content.toString());
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        }
-
-         */
 }
