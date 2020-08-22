@@ -1,12 +1,5 @@
-T | 1 | borrow books
-D | 1 | cs2102 tutorial 1 | By: 2020-08-25
+T | 0 | borrow books
+E | 1 | cs2103 project meeting | At: 2020-09-30 12:00
+D | 0 | cs2102 tutorial 1 | By: 2020-08-25
 T | 0 | verify critical data
 T | 0 | return books
-T | 0 | buy CD
-D | 0 | cs3230 assignment 1 | By: 2020-08-22
-E | 0 | cs2101 op meeting | At: 2020-08-31 12:00
-D | 0 | utw2001 final paper | By: 2020-11-03
-T | 0 | clean room
-T | 1 | wash clothes
-D | 0 | cs2101 email | By: 2020-08-31
-E | 0 | family party | At: 2020-08-31 19:00
