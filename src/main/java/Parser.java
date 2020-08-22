@@ -12,11 +12,11 @@ public class Parser {
             parsed = "T | " + isDone + " | " + taskName + "\n";
         } else if (task instanceof DeadlineTask) {
             DeadlineTask deadlineTask = (DeadlineTask) task;
-            String date = deadlineTask.getDate();
+            String date = deadlineTask.getDateString();
             parsed = "D | " + isDone + " | " + taskName + " | " + date + "\n";
         } else if (task instanceof EventTask) { // task instanceof EventTask
             EventTask eventTask = (EventTask) task;
-            String time = eventTask.getTime();
+            String time = eventTask.getDateString();
             parsed = "E | " + isDone + " | " + taskName + " | " + time + "\n";
         }
 

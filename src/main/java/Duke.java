@@ -3,9 +3,12 @@ package main.java;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -23,6 +26,7 @@ public class Duke {
     private String TODO_COMMAND = "todo";
     private String DEADLINE_COMMAND = "deadline";
     private String EVENT_COMMAND = "event";
+    private String TASK_AFTER_COMMAND = "taskafter";
 
     Duke() {
         tasks = new ArrayList<>();
@@ -44,6 +48,7 @@ public class Duke {
                 if (task == null) {
                     throw new DeadlineException();
                 }
+
                 String[] arrForDeadline = task.split("/by", 2);
 
                 if (arrForDeadline.length == 1) {
@@ -52,7 +57,8 @@ public class Duke {
 
                 String taskForDeadline = arrForDeadline[0].trim();
                 String dateForDeadline = arrForDeadline[1].trim();
-                newTask = new DeadlineTask(taskForDeadline, dateForDeadline);
+                LocalDate deadlineDate = LocalDate.parse(dateForDeadline);
+                newTask = new DeadlineTask(taskForDeadline, deadlineDate);
                 break;
             case EVENT:
                 if (task == null) {
@@ -65,7 +71,9 @@ public class Duke {
                 }
                 String taskForEvent = arrForEvent[0].trim();
                 String dateForEvent = arrForEvent[1].trim();
-                newTask = new EventTask(taskForEvent, dateForEvent);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                LocalDateTime eventDate = LocalDateTime.parse(dateForEvent, formatter);
+                newTask = new EventTask(taskForEvent, eventDate);
                 break;
             default:
                 newTask = new Task(task);
@@ -77,10 +85,12 @@ public class Duke {
                     "Now you have " + tasks.size() + " " + (tasks.size() == 1 ? "task " : "tasks ") + "in the list.";
         } catch (ToDoException | DeadlineException | EventException | IOException e) {
             message = e.getMessage();
+        } catch (DateTimeParseException e) {
+            message = "Invalid date format! Please put it something " +
+                    "like 2020-12-31 for deadline and 2020-12-31 1800 for event.";
         }
 
         sendMessage(message);
-
     }
 
     private void saveTaskToFile(Task task) throws IOException {
@@ -152,7 +162,7 @@ public class Duke {
             fw.write(tobeWritten);
             fw.close();
         } catch (IOException e) {
-
+            throw new FailToReadFileException();
         }
     }
 
@@ -234,6 +244,39 @@ public class Duke {
         sendMessage(message);
     }
 
+    private void taskAfter(String date) {
+        String message;
+        try {
+            LocalDate parsedDate = LocalDate.parse(date);
+            StringBuilder sb = new StringBuilder();
+            sb.append("Here is the tasks after "
+                    + parsedDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ":\n");
+            int count = 1;
+            for (Task task : tasks) {
+                if (task instanceof ToDoTask) {
+                    continue;
+                } else if (task instanceof DeadlineTask) {
+                    DeadlineTask deadlineTask = (DeadlineTask) task;
+                    if (parsedDate.isBefore(deadlineTask.getDate())) {
+                        sb.append(count + ". " + task + "\n");
+                        count++;
+                    }
+                } else if (task instanceof EventTask) {
+                    EventTask eventTask = (EventTask) task;
+                    if (parsedDate.isBefore(eventTask.getDate().toLocalDate())) {
+                        sb.append(count + ". " + task + "\n");
+                        count++;
+                    }
+                }
+            }
+            message = sb.toString().trim();
+        } catch (DateTimeParseException e) {
+            message = "Invalid date format! Please put it something like 2020-12-31!";
+        }
+
+        sendMessage(message);
+    }
+
     private void takeUserInput() {
         Scanner sc = new Scanner(System.in);
 
@@ -257,6 +300,8 @@ public class Duke {
                     doneTask(arg);
                 } else if (command.equals(DELETE_COMMAND)) {
                     deleteTask(arg);
+                } else if (command.equals(TASK_AFTER_COMMAND)) {
+                    taskAfter(arg);
                 } else if (command.equals(TODO_COMMAND)) {
                     addTaskCommand(arg, TaskType.TODO);
                 } else if (command.equals(DEADLINE_COMMAND)) {
@@ -301,10 +346,13 @@ public class Duke {
             newTask = new ToDoTask(task);
             break;
         case DEADLINE:
-            newTask = new DeadlineTask(task, desc);
+            LocalDate deadlineDate = LocalDate.parse(desc);
+            newTask = new DeadlineTask(task, deadlineDate);
             break;
         case EVENT:
-            newTask = new EventTask(task, desc);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            LocalDateTime eventDate = LocalDateTime.parse(desc, formatter);
+            newTask = new EventTask(task, eventDate);
             break;
         default:
             newTask = new Task(task);
@@ -359,11 +407,11 @@ public class Duke {
             if (taskType.equals("T")) {
                 addTaskReadingList(taskName, TaskType.TODO, isDone, null);
             } else if (taskType.equals("D")) {
-                String date = taskArr[3];
+                String date = taskArr[3].trim();
                 addTaskReadingList(taskName, TaskType.DEADLINE, isDone, date);
             } else {
-                String time = taskArr[3];
-                addTaskReadingList(taskName, TaskType.EVENT, isDone, time);
+                String date = taskArr[3].trim();
+                addTaskReadingList(taskName, TaskType.EVENT, isDone, date);
             }
         }
     }
