@@ -4,10 +4,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class TaskList {
-    private ArrayList<Task> list = new ArrayList<>();
+    private final ArrayList<Task> list;
 
     public int size() {
         return this.list.size();
+    }
+
+    public TaskList() {
+        this.list = new ArrayList<>();
+    }
+
+    private TaskList(ArrayList<Task> arr) {
+        this.list = arr;
     }
 
     public Task addTask(String type, String input) throws DukeException {
@@ -42,15 +50,28 @@ public class TaskList {
         return task;
     }
 
-    /*
-    public String tasksOn(String dateString) { // input of form "dd-MM-yyyy"
-        String output = "";
-        LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        ArrayList<Task> timedTasks = new ArrayList<>(this.list);
-        timedTasks.removeIf(i -> i instanceof Todo);
-        for (Task i: task)
+    public String getTasksOn(String dateString) throws DukeException { // input of form "dd-MM-yyyy"
+        try {
+            LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("d-M-yyyy"));
+            ArrayList<Task> timedTasks = new ArrayList<>(this.list);
+            timedTasks.removeIf(i -> i instanceof Todo);
+            Task[] timedTasksArr = timedTasks.toArray(new Task[0]);
+            for (Task i : timedTasksArr) {
+                if (!((TimedTask) i).getDate().equals(date)) {
+                    timedTasks.remove(i);
+                }
+            }
+            if (timedTasks.isEmpty()) {
+                throw new DukeException("OOPS!!! I'm sorry, your list is empty :<");
+            } else {
+                return "Here are your tasks for "
+                        + date.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ":\n"
+                        + new TaskList(new ArrayList<>(timedTasks)).toString();
+            }
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid date-time format! (/at...)");
+        }
     }
-     */
 
     public Task markAsDone(int i) throws DukeException {
         try {
