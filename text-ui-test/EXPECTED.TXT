@@ -1,5 +1,6 @@
     ----------------------------------------
-    What can I do for you?
+    Hello! I'm the Riddle. Type 'help' if you know nothing HAHAHA
+    What can WE do for you?
 
     ----------------------------------------
     ----------------------------------------
@@ -8,13 +9,13 @@
     ----------------------------------------
     ----------------------------------------
     Got it. I've added this task:
-      [D][?] go eat( by: Sunday 2pm)
+      [D][?] go eat( by: 20 Oct 2020 00:00am)
     Now you have 1 tasks in the list.
 
     ----------------------------------------
     ----------------------------------------
     Got it. I've added this task:
-      [E][?] huhuh( at: Hihi 3pm 9pm)
+      [E][?] huhuh( at: 1 Dec 1999 12:00pm)
     Now you have 2 tasks in the list.
 
     ----------------------------------------
@@ -26,12 +27,12 @@
     ----------------------------------------
     ----------------------------------------
     Nice! I've marked this task as done:
-      [E][?] huhuh( at: Hihi 3pm 9pm)
+      [E][?] huhuh( at: 1 Dec 1999 12:00pm)
 
     ----------------------------------------
     ----------------------------------------
     Nice! I've marked this task as done:
-      [D][?] go eat( by: Sunday 2pm)
+      [D][?] go eat( by: 20 Oct 2020 00:00am)
 
     ----------------------------------------
     ----------------------------------------
@@ -40,8 +41,8 @@
     ----------------------------------------
     ----------------------------------------
     Here are the tasks in your list:
-    1.[D][?] go eat( by: Sunday 2pm)
-    2.[E][?] huhuh( at: Hihi 3pm 9pm)
+    1.[D][?] go eat( by: 20 Oct 2020 00:00am)
+    2.[E][?] huhuh( at: 1 Dec 1999 12:00pm)
     3.[T][?] huhuhuhuhu
 
     ----------------------------------------
@@ -51,7 +52,59 @@
     ----------------------------------------
     ----------------------------------------
     Got it. I've added this task:
-      [D][?] study( by: 100000000 years)
+      [D][?] study( by: 20 Jan 1000 05:00am)
     Now you have 4 tasks in the list.
+
+    ----------------------------------------
+    ----------------------------------------
+    Here are the tasks in your list:
+    4.[D][?] study( by: 20 Jan 1000 05:00am)
+
+    ----------------------------------------
+    ----------------------------------------
+    Here are the tasks in your list:
+    1.[D][?] go eat( by: 20 Oct 2020 00:00am)
+    2.[E][?] huhuh( at: 1 Dec 1999 12:00pm)
+    3.[T][?] huhuhuhuhu
+    4.[D][?] study( by: 20 Jan 1000 05:00am)
+
+    ----------------------------------------
+    ----------------------------------------
+    Got it. I've added this task:
+      [D][?] askdjn( by: 5 Dec 2020 )
+    Now you have 5 tasks in the list.
+
+    ----------------------------------------
+    ----------------------------------------
+    Got it. I've added this task:
+      [D][?] askdjn( by: 5 Dec 2020 )
+    Now you have 6 tasks in the list.
+
+    ----------------------------------------
+    ----------------------------------------
+    Got it. I've added this task:
+      [D][?] askdjn( by: 5 Dec 2020 )
+    Now you have 7 tasks in the list.
+
+    ----------------------------------------
+    ----------------------------------------
+    Got it. I've added this task:
+      [D][?] askdjn( by: 5 Dec 2020 )
+    Now you have 8 tasks in the list.
+
+    ----------------------------------------
+    ----------------------------------------
+    Got it. I've added this task:
+      [D][?] askdjn( by: 5 Dec 2020 )
+    Now you have 9 tasks in the list.
+
+    ----------------------------------------
+    ----------------------------------------
+    Here are the tasks in your list:
+    5.[D][?] askdjn( by: 5 Dec 2020 )
+    6.[D][?] askdjn( by: 5 Dec 2020 )
+    7.[D][?] askdjn( by: 5 Dec 2020 )
+    8.[D][?] askdjn( by: 5 Dec 2020 )
+    9.[D][?] askdjn( by: 5 Dec 2020 )
 
     ----------------------------------------
