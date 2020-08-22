@@ -1,5 +1,6 @@
 public class Event extends Task{
     protected String at;
+    int code = 2;
 
     public Event(String description, String at) {
         super(description);
