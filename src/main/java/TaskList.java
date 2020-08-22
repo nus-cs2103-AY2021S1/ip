@@ -23,6 +23,10 @@ public class TaskList {
         return list.get(index);
     }
 
+    public ArrayList<Task> getList() {
+        return this.list;
+    }
+
     public int getNumberOfTask() {
         return list.size();
     }
