@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
@@ -20,7 +24,7 @@ public class Deadline extends Task {
         this.time = null;
     }
 
-    Deadline(String description, String toDoBy, Boolean isDone) {
+    public Deadline(String description, String toDoBy, Boolean isDone) {
         super(description, isDone);
         String[] scheduledTime = toDoBy.split(" ");
         this.toDoBy = LocalDate.of(Integer.parseInt(scheduledTime[2]),
@@ -33,7 +37,7 @@ public class Deadline extends Task {
         }
     }
 
-    public static Deadline createTask(String message) throws DukeException{
+    public static Deadline createTask(String message) throws DukeException {
         String errMessage1 = " Oops!! You missed out some vital information/keyword... *woof*\n";
         String errMessage2 = " Oops!! You gonna forget what this is about if you\n" +
                 " dont give me a description... *woof*\n";

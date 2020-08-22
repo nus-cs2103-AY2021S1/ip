@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.DukeException;
+
 import java.io.FileWriter;
 
 public class Todo extends Task{
@@ -5,7 +9,7 @@ public class Todo extends Task{
         super(description);
     }
 
-    Todo(String description, Boolean isDone) {
+    public Todo(String description, Boolean isDone) {
         super(description, isDone);
     }
 

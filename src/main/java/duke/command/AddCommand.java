@@ -1,7 +1,14 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.task.Task;
+import duke.Ui;
+
 public class AddCommand implements Command {
     Task t;
 
-    AddCommand(Task t) {
+    public AddCommand(Task t) {
         this.t = t;
     }
 

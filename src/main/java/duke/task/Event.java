@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
@@ -16,7 +20,7 @@ public class Event extends Task{
         this.endTime = endTime;
     }
 
-    Event(String description, String schedule, Boolean isDone) {
+    public Event(String description, String schedule, Boolean isDone) {
         super(description, isDone);
         String[] scheduledTime = schedule.split(" ");
         this.schedule = LocalDate.of(Integer.parseInt(scheduledTime[2]),

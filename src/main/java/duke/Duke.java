@@ -1,3 +1,7 @@
+package duke;
+
+import duke.command.Command;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -31,18 +35,5 @@ public class Duke {
             }
         }
         input.close();
-    }
-
-    public static void main(String[] args) {
-        Duke duke = Duke.createDuke("data/duke.txt");
-        try {
-            if (duke == null) {
-                throw new NullPointerException();
-            } else {
-                duke.run();
-            }
-        } catch (NullPointerException e) {
-            System.err.println(ui.printFormat("Unable to create bot!\n"));
-        }
     }
 }
