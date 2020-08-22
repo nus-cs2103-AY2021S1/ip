@@ -47,6 +47,9 @@ public class Ui {
                 case "delete":
                     list.deleteTask(Integer.parseInt(body));
                     break;
+                case "find":
+                    list.findTask(body);
+                    break;
                 default:
                     String[] timeExtracted = parser.extractDate(body);
                     String content = timeExtracted[0];
