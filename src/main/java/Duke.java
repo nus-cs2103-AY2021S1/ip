@@ -1,10 +1,17 @@
+import java.io.*;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 
 public class Duke {
     private static final String SEPARATOR = "    ____________________________________"
         + "________________________\n";
+    private static final String ERROR_MESSAGE = String.format("     ☹ OOPS!!! "
+            + "Something went wrong!\n%s", SEPARATOR);
     private static final String EXIT_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
     private static final String DONE_COMMAND = "done";
@@ -14,9 +21,9 @@ public class Duke {
     private static final String DELETE_COMMAND = "delete";
 
     private final Scanner sc;
+    private final List<Task> tasks;
     private boolean hasCommand;
     private String[] input;
-    private List<Task> tasks;
 
     public Duke() {
         sc = new Scanner(System.in);
@@ -99,9 +106,74 @@ public class Duke {
                 tasks.size() == 1 ? "task" : "tasks", SEPARATOR);
     }
 
+    private void setTasks() {
+        String currDir = System.getProperty("user.dir");
+        Path filePath = Paths.get(currDir, "data", "tasks.csv");
+        File file = filePath.toFile();
+
+        if (!file.exists()) return;
+
+        try {
+            BufferedReader br = Files.newBufferedReader(filePath);
+            br.readLine();
+            String line = br.readLine();
+
+            while (line != null) {
+                String[] task = line.split(",");
+                line = br.readLine();
+
+                String taskType = task[0];
+                String taskTime = task[1];
+                String taskName = task[3];
+                boolean taskDoneState = task[2].equals("1");
+
+                switch (taskType) {
+                    case "T":
+                        tasks.add(new Todo(taskName, taskDoneState));
+                        break;
+                    case "D":
+                        tasks.add(new Deadline(taskName, taskTime, taskDoneState));
+                        break;
+                    case "E":
+                        tasks.add(new Event(taskName, taskTime, taskDoneState));
+                        break;
+                    default:
+                        break;
+                }
+            }
+        } catch (IOException e) {
+            System.out.print(ERROR_MESSAGE);
+        }
+    }
+
+    private void write() {
+        String currDir = System.getProperty("user.dir");
+        Path folderPath = Paths.get(currDir, "data");
+
+        try {
+            if (!Files.exists(folderPath)) Files.createDirectories(folderPath);
+
+            Path filePath = Paths.get(currDir, "data", "tasks.csv");
+            File file = filePath.toFile();
+
+            if (!file.exists()) file.createNewFile();
+
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write("Task Type,Task Time,Done State,Task Name\n");
+
+            for (Task task : tasks) bw.write(task.write());
+
+            bw.close();
+        } catch (IOException e) {
+            System.out.print(ERROR_MESSAGE);
+        }
+    }
+
     public void initialise() {
         hasCommand = true;
         printGreeting();
+        setTasks();
 
         while (hasCommand) {
             getCommand();
@@ -140,16 +212,12 @@ public class Duke {
             }
         }
 
+        write();
+
         printExit();
     }
 
     public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
         new Duke().initialise();
     }
 }
