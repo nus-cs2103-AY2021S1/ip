@@ -43,9 +43,8 @@ public class TaskList {
         return tasks.size();
     }
 
-    // temp
     public String tasksRemaining() {
-        return String.format("Now you have %d duke.tasks in the list", numOfTasks());
+        return String.format("Now you have %d tasks in the list", numOfTasks());
     }
 
 }

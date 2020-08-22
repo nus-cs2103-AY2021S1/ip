@@ -9,24 +9,33 @@ import duke.tasks.Todo;
 
 public class Parser {
 
-    public static Command parse(String userInput) throws EmptyTaskDescriptionException, DukeDateTimeParseException {
-        String[] arr = userInput.trim().split(" ", 2);
-        switch (arr[0]) {
+    public static Command parse(String userInput) throws EmptyTaskDescriptionException, DukeDateTimeParseException,
+            EmptyTaskDoneException, EmptyTaskDeletedException,
+            EmptyDueDateException, EmptyEventDateException {
+
+        String[] arr = userInput.strip().split(" ", 2);
+        switch (arr[0].strip()) {
             case "bye":
                 return parseBye();
             case "list":
                 return parseList();
             case "done":
-                return parseDone(arr[1]);
+                if (arr.length < 2) {
+                    throw new EmptyTaskDoneException();
+                }
+                return parseDone(arr[1].strip());
             case "todo":
             case "deadline":
             case "event":
                 if (arr.length < 2) {
-                    throw new EmptyTaskDescriptionException(arr[0]);
+                    throw new EmptyTaskDescriptionException(arr[0].strip());
                 }
-                return parseAdd(arr[0], arr[1]);
+                return parseAdd(arr[0].strip(), arr[1].strip());
             case "delete":
-                return parseDelete(arr[1]);
+                if (arr.length < 2) {
+                    throw new EmptyTaskDeletedException();
+                }
+                return parseDelete(arr[1].strip());
             case "today":
                 return parseToday();
             default:
@@ -38,7 +47,9 @@ public class Parser {
         return new TodayCommand();
     }
 
-    private static AddCommand parseAdd(String commandName, String arguments) throws EmptyTaskDescriptionException {
+    private static AddCommand parseAdd(String commandName, String arguments)
+            throws EmptyTaskDescriptionException, DukeDateTimeParseException,
+            EmptyEventDateException, EmptyDueDateException {
         Task task = null;
         if (arguments.equals("")) {
             throw new EmptyTaskDescriptionException(commandName);
@@ -49,28 +60,28 @@ public class Parser {
                 break;
             case "deadline": {
                 String[] parsed = arguments.split(" /by ");
+                if (arguments.startsWith("/by")) {
+                    throw new EmptyTaskDescriptionException(commandName);
+                }
                 if (parsed.length < 2) {
                     throw new EmptyDueDateException();
-                }
-                if (parsed[0].strip().equals("")) {
-                    throw new EmptyTaskDescriptionException(commandName);
                 }
                 task = new Deadline(parsed[0], DukeDateTimeParser.parse(parsed[1]));
                 break;
             }
             case "event": {
                 String[] parsed = arguments.split(" /at ");
+                if (arguments.startsWith("/at")) {
+                    throw new EmptyTaskDescriptionException(commandName);
+                }
                 if (parsed.length < 2) {
                     throw new EmptyEventDateException();
-                }
-                if (parsed[0].strip().equals("")) {
-                    throw new EmptyTaskDescriptionException(commandName);
                 }
                 task = new Event(parsed[0], DukeDateTimeParser.parse(parsed[1]));
                 break;
             }
             default:
-                // todo: throw exception
+                throw new AssertionError("Invalid command scenario has been handled earlier.");
         }
         return new AddCommand(task);
     }
