@@ -1,14 +1,35 @@
+import java.io.IOException;
+
 import java.util.Scanner;
 
 public class Duke {
+    private static Storage initialiseStorage() throws ReadFailedException {
+        String dataFilePath = "data/tasks.txt";
+        Storage storage;
+        try {
+            storage = new Storage(dataFilePath);
+        } catch (IOException ex) {
+            throw new ReadFailedException("data");
+        }
+        return storage;
+    }
+    
     private static void handleInputs() {
         Scanner scanner = new Scanner(System.in);
+        Storage storage = null;
         Tasks list = new Tasks();
-        while(scanner.hasNextLine()) {
+        try {
+            storage = initialiseStorage();
+            list = storage.getTasks();
+        } catch (ReadFailedException ex) {
+            PrintDuke.printDukeException(ex);
+        }
+        
+        while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
             String command = input.split(" ")[0];
             try {
-                switch(command) {
+                switch (command) {
                     case "bye":
                         PrintDuke.printExitMessage();
                         System.exit(0);
@@ -16,25 +37,25 @@ public class Duke {
                         PrintDuke.printList(list.tasks);
                         break;
                     case "done":
-                        list.markTaskAsDone(input);
+                        list.markTaskAsDone(storage, input);
                         break;
                     case "delete":
-                        list.deleteTask(input);
+                        list.deleteTask(storage, input);
                         break;
                     case "todo":
-                        list.addTask(TaskType.TODO, input);
+                        list.addTask(storage, TaskType.TODO, input);
                         break;
                     case "event":
-                        list.addTask(TaskType.EVENT, input);
+                        list.addTask(storage, TaskType.EVENT, input);
                         break;
                     case "deadline":
-                        list.addTask(TaskType.DEADLINE, input);
+                        list.addTask(storage, TaskType.DEADLINE, input);
                         break;
                     default:
                         throw new UnknownInputException();
                 }
             } catch (DukeException ex) {
-                PrintDuke.printException(ex);
+                PrintDuke.printDukeException(ex);
             }
         }
         scanner.close();

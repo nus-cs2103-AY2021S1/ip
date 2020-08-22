@@ -52,7 +52,7 @@ public class PrintDuke {
         printWithDashes(message);
     }
 
-    protected static void printException(DukeException ex) {
+    protected static void printDukeException(DukeException ex) {
         printWithDashes(" ERROR: " + ex.getMessage());
     }
 }

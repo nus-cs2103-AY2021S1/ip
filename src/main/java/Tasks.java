@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Tasks {
@@ -5,6 +6,14 @@ public class Tasks {
 
     public Tasks() {
         this.tasks = new ArrayList<>();
+    }
+
+    public String getData() {
+        String data = "";
+        for (Task task: tasks) {
+            data += task.getData() + "\n";
+        }
+        return data;
     }
 
     private static Todo addTodo(String input) throws EmptyTaskException {
@@ -58,7 +67,7 @@ public class Tasks {
         return new Deadline(description, deadline);
     }
 
-    protected void addTask(TaskType type, String input) throws EmptyTaskException, InvalidTaskException, UnknownInputException {
+    protected void addTask(Storage storage, TaskType type, String input) throws EmptyTaskException, InvalidTaskException, UnknownInputException, SaveTaskFailedException {
         Task task;
         switch (type) {
             case TODO:
@@ -74,10 +83,20 @@ public class Tasks {
                 throw new UnknownInputException();
         }
         this.tasks.add(task);
+        try {
+            storage.addTask(task); 
+        } catch (IOException ex) {
+            throw new SaveTaskFailedException(this.tasks.size());
+        }
         PrintDuke.printAddTask(task, this.tasks.size());
     }
-
-    protected void markTaskAsDone(String input) throws EmptyInputException, InvalidTaskNumberException {
+    
+    protected void addTask(String[] stringArr) throws ReadFailedException {
+        Task task = Task.createTask(stringArr); 
+        this.tasks.add(task);
+    }
+    
+    protected void markTaskAsDone(Storage storage, String input) throws EmptyInputException, InvalidTaskNumberException, SaveTaskFailedException, UnknownInputException {
         String taskIndexStr;
         try {
             taskIndexStr = input.substring(5).trim();
@@ -88,17 +107,25 @@ public class Tasks {
         if (taskIndexStr.length() < 1) {
             throw new EmptyInputException("The task to be marked as done is not specified.");
         }
-        int taskIndex = Integer.parseInt(taskIndexStr) - 1;
+        int taskIndex;
+        try {
+            taskIndex = Integer.parseInt(taskIndexStr) - 1;
+        } catch (IndexOutOfBoundsException | NumberFormatException ex) {
+            throw new UnknownInputException();
+        }
 
         try {
             this.tasks.get(taskIndex).markAsDone();
+            storage.updateTasks(this);
             PrintDuke.printMarkTaskAsDone(this.tasks.get(taskIndex));
         } catch (IndexOutOfBoundsException ex) {
             throw new InvalidTaskNumberException("The task to be marked as done does not exist!");
+        } catch (IOException ex) {
+            throw new SaveTaskFailedException(taskIndex);
         }
     }
 
-    protected void deleteTask(String input) throws EmptyInputException, InvalidTaskNumberException {
+    protected void deleteTask(Storage storage, String input) throws EmptyInputException, InvalidTaskNumberException, SaveTaskFailedException, UnknownInputException {
         String taskIndexStr;
         try {
             taskIndexStr = input.substring(7).trim();
@@ -109,14 +136,21 @@ public class Tasks {
         if (taskIndexStr.length() < 1) {
             throw new EmptyInputException("The task to be deleted is not specified.");
         }
-        int taskIndex = Integer.parseInt(taskIndexStr) - 1;
-
+        int taskIndex;
+        try {
+            taskIndex = Integer.parseInt(taskIndexStr) - 1;
+        } catch (IndexOutOfBoundsException | NumberFormatException ex) {
+            throw new UnknownInputException();
+        }
         try {
             Task task = this.tasks.get(taskIndex);
             this.tasks.remove(taskIndex);
+            storage.updateTasks(this);
             PrintDuke.printDeleteTask(task, this.tasks.size());
         } catch (IndexOutOfBoundsException ex) {
             throw new InvalidTaskNumberException("The task to be deleted does not exist!");
+        } catch (IOException ex) {
+            throw new SaveTaskFailedException(taskIndex);
         }
     }
 }
