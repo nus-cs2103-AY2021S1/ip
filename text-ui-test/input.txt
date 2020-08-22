@@ -3,7 +3,12 @@ deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 event sky jumping /at Sat 2-4pm
 event funny  Sat 2-4pm
+event funny /at 2019-05-32
+event funny /at 2019-05-25
 deadline la la meeting  Sat 2-4pm
+deadline return book /by 2020-07-29
+deadline return book /by 2020-07-100
+deadline funny /by 2019-05-25
 todo team bundling
 todo eat chicken nuggets
 done 5
@@ -15,5 +20,5 @@ delete 100
 delete 3
 list
 delete 4
-list
+date 2019-05-25
 bye

@@ -1,8 +1,10 @@
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -27,6 +29,14 @@ public class Duke {
         }
 
         return cmdParts[1];
+    }
+
+    private static LocalDate parseDateString(String dateString) throws DukeException {
+        try {
+            return LocalDate.parse(dateString);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Date format is wrong. It should be yyyy-mm-dd and within possible date ranges");
+        }
     }
 
     private int getTaskTargetIndex(Command type, String cmd) throws DukeException {
@@ -81,12 +91,32 @@ public class Duke {
                 Files.createDirectory(dataDir);
             }
             Path filePath = Paths.get(dataDir.toString(), Duke.OUTPUT_FILE_NAME);
-            Files.createFile(filePath);
-            Files.writeString(filePath, this.list());
+            BufferedWriter bufferedWriter = Files.newBufferedWriter(filePath);
+            bufferedWriter.write(this.list());
+            bufferedWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+
+    public String listDate(String cmd) throws DukeException {
+        String dateString = Duke.getTaskDescription(Command.LIST_DATE, cmd);
+        LocalDate date = Duke.parseDateString(dateString);
+        StringBuilder output = new StringBuilder();
+        int index = 1;
+        for (int i = 1; i < this.tasks.size(); i++) {
+            Task task = this.tasks.get(i);
+            if (task.getDate().isPresent() && task.getDate().get().isEqual(date)) {
+                output.append(String.format("%d. %s%n", index, task));
+                index++;
+            }
+        }
+        return output.toString();
+    }
+
+    public void printListDate(String cmd) throws DukeException {
+        System.out.println(this.listDate(cmd));
     }
 
     public void bye() {
@@ -121,7 +151,7 @@ public class Duke {
 
         String name = taskParts[0];
         String dateString = taskParts[1];
-        this.addTask(new Event(name, LocalDate.parse(dateString)));
+        this.addTask(new Event(name, Duke.parseDateString(dateString)));
     }
 
     public void deadline(String cmd) throws DukeException {
@@ -134,7 +164,7 @@ public class Duke {
 
         String name = taskParts[0];
         String dateString = taskParts[1];
-        this.addTask(new Deadline(name, LocalDate.parse(dateString)));
+        this.addTask(new Deadline(name, Duke.parseDateString(dateString)));
     }
 
     public void todo(String cmd) throws DukeException {
@@ -163,6 +193,8 @@ public class Duke {
                     duke.event(cmd);
                 } else if (Command.DELETE.is(cmd)) {
                     duke.delete(cmd);
+                } else if (Command.LIST_DATE.is(cmd)) {
+                    duke.printListDate(cmd);
                 } else {
                     throw new DukeException("This command is invalid.");
                 }

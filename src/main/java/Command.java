@@ -5,7 +5,8 @@ public enum Command {
     EVENT("event"),
     DONE("done"),
     BYE("bye"),
-    DELETE("delete");
+    DELETE("delete"),
+    LIST_DATE("date");
 
     private String name;
 
