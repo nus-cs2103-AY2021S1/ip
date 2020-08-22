@@ -13,10 +13,11 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.txt
+text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
 
 PRIVATE-CHANGELOG.md
 node_modules
 .vscode
 *.class
+data
