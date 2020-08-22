@@ -40,7 +40,7 @@ public class Ui {
      * Displays a hello message.
      */
     public void hello() {
-        say("Hello! I'm duke.Duke\nWhat can I do for you?");
+        say("Hello! I'm duke\nWhat can I do for you?");
     }
 
     /**
