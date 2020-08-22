@@ -7,11 +7,6 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public Task(boolean isDone, String description) {
-        this.description = description;
-        this.isDone = isDone;
-    }
-
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }

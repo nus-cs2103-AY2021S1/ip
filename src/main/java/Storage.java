@@ -9,13 +9,18 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public void store(List<Task> taskList) {
+    public void store(List<Task> taskList) throws DukeException {
 
         File outFile;
         Writer out;
 
         try{
             outFile = new File(filePath);
+            if(!outFile.getParentFile().exists()) {
+                throw new DukeException(" ☹ OOPS!!! The folder does not exist.");
+            } else if (!outFile.exists()) {
+                throw new DukeException(" ☹ OOPS!!! The file does not exist.");
+            }
             out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile), "utf-8"), 10240);
 
             for (int i = 0; i < taskList.size(); ++i) {
@@ -27,19 +32,23 @@ public class Storage {
 
             out.flush();
             out.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new DukeException(" ☹ OOPS!!! There is an IOException: " + e.getMessage());
         }
     }
 
-    public List<Task> load() {
+    public List<Task> load() throws DukeException {
         List<Task> taskList = new ArrayList<>();
         FileReader fileReader;
         BufferedReader bufferedReader;
 
         try{
+            File file = new File(filePath);
+            if(!file.getParentFile().exists()) {
+                throw new DukeException(" ☹ OOPS!!! The folder does not exist.");
+            } else if (!file.exists()) {
+                throw new DukeException(" ☹ OOPS!!! The file does not exist.");
+            }
             fileReader = new FileReader(filePath);
             bufferedReader = new BufferedReader(fileReader);
             String line = null;
@@ -50,12 +59,8 @@ public class Storage {
                 }
             }
             return taskList;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return new ArrayList<>();
         } catch (IOException e) {
-            e.printStackTrace();
-            return new ArrayList<>();
+            throw new DukeException(" ☹ OOPS!!! There is an IOException: " + e.getMessage());
         }
     }
 

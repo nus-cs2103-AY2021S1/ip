@@ -16,11 +16,19 @@ public class Duke {
                 + "\n Hello, I'm Duke \n What can I do for you?\n"
                 + line);
 
+        Storage storage = new Storage("data/duke.txt");
+        List<Task> taskList;
+        try {
+            taskList = storage.load();
+        } catch (DukeException e) {
+            System.out.println(line
+                    + e.msg + "\n"
+                    + line);
+            return;
+        }
+
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
-
-        Storage storage = new Storage("data/duke.txt");
-        List<Task> taskList = storage.load();
 
         while(!command.equals("bye")) {
             try {
@@ -76,12 +84,12 @@ public class Duke {
                             throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 }
+                storage.store(taskList);
             } catch (DukeException e) {
                 System.out.println(line
                         + e.msg + "\n"
                         + line);
             }
-            storage.store(taskList);
             command = sc.nextLine();
         }
 

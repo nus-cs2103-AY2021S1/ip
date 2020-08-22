@@ -5,7 +5,8 @@ public class Todo extends Task{
     }
 
     public Todo(boolean isDone, String description) {
-        super(isDone, description);
+        this(description);
+        this.isDone = isDone;
     }
 
     @Override

@@ -17,8 +17,8 @@ public class Deadline extends Task{
     }
 
     public Deadline(boolean isDone, String description, String by) {
-        super(isDone, description);
-        this.by = by;
+        this(description, by);
+        this.isDone = isDone;
     }
 
     @Override

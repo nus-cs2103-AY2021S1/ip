@@ -17,8 +17,8 @@ public class Event extends Task{
     }
 
     public Event(boolean isDone, String description, String at) {
-        super(isDone, description);
-        this.at = at;
+        this(description, at);
+        this.isDone = isDone;
     }
 
     @Override
