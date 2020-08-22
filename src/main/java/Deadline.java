@@ -36,6 +36,17 @@ public class Deadline extends Task {
     }
 
     /**
+     * Convert to string value of deadline to be stored as data.
+     * @return String to be stored in hard disk.
+     */
+    @Override
+    public String convertToStringData() {
+        return checkIsDone()
+                ? "D/1/" + getDescription() + "/" + this.dateAndTime
+                : "D/0/" + getDescription() + "/" + this.dateAndTime;
+    }
+
+    /**
      * Overridden toString method.
      * @return String value of deadline.
      */

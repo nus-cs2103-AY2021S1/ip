@@ -30,7 +30,7 @@ Currently you have 2 tasks in your list.
 
 ========================================================
 Yes boss, I have added this task to your list:
-  [E][✗] project meeting (at: Aug 6th 2-4pm)
+  [E][✗] project meeting  (at: Aug 6th 2-4pm)
 Currently you have 3 tasks in your list.
 ========================================================
 
@@ -46,7 +46,7 @@ Sorry, I can't guess your date that well. Please enter a date.
 You have 3 unfinished tasks.
 1. [T][✗] read book
 2. [D][✗] return book  (by: June 6th)
-3. [E][✗] project meeting (at: Aug 6th 2-4pm)
+3. [E][✗] project meeting  (at: Aug 6th 2-4pm)
 
 ========================================================
 
@@ -73,7 +73,7 @@ I have deleted the task.
 ========================================================
 You have 1 unfinished tasks.
 1. [T][✓] read book
-2. [E][✗] project meeting (at: Aug 6th 2-4pm)
+2. [E][✗] project meeting  (at: Aug 6th 2-4pm)
 
 ========================================================
 
@@ -87,7 +87,7 @@ Sorry, I can't guess your task that well. Please enter a description for your ta
 
 ========================================================
 I have marked the task as done, good job.
-[E][✓] project meeting (at: Aug 6th 2-4pm)
+[E][✓] project meeting  (at: Aug 6th 2-4pm)
 
 ========================================================
 
@@ -98,7 +98,7 @@ Sorry but there is no valid task number. Please enter a valid task number.
 ========================================================
 Wow congrats, you finished all your tasks.
 1. [T][✓] read book
-2. [E][✓] project meeting (at: Aug 6th 2-4pm)
+2. [E][✓] project meeting  (at: Aug 6th 2-4pm)
 
 ========================================================
 
@@ -118,7 +118,7 @@ Sorry but there is no valid task number. Please enter a valid task number.
 
 ========================================================
 I have deleted the task.
-[E][✓] project meeting (at: Aug 6th 2-4pm)
+[E][✓] project meeting  (at: Aug 6th 2-4pm)
 
 ========================================================
 

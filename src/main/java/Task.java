@@ -58,6 +58,16 @@ public class Task {
     }
 
     /**
+     * Convert to string value of task to be stored as data.
+     * @return String to be stored in hard disk.
+     */
+    public String convertToStringData() {
+        return checkIsDone()
+                ? "T/1/" + getDescription()
+                : "T/0/" + getDescription();
+    }
+
+    /**
      * Overridden toString method.
      * @return String value of the task.
      */
