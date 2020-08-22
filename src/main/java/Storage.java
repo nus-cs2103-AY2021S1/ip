@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class Storage {
     public File f;
     private Scanner lineReader;
-    private FileWriter fw;
 
     public Storage(File f){
         this.f = f;
@@ -17,7 +16,7 @@ public class Storage {
             this.lineReader = new Scanner(f);
 
         } catch (FileNotFoundException e) {
-            System.out.println("An error occured.");
+            System.out.println("File is not found");
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -33,10 +32,10 @@ public class Storage {
         return shelf;
     }
 
-    public void updateFile(ArrayList<Task> shelf) throws IOException {
-        this.fw = new FileWriter(f.getAbsolutePath());
-        for(int i = 0; i < shelf.size(); i++) {
-            fw.write(shelf.get(i).toString());
+    public void updateFile(TaskList shelf) throws IOException {
+        FileWriter fw = new FileWriter(f.getAbsolutePath());
+        for(int i = 0; i < shelf.getSize(); i++) {
+            fw.write(shelf.getTask(i).toString());
             fw.write(System.lineSeparator());
         }
         fw.close();
