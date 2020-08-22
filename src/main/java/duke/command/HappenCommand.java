@@ -5,8 +5,8 @@ import duke.component.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class HappensCommand extends Command {
-    public HappensCommand(String input) {
+public class HappenCommand extends Command {
+    public HappenCommand(String input) {
         super(input);
     }
 

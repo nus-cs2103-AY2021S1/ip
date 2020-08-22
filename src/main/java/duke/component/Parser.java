@@ -110,8 +110,8 @@ public class Parser {
             return new DeleteCommand(input);
         } else if (input.startsWith("done ")) {
             return new DoneCommand(input);
-        } else if (input.startsWith("happens on ")) {
-            return new HappensCommand(input);
+        } else if (input.startsWith("happen ")) {
+            return new HappenCommand(input);
         } else {
             return new AddCommand(input);
         }
