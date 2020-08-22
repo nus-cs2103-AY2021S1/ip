@@ -1,0 +1,7 @@
+T---1---borrow book
+D---1---return book---/by Sunday
+E---0---project meeting---/at Aug 6th 2-4pm
+T---1---join sports club
+T---0---buy things
+D---0---submit work---/by Wed
+D---1---do a run---/by 2/25/2020 1700

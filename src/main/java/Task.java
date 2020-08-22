@@ -4,10 +4,16 @@ public class Task {
     protected int index;
     protected final String done = "[\u2713] ";
     protected final String start = "[\u2718] ";
+    public TaskType type;
 
     public Task(String description, int index) {
         this.description = description;
         this.isDone = false;
+        this.index = index;
+    }
+    public Task(String description, int index, boolean isOver) {
+        this.description = description;
+        this.isDone = isOver;
         this.index = index;
     }
 
