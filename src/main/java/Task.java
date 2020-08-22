@@ -25,6 +25,8 @@ public abstract class Task {
 
     public abstract String getTaskType();
 
+    public abstract String getDate();
+
     @Override
     public String toString() {
         return String.format("[%s][%s] %s", getTaskType(),getStatusIcon(), description);

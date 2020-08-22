@@ -9,4 +9,8 @@ public class ToDo extends Task{
         return "T";
     }
 
+    @Override
+    public String getDate() {
+        return "";
+    }
 }
