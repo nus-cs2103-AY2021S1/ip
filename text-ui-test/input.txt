@@ -12,12 +12,14 @@ todo
 deadline
 event
 deadline /by 
+deadline test /by
 event /at 
-done
+event test /at
+done      
 done qqqq
 done 80
 delete 3
-delete
+delete        
 delete 45
 
 bye

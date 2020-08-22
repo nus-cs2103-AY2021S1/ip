@@ -64,6 +64,8 @@ ____________________________________________________________
 ☹ OOPS!!! The description or date of a deadline cannot be empty.
 ☹ OOPS!!! The description or date of an event cannot be empty.
 ☹ OOPS!!! The description or date of a deadline cannot be empty.
+☹ OOPS!!! The description or date of a deadline cannot be empty.
+☹ OOPS!!! The description or date of an event cannot be empty.
 ☹ OOPS!!! The description or date of an event cannot be empty.
 ☹ OOPS!!! The task number is not valid.
 ☹ OOPS!!! The task number is not valid.
