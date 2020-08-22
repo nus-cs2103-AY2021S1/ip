@@ -1,3 +1,5 @@
+package duke;
+
 public enum TaskStatus {
     TODO("todo"),
     DEADLINE("deadline"),

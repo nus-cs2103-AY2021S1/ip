@@ -1,3 +1,8 @@
+package duke;
+
+import duke.task.TaskList;
+import duke.utils.Storage;
+
 public class Duke {
     public static void main(String[] args) {
         TaskList list = new TaskList();
