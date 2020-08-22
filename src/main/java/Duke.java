@@ -9,13 +9,16 @@ import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        LocalDate localDate = LocalDate.parse("2019-12-01");
-        System.out.println(localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
-//        FileHandler database = new FileHandler("data/Duke.txt");
-//
-//        Duke.echo("Hello! I'm Duke\nWhat can I do for you?");
-//
-//        Duke.checkCommands(sc, database);
+
+
+//        LocalDateTime localDateTime = Duke.strToDate("2019-12-01 1800");
+//        System.out.println(Duke.parseDateTime(localDateTime));
+
+        FileHandler database = new FileHandler("data/Duke.txt");
+
+        Duke.echo("Hello! I'm Duke\nWhat can I do for you?");
+
+        Duke.checkCommands(sc, database);
     }
 
     public static void echo(String s) {
@@ -33,15 +36,38 @@ public class Duke {
         Duke.echo(s);
     }
 
-    public static LocalDateTime strToDate(String by) throws Exception {
+    public static LocalDateTime strToDate(String by) {
         String[] arr = by.split("\\s+");
-        if (arr.length === 1) {
+        LocalDate localDate;
+        LocalDateTime localDateTime;
+        try {
+            if (arr.length == 1) {
+                // Only date provided
+                String date = arr[0].replace("/", "-");
+                localDate = LocalDate.parse(date); // Check if exception is thrown here
+                localDateTime = localDate.atTime(0, 0);
+            } else if (arr.length == 2 && arr[1].length() == 4) {
+                // Date and time provided
+                String date = arr[0].replace("/", "-");
+                localDate = LocalDate.parse(date); // Check if exception is thrown here
+                String time = arr[1];
+                int hours = Integer.parseInt(time.substring(0,2));
+                int minutes = Integer.parseInt(time.substring(2,4));
 
-        } else if (arr.length === 2) {
+                localDateTime = localDate.atTime(hours, minutes);
+            } else {
+                throw new InvalidCommandException();
+            }
 
-        } else {
-            throw new InvalidCommandException();
+            return localDateTime;
+        } catch (Exception e) {
+            Duke.echo("☹ OOPS!!! Please enter date format as yyyy-mm-dd iiii, e.g. 2019-12-01 1800");
+            return null;
         }
+    }
+
+    public static String parseDateTime(LocalDateTime datetime) {
+        return datetime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h.mma"));
     }
 
     public static void checkCommands(Scanner sc, FileHandler database) {
@@ -60,8 +86,8 @@ public class Duke {
                         if (arr.length == 1) {
                             throw new EmptyDescException();
                         } else {
-                            Task todo = new Todo(comText);
-                            database.addTask(todo.toString());
+                            Task todo = new Todo(comText, "0");
+                            database.addTask(todo.getStringArr());
                             Duke.echo(String.format("Got it. I've added this task:" +
                                     "\n%s\nNow you have %d tasks in the list.", todo, database.getSize()));
                         }
@@ -75,8 +101,9 @@ public class Duke {
                         } else {
                             String desc = comText.substring(0, dIdx-1);
                             String by = comText.substring(dIdx+4, comText.length()).trim();
-                            Task deadline = new Deadline(desc, by);
-                            database.addTask(deadline.toString());
+                            LocalDateTime deadlineDate = Duke.strToDate(by);
+                            Task deadline = new Deadline(desc, "0", deadlineDate);
+                            database.addTask(deadline.getStringArr());
                             Duke.echo(String.format("Got it. I've added this task:" +
                                     "\n%s\nNow you have %d tasks in the list.", deadline, database.getSize()));
                         }
@@ -90,8 +117,9 @@ public class Duke {
                         } else {
                             String desc = comText.substring(0, eIdx-1);
                             String at = comText.substring(eIdx+4, comText.length()).trim();
-                            Task event = new Event(desc, at);
-                            database.addTask(event.toString());
+                            LocalDateTime eventDate = Duke.strToDate(at);
+                            Task event = new Event(desc, "0", eventDate);
+                            database.addTask(event.getStringArr());
                             Duke.echo(String.format("Got it. I've added this task:" +
                                     "\n%s\nNow you have %d tasks in the list.", event, database.getSize()));
                         }
@@ -130,6 +158,7 @@ public class Duke {
             } catch (Exception e) {
                 Duke.echo(e.getMessage());
             }
+
         }
     }
 }

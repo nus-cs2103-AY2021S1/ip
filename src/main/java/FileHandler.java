@@ -33,30 +33,21 @@ public class FileHandler {
         List<Task> lst = new ArrayList<>();
         String line = br.readLine();
         while (line != null) {
-            String type = Character.toString(line.charAt(1));
-            boolean checked = (Character.toString(line.charAt(4))).equals("✓") ? true : false;
-            String desc = Task.getDesc(line);
+            String[] arr = line.split(",");
+            String type = arr[0];
+            String checked = arr[1];
+            String desc = arr[2];
             switch (type) {
                 case "T":
-                    Task todo = new Todo(desc);
-                    todo.setStatus(checked);
-
+                    Task todo = new Todo(desc, checked);
                     lst.add(todo);
                     break;
                 case "E":
-                    String eventDesc = Event.parseFileDesc(desc);
-                    String eventAt = Event.parseFileAt(desc);
-                    Task event = new Event(eventDesc, eventAt);
-                    event.setStatus(checked);
-
+                    Task event = new Event(desc, checked, Duke.strToDate(arr[3]));
                     lst.add(event);
                     break;
                 case "D":
-                    String deadlineDesc = Deadline.parseFileDesc(desc);
-                    String deadlineBy = Deadline.parseFileBy(desc);
-                    Task deadline = new Deadline(deadlineDesc, deadlineBy);
-                    deadline.setStatus(checked);
-
+                    Task deadline = new Deadline(desc, checked, Duke.strToDate(arr[3]));
                     lst.add(deadline);
                     break;
                 default:
@@ -71,7 +62,9 @@ public class FileHandler {
         try {
             resetFile();
             for (int i = 0; i < lst.size(); i++) {
-                appendToFile(String.format("%s\n", lst.get(i)));
+                String[] arr = lst.get(i).getStringArr();
+                String s = Task.stringFormat(arr);
+                appendToFile(s);
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -91,25 +84,29 @@ public class FileHandler {
         return filecontents.size();
     }
 
-    public void addTask(String description) throws Exception {
-        appendToFile(String.format("%s\n", description));
+    public void addTask(String[] arr) throws Exception {
+        appendToFile(Task.stringFormat(arr));
     }
 
-    public void completeTask(int i) throws Exception {
+    public Task completeTask(int i) throws Exception {
         List<Task> filecontents = getFileContents();
+        Task t = filecontents.get(i-1);
         if (i <= 0 || i > filecontents.size()) {
             throw new InvalidIndexException();
         }
-        filecontents.get(i-1).setStatus(true);
+        filecontents.get(i-1).setStatus("1");
         rewriteFileContents(filecontents);
+        return t;
     }
 
-    public void deleteTask(int i) throws Exception {
+    public Task deleteTask(int i) throws Exception {
         List<Task> filecontents = getFileContents();
+        Task t = filecontents.get(i-1);
         if (i <= 0 || i > filecontents.size()) {
             throw new InvalidIndexException();
         }
         filecontents.remove(i-1);
         rewriteFileContents(filecontents);
+        return t;
     }
 }
