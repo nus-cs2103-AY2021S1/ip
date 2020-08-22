@@ -3,7 +3,12 @@ package main.java;
 public class ToDo extends Task {
 
     ToDo(String description) throws DukeException{
-        super(description);
+        this(description, false);
+    }
+
+    ToDo(String description, boolean isDone) throws DukeException{
+        super(description, isDone);
+        taskType = TaskType.TODO;
         if(description == null || description.isEmpty()) {
             throw new DukeException("The description of a todo cannot be empty!");
         }

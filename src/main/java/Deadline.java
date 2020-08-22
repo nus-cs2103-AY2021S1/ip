@@ -4,7 +4,12 @@ public class Deadline extends Task {
     String time;
 
     Deadline(String description, String time) {
-        super(description);
+        this(description, false, time);
+    }
+
+    Deadline(String description, boolean isDone, String time) {
+        super(description, isDone);
+        taskType = TaskType.DEADLINE;
         this.time = time;
     }
 

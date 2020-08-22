@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Duke {
     static List<Task> tasks;
+    static DataManager dataManager = new DataManager();
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String logo =
@@ -27,22 +28,22 @@ public class Duke {
         System.out.println(logo);
         printInWindow("Hello, I'm a banana.\nWhat can I do for you?");
 
-        tasks = new ArrayList<>();
+        try {
+            tasks = dataManager.load();
 
-        while(sc.hasNextLine()) {
-            String input = sc.nextLine();
-            String[] splitInput = input.split(" ", 2);
+            while (sc.hasNextLine()) {
+                String input = sc.nextLine();
+                String[] splitInput = input.split(" ", 2);
 
-            try {
                 CommandType command = CommandType.enumFromString(splitInput[0]);
                 String parameters = splitInput.length > 1 ? splitInput[1] : null;
                 int result = processCommand(command, parameters);
-                if(result == 0) {
+                if (result == 0) {
                     return;
                 }
-            } catch (DukeException exception) {
-                printInWindow(exception.getMessage());
             }
+        } catch (DukeException exception) {
+            printInWindow(exception.getMessage());
         }
     }
 
@@ -51,24 +52,28 @@ public class Duke {
         case TODO:
             ToDo todo = new ToDo(parameters);
             tasks.add(todo);
+            dataManager.save(tasks);
             printInWindow("Added: " + todo.toString());
             break;
         case EVENT:
             String[] eventParameters = parameters.split(" /at ");
             Event event = new Event(eventParameters[0], eventParameters[1]);
             tasks.add(event);
+            dataManager.save(tasks);
             printInWindow("Added: " + event.toString());
             break;
         case DEADLINE:
             String[] deadlineParameters = parameters.split(" /by ");
             Deadline deadline = new Deadline(deadlineParameters[0], deadlineParameters[1]);
             tasks.add(deadline);
+            dataManager.save(tasks);
             printInWindow("Added: " + deadline.toString());
             break;
         case DONE:
             int doneNumber = Integer.parseInt(parameters);
             Task task = tasks.get(doneNumber - 1);
             task.markAsDone(true);
+            dataManager.save(tasks);
             printInWindow("Nice! I've marked the this as done.\n" + task.toString());
             break;
         case LIST:
@@ -78,6 +83,7 @@ public class Duke {
             int deleteNumber = Integer.parseInt(parameters);
             Task deleteTask = tasks.get(deleteNumber - 1);
             tasks.remove(deleteNumber - 1);
+            dataManager.save(tasks);
             printInWindow("I've removed this task:\n" + deleteTask.toString());
             break;
         case BYE:

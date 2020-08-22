@@ -1,12 +1,17 @@
 package main.java;
 
 public class Task {
+    TaskType taskType;
     String description;
     boolean isDone;
 
     Task(String description) {
+        this(description, false);
+    }
+
+    Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     public void markAsDone(boolean done) {
