@@ -10,8 +10,19 @@ import java.time.LocalDateTime;
 import static duke.parser.Parser.dateProcessor;
 import static duke.parser.Parser.dateTimeProcessor;
 
+/**
+ * A class representing command execution.
+ */
 public class Command {
 
+    /**
+     * Executes the commands from the input.
+     *
+     * @param enumCommand the enumeration type of the input command.
+     * @param instruction the string of input command.
+     * @param result the TaskList storing the list of tasks.
+     * @throws DukeException if the description or the datetime format of the task is illegal.
+     */
     public static void executeCommand(EnumCommand enumCommand, String instruction, TaskList result) throws DukeException {
         Ui ui = new Ui();
         switch (enumCommand) {
@@ -106,6 +117,13 @@ public class Command {
 
     }
 
+    /**
+     * Returns a TaskList of tasks that meet the input date requirement
+     *
+     * @param localDate the date from input that of tasks.
+     * @param tasks the TaskList of all tasks
+     * @return the TaskList of tasks that meet the input date requirement
+     */
     public static TaskList searchTasksByTime(LocalDate localDate, TaskList tasks) {
         TaskList occurings = new TaskList();
         for (int i = 0; i < tasks.getSize(); i++) {

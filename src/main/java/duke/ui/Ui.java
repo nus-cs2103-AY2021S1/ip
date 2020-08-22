@@ -3,6 +3,9 @@ package duke.ui;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
+/**
+ * A class that handles user interface interactions.
+ */
 public class Ui {
     public static String greetings = "Hello! I'm Mr. Duke, your personal assistant\n     What can I do for you? : )";
     public static String farewell = "Bye. Hope to see you again soon!";
@@ -11,34 +14,63 @@ public class Ui {
     public static String addTaskTailAlert = "Now you have %d tasks in the list.";
     public static String deleteTaskFrondAlert = "Noted. I've removed this task:";
 
-    public Ui() {
-
-    }
-
+    /**
+     * Prints out greetings at the beginning.
+     */
     public void greetings() {
         printAnswer("", greetings, "");
     }
 
+    /**
+     * Prints out reminders when adding a task to the list.
+     *
+     * @param result the TaskList of all tasks.
+     */
     public void addTaskAlert(TaskList result) {
         printAnswer(addTaskFrontAlert, "   " + result.get(result.getSize() - 1).toString(), String.format(addTaskTailAlert, result.getSize()));
     }
 
+    /**
+     * Prints out the reminders when done with a task.
+     *
+     * @param tempDone the task object that has been done.
+     */
     public void doneAlert(Task tempDone) {
         printAnswer(doneAlert, "   " + tempDone.toString(), "");
     }
 
+    /**
+     * Prints out a reminder when a task has been deleted.
+     *
+     * @param tempDelete the task object that has been deleted.
+     * @param result the TaskList of all the tasks.
+     */
     public void deleteTaskAlert(Task tempDelete, TaskList result) {
         printAnswer(deleteTaskFrondAlert, "   " + tempDelete.toString(), String.format(addTaskTailAlert, result.getSize()));
     }
 
+    /**
+     * Prints out a list of tasks.
+     * @param result the TaskList of task to be printed.
+     */
     public void showList(TaskList result) {
         printList("", result, "");
     }
 
+    /**
+     * Prints a farewell message when exiting the application.
+     */
     public void farewell() {
         printAnswer("", farewell, "");
     }
 
+    /**
+     * Prints out answers according to commands with front reminder, and tail reminder.
+     *
+     * @param FrontGuidance a string representing reminders at the front.
+     * @param answer a string representing the answer to the user command.
+     * @param TailGuidance a string representing reminders at the tail.
+     */
     public static void printAnswer(String FrontGuidance, String answer, String TailGuidance) {
         String line = "___________________________________________________________________________________";
         String smallSpace = "    ";
@@ -55,6 +87,13 @@ public class Ui {
         System.out.println(smallSpace + line + "\n");
     }
 
+    /**
+     * Prints out a list according to commands with front reminder, and tail reminder.
+     *
+     * @param FrontGuidance a string representing reminders at the front.
+     * @param result a TaskList to be printed.
+     * @param TailGuidance a string representing reminders at the tail.
+     */
     public static void printList(String FrontGuidance, TaskList result, String TailGuidance) {
         String line = "___________________________________________________________________________________";
         String smallSpace = "    ";
@@ -77,6 +116,11 @@ public class Ui {
         System.out.println(smallSpace + line + "\n");
     }
 
+    /**
+     * Prints out the error message when encountering exceptions.
+     *
+     * @param e the exception message to be printed.
+     */
     public void showError(Exception e) {
         System.out.println(e.toString());
     }

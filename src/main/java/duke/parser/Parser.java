@@ -8,10 +8,24 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+/**
+ * A class that represents a parser which parses commands and dateTime
+ */
 public class Parser {
+
+    /**
+     * Constructs a parser that takes in no parameter.
+     */
     public Parser() {
     }
 
+    /**
+     * Converts user input to command enumerations.
+     *
+     * @param instruction the string that represents user input
+     * @return enumeration of commands that matches the input
+     * @throws DukeException if the input format is illegal
+     */
     public static EnumCommand parseCommand(String instruction) throws DukeException {
         Integer indexOfSplit = instruction.indexOf(' ');
         String command;
@@ -46,6 +60,14 @@ public class Parser {
         return enumCommand;
     }
 
+    /**
+     * Converts the user input of date to the correct date format.
+     *
+     * @param date the input date string from user.
+     * @return LocalDate Object that matches the user input date.
+     * @throws DukeException if the user input format is illegal.
+     * @throws DateTimeException if the date is an illegal date.
+     */
     public static LocalDate dateProcessor(String date) throws DukeException, DateTimeException {
 
         String[] dateSplit = date.split("-");
@@ -58,6 +80,14 @@ public class Parser {
         return localDate;
     }
 
+    /**
+     * Converts the user input of dateTime to the correct dateTime format.
+     *
+     * @param dateTime the input dateTime string from user.
+     * @return a LocalDateTime object that matches the input string.
+     * @throws DukeException if the user input format is illegal.
+     * @throws DateTimeException if the date is an illegal date.
+     */
     public static LocalDateTime dateTimeProcessor(String dateTime) throws DukeException, DateTimeException {
         String[] dateTimeSplit = dateTime.strip().split(" ");
         if (dateTimeSplit.length != 2) {
