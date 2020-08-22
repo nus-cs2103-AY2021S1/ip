@@ -1,16 +1,18 @@
 package storage;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.Date;
+
 import exception.DukeException;
 import task.Task;
 import task.Todo;
 import task.Deadline;
 import task.Event;
 import task.TaskList;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
+import utils.Utils;
 
 public class TaskStorage {
     private final File file;
@@ -50,9 +52,11 @@ public class TaskStorage {
             case Todo.TODO_SYMBOL:
                 return new Todo(task[2], isCompleted);
             case Deadline.DEADLINE_SYMBOL:
-                return new Deadline(task[2], isCompleted, task[3]);
+                Date dateTime = Utils.parseDateTimeString(task[3], Deadline.DATE_FORMAT_OUTPUT);
+                return new Deadline(task[2], isCompleted, dateTime);
             case Event.EVENT_SYMBOL:
-                return new Event(task[2], isCompleted, task[3]);
+                Date time = Utils.parseDateTimeString(task[3], Event.TIME_FORMAT_OUTPUT);
+                return new Event(task[2], isCompleted, time);
             default:
                 String err = String.format("It appears this line '%s' is corrupted.", storageTask);
                 throw new DukeException(err);
@@ -67,11 +71,10 @@ public class TaskStorage {
                 Task task = convertStorageToTask(s.nextLine());
                 taskList.addTask(task);
             }
-            return taskList;
         } catch (DukeException exception) {
             System.out.println(exception.getMessage());
         } catch (IOException ignore) {}
-        return new TaskList();
+        return taskList;
     }
 
     private void writeToFile(String text) throws IOException {

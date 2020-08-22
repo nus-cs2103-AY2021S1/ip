@@ -1,6 +1,6 @@
-event project meeting /at Mon 2-4pm
+event project meeting /at 1300
 todo borrow book
-deadline return book /by 1 Jan
+deadline return book /by 12-12-2012 1200
 list
 done 1
 done 2
@@ -13,6 +13,8 @@ not a command
 todo
 event no datetime
 deadline no date
+event project meeting /at 12.00 am
+deadline return book /by 12 Dec 2012 1200
 done 5
 delete 5
 bye

@@ -3,10 +3,12 @@ package operation;
 import task.TaskList;
 import task.Event;
 
-public class AddEventOperation extends AddOperation {
-    private final String time;
+import java.util.Date;
 
-    public AddEventOperation(String description, String time, TaskList taskList) {
+public class AddEventOperation extends AddOperation {
+    private final Date time;
+
+    public AddEventOperation(String description, Date time, TaskList taskList) {
         super(description, taskList);
         this.time = time;
     }
