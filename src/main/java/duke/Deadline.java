@@ -39,14 +39,6 @@ public class Deadline extends Task {
     }
 
     @Override
-<<<<<<< HEAD
-    public String serialize() {
-        return String.format("D | %d | %s | %s", getStatusCode(), description , by);
-    }
-
-    @Override
-=======
->>>>>>> 7cf06867bc1780a8ba55bc5d6537869fa9988b2d
     public String toString() {
         return "[D]" + super.toString() + " (by: " + byFormat() + ")";
     }
