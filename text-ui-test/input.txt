@@ -4,10 +4,10 @@ todo
 todo borrow textbook
 deadline
 deadline return book
-deadline return book /by Sunday
+deadline return book /by 2019-12-02
 event
 event project meeting
-event project meeting /at Mon 10-12pm
+event project meeting /at 2019-12-01
 deadline do homework /by no idea :-p
 list
 done 1
