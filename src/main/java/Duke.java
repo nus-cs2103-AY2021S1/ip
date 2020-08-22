@@ -1,14 +1,17 @@
 import java.util.Scanner;
 
 public class Duke {
-    protected static Storage storage;
+    protected Storage storage;
+    protected TaskList taskList;
 
     public Duke() {
         // set up the things needed to start Duke
         Storage.createFolder();
         storage = new Storage();
         if (storage.retrieveTextFile()) {
-            storage.loadData();
+            taskList = new TaskList(storage.loadData());
+        } else {
+            taskList = new TaskList();
         }
     }
 
@@ -23,17 +26,17 @@ public class Duke {
             input = sc.nextLine();
             try {
                 if (input.startsWith("todo")) { // add todo tasks
-                    DukeCommandsHandler.addToDo(input);
+                    taskList.addToDo(input, storage);
                 } else if (input.startsWith("deadline")) { // add deadline tasks
-                    DukeCommandsHandler.addDeadline(input);
+                    taskList.addDeadline(input, storage);
                 } else if (input.startsWith("event")) { // add event tasks
-                    DukeCommandsHandler.addEvent(input);
+                    taskList.addEvent(input, storage);
                 } else if (input.startsWith("delete")) { // delete tasks
-                    DukeCommandsHandler.deleteTask(input);
+                    taskList.deleteTask(input, storage);
                 } else if (input.startsWith("done")) { // mark tasks done
-                    DukeCommandsHandler.markTaskDone(input);
+                    taskList.markTaskDone(input, storage);
                 } else if (input.equals("list")) { // list out the tasks
-                    DukeCommandsHandler.listTasks();
+                    taskList.listTasks();
                 } else if (input.equals("bye")) { // exit the bot
                     DukeCommandsHandler.exitFocus();
                     break;

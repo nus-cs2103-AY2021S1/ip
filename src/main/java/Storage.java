@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
@@ -39,27 +40,30 @@ public class Storage {
         return hasTextFile;
     }
 
-    public void loadData() {
+    public ArrayList<String> loadData() {
+        String task;
+        ArrayList<String> taskList = new ArrayList<>();
         try {
             File data = new File(path);
             Scanner sc = new Scanner(data);
             while (sc.hasNextLine()) {
-                String task = sc.nextLine();
-                DukeCommandsHandler.tasks.add(Task.textToTask(task));
+                task = sc.nextLine();
+                taskList.add(task);
             }
             sc.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        return taskList;
     }
 
-    public void saveData() {
+    public void saveData(ArrayList<Task> taskList) {
         try {
             FileWriter fileWriter = new FileWriter(path);
-            for (int i = 0; i < DukeCommandsHandler.tasks.size(); i++) {
+            for (Task item : taskList) {
                 // get the task list items
-                String task = DukeCommandsHandler.tasks.get(i).taskToText() + "\n";
+                String task = item.taskToText() + "\n";
                 fileWriter.write(task);
             }
             fileWriter.close();
