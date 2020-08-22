@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import static java.lang.Integer.parseInt;
@@ -129,6 +133,8 @@ public class Duke {
                 task.toString());
     }
 
+
+    // inclusive of startIndex, exclusive of endIndex
     String stringArrayToString(String[] arr, int startIndex, int endIndex) {
         try {
             if (endIndex > startIndex) {
@@ -178,7 +184,7 @@ public class Duke {
     }
 
     // Takes the input as a string array, adds a new deadline to list, then prints the message
-    void deadline(String[] stringArray) throws TaskException{
+    void deadline(String[] stringArray) throws TaskException {
         int indexOfBy = -1;
         for (int i = 0; i < stringArray.length; i++) {
             if (stringArray[i].equals("/by")) {
@@ -190,10 +196,17 @@ public class Duke {
             throw new TaskException("Oops! A deadline task needs a description");
         } else if (indexOfBy == stringArray.length - 1 || indexOfBy == -1) {
             throw new TaskException("Oops! A deadline task needs a deadline");
+        } else if (stringArray.length < indexOfBy + 3) {
+            throw new TaskException("Oops! Date or time is missing from deadline");
         } else {
-            String by = stringArrayToString(stringArray, indexOfBy + 1, stringArray.length);
+            String dateString = stringArray[indexOfBy + 1];
+            String timeString = stringArray[indexOfBy + 2];
             String description = stringArrayToString(stringArray, 1, indexOfBy);
-            Deadline deadline = new Deadline(description, by);
+            String localDateString = parseDateStringToLocalDateFormat(dateString);
+            String localTimeString = parseTimeStringToLocalTimeFormat(timeString);
+            LocalDate localDate = LocalDate.parse(localDateString);
+            LocalTime localTime = LocalTime.parse(localTimeString);
+            Deadline deadline = new Deadline(description, localDate, localTime);
             addToMemory(deadline);
             printAddMessage(deadline);
         }
@@ -223,12 +236,17 @@ public class Duke {
         }
         if (indexOfAt == 1 || stringArray.length == 1) {
             throw new TaskException("Oops! An event task needs a description");
-        } else if (indexOfAt == stringArray.length - 1 || indexOfAt == -1) {
-            throw new TaskException("Oops! An event task needs a date");
+        } else if (stringArray.length < indexOfAt + 3) {
+            throw new TaskException("Oops! Date or time is missing from deadline");
         } else {
-            String at = stringArrayToString(stringArray, indexOfAt + 1, stringArray.length);
+            String dateString = stringArray[indexOfAt + 1];
+            String timeString = stringArray[indexOfAt + 2];
             String description = stringArrayToString(stringArray, 1, indexOfAt);
-            Event event = new Event(description, at);
+            String localDateString = parseDateStringToLocalDateFormat(dateString);
+            String localTimeString = parseTimeStringToLocalTimeFormat(timeString);
+            LocalDate localDate = LocalDate.parse(localDateString);
+            LocalTime localTime = LocalTime.parse(localTimeString);
+            Event event = new Event(description, localDate, localTime);
             addToMemory(event);
             printAddMessage(event);
         }
@@ -239,6 +257,69 @@ public class Duke {
         running = false;
         farewell();
     }
+
+    //------------------------------- Methods dealing with date----------------------
+    // Used for converting local date obj in task to given format
+    String formatDate(String format, LocalDate localDate) {
+        return localDate.format(DateTimeFormatter.ofPattern(format));
+    }
+
+    // Used to convert time obj in task to given format
+    String formatTime(String format, LocalTime localTime) {
+        return localTime.format(DateTimeFormatter.ofPattern(format));
+    }
+
+
+    ArrayList<Task> findTasksByDate(LocalDate localDate) {
+        return null;
+    }
+
+    ArrayList<Task> findTasksByDateAndTime(LocalDate localDate, LocalTime localTime) {
+        return null;
+    }
+
+
+    // Assumes input to be dd/mm/yyyy, returns in yyyy-mm-dd format
+    String parseDateStringToLocalDateFormat(String dateString) throws TaskException {
+        try {
+            String[] stringArray = dateString.split("/");
+            String day = stringArray[0];
+            String month = stringArray[1];
+            String year = stringArray[2];
+            while (day.length() < 2) {
+                day = "0" + day;
+            }
+            while (month.length() < 2) {
+                month = "0" + month;
+            }
+            String editedDateString = day + "/" + month + "/" + year;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate localDate = LocalDate.parse(editedDateString, formatter);
+            return localDate.toString();
+        } catch (IndexOutOfBoundsException e) {
+            throw new TaskException("Date: " + dateString + " is not formatted correctly\n"
+                    + "Please use dd/mm/yyyy format.");
+        } catch (DateTimeParseException e) {
+            throw new TaskException("Date: " + dateString + " is not formatted correctly\n"
+                    + "Please use dd/mm/yyyy format.");
+        }
+    }
+
+    String parseTimeStringToLocalTimeFormat(String timeString) throws TaskException {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("kkmm");
+            LocalTime localTime = LocalTime.parse(timeString, formatter);
+            return localTime.toString();
+        } catch (DateTimeParseException e) {
+            throw new TaskException("Time: " + timeString + " is not formatted correctly.\n"
+                + "Please use HHMM format.");
+        }
+    }
+
+
+
+
+    // ------------------------------------------------------------------------------
 
 
 
