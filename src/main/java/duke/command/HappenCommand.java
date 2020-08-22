@@ -28,7 +28,11 @@ public class HappenCommand extends Command {
                         DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 ui.printList(list, t -> t.happenBeforeDate(date), "happening before " +
                         date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " ");
+            } else {
+                throw new InvalidCommandException("Invalid happen command input");
             }
+        } catch (InvalidCommandException e) {
+            throw e;
         } catch (Exception e) {
             throw new InvalidCommandException("Invalid date format. Please use yyyy-MM-dd");
         }
