@@ -1,5 +1,6 @@
 package main.java;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -57,14 +58,14 @@ public class Duke {
             break;
         case EVENT:
             String[] eventParameters = parameters.split(" /at ");
-            Event event = new Event(eventParameters[0], eventParameters[1]);
+            Event event = new Event(eventParameters[0], LocalDate.parse(eventParameters[1]));
             tasks.add(event);
             dataManager.save(tasks);
             printInWindow("Added: " + event.toString());
             break;
         case DEADLINE:
             String[] deadlineParameters = parameters.split(" /by ");
-            Deadline deadline = new Deadline(deadlineParameters[0], deadlineParameters[1]);
+            Deadline deadline = new Deadline(deadlineParameters[0], LocalDate.parse(deadlineParameters[1]));
             tasks.add(deadline);
             dataManager.save(tasks);
             printInWindow("Added: " + deadline.toString());
