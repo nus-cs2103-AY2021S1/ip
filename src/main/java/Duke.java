@@ -1,101 +1,46 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Duke {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Store store;
+    private final Ui ui;
+    private final Storage storage;
+    private final TaskList taskList;
+
+    public Duke(String filePath) {
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
+
+        TaskList tmpTaskList;
         try {
-            store = new Store();
+            tmpTaskList = new TaskList(storage.load());
+            ui.printWithWrapper(new ArrayList<>(List.of("Duke has loaded from a previously saved file!")), false, false);
         } catch (DukeException e) {
-            e.printError();
-            return;
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-            return;
+            tmpTaskList = new TaskList();
+            ui.printWithWrapper(new ArrayList<>(List.of(
+                    e.getPrettyErrorMsg(),
+                    "Duke will start from a clean taskList!")), false, true);
         }
 
-        String[] welcomeTexts = new String[]{
-                "Hello, my name is ",
-                " ____        _        ",
-                "|  _ \\ _   _| | _____ ",
-                "| | | | | | | |/ / _ \\",
-                "| |_| | |_| |   <  __/",
-                "|____/ \\__,_|_|\\_\\___|",
-                "How may I help you?"
-        };
+        this.taskList = tmpTaskList;
+    }
 
-        StringUtils.printWithWrapper(welcomeTexts, false);
-        String input = sc.nextLine();
-
-        while (!input.equals("bye")) {
+    private void run() {
+        ui.printGreeting();
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                processInput(input.trim(), store);
+                String input = ui.getUserInput();
+                Command cmd = Parser.parseInput(input);
+                cmd.execute(ui, storage, taskList);
+                isExit = cmd.isExit();
             } catch (DukeException e) {
-                e.printError();
+                ui.printWithWrapper(new ArrayList<>(List.of(e.getPrettyErrorMsg())), false, true);
             }
-            input = sc.nextLine();
-        }
-
-        StringUtils.printWithWrapper(new String[]{"Bye bye! Hope to see you again soon!"}, false);
-    }
-
-    private static void processInput(String input, Store store) throws DukeException {
-        if (input.equals("")) {
-            throw new DukeException("Empty input");
-        }
-
-        String[] splitInput = input.split(" ");
-        String firstInput = splitInput[0].trim();
-        String[] sections;
-
-        Command command;
-        try {
-            command = Command.toCommand(firstInput);
-        } catch (DukeException e) {
-            throw e;
-        }
-
-        switch (command) {
-            case SAVE:
-                try {
-                    store.save();
-                } catch (IOException e) {
-                    throw new DukeIOException(e.getMessage());
-                }
-                break;
-            case LIST:
-                store.list();
-                break;
-            case DONE:
-                store.markTaskAsDone(Integer.parseInt(splitInput[1].trim()));
-                break;
-            case DELETE:
-                store.delete(Integer.parseInt(splitInput[1].trim()));
-                break;
-            case TODO:
-            case DEADLINE:
-            case EVENT:
-                try {
-                    sections = StringUtils.parseInputSections(input, firstInput, getTaskBreakPt(firstInput));
-                    store.add(sections, firstInput);
-                } catch (DukeException e) {
-                    throw e;
-                }
-                break;
         }
     }
 
-    private static String getTaskBreakPt(String taskName) {
-        switch (taskName) {
-            case "deadline":
-                return "/by";
-            case "event":
-                return "/at";
-            default:
-                return "";
-        }
+    public static void main(String[] args) {
+        Duke duke = new Duke("data/duke.txt");
+        duke.run();
     }
 }
