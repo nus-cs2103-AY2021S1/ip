@@ -1,3 +1,7 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,6 +11,7 @@ public class Duke {
      * 1-indexed list
      */
     private final List<Task> tasks;
+    private static final String OUTPUT_FILE_NAME = "duke.txt";
 
     public Duke() {
         this.tasks = new ArrayList<>();
@@ -65,6 +70,22 @@ public class Duke {
 
     public void printList() {
         System.out.println(this.list());
+    }
+
+    public void saveList() {
+        String projectDir = System.getProperty("user.dir");
+        Path dataDir = Paths.get(projectDir, "data");
+        try {
+            if (!Files.exists(dataDir)) {
+                Files.createDirectory(dataDir);
+            }
+            Path filePath = Paths.get(dataDir.toString(), Duke.OUTPUT_FILE_NAME);
+            Files.createFile(filePath);
+            Files.writeString(filePath, this.list());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void bye() {
@@ -144,6 +165,7 @@ public class Duke {
                 } else {
                     throw new DukeException("This command is invalid.");
                 }
+                duke.saveList();
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
