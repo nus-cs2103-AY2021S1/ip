@@ -1,5 +1,6 @@
 package main.java;
 
+import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -91,8 +92,22 @@ public class Duke {
                     int deadlineIndex = output.indexOf("/by ");
 
                     if (deadlineIndex != -1 && output.length() > deadlineIndex + 4) {
-                        list.add(new Deadline(output.substring(9, deadlineIndex - 1), output.substring(deadlineIndex + 4)));
-                        added = true;
+
+                        String datetime = output.substring(deadlineIndex + 4);
+
+                        try {
+                            if (datetime.contains(" ")) {
+                                String[] datetimeArr = datetime.split(" ");
+                                list.add(new Deadline(output.substring(9, deadlineIndex - 1), datetimeArr[0], datetimeArr[1]));
+                            }
+                            else {
+                                list.add(new Deadline(output.substring(9, deadlineIndex - 1), datetime, ""));
+                            }
+                            added = true;
+                        } catch (DateTimeException e) {
+                            System.out.println("Enter date in the following format: YYYY-MM-DD HH:mm(optional) " +
+                                    "(e.g. 2020-06-18 or 2020-07-20 18:00)");
+                        }
                     }
                 }
 
@@ -101,9 +116,27 @@ public class Duke {
                     int timeIndex = output.indexOf("/at ");
 
                     if (timeIndex != -1 && output.length() > timeIndex + 4) {
-                        list.add(new Event(output.substring(6, timeIndex - 1), output.substring(timeIndex + 4)));
-                        added = true;
+
+                        String datetime = output.substring(timeIndex + 4);
+
+                        try {
+                            if (datetime.contains(" ")) {
+                                String[] datetimeArr = datetime.split(" ");
+                                list.add(new Event(output.substring(6, timeIndex - 1), datetimeArr[0], datetimeArr[1]));
+                            }
+                            else {
+                                list.add(new Event(output.substring(6, timeIndex - 1), datetime, ""));
+                            }
+                            added = true;
+                        } catch (DateTimeException e) {
+                            System.out.println("Enter date in the following format: YYYY-MM-DD HH:mm(optional) " +
+                                    "(e.g. 2020-06-18 or 2020-07-20 18:00)");
+                        }
                     }
+                }
+
+                else {
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
 
                 if (added){
@@ -111,9 +144,6 @@ public class Duke {
                     System.out.println("Got it. I've added this task:");
                     System.out.println(list.get(list.size() - 1));
                     System.out.println("Now you have " + list.size() + " tasks in the list.");
-                }
-                else {
-                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
 
