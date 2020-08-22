@@ -10,7 +10,6 @@ import duke.ui.Ui;
 
 import java.util.Scanner;
 
-
 public class Duke {
     static final String filePath = "duke.txt";
     private Storage storage;

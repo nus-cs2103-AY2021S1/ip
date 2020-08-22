@@ -95,7 +95,7 @@ public class Storage {
                         state = "1";
                     }
                     fileWriter.write("E" + breaker + state + breaker + event.getDescription()
-                            + breaker + event.getStart() + "\n");
+                            + breaker + event.getStartTime() + "\n");
                 }
             }
             fileWriter.close();

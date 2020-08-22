@@ -5,22 +5,22 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Events extends Task {
-    private LocalDateTime start;
+    private LocalDateTime startTime;
 
     public Events(String description, LocalDateTime startTime) {
         super(description);
-        this.start = startTime;
+        this.startTime = startTime;
     }
 
-    public LocalDateTime getStart() {
-        return start;
+    public LocalDateTime getStartTime() {
+        return startTime;
     }
 
     public LocalDate getDate() {
-        return start.toLocalDate();
+        return startTime.toLocalDate();
     }
 
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.start.format(DateTimeFormatter.ofPattern("MMM d yyyy HH : mm")) + ")";
+        return "[E]" + super.toString() + " (at: " + this.startTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH : mm")) + ")";
     }
 }

@@ -9,8 +9,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Parser {
-    public Parser() {
-    }
 
     public static EnumCommand parseCommand(String instruction) throws DukeException {
         Integer indexOfSplit = instruction.indexOf(' ');
