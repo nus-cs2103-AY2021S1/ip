@@ -12,7 +12,7 @@ public class Event extends Task {
 
     public Event(String description, String at, boolean isDone) {
         super(description, isDone);
-        this.at = at;
+        this.at = LocalDateTime.parse(at);
     }
 
     public String formatStyling() {

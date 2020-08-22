@@ -7,15 +7,17 @@ toDo task 2
 deadline
 deadline task 2
 deadline finish this project /by today 2:00am
+deadline finish this project /by 2020-08-23 0400
+deadline finish this project /by 2020-08-23
 deadline finish this project2 /at today 2:01am
 done 0
 done 5
 done 1
-deadline finish this project /by today 4:00am
 event
 event task 4
 event project meeting /at Mon 2-4pm
-event project meeting /at Tues 2-4pm
+event finish this project /at 2020-08-23 0400
+event finish this project /at 2020-08-23
 event project meeting /by Wednesday 3-4pm
 list
 delete 5
