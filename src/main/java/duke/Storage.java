@@ -8,6 +8,7 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -92,7 +93,7 @@ public class Storage {
 
     public void writeToFile() throws IOException {
         String fileData = String.join("\n", this.serialisedTasks);
-        Files.writeString(filePath, fileData, StandardOpenOption.WRITE,
+        Files.writeString(filePath, fileData, StandardCharsets.UTF_8, StandardOpenOption.WRITE,
                 StandardOpenOption.TRUNCATE_EXISTING);
     }
 

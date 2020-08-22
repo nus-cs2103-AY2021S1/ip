@@ -15,7 +15,7 @@ public abstract class Task implements Serialisable {
     }
 
     public String getStatusIcon() {
-        return (this.isDone ? "\u2713" : "\u2718"); // return tick or X symbols
+        return (this.isDone ? "✓" : "✘");
     }
 
     public void markAsDone() {
