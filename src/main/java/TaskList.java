@@ -41,8 +41,13 @@ public class TaskList {
             case "deadline": {
                 if (next.contains("/by ")) {
                     String[] ls = next.split(" /by ");
-                    toAdd = new Deadline(ls[0], Parser.parseDateTime(ls[1]));
-                    storage.add(toAdd);
+                    String date = Parser.parseDateTime(ls[1]);
+                    if (date.contains(ui.getBorder())) {
+                        System.out.println(date);
+                    } else {
+                        toAdd = new Deadline(ls[0], date);
+                        storage.add(toAdd);
+                    }
                 } else {
                     throw new DukeException("Sorry, please specify expected deadline after \"/by\".");
                 }
@@ -51,8 +56,13 @@ public class TaskList {
             case "event": {
                 if (next.contains("/at ")) {
                     String[] ls = next.split(" /at ");
-                    toAdd = new Event(ls[0], Parser.parseDateTime(ls[1]));
-                    storage.add(toAdd);
+                    String date = Parser.parseDateTime(ls[1]);
+                    if (date.contains(ui.getBorder())) {
+                        System.out.println(date);
+                    } else {
+                        toAdd = new Event(ls[0], date);
+                        storage.add(toAdd);
+                    }
                 } else {
                     throw new DukeException("Sorry, please specify event date after \"/at\".");
                 }
