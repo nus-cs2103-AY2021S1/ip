@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,6 +10,7 @@ public class Duke {
     private static final int DELETE_INDEX = 7;
     private static final int DONE_INDEX = 5;
     private static final int EVENT_INDEX = 6;
+    private static final int TASK_LIMIT = 100;
     private static final int TODO_INDEX = 5;
 
     private static final String BYE = "bye";
@@ -21,7 +23,7 @@ public class Duke {
 
     private static void botStart() {
         Scanner sc = new Scanner(System.in);
-        List<Task> taskStorage = new ArrayList<>(100);
+        List<Task> taskStorage = new ArrayList<>(TASK_LIMIT);
         int storageCount = 0;
         System.out.println("=========================================="
                 + "\nHi, my name is Duke."
@@ -88,6 +90,8 @@ public class Duke {
                                                     DEADLINE_INDEX, command.indexOf("/") - 1), date);
                                 } catch (StringIndexOutOfBoundsException e) {
                                     throw new DukeInvalidDateException(DEADLINE);
+                                } catch (DateTimeParseException e) {
+                                    throw new DukeInvalidDateException(DEADLINE);
                                 }
                             }
                         } else if (commandWordArray[0].equals(EVENT)) {
@@ -100,6 +104,8 @@ public class Duke {
                                             command.substring(
                                                     EVENT_INDEX, command.indexOf("/") - 1), date);
                                 } catch (StringIndexOutOfBoundsException e) {
+                                    throw new DukeInvalidDateException(EVENT);
+                                } catch (DateTimeParseException e) {
                                     throw new DukeInvalidDateException(EVENT);
                                 }
                             }
