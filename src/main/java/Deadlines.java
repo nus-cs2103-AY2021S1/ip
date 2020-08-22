@@ -50,7 +50,8 @@ public class Deadlines extends Task {
     public String parseToSaveFormat() {
         String res = "";
         String isDoneStr = this.done ? "1" : "0";
-        res = "E - " + isDoneStr + " - " + this.task + " - " + this.date;
+        String dateSaveFormatStr = Parser.parseDateToSaveFormat(this.date);
+        res = "D - " + isDoneStr + " - " + this.task + " - " + dateSaveFormatStr + " " + this.time;
         return res;
     }
 

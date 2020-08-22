@@ -123,6 +123,17 @@ public class Parser {
         }
     }
 
+    public static String parseDateToSaveFormat(LocalDate date) {
+        int day = date.getDayOfMonth();
+        int month = date.getMonthValue();
+        String monthStr = Integer.toString(month);
+        int year = date.getYear();
+        if (month < 10) {
+            monthStr = "0" + monthStr;
+        }
+        return day + "/" + monthStr + "/" + year;
+    }
+
     public static String[] splitTaskAndDate(String task) throws DukeException {
         try {
             // date = "at 2/12/2019 1800"

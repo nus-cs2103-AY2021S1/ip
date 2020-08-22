@@ -1,6 +1,6 @@
 T - 1 - read book
-D - 0 - return book - 6/06/2020 0800
+D - 0 - return book - 6/06/2020 800
 E - 0 - project meeting - 6/08/2020 2130
 T - 1 - join sports club
 T - 0 - throw rubbish
-E - 0 - halloween party - 22/08/2020 2000
+E - 0 - halloween party - 22/10/2020 2000

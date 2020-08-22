@@ -8,50 +8,16 @@ import java.util.Scanner;
 import java.io.IOException;
 
 public class Storage {
-    private List<Task> list;
     private static String FILE_PATH = "src/main/data/input.txt";
+    private String filePath;
 
-    public Storage() {
-        this.list = new ArrayList<>();
+    public Storage(String filePath) {
+        this.filePath = filePath;
     }
 
-    public Storage(List<Task> taskArr) {
-        this.list = taskArr;
-    }
-
-    public void addItem(Task item) {
+    public void printFileContents() {
         try {
-            Storage.appendToFile(item);
-            this.list.add(item);
-        } catch (IOException e) {
-            System.out.println("Sorry! The task failed to save. Please try again.");
-        }
-    }
-
-    public int size() {
-        return this.list.size();
-    }
-
-    public void setDone(int index) {
-        Task task = this.list.get(index);
-        task.setDone(true);
-    }
-
-    public Task getItem(int index) {
-        return this.list.get(index);
-    }
-
-    public List getList() {
-        return this.list;
-    }
-
-    public Task remove(int index) {
-        return this.list.remove(index);
-    };
-
-    public static void printFileContents() {
-        try {
-            File f = new File(FILE_PATH); // create a File for the given file path
+            File f = new File(this.filePath); // create a File for the given file path
             Scanner s = new Scanner(f); // create a Scanner using the File as the source
             while (s.hasNext()) {
                 System.out.println(s.nextLine());
@@ -61,9 +27,9 @@ public class Storage {
         }
     }
 
-    public static List<Task> parseFileContents() {
+    public List<Task> load() throws DukeException{
         try{
-            File f = new File(FILE_PATH);
+            File f = new File(this.filePath);
             Scanner s = new Scanner(f);
             List<Task> taskArr = new ArrayList<>();
             while (s.hasNext()) {
@@ -74,9 +40,7 @@ public class Storage {
             }
             return taskArr;
         } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-            System.exit(0);
-            return null;
+            throw new DukeException("File failed to load. Initializing new File...");
         }
     }
 
@@ -84,10 +48,15 @@ public class Storage {
         return task.parseToSaveFormat();
     }
 
-    public static void appendToFile(Task task) throws IOException {
-        String textToAppend = parseTaskToString(task);
+    public static void saveListToFile(TaskList taskList) throws IOException {
+        FileWriter fileWriter = new FileWriter((FILE_PATH));
+        String input = "";
         FileWriter fw = new FileWriter(FILE_PATH, true); // create a FileWriter in append mode
-        fw.write("\n" + textToAppend);
+        for (int i = 0; i < taskList.getList().size(); i++) {
+            List<Task> list = taskList.getList();
+            input += parseTaskToString(list.get(i)) + "\n";
+        }
+        fw.write(input);
         fw.close();
     }
 

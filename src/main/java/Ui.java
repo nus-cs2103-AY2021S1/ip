@@ -1,19 +1,24 @@
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
-    private Storage storage;
+    private TaskList taskList;
     private Scanner scanner = new Scanner(System.in);
 
-    private Ui(Storage storage) {
-        this.storage = storage;
+    private Ui(TaskList taskList) {
+        this.taskList = taskList;
     }
 
-    private void repeat() {
+    public Ui() {
+        this.taskList = null;
+    }
+
+    private void reply() {
         Ui.sectionize();
         System.out.println("\tGot it. I've added this task: ");
-        System.out.println("\t\t" + this.storage.getList().get(this.storage.size() - 1).toString());
-        System.out.println("\tNow you have " + this.storage.size() + " tasks in the list.");
+        System.out.println("\t\t" + this.taskList.getList().get(this.taskList.size() - 1).toString());
+        System.out.println("\tNow you have " + this.taskList.size() + " tasks in the list.");
         Ui.sectionize();
     }
 
@@ -21,34 +26,39 @@ public class Ui {
         Ui.sectionize();
         System.out.println("\tHere are the tasks in your list:");
         int counter = 1;
-        for (int i = 0; i < this.storage.size(); i++) {
-            System.out.println("\t" + counter + "." + this.storage.getItem(i).toString());
+        for (int i = 0; i < this.taskList.size(); i++) {
+            System.out.println("\t" + counter + "." + this.taskList.getItem(i).toString());
             counter++;
         }
         Ui.sectionize();
     }
 
     private void sayBye() {
-        Ui.sectionize();
-        System.out.println("\tBye. Hope to see you again soon!");
-        Ui.sectionize();
+        try {
+            Storage.saveListToFile(taskList);
+            Ui.sectionize();
+            System.out.println("\tBye. Hope to see you again soon!");
+            Ui.sectionize();
+        } catch (IOException e) {
+            System.out.println("Sorry! The file failed to save. Please try again.");
+        }
     }
 
     private void markDone(int index) {
-        this.storage.setDone(index);
+        this.taskList.setDone(index);
         Ui.sectionize();
         System.out.println("\tNice! I've marked this task as done: ");
-        System.out.println("\t" + this.storage.getItem(index).toString());
+        System.out.println("\t" + this.taskList.getItem(index).toString());
         Ui.sectionize();
     }
 
     private void remove(int index) {
         try {
-            Task task = this.storage.remove(index);
+            Task task = this.taskList.remove(index);
             Ui.sectionize();
             System.out.println("\tNoted. I've removed this task: ");
             System.out.println("\t\t" + task.toString());
-            System.out.println("\tNow you have " + this.storage.size() + " tasks in the list.");
+            System.out.println("\tNow you have " + this.taskList.size() + " tasks in the list.");
             Ui.sectionize();
         } catch (IndexOutOfBoundsException e) {
             Ui.sectionize();
@@ -57,7 +67,7 @@ public class Ui {
         }
     }
 
-    private void intro() {
+    public void showWelcome() {
         System.out.println("Hello! I'm DukeBot");
         System.out.println("What can I do for you?");
     }
@@ -70,15 +80,20 @@ public class Ui {
     }
 
     public static void initialize() {
-        Ui ui = new Ui(new Storage());
-        ui.intro();
+        Ui ui = new Ui(new TaskList());
+        ui.showWelcome();
         ui.listen();
     }
 
-    public static void initialize(List<Task> taskArr) {
-        Ui ui = new Ui(new Storage(taskArr));
-        ui.intro();
+    public static void initialize(TaskList taskList) {
+        Ui ui = new Ui(taskList);
+        ui.showWelcome();
         ui.listen();
+    }
+
+    public void showLoadingError() {
+        System.out.println("File failed to load. Initializing new File...");
+        initialize();
     }
 
     private static void exit() {
@@ -112,23 +127,23 @@ public class Ui {
                 //System.out.println(task);
                 switch (taskType) {
                     case ("todo"):
-                        storage.addItem(new ToDos(task));
-                        this.repeat();
+                        taskList.addItem(new ToDos(task));
+                        this.reply();
                         break;
                     case ("deadline"):
                         // date = 'by Sunday'
                         taskAndDateArr = Parser.splitTaskAndDate(task);
                         task = taskAndDateArr[0];
                         date = taskAndDateArr[1];
-                        storage.addItem(new Deadlines(task, date));
-                        this.repeat();
+                        taskList.addItem(new Deadlines(task, date));
+                        this.reply();
                         break;
                     case ("event"):
                         taskAndDateArr = Parser.splitTaskAndDate(task);
                         task = taskAndDateArr[0];
                         date = taskAndDateArr[1];
-                        storage.addItem(new Events(task, date));
-                        this.repeat();
+                        taskList.addItem(new Events(task, date));
+                        this.reply();
                         break;
                     default:
                         throw new DukeException(Ui.errorMessage());
