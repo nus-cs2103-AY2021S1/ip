@@ -1,14 +1,16 @@
+package duke.task;
+
 import java.util.List;
 import java.util.ArrayList;
 
 public class TaskList {
     private List<Task> tasks;
 
-    TaskList() {
+    public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
-    TaskList(List<Task> tasks) {
+    public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 

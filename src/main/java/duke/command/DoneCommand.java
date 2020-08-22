@@ -1,7 +1,15 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Ui;
+import duke.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+
 public class DoneCommand extends Command {
     int taskId;
 
-    DoneCommand(int taskId) {
+    public DoneCommand(int taskId) {
         this.taskId = taskId;
     }
 

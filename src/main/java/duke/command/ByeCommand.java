@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Ui;
+import duke.Storage;
+import duke.task.TaskList;
+
 public class ByeCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

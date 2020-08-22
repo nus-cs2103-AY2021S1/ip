@@ -1,5 +1,9 @@
+package duke;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import duke.task.TaskList;
+import duke.command.Command;
 
 public class Duke {
     private static final Path filePath = Paths.get(".", "data", "duke.txt");

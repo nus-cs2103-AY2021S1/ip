@@ -1,7 +1,15 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Ui;
+import duke.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+
 public class DeleteCommand extends Command {
     int taskId;
 
-    DeleteCommand(int taskId) {
+    public DeleteCommand(int taskId) {
         this.taskId = taskId;
     }
 

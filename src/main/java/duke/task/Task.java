@@ -1,4 +1,6 @@
-abstract class Task implements Serialisable {
+package duke.task;
+
+public abstract class Task implements Serialisable {
     private String description;
     private boolean isDone;
 
