@@ -1,8 +1,9 @@
-import javax.imageio.IIOException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -21,10 +22,10 @@ public class Dobby {
             + (Commands.LIST).getUsage()
             + (Commands.DONE).getUsage()
             + (Commands.DELETE).getUsage()
-            + (Commands.BYE).getUsage();
+            + (Commands.BYE).getUsage()
+            + (Commands.SCHEDULED).getUsage();
 
     public static void main(String[] args) {
-
         reply("\n    Hello! I'm Dobby" + ALL_COMMANDS + "\n    How can I help you?\n    ");
         Scanner scanner = new Scanner(System.in);
         readFile();
@@ -40,7 +41,6 @@ public class Dobby {
                 System.exit(0);
             }
         }
-
     }
 
     private static void readFile () {
@@ -119,11 +119,16 @@ public class Dobby {
                 text = text.substring(9).trim();
                 if (text.indexOf("/by") <= 1) { // empty description or /by missing
                     throw new DobbyException("\n    Incorrect usage of command. Description cannot be empty. Please try again."
-                            + (Commands.DEADLINE).getUsage()  + "\n    ");
+                            + (Commands.DEADLINE).getUsage() + "\n    ");
                 }
                 by = text.substring(text.indexOf("/by") + 4).trim();
                 text = text.substring(0, text.indexOf("/by") - 1).trim();
                 Deadline deadline = new Deadline(text, by);
+                if (by.substring(1 + by.lastIndexOf(' ')).length() > 4) {
+                    throw new DobbyException("\n    Incorrect usage of command." +
+                            "\n    Details of time should be in 24hr format with only 4 digits. Please try again."
+                            + (Commands.DEADLINE).getUsage() + "\n    ");
+                }
                 tasks.add(deadline);
                 message = "\n    Great! I've added the following task:\n      " + deadline.getDescription() +
                         String.format("\n    Now you have %d tasks in the list.\n    ", tasks.size());
@@ -135,6 +140,9 @@ public class Dobby {
                     throw new DobbyException("\n    Incorrect usage of command. Deadline details cannot be empty. Please try again."
                             + (Commands.DEADLINE).getUsage()  + "\n    ");
                 }
+            } catch (DateTimeParseException e) {
+                throw new DobbyException("\n    Incorrect usage of command. The format of the date in incorrect. Please try again."
+                        + (Commands.DEADLINE).getUsage()  + "\n    ");
             } catch (DobbyException e) { // empty description or /by missing
                 return e.getMessage();
             }
@@ -149,6 +157,11 @@ public class Dobby {
                 at = text.substring(text.indexOf("/at") + 4);
                 text = text.substring(0, text.indexOf("/at") - 1);
                 Event event = new Event(text, at);
+                if (at.substring(1 + at.lastIndexOf(' ')).length() > 4) {
+                    throw new DobbyException("\n    Incorrect usage of command." +
+                            "\n    Details of time should be in 24hr format with only 4 digits. Please try again."
+                            + (Commands.EVENT).getUsage()  + "\n    ");
+                }
                 tasks.add(event);
                 message = "\n    Great! I've added the following task:\n      " + event.getDescription() +
                         String.format("\n    Now you have %d tasks in the list.\n    ", tasks.size());
@@ -160,6 +173,9 @@ public class Dobby {
                     throw new DobbyException("\n    Incorrect usage of command. Schedule details cannot be empty. Please try again."
                             + (Commands.EVENT).getUsage()  + "\n    ");
                 }
+            } catch (DateTimeParseException e) {
+                throw new DobbyException("\n    Incorrect usage of command. The format of the date in incorrect. Please try again."
+                        + (Commands.EVENT).getUsage()  + "\n    ");
             } catch (DobbyException e) { // empty description or /at missing
                 return e.getMessage();
             }
@@ -204,6 +220,30 @@ public class Dobby {
             } catch (Exception e) { // missing number after done
                 throw new DobbyException("\n    Incorrect usage of command. Please enter a task number after delete."
                         + (Commands.DELETE).getUsage() + "\n    ");
+            }
+        } else if (text.startsWith("scheduled")) {
+            try {
+                String dt = text.substring(text.indexOf(' ') + 1);
+                String day = dt.substring(0, dt.indexOf('/'));
+                String month = dt.substring(dt.indexOf('/') + 1, dt.lastIndexOf('/'));
+                String year = dt.substring(dt.lastIndexOf('/') + 1);
+                LocalDate parsedDate = LocalDate.parse(year + "-" + month + "-" + day);
+                message = "\n    ";
+                int counter = 0;
+                for (Task task: tasks) {
+                    if (task instanceof TimedTask) {
+                        TimedTask timedTask = (TimedTask)task;
+                        if (parsedDate.equals(timedTask.getDate())) {
+                            message = message + String.format("%d. %s\n    ", ++counter, timedTask.getDescription());
+                        }
+                    }
+                }
+            } catch (DateTimeParseException e) {
+                throw new DobbyException("\n    Incorrect usage of command. The format of the date in incorrect. Please try again."
+                        + (Commands.SCHEDULED).getUsage()  + "\n    ");
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DobbyException("\n    Incorrect usage of command. The format of the date in incorrect. Please try again."
+                        + (Commands.SCHEDULED).getUsage() + "\n    ");
             }
         } else { // unexpected input
             message =  "\n    Sorry that command is not supported. Please try again." + ALL_COMMANDS + "\n    ";
