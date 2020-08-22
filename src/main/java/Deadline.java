@@ -10,7 +10,7 @@ public class Deadline extends Task {
 
     Deadline(String description, int id, String dueDateTime) {
         super(description, id);
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d/M/yyyy");
         DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HHmm");
         String[] dateTime = dueDateTime.split(" ");
         this.connector = dateTime[0];

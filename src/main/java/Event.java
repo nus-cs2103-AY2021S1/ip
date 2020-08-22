@@ -10,7 +10,7 @@ public class Event extends Task {
 
     Event(String description, int id, String duration) {
         super(description, id);
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d/M/yyyy");
         DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HHmm");
         String[] dateTime = duration.split(" ");
         this.connector = dateTime[0];
