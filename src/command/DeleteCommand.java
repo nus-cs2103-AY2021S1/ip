@@ -3,9 +3,11 @@ package command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+
 import exception.DukeException;
 import exception.EmptyDeleteException;
 import exception.NoSuchTaskException;
+
 import task.Task;
 
 import java.io.IOException;
@@ -36,6 +38,7 @@ public class DeleteCommand extends Command {
             String oneBasedIndex = splitCommand[1];
             int zeroBasedIndex = Integer.parseInt(oneBasedIndex) - 1;
             Task toDelete = tasks.remove(zeroBasedIndex);
+
             ui.sayDeletedTask(toDelete, tasks.size());
             storage.save(tasks);
         } catch (IOException e) {

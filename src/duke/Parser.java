@@ -1,19 +1,26 @@
 package duke;
 
-import command.*;
-import exception.DukeException;
+import command.AddDeadlineCommand;
+import command.AddEventCommand;
+import command.AddToDoCommand;
+import command.Command;
+import command.DeleteCommand;
+import command.ExitCommand;
+import command.MarkDoneCommand;
+import command.TaskListCommand;
+import command.UnknownCommand;
 
 /**
  * Represents a <code>Parser</code> object that deals with making sense of the user command.
  */
 public class Parser {
-    private final static String EXIT_COMMAND = "bye";
-    private final static String MARK_DONE_COMMAND = "done";
-    private final static String DISPLAY_TASKS_COMMAND = "list";
-    private final static String TODO_COMMAND = "todo";
-    private final static String DEADLINE_COMMAND = "deadline";
-    private final static String EVENT_COMMAND = "event";
-    private final static String DELETE_COMMAND = "delete";
+    private final static String COMMAND_EXIT = "bye";
+    private final static String COMMAND_MARK_DONE = "done";
+    private final static String COMMAND_DISPLAY_TASKS = "list";
+    private final static String COMMAND_ADD_TODO = "todo";
+    private final static String COMMAND_ADD_DEADLINE = "deadline";
+    private final static String COMMAND_ADD_EVENT = "event";
+    private final static String COMMAND_DELETE_TASK = "delete";
 
     /**
      * Returns the appropriate <code>Command</code> object according to the <code>fullCommand</code>.
@@ -23,22 +30,22 @@ public class Parser {
     public static Command parse(String fullCommand) {
         String[] splitCommand = fullCommand.split(" ", 2);
         switch (splitCommand[0]) {
-            case MARK_DONE_COMMAND:
-                return new MarkDoneCommand(splitCommand);
-            case TODO_COMMAND:
-                return new AddToDoCommand(splitCommand);
-            case DEADLINE_COMMAND:
-                return new AddDeadlineCommand(splitCommand);
-            case EVENT_COMMAND:
-                return new AddEventCommand(splitCommand);
-            case DELETE_COMMAND:
-                return new DeleteCommand(splitCommand);
-            case DISPLAY_TASKS_COMMAND:
-                return new TaskListCommand(splitCommand);
-            case EXIT_COMMAND:
-                return new ExitCommand(splitCommand);
-            default:
-                return new UnknownCommand(splitCommand);
+        case COMMAND_MARK_DONE:
+            return new MarkDoneCommand(splitCommand);
+        case COMMAND_ADD_TODO:
+            return new AddToDoCommand(splitCommand);
+        case COMMAND_ADD_DEADLINE:
+            return new AddDeadlineCommand(splitCommand);
+        case COMMAND_ADD_EVENT:
+            return new AddEventCommand(splitCommand);
+        case COMMAND_DELETE_TASK:
+            return new DeleteCommand(splitCommand);
+        case COMMAND_DISPLAY_TASKS:
+            return new TaskListCommand(splitCommand);
+        case COMMAND_EXIT:
+            return new ExitCommand(splitCommand);
+        default:
+            return new UnknownCommand(splitCommand);
         }
     }
 }

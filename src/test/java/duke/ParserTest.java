@@ -1,6 +1,14 @@
 package duke;
 
-import command.*;
+import command.AddDeadlineCommand;
+import command.AddEventCommand;
+import command.AddToDoCommand;
+import command.DeleteCommand;
+import command.ExitCommand;
+import command.MarkDoneCommand;
+import command.TaskListCommand;
+import command.UnknownCommand;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

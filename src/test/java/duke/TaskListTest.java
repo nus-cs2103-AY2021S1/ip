@@ -1,7 +1,7 @@
 package duke;
 
 import exception.NoSuchTaskException;
-import org.junit.jupiter.api.Test;
+
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -9,8 +9,11 @@ import task.ToDo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -21,8 +24,10 @@ public class TaskListTest {
         List<Task> list = new ArrayList<>();
         ToDo toDo = new ToDo("watch TV");
         list.add(toDo);
-        list.add(new Deadline("homework", LocalDateTime.parse("16/02/2019 1900", DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
-        list.add(new Event("event", LocalDateTime.parse("16/02/2019 1900", DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
+        list.add(new Deadline("homework", LocalDateTime.parse("16/02/2019 1900",
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
+        list.add(new Event("event", LocalDateTime.parse("16/02/2019 1900",
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
         TaskList tasks = new TaskList(list);
         try {
             assertEquals(tasks.get(0), toDo);
@@ -35,8 +40,10 @@ public class TaskListTest {
     public void get_exceptionThrown() {
         List<Task> list = new ArrayList<>();
         list.add(new ToDo("watch TV"));
-        list.add(new Deadline("homework", LocalDateTime.parse("16/02/2019 1900", DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
-        list.add(new Event("event", LocalDateTime.parse("16/02/2019 1900", DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
+        list.add(new Deadline("homework", LocalDateTime.parse("16/02/2019 1900",
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
+        list.add(new Event("event", LocalDateTime.parse("16/02/2019 1900",
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
         TaskList tasks = new TaskList(list);
         try {
             assertEquals(tasks.get(10), null);
@@ -51,8 +58,10 @@ public class TaskListTest {
         List<Task> list = new ArrayList<>();
         ToDo toDo = new ToDo("watch TV");
         list.add(toDo);
-        list.add(new Deadline("homework", LocalDateTime.parse("16/02/2019 1900", DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
-        list.add(new Event("event", LocalDateTime.parse("16/02/2019 1900", DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
+        list.add(new Deadline("homework", LocalDateTime.parse("16/02/2019 1900",
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
+        list.add(new Event("event", LocalDateTime.parse("16/02/2019 1900",
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
         TaskList tasks = new TaskList(list);
         assertEquals(tasks.size(), 3);
     }
@@ -62,8 +71,10 @@ public class TaskListTest {
         List<Task> list = new ArrayList<>();
         ToDo toDo = new ToDo("watch TV");
         list.add(toDo);
-        list.add(new Deadline("homework", LocalDateTime.parse("16/02/2019 1900", DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
-        list.add(new Event("event", LocalDateTime.parse("16/02/2019 1900", DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
+        list.add(new Deadline("homework", LocalDateTime.parse("16/02/2019 1900",
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
+        list.add(new Event("event", LocalDateTime.parse("16/02/2019 1900",
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
         TaskList tasks = new TaskList(list);
         assertEquals(tasks.all(), list);
     }
@@ -73,8 +84,10 @@ public class TaskListTest {
         List<Task> list = new ArrayList<>();
         ToDo toDo = new ToDo("watch TV");
         list.add(toDo);
-        list.add(new Deadline("homework", LocalDateTime.parse("16/02/2019 1900", DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
-        list.add(new Event("event", LocalDateTime.parse("16/02/2019 1900", DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
+        list.add(new Deadline("homework", LocalDateTime.parse("16/02/2019 1900",
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
+        list.add(new Event("event", LocalDateTime.parse("16/02/2019 1900",
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
         TaskList tasks = new TaskList(list);
         try {
             assertEquals(tasks.remove(0), toDo);
@@ -89,8 +102,10 @@ public class TaskListTest {
         List<Task> list = new ArrayList<>();
         ToDo toDo = new ToDo("watch TV");
         list.add(toDo);
-        list.add(new Deadline("homework", LocalDateTime.parse("16/02/2019 1900", DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
-        list.add(new Event("event", LocalDateTime.parse("16/02/2019 1900", DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
+        list.add(new Deadline("homework", LocalDateTime.parse("16/02/2019 1900",
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
+        list.add(new Event("event", LocalDateTime.parse("16/02/2019 1900",
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))));
         TaskList tasks = new TaskList(list);
         try {
             assertEquals(tasks.remove(100), toDo);
