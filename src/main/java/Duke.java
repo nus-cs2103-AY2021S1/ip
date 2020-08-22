@@ -28,7 +28,6 @@ public class Duke {
 
         String timeDescription = "";
         for (int i = 1; i < timeTemp.length; i++) {
-            // timeTemp[0] == by/at depending on deadline/event
             if (i == timeTemp.length - 1) {
                 timeDescription += timeTemp[i];
             } else {
