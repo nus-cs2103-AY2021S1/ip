@@ -22,10 +22,10 @@ public class EventTaskTest {
         try {
             EventTask task = new EventTask("test", "2020-08-22");
             String[] str = task.getData().split("\\|");
-            assertEquals(str[0], "E");
-            assertEquals(str[1], "0");
-            assertEquals(str[2], "test");
-            assertEquals(str[3], "2020-08-22");
+            assertEquals("E", str[0]);
+            assertEquals("0", str[1]);
+            assertEquals("test", str[2]);
+            assertEquals("2020-08-22", str[3]);
         } catch (DukeException e) {
             fail();
         }
@@ -36,10 +36,10 @@ public class EventTaskTest {
         try {
             EventTask task = new EventTask("test", "2020-08-22").markAsDone();
             String[] str = task.getData().split("\\|");
-            assertEquals(str[0], "E");
-            assertEquals(str[1], "1");
-            assertEquals(str[2], "test");
-            assertEquals(str[3], "2020-08-22");
+            assertEquals("E", str[0]);
+            assertEquals("1", str[1]);
+            assertEquals("test", str[2]);
+            assertEquals("2020-08-22", str[3]);
         } catch (DukeException e) {
             fail();
         }
@@ -50,7 +50,7 @@ public class EventTaskTest {
         try {
             EventTask task = new EventTask("test", "2020-08-22");
             String str = task.toString();
-            assertEquals(str, "[E][\u2718] test (at: Aug 22 2020)");
+            assertEquals("[E][\u2718] test (at: Aug 22 2020)", str);
         } catch (DukeException e) {
             fail();
         }
@@ -61,7 +61,7 @@ public class EventTaskTest {
         try {
             EventTask task = new EventTask("test", "2020-08-22").markAsDone();
             String str = task.toString();
-            assertEquals(str, "[E][\u2713] test (at: Aug 22 2020)");
+            assertEquals("[E][\u2713] test (at: Aug 22 2020)", str);
         } catch (DukeException e) {
             fail();
         }

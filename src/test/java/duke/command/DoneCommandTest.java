@@ -8,6 +8,6 @@ public class DoneCommandTest {
     @Test
     public void isExit_doneCommand_false() {
         DoneCommand doneCommand = new DoneCommand(1);
-        assertEquals(doneCommand.isExit(), false);
+        assertEquals(false, doneCommand.isExit());
     }
 }

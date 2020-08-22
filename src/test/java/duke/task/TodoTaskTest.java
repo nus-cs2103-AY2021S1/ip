@@ -9,31 +9,31 @@ public class TodoTaskTest {
     public void getData_todoTaskNotDone_correctOutput() {
         TodoTask task = new TodoTask("test");
         String[] str = task.getData().split("\\|");
-        assertEquals(str[0], "T");
-        assertEquals(str[1], "0");
-        assertEquals(str[2], "test");
+        assertEquals("T", str[0]);
+        assertEquals("0", str[1]);
+        assertEquals("test", str[2]);
     }
 
     @Test
     public void getData_todoTaskDone_correctOutput() {
         TodoTask task = new TodoTask("test").markAsDone();
         String[] str = task.getData().split("\\|");
-        assertEquals(str[0], "T");
-        assertEquals(str[1], "1");
-        assertEquals(str[2], "test");
+        assertEquals("T", str[0]);
+        assertEquals("1", str[1]);
+        assertEquals("test", str[2]);
     }
 
     @Test
     public void toString_todoTaskNotDone_correctOutput() {
         TodoTask task = new TodoTask("test");
         String str = task.toString();
-        assertEquals(str, "[T][\u2718] test");
+        assertEquals("[T][\u2718] test", str);
     }
 
     @Test
     public void toString_todoTaskDone_correctOutput() {
         TodoTask task = new TodoTask("test").markAsDone();
         String str = task.toString();
-        assertEquals(str, "[T][\u2713] test");
+        assertEquals("[T][\u2713] test", str);
     }
 }

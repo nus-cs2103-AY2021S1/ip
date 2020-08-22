@@ -10,7 +10,7 @@ public class DukeIOExceptionTest {
         try {
             throw new DukeIOException("test");
         } catch (DukeException e) {
-            assertEquals(e.getPrettyErrorMsg(), "[IO ERROR]: test");
+            assertEquals("[IO ERROR]: test", e.getPrettyErrorMsg());
         }
     }
 }

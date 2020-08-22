@@ -8,6 +8,6 @@ public class DeadlineCommandTest {
     @Test
     public void isExit_deadlineCommand_false() {
         DeadlineCommand deadlineCommand = new DeadlineCommand("test", "2020-08-22");
-        assertEquals(deadlineCommand.isExit(), false);
+        assertEquals(false, deadlineCommand.isExit());
     }
 }

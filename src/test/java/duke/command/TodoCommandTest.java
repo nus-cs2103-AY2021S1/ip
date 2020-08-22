@@ -8,6 +8,6 @@ public class TodoCommandTest {
     @Test
     public void isExit_todoCommand_false() {
         TodoCommand todoCommand = new TodoCommand("test");
-        assertEquals(todoCommand.isExit(), false);
+        assertEquals(false, todoCommand.isExit());
     }
 }

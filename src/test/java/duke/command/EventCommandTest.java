@@ -8,6 +8,6 @@ public class EventCommandTest {
     @Test
     public void isExit_eventCommand_false() {
         EventCommand eventCommand = new EventCommand("test", "2020-08-22");
-        assertEquals(eventCommand.isExit(), false);
+        assertEquals(false, eventCommand.isExit());
     }
 }

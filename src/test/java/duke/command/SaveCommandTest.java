@@ -8,7 +8,7 @@ public class SaveCommandTest {
     @Test
     public void isExit_saveCommand_false() {
         SaveCommand saveCommand = new SaveCommand();
-        assertEquals(saveCommand.isExit(), false);
+        assertEquals(false, saveCommand.isExit());
     }
 
 }

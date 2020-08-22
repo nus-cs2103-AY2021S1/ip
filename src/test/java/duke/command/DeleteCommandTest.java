@@ -8,6 +8,6 @@ public class DeleteCommandTest {
     @Test
     public void isExit_deleteCommand_false() {
         DeleteCommand deleteCommand = new DeleteCommand(1);
-        assertEquals(deleteCommand.isExit(), false);
+        assertEquals(false, deleteCommand.isExit());
     }
 }

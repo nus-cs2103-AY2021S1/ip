@@ -22,10 +22,10 @@ public class DeadlineTaskTest {
         try {
             DeadlineTask task = new DeadlineTask("test", "2020-08-22");
             String[] str = task.getData().split("\\|");
-            assertEquals(str[0], "D");
-            assertEquals(str[1], "0");
-            assertEquals(str[2], "test");
-            assertEquals(str[3], "2020-08-22");
+            assertEquals("D", str[0]);
+            assertEquals("0", str[1]);
+            assertEquals("test", str[2]);
+            assertEquals("2020-08-22", str[3]);
         } catch (DukeException e) {
             fail();
         }
@@ -36,10 +36,10 @@ public class DeadlineTaskTest {
         try {
             DeadlineTask task = new DeadlineTask("test", "2020-08-22").markAsDone();
             String[] str = task.getData().split("\\|");
-            assertEquals(str[0], "D");
-            assertEquals(str[1], "1");
-            assertEquals(str[2], "test");
-            assertEquals(str[3], "2020-08-22");
+            assertEquals("D", str[0]);
+            assertEquals("1", str[1]);
+            assertEquals("test", str[2]);
+            assertEquals("2020-08-22", str[3]);
         } catch (DukeException e) {
             fail();
         }
@@ -50,7 +50,7 @@ public class DeadlineTaskTest {
         try {
             DeadlineTask task = new DeadlineTask("test", "2020-08-22");
             String str = task.toString();
-            assertEquals(str, "[D][\u2718] test (by: Aug 22 2020)");
+            assertEquals("[D][\u2718] test (by: Aug 22 2020)", str);
         } catch (DukeException e) {
             fail();
         }
@@ -61,7 +61,7 @@ public class DeadlineTaskTest {
         try {
             DeadlineTask task = new DeadlineTask("test", "2020-08-22").markAsDone();
             String str = task.toString();
-            assertEquals(str, "[D][\u2713] test (by: Aug 22 2020)");
+            assertEquals("[D][\u2713] test (by: Aug 22 2020)", str);
         } catch (DukeException e) {
             fail();
         }

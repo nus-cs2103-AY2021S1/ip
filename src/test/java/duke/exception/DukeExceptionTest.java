@@ -10,7 +10,7 @@ public class DukeExceptionTest {
         try {
             throw new DukeException("test");
         } catch (DukeException e) {
-            assertEquals(e.getPrettyErrorMsg(), "[ERROR]: test");
+            assertEquals("[ERROR]: test", e.getPrettyErrorMsg());
         }
     }
 }
