@@ -27,7 +27,7 @@ public class Parser {
     public static void parseInput(TaskList taskList, Storage storage) {
         Scanner scan = new Scanner(System.in);
         while (scan.hasNext()) {
-            String test = scan.next();
+            String test = scan.next().toLowerCase();
             if (ui.checkBye(test)) {
                 ui.exitLine();
                 break;
