@@ -150,4 +150,17 @@ public class EventTest {
             fail();
         }
     }
+
+    @Test
+    public void toStringTest() {
+        try {
+            Event e = new Event("Project meeting", "2020-09-03 11:30");
+            assertEquals("[E][\u2718] Project meeting (at: 11:30 AM   Sep 3 2020)", e.toString());
+
+            e.markAsDone();
+            assertEquals("[E][\u2713] Project meeting (at: 11:30 AM   Sep 3 2020)", e.toString());
+        } catch (Exception e) {
+            fail();
+        }
+    }
 }
