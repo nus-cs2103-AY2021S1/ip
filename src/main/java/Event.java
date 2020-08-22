@@ -5,6 +5,10 @@ public class Event extends Task {
         super(taskName, "E");
         this.eventDate = eventDate;
     }
+    
+    public String getEventDate() {
+        return this.eventDate;
+    }
 
     @Override
     public String toString() {
