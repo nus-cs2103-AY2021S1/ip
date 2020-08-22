@@ -79,6 +79,8 @@ public class Storage {
             throw new DukeException(">> Oh no! I can't find your file!");
         } catch (IOException e) {
             throw new DukeException(">> Oh no! The file couldn't be created for some reason!");
+        } catch (IllegalArgumentException e) {
+            throw new DukeException(">> Oh no! File format seems to be incorrect!");
         }
     }
 }

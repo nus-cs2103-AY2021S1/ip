@@ -13,7 +13,12 @@ src/main/resources/docs/
 *.iml
 bin/
 
+# Tests
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+src/test/.idea/
+src/test/out/
+
+# Local Data
 /text-ui-test/data/
 /data/

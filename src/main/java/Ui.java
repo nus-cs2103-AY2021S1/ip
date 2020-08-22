@@ -27,8 +27,8 @@ public class Ui {
         System.out.println(">> Please format your date in YYYY-MM-DD format!");
     }
 
-    public void descriptionError(Constants.TaskTypes type) {
-        System.out.println(">> Oh no!!! A " + type + " must have a description!");
+    public void incompleteInstructionError() {
+        System.out.println(">> This instruction is incomplete!");
     }
 
     public void conditionError(Constants.TaskTypes type) {

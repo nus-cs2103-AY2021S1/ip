@@ -18,14 +18,29 @@ public class Parser {
             case list:
                 return new ListCommand();
             case delete:
+                if (chunks.length < 2) {
+                    throw new DukeException(">> Oh no!!! Delete must have the index of the task you're deleting!");
+                }
                 return new DeleteCommand(chunks);
             case done:
+                if (chunks.length < 2) {
+                    throw new DukeException(">> Oh no!!! Done must have the index of the task you're completing!");
+                }
                 return new DoneCommand(chunks);
             case todo:
+                if (chunks.length < 2) {
+                    throw new DukeException(">> Oh no!!! A todo must have a description!");
+                }
                 return new AddTodoCommand(chunks);
             case deadline:
+                if (chunks.length < 2) {
+                    throw new DukeException(">> Oh no!!! A deadline must have a description and date!");
+                }
                 return new AddDeadlineCommand(chunks);
             case event:
+                if (chunks.length < 2) {
+                    throw new DukeException(">> Oh no!!! An event must have a description and date!");
+                }
                 return new AddEventCommand(chunks);
             default:
                 throw new DukeException(">> Oh no!!! I don't understand this input.");

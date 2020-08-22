@@ -7,13 +7,9 @@ public class AddTodoCommand extends Command {
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        if (instructions.length < 2) {
-            ui.descriptionError(Constants.TaskTypes.todo);
-        } else {
-            Task todo = new Todo(instructions[1]);
-            tasks.addTask(todo);
-            storage.save(tasks);
-        }
+        Task todo = new Todo(instructions[1]);
+        tasks.addTask(todo);
+        storage.save(tasks);
     }
 }
 

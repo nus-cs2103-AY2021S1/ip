@@ -10,10 +10,6 @@ public class AddEventCommand extends Command {
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        if (instructions.length < 2) {
-            ui.descriptionError(Constants.TaskTypes.event);
-            return;
-        }
         String[] eventInfo = instructions[1].split(" /at ", 2); // [name, date]
         if (eventInfo.length < 2) {
             ui.conditionError(Constants.TaskTypes.event);
