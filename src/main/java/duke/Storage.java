@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import duke.exception.DukeException;
+import duke.exception.CorruptedStorageException;
 
 import duke.task.Task;
 import duke.task.Deadline;
@@ -38,7 +38,7 @@ public class Storage {
         }
     }
 
-    public List<Task> loadTasks() throws DukeException {
+    public List<Task> loadTasks() throws CorruptedStorageException {
         List<Task> tasks = new ArrayList<>();
 
         for (String serialisedTask : this.serialisedTasks) {
@@ -46,7 +46,7 @@ public class Storage {
             String[] tokens = serialisedTask.split(" \\| ");
 
             if (tokens.length < 3) {
-                throw new DukeException("Storage is corrupted!");
+                throw new CorruptedStorageException("Some tasks are missing fields!");
             }
 
             String taskType = tokens[0];
@@ -60,7 +60,7 @@ public class Storage {
                     break;
                 case "D":
                     if (tokens.length < 4) {
-                        throw new DukeException("Storage is corrupted! Missing due date for Deadline");
+                        throw new CorruptedStorageException("Deadline task is missing due date!");
                     }
                     String by = tokens[3];
                     tasks.add(new Deadline(desc, by, isDone));
@@ -68,7 +68,7 @@ public class Storage {
                     break;
                 case "E":
                     if (tokens.length < 4) {
-                        throw new DukeException("Storage is corrupted! Missing date for Event");
+                        throw new CorruptedStorageException("Event task is missing date!");
                     }
                     String at = tokens[3];
                     tasks.add(new Event(desc, at, isDone));
@@ -85,33 +85,33 @@ public class Storage {
         Files.writeString(filePath, fileData, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
     }
 
-    public void saveNewTask(Task task) throws DukeException {
+    public void saveNewTask(Task task) throws CorruptedStorageException {
         this.serialisedTasks.add(task.serialise());
 
         try {
             this.writeToFile();
         } catch (IOException e) {
-            throw new DukeException("Error saving new task to storage!");
+            throw new CorruptedStorageException("Couldn't save new task to storage!");
         }
     }
 
-    public void updateExistingTask(int taskId, Task task) throws DukeException {
+    public void updateExistingTask(int taskId, Task task) throws CorruptedStorageException {
         this.serialisedTasks.set(taskId - 1, task.serialise());
 
         try {
             this.writeToFile();
         } catch (IOException e) {
-            throw new DukeException("Error saving updated task to storage!");
+            throw new CorruptedStorageException("Couldn't save new task to storage!");
         }
     }
 
-    public void deleteExistingTask(int taskId) throws DukeException {
+    public void deleteExistingTask(int taskId) throws CorruptedStorageException {
         this.serialisedTasks.remove(taskId - 1);
 
         try {
             this.writeToFile();
         } catch (IOException e) {
-            throw new DukeException("Error saving deleted task to storage!");
+            throw new CorruptedStorageException("Couldn't save new task to storage!");
         }
     }
 }
