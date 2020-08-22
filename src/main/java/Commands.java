@@ -5,7 +5,8 @@ public enum Commands {
     LIST("\n      list"),
     DONE("\n      done _task_number_"),
     DELETE("\n      delete _task_number_"),
-    BYE("\n      bye");
+    BYE("\n      bye"),
+    SCHEDULED("\n      scheduled dd/mm/yyyy");
 
     private String usage;
 

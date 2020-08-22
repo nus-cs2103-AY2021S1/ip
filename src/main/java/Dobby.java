@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -17,7 +18,8 @@ public class Dobby {
             + (Commands.LIST).getUsage()
             + (Commands.DONE).getUsage()
             + (Commands.DELETE).getUsage()
-            + (Commands.BYE).getUsage();
+            + (Commands.BYE).getUsage()
+            + (Commands.SCHEDULED).getUsage();
 
     public static void main(String[] args) {
 
@@ -160,6 +162,30 @@ public class Dobby {
             } catch (Exception e) { // missing number after done
                 throw new DobbyException("\n    Incorrect usage of command. Please enter a task number after delete."
                         + (Commands.DELETE).getUsage() + "\n    ");
+            }
+        } else if (text.startsWith("scheduled")) {
+            try {
+                String dt = text.substring(text.indexOf(' ') + 1);
+                String day = dt.substring(0, dt.indexOf('/'));
+                String month = dt.substring(dt.indexOf('/') + 1, dt.lastIndexOf('/'));
+                String year = dt.substring(dt.lastIndexOf('/') + 1);
+                LocalDate parsedDate = LocalDate.parse(year + "-" + month + "-" + day);
+                message = "\n    ";
+                int counter = 0;
+                for (Task task: tasks) {
+                    if (task instanceof TimedTask) {
+                        TimedTask timedTask = (TimedTask)task;
+                        if (parsedDate.equals(timedTask.getDate())) {
+                            message = message + String.format("%d. %s\n    ", ++counter, timedTask.getDescription());
+                        }
+                    }
+                }
+            } catch (DateTimeParseException e) {
+                throw new DobbyException("\n    Incorrect usage of command. The format of the date in incorrect. Please try again."
+                        + (Commands.SCHEDULED).getUsage()  + "\n    ");
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DobbyException("\n    Incorrect usage of command. The format of the date in incorrect. Please try again."
+                        + (Commands.SCHEDULED).getUsage() + "\n    ");
             }
         } else { // unexpected input
             message =  "\n    Sorry that command is not supported. Please try again." + ALL_COMMANDS + "\n    ";

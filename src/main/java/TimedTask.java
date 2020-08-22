@@ -27,6 +27,10 @@ public class TimedTask extends Task {
         return this.time;
     }
 
+    public LocalDate getDate() {
+        return this.date;
+    }
+
     private LocalDate parseDate (String dt) {
         LocalDate parsedDate;
         String day = dt.substring(0, dt.indexOf('/'));
