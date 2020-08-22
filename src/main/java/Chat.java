@@ -11,6 +11,13 @@ public class Chat {
                 "\t==================================\n";
     }
 
+    // Returns a printable error message box around the error String
+    public static String errorBox(String error){
+        return "-------- Error Encountered -------------------------------------\n" +
+                "\t " + error + "\n" +
+                "----------------------------------------------------------------\n";
+    }
+
     // Creates a chat box when item is added
     public static String addItemChatBox(String chatContent, int noOfItems){
         return "\t== King says =====================\n" +

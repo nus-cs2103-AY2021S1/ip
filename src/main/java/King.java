@@ -1,10 +1,81 @@
 package main.java;
-
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class King {
     private ArrayList<Task> items = new ArrayList<>();
+    private File listData;
+    private final String path = "data/king.txt";
+
+    King(){
+        File directory = new File("data");
+        if (!directory.exists()){
+            directory.mkdir();
+        }
+        try {
+            listData = new File(path);
+            listData.createNewFile();
+            initialise();
+        } catch (IOException e){
+            System.out.println(Chat.errorBox("Error occurred while loading asset."));
+        }
+    }
+    // method to load the asset into items
+    private void initialise(){
+        try{
+        FileReader input = new FileReader(listData.getAbsoluteFile());
+        Scanner scanner = new Scanner(input);
+        while (scanner.hasNextLine()){
+            String data[] = scanner.nextLine().split("@",4);
+                Task loadedItem;
+                switch (data[0]){
+                    case "T":
+                        loadedItem = new ToDo(data[2]);
+                        break;
+                    case "D":
+                        loadedItem = new Deadline(data[2],data[3]);
+                        break;
+                    default:
+                        loadedItem = new Event(data[2],data[3]);
+                }
+                if (data[1].equals(1)){
+                    loadedItem.markAsDone();
+                }
+                items.add(loadedItem);
+            }
+        input.close();
+        scanner.close();
+        } catch (IOException e){
+            System.out.println(Chat.errorBox("Error occurred while reading asset."));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(Chat.errorBox("Asset file is corrupted."));
+        }
+    }
+
+    // method to persist the items into asset
+    private void persistData(){
+        try {
+            BufferedWriter output = new BufferedWriter(new FileWriter(path));
+            for (Task task : items) {
+                String isLoaded = task.isDone() ? "1" : "0";
+                if (task.getClass().isAssignableFrom(ToDo.class)) {
+                    String s = "T@" + isLoaded + "@" + task.description;
+                    output.write(s);
+                } else if (task.getClass().isAssignableFrom(Event.class)){
+                    String s = "E@" + isLoaded + "@" + task.description + "@" + ((Event) task).time;
+                    output.write(s);
+                } else {
+                    String s = "D@" + isLoaded + "@" + task.description + "@" + ((Deadline) task).by;
+                    output.write(s);
+                }
+                output.newLine();
+            }
+            output.close();
+        } catch (IOException e){
+            System.out.println(Chat.errorBox("Error was encountered when saving list to asset."));
+        }
+    }
 
     // method generates reply based on the phrase given by the User
     private String generateReply(String phrase) throws KingException {
@@ -105,6 +176,7 @@ public class King {
         }
         System.out.print(Chat.chatBox("Bye. Hope to see you again soon!"));
         scanner.close();
+        persistData();
     }
 
     public static void main(String[] args) {
