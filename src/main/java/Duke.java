@@ -1,8 +1,19 @@
+/**
+ * Controls application.
+ */
+
 public class Duke {
+    /** Local task store */
     private final Storage storage;
+    /** List of tasks */
     private TaskList tasks;
+    /** Ui to interact with user */
     private final Ui ui;
 
+    /**
+     * Constructor for DeleteCommand.
+     * @param filepath Contains filepath of local data storage.
+     */
     public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
@@ -16,10 +27,17 @@ public class Duke {
         ui.greet();
     }
 
+    /**
+     * Initialises the program.
+     * @param args Unused.
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
 
+    /**
+     * Runs event loop to listen for user input, until the user invokes a ByeCommand.
+     */
     private void run() {
         while (true) {
             Parser parser = new Parser();

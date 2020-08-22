@@ -7,19 +7,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Handles storing Tasks locally and reading from locally stored Tasks.
+ */
+
 public class Storage {
+    /** Where the local save file is stored */
     private String filepath;
+    /** List of tasks to be saved */
     private List<Task> tasks;
 
+    /** Short form of Task types. */
     private enum TaskSymbols {
         SYMBOL_T, SYMBOL_E, SYMBOL_D
     }
 
+    /**
+     * Constructor for Storage.
+     * @param filepath Contains path of local storage file.
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Saves the input list of tasks into a local store.
+     * @param tasks List of tasks to be saved.
+     */
     public void save(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filepath);
@@ -32,6 +47,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads a list of tasks from a local store.
+     * @return List of tasks from the local store.
+     * @throws DukeException When file is not found.
+     */
     public List<Task> load() throws DukeException {
         String directoryErrorMsg = ">> Something went wrong creating the data directory!";
         try {
