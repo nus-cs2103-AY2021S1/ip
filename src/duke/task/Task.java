@@ -1,6 +1,4 @@
-
-
-package main.java;
+package duke.task;
 
 public abstract class Task {
 
