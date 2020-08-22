@@ -1,6 +1,7 @@
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
- Hello! I'm Yuki *Woof*
- What can I do for you? *Woof woof*
+ Woof! I am Yuki your assigned Task Manager!
+ I have just created a new file to store all your tasks!
+ So... What is my first assignment? *Woof woof*
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
 
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
@@ -62,7 +63,7 @@
 
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
  *WOOF* I have added:
-   [E][✘] meeting (Appear at: Monday 3-4pm)
+   [E][✘] meeting (APPEAR at: Monday 3-4pm)
  Now you have 3 tasks in the list. Keep going!!
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
 
@@ -70,7 +71,7 @@
  Here are the tasks in your list *Woof*:
    1.[T][✓] buy Books
    2.[D][✘] complete project (FINISH by: Monday)
-   3.[E][✘] meeting (Appear at: Monday 3-4pm)
+   3.[E][✘] meeting (APPEAR at: Monday 3-4pm)
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
 
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
@@ -90,7 +91,7 @@
  Here are the tasks in your list *Woof*:
    1.[T][✓] buy Books
    2.[D][✘] complete project (FINISH by: Monday)
-   3.[E][✓] meeting (Appear at: Monday 3-4pm)
+   3.[E][✓] meeting (APPEAR at: Monday 3-4pm)
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
 
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
@@ -102,7 +103,7 @@
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
  Here are the tasks in your list *Woof*:
    1.[D][✘] complete project (FINISH by: Monday)
-   2.[E][✓] meeting (Appear at: Monday 3-4pm)
+   2.[E][✓] meeting (APPEAR at: Monday 3-4pm)
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
 
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
@@ -116,7 +117,7 @@
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
  Here are the tasks in your list *Woof*:
    1.[D][✘] complete project (FINISH by: Monday)
-   2.[E][✓] meeting (Appear at: Monday 3-4pm)
+   2.[E][✓] meeting (APPEAR at: Monday 3-4pm)
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
 
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
