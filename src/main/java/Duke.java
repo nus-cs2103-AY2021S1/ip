@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -112,6 +114,10 @@ public class Duke {
 
             if (at.isBlank()) {
                 throw new DukeException("\t☹ OOPS!!! The /at description of a event cannot be empty.");
+            }
+
+            if (!at.matches("\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01]) ([1-9]|1[012]):([0-5][0-9]) [AP]M")) {
+                throw new DukeException("\t☹ OOPS!!! The date-time format must be yyyy-mm-dd h:mm AM/PM.");
             }
 
             Event newEvent = new Event(description, at);
