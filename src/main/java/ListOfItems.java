@@ -109,9 +109,10 @@ public class ListOfItems {
                 String[] info = input.split("/", 2);
                 String description = info[0].substring(6);
                 String duration = info[1];
+                Event event = new Event(description, index + 1, duration);
 
                 System.out.println(divider + "\n" + addedMessage);
-                list.add(index, new Event(description, index + 1, duration));
+                list.add(index, event);
                 System.out.println(list.get(index));
                 System.out.println(totalMessage + "\n" + divider);
                 index++;
@@ -134,7 +135,7 @@ public class ListOfItems {
     void checkBy(String input) throws DukeException {
         try {
             boolean hasResults = false;
-            String info = input.substring(18);
+            String info = input.substring(13);
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d/M/yyyy");
             LocalDate date = LocalDate.parse(info, dateFormat);
             System.out.println(divider);
@@ -161,7 +162,7 @@ public class ListOfItems {
     void checkBefore(String input) throws DukeException {
         try {
             boolean hasResults = false;
-            String info = input.substring(22);
+            String info = input.substring(17);
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d/M/yyyy");
             DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HHmm");
             if (info.length() <= 10) { // only consists of date
