@@ -5,6 +5,9 @@ import duke.tool.TaskList;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the UI manager for the system.
+ */
 public class Ui {
 
     public void showLogo() {
@@ -20,6 +23,11 @@ public class Ui {
         System.out.println(formatOut(s));
     }
 
+    /**
+     * Returns a formatted string that Duke interacts with users.
+     * @param s An input String.
+     * @return A formatted string with built in format.
+     */
     public String formatOut(String s) {
         return String.format("  %s\n    %s\n  %s\n",line(),s,line());
     }
@@ -40,6 +48,11 @@ public class Ui {
         return "Nice! I've marked this task as done: \n";
     }
 
+    /**
+     * Show the notification after adding a new task.
+     * @param newTask Task that is added to the list.
+     * @param taskList Task list in the system.
+     */
     public void showAddedNotification(Task newTask, TaskList taskList) {
         String out = "Got it. I've added this task: " + "\n\t\t" +
                 newTask.toString() + "\n\t" +
@@ -47,6 +60,11 @@ public class Ui {
         System.out.print(this.formatOut(out));
     }
 
+    /**
+     * Show the notification after an deletion happens.
+     * @param taskList Task list in the system.
+     * @param deletedTask Task that is deleted.
+     */
     public void showDeletionNotification(TaskList taskList, Task deletedTask) {
 
         String out = "Noted. I've removed this task: " + "\n\t\t" +
@@ -55,6 +73,10 @@ public class Ui {
         System.out.print(formatOut(out));
     }
 
+    /**
+     * Print the task list in the system.
+     * @param tasks Task list in the system.
+     */
     public void showTaskList (TaskList tasks) {
         ArrayList<Task> taskList = tasks.getTasks();
         StringBuilder builder = new StringBuilder();
@@ -78,6 +100,10 @@ public class Ui {
         return sc.nextLine();
     }
 
+    /**
+     * Show the greeting after user mark a task as done.
+     * @param task The task that is marked as done.
+     */
     public void showDoneGreet(Task task) {
         System.out.print(formatOut(doneGreetMessage() + "\n\t" + task.toString()));
     }

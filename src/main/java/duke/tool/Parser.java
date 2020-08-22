@@ -20,9 +20,18 @@ import duke.task.Todo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a parser to interpret the user's command.
+ */
 public class Parser {
     private static final DateTimeFormatter acceptedFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+    /**
+     * Returns a command that associate with the specific input.
+     * @param input A complete input stream from user.
+     * @return A command to be excuted
+     * @throws DukeException An exception that happen in Duke system
+     */
     public static Command parse(String input) throws DukeException {
         if (input.equals("bye")) {
             return new ExitCommand();

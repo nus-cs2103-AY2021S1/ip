@@ -4,7 +4,9 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
-
+/**
+ * Represents the task list stored in Duke system.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
 

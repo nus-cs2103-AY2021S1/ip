@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a task.
+ */
 public class Task {
     protected String desciption;
     protected boolean isDone;
@@ -17,6 +20,10 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Returns a string to be stored in data file.
+     * @return Formatted string to be used in data file.
+     */
     public String toFileStringFormat() {
         return String.format("%d / %s",isDone ? 1 : 0,this.desciption);
     }

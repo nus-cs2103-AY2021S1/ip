@@ -5,6 +5,11 @@ import duke.Storage;
 import duke.tool.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents an command that add task to list.
+ * @author Linngy
+ * @version 0.1
+ */
 public class AddCommand implements Command {
     private final Task targetTask;
 

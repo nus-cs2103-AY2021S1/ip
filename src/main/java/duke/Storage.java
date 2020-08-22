@@ -17,6 +17,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a storage manager to handle file I/O.
+ */
 public class Storage {
     protected String dataPath;
 
@@ -24,6 +27,11 @@ public class Storage {
         this.dataPath = dataPath;
     }
 
+    /**
+     * Loads the task list from stored file.
+     * @return An array list that represents the task list.
+     * @throws IOException An exception when the system cannot create the file.
+     */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> taskList = new ArrayList<>();
 
@@ -63,6 +71,10 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves the changes to the storage path.
+     * @param taskList Current task list in the system.
+     */
     public void save(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter("data/duke.txt", false);
