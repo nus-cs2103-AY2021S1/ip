@@ -13,7 +13,8 @@ public class TaskList {
 
     public TaskList() throws DukeException {
         try {
-            this.file = new File("./data/duke.txt"); // main/data/duke.txt
+            //this.file = new File("../data/duke.txt"); // to test with "runtest.sh"
+            this.file = new File("./data/duke.txt");
             Scanner sc = new Scanner(this.file);
             while (sc.hasNext()) { // e.g. deadline, 1, description/by date
                 String[] arr = sc.nextLine().split(", ");
