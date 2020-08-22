@@ -1,7 +1,7 @@
 package duke.task;
 
 public abstract class Task implements Serialisable {
-    private String description;
+    private final String description;
     private boolean isDone;
 
     Task(String description) {

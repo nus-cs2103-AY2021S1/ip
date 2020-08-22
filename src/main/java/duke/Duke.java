@@ -1,20 +1,17 @@
 package duke;
 
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.task.TaskList;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import duke.command.Command;
-
-import duke.exception.DukeException;
-
-import duke.task.TaskList;
-
 public class Duke {
     private static final Path filePath = Paths.get(".", "data", "duke.txt");
-
-    private TaskList tasks;
     private final Storage storage;
     private final Ui ui;
+    private TaskList tasks;
 
     Duke() {
         this.ui = new Ui();
@@ -25,6 +22,11 @@ public class Duke {
             ui.showLoadingError();
             this.tasks = new TaskList();
         }
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
     }
 
     public void run() {
@@ -42,10 +44,5 @@ public class Duke {
             }
         }
 
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
     }
 }

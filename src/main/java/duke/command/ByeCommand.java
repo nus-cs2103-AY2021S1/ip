@@ -1,15 +1,12 @@
 package duke.command;
 
-import duke.Ui;
 import duke.Storage;
-
-import duke.exception.DukeException;
-
+import duke.Ui;
 import duke.task.TaskList;
 
 public class ByeCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.print("Bye. Hope to see you again soon!");
     }
 

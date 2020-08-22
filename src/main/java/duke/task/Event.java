@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     private static final String identifier = "E";
-    private LocalDate at;
+    private final LocalDate at;
 
     public Event(String description, String at) {
         super(description);

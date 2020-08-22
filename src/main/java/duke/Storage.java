@@ -1,21 +1,20 @@
 package duke;
 
+import duke.exception.CorruptedStorageException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import duke.exception.CorruptedStorageException;
-
-import duke.task.Task;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
 
 public class Storage {
+
     private final Path filePath;
     private List<String> serialisedTasks;
 
@@ -50,7 +49,7 @@ public class Storage {
             }
 
             String taskType = tokens[0];
-            boolean isDone = tokens[1] == "1";
+            boolean isDone = tokens[1].equals("1");
             String desc = tokens[2];
 
             switch (taskType) {
@@ -81,7 +80,7 @@ public class Storage {
     }
 
     public void writeToFile() throws IOException {
-        String fileData = this.serialisedTasks.stream().collect(Collectors.joining("\n"));
+        String fileData = String.join("\n", this.serialisedTasks);
         Files.writeString(filePath, fileData, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
     }
 
