@@ -1,9 +1,61 @@
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
     private static final List<Task> tasks = new ArrayList<>();
+
+    private static void initialize() {
+        File dir = new File("./data");
+        dir.mkdir();
+        File file = new File("./data/duke.txt");
+        try {
+            if (!file.createNewFile()) {
+                Scanner sc = new Scanner(file);
+                while (sc.hasNextLine()) {
+                    String task = sc.nextLine();
+                    switch (task.charAt(1)) {
+                    case 'T':
+                        Todo todo = new Todo(task.substring(5));
+                        tasks.add(todo);
+                        break;
+                    case 'D':
+                        String[] splitDeadline = task.split(" \\(by: ", 2);
+                        Deadline deadline = new Deadline(splitDeadline[0].substring(5),
+                                splitDeadline[1].substring(0, splitDeadline[1].lastIndexOf(')')));
+                        tasks.add(deadline);
+                        break;
+                    case 'E':
+                        String[] splitEvent = task.split(" \\(at: ", 2);
+                        Event event = new Event(splitEvent[0].substring(5),
+                                splitEvent[1].substring(0, splitEvent[1].lastIndexOf(')')));
+                        tasks.add(event);
+                        break;
+                    default:
+                        break;
+                    }
+
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void saveTasks() {
+        try {
+            FileWriter writer = new FileWriter("./data/duke.txt");
+            for (Task task : tasks) {
+                writer.write(task + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private static void greet() {
         String logo = " ____        _        \n"
@@ -70,6 +122,7 @@ public class Duke {
                     printList();
                     break;
                 case BYE:
+                    saveTasks();
                     printResponse("Bye. Hope to see you again soon!");
                     return;
                 case DONE:
@@ -126,6 +179,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        initialize();
         greet();
         handleUserInputs();
     }
