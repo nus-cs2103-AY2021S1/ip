@@ -21,6 +21,8 @@ Welcome to
         There are currently no tasks on your list!
         Start adding one now!
         ------------------------------------------------------------------
+
+        ------------------------------------------------------------------
         Gotcha! I've added this task:
                 [T][✘] borrow book
         You have 1 tasks on your list now.
@@ -83,3 +85,4 @@ Welcome to
         ------------------------------------------------------------------
         Hopefully I have helped you today. Byeee! (*^O^*)/"
         ------------------------------------------------------------------
+

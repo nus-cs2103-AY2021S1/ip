@@ -2,8 +2,12 @@ public class UI {
     private static final String divider =
             "\t------------------------------------------------------------------\n";
 
-    protected String showDivider() {
-        return divider;
+    protected void printDivider() {
+        System.out.print(divider);
+    }
+
+    protected void printDividerWithSpacing() {
+        System.out.println(divider);
     }
 
     protected void greetUser() {
@@ -30,16 +34,8 @@ public class UI {
     }
 
     protected void exitFocus() {
-        String exit = divider
-                + "\tHopefully I have helped you today. Byeee! (*^O^*)/\"\n"
+        String exit = "\tHopefully I have helped you today. Byeee! (*^O^*)/\"\n"
                 + divider;
-        System.out.print(exit);
-    }
-
-    protected void invalidInput() throws DukeException {
-        throw new DukeException(divider
-                + "\tOops! I'm not sure what you meant!\n"
-                + "\tPlease try again!\n"
-                + divider);
+        System.out.println(exit);
     }
 }

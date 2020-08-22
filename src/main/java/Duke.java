@@ -18,6 +18,7 @@ public class Duke {
     }
 
     public void run() {
+        boolean exit;
         Scanner sc = new Scanner(System.in);
         ui.greetUser();
         String name = sc.nextLine();
@@ -26,27 +27,19 @@ public class Duke {
         String input;
         while (sc.hasNext()) {
             input = sc.nextLine();
+            Command command = Parser.parse(input);
+            exit = command.isExit();
+            ui.printDivider();
+            if (exit) {
+                ui.exitFocus();
+                break;
+            }
             try {
-                if (input.startsWith("todo")) { // add todo tasks
-                    taskList.addToDo(input, storage);
-                } else if (input.startsWith("deadline")) { // add deadline tasks
-                    taskList.addDeadline(input, storage);
-                } else if (input.startsWith("event")) { // add event tasks
-                    taskList.addEvent(input, storage);
-                } else if (input.startsWith("delete")) { // delete tasks
-                    taskList.deleteTask(input, storage);
-                } else if (input.startsWith("done")) { // mark tasks done
-                    taskList.markTaskDone(input, storage);
-                } else if (input.equals("list")) { // list out the tasks
-                    taskList.listTasks();
-                } else if (input.equals("bye")) { // exit the bot
-                    ui.exitFocus();
-                    break;
-                } else { // handle invalid inputs
-                    ui.invalidInput();
-                }
+                command.execute(input, taskList, storage);
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
+            } finally {
+                ui.printDividerWithSpacing();
             }
         }
         sc.close();
