@@ -13,6 +13,7 @@ public class Ui {
     public static String addTaskFrontAlert = "Got it. I've added this task for you:";
     public static String addTaskTailAlert = "Now you have %d tasks in the list.";
     public static String deleteTaskFrondAlert = "Noted. I've removed this task:";
+    public static String findTaskFrontAlert = "Here are the matching tasks in your list:";
 
     /**
      * Prints out greetings at the beginning.
@@ -54,7 +55,7 @@ public class Ui {
      * @param result the TaskList of task to be printed.
      */
     public void showList(TaskList result) {
-        printList("", result, "");
+        printList(":) Here are all the tasks in your list:", result, "");
     }
 
     /**
@@ -62,6 +63,15 @@ public class Ui {
      */
     public void farewell() {
         printAnswer("", farewell, "");
+    }
+
+    /**
+     * Prints out a list of tasks when finding by keywords.
+     *
+     * @param result the list of tasks that are found by a keyword.
+     */
+    public void findTaskAlert(TaskList result) {
+        printList(findTaskFrontAlert, result, "");
     }
 
     /**
@@ -98,13 +108,12 @@ public class Ui {
         String line = "___________________________________________________________________________________";
         String smallSpace = "    ";
         String bigSpace = "     ";
-        String reminder = ":) Here are all the tasks in your list:";
 
         System.out.println(smallSpace + line);
         if (FrontGuidance.length() != 0) {
             System.out.println(bigSpace + FrontGuidance);
         }
-        System.out.println(bigSpace + reminder);
+
         for (int i = 0; i < result.getSize(); i++) {
             System.out.println(bigSpace + (i + 1) + ". " + result.get(i));
         }

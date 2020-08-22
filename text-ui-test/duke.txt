@@ -1,0 +1,7 @@
+T | 1 | readbook
+T | 0 | borrow book
+D | 0 | return book again | 1111-11-11T12:12
+D | 0 | return book | 1111-11-11T12:12
+D | 0 | study hard | 1111-11-11T00:01
+D | 0 | return books | 0808-08-08T08:08
+E | 0 | work hard | 2020-12-12T12:21

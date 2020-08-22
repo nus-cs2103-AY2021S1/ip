@@ -54,6 +54,8 @@ public class Parser {
             enumCommand = EnumCommand.EVENT;
         } else if (command.equals("check")) {
             enumCommand = EnumCommand.CHECK;
+        } else if (command.equals("find")) {
+            enumCommand = EnumCommand.FIND;
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means, there is a typo  :-(");
         }
