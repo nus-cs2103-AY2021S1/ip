@@ -7,238 +7,246 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-  public static void updateData(List<Task> list) {
-    try {
-      FileWriter fw = new FileWriter("data/duke.txt");
-      StringBuilder textToAdd = new StringBuilder();
+    public static void updateData(List<Task> list) {
+        try {
+            FileWriter fw = new FileWriter("data/duke.txt");
+            StringBuilder textToAdd = new StringBuilder();
       
-      for (Task t : list) {
-        String data = t.getData();
-        textToAdd.append(data).append("\n");
-      }
-      
-      fw.write(textToAdd.toString());
-      fw.close();
-    } catch (IOException e) {
-      System.out.println("Something went wrong" + e.getMessage());
-    }
-  }
-  
-  public static void loadData(List<Task> list) {
-    try {
-      File file = new File("data/duke.txt");
-      
-      if (file.exists()) {
-        Scanner sc = new Scanner(file);
-
-        while (sc.hasNext()) {
-          String[] data = sc.nextLine().split("/");
-          String taskType = data[0];
-          boolean status = data[1].equals("1");
-          String description = data[2];
-          String additional;
-
-          switch (taskType) {
-            case "t":
-              list.add(new ToDo(description, status));
-              break;
-            case "d":
-              additional = data[3];
-              list.add(new Deadline(description, additional, status));
-              break;
-            case "e":
-              additional = data[3];
-              list.add(new Event(description, additional, status));
-              break;
-          }
+        for (Task t : list) {
+            String data = t.getData();
+            textToAdd.append(data).append("\n");
         }
-      } else {
-        File dir = new File("data");
-        dir.mkdir();
-        file.createNewFile();
-      }
       
-    } catch (FileNotFoundException e) {
-      System.out.println("File not exists" + e.getMessage());
-    } catch (IOException e) {
-      System.out.println("Something went wrong " + e.getMessage());
+        fw.write(textToAdd.toString());
+        fw.close();
+        } catch (IOException e) { 
+            System.out.println("Something went wrong" + e.getMessage());
+        }
     }
-  }
   
-  public static String process(String input, List<Task> list) throws DukeException {
-    String output;
-    String[] command = input.split(" ", 2);
+    public static void loadData(List<Task> list) { 
+        try {
+            File file = new File("data/duke.txt");
+            
+            if (file.exists()) {
+                Scanner sc = new Scanner(file);
+    
+                while (sc.hasNext()) {
+                    String[] data = sc.nextLine().split("/");
+                    String taskType = data[0];
+                    boolean status = data[1].equals("1");
+                    String description = data[2];
+                    String additional;
+                    
+                    switch (taskType) {
+                        case "t":
+                            list.add(new ToDo(description, status));
+                            break;
+                        case "d":
+                            additional = data[3];
+                            list.add(new Deadline(description, additional, status));
+                            break;
+                        case "e":
+                            additional = data[3];
+                            list.add(new Event(description, additional, status));
+                            break;
+                    }
+                }
+            } else {
+                File dir = new File("data");
+                dir.mkdir();
+                file.createNewFile();
+            }
+      
+        } catch (FileNotFoundException e) {
+            System.out.println("File not exists" + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Something went wrong " + e.getMessage());
+        }
+    }
+  
+    public static String process(String input, List<Task> list) throws DukeException {
+        String output;
+        String[] command = input.split(" ", 2);
 
-    if (input.equals("bye")) {
-      output = "\tBye. Hope to see you again soon!";
-    } else if (input.equals("list")) {
-      if (list.isEmpty()) {
-        throw new DukeException("\t☹ OOPS!!! There is no task in the list.");
-      }
-      StringBuilder concat = new StringBuilder();
+        if (input.equals("bye")) {
+            output = "\tBye. Hope to see you again soon!";
+        } else if (input.equals("list")) {
+            if (list.isEmpty()) {
+                throw new DukeException("\t☹ OOPS!!! There is no task in the list.");
+            }
+            StringBuilder concat = new StringBuilder();
 
-      for (int i = 0; i < list.size(); i++) {
-        concat.append(String.format("\n\t%d. %s", i + 1, list.get(i)));
-      }
+            for (int i = 0; i < list.size(); i++) {
+                concat.append(String.format("\n\t%d. %s", i + 1, list.get(i)));
+            }
 
-      output = "\tHere are the tasks in your list: " + concat;
-    } else if (command[0].equals("done")){
-      if (command.length < 2) {
-        throw new DukeException("\t☹ OOPS!!! The description of a done cannot be empty.");
-      }
+            output = "\tHere are the tasks in your list: " + concat;
+        } else if (command[0].equals("done")){
+            if (command.length < 2) {
+                throw new DukeException("\t☹ OOPS!!! The description of a done cannot be empty.");
+            }
 
-      int inputNumber;
-      
-      try {
-        inputNumber = Integer.parseInt(command[1]);
-      } catch(NumberFormatException e) {
-        throw new DukeException("\t☹ OOPS!!! Argument must be an integer.");
-      }
-      
-      if (inputNumber <= 0) {
-        throw new DukeException(("\t☹ OOPS!!! Invalid argument."));
-      }
-      
-      if (inputNumber > list.size()) {
-        throw new DukeException("\t☹ OOPS!!! There is only " + list.size() + " tasks in the list.");
-      }
-      
-      int index = inputNumber - 1;
-      Task targetTask = list.get(index);
+            int inputNumber;
 
-      if (targetTask.getStatus()) {
-        throw new DukeException("\t☹ OOPS!!! You've already done that task.");
-      }
-      
-      targetTask.setDone();
-      updateData(list);
-      output = "\tNice! I've marked this task as done: \n\t\t" + targetTask;
-    } else if (command[0].equals("todo")) {
-      if (command.length < 2 || command[1].isBlank()) {
-        throw new DukeException("\t☹ OOPS!!! The description of a todo cannot be empty.");
-      } 
-      
-      ToDo newToDo = new ToDo(command[1]);
+            try {
+                inputNumber = Integer.parseInt(command[1]);
+            } catch(NumberFormatException e) {
+                throw new DukeException("\t☹ OOPS!!! Argument must be an integer.");
+            }
 
-      list.add(newToDo);
-      updateData(list);
-      output = "\tGot it. I've added this task: \n\t\t" + newToDo + "\n\tNow you have " + list.size() + " tasks in the list.";
-    } else if (command[0].equals("deadline")) {
-      if (command.length < 2) {
-        throw new DukeException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
-      }
-      
-      String[] commandParam = command[1].split("/by");
-      
-      if (commandParam.length < 2) {
-        throw new DukeException("\t☹ OOPS!!! Invalid Argument (\"/by\" String not found)");
-      }
-      
-      String description = commandParam[0].trim();
-      String by = commandParam[1].trim();
-      
-      if (description.isBlank()) {
-        throw new DukeException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
-      }
-      
-      if (by.isBlank()) {
-        throw new DukeException("\t☹ OOPS!!! The /by description of a deadline cannot be empty.");
-      }
-      
-      Deadline newDeadline = new Deadline(description, by);
+            if (inputNumber <= 0) {
+                throw new DukeException(("\t☹ OOPS!!! Invalid argument."));
+            }
 
-      list.add(newDeadline);
-      updateData(list);
-      output = "\tGot it. I've added this task: \n\t\t" + newDeadline + "\n\tNow you have " + list.size() + " tasks in the list.";
-    } else if (command[0].equals("event")) {
-      if (command.length < 2) {
-        throw new DukeException("\t☹ OOPS!!! The description of a event cannot be empty.");
-      }
-      
-      String[] commandParam = command[1].split("/at");
+            if (inputNumber > list.size()) {
+                throw new DukeException("\t☹ OOPS!!! There is only " + list.size() + " tasks in the list.");
+            }
 
-      if (commandParam.length < 2) {
-        throw new DukeException("\t☹ OOPS!!! Invalid Argument (\"/at\" String not found)");
-      }
-      
-      String description = commandParam[0].trim();
-      String at = commandParam[1].trim();
-      
-      if (description.isBlank()) {
-        throw new DukeException("\t☹ OOPS!!! The description of a event cannot be empty.");
-      }
+            int index = inputNumber - 1;
+            Task targetTask = list.get(index);
 
-      if (at.isBlank()) {
-        throw new DukeException("\t☹ OOPS!!! The /at description of a event cannot be empty.");
-      }
-      
-      Event newEvent = new Event(description, at);
+            if (targetTask.getStatus()) {
+                throw new DukeException("\t☹ OOPS!!! You've already done that task.");
+            }
 
-      list.add(newEvent);
-      updateData(list);
-      output = "\tGot it. I've added this task: \n\t\t" + newEvent + "\n\tNow you have " + list.size() + " tasks in the list.";
-    } else if (command[0].equals("delete")) {
-      if (command.length < 2) {
-        throw new DukeException("\t☹ OOPS!!! The description of a delete cannot be empty.");
-      }
-      
-      int inputNumber;
+            targetTask.setDone();
+            updateData(list);
+            output = "\tNice! I've marked this task as done: \n\t\t" + targetTask;
+        } else if (command[0].equals("todo")) {
+            if (command.length < 2 || command[1].isBlank()) {
+                throw new DukeException("\t☹ OOPS!!! The description of a todo cannot be empty.");
+            }
 
-      try {
-        inputNumber = Integer.parseInt(command[1]);
-      } catch(NumberFormatException e) {
-        throw new DukeException("\t☹ OOPS!!! Argument must be an integer.");
-      }
+            ToDo newToDo = new ToDo(command[1]);
 
-      if (inputNumber <= 0) {
-        throw new DukeException(("\t☹ OOPS!!! Invalid argument."));
-      }
+            list.add(newToDo);
+            updateData(list);
+            output = "\tGot it. I've added this task: \n\t\t" + newToDo + "\n\tNow you have " + list.size() + " tasks in the list.";
+        } else if (command[0].equals("deadline")) {
+            if (command.length < 2) {
+                throw new DukeException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
+            }
 
-      if (inputNumber > list.size()) {
-        throw new DukeException("\t☹ OOPS!!! There is only " + list.size() + " tasks in the list.");
-      }
-      
-      int index = inputNumber - 1;
-      Task targetTask = list.remove(index);
-      updateData(list);
-      output = "\tNoted. I've removed this task: \n\t\t" + targetTask + "\n\tNow you have " + list.size() + " tasks in the list.";
-    } else {
-      throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            String[] commandParam = command[1].split("/by");
+
+            if (commandParam.length < 2) {
+                throw new DukeException("\t☹ OOPS!!! Invalid Argument (\"/by\" String not found)");
+            }
+
+            String description = commandParam[0].trim();
+            String by = commandParam[1].trim();
+
+            if (description.isBlank()) {
+                throw new DukeException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
+            }
+
+            if (by.isBlank()) {
+                throw new DukeException("\t☹ OOPS!!! The /by description of a deadline cannot be empty.");
+            }
+            
+            if (!by.matches("\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])")) {
+                throw new DukeException("\t☹ OOPS!!! The date format must be yyyy-mm-dd.");
+            }
+
+            Deadline newDeadline = new Deadline(description, by);
+
+            list.add(newDeadline);
+            updateData(list);
+            output = "\tGot it. I've added this task: \n\t\t" + newDeadline + "\n\tNow you have " + list.size() + " tasks in the list.";
+        } else if (command[0].equals("event")) {
+            if (command.length < 2) {
+                throw new DukeException("\t☹ OOPS!!! The description of a event cannot be empty.");
+            }
+
+            String[] commandParam = command[1].split("/at");
+
+            if (commandParam.length < 2) {
+                throw new DukeException("\t☹ OOPS!!! Invalid Argument (\"/at\" String not found)");
+            }
+
+            String description = commandParam[0].trim();
+            String at = commandParam[1].trim();
+
+            if (description.isBlank()) {
+                throw new DukeException("\t☹ OOPS!!! The description of a event cannot be empty.");
+            }
+
+            if (at.isBlank()) {
+                throw new DukeException("\t☹ OOPS!!! The /at description of a event cannot be empty.");
+            }
+
+            if (!at.matches("\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) ([1-9]|1[012]):([0-5][0-9]) [AP]M")) {
+                throw new DukeException("\t☹ OOPS!!! The date-time format must be yyyy-mm-dd h:mm AM/PM.");
+            }
+
+            Event newEvent = new Event(description, at);
+
+            list.add(newEvent);
+            updateData(list);
+            output = "\tGot it. I've added this task: \n\t\t" + newEvent + "\n\tNow you have " + list.size() + " tasks in the list.";
+        } else if (command[0].equals("delete")) {
+            if (command.length < 2) {
+                throw new DukeException("\t☹ OOPS!!! The description of a delete cannot be empty.");
+            }
+
+            int inputNumber;
+
+            try {
+                inputNumber = Integer.parseInt(command[1]);
+            } catch(NumberFormatException e) {
+                throw new DukeException("\t☹ OOPS!!! Argument must be an integer.");
+            }
+
+            if (inputNumber <= 0) {
+                throw new DukeException(("\t☹ OOPS!!! Invalid argument."));
+            }
+
+            if (inputNumber > list.size()) {
+                throw new DukeException("\t☹ OOPS!!! There is only " + list.size() + " tasks in the list.");
+            }
+
+            int index = inputNumber - 1;
+            Task targetTask = list.remove(index);
+            updateData(list);
+            output = "\tNoted. I've removed this task: \n\t\t" + targetTask + "\n\tNow you have " + list.size() + " tasks in the list.";
+        } else {
+            throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+
+        return output;
     }
 
-    return output;
-  }
+    public static void main(String[] args) {
+        String divider = "---------------------------------------------------------------------------------------------";
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        Scanner sc = new Scanner(System.in);
+        String input = "";
+        List<Task> list = new ArrayList<>();
+        String output;
 
-  public static void main(String[] args) {
-    String divider = "---------------------------------------------------------------------------------------------";
-    String logo = " ____        _        \n"
-        + "|  _ \\ _   _| | _____ \n"
-        + "| | | | | | | |/ / _ \\\n"
-        + "| |_| | |_| |   <  __/\n"
-        + "|____/ \\__,_|_|\\_\\___|\n";
-    Scanner sc = new Scanner(System.in);
-    String input = "";
-    List<Task> list = new ArrayList<>();
-    String output;
+        System.out.println("\n" + logo);
+        System.out.println("\t" + divider);
+        System.out.println("\t" + "Hello! I'm Duke\n\tWhat can I do for you?");
+        System.out.println("\t" + divider);
+        loadData(list);
 
-    System.out.println("\n" + logo);
-    System.out.println("\t" + divider);
-    System.out.println("\t" + "Hello! I'm Duke\n\tWhat can I do for you?");
-    System.out.println("\t" + divider);
-    loadData(list);
+        while (!input.equals("bye")) {
+            input = sc.nextLine();
 
-    while (!input.equals("bye")) {
-      input = sc.nextLine();
+            try {
+                output = process(input, list);
+            } catch (DukeException e) {
+                output = e.getMessage();
+            }
 
-      try {
-        output = process(input, list);
-      } catch (DukeException e) {
-        output = e.getMessage();
-      }
-
-      System.out.println("\t" + divider);
-      System.out.println(output);
-      System.out.println("\t" + divider + "\n");
+            System.out.println("\t" + divider);
+            System.out.println(output);
+            System.out.println("\t" + divider + "\n");
+        }
     }
-  }
 }
