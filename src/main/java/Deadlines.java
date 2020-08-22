@@ -10,7 +10,8 @@ public class Deadlines extends Task {
     public Deadlines(String description, String by) {
         super(description);
         by = by.replace('/', '-');
-        this.date = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("d-MM-yyyy HHmm"));
+        this.date = LocalDateTime.parse(by, DateTimeFormatter.ofPattern(
+                "[d-MM-yyyy HHmm][yyyy-MM-d HHmm"));
     }
 
     public String getDate() {
