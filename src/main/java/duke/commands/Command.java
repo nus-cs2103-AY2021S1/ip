@@ -104,33 +104,61 @@ public class Command {
             LocalDate dtCheck = dateProcessor(dateTimeTmp);
             TaskList occurings = searchTasksByTime(dtCheck, result);
             ui.showList(occurings);
+            break;
+        case FIND:
+            if (instruction.substring(4).strip().equals("")) {
+                throw new DukeException("The \"find\" command is not entered correctly");
+            }
+
+            String keyword = instruction.substring(4).strip();
+            TaskList matchingList = findTaskByKeyword(keyword, result);
+            ui.findTaskAlert(matchingList);
+            break;
         }
 
     }
 
     public static TaskList searchTasksByTime(LocalDate localDate, TaskList tasks) {
         TaskList occurings = new TaskList();
-        
+
         for (int i = 0; i < tasks.getSize(); i++) {
-            boolean check = false;
+            boolean isMatch = false;
             Task temp = tasks.get(i);
             if (temp instanceof Deadlines) {
                 Deadlines deadlines = (Deadlines) temp;
                 if (deadlines.getDate().equals(localDate)) {
-                    check = true;
+                    isMatch = true;
                 }
             }
             if (temp instanceof Events) {
                 Events deadlines = (Events) temp;
                 if (deadlines.getDate().equals(localDate)) {
-                    check = true;
+                    isMatch = true;
                 }
             }
-            if (check) {
+            if (isMatch) {
                 occurings.add(temp);
             }
         }
 
         return occurings;
+    }
+
+
+    public static TaskList findTaskByKeyword(String keyword, TaskList tasks) {
+        TaskList matchingList = new TaskList();
+
+        for (int i = 0; i < tasks.getSize(); i++) {
+            boolean isMatch = false;
+            Task temp = tasks.get(i);
+            if (temp.getDescription().contains(keyword)) {
+                isMatch = true;
+            }
+            if (isMatch) {
+                matchingList.add(temp);
+            }
+        }
+
+        return matchingList;
     }
 }

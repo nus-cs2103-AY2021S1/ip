@@ -10,6 +10,7 @@ public class Ui {
     public static String addTaskFrontAlert = "Got it. I've added this task for you:";
     public static String addTaskTailAlert = "Now you have %d tasks in the list.";
     public static String deleteTaskFrondAlert = "Noted. I've removed this task:";
+    public static String findTaskFrontAlert = "Here are the matching tasks in your list:";
 
     public Ui() {
 
@@ -32,13 +33,16 @@ public class Ui {
     }
 
     public void showList(TaskList result) {
-        printList("", result, "");
+        printList(":) Here are all the tasks in your list:", result, "");
     }
 
     public void farewell() {
         printAnswer("", farewell, "");
     }
 
+    public void findTaskAlert(TaskList result) {
+        printList(findTaskFrontAlert, result, "");
+    }
     public static void printAnswer(String FrontGuidance, String answer, String TailGuidance) {
         String line = "___________________________________________________________________________________";
         String smallSpace = "    ";
@@ -59,13 +63,12 @@ public class Ui {
         String line = "___________________________________________________________________________________";
         String smallSpace = "    ";
         String bigSpace = "     ";
-        String reminder = ":) Here are all the tasks in your list:";
 
         System.out.println(smallSpace + line);
         if (FrontGuidance.length() != 0) {
             System.out.println(bigSpace + FrontGuidance);
         }
-        System.out.println(bigSpace + reminder);
+
         for (int i = 0; i < result.getSize(); i++) {
             System.out.println(bigSpace + (i + 1) + ". " + result.get(i));
         }

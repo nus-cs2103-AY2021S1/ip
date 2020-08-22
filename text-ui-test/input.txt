@@ -36,4 +36,6 @@ deadline study hard /by      1111-11-11 0001
 deadline return books /by 0808-08-08 0808
 check 1111-11-11
 event work hard /at2020-12-12 1221
+find book
+find
 bye
