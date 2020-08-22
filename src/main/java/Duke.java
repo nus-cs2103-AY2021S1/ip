@@ -81,7 +81,7 @@ public class Duke {
       }
       
       if (by.isBlank()) {
-        throw new DukeException("\t☹ OOPS!!! The /by Date of a deadline cannot be empty.");
+        throw new DukeException("\t☹ OOPS!!! The /by description of a deadline cannot be empty.");
       }
       
       Deadline newDeadline = new Deadline(description, by);
@@ -94,8 +94,22 @@ public class Duke {
       }
       
       String[] commandParam = command[1].split("/at");
+
+      if (commandParam.length < 2) {
+        throw new DukeException("\t☹ OOPS!!! Invalid Argument (\"/at\" String not found)");
+      }
+      
       String description = commandParam[0].trim();
       String at = commandParam[1].trim();
+      
+      if (description.isBlank()) {
+        throw new DukeException("\t☹ OOPS!!! The description of a event cannot be empty.");
+      }
+
+      if (at.isBlank()) {
+        throw new DukeException("\t☹ OOPS!!! The /at description of a event cannot be empty.");
+      }
+      
       Event newEvent = new Event(description, at);
 
       list.add(newEvent);
