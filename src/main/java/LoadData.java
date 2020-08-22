@@ -9,7 +9,7 @@ public class LoadData {
     public ArrayList<String> getSavedTasks() {
         ArrayList<String> savedTasks = new ArrayList<String>();
         try {
-            File savedFile = new File("./src/main/data/save_file.txt");
+            File savedFile = new File("data/save_file.txt");
             Scanner scanner = new Scanner(savedFile);
             while (scanner.hasNextLine()) {
                 String taskData = scanner.nextLine();

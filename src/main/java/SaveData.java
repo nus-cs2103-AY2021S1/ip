@@ -14,9 +14,9 @@ public class SaveData {
             String command = "";
             String status = task.getStatus() ? " 1" : " 0";
             if(task instanceof Deadline) {
-                command = "deadline " + task.getContent() + " /by " + ((Deadline)task).getDeadline();
+                command = "deadline " + task.getContent() + " /by " + ((Deadline)task).getDeadlineStr();
             } else if(task instanceof Event) {
-                command = "event " + task.getContent() + " /at " + ((Event)task).getDeadline();
+                command = "event " + task.getContent() + " /at " + ((Event)task).getDealineStr();
             } else if(task instanceof Todo) {
                 command = "todo " + task.getContent();
             }
@@ -27,7 +27,7 @@ public class SaveData {
     public void saveData(ArrayList<Task> data) {
         //System.out.println("hello");
         try {
-            File file = new File("./src/main/data/save_file.txt");
+            File file = new File("data/save_file.txt");
             if(!file.exists()) {
                 file.createNewFile();
             }

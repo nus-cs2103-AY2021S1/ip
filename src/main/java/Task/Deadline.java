@@ -1,16 +1,29 @@
 package Task;
 
+import Helper.DateTimeHelper;
 import Task.Task;
 
+import java.time.LocalDate;
+
 public class Deadline extends Task {
-    private String deadline;
-    public Deadline(String content, String deadline) {
+    private LocalDate deadline;
+    private String exactTime;
+    private String deadlineStr;
+    public Deadline(String content, LocalDate deadline, String exactTime, String deadlineStr) {
         super(content);
         this.deadline = deadline;
+        this.exactTime = exactTime;
+        this.deadlineStr = deadlineStr;
     }
-    public String getDeadline() { return this.deadline; }
+
+    public LocalDate getDeadline() {
+        return deadline;
+    }
+    public String getDeadlineStr() {
+        return this.deadlineStr;
+    }
     @Override
     public String returnStringForm() {
-        return "[D]" + super.returnStringForm() + " (by: " + this.deadline + ")";
+        return "[D]" + super.returnStringForm() + "( by: " + DateTimeHelper.getStringRep(this.deadline) + " " + this.exactTime + ")";
     }
 }
