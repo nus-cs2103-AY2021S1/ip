@@ -1,5 +1,8 @@
+import Helper.DateTimeHelper;
 import Task.*;
 import Exception.*;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -27,33 +30,47 @@ public class Duke {
         String result_prefix = "Got it. I've added this task:\n      ";
         String result_subfix = "Now you have " + (dk.taskStorage.size() + 1) + " tasks in the list.";
         String main_content = "";
-        String deadline = "";
+        String deadlineStr = "";
         for(int i = 1;i < tokens.length; i++) {
             if(tokens[i].length() == 0) continue;
             if(tokens[i].charAt(0) == '/') {
                 for(int j = i + 1; j < tokens.length;j++) {
-                    deadline += tokens[j] + " ";
+                    deadlineStr += tokens[j] + " ";
                 }
                 break;
             }
 
             content += tokens[i] + " ";
         }
-        deadline = deadline.strip();
-        content = content.strip();
-        if(content.equals("")) throw new DukeException("Description cannot be empty PLEASE!!!");
-        if(deadline.equals("") && (commandType == Commands.DEADLINE || commandType == Commands.EVENT))
+        LocalDate deadline = LocalDate.now();
+        String exactTime = "";
+        if(deadlineStr.equals("") && (commandType == Commands.DEADLINE || commandType == Commands.EVENT))
             throw new DukeInvalidArgumentException("NOT ENOUGH INFORMATION!!!");
 
+        if(commandType == Commands.DEADLINE || commandType == Commands.EVENT) {
+            DateTimeHelper dtHelper = new DateTimeHelper(deadlineStr.strip());
+            String result = dtHelper.processInput();
+            String resDate = dtHelper.processDateStr();
+            String resTime = dtHelper.processTimeStr();
+            //System.out.println(result +" " + resDate + " " + resTime);
+            if (!result.equals("error") && !resDate.equals("error")) {
+                deadline = dtHelper.getDate();
+                if (resTime.equals("success")) exactTime = dtHelper.getTime();
+            } else {
+                return "Your date and time(optional) should be in this format:\n      yyyy-mm-dd HHmm\n    e.g: 2019-10-15 1800";
+            }
+        }
+        content = content.strip();
+        if(content.equals("")) throw new DukeException("Description cannot be empty PLEASE!!!");
         if(commandType == Commands.DEADLINE) {
 
-            Deadline deadlineTask = new Deadline(content, deadline);
+            Deadline deadlineTask = new Deadline(content, deadline, exactTime);
             dk.taskStorage.add(deadlineTask);
             main_content = deadlineTask.returnStringForm();
 
         } else if(commandType == Commands.EVENT) {
 
-            Event eventTask = new Event(content, deadline);
+            Event eventTask = new Event(content, deadline, exactTime);
             dk.taskStorage.add(eventTask);
             main_content = eventTask.returnStringForm();
 
@@ -106,13 +123,7 @@ public class Duke {
     }
     public static void main(String[] args) {
         Duke dk = new Duke();
-       /* String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);*/
-        printDialog("What can I do for you?");
+        printDialog("Hello! I am the Dynamic Normalised Hand\n    What can WE do for you?");
         Scanner sc = new Scanner(System.in);
         while(true) {
             String content = sc.nextLine();
