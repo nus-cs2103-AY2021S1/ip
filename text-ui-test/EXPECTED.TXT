@@ -11,22 +11,22 @@ New task added!
 [T][✘] borrow book
 You now have 1 tasks.
 New task added!
-[D][✘] return book (by: Sunday)
+[D][✘] return book (by: Sep 4 2020)
 You now have 2 tasks.
 New task added!
-[E][✘] project meeting (at: Mon 2-4pm)
+[E][✘] project meeting (at: Oct 15 2020)
 You now have 3 tasks.
 Here's all your tasks to complete:
 1. [T][✘] borrow book
-2. [D][✘] return book (by: Sunday)
-3. [E][✘] project meeting (at: Mon 2-4pm)
+2. [D][✘] return book (by: Sep 4 2020)
+3. [E][✘] project meeting (at: Oct 15 2020)
 Time to get to work! :D
 Task marked as done! Good job!
 [T][✓] borrow book
 Here's all your tasks to complete:
 1. [T][✓] borrow book
-2. [D][✘] return book (by: Sunday)
-3. [E][✘] project meeting (at: Mon 2-4pm)
+2. [D][✘] return book (by: Sep 4 2020)
+3. [E][✘] project meeting (at: Oct 15 2020)
 Time to get to work! :D
 Oh no! This can't be DONE! (The description of done can't be empty!)
 Oh no! That number is not on the list! D:
@@ -35,18 +35,19 @@ Oh no! What are you trying TODO? (The description of todo can't be empty!)
 Oh no! This LINE has made me DEAD! (The description of deadline can't be empty!)
 Oh no! Remember to write /by (time) after your task!
 Oh no! Remember to write /by (time) after your task!
+Oh no! Please only type in the date in this format: yyyy-mm-dd (eg, 2019-10-15).
 Oh no! EVENTually you'll get it right! (The description of event can't be empty!)
 Oh no! Remember to write /at (time) after your task!
 Oh no! Remember to write /at (time) after your task!
 Sorry! I don't understand that command. Please try again!
 This task has been deleted from the list:
-[E][✘] project meeting (at: Mon 2-4pm)
+[E][✘] project meeting (at: Oct 15 2020)
 You now have 2 tasks.
 This task has been deleted from the list:
 [T][✓] borrow book
 You now have 1 tasks.
 Here's all your tasks to complete:
-1. [D][✘] return book (by: Sunday)
+1. [D][✘] return book (by: Sep 4 2020)
 Time to get to work! :D
 Oh no! You must DELETE this! (The description of delete can't be empty!)
 Oh no! That number is not on the list! D:

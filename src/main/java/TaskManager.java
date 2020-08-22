@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import static java.lang.Integer.parseInt;
 
 public class TaskManager {
@@ -55,6 +56,10 @@ public class TaskManager {
 
     public static void fileError() {
         System.out.println("Oops! There's been an error with the data file, please try again!");
+    }
+
+    public static void incorrectTimeFormat() {
+        System.out.println("Oh no! Please only type in the date in this format: yyyy-mm-dd (eg, 2019-10-15).");
     }
 
     public static void setDoneTask(String command) throws DukeException{
@@ -132,6 +137,8 @@ public class TaskManager {
                 deadlineByReminder();
             } catch (ArrayIndexOutOfBoundsException e) {
                 deadlineByReminder();
+            } catch (DateTimeParseException e) {
+                incorrectTimeFormat();
             }
         }
     }
@@ -151,6 +158,8 @@ public class TaskManager {
                 eventAtReminder();
             } catch (ArrayIndexOutOfBoundsException e) {
                 eventAtReminder();
+            } catch (DateTimeParseException e) {
+                incorrectTimeFormat();
             }
         }
     }
