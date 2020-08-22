@@ -12,7 +12,7 @@ public class Task {
     /**
      * The completion status of the task.
      */
-    public boolean done;
+    public boolean isDone;
 
     /**
      * Creates a new instance of a Task object with attributes defined
@@ -21,7 +21,7 @@ public class Task {
      */
     Task(String description) {
         this.description = description;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -33,15 +33,30 @@ public class Task {
      */
     Task(String description, boolean done) {
         this.description = description;
-        this.done = done;
+        this.isDone = done;
     }
 
     /**
      * Retrieves the completion status of the task.
      * @return Returns the completion status.
      */
-    public void done() {
-        this.done = true;
+    public boolean getStatus() {
+        return this.isDone;
+    }
+
+    /**
+     * Retrieves the description of the task.
+     * @return Returns the description.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Marks a task as done.
+     */
+    public void markAsDone() {
+        this.isDone = true;
     }
 
     /**
@@ -50,6 +65,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return this.done ? "[✓] " + this.description : "[✗] " + this.description;
+        return this.isDone ? "[✓] " + this.description : "[✗] " + this.description;
     }
 }

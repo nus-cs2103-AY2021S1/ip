@@ -10,7 +10,7 @@ public class Deadline extends Task {
     /**
      * The due date associated with the Task
      */
-    LocalDateTime date;
+    private LocalDateTime date;
 
     /**
      * Creates a new instance of a Deadline object with attributes defined
@@ -31,8 +31,8 @@ public class Deadline extends Task {
      * @param date Date that the task is due by.
      * @param done Completion status of the task.
      */
-    public Deadline(String description, String date, boolean done) {
-        super(description, done);
+    public Deadline(String description, String date, boolean isDone) {
+        super(description, isDone);
         this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 

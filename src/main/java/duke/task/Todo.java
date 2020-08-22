@@ -18,10 +18,10 @@ public class Todo extends Task {
      * in the parameters.
      * Overloaded constructor which specifies the completion status of the task.
      * @param description Description of the todo.
-     * @param done Completion status of the todo.
+     * @param isDone Completion status of the todo.
      */
-    public Todo(String description, boolean done) {
-        super(description, done);
+    public Todo(String description, boolean isDone) {
+        super(description, isDone);
     }
 
     /**

@@ -72,7 +72,7 @@ public class TaskList {
      */
     public Task completeTask(int taskNo) {
         Task task = tasks.get(taskNo - 1);
-        task.done();
+        task.markAsDone();
         return task;
     }
 
@@ -91,7 +91,7 @@ public class TaskList {
      * Retrieves a string describing the task size.
      * @return Returns the string.
      */
-    public String taskSizeMessage() {
+    public String getTaskSizeMessage() {
         return "Now you have " + tasks.size() + " tasks in the list.";
     }
 }

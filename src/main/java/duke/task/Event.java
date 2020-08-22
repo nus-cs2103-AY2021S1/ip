@@ -11,7 +11,7 @@ public class Event extends Task {
     /**
      * The date associated with the Event.
      */
-    LocalDateTime date;
+    private LocalDateTime date;
 
     /**
      * Creates a new instance of an Event object with attributes defined
@@ -31,10 +31,10 @@ public class Event extends Task {
      * Overloaded constructor which specifies the completion status of the task.
      * @param description Description of the event.
      * @param date Date that the event is on.
-     * @param done Completion status of the event.
+     * @param isDone Completion status of the event.
      */
-    public Event(String description, String date, boolean done) {
-        super(description, done);
+    public Event(String description, String date, boolean isDone) {
+        super(description, isDone);
         this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 
