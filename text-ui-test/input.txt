@@ -1,20 +1,25 @@
 list
-todo watch CS2105 Lecture 2
-event zoom meeting /at Wednesday 10pm
+date 27-08-2020
+todo cs2105 lecture
+event cs2030 TA meeting /at 24-08-2020 16:00
 list
-done 1
-todo buy groceries
-deadline CS2103 iP Week 2 /by Thursday 23.59pm
+deadline cs2030 /by 27-08-2020 09:00
 list
-done 2
-done 100
-done 3
-deadline
+date 27-08-2020
+event test /at 27-08-2020
+event test /at 27-08-2020 7:00
+event test /at 27-08-2020 07:00
+event test /at 27-8-2020 7:00
+event test /at 27-08-2020 7:00
+event test /at 7-08-2020 7:00
+event test /at 07-08-2020 7:00
 list
-todo
-event
-bhkd
-done all
-delete 4
-delete nothing
+date 07-08-2020
+date 27-08-2020
+list
+delete 9
+list
+date 07-8-2020
+date 7-8-2020
+date 7-08-2020
 bye
