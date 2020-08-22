@@ -1,11 +1,18 @@
+import java.time.LocalDateTime;
+
 public class Event extends Task {
-    private final String event;
-    Event(String task, String event) {
+    private final LocalDateTime dateTime;
+
+    Event(String task, LocalDateTime dateTime) {
         super(task);
-        this.event = event;
+        this.dateTime = dateTime;
     }
 
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + this.event + ")";
+        String MMM = this.dateTime.getMonth().toString().substring(0, 3);
+        String DDD = this.dateTime.getDayOfWeek().toString().substring(0, 3);
+        int dd = this.dateTime.getDayOfMonth();
+        int yyyy = this.dateTime.getYear();
+        return "[E]" + super.toString() + "(at: " + dd + " " + MMM + " " + yyyy + ", " + DDD + ")";
     }
 }

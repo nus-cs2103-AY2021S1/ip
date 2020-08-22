@@ -1,12 +1,18 @@
-public class Deadline extends Task {
-    private final String deadline;
+import java.time.LocalDateTime;
 
-    Deadline(String task, String deadline) {
+public class Deadline extends Task {
+    private final LocalDateTime dateTime;
+
+    Deadline(String task, LocalDateTime dateTime) {
         super(task);
-        this.deadline = deadline;
+        this.dateTime = dateTime;
     }
 
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + this.deadline + ")";
+        String MMM = this.dateTime.getMonth().toString().substring(0, 3);
+        String DDD = this.dateTime.getDayOfWeek().toString().substring(0, 3);
+        int dd = this.dateTime.getDayOfMonth();
+        int yyyy = this.dateTime.getYear();
+        return "[D]" + super.toString() + "(by: " + dd + " " + MMM + " " + yyyy + ", " + DDD + ")";
     }
 }
