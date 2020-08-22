@@ -48,7 +48,7 @@ public class TaskHandler {
                 currentTask.markAsDone();
             }
             return currentTask;
-        } catch (Exception e){
+        } catch (IndexOutOfBoundsException | NumberFormatException e){
             throw new DukeException("Oops, pls enter a valid task number after " + lowerCaseOperation);
         }
     }
@@ -59,7 +59,7 @@ public class TaskHandler {
             // Without time
             if (input.substring(4).trim().isEmpty()) {
                 // if given empty arguments or space as task
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
             }
             String taskDesc = input.substring(5);
             return new Todo(taskDesc);
@@ -67,13 +67,13 @@ public class TaskHandler {
         if (tasktype == Task.taskType.DEADLINE) {
             try {
                 return processTaskWithTime(input, tasktype, "/by");
-            } catch (Exception e) {
+            } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("Oops, use add deadline format: deadline [task] /by [time]");
             }
         } else if (tasktype == Task.taskType.EVENT) {
             try {
                 return processTaskWithTime(input, tasktype, "/at");
-            } catch (Exception e) {
+            } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("Oops, use add event format: event [task] /at [time]");
             }
         } else {
@@ -109,6 +109,6 @@ public class TaskHandler {
     }
 
     public void receiveInvalidCommand() throws DukeException {
-        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 }

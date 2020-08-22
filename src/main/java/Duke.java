@@ -1,3 +1,4 @@
+import java.io.EOFException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -97,26 +98,22 @@ public class Duke {
         }
     }
 
-    public static void printSuccess(String operation, Task currentTask, int listSize) throws DukeException {
+    public static void printSuccess(String operation, Task currentTask, int listSize) {
         // Prints success message and list size after task added/deleted
-        try {
-            indent(1);
-            if (operation.equals("add")) {
-                System.out.print("Successfully added:\n");
-            } else if (operation.equals("delete")) {
-                System.out.print("Noted. I've removed this task:\n");
-            } else {
-                System.out.println("Good job! You completed:");
-                indent(2);
-                System.out.println(currentTask);
-                return;
-            }
+        indent(1);
+        if (operation.equals("add")) {
+            System.out.print("Successfully added:\n");
+        } else if (operation.equals("delete")) {
+            System.out.print("Noted. I've removed this task:\n");
+        } else {
+            System.out.println("Good job! You completed:");
             indent(2);
             System.out.println(currentTask);
-            indent(1);
-            System.out.println("You have " + listSize + " task(s) in the list.");
-        } catch (Exception e) {
-            throw new DukeException("Oops, pls enter a valid task to complete");
+            return;
         }
+        indent(2);
+        System.out.println(currentTask);
+        indent(1);
+        System.out.println("You have " + listSize + " task(s) in the list.");
     }
 }
