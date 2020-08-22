@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -27,7 +29,7 @@ public class Duke {
     private static Task getTask(String command, TypeOfTask typeOfTask, Scanner input) throws MissingInfoException {
         String[] commandArray = input.nextLine().split(" ");
         String description = "";
-        String timing = null;
+        LocalDateTime timing = null;
 
         for (int i = 1; i < commandArray.length; i++) {
             if (commandArray[i].equals("/by")) {
@@ -64,7 +66,7 @@ public class Duke {
         }
     }
 
-    private static String getTiming(String command, String[] commandArray, int index) throws MissingInfoException {
+    private static LocalDateTime getTiming(String command, String[] commandArray, int index) throws MissingInfoException, DateTimeParseException {
         String timing = "";
         for (int i = index; i < commandArray.length; i++) {
             if (i == index) {
@@ -77,7 +79,11 @@ public class Duke {
         if (timing.isEmpty()) {
             throw new MissingInfoException("OOPS!!! The date/time of a " + command + " cannot be empty.");
         }
-        return timing;
+        try {
+            return LocalDateTime.parse(timing);
+        } catch (DateTimeParseException e) {
+            throw e;
+        }
     }
 
     public static void main(String[] args) {
@@ -138,6 +144,8 @@ public class Duke {
                     System.out.println(formatReply(e.getMessage()));
                 } catch (MissingInfoException e) {
                     System.out.println(formatReply(e.getMessage()));
+                } catch (DateTimeParseException e) {
+                    System.out.println(formatReply("OOPS!!! Date format is invalid. Make sure it is yyyy-mm-ddTHH:mm."));
                 }
             }
         }
