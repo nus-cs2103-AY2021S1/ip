@@ -18,9 +18,15 @@ public class Parser {
                 return parseAdd(arr[0], arr[1]);
             case "delete":
                 return parseDelete(arr[1]);
+            case "today":
+                return parseToday();
             default:
                 throw new InvalidCommandException();
         }
+    }
+
+    private static Command parseToday() {
+        return new TodayCommand();
     }
 
     private static AddCommand parseAdd(String commandName, String arguments) throws EmptyTaskDescriptionException {
