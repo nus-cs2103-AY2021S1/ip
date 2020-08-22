@@ -1,6 +1,6 @@
-import javax.xml.parsers.ParserConfigurationException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Scanner;
 
 public class Parser {
     private static final Ui ui = new Ui();
@@ -22,5 +22,43 @@ public class Parser {
             return ui.getBorder() + "Please input the time and date in\n"
                             + dateParser.toPattern() + " or " + parser.toPattern() + "\n" + ui.getBorder();
         }
+    }
+    
+    public static void parseInput(TaskList taskList, Storage storage) {
+        Scanner scan = new Scanner(System.in);
+        while (scan.hasNext()) {
+            String test = scan.next();
+            if (ui.checkBye(test)) {
+                ui.exitLine();
+                break;
+            } else {
+                String next = scan.nextLine().replaceFirst(" ", "");
+                if (taskList.checkList(test)) {
+                    taskList.displayList();
+                } else if (taskList.checkDone(test)) {
+                    try {
+                        taskList.doneTask(next);
+                        storage.updateFile();
+                    } catch (DukeException e) {
+                        System.out.println(ui.getBorder() + e.getMessage() + "\n" + ui.getBorder());
+                    }
+                } else if (taskList.checkDel(test)) {
+                    try {
+                        taskList.delTask(next);
+                        storage.updateFile();
+                    } catch (DukeException e) {
+                        System.out.println(ui.getBorder() + e.getMessage() + "\n" + ui.getBorder());
+                    }
+                } else {
+                    try {
+                        taskList.addTask(test, next);
+                        storage.updateFile();
+                    } catch (DukeException e) {
+                        System.out.println(ui.getBorder() + e.getMessage() + "\n" + ui.getBorder());
+                    }
+                }
+            }
+        }
+        scan.close();
     }
 }
