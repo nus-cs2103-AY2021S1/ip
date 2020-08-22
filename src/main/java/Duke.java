@@ -53,7 +53,7 @@ public class Duke {
                 try {
                     Files.createDirectory(filePath.getParent());
                     Files.createFile(filePath);
-                } catch (IOException e3) {
+                } catch (Exception e3) {
                     System.out.println("Unable to create new Data File Again");
                     System.out.println(e2.toString());
                     System.out.println(e3.toString());
