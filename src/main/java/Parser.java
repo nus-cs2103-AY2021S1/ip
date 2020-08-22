@@ -39,29 +39,29 @@ public class Parser {
         }
         String rest = parsedResponse.length == 1 ? null : parsedResponse[1];
         switch (command) {
-            case BYE:
-                saver.saveData(taskList);
-                ui.exit();
-            case LIST:
-                handleList();
-                break;
-            case DONE:
-                handleDone(rest);
-                break;
-            case TODO:
-                handleTodo(rest);
-                break;
-            case DEADLINE:
-                handleDeadline(rest);
-                break;
-            case EVENT:
-                handleEvent(rest);
-                break;
-            case DELETE:
-                handleDelete(rest);
-                break;
-            case INVALID:
-                throw new DukeException("Unrecognized command!");
+        case BYE:
+            saver.saveData(taskList);
+            ui.exit();
+        case LIST:
+            handleList();
+            break;
+        case DONE:
+            handleDone(rest);
+            break;
+        case TODO:
+            handleTodo(rest);
+            break;
+        case DEADLINE:
+            handleDeadline(rest);
+            break;
+        case EVENT:
+            handleEvent(rest);
+            break;
+        case DELETE:
+            handleDelete(rest);
+            break;
+        case INVALID:
+            throw new DukeException("Unrecognized command!");
         }
     }
 

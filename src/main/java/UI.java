@@ -17,8 +17,7 @@ public class UI {
     /**
      * Input system using Java's scanner.
      */
-    private final Scanner in = new Scanner(System.in);
-
+    private Scanner in = new Scanner(System.in);
     private final String DIVIDER = "______________________________________________";
 
     /**
