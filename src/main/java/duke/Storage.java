@@ -1,10 +1,5 @@
-package storage;
+package duke;
 
-import duke.Deadline;
-import duke.Event;
-import duke.Task;
-import duke.TaskList;
-import duke.Todo;
 import exception.DeadlineInvalidUsageException;
 import exception.EventInvalidUsageException;
 import exception.StorageException;

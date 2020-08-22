@@ -1,21 +1,10 @@
 package duke;
 
 import exception.*;
-import storage.Storage;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Files;
 
 import java.time.DateTimeException;
-import java.time.LocalDate;
 
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class Duke {
     Scanner sc;
@@ -147,7 +136,7 @@ public class Duke {
             ui.buildChatFence();
         }
     }
-    
+
     private void printAddConfirmation(int index) {
         int size = taskList.size();
         ui.print("Got it. I've added this task:");
@@ -182,6 +171,4 @@ public class Duke {
         storage.save(this.taskList);
         printAddConfirmation(taskList.size() - 1);
     }
-
-
 }
