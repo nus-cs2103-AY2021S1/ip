@@ -6,24 +6,28 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-
 public class Storage {
-    private final String fileName;
+    private final String filePath;
 
-    public Storage(String fileName) {
-        this.fileName = fileName;
+    public Storage(String filePath) {
+        this.filePath = filePath;
     }
 
-    //This function creates file if does not exit, else continue
+    //This function creates file if it does not exist, else return
     private void createFile() throws IOException {
-        File f = new File(this.fileName);
-        f.createNewFile();
+        File f = new File(this.filePath);
+        if (f.exists()) {
+            return;
+        } else {
+            f.getParentFile().mkdirs();
+            f.createNewFile();
+        }
     }
 
     //This function returns a list of tasks to be loaded into tasklist
     public List<Task> load() throws IOException {
         this.createFile();
-        File f = new File(this.fileName);
+        File f = new File(this.filePath);
         Scanner sc = new Scanner(f);
         List<Task> taskList = new ArrayList<>();
         while (sc.hasNext()) {
@@ -65,11 +69,7 @@ public class Storage {
     }
 
     //This function updates file content when tasklist updated
-    public void updateFile(String text) {
-        try {
-            writeToFile(this.fileName, text);
-        } catch (IOException e) {
-            System.out.println("Something went wrong");
-        }
+    public void updateFile(String text) throws IOException {
+        writeToFile(this.filePath, text);
     }
 }

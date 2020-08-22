@@ -140,11 +140,11 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke("duke.txt");
+        Duke duke = new Duke("data/duke.txt");
         try {
             duke.process();
         } catch (IOException e) {
-            System.out.println("Invalid file!");
+            System.out.println("Invalid file path!");
         }
     }
 }
