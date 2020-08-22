@@ -1,6 +1,8 @@
 package Exception;
 
-
+/**
+ * Represents the exception that the value given is not integer.
+ */
 public class DeleteUnknownException extends DukeException {
     @Override
     public String toString(){

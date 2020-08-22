@@ -2,6 +2,9 @@ package main.java;
 
 import java.util.Scanner;
 
+/**
+ * A class to deal with all the interaction with the user.
+ */
 public class Ui {
 
     public void hello() {

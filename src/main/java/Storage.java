@@ -9,6 +9,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * An object to save all the task in the file.
+ */
 public class Storage {
     String filePath;
 
@@ -16,6 +19,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * A function to load all the task saved in the file.
+     * @return a list of the task which is saved in the file.
+     * @throws IOException
+     */
     public List<Task> load() throws IOException {
         File f = new File(this.filePath);
         LinkedList<Task> result = new LinkedList<>();
@@ -61,6 +69,11 @@ public class Storage {
         }
     }
 
+    /**
+     * A function to save all the list of task to the filepath.
+     * @param task the list of the task.
+     * @throws IOException
+     */
     public void saveFile(TaskList task) throws IOException {
         FileWriter fw = new FileWriter("data/duke.txt");
         List<Task> currentList = task.getTaskList();

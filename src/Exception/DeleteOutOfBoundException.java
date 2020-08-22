@@ -1,6 +1,8 @@
 package Exception;
 
-
+/**
+ * Represents the exception if there are no such task.
+ */
 public class DeleteOutOfBoundException extends DukeException {
     @Override
     public String toString(){

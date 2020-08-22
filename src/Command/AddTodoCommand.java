@@ -6,10 +6,21 @@ import Exception.TaskException;
 import java.io.IOException;
 import java.util.Arrays;
 
+/**
+ * Represents a command to add a todo to the tasklist.
+ */
 public class AddTodoCommand extends Command {
     public AddTodoCommand(String[] command) {
         super(command);
     }
+
+    /**
+     * Adds Todo to the TaskList and save it to storage.
+     * @param tasks the list of task saved.
+     * @param ui deals with interaction with the user.
+     * @param storage deals with loading tasks from the file and saving tasks in the file.
+     * @throws DukeException if there are no description.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
@@ -24,6 +35,10 @@ public class AddTodoCommand extends Command {
         }
     }
 
+    /**
+     * Indicates to not exit the loop.
+     * @return false.
+     */
     @Override
     public boolean isExit() {
         return false;

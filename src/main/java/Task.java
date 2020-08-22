@@ -1,4 +1,8 @@
 package main.java;
+
+/**
+ * Represents the task to be saved in the list.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -21,6 +25,10 @@ public class Task {
         return "[T]" +"[" + this.getStatusIcon()+"] " + this.description;
     }
 
+    /**
+     * A function to help saving to the file.
+     * @return String Which is the template to be saved in the file.
+     */
     public String writeToFile() {
         String result = "T # ";
         if(isDone) {

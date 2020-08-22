@@ -11,12 +11,22 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
+/**
+ * Represents a command to add deadline to the tasklist.
+ */
 public class AddDeadlineCommand extends Command {
 
     public AddDeadlineCommand(String[] command) {
         super(command);
     }
 
+    /**
+     * Adds Deadline to the TaskList and save it to storage.
+     * @param tasks the list of task saved.
+     * @param ui deals with interaction with the user.
+     * @param storage deals with loading tasks from the file and saving tasks in the file.
+     * @throws DukeException if they use the wrong format or no description.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
@@ -36,6 +46,10 @@ public class AddDeadlineCommand extends Command {
         }
     }
 
+    /**
+     * Indicates not to exit the loop.
+     * @return false.
+     */
     @Override
     public boolean isExit() {
         return false;

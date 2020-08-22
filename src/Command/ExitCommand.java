@@ -7,15 +7,30 @@ import main.java.Ui;
 
 import java.util.Arrays;
 
+/**
+ * Represents a command to exit the loop.
+ */
 public class ExitCommand extends Command {
     public ExitCommand(String[] command) {
         super(command);
     }
+
+    /**
+     * Exit the program.
+     * @param tasks the list of task saved.
+     * @param ui deals with interaction with the user.
+     * @param storage deals with loading tasks from the file and saving tasks in the file.
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.goodbyeMessage();
     }
 
+    /**
+     * Indicates to exit the loop.
+     * @return true.
+     */
     @Override
     public boolean isExit() {
         return true;

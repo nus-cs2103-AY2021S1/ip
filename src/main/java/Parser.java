@@ -2,8 +2,16 @@ package main.java;
 
 import Command.*;
 
+/**
+ * A class to deals with making sense of the input command.
+ */
 public class Parser {
 
+    /**
+     * A function to parse the input from the user.
+     * @param fullCommand The input of the user which is saved in String.
+     * @return Command which is grouped into different command.
+     */
     public static Command parse (String fullCommand) {
         String[] parsed = fullCommand.split(" ",2);
         if (parsed[0].equals("list")) {

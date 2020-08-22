@@ -3,6 +3,9 @@ package main.java;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * An event which extends from the task and consist of description and the date and time.
+ */
 public class Event extends Task {
     private LocalDateTime time;
     public Event(String description, LocalDateTime time) {
@@ -22,6 +25,10 @@ public class Event extends Task {
         return "[E]" +"[" + this.getStatusIcon()+"] " + this.description + "(at:" + date +")";
     }
 
+    /**
+     * A function to help in saving it to the file.
+     * @return String which is the template for all event.
+     */
     @Override
     public String writeToFile() {
         String result = "D # ";

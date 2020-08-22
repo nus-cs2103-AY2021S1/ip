@@ -3,6 +3,9 @@ package main.java;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline which extends from the task class which consist of description and the date and time.
+ */
 public class Deadline extends Task {
     private LocalDateTime deadline;
     public Deadline(String description, LocalDateTime deadline) {
@@ -22,6 +25,10 @@ public class Deadline extends Task {
         return "[D]" +"[" + this.getStatusIcon()+"] " + this.description + "(by:" + date +")";
     }
 
+    /**
+     * A function to help in saving it to the file.
+     * @return String which is the template to be saved in the file.
+     */
     @Override
     public String writeToFile() {
         String result = "D # ";
