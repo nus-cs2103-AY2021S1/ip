@@ -1,13 +1,84 @@
 package main.java;
-
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Duke {
+public class King {
     private ArrayList<Task> items = new ArrayList<>();
+    private File listData;
+    private final String path = "data/king.txt";
+
+    King(){
+        File directory = new File("data");
+        if (!directory.exists()){
+            directory.mkdir();
+        }
+        try {
+            listData = new File(path);
+            listData.createNewFile();
+            initialise();
+        } catch (IOException e){
+            System.out.println(Chat.errorBox("Error occurred while loading asset."));
+        }
+    }
+    // method to load the asset into items
+    private void initialise(){
+        try{
+        FileReader input = new FileReader(listData.getAbsoluteFile());
+        Scanner scanner = new Scanner(input);
+        while (scanner.hasNextLine()){
+            String data[] = scanner.nextLine().split("@",4);
+                Task loadedItem;
+                switch (data[0]){
+                    case "T":
+                        loadedItem = new ToDo(data[2]);
+                        break;
+                    case "D":
+                        loadedItem = new Deadline(data[2],data[3]);
+                        break;
+                    default:
+                        loadedItem = new Event(data[2],data[3]);
+                }
+                if (data[1].equals(1)){
+                    loadedItem.markAsDone();
+                }
+                items.add(loadedItem);
+            }
+        input.close();
+        scanner.close();
+        } catch (IOException e){
+            System.out.println(Chat.errorBox("Error occurred while reading asset."));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(Chat.errorBox("Asset file is corrupted."));
+        }
+    }
+
+    // method to persist the items into asset
+    private void persistData(){
+        try {
+            BufferedWriter output = new BufferedWriter(new FileWriter(path));
+            for (Task task : items) {
+                String isLoaded = task.isDone() ? "1" : "0";
+                if (task.getClass().isAssignableFrom(ToDo.class)) {
+                    String s = "T@" + isLoaded + "@" + task.description;
+                    output.write(s);
+                } else if (task.getClass().isAssignableFrom(Event.class)){
+                    String s = "E@" + isLoaded + "@" + task.description + "@" + ((Event) task).time;
+                    output.write(s);
+                } else {
+                    String s = "D@" + isLoaded + "@" + task.description + "@" + ((Deadline) task).by;
+                    output.write(s);
+                }
+                output.newLine();
+            }
+            output.close();
+        } catch (IOException e){
+            System.out.println(Chat.errorBox("Error was encountered when saving list to asset."));
+        }
+    }
 
     // method generates reply based on the phrase given by the User
-    private String generateReply(String phrase) throws DukeException {
+    private String generateReply(String phrase) throws KingException {
         int phraseLength = phrase.length();
         if (phrase.equals("list")){
             return Chat.numberedListChatBox(items);
@@ -22,13 +93,13 @@ public class Duke {
                                 + "\t\t" + item.toString()
                 );
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("Item " + stringItem + " not found.", e);
+                throw new KingException("Item " + stringItem + " not found.", e);
             } catch (NumberFormatException e){
                 throw (stringItem.isEmpty())
-                    ? new DukeException("Done must be followed by item number", e)
-                        : new DukeException(stringItem + " is not a valid item number!", e);
+                    ? new KingException("Done must be followed by item number", e)
+                        : new KingException(stringItem + " is not a valid item number!", e);
             } catch (Exception e) {
-                throw new DukeException("Please follow the syntax: done <item no.>", e);
+                throw new KingException("Please follow the syntax: done <item no.>", e);
             }
         } else if (phrase.startsWith("todo ") || (phrase.startsWith("todo") && phraseLength == 4)) {
             String item;
@@ -37,7 +108,7 @@ public class Duke {
                 items.add(todo);
                 return Chat.addItemChatBox(todo.toString(),items.size());
             } else {
-                throw new DukeException("Todo cannot be empty!", new Throwable("empty field"));
+                throw new KingException("Todo cannot be empty!", new Throwable("empty field"));
             }
         } else if (phrase.startsWith("event ") || (phrase.startsWith("event") && phraseLength == 5)) {
             String item = phrase.substring(5).trim();
@@ -47,9 +118,9 @@ public class Duke {
                 items.add(event);
                 return Chat.addItemChatBox(event.toString(),items.size());
             } else if(tokens.length < 2){
-                throw new DukeException("Event description and time CANNOT be empty!", new Throwable("empty field"));
+                throw new KingException("Event description and time CANNOT be empty!", new Throwable("empty field"));
             } else {
-                throw new DukeException("Follow the syntax event: <description> /at <time>", new Throwable(
+                throw new KingException("Follow the syntax event: <description> /at <time>", new Throwable(
                         "bad event"
                 ));
             }
@@ -61,9 +132,9 @@ public class Duke {
                 items.add(deadline);
                 return Chat.addItemChatBox(deadline.toString(),items.size());
             } else if(tokens.length < 2){
-                throw new DukeException("Deadline description and time CANNOT be empty!", new Throwable("empty field"));
+                throw new KingException("Deadline description and time CANNOT be empty!", new Throwable("empty field"));
             } else {
-                throw new DukeException("Follow the syntax: deadline <description> /by <time>", new Throwable(
+                throw new KingException("Follow the syntax: deadline <description> /by <time>", new Throwable(
                         "bad deadline"
                 ));
             }
@@ -79,16 +150,16 @@ public class Duke {
                                 "\n\t You got " + items.size() + " task(s) left."
                 );
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("Item " + stringItem + " not found.", e);
+                throw new KingException("Item " + stringItem + " not found.", e);
             } catch (NumberFormatException e){
                 throw (stringItem.isEmpty())
-                        ? new DukeException("delete must be followed by item number", e)
-                        : new DukeException(stringItem + " is not a valid item number", e);
+                        ? new KingException("delete must be followed by item number", e)
+                        : new KingException(stringItem + " is not a valid item number", e);
             } catch (Exception e) {
-                throw new DukeException("Please follow the syntax: delete <item no.>", e);
+                throw new KingException("Please follow the syntax: delete <item no.>", e);
             }
         } else {
-            throw new DukeException("I don't understand you!", new Throwable("invalid command"));
+            throw new KingException("I don't understand you!", new Throwable("invalid command"));
         }
     }
 
@@ -99,12 +170,13 @@ public class Duke {
         while(scanner.hasNextLine() && !(phrase = scanner.nextLine()).equals("bye")){
             try {
                 System.out.println(generateReply(phrase));
-            } catch (DukeException e) {
+            } catch (KingException e) {
                 System.out.println(Chat.chatBox(e.message));
             }
         }
         System.out.print(Chat.chatBox("Bye. Hope to see you again soon!"));
         scanner.close();
+        persistData();
     }
 
     public static void main(String[] args) {
@@ -118,7 +190,7 @@ public class Duke {
         System.out.println(logo);
         System.out.println("Hello! I'm King");
         System.out.println("What can I do for you?");
-        Duke king = new Duke();
+        King king = new King();
         king.chat();
     }
 }

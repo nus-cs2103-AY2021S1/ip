@@ -1,7 +1,6 @@
 package main.java;
 
 public class Event extends Task{
-    protected String description;
     protected String time;
 
     Event(String description, String time){

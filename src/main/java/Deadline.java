@@ -1,7 +1,6 @@
 package main.java;
 
 public class Deadline extends Task {
-    protected String description;
     protected String by;
 
     Deadline(String description, String by){

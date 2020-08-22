@@ -2,16 +2,21 @@ package main.java;
 
 public class Task {
     protected TaskStates state;
-    protected String task;
+    protected String description;
 
     Task(String task){
         state = TaskStates.UNDONE;
-        this.task = task;
+        this.description = task;
     }
 
     // set task as done
     public void markAsDone(){
         state = TaskStates.DONE;
+    }
+
+    // returns true if task is done
+    public boolean isDone(){
+        return state == TaskStates.DONE;
     }
 
     //return tick or X symbols
@@ -23,11 +28,11 @@ public class Task {
     public String toString() {
         switch(state){
             case DONE:
-                return "[\u2713] " + task;
+                return "[\u2713] " + description;
             case UNDONE:
-                return "[\u2718] " + task;
+                return "[\u2718] " + description;
             default:
-                return task;
+                return description;
         }
     }
 }

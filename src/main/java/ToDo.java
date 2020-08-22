@@ -1,8 +1,6 @@
 package main.java;
 
 public class ToDo extends Task{
-        protected String description;
-
         ToDo(String description){
             super(description);
         }
