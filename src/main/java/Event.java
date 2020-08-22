@@ -7,6 +7,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String taskToText() {
+        return "E|" + super.completed + "|" + super.taskName + "|" + at;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
