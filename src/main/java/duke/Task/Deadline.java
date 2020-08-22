@@ -13,6 +13,11 @@ public class Deadline extends Task {
 
     public static final String delimiterBy = " /by ";
 
+    /** Constructs a <code>Deadline</code> Object to represent a task with a deadline
+     *
+     * @param description The description of the deadline
+     * @param by The deadline containing date and time
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
@@ -26,11 +31,23 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Parses a text and returns the date of the deadline
+     *
+     * @param dateString The text to be parsed
+     * @return The date of the deadline
+     */
     private LocalDate parseDate(String dateString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
         return LocalDate.parse(dateString, formatter);
     }
 
+    /**
+     * Parses a text and returns the time of the deadline
+     *
+     * @param timeString The text to be parsed
+     * @return The time of the deadline
+     */
     private LocalTime parseTime(String timeString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("Hmm");
         return LocalTime.parse(timeString, formatter);

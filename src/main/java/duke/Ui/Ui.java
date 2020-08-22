@@ -37,6 +37,11 @@ public class Ui {
         return scanner.nextLine().trim();
     }
 
+    /**
+     * Prints a list of tasks
+     *
+     * @param tasks A list of tasks to be printed
+     */
     public void showTaskList(TaskList tasks) {
         if (tasks.isEmpty()) {
             showNoTasksMsg();
@@ -50,10 +55,19 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints a message if there are no tasks in the list
+     */
     private void showNoTasksMsg() {
         System.out.println("There are currently no tasks in your list");
     }
 
+    /**
+     * Prints a message upon successful addition of a task to the list
+     *
+     * @param newTask The task to be added to the list
+     * @param taskList The list of tasks after the addition
+     */
     public void showTaskAdditionMessage(Task newTask, TaskList taskList) {
         System.out.println(Message.ADDED + newTask.toString() + "\n" +
                 "Now you have " + taskList.size() +
@@ -61,6 +75,12 @@ public class Ui {
                 + "in the list");
     }
 
+    /**
+     * Prints a message upon successful deletion of a task from the list
+     *
+     * @param task The task to be removed from the list
+     * @param taskList The list of tasks after the deletion
+     */
     public void showTaskDeletionMessage(Task task,TaskList taskList) {
         System.out.println(Message.DELETE + task.toString() + "\n" +
                 "Now you have " + taskList.size() +
@@ -68,6 +88,11 @@ public class Ui {
                 + "in the list");
     }
 
+    /**
+     * Prints a message upon successful completion of a task in the list
+     *
+     * @param task The task that is completed in the list
+     */
     public void showCompletionMessage(Task task) {
         System.out.println(Message.DONE + task.toString());
     }

@@ -17,6 +17,13 @@ public class Event extends Task {
 
     public static final String delimiterAt = " /at ";
 
+    /**
+     * Constructs an <code>Event</code> Object to represent an event
+     *
+     * @param description The description of the event item
+     * @param at The duration of the event (including the start and end of both date and time)
+     * @throws DukeException If the format of either date or time is incorrect
+     */
     public Event(String description, String at) throws DukeException {
         super(description);
         this.at = at;
@@ -46,11 +53,23 @@ public class Event extends Task {
 
     }
 
+    /**
+     * Parses a text and returns the date of an event
+     *
+     * @param dateString The text to be parsed
+     * @return The date of an event
+     */
     private LocalDate parseDate(String dateString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
         return LocalDate.parse(dateString, formatter);
     }
 
+    /**
+     * Parses a text and returns the time of an event
+     *
+     * @param timeString The text to be parsed
+     * @return The time of an event
+     */
     private LocalTime parseTime(String timeString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("Hmm");
         return LocalTime.parse(timeString, formatter);
