@@ -6,9 +6,10 @@ public class UnknownCommandException extends DukeException {
     private static final String s2 = "2. bye\n";
     private static final String s3 = "3. todo \'task name\' (e.g. todo task 1)\n";
     private static final String s4 =
-            "4. deadline \'task name\' /by \'any date format\' (e.g. deadline project /by Friday 2pm)\n";
+            "4. deadline \'task name\' /by \'any date format\' (e.g. deadline project /by YYYY-MM-DD HHMM or" +
+                    " YYYY-MM-DD)\n";
     private static final String s5 =
-            "5. event \'event name\' /at \'any date format\' (e.g. event project /at Friday 2pm)\n";
+            "5. event \'event name\' /at \'any date format\' (e.g. event project /at YYYY-MM-DD HHMM or YYYY-MM-DD)\n";
     private static final String s6 = "6. delete ___ (e.g. delete 1)  *Note that it should be a value more than 0*\n";
     private static final String s7 = "7. done ___ (e.g. done 1)  *Note that it should be a value more than 0*\n";
 

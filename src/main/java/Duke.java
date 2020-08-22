@@ -2,6 +2,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.ArrayList;
 import static java.lang.Integer.parseInt;
@@ -107,7 +108,7 @@ public class Duke {
         System.out.println(LINE);
         func.run();
         System.out.println(LINE);
-        System.out.println(); // optional
+        System.out.println();
     }
 
     private boolean isNumber(String str) {
@@ -181,7 +182,7 @@ public class Duke {
 
     // adding the task into the list
     private void addTask(String type, String message)
-            throws InvalidFormatDeadlineException, InvalidFormatEventException {
+            throws InvalidFormatDeadlineException, InvalidFormatEventException, InvalidFormatDateException {
         Task task;
         String[] dateTime;
         if (isTODO(type)) {
@@ -192,14 +193,14 @@ public class Duke {
             if (dateTime.length == 1) {
                 throw new InvalidFormatDeadlineException();
             }
-            task = new Deadline(dateTime[0], dateTime[1]);
+            task = new Deadline(dateTime[0], formatDateTime(dateTime[1]));
         } else if (isEvent(type)){
             dateTime = message.split(" /at ", 2);
             // checking if the input is valid
             if (dateTime.length == 1) {
                 throw new InvalidFormatEventException();
             }
-            task = new Event(dateTime[0], dateTime[1]);
+            task = new Event(dateTime[0], formatDateTime(dateTime[1]));
         } else {
             return;
         }
@@ -294,6 +295,35 @@ public class Duke {
             } catch (IOException e) {
                 System.out.println(KEYWORD_ERR);
             }
+        }
+    }
+
+    private LocalDateTime formatDateTime(String s) throws InvalidFormatDateException {
+        String[] dateFormat = s.split(" ",2);
+        String[] date = dateFormat[0].split("-");
+        String time;
+        if (dateFormat.length == 1) {
+            // case where he nvr input in the time
+            time = "2359";
+            if (date.length != 3) {
+                throw new InvalidFormatDateException();
+            }
+        } else {
+            time = dateFormat[1];
+            // case where he inputs in the time
+            if (date.length != 3 || time.length() != 4) {
+                throw new InvalidFormatDateException();
+            }
+        }
+        try {
+            int year = Integer.parseInt(date[0]);
+            int month = Integer.parseInt(date[1]);
+            int day = Integer.parseInt(date[2]);
+            int hour = Integer.parseInt(time.substring(0, 2));
+            int minute = Integer.parseInt(time.substring(2));
+            return LocalDateTime.of(year, month, day, hour, minute);
+        } catch (NumberFormatException e) {
+            throw new InvalidFormatDateException();
         }
     }
 
