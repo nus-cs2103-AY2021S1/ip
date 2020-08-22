@@ -19,6 +19,8 @@ public class Duke {
                     listOfItems.doneItem(input);
                 } else if (input.contains("delete")) {
                     listOfItems.deleteItem(input);
+                } else if (input.contains("show items due by")) { // check items due on a specific date
+                    listOfItems.check(input);
                 } else {
                     listOfItems.addItem(input);
                 }

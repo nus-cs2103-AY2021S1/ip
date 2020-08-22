@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -125,5 +128,31 @@ public class ListOfItems {
                     "Sorry, you did not enter a valid command! Please try again." +
                     "\n" + divider);
         }
+    }
+
+    void check(String input) throws DukeException {
+        try {
+            boolean hasResults = false;
+            String info = input.substring(18);
+            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d/M/yyyy");
+            LocalDate date = LocalDate.parse(info, dateFormat);
+            System.out.println(divider);
+            System.out.println("Here are the results:");
+            for (int i = 0; i < this.list.size(); i++) {
+                if (this.list.get(i) instanceof Deadline && ((Deadline) this.list.get(i)).date.equals(date)) {
+                    hasResults = true;
+                    System.out.println(this.list.get(i));
+                }
+            }
+            if (!hasResults) {
+                System.out.println("- No tasks due on " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " -");
+            }
+            System.out.println(divider);
+        } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
+            throw new DukeException("\n" + divider + "\n" +
+                    "Sorry, you did not enter a valid date (DD/MM/YYYY)! Please try again." +
+                    "\n" + divider);
+        }
+
     }
 }
