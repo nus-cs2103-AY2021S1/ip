@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -119,8 +120,8 @@ public class Duke {
         }
 
         String name = taskParts[0];
-        String date = taskParts[1];
-        this.addTask(new Event(name, date));
+        String dateString = taskParts[1];
+        this.addTask(new Event(name, LocalDate.parse(dateString)));
     }
 
     public void deadline(String cmd) throws DukeException {
@@ -132,8 +133,8 @@ public class Duke {
         }
 
         String name = taskParts[0];
-        String date = taskParts[1];
-        this.addTask(new Deadline(name, date));
+        String dateString = taskParts[1];
+        this.addTask(new Deadline(name, LocalDate.parse(dateString)));
     }
 
     public void todo(String cmd) throws DukeException {
