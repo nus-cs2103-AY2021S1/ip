@@ -4,6 +4,6 @@ event read book /at 4-6pm
 list
 done 2
 remove 2
-blah
-yo
-
+done
+hello
+bye

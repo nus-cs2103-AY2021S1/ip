@@ -84,7 +84,7 @@ public class Duke {
                 taskNumber = Integer.parseInt(command.getDescription());
                 Task doneTask = taskList.getTask(taskNumber);
                 doneTask.markAsDone();
-                System.out.println(doneTask + "\n-------------------------------------------\n");
+                System.out.println(doneTask + "\n-------------------------------------------");
                 break;
             case DELETE:
                 System.out.println("-------------------------------------------\n" +
@@ -92,7 +92,7 @@ public class Duke {
                 taskNumber = Integer.parseInt(command.getDescription());
                 Task deletedTask = taskList.getTask(taskNumber);
                 taskList.removeTask(deletedTask);
-                System.out.println(deletedTask + "\n-------------------------------------------\n");
+                System.out.println(deletedTask + "\n-------------------------------------------");
                 break;
             case BYE: //bye
                 System.out.println("-------------------------------------------\n" +
@@ -104,8 +104,8 @@ public class Duke {
     }
 
     public static void printHello() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
@@ -129,6 +129,7 @@ public class Duke {
                 processCommand(command, taskList);
             } catch (IllegalArgumentException exception) {
                 System.out.println(exception.getMessage());
+
             }
         }
     }
