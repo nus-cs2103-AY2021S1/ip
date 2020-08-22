@@ -6,9 +6,16 @@ import java.time.LocalDateTime;
 
 
 public class Duke {
-    private static ArrayList<Task> taskList = new ArrayList<>();
 
-    private static void processEventOrDeadline(String input) throws EventException, DeadlineException {
+    private DukeCSV dukeCSV;
+    private ArrayList<Task> taskList;
+
+    public Duke() {
+        this.dukeCSV = new DukeCSV();
+        this.taskList = this.dukeCSV.read();
+    }
+
+    private void processEventOrDeadline(String input) throws EventException, DeadlineException {
         String[] temp = input.split("/");
         String[] commandTemp = temp[0].split(" ");
         String command = commandTemp[0];
@@ -91,18 +98,18 @@ public class Duke {
         System.out.println("Got it. I've added this task:");
         if (command.equals("deadline")) {
             Task task = new Deadline(description, dateTime);
-            taskList.add(task);
+            this.taskList.add(task);
             System.out.println(task);
-            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+            System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
         } else if (command.equals("event")) {
             Task task = new Event(description, dateTime);
-            taskList.add(task);
+            this.taskList.add(task);
             System.out.println(task);
-            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+            System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
         }
     }
 
-    private static void processToDo(String input) throws ToDoException {
+    private void processToDo(String input) throws ToDoException {
         String[] temp = input.split(" ");
 
         String command = temp[0];
@@ -117,14 +124,14 @@ public class Duke {
         }
 
         Task task = new ToDo(description);
-        taskList.add(task);
+        this.taskList.add(task);
 
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
     }
 
-    private static void processDelete(String input) throws DeletionException {
+    private void processDelete(String input) throws DeletionException {
         String[] temp = input.split(" ");
         if (temp.length == 1) {
             throw new DeletionException("Please input index after delete! Example of input would be 'delete 1' which deletes 1st item from list");
@@ -136,19 +143,19 @@ public class Duke {
         String command = temp[0];
         int index = Integer.parseInt(temp[1]) - 1;
 
-        if (index >= taskList.size() || index < 0) {
+        if (index >= this.taskList.size() || index < 0) {
             throw new DeletionException("Item does not exist in list!");
         }
 
-        Task task = taskList.get(index);
-        taskList.remove(index);
+        Task task = this.taskList.get(index);
+        this.taskList.remove(index);
 
         System.out.println("Noted. I've removed this task:");
         System.out.println(task);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
     }
 
-    private static void processDone(String input) throws DoneException {
+    private void processDone(String input) throws DoneException {
         String[] temp = input.split(" ");
         if (temp.length == 1) {
             throw new DoneException("Please input number after done! Example of input would be 'done 2' checks item number 2 from list");
@@ -157,30 +164,30 @@ public class Duke {
             throw new DoneException("Too many arguements! Example of input would be 'done 2' which checks item number 2 from list");
         }
         int listNumber = Integer.parseInt(temp[1]);
-        if (listNumber > taskList.size()) {
+        if (listNumber > this.taskList.size()) {
             throw new DoneException("Item number " + listNumber + " does not exist in list!");
         }
-        taskList.get(listNumber - 1).completeTask();
+        this.taskList.get(listNumber - 1).completeTask();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println(taskList.get(listNumber - 1).toString());
+        System.out.println(this.taskList.get(listNumber - 1).toString());
     }
 
-    private static void processList() {
+    private void processList() {
         System.out.println("Here are the tasks in your list:");
         int index = 1;
-        for (Task task : taskList) {
+        for (Task task : this.taskList) {
             System.out.println(index + ". " + task.toString());
             index++;
         }
     }
 
-    public static void main(String[] args) {
+    public void run() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello! I'm Duke");
         System.out.println("What can i do for you?");
 
         DukeCSV dukeCSV = new DukeCSV();
-        taskList = dukeCSV.read();
+        this.taskList = dukeCSV.read();
 
         while (true) {
             String input = sc.nextLine();
@@ -234,9 +241,13 @@ public class Duke {
 
         // saves taskList to data/duke.csv
         try {
-            dukeCSV.saveToCSV(taskList);
+            dukeCSV.saveToCSV(this.taskList);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
     }
 }
