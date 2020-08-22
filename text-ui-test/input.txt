@@ -1,10 +1,10 @@
 todo read book
-deadline return book /by June 6th
+deadline return book /by 20/01/1998 1800
 event project meeting /at Aug 6th 2-4pm
 todo join sports club
 todo borrow book
 list
-deadline return book /by Sunday
+deadline return book /by 19/02/2020 0900
 event project meeting /at Mon 2-4pm
 done 1
 done 2
@@ -22,4 +22,7 @@ event
 event /at Mon
 event /at 2-4pm
 delete 7
+deadline burn book /by 2/12/2019 1800
+deadline shred book /by 2020/12/2 2359
+list
 bye
