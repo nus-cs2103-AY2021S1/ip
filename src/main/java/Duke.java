@@ -1,12 +1,15 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 import exception.DukeException;
 import operation.Operation;
 import parser.CommandParser;
 import task.TaskList;
+import storage.TaskStorage;
 
 public class Duke {
-    private final TaskList taskStorage;
+    private TaskStorage taskStorage;
+    private TaskList taskList;
 
     private static final String DIVIDER = "---------------------------------------------------------";
     private static final String LOGO = " ____        _        \n"
@@ -15,8 +18,9 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    Duke() {
-        this.taskStorage = new TaskList();
+    private void initialiseDuke() {
+        this.taskStorage = TaskStorage.createTaskStorage();
+        this.taskList = this.taskStorage.loadTaskList();
     }
 
     private void printStartMessage() {
@@ -26,6 +30,7 @@ public class Duke {
 
     public void runDuke() {
         printStartMessage();
+        initialiseDuke();
 
         boolean isExit = false;
         Scanner userInput = new Scanner(System.in);
@@ -37,7 +42,7 @@ public class Duke {
 
             System.out.println(Duke.DIVIDER);
             try {
-                Operation operation = commandParser.parse(command, this.taskStorage);
+                Operation operation = commandParser.parse(command, this.taskList, this.taskStorage);
                 operation.execute();
                 isExit = operation.isExit();
             } catch (DukeException exception) {

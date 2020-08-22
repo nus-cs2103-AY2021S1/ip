@@ -1,12 +1,18 @@
 package task;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class TaskList {
+public class TaskList implements Iterable<Task> {
     private final ArrayList<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();
+    }
+
+    @Override
+    public Iterator<Task> iterator() {
+        return this.taskList.iterator();
     }
 
     public int getCurrCapacity() {

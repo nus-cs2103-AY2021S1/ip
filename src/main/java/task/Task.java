@@ -1,5 +1,7 @@
 package task;
 
+import java.util.Optional;
+
 public abstract class Task {
     protected final String description;
     protected boolean completed;
@@ -20,4 +22,16 @@ public abstract class Task {
     public void completeTask() {
         this.completed = true;
     }
+
+    public String getTaskDescription() {
+        return this.description;
+    }
+
+    public boolean isTaskCompleted() {
+        return this.completed;
+    }
+
+    public abstract String getTaskSymbol();
+
+    public abstract Optional<String> getTaskDatetime();
 }

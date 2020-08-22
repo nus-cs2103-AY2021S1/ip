@@ -12,10 +12,8 @@ import operation.DeleteOperation;
 import operation.DoneOperation;
 import operation.ExitOperation;
 import operation.ListOperation;
-import task.Deadline;
-import task.Event;
-import task.TaskList;
-import task.Todo;
+import storage.TaskStorage;
+import task.*;
 
 public class CommandParser {
     private static String concatenate(String[] arr, int start, int end) {
@@ -39,8 +37,8 @@ public class CommandParser {
         return str.matches("\\d+");
     }
 
-    private ExitOperation createExitOp() {
-        return new ExitOperation();
+    private ExitOperation createExitOp(TaskStorage storage, TaskList list) {
+        return new ExitOperation(storage, list);
     }
 
     private ListOperation createListOp(TaskList list) {
@@ -104,11 +102,12 @@ public class CommandParser {
         return new DeleteOperation(list, index);
     }
 
-    public Operation parse(String commandString, TaskList list) throws DukeException {
+    public Operation parse(String commandString, TaskList list, TaskStorage taskStorage)
+            throws DukeException {
         String[] commands = commandString.split(" ");
         switch(commands[0]) {
             case CommandType.BYE:
-                return createExitOp();
+                return createExitOp(taskStorage, list);
             case CommandType.LIST:
                 return createListOp(list);
             case CommandType.DONE:
