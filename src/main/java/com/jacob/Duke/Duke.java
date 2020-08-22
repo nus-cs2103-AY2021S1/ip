@@ -1,8 +1,11 @@
 package com.jacob.Duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Predicate;
 
 
 public class Duke {
@@ -32,6 +35,7 @@ public class Duke {
         System.out.println(" -----------------");
         System.out.println(byeHandler());
         System.out.println(" -----------------");
+
         sc.close();
         }
 
@@ -68,6 +72,10 @@ public class Duke {
             case "list":
                 //iterate through the taskList and print all active members
                 printListStatus(taskList);
+                break;
+            case "list-due":
+                //iterate through the taskList and print all active members
+                filterPrintTasks(inputCommand,taskList);
                 break;
             case "done":
                 //doneEventHandler();
@@ -147,10 +155,9 @@ public class Duke {
         } else if (breakpoint == -1) {
             throw new DukeException("Hey a deadline cannot have no actual date!!\n");
         }
-        String tempString = inputCommand.substring("deadline".length(), breakpoint);
-        String tempString2 = "(by: " + inputCommand.substring(breakpoint + 3) + ")";
-        String result = tempString + tempString2;
-        Task theDeadline = new Deadline(result);
+        String description = inputCommand.substring("deadline".length(), breakpoint);
+        String dateTime = inputCommand.substring(breakpoint + 4);
+        Task theDeadline = new Deadline(description, dateTime);
         taskList.add(theDeadline);
         return String.format(" Got it. I've added this task: \n" +
                 "   %s\n" +
@@ -171,10 +178,9 @@ public class Duke {
         } else if (breakpoint == -1) {
             throw new DukeException("Hey, a event cannot have no actual date and time!!");
         }
-        String tempString = inputCommand.substring("event".length(), breakpoint);
-        String tempString2 = "(at: " + inputCommand.substring(breakpoint + 3) + ")";
-        String result = tempString + tempString2;
-        Task theEvent = new Event(result);
+        String description = inputCommand.substring("event".length(), breakpoint);
+        String dateTime = inputCommand.substring(breakpoint + 4);
+        Task theEvent = new Event(description, dateTime);
         taskList.add(theEvent);
         return String.format(" Got it. I've added this task: \n" +
                 "   %s\n" +
@@ -200,5 +206,27 @@ public class Duke {
         return String.format(" Noted. I've removed this task:\n" +
                 "   %s\n" +
                 " Now you have %d tasks in the list.",theRemovedTask.getCurrentStatus(), taskList.size());
+    }
+
+    //add ability to filter for date time using predicate
+    static void filterPrintTasks(String inputCommand,List<Task> taskList) {
+        //get the date time string from the initial string
+        String dateTime = inputCommand.substring("list-due ".length());
+
+        //get the date time object for comparison
+        LocalDateTime filterDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
+
+        //check that the date and time is the same before printing
+        Predicate<LocalDateTime> dateTimePredicate = x -> x.equals(filterDateTime);
+
+        //print out the filtered items
+        int count = 1;
+        System.out.println(" Here are the tasks in your filtered list:");
+        for (Task t: taskList) {
+            if (t.dueDateTime != null && dateTimePredicate.test(t.dueDateTime)) {
+                System.out.println("  "+ count + ". "+ t.getCurrentStatus());
+                count++;
+            }
+        }
     }
 }

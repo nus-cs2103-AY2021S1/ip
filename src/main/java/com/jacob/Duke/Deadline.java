@@ -7,4 +7,8 @@ public class Deadline extends Task {
         this.type = "D";
     }
 
+    public Deadline(String description, String dateTime) {
+        super(description, dateTime);
+        this.type = "D";
+    }
 }

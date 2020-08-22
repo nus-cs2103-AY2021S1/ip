@@ -7,4 +7,9 @@ public class Event extends Task {
         this.type = "E";
     }
 
+    public Event(String description, String dateTime) {
+        super(description, dateTime);
+        this.type = "E";
+    }
+
 }
