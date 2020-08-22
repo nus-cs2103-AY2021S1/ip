@@ -9,17 +9,17 @@ import java.time.LocalDate;
 
 public class Duke {
     private static final List<Task> storage = new ArrayList<>();
-    private static final String border = "____________________________________________________________\n";
-    private static final String pathname = System.getProperty("user.dir")
+    private static final String BORDER = "____________________________________________________________\n";
+    private static final String PATHNAME = System.getProperty("user.dir")
             + File.separator + "data" + File.separator + "duke.txt";
-    protected static File file = new File(pathname);
+    protected static File file = new File(PATHNAME);
 
     public static boolean checkBye(String s) {
         return s.equals("bye");
     }
 
     public static void exitLine() {
-        System.out.println(border + "Bye. Hope to see you again soon!\n" + border);
+        System.out.println(BORDER + "Bye. Hope to see you again soon!\n" + BORDER);
     }
 
     public static boolean checkList(String s) {
@@ -28,13 +28,13 @@ public class Duke {
 
     public static void displayList() {
         int listLen = storage.size();
-        System.out.println(border.replace("\n", ""));
+        System.out.println(BORDER.replace("\n", ""));
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= listLen; i++) {
             Task curr = storage.get(i - 1);
             System.out.println(i + "." + curr);
         }
-        System.out.println(border);
+        System.out.println(BORDER);
     }
 
     public static void addTask(String s, String next) throws DukeException {
@@ -77,10 +77,10 @@ public class Duke {
         }
 
         System.out.println(
-                border + "Got it. I've added this task:\n"
+                BORDER + "Got it. I've added this task:\n"
                         + "  " + toAdd + "\n"
                         + "Now you have " + storage.size() + " tasks in the list.\n"
-                        + border
+                        + BORDER
         );
     }
 
@@ -99,14 +99,14 @@ public class Duke {
                 Task completed = t.setDone(true);
                 storage.set(i - 1, completed);
                 System.out.println(
-                        border + "Nice! I've marked this task as done:\n" + "  "
-                                + completed + "\n" + border
+                        BORDER + "Nice! I've marked this task as done:\n" + "  "
+                                + completed + "\n" + BORDER
                 );
             }
         } catch (NumberFormatException nfe) {
             System.out.println(
-                    border + "Please state the completed task number after \"done\".\n"
-                    + border
+                    BORDER + "Please state the completed task number after \"done\".\n"
+                    + BORDER
             );
         }
     }
@@ -120,7 +120,7 @@ public class Duke {
             try {
                 addTask("delete", "");
             } catch (DukeException e) {
-                System.out.println(border + e.getMessage() + "\n" + border);
+                System.out.println(BORDER + e.getMessage() + "\n" + BORDER);
             }
             return;
         }
@@ -133,16 +133,16 @@ public class Duke {
             Task t = storage.get(i - 1);
             storage.remove(i - 1);
             System.out.println(
-                    border + "Noted. I've removed this task:\n" + "  "
+                    BORDER + "Noted. I've removed this task:\n" + "  "
                     + t + "\n"
-                    + "Now you have " + storage.size() + " tasks in the list.\n" + border
+                    + "Now you have " + storage.size() + " tasks in the list.\n" + BORDER
             );
         }
     }
 
     public static void fileCheck() {
         try {
-            File f = new File(pathname);
+            File f = new File(PATHNAME);
             f.getParentFile().mkdirs();
 
             if (!f.createNewFile()) {
@@ -156,7 +156,7 @@ public class Duke {
 
     public static void saveFile() {
         try {
-            FileWriter fw = new FileWriter(pathname);
+            FileWriter fw = new FileWriter(PATHNAME);
             List<Task> storageCopy = storage;
             String split = "_";
             int index = 0;
@@ -172,20 +172,17 @@ public class Duke {
                 fw.write(completed + split);
                 fw.write(name + split);
 
-                switch(type) {
-                    case "E": {
-                        Event event = (Event) curr;
-                        fw.write(event.getAt() + System.lineSeparator());
-                        break;
-                    }
-                    case "D": {
-                        Deadline deadline = (Deadline) curr;
-                        fw.write(deadline.getBy() + System.lineSeparator());
-                        break;
-                    }
-                    default: {
-                        fw.write("mark" + System.lineSeparator());
-                    }
+                switch (type) {
+                case "E":
+                    Event event = (Event) curr;
+                    fw.write(event.getAt() + System.lineSeparator());
+                    break;
+                case "D":
+                    Deadline deadline = (Deadline) curr;
+                    fw.write(deadline.getBy() + System.lineSeparator());
+                    break;
+                default:
+                    fw.write("mark" + System.lineSeparator());
                 }
             }
             fw.close();
@@ -210,17 +207,14 @@ public class Duke {
                 }
 
                 switch (type) {
-                    case "E": {
-                        storage.add(new Event(name, done, time));
-                        break;
-                    }
-                    case "D": {
-                        storage.add(new Deadline(name, done, time));
-                        break;
-                    }
-                    default: {
-                        storage.add(new ToDo(name, done));
-                    }
+                case "E":
+                    storage.add(new Event(name, done, time));
+                    break;
+                case "D":
+                    storage.add(new Deadline(name, done, time));
+                    break;
+                default:
+                    storage.add(new ToDo(name, done));
                 }
             }
         } catch (FileNotFoundException e) {
@@ -238,13 +232,13 @@ public class Duke {
         fileCheck();
         if (!file.exists() || file.length() == 0) {
             System.out.println(
-                    border + "Hello! I'm Duke\n"
-                    + "What can I do for you?\n" + border
+                    BORDER + "Hello! I'm Duke\n"
+                    + "What can I do for you?\n" + BORDER
             );
         } else {
             System.out.println(
-                    border + "Well come back!\n" + "You still have "
-                    + storage.size() + " tasks left to clear.\n" + border
+                    BORDER + "Well come back!\n" + "You still have "
+                    + storage.size() + " tasks left to clear.\n" + BORDER
             );
         }
     }
@@ -266,21 +260,21 @@ public class Duke {
                         doneTask(next);
                         updateFile();
                     } catch (DukeException e) {
-                        System.out.println(border + e.getMessage() + "\n" + border);
+                        System.out.println(BORDER + e.getMessage() + "\n" + BORDER);
                     }
                 } else if (checkDel(test)) {
                     try {
                         delTask(next);
                         updateFile();
                     } catch (DukeException e) {
-                        System.out.println(border + e.getMessage() + "\n" + border);
+                        System.out.println(BORDER + e.getMessage() + "\n" + BORDER);
                     }
                 } else {
                     try {
                         addTask(test, next);
                         updateFile();
                     } catch (DukeException e) {
-                        System.out.println(border + e.getMessage() + "\n" + border);
+                        System.out.println(BORDER + e.getMessage() + "\n" + BORDER);
                     }
                 }
             }
