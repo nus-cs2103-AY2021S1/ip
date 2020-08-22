@@ -167,6 +167,13 @@ public class Duke {
                     splitString[0].equals("delete") && stringIsInt(splitString[1])) {
                 int index = parseInt(splitString[1]);
                 delete(index);
+            } else if (splitString.length == 2 && splitString[0].equals("find")) {
+                String date = parseDateStringToLocalDateFormat(splitString[1]);
+                printTasksByDate(LocalDate.parse(date));
+            } else if (splitString.length == 3 && splitString[0].equals("find")) {
+                String date = parseDateStringToLocalDateFormat(splitString[1]);
+                String time = parseTimeStringToLocalTimeFormat(splitString[2]);
+                printTasksByDateAndTime(LocalDate.parse(date), LocalTime.parse(time));
             } else if (splitString[0].equals(TaskType.TODO.name)) {
                 todo(splitString);
             } else if (splitString[0].equals(TaskType.DEADLINE.name)) {
@@ -258,24 +265,59 @@ public class Duke {
         farewell();
     }
 
-    //------------------------------- Methods dealing with date----------------------
-    // Used for converting local date obj in task to given format
-    String formatDate(String format, LocalDate localDate) {
-        return localDate.format(DateTimeFormatter.ofPattern(format));
+    //------------------------------- Methods dealing with date and time---------------------
+    void printTasksByDate(LocalDate localDate) {
+        if (memory.size() > 0) {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("Here are the tasks with the date: " + localDate.toString() + "\n");
+
+            for (int i = 0; i < memory.size(); i++) {
+                Task currentTask = memory.get(i);
+                if (currentTask instanceof Deadline) {
+                    Deadline deadline = (Deadline) currentTask;
+                    if (deadline.getLocalDate().equals(localDate)) {
+                        stringBuilder.append((i + 1) + ". " + deadline.toString() + "\n");
+                    }
+                } else if (currentTask instanceof Event) {
+                    Event event = (Event) currentTask;
+                    if (event.getLocalDate().equals(localDate)) {
+                        stringBuilder.append((i + 1) + ". " + event.toString() + "\n");
+                    }
+                }
+            }
+            printMessage(stringBuilder.toString());
+        } else {
+            printMessage("There are no tasks with the date: " + localDate.toString());
+        }
     }
 
-    // Used to convert time obj in task to given format
-    String formatTime(String format, LocalTime localTime) {
-        return localTime.format(DateTimeFormatter.ofPattern(format));
-    }
+    void printTasksByDateAndTime(LocalDate localDate, LocalTime localTime) {
+        if (memory.size() > 0) {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("Here are the tasks with the date: "
+                    + localDate.toString() + " and time: " + localTime.toString() + "\n");
 
-
-    ArrayList<Task> findTasksByDate(LocalDate localDate) {
-        return null;
-    }
-
-    ArrayList<Task> findTasksByDateAndTime(LocalDate localDate, LocalTime localTime) {
-        return null;
+            for (int i = 0; i < memory.size(); i++) {
+                Task currentTask = memory.get(i);
+                if (currentTask instanceof Deadline) {
+                    Deadline deadline = (Deadline) currentTask;
+                    if (deadline.getLocalDate().equals(localDate)
+                        && deadline.getLocalTime().equals(localTime)) {
+                        stringBuilder.append((i + 1) + ". " + deadline.toString() + "\n");
+                    }
+                } else if (currentTask instanceof Event) {
+                    Event event = (Event) currentTask;
+                    if (event.getLocalDate().equals(localDate)
+                        && event.getLocalTime().equals(localTime)) {
+                        stringBuilder.append((i + 1) + ". " + event.toString() + "\n");
+                    }
+                }
+            }
+            printMessage(stringBuilder.toString());
+        } else {
+            printMessage("There are no tasks with the date: " + localDate.toString()
+            + " and time: " + localTime.toString());
+        }
     }
 
 
