@@ -46,7 +46,6 @@ public class DukeFileHandler {
         String[] inputArr = input.split("\\|");
         boolean isDone = inputArr[1].trim().equals("1");
 
-
         switch (inputArr[0].trim()) {
         case "T":
             return new Task(inputArr[2].trim(), isDone);
@@ -65,7 +64,7 @@ public class DukeFileHandler {
         FileWriter fileWriter = new FileWriter(path);
         StringBuilder content = new StringBuilder();
 
-        for(Task task : list){
+        for (Task task : list) {
             content.append(task.toCustomString()).append(System.lineSeparator());
         }
 

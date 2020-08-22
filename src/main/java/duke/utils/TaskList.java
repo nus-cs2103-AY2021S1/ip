@@ -28,16 +28,16 @@ public class TaskList {
     }
 
 
-    public void clear(){
+    public void clear() {
         list.clear();
     }
 
-    public Task delete(int entryDelete){
+    public Task delete(int entryDelete) {
         return list.remove(entryDelete);
     }
 
 
-    public int size(){
+    public int size() {
         return list.size();
     }
 
