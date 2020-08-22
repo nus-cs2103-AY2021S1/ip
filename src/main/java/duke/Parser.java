@@ -19,7 +19,7 @@ public class Parser {
      * @throws DukeInvalidDateTimeException If date and time input is invalid.
      * @throws DukeInvalidCommandException If command is invalid.
      */
-    static Command parse(String fullCommand) throws DukeEmptyInputException, DukeInvalidDateTimeException, DukeInvalidCommandException {
+    static Command parse(String fullCommand) throws DukeEmptyInputException, DukeInvalidDateTimeException, DukeInvalidCommandException, DukeInvalidKeywordException {
         String[] commandArr = fullCommand.trim().split(" ", 2);
         switch(commandArr[0]) {
             case "bye":
@@ -30,6 +30,11 @@ public class Parser {
                 return parseDone(Integer.parseInt(commandArr[1]));
             case "delete":
                 return parseDelete(Integer.parseInt(commandArr[1]));
+            case "find":
+                if(commandArr.length < 2) {
+                    throw new DukeInvalidKeywordException();
+                }
+                return parseFind(commandArr[1]);
             case "todo":
                 if(commandArr.length < 2) {
                     throw new DukeEmptyInputException("The description of a todo cannot be empty.");
@@ -82,6 +87,15 @@ public class Parser {
      */
     static DeleteCommand parseDelete(int taskNo) {
         return new DeleteCommand(taskNo);
+    }
+
+    /**
+     * Parses an FindCommand associated with a keyword.
+     * @param keyword Search keyword.
+     * @return Returns an FindCommand associated with the search keyword.
+     */
+    static FindCommand parseFind(String keyword) {
+        return new FindCommand(keyword);
     }
 
     /**

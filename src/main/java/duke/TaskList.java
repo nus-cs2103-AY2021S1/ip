@@ -88,6 +88,21 @@ public class TaskList {
     }
 
     /**
+     * Finds the tasks related to keyword.
+     * @param keyword Keyword used to find the related tasks.
+     * @return Returns a list of related tasks.
+     */
+    public List<Task> findTasks(String keyword) {
+        List<Task> relatedTasks = new ArrayList<>();
+        for(Task task : this.tasks) {
+            if(task.description.contains(keyword)) {
+                relatedTasks.add(task);
+            }
+        }
+        return relatedTasks;
+    }
+
+    /**
      * Retrieves a string describing the task size.
      * @return Returns the string.
      */

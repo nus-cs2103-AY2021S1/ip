@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.List;
 import java.util.Scanner;
 import duke.task.*;
 
@@ -50,9 +51,27 @@ public class Ui {
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= taskList.size(); i++) {
             Task task = taskList.get(i - 1);
-            String message = String.valueOf(i) + ".";
+            String message = i + ".";
             message += task;
             System.out.println(message);
+        }
+    }
+
+    /**
+     * Parses the list of tasks and prints the search result.
+     * @param searchResult Search result for task list.
+     */
+    public void printSearchResult(List<Task> searchResult) {
+        if(searchResult.size() < 1) {
+            System.out.println("There are no matching results!");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 1; i <= searchResult.size(); i++) {
+                Task task = searchResult.get(i - 1);
+                String message = i + ".";
+                message += task;
+                System.out.println(message);
+            }
         }
     }
 
