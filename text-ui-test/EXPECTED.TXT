@@ -47,8 +47,20 @@
 
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
  *WOOF* I have added:
-   [D][✘] complete project (FINISH by: Monday)
+   [D][✘] complete project (FINISH by: 21 February 2019)
  Now you have 2 tasks in the list. Keep going!!
+.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+
+.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+ Please input deadline in following format:
+   YYYY/MM/DD HH:MM!
+ *Woof woof*
+.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+
+.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+ *WOOF* I have added:
+   [D][✘] complete tutorial (FINISH by: 20 February 2019 12:00)
+ Now you have 3 tasks in the list. Keep going!!
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
 
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
@@ -62,16 +74,23 @@
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
 
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+ Please input event time in the following format:
+    YYYY/MM/DD HH:MM-HH:MM!
+ *Woof woof*
+.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+
+.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
  *WOOF* I have added:
-   [E][✘] meeting (APPEAR at: Monday 3-4pm)
- Now you have 3 tasks in the list. Keep going!!
+   [E][✘] meeting (APPEAR at: 20 February 2019 16:00-18:00)
+ Now you have 4 tasks in the list. Keep going!!
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
 
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
  Here are the tasks in your list *Woof*:
    1.[T][✓] buy Books
-   2.[D][✘] complete project (FINISH by: Monday)
-   3.[E][✘] meeting (APPEAR at: Monday 3-4pm)
+   2.[D][✘] complete project (FINISH by: 21 February 2019)
+   3.[D][✘] complete tutorial (FINISH by: 20 February 2019 12:00)
+   4.[E][✘] meeting (APPEAR at: 20 February 2019 16:00-18:00)
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
 
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
@@ -90,20 +109,22 @@
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
  Here are the tasks in your list *Woof*:
    1.[T][✓] buy Books
-   2.[D][✘] complete project (FINISH by: Monday)
-   3.[E][✓] meeting (APPEAR at: Monday 3-4pm)
+   2.[D][✘] complete project (FINISH by: 21 February 2019)
+   3.[D][✘] complete tutorial (FINISH by: 20 February 2019 12:00)
+   4.[E][✓] meeting (APPEAR at: 20 February 2019 16:00-18:00)
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
 
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
  *WOOF* I have removed:
    [T][✓] buy Books
- Now you have 2 tasks in the list. Keep going!!
+ Now you have 3 tasks in the list. Keep going!!
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
 
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
  Here are the tasks in your list *Woof*:
-   1.[D][✘] complete project (FINISH by: Monday)
-   2.[E][✓] meeting (APPEAR at: Monday 3-4pm)
+   1.[D][✘] complete project (FINISH by: 21 February 2019)
+   2.[D][✘] complete tutorial (FINISH by: 20 February 2019 12:00)
+   3.[E][✓] meeting (APPEAR at: 20 February 2019 16:00-18:00)
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
 
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
@@ -116,8 +137,27 @@
 
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
  Here are the tasks in your list *Woof*:
-   1.[D][✘] complete project (FINISH by: Monday)
-   2.[E][✓] meeting (APPEAR at: Monday 3-4pm)
+   1.[D][✘] complete project (FINISH by: 21 February 2019)
+   2.[D][✘] complete tutorial (FINISH by: 20 February 2019 12:00)
+   3.[E][✓] meeting (APPEAR at: 20 February 2019 16:00-18:00)
+.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+
+.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+ Here is the list of ongoing events on 20 February 2019:
+   1.[D][✘] complete tutorial (FINISH by: 20 February 2019 12:00)
+   2.[E][✓] meeting (APPEAR at: 20 February 2019 16:00-18:00)
+.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+
+.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+ Please enter date in YYYY/MM/DD format! *Woof woof*
+.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+
+.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+ Please enter date in YYYY/MM/DD format! *Woof woof*
+.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+
+.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+ You have no event on this day! Have a good break! *Woof*
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
 
 .~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
