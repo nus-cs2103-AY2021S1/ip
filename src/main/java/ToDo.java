@@ -10,4 +10,10 @@ public class ToDo extends Task {
                 ? "[T][✓] " + text
                 : "[T][✗] " + text;
     }
+
+    public String toCommand() {
+        return done
+                ? "done todo " + text
+                : "todo " + text;
+    }
 }
