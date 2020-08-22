@@ -55,6 +55,11 @@ public class Parser {
                 throw new DukeException(">> Oh no!!! An event must have a description and date!");
             }
             return new AddEventCommand(chunks);
+        case FIND:
+            if (chunks.length < 2) {
+                throw new DukeException(">> Oh no!!! Find needs a search word or phrase!");
+            }
+            return new FindCommand(chunks);
         default:
             throw new DukeException(">> Oh no!!! I don't understand this input.");
         }

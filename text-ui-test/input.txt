@@ -14,4 +14,9 @@ list
 delete 4
 delete 3
 list
+todo eat less cake
+find cake
+find friend's birthday
+find
+find no match
 bye

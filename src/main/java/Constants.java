@@ -14,6 +14,6 @@ public class Constants {
      * Type of Commands.
      */
     public enum CommandType {
-        BYE, LIST, DELETE, DONE, TODO, DEADLINE, EVENT
+        BYE, LIST, DELETE, DONE, TODO, DEADLINE, EVENT, FIND
     }
 }

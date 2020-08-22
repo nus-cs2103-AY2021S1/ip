@@ -10,7 +10,7 @@ public class Task {
 
     /** Name of task */
     protected String name;
-    
+
     /** Completion state of task */
     protected boolean isCompleted;
 
