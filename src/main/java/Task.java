@@ -1,8 +1,12 @@
 package main.java;
 
-public class Task {
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+abstract public class Task {
     protected String description;
     protected boolean isDone;
+    protected final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public Task(String description) {
         this.description = description;
@@ -17,17 +21,7 @@ public class Task {
         this.isDone = true;
     }
 
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (this == obj) {
-//            return true;
-//        } else if (obj instanceof Task) {
-//            Task otherTask = (Task) obj;
-//            return this.description == otherTask.description && this.isDone == otherTask.isDone;
-//        } else {
-//            return false;
-//        }
-//    }
+    abstract public boolean hasSameDate(LocalDate theDate);
 
     @Override
     public String toString() {
