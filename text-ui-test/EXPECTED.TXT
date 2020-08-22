@@ -1,23 +1,23 @@
 ----------------------------------------
-  Hello! I am JonasBot! Nice to meet you :) 
-  ______  _____  __  ____     __     _______      
- |__  __||  __ | | \ |  |    /_ \    |   ___|     
-    | |  | | | | |  \|  |   //_\ \   |  |___          
- _  | |  | | | | | |\   |  / ____ \  |____  |   
-| |_| |  | |_| | | | \  | / /    \ \ _____| |         
-|_____|  |_____| |_|  \_|/_/      \_\|______|       
-                  _____   ______  ________                            
-                  |  _ \ |  _  | |__   __|                  
-                  | |_| || | | |    | |                      
-                  |    / | | | |    | |         
-                  |  _ \ | |_| |    | |       
-                  | |_| ||     |    | |         
-                  |_____/|_____|    |_|                 
-  
-  I am a task manager bot that will keep track of all your tasks. 
-  
-  To view a list of all my commands, input '/commands' 
-  
+  Hello! I am JonasBot! Nice to meet you :)
+  ______  _____  __  ____     __     _______
+ |__  __||  __ | | \ |  |    /_ \    |   ___|
+    | |  | | | | |  \|  |   //_\ \   |  |___
+ _  | |  | | | | | |\   |  / ____ \  |____  |
+| |_| |  | |_| | | | \  | / /    \ \ _____| |
+|_____|  |_____| |_|  \_|/_/      \_\|______|
+                  _____   ______  ________
+                  |  _ \ |  _  | |__   __|
+                  | |_| || | | |    | |
+                  |    / | | | |    | |
+                  |  _ \ | |_| |    | |
+                  | |_| ||     |    | |
+                  |_____/|_____|    |_|
+
+  I am a task manager bot that will keep track of all your tasks.
+
+  To view a list of all my commands, input '/commands'
+
   Now that you are familiar with the commands, how may I assist you today?
 ----------------------------------------
 ----------------------------------------
@@ -52,7 +52,7 @@ Oh no! Invalid Task! The task does not exist, try again.
 Oh no! Invalid Task! The task does not exist, try again.
 ----------------------------------------
 ----------------------------------------
-Oh no! Invalid Function! Input '/commands' for a list of all my commands. 
+Oh no! Invalid Function! Input '/commands' for a list of all my commands.
 ----------------------------------------
 ----------------------------------------
   Success! This deadline task has been added:
@@ -79,22 +79,22 @@ Oh no! Invalid Function! Input '/commands' for a list of all my commands.
   You have 3 tasks in your list now.
 ----------------------------------------
 ----------------------------------------
-Oh no! Your deadline task description is empty and/or is missing a time stamp. The task cannot be created. 
+Oh no! Your deadline task description is empty and/or is missing a time stamp. The task cannot be created.
  Type '/commands' to view the correct command for task creation.
 ----------------------------------------
 ----------------------------------------
-Oh no! Your deadline task description is empty and/or is missing a time stamp. The task cannot be created. 
+Oh no! Your deadline task description is empty and/or is missing a time stamp. The task cannot be created.
  Type '/commands' to view the correct command for task creation.
 ----------------------------------------
 ----------------------------------------
-Oh no! Your deadline task is missing a description. Please try again! 
-Type '/commands' to view the correct command for task creation! 
+Oh no! Your deadline task is missing a description. Please try again!
+Type '/commands' to view the correct command for task creation!
 ----------------------------------------
 ----------------------------------------
 Oh no! Invalid Task! The task does not exist, try again.
 ----------------------------------------
 ----------------------------------------
-Oh no! The task ID you provided is not valid. Input '/commands' to view a list of my commands. 
+Oh no! The task ID you provided is not valid. Input '/commands' to view a list of my commands.
 ----------------------------------------
 ----------------------------------------
 Here is a list of all your tasks:
@@ -103,5 +103,5 @@ Here is a list of all your tasks:
 	3. [T][✗] read up on week 2 topics
 ----------------------------------------
 ----------------------------------------
-  GoodBye and I hope to see you soon! Have a fantastic day! 
+  GoodBye and I hope to see you soon! Have a fantastic day!
 ----------------------------------------

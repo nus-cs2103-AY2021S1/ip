@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -5,7 +9,9 @@ import java.util.ArrayList;
 public class Duke {
 
     private final List<Task> tasks;
-    public static final String DIVIDER = "----------------------------------------";
+    private static final String DIVIDER = "----------------------------------------";
+    private static final String DIRECTORY = "data";
+    private static final String FILE = "data/duke.txt";
 
     public Duke() {
         this.tasks = new ArrayList<>();
@@ -14,6 +20,7 @@ public class Duke {
     public static void main(String[] args) {
         Duke session = new Duke(); // start a new session with JonasBot
         session.greet(); // greet the user
+        session.readFile();
         session.execute(); // execute the bot to perform intended functions
         session.end(); // end the current session with JonasBot
     }
@@ -110,6 +117,7 @@ public class Duke {
                 }
                 System.out.println("\t" + this.tasks.get(index - 1));
             }
+            this.saveFile();
         } catch (ArrayIndexOutOfBoundsException ex) {
             String err = "No Task ID provided! Please input the ID of the task you wish to mark as completed.";
             throw new InvalidFunctionException(err);
@@ -136,6 +144,7 @@ public class Duke {
                 this.tasks.remove(index - 1);
                 System.out.println("  You have " + this.tasks.size() + " tasks in your list now.");
             }
+            this.saveFile();
         } catch (ArrayIndexOutOfBoundsException ex) {
             String err = "No Task ID provided! Please input the ID of the task you wish to delete.";
             throw new InvalidFunctionException(err);
@@ -177,6 +186,7 @@ public class Duke {
             this.tasks.add(toAdd);
             System.out.println("\t" + toAdd);
         }
+        this.saveFile();
         System.out.println("  You have " + this.tasks.size() + " tasks in your list now.");
     }
 
@@ -252,6 +262,57 @@ public class Duke {
         taskInfo[1] = description;
         taskInfo[2] = time;
         return taskInfo;
+    }
+
+    public void readFile() {
+        try {
+            File dataDirectory = new File(Duke.DIRECTORY);
+            dataDirectory.mkdir(); // make a data directory if the directory does not exist
+
+            File dataFile = new File(Duke.FILE);
+            dataFile.createNewFile(); // create an empty file to store the tasks if the file does not exist
+
+            Scanner sc = new Scanner(dataFile);
+
+            while (sc.hasNextLine()) {
+                String[] taskData = sc.nextLine().split("\\|");
+                if (taskData[0].equals("T ")) {
+                    Task toAdd = new Todo(taskData[2]);
+                    if (taskData[1].equals(" 1 ")) {
+                        toAdd.markAsDone();
+                    }
+                    this.tasks.add(toAdd);
+                } else if (taskData[0].equals("D ")) {
+                    Task toAdd = new Deadline(taskData[2], taskData[3]);
+                    if (taskData[1].equals(" 1 ")) {
+                        toAdd.markAsDone();
+                    }
+                    this.tasks.add(toAdd);
+                } else if (taskData[0].equals("E ")) {
+                    Task toAdd = new Event(taskData[2], taskData[3]);
+                    if (taskData[1].equals(" 1 ")) {
+                        toAdd.markAsDone();
+                    }
+                    this.tasks.add(toAdd);
+                }
+            }
+            sc.close();
+        } catch (IOException ex) {
+            System.out.println("Oh no! An error was encountered, the file data could not be red.");
+        }
+    }
+
+    public void saveFile() {
+        try {
+            FileWriter fileWriter = new FileWriter(Duke.FILE);
+            for (int i = 0; i < this.tasks.size(); i++) {
+                fileWriter.write(this.tasks.get(i).taskFileFormat() + "\n");
+            }
+            fileWriter.close();
+        } catch (IOException ex) {
+            System.out.println("Oh no! An error is encountered and the task file could not be updated.");
+        }
+
     }
 
     public void end() {
