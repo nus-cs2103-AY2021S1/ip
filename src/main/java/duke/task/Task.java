@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Task {
     protected String taskName;
     protected boolean isDone;
@@ -9,18 +11,18 @@ public class Task {
         this.completed = "0";
     }
 
-    protected String getStatusIcon() {
+    public String getStatusIcon() {
         return isDone
                 ? "\u2713"
                 : "\u2718";
     }
 
-    protected void markAsDone() {
+    public void markAsDone() {
         this.isDone = true;
         this.completed = "1";
     }
 
-    protected String taskToText() {
+    public String taskToText() {
         return "";
     }
 

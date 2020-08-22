@@ -1,16 +1,18 @@
+package duke.ui;
+
 public class UI {
     private static final String divider =
             "\t------------------------------------------------------------------\n";
 
-    protected void printDivider() {
+    public void printDivider() {
         System.out.print(divider);
     }
 
-    protected void printDividerWithSpacing() {
+    public void printDividerWithSpacing() {
         System.out.println(divider);
     }
 
-    protected void greetUser() {
+    public void greetUser() {
         String logo =
                 "\t __\n"
                         + "\t/ _|   ___    ___  _   _  ___\n"
@@ -25,7 +27,7 @@ public class UI {
         System.out.println(greetings);
     }
 
-    protected void addressUser(String name) {
+    public void addressUser(String name) {
         String address = divider
                 + "\tHi there, " + name + "!"
                 + "\n\tHow can I help you today?\n"
@@ -33,7 +35,7 @@ public class UI {
         System.out.println(address);
     }
 
-    protected void exitFocus() {
+    public void exitFocus() {
         String exit = "\tHopefully I have helped you today. Byeee! (*^O^*)/\"\n"
                 + divider;
         System.out.println(exit);

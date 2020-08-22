@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -10,7 +12,7 @@ public class Event extends Task {
     }
 
     @Override
-    protected String taskToText() {
+    public String taskToText() {
         return "E|" + super.completed + "|" + super.taskName + "|" + at;
     }
 

@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
@@ -8,11 +14,11 @@ public class AddCommand extends Command {
         this.taskType = taskType;
     }
 
-    protected boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 
-    protected void execute(String input, TaskList taskList, Storage storage) throws DukeException {
+    public void execute(String input, TaskList taskList, Storage storage) throws DukeException {
         String information;
         switch (taskType) {
         case "todo": {

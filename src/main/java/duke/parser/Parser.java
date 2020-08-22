@@ -1,8 +1,22 @@
+package duke.parser;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
-    protected static Command parse(String input) {
+    public static Command parse(String input) {
         Command command;
         if (input.startsWith("todo")) { // add todo tasks
             command = new AddCommand("todo");
@@ -24,7 +38,7 @@ public class Parser {
         return command;
     }
 
-    protected static Task textToTask(String text) {
+    public static Task textToTask(String text) {
         String[] task = text.split("\\|");
         Task existingTask = null;
         switch (task[0]) {

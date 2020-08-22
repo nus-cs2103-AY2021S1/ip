@@ -1,9 +1,15 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+
 public class ListCommand extends Command {
-    protected boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 
-    protected void execute(String input, TaskList taskList, Storage storage) throws DukeException {
+    public void execute(String input, TaskList taskList, Storage storage) throws DukeException {
         if (taskList.getSize() == 0) {
             throw new DukeException("\tThere are currently no tasks on your list!\n"
                     + "\tStart adding one now!");

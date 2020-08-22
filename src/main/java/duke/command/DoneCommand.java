@@ -1,9 +1,15 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+
 public class DoneCommand extends Command {
-    protected boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 
-    protected void execute(String input, TaskList taskList, Storage storage) throws DukeException {
+    public void execute(String input, TaskList taskList, Storage storage) throws DukeException {
         String indexString;
         try {
             indexString = input.substring(5);

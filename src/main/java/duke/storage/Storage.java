@@ -1,3 +1,7 @@
+package duke.storage;
+
+import duke.task.Task;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,7 +16,7 @@ public class Storage {
         this.path = System.getProperty("user.dir") + "/data/duke.txt";
     }
 
-    protected static void createFolder() {
+    public static void createFolder() {
         String folderPath = System.getProperty("user.dir") + "/data";
         File folder = new File(folderPath);
         boolean isSuccessful = folder.mkdir();
@@ -23,7 +27,7 @@ public class Storage {
         }
     }
 
-    protected boolean retrieveTextFile() {
+    public boolean retrieveTextFile() {
         boolean hasTextFile = false;
         try {
             File data = new File(path);
@@ -40,7 +44,7 @@ public class Storage {
         return hasTextFile;
     }
 
-    protected ArrayList<String> loadData() {
+    public ArrayList<String> loadData() {
         String task;
         ArrayList<String> taskList = new ArrayList<>();
         try {
@@ -58,7 +62,7 @@ public class Storage {
         return taskList;
     }
 
-    protected void saveData(ArrayList<Task> taskList) {
+    public void saveData(ArrayList<Task> taskList) {
         try {
             FileWriter fileWriter = new FileWriter(path);
             for (Task item : taskList) {

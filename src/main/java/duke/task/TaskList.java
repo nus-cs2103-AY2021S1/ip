@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.parser.Parser;
+import duke.storage.Storage;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -15,11 +20,11 @@ public class TaskList {
         }
     }
 
-    protected int getSize() {
+    public int getSize() {
         return this.taskList.size();
     }
 
-    protected void addToDo(String description, Storage storage) {
+    public void addToDo(String description, Storage storage) {
         Task toDo = new ToDo(description);
         taskList.add(toDo);
         storage.saveData(taskList);
@@ -29,7 +34,7 @@ public class TaskList {
         System.out.print(printing);
     }
 
-    protected void addDeadline(String description, LocalDateTime date, Storage storage) {
+    public void addDeadline(String description, LocalDateTime date, Storage storage) {
         Task deadline = new Deadline(description, date);
         taskList.add(deadline);
         storage.saveData(taskList);
@@ -39,7 +44,7 @@ public class TaskList {
         System.out.print(printing);
     }
 
-    protected void addEvent(String description, LocalDateTime date, Storage storage) {
+    public void addEvent(String description, LocalDateTime date, Storage storage) {
         Task event = new Event(description, date);
         taskList.add(event);
         storage.saveData(taskList);
@@ -49,7 +54,7 @@ public class TaskList {
         System.out.print(printing);
     }
 
-    protected void deleteTask(int index, Storage storage) {
+    public void deleteTask(int index, Storage storage) {
         Task taskToBeDeleted = taskList.get(index - 1);
         taskList.remove(index - 1);
         storage.saveData(taskList);
@@ -60,7 +65,7 @@ public class TaskList {
         System.out.print(deletedTask);
     }
 
-    protected void markTaskDone(int index, Storage storage) {
+    public void markTaskDone(int index, Storage storage) {
         Task finishedTask = taskList.get(index - 1);
         finishedTask.markAsDone();
         storage.saveData(taskList);
@@ -69,7 +74,7 @@ public class TaskList {
         System.out.print(doneTask);
     }
 
-    protected void listTasks() {
+    public void listTasks() {
         System.out.print("\tHere are the tasks on your list:\n");
         for (int i = 0; i < taskList.size(); i++) {
             int number = i + 1;
