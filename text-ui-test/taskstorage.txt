@@ -1,4 +1,0 @@
-D;N;return book;1 Jan
-E;N;project meeting;Mon 2-4pm
-T;N;borrow book
-D;N;return book;1 Jan
