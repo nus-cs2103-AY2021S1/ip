@@ -1,6 +1,8 @@
 package duke;
 
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+
 import duke.command.*;
 import duke.exception.*;
 import duke.task.*;
@@ -19,10 +21,19 @@ public class Parser {
             case "delete":
                 return parseDelete(Integer.parseInt(commandArr[1]));
             case "todo":
+                if(commandArr.length < 2) {
+                    throw new DukeEmptyInputException("The description of a todo cannot be empty.");
+                }
                 return parseToDo(commandArr[1]);
             case "deadline":
+                if(commandArr.length < 2) {
+                    throw new DukeEmptyInputException("The description of a todo cannot be empty.");
+                }
                 return parseDeadline(commandArr[1]);
             case "event":
+                if(commandArr.length < 2) {
+                    throw new DukeEmptyInputException("The description of a todo cannot be empty.");
+                }
                 return parseEvent(commandArr[1]);
             default:
                 throw new DukeInvalidCommandException("Unknown command.");
