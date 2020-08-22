@@ -1,7 +1,9 @@
+package duke;
+
 public class ByeCommand implements Command {
 
     @Override
-    public void execute(Ui ui, Storage storage, TaskList tasks) throws DukeException {
+    public void execute(Ui ui, Storage storage, TaskList tasks) {
         ui.printExit();
     }
 

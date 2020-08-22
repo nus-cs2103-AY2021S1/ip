@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +11,7 @@ public class TodoCommand implements Command {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage, TaskList tasks) throws DukeException {
+    public void execute(Ui ui, Storage storage, TaskList tasks) {
         Task todoTask = new TodoTask(description);
         tasks.add(todoTask);
         ui.printWithWrapper(new ArrayList<>(List.of(

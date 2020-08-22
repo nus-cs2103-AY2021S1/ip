@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +11,7 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage, TaskList tasks) throws DukeException {
+    public void execute(Ui ui, Storage storage, TaskList tasks) {
         Task delTask = tasks.delete(taskNum);
         ui.printWithWrapper(new ArrayList<>(List.of(
                 "OK! I have deleted the following task for your list:",

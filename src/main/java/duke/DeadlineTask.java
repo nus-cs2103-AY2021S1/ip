@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -14,13 +16,13 @@ public class DeadlineTask extends Task {
         }
     }
 
-    public DeadlineTask(String description, boolean isDone, LocalDate dateTime) throws DukeException {
+    public DeadlineTask(String description, boolean isDone, LocalDate dateTime) {
         super(description, isDone);
         this.dateTime = dateTime;
     }
 
     @Override
-    public DeadlineTask markAsDone() throws DukeException {
+    public DeadlineTask markAsDone() {
         return new DeadlineTask(description, true, dateTime);
     }
 

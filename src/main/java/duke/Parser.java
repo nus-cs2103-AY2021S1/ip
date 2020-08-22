@@ -1,4 +1,7 @@
+package duke;
+
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Parser {
     public static Command parseInput(String input) throws DukeException {
@@ -46,20 +49,25 @@ public class Parser {
         Task task;
         boolean isDone = segments[1].equals("1");
 
-        switch (segments[0]) {
-            case "T":
-                task = new TodoTask(segments[2], isDone);
-                break;
-            case "D":
-                task = new DeadlineTask(segments[2], isDone, LocalDate.parse(segments[3]));
-                break;
-            case "E":
-                task = new EventTask(segments[2], isDone, LocalDate.parse(segments[3]));
-                break;
-            default:
-                task = null;
+        try {
+            switch (segments[0]) {
+                case "T":
+                    task = new TodoTask(segments[2], isDone);
+                    break;
+                case "D":
+                    task = new DeadlineTask(segments[2], isDone, LocalDate.parse(segments[3]));
+                    break;
+                case "E":
+                    task = new EventTask(segments[2], isDone, LocalDate.parse(segments[3]));
+                    break;
+                default:
+                    task = null;
+            }
+            return task;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("supplied data: " + segments[3] + " does not conform to yyyy-mm-dd");
         }
-        return task;
+
     }
 
     private static String[] parseSegments(String input, String cmd, String breakPt) throws DukeException {
