@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.NotDirectoryException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,7 +15,9 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         String SPACES = "____________________________________________________________";
         System.out.println("Hello from\n" + logo);
+        File file = openFile();
         Bot bot = new Bot(SPACES);
+        bot.parseFile(file);
         bot.welcomeMessage();
 
         Scanner sc = new Scanner(System.in);
@@ -21,10 +27,12 @@ public class Duke {
         Pattern done = Pattern.compile("done ([0-9]+)");
         Pattern delete = Pattern.compile("delete ([0-9]+)");
 
+
         while (sc.hasNextLine()) {
             try {
                 String next = sc.nextLine();
                 if (next.equals("bye")) {
+                    bot.saveTasks(file);
                     bot.goodByeMessage();
                     break;
                 } else if (next.equals("list")) {
@@ -35,8 +43,7 @@ public class Duke {
                         int taskNum = Integer.parseInt(doneMatcher.group(1));
                         if (taskNum != 0 && taskNum <= bot.activityList.size()) {
                             bot.completeTask(taskNum);
-                        }
-                        else {
+                        } else {
                             throw new InvalidInputException("Number provided is too small or too large, Please provide a valid task number");
                         }
                     } else {
@@ -48,29 +55,27 @@ public class Duke {
                         int taskNum = Integer.parseInt(deleteMatcher.group(1));
                         if (taskNum != 0 && taskNum <= bot.activityList.size()) {
                             bot.deleteTask(taskNum);
-                        }
-                        else {
+                        } else {
                             throw new InvalidInputException("Number provided is too small or too large, Please provide a valid task number");
                         }
                     } else {
                         throw new EmptyDescriptionException("done");
                     }
-                }
-                else if(next.split(" ")[0].equals("todo")) {
+                } else if (next.split(" ")[0].equals("todo")) {
                     Matcher todoMatcher = todo.matcher(next);
                     if (todoMatcher.find()) {
                         bot.addTodo(todoMatcher.group(1));
                     } else {
                         throw new EmptyDescriptionException("todo");
                     }
-                } else if(next.split(" ")[0].equals("deadline")) {
+                } else if (next.split(" ")[0].equals("deadline")) {
                     Matcher deadlineMatcher = deadline.matcher(next);
                     if (deadlineMatcher.find()) {
                         bot.addDeadline(deadlineMatcher.group(1), deadlineMatcher.group(2));
                     } else {
                         throw new EmptyDescriptionException("deadline");
                     }
-                } else if(next.split(" ")[0].equals("event")) {
+                } else if (next.split(" ")[0].equals("event")) {
                     Matcher eventMatcher = event.matcher(next);
                     if (eventMatcher.find()) {
                         bot.addEvent(eventMatcher.group(1), eventMatcher.group(2));
@@ -84,5 +89,28 @@ public class Duke {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    public static File openFile() {
+        String FILEPATH = "data/duke.txt";
+        String FOLDERPATH = "data";
+        try {
+            File directory = new File(FOLDERPATH);
+            if (!directory.isDirectory()) {
+                // create Directory data
+                File folder = new File(FOLDERPATH);
+                folder.mkdir();
+            }
+            File file = new File(FILEPATH);
+            if (file.exists()) {
+                return file;
+            } else {
+                file.createNewFile();
+                return file;
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 }
