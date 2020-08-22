@@ -28,7 +28,7 @@ list
 deadline testDeadline /by 2020-03-18
 list
 deadliNe testDeadline 2 /at 2020-03-18
-Deadline testDeadline 3
+duke.task.Deadline testDeadline 3
 list
 deadline testDeadline 4 /by 2020-03-18
 deadline /by 2020-03-18

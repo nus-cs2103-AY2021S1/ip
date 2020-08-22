@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.task.Task;
+import duke.utils.DukeException;
+import duke.utils.DukeFileHandler;
+import duke.utils.TaskList;
+import duke.utils.Ui;
+
 public class TodoCommand extends Command {
     private final String description;
 

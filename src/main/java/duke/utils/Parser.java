@@ -1,8 +1,21 @@
+package duke.utils;
+
+import duke.command.ClearCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
+
+
 public class Parser {
     public static Command parse(String input) throws DukeException {
         switch (input.split(" ")[0].toLowerCase()) {
         case "":
-            throw new DukeException("Please type a command");
+            throw new DukeException("Please type a duke.command");
         case "bye":
             return new ExitCommand();
         case "clear":

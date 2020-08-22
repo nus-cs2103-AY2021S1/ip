@@ -1,10 +1,20 @@
+package duke;
+
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.utils.DukeException;
+import duke.utils.DukeFileHandler;
+import duke.utils.Parser;
+import duke.utils.TaskList;
+import duke.utils.Ui;
+
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Duke {
-    //    private List<Task> toDoList;
+    //    private List<duke.task.Task> toDoList;
     private final Ui ui;
     private final DukeFileHandler fileHandler;
     private TaskList tasks;

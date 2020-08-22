@@ -1,3 +1,7 @@
+package duke.utils;
+
+import duke.task.Task;
+
 import java.util.List;
 
 public class Ui {
@@ -33,7 +37,7 @@ public class Ui {
         System.out.println(logo);
 
         System.out.println("" +
-                "\n    Hello! I'm Duke, your Windows Task Manager" +
+                "\n    Hello! I'm duke.Duke, your Windows duke.task.Task Manager" +
                 "\n    Valid command:" +
                 "\n    - list" +
                 "\n    - done <num>" +
