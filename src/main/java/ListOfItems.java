@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -130,16 +131,17 @@ public class ListOfItems {
         }
     }
 
-    void check(String input) throws DukeException {
+    void checkBy(String input) throws DukeException {
         try {
             boolean hasResults = false;
             String info = input.substring(18);
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d/M/yyyy");
             LocalDate date = LocalDate.parse(info, dateFormat);
             System.out.println(divider);
-            System.out.println("Here are the results:");
+            System.out.println("Task(s) due by " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " :");
             for (int i = 0; i < this.list.size(); i++) {
-                if (this.list.get(i) instanceof Deadline && ((Deadline) this.list.get(i)).date.equals(date)) {
+                if ((this.list.get(i) instanceof Deadline && ((Deadline) this.list.get(i)).date.equals(date)) ||
+                        (this.list.get(i) instanceof Event && ((Event) this.list.get(i)).date.equals(date))) {
                     hasResults = true;
                     System.out.println(this.list.get(i));
                 }
@@ -150,8 +152,59 @@ public class ListOfItems {
             System.out.println(divider);
         } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
             throw new DukeException("\n" + divider + "\n" +
-                    "Sorry, you did not enter a valid date (DD/MM/YYYY)! Please try again." +
-                    "\n" + divider);
+                    "Sorry, you did not enter a valid date (DD/MM/YYYY)! "
+                    + "\n" + "Please try again."
+                    + "\n" + divider);
+        }
+    }
+
+    void checkBefore(String input) throws DukeException {
+        try {
+            boolean hasResults = false;
+            String info = input.substring(22);
+            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d/M/yyyy");
+            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HHmm");
+            if (info.length() <= 10) { // only consists of date
+                LocalDate date = LocalDate.parse(info, dateFormat);
+                System.out.println(divider);
+                System.out.println("Task(s) due before " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " :");
+                for (int i = 0; i < this.list.size(); i++) {
+                    if ((this.list.get(i) instanceof Deadline && ((Deadline) this.list.get(i)).date.isBefore(date)) ||
+                            (this.list.get(i) instanceof Event && ((Event) this.list.get(i)).date.isBefore(date)))  {
+                        hasResults = true;
+                        System.out.println(this.list.get(i));
+                    }
+                }
+                if (!hasResults) {
+                    System.out.println("- No tasks due before " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " -");
+                }
+                System.out.println(divider);
+            } else { // date + time
+                LocalDate date = LocalDate.parse(info.split(" ")[0], dateFormat);
+                LocalTime time = LocalTime.parse(info.split(" ")[1], timeFormat);
+                System.out.println(divider);
+                System.out.println("Task(s) due before " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                        + ", " + time.format(DateTimeFormatter.ofPattern("h:mma")) + " :");
+                for (int i = 0; i < this.list.size(); i++) {
+                    if ((this.list.get(i) instanceof Deadline && ((Deadline) this.list.get(i)).date.isBefore(date)
+                    && time.isBefore(((Deadline) this.list.get(i)).time)) ||
+                            (this.list.get(i) instanceof Event && ((Event) this.list.get(i)).date.isBefore(date))
+                    && time.isBefore(((Event) this.list.get(i)).endTime))  {
+                        hasResults = true;
+                        System.out.println(this.list.get(i));
+                    }
+                }
+                if (!hasResults) {
+                    System.out.println("- No tasks due before " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                            + ", " + time.format(DateTimeFormatter.ofPattern("h:mma")) + " -");
+                }
+                System.out.println(divider);
+            }
+        } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
+            throw new DukeException("\n" + divider + "\n"
+                    + "Sorry, you did not enter a valid date (DD/MM/YYYY) and/or time (HHmm)! "
+                    + "\n" + "Please try again."
+                    + "\n" + divider);
         }
 
     }
