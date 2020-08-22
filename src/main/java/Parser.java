@@ -26,6 +26,7 @@ public class Parser {
      * @param input Input from user
      * @throws DukeException If description or date is missing
      */
+    // dates must be in this format YYYY-MM-DD
     // example of event: event meeting /at 2020-08-22 14:00-16:00
     public void handleEvent(String input) throws DukeException {
         // since input is confirmed to have "event",
