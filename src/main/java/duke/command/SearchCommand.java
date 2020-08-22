@@ -16,7 +16,7 @@ public class SearchCommand extends Command {
     /**
      * Takes in the key for searching of the task and returns a search command.
      *
-     * @param key
+     * @param key The search key.
      */
     public SearchCommand(String key) {
         this.key = key;

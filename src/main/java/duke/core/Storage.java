@@ -7,9 +7,12 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-import main.java.duke.command.*;
-import main.java.duke.task.*;
-import main.java.duke.handle.*;
+import main.java.duke.task.Task;
+import main.java.duke.task.Event;
+import main.java.duke.task.ToDo;
+import main.java.duke.task.Deadline;
+import main.java.duke.handle.LoadingException;
+
 
 /**
  * The Storage class reads the local task record and the task list, and updates

@@ -1,10 +1,8 @@
 package main.java.duke.command;
 
-import main.java.duke.core.*;
-import main.java.duke.task.*;
-import main.java.duke.handle.*;
-
-import java.io.IOException;
+import main.java.duke.core.Ui;
+import main.java.duke.core.TaskList;
+import main.java.duke.core.Storage;
 
 /**
  * The ExitCommand class represents a command that exits the program.

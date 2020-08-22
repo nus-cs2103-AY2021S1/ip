@@ -2,9 +2,14 @@ package main.java.duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import main.java.duke.command.*;
-import main.java.duke.handle.*;
-import main.java.duke.core.*;
+import main.java.duke.command.Command;
+import main.java.duke.handle.CommandNotFoundException;
+import main.java.duke.handle.TaskNotFoundException;
+import main.java.duke.handle.LoadingException;
+import main.java.duke.core.Storage;
+import main.java.duke.core.TaskList;
+import main.java.duke.core.Ui;
+import main.java.duke.core.Parser;
 
 /**
  * The Duke class represents a duke bot that can interact with

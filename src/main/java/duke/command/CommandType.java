@@ -1,7 +1,7 @@
 package main.java.duke.command;
 
 /**
- * The CommandType class is an enumerater class and it describes
+ * The CommandType class is an enumerator class and it describes
  * the different types of command and enumerates them.
  */
 public enum CommandType {
@@ -13,7 +13,7 @@ public enum CommandType {
     /**
      * Takes in the name of the type of the command and returns a command type.
      *
-     * @param type
+     * @param type The type of the command.
      */
     CommandType(String type) {
         this.type = type;

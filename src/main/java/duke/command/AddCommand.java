@@ -1,9 +1,10 @@
 package main.java.duke.command;
 
 import java.io.IOException;
-import main.java.duke.core.*;
-import main.java.duke.handle.TaskNotFoundException;
-import main.java.duke.task.*;
+import main.java.duke.core.Ui;
+import main.java.duke.core.TaskList;
+import main.java.duke.core.Storage;
+import main.java.duke.task.Task;
 
 /**
  * The AddCommand class represents a command that adds a task to the task list.
@@ -14,7 +15,7 @@ public class AddCommand extends Command {
     /**
      * Takes in a task to be added and returns a command.
      *
-     * @param task
+     * @param task The task to be added.
      */
     public AddCommand(Task task) {
         this.task = task;
@@ -27,7 +28,6 @@ public class AddCommand extends Command {
      * @param taskList The task list component.
      * @param ui The user interface component.
      * @param storage The storage component.
-     * @throws TaskNotFoundException If there is no task corresponding to the count of the task.
      * @throws IOException If the storage process needs to be handled
      */
     @Override
