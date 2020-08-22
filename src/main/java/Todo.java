@@ -14,7 +14,7 @@ public class Todo extends Task{
         try {
             String description = message.substring(5);
             if (description.isBlank()) {
-                String exMessage = Print.printFormat(errMessage);
+                String exMessage = Task.ui.printFormat(errMessage);
                 throw new DukeException(exMessage);
             } else {
                 return new Todo(description);
@@ -22,7 +22,7 @@ public class Todo extends Task{
         } catch (DukeException e) {
             throw e;
         } catch (Exception e) {
-            String exMessage = Print.printFormat(errMessage);
+            String exMessage = Task.ui.printFormat(errMessage);
             throw new DukeException(exMessage);
         }
     }

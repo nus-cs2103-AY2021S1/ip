@@ -1,9 +1,9 @@
 import java.time.LocalDate;
 
 public class Task{
-    private String lines = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
-    private String description;
+    private final String description;
     private boolean isDone;
+    protected final static Ui ui = new Ui();
 
     Task(String message) {
         this.description = message.stripLeading().stripTrailing();
@@ -19,15 +19,13 @@ public class Task{
         return (isDone ? "\u2713" : "\u2718");
     }
 
-    public Task markAsDone() {
+    public void markAsDone() {
         if (!isDone) {
             this.isDone = true;
-            Print.print(" Good Job!!! You cleared this task:\n   [" + this.getStatusIcon() + "] "
-                    + this.description + "\n");
+            ui.markDoneSuccess("   [" + this.getStatusIcon() + "] " + this.description + "\n");
         } else {
-            Print.print(" You have already completed this task! *Woof woof*\n");
+            ui.markDoneRepeat();
         }
-        return this;
     }
 
     public boolean compareDate(LocalDate date) {

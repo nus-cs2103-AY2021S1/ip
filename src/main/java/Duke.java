@@ -1,224 +1,48 @@
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.InvalidPathException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.format.FormatStyle;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-import java.io.File;
 
 public class Duke {
-    private final List<Task> listOfTask = new ArrayList<>();
-    private Path filePath;
-    private final static String ignoreCase = "(?i)";
+    private final static Ui ui = new Ui();
+    private final Storage storage;
 
-    enum Command {
-        LIST, DONE, BYE, TODO, DEADLINE, EVENT, DELETE, CHECK
+    Duke(Storage storage) {
+        this.storage = storage;
     }
 
-    Duke(Path filePath) {
-        this.filePath = filePath;
-    }
-
-    public static Duke createDuke() throws DukeException {
-        String errMessage = "Woof woof... I can't seem to create a file to store your tasks...\n"
-                + "Your tasks would be forgotten at this rate...";
+    public static Duke createDuke(String filePath) {
         try {
-            String home = System.getProperty("user.dir");
-            Path currDir = Paths.get(home).getParent();
-//            Path currDir = Paths.get(home);
-            Path targetPath = Paths.get(currDir.toString(), "data", "duke.txt");
-
-            if (!java.nio.file.Files.exists(targetPath)) {
-                File dir = new File(Paths.get(currDir.toString(),"data").toString());
-                boolean isDirCreated = dir.mkdir();
-                File file = new File(Paths.get(currDir.toString(),"data", "duke.txt").toString());
-                boolean isFileCreated = file.createNewFile();
-
-                if (isDirCreated && isFileCreated) {
-                    String welcome = " Woof! I am Yuki your assigned Task Manager!\n"
-                            +" I have just created a new file to store all your tasks!\n"
-                                    +" So... What is my first assignment? *Woof woof*\n";
-                    Print.print(welcome);
-                    return new Duke(targetPath);
-                } else {
-                    throw new DukeException(errMessage);
-                }
-
-            } else {
-                String welcome = " Hello! I'm Yuki *Woof*\n What can I do for you? *Woof woof*\n";
-                Print.print(welcome);
-                Duke duke = new Duke(targetPath);
-                File f = new File(targetPath.toString());
-                Scanner s = new Scanner(f);
-                while (s.hasNextLine()) {
-                    duke.checkTask(s.nextLine());
-                }
-                return duke;
-            }
-        } catch (InvalidPathException | DukeException | IOException e) {
-            throw new DukeException(e.getMessage());
+            Storage storage = Storage.createStorage(filePath);
+            storage.load();
+            return new Duke(storage);
+        } catch (DukeException e) {
+            ui.fileCreationError(e.getMessage());
+            return null;
         }
     }
 
-    public void checkTask(String s) {
-        Task t;
-        String taskType = s.substring(0, 3);
-        String status = s.substring(3,6);
-        boolean isDone = status.equals("[" + "\u2713" + "]");
-        if (taskType.equals("[T]")) {
-            t = new Todo(s.substring(7), isDone);
-        } else if (taskType.equals("[D]")){
-            int indOfTime = s.lastIndexOf("(FINISH by: ");
-            t = new Deadline(s.substring(7, indOfTime), s.substring(indOfTime + 11, s.lastIndexOf(")")).trim(), isDone);
-        } else {
-            int indOfTime = s.lastIndexOf("(APPEAR at: ");
-            t = new Event(s.substring(7, indOfTime), s.substring(indOfTime + 11, s.lastIndexOf(")")).trim(), isDone);
-        }
-        listOfTask.add(t);
-    }
-
-    public void goodBye() throws DukeException{
-         try {
-            FileWriter fileWriter = new FileWriter(filePath.toString());
-            for (Task t : listOfTask) {
-                fileWriter.write(t.toString());
-                fileWriter.write(System.getProperty("line.separator"));
-            }
-            fileWriter.close();
-        } catch (IOException e){
-             throw new DukeException(e.getMessage());
-        }
-        String bye = " Bye. Hope to see you again soon! *Woof woof*\n";
-        Print.print(bye);
-    }
-
-    public String printTotal() {
-        return " Now you have " + listOfTask.size() + " tasks in the list. Keep going!!\n";
-    }
-
-    public void deleteTask(String message) throws DukeException{
-        try {
-            int ind = Integer.parseInt(message.substring(6).trim()) - 1;
-            Task t = listOfTask.get(ind);
-            listOfTask.remove(ind);
-            Print.print(" *WOOF* I have removed:\n   " + t + "\n" + printTotal());
-        } catch (IndexOutOfBoundsException e) {
-            String errMessage = Print.printFormat(" *Woof!* This task does not exist!\n");
-            throw new DukeException(errMessage);
-        } catch (NumberFormatException e) {
-            String errMessage = Print.printFormat(" *Woof!* Please enter an integer value! I can't really read...\n");
-            throw new DukeException(errMessage);
-        }
-    }
-
-    public void addTask(Task t) {
-        listOfTask.add(t);
-        Print.print(" *WOOF* I have added:\n   " + t + "\n" + printTotal());
-    }
-
-    public void checkAction(String message) throws DukeException{
-        Task t;
-        if (message.matches(ignoreCase + Command.DEADLINE.name() + "(.*)")) {
-            t = Deadline.createTask(message);
-            addTask(t);
-        } else if (message.matches(ignoreCase + Command.EVENT.name() + "(.*)")) {
-            t = Event.createTask(message);
-            addTask(t);
-        } else if (message.matches(ignoreCase + Command.TODO.name() + "(.*)")) {
-            t = Todo.createTask(message);
-            addTask(t);
-        } else if (message.matches(ignoreCase + Command.DELETE.name() + "(.*)")) {
-            deleteTask(message);
-        } else {
-            String errMessage = Print.printFormat(" I'm sorry but i do not know what you want to do. *woof*\n");
-            throw new DukeException(errMessage);
-        }
-    }
-
-    public void markAsDone(int ind) throws DukeException{
-        try {
-            listOfTask.get(ind).markAsDone();
-            printTotal();
-        } catch (Exception e) {
-            int taskInd = ind + 1;
-            String errMessage = Print.printFormat(" There's no task " + taskInd + " in your list *woof*\n");
-            throw new DukeException(errMessage);
-        }
-    }
-
-    public void printToDos() {
-        if (listOfTask.size() == 0) {
-            Print.print(" You have no task to complete! *WOOF*\n");
-        } else {
-            String lines = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
-            System.out.print(lines);
-            System.out.println(" Here are the tasks in your list *Woof*:");
-            listOfTask.forEach((task) -> {
-                int ind = listOfTask.indexOf(task) + 1;
-                System.out.println("   " + ind + "." + task.toString());
-            });
-            System.out.println(lines);
-        }
-    }
-
-    public void checkDate(String s) throws DukeException{
-        try {
-            String[] inputDate = s.trim().split("/");
-            String formatDate = inputDate[0] + "-" + inputDate[1] + "-" + inputDate[2];
-            LocalDate date = LocalDate.parse(formatDate);
-            int ind = 1;
-            String lines = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
-            System.out.print(lines);
-            for (Task t : listOfTask) {
-                if (t.compareDate(date)) {
-                    if (ind == 1) {
-                        System.out.println(" Here is the list of ongoing events on "
-                                + DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(date) + ":");
-                    }
-                    System.out.println("   " + ind + "." + t.toString());
-                    ind++;
-                }
-            }
-            if (ind == 1) {
-                System.out.println(" You have no event on this day! Have a good break! *Woof*");
-            }
-            System.out.println(lines);
-        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
-            String errMessage = Print.printFormat(" Please enter date in YYYY/MM/DD format! *Woof woof*\n");
-            throw new DukeException(errMessage);
-        }
-    }
-
-    public static void main(String[] args) throws DukeException {
+    public void run() {
         Scanner input = new Scanner(System.in);
-        Duke duke = Duke.createDuke();
-
         while (input.hasNextLine()) {
             try {
-                String query = input.nextLine();
-                if (query.matches(ignoreCase + Command.BYE.name())) {
-                    duke.goodBye();
-                    input.close();
-                    break;
-                } else if (query.matches(ignoreCase + Command.LIST.name())) {
-                    duke.printToDos();
-                } else if (query.matches(ignoreCase + Command.DONE.name() + "(.*)")) {
-                    int taskInd = Integer.parseInt(query.substring(5));
-                    duke.markAsDone(taskInd - 1);
-                } else if (query.matches(ignoreCase + Command.CHECK.name() + "(.*)")) {
-                    duke.checkDate(query.substring(5));
-                } else {
-                    duke.checkAction(query);
-                }
+                String commandMessage = input.nextLine();
+                Command c = Parser.parse(commandMessage);
+                c.execute(commandMessage, storage, ui);
             } catch (DukeException ex) {
                 System.out.println(ex.getMessage());
             }
+        }
+        input.close();
+    }
+
+    public static void main(String[] args) {
+        Duke duke = Duke.createDuke("data/duke.txt");
+        try {
+            if (duke == null) {
+                throw new NullPointerException();
+            } else {
+                duke.run();
+            }
+        } catch (NullPointerException e) {
+            System.err.println(ui.printFormat("Unable to create bot!\n"));
         }
     }
 }
