@@ -21,6 +21,13 @@ public class HappenCommand extends Command {
                         DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 ui.printList(list, t -> t.happenOnDate(date), "happening on " +
                         date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " ");
+            } else if (description.equals("before today")) {
+
+            } else if (description.equals("before ")) {
+                LocalDate date = LocalDate.parse(description.substring(3),
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                ui.printList(list, t -> t.happenBeforeDate(date), "happening before " +
+                        date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " ");
             }
         } catch (Exception e) {
             throw new InvalidCommandException("Invalid date format. Please use yyyy-MM-dd");
