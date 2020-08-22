@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -56,7 +57,6 @@ public class Duke {
                     case "list":
                         prettyPrint(userInputCollector);
                         break;
-                        
                     case "done":
                         taskToUpdate = userInputCollector.get(Integer.parseInt(userInput.split(" ", 2)[1])
                                 - 1);
@@ -64,7 +64,6 @@ public class Duke {
                         userInputCollector.set(userInputCollector.indexOf(taskToUpdate), updatedTask);
                         prettyPrint("Nice! I've marked this task as done: \n" + "\t" + updatedTask);
                         break;
-
                     case "todo":
                         taskToUpdate = new ToDo(userInputArray[1]);
                         userInputCollector.add(taskToUpdate);
@@ -72,7 +71,6 @@ public class Duke {
                                 "\t" + taskToUpdate + "\n" +
                                 "\tNow you have " + userInputCollector.size() +" tasks in the list.");
                         break;
-
                     case "event":
                         taskToUpdate = new Event(userInputArray[1].split("/at")[0],
                                 userInputArray[1].split("/at")[1]);
@@ -81,7 +79,6 @@ public class Duke {
                                 "\t" + taskToUpdate + "\n" +
                                 "\tNow you have " + userInputCollector.size() + " tasks in the list.");
                         break;
-
                     case "deadline":
                         taskToUpdate = new Deadline(userInputArray[1].split("/by")[0],
                                 userInputArray[1].split("/by")[1]);
@@ -90,7 +87,6 @@ public class Duke {
                                 "\t" + taskToUpdate + "\n" +
                                 "\tNow you have " + userInputCollector.size() + " tasks in the list.");
                         break;
-
                     case "delete":
                         taskToUpdate = userInputCollector.get(Integer.parseInt(userInputArray[1]) - 1);
                         userInputCollector.remove(taskToUpdate);
@@ -98,7 +94,6 @@ public class Duke {
                                 "\t" + taskToUpdate + "\n" +
                                 "\tNow you have " + userInputCollector.size() + " tasks in the list.");
                         break;
-
                     case "clear":
                         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                         break;
@@ -106,8 +101,12 @@ public class Duke {
             } catch (DukeIllegalCommandException | DukeMissingArgumentException | DukeTaskOutOfBoundsException e) {
                 System.out.println(e.toString());
             }
-
-	        // Gets the new input
+            try {
+                SaveData.save("./src/main/data/SaveData.txt", userInputCollector);
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+            // Gets the new input
             userInput = scan.nextLine();
         }
 
