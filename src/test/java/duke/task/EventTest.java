@@ -97,4 +97,16 @@ public class EventTest {
             fail();
         }
     }
+
+    @Test
+    public void happenBetweenTest() {
+        try {
+            Event e = new Event("Project meeting", "2020-09-03 11:30");
+            assertEquals(false, e.happenBetween(LocalDate.parse("2020-08-01"), LocalDate.parse("2020-09-01")));
+            assertEquals(true, e.happenBetween(LocalDate.parse("2020-09-01"), LocalDate.parse("2020-09-04")));
+            assertEquals(true, e.happenBetween(LocalDate.parse("2020-09-03"), LocalDate.parse("2020-09-03")));
+        } catch (Exception e) {
+            fail();
+        }
+    }
 }
