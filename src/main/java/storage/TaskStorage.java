@@ -4,27 +4,22 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.Date;
 
 import exception.DukeException;
+import parser.StorageParser;
 import task.Task;
-import task.Todo;
-import task.Deadline;
-import task.Event;
 import task.TaskList;
-import utils.Utils;
 
 public class TaskStorage {
     private final File file;
+    private final StorageParser storageParser;
 
     private static final String DEFAULT_FILEPATH = "src/main/java/storage/";
     private static final String DEFAULT_FILENAME = "taskstorage.txt";
-    private static final String IS_COMPLETED = "Y";
-    private static final String NOT_COMPLETED = "N";
-    private static final String DELIMITER = ";";
 
     private TaskStorage(File file) {
         this.file = file;
+        this.storageParser = new StorageParser();
     }
 
     public static TaskStorage createTaskStorage() {
@@ -35,40 +30,12 @@ public class TaskStorage {
         return new TaskStorage(actualFile);
     }
 
-    private static String convertTaskToStorage(Task task) {
-        String symbol = task.getTaskSymbol();
-        String completed = task.isTaskCompleted()
-                ? DELIMITER + IS_COMPLETED
-                : DELIMITER + NOT_COMPLETED;
-        String description = DELIMITER + task.getTaskDescription();
-        String datetime = task.getTaskDatetime().map(d -> DELIMITER + d).orElse("");
-        return symbol + completed + description + datetime + "\n";
-    }
-
-    private static Task convertStorageToTask(String storageTask) throws DukeException {
-        String[] task = storageTask.split(DELIMITER);
-        boolean isCompleted = task[1].equals(IS_COMPLETED);
-        switch(task[0]) {
-            case Todo.TODO_SYMBOL:
-                return new Todo(task[2], isCompleted);
-            case Deadline.DEADLINE_SYMBOL:
-                Date dateTime = Utils.parseDateTimeString(task[3], Deadline.DATE_FORMAT_OUTPUT);
-                return new Deadline(task[2], isCompleted, dateTime);
-            case Event.EVENT_SYMBOL:
-                Date time = Utils.parseDateTimeString(task[3], Event.TIME_FORMAT_OUTPUT);
-                return new Event(task[2], isCompleted, time);
-            default:
-                String err = String.format("It appears this line '%s' is corrupted.", storageTask);
-                throw new DukeException(err);
-        }
-    }
-
     public TaskList loadTaskList() {
         TaskList taskList = new TaskList();
         try {
             Scanner s = new Scanner(this.file);
             while (s.hasNext()) {
-                Task task = convertStorageToTask(s.nextLine());
+                Task task = this.storageParser.convertStorageToTask(s.nextLine());
                 taskList.addTask(task);
             }
         } catch (DukeException exception) {
@@ -86,13 +53,13 @@ public class TaskStorage {
     public void saveToDisk(TaskList taskList) throws DukeException {
         StringBuilder sb = new StringBuilder();
         for (Task task : taskList) {
-            String storageTask = convertTaskToStorage(task);
+            String storageTask = this.storageParser.convertTaskToStorage(task);
             sb.append(storageTask);
         }
         try {
             writeToFile(sb.toString());
         } catch (IOException exception) {
-            throw new DukeException("There were some problems when writing to the file"
+            throw new DukeException("There were some problems when writing to the file. "
                     + exception.getMessage());
         }
     }

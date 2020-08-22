@@ -1,6 +1,6 @@
 package parser;
 
-public class CommandType {
+public final class CommandType {
     public static final String BYE = "bye";
     public static final String LIST = "list";
     public static final String DONE = "done";
