@@ -1,4 +1,3 @@
 T | 1 | join sports club
-T | 1 | borrow book
+E | 1 | meeting | 2020-08-22 14:00-16:00
 D | 0 | return book | 2020-08-22
-E | 0 | meeting | 2020-08-22 14:00-16:00
