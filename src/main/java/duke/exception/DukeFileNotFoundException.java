@@ -1,5 +1,7 @@
+package duke.exception;
+
 public class DukeFileNotFoundException extends DukeException{
-    DukeFileNotFoundException() {
+    public DukeFileNotFoundException() {
         super("File not found!");
     }
 }

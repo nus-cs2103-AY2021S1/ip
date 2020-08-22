@@ -1,5 +1,7 @@
+package duke.exception;
+
 public class DukeEmptyInputException extends DukeException{
-    DukeEmptyInputException(String message) {
+    public DukeEmptyInputException(String message) {
         super(message);
     }
 }

@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -5,10 +7,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import duke.task.*;
+import duke.exception.*;
 
 public class Storage {
 
@@ -64,13 +67,13 @@ public class Storage {
         if (task instanceof Todo) {
             return "T | " + (task.done ? "1" : "0") + " | " + task.description;
         } else if (task instanceof Event) {
-            return "E | " + (task.done ? "1" : "0") + " | " + task.description + " | " + ((Event) task).date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+            return "E | " + (task.done ? "1" : "0") + " | " + task.description + " | " + ((Event) task).getDate();
         } else {
-            return "D | " + (task.done ? "1" : "0") + " | " + task.description + " | " + ((Deadline) task).date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+            return "D | " + (task.done ? "1" : "0") + " | " + task.description + " | " + ((Deadline) task).getDate();
         }
     }
 
-    void save(TaskList taskList) throws DukeLoadingErrorException {
+    public void save(TaskList taskList) throws DukeLoadingErrorException {
         try {
             FileWriter fw = new FileWriter(String.valueOf(path));
             String content = "";

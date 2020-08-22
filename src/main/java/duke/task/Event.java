@@ -1,19 +1,25 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
-    LocalDateTime date;
+    public LocalDateTime date;
 
-    Event(String description, String date) {
+    public Event(String description, String date) {
         super(description);
         this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
 
     }
 
-    Event(String description, String date, boolean done) {
+    public Event(String description, String date, boolean done) {
         super(description, done);
         this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+    }
+
+    public String getDate() {
+        return this.date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 
     @Override

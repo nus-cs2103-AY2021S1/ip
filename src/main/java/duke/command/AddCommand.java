@@ -1,8 +1,13 @@
+package duke.command;
+
+import duke.*;
+import duke.task.*;
+import duke.exception.*;
 public class AddCommand extends Command {
 
     private Task task;
 
-    AddCommand(Task task) {
+    public AddCommand(Task task) {
         this.task = task;
     }
 

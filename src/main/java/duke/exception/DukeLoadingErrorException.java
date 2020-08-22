@@ -1,5 +1,7 @@
+package duke.exception;
+
 public class DukeLoadingErrorException extends DukeException{
-    DukeLoadingErrorException() {
+    public DukeLoadingErrorException() {
         super("Loading error!");
     }
 }

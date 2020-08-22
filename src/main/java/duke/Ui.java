@@ -1,4 +1,7 @@
+package duke;
+
 import java.util.Scanner;
+import duke.task.*;
 
 public class Ui {
 
@@ -12,15 +15,15 @@ public class Ui {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
 
-    void exit() {
+    public void exit() {
         System.out.println("Bye. Hope to see you soon!");
     }
 
-    void print(String s) {
+    public void print(String s) {
         System.out.println(s);
     }
 
-    void list(TaskList taskList) {
+    public void list(TaskList taskList) {
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= taskList.size(); i++) {
             Task task = taskList.get(i - 1);

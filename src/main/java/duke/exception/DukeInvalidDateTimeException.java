@@ -1,5 +1,7 @@
+package duke.exception;
+
 public class DukeInvalidDateTimeException extends DukeException{
-    DukeInvalidDateTimeException(String message) {
+    public DukeInvalidDateTimeException(String message) {
         super(message);
     }
 }
