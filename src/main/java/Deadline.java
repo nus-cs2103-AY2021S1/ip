@@ -10,6 +10,16 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    public Deadline(boolean isDone, String description, String deadline) {
+        super(isDone, description);
+        this.deadline = deadline;
+    }
+
+    @Override
+    public String fileFormat() {
+        return String.format("%1$s|%2$s|%3$s|%4$s", "D", this.isDone ? "0" : "1", this.description, this.deadline);
+    }
+
     @Override
     public String toString() {
         return String.format("[D]%1$s (by: %2$s)", super.toString(), this.deadline);

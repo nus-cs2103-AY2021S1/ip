@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,9 +12,9 @@ public class Duke {
     private Scanner scanner;
     private List<Task> list;
 
-    private Duke() {
+    private Duke(List<Task> list) {
         this.scanner = new Scanner(System.in);
-        this.list = new ArrayList<>();
+        this.list = list;
         greet();
     }
 
@@ -25,7 +28,12 @@ public class Duke {
         System.out.printf(stringFormat, "Hello! I'm Duke\nWhat can I do for you?");
     }
 
+    private List<Task> getTaskList() {
+        return this.list;
+    }
+
     private void processBye() {
+        this.scanner.close();
         System.out.printf(stringFormat, "Bye. Hope to see you again soon!");
     }
 
@@ -165,10 +173,22 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        boolean status;
-        do {
-            status = duke.processAction();
-        } while (status);
+        try {
+            String pathName = "src/data/duke.txt";
+            FileClass file = new FileClass(pathName);
+            List<Task> list = file.readFromFile();
+            Duke duke = new Duke(list);
+            boolean status;
+            do {
+                status = duke.processAction();
+            } while (status);
+            file.writeToFile(duke.getTaskList());
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

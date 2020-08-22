@@ -7,6 +7,15 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(boolean isDone, String description) {
+        super(isDone, description);
+    }
+
+    @Override
+    public String fileFormat() {
+        return String.format("%1$s|%2$s|%3$s", "T", this.isDone ? "0" : "1", this.description);
+    }
+
     @Override
     public String toString() {
         return String.format("[T]%1$s", super.toString());
