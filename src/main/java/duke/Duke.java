@@ -1,9 +1,11 @@
-import exception.DukeException;
-import operation.Operation;
-import parser.CommandParser;
-import task.TaskList;
-import storage.TaskStorage;
-import ui.Ui;
+package duke;
+
+import duke.exception.DukeException;
+import duke.operation.Operation;
+import duke.parser.CommandParser;
+import duke.task.TaskList;
+import duke.storage.TaskStorage;
+import duke.ui.Ui;
 
 public class Duke {
     private TaskStorage taskStorage;

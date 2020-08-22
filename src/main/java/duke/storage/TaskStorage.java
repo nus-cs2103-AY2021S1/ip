@@ -1,20 +1,20 @@
-package storage;
+package duke.storage;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import exception.DukeException;
-import parser.StorageParser;
-import task.Task;
-import task.TaskList;
+import duke.exception.DukeException;
+import duke.parser.StorageParser;
+import duke.task.Task;
+import duke.task.TaskList;
 
 public class TaskStorage {
     private final File file;
     private final StorageParser storageParser;
 
-    private static final String DEFAULT_FILEPATH = "src/main/java/storage/";
+    private static final String DEFAULT_FILEPATH = "src/main/java/duke/storage/";
     private static final String DEFAULT_FILENAME = "taskstorage.txt";
 
     private TaskStorage(File file) {

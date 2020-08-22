@@ -1,7 +1,7 @@
-package operation;
+package duke.operation;
 
-import task.Task;
-import task.TaskList;
+import duke.task.Task;
+import duke.task.TaskList;
 
 public class DeleteOperation extends Operation {
     private final TaskList taskList;

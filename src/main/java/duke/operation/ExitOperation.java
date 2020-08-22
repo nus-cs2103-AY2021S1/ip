@@ -1,8 +1,8 @@
-package operation;
+package duke.operation;
 
-import exception.DukeException;
-import storage.TaskStorage;
-import task.TaskList;
+import duke.exception.DukeException;
+import duke.storage.TaskStorage;
+import duke.task.TaskList;
 
 public class ExitOperation extends Operation {
     private final TaskStorage storage;

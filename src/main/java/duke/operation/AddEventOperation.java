@@ -1,9 +1,9 @@
-package operation;
+package duke.operation;
 
 import java.util.Date;
 
-import task.TaskList;
-import task.Event;
+import duke.task.TaskList;
+import duke.task.Event;
 
 public class AddEventOperation extends AddOperation {
     private final Date time;

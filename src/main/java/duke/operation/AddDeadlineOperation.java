@@ -1,9 +1,9 @@
-package operation;
+package duke.operation;
 
 import java.util.Date;
 
-import task.TaskList;
-import task.Deadline;
+import duke.task.TaskList;
+import duke.task.Deadline;
 
 public class AddDeadlineOperation extends AddOperation {
     private final Date deadline;

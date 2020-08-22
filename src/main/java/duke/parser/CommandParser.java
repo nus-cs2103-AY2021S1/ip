@@ -1,22 +1,22 @@
-package parser;
+package duke.parser;
 
 import java.util.Date;
 
-import exception.DukeException;
-import operation.Operation;
-import operation.AddDeadlineOperation;
-import operation.AddEventOperation;
-import operation.AddTodoOperation;
-import operation.DeleteOperation;
-import operation.DoneOperation;
-import operation.ExitOperation;
-import operation.ListOperation;
-import storage.TaskStorage;
-import task.Todo;
-import task.Deadline;
-import task.Event;
-import task.TaskList;
-import utils.Utils;
+import duke.exception.DukeException;
+import duke.operation.Operation;
+import duke.operation.AddDeadlineOperation;
+import duke.operation.AddEventOperation;
+import duke.operation.AddTodoOperation;
+import duke.operation.DeleteOperation;
+import duke.operation.DoneOperation;
+import duke.operation.ExitOperation;
+import duke.operation.ListOperation;
+import duke.storage.TaskStorage;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.utils.Utils;
 
 public class CommandParser {
     private ExitOperation createExitOp(TaskStorage storage, TaskList list) {

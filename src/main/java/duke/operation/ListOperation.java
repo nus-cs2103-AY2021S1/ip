@@ -1,6 +1,6 @@
-package operation;
+package duke.operation;
 
-import task.TaskList;
+import duke.task.TaskList;
 
 public class ListOperation extends Operation {
     private final TaskList taskList;

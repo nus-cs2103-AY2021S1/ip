@@ -1,4 +1,4 @@
-package parser;
+package duke.parser;
 
 public final class CommandType {
     public static final String BYE = "bye";

@@ -1,7 +1,7 @@
-package operation;
+package duke.operation;
 
-import task.TaskList;
-import task.Todo;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 public class AddTodoOperation extends AddOperation {
     public AddTodoOperation(String description, TaskList taskList) {

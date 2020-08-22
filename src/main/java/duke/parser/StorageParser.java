@@ -1,13 +1,13 @@
-package parser;
+package duke.parser;
 
 import java.util.Date;
 
-import exception.DukeException;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
-import utils.Utils;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.utils.Utils;
 
 public class StorageParser {
     private static final String IS_COMPLETED = "1";
