@@ -15,7 +15,7 @@ import java.util.Scanner;
 // 5. continue again
 
 enum Category {
-    TODO, DEADLINE, EVENT, LIST, BYE, INVALID, DONE
+    TODO, DEADLINE, EVENT, LIST, BYE, INVALID, DONE, DELETE
 }
 
 public class Duke {
@@ -36,6 +36,8 @@ public class Duke {
                     return new Command(Category.EVENT, wordsArray[1]);
                 case "done":
                     return new Command(Category.DONE, wordsArray[1]);
+                case "delete":
+                    return new Command(Category.DELETE, wordsArray[1]);
                 default:
                     return new Command(Category.INVALID);
             }
@@ -52,6 +54,7 @@ public class Duke {
     }
 
     public static void processCommand(Command command, TaskList taskList) {
+        int taskNumber;
         switch (command.getCategory()) {
             case TODO:
                 Todo newTask = new Todo(command.getDescription());
@@ -72,10 +75,16 @@ public class Duke {
                 taskList.showList();
                 break;
             case DONE:
-                int taskNumber = Integer.parseInt(command.getDescription());
+                taskNumber = Integer.parseInt(command.getDescription());
                 Task doneTask = taskList.getTask(taskNumber);
                 doneTask.markAsDone();
                 System.out.println("ok done");
+                break;
+            case DELETE:
+                taskNumber = Integer.parseInt(command.getDescription());
+                Task deletedTask = taskList.getTask(taskNumber);
+                taskList.removeTask(deletedTask);
+                System.out.println("deleted");
                 break;
             case BYE: //bye
                 System.out.println("bye!");
