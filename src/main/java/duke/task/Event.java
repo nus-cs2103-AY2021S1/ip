@@ -40,6 +40,16 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean happenAfterDate(LocalDate date) {
+        return atTime.toLocalDate().isAfter(date);
+    }
+
+    @Override
+    public boolean happenAfterToday() {
+        return happenAfterDate(LocalDate.now());
+    }
+
+    @Override
     public String output() {
         return "E" + super.output() + " | At: " +
                 atTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\n";

@@ -45,6 +45,14 @@ public abstract class Task {
         return false;
     }
 
+    public boolean happenAfterDate(LocalDate date) {
+        return false;
+    }
+
+    public boolean happenAfterToday() {
+        return false;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
