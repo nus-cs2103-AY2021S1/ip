@@ -1,6 +1,6 @@
 public class Parser {
 
-    public static Command parse(String userInput) throws EmptyTaskDescriptionException {
+    public static Command parse(String userInput) throws EmptyTaskDescriptionException, DukeDateTimeParseException {
         String[] arr = userInput.trim().split(" ", 2);
         switch (arr[0]) {
             case "bye":
@@ -33,25 +33,25 @@ public class Parser {
                 task = new Todo(arguments);
                 break;
             case "deadline": {
-                String[] parsed = arguments.split("/by");
+                String[] parsed = arguments.split(" /by ");
                 if (parsed.length < 2) {
                     throw new EmptyDueDateException();
                 }
                 if (parsed[0].strip().equals("")) {
                     throw new EmptyTaskDescriptionException(commandName);
                 }
-                task = new Deadline(parsed[0], parsed[1]);
+                task = new Deadline(parsed[0], DukeDateTimeParser.parse(parsed[1]));
                 break;
             }
             case "event": {
-                String[] parsed = arguments.split("/at");
+                String[] parsed = arguments.split(" /at ");
                 if (parsed.length < 2) {
                     throw new EmptyEventDateException();
                 }
                 if (parsed[0].strip().equals("")) {
                     throw new EmptyTaskDescriptionException(commandName);
                 }
-                task = new Event(parsed[0], parsed[1]);
+                task = new Event(parsed[0], DukeDateTimeParser.parse(parsed[1]));
                 break;
             }
             default:
@@ -59,6 +59,7 @@ public class Parser {
         }
         return new AddCommand(task);
     }
+
 
     private static DoneCommand parseDone(String taskDone) throws InvalidTaskException {
         try {
