@@ -1,10 +1,14 @@
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
+
 
 public class Duke {
     public final static String LINE = "*********************************************************";
@@ -81,7 +85,7 @@ public class Duke {
                         if (response.length() <= 5) {
                             throw new EmptyDescriptionException("todo");
                         }
-                        book = new ToDo(response.substring(4));
+                        book = new ToDo(response.substring(4), LocalDateTime.now());
                         shelf.add(book);
                     } else if (response.indexOf("deadline ") == 0) {
                         if (response.length() <= 9) {
@@ -92,7 +96,7 @@ public class Duke {
                         }
                         date = response.substring(response.indexOf("/by ") + 4);
                         response = response.substring(response.indexOf("deadline ") + 8, response.indexOf("/by "));
-                        book = new Deadline(response, date);
+                        book = new Deadline(response, LocalDateTime.now(),  date);
                         shelf.add(book);
                     } else if (response.indexOf("event ") == 0) {
                         if (response.length() <= 6) {
@@ -103,7 +107,7 @@ public class Duke {
                         }
                         date = response.substring(response.indexOf("/at ") + 4);
                         response = response.substring(response.indexOf("event ") + 5, response.indexOf("/at "));
-                        book = new EventTask(response, date);
+                        book = new EventTask(response,LocalDateTime.now(), date);
                         shelf.add(book);
                     } else {
                         throw new DukeUnknownInputException("error");
@@ -119,6 +123,8 @@ public class Duke {
                     IOException e) {
                 System.out.println(e);
                 System.out.println(LINE);
+            } catch (DateTimeParseException e) {
+                System.out.println("☹ OOPS!!! Ensure that the datetime input is in the format YYYY-MM-DD HH:MM");
             }
         }
     }
