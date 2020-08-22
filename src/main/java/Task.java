@@ -14,11 +14,15 @@ public class Task {
         state = TaskStates.DONE;
     }
 
+    // returns true if task is done
+    public boolean isDone(){
+        return state == TaskStates.DONE;
+    }
+
     //return tick or X symbols
     public String getStatusIcon() {
         return (state == TaskStates.DONE ? "\u2713" : "\u2718");
     }
-
 
     @Override
     public String toString() {
