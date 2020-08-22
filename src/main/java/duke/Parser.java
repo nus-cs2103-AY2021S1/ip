@@ -10,7 +10,18 @@ import duke.task.TodoTask;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class that is responsible for parsing raw inputs and
+ * translating them to the correct Command or Task.
+ */
 public class Parser {
+    /**
+     * Parses user input.
+     * @param input The user input.
+     * @return The Command subclass that correctly
+     * represents the user intent.
+     * @throws DukeException If input is unexpected or exceptional.
+     */
     public static Command parseInput(String input) throws DukeException {
         validateNotEmpty(input);
 
@@ -51,6 +62,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses raw data that is loaded from save file.
+     * @param data The raw data.
+     * @return The correct Task that corresponds to what the raw
+     * data represents.
+     * @throws DukeException If data is unexpected or exceptional.
+     */
     public static Task parseTaskData(String data) throws DukeException {
         String[] segments = data.split("\\|");
         Task task;

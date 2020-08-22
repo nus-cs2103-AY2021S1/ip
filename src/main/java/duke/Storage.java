@@ -9,13 +9,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The class that is responsible for reading
+ * and writing raw taskList data.
+ */
 public class Storage {
     private final File f;
 
+    /**
+     * Initializes a Storage object.
+     * @param filePath The path of the data file.
+     */
     public Storage(String filePath) {
         this.f = new File(filePath);
     }
 
+    /**
+     * Retrives The raw data from the data file.
+     * @return An ArrayList of each line of raw data.
+     * @throws DukeIOException If file was not found at the filePath.
+     */
     public ArrayList<String> load() throws DukeIOException {
         ArrayList<String> res = new ArrayList<>();
         try {
@@ -31,6 +44,12 @@ public class Storage {
 
     }
 
+    /**
+     * Writes the raw data into the data file.
+     * @param data The raw data to be written.
+     * @throws DukeIOException For exceptional cases where
+     * the program is unable to write to the data file.
+     */
     public void save(ArrayList<String> data) throws DukeIOException {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < data.size(); i++) {

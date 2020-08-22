@@ -6,11 +6,21 @@ import duke.exception.DukeException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Duke object initializes the core classes: Ui, Storage,
+ * Parser and TaskList, and contains the main logic that integrates
+ * them together to run the Duke application.
+ */
 public class Duke {
     private final Ui ui;
     private final Storage storage;
     private final TaskList taskList;
 
+    /**
+     * Initializes a Duke object.
+     * @param filePath the filePath where the storage will
+     *                 load from and save data to.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -29,6 +39,10 @@ public class Duke {
         this.taskList = tmpTaskList;
     }
 
+    /**
+     * The main processing method of Duke. It waits for user input,
+     * parses, then executes the desired command.
+     */
     private void run() {
         ui.printGreeting();
         boolean isExit = false;
