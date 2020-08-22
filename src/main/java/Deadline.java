@@ -12,9 +12,9 @@ public class Deadline extends Task{
     @Override
     public String stringify(){
         if(this.complete == true) {
-            return "[D][DONE] " + this.task + " " +"(by: " +this.deadline+")" ;
+            return "[D][✓] " + this.task +"(by:" +this.deadline+")" ;
         }else{
-            return "[D][UNDONE] " + this.task + " " +"(by: " +this.deadline+")" ;
+            return "[D][✗] " + this.task +"(by:" +this.deadline+")" ;
         }
     }
 }
