@@ -10,13 +10,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * A class that represents the file storage of list of task.
+ */
 public class Storage {
     String filePath;
 
+    /**
+     * Constructs the file Storage.
+     *
+     * @param filePath the file path to store the Task List.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns a list of tasks that is read from the file storage.
+     *
+     * @return a list of tasks that is read from the file storage.
+     * @throws DukeException if the file is not read correctly.
+     */
     public List<Task> readFromFile() throws DukeException {
         List<Task> tasks = new ArrayList<>();
 
@@ -70,6 +84,12 @@ public class Storage {
 
     }
 
+    /**
+     * Stores the TaskList to the file storage system.
+     *
+     * @param tasks the TaskList of tasks from the application to be stored in the file storage.
+     * @throws DukeException when the file is not written correctly.
+     */
     public void storeToFile(TaskList tasks) throws DukeException {
         try {
             String breaker = " | ";
