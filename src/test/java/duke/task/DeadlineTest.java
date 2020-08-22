@@ -148,4 +148,17 @@ public class DeadlineTest {
             fail();
         }
     }
+
+    @Test
+    public void outputTest() {
+        try {
+            Deadline d = new Deadline("Assignment 1", "2020-08-02");
+            assertEquals("D | 0 | Assignment 1 | By: 2020-08-02\n", d.output());
+
+            d.markAsDone();
+            assertEquals("D | 1 | Assignment 1 | By: 2020-08-02\n", d.output());
+        } catch (Exception e) {
+            fail();
+        }
+    }
 }
