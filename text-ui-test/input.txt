@@ -1,8 +1,8 @@
 todo
-todo
+todo 
 todo dfsfsdf
 event
-event
+event 
 eventfsrfdg
 event awrfawesf
 event dads /at
@@ -11,7 +11,7 @@ event /at gasrfg
 event/at efew
 event a /at somedate
 deadline
-deadline
+deadline 
 deadlineedasfa
 deadline awrfawesf
 deadline dads /yb
@@ -20,10 +20,12 @@ deadline /by gasrfg
 deadline/by efew
 deadline dda /by somedate
 done
-done
+done 
 done 2
+done asddqwad
 done 324341
 delete
-delete
+delete 
+delete qfdsqf
 delete 3
 delete 747
