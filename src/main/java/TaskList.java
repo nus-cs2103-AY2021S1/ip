@@ -116,14 +116,21 @@ public class TaskList {
             return;
         }
 
-        int i = Integer.parseInt(s);
-        if (i < 1 || i > storage.size()) {
-            throw new DukeException("You have entered an invalid number: " + i
-                    + ". Please try again.");
-        } else {
-            Task t = storage.get(i - 1);
-            storage.remove(i - 1);
-            ui.removeTaskLine(t, storage.size());
+        try {
+            int i = Integer.parseInt(s);
+            if (i < 1 || i > storage.size()) {
+                throw new DukeException("You have entered an invalid number: " + i
+                        + ". Please try again.");
+            } else {
+                Task t = storage.get(i - 1);
+                storage.remove(i - 1);
+                ui.removeTaskLine(t, storage.size());
+            }
+        } catch (NumberFormatException e) {
+            System.out.println(
+                    ui.getBorder() + "Please state the completed task number after \"delete\".\n"
+                    + ui.getBorder()
+            );
         }
     }
 
