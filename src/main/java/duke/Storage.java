@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import duke.exception.DukeException;
+
 import duke.task.Task;
 import duke.task.Deadline;
 import duke.task.Event;

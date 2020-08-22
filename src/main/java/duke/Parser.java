@@ -7,6 +7,8 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ListCommand;
 
+import duke.exception.DukeException;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
