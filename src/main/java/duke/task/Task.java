@@ -4,7 +4,7 @@ import duke.command.InvalidCommandException;
 
 import java.time.LocalDate;
 
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
