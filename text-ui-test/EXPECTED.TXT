@@ -31,4 +31,15 @@
 >> You now have 2 tasks to do!
 >> 1. [T][✓] eat cake
 >> 2. [E][✓] friend's birthday (at: Aug 23 2020)
+>> Added the task:
+>> [T][✘] eat less cake
+>> You now have 3 tasks to do!
+>> Your matching tasks:
+>> 1. [T][✓] eat cake
+>> 2. [T][✘] eat less cake
+>> Your matching tasks:
+>> 1. [E][✓] friend's birthday (at: Aug 23 2020)
+>> Oh no!!! Find needs a search word or phrase!
+>> Your matching tasks:
+>> No results!
 >> Bye! Hope I helped!
