@@ -1,13 +1,14 @@
 import Exception.DukeException;
-import Exception.InvalidCommandException;
 import Exception.EmptyActionException;
 import Exception.InvalidActionException;
-
+import Exception.InvalidCommandException;
 import Task.DeadlineTask;
 import Task.EventTask;
 import Task.Task;
 import Task.ToDoTask;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +18,9 @@ import java.util.function.BiConsumer;
 public class Duke {
     public static void main(String[] args) {
         introduction();
+        List<Task> list = loadTasks();
         Scanner sc  = new Scanner(System.in);
-        interact(sc);
+        interact(sc, list);
         sc.close();
     }
 
@@ -28,6 +30,49 @@ public class Duke {
                 + "     What can I do for you?\n"
                 + "    ____________________________________________________________\n";
         System.out.println(greeting);
+    }
+
+    public static List<String> loadStringData() {
+        try {
+            List<String> list = new ArrayList<>();
+            File data = new File("data/duke.txt");
+            Scanner sc = new Scanner(data);
+            while (sc.hasNext()) {
+                list.add(sc.nextLine());
+            }
+            return list;
+        } catch (FileNotFoundException e) {
+            System.out.println("Data file not found. Task list renewed.");
+            return new ArrayList<>();
+        }
+    }
+
+    public static List<Task> loadTasks() {
+        List<String> data = loadStringData();
+        List<Task> list = new ArrayList<>();
+
+        for (int i = 0; i < data.size(); i++) {
+            list.add(getTaskFromData(data.get(i)));
+        }
+
+        return list;
+    }
+
+    public static Task getTaskFromData(String info) {
+        String[] arr = info.split("/");
+        char type = arr[0].charAt(0);
+        boolean isDone = arr[1].equals("1");
+
+        switch (type) {
+        case 'T':
+            return new ToDoTask(arr[2], isDone);
+        case 'D':
+            return new DeadlineTask(arr[2], arr[3], isDone);
+        case 'E':
+            return new EventTask(arr[2], arr[3], isDone);
+        default:
+            return new Task("No Task");
+        }
     }
 
     public static HashMap<String, BiConsumer<String, List<Task>>> setUp() {
@@ -42,10 +87,9 @@ public class Duke {
         return map;
     }
 
-    public static void interact(Scanner sc) {
+    public static void interact(Scanner sc, List<Task> list) {
         HashMap<String, BiConsumer<String, List<Task>>> map = setUp();
         String command = sc.nextLine();
-        List<Task> list = new ArrayList<>();
 
         while (!command.equals("bye")) {
             BiConsumer<String, List<Task>> action =  map.get(command.replaceAll(" .*", ""));
@@ -81,7 +125,7 @@ public class Duke {
     public static void listCommand(List<Task> list) {
         System.out.print("    ____________________________________________________________\n");
         System.out.print("     Here are the tasks in your list:\n");
-        for(int i = 1; i <= list.size(); i++) {
+        for (int i = 1; i <= list.size(); i++) {
             System.out.println("     " + i + "." + list.get(i - 1));
         }
         System.out.println("    ____________________________________________________________\n");
