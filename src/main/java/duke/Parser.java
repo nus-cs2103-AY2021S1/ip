@@ -7,8 +7,18 @@ import duke.command.*;
 import duke.exception.*;
 import duke.task.*;
 
+/**
+ * Responsible for parsing user inputs.
+ */
 public class Parser {
 
+    /**
+     * Parses the user input and returns a Command based on the input.
+     * @param fullCommand User input.
+     * @throws DukeEmptyInputException If input is empty.
+     * @throws DukeInvalidDateTimeException If date and time input is invalid.
+     * @throws DukeInvalidCommandException If command is invalid.
+     */
     static Command parse(String fullCommand) throws DukeEmptyInputException, DukeInvalidDateTimeException, DukeInvalidCommandException {
         String[] commandArr = fullCommand.trim().split(" ", 2);
         switch(commandArr[0]) {
@@ -40,22 +50,46 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a ByeCommand
+     * @return Returns a ByeCommand.
+     */
     static ByeCommand parseBye() {
         return new ByeCommand();
     }
 
+    /**
+     * Parses a ListCommand
+     * @return Returns a ListCommand.
+     */
     static ListCommand parseList() {
         return new ListCommand();
     }
 
+    /**
+     * Parses a DoneCommand
+     * @param taskNo Number of the task that is to be completed.
+     * @return Returns a DoneCommand associated with the task to be completed.
+     */
     static DoneCommand parseDone(int taskNo) {
         return new DoneCommand(taskNo);
     }
 
+    /**
+     * Parses a DeleteCommand
+     * @param taskNo Number of the task that is to be deleted.
+     * @return Returns a DeleteCommand associated with the task to be deleted.
+     */
     static DeleteCommand parseDelete(int taskNo) {
         return new DeleteCommand(taskNo);
     }
 
+    /**
+     * Parses an AddCommand associated with a Todo.
+     * @param description Description of the Todo.
+     * @return Returns an AddCommand associated with the Todo to be added.
+     * @throws DukeEmptyInputException If input is empty.
+     */
     static AddCommand parseToDo(String description) throws DukeEmptyInputException {
         if (description.length() == 0) {
             throw new DukeEmptyInputException("The description of a todo cannot be empty.");
@@ -63,6 +97,13 @@ public class Parser {
         return new AddCommand(new Todo(description));
     }
 
+    /**
+     * Parses an AddCommand associated with a Deadline task.
+     * @param description Description of the Deadline task.
+     * @return Returns an AddCommand associated with the Deadline task to be added.
+     * @throws DukeEmptyInputException If input is empty.
+     * @throws DukeInvalidDateTimeException If date and time input is invalid.
+     */
     static AddCommand parseDeadline(String description) throws DukeEmptyInputException, DukeInvalidDateTimeException {
         String[] details = description.split(" /by ");
         if (details[0].length() == 0) {
@@ -78,6 +119,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses an AddCommand associated with an Event task.
+     * @param description Description of the Event task.
+     * @return Returns an AddCommand associated with the Event task to be added.
+     * @throws DukeEmptyInputException If input is empty.
+     * @throws DukeInvalidDateTimeException If date and time input is invalid.
+     */
     static AddCommand parseEvent(String description) throws DukeEmptyInputException, DukeInvalidDateTimeException {
         String[] details = description.split(" /at ");
         if (details[0].length() == 0) {
