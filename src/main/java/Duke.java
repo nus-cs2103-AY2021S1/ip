@@ -42,7 +42,7 @@ public class Duke {
                     }
                 } else if (commandWordArray[0].equals(DONE)) {
                     if (command.substring(DONE_INDEX - 1).isBlank()) {
-                        throw new DukeException("Argument of done cannot be empty!");
+                        throw new DukeEmptyArgumentException(DONE);
                     }
                     try {
                         int taskNumber = Integer.parseInt(command.substring(DONE_INDEX));
@@ -50,13 +50,13 @@ public class Duke {
                         System.out.println("I have marked this task as done: "
                                 + "\n" + taskStorage.get(taskNumber - 1));
                     } catch (IndexOutOfBoundsException e) {
-                        throw new DukeException("That task does not exist in the list!");
+                        throw new DukeInvalidTaskException();
                     } catch (NumberFormatException e) {
-                        throw new DukeException("Please enter a valid argument for done!");
+                        throw new DukeInvalidArgumentException(DONE);
                     }
                 } else if (commandWordArray[0].equals(DELETE)) {
                     if (command.substring(DELETE_INDEX - 1).isBlank()) {
-                        throw new DukeException("Argument of delete cannot be empty!");
+                        throw new DukeEmptyArgumentException(DELETE);
                     }
                     try {
                         int taskNumber = Integer.parseInt(command.substring(DELETE_INDEX));
@@ -65,21 +65,21 @@ public class Duke {
                         taskStorage.remove(taskNumber - 1);
                         storageCount--;
                     } catch (IndexOutOfBoundsException e) {
-                        throw new DukeException("That task does not exist in the list!");
+                        throw new DukeInvalidTaskException();
                     } catch (NumberFormatException e) {
-                        throw new DukeException("Please enter a valid argument for delete!");
+                        throw new DukeInvalidArgumentException(DELETE);
                     }
                 } else {
                     Task task;
                     if (commandWordArray[0].equals(TODO)) {
                         if (command.substring(TODO_INDEX - 1).isBlank()) {
-                            throw new DukeException("Description of todo cannot be empty!");
+                            throw new DukeEmptyDescriptionException(TODO);
                         }
                         task = new Todo(command.substring(TODO_INDEX));
                     } else {
                         if (commandWordArray[0].equals(DEADLINE)) {
                             if (command.substring(DEADLINE_INDEX - 1).isBlank()) {
-                                throw new DukeException("Description of deadline cannot be empty!");
+                                throw new DukeEmptyDescriptionException(DEADLINE);
                             } else {
                                 try {
                                     String date = command.substring(command.indexOf("/") + DATE_INDEX);
@@ -87,12 +87,12 @@ public class Duke {
                                             command.substring(
                                                     DEADLINE_INDEX, command.indexOf("/") - 1), date);
                                 } catch (StringIndexOutOfBoundsException e) {
-                                    throw new DukeException("Please enter a valid date!");
+                                    throw new DukeInvalidDateException(DEADLINE);
                                 }
                             }
                         } else if (commandWordArray[0].equals(EVENT)) {
                             if (command.substring(EVENT_INDEX - 1).isBlank()) {
-                                throw new DukeException("Description of event cannot be empty!");
+                                throw new DukeEmptyDescriptionException(EVENT);
                             } else {
                                 try {
                                     String date = command.substring(command.indexOf("/") + DATE_INDEX);
@@ -100,11 +100,11 @@ public class Duke {
                                             command.substring(
                                                     EVENT_INDEX, command.indexOf("/") - 1), date);
                                 } catch (StringIndexOutOfBoundsException e) {
-                                    throw new DukeException("Please enter a valid date!");
+                                    throw new DukeInvalidDateException(EVENT);
                                 }
                             }
                         } else {
-                            throw new DukeException("Invalid command!");
+                            throw new DukeInvalidCommandException();
                         }
                     }
                     taskStorage.add(storageCount, task);
