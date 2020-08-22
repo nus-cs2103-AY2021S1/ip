@@ -1,0 +1,3 @@
+event|return book|Aug 25 2020
+deadline|do homework|Aug 27 2020
+deadline|read notes|Aug 30 2020

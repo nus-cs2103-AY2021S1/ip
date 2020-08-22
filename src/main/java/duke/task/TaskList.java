@@ -51,4 +51,16 @@ public class TaskList {
         Messenger.deleteTaskMessage(tasks.get(index - 1), size - 1);
         tasks.remove(index - 1);
     }
+
+    public void findTask(String keyword) {
+        int index = 1;
+        System.out.println("Here are the matching tasks in your list:");
+        for (Task task : tasks) {
+            String content = task.getContent();
+            if (content.contains(keyword)) {
+                System.out.println(index + "." + task.toString());
+                index++;
+            }
+        }
+    }
 }

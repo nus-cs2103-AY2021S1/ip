@@ -14,7 +14,7 @@ class TaskListTest {
     void getTasks() {
         TaskList list = new TaskList();
         list.addTask("test content", "todo");
-        assertEquals(list.getTasks().get(0).toString(), "test content");
+        assertEquals(list.getTasks().get(0).toString(), "[T][✗] test content");
     }
 
     @Test
@@ -82,5 +82,24 @@ class TaskListTest {
         } catch (DukeException e) {
             assertEquals(e.getMessage(), "☹ OOPS!!! Seems the index you provided is not in the list.");
         }
+    }
+
+    @Test
+    void findTask() {
+        TaskList list = new TaskList();
+        list.addTask("test content1", "todo");
+        list.addTask("test content2", "deadline", "2020-08-23");
+        list.addTask("test content2", "deadline", "2020-08-25");
+        list.addTask("test content3", "deadline", "2020-08-28");
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        list.findTask("content2");
+
+        String expected = "Here are the matching tasks in your list:\n" +
+                "1.[D][✗] test content2 (by: Aug 23 2020)\n" +
+                "2.[D][✗] test content2 (by: Aug 25 2020)\n";
+        assertEquals(expected, outContent.toString());
     }
 }
