@@ -40,10 +40,10 @@ public class Task {
             return "T//" + this.getTaskStatus() + "//" + this.description;
         }
         if (this instanceof Event) {
-            return "E//" + this.getTaskStatus() + "//" + this.description + "//" + ((Event) this).at;
+            return "E//" + this.getTaskStatus() + "//" + this.description + "//" + ((Event) this).getAt();
         }
         if (this instanceof Deadline) {
-            return "D//" + this.getTaskStatus() + "//" + this.description + "//" + ((Deadline) this).by;
+            return "D//" + this.getTaskStatus() + "//" + this.description + "//" + ((Deadline) this).getBy();
         }
         return " ";
     }

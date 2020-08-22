@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -27,9 +28,9 @@ public class Storage {
                     if (txtLineArr[0].equals("T")) {
                         task = new Todo(txtLineArr[1]);
                     } else if (txtLineArr[0].equals("E")) {
-                        task = new Event(txtLineArr[2], txtLineArr[3]);
+                        task = new Event(txtLineArr[2], LocalDate.parse(txtLineArr[3]));
                     } else {
-                        task = new Deadline(txtLineArr[2], txtLineArr[3]);
+                        task = new Deadline(txtLineArr[2], LocalDate.parse(txtLineArr[3]));
                     }
                     taskList.add(task);
                 }

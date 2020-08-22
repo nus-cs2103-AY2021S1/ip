@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.FileWriter;
@@ -45,14 +46,14 @@ public class Duke {
             } else if (message.equals("event")) {
                 message += sc.nextLine();
                 EventCommand newEventCommand = new EventCommand(message);
-                String at = newEventCommand.getDateForTask();
+                LocalDate at = newEventCommand.getDateForTask();
                 String description = newEventCommand.getDescriptionForTask();
                 Event newEvent = new Event(description, at);
                 newBot.addTask(newEvent);
             } else if (message.equals("deadline")) {
                 message += sc.nextLine();
                 DeadlineCommand newDeadlineCommand = new DeadlineCommand(message);
-                String by = newDeadlineCommand.getDateForTask();
+                LocalDate by = newDeadlineCommand.getDateForTask();
                 String description = newDeadlineCommand.getDescriptionForTask();
                 Deadline newDeadline = new Deadline(description, by);
                 newBot.addTask(newDeadline);
