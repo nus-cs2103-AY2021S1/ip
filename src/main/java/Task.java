@@ -14,7 +14,11 @@ public class Task {
   }
   
   public boolean getStatus() {
-    return isDone;
+    return this.isDone;
+  }
+  
+  public String getData() {
+    return (this.isDone ? 1 : 0) + "/" + this.description;
   }
 
   public void setDone() {
