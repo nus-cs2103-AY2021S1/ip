@@ -3,7 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Events extends Task {
+public class Event extends Task {
     protected LocalDate at;
 
     /**
@@ -12,13 +12,13 @@ public class Events extends Task {
      * @param description detail of the task
      * @param at          time in yyyy-mm-dd
      */
-    public Events(String description, String at) {
+    public Event(String description, String at) {
         super(description);
         this.at = LocalDate.parse(at.trim());
     }
 
 
-    public Events(String description, boolean isDone, String at) {
+    public Event(String description, boolean isDone, String at) {
         super(description, isDone);
         this.at = LocalDate.parse(at.trim());
     }

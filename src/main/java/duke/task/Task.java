@@ -16,7 +16,7 @@ public class Task {
     }
 
 
-    public Task(String description, boolean isDone){
+    public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }

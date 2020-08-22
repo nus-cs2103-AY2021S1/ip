@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.task.Events;
+import duke.task.Event;
 import duke.utils.DukeException;
 import duke.utils.DukeFileHandler;
 import duke.utils.TaskList;
@@ -21,7 +21,7 @@ public class EventCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, DukeFileHandler fileHandler) throws DukeException {
         try {
-            tasks.addTask(new Events(description, at));
+            tasks.addTask(new Event(description, at));
             fileHandler.writeToFile(tasks.getList());
         } catch (Exception ex) {
             throw new DukeException("Error creating this event");

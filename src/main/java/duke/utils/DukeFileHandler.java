@@ -1,7 +1,7 @@
 package duke.utils;
 
 import duke.task.Deadline;
-import duke.task.Events;
+import duke.task.Event;
 import duke.task.Task;
 
 import java.io.File;
@@ -53,7 +53,7 @@ public class DukeFileHandler {
         case "D":
             return new Deadline(inputArr[2].trim(), isDone, inputArr[3].trim());
         case "E":
-            return new Events(inputArr[2].trim(), isDone, inputArr[3].trim());
+            return new Event(inputArr[2].trim(), isDone, inputArr[3].trim());
 
         default:
             return null;
