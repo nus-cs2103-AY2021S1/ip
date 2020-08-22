@@ -1,3 +1,5 @@
+package duke;
+
 public class ListCommand extends Command {
     public void execute(TaskList list, Ui ui, Storage storage) throws DukeException {
         if (list.isEmpty()) {
