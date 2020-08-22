@@ -1,6 +1,10 @@
-
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.FileWriter;
 
 
 public class Duke {
@@ -13,17 +17,20 @@ public class Duke {
     }
 
     // Method to intiate the bot
-    private static void startBot() throws DukeException {
+    private static void startBot() throws DukeException, IOException {
         String welcome = "Hello I am Duke!\nHow can I help you?\n";
         System.out.println(welcome);
 
         Duke newBot = new Duke(new ArrayList<Task>());
 
+        Storage storage = new Storage("data" + File.separator +  "duke.txt");
+
+        newBot.taskList = storage.loadData();
+
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNextLine()) {
             String message = sc.next();
-
             if (message.equals("done")) {
                 message += sc.nextLine();
                 DoneCommand newDoneCommand = new DoneCommand(message, newBot.taskList.size());
@@ -73,6 +80,7 @@ public class Duke {
             } else {
                 throw new InvalidCommandException();
             }
+            newBot.writeFile();
         }
     }
 
@@ -129,6 +137,14 @@ public class Duke {
         int tasksLeft = checkTasksLeft();
         System.out.println("You have " + tasksLeft  + " tasks left in your list!\n");
 
+    }
+
+    public void writeFile() throws IOException {
+        FileWriter dukeWriter = new FileWriter("data/duke.txt", false);
+        for (Task task : this.taskList) {
+            dukeWriter.write(task.inputInFile() + "\n");
+        }
+        dukeWriter.close();
     }
 
     public static void main(String[] args) throws Exception {
