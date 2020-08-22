@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * Encapsulates the parsing system for user commands.
  */
@@ -59,6 +61,9 @@ public class Parser {
             break;
         case DELETE:
             handleDelete(rest);
+            break;
+        case FIND:
+            handleFind(rest);
             break;
         case INVALID:
             throw new DukeException("Unrecognized command!");
@@ -197,4 +202,30 @@ public class Parser {
         ui.print("Noted. I've removed this task:\n" + taskToDelete + "\n" + taskList.taskSizeString());
     }
 
+    /**
+     * Handles the "find" command.
+     *
+     * @param rest Remaining string after the "find" command, which is query term.
+     * @throws DukeException Thrown when no search term is given.
+     */
+    private void handleFind(String rest) throws DukeException {
+        if (rest == null) {
+            throw new DukeException("Specify a search term!");
+        }
+
+        List<Task> matches = taskList.search(rest);
+
+        if (matches.isEmpty()) {
+            ui.print("No matching task.");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
+
+        for (int i = 0; i < matches.size(); ++i) {
+            sb.append((i + 1) + "." + matches.get(i) + "\n");
+        }
+        sb.setLength(sb.length() - 1);
+        ui.print(sb.toString());
+    }
 }

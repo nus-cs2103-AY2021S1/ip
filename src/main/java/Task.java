@@ -36,6 +36,15 @@ public class Task {
     }
 
     /**
+     * Retrieves name of task.
+     *
+     * @return Name.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
      * Parses a serialized string by checking the first letter for type.
      * Designates the parsing to the appropriate class.
      *

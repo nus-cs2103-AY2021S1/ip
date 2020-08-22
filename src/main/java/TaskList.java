@@ -83,6 +83,22 @@ public class TaskList {
     }
 
     /**
+     * Searches the list for tasks that contain search query.
+     *
+     * @param query Term to be searched.
+     * @return List of matching tasks.
+     */
+    public List<Task> search(String query) {
+        List<Task> results = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.getName().contains(query)) {
+                results.add(task);
+            }
+        }
+        return results;
+    }
+
+    /**
      * Marks a given task as completed.
      *
      * @param taskNum Index of task to be marked.
