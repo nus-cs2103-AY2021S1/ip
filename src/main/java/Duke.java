@@ -1,9 +1,15 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
         ListOfItems listOfItems = new ListOfItems();
+        HandleFile handleFile = new HandleFile(listOfItems);
+        handleFile.checkFile();
+
+        Scanner sc = new Scanner(System.in);
+
         String divider = "____________________________________________________________";
         String intro = "Hello! I'm Bob\n" +
                 "What can I do for you?\n";
@@ -17,10 +23,13 @@ public class Duke {
                     listOfItems.getList();
                 } else if (input.contains("done")) {
                     listOfItems.doneItem(input);
+                    handleFile.writeFile(listOfItems);
                 } else if (input.contains("delete")) {
                     listOfItems.deleteItem(input);
+                    handleFile.writeFile(listOfItems);
                 } else {
                     listOfItems.addItem(input);
+                    handleFile.writeFile(listOfItems);
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
