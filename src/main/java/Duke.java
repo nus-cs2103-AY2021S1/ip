@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -116,10 +118,14 @@ public class Duke {
                         if (text.length <= 1) {
                             throw new EmptyBodyException("deadline", "deadline");
                         }
-                        String deadline = text[1];
-                        Task newDeadline = new Deadline(description, deadline);
-                        createNewTask(newDeadline);
-                        break;
+                        try {
+                            LocalDate deadline = LocalDate.parse(text[1]);
+                            Task newDeadline = new Deadline(description, deadline);
+                            createNewTask(newDeadline);
+                            break;
+                        } catch (DateTimeParseException e) {
+                            throw new UnknownInputException(text[1]);
+                        }
                     }
                     case "event": {
                         String[] text = remaining.split(" /at ");
