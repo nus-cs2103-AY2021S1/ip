@@ -135,4 +135,17 @@ public class DeadlineTest {
             fail();
         }
     }
+
+    @Test
+    public void isOverdueTest() {
+        try {
+            Deadline d = new Deadline("Assignment 1", "2020-08-02");
+            assertEquals(true, d.isOverdue());
+
+            d.markAsDone();
+            assertEquals(false, d.isOverdue());
+        } catch (Exception e) {
+            fail();
+        }
+    }
 }
