@@ -13,7 +13,7 @@ public class Duke {
         ui = new Ui();
         try {
             storage = new Storage(filePath);
-            list = storage.list;
+            list = storage.getList();
         } catch (Exception e) {
             ui.output(e.getMessage());
             list = new TaskList();

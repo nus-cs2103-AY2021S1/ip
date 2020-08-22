@@ -11,7 +11,11 @@ import java.util.Scanner;
 
 public class Storage {
     private final String filePath;
-    public final TaskList list;
+    private final TaskList list;
+
+    public TaskList getList() {
+        return list;
+    }
 
     public Storage(String filePath) throws FileNotFoundException, InvalidCommandException {
         this.filePath = filePath;
