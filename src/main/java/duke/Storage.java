@@ -13,10 +13,21 @@ import java.util.Scanner;
 import duke.task.*;
 import duke.exception.*;
 
+/**
+ * Responsible for local disk file-related operations.
+ */
 public class Storage {
 
+    /**
+     * Path associated with the file.
+     */
     private Path path;
 
+    /**
+     * Creates a new instance of a Storage object with attributes defined
+     * in the parameters.
+     * @param filePath Path associated with the file.
+     */
     Storage(String filePath) {
         try {
             this.path = Paths.get(filePath);
@@ -34,6 +45,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the task list in the file.
+     * @return Returns a List<Task> that corresponds to the file data.
+     * @throws DukeFileNotFoundException If file is not found.
+     */
     List<Task> load() throws DukeFileNotFoundException {
         File f = new File(String.valueOf(path));
         try {
@@ -63,6 +79,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Parses the Task into a string stored in the file.
+     * @return Returns a String that corresponds to the Task attributes.
+     */
     String parseTaskAsText(Task task) {
         if (task instanceof Todo) {
             return "T | " + (task.done ? "1" : "0") + " | " + task.description;
@@ -73,6 +93,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the task list in the file.
+     * @param taskList TaskList to be saved.
+     * @throws DukeLoadingErrorException If I/O operation fails.
+     */
     public void save(TaskList taskList) throws DukeLoadingErrorException {
         try {
             FileWriter fw = new FileWriter(String.valueOf(path));
