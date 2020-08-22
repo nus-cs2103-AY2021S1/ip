@@ -7,11 +7,15 @@ import duke.Command.ListCommand;
 import duke.Command.DeleteCommand;
 import duke.Command.AddCommand;
 
-import duke.Exception.DukeException;
-
 public class Parser {
 
-    public static Command parse(String str) throws DukeException {
+    /**
+     * Parses user input and returns an executable <code>Command</code> Object
+     *
+     * @param str The raw user input
+     * @return An executable <code>Command</code> object
+     */
+    public static Command parse(String str) {
         if (str.equals("bye")) {
             return new ExitCommand();
         } else if (str.equals("list")) {

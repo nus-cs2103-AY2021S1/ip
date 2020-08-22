@@ -35,8 +35,10 @@ public class AddCommand extends Command {
         }
 
         if (str.split(delimiter).length == 1) {
-            return str.split(delimiter)[0]; // (deadline/event by/at ...)
+            // (deadline/event by/at ...)
+            return str.split(delimiter)[0];
         }
+        // (deadline/event ... by/at ...)
         return str.split(delimiter)[1]; // (deadline/event ... by/at ...)
     }
 
@@ -48,7 +50,6 @@ public class AddCommand extends Command {
         } else if (delimiter.equals(Event.delimiterAt) && splitString[0].equals("/at")) {
             throw new DukeException("The description of an event cannot by empty");
         }
-
         return str.split(delimiter)[0];
     }
 

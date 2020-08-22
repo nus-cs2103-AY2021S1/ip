@@ -6,6 +6,11 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructs a <code>Task</code> Object to represent a task
+     *
+     * @param description The description of a task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -23,6 +28,11 @@ public abstract class Task {
         return this.description;
     }
 
+    /**
+     * Sets the status of a task as done
+     *
+     * @throws DukeException If a task is already marked as done before
+     */
     public void markAsDone() throws DukeException {
         if (isDone) {
             throw new DukeException("This task is already completed!");
