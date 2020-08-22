@@ -1,3 +1,8 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -96,6 +101,7 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
                     }
                 }
+                writeToFile(list);
             } catch (TaskException e) {
                 System.out.println(addDividers(formatString(e.toString())));
             } catch (DukeException e) {
@@ -172,6 +178,48 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
+        readFile();
         readAndEcho(arrayList);
+    }
+
+    private static void readFile() {
+        //From https://www.sghill.net/how-do-i-make-cross-platform-file-paths-in-java.html
+        String home = System.getProperty("user.dir");
+        Path path = Paths.get(home, "data", "duke.txt");
+        if (!Files.isRegularFile(path)) {
+            createFile();
+        }
+    }
+
+    private static void createFile() {
+        String home = System.getProperty("user.dir");
+        Path path = Paths.get(home, "data");
+        if (!Files.isDirectory(path)) {
+            try {
+                Files.createDirectory(path);
+            } catch (IOException e) {
+                System.out.println("Failed to create directory");
+            }
+        }
+
+        path = Paths.get(home, "data", "duke.txt");
+        try {
+            Files.createFile(path);
+        } catch (IOException e) {
+            System.out.println("Failed to create file");
+        }
+    }
+
+    private static void writeToFile(List<Task> arrayList) {
+        Path path = Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
+        try {
+            FileWriter fw = new FileWriter(path.toString());
+            for (Task task : arrayList) {
+                fw.write(task.toStoredTextString() + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Unable to write to file");
+        }
     }
 }

@@ -11,4 +11,9 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + date + ")";
     }
+
+    @Override
+    public String toStoredTextString() {
+        return "D | " + super.toStoredTextString() + " | " + date;
+    }
 }

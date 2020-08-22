@@ -22,4 +22,9 @@ public class Task {
     public void markDone() {
         this.isDone = true;
     }
+
+    public String toStoredTextString() {
+        String done = (isDone) ? "1" : "0";
+        return done + " | " + description;
+    }
 }
