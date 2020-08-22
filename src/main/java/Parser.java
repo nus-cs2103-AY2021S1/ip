@@ -20,7 +20,9 @@ public class Parser {
             return new AddTodoCommand(parsed);
         } else if (parsed[0].equals("bye")) {
             return new ExitCommand(parsed);
-        } else {
+        } else if (parsed[0].equals("find")) {
+            return new FindCommand(parsed);
+        } else  {
             return new UnknownCommand(parsed);
         }
 
