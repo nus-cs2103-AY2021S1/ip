@@ -2,4 +2,3 @@ T | 1 | read book
 D | 0 | return book | 19/09/2020 1000
 E | 0 | project meeting | 20/12/2020 200-1400
 T | 1 | join sports club
-
