@@ -14,7 +14,7 @@ public class EventTask extends Task {
         }
     }
 
-    private EventTask(String description, boolean isDone, LocalDate dateTime) throws DukeException {
+    public EventTask(String description, boolean isDone, LocalDate dateTime) throws DukeException {
         super(description, isDone);
         this.dateTime = dateTime;
     }
@@ -26,7 +26,7 @@ public class EventTask extends Task {
 
     @Override
     public String printData() {
-        return "E|" + super.printData() + "|" + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "E|" + super.printData() + "|" + dateTime.format(DateTimeFormatter.ofPattern("YYYY-MM-dd"));
     }
 
     @Override

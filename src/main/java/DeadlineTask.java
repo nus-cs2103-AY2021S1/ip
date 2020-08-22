@@ -14,7 +14,7 @@ public class DeadlineTask extends Task {
         }
     }
 
-    private DeadlineTask(String description, boolean isDone, LocalDate dateTime) throws DukeException {
+    public DeadlineTask(String description, boolean isDone, LocalDate dateTime) throws DukeException {
         super(description, isDone);
         this.dateTime = dateTime;
     }
@@ -26,7 +26,7 @@ public class DeadlineTask extends Task {
 
     @Override
     public String printData() {
-        return "D|" + super.printData() + "|" + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "D|" + super.printData() + "|" + dateTime.format(DateTimeFormatter.ofPattern("YYYY-MM-dd"));
     }
 
     @Override
