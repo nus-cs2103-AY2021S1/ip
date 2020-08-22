@@ -8,7 +8,7 @@ public class TaskList {
     }
     
     // side effect: create & add task + return response
-    protected String addEntry(String[] parsedOutput) {
+    protected String addEntry(String[] parsedOutput) throws DukeException {
         String command = parsedOutput[0];
         switch (command) {
         case "T":

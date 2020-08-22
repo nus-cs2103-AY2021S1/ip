@@ -19,7 +19,7 @@ public class Duke {
         }
         sc.close();
     }
-    
+
     private static void greet() {
         ArrayList<String> greeting = new ArrayList<>();
         greeting.add("Hello I'm Duke");
@@ -125,8 +125,6 @@ public class Duke {
     }
     
 }
-
-//todo: create enums for messages, delims and commands/cases
 
 
 
