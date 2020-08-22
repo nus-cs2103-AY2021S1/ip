@@ -18,13 +18,13 @@ public class Commands {
 
     public void start() {
         this.greet();
+        this.getPreviousTask();
 
         Scanner scanner = new Scanner(System.in);
 
         String inputs = scanner.nextLine().trim();
 
         while (shouldBreak) {
-            this.getPreviousTask();
             String[] inputArray = inputs.split(" ", 2);
             try {
                 if (find(inputArray[0])) {
@@ -66,6 +66,7 @@ public class Commands {
                 inputs = scanner.nextLine().trim();
             }
         }
+        this.writeToFile();
     }
 
     private void markDone(String[] inputs) throws DukeException {
@@ -178,25 +179,25 @@ public class Commands {
             File file = new File(path.toString());
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
-                String[] tasks = sc.nextLine().split("\\|");
-                switch (tasks[0].trim()) {
+                String[] task = sc.nextLine().split("\\|");
+                switch (task[0].trim()) {
                 case "T":
-                    ToDos todo = new ToDos(tasks[2]);
-                    if (Integer.parseInt(tasks[1].trim()) == 1) {
+                    ToDos todo = new ToDos(task[2].trim());
+                    if (task[1].equals("1")) {
                         todo.doneTask();
                     }
                     taskList.add(todo);
                     break;
                 case "D":
-                    Deadlines deadline = new Deadlines(tasks[2], tasks[3]);
-                    if (Integer.parseInt(tasks[1].trim()) == 1) {
+                    Deadlines deadline = new Deadlines(task[2].trim(), task[3].trim());
+                    if (task[1].equals("1")) {
                         deadline.doneTask();
                     }
                     taskList.add(deadline);
                     break;
                 case "E":
-                    Events event = new Events(tasks[2], tasks[3]);
-                    if (Integer.parseInt(tasks[1].trim()) == 1) {
+                    Events event = new Events(task[2].trim(), task[3].trim());
+                    if (task[1].equals("1")) {
                         event.doneTask();
                     }
                     taskList.add(event);
@@ -205,6 +206,33 @@ public class Commands {
             }
         } catch (FileNotFoundException e) {
             File file = new File(path.toString());
+        }
+    }
+
+    private void writeToFile() {
+        java.nio.file.Path path = java.nio.file.Paths.get("data").resolve("duke.txt");
+        try {
+            String content = "";
+            FileWriter fw = new FileWriter(path.toString());
+            for (int i = 0; i < taskList.size(); i++) {
+                Task task = taskList.get(i);
+                if (task instanceof ToDos) {
+                    String taskDetails = String.format("T | %d | %s", task.isDone ? 1 : 0, task.getDescription());
+                    content += taskDetails + "\n";
+                } else if (task instanceof Deadlines) {
+                    String taskDetails = String.format("T | %d | %s |%s",
+                            task.isDone ? 1 : 0, task.getDescription(), ((Deadlines) task).getBy());
+                    content += taskDetails + "\n";
+                } else {
+                    String taskDetails = String.format("T | %d | %s |%s",
+                            task.isDone ? 1 : 0, task.getDescription(), ((Events) task).getAt());
+                    content += taskDetails + "\n";
+                }
+            }
+            fw.write(content);
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
