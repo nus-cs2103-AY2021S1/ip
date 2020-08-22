@@ -1,16 +1,19 @@
 package main.java;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private List<Task> tasks;
+    Storage storage;
 
     TaskList() {
-        this.tasks = new ArrayList<>();
+        this.storage = new Storage();
+        this.tasks = this.storage.readFromFile();
     }
 
     void add(Task task) {
         this.tasks.add(task);
+        this.storage.appendToFile(task);
         System.out.println("New task added: " + task);
     }
 
@@ -19,6 +22,7 @@ public class TaskList {
             throw new DukeException("Invalid task.");
         } else {
             this.tasks.get(position - 1).markAsDone();
+            this.storage.writeToFile(this.tasks);
         }
     }
 
@@ -27,6 +31,7 @@ public class TaskList {
             throw new DukeException("Invalid task.");
         } else {
             Task removed = this.tasks.remove(position - 1);
+            this.storage.writeToFile(this.tasks);
             System.out.println("Deleted: " + removed);
         }
     }
