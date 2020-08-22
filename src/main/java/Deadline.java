@@ -6,6 +6,11 @@ public class Deadline extends Task {
         this.toDoBy = toDoBy.stripLeading().stripTrailing();
     }
 
+    Deadline(String description, String toDoBy, Boolean isDone) {
+        super(description, isDone);
+        this.toDoBy = toDoBy.stripLeading().stripTrailing();
+    }
+
     public static Deadline createTask(String message) throws DukeException{
         String errMessage1 = " Oops!! You missed out some vital information/keyword... *woof*\n";
         String errMessage2 = " Oops!! You gonna forget what this is about if you\n" +

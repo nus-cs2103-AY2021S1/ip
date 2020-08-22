@@ -1,6 +1,12 @@
+import java.io.FileWriter;
+
 public class Todo extends Task{
     Todo(String description) {
         super(description);
+    }
+
+    Todo(String description, Boolean isDone) {
+        super(description, isDone);
     }
 
     public static Todo createTask(String message) throws DukeException{

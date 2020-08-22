@@ -8,6 +8,11 @@ public class Task{
         this.isDone = false;
     }
 
+    Task(String message, boolean isDone) {
+        this.description = message.stripLeading().stripTrailing();
+        this.isDone = isDone;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }

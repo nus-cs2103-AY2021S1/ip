@@ -6,6 +6,11 @@ public class Event extends Task{
         this.schedule = schedule.stripLeading().stripTrailing();
     }
 
+    Event(String description, String schedule, Boolean isDone) {
+        super(description, isDone);
+        this.schedule = schedule.stripLeading().stripTrailing();
+    }
+
     public static Event createTask(String message) throws DukeException{
         String errMessage1 = " Oops!! You missed out some vital information/keyword... *woof*\n";
         String errMessage2 = " Oops!! Are you planning to ghost the event?\n" +
@@ -39,6 +44,6 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (Appear at: " + schedule + ")";
+        return "[E]" + super.toString() + " (APPEAR at: " + schedule + ")";
     }
 }
