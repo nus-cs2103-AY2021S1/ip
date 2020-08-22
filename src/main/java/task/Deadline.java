@@ -1,11 +1,13 @@
 package task;
 
+import misc.DukeDateTime;
+
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.time.LocalDateTime;
 
 /**
- * A Deadline is a Task with a deadline
+ * A Task with a DukeDateTime indicating it's deadline
  */
 public class Deadline extends Task {
 
@@ -35,14 +37,16 @@ public class Deadline extends Task {
         return "D," + super.toCSV() + "," + deadline;
     }
 
-    @Override
-    public Task fromCSV(String csv) {
+    public static Task fromCSV(String csv) {
         Scanner scanner = new Scanner(csv);
-        Pattern pattern = Pattern.compile("([^,]+?),");
+        scanner.useDelimiter(",");
+        scanner.next(); // Discard first match
+
+        // Construct task from csv
         return new Deadline(
-                scanner.nextBoolean(),
-                scanner.next(pattern),
-                DukeDateTime.generate(scanner.next(pattern))
+                Boolean.parseBoolean(scanner.next()),
+                scanner.next(),
+                DukeDateTime.generate(scanner.next())
         );
     }
 }

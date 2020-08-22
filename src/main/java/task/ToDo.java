@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 /**
- * Todo is a Task with no defined datetime
+ * A Task with no defined datetime
  */
 public class ToDo extends Task {
 
@@ -26,10 +26,15 @@ public class ToDo extends Task {
         return "T," + super.toCSV();
     }
 
-    @Override
-    public Task fromCSV(String csv) {
+    public static Task fromCSV(String csv) {
         Scanner scanner = new Scanner(csv);
-        Pattern pattern = Pattern.compile("([^,]+?),");
-        return new ToDo(scanner.nextBoolean(), scanner.next(pattern));
+        scanner.useDelimiter(",");
+        scanner.next(); // Discard first match
+
+        // Construct task from csv
+        return new ToDo(
+                Boolean.parseBoolean(scanner.next()),
+                scanner.next()
+        );
     }
 }

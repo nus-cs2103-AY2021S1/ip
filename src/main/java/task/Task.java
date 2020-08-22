@@ -3,7 +3,7 @@ package task;
 /**
  * A task is a is an item that has a description and is completable
  */
-public abstract class Task implements CSVable<Task> {
+public abstract class Task {
 
     private static final String SYMBOL_DONE = "✓";
     private static final String SYMBOL_UNDONE = "✗";
@@ -46,11 +46,8 @@ public abstract class Task implements CSVable<Task> {
         return "[" + isCompletedSymbol() + "] " + description;
     }
 
-    @Override
     public String toCSV() {
         return "" + this.isCompleted() + ',' + this.description;
     }
-
-    public abstract Task fromCSV(String csv);
 
 }

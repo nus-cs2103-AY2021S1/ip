@@ -1,11 +1,13 @@
 package task;
 
+import misc.DukeDateTime;
+
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.time.LocalDateTime;
 
 /**
- * An Event is a Task with startTime, and endTime
+ * A Task with a startTime, and an endTime
  */
 public class Event extends Task{
 
@@ -42,15 +44,17 @@ public class Event extends Task{
         return "E," + super.toCSV() + "," + eventStart + "," + eventEnd;
     }
 
-    @Override
-    public Task fromCSV(String csv) {
+    public static Task fromCSV(String csv) {
         Scanner scanner = new Scanner(csv);
-        Pattern pattern = Pattern.compile("([^,]+?),");
+        scanner.useDelimiter(",");
+        scanner.next(); // Discard first match
+
+        // Construct task from csv
         return new Event(
-                scanner.nextBoolean(),
-                scanner.next(pattern),
-                DukeDateTime.generate(scanner.next(pattern)),
-                DukeDateTime.generate(scanner.next(pattern))
+                Boolean.parseBoolean(scanner.next()),
+                scanner.next(),
+                DukeDateTime.generate(scanner.next()),
+                DukeDateTime.generate(scanner.next())
         );
     }
 

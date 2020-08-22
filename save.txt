@@ -1,2 +1,1 @@
-T,true,manaajlsfke
-E,true,shopping,22082020 0900,23102021 1800
+T,false,sjlfjal efjals flsk fjl

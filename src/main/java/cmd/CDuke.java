@@ -1,18 +1,14 @@
 package cmd;
 
+import command.Command;
 import task.Task;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.function.Consumer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
- * Command line application for Duke
+ * Command line application for Duke (Command line UI)
  */
 public class CDuke {
 
@@ -25,8 +21,6 @@ public class CDuke {
     private static final String GREETING = "Hello! I'm Duke\nLet's have a conversation!";
     private static final String ENDING_GREETING = "Bye. Hope to see you again soon!";
 
-    private static final Pattern INPUT_PATTERN = Pattern.compile("^\\s*(\\S+)\\s*(.*)$");
-
     private final List<Task> taskList;
     private final Scanner scanner;
 
@@ -36,24 +30,7 @@ public class CDuke {
     }
 
     /**
-     * Store task list on disk
-     * @throws IOException if the named file exists but is a directory rather than a regular file, does not exist but
-     * cannot be created, or cannot be opened for any other reason
-     */
-    private void saveTaskList(String filePath) throws IOException {
-        // TODO: Make sure directory exists
-
-        // Open file for write/overwrite
-        FileWriter fileWriter = new FileWriter(filePath);
-        for (Task task : taskList) {
-            fileWriter.write(task.toCSV() + "\n");
-        }
-        fileWriter.flush();
-        fileWriter.close();
-    }
-
-    /**
-     * Main logic for Duke commandline
+     * Main execution point for Duke commandline
      */
     public void run() {
 
@@ -64,25 +41,13 @@ public class CDuke {
 
             // Prompt for input
             String input = scanner.nextLine();
-            Matcher matcher = INPUT_PATTERN.matcher(input);
-
-            // No input received, skip
-            if (!matcher.matches()) continue;
 
             // Look up command and execute
-            CommandType type = CommandType.get(matcher.group(1));
-            Consumer<List<Task>> exec = type.generate(matcher.group(2));
-            exec.accept(taskList);
-
-            // Save on disk
-            try {
-                this.saveTaskList("save.txt");
-            } catch (IOException e) {
-                System.out.println("Internal Error: Failed to save file list");
-            }
+            Command c = Parser.parse(taskList, input);
+            c.execute();
 
             // Exit CDuke
-            if (type.equals(CommandType.BYE)) {
+            if (c.isExit()) {
                 break;
             }
         }
