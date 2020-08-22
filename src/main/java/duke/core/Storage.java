@@ -39,7 +39,7 @@ public class Storage {
     public ArrayList<Task> readRecord() throws FileNotFoundException, LoadingException {
         File record = new File(path);
         Scanner scanner = new Scanner(record);
-        
+
         try {
             ArrayList<Task> tasks = new ArrayList<>();
             String next;
@@ -95,6 +95,7 @@ public class Storage {
         FileWriter fileWriter = new FileWriter(path);
         ArrayList<Task> tasks = taskList.getTasks();
         String string = "";
+        
         for(int i = 0; i < tasks.size(); i = i + 1) {
             string = string.concat(tasks.get(i).record() + System.lineSeparator());
         }

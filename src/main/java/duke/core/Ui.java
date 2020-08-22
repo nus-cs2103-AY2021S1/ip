@@ -91,7 +91,6 @@ public class Ui {
         System.out.println(makeBlock(taskList.toString()));
     }
 
-
     /**
      * Shows the result of the executing the complete command.
      *

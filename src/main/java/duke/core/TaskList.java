@@ -78,7 +78,6 @@ public class TaskList {
         return new TaskList(list);
     }
 
-
     /**
      * Finds the task with the description containing the search key.
      *
