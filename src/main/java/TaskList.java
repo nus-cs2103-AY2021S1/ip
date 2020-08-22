@@ -1,4 +1,7 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class TaskList {
     private ArrayList<Task> list = new ArrayList<>();
@@ -11,12 +14,14 @@ public class TaskList {
         Task task;
         if (type.equals("todo")) {
             task = new Todo(input);
-        } else if (type.equals("deadline")) {
+        } else if (type.equals("deadline")) { // datetime formatter: "dd-MM-yyyy kk:mm"
             String[] arr = input.split("/by");
             try {
                 task = new Deadline(arr[0].trim(), arr[1].trim());
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! I'm sorry, when is the deadline? (/by...)");
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Invalid date-time format! (/by...)");
             }
         } else if (type.equals("event")) {
             String[] arr = input.split("/at");
@@ -24,6 +29,8 @@ public class TaskList {
                 task = new Event(arr[0].trim(), arr[1].trim());
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! I'm sorry, when is the event? (/at...)");
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Invalid date-time format! (/at...)");
             }
         } else {
             throw new DukeException("OOPS!!! I'm sorry, I don't know what that means :<");
