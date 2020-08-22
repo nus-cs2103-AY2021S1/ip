@@ -12,7 +12,7 @@ public class DukeException {
         System.out.print(divider
                 + "\tPlease input an appropriate description!\n"
                 + "\tAn example would be:\n"
-                + "\tdeadline return book /by Friday\n"
+                + "\tdeadline return book /by 2020-12-09 08:00\n"
                 + divider);
     }
 
@@ -20,7 +20,7 @@ public class DukeException {
         System.out.print(divider
                 + "\tPlease input the appropriate command!\n"
                 + "\tAn example would be:\n"
-                + "\tdeadline return book /by Friday\n"
+                + "\tdeadline return book /by 2020-12-09 08:00\n"
                 + divider);
     }
 
@@ -28,7 +28,15 @@ public class DukeException {
         System.out.print(divider
                 + "\tPlease input the date!\n"
                 + "\tAn example would be:\n"
-                + "\tdeadline return book /by Friday\n"
+                + "\tdeadline return book /by 2020-12-09 08:00\n"
+                + divider);
+    }
+
+    protected static void deadlineInvalidDateFormat() {
+        System.out.print(divider
+                + "\tPlease input the correct date format!\n"
+                + "\tAn example would be:\n"
+                + "\tdeadline return book /by YYYY-MM-DD HH:mm\n"
                 + divider);
     }
 
@@ -36,7 +44,7 @@ public class DukeException {
         System.out.print(divider
                 + "\tPlease input an appropriate description!\n"
                 + "\tAn example would be:\n"
-                + "\tevent project meeting /at Aug 6th 2-4pm\n"
+                + "\tevent Christmas party /at 2020-12-25 17:00\n"
                 + divider);
     }
 
@@ -44,7 +52,7 @@ public class DukeException {
         System.out.print(divider
                 + "\tPlease input the appropriate command!\n"
                 + "\tAn example would be:\n"
-                + "\tevent project meeting /at Aug 6th 2-4pm\n"
+                + "\tevent Christmas party /at 2020-12-25 17:00\n"
                 + divider);
     }
 
@@ -52,7 +60,15 @@ public class DukeException {
         System.out.print(divider
                 + "\tPlease input the date!\n"
                 + "\tAn example would be:\n"
-                + "\tevent project meeting /at Aug 6th 2-4pm\n"
+                + "\tevent Christmas party /at 2020-12-25 17:00\n"
+                + divider);
+    }
+
+    protected static void eventInvalidDateFormat() {
+        System.out.print(divider
+                + "\tPlease input the correct date format!\n"
+                + "\tAn example would be:\n"
+                + "\tevent Christmas party /at YYYY-MM-DD HH:mm\n"
                 + divider);
     }
 

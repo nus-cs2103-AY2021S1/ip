@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class DukeCommandsHandler {
@@ -85,7 +87,15 @@ public class DukeCommandsHandler {
             return;
         }
 
-        Task deadline = new Deadline(description, by);
+        String formattedBy = by.replace(' ', 'T');
+        LocalDateTime date;
+        try {
+            date = LocalDateTime.parse(formattedBy);
+        } catch (DateTimeParseException e) {
+            DukeException.deadlineInvalidDateFormat();
+            return;
+        }
+        Task deadline = new Deadline(description, date);
         tasks.add(deadline);
         String printing = divider
                 + "\tGotcha! I've added this task:\n\t\t"
@@ -128,7 +138,15 @@ public class DukeCommandsHandler {
             return;
         }
 
-        Task event = new Event(description, at);
+        String formattedAt = at.replace(' ', 'T');
+        LocalDateTime date;
+        try {
+            date = LocalDateTime.parse(formattedAt);
+        } catch (DateTimeParseException e) {
+            DukeException.eventInvalidDateFormat();
+            return;
+        }
+        Task event = new Event(description, date);
         tasks.add(event);
         String printing = divider
                 + "\tGotcha! I've added this task:\n\t\t"
