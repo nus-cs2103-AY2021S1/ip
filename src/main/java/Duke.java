@@ -1,12 +1,52 @@
 package main.java;
 
-import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
+    static ArrayList<Task> taskList = new ArrayList<Task>();
+
+    private static int parseTaskNumber(String input) throws DukeException {
+        String digitsOnlyInput = input.replaceAll("[^0-9]", "");
+        if (digitsOnlyInput.isEmpty()) {
+            throw new DukeException("Specify the task number to change e.g. done 12 / delete 4");
+        } else {
+            int taskNumberToMark = Integer.parseInt(digitsOnlyInput);
+            if (taskNumberToMark > taskList.size() | taskNumberToMark < 1) {
+                throw new DukeException("There is no such task number.");
+            } else {
+                return taskNumberToMark;
+            }
+        }
+    }
+
+    private static void deleteTask(int taskNumberToMark) {
+        Task taskToMark = taskList.remove(taskNumberToMark - 1);
+        String remainingTasksMsg = "\nNow you have " + taskList.size() + " tasks in the list.";
+        System.out.println("Noted. I've removed this task:\n" + taskToMark + remainingTasksMsg);
+    }
+
+    private static void markTask(int taskNumberToMark) {
+        Task taskToMark = taskList.get(taskNumberToMark - 1);
+        taskToMark.markAsDone();
+        System.out.println("Nicely done. I've marked this task as done:" +
+                "\n" + taskToMark);
+    }
+
+    private static void updateTaskFile(String filePath, String fileData) throws IOException {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            fw.write(fileData);
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("An IO exception has occured writing to ." + filePath);
+        }
+    }
+
     public static void main(String[] args) {
         Scanner myObj = new Scanner(System.in);
-        ArrayList<Task> taskList = new ArrayList<Task>();
         String MSG_DIVIDER = "____________________________________________________________";
         System.out.println("Hello I'm batman\n");
 
@@ -15,6 +55,8 @@ public class Duke {
             try {
                 String[] taskInput = input.split(" ", 2);
                 String taskCategory = taskInput[0];
+                boolean validTask = taskCategory.equals("todo") || taskCategory.equals("event")
+                        || taskCategory.equals("deadline");
 
                 if (taskCategory.equals("bye")) {
                     break;
@@ -28,38 +70,12 @@ public class Duke {
                         System.out.println(n + "." + taskList.get(n - 1));
                     }
                 } else if (taskCategory.equals("done")) {
-                    String digitsOnlyInput = input.replaceAll("[^0-9]", "");
-                    if (digitsOnlyInput.isEmpty()) {
-                        throw new DukeException("Specify the task number to delete e.g. delete 12");
-                    } else {
-                        int taskNumberToMark = Integer.parseInt(digitsOnlyInput);
-                        if (taskNumberToMark > taskList.size() | taskNumberToMark < 1) {
-                            throw new DukeException("There is no such task number.");
-                        }
-                        Task taskToMark = taskList.get(taskNumberToMark - 1);
-                        taskToMark.markAsDone();
-                        System.out.println("Nicely done. I've marked this task as done:" +
-                                "\n" + taskToMark);
-                    }
+                    int taskNumberToMark = parseTaskNumber(input);
+                    markTask(taskNumberToMark);
                 } else if (taskCategory.equals("delete")) {
-                    String digitsOnlyInput = input.replaceAll("[^0-9]", "");
-                    if (digitsOnlyInput.isEmpty()) {
-                        throw new DukeException("Specify the task number to delete e.g. delete 12");
-                    }
-                    int taskNumberToMark = Integer.parseInt(digitsOnlyInput);
-                    if (taskNumberToMark > taskList.size() | taskNumberToMark < 1 ) {
-                        throw new DukeException("There is no such task number.");
-                    }
-                    Task taskToMark = taskList.remove(taskNumberToMark - 1);
-                    String remainingTasksMsg = "\nNow you have " + taskList.size() + " tasks in the list.";
-                    System.out.println("Noted. I've removed this task:\n" + taskToMark + remainingTasksMsg);
-                } else {
-                    boolean invalidTask = !(taskCategory.equals("todo") || taskCategory.equals("event")
-                            || taskCategory.equals("deadline"));
-                    if (invalidTask) {
-                        throw new CommandNotFoundException();
-                    }
-
+                    int taskNumberToMark = parseTaskNumber(input);
+                    deleteTask(taskNumberToMark);
+                } else if (validTask) {
                     boolean incompleteTask = taskInput.length == 1;
                     if (incompleteTask) {
                         throw new IncompleteCommandException(taskCategory);
@@ -87,6 +103,8 @@ public class Duke {
                     taskList.add(newTask);
                     String remainingTasksMsg = "\nNow you have " + taskList.size() + " tasks in the list.";
                     System.out.println("Got it. I've added this task:\n" + newTask + remainingTasksMsg);
+                } else {
+                    throw new CommandNotFoundException();
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
