@@ -1,18 +1,16 @@
-public class Event extends Task {
-    private String datetime;
+public class Event extends TimedTask {
 
     public Event(String description, String datetime) {
-        super(description);
-        this.datetime = datetime;
+        super(description, datetime);
     }
 
     @Override
-    public String textFormat() {
-        return "event, " + super.textFormat() + "/at" + this.datetime;
+    protected String textFormat() {
+        return "event, " + super.textFormat() + "/at" + this.datetime.format(Deadline.inputFormatter);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.datetime + ")";
+        return "[E]" + super.toString() + " (at: " + super.datetimeString() + ")";
     }
 }
