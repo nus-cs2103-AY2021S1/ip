@@ -1,13 +1,15 @@
-import commands.EnumCommand;
-import exception.DukeException;
-import parser.Parser;
-import storage.Storage;
-import tasks.*;
-import ui.Ui;
+package duke;
+
+import duke.commands.EnumCommand;
+import duke.commands.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 import java.util.Scanner;
 
-import static commands.Command.executeCommand;
 
 public class Duke {
     static final String dirPath = "..\\data";
@@ -38,7 +40,7 @@ public class Duke {
             String instruction = sc.nextLine();
             try {
                 EnumCommand enumCommand = Parser.parseCommand(instruction);
-                executeCommand(enumCommand, instruction, result);
+                Command.executeCommand(enumCommand, instruction, result);
                 storage.storeToFile(result);
             } catch (Exception e) {
                 ui.showError(e);

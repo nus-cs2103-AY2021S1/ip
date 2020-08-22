@@ -1,7 +1,7 @@
-package parser;
+package duke.parser;
 
-import commands.EnumCommand;
-import exception.DukeException;
+import duke.commands.EnumCommand;
+import duke.exception.DukeException;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;

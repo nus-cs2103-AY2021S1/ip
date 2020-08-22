@@ -1,14 +1,14 @@
-package commands;
+package duke.commands;
 
-import ui.Ui;
-import exception.DukeException;
-import tasks.*;
+import duke.ui.Ui;
+import duke.exception.DukeException;
+import duke.tasks.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import static parser.Parser.dateProcessor;
-import static parser.Parser.dateTimeProcessor;
+import static duke.parser.Parser.dateProcessor;
+import static duke.parser.Parser.dateTimeProcessor;
 
 public class Command {
 

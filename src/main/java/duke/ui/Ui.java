@@ -1,9 +1,7 @@
-package ui;
+package duke.ui;
 
-import tasks.Task;
-import tasks.TaskList;
-
-import java.util.List;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
 
 public class Ui {
     public static String greetings = "Hello! I'm Mr. Duke, your personal assistant\n     What can I do for you? : )";
