@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+
 
 public class Duke {
     private static ArrayList<Task> taskList = new ArrayList<>();
@@ -12,38 +14,75 @@ public class Duke {
         String command = commandTemp[0];
         if (temp.length != 2) {
             if (command.equals("deadline")) {
-                throw new DeadlineException("Both time description and description of a deadline must be filled!");
+                if (temp.length > 2) {
+                    // if user ended up using a dd/mm/yyyy HHHH format
+                    throw new DeadlineException("Please input date time format in DD-MM-YYYY HHHH format!\n" +
+                            "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
+                } else {
+                    throw new DeadlineException("Both time description and description of a deadline must be filled!");
+                }
             } else if (command.equals("event")) {
-                throw new EventException("Both time description and description of a event must be filled!");
+                if (temp.length > 2) {
+                    // if user ended up using a dd/mm/yyyy HHHH format
+                    throw new EventException("Please input date time format in DD-MM-YYYY HHHH format!\n" +
+                            "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
+                } else {
+                    throw new EventException("Both time description and description of a event must be filled!");
+                }
             }
         }
-
-        String[] timeTemp = temp[1].split(" ");
-        String timeCommand = timeTemp[0];
 
         String description = "";
         for (int i = 1; i < commandTemp.length; i++) {
             description += commandTemp[i] + " ";
         }
 
-        String timeDescription = "";
-        for (int i = 1; i < timeTemp.length; i++) {
-            if (i == timeTemp.length - 1) {
-                timeDescription += timeTemp[i];
-            } else {
-                timeDescription += timeTemp[i] + " ";
+
+        String[] timeTemp = temp[1].split(" ");
+
+        if (timeTemp.length != 3) {
+            // timeTemp[0] = timeCommand which is a by or at
+            // timeTemp[1] = DDMMYYYY
+            // timeTemp[2] = HHHH
+            if (command.equals("deadline")) {
+                throw new DeadlineException("Please input date time format in DD-MM-YYYY HHHH format!\n" +
+                        "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
+            } else if (command.equals("event")) {
+                throw new EventException("Please input date time format in DD-MM-YYYY HHHH format!\n" +
+                        "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
             }
         }
+
+        String timeCommand = timeTemp[0];
+        String DDMMYYYY = timeTemp[1];
+        String[] DDMMYYYtemp = DDMMYYYY.split("-");
+        String HHHH = timeTemp[2];
+
+        if (DDMMYYYtemp.length != 3 || HHHH.length() != 4) {
+            if (command.equals("deadline")) {
+                throw new DeadlineException("Please input date time format in DD-MM-YYYY HHHH format!\n" +
+                            "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
+            } else if (command.equals("event")) {
+                throw new EventException("Please input date time format in DD-MM-YYYY HHHH format!\n" +
+                        "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
+            }
+        }
+
+        int day = Integer.parseInt(DDMMYYYtemp[0]);
+        int month = Integer.parseInt(DDMMYYYtemp[1]);
+        int year = Integer.parseInt(DDMMYYYtemp[2]);
+        int hour = Integer.parseInt(HHHH.substring(0, 2));
+        int min = Integer.parseInt(HHHH.substring(2, 4));
 
         System.out.println("Got it. I've added this task:");
 
         if (command.equals("deadline")) {
-            Task task = new Deadline(description, timeDescription);
+            Task task = new Deadline(description, LocalDateTime.of(year, month, day, hour, min));
             taskList.add(task);
             System.out.println(task);
             System.out.println("Now you have " + taskList.size() + " tasks in the list.");
         } else if (command.equals("event")) {
-            Task task = new Event(description, timeDescription);
+            Task task = new Event(description, LocalDateTime.of(year, month, day, hour, min));
             taskList.add(task);
             System.out.println(task);
             System.out.println("Now you have " + taskList.size() + " tasks in the list.");

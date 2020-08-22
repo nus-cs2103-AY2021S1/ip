@@ -1,16 +1,18 @@
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
-    private final String timeDescription;
+    private final LocalDateTime dateTime;
 
-    Deadline(String taskDescription, String timeDescription) {
-        super(taskDescription);
-        this.timeDescription = timeDescription;
-    }
-
-    public String getTimeDescription() {
-        return timeDescription;
+    Deadline(String task, LocalDateTime dateTime) {
+        super(task);
+        this.dateTime = dateTime;
     }
 
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + this.timeDescription + ")";
+        String MMM = this.dateTime.getMonth().toString().substring(0, 3);
+        String DDD = this.dateTime.getDayOfWeek().toString().substring(0, 3);
+        int dd = this.dateTime.getDayOfMonth();
+        int yyyy = this.dateTime.getYear();
+        return "[D]" + super.toString() + "(by: " + dd + " " + MMM + " " + yyyy + ", " + DDD + ")";
     }
 }
