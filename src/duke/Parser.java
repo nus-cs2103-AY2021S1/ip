@@ -9,6 +9,7 @@ import command.ExitCommand;
 import command.MarkDoneCommand;
 import command.TaskListCommand;
 import command.UnknownCommand;
+import command.FindCommand;
 
 /**
  * Represents a <code>Parser</code> object that deals with making sense of the user command.
@@ -21,6 +22,7 @@ public class Parser {
     private final static String COMMAND_ADD_DEADLINE = "deadline";
     private final static String COMMAND_ADD_EVENT = "event";
     private final static String COMMAND_DELETE_TASK = "delete";
+    private final static String COMMAND_FIND = "find";
 
     /**
      * Returns the appropriate <code>Command</code> object according to the <code>fullCommand</code>.
@@ -44,6 +46,8 @@ public class Parser {
             return new TaskListCommand(splitCommand);
         case COMMAND_EXIT:
             return new ExitCommand(splitCommand);
+        case COMMAND_FIND:
+            return new FindCommand(splitCommand);
         default:
             return new UnknownCommand(splitCommand);
         }
