@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -52,11 +53,11 @@ public class DataHandler {
                         break;
                     case 'D':
                         description = Duke.stringSplit(newTask, "/by");
-                        tasks.add(new Deadline(description[0], isDone, description[1]));
+                        tasks.add(new Deadline(description[0], isDone, LocalDate.parse(description[1])));
                         break;
                     case 'E':
                         description = Duke.stringSplit(newTask, "/at");
-                        tasks.add(new Event(description[0], isDone, description[1]));
+                        tasks.add(new Event(description[0], isDone, LocalDate.parse(description[1])));
                         break;
                 }
             }

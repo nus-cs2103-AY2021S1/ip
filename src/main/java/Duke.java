@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -75,7 +76,7 @@ public class Duke {
                         break;
                     case "event":
                         description = stringSplit(userInputArray[1], "/at");
-                        taskToUpdate = new Event(description[0], description[1]);
+                        taskToUpdate = new Event(description[0], LocalDate.parse(description[1]));
                         userInputCollector.add(taskToUpdate);
                         prettyPrint("Got it. I've added this task: \n" +
                                 "\t" + taskToUpdate + "\n" +
@@ -83,7 +84,7 @@ public class Duke {
                         break;
                     case "deadline":
                         description = stringSplit(userInputArray[1], "/by");
-                        taskToUpdate = new Deadline(description[0], description[1]);
+                        taskToUpdate = new Deadline(description[0], LocalDate.parse(description[1]));
                         userInputCollector.add(taskToUpdate);
                         prettyPrint("Got it. I've added this task: \n" +
                                 "\t" + taskToUpdate + "\n" +
@@ -100,6 +101,8 @@ public class Duke {
                         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                         break;
                 }
+                // ToDo: handle localDate parse error
+                // ToDo: stretch goal level-8
             } catch (DukeIllegalCommandException | DukeMissingArgumentException | DukeTaskOutOfBoundsException e) {
                 System.out.println(e.toString());
             }
@@ -118,9 +121,9 @@ public class Duke {
     }
 
     public static String[] stringSplit(String toSplit, String split) {
-        String description= toSplit.split(split)[0];
+        String description = toSplit.split(split)[0];
         return new String[]{description.substring(0, description.length() - 1),
-                toSplit.split(split)[1]};
+                toSplit.split(split)[1].substring(1)};
     }
 
     // Check if command user input is valid
