@@ -5,7 +5,7 @@ public class Event extends Task {
         this(description, false, at);
     }
 
-    private Event(String description, boolean isDone, String at) {
+    Event(String description, boolean isDone, String at) {
         super(description, isDone);
         this.at = at;
     }
