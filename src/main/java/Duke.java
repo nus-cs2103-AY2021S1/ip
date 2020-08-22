@@ -1,5 +1,6 @@
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +45,7 @@ public class Duke {
                 storage.add(sm.loadTaskFromSave(currLine));
                 currLine = br.readLine();
             }
-        } catch (FileNotFoundException e) {
+        } catch (NoSuchFileException e) {
             try {
                 Files.createFile(filePath);
             } catch (IOException e2) {
