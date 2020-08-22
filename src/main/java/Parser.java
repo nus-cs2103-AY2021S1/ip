@@ -1,8 +1,21 @@
-public class Parser {
-    public Parser() {
+/**
+ * Handles making sense of user input.
+ */
 
+public class Parser {
+    /**
+     * Constructor for Parser.
+     */
+    public Parser() {
     }
 
+    /**
+     * Converts user input into a command of the appropriate type depending on the leading word
+     * of the user input.
+     * @param input User input.
+     * @return Command object corresponding to input.
+     * @throws DukeException When user input cannot be parsed.
+     */
     public Command parse(String input) throws DukeException {
         String[] chunks = input.split(" ", 2);
         String action = chunks[0].toUpperCase();
