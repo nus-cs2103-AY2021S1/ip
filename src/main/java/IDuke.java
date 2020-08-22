@@ -25,11 +25,18 @@ public interface IDuke {
     void displayTasks();
 
     /**
-     * Gets a specific task from the list
+     * Gets a specific task from the list.
      *
      * @return The specified task
      */
     ITask getTask(int id);
+
+    /**
+     * Gets a list of all the tasks.
+     *
+     * @return The specified task
+     */
+    List<? extends ITask> getTasks();
 
     /**
      * Gets the number of tasks in the list.

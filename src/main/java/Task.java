@@ -36,6 +36,14 @@ public class Task implements ITask {
         return this.isDone;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getDataString() {
+        return String.format("Ta|%d|%s", isDone ? 1 : 0, description);
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", isDone ? "✓" : "✗", description);

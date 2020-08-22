@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -7,10 +8,12 @@ import java.util.Scanner;
  */
 public class Duke implements IDuke {
     /** List for storing Tasks */
-    private final ArrayList<ITask> list;
+    private final List<ITask> list;
+    private final StorageManager storageManager;
 
-    private Duke(ArrayList<ITask> list) {
+    private Duke(List<ITask> list, StorageManager storageManager) {
         this.list = new ArrayList<>(list);
+        this.storageManager = storageManager;
     }
 
     /**
@@ -18,8 +21,9 @@ public class Duke implements IDuke {
      *
      * @return New Duke chatbot object.
      */
-    public static Duke getDuke() {
-        return new Duke(new ArrayList<>());
+    public static Duke getDuke(String filePath) {
+        StorageManager sm = StorageManager.getStorageManager(filePath);
+        return new Duke(sm.read(), sm);
     }
 
     /**
@@ -48,7 +52,8 @@ public class Duke implements IDuke {
     public IDuke storeTask(ITask task) {
         ArrayList<ITask> newList = new ArrayList<>(this.list);
         newList.add(task);
-        return new Duke(newList);
+        storageManager.save(newList);
+        return new Duke(newList, storageManager);
     }
 
     /**
@@ -74,6 +79,13 @@ public class Duke implements IDuke {
             throw new IllegalArgumentException("Task id out of bound!");
         }
         return list.get(id - 1);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public List<ITask> getTasks() {
+        return this.list;
     }
 
     /**
@@ -167,6 +179,7 @@ public class Duke implements IDuke {
         IDuke newDuke = doneTask(index);
         System.out.println(TextFormatter.getFormattedText(
                 "Naisu! I've marked this task done!\n" + newDuke.getTask(index)));
+        storageManager.save(newDuke.getTasks());
         return newDuke;
     }
 
@@ -250,7 +263,8 @@ public class Duke implements IDuke {
         }
         ArrayList<ITask> newList = new ArrayList<>(this.list);
         newList.set(id - 1, newList.get(id - 1).markComplete());
-        return new Duke(newList);
+        storageManager.save(newList);
+        return new Duke(newList, storageManager);
     }
 
     /**
@@ -267,11 +281,12 @@ public class Duke implements IDuke {
         }
         ArrayList<ITask> newList = new ArrayList<>(this.list);
         newList.remove(id - 1);
-        return new Duke(newList);
+        storageManager.save(newList);
+        return new Duke(newList, storageManager);
     }
 
     public static void main(String[] args) {
-        IDuke bot = getDuke();
+        IDuke bot = getDuke("data/duke.txt");
         Scanner sc = new Scanner(System.in);
 
         // Greet user

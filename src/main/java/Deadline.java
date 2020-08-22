@@ -28,6 +28,14 @@ public class Deadline extends Task {
         return new Deadline(description, time, true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getDataString() {
+        return String.format("D|%d|%s|%s", isDone ? 1 : 0, description, time);
+    }
+
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(), time);

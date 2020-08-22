@@ -28,6 +28,14 @@ public class Event extends Task {
         return new Event(description, time, true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getDataString() {
+        return String.format("E|%d|%s|%s", isDone ? 1 : 0, description, time);
+    }
+
     @Override
     public String toString() {
         return String.format("[E]%s (at: %s)", super.toString(), time);
