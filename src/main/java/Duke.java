@@ -1,9 +1,69 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+  public static void updateData(List<Task> list) {
+    try {
+      FileWriter fw = new FileWriter("data/duke.txt");
+      StringBuilder textToAdd = new StringBuilder();
+      
+      for (Task t : list) {
+        String data = t.getData();
+        textToAdd.append(data).append("\n");
+      }
+      
+      fw.write(textToAdd.toString());
+      fw.close();
+    } catch (IOException e) {
+      System.out.println("Something went wrong" + e.getMessage());
+    }
+  }
+  
+  public static void loadData(List<Task> list) {
+    try {
+      File file = new File("data/duke.txt");
+      
+      if (file.exists()) {
+        Scanner sc = new Scanner(file);
+
+        while (sc.hasNext()) {
+          String[] data = sc.nextLine().split("/");
+          String taskType = data[0];
+          boolean status = data[1].equals("1");
+          String description = data[2];
+          String additional;
+
+          switch (taskType) {
+            case "t":
+              list.add(new ToDo(description, status));
+              break;
+            case "d":
+              additional = data[3];
+              list.add(new Deadline(description, additional, status));
+              break;
+            case "e":
+              additional = data[3];
+              list.add(new Event(description, additional, status));
+              break;
+          }
+        }
+      } else {
+        File dir = new File("data");
+        dir.mkdir();
+        file.createNewFile();
+      }
+      
+    } catch (FileNotFoundException e) {
+      System.out.println("File not exists" + e.getMessage());
+    } catch (IOException e) {
+      System.out.println("Something went wrong " + e.getMessage());
+    }
+  }
   
   public static String process(String input, List<Task> list) throws DukeException {
     String output;
@@ -51,6 +111,7 @@ public class Duke {
       }
       
       targetTask.setDone();
+      updateData(list);
       output = "\tNice! I've marked this task as done: \n\t\t" + targetTask;
     } else if (command[0].equals("todo")) {
       if (command.length < 2 || command[1].isBlank()) {
@@ -60,8 +121,8 @@ public class Duke {
       ToDo newToDo = new ToDo(command[1]);
 
       list.add(newToDo);
+      updateData(list);
       output = "\tGot it. I've added this task: \n\t\t" + newToDo + "\n\tNow you have " + list.size() + " tasks in the list.";
-      
     } else if (command[0].equals("deadline")) {
       if (command.length < 2) {
         throw new DukeException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -87,6 +148,7 @@ public class Duke {
       Deadline newDeadline = new Deadline(description, by);
 
       list.add(newDeadline);
+      updateData(list);
       output = "\tGot it. I've added this task: \n\t\t" + newDeadline + "\n\tNow you have " + list.size() + " tasks in the list.";
     } else if (command[0].equals("event")) {
       if (command.length < 2) {
@@ -113,6 +175,7 @@ public class Duke {
       Event newEvent = new Event(description, at);
 
       list.add(newEvent);
+      updateData(list);
       output = "\tGot it. I've added this task: \n\t\t" + newEvent + "\n\tNow you have " + list.size() + " tasks in the list.";
     } else if (command[0].equals("delete")) {
       if (command.length < 2) {
@@ -137,7 +200,7 @@ public class Duke {
       
       int index = inputNumber - 1;
       Task targetTask = list.remove(index);
-
+      updateData(list);
       output = "\tNoted. I've removed this task: \n\t\t" + targetTask + "\n\tNow you have " + list.size() + " tasks in the list.";
     } else {
       throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -162,6 +225,7 @@ public class Duke {
     System.out.println("\t" + divider);
     System.out.println("\t" + "Hello! I'm Duke\n\tWhat can I do for you?");
     System.out.println("\t" + divider);
+    loadData(list);
 
     while (!input.equals("bye")) {
       input = sc.nextLine();
