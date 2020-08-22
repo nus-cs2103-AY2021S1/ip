@@ -1,4 +1,4 @@
-import java.util.Optional;
+import java.time.LocalDate;
 
 public class Task {
 
@@ -6,6 +6,8 @@ public class Task {
     private boolean done = false;
     private String details;
     private String deadLine = null;
+
+    public LocalDate localDeadline;
 
     public boolean finished(){
         return this.done;
@@ -25,6 +27,14 @@ public class Task {
         this.type = type;
         this.details = details;
         this.deadLine = deadLine;
+    }
+    public Task(String type, String details,LocalDate localDeadline)  {
+        this.type = type;
+        this.details = details;
+        this.localDeadline=localDeadline;
+
+        deadLine = localDeadline.toString();
+
     }
 
     @Override

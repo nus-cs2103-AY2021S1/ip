@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -28,14 +29,24 @@ public class DukeBot {
 
         }
     }
-
-    public void addTask( String type,String task) throws InSuffArgsException{
+    public void addTask(String type, String task) throws InSuffArgsException{
 
         if(task.equals("")){
             throw new InSuffArgsException();
         }
 
         Task myTask = new Task(type,task);
+        this.tasks.add(myTask);
+        System.out.println("added: " + myTask);
+    }
+
+    public void addTask(String type, String task, LocalDate d1) throws InSuffArgsException{
+
+        if(task.equals("")){
+            throw new InSuffArgsException();
+        }
+
+        Task myTask = new Task(type,task,d1);
         this.tasks.add(myTask);
         System.out.println("added: " + myTask);
     }
@@ -111,7 +122,27 @@ public class DukeBot {
                     if(fullArg.length==1){
                         throw new InSuffArgsException();
                     }
-                    addTask("[D]",task ,fullArg[1]);
+                    if(fullArg.length==4){
+                        String day = Integer.parseInt(fullArg[1].substring(fullArg[1].length()-1))+"";
+                        if(day.length()==1){
+                            day= "0"+day;
+                        }
+                        String month = Integer.parseInt(fullArg[2])+"";
+                        if(month.length()==1){
+                            month= "0"+month;
+                        }
+                        int year = Integer.parseInt(fullArg[3].split(" ")[0]);
+                        //int time = Integer.parseInt(fullArg[3].split(" ")[1]);
+
+                        //System.out.println(time);
+
+                        LocalDate d1 = LocalDate.parse(year+"-"+month+"-"+day);
+                        addTask("[D]",task,d1);
+
+                    }else{
+                        addTask("[D]",task ,fullArg[1]);
+                    }
+
                 }
                 catch (InSuffArgsException E){
                     System.out.println("☹ OOPS!!! The description of a " + args1[0] + " cannot be empty.");
