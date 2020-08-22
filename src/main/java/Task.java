@@ -2,9 +2,9 @@ public class Task {
     protected String taskDescription;
     protected boolean done;
 
-    public Task(String taskDescription) {
+    public Task(String taskDescription, boolean done) {
         this.taskDescription = taskDescription;
-        this.done = false;
+        this.done = done;
     }
 
     public String getTaskDescription() {

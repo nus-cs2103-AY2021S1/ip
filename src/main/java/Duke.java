@@ -1,6 +1,10 @@
+import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Duke {
 
@@ -52,16 +56,7 @@ public class Duke {
             throw new MissingInfoException("OOPS!!! The date/time of a " + command + " cannot be empty.");
         }
 
-        switch (typeOfTask) {
-            case TODO:
-                return new Todo(description);
-            case DEADLINE:
-                return new Deadline(description, timing);
-            case EVENT:
-                return new Event(description, timing);
-            default:
-                return new Task(description);
-        }
+        return createTask(typeOfTask, description, timing, false);
     }
 
     private static String getTiming(String command, String[] commandArray, int index) throws MissingInfoException {
@@ -80,9 +75,49 @@ public class Duke {
         return timing;
     }
 
+    private static Task createTask(TypeOfTask typeOfTask, String description, String timing, boolean done) {
+
+        switch (typeOfTask) {
+        case TODO:
+            return new Todo(description, done);
+        case DEADLINE:
+            return new Deadline(description, timing, done);
+        case EVENT:
+            return new Event(description, timing, done);
+        default:
+            return new Task(description, done);
+        }
+    }
+
+    private static ArrayList<Task> readFile(ArrayList<Task> tasks) {
+        File f = new File("data/tasks.txt");
+        try {
+            Scanner s = new Scanner(f);
+            while (s.hasNextLine()) {
+                String[] data;
+                data = s.nextLine().split(" \\| ");
+                switch (data[0]) {
+                case "T":
+                    tasks.add(createTask(TypeOfTask.TODO, data[2], "", data[1].equals("1") ? true : false));
+                    break;
+                case "D":
+                    tasks.add(createTask(TypeOfTask.DEADLINE, data[2], data[3], data[1].equals("1") ? true : false));
+                    break;
+                case "E":
+                    tasks.add(createTask(TypeOfTask.EVENT, data[2], data[3], data[1].equals("1") ? true : false));
+                    break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return tasks;
+    }
+
     public static void main(String[] args) {
         System.out.println(formatReply("Hello! I'm Duke\nWhat can I do for you?"));
         ArrayList<Task> taskList = new ArrayList<>();
+        taskList = readFile(taskList);
         Scanner input = new Scanner(System.in);
         while (true) {
             String command = input.next();
