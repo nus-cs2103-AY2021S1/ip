@@ -1,13 +1,13 @@
 package duke.parser;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import duke.utils.Utils;
+import duke.utils.Datetime;
 
 public class StorageParser {
     private static final String IS_COMPLETED = "1";
@@ -31,13 +31,13 @@ public class StorageParser {
 
     private Deadline createDeadline(String[] storageTask) throws DukeException {
         boolean isCompleted = storageTask[1].equals(IS_COMPLETED);
-        Date dateTime = Utils.parseDateTimeString(storageTask[3], Deadline.DATE_FORMAT_OUTPUT);
+        LocalDate dateTime = Datetime.parseDateTimeString(storageTask[3], Deadline.DATE_FORMAT_OUTPUT);
         return new Deadline(storageTask[2], isCompleted, dateTime);
     }
 
     private Event createEvent(String[] storageTask) throws DukeException {
         boolean isCompleted = storageTask[1].equals(IS_COMPLETED);
-        Date time = Utils.parseDateTimeString(storageTask[3], Event.TIME_FORMAT_OUTPUT);
+        LocalDate time = Datetime.parseDateTimeString(storageTask[3], Event.TIME_FORMAT_OUTPUT);
         return new Event(storageTask[2], isCompleted, time);
     }
 

@@ -1,6 +1,6 @@
 package duke.parser;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import duke.exception.DukeException;
 import duke.operation.Operation;
@@ -16,6 +16,7 @@ import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
+import duke.utils.Datetime;
 import duke.utils.Utils;
 
 public class CommandParser {
@@ -57,7 +58,7 @@ public class CommandParser {
         }
         String description = Utils.concatenate(commands, 1, splitIndex);
         String datetime = Utils.concatenate(commands, splitIndex + 1, commands.length);
-        Date parsedDateTime = Utils.parseDateTimeString(datetime, Deadline.DATE_FORMAT_INPUT);
+        LocalDate parsedDateTime = Datetime.parseDateTimeString(datetime, Deadline.DATE_FORMAT_INPUT);
         return new AddDeadlineOperation(description, parsedDateTime, list);
     }
 
@@ -71,7 +72,7 @@ public class CommandParser {
         }
         String description = Utils.concatenate(commands, 1, splitIndex);
         String time = Utils.concatenate(commands, splitIndex + 1, commands.length);
-        Date parsedTime = Utils.parseDateTimeString(time, Event.TIME_FORMAT_INPUT);
+        LocalDate parsedTime = Datetime.parseDateTimeString(time, Event.TIME_FORMAT_INPUT);
         return new AddEventOperation(description, parsedTime, list);
     }
 

@@ -1,14 +1,14 @@
 package duke.operation;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import duke.task.TaskList;
 import duke.task.Event;
 
 public class AddEventOperation extends AddOperation {
-    private final Date time;
+    private final LocalDate time;
 
-    public AddEventOperation(String description, Date time, TaskList taskList) {
+    public AddEventOperation(String description, LocalDate time, TaskList taskList) {
         super(description, taskList);
         this.time = time;
     }

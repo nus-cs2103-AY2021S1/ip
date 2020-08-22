@@ -1,14 +1,14 @@
 package duke.operation;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import duke.task.TaskList;
 import duke.task.Deadline;
 
 public class AddDeadlineOperation extends AddOperation {
-    private final Date deadline;
+    private final LocalDate deadline;
 
-    public AddDeadlineOperation(String description, Date deadline, TaskList taskList) {
+    public AddDeadlineOperation(String description, LocalDate deadline, TaskList taskList) {
         super(description, taskList);
         this.deadline = deadline;
     }
