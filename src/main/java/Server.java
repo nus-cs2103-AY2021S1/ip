@@ -1,7 +1,11 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Server {
     ArrayList<Task> taskList = new ArrayList<>();
+    private final DateTimeFormatter acceptedFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     private void add(Task newTask) {
         StringBuilder out = new StringBuilder();
@@ -16,8 +20,14 @@ public class Server {
         StringBuilder builder = new StringBuilder();
         builder.append("Here are the tasks in your list: \n\t");
 
+        if (this.taskList.isEmpty()) {
+            System.out.print(Duke.formatOut("You haven't added any task here !"));
+            return ;
+        }
+
         for(Task task:taskList) {
-            builder.append(taskList.indexOf(task) + 1).append(". ").append(task.toString()).append("\n").append("\t");
+            builder.append(taskList.indexOf(task) + 1).append(". ")
+                    .append(task.toString()).append("\n").append("\t");
         }
 
         System.out.print(Duke.formatOut(builder.toString()));
@@ -62,7 +72,7 @@ public class Server {
                             throw new TimeEmptyException("deadline");
                         }
 
-                        this.add(new Deadline(set[0], set[1]));
+                        this.add(new Deadline(set[0], LocalDateTime.parse(set[1], acceptedFormatter)));
 
                         break;
                     }
@@ -71,7 +81,7 @@ public class Server {
                         if (set.length == 1) {
                             throw new TimeEmptyException("event");
                         }
-                        this.add(new Event(set[0], set[1]));
+                        this.add(new Event(set[0], LocalDateTime.parse(set[1], acceptedFormatter)));
                         break;
                     }
                     case "delete": {
