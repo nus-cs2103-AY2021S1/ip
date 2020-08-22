@@ -49,6 +49,8 @@ public class Duke {
                     } catch (NumberFormatException e) {
                         throw new DukeException("OOPS!!! I'm sorry, which task number?");
                     }
+                } else if (type.equals("date")) {
+                    System.out.println(list.getTasksOn(input));
                 } else {
                     Task task = list.addTask(type, input);
                     System.out.println("Got it. I've added this task: ");
