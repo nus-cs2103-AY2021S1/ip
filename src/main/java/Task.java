@@ -9,13 +9,13 @@ public class Task {
     protected String taskTypeSymbol; // [T], [D] or [E]
     protected String taskTypeName; // To-Do, Deadline or Event task
 
-    public Task(String description, String taskTypeSymbol, String taskTypeName)
+    public Task(String description, String taskTypeSymbol, String taskTypeName, boolean isDone)
             throws WrongFormatException {
         if (description.isEmpty()) {
             throw new WrongFormatException(taskTypeName);
         }
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
         this.taskTypeSymbol = taskTypeSymbol;
         this.taskTypeName = taskTypeName;
     }
@@ -26,6 +26,10 @@ public class Task {
 
     public void markAsDone() {
         isDone = true;
+    }
+
+    public String stringToSaveInMemory() {
+        return taskTypeSymbol + "|" + (isDone ? 1 : 0) + "|" + description;
     }
 
     @Override
