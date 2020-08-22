@@ -1,5 +1,7 @@
 package main.java;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Duke {
@@ -27,10 +29,17 @@ public class Duke {
                     taskList.add(ToDo.of(input));
                     break;
                 case "deadline":
-                    taskList.add(Deadline.of(input));
+                    Deadline deadline = Deadline.of(input);
+                    System.out.println(deadline);
+                    if (deadline != null) {
+                        taskList.add(deadline);
+                    }
                     break;
                 case "event":
-                    taskList.add(Event.of(input));
+                    Event event = Event.of(input);
+                    if (event != null) {
+                        taskList.add(event);
+                    }
                     break;
                 case "done":
                     if (inputArray.length != 2) {
@@ -53,7 +62,16 @@ public class Duke {
                     }
                     break;
                 case "list":
-                    taskList.list();
+                    if (inputArray.length > 1) {
+                        try {
+                            LocalDate date = LocalDate.parse(inputArray[1]);
+                            taskList.list(date);
+                        } catch (DateTimeException e) {
+                            System.out.println("Please provide date in yyyy-mm-dd format.");
+                        }
+                    } else {
+                        taskList.list();
+                    }
                     break;
                 default:
                     throw new DukeException("I'm not sure what you're talking about.");

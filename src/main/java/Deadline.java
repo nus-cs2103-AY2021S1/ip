@@ -1,9 +1,13 @@
 package main.java;
 
-public class Deadline extends Task {
-    private String deadline;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    Deadline(String title, String deadline) {
+public class Deadline extends Task {
+    private LocalDate deadline;
+
+    Deadline(String title, LocalDate deadline) {
         super(title);
         this.deadline = deadline;
     }
@@ -16,10 +20,21 @@ public class Deadline extends Task {
         if (split.length != 2) {
             throw new DukeException("Wrong format.");
         }
-        return new Deadline(split[0], split[1]);
+        try {
+            return new Deadline(split[0], LocalDate.parse(split[1]));
+        } catch (DateTimeException e) {
+            System.out.println("Please provide date in yyyy-mm-dd format.");
+            return null;
+        }
+    }
+
+    @Override
+    LocalDate getDate() {
+        return this.deadline;
     }
 
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.deadline + ")";
+        String date = this.deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+        return "[D]" + super.toString() + " (by: " + date + ")";
     }
 }
