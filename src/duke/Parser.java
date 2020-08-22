@@ -10,6 +10,7 @@ public class Parser {
     private final static String DEADLINE_COMMAND = "deadline";
     private final static String EVENT_COMMAND = "event";
     private final static String DELETE_COMMAND = "delete";
+    private final static String COMMAND_FIND = "find";
 
     public static Command parse(String fullCommand) {
         String[] splitCommand = fullCommand.split(" ", 2);
@@ -28,6 +29,8 @@ public class Parser {
                 return new TaskListCommand(splitCommand);
             case EXIT_COMMAND:
                 return new ExitCommand(splitCommand);
+            case COMMAND_FIND:
+                return new FindCommand(splitCommand);
             default:
                 return new UnknownCommand(splitCommand);
         }
