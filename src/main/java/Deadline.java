@@ -16,11 +16,16 @@ public class Deadline extends Task {
     }
 
     public static Deadline parse(String[] split) {
-        Deadline deadline = new Deadline(split[2], split[3]);
-        if (split[1].equals("1")) {
-            deadline.markDone();
+        try {
+            Deadline deadline = new Deadline(split[2], split[3]);
+            if (split[1].equals("1")) {
+                deadline.markDone();
+            }
+            return deadline;
+        } catch (DukeException ex) {
+            ex.printStackTrace();
+            return null;
         }
-        return deadline;
     }
 
     public String serialize() {

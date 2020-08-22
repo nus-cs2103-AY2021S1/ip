@@ -16,11 +16,16 @@ public class Event extends Task {
     }
 
     public static Event parse(String[] split) {
-        Event event = new Event(split[2], split[3]);
-        if (split[1].equals("1")) {
-            event.markDone();
+        try {
+            Event event = new Event(split[2], split[3]);
+            if (split[1].equals("1")) {
+                event.markDone();
+            }
+            return event;
+        } catch (DukeException ex) {
+            ex.printStackTrace();
+            return null;
         }
-        return event;
     }
 
     public String serialize() {
