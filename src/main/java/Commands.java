@@ -1,5 +1,10 @@
 package main.java;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,6 +24,7 @@ public class Commands {
         String inputs = scanner.nextLine().trim();
 
         while (shouldBreak) {
+            this.getPreviousTask();
             String[] inputArray = inputs.split(" ", 2);
             try {
                 if (find(inputArray[0])) {
@@ -62,7 +68,7 @@ public class Commands {
         }
     }
 
-    public void markDone(String[] inputs) throws DukeException {
+    private void markDone(String[] inputs) throws DukeException {
         if (inputs.length > 1 && Character.isDigit(inputs[1].charAt(0))) {
             int taskNumber = Character.getNumericValue(inputs[1].charAt(0)) - 1;
             if (!taskList.isEmpty() && taskNumber < taskList.size()) {
@@ -78,11 +84,11 @@ public class Commands {
         }
     }
 
-    public void greet() {
+    private void greet() {
         System.out.println("~ \n Hello I'm the Terminator \n What can I do for you? \n~");
     }
 
-    public void lst() {
+    private void lst() {
         System.out.println("~ \n Here are targets in your kill list: ");
         if (!taskList.isEmpty()) {
             for (int i = 0; i < taskList.size(); i++) {
@@ -93,7 +99,7 @@ public class Commands {
         System.out.println("\n~ ");
     }
 
-    public void addTodo(String[] inputs) throws DukeException {
+    private void addTodo(String[] inputs) throws DukeException {
         if (inputs.length > 1) {
             System.out.println("~ \n Got it. I've added this task: ");
             ToDos toDo = new ToDos(inputs[1]);
@@ -105,7 +111,7 @@ public class Commands {
         }
     }
 
-    public void addDeadline(String[] inputs) throws DukeException {
+    private void addDeadline(String[] inputs) throws DukeException {
         if (inputs.length > 1) {
             String[] stringArray = inputs[1].split("/", 2);
             if (stringArray.length > 1 && stringArray[1].split(" ", 2).length > 1) {
@@ -123,7 +129,7 @@ public class Commands {
         }
     }
 
-    public void addEvent(String[] inputs) throws DukeException {
+    private void addEvent(String[] inputs) throws DukeException {
         if (inputs.length > 1) {
             String[] stringArray = inputs[1].split("/", 2);
             if (stringArray.length > 1 && stringArray[1].split(" ", 2).length > 1) {
@@ -141,7 +147,7 @@ public class Commands {
         }
     }
 
-    public void deleteItem(String[] inputs) throws DukeException {
+    private void deleteItem(String[] inputs) throws DukeException {
         if (inputs.length > 1 && Character.isDigit(inputs[1].charAt(0))) {
             int taskNumber = Character.getNumericValue(inputs[1].charAt(0)) - 1;
             if (!taskList.isEmpty() && taskNumber < taskList.size()) {
@@ -157,7 +163,7 @@ public class Commands {
         }
     }
 
-    public static boolean find(String input) {
+    private static boolean find(String input) {
         for (Input i : Input.values()) {
             if (input.toUpperCase().equals(i.toString())) {
                 return true;
@@ -165,4 +171,41 @@ public class Commands {
         }
         return false;
     }
+
+    private void getPreviousTask() {
+        java.nio.file.Path path = java.nio.file.Paths.get("data").resolve("duke.txt");
+        try {
+            File file = new File(path.toString());
+            Scanner sc = new Scanner(file);
+            while (sc.hasNext()) {
+                String[] tasks = sc.nextLine().split("\\|");
+                switch (tasks[0].trim()) {
+                case "T":
+                    ToDos todo = new ToDos(tasks[2]);
+                    if (Integer.parseInt(tasks[1].trim()) == 1) {
+                        todo.doneTask();
+                    }
+                    taskList.add(todo);
+                    break;
+                case "D":
+                    Deadlines deadline = new Deadlines(tasks[2], tasks[3]);
+                    if (Integer.parseInt(tasks[1].trim()) == 1) {
+                        deadline.doneTask();
+                    }
+                    taskList.add(deadline);
+                    break;
+                case "E":
+                    Events event = new Events(tasks[2], tasks[3]);
+                    if (Integer.parseInt(tasks[1].trim()) == 1) {
+                        event.doneTask();
+                    }
+                    taskList.add(event);
+                    break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            File file = new File(path.toString());
+        }
+    }
+
 }
