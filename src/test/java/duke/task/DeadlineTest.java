@@ -120,4 +120,19 @@ public class DeadlineTest {
             fail();
         }
     }
+
+
+    @Test
+    public void happenInTest() {
+        try {
+            LocalDate newDate = LocalDate.now().plusDays(2);
+            String newStr = newDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            Deadline d = new Deadline("Assignment 1", newStr);
+            assertEquals(true, d.happenIn(3));
+            assertEquals(true, d.happenIn(2));
+            assertEquals(false, d.happenIn(1));
+        } catch (Exception e) {
+            fail();
+        }
+    }
 }
