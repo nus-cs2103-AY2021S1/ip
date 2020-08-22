@@ -12,12 +12,6 @@ public class Duke {
 
     private static final String FILE_PATH = "data/tasklist.txt";
 
-    enum TaskType {
-        TODO,
-        DEADLINE,
-        EVENT
-    }
-
     public static void readFile(ArrayList<Task> taskList) {
         try {
             File file = new File(FILE_PATH);
@@ -140,13 +134,13 @@ public class Duke {
         return time;
     }
 
-    public static void addTask(String taskString, TaskType taskType, ArrayList<Task> taskList) throws DukeException {
+    public static void addTask(String taskString, String taskType, ArrayList<Task> taskList) throws DukeException {
         emptyStringChecker(taskString,  true);
         Task taskToAdd;
-        if (taskType.equals(TaskType.TODO)) {
+        if (taskType.equals("todo")) {
             taskToAdd = new Todo(taskString);
             taskList.add(taskToAdd);
-        } else if (taskType.equals(TaskType.DEADLINE)) {
+        } else if (taskType.equals("deadline")) {
             String taskName =  processTaskName(taskString, "/by");
             String deadline = processTaskTime(taskString, "/by");
             taskToAdd = new Deadline(taskName, deadline);
@@ -195,19 +189,19 @@ public class Duke {
 
             case "todo" :
                 String todo =  Arrays.stream(splitString).skip(1).collect(Collectors.joining(" "));
-                addTask(todo, TaskType.TODO, inputStore);
+                addTask(todo, "todo", inputStore);
                 break;
 
             case "deadline" :
                 String deadlineNameTime = Arrays.stream(splitString).skip(1)
                         .collect(Collectors.joining(" "));
-                addTask(deadlineNameTime, TaskType.DEADLINE, inputStore);
+                addTask(deadlineNameTime, "deadline", inputStore);
                 break;
 
             case "event" :
                 String eventNameTime = Arrays.stream(splitString).skip(1)
                         .collect(Collectors.joining(" "));
-                addTask(eventNameTime, TaskType.EVENT, inputStore);
+                addTask(eventNameTime, "event", inputStore);
                 break;
 
             case "done" :

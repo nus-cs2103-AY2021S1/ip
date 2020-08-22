@@ -1,11 +1,16 @@
 public class Todo extends Task {
 
     Todo(String name) {
-        super(name, Duke.TaskType.TODO);
+        super(name);
     }
 
     Todo(String name, boolean done) {
-        super(name, Duke.TaskType.TODO, done);
+        super(name, done);
+    }
+
+    public String appendFile() {
+        String doneString = (done == true ? "1" : "0");
+        return "TODO" + " | " + doneString + " | " + this.name;
     }
 
     @Override

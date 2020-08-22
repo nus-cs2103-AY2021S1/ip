@@ -1,18 +1,15 @@
 public class Task {
     protected String name;
     protected boolean done;
-    protected Duke.TaskType taskType;
 
-    Task(String name, Duke.TaskType taskType) {
+    Task(String name) {
         this.name = name;
         this.done = false;
-        this.taskType = taskType;
     }
 
-    Task(String name, Duke.TaskType taskType, boolean done) {
+    Task(String name, boolean done) {
         this.name = name;
         this.done = done;
-        this.taskType = taskType;
     }
 
     public void markDone() {
@@ -21,7 +18,7 @@ public class Task {
 
     public String appendFile() {
         String doneString = (done == true ? "1" : "0");
-        return this.taskType + " | " + doneString + " | " + this.name;
+        return "" + " | " + doneString + " | " + this.name;
     }
 
     @Override
