@@ -44,6 +44,16 @@ public class TaskList {
         return task;
     }
 
+    public List<Task> findTasks(String keyword) {
+        List<Task> relatedTasks = new ArrayList<>();
+        for(Task task : this.tasks) {
+            if(task.description.contains(keyword)) {
+                relatedTasks.add(task);
+            }
+        }
+        return relatedTasks;
+    }
+
     public String taskSizeMessage() {
         return "Now you have " + tasks.size() + " tasks in the list.";
     }

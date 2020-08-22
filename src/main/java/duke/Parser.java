@@ -9,7 +9,7 @@ import duke.task.*;
 
 public class Parser {
 
-    static Command parse(String fullCommand) throws DukeEmptyInputException, DukeInvalidDateTimeException, DukeInvalidCommandException {
+    static Command parse(String fullCommand) throws DukeEmptyInputException, DukeInvalidDateTimeException, DukeInvalidCommandException, DukeInvalidKeywordException {
         String[] commandArr = fullCommand.trim().split(" ", 2);
         switch(commandArr[0]) {
             case "bye":
@@ -20,6 +20,11 @@ public class Parser {
                 return parseDone(Integer.parseInt(commandArr[1]));
             case "delete":
                 return parseDelete(Integer.parseInt(commandArr[1]));
+            case "find":
+                if(commandArr.length < 2) {
+                    throw new DukeInvalidKeywordException();
+                }
+                return parseFind(commandArr[1]);
             case "todo":
                 if(commandArr.length < 2) {
                     throw new DukeEmptyInputException("The description of a todo cannot be empty.");
@@ -54,6 +59,10 @@ public class Parser {
 
     static DeleteCommand parseDelete(int taskNo) {
         return new DeleteCommand(taskNo);
+    }
+
+    static FindCommand parseFind(String keyword) {
+        return new FindCommand(keyword);
     }
 
     static AddCommand parseToDo(String description) throws DukeEmptyInputException {
