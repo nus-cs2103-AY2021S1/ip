@@ -10,7 +10,7 @@ public class AddCommand extends Command {
 
     @Override
     public void execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
-        int count = list.size() + 1;
+        int count = list.size();
         Task task = Parser.generate(input);
         storage.addToList(task);
         list.add(count, task);

@@ -37,7 +37,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String path = "../data/tasks.txt";
+        String path = "data/tasks.txt";
         new Duke(path).run();
     }
 }
