@@ -4,7 +4,7 @@ public class DukeIOException extends DukeException {
     }
 
     @Override
-    public void printError() {
-        StringUtils.printWithWrapper(new String[]{"[IO ERROR]: " + getMessage()}, false);
+    public String getPrettyErrorMsg() {
+        return "[IO ERROR]: " + getMessage();
     }
 }

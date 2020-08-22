@@ -3,7 +3,7 @@ public class DukeException extends Exception {
         super(msg);
     }
 
-    public void printError() {
-        StringUtils.printWithWrapper(new String[]{"[ERROR]: " + getMessage()}, false);
+    public String getPrettyErrorMsg() {
+        return "[ERROR]: " + getMessage();
     }
 }
