@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Bot {
@@ -72,6 +73,12 @@ public class Bot {
 
     public static void initialize() {
         Bot bot = new Bot(new Store());
+        bot.intro();
+        bot.listen();
+    }
+
+    public static void initialize(List<Task> taskArr) {
+        Bot bot = new Bot(new Store(taskArr));
         bot.intro();
         bot.listen();
     }

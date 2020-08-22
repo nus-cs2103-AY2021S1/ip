@@ -4,6 +4,9 @@ public class ToDos extends Task {
         super(task);
     }
 
+    public ToDos(String task, boolean done) {
+        super(task, done);
+    }
     @Override
     public String toString() {
         String doneIndicator = this.done ? "[✓]" : "[✗]";

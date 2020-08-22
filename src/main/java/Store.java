@@ -8,6 +8,10 @@ public class Store {
         this.list = new ArrayList<>();
     }
 
+    public Store(List<Task> taskArr) {
+        this.list = taskArr;
+    }
+
     public void addItem(Task item) {
         this.list.add(item);
     }

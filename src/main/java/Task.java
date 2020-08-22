@@ -7,6 +7,11 @@ public class Task {
         this.done = false;
     }
 
+    public Task(String task, boolean done) {
+        this.task = task;
+        this.done = done;
+    }
+
     public Task(String task) {
         this.task = task;
         this.done = false;

@@ -12,6 +12,12 @@ public class Events extends Task {
         this.time = time;
     }
 
+    public Events(String task, String time, boolean done) {
+        this.task = task;
+        this.time = time;
+        this.done = done;
+    }
+
     @Override
     public String toString() {
         String doneIndicator = this.done ? "[✓]" : "[✗]";

@@ -12,6 +12,12 @@ public class Deadlines extends Task {
         this.date = date;
     }
 
+    public Deadlines(String task, String date, boolean done) {
+        this.task = task;
+        this.date = date;
+        this.done = done;
+    }
+
     @Override
     public String toString() {
         String doneIndicator = this.done ? "[✓]" : "[✗]";
