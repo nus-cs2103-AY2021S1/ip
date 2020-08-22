@@ -1,10 +1,13 @@
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Duke {
 
-
+    static final String filePath = "list.txt";
     protected Scanner sc;
     protected List<Task> tasks;
 
@@ -19,6 +22,7 @@ public class Duke {
         sc = new Scanner(System.in);
         tasks = new ArrayList<Task>();
         System.out.println("Hello~ I'm Duke!\n" + "What can I do for you?");
+        pullList();
 
         while (sc.hasNextLine()) {
             String nextInput = sc.nextLine();
@@ -29,6 +33,7 @@ public class Duke {
             try {
                 if (nextInput.equals("bye")) {
                     sc.close();
+                    storelist();
                     System.out.println("Goodbye~\n"
                             + "____________________________________________________________");
                     System.exit(0);
@@ -140,6 +145,86 @@ public class Duke {
         } catch (Exception e) {
             throw new DeleteException();
         }
+    }
+    
+    public void pullList() {
+        try {
+            File file = new File(filePath);
+            file.createNewFile();
+            Scanner sc = new Scanner(file);
+            
+            while (sc.hasNextLine()) {
+                Task temp;
+                String line = sc.nextLine();
+                String[] nextTaskArr = line.split("\\|");
+                int nextTaskLength = nextTaskArr.length;
+                String nextTaskType = nextTaskArr[0].strip();
+                
+                if (nextTaskType.equals("T")) {
+                    if (nextTaskLength != 3) { 
+                        throw new DukeException("Your data might be corrupted~");
+                    }
+                    temp = new Todo(nextTaskArr[2].strip());
+                    if (nextTaskArr[1].strip().equals("1")) {
+                        temp.setDone();
+                    }
+                    tasks.add(temp);
+                } else if (nextTaskType.equals("D")) {
+                    if (nextTaskLength != 4) {
+                        throw new DukeException("Your data might be corrupted~");
+                    }
+                    temp = new Deadline(nextTaskArr[2].strip(), nextTaskArr[3].strip());
+                    if (nextTaskArr[1].strip().equals("1")) {
+                        temp.setDone();
+                    }
+                    tasks.add(temp);
+                } else if (nextTaskType.equals("E")) {
+                    if (nextTaskLength != 4) {
+                        throw new DukeException("Your data might be corrupted~");
+                    }
+                    temp = new Event(nextTaskArr[2].strip(), nextTaskArr[3].strip());
+                    if (nextTaskArr[1].strip().equals("1")) {
+                        temp.setDone();
+                    }
+                    tasks.add(temp);
+                }
+            }
+                    
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void storelist() {
+        try {
+            String seperator = " | ";
+            FileWriter fileWriter = new FileWriter(filePath);
+            
+            for (int i = 0; i < tasks.size(); i++) {
+                Task temp = tasks.get(i);
+                String doneStatus = "0";
+                if (temp.checkDone()) {
+                    doneStatus = "1";
+                }
+                
+                if (temp instanceof Todo) {
+                    fileWriter.write("T" + seperator + doneStatus + seperator + 
+                            temp.getTaskName() + "\n");
+                } else if (temp instanceof Deadline) {
+                    Deadline tempDeadline = (Deadline) temp; 
+                    fileWriter.write("D" + seperator + doneStatus + seperator +
+                            tempDeadline.getTaskName() + seperator + tempDeadline.getDeadlineDate());
+                } else if (temp instanceof Event) {
+                    Event tempEvent = (Event) temp;
+                    fileWriter.write("E" + seperator + doneStatus + seperator +
+                            tempEvent.getTaskName() + seperator + tempEvent.getEventDate());
+                }
+            }
+            fileWriter.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
     }
 
 

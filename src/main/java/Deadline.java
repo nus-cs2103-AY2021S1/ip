@@ -5,6 +5,10 @@ public class Deadline extends Task {
         super(taskName, "D");
         this.deadlineDate = deadlineDate;
     }
+    
+    public String getDeadlineDate() {
+        return this.deadlineDate;
+    }
 
     @Override
     public String toString() {
