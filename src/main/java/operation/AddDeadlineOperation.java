@@ -1,12 +1,14 @@
 package operation;
 
+import java.util.Date;
+
 import task.TaskList;
 import task.Deadline;
 
 public class AddDeadlineOperation extends AddOperation {
-    private final String deadline;
+    private final Date deadline;
 
-    public AddDeadlineOperation(String description, String deadline, TaskList taskList) {
+    public AddDeadlineOperation(String description, Date deadline, TaskList taskList) {
         super(description, taskList);
         this.deadline = deadline;
     }

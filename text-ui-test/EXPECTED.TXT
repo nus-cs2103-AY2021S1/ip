@@ -7,7 +7,7 @@ Greetings, what may I do for you?
 
 ---------------------------------------------------------
 I have added the task:
-[E][✗] project meeting (at: Mon 2-4pm)
+[E][✗] project meeting (at: 01:00 pm)
 You now have 1 tasks.
 ---------------------------------------------------------
 
@@ -19,20 +19,20 @@ You now have 2 tasks.
 
 ---------------------------------------------------------
 I have added the task:
-[D][✗] return book (by: 1 Jan)
+[D][✗] return book (by: Dec 12 2012 12:00 pm)
 You now have 3 tasks.
 ---------------------------------------------------------
 
 ---------------------------------------------------------
 Here are your tasks:
-1. [E][✗] project meeting (at: Mon 2-4pm)
+1. [E][✗] project meeting (at: 01:00 pm)
 2. [T][✗] borrow book
-3. [D][✗] return book (by: 1 Jan)
+3. [D][✗] return book (by: Dec 12 2012 12:00 pm)
 ---------------------------------------------------------
 
 ---------------------------------------------------------
 You have completed this task:
-[E][✓] project meeting (at: Mon 2-4pm)
+[E][✓] project meeting (at: 01:00 pm)
 ---------------------------------------------------------
 
 ---------------------------------------------------------
@@ -42,9 +42,9 @@ You have completed this task:
 
 ---------------------------------------------------------
 Here are your tasks:
-1. [E][✓] project meeting (at: Mon 2-4pm)
+1. [E][✓] project meeting (at: 01:00 pm)
 2. [T][✓] borrow book
-3. [D][✗] return book (by: 1 Jan)
+3. [D][✗] return book (by: Dec 12 2012 12:00 pm)
 ---------------------------------------------------------
 
 ---------------------------------------------------------
@@ -55,19 +55,19 @@ You now have 2 tasks in the list
 
 ---------------------------------------------------------
 Here are your tasks:
-1. [E][✓] project meeting (at: Mon 2-4pm)
-2. [D][✗] return book (by: 1 Jan)
+1. [E][✓] project meeting (at: 01:00 pm)
+2. [D][✗] return book (by: Dec 12 2012 12:00 pm)
 ---------------------------------------------------------
 
 ---------------------------------------------------------
 Noted. I've removed this task:
-[E][✓] project meeting (at: Mon 2-4pm)
+[E][✓] project meeting (at: 01:00 pm)
 You now have 1 tasks in the list
 ---------------------------------------------------------
 
 ---------------------------------------------------------
 Here are your tasks:
-1. [D][✗] return book (by: 1 Jan)
+1. [D][✗] return book (by: Dec 12 2012 12:00 pm)
 ---------------------------------------------------------
 
 ---------------------------------------------------------
@@ -84,6 +84,14 @@ Apologies. Ensure an indication of '/at' after an event command.
 
 ---------------------------------------------------------
 Apologies. Ensure an indication of '/by' after a deadline command.
+---------------------------------------------------------
+
+---------------------------------------------------------
+Apologies. Ensure the datetime you have passed in is of the form: 'HHmm'.
+---------------------------------------------------------
+
+---------------------------------------------------------
+Apologies. Ensure the datetime you have passed in is of the form: 'dd-MM-yyyy HHmm'.
 ---------------------------------------------------------
 
 ---------------------------------------------------------

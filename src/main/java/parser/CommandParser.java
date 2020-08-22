@@ -1,7 +1,10 @@
 package parser;
 
 import java.lang.StringBuilder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 import exception.DukeException;
 import operation.Operation;
@@ -33,6 +36,16 @@ public class CommandParser {
 
     private static int getIndexOf(String[] arr, String target) {
         return Arrays.asList(arr).indexOf(target);
+    }
+
+    private static Date parseDateTimeString(String datetime, SimpleDateFormat sdf) throws DukeException {
+        try {
+            return sdf.parse(datetime);
+        } catch (ParseException parseException) {
+            String msg = String.format("Ensure the datetime you have passed in is of the form: '%s'.",
+                    sdf.toPattern());
+            throw new DukeException(msg);
+        }
     }
 
     private static boolean isInteger(String str) {
@@ -77,7 +90,8 @@ public class CommandParser {
         }
         String description = concatenate(commands, 1, splitIndex);
         String datetime = concatenate(commands, splitIndex + 1, commands.length);
-        return new AddDeadlineOperation(description, datetime, list);
+        Date parsedDateTime = parseDateTimeString(datetime, Deadline.DATE_FORMAT_INPUT);
+        return new AddDeadlineOperation(description, parsedDateTime, list);
     }
 
     private AddEventOperation createEventOp(String[] commands, TaskList list) throws DukeException {
@@ -89,8 +103,9 @@ public class CommandParser {
             throw new DukeException("Ensure an indication of '/at' after an event command.");
         }
         String description = concatenate(commands, 1, splitIndex);
-        String datetime = concatenate(commands, splitIndex + 1, commands.length);
-        return new AddEventOperation(description, datetime, list);
+        String time = concatenate(commands, splitIndex + 1, commands.length);
+        Date parsedTime = parseDateTimeString(time, Event.TIME_FORMAT_INPUT);
+        return new AddEventOperation(description, parsedTime, list);
     }
 
     private DeleteOperation createDeleteOp(String[] commands, TaskList list) throws DukeException {
