@@ -1,7 +1,10 @@
-public class Deadline extends Task {
-    protected String dateEnd;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String dateEnd) {
+public class Deadline extends Task {
+    protected LocalDateTime dateEnd;
+
+    public Deadline(String description, LocalDateTime dateEnd) {
         super(description);
         this.dateEnd = dateEnd;
     }
@@ -13,11 +16,11 @@ public class Deadline extends Task {
 
     @Override
     public String getDate() {
-        return dateEnd;
+        return dateEnd.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
 
     @Override
     public String toString() {
-        return String.format("%s (by: %s)", super.toString(), dateEnd);
+        return String.format("%s (by: %s)", super.toString(), dateEnd.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")));
     }
 }
