@@ -55,16 +55,16 @@ public class Ui {
     }
 
     public void showTaskAdditionMessage(Task newTask, TaskList taskList) {
-        System.out.println(Message.ADDED + newTask.toString() + "\n" +
-                "Now you have " + taskList.size() +
-                (taskList.size() == 1 ? " task " : " tasks ")
+        System.out.println(Message.ADDED + newTask.toString() + "\n"
+                + "Now you have " + taskList.size()
+                + (taskList.size() == 1 ? " task " : " tasks ")
                 + "in the list");
     }
 
     public void showTaskDeletionMessage(Task task,TaskList taskList) {
-        System.out.println(Message.DELETE + task.toString() + "\n" +
-                "Now you have " + taskList.size() +
-                (taskList.size() == 1 ? " task " : " tasks ")
+        System.out.println(Message.DELETE + task.toString() + "\n"
+                + "Now you have " + taskList.size()
+                + (taskList.size() == 1 ? " task " : " tasks ")
                 + "in the list");
     }
 

@@ -11,7 +11,7 @@ import duke.Exception.DukeException;
 
 public class Parser {
 
-    public static Command parse(String str) throws DukeException {
+    public static Command parse(String str) {
         if (str.equals("bye")) {
             return new ExitCommand();
         } else if (str.equals("list")) {

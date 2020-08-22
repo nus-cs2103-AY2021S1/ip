@@ -34,17 +34,17 @@ public class Storage {
                 Task task;
 
                 switch (data[0]) {
-                    case "T":
-                        task = new ToDo(data[2]);
-                        break;
-                    case "D":
-                        task = new Deadline(data[2], data[3]);
-                        break;
-                    case "E":
-                        task = new Event(data[2], data[3]);
-                        break;
-                    default:
-                        throw new DukeException(Message.BORDERS + "\n" + "Failed to load tasks.\n" + Message.BORDERS);
+                case "T":
+                    task = new ToDo(data[2]);
+                    break;
+                case "D":
+                    task = new Deadline(data[2], data[3]);
+                    break;
+                case "E":
+                    task = new Event(data[2], data[3]);
+                    break;
+                default:
+                    throw new DukeException(Message.BORDERS + "\n" + "Failed to load tasks.\n" + Message.BORDERS);
                 }
 
                 if (data[1].equals("1")) {
@@ -59,10 +59,10 @@ public class Storage {
         }
     }
 
-    public void saveTasks(TaskList tasks) throws DukeException {
+    public void saveTasks(TaskList taskList) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
-            for (Task task : tasks.getTasks()) {
+            for (Task task : taskList.getTasks()) {
                 fw.write(task.serialize());
                 fw.write(System.lineSeparator());
             }
