@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Bot {
@@ -65,9 +66,7 @@ public class Bot {
     }
 
     private static String errorMessage() {
-        return "\t____________________________________________________________\n" +
-                "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                "\t____________________________________________________________";
+        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
     public static void initialize() {
@@ -102,6 +101,8 @@ public class Bot {
                 //pull type of task and the task
                 String taskType = input.substring(0, input.indexOf(" "));
                 String task = input.substring(input.indexOf(" ") + 1);
+                String[] taskAndDateArr;
+                String date;
                 //System.out.println(task);
                 switch (taskType) {
                     case ("todo"):
@@ -110,18 +111,26 @@ public class Bot {
                         break;
                     case ("deadline"):
                         // date = 'by Sunday'
-                        store.addItem(new Deadlines(task));
+                        taskAndDateArr = InputParser.splitTaskAndDate(task);
+                        task = taskAndDateArr[0];
+                        date = taskAndDateArr[1];
+                        store.addItem(new Deadlines(task, date));
                         this.repeat();
                         break;
                     case ("event"):
-                        store.addItem(new Events(task));
+                        taskAndDateArr = InputParser.splitTaskAndDate(task);
+                        task = taskAndDateArr[0];
+                        date = taskAndDateArr[1];
+                        store.addItem(new Events(task, date));
                         this.repeat();
                         break;
                     default:
                         throw new DukeException(Bot.errorMessage());
                 }
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                Bot.sectionize();
+                System.out.println("\t\t" + e.getMessage());
+                Bot.sectionize();
             }
         }
         this.listen();
