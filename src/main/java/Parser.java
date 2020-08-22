@@ -1,15 +1,34 @@
+/**
+ * Encapsulates the parsing system for user commands.
+ */
 public class Parser {
 
+    /**
+     * Duke components required when handling user commands.
+     */
     private UI ui;
     private TaskList taskList;
     private DukeSaver saver;
 
+    /**
+     * Constructor for parsing system.
+     *
+     * @param ui Duke's UI.
+     * @param taskList List of tasks.
+     * @param saver Saving system.
+     */
     public Parser(UI ui, TaskList taskList, DukeSaver saver) {
         this.ui = ui;
         this.taskList = taskList;
         this.saver = saver;
     }
 
+    /**
+     * Handles a user command and designates task to helper functions.
+     *
+     * @param response User's command.
+     * @throws DukeException Thrown when invalid commands are invoked.
+     */
     public void handleResponse(String response) throws DukeException {
         String[] parsedResponse = response.split(" ", 2);
         Command command;
@@ -46,6 +65,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles the "list" command by iterating through all
+     * tasks in the list and building a string.
+     * Prints the final string.
+     */
     private void handleList() {
         if (taskList.isEmpty()) {
             ui.print("You have no tasks!");
@@ -60,6 +84,13 @@ public class Parser {
         ui.print(sb.toString());
     }
 
+    /**
+     * Handles the "done" command by looking for the task
+     * at the index and marking it as done.
+     *
+     * @param rest The remaining string after the key command "done".
+     * @throws DukeException Thrown when invalid format used.
+     */
     private void handleDone(String rest) throws DukeException {
         if (rest == null) {
             throw new DukeException("Specify a task!");
@@ -77,6 +108,12 @@ public class Parser {
         ui.print("Nice! I've marked this task as done:\n" + taskList.get(taskDone));
     }
 
+    /**
+     * Handles the creation of a Todo task.
+     *
+     * @param rest The remaining string after the key command "todo".
+     * @throws DukeException Thrown when invalid format used.
+     */
     private void handleTodo(String rest) throws DukeException {
         if (rest == null) {
             throw new DukeException("Description of a todo cannot be empty!");
@@ -86,6 +123,12 @@ public class Parser {
         ui.print("Got it. I've added this task:\n" + todo + "\n" + taskList.taskSizeString());
     }
 
+    /**
+     * Handles the creation of a Deadline task.
+     *
+     * @param rest The remaining string after the key command "deadline".
+     * @throws DukeException Thrown when invalid format used.
+     */
     private void handleDeadline(String rest) throws DukeException {
         if (rest == null) {
             throw new DukeException("Description of a deadline cannot be empty!");
@@ -105,6 +148,12 @@ public class Parser {
         ui.print("Got it. I've added this task:\n" + deadline + "\n" + taskList.taskSizeString());
     }
 
+    /**
+     * Handles the creation of an Event task.
+     *
+     * @param rest The remaining string after the key command "event".
+     * @throws DukeException Thrown when invalid format used.
+     */
     private void handleEvent(String rest) throws DukeException {
         if (rest == null) {
             throw new DukeException("Description of an event cannot be empty!");
@@ -124,6 +173,12 @@ public class Parser {
         ui.print("Got it. I've added this task:\n" + event + "\n" + taskList.taskSizeString());
     }
 
+    /**
+     * Handles the deletion of a task.
+     *
+     * @param rest The remaining string after the key command "delete", which is index of task.
+     * @throws DukeException Thrown when invalid format used.
+     */
     private void handleDelete(String rest) throws DukeException {
         if (rest == null) {
             throw new DukeException("Specify a task!");
