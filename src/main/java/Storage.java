@@ -3,14 +3,26 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Encapsulates the operations related to the I/O of the log file.
+ */
 public class Storage {
     String pathname;
     List<Task> data = new ArrayList<>();
 
+    /**
+     * Constructs a storage object.
+     * @param path the file path.
+     */
     public Storage(String path) {
         this.pathname = path;
     }
 
+    /**
+     * Reads data from the log file.
+     * @return data that represented by a list of Task objects.
+     * @throws IOException Handle the exception when reading files.
+     */
     public List<Task> readFile() throws IOException {
         String pathname = "./log.txt";
         File filename = new File(pathname);
@@ -53,6 +65,11 @@ public class Storage {
         return this.data;
     }
 
+    /**
+     * Writes the data into the log file.
+     * @param data the data that will be stored in the file.
+     * @throws FileNotFoundException handle the exception when writing files.
+     */
     public void writeFile(List<Task> data) throws FileNotFoundException {
         final PrintStream oldStdout = System.out;
         PrintStream ps = new PrintStream("./log.txt");
@@ -63,6 +80,11 @@ public class Storage {
         System.setOut(oldStdout);
     }
 
+    /**
+     * Converts the words of month into corresponding numbers.
+     * @param month word representation of months.
+     * @return number representation of months.
+     */
     public static int getMonth(String month) {
         return switch (month) {
             case "JAN" -> 1;

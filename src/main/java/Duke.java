@@ -1,11 +1,18 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
-
+/**
+ * Represents a todo manager bot.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    /**
+     * Constructs a Duke bot.
+     * @param filePath the path of the file which store the previous data.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -17,6 +24,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the todo list feature of the .
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         String res;
@@ -54,6 +64,11 @@ public class Duke {
         }
         ui.bye();
     }
+
+    /**
+     * Starts creating an Duke bot object.
+     * @param args no need here.
+     */
     public static void main(String[] args) {
         new Duke("./log.txt").run();
     }

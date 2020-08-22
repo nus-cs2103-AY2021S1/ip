@@ -3,17 +3,43 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Represents the list of the todo events.
+ */
 public class TaskList {
     protected List<Task> data;
+
+    /**
+     * Constructs an empty task list.
+     */
     public TaskList() {
         data = new ArrayList();
     }
+
+    /**
+     * Constructs an task list with given data.
+     * @param data the existing data needed to initialize the task list.
+     */
     public TaskList(List<Task> data) {
         this.data = data;
     }
+
+    /**
+     * Returns the task list.
+     * @return the task list.
+     */
     public List<Task> getData() {
         return data;
     }
+
+    /**
+     * Sets the status of a certain event to done.
+     * @param input the input from the user.
+     * @param ui user interaction object.
+     * @param storage storage object.
+     * @throws DukeException handles the exception when running the Duke bot.
+     * @throws FileNotFoundException handles the exception of file not found.
+     */
     public void done(String input, Ui ui, Storage storage) throws DukeException, FileNotFoundException {
         if (input.length() <= 5) {
             // Exception: eg. done
@@ -28,6 +54,15 @@ public class TaskList {
         ui.printDone(data, n);
         storage.writeFile(data);
     }
+
+    /**
+     * Deletes a certain event from the list.
+     * @param input the input from the user.
+     * @param ui user interaction object.
+     * @param storage storage object.
+     * @throws DukeException handles the exception when running the Duke bot.
+     * @throws FileNotFoundException handles the exception of file not found.
+     */
     public void delete(String input, Ui ui, Storage storage) throws DukeException, FileNotFoundException {
         if (input.length() <= 7) {
             // Exception: eg. delete
@@ -43,6 +78,15 @@ public class TaskList {
         ui.printDeletePost(data, n);
         storage.writeFile(data);
     }
+
+    /**
+     * Adds a todo event into the list.
+     * @param input the input from the user.
+     * @param ui user interaction object.
+     * @param storage storage object.
+     * @throws DukeException handles the exception when running the Duke bot.
+     * @throws FileNotFoundException handles the exception of file not found.
+     */
     public void todo(String input, Ui ui, Storage storage) throws DukeException, FileNotFoundException {
         if (input.length() <= 5) {
             // Exception: eg. todo
@@ -53,6 +97,15 @@ public class TaskList {
         ui.printTodo(data, t);
         storage.writeFile(data);
     }
+
+    /**
+     * Adds an event with a deadline into the list.
+     * @param input the input from the user.
+     * @param ui user interaction object.
+     * @param storage storage object.
+     * @throws DukeException handles the exception when running the Duke bot.
+     * @throws FileNotFoundException handles the exception of file not found.
+     */
     public void deadline(String input, Ui ui, Storage storage) throws DukeException, FileNotFoundException {
         if (input.length() <= 9) {
             // Exception: eg. deadline
@@ -72,6 +125,15 @@ public class TaskList {
         ui.printDeadline(data, t);
         storage.writeFile(data);
     }
+
+    /**
+     * Adds an event that will happen at a fixed time into the list.
+     * @param input the input from the user.
+     * @param ui user interaction object.
+     * @param storage storage object.
+     * @throws DukeException handles the exception when running the Duke bot.
+     * @throws FileNotFoundException handles the exception of file not found.
+     */
     public void event(String input, Ui ui, Storage storage) throws DukeException, FileNotFoundException {
         if (input.length() <= 9) {
             // Exception: eg. event
