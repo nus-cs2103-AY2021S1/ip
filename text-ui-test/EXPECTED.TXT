@@ -2,22 +2,23 @@
 Hello! I'm Duke!
 What can I do for you?
 
+FAILURE: Unable to load data from local drive.
 ---------------------------------------------------
 Got it. I've added this task:
    [T][✘] borrow book
 Now you have 1 tasks in the list.
 ---------------------------------------------------
 Got it. I've added this task:
-   [D][✘] return book (by: Sunday)
+   [D][✘] return book (by: 2019-10-15 18:00)
 Now you have 2 tasks in the list.
 ---------------------------------------------------
 Got it. I've added this task:
-   [E][✘] project meeting (at: Mon 2-4pm)
+   [E][✘] interview at Google (by: 2021-01-31 21:00)
 Now you have 3 tasks in the list.
 ---------------------------------------------------
 1. [T][✘] borrow book
-2. [D][✘] return book (by: Sunday)
-3. [E][✘] project meeting (at: Mon 2-4pm)
+2. [D][✘] return book (by: 2019-10-15 18:00)
+3. [E][✘] interview at Google (at: Jan 31 2021, 9:00 pm)
 ---------------------------------------------------
 FAILURE: The description of your event is empty.
 ---------------------------------------------------
@@ -26,7 +27,7 @@ FAILURE: The description of your deadline is empty.
 added: workout
 ---------------------------------------------------
 Nice! I have marked this task as done:
-  [E][✓] project meeting (at: Mon 2-4pm)
+  [E][✓] interview at Google (by: 2021-01-31 21:00)
 ---------------------------------------------------
 added: run
 ---------------------------------------------------
@@ -34,17 +35,20 @@ Nice! I have marked this task as done:
   [✓] run
 ---------------------------------------------------
 1. [T][✘] borrow book
-2. [D][✘] return book (by: Sunday)
-3. [E][✓] project meeting (at: Mon 2-4pm)
+2. [D][✘] return book (by: 2019-10-15 18:00)
+3. [E][✓] interview at Google (at: Jan 31 2021, 9:00 pm)
 4. [✘] workout
 5. [✓] run
 ---------------------------------------------------
+FAILURE: Your command has to be in a proper format like the one here
+	 <command> <activity> <by/at> <Year-Month-Day Hour:Minute>.
+---------------------------------------------------
 Noted. I've removed this task:
-  [E][✓] project meeting (at: Mon 2-4pm)
+  [E][✓] interview at Google (by: 2021-01-31 21:00)
 Now you have 4 tasks in the list.
 ---------------------------------------------------
 1. [T][✘] borrow book
-2. [D][✘] return book (by: Sunday)
+2. [D][✘] return book (by: 2019-10-15 18:00)
 3. [✘] workout
 4. [✓] run
 ---------------------------------------------------
@@ -54,4 +58,5 @@ FAILURE: You're talking gibberish. Cannot make sense of what you just said.
 ---------------------------------------------------
 Bye. Hope to see you again soon!
 ---------------------------------------------------
+
 

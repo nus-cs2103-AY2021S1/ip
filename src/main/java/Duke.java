@@ -14,7 +14,7 @@ public class Duke {
             data = new Data(path);
             //System.out.println("Before calling load");
             todoList = data.loadData();
-        } catch (IOException e) {
+        } catch (IOException | DukeInvalidTimeException e) {
             System.out.println("FAILURE: Unable to load data from local drive.");
             todoList = new ArrayList<>();
         }
@@ -184,7 +184,7 @@ public class Duke {
             return curr;
         }
     }
-    public static Deadline storeDeadline(String deadline) throws EmptyDukeException {
+    public static Deadline storeDeadline(String deadline) throws EmptyDukeException, DukeInvalidTimeException {
         int count = todoList.size() + 1;
         if (count > 100) {
             System.out.println("You have far too many pending tasks!");
@@ -197,7 +197,7 @@ public class Duke {
             return curr;
         }
     }
-    public static Event storeEvent(String event) throws EmptyDukeException {
+    public static Event storeEvent(String event) throws EmptyDukeException, DukeInvalidTimeException {
         int count = todoList.size() + 1;
         if (count > 100) {
             System.out.println("You have far too many pending tasks!");
@@ -224,7 +224,7 @@ public class Duke {
             System.out.println(toDo == null ? "Failed!" : line + "\nGot it. I've added this task:\n   "
                     + toDo.toString()
                     + "\nNow you have " + todoList.size() + " tasks in the list." );
-        } catch (EmptyDukeException e) {
+        } catch (EmptyDukeException | DukeInvalidTimeException e) {
             System.out.println(e.toString());
         }
     }
