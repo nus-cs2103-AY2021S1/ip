@@ -2,7 +2,6 @@ public class TodoCommand extends Command{
 
     private String command;
 
-
     public TodoCommand(String command) {
         this.command = command;
     }

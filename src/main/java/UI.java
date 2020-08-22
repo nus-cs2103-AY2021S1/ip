@@ -4,14 +4,14 @@ public class UI {
     protected String readCommand() {
         Scanner sc = new Scanner(System.in);
 
-        String message = "";
-
-        while (sc.hasNextLine()) {
-            message = sc.next();
-            message += sc.nextLine();
-        }
+        String message = sc.nextLine();
 
         return message;
+    }
+
+    protected void greetUser() {
+        String welcome = "Hello I am Duke!\nHow can I help you?\n";
+        System.out.println(welcome);
     }
 
     protected void doneTask(Task task) {
@@ -46,6 +46,4 @@ public class UI {
         }
         System.out.println("\n");
     }
-
-
 }

@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class Parser {
 
     protected Command parseCommand(String userCommand) throws InvalidCommandException {

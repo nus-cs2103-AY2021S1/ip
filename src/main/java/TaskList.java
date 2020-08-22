@@ -9,15 +9,10 @@ public class TaskList {
     }
 
     protected void markTaskDone(Task completedTask) {
-        if (!completedTask.getStatus()) {
-            System.out.println("\nNice! I have completed this task!");
-            completedTask.markAsDone();
-            System.out.println(" " + completedTask + "\n");
-            int indexOfTask = this.taskList.indexOf(completedTask);
-            this.taskList.get(indexOfTask).markAsDone();
-        } else {
-            System.out.println("\nThis task has already been completed!\n");
-        }
+        completedTask.markAsDone();
+        int indexOfTask = this.taskList.indexOf(completedTask);
+        this.taskList.get(indexOfTask).markAsDone();
+
     }
 
     protected void addTask(Task task) {

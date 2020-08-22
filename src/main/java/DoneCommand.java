@@ -15,7 +15,7 @@ public class DoneCommand extends Command {
             if (taskIndex > 0 && taskIndex <= tasks.getTaskList().size()) {
                 Task completedTask = tasks.getTaskList().get(taskIndex-1);
                 if (!completedTask.getStatus()) {
-                    completedTask.markAsDone();
+                    tasks.markTaskDone(completedTask);
                 }
                 dukeUI.doneTask(completedTask);
             } else {
