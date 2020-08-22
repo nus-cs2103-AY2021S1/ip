@@ -19,7 +19,8 @@ public class DeleteCommand extends Command {
 
         storage.deleteExistingTask(taskId);
 
-        ui.print(String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.", task,
+        ui.print(String.format(
+                "Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.", task,
                 tasks.size()));
     }
 }

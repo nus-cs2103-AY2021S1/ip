@@ -15,8 +15,8 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        this.print(
-                "Something went wrong when loading previously saved tasks! Starting with an empty tasks list instead...");
+        this.print("Something went wrong when loading previously saved tasks! Starting with an " +
+                "empty tasks list instead...");
     }
 
     public void showError(String message) {

@@ -92,7 +92,8 @@ public class Storage {
 
     public void writeToFile() throws IOException {
         String fileData = String.join("\n", this.serialisedTasks);
-        Files.writeString(filePath, fileData, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+        Files.writeString(filePath, fileData, StandardOpenOption.WRITE,
+                StandardOpenOption.TRUNCATE_EXISTING);
     }
 
     public void saveNewTask(Task task) throws CorruptedStorageException {

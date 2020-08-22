@@ -1,7 +1,10 @@
 package duke;
 
 import duke.command.*;
-import duke.exception.*;
+import duke.exception.DukeException;
+import duke.exception.InvalidTaskIdException;
+import duke.exception.MissingTaskDetailsException;
+import duke.exception.MissingTaskIdException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -71,7 +74,8 @@ public class Parser {
                     String[] deadlineDetails = commandDetails.split("/by", 2);
 
                     if (deadlineDetails.length < 2) {
-                        throw new MissingTaskDetailsException(failedToCreateDeadline, "No deadline was specified!");
+                        throw new MissingTaskDetailsException(failedToCreateDeadline,
+                                "No " + "deadline was specified!");
                     }
 
                     String description = deadlineDetails[0].trim();
@@ -83,7 +87,8 @@ public class Parser {
                     String[] eventDetails = commandDetails.split("/at", 2);
 
                     if (eventDetails.length < 2) {
-                        throw new MissingTaskDetailsException(failedToCreateEvent, "No time was specified!");
+                        throw new MissingTaskDetailsException(failedToCreateEvent,
+                                "No time was specified!");
                     }
 
                     String description = eventDetails[0].trim();

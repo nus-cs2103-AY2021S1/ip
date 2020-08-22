@@ -1,10 +1,10 @@
 package duke.task;
 
+import duke.exception.InvalidDateInputException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
-import duke.exception.InvalidDateInputException;
 
 public class Deadline extends Task {
     private static final String identifier = "D";
@@ -19,7 +19,8 @@ public class Deadline extends Task {
         }
     }
 
-    public Deadline(String description, String by, boolean isDone) throws InvalidDateInputException {
+    public Deadline(String description, String by, boolean isDone)
+            throws InvalidDateInputException {
         super(description, isDone);
         try {
             this.by = LocalDate.parse(by);
