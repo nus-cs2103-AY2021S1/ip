@@ -7,4 +7,8 @@ public abstract class ComplexCommand extends Command{
         this.params = params;
     }
 
+    public String toString() {
+        return super.toString() + " | " + this.params;
+    }
+
 }
