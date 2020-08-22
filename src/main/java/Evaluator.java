@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Evaluator {
     public static String[] extractAction(String command) throws DukeException {
         String[] split = command.split(" ", 2);
@@ -22,6 +26,8 @@ public class Evaluator {
 
     public static String[] extractTime(String command) throws DukeException {
         String[] split = command.split(" /by | /at ", 2);
+
+        // validate if there are two parts
         if (split.length < 2) {
             if (split[0].charAt(0) == '/') {
                 throw new DukeException(Messenger.EMPTY_CONTENT_ERROR);
@@ -29,6 +35,23 @@ public class Evaluator {
                 throw new DukeException(Messenger.EMPTY_TIME_ERROR);
             }
         }
+
+        // validate if time is of the correct format
+        String time = split[1];
+        validateFormat(time);
         return split;
+    }
+
+    private static void validateFormat(String value) throws DukeException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try {
+            LocalDate ld = LocalDate.parse(value, formatter);
+            String result = ld.format(formatter);
+            if (!result.equals(value)) {
+                throw new DukeException(Messenger.DATE_FORMAT_ERROR);
+            }
+        } catch (DateTimeParseException exp) {
+            throw new DukeException(Messenger.DATE_FORMAT_ERROR);
+        }
     }
 }
