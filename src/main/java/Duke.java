@@ -118,7 +118,7 @@ public class Duke {
                 date = taskInfoParts[1];
                 task = handleEvent(description, date);
                 break;
-            default:
+            default: 
                 task = new Task("");
             }
 
