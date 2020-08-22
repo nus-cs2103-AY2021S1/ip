@@ -1,5 +1,6 @@
 /**
  * Abstract class to represent a task.
+ * Contains task name and completed status.
  *
  * @author YanCheng
  */

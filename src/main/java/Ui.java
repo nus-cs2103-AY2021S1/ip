@@ -3,6 +3,7 @@ import java.util.Scanner;
 /**
  * UI class.
  * Handles input from user.
+ * Contains task list, storage and parser
  *
  * @author YanCheng
  */

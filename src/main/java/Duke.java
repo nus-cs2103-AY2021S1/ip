@@ -1,6 +1,7 @@
 /**
  * Duke class.
  * Driver class for Duke.
+ * Contains task list, storage, parser and ui.
  *
  * @author YanCheng
  */

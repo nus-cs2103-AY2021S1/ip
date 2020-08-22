@@ -3,6 +3,7 @@ import java.util.ArrayList;
 /**
  * TaskList class.
  * Stores Task objects in an ArrayList.
+ * Contains array list
  *
  * @author YanCheng
  */

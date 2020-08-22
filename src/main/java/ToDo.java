@@ -2,6 +2,7 @@
  * To Do class.
  * Represents a to do task.
  * Extends from Task.
+ * Contains to do name.
  *
  * @author YanCheng
  */
