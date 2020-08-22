@@ -1,4 +1,5 @@
 T | 1 | read book
-D | 0 | return book | 19/09/2020 1000
-E | 0 | project meeting | 20/12/2020 200-1400
-T | 1 | join sports club
+E | 0 | project meeting | 01/01/2020 1400-1800
+D | 1 | homework | 01/01/2020 0700
+T | 0 | join sports club
+T | 0 | return book
