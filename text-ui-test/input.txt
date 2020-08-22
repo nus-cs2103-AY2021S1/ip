@@ -8,12 +8,28 @@ deadline
 deadline task 2
 deadline task 2 /by
 deadline /by next time
-deadline task 2 /by next time
+deadline task 2 /by nexttime
+deadline task 2 /by year-month-day hourminute
+deadline task 2 /by 1993-12 1423
+deadline task 2 /by 1993-12-6 123
+deadline task 2 /by 1993-12-6 12345
+deadline task 2 /by abcd-12-6 2359
+deadline task 2 /by 1993-12-6 abcd
+deadline task 2 /by 1993-12-6 3560
+deadline task 2 /by 1993-12-6 2359
 event
 event task 3
 event task 3 /at
-event /at now
+event /at right now
 event task 3 /at now
+event task 3 /at year-month-day hourminute
+event task 3 /at 1967-01 1423
+event task 3 /at 1967-01-31 123
+event task 3 /at 1967-01-31 12345
+event task 3 /at abcd-01-31 2359
+event task 3 /at 1967-01-31 abcd
+event task 3 /at 1967-01-31 3560
+event task 3 /at 1967-01-31 1400
 blah
 list
 bye

@@ -1,5 +1,7 @@
 import java.io.*;
 import java.util.Arrays;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -42,6 +44,35 @@ public class Duke {
         System.out.printf("%s", SEPARATOR);
     }
 
+    private LocalDateTime toDateTime(String dateTime) {
+        String[] dateTimeSplit = dateTime.split(" ");
+        if (dateTimeSplit.length != 2)
+            throw new DateTimeException("     ☹ OOPS!!! Your date needs to"
+                    + " have this format:\n     \"YYYY-MM-DD HHMM\"");
+
+        String[] date = dateTimeSplit[0].split("-");
+        String time = dateTimeSplit[1];
+
+        if (date.length != 3)
+            throw new DateTimeException("     ☹ OOPS!!! Your date needs to"
+                    + " have this format:\n     \"YYYY-MM-DD\"");
+        if (time.length() != 4)
+            throw new DateTimeException("     ☹ OOPS!!! Your time needs to"
+                    + " have this format:\n     \"HHMM\"");
+        try {
+            int year = Integer.parseInt(date[0]);
+            int month = Integer.parseInt(date[1]);
+            int day = Integer.parseInt(date[2]);
+            int hour = Integer.parseInt(time.substring(0, 2));
+            int minute = Integer.parseInt(time.substring(2));
+
+            return LocalDateTime.of(year, month, day, hour, minute);
+        } catch (NumberFormatException | DateTimeException e) {
+            throw new DateTimeException("     ☹ OOPS!!! Please check that you've"
+                    + " entered\n       the date and time correctly");
+        }
+    }
+
     private void addTask(String command, String taskDescription)
             throws InvalidDeadlineFormatException, InvalidEventFormatException {
         Task task;
@@ -54,13 +85,13 @@ public class Duke {
                 nameAndTime = taskDescription.split(" /by ", 2);
                 if (nameAndTime.length == 1)
                     throw new InvalidDeadlineFormatException();
-                task = new Deadline(nameAndTime[0], nameAndTime[1]);
+                task = new Deadline(nameAndTime[0], toDateTime(nameAndTime[1]));
                 break;
             case EVENT_COMMAND:
                 nameAndTime = taskDescription.split(" /at ", 2);
                 if (nameAndTime.length == 1)
                     throw new InvalidEventFormatException();
-                task = new Event(nameAndTime[0], nameAndTime[1]);
+                task = new Event(nameAndTime[0], toDateTime(nameAndTime[1]));
                 break;
             default:
                 return;
@@ -182,32 +213,32 @@ public class Duke {
 
             try {
                 switch (command) {
-                    case EXIT_COMMAND:
-                        hasCommand = false;
-                        break;
-                    case LIST_COMMAND:
-                        printTaskList();
-                        break;
-                    case DONE_COMMAND:
-                        taskNum = Integer.parseInt(input[1]);
-                        setTaskDone(taskNum);
-                        break;
-                    case DELETE_COMMAND:
-                        taskNum = Integer.parseInt(input[1]);
-                        deleteTask(taskNum);
-                        break;
-                    case TODO_COMMAND:
-                    case DEADLINE_COMMAND:
-                    case EVENT_COMMAND:
-                        if (input.length == 1)
-                            throw new EmptyMessageException(command);
-                        String taskDescription = input[1];
-                        addTask(command, taskDescription);
-                        break;
-                    default:
-                        throw new UnknownCommandException();
+                case EXIT_COMMAND:
+                    hasCommand = false;
+                    break;
+                case LIST_COMMAND:
+                    printTaskList();
+                    break;
+                case DONE_COMMAND:
+                    taskNum = Integer.parseInt(input[1]);
+                    setTaskDone(taskNum);
+                    break;
+                case DELETE_COMMAND:
+                    taskNum = Integer.parseInt(input[1]);
+                    deleteTask(taskNum);
+                    break;
+                case TODO_COMMAND:
+                case DEADLINE_COMMAND:
+                case EVENT_COMMAND:
+                    if (input.length == 1)
+                        throw new EmptyMessageException(command);
+                    String taskDescription = input[1];
+                    addTask(command, taskDescription);
+                    break;
+                default:
+                    throw new UnknownCommandException();
                 }
-            } catch (DukeException e) {
+            } catch (DukeException | DateTimeException | NumberFormatException e) {
                 System.out.printf("%s\n%s", e.getMessage(), SEPARATOR);
             }
         }
