@@ -17,7 +17,9 @@ public class Duke {
             "   / /\\ \\   | |      |  __|   |  _  /  |  __|   | |  | |\n" +
             "  / ____ \\  | |____  | |      | | \\ \\  | |____  | |__| |\n" +
             " /_/    \\_\\ |______| |_|      |_|  \\_\\ |______| |_____/ \n";
-
+    
+    private static Storage storage;
+    
     private static void printToConsole(String message) {
         System.out.println(DIVIDER);
         System.out.println(message);
@@ -45,21 +47,29 @@ public class Duke {
         return sb.toString();
     }
 
-    private static String markTaskAsDone(List<Task> tasks, int taskID) throws DukeException {
+    private static String markTaskAsDone(List<Task> tasks, int taskID) throws DukeException, IOException {
         if (taskID < 1 || taskID > tasks.size()) {
             throw new DukeException("Task ID is invalid!");
         }
+        
         Task task = tasks.get(taskID - 1);
+        String oldTaskString = task.generateStorageString();
         task.competeTask();
+        String newTaskString = task.generateStorageString();
+        storage.editLineInStorage(oldTaskString, newTaskString);
+        
         return String.format("Nice! I've marked this task as done.\n%s", task.toString());
     }
 
-    private static String deleteTask(List<Task> tasks, int taskID) throws DukeException {
+    private static String deleteTask(List<Task> tasks, int taskID) throws DukeException, IOException {
         if (taskID < 1 || taskID > tasks.size()) {
             throw new DukeException("Task ID is invalid!");
         }
+        
         Task task = tasks.get(taskID - 1);
+        storage.deleteLineFromStorage(task.generateStorageString());
         tasks.remove(taskID - 1);
+        
         return String.format("Nice! I've marked this task as done.\n%s\nNow you have %d tasks in the list", 
                 task.toString(), tasks.size());
     }
@@ -69,65 +79,67 @@ public class Duke {
         return String.format("Got it. I've added this task: \n%s\nNow you have %d tasks in the list",
                 task.toString(), tasks.size());
     }
+    
+    private static void loadDataFromStorage(Path filePath, List<Task> tasks) throws DukeException, IOException {
+        storage = Storage.loadStorage(filePath);
+
+        FileReader reader = new FileReader(filePath.toString());
+        BufferedReader bufferedReader = new BufferedReader(reader);
+
+        String line;
+
+        while ((line = bufferedReader.readLine()) != null) {
+
+            String[] entry = line.split(" \\| ");
+
+            if (entry.length == 3) {
+                String taskType = entry[0];
+                if (!entry[1].toUpperCase().equals("TRUE") && !entry[1].toUpperCase().equals("FALSE")) {
+                    throw new DukeException("One or more task statuses are not stored correctly");
+                }
+                boolean taskIsDone = Boolean.parseBoolean(entry[1]);
+                String taskArgument = entry[2];
+
+                Task newTask;
+
+                switch (taskType) {
+                case "TODO":
+                    newTask = ToDo.createNewToDo(taskArgument);
+                    break;
+                case "EVENT":
+                    newTask = Event.createNewEvent(taskArgument);
+                    break;
+                case "DEADLINE":
+                    newTask = Deadline.createNewDeadline(taskArgument);
+                    break;
+                default:
+                    throw new DukeException("One or more task types are not stored correctly");
+                }
+
+                if (taskIsDone) {
+                    newTask.competeTask();
+                }
+
+                tasks.add(newTask);
+
+            } else {
+                throw new DukeException("One or more entries have an invalid number of arguments");
+            }
+        }
+
+        reader.close();
+
+    }
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
         List<Task> tasks = new ArrayList<>();
         Path filePath = Paths.get("data","duke.txt");
-        
-        Storage storage;
-        
+
         try {
-            storage = Storage.loadStorage(filePath);
-            
-            FileReader reader = new FileReader(filePath.toString());
-            BufferedReader bufferedReader = new BufferedReader(reader);
-
-            String line;
-
-            while ((line = bufferedReader.readLine()) != null) {
-                
-                String[] entry = line.split(" \\| ");
-                
-                if (entry.length == 3) {
-                    String taskType = entry[0];
-                    if (!entry[1].toUpperCase().equals("TRUE") && !entry[1].toUpperCase().equals("FALSE")) {
-                        throw new DukeException("One or more task statuses are not stored correctly");
-                    }
-                    boolean taskIsDone = Boolean.parseBoolean(entry[1]);
-                    String taskArgument = entry[2];
-                    
-                    Task newTask;
-
-                    switch (taskType) {
-                    case "TODO":
-                        newTask = ToDo.createNewToDo(taskArgument);
-                        break;
-                    case "EVENT":
-                        newTask = Event.createNewEvent(taskArgument);
-                        break;
-                    case "DEADLINE":
-                        newTask = Deadline.createNewDeadline(taskArgument);
-                        break;
-                    default:
-                        throw new DukeException("One or more task types are not stored correctly");
-                    }
-                    
-                    if (taskIsDone) {
-                        newTask.competeTask();
-                    }
-                    
-                    tasks.add(newTask);
-                    
-                } else {
-                    throw new DukeException("One or more entries have an invalid number of arguments");
-                }
-            }
-
-            reader.close();
-            
-        } catch (IOException e) {
+            loadDataFromStorage(filePath, tasks);
+        }  catch (IOException e) {
             printToConsole("File System Error");
             return;
         } catch (DukeException e) {
