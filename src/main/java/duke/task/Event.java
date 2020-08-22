@@ -53,7 +53,7 @@ public class Event extends Task {
     public boolean happenBetween(LocalDate date1, LocalDate date2) {
         super.happenBetween(date1, date2);
         LocalDate date = atTime.toLocalDate();
-        return !date.isAfter(date2) && date.isBefore(date1);
+        return !date.isAfter(date2) && !date.isBefore(date1);
     }
 
     @Override
