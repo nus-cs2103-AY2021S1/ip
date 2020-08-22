@@ -5,7 +5,11 @@ import duke.component.*;
 public class ByeCommand extends Command {
     public ByeCommand(String input) {
         super(input);
-        isExit = true;
+    }
+
+    @Override
+    public boolean isExit() {
+        return true;
     }
 
     @Override
