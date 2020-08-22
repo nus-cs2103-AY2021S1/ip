@@ -76,7 +76,7 @@ ____________________________________________________________
 ☹ OOPS!!! Failed to create Deadline task! No deadline was specified!
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Failed to create Event task! No time was specified!
+☹ OOPS!!! Failed to create Event task! No date was specified!
 ____________________________________________________________
 ____________________________________________________________
 ☹ OOPS!!! Failed to mark task as complete! No task was specified!

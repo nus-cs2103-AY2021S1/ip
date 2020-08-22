@@ -22,14 +22,13 @@ public class Parser {
     private final static String failedToCreateEvent = "Failed to create Event task!";
 
     static Command parse(String fullCommand) throws DukeException {
-        String[] commandInputs = fullCommand.split(" ", 2);
+        String[] commandInputs = fullCommand.trim().split(" ", 2);
 
         if (commandInputs.length == 0) {
             throw new DukeException("Something went wrong when parsing your inputs!");
         }
 
-        // TODO: add test for case insensitivity
-        String command = commandInputs[0].toLowerCase();
+        String command = commandInputs[0].trim().toLowerCase();
 
         String commandDetails;
         switch (command) {
@@ -41,7 +40,7 @@ public class Parser {
                     throw new MissingTaskIdException(failedToMarkTaskAsComplete);
                 }
 
-                commandDetails = commandInputs[1];
+                commandDetails = commandInputs[1].trim();
 
                 try {
                     int taskId = Integer.parseInt(commandDetails);
@@ -55,7 +54,7 @@ public class Parser {
                     throw new MissingTaskIdException(failedToDeleteTask);
                 }
 
-                commandDetails = commandInputs[1];
+                commandDetails = commandInputs[1].trim();
 
                 try {
                     int taskId = Integer.parseInt(commandDetails);
@@ -71,7 +70,7 @@ public class Parser {
                     throw new MissingTaskDetailsException(failedToCreateTask);
                 }
 
-                commandDetails = commandInputs[1];
+                commandDetails = commandInputs[1].trim();
 
                 if (command.equals("todo")) {
                     return new AddCommand(new Todo(commandDetails));
@@ -80,7 +79,7 @@ public class Parser {
 
                     if (deadlineDetails.length < 2) {
                         throw new MissingTaskDetailsException(failedToCreateDeadline,
-                                "No " + "deadline was specified!");
+                                "No deadline was specified!");
                     }
 
                     String description = deadlineDetails[0].trim();
@@ -93,7 +92,7 @@ public class Parser {
 
                     if (eventDetails.length < 2) {
                         throw new MissingTaskDetailsException(failedToCreateEvent,
-                                "No time was specified!");
+                                "No date was specified!");
                     }
 
                     String description = eventDetails[0].trim();
