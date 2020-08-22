@@ -18,17 +18,17 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[T]" +"[" + this.getStatusIcon()+"] " + this.description;
+        return "[T]" + "[" + this.getStatusIcon() + "] " + this.description;
     }
 
     public String writeToFile() {
         String result = "T # ";
         if(isDone) {
-            result+="1 # ";
+            result += "1 # ";
         } else {
-            result+="0 # ";
+            result += "0 # ";
         }
-        result+=description;
+        result += description;
         return result;
     }
 

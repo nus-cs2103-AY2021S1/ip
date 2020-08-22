@@ -1,6 +1,5 @@
 package Command;
 
-
 import main.java.Storage;
 import main.java.TaskList;
 import main.java.Ui;
@@ -29,7 +28,7 @@ public class PrintListCommand extends Command {
             return true;
         } else if (o instanceof PrintListCommand) {
             PrintListCommand cur = (PrintListCommand) o;
-            if(Arrays.equals(this.command, cur.command)) {
+            if (Arrays.equals(this.command, cur.command)) {
                 return true;
             } else {
                 return false;

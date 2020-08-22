@@ -1,9 +1,14 @@
 package Command;
 
-import main.java.*;
+import main.java.Storage;
+import main.java.TaskList;
+import main.java.Ui;
+
+
 import Exception.DukeException;
 import Exception.DoneOutOfBoundException;
 import Exception.DoneUnknownException;
+
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -43,7 +48,7 @@ public class DoneCommand extends Command {
             return true;
         } else if (o instanceof DoneCommand) {
             DoneCommand cur = (DoneCommand) o;
-            if(Arrays.equals(this.command, cur.command)) {
+            if (Arrays.equals(this.command, cur.command)) {
                 return true;
             } else {
                 return false;

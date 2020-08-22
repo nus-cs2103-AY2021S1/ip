@@ -1,13 +1,20 @@
 package Command;
 
-import main.java.*;
+import main.java.Storage;
+import main.java.TaskList;
+import main.java.Ui;
+import main.java.Event;
+import main.java.Task;
+
 import Exception.DukeException;
 import Exception.EventException;
 import Exception.WrongFormatException;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 import java.util.Arrays;
 
 public class AddEventCommand extends Command {
@@ -46,7 +53,7 @@ public class AddEventCommand extends Command {
             return true;
         } else if (o instanceof AddEventCommand) {
             AddEventCommand cur = (AddEventCommand) o;
-            if(Arrays.equals(this.command, cur.command)) {
+            if (Arrays.equals(this.command, cur.command)) {
                 return true;
             } else {
                 return false;

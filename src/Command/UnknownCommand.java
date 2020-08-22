@@ -1,6 +1,9 @@
 package Command;
 
-import main.java.*;
+import main.java.Storage;
+import main.java.TaskList;
+import main.java.Ui;
+
 import Exception.DukeException;
 import Exception.CommandException;
 
@@ -27,7 +30,7 @@ public class UnknownCommand extends Command {
             return true;
         } else if (o instanceof UnknownCommand) {
             UnknownCommand cur = (UnknownCommand) o;
-            if(Arrays.equals(this.command, cur.command)) {
+            if (Arrays.equals(this.command, cur.command)) {
                 return true;
             } else {
                 return false;

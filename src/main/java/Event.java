@@ -19,21 +19,21 @@ public class Event extends Task {
         String datePattern = "dd/MM/yyyy HH:mm";
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(datePattern);
         String date = this.time.format(dateFormatter);
-        return "[E]" +"[" + this.getStatusIcon()+"] " + this.description + "(at:" + date +")";
+        return "[E]" + "[" + this.getStatusIcon() + "] " + this.description + "(at:" + date + ")";
     }
 
     @Override
     public String writeToFile() {
         String result = "D # ";
         if(isDone) {
-            result+="1 # ";
+            result += "1 # ";
         } else {
-            result+="0 # ";
+            result += "0 # ";
         }
-        result+=description;
+        result += description;
         String datePattern = "dd/MM/yyyy HH:mm";
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(datePattern);
-        result+=" # "+time.format(dateFormatter);
+        result+=" # " + time.format(dateFormatter);
         return result;
 
     }
