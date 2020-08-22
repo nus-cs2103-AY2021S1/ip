@@ -60,4 +60,14 @@ public class TaskList {
     public boolean isEmpty() {
         return tasks.isEmpty();
     }
+
+    public TaskList filter(String keyword) {
+        ArrayList<Task> resultWithKeyword = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                resultWithKeyword.add(task);
+            }
+        }
+        return new TaskList(resultWithKeyword);
+    }
 }
