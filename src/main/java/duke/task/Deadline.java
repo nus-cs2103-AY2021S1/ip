@@ -48,6 +48,18 @@ public class Deadline extends Task {
         return happenAfterDate(LocalDate.now());
     }
 
+    @Override
+    public boolean happenBetween(LocalDate date1, LocalDate date2) throws InvalidCommandException {
+        super.happenBetween(date1, date2);
+        return !byTime.isAfter(date2) && byTime.isBefore(date1);
+    }
+
+    @Override
+    public boolean happenIn(int n) throws InvalidCommandException {
+        super.happenIn(n);
+        return happenBetween(LocalDate.now(), LocalDate.now().plusDays(n));
+    }
+
     public boolean isOverdue() {
         return !isDone && byTime.isBefore(LocalDate.now());
     }
