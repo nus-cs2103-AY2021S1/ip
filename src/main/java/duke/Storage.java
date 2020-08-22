@@ -26,7 +26,7 @@ public class Storage {
             }
             return res;
         } catch (FileNotFoundException e) {
-            throw new DukeIOException("PROJ_ROOT/data/duke.txt not found!");
+            throw new DukeIOException("PROJ_ROOT/" + f.getPath() + " not found!");
         }
 
     }
@@ -40,14 +40,17 @@ public class Storage {
             }
         }
 
-        File dataDir = new File("data/");
-        if (!dataDir.exists()) {
-            dataDir.mkdir(); // if intellij is slow in displaying data dir, right click -> reload from disk
+        if (f.getParent() != null) {
+            String parentDir = f.getParent();
+            File dataDir = new File(parentDir);
+            if (!dataDir.exists()) {
+                dataDir.mkdir(); // if intellij is slow in displaying data dir, right click -> reload from disk
+            }
         }
 
         String textToPrint = sb.toString();
         try {
-            FileWriter fw = new FileWriter("data/duke.txt");
+            FileWriter fw = new FileWriter(f);
             fw.write(textToPrint);
             fw.close();
         } catch (IOException e) {
