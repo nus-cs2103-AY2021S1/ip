@@ -1,6 +1,6 @@
 public class UnknownCommandException extends DukeException{
 
-    private static final int numberOfCommands = 7;
+    private static final int NUM_OF_COMMANDS = 7;
     private static final String MSG_1 = "I'm sorry, but I don't know what that means.\n";
     private static final String MSG_2 = "    Here are the available commands that I know:\n";
 
@@ -18,11 +18,11 @@ public class UnknownCommandException extends DukeException{
         StringBuilder str1 = new StringBuilder();
         str1.append(MSG_1);
         str1.append(MSG_2);
-        for (int i = 1; i < numberOfCommands; i++) {
+        for (int i = 1; i < NUM_OF_COMMANDS; i++) {
             String s = String.format("     %d. %s\n", i, listOfCommands[i - 1]);
             str1.append(s);
         }
-        str1.append(String.format("     %d. %s", numberOfCommands, listOfCommands[numberOfCommands - 1]));
+        str1.append(String.format("     %d. %s", NUM_OF_COMMANDS, listOfCommands[NUM_OF_COMMANDS - 1]));
         return str1.toString();
     }
 

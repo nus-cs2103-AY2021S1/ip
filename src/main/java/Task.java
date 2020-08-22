@@ -1,13 +1,13 @@
 public abstract class Task {
-    protected String description;
-    protected boolean isDone;
+    private final String description;
+    private boolean isDone;
 
     protected Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    protected String getStatusIcon() {
+    private String getStatusIcon() {
         return (isDone ? "[\u2713]" : "[\u2718]"); //return tick or X symbols
     }
 
