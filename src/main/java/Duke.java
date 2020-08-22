@@ -55,10 +55,16 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
 
-    public void list() {
+    public String list() {
+        StringBuilder output = new StringBuilder();
         for (int i = 1; i < this.tasks.size(); i++) {
-            System.out.printf("%d. %s%n", i, this.tasks.get(i));
+            output.append(String.format("%d. %s%n", i, this.tasks.get(i)));
         }
+        return output.toString();
+    }
+
+    public void printList() {
+        System.out.println(this.list());
     }
 
     public void bye() {
@@ -124,7 +130,7 @@ public class Duke {
         while (!Command.BYE.is(cmd)) {
             try {
                 if (Command.LIST.is(cmd)) {
-                    duke.list();
+                    duke.printList();
                 } else if (Command.DONE.is(cmd)) {
                     duke.done(cmd);
                 } else if (Command.TODO.is(cmd)) {
