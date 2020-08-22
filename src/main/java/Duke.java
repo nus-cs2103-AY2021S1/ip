@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Duke {
@@ -47,7 +48,7 @@ public class Duke {
                         String[] dInfo = deadlineInfo.split(" /by ");
                         Validator.info(command, dInfo.length, true);
                         String deadlineEvent = dInfo[0];
-                        String deadlineTime = dInfo[1];
+                        LocalDate deadlineTime = Validator.date(dInfo[1]);
                         Deadline newDeadline = new Deadline(deadlineEvent, deadlineTime);
                         output = printDesign(lst.addWork(newDeadline));
                         break;
@@ -57,7 +58,7 @@ public class Duke {
                         String[] eInfo = eventInfo.split(" /at ");
                         Validator.info(command, eInfo.length, true);
                         String eventEvent = eInfo[0];
-                        String EventTime = eInfo[1];
+                        LocalDate EventTime = Validator.date(eInfo[1]);
                         Event newEvent = new Event(eventEvent, EventTime);
                         output = printDesign(lst.addWork(newEvent));
                         break;
@@ -66,8 +67,7 @@ public class Duke {
                         output = printDesign(errorCommand);
                         break;
                 }
-            } catch (ArrayIndexOutOfBoundsException
-                    | IllegalArgumentException ex){
+            } catch (DukeException ex){
                 output = printDesign(ex.getMessage());
             }
 
