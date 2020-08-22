@@ -13,7 +13,8 @@ import java.util.Scanner;
 public class DataManager {
     final String filePath = "data/data.txt";
 
-    public void save(List<Task> tasks) throws DukeException {
+    public void save(TaskList taskList) throws DukeException {
+        List<Task> tasks = taskList.getAllTasks();
         try {
             File dataFile = new File(filePath);
             dataFile.createNewFile();
@@ -50,11 +51,11 @@ public class DataManager {
         }
     }
 
-    public List<Task> load() throws DukeException {
+    public TaskList load() throws DukeException {
         File dataFile = new File(filePath);
 
         if(!dataFile.exists()) {
-            return new ArrayList<>();
+            return new TaskList();
         }
 
         try {
@@ -84,7 +85,7 @@ public class DataManager {
                 }
 
             }
-            return taskList;
+            return new TaskList(taskList);
         } catch (FileNotFoundException exception) {
             throw new DukeException("File could not be loaded!");
         }

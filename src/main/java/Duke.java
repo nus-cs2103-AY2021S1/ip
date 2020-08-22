@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    static List<Task> tasks;
+    static TaskList taskList;
     static DataManager dataManager = new DataManager();
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -30,7 +30,7 @@ public class Duke {
         printInWindow("Hello, I'm a banana.\nWhat can I do for you?");
 
         try {
-            tasks = dataManager.load();
+            taskList = dataManager.load();
 
             while (sc.hasNextLine()) {
                 String input = sc.nextLine();
@@ -52,40 +52,38 @@ public class Duke {
         switch(command) {
         case TODO:
             ToDo todo = new ToDo(parameters);
-            tasks.add(todo);
-            dataManager.save(tasks);
+            taskList.addTask(todo);
+            dataManager.save(taskList);
             printInWindow("Added: " + todo.toString());
             break;
         case EVENT:
             String[] eventParameters = parameters.split(" /at ");
             Event event = new Event(eventParameters[0], LocalDate.parse(eventParameters[1]));
-            tasks.add(event);
-            dataManager.save(tasks);
+            taskList.addTask(event);
+            dataManager.save(taskList);
             printInWindow("Added: " + event.toString());
             break;
         case DEADLINE:
             String[] deadlineParameters = parameters.split(" /by ");
             Deadline deadline = new Deadline(deadlineParameters[0], LocalDate.parse(deadlineParameters[1]));
-            tasks.add(deadline);
-            dataManager.save(tasks);
+            taskList.addTask(deadline);
+            dataManager.save(taskList);
             printInWindow("Added: " + deadline.toString());
             break;
         case DONE:
             int doneNumber = Integer.parseInt(parameters);
-            Task task = tasks.get(doneNumber - 1);
-            task.markAsDone(true);
-            dataManager.save(tasks);
-            printInWindow("Nice! I've marked the this as done.\n" + task.toString());
+            taskList.updateDone(doneNumber);
+            dataManager.save(taskList);
+            printInWindow("Nice! I've marked the this as done.\n" + taskList.getTask(doneNumber).toString());
             break;
         case LIST:
-            printInWindow(formatTaskListToString(tasks));
+            printInWindow(taskList.toString());
             break;
         case DELETE:
             int deleteNumber = Integer.parseInt(parameters);
-            Task deleteTask = tasks.get(deleteNumber - 1);
-            tasks.remove(deleteNumber - 1);
-            dataManager.save(tasks);
-            printInWindow("I've removed this task:\n" + deleteTask.toString());
+            printInWindow("I've removed this task:\n" + taskList.getTask(deleteNumber).toString());
+            taskList.deleteTask(deleteNumber);
+            dataManager.save(taskList);
             break;
         case BYE:
             printInWindow("Bye. Hope to see you again soon!");
@@ -103,18 +101,5 @@ public class Duke {
         System.out.println(divider);
         System.out.println(text);
         System.out.println(divider);
-    }
-
-    public static String formatTaskListToString(List<Task> tasks) {
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < tasks.size(); i++) {
-            sb.append(i + 1)
-                    .append(". ")
-                    .append(tasks.get(i).toString());
-            if(i < tasks.size() - 1) {
-                sb.append("\n");
-            }
-        }
-        return sb.toString();
     }
 }
