@@ -7,6 +7,11 @@ public class Task {
         this.name = name;
     }
 
+    protected Task(String line, boolean isAutomated) {
+        this.isDone = line.charAt(4) == '\u2713';
+        this.name = line.substring(7);
+    }
+
     public String getName() {
         return this.name;
     }
