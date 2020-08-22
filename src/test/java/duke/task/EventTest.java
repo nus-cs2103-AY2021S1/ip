@@ -53,4 +53,20 @@ public class EventTest {
             fail();
         }
     }
+
+    @Test
+    public void happenBeforeTodayTest() {
+        try {
+            Event e1 = new Event("Project meeting", "2020-08-22 11:30");
+            assertEquals(false, e1.happenBeforeToday());
+
+            Event e2 = new Event("Project meeting", "2020-08-24 11:30");
+            assertEquals(false, e2.happenBeforeToday());
+
+            Event e3 = new Event("Project meeting", "2020-08-01 11:30");
+            assertEquals(true, e3.happenBeforeToday());
+        } catch (Exception e) {
+            fail();
+        }
+    }
 }
