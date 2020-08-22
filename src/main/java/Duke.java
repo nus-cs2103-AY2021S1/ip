@@ -3,7 +3,6 @@ import main.java.*;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
-<<<<<<<<< Temporary merge branch 1
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
@@ -12,7 +11,6 @@ import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
->>>>>>>>> Temporary merge branch 2
 
 public class Duke {
 
@@ -177,12 +175,14 @@ public class Duke {
                         break;
                     case "D":
                         String deadlineString = taskDetails.substring(0,taskDetails.indexOf("("));
-                        String taskDeadline = taskDetails.substring(taskDetails.indexOf("by:")+3,taskDetails.indexOf(")"));
+                        String taskDeadlineString = taskDetails.substring(taskDetails.indexOf("by:")+3,taskDetails.indexOf(")"));
+                        LocalDate taskDeadline = LocalDate.parse(taskDeadlineString);
                         arr.add(new Deadline(deadlineString,taskCompletion,taskDeadline));
                         break;
                     case "E":
                         String eventString = taskDetails.substring(0,taskDetails.indexOf("("));
-                        String eventDate = taskDetails.substring(taskDetails.indexOf("at:")+3,taskDetails.indexOf(")"));
+                        String eventDateString = taskDetails.substring(taskDetails.indexOf("at:")+3,taskDetails.indexOf(")"));
+                        LocalDate eventDate = LocalDate.parse(eventDateString);
                         arr.add(new Event(eventString,taskCompletion,eventDate));
 
 
