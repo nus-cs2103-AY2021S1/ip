@@ -1,13 +1,15 @@
+package duke;
+
 /**
  * Handles searching of tasks given a search phrase.
  */
 
 public class FindCommand extends Command {
-    /** Command details */
+    /** duke.Command details */
     private final String[] instructions;
 
     /**
-     * Constructor for FindCommand.
+     * Constructor for duke.FindCommand.
      * @param instructions Contains search phrase.
      */
     public FindCommand(String[] instructions) {
@@ -16,8 +18,8 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes the Find Command, displaying a list of tasks that have the search phrase.
-     * @param tasks TaskList to be searched.
+     * Executes the Find duke.Command, displaying a list of tasks that have the search phrase.
+     * @param tasks duke.TaskList to be searched.
      * @param ui For user interaction.
      * @param storage Unused.
      */

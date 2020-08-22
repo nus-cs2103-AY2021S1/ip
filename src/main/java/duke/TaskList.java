@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,14 +11,14 @@ public class TaskList {
     private List<Task> tasks;
 
     /**
-     * Constructor for TaskList.
+     * Constructor for duke.TaskList.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
     /**
-     * Constructor for TaskList.
+     * Constructor for duke.TaskList.
      * @param tasks Initial list of tasks.
      */
     public TaskList(List<Task> tasks) {
@@ -41,7 +43,7 @@ public class TaskList {
 
     /**
      * Adds an input task to the list of tasks.
-     * @param task Task to be added.
+     * @param task duke.Task to be added.
      */
     public void addTask(Task task) {
         tasks.add(task);

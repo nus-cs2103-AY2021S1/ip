@@ -1,13 +1,15 @@
+package duke;
+
 /**
  * Handles addition of todo-based Tasks.
  */
 
 public class AddTodoCommand extends Command {
-    /** Command details */
+    /** duke.Command details */
     private final String[] instructions;
 
     /**
-     * Constructor for AddTodoCommand.
+     * Constructor for duke.AddTodoCommand.
      * @param instructions Contains description.
      */
     public AddTodoCommand(String[] instructions) {
@@ -16,8 +18,8 @@ public class AddTodoCommand extends Command {
     }
 
     /**
-     * Executes the AddTodo Command, adding a new Task of type Todo with description.
-     * @param tasks TaskList to be added to.
+     * Executes the AddTodo duke.Command, adding a new duke.Task of type duke.Todo with description.
+     * @param tasks duke.TaskList to be added to.
      * @param ui For user interaction.
      * @param storage To store the added task.
      */

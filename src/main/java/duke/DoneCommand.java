@@ -1,14 +1,16 @@
+package duke;
+
 /**
  * Handles completion of Tasks.
  */
 
 public class DoneCommand extends Command {
-    /** Command details */
+    /** duke.Command details */
     private final String[] instructions;
 
     /**
-     * Constructor for DoneCommand.
-     * @param instructions Contains index of Task to be completed.
+     * Constructor for duke.DoneCommand.
+     * @param instructions Contains index of duke.Task to be completed.
      */
     public DoneCommand(String[] instructions) {
         super();
@@ -16,8 +18,8 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Executes the Done Command, completing the Task at the index provided by the instructions.
-     * @param tasks TaskList to be updated.
+     * Executes the Done duke.Command, completing the duke.Task at the index provided by the instructions.
+     * @param tasks duke.TaskList to be updated.
      * @param ui For user interaction.
      * @param storage To update the completed task.
      */

@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -5,11 +7,11 @@ import java.time.format.DateTimeParseException;
  * Handles addition of event-based Tasks.
  */
 public class AddEventCommand extends Command {
-    /** Command details */
+    /** duke.Command details */
     private final String[] instructions;
 
     /**
-     * Constructor for AddEventCommand.
+     * Constructor for duke.AddEventCommand.
      * @param instructions Contains description and deadline.
      */
     public AddEventCommand(String[] instructions) {
@@ -18,8 +20,8 @@ public class AddEventCommand extends Command {
     }
 
     /**
-     * Executes the AddEvent Command, adding a new Task of type Event with description and date.
-     * @param tasks TaskList to be added to.
+     * Executes the AddEvent duke.Command, adding a new duke.Task of type duke.Event with description and date.
+     * @param tasks duke.TaskList to be added to.
      * @param ui For user interaction.
      * @param storage To store the added task.
      */

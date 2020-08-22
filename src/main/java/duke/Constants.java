@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Contains Enums used in multiple locations.
  */

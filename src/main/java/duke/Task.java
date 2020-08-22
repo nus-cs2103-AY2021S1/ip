@@ -1,5 +1,7 @@
+package duke;
+
 /**
- * Handles maintenance and display of Task objects.
+ * Handles maintenance and display of duke.Task objects.
  */
 
 public class Task {
@@ -16,7 +18,7 @@ public class Task {
 
     /**
      * Constructor for Tasks.
-     * @param name Description of Task.
+     * @param name Description of duke.Task.
      */
     public Task(String name) {
         this.name = name;
@@ -25,8 +27,8 @@ public class Task {
 
     /**
      * Constructor for Tasks.
-     * @param name Description of Task.
-     * @param completed Completion state of Task.
+     * @param name Description of duke.Task.
+     * @param completed Completion state of duke.Task.
      */
     public Task(String name, boolean completed) {
         this.name = name;
@@ -34,14 +36,14 @@ public class Task {
     }
 
     /**
-     * Marks Task as complete.
+     * Marks duke.Task as complete.
      */
     public void complete() {
         this.isCompleted = true;
     }
 
     /**
-     * Gets appropriate status icon based on completion state of the Task.
+     * Gets appropriate status icon based on completion state of the duke.Task.
      * @return Status icon.
      */
     public String getStatusIcon() {
@@ -49,16 +51,16 @@ public class Task {
     }
 
     /**
-     * Represents Task in format to be saved.
-     * @return Saved representation of Task object.
+     * Represents duke.Task in format to be saved.
+     * @return Saved representation of duke.Task object.
      */
     public String format() {
         return this.name + SAVE_DELIMITER + this.isCompleted;
     }
 
     /**
-     * Represents Task in String form.
-     * @return String representation of Task object.
+     * Represents duke.Task in String form.
+     * @return String representation of duke.Task object.
      */
     @Override
     public String toString() {

@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 /**
@@ -8,7 +10,7 @@ public class Ui {
     private Scanner sc;
 
     /**
-     * Constructor for Ui.
+     * Constructor for duke.Ui.
      */
     public Ui() {
         this.sc = new Scanner(System.in);
@@ -58,7 +60,7 @@ public class Ui {
     }
 
     /**
-     * Displays error when user attempts to create a Dated Task without a date.
+     * Displays error when user attempts to create a Dated duke.Task without a date.
      */
     public void conditionError(Constants.TaskTypes type) {
         System.out.println(">> Oh no!!! A " + type.toString().toLowerCase() + " must have an associated date!");

@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -5,11 +7,11 @@ import java.time.format.DateTimeParseException;
  * Handles addition of deadline-based Tasks.
  */
 public class AddDeadlineCommand extends Command {
-    /** Command details */
+    /** duke.Command details */
     private final String[] instructions;
 
     /**
-     * Constructor for AddDeadlineCommand.
+     * Constructor for duke.AddDeadlineCommand.
      * @param instructions Contains description and deadline.
      */
     public AddDeadlineCommand(String[] instructions) {
@@ -18,8 +20,8 @@ public class AddDeadlineCommand extends Command {
     }
 
     /**
-     * Executes the AddDeadline Command, adding a new Task of type Deadline with description and date.
-     * @param tasks TaskList to be added to.
+     * Executes the AddDeadline duke.Command, adding a new duke.Task of type duke.Deadline with description and date.
+     * @param tasks duke.TaskList to be added to.
      * @param ui For user interaction.
      * @param storage To store the added task.
      */

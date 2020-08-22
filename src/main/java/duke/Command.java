@@ -1,17 +1,19 @@
+package duke;
+
 /**
- * Provides contract for Command subclasses.
+ * Provides contract for duke.Command subclasses.
  */
 
 public abstract class Command {
     /**
-     * Constructor for Command.
+     * Constructor for duke.Command.
      */
     public Command() {
     }
 
     /**
-     * Contract for Command execution.
-     * @param tasks TaskList to be added to.
+     * Contract for duke.Command execution.
+     * @param tasks duke.TaskList to be added to.
      * @param ui For user interaction.
      * @param storage To store the added task.
      */

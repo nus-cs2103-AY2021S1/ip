@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,13 +19,13 @@ public class Storage {
     /** List of tasks to be saved */
     private List<Task> tasks;
 
-    /** Short form of Task types. */
+    /** Short form of duke.Task types. */
     private enum TaskSymbols {
         SYMBOL_T, SYMBOL_E, SYMBOL_D
     }
 
     /**
-     * Constructor for Storage.
+     * Constructor for duke.Storage.
      * @param filepath Contains path of local storage file.
      */
     public Storage(String filepath) {

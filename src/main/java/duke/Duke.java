@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Controls application.
  */
@@ -7,11 +9,11 @@ public class Duke {
     private final Storage storage;
     /** List of tasks */
     private TaskList tasks;
-    /** Ui to interact with user */
+    /** duke.Ui to interact with user */
     private final Ui ui;
 
     /**
-     * Constructor for DeleteCommand.
+     * Constructor for duke.DeleteCommand.
      * @param filepath Contains filepath of local data storage.
      */
     public Duke(String filepath) {
@@ -36,7 +38,7 @@ public class Duke {
     }
 
     /**
-     * Runs event loop to listen for user input, until the user invokes a ByeCommand.
+     * Runs event loop to listen for user input, until the user invokes a duke.ByeCommand.
      */
     private void run() {
         while (true) {

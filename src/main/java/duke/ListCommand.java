@@ -1,18 +1,20 @@
+package duke;
+
 /**
- * Handles display of Task list.
+ * Handles display of duke.Task list.
  */
 
 public class ListCommand extends Command {
     /**
-     * Constructor for ListCommand.
+     * Constructor for duke.ListCommand.
      */
     public ListCommand() {
         super();
     }
 
     /**
-     * Executes the List Command, displaying a list of all Tasks the user has.
-     * @param tasks TaskList to be referenced.
+     * Executes the List duke.Command, displaying a list of all Tasks the user has.
+     * @param tasks duke.TaskList to be referenced.
      * @param ui For user interaction.
      * @param storage Unused.
      */

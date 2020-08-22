@@ -1,28 +1,30 @@
+package duke;
+
 /**
  * Handles todo-based Tasks.
  */
 
 public class Todo extends Task {
     /**
-     * Constructor for Todo-type Tasks.
-     * @param name Description of Task.
+     * Constructor for duke.Todo-type Tasks.
+     * @param name Description of duke.Task.
      */
     public Todo(String name) {
         super(name);
     }
 
     /**
-     * Constructor for Todo-type Tasks.
-     * @param name Description of Task.
-     * @param completed Completion state of Task.
+     * Constructor for duke.Todo-type Tasks.
+     * @param name Description of duke.Task.
+     * @param completed Completion state of duke.Task.
      */
     public Todo(String name, boolean completed) {
         super(name, completed);
     }
 
     /**
-     * Represents Todo in format to be saved.
-     * @return Saved representation of Todo object.
+     * Represents duke.Todo in format to be saved.
+     * @return Saved representation of duke.Todo object.
      */
     @Override
     public String format() {
@@ -30,8 +32,8 @@ public class Todo extends Task {
     }
 
     /**
-     * Represents Todo in String form.
-     * @return String representation of Todo object.
+     * Represents duke.Todo in String form.
+     * @return String representation of duke.Todo object.
      */
     @Override
     public String toString() {

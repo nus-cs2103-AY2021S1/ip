@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -11,8 +13,8 @@ public class DatedTask extends Task {
 
     /**
      * Constructor for Dated Tasks.
-     * @param name Description of Task.
-     * @param date Date of Task.
+     * @param name Description of duke.Task.
+     * @param date Date of duke.Task.
      */
     public DatedTask(String name, LocalDate date) {
         super(name);
@@ -21,9 +23,9 @@ public class DatedTask extends Task {
 
     /**
      * Constructor for Dated Tasks.
-     * @param name Description of Task.
-     * @param completed State of completion of Task.
-     * @param date Date of Task.
+     * @param name Description of duke.Task.
+     * @param completed State of completion of duke.Task.
+     * @param date Date of duke.Task.
      */
     public DatedTask(String name, boolean completed, LocalDate date) {
         super(name, completed);
@@ -31,8 +33,8 @@ public class DatedTask extends Task {
     }
 
     /**
-     * Represents Task in String form.
-     * @return String representation of Task object.
+     * Represents duke.Task in String form.
+     * @return String representation of duke.Task object.
      */
     @Override
     public String format() {

@@ -1,14 +1,16 @@
+package duke;
+
 /**
  * Handles deletion of Tasks.
  */
 
 public class DeleteCommand extends Command {
-    /** Command details */
+    /** duke.Command details */
     private final String[] instructions;
 
     /**
-     * Constructor for DeleteCommand.
-     * @param instructions Contains index of Task to be deleted.
+     * Constructor for duke.DeleteCommand.
+     * @param instructions Contains index of duke.Task to be deleted.
      */
     public DeleteCommand(String[] instructions) {
         super();
@@ -16,8 +18,8 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the Delete Command, deleting the Task at the index provided by the instructions.
-     * @param tasks TaskList to be updated.
+     * Executes the Delete duke.Command, deleting the duke.Task at the index provided by the instructions.
+     * @param tasks duke.TaskList to be updated.
      * @param ui For user interaction.
      * @param storage To remove the deleted task.
      */
