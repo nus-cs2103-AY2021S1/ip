@@ -13,8 +13,8 @@ Here are the list of commands available:
 1. list
 2. bye
 3. todo 'task name' (e.g. todo task 1)
-4. deadline 'task name' /by 'any date format' (e.g. deadline project /by Friday 2pm)
-5. event 'event name' /at 'any date format' (e.g. event project /at Friday 2pm)
+4. deadline 'task name' /by 'any date format' (e.g. deadline project /by YYYY-MM-DD HHMM or YYYY-MM-DD)
+5. event 'event name' /at 'any date format' (e.g. event project /at YYYY-MM-DD HHMM or YYYY-MM-DD)
 6. delete ___ (e.g. delete 1)  *Note that it should be a value more than 0*
 7. done ___ (e.g. done 1)  *Note that it should be a value more than 0*
 
@@ -45,17 +45,15 @@ _______________________________________________
 _______________________________________________
 
 _______________________________________________
- ☹ OOPS! A proper deadline format would be like, e.g. deadline 'task name' /by 'any date format'
+ ☹ OOPS! A proper deadline format would be like, e.g. deadline 'task name' /by 'YYYY-MM-DD HHMM or YYYY-MM-DD'
 _______________________________________________
 
 _______________________________________________
-Got it. I've added this task:
-[D][✘] finish this project (by: today 2:00am)
-Now you have 3 tasks in the list.
+ ☹ OOPS! A proper date format would be YYYY-MM-DD HHMM (e.g. 2019-10-15 1600) or YYYY-MM-DD (e.g. 2019-10-15)
 _______________________________________________
 
 _______________________________________________
- ☹ OOPS! A proper deadline format would be like, e.g. deadline 'task name' /by 'any date format'
+ ☹ OOPS! A proper deadline format would be like, e.g. deadline 'task name' /by 'YYYY-MM-DD HHMM or YYYY-MM-DD'
 _______________________________________________
 
 _______________________________________________
@@ -72,9 +70,7 @@ Nice! I've marked this task as done:
 _______________________________________________
 
 _______________________________________________
-Got it. I've added this task:
-[D][✘] finish this project (by: today 4:00am)
-Now you have 4 tasks in the list.
+ ☹ OOPS! A proper date format would be YYYY-MM-DD HHMM (e.g. 2019-10-15 1600) or YYYY-MM-DD (e.g. 2019-10-15)
 _______________________________________________
 
 _______________________________________________
@@ -82,48 +78,37 @@ _______________________________________________
 _______________________________________________
 
 _______________________________________________
- ☹ OOPS! A proper event format would be like, e.g. event 'event name' /at 'any date format'
+ ☹ OOPS! A proper event format would be like, e.g. event 'event name' /at 'YYYY-MM-DD HHMM or YYYY-MM-DD'
 _______________________________________________
 
 _______________________________________________
-Got it. I've added this task:
-[E][✘] project meeting (at: Mon 2-4pm)
-Now you have 5 tasks in the list.
+ ☹ OOPS! A proper date format would be YYYY-MM-DD HHMM (e.g. 2019-10-15 1600) or YYYY-MM-DD (e.g. 2019-10-15)
 _______________________________________________
 
 _______________________________________________
-Got it. I've added this task:
-[E][✘] project meeting (at: Tues 2-4pm)
-Now you have 6 tasks in the list.
+ ☹ OOPS! A proper date format would be YYYY-MM-DD HHMM (e.g. 2019-10-15 1600) or YYYY-MM-DD (e.g. 2019-10-15)
 _______________________________________________
 
 _______________________________________________
- ☹ OOPS! A proper event format would be like, e.g. event 'event name' /at 'any date format'
+ ☹ OOPS! A proper event format would be like, e.g. event 'event name' /at 'YYYY-MM-DD HHMM or YYYY-MM-DD'
 _______________________________________________
 
 _______________________________________________
 Here are the tasks in your list:
 1. [T][✓] task 1
 2. [T][✘] task 2
-3. [D][✘] finish this project (by: today 2:00am)
-4. [D][✘] finish this project (by: today 4:00am)
-5. [E][✘] project meeting (at: Mon 2-4pm)
-6. [E][✘] project meeting (at: Tues 2-4pm)
 _______________________________________________
 
 _______________________________________________
-Noted. I've removed this task:
-[E][✘] project meeting (at: Mon 2-4pm)
-Now you have 5 tasks in the list.
+Invalid input for delete
 _______________________________________________
 
 _______________________________________________
-Nice! I've marked this task as done:
-[D][✓] finish this project (by: today 4:00am)
+Invalid input for done
 _______________________________________________
 
 _______________________________________________
-This task has already been marked!
+Invalid input for done
 _______________________________________________
 
 _______________________________________________
@@ -132,9 +117,7 @@ Nice! I've marked this task as done:
 _______________________________________________
 
 _______________________________________________
-Noted. I've removed this task:
-[D][✘] finish this project (by: today 2:00am)
-Now you have 4 tasks in the list.
+Invalid input for delete
 _______________________________________________
 
 _______________________________________________
@@ -151,8 +134,8 @@ Here are the list of commands available:
 1. list
 2. bye
 3. todo 'task name' (e.g. todo task 1)
-4. deadline 'task name' /by 'any date format' (e.g. deadline project /by Friday 2pm)
-5. event 'event name' /at 'any date format' (e.g. event project /at Friday 2pm)
+4. deadline 'task name' /by 'any date format' (e.g. deadline project /by YYYY-MM-DD HHMM or YYYY-MM-DD)
+5. event 'event name' /at 'any date format' (e.g. event project /at YYYY-MM-DD HHMM or YYYY-MM-DD)
 6. delete ___ (e.g. delete 1)  *Note that it should be a value more than 0*
 7. done ___ (e.g. done 1)  *Note that it should be a value more than 0*
 
