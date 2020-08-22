@@ -3,7 +3,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-public class InputParser {
+public class Parser {
 
     public static boolean isDone(String input) {
         String[] inputArr = input.split(" ");
