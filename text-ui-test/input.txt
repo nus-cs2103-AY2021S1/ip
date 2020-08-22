@@ -1,4 +1,3 @@
-list
 todo readbook
 todo
 deadline return book /by June 6th
@@ -10,7 +9,6 @@ done 8
 done3
 done
 todo borrow book
-list
 deadline
 deadline return book /by Sunday
 deadline      return home /by today

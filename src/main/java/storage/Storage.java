@@ -1,16 +1,25 @@
+package storage;
+
+import exception.DukeException;
+import tasks.*;
+
 import java.io.File;
 import java.io.FileWriter;
-import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ListStorage {
-    static final String dirPath = "..\\data";
-    static final String filePath = "../data/duke.txt";
+public class Storage {
+    String dirPath;
+    String filePath;
 
-    public static List<Task> readFromFile() {
+    public Storage(String filePath, String dirPath) {
+        this.dirPath = dirPath;
+        this.filePath = filePath;
+    }
+
+    public List<Task> readFromFile() throws DukeException {
         List<Task> tasks = new ArrayList<>();
 
         try {
@@ -39,7 +48,6 @@ public class ListStorage {
                     if (num != 4) {
                         throw new DukeException("The data format of the file is incorrect\n");
                     }
-                    System.out.println(num);
                     LocalDateTime dtDeadline = LocalDateTime.parse(instructions[3].strip());
                     temp = new Deadlines(instructions[2].strip(), dtDeadline);
                     if (instructions[1].strip().equals("1")) {
@@ -58,19 +66,19 @@ public class ListStorage {
                     tasks.add(temp);
                 }
             }
-        } catch (
-                Exception e) {
-            System.out.println(e.toString());
+        } catch (Exception e) {
+            throw new DukeException(e.getMessage());
         }
+
         return tasks;
 
     }
 
-    public static void storeToFile(List<Task> tasks) {
+    public void storeToFile(TaskList tasks) throws DukeException {
         try {
             String breaker = " | ";
             FileWriter fileWriter = new FileWriter(filePath);
-            for (int i = 0; i < tasks.size(); i++) {
+            for (int i = 0; i < tasks.getSize(); i++) {
                 Task temp = tasks.get(i);
                 String state = "0";
                 if (temp instanceof ToDo) {
@@ -96,7 +104,7 @@ public class ListStorage {
             }
             fileWriter.close();
         } catch (Exception e) {
-            System.out.println(e.toString());
+            throw new DukeException(e.getMessage());
         }
     }
 

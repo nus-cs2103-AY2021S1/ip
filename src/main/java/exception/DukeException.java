@@ -1,3 +1,5 @@
+package exception;
+
 public class DukeException extends Exception {
     String line = "___________________________________________________________________________________";
     String smallSpace = "    ";
