@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +21,33 @@ public class Duke {
       fw.close();
     } catch (IOException e) {
       System.out.println("Something went wrong" + e.getMessage());
+    }
+  }
+  
+  public static void loadData(List<Task> list) {
+    try {
+      File file = new File("data/duke.txt");
+      Scanner sc = new Scanner(file);
+      
+      while (sc.hasNext()) {
+        String[] data = sc.nextLine().split("/");
+        String taskType = data[0];
+        boolean status = data[1].equals("1");
+        String description = data[2];
+        String additional;
+        
+        if (taskType.equals("t")) {
+          list.add(new ToDo(description, status));
+        } else if (taskType.equals("d")) {
+          additional = data[3];
+          list.add(new Deadline(description, additional, status));
+        } else if (taskType.equals("e")) {
+          additional = data[3];
+          list.add(new Event(description, additional, status));
+        }
+      }
+    } catch (FileNotFoundException e) {
+      System.out.println("File not exists" + e.getMessage());
     }
   }
   
@@ -182,6 +211,7 @@ public class Duke {
     System.out.println("\t" + divider);
     System.out.println("\t" + "Hello! I'm Duke\n\tWhat can I do for you?");
     System.out.println("\t" + divider);
+    loadData(list);
 
     while (!input.equals("bye")) {
       input = sc.nextLine();
