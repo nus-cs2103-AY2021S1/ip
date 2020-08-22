@@ -9,63 +9,112 @@ What can I do for you?
 ---------------------------------------------------------
 OOPS!!! I'm sorry, your list is empty :<
 ---------------------------------------------------------
+OOPS!!! I'm sorry, your list is empty :<
+---------------------------------------------------------
 Got it. I've added this task: 
-[T][✗] watch CS2105 Lecture 2
+[T][✗] cs2105 lecture
 Now you have 1 tasks in the list.
 ---------------------------------------------------------
 Got it. I've added this task: 
-[E][✗] zoom meeting (at: Wednesday 10pm)
+[E][✗] cs2030 TA meeting (at: 24 Aug 2020 04.00pm)
 Now you have 2 tasks in the list.
 ---------------------------------------------------------
 Here are the tasks in your list:
-1.[T][✗] watch CS2105 Lecture 2
-2.[E][✗] zoom meeting (at: Wednesday 10pm)
----------------------------------------------------------
-Nice! I've marked this task as done:
-[T][✓] watch CS2105 Lecture 2
+1.[T][✗] cs2105 lecture
+2.[E][✗] cs2030 TA meeting (at: 24 Aug 2020 04.00pm)
 ---------------------------------------------------------
 Got it. I've added this task: 
-[T][✗] buy groceries
+[D][✗] cs2030 (by: 27 Aug 2020 09.00am)
 Now you have 3 tasks in the list.
 ---------------------------------------------------------
+Here are the tasks in your list:
+1.[T][✗] cs2105 lecture
+2.[E][✗] cs2030 TA meeting (at: 24 Aug 2020 04.00pm)
+3.[D][✗] cs2030 (by: 27 Aug 2020 09.00am)
+---------------------------------------------------------
+Here are your tasks for 27 Aug 2020:
+1.[D][✗] cs2030 (by: 27 Aug 2020 09.00am)
+---------------------------------------------------------
+Invalid date-time format! (/at...)
+---------------------------------------------------------
 Got it. I've added this task: 
-[D][✗] CS2103 iP Week 2 (by: Thursday 23.59pm)
+[E][✗] test (at: 27 Aug 2020 07.00am)
 Now you have 4 tasks in the list.
 ---------------------------------------------------------
+Got it. I've added this task: 
+[E][✗] test (at: 27 Aug 2020 07.00am)
+Now you have 5 tasks in the list.
+---------------------------------------------------------
+Got it. I've added this task: 
+[E][✗] test (at: 27 Aug 2020 07.00am)
+Now you have 6 tasks in the list.
+---------------------------------------------------------
+Got it. I've added this task: 
+[E][✗] test (at: 27 Aug 2020 07.00am)
+Now you have 7 tasks in the list.
+---------------------------------------------------------
+Got it. I've added this task: 
+[E][✗] test (at: 07 Aug 2020 07.00am)
+Now you have 8 tasks in the list.
+---------------------------------------------------------
+Got it. I've added this task: 
+[E][✗] test (at: 07 Aug 2020 07.00am)
+Now you have 9 tasks in the list.
+---------------------------------------------------------
 Here are the tasks in your list:
-1.[T][✓] watch CS2105 Lecture 2
-2.[E][✗] zoom meeting (at: Wednesday 10pm)
-3.[T][✗] buy groceries
-4.[D][✗] CS2103 iP Week 2 (by: Thursday 23.59pm)
+1.[T][✗] cs2105 lecture
+2.[E][✗] cs2030 TA meeting (at: 24 Aug 2020 04.00pm)
+3.[D][✗] cs2030 (by: 27 Aug 2020 09.00am)
+4.[E][✗] test (at: 27 Aug 2020 07.00am)
+5.[E][✗] test (at: 27 Aug 2020 07.00am)
+6.[E][✗] test (at: 27 Aug 2020 07.00am)
+7.[E][✗] test (at: 27 Aug 2020 07.00am)
+8.[E][✗] test (at: 07 Aug 2020 07.00am)
+9.[E][✗] test (at: 07 Aug 2020 07.00am)
 ---------------------------------------------------------
-Nice! I've marked this task as done:
-[E][✓] zoom meeting (at: Wednesday 10pm)
+Here are your tasks for 07 Aug 2020:
+1.[E][✗] test (at: 07 Aug 2020 07.00am)
+2.[E][✗] test (at: 07 Aug 2020 07.00am)
 ---------------------------------------------------------
-OOPS!!! I'm sorry, the task number is out of range :<
----------------------------------------------------------
-Nice! I've marked this task as done:
-[T][✓] buy groceries
----------------------------------------------------------
-OOPS!!! I'm sorry, when is the deadline? (/by...)
+Here are your tasks for 27 Aug 2020:
+1.[D][✗] cs2030 (by: 27 Aug 2020 09.00am)
+2.[E][✗] test (at: 27 Aug 2020 07.00am)
+3.[E][✗] test (at: 27 Aug 2020 07.00am)
+4.[E][✗] test (at: 27 Aug 2020 07.00am)
+5.[E][✗] test (at: 27 Aug 2020 07.00am)
 ---------------------------------------------------------
 Here are the tasks in your list:
-1.[T][✓] watch CS2105 Lecture 2
-2.[E][✓] zoom meeting (at: Wednesday 10pm)
-3.[T][✓] buy groceries
-4.[D][✗] CS2103 iP Week 2 (by: Thursday 23.59pm)
----------------------------------------------------------
-OOPS!!! I'm sorry, the description cannot be empty :<
----------------------------------------------------------
-OOPS!!! I'm sorry, when is the event? (/at...)
----------------------------------------------------------
-OOPS!!! I'm sorry, I don't know what that means :<
----------------------------------------------------------
-OOPS!!! I'm sorry, which task number?
+1.[T][✗] cs2105 lecture
+2.[E][✗] cs2030 TA meeting (at: 24 Aug 2020 04.00pm)
+3.[D][✗] cs2030 (by: 27 Aug 2020 09.00am)
+4.[E][✗] test (at: 27 Aug 2020 07.00am)
+5.[E][✗] test (at: 27 Aug 2020 07.00am)
+6.[E][✗] test (at: 27 Aug 2020 07.00am)
+7.[E][✗] test (at: 27 Aug 2020 07.00am)
+8.[E][✗] test (at: 07 Aug 2020 07.00am)
+9.[E][✗] test (at: 07 Aug 2020 07.00am)
 ---------------------------------------------------------
 Noted. I've removed this task: 
-[D][✗] CS2103 iP Week 2 (by: Thursday 23.59pm)
-Now you have 3 tasks in the list.
+[E][✗] test (at: 07 Aug 2020 07.00am)
+Now you have 8 tasks in the list.
 ---------------------------------------------------------
-OOPS!!! I'm sorry, which task number?
+Here are the tasks in your list:
+1.[T][✗] cs2105 lecture
+2.[E][✗] cs2030 TA meeting (at: 24 Aug 2020 04.00pm)
+3.[D][✗] cs2030 (by: 27 Aug 2020 09.00am)
+4.[E][✗] test (at: 27 Aug 2020 07.00am)
+5.[E][✗] test (at: 27 Aug 2020 07.00am)
+6.[E][✗] test (at: 27 Aug 2020 07.00am)
+7.[E][✗] test (at: 27 Aug 2020 07.00am)
+8.[E][✗] test (at: 07 Aug 2020 07.00am)
+---------------------------------------------------------
+Here are your tasks for 07 Aug 2020:
+1.[E][✗] test (at: 07 Aug 2020 07.00am)
+---------------------------------------------------------
+Here are your tasks for 07 Aug 2020:
+1.[E][✗] test (at: 07 Aug 2020 07.00am)
+---------------------------------------------------------
+Here are your tasks for 07 Aug 2020:
+1.[E][✗] test (at: 07 Aug 2020 07.00am)
 ---------------------------------------------------------
 Bye. Hope to see you again!
