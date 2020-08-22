@@ -33,25 +33,25 @@ public class Bot {
             System.out.println(Bot.demarcation);
             // Dispatch respective handlers depending on command
             switch (commandType) {
-                case ("bye"):
-                    System.out.println(indentWord(farewellMsg));
-                    return;
-                case ("list"):
-                    printTasks();
-                    break;
-                case ("delete"):
-                    deleteTask(commandArr[1]);
-                    break;
-                case ("done"):
-                    markComplete(commandArr[1]);
-                    break;
-                default:
-                    try {
-                        addTask(command);
-                    } catch (DukeException e) {
-                        System.out.println(indentWord(e.getMessage()));
-                    }
-                    break;
+            case ("bye"):
+                System.out.println(indentWord(farewellMsg));
+                return;
+            case ("list"):
+                printTasks();
+                break;
+            case ("delete"):
+                deleteTask(commandArr[1]);
+                break;
+            case ("done"):
+                markComplete(commandArr[1]);
+                break;
+            default:
+                try {
+                    addTask(command);
+                } catch (DukeException e) {
+                    System.out.println(indentWord(e.getMessage()));
+                }
+                break;
             }
             System.out.println(Bot.demarcation);
         }
@@ -73,7 +73,7 @@ public class Bot {
         int counter = 1;
         System.out.println("Here are the tasks in your list:");
         for (Task todo : tasks) {
-            System.out.print(indentWord(Integer.toString(counter) + ". "));
+            System.out.print(indentWord(counter + ". "));
             System.out.println(todo);
             counter++;
         }
@@ -82,17 +82,17 @@ public class Bot {
     private void printTask(Task task, Action action) {
         String message = "";
         switch (action) {
-            case ADD:
-                message = "Got it. I've added this task:";
-                break;
-            case DONE:
-                message = "Nice! I've marked this task as done:";
-                break;
-            case DELETE:
-                message = "Noted. I've removed this task:";
-                break;
-            default:
-                break;
+        case ADD:
+            message = "Got it. I've added this task:";
+            break;
+        case DONE:
+            message = "Nice! I've marked this task as done:";
+            break;
+        case DELETE:
+            message = "Noted. I've removed this task:";
+            break;
+        default:
+            break;
         }
         System.out.println(indentWord(message));
         System.out.println(indentWord(task.toString()));
@@ -121,23 +121,23 @@ public class Bot {
         Task task;
 
         switch (taskType) {
-            case ("todo"):
-                // Only has the word todo
-                if (taskArr.length == 1) throw new EmptyTodoException();
-                task = new Todo(command.substring(5));
-                break;
-            case ("deadline"):
-                String deadlineContent = command.substring(9);
-                String[] deadlineArr = deadlineContent.split("/");
-                task = new Deadline(deadlineArr[0], deadlineArr[1]);
-                break;
-            case("event"):
-                String eventContent = command.substring(6);
-                String[] eventArr = eventContent.split("/");
-                task = new Event(eventArr[0], eventArr[1]);
-                break;
-            default:
-                throw new DukeException();
+        case ("todo"):
+            // Only has the word todo
+            if (taskArr.length == 1) throw new EmptyTodoException();
+            task = new Todo(command.substring(5));
+            break;
+        case ("deadline"):
+            String deadlineContent = command.substring(9);
+            String[] deadlineArr = deadlineContent.split("/");
+            task = new Deadline(deadlineArr[0], deadlineArr[1]);
+            break;
+        case("event"):
+            String eventContent = command.substring(6);
+            String[] eventArr = eventContent.split("/");
+            task = new Event(eventArr[0], eventArr[1]);
+            break;
+        default:
+            throw new DukeException();
         }
 
 
