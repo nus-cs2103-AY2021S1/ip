@@ -1,3 +1,10 @@
+package duke;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -94,14 +101,14 @@ public class Duke {
             } else if (input.startsWith("done")) {
                 try {
                     int taskIndex = Integer.parseInt(input.split(" ")[1]);
-                    Task markedTask = taskList.get(taskIndex - 1); // shown list is base 1, implemented list is base 0
+                    duke.tasks.Task markedTask = taskList.get(taskIndex - 1); // shown list is base 1, implemented list is base 0
                     markedTask.markDone();
                     System.out.println("Right. This task is now marked as done:" + markedTask);
                 } catch (IndexOutOfBoundsException | NumberFormatException e) {
                     System.out.println("Hmm? Please mention \"done\" followed by the number of the task we're marking as done.");
                 }
             } else if (input.startsWith("todo")) {
-                Task newTask = new Task(input);
+                duke.tasks.Task newTask = new duke.tasks.Task(input);
                 taskList.add(newTask);
                 System.out.println("Fine. I added the following to the list: " + newTask);
             }*/

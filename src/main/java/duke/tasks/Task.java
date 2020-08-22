@@ -1,8 +1,12 @@
+package duke.tasks;
+
+import duke.DukeException;
+
 public class Task {
     private boolean isDone;
     private String taskName;
 
-    Task(String name) throws DukeException{
+    Task(String name) throws DukeException {
 
         if (name.trim().equals("")) {
             throw new DukeException("Charming, but we can't have nothing as a task.");

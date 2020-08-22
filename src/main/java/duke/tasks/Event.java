@@ -1,15 +1,19 @@
+package duke.tasks;
+
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task {
-    LocalDate deadlineTime;
+public class Event extends Task {
+    LocalDate eventTime;
 
-    Deadline(String taskName, String deadlineTime) throws DukeException {
-        super (taskName);
+    public Event(String taskName, String eventTime) throws DukeException {
+        super(taskName);
         // ISO_LOCAL_DATE format, no conversion needed (yyyy-mm-dd)
         try {
-            this.deadlineTime = LocalDate.parse(deadlineTime.trim());
+            this.eventTime = LocalDate.parse(eventTime.trim());
         } catch (DateTimeParseException e) {
             throw new DukeException("Please write down our dates in the standard format, yyyy-mm-dd.");
         }
@@ -17,6 +21,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[DEADLINE] " + super.toString() + " | by: " + deadlineTime.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy"));
+        return "[EVENT] " + super.toString() + " | at: " + eventTime.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy"));
     }
 }
