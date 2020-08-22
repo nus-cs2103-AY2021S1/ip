@@ -29,8 +29,11 @@
 	 OOPS!!! The date/time of a deadline cannot be empty.
 	____________________________________________________________
 	____________________________________________________________
+	 OOPS!!! Please use the format "dd/MM/yyyy HH:mm" to indicate the date and time.
+	____________________________________________________________
+	____________________________________________________________
 	 Got it. I've added this task:
-	   [D][✘] read book (by: August 24th)
+	   [D][✘] read book (by: 24 August 2020, 12:30 PM)
 	 Now you have 2 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
@@ -40,8 +43,11 @@
 	 OOPS!!! The duration of an event cannot be empty.
 	____________________________________________________________
 	____________________________________________________________
+	 OOPS!!! Please use the format "dd/MM/yyyy HH:mm" to indicate the date and time.
+	____________________________________________________________
+	____________________________________________________________
 	 Got it. I've added this task:
-	   [E][✘] lesson (at: Mon 6-8pm)
+	   [E][✘] lesson (at: 24 August 2020, 03:00 PM)
 	 Now you have 3 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
@@ -70,8 +76,8 @@
 	____________________________________________________________
 	 Here are the tasks in your list:
 	 1.[T][✓] borrow book
-	 2.[D][✘] read book (by: August 24th)
-	 3.[E][✘] lesson (at: Mon 6-8pm)
+	 2.[D][✘] read book (by: 24 August 2020, 12:30 PM)
+	 3.[E][✘] lesson (at: 24 August 2020, 03:00 PM)
 	 4.[T][✘] ip
 	 5.[T][✘] play basketball
 	____________________________________________________________
@@ -80,24 +86,24 @@
 	____________________________________________________________
 	____________________________________________________________
 	 Nice! I've marked this task as done:
-	   [E][✓] lesson (at: Mon 6-8pm)
+	   [E][✓] lesson (at: 24 August 2020, 03:00 PM)
 	____________________________________________________________
 	____________________________________________________________
 	 Here are the tasks in your list:
 	 1.[T][✓] borrow book
-	 2.[D][✘] read book (by: August 24th)
-	 3.[E][✓] lesson (at: Mon 6-8pm)
+	 2.[D][✘] read book (by: 24 August 2020, 12:30 PM)
+	 3.[E][✓] lesson (at: 24 August 2020, 03:00 PM)
 	 4.[T][✘] ip
 	 5.[T][✘] play basketball
 	____________________________________________________________
 	____________________________________________________________
 	 Got it. I've added this task:
-	   [E][✘] project meeting (at: 6 August 2-4pm)
+	   [E][✘] project meeting (at: 02 August 2020, 10:15 PM)
 	 Now you have 6 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	 Got it. I've added this task:
-	   [D][✘] survey (by: Tue 10pm)
+	   [D][✘] survey (by: 12 October 2021, 12:00 AM)
 	 Now you have 7 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
@@ -111,12 +117,12 @@
 	____________________________________________________________
 	 Here are the tasks in your list:
 	 1.[T][✓] borrow book
-	 2.[D][✘] read book (by: August 24th)
-	 3.[E][✓] lesson (at: Mon 6-8pm)
+	 2.[D][✘] read book (by: 24 August 2020, 12:30 PM)
+	 3.[E][✓] lesson (at: 24 August 2020, 03:00 PM)
 	 4.[T][✓] ip
 	 5.[T][✓] play basketball
-	 6.[E][✘] project meeting (at: 6 August 2-4pm)
-	 7.[D][✘] survey (by: Tue 10pm)
+	 6.[E][✘] project meeting (at: 02 August 2020, 10:15 PM)
+	 7.[D][✘] survey (by: 12 October 2021, 12:00 AM)
 	____________________________________________________________
 	____________________________________________________________
 	 OOPS!!! The task to be deleted has to be a number.
@@ -131,12 +137,12 @@
 	____________________________________________________________
 	____________________________________________________________
 	 Here are the tasks in your list:
-	 1.[D][✘] read book (by: August 24th)
-	 2.[E][✓] lesson (at: Mon 6-8pm)
+	 1.[D][✘] read book (by: 24 August 2020, 12:30 PM)
+	 2.[E][✓] lesson (at: 24 August 2020, 03:00 PM)
 	 3.[T][✓] ip
 	 4.[T][✓] play basketball
-	 5.[E][✘] project meeting (at: 6 August 2-4pm)
-	 6.[D][✘] survey (by: Tue 10pm)
+	 5.[E][✘] project meeting (at: 02 August 2020, 10:15 PM)
+	 6.[D][✘] survey (by: 12 October 2021, 12:00 AM)
 	____________________________________________________________
 	____________________________________________________________
 	 OOPS!!! The task to be deleted has to be a number.
@@ -146,28 +152,44 @@
 	____________________________________________________________
 	____________________________________________________________
 	 Noted. I've removed this task:
-	   [E][✓] lesson (at: Mon 6-8pm)
+	   [E][✓] lesson (at: 24 August 2020, 03:00 PM)
 	 Now you have 5 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	 Here are the tasks in your list:
-	 1.[D][✘] read book (by: August 24th)
+	 1.[D][✘] read book (by: 24 August 2020, 12:30 PM)
 	 2.[T][✓] ip
 	 3.[T][✓] play basketball
-	 4.[E][✘] project meeting (at: 6 August 2-4pm)
-	 5.[D][✘] survey (by: Tue 10pm)
+	 4.[E][✘] project meeting (at: 02 August 2020, 10:15 PM)
+	 5.[D][✘] survey (by: 12 October 2021, 12:00 AM)
 	____________________________________________________________
 	____________________________________________________________
 	 Noted. I've removed this task:
-	   [D][✘] survey (by: Tue 10pm)
+	   [D][✘] survey (by: 12 October 2021, 12:00 AM)
 	 Now you have 4 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	 Here are the tasks in your list:
-	 1.[D][✘] read book (by: August 24th)
+	 1.[D][✘] read book (by: 24 August 2020, 12:30 PM)
 	 2.[T][✓] ip
 	 3.[T][✓] play basketball
-	 4.[E][✘] project meeting (at: 6 August 2-4pm)
+	 4.[E][✘] project meeting (at: 02 August 2020, 10:15 PM)
+	____________________________________________________________
+	____________________________________________________________
+	 OOPS!!! Please enter a date.
+	____________________________________________________________
+	____________________________________________________________
+	 OOPS!!! Please use the format "dd/MM/yyyy" to indicate the date.
+	____________________________________________________________
+	____________________________________________________________
+	 OOPS!!! Please use the format "dd/MM/yyyy" to indicate the date.
+	____________________________________________________________
+	____________________________________________________________
+	 Here are the deadlines and events happening on 24 August 2020:
+	 1.[D][✘] read book (by: 24 August 2020, 12:30 PM)
+	____________________________________________________________
+	____________________________________________________________
+	 You do not have any deadlines or events happening on 12 August 2020! :)
 	____________________________________________________________
 	____________________________________________________________
 	 Bye. Hope to see you again soon!

@@ -1,4 +1,4 @@
-D | 0 | read book | August 24th
+D | 0 | read book | 24/08/2020 12:30
 T | 1 | ip
 T | 1 | play basketball
-E | 0 | project meeting | 6 August 2-4pm
+E | 0 | project meeting | 02/08/2020 22:15
