@@ -30,20 +30,12 @@ public class TodayCommand extends Command {
                 }
             }
         });
-        // todo: sort duke.tasks
+        // todo: sort tasks
         ui.show(tasksTodayString(tasksToday));
     }
 
     private String tasksTodayString(ArrayList<Task> tasks) {
-        StringBuilder builder = new StringBuilder("\t Here are your tasks today:\n");
-        int i = 1;
-        for (Task task : tasks) {
-            builder.append("\t ").append(i).append(". ").append(task.toString());
-            if (i != tasks.size()) {
-                builder.append("\n");
-            }
-            i++;
-        }
-        return builder.toString();
+        String response = "\t Here are your tasks today:\n";
+        return ListCommand.tasksToString(tasks, response);
     }
 }
