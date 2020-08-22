@@ -1,7 +1,6 @@
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected int i = 1;
 
     public Task(String description) {
         this.description = description;
