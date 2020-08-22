@@ -1,3 +1,5 @@
+import javax.imageio.IIOException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +10,17 @@ public class Store {
         this.list = new ArrayList<>();
     }
 
+    public Store(List<Task> taskArr) {
+        this.list = taskArr;
+    }
+
     public void addItem(Task item) {
-        this.list.add(item);
+        try {
+            Storage.appendToFile(item);
+            this.list.add(item);
+        } catch (IOException e) {
+            System.out.println("Sorry! The task failed to save. Please try again.");
+        }
     }
 
     public int size() {
