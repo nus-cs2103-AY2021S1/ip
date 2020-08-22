@@ -16,12 +16,12 @@ Hello from
     -------------------------------------------------------------
     -------------------------------------------------------------
     Got it. I've added this task:
-    [D][✘] description (by: monday 2pm)
+    [D][✘] description (by: Jan 02 2012 21:00)
     Now you have 2 tasks in the list.
     -------------------------------------------------------------
     -------------------------------------------------------------
     Got it. I've added this task:
-    [E][✘] description (at: tuesday 4pm)
+    [E][✘] description (at: Jan 22 2101 14:00)
     Now you have 3 tasks in the list.
     -------------------------------------------------------------
     -------------------------------------------------------------
@@ -34,10 +34,26 @@ Hello from
     Oops! An event task needs a description
     -------------------------------------------------------------
     -------------------------------------------------------------
-    Oops! An event task needs a date
+    Date: event is not formatted correctly
+    Please use dd/mm/yyyy format.
     -------------------------------------------------------------
     -------------------------------------------------------------
-    Oops! An event task needs a date
+    Oops! Date or time is missing from deadline
+    -------------------------------------------------------------
+    -------------------------------------------------------------
+    Oops! Date or time is missing from deadline
+    -------------------------------------------------------------
+    -------------------------------------------------------------
+    Oops! Date or time is missing from deadline
+    -------------------------------------------------------------
+    -------------------------------------------------------------
+    Time: 160 is not formatted correctly.
+    Please use HHMM format.
+    -------------------------------------------------------------
+    -------------------------------------------------------------
+    Got it. I've added this task:
+    [E][✘] test description (at: Jan 22 2100 16:00)
+    Now you have 4 tasks in the list.
     -------------------------------------------------------------
     -------------------------------------------------------------
     Oops! A deadline task needs a description
@@ -49,10 +65,27 @@ Hello from
     Oops! A deadline task needs a deadline
     -------------------------------------------------------------
     -------------------------------------------------------------
+    Oops! Date or time is missing from deadline
+    -------------------------------------------------------------
+    -------------------------------------------------------------
+    Oops! Date or time is missing from deadline
+    -------------------------------------------------------------
+    -------------------------------------------------------------
+    Time: 160 is not formatted correctly.
+    Please use HHMM format.
+    -------------------------------------------------------------
+    -------------------------------------------------------------
+    Got it. I've added this task:
+    [D][✘] test description (by: Jan 22 2100 16:00)
+    Now you have 5 tasks in the list.
+    -------------------------------------------------------------
+    -------------------------------------------------------------
     Here are the tasks in your list:
     1. [T][✘] description
-    2. [D][✘] description (by: monday 2pm)
-    3. [E][✘] description (at: tuesday 4pm)
+    2. [D][✘] description (by: Jan 02 2012 21:00)
+    3. [E][✘] description (at: Jan 22 2101 14:00)
+    4. [E][✘] test description (at: Jan 22 2100 16:00)
+    5. [D][✘] test description (by: Jan 22 2100 16:00)
     -------------------------------------------------------------
     -------------------------------------------------------------
     Oops! I'm sorry, I don't know what that means.
@@ -63,18 +96,21 @@ Hello from
     -------------------------------------------------------------
     -------------------------------------------------------------
     Nice! I've marked this task as done:
-    [D][✓] description (by: monday 2pm)
+    [D][✓] description (by: Jan 02 2012 21:00)
     -------------------------------------------------------------
     -------------------------------------------------------------
-    Oops! Sorry, I couldn't find the task.
+    Nice! I've marked this task as done:
+    [D][✓] test description (by: Jan 22 2100 16:00)
     -------------------------------------------------------------
     -------------------------------------------------------------
     Noted. I've removed this task.
     [T][✓] description
-    Now you have 2 tasks in the list.
+    Now you have 4 tasks in the list.
     -------------------------------------------------------------
     -------------------------------------------------------------
-    Oops! Sorry, I couldn't find the task.
+    Noted. I've removed this task.
+    [E][✘] test description (at: Jan 22 2100 16:00)
+    Now you have 3 tasks in the list.
     -------------------------------------------------------------
     -------------------------------------------------------------
     Goodbye! Hope to see you again soon!

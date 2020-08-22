@@ -1,14 +1,22 @@
 todo description
-deadline description /by monday 2pm
-event description /at tuesday 4pm
+deadline description /by 2/1/2012 2100
+event description /at 22/1/2101 1400
 todo
 event
 event /at
 event test description
 event test description /at
+event test description /at 22/1/2012
+event test description /at 222/2/20100
+event test description /at 22/1/2100 160
+event test description /at 22/1/2100 1600
 deadline
 deadline test description
 deadline test description /by
+deadline test description /by 22/1/2012
+deadline test description /by 222/2/20100
+deadline test description /by 22/1/2100 160
+deadline test description /by 22/1/2100 1600
 list
 list 1
 done 1
