@@ -1,7 +1,9 @@
 package main.java;
 
-import jdk.jfr.Event;
-
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,6 +21,7 @@ public class Duke {
     private String TODO_COMMAND = "todo";
     private String DEADLINE_COMMAND = "deadline";
     private String EVENT_COMMAND = "event";
+    private String TASK_AFTER_COMMAND = "taskafter";
 
     Duke() {
         tasks = new ArrayList<>();
@@ -30,53 +33,58 @@ public class Duke {
 
         try {
             switch (taskType) {
-                case TODO:
-                    if (task == null) {
-                        throw new ToDoException();
-                    }
-                    newTask = new ToDoTask(task);
-                    break;
-                case DEADLINE:
-                    if (task == null) {
-                        throw new DeadlineException();
-                    }
+            case TODO:
+                if (task == null) {
+                    throw new ToDoException();
+                }
+                newTask = new ToDoTask(task);
+                break;
+            case DEADLINE:
+                if (task == null) {
+                    throw new DeadlineException();
+                }
 
-                    String[] arrForDeadline = task.split("/by", 2);
+                String[] arrForDeadline = task.split("/by", 2);
 
-                    if (arrForDeadline.length == 1) {
-                        throw new DeadlineException();
-                    }
+                if (arrForDeadline.length == 1) {
+                    throw new DeadlineException();
+                }
 
-                    String taskForDeadline = arrForDeadline[0].trim();
-                    String dateForDeadline = arrForDeadline[1].trim();
-                    newTask = new DeadlineTask(taskForDeadline, dateForDeadline);
-                    break;
-                case EVENT:
-                    if (task == null) {
-                        throw new EventException();
-                    }
-                    String[] arrForEvent = task.split("/at", 2);
+                String taskForDeadline = arrForDeadline[0].trim();
+                String dateForDeadline = arrForDeadline[1].trim();
+                LocalDate deadlineDate = LocalDate.parse(dateForDeadline);
+                newTask = new DeadlineTask(taskForDeadline, deadlineDate);
+                break;
+            case EVENT:
+                if (task == null) {
+                    throw new EventException();
+                }
+                String[] arrForEvent = task.split("/at", 2);
 
-                    if (arrForEvent.length == 1) {
-                        throw new EventException();
-                    }
-                    String taskForEvent = arrForEvent[0].trim();
-                    String dateForEvent = arrForEvent[1].trim();
-                    newTask = new EventTask(taskForEvent, dateForEvent);
-                    break;
-                default:
-                    newTask = new Task(task);
-                    break;
+                if (arrForEvent.length == 1) {
+                    throw new EventException();
+                }
+                String taskForEvent = arrForEvent[0].trim();
+                String dateForEvent = arrForEvent[1].trim();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                LocalDateTime eventDate = LocalDateTime.parse(dateForEvent, formatter);
+                newTask = new EventTask(taskForEvent, eventDate);
+                break;
+            default:
+                newTask = new Task(task);
+                break;
             }
             tasks.add(newTask);
             message = "Okay. I will add this task:\n" + indentation + newTask + "\n" +
                     "Now you have " + tasks.size() + " " + (tasks.size() == 1 ? "task " : "tasks ") + "in the list.";
         } catch (ToDoException | DeadlineException | EventException e) {
             message = e.getMessage();
+        } catch (DateTimeParseException e) {
+            message = "Invalid date format! Please put it something " +
+                    "like 2020-12-31 for deadline and 2020-12-31 1800 for event.";
         }
 
         sendMessage(message);
-
     }
 
     private void welcome() {
@@ -151,6 +159,39 @@ public class Duke {
         sendMessage(message);
     }
 
+    private void taskAfter(String date) {
+        String message;
+        try {
+            LocalDate parsedDate = LocalDate.parse(date);
+            StringBuilder sb = new StringBuilder();
+            sb.append("Here is the tasks after "
+                    + parsedDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ":\n");
+            int count = 1;
+            for (Task task : tasks) {
+                if (task instanceof ToDoTask) {
+                    continue;
+                } else if (task instanceof DeadlineTask) {
+                    DeadlineTask deadlineTask = (DeadlineTask) task;
+                    if (parsedDate.isBefore(deadlineTask.getDate())) {
+                        sb.append(count + ". " + task + "\n");
+                        count++;
+                    }
+                } else if (task instanceof EventTask) {
+                    EventTask eventTask = (EventTask) task;
+                    if (parsedDate.isBefore(eventTask.getDate().toLocalDate())) {
+                        sb.append(count + ". " + task + "\n");
+                        count++;
+                    }
+                }
+            }
+            message = sb.toString().trim();
+        } catch (DateTimeParseException e) {
+            message = "Invalid date format! Please put it something like 2020-12-31!";
+        }
+
+        sendMessage(message);
+    }
+
     private void takeUserInput() {
         Scanner sc = new Scanner(System.in);
 
@@ -174,6 +215,8 @@ public class Duke {
                     doneTask(arg);
                 } else if (command.equals(DELETE_COMMAND)) {
                     deleteTask(arg);
+                } else if (command.equals(TASK_AFTER_COMMAND)) {
+                    taskAfter(arg);
                 } else if (command.equals(TODO_COMMAND)) {
                     addTask(arg, TaskType.TODO);
                 } else if (command.equals(DEADLINE_COMMAND)) {
