@@ -23,11 +23,11 @@ public class Duke {
 
       output = "\tHere are the tasks in your list: " + concat;
     } else if (command[0].equals("done")){
-      int inputNumber;
-      
       if (command.length < 2) {
         throw new DukeException("\t☹ OOPS!!! The description of a done cannot be empty.");
       }
+
+      int inputNumber;
       
       try {
         inputNumber = Integer.parseInt(command[1]);
@@ -119,7 +119,23 @@ public class Duke {
         throw new DukeException("\t☹ OOPS!!! The description of a delete cannot be empty.");
       }
       
-      int index = Integer.parseInt(command[1]) - 1;
+      int inputNumber;
+
+      try {
+        inputNumber = Integer.parseInt(command[1]);
+      } catch(NumberFormatException e) {
+        throw new DukeException("\t☹ OOPS!!! Argument must be an integer.");
+      }
+
+      if (inputNumber <= 0) {
+        throw new DukeException(("\t☹ OOPS!!! Invalid argument."));
+      }
+
+      if (inputNumber > list.size()) {
+        throw new DukeException("\t☹ OOPS!!! There is only " + list.size() + " tasks in the list.");
+      }
+      
+      int index = inputNumber - 1;
       Task targetTask = list.remove(index);
 
       output = "\tNoted. I've removed this task: \n\t\t" + targetTask + "\n\tNow you have " + list.size() + " tasks in the list.";
