@@ -1,6 +1,6 @@
 public class Parser {
 
-    public static Command parse(String userInput) throws EmptyTaskDescriptionException {
+    public static Command parse(String userInput) throws EmptyTaskDescriptionException, DukeDateTimeParseException {
         String[] arr = userInput.trim().split(" ", 2);
         switch (arr[0]) {
             case "bye":
@@ -18,9 +18,15 @@ public class Parser {
                 return parseAdd(arr[0], arr[1]);
             case "delete":
                 return parseDelete(arr[1]);
+            case "today":
+                return parseToday();
             default:
                 throw new InvalidCommandException();
         }
+    }
+
+    private static Command parseToday() {
+        return new TodayCommand();
     }
 
     private static AddCommand parseAdd(String commandName, String arguments) throws EmptyTaskDescriptionException {
@@ -40,7 +46,7 @@ public class Parser {
                 if (parsed[0].strip().equals("")) {
                     throw new EmptyTaskDescriptionException(commandName);
                 }
-                task = new Deadline(parsed[0], parsed[1]);
+                task = new Deadline(parsed[0], DukeDateTimeParser.parse(parsed[1]));
                 break;
             }
             case "event": {
@@ -51,7 +57,7 @@ public class Parser {
                 if (parsed[0].strip().equals("")) {
                     throw new EmptyTaskDescriptionException(commandName);
                 }
-                task = new Event(parsed[0], parsed[1]);
+                task = new Event(parsed[0], DukeDateTimeParser.parse(parsed[1]));
                 break;
             }
             default:
@@ -59,6 +65,7 @@ public class Parser {
         }
         return new AddCommand(task);
     }
+
 
     private static DoneCommand parseDone(String taskDone) throws InvalidTaskException {
         try {
