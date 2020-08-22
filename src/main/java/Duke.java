@@ -1,9 +1,26 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+  public static void updateData(List<Task> list) {
+    try {
+      FileWriter fw = new FileWriter("data/duke.txt");
+      StringBuilder textToAdd = new StringBuilder();
+      
+      for (Task t : list) {
+        String data = t.getData();
+        textToAdd.append(data).append("\n");
+      }
+      
+      fw.write(textToAdd.toString());
+      fw.close();
+    } catch (IOException e) {
+      System.out.println("Something went wrong" + e.getMessage());
+    }
+  }
   
   public static String process(String input, List<Task> list) throws DukeException {
     String output;
@@ -51,6 +68,7 @@ public class Duke {
       }
       
       targetTask.setDone();
+      updateData(list);
       output = "\tNice! I've marked this task as done: \n\t\t" + targetTask;
     } else if (command[0].equals("todo")) {
       if (command.length < 2 || command[1].isBlank()) {
@@ -60,8 +78,8 @@ public class Duke {
       ToDo newToDo = new ToDo(command[1]);
 
       list.add(newToDo);
+      updateData(list);
       output = "\tGot it. I've added this task: \n\t\t" + newToDo + "\n\tNow you have " + list.size() + " tasks in the list.";
-      
     } else if (command[0].equals("deadline")) {
       if (command.length < 2) {
         throw new DukeException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -87,6 +105,7 @@ public class Duke {
       Deadline newDeadline = new Deadline(description, by);
 
       list.add(newDeadline);
+      updateData(list);
       output = "\tGot it. I've added this task: \n\t\t" + newDeadline + "\n\tNow you have " + list.size() + " tasks in the list.";
     } else if (command[0].equals("event")) {
       if (command.length < 2) {
@@ -113,6 +132,7 @@ public class Duke {
       Event newEvent = new Event(description, at);
 
       list.add(newEvent);
+      updateData(list);
       output = "\tGot it. I've added this task: \n\t\t" + newEvent + "\n\tNow you have " + list.size() + " tasks in the list.";
     } else if (command[0].equals("delete")) {
       if (command.length < 2) {
@@ -137,7 +157,7 @@ public class Duke {
       
       int index = inputNumber - 1;
       Task targetTask = list.remove(index);
-
+      updateData(list);
       output = "\tNoted. I've removed this task: \n\t\t" + targetTask + "\n\tNow you have " + list.size() + " tasks in the list.";
     } else {
       throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
