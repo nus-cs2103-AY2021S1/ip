@@ -3,10 +3,10 @@ import java.util.Scanner;
 import exception.DukeException;
 import operation.Operation;
 import parser.CommandParser;
-import task.TaskStorage;
+import task.TaskList;
 
 public class Duke {
-    private final TaskStorage taskStorage;
+    private final TaskList taskStorage;
 
     private static final String DIVIDER = "---------------------------------------------------------";
     private static final String LOGO = " ____        _        \n"
@@ -16,7 +16,7 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     Duke() {
-        this.taskStorage = new TaskStorage();
+        this.taskStorage = new TaskList();
     }
 
     private void printStartMessage() {

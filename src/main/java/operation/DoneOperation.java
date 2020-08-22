@@ -1,14 +1,14 @@
 package operation;
 
 import task.Task;
-import task.TaskStorage;
+import task.TaskList;
 
 public class DoneOperation extends Operation {
-    private final TaskStorage taskStorage;
+    private final TaskList taskList;
     private final int index;
 
-    public DoneOperation(TaskStorage taskStorage, int index) {
-        this.taskStorage = taskStorage;
+    public DoneOperation(TaskList taskList, int index) {
+        this.taskList = taskList;
         this.index = index;
     }
 
@@ -19,7 +19,7 @@ public class DoneOperation extends Operation {
 
     @Override
     public void execute() {
-        Task completed = this.taskStorage.completeTask(this.index);
+        Task completed = this.taskList.completeTask(this.index);
         System.out.println("You have completed this task:\n" + completed);
     }
 }

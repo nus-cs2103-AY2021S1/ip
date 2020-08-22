@@ -1,11 +1,11 @@
 package operation;
 
-import task.TaskStorage;
+import task.TaskList;
 import task.Todo;
 
 public class AddTodoOperation extends AddOperation {
-    public AddTodoOperation(String description, TaskStorage taskStorage) {
-        super(description, taskStorage);
+    public AddTodoOperation(String description, TaskList taskList) {
+        super(description, taskList);
     }
 
     @Override

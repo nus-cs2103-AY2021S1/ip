@@ -1,13 +1,13 @@
 package operation;
 
-import task.TaskStorage;
+import task.TaskList;
 import task.Deadline;
 
 public class AddDeadlineOperation extends AddOperation {
     private final String deadline;
 
-    public AddDeadlineOperation(String description, String deadline, TaskStorage taskStorage) {
-        super(description, taskStorage);
+    public AddDeadlineOperation(String description, String deadline, TaskList taskList) {
+        super(description, taskList);
         this.deadline = deadline;
     }
 

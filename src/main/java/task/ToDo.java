@@ -1,7 +1,7 @@
 package task;
 
 public class Todo extends Task {
-    private static final String TODO = "[T]";
+    private static final String TODO_SYMBOL = "T";
     public static final int COMMAND_LENGTH = 1;
 
     Todo(String description, boolean completed) {
@@ -14,6 +14,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return TODO + toStringSuffix();
+        return "[" + TODO_SYMBOL + "]" + toStringSuffix();
     }
 }

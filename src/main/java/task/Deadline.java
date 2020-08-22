@@ -3,7 +3,7 @@ package task;
 public class Deadline extends Task {
     private final String datetime;
 
-    private static final String DEADLINE = "[D]";
+    private static final String DEADLINE_SYMBOL = "D";
     public static final String DEADLINE_BREAK = "/by";
     public static final int COMMAND_LENGTH = 2;
 
@@ -19,6 +19,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String byDatetime = String.format("(by: %s)", this.datetime);
-        return DEADLINE + toStringSuffix() + " " + byDatetime;
+        return "[" + DEADLINE_SYMBOL + "]" + toStringSuffix() + " " + byDatetime;
     }
 }

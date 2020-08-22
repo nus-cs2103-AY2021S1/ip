@@ -3,7 +3,7 @@ package task;
 public class Event extends Task{
     private final String time;
 
-    private static final String EVENT= "[D]";
+    private static final String EVENT_SYMBOL = "E";
     public static final String EVENT_BREAK = "/at";
     public static final int COMMAND_LENGTH = 2;
 
@@ -19,6 +19,6 @@ public class Event extends Task{
     @Override
     public String toString() {
         String atTime = String.format("(at: %s)", this.time);
-        return EVENT + toStringSuffix() + " " + atTime;
+        return "[" + EVENT_SYMBOL + "]" + toStringSuffix() + " " + atTime;
     }
 }

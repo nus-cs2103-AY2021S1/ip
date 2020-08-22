@@ -7,7 +7,7 @@ Greetings, what may I do for you?
 
 ---------------------------------------------------------
 I have added the task:
-[D][✗] project meeting (at: Mon 2-4pm)
+[E][✗] project meeting (at: Mon 2-4pm)
 You now have 1 tasks.
 ---------------------------------------------------------
 
@@ -25,14 +25,14 @@ You now have 3 tasks.
 
 ---------------------------------------------------------
 Here are your tasks:
-1. [D][✗] project meeting (at: Mon 2-4pm)
+1. [E][✗] project meeting (at: Mon 2-4pm)
 2. [T][✗] borrow book
 3. [D][✗] return book (by: 1 Jan)
 ---------------------------------------------------------
 
 ---------------------------------------------------------
 You have completed this task:
-[D][✓] project meeting (at: Mon 2-4pm)
+[E][✓] project meeting (at: Mon 2-4pm)
 ---------------------------------------------------------
 
 ---------------------------------------------------------
@@ -42,7 +42,7 @@ You have completed this task:
 
 ---------------------------------------------------------
 Here are your tasks:
-1. [D][✓] project meeting (at: Mon 2-4pm)
+1. [E][✓] project meeting (at: Mon 2-4pm)
 2. [T][✓] borrow book
 3. [D][✗] return book (by: 1 Jan)
 ---------------------------------------------------------
@@ -55,13 +55,13 @@ You now have 2 tasks in the list
 
 ---------------------------------------------------------
 Here are your tasks:
-1. [D][✓] project meeting (at: Mon 2-4pm)
+1. [E][✓] project meeting (at: Mon 2-4pm)
 2. [D][✗] return book (by: 1 Jan)
 ---------------------------------------------------------
 
 ---------------------------------------------------------
 Noted. I've removed this task:
-[D][✓] project meeting (at: Mon 2-4pm)
+[E][✓] project meeting (at: Mon 2-4pm)
 You now have 1 tasks in the list
 ---------------------------------------------------------
 

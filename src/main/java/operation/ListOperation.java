@@ -1,12 +1,12 @@
 package operation;
 
-import task.TaskStorage;
+import task.TaskList;
 
 public class ListOperation extends Operation {
-    private final TaskStorage taskStorage;
+    private final TaskList taskList;
 
-    public ListOperation(TaskStorage taskStorage) {
-        this.taskStorage = taskStorage;
+    public ListOperation(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     @Override
@@ -17,6 +17,6 @@ public class ListOperation extends Operation {
     @Override
     public void execute() {
         System.out.println("Here are your tasks:");
-        this.taskStorage.printTaskStorage();
+        this.taskList.printTaskList();
     }
 }
