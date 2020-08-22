@@ -1,9 +1,77 @@
-import main.java.*;
+package main.java;
 
-import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
+
+    private static final String DATABASE_DIRECTORY = "data";
+    private static final String TASKS_PATH = "data/tasks.txt";
+
+    private static final ArrayList<Task> TODOS = new ArrayList<>();
+
+    static {
+        new File(DATABASE_DIRECTORY).mkdir();
+
+        File tasks = new File(TASKS_PATH);
+
+        boolean hasFile;
+        try {
+            hasFile = !tasks.createNewFile();
+
+            if (hasFile) {
+                initiate(tasks);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void initiate(File tasks) {
+        Scanner contents = null;
+        try {
+            contents = new Scanner(tasks);
+
+            while (contents.hasNext()) {
+                String[] taskParts = contents.nextLine().split("~");
+                String identifier = taskParts[0];
+                String desc = taskParts[2];
+                String timing = taskParts.length == 3 ? null : taskParts[3];
+                boolean isDone = Boolean.parseBoolean(taskParts[1]);
+                Task savedTask;
+
+                if (identifier.equals("T")) {
+                    savedTask = new Todo(desc, isDone);
+                } else if (identifier.equals("D")) {
+                    savedTask = new Deadline(desc, timing, isDone);
+                } else {
+                    savedTask = new Event(desc, timing, isDone);
+                }
+
+                TODOS.add(savedTask);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void saveTask(Task task) throws IOException {
+        FileWriter fw = new FileWriter(TASKS_PATH, true);
+        fw.write(task.saveFormat() + System.lineSeparator());
+        fw.close();
+    }
+
+    private static void updateTask() throws IOException {
+        FileWriter fw = new FileWriter(TASKS_PATH);
+        for (Task todo : TODOS) {
+            fw.write(todo.saveFormat() + System.lineSeparator());
+        }
+        fw.close();
+    }
 
     private static void log(String message) {
         String startLine = "    ____________________________________________________________\n";
@@ -12,7 +80,7 @@ public class Duke {
         System.out.println(output);
     }
 
-    public static void main(String[] args) throws DukeException{
+    public static void main(String[] args) throws IOException {
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -26,7 +94,6 @@ public class Duke {
         log(greeting);
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> todos = new ArrayList<>();
 
         while (sc.hasNextLine()) {
             try {
@@ -47,11 +114,12 @@ public class Duke {
                         throw new DukeException("\tTask number format invalid, " +
                                 "must be a number.");
                     }
-                    if (idx < 0 || idx > todos.size() - 1) {
+                    if (idx < 0 || idx > TODOS.size() - 1) {
                         throw new DukeException("\tThere is no such task.");
                     }
-                    Task toChange = todos.get(idx);
+                    Task toChange = TODOS.get(idx);
                     toChange.markAsDone();
+                    updateTask();
                     String output = "     Nice! I've marked this task as done:\n" +
                             "       " + toChange + "\n";
                     log(output);
@@ -66,30 +134,31 @@ public class Duke {
                         throw new DukeException("\tTask number format invalid, " +
                                 "must be a number.");
                     }
-                    if (idx < 0 || idx > todos.size() - 1) {
+                    if (idx < 0 || idx > TODOS.size() - 1) {
                         throw new DukeException("\tThere is no such task.");
                     }
-                    Task toDelete = todos.get(idx);
-                    todos.remove(idx);
+                    Task toDelete = TODOS.get(idx);
+                    TODOS.remove(idx);
+                    updateTask();
                     String output = "     Noted. I've removed this task:\n" +
                             "       " + toDelete + "\n" +
-                            "     Now you have " + todos.size() + " tasks in the list.\n";
+                            "     Now you have " + TODOS.size() + " tasks in the list.\n";
                     log(output);
                 } else if (input.equals("list")) {
-                    if (todos.size() == 0) {
+                    if (TODOS.size() == 0) {
                         log("\tYay! You have nothing to do at the moment! :-)\n");
                     } else {
                         StringBuilder output = new StringBuilder("     Here are the tasks in your list:\n");
 
-                        for (int i = 1; i <= todos.size(); i++) {
-                            Task theTask = todos.get(i - 1);
+                        for (int i = 1; i <= TODOS.size(); i++) {
+                            Task theTask = TODOS.get(i - 1);
                             output.append("\t ").append(i).append(".").append(theTask).append("\n");
                         }
 
                         log(output.toString());
                     }
                 } else if (!input.isBlank()){
-                    Task newTask = null;
+                    Task newTask;
                     String desc;
 
                     if (input.startsWith("todo")) {
@@ -122,11 +191,13 @@ public class Duke {
                         throw new DukeException("\tI don't know what that means :-(");
                     }
 
-                    todos.add(newTask);
+                    saveTask(newTask);
+
+                    TODOS.add(newTask);
 
                     String output = "     Got it. I've added this task:\n" +
                             "       " + newTask + "\n" +
-                            "     Now you have " + todos.size() + " tasks in the list.\n" ;
+                            "     Now you have " + TODOS.size() + " tasks in the list.\n" ;
 
                     log(output);
                 }

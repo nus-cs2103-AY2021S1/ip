@@ -5,8 +5,12 @@ public class Task {
     protected boolean isDone;
 
     public Task(String description) {
+        this(description, false);
+    }
+
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     public String getStatusIcon() {
@@ -17,17 +21,9 @@ public class Task {
         this.isDone = true;
     }
 
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (this == obj) {
-//            return true;
-//        } else if (obj instanceof Task) {
-//            Task otherTask = (Task) obj;
-//            return this.description == otherTask.description && this.isDone == otherTask.isDone;
-//        } else {
-//            return false;
-//        }
-//    }
+    public String saveFormat() {
+        return isDone + "~" + description;
+    }
 
     @Override
     public String toString() {
