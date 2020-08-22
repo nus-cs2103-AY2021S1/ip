@@ -47,4 +47,17 @@ public class DeadlineTest {
             fail();
         }
     }
+
+
+    @Test
+    public void happenBeforeDateTest() {
+        try {
+            Deadline d = new Deadline("Assignment 1", "2020-09-01");
+            assertEquals(true, d.happenBeforeDate(LocalDate.parse("2020-09-05")));
+            assertEquals(false, d.happenBeforeDate(LocalDate.parse("2020-09-01")));
+            assertEquals(false, d.happenBeforeDate(LocalDate.parse("2020-08-03")));
+        } catch (Exception e) {
+            fail();
+        }
+    }
 }
