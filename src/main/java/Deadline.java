@@ -6,6 +6,10 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    public Deadline(String line, boolean isAutomated) {
+        super(line, true);
+    }
+
     public String getDate() {
         return this.date;
     }

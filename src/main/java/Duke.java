@@ -1,14 +1,21 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
 
 public class Duke {
     public final static String LINE = "*********************************************************";
     public static ArrayList<Task> shelf;
+    public static Storage storage;
 
     public static void main(String[] args) {
+        File f = new File("D:\\24092014\\Joven\\UNI STUFF\\CS2103\\IP\\task.txt");
         welcome();
-        shelf = new ArrayList<>();
+        storage = new Storage(f);
+        shelf = storage.loadFile();
         Scanner sc = new Scanner(System.in);
         handler(sc);
         sc.close();
@@ -55,6 +62,7 @@ public class Duke {
                     }
                     System.out.println("Noted. I've removed this task: ");
                     shelf.remove(indexer);
+                    storage.updateFile(shelf);
                     System.out.println("Now you have " + shelf.size() + " in the list.");
                     System.out.println(LINE);
                 } else if (response.indexOf("done ") == 0) {
@@ -65,6 +73,7 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done: ");
                     book = shelf.get(indexer);
                     book.complete();
+                    storage.updateFile(shelf);
                     System.out.println(book);
                     System.out.println(LINE);
                 } else {
@@ -99,13 +108,15 @@ public class Duke {
                     } else {
                         throw new DukeUnknownInputException("error");
                     }
+                    storage.updateFile(shelf);
                     System.out.println("Got it. I've added this task: ");
                     System.out.println("  " + book);
                     System.out.println("Now you have " + shelf.size() + " tasks in the list.");
                     System.out.println(LINE);
                 }
             } catch (DukeUnknownInputException | EmptyDescriptionException |
-                    DukeTaskNonExistException | DukeKeywordMissingException e) {
+                    DukeTaskNonExistException | DukeKeywordMissingException |
+                    IOException e) {
                 System.out.println(e);
                 System.out.println(LINE);
             }

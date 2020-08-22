@@ -6,6 +6,10 @@ public class EventTask extends Task {
         this.date = date;
     }
 
+    public EventTask(String line, boolean isAutomated) {
+        super(line, true);
+    }
+
     public String getDate() {
         return this.date;
     }
