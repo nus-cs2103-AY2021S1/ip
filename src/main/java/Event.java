@@ -18,6 +18,10 @@ public class Event extends Task {
         }
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
     @Override
     public String toString(){
         return "[E]" + super.toString() + " (at: " +  date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +

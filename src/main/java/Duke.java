@@ -1,6 +1,7 @@
 package main.java;
 
 import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -80,6 +81,33 @@ public class Duke {
                     System.out.println("☹ OOPS!!! Invalid parameter given :-(");
                 }
             }
+
+            else if (output.indexOf("search ") == 0) {
+
+                if (output.contains("/on ")) {
+
+                    int index = output.indexOf("/on ");
+
+                    String dateString = output.substring(index + 4);
+
+                    try {
+                        LocalDate date = LocalDate.parse(dateString);
+                        
+                        for (int i = 0; i < list.size(); i++) {
+                            if (list.get(i) instanceof Event && ((Event) list.get(i)).getDate().equals(date)) {
+                                System.out.println((i + 1) + ". " + list.get(i));
+                            }
+                            else if (list.get(i) instanceof Deadline && ((Deadline) list.get(i)).getDate().equals(date)) {
+                                System.out.println((i + 1) + ". " + list.get(i));
+                            }
+                        }
+
+                    } catch (DateTimeException e) {
+                        System.out.println("Enter date in the following format: YYYY-MM-DD");
+                    }
+                }
+            }
+
             else {
 
                 if (output.indexOf("todo ") == 0 && output.length() > 5) {
