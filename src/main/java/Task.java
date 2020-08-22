@@ -12,6 +12,10 @@ public class Task {
         ? "✓"
         : "✘";
   }
+  
+  public boolean getStatus() {
+    return isDone;
+  }
 
   public void setDone() {
     this.isDone = true;
