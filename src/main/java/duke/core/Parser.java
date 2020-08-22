@@ -6,7 +6,22 @@ import main.java.duke.command.*;
 import main.java.duke.task.*;
 import main.java.duke.handle.*;
 
+/**
+ * The Parser class parses the command entered by
+ * the user and returns the parsed command with
+ * the corresponding command type and parameters.
+ */
 public class Parser {
+
+    /**
+     * Parses the command by reading the type and calling
+     * the corresponding method to read the parameters of
+     * the command, and returns the parsed command.
+     *
+     * @param command The command to be parsed
+     * @return The parsed command with the corresponding type and parameter.
+     * @throws CommandNotFoundException If the command cannot be parsed.
+     */
     public static Command parseCommand(String command) throws CommandNotFoundException {
         Command parsedCommand;
         //HashMap<String, Object> map = new HashMap<>();
@@ -46,8 +61,18 @@ public class Parser {
 
         return parsedCommand;
     }
-    public static Command evaluateAddCommand(String string, String command, CommandType commandtype) throws CommandNotFoundException {
-        if(commandtype == CommandType.ADD_TODO) {
+
+    /**
+     * Parses the add command.
+     *
+     * @param string The time notation used to separate the description from the time.
+     * @param command The command to be parsed.
+     * @param commandType The type of the command.
+     * @return The parsed command.
+     * @throws CommandNotFoundException If the command cannot be parsed.
+     */
+    public static Command evaluateAddCommand(String string, String command, CommandType commandType) throws CommandNotFoundException {
+        if(commandType == CommandType.ADD_TODO) {
 
             if (command.strip().split(" ").length == 1) {
                 throw new CommandNotFoundException("The description for todo should not be empty");
@@ -76,9 +101,9 @@ public class Parser {
                     //map.put("description", description);
                     LocalDate localDate = LocalDate.parse(time.strip());
 
-                    if(commandtype == CommandType.ADD_DEADLINE) {
+                    if(commandType == CommandType.ADD_DEADLINE) {
                         return new AddCommand(new Deadline(description, localDate));
-                    } else if (commandtype == CommandType.ADD_EVENT) {
+                    } else if (commandType == CommandType.ADD_EVENT) {
                         return new AddCommand(new Event(description, localDate));
                     } else {
                         throw new CommandNotFoundException("The command is not found");
@@ -93,6 +118,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the complete command or the delete command.
+     *
+     * @param command The command to be parsed.
+     * @param commandType The type of the command.
+     * @return The parsed command.
+     * @throws CommandNotFoundException If the command cannot be parsed.
+     */
     public static Command evaluateCompleteOrDelete(String command, CommandType commandType) throws CommandNotFoundException {
         String type = command.split(" ")[0];
         //System.out.println(type);
@@ -117,6 +150,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the list date command.
+     *
+     * @param command The command to be parsed.
+     * @return The parsed command.
+     * @throws CommandNotFoundException If the command cannot be parsed.
+     */
     public static Command evaluateListDate(String command) throws CommandNotFoundException {
         try {
             //map.put("type", Command.LIST_DATE);
@@ -132,6 +172,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the search command.
+     *
+     * @param command The command to be parsed.
+     * @return The parsed command.
+     * @throws CommandNotFoundException If the command cannot be parsed.
+     */
     public static Command evaluateSearchCommand(String command) {
         String key = command.split("\\s+", 2)[1];
         return new SearchCommand(key);

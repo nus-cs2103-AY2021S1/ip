@@ -11,14 +11,30 @@ import main.java.duke.command.*;
 import main.java.duke.task.*;
 import main.java.duke.handle.*;
 
+/**
+ * The Storage class reads the local task record and the task list, and updates
+ * the local record when the list of tasks is changed.
+ */
 public class Storage {
-    String path;
+    public String path;
     //Scanner scanner;
 
+    /**
+     * Takes in the path of the local record and returns a storage manager.
+     *
+     * @param path The path of the local record.
+     */
     public Storage(String path) {
         this.path = path;
     }
 
+    /**
+     * Reads the local record according to the path.
+     *
+     * @return The list of tasks.
+     * @throws FileNotFoundException If the local record is not found.
+     * @throws LoadingException If the local record cannot be read.
+     */
     public ArrayList<Task> readRecord() throws FileNotFoundException, LoadingException {
         File record = new File(path);
         Scanner scanner = new Scanner(record);
@@ -75,6 +91,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates the local record when the list of tasks is changed.
+     *
+     * @param taskList The task list.
+     * @throws IOException If the local record cannot be updated.
+     */
     public void writeRecord(TaskList taskList) throws IOException {
         FileWriter fileWriter = new FileWriter(path);
         ArrayList<Task> tasks = taskList.getTasks();
