@@ -1,11 +1,13 @@
 import java.util.Scanner;
 
 public class Duke {
-    protected Storage storage;
-    protected TaskList taskList;
+    private final Storage storage;
+    private final TaskList taskList;
+    private final UI ui;
 
     public Duke() {
         // set up the things needed to start Duke
+        ui = new UI();
         Storage.createFolder();
         storage = new Storage();
         if (storage.retrieveTextFile()) {
@@ -17,9 +19,9 @@ public class Duke {
 
     public void run() {
         Scanner sc = new Scanner(System.in);
-        DukeCommandsHandler.greetings();
+        ui.greetUser();
         String name = sc.nextLine();
-        DukeCommandsHandler.addressUser(name);
+        ui.addressUser(name);
 
         String input;
         while (sc.hasNext()) {
@@ -38,10 +40,10 @@ public class Duke {
                 } else if (input.equals("list")) { // list out the tasks
                     taskList.listTasks();
                 } else if (input.equals("bye")) { // exit the bot
-                    DukeCommandsHandler.exitFocus();
+                    ui.exitFocus();
                     break;
                 } else { // handle invalid inputs
-                    DukeCommandsHandler.invalidInput();
+                    ui.invalidInput();
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
