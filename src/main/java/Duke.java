@@ -1,3 +1,7 @@
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -5,9 +9,62 @@ import java.util.Scanner;
 public class Duke {
 
     private List<Task> storage;
-
+    private Path filePath = Path.of("/data","data.txt");
+    //TODO: Hard code filePath in Duke() only.
     public Duke() {
         storage = new ArrayList<>();
+        try {
+            Files.createFile(this.filePath);
+        } catch (IOException e) {
+            try {
+                Files.createDirectory(Path.of("/data"));
+            } catch (IOException e2) {
+                //System.out.println(e2.toString());
+            }
+        }
+    }
+
+    public Duke(Path filePath) {
+        storage = new ArrayList<>();
+        this.filePath = filePath;
+
+        //initializes storage with save data
+        try {
+            /*
+            File saveFile = new File("/data/data.txt");
+            Scanner sc = new Scanner(saveFile);
+            SaveManager sm = new SaveManager();
+            while (sc.hasNext()) {
+                storage.add(sm.loadTaskFromSave(sc.nextLine()));
+            }
+            */
+            BufferedReader br = Files.newBufferedReader(filePath); //new BufferedReader(new FileReader("/data/data22.txt"));
+            SaveManager sm = new SaveManager();
+            String currLine = br.readLine();
+            while (currLine != null) {
+                storage.add(sm.loadTaskFromSave(currLine));
+                currLine = br.readLine();
+            }
+        } catch (NoSuchFileException e) {
+            try {
+                Files.createFile(filePath);
+            } catch (IOException e2) {
+                //System.out.println("Unable to create new Data File");
+                //System.out.println(e2.toString());
+                try {
+                    Files.createDirectory(filePath.getParent());
+                    Files.createFile(filePath);
+                } catch (Exception e3) {
+                    System.out.println("Unable to create new Data File Again");
+                    System.out.println(e2.toString());
+                    System.out.println(e3.toString());
+                }
+            }
+        } catch (DukeSaveDataException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void greet() {
@@ -19,8 +76,24 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
     }
 
-    public void bye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String saveDataGenerator() {
+        SaveManager sm = new SaveManager();
+        final String[] saveData = {""};
+
+        this.storage.forEach(task -> saveData[0] += sm.toSaveFormat(task.convertToHashMap()));
+        return saveData[0];
+    }
+
+    public void bye() throws DukeInputException{
+        try {
+            BufferedWriter bw = Files.newBufferedWriter(this.filePath);
+            bw.write(this.saveDataGenerator());
+            bw.close();
+        } catch (IOException e) {
+            throw new DukeInputException("Unable to write to file <" + this.filePath + "> when exiting");
+        } finally {
+            System.out.println("Bye. Hope to see you again soon!");
+        }
     }
 
     public void store(Task t) {
@@ -114,6 +187,7 @@ public class Duke {
             throw new DukeInputException("Please input number instead of <" + params + "> after a 'delete' command!");
         }
 
+        //TODO: Throw DukeInputException for wrong out of bounds index
         Task temp = this.removeTask(i);
         System.out.println("Alright. I've removed this task:");
         System.out.println("\t" + temp.toString());
@@ -121,8 +195,9 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        //initialize Duke and send welcome message
-        Duke duke = new Duke();
+        //initialize Duke with save data and send welcome message
+        //TODO: Find where is this file???? Cannot find this file anywhere.
+        Duke duke = new Duke(Path.of("data/data.txt"));
         duke.greet();
 
         //input loop
@@ -137,6 +212,7 @@ public class Duke {
                 params = inputs[1];
             }
 
+            //TODO: Capture the command switch as a method of Duke
             try {
                 if (s.equals("bye")) {
                     break;
@@ -162,7 +238,23 @@ public class Duke {
         }
 
         //send exit message
-        duke.bye();
+        try {
+            duke.bye();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+
+        /*testing code to check if printout to savefile worked
+        try {
+            Scanner sc2 = new Scanner(new File("/data/data.txt"));
+            while (sc2.hasNext()) {
+                System.out.println(sc2.nextLine());
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
+         */
 
     }
 }
