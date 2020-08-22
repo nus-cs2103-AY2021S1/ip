@@ -4,7 +4,7 @@ public class TodoTask extends Task {
         super(description);
     }
 
-    private TodoTask(String description, boolean isDone) {
+    public TodoTask(String description, boolean isDone) {
         super(description, isDone);
     }
 
