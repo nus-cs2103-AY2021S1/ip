@@ -1,12 +1,48 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         String res;
         List<Task> data = new ArrayList<>();
+
+        //read file
+        String pathname = "./log.txt";
+        File filename = new File(pathname);
+        InputStreamReader reader = new InputStreamReader(new FileInputStream(filename));
+        BufferedReader br = new BufferedReader(reader);
+        String line;
+        line = br.readLine();
+        while (line != null) {
+            char type = line.charAt(8);
+            boolean isDone = line.charAt(11) == '✓';
+            if(type == 'T') {
+                Todo t = new Todo(line.substring(14));
+                if(isDone) {
+                    t.done();
+                }
+                data.add(t);
+            } else if(type == 'D') {
+                String[] parts = line.substring(5).split(" ");
+                Deadline d = new Deadline(parts[1], parts[3].substring(0, parts[3].length() - 1));
+                if(isDone) {
+                    d.done();
+                }
+                data.add(d);
+            } else {
+                String[] parts = line.substring(5).split(" ");
+                Event e = new Event(parts[1], parts[3].substring(0, parts[3].length() - 1));
+                if(isDone) {
+                    e.done();
+                }
+                data.add(e);
+            }
+            line = br.readLine();
+        }
+
         System.out.println("    ____________________________________________________________");
         System.out.println("     Hello! I'm Duke");
         System.out.println("     What can I do for you?");
@@ -38,6 +74,7 @@ public class Duke {
                     System.out.println("    Nice! I've marked this task as done: ");
                     System.out.printf("     %s\n", data.get(n).toString());
                     System.out.println("    ____________________________________________________________");
+                    writeFile(data);
                 } else if (res.startsWith(Operations.DELETE.name().toLowerCase())) {
                     if (res.length() <= 7) {
                         // Exception: eg. delete
@@ -54,6 +91,7 @@ public class Duke {
                     data.remove(n);
                     System.out.printf("     Now you have %d tasks in the list.\n", data.size());
                     System.out.println("    ____________________________________________________________");
+                    writeFile(data);
                 } else if (res.startsWith(Operations.TODO.name().toLowerCase())) {
                     if (res.length() <= 5) {
                         // Exception: eg. todo
@@ -66,6 +104,7 @@ public class Duke {
                     System.out.printf("       %s\n", t.toString());
                     System.out.printf("     Now you have %d tasks in the list.\n", data.size());
                     System.out.println("    ____________________________________________________________");
+                    writeFile(data);
                 } else if (res.startsWith(Operations.DEADLINE.name().toLowerCase())) {
                     if (res.length() <= 9) {
                         // Exception: eg. deadline
@@ -87,6 +126,7 @@ public class Duke {
                     System.out.printf("       %s\n", t.toString());
                     System.out.printf("     Now you have %d tasks in the list.\n", data.size());
                     System.out.println("    ____________________________________________________________");
+                    writeFile(data);
                 } else if (res.startsWith(Operations.EVENT.name().toLowerCase())) {
                     if (res.length() <= 9) {
                         // Exception: eg. event
@@ -108,6 +148,7 @@ public class Duke {
                     System.out.printf("       %s\n", t.toString());
                     System.out.printf("     Now you have %d tasks in the list.\n", data.size());
                     System.out.println("    ____________________________________________________________");
+                    writeFile(data);
                 } else {
                     // Exception: eg. ???
                     throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -122,6 +163,8 @@ public class Duke {
                 System.out.println("    ____________________________________________________________");
                 System.out.println(e.toString().substring(14));
                 System.out.println("    ____________________________________________________________");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
             }
         }
         System.out.println("    ____________________________________________________________");
@@ -129,4 +172,13 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
     }
 
+    public static void writeFile(List<Task> data) throws FileNotFoundException {
+        final PrintStream oldStdout = System.out;
+        PrintStream ps = new PrintStream("./log.txt");
+        System.setOut(ps);
+        for (int i = 0; i < data.size(); i++) {
+            System.out.printf("     %d.%s\n", i + 1, data.get(i).toString());
+        }
+        System.setOut(oldStdout);
+    }
 }
