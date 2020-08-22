@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 public class AddDeadlineCommand extends Command {
 
@@ -38,5 +39,21 @@ public class AddDeadlineCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof AddDeadlineCommand) {
+            AddDeadlineCommand cur = (AddDeadlineCommand) o;
+            if(Arrays.equals(this.command, cur.command)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 }

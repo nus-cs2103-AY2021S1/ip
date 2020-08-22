@@ -5,6 +5,7 @@ import Exception.DukeException;
 import Exception.DoneOutOfBoundException;
 import Exception.DoneUnknownException;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class DoneCommand extends Command {
 
@@ -34,5 +35,21 @@ public class DoneCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof DoneCommand) {
+            DoneCommand cur = (DoneCommand) o;
+            if(Arrays.equals(this.command, cur.command)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 }

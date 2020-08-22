@@ -51,4 +51,11 @@ public class TaskList {
         System.out.println("Added new task " + task);
     }
 
+    public int size() {
+        return this.taskList.size();
+    }
+
+    public void removeAll() {
+        this.taskList.clear();
+    }
 }

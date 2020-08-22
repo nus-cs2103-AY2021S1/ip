@@ -35,6 +35,21 @@ public class Deadline extends Task {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(datePattern);
         result+=" # "+deadline.format(dateFormatter);
         return result;
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Deadline) {
+            Deadline cur = (Deadline) o;
+            if (cur.isDone == this.isDone && cur.description.equals(this.description)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 }
