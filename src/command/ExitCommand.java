@@ -1,9 +1,10 @@
 package command;
 
-import command.Command;
-import main.java.Storage;
-import main.java.TaskList;
-import main.java.Ui;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
+import java.util.Arrays;
 
 public class ExitCommand extends Command {
 
@@ -17,5 +18,17 @@ public class ExitCommand extends Command {
 
     public boolean isExit() {
         return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof ExitCommand) {
+            ExitCommand other = (ExitCommand) o;
+            return Arrays.equals(other.splitCommand, this.splitCommand);
+        } else {
+            return false;
+        }
     }
 }

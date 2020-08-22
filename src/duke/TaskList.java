@@ -1,4 +1,4 @@
-package main.java;
+package duke;
 
 import exception.NoSuchTaskException;
 import task.Task;

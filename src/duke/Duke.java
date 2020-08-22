@@ -1,8 +1,9 @@
+package duke;
+
 import java.io.IOException;
 
 import command.Command;
 import exception.DukeException;
-import main.java.*;
 
 public class Duke {
 
@@ -19,7 +20,7 @@ public class Duke {
         duke.run();
     }
 
-    private Duke() {
+    public Duke() {
         ui = new Ui();
         storage = new Storage(DATA_DIRECTORY, SAVED_FILE_PATH);
         try {
@@ -29,7 +30,7 @@ public class Duke {
         }
     }
 
-    private void run() {
+    public void run() {
         ui.hello();
         boolean isExit = false;
         while (!isExit) {

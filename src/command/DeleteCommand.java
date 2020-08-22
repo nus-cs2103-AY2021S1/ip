@@ -1,12 +1,15 @@
 package command;
 
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import exception.DukeException;
 import exception.EmptyDeleteException;
 import exception.NoSuchTaskException;
-import main.java.*;
 import task.Task;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class DeleteCommand extends Command {
 
@@ -32,5 +35,17 @@ public class DeleteCommand extends Command {
 
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof DeleteCommand) {
+            DeleteCommand other = (DeleteCommand) o;
+            return Arrays.equals(other.splitCommand, this.splitCommand);
+        } else {
+            return false;
+        }
     }
 }

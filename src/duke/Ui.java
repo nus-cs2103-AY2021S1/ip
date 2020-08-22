@@ -1,4 +1,4 @@
-package main.java;
+package duke;
 
 import exception.NoSuchTaskException;
 import task.Task;
@@ -19,19 +19,19 @@ public class Ui {
     }
 
     public void hello() {
-        say("Hello! I'm Duke\nWhat can I do for you?");
+        say("Hello! I'm duke.Duke\nWhat can I do for you?");
     }
 
     public void bye() {
         say("Bye. Hope to see you again soon!");
     }
 
-    public void sayAddedTask(Task task, int tasksNum) {
-        say("Got it. I've added this task:\n" + task + "\nNow you have " + tasksNum + " tasks in the list.");
+    public void sayAddedTask(Task task, int tasksTotal) {
+        say("Got it. I've added this task:\n" + task + "\nNow you have " + tasksTotal + " tasks in the list.");
     }
 
-    public void sayDeletedTask(Task task, int tasksNum) {
-        say("Noted. I've removed this task:\n" + task + "\nNow you have " + tasksNum + " tasks in the list.");
+    public void sayDeletedTask(Task task, int tasksTotal) {
+        say("Noted. I've removed this task:\n" + task + "\nNow you have " + tasksTotal + " tasks in the list.");
     }
 
     public void sayMarkedTask(Task task) {

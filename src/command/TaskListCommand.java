@@ -1,9 +1,10 @@
 package command;
 
-import command.Command;
-import main.java.Storage;
-import main.java.TaskList;
-import main.java.Ui;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
+import java.util.Arrays;
 
 public class TaskListCommand extends Command {
 
@@ -17,5 +18,17 @@ public class TaskListCommand extends Command {
 
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof TaskListCommand) {
+            TaskListCommand other = (TaskListCommand) o;
+            return Arrays.equals(other.splitCommand, this.splitCommand);
+        } else {
+            return false;
+        }
     }
 }

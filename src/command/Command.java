@@ -1,9 +1,9 @@
 package command;
 
 import exception.DukeException;
-import main.java.Storage;
-import main.java.TaskList;
-import main.java.Ui;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 public abstract class Command {
     protected String[] splitCommand;

@@ -1,4 +1,4 @@
-package main.java;
+package duke;
 
 import task.Deadline;
 import task.Event;

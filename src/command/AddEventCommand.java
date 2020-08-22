@@ -1,8 +1,10 @@
 package command;
 
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import exception.DukeException;
 import exception.EmptyEventException;
-import main.java.*;
 import task.Event;
 import task.Task;
 
@@ -10,6 +12,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 public class AddEventCommand extends Command {
 
@@ -37,5 +40,17 @@ public class AddEventCommand extends Command {
 
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof AddEventCommand) {
+            AddEventCommand other = (AddEventCommand) o;
+            return Arrays.equals(other.splitCommand, this.splitCommand);
+        } else {
+            return false;
+        }
     }
 }
