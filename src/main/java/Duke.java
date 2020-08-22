@@ -49,7 +49,7 @@ public class Duke {
                         output = printDesign(errorCommand);
                         break;
                 }
-            } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException | IOException ex){
+            } catch (DukeException | IOException ex){
                 output = printDesign(ex.getMessage());
             }
 

@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 
@@ -9,7 +10,8 @@ public class TaskWriter {
         this.filepath = filepath;
     }
 
-    private Task taskCreator(Command command, boolean isDone, String info, String dTimeSplitter, String eTimeSplitter) {
+    private Task taskCreator(Command command, boolean isDone, String info, String dTimeSplitter, String eTimeSplitter)
+            throws DukeException {
         Task newTask = null;
         switch (command) {
             case TODO:
@@ -19,14 +21,14 @@ public class TaskWriter {
                 String[] dInfo = info.split(dTimeSplitter);
                 Validator.info(command, dInfo.length, true);
                 String deadlineEvent = dInfo[0];
-                String deadlineTime = dInfo[1];
+                LocalDate deadlineTime = Validator.date(dInfo[1]);
                 newTask = new Deadline(deadlineEvent, deadlineTime, isDone);
                 break;
             case EVENT:
                 String[] eInfo = info.split(eTimeSplitter);
                 Validator.info(command, eInfo.length, true);
                 String eventEvent = eInfo[0];
-                String eventTime = eInfo[1];
+                LocalDate eventTime = Validator.date(eInfo[1]);
                 newTask = new Event(eventEvent, eventTime, isDone);
                 break;
             default:
@@ -50,14 +52,14 @@ public class TaskWriter {
                     String[] dInfo = info.split(" /by ");
                     Validator.info(command, dInfo.length, true);
                     String deadlineEvent = dInfo[0];
-                    String deadlineTime = dInfo[1];
+                    LocalDate deadlineTime = Validator.date(dInfo[1]);
                     pw.println("DEADLINE|0|" + deadlineEvent + "|" + deadlineTime);
                     break;
                 case EVENT:
                     String[] eInfo = info.split(" /at ");
                     Validator.info(command, eInfo.length, true);
                     String eventEvent = eInfo[0];
-                    String eventTime = eInfo[1];
+                    LocalDate eventTime = Validator.date(eInfo[1]);
                     pw.println("EVENT|0|" + eventEvent + "|" + eventTime);
                     break;
                 default:
@@ -69,6 +71,8 @@ public class TaskWriter {
 
             return "Got it. MUG has added this task:\n"
                     + newTask;
+        } catch (DukeException ex){
+            return ex.getMessage();
         } catch (IOException ex) {
             throw new IOException("Something went wrong. MUG fail to add the Task :_:");
         }
@@ -107,6 +111,8 @@ public class TaskWriter {
             oldFile.delete();
             File renameFile = new File(this.filepath);
             newFile.renameTo(renameFile);
+        } catch (DukeException ex){
+            return ex.getMessage();
         } catch (IOException ex) {
             throw new IOException("Something went wrong. MUG fail to delete the Task :_:");
         }
@@ -154,6 +160,8 @@ public class TaskWriter {
             oldFile.delete();
             File renameFile = new File(this.filepath);
             newFile.renameTo(renameFile);
+        } catch (DukeException ex){
+            return ex.getMessage();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -169,7 +177,7 @@ public class TaskWriter {
         }
     }
 
-    public String readTask() throws FileNotFoundException {
+    public String readTask() throws FileNotFoundException, DukeException {
         Scanner sc = new Scanner(new File(this.filepath));
         sc.useDelimiter("[\n]");
         String line;
@@ -192,9 +200,11 @@ public class TaskWriter {
             if (command == Command.TODO) {
                 results.append(new Todo(newLine[2], taskStatus));
             } else if (command == Command.DEADLINE) {
-                results.append(new Deadline(newLine[2], newLine[3], taskStatus));
+                LocalDate date = Validator.date(newLine[3]);
+                results.append(new Deadline(newLine[2], date, taskStatus));
             } else if (command == Command.EVENT) {
-                results.append(new Event(newLine[2], newLine[3], taskStatus));
+                LocalDate date = Validator.date(newLine[3]);
+                results.append(new Event(newLine[2], date, taskStatus));
             }
         }
 
