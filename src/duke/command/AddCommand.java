@@ -1,6 +1,10 @@
-package main.java;
+package duke.command;
 
-public class AddCommand extends Command{
+import duke.exception.DukeException;
+import duke.task.Task;
+import main.java.*;
+
+public class AddCommand extends Command {
     private Task newTask;
 
     public AddCommand(Task newTask) {

@@ -1,4 +1,8 @@
-package main.java;
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+import main.java.*;
 
 public class ListCommand extends Command{
 
