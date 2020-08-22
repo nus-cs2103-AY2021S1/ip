@@ -75,9 +75,6 @@ public class TaskListTest {
         testInputTasks.add(new Event("event desc1", "2020-12-30"));
 
         TaskList tasks = new TaskList(testInputTasks);
-        assertEquals("1. [T][✘] todo desc1\n" +
-                "2. [T][✘] todo desc2\n" +
-                "3. [D][✘] deadline desc1 (by: Dec 30 2020)\n" +
-                "4. [E][✘] event desc1 (at: Dec 30 2020)", tasks.toString());
+        assertEquals("1. [T][✘] todo desc1\n" + "2. [T][✘] todo desc2\n" + "3. [D][✘] deadline " + "desc1 (by: Dec 30 2020)\n" + "4. [E][✘] event desc1 (at: Dec 30 2020)", tasks.toString());
     }
 }
