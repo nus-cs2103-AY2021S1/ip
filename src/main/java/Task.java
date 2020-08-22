@@ -16,7 +16,7 @@ public abstract class Task {
         return "[" + (isDone ? "\u2713" : "\u2718") + "]";
     }
 
-    public String printData() {
+    public String getData() {
         return (isDone ? "1" : "0") + "|" + description;
     }
 

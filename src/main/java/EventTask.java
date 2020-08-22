@@ -25,8 +25,8 @@ public class EventTask extends Task {
     }
 
     @Override
-    public String printData() {
-        return "E|" + super.printData() + "|" + dateTime.format(DateTimeFormatter.ofPattern("YYYY-MM-dd"));
+    public String getData() {
+        return "E|" + super.getData() + "|" + dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     @Override

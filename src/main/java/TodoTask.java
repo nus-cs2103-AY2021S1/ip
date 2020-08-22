@@ -14,8 +14,8 @@ public class TodoTask extends Task {
     }
 
     @Override
-    public String printData() {
-        return "T|" + super.printData();
+    public String getData() {
+        return "T|" + super.getData();
     }
 
     @Override

@@ -25,8 +25,8 @@ public class DeadlineTask extends Task {
     }
 
     @Override
-    public String printData() {
-        return "D|" + super.printData() + "|" + dateTime.format(DateTimeFormatter.ofPattern("YYYY-MM-dd"));
+    public String getData() {
+        return "D|" + super.getData() + "|" + dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     @Override
