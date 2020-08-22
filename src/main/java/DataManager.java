@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -30,14 +32,14 @@ public class DataManager {
                     stringToWrite = event.taskType.name() + "|" +
                             (event.isDone ? "true" : "false") + "|" +
                             event.description + "|" +
-                            event.time;
+                            event.time.format(DateTimeFormatter.ISO_LOCAL_DATE);
                     break;
                 case DEADLINE:
                     Deadline deadline = (Deadline) task;
                     stringToWrite = deadline.taskType.name() + "|" +
                             (deadline.isDone ? "true" : "false") + "|" +
                             deadline.description + "|" +
-                            deadline.time;
+                            deadline.time.format(DateTimeFormatter.ISO_LOCAL_DATE);
                     break;
                 }
                 fw.write(stringToWrite + "\n");
@@ -69,10 +71,10 @@ public class DataManager {
                         taskList.add(new ToDo(data[2], Boolean.parseBoolean(data[1])));
                         break;
                     case EVENT:
-                        taskList.add(new Event(data[2], Boolean.parseBoolean(data[1]), data[3]));
+                        taskList.add(new Event(data[2], Boolean.parseBoolean(data[1]), LocalDate.parse(data[3])));
                         break;
                     case DEADLINE:
-                        taskList.add(new Deadline(data[2], Boolean.parseBoolean(data[1]), data[3]));
+                        taskList.add(new Deadline(data[2], Boolean.parseBoolean(data[1]), LocalDate.parse(data[3])));
                         break;
                     default:
                         throw new DukeException("Invalid data format provided!");
