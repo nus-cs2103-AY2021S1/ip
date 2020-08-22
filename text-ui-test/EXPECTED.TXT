@@ -1,32 +1,35 @@
 Hello Boss! How can I help you?
 --------------------------------------
+Here are the tasks in your list:
+--------------------------------------
+--------------------------------------
 Got it. I've added this task:
-   [T][✘]  buy some fruits
+   [T][✘] buy some fruits
 Now you have 1 tasks in the list.
 --------------------------------------
 --------------------------------------
 Here are the tasks in your list:
-1.[T][✘]  buy some fruits
+1.[T][✘] buy some fruits
 --------------------------------------
 --------------------------------------
 Got it. I've added this task:
-   [D][✘]  must eat the fruit (by: Sunday)
+   [D][✘] must eat the fruit (by: Sunday)
 Now you have 2 tasks in the list.
 --------------------------------------
 --------------------------------------
 Got it. I've added this task:
-   [E][✘]  attend ninja fruit competition (at: Mon 2-4pm)
+   [E][✘] attend ninja fruit competition (at: Mon 2-4pm)
 Now you have 3 tasks in the list.
 --------------------------------------
 --------------------------------------
 Nice! I've marked this task as done:
-   [T][✓]  buy some fruits
+   [T][✓] buy some fruits
 --------------------------------------
 --------------------------------------
 Here are the tasks in your list:
-1.[T][✓]  buy some fruits
-2.[D][✘]  must eat the fruit (by: Sunday)
-3.[E][✘]  attend ninja fruit competition (at: Mon 2-4pm)
+1.[T][✓] buy some fruits
+2.[D][✘] must eat the fruit (by: Sunday)
+3.[E][✘] attend ninja fruit competition (at: Mon 2-4pm)
 --------------------------------------
 --------------------------------------
 Oops! Todo cannot have an empty message!
@@ -42,7 +45,7 @@ Oops! I'm sorry Boss! I do not know what that means :-(
 --------------------------------------
 --------------------------------------
 Noted. I've removed this task:
-   [T][✓]  buy some fruits
+   [T][✓] buy some fruits
 Now you have 2 tasks in the list.
 --------------------------------------
 --------------------------------------

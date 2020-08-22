@@ -2,15 +2,18 @@ public class Event extends Task {
 
     protected String time;
 
-    Event(String description) {
+    Event(String description, String time) {
         super(description);
-        String[] strArr = description.split("/", 2);
-        this.description = strArr[0];
-        this.time = strArr[1].substring(2);
+        this.time = time;
     }
 
     @Override
     public String toString() {
         return String.format("[E]%s(at:%s)", super.toString(), time);
+    }
+
+    @Override
+    public String toSaveString() {
+        return String.format("%s || event || %s || %s", super.toSaveString(), this.description, this.time);
     }
 }
