@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Optional;
 
-public class Task {
+public class Task implements Serializable {
 
     private String type;// can be [T] [E] or [D]
     private boolean done = false;
