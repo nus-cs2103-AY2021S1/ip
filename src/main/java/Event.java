@@ -6,6 +6,11 @@ public class Event extends Task {
     this.at = at;
   }
 
+  public Event(String description, String at, boolean isDone) {
+    super(description, isDone);
+    this.at = at;
+  }
+
   @Override
   public String getData() {
     return "e/" + super.getData() + "/" + this.at;
