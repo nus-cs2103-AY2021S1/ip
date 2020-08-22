@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -60,7 +63,7 @@ public class Duke {
                             } else if (byDate.equals("")) {
                                 throw new EmptyDateError();
                             } else {
-                                addTask(new Deadline(deadline, byDate));
+                                addTask(new Deadline(deadline, formatDateTime(byDate)));
                             }
                             break;
                         case "event":
@@ -78,7 +81,7 @@ public class Duke {
                             } else if (atDate.equals("")) {
                                 throw new EmptyDateError();
                             } else {
-                                addTask(new Event(event, atDate));
+                                addTask(new Event(event, formatDateTime(atDate)));
                             }
                             break;
                         default:
@@ -88,6 +91,10 @@ public class Duke {
                 catch (DukeError e) {
                     hrTag();
                     System.out.println(e.getMessage());
+                    hrTag();
+                } catch (DateTimeParseException e) {
+                    hrTag();
+                    System.out.println("Invalid date entered!\nPlease enter the following format! dd/mm/yyyy HH:MM");
                     hrTag();
                 }
             }
@@ -99,6 +106,32 @@ public class Duke {
 
     public static void hrTag() {
         System.out.println("____________________________________________________________");
+    }
+
+    private static LocalDateTime formatDateTime(String s) throws InvalidDateInputError {
+        String[] dateAndTime = s.split(" ");
+
+        if (dateAndTime.length != 2) {
+            throw new InvalidDateInputError();
+        }
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        String beforeDate = dateAndTime[0];
+        String[] arrDate = beforeDate.split("/");
+        if (arrDate[0].length() == 1) {
+            beforeDate = "0".concat(beforeDate);
+        }
+        if (arrDate[1].length() == 1) {
+            beforeDate = String.format("%s/0%s/%s", beforeDate.substring(0, 2),
+                    arrDate[1], arrDate[2]);
+        }
+
+        String beforeTime = dateAndTime[1];
+        if (beforeTime.length() == 4) {
+            beforeTime = beforeTime.substring(0, 2) + ":" + beforeTime.substring(2);
+        }
+        String after = beforeDate + " " + beforeTime;
+        return LocalDateTime.parse(after, dateFormatter);
     }
 
     private static void welcomeMessage() {
