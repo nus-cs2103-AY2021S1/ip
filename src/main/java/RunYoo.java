@@ -28,15 +28,15 @@ public class RunYoo {
                     else if (temp[0].equals("event"))
                         addEvent(al, temp);
                     else
-                        throw new YooException("Sorry, I didn't get that (っ*´□`)っ");
+                        throw new YooException("Sorry, I didn't get that (\u3063*\u00B4\u25A1`)\u3063");
 
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println("You're missing a task description (っ*´□`)っ");
+                    System.out.println("You're missing a task description (\u3063*\u00B4\u25A1`)\u3063");
                 }
             }
             input = sc.nextLine();
         }
-        System.out.println("Bye! Come back soon ( ･ω･)ﾉ");
+        System.out.println("Bye! Come back soon ( ^-^)/");
     }
 
 
@@ -53,7 +53,7 @@ public class RunYoo {
         if (index > al.size()) {
             throw new YooException("No such task (>_<)");
         } else {
-            System.out.println("Good job completing the task! ╭( ･ㅂ･)و");
+            System.out.println("Good job completing the task! \u256D( \uFF65\u3142\uFF65)\u0648");
             Task t = al.get(index - 1);
             t.markAsDone();
             System.out.println(index + ". " + t);
@@ -67,7 +67,7 @@ public class RunYoo {
         } else {
             Task t = al.remove(index - 1);
             System.out.println("I've deleted the following task! \n" + t);
-            System.out.println("Now you have " + al.size() + " tasks in the list (´・ω・｀)");
+            System.out.println("Now you have " + al.size() + " tasks in the list (\u00B4\u30FB\u03C9\u30FB\uFF40)");
         }
     }
 
@@ -75,7 +75,7 @@ public class RunYoo {
         Todo td = new Todo(temp[1]);
         al.add(td);
         System.out.println("I've added the following task! \n" + td);
-        System.out.println("Now you have " + al.size() + " tasks in the list (´・ω・｀)");
+        System.out.println("Now you have " + al.size() + " tasks in the list (\u00B4\u30FB\u03C9\u30FB\uFF40)");
     }
 
     private static void addDeadline(ArrayList<Task> al, String[] temp) {
@@ -84,9 +84,9 @@ public class RunYoo {
             Deadline dl = new Deadline(a[0], a[1]);
             al.add(dl);
             System.out.println("I've added the following task! \n" + dl);
-            System.out.println("Now you have " + al.size() + " tasks in the list (´・ω・｀)");
+            System.out.println("Now you have " + al.size() + " tasks in the list (\u00B4\u30FB\u03C9\u30FB\uFF40)");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Sorry, your deadline time is missing (っ*´□`)っ");
+            System.out.println("Sorry, your deadline time is missing (\u3063*\u00B4\u25A1`)\u3063");
         }
     }
 
@@ -96,9 +96,9 @@ public class RunYoo {
             Event e = new Event(a[0], a[1]);
             al.add(e);
             System.out.println("I've added the following task! \n" + e);
-            System.out.println("Now you have " + al.size() + " tasks in the list (´・ω・｀)");
+            System.out.println("Now you have " + al.size() + " tasks in the list (\u00B4\u30FB\u03C9\u30FB\uFF40)");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Sorry, your event time is missing (っ*´□`)っ");
+            System.out.println("Sorry, your event time is missing (\u3063*\u00B4\u25A1`)\u3063");
         }
     }
 }
