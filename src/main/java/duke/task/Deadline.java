@@ -2,19 +2,30 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import duke.exception.InvalidDateInputException;
 
 public class Deadline extends Task {
     private static final String identifier = "D";
     private final LocalDate by;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws InvalidDateInputException {
         super(description);
-        this.by = LocalDate.parse(by);
+        try {
+            this.by = LocalDate.parse(by);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateInputException(by);
+        }
     }
 
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, String by, boolean isDone) throws InvalidDateInputException {
         super(description, isDone);
-        this.by = LocalDate.parse(by);
+        try {
+            this.by = LocalDate.parse(by);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateInputException(by);
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exception.InvalidDateInputException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TaskListTest {
 
     @Test
-    public void addTask_taskListWithSomeItems_taskAddedAsLastItem() {
+    public void addTask_taskListWithSomeItems_taskAddedAsLastItem() throws InvalidDateInputException {
         List<Task> testInputTasks = new ArrayList<>();
         testInputTasks.add(new Todo("todo desc1"));
         testInputTasks.add(new Todo("todo desc2"));
@@ -25,7 +26,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void deleteTask_taskListWithSomeItems_success() {
+    public void deleteTask_taskListWithSomeItems_success() throws InvalidDateInputException {
         List<Task> testInputTasks = new ArrayList<>();
         testInputTasks.add(new Todo("todo desc1"));
         Task taskToDelete = new Todo("todo desc3");
@@ -38,11 +39,11 @@ public class TaskListTest {
         tasks.deleteTask(2);
         int numItemsAfter = tasks.size();
 
-        assertEquals(numItemsInitial - 1, numItemsAfter );
+        assertEquals(numItemsInitial - 1, numItemsAfter);
     }
 
     @Test
-    public void size_emptyTaskList_zero() {
+    public void size_emptyTaskList_zero() throws InvalidDateInputException {
         List<Task> testInputTasks = new ArrayList<>();
         testInputTasks.add(new Todo("todo desc1"));
         testInputTasks.add(new Deadline("deadline desc1", "2020-12-30"));
@@ -65,8 +66,9 @@ public class TaskListTest {
     }
 
     @Test
-    public void toString_nonEmptyTaskList_noTrailingNewLine() {
+    public void toString_nonEmptyTaskList_noTrailingNewLine() throws InvalidDateInputException {
         List<Task> testInputTasks = new ArrayList<>();
+
         testInputTasks.add(new Todo("todo desc1"));
         testInputTasks.add(new Todo("todo desc2"));
         testInputTasks.add(new Deadline("deadline desc1", "2020-12-30"));

@@ -1,6 +1,7 @@
 package duke;
 
 import duke.exception.CorruptedStorageException;
+import duke.exception.InvalidDateInputException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -62,7 +63,12 @@ public class Storage {
                         throw new CorruptedStorageException("Deadline task is missing due date!");
                     }
                     String by = tokens[3];
-                    tasks.add(new Deadline(desc, by, isDone));
+
+                    try {
+                        tasks.add(new Deadline(desc, by, isDone));
+                    } catch (InvalidDateInputException e) {
+                        throw new CorruptedStorageException("Date was not stored properly!");
+                    }
 
                     break;
                 case "E":
@@ -70,7 +76,12 @@ public class Storage {
                         throw new CorruptedStorageException("Event task is missing date!");
                     }
                     String at = tokens[3];
-                    tasks.add(new Event(desc, at, isDone));
+
+                    try {
+                        tasks.add(new Event(desc, at, isDone));
+                    } catch (InvalidDateInputException e) {
+                        throw new CorruptedStorageException("Date was not stored properly!");
+                    }
 
                     break;
             }

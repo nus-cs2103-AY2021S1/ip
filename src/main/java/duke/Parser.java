@@ -1,10 +1,7 @@
 package duke;
 
 import duke.command.*;
-import duke.exception.DukeException;
-import duke.exception.InvalidTaskIdException;
-import duke.exception.MissingTaskDetailsException;
-import duke.exception.MissingTaskIdException;
+import duke.exception.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;

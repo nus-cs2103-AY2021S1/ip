@@ -2,19 +2,30 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import duke.exception.InvalidDateInputException;
 
 public class Event extends Task {
     private static final String identifier = "E";
     private final LocalDate at;
 
-    public Event(String description, String at) {
+    public Event(String description, String at) throws InvalidDateInputException {
         super(description);
-        this.at = LocalDate.parse(at);
+        try {
+            this.at = LocalDate.parse(at);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateInputException(at);
+        }
     }
 
-    public Event(String description, String at, boolean isDone) {
+    public Event(String description, String at, boolean isDone) throws InvalidDateInputException {
         super(description, isDone);
-        this.at = LocalDate.parse(at);
+        try {
+            this.at = LocalDate.parse(at);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateInputException(at);
+        }
     }
 
     @Override
