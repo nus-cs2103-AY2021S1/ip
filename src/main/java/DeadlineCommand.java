@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class DeadlineCommand extends Command {
 
     public DeadlineCommand(String command) {
@@ -6,12 +8,14 @@ public class DeadlineCommand extends Command {
     }
 
     // Method to get the date of a deadline task
-    protected LocalDate getDateForTask() throws InvalidTaskDescriptionException {
+    protected LocalDate getDateForTask() throws InvalidTaskDescriptionException, WrongDateFormatException {
         try {
             String[] taskDetails = this.command.split("/");
             return LocalDate.parse(taskDetails[1]);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskDescriptionException();
+        } catch (DateTimeParseException e) {
+            throw new WrongDateFormatException();
         }
     }
 
