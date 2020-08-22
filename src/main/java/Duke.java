@@ -1,13 +1,19 @@
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    private final String DATA_DIRECTORY_PATH = "data";
+    private final String DATA_FILE_PATH = "./data/duke.txt";
+    private File dataDirectory, dataFile;
     private Scanner scanner;
     private List<Task> taskList;
-    private File dataDirectory, dataFile;
 
     public void initialise() {
         String logo = "\t    ,---,                                     \n" +
@@ -23,13 +29,14 @@ public class Duke {
                 "\t;   :  .'    :  ,      .-./   :    :||   :    |     \n" +
                 "\t|   ,.'       `--`----'    \\   \\  /   \\   \\  /  \n" +
                 "\t'---'                       `----'     `----'       \n";
-        System.out.printf(logo);
+        System.out.print(logo);
         System.out.println("\t Initializing...");
         
         scanner = new Scanner(System.in);
         taskList = new ArrayList<>();
-        dataDirectory = new File("data");
-        dataFile = new File("./data/duke.txt");
+
+        dataDirectory = new File(DATA_DIRECTORY_PATH);
+        dataFile = new File(DATA_FILE_PATH);
         
         try {
             if (dataDirectory.mkdir()) {
@@ -42,16 +49,74 @@ public class Duke {
                 System.out.println("\t Data file created: " + dataFile.getName());
             } else {
                 System.out.println("\t Data file located.");
+                loadExistingTasks();
             }
         } catch (IOException e) {
             System.out.println("\t An error occurred.");
             e.printStackTrace();
+            System.exit(1);
+        } catch (DukeException e) {
+            System.out.println("\t " + e.getMessage());
             System.exit(1);
         }
         
         System.out.println("\t Initialization complete.");
         
         greet();
+    }
+    
+    private void loadExistingTasks() throws IOException, DukeException {
+        // load existing tasks into task list
+        FileReader fileReader = new FileReader(dataFile);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        String entry = bufferedReader.readLine();
+        while (entry != null) {
+            String[] entryBreakdown = entry.split(" \\| ");
+            if (entryBreakdown.length < 3) {
+                throw new DukeException("Data file corrupted");
+            }
+            if (!(entryBreakdown[1].equals("0") || entryBreakdown[1].equals("1"))) {
+                throw new DukeException("Data file corrupted");
+            }
+            String type = entryBreakdown[0];
+            boolean isDone = entryBreakdown[1].equals("1");
+            String description = entryBreakdown[2];
+            
+            Task task;
+            switch (type) {
+            case ("T"):
+                task = new Todo(description);
+                if (isDone) {
+                    task.markAsDone();
+                }
+                break;
+            case ("D"):
+                if (entryBreakdown.length != 4) {
+                    throw new DukeException("Data file corrupted");
+                }
+                String by = entryBreakdown[3];
+                task = new Deadline(description, by);
+                if (isDone) {
+                    task.markAsDone();
+                }
+                break;
+            case ("E"):
+                if (entryBreakdown.length != 4) {
+                    throw new DukeException("Data file corrupted");
+                }
+                String at = entryBreakdown[3];
+                task = new Event(description, at);
+                if (isDone) {
+                    task.markAsDone();
+                }
+                break;
+            default:
+                throw new DukeException("Data file corrupted.");
+            }
+            taskList.add(task);
+            entry = bufferedReader.readLine();
+        }
+        System.out.println("\t Data file loaded successfully.");
     }
     
     private void sendMessage(List<String> messages) {
@@ -117,6 +182,7 @@ public class Duke {
         try {
             int taskNumber = Integer.parseInt(input);
             markTaskAsDone(taskNumber);
+            updateDataFile();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Error! The task number entered does not exist.");
         } catch (NumberFormatException e) {
@@ -127,6 +193,7 @@ public class Duke {
     private void handleTodoCommand(String input) {
         Todo todo = new Todo(input);
         addTask(todo);
+        updateDataFile();
     }
     
     private void handleDeadlineCommand(String input) throws DukeException {
@@ -138,6 +205,7 @@ public class Duke {
             String by = inputBreakdown[1];
             Deadline deadline = new Deadline(description, by);
             addTask(deadline);
+            updateDataFile();
         }
     }
     
@@ -150,6 +218,7 @@ public class Duke {
             String at = inputBreakdown[1];
             Event event = new Event(description, at);
             addTask(event);
+            updateDataFile();
         }
     }
     
@@ -157,10 +226,24 @@ public class Duke {
         try {
             int taskNumber = Integer.parseInt(input);
             deleteTask(taskNumber);
+            updateDataFile();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Error! The task number entered does not exist.");
         } catch (NumberFormatException e) {
             throw new DukeException("Error! Please enter a valid task number.");
+        }
+    }
+    
+    private void updateDataFile() {
+        try {
+            FileWriter fileWriter = new FileWriter(dataFile);
+            for (Task task : taskList) {
+                fileWriter.write(task.toData() + "\n");
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
 

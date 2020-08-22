@@ -1,6 +1,6 @@
 public class Task {
-    private String description;
-    private boolean isDone;
+    protected String description;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -15,6 +15,11 @@ public class Task {
         isDone = true;
     }
 
+    public String toData() {
+        int binary = isDone ? 1 : 0;
+        return binary + " | " + description;
+    }
+    
     @Override
     public String toString() {
         String statusIcon = getStatusIcon();
