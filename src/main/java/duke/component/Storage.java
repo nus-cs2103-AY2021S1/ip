@@ -68,7 +68,7 @@ public class Storage {
         }
     }
 
-    public void deleteTask(TaskList list) throws InvalidCommandException {
+    public void reWrite(TaskList list) throws InvalidCommandException {
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Task task : list) {

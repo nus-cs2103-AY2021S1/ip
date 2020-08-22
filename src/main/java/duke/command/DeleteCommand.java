@@ -14,7 +14,7 @@ public class DeleteCommand extends Command {
         int m = Parser.isValidDelete(input, count) - 1;
         Task toDelete = list.get(m);
         list.remove(toDelete);
-        storage.deleteTask(list);
+        storage.reWrite(list);
         ui.output("Noted. I've removed this task:\n\t    " + toDelete +
                 "\n\t  Now you have " + list.size());
     }
