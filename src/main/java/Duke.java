@@ -1,10 +1,22 @@
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+
+        try {
+            readListFromFile();
+        } catch (DukeException e) {
+            Print.formatPrint(e.getMessage());
+        }
+
         Scanner sc = new Scanner(System.in);
 
-        String greeting = "Hello I'm Duke, your favourite chatbot! \n"
+        String greeting = "Hello I'm Duke, your favourite chatbot! \n\n"
+                + Task.printList()
+                + "\n\n"
                 + "What can I do for you? ";
         Print.formatPrint(greeting);
 
@@ -19,7 +31,7 @@ public class Duke {
                     Print.formatPrint("Bye! Hope to see you again soon! ");
                     return;
                 case LIST:
-                    Task.printList();
+                    Print.formatPrint(Task.printList());
                     break;
                 case DONE:
                     if (inputs.length <= 1) {
@@ -96,6 +108,31 @@ public class Duke {
             return CommandType.EVENT;
         default:
             throw new DukeException("OOPS! I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
+    private static void readListFromFile() throws DukeException {
+        try {
+
+            FileReader fr = new FileReader("data/TaskList.txt");
+            BufferedReader br = new BufferedReader(fr);
+
+            String task;
+            List<String> tasks = new ArrayList<>();
+            while ((task = br.readLine()) != null) {
+                tasks.add(task.strip());
+            }
+            Task.generateTaskList(tasks);
+
+        } catch (FileNotFoundException e) {
+            new File("data/").mkdirs();
+            try {
+                new File("data/TaskList.txt").createNewFile();
+            } catch (IOException ex) {
+                throw new DukeException("OOPS! I'm sorry, there is an error during initialisation :-(");
+            }
+        } catch (IOException e) {
+            throw new DukeException("OOPS! I'm sorry, there is an error during initialisation :-(");
         }
     }
 }

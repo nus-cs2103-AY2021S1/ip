@@ -11,6 +11,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(boolean isDone, String description) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "[\u2713]" : "[\u2718]");
     }
@@ -28,16 +33,16 @@ public class Task {
                 deletedTask, taskList.size(), taskList.size() > 1 ? "s": ""));
     }
 
-    public static void printList() {
+    public static String printList() {
         String output = "Here are the tasks in your list:\n";
         int count = taskList.size();
         if (count <= 0) {
-            Print.formatPrint("There is no task in your list currently. ");
+            return "There is no task in your list currently. ";
         } else {
             for (int i = 0; i < count; i++) {
                 output += (i + 1) + ". " + taskList.get(i) + "\n";
             }
-            Print.formatPrint(output.strip());
+            return output.strip();
         }
     }
 
@@ -48,6 +53,29 @@ public class Task {
 
     public static void markTaskAsDone(int idx) {
         taskList.get(idx - 1).markAsDone();
+    }
+
+    public static void generateTaskList(List<String> tasks) {
+        for (String task : tasks) {
+            if (task.length() < 1) {
+                continue;
+            }
+            String[] taskDetail = task.split(" \\| ");
+            String type = taskDetail[0];
+            boolean isDone = Integer.parseInt(taskDetail[1]) == 1;
+            String description = taskDetail[2];
+            switch (type) {
+                case "T":
+                    taskList.add(new ToDo(isDone, description));
+                    break;
+                case "E":
+                    taskList.add(new Event(isDone, description, taskDetail[3]));
+                    break;
+                case "D":
+                    taskList.add(new Deadline(isDone, description, taskDetail[3]));
+                    break;
+            }
+        }
     }
 
     @Override
