@@ -2,14 +2,19 @@ Hello! I'm Duke
 What can I do for you?
 Got it. I've added this task:
  [T][ ] buy book
-Got it. I've added this task:
- [E][ ] return book (by: Sunday)
-Got it. I've added this task:
- [E][ ] project meeting (at: Mon 2-4pm)
-Got it. I've added this task:
- [E][ ] sky jumping (at: Sat 2-4pm)
+Date format is wrong. It should be yyyy-mm-dd and within possible date ranges
+Date format is wrong. It should be yyyy-mm-dd and within possible date ranges
+Date format is wrong. It should be yyyy-mm-dd and within possible date ranges
 Error! The description of a event is missing a date.
+Date format is wrong. It should be yyyy-mm-dd and within possible date ranges
+Got it. I've added this task:
+ [E][ ] funny (at: May 25 2019)
 Error! The description of a deadline is missing a date.
+Got it. I've added this task:
+ [E][ ] return book (by: Jul 29 2020)
+Date format is wrong. It should be yyyy-mm-dd and within possible date ranges
+Got it. I've added this task:
+ [E][ ] funny (by: May 25 2019)
 Got it. I've added this task:
  [T][ ] team bundling
 Got it. I've added this task:
@@ -18,32 +23,29 @@ Good job. This task is marked as done:
  [T][x] team bundling
 Task at index 100 doesn't exist
 There are 6 tasks currently. Please a number between 1 and 6 inclusive.
-Got it. I've added this task:
- [E][ ] sing song (at: Fri 2pm)
+Date format is wrong. It should be yyyy-mm-dd and within possible date ranges
 Good job. This task is marked as done:
- [E][x] return book (by: Sunday)
+ [E][x] funny (at: May 25 2019)
 1. [T][ ] buy book
-2. [E][x] return book (by: Sunday)
-3. [E][ ] project meeting (at: Mon 2-4pm)
-4. [E][ ] sky jumping (at: Sat 2-4pm)
+2. [E][x] funny (at: May 25 2019)
+3. [E][ ] return book (by: Jul 29 2020)
+4. [E][ ] funny (by: May 25 2019)
 5. [T][x] team bundling
 6. [T][ ] eat chicken nuggets
-7. [E][ ] sing song (at: Fri 2pm)
+
 Task at index 100 doesn't exist
-There are 7 tasks currently. Please a number between 1 and 7 inclusive.
+There are 6 tasks currently. Please a number between 1 and 6 inclusive.
 Noted. I've remove this task:
- [E][ ] project meeting (at: Mon 2-4pm)
+ [E][ ] return book (by: Jul 29 2020)
 1. [T][ ] buy book
-2. [E][x] return book (by: Sunday)
-3. [E][ ] sky jumping (at: Sat 2-4pm)
+2. [E][x] funny (at: May 25 2019)
+3. [E][ ] funny (by: May 25 2019)
 4. [T][x] team bundling
 5. [T][ ] eat chicken nuggets
-6. [E][ ] sing song (at: Fri 2pm)
+
 Noted. I've remove this task:
  [T][x] team bundling
-1. [T][ ] buy book
-2. [E][x] return book (by: Sunday)
-3. [E][ ] sky jumping (at: Sat 2-4pm)
-4. [T][ ] eat chicken nuggets
-5. [E][ ] sing song (at: Fri 2pm)
+1. [E][x] funny (at: May 25 2019)
+2. [E][ ] funny (by: May 25 2019)
+
 Bye! Hope to never see you again!
