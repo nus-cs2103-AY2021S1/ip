@@ -1,4 +1,6 @@
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Duke {
     static final String GREET = "greet";
@@ -9,6 +11,12 @@ public class Duke {
     static final String EVENT = "event";
     static final String DEADLINE = "deadline";
     static final String DELETE = "delete";
+
+    private static String formatDate(String date) {
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        LocalDate localDate = LocalDate.parse(date);
+        return localDate.format(pattern);
+    }
 
     protected static Task assignTask(String[] command) throws DukeException {
         Task t;
@@ -29,7 +37,7 @@ public class Duke {
             } else if (type.equals(DEADLINE)) {
                 String[] s = description.split(" /by ");
                 String desc = s[0];
-                String by = s[1];
+                String by = formatDate(s[1]);
                 t = new Deadline(desc, by);
             } else if (type.equals(DELETE)) {
                 int taskNum = Integer.parseInt(description) - 1;
