@@ -59,4 +59,25 @@ public class HappenCommandTest {
         invalidDateFormatHelper("happen before tomorrow", ui, list, storage);
         invalidDateFormatHelper("happen between 2020-08-09 2020/09/01", ui, list, storage);
     }
+
+    @Test
+    public void execute_nonPositiveInDays_throwException() {
+        Ui ui = new Ui();
+        Storage storage = new StorageStub();
+        TaskList list = storage.getList();
+
+        try {
+            new HappenCommand("happen in 0 days").execute(ui, list, storage);
+            fail();
+        } catch (Exception e) {
+            assertEquals("Please input a positive integer for happen in command.", e.getMessage());
+        }
+
+        try {
+            new HappenCommand("happen in -3 days").execute(ui, list, storage);
+            fail();
+        } catch (Exception e) {
+            assertEquals("Please input a positive integer for happen in command.", e.getMessage());
+        }
+    }
 }
