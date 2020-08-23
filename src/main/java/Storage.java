@@ -5,17 +5,28 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents the Storage handler for the bot.
+ */
 public class Storage {
     private final TaskList taskList;
     private final String pathname;
     private final File file;
 
+    /**
+     * Constructor for class Storage.
+     * @param taskList The task list of the bot
+     * @param name The name of the text file used to store the save data
+     */
     public Storage(TaskList taskList, String name) {
         this.taskList = taskList;
         pathname = Storage.getStoragePath(name);
         file = new File(pathname);
     }
 
+    /**
+     * Checks and makes save file.
+     */
     public void fileCheck() {
         try {
             File f = new File(pathname);
@@ -30,6 +41,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves current task list state to save file.
+     */
     public void saveFile() {
         try {
             FileWriter fw = new FileWriter(file);
@@ -68,6 +82,9 @@ public class Storage {
 
     }
 
+    /**
+     * Loads state from save file.
+     */
     public  void loadFile() {
         try {
             Scanner scan = new Scanner(file);
@@ -98,17 +115,29 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates save file.
+     */
     public  void updateFile() {
         file.delete();
         saveFile();
         loadFile();
     }
 
+    /**
+     * Returns the file path of the save file.
+     * @param name The name of the save file
+     * @return The absolute path to the save file
+     */
     public static String getStoragePath(String name) {
         return System.getProperty("user.dir")
                 + File.separator + "data" + File.separator + name + ".txt";
     }
 
+    /**
+     * Getter method for file attribute.
+     * @return The file attribute of Storage object
+     */
     public File getFile() {
         return file;
     }
