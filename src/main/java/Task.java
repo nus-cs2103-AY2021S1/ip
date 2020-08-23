@@ -27,6 +27,10 @@ abstract class Task {
         this.isCompleted = true;
     }
 
+    String[] getDataString() {
+        return new String[] {"task", String.valueOf(isCompleted), description};
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;

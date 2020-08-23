@@ -15,6 +15,11 @@ class Event extends Task {
     }
 
     @Override
+    String[] getDataString() {
+        return new String[] {"event", String.valueOf(isCompleted), description, dateTime};
+    }
+
+    @Override
     public String toString() {
         return "[E][" + super.getStatusIcon() + "] " + super.description + " (at: " + this.dateTime + ")";
     }

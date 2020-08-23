@@ -17,6 +17,7 @@ public class Duke {
     private static String completeTaskMessage = Duke.textIndentation + "Nice! I've marked this task as done:";
     private static String invalidSyntaxMessage = Duke.textIndentation + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     private static String deleteTaskMessage = Duke.textIndentation + "Noted. I've removed this task:";
+    private static String dataSeparator = "\uff5c";
     private static TaskList taskList;
 
     public static void main(String[] args) {
@@ -29,7 +30,7 @@ public class Duke {
                 BufferedReader csvReader = new BufferedReader(new FileReader(dukeData));
                 String eachRow;
                 while ((eachRow = csvReader.readLine()) != null) {
-                    String[] dataStringArray = eachRow.split(",");
+                    String[] dataStringArray = eachRow.split(dataSeparator);
                     System.out.println(dataStringArray[0] + dataStringArray[1] + dataStringArray[2]);
                     Task eachTask = Duke.genTask(dataStringArray);
                     if (eachTask != null) {
@@ -73,7 +74,12 @@ public class Duke {
 
                 for (Task eachTask : Duke.taskList.taskArrayList) {
                     try {
-                        csvWriter.append(eachTask.toString());
+                        String[] dataString = eachTask.getDataString();
+                        for (int i = 0; i < dataString.length; i++) {
+                            csvWriter.append(dataString[i]);
+                            csvWriter.append(dataSeparator);
+                        }
+                        csvWriter.append("\n");
                     } catch (Exception e) {
                         System.out.println("FAILED TO WRITE TASK");
                     }

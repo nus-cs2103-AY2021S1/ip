@@ -10,6 +10,7 @@ class ToDo extends Task {
         super(isCompleted, description);
     }
 
+    @Override
     String[] getDataString() {
         return new String[] {"todo", String.valueOf(isCompleted), description};
     }
