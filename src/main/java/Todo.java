@@ -1,8 +1,13 @@
+import java.time.LocalDate;
+
 public class Todo extends Task {
+    protected boolean hasTime = false;
 
     public Todo(String description) {
         super(description);
     }
+
+
 
     @Override
     public String toString() {

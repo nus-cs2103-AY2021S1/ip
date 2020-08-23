@@ -1,5 +1,9 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -14,7 +18,7 @@ public class Duke {
             String input = sc.nextLine();
             try {
                 dk.respond(input, tasks);
-            } catch (CommandNotFoundException | EmptyTaskException | EmptyTimeException ex) {
+            } catch (CommandNotFoundException | EmptyTaskException | EmptyTimeException | WrongDateFormatException ex) {
                 System.out.println(ex.getMessage());
             }
             System.out.println("____________________________________________________________");
@@ -26,7 +30,7 @@ public class Duke {
     }
 
     public void respond(String input, ArrayList<Task> tasks) throws CommandNotFoundException, EmptyTaskException,
-    EmptyTimeException {
+    EmptyTimeException, WrongDateFormatException {
         String[] parseArray = input.trim().split(" ", 2);
         String type = parseArray[0].toUpperCase();
         try {
@@ -36,7 +40,12 @@ public class Duke {
                     endConversation();
                     break;
                 case LIST:
-                    showTask(tasks);
+                    if (parseArray.length == 1) {
+                        showTask(tasks);
+                    } else {
+                        LocalDate date = LocalDate.parse(parseArray[1]);
+                        showTasksOnSpecificDay(date, tasks);
+                    }
                     break;
                 case DONE:
                 case DELETE:
@@ -79,7 +88,8 @@ public class Duke {
                                     String description = rest.split(" /")[0];
                                     try{
                                         String time = rest.split(" /")[1].split(" ", 2)[1];
-                                        Deadline newDeadline = new Deadline(description, time);
+                                        LocalDate date = LocalDate.parse(time);
+                                        Deadline newDeadline = new Deadline(description, date);
                                         tasks.add(newDeadline);
                                         System.out.println(newDeadline);
                                     } catch (ArrayIndexOutOfBoundsException ex) {
@@ -95,7 +105,8 @@ public class Duke {
                                     String description = rest.split(" /")[0];
                                     try{
                                         String time = rest.split(" /")[1].split(" ", 2)[1];
-                                        Event newEvent = new Event(description, time);
+                                        LocalDate date = LocalDate.parse(time);
+                                        Event newEvent = new Event(description, date);
                                         tasks.add(newEvent);
                                         System.out.println(newEvent);
                                     } catch (ArrayIndexOutOfBoundsException ex) {
@@ -109,8 +120,10 @@ public class Duke {
                 default:
                     throw new CommandNotFoundException();
             }
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException ex) {
             throw new CommandNotFoundException();
+        } catch (DateTimeParseException ex) {
+            throw new WrongDateFormatException();
         }
 
     }
@@ -136,6 +149,19 @@ public class Duke {
         System.out.println("Bye~ Hope to see you again soon! ∠( ᐛ 」∠)＿");
         System.out.println("____________________________________________________________");
         System.exit(0);
+    }
+
+    public void showTasksOnSpecificDay(LocalDate date, ArrayList<Task> tasks){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        String dateString = date.format(formatter);
+        ArrayList<Task> filtered = tasks.stream().filter(Task::getHasTime).filter(task -> task.getTime().equals(date))
+                .collect(Collectors.toCollection(ArrayList::new));
+        if (filtered.size() == 0) {
+            System.out.println("No tasks on this day! Chill Chill~ ٩(˘◡˘)۶");
+        } else {
+            System.out.println("On " + dateString + ", you have the following tasks:");
+            showTask(filtered);
+        }
     }
 
 
