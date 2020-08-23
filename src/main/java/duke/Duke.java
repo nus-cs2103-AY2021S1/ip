@@ -31,6 +31,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke program.
+     */
     public void run() {
         boolean flag = true;
         ui.greeting();
