@@ -1,4 +1,15 @@
+package duke;
+
+import duke.task.Task;
+
+import java.util.Scanner;
+
 public class Ui {
+    private Scanner sc;
+    public Ui() {
+        this.sc = new Scanner(System.in);
+    }
+
     static final String SOCCAT =
             "                 .                         .                             \n" +
             "                ...                       ...                            \n" +
@@ -60,7 +71,7 @@ public class Ui {
     public void intro() {
         System.out.println(INDENT + HORIZONTAL_LINE);
         System.out.println(SOCCAT);
-        System.out.println("    Hello! I'm Soccat Duke\n" +
+        System.out.println("    Hello! I'm Soccat duke.command.Duke\n" +
                 "    What do you meow?");
         System.out.println(INDENT + HORIZONTAL_LINE);
     }
@@ -85,5 +96,21 @@ public class Ui {
 
     public void showLoadingError() {
         printWindow("Oops, error in loading the tasks! Please check the duke.txt file");
+    }
+
+    public void showList(TaskList tasks) {
+        printWindow(tasks.getListAsString());
+    }
+
+    public void showError(Exception e) {
+        printWindow(e.getMessage());
+    }
+
+    public String readCommand() {
+        if (sc.hasNext()) {
+            return sc.nextLine();
+        } else {
+            return null;
+        }
     }
 }

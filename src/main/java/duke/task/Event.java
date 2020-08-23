@@ -1,8 +1,15 @@
+package duke.task;
+
 public class Event extends Task {
-    final String at;
-    Event(String description, String at) {
+    private final String at;
+
+    public Event(String description, String at) {
         super(description, TaskType.EVENT);
         this.at = at;
+    }
+
+    public String getAt() {
+        return this.at;
     }
 
     @Override
