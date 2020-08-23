@@ -18,6 +18,14 @@ public class Echo {
         this.shouldExit = false;
     }
 
+    private void saveToFile() {
+        try {
+            SaveFile.save(this.tasks);
+        } catch (DukeException e) {
+            System.err.println(e);
+        }
+    }
+
     public void addTask(Task task) {
         this.tasks.add(task);
     }
@@ -51,15 +59,19 @@ public class Echo {
             this.tasks.remove(curr);
             Done d = (Done) task;
             Task t = tasks.get(d.getTaskNum());
-            return t.markAsDone();
+            String response = t.markAsDone();
+            this.saveToFile();
+            return response;
         } else if (type.equals(DELETE)) {
             this.tasks.remove(curr);
             Delete del = (Delete) task;
             Task t = tasks.remove(del.getTaskNum());
             String message = "Noted. I've removed this task:\n";
+            this.saveToFile();
             return message + "   " + t.toString() + "\n" + getNumTasks();
         } else {
             String message = "Got it. I've added this task:\n";
+            this.saveToFile();
             return message + "   " + task.toString() + "\n" + getNumTasks();
         }
     }

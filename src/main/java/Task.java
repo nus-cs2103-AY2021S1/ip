@@ -23,6 +23,18 @@ public class Task {
         return this.type;
     }
 
+    public boolean getDoneStatus() {
+        return this.isDone;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public String getTiming() {
+        return "";
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
