@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -112,8 +113,11 @@ public class Duke {
 
     public static void run() {
         Scanner sc = new Scanner(System.in);
-        TaskManager taskManager = new TaskManager();
         String userCommand;
+
+        // Load duke.txt into task list
+        List<Task> tasks = FileManipulator.loadTextIntoTaskList();
+        TaskManager taskManager = new TaskManager(tasks);
 
         while (sc.hasNext()) {
             userCommand = sc.nextLine();
