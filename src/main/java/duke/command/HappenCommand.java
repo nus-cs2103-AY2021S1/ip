@@ -15,6 +15,14 @@ public class HappenCommand extends Command {
         super(input);
     }
 
+    /**
+     * Executes the command, prints the filtered result on ui.
+     * @param ui The user interface object that is currently running.
+     * @param list The current list of tasks.
+     * @param storage The storage-writing object that is currently running.
+     * @return The string of the input time constrain with a number representing the size of the resulting task list.
+     * @throws InvalidCommandException If the input cannot be processed correctly or does not make sense.
+     */
     @Override
     public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
         String description = input.substring(7);
