@@ -30,12 +30,11 @@ public class FileManager {
         List<Task> taskList = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
-            Parser parser = new Parser();
             String header = br.readLine();
             if (header != null) {
                 String line = br.readLine();
                 while (line != null) {
-                    Task newTask = parser.parseToTask(line);
+                    Task newTask = CSVParser.parseToTask(line);
                     if (newTask != null) {
                         taskList.add(newTask);
                     }

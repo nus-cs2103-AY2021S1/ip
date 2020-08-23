@@ -11,27 +11,23 @@ public class Manager {
         this.fileManager = fileManager;
     }
 
-    protected void manageInput(String keyWord, String restOfWord) {
-        try {
+    protected void manageInput(String keyWord, String restOfWord) throws DukeException {
+        if (keyWord.equals("list")) {
+            showList(tasks);
+        } else {
             TaskManager taskManager = new TaskManager(tasks, keyWord, restOfWord);
-            if (keyWord.equals("list")) {
-                showList(tasks);
+            if (keyWord.equals("done")) {
+                taskManager.handleDone();
+            } else if (keyWord.equals("delete")) {
+                taskManager.handleDeletion();
             } else {
-                if (keyWord.equals("done")) {
-                    taskManager.handleDone();
-                } else if (keyWord.equals("delete")) {
-                    taskManager.handleDeletion();
+                if (keyWord.equals("todo") || keyWord.equals("deadline") || keyWord.equals("event")) {
+                    taskManager.addTask();
                 } else {
-                    if (keyWord.equals("todo") || keyWord.equals("deadline") || keyWord.equals("event")) {
-                        taskManager.addTask();
-                    } else {
-                        throw new UnknownCommandException();
-                    }
+                    throw new UnknownCommandException();
                 }
-                fileManager.update(tasks);
             }
-        } catch (DukeException e) {
-            Ui.printMsg(e.getMessage());
+            fileManager.update(tasks);
         }
     }
 

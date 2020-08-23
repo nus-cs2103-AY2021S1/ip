@@ -25,7 +25,11 @@ public class ComplexTaskManager {
     protected ComplexTask getTask() throws DukeException {
         String[] inputArr = taskDetails.split(identifier(), 2);
         if (inputArr.length == 1) {
-            throw new InvalidDeadlineException();
+            if (taskType == TaskType.DEADLINE) {
+                throw new InvalidDeadlineException();
+            } else {
+                throw new InvalidEventException();
+            }
         }
         checkIfEmpty(inputArr);
         String date = inputArr[1].trim();
@@ -37,6 +41,16 @@ public class ComplexTaskManager {
             return new ComplexTask(inputArr[0], timeToString(date), taskType);
         } else {
             return new ComplexTask(inputArr[0], date, taskType);
+        }
+    }
+
+    private void checkIfEmpty(String[] inputArr) throws DukeException {
+        String description = inputArr[0];
+        String time = inputArr[1];
+        if (description.isEmpty()) {
+            throw new EmptyTaskException(taskType);
+        } else if (time.isBlank()) {
+            throw new EmptyByException(taskType);
         }
     }
 
@@ -78,16 +92,6 @@ public class ComplexTaskManager {
             return true;
         } catch (DateTimeParseException e) {
             return false;
-        }
-    }
-
-    private void checkIfEmpty(String[] inputArr) throws DukeException {
-        String description = inputArr[0];
-        String time = inputArr[1];
-        if (description.isEmpty()) {
-            throw new EmptyTaskException(taskType);
-        } else if (time.isBlank()) {
-            throw new EmptyByException(taskType);
         }
     }
 }

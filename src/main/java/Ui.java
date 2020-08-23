@@ -1,7 +1,8 @@
 import java.util.List;
+import java.util.Scanner;
 
 public class Ui {
-    private static final String SEPARATOR = "   ----------------------------------------------------------\n";
+    private static final String SEPARATOR = "   --------------------------------------------------------------\n";
 
     protected static void printMsg(String msg) {
         System.out.print(SEPARATOR);
@@ -61,4 +62,5 @@ public class Ui {
         str1.append(String.format("     %d.%s", size, tasks.get(size - 1)));
         printMsg(str1.toString());
     }
+
 }

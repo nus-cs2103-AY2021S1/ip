@@ -14,31 +14,22 @@ public class DukeController {
         Scanner sc = new Scanner(System.in);
         Ui.greetings();
         while (true) {
-            String input = sc.nextLine();
-            System.out.println(input);
-            String[] inputArr = deconstruct(input);
-            String keyWord = getKeyWord(inputArr);
-            String restOfWord = getRestOfWord(inputArr);
-            if (keyWord.equals("bye")) {
-                Ui.goodBye();
-                break;
-            } else {
-                manager.manageInput(keyWord, restOfWord);
+            try {
+                String input = sc.nextLine();
+                System.out.println(input);
+                String[] arr = Parser.parse(input);
+                String keyWord = arr[0];
+                String restOfWord = arr[1];
+                if (keyWord.equals("bye")) {
+                    Ui.goodBye();
+                    break;
+                } else {
+                    manager.manageInput(keyWord, restOfWord);
+                }
+            } catch (DukeException e) {
+                Ui.printMsg(e.getMessage());
             }
         }
         sc.close();
-    }
-
-    private String getKeyWord(String[] arr) {
-        return arr[0].toLowerCase();
-    }
-
-    private String getRestOfWord(String[] arr) {
-        return arr.length == 1 ? "" : arr[1];
-    }
-
-    private String[] deconstruct(String input) {
-        String formattedString = input.trim().replaceAll("\\s{2,}", " ");
-        return formattedString.split(" ", 2);
     }
 }
