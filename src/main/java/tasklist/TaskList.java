@@ -26,7 +26,6 @@ public class TaskList {
      * @param first the first word of the input
      */
     public void operate(Storage storage, String fullCommand, String first) throws IOException {
-
         String[] s = fullCommand.split("\\s");
 
         try {
