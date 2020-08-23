@@ -1,6 +1,7 @@
 package ui;
 
 import java.util.Scanner;
+
 /**
  * Ui deals with the interaction with the User by
  * reading inputs and printing them.
