@@ -1,5 +1,10 @@
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.ArrayList;
+
+import java.nio.file.Paths;
+import java.nio.file.Files;
 
 public class Duke {
 
@@ -8,6 +13,12 @@ public class Duke {
     private final String name = "Bolot";
     private final String end = "bye";
     private ArrayList<Task> list = new ArrayList<>();
+
+    private Path dukeFile;
+
+    public Duke() {
+        createFile();
+    }
 
     public void printLogo() {
         System.out.println("Greetings, human. I am");
@@ -175,8 +186,11 @@ public class Duke {
                 } else {
 
                     addTask(firstWord, input.trim());
+                    saveTasks();
 
                 }
+
+                saveTasks();
 
             } catch (DukeException error) {
                 System.out.println(error.getMessage());
@@ -195,11 +209,44 @@ public class Duke {
 
     }
 
+    private void createFile() {
+        try {
+
+            if (Files.notExists(Paths.get("data"))) {
+                Files.createDirectory(Paths.get("data"));
+            }
+
+            Files.deleteIfExists(Paths.get("data/duke.txt"));
+            dukeFile = Files.createFile(Paths.get("data/duke.txt"));
+
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+    }
+
+    private void saveTasks() {
+
+        StringBuilder taskString = new StringBuilder();
+
+        int i = 1;
+        for (Task task: list) {
+            taskString.append(String.format("%d. ", i));
+            taskString.append(task.toString());
+            taskString.append("\n");
+            i++;
+        }
+
+        try {
+            Files.writeString(dukeFile, taskString);
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         Duke bot = new Duke();
         bot.printLogo();
         bot.greet();
-//        bot.echo();
         bot.addToList();
     }
 }
