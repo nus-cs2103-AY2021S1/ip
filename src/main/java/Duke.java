@@ -127,7 +127,9 @@ public class Duke {
             } catch (NumberFormatException e) {
                 System.out.println(addDividers(formatString("Please enter out a valid number\n")));
             } catch (ParseException e) {
-                System.out.println(addDividers(formatString("Please enter a date and time in the format of dd/MM/2020 HHmm or dd/MM/2020\n")));
+                System.out.println(addDividers(formatString("Please enter a date and time in the format of \n") +
+                        formatString("dd/MM/2020 HHmm (e.g. 02/12/2020 1530) " +
+                        "or dd/MM/2020 (e.g. 15/02/2020)\n")));
             }
             input = sc.nextLine();
         }
@@ -179,7 +181,7 @@ public class Duke {
     }
 
     private static String addDividers(String s) {
-        String divider = "___________________________\n";
+        String divider = "____________________________________________________________________\n";
         String dividerFormatted = String.format("%" + (5 + divider.length()) + "s", divider);
         return dividerFormatted + s + dividerFormatted;
     }
