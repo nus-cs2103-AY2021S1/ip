@@ -8,6 +8,10 @@ import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * <code>Event</code> class extends the <code>Task</code> class. Represents a <code>Task</code> with a specified
+ * duration.
+ */
 public class Event extends Task{
     LocalDate schedule;
     LocalTime startTime;
@@ -31,6 +35,14 @@ public class Event extends Task{
         this.endTime = LocalTime.parse(times[1]);
     }
 
+    /**
+     * Returns a <code>Event</code> object if input format is correct. Specifically, the input format of
+     * <code>Event</code> object must be in the form of "Event description /by YYYY/MM/DD HH:MM-HH:MM"
+     *
+     * @param message the command to create an <code>Event</code> object
+     * @return an <code>Event</code> object
+     * @throws DukeException if the input format is wrong or contains missing details
+     */
     public static Event createTask(String message) throws DukeException{
         String errMessage1 = " Oops!! You missed out some vital information/keyword... *woof*\n";
         String errMessage2 = " Oops!! Are you planning to ghost the event?\n" +
@@ -78,11 +90,23 @@ public class Event extends Task{
         }
     }
 
+    /**
+     * Compare the date of this <code>Event</code> task with the specified date.
+     *
+     * @param date the specified Date
+     * @return returns true if the date of this <code>Event</code> task is same as the specified date.
+     * Else, otherwise.
+     */
     @Override
     public boolean compareDate(LocalDate date) {
         return schedule.compareTo(date) == 0;
     }
 
+    /**
+     * Returns a string representation of this <code>Event</code> object.
+     *
+     * @return a string representation of this <code>Event</code> object
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (APPEAR at: "

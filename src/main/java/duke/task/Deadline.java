@@ -8,6 +8,10 @@ import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * <code>Deadline</code> class extends the <code>Task</code> class. Represents the a <code>Task</code> with a deadline
+ * for completion.
+ */
 public class Deadline extends Task {
     LocalDate toDoBy;
     LocalTime time;
@@ -37,6 +41,15 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns a <code>Deadline/code> object if input format is correct. Specifically, the input format of
+     * <code>Event</code> object must be in the form of "Deadline description /by YYYY/MM/DD" or
+     * "Event description /by YYYY/MM/DD HH:MM".
+     *
+     * @param message the command to create an <code>Deadline</code> object
+     * @return an <code>Deadline</code> object
+     * @throws DukeException if the input format is wrong or contains missing details
+     */
     public static Deadline createTask(String message) throws DukeException {
         String errMessage1 = " Oops!! You missed out some vital information/keyword... *woof*\n";
         String errMessage2 = " Oops!! You gonna forget what this is about if you\n" +
@@ -85,12 +98,23 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Compare the date of this <code>Deadline</code> task with the specified date.
+     *
+     * @param date the specified Date
+     * @return returns true if the date of this <code>Deadline</code> task is same as the specified date. Else,
+     * otherwise.
+     */
     @Override
     public boolean compareDate(LocalDate date) {
         return toDoBy.compareTo(date) == 0;
     }
 
-
+    /**
+     * Returns a string representation of this <code>Deadline</code> object.
+     *
+     * @return a string representation of this <code>Deadline</code> object
+     */
     @Override
     public String toString() {
         String s = "[D]" + super.toString() + " (FINISH by: "

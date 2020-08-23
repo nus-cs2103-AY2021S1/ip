@@ -6,14 +6,29 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * The <code>Parser</code> reads a command from user and perform various checks to determine the next action.
+ */
 public class Parser {
     private final static String ignoreCase = "(?i)";
     private final static Ui ui = new Ui();
 
+    /**
+     * <code>CommandState</code> is an enum representing all possible command direction from user.
+     */
     enum CommandState {
         LIST, DONE, BYE, TODO, DEADLINE, EVENT, DELETE, CHECK
     }
 
+    /**
+     * Obtain an instance of <code>Command</code> from a text string input.
+     *
+     * <p>The string must represent a valid command input in the correct format of "command taskDetails".</p>
+     *
+     * @param command the text to parse
+     * @return the command desired by user
+     * @throws DukeException if the command is unidentifiable
+     */
     public static Command parse(String command) throws DukeException {
         if (command.matches(ignoreCase + CommandState.BYE.name())) {
             return new ExitCommand();
@@ -32,6 +47,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Obtain an instance of <code>Task</code> from a text string input.
+     * @param command the task command to be parse
+     * @return the <code>Task</code> to be acted on
+     * @throws DukeException if task command is unidentifiable
+     */
     public static Task checkAction(String command) throws DukeException{
         Task t;
         if (command.matches(ignoreCase + CommandState.DEADLINE.name() + "(.*)")) {
