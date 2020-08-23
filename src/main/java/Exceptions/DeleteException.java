@@ -30,14 +30,11 @@ public class DeleteException extends DukeException {
     @Override
     public String toString() {
         if(deleted){
-            return "  '\u2639' OOPS!!! This task is previously deleted.\n" +
-                    "  ____________________________________________________________";
+            return "  '\u2639' OOPS!!! This task is previously deleted.\n";
         }
         if(IDabsent){
-            return "  '\u2639' OOPS!!! The description of delete cannot be empty.\n" +
-                    "  ____________________________________________________________";
+            return "  '\u2639' OOPS!!! The description of delete cannot be empty.\n";
         }
-        return "  '\u2639' OOPS!!! The ID is not yet defined.\n" +
-                "  ____________________________________________________________";
+        return "  '\u2639' OOPS!!! The ID is not yet defined.\n";
     }
 }
