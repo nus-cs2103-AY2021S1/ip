@@ -3,8 +3,6 @@ package duke;
 import duke.Command.Command;
 import duke.Exception.DukeException;
 
-import java.util.Scanner;
-
 public class Duke {
 
     private final Storage storage;

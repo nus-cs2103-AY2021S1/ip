@@ -8,6 +8,7 @@ import duke.Ui;
 import java.io.IOException;
 
 public class ExitCommand extends Command {
+
     public ExitCommand(String input) {
         super(input);
     }
