@@ -1,9 +1,4 @@
 public class DukeInterpreter {
-    private String code;
-
-    public DukeInterpreter(String code) {
-        this.code = code;
-    }
 
     public static String encode(Task task) {
         String taskString = task.toString();
