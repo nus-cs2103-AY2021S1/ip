@@ -3,12 +3,8 @@ public class ToDo extends Task {
     private final String task;
     private static final String errorMessage = "OOPS!!! The description of a todo cannot be empty.\n";
 
-    protected ToDo(String command) throws DukeException{
-        if (command.equals("todo")) {
-            throw new DukeException(errorMessage);
-        } else {
-            this.task = command.substring(5);
-        }
+    protected ToDo(String task) throws DukeException{
+            this.task = task;
     }
 
     @Override

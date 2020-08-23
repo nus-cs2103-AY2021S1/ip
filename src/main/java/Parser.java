@@ -17,17 +17,16 @@ public class Parser {
         boolean isDone = line.charAt(6) == '\u2713';
         Task task = null;
         if (taskType == 'T') {
-            task = new ToDo("todo " + line.substring(9));
+            task = new ToDo(line.substring(9));
         } else if (taskType == 'E') {
             int index = line.indexOf(" (at: ");
             String time = line.substring(index + 6, line.length() - 1);
-            task = new Event("event " + line.substring(9, index) + " /at " + time);
+            task = new Event(line.substring(9, index), time);
         } else if (taskType == 'D') {
             int index = line.indexOf(" (by: ");
             String date = line.substring(index + 6, line.length() - 1);
             LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("d MMM yyyy"));
-            date = localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-            task = new Deadline("deadline " + line.substring(9, index) + " /by " + date);
+            task = new Deadline(line.substring(9, index), localDate);
         }
 
         if (isDone) {
@@ -45,13 +44,29 @@ public class Parser {
             } else if (input.startsWith("done")) {
                 list.markTaskDone(input);
             } else if (input.startsWith("todo")) {
+                if (input.equals("todo")) {
+                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
+                }
                 ToDo toDoTask = new ToDo(input);
                 list.addTask(toDoTask);
             } else if (input.startsWith("deadline")) {
-                Deadline deadlineTask = new Deadline(input);
+                if (input.equals("deadline")) {
+                    throw new DukeException("OOPS!!! The description of a deadline cannot be empty.\n");
+                }
+                int index = input.indexOf("/by");
+                String task = input.substring(9, index - 1);
+                LocalDate deadline = LocalDate.parse(input.substring(index + 4),
+                        DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                Deadline deadlineTask = new Deadline(task, deadline);
                 list.addTask(deadlineTask);
             } else if (input.startsWith("event")) {
-                Event eventTask = new Event(input);
+                if (input.equals("event")) {
+                    throw new DukeException("OOPS!!! The description of an event cannot be empty.\n");
+                }
+                int index = input.indexOf("/at");
+                String task = input.substring(6, index - 1);
+                String time = input.substring(index + 4);
+                Event eventTask = new Event(task, time);
                 list.addTask(eventTask);
             } else if (input.startsWith("delete")) {
                 list.deleteTask(input);
