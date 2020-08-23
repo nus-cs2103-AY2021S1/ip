@@ -20,6 +20,10 @@ public class Task {
         this.isCompleted = true;
     }
 
+    public String getDetails() {
+        return this.details;
+    }
+
     /**
      * Returns the string representation of the task.
      * @return String representation

@@ -41,6 +41,8 @@ public class Parser {
             return new EventCommand(afterCommand);
         case DELETE:
             return new DeleteCommand(afterCommand);
+        case FIND:
+            return new FindCommand(afterCommand);
         case UNIDENTIFIED:
             // if a bad command is thrown at Duke
             throw new DukeException("Please enter a command I understand!");

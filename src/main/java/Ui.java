@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -70,6 +71,21 @@ public class Ui {
     public void displayDeletedTask(Task task, int size) {
         format("Noted. I've removed this task:\n" + task + "\n"
             + "Now you have " + size + " tasks in the list.");
+    }
+
+    public void displayTasksWithKeyword(List<Task> tasks) {
+        StringBuilder sb = new StringBuilder();
+        int len = tasks.size();
+        if (len == 0) {
+            sb.append("No tasks!");
+            format(sb.toString());
+            return;
+        }
+        sb.append("Here are the matching tasks in your list:\n");
+        for (int i = 0; i < len; i++) {
+            sb.append(i + 1 + "." + tasks.get(i) + "\n");
+        }
+        format(sb.toString());
     }
 
     /**
