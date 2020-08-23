@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.ByeCommand;
+import duke.command.ListCommand;
 import duke.exception.DukeInputException;
 import org.junit.jupiter.api.Test;
 
@@ -25,6 +26,27 @@ public class ParserTest {
             fail();
         } catch (DukeInputException e) {
             assertEquals("DUKE ERROR - Invalid command <bye bye> given.", e.getMessage());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_correctListCommandInput_listCommand() {
+        try {
+            assertEquals(Parser.parse("list").toString(), (new ListCommand()).toString());
+        } catch (DukeInputException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_wrongListCommandInput_exceptionThrown() {
+        try {
+            Parser.parse("list 123");
+            fail();
+        } catch (DukeInputException e) {
+            assertEquals("DUKE ERROR - Invalid command <list 123> given.", e.getMessage());
         } catch (Exception e) {
             fail();
         }
