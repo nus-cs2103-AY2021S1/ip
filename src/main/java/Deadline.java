@@ -34,7 +34,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Setter method for setting done attribute to give input.
+     * Setter method for setting done attribute to given input.
      * @param b The new completion status
      * @return New Deadline task with same parameters but attribute done changed to given input
      */

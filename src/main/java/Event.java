@@ -6,7 +6,7 @@ public class Event extends Task {
 
     /**
      * Constructor for Event task object.
-     * @param name The name of task to be done
+     * @param name The name of event to attend
      * @param at The due date of the task
      */
     public Event(String name, String at) {
@@ -34,7 +34,7 @@ public class Event extends Task {
     }
 
     /**
-     * Setter method for setting done attribute to give input.
+     * Setter method for setting done attribute to given input.
      * @param b The new completion status
      * @return New Event task with same parameters but attribute done changed to given input
      */
