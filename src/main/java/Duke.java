@@ -1,6 +1,3 @@
-/*
- * Duke is a retired old uncle who likes to speak in Singlish.
- */
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -98,17 +95,39 @@ public class Duke {
         }
     }
 
+    //command is e.g.: print 2020-08-08
+    private void printSameDateTasks(String date) throws InvalidDateAndTimeException {
+        try {
+            LocalDate eventDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            for (Task task : taskList) {
+                LocalDate dateInTask = task.getDate().orElse(null);
+                if (eventDate.equals(dateInTask)) {
+                    System.out.println(task);
+                }
+            }
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateAndTimeException();
+        }
+    }
+
     public void process() {
         greet();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.toLowerCase().equals("bye")) {
             //to list?
-            if (input.toLowerCase().equals("list")) {
+            String[] cmd = input.split(" ");
+            if (cmd[0].toLowerCase().equals("list")) {
                 listTask();
+            } else if (cmd[0].toLowerCase().equals("print")) {
+                try {
+                    printSameDateTasks(cmd[1]);
+                } catch (InvalidDateAndTimeException e) {
+                    System.out.println(e);
+                }
+
             } else {
                 //could it be a done task?
-                String[] cmd = input.split(" ");
                 if (cmd[0].toLowerCase().equals("done")) {
                     try {
                         Integer taskNum = Integer.parseInt(cmd[1]);

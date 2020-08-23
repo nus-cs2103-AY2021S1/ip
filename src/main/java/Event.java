@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 public class Event extends Task{
     protected LocalDate eventDate;
@@ -14,15 +15,16 @@ public class Event extends Task{
         this.endTime = end;
     }
 
+    public Optional<LocalDate> getDate() {
+        return Optional.of(eventDate);
+    }
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + eventDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + " " +
+        return "[E]" + super.toString() + "(at: " +
+                eventDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + " " +
                 startTime.format(DateTimeFormatter.ofPattern("hh.mma")) + " to " +
                 endTime.format(DateTimeFormatter.ofPattern("hh.mma")) + ")";
     }
 }
 
-
-//System.out.println(dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
-
-//    System.out.println(time.format(DateTimeFormatter.ofPattern("hh-mm a")));

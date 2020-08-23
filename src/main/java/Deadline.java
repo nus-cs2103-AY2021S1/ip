@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 public class Deadline extends Task {
     protected LocalDate deadlineDate;
@@ -10,6 +11,10 @@ public class Deadline extends Task {
         super(description);
         this.deadlineDate = date;
         this.deadlineTime = time;
+    }
+
+    public Optional<LocalDate> getDate() {
+        return Optional.of(deadlineDate);
     }
 
     @Override
