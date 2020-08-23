@@ -1,0 +1,2 @@
+0 || deadline || must eat the fruit  || 2020-10-10
+0 || event || attend ninja fruit competition  || 2020-10-10

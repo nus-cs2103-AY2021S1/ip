@@ -6,7 +6,6 @@ import java.time.format.DateTimeParseException;
 public class Duke {
 
     private Ui ui;
-    private Parser parser;
     private Storage storage;
     private TaskList taskList;
     public final static String FILEPATH = System.getProperty("user.dir") + (System.getProperty("user.dir").endsWith("text-ui-test")
@@ -15,7 +14,6 @@ public class Duke {
 
     public Duke() {
         ui = new Ui();
-        parser = new Parser();
         storage = new Storage(FILEPATH);
         taskList = new TaskList();
     }
@@ -33,7 +31,7 @@ public class Duke {
         while (!isExit) {
             try {
                 String toEcho = ui.getCommand();
-                String[] command = parser.splitCommandAndDescription(toEcho);
+                String[] command = Parser.splitCommandAndDescription(toEcho);
                 if (toEcho.equals("bye")) {
                     ui.bye();
                     isExit = true;
@@ -93,7 +91,7 @@ public class Duke {
 
     public void handleDeadline(String description) throws DukeMissingTimeException {
         try {
-            String[] strArr = parser.splitDeadlineTime(description);
+            String[] strArr = Parser.splitDeadlineTime(description);
             String todo = strArr[0];
             String time = strArr[1];
             Deadline deadline = new Deadline(todo, time);
@@ -106,7 +104,7 @@ public class Duke {
 
     public void handleEvent(String description) throws DukeMissingTimeException {
         try {
-            String[] strArr = parser.splitEventTime(description);
+            String[] strArr = Parser.splitEventTime(description);
             String todo = strArr[0];
             String time = strArr[1];
             Event event = new Event(todo, time);
