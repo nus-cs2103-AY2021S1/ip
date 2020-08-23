@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * The Main class of this program.
+ * Is the Main class of this program.
  * @author Li Jiayu
  * @version 0.1
  */
