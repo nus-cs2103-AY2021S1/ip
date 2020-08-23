@@ -1,5 +1,10 @@
 package exceptions;
 
+/**
+ * UnknownCommandException class extends DukeException class
+ * and handles the UnknownCommandException.
+ * @author Maguire Ong
+ */
 public class UnknownCommandException extends DukeException {
 
     public UnknownCommandException() {
