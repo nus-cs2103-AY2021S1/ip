@@ -1,6 +1,9 @@
 import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
 
@@ -210,7 +213,8 @@ public class Duke {
                         }
                         String deadlineTaskName = deadlineInput.substring(0, indexSeparator - 1);
                         String deadlineTime = deadlineInput.substring(indexSeparator + 4);
-                        Deadline newDeadline = new Deadline(deadlineTaskName, deadlineTime);
+                        LocalDate deadlineDate = LocalDate.parse(deadlineTime);
+                        Deadline newDeadline = new Deadline(deadlineTaskName, deadlineDate);
                         currentList.add(newDeadline);
 
                         FileWriter fw = new FileWriter(dataList,true);
@@ -235,7 +239,8 @@ public class Duke {
                         }
                         String eventTaskName = eventInput.substring(0, indexSeparator - 1);
                         String eventTime = eventInput.substring(indexSeparator + 4);
-                        Event newEvent = new Event(eventTaskName, eventTime);
+                        LocalDate eventDate = LocalDate.parse(eventTime);
+                        Event newEvent = new Event(eventTaskName, eventDate);
                         currentList.add(newEvent);
 
                         FileWriter fw = new FileWriter(dataList,true);
