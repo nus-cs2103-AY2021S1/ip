@@ -4,10 +4,8 @@ import duke.command.Command;
 import duke.exception.*;
 
 import java.io.File;
-import java.util.Scanner;
 
 public class Duke {
-
     private TaskList list;
     private final Storage storage;
     private final Ui ui;
@@ -17,7 +15,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             list = new TaskList(storage.load());
-        } catch (DukeInvalidDataException dukeInvalidData) {
+        } catch (DukeInvalidDataException | DukeInvalidStoragePathException dukeInvalidData) {
             ui.showLoadingError();
             list = new TaskList();
         }

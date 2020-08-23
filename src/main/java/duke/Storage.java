@@ -1,6 +1,7 @@
 package duke;
 
 import duke.exception.DukeInvalidDataException;
+import duke.exception.DukeInvalidStoragePathException;
 import duke.task.*;
 
 import java.io.File;
@@ -18,7 +19,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public List<Task> load() throws DukeInvalidDataException {
+    public List<Task> load() throws DukeInvalidDataException, DukeInvalidStoragePathException {
         File file = new File(filePath);
         List<Task> list = new ArrayList<>();
         try {
@@ -60,8 +61,7 @@ public class Storage {
                 writer = new FileWriter(filePath);
                 writer.write("");
             } catch (IOException ioException) {
-                System.out.println(ioException.getMessage());
-                list = new ArrayList<>();
+                throw new DukeInvalidStoragePathException();
             }
         }
         return list;
