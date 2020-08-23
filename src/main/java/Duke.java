@@ -1,106 +1,32 @@
 import exceptions.DukeException;
-import exceptions.EmptyBodyException;
-import exceptions.NoSuchTaskException;
-import exceptions.WrongSyntaxException;
-import exceptions.UnknownCommandException;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.time.LocalDateTime;
-import java.util.Scanner;
-import java.util.List;
-import java.lang.StringBuilder;
 
 public class Duke {
 
-    private final Storage store = new Storage();
-    private List<Task> taskList = new ArrayList<>();
-
-    public boolean handleInput(Scanner scanner) throws DukeException {
-        String userInput = scanner.next();
-        Command command = Command.getCommand(userInput);
-        boolean toContinue = true;
-        boolean updateRequired = true;
-        switch (command) {
-        case BYE:
-            printMessage("Bye! Hope to see you soon!");
-            toContinue = false;
-            updateRequired = false;
-            break;
-        case LIST:
-            printList();
-            updateRequired = false;
-            break;
-        case DONE:
-            int taskNumber = scanner.nextInt();
-            if (taskNumber < 1 || taskNumber > taskList.size()) {
-                throw new NoSuchTaskException();
-            }
-            completeTask(taskNumber);
-            break;
-        case DELETE:
-            int toDelete = scanner.nextInt();
-            if (toDelete < 1 || toDelete > taskList.size()) {
-                throw new NoSuchTaskException();
-            }
-            deleteTask(toDelete);
-            break;
-        case DEADLINE:
-            String deadlineCommand = scanner.nextLine().trim();
-            String[] deadlineParts = deadlineCommand.split(" /by ");
-            if (deadlineParts.length != 2) {
-                throw new WrongSyntaxException();
-            }
-            LocalDateTime dueDateTime = DateParser.parseString(deadlineParts[1]);
-            addTask(new Deadline(deadlineParts[0], dueDateTime));
-            break;
-        case EVENT:
-            String eventCommand = scanner.nextLine().trim();
-            String[] eventParts = eventCommand.split(" /at ");
-            if (eventParts.length != 2) {
-                throw new WrongSyntaxException();
-            }
-            LocalDateTime eventDateTime = DateParser.parseString(eventParts[1]);
-            addTask(new Event(eventParts[0], eventDateTime));
-            break;
-        case TODO:
-            String task = scanner.nextLine().trim();
-            if (task.isBlank()) {
-                throw(new EmptyBodyException());
-            }
-            addTask(new Todo(task));
-            break;
-        case UNKNOWN:
-            // unknown command, skip the entire line
-            scanner.nextLine();
-            throw(new UnknownCommandException(userInput));
-        default:
-            scanner.nextLine();
-        }
-
-        if (updateRequired) {
-            store.updateTasks(taskList);
-        }
-
-        return toContinue;
-    }
+    private Storage store = new Storage();
+    private TaskList taskList;
+    private Ui ui;
+    private Parser parser = new Parser();
 
     public void start() {
-        greet();
-        Scanner scanner = new Scanner(System.in);
+        ui = new Ui();
+        ui.greet();
         boolean isRunning = true;
         while (isRunning) {
             try {
                 store.initializeStorage();
-                taskList = store.getTasks();
-                isRunning = handleInput(scanner);
+                taskList = new TaskList(store.getTasks());
+                Command c = parser.parse(ui.readCommand());
+                c.execute(taskList, ui, store);
+                isRunning = !c.isExit();
             } catch (IOException e) {
                 System.out.println("Error connecting to storage, actions made will not be saved");
             } catch (DukeException e) {
-                printMessage(e.getFriendlyMessage());
+                ui.printMessage(e.getFriendlyMessage());
             }
         }
-        scanner.close();
+        ui.stopReading();
     }
 
     public static void main(String[] args) {

@@ -5,7 +5,15 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    private final List<Task> taskList = new ArrayList<>();
+    private final List<Task> taskList;
+
+    public TaskList() {
+        this.taskList = new ArrayList<>();
+    }
+
+    public TaskList(List<Task> taskList) {
+        this.taskList = taskList;
+    }
 
     public void addTask(Task task) {
         taskList.add(task);
@@ -16,7 +24,7 @@ public class TaskList {
     }
 
     public Task completeTask(int taskNumber) throws NoSuchTaskException {
-        if (!validateTaskNumber(taskNumber)) {
+        if (!isValidTaskNumber(taskNumber)) {
             throw new NoSuchTaskException();
         }
         Task completedTask = taskList.get(taskNumber - 1).markCompleted();
@@ -25,7 +33,7 @@ public class TaskList {
     }
 
     public Task deleteTask(int taskNumber) throws NoSuchTaskException {
-        if (!validateTaskNumber(taskNumber)) {
+        if (!isValidTaskNumber(taskNumber)) {
             throw new NoSuchTaskException();
         }
         Task toRemove = taskList.get(taskNumber - 1);
@@ -33,8 +41,8 @@ public class TaskList {
         return toRemove;
     }
 
-    private boolean validateTaskNumber(int taskNumber) {
-        return taskNumber < 1 && taskNumber > taskList.size();
+    private boolean isValidTaskNumber(int taskNumber) {
+        return !(taskNumber < 1 || taskNumber > taskList.size());
     }
 
     public String tasksToString() {
