@@ -73,9 +73,10 @@ public class ListOfItems {
         if (input.contains("todo")) {
             try {
                 String description = input.substring(5);
+                Todo todo = new Todo(description, index + 1);
 
                 System.out.println(divider + "\n" + addedMessage);
-                list.add(index, new Todo(description, index + 1));
+                list.add(index, todo);
                 System.out.println(list.get(index));
                 System.out.println(totalMessage + "\n" + divider);
                 index++;
@@ -89,9 +90,10 @@ public class ListOfItems {
                 String[] info = input.split("/", 2);
                 String description = info[0].substring(9);
                 String dueDateTime = info[1];
+                Deadline deadline = new Deadline(description, index + 1, dueDateTime);
 
                 System.out.println(divider + "\n" + addedMessage);
-                list.add(index, new Deadline(description, index + 1, dueDateTime));
+                list.add(index, deadline);
                 System.out.println(list.get(index));
                 System.out.println(totalMessage + "\n" + divider);
                 index++;
@@ -170,8 +172,8 @@ public class ListOfItems {
                 System.out.println(divider);
                 System.out.println("Task(s) due before " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " :");
                 for (int i = 0; i < this.list.size(); i++) {
-                    if ((this.list.get(i) instanceof Deadline && ((Deadline) this.list.get(i)).date.isBefore(date)) ||
-                            (this.list.get(i) instanceof Event && ((Event) this.list.get(i)).date.isBefore(date)))  {
+                    if ((this.list.get(i) instanceof Deadline && !((Deadline) this.list.get(i)).date.isAfter(date)) ||
+                            (this.list.get(i) instanceof Event && !((Event) this.list.get(i)).date.isAfter(date)))  {
                         hasResults = true;
                         System.out.println(this.list.get(i));
                     }
@@ -187,10 +189,10 @@ public class ListOfItems {
                 System.out.println("Task(s) due before " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
                         + ", " + time.format(DateTimeFormatter.ofPattern("h:mma")) + " :");
                 for (int i = 0; i < this.list.size(); i++) {
-                    if ((this.list.get(i) instanceof Deadline && ((Deadline) this.list.get(i)).date.isBefore(date)
-                    && time.isBefore(((Deadline) this.list.get(i)).time)) ||
-                            (this.list.get(i) instanceof Event && ((Event) this.list.get(i)).date.isBefore(date))
-                    && time.isBefore(((Event) this.list.get(i)).endTime))  {
+                    if ((this.list.get(i) instanceof Deadline && !((Deadline) this.list.get(i)).date.isAfter(date)
+                        && ((Deadline) this.list.get(i)).time != null && !((Deadline) this.list.get(i)).time.isAfter(time))
+                            || (this.list.get(i) instanceof Event && !((Event) this.list.get(i)).date.isAfter(date)
+                    && ((Event) this.list.get(i)).endTime != null && !((Event) this.list.get(i)).endTime.isAfter(time)))  {
                         hasResults = true;
                         System.out.println(this.list.get(i));
                     }
