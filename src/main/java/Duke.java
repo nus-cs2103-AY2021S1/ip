@@ -1,12 +1,16 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Duke is a Personal Assistant Chatbot that helps a user keep track of various things.
+ */
 public class Duke {
 
     protected static final String LINE_BREAK = "    ____________________________________________________________\n";
     protected static final String PRESPACING = "     ";
-    protected static final String OPENING_MESSAGE = "Hello! I'm Duke\n" + PRESPACING + "What can I do for you?";
+    protected static final String OPENING_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
     protected static final String CLOSING_MESSAGE = "Bye. Hope to see you again soon!";
     protected static final String MARKED_MESSAGE = "Nice! I've marked this task as done: ";
     protected static final String ADDED_MESSAGE = "Got it. I've added this task: ";
@@ -46,7 +50,7 @@ public class Duke {
                 if (userInput.equals(CLOSING_STRING)) {
                     System.out.println(getClosingText());
                 } else if (userInput.equals(LIST_STRING)) {
-                    System.out.println(processString(getListString()));
+                    System.out.println(getListString());
                 } else if (firstWord.equals(DONE_STRING)) {
                     System.out.println(registerTaskDone(userInput));
                 } else if (firstWord.equals(DELETE_STRING)) {
@@ -78,9 +82,9 @@ public class Duke {
             throw new DukeException("No such task!");
         }
         Task taskRemoved = taskRecords.remove(taskNumber - 1);;
-        return processString(REMOVED_MESSAGE + '\n' +
-                PRESPACING + "   " + taskRemoved + '\n' +
-                PRESPACING + createTaskNumberCountMessage(taskRecords.size()));
+        return processString(REMOVED_MESSAGE + '\n'
+                + "   " + taskRemoved + '\n'
+                + createTaskNumberCountMessage(taskRecords.size()));
 
     }
 
@@ -105,7 +109,7 @@ public class Duke {
         }
         Task taskDone = taskRecords.get(taskNumber - 1);
         taskDone.markDone();
-        return processString(MARKED_MESSAGE + '\n' + PRESPACING + "   " + taskDone);
+        return processString(MARKED_MESSAGE + '\n' + "   " + taskDone);
     }
 
     protected static String getListString() {
@@ -113,10 +117,10 @@ public class Duke {
         builder.append(LIST_HEADER);
         int count = 1;
         for (Task task : taskRecords) {
-            builder.append('\n' + PRESPACING);
+            builder.append('\n');
             builder.append(count++ + "." + task.toString());
         }
-        return builder.toString();
+        return processString(builder.toString());
     }
 
     protected static String addTask(String taskDescription) {
@@ -141,9 +145,9 @@ public class Duke {
 
         taskRecords.add(addedTask);
         return processString(
-                ADDED_MESSAGE + '\n' +
-                        PRESPACING + "   " + addedTask + '\n' +
-                        PRESPACING + createTaskNumberCountMessage(taskRecords.size())
+                ADDED_MESSAGE + '\n'
+                        + "   " + addedTask + '\n'
+                        + createTaskNumberCountMessage(taskRecords.size())
         );
 
     }
@@ -154,7 +158,9 @@ public class Duke {
 
 
     protected static String processString(String string) {
-        return LINE_BREAK  + PRESPACING + string + '\n' + LINE_BREAK;
+        return LINE_BREAK  + PRESPACING
+                + string.replaceAll("\n", '\n' + PRESPACING)
+                + '\n' + LINE_BREAK;
     }
 
     protected static String getOpeningText() {
