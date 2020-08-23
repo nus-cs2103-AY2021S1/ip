@@ -1,8 +1,14 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
-    private final String contents;
+    protected DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM d yyyy HHmm'H'");
+    protected LocalDateTime deadline;
+
+    private String contents;
     private boolean done = false;
 
-    public Task(String contents) {
+    protected void setContents(String contents) {
         this.contents = contents;
     }
 
@@ -10,6 +16,7 @@ public class Task {
         done = true;
     }
 
+    @Override
     public String toString() {
         return (done ? "[✓]" : "[✗]") + " " + contents;
     }

@@ -1,6 +1,6 @@
 public class ToDo extends Task {
     public ToDo(String contents) {
-        super(contents);
+        setContents(contents);
     }
 
     public String toString() {
