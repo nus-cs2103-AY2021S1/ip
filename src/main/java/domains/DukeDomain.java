@@ -52,9 +52,6 @@ public class DukeDomain {
 
 
     public void addToList(Task task) {
-        System.out.println(task);
-        System.out.println(TASK_LIST);
-        System.out.println(TASK_LIST.size());
         TASK_LIST.add(task);
     }
 
