@@ -9,5 +9,7 @@ done 3
 list
 delete 2
 list
+event ice skating /at 2020-08-26
+event no /at 2020/09/13
 blah
 bye
