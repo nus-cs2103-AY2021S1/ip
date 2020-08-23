@@ -5,19 +5,16 @@ import static ui.Ui.welcome;
 import parser.Parser;
 import storage.Storage;
 import tasklist.TaskList;
-import ui.Ui;
 
 public class Duke {
     private Storage stores;
     private TaskList tasks;
-    private Ui ui;
 
     /**
      * constructor
      * @param filePath save file path
      */
     public Duke(String filePath) {
-        this.ui = new Ui();
         this.stores = new Storage(filePath);
         try {
             echo("Loading started");
@@ -35,6 +32,10 @@ public class Duke {
     public void run() {
         welcome();
         Parser.accept(tasks, stores);
+    }
+
+    public Storage getStores() {
+        return stores;
     }
 
     /**

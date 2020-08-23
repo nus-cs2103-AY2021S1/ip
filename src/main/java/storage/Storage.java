@@ -3,6 +3,7 @@ package storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 import data.task.Task;
@@ -18,6 +19,26 @@ public class Storage {
      */
     public Storage(String path) {
         this.path = path;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Storage storage = (Storage) o;
+
+        return Objects.equals(path, storage.path);
+    }
+
+    @Override
+    public int hashCode() {
+        return path != null ? path.hashCode() : 0;
     }
 
     /**
@@ -47,7 +68,7 @@ public class Storage {
      */
     public void load(TaskList tl) {
         try {
-            File data = new File("./data/duke.txt");
+            File data = new File(path);
             Scanner dataScan = new Scanner(data);
             while (dataScan.hasNextLine()) {
                 tl.store(dataScan.nextLine());

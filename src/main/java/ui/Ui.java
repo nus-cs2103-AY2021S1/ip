@@ -1,15 +1,9 @@
 package ui;
 
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import data.task.Task;
-import storage.Storage;
-import tasklist.TaskList;
 
 public class Ui {
     // border line
@@ -74,16 +68,31 @@ public class Ui {
             super(message);
         }
 
+        /**
+         * error message for having a blank task name
+         * @param type deadline, event, etc
+         * @return error message
+         */
         public static DukeException empty(String type) {
             String message = "The description of " + type + " cannot be empty.";
             return new DukeException(message);
         }
 
+        /**
+         * error message for unsupported user input
+         * @param order user input
+         * @return error message
+         */
         public static DukeException invalid(String order) {
             String message = "Sorry, '" + order + "' is not a recognised order.";
             return new DukeException(message);
         }
 
+        /**
+         * error message for invalid task number
+         * @param index task number
+         * @return error message
+         */
         public static DukeException outOfBounds(int index) {
             String message = "There is no task number " + index + ".";
             return new DukeException(message);
@@ -95,11 +104,6 @@ public class Ui {
          */
         public static DukeException fileError() {
             String message = "Line in save file has invalid format";
-            return new DukeException(message);
-        }
-
-        static DukeException loadingError() {
-            String message = "There has been a loading error";
             return new DukeException(message);
         }
     }
