@@ -2,6 +2,9 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.DateTimeException;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class Duke {
 
@@ -38,9 +41,17 @@ public class Duke {
                 } else {
                     String description = information[0];
                     String by = information[1];
-                    Deadlines newDeadline = new Deadlines(description, by);
 
-                    newList.addTask(newDeadline);
+                    try {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                        LocalDateTime dateTime = LocalDateTime.parse(by, formatter);
+
+                        Deadlines newDeadline = new Deadlines(description, dateTime);
+
+                        newList.addTask(newDeadline);
+                    } catch (DateTimeException ex) {
+                        System.out.println("    Please specify the date and time in this format dd/MM/yyy HH:mm");
+                    }
                 }
             }
 
@@ -56,9 +67,16 @@ public class Duke {
                 } else {
                     String description = information[0];
                     String at = information[1];
-                    Events newEvent = new Events(description, at);
+                    try {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                        LocalDateTime dateTime = LocalDateTime.parse(at, formatter);
 
-                    newList.addTask(newEvent);
+                        Events newEvent = new Events(description, dateTime);
+
+                        newList.addTask(newEvent);
+                    } catch (DateTimeException ex) {
+                        System.out.println("    Please specify the date and time in this format dd/MM/yyy HH:mm");
+                    }
                 }
             }
 
