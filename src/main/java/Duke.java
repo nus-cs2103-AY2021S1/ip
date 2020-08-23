@@ -23,16 +23,20 @@ public class Duke {
                 "____________________________________________________________\n";
         System.out.println(message);
 
+        List<Task> lists = new ArrayList<Task>();
+
         File path = new File("data");
         if (path.exists() && path.isDirectory()) {
             File f = new File("data/duke.txt");
             try {
                 Scanner s = new Scanner(f);
+                readTask(f, lists);
                 while (s.hasNext()) {
                     System.out.println(s.nextLine());
                 }
             } catch (FileNotFoundException e) {
-                System.out.println("File not found");
+                new File("data").mkdir();
+                System.out.println("File not found. Created a file.");
             }
         } else {
             new File("data").mkdir();
@@ -42,7 +46,7 @@ public class Duke {
         String string1 = scanner.nextLine();
         String message1;
 
-        List<Task> lists = new ArrayList<Task>();
+
 
         while (!string1.equals("bye")) {
             try {
@@ -147,5 +151,40 @@ public class Duke {
 
         fw.write(textToAdd);
         fw.close();
+    }
+
+    public static void readTask(File f, List<Task> lists) {
+        try {
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String string = s.nextLine();
+                if (string.charAt(1) == 'T') {
+                    String description = string.substring(string.indexOf(' ') + 1);
+                    if (string.charAt(4) == '✓') {
+                        lists.add(new ToDo(description, true));
+                    } else {
+                        lists.add(new ToDo(description));
+                    }
+                } else if (string.charAt(1) == 'D') {
+                    String description = string.substring(string.indexOf(' ') + 1, string.indexOf('('));
+                    String by = string.substring(string.indexOf("(by") + 5);
+                    if (string.charAt(4) == '✓') {
+                        lists.add(new Deadline(description, by, true));
+                    } else {
+                        lists.add(new Deadline(description, by));
+                    }
+                } else {
+                    String time = string.substring(string.indexOf("(at") + 5);
+                    String description = string.substring(string.indexOf(' ') + 1, string.indexOf('('));
+                    if (string.charAt(4) == '✓') {
+                        lists.add(new Event(description, time, true));
+                    } else {
+                        lists.add(new Event(description, time));
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found.");
+        }
     }
 }
