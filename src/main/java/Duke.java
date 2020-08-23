@@ -51,9 +51,11 @@ public class Duke {
 
     static void addDeadline(String input) {
         try {
-            int dash = input.indexOf('/');
+            int dash = input.indexOf('/') + 1;
+            String dateString = input.substring(dash, input.length());
+            System.out.println(dateString);
             Deadline temp = new Deadline(input.substring(9, dash),
-                    input.substring(dash, input.length()));
+                    dateString);
             arr.add(temp);
             System.out.println(LINE);
             System.out.println(INDENT + "Deadline added:  ");
@@ -70,7 +72,7 @@ public class Duke {
 
     static void addEvent(String input) {
         try {
-            int dash = input.indexOf('/');
+            int dash = input.indexOf('/') + 1;
             String date_String = input.substring(dash, input.length());
             Event temp = new Event(input.substring(6, dash), date_String
                     );

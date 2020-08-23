@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Event extends Task{
     LocalDate time;
@@ -9,11 +10,12 @@ public class Event extends Task{
 
     public Event(String description, boolean isDone, String time) {
         super(description, isDone);
+        System.out.println(LocalDate.parse(time));
         this.time = LocalDate.parse(time);
     }
 
     String printTime() {
-        return String.format("%s %d %d", time.getMonth(), time.getDayOfMonth(), time.getYear());
+        return time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     @Override
@@ -23,7 +25,7 @@ public class Event extends Task{
 
     @Override
     public String getOutput() {
-        return String.format("%s %s%s", getStatusIcon(), this.description, this.time);
+        return String.format("%s %s%s", getStatusIcon(), this.description, printTime());
     }
 
 }

@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     LocalDate time;
@@ -13,7 +14,7 @@ public class Deadline extends Task {
     }
 
     String printTime() {
-        return String.format("%s %d %d", time.getMonth(), time.getDayOfMonth(), time.getYear());
+        return time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     @Override
@@ -23,7 +24,7 @@ public class Deadline extends Task {
 
     @Override
     public String getOutput() {
-        return String.format("%s %s%s", getStatusIcon(), this.description, this.time);
+        return String.format("%s %s%s", getStatusIcon(), this.description, printTime());
     }
 
 }
