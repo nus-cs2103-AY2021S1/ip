@@ -16,6 +16,10 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+    
+    public boolean hasDate() {
+        return this.type != TaskType.TODO;
+    }
 
     @Override
     public String toString() {

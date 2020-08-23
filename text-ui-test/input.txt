@@ -7,18 +7,20 @@ eventfsrfdg
 event awrfawesf
 event dads /at
 event efaws /at
-event /at gasrfg
-event/at efew
-event a /at somedate
+event /at 2020-10-23
+event/at 2020-10-23
+event a /at 2020-10-32
+event a /at 2020-10-23
 deadline
 deadline
 deadlineedasfa
 deadline awrfawesf
 deadline dads /yb
 deadline efaws /by
-deadline /by gasrfg
-deadline/by efew
-deadline dda /by somedate
+deadline /by 2020-10-22
+deadline/by 2020-10-22
+deadline dda /by 2020-22
+deadline dda /by 2020-10-22
 done
 done
 done 2
@@ -27,3 +29,13 @@ delete
 delete
 delete 3
 delete 747
+event dfgdg /at 2020-10-22
+deadline dasd /by 2020-10-22
+find
+find 
+findasdf
+find asdas
+find2020-24-22
+find 2020-2132
+find 2020-24-22
+find 2020-10-22

@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 
 public class Tasks {
@@ -31,12 +34,18 @@ public class Tasks {
             throw new EmptyTaskException("description", TaskType.EVENT);
         }
 
-        String date = input.substring(slashIndex + 3).trim();
-        if (date.length() < 1) {
+        String dateStr = input.substring(slashIndex + 3).trim();
+        if (dateStr.length() < 1) {
             throw new EmptyTaskException("date", TaskType.EVENT);
         }
+        LocalDate localDate;
+        try {
+            localDate = LocalDate.parse(dateStr);
+        } catch (DateTimeParseException ex) {
+            throw new InvalidTaskException("The date of event is invalid, it should be in YYYY-MM-DD format.");
+        }
 
-        return new Event(description, date);
+        return new Event(description, localDate);
     }
 
     private static Deadline addDeadline(String input) throws InvalidTaskException, EmptyTaskException {
@@ -50,12 +59,19 @@ public class Tasks {
             throw new EmptyTaskException("description", TaskType.DEADLINE);
         }
 
-        String deadline = input.substring(slashIndex + 3).trim();
-        if (deadline.length() < 1) {
+        String deadlineStr = input.substring(slashIndex + 3).trim();
+        if (deadlineStr.length() < 1) {
             throw new EmptyTaskException("date", TaskType.DEADLINE);
         }
+        
+        LocalDate localDeadline;
+        try {
+            localDeadline = LocalDate.parse(deadlineStr);
+        } catch (DateTimeParseException ex) {
+            throw new InvalidTaskException("The deadline of deadline is invalid, it should be in YYYY-MM-DD format.");
+        }
 
-        return new Deadline(description, deadline);
+        return new Deadline(description, localDeadline);
     }
 
     protected void addTask(TaskType type, String input) throws EmptyTaskException, InvalidTaskException, UnknownInputException {
@@ -118,5 +134,37 @@ public class Tasks {
         } catch (IndexOutOfBoundsException ex) {
             throw new InvalidTaskNumberException("The task to be deleted does not exist!");
         }
+    }
+    
+    protected void find(String input) throws EmptyInputException, InvalidInputException {
+        String dateStr; 
+        try {
+            dateStr = input.substring(5).trim();
+        } catch (IndexOutOfBoundsException ex) {
+            throw new EmptyInputException("The item to be retrieved is not specified.");
+        }
+        
+        if (dateStr.length() < 1) {
+            throw new EmptyInputException("The item to be retrieved is not specified.");
+        }
+
+        LocalDate localDate;
+        try {
+            localDate = LocalDate.parse(dateStr);
+        } catch (DateTimeParseException ex) {
+            throw new InvalidInputException("The date to be retrieved is invalid, it should be in YYYY-MM-DD format.");
+        }
+        
+        ArrayList<Task> taskList = new ArrayList<>();
+        for (Task task: this.tasks) {
+            if (task.hasDate()) {
+                boolean isEqual = task.type == TaskType.DEADLINE 
+                        ? ((Deadline) task).isDateEqual(localDate) 
+                        : ((Event) task).isDateEqual(localDate);
+                if (isEqual) taskList.add(task);
+            }
+        }
+        
+        PrintDuke.printFound(localDate, taskList);
     }
 }
