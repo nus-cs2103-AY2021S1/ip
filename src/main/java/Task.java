@@ -1,6 +1,10 @@
+import java.time.format.DateTimeFormatter;
+
 public class Task {
+
     protected String description;
     protected boolean isDone;
+    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy hh:mm a");
 
     public Task(String description) {
         this.description = description;
@@ -13,7 +17,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "O" : "X"); //return O or X symbols
     }
 
     public void markAsDone() {

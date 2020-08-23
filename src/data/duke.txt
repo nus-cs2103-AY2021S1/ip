@@ -1,6 +1,6 @@
 T|1|read book
-D|0|return book|June 6th
-E|0|project meeting|Aug 6th 2-4pm
+D|0|return book|Tue, 25 Aug 2020 10:00 AM
+E|1|project meeting|Sun, 18 Oct 2020 02:30 PM
 T|1|join sports club
-T|0|buy groceries
-T|1|walk dog
+T|0|walk dog
+D|1|submit assignment|Mon, 07 Sep 2020 11:59 PM

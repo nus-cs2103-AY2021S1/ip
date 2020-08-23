@@ -2,14 +2,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class FileClass {
-    String pathName;
-    File file;
-    boolean fileExists;
+
+    private String pathName;
+    private File file;
+    private boolean fileExists;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy hh:mm a");
 
     public FileClass(String pathName) {
         this.pathName = pathName;
@@ -38,12 +42,14 @@ public class FileClass {
                     break;
                 case "D":
                     boolean deadlineIsDone = taskDetail[1].equals("0");
-                    Deadline newDeadline = new Deadline(deadlineIsDone, taskDetail[2], taskDetail[3]);
+                    LocalDateTime deadline = LocalDateTime.parse(taskDetail[3], this.formatter);
+                    Deadline newDeadline = new Deadline(deadlineIsDone, taskDetail[2], deadline);
                     tasksList.add(newDeadline);
                     break;
                 case "E":
                     boolean eventIsDone = taskDetail[1].equals("0");
-                    Event newEvent = new Event(eventIsDone, taskDetail[2], taskDetail[3]);
+                    LocalDateTime dateTime = LocalDateTime.parse(taskDetail[3], this.formatter);
+                    Event newEvent = new Event(eventIsDone, taskDetail[2], dateTime);
                     tasksList.add(newEvent);
                     break;
                 default:
