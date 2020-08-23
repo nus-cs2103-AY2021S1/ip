@@ -11,6 +11,7 @@ import duke.command.ExitCommand;
 import duke.command.ListCommand;
 import duke.command.CheckCommand;
 import duke.command.DoneCommand;
+import duke.command.FindCommand;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
