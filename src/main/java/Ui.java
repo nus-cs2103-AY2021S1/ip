@@ -61,6 +61,6 @@ public class Ui {
     }
 
     public void printDateTimeParseError(String e) {
-        System.out.println(TAB + "Please enter date in the format yyyy-MM-dd HHmm");
+        System.out.println(TAB + "Please enter date in 'yyyy-MM-dd' format");
     }
 }

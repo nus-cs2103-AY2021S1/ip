@@ -7,14 +7,12 @@ public class Deadline extends Task {
 
     Deadline(String description, String time) {
         super(description);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate myDateObj = LocalDate.parse(time, formatter);
-        this.time = myDateObj;
+        this.time = Parser.stringToDate(time);
     }
 
     @Override
     public String toString() {
-        String timeStr = this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String timeStr = Parser.dateToString(this.time);
         return String.format("[D]%s(by: %s)", super.toString(), timeStr);
     }
 
