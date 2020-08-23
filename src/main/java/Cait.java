@@ -3,14 +3,14 @@ import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
 
-public class Duke {
+public class Cait {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
 
-    public Duke(String fileName) {
+    public Cait(String fileName) {
         storage = new Storage(fileName);
         tasks = new TaskList(storage);
         parser = new Parser(tasks);
@@ -27,6 +27,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("duke_data.txt").run();
+        new Cait("duke_data.txt").run();
     }
 }
