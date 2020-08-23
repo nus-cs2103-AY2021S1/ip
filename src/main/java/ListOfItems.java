@@ -262,4 +262,28 @@ public class ListOfItems {
         }
 
     }
+
+    protected void find(String input) throws DukeException {
+        try {
+            boolean hasResults = false;
+            String info = input.substring(5);
+
+            System.out.println(divider);
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < this.list.size(); i++) {
+                if (this.list.get(i).description.contains(info)) {
+                    System.out.println(this.list.get(i).id + ". " + this.list.get(i));
+                    hasResults = true;
+                }
+            }
+            if (!hasResults) {
+                System.out.println("- No results found -");
+            }
+            System.out.println(divider);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("\n" + divider + "\n"
+                    + "Sorry, you did not enter a search. Please try again."
+                    + "\n" + divider);
+        }
+    }
 }
