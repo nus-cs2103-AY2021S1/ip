@@ -230,4 +230,21 @@ public class ParserTest {
             assertEquals("Do you mean 'event things'", e.getMessage());
         }
     }
+
+    @Test
+    public void generate_noTimeIndicator_throwException() {
+        try {
+            Parser.generate("deadline things");
+            fail();
+        } catch (Exception e) {
+            assertEquals("\u2639 OOPS!!! Time should be specified", e.getMessage());
+        }
+
+        try {
+            Parser.generate("event things");
+            fail();
+        } catch (Exception e) {
+            assertEquals("\u2639 OOPS!!! Time should be specified", e.getMessage());
+        }
+    }
 }
