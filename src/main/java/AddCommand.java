@@ -1,10 +1,8 @@
 public class AddCommand extends Command {
 
-    private String type;
-    private String task;
+    private Task task;
 
-    public AddCommand(String type, String task) {
-        this.type = type;
+    public AddCommand(Task task) {
         this.task = task;
     }
 
@@ -13,7 +11,6 @@ public class AddCommand extends Command {
         String echoizer = "\t Got it. I've added this task:\n"
                 + "\t %s\n"
                 + "\t Now you have %d tasks in the list.\n";
-        Task t = tasks.addTask(type, task);
-        ui.showAction(String.format(echoizer, t, tasks.size()));
+        ui.showAction(String.format(echoizer, task, tasks.size()));
     }
 }
