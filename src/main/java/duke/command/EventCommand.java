@@ -7,6 +7,10 @@ import duke.exception.DukeException;
 
 import java.util.ArrayList;
 
+/**
+ * Encapsulates a Command which creates a new Event task to add to the task
+ * list.
+ */
 public class EventCommand extends Command {
 
     private String description;

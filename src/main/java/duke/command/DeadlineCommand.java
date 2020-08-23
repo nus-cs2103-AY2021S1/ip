@@ -7,6 +7,10 @@ import duke.exception.DukeException;
 
 import java.util.ArrayList;
 
+/**
+ * Encapsulates a Command which creates a new Deadline task to add to the task
+ * list.
+ */
 public class DeadlineCommand extends Command {
 
     private String description;

@@ -1,13 +1,19 @@
 package duke.task;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
+/**
+ * Encapsulates the parent class for all types of tasks.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
     protected LocalDate date;
 
+    /**
+     * Creates a generic task with a description.
+     * @param description The task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

@@ -7,6 +7,9 @@ import duke.exception.DukeException;
 
 import java.util.ArrayList;
 
+/**
+ * Encapsulates a Command which marks a task in the list as complete.
+ */
 public class DoneCommand extends Command {
     private int index;
 

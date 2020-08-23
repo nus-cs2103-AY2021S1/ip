@@ -9,12 +9,23 @@ import duke.parser.Parser;
 
 import java.io.FileNotFoundException;
 
+/**
+ * Encapsulates the core class which coordinates with all other key classes to
+ * take in input, process it and produce the output that the Duke program displays
+ * to its users.
+ */
 public class Duke {
 
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
 
+    /**
+     * Creates a Duke object which holds a file path and uses it to load
+     * the text file from the hard drive or create one if it does not yet exist.
+     * It also creates new Ui and Storage objects for functionality.
+     * @param filePath The path where the text file is located.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -30,6 +41,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke program until the bye command is entered, and until
+     * then it takes in commands and processes them to provide output to
+     * the user.
+     */
     public void run() {
         // display starting UI
         ui.showStartMessage();

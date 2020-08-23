@@ -7,6 +7,10 @@ import duke.command.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses the string commands passed into the program by the user through
+ * the console, and afterward processes them to create Command objects.
+ */
 public class Parser {
     private Ui ui;
 
@@ -33,6 +37,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses one word commands. (e.g. bye, list)
+     * @param echo The command entered by the user.
+     * @return A command
+     * @throws DukeException If command is invalid or is missing some details.
+     */
     public Command CheckOneWord(String echo) throws DukeException {
         if (echo.equals("bye")) {
             return new ExitCommand();
@@ -55,6 +65,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses two word commands. (e.g. done 2, delete 3)
+     * @param modEcho The command entered by the user.
+     * @return A command.
+     * @throws DukeException If the command entered is invalid.
+     */
     public Command CheckTwoWords(String[] modEcho) throws DukeException {
         String task = modEcho[0];
 
@@ -94,6 +110,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses commands involving time-based tasks.
+     * @param modEcho The command entered by the user.
+     * @return A command.
+     * @throws DukeException If the date entered is in the wrong format.
+     */
     public Command CheckValidTime(String[] modEcho) throws DukeException {
         String task = modEcho[0];
         String[] processTime = modEcho[1].split("/");

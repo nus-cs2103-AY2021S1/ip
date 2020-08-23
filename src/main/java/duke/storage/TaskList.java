@@ -4,6 +4,10 @@ import duke.task.*;
 
 import java.util.ArrayList;
 
+/**
+ * Encapsulates the list of tasks that the user currently stores. Allows
+ * for the deletion and addition of all types of supported tasks.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
 

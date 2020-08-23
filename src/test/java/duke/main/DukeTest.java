@@ -11,6 +11,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Encapsulates the main test system that the developer uses to test the
+ * functionality of the Duke program.
+ */
 public class DukeTest {
 
     @Test
