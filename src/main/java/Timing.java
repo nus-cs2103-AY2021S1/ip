@@ -3,6 +3,10 @@ public class Timing {
     private final boolean meridiemCheck;
     protected String timing;
 
+    /**
+     * Instantiates Timing object.
+     * @param timing Timing read from input text file.
+     */
     public Timing(String timing) {
         this.timing = timing;
         int timeInt = Integer.parseInt(timing);
@@ -16,6 +20,10 @@ public class Timing {
         }
     }
 
+    /**
+     * Overrides toString method so as to customize output string format.
+     * @return String in our desired format.
+     */
     @Override
     public String toString() {
         String formattedTiming;

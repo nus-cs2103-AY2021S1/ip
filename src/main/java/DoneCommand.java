@@ -2,10 +2,22 @@ public class DoneCommand extends Command {
     int taskIndex;
     boolean exitCheck;
 
+    /**
+     * Instantiates DoneCommand object.
+     * @param taskIndex Index of task to be deleted.
+     */
     public DoneCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
 
+    /**
+     * Runs command to handle done command.
+     *
+     * @param arrayOfTasks Array of tasks that we have parsed.
+     * @param ui Ui object to aid in program execution.
+     * @param storage Storage object to aid in program execution.
+     * @return void
+     */
     public void runCommand(TaskList arrayOfTasks, Ui ui, Storage storage) {
         try {
             int arraySize = arrayOfTasks.taskArraySize();
@@ -24,6 +36,11 @@ public class DoneCommand extends Command {
         }
     }
 
+    /**
+     * Since this is not a exit command, it does not signal the program to exit.
+     *
+     * @return exitCheck as False
+     */
     public boolean exitCheck() {
         exitCheck = false;
         return exitCheck;

@@ -3,11 +3,19 @@ public class Duke {
     public Ui ui;
     public TaskList arrayOfTasks;
 
+    /**
+     * Instantiates Duke object.
+     * @param path File path giving the location of the input file.
+     */
     public Duke(String path) {
         this.storage = new Storage(path);
         this.ui = new Ui();
     }
 
+    /**
+     * Loads input file and starts parsing.
+     * @return void
+     */
     public void execute() {
         try {
             TaskList inputArray = new TaskList(storage.load());
@@ -54,6 +62,11 @@ public class Duke {
         ui.printByeMessage();
     }
 
+    /**
+     * Instantiates and run Duke program.
+     * @param args CMD arguments
+     * @return void
+     */
     public static void main(String[] args) {
         Duke runDuke = new Duke("data/duke.txt");
         runDuke.execute();

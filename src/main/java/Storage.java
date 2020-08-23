@@ -5,10 +5,18 @@ public class Storage {
     public String path;
     public boolean fileIsChanged = false;
 
+    /**
+     * Instantiates Storage object.
+     * @param path Filepath to load and read input file.
+     */
     public Storage(String path) {
         this.path = path;
     }
 
+    /**
+     * Parses strings from input text file.
+     * @return ArrayList<Task> that contains the parsed strings from input text file.
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             ArrayList<Task> outputTaskArray = new ArrayList<>();
@@ -59,6 +67,11 @@ public class Storage {
 
     }
 
+    /**
+     * Saves parsed strings to output text file.
+     * @param arrayOfTasks Array of tasks that contains all tasks read from input text file.
+     * @return void
+     */
     public void saveToDisk(TaskList arrayOfTasks) throws DukeException {
         try {
             String outputLine = "";
@@ -99,10 +112,18 @@ public class Storage {
         }
     }
 
+    /**
+     * Asserts that there have been changes made to the file.
+     * @return void
+     */
     public void changeFile() {
         fileIsChanged = true;
     }
 
+    /**
+     * Checks if there are any changes made to the storage files.
+     * @return True if files have been changed, False if no changes have been made.
+     */
     public boolean isStorageChanged() {
         return fileIsChanged;
     }
