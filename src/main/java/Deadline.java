@@ -46,8 +46,8 @@ public class Deadline extends Task {
     @Override
     public String convertToStringData() {
         return checkIsDone()
-                ? "D/1/" + getDescription() + "/" + this.dateAndTime
-                : "D/0/" + getDescription() + "/" + this.dateAndTime;
+                ? "D/1/" + getDescription() + "/" + this.dateAndTime.getDate() + "/" + this.dateAndTime.getTime()
+                : "D/0/" + getDescription() + "/" + this.dateAndTime.getDate() + "/" + this.dateAndTime.getTime();
     }
 
     /**

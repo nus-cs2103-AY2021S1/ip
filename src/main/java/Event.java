@@ -43,8 +43,8 @@ public class Event extends Task {
     @Override
     public String convertToStringData() {
         return checkIsDone()
-                ? "E/1/" + getDescription() + "/" + this.dateAndTime
-                : "E/0/" + getDescription() + "/" + this.dateAndTime;
+                ? "E/1/" + getDescription() + "/" + this.dateAndTime.getDate() + "/" + this.dateAndTime.getTime()
+                : "E/0/" + getDescription() + "/" + this.dateAndTime.getDate() + "/" + this.dateAndTime.getTime();
     }
 
     /**
@@ -53,10 +53,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-<<<<<<< HEAD
         return "[E][" + getStatusIcon() + "] " + getDescription() + " (at: " + this.dateAndTime + ")";
-=======
-        return "[E][" + getStatusIcon() + "] " + getDescription() + "(at: " + this.dateAndTime + ")";
->>>>>>> branch-Level-8
     }
 }

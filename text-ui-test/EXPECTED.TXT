@@ -10,8 +10,8 @@ What can I do for you?
 
 ========================================================
 Yes boss, I have added this task to your list:
-  [T][✗] read book
-Currently you have 1 task in your list.
+  [T][?] read book
+Currently you have 1 tasks in your list.
 ========================================================
 
 ================================================================================================
@@ -24,19 +24,19 @@ Erm, you are asking me to mark task 3 but there are only 1 tasks. Please enter t
 
 ========================================================
 Yes boss, I have added this task to your list:
-  [D][✗] return book  (by: Monday, 24 August 2020, 08:00PM)
+  [D][?] return book  (by: Monday, 24 August 2020, 08:00PM)
 Currently you have 2 tasks in your list.
 ========================================================
 
 ========================================================
 Yes boss, I have added this task to your list:
-  [E][✗] project meeting (at: Wednesday, 23 September 2020, 04:35AM)
+  [E][?] project meeting  (at: Wednesday, 23 September 2020, 04:35AM)
 Currently you have 3 tasks in your list.
 ========================================================
 
 ========================================================
 Yes boss, I have added this task to your list:
-  [E][✗] birthday party (at: Wednesday, 9 December 2020, 12:00AM)
+  [E][?] birthday party  (at: Wednesday, 9 December 2020, 12:00AM)
 Currently you have 4 tasks in your list.
 ========================================================
 
@@ -126,16 +126,16 @@ Or, "event birthday /at 2020/12/09 0000".
 
 ========================================================
 You have 4 unfinished tasks.
-1. [T][✗] read book
-2. [D][✗] return book  (by: Monday, 24 August 2020, 08:00PM)
-3. [E][✗] project meeting (at: Wednesday, 23 September 2020, 04:35AM)
-4. [E][✗] birthday party (at: Wednesday, 9 December 2020, 12:00AM)
+1. [T][?] read book
+2. [D][?] return book  (by: Monday, 24 August 2020, 08:00PM)
+3. [E][?] project meeting  (at: Wednesday, 23 September 2020, 04:35AM)
+4. [E][?] birthday party  (at: Wednesday, 9 December 2020, 12:00AM)
 
 ========================================================
 
 ========================================================
 I have marked the task as done, good job.
-[T][✓] read book
+[T][?] read book
 
 ========================================================
 
@@ -149,15 +149,15 @@ Sorry, I can't guess your task that well. Please enter a description for your ta
 
 ========================================================
 I have deleted the task.
-[D][✗] return book  (by: Monday, 24 August 2020, 08:00PM)
+[D][?] return book  (by: Monday, 24 August 2020, 08:00PM)
 
 ========================================================
 
 ========================================================
 You have 2 unfinished tasks.
-1. [T][✓] read book
-2. [E][✗] project meeting (at: Wednesday, 23 September 2020, 04:35AM)
-3. [E][✗] birthday party (at: Wednesday, 9 December 2020, 12:00AM)
+1. [T][?] read book
+2. [E][?] project meeting  (at: Wednesday, 23 September 2020, 04:35AM)
+3. [E][?] birthday party  (at: Wednesday, 9 December 2020, 12:00AM)
 
 ========================================================
 
@@ -171,7 +171,7 @@ Sorry, I can't guess your task that well. Please enter a description for your ta
 
 ========================================================
 I have marked the task as done, good job.
-[E][✓] project meeting (at: Wednesday, 23 September 2020, 04:35AM)
+[E][?] project meeting  (at: Wednesday, 23 September 2020, 04:35AM)
 
 ========================================================
 
@@ -181,15 +181,15 @@ Sorry but there is no valid task number. Please enter a valid task number.
 
 ========================================================
 You have 1 unfinished tasks.
-1. [T][✓] read book
-2. [E][✓] project meeting (at: Wednesday, 23 September 2020, 04:35AM)
-3. [E][✗] birthday party (at: Wednesday, 9 December 2020, 12:00AM)
+1. [T][?] read book
+2. [E][?] project meeting  (at: Wednesday, 23 September 2020, 04:35AM)
+3. [E][?] birthday party  (at: Wednesday, 9 December 2020, 12:00AM)
 
 ========================================================
 
 ========================================================
 I have deleted the task.
-[T][✓] read book
+[T][?] read book
 
 ========================================================
 
@@ -203,19 +203,19 @@ Sorry but there is no valid task number. Please enter a valid task number.
 
 ========================================================
 I have deleted the task.
-[E][✓] project meeting (at: Wednesday, 23 September 2020, 04:35AM)
+[E][?] project meeting  (at: Wednesday, 23 September 2020, 04:35AM)
 
 ========================================================
 
 ========================================================
 You have 1 unfinished tasks.
-1. [E][✗] birthday party (at: Wednesday, 9 December 2020, 12:00AM)
+1. [E][?] birthday party  (at: Wednesday, 9 December 2020, 12:00AM)
 
 ========================================================
 
 ========================================================
 I have deleted the task.
-[E][✗] birthday party (at: Wednesday, 9 December 2020, 12:00AM)
+[E][?] birthday party  (at: Wednesday, 9 December 2020, 12:00AM)
 
 ========================================================
 
@@ -224,6 +224,6 @@ You currently have no tasks.
 ========================================================
 
 ========================================================
-See you soon, maybe?
+Good bye boss, see you soon.
 ========================================================
 

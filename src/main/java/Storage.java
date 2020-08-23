@@ -33,7 +33,7 @@ public class Storage {
      * @return List containing the task.
      * @throws FileNotFoundException If file does not exist.
      */
-    public ArrayList<Task> getList() throws FileNotFoundException {
+    public ArrayList<Task> getList() throws FileNotFoundException, BobInvalidDateAndTimeException {
         Scanner scanner = new Scanner(this.file);
         ArrayList<Task> list = new ArrayList<>();
 
@@ -50,17 +50,19 @@ public class Storage {
                 list.add(task);
             } else if (split[0].equals("D")) {
                 String description = split[2];
-                String dateAndTime = split[3];
+                String date = split[3];
+                String time = split[4];
                 Deadline deadline = split[1].equals("0")
-                        ? new Deadline(description, dateAndTime)
-                        : new Deadline(description, dateAndTime).markDone();
+                        ? new Deadline(description, date, time)
+                        : new Deadline(description, date, time).markDone();
                 list.add(deadline);
             } else if (split[0].equals("E")) {
                 String description = split[2];
-                String time = split[3];
+                String date = split[3];
+                String time = split[4];
                 Event event = split[1].equals("0")
-                        ? new Event(description, time)
-                        : new Event(description, time).markDone();
+                        ? new Event(description, date, time)
+                        : new Event(description, date, time).markDone();
                 list.add(event);
             }
         }

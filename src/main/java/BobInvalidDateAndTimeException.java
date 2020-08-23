@@ -6,7 +6,7 @@ public class BobInvalidDateAndTimeException extends Exception {
     /** Error message */
     private static final String ERR =
             "Sorry, I don't recognize your date and time. Please enter a valid date"
-                    + " and time in this format \"YY/MM/DD HHmm\" after \"/by\" or \"/at\". \n"
+                    + " and time in this format \"YY/MM/DD HHmm\" after \"/by\" or \"/at\".\n"
                     + "For example, \"deadline return book /by 2020/08/23 1930\".\n"
                     + "Or, \"event birthday /at 2020/12/09 0000\".\n";
 
