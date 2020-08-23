@@ -8,6 +8,10 @@ import duke.task.Task;
 import duke.component.*;
 
 public class AddCommand extends Command {
+    /**
+     * Creates a command for adding tasks.
+     * @param input The input command classified as AddCommand.
+     */
     public AddCommand(String input) {
         super(input);
     }
