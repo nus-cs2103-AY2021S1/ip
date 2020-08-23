@@ -23,7 +23,7 @@ public class Storage {
     public void processData() throws IOException {
         File directory = new File(directoryPath);
         if (!directory.exists()) {
-            directory.mkdir();
+            directory.mkdirs();
         }
         data = new File(filePath);
         if (!data.exists()) {
