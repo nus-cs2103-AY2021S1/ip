@@ -15,9 +15,9 @@ public class FindCommand extends Command {
 
     /**
      * Executes the find command and prints the list of tasks where the given substring can be found
-     * @param ui
-     * @param list
-     * @param storage
+     * @param ui the user interface object that is currently running
+     * @param list the current list of tasks
+     * @param storage the storage-writing object that is currently running
      * @return the string description of the filtered table and the number of elements in the table
      */
     @Override
