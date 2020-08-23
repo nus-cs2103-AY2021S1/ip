@@ -13,6 +13,11 @@ public class TaskList extends ArrayList<Task> {
         super();
     }
 
+    /**
+     * Prints a filtered list based on this list with the given predicate.
+     * @param predicate the condition for a task to be printed
+     * @return the number of tasks printed
+     */
     public int print(Predicate<Task> predicate) {
         int n = size();
         int count = 0;
