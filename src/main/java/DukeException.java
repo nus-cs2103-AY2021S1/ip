@@ -1,5 +1,3 @@
-package duke.exception;
-
 public class DukeException extends Exception {
     String message;
     DukeException(String message) {
