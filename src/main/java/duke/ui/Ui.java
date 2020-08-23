@@ -1,8 +1,5 @@
 package duke.ui;
 
-import duke.tasks.Task;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -51,7 +48,6 @@ public class Ui {
         if (sc.hasNextLine()) {
             return sc.nextLine();
         } else {
-            // todo: throw no input found exception
             return "bye";
         }
     }
