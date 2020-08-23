@@ -18,30 +18,30 @@ public class Parser {
         String tag = input.split(" ")[0];
 
         switch (tag) {
-            case "list":
-                return new ListCommand();
+        case "list":
+            return new ListCommand();
 
-            case "done":
-                return new DoneCommand(input);
+        case "done":
+            return new DoneCommand(input);
 
-            case "delete":
-                return new DeleteCommand(input);
+        case "delete":
+            return new DeleteCommand(input);
 
-            case "todo":
-                return new AddTaskCommand("todo", input);
-            case "event":
-                return new AddTaskCommand("event", input);
-            case "deadline":
-                return new AddTaskCommand("deadline", input);
+        case "todo":
+            return new AddTaskCommand("todo", input);
+        case "event":
+            return new AddTaskCommand("event", input);
+        case "deadline":
+            return new AddTaskCommand("deadline", input);
 
-            case "find":
-                return new FindCommand(input);
+        case "find":
+            return new FindCommand(input);
 
-            case "bye":
-                return new ByeCommand();
+        case "bye":
+            return new ByeCommand();
 
-            default:
-                return new UnknownCommand();
+        default:
+            return new UnknownCommand();
         }
     }
 

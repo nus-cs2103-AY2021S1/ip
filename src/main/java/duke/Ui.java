@@ -20,7 +20,7 @@ public class Ui {
     private static final String indent = "    ";
     private static final String doubleIndent = indent + indent;
     private static final String border = "_________________________________________________________";
-    private final Scanner scanner;
+    private static Scanner scanner;
 
     /**
      * Class constructor.

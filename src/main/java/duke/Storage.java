@@ -71,15 +71,15 @@ public class Storage {
                 TaskType type = task.getTaskType();
 
                 switch (type) {
-                    case TODO:
-                        toSave += String.format("%s\t%d\t%s",
-                                type, isDone, description);
-                        break;
-                    case EVENT:
-                    case DEADLINE:
-                        toSave += String.format("%s\t%d\t%s\t%s",
-                                type, isDone, description, task.getTime());
-                        break;
+                case TODO:
+                    toSave += String.format("%s\t%d\t%s",
+                            type, isDone, description);
+                    break;
+                case EVENT:
+                case DEADLINE:
+                    toSave += String.format("%s\t%d\t%s\t%s",
+                            type, isDone, description, task.getTime());
+                    break;
                 }
 
                 fw.write(String.format("%s\n", toSave));
@@ -122,15 +122,15 @@ public class Storage {
             }
 
             switch (parsed[0]) {
-                case "T":
-                    task = new ToDo(description, isDone);
-                    break;
-                case "E":
-                    task = new Event(description, isDone, time);
-                    break;
-                case "D":
-                    task = new Deadline(description, isDone, time);
-                    break;
+            case "T":
+                task = new ToDo(description, isDone);
+                break;
+            case "E":
+                task = new Event(description, isDone, time);
+                break;
+            case "D":
+                task = new Deadline(description, isDone, time);
+                break;
             }
 
             tasks.add(task);

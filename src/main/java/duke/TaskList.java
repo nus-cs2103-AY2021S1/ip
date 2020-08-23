@@ -106,15 +106,15 @@ public class TaskList {
         Task toAdd = null;
         try {
             switch (tag) {
-                case "todo":
-                    toAdd = addToDo(input);
-                    break;
-                case "event":
-                    toAdd = addEvent(input);
-                    break;
-                case "deadline":
-                    toAdd = addDeadline(input);
-                    break;
+            case "todo":
+                toAdd = addToDo(input);
+                break;
+            case "event":
+                toAdd = addEvent(input);
+                break;
+            case "deadline":
+                toAdd = addDeadline(input);
+                break;
             }
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeInvalidTaskDescriptionException();

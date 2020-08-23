@@ -69,9 +69,11 @@ public abstract class Command {
      * @throws DukeInvalidTaskDescriptionException If an invalid task description is given.
      * @throws DukeUnknownInputException           If the user input cannot be understood.
      * @throws DukeLoadingErrorException           If the file containing the save data cannot be loaded.
+     * @throws DukeInvalidKeywordException         If the user input contains an invalid keyword.
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeInvalidListNumberInputException, DukeInvalidTaskTimeException,
             DukeInvalidTaskDescriptionException, DukeUnknownInputException,
             DukeLoadingErrorException, DukeInvalidKeywordException;
+
 }
