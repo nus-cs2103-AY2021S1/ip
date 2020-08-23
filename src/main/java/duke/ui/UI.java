@@ -12,9 +12,8 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class UI {
-    public final static String LINE = "*********************************************************";
-    private TaskList shelf;
-    private Storage storage;
+    private final TaskList shelf;
+    private final Storage storage;
 
     public UI(TaskList shelf, Storage storage) {
         this.shelf = shelf;
@@ -23,12 +22,10 @@ public class UI {
 
     public void replyBye(){
         System.out.println("CYA PAL. Hope to see you again!");
-        this.showLine();
     }
 
     public void replyList(){
         shelf.iterate();
-        this.showLine();
     }
 
     public void replyDelete(int index) throws IOException, DukeTaskNonExistException {
@@ -36,7 +33,6 @@ public class UI {
         shelf.delete(index);
         storage.updateFile(shelf);
         System.out.println("Now you have " + shelf.getSize() + " in the list.");
-        this.showLine();
     }
 
     public void replyDone(int index) throws DukeTaskNonExistException, IOException {
@@ -47,7 +43,6 @@ public class UI {
         Task book = shelf.completeTask(index);
         storage.updateFile(shelf);
         System.out.println(book);
-        this.showLine();
     }
 
     public void addTodo(String response) throws IOException {
@@ -57,7 +52,6 @@ public class UI {
         System.out.println("Got it. I've added this task: ");
         System.out.println("  " + book);
         System.out.println("Now you have " + shelf.getSize() + " tasks in the list.");
-        this.showLine();
     }
 
     public void addDeadline(String response, String duedate) throws IOException {
@@ -67,7 +61,6 @@ public class UI {
         System.out.println("Got it. I've added this task: ");
         System.out.println("  " + book);
         System.out.println("Now you have " + shelf.getSize() + " tasks in the list.");
-        this.showLine();
     }
 
     public void addEvent(String response, String duedate) throws IOException {
@@ -77,15 +70,9 @@ public class UI {
         System.out.println("Got it. I've added this task: ");
         System.out.println("  " + book);
         System.out.println("Now you have " + shelf.getSize() + " tasks in the list.");
-        this.showLine();
     }
 
     public void showError(Exception e){
         System.out.println(e);
-        this.showLine();
-    }
-
-    public void showLine(){
-        System.out.println(LINE);
     }
 }

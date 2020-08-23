@@ -44,6 +44,7 @@ public class Duke {
         while(true){
             String response = sc.nextLine();
             parser.listen(response);
+            System.out.println(LINE);
             if(parser.toStop(response)){
                 break;
             }
