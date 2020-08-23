@@ -1,5 +1,9 @@
 package duke.command;
 
+/**
+ * Represents a command that asks the program to add a new task to the list.
+ */
+
 import duke.task.Task;
 import duke.component.*;
 
