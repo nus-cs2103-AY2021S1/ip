@@ -18,4 +18,9 @@ public class Event extends Task {
         }
         return "[E] " + icon + " " + this.description + " (at: " + this.at + ")";
     }
+
+    public String toEncoding() {
+        int completedBinary = this.completed ? 1 : 0;
+        return "E|" + completedBinary + "|" + this.description + "|" + this.at;
+    }
 }

@@ -173,6 +173,8 @@ public class Duke {
                 String taskDetails = taskSplit[2];
                 if (taskType.equals("[T]")) {
                     taskList.add(new ToDo(taskDetails, taskIsDone));
+                } else if (taskType.equals("[D]")) {
+
                 }
             }
         }

@@ -18,4 +18,9 @@ public class ToDo extends Task {
         }
         return "[T] " + icon + " " + this.description;
     }
+
+    public String toEncoding() {
+        int completedBinary = this.completed ? 1 : 0;
+        return "T|" + completedBinary + "|" + this.description;
+    }
 }

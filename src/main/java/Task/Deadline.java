@@ -18,4 +18,9 @@ public class Deadline extends Task {
         }
         return "[D] " + icon + " " + this.description + " (by: " + this.by + ")";
     }
+
+    public String toEncoding() {
+        int completedBinary = this.completed ? 1 : 0;
+        return "D|" + completedBinary + "|" + this.description + "|" + this.by;
+    }
 }
