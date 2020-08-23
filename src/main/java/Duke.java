@@ -13,7 +13,6 @@ public class Duke {
     private final UI ui;
 
     public Duke() {
-        // set up the things needed to start Duke
         ui = new UI();
         Storage.createFolder();
         storage = new Storage();

@@ -62,11 +62,22 @@ public class Storage {
         return taskList;
     }
 
-    public void saveData(ArrayList<Task> taskList) {
+    public void addData(Task item) {
+        try {
+            FileWriter fileWriter = new FileWriter(path, true);
+            String task = item.taskToText() + "\n";
+            fileWriter.write(task);
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public void updateData(ArrayList<Task> tasks) {
         try {
             FileWriter fileWriter = new FileWriter(path);
-            for (Task item : taskList) {
-                // get the task list items
+            for (Task item : tasks) {
                 String task = item.taskToText() + "\n";
                 fileWriter.write(task);
             }
