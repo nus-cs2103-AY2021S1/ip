@@ -1,9 +1,6 @@
 package duke.component;
 
-import duke.command.ByeCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -335,5 +332,11 @@ public class ParserTest {
         assertEquals(new DoneCommand("done -3"), Parser.parse("done -3"));
         assertEquals(new DoneCommand("done "), Parser.parse("done "));
         assertEquals(new DoneCommand("done //"), Parser.parse("done //"));
+    }
+
+    @Test
+    public void parse_happenCommand_happenCommand() {
+        assertEquals(new HappenCommand("happen on 2020-08-31"), Parser.parse("happen on 2020-08-31"));
+        assertEquals(new HappenCommand("happen "), Parser.parse("happen "));
     }
 }
