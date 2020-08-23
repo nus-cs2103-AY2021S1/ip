@@ -1,6 +1,7 @@
 package duke;
 
-/** The Main class of this program.
+/**
+ * The Main class of this program.
  * @author Li Jiayu
  * @version 0.1
  */
@@ -14,6 +15,11 @@ public class Duke {
     private TaskList list;
     private Ui ui;
 
+    /**
+     * Creates a running Duke, initialize the list with data in the input file, if input file is not found,
+     * initialize the list with an empty list.
+     * @param filePath The file path of the data file holding all existing tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         try {
