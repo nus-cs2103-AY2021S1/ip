@@ -5,14 +5,15 @@ import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.List;
 
-
+/**
+ * deals with loading tasks from the file and saving tasks in the file
+ */
 public final class Storage {
     private static final String DB_DIR_NAME = "data";
     private static final String DB_FILE_NAME = "duke.txt";
     private static Path dbPath = null;
 
     private TaskList toDoLst;
-//    private List<Task> toDoLst;
 
     public Storage() throws FileNotFoundException, IOException {
         try {
@@ -22,7 +23,6 @@ public final class Storage {
         }
 
         toDoLst = new TaskList();
-//        toDoLst = new ArrayList<>();
 
         try {
             BufferedReader br = new BufferedReader(new FileReader(dbPath.toFile()));
@@ -42,6 +42,11 @@ public final class Storage {
         }
     }
 
+    /**
+     * Checks whether the text file (for storage) exists
+     *
+     * @throws FileNotFoundException
+     */
     public static void checkDbExists() throws FileNotFoundException {
         Path curDirPath = Paths.get("");
         Path dbDirPath = curDirPath.resolve(DB_DIR_NAME);
@@ -57,26 +62,58 @@ public final class Storage {
         }
     }
 
+    /**
+     * Get to-do list.
+     *
+     * @returns List of tasks (to-do list)
+     */
     public List<Task> getToDoLst() {
         return toDoLst.getToDoLst();
     }
 
+    /**
+     * Get size of to-do list.
+     *
+     * @returns size of to-do list.
+     */
     public int getToDoLstSize() {
         return toDoLst.getToDoLstSize();
     }
 
+    /**
+     * Get description of size of list.
+     *
+     * @returns Description of size of list.
+     */
     public String getTotalItemsDescription() {
         return String.format("Now you have %d %s in the list.", toDoLst.getToDoLstSize(), toDoLst.getToDoLstSize() > 1 ? "tasks" : "task");
     }
 
+    /**
+     * Add to-do item
+     *
+     * @param task to be added
+     */
     public void addToDoItem(Task task) {
         toDoLst.addToDoItem(task);
     }
 
+    /**
+     * Remove to-do item
+     *
+     * @param i index of task tobe removed in the to-do list
+     *
+     * @return removed task
+     */
     public Task removeToDoItem(int i) {
         return toDoLst.removeToDoItem(i);
     }
 
+    /**
+     * Saves current list of tasks to text file.
+     *
+     * @throws IOException
+     */
     public void save() throws IOException {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(dbPath.toFile()));
