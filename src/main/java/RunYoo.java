@@ -1,54 +1,145 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.nio.file.Paths;
 
 public class RunYoo {
 
     public static void run(Scanner sc) throws Exception {
 
+        //initialise ArrayList of tasks
         ArrayList<Task> al = new ArrayList<>();
+
+
+        //check if data & duke.txt exists
+        try {
+            java.nio.file.Path dataPath = java.nio.file.Paths.get(".", "data");
+            java.nio.file.Path dukePath = java.nio.file.Paths.get(".", "data", "duke.txt");
+
+            File dataFile = new File(String.valueOf(dataPath));
+            File duke = new File(String.valueOf(dukePath));
+
+            if (dataFile.exists()) {
+                if (duke.exists()) {
+                    FileReader fr = new FileReader(duke);
+                    BufferedReader br = new BufferedReader(fr);
+                    StringBuffer sb = new StringBuffer();
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        String temp[] = line.split(" // ", 4);
+                        addTaskToArrayList(temp, al);
+                    }
+                    if (al.size() != 0) {
+                        System.out.println("\n(By the way, here's your saved list!)");
+                        displayList(al);
+                        fr.close();
+                    }
+                } else {
+                    duke.createNewFile();
+                }
+            } else {
+                //create data file
+                dataFile.mkdir();
+                duke.createNewFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //creating tasks
         String input = sc.nextLine();
 
-        while(!input.equals("bye")) {
+        while (!input.equals("bye")) {
 
             String temp[] = input.split(" ", 2);
 
             if (input.equals("list")) {
+                System.out.println("Here's your list!");
                 displayList(al);
 
             } else {
                 try {
-                    if (temp[0].equals("done"))
+                    switch (temp[0]) {
+                    case "done":
                         markAsDone(al, temp);
-                    else if (temp[0].equals("delete"))
+                        break;
+                    case "delete":
                         deleteTask(al, temp);
-                    else if (temp[0].equals("todo"))
+                        break;
+                    case "todo":
                         addTodo(al, temp);
-                    else if (temp[0].equals("deadline"))
+                        break;
+                    case "deadline":
                         addDeadline(al, temp);
-                    else if (temp[0].equals("event"))
+                        break;
+                    case "event":
                         addEvent(al, temp);
-                    else
+                        break;
+                    default:
                         throw new YooException("Sorry, I didn't get that (\u3063*\u00B4\u25A1`)\u3063");
-
+                    }
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("You're missing a task description (\u3063*\u00B4\u25A1`)\u3063");
                 }
             }
             input = sc.nextLine();
         }
+        //when "bye" is entered
+        File newDuke = new File("./data/duke.txt");
+        saveTasksToFile(al, newDuke);
         System.out.println("Bye! Come back soon ( ^-^)/");
     }
 
+    private static void saveTasksToFile(ArrayList<Task> al, File duke) throws IOException {
+        FileWriter fw = new FileWriter(duke, false);
 
-    public static void displayList(ArrayList<Task> al) {
-        System.out.println("Here's your list!");
-        for(int i = 1; i <= al.size(); i ++) {
+        for (Task t : al) {
+            int isDone = t.isDone ? 1 : 0;
+
+            switch (t.getClass().getName()) {
+            case "Todo":
+                fw.write("T // " + isDone + " // " + t.description + " // \n");
+                break;
+            case "Deadline":
+                Deadline dl = (Deadline) t;
+                fw.write("D // " + isDone + " // " + dl.description + " // " + dl.by + "\n");
+                break;
+            case "Event":
+                Event e = (Event) t;
+                fw.write("E // " + isDone + " // " + e.description + " // " + e.at + "\n");
+                break;
+            }
+        }
+        fw.close();
+    }
+
+    private static void addTaskToArrayList(String[] temp, ArrayList<Task> al) {
+        boolean isDone = Integer.parseInt(temp[1]) == 0;
+        switch (temp[0]) {
+        case "T":
+            Todo td = new Todo(temp[2], isDone);
+            al.add(td);
+            break;
+        case "D":
+            Deadline dl = new Deadline(temp[2], isDone, temp[3]);
+            al.add(dl);
+            break;
+        case "E":
+            Event e = new Event(temp[2], isDone, temp[3]);
+            al.add(e);
+            break;
+        }
+    }
+
+
+    private static void displayList(ArrayList<Task> al) {
+        for (int i = 1; i <= al.size(); i ++) {
             System.out.println(i + ". "
                     + al.get(i - 1));
         }
     }
 
-    public static void markAsDone(ArrayList<Task> al, String[] temp) throws YooException {
+    private static void markAsDone(ArrayList<Task> al, String[] temp) throws YooException {
         int index = Integer.parseInt(temp[1]);
         if (index > al.size()) {
             throw new YooException("No such task (>_<)");
@@ -60,7 +151,7 @@ public class RunYoo {
         }
     }
 
-    public static void deleteTask(ArrayList<Task> al, String[] temp) throws YooException {
+    private static void deleteTask(ArrayList<Task> al, String[] temp) throws YooException {
         int index = Integer.parseInt(temp[1]);
         if (index > al.size()) {
             throw new YooException("No such task (>_<)");
@@ -71,7 +162,7 @@ public class RunYoo {
         }
     }
 
-    public static void addTodo(ArrayList<Task> al, String[] temp) {
+    private static void addTodo(ArrayList<Task> al, String[] temp) {
         Todo td = new Todo(temp[1]);
         al.add(td);
         System.out.println("I've added the following task! \n" + td);
