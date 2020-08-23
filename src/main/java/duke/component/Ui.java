@@ -46,6 +46,10 @@ public class Ui {
         return note + n;
     }
 
+    /**
+     * Reads input from the user.
+     * @return the user inputs in the next line
+     */
     public String readInput() {
         return sc.nextLine();
     }
