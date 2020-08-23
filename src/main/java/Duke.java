@@ -1,10 +1,15 @@
 import exceptions.InvalidCommandException;
+import task.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private ArrayList<Task> taskList = new ArrayList<>();
+    private Database database;
 
-    private void userInput(TaskList taskList) {
+
+    private void getUserInput(ArrayList<Task> taskList) {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
@@ -16,6 +21,7 @@ public class Duke {
             }
             if (input.equals("bye")) break;
         }
+        this.database.updateDatabase(taskList);
         sc.close();
     }
 
@@ -27,9 +33,10 @@ public class Duke {
     }
 
     public void start() {
-        TaskList todoList = new TaskList();
+        this.database = Database.dbInstance();
+        //this.taskList = new TaskList();
         printWelcomeMessage();
-        userInput(todoList);
+        getUserInput(this.taskList);
     }
 
     public static void main(String[] args) {
