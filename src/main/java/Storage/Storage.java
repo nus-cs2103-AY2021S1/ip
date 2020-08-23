@@ -1,3 +1,13 @@
+package Storage;
+
+import Command.Command;
+import DukeException.DukeException;
+import Parser.Parser;
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.Todo;
+
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
@@ -52,7 +62,7 @@ public class Storage {
         } catch (FileNotFoundException | DukeException ex){
             System.out.println("WARNING: " + ex.getMessage() + " :WARNING");
         } catch (ArrayIndexOutOfBoundsException ex) {
-            System.out.println("WARNING: There is Something wrong with your Storage :WARNING");
+            System.out.println("WARNING: There is Something wrong with your Storage.Storage :WARNING");
         }
         return taskList;
     }
@@ -93,7 +103,7 @@ public class Storage {
         } catch (DukeException ex){
             throw new DukeException(ex.getMessage());
         } catch (IOException ex) {
-            throw new DukeException("Something went wrong. MUG fail to add the Task :_:");
+            throw new DukeException("Something went wrong. MUG fail to add the Tasks.Task :_:");
         }
     }
 
@@ -125,7 +135,7 @@ public class Storage {
             File renameFile = new File(this.filepath);
             newFile.renameTo(renameFile);
         } catch (IOException ex) {
-            throw new DukeException("Something went wrong. MUG fail to delete the Task :_:");
+            throw new DukeException("Something went wrong. MUG fail to delete the Tasks.Task :_:");
         }
     }
 

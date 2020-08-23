@@ -1,3 +1,10 @@
+package Tasks;
+
+import Command.Command;
+import DukeException.DukeException;
+import Parser.Parser;
+import Storage.Storage;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -101,7 +108,7 @@ public class TaskList {
         } else {
             int taskIndex = taskId - 1;
             Task doneTask = this.taskList.get(taskIndex);
-            if (doneTask.isDone) {
+            if (doneTask.isDone()) {
                 return "MUG had marked this task as done:\n"
                         + doneTask;
             } else {

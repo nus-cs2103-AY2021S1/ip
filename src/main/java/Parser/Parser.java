@@ -1,9 +1,14 @@
+package Parser;
+
+import Command.Command;
+import DukeException.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-    protected static void input(Command command, int splitNum, boolean timeRelated) throws DukeException {
+    public static void input(Command command, int splitNum, boolean timeRelated) throws DukeException {
         if (splitNum < 2 ) {
             if ((timeRelated && command == Command.DEADLINE)
             ) {
@@ -17,7 +22,7 @@ public class Parser {
         }
     }
 
-    protected static void info(Command command, String info, boolean timeRelated) throws DukeException {
+    public static void info(Command command, String info, boolean timeRelated) throws DukeException {
         if (info.trim().equals("")) {
             if ((timeRelated && command == Command.DEADLINE)
             ) {
@@ -31,7 +36,7 @@ public class Parser {
         }
     }
 
-    protected static LocalDate date(String date) throws DukeException {
+    public static LocalDate date(String date) throws DukeException {
         try {
             return LocalDate.parse(date);
         } catch (DateTimeParseException ex) {
@@ -39,7 +44,7 @@ public class Parser {
         }
     }
 
-    protected static Command command(String command) throws DukeException{
+    public static Command command(String command) throws DukeException {
         try {
             return Command.valueOf(command.toUpperCase());
         } catch (IllegalArgumentException ex) {
@@ -47,7 +52,7 @@ public class Parser {
         }
     }
 
-    protected static int index(String strIndex, int splitNum) throws DukeException {
+    public static int index(String strIndex, int splitNum) throws DukeException {
         try {
             int index = Integer.parseInt(strIndex);
 

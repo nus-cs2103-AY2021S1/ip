@@ -1,3 +1,10 @@
+package Ui;
+
+import Command.Command;
+import DukeException.DukeException;
+import Parser.Parser;
+import Tasks.TaskList;
+
 public class Ui {
 
     public void welcome() {
@@ -61,7 +68,7 @@ public class Ui {
         } catch (DukeException ex){
             output = printDesign(ex.getMessage());
         } catch (ArrayIndexOutOfBoundsException ex) {
-            output = printDesign("There is Something wrong with your Storage");
+            output = printDesign("There is Something wrong with your Storage.Storage");
         }
 
         return output;
