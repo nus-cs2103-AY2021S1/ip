@@ -61,7 +61,9 @@ class Storage {
             } catch (java.io.IOException e) {
                 System.out.println("(ERROR READING FILE) THIS MESSAGE SHOULD NEVER APPEAR");
             }
+            return taskList;
+        } else {
+            return null;
         }
-        return taskList;
     }
 }
