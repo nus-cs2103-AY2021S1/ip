@@ -7,18 +7,18 @@ public class TaskHandler {
         DONE, DELETE
     }
 
-    public TaskHandler() {
-        this.taskList = new ArrayList<>();
+    public TaskHandler(ArrayList<Task> list) {
+        this.taskList = list;
     }
 
     public ArrayList<Task> getTaskList() {
         return taskList;
     }
 
-    public void printList() throws DukeException {
+    public void printList() {
         if (taskList.isEmpty()) {
             // Asks user for tasks when printing empty list
-            throw new DukeException("Empty list, pls add tasks to list first");
+            System.out.println("Empty list, pls add tasks to list first");
         }
         int listPos = 1;
         indent(1);
@@ -31,7 +31,7 @@ public class TaskHandler {
         System.out.println("You have " + taskList.size() + " task(s) in the list");
     }
 
-    public Task modifyTask(String input, ArrayList<Task> list, TaskHandler.operationType currentOp) throws DukeException {
+    public static Task modifyTask(String input, ArrayList<Task> list, TaskHandler.operationType currentOp) throws DukeException {
         String[] stringArr = input.split(" ");
         String lowerCaseOperation = currentOp.toString().toLowerCase();
         if (stringArr.length != 2 ) {
@@ -53,13 +53,13 @@ public class TaskHandler {
         }
     }
 
-    public Task processNewTask(String input, Task.taskType tasktype) throws DukeException {
+    public static Task processNewTask(String input, Task.taskType tasktype) throws DukeException {
         // Sorts the input into a task with or without time
         if (tasktype == Task.taskType.TODO) {
             // Without time
             if (input.substring(4).trim().isEmpty()) {
                 // if given empty arguments or space as task
-                throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
+                throw new DukeException("\u2639 Oops, the description of a todo cannot be empty.");
             }
             String taskDesc = input.substring(5);
             return new Todo(taskDesc);
@@ -68,13 +68,13 @@ public class TaskHandler {
             try {
                 return processTaskWithTime(input, tasktype, "/by");
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("Oops, use add deadline format: deadline [task] /by [time]");
+                throw new DukeException("\u2639 Oops, use add deadline format: deadline [task] /by [time]");
             }
         } else if (tasktype == Task.taskType.EVENT) {
             try {
                 return processTaskWithTime(input, tasktype, "/at");
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("Oops, use add event format: event [task] /at [time]");
+                throw new DukeException("\u2639 Oops, use add event format: event [task] /at [time]");
             }
         } else {
             return new Task("this task should not be created", "todo");
@@ -83,7 +83,7 @@ public class TaskHandler {
 
     public static Task processTaskWithTime(String input, Task.taskType tasktype, String separator) throws DukeException {
         // Process string to find task description and time
-        String taskDesc = input.substring(tasktype.name().length() + 1, input.indexOf(separator));
+        String taskDesc = input.substring(tasktype.name().length() + 1, input.indexOf(separator) - 1);
         checkIsFieldEmpty("taskDesc", taskDesc);
         // +4 due to size of /by or /at with a space
         String time = input.substring(input.indexOf(separator) + 4);
@@ -98,7 +98,7 @@ public class TaskHandler {
     public static void checkIsFieldEmpty(String nameOfField, String field) throws DukeException {
         // check whether the argument given is empty
         if (field.trim().isEmpty()) {
-            throw new DukeException("Oops, " + nameOfField + " cannot be empty");
+            throw new DukeException("\u2639 Oops, " + nameOfField + " cannot be empty");
         }
     }
 
@@ -108,7 +108,7 @@ public class TaskHandler {
         }
     }
 
-    public void receiveInvalidCommand() throws DukeException {
-        throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+    public static void receiveInvalidCommand() throws DukeException {
+        throw new DukeException("\u2639 Oops, I'm sorry but I don't know what that means :-(");
     }
 }

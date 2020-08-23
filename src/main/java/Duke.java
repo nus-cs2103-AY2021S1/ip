@@ -21,7 +21,30 @@ public class Duke {
 
     public static void startChat() {
         Scanner scanner = new Scanner(System.in);
-        TaskHandler handler = new TaskHandler();
+        Storage storage = new Storage();
+        ArrayList<Task> savedList;
+        try {
+            // Loading the save file from disk
+            savedList = storage.loadFromFile();
+        } catch (DukeException e) {
+            e.printStackTrace(System.out);
+            // If fail to load save file, prompts user to reset the savefile
+            System.out.println("Type restart to reset task list or anything else to exit.");
+            if (scanner.nextLine().equals("restart")) {
+                savedList = new ArrayList<>();
+                try {
+                    // Resets save file to empty
+                    storage.saveToFile(savedList);
+                } catch (DukeException e1) {
+                    e1.printStackTrace(System.out);
+                }
+                initialize();
+            } else {
+                System.out.println("Bye bye! Hope to see you again soon!");
+                return;
+            }
+        }
+        TaskHandler handler = new TaskHandler(savedList);
         ArrayList<Task> list = handler.getTaskList();
         while (true) {
             // Listens for input
@@ -33,40 +56,40 @@ public class Duke {
                 break;
             } else if (input.equals("list")) {
                 // Prints the given list
-                try {
-                    handler.printList();
-                } catch (DukeException e) {
-                    e.printStackTrace(System.out);
-                }
+                handler.printList();
             } else if (input.startsWith("done ") || input.equals("done")) {
                  try {
-                     Task currentTask = handler.modifyTask(input, list, TaskHandler.operationType.DONE);
+                     Task currentTask = TaskHandler.modifyTask(input, list, TaskHandler.operationType.DONE);
                      printSuccess("done", currentTask, list.size());
+                     storage.saveToFile(list);
                  } catch (DukeException e) {
                      e.printStackTrace(System.out);
                  }
             } else if (input.startsWith("delete ") || input.equals("delete")){
                 try {
-                    Task delTask = handler.modifyTask(input, list, TaskHandler.operationType.DELETE);
+                    Task delTask = TaskHandler.modifyTask(input, list, TaskHandler.operationType.DELETE);
                     printSuccess("delete", delTask, list.size());
+                    storage.saveToFile(list);
                 } catch (DukeException e) {
                     e.printStackTrace(System.out);
                 }
             } else if (input.startsWith("todo ") || input.equals("todo")) {
                 // Create and store todos given in list
                 try {
-                    Task newTodo = handler.processNewTask(input, Task.taskType.TODO);
+                    Task newTodo = TaskHandler.processNewTask(input, Task.taskType.TODO);
                     list.add(newTodo);
                     printSuccess("add", newTodo, list.size());
+                    storage.saveToFile(list);
                 } catch (DukeException e){
                     e.printStackTrace(System.out);
                 }
             } else if (input.startsWith("deadline ") || input.equals("deadline")) {
                 // Create and store deadlines given in list
                 try {
-                    Task newDeadline = handler.processNewTask(input, Task.taskType.DEADLINE);
+                    Task newDeadline = TaskHandler.processNewTask(input, Task.taskType.DEADLINE);
                     list.add(newDeadline);
                     printSuccess("add", newDeadline, list.size());
+                    storage.saveToFile(list);
                 }  catch (DukeException e){
                     e.printStackTrace(System.out);
                 }
@@ -74,16 +97,17 @@ public class Duke {
             } else if (input.startsWith("event ") || input.equals("event")) {
                 // Create and store events given in list
                 try {
-                    Task newEvent = handler.processNewTask(input, Task.taskType.EVENT);
+                    Task newEvent = TaskHandler.processNewTask(input, Task.taskType.EVENT);
                     list.add(newEvent);
                     printSuccess("add", newEvent, list.size());
+                    storage.saveToFile(list);
                 } catch (DukeException e){
                     e.printStackTrace(System.out);
                 }
             } else {
                 // Other commands
                 try {
-                    handler.receiveInvalidCommand();
+                    TaskHandler.receiveInvalidCommand();
                 } catch (DukeException e) {
                     e.printStackTrace(System.out);
                 }

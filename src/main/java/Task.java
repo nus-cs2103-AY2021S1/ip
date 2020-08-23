@@ -1,10 +1,20 @@
 public class Task {
     protected String description;
-    protected taskStatus isDone;
+    protected taskStatus status;
     protected taskType type;
 
     enum taskStatus {
-        DONE, NOTDONE
+        DONE("1"), NOTDONE("0");
+
+        public final String num;
+
+        taskStatus(String num) {
+            this.num = num;
+        }
+
+        public String getNum() {
+            return num;
+        }
     }
 
     enum taskType {
@@ -12,7 +22,7 @@ public class Task {
     }
 
     public Task(String desc, String type) {
-        this.isDone = taskStatus.NOTDONE;
+        this.status = taskStatus.NOTDONE;
         this.description = desc;
         if (type.equals("todo")) {
             this.type = taskType.TODO;
@@ -24,17 +34,21 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (this.isDone == taskStatus.DONE
+        return (this.status == taskStatus.DONE
                 ? "\u2713" // return tick
                 : "\u2718");  // or X symbols
     }
 
     public void markAsDone() {
-        this.isDone = taskStatus.DONE;
+        this.status = taskStatus.DONE;
     }
 
     public boolean isDone() {
-        return this.isDone == taskStatus.DONE;
+        return this.status == taskStatus.DONE;
+    }
+
+    public String toSaveFormat() {
+        return description;
     }
 
     @Override
