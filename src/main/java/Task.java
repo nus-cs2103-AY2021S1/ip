@@ -9,9 +9,18 @@ public class Task {
         this.content = content;
     }
 
+    public Task(boolean status, String content) {
+        this.status = status;
+        this.content = content;
+    }
+
     public void done() {
         this.status = true;
     }
+
+    public boolean isDone() { return this.status; }
+
+    public String getContent() { return this.content; }
 
     @Override
     public String toString() {

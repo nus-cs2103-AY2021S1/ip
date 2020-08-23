@@ -6,6 +6,10 @@ public class Todo extends Task {
         super(content);
     }
 
+    public Todo(boolean status, String content) {
+        super(status, content);
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString() + "  <-";

@@ -8,6 +8,13 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    public Deadline(boolean status, String content, String time) {
+        super(status, content);
+        this.time = time;
+    }
+
+    public String getTime() { return this.time; }
+
     @Override
     public String toString() {
         return "[D]" + (super.status ? "[√]" : "[×]") + super.content + "(" + time + ")" + "  <-";

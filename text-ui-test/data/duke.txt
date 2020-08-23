@@ -1,0 +1,14 @@
+T
+1
+go to fairprice
+E
+0
+CS2103 lecture 
+at FRI 12:00
+D
+0
+CS2103 project submission 
+before FRI 2359
+T
+0
+
