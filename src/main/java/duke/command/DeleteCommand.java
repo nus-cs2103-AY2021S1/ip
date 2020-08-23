@@ -13,7 +13,7 @@ public class DeleteCommand extends Command {
     /**
      * The ID of the task to be deleted.
      */
-    int taskId;
+    private final int taskId;
 
     /**
      * Initialises a new instance.
@@ -28,9 +28,9 @@ public class DeleteCommand extends Command {
      * Executes the Delete command by deleting the task from the task list, updating the storage,
      * and then printing a message indicating that the task was successfully deleted.
      *
-     * @param tasks   The list of tasks known by the chatbot.
-     * @param ui      The UI that is used by the chatbot.
-     * @param storage The storage that is used by the chatbot.
+     * @param tasks   The list of tasks known by the chat bot.
+     * @param ui      The UI that is used by the chat bot.
+     * @param storage The storage that is used by the chat bot.
      * @throws DukeException If the execution fails at any step.
      */
     @Override

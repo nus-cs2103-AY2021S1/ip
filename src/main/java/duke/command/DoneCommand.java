@@ -13,7 +13,7 @@ public class DoneCommand extends Command {
     /**
      * The ID of the task to be marked as complete.
      */
-    int taskId;
+    private final int taskId;
 
     /**
      * Initialises a new instance.
@@ -28,9 +28,9 @@ public class DoneCommand extends Command {
      * Executes the Done command by marking the task in the task list as complete, updating the
      * storage, and then printing a message to indicate that the task was marked as done.
      *
-     * @param tasks   The list of tasks known by the chatbot.
-     * @param ui      The UI that is used by the chatbot.
-     * @param storage The storage that is used by the chatbot.
+     * @param tasks   The list of tasks known by the chat bot.
+     * @param ui      The UI that is used by the chat bot.
+     * @param storage The storage that is used by the chat bot.
      * @throws DukeException If the execution fails at any step.
      */
     @Override

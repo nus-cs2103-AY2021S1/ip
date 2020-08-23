@@ -51,7 +51,7 @@ public class Deadline extends Task {
     /**
      * Returns a string representation of the deadline task.
      * This string representation is prepended by a <code>D</code> to indicate that this task is a
-     * Deadine item followed by the default string representation of a normal {@link Task}.
+     * Deadline item followed by the default string representation of a normal {@link Task}.
      *
      * @return A string representation of the deadline task.
      */

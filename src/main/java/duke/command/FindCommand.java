@@ -11,7 +11,7 @@ public class FindCommand extends Command {
     /**
      * The keyword to search for
      */
-    String keyword;
+    private final String keyword;
 
     /**
      * Initialises a new instance.
@@ -26,9 +26,9 @@ public class FindCommand extends Command {
      * Executes the Find command by searching for the keyword within the task list and then
      * printing a message listing the matching tasks or a message indicating no tasks were found..
      *
-     * @param tasks   The list of tasks known by the chatbot.
-     * @param ui      The UI that is used by the chatbot.
-     * @param storage The storage that is used by the chatbot.
+     * @param tasks   The list of tasks known by the chat bot.
+     * @param ui      The UI that is used by the chat bot.
+     * @param storage The storage that is used by the chat bot.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

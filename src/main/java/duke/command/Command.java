@@ -6,15 +6,15 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 
 /**
- * Encapsulates a command that will be issued to the chatbot.
+ * Encapsulates a command that will be issued to the chat bot.
  */
 public abstract class Command {
     /**
      * Executes the command.
      *
-     * @param tasks   The list of tasks known by the chatbot.
-     * @param ui      The UI that is used by the chatbot.
-     * @param storage The storage that is used by the chatbot.
+     * @param tasks   The list of tasks known by the chat bot.
+     * @param ui      The UI that is used by the chat bot.
+     * @param storage The storage that is used by the chat bot.
      * @throws DukeException If the execution fails at any step.
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;

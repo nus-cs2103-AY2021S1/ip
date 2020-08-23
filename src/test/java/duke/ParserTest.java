@@ -46,7 +46,7 @@ public class ParserTest {
     @Test
     public void parseFind_missingKeyword_exceptionThrown() {
         try {
-            Command c = Parser.parse("find");
+            Parser.parse("find");
         } catch (DukeException e) {
             assertTrue(e instanceof MissingKeywordException);
             assertEquals(
@@ -78,7 +78,7 @@ public class ParserTest {
     @Test
     public void parseDone_missingTaskId_exceptionThrown() {
         try {
-            Command c = Parser.parse("done");
+            Parser.parse("done");
         } catch (DukeException e) {
             assertTrue(e instanceof MissingTaskIdException);
             assertEquals("☹ OOPS!!! Failed to mark task as complete! No task was specified!",
@@ -113,7 +113,7 @@ public class ParserTest {
     @Test
     public void parseDone_invalidTaskId_exceptionThrown() {
         try {
-            Command c = Parser.parse("done task1");
+            Parser.parse("done task1");
         } catch (DukeException e) {
             assertTrue(e instanceof InvalidTaskIdException);
             assertEquals(
@@ -126,7 +126,7 @@ public class ParserTest {
     @Test
     public void parseDelete_missingTaskId_exceptionThrown() {
         try {
-            Command c = Parser.parse("delete");
+            Parser.parse("delete");
         } catch (DukeException e) {
             assertTrue(e instanceof MissingTaskIdException);
             assertEquals("☹ OOPS!!! Failed to delete task! No task was specified!", e.getMessage());
@@ -160,7 +160,7 @@ public class ParserTest {
     @Test
     public void parseDelete_invalidTaskId_exceptionThrown() {
         try {
-            Command c = Parser.parse("delete task1");
+            Parser.parse("delete task1");
         } catch (DukeException e) {
             assertTrue(e instanceof InvalidTaskIdException);
             assertEquals("☹ OOPS!!! Failed to delete task! Please key in only the integer " +
@@ -172,7 +172,7 @@ public class ParserTest {
     @Test
     public void parseTodo_missingDetails_exceptionThrown() {
         try {
-            Command c = Parser.parse("todo");
+            Parser.parse("todo");
         } catch (DukeException e) {
             assertTrue(e instanceof MissingTaskDetailsException);
             assertEquals("☹ OOPS!!! Failed to create task! Insufficient details provided!",
@@ -183,7 +183,7 @@ public class ParserTest {
     @Test
     public void parseDeadline_missingDetails_exceptionThrown() {
         try {
-            Command c = Parser.parse("deadline");
+            Parser.parse("deadline");
         } catch (DukeException e) {
             assertTrue(e instanceof MissingTaskDetailsException);
             assertEquals("☹ OOPS!!! Failed to create task! Insufficient details provided!",
@@ -194,7 +194,7 @@ public class ParserTest {
     @Test
     public void parseEvent_missingDetails_exceptionThrown() {
         try {
-            Command c = Parser.parse("event");
+            Parser.parse("event");
         } catch (DukeException e) {
             assertTrue(e instanceof MissingTaskDetailsException);
             assertEquals("☹ OOPS!!! Failed to create task! Insufficient details provided!",
@@ -223,7 +223,7 @@ public class ParserTest {
     @Test
     public void parseDeadline_missingDeadline_exceptionThrown() {
         try {
-            Command c = Parser.parse("deadline blahblah");
+            Parser.parse("deadline blahblah");
         } catch (DukeException e) {
             assertTrue(e instanceof MissingTaskDetailsException);
             assertEquals("☹ OOPS!!! Failed to create Deadline task! No deadline was specified!",
@@ -246,7 +246,7 @@ public class ParserTest {
     @Test
     public void parseEvent_missingDate_exceptionThrown() {
         try {
-            Command c = Parser.parse("event blahblah");
+            Parser.parse("event blahblah");
         } catch (DukeException e) {
             assertTrue(e instanceof MissingTaskDetailsException);
             assertEquals("☹ OOPS!!! Failed to create Event task! No date was specified!",
@@ -289,7 +289,7 @@ public class ParserTest {
     @Test
     public void parseUnknown_help_exceptionThrown() {
         try {
-            Command c = Parser.parse("help");
+            Parser.parse("help");
         } catch (DukeException e) {
             assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(",
                     e.getMessage());
@@ -299,7 +299,7 @@ public class ParserTest {
     @Test
     public void parseUnknown_emptyString_exceptionThrown() {
         try {
-            Command c = Parser.parse("");
+            Parser.parse("");
         } catch (DukeException e) {
             assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(",
                     e.getMessage());
@@ -309,7 +309,7 @@ public class ParserTest {
     @Test
     public void parseUnknown_todoTypo_exceptionThrown() {
         try {
-            Command c = Parser.parse("todoo");
+            Parser.parse("todoo");
         } catch (DukeException e) {
             assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(",
                     e.getMessage());

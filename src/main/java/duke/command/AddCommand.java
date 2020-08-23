@@ -13,7 +13,7 @@ public class AddCommand extends Command {
     /**
      * The task to be added.
      */
-    Task task;
+    private final Task task;
 
     /**
      * Initialises a new instance.
@@ -28,9 +28,9 @@ public class AddCommand extends Command {
      * Executes the Add command by adding the task to the task list, saving the task to the
      * storage, and then printing a message indicating that the task was successfully added.
      *
-     * @param tasks   The list of tasks known by the chatbot.
-     * @param ui      The UI that is used by the chatbot.
-     * @param storage The storage that is used by the chatbot.
+     * @param tasks   The list of tasks known by the chat bot.
+     * @param ui      The UI that is used by the chat bot.
+     * @param storage The storage that is used by the chat bot.
      * @throws DukeException If the execution fails at any step.
      */
     @Override

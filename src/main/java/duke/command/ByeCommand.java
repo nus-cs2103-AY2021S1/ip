@@ -11,9 +11,9 @@ public class ByeCommand extends Command {
     /**
      * Executes the Bye command by printing a farewell message.
      *
-     * @param tasks   The list of tasks known by the chatbot.
-     * @param ui      The UI that is used by the chatbot.
-     * @param storage The storage that is used by the chatbot.
+     * @param tasks   The list of tasks known by the chat bot.
+     * @param ui      The UI that is used by the chat bot.
+     * @param storage The storage that is used by the chat bot.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
