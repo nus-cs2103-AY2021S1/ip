@@ -118,8 +118,9 @@ public class ListOfItems {
                 index++;
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("\n" + divider + "\n" +
-                        "Whoops, you did not fill in the details of the Todo properly :(" +
-                        "\n" + divider);
+                        "Whoops, you did not fill in the details of the Todo properly :("
+                        + "\n" + "Please try again."
+                        + "\n" + divider);
             }
         } else if (input.contains("deadline")) {
             try {
@@ -135,12 +136,19 @@ public class ListOfItems {
                 index++;
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("\n" + divider + "\n" +
-                        "Whoops, you did not fill in the details of the Deadline properly :(" +
-                        "\n" + divider);
+                        "Whoops, you did not fill in the details of the Deadline properly :("
+                        + "\n" + "Please try again."
+                        + "\n" + divider);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("\n" + divider + "\n" +
-                        "Whoops, you did not fill in the due date/time of the Deadline." +
-                        "\n" + divider);
+                        "Whoops, you did not fill in the due date/time of the Deadline properly."
+                        + "\n" + "Please try again."
+                        + "\n" + divider);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("\n" + divider + "\n" +
+                        "Sorry, you did not fill in the due date(DD/MM/YYYY)"
+                        + "\n" + "and/or time(HHmm) properly. Please try again."
+                        + "\n" + divider);
             }
         } else if (input.contains("event")) {
             try {
@@ -156,12 +164,19 @@ public class ListOfItems {
                 index++;
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("\n" + divider + "\n" +
-                        "Whoops, you did not fill in the details of the Event properly :(" +
-                        "\n" + divider);
+                        "Whoops, you did not fill in the details of the Event properly :("
+                        + "\n" + "Please try again."
+                        + "\n" + divider);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("\n" + divider + "\n" +
-                        "Whoops, you did not fill in the duration of the Event." +
-                        "\n" + divider);
+                        "Whoops, you did not fill in the duration of the Event properly."
+                        + "\n" + "Please try again."
+                        + "\n" + divider);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("\n" + divider + "\n" +
+                        "Sorry, you did not fill in the due date(DD/MM/YYYY)"
+                        + "\n" + "and/or time(HHmm) properly. Please try again."
+                        + "\n" + divider);
             }
         } else {
             throw new DukeException("\n" + divider + "\n" +
@@ -241,8 +256,8 @@ public class ListOfItems {
             }
         } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
             throw new DukeException("\n" + divider + "\n"
-                    + "Sorry, you did not enter a valid date (DD/MM/YYYY) and/or time (HHmm)! "
-                    + "\n" + "Please try again."
+                    + "Sorry, you did not enter a valid date (DD/MM/YYYY)"
+                    + "\n" + "and/or time (HHmm)! Please try again."
                     + "\n" + divider);
         }
 
