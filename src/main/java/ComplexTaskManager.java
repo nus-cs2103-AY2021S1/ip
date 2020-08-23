@@ -1,3 +1,8 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+
 public class ComplexTaskManager {
 
     private final String taskDetails;
@@ -15,7 +20,16 @@ public class ComplexTaskManager {
                 throw new InvalidDeadlineException();
             } else {
                 checkIfEmpty(inputArr);
-                return new Deadline(inputArr[0], inputArr[1].trim());
+                String date = inputArr[1].trim();
+                if (isDateAndTimeFormat(date)) {
+                    return new Deadline(inputArr[0], LocalDateTime.parse(date));
+                } else if (isDateFormat(date)) {
+                    return new Deadline(inputArr[0], LocalDate.parse(date));
+                } else if (isTimeFormat(date)) {
+                    return new Deadline(inputArr[0], LocalTime.parse(date));
+                } else {
+                    return new Deadline(inputArr[0], date);
+                }
             }
         } else { // EVENT type
             String[] inputArr = taskDetails.split(" /at", 2);
@@ -23,8 +37,44 @@ public class ComplexTaskManager {
                 throw new InvalidEventException();
             } else {
                 checkIfEmpty(inputArr);
-                return new Event(inputArr[0], inputArr[1].trim());
+                String date = inputArr[1].trim();
+                if (isDateAndTimeFormat(date)) {
+                    return new Event(inputArr[0], LocalDateTime.parse(date));
+                } else if (isDateFormat(date)) {
+                    return new Event(inputArr[0], LocalDate.parse(date));
+                } else if (isTimeFormat(date)) {
+                    return new Event(inputArr[0], LocalTime.parse(date));
+                } else {
+                    return new Event(inputArr[0], date);
+                }
             }
+        }
+    }
+
+    private boolean isDateFormat(String input) {
+        try {
+            LocalDate.parse(input);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    private boolean isDateAndTimeFormat(String input) {
+        try {
+            LocalDateTime.parse(input);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    private boolean isTimeFormat(String input) {
+        try {
+            LocalTime.parse(input);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
         }
     }
 

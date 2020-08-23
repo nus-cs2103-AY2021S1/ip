@@ -2,13 +2,16 @@ todo test case
 todo
 list
 deadline
-deadline return book /bySunday
+deadline return book /by 2020-08-23
+deadline return book /by 2020-08-23T10:15
+deadline return book /by 2020-08-23 10:00
+deadline return book /by 10:20
 deadline /by
 event /at 2 - 4pm
 event meeting /at
 deadline meeting /at
 deadline meeting /by
-event project meeting /at Mon 2-4pm
+event project meeting /at 2019-12-01
 done 1
 done 1
 done sdvgfdsg
