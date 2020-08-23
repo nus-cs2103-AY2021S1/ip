@@ -1,4 +1,11 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 
 public class Duke {
 
@@ -18,6 +25,14 @@ public class Duke {
         System.out.println( "---------------\n" + "Hello! I'm\n" + logo + "\n" +
                 "---------------\n" + "What can I do for you?\n" + "---------------");
 
+        // read current data here
+        createFile("data/duke.txt"); // create directory and file if it does not exist
+        try {
+            loadData("data/duke.txt");
+        } catch (FileNotFoundException ex) {
+            System.out.println("File cannot be found!");
+        }
+
         while (takeInput) {
             String echo = sc.nextLine();
             String[] modEcho = echo.split(" ", 2);
@@ -31,11 +46,83 @@ public class Duke {
             } catch (DukeException ex) {
                 System.out.println("---------------\n" +
                         ex.getMessage() + "\n" + "---------------");
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
 
         }
 
         sc.close();
+    }
+
+    private static void createFile(String filePath) {
+        try {
+            File saveFile = new File(filePath);
+            saveFile.getParentFile().mkdirs();
+            saveFile.createNewFile();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private static void loadData(String filePath) throws FileNotFoundException {
+        File file = new File(filePath);
+        Scanner reader = new Scanner(file);
+        while (reader.hasNext()) {
+            String next = reader.nextLine();
+            System.out.println(next);
+
+            String[] modNext = next.split(">");
+            if (modNext[0].trim().equals("D")) {
+
+                String[] time = modNext[3].trim().split(" ");
+                Deadline deadline = new Deadline(modNext[2].trim(),
+                        time[1], modNext[1].trim().equals("✓"));
+                lib.add(deadline);
+            }
+            if (modNext[0].trim().equals("E")) {
+
+                String[] time = modNext[3].trim().split(" ");
+                Event event = new Event(modNext[2].trim(),
+                        time[1], modNext[1].trim().equals("✓"));
+                lib.add(event);
+            }
+            if (modNext[0].trim().equals("T")) {
+
+                ToDo toDo = new ToDo(modNext[2].trim(),
+                        modNext[1].trim().equals("✓")
+                );
+                lib.add(toDo);
+            }
+
+            curr++;
+        }
+    }
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter writer = new FileWriter(filePath);
+        writer.write(textToAdd);
+        writer.close();
+    }
+
+    private static void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter writer = new FileWriter(filePath, true);
+        writer.write(textToAppend);
+        writer.close();
+    }
+
+    private static void saveData() throws IOException {
+        for (int i = 0; i < lib.size(); i++) {
+            String curr = lib.get(i).toString();
+
+            if (i == 0) {
+                writeToFile("data/duke.txt", curr + "\n");
+            } else if (i == (lib.size() - 1)) {
+                appendToFile("data/duke.txt", curr);
+            } else {
+                appendToFile("data/duke.txt", curr + "\n");
+            }
+        }
     }
 
     public static boolean isNumeric(String test) {
@@ -47,10 +134,12 @@ public class Duke {
         }
     }
 
-    public static void CheckOneWord(String echo) throws DukeException {
+    public static void CheckOneWord(String echo) throws DukeException, IOException {
         if (echo.equals("bye")) {
             System.out.println("---------------\n" + "Bye. Hope to see you again soon!\n"
                     + "---------------");
+
+            saveData(); // writes the current tasks to the Duke.txt file
             takeInput = false;
         } else if (echo.equals("list")) {
             System.out.println("---------------\n" + "Here are the task(s) in your list:");
