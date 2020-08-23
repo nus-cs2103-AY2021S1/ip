@@ -52,6 +52,11 @@ public class Parser {
      * </p>
      *
      * <p>
+     * <h3> UserInput = find xxx task</h3>
+     * Finds the tasks that match the keyword provided by the user and prints it out as a list
+     * </p>
+     *
+     * <p>
      * <h3> UserInput = delete xxx task</h3>
      * Triggers the UI to delete the task and converts the one-based index given by the user
      * to a zero-based index.
@@ -79,6 +84,11 @@ public class Parser {
                 ui.replyBye();
             } else if (response.equals("list")) {
                 ui.replyList();
+            } else if (response.indexOf("find ") == 0) {
+                if (response.length() <= 5) {
+                    throw new EmptyDescriptionException("find query");
+                }
+                ui.replyFind(response.substring(5));
             } else if (response.indexOf("delete") == 0) {
                 indexer = Integer.parseInt(response.replaceAll("\\D+", "")) - 1;
                 ui.replyDelete(indexer);

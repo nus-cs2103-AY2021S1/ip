@@ -97,4 +97,22 @@ public class TaskList {
         this.shelf.remove(index);
     }
 
+    public void find(String response) {
+        Iterator<Task> iter = shelf.iterator();
+        ArrayList<Task> temp = new ArrayList<>();
+        while (iter.hasNext()) {
+            Task book = iter.next();
+            if(book.getName().contains(response)){
+                temp.add(book);
+            }
+        }
+        iter = temp.iterator();
+        int counter = 1;
+        System.out.println("Here are the matching tasks in your list: ");
+        while (iter.hasNext()) {
+            System.out.println(counter + ". " + iter.next());
+            counter++;
+        }
+    }
+
 }

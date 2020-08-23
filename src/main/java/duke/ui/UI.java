@@ -46,6 +46,14 @@ public class UI {
     }
 
     /**
+     * Method that would invoke the find statement from the TaskList.
+     * @param response Input from the user
+     */
+    public void replyFind(String response) {
+        shelf.find(response);
+    }
+
+    /**
      * method that deletes a task from the tasklist given the one-based index provided by the user.
      * It also updates the txt file based on the updated tasklist.
      *
