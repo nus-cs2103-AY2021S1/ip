@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.exceptions.TaskListTranslatorException;
 import duke.parsers.DukeDateTimeParser;
 import duke.tasklist.TaskList;
 import duke.tasks.Deadline;
@@ -12,13 +13,14 @@ import java.util.List;
 
 public class TaskListTranslator {
 
-    public static TaskList decode(List<String> lines) {
+    public static TaskList decode(List<String> lines) throws TaskListTranslatorException {
 
-        TaskList taskList = new TaskList();
-        for (String line : lines) {
-            Task task = null;
-            String[] parsed = line.split(" \\| ");
-            switch (parsed[0]) {
+        try {
+            TaskList taskList = new TaskList();
+            for (String line : lines) {
+                Task task = null;
+                String[] parsed = line.split(" \\| ");
+                switch (parsed[0]) {
                 case "T":
                     task = new Todo(parsed[2]);
                     break;
@@ -30,16 +32,18 @@ public class TaskListTranslator {
                     break;
                 default:
                     break;
+                }
+                if (parsed[1].equals("1")) {
+                    assert task != null;
+                    task.markAsDone();
+                }
+                taskList.addTask(task);
             }
-            if (parsed[1].equals("1")) {
-                assert task != null;
-                task.markAsDone();
-            }
-            taskList.addTask(task);
+            return taskList;
+
+        } catch (IndexOutOfBoundsException e) {
+            throw new TaskListTranslatorException();
         }
-
-        return taskList;
-
     }
 
     public static List<String> encode(TaskList taskList) {

@@ -2,5 +2,4 @@ D | 1 | return book | 23 Aug 2020
 E | 0 | meeting | 22 Aug 2020 9:00 AM
 D | 1 | do something  | 23 Aug 2020
 D | 0 | die  | 22 Aug 2020
-T | 0 | read book
-D | 1 | something | 27 Oct 2020
+E | 0 | meeting | 23 Jul 2020

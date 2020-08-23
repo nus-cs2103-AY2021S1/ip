@@ -1,6 +1,8 @@
 package duke.storage;
 
+import duke.exceptions.InvalidFIlePathException;
 import duke.exceptions.NoSuchTaskException;
+import duke.exceptions.TaskListTranslatorException;
 import duke.tasklist.TaskList;
 
 import java.io.File;
@@ -17,16 +19,26 @@ public class Storage {
     private static final String DEFAULT_FILEPATH = "./data/duke.txt";
 
     public Storage() {
-        path = Paths.get(DEFAULT_FILEPATH);
-        File file = new File(DEFAULT_FILEPATH);
+        this(DEFAULT_FILEPATH);
+    }
+
+    public Storage(String filePath) throws InvalidFIlePathException {
+        path = Paths.get(filePath);
+        if (!isValidPath(path)) {
+            throw new InvalidFIlePathException();
+        }
+        File file = new File(filePath);
         file.getParentFile().mkdirs();
     }
 
-    public TaskList load() {
+    private static boolean isValidPath(Path filePath) {
+        return filePath.toString().endsWith(".txt");
+    }
+
+    public TaskList load() throws TaskListTranslatorException {
         if (!Files.exists(path) || !Files.isRegularFile(path)) {
             return new TaskList();
         }
-
         try {
             return TaskListTranslator.decode(Files.readAllLines(path));
         } catch (FileNotFoundException e) {
