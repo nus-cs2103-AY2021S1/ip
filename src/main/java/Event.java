@@ -1,14 +1,21 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
-  String at;
+  LocalDateTime at;
+  LocalDateTime end;
 
-  public Event(String description, String at) {
+  public Event(String description, LocalDateTime at, LocalDateTime end) {
     super(description);
     this.at = at;
+    this.end = end;
   }
 
   @Override
   public String toString() {
-    return String.format("[E]%s (at: %s)", super.toString(), at);
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("E, dd/MMM/yyyy HHmm");
+    return String.format(
+        "[E]%s (at: %s till %s)", super.toString(), at.format(dtf), end.format(dtf));
   }
 }
