@@ -1,4 +1,0 @@
-T|✘|play
-D|✓|return book |Sunday
-E|✓|project meeting |Mon 2-4pm
-T|✘|sleep

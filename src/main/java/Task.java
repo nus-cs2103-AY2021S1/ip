@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.util.Optional;
+
 abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -6,6 +9,8 @@ abstract class Task {
         this.description = description;
         this.isDone = false;
     }
+
+    public abstract Optional<LocalDate> getDate();
 
     public void markAsDone() {
         this.isDone = true;

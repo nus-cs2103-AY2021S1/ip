@@ -1,6 +1,9 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -43,14 +46,19 @@ public class Storage {
                 }
                 break;
             case "D":
-                Task deadlineTask = new Deadline(taskComponent[2], taskComponent[3]);
+                Task deadlineTask = new Deadline(taskComponent[2],
+                        LocalDate.parse(taskComponent[3], DateTimeFormatter.ofPattern("dd MMM yyyy")),
+                        LocalTime.parse(taskComponent[4], DateTimeFormatter.ofPattern("hh.mma")));
                 taskList.add(deadlineTask);
                 if (taskComponent[1].equals("\u2713")) {
                     deadlineTask.markAsDone();
                 }
                 break;
             case "E":
-                Task eventTask = new Event(taskComponent[2], taskComponent[3]);
+                Task eventTask = new Event(taskComponent[2],
+                        LocalDate.parse(taskComponent[3], DateTimeFormatter.ofPattern("dd MMM yyyy")),
+                        LocalTime.parse(taskComponent[4].split(" to ")[0], DateTimeFormatter.ofPattern("hh.mma")),
+                        LocalTime.parse(taskComponent[4].split(" to ")[1], DateTimeFormatter.ofPattern("hh.mma")));
                 taskList.add(eventTask);
                 if (taskComponent[1].equals("\u2713")) {
                     eventTask.markAsDone();
