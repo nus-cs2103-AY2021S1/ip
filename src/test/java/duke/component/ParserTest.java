@@ -60,18 +60,94 @@ public class ParserTest {
     }
 
     @Test
-    public void isValidDone_ExceedLimit_throwException() {
-        try {
-            Parser.isValidDone("done 3", 5);
-        } catch (Exception e) {
-            fail();
-        }
-
+    public void isValidDone_exceedLimit_throwException() {
         try {
             Parser.isValidDone("done 8", 5);
             fail();
         } catch (Exception e) {
             assertEquals("\u2639 OOPS!!! The task index does not exist.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void isValidDone_validInput_indexOutput() {
+        try {
+            assertEquals(3, Parser.isValidDone("done 3", 5));
+            assertEquals(5, Parser.isValidDone("done 5", 5));
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void isValidDelete_emptyInput_throwException() {
+        try {
+            Parser.isValidDelete("delete ", 5);
+            fail();
+        } catch (Exception e) {
+            assertEquals("\u2639 OOPS!!! The task to mark to delete cannot be empty.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void isValidDelete_withoutSpace_returnNegative1() {
+        try {
+            assertEquals(-1, Parser.isValidDelete("delete1", 4));
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void isValidDelete_nonIntegerInput_throwException() {
+        try {
+            Parser.isValidDelete("delete anything", 4);
+            fail();
+        } catch (Exception e) {
+            assertEquals("\u2639 OOPS!!! The task index should be a number.", e.getMessage());
+        }
+
+        try {
+            Parser.isValidDelete("delete 1.3", 4);
+            fail();
+        } catch (Exception e) {
+            assertEquals("\u2639 OOPS!!! The task index should be a number.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void isValidDelete_nonPositiveInput_throwException() {
+        try {
+            Parser.isValidDelete("delete 0", 5);
+            fail();
+        } catch (Exception e) {
+            assertEquals("\u2639 OOPS!!! The task index should be a positive integer.", e.getMessage());
+        }
+
+        try {
+            Parser.isValidDelete("delete -3", 5);
+            fail();
+        } catch (Exception e) {
+            assertEquals("\u2639 OOPS!!! The task index should be a positive integer.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void isValidDelete_exceedLimit_throwException() {try {
+            Parser.isValidDelete("delete 8", 5);
+            fail();
+        } catch (Exception e) {
+            assertEquals("\u2639 OOPS!!! The task index does not exist.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void isValidDelete_validInput_indexOutput() {
+        try {
+            assertEquals(3, Parser.isValidDelete("delete 3", 5));
+            assertEquals(5, Parser.isValidDelete("delete 5", 5));
+        } catch (Exception e) {
+            fail();
         }
     }
 }
