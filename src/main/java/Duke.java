@@ -1,7 +1,3 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,7 +6,6 @@ public class Duke {
     //Characteristics of Duke
     private boolean isChatting;
     private ArrayList<Task> taskList;
-    private String filepath;
 
     //Constants Command Enum
     enum Command {
@@ -24,10 +19,9 @@ public class Duke {
     }
 
     //Constructor
-    public Duke(String file) {
+    public Duke() {
         //Characteristic of Duke
         this.isChatting = true;
-        this.filepath = file;
         this.taskList = new ArrayList<>();
     }
 
@@ -36,7 +30,6 @@ public class Duke {
         //Initialisation Message
         String greeting = "Oh Golly! Who do we have here?\nThe name's Duke, how can I be of assistance?";
         System.out.println(greeting);
-        loadTaskList();
 
         //Initialise scanner to prompt user
         Scanner sc = new Scanner(System.in);
@@ -126,7 +119,6 @@ public class Duke {
             String markDoneMsg = "Splendid! I've marked the following task as done:";
             System.out.println(markDoneMsg);
             System.out.println("  [" + currentTask.getStatusIcon() + "] " + currentTask.getDescription());
-            saveTaskList(); //Overwrites current data.txt file
         } catch (NumberFormatException ex) {
             throw new NotNumberException();
         } catch (IndexOutOfBoundsException ex) {
@@ -142,12 +134,11 @@ public class Duke {
         try {
             int int_substring_converted = Integer.parseInt(int_substring);
             Task currentTask = this.taskList.get(int_substring_converted - 1);
+            this.taskList.remove(currentTask);
             String deleteMsg = "No worries, the following task has been deleted from your list:";
             System.out.println(deleteMsg);
             System.out.println("  [" + currentTask.getStatusIcon() + "] " + currentTask.getDescription());
-            this.taskList.remove(currentTask);
             getTotalTasksMsg();
-            saveTaskList(); //Overwrites current data.txt file
         } catch (NumberFormatException ex) {
             throw new NotNumberException();
         } catch (IndexOutOfBoundsException ex) {
@@ -162,7 +153,6 @@ public class Duke {
         addedToListMsg();
         System.out.println("\t" + newTask);
         getTotalTasksMsg();
-        saveTask(newTask);
     }
 
     //Adds a Deadline task to the task list
@@ -178,7 +168,6 @@ public class Duke {
             addedToListMsg();
             System.out.println("\t" + newTask);
             getTotalTasksMsg();
-            saveTask(newTask);
         }
     }
 
@@ -195,7 +184,6 @@ public class Duke {
             addedToListMsg();
             System.out.println("\t" + newTask);
             getTotalTasksMsg();
-            saveTask(newTask);
         }
     }
 
@@ -301,58 +289,6 @@ public class Duke {
         }
     }
 
-    private void saveTask(Task task) {
-        File saveFile = new File(this.filepath);
-        try {
-            saveFile.getParentFile().mkdirs(); //to create directory 'data'
-            saveFile.createNewFile(); //to create duke.txt file
-            //Check to see whether duke.txt file exists
-            if (saveFile.length() > 0) {
-                FileWriter toSave = new FileWriter(saveFile, true);
-                toSave.write(System.lineSeparator() + task.toTxtFormat());
-                toSave.close();
-            } else {
-                FileWriter toSave = new FileWriter(saveFile);
-                toSave.write(task.toTxtFormat());
-                toSave.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    private void loadTaskList() {
-        File saveFile = new File(this.filepath);
-        try {
-            Scanner s = new Scanner(saveFile);
-            while (s.hasNext()) {
-                Task toAdd = Task.parse(s.nextLine());
-                this.taskList.add(toAdd);
-            }
-        } catch (FileNotFoundException e) {
-        }
-    }
-
-    private void saveTaskList() {
-        try {
-            FileWriter overwriteFile = new FileWriter(this.filepath);
-            if (this.taskList.size() > 0) {
-                overwriteFile.write(this.taskList.get(0).toTxtFormat());
-                overwriteFile.close();
-                for (int i = 1 ; i < this.taskList.size() ; i++) {
-                    saveTask(this.taskList.get(i));
-                }
-            } else {
-                overwriteFile.write("");
-                overwriteFile.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
     private void exitDuke() {
         String parting = "Well, I'm utterly knackered! Cheerios!";
         System.out.println(parting);
@@ -361,7 +297,7 @@ public class Duke {
 
     public static void main(String[] args) {
         //Initialise Duke
-        Duke chatBot = new Duke("data/duke.txt");
+        Duke chatBot = new Duke();
         //Start chatting with Bot
         chatBot.startChat();
     }

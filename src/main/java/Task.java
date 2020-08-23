@@ -30,28 +30,6 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    public static Task parse(String txtFormat) {
-        char firstLetter = txtFormat.charAt(0);
-        String[] txtArray = txtFormat.split("\\|");
-        if (firstLetter == 'T') {
-            return ToDo.parse(txtFormat, txtArray);
-        } else if (firstLetter == 'D') {
-            return Deadline.parse(txtFormat, txtArray);
-        } else if (firstLetter == 'E') {
-            return Event.parse(txtFormat, txtArray);
-        } else {
-            return null;
-        }
-    }
-
-    public String toTxtFormat() {
-        if (this.isDone) {
-            return "1 | " + this.description;
-        } else {
-            return "0 | " + this.description;
-        }
-    }
-
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
