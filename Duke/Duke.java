@@ -1,5 +1,7 @@
 package Duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.*;
@@ -104,6 +106,38 @@ public class Duke {
     }
 
     /**
+     * This method displays the task list based on date.
+     *
+     * @param date displayDate for the list
+     */
+    public void displayDateList(LocalDateTime date) {
+        if (taskList.size() == 0) {
+            System.out.println("There's nothing in your list");
+            return ;
+        }
+        System.out.println(indent + "Here are the tasks in your list:");
+        int count = 1;
+        for (int i = 0; i < taskList.size(); i++) {
+            LocalDateTime dueDateOfTask = null;
+            if (taskList.get(i) instanceof Deadline) {
+                dueDateOfTask = ((Deadline) taskList.get(i)).getDueDate();
+            }
+            if (taskList.get(i) instanceof Event) {
+                dueDateOfTask = ((Event) taskList.get(i)).getDueDate();
+            }
+
+            if (dueDateOfTask == date) {
+                System.out.println(indent + (i+1) + "." + taskList.get(i));
+                count += 1;
+            }
+        }
+        if (count == 1) {
+            System.out.println("There's nothing in your list");
+            return;
+        }
+    }
+
+    /**
      * This method does verification for description.
      * @param type Type of task
      * @throws DukeException Customized exception
@@ -129,8 +163,16 @@ public class Duke {
 
                 // If input does not contain any of the actions
                 if (!(input.contains("bye") || input.contains("done") || input.contains("todo")
-                        || input.contains("deadline") || input.contains("list") || input.contains("event") || input.contains("delete"))) {
+                        || input.contains("deadline") || input.contains("list")
+                        || input.contains("event") || input.contains("delete")
+                        || input.contains("time"))) {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                }
+
+                if (inputList[0].equals("time")) {
+                    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                    displayDateList(LocalDateTime.parse(inputList[1] + " " + inputList[2], dateFormat));
+                    continue;
                 }
 
                 if (inputList[0].equals("bye")) {

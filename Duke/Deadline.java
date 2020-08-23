@@ -22,4 +22,8 @@ public class Deadline extends Task {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         return "[D]" + super.toString() + "(by: " + dueDate.format(dateFormat) + ")";
     }
+
+    public LocalDateTime getDueDate() {
+        return dueDate;
+    }
 }

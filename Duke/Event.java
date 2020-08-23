@@ -23,4 +23,8 @@ public class Event extends Task {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         return "[E]" + super.toString() + "(at: " + dueDate.format(dateFormat) + ")";
     }
+
+    public LocalDateTime getDueDate() {
+        return dueDate;
+    }
 }
