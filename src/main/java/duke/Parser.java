@@ -10,7 +10,7 @@ import duke.exceptions.InvalidCommandException;
 public class Parser {
 
     /**
-     * Takes in a line of user input and passes it to TaskList.
+     * Takes in a line of user input and passes it to the TaskList to handle.
      * @param str user's input
      * @param tasks current list of tasks
      * @param storage location of saved tasklist
@@ -32,6 +32,9 @@ public class Parser {
                 storage.save(tasks);
             } else if (str.startsWith("find")) {
                 tasks.find(str);
+            } else if (str.equals("clear")) {
+                tasks.clear();
+                storage.save(tasks);
             } else {
                 throw new InvalidCommandException();
             }

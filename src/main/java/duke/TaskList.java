@@ -100,6 +100,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds and displays tasks containing the relevant keyword
+     * @param str The keyword the user is searching for.
+     * @throws EmptyFindException If there is no keyword given.
+     * @throws InvalidCommandException If command is not valid.
+     */
     public void find (String str) throws EmptyFindException, InvalidCommandException {
         String s = str.trim();
         if (s.equals("find")) {
@@ -128,21 +134,6 @@ public class TaskList {
         } else {
             throw new InvalidCommandException();
         }
-    }
-
-    private void insert(Task task) {
-        tasks.add(task);
-        System.out.println("Task has been added:");
-        System.out.println(task.toString());
-        System.out.println("You now have " + tasks.size() + " tasks in the list");
-    }
-
-    private void delete(int i) {
-        Task t = tasks.get(i - 1);
-        tasks.remove(i - 1);
-        System.out.println("Task has been removed.");
-        System.out.println(t.toString());
-        System.out.println("You now have " + tasks.size() + " tasks in the list");
     }
 
     /**
@@ -187,6 +178,29 @@ public class TaskList {
         } else {
             throw new TaskDeletionException(tasks.size());
         }
+    }
+
+    /**
+     * Deletes all items in the current list.
+     */
+    public void clear() {
+        tasks.clear();
+        System.out.println("Task List has been cleared.");
+    }
+
+    private void insert(Task task) {
+        tasks.add(task);
+        System.out.println("Task has been added:");
+        System.out.println(task.toString());
+        System.out.println("You now have " + tasks.size() + " tasks in the list");
+    }
+
+    private void delete(int i) {
+        Task t = tasks.get(i - 1);
+        tasks.remove(i - 1);
+        System.out.println("Task has been removed.");
+        System.out.println(t.toString());
+        System.out.println("You now have " + tasks.size() + " tasks in the list");
     }
 
     //helper function to check if part of user input is an integer

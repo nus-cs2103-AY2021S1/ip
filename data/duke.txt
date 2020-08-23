@@ -1,7 +1,1 @@
-T|false|project meeting
-E|false|book meeting|sunday
-D|false|book borrow money|mon
-T|false|borrow money bank
-T|false|return money test
-T|false|bank robber
-T|false|money
+T|false|1
