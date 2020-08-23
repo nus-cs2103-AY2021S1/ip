@@ -23,6 +23,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return (getDone() ? "[✓] " : "[✘] ") + getTaskDescription();
+        return (getDone() ? "[\u2713] " : "[\u2717] ") + getTaskDescription();
     }
 }

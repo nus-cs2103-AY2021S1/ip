@@ -16,7 +16,7 @@ public class TaskListTest {
         Task createdTask = taskList.createTask(TaskType.TypeOfTask.DEADLINE, "Test",
                 LocalDateTime.parse("2020-08-23T00:00"), false);
 
-        assertEquals("[D][✘] Test (by: Aug 23 2020, 00:00)", createdTask.toString());
+        assertEquals("[D][\u2717] Test (by: Aug 23 2020, 00:00)", createdTask.toString());
     }
 
     @Test
@@ -24,7 +24,7 @@ public class TaskListTest {
         TaskList taskList = new TaskList(new ArrayList<>());
         taskList.addTask(new Todo("Test1", false));
         taskList.addTask(new Todo("Test2", true));
-        assertEquals("1. [T][✘] Test1\n2. [T][✓] Test2", taskList.listTasks());
+        assertEquals("1. [T][\u2717] Test1\n2. [T][\u2713] Test2", taskList.listTasks());
 
     }
 }
