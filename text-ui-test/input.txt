@@ -1,21 +1,27 @@
 list
 todo read book
-deadline submit assignment /by tmr
-event project meeting /at Wed 2-4pm
+deadline return book /by 12/09/2020 2200
+event project meeting /at 22/08/2020 1300
 list
 done 1
 list
-delete 1
+todo read book
 list
+delete 4
+list
+
+done
+done 5
+delete
+delete 5
 todo
 deadline
-deadline submit homework
+deadline return book
+deadline /by 12/12/2020
+deadline return book /by 53/12/2020
+deadline return book /by 12/90/2020
 event
 event project meeting
-done
-done 4
-delete
-delete 1
-list
-delete 2
+event /at 12/05/2020 1300
+event project meeting /at 12/06/2020 9800
 bye
