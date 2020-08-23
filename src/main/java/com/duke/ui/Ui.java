@@ -1,5 +1,15 @@
+package com.duke.ui;
+
+import com.duke.events.Deadlines;
+import com.duke.events.Events;
+import com.duke.events.Task;
+import com.duke.events.ToDos;
+import com.duke.exceptions.DukeException;
+import com.duke.parser.Parser;
+import com.duke.storage.Storage;
+import com.duke.tasklist.TaskList;
+
 import java.io.IOException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
@@ -35,7 +45,7 @@ public class Ui {
 
     private void sayBye() {
         try {
-            Storage.saveListToFile(taskList);
+            Storage.saveListToFile(this.taskList);
             Ui.sectionize();
             System.out.println("\tBye. Hope to see you again soon!");
             Ui.sectionize();

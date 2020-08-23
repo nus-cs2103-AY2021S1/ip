@@ -1,3 +1,5 @@
+package com.duke.tasks;
+
 public class Task {
     protected String task;
     protected boolean done;
@@ -37,6 +39,6 @@ public class Task {
 
     public String parseToSaveFormat() {
         String isDoneStr = this.done ? "1" : "0";
-        return "Task - " + isDoneStr + " - " + this.task;
+        return "com.duke.events.Task - " + isDoneStr + " - " + this.task;
     }
 }

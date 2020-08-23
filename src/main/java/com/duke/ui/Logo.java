@@ -1,3 +1,5 @@
+package com.duke.ui;
+
 public class Logo {
     public static String logo() {
         return " ____        _        \n"

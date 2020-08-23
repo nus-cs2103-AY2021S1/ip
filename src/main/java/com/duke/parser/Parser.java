@@ -1,7 +1,12 @@
+package com.duke.parser;
+
+import com.duke.events.Deadlines;
+import com.duke.events.Events;
+import com.duke.events.Task;
+import com.duke.events.ToDos;
+import com.duke.exceptions.DukeException;
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class Parser {
 
