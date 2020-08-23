@@ -1,7 +1,12 @@
 import java.io.*;
+import java.time.DateTimeException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class RunYoo {
 
@@ -172,24 +177,30 @@ public class RunYoo {
     private static void addDeadline(ArrayList<Task> al, String[] temp) {
         try {
             String[] a = temp[1].split("/by ", 2);
-            Deadline dl = new Deadline(a[0], a[1]);
+            LocalDate by = LocalDate.parse(a[1]);
+            Deadline dl = new Deadline(a[0], by);
             al.add(dl);
             System.out.println("I've added the following task! \n" + dl);
             System.out.println("Now you have " + al.size() + " tasks in the list (\u00B4\u30FB\u03C9\u30FB\uFF40)");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Sorry, your deadline time is missing (\u3063*\u00B4\u25A1`)\u3063");
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date! Please try again (>_<)");
         }
     }
 
     private static void addEvent(ArrayList<Task> al, String[] temp) {
         try {
             String[] a = temp[1].split("/at ", 2);
-            Event e = new Event(a[0], a[1]);
+            LocalDate at = LocalDate.parse(a[1]);
+            Event e = new Event(a[0], at);
             al.add(e);
             System.out.println("I've added the following task! \n" + e);
             System.out.println("Now you have " + al.size() + " tasks in the list (\u00B4\u30FB\u03C9\u30FB\uFF40)");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Sorry, your event time is missing (\u3063*\u00B4\u25A1`)\u3063");
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date! Please try again (>_<)");
         }
     }
 }
