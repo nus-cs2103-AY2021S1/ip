@@ -1,6 +1,8 @@
 package main.java;
 
 import java.time.LocalDateTime;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 class Task {
 
@@ -36,6 +38,18 @@ class Task {
 
     void completeTask() {
         this.isCompleted = true;
+    }
+
+    String getDateTimeString() {
+        if (this.dateTime == null) {
+            return null;
+        } else {
+            return this.dateTime.getYear() + " " +
+                    this.dateTime.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " " +
+                    this.dateTime.getDayOfMonth() + " " +
+                    this.dateTime.getHour() + ":" +
+                    this.dateTime.getMinute();
+        }
     }
 
     @Override
