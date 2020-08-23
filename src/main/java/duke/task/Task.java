@@ -53,4 +53,11 @@ public class Task {
     }
 
 
+    /**
+     * Gets the content of the tasks
+     * @return String the content of the tasks
+     */
+    public String getDescription() {
+        return description;
+    }
 }

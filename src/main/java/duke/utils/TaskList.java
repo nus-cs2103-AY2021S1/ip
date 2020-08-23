@@ -2,6 +2,7 @@ package duke.utils;
 
 import duke.task.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
@@ -52,4 +53,20 @@ public class TaskList {
     }
 
 
+    /**
+     * Retuns a list of tasks which contains the keyword.
+     *
+     * @param keyword string the user wants to find.
+     * @return List of tasks with the keyword.
+     */
+    public List<Task> findKeyword(String keyword) throws DukeException {
+        List<Task> containsKeywords = new ArrayList<>();
+        for (Task task : list) {
+            if (task.getDescription().contains(keyword)) {
+                containsKeywords.add(task);
+            }
+        }
+
+        return containsKeywords;
+    }
 }

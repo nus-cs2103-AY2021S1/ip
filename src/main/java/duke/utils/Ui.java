@@ -27,6 +27,15 @@ public class Ui {
     }
 
 
+    public void displayList(List<Task> toDoList, String s) {
+        displayLines();
+        displayString(s);
+        for (int i = 0; i < toDoList.size(); i++) {
+            displayString((i + 1) + ". " + toDoList.get(i));
+        }
+        displayLines();
+    }
+
     public void welcome() {
         String logo = "     ____        _        \n"
                 + "    |  _ \\ _   _| | _____ \n"
