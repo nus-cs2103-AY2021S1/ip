@@ -1,7 +1,7 @@
 public class Event extends Task {
     String eventTime;
-    public Event(String description) {
-        super(description.split(" /at ")[0]);
+    public Event(String description, boolean isDone) {
+        super(description.split(" /at ")[0], isDone);
         this.eventTime = description.split(" /at ")[1];
     }
 

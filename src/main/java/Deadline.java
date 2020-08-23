@@ -1,7 +1,8 @@
 public class Deadline extends Task {
     String deadline;
-    public Deadline(String description) {
-        super(description.split(" /by ")[0]);
+    public Deadline(String description, boolean isDone) {
+        super(description.split(" /by ")[0], isDone);
+        System.out.println("new deadline");
         this.deadline = description.split(" /by ")[1];
     }
 
