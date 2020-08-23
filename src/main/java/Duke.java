@@ -7,22 +7,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void updateData(List<Task> list) {
-        try {
-            FileWriter fw = new FileWriter("data/duke.txt");
-            StringBuilder textToAdd = new StringBuilder();
-      
-        for (Task t : list) {
-            String data = t.getData();
-            textToAdd.append(data).append("\n");
-        }
-      
-        fw.write(textToAdd.toString());
-        fw.close();
-        } catch (IOException e) { 
-            System.out.println("Something went wrong" + e.getMessage());
-        }
-    }
   
     public static String process(String input, List<Task> list, Storage storage) throws DukeException {
         String output;
