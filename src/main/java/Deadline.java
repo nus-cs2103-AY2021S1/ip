@@ -5,6 +5,8 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
 
     protected String by;
+    protected String userInputDate;
+    protected String userInputTime;
     protected LocalDate date;
     protected String time;
 
@@ -16,6 +18,8 @@ public class Deadline extends Task {
 
     public void dateAndTimeFormat(String by) throws DukeException {
         String[] dateAndTime = by.split(" ");
+        this.userInputDate = dateAndTime[0];
+        this.userInputTime = dateAndTime[1];
         try {
             this.date = LocalDate.parse(dateAndTime[0]);
             this.time = timeFormat(dateAndTime[1]);

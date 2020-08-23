@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -161,6 +162,55 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
+    public static String formatDateAndTime(String by) {
+        StringBuilder result = new StringBuilder();
+
+        String[] dateAndTime = by.split(", ");
+        String date = dateAndTime[0];
+        String[] monthDayYear = date.split(" ");
+        String month = monthDayYear[0];
+        result.append(monthDayYear[2]).append("-");
+
+        List<String> months = Arrays.asList("Jan", "Feb",
+                "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+        for(int i = 0; i < months.size(); i++) {
+            if(months.get(i).equals(month)) {
+                result.append(String.format("%02d", i+1));
+                break;
+            }
+        }
+        result.append("-")
+                .append(String.format("%02d", Integer.parseInt(monthDayYear[1])))
+                .append(" ");
+
+        String time = dateAndTime[1];
+        String[] timings = time.split(" - ");
+        if(timings.length == 2) {
+            String from = timings[0];
+            String to = timings[1];
+            result.append(processTime(from)).append("-").append(processTime(to));
+        } else {
+            result.append(processTime(time));
+        }
+        return result.toString();
+    }
+
+    public static String processTime(String time) {
+        StringBuilder result = new StringBuilder();
+        String[] hourAndMin = time.replace("am", "")
+                .replace("pm", "").split("\\.");
+        String hour = hourAndMin[0];
+        String min = hourAndMin[1];
+        if(time.contains("am") && hour.equals("12")) {
+            result.append("00").append(min);
+        } else if(time.contains("pm")) {
+            result.append(Integer.parseInt(hour)+12).append(min);
+        } else {
+            result.append(String.format("%02d", Integer.parseInt(hour))).append(min);
+        }
+        return result.toString();
+    }
+
     public static void loadData(List<Task> tasks) throws DukeException {
         //read Duke's data file and load tasks into tasks list
         try {
@@ -197,7 +247,7 @@ public class Duke {
                         String[] taskBy = taskDesc.split("by:");
                         String task = taskBy[0].substring(0, taskBy[0].length() - 2);
                         String by = taskBy[1].substring(1, taskBy[1].length() - 1);
-                        Deadline deadline = new Deadline(task, by);
+                        Deadline deadline = new Deadline(task, formatDateAndTime(by));
                         if(taskDone.equals("1")) {
                             deadline.markAsDone();
                         }
@@ -208,7 +258,7 @@ public class Duke {
                         String[] eventAt = taskDesc.split("at:");
                         String eventTask = eventAt[0].substring(0, eventAt[0].length() - 2);
                         String at = eventAt[1].substring(1, eventAt[1].length() - 1);
-                        Event event = new Event(eventTask, at);
+                        Event event = new Event(eventTask, formatDateAndTime(at));
                         if(taskDone.equals("1")) {
                             event.markAsDone();
                         }
@@ -235,7 +285,7 @@ public class Duke {
     public static void writeToFile(Task task, DukeAction action) throws DukeException {
         try {
             switch(action) {
-            case ADD :
+            case ADD:
                 FileWriter fw = new FileWriter("./data/tasklist.txt", true);
                 fw.write(task.toString() + "\n");
                 fw.close();

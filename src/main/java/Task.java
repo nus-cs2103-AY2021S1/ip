@@ -11,6 +11,10 @@ public class Task {
         return (isDone ? "1" : "0"); //return 1 or 0 symbols
     }
 
+    public String getTaskName() {
+        return this.taskName;
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }

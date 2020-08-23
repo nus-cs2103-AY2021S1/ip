@@ -7,6 +7,8 @@ public class Event extends Task{
     protected String at;
     protected LocalDate date;
     protected String time;
+    protected String userInputDate;
+    protected String userInputTime;
 
     public Event(String description, String at) throws DukeException {
         super(description);
@@ -16,6 +18,8 @@ public class Event extends Task{
 
     public void dateAndTimeFormat(String by) throws DukeException {
         String[] dateAndTime = by.split(" ");
+        this.userInputDate = dateAndTime[0];
+        this.userInputTime = dateAndTime[1];
         try {
             this.date = LocalDate.parse(dateAndTime[0]);
             String[] startAndEndTime = dateAndTime[1].split("-");
