@@ -1,28 +1,51 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Event extends Task {
 
     //Store the variables
-    private final String at;
+    private String at = null;
+    private Date date = null;
     private static final Pattern DATEMATCH =
             Pattern.compile("^(.*) (/at) (.*)$");
+    private static DateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm");
 
     //Constructor for the event class
-    public Event(final String description, final String by) {
+    public Event(final String description, final String at) {
 
         //Call the superclass constructor
         super(description);
 
         //Store the at variable
-        at = by;
+        this.at = at;
     }
 
+    //Constructor for the event class
+    public Event(final String description, final Date at) {
+
+        //Call the superclass constructor
+        super(description);
+
+        //Store the at variable
+        this.date = at;
+    }
+
+    /**
+     * @return date Date of the event
+     */
     //Getter for the date of the
     public String getDate() {
+        if (at != null){
+            //Return the date
+            return at;
+        } else {
+            return new SimpleDateFormat("dd-MM-yyyy HHmm").format(date);
+        }
 
-        //Return the date
-        return this.at;
     }
 
     public static Task parseCommand(final String args) {
@@ -36,8 +59,21 @@ public class Event extends Task {
         String name = matcher.group(1);
         String date = matcher.group(3);
 
-        //Pass the 2 arguments into the function
-        return new Event(name, date);
+        //Extract the date
+        try {
+
+            //Parse the date
+            Date date1 = format.parse(date);
+
+            //Pass the date to the constructor
+            return new Event(name, date1);
+        } catch (ParseException e){
+
+            //Pass the 2 arguments into the function
+            return new Event(name, date);
+        }
+
+
     }
 
     @Override
