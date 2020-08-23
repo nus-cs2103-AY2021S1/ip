@@ -1,7 +1,16 @@
 package main.java;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DoNothingCommand;
+import duke.command.ListCommand;
+import duke.command.DeleteCommand;
+import duke.command.TasksOnCommand;
+import duke.command.DoneCommand;
+
 import duke.exception.DukeException;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -11,10 +20,19 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
+/**
+ * Represents a Parser which helps make any sense of the input from the user.
+ */
 public class Parser {
 
+    /**
+     * Converts the input from the user into a Command understandable by Duke.
+     *
+     * @param command String input from user.
+     * @return A Command that Duke can execute.
+     * @throws DukeException Thrown when input from user is invalid.
+     */
     public static Command parse(String command) throws DukeException {
         String input = command.trim();
 
@@ -30,8 +48,8 @@ public class Parser {
             try {
                 idx = Integer.parseInt(input.substring(5).trim()) - 1;
             } catch (NumberFormatException e) {
-                throw new DukeException("\tTask number format invalid, " +
-                        "must be a number.");
+                throw new DukeException("\tTask number format invalid, "
+                        + "must be a number.");
             }
             return new DoneCommand(idx);
         } else if (input.startsWith("delete")) {
@@ -42,8 +60,8 @@ public class Parser {
             try {
                 idx = Integer.parseInt(input.substring(7).trim()) - 1;
             } catch (NumberFormatException e) {
-                throw new DukeException("\tTask number format invalid, " +
-                        "must be a number.");
+                throw new DukeException("\tTask number format invalid, "
+                        + "must be a number.");
             }
             return new DeleteCommand(idx);
         } else if (input.equals("list")) {

@@ -13,13 +13,27 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a Storage where the tasks of the user are stored in.
+ */
 public class Storage {
     private File taskFile;
 
-    public Storage(String filepath) throws DukeException {
+    /**
+     * Creates a Storage instance containing the filepath leading to it.
+     *
+     * @param filepath Filepath leading to Storage.
+     */
+    public Storage(String filepath) {
         this.taskFile = new File(filepath);
     }
 
+    /**
+     * Loads the data from the file in the filepath into an ArrayList.
+     *
+     * @return An ArrayList containing data of the user's previous tasks inputted into Duke.
+     * @throws DukeException Thrown when it couldn't locate the file in the specified file path.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -56,6 +70,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Adds the task in a recognized format into the Storage file.
+     *
+     * @param task Task to be added in storage file.
+     * @throws DukeException thrown when there is an IOException thrown by FileWriter.
+     */
     public void append(Task task) throws DukeException {
         try {
             FileWriter fw = new FileWriter(taskFile.getPath(), true);
@@ -66,6 +86,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Overwrite the existing data in the Storage with data from the Tasks present in the TaskList.
+     *
+     * @param todos TaskList containing Tasks for overwriting the data in Storage.
+     * @throws DukeException Thrown when FileWrite throws an IOException.
+     */
     public void overwrite(TaskList todos) throws DukeException {
         try {
             FileWriter fw = new FileWriter(taskFile.getPath());

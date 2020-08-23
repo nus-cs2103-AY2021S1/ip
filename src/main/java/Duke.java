@@ -3,12 +3,23 @@ package main.java;
 import duke.command.Command;
 import duke.exception.DukeException;
 
+/**
+ * Represents a CLI Program known as Duke.
+ *
+ * @author Francis Hodianto
+ * @version 0.1
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates an instance of Duke.
+     *
+     * @param filePath The path of the file used for storing saved tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         try {
@@ -20,6 +31,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Initiates Duke on the command line.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
