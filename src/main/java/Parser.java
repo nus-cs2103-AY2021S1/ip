@@ -32,6 +32,10 @@ public class Parser {
         return s.equals("list");
     }
 
+    private static boolean checkFind(String test) {
+        return test.equals("find");
+    }
+
     public static boolean checkDone(String s) {
         return s.equals("done");
     }
@@ -51,6 +55,8 @@ public class Parser {
                 String next = scan.nextLine().replaceFirst(" ", "");
                 if (checkList(test)) {
                     taskList.displayList();
+                } else if (checkFind(test)) {
+                    taskList.findTask(next);
                 } else if (checkDone(test)) {
                     try {
                         taskList.doneTask(next);
