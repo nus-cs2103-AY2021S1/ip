@@ -131,13 +131,13 @@ public class Duke {
         Task addedTask;
         switch(details[0]) {
             case TO_DO:
-                addedTask = new ToDos(details[1]);
+                addedTask = new ToDo(details[1]);
                 break;
             case DEADLINE:
-                addedTask = new Deadlines(details[1]);
+                addedTask = new Deadline(details[1]);
                 break;
             case EVENT:
-                addedTask = new Events(details[1]);
+                addedTask = new Event(details[1]);
                 break;
             default:
                 throw new DukeException("Not a valid command!");
