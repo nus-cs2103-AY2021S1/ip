@@ -16,9 +16,20 @@ public class Task {
         this.isDone = true;
     }
 
+    public int ifDone() {
+        if(this.isDone){
+            return 1;
+        }
+        else return 0;
+    }
+
     @Override
     public String toString() {
         return this.getStatusIcon() + " " + this.description;
+    }
+
+    public String splitToString() {
+        return  this.getStatusIcon() + "|" + this.description;
     }
 
 }
