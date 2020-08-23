@@ -23,9 +23,19 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the number of tasks in Duke.
+     * @return The number of tasks.
+     */
+
     public Integer getSize() {
         return tasks.size();
     }
+
+    /**
+     * Returns a list of string containing the minimal information of each task in the task list.
+     * @return A list of each task's information.
+     */
 
     public ArrayList<String> getTasksInfo() {
         ArrayList<String> tasksInfo = new ArrayList<>();
@@ -65,6 +75,12 @@ public class TaskList {
         tasks.add(task);
         return task;
     }
+
+    /**
+     * Mark the specified task as done and return it.
+     * @param index The task number to be marked done.
+     * @return The task that was marked done.
+     */
 
     public Task markDone(int index) {
         int itemToMark = index - 1;

@@ -60,6 +60,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Runs a scanner to parse user input and print response.
+     */
+
     public void getInput() {
         greetings();
         Scanner scanner = new Scanner(System.in);

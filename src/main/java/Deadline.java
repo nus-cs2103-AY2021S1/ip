@@ -10,6 +10,11 @@ public class Deadline extends Task implements Saveable {
         this.deadline = LocalDate.parse(deadline);
     }
 
+    /**
+     * Returns a minimalistic string representation of the task
+     * @return A string that describes the task.
+     */
+
     @Override
     public String getInfo() {
         StringBuilder str = new StringBuilder();
