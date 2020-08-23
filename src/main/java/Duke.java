@@ -43,7 +43,7 @@ public class Duke {
      * @param args Please it's just psvm
      */
     public static void main(String[] args) {
-        if (args[0] == null) {
+        if (args.length == 0) {
             new Duke("./data/duke.txt").run();
         } else {
             // enter full save file path for jar file
