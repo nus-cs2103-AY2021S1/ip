@@ -10,15 +10,30 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles the read and write operations to the data file
+ */
 public class Storage {
 
     String path;
     String content = "";
 
+    /**
+     * Constructor for the Storage Class
+     *
+     * @param path relative filepath where the datafile is located
+     */
     public Storage(String path) {
         this.path = path;
     }
 
+    /**
+     * Reads the datafile if it exists else it creates a new data file
+     * Adds all the tasks on the datafile into a new ArrayList
+     *
+     * @return returns a list of Task
+     * @throws DukeException exception to be thrown if there is error reading the file
+     */
     public List<Task> load() throws DukeException {
 
         String fileLine = "";
@@ -61,6 +76,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves the task into the current datafile
+     *
+     * @param task task to be saved
+     */
     public void save(Task task) {
         if(content.isEmpty()) {
             content = task.saveText(task.getStatus());
@@ -69,14 +89,29 @@ public class Storage {
         }
     }
 
+    /**
+     * Deletes the task from the data file
+     *
+     * @param task task to be deleted
+     */
     public void delete(Task task) {
         content = content.replace(task.saveText(task.getStatus()), "");
     }
 
+    /**
+     * Replaces the uncompleted task with completed task
+     *
+     * @param task task that has been completed
+     */
     public void replace(Task task) {
         content = content.replace(task.saveText(0), task.saveText(1));
     }
 
+    /**
+     * Updates and writes all the changes into a text file upon exiting the program
+     *
+     * @throws DukeException exception to be thrown if there is error writing file
+     */
     public void update() throws DukeException {
         File file = new File("data/duke.txt");
         try {

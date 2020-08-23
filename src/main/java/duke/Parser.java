@@ -9,11 +9,19 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Takes the user's command and parse it
+ */
 public class Parser {
 
     protected static List<String> inputFormat = Arrays.asList("dd/MM/yyyy HHmm", "yyyy-mm-dd Haaa");
     protected static SimpleDateFormat outputFormat = new SimpleDateFormat("MMM dd yyyy h:mma");
 
+    /**
+     * Converts the input date to another date format, if it exist
+     * @param str users date input
+     * @return String representation of the new date format or the original date input
+     */
     public static String DateParser(String str) {
         Date date = null;
         for (String input : inputFormat) {
@@ -28,6 +36,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a command object based on the users' input
+     *
+     * @param input users' input
+     * @return Command to be executed
+     * @throws DukeException exception to be thrown if there is any parsing error
+     */
     public static Command parse(String input) throws DukeException {
 
         switch (input) {
@@ -69,6 +84,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if there is any format discrepancy
+     *
+     * @param input users' input
+     * @throws DukeException exception to be thrown if there is an incorrect format
+     */
     private static void formatChecker(String[] input) throws DukeException {
         try {
             String str = input[1].split(" /", 2)[1];
