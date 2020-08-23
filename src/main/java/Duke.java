@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
@@ -61,36 +63,39 @@ public class Duke {
             } else {
                 try {
                     switch (command) {
-                        case "done":
-                            handleDone(reply);
-                            break;
-                        case "delete":
-                            handleDelete(reply);
-                            break;
-                        case "todo":
-                            Task newTodo = new ToDo(reply.substring(5));
-                            taskItems.add(newTodo);
-                            printReply(addTaskReplyFormatter(newTodo));
-                            break;
-                        case "deadline":
-                            String[] taskAndTimeByArray = reply.split(" /by ");
-                            String deadlineDescription = taskAndTimeByArray[0].substring(9);
-                            String by = taskAndTimeByArray[1];
-                            Task newDeadline = new Deadline(deadlineDescription, by);
-                            taskItems.add(newDeadline);
-                            printReply(addTaskReplyFormatter(newDeadline));
-                            break;
-                        case "event":
-                            String[] taskAndTimeAtArray = reply.split(" /at ");
-                            String eventDescription = taskAndTimeAtArray[0].substring(6);
-                            String at = taskAndTimeAtArray[1];
-                            Task newEvent = new Event(eventDescription, at);
-                            taskItems.add(newEvent);
-                            printReply(addTaskReplyFormatter(newEvent));
-                            break;
-                        default:
-                            throw new DukeException("Invalid Command Exception");
+                    case "done":
+                        handleDone(reply);
+                        break;
+                    case "delete":
+                        handleDelete(reply);
+                        break;
+                    case "todo":
+                        Task newTodo = new ToDo(reply.substring(5));
+                        taskItems.add(newTodo);
+                        printReply(addTaskReplyFormatter(newTodo));
+                        break;
+                    case "deadline":
+                        String[] taskAndTimeByArray = reply.split(" /by ");
+                        String deadlineDescription = taskAndTimeByArray[0].substring(9);
+                        String by = taskAndTimeByArray[1];
+                        Task newDeadline = new Deadline(deadlineDescription, LocalDate.parse(by));
+                        taskItems.add(newDeadline);
+                        printReply(addTaskReplyFormatter(newDeadline));
+                        break;
+                    case "event":
+                        String[] taskAndTimeAtArray = reply.split(" /at ");
+                        String eventDescription = taskAndTimeAtArray[0].substring(6);
+                        String at = taskAndTimeAtArray[1];
+                        Task newEvent = new Event(eventDescription, LocalDate.parse(at));
+                        taskItems.add(newEvent);
+                        printReply(addTaskReplyFormatter(newEvent));
+                        break;
+                    default:
+                        throw new DukeException("Invalid Command Exception");
                     }
+                } catch (DateTimeParseException e) {
+                   throw new DukeException(String.format(
+                           "Time format has to be in the form: YYYY-MM-DD %s", e.getMessage()));
                 } catch (StringIndexOutOfBoundsException e) {
                     throw new DukeException(String.format("No arguments specified for %s", command));
                 }
