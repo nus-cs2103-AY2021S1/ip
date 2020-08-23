@@ -3,9 +3,9 @@ deadline
 todo borrow book
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
-event readbook /at 18:00 2020-12-22
-deadline readbook /by 2020-12-22
-event project meeting /at 19:00 2020-12-22
+todo collect homework
+event project meeting /at 19:00 2020-12-25
+deadline CS2030 homework /by 2020-12-22
 done 3
 list
 bye

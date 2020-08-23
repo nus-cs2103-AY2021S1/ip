@@ -40,7 +40,6 @@ public class TaskSaveAndLoadManager {
         if (taskData.taskType.equals("todo")) {
             return new ToDoTask(taskData.taskDescription, isDone);
         } else if (taskData.taskType.equals("deadline")) {
-            System.out.println(taskData.time);
             DateAndTime dt = new DateAndTime(LocalDate.parse(taskData.time));
             return new DeadlineTask(taskData.taskDescription, isDone, dt);
         } else {

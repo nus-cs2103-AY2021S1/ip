@@ -5,18 +5,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class IOHandler {
-    String separationLine = "     _____________________________________________________\n";
-    String indentation = "      ";
     Scanner sc = new Scanner(System.in);
     String reply = sc.nextLine();
 
     String[] replyArr;
 
-    String topPartOfBotReplyMessage = separationLine + indentation;
-    String botPartOfBotReplyMessage = "\n" + separationLine.substring(0, separationLine.length() - 1);
-
     TaskManager taskManager = new TaskManager(new ArrayList<>());
     TaskSaveAndLoadManager taskSaveAndLoadManager = new TaskSaveAndLoadManager();
+    UI ui = new UI();
 
     private DateAndTime handleTime(String timeFormat) {
         if (!timeFormat.contains(" ")) {
@@ -47,39 +43,36 @@ public class IOHandler {
         return replyArr;
     }
 
-    private void printMessage(String message) {
-        System.out.println(topPartOfBotReplyMessage + message + botPartOfBotReplyMessage);
-    }
-
     private void handleUserInput()
     {
         String fullReply;
+        ArrayList<String> botReplyHeading = ui.botReplyHeading(reply);
         if (reply.equals("list")) {
-            String botReply = "Checking the whole list doesn't make you finish anything faster... \n";
-            String resultList = indentation + taskManager.convertTaskListToString(taskManager.getTaskList());
+            String botReply = botReplyHeading.get(0);
+            String resultList = ui.formatBotReplyBody(taskManager.convertTaskListToString(taskManager.getTaskList()));
             fullReply = botReply + resultList;
         } else if (replyArr != null && replyArr[0].equals("done")) {
             int taskIndex = Integer.parseInt(replyArr[1]) - 1;
             taskManager.markTaskAsDone(taskIndex);
-            String botReply = "Wah finally. Wondering how long more I need to wait... \n";
-            String taskDone = indentation + taskManager.getTask(taskIndex).toString();
+            String botReply = botReplyHeading.get(0);
+            String taskDone = ui.formatBotReplyBody(taskManager.getTask(taskIndex).toString());
             fullReply = botReply + taskDone;
         } else if (replyArr != null && replyArr[0].equals("delete")) {
             int taskIndex = Integer.parseInt(replyArr[1]) - 1;
             Task cacheTask = taskManager.getTask(taskIndex);
             taskManager.removeTask(taskIndex);
-            String botReply = "Good good... Okay removed! Looks more apt for a lazy ass like you. \n";
-            String taskDone = indentation + cacheTask.toString();
+            String botReply = botReplyHeading.get(0);
+            String taskDone = ui.formatBotReplyBody(cacheTask.toString());
             fullReply = botReply + taskDone;
         } else if (replyArr != null && replyArr[0].equals("find")) {
             ArrayList<Task> foundTasks = taskManager.findTaskThatHasKeyword(replyArr[1]);
             String botReply = "";
             if (foundTasks.size() == 0) {
-                botReply = "Sorry can't find any tasks with such keyword";
+                botReply = botReplyHeading.get(0);
             } else {
-                botReply = "Found 'em. But at what cost.. \n.";
+                botReply = botReplyHeading.get(1);
             }
-            String resultList = indentation + taskManager.convertTaskListToString(foundTasks);
+            String resultList = ui.formatBotReplyBody(taskManager.convertTaskListToString(foundTasks));
             fullReply = botReply + resultList;
         }
         // adding task to the list
@@ -102,13 +95,13 @@ public class IOHandler {
                 newTask = new EventTask(tempArr[0], false, handleTime(tempArr[1].trim()));
             }
             taskManager.addTask(newTask);
-            String botReply = "Wow, another task. Added. You sure you can finish them all? \n";
+            String botReply = botReplyHeading.get(0);
             assert newTask != null;
-            String addedTask = indentation + newTask.toString() + "\n";
-            String totalTask = indentation + "Now you have a grand total of " + taskManager.getTotalNoOfTasks() + " tasks!";
+            String addedTask = ui.formatBotReplyBody(newTask.toString() + "\n");
+            String totalTask = ui.formatBotReplyBody("Now you have a grand total of " + taskManager.getTotalNoOfTasks() + " tasks!");
             fullReply = botReply + addedTask + totalTask;
         }
-        printMessage(fullReply);
+        ui.printMessage(fullReply);
     }
 
     public void handleInput() throws IOException {
@@ -124,7 +117,7 @@ public class IOHandler {
 
             DukeException exception = DukeExceptionHandler.checkForException(reply);
             if (exception != null) {
-                printMessage(exception.toString());
+                ui.printMessage(exception.toString());
             } else {
                 handleUserInput();
             }
@@ -133,7 +126,7 @@ public class IOHandler {
 
         taskSaveAndLoadManager.saveTaskManager(taskManager);
         String byeMessage = "That's all? Sure. See you again (hopefully LOL).";
-        System.out.println(topPartOfBotReplyMessage + byeMessage + botPartOfBotReplyMessage);
+        ui.printMessage(byeMessage);
         sc.close();
     }
 }
