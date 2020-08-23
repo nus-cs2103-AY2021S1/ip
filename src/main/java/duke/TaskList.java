@@ -88,12 +88,12 @@ public class TaskList {
     /**
      * Returns the list of tasks that match the keyword.
      *
-     * @param find keyword to find.
+     * @param keyword keyword to find.
      * @return Tasks matching keyword.
      */
-    public ArrayList<Task> findTasks(String find) {
+    public ArrayList<Task> findTasks(String keyword) {
         ArrayList<Task> foundTasks = new ArrayList<>(this.tasks);
-        foundTasks.removeIf(task -> !task.getTaskDescription().contains(find));
+        foundTasks.removeIf(task -> !task.getTaskDescription().contains(keyword));
         return foundTasks;
     }
 }

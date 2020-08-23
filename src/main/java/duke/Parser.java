@@ -60,8 +60,13 @@ public class Parser {
                 return "OOPS!!! Task number must be a number.";
             }
         } else if (command.equals("find")) {
-            String find = input.nextLine().substring(1);
-            TaskList foundTasks = new TaskList(taskList.findTasks(find));
+            String keyword;
+            try {
+                keyword = input.nextLine().substring(1);
+            } catch (StringIndexOutOfBoundsException e) {
+                return "OOPS!!! Keyword cannot be empty.";
+            }
+            TaskList foundTasks = new TaskList(taskList.findTasks(keyword));
             return "Here are the matching tasks in your list:\n" + foundTasks.listTasks();
         } else {
             try {

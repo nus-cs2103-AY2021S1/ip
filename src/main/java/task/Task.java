@@ -20,7 +20,7 @@ public class Task {
     public String getTaskDescription() {
         return this.taskDescription;
     }
-    
+
     /**
      * Returns the status of the Task.
      *
