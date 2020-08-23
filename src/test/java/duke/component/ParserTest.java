@@ -161,4 +161,49 @@ public class ParserTest {
             assertEquals("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
         }
     }
+
+    @Test
+    public void generate_emptyDescription_throwException() {
+        try {
+            Parser.generate("todo");
+            fail();
+        } catch (Exception e) {
+            assertEquals("\u2639 OOPS!!! The description of a todo cannot be empty.", e.getMessage());
+        }
+
+        try {
+            Parser.generate("todo ");
+            fail();
+        } catch (Exception e) {
+            assertEquals("\u2639 OOPS!!! The description of a todo cannot be empty.", e.getMessage());
+        }
+
+        try {
+            Parser.generate("deadline");
+            fail();
+        } catch (Exception e) {
+            assertEquals("\u2639 OOPS!!! The description of a deadline cannot be empty.", e.getMessage());
+        }
+
+        try {
+            Parser.generate("deadline ");
+            fail();
+        } catch (Exception e) {
+            assertEquals("\u2639 OOPS!!! The description of a deadline cannot be empty.", e.getMessage());
+        }
+
+        try {
+            Parser.generate("event");
+            fail();
+        } catch (Exception e) {
+            assertEquals("\u2639 OOPS!!! The description of an event cannot be empty.", e.getMessage());
+        }
+
+        try {
+            Parser.generate("event ");
+            fail();
+        } catch (Exception e) {
+            assertEquals("\u2639 OOPS!!! The description of an event cannot be empty.", e.getMessage());
+        }
+    }
 }
