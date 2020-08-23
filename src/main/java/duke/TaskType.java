@@ -1,7 +1,7 @@
 package duke;
 
 public class TaskType {
-    public static enum TypeOfTask {
+    public enum TypeOfTask {
         TODO,
         DEADLINE,
         EVENT
