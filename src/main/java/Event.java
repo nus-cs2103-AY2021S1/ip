@@ -9,6 +9,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String getState() {
+        return "E|" + (this.isDone ? "1" : "0") + "|" + this.description + "|" + this.date;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + "(at:" + date + ")";
     }
