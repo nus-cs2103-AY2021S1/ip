@@ -21,15 +21,15 @@ You now have 2 task(s) in the list
 ----------------------------------------------
 
 ----------------------------------------------
-I have added a taskbot.task.Todo:
-[✗] taskbot.task.Todo: buy bread
+I have added a Todo:
+[✗] Todo: buy bread
 
 You now have 3 task(s) in the list
 ----------------------------------------------
 
 ----------------------------------------------
-I have added a taskbot.task.Todo:
-[✗] taskbot.task.Todo: buy milk
+I have added a Todo:
+[✗] Todo: buy milk
 
 You now have 4 task(s) in the list
 ----------------------------------------------
@@ -40,9 +40,9 @@ These are the following task(s) to complete:
 
 2. [✗] Event: project meeting (at: 3:30 pm)
 
-3. [✗] taskbot.task.Todo: buy bread
+3. [✗] Todo: buy bread
 
-4. [✗] taskbot.task.Todo: buy milk
+4. [✗] Todo: buy milk
 
 ----------------------------------------------
 
@@ -62,7 +62,7 @@ Understood. The following task is now marked as done:
 
 ----------------------------------------------
 Understood. The following task is now marked as done:
-    [✓] taskbot.task.Todo: buy bread
+    [✓] Todo: buy bread
 
 ----------------------------------------------
 
@@ -90,14 +90,14 @@ You have specified an index not within the ranges of the list. Please try again.
 
 ----------------------------------------------
 Understood. The following task has been deleted.
-    [✓] taskbot.task.Todo: buy bread
+    [✓] Todo: buy bread
 
 You now have 1 task(s) in the list
 ----------------------------------------------
 
 ----------------------------------------------
 Understood. The following task has been deleted.
-    [✗] taskbot.task.Todo: buy milk
+    [✗] Todo: buy milk
 
 You now have 0 task(s) in the list
 ----------------------------------------------

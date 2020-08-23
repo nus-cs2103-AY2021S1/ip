@@ -7,15 +7,16 @@ REM delete output from previous run
 del ACTUAL.TXT
 
 REM compile the code into the bin folder
-javac  -cp ..\src\taskbot\ -Xlint:none -d ..\bin ..\src\taskbot\exceptions\*.java ..\src\taskbot\task\*.java ..\src\taskbot\logic\*.java ..\src\taskbot\main\Main.java
+javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\*.java
 
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
+    exit /b 1
 )
 REM no error here, error level == 0
 
 REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ..\bin taskbot/main/Main < input.txt > ACTUAL.TXT
+java -classpath ..\bin Main < input.txt > ACTUAL.TXT cmd /U
 
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT

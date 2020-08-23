@@ -1,12 +1,4 @@
-package taskbot.main;
-
 import java.util.Scanner;
-
-import taskbot.logic.Taskbot;
-
-import taskbot.exceptions.EmptyArgumentException;
-import taskbot.exceptions.InvalidCommandException;
-import taskbot.exceptions.InvalidIndexException;
 
 /**
  * This is the main class which handles user input.
@@ -18,7 +10,6 @@ public class Main {
         TODO, DEADLINE, EVENT,
         EXIT, DELETE
     }
-
     public static void main(String[] args) throws Exception {
         //The logo to be used for TaskBot
         String logo = "___________              __   __________        __   \n" +

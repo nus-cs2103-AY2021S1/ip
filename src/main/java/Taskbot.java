@@ -1,12 +1,4 @@
-package taskbot.logic;
-
 import java.util.ArrayList;
-
-import taskbot.task.*;
-
-import taskbot.exceptions.InvalidIndexException;
-import taskbot.exceptions.TaskAlreadyCompleteException;
-import taskbot.exceptions.WrongFormatException;
 
 public class Taskbot {
     private String logo;
@@ -49,12 +41,12 @@ public class Taskbot {
      * @param task The task to be added
      */
     public void addTodoTask(String task) {
-        //Makes a new taskbot.task.Todo task
+        //Makes a new Todo task
         Todo newTask = new Todo(task);
         //Adds the new task to the list
         tasks.add(newTask);
         //Informs the user that the task has been added
-        borderString("I have added a taskbot.task.Todo:\n" + newTask +
+        borderString("I have added a Todo:\n" + newTask +
                 "\n" + listTaskSize());
     }
 

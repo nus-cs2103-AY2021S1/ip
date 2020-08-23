@@ -1,5 +1,3 @@
-package taskbot.exceptions;
-
 /**
  * This exception handles when the supplied argument is empty
  */

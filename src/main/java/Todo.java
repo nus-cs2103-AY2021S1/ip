@@ -1,5 +1,3 @@
-package taskbot.task;
-
 public class Todo extends Task {
     public Todo(String task) {
         super(task);
@@ -7,6 +5,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[" + super.getStatusIcon() + "] " + "taskbot.task.Todo: " + super.getTask() + "\n";
+        return "[" + super.getStatusIcon() + "] " + "Todo: " + super.getTask() + "\n";
     }
 }
