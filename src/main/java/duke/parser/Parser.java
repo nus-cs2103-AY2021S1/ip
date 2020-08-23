@@ -68,6 +68,8 @@ public class Parser {
             return new ExitCommand();
         case GetEventsCommand.COMMAND_WORD:
             return prepareGetEvents(commandBody.strip());
+        case SearchCommand.COMMAND_WORD:
+            return prepareSearch(commandBody.strip());
         default:
             return new InvalidCommand();
 
@@ -125,6 +127,14 @@ public class Parser {
             return new GetEventsCommand(localDate);
         } catch (DateTimeParseException e) {
             return new InvalidCommand();
+        }
+    }
+
+    private static Command prepareSearch(String commandBody) {
+        if (commandBody.length() == 0) {
+            return new InvalidCommand();
+        } else {
+            return new SearchCommand(commandBody);
         }
     }
 
