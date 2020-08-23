@@ -25,10 +25,15 @@ public class Duke {
         }
     }
 
-    void writeToFile(Task task) throws IOException {
+    void writeToFile(FileWriterCommand command, Task task) throws IOException {
         // create a fileWriter in append mode instead of overwriting
         FileWriter fw = new FileWriter(DATA_PATHNAME, true);
-        fw.append(convertTaskToText(task));
+        switch (command) {
+            case APPEND: {
+                fw.append(convertTaskToText(task));
+                break;
+            }
+        }
         fw.close();
     }
 
@@ -55,7 +60,7 @@ public class Duke {
                     throw new DukeException("Invalid Task Type");
             }
 
-            writeToFile(t);
+            writeToFile(FileWriterCommand.APPEND, t);
             System.out.println("Got it. I've added this task:\n " + t);
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         } catch (IOException error) {
