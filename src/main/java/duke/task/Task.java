@@ -1,7 +1,9 @@
 package duke.task;
 
 public class Task {
-
+    private static final String TASK_MARKED_BEFORE = "This duke.task has already been marked!";
+    private static final String TASK_MARKED = "Nice! I've marked this duke.task as done:";
+    
     //@@author Damith C. Rajapakse
     //Reused from https://nus-cs2103-ay2021s1.github.io/website/schedule/week2/project.html with minor modifications
     protected String description;
@@ -25,10 +27,10 @@ public class Task {
 
     public void markAsDone() {
         if (this.isDone) {
-            System.out.println("This duke.task has already been marked!");
+            System.out.println(TASK_MARKED_BEFORE);
         } else {
             this.isDone = true;
-            System.out.println("Nice! I've marked this duke.task as done:");
+            System.out.println(TASK_MARKED);
             System.out.println(this);
         }
     }

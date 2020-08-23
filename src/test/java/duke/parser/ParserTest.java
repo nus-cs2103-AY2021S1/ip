@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.time.LocalDateTime;
 
 
-public class parserTest {
+public class ParserTest {
     
     Parser p;
     @BeforeEach

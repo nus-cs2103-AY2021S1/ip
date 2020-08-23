@@ -11,19 +11,19 @@ import java.io.ByteArrayOutputStream;
 
 public class UiTest {
     
-    Ui ui;
     private static final String LINE = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-    private static final String spacer = "               ";
-    private static final String logo = spacer + " ____        _        \n"
-            + spacer + "|  _ \\ _   _| | _____ \n"
-            + spacer + "| | | | | | | |/ / _ \\\n"
-            + spacer + "| |_| | |_| |   <  __/\n"
-            + spacer + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String SPACER = "               ";
+    private static final String LOGO = SPACER + " ____        _        \n"
+            + SPACER + "|  _ \\ _   _| | _____ \n"
+            + SPACER + "| | | | | | | |/ / _ \\\n"
+            + SPACER + "| |_| | |_| |   <  __/\n"
+            + SPACER + "|____/ \\__,_|_|\\_\\___|\n";
     //@@author Jonathan Cook
     // Reused from https://www.baeldung.com/java-testing-system-out-println
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     
+    Ui ui;
     @BeforeEach
     void init() {
         ui = new Ui();
@@ -42,7 +42,7 @@ public class UiTest {
     @DisplayName("user's login greetings")
     public void testGreetings() {
         ui.greetings();
-        String str = LINE + "\n" + " *** Opening and loading relevant documents into duke.Duke ***\n" + logo + "\n" 
+        String str = LINE + "\n" + " *** Opening and loading relevant documents into duke.Duke ***\n" + LOGO + "\n" 
                 + LINE+ "\n"+ "\n" + LINE + "\n" + "Hello! I'm duke.Duke ^.^\n" + "What can I do for you?\n" + LINE;
         assertEquals(str, outputStreamCaptor.toString().trim());
     }
