@@ -118,7 +118,10 @@ public class UI {
     }
 
     public void showHelp() {
+        this.showLine();
         System.out.println(OFFSET + "I can't help you either ._.");
+        this.showLine();
+        System.out.println(this.BLANK_LINE);
     }
 
     public String readCommand() {
