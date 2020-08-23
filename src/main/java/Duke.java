@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.text.ParseException;
+import java.time.LocalDate;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -75,7 +77,7 @@ public class Duke {
 
                     try {
                         String DLname = fullDL.split("/by")[0];
-                        String DLtime = fullDL.split("/by")[1];
+                        LocalDate DLtime = LocalDate.parse(fullDL.split("/by ")[1]);
                         Deadline dl = new Deadline(DLname, DLtime);
                         todoList.add(dl);
                         System.out.println("Aight new task for you: \n" + dl.toString());
@@ -92,7 +94,7 @@ public class Duke {
                     String fullE = sc.nextLine();
                     try {
                         String EventName = fullE.split("/at")[0];
-                        String EventTime = fullE.split("/at")[1];
+                        LocalDate EventTime = LocalDate.parse(fullE.split("/at ")[1]);
                         Event e = new Event(EventName, EventTime);
                         todoList.add(e);
                         System.out.println("Aight new task for you: \n" + e.toString());
@@ -118,6 +120,39 @@ public class Duke {
                         e.printStackTrace();
                     }
                     printLine();
+                    break;
+                case "on":
+                    LocalDate checkOn = LocalDate.parse(sc.nextLine().trim());
+                    System.out.println("On this day, you have: ");
+                    int eCount = 0;
+                    for (Task checkEvent: todoList) {
+                        if (checkEvent instanceof Event && ((Event) checkEvent).at.equals(checkOn)) {
+                            System.out.println(checkEvent.toString());
+                            eCount ++;
+                        }
+                    }
+                    if (eCount > 0) {
+                        System.out.println("   [ A total of " + eCount + " event(s)]");
+                    } else {
+                        System.out.println("   [ You have no events on this day ]");
+                    }
+                    break;
+                case "by":
+                    LocalDate checkBy = LocalDate.parse(sc.nextLine().trim());
+                    System.out.println("By this day, you have: ");
+                    int dCount = 0;
+                    for (Task checkDead: todoList) {
+                        if (checkDead instanceof Deadline && (((Deadline) checkDead).by.isBefore(checkBy) ||
+                                ((Deadline) checkDead).by.equals(checkBy))) {
+                            System.out.println(checkDead.toString());
+                            dCount ++;
+                        }
+                    }
+                    if (dCount > 0) {
+                        System.out.println("   [ A total of " + dCount + " deadline(s)]");
+                    } else {
+                        System.out.println("   [ You have no deadlines by this day ]");
+                    }
                     break;
                 default:
                     printLine();
