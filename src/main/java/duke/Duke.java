@@ -1,3 +1,12 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
+
 public class Duke {
 
     private TaskList tasks;
