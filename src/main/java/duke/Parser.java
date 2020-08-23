@@ -9,13 +9,14 @@ import main.java.duke.command.UndoCommand;
 import main.java.duke.command.EventCommand;
 import main.java.duke.command.DoneCommand;
 import main.java.duke.command.ToDoCommand;
+import main.java.duke.command.FindCommand;
 import main.java.duke.exception.DukeInputNotRecognizedException;
 import main.java.duke.exception.DukeTaskNotFoundException;
 
 public class Parser {
 
     enum Input {
-        LIST, BYE, DONE, TODO, DEADLINE, EVENT, DELETE, UNDO
+        LIST, BYE, DONE, TODO, DEADLINE, EVENT, DELETE, UNDO, FIND
     }
 
     public static Command parse(String fullCommand) throws DukeInputNotRecognizedException, DukeTaskNotFoundException {
@@ -38,9 +39,11 @@ public class Parser {
                 return parseDelete(command);
             case UNDO:
                 return parseUndo(command);
+            case FIND:
+                return parseFind(command[1].trim());
             }
         } else {
-            throw new DukeInputNotRecognizedException(" ERROR... INPUT NOT RECOGNIZED. \n PLEASE TRY AGAIN ");
+            throw new DukeInputNotRecognizedException(" ERROR... INPUT NOT RECOGNIZED. \n PLEASE TRY AGAIN. ");
         }
         return null;
     }
@@ -59,7 +62,7 @@ public class Parser {
             return new DoneCommand(commandDetails);
         } else {
             throw new DukeTaskNotFoundException(" ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n " +
-                    "PLEASE TRY AGAIN ");
+                    "PLEASE TRY AGAIN. ");
         }
     }
 
@@ -67,7 +70,7 @@ public class Parser {
         if (commandDetails.length > 1) {
             return new ToDoCommand(commandDetails);
         } else {
-            throw new DukeTaskNotFoundException(" ERROR... TODO DESCRIPTION EMPTY. \n PLEASE TRY AGAIN ");
+            throw new DukeTaskNotFoundException(" ERROR... TODO DESCRIPTION EMPTY. \n PLEASE TRY AGAIN. ");
         }
     }
 
@@ -77,10 +80,10 @@ public class Parser {
             if (stringArray.length > 1 && stringArray[1].split(" ", 2).length > 1) {
                 return new DeadlineCommand(stringArray);
             } else {
-                throw new DukeTaskNotFoundException(" ERROR... DEADLINE DATE EMPTY. \n PLEASE TRY AGAIN ");
+                throw new DukeTaskNotFoundException(" ERROR... DEADLINE DATE EMPTY. \n PLEASE TRY AGAIN. ");
             }
         } else {
-            throw new DukeTaskNotFoundException(" ERROR... DEADLINE DESCRIPTION EMPTY . \n PLEASE TRY AGAIN ");
+            throw new DukeTaskNotFoundException(" ERROR... DEADLINE DESCRIPTION EMPTY . \n PLEASE TRY AGAIN. ");
         }
     }
 
@@ -90,10 +93,10 @@ public class Parser {
             if (stringArray.length > 1 && stringArray[1].split(" ", 2).length > 1) {
                 return new EventCommand(stringArray);
             } else {
-                throw new DukeTaskNotFoundException(" ERROR... EVENT DATE EMPTY. \n PLEASE TRY AGAIN ");
+                throw new DukeTaskNotFoundException(" ERROR... EVENT DATE EMPTY. \n PLEASE TRY AGAIN. ");
             }
         } else {
-            throw new DukeTaskNotFoundException(" ERROR... EVENT DESCRIPTION EMPTY. \n PLEASE TRY AGAIN ");
+            throw new DukeTaskNotFoundException(" ERROR... EVENT DESCRIPTION EMPTY. \n PLEASE TRY AGAIN. ");
         }
     }
 
@@ -102,7 +105,7 @@ public class Parser {
             return new DeleteCommand(commandDetails);
         } else {
             throw new DukeTaskNotFoundException(" ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n " +
-                    "PLEASE TRY AGAIN ");
+                    "PLEASE TRY AGAIN. ");
         }
     }
 
@@ -111,8 +114,12 @@ public class Parser {
             return new UndoCommand(commandDetails);
         } else {
             throw new DukeTaskNotFoundException(" ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n " +
-                    "PLEASE TRY AGAIN ");
+                    "PLEASE TRY AGAIN. ");
         }
+    }
+
+    public static FindCommand parseFind(String keyword) {
+        return new FindCommand(keyword);
     }
 
 }
