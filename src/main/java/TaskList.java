@@ -1,49 +1,46 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> tasks = new ArrayList<>();
-    private InputStream input = null;
-    public TaskList() {
-        try {
-//            FileReader file = new FileReader("C:\\Users\\banik\\OneDrive\\Desktop\\NUS Y2S1\\CS2103\\Duke ChatBot\\src\\main\\java\\Data\\duke.txt");
-            FileReader file = new FileReader("Data/duke.txt");
-            BufferedReader reader = new BufferedReader(file);
-            String line;
-            while ((line = reader.readLine()) != null){
-                tasks.add(getTask(line));
-            }
-            file.close();
-        } catch (IOException e){
-            tasks = new ArrayList<>();
-        }
+
+    public TaskList(ArrayList<Task> tasks){
+        this.tasks = tasks;
     }
 
-    private Task getTask(String line){
-        Task task;
-        if (line.charAt(1) == 'T'){
-            task = new ToDos(line.substring(6));
-        } else if (line.charAt(1) == 'D'){
-            int index = line.indexOf("|");
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-            LocalDateTime date = LocalDateTime.parse(line.substring(index + 1).trim(), formatter);
-            task = new Deadline(line.substring(6, index), date);
-        } else {
-            int index = line.indexOf("|");
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-            LocalDateTime date = LocalDateTime.parse(line.substring(index + 1).trim(), formatter);
-            task = new Event(line.substring(6, index), date);
-        }
-        if (line.charAt(4) == '✓'){
-            task.updateStatus();
-        }
-        return task;
-    }
+//    public TaskList(String filepath) {
+//        try {
+//            FileReader file = new FileReader(filepath);
+//            BufferedReader reader = new BufferedReader(file);
+//            String line;
+//            while ((line = reader.readLine()) != null){
+//                tasks.add(getTask(line));
+//            }
+//            file.close();
+//        } catch (IOException e){
+//            tasks = new ArrayList<>();
+//        }
+//    }
+//
+//    private Task getTask(String line){
+//        Task task;
+//        if (line.charAt(1) == 'T'){
+//            task = new ToDos(line.substring(6));
+//        } else if (line.charAt(1) == 'D'){
+//            int index = line.indexOf("|");
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+//            LocalDateTime date = LocalDateTime.parse(line.substring(index + 1).trim(), formatter);
+//            task = new Deadline(line.substring(6, index), date);
+//        } else {
+//            int index = line.indexOf("|");
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+//            LocalDateTime date = LocalDateTime.parse(line.substring(index + 1).trim(), formatter);
+//            task = new Event(line.substring(6, index), date);
+//        }
+//        if (line.charAt(4) == '✓'){
+//            task.updateStatus();
+//        }
+//        return task;
+//    }
 
     public void update(Task task){
         tasks.add(task);
@@ -86,9 +83,5 @@ public class TaskList {
             line.append('\n');
         }
         return line.toString();
-    }
-
-    public static void main(String[] args) throws IOException {
-        TaskList task = new TaskList();
     }
 }
