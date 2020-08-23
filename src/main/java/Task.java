@@ -1,3 +1,7 @@
+/**
+ * Encapsulates a general Task object
+ */
+
 public class Task {
     protected String name;
     protected boolean done;

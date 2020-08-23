@@ -10,6 +10,10 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
+    /**
+     * Adds a task to the ArrayList of tasks
+     * @param item The task to be added
+     */
     public void addItem(Task item) {
         numTasks++;
         list.add(item);

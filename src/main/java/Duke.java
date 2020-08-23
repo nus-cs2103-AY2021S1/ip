@@ -1,4 +1,11 @@
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.LocalDateTime;
 import java.util.Scanner;
+
+/**
+ * Over-arching class to represent the Duke bot
+ */
 
 public class Duke {
     Scanner sc;
@@ -8,6 +15,10 @@ public class Duke {
         this.sc = new Scanner(System.in);
         this.tasks = new TaskList();
     }
+
+    /**
+     * Allows the bot to begin receiving user inputs and process them
+     */
 
     void takeInputs() {
         boolean quit = false;
@@ -48,11 +59,11 @@ public class Duke {
                         System.out.println("Added new task: " + info[1]);
                         printListSize();
                     } else if (info[0].equals("deadline")) {
-                        tasks.addItem(new Deadline(info[1], info[2]));
+                        tasks.addItem(new Deadline(info[1], stringToTime(info[2])));
                         System.out.println("Added new task: " + info[1]);
                         printListSize();
                     } else {
-                        tasks.addItem(new Event(info[1], info[2]));
+                        tasks.addItem(new Event(info[1], stringToTime(info[2])));
                         System.out.println("Added new task: " + info[1]);
                         printListSize();
                     }
@@ -63,10 +74,18 @@ public class Duke {
         }
     }
 
-    // method to handle the adding of items
-    public String[] extractInfo(String str) throws DukeException {
+    /**
+     * Breaks down a string into an array categorised by type of information
+     * @param str The string to be broken down
+     * @return An array containing the data required
+     * @throws InvalidTaskException If no task is entered
+     * @throws UnknownCmdException If an unknown command is input
+     * @throws InvalidTimeException If an invalid time for the task is entered
+     */
+
+    public String[] extractInfo(String str) throws InvalidTaskException, UnknownCmdException,InvalidTimeException {
         String[] store = new String[3];
-        // Todo, Deadline and Event
+        // Handling the classification of event type
         if (str.startsWith("todo")) {
             if (str.equals("todo") || str.strip().equals("todo"))  {
                 throw new InvalidTaskException("Your task cannot be empty!");
@@ -75,8 +94,7 @@ public class Duke {
             } else {
                 store[0] = "todo";
             }
-        }
-        else if (str.startsWith("deadline")) {
+        } else if (str.startsWith("deadline")) {
             if (str.equals("deadline") || str.strip().equals("deadline")) {
                 throw new InvalidTaskException("Your task cannot be empty!");
             } else if (!str.startsWith("deadline ")) {
@@ -84,8 +102,7 @@ public class Duke {
             } else {
                 store[0] = "deadline";
             }
-        }
-        else if (str.startsWith("event")) {
+        } else if (str.startsWith("event")) {
             if (str.equals("event") || str.strip().equals("event")) {
                 throw new InvalidTaskException("Your task cannot be empty!");
             } else if (!str.startsWith("event ")) {
@@ -93,11 +110,11 @@ public class Duke {
             } else {
                 store[0] = "event";
             }
-        }
-        else {
+        } else {
             throw new UnknownCmdException("Unknown command entered!");
         }
 
+        // handling the content of the event
         int splitPrefix = str.indexOf(" ");
         String content = str.substring(splitPrefix).strip();
         if (content.length() <= 0) {
@@ -111,7 +128,7 @@ public class Duke {
             if (splitTime < 0) {
                 throw new InvalidTimeException("Please indicate the date or time by using /by (for deadlines) or /at (for events)!");
             }
-            String name = content.substring(0, splitTime).strip(); // stripping to remove whitespaces
+            String name = content.substring(0, splitTime).strip();
             String time = content.substring(splitTime + 3).strip();
             if (name.length() <= 0) {
                 throw new InvalidTaskException("Your task cannot be empty!");
@@ -125,6 +142,24 @@ public class Duke {
         return store;
     }
 
+    /**
+     * Converts a string into a LocalDateTime
+     * @param time The string to be parsed
+     * @return A LocalDateTime object
+     * @throws BadDtFormatException If an invalid string format is entered
+     */
+    public LocalDateTime stringToTime(String time) throws BadDtFormatException {
+        try {
+            return LocalDateTime.parse(time, DateTimeFormatter.ofPattern("dd/MM/yyyy H:m"));
+        } catch (DateTimeParseException e) {
+            throw new BadDtFormatException("Please enter the date and time in the following format: dd/mm/yyyy hh:mm "
+                    + "(24 hour clock)");
+        }
+    }
+
+    /**
+     * Prints the current size of the tasklist
+     */
     public void printListSize() {
         System.out.println("You now have " + tasks.size() + (tasks.size() == 1 ? " task in your list." : " tasks in your list."));
     }
@@ -139,7 +174,5 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         duke.takeInputs();
-//        String test = "I want to die";
-//        System.out.println(test.indexOf("die"));
     }
 }
