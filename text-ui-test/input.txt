@@ -1,6 +1,7 @@
 todo go to fairprice
-event CS2103 lecture /at FRI 12:00
-deadline CS2103 project submission /before FRI 2359
+event CS2103 lecture / 2020-08-01
+deadline CS2103 project submission /    2020-08-01
+deadline CS2103 tP /2020-08-01
 list
 done 1
 list
