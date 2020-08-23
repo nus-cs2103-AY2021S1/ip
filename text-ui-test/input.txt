@@ -3,10 +3,10 @@ todo
 todo read book
 deadline
 deadline return book
-deadline return book /by tomorrow
+deadline return book /by 2020-12-25
 event
 event library renewal
-event library renewal /at next Sunday
+event library renewal /at 2020-12-26
 todo do homework
 list
 done
