@@ -49,6 +49,9 @@ public class Ui {
         }
     }
 
+    public void printFind() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
     public void showError(String error) {
         System.out.println(error);
     }

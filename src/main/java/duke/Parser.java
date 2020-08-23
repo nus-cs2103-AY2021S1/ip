@@ -40,7 +40,7 @@ public class Parser {
         String[] inputArray = input.split(" ", 2);
 
         if (inputArray.length == 1 && (inputArray[0].equals("done") || inputArray[0].equals("delete") || inputArray[0].equals("todo")
-                || inputArray[0].equals("deadline") || inputArray[0].equals("event"))) {
+                || inputArray[0].equals("deadline") || inputArray[0].equals("event") || inputArray[0].equals("find"))) {
             throw new EmptyDescriptionException(("The description of " + inputArray[0] + " cannot be empty. Please re-enter"));
         }
 
@@ -49,14 +49,15 @@ public class Parser {
                 return new DoneCommand(Integer.parseInt(inputArray[1]));
             case "delete":
                 return new DeleteCommand(Integer.parseInt(inputArray[1]));
-            case "todo": {
+            case "find":
+                return new FindCommand(inputArray[1]);
+            case "todo":
                 return new TodoCommand(inputArray[1]);
-            }
             case "deadline": {
                 formatChecker(inputArray);
                 String str = inputArray[1].split(" /", 2)[0];
                 String date = inputArray[1].split("/", 2)[1].split(" ", 2)[1];
-                return new DeadlineCommand(str,DateParser(date));
+                return new DeadlineCommand(str, DateParser(date));
             }
             case "event": {
                 formatChecker(inputArray);

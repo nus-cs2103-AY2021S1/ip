@@ -32,6 +32,5 @@ public class TaskList {
     public List<Task> getList() {
         return this.taskList;
     }
-
-
+    
 }
