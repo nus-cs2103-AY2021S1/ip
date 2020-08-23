@@ -17,6 +17,7 @@ public class TimedTask extends Task {
     protected String time2;
     protected boolean hasDate;
     protected boolean hasTime;
+
     protected String firstLetter;
     protected String connecting;
 

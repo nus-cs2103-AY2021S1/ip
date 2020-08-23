@@ -9,6 +9,7 @@ public class TaskCompletionException extends DukeException {
     public TaskCompletionException (int size) {
         this.size = size;
     }
+
     @Override
     public String getMessage() {
         return "Please select a task from 1 to " + size +".";
