@@ -13,19 +13,10 @@ import java.lang.StringBuilder;
 
 public class Duke {
 
-    private final String lineSeparator = "***********************";
     private final Storage store = new Storage();
     private List<Task> taskList = new ArrayList<>();
 
-    public void greet() {
-        printMessage("Hi! I'm Duke. What can I do for you?");
-    }
 
-    public void printMessage(String msg) {
-        System.out.println(lineSeparator);
-        System.out.println(msg);
-        System.out.println(lineSeparator);
-    }
 
     public void addTask(Task task) {
         taskList.add(task);
@@ -143,6 +134,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();        duke.start();
+        Duke duke = new Duke();
+        duke.start();
     }
 }
