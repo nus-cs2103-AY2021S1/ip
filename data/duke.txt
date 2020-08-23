@@ -1,0 +1,7 @@
+T ~ 0 ~ eat
+E ~ 1 ~ gym  ~ tomorrow 10pm
+D ~ 1 ~ easdasd  ~ 26aug 1pm
+D ~ 0 ~ ip3  ~ today
+T ~ 1 ~ bathe
+E ~ 1 ~ aasdasd  ~ 2020-10-15
+D ~ 0 ~ water  ~ 2020-08-23
