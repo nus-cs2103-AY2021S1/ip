@@ -52,6 +52,26 @@ public class Duke {
         }
     }
 
+    public static int decideIndexDelete(String word) throws MissingSpecifiedDeleteError {
+        int index = 0;
+        try {
+            index = Integer.parseInt(word.substring(7));
+        } catch (IndexOutOfBoundsException e) {
+            throw new MissingSpecifiedDeleteError("☹ OOPS!!! Please specify which task you want to delete.");
+        }
+        return index;
+    }
+
+    public static Task deletedTask(int index, ArrayList<Task> tasks) throws WrongDeleteIndexError {
+        Task curr = null;
+        try {
+            curr = tasks.get(index - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new WrongDeleteIndexError("☹ OOPS!!! You only have " + tasks.size() + " tasks in your list. " +
+                    "Please select a valid task to be deleted.");
+        }
+        return curr;
+    }
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
@@ -88,6 +108,30 @@ public class Duke {
                 System.out.println(line);
                 System.out.println(curr);
                 System.out.println(line);
+            } else if (echo.toLowerCase().contains(delete)) {
+                int num = 0;
+                try {
+                    num = decideIndexDelete(echo);
+                    try {
+                        Task removed = deletedTask(num,tasks);
+                        tasks.remove(num - 1);
+                        System.out.println(line);
+                        System.out.println("Noted. I've removed this task: \n" +
+                                "  " + removed + "\n" +
+                                "Now you have " + tasks.size() + " tasks in the list.");
+                        System.out.println(line);
+                    } catch (WrongDeleteIndexError e) {
+                        System.out.println(line);
+                        System.out.println(e.getMessage());
+                        System.out.println(line);
+                    }
+                } catch (MissingSpecifiedDeleteError e) {
+                    System.out.println(line);
+                    System.out.println(e.getMessage());
+                    System.out.println(line);
+                }
+
+
             } else {
                 String firstWord = echo.toLowerCase().contains("todo") ? "todo"
                         : echo.toLowerCase().contains("deadline") ? "deadline"
