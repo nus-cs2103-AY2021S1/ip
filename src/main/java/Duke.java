@@ -1,16 +1,21 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
 public class Duke {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
+        File directory = new File("src/main/data/");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
         File data = new File("src/main/data/data.txt");
-        try {
+        if (!data.exists()) {
             data.createNewFile();
-        } catch (IOException e) {
-
         }
         String divider = "************************************************\n";
         String intro = "Hello! I'm Duke\nWhat can i do for you?\n";
