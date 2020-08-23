@@ -1,3 +1,5 @@
+package duke.command;
+
 public enum CommandType {
   LIST_DATE("date"),
   LIST("list"),

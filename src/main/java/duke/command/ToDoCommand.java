@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import duke.task.ToDo;
+
 public class ToDoCommand extends CreateCommand {
   public ToDoCommand(String commandString) {
     super(CommandType.TODO, commandString);

@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public abstract class CreateCommand extends Command {
   public CreateCommand(CommandType commandType, String commandString) {
     super(commandType, commandString);

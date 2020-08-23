@@ -1,3 +1,12 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.scanner.CommandScanner;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class Duke {
   private String fileString;
   private TaskList taskList;
@@ -31,9 +40,5 @@ public class Duke {
     } catch (Exception e) {
       Ui.showUnexpectedError(e.getMessage());
     }
-  }
-
-  public static void main(String[] args) {
-    new Duke("tasks.txt").run();
   }
 }
