@@ -159,17 +159,50 @@ public class Duke {
             String nextLine = userInput.nextLine();
             String[] commandParts = nextLine.split("\\s", 2);
             
-            if (!commandParts[0].contains("bye") 
-                    && !commandParts[0].contains("list") 
-                    && !commandParts[0].contains("done")) {
-
-                Task newTask = new Task(nextLine);
-                listOfTasks.add(newTask);
+            if (commandParts[0].contains("todo")) {
+                
+                Task newToDoTask = new ToDo(commandParts[1]);
+                listOfTasks.add(newToDoTask);
 
                 System.out.println(horizontalLine
                         + "\r\n"
-                        + "Task added: "
-                        + nextLine
+                        + "One new ToDo Task added: "
+                        + "\r\n"
+                        + newToDoTask.toString()
+                        + "\r\n"
+                        + "Total number of tasks in list: "
+                        + listOfTasks.size()
+                        + "\r\n"
+                        + horizontalLine);
+            } else if (commandParts[0].contains("deadline")) {
+
+                String[] deadlineParts = commandParts[1].split("/by");
+                Task newDeadline = new Deadline(deadlineParts[0].trim(), deadlineParts[1].trim());
+                listOfTasks.add(newDeadline);
+                System.out.println(horizontalLine
+                        + "\r\n"
+                        + "One new Deadline added: "
+                        + "\r\n"
+                        + newDeadline.toString()
+                        + "\r\n"
+                        + "Total number of tasks in list: "
+                        + listOfTasks.size()
+                        + "\r\n"
+                        + horizontalLine);
+                
+            } else if (commandParts[0].contains("event")) {
+                
+                String[] eventParts = commandParts[1].split("/at");
+                Task newEvent = new Event(eventParts[0].trim(), eventParts[1].trim());
+                listOfTasks.add(newEvent);
+                System.out.println(horizontalLine
+                        + "\r\n"
+                        + "One new Deadline Task added: "
+                        + "\r\n"
+                        + newEvent.toString()
+                        + "\r\n"
+                        + "Total number of tasks in list: "
+                        + listOfTasks.size()
                         + "\r\n"
                         + horizontalLine);
                 
