@@ -10,8 +10,8 @@ public class Deadline extends Task {
         this.deadlineDate = deadlineDate;
     }
 
-    public Deadline(String deadlineDate, LocalDate localDate) {
-        super(deadlineDate, true, localDate);
+    public Deadline(String deadlineName, LocalDate localDate) {
+        super(deadlineName, true, localDate);
     }
 
 
