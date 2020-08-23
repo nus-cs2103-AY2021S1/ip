@@ -12,11 +12,17 @@ public class UI {
 
     protected void greetUser() {
         String welcome = "Hello I am Duke!\nHow can I help you?\n";
+        String instructions = "Leave a single blankspace after each command to " +
+                "trigger Duke's response!\n";
+        String listOfCommand = "List of Commands = " +
+                "event, todo, deadline, delete, done, find, list\n";
         System.out.println(welcome);
+        System.out.println(instructions);
+        System.out.println(listOfCommand);
     }
 
     protected void doneTask(Task task) {
-        if (task.getStatus()) {
+        if (!task.getStatus()) {
             System.out.println("\nNice! I have completed this task!");
             System.out.println(" " + task + "\n");
         } else {
