@@ -1,12 +1,15 @@
-public class Deadline extends Task {
-    private String endDate;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    Deadline(String description, String endDate) {
+public class Deadline extends Task {
+    private LocalDate endDate;
+
+    Deadline(String description, LocalDate endDate) {
         super(description);
         this.endDate = endDate;
     }
 
-    Deadline(String description, String endDate, String completionStatus) {
+    Deadline(String description, LocalDate endDate, String completionStatus) {
         super(description, completionStatus);
         this.endDate = endDate;
     }
@@ -17,12 +20,12 @@ public class Deadline extends Task {
     }
 
     @Override
-    String getDate() {
+    LocalDate getDate() {
         return endDate;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (" + endDate + ")";
+        return "[D]" + super.toString() + " (by: " + endDate.format(DateTimeFormatter.ofPattern("MMMM d yyyy")) + ")";
     }
 }

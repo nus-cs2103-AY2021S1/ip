@@ -1,14 +1,20 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 enum Command {
     LIST("list"),
     DONE("done"),
-    DELETE("delete");
+    DELETE("delete"),
+    SHOW("show");
 
     private String command;
 
@@ -59,6 +65,16 @@ public class Tasks {
         input = input.strip();
         if (input.equals(Command.LIST.getCommand())) {
             this.listTasks();
+        } else if (input.equals(Command.SHOW.getCommand())) {
+            throw new InvalidArgumentException("☹ OOPS!!! The show command requires a date in yyyy-mm-dd.");
+        } else if (inputArray[0].equals(Command.SHOW.getCommand())) {
+            try {
+                LocalDate date = LocalDate.parse(inputArray[1]);
+                Stream<Task> filtered = list.stream().filter(task -> task.getDate().equals(date));
+                listTasks(filtered, date);
+            } catch (DateTimeParseException e) {
+                throw new InvalidArgumentException("☹ OOPS!!! The show command requires a date in yyyy-mm-dd.");
+            }
         } else if (input.equals(Command.DONE.getCommand()) || input.equals(Command.DELETE.getCommand())) {
             throw new InvalidCommandException("☹ OOPS!!! The index of a task cannot be empty.");
         } else if (inputArray[0].equals(Command.DONE.getCommand())) {
@@ -81,19 +97,28 @@ public class Tasks {
                 ToDo t = new ToDo(details.strip());
                 this.list.add(t);
                 echo(t);
-            } else {
-                String[] detailsArray = details.split("/");
-                String[] keywords = detailsArray[1].split(" ");
-                String datetime = detailsArray[1].substring(keywords[0].length() + 1);
-                if (type.equals(TaskType.DEADLINE.getType())) {
-                    Deadline d = new Deadline(detailsArray[0].strip(), keywords[0] + ": " + datetime);
-                    this.list.add(d);
-                    echo(d);
-                } else {
-                    Event e = new Event(detailsArray[0].strip(), keywords[0] + ": " + datetime);
-                    this.list.add(e);
-                    echo(e);
+            } else if (type.equals(TaskType.DEADLINE.getType())) {
+                String[] detailsArray = details.split("/by");
+                LocalDate date;
+                try {
+                    date = LocalDate.parse(detailsArray[1].strip());
+                } catch (DateTimeParseException e) {
+                    throw new InvalidArgumentException("☹ OOPS!!! Please enter a date in yyyy-mm-dd format.");
                 }
+                Deadline d = new Deadline(detailsArray[0].strip(), date);
+                this.list.add(d);
+                echo(d);
+            } else {
+                String[] detailsArray = details.split("/at");
+                LocalDate date;
+                try {
+                    date = LocalDate.parse(detailsArray[1].strip());
+                } catch (DateTimeParseException e) {
+                    throw new InvalidArgumentException("☹ OOPS!!! Please enter a date in yyyy-mm-dd format.");
+                }
+                Event e = new Event(detailsArray[0].strip(), date);
+                this.list.add(e);
+                echo(e);
             }
         }
     }
@@ -102,15 +127,16 @@ public class Tasks {
         while (sc.hasNext()) {
             String data = sc.nextLine();
             String[] dataArray = data.split(" \\| ");
+            LocalDate date = LocalDate.parse(dataArray[3]);
             switch (dataArray[0]) {
             case "T":
                 list.add(new ToDo(dataArray[2], dataArray[1]));
                 break;
             case "E":
-                list.add(new Event(dataArray[2], dataArray[3], dataArray[1]));
+                list.add(new Event(dataArray[2], date, dataArray[1]));
                 break;
             case "D":
-                list.add(new Deadline(dataArray[2], dataArray[3], dataArray[1]));
+                list.add(new Deadline(dataArray[2], date, dataArray[1]));
                 break;
             default:
             throw new IOException("Invalid data");
@@ -122,6 +148,18 @@ public class Tasks {
         System.out.println("\t___________________________________________________________________________");
         for (int i = 0; i < this.list.size(); i++) {
             System.out.println("\t " + (i + 1) + "." + list.get(i));
+        }
+        System.out.println("\t___________________________________________________________________________\n");
+    }
+
+    void listTasks(Stream<Task> stream, LocalDate date) {
+        System.out.println("\t___________________________________________________________________________");
+        AtomicInteger i = new AtomicInteger(1);
+        stream.forEach(task -> {
+            System.out.println("\t " + i.getAndIncrement() + "." + task);
+        });
+        if (i.intValue() == 1) {
+            System.out.println("\t No tasks found on " + date.format(DateTimeFormatter.ofPattern("MMMM d yyyy")));
         }
         System.out.println("\t___________________________________________________________________________\n");
     }
