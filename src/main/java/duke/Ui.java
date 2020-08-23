@@ -24,7 +24,7 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        System.out.println(" ERROR DETECTED! UNABLE TO LOAD PROGRAM. \n SYSTEM SHUTTING DOWN");
+        System.out.println(" ERROR DETECTED! UNABLE TO LOAD TASKLIST. \n CREATING NEW TASKLIST");
     }
 
     public void showTaskList(ArrayList<Task> taskList) {
