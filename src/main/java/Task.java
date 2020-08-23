@@ -3,7 +3,6 @@ import java.util.List;
 
 public class Task {
 
-    public static List<Task> tasks = new ArrayList<>();
     protected String description;
     protected boolean isDone;
 

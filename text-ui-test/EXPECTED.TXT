@@ -36,5 +36,9 @@ Noted. I've removed this task:
    [T][✓] buy some fruits
 Now you have 2 tasks in the list.
 --------------------------------------
+Sorry Boss! Please ensure that you have input the time
+--------------------------------------
+Sorry Boss! Please ensure that you have input the time
+--------------------------------------
 Bye Boss! Hope to see you again!
 --------------------------------------

@@ -11,7 +11,7 @@ public class Storage {
     public void saveTasks() throws IOException {
         BufferedWriter taskWriter = new BufferedWriter(new FileWriter(path));
         String tasks = "";
-        for (Task task: Task.tasks) {
+        for (Task task: TaskList.taskList) {
             tasks += task.toSaveString() + "\n";
         }
         taskWriter.write(tasks);
@@ -42,7 +42,7 @@ public class Storage {
             if (keywords[0].equals("1")) {
                 cur.markAsDone();
             }
-            Task.tasks.add(cur);
+            TaskList.taskList.add(cur);
             longCommand = taskLoader.readLine();
         }
         taskLoader.close();

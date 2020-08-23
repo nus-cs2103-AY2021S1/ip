@@ -1,7 +1,4 @@
-import exceptions.DukeException;
-import exceptions.DukeInvalidMessageException;
-import exceptions.DukeUnknownCommandException;
-import exceptions.DukeEmptyMessageException;
+import exceptions.*;
 
 import java.io.*;
 import java.time.format.DateTimeParseException;
@@ -11,6 +8,7 @@ public class Duke {
     private Ui ui;
     private Parser parser;
     private Storage storage;
+    private TaskList taskList;
     public final static String FILEPATH = System.getProperty("user.dir") + (System.getProperty("user.dir").endsWith("text-ui-test")
             ? "/saved-tasks.txt"
             : "/text-ui-test/saved-tasks.txt");
@@ -19,6 +17,7 @@ public class Duke {
         ui = new Ui();
         parser = new Parser();
         storage = new Storage(FILEPATH);
+        taskList = new TaskList();
     }
 
     public static void main(String[] args) throws IOException {
@@ -43,11 +42,11 @@ public class Duke {
                 } else if (toEcho.startsWith("done")) {
                     if (toEcho.length() == 4) {
                         throw new DukeEmptyMessageException("Done");
-                    } else if (Integer.parseInt(command[1]) > Task.tasks.size()) {
+                    } else if (Integer.parseInt(command[1]) > TaskList.taskList.size()) {
                         throw new DukeInvalidMessageException();
                     } else {
                         int index = Integer.parseInt(command[1]) - 1;
-                        Task.tasks.get(index).markAsDone();
+                        taskList.markDone(index);
                         ui.printDone(index);
                     }
                 } else if (toEcho.startsWith("todo")) {
@@ -68,7 +67,7 @@ public class Duke {
                 } else if (toEcho.startsWith("delete")) {
                     if (toEcho.length() == 6) {
                         throw new DukeEmptyMessageException("Delete");
-                    } else if (Integer.parseInt(command[1]) > Task.tasks.size() ||
+                    } else if (Integer.parseInt(command[1]) > TaskList.taskList.size() ||
                             Integer.parseInt(command[1]) < 0) {
                         throw new DukeInvalidMessageException();
                     }
@@ -88,26 +87,34 @@ public class Duke {
 
     public void handleTodo(String description) {
         Todo todo = new Todo(description);
-        Task.tasks.add(todo);
+        TaskList.taskList.add(todo);
         ui.printTask(todo);
     }
 
-    public void handleDeadline(String description) {
-        String[] strArr = parser.splitDeadlineTime(description);
-        String todo = strArr[0];
-        String time = strArr[1];
-        Deadline deadline = new Deadline(todo, time);
-        Task.tasks.add(deadline);
-        ui.printTask(deadline);
+    public void handleDeadline(String description) throws DukeMissingTimeException {
+        try {
+            String[] strArr = parser.splitDeadlineTime(description);
+            String todo = strArr[0];
+            String time = strArr[1];
+            Deadline deadline = new Deadline(todo, time);
+            taskList.add(deadline);
+            ui.printTask(deadline);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeMissingTimeException();
+        }
     }
 
-    public void handleEvent(String description) {
-        String[] strArr = parser.splitEventTime(description);
-        String todo = strArr[0];
-        String time = strArr[1];
-        Event event = new Event(todo, time);
-        Task.tasks.add(event);
-        ui.printTask(event);
+    public void handleEvent(String description) throws DukeMissingTimeException {
+        try {
+            String[] strArr = parser.splitEventTime(description);
+            String todo = strArr[0];
+            String time = strArr[1];
+            Event event = new Event(todo, time);
+            taskList.add(event);
+            ui.printTask(event);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeMissingTimeException();
+        }
     }
 
 }

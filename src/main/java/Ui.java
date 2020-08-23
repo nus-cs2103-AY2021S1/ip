@@ -24,9 +24,9 @@ public class Ui {
 
     public void showList() {
         System.out.println(SHOW_TASK);
-        for (int i = 0; i < Task.tasks.size(); i++) {
+        for (int i = 0; i < TaskList.taskList.size(); i++) {
             int number = i + 1;
-            System.out.println(number + "." + Task.tasks.get(i));
+            System.out.println(number + "." + TaskList.taskList.get(i));
         }
         System.out.println(HORIZONTAL_LINE);
     }
@@ -38,21 +38,21 @@ public class Ui {
     public void printTask(Task task) {
         System.out.println("Got it. I've added this task:");
         System.out.println(TAB + task);
-        System.out.println("Now you have " + Task.tasks.size() + " tasks in the list.");
+        System.out.println("Now you have " + TaskList.taskList.size() + " tasks in the list.");
         System.out.println(HORIZONTAL_LINE);
     }
 
     public void printDone(int index) {
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println(TAB + Task.tasks.get(index));
+        System.out.println(TAB + TaskList.taskList.get(index));
         System.out.println(HORIZONTAL_LINE);
     }
 
     public void printDelete(int indexToDelete) {
         System.out.println("Noted. I've removed this task:");
-        System.out.println(TAB + Task.tasks.get(indexToDelete));
-        Task.tasks.remove(indexToDelete);
-        System.out.println("Now you have " + Task.tasks.size() + " tasks in the list.");
+        System.out.println(TAB + TaskList.taskList.get(indexToDelete));
+        TaskList.taskList.remove(indexToDelete);
+        System.out.println("Now you have " + TaskList.taskList.size() + " tasks in the list.");
         System.out.println(HORIZONTAL_LINE);
     }
 

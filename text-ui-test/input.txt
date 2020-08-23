@@ -9,4 +9,6 @@ done 10
 done
 helloworld
 delete 1
+deadline nodeadlinetimegiven
+event notimegiven
 bye
