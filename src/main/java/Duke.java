@@ -1,6 +1,8 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
 
 public class Duke {
     public static String iterateToDo(List<Task> arr) {
@@ -30,7 +32,43 @@ public class Duke {
         return arr;
     }
 
-    public static void main(String[] args) {
+    public static void parseAndAddToList(List<Task> list, String line) {
+        String[] line_arr = line.split(" / ");
+        if (line_arr[0].equals("T")) {
+            if (line_arr[1].equals("1")) {
+                list.add(new Todo(true, list.size() + 1, line_arr[2]));
+            } else if (line_arr[1].equals("0")) {
+                list.add(new Todo(false, list.size() + 1, line_arr[2]));
+            }
+        } else if (line_arr[0].equals("E")) {
+            if (line_arr[1].equals("1")) {
+                list.add(new Event(true, list.size() + 1, line_arr[2], line_arr[3]));
+            } else if (line_arr[1].equals("0")) {
+                list.add(new Event(false, list.size() + 1, line_arr[2], line_arr[3]));
+            }
+        } else if (line_arr[0].equals("D")) {
+            if (line_arr[1].equals("1")) {
+                list.add(new Deadline(true, list.size() + 1, line_arr[2], line_arr[3]));
+            } else if (line_arr[1].equals("0")) {
+                list.add(new Deadline(false, list.size() + 1, line_arr[2], line_arr[3]));
+            }
+        }
+    }
+
+    // reads file and returns a list with value stored
+    public static void initialiseFile(List<Task> list) throws FileNotFoundException {
+        try {
+            File file = new File("data/duke.txt");
+            Scanner fr = new Scanner(file);
+            while (fr.hasNextLine()) {
+                parseAndAddToList(list, fr.nextLine());
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("☹ OOPS!!! I can't find your file!");
+        }
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -40,7 +78,8 @@ public class Duke {
         String hor_line = "____________________________________\n";
         System.out.println(hor_line + "Hello! I'm Duke\n" + "What can I do for you?\n" + hor_line);
         List<Task> todo_list = new ArrayList<Task>();
-        int counter = 0;
+        initialiseFile(todo_list);
+        int counter = todo_list.size();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String echo = sc.nextLine();
