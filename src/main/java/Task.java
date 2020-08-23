@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public abstract class Task {
 
     protected String description;
@@ -17,6 +19,8 @@ public abstract class Task {
     }
 
     public abstract String taskFileFormat();
+
+    public abstract LocalDate getDate();
 
     @Override
     public String toString() {

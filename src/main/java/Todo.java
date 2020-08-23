@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Todo extends Task {
 
     public Todo(String description) {
@@ -7,6 +9,11 @@ public class Todo extends Task {
     @Override
     public String taskFileFormat() {
         return "T | " + (super.isDone ? "1 |" : "0 |") + super.description;
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return null;
     }
 
     @Override

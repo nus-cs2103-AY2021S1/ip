@@ -1,19 +1,33 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
-    protected String at;
+    protected LocalDate eventDate;
+    protected LocalTime eventTime;
 
-    public Event(String description, String at) {
+    public Event(String description, LocalDate eventDate, LocalTime eventTime) {
         super(description);
-        this.at = at;
+        this.eventDate = eventDate;
+        this.eventTime = eventTime;
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return this.eventDate;
     }
 
     @Override
     public String taskFileFormat() {
-        return "E | " + (super.isDone ? "1 |" : "0 |") + super.description + "|" + this.at;
+        return "E | " + (super.isDone ? "1 |" : "0 |") + super.description + "|" +
+                this.eventDate.toString() + this.eventTime.toString();
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at:" + this.at + ")";
+        String formattedEventTime = this.eventDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", " +
+                this.eventTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
+        return "[E]" + super.toString() + "(at: " + formattedEventTime + ")";
     }
 }

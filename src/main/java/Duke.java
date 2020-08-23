@@ -2,9 +2,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Duke {
 
@@ -69,6 +73,8 @@ public class Duke {
                     createTask(message);
                 } else if (function.equals("delete")) {
                     deleteTask(message);
+                } else if (function.equals("find_by_date")) {
+                    searchByDate(message);
                 } else {
                     handleFailedFunction();
                 }
@@ -159,32 +165,76 @@ public class Duke {
         String commands = "  Below is a list of all the commands for my functions: \n" +
                 "  1. Create a new task: \n" +
                 "\t  1.1 Todo: 'todo' {task description}. For eg, todo eat \n" +
-                "\t  1.2 Deadline: 'deadline' {task description} '/by' {due date}." +
-                " For eg, deadline return book /by Sunday \n" +
-                "\t  1.3 Event: 'event' {task description} '/at' {event time}." +
-                " For eg, event project meeting /at Mon 2-4pm \n" +
+                "\t  1.2 Deadline: 'deadline' {task description} '/by' {deadline date}.\n\t\t" +
+                "  Input the date using the format: 'dd/mm/yyyy hh:mm'. " +
+                "For eg, deadline return book /by 12/2/2020 13:00 \n" +
+                "\t  1.3 Event: 'event' {task description} '/at' {event date}.\n\t\t" +
+                "  Input the date using the format: 'dd/mm/yyyy hh:mm'. " + "" +
+                "For eg, event project meeting /at 1/3/2020 12:00 \n" +
                 "  \n  2. To display all tasks in your list: 'list' \n" +
                 "  \n  3. To mark a task as completed: 'done' {task ID}. For eg, 'done 2' \n" +
                 "  \n  4. To delete a task: 'delete' {task ID}. For eg, 'delete 2' \n" +
+                "  \n  6. To search for a task by date: 'find_by_date' {date}. \n" +
+                "     Input the date using the format: 'dd/mm/yyyy'. For eg, 'find_by_date 12/2/2020' \n" +
                 "  \n  5. To end this chat: 'bye' \n";
         System.out.println(commands);
     }
 
-    public void createTask(String message) throws InvalidTaskException {
+    public void searchByDate(String message) throws InvalidFunctionException {
+        try {
+            String date = message.split("find_by_date")[1].trim();
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+            LocalDate dateToSearch = LocalDate.parse(date, dateFormatter);
+            int index = 1;
+            System.out.println("Search Results:");
+            for (Task task : this.tasks) {
+                if (task.getDate() != null) {
+                    if (task.getDate().isEqual(dateToSearch)) {
+                        System.out.println(String.format("%d. %s", index, task));
+                        index++;
+                    }
+                }
+            }
+            if (index == 1) {
+                System.out.println("No tasks found! Please search using a different date!");
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            String err = "No task date provided. Please input a valid date using the format: 'dd/mm/yyyy' \n" +
+                    "Type '/commands' to view the correct command for task search by date! ";
+            throw new InvalidFunctionException(err);
+        } catch (DateTimeParseException ex) {
+            String err = "The task date format is incorrect. Please input a valid date using the format: 'dd/mm/yyyy'";
+            throw new InvalidFunctionException(err);
+        }
+    }
+
+    public void createTask(String message) throws InvalidTaskException, InvalidFunctionException {
         String[] taskInfo = retrieveTaskInfo(message);
-        System.out.println("  Success! This " + taskInfo[0] + " task has been added:");
-        if (taskInfo[0].equals("todo")) {
-            Task toAdd = new Todo(taskInfo[1]);
+        Task toAdd = null;
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+        try {
+            if (taskInfo[0].equals("todo")) {
+                toAdd = new Todo(taskInfo[1]);
+            } else {
+                String[] timeStamp = taskInfo[2].split(" ");
+                if (taskInfo[0].equals("deadline")) {
+                    LocalDate deadlineDate = LocalDate.parse(timeStamp[0], dateFormatter);
+                    LocalTime deadlineTime = LocalTime.parse(timeStamp[1]);
+                    toAdd = new Deadline(taskInfo[1], deadlineDate, deadlineTime);
+                } else if (taskInfo[0].equals("event")) {
+                    LocalDate deadlineDate = LocalDate.parse(timeStamp[0], dateFormatter);
+                    LocalTime deadlineTime = LocalTime.parse(timeStamp[1]);
+                    toAdd = new Event(taskInfo[1], deadlineDate, deadlineTime);
+                }
+            }
+            System.out.println("  Success! This " + taskInfo[0] + " task has been added:");
             this.tasks.add(toAdd);
             System.out.println("\t" + toAdd);
-        } else if (taskInfo[0].equals("deadline")) {
-            Task toAdd = new Deadline(taskInfo[1], taskInfo[2]);
-            this.tasks.add(toAdd);
-            System.out.println("\t" + toAdd);
-        } else if (taskInfo[0].equals("event")) {
-            Task toAdd = new Event(taskInfo[1], taskInfo[2]);
-            this.tasks.add(toAdd);
-            System.out.println("\t" + toAdd);
+            System.out.println("  You have " + this.tasks.size() + " tasks in your list now.");
+        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException ex) {
+            String err = "The task date format is incorrect. \n" +
+                    "Please input a valid date using the format: 'dd/mm/yyyy hh:mm'. For eg, 10/8/2020 18:00";
+            throw new InvalidFunctionException(err);
         }
         this.saveFile();
         System.out.println("  You have " + this.tasks.size() + " tasks in your list now.");
@@ -212,7 +262,7 @@ public class Duke {
                         "The task cannot be created.\n" +
                         "Type '/commands' to view the correct command for task creation! ";
                 throw new InvalidTaskException(err);
-            } else if (!task[1].contains("/by")) {
+            } else if (!task[1].contains(" /by ")) {
                 String err = "Your deadline task does not have the correct format. The task cannot be created.\n" +
                         "Type '/commands' to view the correct command for task creation!";
                 throw new InvalidTaskException(err);
@@ -228,7 +278,7 @@ public class Duke {
                     throw new InvalidTaskException(err);
                 } else {
                     description = taskInputArray[0];
-                    time = taskInputArray[1];
+                    time = taskInputArray[1].trim();
                 }
             }
         } else if (taskType.equals("event")) {
@@ -238,7 +288,7 @@ public class Duke {
                         "The task cannot be created.\n" +
                         "Type '/commands' to view the correct command for task creation! ";
                 throw new InvalidTaskException(err);
-            } else if (!task[1].contains("/at")) {
+            } else if (!task[1].contains(" /at ")) {
                 String err = "Your event task does not have the correct format. The task cannot be created.\n" +
                         "Type '/commands' to view the correct command for task creation!";
                 throw new InvalidTaskException(err);
@@ -254,7 +304,7 @@ public class Duke {
                     throw new InvalidTaskException(err);
                 } else {
                     description = taskInputArray[0];
-                    time = taskInputArray[1];
+                    time = taskInputArray[1].trim();
                 }
             }
         }
@@ -276,6 +326,7 @@ public class Duke {
 
             while (sc.hasNextLine()) {
                 String[] taskData = sc.nextLine().split("\\|");
+                // DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
                 if (taskData[0].equals("T ")) {
                     Task toAdd = new Todo(taskData[2]);
                     if (taskData[1].equals(" 1 ")) {
@@ -283,13 +334,21 @@ public class Duke {
                     }
                     this.tasks.add(toAdd);
                 } else if (taskData[0].equals("D ")) {
-                    Task toAdd = new Deadline(taskData[2], taskData[3]);
+                    String dateTime = taskData[3].trim();
+                    String[] dateTimeArray = dateTime.split(" ");
+                    LocalDate deadlineDate = LocalDate.parse(dateTimeArray[0]);
+                    LocalTime deadlineTime = LocalTime.parse(dateTimeArray[1]);
+                    Task toAdd = new Deadline(taskData[2], deadlineDate, deadlineTime);
                     if (taskData[1].equals(" 1 ")) {
                         toAdd.markAsDone();
                     }
                     this.tasks.add(toAdd);
                 } else if (taskData[0].equals("E ")) {
-                    Task toAdd = new Event(taskData[2], taskData[3]);
+                    String dateTime = taskData[3].trim();
+                    String[] dateTimeArray = dateTime.split(" ");
+                    LocalDate eventDate = LocalDate.parse(dateTimeArray[0]);
+                    LocalTime eventTime = LocalTime.parse(dateTimeArray[1]);
+                    Task toAdd = new Event(taskData[2], eventDate, eventTime);
                     if (taskData[1].equals(" 1 ")) {
                         toAdd.markAsDone();
                     }
