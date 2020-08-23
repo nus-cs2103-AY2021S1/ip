@@ -41,7 +41,7 @@ public class Ui {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String command = sc.nextLine();
-            if (command.equals("bye")) {
+            if (command.equals("bye") || command.equals("Bye")) {
                 this.isExit = true;
                 //showLine();
                 showBye();

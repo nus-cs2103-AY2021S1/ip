@@ -8,12 +8,12 @@ import static java.lang.Integer.parseInt;
 
 public class TaskList {
 
-    protected ArrayList<Task> list;
+    protected ArrayList<Task> tasks;
     protected Storage storage;
 
     public TaskList(Storage storage) {
         this.storage = storage;
-        this.list = storage.load();
+        this.tasks = storage.load();
     }
 
     public Storage getStorage() {
@@ -21,18 +21,17 @@ public class TaskList {
     }
 
     protected void addToList(Task task) {
-        list.add(task);
+        tasks.add(task);
     }
 
     protected int getNumList() {
-        return this.list.size();
+        return this.tasks.size();
     }
 
-    public void setDoneList(String command) throws DukeException {
-        String[] doneCommand = command.split("\\W+");
+    public void setDoneList(String command) {
         try {
-            int i = parseInt(command.split(" ")[1]);
-            Task doneTask = list.get(i - 1);
+            int index = parseInt(command.split(" ")[1]);
+            Task doneTask = tasks.get(index - 1);
             doneTask.markAsDone();
         } catch (IndexOutOfBoundsException e) {
             ;
@@ -42,12 +41,10 @@ public class TaskList {
 
     }
 
-    public void deleteList(String command) throws DukeException{
-        String[] deleteCommand = command.split("\\W+");
+    public void deleteList(String command) {
         try {
-            int i = parseInt(command.split(" ")[1]);
-            Task deleteTask = list.get(i - 1);
-            list.remove(i - 1);
+            int index = parseInt(command.split(" ")[1]);
+            tasks.remove(index - 1);
         } catch (IndexOutOfBoundsException e) {
             ;
         } catch (NumberFormatException e) {
@@ -73,6 +70,7 @@ public class TaskList {
         String taskString = processTasks(task);
         storage.saveData(taskString);
         addToList(task);
+
         System.out.println("New task added!");
         System.out.println(task);
         System.out.println("You now have " + getNumList() + " tasks.");
@@ -89,13 +87,13 @@ public class TaskList {
     }*/
 
     public void readList() {
-        if (list.isEmpty()) {
+        if (tasks.isEmpty()) {
             System.out.println("Looks like you don't have any tasks! Go on and add some!");
         } else {
             System.out.println("Here's all your tasks to complete:");
             int i = 1;
-            for (Task ele : list) {
-                System.out.println(i + ". " + ele);
+            for (Task task : tasks) {
+                System.out.println(i + ". " + task);
                 i++;
             }
             System.out.println("Time to get to work! :D");

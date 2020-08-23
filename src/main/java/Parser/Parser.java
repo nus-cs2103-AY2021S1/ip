@@ -52,10 +52,11 @@ public class Parser {
             throw new DukeException("Oh no! This can't be DONE! (The description of done can't be empty!)");
         } else {
             try {
-                int i = parseInt(command.split(" ")[1]);
-                storage.setDoneLine(i);
-                String doneTask = storage.printLine(i);
+                int index = parseInt(command.split(" ")[1]);
+                storage.setDoneLine(index);
+                String doneTask = storage.printLine(index);
                 doneTask = storage.processLine(doneTask);
+
                 System.out.println("Tasks.Task marked as done! Good job!");
                 System.out.println(doneTask);
             } catch (IndexOutOfBoundsException e) {
@@ -76,10 +77,11 @@ public class Parser {
             throw new DukeException("Oh no! You must DELETE this! (The description of delete can't be empty!)");
         } else {
             try {
-                int i = parseInt(command.split(" ")[1]);
-                String deletedTask = storage.printLine(i);
+                int index = parseInt(command.split(" ")[1]);
+                String deletedTask = storage.printLine(index);
                 deletedTask = storage.processLine(deletedTask);
-                storage.deleteFromFile(i);
+                storage.deleteFromFile(index);
+
                 System.out.println("This task has been deleted from the list:");
                 System.out.println(deletedTask);
                 System.out.println("You now have " + storage.getNumOfTasks() + " tasks.");
@@ -117,9 +119,7 @@ public class Parser {
                 String by = command.split("/by ")[1];
                 Deadline deadline = new Deadline(taskName, by);
                 tasks.addToFile(deadline);
-            } catch (StringIndexOutOfBoundsException e) {
-                deadlineByReminder();
-            } catch (ArrayIndexOutOfBoundsException e) {
+            } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
                 deadlineByReminder();
             } catch (DateTimeParseException e) {
                 incorrectTimeFormat();
@@ -138,9 +138,7 @@ public class Parser {
                 String at = command.split("/at ")[1];
                 Event event = new Event(taskName, at);
                 tasks.addToFile(event);
-            } catch (StringIndexOutOfBoundsException e) {
-                eventAtReminder();
-            } catch (ArrayIndexOutOfBoundsException e) {
+            } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
                 eventAtReminder();
             } catch (DateTimeParseException e) {
                 incorrectTimeFormat();
@@ -152,29 +150,29 @@ public class Parser {
         try {
             String taskType = command.split(" ")[0];
             switch (taskType) {
-                case "list":
-                    tasks.readList();
-                    break;
-                case "done":
-                    setDoneTask(command);
-                    tasks.setDoneList(command);
-                    break;
-                case "delete":
-                    deleteTask(command);
-                    tasks.deleteList(command);
-                    break;
-                case "todo":
-                    handleTodo(command);
-                    break;
-                case "deadline":
-                    handleDeadline(command);
-                    break;
-                case "event":
-                    handleEvent(command);
-                    break;
-                default:
-                    System.out.println("Sorry! I don't understand that command. Please try again!");
-                    break;
+            case "list":
+                tasks.readList();
+                break;
+            case "done":
+                setDoneTask(command);
+                tasks.setDoneList(command);
+                break;
+            case "delete":
+                deleteTask(command);
+                tasks.deleteList(command);
+                break;
+            case "todo":
+                handleTodo(command);
+                break;
+            case "deadline":
+                handleDeadline(command);
+                break;
+            case "event":
+                handleEvent(command);
+                break;
+            default:
+                System.out.println("Sorry! I don't understand that command. Please try again!");
+                break;
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
