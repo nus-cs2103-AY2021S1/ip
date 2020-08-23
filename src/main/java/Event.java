@@ -20,14 +20,14 @@ public class Event extends Task {
 
     @Override
     public String taskFileFormat() {
-        return "E | " + (super.isDone ? "1 |" : "0 |") + super.description + "|" +
-                this.eventDate.toString() + this.eventTime.toString();
+        return "E | " + (super.isDone ? "1 |" : "0 |") + super.description + " | " +
+                this.eventDate.toString() + " " + this.eventTime.toString();
     }
 
     @Override
     public String toString() {
-        String formattedEventTime = this.eventDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", " +
+        String formattedEventTime = this.eventDate.format(DateTimeFormatter.ofPattern("EE, MMM dd yyyy")) + ", " +
                 this.eventTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
-        return "[E]" + super.toString() + "(at: " + formattedEventTime + ")";
+        return "[E]" + super.toString() + " (at: " + formattedEventTime + ")";
     }
 }

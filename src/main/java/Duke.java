@@ -212,6 +212,7 @@ public class Duke {
         String[] taskInfo = retrieveTaskInfo(message);
         Task toAdd = null;
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:mm");
         try {
             if (taskInfo[0].equals("todo")) {
                 toAdd = new Todo(taskInfo[1]);
@@ -219,11 +220,11 @@ public class Duke {
                 String[] timeStamp = taskInfo[2].split(" ");
                 if (taskInfo[0].equals("deadline")) {
                     LocalDate deadlineDate = LocalDate.parse(timeStamp[0], dateFormatter);
-                    LocalTime deadlineTime = LocalTime.parse(timeStamp[1]);
+                    LocalTime deadlineTime = LocalTime.parse(timeStamp[1], timeFormatter);
                     toAdd = new Deadline(taskInfo[1], deadlineDate, deadlineTime);
                 } else if (taskInfo[0].equals("event")) {
                     LocalDate deadlineDate = LocalDate.parse(timeStamp[0], dateFormatter);
-                    LocalTime deadlineTime = LocalTime.parse(timeStamp[1]);
+                    LocalTime deadlineTime = LocalTime.parse(timeStamp[1], timeFormatter);
                     toAdd = new Event(taskInfo[1], deadlineDate, deadlineTime);
                 }
             }
@@ -244,7 +245,6 @@ public class Duke {
         String taskType = message.split(" ")[0];
         String description = "";
         String time = "";
-
         if (taskType.equals("todo")) {
             String[] task = message.split("todo");
             if (task.length == 0) {
@@ -259,22 +259,28 @@ public class Duke {
             if (task.length == 0) {
                 String err = "Your deadline task has missing arguments and has an incorrect format. " +
                         "The task cannot be created.\n" +
-                        "Type '/commands' to view the correct command for task creation! ";
-                throw new InvalidTaskException(err);
-            } else if (!task[1].contains(" /by ")) {
-                System.out.println(task[1].length());
-                String err = "Your deadline task does not have the correct format. The task cannot be created.\n" +
                         "Type '/commands' to view the correct command for task creation!";
                 throw new InvalidTaskException(err);
             } else {
-                String[] taskInputArray = task[1].split("/by");
-                if (taskInputArray.length == 0 || taskInputArray[0].isBlank()) {
-                    String err = "Your deadline task is missing a description. " +
-                            "The task cannot be created. Please try again!";
+                String[] taskInputArray = task[1].split(" /by ");
+                if (!task[1].contains(" /by ") && !task[1].endsWith("/by")) {
+                    String err = "Your deadline task has an incorrect format. The task cannot be created. \n" +
+                            "Type '/commands' to view the correct command for task creation!";
                     throw new InvalidTaskException(err);
-                } else if (taskInputArray.length == 1){
-                    String err = "Your deadline task is missing a time stamp. " +
-                            "The task cannot be created. Please try again!";
+                } else if (task[1].trim().equals("/by")) {
+                    String err = "Your deadline task is missing a description and time stamp. " +
+                            "The task cannot be created. \n" +
+                            "Type '/commands' to view the correct command for task creation!";
+                    throw new InvalidTaskException(err);
+                }
+                else if (task[1].trim().endsWith("/by")) {
+                    String err = "Your deadline task is missing a time stamp. The task cannot be created. \n" +
+                            "Type '/commands' to view the correct command for task creation!";
+                    throw new InvalidTaskException(err);
+                }
+                else if (taskInputArray.length == 1 || taskInputArray[0].isBlank()) {
+                    String err = "Your deadline task is missing a description. The task cannot be created. \n" +
+                            "Type '/commands' to view the correct command for task creation!";
                     throw new InvalidTaskException(err);
                 } else {
                     description = taskInputArray[0];
@@ -286,21 +292,28 @@ public class Duke {
             if (task.length == 0) {
                 String err = "Your event task has missing arguments and has an incorrect format. " +
                         "The task cannot be created.\n" +
-                        "Type '/commands' to view the correct command for task creation! ";
-                throw new InvalidTaskException(err);
-            } else if (!task[1].contains(" /at ")) {
-                String err = "Your event task does not have the correct format. The task cannot be created.\n" +
                         "Type '/commands' to view the correct command for task creation!";
                 throw new InvalidTaskException(err);
             } else {
-                String[] taskInputArray = task[1].split("/at");
-                if (taskInputArray.length == 0 || taskInputArray[0].isBlank()) {
-                    String err = "Your event task is missing a description. " +
-                            "The task cannot be created. Please try again!";
+                String[] taskInputArray = task[1].split(" /at ");
+                if (!task[1].contains(" /at ") && !task[1].endsWith("/at")) {
+                    String err = "Your event task has an incorrect format. The task cannot be created. \n" +
+                            "Type '/commands' to view the correct command for task creation!";
                     throw new InvalidTaskException(err);
-                } else if (taskInputArray.length == 1){
-                    String err = "Your event task is missing a time stamp. " +
-                            "The task cannot be created. Please try again!";
+                } else if (task[1].trim().equals("/at")) {
+                    String err = "Your event task is missing a description and time stamp. " +
+                            "The task cannot be created. \n" +
+                            "Type '/commands' to view the correct command for task creation!";
+                    throw new InvalidTaskException(err);
+                }
+                else if (task[1].trim().endsWith("/at")) {
+                    String err = "Your event task is missing a time stamp. The task cannot be created. \n" +
+                            "Type '/commands' to view the correct command for task creation!";
+                    throw new InvalidTaskException(err);
+                }
+                else if (taskInputArray.length == 1 || taskInputArray[0].isBlank()) {
+                    String err = "Your event task is missing a description. The task cannot be created. \n" +
+                            "Type '/commands' to view the correct command for task creation!";
                     throw new InvalidTaskException(err);
                 } else {
                     description = taskInputArray[0];
@@ -325,30 +338,30 @@ public class Duke {
             Scanner sc = new Scanner(dataFile);
 
             while (sc.hasNextLine()) {
-                String[] taskData = sc.nextLine().split("\\|");
-                if (taskData[0].equals("T ")) {
+                String[] taskData = sc.nextLine().split(" \\|");
+                if (taskData[0].equals("T")) {
                     Task toAdd = new Todo(taskData[2]);
-                    if (taskData[1].equals(" 1 ")) {
+                    if (taskData[1].equals(" 1")) {
                         toAdd.markAsDone();
                     }
                     this.tasks.add(toAdd);
-                } else if (taskData[0].equals("D ")) {
+                } else if (taskData[0].equals("D")) {
                     String dateTime = taskData[3].trim();
                     String[] dateTimeArray = dateTime.split(" ");
                     LocalDate deadlineDate = LocalDate.parse(dateTimeArray[0]);
                     LocalTime deadlineTime = LocalTime.parse(dateTimeArray[1]);
                     Task toAdd = new Deadline(taskData[2], deadlineDate, deadlineTime);
-                    if (taskData[1].equals(" 1 ")) {
+                    if (taskData[1].equals(" 1")) {
                         toAdd.markAsDone();
                     }
                     this.tasks.add(toAdd);
-                } else if (taskData[0].equals("E ")) {
+                } else if (taskData[0].equals("E")) {
                     String dateTime = taskData[3].trim();
                     String[] dateTimeArray = dateTime.split(" ");
                     LocalDate eventDate = LocalDate.parse(dateTimeArray[0]);
                     LocalTime eventTime = LocalTime.parse(dateTimeArray[1]);
                     Task toAdd = new Event(taskData[2], eventDate, eventTime);
-                    if (taskData[1].equals(" 1 ")) {
+                    if (taskData[1].equals(" 1")) {
                         toAdd.markAsDone();
                     }
                     this.tasks.add(toAdd);

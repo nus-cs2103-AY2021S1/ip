@@ -20,14 +20,14 @@ public class Deadline extends Task {
 
     @Override
     public String taskFileFormat() {
-        return "D | " + (super.isDone ? "1 |" : "0 |") + super.description + "|" +
-                this.deadlineDate.toString() + this.deadlineTime.toString();
+        return "D | " + (super.isDone ? "1 |" : "0 |") + super.description + " | " +
+                this.deadlineDate.toString() + " "+ this.deadlineTime.toString();
     }
 
     @Override
     public String toString() {
-        String formattedEventTime = this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", " +
+        String formattedEventTime = this.deadlineDate.format(DateTimeFormatter.ofPattern("EE, MMM dd yyyy")) + ", " +
                 this.deadlineTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
-        return "[D]" + super.toString() + "(by: " + formattedEventTime + ")";
+        return "[D]" + super.toString() + " (by: " + formattedEventTime + ")";
     }
 }
