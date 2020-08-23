@@ -23,26 +23,42 @@ public class Parser {
                             + dateParser.toPattern() + " or " + parser.toPattern() + "\n" + ui.getBorder();
         }
     }
-    
+
+    public static boolean checkBye(String s) {
+        return s.equals("bye");
+    }
+
+    public static boolean checkList(String s) {
+        return s.equals("list");
+    }
+
+    public static boolean checkDone(String s) {
+        return s.equals("done");
+    }
+
+    public static boolean checkDel(String s) {
+        return s.equals("delete");
+    }
+
     public static void parseInput(TaskList taskList, Storage storage) {
         Scanner scan = new Scanner(System.in);
         while (scan.hasNext()) {
             String test = scan.next().toLowerCase();
-            if (ui.checkBye(test)) {
+            if (checkBye(test)) {
                 ui.exitLine();
                 break;
             } else {
                 String next = scan.nextLine().replaceFirst(" ", "");
-                if (taskList.checkList(test)) {
+                if (checkList(test)) {
                     taskList.displayList();
-                } else if (taskList.checkDone(test)) {
+                } else if (checkDone(test)) {
                     try {
                         taskList.doneTask(next);
                         storage.updateFile();
                     } catch (DukeException e) {
                         System.out.println(ui.getBorder() + e.getMessage() + "\n" + ui.getBorder());
                     }
-                } else if (taskList.checkDel(test)) {
+                } else if (checkDel(test)) {
                     try {
                         taskList.delTask(next);
                         storage.updateFile();

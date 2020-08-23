@@ -1,10 +1,6 @@
 public class Ui {
     private static final String BORDER = "____________________________________________________________\n";
 
-    public boolean checkBye(String s) {
-        return s.equals("bye");
-    }
-
     public void exitLine() {
         System.out.println(BORDER + "Bye. Hope to see you again soon!\n" + BORDER);
     }

@@ -9,10 +9,6 @@ public class TaskList {
         this.ui = new Ui();
     }
 
-    public boolean checkList(String s) {
-        return s.equals("list");
-    }
-
     public  void displayList() {
         int listLen = storage.size();
         System.out.println(ui.getBorder().replace("\n", ""));
@@ -75,10 +71,6 @@ public class TaskList {
         ui.addTaskLine(toAdd, storage.size());
     }
 
-    public boolean checkDone(String s) {
-        return s.equals("done");
-    }
-
     public void doneTask(String s) throws DukeException {
         try {
             int i = Integer.parseInt(s);
@@ -100,10 +92,6 @@ public class TaskList {
                             + ui.getBorder()
             );
         }
-    }
-
-    public boolean checkDel(String s) {
-        return s.equals("delete");
     }
 
     public void delTask(String s) throws DukeException {
@@ -134,7 +122,7 @@ public class TaskList {
         }
     }
 
-    public static List<Task> getList() {
+    public List<Task> getList() {
         return storage;
     }
 }
