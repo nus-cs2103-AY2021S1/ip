@@ -45,6 +45,11 @@ public abstract class Task {
         return " | " + done + " | " + description;
     }
 
+    /**
+     * Checks whether the task happen on the designated date.
+     * @param date the given date
+     * @return true if the task happen on the given date, ToDo doesn't happen on any date
+     */
     public boolean happenOnDate(LocalDate date) {
         return false;
     }
