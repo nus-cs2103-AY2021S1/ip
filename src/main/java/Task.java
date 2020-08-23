@@ -9,9 +9,16 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
+
+    public String getStatusIndex() { return (isDone ? "1" : "0" );}
 
     public void markAsDone() {
         this.isDone = true;
@@ -36,6 +43,17 @@ public class Task {
         }
     }
 
+    public static void createTask(ArrayList<Task> tasks, String task) {
+        Task newTask = new Task(task);
+        tasks.add(newTask);
+        String str = "   ____________________________________________________________"
+                + "\n    Got it. I've added this task:"
+                + "\n      " + tasks.get(tasks.size() - 1)
+                + "\n    Now you have " + tasks.size() + " task(s) in the list."
+                + "\n   ____________________________________________________________\n";
+        System.out.println(str);
+    }
+
     public static void done(ArrayList<Task> tasks, Integer index) {
         tasks.get(index - 1).markAsDone();
         String str = "   ____________________________________________________________"
@@ -57,5 +75,9 @@ public class Task {
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
+    }
+
+    public String writeToFile() {
+        return " | " + getStatusIndex() + " | " + description;
     }
 }
