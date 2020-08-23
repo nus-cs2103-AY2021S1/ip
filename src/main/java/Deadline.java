@@ -12,4 +12,10 @@ public class Deadline extends Task {
                 ? "[D][✓] " + text + " (by: " + time + ")"
                 : "[D][✗] " + text + " (by: " + time + ")";
     }
+
+    public String toCommand() {
+        return done
+                ? "done deadline " + text + " /by " + time
+                : "deadline " + text + " /by " + time;
+    }
 }

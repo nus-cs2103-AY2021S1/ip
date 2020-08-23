@@ -12,4 +12,10 @@ public class Event extends Task {
                 ? "[E][✓] " + text + " (at: " + time + ")"
                 : "[E][✗] " + text + " (at: " + time + ")";
     }
+
+    public String toCommand() {
+        return done
+                ? "done event " + text + " /at " + time
+                : "event " + text + " /at " + time;
+    }
 }

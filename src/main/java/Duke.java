@@ -1,5 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileWriter;
 
 import static java.lang.Integer.parseInt;
 
@@ -58,18 +62,18 @@ public class Duke {
     }
 
     private static void handleDeadline(String input) throws DukeException {
-        String pattern1 = "(deadline\\s)(.+)";
-        String pattern2 = "(deadline\\s)(.+)\\s(/by\\s)(.+)";
-        String pattern3 = "(deadline\\s)(/by)((\\s(.*))*)";
-        if (input.trim().matches(pattern1)) {
-            if (input.trim().matches(pattern2)) {
-                String task = input.replaceAll(pattern2, "$2");
-                String time = input.replaceAll(pattern2, "$4");
+        String basePattern = "(deadline\\s)(.+)";
+        String completePattern = "(deadline\\s)(.+)\\s(/by\\s)(.+)";
+        String missingTaskPattern = "(deadline\\s)(/by)((\\s(.*))*)";
+        if (input.trim().matches(basePattern)) {
+            if (input.trim().matches(completePattern)) {
+                String task = input.replaceAll(completePattern, "$2");
+                String time = input.replaceAll(completePattern, "$4");
                 Task next = new Deadline(task, time);
                 list.add(next);
                 String text = "Added Deadline '" + task + "' to your list!";
                 say(text);
-            } else if (input.trim().matches(pattern3)) {
+            } else if (input.trim().matches(missingTaskPattern)) {
                 throw(DukeException.missingTask());
             } else {
                 throw(DukeException.missingTime("by"));
@@ -80,18 +84,18 @@ public class Duke {
     }
 
     private static void handleEvent(String input) throws DukeException {
-        String pattern1 = "(event\\s)(.+)";
-        String pattern2 = "(event\\s)(.+)\\s(/at\\s)(.+)";
-        String pattern3 = "(event\\s)(/at)((\\s(.*))*)";
-        if (input.trim().matches(pattern1)) {
-            if (input.trim().matches(pattern2)) {
-                String task = input.replaceAll(pattern2, "$2");
-                String time = input.replaceAll(pattern2, "$4");
+        String basePattern = "(event\\s)(.+)";
+        String completePattern = "(event\\s)(.+)\\s(/at\\s)(.+)";
+        String missingTaskPattern = "(event\\s)(/at)((\\s(.*))*)";
+        if (input.trim().matches(basePattern)) {
+            if (input.trim().matches(completePattern)) {
+                String task = input.replaceAll(completePattern, "$2");
+                String time = input.replaceAll(completePattern, "$4");
                 Task next = new Event(task, time);
                 list.add(next);
                 String text = "Added Event '" + task + "' to your list!";
                 say(text);
-            } else if (input.trim().matches(pattern3)) {
+            } else if (input.trim().matches(missingTaskPattern)) {
                 throw(DukeException.missingTask());
             } else {
                 throw(DukeException.missingTime("at"));
@@ -139,8 +143,77 @@ public class Duke {
         say(help);
     }
 
+    private static void createTask(String s) {
+        Task next;
+        if (s.startsWith("todo")) {
+            next = new ToDo(s.substring(5));
+        } else if (s.startsWith("deadline")) {
+            String pattern = "(deadline\\s)(.+)\\s(/by\\s)(.+)";
+            String task = s.replaceAll(pattern, "$2");
+            String time = s.replaceAll(pattern, "$4");
+            next = new Deadline(task, time);
+        } else {
+            String pattern = "(event\\s)(.+)\\s(/at\\s)(.+)";
+            String task = s.replaceAll(pattern, "$2");
+            String time = s.replaceAll(pattern, "$4");
+            next = new Event(task, time);
+        }
+        list.add(next);
+    }
+
+    private static void loadList() {
+        try {
+            File f = new File("./data/list.txt");
+            Scanner listScanner = new Scanner(f);
+            int index = 0;
+            while (listScanner.hasNext()) {
+                String command = listScanner.nextLine();
+                String taskDesc;
+                if (command.startsWith("done")) {
+                    createTask(command.substring(5));
+                    list.get(index).setDone();
+                } else {
+                    createTask(command);
+                }
+                index++;
+            }
+            say("List has been loaded.");
+        } catch (FileNotFoundException e) {
+            say("No saved data found.");
+        }
+
+    }
+
+    private static void saveList() {
+        try {
+            File saveFile = new File("./data/list.txt");
+            File parent_directory = saveFile.getParentFile();
+
+            if (null != parent_directory) {
+                parent_directory.mkdirs();
+            }
+
+            FileWriter fw = new FileWriter(saveFile);
+            int len = list.size();
+            if (len > 0) {
+                String text = list.get(0).toCommand();
+                for (int i = 1; i < len; i++) {
+                    Task t = list.get(i);
+                    text = text + "\n" + t.toCommand();
+                }
+                fw.write(text);
+            } else {
+                fw.write("");
+            }
+            fw.close();
+        } catch (IOException e) {
+            say("Something went wrong: " + e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        loadList();
         String logo =
                 "█████████████████████████████████████████████████████████████\n" +
                 "█░░░░░░░░░░░░░░███░░░░░░░░░░░░░░░░░░░░░░░░░█░░░░░░░░░░░░░░███\n" +
@@ -182,6 +255,7 @@ public class Duke {
             }
             input = sc.nextLine();
         }
+        saveList();
         say("Goodbye!");
         sc.close();
     }
