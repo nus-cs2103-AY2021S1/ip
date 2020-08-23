@@ -6,10 +6,10 @@ import duke.tasks.Task;
 import duke.tasks.Todo;
 
 public class ParsedCommand {
-    String commandType;
-    int index;
-    String name;
-    String date;
+    private String commandType;
+    private int index;
+    private String name;
+    private String date;
 
     public ParsedCommand(String commandType) {
         this.commandType = commandType;
