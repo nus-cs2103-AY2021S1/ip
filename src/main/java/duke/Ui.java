@@ -34,7 +34,7 @@ public class Ui {
                 + " | | | | | | | |/ / _ \\\n"
                 + " | |_| | |_| |   <  __/\n"
                 + " |____/ \\__,_|_|\\_\\___|\n\n";
-        String greeting = logo + " Hello! I'm duke.Duke\n" + " What can I do for you?";
+        String greeting = logo + " Hello! I'm Duke\n" + " What can I do for you?";
         printWithDashes(greeting);
     }
 
