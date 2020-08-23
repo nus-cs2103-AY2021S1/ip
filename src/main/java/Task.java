@@ -24,4 +24,8 @@ public class Task {
                 + this.getStatusIcon() + "] "
                 + this.description;
     }
+
+    public String display() {
+        return "";
+    }
 }
