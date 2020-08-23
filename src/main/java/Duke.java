@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
 
@@ -61,7 +62,13 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    void getFile() {
+        File f = new File("data/duke.txt");
+        System.out.println("file exists?: " + f.exists());
+    }
+
     void initializeChatbot() {
+        getFile();
         greet();
         Scanner sc = new Scanner(System.in);
         boolean hasEnded = false;
