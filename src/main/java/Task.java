@@ -11,6 +11,11 @@ public class Task {
         this.isComplete = false;
     }
 
+    public Task(String content, boolean isComplete) {
+        this.content = content;
+        this.isComplete = isComplete;
+    }
+
     public void setComplete(boolean isComplete) {
         this.isComplete = isComplete;
     }
@@ -22,5 +27,13 @@ public class Task {
         } else {
             return String.format("[X] %s", content);
         }
+    }
+
+    private static int booleanToInt(boolean bool) {
+        return bool ? 1 : 0;
+    }
+
+    public String toSaveString() {
+        return String.format("%s/%s", booleanToInt(isComplete), content);
     }
 }
