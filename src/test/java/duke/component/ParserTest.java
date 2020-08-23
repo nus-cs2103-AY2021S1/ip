@@ -206,4 +206,28 @@ public class ParserTest {
             assertEquals("\u2639 OOPS!!! The description of an event cannot be empty.", e.getMessage());
         }
     }
+
+    @Test
+    public void generate_noSpace_throwExceptionWithTip() {
+        try {
+            Parser.generate("todothings");
+            fail();
+        } catch (Exception e) {
+            assertEquals("Do you mean 'todo things'", e.getMessage());
+        }
+
+        try {
+            Parser.generate("deadlinethings");
+            fail();
+        } catch (Exception e) {
+            assertEquals("Do you mean 'deadline things'", e.getMessage());
+        }
+
+        try {
+            Parser.generate("eventthings");
+            fail();
+        } catch (Exception e) {
+            assertEquals("Do you mean 'event things'", e.getMessage());
+        }
+    }
 }
