@@ -86,9 +86,10 @@ public class TaskList {
         for(int i = 1;i < tokens.length;i++) {
             keyword += tokens[i];
         }
+        keyword = keyword.toLowerCase();
         for(int i = 0;i < taskList.size();i++) {
             Task task = taskList.get(i);
-            if(task.getContent().contains(keyword)) {
+            if(task.getContent().toLowerCase().contains(keyword)) {
                 numMatch++;
                 res += ((i + 1) + "." + task.returnStringForm());
                 if (i < taskList.size() - 1) res += "\n    ";
