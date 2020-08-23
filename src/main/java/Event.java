@@ -1,6 +1,4 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     private static final String STRING_FORMAT = "[E][%s] %s (at: %s)";
@@ -26,12 +24,12 @@ public class Event extends Task {
     @Override
     public String toTaskData() {
         return String.format(Event.TASK_DATA_FORMAT, taskType.name(), isDone ? 1 : 0, description,
-                eventTime.format(Viscount.TASK_DATA_DATE_TIME_FORMATTER));
+                eventTime.format(Parser.TASK_DATA_DATE_TIME_FORMATTER));
     }
 
     @Override
     public String toString() {
         return String.format(Event.STRING_FORMAT, getStatusIcon(), description, 
-                eventTime.format(Task.OUTPUT_DATE_TIME_FORMATTER));
+                eventTime.format(Parser.OUTPUT_DATE_TIME_FORMATTER));
     }
 }

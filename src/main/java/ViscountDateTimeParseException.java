@@ -8,17 +8,9 @@ public class ViscountDateTimeParseException extends ViscountException {
             + "For example: 23-08-2020 1300\n"
             + "The time is optional and the default is 0000.";
     
-    private String dateTimeType;
-    
     public ViscountDateTimeParseException(String dateTimeType) {
-        super();
-        this.dateTimeType = dateTimeType;
-    }
-    
-    @Override
-    public String toString() {
-        return dateTimeType.equals("date query")
-            ? String.format(ViscountDateTimeParseException.DATE_ERROR_MESSAGE, dateTimeType)
-            : String.format(ViscountDateTimeParseException.DATE_TIME_ERROR_MESSAGE, dateTimeType);
+        super(dateTimeType.equals("date query")
+                ? String.format(ViscountDateTimeParseException.DATE_ERROR_MESSAGE, dateTimeType)
+                : String.format(ViscountDateTimeParseException.DATE_TIME_ERROR_MESSAGE, dateTimeType));
     }
 }

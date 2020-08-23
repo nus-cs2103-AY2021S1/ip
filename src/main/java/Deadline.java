@@ -1,6 +1,4 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     private static final String STRING_FORMAT = "[D][%s] %s (by: %s)";
@@ -26,12 +24,12 @@ public class Deadline extends Task {
     @Override
     public String toTaskData() {
         return String.format(Deadline.TASK_DATA_FORMAT, taskType.name(), isDone ? 1 : 0, description,
-                dueDate.format(Viscount.TASK_DATA_DATE_TIME_FORMATTER));
+                dueDate.format(Parser.TASK_DATA_DATE_TIME_FORMATTER));
     }
 
     @Override
     public String toString() {
         return String.format(Deadline.STRING_FORMAT, getStatusIcon(), description, 
-                dueDate.format(Task.OUTPUT_DATE_TIME_FORMATTER));
+                dueDate.format(Parser.OUTPUT_DATE_TIME_FORMATTER));
     }
 }
