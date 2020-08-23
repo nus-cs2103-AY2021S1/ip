@@ -95,6 +95,11 @@ public class TaskList {
     }
 
     public void delTask(String s) throws DukeException {
+        if (storage.size() == 0) {
+            System.out.println(ui.getBorder() + "All tasks cleared!!\n" + ui.getBorder());
+            return;
+        }
+
         if (s.equals("")) {
             try {
                 addTask("delete", "");
