@@ -1,7 +1,7 @@
-import java.util.Scanner;
+import java.io.IOException;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String separationLine = "     _____________________________________________________\n";
         String indentation = "      ";
         String logo = " ____        _        \n"
@@ -15,7 +15,7 @@ public class Duke {
         System.out.print(indentation + "Let's see how long it takes. \n");
         System.out.print(indentation + "So, tell me, what do you want, sweetie? \n" + separationLine);
 
-        InputOutputHandler handler = new InputOutputHandler();
+        IOHandler handler = new IOHandler();
 
         handler.handleInput();
     }
