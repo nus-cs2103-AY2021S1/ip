@@ -8,7 +8,11 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private static final String filePath = "data/fileInfo.txt";
+    private static String filePath;
+
+    public Storage(String filePath) {
+        Storage.filePath = filePath;
+    }
 
     public static void writeToFile(ArrayList<Task> toDoList) throws IOException {
         FileWriter fw = new FileWriter(filePath);
