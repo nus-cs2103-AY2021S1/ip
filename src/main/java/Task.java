@@ -16,6 +16,16 @@ public class Task {
         return true;
     }
 
+    public String getTaskType() {
+        if (this instanceof Todo) {
+            return "T";
+        } else if (this instanceof Deadline) {
+            return "D";
+        } else {
+            return "E";
+        }
+    }
+
     public String getDescription() {
         return this.description;
     }
