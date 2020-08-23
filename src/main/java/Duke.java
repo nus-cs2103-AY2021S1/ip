@@ -5,21 +5,22 @@ import static java.lang.Integer.parseInt;
 
 public class Duke {
     private static ArrayList<Task> list = new ArrayList<>();
+    private static final String BORDER = "__________________________________________________";
 
     private static void say(String s) {
-        System.out.println("______________________________");
+        System.out.println(BORDER);
         System.out.println(s);
-        System.out.println("______________________________");
+        System.out.println(BORDER);
     }
 
     private static void printList() throws DukeException {
         if (list.size() > 0) {
-            System.out.println("______________________________");
+            System.out.println(BORDER);
             System.out.println("Here is your list:");
             for (int i = 1; i <= list.size(); i++) {
                 System.out.println(i + "." + list.get(i - 1));
             }
-            System.out.println("______________________________");
+            System.out.println(BORDER);
         } else {
             throw(DukeException.emptyList());
         }
@@ -123,6 +124,21 @@ public class Duke {
         }
     }
 
+    public static void printHelp() {
+        String help = "These are the available commands:\n" +
+                "bye - exits the program\n" +
+                "deadline <description> /by <due date and time> - " +
+                "adds a deadline with the given description and due date to the task list\n" +
+                "delete <task number> - deletes the task corresponding to the number from the task list\n" +
+                "done <task number> - marks the task corresponding to the number as done\n" +
+                "event <description> /at <due date and time> - " +
+                "adds an event with the given description and due date to the task list\n" +
+                "help - shows this list of commands\n" +
+                "list - shows the contents of the task list\n" +
+                "todo <description> - adds a todo task with the given description to the task list";
+        say(help);
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String logo =
@@ -144,7 +160,9 @@ public class Duke {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             try {
-                if (input.trim().equals("list")) {
+                if (input.trim().equals("help")) {
+                    printHelp();
+                } else if (input.trim().equals("list")) {
                     printList();
                 } else if (input.startsWith("done")) {
                     printDone(input);
