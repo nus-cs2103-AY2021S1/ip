@@ -80,4 +80,18 @@ public class HappenCommandTest {
             assertEquals("Please input a positive integer for happen in command.", e.getMessage());
         }
     }
+
+    @Test
+    public void execute_invalidBetween_throwException() {
+        Ui ui = new Ui();
+        Storage storage = new StorageStub();
+        TaskList list = storage.getList();
+
+        try {
+            new HappenCommand("happen between 2020-09-01 2020-08-01").execute(ui, list, storage);
+            fail();
+        } catch (Exception e) {
+            assertEquals("Latter date is before former date for happen between.", e.getMessage());
+        }
+    }
 }
