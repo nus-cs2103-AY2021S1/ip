@@ -25,6 +25,10 @@ public class Task {
         return str.toString();
     }
 
+    public boolean containsWord(String word) {
+        return label.contains(word);
+    }
+
     @Override
     public String toString() {
         String symbol = Character.toString(done ? 10003 : 2717);

@@ -7,13 +7,33 @@ public class Parser {
         this.inputArr = command.split(" ");
     }
 
+    /**
+     * Returns the type of the command keyed in by the user.
+     * @return The type of command. Eg: done, delete, list, etc.
+     */
+
     public String getCommandType() {
         return inputArr[0];
     }
 
+    /**
+     * Returns an integer of the task item the user wishes to delete or mark as done.
+     * @return The number of the task item to be modified.
+     */
+
     public int getTaskToModify() {
         return Integer.parseInt(inputArr[1]);
     }
+
+    public String getWord() {
+        return inputArr[1];
+    }
+
+    /**
+     * Returns an array of strings that make up the details of one task. Eg: ["T", "Read Book"].
+     * @return Details of a single task.
+     * @throws DukeException If the "todo" command keyed by user does not contain a todo task string.
+     */
 
     public String[] getNewTask() throws DukeException {
         String[] newTaskDetails;

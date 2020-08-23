@@ -6,6 +6,10 @@ public class Duke {
         this.ui = new Ui(new TaskList(storage.load()), storage);
     }
 
+    /**
+     * Runs the Duke bot to process input from user and output the response.
+     */
+
     public void run() {
         ui.getInput();
     }
