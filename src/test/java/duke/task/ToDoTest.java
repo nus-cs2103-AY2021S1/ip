@@ -27,4 +27,17 @@ public class ToDoTest {
             fail();
         }
     }
+
+    @Test
+    public void toStringTest() {
+        try {
+            ToDo t = new ToDo("return books");
+            assertEquals("[T][\u2718] return books", t.toString());
+
+            t.markAsDone();
+            assertEquals("[T][\u2713] return books", t.toString());
+        } catch (Exception e) {
+            fail();
+        }
+    }
 }
