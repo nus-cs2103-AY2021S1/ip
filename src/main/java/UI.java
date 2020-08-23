@@ -39,7 +39,7 @@ public class UI {
      * @param task
      */
     protected void doneTask(Task task) {
-        if (!task.getStatus()) {
+        if (task.getStatus()) {
             System.out.println("\nNice! I have completed this task!");
             System.out.println(" " + task + "\n");
         } else {
