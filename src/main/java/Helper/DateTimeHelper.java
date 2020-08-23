@@ -68,6 +68,17 @@ public class DateTimeHelper {
         return this.fullDate;
         //return date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + " " + fullTime;
     }
+    public static DateTimeHelper processDateTime(String input) {
+        DateTimeHelper dtHelper = new DateTimeHelper(input.strip());
+        String result = dtHelper.processInput();
+        String resDate = dtHelper.processDateStr();
+
+        if (!result.equals("error") && !resDate.equals("error")) {
+            return dtHelper;
+        } else {
+            return null;
+        }
+    }
     public String getTime() {
         return this.fullTime;
     }

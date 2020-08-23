@@ -1,4 +1,6 @@
-enum Commands {
+package Commands;
+
+public enum Commands {
     LIST("list", "List all tasks, pass date if you want to list specific deadlines/events e.g list "),
     BYE("bye", "Exit the program"),
     DONE("done", "Mark a task as done e.g done 1 = task 1 is done"),

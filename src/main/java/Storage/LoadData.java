@@ -1,4 +1,4 @@
-import Task.Task;
+package Storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LoadData {
-    public ArrayList<String> getSavedTasks() {
-        ArrayList<String> savedTasks = new ArrayList<String>();
+    public static ArrayList<String> getSavedTasks(String path) {
+        ArrayList<String> savedTasks = new ArrayList<>();
         try {
-            File savedFile = new File("data/save_file.txt");
+            File savedFile = new File(path);
             Scanner scanner = new Scanner(savedFile);
             while (scanner.hasNextLine()) {
                 String taskData = scanner.nextLine();

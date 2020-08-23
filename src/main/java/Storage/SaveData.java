@@ -1,3 +1,5 @@
+package Storage;
+
 import Task.Task;
 import Task.Deadline;
 import Task.Todo;
@@ -8,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class SaveData {
-    private String taskToCommand(ArrayList<Task> tasks) {
+    private static String taskToCommand(ArrayList<Task> tasks) {
         String commands = "";
         for(Task task : tasks) {
             String command = "";
@@ -24,10 +26,10 @@ public class SaveData {
         }
         return commands;
     }
-    public void saveData(ArrayList<Task> data) {
+    public static void saveData(String path, ArrayList<Task> data) {
         //System.out.println("hello");
         try {
-            File file = new File("data/save_file.txt");
+            File file = new File(path);
             if(!file.exists()) {
                 file.createNewFile();
             }
