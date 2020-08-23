@@ -9,6 +9,10 @@ import duke.component.*;
 public abstract class Command {
     protected final String input;
 
+    /**
+     * Creates a command with the given input.
+     * @param input The input command.
+     */
     public Command(String input) {
         this.input = input;
     }
