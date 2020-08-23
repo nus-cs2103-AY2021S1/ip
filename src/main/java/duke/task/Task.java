@@ -46,9 +46,9 @@ public abstract class Task {
     }
 
     /**
-     * Checks whether the task happen on a designated date.
+     * Checks whether the task happens on a designated date.
      * @param date the given date
-     * @return true if the task happen on the given date, ToDo doesn't happen on any date
+     * @return true if the task happens on the given date, ToDo does not happen on any date
      */
     public boolean happenOnDate(LocalDate date) {
         return false;
@@ -59,9 +59,9 @@ public abstract class Task {
     }
 
     /**
-     * Checks whether the task happen before a designated date.
+     * Checks whether the task happens before a designated date.
      * @param date the given date
-     * @return true if the task happen before the given date, ToDo doesn't happen on any date
+     * @return true if the task happens before the given date, ToDo does not happen on any date
      */
     public boolean happenBeforeDate(LocalDate date) {
         return false;
@@ -71,6 +71,11 @@ public abstract class Task {
         return false;
     }
 
+    /**
+     * Checks whether the task happens after a designated date.
+     * @param date the given date
+     * @return true if the task happens after the given date, ToDo does not happen on any date
+     */
     public boolean happenAfterDate(LocalDate date) {
         return false;
     }
