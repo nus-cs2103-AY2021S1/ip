@@ -38,6 +38,6 @@ public class Event extends Task {
 
     @Override
     public String toSaveString() {
-        return String.format("T/%s/%s", super.toSaveString(), datetime);
+        return String.format("E/%s/%s", super.toSaveString(), datetime.format(formatter));
     }
 }

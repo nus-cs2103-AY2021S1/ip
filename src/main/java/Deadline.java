@@ -38,6 +38,6 @@ public class Deadline extends Task {
 
     @Override
     public String toSaveString() {
-        return String.format("D/%s/%s", super.toSaveString(), datetimeDue);
+        return String.format("D/%s/%s", super.toSaveString(), datetimeDue.format(formatter));
     }
 }
