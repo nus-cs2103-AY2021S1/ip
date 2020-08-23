@@ -16,8 +16,8 @@ public class TaskList {
         todo = new ArrayList<>();
         while (reader.hasNext()) {
             String currentTask = reader.nextLine();
-            String[] splits = currentTask.split(" / ");
-            boolean done = Integer.parseInt(splits[1]) == 1 ? true : false;
+            String[] splits = currentTask.split(" \\| ");
+            boolean done = Integer.parseInt(splits[1]) == 1;
             String type = splits[0];
             String task = splits[2];
             switch (type) {
@@ -46,11 +46,10 @@ public class TaskList {
                     break;
             }
         }
-        System.out.println("your current tasks are: ");
         list();
     }
 
-    public void delete (String line) throws DukeException {
+    public void delete (String line) throws DukeException, IOException {
         String[] splits = line.split("delete ");
         if(splits.length > 1) {
             int taskNumber =  Integer.parseInt(splits[1]);
@@ -63,6 +62,21 @@ public class TaskList {
                         + UNDERSCORE
                 );
                 todo.remove(taskNumber - 1);
+                FileWriter fw = new FileWriter(FILE_PATH);
+                for (int i = 0; i < todo.size(); i++){
+                    Task currentTask = todo.get(i);
+                    String done = currentTask.isDone() ? "1" : "0";
+                    if (currentTask instanceof Event) {
+                        fw.write("E | " + done + " | " + currentTask.getTaskName() + " | "
+                                + ((Event) currentTask).getDate() + "\n");
+                    } else if (currentTask instanceof Deadline){
+                        fw.write("D | " + done + " | " + currentTask.getTaskName() + " | "
+                                + ((Deadline) currentTask).getDate() + "\n");
+                    } else if (currentTask instanceof Todo){
+                        fw.write("T | " + done + " | " + currentTask.getTaskName() + "\n");
+                    }
+                }
+                fw.close();
             }
         } else {
             throw new DukeException("Please key in the task number to be marked done");
@@ -83,7 +97,7 @@ public class TaskList {
     }
 
     private void addEvent (String line) throws DukeInvalidDayException, DukeInvalidTaskException, IOException {
-        String[] splits = line.split("event |/at");
+        String[] splits = line.split("event |/at ");
         if (splits.length > 2){
             Event task = new Event(splits[1], splits[2]);
             todo.add(task);
@@ -91,7 +105,7 @@ public class TaskList {
                     + "Now you have " + todo.size() + " tasks in the list \n" + UNDERSCORE
             );
             FileWriter fw = new FileWriter(FILE_PATH, true);
-            String textToAppend = "\nE / 0 / " + splits[1] + " / " + splits[2];
+            String textToAppend = "\nE | 0 | " + splits[1] + " | " + splits[2];
             fw.write(textToAppend);
             fw.close();
         } else if (splits.length > 1){
@@ -110,7 +124,7 @@ public class TaskList {
                     + "Now you have " + todo.size() + " tasks in the list \n" + UNDERSCORE
             );
             FileWriter fw = new FileWriter(FILE_PATH, true);
-            String textToAppend = "\nD / 0 / " + splits[1] + " / " + splits[2];
+            String textToAppend = "\nD | 0 | " + splits[1] + " | " + splits[2];
             fw.write(textToAppend);
             fw.close();
         } else if (splits.length > 1) {
@@ -129,7 +143,7 @@ public class TaskList {
                     + "Now you have " + todo.size() + " tasks in the list \n" + UNDERSCORE
             );
             FileWriter fw = new FileWriter(FILE_PATH, true);
-            String textToAppend = "\nT / 0 / " + splits[1];
+            String textToAppend = "\nT | 0 | " + splits[1];
             fw.write(textToAppend);
             fw.close();
         } else {
