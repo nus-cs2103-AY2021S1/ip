@@ -25,6 +25,10 @@ public abstract class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+    /**
+     * Marks this task as done.
+     * @throws InvalidCommandException if the task is already done
+     */
     public void markAsDone() throws InvalidCommandException {
         if (isDone) {
             throw new InvalidCommandException("The task " + this + " has already been done.");
