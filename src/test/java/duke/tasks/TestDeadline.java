@@ -36,7 +36,7 @@ public class TestDeadline {
     }
 
     @Test
-    public void testToFileString_markedAsDone() {
+    public void toFileString_markedAsDone() {
         DukeDateTime by = new DukeDateTime(LocalDateTime.parse("2020-08-23T13:00"), true);
         String description = "description";
         Deadline deadline = new Deadline(description, by);
@@ -46,7 +46,7 @@ public class TestDeadline {
     }
 
     @Test
-    public void testToString_markedAsDone() {
+    public void toString_markedAsDone() {
         DukeDateTime by = new DukeDateTime(LocalDateTime.parse("2020-08-23T13:00"), true);
         String description = "description";
         Deadline deadline = new Deadline(description, by);

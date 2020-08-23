@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TestDukeDateTime {
 
     @Test
-    public void testToString_dateWithTime_success() {
+    public void toString_dateWithTime_success() {
         LocalDateTime dateTime = LocalDateTime.parse("2020-08-23T13:00");
         DukeDateTime dukeDateTime = new DukeDateTime(dateTime, true);
         String expected = "23 Aug 2020 1:00 PM";
@@ -18,7 +18,7 @@ public class TestDukeDateTime {
     }
 
     @Test
-    public void testToString_dateWithoutTime_success() {
+    public void toString_dateWithoutTime_success() {
         LocalDateTime dateTime = LocalDate.parse("2020-08-23").atStartOfDay();
         DukeDateTime dukeDateTime = new DukeDateTime(dateTime, false);
         String expected = "23 Aug 2020";
@@ -26,7 +26,7 @@ public class TestDukeDateTime {
     }
 
     @Test
-    public void testIsSameDate_sameDates_success() {
+    public void isSameDate_sameDates_success() {
         LocalDateTime dateTime1 = LocalDate.parse("2020-08-23").atStartOfDay();
         LocalDateTime dateTime2 = LocalDateTime.parse("2020-08-23T13:00");
         DukeDateTime first = new DukeDateTime(dateTime1, false);
@@ -35,7 +35,7 @@ public class TestDukeDateTime {
     }
 
     @Test
-    public void testIsSameDate_differentDates_success() {
+    public void isSameDate_differentDates_success() {
         LocalDateTime dateTime1 = LocalDate.parse("2020-09-21").atStartOfDay();
         LocalDateTime dateTime2 = LocalDateTime.parse("2020-08-23T13:00");
         DukeDateTime first = new DukeDateTime(dateTime1, false);

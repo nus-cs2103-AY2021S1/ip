@@ -36,7 +36,7 @@ public class TestEvent {
     }
 
     @Test
-    public void testToFileString_markedAsDone() {
+    public void toFileString_markedAsDone() {
         DukeDateTime at = new DukeDateTime(LocalDateTime.parse("2020-08-23T13:00"), true);
         String description = "description";
         Event event = new Event(description, at);
@@ -46,7 +46,7 @@ public class TestEvent {
     }
 
     @Test
-    public void testToString_markedAsDone() {
+    public void toString_markedAsDone() {
         DukeDateTime at = new DukeDateTime(LocalDateTime.parse("2020-08-23T13:00"), true);
         String description = "description";
         Event event = new Event(description, at);

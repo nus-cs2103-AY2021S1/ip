@@ -73,7 +73,7 @@ public class UiTest {
     }
 
     @Test
-    public void testReadCommand_nonEmptyInput_returnInput() {
+    public void readCommand_nonEmptyInput_returnInput() {
         String input = "test command";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Ui ui = new Ui();
@@ -81,7 +81,7 @@ public class UiTest {
     }
 
     @Test
-    public void testReadCommand_emptyInput_returnBye() {
+    public void readCommand_emptyInput_returnBye() {
         String input = "";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Ui ui = new Ui();

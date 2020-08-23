@@ -23,7 +23,7 @@ public class TestTodo {
     }
 
     @Test
-    public void testToFileString_markedAsDone() {
+    public void toFileString_markedAsDone() {
         String description = "description";
         Todo todo = new Todo(description);
         todo.markAsDone();
@@ -32,7 +32,7 @@ public class TestTodo {
     }
 
     @Test
-    public void testToString_markedAsDone() {
+    public void toString_markedAsDone() {
         String description = "description";
         Todo todo = new Todo(description);
         todo.markAsDone();
