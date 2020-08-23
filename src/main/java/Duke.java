@@ -2,40 +2,25 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static final ArrayList<Task> tasks = new ArrayList<>();
     private static String filePath = "/data/duke.txt";
     private static Ui ui;
     private static Storage storage;
+    private static TaskList tasks;
 
     public static void readFile() {
         String folderPath = "/data";
         storage = new Storage(filePath, folderPath);
         try {
             ArrayList<String> taskList = storage.load();
-            for (String taskString : taskList) {
-                String[] taskLine = taskString.split("~");
-                Task task = null;
-                if (taskLine[0].equals("T")) {
-                    task = new ToDo(taskLine[2]);
-
-                } else if (taskLine[0].equals("D")) {
-                    task = new Deadline(taskLine[2], taskLine[3]);
-                } else if (taskLine[0].equals("E")) {
-                    task = new Event(taskLine[2], taskLine[3]);
-                }
-                if (taskLine[1].equals("1")) {
-                    assert task != null;
-                    task.markAsDone();
-                }
-                tasks.add(task);
-            }
+            tasks = new TaskList(taskList);
         } catch (DukeException ex) {
             ui.showLoadingError();
+            tasks = new TaskList();
         }
     }
 
     public static void writeFile() {
-        storage.save(tasks);
+        storage.save(tasks.tasks);
     }
 
     private static void add(String task) throws DukeException{
@@ -44,46 +29,13 @@ public class Duke {
                 + "\t %s\n"
                 + "\t Now you have %d tasks in the list.\n"
                 + "\t____________________________________________________________\n";
-        if (task.startsWith("todo")) {
-            if (task.length() <= 5) {
-                throw new DukeException("The description of a todo cannot be empty.");
-            }
-            tasks.add(new ToDo(task.substring(5)));
-        } else if (task.startsWith("deadline")) {
-            if (task.length() <= 9) {
-                throw new DukeException("The description of a deadline cannot be empty.");
-            }
-            String[] taskArr = task.substring(9).split(" /by ");
-            try {
-                tasks.add(new Deadline(taskArr[0], taskArr[1]));
-            } catch (IndexOutOfBoundsException ex) {
-                throw new DukeException("Invalid description of a deadline.");
-            }
-        } else if (task.startsWith("event")) {
-            if (task.length() <= 6) {
-                throw new DukeException("The description of an event cannot be empty.");
-            }
-            String[] taskArr = task.substring(6).split(" /at ");
-            try {
-                tasks.add(new Event(taskArr[0], taskArr[1]));
-            } catch (IndexOutOfBoundsException ex) {
-                throw new DukeException("Invalid description of an event.");
-            }
-        } else {
-            throw new DukeException("I'm sorry, but I don't know what that means :-(");
-        }
-        System.out.printf((echoizer) + "%n", tasks.get(tasks.size() - 1), tasks.size());
+        Task t = tasks.addTask(task);
+        System.out.printf((echoizer) + "%n", t, tasks.size());
     }
 
     private static void list() {
-        ui.showLine();
-        System.out.print("\t Here are the tasks in your list:\n");
-        Task t;
-        for (int i = 0; i < tasks.size(); i++) {
-            t = tasks.get(i);
-            System.out.printf("\t %d.%s%n", i + 1, t);
-        }
-        ui.showLine();
+        String tasksString = tasks.listTasks();
+        ui.showAction("\t Here are the tasks in your list:\n" + tasksString);
     }
 
     private static void exit() {
@@ -94,7 +46,7 @@ public class Duke {
 
     private static void done(int i) throws DukeException {
         try {
-            Task t = tasks.get(i - 1);
+            Task t = tasks.tasks.get(i - 1);
             t.markAsDone();
             ui.showAction(String.format("\t Nice! I've marked this task as done:\n"
                     + "\t   %s\n", t));
@@ -105,8 +57,8 @@ public class Duke {
 
     private static void delete(int i) throws DukeException {
         try {
-            Task t = tasks.get(i - 1);
-            tasks.remove(i - 1);
+            Task t = tasks.tasks.get(i - 1);
+            tasks.tasks.remove(i - 1);
             ui.showAction(String.format("\t Noted. I've removed this task:\n"
                     + "\t   %s\n"
                     + "\t Now you have %d tasks in the list.\n", t, tasks.size()));

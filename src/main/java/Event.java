@@ -6,7 +6,7 @@ public class Event extends Task {
 
     protected String at;
 
-    public Event(String description, String at) {
+    public Event(String description, String at) throws DukeException {
         super(description);
         LocalDate dateStart = null;
         LocalDate dateEnd = null;
@@ -19,7 +19,7 @@ public class Event extends Task {
                 dateStart = LocalDate.parse(startEnd[0], DateTimeFormatter.ofPattern("MMM d yyyy"));
                 dateEnd = LocalDate.parse(startEnd[1], DateTimeFormatter.ofPattern("MMM d yyyy"));
             } catch (DateTimeParseException exc) {
-                System.out.println(exc.getMessage());
+                throw new DukeException("Event timing details cannot be parsed");
             }
         }
         this.at = dateStart.format(DateTimeFormatter.ofPattern("MMM d yyyy"))

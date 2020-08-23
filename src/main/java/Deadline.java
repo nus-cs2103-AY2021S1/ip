@@ -6,7 +6,7 @@ public class Deadline extends Task {
 
     protected String by;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeException {
         super(description);
         LocalDate dateBy = null;
         try {
@@ -15,7 +15,7 @@ public class Deadline extends Task {
             try {
                 dateBy = LocalDate.parse(by, DateTimeFormatter.ofPattern("MMM d yyyy"));
             } catch (DateTimeParseException exc) {
-                System.out.println(exc.getMessage());
+                throw new DukeException("Deadline timing cannot be parsed");
             }
         }
         this.by = dateBy.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
