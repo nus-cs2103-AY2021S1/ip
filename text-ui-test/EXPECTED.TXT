@@ -1,87 +1,163 @@
 Hello! I'm Duke
 What can i do for you?
+______________________________
 The description of a todo cannot be empty!
+______________________________
+______________________________
 Both time description and description of a deadline must be filled!
+______________________________
+______________________________
 Both time description and description of a event must be filled!
+______________________________
+______________________________
 Both time description and description of a deadline must be filled!
+______________________________
+______________________________
 Please input date time format in DD-MM-YYYY HHHH format!
 Eg: 2-12-2019 1800 OR 02-12-2019 1800
+______________________________
+______________________________
 Please input date time format in DD-MM-YYYY HHHH format!
 Eg: 2-12-2019 1800 OR 02-12-2019 1800
+______________________________
+______________________________
 Please input date time format in DD-MM-YYYY HHHH format!
 Eg: 2-12-2019 1800 OR 02-12-2019 1800
+______________________________
+______________________________
 Please input date time format in DD-MM-YYYY HHHH format!
 Eg: 2-12-2019 1800 OR 02-12-2019 1800
+______________________________
+______________________________
 Both time description and description of a event must be filled!
+______________________________
+______________________________
 Please input date time format in DD-MM-YYYY HHHH format!
 Eg: 2-12-2019 1800 OR 02-12-2019 1800
+______________________________
+______________________________
 Please input date time format in DD-MM-YYYY HHHH format!
 Eg: 2-12-2019 1800 OR 02-12-2019 1800
+______________________________
+______________________________
 Please input date time format in DD-MM-YYYY HHHH format!
 Eg: 2-12-2019 1800 OR 02-12-2019 1800
+______________________________
+______________________________
 Please input date time format in DD-MM-YYYY HHHH format!
 Eg: 2-12-2019 1800 OR 02-12-2019 1800
+______________________________
+______________________________
 Got it. I've added this task:
 [T][?] read book 
 Now you have 1 tasks in the list.
+______________________________
+______________________________
 Got it. I've added this task:
 [D][?] return book (at: 22 AUG 2020, SAT @ 17:00)
 Now you have 2 tasks in the list.
+______________________________
+______________________________
 Got it. I've added this task:
 [E][?] project meeting (at: 22 AUG 2020, SAT @ 19:00)
 Now you have 3 tasks in the list.
+______________________________
+______________________________
 Please input date time format in DD-MM-YYYY HHHH format!
 Eg: 2-12-2019 1800 OR 02-12-2019 1800
+______________________________
+______________________________
 Please input date time format in DD-MM-YYYY HHHH format!
 Eg: 2-12-2019 1800 OR 02-12-2019 1800
+______________________________
+______________________________
 Got it. I've added this task:
 [T][?] join sports club 
 Now you have 4 tasks in the list.
+______________________________
+______________________________
 Got it. I've added this task:
 [T][?] borrow book 
 Now you have 5 tasks in the list.
+______________________________
+______________________________
 Please input number after done! Example of input would be 'done 2' checks item number 2 from list
+______________________________
+______________________________
 Too many arguements! Example of input would be 'done 2' which checks item number 2 from list
+______________________________
+______________________________
 Item number 213123 does not exist in list!
+______________________________
+______________________________
 Nice! I've marked this task as done:
 [T][?] read book 
+______________________________
+______________________________
 Nice! I've marked this task as done:
 [T][?] join sports club 
+______________________________
+______________________________
 Here are the tasks in your list:
 1. [T][?] read book 
 2. [D][?] return book (at: 22 AUG 2020, SAT @ 17:00)
 3. [E][?] project meeting (at: 22 AUG 2020, SAT @ 19:00)
 4. [T][?] join sports club 
 5. [T][?] borrow book 
+______________________________
+______________________________
 Item does not exist in list!
+______________________________
+______________________________
 Item does not exist in list!
+______________________________
+______________________________
 Noted. I've removed this task:
 [T][?] read book 
 Now you have 4 tasks in the list.
+______________________________
+______________________________
 Here are the tasks in your list:
 1. [D][?] return book (at: 22 AUG 2020, SAT @ 17:00)
 2. [E][?] project meeting (at: 22 AUG 2020, SAT @ 19:00)
 3. [T][?] join sports club 
 4. [T][?] borrow book 
+______________________________
+______________________________
 Noted. I've removed this task:
 [T][?] join sports club 
 Now you have 3 tasks in the list.
+______________________________
+______________________________
 Here are the tasks in your list:
 1. [D][?] return book (at: 22 AUG 2020, SAT @ 17:00)
 2. [E][?] project meeting (at: 22 AUG 2020, SAT @ 19:00)
 3. [T][?] borrow book 
+______________________________
+______________________________
 Item does not exist in list!
+______________________________
+______________________________
 Here are the tasks in your list:
 1. [D][?] return book (at: 22 AUG 2020, SAT @ 17:00)
 2. [E][?] project meeting (at: 22 AUG 2020, SAT @ 19:00)
 3. [T][?] borrow book 
+______________________________
+______________________________
 Noted. I've removed this task:
 [D][?] return book (at: 22 AUG 2020, SAT @ 17:00)
 Now you have 2 tasks in the list.
+______________________________
+______________________________
 Noted. I've removed this task:
 [E][?] project meeting (at: 22 AUG 2020, SAT @ 19:00)
 Now you have 1 tasks in the list.
+______________________________
+______________________________
 Noted. I've removed this task:
 [T][?] borrow book 
 Now you have 0 tasks in the list.
+______________________________
+______________________________
 Bye. Hope to see you again soon!
+______________________________
