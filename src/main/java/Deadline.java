@@ -8,18 +8,35 @@ public class Deadline extends Task {
     protected LocalTime time;
     protected boolean hasTime;
 
-    Deadline(String description, int id, String dueDateTime) {
+    Deadline(String description, int id, String dueDateTime, boolean stored) {
         super(description, id);
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d/M/yyyy");
-        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HHmm");
-        String[] dateTime = dueDateTime.split(" ");
-        this.connector = dateTime[0];
-        this.date = LocalDate.parse(dateTime[1], dateFormat);
-        if (dateTime.length == 3) { // if user inputs time after date
-            this.time = LocalTime.parse(dateTime[2], timeFormat);
-            this.hasTime = true;
+        if (stored) { // stored data
+            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d/MMM/yyyy");
+            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("h:mma");
+            String[] dateTime = dueDateTime.split(" ");
+            this.connector = dateTime[0];
+            if (dateTime.length > 4) { // if user inputs time after date
+                String date = dateTime[1] + "/" + dateTime[2] + "/" + dateTime[3].substring(0, dateTime[3].length() - 1);
+                this.date = LocalDate.parse(date, dateFormat);
+                this.time = LocalTime.parse(dateTime[4], timeFormat);
+                this.hasTime = true;
+            } else {
+                String date = dateTime[1] + "/" + dateTime[2] + "/" + dateTime[3];
+                this.date = LocalDate.parse(date, dateFormat);
+                this.hasTime = false;
+            }
         } else {
-            this.hasTime = false;
+            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d/M/yyyy");
+            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HHmm");
+            String[] dateTime = dueDateTime.split(" ");
+            this.connector = dateTime[0];
+            this.date = LocalDate.parse(dateTime[1], dateFormat);
+            if (dateTime.length == 3) { // if user inputs time after date
+                this.time = LocalTime.parse(dateTime[2], timeFormat);
+                this.hasTime = true;
+            } else {
+                this.hasTime = false;
+            }
         }
     }
 

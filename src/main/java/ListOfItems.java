@@ -32,7 +32,7 @@ public class ListOfItems {
             String[] info = input.split("[(]");
             String description = info[0].substring(7);
             String dueDateTime = info[1].substring(0, info[1].length() - 1);
-            Deadline deadline = new Deadline(description, index + 1, dueDateTime);
+            Deadline deadline = new Deadline(description, index + 1, dueDateTime, true);
             if (isDone) {
                 deadline.markedDone();
             }
@@ -42,7 +42,7 @@ public class ListOfItems {
             String[] info = input.split("[(]");
             String description = info[0].substring(7);
             String duration = info[1].substring(0, info[1].length() - 1);
-            Event event = new Event(description, index + 1, duration);
+            Event event = new Event(description, index + 1, duration, true);
             if (isDone) {
                 event.markedDone();
             }
@@ -126,7 +126,7 @@ public class ListOfItems {
                 String[] info = input.split("/", 2);
                 String description = info[0].substring(9);
                 String dueDateTime = info[1];
-                Deadline deadline = new Deadline(description, index + 1, dueDateTime);
+                Deadline deadline = new Deadline(description, index + 1, dueDateTime, false);
 
                 System.out.println(divider + "\n" + addedMessage);
                 list.add(index, deadline);
@@ -147,7 +147,7 @@ public class ListOfItems {
                 String[] info = input.split("/", 2);
                 String description = info[0].substring(6);
                 String duration = info[1];
-                Event event = new Event(description, index + 1, duration);
+                Event event = new Event(description, index + 1, duration, false);
 
                 System.out.println(divider + "\n" + addedMessage);
                 list.add(index, event);
