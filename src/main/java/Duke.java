@@ -1,5 +1,4 @@
-import javax.swing.plaf.DesktopIconUI;
-import java.lang.reflect.Array;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -93,7 +92,7 @@ public class Duke {
         DONE, LIST, TODO, EVENT, DEADLINE
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, FileNotFoundException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -107,7 +106,9 @@ public class Duke {
                 + "____________________________________________________________";
         System.out.println(welcomeMessage);
 
-        ArrayList<Task> ls = new ArrayList<>(); // Create an empty ArrayList of tasks
+        Storage storage = new Storage();
+
+        ArrayList<Task> ls = storage.readFile("data.txt");
 
         while (true) {
             String input = sc.nextLine();
@@ -115,6 +116,7 @@ public class Duke {
             try {
                 if (input.equals("bye")) {
                     System.out.println("Bye. Hope to see you again soon!");
+                    storage.writeToFile("data.txt", ls);
                     break;
                 } else if (input.length() > 5 && input.substring(0,6).equals("delete")) {
                     deleteTask(input, ls);
