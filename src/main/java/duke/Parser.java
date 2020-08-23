@@ -17,7 +17,7 @@ import main.java.duke.exception.DukeTaskNotFoundException;
  */
 public class Parser {
 
-    enum Input {
+    private enum Input {
         LIST, BYE, DONE, TODO, DEADLINE, EVENT, DELETE, UNDO
     }
 
@@ -31,7 +31,7 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws DukeInputNotRecognizedException, DukeTaskNotFoundException {
         String[] command = fullCommand.split(" ", 2);
-        if (inputExist(command[0])) {
+        if (hasInputs(command[0])) {
             switch (Input.valueOf(command[0].toUpperCase())) {
             case LIST:
                 return new ListCommand();
@@ -56,7 +56,7 @@ public class Parser {
         return null;
     }
 
-    private static boolean inputExist(String input) {
+    private static boolean hasInputs(String input) {
         for (Input i : Input.values()) {
             if (input.toUpperCase().equals(i.toString())) {
                 return true;
@@ -76,8 +76,8 @@ public class Parser {
         if (commandDetails.length > 1 && Character.isDigit(commandDetails[1].charAt(0))) {
             return new DoneCommand(commandDetails);
         } else {
-            throw new DukeTaskNotFoundException(" ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n " +
-                    "PLEASE TRY AGAIN ");
+            throw new DukeTaskNotFoundException(" ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n "
+                    + "PLEASE TRY AGAIN ");
         }
     }
 
@@ -147,8 +147,8 @@ public class Parser {
         if (commandDetails.length > 1 && Character.isDigit(commandDetails[1].charAt(0))) {
             return new DeleteCommand(commandDetails);
         } else {
-            throw new DukeTaskNotFoundException(" ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n " +
-                    "PLEASE TRY AGAIN ");
+            throw new DukeTaskNotFoundException(" ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n "
+                    + "PLEASE TRY AGAIN ");
         }
     }
 
@@ -163,8 +163,8 @@ public class Parser {
         if (commandDetails.length > 1 && Character.isDigit(commandDetails[1].charAt(0))) {
             return new UndoCommand(commandDetails);
         } else {
-            throw new DukeTaskNotFoundException(" ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n " +
-                    "PLEASE TRY AGAIN ");
+            throw new DukeTaskNotFoundException(" ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n "
+                    + "PLEASE TRY AGAIN ");
         }
     }
 

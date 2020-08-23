@@ -91,24 +91,23 @@ public class Storage {
      */
     public void save(ArrayList<Task> taskList) {
         try {
-            String content = "";
+            StringBuilder content = new StringBuilder();
             FileWriter fw = new FileWriter(file.getPath());
-            for (int i = 0; i < taskList.size(); i++) {
-                Task task = taskList.get(i);
+            for (Task task : taskList) {
                 if (task instanceof ToDo) {
-                    String taskDetails = String.format("T | %d | %s", task.isTaskDone() ? 1 : 0, task.getDescription());
-                    content += taskDetails + "\n";
+                    String taskDetails = String.format("T | %d | %s", task.checkDone() ? 1 : 0, task.getDescription());
+                    content.append(taskDetails).append("\n");
                 } else if (task instanceof Deadline) {
                     String taskDetails = String.format("T | %d | %s |%s",
-                            task.isTaskDone() ? 1 : 0, task.getDescription(), ((Deadline) task).getDate());
-                    content += taskDetails + "\n";
+                            task.checkDone() ? 1 : 0, task.getDescription(), ((Deadline) task).getDate());
+                    content.append(taskDetails).append("\n");
                 } else {
                     String taskDetails = String.format("T | %d | %s |%s",
-                            task.isTaskDone() ? 1 : 0, task.getDescription(), ((Event) task).getAt());
-                    content += taskDetails + "\n";
+                            task.checkDone() ? 1 : 0, task.getDescription(), ((Event) task).getAt());
+                    content.append(taskDetails).append("\n");
                 }
             }
-            fw.write(content);
+            fw.write(content.toString());
             fw.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
