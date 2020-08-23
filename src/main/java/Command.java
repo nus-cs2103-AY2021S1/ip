@@ -102,12 +102,15 @@ public class Command {
         String[] result = new String[2];
         int dateIndex = -1;
         for (int i = 0; i < description.size(); i++) {
-            if (description.get(i).charAt(0) == '/') {
+            if (description.get(i).equals("/at") || description.get(i).equals("/by")) {
                 dateIndex = i;
             }
         }
         if (dateIndex == -1) {
             result[0] = String.join(" ", description.subList(0, description.size()));
+            result[1] = "No date set";
+        } else if (dateIndex == description.size() - 1) {
+            result[0] = String.join(" ", description.subList(0, description.size() - 1));
             result[1] = "No date set";
         } else {
             result[0] = String.join(" ", description.subList(0, dateIndex));

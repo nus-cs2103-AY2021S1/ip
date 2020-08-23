@@ -13,7 +13,8 @@ public class Duke {
                         "\n____________________________________________________________");
 
         Scanner scanner = new Scanner(System.in);
-        DukeList list = new DukeList();
+        FileHandler fileHandler = new FileHandler();
+        DukeList list = fileHandler.getList();
         Command system = new Command(list);
 
         boolean running = true;
@@ -21,6 +22,8 @@ public class Duke {
             String command = scanner.nextLine();
             if (command.equals("bye")) {
                 running = false;
+
+                fileHandler.updateFile(list);
                 System.out.println(
                         "____________________________________________________________\n" +
                                 "Bye! Hope to see you again soon!" +
