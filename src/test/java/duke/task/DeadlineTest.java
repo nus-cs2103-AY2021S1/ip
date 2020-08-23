@@ -19,7 +19,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void happenOnDateTest() {
+    public void isHappeningOn_date_isHappeningOnDate() {
         try {
             Deadline d = new Deadline("Assignment 1", "2020-09-01");
             assertTrue(d.isHappeningOn(LocalDate.parse("2020-09-01")));
@@ -30,7 +30,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void happenTodayTest() {
+    public void isHappeningToday__isHappeningToday() {
         try {
             LocalDate today = LocalDate.now();
             String td = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -48,7 +48,7 @@ public class DeadlineTest {
 
 
     @Test
-    public void happenBeforeDateTest() {
+    public void hasHappenedBefore_date_hasHappenedBeforeDate() {
         try {
             Deadline d = new Deadline("Assignment 1", "2020-09-01");
             assertTrue(d.hasHappenedBefore(LocalDate.parse("2020-09-05")));
@@ -60,7 +60,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void happenBeforeTodayTest() {
+    public void hasHappenedBeforeToday__hasHappenedBeforeToday() {
         try {
             LocalDate today = LocalDate.now();
             String td = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -78,7 +78,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void happenAfterDateTest() {
+    public void isHappeningAfter_date_isHappeningAfterDate() {
         try {
             Deadline d = new Deadline("Assignment 1", "2020-09-01");
             assertFalse(d.isHappeningAfter(LocalDate.parse("2020-09-05")));
@@ -90,7 +90,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void happenAfterTodayTest() {
+    public void isHappeningAfterToday__isHappeningAfterToday() {
         try {
             LocalDate today = LocalDate.now();
             String td = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -108,7 +108,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void happenBetweenTest() {
+    public void isHappeningBetween_dates_isHappeningBetweenDates() {
         try {
             Deadline d = new Deadline("Assignment 1", "2020-09-03");
             assertFalse(d.isHappeningBetween(LocalDate.parse("2020-08-01"), LocalDate.parse("2020-09-01")));
@@ -121,7 +121,7 @@ public class DeadlineTest {
 
 
     @Test
-    public void happenInTest() {
+    public void willHappenInDays_numberOfDays_willHappenInNDays() {
         try {
             LocalDate newDate = LocalDate.now().plusDays(2);
             String newStr = newDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -135,7 +135,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void isOverdueTest() {
+    public void isOverdue__isOverdue() {
         try {
             Deadline d = new Deadline("Assignment 1", "2020-08-02");
             assertTrue(d.isOverdue());
@@ -148,7 +148,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void outputTest() {
+    public void output__toWriteStorage() {
         try {
             Deadline d = new Deadline("Assignment 1", "2020-08-02");
             assertEquals("D | 0 | Assignment 1 | By: 2020-08-02\n", d.output());
@@ -161,7 +161,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void toStringTest() {
+    public void toString__systemOutput() {
         try {
             Deadline d = new Deadline("Assignment 1", "2020-08-02");
             assertEquals("[D][\u2718] Assignment 1 (by: Aug 2 2020) This is overdue! The deadline has passed!!!", d.toString());
