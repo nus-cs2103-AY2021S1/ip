@@ -44,25 +44,25 @@ public class HappenCommand extends Command {
             } else if (detail.length == 3 && detail[0].equals("in") && detail[2].equals("days")) {
                 int n = Integer.parseInt(detail[1]);
                 if (n <= 0) {
-                    throw new InvalidCommandException("Please input a positive integer for happen in command");
+                    throw new InvalidCommandException("Please input a positive integer for happen in command.");
                 }
                 ui.printList(list, t -> t.happenIn(n), "happening in " + n + " days");
             } else if (detail[0].equals("between") && detail.length == 3) {
                 LocalDate date1 = LocalDate.parse(detail[1], parse);
                 LocalDate date2 = LocalDate.parse(detail[2], parse);
                 if (!date1.isBefore(date2)) {
-                    throw new InvalidCommandException("Latter date is before former date for happen between");
+                    throw new InvalidCommandException("Latter date is before former date for happen between.");
                 }
                 ui.printList(list, t -> t.happenBetween(date1, date2),
                         "happening bewteen " + date1.format(output) + " and " + date2.format(output) + " ");
             } else {
-                throw new InvalidCommandException("Invalid happen command input");
+                throw new InvalidCommandException("Invalid happen command input.");
             }
             return "";
         } catch (InvalidCommandException e) {
             throw e;
         } catch (Exception e) {
-            throw new InvalidCommandException("Invalid date format. Please use yyyy-MM-dd");
+            throw new InvalidCommandException("Invalid date format. Please use yyyy-MM-dd.");
         }
     }
 
