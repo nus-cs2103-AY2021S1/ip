@@ -22,7 +22,7 @@ public class Parser {
 
             String[] temp = input.split(" ");
             if (temp.length == 1) {
-                throw new DoneException("Please input number after done! Example of input would be 'done 2' checks item number 2 from list");
+                throw new DoneException("Please input number after done! Example of input would be 'done 2' which checks item number 2 from list");
             }
             if (temp.length > 2) {
                 throw new DoneException("Too many arguements! Example of input would be 'done 2' which checks item number 2 from list");
@@ -159,6 +159,23 @@ public class Parser {
             int index = Integer.parseInt(temp[1]) - 1;
 
             return new DeleteCommand(input, index);
+        } else if (input.startsWith("find")) {
+            // when user inputs find
+            String[] temp = input.split(" ");
+            if (temp.length == 1) {
+                throw new FindException("Please input keyword after done! "
+                        + "Example of input would be 'find book' which returns tasks with book in it");
+            }
+            if (temp.length > 2) {
+                throw new FindException("Too many arguements! "
+                        + "Example of input would be 'find book' which returns tasks with book in it");
+            }
+
+            // command == find
+            String command = temp[0];
+            String keyword = temp[1];
+
+            return new FindCommand(keyword);
         } else {
             // invalid input
             return new InvalidCommand(input);
