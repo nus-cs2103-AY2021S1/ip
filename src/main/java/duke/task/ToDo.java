@@ -19,6 +19,11 @@ public class ToDo extends Task {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Checks whether the given object equals this ToDo task.
+     * @param obj the given object to compare
+     * @return true if the object is a ToDo and the description equals
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
