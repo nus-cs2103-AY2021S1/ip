@@ -7,6 +7,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class HappenCommand extends Command {
+    /**
+     * Creates a command for filtering tasks on when it happens.
+     * @param input The input command classified as HappenCommand, starting with "happen ".
+     */
     public HappenCommand(String input) {
         super(input);
     }
