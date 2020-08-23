@@ -62,7 +62,7 @@ public class TaskList {
      * @return message to user
      */
     public String filteredTaskList(LocalDate deadline) {
-        String res = "Here are the tasks in your list:\n    ";
+        String res = "Here are the matching tasks in your list:\n    ";
         for(int i = 0;i < taskList.size();i++) {
             Task task = taskList.get(i);
             if(task instanceof Deadline) {
@@ -76,6 +76,26 @@ public class TaskList {
                     if (i < taskList.size() - 1) res += "\n    ";
                 }
             }
+        }
+        return res;
+    }
+    public String findTasks(String[] tokens) {
+        String keyword = "";
+        int numMatch = 0;
+        String res = "Here are the matching tasks in your list:\n    ";
+        for(int i = 1;i < tokens.length;i++) {
+            keyword += tokens[i];
+        }
+        for(int i = 0;i < taskList.size();i++) {
+            Task task = taskList.get(i);
+            if(task.getContent().contains(keyword)) {
+                numMatch++;
+                res += ((i + 1) + "." + task.returnStringForm());
+                if (i < taskList.size() - 1) res += "\n    ";
+            }
+        }
+        if(numMatch == 0) {
+            return "Nothing matches. Watchout for typos\n";
         }
         return res;
     }

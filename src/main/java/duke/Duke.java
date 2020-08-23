@@ -69,7 +69,10 @@ public class Duke {
                 throw new DukeException("Wrong format\n    Your date and time(optional) should be in this format:\n      yyyy-mm-dd HHmm\n    e.g: 2019-10-15 1800 or 2019-10-15");
             }
 
-        } else if(commandType == Commands.BYE || commandType == Commands.HELP) {
+        } else if(commandType == Commands.FIND) {
+            return tasks.findTasks(tokens);
+        }
+        else if(commandType == Commands.BYE || commandType == Commands.HELP) {
             throw new DukeException("Wrong format of command " + "'" + commandType.getAction() + "'");
         }
 
