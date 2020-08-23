@@ -1,16 +1,45 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
-    public enum Verb {
-    }
-    public static ArrayList<Task> tasks = new ArrayList<>();
 
-    public static void greeting() {
-        String greeting = "Hello! I'm Duke\nWhat can I do for you?";
-        System.out.println(greeting);
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (FileNotFoundException e) {
+            ui.showError(e.getMessage());
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
     }
 
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
+    }
+    
     public static void printAllTask() {
         int numTask = 0;
         System.out.println("Here are the tasks in your list:");
@@ -22,7 +51,7 @@ public class Duke {
 
     public static void printAddedTask(Task task) {
         System.out.println("Got it. I've added this task:\n" + task +
-                "\nNow you have " + String.valueOf(tasks.size())  + " tasks in the list.");
+                "\nNow you have " + String.valueOf(tasks.size()) + " tasks in the list.");
     }
 
     public static String[] removeFirst(String[] arr) {
@@ -35,7 +64,7 @@ public class Duke {
 
     public static String[] removeAfterWord(String[] arr, String word) {
         String[] temp = new String[arr.length];
-        for(int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < arr.length; i++) {
             if (arr[i].equals(word)) {
                 break;
             } else {
@@ -49,14 +78,14 @@ public class Duke {
         String[] temp = new String[arr.length];
         int counter = 0;
         // find position of the word
-        for(int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < arr.length; i++) {
             if (arr[i].equals(word)) {
                 counter = i;
                 break;
             }
         }
         counter++;
-        for(int i = 0; (counter + i) < arr.length; i++) {
+        for (int i = 0; (counter + i) < arr.length; i++) {
             temp[i] = arr[counter + i];
         }
         return temp;
@@ -76,7 +105,7 @@ public class Duke {
 
     public static void addNewTask(String[] task, int pos)
             throws InvalidTodoDescripDukeException, InvalidDeadlineDescripDukeException, InvalidEventDescripDukeException,
-            InvalidFirstDukeException {
+            InvalidFirstDukeException, IOException {
 
 
         if (task[0].equals("todo")) {
@@ -84,7 +113,7 @@ public class Duke {
                 throw new InvalidTodoDescripDukeException();
             }
             String[] modifiedTask = removeFirst(task);
-            tasks.add(new Todo(joinString(modifiedTask))) ;
+            tasks.add(new Todo(joinString(modifiedTask)));
             printAddedTask(tasks.get(pos));
         } else if (task[0].equals("deadline")) {
             if (task.length == 1) {
@@ -107,45 +136,50 @@ public class Duke {
         } else {
             throw new InvalidFirstDukeException();
         }
+        DukeFileWriter.writeToFile("data/duke.txt", tasks);
     }
 
     public static void deleteTask(int pos) {
         System.out.println("Noted. I've removed this task: \n" + tasks.get(pos) +
-               "\n" + "Now you have " + Integer.valueOf(tasks.size() - 1) + " tasks in the list.");
+                "\n" + "Now you have " + Integer.valueOf(tasks.size() - 1) + " tasks in the list.");
         tasks.remove(pos);
     }
 
     public static void main(String[] args) {
-            Scanner sc = new Scanner(System.in);
-            int numTask = 0;
 
-            greeting();
-            String input;
-            String[] inputArr;
+        Scanner sc = new Scanner(System.in);
+        int numTask = 0;
 
-            while(true) {
-                input = sc.nextLine(); // original input line
-                inputArr = input.split(" "); // split input into string array
-                try{
-                    if (inputArr[0].equals("bye")) {
-                        System.out.println("Bye. Hope to see you again soon!");
-                        sc.close();
-                        break;
-                    } else if (inputArr[0].equals("list")) {
-                        printAllTask();
-                    } else if (inputArr[0].equals("done")) {
-                        int counter =  Integer.parseInt(inputArr[1]);
-                        tasks.get(counter - 1).markAsDone();
-                    } else if (inputArr[0].equals("delete")) {
-                        int counter =  Integer.parseInt(inputArr[1]);
-                        deleteTask(counter - 1);
-                    } else {
-                        addNewTask(input.split(" "), numTask);
-                        numTask++;
-                    }
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
+        greeting();
+        String input;
+        String[] inputArr;
+
+        while (true) {
+            input = sc.nextLine(); // original input line
+            inputArr = input.split(" "); // split input into string array
+
+            try {
+                if (inputArr[0].equals("bye")) {
+                    System.out.println("Bye. Hope to see you again soon!");
+                    sc.close();
+                    break;
+                } else if (inputArr[0].equals("list")) {
+                    printAllTask();
+                } else if (inputArr[0].equals("done")) {
+                    int counter = Integer.parseInt(inputArr[1]);
+                    tasks.get(counter - 1).markAsDone();
+                } else if (inputArr[0].equals("delete")) {
+                    int counter = Integer.parseInt(inputArr[1]);
+                    deleteTask(counter - 1);
+                } else {
+                    addNewTask(input.split(" "), numTask);
+                    numTask++;
                 }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
+        }
     }
 }
