@@ -5,16 +5,28 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 
+/**
+ * Handles all of the file operations of "stored.txt" file.
+ */
 public class HandleFile {
     File storedData;
     ListOfItems list;
 
+    /**
+     * Constructor creates a new HandleFile object and passes to checkFile().
+     *
+     * @param list list of tasks.
+     */
     HandleFile(ListOfItems list) {
         this.storedData = new File("stored.txt");
         this.list = list;
         this.checkFile();
     }
 
+    /**
+     * It checks whether if "stored.txt" file exists, which it will pass to readFile().
+     * Else, it creates a new "stored.txt" file.
+     */
     void checkFile() {
         try {
             if (!this.storedData.exists()) {
@@ -27,6 +39,9 @@ public class HandleFile {
         }
     }
 
+    /**
+     * Reads the file using Scanner, and passes each line to ListOfItems's addStored(String input).
+     */
     void readFile() {
         try {
             Scanner sc = new Scanner(this.storedData);
@@ -38,6 +53,11 @@ public class HandleFile {
         }
     }
 
+    /**
+     * Writes to "stored.txt", where it will copy each line from ListOfItems's list.
+     *
+     * @param listOfItems list of tasks.
+     */
     void writeFile(ListOfItems listOfItems) {
         try {
             List<Task> list = listOfItems.list;

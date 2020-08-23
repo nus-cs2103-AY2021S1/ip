@@ -2,12 +2,23 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event is a type of Task, which takes in a specific date/time.
+ */
 public class Event extends Task {
     protected String connector;
     protected LocalDate date;
     protected LocalTime startTime;
     protected LocalTime endTime;
 
+    /**
+     * Constructor that creates a new Event object based on stored data or input.
+     *
+     * @param description describes the event.
+     * @param id position of event.
+     * @param duration duration of event.
+     * @param stored whether it is from stored.txt or a new input.
+     */
     Event(String description, int id, String duration, boolean stored) {
         super(description, id);
         if (stored) { //stored data
