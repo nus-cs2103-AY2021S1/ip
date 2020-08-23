@@ -130,9 +130,9 @@ abstract public class Task {
     }
     public String inputListFormat(){
         if(this.done){
-            return " | 0 | " + this.name;
-        }else{
             return " | 1 | " + this.name;
+        }else{
+            return " | 0 | " + this.name;
         }
     }
     /**

@@ -1,3 +1,5 @@
 todo buy book
 event buy book /at Aug 6th 4pm
 deadline buy book /by Aug 6th
+done 1
+delete 2

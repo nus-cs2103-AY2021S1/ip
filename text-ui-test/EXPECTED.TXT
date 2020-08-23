@@ -1,1 +1,2 @@
-  TIMETABLE.TXT absent, please add it in the text-ui-test folder!
+T | 1 | buy book
+D | 0 | buy book | Aug 6th
