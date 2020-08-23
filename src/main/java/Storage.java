@@ -52,11 +52,19 @@ public class Storage {
                     break;
                 case 'E':
                     String eventDescription = taskString.substring(8, taskString.lastIndexOf("|") - 1);
-                    taskList.add(new Event(eventDescription, isDone, taskDetails));
+                    try {
+                        taskList.add(new Event(eventDescription, isDone, taskDetails));
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 'D':
                     String deadlineDescription = taskString.substring(8, taskString.lastIndexOf("|") - 1);
-                    taskList.add(new Deadline(deadlineDescription, isDone, taskDetails));
+                    try {
+                        taskList.add(new Deadline(deadlineDescription, isDone, taskDetails));
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 default:
                     System.out.println("Unable to determine type of task");

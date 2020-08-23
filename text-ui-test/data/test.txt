@@ -1,5 +1,5 @@
-D | 0 | return book | June 6th
+D | 0 | return book | May 4 2020, 15:30:00
 T | 1 | join sports club
 T | 0 | borrow book
-D | 0 | return book | Sunday
-E | 0 | project meeting | Mon 2-4pm
+D | 0 | individual project | Sep 20 2020, 12:00:00
+E | 0 | project meeting | Oct 11 2020, 14:15:00

@@ -4,10 +4,10 @@ Got it. I've added this task:
    T | 0 | read book
 Now you have 1 task in the list.
 Got it. I've added this task:
-   D | 0 | return book | June 6th
+   D | 0 | return book | May 4 2020, 15:30:00
 Now you have 2 tasks in the list.
 Got it. I've added this task:
-   E | 0 | project meeting | Aug 6th 2-4pm
+   E | 0 | talkshow | Aug 15 2020, 18:00:00
 Now you have 3 tasks in the list.
 Got it. I've added this task:
    T | 0 | join sports club
@@ -15,8 +15,8 @@ Now you have 4 tasks in the list.
 Here are the tasks in your list:
 
 1.T | 0 | read book
-2.D | 0 | return book | June 6th
-3.E | 0 | project meeting | Aug 6th 2-4pm
+2.D | 0 | return book | May 4 2020, 15:30:00
+3.E | 0 | talkshow | Aug 15 2020, 18:00:00
 4.T | 0 | join sports club
 Nice! I've marked this task as done:
 T | 1 | read book
@@ -28,39 +28,40 @@ Now you have 5 tasks in the list.
 Here are the tasks in your list:
 
 1.T | 1 | read book
-2.D | 0 | return book | June 6th
-3.E | 0 | project meeting | Aug 6th 2-4pm
+2.D | 0 | return book | May 4 2020, 15:30:00
+3.E | 0 | talkshow | Aug 15 2020, 18:00:00
 4.T | 1 | join sports club
 5.T | 0 | borrow book
 Got it. I've added this task:
-   D | 0 | return book | Sunday
+   D | 0 | individual project | Sep 20 2020, 12:00:00
 Now you have 6 tasks in the list.
 Got it. I've added this task:
-   E | 0 | project meeting | Mon 2-4pm
+   E | 0 | project meeting | Oct 11 2020, 14:15:00
 Now you have 7 tasks in the list.
 ☹ OOPS!!! The description of a todo cannot be empty.
+☹ OOPS!!! Please input date and time in correct format: YYYY/MM/DD HH:MM
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 ☹ OOPS!!! Please enter a valid task number for me to mark as done.
 Noted. I've removed this task:
-E | 0 | project meeting | Aug 6th 2-4pm
+E | 0 | talkshow | Aug 15 2020, 18:00:00
 Now you have 6 tasks in the list.
 Here are the tasks in your list:
 
 1.T | 1 | read book
-2.D | 0 | return book | June 6th
+2.D | 0 | return book | May 4 2020, 15:30:00
 3.T | 1 | join sports club
 4.T | 0 | borrow book
-5.D | 0 | return book | Sunday
-6.E | 0 | project meeting | Mon 2-4pm
+5.D | 0 | individual project | Sep 20 2020, 12:00:00
+6.E | 0 | project meeting | Oct 11 2020, 14:15:00
 Noted. I've removed this task:
 T | 1 | read book
 Now you have 5 tasks in the list.
 Here are the tasks in your list:
 
-1.D | 0 | return book | June 6th
+1.D | 0 | return book | May 4 2020, 15:30:00
 2.T | 1 | join sports club
 3.T | 0 | borrow book
-4.D | 0 | return book | Sunday
-5.E | 0 | project meeting | Mon 2-4pm
+4.D | 0 | individual project | Sep 20 2020, 12:00:00
+5.E | 0 | project meeting | Oct 11 2020, 14:15:00
 ☹ OOPS!!! Please enter a valid task number for me delete.
 Bye. Hope to see you again soon!
