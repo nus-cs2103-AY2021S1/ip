@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -15,8 +16,15 @@ public class Duke {
 	private final static String EVENT = "event";
 	private final static String DEADLINE = "deadline";
 
+
 	public static void main(String[] args) {
-		looper();
+		try {
+			looper();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (DukeException d) {
+			d.printStackTrace();
+		}
 	}
 
 	private static void reply(String text) {
@@ -36,8 +44,9 @@ public class Duke {
 	}
 
 
-	private static void looper() {
+	private static void looper() throws DukeException, IOException {
 		reply("Hello");
+		Storage storage = new Storage("data.txt");
 		ArrayList<Task> list = new ArrayList<>();
 		boolean exit = false;
 		Scanner sc = new Scanner(System.in);
@@ -50,15 +59,7 @@ public class Duke {
 					exit = true;
 					break;
 				case LIST:
-					if (!list.isEmpty()) {
-						String result = "";
-						for (int i = 0; i < list.size(); i++) {
-							result += String.format("%d. %s\n", i + 1, list.get(i));
-						}
-						reply(result);
-					} else {
-						reply("List is empty.");
-					}
+					reply(storage.toString());
 					break;
 				case DONE:
 					try {
@@ -77,8 +78,7 @@ public class Duke {
 				case DELETE:
 					try {
 						int index = Integer.parseInt(parsedInput[1]) - 1;
-						Task deleted = list.get(index);
-						list.remove(index);
+						Task deleted = storage.delete(index);
 						reply(String.format("Task deleted: \n%s", deleted.toString()));
 					} catch (ArrayIndexOutOfBoundsException e) {
 						throw new DukeException(e.getMessage());
@@ -92,7 +92,7 @@ public class Duke {
 				case TODO:
 					try {
 						Todo todo = new Todo(parsedInput[1]);
-						list.add(todo);
+						storage.add(todo);
 						addTaskNotification(todo);
 					} catch (ArrayIndexOutOfBoundsException e) {
 						throw new DukeException("Insufficient arguments for Todo");
@@ -102,7 +102,7 @@ public class Duke {
 					try {
 						String[] evInput = parsedInput[1].split("/at ", 2);
 						Event event = new Event(evInput[0].trim(), evInput[1].trim());
-						list.add(event);
+						storage.add(event);
 						addTaskNotification(event);
 					} catch (ArrayIndexOutOfBoundsException e) {
 						throw new DukeException("Insufficient arguments for Event");
@@ -112,7 +112,7 @@ public class Duke {
 					try {
 						String[] dlInput = parsedInput[1].split("/by ", 2);
 						Deadline deadline = new Deadline(dlInput[0].trim(), dlInput[1].trim());
-						list.add(deadline);
+						storage.add(deadline);
 						addTaskNotification(deadline);
 					} catch (ArrayIndexOutOfBoundsException e) {
 						throw new DukeException("Insufficient arguments for Deadline");
