@@ -17,6 +17,10 @@ public abstract class Command {
         this.input = input;
     }
 
+    /**
+     * Tells whether this command is aiming for exiting.
+     * @return True if this is a ByeCommand, this is to be overridden.
+     */
     public boolean isExit() {
         return false;
     }
