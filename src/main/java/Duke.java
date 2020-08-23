@@ -50,10 +50,17 @@ public class Duke {
             this.type = Type.valueOf(type.toUpperCase());
         }
 
-        Task(String type, String name, Boolean completed) {
-            this.name = name;
+        Task(String type, String name, Boolean completed, String date) {
+            this(type, name);
             this.completion = completed;
-            this.type = Type.valueOf(type.toUpperCase());
+            if (date != null) {
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
+                this.date = LocalDate.parse(date, dateFormat);
+                if (!dateStorage.containsKey(this.date)) {
+                    dateStorage.put(this.date, new ArrayList<>());
+                }
+                dateStorage.get(this.date).add(this);
+            }
         }
 
         void complete() {
@@ -94,7 +101,7 @@ public class Duke {
         @Override
         public String toString() {
             if (date != null) {
-                return getType() + getCompletion() + " " + getName() + " @ " + getDate();
+                return getType() + getCompletion() + " " + getName() + "  @  " + getDate();
             } else {
                 return getType() + getCompletion() + " " + getName();
             }
@@ -161,16 +168,55 @@ public class Duke {
     }
 
     /**
-     * Overloaded store with ability to set completion
-     * @param type the type of task to be added
-     * @param name the name of the task
-     * @param completionStatus whether the task is completed
+     * Overloaded store that reads from save file
+     * @param wholeLine each line in the save file
      */
-    public static void store(String type, String name, Boolean completionStatus) {
-        Task taskToAdd = new Task(type, name, completionStatus);
-        storage.add(taskToAdd);
-        taskAdded(taskToAdd);
-        save(storage);
+    public static void store(String wholeLine) {
+        String type;
+        boolean completionStatus;
+        String name;
+        String date = null;
+        try {
+            Scanner currentLine = new Scanner(wholeLine);
+            // something like [T][✓]
+            if (currentLine.hasNext()) {
+                String typeCompletion = currentLine.next();
+                switch (typeCompletion.charAt(1)) {
+                case ('T'):
+                    type = "todo";
+                    break;
+                case ('E'):
+                    type = "event";
+                    break;
+                case ('D'):
+                    type = "deadline";
+                    break;
+                default:
+                    // this shouldn't happen
+                    type = null;
+                }
+                completionStatus = typeCompletion.charAt(4) == '✓';
+            } else {
+                throw DukeException.fileError();
+            }
+
+            if (currentLine.hasNext()) {
+                name = currentLine.nextLine().trim();
+            } else {
+                throw DukeException.fileError();
+            }
+            assert type != null;
+            int dateLocation = containsDate(name);
+            if (dateLocation >= 0) {
+                date = name.substring(dateLocation);
+                name = name.substring(0, dateLocation - 5);
+            }
+            Task taskToAdd = new Task(type, name, completionStatus, date);
+            storage.add(taskToAdd);
+            taskAdded(taskToAdd);
+        } catch (DukeException e) {
+            echo(e.getMessage());
+        }
     }
 
     /**
@@ -250,16 +296,6 @@ public class Duke {
     }
 
     /**
-     * finds /by or /at if the string contains them
-     * @param s the string to be searched
-     * @return the index of the date after /by or /at
-     */
-    public static int containsDate(String s) {
-        int eitherIndex = Math.max(s.indexOf(" /by "), s.indexOf(" /at "));
-        return eitherIndex == -1 ? eitherIndex : eitherIndex + 5;
-    }
-
-    /**
      * Loads contents of storage text file into storage array
      */
     public static void load() {
@@ -267,37 +303,22 @@ public class Duke {
             File data = new File("./data/duke.txt");
             Scanner dataScan = new Scanner(data);
             while (dataScan.hasNextLine()) {
-                try {
-                    Scanner currentLine = new Scanner(dataScan.nextLine());
-                    String type;
-                    boolean completionStatus;
-                    String name;
-
-                    if (currentLine.hasNext()) {
-                        type = currentLine.next();
-                    } else {
-                        throw DukeException.fileError();
-                    }
-
-                    if (currentLine.hasNext()) {
-                        completionStatus = Boolean.parseBoolean(currentLine.next());
-                    } else {
-                        throw DukeException.fileError();
-                    }
-
-                    if (currentLine.hasNext()) {
-                        name = currentLine.next();
-                    } else {
-                        throw DukeException.fileError();
-                    }
-                    store(type, name, completionStatus);
-                } catch (DukeException e) {
-                    echo(e.getMessage());
-                }
+                store(dataScan.nextLine());
             }
         } catch (Exception e) {
             System.out.println("save file does not exist, nothing loaded");
         }
+    }
+
+    /**
+     * finds /by or /at if the string contains them
+     * @param s the string to be searched
+     * @return the index of the date after /by or /at
+     */
+    public static int containsDate(String s) {
+        int eitherIndex = Math.max(s.indexOf(" /by "), s.indexOf(" /at "));
+        int anyIndex = Math.max(eitherIndex, s.indexOf("  @  "));
+        return anyIndex == -1 ? -1 : anyIndex + 5;
     }
 
     /**
