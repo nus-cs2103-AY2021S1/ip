@@ -22,6 +22,10 @@ public abstract class Task implements Serialisable {
         this.isDone = true;
     }
 
+    public boolean containsKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
