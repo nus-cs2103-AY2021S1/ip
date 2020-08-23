@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
@@ -38,9 +39,14 @@ public class test {
 //            while(sc.hasNext()){
 //                System.out.println(sc.nextLine());
 //            }
-        FileWriter fw = new FileWriter(fileDir);
-        fw.write("test1");
-        fw.write("test2");
-        fw.close();
+//        FileWriter fw = new FileWriter(fileDir);
+//        fw.write("test1");
+//        fw.write("test2");
+//        fw.close();
+        ArrayList<task> store = new ArrayList<>();
+        FileManager.read(save,store);
+        for(task i:store){
+            System.out.println(i.read());
+        }
     }
 }

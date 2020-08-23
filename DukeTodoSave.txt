@@ -1,3 +1,2 @@
-[T][X] read book 
-[E][✓] buy food (at: monday 2-4pm)
-[T][X] test 
+[T][✓] read book 
+[T][✓] test 

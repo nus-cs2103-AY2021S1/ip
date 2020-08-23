@@ -24,8 +24,8 @@ public class Duke {
             }
         }
 
-
         ArrayList<task> store = new ArrayList<>();
+        FileManager.read(save,store);
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         Scanner sc = new Scanner(System.in);
