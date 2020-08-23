@@ -1,5 +1,8 @@
 package DukeException;
 
+/**
+ * Error that cause by Mug.
+ */
 public class DukeException extends Exception {
 
     public DukeException(String message) {
