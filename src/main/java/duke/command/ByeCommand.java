@@ -1,5 +1,9 @@
 package duke.command;
 
+/**
+ * Represents a command that says bye, aiming to exit the app.
+ */
+
 import duke.component.*;
 
 public class ByeCommand extends Command {
