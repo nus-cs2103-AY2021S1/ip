@@ -34,9 +34,19 @@ public class Duke {
         validTaskTypes.add(EVENT);
     }
 
-    protected static final List<Task> taskRecords = new ArrayList<Task>();
+    protected final List<Task> taskRecords;
+
+    public Duke() {
+        this.taskRecords = new ArrayList<>();
+    }
 
     public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
+
+    }
+
+    protected void run() {
         System.out.println(getOpeningText());
 
         Scanner scanner = new Scanner(System.in);
@@ -64,10 +74,9 @@ public class Duke {
             }
         }
 
-
     }
 
-    protected static String registerDeleteTask(String userInput) {
+    protected String registerDeleteTask(String userInput) {
         String[] details = userInput.split(" ", 2);
         if (details.length == 1) {
             throw new DukeException("Please specify a task to delete!");
@@ -88,12 +97,12 @@ public class Duke {
 
     }
 
-    protected static String processErrorString(DukeException e) {
+    protected String processErrorString(DukeException e) {
         String message = e.getMessage();
         return processString(message);
     }
 
-    protected static String registerTaskDone(String userInput) {
+    protected String registerTaskDone(String userInput) {
         String[] details = userInput.split(" ", 2);
         if (details.length == 1) {
             throw new DukeException("Please specify a task to complete!");
@@ -112,7 +121,7 @@ public class Duke {
         return processString(MARKED_MESSAGE + '\n' + "   " + taskDone);
     }
 
-    protected static String getListString() {
+    protected String getListString() {
         StringBuilder builder = new StringBuilder();
         builder.append(LIST_HEADER);
         int count = 1;
@@ -123,7 +132,7 @@ public class Duke {
         return processString(builder.toString());
     }
 
-    protected static String addTask(String taskDescription) {
+    protected String addTask(String taskDescription) {
         String[] details = taskDescription.split(" ", 2);
         if (details.length == 1 && validTaskTypes.contains(details[0])) {
             throw new DukeException("The description of a " + details[0] + " cannot be empty.");
