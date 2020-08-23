@@ -10,6 +10,7 @@ public class Duke {
 
     private Ui ui;
     private Parser parser;
+    private Storage storage;
     public final static String FILEPATH = System.getProperty("user.dir") + (System.getProperty("user.dir").endsWith("text-ui-test")
             ? "/saved-tasks.txt"
             : "/text-ui-test/saved-tasks.txt");
@@ -17,6 +18,7 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         parser = new Parser();
+        storage = new Storage(FILEPATH);
     }
 
     public static void main(String[] args) throws IOException {
@@ -25,7 +27,7 @@ public class Duke {
 
     public void run() throws IOException {
 
-        handleLoad();
+        storage.handleLoad();
         ui.greeting();
         ui.showList();
         boolean isExit = false;
@@ -75,23 +77,13 @@ public class Duke {
                 } else {
                     throw new DukeUnknownCommandException();
                 }
-                saveTasks();
+                storage.saveTasks();
             } catch (DateTimeParseException e) {
                 ui.printDateTimeParseError(e.getMessage());
             } catch (DukeException e) {
                 ui.printError(e.getMessage());
             }
         }
-    }
-
-    public static void saveTasks() throws IOException {
-        BufferedWriter taskWriter = new BufferedWriter(new FileWriter(FILEPATH));
-        String tasks = "";
-        for (Task task: Task.tasks) {
-            tasks += task.toSaveString() + "\n";
-        }
-        taskWriter.write(tasks);
-        taskWriter.close();
     }
 
     public void handleTodo(String description) {
@@ -118,33 +110,4 @@ public class Duke {
         ui.printTask(event);
     }
 
-    public static void handleLoad() throws IOException {
-        BufferedReader taskLoader = new BufferedReader(new FileReader(FILEPATH));
-        String longCommand = taskLoader.readLine();
-        while (longCommand != null) {
-            String[] keywords = longCommand.split(" \\|\\| ");
-            Task cur = null;
-            switch (keywords[1]) {
-                case "todo":
-                    cur = new Todo(keywords[2]);
-                    break;
-                case "deadline":
-                    cur = new Deadline(keywords[2], keywords[3]);
-                    break;
-                case "event":
-                    cur = new Event(keywords[2], keywords[3]);
-                    break;
-                default:
-                    System.out.println("error");
-                    break;
-            }
-
-            if (keywords[0].equals("1")) {
-                cur.markAsDone();
-            }
-            Task.tasks.add(cur);
-            longCommand = taskLoader.readLine();
-        }
-        taskLoader.close();
-    }
 }
