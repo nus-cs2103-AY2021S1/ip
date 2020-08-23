@@ -1,15 +1,93 @@
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     ArrayList<Task> tasklist;
     String divider = "\t_________________________________________\n";
+    String filePath = "data/duke.txt";
 
     public Duke() {
         this.tasklist = new ArrayList<>();
+    }
+
+    public void checkIfDone(String s, Task task) {
+        if (s.equals("1")) {
+            task.markAsDone();
+        }
+    }
+
+    public void addFileContents(String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+
+        while (s.hasNext()) {
+            String[] data = s.nextLine().split(" , ");
+
+            if (data[0].equals("T")) {
+                Task t = new Todo(data[2]);
+                checkIfDone(data[1], t);
+                tasklist.add(t);
+            }
+
+            if (data[0].equals("D")) {
+                Task d = new Deadline(data[2], data[3]);
+                checkIfDone(data[1], d);
+                tasklist.add(d);
+            }
+
+            if (data[0].equals("E")) {
+                Task e = new Event(data[2], data[3]);
+                checkIfDone(data[1], e);
+                tasklist.add(e);
+            }
+        }
+    }
+
+    private void updateFile() throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (int i = 1; i < tasklist.size() + 1; i++) {
+            Task t = tasklist.get(i - 1);
+            fw.write(processTaskToUpdateFile(t));
+        }
+
+        fw.close();
+    }
+
+    private String processTaskToUpdateFile(Task t) {
+        String task = t.toString();
+        char type = task.charAt(1);
+        boolean isDone = task.charAt(4) == 'X';
+        String indicateDone = isDone ? "1" : "0";
+
+        String frontHalfToPrint = type + " , " + indicateDone + " , ";
+        String rest = task.substring(7);
+        String toPrint;
+
+        switch (type) {
+            case ('T'):
+                toPrint = frontHalfToPrint + rest + "\n";
+                break;
+            case ('D'):
+                int startOfBy = rest.indexOf("(by");
+                String deadlineDescription = rest.substring(0, startOfBy - 1);
+                String by = rest.substring(startOfBy + 5, rest.length() - 1);
+                toPrint = frontHalfToPrint + deadlineDescription + " , " + by + "\n";
+                break;
+            case ('E'):
+                int startOfAt = rest.indexOf("(at");
+                String eventDescription = rest.substring(0, startOfAt - 1);
+                String at = rest.substring(startOfAt + 5, rest.length() - 1);
+                toPrint = frontHalfToPrint + eventDescription + " , " + at + "\n";
+                break;
+            default:
+                toPrint = "something wrong";
+                break;
+        }
+        return toPrint;
     }
 
     public void addToDo(String description) throws DukeException {
@@ -19,6 +97,11 @@ public class Duke {
         Task t = new Todo(description);
         this.tasklist.add(t);
         printOutputAddTask(t);
+        try {
+            updateFile();
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
     }
 
     public void addDeadline(String details) throws DukeException {
@@ -33,6 +116,11 @@ public class Duke {
             Task t = new Deadline(description, by);
             this.tasklist.add(t);
             printOutputAddTask(t);
+            try {
+                updateFile();
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
 
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Please provide both a description and deadline!");
@@ -51,6 +139,11 @@ public class Duke {
             Task t = new Event(description, at);
             this.tasklist.add(t);
             printOutputAddTask(t);
+            try {
+                updateFile();
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
 
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Please provide both a description and timing!");
@@ -67,6 +160,12 @@ public class Duke {
             System.out.println("\tNumber of tasks: " + tasklist.size());
             System.out.println(divider);
 
+            try {
+                updateFile();
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
+
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Invalid task number!");
         }
@@ -80,6 +179,12 @@ public class Duke {
             System.out.println(divider);
             System.out.println("\tMr Camel will mark this task as done:\n" + "\t" + t);
             System.out.println(divider);
+
+            try {
+                updateFile();
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
 
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Invalid task number!");
@@ -169,7 +274,12 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke();
 
-        duke.initDuke();
-        duke.runDuke();
+        try {
+            duke.addFileContents(duke.filePath);
+            duke.initDuke();
+            duke.runDuke();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
     }
 }
