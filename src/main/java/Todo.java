@@ -18,7 +18,7 @@ public class Todo extends task{
         else{
             done = "[X]";
         }
-        return this.index + ". " + this.type + done + " " + this.name;
+        return this.type + done + " " + this.name;
     }
 
     public String read2(){

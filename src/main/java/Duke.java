@@ -73,7 +73,7 @@ public class Duke {
                     if(echo.equals("list")){
                         int count = 1;
                         for(task i : store){
-                            System.out.println(count + i.read());
+                            System.out.println(count + ". " + i.read());
                             count++;
                         }
                     }
