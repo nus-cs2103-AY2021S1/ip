@@ -1,13 +1,10 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class Event extends Task {
 
-    protected LocalDateTime at;
+    protected String at;
 
     public Event(String description, String at) {
         super(description);
-        this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));;
+        this.at = at;
     }
 
     public Event(String description, boolean isDone, String at) {
@@ -17,8 +14,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString()
-                + " (at: " + at.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a")) + ")";
+        return "[E]" + super.toString() + " (at: " + at + ")";
     }
 
     @Override
@@ -27,7 +23,7 @@ public class Event extends Task {
     }
 
 //    public static void main(String[] args) {
-//        Task event = new Event("attend wedding", "22/08/2020 2200");
+//        Task event = new Event("attend wedding", "friday");
 //        System.out.println(event);
 //    }
 }
