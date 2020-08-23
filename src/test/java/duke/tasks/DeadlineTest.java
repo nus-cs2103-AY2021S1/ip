@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestDeadline {
+public class DeadlineTest {
 
     @Test
     public void testGetBy() {

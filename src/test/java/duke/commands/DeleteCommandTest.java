@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.NoSuchTaskException;
 import duke.tasklist.TaskList;
 import duke.tasks.Todo;
 import duke.ui.Ui;
@@ -11,8 +12,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
-public class TestAddCommnad {
+public class DeleteCommandTest {
 
     private final ByteArrayOutputStream OUT_CONTENT = new ByteArrayOutputStream();
     private final PrintStream ORIGINAL_OUT = System.out;
@@ -29,17 +31,29 @@ public class TestAddCommnad {
     }
 
     @Test
-    public void testExecute() {
+    public void execute_validIndex_success() {
+        DeleteCommand command = new DeleteCommand(0);
         TaskList taskList = new TaskList();
-        Todo todo = new Todo("todo");
-        Ui ui = new Ui();
-        AddCommand addCommand = new AddCommand(todo);
-        addCommand.execute(taskList, ui);
-        assertEquals(LINE + "\t Got it. I've added this task:\n\t\t"
+        Todo todo = new Todo("description");
+        taskList.addTask(todo);
+        command.execute(taskList, new Ui());
+        String expected = LINE + "\t Noted. I've removed this task:\n\t\t"
                 + todo.toString()
                 + "\n\t "
                 + taskList.tasksRemaining()
                 + "\n"
-                + LINE, OUT_CONTENT.toString());
+                + LINE;
+        assertEquals(expected, OUT_CONTENT.toString());
+    }
+
+    @Test
+    public void execute_invalidIndex_exceptionThrown() {
+        try {
+            DeleteCommand command = new DeleteCommand(0);
+            command.execute(new TaskList(), new Ui());
+            fail();
+        } catch (NoSuchTaskException e) {
+            assertEquals("OOPS! No such task exists!", e.getMessage());
+        }
     }
 }

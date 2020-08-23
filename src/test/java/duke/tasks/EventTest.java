@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestEvent {
+public class EventTest {
 
     @Test
     public void testGetAt() {

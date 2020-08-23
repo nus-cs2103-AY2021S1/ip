@@ -14,7 +14,7 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class TestDoneCommand {
+public class DoneCommandTest {
 
     private final ByteArrayOutputStream OUT_CONTENT = new ByteArrayOutputStream();
     private final PrintStream ORIGINAL_OUT = System.out;

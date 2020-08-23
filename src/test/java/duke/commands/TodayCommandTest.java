@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestTodayCommand {
+public class TodayCommandTest {
 
     private final ByteArrayOutputStream OUT_CONTENT = new ByteArrayOutputStream();
     private final PrintStream ORIGINAL_OUT = System.out;

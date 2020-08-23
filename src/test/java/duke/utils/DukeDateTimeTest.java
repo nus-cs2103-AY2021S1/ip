@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestDukeDateTime {
+public class DukeDateTimeTest {
 
     @Test
     public void toString_dateWithTime_success() {

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TestParser {
+public class ParserTest {
 
     @Test
     public void parse_bye_success() {

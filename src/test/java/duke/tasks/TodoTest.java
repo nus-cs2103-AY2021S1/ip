@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestTodo {
+public class TodoTest {
 
     @Test
     public void testToFileString() {

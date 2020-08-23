@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class TestDukeDateTimeParser {
+public class DukeDateTimeParserTest {
 
     @Test
     public void parse_validInputWithTime_success() {

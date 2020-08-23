@@ -12,7 +12,7 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestListCommand {
+public class AddCommandTest {
 
     private final ByteArrayOutputStream OUT_CONTENT = new ByteArrayOutputStream();
     private final PrintStream ORIGINAL_OUT = System.out;
@@ -29,23 +29,17 @@ public class TestListCommand {
     }
 
     @Test
-    public void execute_emptyList_success() {
-        ListCommand command = new ListCommand();
-        command.execute(new TaskList(), new Ui());
-        String expected = LINE + "\t Here are the tasks in your list:\n\n" + LINE;
-        assertEquals(expected, OUT_CONTENT.toString());
-    }
-
-    @Test
-    public void execute_nonEmptyList_success() {
-        ListCommand command = new ListCommand();
+    public void testExecute() {
         TaskList taskList = new TaskList();
-        Todo todo = new Todo("description");
-        taskList.addTask(todo);
-        command.execute(taskList, new Ui());
-        String expected = LINE + "\t Here are the tasks in your list:\n"
-                + "\t 1.[T][\u2718] description\n"
-                + LINE;
-        assertEquals(expected, OUT_CONTENT.toString());
+        Todo todo = new Todo("todo");
+        Ui ui = new Ui();
+        AddCommand addCommand = new AddCommand(todo);
+        addCommand.execute(taskList, ui);
+        assertEquals(LINE + "\t Got it. I've added this task:\n\t\t"
+                + todo.toString()
+                + "\n\t "
+                + taskList.tasksRemaining()
+                + "\n"
+                + LINE, OUT_CONTENT.toString());
     }
 }
