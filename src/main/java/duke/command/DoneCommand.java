@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.DoneWrongFormatException;
+import duke.exception.TaskIndexOutOfBoundsException;
+import duke.task.Task;
+
 import java.io.IOException;
 
 public class DoneCommand extends Command {

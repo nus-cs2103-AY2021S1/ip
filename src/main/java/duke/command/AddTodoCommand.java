@@ -1,3 +1,13 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.TodoWrongFormatException;
+import duke.exception.WrongFormatException;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.IOException;
 
 public class AddTodoCommand extends AddCommand {
@@ -20,7 +30,7 @@ public class AddTodoCommand extends AddCommand {
                 System.err.println(e.getMessage());
             }
         } catch (IndexOutOfBoundsException | WrongFormatException e)
-        { // Command is in a wrong format
+        { // duke.command.Command is in a wrong format
             throw new TodoWrongFormatException();
         }
     }

@@ -1,3 +1,11 @@
+package duke;
+
+import duke.exception.WrongFormatException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -20,10 +28,10 @@ public class TaskList {
             case "[T]": // To-Do
                 taskList.add(new ToDo(splitLine[2], !splitLine[1].equals("0")));
                 break;
-            case "[E]": // Event
+            case "[E]": // duke.task.Event
                 taskList.add(new Event(splitLine[2], splitLine[3], !splitLine[1].equals("0")));
                 break;
-            case "[D]": // Deadline
+            case "[D]": // duke.task.Deadline
                 taskList.add(new Deadline(splitLine[2], LocalDateTime.parse(splitLine[3]).format(DateTimeFormatter
                         .ofPattern("yyyy-MM-dd HHmm")), !splitLine[1].equals("0")));
                 break;

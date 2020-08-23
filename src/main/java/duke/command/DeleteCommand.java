@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.DeleteWrongFormatException;
+import duke.exception.TaskIndexOutOfBoundsException;
+import duke.task.Task;
+
 import java.io.IOException;
 
 public class DeleteCommand extends Command {

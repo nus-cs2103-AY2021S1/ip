@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class DoneWrongFormatException extends WrongFormatException {
 
     public DoneWrongFormatException() {

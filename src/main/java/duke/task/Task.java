@@ -1,5 +1,9 @@
+package duke.task;
+
+import duke.exception.WrongFormatException;
+
 /**
- * Encapsulates a to-do list type of task for the Duke program. A task is
+ * Encapsulates a to-do list type of task for the duke.Duke program. A task is
  * inclusive of a textual description and a boolean flag to mark whether it has
  * been completed or not.
  */
@@ -7,7 +11,7 @@ public class Task {
     protected String description; // Describes the task
     protected boolean isDone; // Marks whether the task is completed or not
     protected String taskTypeSymbol; // [T], [D] or [E]
-    protected String taskTypeName; // To-Do, Deadline or Event task
+    protected String taskTypeName; // To-Do, duke.task.Deadline or duke.task.Event task
 
     public Task(String description, String taskTypeSymbol, String taskTypeName, boolean isDone)
             throws WrongFormatException {

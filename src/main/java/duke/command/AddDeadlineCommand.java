@@ -1,3 +1,13 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.DeadlineWrongFormatException;
+import duke.exception.WrongFormatException;
+import duke.task.Deadline;
+import duke.task.Task;
+
 import java.io.IOException;
 import java.time.DateTimeException;
 
@@ -24,7 +34,7 @@ public class AddDeadlineCommand extends AddCommand {
                 System.err.println(e.getMessage());
             }
         } catch (IndexOutOfBoundsException | WrongFormatException | DateTimeException e)
-        { // Command is in a wrong format
+        { // duke.command.Command is in a wrong format
             throw new DeadlineWrongFormatException();
         }
     }

@@ -1,3 +1,15 @@
+package duke;
+
+import duke.command.Command;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.DeleteCommand;
+import duke.command.AddTodoCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddDeadlineCommand;
+import duke.command.UnknownCommand;
+
 public class Parser {
 
     public static Command parse(String fullCommand) {
@@ -12,9 +24,9 @@ public class Parser {
             return new DeleteCommand(splitCommand);
         } else if (splitCommand[0].equals("todo")) { // Add To-Do task
             return new AddTodoCommand(fullCommand);
-        } else if (splitCommand[0].equals("event")) { // Add Event task
+        } else if (splitCommand[0].equals("event")) { // Add duke.task.Event task
             return new AddEventCommand(fullCommand);
-        } else if (splitCommand[0].equals("deadline")) { // Add Deadline task
+        } else if (splitCommand[0].equals("deadline")) { // Add duke.task.Deadline task
             return new AddDeadlineCommand(fullCommand);
         } else { // Unknown command entered
             return new UnknownCommand();

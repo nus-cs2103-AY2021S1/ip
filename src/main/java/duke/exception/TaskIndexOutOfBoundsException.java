@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class TaskIndexOutOfBoundsException extends DukeException {
     private String index;
 

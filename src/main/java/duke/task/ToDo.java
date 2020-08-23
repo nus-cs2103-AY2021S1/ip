@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.exception.WrongFormatException;
+
 public class ToDo extends Task {
 
     public ToDo(String description) throws WrongFormatException {

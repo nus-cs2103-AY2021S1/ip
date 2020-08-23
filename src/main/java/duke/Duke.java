@@ -1,7 +1,13 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.exception.WrongFormatException;
+
 import java.io.FileNotFoundException;
 
 /**
- * Serves as a chat bot. Duke can keep a record of user's inputs as a list of
+ * Serves as a chat bot. duke.Duke can keep a record of user's inputs as a list of
  * tasks, mark them as completed when they are done, and show the user the list
  * of tasks upon request.
  */
@@ -30,7 +36,7 @@ public class Duke {
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
-        while (!isExit) { // Duke takes in user input indefinitely until the user says "bye"
+        while (!isExit) { // duke.Duke takes in user input indefinitely until the user says "bye"
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
