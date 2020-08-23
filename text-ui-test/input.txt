@@ -6,6 +6,7 @@ done 1
 list
 todo
 blah
+find book
 delete 2
 list
 bye

@@ -75,6 +75,20 @@ public class TaskList {
                     storage.appendToFile("Noted. I've removed this task:");
                     storage.appendToFile("  " + t);
                     storage.appendToFile("Now you have " + books.size() + " tasks in the list.");
+                }  else if (first.equals("find")) {
+                    ArrayList<Task> tempList = new ArrayList<>();
+                    for (int i = 0; i < books.size(); i++) {
+                        if (books.get(i).description.contains(s[1])) {
+                            tempList.add(books.get(i));
+                        }
+                    }
+
+                    storage.appendToFile("Here are the matching tasks in your list:");
+
+                    for (int i = 0; i < tempList.size(); i++) {
+                        int l = i + 1;
+                        storage.appendToFile(l + "." + tempList.get(i));
+                    }
                 } else {
                     throw new UnknownCommandException();
                 }
