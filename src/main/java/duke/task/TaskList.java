@@ -91,4 +91,19 @@ public class TaskList implements Iterable<Task> {
         }
         return sb.toString();
     }
+
+    /**
+     * Finds all Tasks containing the specified search word.
+     * @param searchWord the String that is to be search with.
+     * @return a TaskList containing all Tasks that are found.
+     */
+    public TaskList findString(String searchWord) {
+        TaskList foundTasks = new TaskList();
+        for (Task task : this.taskList) {
+            if (task.getTaskDescription().contains(searchWord)) {
+                foundTasks.addTask(task);
+            }
+        }
+        return foundTasks;
+    }
 }

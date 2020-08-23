@@ -3,14 +3,7 @@ package duke.parser;
 import java.time.LocalDateTime;
 
 import duke.exception.DukeException;
-import duke.operation.Operation;
-import duke.operation.AddDeadlineOperation;
-import duke.operation.AddEventOperation;
-import duke.operation.AddTodoOperation;
-import duke.operation.DeleteOperation;
-import duke.operation.DoneOperation;
-import duke.operation.ExitOperation;
-import duke.operation.ListOperation;
+import duke.operation.*;
 import duke.storage.TaskStorage;
 import duke.task.Todo;
 import duke.task.Deadline;
@@ -90,6 +83,14 @@ public class CommandParser {
         return new DeleteOperation(list, index);
     }
 
+    private FindOperation createFindOp(String[] commands, TaskList list) throws DukeException {
+        if (commands.length < 2) {
+            throw new DukeException("Ensure a keyword is entered so that I can perform a search with it.");
+        }
+        String searchWord = Utils.concatenate(commands, 1, commands.length);
+        return new FindOperation(list, searchWord);
+    }
+
     /**
      * Parses the String given into an Operation object.
      * @param commandString the String that has been input by the user into Duke.
@@ -117,6 +118,8 @@ public class CommandParser {
             return createEventOp(commands, list);
         case CommandType.DELETE:
             return createDeleteOp(commands, list);
+        case CommandType.FIND:
+            return createFindOp(commands, list);
         default:
             throw new DukeException("This command is not recognised unfortunately.");
         }
