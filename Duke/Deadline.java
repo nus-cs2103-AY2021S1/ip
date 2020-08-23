@@ -18,7 +18,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * This method returns the string to be written for the deadline.
+     * This method returns the string to be written for the deadline task.
      */
     public String toWriteString() { return "D " +  super.toWriteString() + " | " + dueDate; }
 }
