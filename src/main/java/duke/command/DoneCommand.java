@@ -3,6 +3,10 @@ package duke.command;
 import duke.component.*;
 
 public class DoneCommand extends Command {
+    /**
+     * Creates a command for marking tasks as done.
+     * @param input The input command classified as DoneCommand, starting with "done ".
+     */
     public DoneCommand(String input) {
         super(input);
     }
