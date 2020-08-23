@@ -1,9 +1,18 @@
 public class Event extends Task {
     protected String at;
 
-    public Event(String description, String by) {
+    public Event(String description, String at) {
         super(description);
-        this.at = by;
+        this.at = at;
+    }
+
+    public Event(String description, boolean isDone, String at) {
+        super(description, isDone);
+        this.at = at;
+    }
+
+    public String getTime() {
+        return at;
     }
 
     @Override

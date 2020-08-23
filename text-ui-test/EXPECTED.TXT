@@ -11,17 +11,7 @@ Send me a task in one of the following formats and I'll store it for you.
 	Event: "event <description> /at <time interval>"
 Send "list" to see all tasks.
 Send "done <item number>" to mark an item as done
-Send "delete <item number>" to delete anj item from the list
+Send "delete <item number>" to delete and item from the list
 Send "bye" to end our conversation.
-Got it. I've added this task:
-	[T][✘] borrow book
-You now have 1 tasks in the list.
-1. [T][✘] borrow book
-☹ OOPS!!! Please key in a valid deadline command!
-Got it. I've added this task:
-	[D][✘] return book (by: Sunday)
-You now have 2 in the list.
-Got it. I've added this task:
-	[E][✘] project meeting (at: Mon 2-4pm)
-You now have 3 in the list.
+Theres currently nothing in your list.
 Bye, hope to chat again soon!
