@@ -1,4 +1,9 @@
 package exceptions;
+/**
+ * EmptyEventsException class extends DukeException class
+ * and handles the EmptyEventsException.
+ * @author Maguire Ong
+ */
 
 public class EmptyEventsException extends DukeException {
 

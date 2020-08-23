@@ -1,4 +1,9 @@
 package tasklist;
+/**
+ * Deadline class is a subclass of Task.
+ * Deadline stores each Deadline's description and deadline.
+ * @author Maguire Ong
+ */
 
 public class Deadline extends Task {
     protected String by;

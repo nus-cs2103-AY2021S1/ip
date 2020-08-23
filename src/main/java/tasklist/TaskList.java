@@ -8,9 +8,23 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * TaskList class handles the bulk of the Duke bot after each command
+ * has been processed by the parser.
+ * @author Maguire Ong
+ */
+
 public class TaskList {
     public static ArrayList<Task> books = new ArrayList<>();
 
+    /**
+     * Checks which command the Duke bot is taking in
+     * and adds the printed line to the saved file.
+     *
+     * @param storage the storage system
+     * @param fullCommand tbe full input
+     * @param first the first word of the input
+     */
     public void operate(Storage storage, String fullCommand, String first) throws IOException {
 
         String[] s = fullCommand.split("\\s");
