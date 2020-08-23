@@ -1,13 +1,13 @@
 public class DeadlineTask extends Task {
-    private String timeToBeDoneBy;
+    private DateAndTime timeToBeDoneBy;
 
-    public DeadlineTask(String taskName, String timeToBeDoneBy) {
+    public DeadlineTask(String taskName, DateAndTime timeToBeDoneBy) {
         super(taskName);
         this.timeToBeDoneBy = timeToBeDoneBy;
     }
 
     @Override
     public String toString() {
-        return "[D] [" + getStatusIcon() + "] " + taskName + " (by:" + timeToBeDoneBy + ")";
+        return "[D] [" + getStatusIcon() + "] " + taskDescription + " (by: " + timeToBeDoneBy + ")";
     }
 }

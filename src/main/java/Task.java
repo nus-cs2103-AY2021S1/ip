@@ -1,9 +1,9 @@
 public class Task {
-    protected final String taskName;
+    protected final String taskDescription;
     private boolean isDone;
 
-    public Task(String taskName) {
-        this.taskName = taskName;
+    public Task(String taskDescription) {
+        this.taskDescription = taskDescription;
         this.isDone = false;
     }
 
@@ -16,8 +16,12 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    public String getTaskDescription() {
+        return taskDescription;
+    }
+
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + taskName;
+        return "[" + getStatusIcon() + "] " + taskDescription;
     }
 }

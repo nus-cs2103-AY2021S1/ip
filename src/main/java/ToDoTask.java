@@ -6,6 +6,6 @@ public class ToDoTask extends Task {
 
     @Override
     public String toString() {
-        return "[T] [" + getStatusIcon() + "] " + taskName;
+        return "[T] [" + getStatusIcon() + "] " + taskDescription;
     }
 }
