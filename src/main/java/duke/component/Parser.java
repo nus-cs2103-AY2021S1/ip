@@ -4,6 +4,14 @@ import duke.command.*;
 import duke.task.*;
 
 public class Parser {
+    /**
+     * Parses a DoneCommand to tell which task to mark as done.
+     * @param cmd the given input command
+     * @param count the current number of tasks in list
+     * @return the index of the task to mark as done
+     * @throws InvalidCommandException if the input is invalid, including non-integer, negative values, 0 or large
+     * numbers
+     */
     public static int isValidDone(String cmd, int count) throws InvalidCommandException {
         if (cmd.startsWith("done ")) {
             if (cmd.length() < 6) {
