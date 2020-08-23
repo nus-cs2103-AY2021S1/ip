@@ -1,7 +1,5 @@
 package main.java;
 
-import java.util.ArrayList;
-
 public class DeleteCommand extends Command {
 
     String[] commandDetails;
@@ -11,14 +9,14 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
         int taskNumber = Character.getNumericValue(commandDetails[1].charAt(0)) - 1;
-        if (!tasks.isEmpty() && taskNumber < tasks.size()) {
-            Task removedTask = tasks.remove(taskNumber);
-            System.out.println( String.format("~ \n Noted. Target Scraped: \n   %s \n " +
-                    "Now you have %d tasks in the list. \n~", removedTask.toString(), tasks.size()));
+        if (!tasks.getTasks().isEmpty() && taskNumber < tasks.getTasks().size()) {
+            Task removedTask = tasks.getTasks().remove(taskNumber);
+            System.out.println( String.format(" Noted. Target Scraped: \n   %s \n " +
+                    "Now you have %d tasks in the list. ", removedTask.toString(), tasks.getTasks().size()));
         } else {
-            throw new DukeException("~\n ERROR... TASK NOT FOUND. \n PLEASE TRY AGAIN \n~");
+            throw new DukeException(" ERROR... TASK NOT FOUND. \n PLEASE TRY AGAIN ");
         }
     }
 

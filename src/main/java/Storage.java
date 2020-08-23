@@ -19,11 +19,8 @@ public class Storage {
             Path directory = Paths.get(filePath).getParent();
             if (!Files.exists(directory)) {
                 Files.createDirectory(directory);
-                Path path = Paths.get(filePath);
-                if (Files.notExists(path)) {
-                    file = new File(filePath);
-                }
             }
+            file = new File(filePath);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

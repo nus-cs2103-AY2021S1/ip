@@ -22,18 +22,17 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        System.out.println("~ \n ERROR DETECTED! UNABLE TO LOAD PROGRAM. \n SYSTEM SHUTTING DOWN");
+        System.out.println(" ERROR DETECTED! UNABLE TO LOAD PROGRAM. \n SYSTEM SHUTTING DOWN");
     }
 
     public void showTaskList(ArrayList<Task> taskList) {
-        System.out.println("~ \n Here are targets in your kill list: ");
+        System.out.println(" Here are targets in your kill list: ");
         if (!taskList.isEmpty()) {
             for (int i = 0; i < taskList.size(); i++) {
                 int count = i + 1;
                 System.out.println(String.format("   %d. ", count) + taskList.get(i).toString());
             }
         }
-        System.out.println("\n~ ");
     }
 
     public String readCommand() {
@@ -42,7 +41,14 @@ public class Ui {
     }
 
     public void showBye() {
-        System.out.println("~ \n I will be back \n~ ");
+        System.out.println(" I will be back ");
     }
 
+    public void showError(String message) {
+        System.out.println(message);
+    }
+
+    public void showLine() {
+        System.out.println("\n ******************************************************************** \n");
+    }
 }

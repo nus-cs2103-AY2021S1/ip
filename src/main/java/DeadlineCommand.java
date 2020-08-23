@@ -1,7 +1,5 @@
 package main.java;
 
-import java.util.ArrayList;
-
 public class DeadlineCommand extends Command {
 
     String[] commandDetails;
@@ -11,13 +9,13 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String day = commandDetails[1].split(" ", 2)[1];
-        System.out.println("~ \n Got it. I've added this task: ");
+        System.out.println(" Got it. I've added this task: ");
         Deadline deadline = new Deadline(commandDetails[0], day.trim());
-        tasks.add(deadline);
-        System.out.println(String.format("   %s \n Now you have %d tasks in the list. \n~",
-                deadline, tasks.size()));
+        tasks.getTasks().add(deadline);
+        System.out.println(String.format("   %s \n Now you have %d tasks in the list. ",
+                deadline, tasks.getTasks().size()));
     }
 
     @Override

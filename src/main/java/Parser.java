@@ -26,7 +26,7 @@ public class Parser {
                 return parseDelete(command);
             }
         } else {
-            throw new DukeException("~\n ERROR... INPUT NOT RECOGNIZED. \n PLEASE TRY AGAIN \n~");
+            throw new DukeException(" ERROR... INPUT NOT RECOGNIZED. \n PLEASE TRY AGAIN ");
         }
         return null;
     }
@@ -44,8 +44,8 @@ public class Parser {
         if (commandDetails.length > 1 && Character.isDigit(commandDetails[1].charAt(0))) {
             return new DoneCommand(commandDetails);
         } else {
-            throw new DukeException("~\n ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n " +
-                    "PLEASE TRY AGAIN \n~");
+            throw new DukeException(" ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n " +
+                    "PLEASE TRY AGAIN ");
         }
     }
 
@@ -53,7 +53,7 @@ public class Parser {
             if (commandDetails.length > 1) {
                 return new ToDoCommand(commandDetails);
             } else {
-                throw new DukeException("~\n ERROR... TODO DESCRIPTION EMPTY. \n PLEASE TRY AGAIN \n~");
+                throw new DukeException(" ERROR... TODO DESCRIPTION EMPTY. \n PLEASE TRY AGAIN ");
             }
     }
 
@@ -63,10 +63,10 @@ public class Parser {
             if (stringArray.length > 1 && stringArray[1].split(" ", 2).length > 1) {
                 return new DeadlineCommand(stringArray);
             } else {
-                throw new DukeException("~\n ERROR... DEADLINE DATE EMPTY. \n PLEASE TRY AGAIN \n~");
+                throw new DukeException(" ERROR... DEADLINE DATE EMPTY. \n PLEASE TRY AGAIN ");
             }
         } else {
-            throw new DukeException("~\n ERROR... DEADLINE DESCRIPTION EMPTY . \n PLEASE TRY AGAIN \n~");
+            throw new DukeException(" ERROR... DEADLINE DESCRIPTION EMPTY . \n PLEASE TRY AGAIN ");
         }
     }
 
@@ -76,10 +76,10 @@ public class Parser {
             if (stringArray.length > 1 && stringArray[1].split(" ", 2).length > 1) {
                 return new EventCommand(stringArray);
             } else {
-                throw new DukeException("~\n ERROR... EVENT DATE EMPTY. \n PLEASE TRY AGAIN \n~");
+                throw new DukeException(" ERROR... EVENT DATE EMPTY. \n PLEASE TRY AGAIN ");
             }
         } else {
-            throw new DukeException("~\n ERROR... EVENT DESCRIPTION EMPTY. \n PLEASE TRY AGAIN \n~");
+            throw new DukeException(" ERROR... EVENT DESCRIPTION EMPTY. \n PLEASE TRY AGAIN ");
         }
     }
 
@@ -87,8 +87,8 @@ public class Parser {
         if (commandDetails.length > 1 && Character.isDigit(commandDetails[1].charAt(0))) {
             return new DeleteCommand(commandDetails);
         } else {
-            throw new DukeException("~\n ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n " +
-                    "PLEASE TRY AGAIN \n~");
+            throw new DukeException(" ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n " +
+                    "PLEASE TRY AGAIN ");
         }
     }
 }

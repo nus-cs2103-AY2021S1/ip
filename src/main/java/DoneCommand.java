@@ -1,7 +1,5 @@
 package main.java;
 
-import java.util.ArrayList;
-
 public class DoneCommand extends Command {
 
     String[] commandDetails;
@@ -11,14 +9,14 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int taskNumber = Character.getNumericValue(commandDetails[1].charAt(0)) - 1;
-        if (!tasks.isEmpty() && taskNumber < tasks.size()) {
-            tasks.get(taskNumber).doneTask();
-            System.out.println("~ \n Nice! Target Eliminated: \n   "
-                    + tasks.get(taskNumber).toString() + "\n~");
+        if (!tasks.getTasks().isEmpty() && taskNumber < tasks.getTasks().size()) {
+            tasks.getTasks().get(taskNumber).doneTask();
+            System.out.println(" Nice! Target Eliminated: \n   "
+                    + tasks.getTasks().get(taskNumber).toString());
         } else {
-            throw new DukeException("~\n ERROR... TASK NOT FOUND. \n PLEASE TRY AGAIN \n~");
+            throw new DukeException(" ERROR... TASK NOT FOUND. \n PLEASE TRY AGAIN ");
         }
     }
 
