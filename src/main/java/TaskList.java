@@ -1,3 +1,5 @@
+import exceptions.NoSuchTaskException;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -9,14 +11,28 @@ public class TaskList {
         taskList.add(task);
     }
 
-    public void completeTask(int taskNumber) {
+    public List<Task> getListOfTasks() {
+        return List.copyOf(taskList);
+    }
+
+    public void completeTask(int taskNumber) throws NoSuchTaskException {
+        if (!validateTaskNumber(taskNumber)) {
+            throw new NoSuchTaskException();
+        }
         Task completedTask = taskList.get(taskNumber - 1).markCompleted();
         taskList.set(taskNumber - 1, completedTask);
     }
 
-    public void deleteTask(int taskNumber) {
+    public void deleteTask(int taskNumber) throws NoSuchTaskException {
+        if (!validateTaskNumber(taskNumber)) {
+            throw new NoSuchTaskException();
+        }
         Task toRemove = taskList.get(taskNumber - 1);
         taskList.remove(taskNumber - 1);
+    }
+
+    private boolean validateTaskNumber(int taskNumber) {
+        return taskNumber < 1 && taskNumber > taskList.size();
     }
 
     public String tasksToString() {
