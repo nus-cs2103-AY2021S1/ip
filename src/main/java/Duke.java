@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -53,10 +54,12 @@ public class Duke {
                         tasks.add(new Todo(line[2], Boolean.parseBoolean(line[1])));
                         break;
                     case "D":
-                        tasks.add(new Deadline(line[2], line[3], Boolean.parseBoolean(line[1])));
+                        tasks.add(new Deadline(line[2], LocalDate.parse(line[3]),
+                                Boolean.parseBoolean(line[1])));
                         break;
                     case "E":
-                        tasks.add(new Event(line[2], line[3], Boolean.parseBoolean(line[1])));
+                        tasks.add(new Event(line[2], LocalDate.parse(line[3]),
+                                Boolean.parseBoolean(line[1])));
                         break;
                 }
             }
@@ -71,6 +74,7 @@ public class Duke {
         while (!answer.equals("bye")) {
             String[] command = answer.split(" ");
             String description, time;
+            LocalDate date;
             int idx;
             Task task;
 
@@ -139,7 +143,7 @@ public class Duke {
                         break;
 
                     case deadline:
-                        if (command.length < 2) {
+                        if (command.length < 2 || command[1].equals("/by")) {
                             throw new DukeException("The description can't be blank :(.");
                         }
                         description = command[1];
@@ -152,7 +156,7 @@ public class Duke {
 
                         if (idx >= command.length) {
                             throw new DukeException(
-                                    "Please specify deadline time in this format: \"/by <time>\". ");
+                                    "Please specify the deadline date in this format: \"/by <date>\". ");
                         }
 
                         time = command[idx];
@@ -162,7 +166,13 @@ public class Duke {
                             idx++;
                         }
 
-                        task = new Deadline(description, time);
+                        try {
+                            date = LocalDate.parse(time);
+                        } catch (Exception e) {
+                            throw new DukeException("Please enter the date in yyyy-mm-dd format.");
+                        }
+
+                        task = new Deadline(description, date);
                         tasks.add(task);
 
                         System.out.printf(
@@ -174,7 +184,7 @@ public class Duke {
                         break;
 
                     case event:
-                        if (command.length < 2) {
+                        if (command.length < 2 || command[1].equals("/at")) {
                             throw new DukeException("The description can't be blank :(.");
                         }
                         description = command[1];
@@ -187,7 +197,7 @@ public class Duke {
 
                         if (idx >= command.length) {
                             throw new DukeException(
-                                    "Please specify event time in this format: \"/at <time>\". ");
+                                    "Please specify the event date in this format: \"/at <date>\". ");
                         }
 
                         time = command[idx];
@@ -197,7 +207,13 @@ public class Duke {
                             idx++;
                         }
 
-                        task = new Event(description, time);
+                        try {
+                            date = LocalDate.parse(time);
+                        } catch (Exception e) {
+                            throw new DukeException("Please enter the date in yyyy-mm-dd format.");
+                        }
+
+                        task = new Event(description, date);
                         tasks.add(task);
 
                         System.out.printf(

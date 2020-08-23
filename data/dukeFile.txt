@@ -1,3 +1,2 @@
-T | false | sleep   
-D | true | eat | tomorrow
-E | false | play | noon
+D | false | sleep | 2020-12-11
+E | false | play | 1985-11-02
