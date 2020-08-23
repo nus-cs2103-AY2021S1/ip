@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -65,8 +68,31 @@ public class Duke {
                   if (by.equals("")) {
                     throw new DukeException("☹ OOPS!!! The deadline cannot be empty.");
                   }
+
+                  String[] inputDateTime = by.split(" ");
+                  String[] date = inputDateTime[0].split("[/\\\\]|-");
+                  LocalDate localDate = dateToLocalDate(date);
+
+                  LocalTime localTime = LocalTime.of(0, 0);
+                  if (inputDateTime.length > 1) {
+                    int timeLength = inputDateTime[1].length();
+                    if (timeLength == 4) {
+                      int hour = Integer.parseInt(inputDateTime[1].substring(0, 2));
+                      int minute = Integer.parseInt(inputDateTime[1].substring(2, 4));
+                      localTime = LocalTime.of(hour, minute);
+                    } else if (timeLength == 3) {
+                      int hour = Integer.parseInt(String.valueOf(inputDateTime[1].charAt(0)));
+                      int minute = Integer.parseInt(inputDateTime[1].substring(1, 3));
+                      localTime = LocalTime.of(hour, minute);
+                    } else {
+                      throw new DukeException("Error with input time");
+                    }
+                  }
+
+                  LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
+
                   System.out.println(addMessage);
-                  dataArrayList.add(new Deadline(descDeadline, by));
+                  dataArrayList.add(new Deadline(descDeadline, localDateTime));
                   break;
                 }
               case "event":
@@ -83,7 +109,24 @@ public class Duke {
                   if (at.equals("")) {
                     throw new DukeException("☹ OOPS!!! The event date cannot be empty.");
                   }
-                  dataArrayList.add(new Event(descEvent, at));
+                  String[] inputDateTime = at.split(" ");
+                  String[] date = inputDateTime[0].split("[/\\\\]|-");
+                  LocalDate localDate = dateToLocalDate(date);
+
+                  LocalTime startLocalTime = LocalTime.of(0, 0);
+                  LocalTime endLocalTime = LocalTime.of(23, 59);
+                  if (inputDateTime.length > 1) {
+                    String[] timeArr = inputDateTime[1].split("-");
+                    if (timeArr.length > 1) {
+                      endLocalTime = timeToLocalTime(timeArr[1]);
+                    }
+                    startLocalTime = timeToLocalTime(timeArr[0]);
+                  }
+
+                  LocalDateTime startLocalDateTime = LocalDateTime.of(localDate, startLocalTime);
+                  LocalDateTime endLocalDateTime = LocalDateTime.of(localDate, endLocalTime);
+
+                  dataArrayList.add(new Event(descEvent, startLocalDateTime, endLocalDateTime));
                   break;
                 }
               default:
@@ -98,5 +141,35 @@ public class Duke {
       }
     }
     System.out.println("Bye. Hope to see you again soon!");
+  }
+
+  private static LocalDate dateToLocalDate(String[] date) throws DukeException {
+    LocalDate localDate;
+    if (date.length == 3) {
+      int day = Integer.parseInt(date[0]);
+      int month = Integer.parseInt(date[1]);
+      int year = Integer.parseInt(date[2]);
+      localDate = LocalDate.of(year, month, day);
+    } else {
+      throw new DukeException("Error with input date!");
+    }
+    return localDate;
+  }
+
+  private static LocalTime timeToLocalTime(String time) throws DukeException {
+    int timeLength = time.length();
+    LocalTime localTime;
+    if (timeLength == 4) {
+      int hour = Integer.parseInt(time.substring(0, 2));
+      int minute = Integer.parseInt(time.substring(2, 4));
+      localTime = LocalTime.of(hour, minute);
+    } else if (timeLength == 3) {
+      int hour = Integer.parseInt(String.valueOf(time.charAt(0)));
+      int minute = Integer.parseInt(time.substring(1, 3));
+      localTime = LocalTime.of(hour, minute);
+    } else {
+      throw new DukeException("Error with input time");
+    }
+    return localTime;
   }
 }
