@@ -26,7 +26,10 @@ public class Duke {
                     handleFile.writeFile(listOfItems);
                 } else if (input.contains("delete")) {
                     listOfItems.deleteItem(input);
-                    handleFile.writeFile(listOfItems);
+                } else if (input.contains("items due by")) { // check items due on a specific date
+                    listOfItems.checkBy(input);
+                } else if (input.contains("items due before")) { // check items due before a specific date + time
+                    listOfItems.checkBefore(input);
                 } else {
                     listOfItems.addItem(input);
                     handleFile.writeFile(listOfItems);
