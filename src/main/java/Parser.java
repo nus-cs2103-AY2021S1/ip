@@ -1,13 +1,11 @@
 import java.util.ArrayList;
 
 public class Parser {
-    private ArrayList<String> lines;
-    private int numberOfItems;
+    private TaskList lines;
     private boolean carryOn = true;
 
     public Parser(ArrayList<String> lines) {
-        this.lines = lines;
-        this.numberOfItems = lines.size();
+        this.lines = new TaskList(lines);
     }
 
     public boolean continueDuke() {
@@ -15,7 +13,7 @@ public class Parser {
     }
 
     public ArrayList<String> finalizedLines() {
-        return lines;
+        return lines.getList();
     }
 
     public void parse(String inputString) throws DukeException {
@@ -25,17 +23,17 @@ public class Parser {
                 int itemNumber = Integer.parseInt(inputString.substring(inputString.indexOf(" ") + 1));
                 if (inputString.length() <= 5) {
                     throw new DukeException("You did not specify which task you are done with!");
-                } else if (numberOfItems < itemNumber || itemNumber <= 0) {
+                } else if (lines.getNumberOfItems() < itemNumber || itemNumber <= 0) {
                     throw new DukeException("Hey, no such task exists!");
                 } else {
-                    String doneTask = lines.get(itemNumber - 1);
-                    lines.set(itemNumber - 1, Ui.done(doneTask));
+                    String doneTask = lines.getTask(itemNumber - 1);
+                    lines.updateTask(Ui.done(doneTask), itemNumber - 1);
                 }
             } catch (NumberFormatException e) {
                 System.out.println(divider + "Invalid input for done command!" + "\n" + divider);
             }
         } else if (inputString.equals("list")) {
-            Ui.listTasks(lines);
+            Ui.listTasks(lines.getList());
         } else if (inputString.equals("bye")) {
             Ui.bye();
             carryOn = false;
@@ -44,13 +42,12 @@ public class Parser {
                 int itemNumber = Integer.parseInt(inputString.substring(inputString.indexOf(" ") + 1));
                 if (inputString.length() <= 7) {
                     throw new DukeException("You did not specify which task you are deleting!");
-                } else if (numberOfItems < itemNumber || itemNumber <= 0) {
+                } else if (lines.getNumberOfItems() < itemNumber || itemNumber <= 0) {
                     throw new DukeException("Hey, no such task exists!");
                 } else {
-                    String task = lines.get(itemNumber - 1);
-                    numberOfItems -= 1;
-                    lines.remove(itemNumber - 1);
-                    Ui.deletedTask(task, numberOfItems);
+                    String task = lines.getTask(itemNumber - 1);
+                    lines.removeTask(itemNumber - 1);
+                    Ui.deletedTask(task, lines.getNumberOfItems());
                 }
             } catch (NumberFormatException e) {
                 System.out.println(divider + "Invalid input for delete command!" + "\n" + divider);
@@ -98,8 +95,8 @@ public class Parser {
             }
             if (task != null) {
                 String newTask = task.toString();
-                lines.add(newTask);
-                numberOfItems = Ui.addedTask(task, numberOfItems);
+                lines.addTask(newTask);
+                Ui.addedTask(task, lines.getNumberOfItems());
             }
         }
     }

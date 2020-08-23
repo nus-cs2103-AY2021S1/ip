@@ -36,8 +36,7 @@ public class Ui {
         System.out.println("Now you have " + numberOfItems + " tasks in the list.");
     }
 
-    public static int addedTask(Task task, int numberOfItems) {
-        numberOfItems += 1;
+    public static void addedTask(Task task, int numberOfItems) {
         if (numberOfItems < 100) {
             System.out.println(divider + "Got it, I've added this task:");
             System.out.println(" " + task);
@@ -45,9 +44,7 @@ public class Ui {
             System.out.println(divider);
         } else {
             System.out.println(divider + "Sorry, the list is full!\n" + divider);
-            numberOfItems -= 1;
         }
-        return numberOfItems;
     }
 
     public static void handleDukeException(DukeException e) {
