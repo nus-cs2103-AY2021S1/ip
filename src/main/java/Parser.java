@@ -17,4 +17,10 @@ public class Parser {
 
         return lineData;
     }
+
+    public static String processFind(String line) {
+        String[] lineData = line.split(" ");
+
+        return lineData[1];
+    }
 }

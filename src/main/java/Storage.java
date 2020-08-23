@@ -12,7 +12,6 @@ public final class Storage {
     private static Path dbPath = null;
 
     private TaskList toDoLst;
-//    private List<Task> toDoLst;
 
     public Storage() throws FileNotFoundException, IOException {
         try {
@@ -22,7 +21,6 @@ public final class Storage {
         }
 
         toDoLst = new TaskList();
-//        toDoLst = new ArrayList<>();
 
         try {
             BufferedReader br = new BufferedReader(new FileReader(dbPath.toFile()));
@@ -75,6 +73,10 @@ public final class Storage {
 
     public Task removeToDoItem(int i) {
         return toDoLst.removeToDoItem(i);
+    }
+
+    public List<Task> searchToDoItems(String searchTerm) {
+        return toDoLst.searchToDoItems(searchTerm);
     }
 
     public void save() throws IOException {
