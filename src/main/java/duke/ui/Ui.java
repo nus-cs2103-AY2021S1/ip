@@ -7,12 +7,12 @@ import java.util.Scanner;
  */
 
 public class Ui {
-    private static final String spacer = "               ";
-    private static final String logo = spacer + " ____        _        \n"
-            + spacer + "|  _ \\ _   _| | _____ \n"
-            + spacer + "| | | | | | | |/ / _ \\\n"
-            + spacer + "| |_| | |_| |   <  __/\n"
-            + spacer + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String SPACER = "               ";
+    private static final String LOGO = SPACER + " ____        _        \n"
+            + SPACER + "|  _ \\ _   _| | _____ \n"
+            + SPACER + "| | | | | | | |/ / _ \\\n"
+            + SPACER + "| |_| | |_| |   <  __/\n"
+            + SPACER + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String LINE = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     private static final String OPENING_MSG = " *** Opening and loading relevant documents into duke.Duke ***";
     private static final String GOODBYE_MSG = "Bye ^.^, Hope to see you again soon!!!";
@@ -31,7 +31,7 @@ public class Ui {
     public void greetings() {
         messageFormatter(() -> {
             System.out.println(OPENING_MSG);
-            System.out.println(logo);
+            System.out.println(LOGO);
         });
         messageFormatter(() -> {
             System.out.println(HELLO_DUKE);
