@@ -90,6 +90,10 @@ public class Ui {
                 " tasks on " + date + ":");
     }
 
+    public void printFindStatement() {
+        System.out.println(startLine + "Here are the matching tasks in your list:\n");
+    }
+
     public void printAddStatements(String taskString, int size) {
         System.out.println(startLine + "Got it. I've added this task:\n" +
                 taskString + "\n" + "Now you have " + size + " task(s) in the list.\n"
