@@ -49,6 +49,27 @@ public class DoneCommandTest {
     }
 
     @Test
+    public void execute_markDoneAsDone_throwException() {
+        Ui ui = new Ui();
+        Storage storage = new StorageStub();
+        TaskList list = storage.getList();
+        Task task = new ToDo("hello");
+        list.add(task);
+        try {
+            task.markAsDone();
+        } catch (Exception e) {
+            fail();
+        }
+
+        try {
+            String res = new DoneCommand("done 1").execute(ui, list, storage);
+            fail();
+        } catch (Exception e) {
+            assertEquals("The task " + task + " has already been done.", e.getMessage());
+        }
+    }
+
+    @Test
     public void execute_validCommand_doneTask() {
         Ui ui = new Ui();
         Storage storage = new StorageStub();
