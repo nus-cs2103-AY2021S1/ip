@@ -15,6 +15,10 @@ public class ByeCommand extends Command {
         super(input);
     }
 
+    /**
+     * Tells whether this command is aiming for exiting.
+     * @return True.
+     */
     @Override
     public boolean isExit() {
         return true;
