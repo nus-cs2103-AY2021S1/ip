@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -80,11 +81,11 @@ public class DataSaver {
                     break;
                 case "D":
                     time = parsedTask[3];
-                    taskToAdd = new Deadline(description, isDone, time);
+                    taskToAdd = new Deadline(description, isDone, LocalDate.parse(time));
                     break;
                 case "E":
                     time = parsedTask[3];
-                    taskToAdd = new Event(description, isDone, time);
+                    taskToAdd = new Event(description, isDone, LocalDate.parse(time));
                     break;
                 default:
                    throw new DukeException("Task cannot be read from Duke.txt");

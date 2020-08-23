@@ -1,6 +1,7 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+import java.util.List;
 
 public class Duke {
 
@@ -83,20 +84,23 @@ public class Duke {
                             String[] taskAndTimeByArray = reply.split(" /by ");
                             String deadlineDescription = taskAndTimeByArray[0].substring(9);
                             String by = taskAndTimeByArray[1];
-                            Task newDeadline = new Deadline(deadlineDescription, by);
+                            Task newDeadline = new Deadline(deadlineDescription, LocalDate.parse(by));
                             handleAddTask(newDeadline);
                             break;
                     case "event":
                             String[] taskAndTimeAtArray = reply.split(" /at ");
                             String eventDescription = taskAndTimeAtArray[0].substring(6);
                             String at = taskAndTimeAtArray[1];
-                            Task newEvent = new Event(eventDescription, at);
+                            Task newEvent = new Event(eventDescription, LocalDate.parse(at));
                             handleAddTask(newEvent);
                             break;
                     default:
                             throw new DukeException(
                                     "Invalid Command Exception, start every cmd with todo, deadline or event");
                     }
+                } catch (DateTimeParseException e) {
+                    throw new DukeException(String.format(
+                            "Time format has to be in the form: YYYY-MM-DD %s", e.getMessage()));
                 } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
                     throw new DukeException(String.format("Invalid arguments specified for %s", command));
                 }
