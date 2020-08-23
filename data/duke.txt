@@ -1,3 +1,5 @@
 T | 1 | borrow book
 T | 1 | return book
 T | 1 | watch a movie
+D | 0 | finish level-8 | 23-08-2020 12:00
+D | 0 | add-tags | 23-08-2020 12:00

@@ -2,6 +2,7 @@ import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -23,9 +24,11 @@ public class Duke {
         if (task instanceof TodoTask) {
             return "T" + " | " + (task.isDone ? "1" : "0") + " | " + task.description;
         } else if (task instanceof DeadlineTask) {
-            return "D" + " | " + (task.isDone ? "1" : "0") + " | " + task.description + " | " + ((DeadlineTask) task).deadline;
+            return "D" + " | " + (task.isDone ? "1" : "0") + " | " + task.description + " | " +
+                    ((DeadlineTask) task).deadline.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
         } else {
-            return "E" + " | " + (task.isDone ? "1" : "0") + " | " + task.description + " | " + ((EventTask) task).timing;
+            return "E" + " | " + (task.isDone ? "1" : "0") + " | " + task.description + " | " +
+                    ((EventTask) task).timing.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
         }
     }
 
@@ -174,7 +177,7 @@ public class Duke {
                     }
                 }
             }
-        } catch (FileNotFoundException exception) {
+        } catch (FileNotFoundException | DukeException exception) {
             System.out.println(exception);
         }
     }

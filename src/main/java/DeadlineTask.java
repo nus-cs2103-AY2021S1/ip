@@ -11,6 +11,7 @@ public class DeadlineTask extends Task {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
             this.deadline = LocalDateTime.parse(deadline, formatter);
         } catch (DateTimeParseException exception) {
+            System.out.println(deadline);
             throw new DukeException("Error! Invalid date format, Please enter the date in the format dd-MM-yyyy HH:mm");
     }
 
@@ -19,7 +20,7 @@ public class DeadlineTask extends Task {
     @Override
     public String toString() {
         return "[D][" + getStatusIcon() + "] " + description + " (by: " +
-                deadline.format(DateTimeFormatter.ofPattern("d MM yyyy, hh:mm a")) + ")";
+                deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a")) + ")";
     }
 
 }
