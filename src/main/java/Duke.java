@@ -33,6 +33,12 @@ public class Duke {
             this.type = Type.valueOf(type.toUpperCase());
         }
 
+        Task(String type, String name, Boolean completed) {
+            this.name = name;
+            this.completion = completed;
+            this.type = Type.valueOf(type.toUpperCase());
+        }
+
         void complete() {
             completion = true;
         }
@@ -65,7 +71,7 @@ public class Duke {
 
         @Override
         public String toString() {
-            return completion + name + type;
+            return type + " " + completion + " " + name;
         }
     }
 
@@ -86,6 +92,11 @@ public class Duke {
 
         static DukeException outOfBounds(int index) {
             String message = "There is no task number " + index + " , there are only " + storage.size() + " task(s).";
+            return new DukeException(message);
+        }
+
+        static DukeException fileError() {
+            String message = "Line in save file has invalid format";
             return new DukeException(message);
         }
     }
@@ -117,6 +128,20 @@ public class Duke {
         Task taskToAdd = new Task(type, name);
         storage.add(taskToAdd);
         taskAdded(taskToAdd);
+        save(storage);
+    }
+
+    /**
+     * Overloaded store with ability to set completion
+     * @param type the type of task to be added
+     * @param name the name of the task
+     * @param completionStatus whether the task is completed
+     */
+    public static void store(String type, String name, Boolean completionStatus) {
+        Task taskToAdd = new Task(type, name, completionStatus);
+        storage.add(taskToAdd);
+        taskAdded(taskToAdd);
+        save(storage);
     }
 
     /**
@@ -158,6 +183,7 @@ public class Duke {
         System.out.println("Marked task " + (taskNumber + 1) + " as complete.");
         System.out.println(currentTask.getType() + "[✓] " + storage.get(taskNumber).getName());
         line();
+        save(storage);
     }
 
     /**
@@ -172,6 +198,7 @@ public class Duke {
         storage.remove(taskNumber);
         System.out.println("There are now " + storage.size() + " task(s) remaining.");
         line();
+        save(storage);
     }
 
     /**
@@ -183,6 +210,7 @@ public class Duke {
             FileWriter writer = new FileWriter("./data/duke.txt");
             for (Task task: storage) {
                 writer.write(task.toString());
+                writer.write("\n");
             }
             writer.close();
         } catch (Exception e) {
@@ -192,6 +220,47 @@ public class Duke {
             } else {
                 System.out.println("folder does not exist, while making folder failed");
             }
+        }
+    }
+
+    /**
+     * Loads contents of storage text file into storage array
+     */
+    public static void load() {
+        try {
+            File data = new File("./data/duke.txt");
+            Scanner dataScan = new Scanner(data);
+            while (dataScan.hasNextLine()) {
+                try {
+                    Scanner currentLine = new Scanner(dataScan.nextLine());
+                    String type;
+                    boolean completionStatus;
+                    String name;
+
+                    if (currentLine.hasNext()) {
+                        type = currentLine.next();
+                    } else {
+                        throw DukeException.fileError();
+                    }
+
+                    if (currentLine.hasNext()) {
+                        completionStatus = Boolean.parseBoolean(currentLine.next());
+                    } else {
+                        throw DukeException.fileError();
+                    }
+
+                    if (currentLine.hasNext()) {
+                        name = currentLine.next();
+                    } else {
+                        throw DukeException.fileError();
+                    }
+                    store(type, name, completionStatus);
+                } catch (DukeException e) {
+                    echo(e.getMessage());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("save file does not exist, nothing loaded");
         }
     }
 
@@ -209,6 +278,9 @@ public class Duke {
                         + "|____/|_|   \\__,_|_| |_|\n";
 
         echo(logo + "What's up?");
+        echo("Loading started");
+        load();
+        echo("Loading ended");
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
             String output = scanner.nextLine();
@@ -226,7 +298,16 @@ public class Duke {
                 // wow intelliJ is a better programmer than i'll ever be
                 switch (firstWord) {
                 case "done": {
-                    String index = multiWord.next();
+                    String index = "0";
+                    try {
+                        if (multiWord.hasNext()) {
+                            index = multiWord.next();
+                        } else {
+                            throw DukeException.empty("done");
+                        }
+                    } catch (DukeException e) {
+                        echo(e.getMessage());
+                    }
                     int intIndex = Integer.parseInt(index);
                     try {
                         if (intIndex <= storage.size() && intIndex > 0) {
