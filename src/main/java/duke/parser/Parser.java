@@ -2,7 +2,15 @@ package duke.parser;
 
 import duke.exception.DukeException;
 import duke.ui.Ui;
-import duke.command.*;
+import duke.command.Command;
+import duke.command.TodoCommand;
+import duke.command.EventCommand;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.CheckCommand;
+import duke.command.DoneCommand;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
