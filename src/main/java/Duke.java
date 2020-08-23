@@ -11,24 +11,29 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Parser parser;
-    //private Ui ui;
+    private Ui ui;
 
     public Duke(String filePath) throws FileNotFoundException, DukeException {
         this.storage = new Storage(filePath);
         this.taskList = new TaskList(storage);
         this.parser = new Parser(taskList);
+        this.ui = new Ui();
     }
 
     public void run() {
         Scanner sc = new Scanner(System.in);
         String input;
-        System.out.println("Hi there! I'm Peanut.\nHow can I be of assistance?\n");
+        ui.start();
         input = sc.nextLine();
         while (!input.equals("bye")) {
-            parser.parseUserInput(input);
+            try {
+                parser.parseUserInput(input);
+            } catch (DukeException | IOException e) {
+                ui.showError(e);
+            }
             input = sc.nextLine();
         }
-        System.out.println("\nBye! Sad to see you go :(");
+        ui.end();
     }
 
     public static void main(String[] args) throws IOException, DukeException {

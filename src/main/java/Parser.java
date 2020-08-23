@@ -36,9 +36,9 @@ public class Parser {
         return task;
     }
 
-    protected void parseUserInput(String input) {
+    protected void parseUserInput(String input) throws DukeException, IOException {
         System.out.print("\n");
-        try {
+
             if (input.equals("list")) {
                 System.out.println("Here are your tasks:");
                 System.out.println(list);
@@ -60,8 +60,5 @@ public class Parser {
                 //unrecognised command
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means.\n");
             }
-        } catch (DukeException | IOException error) {
-            System.out.println(error.getMessage());
-        }
     }
 }
