@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Ui {
 
     private static final String DIVIDER =
@@ -43,5 +45,10 @@ public class Ui {
 
     public void showLine() {
         System.out.println(DIVIDER);
+    }
+
+    public String readCommand() {
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
     }
 }

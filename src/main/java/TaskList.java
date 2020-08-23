@@ -43,38 +43,42 @@ public class TaskList {
         }
     }
 
-    public Task addTask(String task) throws DukeException {
+    public Task addTask(String type, String task) throws DukeException {
         Task ret;
-        if (task.startsWith("todo")) {
-            if (task.length() <= 5) {
-                throw new DukeException("The description of a todo cannot be empty.");
-            }
-            ret = new ToDo(task.substring(5));
-            tasks.add(ret);
-        } else if (task.startsWith("deadline")) {
-            if (task.length() <= 9) {
-                throw new DukeException("The description of a deadline cannot be empty.");
-            }
-            String[] taskArr = task.substring(9).split(" /by ");
-            try {
-                ret = new Deadline(taskArr[0], taskArr[1]);
+        switch (type) {
+            case "todo":
+                if (task.length() <= 5) {
+                    throw new DukeException("The description of a todo cannot be empty.");
+                }
+                ret = new ToDo(task.substring(5));
                 tasks.add(ret);
-            } catch (IndexOutOfBoundsException ex) {
-                throw new DukeException("Invalid description of a deadline.");
-            }
-        } else if (task.startsWith("event")) {
-            if (task.length() <= 6) {
-                throw new DukeException("The description of an event cannot be empty.");
-            }
-            String[] taskArr = task.substring(6).split(" /at ");
-            try {
-                ret = new Event(taskArr[0], taskArr[1]);
-                tasks.add(ret);
-            } catch (IndexOutOfBoundsException ex) {
-                throw new DukeException("Invalid description of an event.");
-            }
-        } else {
-            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                break;
+            case "deadline":
+                if (task.length() <= 9) {
+                    throw new DukeException("The description of a deadline cannot be empty.");
+                }
+                String[] taskArr = task.substring(9).split(" /by ");
+                try {
+                    ret = new Deadline(taskArr[0], taskArr[1]);
+                    tasks.add(ret);
+                } catch (IndexOutOfBoundsException ex) {
+                    throw new DukeException("Invalid description of a deadline.");
+                }
+                break;
+            case "event":
+                if (task.length() <= 6) {
+                    throw new DukeException("The description of an event cannot be empty.");
+                }
+                String[] taskArr2 = task.substring(6).split(" /at ");
+                try {
+                    ret = new Event(taskArr2[0], taskArr2[1]);
+                    tasks.add(ret);
+                } catch (IndexOutOfBoundsException ex) {
+                    throw new DukeException("Invalid description of an event.");
+                }
+                break;
+            default:
+                throw new DukeException("Unexpected value: " + type);
         }
         return ret;
     }
