@@ -1,9 +1,14 @@
 package duke;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+import java.util.Calendar;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
 
@@ -45,9 +50,9 @@ public class Duke {
             String command = sc.nextLine();
 
             try {
-            String[] cmd = command.split(" ", 2);
-            String firstWord = cmd[0];
-            Commands defCommand = null;
+                String[] cmd = command.split(" ", 2);
+                String firstWord = cmd[0];
+                Commands defCommand = null;
 
                 try {
                     defCommand = Commands.valueOf(firstWord.toUpperCase()); //input to upper case
@@ -79,6 +84,9 @@ public class Duke {
                         break;
                     case DELETE:
                         processDelete(command);
+                        break;
+                    case SHOW:
+                        processShow(command);
                         break;
                     default:
                         WrongInputException wrong = new WrongInputException();
@@ -137,9 +145,10 @@ public class Duke {
             deleteTask(index);
 
         } catch (DukeException d) {
-           throw new DeleteException("Please enter a number. I cannot delete nothing :(");
+            throw new DeleteException("Please enter a number. I cannot delete nothing :(");
         }
     }
+
     public void deleteTask(int taskNum) throws DeleteException {
         if(taskNum <= 0 || taskNum >= todos.size()) {
             throw new DeleteException("Please enter a valid task number.");
@@ -174,17 +183,34 @@ public class Duke {
         }
     }
 
-
     public void processDeadline(String command) throws DeadlineException {
         try {
             String theRest = removeFirstWord(command);
-            String[] taskAndDeadline = theRest.split(" /by", 2);
+            String[] taskAndDeadlineAndTime = theRest.split(" /by ", 2);
+            Deadline deadline;
 
             try {
-                String task = taskAndDeadline[0];
-                String date = taskAndDeadline[1];
-                Deadline deadline = new Deadline(task, date);
-                saveToList(deadline);
+                String task = taskAndDeadlineAndTime[0];
+                String dateAndTime = taskAndDeadlineAndTime[1];
+                String[] dateTime = dateAndTime.split(" ", 2);
+
+                String date = dateTime[0];
+
+                try {
+                    LocalDate localDate = LocalDate.parse(date);
+
+                    if (dateTime.length < 2) {
+                        deadline = new Deadline(task, localDate);
+                    } else {
+                        String time = dateTime[1];
+                        LocalTime localTime = LocalTime.parse(time);
+                        deadline = new Deadline(task, localDate, localTime);
+                    }
+                    saveToList(deadline);
+                } catch (DateTimeParseException e) {
+                    System.out.println("Please enter the date in YYYY/MM/DD format and time in HH:MM format.");
+                }
+
             } catch (IndexOutOfBoundsException e) {
                 throw new DeadlineException("Please specify the task and deadline.");
             }
@@ -197,18 +223,49 @@ public class Duke {
     public void processEvent(String command) throws EventException {
         try {
             String theRest = removeFirstWord(command);
-            String[] eventAndDate = theRest.split(" /at", 2);
+            String[] eventAndDateAndTime = theRest.split(" /at ", 2);
+            Event event;
+
             try {
-                String eventDesc = eventAndDate[0];
-                String eventDate = eventAndDate[1];
-                Event event = new Event(eventDesc, eventDate);
-                saveToList(event);
+                String eventDesc = eventAndDateAndTime[0];
+                String eventDateAndTime = eventAndDateAndTime[1];
+
+                String[] dateTime = eventDateAndTime.split(" ", 2);
+
+                String date = dateTime[0];
+
+                try {
+                    LocalDate localDate = LocalDate.parse(date);
+
+                    if(dateTime.length < 2) {
+                        event = new Event(eventDesc, localDate);
+                    } else {
+                        String time = dateTime[1];
+                        LocalTime localTime = LocalTime.parse(time);
+                        event = new Event(eventDesc, localDate, localTime);
+                    }
+
+                    saveToList(event);
+
+                } catch (DateTimeParseException e) {
+                    System.out.println("Please enter the date in YYYY/MM/DD format and time in HH:MM format..");
+                }
+
             } catch (IndexOutOfBoundsException e) {
                 throw new EventException("Please specify the event name and date.");
             }
 
         } catch (DukeException d) {
             throw new EventException("Please specify the event name and date.");
+        }
+    }
+
+    public void processShow(String command) throws CalendarException {
+        try {
+            String date = removeFirstWord(command);
+            showCalendar(date);
+        } catch (DukeException e) {
+            throw new CalendarException("Invalid input date format. Please try again.");
         }
     }
 
@@ -243,6 +300,40 @@ public class Duke {
             this.todos.add(index, newTask);
             System.out.println("YAYY! I've marked this task as done : \n"
                     + newTask.toString());
+        }
+    }
+
+    public void showCalendar(String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        Boolean hasSomething = false;
+        System.out.println("Tasks on : " + localDate.getDayOfWeek() + ", "
+                + localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+
+        for(Task task : this.todos) {
+            String type = task.getType();
+            if(type.equals("E")) {
+                Event event = (Event) task;
+                LocalDate eventDate = event.getDate();
+                if(eventDate.equals(localDate)) {
+                    hasSomething = true;
+                    System.out.println(task);
+                }
+
+            } else if(type.equals("D")) {
+                Deadline deadline = (Deadline) task;
+                LocalDate deadlineDate = deadline.getDeadline();
+                if(deadlineDate.equals(localDate)) {
+                    hasSomething = true;
+                    System.out.println(task);
+                }
+
+            } else {
+                continue;
+            }
+        }
+
+        if(!hasSomething) {
+            System.out.println("You have nothing to do on this day!");
         }
     }
 }

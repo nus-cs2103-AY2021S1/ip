@@ -6,6 +6,7 @@ enum Commands {
     EVENT,
     DONE,
     LIST,
+    SHOW,
     DELETE,
     BYE
 }
