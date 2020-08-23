@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public abstract class Task {
 
     protected String description;
@@ -15,6 +17,8 @@ public abstract class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public abstract LocalDate getDate();
 
     @Override
     public String toString() {
