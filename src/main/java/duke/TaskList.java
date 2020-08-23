@@ -78,7 +78,7 @@ public class TaskList implements Iterable<Task> {
             timedTasks.removeIf(i -> i instanceof Todo);
             Task[] timedTasksArr = timedTasks.toArray(new Task[0]);
             for (Task i : timedTasksArr) {
-                assert(i instanceof TimedTask);
+                assert i instanceof TimedTask;
                 if (!((TimedTask) i).getDate().equals(date)) {
                     timedTasks.remove(i);
                 }
