@@ -2,7 +2,7 @@ public class Todo extends Task {
     private static final String STRING_FORMAT = "[T][%s] %s";
 
     public Todo(String description) {
-        super(description);
+        super(TaskType.TODO, description);
     }
 
     @Override

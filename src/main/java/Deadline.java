@@ -7,7 +7,7 @@ public class Deadline extends Task {
     protected LocalDateTime dueDate;
 
     public Deadline(String description, LocalDateTime dueDate) {
-        super(description);
+        super(TaskType.DEADLINE, description);
         this.dueDate = dueDate;
     }
     

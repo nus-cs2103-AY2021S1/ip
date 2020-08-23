@@ -1,8 +1,10 @@
 public abstract class Task {
+    protected TaskType taskType;
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    public Task(TaskType taskType, String description) {
+        this.taskType = taskType;
         this.description = description;
         this.isDone = false;
     }
@@ -14,6 +16,10 @@ public abstract class Task {
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
         //return tick or X symbols
+    }
+    
+    public TaskType getTaskType() {
+        return taskType;
     }
 
     public abstract boolean hasDateTime();
