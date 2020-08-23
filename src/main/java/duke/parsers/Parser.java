@@ -14,7 +14,7 @@ public class Parser {
             EmptyDueDateException, EmptyEventDateException {
 
         String[] arr = userInput.strip().split(" ", 2);
-        switch (arr[0].strip()) {
+        switch (arr[0].strip().toLowerCase()) {
             case "bye":
                 return parseBye();
             case "list":
