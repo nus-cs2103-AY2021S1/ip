@@ -1,4 +1,3 @@
-
 import static ui.Ui.echo;
 import static ui.Ui.welcome;
 
