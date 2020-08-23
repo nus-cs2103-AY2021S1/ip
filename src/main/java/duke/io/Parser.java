@@ -76,9 +76,14 @@ public class Parser {
             } else if (arr[i].equals("/by") || arr[i].equals("/at")) {
                 reached = true;
             } else {
-                description.append(arr[i] + " ");
+                if (i != 1) {
+                    description.append(" " + arr[i]);
+                } else {
+                    description.append(arr[i]);
+                }
             }
         }
+       
         return new String[]{date.toString(), description.toString()};
     }
 

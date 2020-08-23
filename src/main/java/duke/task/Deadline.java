@@ -48,4 +48,19 @@ public class Deadline extends Task {
     public String toSave() {
         return "D | " + getDoneInteger() + " | " + description + " | " + this.by;
     }
+
+    @Override
+    public boolean equals(Object d) {
+        if (d instanceof Deadline) {
+            Deadline deadline = (Deadline) d;
+            return this.description.equals(deadline.description) &&
+                    this.by.equals(deadline.by) &&
+                    this.localDate.equals(deadline.localDate) &&
+                    this.time.equals(deadline.time);
+        } else {
+            return false;
+        }
+    }
+
+   
 }
