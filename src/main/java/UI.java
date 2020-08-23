@@ -49,12 +49,16 @@ public class UI {
     }
 
     protected void findTask(ArrayList<Task> foundTasks) {
-        System.out.println("\nHere are the tasks in your list!\n");
-        int index = 1;
-        for (Task task: foundTasks) {
-            System.out.println(index + "." + task);
-            index++;
+        if (foundTasks.isEmpty()) {
+            System.out.println("\nNo matching tasks found!\n");
+        } else {
+            System.out.println("\nHere are the tasks in your list!\n");
+            int index = 1;
+            for (Task task : foundTasks) {
+                System.out.println(index + "." + task);
+                index++;
+            }
+            System.out.println("\n");
         }
-        System.out.println("\n");
     }
 }
