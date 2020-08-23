@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -6,6 +9,8 @@ public class Duke {
 
     public static List<Task> toDoList = new ArrayList<>();
     public static String seperator = "\t____________________________________________________________";
+    public static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
 
     public static void listTask() {
         System.out.println(seperator);
@@ -30,29 +35,44 @@ public class Duke {
         current.completeTask();
         System.out.println(seperator);
         System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t\t[" + current.getIcon() + "] " + current.taskDesc);
+        System.out.println("\t\t"+current.toString());
         System.out.println();
     }
 
-    private static void deadlineTask(String newLine) throws InvalidInputException {
+    private static void deadlineTask(String newLine) throws InvalidInputException, InvalidDateTimeFormatException {
         if(newLine.length() <= 9) {
             throw new InvalidInputException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
         }
         String[] splitWord = newLine.split("/");
-        Deadlines task = new Deadlines(splitWord[0].substring(9),splitWord[1]);
-        toDoList.add(task);
-        System.out.println(seperator);
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t"+task.toString());
-        System.out.println("\tNow you have " + toDoList.size() + " tasks in the list.");
-        System.out.println(seperator);
+        String deadline = splitWord[1].substring(3);
+        Deadlines task;
+        try {
+            task = new Deadlines(splitWord[0].substring(9), LocalDateTime.parse(deadline,dtf));
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeFormatException("\tDeadline input must follow a certain format! " +
+                    "e.g. 2020-08-23 16:45");
+        }
+            toDoList.add(task);
+            System.out.println(seperator);
+            System.out.println("\tGot it. I've added this task:");
+            System.out.println("\t" + task.toString());
+            System.out.println("\tNow you have " + toDoList.size() + " tasks in the list.");
+            System.out.println(seperator);
+
     }
-    private static void eventTask(String newLine) throws  InvalidInputException{
+    private static void eventTask(String newLine) throws InvalidInputException, InvalidDateTimeFormatException {
         if(newLine.length() <= 6) {
             throw new InvalidInputException("\t☹ OOPS!!! The description of an event cannot be empty.");
         }
         String[] splitWord = newLine.split("/");
-        Events task = new Events(splitWord[0].substring(6),splitWord[1]);
+        String timing = splitWord[1].substring(3);
+        Events task;
+        try {
+            task = new Events(splitWord[0].substring(6),LocalDateTime.parse(timing,dtf) );
+        } catch(DateTimeParseException e) {
+            throw new InvalidDateTimeFormatException("\tEvent timing input must follow a certain format: yyyy-mm-dd HH:mm " +
+                    "e.g. 2020-08-23 16:45");
+        }
         toDoList.add(task);
         System.out.println(seperator);
         System.out.println("\tGot it. I've added this task:");
@@ -126,7 +146,7 @@ public class Duke {
                 } else {
                     throw new InvalidInputException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-            } catch (InvalidInputException e) {
+            } catch (DukeException e) {
                 System.out.println(seperator);
                 System.out.println(e.getMessage());
                 System.out.println(seperator);
