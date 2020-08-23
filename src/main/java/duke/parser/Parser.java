@@ -15,7 +15,16 @@ import duke.task.ToDo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Allows Focus to make sense of user's commands and parsing of
+ * text files to convert them to Tasks.
+ */
 public class Parser {
+    /**
+     * Parses user's inputs to Command.
+     * @param input User's input.
+     * @return Different commands depending on user's input.
+     */
     public static Command parse(String input) {
         Command command;
         if (input.startsWith("todo")) { // add todo tasks
@@ -38,6 +47,11 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Parses strings from text file to different types of Task.
+     * @param text Task in string form in text file.
+     * @return Different types of Task.
+     */
     public static Task textToTask(String text) {
         String[] task = text.split("\\|");
         Task existingTask = null;

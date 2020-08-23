@@ -1,17 +1,32 @@
 package duke.ui;
 
+/**
+ * Represents the interactions between Focus and user.
+ */
 public class UI {
+    /**
+     * Divider.
+     */
     private static final String divider =
             "\t------------------------------------------------------------------\n";
 
+    /**
+     * Prints the divider.
+     */
     public void printDivider() {
         System.out.print(divider);
     }
 
+    /**
+     * Prints divider with next line.
+     */
     public void printDividerWithSpacing() {
         System.out.println(divider);
     }
 
+    /**
+     * Greets the user upon entering the Focus.
+     */
     public void greetUser() {
         String logo =
                 "\t __\n"
@@ -27,6 +42,10 @@ public class UI {
         System.out.println(greetings);
     }
 
+    /**
+     * Addresses the user with the name provided.
+     * @param name Name of user.
+     */
     public void addressUser(String name) {
         String address = divider
                 + "\tHi there, " + name + "!"
@@ -35,6 +54,9 @@ public class UI {
         System.out.println(address);
     }
 
+    /**
+     * Exits Focus.
+     */
     public void exitFocus() {
         String exit = "\tHopefully I have helped you today. Byeee! (*^O^*)/\"\n"
                 + divider;
