@@ -13,7 +13,8 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/*
+# shellcheck disable=SC2211
+if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/*.java ../src/main/java/*/*.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1

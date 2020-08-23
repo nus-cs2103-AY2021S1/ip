@@ -1,3 +1,4 @@
+package exceptions;
 
 public class EmptyEventsException extends DukeException {
 

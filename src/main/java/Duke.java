@@ -1,109 +1,41 @@
-import java.io.File;
-import java.io.FileWriter;
+
+import parser.Parser;
+import storage.Storage;
+import tasklist.TaskList;
+import ui.Ui;
+
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Duke {
     public final static String FILEPATH = System.getProperty("user.dir") + "/duke.txt";
-    
-    private static void appendToFile(String filePath, String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
-        fw.write(textToAppend + "\n");
-//        System.out.println(textToAppend);
-        fw.close();
-    }
+    private final Storage storage;
+    private final TaskList tasks;
+    private final Parser parser;
+    private final Ui ui;
 
     public static void main(String[] args) throws IOException {
-        
-        boolean directoryExists = new File(FILEPATH).exists();
+        new Duke(FILEPATH).run();
+    }
 
-        if (!directoryExists) {
-            FileWriter fw = new FileWriter(FILEPATH, true);
-        }
-        appendToFile(FILEPATH, "Hello! I'm Duke\n" +
-                "What can I do for you?");
-        Scanner sc = new Scanner(System.in);
-        ArrayList<Task> books = new ArrayList<>();
+    public Duke(String filePath) throws IOException {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        parser = new Parser();
+        tasks = new TaskList();
+        storage.load();
+    }
 
-        while (sc.hasNext()) {
-            try {
-                String echo = sc.nextLine();
-                String[] s = echo.split("\\s");
-                String first = s[0];
+    public void run() throws IOException {
+        storage.appendToFile("Hello! I'm Duke\n" + "What can I do for you?");
 
-                if (first.equals("bye")) {
-                    appendToFile(FILEPATH, "Bye. Hope to see you again soon!");
-                    break;
-                }
-                if (first.equals("list")) {
-                    appendToFile(FILEPATH, "Here are the tasks in your list:");
-                    for (int i = 0; i < books.size(); i++) {
-                        int l = i + 1;
-                        appendToFile(FILEPATH, l + "." + books.get(i));
-                    }
-                } else if (first.equals("done")) {
-                    int index = Integer.parseInt(s[1]);
-                    books.get(index - 1).markAsDone();
-                    appendToFile(FILEPATH, "Nice! I've marked this task as done:\n  " + books.get(index - 1).getStatusIcon() + " return book");
-                } else {
-                    if (first.equals("todo")) {
-                        if (s.length == 1) {
-                            throw new EmptyTodoException();
-                        }
-                        Todo t = new Todo(echo.substring(5));
-                        books.add(t);
-
-                        appendToFile(FILEPATH, "Got it. I've added this task:");
-                        appendToFile(FILEPATH, "  " + books.get(books.size() - 1));
-                        appendToFile(FILEPATH, "Now you have " + books.size() + " tasks in the list.");
-                    } else if (first.equals("event")) {
-                        if (s.length == 1) {
-                            throw new EmptyEventsException();
-                        }
-                        int start = echo.indexOf("/at");
-                        String date = echo.substring(start + 4);
-                        LocalDate d = LocalDate.parse(date);
-                        String formattedDate = d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-
-                        Event t = new Event(echo.substring(6, start - 1), formattedDate);
-                        books.add(t);
-
-                        appendToFile(FILEPATH, "Got it. I've added this task:");
-                        appendToFile(FILEPATH, "  " + books.get(books.size() - 1));
-                        appendToFile(FILEPATH, "Now you have " + books.size() + " tasks in the list.");
-                    } else if (first.equals("deadline")) {
-                        if (s.length == 1) {
-                            throw new EmptyDeadlineException();
-                        }
-
-                        int start = echo.indexOf("/by");
-                        String date = echo.substring(start + 4);
-                        LocalDate d = LocalDate.parse(date);
-                        String formattedDate = d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-
-                        Deadline t = new Deadline(echo.substring(9, start - 1), formattedDate);
-                        books.add(t);
-
-                        appendToFile(FILEPATH, "Got it. I've added this task:");
-                        appendToFile(FILEPATH, "  " + books.get(books.size() - 1));
-                        appendToFile(FILEPATH, "Now you have " + books.size() + " tasks in the list.");
-                    } else if (first.equals("delete")) {
-                        int index = Integer.parseInt(s[1]);
-                        Task t = books.get(index - 1);
-                        books.remove(index - 1);
-                        appendToFile(FILEPATH, "Noted. I've removed this task:");
-                        appendToFile(FILEPATH, "  " + t);
-                        appendToFile(FILEPATH, "Now you have " + books.size() + " tasks in the list.");
-                    } else {
-                        throw new UnknownCommandException();
-                    }
-                }
-            } catch (DukeException e) {
-                appendToFile(FILEPATH, e.getMessage());
+        while (true) {
+            String fullCommand = ui.readCommand();
+            String first = parser.parse(fullCommand);
+            if (first.equals("bye")) {
+                storage.appendToFile("Bye. Hope to see you again soon!");
+                break;
             }
+            tasks.operate(storage, fullCommand, first);
         }
     }
 }
