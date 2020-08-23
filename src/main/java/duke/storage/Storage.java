@@ -9,13 +9,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Allows Focus to load and save data in user's files.
+ */
 public class Storage {
+    /**
+     * Represents the path for the task list to be saved at.
+     */
     private final String path;
 
+    /**
+     * Creates a storage to allow loading and saving of tasks.
+     */
     public Storage() {
         this.path = System.getProperty("user.dir") + "/data/duke.txt";
     }
 
+    /**
+     * Creates a folder to store text file. If present, it will not create.
+     */
     public static void createFolder() {
         String folderPath = System.getProperty("user.dir") + "/data";
         File folder = new File(folderPath);
@@ -27,6 +39,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates or retrieves the text file from user's files.
+     * @return True if user has an existing text file,
+     * false if user does not have an existing text file.
+     */
     public boolean retrieveTextFile() {
         boolean hasTextFile = false;
         try {
@@ -44,6 +61,10 @@ public class Storage {
         return hasTextFile;
     }
 
+    /**
+     * Loads the data from user's text file if it already exists.
+     * @return Arraylist of tasks in string format.
+     */
     public ArrayList<String> loadData() {
         String task;
         ArrayList<String> taskList = new ArrayList<>();
@@ -62,6 +83,10 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves the data to user's text file.
+     * @param taskList Task list created for user.
+     */
     public void saveData(ArrayList<Task> taskList) {
         try {
             FileWriter fileWriter = new FileWriter(path);

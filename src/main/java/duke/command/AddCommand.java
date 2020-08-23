@@ -7,17 +7,38 @@ import duke.task.TaskList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents the AddCommand to add tasks into task list.
+ */
 public class AddCommand extends Command {
+    /**
+     * Represents the type of task.
+     */
     private final String taskType;
 
+    /**
+     * Creates AddCommand with the given task type.
+     * @param taskType Type of task (to-do, deadline or event).
+     */
     public AddCommand(String taskType) {
         this.taskType = taskType;
     }
 
+    /**
+     * Returns false since AddCommand is not an ExitCommand.
+     * @return False.
+     */
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Executes AddCommand to add To-Do, Deadline or Event.
+     * @param input User's input.
+     * @param taskList Task list created for user.
+     * @param storage Storage created for user.
+     * @throws DukeException If input does not meet criteria.
+     */
     public void execute(String input, TaskList taskList, Storage storage) throws DukeException {
         String information;
         switch (taskType) {

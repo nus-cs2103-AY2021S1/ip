@@ -7,13 +7,27 @@ import duke.ui.UI;
 
 import java.util.Scanner;
 
+/**
+ * Main class to run Focus.
+ */
 public class Duke {
+    /**
+     * Storage created for user.
+     */
     private final Storage storage;
+    /**
+     * Task list created for user.
+     */
     private final TaskList taskList;
+    /**
+     * UI created to interact with user.
+     */
     private final UI ui;
 
+    /**
+     * Creates Focus to set up the things needed.
+     */
     public Duke() {
-        // set up the things needed to start Duke
         ui = new UI();
         Storage.createFolder();
         storage = new Storage();
@@ -24,6 +38,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs Focus.
+     */
     public void run() {
         boolean exit;
         Scanner sc = new Scanner(System.in);
@@ -52,6 +69,10 @@ public class Duke {
         sc.close();
     }
 
+    /**
+     * Entry point for Focus to start.
+     * @param args Args.
+     */
     public static void main(String[] args) {
         new Duke().run();
     }
