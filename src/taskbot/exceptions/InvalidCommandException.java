@@ -1,3 +1,5 @@
+package taskbot.exceptions;
+
 /**
  * This exceptions handles when the user inputs an
  * incorrect command
