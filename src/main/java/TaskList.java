@@ -153,6 +153,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints the list of tasks that contain the given string.
+     * @param s The string that should appear in the task
+     */
     public void findTask(String s) {
         if (storage.isEmpty()) {
             System.out.println(ui.getBorder() + "Your list is empty!\n" + ui.getBorder());
