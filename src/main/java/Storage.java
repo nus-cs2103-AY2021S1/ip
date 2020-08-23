@@ -10,40 +10,40 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FileManipulator {
+public class Storage {
     protected final static String FOLDERPATH = java.nio.file.Paths.get(System.getProperty("user.dir"), "data").toString();
-    protected final static String FILEPATH = System.getProperty("user.dir").endsWith("text-ui-test")
-            ? java.nio.file.Paths.get(System.getProperty("user.dir"), "data", "duke.txt").toString()
-            : java.nio.file.Paths.get(System.getProperty("user.dir"), "data", "duke.txt").toString();
+    protected final static String FILEPATH = java.nio.file.Paths.get(System.getProperty("user.dir"), "data", "duke.txt").toString();
 
     public static void createFolder() {
         try {
-            File writingDirectory = new File(FileManipulator.FOLDERPATH);
+            File writingDirectory = new File(Storage.FOLDERPATH);
             // If src\main\java\data folder does not exist, create one
             if (!writingDirectory.exists()) {
                 writingDirectory.mkdir();
             }
         } catch (Exception e) {
-            System.out.println("Something went wrong while creating src\\main\\java\\data folder " + e.getMessage());
+            DukeException.errorCreatingFolder();
+            System.out.println("Error Message: " + e.getMessage());
         }
     }
 
     public static void appendToFile(String textToAdd) {
         try {
             // Create src\main\java\data folder if needed
-            FileManipulator.createFolder();
+            Storage.createFolder();
             // Append instead of overwriting
-            FileWriter fw = new FileWriter(FileManipulator.FILEPATH, true);
+            FileWriter fw = new FileWriter(Storage.FILEPATH, true);
             fw.write(textToAdd + "\n");
             fw.close();
         } catch (IOException e) {
-            System.out.println("Something went wrong while writing to file: " + e.getMessage());
+            DukeException.errorAppendingToFile();
+            System.out.println("Error Message: " + e.getMessage());
         }
     }
 
     public static void amendFile(String currentText, String amendedText) {
         try {
-            File file = new File(FileManipulator.FILEPATH);
+            File file = new File(Storage.FILEPATH);
             // Replace currentText with amendedText
             List<String> out = Files.lines(file.toPath())
                     .map(line -> line.replace(currentText, amendedText))
@@ -51,13 +51,14 @@ public class FileManipulator {
             // TRUNCATE_EXISTING overwrites our existing text file and rewrites the text file
             Files.write(file.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
-            System.out.println("Something went wrong while amending text to file: " + e.getMessage());
+            DukeException.errorAmendingFile();
+            System.out.println("Error Message: " + e.getMessage());
         }
     }
 
     public static void deleteFromFile(String textToDelete) {
         try {
-            File file = new File(FileManipulator.FILEPATH);
+            File file = new File(Storage.FILEPATH);
             // Use Stream filter to remove line that contains textToDelete
             List<String> out = Files.lines(file.toPath())
                     .filter(line -> !line.contains(textToDelete))
@@ -65,14 +66,15 @@ public class FileManipulator {
             // TRUNCATE_EXISTING replaces old contents of duke.txt file
             Files.write(file.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
-            System.out.println("Something went wrong while deleting text from file: " + e.getMessage());
+            DukeException.errorDeletingTextFromFile();
+            System.out.println("Error Message: " + e.getMessage());
         }
     }
 
     public static List<Task> loadTextIntoTaskList() {
         List<String> lines;
         List<Task> tasks = new ArrayList<>();
-        File file = new File(FileManipulator.FILEPATH);
+        File file = new File(Storage.FILEPATH);
         try {
             // E.g [D][Y] return book (by: Sunday)
             lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
@@ -118,9 +120,8 @@ public class FileManipulator {
                 tasks.add(task);
             }
         } catch (IOException e) {
-            System.out.println("-- IGNORE THIS ERROR IF IT IS YOUR FIRST TIME USING THE APPLICATION AND HAVE NOT ADD ANYTHING INTO TASK LIST! --");
-            System.out.println("-- Error is thrown because data\\duke.txt\\ has not been created yet on first run. --");
-            System.out.println("Something went wrong while loading duke.txt into task list: " + e.getMessage());
+            DukeException.errorLoadingTextIntoTaskList();
+            System.out.println("Error Message: " + e.getMessage());
         }
         return tasks;
     }

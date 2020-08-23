@@ -123,7 +123,7 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Got it. I've added this task:
 
-		[D][N] return money (by: Monday, December 02, 2019 06:00 PM)
+		[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
 
 	Now you have 3 tasks in the list.
 
@@ -133,7 +133,7 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Got it. I've added this task:
 
-		[D][N] return money (by: Tuesday, January 01, 2019 06:00 PM)
+		[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
 
 	Now you have 4 tasks in the list.
 
@@ -143,21 +143,17 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Got it. I've added this task:
 
-		[E][N] project meeting (at: Mon 2-4pm)
+		[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
 
 	Now you have 5 tasks in the list.
 
 	____________________________________________________________
 
 	____________________________________________________________
-	Event format is invalid
-	____________________________________________________________
-
-	____________________________________________________________
 
 	Got it. I've added this task:
 
-		[E][N] friend meeting (at: Friday, December 13, 2019 06:00 PM)
+		[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
 
 	Now you have 6 tasks in the list.
 
@@ -167,7 +163,7 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Got it. I've added this task:
 
-		[E][N] friend meeting (at: Monday, January 14, 2019 06:00 PM)
+		[D][N] submit work (by: Tuesday, March 12, 2019 06:00 PM)
 
 	Now you have 7 tasks in the list.
 
@@ -175,13 +171,79 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	____________________________________________________________
 
+	Got it. I've added this task:
+
+		[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
+
+	Now you have 8 tasks in the list.
+
+	____________________________________________________________
+
+	____________________________________________________________
+
+	Got it. I've added this task:
+
+		[E][N] meet friend (at: Tuesday, March 12, 2019 06:00 PM)
+
+	Now you have 9 tasks in the list.
+
+	____________________________________________________________
+
+	____________________________________________________________
+
+	Got it. I've added this task:
+
+		[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
+
+	Now you have 10 tasks in the list.
+
+	____________________________________________________________
+
+	____________________________________________________________
+
+	Got it. I've added this task:
+
+		[E][N] meet friend (at: 1800 02/12/2019)
+
+	Now you have 11 tasks in the list.
+
+	____________________________________________________________
+
+	____________________________________________________________
+
+	Got it. I've added this task:
+
+		[E][N] project meeting (at: Mon 2-4pm)
+
+	Now you have 12 tasks in the list.
+
+	____________________________________________________________
+
+	____________________________________________________________
+	Event format is invalid
+	____________________________________________________________
+
+	____________________________________________________________
+
 	1.[T][N] todo work
 	2.[D][N] return book (by: Sunday)
-	3.[D][N] return money (by: Monday, December 02, 2019 06:00 PM)
-	4.[D][N] return money (by: Tuesday, January 01, 2019 06:00 PM)
-	5.[E][N] project meeting (at: Mon 2-4pm)
-	6.[E][N] friend meeting (at: Friday, December 13, 2019 06:00 PM)
-	7.[E][N] friend meeting (at: Monday, January 14, 2019 06:00 PM)
+	3.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	4.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	5.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	6.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	7.[D][N] submit work (by: Tuesday, March 12, 2019 06:00 PM)
+	8.[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
+	9.[E][N] meet friend (at: Tuesday, March 12, 2019 06:00 PM)
+	10.[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
+	11.[E][N] meet friend (at: 1800 02/12/2019)
+	12.[E][N] project meeting (at: Mon 2-4pm)
+	____________________________________________________________
+
+	____________________________________________________________
+
+	Nice! I've marked this task as done:
+
+	[T][Y] todo work
 	____________________________________________________________
 
 	____________________________________________________________
@@ -193,33 +255,68 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	____________________________________________________________
 
-	1.[T][N] todo work
+	Nice! I've marked this task as done:
+
+	[E][Y] meet friend (at: Saturday, March 02, 2019 06:00 PM)
+	____________________________________________________________
+
+	____________________________________________________________
+
+	1.[T][Y] todo work
 	2.[D][Y] return book (by: Sunday)
-	3.[D][N] return money (by: Monday, December 02, 2019 06:00 PM)
-	4.[D][N] return money (by: Tuesday, January 01, 2019 06:00 PM)
-	5.[E][N] project meeting (at: Mon 2-4pm)
-	6.[E][N] friend meeting (at: Friday, December 13, 2019 06:00 PM)
-	7.[E][N] friend meeting (at: Monday, January 14, 2019 06:00 PM)
+	3.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	4.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	5.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	6.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	7.[D][N] submit work (by: Tuesday, March 12, 2019 06:00 PM)
+	8.[E][Y] meet friend (at: Saturday, March 02, 2019 06:00 PM)
+	9.[E][N] meet friend (at: Tuesday, March 12, 2019 06:00 PM)
+	10.[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
+	11.[E][N] meet friend (at: 1800 02/12/2019)
+	12.[E][N] project meeting (at: Mon 2-4pm)
 	____________________________________________________________
 
 	____________________________________________________________
 
 	Noted. I've removed this task:
 
-		[T][N] todo work
+		[T][Y] todo work
 
-	Now you have 6 tasks in the list.
+	Now you have 11 tasks in the list.
+
+	____________________________________________________________
+
+	____________________________________________________________
+
+	Noted. I've removed this task:
+
+		[D][Y] return book (by: Sunday)
+
+	Now you have 10 tasks in the list.
 
 	____________________________________________________________
 
 	____________________________________________________________
 
-	1.[D][Y] return book (by: Sunday)
-	2.[D][N] return money (by: Monday, December 02, 2019 06:00 PM)
-	3.[D][N] return money (by: Tuesday, January 01, 2019 06:00 PM)
-	4.[E][N] project meeting (at: Mon 2-4pm)
-	5.[E][N] friend meeting (at: Friday, December 13, 2019 06:00 PM)
-	6.[E][N] friend meeting (at: Monday, January 14, 2019 06:00 PM)
+	Noted. I've removed this task:
+
+		[E][N] meet friend (at: Tuesday, March 12, 2019 06:00 PM)
+
+	Now you have 9 tasks in the list.
+
+	____________________________________________________________
+
+	____________________________________________________________
+
+	1.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	2.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	3.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	4.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	5.[D][N] submit work (by: Tuesday, March 12, 2019 06:00 PM)
+	6.[E][Y] meet friend (at: Saturday, March 02, 2019 06:00 PM)
+	7.[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
+	8.[E][N] meet friend (at: 1800 02/12/2019)
+	9.[E][N] project meeting (at: Mon 2-4pm)
 	____________________________________________________________
 
 	<CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE>

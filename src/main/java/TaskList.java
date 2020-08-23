@@ -1,28 +1,14 @@
 import java.util.List;
 
-public class TaskManager {
+public class TaskList {
     protected List<Task> tasks;
 
-    public TaskManager(List<Task> tasks) {
+    public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 
-    public void showAllTask() {
-        System.out.println("\t____________________________________________________________\n");
-        for (int i = 0; i < this.tasks.size(); i++) {
-            int serialNumber = i + 1;
-            Task task = this.tasks.get(i);
-            System.out.println("\t" + serialNumber + "." + task);
-        }
-        System.out.println("\t____________________________________________________________\n");
-    }
-
-    public void addedTaskDescription(Task newTask) {
-        System.out.println("\t____________________________________________________________\n");
-        System.out.println("\tGot it. I've added this task:\n");
-        System.out.println("\t\t" + newTask + "\n");
-        System.out.println("\tNow you have " + this.tasks.size() + " tasks in the list.\n");
-        System.out.println("\t____________________________________________________________\n");
+    public List<Task> getTasks() {
+        return this.tasks;
     }
 
     public void addTask(String userCommand) {
@@ -34,8 +20,8 @@ public class TaskManager {
                 // Add and report that the todo is added
                 Task newTask = new Todo(userCommand);
                 this.tasks.add(newTask);
-                this.addedTaskDescription(newTask);
-                FileManipulator.appendToFile(newTask.toString());
+                TaskDescription.addedTaskDescription(this.tasks, newTask);
+                Storage.appendToFile(newTask.toString());
             }
         } else if (userCommand.contains("deadline")) { // Deadline
             try {
@@ -46,8 +32,8 @@ public class TaskManager {
                 // Add and report that the deadline is added
                 Task newTask = new Deadline(description, by);
                 this.tasks.add(newTask);
-                this.addedTaskDescription(newTask);
-                FileManipulator.appendToFile(newTask.toString());
+                TaskDescription.addedTaskDescription(this.tasks, newTask);
+                Storage.appendToFile(newTask.toString());
             } catch (ArrayIndexOutOfBoundsException e) {
                 // E.g deadline return book /bylmklmlmlkmlkmlmlmlmlmkl Sunday
                 DukeException.invalidDeadline();
@@ -61,20 +47,13 @@ public class TaskManager {
                 // Add and report that the event is added
                 Task newTask = new Event(description, at);
                 this.tasks.add(newTask);
-                this.addedTaskDescription(newTask);
-                FileManipulator.appendToFile(newTask.toString());
+                TaskDescription.addedTaskDescription(this.tasks, newTask);
+                Storage.appendToFile(newTask.toString());
             } catch (ArrayIndexOutOfBoundsException e) {
                 // E.g event project meeting /atlmklmlmlkmlkmlmlmlmlmkl Mon 2-4pm
                 DukeException.invalidEvent();
             }
         }
-    }
-
-    public void doneTaskDescription(Task doneTask) {
-        System.out.println("\t____________________________________________________________\n");
-        System.out.println("\tNice! I've marked this task as done:\n");
-        System.out.println("\t" + doneTask);
-        System.out.println("\t____________________________________________________________\n");
     }
 
     public void markTaskDone(String userCommand) {
@@ -94,8 +73,8 @@ public class TaskManager {
                 String currentText = doneTask.toString();
                 doneTask.markAsDone();
                 String amendedText = doneTask.toString();
-                this.doneTaskDescription(doneTask);
-                FileManipulator.amendFile(currentText, amendedText);
+                TaskDescription.doneTaskDescription(doneTask);
+                Storage.amendFile(currentText, amendedText);
             }
         } catch (IndexOutOfBoundsException e) {
             // E.g "done 719329813298712398123" is not valid as number of tasks is cap to 100 by requirements
@@ -104,14 +83,6 @@ public class TaskManager {
             // E.g "done work"
             DukeException.invalidCommand();
         }
-    }
-
-    public void deletedTaskDescription(Task deletedTask) {
-        System.out.println("\t____________________________________________________________\n");
-        System.out.println("\tNoted. I've removed this task:\n");
-        System.out.println("\t\t" + deletedTask + "\n");
-        System.out.println("\tNow you have " + this.tasks.size() + " tasks in the list.\n");
-        System.out.println("\t____________________________________________________________\n");
     }
 
     public void deleteTask(String userCommand) {
@@ -129,8 +100,8 @@ public class TaskManager {
                 // Mark as deleted and report that the task is deleted
                 Task deletedTask = this.tasks.get(index);
                 this.tasks.remove(index);
-                this.deletedTaskDescription(deletedTask);
-                FileManipulator.deleteFromFile(deletedTask.toString());
+                TaskDescription.deletedTaskDescription(this.tasks, deletedTask);
+                Storage.deleteFromFile(deletedTask.toString());
             }
         } catch (IndexOutOfBoundsException e) {
             // E.g "delete 719329813298712398123" is not valid as number of tasks is cap to 100 by requirements
