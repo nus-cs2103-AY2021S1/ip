@@ -14,4 +14,15 @@ public abstract class Command {
     }
 
     abstract public void execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof Command) {
+            return input.equals(((Command) obj).input);
+        } else {
+            return false;
+        }
+    }
 }
