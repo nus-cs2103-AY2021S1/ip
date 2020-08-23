@@ -15,6 +15,7 @@ public class Todo extends Task {
 
     /**
      * Create a new Todo object with isDone equal true.
+     *
      * @return new Todo object.
      */
     @Override

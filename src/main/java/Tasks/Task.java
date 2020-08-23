@@ -19,6 +19,7 @@ public class Task {
 
     /**
      * Gets status Icon.
+     *
      * @return status Icon.
      */
     protected String getStatusIcon() {
@@ -27,6 +28,7 @@ public class Task {
 
     /**
      * Gets Task description.
+     *
      * @return task description.
      */
     protected String getDescription() {
@@ -35,6 +37,7 @@ public class Task {
 
     /**
      * Create a new Task object with isDone equal true.
+     *
      * @return new Task object.
      */
     protected Task markAsDone() {
@@ -43,6 +46,7 @@ public class Task {
 
     /**
      * Gets isDone status.
+     *
      * @return boolean.
      */
     protected boolean isDone() {

@@ -1,7 +1,7 @@
 package Parser;
 
 import Command.Command;
-import DukeException.DukeException;
+import MugException.MugException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -14,7 +14,7 @@ public class ParserTest {
     public void inputTest(){
         try {
             Parser.input(Command.TODO, 1, true);
-        } catch (DukeException ex){
+        } catch (MugException ex){
             String expect = "HEY!!! Don't be stingy give MUG more information >.<";
             assertEquals(expect, ex.getMessage());
         }
@@ -24,7 +24,7 @@ public class ParserTest {
     public void infoTest(){
         try {
             Parser.info(Command.TODO, "", true);
-        } catch (DukeException ex){
+        } catch (MugException ex){
             String expect = "HEY!!! Don't be stingy give MUG more information >.<";
             assertEquals(expect, ex.getMessage());
         }
@@ -36,7 +36,7 @@ public class ParserTest {
             LocalDate actDate = Parser.date("2019-01-12");
             LocalDate expDate = LocalDate.parse("2019-01-12");
             assertEquals(expDate, actDate);
-        } catch (DukeException ex){
+        } catch (MugException ex){
             ex.printStackTrace();
         }
     }
@@ -46,7 +46,7 @@ public class ParserTest {
         try {
             Command command = Parser.command("todo");
             assertEquals(Command.TODO, command);
-        } catch (DukeException ex){
+        } catch (MugException ex){
             ex.printStackTrace();
         }
     }
@@ -56,7 +56,7 @@ public class ParserTest {
         try {
             int index = Parser.index("2", 4);
             assertEquals(2, index);
-        } catch (DukeException ex){
+        } catch (MugException ex){
             ex.printStackTrace();
         }
     }

@@ -1,7 +1,7 @@
 package Ui;
 
 import Command.Command;
-import DukeException.DukeException;
+import MugException.MugException;
 import Parser.Parser;
 import Tasks.TaskList;
 
@@ -84,7 +84,7 @@ public class Ui {
                     output = printDesign(errorCommand);
                     break;
             }
-        } catch (DukeException ex){
+        } catch (MugException ex){
             output = printDesign(ex.getMessage());
         } catch (ArrayIndexOutOfBoundsException ex) {
             output = printDesign("There is Something wrong with your Storage.Storage");

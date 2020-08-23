@@ -1,7 +1,7 @@
 package Parser;
 
 import Command.Command;
-import DukeException.DukeException;
+import MugException.MugException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -17,18 +17,18 @@ public class Parser {
      * @param command user command.
      * @param splitNum length of the split string.
      * @param isTime about time.
-     * @throws DukeException if splitNum less than 2.
+     * @throws MugException if splitNum less than 2.
      */
-    public static void input(Command command, int splitNum, boolean isTime) throws DukeException {
+    public static void input(Command command, int splitNum, boolean isTime) throws MugException {
         if (splitNum < 2 ) {
             if ((isTime && command == Command.DEADLINE)
             ) {
-                throw new DukeException("HEY!!! Feed me with {/by [date]}. MUG is hungry T_T");
+                throw new MugException("HEY!!! Feed me with {/by [date]}. MUG is hungry T_T");
             } else if (isTime
                     && command == Command.EVENT) {
-                throw new DukeException("HEY!!! Feed me with {/at [date]}. MUG is hungry T_T");
+                throw new MugException("HEY!!! Feed me with {/at [date]}. MUG is hungry T_T");
             } else {
-                throw new DukeException("HEY!!! Don't be stingy give MUG more information >.<");
+                throw new MugException("HEY!!! Don't be stingy give MUG more information >.<");
             }
         }
     }
@@ -39,18 +39,18 @@ public class Parser {
      * @param command user command.
      * @param info task description.
      * @param isTime about time.
-     * @throws DukeException if info pass in is empty.
+     * @throws MugException if info pass in is empty.
      */
-    public static void info(Command command, String info, boolean isTime) throws DukeException {
+    public static void info(Command command, String info, boolean isTime) throws MugException {
         if (info.trim().equals("")) {
             if ((isTime && command == Command.DEADLINE)
             ) {
-                throw new DukeException("HEY!!! Feed me with {/by [date]}. MUG is hungry T_T");
+                throw new MugException("HEY!!! Feed me with {/by [date]}. MUG is hungry T_T");
             } else if (isTime
                     && command == Command.EVENT) {
-                throw new DukeException("HEY!!! Feed me with {/at [date]}. MUG is hungry T_T");
+                throw new MugException("HEY!!! Feed me with {/at [date]}. MUG is hungry T_T");
             } else {
-                throw new DukeException("HEY!!! Don't be stingy give MUG more information >.<");
+                throw new MugException("HEY!!! Don't be stingy give MUG more information >.<");
             }
         }
     }
@@ -60,13 +60,13 @@ public class Parser {
      *
      * @param date date.
      * @return parse date.
-     * @throws DukeException if date pass in with wrong format.
+     * @throws MugException if date pass in with wrong format.
      */
-    public static LocalDate date(String date) throws DukeException {
+    public static LocalDate date(String date) throws MugException {
         try {
             return LocalDate.parse(date);
         } catch (DateTimeParseException ex) {
-            throw new DukeException("MUG is picky. Give him the correct date format(YYYY-MM-DD) XD");
+            throw new MugException("MUG is picky. Give him the correct date format(YYYY-MM-DD) XD");
         }
     }
 
@@ -75,13 +75,13 @@ public class Parser {
      *
      * @param command user command.
      * @return parse command.
-     * @throws DukeException if wrong command give.
+     * @throws MugException if wrong command give.
      */
-    public static Command command(String command) throws DukeException {
+    public static Command command(String command) throws MugException {
         try {
             return Command.valueOf(command.toUpperCase());
         } catch (IllegalArgumentException ex) {
-            throw new DukeException("Hey!!! I'm sorry, but MUG don't know what that means :-()");
+            throw new MugException("Hey!!! I'm sorry, but MUG don't know what that means :-()");
         }
     }
 
@@ -91,18 +91,18 @@ public class Parser {
      * @param strIndex integer in string.
      * @param splitNum length of the split string.
      * @return Integer number.
-     * @throws DukeException if splitNum smaller than 2 or strIndex is not integer in string.
+     * @throws MugException if splitNum smaller than 2 or strIndex is not integer in string.
      */
-    public static int index(String strIndex, int splitNum) throws DukeException {
+    public static int index(String strIndex, int splitNum) throws MugException {
         try {
             int index = Integer.parseInt(strIndex);
 
             if (splitNum < 2) {
-                throw new DukeException("HEY!!! Don't be stingy give MUG more information >.<");
+                throw new MugException("HEY!!! Don't be stingy give MUG more information >.<");
             }
             return index;
         } catch ( NumberFormatException ex) {
-            throw new DukeException("Please feed MUG an integer number ~_~");
+            throw new MugException("Please feed MUG an integer number ~_~");
         }
     }
 }

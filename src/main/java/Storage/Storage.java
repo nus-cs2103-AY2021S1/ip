@@ -1,7 +1,7 @@
 package Storage;
 
 import Command.Command;
-import DukeException.DukeException;
+import MugException.MugException;
 import Parser.Parser;
 import Tasks.Deadline;
 import Tasks.Event;
@@ -39,8 +39,8 @@ public class Storage {
     }
 
     /**
-     * Loads Tasks from the file to arraylist of task.
-     * @return arraylist of task.
+     * Loads Tasks from the file to arraylist of Task.
+     * @return arraylist of Task.
      */
     public ArrayList<Task> load() {
         ArrayList<Task> taskList = new ArrayList<>();
@@ -66,7 +66,7 @@ public class Storage {
                 }
             }
 
-        } catch (FileNotFoundException | DukeException ex){
+        } catch (FileNotFoundException | MugException ex){
             System.out.println("WARNING: " + ex.getMessage() + " :WARNING");
         } catch (ArrayIndexOutOfBoundsException ex) {
             System.out.println("WARNING: There is Something wrong with your Storage.Storage :WARNING");
@@ -75,13 +75,13 @@ public class Storage {
     }
 
     /**
-     * Adds task to local file
+     * Adds Task to local file
      *
      * @param command user command.
      * @param info task description.
-     * @throws DukeException when DukeException cause by other method.
+     * @throws MugException when MugException cause by other method.
      */
-    public void appendTask(Command command, String info) throws DukeException {
+    public void appendTask(Command command, String info) throws MugException {
         try {
             FileWriter fw = new FileWriter(this.filepath, true);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -114,10 +114,10 @@ public class Storage {
             pw.flush();
             pw.close();
 
-        } catch (DukeException ex){
-            throw new DukeException(ex.getMessage());
+        } catch (MugException ex){
+            throw new MugException(ex.getMessage());
         } catch (IOException ex) {
-            throw new DukeException("Something went wrong. MUG fail to add the Tasks.Task :_:");
+            throw new MugException("Something went wrong. MUG fail to add the Tasks.Task :_:");
         }
     }
 
@@ -125,9 +125,9 @@ public class Storage {
      * Deletes Task from local file.
      *
      * @param taskId task index
-     * @throws DukeException when DukeException cause by other method.
+     * @throws MugException when MugException cause by other method.
      */
-    public void deleteTask(int taskId) throws DukeException {
+    public void deleteTask(int taskId) throws MugException {
         String tempFile = "temp.txt";
         File oldFile = new File(this.filepath);
         File newFile = new File(tempFile);
@@ -155,7 +155,7 @@ public class Storage {
             File renameFile = new File(this.filepath);
             newFile.renameTo(renameFile);
         } catch (IOException ex) {
-            throw new DukeException("Something went wrong. MUG fail to delete the Tasks.Task :_:");
+            throw new MugException("Something went wrong. MUG fail to delete the Tasks.Task :_:");
         }
     }
 
@@ -163,9 +163,9 @@ public class Storage {
      * Marks Task done in local file.
      *
      * @param taskId task index.
-     * @throws DukeException when DukeException cause by other method.
+     * @throws MugException when MugException cause by other method.
      */
-    public void doneTask(int taskId) throws DukeException {
+    public void doneTask(int taskId) throws MugException {
         String tempFile = "temp.txt";
         File oldFile = new File(this.filepath);
         File newFile = new File(tempFile);
@@ -196,9 +196,9 @@ public class Storage {
             File renameFile = new File(this.filepath);
             newFile.renameTo(renameFile);
         } catch (FileNotFoundException e) {
-            throw new DukeException("File not found");
+            throw new MugException("File not found");
         } catch (IOException e) {
-            throw new DukeException("Something went wrong");
+            throw new MugException("Something went wrong");
         }
 
     }

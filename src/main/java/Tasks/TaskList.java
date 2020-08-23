@@ -1,7 +1,7 @@
 package Tasks;
 
 import Command.Command;
-import DukeException.DukeException;
+import MugException.MugException;
 import Parser.Parser;
 import Storage.Storage;
 
@@ -12,8 +12,8 @@ import java.util.ArrayList;
  * Operation for the list of Task.
  */
 public class TaskList {
-    private ArrayList<Task> taskList;
-    private Storage store;
+    private final ArrayList<Task> taskList;
+    private final Storage store;
 
     public TaskList(Storage store) {
         this.taskList = store.load();
@@ -91,7 +91,7 @@ public class TaskList {
                     + this.taskListLen()
                     + " tasks in the list.";
 
-        } catch (DukeException ex) {
+        } catch (MugException ex) {
             return ex.getMessage();
         }
     }
@@ -117,7 +117,7 @@ public class TaskList {
                         + "\nNow you have "
                         + this.taskListLen()
                         + " tasks in the list.";
-            } catch (DukeException ex) {
+            } catch (MugException ex) {
                 return ex.getMessage();
             }
         }
@@ -145,7 +145,7 @@ public class TaskList {
                     this.store.doneTask(taskId);
                     return "Congratz! MUG has marked this task as done:\n"
                             + doneTask;
-                } catch (DukeException ex) {
+                } catch (MugException ex) {
                     return ex.getMessage();
                 }
             }

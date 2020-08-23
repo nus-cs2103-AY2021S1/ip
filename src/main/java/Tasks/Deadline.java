@@ -22,6 +22,7 @@ public class Deadline extends Task {
 
     /**
      * Create a new Deadline object with isDone equal true.
+     *
      * @return new Deadline object.
      */
     @Override

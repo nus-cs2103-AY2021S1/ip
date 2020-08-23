@@ -22,6 +22,7 @@ public class Event extends Task {
 
     /**
      * Create a new Event object with isDone equal true.
+     *
      * @return new Event object.
      */
     @Override
