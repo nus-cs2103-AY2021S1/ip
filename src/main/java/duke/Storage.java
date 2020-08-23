@@ -39,7 +39,7 @@ public class Storage {
 
                 if (directory.exists()) {
                     isDirCreated = true;
-                    File file = new File(Paths.get(currDir.toString(),dirName, fileName).toString());
+                    File file = new File(Paths.get(currDir.toString(), dirName, fileName).toString());
                     isFileCreated = file.createNewFile();
                 } else {
                     File dir = new File(Paths.get(currDir.toString(), dirName).toString());

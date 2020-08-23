@@ -5,6 +5,7 @@ import duke.task.Todo;
 
 public class ParserStub {
     private final static String ignoreCase = "(?i)";
+    private final static String wildcard = "(.*)";
     private final static Ui ui = new Ui();
 
     enum CommandState {
@@ -16,9 +17,9 @@ public class ParserStub {
             return new ExitCommand();
         } else if (command.matches(ignoreCase + Parser.CommandState.LIST.name())) {
             return new ListCommand();
-        } else if (command.matches(ignoreCase + Parser.CommandState.DONE.name() + "(.*)")) {
+        } else if (command.matches(ignoreCase + Parser.CommandState.DONE.name() + wildcard)) {
             return new DoneCommand();
-        } else if (command.matches(ignoreCase + Parser.CommandState.CHECK.name() + "(.*)")) {
+        } else if (command.matches(ignoreCase + Parser.CommandState.CHECK.name() + wildcard)) {
             return new CheckCommand();
         } else {
             String t = checkAction(command);
@@ -31,13 +32,13 @@ public class ParserStub {
 
     public static String checkAction(String command) throws DukeException{
         String s;
-        if (command.matches(ignoreCase + CommandState.DEADLINE.name() + "(.*)")) {
+        if (command.matches(ignoreCase + CommandState.DEADLINE.name() + wildcard)) {
             s = "Deadline";
-        } else if (command.matches(ignoreCase + CommandState.EVENT.name() + "(.*)")) {
+        } else if (command.matches(ignoreCase + CommandState.EVENT.name() + wildcard)) {
             s = "Event";
-        } else if (command.matches(ignoreCase + CommandState.TODO.name() + "(.*)")) {
+        } else if (command.matches(ignoreCase + CommandState.TODO.name() + wildcard)) {
             s = "Todo";
-        } else if (command.matches(ignoreCase + CommandState.DELETE.name() + "(.*)")) {
+        } else if (command.matches(ignoreCase + CommandState.DELETE.name() + wildcard)) {
             s = "Delete";
         } else {
             String errMessage = ui.printFormat(" I'm sorry but i do not know what you want to do. *woof*\n");

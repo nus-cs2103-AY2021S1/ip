@@ -44,10 +44,12 @@ public class TaskList {
             t = new Todo(s.substring(7), isDone);
         } else if (taskType.equals("[D]")){
             int indOfTime = s.lastIndexOf("(FINISH by: ");
-            t = new Deadline(s.substring(7, indOfTime), s.substring(indOfTime + 11, s.lastIndexOf(")")).trim(), isDone);
+            t = new Deadline(s.substring(7, indOfTime), s.substring(indOfTime + 11,
+                    s.lastIndexOf(")")).trim(), isDone);
         } else {
             int indOfTime = s.lastIndexOf("(APPEAR at: ");
-            t = new Event(s.substring(7, indOfTime), s.substring(indOfTime + 11, s.lastIndexOf(")")).trim(), isDone);
+            t = new Event(s.substring(7, indOfTime), s.substring(indOfTime + 11,
+                    s.lastIndexOf(")")).trim(), isDone);
         }
         listOfTask.add(t);
     }
@@ -61,7 +63,7 @@ public class TaskList {
         return listOfTask.size();
     }
 
-    public Task deleteTask(int ind) throws IndexOutOfBoundsException,IOException,NumberFormatException {
+    public Task deleteTask(int ind) throws IndexOutOfBoundsException, IOException, NumberFormatException {
         Task t = listOfTask.get(ind);
         listOfTask.remove(ind);
         FileWriter fileWriter = new FileWriter(file);
