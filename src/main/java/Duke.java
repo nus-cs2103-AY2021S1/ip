@@ -1,5 +1,7 @@
 package main.java;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -30,30 +32,30 @@ class Todo extends Task {
 }
 
 class Deadline extends Task {
-    String by;
+    LocalDate by;
 
     public Deadline(String name, String by) {
         super(name);
-        this.by = by;
+        this.by = LocalDate.parse(by);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
 
 class Event extends Task {
-    String at;
+    LocalDate at;
 
     public Event(String name, String at) {
         super(name);
-        this.at = at;
+        this.at = LocalDate.parse(at);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
 
