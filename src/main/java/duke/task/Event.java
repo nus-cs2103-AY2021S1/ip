@@ -78,7 +78,7 @@ public class Event extends Task {
             return true;
         } else if (obj instanceof Event) {
             Event o = (Event) obj;
-            return description == o.description && atTime.isEqual(o.atTime);
+            return description.equals(o.description) && atTime.isEqual(o.atTime);
         } else {
             return false;
         }

@@ -1,5 +1,9 @@
 package duke.component;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -262,6 +266,25 @@ public class ParserTest {
             fail();
         } catch (Exception e) {
             assertEquals("The time specification cannot be empty.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void generate_validInput_validTask() {
+        try {
+            Task t = Parser.generate("todo task");
+            Task t2 = new ToDo("task");
+            assertEquals(t2, t);
+
+            Task d = Parser.generate("deadline assignment /by 2020-08-31");
+            Task d2 = new Deadline("assignment", "2020-08-31");
+            assertEquals(d2, d);
+            
+            Task e = Parser.generate("event meeting /at 2020-09-01 11:00");
+            Task e2 = new Event("meeting", "2020-09-01 11:00");
+            assertEquals(e2, e);
+        } catch (Exception e) {
+            fail();
         }
     }
 }

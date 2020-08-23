@@ -82,7 +82,7 @@ public class Deadline extends Task {
             return true;
         } else if (obj instanceof Deadline) {
             Deadline o = (Deadline) obj;
-            return description == o.description && byTime.isEqual(o.byTime);
+            return description.equals(o.description) && byTime.isEqual(o.byTime);
         } else {
             return false;
         }

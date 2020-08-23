@@ -21,7 +21,7 @@ public class ToDo extends Task {
             return true;
         } else if (obj instanceof ToDo) {
             ToDo o = (ToDo) obj;
-            return description == o.description;
+            return description.equals(o.description);
         } else {
             return false;
         }
