@@ -1,4 +1,5 @@
 package tasklist;
+
 /**
  * Task class is the super class of all Task types.
  * The subclasses are Todo, Event and Deadline.
