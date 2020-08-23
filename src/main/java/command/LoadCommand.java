@@ -8,7 +8,12 @@ import task.ToDo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Scanner;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 /**
  * Load taskList from file
@@ -24,6 +29,11 @@ public class LoadCommand extends Command {
     }
 
     @Override
+    public boolean isModifying() {
+        return false;
+    }
+
+    @Override
     public void execute() {
 
         // Empty current list
@@ -32,24 +42,28 @@ public class LoadCommand extends Command {
         try {
             File file = new File(filePath);
             Scanner scanner = new Scanner(file);
-            while (scanner.hasNext()) {
-                String line = scanner.nextLine().trim();
-                if (line.isBlank()) continue;
+            Supplier<String> supplier = () -> scanner.hasNext() ? scanner.nextLine() : null;
 
-                switch (line.charAt(0)) {
-                    case 'T':
-                        taskList.add(ToDo.fromCSV(line));
-                        break;
-                    case 'D':
-                        taskList.add(Deadline.fromCSV(line));
-                        break;
-                    case 'E':
-                        taskList.add(Event.fromCSV(line));
-                        break;
-                    default:
-                        System.out.println("Corrupted entry: " + line);
-                }
-            }
+            // Process each line as stream
+            Stream.generate(supplier)
+                    .takeWhile(Objects::nonNull)
+                    .filter(Predicate.not(String::isBlank))
+                    .map(String::trim)
+                    .map(line -> {
+                        try {
+                            switch (line.charAt(0)) {
+                                case 'T': return ToDo.fromCSV(line);
+                                case 'D': return Deadline.fromCSV(line);
+                                case 'E': return Event.fromCSV(line);
+                                default: throw new Exception(); // TODO: duke exception?
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Corrupt entry: " + line); // Sorry
+                            return null;
+                        }
+                    })
+                    .filter(Objects::nonNull)
+                    .forEach(taskList::add);
         } catch (FileNotFoundException e) {
             System.out.println("Error: File not found");
         }

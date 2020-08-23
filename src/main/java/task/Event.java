@@ -44,6 +44,7 @@ public class Event extends Task{
         return "E," + super.toCSV() + "," + eventStart + "," + eventEnd;
     }
 
+    // Warning: does not check for corrupt entry
     public static Task fromCSV(String csv) {
         Scanner scanner = new Scanner(csv);
         scanner.useDelimiter(",");

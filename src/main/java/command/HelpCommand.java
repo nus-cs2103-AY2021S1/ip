@@ -2,6 +2,9 @@ package command;
 
 import cmd.Parser;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 /**
  * Display list of available command
  */
@@ -15,9 +18,9 @@ public class HelpCommand extends Command {
     @Override
     public void execute() {
         System.out.println("Command list:");
-        for (Parser p : Parser.values()) {
-            System.out.print(" " + p.toString().toLowerCase());
-        }
+        Arrays.stream(Parser.values())
+                .map((p) -> " " + p.toString().toLowerCase())
+                .forEach(System.out::print);
         System.out.println();
     }
 

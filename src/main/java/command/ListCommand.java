@@ -3,6 +3,7 @@ package command;
 import task.Task;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Display all items in taskList
@@ -16,16 +17,23 @@ public class ListCommand extends Command {
     }
 
     @Override
+    public boolean isModifying() {
+        return false;
+    }
+
+    @Override
     public void execute() {
-        int i = 0;
 
-        for (Task item : taskList) {
-            System.out.println(++i + ". " + item.toString());
-        }
-
-        if (i == 0) {
+        if (taskList.isEmpty()) {
             System.out.println("List is empty!");
+            return;
         }
+
+        AtomicInteger index = new AtomicInteger(0);
+        taskList.stream()
+                .map((task) -> index.incrementAndGet() + ". " + task.toString() )
+                .forEach(System.out::println);
+
     }
 
     @Override

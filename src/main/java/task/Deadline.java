@@ -37,6 +37,7 @@ public class Deadline extends Task {
         return "D," + super.toCSV() + "," + deadline;
     }
 
+    // Warning: does not check for corrupt entry
     public static Task fromCSV(String csv) {
         Scanner scanner = new Scanner(csv);
         scanner.useDelimiter(",");

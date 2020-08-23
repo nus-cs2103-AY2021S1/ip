@@ -1,0 +1,6 @@
+T,false,readbook
+D,true,return book,06062020 2359
+T,true,join sports club
+D,false,drink coffee,07062020 2359
+E,false,drink tea,07082020 1600,07082020 1800
+T,false,say goodbye

@@ -5,7 +5,9 @@ import misc.DukeDateTime;
 import task.*;
 
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -147,16 +149,16 @@ public enum Parser {
     /**
      * Generate the command based on given secondary parameters
      * @param taskList Required for commands that makes use of an index
-     * @param commandParam Command parameters (If required)
+     * @param commandParam Command parameters (As required)
      * @return Consumer which executes the command on given taskList
      */
     public abstract Command generate(List<Task> taskList, String commandParam);
 
     /**
-     * Translates user input to its corresponding Command.Type enum
-     * @param taskList Required for commands that makes use of an index
+     * Translates user input to its corresponding Command
+     * @param taskList The taskList which command will execute on
      * @param input The raw user input
-     * @return The corresponding Command.Type enum
+     * @return The relevant Command
      */
     public static Command parse(List<Task> taskList, String input) {
 
@@ -168,14 +170,11 @@ public enum Parser {
 
         // Find the matching command
         String firstWord = matcher.group(1).toUpperCase();
-        for (Parser parser : Parser.values()) {
-            if (parser.toString().equals(firstWord)) {
-                return parser.generate(taskList, matcher.group(2));
-            }
-        }
-
-        // No matching command
-        return new InvalidCommand();
+        return Arrays.stream(Parser.values()) // parser is an enum of all valid commands
+                .filter((parser) -> parser.toString().equals(firstWord))
+                .findFirst()
+                .map(parser -> parser.generate(taskList, matcher.group(2)))
+                .orElse(new InvalidCommand());
     }
 
 }

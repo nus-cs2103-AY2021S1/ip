@@ -6,6 +6,11 @@ package command;
 public class ExitCommand extends Command{
 
     @Override
+    public boolean isModifying() {
+        return false;
+    }
+
+    @Override
     public boolean isExit() {
         return true;
     }

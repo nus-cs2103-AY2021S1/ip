@@ -5,6 +5,7 @@ import task.Task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 /**
@@ -41,15 +42,14 @@ public class CDuke {
 
             // Prompt for input
             String input = scanner.nextLine();
+            if (input.isBlank()) continue;
 
             // Look up command and execute
             Command c = Parser.parse(taskList, input);
             c.execute();
 
             // Exit CDuke
-            if (c.isExit()) {
-                break;
-            }
+            if (c.isExit()) break;
         }
 
         System.out.println(ENDING_GREETING);

@@ -20,6 +20,11 @@ public class SaveCommand extends Command {
     }
 
     @Override
+    public boolean isModifying() {
+        return false;
+    }
+
+    @Override
     public void execute() {
         try {
             // Open file for write/overwrite
