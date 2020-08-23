@@ -1,41 +1,10 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
     static ArrayList<Task> tasks = new ArrayList<>();
-
-    public static void greeting() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String greet = "\n____________________________________________________________"
-                + "\n Hello! I'm Duke"
-                + "\n What can I do for you?"
-                + "\n____________________________________________________________\n";
-        System.out.println(logo + greet);
-    }
-
-    public static void commands() {
-        String commands = "   ____________________________________________________________"
-                + "\n    Here are all your commands:"
-                + "\n     list - show all tasks"
-                + "\n     todo <your task> - add task"
-                + "\n     deadline <your task> /by <your deadline> - add task with deadline"
-                + "\n     event <your event> /at <event's timing> - add event"
-                + "\n     done <index of task> - mark task as done"
-                + "\n   ____________________________________________________________\n";
-        System.out.println(commands);
-    }
-
-    public static void bye() {
-        String bye = "   ____________________________________________________________"
-                + "\n    Bye! Hope to see you again soon."
-                + "\n   ____________________________________________________________";
-        System.out.println(bye);
-    }
 
     public static void addTask(Task task) {
         tasks.add(task);
@@ -47,23 +16,77 @@ public class Duke {
         System.out.println(str);
     }
 
+    private static final String path = "data/listOfTasks.txt";
+
+    public static void readFile(ArrayList<Task> tasks) {
+        try {
+            File file = new File(path);
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            String line = br.readLine();
+            while (line != null) {
+                String[] details = line.split(" \\| ");
+                boolean isDone = details[1].equals("1") ? true : false;
+                switch (details[0]) {
+                case "T":
+                    tasks.add(new ToDos(details[2], isDone));
+                    break;
+                case "D":
+                    tasks.add(new Deadlines(details[2], details[3], isDone));
+                    break;
+                case "E":
+                    tasks.add(new Events(details[2], details[3], isDone));
+                    break;
+                }
+                line = br.readLine();
+            }
+            br.close();
+            fr.close();
+        } catch (IOException e) {
+            System.err.println (e);
+        }
+    }
+
+    public static void writeFile(ArrayList<Task> tasks) {
+        try {
+            File file = new File(path);
+            file.getParentFile().mkdirs();
+            FileWriter fw;
+            if (file.exists()) {
+                fw = new FileWriter(file, false);
+            } else {
+                fw = new FileWriter(file, true);
+            }
+            for (Task task : tasks) {
+                fw.write(task.writeToFile() + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.err.println (e);
+        }
+    }
+
+
     public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
 
-        greeting();
+        readFile(tasks);
+
+        CommandHandler.greeting();
+
         String input = sc.nextLine();
         while (!input.isEmpty()) {
             if (input.equals("bye")) {
-                bye();
+                CommandHandler.bye();
                 break;
             } else if (input.equals("help")) {
-                commands();
+                CommandHandler.getListOfCommands();
             } else if (input.equals("list")) {
                 Task.getListOfTasks(tasks);
             } else if (input.startsWith("todo")) {
                 String task;
                 try {
-                    task = input.split("todo")[1];
+                    task = input.split("todo ")[1];
                     Task newTask = new ToDos(task);
                     addTask(newTask);
                 } catch (ArrayIndexOutOfBoundsException exception) {
@@ -78,7 +101,7 @@ public class Duke {
                     if (input.split("deadline ").length < 2) {
                         throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.DEADLINE);
                     } else if (!input.contains("/by ")) {
-                        if (input.equals("deadline /by")) {
+                        if (input.equals("deadline /by ")) {
                             throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.DEADLINE);
                         } else {
                             throw new DukeException("", DukeExceptionType.MISSING_TIMING, DukeCommandType.DEADLINE);
@@ -87,8 +110,8 @@ public class Duke {
                         throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.DEADLINE);
                     } else {
                         try {
-                            String task = input.split("deadline ")[1].split("/by")[0];
-                            String due = input.split("deadline ")[1].split("/by")[1];
+                            String task = input.split("deadline ")[1].split("/by ")[0];
+                            String due = input.split("deadline ")[1].split("/by ")[1];
                             if (task.equals("") && due.equals("")) {
                                 throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.DEADLINE);
                             } else if (task.equals("")) {
@@ -111,7 +134,7 @@ public class Duke {
                     if (input.split("event ").length < 2) {
                         throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.EVENT);
                     } else if (!input.contains("/at ")) {
-                        if (input.equals("event /at")) {
+                        if (input.equals("event /at ")) {
                             throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.EVENT);
                         } else {
                             throw new DukeException("", DukeExceptionType.MISSING_TIMING, DukeCommandType.EVENT);
@@ -120,8 +143,8 @@ public class Duke {
                         throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.EVENT);
                     } else {
                         try {
-                            String task = input.split("event ")[1].split("/at")[0];
-                            String due = input.split("event ")[1].split("/at")[1];
+                            String task = input.split("event ")[1].split("/at ")[0];
+                            String due = input.split("event ")[1].split("/at ")[1];
                             if (task.equals("") && due.equals("")) {
                                 throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.EVENT);
                             } else if (task.equals("")) {
@@ -176,5 +199,6 @@ public class Duke {
             }
             input = sc.nextLine();
         }
+        writeFile(tasks);
     }
 }

@@ -4,5 +4,5 @@ public enum DukeExceptionType {
     MISSING_TIMING,
     INVALID_INDEX,
     WRONG_FORMAT,
-    UNKNOWN
+    UNKNOWN,
 }
