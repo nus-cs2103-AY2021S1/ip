@@ -1,14 +1,27 @@
-public class Deadline extends Task{
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
 
-    private final String by;
+public class Deadline extends ComplexTask {
 
-    protected Deadline(String description, String by) {
-        super(description);
-        this.by = by.trim();
+    protected Deadline(String description, String at) {
+        super(description, at);
+    }
+
+    protected Deadline(String description, LocalDate date) {
+        super(description, date);
+    }
+
+    protected Deadline(String description, LocalDateTime dateAndTime) {
+        super(description, dateAndTime);
+    }
+
+    protected Deadline(String description, LocalTime time) {
+        super(description, time);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return convertToString(TaskType.DEADLINE);
     }
 }

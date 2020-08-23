@@ -1,13 +1,27 @@
-public class Event extends Task{
-    private final String by;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
 
-    protected Event(String description, String by) {
-        super(description);
-        this.by = by.trim();
+public class Event extends ComplexTask {
+
+    protected Event(String description, String at) {
+        super(description, at);
+    }
+
+    protected Event(String description, LocalDate date) {
+        super(description, date);
+    }
+
+    protected Event(String description, LocalDateTime dateAndTime) {
+        super(description, dateAndTime);
+    }
+
+    protected Event(String description, LocalTime time) {
+        super(description, time);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + by + ")";
+        return convertToString(TaskType.EVENT);
     }
 }
