@@ -7,8 +7,6 @@ public class Duke {
     static String LINE = "    ____________________________________________________________";
     static String INDENT = "    ";
     static Scanner sc = new Scanner(System.in);
-    private static String DATA_PATH =  "./data/data.txt";
-    private static String DATA_FILE = "./data.txt";
 
     static ArrayList<Task> arr =  new ArrayList<Task>();
 
