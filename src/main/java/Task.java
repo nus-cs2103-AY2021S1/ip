@@ -7,12 +7,16 @@ public class Task {
         this.completed = false;
     }
 
-    private String getStatus() {
+    protected String getStatus() {
         return (this.completed ? "\u2713" : "\u2718");
     }
 
     public void markDone() {
         this.completed = true;
+    }
+
+    protected String getTaskName() {
+        return this.taskName;
     }
 
     @Override
