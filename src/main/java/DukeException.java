@@ -30,4 +30,12 @@ public class DukeException extends Exception {
     public static DukeException missingTime(String byOrAt) {
         return new DukeException("Error! '/" + byOrAt + "' date not found.");
     }
+
+    public static DukeException loadingError(String path) {
+        return new DukeException("Error! No file found at path: " + path);
+    }
+
+    public static DukeException storageIOException(String message) {
+        return new DukeException("Error! " + message);
+    }
 }
