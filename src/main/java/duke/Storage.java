@@ -28,8 +28,8 @@ public class Storage {
 
         try {
             String home = System.getProperty("user.dir");
-            Path currDir = Paths.get(home).getParent();
-//            Path currDir = Paths.get(home);
+//            Path currDir = Paths.get(home).getParent();
+            Path currDir = Paths.get(home);
             Path targetPath = Paths.get(currDir.toString(), filePath);
             File directory = new File(Paths.get(currDir.toString(), dirName).toString());
             boolean isDirCreated;
@@ -132,6 +132,25 @@ public class Storage {
             }
         } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
             throw new DukeException(ui.inputCorrectCheckDateFormat());
+        }
+    }
+
+    public void findRelevantTask(String s) throws DukeException{
+        try {
+            String searchName = s.substring(s.indexOf("find") + 5).trim();
+            List<Task> results = taskList.searchTask(searchName.toLowerCase());
+
+            if (results.isEmpty()) {
+                ui.noRelevantTask();
+            } else {
+                ui.relevantTaskHeader();
+                for (Task t : results) {
+                    ui.listBody(results.indexOf(t) + 1, t.toString());
+                }
+                ui.line();
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(ui.searchFail());
         }
     }
 

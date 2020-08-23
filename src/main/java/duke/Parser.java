@@ -11,7 +11,7 @@ public class Parser {
     private final static Ui ui = new Ui();
 
     enum CommandState {
-        LIST, DONE, BYE, TODO, DEADLINE, EVENT, DELETE, CHECK
+        LIST, DONE, BYE, TODO, DEADLINE, EVENT, DELETE, CHECK, FIND
     }
 
     public static Command parse(String command) throws DukeException {
@@ -23,11 +23,12 @@ public class Parser {
             return new DoneCommand();
         } else if (command.matches(ignoreCase + CommandState.CHECK.name() + "(.*)")) {
             return new CheckCommand();
+        } else if (command.matches(ignoreCase + CommandState.FIND.name() + "(.*)")) {
+            return new FindCommand(command);
+        } else if (command.matches(ignoreCase + CommandState.DELETE.name() + "(.*)")) {
+            return new DeleteCommand();
         } else {
             Task t = checkAction(command);
-            if (t == null) {
-                return new DeleteCommand();
-            }
             return new AddCommand(t);
         }
     }
@@ -40,8 +41,6 @@ public class Parser {
             t = Event.createTask(command);
         } else if (command.matches(ignoreCase + CommandState.TODO.name() + "(.*)")) {
             t = Todo.createTask(command);
-        } else if (command.matches(ignoreCase + CommandState.DELETE.name() + "(.*)")) {
-            t = null;
         } else {
             String errMessage = ui.printFormat(" I'm sorry but i do not know what you want to do. *woof*\n");
             throw new DukeException(errMessage);
