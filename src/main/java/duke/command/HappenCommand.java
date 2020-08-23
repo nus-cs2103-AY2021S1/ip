@@ -77,6 +77,11 @@ public class HappenCommand extends Command {
         }
     }
 
+    /**
+     * Checks whether a command equals this one.
+     * @param obj the Object to compare
+     * @return true if obj is a HappenCommand and it has the same input as this one
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
