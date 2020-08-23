@@ -1,10 +1,15 @@
 public abstract class Task {
     private final String description;
-    private boolean isDone;
+    private final TaskType taskType;
 
-    protected Task(String description) {
+    private boolean isDone;
+    private final String time;
+
+    protected Task(String description, boolean isDone, TaskType taskType, String time) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
+        this.taskType = taskType;
+        this.time = time;
     }
 
     private String getStatusIcon() {
@@ -15,8 +20,24 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    protected boolean checkIfDone() {
+    protected boolean checkStatus() {
         return isDone;
+    }
+
+    protected String getStatus() {
+        return isDone ? "Done" : "Not done";
+    }
+
+    protected String getTaskName() {
+        return taskType.toString().toUpperCase();
+    }
+
+    protected String getDescription() {
+        return description;
+    }
+
+    protected String getTime() {
+        return time;
     }
 
     @Override

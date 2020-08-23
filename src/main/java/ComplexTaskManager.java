@@ -15,7 +15,7 @@ public class ComplexTaskManager {
                 throw new InvalidDeadlineException();
             } else {
                 checkIfEmpty(inputArr);
-                return new Deadline(inputArr[0], inputArr[1]);
+                return new Deadline(inputArr[0], inputArr[1].trim());
             }
         } else { // EVENT type
             String[] inputArr = taskDetails.split(" /at", 2);
@@ -23,17 +23,17 @@ public class ComplexTaskManager {
                 throw new InvalidEventException();
             } else {
                 checkIfEmpty(inputArr);
-                return new Event(inputArr[0], inputArr[1]);
+                return new Event(inputArr[0], inputArr[1].trim());
             }
         }
     }
 
     private void checkIfEmpty(String[] inputArr) throws DukeException {
         String description = inputArr[0];
-        String by = inputArr[1];
+        String time = inputArr[1];
         if (description.isEmpty()) {
             throw new EmptyTaskException(complexTask);
-        } else if (by.isBlank()) {
+        } else if (time.isBlank()) {
             throw new EmptyByException(complexTask);
         }
     }

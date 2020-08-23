@@ -4,9 +4,10 @@ import java.util.Scanner;
 public class DukeController {
 
     private final Manager manager;
+    private final FileManager fileManager = new FileManager();
 
     protected DukeController() {
-        this.manager = new Manager(new ArrayList<Task>());
+        this.manager = new Manager(new ArrayList<Task>(fileManager.getTasks()), fileManager);
     }
 
     protected void simulate() {
@@ -14,7 +15,7 @@ public class DukeController {
         Ui.greetings();
         while (true) {
             String input = sc.nextLine();
-//            System.out.println(input);
+            System.out.println(input);
             String[] inputArr = deconstruct(input);
             String keyWord = getKeyWord(inputArr);
             String restOfWord = getRestOfWord(inputArr);
