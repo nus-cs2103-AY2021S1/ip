@@ -3,30 +3,63 @@ Hello, I'm Mocha!
 What's up today!
 _______________________________________________________
 _______________________________________________________
-Task added: read book
+One new ToDo Task added: 
+[T][✘] read book
+Total number of tasks in list: 1
 _______________________________________________________
 _______________________________________________________
-Task added: return book
+One new Deadline added: 
+[D][✘] return book (by: June 6h)
+Total number of tasks in list: 2
 _______________________________________________________
 _______________________________________________________
-Task added: buy bread
+One new Deadline Task added: 
+[E][✘] project meeting (at: Aug 6th 2-4pm)
+Total number of tasks in list: 3
+_______________________________________________________
+_______________________________________________________
+One new ToDo Task added: 
+[T][✘] join sports club
+Total number of tasks in list: 4
+_______________________________________________________
+_______________________________________________________
+One new ToDo Task added: 
+[T][✘] borrow book
+Total number of tasks in list: 5
 _______________________________________________________
 _______________________________________________________
 Nice! One thing done: 
-[✓] read book
+[T][✓] read book
+_______________________________________________________
+_______________________________________________________
+Nice! One thing done: 
+[T][✓] join sports club
 _______________________________________________________
 _______________________________________________________
 Here are all of your tasks:
 
-1.[✓] read book
-2.[✘] return book
-3.[✘] buy bread
+1.[T][✓] read book
+2.[D][✘] return book (by: June 6h)
+3.[E][✘] project meeting (at: Aug 6th 2-4pm)
+4.[T][✓] join sports club
+5.[T][✘] borrow book
 
-You have a total of 3 tasks.
+You have a total of 5 tasks.
 _______________________________________________________
 _______________________________________________________
-Nice! One thing done: 
-[✓] return book
+One new Deadline added: 
+[D][✘] return book (by: Sunday)
+Total number of tasks in list: 6
+_______________________________________________________
+_______________________________________________________
+One new Deadline Task added: 
+[E][✘] project meeting (at: Mon 2-4pm)
+Total number of tasks in list: 7
+_______________________________________________________
+_______________________________________________________
+One new Deadline added: 
+[D][✘] do homework (by: no idea :P)
+Total number of tasks in list: 8
 _______________________________________________________
 _______________________________________________________
 Bye! See ya soon!
