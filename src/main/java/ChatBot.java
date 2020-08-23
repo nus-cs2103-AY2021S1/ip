@@ -1,7 +1,10 @@
 package main.java;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ChatBot {
+
+    static ArrayList<Task> taskList = new ArrayList<Task>();
 
     public static void start(){
         Scanner scanner = new Scanner(System.in);
@@ -19,11 +22,29 @@ public class ChatBot {
     }
 
     private static String response(String query){
-        String command = query.toLowerCase();
+        String command = query.toLowerCase().stripLeading().stripTrailing();
         switch (command){
+            case "list":
+                return listOfTasks();
             default:
-                return query;
+                ChatBot.addTask(query);
+                return "added: " + query;
         }
+    }
+
+    private static String listOfTasks(){
+        String acc = "";
+        int i = 0;
+        for (Task t: taskList){
+            i++;
+            acc = acc + String.format("%d. %s\n",i,t);
+        }
+        return acc;
+    }
+
+    private static void addTask(String query){
+        Task newTask = new Task(query);
+        taskList.add(newTask);
     }
 
     private static boolean isEnd(String query){
