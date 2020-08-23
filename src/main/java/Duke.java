@@ -57,18 +57,27 @@ public class Duke {
     }
 
     private static void handleDeadline(String input) throws DukeException {
-        String pattern1 = "(deadline\\s)(.+)";
-        String pattern2 = "(deadline\\s)(.+)\\s(/by\\s)(.+)";
-        String pattern3 = "(deadline\\s)(/by)((\\s(.*))*)";
-        if (input.trim().matches(pattern1)) {
-            if (input.trim().matches(pattern2)) {
-                String task = input.replaceAll(pattern2, "$2");
-                String time = input.replaceAll(pattern2, "$4");
-                Task next = new Deadline(task, time);
-                list.add(next);
-                String text = "Added Deadline '" + task + "' to your list!";
-                say(text);
-            } else if (input.trim().matches(pattern3)) {
+        String basePattern = "(deadline\\s)(.+)";
+        String almostCompletePattern = "(deadline\\s)(.+)\\s(/by\\s)(.+)";
+        String datePattern = "(\\d\\d\\d\\d-[01]\\d-[0123]\\d)\\s";
+        String timePattern = "([012]\\d)([012345]\\d)";
+        String completePattern = "(deadline\\s)(.+)\\s(/by\\s)"+ datePattern + timePattern;
+        String missingTaskPattern = "(deadline\\s)(/by)((\\s(.*))*)";
+        if (input.trim().matches(basePattern)) {
+            if (input.trim().matches(almostCompletePattern)) {
+                if (input.trim().matches(completePattern)) {
+                    String task = input.replaceAll(completePattern, "$2");
+                    String date = input.replaceAll(completePattern, "$4");
+                    String hours = input.replaceAll(completePattern, "$5");
+                    String minutes = input.replaceAll(completePattern, "$6");
+                    Task next = new Deadline(task, date, hours, minutes);
+                    list.add(next);
+                    String text = "Added Deadline '" + task + "' to your list!";
+                    say(text);
+                } else {
+                    throw(DukeException.wrongDateTime());
+                }
+            } else if (input.trim().matches(missingTaskPattern)) {
                 throw(DukeException.missingTask());
             } else {
                 throw(DukeException.missingTime("by"));
@@ -79,18 +88,18 @@ public class Duke {
     }
 
     private static void handleEvent(String input) throws DukeException {
-        String pattern1 = "(event\\s)(.+)";
-        String pattern2 = "(event\\s)(.+)\\s(/at\\s)(.+)";
-        String pattern3 = "(event\\s)(/at)((\\s(.*))*)";
-        if (input.trim().matches(pattern1)) {
-            if (input.trim().matches(pattern2)) {
-                String task = input.replaceAll(pattern2, "$2");
-                String time = input.replaceAll(pattern2, "$4");
+        String basePattern = "(event\\s)(.+)";
+        String completePattern = "(event\\s)(.+)\\s(/at\\s)(.+)";
+        String missingTaskPattern = "(event\\s)(/at)((\\s(.*))*)";
+        if (input.trim().matches(basePattern)) {
+            if (input.trim().matches(completePattern)) {
+                String task = input.replaceAll(completePattern, "$2");
+                String time = input.replaceAll(completePattern, "$4");
                 Task next = new Event(task, time);
                 list.add(next);
                 String text = "Added Event '" + task + "' to your list!";
                 say(text);
-            } else if (input.trim().matches(pattern3)) {
+            } else if (input.trim().matches(missingTaskPattern)) {
                 throw(DukeException.missingTask());
             } else {
                 throw(DukeException.missingTime("at"));

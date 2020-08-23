@@ -30,4 +30,8 @@ public class DukeException extends Exception {
     public static DukeException missingTime(String byOrAt) {
         return new DukeException("Error! '/" + byOrAt + "' date not found.");
     }
+
+    public static DukeException wrongDateTime() {
+        return new DukeException("Error! Invalid date or date is in the wrong format.");
+    }
 }
