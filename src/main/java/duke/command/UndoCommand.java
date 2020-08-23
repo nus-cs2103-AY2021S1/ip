@@ -5,14 +5,30 @@ import main.java.duke.TaskList;
 import main.java.duke.Ui;
 import main.java.duke.exception.DukeTaskNotFoundException;
 
+/**
+ * Represents a command which undo a task.
+ */
 public class UndoCommand extends Command {
 
-    String[] commandDetails;
+    private String[] commandDetails;
 
+    /**
+     * Creates a new instance of an UndoCommand.
+     *
+     * @param commandDetails String array with task details.
+     */
     public UndoCommand(String[] commandDetails) {
         this.commandDetails = commandDetails;
     }
 
+    /**
+     * Executes the operation for an task to be undone.
+     *
+     * @param tasks TaskList linked to the program.
+     * @param ui Ui linked to the program.
+     * @param storage Storage linked to the program.
+     * @throws DukeTaskNotFoundException If the task is not found.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeTaskNotFoundException {
         int taskNumber = Character.getNumericValue(commandDetails[1].charAt(0)) - 1;
@@ -25,6 +41,11 @@ public class UndoCommand extends Command {
         }
     }
 
+    /**
+     * Returns a boolean that dictates if the program is running.
+     *
+     * @return False.
+     */
     @Override
     public boolean isExit() {
         return false;
