@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -5,13 +6,27 @@ import java.util.Scanner;
 
 // The chat bot class to handle the internal logic
 public class ChatBot {
-    List<Task> list = new LinkedList<>();
+    LinkedList<Task> list = new LinkedList<>();
     Scanner sc = new Scanner(System.in);
+
+    private void welcome() {
+        printHorizontal();
+        System.out.println("    " + " Hello! I'm Duke!");
+        try {
+            list = Storage.readList();
+            System.out.println("     Previous data found!\n     Now you have " + list.size() + " task in the list!");
+        } catch (NoDataFileException e) {
+            System.out.println("     Did not find any previous stored data and new data file created! Welcome!");
+        } catch (IOException e) {
+            System.out.println("     Oops! Cannot access your data file and no new data file has been created!");
+        }
+        System.out.println("     What can I do for you?");
+        printHorizontal();
+    }
 
     // The entry point to run the chat bot
     public void start() {
-        String welcome = " Hello! I'm Duke \n     What can I do for you?";
-        sendChat(welcome);
+        welcome();
         String response = receiveChat();
         while (!response.equals("bye")) {
             if (response.equals("list")) {
@@ -38,6 +53,7 @@ public class ChatBot {
                     printHorizontal();
                 }
             }
+            Storage.save(list);
             response = receiveChat();
         }
         sendChat(" Bye. Hope to see you again soon!");
@@ -129,6 +145,10 @@ public class ChatBot {
         list.add(newTask);
         System.out.println("     Now you have " + list.size() + " tasks in the list.");
         printHorizontal();
+    }
+
+    private void saveList() {
+        Storage.save(list);
     }
 
     private void printHorizontal() {
