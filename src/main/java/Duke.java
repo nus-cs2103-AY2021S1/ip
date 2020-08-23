@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Duke {
     private DukeStorage storage;
@@ -27,12 +28,22 @@ public class Duke {
                 String input = ui.getInput();
                 Command c = Parser.parse(input);
                 c.execute(taskList, ui, storage);
+                saveData(taskList, storage);
                 isCompleted = c.isCompleted();
             } catch (DukeException ex) {
                 ui.throwDukeException(ex);
             }
         }
         ui.getScanner().close();
+    }
+
+    public void saveData(TaskList taskList, DukeStorage storage) {
+        try {
+            storage.saveStorage(taskList.getTasks());
+        } catch (IOException ex) {
+            System.out.println("Error in saving!");
+            ex.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
