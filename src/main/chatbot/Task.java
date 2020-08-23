@@ -1,28 +1,26 @@
-package ChatbotPkg;
-
 public class Task {
     protected final String description;
     protected final String type;
     protected final boolean isDone;
+    protected final String timestamp;
 
-    protected Task(String description, String type) {
-        this.description = description;
-        this.type = type;
-        this.isDone = false;
-    }
-
-    protected Task(String description, String type, boolean isDone) {
+    protected Task(String description, String type, boolean isDone, String timestamp) {
         this.description = description;
         this.isDone = isDone;
         this.type = type;
+        this.timestamp = timestamp;
     }
 
-    private String getStatusIcon() {
+    public String getStatus() {
+        return isDone ? "1" : "0";
+    }
+
+    public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     public Task markDone() {
-        return new Task(this.description, this.type, true);
+        return new Task(this.description, this.type, true, this.timestamp);
     }
 
     @Override

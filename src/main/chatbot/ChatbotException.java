@@ -1,5 +1,3 @@
-package ChatbotPkg;
-
 public class ChatbotException extends Exception {
 
     String message;

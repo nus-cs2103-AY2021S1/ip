@@ -1,5 +1,3 @@
-package ChatbotPkg;
-
 import java.util.ArrayList;
 
 public interface Printable<T> {
