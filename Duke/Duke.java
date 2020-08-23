@@ -177,7 +177,7 @@ public class Duke {
 
                 if (inputList[0].equals("deadline")) {
                     // Check whether the string is correct
-                    if (!Pattern.matches("(deadline)+\\s+([a-z])\\w+\\s+.+(\\/by)+\\s+.+", input)) {
+                    if (!Pattern.matches("^(deadline)+\\s+a*([a-z])+.+(\\/by)+\\s.*", input)) {
                         throw new DukeException("Incorrect format");
                     }
                     addDeadline(input);
@@ -187,7 +187,7 @@ public class Duke {
 
                 if (inputList[0].equals("event")) {
                     // Check whether the string is correct
-                    if (!Pattern.matches("(event)+\\s+([a-z])\\w+\\s+.+(\\/at)+\\s+.+", input)) {
+                    if (!Pattern.matches("^(event)+\\s+a*([a-z])+.+(\\/at)+\\s.*", input)) {
                         throw new DukeException("Incorrect format");
                     }
                     addEvent(input);

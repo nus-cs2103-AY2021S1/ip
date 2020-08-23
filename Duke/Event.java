@@ -1,5 +1,8 @@
 package Duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * The Event class that represents a event task.
  *
@@ -8,13 +11,16 @@ package Duke;
  * @since 2020-15-08
  */
 public class Event extends Task {
-    private String dueDate;
+    private LocalDateTime dueDate;
     public Event(String description, String dueDate) {
         this.description = description;
-        this.dueDate = dueDate;
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        System.out.println(dueDate);
+        this.dueDate = LocalDateTime.parse(dueDate, dateFormat);
     }
 
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + dueDate + ")";
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+        return "[E]" + super.toString() + "(at: " + dueDate.format(dateFormat) + ")";
     }
 }

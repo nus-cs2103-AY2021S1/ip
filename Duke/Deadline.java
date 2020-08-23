@@ -1,4 +1,8 @@
 package Duke;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * The Deadline class that represents a Deadline task.
  *
@@ -7,13 +11,15 @@ package Duke;
  * @since 2020-15-08
  */
 public class Deadline extends Task {
-    private String dueDate;
+    private LocalDateTime dueDate;
     public Deadline(String description, String dueDate) {
         this.description = description;
-        this.dueDate = dueDate;
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        this.dueDate = LocalDateTime.parse(dueDate, dateFormat);
     }
 
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + dueDate + ")";
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+        return "[D]" + super.toString() + "(by: " + dueDate.format(dateFormat) + ")";
     }
 }
