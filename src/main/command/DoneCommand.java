@@ -1,3 +1,10 @@
+package main.command;
+
+import main.task.Task;
+import main.task.TaskList;
+import main.ui.Ui;
+import main.exception.InvalidTaskException;
+
 public class DoneCommand implements Command {
     private final int taskNum;
 

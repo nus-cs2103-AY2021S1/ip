@@ -1,4 +1,10 @@
+package main.command;
+
 import java.time.LocalDateTime;
+
+import main.task.Deadline;
+import main.task.TaskList;
+import main.ui.Ui;
 
 public class AddDeadlineCommand implements Command {
     private final Deadline deadline;

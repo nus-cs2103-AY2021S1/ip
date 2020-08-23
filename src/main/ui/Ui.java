@@ -1,5 +1,9 @@
-import java.util.List;
+package main.ui;
+
 import java.util.Scanner;
+
+import main.task.Task;
+import main.task.TaskList;
 
 public class Ui {
     private static final String SEPARATOR = "    ____________________________________"

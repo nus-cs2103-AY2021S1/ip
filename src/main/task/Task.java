@@ -1,3 +1,5 @@
+package main.task;
+
 public class Task {
     private final String name;
     private boolean doneState;

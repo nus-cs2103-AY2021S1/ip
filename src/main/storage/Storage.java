@@ -1,4 +1,15 @@
-import java.io.*;
+package main.storage;
+
+import main.task.Deadline;
+import main.task.Event;
+import main.task.TaskList;
+import main.task.Todo;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,7 +29,7 @@ public class Storage {
 
         FileWriter fw = new FileWriter(file);
         BufferedWriter bw = new BufferedWriter(fw);
-        bw.write("Task Type,Task Time,Done State,Task Name\n");
+        bw.write("main.task.Task Type,main.task.Task Time,Done State,main.task.Task Name\n");
 
         for (int i = 0; i < tasks.size(); i++) bw.write(tasks.get(i).write());
 

@@ -1,3 +1,9 @@
+package main.command;
+
+import main.task.Todo;
+import main.task.TaskList;
+import main.ui.Ui;
+
 public class AddTodoCommand implements Command {
     private final Todo todo;
 

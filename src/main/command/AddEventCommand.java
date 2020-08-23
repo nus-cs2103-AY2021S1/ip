@@ -1,4 +1,10 @@
+package main.command;
+
 import java.time.LocalDateTime;
+
+import main.task.Event;
+import main.task.TaskList;
+import main.ui.Ui;
 
 public class AddEventCommand implements Command {
     private final Event event;

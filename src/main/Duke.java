@@ -1,5 +1,14 @@
-import java.io.*;
+package main;
+
+import java.io.IOException;
 import java.util.Scanner;
+
+import main.ui.Ui;
+import main.task.TaskList;
+import main.storage.Storage;
+import main.command.Command;
+import main.parser.Parser;
+import main.exception.DukeException;
 
 public class Duke {
     private final Ui ui;
