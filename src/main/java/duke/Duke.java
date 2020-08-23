@@ -5,6 +5,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
 
+/**
+ * Main class for the Duke program
+ */
 public class Duke {
 
     private Storage storage;
@@ -17,6 +20,9 @@ public class Duke {
         this.taskList = new TaskList(new ArrayList<>());
     }
 
+    /**
+     * Start the chat bot
+     */
     public void run() {
         Parser parser = new Parser(new Scanner(System.in));
         try {
