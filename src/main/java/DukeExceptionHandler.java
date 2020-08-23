@@ -10,11 +10,12 @@ public class DukeExceptionHandler {
             exception = new EmptyTaskException();
 
         // shortest reply allowed is "list"
-        // also unexpected if it doesn't contain any of the keywords: "todo, deadline, event, done, delete, list"
+        // also unexpected if it doesn't contain any of the keywords: "todo, deadline, event, done, delete, list, find"
         } else if (reply.length() < 4 ||
                 (!reply.contains("todo") && !reply.contains("deadline")
                     && !reply.contains("event") && !reply.contains("done")
-                        && !reply.contains("delete") && !reply.contains("list"))) {
+                        && !reply.contains("delete") && !reply.contains("list")
+                            && !reply.contains("find"))) {
             exception = new UnexpectedInputException();
 
         // if the reply has the task keywords but not description

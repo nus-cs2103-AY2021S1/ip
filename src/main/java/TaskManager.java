@@ -32,22 +32,31 @@ public class TaskManager {
         taskList.remove(taskIndex);
     }
 
+    public ArrayList<Task> findTaskThatHasKeyword(String keyWord) {
+        ArrayList<Task> res = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (task.getTaskDescription().contains(keyWord)) {
+                res.add(task);
+            }
+        }
+        return res;
+    }
+
     public ArrayList<Task> getTaskList() {
         return taskList;
     }
 
-    @Override
-    public String toString() {
+    public String convertTaskListToString(ArrayList<Task> givenTaskList) {
         String result = "";
-        for (int i = 0; i < taskList.size(); i++) {
+        for (int i = 0; i < givenTaskList.size(); i++) {
             String index = (i + 1) + ". ";
 
             // remove the empty line created in the last task
-            if (i == taskList.size() - 1) {
-                result = result + index + taskList.get(i).toString();
+            if (i == givenTaskList.size() - 1) {
+                result = result + index + givenTaskList.get(i).toString();
                 break;
             }
-            result = result + index + taskList.get(i).toString() + "\n" + "      ";
+            result = result + index + givenTaskList.get(i).toString() + "\n" + "      ";
         }
         return result;
     }

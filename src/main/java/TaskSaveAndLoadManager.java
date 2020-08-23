@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +20,13 @@ public class TaskSaveAndLoadManager {
             if (task instanceof ToDoTask) {
                 taskData = new TaskData("todo", task.getTaskDescription(), boolInt, "");
             } else if (task instanceof DeadlineTask) {
-                taskData = new TaskData("deadline", task.getTaskDescription(), boolInt, ((DeadlineTask) task).getTimeToBeDoneBy());
+                LocalDate date = ((DeadlineTask) task).getTimeToBeDoneBy().getDate();
+                taskData = new TaskData("deadline", task.getTaskDescription(), boolInt, date.toString(), "");
             } else if (task instanceof EventTask) {
-                taskData = new TaskData("event", task.getTaskDescription(), boolInt, ((EventTask) task).getEventTime());
+                LocalDate date = ((EventTask) task).getEventTime().getDate();
+                LocalTime time = ((EventTask) task).getEventTime().getTime();
+                taskData = new TaskData("event", task.getTaskDescription(), boolInt,
+                        date.toString(), time.toString());
             }
             taskManagerData.taskList.add(taskData);
         }
@@ -34,16 +40,18 @@ public class TaskSaveAndLoadManager {
         if (taskData.taskType.equals("todo")) {
             return new ToDoTask(taskData.taskDescription, isDone);
         } else if (taskData.taskType.equals("deadline")) {
-            return new DeadlineTask(taskData.taskDescription, isDone, taskData.time);
+            System.out.println(taskData.time);
+            DateAndTime dt = new DateAndTime(LocalDate.parse(taskData.time));
+            return new DeadlineTask(taskData.taskDescription, isDone, dt);
         } else {
-            return new EventTask(taskData.taskDescription, isDone, taskData.time);
+            DateAndTime dt = new DateAndTime(LocalDate.parse(taskData.date), LocalTime.parse(taskData.time));
+            return new EventTask(taskData.taskDescription, isDone, dt);
         }
     }
 
     public TaskManager loadTaskManager() throws IOException {
         List<String> loadedData = FileReadWriteIO.loadUngroupedSavedTaskList();
         ArrayList<Task> taskList = new ArrayList<>();
-
         // loop through the loaded data strings, split each string by | and add to task list
         if (loadedData != null) {
             for (String loadedDatum : loadedData) {
@@ -52,8 +60,11 @@ public class TaskSaveAndLoadManager {
                 // a todo item
                 if (tempArr.length == 3) {
                     taskData = new TaskData(tempArr[0], tempArr[1], Integer.parseInt(tempArr[2]));
-                } else {
+                // a deadline item
+                } else if (tempArr.length == 4) {
                     taskData = new TaskData(tempArr[0], tempArr[1], Integer.parseInt(tempArr[2]), tempArr[3]);
+                } else {
+                    taskData = new TaskData(tempArr[0], tempArr[1], Integer.parseInt(tempArr[2]), tempArr[3], tempArr[4]);
                 }
                 Task task = loadTask(taskData);
                 taskList.add(task);
