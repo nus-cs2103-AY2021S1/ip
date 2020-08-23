@@ -123,6 +123,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses any input command.
+     * @param input the given input command
+     * @return the Command to be executed
+     */
     public static Command parse(String input) {
         if (input.equals("bye")) {
             return new ByeCommand(input);
