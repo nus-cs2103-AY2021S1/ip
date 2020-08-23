@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * represents a task
+ */
 public class Task {
     private String type;
     private String todo;

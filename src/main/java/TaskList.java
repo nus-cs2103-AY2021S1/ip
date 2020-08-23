@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * represents a list of tasks
+ */
 public class TaskList {
     private List<Task> toDoLst;
 

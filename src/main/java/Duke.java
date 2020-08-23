@@ -3,7 +3,9 @@ import java.util.*;
 import java.time.LocalDate;
 import java.io.FileNotFoundException;
 
-
+/**
+ * Main class
+ */
 public class Duke {
     private Storage db;
     private Parser parser;
@@ -22,18 +24,32 @@ public class Duke {
         parser = new Parser();
     }
 
-//    public boolean isTaskModification(String action) {
-//        return action.equals("done") || action.equals("delete");
-//    }
-
+    /**
+     * Returns List of tasks.
+     *
+     * @return List of tasks
+     */
     public List<Task> getToDoLst() {
         return db.getToDoLst();
     }
 
+    /**
+     * Returns description of total number of items in todo list.
+     *
+     * @return description of total number of items in todo list.
+     */
     public String getTotalItemsDescription() {
         return db.getTotalItemsDescription();
     }
 
+    /**
+     * Returns description of total number of items in todo list.
+     *
+     * @param i index of Task in todo list
+     * @param bool new isDone status to set in task
+     *
+     * @return updated task
+     */
     public Task setToDoItemStatus(int i, boolean bool) {
         Task task = getToDoLst().get(i);
 
@@ -42,6 +58,15 @@ public class Duke {
         return task;
     }
 
+    /**
+     * Add new task to todo list.
+     *
+     * @param type type of task
+     * @param todo description of task
+     * @param date deadline of task (LocalDate)
+     *
+     * @return new task
+     */
     public Task addToDoItem(String type, String todo, LocalDate date) {
         Task newTask = null;
 
@@ -58,12 +83,24 @@ public class Duke {
         return newTask;
     }
 
+    /**
+     * Remove task from todo list.
+     *
+     * @param i index of Task in todo list
+     *
+     * @return deleted task
+     */
     public Task removeToDoItem(int i) {
         Task deletedTask = db.removeToDoItem(i);
 
         return deletedTask;
     }
 
+    /**
+     * Save tasks to storage.
+     *
+     * @throws IOException
+     */
     public void save() throws IOException {
         try {
             db.save();
@@ -72,6 +109,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Run.
+     */
     public void run() {
         Scanner scanner = new Scanner(System.in);
         String line = "";
@@ -154,6 +194,9 @@ public class Duke {
         ui.showByeMessage();
     }
 
+    /**
+     * Entry point.
+     */
     public static void main(String[] args) {
         Duke duke = null;
 
