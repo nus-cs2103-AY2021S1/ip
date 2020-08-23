@@ -1,3 +1,8 @@
+import java.io.IOException;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -26,12 +31,19 @@ public class Duke {
                 //unrecognised command
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means.\n");
             }
-        } catch (DukeException error) {
+        } catch (DukeException | IOException error) {
             System.out.println(error.getMessage());
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, DukeException {
+
+        if (!Files.exists(Paths.get("data"))) {
+            Files.createDirectory(Paths.get("data"));
+        }
+        if (!Files.exists(Paths.get("data/Duke.txt"))) {
+            Files.createFile(Paths.get("data/Duke.txt"));
+        }
 
         Scanner sc = new Scanner(System.in);
         TaskList list = new TaskList();
