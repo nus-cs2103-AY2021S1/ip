@@ -1,11 +1,11 @@
 package duke.command;
 
-public class findCommand extends Command {
+public class FindCommand extends Command {
     /**
      * Creates a find command.
      * @param input the input command
      */
-    public findCommand(String input) {
+    public FindCommand(String input) {
         super(input);
     }
 
@@ -18,8 +18,8 @@ public class findCommand extends Command {
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
-        } else if (obj instanceof findCommand) {
-            return input.equals(((findCommand) obj).input);
+        } else if (obj instanceof FindCommand) {
+            return input.equals(((FindCommand) obj).input);
         } else {
             return false;
         }
