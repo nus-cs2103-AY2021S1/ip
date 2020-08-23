@@ -41,28 +41,10 @@ public class Ui {
         showLine();
     }
 
-    public void showMessages(ArrayList<String> strings) {
-        showLine();
-        strings.forEach(str -> System.out.println(addIndent(str)));
-        showLine();
-    }
-
-    public void showResult(String response, Task task, String tasksLeft) {
-        showLine();
-        System.out.println(addIndent(response));
-        System.out.println(addIndent(addIndent(task.toString())));
-        System.out.println(addIndent(tasksLeft));
-        showLine();
-    }
-
     public void show(String message) {
         showLine();
         System.out.println(message);
         showLine();
-    }
-
-    private String addIndent(String str) {
-        return String.format("\t %s", str);
     }
 
     public String readCommand() {

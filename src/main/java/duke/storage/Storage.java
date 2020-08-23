@@ -17,7 +17,6 @@ public class Storage {
     private static final String DEFAULT_FILEPATH = "./data/duke.txt";
 
     public Storage() {
-        // todo: check for directory and non existence of file
         path = Paths.get(DEFAULT_FILEPATH);
         File file = new File(DEFAULT_FILEPATH);
         file.getParentFile().mkdirs();
