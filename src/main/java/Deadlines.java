@@ -5,7 +5,6 @@ public class Deadlines extends Task {
 
     protected LocalDate deadline;
     protected String due;
-    protected String string;
 
     public Deadlines(String description, String deadline) {
         super(description);

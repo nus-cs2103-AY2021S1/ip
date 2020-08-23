@@ -100,6 +100,8 @@ public class Duke {
                 try {
                     if (input.split("deadline ").length < 2) {
                         throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.DEADLINE);
+                    } else if (input.contains("/at")) {
+                        throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.DEADLINE);
                     } else if (!input.contains("/by ")) {
                         if (input.equals("deadline /by")) {
                             throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.DEADLINE);
@@ -136,6 +138,8 @@ public class Duke {
             } else if (input.startsWith("event")) {
                 try {
                     if (input.split("event ").length < 2) {
+                        throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.EVENT);
+                    } else if (input.contains("/by")) {
                         throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.EVENT);
                     } else if (!input.contains("/at ")) {
                         if (input.equals("event /at")) {
