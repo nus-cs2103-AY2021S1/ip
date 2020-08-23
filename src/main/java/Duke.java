@@ -1,11 +1,15 @@
-/*
- * Duke is a retired old uncle who likes to speak in Singlish.
- */
-import java.util.*;
+import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private Storage storage;
     private List<Task> taskList = new ArrayList<>();
+
+    public Duke(String filePath) {
+        this.storage = new Storage(filePath);
+    }
 
     private void greet() {
         String logo = " ____        _        \n"
@@ -82,7 +86,8 @@ public class Duke {
         }
     }
 
-    public void process() {
+    public void process() throws IOException {
+        this.taskList = storage.load();
         greet();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
@@ -91,7 +96,7 @@ public class Duke {
             if (input.toLowerCase().equals("list")) {
                 listTask();
             } else {
-                //could it be a done task?
+                //these involves changes to the taskList
                 String[] cmd = input.split(" ");
                 if (cmd[0].toLowerCase().equals("done")) {
                     try {
@@ -113,7 +118,7 @@ public class Duke {
                     } catch (InvalidTaskNumber e) {
                         System.out.println(e);
                     }
-                } else{
+                } else {
                     //process input
                     try {
                         addTask(input);
@@ -121,6 +126,13 @@ public class Duke {
                         System.out.println(e);
                     }
                 }
+                //reload the file here
+                StringBuilder content = new StringBuilder();
+                for (int i = 0; i < taskList.size(); i++) {
+                    content.append(taskList.get(i));
+                    content.append(System.lineSeparator());
+                }
+                storage.updateFile(content.toString());
             }
             input = sc.nextLine();
         }
@@ -128,7 +140,11 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.process();
+        Duke duke = new Duke("data/duke.txt");
+        try {
+            duke.process();
+        } catch (IOException e) {
+            System.out.println("Invalid file path!");
+        }
     }
 }
