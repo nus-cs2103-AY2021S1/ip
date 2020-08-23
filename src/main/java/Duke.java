@@ -136,6 +136,9 @@ public class Duke {
 //                throw new CommandNotRecognisedException();
 //            }
 //        }
+
+        // Contains all tasks
+        ArrayList<Task> listOfTasks= new ArrayList<>();
         
         // Introduction of Mocha
         String horizontalLine = "_______________________________________________________";
@@ -147,24 +150,52 @@ public class Duke {
                 + "\r\n"
                 + greeting
                 + "\r\n"
-                + horizontalLine
-                + "\r\n");
+                + horizontalLine);
         
         Scanner userInput = new Scanner(System.in);
         
         while (userInput.hasNextLine()) {
-            
+
             String nextLine = userInput.nextLine();
+            String[] commandParts = nextLine.split("\\s", 2);
             
-             if (!nextLine.contains("bye")) {
-                 System.out.println(nextLine);
-             } else {
+            if (!commandParts[0].contains("bye") && !commandParts[0].contains("list")) {
+
+                Task newTask = new Task(nextLine);
+                listOfTasks.add(newTask);
+                
+                System.out.println(horizontalLine 
+                        + "\r\n"
+                        + "Task added: "
+                        + nextLine 
+                        + "\r\n"
+                        + horizontalLine);
+                
+            } else if (commandParts[0].contains("list")) {
+                
+                System.out.println(horizontalLine 
+                        + "\r\n"
+                        + "Here are all of your tasks:"
+                        + "\r\n");
+                
+                for (int i = 0; i < listOfTasks.size(); i++) {
+                    System.out.println((i + 1) + "." + listOfTasks.get(i).toString());
+                }
+                
+                System.out.println("\r\n" 
+                        + "You have a total of " 
+                        + listOfTasks.size()
+                        + " tasks."
+                        + "\r\n"
+                        + horizontalLine);
+                
+            } else {
                  System.out.println(horizontalLine
                          + "\r\n"
                          + "Bye! See ya soon!"
                          + "\r\n"
                          + horizontalLine);
-             }
+            }
         }
     }
 }
