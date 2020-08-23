@@ -1,3 +1,4 @@
-public enum Command {
-    BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, UNIDENTIFIED;
+public abstract class Command {
+    public abstract void execute(TaskList taskList, Ui ui, DukeStorage storage);
+    public abstract boolean isCompleted();
 }
