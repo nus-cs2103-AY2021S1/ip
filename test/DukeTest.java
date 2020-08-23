@@ -33,7 +33,7 @@ public class DukeTest {
         storage = new Storage(f);
         shelf = new TaskList(storage.loadFile());
         ui = new UI(shelf, storage);
-        parser = new Parser(storage, shelf, ui);
+        parser = new Parser(ui);
         formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
     }
 

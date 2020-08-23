@@ -13,17 +13,19 @@ public class Deadline extends Task {
 
     /**
      * Constructor for the deadline task object.
-     * @param name name of the deadline task
-     * @param date Date when the deadline task is created
+     *
+     * @param name    name of the deadline task
+     * @param date    Date when the deadline task is created
      * @param dueDate Date indicated by the user on when the deadline is due.
      */
     public Deadline(String name, LocalDateTime date, String dueDate) {
-        super(name,date);
+        super(name, date);
         this.dueDate = LocalDateTime.parse(dueDate, formatter);
     }
 
     /**
      * Overloaded constructor when the deadline task object is re-created from a tasklist.txt file.
+     *
      * @param line input from the tasklist.txt file
      */
     public Deadline(String line) {

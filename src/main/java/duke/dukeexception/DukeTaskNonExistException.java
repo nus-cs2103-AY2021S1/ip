@@ -3,7 +3,7 @@ package duke.dukeexception;
 
 public class DukeTaskNonExistException extends DukeException {
 
-    public DukeTaskNonExistException(String message){
+    public DukeTaskNonExistException(String message) {
         super(message);
     }
 

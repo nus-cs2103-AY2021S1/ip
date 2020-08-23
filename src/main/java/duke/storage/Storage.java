@@ -77,12 +77,12 @@ public class Storage {
      */
     private Task taskCreator(String task) {
         switch (task.charAt(1)) {
-            case 'T':
-                return new ToDo(task.toString());
-            case 'D':
-                return new Deadline(task.toString());
-            default:
-                return new EventTask(task.toString());
+        case 'T':
+            return new ToDo(task.toString());
+        case 'D':
+            return new Deadline(task.toString());
+        default:
+            return new EventTask(task.toString());
         }
     }
 

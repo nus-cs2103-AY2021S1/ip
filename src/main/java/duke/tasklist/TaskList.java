@@ -11,11 +11,14 @@ import java.util.Iterator;
  */
 public class TaskList {
 
-    /** The arraylist that is used to store the tasks */
+    /**
+     * The arraylist that is used to store the tasks
+     */
     private final ArrayList<Task> shelf;
 
     /**
      * Constructor for the TaskList object.
+     *
      * @param shelf An ArrayList that encapsulates Tasks objects
      */
     public TaskList(ArrayList<Task> shelf) {
@@ -24,30 +27,32 @@ public class TaskList {
 
     /**
      * Getter to get a task from the arraylist.
+     *
      * @param index Zero-based index to get the task from the arraylist
      * @return Returns the Task that is gotten from the arraylist
      */
-    public Task getTask(int index){
+    public Task getTask(int index) {
         return this.shelf.get(index);
     }
 
     /**
      * This method adds a task to the back of the arraylist.
+     *
      * @param task Task object to be added to the arraylist
      */
-    public void addTask(Task task){
+    public void addTask(Task task) {
         this.shelf.add(task);
-        //also remember to include thee updateFile from the storage side
     }
 
     /**
      * Marks a task in the Arraylist as complete.
+     *
      * @param index Zero-based index on where the task is in the Arraylist
      * @return the task in the index that is completed
      * @throws DukeTaskNonExistException if the index provided is out of range of the arraylist
      */
     public Task completeTask(int index) throws DukeTaskNonExistException {
-        if(index <0 | index>=shelf.size()) {
+        if (index < 0 | index >= shelf.size()) {
             throw new DukeTaskNonExistException("error");
         }
         Task book = this.shelf.get(index);
@@ -55,11 +60,13 @@ public class TaskList {
         return book;
     }
 
+
     /**
      * Getter for the size of the arraylist
+     *
      * @return the size of the arraylist
      */
-    public int getSize(){
+    public int getSize() {
         return this.shelf.size();
     }
 
@@ -79,11 +86,12 @@ public class TaskList {
 
     /**
      * A method that deletes a given task from the arraylist based on the index given.
+     *
      * @param index Zero-based index of the task in the arraylist
      * @throws DukeTaskNonExistException if the index provided is out of range of the arraylist
      */
     public void delete(int index) throws DukeTaskNonExistException {
-        if(index <0 | index>=shelf.size()) {
+        if (index < 0 | index >= shelf.size()) {
             throw new DukeTaskNonExistException("error");
         }
         this.shelf.remove(index);
