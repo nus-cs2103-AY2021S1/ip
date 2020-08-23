@@ -7,6 +7,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String task, boolean isDone) {
+        this.task = task;
+        this.isDone = isDone;
+    }
+
     public String getStatus() {
         return this.isDone ? "[✓]" : "[✘]";
     }
@@ -22,5 +27,25 @@ public class Task {
     @Override
     public String toString() {
         return this.getStatus() + " " + this.getTask();
+    }
+
+    public String getStorageString(String task) {
+        String done = "";
+        if (this.isDone) {
+            done = "1";
+        } else {
+            done = "0";
+        }
+        return task + " ~ " + done + " ~ " + this.getTask();
+    }
+
+    public String getStorageString(String task, String date) {
+        String done = "";
+        if (this.isDone) {
+            done = "1";
+        } else {
+            done = "0";
+        }
+        return task + " ~ " + done + " ~ " + this.getTask() + " ~ " + date;
     }
 }

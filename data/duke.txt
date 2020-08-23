@@ -1,0 +1,6 @@
+T ~ 0 ~ eat
+E ~ 1 ~ gym  ~ tomorrow 10pm
+D ~ 1 ~ easdasd  ~ 26aug 1pm
+D ~ 0 ~ ip3  ~ today
+T ~ 1 ~ bathe
+T ~ 0 ~ water plants
