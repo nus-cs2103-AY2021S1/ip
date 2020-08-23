@@ -3,8 +3,8 @@ import java.util.ArrayList;
 public class TaskManager {
     private ArrayList<Task> taskList;
 
-    public TaskManager() {
-        this.taskList = new ArrayList<>();
+    public TaskManager(ArrayList<Task> taskList) {
+        this.taskList = taskList;
     }
 
     // Should i make it immutable?
@@ -30,6 +30,10 @@ public class TaskManager {
 
     public void removeTask(int taskIndex) {
         taskList.remove(taskIndex);
+    }
+
+    public ArrayList<Task> getTaskList() {
+        return taskList;
     }
 
     @Override

@@ -1,10 +1,10 @@
 public class Task {
-    protected final String taskName;
+    protected final String taskDescription;
     private boolean isDone;
 
-    public Task(String taskName) {
-        this.taskName = taskName;
-        this.isDone = false;
+    public Task(String taskDescription, boolean isDone) {
+        this.taskDescription = taskDescription;
+        this.isDone = isDone;
     }
 
     public void setTaskAsDone()
@@ -16,8 +16,16 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    public String getTaskDescription() {
+        return taskDescription;
+    }
+
+    public boolean getTaskStatus() {
+        return isDone;
+    }
+
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + taskName;
+        return "[" + getStatusIcon() + "] " + taskDescription;
     }
 }

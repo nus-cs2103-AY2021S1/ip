@@ -1,6 +1,8 @@
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class InputOutputHandler {
+public class IOHandler {
     String separationLine = "     _____________________________________________________\n";
     String indentation = "      ";
     Scanner sc = new Scanner(System.in);
@@ -11,7 +13,11 @@ public class InputOutputHandler {
     String topPartOfBotReplyMessage = separationLine + indentation;
     String botPartOfBotReplyMessage = "\n" + separationLine.substring(0, separationLine.length() - 1);
 
-    TaskManager taskManager = new TaskManager();
+    TaskManager taskManager = new TaskManager(new ArrayList<>());
+    TaskSaveAndLoadManager taskSaveAndLoadManager = new TaskSaveAndLoadManager();
+
+    public IOHandler() throws IOException {
+    }
 
     private String[] splitReply() {
         // index 4 is excluded
@@ -34,8 +40,8 @@ public class InputOutputHandler {
         System.out.println(topPartOfBotReplyMessage + message + botPartOfBotReplyMessage);
     }
 
-    private void handleUserInput()
-    {
+    private void handleUserInput() throws IOException {
+
         String fullReply;
         if (reply.equals("list")) {
             String botReply = "Checking the whole list doesn't make you finish anything faster... \n";
@@ -62,19 +68,19 @@ public class InputOutputHandler {
             Task newTask = null;
             if (reply.contains("todo")) {
                 reply = reply.replace("todo ", "");
-                newTask = new ToDoTask(reply);
+                newTask = new ToDoTask(reply, false);
             }
             else if (reply.contains("deadline")) {
                 reply = reply.replace("deadline ", "");
                 reply = reply.replace("/by", "/");
                 String[] tempArr = splitReply();
-                newTask = new DeadlineTask(tempArr[0], tempArr[1]);
+                newTask = new DeadlineTask(tempArr[0], false, tempArr[1]);
             }
             else if (reply.contains("event")) {
                 reply = reply.replace("event ", "");
                 reply = reply.replace("/at", "/");
                 String[] tempArr = splitReply();
-                newTask = new EventTask(tempArr[0], tempArr[1]);
+                newTask = new EventTask(tempArr[0], false, tempArr[1]);
 
             }
             taskManager.addTask(newTask);
@@ -87,7 +93,13 @@ public class InputOutputHandler {
         printMessage(fullReply);
     }
 
-    public void handleInput() {
+    public void handleInput() throws IOException {
+
+        if (taskSaveAndLoadManager.loadTaskManager() != null) {
+            System.out.println("Here");
+            taskManager = taskSaveAndLoadManager.loadTaskManager();
+        }
+
         while (!reply.equals("bye"))
         {
             replyArr = splitReply();
@@ -100,6 +112,9 @@ public class InputOutputHandler {
             }
             reply = sc.nextLine();
         }
+
+        taskSaveAndLoadManager.saveTaskManager(taskManager);
+
         String byeMessage = "That's all? Sure. See you again (hopefully LOL).";
         System.out.println(topPartOfBotReplyMessage + byeMessage + botPartOfBotReplyMessage);
         sc.close();
