@@ -4,5 +4,6 @@ event meeting /at Monday
 deadline return books /by Tuesday
 done 2
 todo change the world
+list
 blahhh
 exit

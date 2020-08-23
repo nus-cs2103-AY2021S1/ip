@@ -1,3 +1,5 @@
+Dir exist
+File created
 ____________________________________________________________
  ____        _        
 |  _ \ _   _| | _____ 
@@ -9,6 +11,7 @@ Hello, I'm Duke
 what can I do for you?
 ____________________________________________________________
 
+Successfully saved your data.
 ____________________________________________________________
 Got it! I have added the task:
 [ToDo][X] run 100km
@@ -16,34 +19,42 @@ Now you have 1 tasks in the list.
 ____________________________________________________________
 
 ____________________________________________________________
-Here are the task in your list:
+Here are the tasks in your list:
 1. [ToDo][X] run 100km
-Stop whining and start rolling.
+So stop procrastinating!
 ____________________________________________________________
 
+Successfully saved your data.
 ____________________________________________________________
 Got it! I have added the task:
 [Event][X] meeting (at: Monday)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 
+Successfully saved your data.
 ____________________________________________________________
 Got it! I have added the task:
-[Event][X] return books (at: Tuesday)
+[Deadline][X] return books (by: Tuesday)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 
+Successfully saved your data.
 ____________________________________________________________
 Congratz! I will marked this task as completed for you!
-
+[Event][?] meeting (at: Monday)
 Keep up the good work and continue to stay motivated.
 You've got 2 task left to be completed!
 ____________________________________________________________
 
+Successfully saved your data.
 ____________________________________________________________
 Got it! I have added the task:
 [ToDo][X] change the world
 Now you have 4 tasks in the list.
+____________________________________________________________
+
+____________________________________________________________
+OOPS!!! I'm sorry, but I don't know what that means :-(
 ____________________________________________________________
 
 ____________________________________________________________
