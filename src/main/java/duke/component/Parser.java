@@ -33,6 +33,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a DeleteCommand to tell which task to delete.
+     * @param cmd the given input command
+     * @param count the current number of tasks in list
+     * @return the index of the task to delete
+     * @throws InvalidCommandException if the input is invalid, including non-integer, negative values, 0 or large
+     * numbers
+     */
     public static int isValidDelete(String cmd, int count) throws InvalidCommandException {
         if (cmd.startsWith("delete ")) {
             if (cmd.length() < 8) {
