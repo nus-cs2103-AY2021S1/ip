@@ -11,6 +11,10 @@ public class Task {
         this.completed = "0";
     }
 
+    public String getTaskName() {
+        return this.taskName;
+    }
+
     public String getStatusIcon() {
         return isDone
                 ? "\u2713"

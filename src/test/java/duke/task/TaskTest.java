@@ -10,6 +10,12 @@ public class TaskTest {
     Task completedTask = new Task("completed task");
 
     @Test
+    public void testGetTaskName() {
+        assertEquals("incomplete task", incompleteTask.getTaskName());
+        assertEquals("completed task", completedTask.getTaskName());
+    }
+
+    @Test
     public void testGetStatusIcon() {
         completedTask.markAsDone();
         assertEquals("\u2718", incompleteTask.getStatusIcon());

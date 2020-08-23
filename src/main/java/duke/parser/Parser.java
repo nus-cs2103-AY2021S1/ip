@@ -1,12 +1,6 @@
 package duke.parser;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.InvalidCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -30,6 +24,8 @@ public class Parser {
             command = new DoneCommand();
         } else if (input.equals("list")) { // list out the tasks
             command = new ListCommand();
+        } else if (input.startsWith("find")) { // find the tasks
+            command = new FindCommand();
         } else if (input.equals("bye")) { // exit the bot
             return new ExitCommand();
         } else { // handle invalid inputs
