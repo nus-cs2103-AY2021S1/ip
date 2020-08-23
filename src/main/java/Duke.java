@@ -1,6 +1,9 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
 
@@ -31,7 +34,6 @@ public class Duke {
         System.out.println(seperator);
         System.out.println("\tNice! I've marked this task as done:");
         System.out.println("\t\t[" + current.getIcon() + "] " + current.taskDesc);
-        System.out.println();
     }
 
     private static void deadlineTask(String newLine) throws InvalidInputException {
@@ -91,18 +93,77 @@ public class Duke {
         System.out.println(seperator);
     }
 
-    public static void main(String[] args) {
+    private void readFile(String fileLocation) {
+        File dir = new File("data");
+        if(!dir.exists()) {
+            dir.mkdir();
+        }
+        try {
+            File file = new File(fileLocation);
+            if(file.exists()) {
+                Scanner s = new Scanner(file);
+                while(s.hasNext()) {
+                    String entry = s.nextLine();
+                    if(entry.startsWith("[T]")) {
+                        ToDos t = new ToDos(entry.substring(7));
+                        if(entry.contains("✓")) {
+                            t.completeTask();
+                        }
+                        toDoList.add(t);
+                    } else if (entry.startsWith("[D]")) {
+                        int index = entry.indexOf("(");
+                        Deadlines d = new Deadlines(entry.substring(7,index),
+                                entry.substring(index+2,entry.length()-1));
+                        if(entry.contains("✓")) {
+                            d.completeTask();
+                        }
+                        toDoList.add(d);
+                    } else {
+                        int index = entry.indexOf("(");
+                        Events e = new Events(entry.substring(7,index),
+                                entry.substring(index+2,entry.length()-1));
+                        if(entry.contains("✓")) {
+                            e.completeTask();
+                        }
+                        toDoList.add(e);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    private static void saveFile(String fileLocation) throws InvalidInputException {
+        File dir = new File("data");
+        if(!dir.exists()) {
+            dir.mkdir();
+        }
+        try {
+            FileWriter fw = new FileWriter(fileLocation);
+            for(int i=0; i<toDoList.size();i++) {
+                Task interim = toDoList.get(i);
+                String desc = interim.toString();
+                fw.write(desc+"\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            throw new InvalidInputException("\t☹ OOPS!!! Duke is experiencing IO errors when writing to save file!");
+        }
+    }
+
+    public void run(String fileLocation) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-
         System.out.println(seperator);
         System.out.println("\tHello! I'm Duke\n\tWhat can I do for you?");
         System.out.println(seperator);
         Scanner sc = new Scanner(System.in);
+        readFile(fileLocation);
         while(sc.hasNext()) {
             try {
                 String newLine = sc.nextLine();
@@ -110,6 +171,7 @@ public class Duke {
                     System.out.println(seperator);
                     System.out.println("\tBye. Hope to see you again soon!");
                     System.out.println(seperator);
+                    saveFile(fileLocation);
                     break;
                 } else if (newLine.equals("list")) {
                     listTask();
@@ -133,6 +195,8 @@ public class Duke {
             }
         }
     }
-
-
+    public static void main(String[] args) {
+        new Duke().run("data/tasks.txt");
+        
+    }
 }
