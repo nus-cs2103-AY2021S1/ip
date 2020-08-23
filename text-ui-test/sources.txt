@@ -1,5 +1,6 @@
 C:\Users\Qi\Documents\ip\src\main\java\Deadline.java
 C:\Users\Qi\Documents\ip\src\main\java\Duke.java
+C:\Users\Qi\Documents\ip\src\main\java\DukeException.java
 C:\Users\Qi\Documents\ip\src\main\java\Event.java
 C:\Users\Qi\Documents\ip\src\main\java\Task.java
 C:\Users\Qi\Documents\ip\src\main\java\Todo.java

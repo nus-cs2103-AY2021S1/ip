@@ -21,29 +21,39 @@ public class Duke {
                 check(strArr);
                 if (str.equals("bye")) {
                     boo = false;
-                    System.out.println("Bye. Hope to see you again soon!");
+                    System.out.println("_____________________________________________________\n" + 
+                            "Bye. Hope to see you again soon!\n" +
+                            "_____________________________________________________");
                 } else if (str.equals("list")) {
-                    System.out.println("Here are the tasks in your list:");
+                    System.out.println("_____________________________________________________\n" + 
+                            "Here are the tasks in your list:");
                     for (int i = 0; i < lst.size(); i++) {
                         System.out.println((i + 1) + ". " + lst.get(i).toString());
                     }
+                    System.out.println("_____________________________________________________");
                 } else if (strArr[0].equals("done")) {
                     lst.get(Integer.parseInt(strArr[1]) - 1).markAsDone();
-                    System.out.println("Nice! I've marked this task as done: \n" +
-                            lst.get(Integer.parseInt(strArr[1]) - 1).toString());
+                    System.out.println("_____________________________________________________\n" + 
+                            "Nice! I've marked this task as done: \n" + "  " +
+                            lst.get(Integer.parseInt(strArr[1]) - 1).toString() +
+                            "\n_____________________________________________________");
                 } else if (strArr[0].equals("delete")) {
                     int i = Integer.parseInt(strArr[1]) - 1;
                     Task t = lst.get(Integer.parseInt(strArr[1]) - 1);
                     lst.remove(i);
-                    System.out.println("Noted. I've removed this task:\n" +
+                    System.out.println("_____________________________________________________\n" + 
+                            "Noted. I've removed this task:\n" + "  " +
                             t.toString() + "\n" +
-                            "Now you have " + lst.size() + " tasks in the list.");
+                            "Now you have " + lst.size() + " tasks in the list.\n" +
+                            "_____________________________________________________");
                 } else {
                     if (strArr[0].equals("todo")) {
                         Task task = new Todo(str);
                         lst.add(task);
-                        System.out.println("Got it. I've added this task:\n" + task.toString() + "\n" +
-                                "Now you have " + lst.size() + " tasks in the list.");
+                        System.out.println("_____________________________________________________\n" + 
+                                "Got it. I've added this task:\n" + "  " + task.toString() + "\n" +
+                                "Now you have " + lst.size() + " tasks in the list.\n" +
+                                "_____________________________________________________");
                     } else if (strArr[0].equals("deadline")) {
                         String sd = "";
                         String sb = "";
@@ -64,8 +74,10 @@ public class Duke {
                         }
                         Task task = new Deadline(sd, sb);
                         lst.add(task);
-                        System.out.println("Got it. I've added this task:\n" + task.toString() + "\n" +
-                                "Now you have " + lst.size() + " tasks in the list.");
+                        System.out.println("_____________________________________________________\n" + 
+                                "Got it. I've added this task:\n" + "  " + task.toString() + "\n" +
+                                "Now you have " + lst.size() + " tasks in the list.\n" +
+                                "_____________________________________________________");
                     } else if (strArr[0].equals("event")) {
                         String sd = "";
                         String sa = "";
@@ -86,12 +98,15 @@ public class Duke {
                         }
                         Task task = new Event(sd, sa);
                         lst.add(task);
-                        System.out.println("Got it. I've added this task:\n" + task.toString() + "\n" +
-                                "Now you have " + lst.size() + " tasks in the list.");
+                        System.out.println("_____________________________________________________\n" + 
+                                "Got it. I've added this task:\n" + "  " + task.toString() + "\n" +
+                                "Now you have " + lst.size() + " tasks in the list.\n" +
+                                "_____________________________________________________");
                     }
                 }
             } catch (Exception e) {
-                System.out.println(e.toString());
+                System.out.println("_____________________________________________________\n" + e.toString() +
+                        "\n_____________________________________________________");
             }
         }
         sc.close();
