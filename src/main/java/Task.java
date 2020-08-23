@@ -2,9 +2,9 @@ public class Task {
     protected String name;
     protected boolean done;
 
-    public Task(String name) {
+    public Task(String name, boolean done) {
         this.name = name;
-        this.done = false;
+        this.done = done;
     }
 
     public void setDone(boolean done) {
@@ -12,10 +12,14 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (done ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (done ? "\u2713" : "\u2718"); // return tick or X symbols
     }
 
     public String toString() {
         return "[" + getStatusIcon() + "] " + name;
+    }
+
+    public String writeString() {
+        return (done ? "0" : "1") + " # " + name;
     }
 }

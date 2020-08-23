@@ -35,4 +35,14 @@ public class TaskList {
         }
         return ls.toString();
     }
+
+    public String writeString() {
+        StringBuilder ls = new StringBuilder();
+        int counter = 1;
+        for (Task task : list) {
+            ls.append(task.writeString()).append(counter != list.size() ? "\n" : "");
+            counter++;
+        }
+        return ls.toString();
+    }
 }
