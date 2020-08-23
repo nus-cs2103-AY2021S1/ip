@@ -1,16 +1,14 @@
 package seedu.bob;
 
-import seedu.bob.exceptions.*;
-import seedu.bob.storage.Storage;
 import seedu.bob.commands.Command;
-import seedu.bob.data.task.*;
+import seedu.bob.common.Messages;
+import seedu.bob.data.task.Tasklist;
+import seedu.bob.parser.Parser;
+import seedu.bob.storage.Storage;
+import seedu.bob.ui.Ui;
+import seedu.bob.exceptions.BobException;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-
-
 
 /**
  * Represents the task-managing ChatBot.
@@ -18,408 +16,39 @@ import java.io.IOException;
  */
 public class Bob {
     private final Storage storage;
-    private final String output;
-    private final ArrayList<Task> list;
-    private final boolean hasExited;
+    private final Tasklist tasks;
+    private final Ui ui;
 
-    /**
-     * Introduction message
-     */
-    private static final String INTRO = "/*----------------- Welcome to BOB -----------------*/\n"
-                    + "                    █▀▀▄ █▀▀█ █▀▀▄\n"
-                    + "                    █▀▀▄ █  █ █▀▀▄\n"
-                    + "                    ▀▀▀  ▀▀▀▀ ▀▀▀\n"
-                    + "            Also known as BERY ORDINARY BOT\n"
-                    + "Hi, my name is BOB.\n"
-                    + "What can I do for you?";
-
-    /**
-     * Exit message
-     */
-    private static final String OUTRO = "Good bye boss, see you soon.";
-
-    /**
-     * Divider to be display on UI
-     */
-    private static final String DIVIDER = "========================================================\n";
-
-    /**
-     * Default file path of saved task list
-     */
-    public static final String FILEPATH = System.getProperty("user.dir").endsWith("text-ui-test")
-            ? "test.txt"
-            : "data/bob.txt";
-
-    /**
-     * Initializes an active Bob.
-     */
-    private Bob() throws IOException, BobInvalidDateAndTimeException {
-        ArrayList<Task> tempList;
-
-        this.storage = new Storage(FILEPATH);
-        this.output = INTRO;
-        // Checks if file exists; If exist, converts file into list, else initialize a new list
+    public Bob(String filePath) throws IOException {
+        Tasklist tempTasks;
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
         try {
-            tempList = storage.getList();
-        } catch (FileNotFoundException e) {
-            System.out.println("I will initialize a new list for you.");
-            tempList = new ArrayList<>();
+            tempTasks = new Tasklist(storage);
+        } catch (BobException | IOException e) {
+            tempTasks = new Tasklist();
         }
-        this.list = tempList;
-        this.hasExited = false;
+        this.tasks = tempTasks;
     }
 
-    /**
-     * Creates an active Bob.
-     * @param output Current message to print to user.
-     * @param list   List of tasks.
-     */
-    private Bob(String output, ArrayList<Task> list) throws IOException {
-        this.storage = new Storage(FILEPATH);
-        this.output = output;
-        this.list = list;
-        this.hasExited = false;
-    }
-
-    /**
-     * Creates a Bob.
-     * @param output    Current message to print to user.
-     * @param list      List of tasks.
-     * @param hasExited Whether Bob has exited.
-     */
-    private Bob(String output, ArrayList<Task> list, boolean hasExited) throws IOException {
-        this.storage = new Storage(FILEPATH);
-        this.output = output;
-        this.list = list;
-        this.hasExited = hasExited;
-    }
-
-    /**
-     * Updates saved file with updated list of tasks.
-     * @throws IOException If error occurs while updating file.
-     */
-    private void updateData() throws IOException {
-        storage.updateFile(this.list);
-    }
-
-    /**
-     * Formats date to be parsed.
-     * @param date Inputted date.
-     * @return Formatted date.
-     * @throws BobInvalidDateAndTimeException If the inputted date and time has invalid format.
-     */
-    private String formatDate(String date) throws BobInvalidDateAndTimeException {
-        String[] split = date.split("/");
-        // If length of date is not same as "YYYY/MM/DD" and components are not separated by "/"
-        if (date.length() != 10 || split.length != 3) {
-            throw new BobInvalidDateAndTimeException();
-        }
-        String formattedDate = split[0] + "-" + split[1] + "-" + split[2];
-        return formattedDate;
-    }
-
-    /**
-     * Formats time to be parsed.
-     * @param time Inputted time.
-     * @return Formatted time.
-     * @throws BobInvalidDateAndTimeException If the inputted date and time has invalid format.
-     */
-    private String formatTime(String time) throws BobInvalidDateAndTimeException {
-        // If length of time is not same as "HHMM"
-        if (time.length() != 4) {
-            throw new BobInvalidDateAndTimeException();
-        }
-
-        return time.substring(0, 2) + ":" + time.substring(2);
-    }
-
-
-    /**
-     * Adds a task to the list.
-     * @param description Description of the task.
-     * @return String message regarding adding of task.
-     */
-    private String addTodo(String description) throws IOException {
-        Task task = new Task(description);
-        this.list.add(task);
-        updateData();
-        return returnAddMessage(task);
-    }
-
-    /**
-     * Adds a deadline to the list.
-     * @param description Description of the deadline.
-     * @param dateAndTime Date and time of the deadline.
-     * @return String message regarding adding of deadline.
-     * @throws BobInvalidDateAndTimeException If format of date and time is invalid.
-     */
-    private String addDeadline(String description, String dateAndTime) throws
-            BobInvalidDateAndTimeException, IOException {
-        // Checks if there is a space between "/by" and "date and time"
-        String temp = dateAndTime.startsWith(" ")
-                ? dateAndTime.substring(1)
-                : dateAndTime;
-        String[] dateAndTimeSplit = temp.split(" ");
-
-        // If format of date and time is invalid (in this case, not separated by one space)
-        if (dateAndTimeSplit.length != 2) {
-            throw new BobInvalidDateAndTimeException();
-        }
-
-        String date = formatDate(dateAndTimeSplit[0]);
-        String time = formatTime(dateAndTimeSplit[1]);
-        Deadline deadline = new Deadline(description, date, time);
-        this.list.add(deadline);
-        updateData();
-        return returnAddMessage(deadline);
-    }
-
-    /**
-     * Adds an event to the list.
-     * @param description Description of the event.
-     * @param dateAndTime Date and time of the event.
-     * @return String message regarding adding of event.
-     * @throws BobInvalidDateAndTimeException If format of date and time is invalid.
-     */
-    private String addEvent(String description, String dateAndTime)
-            throws BobInvalidDateAndTimeException, IOException {
-        // Checks if there is a space between "/by" and "date and time"
-        String temp = dateAndTime.startsWith(" ")
-                ? dateAndTime.substring(1)
-                : dateAndTime;
-        String[] dateAndTimeSplit = temp.split(" ");
-
-        // If format of date and time is invalid (in this case, not separated by one space)
-        if (dateAndTimeSplit.length != 2) {
-            throw new BobInvalidDateAndTimeException();
-        }
-
-        String date = formatDate(dateAndTimeSplit[0]);
-        String time = formatTime(dateAndTimeSplit[1]);
-        Event event = new Event(description, date, time);
-        this.list.add(event);
-        updateData();
-        return returnAddMessage(event);
-    }
-
-    /**
-     * Returns message after adding task.
-     * @param task Task that was added to list.
-     * @return String message.
-     */
-    private String returnAddMessage(Task task) {
-        return "Yes boss, I have added this task to your list:\n" + "  " + task + "\n"
-                + "Currently you have " + this.list.size() + " tasks in your list.";
-    }
-
-    /**
-     * Converts the list as a readable String.
-     * @return String message regarding tasks in list.
-     */
-    private String convertList() {
-        String output = "";
-        int taskCompleted = 0;
-
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).checkIsDone()) {
-                taskCompleted++;
-            }
-            int taskNumber = i + 1;
-            output += taskNumber + ". " + list.get(i) + "\n";
-        }
-
-        return list.size() == 0
-                ? "You currently have no tasks."
-                : taskCompleted == list.size()
-                ? "Wow congrats, you finished all your tasks.\n" + output
-                : "You have " + (list.size() - taskCompleted) + " unfinished tasks.\n" + output;
-    }
-
-    /**
-     * Marks task in a list as done.
-     * @param taskNum Task number.
-     * @return String message regarding marking of task.
-     * @throws BobListIndexOutOfBoundsException If taskNum is > list.size() or <= 0.
-     */
-    private String markTaskDone(int taskNum) throws BobListIndexOutOfBoundsException, IOException {
-        if (taskNum > list.size() || taskNum <= 0) {
-            throw new BobListIndexOutOfBoundsException(list.size(), taskNum, "mark");
-        }
-        int index = taskNum - 1;
-        Task task = list.get(index).markDone();
-        list.set(index, task);
-        updateData();
-        return "I have marked the task as done, good job.\n" + task + "\n";
-    }
-
-    /**
-     * Deletes task from the list.
-     * @param taskNum Task number.
-     * @return String message regarding deleting of task.
-     * @throws BobListIndexOutOfBoundsException If taskNum is > list.size() or <= 0.
-     */
-    private String deleteTask(int taskNum) throws BobListIndexOutOfBoundsException, IOException {
-        if (taskNum > list.size() || taskNum <= 0) {
-            throw new BobListIndexOutOfBoundsException(list.size(), taskNum, "delete");
-        }
-        int index = taskNum - 1;
-        Task task = list.get(index);
-        list.remove(index);
-        updateData();
-        return "I have deleted the task.\n" + task + "\n";
-    }
-
-    /**
-     * Executes Bob's next action based on command.
-     * @param command User's command.
-     * @return Updated Bob with the next output.
-     */
-    private Bob execute(Command command) throws IOException {
-        switch (command) {
-
-        case EXIT:
-            return new Bob(OUTRO, this.list, true);
-        case LIST:
-            return new Bob(convertList(), this.list);
-        default:
-            return this;
-        }
-    }
-
-    /**
-     * Executes Bob's next action based on command and other user input.
-     * @param command User's command.
-     * @param input   User's input other than command.
-     * @return Updated Bob with the next output.
-     * @throws BobListIndexOutOfBoundsException If task number input > number of task in list or <= 0
-     * for DONE and DELETE commands.
-     * @throws BobInvalidDateAndTimeException   If no/invalid date is provided for DEADLINE and EVENT commands.
-     * @throws BobInvalidNumberException        If task number input is not a valid integer for LIST and DELETE commands.
-     */
-    private Bob execute(Command command, String input) throws BobListIndexOutOfBoundsException,
-            BobInvalidDateAndTimeException, BobInvalidNumberException, IOException {
-        // for each case, treats return statement as break
-        switch (command) {
-
-        // If the command given by user is todo
-        case TODO:
-            String outputTodo = addTodo(input.substring(5));
-            return new Bob(outputTodo, this.list);
-
-        // If the command given by user is deadline, handles empty date exception
-        case DEADLINE:
-            String[] splitD = input.split("/by");
-            if (splitD.length == 1) {
-                throw new BobInvalidDateAndTimeException();
-            }
-            String descriptionD = splitD[0].substring(9);
-            String dateAndTimeD = splitD[1];
-            String outputDeadline = addDeadline(descriptionD, dateAndTimeD);
-            return new Bob(outputDeadline, this.list);
-
-        // If the command given by user is event, handles empty date exception
-        case EVENT:
-            String[] splitE = input.split("/at");
-            if (splitE.length == 1) {
-                throw new BobInvalidDateAndTimeException();
-            }
-            String descriptionE = splitE[0].substring(6);
-            String dateAndTimeE = splitE[1];
-            String outputEvent = addEvent(descriptionE, dateAndTimeE);
-            return new Bob(outputEvent, this.list);
-
-        // If the command given by user is done, handles invalid number and number out of range exceptions
-        case DONE:
+    public void run() {
+        ui.showIntroMessage();
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                int taskNumberDone = Integer.parseInt(input.substring(4).replaceAll("\\s+", ""));
-                String outputDone = markTaskDone(taskNumberDone);
-                return new Bob(outputDone, this.list);
-            } catch (NumberFormatException e) {
-                throw new BobInvalidNumberException();
+                String fullCommand = ui.readCommand();
+                ui.showDivider();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExited();
+            } catch (IOException e){
+                ui.showUpdatingError();
+            } catch (BobException e) {
+                ui.showError(e);
+            } finally {
+                ui.showDivider();
             }
-
-        // If the command given by user is delete, handles invalid number and number out of range exceptions
-        case DELETE:
-            try {
-                int taskNumberDelete = Integer.parseInt(input.substring(6).replaceAll("\\s+", ""));
-                String outputDelete = deleteTask(taskNumberDelete);
-                return new Bob(outputDelete, this.list);
-            } catch (NumberFormatException e) {
-                throw new BobInvalidNumberException();
-            }
-
-        default:
-            return this;
         }
-    }
-
-    /**
-     * Bob's current output getter.
-     * @return String message to be printed to the user.
-     */
-    public String getOutput() {
-        return DIVIDER + this.output + "\n" + DIVIDER;
-    }
-
-    /**
-     * Checks if Bob has exited.
-     * @return Boolean value indicating whether Bob has exited.
-     */
-    public boolean checkHasExited() {
-        return this.hasExited;
-    }
-
-    /**
-     * Initializes Bob.
-     * @return Bob with INTRODUCTION as output.
-     */
-    public static Bob initializeBob() throws IOException, BobInvalidDateAndTimeException {
-        return new Bob();
-    }
-
-
-    // Handles user input which decides which command Bob executes, handles all exceptions
-
-    /**
-     * Handles user input which decides which command Bob executes.
-     * @param input User input.
-     * @return Updated Bob.
-     * @throws BobInvalidCommandException       If user input is not recognised.
-     * @throws BobEmptyTaskException            If no task is specified after todo, deadline or event.
-     * @throws BobListIndexOutOfBoundsException If BobListIndexOutOfBoundsException is caught after execute.
-     * @throws BobInvalidDateAndTimeException   If BobInvalidDateAndTimeException is caught after execute.
-     * @throws BobInvalidNumberException        If BobInvalidNumberException is caught after execute.
-     */
-    public Bob nextCommand(String input) throws BobInvalidCommandException, BobEmptyTaskException,
-            BobListIndexOutOfBoundsException, BobInvalidDateAndTimeException, BobInvalidNumberException, IOException {
-        if (input.equals("bye")) {
-            return execute(Command.EXIT);
-        } else if (input.equals("list")) {
-            return execute(Command.LIST);
-        } else if (input.length() >= 4 && input.startsWith("done")) {
-            return execute(Command.DONE, input);
-        } else if (input.length() >= 6 && input.startsWith("delete")) {
-            return execute(Command.DELETE, input);
-        } else if (input.length() >= 4 && input.startsWith("todo")) {
-            if (input.substring(4).replaceAll("\\s+", "").length() == 0) {
-                throw new BobEmptyTaskException();
-            }
-            return execute(Command.TODO, input);
-        } else if (input.length() >= 5 && input.startsWith("event")) {
-            if (input.substring(5).replaceAll("\\s+", "").length() == 0) {
-                throw new BobEmptyTaskException();
-            }
-            return execute(Command.EVENT, input);
-        } else if (input.length() >= 8 && input.startsWith("deadline")) {
-            if (input.substring(8).replaceAll("\\s+", "").length() == 0) {
-                throw new BobEmptyTaskException();
-            }
-            return execute(Command.DEADLINE, input);
-            // If user's command is invalid/not recognisable by Bob
-        } else {
-            throw new BobInvalidCommandException();
-        }
-
     }
 
 
@@ -428,37 +57,14 @@ public class Bob {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-        // Initializing stage
-        try {
-            Bob chatbot = initializeBob();
-            // Output for greeting
-            System.out.println(chatbot.getOutput());
-
-            Scanner sc = new Scanner(System.in);
-
-            while (!chatbot.checkHasExited()) {
-                try {
-                    String userInput = sc.nextLine();
-                    chatbot = chatbot.nextCommand(userInput);
-                    System.out.println(chatbot.getOutput());
-                } catch (BobInvalidCommandException e) {
-                    System.out.println(e.toString());
-                } catch (BobEmptyTaskException e) {
-                    System.out.println(e.toString());
-                } catch (BobListIndexOutOfBoundsException e) {
-                    System.out.println(e.toString());
-                } catch (BobInvalidDateAndTimeException e) {
-                    System.out.println(e.toString());
-                } catch (BobInvalidNumberException e) {
-                    System.out.println(e.toString());
-                } catch (IOException e) {
-                    System.out.println("File is not found.");
-                }
-            }
-            sc.close();
-
-        } catch (IOException | BobInvalidDateAndTimeException e) {
-            System.out.println("File data is corrupted");
-        }
+         //File path of saved task list
+         String filePath = System.getProperty("user.dir").endsWith("text-ui-test")
+                ? "test.txt"
+                : "data/bob.txt";
+         try {
+             new Bob(filePath).run();
+         } catch (IOException e) {
+             System.out.println(Messages.INVALIDPATHNAME);
+         }
     }
 }

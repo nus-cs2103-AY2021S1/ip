@@ -1,23 +1,22 @@
 package seedu.bob.exceptions;
 
+import seedu.bob.common.Messages;
+
 /**
  * Exception representing empty task input with inherited functionalities from Exception.
  * @author Lim Zi Yang
  */
-public class BobEmptyTaskException extends Exception {
-    /** Error message */
-    private static final String ERR =
-            "Sorry, I can't guess your task that well. Please enter a description for your task.\n";
+public class BobEmptyTaskException extends BobException {
 
-    /** Divider */
-    private static final String DIVIDER =
-            "===========================================================================================\n";
+//    /** Divider */
+//    private static final String DIVIDER =
+//            "===========================================================================================\n";
 
     /**
      * Creates a BobEmptyTaskException.
      */
     public BobEmptyTaskException () {
-        super (ERR);
+        super (Messages.EMPTYTASK);
     }
 
     /**
@@ -26,7 +25,7 @@ public class BobEmptyTaskException extends Exception {
      */
     @Override
     public String toString() {
-        return DIVIDER + ERR + DIVIDER;
+        return Messages.EMPTYTASK;
 
     }
 }

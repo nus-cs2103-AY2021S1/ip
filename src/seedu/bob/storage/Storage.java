@@ -85,12 +85,11 @@ public class Storage {
      */
     public void updateFile(ArrayList<Task> list) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
-        String textToAdd = "";
+        StringBuilder textToAdd = new StringBuilder();
         for (Task task : list) {
-            textToAdd += task.convertToStringData() + System.lineSeparator();
+            textToAdd.append(task.convertToStringData()).append(System.lineSeparator());
         }
-
-        fw.write(textToAdd);
+        fw.write(textToAdd.toString());
         fw.close();
     }
 }

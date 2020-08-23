@@ -1,24 +1,24 @@
 package seedu.bob.exceptions;
 
+import seedu.bob.common.Messages;
+
 /**
  * Exception representing invalid task number for DONE and DELETE commands
  * with inherited functionalities from Exception.
  * @author Lim Zi Yang
  */
-public class BobInvalidNumberException extends Exception {
+public class BobInvalidNumberException extends BobException {
     /** Error message */
-    private static final String ERR =
-            "Sorry but there is no valid task number. Please enter a valid task number.\n";
 
-    /** Divider */
-    private static final String DIVIDER =
-            "========================================================================================\n";
+//    /** Divider */
+//    private static final String DIVIDER =
+//            "========================================================================================\n";
 
     /**
      * Creates a BobInvalidNumberException.
      */
     public BobInvalidNumberException () {
-        super (ERR);
+        super (Messages.INVALIDNUMBER);
     }
 
     /**
@@ -27,6 +27,6 @@ public class BobInvalidNumberException extends Exception {
      */
     @Override
     public String toString() {
-        return DIVIDER + ERR + DIVIDER;
+        return Messages.INVALIDNUMBER;
     }
 }
