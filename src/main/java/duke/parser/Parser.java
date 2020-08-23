@@ -49,6 +49,8 @@ public class Parser {
                     "the ID of the task to be deleted.");
         } else if (echo.equals("check")) {
             throw new DukeException("Please enter a date to check!");
+        } else if (echo.equals("find")) {
+            throw new DukeException("Please enter a keyword to search for.");
         } else {
             throw new DukeException("Please enter a valid " +
                     "command into the console.");
@@ -82,6 +84,8 @@ public class Parser {
                 throw new DukeException("Please enter the date in this format: yyyy-mm-dd");
             }
 
+        } else if (task.equals("find")) {
+            return new FindCommand(modEcho[1]);
         } else {
             if (task.equals("todo")) {
                 return new TodoCommand(modEcho[1]);

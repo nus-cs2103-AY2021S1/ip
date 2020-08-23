@@ -19,6 +19,8 @@ public class Task {
                 : "✘";
     }
 
+    public String getDescription() { return this.description; }
+
     public LocalDate getDate() {
         return this.date;
     }
