@@ -15,7 +15,7 @@ import duke.task.TodoTask;
  */
 public class TodoCommand implements Command {
 
-    String description;
+    private final String description;
 
     /**
      * Initializes a TodoCommand.

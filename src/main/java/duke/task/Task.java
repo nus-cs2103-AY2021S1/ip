@@ -23,10 +23,6 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
-    private String getStatusIcon() {
-        return "[" + (isDone ? "\u2713" : "\u2718") + "]";
-    }
-
     /**
      * Gets the raw data representation of the Task.
      * @return The raw data representation of the Task.
@@ -41,6 +37,11 @@ public abstract class Task {
      */
     public abstract Task markAsDone();
 
+    /**
+     * Checks whether task description contains a certain keyword.
+     * @param keyword The search keyword.
+     * @return Boolean value indicating whether task description contains a certain keyword.
+     */
     public boolean contains(String keyword) {
         return description.contains(keyword);
     }
@@ -48,5 +49,9 @@ public abstract class Task {
     @Override
     public String toString() {
         return getStatusIcon() + " " + this.description;
+    }
+
+    private String getStatusIcon() {
+        return "[" + (isDone ? "\u2713" : "\u2718") + "]";
     }
 }

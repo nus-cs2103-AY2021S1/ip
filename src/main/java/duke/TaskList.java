@@ -67,11 +67,14 @@ public class TaskList {
      * @return The task that was deleted.
      */
     public Task delete(int taskNum) {
-        Task deletedTask = taskStore.remove(taskNum - 1);
-        return deletedTask;
+        return taskStore.remove(taskNum - 1);
     }
 
-
+    /**
+     * Finds tasks that matches the search keyword.
+     * @param keyword The search keyword.
+     * @return An ArrayList of string representations of tasks that match the keyword.
+     */
     public ArrayList<String> find(String keyword) {
         return mapToRepr(filterTasks(taskStore, task -> task.contains(keyword)), Task::toString);
     }

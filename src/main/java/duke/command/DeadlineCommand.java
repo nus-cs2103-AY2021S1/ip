@@ -16,8 +16,8 @@ import duke.task.Task;
  */
 public class DeadlineCommand implements Command {
 
-    String description;
-    String deadline;
+    private final String description;
+    private final String deadline;
 
     /**
      * Initializes a DeadlineCommand.
