@@ -7,6 +7,8 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.io.IOException;
+
 public class Parser {
 
     public static Command add(String command) throws DukeEmptyDescriptionException,
