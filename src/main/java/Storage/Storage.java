@@ -1,9 +1,9 @@
-package Storage;
+package storage;
 
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.Todo;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -72,7 +72,7 @@ public class Storage {
         }
     }
 
-    public static void fileError() {
+    protected static void fileError() {
         System.out.println("Oops! There's been an error with the data file, please try again!");
     }
 
@@ -94,7 +94,7 @@ public class Storage {
         return 0;
     }
 
-    public void createFile(String fileName) {
+    protected void createFile(String fileName) {
         try {
             File dataFile = new File(fileName);
             if (dataFile.createNewFile()) {
@@ -126,6 +126,7 @@ public class Storage {
                 result = String.format("[D]%1$s%2$s (by: %3$s)", isDone, taskName, by);
                 break;
             default:
+                result = "There's been an error!";
                 break;
         }
         return result;
@@ -155,7 +156,7 @@ public class Storage {
         }
     }
 
-    public void writeToFile(String text) throws IOException{
+    protected void writeToFile(String text) throws IOException{
         FileWriter writer = new FileWriter(this.fileName, this.appendToFile);
         BufferedWriter bufferedWriter = new BufferedWriter(writer);
         bufferedWriter.write(text);

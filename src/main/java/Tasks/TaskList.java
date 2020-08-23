@@ -1,15 +1,15 @@
-package Tasks;
+package tasks;
 
 import DukeException.DukeException;
-import Storage.Storage;
+import storage.Storage;
 
 import java.util.ArrayList;
 import static java.lang.Integer.parseInt;
 
 public class TaskList {
 
-    public ArrayList<Task> list;
-    public Storage storage;
+    protected ArrayList<Task> list;
+    protected Storage storage;
 
     public TaskList(Storage storage) {
         this.storage = storage;
@@ -20,11 +20,11 @@ public class TaskList {
         return this.storage;
     }
 
-    public void addToList(Task task) {
+    protected void addToList(Task task) {
         list.add(task);
     }
 
-    public int getNumList() {
+    protected int getNumList() {
         return this.list.size();
     }
 
@@ -56,7 +56,7 @@ public class TaskList {
 
     }
 
-    public static String processTasks(Task task) {
+    protected static String processTasks(Task task) {
         String result = "";
         int isDone = task.getIsDone().equals("[\u2713] ") ? 1 : 0;
         if (task instanceof Todo) {

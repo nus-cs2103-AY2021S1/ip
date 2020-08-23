@@ -1,7 +1,7 @@
-import Parser.Parser;
-import Storage.Storage;
-import Tasks.TaskList;
-import Ui.Ui;
+import parser.Parser;
+import storage.Storage;
+import tasks.TaskList;
+import ui.Ui;
 
 public class Duke {
 

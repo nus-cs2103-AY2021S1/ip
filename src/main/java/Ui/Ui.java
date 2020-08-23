@@ -1,6 +1,6 @@
-package Ui;
+package ui;
 
-import Parser.Parser;
+import parser.Parser;
 
 import java.util.Scanner;
 
@@ -8,7 +8,7 @@ public class Ui {
 
     private boolean isExit = false;
 
-    public Parser parser;
+    protected Parser parser;
 
     public Ui(Parser parser) {
         this.parser = parser;
@@ -29,11 +29,11 @@ public class Ui {
         System.out.println("What can I help you with?");
     }
 
-    public void showLine() {
+    protected void showLine() {
         System.out.println("***********************************************************************");
     }
 
-    public void showBye() {
+    protected void showBye() {
         System.out.println("Bye! Let's talk again soon!");
     }
 

@@ -1,11 +1,11 @@
-package Parser;
+package parser;
 
 import DukeException.DukeException;
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Todo;
-import Storage.Storage;
-import Tasks.TaskList;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Todo;
+import storage.Storage;
+import tasks.TaskList;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,39 +14,39 @@ import static java.lang.Integer.parseInt;
 
 public class Parser {
 
-    public Storage storage;
-    public TaskList tasks;
+    protected Storage storage;
+    protected TaskList tasks;
 
     public Parser(TaskList tasks) {
         this.storage = tasks.getStorage();
         this.tasks = tasks;
     }
 
-    public static void indexOutOfBounds() {
+    protected static void indexOutOfBounds() {
         System.out.println("Oh no! That number is not on the list! D:");
     }
 
-    public static void numberFormat() {
+    protected static void numberFormat() {
         System.out.println("Oh no! Type only a number for the description!");
     }
 
-    public static void deadlineByReminder() {
+    protected static void deadlineByReminder() {
         System.out.println("Oh no! Remember to write /by (time) after your task!");
     }
 
-    public static void eventAtReminder() {
+    protected static void eventAtReminder() {
         System.out.println("Oh no! Remember to write /at (time) after your task!");
     }
 
-    public static void fileError() {
+    protected static void fileError() {
         System.out.println("Oops! There's been an error with the data file, please try again!");
     }
 
-    public static void incorrectTimeFormat() {
+    protected static void incorrectTimeFormat() {
         System.out.println("Oh no! Please only type in the date in this format: yyyy-mm-dd (eg, 2019-10-15).");
     }
 
-    public void setDoneTask(String command) throws DukeException {
+    protected void setDoneTask(String command) throws DukeException {
         String[] doneCommand = command.split("\\W+");
         if (doneCommand.length == 1) {
             throw new DukeException("Oh no! This can't be DONE! (The description of done can't be empty!)");
@@ -70,7 +70,7 @@ public class Parser {
         }
     }
 
-    public void deleteTask(String command) throws DukeException{
+    protected void deleteTask(String command) throws DukeException{
         String[] deleteCommand = command.split("\\W+");
         if (deleteCommand.length == 1) {
             throw new DukeException("Oh no! You must DELETE this! (The description of delete can't be empty!)");
@@ -95,7 +95,7 @@ public class Parser {
         }
     }
 
-    public void handleTodo(String command) throws DukeException {
+    protected void handleTodo(String command) throws DukeException {
         String[] todoCommand = command.split("\\W+");
         if (todoCommand.length == 1) {
             throw new DukeException("Oh no! What are you trying TODO? (The description of todo can't be empty!)");
@@ -106,7 +106,7 @@ public class Parser {
         }
     }
 
-    public void handleDeadline(String command) throws DukeException {
+    protected void handleDeadline(String command) throws DukeException {
         String[] deadlineCommand = command.split("\\W+");
         if (deadlineCommand.length == 1) {
             throw new DukeException("Oh no! This LINE has made me DEAD! (The description of deadline can't be empty!)");
@@ -127,7 +127,7 @@ public class Parser {
         }
     }
 
-    public void handleEvent(String command) throws DukeException{
+    protected void handleEvent(String command) throws DukeException{
         String[] eventCommand = command.split("\\W+");
         if (eventCommand.length == 1) {
             throw new DukeException("Oh no! EVENTually you'll get it right! (The description of event can't be empty!)");
