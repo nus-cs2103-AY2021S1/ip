@@ -66,6 +66,10 @@ public class Deadline extends Task {
         return happenBetween(LocalDate.now(), LocalDate.now().plusDays(n));
     }
 
+    /**
+     * Checks whether the task is overdue.
+     * @return true if the task is not done and the deadline is before today
+     */
     public boolean isOverdue() {
         return !isDone && byTime.isBefore(LocalDate.now());
     }
