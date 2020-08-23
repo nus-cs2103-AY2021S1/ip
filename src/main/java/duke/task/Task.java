@@ -116,6 +116,15 @@ public abstract class Task {
         return false;
     }
 
+    /**
+     * Checks whether the task description contains a designated substring
+     * @param s the substring to find
+     * @return true if s is found in the task description
+     */
+    public boolean finds(String s) {
+        return description.contains(s);
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

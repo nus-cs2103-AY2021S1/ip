@@ -139,6 +139,8 @@ public class Parser {
             return new DoneCommand(input);
         } else if (input.startsWith("happen ")) {
             return new HappenCommand(input);
+        } else if (input.startsWith("find ")) {
+            return new FindCommand(input);
         } else {
             return new AddCommand(input);
         }

@@ -99,4 +99,15 @@ public class ToDoTest {
             assertEquals("The task [T][\u2713] return books has already been done.", e.getMessage());
         }
     }
+
+    @Test
+    public void finds_givenString_matchingTasks() {
+        ToDo t = new ToDo("return books");
+        assertTrue(t.finds("return books"));
+        assertTrue(t.finds(""));
+        assertTrue(t.finds("return"));
+        assertTrue(t.finds("boo"));
+        assertFalse(t.finds("retun"));
+        assertFalse(t.finds("return books a"));
+    }
 }
