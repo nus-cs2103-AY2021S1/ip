@@ -33,6 +33,11 @@ public class AddCommand extends Command {
         return res;
     }
 
+    /**
+     * Checks whether a command equals this one.
+     * @param obj the Object to compare
+     * @return true if obj is a AddCommand and it has the same input as this one
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
