@@ -86,6 +86,11 @@ public class Deadline extends Task {
                 byTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")" + overdue;
     }
 
+    /**
+     * Checks whether the given object equals this Deadline task.
+     * @param obj the given object to compare
+     * @return true if the object is a Deadline and both the description and byTime equals
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
