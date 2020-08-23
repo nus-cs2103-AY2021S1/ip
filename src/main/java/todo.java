@@ -18,5 +18,7 @@ public class todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
-
+    public String inputListFormat(){
+        return "T" + super.inputListFormat();
+    }
 }

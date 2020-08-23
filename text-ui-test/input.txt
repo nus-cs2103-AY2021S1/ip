@@ -1,10 +1,3 @@
-todo read book
-list
-delete 1
-delete 1
-delete
-event
-event read book
-delete 2
-deadline read book
-deadline
+todo buy book
+event buy book /at Aug 6th 4pm
+deadline buy book /by Aug 6th
