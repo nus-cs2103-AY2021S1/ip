@@ -15,8 +15,9 @@ public class DeleteCommand extends Command {
         Task toDelete = list.get(m);
         list.remove(toDelete);
         storage.reWrite(list);
+        String temp = count <= 2 ? " task" : " tasks";
         String str = "Noted. I've removed this task:\n\t    " + toDelete +
-                "\n\t  Now you have " + list.size();
+                "\n\t  Now you have " + list.size() + temp;
         ui.output(str);
         return str;
     }
