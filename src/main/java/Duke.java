@@ -1,5 +1,7 @@
+import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -75,8 +77,8 @@ public class Duke {
             writeToFile(FileWriterCommand.APPEND, t);
             System.out.println("Got it. I've added this task:\n " + t);
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-        } catch (IOException error) {
-            System.out.println(error);
+        } catch (IOException exception) {
+            System.out.println(exception);
         }
 
     }
@@ -94,8 +96,8 @@ public class Duke {
             completedTask.markAsDone();
             writeToFile(FileWriterCommand.UPDATE, completedTask);
             System.out.println("Nice! I've marked this task as done:\n " + completedTask);
-        } catch (IOException error) {
-            System.out.println(error);
+        } catch (IOException exception) {
+            System.out.println(exception);
         }
     }
 
@@ -109,8 +111,8 @@ public class Duke {
         System.out.println("Noted. I've removed this task:\n" + deletedTask);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
 
-        } catch (IOException error) {
-            System.out.println(error);
+        } catch (IOException exception) {
+            System.out.println(exception);
         }
     }
 
@@ -118,11 +120,50 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    void loadTasks() {
+        try {
+            File localTasks = new File(DATA_PATHNAME);
+            // Create Scanner using file as source
+            Scanner sc = new Scanner(localTasks);
+            while (sc.hasNext()) {
+                String[] details = sc.nextLine().split(" \\| ");
 
+                switch (details[0]) {
+                    case "T": {
+                        TodoTask todoTask = new TodoTask(details[2]);
+                        if (details[1].equals("1")) {
+                            todoTask.markAsDone();
+                        }
+                        tasks.add(todoTask);
+                        break;
+                    }
+                    case "D": {
+                        DeadlineTask deadlineTask = new DeadlineTask(details[2], details[3]);
+                        if (details[1].equals("1")) {
+                            deadlineTask.markAsDone();
+                        }
+                        tasks.add(deadlineTask);
+                        break;
+                    }
+                    case "E": {
+                        EventTask eventTask = new EventTask(details[2], details[3]);
+                        if (details[1].equals("1")) {
+                            eventTask.markAsDone();
+                        }
+                        tasks.add(eventTask);
+                        break;
+                    }
+                }
+            }
+        } catch (FileNotFoundException exception) {
+            System.out.println(exception);
+        }
+    }
 
 
     void initializeChatbot() {
         greet();
+        loadTasks();
         Scanner sc = new Scanner(System.in);
         boolean hasEnded = false;
         while (!hasEnded) {
@@ -195,8 +236,8 @@ public class Duke {
                         break;
                     }
                 }
-            } catch (DukeException ex) {
-                System.out.println(ex);
+            } catch (DukeException exception) {
+                System.out.println(exception);
             }
         }
         sc.close();
