@@ -1,4 +1,4 @@
-public class DoneException extends Exception {
+public class DoneException extends DukeException {
     public DoneException(String msg) {
         super(msg);
     }

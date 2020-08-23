@@ -9,10 +9,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class DukeCSV {
-    private static String pathToCSV = "data/duke.csv";
+public class Storage {
+    private String filePath;
 
-    public DukeCSV() {
+    public Storage(String filePath) {
+        this.filePath = filePath;
         initialize();
     }
 
@@ -31,7 +32,7 @@ public class DukeCSV {
             // if csv file has existing data
             ArrayList<Task> taskList = new ArrayList<>();
             try {
-                BufferedReader csvReader = new BufferedReader(new FileReader(pathToCSV));
+                BufferedReader csvReader = new BufferedReader(new FileReader(filePath));
 
                 // does once to remove column headers
                 String row = csvReader.readLine();
@@ -91,9 +92,9 @@ public class DukeCSV {
         }
     }
 
-    public void saveToCSV(ArrayList<Task> taskList) throws IOException {
+    public void saveToCSV(TaskList taskList) throws IOException {
         FileWriter csvWriter = insertColumnHeadersToCSV();
-        for(Task task : taskList) {
+        for(Task task : taskList.getList()) {
             String typeOfTask = task.getClass().getName();
             String isCompleted = Boolean.toString(task.isComepleted());
             String taskDescription = task.getTaskDescription();
@@ -120,7 +121,7 @@ public class DukeCSV {
 
     private FileWriter insertColumnHeadersToCSV() throws IOException {
         // writes column headers in
-        FileWriter csvWriter = new FileWriter(pathToCSV);
+        FileWriter csvWriter = new FileWriter(filePath);
         csvWriter.append("typeOfTask");
         csvWriter.append(",");
         csvWriter.append("isCompleted");
@@ -133,22 +134,22 @@ public class DukeCSV {
     }
 
     public boolean isEmpty() {
-        return new File(pathToCSV).length() == 0;
+        return new File(filePath).length() == 0;
     }
 
-    private static void initialize() {
+    private void initialize() {
         BufferedReader csvReader = null;
         File dataFolder = new File("data");
         if (dataFolder.exists()) {
             // if data folder exists
             try {
-                // try to read duke.txt in pathToCSV
-                new BufferedReader(new FileReader(pathToCSV));
+                // try to read duke.txt in filePath
+                new BufferedReader(new FileReader(filePath));
             } catch (FileNotFoundException e) {
                 // if csv file has not been created yet
                 try {
-                    // creates the csv file called duke.csv
-                    FileWriter csvWriter = new FileWriter(pathToCSV);
+                    // creates the csv file
+                    FileWriter csvWriter = new FileWriter(filePath);
                     csvWriter.flush();
                     csvWriter.close();
                 } catch (IOException IOError) {
@@ -159,8 +160,8 @@ public class DukeCSV {
             // if data folder does not exist
             dataFolder.mkdir(); // makes the data folder
             try {
-                // creates the csv file called duke.csv
-                FileWriter csvWriter = new FileWriter(pathToCSV);
+                // creates the csv file
+                FileWriter csvWriter = new FileWriter(filePath);
                 csvWriter.flush();
                 csvWriter.close();
             } catch (IOException IOError) {
