@@ -11,7 +11,6 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.readFile());
-
     }
 
     public void run() {

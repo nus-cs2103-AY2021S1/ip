@@ -24,6 +24,7 @@ public class Storage {
 
     public Storage(String filename) {
         this.filename = filename;
+        accessTaskListInFileSystem(getCurrentDirectory());
     }
 
     //get current directory
@@ -33,7 +34,9 @@ public class Storage {
 
     //Access the current list, creates the folder and files if they do not exist
     public void accessTaskListInFileSystem(String current) {
-        java.nio.file.Path directoryPath = java.nio.file.Paths.get(current, filename);
+        String[] fileParents = filename.split("/");
+        String parent = fileParents[0];
+        java.nio.file.Path directoryPath = java.nio.file.Paths.get(current, parent);
         boolean directoryExists = java.nio.file.Files.exists(directoryPath);
 
 
