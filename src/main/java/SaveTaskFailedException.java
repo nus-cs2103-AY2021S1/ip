@@ -1,5 +1,5 @@
 public class SaveTaskFailedException extends SaveFailedException {
-    SaveTaskFailedException(int taskIndex) {
+    public SaveTaskFailedException(int taskIndex) {
         super("task " + taskIndex);
     }
 }

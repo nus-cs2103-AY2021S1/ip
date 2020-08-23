@@ -1,9 +1,9 @@
 public class InvalidTaskNumberException extends InvalidInputException {
-    InvalidTaskNumberException() {
+    public InvalidTaskNumberException() {
         super("The task number is invalid!");
     }
 
-    InvalidTaskNumberException(String message) {
+    public InvalidTaskNumberException(String message) {
         super(message);
     }
 }

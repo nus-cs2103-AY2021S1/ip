@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+
 import java.util.function.Function;
 
 public class Task {
@@ -18,10 +19,18 @@ public class Task {
         this.type = type;
     }
     
+    public boolean hasDate() {
+        return this.type != TaskType.TODO;
+    }
+
+    public void markAsDone() {
+        this.isDone = true;
+    }
+
     public static Task createTask(String[] stringArr) throws ReadFailedException {
         Function<String, Boolean> isDone = num -> num.equals("1");
-        Function<String, LocalDate> toDate = date -> LocalDate.parse(date);
-        
+        Function<String, LocalDate> toDate = date -> LocalDate.parse(date.trim());
+
         switch (stringArr[0]) {
             case "T":
                 return new Todo(stringArr[2], isDone.apply(stringArr[0]));
@@ -29,25 +38,17 @@ public class Task {
                 return new Event(stringArr[2], toDate.apply(stringArr[3]), isDone.apply(stringArr[0]));
             case "D":
                 return new Deadline(stringArr[2], toDate.apply(stringArr[3]), isDone.apply(stringArr[0]));
-            default: 
+            default:
                 throw new ReadFailedException("tasks");
         }
-    } 
+    }
 
     public String getStatusIcon() {
         return (isDone ? "✓" : "✘"); // return tick or cross symbols
     }
 
-    public void markAsDone() {
-        this.isDone = true;
-    }
-    
     public String getData() {
         return String.format("%s_%s_%s", type.toString().charAt(0), isDone ? 1 : 0, description);
-    
-    }
-    public boolean hasDate() {
-        return this.type != TaskType.TODO;
     }
 
     @Override

@@ -1,7 +1,6 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
-
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.util.Scanner;
@@ -31,7 +30,7 @@ public class Storage {
         fileWriter.close();
     }
     
-    protected Tasks getTasks() throws ReadFailedException {        
+    public Tasks getTasks() throws ReadFailedException {        
         Tasks tasks = new Tasks();
         Scanner scanner;
         try {
@@ -50,11 +49,11 @@ public class Storage {
         return tasks;
     }
     
-    protected void addTask(Task task) throws IOException {
+    public void addTask(Task task) throws IOException {
         this.writeData(task.getData() + "\n", true);
     }
     
-    protected void updateTasks(Tasks newTasks) throws IOException {
+    public void updateTasks(Tasks newTasks) throws IOException {
         this.writeData(newTasks.getData(), false);
     }    
 }

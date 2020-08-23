@@ -1,5 +1,5 @@
 public class EmptyInputException extends DukeException {
-    EmptyInputException(String message) {
+    public EmptyInputException(String message) {
         super(message);
     }
 }
