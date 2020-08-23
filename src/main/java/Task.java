@@ -7,6 +7,10 @@ public class Task {
 
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public void completeTask() {
         done = true;
     }
@@ -15,5 +19,14 @@ public class Task {
     public String toString() {
 
         return (this.done ? "[✓]":"[✘]")+" "+this.description;
+    }
+
+    public String toFileString() {
+        StringBuilder str = new StringBuilder();
+        str.append(this.done ? "T" :"F");
+        str.append("\n");
+        str.append(this.description);
+        str.append("\n");
+        return str.toString();
     }
 }
