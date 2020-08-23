@@ -71,21 +71,21 @@ You have a total of 3 tasks
 --------------------------------------
 DukeException: Much error! You have to describe your mission!
 Check out your missions!
-1.  [T] feed doge [?]
-2.  [D] east coast plan  ------> by monday [?]
-3.  [E] covid19  ------> by september [?]
+1.  [T] feed doge [✘]
+2.  [D] east coast plan  ------> by monday [✘]
+3.  [E] covid19  ------> by september [✘]
 You have a total of 3 tasks
 --------------------------------------
 --------------------------------------
 Such wow! I have completed the following task!
-feed doge [?]
+feed doge [✓]
 --------------------------------------
 You have a total of 3 tasks
 --------------------------------------
 Check out your missions!
-1.  [T] feed doge [?]
-2.  [D] east coast plan  ------> by monday [?]
-3.  [E] covid19  ------> by september [?]
+1.  [T] feed doge [✓]
+2.  [D] east coast plan  ------> by monday [✘]
+3.  [E] covid19  ------> by september [✘]
 You have a total of 3 tasks
 --------------------------------------
 Task successfully removed!
@@ -93,19 +93,19 @@ Task successfully removed!
 You have a total of 2 tasks
 --------------------------------------
 Check out your missions!
-1.  [T] feed doge [?]
-2.  [E] covid19  ------> by september [?]
+1.  [T] feed doge [✓]
+2.  [E] covid19  ------> by september [✘]
 You have a total of 2 tasks
 --------------------------------------
 --------------------------------------
 Such wow! I have completed the following task!
-covid19  ------> by september [?]
+covid19  ------> by september [✓]
 --------------------------------------
 You have a total of 2 tasks
 --------------------------------------
 Check out your missions!
-1.  [T] feed doge [?]
-2.  [E] covid19  ------> by september [?]
+1.  [T] feed doge [✓]
+2.  [E] covid19  ------> by september [✓]
 You have a total of 2 tasks
 --------------------------------------
 Bye! Woof!
