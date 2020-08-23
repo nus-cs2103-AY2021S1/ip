@@ -6,7 +6,7 @@ import duke.component.*;
 public class DeleteCommand extends Command {
     /**
      * Creates a command for deleting tasks.
-     * @param input The input command classified as DeleteCommand, starting with "delete ".
+     * @param input the input command classified as DeleteCommand, starting with "delete "
      */
     public DeleteCommand(String input) {
         super(input);
@@ -14,11 +14,11 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the command, prints the result on ui and re-writes the source data file.
-     * @param ui The user interface object that is currently running.
-     * @param list The current list of tasks.
-     * @param storage The storage-writing object that is currently running.
-     * @return The string that is to be printed on ui if the deleting is successful.
-     * @throws InvalidCommandException If the input index for deleting is invalid.
+     * @param ui the user interface object that is currently running
+     * @param list the current list of tasks
+     * @param storage the storage-writing object that is currently running
+     * @return the string that is to be printed on ui if the deleting is successful
+     * @throws InvalidCommandException if the input index for deleting is invalid
      */
     @Override
     public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {

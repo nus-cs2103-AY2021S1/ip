@@ -5,7 +5,7 @@ import duke.component.*;
 public class DoneCommand extends Command {
     /**
      * Creates a command for marking tasks as done.
-     * @param input The input command classified as DoneCommand, starting with "done ".
+     * @param input the input command classified as DoneCommand, starting with "done "
      */
     public DoneCommand(String input) {
         super(input);
@@ -13,11 +13,11 @@ public class DoneCommand extends Command {
 
     /**
      * Executes the command, prints the result on ui and re-writes the source data file.
-     * @param ui The user interface object that is currently running.
-     * @param list The current list of tasks.
-     * @param storage The storage-writing object that is currently running.
-     * @return The string that is to be printed on ui if the marking is successful.
-     * @throws InvalidCommandException If the input index for marking as done is invalid.
+     * @param ui the user interface object that is currently running
+     * @param list the current list of tasks
+     * @param storage the storage-writing object that is currently running
+     * @return the string that is to be printed on ui if the marking is successful
+     * @throws InvalidCommandException if the input index for marking as done is invalid
      */
     @Override
     public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {

@@ -6,7 +6,7 @@ import duke.component.*;
 public class AddCommand extends Command {
     /**
      * Creates a command for adding tasks.
-     * @param input The input command classified as AddCommand.
+     * @param input the input command classified as AddCommand
      */
     public AddCommand(String input) {
         super(input);
@@ -14,11 +14,11 @@ public class AddCommand extends Command {
 
     /**
      * Executes the command, prints the result on ui and writes to source data file.
-     * @param ui The user interface object that is currently running.
-     * @param list The current list of tasks.
-     * @param storage The storage-writing object that is currently running.
-     * @return The string that is to be printed on ui if the adding is successful.
-     * @throws InvalidCommandException If the input command doesn't make sense and states why.
+     * @param ui the user interface object that is currently running
+     * @param list the current list of tasks
+     * @param storage the storage-writing object that is currently running
+     * @return the string that is to be printed on ui if the adding is successful
+     * @throws InvalidCommandException if the input command doesn't make sense and states why
      */
     @Override
     public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {

@@ -5,7 +5,7 @@ import duke.component.*;
 public class ByeCommand extends Command {
     /**
      * Creates a command for exiting.
-     * @param input The input command "bye".
+     * @param input the input command "bye"
      */
     public ByeCommand(String input) {
         super(input);
@@ -13,7 +13,7 @@ public class ByeCommand extends Command {
 
     /**
      * Tells whether this command is aiming for exiting.
-     * @return True.
+     * @return true
      */
     @Override
     public boolean isExit() {
@@ -22,10 +22,10 @@ public class ByeCommand extends Command {
 
     /**
      * Executes the command, prints the current list on ui.
-     * @param ui The user interface object that is currently running.
-     * @param list The current list of tasks.
-     * @param storage The storage-writing object that is currently running.
-     * @return The string "bye".
+     * @param ui the user interface object that is currently running
+     * @param list the current list of tasks
+     * @param storage the storage-writing object that is currently running
+     * @return the string "bye"
      */
     @Override
     public String execute(Ui ui, TaskList list, Storage storage) {

@@ -5,7 +5,7 @@ import duke.component.*;
 public class ListCommand extends Command {
     /**
      * Creates a command for getting the current entire list.
-     * @param input The input command "list".
+     * @param input the input command "list"
      */
     public ListCommand(String input) {
         super(input);
@@ -13,10 +13,10 @@ public class ListCommand extends Command {
 
     /**
      * Executes the command, prints the current list on ui.
-     * @param ui The user interface object that is currently running.
-     * @param list The current list of tasks.
-     * @param storage The storage-writing object that is currently running.
-     * @return The string "list".
+     * @param ui the user interface object that is currently running
+     * @param list the current list of tasks
+     * @param storage the storage-writing object that is currently running
+     * @return the string "list"
      */
     @Override
     public String execute(Ui ui, TaskList list, Storage storage) {
