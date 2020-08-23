@@ -15,6 +15,7 @@ public class Event extends Task {
     public Event(String description, boolean isDone, String at) {
         super(description, isDone);
         this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+        originalDate = at;
     }
 
     @Override
