@@ -26,10 +26,11 @@ class TaskList {
         this.taskArrayList.remove(taskIndex);
     }
 
-    public int getNumOfTasks() {
+    int getNumOfTasks() {
         return this.taskArrayList.size();
     }
 
+    @Override
     public String toString() {
         String textIndentation = "     ";
         if (this.isEmpty()) {
