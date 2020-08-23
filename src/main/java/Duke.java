@@ -64,7 +64,7 @@ public class Duke {
 //        System.out.println("Hello from\n" + logo);
 
         Scanner sc = new Scanner(System.in);
-        Echo echo = new Echo();
+        Echo echo = new LoadFile().loadFile();
         echo.addTask(new Greet());
         String res = echo.replyUser();
         System.out.println(res);
