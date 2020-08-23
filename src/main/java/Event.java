@@ -6,8 +6,23 @@ public class Event extends Task {
         this.date = date;
     }
 
+    Event(String description, String date, String completionStatus) {
+        super(description, completionStatus);
+        this.date = date;
+    }
+
+    @Override
+    String getType() {
+        return "E";
+    }
+
+    @Override
+    String getDate() {
+        return date;
+    }
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (" + this.date + ")";
+        return "[E]" + super.toString() + " (" + date + ")";
     }
 }

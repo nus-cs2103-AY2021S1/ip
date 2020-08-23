@@ -12,6 +12,12 @@ then
     rm ACTUAL.TXT
 fi
 
+# delete saved data from previous run
+if [ -e "./data/" ]
+then
+  rm -rf data/
+fi
+
 # compile the code into the bin folder, terminates if error occurred
 if
   ! (
