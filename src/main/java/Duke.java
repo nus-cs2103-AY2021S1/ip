@@ -10,21 +10,22 @@ import static java.lang.Integer.parseInt;
 public class Duke {
     private static ArrayList<Task> list = new ArrayList<>();
     private static LocalDateTime now = LocalDateTime.now();
+    private static final String BORDER = "__________________________________________________";
 
     private static void say(String s) {
-        System.out.println("______________________________");
+        System.out.println(BORDER);
         System.out.println(s);
-        System.out.println("______________________________");
+        System.out.println(BORDER);
     }
 
     private static void printList() throws DukeException {
         if (list.size() > 0) {
-            System.out.println("______________________________");
+            System.out.println(BORDER);
             System.out.println("Here is your list:");
             for (int i = 1; i <= list.size(); i++) {
                 System.out.println(i + "." + list.get(i - 1));
             }
-            System.out.println("______________________________");
+            System.out.println(BORDER);
         } else {
             throw(DukeException.emptyList());
         }
@@ -166,6 +167,53 @@ public class Duke {
         return LocalDateTime.parse(date + "T" + time);
     }
 
+    private static void handleDueIn(String input) throws DukeException {
+        try {
+            String basePattern = "(due in\\s)(.+)";
+            String hourPattern = "(due in\\s)(\\d+)\\s(hours)";
+            String dayPattern = "(due in\\s)(\\d+)\\s(days)";
+            if (input.trim().matches(basePattern)) {
+                if (input.trim().matches(hourPattern)) {
+                    long hours = parseInt(input.replaceAll(hourPattern, "$2"));
+                    int i = 0;
+                    System.out.println(BORDER);
+                    System.out.println("These tasks are due in " + hours + " hours:");
+                    for (Task t : list) {
+                        if (t.compareTime(LocalDateTime.now(), hours)) {
+                            i++;
+                            System.out.println(i + "." + t);
+                        }
+                    }
+                    System.out.println("Count: " + i);
+                    System.out.println(BORDER);
+                } else if (input.trim().matches(dayPattern)) {
+                    long days = parseInt(input.replaceAll(dayPattern, "$2"));
+                    int i = 0;
+                    System.out.println(BORDER);
+                    System.out.println("These tasks are due in " + days + " days:");
+                    for (Task t : list) {
+                        if (t.compareTime(LocalDateTime.now(), days * 24)) {
+                            i++;
+                            System.out.println(i + "." + t);
+                        }
+                    }
+                    System.out.println("Count: " + i);
+                    System.out.println(BORDER);
+                } else {
+                    throw(DukeException.wrongDueInFormat());
+                }
+            } else {
+                throw(DukeException.emptyDesc("due in"));
+            }
+        } catch (NumberFormatException e) {
+            throw(DukeException.typeMismatch("due in"));
+        } catch (IndexOutOfBoundsException e) {
+            throw(DukeException.outOfBounds());
+        }
+    }
+
+
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String logo =
@@ -199,6 +247,8 @@ public class Duke {
                     handleEvent(input);
                 } else if (input.startsWith("delete")) {
                     delete(input);
+                } else if (input.startsWith("due in")) {
+                    handleDueIn(input);
                 } else {
                     handleOthers();
                 }

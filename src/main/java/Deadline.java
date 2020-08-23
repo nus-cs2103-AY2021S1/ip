@@ -9,10 +9,13 @@ public class Deadline extends Task {
     public Deadline(String s, LocalDateTime dateTime) {
         super(s);
         this.dateTime = dateTime;
-        int minute = dateTime.getMinute();
-        this.time = minute < 10
-                ? String.format("%d:0$d", dateTime.getHour(), minute)
-                : String.format("%d:$d", dateTime.getHour(), minute);
+        String minute = dateTime.getMinute() < 10
+                ? "0" + dateTime.getMinute()
+                : String.format("%d", dateTime.getMinute());
+        String hour = dateTime.getHour() < 10
+                ? "0" + dateTime.getHour()
+                : String.format("%d", dateTime.getHour());
+        this.time = String.format("%s:%s", hour, minute);
     }
 
     @Override
@@ -24,5 +27,9 @@ public class Deadline extends Task {
         return done
                 ? "[D][✓] " + text + " (by: " + dueDate + ")"
                 : "[D][✗] " + text + " (by: " + dueDate + ")";
+    }
+
+    public boolean compareTime(LocalDateTime now, long hours) {
+        return now.plusHours(hours).isAfter(dateTime);
     }
 }

@@ -44,4 +44,8 @@ public class DukeException extends Exception {
     public static DukeException pastDateTime() {
         return new DukeException("Error! Date/time has already passed.");
     }
+
+    public static DukeException wrongDueInFormat() {
+        return new DukeException("Error! 'due in' command is in the wrong format.");
+    }
 }
