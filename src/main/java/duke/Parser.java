@@ -9,6 +9,7 @@ import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.SaveCommand;
 import duke.command.TodoCommand;
@@ -24,6 +25,7 @@ import duke.task.TodoTask;
  */
 public class Parser {
 
+
     /**
      * Parses user input.
      * @param input The user input.
@@ -38,23 +40,30 @@ public class Parser {
         String cmd = segments[0].trim();
 
         // CHECK FOR NON-TASKS-RELATED COMMANDS
-        switch (cmd) {
-        case "bye":
-            return new ByeCommand();
-        case "save":
-            return new SaveCommand();
-        case "list":
-            return new ListCommand();
-        case "done":
-            return new DoneCommand(Integer.parseInt(segments[1].trim()));
-        case "delete":
-            return new DeleteCommand(Integer.parseInt(segments[1].trim()));
-        case "todo":
-        case "deadline":
-        case "event":
-            break;
-        default:
-            throw new DukeException("Aww! The first word of your input is wrong!");
+        try {
+            switch (cmd) {
+            case "bye":
+                return new ByeCommand();
+            case "save":
+                return new SaveCommand();
+            case "list":
+                return new ListCommand();
+            case "done":
+                return new DoneCommand(Integer.parseInt(segments[1].trim()));
+            case "delete":
+                return new DeleteCommand(Integer.parseInt(segments[1].trim()));
+            case "find":
+                return new FindCommand(segments[1].trim());
+            case "todo":
+            case "deadline":
+            case "event":
+                break;
+            default:
+                throw new DukeException("Aww! The first word of your input is wrong!");
+            }
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeException("Please check your inputs again, ensure words are spaced and numbers"
+                    + "(if any) are correct.");
         }
 
         String[] parsedSegments = parseSegments(input, cmd, getTaskBreakPt(cmd));

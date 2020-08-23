@@ -41,6 +41,10 @@ public abstract class Task {
      */
     public abstract Task markAsDone();
 
+    public boolean contains(String keyword) {
+        return description.contains(keyword);
+    }
+
     @Override
     public String toString() {
         return getStatusIcon() + " " + this.description;

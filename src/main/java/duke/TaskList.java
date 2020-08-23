@@ -1,11 +1,12 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import duke.exception.DukeException;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * The class that is responsible for storing
@@ -70,6 +71,11 @@ public class TaskList {
         return deletedTask;
     }
 
+
+    public ArrayList<String> find(String keyword) {
+        return mapToRepr(filterTasks(taskStore, task -> task.contains(keyword)), Task::toString);
+    }
+
     /**
      * Gets the string representation of each task
      * in the taskList.
@@ -77,11 +83,17 @@ public class TaskList {
      * of each task in the taskList.
      */
     public ArrayList<String> getListRepr() {
-        ArrayList<String> res = new ArrayList<>();
-        for (Task t : taskStore) {
-            res.add(t.toString());
-        }
-        return res;
+        return mapToRepr(taskStore, Task::toString);
+    }
+
+    /**
+     * Translates the taskList to raw data to be stored.
+     * @return An ArrayList of raw data where each element
+     * corresponds to the raw data representation of each
+     * task in the taskList.
+     */
+    public ArrayList<String> getData() {
+        return mapToRepr(taskStore, Task::getData);
     }
 
     /**
@@ -95,17 +107,11 @@ public class TaskList {
                 (storeSize > 1 ? "tasks " : "task ") + "in your list!";
     }
 
-    /**
-     * Translates the taskList to raw data to be stored.
-     * @return An ArrayList of raw data where each element
-     * corresponds to the raw data representation of each
-     * task in the taskList.
-     */
-    public ArrayList<String> getData() {
-        ArrayList<String> res = new ArrayList<>();
-        for (Task t : taskStore) {
-            res.add(t.getData());
-        }
-        return res;
+    private static ArrayList<String> mapToRepr(ArrayList<Task> taskStore, Function<Task, String> mapper) {
+        return taskStore.stream().map(mapper).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    private static ArrayList<Task> filterTasks(ArrayList<Task> taskStore, Predicate<Task> pred) {
+        return taskStore.stream().filter(pred).collect(Collectors.toCollection(ArrayList::new));
     }
 }

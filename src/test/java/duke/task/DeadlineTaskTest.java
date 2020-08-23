@@ -1,6 +1,8 @@
 package duke.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
@@ -64,6 +66,24 @@ public class DeadlineTaskTest {
             DeadlineTask task = new DeadlineTask("test", "2020-08-22").markAsDone();
             String str = task.toString();
             assertEquals("[D][\u2713] test (by: Aug 22 2020)", str);
+        } catch (DukeException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void contains_correctKeyword_true() {
+        try {
+            assertTrue(new DeadlineTask("test", "2020-08-22").contains("test"));
+        } catch (DukeException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void contains_wrongKeyword_false() {
+        try {
+            assertFalse(new DeadlineTask("test", "2020-08-22").contains("wrong"));
         } catch (DukeException e) {
             fail();
         }

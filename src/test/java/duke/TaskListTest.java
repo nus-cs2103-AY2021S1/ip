@@ -11,6 +11,8 @@ import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.TodoTask;
 
+import java.util.ArrayList;
+
 public class TaskListTest {
 
     @Test
@@ -40,6 +42,29 @@ public class TaskListTest {
         t = taskList.delete(1);
         assertEquals(0, taskList.getListRepr().size());
         assertEquals("[T][\u2718] test", t.toString());
+    }
+
+    @Test
+    public void find_existKeyword_correctOutput() {
+        Task t = new TodoTask("test");
+        Task t1 = new TodoTask("abc");
+        TaskList taskList = new TaskList();
+        taskList.add(t);
+        taskList.add(t1);
+        ArrayList<String> res = taskList.find("test");
+        assertEquals(1, res.size());
+        assertEquals("[T][\u2718] test", res.get(0));
+    }
+
+    @Test
+    public void find_nonExistKeyword_emptyList() {
+        Task t = new TodoTask("test");
+        Task t1 = new TodoTask("abc");
+        TaskList taskList = new TaskList();
+        taskList.add(t);
+        taskList.add(t1);
+        ArrayList<String> res = taskList.find("123");
+        assertEquals(0, res.size());
     }
 
     @Test
