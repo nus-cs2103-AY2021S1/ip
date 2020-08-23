@@ -4,14 +4,29 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Storage class is responsible to save the existing list
+ * to a hardware storage. The list will auto-load when
+ * user restart duke chatbot.
+ */
 public class Storage {
 
     private String path;
 
+    /**
+     * Constructor for storage.
+     *
+     * @param path path to the storage file.
+     */
     public Storage(String path) {
         this.path = path;
     }
 
+    /**
+     * Saves every tasks into the storage file.
+     *
+     * @throws IOException if storage file cannot be found.
+     */
     public void saveTasks() throws IOException {
         BufferedWriter taskWriter = new BufferedWriter(new FileWriter(path));
         String tasks = "";
@@ -22,6 +37,11 @@ public class Storage {
         taskWriter.close();
     }
 
+    /**
+     * Loads every tasks from the storage file to the user interface.
+     *
+     * @throws IOException if storage file cannot be found.
+     */
     public void handleLoad() throws IOException {
         BufferedReader taskLoader = new BufferedReader(new FileReader(path));
         String longCommand = taskLoader.readLine();
@@ -42,7 +62,6 @@ public class Storage {
                 System.out.println("error");
                 break;
             }
-
             if (keywords[0].equals("1")) {
                 cur.markAsDone();
             }
