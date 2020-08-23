@@ -6,12 +6,13 @@ import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
 
     // attributes for task storage
     public static ArrayList<Task> lib = new ArrayList<>();
-    public static int curr = 0;
     public static boolean takeInput = true;
 
     public static void main(String[] args) {
@@ -29,7 +30,7 @@ public class Duke {
         createFile("data/duke.txt"); // create directory and file if it does not exist
         try {
             loadData("data/duke.txt");
-        } catch (FileNotFoundException ex) {
+        } catch (FileNotFoundException | DukeException ex) {
             System.out.println("File cannot be found!");
         }
 
@@ -65,7 +66,7 @@ public class Duke {
         }
     }
 
-    private static void loadData(String filePath) throws FileNotFoundException {
+    private static void loadData(String filePath) throws FileNotFoundException, DukeException {
         File file = new File(filePath);
         Scanner reader = new Scanner(file);
         while (reader.hasNext()) {
@@ -95,7 +96,6 @@ public class Duke {
                 lib.add(toDo);
             }
 
-            curr++;
         }
     }
 
@@ -113,7 +113,7 @@ public class Duke {
 
     private static void saveData() throws IOException {
         for (int i = 0; i < lib.size(); i++) {
-            String curr = lib.get(i).toString();
+            String curr = lib.get(i).saveData();
 
             if (i == 0) {
                 writeToFile("data/duke.txt", curr + "\n");
@@ -154,6 +154,8 @@ public class Duke {
             throw new DukeException("Please enter the ID of the task you would like to complete.");
         } else if (echo.equals("delete")) {
             throw new DukeException("Please retry and enter the ID of the task to be deleted.");
+        } else if (echo.equals("check")) {
+            throw new DukeException("Please enter a date to check!");
         } else {
             throw new DukeException("Please enter a valid command into the console.");
         }
@@ -168,7 +170,7 @@ public class Duke {
             } else {
                 int index = Integer.parseInt(modEcho[1]) - 1;
 
-                if (index >= curr || curr == 0 || index < 0) {
+                if (index >= lib.size() || lib.size() == 0 || index < 0) {
                     throw new DukeException("This task ID does not exist in the database!");
                 } else {
                     System.out.println("---------------\n" + "Nice! I've marked this task as done:");
@@ -184,17 +186,39 @@ public class Duke {
             } else {
                 int index = Integer.parseInt(modEcho[1]) - 1;
 
-                if (index >= curr || curr == 0 || index < 0) {
+                if (index >= lib.size() || lib.size() == 0 || index < 0) {
                     throw new DukeException("This task ID does not exist in the database!");
                 } else {
                     System.out.println("---------------\n" + "The following task has been deleted:\n" +
                             lib.get(index).toString());
 
                     lib.remove(index);
-                    curr--;
-                    System.out.println("Now you have " + curr + " task(s) in the list.\n" +
+
+                    System.out.println("Now you have " + lib.size() + " task(s) in the list.\n" +
                             "---------------");
                 }
+            }
+        } else if (task.equals("check")) {
+            try {
+                LocalDate checkedDate = LocalDate.parse(modEcho[1]);
+
+                System.out.println("---------------\n" + "You have the following" +
+                        " tasks on " + checkedDate + ": \n");
+                for (int i = 0; i < lib.size(); i++) {
+
+                    if (lib.get(i).date == null) {
+                        continue;
+                    }
+
+                    if (lib.get(i).date.equals(checkedDate)) {
+                        System.out.println(lib.get(i).toString());
+                    }
+                }
+                System.out.println("---------------");
+
+            } catch (DateTimeParseException ex) {
+                System.out.println("---------------\n" +
+                        "Please enter the date in this format: yyyy-mm-dd");
             }
         } else {
 
@@ -204,8 +228,7 @@ public class Duke {
                 System.out.println("---------------\n" +
                         "Got it. I've added this task:");
                 System.out.println(todo.toString());
-                curr++;
-                System.out.println("Now you have " + curr + " task(s) in the list.\n" +
+                System.out.println("Now you have " + lib.size() + " task(s) in the list.\n" +
                         "---------------");
 
             } else if (task.equals("deadline") || task.equals("event")) {
@@ -230,22 +253,24 @@ public class Duke {
                 throw new DukeException("The time description cannot be left blank!");
             } else {
 
-                System.out.println("---------------\n" +
-                        "Got it. I've added this task:");
-
                 if (task.equals("deadline")) {
                     Deadline deadline = new Deadline(processTime[0].trim(),
                             time[1].trim());
                     lib.add(deadline);
+
+                    System.out.println("---------------\n" +
+                            "Got it. I've added this task:");
                     System.out.println(deadline.toString());
                 } else {
                     Event event = new Event(processTime[0].trim(),
                             time[1].trim());
                     lib.add(event);
+
+                    System.out.println("---------------\n" +
+                            "Got it. I've added this task:");
                     System.out.println(event.toString());
                 }
-                curr++;
-                System.out.println("Now you have " + curr + " task(s) in the list.\n" +
+                System.out.println("Now you have " + lib.size() + " task(s) in the list.\n" +
                         "---------------");
             }
         }

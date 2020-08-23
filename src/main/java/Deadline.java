@@ -1,21 +1,35 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
-    protected String by;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeException {
         super(description);
-        this.by = by;
+        try {
+            this.date = LocalDate.parse(by);
+        } catch (DateTimeParseException ex) {
+            throw new DukeException("Please enter the date in this format: yyyy-mm-dd");
+        }
     }
 
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, String by, boolean isDone) throws DukeException {
         super(description);
-        this.by = by;
         this.isDone = isDone;
+        try {
+            this.date = LocalDate.parse(by);
+        } catch (DateTimeParseException ex) {
+            throw new DukeException("Please enter the date in this format: yyyy-mm-dd");
+        }
     }
 
+    @Override
+    public String saveData() {
+        return "D > " + super.saveData() + " > by: " + this.date;
+    }
 
     @Override
     public String toString() {
-        return "D > " + super.toString() + " > by: " + by;
+        return "D > " + super.toString() + " > by: " + printDate();
     }
 
 }

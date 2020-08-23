@@ -9,6 +9,9 @@ public class ToDo extends Task {
         this.isDone = isDone;
     }
 
+    public String saveData() {
+        return "T > " + super.saveData();
+    }
 
     @Override
     public String toString() {
