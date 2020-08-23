@@ -1,4 +1,6 @@
-import java.util.Arrays;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,7 +9,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 /**
- * Contains the main information and methods of the Duke bot.
+ * Over-arching class containing the main information and methods of the Duke bot.
  */
 
 public class Duke {
@@ -33,6 +35,7 @@ public class Duke {
     /**
      * Allows the system to begin taking in user input and edits the stored data accordingly
      */
+
     void takeInputs() {
         String input;
         while (!quit) {
@@ -57,12 +60,12 @@ public class Duke {
                         printListSize();
                         writeToFile("data.txt", tasks.writeString());
                     } else if (info[0].equals("deadline")) {
-                        tasks.addItem(new Deadline(info[1], info[2], false));
+                        tasks.addItem(new Deadline(info[1], stringToTime(info[2]), false));
                         System.out.println("Added new task: " + info[1]);
                         printListSize();
                         writeToFile("data.txt", tasks.writeString());
                     } else {
-                        tasks.addItem(new Event(info[1], info[2], false));
+                        tasks.addItem(new Event(info[1], stringToTime(info[2]), false));
                         System.out.println("Added new task: " + info[1]);
                         printListSize();
                         writeToFile("data.txt", tasks.writeString());
@@ -114,16 +117,16 @@ public class Duke {
 
     /**
      * Breaks down and stores user input in a string array for easy access
-     * @param str Input string to be broken down
+     * @param str String to be broken down
      * @return A string array split according to the information categories
-     * @throws InvalidTaskException Task description is empty
-     * @throws UnknownCmdException An unknown command is entered
-     * @throws InvalidTimeException An invalid time is entered for a Deadline or Event task
+     * @throws InvalidTaskException If task description is empty
+     * @throws UnknownCmdException If an unknown command is entered
+     * @throws InvalidTimeException If an invalid time is entered for a Deadline or Event task
      */
 
-    public String[] extractInfo(String str) throws InvalidTaskException, UnknownCmdException, InvalidTimeException {
+    public String[] extractInfo(String str) throws InvalidTaskException, UnknownCmdException,InvalidTimeException {
         String[] store = new String[3];
-        // Todo, Deadline and Event
+        // Handling the classification of event type
         if (str.startsWith("todo")) {
             if (str.equals("todo") || str.strip().equals("todo"))  {
                 throw new InvalidTaskException("Your task cannot be empty!");
@@ -151,6 +154,8 @@ public class Duke {
         } else {
             throw new UnknownCmdException("Unknown command entered!");
         }
+
+        // handling the content of the event
         int splitPrefix = str.indexOf(" ");
         String content = str.substring(splitPrefix).strip();
         if (content.length() <= 0) {
@@ -162,7 +167,7 @@ public class Duke {
         } else {
             int splitTime = store[0].equals("deadline") ? content.indexOf("/by") : content.indexOf("/at");
             if (splitTime < 0) {
-                throw new InvalidTimeException("Please indicate the date or time by using /by (for deadlines) or /at (for events)!");
+                throw new InvalidTimeException("Please use /by (deadlines) or /at (events)! to indicate the date or time!");
             }
             String name = content.substring(0, splitTime).strip();
             String time = content.substring(splitTime + 3).strip();
@@ -189,22 +194,19 @@ public class Duke {
             String type = line[0];
             boolean done = line[1].equals("1");
             String name = line[2];
-            String time = type.equals("T") ? "N/A" : line[3];
             if (type.equals("T")) {
                 tasks.addItem(new Todo(name, done));
-            } else if (type.equals("D")) {
-                tasks.addItem(new Deadline(name, time, done));
             } else {
-                tasks.addItem(new Event(name, time, done));
+                String time = line[3];
+                LocalDateTime ldt = LocalDateTime.parse(time, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+                if (type.equals("D")) {
+                    tasks.addItem(new Deadline(name, ldt, done));
+                } else {
+                    tasks.addItem(new Event(name, ldt, done));
+                }
             }
         }
     }
-
-//    Example format:
-//    T # 1 # read book
-//    D # 0 # return book # June 6th
-//    E # 0 # project meeting # Aug 6th 2-4pm
-//    T # 1 # join sports club
 
     /**
      * Writes data into a file
@@ -222,13 +224,28 @@ public class Duke {
         }
     }
 
-    // utility method to print a list
+    /**
+     * Converts a string into a LocalDateTime
+     * @param time The string to be parsed
+     * @return A LocalDateTime object
+     * @throws BadDtFormatException If an invalid string format is entered
+     */
+    public LocalDateTime stringToTime(String time) throws BadDtFormatException {
+        try {
+            return LocalDateTime.parse(time, DateTimeFormatter.ofPattern("dd/MM/yyyy H:m"));
+        } catch (DateTimeParseException e) {
+            throw new BadDtFormatException("Please enter the date and time in the following format: dd/mm/yyyy hh:mm "
+                    + "(24 hour clock)");
+        }
+    }
 
     /**
-     * Prints the current list of tasks
+     * Prints the current size of the tasklist
      */
     public void printListSize() {
-        System.out.println("You now have " + tasks.size() + (tasks.size() == 1 ? " task in your list." : " tasks in your list."));
+        System.out.println("You now have " + tasks.size() + (tasks.size() == 1
+                ? " task in your list."
+                : " tasks in your list."));
     }
 
     public static void main(String[] args) {

@@ -1,3 +1,7 @@
+/**
+ * Represents a general Task object
+ */
+
 public class Task {
     protected String name;
     protected boolean done;
@@ -20,6 +24,6 @@ public class Task {
     }
 
     public String writeString() {
-        return (done ? "0" : "1") + " # " + name;
+        return (done ? "1" : "0") + " # " + name;
     }
 }

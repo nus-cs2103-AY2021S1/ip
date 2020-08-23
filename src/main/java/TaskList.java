@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/**
+ * Represents a data structure to contain an array of Task objects
+ */
+
 public class TaskList {
 
     private int numTasks;
@@ -10,6 +14,10 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
+    /**
+     * Adds a task to the ArrayList of tasks
+     * @param item The task to be added
+     */
     public void addItem(Task item) {
         numTasks++;
         list.add(item);
