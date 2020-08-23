@@ -1,8 +1,48 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Duke {
-    public static void main(String[] args) {
+
+    private static Task genTaskFromString(String string) {
+        boolean status = (string.charAt(4) == '\u2713');
+        if (string.charAt(1) == 'T') {
+            return new ToDo(string.substring(7), status);
+        } else if (string.charAt(1) == 'D') {
+            int endIndex = string.indexOf("(by:") - 1;
+            return new Deadline(string.substring(7, endIndex), string.substring(endIndex + 6, string.length() - 1), status);
+        } else {
+            int endIndex = string.indexOf("(at:") - 1;
+            return new Event(string.substring(7, endIndex), string.substring(endIndex + 6, string.length() - 1), status);
+        }
+    }
+
+    private static void printAndLoadFileContents(String filePath, ArrayList<Task> task) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            String currentTask = s.nextLine();
+            System.out.println(currentTask);
+            task.add(genTaskFromString(currentTask));
+        }
+    }
+
+    private static void clearFile(String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write("");
+        fw.close();
+    }
+
+    private static void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true);
+        fw.write(textToAppend + System.lineSeparator());
+        fw.close();
+    }
+
+    public static void main(String[] args) throws IOException {
         String divider = "_____________________________________________________________";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -15,6 +55,14 @@ public class Duke {
         System.out.println(divider);
         System.out.println("Beep Boop! Hello there!\n" + "What can I do for you?");
         System.out.println(divider);
+
+        try {
+            System.out.println("Welcome back! Here are the tasks in your list:");
+            printAndLoadFileContents("C:\\Users\\Cedric\\Desktop\\Repo\\iP\\src\\main\\java\\data\\duke.txt", task);
+            System.out.println(divider);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
 
         /* Takes in user inputs. Program terminates when the String "bye" is entered.
         Program stores user inputs as Tasks and returns the list when the String "list" is entered.
@@ -101,5 +149,10 @@ public class Duke {
         System.out.println(divider);
         System.out.println("Goodbye, have a nice day :D");
         System.out.println(divider);
+
+        clearFile("C:\\Users\\Cedric\\Desktop\\Repo\\iP\\src\\main\\java\\data\\duke.txt");
+        for (Task t : task) {
+            appendToFile("C:\\Users\\Cedric\\Desktop\\Repo\\iP\\src\\main\\java\\data\\duke.txt", t.toString());
+        }
     }
 }
