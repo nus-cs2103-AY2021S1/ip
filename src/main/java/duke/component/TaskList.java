@@ -6,10 +6,18 @@ import java.util.ArrayList;
 import java.util.function.Predicate;
 
 public class TaskList extends ArrayList<Task> {
+    /**
+     * Creates a list of tasks.
+     */
     public TaskList() {
         super();
     }
 
+    /**
+     * Prints a filtered list based on this list with the given predicate.
+     * @param predicate the condition for a task to be printed
+     * @return the number of tasks printed
+     */
     public int print(Predicate<Task> predicate) {
         int n = size();
         int count = 0;

@@ -8,6 +8,12 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private final LocalDate byTime;
 
+    /**
+     * Creates a deadline task.
+     * @param description the description of the task
+     * @param byTime the string description of the time the deadline task should be done by
+     * @throws InvalidCommandException if the input time format is not yyyy-MM-dd
+     */
     public Deadline(String description, String byTime) throws InvalidCommandException {
         super(description);
         try {
@@ -60,6 +66,10 @@ public class Deadline extends Task {
         return happenBetween(LocalDate.now(), LocalDate.now().plusDays(n));
     }
 
+    /**
+     * Checks whether the task is overdue.
+     * @return true if the task is not done and the deadline is before today
+     */
     public boolean isOverdue() {
         return !isDone && byTime.isBefore(LocalDate.now());
     }
@@ -76,6 +86,11 @@ public class Deadline extends Task {
                 byTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")" + overdue;
     }
 
+    /**
+     * Checks whether the given object equals this Deadline task.
+     * @param obj the given object to compare
+     * @return true if the object is a Deadline and both the description and byTime equals
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

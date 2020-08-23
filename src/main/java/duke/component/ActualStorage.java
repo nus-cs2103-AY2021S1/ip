@@ -13,6 +13,13 @@ public class ActualStorage implements Storage {
     private final String filePath;
     private final TaskList list;
 
+    /**
+     * Creates a Storage object that can read data from and write data into a storage file, initialize the list of
+     * tasks with data in the file.
+     * @param filePath the file path holding the targeted data
+     * @throws FileNotFoundException if the file is not in the given file path
+     * @throws InvalidCommandException should never been thrown if the input file is well-written
+     */
     public ActualStorage(String filePath) throws FileNotFoundException, InvalidCommandException {
         this.filePath = filePath;
         list = new TaskList();

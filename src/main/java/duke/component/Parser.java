@@ -4,6 +4,14 @@ import duke.command.*;
 import duke.task.*;
 
 public class Parser {
+    /**
+     * Parses a DoneCommand to tell which task to mark as done.
+     * @param cmd the given input command
+     * @param count the current number of tasks in list
+     * @return the index of the task to mark as done
+     * @throws InvalidCommandException if the input is invalid, including non-integer, negative values, 0 or large
+     * numbers
+     */
     public static int isValidDone(String cmd, int count) throws InvalidCommandException {
         if (cmd.startsWith("done ")) {
             if (cmd.length() < 6) {
@@ -25,6 +33,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a DeleteCommand to tell which task to delete.
+     * @param cmd the given input command
+     * @param count the current number of tasks in list
+     * @return the index of the task to delete
+     * @throws InvalidCommandException if the input is invalid, including non-integer, negative values, 0 or large
+     * numbers
+     */
     public static int isValidDelete(String cmd, int count) throws InvalidCommandException {
         if (cmd.startsWith("delete ")) {
             if (cmd.length() < 8) {
@@ -46,6 +62,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses an AddCommand to tell what is the task need to be added.
+     * @param cmd the given input command
+     * @return the task to be added according to the command
+     * @throws InvalidCommandException if the command does not make sense
+     */
     public static Task generate(String cmd) throws InvalidCommandException {
         if (cmd.startsWith("todo")) {
             if (cmd.length() < 5) {
@@ -101,6 +123,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses any input command.
+     * @param input the given input command
+     * @return the Command to be executed
+     */
     public static Command parse(String input) {
         if (input.equals("bye")) {
             return new ByeCommand(input);

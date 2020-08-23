@@ -7,10 +7,22 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class HappenCommand extends Command {
+    /**
+     * Creates a command for filtering tasks on when it happens.
+     * @param input the input command classified as HappenCommand, starting with "happen "
+     */
     public HappenCommand(String input) {
         super(input);
     }
 
+    /**
+     * Executes the command, prints the filtered result on ui.
+     * @param ui the user interface object that is currently running
+     * @param list the current list of tasks
+     * @param storage the storage-writing object that is currently running
+     * @return the string of the input time constrain with a number representing the size of the resulting task list
+     * @throws InvalidCommandException if the input cannot be processed correctly or does not make sense
+     */
     @Override
     public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
         String description = input.substring(7);
@@ -65,6 +77,11 @@ public class HappenCommand extends Command {
         }
     }
 
+    /**
+     * Checks whether a command equals this one.
+     * @param obj the Object to compare
+     * @return true if obj is a HappenCommand and it has the same input as this one
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
