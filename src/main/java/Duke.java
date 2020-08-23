@@ -1,11 +1,16 @@
 import javax.management.InvalidAttributeValueException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
     public static ArrayList<Task> tasks = new ArrayList<Task>(100);
+    public static String fileName = "data.txt";
     public static void main(String[] args) {
+        LoadData();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -50,7 +55,7 @@ public class Duke {
                 }
                 int ind;
                 try{
-                ind = Integer.parseInt(tokens.get(1))-1;
+                    ind = Integer.parseInt(tokens.get(1))-1;
                 } catch(Exception ex) {
                     throw new InvalidCommandException(tokens.get(1)+" is not a number!");
                 }
@@ -58,6 +63,7 @@ public class Duke {
                     throw new DukeException("Task "+ tokens.get(1) +" does not exist!");
                 }
                 tasks.get(ind).completeTask();
+                Save();
                 System.out.println(tasks.get(ind).toString());
             } else if (command == DukeCommand.DELETE) {
                 if (tokens.size() < 2) {
@@ -73,6 +79,7 @@ public class Duke {
                     throw new DukeException("Task " + tokens.get(1) + " does not exist!");
                 }
                 Task task = tasks.remove(ind);
+                Save();
                 System.out.println("I have removed this task");
                 System.out.println(task.toString());
                 System.out.println("You now have " + tasks.size() + " tasks left!");
@@ -85,6 +92,7 @@ public class Duke {
             } else {
                 Task task = addNewTask(command, tokens);
                 tasks.add(task);
+                Save();
                 System.out.println(
                         String.format("I have added this task: \n\t%s\nYou now have %d tasks in the list",
                                 task.toString(), tasks.size()));
@@ -154,5 +162,51 @@ public class Duke {
             }
         }
         return str.toString();
+    }
+
+    public static void Save() {
+        try{
+            FileWriter writer = new FileWriter(fileName);
+            StringBuilder str = new StringBuilder();
+            for(Task task : tasks) {
+                str.append(task.toFileString());
+                str.append("\n");
+            }
+            writer.write(str.toString());
+            writer.flush();
+            writer.close();
+        } catch(Exception ex) {
+            System.out.println(ex);
+        }
+
+    }
+    public static void LoadData() {
+        File file = new File(fileName);
+        if (file.exists()) {
+            try {
+                Scanner sc = new Scanner(file);
+                while (sc.hasNext()) {
+                    String type = sc.nextLine();
+                    String done = sc.nextLine();
+                    String desc = sc.nextLine();
+                    Task t;
+                    System.out.println(type);
+                    if (type.equals("T")) {
+                        t = new ToDo(desc);
+                    } else if (type.equals("E")) {
+                        t = new Event(desc, sc.nextLine());
+                    } else {
+                        t = new Deadline(desc, sc.nextLine());
+                    }
+                    if (done.equals("T")) {
+                        t.completeTask();
+                    }
+                    sc.nextLine();
+                    tasks.add(t);
+                }
+            } catch (FileNotFoundException e) {
+                System.out.println(e);
+            }
+        }
     }
 }
