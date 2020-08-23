@@ -12,11 +12,15 @@ abstract class Task {
         return this.name;
     }
 
-    public boolean check () {
-        return this.isDone;
+    public abstract String getType();
+
+    public int isDone(){
+        return isDone ? 1 : 0;
     }
 
     public abstract Task setToTrue();
+
+    public abstract String getEnd();
 
     @Override
     public String toString(){
