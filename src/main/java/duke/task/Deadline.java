@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.exception.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -12,7 +16,7 @@ public class Deadline extends Task {
         try {
             timeBy = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
         } catch (DateTimeParseException ex) {
-            throw new DukeException("Deadline timing cannot be parsed");
+            throw new DukeException("duke.task.Deadline timing cannot be parsed");
         }
         this.time = timeBy;
     }

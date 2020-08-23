@@ -1,3 +1,8 @@
+package duke.storage;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 import java.io.File;

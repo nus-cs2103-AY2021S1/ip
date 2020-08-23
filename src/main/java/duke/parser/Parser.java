@@ -1,3 +1,12 @@
+package duke.parser;
+
+import duke.exception.DukeException;
+import duke.command.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
         Command command;

@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.exception.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -16,7 +20,7 @@ public class Event extends Task {
             timeStart = LocalDateTime.parse(startEnd[0], DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
             timeEnd = LocalDateTime.parse(startEnd[1], DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
         } catch (DateTimeParseException ex) {
-            throw new DukeException("Event timing details cannot be parsed");
+            throw new DukeException("duke.task.Event timing details cannot be parsed");
         }
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
