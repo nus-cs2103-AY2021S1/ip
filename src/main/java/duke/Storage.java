@@ -1,6 +1,5 @@
 package main.java.duke;
 
-import main.java.duke.exception.DukeException;
 import main.java.duke.exception.DukeFileNotFoundException;
 import main.java.duke.task.Deadline;
 import main.java.duke.task.Event;
@@ -17,10 +16,20 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Takes care of file related operation.
+ */
 public class Storage {
 
     private File file;
 
+    /**
+     * Creates a new instance of Storage.
+     * Creates a file directory if it is missing.
+     * Creates a file if it does not exist.
+     *
+     * @param filePath Path of the file.
+     */
     public Storage(String filePath) {
         try {
             Path directory = Paths.get(filePath).getParent();
@@ -33,6 +42,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the tasks in a file and convert them into an ArrayList.
+     *
+     * @return ArrayList of Task.
+     * @throws DukeFileNotFoundException If file is not found.
+     */
     public ArrayList<Task> load() throws DukeFileNotFoundException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
@@ -69,6 +84,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves the TaskList to a file.
+     *
+     * @param taskList ArrayList of Task.
+     */
     public void save(ArrayList<Task> taskList) {
         try {
             String content = "";

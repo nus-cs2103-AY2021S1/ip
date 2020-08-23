@@ -12,12 +12,23 @@ import main.java.duke.command.ToDoCommand;
 import main.java.duke.exception.DukeInputNotRecognizedException;
 import main.java.duke.exception.DukeTaskNotFoundException;
 
+/**
+ * Parses the input by the user.
+ */
 public class Parser {
 
     enum Input {
         LIST, BYE, DONE, TODO, DEADLINE, EVENT, DELETE, UNDO
     }
 
+    /**
+     * Parses the input by the user and return a Command.
+     *
+     * @param fullCommand User input.
+     * @return Command.
+     * @throws DukeInputNotRecognizedException If the input is not recognised.
+     * @throws DukeTaskNotFoundException If the task is not found.
+     */
     public static Command parse(String fullCommand) throws DukeInputNotRecognizedException, DukeTaskNotFoundException {
         String[] command = fullCommand.split(" ", 2);
         if (inputExist(command[0])) {
@@ -54,6 +65,13 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Handles the case where the user input is "done".
+     *
+     * @param commandDetails Command inputted by user.
+     * @return DoneCommand.
+     * @throws DukeTaskNotFoundException If the task is not found.
+     */
     public static DoneCommand parseDone(String[] commandDetails) throws DukeTaskNotFoundException {
         if (commandDetails.length > 1 && Character.isDigit(commandDetails[1].charAt(0))) {
             return new DoneCommand(commandDetails);
@@ -63,6 +81,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles the case where the user input is "todo".
+     *
+     * @param commandDetails Command inputted by user.
+     * @return ToDoCommand.
+     * @throws DukeTaskNotFoundException If the task is not found.
+     */
     public static ToDoCommand parseToDo(String[] commandDetails) throws DukeTaskNotFoundException {
         if (commandDetails.length > 1) {
             return new ToDoCommand(commandDetails);
@@ -71,6 +96,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles the case where the user input is "deadline".
+     *
+     * @param commandDetails Command inputted by user.
+     * @return DeadlineCommand.
+     * @throws DukeTaskNotFoundException If the task is not found.
+     */
     public static DeadlineCommand parseDeadline(String[] commandDetails) throws DukeTaskNotFoundException {
         if (commandDetails.length > 1) {
             String[] stringArray = commandDetails[1].split("/", 2);
@@ -84,6 +116,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles the case where the user input is "event".
+     *
+     * @param commandDetails Command inputted by user.
+     * @return EventCommand.
+     * @throws DukeTaskNotFoundException If the task is not found.
+     */
     public static EventCommand parseEvent(String[] commandDetails) throws DukeTaskNotFoundException {
         if (commandDetails.length > 1) {
             String[] stringArray = commandDetails[1].split("/", 2);
@@ -97,6 +136,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles the case where the user input is "delete".
+     *
+     * @param commandDetails Command inputted by user.
+     * @return DeleteCommand.
+     * @throws DukeTaskNotFoundException If the task is not found.
+     */
     public static DeleteCommand parseDelete(String[] commandDetails) throws DukeTaskNotFoundException {
         if (commandDetails.length > 1 && Character.isDigit(commandDetails[1].charAt(0))) {
             return new DeleteCommand(commandDetails);
@@ -106,6 +152,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles the case where the user input is "undo".
+     *
+     * @param commandDetails Command inputted by user.
+     * @return UndoCommand.
+     * @throws DukeTaskNotFoundException If the task is not found.
+     */
     public static UndoCommand parseUndo(String[] commandDetails) throws DukeTaskNotFoundException {
         if (commandDetails.length > 1 && Character.isDigit(commandDetails[1].charAt(0))) {
             return new UndoCommand(commandDetails);
