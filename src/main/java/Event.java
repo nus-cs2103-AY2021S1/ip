@@ -23,8 +23,13 @@ public class Event extends Task{
     }
 
     @Override
-    public String getOutput() {
-        return String.format("%s %s%s", getStatusIcon(), this.description, printTime());
+    public String writeToFile() {
+        int done = isDone ? 1 : 0;
+        return String.format("E//%d//%s//%s\n", done, this.description, this.time );
     }
 
+    @Override
+    public String getOutput() {
+        return String.format("%s %s(At: %s)", getStatusIcon(), this.description, printTime());
+    }
 }

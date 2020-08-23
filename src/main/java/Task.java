@@ -24,4 +24,8 @@ public class Task {
     public void setDone() {
         isDone = true;
     }
+
+    public String writeToFile() {
+        return "-1";
+    }
 }

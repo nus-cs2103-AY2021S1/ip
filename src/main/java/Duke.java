@@ -1,3 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -6,10 +12,12 @@ public class Duke {
     static String LINE = "    ____________________________________________________________";
     static String INDENT = "    ";
     static Scanner sc = new Scanner(System.in);
+    private static String DATA_PATH =  "./data/data.txt";
+    private static String DATA_FILE = "./data.txt";
 
     static ArrayList<Task> arr =  new ArrayList<Task>();
 
-    private static void markAsDone(String input) {
+    private static void markAsDone(String input) throws IOException {
         String index = input.substring(5, input.length());
         int number = Integer.parseInt(index) - 1;
         arr.get(number).setDone();
@@ -17,6 +25,24 @@ public class Duke {
         System.out.println(INDENT + "Task marked as done: ");
         System.out.println(String.format(INDENT + "%s", arr.get(number).getOutput()));
         System.out.println(LINE);
+        saveFile();
+    }
+
+    private static void saveFile() throws IOException {
+        File file = new File(DATA_PATH);
+
+        try {
+            FileWriter writer = new FileWriter(file);
+            writer.close();
+
+            for (Task t : arr) {
+                FileWriter fileWriter = new FileWriter(file, true);
+                fileWriter.write(t.writeToFile());
+                fileWriter.close();
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private static void printList() {
@@ -51,9 +77,8 @@ public class Duke {
 
     static void addDeadline(String input) {
         try {
-            int dash = input.indexOf('/') + 1;
-            String dateString = input.substring(dash, input.length());
-            System.out.println(dateString);
+            int dash = input.indexOf('/') ;
+            String dateString = input.substring(dash + 1, input.length());
             Deadline temp = new Deadline(input.substring(9, dash),
                     dateString);
             arr.add(temp);
@@ -72,13 +97,13 @@ public class Duke {
 
     static void addEvent(String input) {
         try {
-            int dash = input.indexOf('/') + 1;
-            String date_String = input.substring(dash, input.length());
+            int dash = input.indexOf('/');
+            String date_String = input.substring(dash + 1, input.length());
             Event temp = new Event(input.substring(6, dash), date_String
                     );
             arr.add(temp);
             System.out.println(LINE);
-            System.out.println(INDENT + "Event added:  ");
+            System.out.println(INDENT + "Event added: ");
             System.out.println(INDENT + temp.getOutput());
             numTask();
             System.out.println(LINE);
@@ -90,7 +115,7 @@ public class Duke {
         }
     }
 
-    private static void addNewTask(String input) {
+    private static void addNewTask(String input) throws IOException {
         if(input.indexOf("todo") == 0) {
             addTodo(input);
         } else if (input.indexOf("deadline") == 0) {
@@ -98,20 +123,66 @@ public class Duke {
         } else {
             addEvent(input);
         }
+        saveFile();
     }
 
-    private static void removeEntry(String input)  {
+    private static void removeEntry(String input) throws IOException {
         int temp = Integer.parseInt(String.valueOf(input.charAt(7))) - 1;
         System.out.println(temp);
         Task removed = arr.remove(temp);
         System.out.println(LINE);
         System.out.println(INDENT + "Tasked removed: ");
         System.out.println(INDENT + removed.getOutput());
-        numTask();
+         numTask();
         System.out.println(LINE);
+        saveFile();
+    }
+    private static File getFile() {
+        File route = new File("./data");
+        if(!route.exists()) {
+            route.mkdirs();
+        }
+
+        File file = new File(DATA_PATH);
+
+        try {
+            if(!file.exists()) {
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+
+        return file;
+    }
+    private static void loadSave() {
+        try {
+            Path path = Paths.get(DATA_PATH);
+            Scanner sc = new Scanner(path);
+            while(sc.hasNextLine()) {
+                String[] parts = sc.nextLine().split("//");
+                switch (parts[0]) {
+                    case "T":
+                        arr.add(new ToDo(parts[2], parts[1].equals("1")));
+                        break;
+                    case "E":
+                        arr.add(new Event(parts[2], parts[1].equals("1"), parts[3]));
+                        break;
+                    case "D":
+                        arr.add(new Deadline(parts[2], parts[1].equals("1"), parts[3]));
+                        break;
+                }
+
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
+        loadSave();
         boolean on = true;
         System.out.println(LINE);
         System.out.println(INDENT + "Hello! What can I do for you?");

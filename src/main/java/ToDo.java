@@ -10,4 +10,10 @@ public class ToDo extends Task {
     public String getStatusIcon() {
         return String.format("[T]%s ", super.getStatusIcon());
     }
+
+    @Override
+    public String writeToFile() {
+        int done = isDone ? 1 : 0;
+        return String.format("T//%d//%s\n", done, this.description );
+    }
 }

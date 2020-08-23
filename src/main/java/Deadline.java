@@ -23,8 +23,15 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String writeToFile() {
+        int done = isDone ? 1 : 0;
+        return String.format("D//%d//%s//%s\n", done, this.description, this.time );
+
+    }
+
+    @Override
     public String getOutput() {
-        return String.format("%s %s%s", getStatusIcon(), this.description, printTime());
+        return String.format("%s %s(By: %s)", getStatusIcon(), this.description, printTime());
     }
 
 }
