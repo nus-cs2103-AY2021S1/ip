@@ -8,6 +8,16 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toText() {
+        String completionStatus = "0";
+        if (this.isDone) {
+            completionStatus = "1";
+        }
+        return "D" + " | " + completionStatus + " | " + this.description + " | "
+                + this.by;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + this.getStatusIcon() + " " + super.toString() + " (by: " + by + ")";
     }
