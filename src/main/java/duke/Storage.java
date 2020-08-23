@@ -36,7 +36,6 @@ public class Storage {
         ArrayList<Task> taskList = new ArrayList<>();
 
         try {
-
             File dataFile = new File(dataPath);
             Scanner sc = new Scanner(dataFile);
 
@@ -45,6 +44,7 @@ public class Storage {
 
                 String[] taskComponents = nowTask.split(" / ");
 
+                //Decode the file representation of list
                 switch (taskComponents[0]) {
                 case "T":
                     taskList.add(new Todo(taskComponents[1].equals("1"), taskComponents[2]));

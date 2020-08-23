@@ -33,14 +33,17 @@ public class Parser {
      * @throws DukeException An exception that happen in Duke system
      */
     public static Command parse(String input) throws DukeException {
+        //Decode the exit command
         if (input.equals("bye")) {
             return new ExitCommand();
         }
 
+        //Detect ambiguous input
         if (input.equals("")) {
             throw new AmbiguousInputException();
         }
 
+        //Detect the command and give it parameter
         String[] s = input.split(" ", 2);
         if (s[0].equals("list")) {
             return new ListCommand();
@@ -56,7 +59,6 @@ public class Parser {
                 }
             }
 
-            //Judge the action and execute
             switch (s[0]) {
             case "todo":
                 return new AddCommand(new Todo(s[1]));

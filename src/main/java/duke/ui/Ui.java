@@ -66,7 +66,6 @@ public class Ui {
      * @param deletedTask Task that is deleted.
      */
     public void showDeletionNotification(TaskList taskList, Task deletedTask) {
-
         String out = "Noted. I've removed this task: " + "\n\t\t" +
                 deletedTask.toString() + "\n\t" +
                 String.format("Now you have %d tasks in the list.\n", taskList.getSize());
@@ -82,11 +81,13 @@ public class Ui {
         StringBuilder builder = new StringBuilder();
         builder.append("Here are the tasks in your list: \n\t");
 
+        //Check whether there are any task in the list or not
         if (taskList.isEmpty()) {
             System.out.print(formatOut("You haven't added any task here !"));
             return ;
         }
 
+        //Produce output string
         for(Task task:taskList) {
             builder.append(taskList.indexOf(task) + 1).append(". ")
                     .append(task.toString()).append("\n").append("\t");
