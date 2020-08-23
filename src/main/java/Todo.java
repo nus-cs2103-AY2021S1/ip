@@ -4,6 +4,9 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(String description, int isDone) {
+        super(description, isDone);
+    }
     @Override
     public String toString() {
         return  super.toString().replace("[\u2718]", "[T][\u2718]");
@@ -12,5 +15,9 @@ public class Todo extends Task {
     @Override
     public String deleteMessage() {
         return super.deleteMessage().replace("[\u2718]", "[T][\u2718]");
+    }
+
+    public String data() {
+        return  "T" + super.data();
     }
 }

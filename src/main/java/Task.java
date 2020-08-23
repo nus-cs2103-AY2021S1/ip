@@ -4,9 +4,19 @@ public class Task {
     protected static int numberOfTasks = 0;
 
 
-    public Task (String description) {
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
+        numberOfTasks++;
+    }
+
+    public Task(String description, int isDone) {
+        this.description = description;
+        if (isDone == 0) {
+            this.isDone = false;
+        } else {
+            this.isDone = true;
+        }
         numberOfTasks++;
     }
 
@@ -33,5 +43,11 @@ public class Task {
     public String deleteMessage() {
         return "Got it. I've deleted this task:\n" +
                 "[\u2718] " + this.description;
+    }
+
+    public String data() {
+        return  " | " + (isDone
+                ? "1"
+                : "0" ) + " | " + description;
     }
 }
