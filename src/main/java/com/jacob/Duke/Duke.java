@@ -1,10 +1,8 @@
 package com.jacob.Duke;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 
 public class Duke {
     /**
@@ -21,7 +19,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Omo!! hello from\n" + logo);
 
-        // get file commands and turn them into task objects
+        // get file commands and turn them into task objects in toDoList
         String filename = FileEditor.accessTaskListInFileSystem(FileEditor.getCurrentDirectory());
         toDoList = FileEditor.readFile(filename, comHandlers, toDoList);
 
@@ -40,10 +38,8 @@ public class Duke {
         System.out.println(" -----------------");
         System.out.println(comHandlers.byeHandler());
         System.out.println(" -----------------");
+
         sc.close();
-    }
 
-
-
-
+        }
 }

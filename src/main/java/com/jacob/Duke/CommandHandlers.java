@@ -1,7 +1,9 @@
 package com.jacob.Duke;
 
-import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class CommandHandlers {
     public void handleFileCommands(String inputCommand, List<Task> taskList,int count) {
@@ -71,6 +73,10 @@ public class CommandHandlers {
                 case "list":
                     //iterate through the taskList and print all active members
                     printListStatus(taskList);
+                    break;
+                case "list-due":
+                    //iterate through the taskList and print all active members
+                    filterPrintTasks(inputCommand,taskList);
                     break;
                 case "done":
                     //doneEventHandler();
@@ -159,10 +165,9 @@ public class CommandHandlers {
         } else if (breakpoint == -1) {
             throw new DukeException("Hey a deadline cannot have no actual date!!\n");
         }
-        String tempString = inputCommand.substring("deadline".length()+1, breakpoint);
-        String tempString2 = inputCommand.substring(breakpoint + 5);
-        String result = tempString + tempString2;
-        Task theDeadline = new Deadline(tempString, tempString2);
+        String description = inputCommand.substring("deadline".length()+1, breakpoint);
+        String dateTime = inputCommand.substring(breakpoint + 5);
+        Task theDeadline = new Deadline(description, dateTime);
         taskList.add(theDeadline);
 
         //append text
@@ -186,10 +191,9 @@ public class CommandHandlers {
         } else if (breakpoint == -1) {
             throw new DukeException("Hey, a event cannot have no actual date and time!!");
         }
-        String tempString = inputCommand.substring("event".length()+1, breakpoint);
-        String tempString2 = inputCommand.substring(breakpoint + 5);
-        String result = tempString + tempString2;
-        Task theEvent = new Event(tempString, tempString2);
+        String description = inputCommand.substring("event".length()+1, breakpoint);
+        String dateTime = inputCommand.substring(breakpoint + 5);
+        Task theEvent = new Event(description, dateTime);
         taskList.add(theEvent);
 
         //append text
@@ -221,5 +225,26 @@ public class CommandHandlers {
         return String.format(" Noted. I've removed this task:\n" +
                 "   %s\n" +
                 " Now you have %d tasks in the list.",theRemovedTask.getCurrentStatus(), taskList.size());
+    }
+    //add ability to filter for date time using predicate
+    static void filterPrintTasks(String inputCommand,List<Task> taskList) {
+        //get the date time string from the initial string
+        String dateTime = inputCommand.substring("list-due ".length());
+
+        //get the date time object for comparison
+        LocalDateTime filterDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
+
+        //check that the date and time is the same before printing
+        Predicate<LocalDateTime> dateTimePredicate = x -> x.equals(filterDateTime);
+
+        //print out the filtered items
+        int count = 1;
+        System.out.println(" Here are the tasks in your filtered list:");
+        for (Task t: taskList) {
+            if (t.dueDateTime != null && dateTimePredicate.test(t.dueDateTime)) {
+                System.out.println("  "+ count + ". "+ t.getCurrentStatus());
+                count++;
+            }
+        }
     }
 }

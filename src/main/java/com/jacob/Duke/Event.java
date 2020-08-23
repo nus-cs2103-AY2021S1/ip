@@ -8,8 +8,8 @@ public class Event extends Task {
     }
 
     public Event(String description, String dateTime) {
-        super(description);
+        super(description, dateTime);
         this.type = "E";
-        this.dateTime = dateTime;
     }
+
 }

@@ -1,19 +1,24 @@
 package com.jacob.Duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     protected String description;
     protected boolean isDone;
     protected String type;
-    protected String dateTime;
+    protected LocalDateTime dueDateTime;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
+
     public Task(String description, String dateTime) {
         this.description = description;
         this.isDone = false;
-        this.dateTime = dateTime;
+        this.dueDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
+        // example command: deadline return book /by 2019-10-15 1800
     }
 
     public String getStatusIcon() {
@@ -29,17 +34,19 @@ public class Task {
     }
 
     public String getCurrentStatus() {
-        if (dateTime != null) {
+        if (dueDateTime != null) {
             return "  ["+ type + "]"+ "[" + getStatusIcon() +"] " + getDescription()
-                    + String.format(" (by: %s)", dateTime);
+                    + " " +dueDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy ha"));
         }
         return "  ["+ type + "]"+ "[" + getStatusIcon() +"] " + getDescription();
     }
 
     public String convertToFile() {
-        if (dateTime != null) {
-            return String.format("%s,%s,%s,%s", type, isDone ? 1 : 0 , getDescription(), dateTime);
+        if (dueDateTime != null) {
+            return String.format("%s,%s,%s,%s", type, isDone ? 1 : 0 , getDescription(),
+                    dueDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm")));
         }
         return String.format("%s,%s,%s", type, isDone ? 1 : 0, getDescription());
     }
+
 }
