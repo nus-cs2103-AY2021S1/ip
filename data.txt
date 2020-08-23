@@ -1,0 +1,3 @@
+T | false |  read
+T | false |  don't read ever again
+D | false |  do this | today
