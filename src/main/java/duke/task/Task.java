@@ -96,6 +96,13 @@ public abstract class Task {
         return false;
     }
 
+    /**
+     * Checks whether the task happens before the two given designated date.
+     * @param date1 the starting date for the period
+     * @param date2 the ending date for the period
+     * @return true if the task happens before the two dates (inclusive), ToDo does not happen on any date, so always
+     * false
+     */
     public boolean happenBetween(LocalDate date1, LocalDate date2) {
         return false;
     }
