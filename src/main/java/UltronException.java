@@ -1,12 +1,15 @@
-public class UltronException extends Exception{
+public class UltronException extends Exception {
 
-    public UltronException(String inputString, ExceptionType errorType){
+    public UltronException(final String inputString,
+                           final  ExceptionType errorType) {
 
         //Call the superclass method
         super(errorType.getMessage(inputString));
     }
 
-    public UltronException(String inputString, String inputArguments, ExceptionType errorType){
+    public UltronException(final String inputString,
+                           final String inputArguments,
+                           final ExceptionType errorType) {
 
         //Call the superclass method
         super(errorType.getMessage(inputString, inputArguments));
