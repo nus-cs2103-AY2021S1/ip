@@ -41,4 +41,8 @@ public class Ui {
         return input;
     }
 
+    public void showBye() {
+        System.out.println("~ \n I will be back \n~ ");
+    }
+
 }

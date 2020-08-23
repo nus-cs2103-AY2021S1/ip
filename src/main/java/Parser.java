@@ -7,30 +7,23 @@ public class Parser {
     }
 
     public static Command parse(String fullCommand) throws DukeException {
-        String[] commands = fullCommand.split(" ", 2);
-        if (inputExist(commands[0])) {
-            switch (Input.valueOf(commands[0].toUpperCase())) {
+        String[] command = fullCommand.split(" ", 2);
+        if (inputExist(command[0])) {
+            switch (Input.valueOf(command[0].toUpperCase())) {
             case LIST:
-                return ListCommand;
-            break;
+                return new ListCommand();
             case BYE:
-                return ByeCommand;
-            break;
+                return new ByeCommand();
             case DONE:
-                return DoneCommand;
-            break;
+                return parseDone(command);
             case TODO:
-                return ToDoCommand;
-            break;
+                return parseToDo(command);
             case DEADLINE:
-                return DeadlineCommand;
-            break;
+                return parseDeadline(command);
             case EVENT:
-                return EventCommand;
-            break;
+                return parseEvent(command);
             case DELETE:
-                return DeleteCommand;
-            break;
+                return parseDelete(command);
             }
         } else {
             throw new DukeException("~\n ERROR... INPUT NOT RECOGNIZED. \n PLEASE TRY AGAIN \n~");
@@ -39,11 +32,63 @@ public class Parser {
     }
 
     private static boolean inputExist(String input) {
-        for (Command.Input i : Command.Input.values()) {
+        for (Input i : Input.values()) {
             if (input.toUpperCase().equals(i.toString())) {
                 return true;
             }
         }
         return false;
+    }
+
+    public static DoneCommand parseDone(String[] commandDetails) throws DukeException {
+        if (commandDetails.length > 1 && Character.isDigit(commandDetails[1].charAt(0))) {
+            return new DoneCommand(commandDetails);
+        } else {
+            throw new DukeException("~\n ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n " +
+                    "PLEASE TRY AGAIN \n~");
+        }
+    }
+
+    public static ToDoCommand parseToDo(String[] commandDetails) throws DukeException {
+            if (commandDetails.length > 1) {
+                return new ToDoCommand(commandDetails);
+            } else {
+                throw new DukeException("~\n ERROR... TODO DESCRIPTION EMPTY. \n PLEASE TRY AGAIN \n~");
+            }
+    }
+
+    public static DeadlineCommand parseDeadline(String[] commandDetails) throws DukeException {
+        if (commandDetails.length > 1) {
+            String[] stringArray = commandDetails[1].split("/", 2);
+            if (stringArray.length > 1 && stringArray[1].split(" ", 2).length > 1) {
+                return new DeadlineCommand(stringArray);
+            } else {
+                throw new DukeException("~\n ERROR... DEADLINE DATE EMPTY. \n PLEASE TRY AGAIN \n~");
+            }
+        } else {
+            throw new DukeException("~\n ERROR... DEADLINE DESCRIPTION EMPTY . \n PLEASE TRY AGAIN \n~");
+        }
+    }
+
+    public static EventCommand parseEvent(String[] commandDetails) throws DukeException {
+        if (commandDetails.length > 1) {
+            String[] stringArray = commandDetails[1].split("/", 2);
+            if (stringArray.length > 1 && stringArray[1].split(" ", 2).length > 1) {
+                return new EventCommand(stringArray);
+            } else {
+                throw new DukeException("~\n ERROR... EVENT DATE EMPTY. \n PLEASE TRY AGAIN \n~");
+            }
+        } else {
+            throw new DukeException("~\n ERROR... EVENT DESCRIPTION EMPTY. \n PLEASE TRY AGAIN \n~");
+        }
+    }
+
+    public static DeleteCommand parseDelete(String[] commandDetails) throws DukeException {
+        if (commandDetails.length > 1 && Character.isDigit(commandDetails[1].charAt(0))) {
+            return new DeleteCommand(commandDetails);
+        } else {
+            throw new DukeException("~\n ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n " +
+                    "PLEASE TRY AGAIN \n~");
+        }
     }
 }
