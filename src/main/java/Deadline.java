@@ -20,13 +20,13 @@ public class Deadline extends Task {
 
     @Override
     public String toDataString() {
-        if (super.isDone) return "E | 1 | " + description + " | " + byString;
-        else return "E | 0 | " + description + " | " + byString;
+        if (super.isDone) return "D | 1 | " + description + " | " + byString;
+        else return "D | 0 | " + description + " | " + byString;
     }
 
     @Override
     public String toString() {
-        if (this.by != null) return "[E]" + super.toString() + " (at: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
-        else return "[E]" + super.toString() + " (at: " + byString + ")";
+        if (this.by != null) return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        else return "[D]" + super.toString() + " (by: " + byString + ")";
     }
 }
