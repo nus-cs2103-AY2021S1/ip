@@ -1,4 +1,7 @@
+import java.io.IOException;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Duke {
 
@@ -29,7 +32,7 @@ public class Duke {
                 throw new NoDescriptionException("    ☹ OOPS!!! The description of a deadline cannot be empty.");
             } else {
                 String info = splitString[1];
-                String[] information = info.split("/by ");
+                String[] information = info.split(" /by ");
                 if (information.length == 1) {
                     throw new InvalidTaskException("    ☹ OOPS!!! Please specify the deadline time");
                 } else {
@@ -46,7 +49,7 @@ public class Duke {
                 throw new NoDescriptionException("    ☹ OOPS!!! The description of an event cannot be empty.");
             } else {
                 String info = splitString[1];
-                String[] information = info.split("/at ");
+                String[] information = info.split(" /at ");
 
                 if (information.length == 1) {
                     throw new InvalidTaskException("    ☹ OOPS!!! Please state the event time");
@@ -81,7 +84,9 @@ public class Duke {
                     if (taskNumberInt + 1 > newList.getLength()) {
                         throw new InvalidDoneDeleteException("    ☹ OOPS!!! Your task number is out of bounds");
                     } else {
-                        newList.get(taskNumberInt).markDone();
+                        Task t = newList.get(taskNumberInt);
+                        t.markDone();
+                        newList.updateDone();
                     }
                 } catch (NumberFormatException e) {
                     throw new InvalidDoneDeleteException("    ☹ OOPS!!! Invalid task number.");
@@ -119,28 +124,61 @@ public class Duke {
     }
 
 
+
     public static void main(String[] args) {
         String underscore = "    ____________________________________________________________";
         greeting();
 
         Scanner sc = new Scanner(System.in);
-        TaskList newList = new TaskList();
+        String home = System.getProperty("user.home");
 
-        while(sc.hasNext()) {
-            String input = sc.nextLine();
-            System.out.println(underscore);
-            try {
-                String[] splitInput = input.split(" ");
-                if (splitInput[0].equals("bye")) {
-                    System.out.println("     Bye. Hope to see you again soon!");
-                    return;
-                } else {
-                    commandHandler(input, newList);
+        try {
+            File f = new File(home + "/Desktop/ip/data/duke.txt");
+
+            TaskList newList = new TaskList(f);
+
+            while(sc.hasNext()) {
+                String input = sc.nextLine();
+                System.out.println(underscore);
+                try {
+                    String[] splitInput = input.split(" ");
+                    if (splitInput[0].equals("bye")) {
+                        System.out.println("     Bye. Hope to see you again soon!");
+                        return;
+                    } else {
+                        commandHandler(input, newList);
+                    }
+                } catch (InvalidDoneDeleteException e) {
+                    System.out.println(e.getMessage());
                 }
-            } catch (InvalidDoneDeleteException e) {
-                System.out.println(e.getMessage());
+                System.out.println(underscore);
             }
-            System.out.println(underscore);
+        } catch (FileNotFoundException e) {
+            File newFile = new File(home + "/Desktop/ip/data/duke.txt");
+            try {
+                newFile.createNewFile();
+
+                TaskList newList = new TaskList(newFile);
+
+                while(sc.hasNext()) {
+                    String input = sc.nextLine();
+                    System.out.println(underscore);
+                    try {
+                        String[] splitInput = input.split(" ");
+                        if (splitInput[0].equals("bye")) {
+                            System.out.println("     Bye. Hope to see you again soon!");
+                            return;
+                        } else {
+                            commandHandler(input, newList);
+                        }
+                    } catch (InvalidDoneDeleteException error) {
+                        System.out.println(error.getMessage());
+                    }
+                    System.out.println(underscore);
+                }
+            } catch (IOException ex) {
+                System.out.println("An error occurred, file could not be created.");
+            }
         }
         sc.close();
     }
