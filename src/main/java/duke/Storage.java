@@ -18,11 +18,19 @@ import java.util.ArrayList;
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructs a Storage object with the filePath specified
+     * @param filePath specifies the directory of the csv file to read from/write to
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         initialize();
     }
 
+    /**
+     * Returns an ArrayList of Task from file located in filePath
+     * @return ArrayList of Task
+     */
     public ArrayList<Task> read() {
         if (isEmpty()) {
             // if file is totally new
@@ -98,6 +106,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves all the tasks inside taskList into the csv located in filePath
+     * @param taskList TaskList object
+     * @throws IOException If filePath does not exist
+     */
     public void saveToCSV(TaskList taskList) throws IOException {
         FileWriter csvWriter = insertColumnHeadersToCSV();
         for(Task task : taskList.getList()) {
@@ -139,6 +152,10 @@ public class Storage {
         return csvWriter;
     }
 
+    /**
+     * Checks if csv file in filePath is empty
+     * @return true if empty, false if not empty
+     */
     public boolean isEmpty() {
         return new File(filePath).length() == 0;
     }

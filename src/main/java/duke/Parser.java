@@ -8,6 +8,12 @@ import java.time.LocalDateTime;
 
 public class Parser {
 
+    /**
+     * Returns a Command object depending on user's input
+     * @param input User's input via standard input
+     * @return Command object
+     * @throws DukeException If input is wrong/not recognised
+     */
     public static Command parse(String input) throws DukeException {
         if (input.equals("bye")) {
             // when user inputs bye

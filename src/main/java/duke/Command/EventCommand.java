@@ -18,6 +18,15 @@ public class EventCommand extends Command {
     private final int hour;
     private final int min;
 
+    /**
+     * Constructs a Event object with it's input, date and time specified
+     * @param input User's input that is processed by the Deadline Object
+     * @param day the day-of-month to represent, from 1 to 31
+     * @param month the month-of-year to represent, from 1 (January) to 12 (December)
+     * @param year the year to represent, from -999999999 to +999999999
+     * @param hour the hour-of-day to represent, from 0 to 23
+     * @param min the minute-of-hour to represent, from 0 to 59
+     */
     public EventCommand(String input, int day, int month, int year, int hour, int min) {
         super(input);
         this.day = day;
@@ -27,6 +36,13 @@ public class EventCommand extends Command {
         this.min = min;
     }
 
+    /**
+     * Invokes the EventCommand object to process the User's request based on User's input
+     * @param tasks TaskList that contains an ArrayList of Task
+     * @param ui Ui object that interacts with User
+     * @param storage Storage object that reads from/write to specified filePath
+     * @throws EventException
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws EventException {
 
@@ -44,6 +60,10 @@ public class EventCommand extends Command {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
+    /**
+     * Returns false as EventCommand is not for termination
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;
