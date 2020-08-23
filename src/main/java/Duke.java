@@ -9,6 +9,7 @@ import java.io.FileWriter;
 public class Duke {
     public static final String LINE = "_______________________________________\n";
     public static ArrayList<Task> taskList = new ArrayList<>();
+    public static File file;
     public static FileWriter writer;
 
     public static void main(String[] args) throws DukeException, IOException {
@@ -21,7 +22,7 @@ public class Duke {
                 + "_______________________________________ \n";
         System.out.println(open);
 
-        File file = new File("data/duke.txt");
+        file = new File("data/duke.txt");
         readSavedData(file);
         writer = new FileWriter(file, true);
         Scanner scanner = new Scanner(System.in);
@@ -123,7 +124,7 @@ public class Duke {
     public static void handleTodo(String todoDescription) throws IOException {
         ToDo newToDo = new ToDo(todoDescription, false);
         taskList.add(newToDo);
-        writer.write(System.lineSeparator() + newToDo.toEncoding());
+        writer.write(newToDo.toEncoding() + System.lineSeparator());
         String output = LINE + "Got it. I've added this task: \n"
                 + taskList.get(taskList.size() - 1) + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list."
@@ -135,7 +136,7 @@ public class Duke {
         String[] details = deadlineDetails.split(" /by ", 2);
         Deadline newDeadline = new Deadline(details[0], details[1], false);
         taskList.add(newDeadline);
-        writer.write(System.lineSeparator() + newDeadline.toEncoding());
+        writer.write(newDeadline.toEncoding() + System.lineSeparator());
         String output = LINE + "Got it. I've added this task: \n"
                 + taskList.get(taskList.size() - 1) + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list."
@@ -147,7 +148,7 @@ public class Duke {
         String[] details = eventDetails.split(" /at ", 2);
         Event newEvent = new Event(details[0], details[1], false);
         taskList.add(newEvent);
-        writer.write(System.lineSeparator() + newEvent.toEncoding());
+        writer.write(newEvent.toEncoding() + System.lineSeparator());
         String output = LINE + "Got it. I've added this task: \n"
                 + taskList.get(taskList.size() - 1) + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list."
@@ -166,6 +167,7 @@ public class Duke {
                 + "bye: Exits program \n" + LINE;
         System.out.println(output);
     }
+
 
     public static void readSavedData(File file) throws IOException {
         if (!file.exists()) {
