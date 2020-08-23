@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -7,26 +9,26 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private Storage storage;
-    private TaskList tasks;
+    private duke.Storage storage;
+    private duke.TaskList tasks;
     private Ui ui;
 
-    public Duke(String filepath) throws IOException, DukeException {
+    public Duke(String filepath) throws IOException, duke.DukeException {
         ui = new Ui();
-        storage = new Storage(filepath);
+        storage = new duke.Storage(filepath);
         try {
-            tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
+            tasks = new duke.TaskList(storage.load());
+        } catch (duke.DukeException e) {
             ui.showLoadingError();
-            tasks = new TaskList();
+            tasks = new duke.TaskList();
         }
     }
 
-    public static void main(String[] args) throws DukeException, IOException {
+    public static void main(String[] args) throws duke.DukeException, IOException {
         new Duke("data/duke.txt").run();
     }
 
-    public void run() throws DukeException, FileNotFoundException {
+    public void run() throws duke.DukeException, FileNotFoundException {
         ui.introduce();
 
         Scanner sc = new Scanner(System.in);

@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 
 public class Parser {
@@ -6,8 +8,8 @@ public class Parser {
 
     }
 
-    public void interpret(String input, TaskList taskList, Storage storage) throws DukeException {
-        ArrayList<Task> list = taskList.getList();
+    public void interpret(String input, duke.TaskList taskList, duke.Storage storage) throws duke.DukeException {
+        ArrayList<duke.Task> list = taskList.getList();
         if (input.equals("list")) {
             if (list.isEmpty()) {
                 System.out.println("List is empty.");
@@ -15,7 +17,7 @@ public class Parser {
                 StringBuilder listOutput = new StringBuilder();
                 for (int j = 0; j < list.size(); j++) {
                     int num = j + 1;
-                    Task task = list.get(j);
+                    duke.Task task = list.get(j);
                     listOutput.append(num + "." + task.toString() + "\n");
                 }
                 System.out.println(listOutput);
@@ -28,9 +30,9 @@ public class Parser {
                     // what if task is not in the list
                     int num = Integer.parseInt(input.substring(i+1));
                     if (list.size() < num) {
-                        throw new DukeException("List does not have that item.");
+                        throw new duke.DukeException("List does not have that item.");
                     } else {
-                        Task taskToSetToDone = list.get(num-1);
+                        duke.Task taskToSetToDone = list.get(num-1);
                         taskToSetToDone.setDone();
                         System.out.println("Nice! I've marked this task as done:" + "\n" + taskToSetToDone.toString());
                         storage.update(list);
@@ -39,7 +41,7 @@ public class Parser {
                     // what if task is not in the list
                     int num = Integer.parseInt(input.substring(i+1));
                     if (list.size() < num) {
-                        throw new DukeException("List does not have that item.");
+                        throw new duke.DukeException("List does not have that item.");
                     } else {
                         taskList.remove(num-1);
                         storage.update(list);
@@ -65,23 +67,23 @@ public class Parser {
                     storage.update(list);
                 } else {
                     // throw exception
-                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means. Please enter your task with the " +
+                    throw new duke.DukeException("OOPS!!! I'm sorry, but I don't know what that means. Please enter your task with the " +
                             "starting keyword \"todo\" or \"deadline\" or \"event\".");
                 }
             } else {
                 // throw exception
                 if (input.equals("todo")) {
                     // throw empty todo exception
-                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                    throw new duke.DukeException("OOPS!!! The description of a todo cannot be empty.");
                 } else if (input.equals("deadline")) {
                     // throw empty deadline
-                    throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+                    throw new duke.DukeException("OOPS!!! The description of a deadline cannot be empty.");
                 } else if (input.equals("event")) {
                     // throw empty deadline
-                    throw new DukeException("OOPS!!! The description of an event cannot be empty.");
+                    throw new duke.DukeException("OOPS!!! The description of an event cannot be empty.");
                 } else {
                     // throw idk what it means exception
-                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means. Please enter your task with the " +
+                    throw new duke.DukeException("OOPS!!! I'm sorry, but I don't know what that means. Please enter your task with the " +
                             "starting keyword \"todo\" or \"deadline\" or \"event\".");
                 }
             }

@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,7 +10,7 @@ public class Storage {
 
     BufferedReader reader;
     PrintWriter printWriter;
-    ArrayList<Task> list;
+    ArrayList<duke.Task> list;
 
     public Storage(String filepath) throws IOException {
         try{
@@ -30,9 +32,9 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> load() throws IOException, DukeException {
+    public ArrayList<duke.Task> load() throws IOException, duke.DukeException {
         // returns the string list from the txt file
-        ArrayList<Task> list = new ArrayList<>();
+        ArrayList<duke.Task> list = new ArrayList<>();
         String line;
         System.out.println("bbb");
 
@@ -60,19 +62,19 @@ public class Storage {
                 }
                 list.add(event);
             } else {
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that line means.");
+                throw new duke.DukeException("OOPS!!! I'm sorry, but I don't know what that line means.");
             }
         }
         this.list = list;
         return list;
     }
 
-    public void update(ArrayList<Task> list) {
+    public void update(ArrayList<duke.Task> list) {
         this.list = list;
         StringBuilder listOutput = new StringBuilder();
         for (int j = 0; j < list.size(); j++) {
             int num = j + 1;
-            Task task = list.get(j);
+            duke.Task task = list.get(j);
             listOutput.append(num + "." + task.toString() + "\n");
         }
         String text = listOutput.toString();
