@@ -2,6 +2,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -27,11 +29,15 @@ public class TaskList {
         if (line.charAt(1) == 'T'){
             task = new ToDos(line.substring(6));
         } else if (line.charAt(1) == 'D'){
-            int index = line.indexOf("(by:");
-            task = new Deadline(line.substring(6, index), line.substring(index + 5));
+            int index = line.indexOf("|");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            LocalDateTime date = LocalDateTime.parse(line.substring(index + 1).trim(), formatter);
+            task = new Deadline(line.substring(6, index), date);
         } else {
-            int index = line.indexOf("(at:");
-            task = new Event(line.substring(6, index), line.substring(index + 5));
+            int index = line.indexOf("|");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            LocalDateTime date = LocalDateTime.parse(line.substring(index + 1).trim(), formatter);
+            task = new Event(line.substring(6, index), date);
         }
         if (line.charAt(4) == '✓'){
             task.updateStatus();
@@ -58,6 +64,21 @@ public class TaskList {
     public int getSize(){
         return tasks.size();
     }
+
+    public String save(){
+        StringBuilder line = new StringBuilder();
+        for (Task task : tasks){
+            if (!task.istodo()){
+                String append = task.description() + task.getWork() + "|" + task.getDate() + "\n";
+                line.append(append);
+                continue;
+            }
+            String append = task.toString() + "\n";
+            line.append(append);
+        }
+        return line.toString();
+    }
+
     public String toString(){
         StringBuilder line = new StringBuilder();
         for (Task task : tasks) {

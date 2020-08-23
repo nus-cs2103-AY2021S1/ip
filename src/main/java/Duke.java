@@ -108,7 +108,7 @@ public class Duke {
             File file = new File("Data/duke.txt");
             file.createNewFile();
             FileWriter writer = new FileWriter(file);
-            writer.write(list.toString());
+            writer.write(list.save());
             writer.close();
         } catch (IOException e) {
             System.out.println("No File found");
