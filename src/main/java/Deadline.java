@@ -1,10 +1,13 @@
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
 
-    protected String by;
+//    protected String by;
+    protected DukeDate by;
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = new DukeDate(by);
     }
 
     @Override
