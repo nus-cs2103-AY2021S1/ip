@@ -43,7 +43,7 @@ public class Parser {
         return new String[]{content, deadlineStr};
     }
     public Task parseCommand(Commands commandType, String[] tokens, boolean isLoaded, int numTasks) throws DukeException, DukeInvalidArgumentException{
-        String result_prefix = "Got it. I've added this duke.task:\n      ";
+        String result_prefix = "Got it. I've added this task:\n      ";
         String result_subfix = "Now you have " + (numTasks + 1) + " tasks in the list.";
 
         String[] extractedData = extractData(isLoaded, tokens);

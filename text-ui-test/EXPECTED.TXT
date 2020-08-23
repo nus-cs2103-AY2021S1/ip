@@ -10,19 +10,19 @@
     ----------------------------------------
     Got it. I've added this task:
       [D][?] go eat( by: 20 Oct 2020 00:00am)
-    Now you have 10 tasks in the list.
+    Now you have 1 tasks in the list.
 
     ----------------------------------------
     ----------------------------------------
     Got it. I've added this task:
       [E][?] huhuh( at: 1 Dec 1999 12:00pm)
-    Now you have 11 tasks in the list.
+    Now you have 2 tasks in the list.
 
     ----------------------------------------
     ----------------------------------------
     Got it. I've added this task:
       [T][?] huhuhuhuhu
-    Now you have 12 tasks in the list.
+    Now you have 3 tasks in the list.
 
     ----------------------------------------
     ----------------------------------------
@@ -44,15 +44,6 @@
     1.[D][?] go eat( by: 20 Oct 2020 00:00am)
     2.[E][?] huhuh( at: 1 Dec 1999 12:00pm)
     3.[T][?] huhuhuhuhu
-    4.[D][?] study( by: 20 Jan 1000 05:00am)
-    5.[D][?] askdjn( by: 5 Dec 2020 )
-    6.[D][?] askdjn( by: 5 Dec 2020 )
-    7.[D][?] askdjn( by: 5 Dec 2020 )
-    8.[D][?] askdjn( by: 5 Dec 2020 )
-    9.[D][?] askdjn( by: 5 Dec 2020 )
-    10.[D][?] go eat( by: 20 Oct 2020 00:00am)
-    11.[E][?] huhuh( at: 1 Dec 1999 12:00pm)
-    12.[T][?] huhuhuhuhu
 
     ----------------------------------------
     ----------------------------------------
@@ -62,13 +53,12 @@
     ----------------------------------------
     Got it. I've added this task:
       [D][?] study( by: 20 Jan 1000 05:00am)
-    Now you have 13 tasks in the list.
+    Now you have 4 tasks in the list.
 
     ----------------------------------------
     ----------------------------------------
     Here are the tasks in your list:
     4.[D][?] study( by: 20 Jan 1000 05:00am)
-    13.[D][?] study( by: 20 Jan 1000 05:00am)
 
     ----------------------------------------
     ----------------------------------------
@@ -77,45 +67,36 @@
     2.[E][?] huhuh( at: 1 Dec 1999 12:00pm)
     3.[T][?] huhuhuhuhu
     4.[D][?] study( by: 20 Jan 1000 05:00am)
-    5.[D][?] askdjn( by: 5 Dec 2020 )
-    6.[D][?] askdjn( by: 5 Dec 2020 )
-    7.[D][?] askdjn( by: 5 Dec 2020 )
-    8.[D][?] askdjn( by: 5 Dec 2020 )
-    9.[D][?] askdjn( by: 5 Dec 2020 )
-    10.[D][?] go eat( by: 20 Oct 2020 00:00am)
-    11.[E][?] huhuh( at: 1 Dec 1999 12:00pm)
-    12.[T][?] huhuhuhuhu
-    13.[D][?] study( by: 20 Jan 1000 05:00am)
 
     ----------------------------------------
     ----------------------------------------
     Got it. I've added this task:
       [D][?] askdjn( by: 5 Dec 2020 )
-    Now you have 14 tasks in the list.
+    Now you have 5 tasks in the list.
 
     ----------------------------------------
     ----------------------------------------
     Got it. I've added this task:
       [D][?] askdjn( by: 5 Dec 2020 )
-    Now you have 15 tasks in the list.
+    Now you have 6 tasks in the list.
 
     ----------------------------------------
     ----------------------------------------
     Got it. I've added this task:
       [D][?] askdjn( by: 5 Dec 2020 )
-    Now you have 16 tasks in the list.
+    Now you have 7 tasks in the list.
 
     ----------------------------------------
     ----------------------------------------
     Got it. I've added this task:
       [D][?] askdjn( by: 5 Dec 2020 )
-    Now you have 17 tasks in the list.
+    Now you have 8 tasks in the list.
 
     ----------------------------------------
     ----------------------------------------
     Got it. I've added this task:
       [D][?] askdjn( by: 5 Dec 2020 )
-    Now you have 18 tasks in the list.
+    Now you have 9 tasks in the list.
 
     ----------------------------------------
     ----------------------------------------
@@ -125,10 +106,5 @@
     7.[D][?] askdjn( by: 5 Dec 2020 )
     8.[D][?] askdjn( by: 5 Dec 2020 )
     9.[D][?] askdjn( by: 5 Dec 2020 )
-    14.[D][?] askdjn( by: 5 Dec 2020 )
-    15.[D][?] askdjn( by: 5 Dec 2020 )
-    16.[D][?] askdjn( by: 5 Dec 2020 )
-    17.[D][?] askdjn( by: 5 Dec 2020 )
-    18.[D][?] askdjn( by: 5 Dec 2020 )
 
     ----------------------------------------

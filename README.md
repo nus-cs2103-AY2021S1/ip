@@ -1,4 +1,4 @@
-# duke.dukehelper project template
+# Duke project template
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
@@ -15,7 +15,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    1. Click `Open or Import`.
    1. Select the project directory, and click `OK`
    1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/duke.dukehelper.java` file, right-click it, and choose `Run duke.dukehelper.main()`. If the setup is correct, you should see something like the below:
+1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
    ```
    Hello from
     ____        _        

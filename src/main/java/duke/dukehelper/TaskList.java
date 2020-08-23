@@ -26,7 +26,7 @@ public class TaskList {
         try {
             Task marked = taskList.get(markNumber - 1);
             marked.markAsDone();
-            return "Nice! I've marked this duke.task as done:\n      " + marked.returnStringForm();
+            return "Nice! I've marked this task as done:\n      " + marked.returnStringForm();
         } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
             throw new DukeInvalidArgumentException("Invalid number");
         }
@@ -35,7 +35,7 @@ public class TaskList {
         try {
             Task marked = taskList.get(markNumber - 1);
             this.taskList.remove(markNumber - 1);
-            return "Noted. I've removed this duke.task:\n      " + marked.returnStringForm() + "\n    Now you have " + numTasks + " duke.task(s) in the list.";
+            return "Noted. I've removed this task:\n      " + marked.returnStringForm() + "\n    Now you have " + numTasks + " task(s) in the list.";
         } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
             throw new DukeInvalidArgumentException("Invalid number");
         }

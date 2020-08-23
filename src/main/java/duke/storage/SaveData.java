@@ -31,6 +31,7 @@ public class SaveData {
         try {
             File file = new File(path);
             if(!file.exists()) {
+                file.getParentFile().mkdirs();
                 file.createNewFile();
             }
             FileWriter writer = new FileWriter(file, false);

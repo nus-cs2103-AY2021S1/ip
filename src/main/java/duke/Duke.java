@@ -83,11 +83,11 @@ public class Duke {
     }
 
     protected void run() {
-        Ui.printDialog("Hello! I'm the Riddle. Type 'help' if you know nothing HAHAHA\n    What can WE do for you?");
+        Ui.printDialog("Hello! I'm the Riddler. Type 'help' if you know nothing HAHAHA\n    Your tasks will be saved at /data\n    What can WE do for you?");
         Scanner sc = new Scanner(System.in);
         ArrayList<String> savedTasks = storage.loadSavedTasks();
         if(savedTasks.size() > 0 && savedTasks.get(0).equals("000")) {
-            Ui.printDialog("This is the first time you use duke.Duke!");
+            Ui.printDialog("This is the first time you use Duke!");
         } else {
             try {
                 for (String task : savedTasks) {
