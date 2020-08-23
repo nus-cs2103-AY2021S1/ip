@@ -7,6 +7,12 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 import duke.commands.Command;
 
+/**
+ * Duke is the name of this program. It acts as a CLI app that reads and save
+ * the user inputs. You can use it to record down tasks and marking the progress
+ * of it.
+ */
+
 public class Duke {
     
     private Storage storage;
@@ -21,7 +27,9 @@ public class Duke {
         this.ui = new Ui();
     }
 
-    // activate the duke.Duke Bot
+    /**
+     * Activates the duke bot.
+     */
     public void echo() {
         ui.greetings();
         isExit = false;
