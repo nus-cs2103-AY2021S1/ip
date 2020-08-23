@@ -1,5 +1,10 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.IOException;
+import java.nio.file.Files;
 
 public class TaskManager {
     private List<Task> toDoList;
@@ -132,6 +137,7 @@ public class TaskManager {
 
     public void addToList(Task task) {
         this.toDoList.add(task);
+        save();
     }
 
     public void removeFromList(int taskId) {
@@ -139,6 +145,43 @@ public class TaskManager {
         System.out.println("Task successfully removed!");
         System.out.println("-> " + tr.toString());
         this.toDoList.remove(taskId - 1);
+        save();
+    }
+
+    public void save() {
+        String path = System.getProperty("user.dir") + "\\" + "save.txt";
+        if(!Files.exists(Paths.get(path))) {
+            try {
+                Files.createFile(Paths.get(path));
+            }
+            catch (IOException e) {
+                System.out.println("error creating file");
+            }
+        }
+        try {
+            new FileWriter(path, false).close();
+        }
+        catch (IOException e) {
+                System.out.println("error deleting file");
+        }
+
+        int i = 1;
+        try {
+            FileWriter myWriter = new FileWriter("save.txt");
+            BufferedWriter out = new BufferedWriter(myWriter);
+            for (Task s : this.toDoList) {
+                    String write = i + ". " + " [" + s.getType() + "] "
+                            + s.toString() + " [" + s.getTaskStatusIcon() + "]";
+                    i += 1;
+                    out.write(write);
+                    out.newLine();
+
+            }
+            out.close();
+        }
+        catch (IOException e) {
+            System.out.println(e);
+        }
 
     }
 
