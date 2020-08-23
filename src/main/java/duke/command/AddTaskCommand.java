@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.error.DukeError;
+import duke.error.IllegalCharacterError;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.UI;
+import duke.task.Task;
+
 public class AddTaskCommand implements Command {
     Task task;
 

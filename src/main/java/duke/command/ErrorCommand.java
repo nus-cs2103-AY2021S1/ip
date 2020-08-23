@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.UI;
+
 public class ErrorCommand implements Command {
     private final Exception error;
 

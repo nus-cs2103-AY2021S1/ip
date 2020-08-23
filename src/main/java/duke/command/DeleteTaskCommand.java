@@ -1,21 +1,26 @@
-public class DoneTaskCommand implements Command {
+package duke.command;
+
+import duke.error.DukeError;
+import duke.error.InvalidRangeError;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.UI;
+import duke.task.Task;
+
+public class DeleteTaskCommand implements Command {
     private final int n;
 
-    public DoneTaskCommand(int n) {
+    public DeleteTaskCommand(int n) {
         this.n = n;
     }
-
     @Override
     public void execute(TaskList taskList, UI ui, Storage storage) throws DukeError {
         if (n < 1 || n > taskList.numberOfTasks()) {
             throw new InvalidRangeError();
         }
         Task task = taskList.getTaskList().get(n - 1);
-        if (task.getIsDone()) {
-            throw new TaskAlreadyCompletedError(task);
-        }
-        ui.doneTask(task.getDescription());
-        task.markAsDone();
+        taskList.deleteTask(task);
+        ui.deleteTask(task.toString(), taskList.numberOfTasks());
     }
 
     @Override
