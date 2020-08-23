@@ -37,18 +37,19 @@ public class Duke {
                     }
                 } else {
                     printBorder();
-                    if (input.contains("todo")) {
-                        try {
-                            Todo t = new Todo(input.substring(5));
-                            tasks.add(t);
-                            System.out.println("Got it. I've added this task:");
-                            System.out.println(t);
-                        } catch (Exception e) {
-                            throw new DukeException(" ☹ Insufficient details! The description of a todo cannot be empty.");
-                        }
-                    } else if (input.contains("deadline") || input.contains("event") || input.contains("delete")) {
+                    if (input.contains("todo") || input.contains("deadline") || input.contains("event") || input.contains("delete")) {
                         int due = input.indexOf("/");
 
+                        if (input.contains("todo")) {
+                            try {
+                                Todo t = new Todo(input.substring(5));
+                                tasks.add(t);
+                                System.out.println("Got it. I've added this task:");
+                                System.out.println(t);
+                            } catch (Exception e) {
+                                throw new DukeException(" ☹ Insufficient details! The description of a todo cannot be empty.");
+                            }
+                        }
                         if (input.contains("deadline")) {
                             try {
                                 Deadline dl = new Deadline(input.substring(9, due), input.substring(due + 4));
