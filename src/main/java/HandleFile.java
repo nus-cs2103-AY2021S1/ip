@@ -12,13 +12,18 @@ public class HandleFile {
     HandleFile(ListOfItems list) {
         this.storedData = new File("stored.txt");
         this.list = list;
+        this.checkFile();
     }
 
-    void checkFile() throws IOException {
-        if (!this.storedData.exists()) {
-            this.storedData.createNewFile();
-        } else {
-            readFile();
+    void checkFile() {
+        try {
+            if (!this.storedData.exists()) {
+                this.storedData.createNewFile();
+            } else {
+                readFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -33,18 +38,22 @@ public class HandleFile {
         }
     }
 
-    void writeFile(ListOfItems listOfItems) throws IOException {
-        List<Task> list = listOfItems.list;
+    void writeFile(ListOfItems listOfItems) {
+        try {
+            List<Task> list = listOfItems.list;
 
-        FileWriter fw = new FileWriter(this.storedData);
-        BufferedWriter bw = new BufferedWriter(fw);
+            FileWriter fw = new FileWriter(this.storedData);
+            BufferedWriter bw = new BufferedWriter(fw);
 
-        for (int i = 0; i < list.size(); i++) {
-            Task task = list.get(i);
-            String taskText = task.toString();
-            bw.write(taskText);
-            bw.write("\n");
+            for (int i = 0; i < list.size(); i++) {
+                Task task = list.get(i);
+                String taskText = task.toString();
+                bw.write(taskText);
+                bw.write("\n");
+            }
+            bw.close();
+        } catch(IOException e) {
+            e.printStackTrace();
         }
-        bw.close();
     }
 }

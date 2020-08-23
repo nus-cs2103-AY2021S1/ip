@@ -1,47 +1,18 @@
-import java.io.IOException;
-import java.util.Scanner;
-
 public class Duke {
 
-    public static void main(String[] args) throws IOException {
+    private Ui ui;
+    private HandleFile handleFile;
+    private Parser parser;
+
+    public Duke() {
         ListOfItems listOfItems = new ListOfItems();
-        HandleFile handleFile = new HandleFile(listOfItems);
-        handleFile.checkFile();
+        handleFile = new HandleFile(listOfItems);
+        parser = new Parser(listOfItems, handleFile);
+        ui = new Ui(parser);
+    }
 
-        Scanner sc = new Scanner(System.in);
-
-        String divider = "____________________________________________________________";
-        String intro = "Hello! I'm Bob\n" +
-                "What can I do for you?\n";
-
-        System.out.println(divider + "\n" + intro + "\n" + divider);
-        String input = sc.nextLine();
-
-        while (!input.equals("bye")) {
-            try {
-                if (input.equals("list")) {
-                    listOfItems.getList();
-                } else if (input.contains("done")) {
-                    listOfItems.doneItem(input);
-                    handleFile.writeFile(listOfItems);
-                } else if (input.contains("delete")) {
-                    listOfItems.deleteItem(input);
-                } else if (input.contains("items due by")) { // check items due on a specific date
-                    listOfItems.checkBy(input);
-                } else if (input.contains("items due before")) { // check items due before a specific date + time
-                    listOfItems.checkBefore(input);
-                } else {
-                    listOfItems.addItem(input);
-                    handleFile.writeFile(listOfItems);
-                }
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-            }
-            input = sc.nextLine();
-        }
-
-        String message = "Bye. Hope to see you again soon! :)";
-        System.out.println(divider + "\n" + message + "\n" + divider);
+    public static void main(String[] args) {
+        new Duke();
     }
 }
 
