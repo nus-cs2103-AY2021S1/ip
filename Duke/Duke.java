@@ -56,8 +56,6 @@ public class Duke {
             String input = "";
             while ((input = reader.readLine()) != null) {
                 try {
-                    System.out.println(input);
-
                     // Split the string
                     String[] inputList = input.split("\\|");
                     // If  does not matches input throw exceptions
@@ -73,8 +71,8 @@ public class Duke {
                         taskList.add(new Todo(inputList[2].trim()));
                     }
 
-                    if (inputList[0].trim().equals("3")) {
-                        taskList.add(new Deadline(inputList[2].trim(),inputList[3].trim()));
+                    if (inputList[0].trim().equals("E")) {
+                        taskList.add(new Event(inputList[2].trim(),inputList[3].trim()));
                     }
 
                     if (inputList[1].trim().equals("1")) {
@@ -88,7 +86,7 @@ public class Duke {
             reader.close();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("There's no duke text");
         }
     }
 
