@@ -12,7 +12,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         try {
-            storage = new Storage(filePath);
+            storage = new ActualStorage(filePath);
             list = storage.getList();
         } catch (Exception e) {
             ui.output(e.getMessage());
