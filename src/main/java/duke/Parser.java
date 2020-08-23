@@ -17,12 +17,12 @@ import duke.task.Event;
 import duke.task.Todo;
 
 public class Parser {
-    private final static String FAILED_TO_MARK_TASK_AS_COMPLETE =
+    private static final String FAILED_TO_MARK_TASK_AS_COMPLETE =
             "Failed to mark task as complete!";
-    private final static String FAILED_TO_DELETE_TASK = "Failed to delete task!";
-    private final static String FAILED_TO_CREATE_TASK = "Failed to create task!";
-    private final static String FAILED_TO_CREATE_DEADLINE_TASK = "Failed to create Deadline task!";
-    private final static String FAILED_TO_CREATE_EVENT_TASK = "Failed to create Event task!";
+    private static final String FAILED_TO_DELETE_TASK = "Failed to delete task!";
+    private static final String FAILED_TO_CREATE_TASK = "Failed to create task!";
+    private static final String FAILED_TO_CREATE_DEADLINE_TASK = "Failed to create Deadline task!";
+    private static final String FAILED_TO_CREATE_EVENT_TASK = "Failed to create Event task!";
 
     static Command parse(String fullCommand) throws DukeException {
         String[] commandInputs = fullCommand.trim().split(" ", 2);
