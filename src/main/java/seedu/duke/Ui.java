@@ -1,5 +1,6 @@
-import java.util.Scanner;
+package seedu.duke;
 
+import java.util.Scanner;
 public class Ui {
     private final static String LINES = "------------------------------------------------\n";
     private final static String INTRO = "Hello! I'm Duke!\n" + "What can I do for you?\n";

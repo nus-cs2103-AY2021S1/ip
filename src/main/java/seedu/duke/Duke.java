@@ -1,9 +1,6 @@
-import java.io.FileNotFoundException;
+package seedu.duke;
+
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.FileReader;
 
 public class Duke {
     private Storage storage;

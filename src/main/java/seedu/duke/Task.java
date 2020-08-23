@@ -1,3 +1,5 @@
+package seedu.duke;
+
 public class Task {
     protected String task;
     protected boolean isDone;

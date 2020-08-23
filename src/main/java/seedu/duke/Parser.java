@@ -1,3 +1,4 @@
+package seedu.duke;
 public class Parser {
     private TaskList taskList;
 

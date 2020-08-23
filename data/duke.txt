@@ -1,7 +1,3 @@
-E ~ 1 ~ gym  ~ tomorrow 10pm
-D ~ 0 ~ ip3  ~ today
-T ~ 1 ~ bathe
-D ~ 1 ~ water  ~ 2020-08-23
-T ~ 0 ~ drink water
-E ~ 0 ~ asdas  ~ Oct 10 2020
-E ~ 1 ~ ssss  ~ Aug 8 2020
+[T] [0] eat dinner
+[D] [0] ip3 
+[E] [0] supper 
