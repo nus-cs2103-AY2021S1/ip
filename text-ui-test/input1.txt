@@ -1,8 +1,10 @@
 blah
 todo
-todo read book
+todo t1
 deadline
 deadline /by
-deadline return book /by
-deadline return book /by wednesday
+deadline t2 /by
+deadline t2 /by wednesday
+deadline t2 /by 23-08-2020 1400
+deadline t3 /by 26-08-2020
 bye

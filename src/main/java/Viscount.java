@@ -1,6 +1,4 @@
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -9,10 +7,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAccessor;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Viscount {
     private static final String VISCOUNT_LOGO =
@@ -24,6 +31,9 @@ public class Viscount {
             "   \\_/ |_|_____/ \\_____\\___/ \\__,_|_| |_|\\__|";
     private static final String HORIZONTAL_LINE = "__________________________________________________";
     private static final String DATA_FILE_PATH = System.getProperty("user.dir") + "/data/viscount.txt";
+    private static final DateTimeFormatter INPUT_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy[ HHmm]");
+    private static final DateTimeFormatter OUTPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    public static final DateTimeFormatter TASK_DATA_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd HHmm");
 
     private static List<Task> tasks = new ArrayList<>();
 
@@ -38,7 +48,7 @@ public class Viscount {
         System.out.println();
     }
 
-    private static String convertTaskListToString() {
+    private static String convertTaskListToString(List<Task> tasks) {
         String result = "";
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -75,12 +85,93 @@ public class Viscount {
         
         Viscount.speak("Very good! I have marked this task as done:\n" + task.toString());
     }
+    
+    //@@author sc-arecrow-reused
+    //Reused from https://stackoverflow.com/a/48281350 with minor modifications
+    private static LocalDateTime parseDateTime(String dateTimeString, DateTimeFormatter formatter) 
+            throws DateTimeParseException {
+        LocalDateTime dateTime;
+
+        TemporalAccessor ta = formatter.parseBest(dateTimeString, LocalDateTime::from, LocalDate::from);
+        
+        if (ta instanceof LocalDateTime) {
+            dateTime = (LocalDateTime) ta;
+        } else {
+            dateTime = ((LocalDate) ta).atStartOfDay();
+        }
+        
+        return dateTime;
+    }
+    //@@author
+    
+    private static void filterAndListTasks(String modifier, String dateString) throws ViscountException {
+        if (!modifier.isEmpty()) {
+            try {
+                TaskType.valueOf(modifier.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                throw new ViscountUnknownCommandException(modifier);
+            }
+        }
+
+        Predicate<Task> filterByModifier = task -> modifier.isEmpty()
+                || task.getTaskType() == TaskType.valueOf(modifier.toUpperCase());
+
+        if (dateString.isEmpty()) {
+            List<Task> filteredTasks = tasks
+                    .stream()
+                    .filter(filterByModifier)
+                    .collect(Collectors.toList());
+            
+            Viscount.speak(String.format("Here are the %ss in your list:\n%s",
+                    modifier.isEmpty() ? "task" : modifier,
+                    Viscount.convertTaskListToString(filteredTasks)));
+        } else {
+            try {
+                LocalDateTime queriedDateTime = dateString.equals("today")
+                        ? LocalDate.now().atStartOfDay()
+                        : Viscount.parseDateTime(dateString, Viscount.INPUT_DATE_TIME_FORMATTER);
+
+                List<Task> filteredTasks = tasks
+                        .stream()
+                        .filter(Task::hasDateTime)
+                        .filter(filterByModifier)
+                        .filter(task -> task.getDateTime().toLocalDate().isEqual(queriedDateTime.toLocalDate()))
+                        .sorted(Comparator.comparing(Task::getDateTime))
+                        .collect(Collectors.toList());
+                
+                Viscount.speak(String.format("Here are the %ss occurring %s in your list:\n%s",
+                        modifier.isEmpty() ? "task" : modifier,
+                        dateString.equals("today") 
+                                ? dateString 
+                                : "on " + queriedDateTime.format(Viscount.OUTPUT_DATE_FORMATTER),
+                        Viscount.convertTaskListToString(filteredTasks)));
+            } catch (DateTimeParseException e) {
+                throw new ViscountDateTimeParseException("date query");
+            }
+        }
+    }
 
     private static void parseInput(List<String> arguments) throws ViscountException, IOException {
         String command = arguments.get(0);
 
         if (command.equals("list")) {
-            Viscount.speak("Here are the tasks in your list:\n" + Viscount.convertTaskListToString());
+            int indexOfDate = arguments.indexOf("/on");
+            
+            if (indexOfDate == -1) {
+                String modifier = String.join(" ", arguments.subList(1, arguments.size()));
+                Viscount.filterAndListTasks(modifier, "");
+            } else {
+                String modifier = String.join(" ", arguments.subList(1, indexOfDate));
+                String dateString = String.join(" ", arguments.subList(indexOfDate + 1, arguments.size()));
+                
+                if (modifier.equals("todo")) {
+                    Viscount.speak("Alas, todos do not have dates! Try again without /on");
+                } else if (dateString.isEmpty()) {
+                    throw new ViscountMissingArgumentDescriptionException("/on");
+                } else {
+                    Viscount.filterAndListTasks(modifier, dateString);
+                }
+            }            
         } else if (command.equals("todo")) {
             String description = String.join(" ", arguments.subList(1, arguments.size()));
 
@@ -97,15 +188,20 @@ public class Viscount {
                 throw new ViscountMissingArgumentException("/by");
             } else {
                 String description = String.join(" ", arguments.subList(1, indexOfDueDate));
-                String dueDate = String.join(" ", arguments.subList(indexOfDueDate + 1, arguments.size()));
+                String dueDateString = String.join(" ", arguments.subList(indexOfDueDate + 1, arguments.size()));
 
                 if (description.isEmpty()) {
                     throw new ViscountMissingDescriptionException("deadline");
-                } else if (dueDate.isEmpty()) {
+                } else if (dueDateString.isEmpty()) {
                     throw new ViscountMissingArgumentDescriptionException("/by");
                 } else {
-                    Deadline deadline = new Deadline(description, false, dueDate);
-                    Viscount.addToTaskList(deadline);
+                    try {
+                        LocalDateTime dueDate = Viscount.parseDateTime(dueDateString, Viscount.INPUT_DATE_TIME_FORMATTER);
+                        Deadline deadline = new Deadline(description, false, dueDate);
+                        Viscount.addToTaskList(deadline);
+                    } catch (DateTimeParseException e) {
+                        throw new ViscountDateTimeParseException("due date");
+                    }
                 }
             }
         } else if (command.equals("event")) {
@@ -115,15 +211,20 @@ public class Viscount {
                 throw new ViscountMissingArgumentException("/at");
             } else {
                 String description = String.join(" ", arguments.subList(1, indexOfEventTime));
-                String eventTime = String.join(" ", arguments.subList(indexOfEventTime + 1, arguments.size()));
+                String eventTimeString = String.join(" ", arguments.subList(indexOfEventTime + 1, arguments.size()));
 
                 if (description.isEmpty()) {
                     throw new ViscountMissingDescriptionException("event");
-                } else if (eventTime.isEmpty()) {
+                } else if (eventTimeString.isEmpty()) {
                     throw new ViscountMissingArgumentDescriptionException("/at");
                 } else {
-                    Event event = new Event(description, false, eventTime);
-                    Viscount.addToTaskList(event);
+                    try {
+                        LocalDateTime eventTime = Viscount.parseDateTime(eventTimeString, Viscount.INPUT_DATE_TIME_FORMATTER);
+                        Event event = new Event(description, false, eventTime);
+                        Viscount.addToTaskList(event);
+                    } catch (DateTimeParseException e) {
+                        throw new ViscountDateTimeParseException("event date");
+                    }
                 }
             }
         } else if (command.equals("done")) {
@@ -199,17 +300,17 @@ public class Viscount {
                 } else {
                     List<String> taskData = Arrays.asList(line.split("\\|"));
 
-                    String taskType = taskData.get(0);
+                    TaskType taskType = TaskType.valueOf(taskData.get(0));
                     boolean taskIsDone = !taskData.get(1).equals("0");
                     String taskDescription = taskData.get(2);
 
-                    if (taskType.equals("T")) {
+                    if (taskType == TaskType.TODO) {
                         tasks.add(new Todo(taskDescription, taskIsDone));
-                    } else if (taskType.equals("D")) {
-                        String dueDate = taskData.get(3);
+                    } else if (taskType == TaskType.DEADLINE) {
+                        LocalDateTime dueDate = Viscount.parseDateTime(taskData.get(3), Viscount.TASK_DATA_DATE_TIME_FORMATTER);
                         tasks.add(new Deadline(taskDescription, taskIsDone, dueDate));
-                    } else if (taskType.equals("E")) {
-                        String eventTime = taskData.get(3);
+                    } else if (taskType == TaskType.EVENT) {
+                        LocalDateTime eventTime = Viscount.parseDateTime(taskData.get(3), Viscount.TASK_DATA_DATE_TIME_FORMATTER);
                         tasks.add(new Event(taskDescription, taskIsDone, eventTime));
                     }
                 }
@@ -229,7 +330,7 @@ public class Viscount {
             savedData.add(task.toTaskData());
         }
 
-        Files.write(path, savedData, StandardCharsets.UTF_8, StandardOpenOption.WRITE);
+        Files.write(path, savedData, StandardCharsets.UTF_8);
     }
     
     private static void initialise() throws IOException {

@@ -1,10 +1,24 @@
 event
 event /at
-event project meeting /at
-event project meeting /at 6pm
+event t4 /at
+event t4 /at 6pm
+event t4 /at 23-08-2020 1800
+event t5 /at 26-08-2020 1900
+list
+list blah
+list todo
+list deadline
+list event
+list /on
+list todo /on
+list /on 26-08-2020
+list deadline /on today
+list event /on 26-08-2020
 done
 done a
 done 0
 done 1
+list
+delete 1
 list
 bye

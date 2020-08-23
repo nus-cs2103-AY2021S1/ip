@@ -1,14 +1,26 @@
+import java.time.LocalDateTime;
+
 public class Todo extends Task {
     private static final String STRING_FORMAT = "[T][%s] %s";
     private static final String TASK_DATA_FORMAT = "%s|%d|%s";
 
     public Todo(String description, boolean isDone) {
-        super(description, isDone);
+        super(TaskType.TODO, description, isDone);
+    }
+
+    @Override
+    public boolean hasDateTime() {
+        return false;
+    }
+
+    @Override
+    public LocalDateTime getDateTime() {
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public String toTaskData() {
-        return String.format(Todo.TASK_DATA_FORMAT, "T", isDone ? 1 : 0, description);
+        return String.format(Todo.TASK_DATA_FORMAT, taskType.name(), isDone ? 1 : 0, description);
     }
 
     @Override
