@@ -9,6 +9,7 @@ import duke.exception.DukeException;
 import duke.parser.StorageParser;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 public class TaskStorage {
     private final File file;
@@ -30,20 +31,24 @@ public class TaskStorage {
         return new TaskStorage(actualFile);
     }
 
-    public TaskList loadTaskList() throws DukeException {
+    public TaskList loadTaskList(Ui ui) {
         TaskList taskList = new TaskList();
+        Scanner s;
         try {
-            Scanner s = new Scanner(this.file);
-            while (s.hasNext()) {
-                Task task = this.storageParser.convertStorageToTask(s.nextLine());
-                taskList.addTask(task);
-            }
-            return taskList;
-        } catch (DukeException exception) {
-            throw exception;
+            s = new Scanner(this.file);
         } catch (IOException ignore) {
             return taskList;
         }
+
+        while (s.hasNext()) {
+            try {
+                Task task = this.storageParser.convertStorageToTask(s.nextLine());
+                taskList.addTask(task);
+            } catch (DukeException exception) {
+                ui.showStatus(exception.getMessage());
+            }
+        }
+        return taskList;
     }
 
     private void writeToFile(String text) throws IOException {

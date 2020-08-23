@@ -91,22 +91,22 @@ public class CommandParser {
             throws DukeException {
         String[] commands = commandString.split(" ");
         switch(commands[0]) {
-            case CommandType.BYE:
-                return createExitOp(taskStorage, list);
-            case CommandType.LIST:
-                return createListOp(list);
-            case CommandType.DONE:
-                return createDoneOp(commands, list);
-            case CommandType.TODO:
-                return createTodoOp(commands, list);
-            case CommandType.DEADLINE:
-                return createDeadlineOp(commands, list);
-            case CommandType.EVENT:
-                return createEventOp(commands, list);
-            case CommandType.DELETE:
-                return createDeleteOp(commands, list);
-            default:
-                throw new DukeException("This command is not recognised unfortunately.");
+        case CommandType.BYE:
+            return createExitOp(taskStorage, list);
+        case CommandType.LIST:
+            return createListOp(list);
+        case CommandType.DONE:
+            return createDoneOp(commands, list);
+        case CommandType.TODO:
+            return createTodoOp(commands, list);
+        case CommandType.DEADLINE:
+            return createDeadlineOp(commands, list);
+        case CommandType.EVENT:
+            return createEventOp(commands, list);
+        case CommandType.DELETE:
+            return createDeleteOp(commands, list);
+        default:
+            throw new DukeException("This command is not recognised unfortunately.");
         }
     }
 }

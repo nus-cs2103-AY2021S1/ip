@@ -24,18 +24,30 @@ public class StorageParser {
         return symbol + completed + description + datetime + "\n";
     }
 
-    private Todo createTodo(String[] storageTask) {
+    private Todo createTodo(String[] storageTask, String storageTaskString) throws DukeException {
+        if (storageTask.length < 3) {
+            String msg = String.format("It appears this todo: '%s' is corrupted.", storageTaskString);
+            throw new DukeException(msg);
+        }
         boolean isCompleted = storageTask[1].equals(IS_COMPLETED);
         return new Todo(storageTask[2], isCompleted);
     }
 
-    private Deadline createDeadline(String[] storageTask) throws DukeException {
+    private Deadline createDeadline(String[] storageTask, String storageTaskString) throws DukeException {
+        if (storageTask.length < 4) {
+            String msg = String.format("It appears this deadline: '%s' is corrupted.", storageTaskString);
+            throw new DukeException(msg);
+        }
         boolean isCompleted = storageTask[1].equals(IS_COMPLETED);
         LocalDateTime dateTime = Datetime.parseDateTimeString(storageTask[3], Deadline.DATE_FORMAT_OUTPUT);
         return new Deadline(storageTask[2], isCompleted, dateTime);
     }
 
-    private Event createEvent(String[] storageTask) throws DukeException {
+    private Event createEvent(String[] storageTask, String storageTaskString) throws DukeException {
+        if (storageTask.length < 4) {
+            String msg = String.format("It appears this event: '%s' is corrupted.", storageTaskString);
+            throw new DukeException(msg);
+        }
         boolean isCompleted = storageTask[1].equals(IS_COMPLETED);
         LocalDateTime time = Datetime.parseTimeString(storageTask[3], Event.TIME_FORMAT_OUTPUT);
         return new Event(storageTask[2], isCompleted, time);
@@ -44,15 +56,15 @@ public class StorageParser {
     public Task convertStorageToTask(String storageTaskString) throws DukeException {
         String[] storageTask = storageTaskString.split(DELIMITER);
         switch(storageTask[0]) {
-            case Todo.TODO_SYMBOL:
-                return createTodo(storageTask);
-            case Deadline.DEADLINE_SYMBOL:
-                return createDeadline(storageTask);
-            case Event.EVENT_SYMBOL:
-                return createEvent(storageTask);
-            default:
-                String err = String.format("It appears this line '%s' is corrupted.", storageTaskString);
-                throw new DukeException(err);
+        case Todo.TODO_SYMBOL:
+            return createTodo(storageTask, storageTaskString);
+        case Deadline.DEADLINE_SYMBOL:
+            return createDeadline(storageTask, storageTaskString);
+        case Event.EVENT_SYMBOL:
+            return createEvent(storageTask, storageTaskString);
+        default:
+            String err = String.format("It appears this line '%s' is corrupted.", storageTaskString);
+            throw new DukeException(err);
         }
     }
 }

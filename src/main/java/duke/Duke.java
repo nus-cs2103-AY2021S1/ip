@@ -17,12 +17,7 @@ public class Duke {
         this.ui = new Ui();
         this.ui.showStartMessage();
         this.taskStorage = TaskStorage.createTaskStorage();
-        try {
-            this.taskList = this.taskStorage.loadTaskList();
-        } catch (DukeException exception) {
-            this.taskList = new TaskList();
-            this.ui.showStatus(exception.getMessage());
-        }
+        this.taskList = this.taskStorage.loadTaskList(this.ui);
         this.commandParser = new CommandParser();
     }
 
