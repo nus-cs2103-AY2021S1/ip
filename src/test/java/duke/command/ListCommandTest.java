@@ -11,12 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class ListCommandTest {
     @Test
-    public void isExit_alwaysFalse() {
+    public void isExit__alwaysFalse() {
         assertFalse(new ListCommand("list").isExit());
     }
 
     @Test
-    public void execute_nothingWrong() {
+    public void execute__nothingWrong() {
         Ui ui = new Ui();
         Storage storage = new StorageStub();
         TaskList list = storage.getList();

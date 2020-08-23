@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DoneCommandTest {
     @Test
-    public void isExit_alwaysFalse() {
+    public void isExit__alwaysFalse() {
         assertFalse(new DoneCommand("done ").isExit());
         assertFalse(new DoneCommand("done 3").isExit());
         assertFalse(new DoneCommand("done 0").isExit());
