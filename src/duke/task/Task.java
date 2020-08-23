@@ -29,6 +29,10 @@ abstract public class Task {
         return isDone + "~" + description;
     }
 
+    public boolean hasKeyword(String keyword) {
+        return this.description.toLowerCase().contains(keyword.toLowerCase());
+    }
+
     abstract public boolean hasSameDate(LocalDate theDate);
 
     @Override

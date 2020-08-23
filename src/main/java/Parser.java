@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
 public class Parser {
 
@@ -48,6 +47,12 @@ public class Parser {
             return new DeleteCommand(idx);
         } else if (input.equals("list")) {
             return new ListCommand();
+        } else if (input.startsWith("find")) {
+            if (input.length() == 4 || input.substring(5).isBlank()) {
+                throw new DukeException("\tNo keyword specified.");
+            }
+
+            return new FindCommand(input.substring(5).trim());
         } else if (input.startsWith("tasks on")) {
             if (input.length() == 8 || input.substring(9).isBlank()) {
                 throw new DukeException("\tNeed to specify the date of the tasks");
