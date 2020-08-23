@@ -270,6 +270,23 @@ public class ParserTest {
     }
 
     @Test
+    public void generate_invalidDateFormat_throwException() {
+        try {
+            Parser.generate("deadline assignment /by 2020/08/31");
+            fail();
+        } catch (Exception e) {
+            assertEquals("Invalid input date, please input as yyyy-mm-dd.", e.getMessage());
+        }
+
+        try {
+            Parser.generate("event assignment /at 2020-08-01");
+            fail();
+        } catch (Exception e) {
+            assertEquals("Invalid input datetime, please input as yyyy-MM-dd HH:mm.", e.getMessage());
+        }
+    }
+
+    @Test
     public void generate_validInput_validTask() {
         try {
             Task t = Parser.generate("todo task");
@@ -279,7 +296,7 @@ public class ParserTest {
             Task d = Parser.generate("deadline assignment /by 2020-08-31");
             Task d2 = new Deadline("assignment", "2020-08-31");
             assertEquals(d2, d);
-            
+
             Task e = Parser.generate("event meeting /at 2020-09-01 11:00");
             Task e2 = new Event("meeting", "2020-09-01 11:00");
             assertEquals(e2, e);
