@@ -1,6 +1,8 @@
-../src/main/java/TaskWriter.java
-../src/main/java/Validator.java
+../src/main/java/TaskList.java
+../src/main/java/Storage.java
+../src/main/java/Parser.java
 ../src/main/java/Command.java
+../src/main/java/Ui.java
 ../src/main/java/Event.java
 ../src/main/java/Task.java
 ../src/main/java/Duke.java

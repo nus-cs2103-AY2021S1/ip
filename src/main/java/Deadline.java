@@ -5,9 +5,19 @@ public class Deadline extends Task {
 
     protected LocalDate by;
 
+    public Deadline(String description, LocalDate by) {
+        super(description);
+        this.by = by;
+    }
+
     public Deadline(String description, LocalDate by, boolean isDone) {
         super(description, isDone);
         this.by = by;
+    }
+
+    @Override
+    public Deadline markAsDone() {
+        return new Deadline(super.description, this.by, true);
     }
 
     @Override

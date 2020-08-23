@@ -43,6 +43,7 @@ Got it. MUG has added this task:
 MUG is picky. Give him the correct date format(YYYY-MM-DD) XD
 **
 **
+Here is your tasks:
 1. [T][✘] borrow textbook
 2. [D][✘] return book (by: Dec 2 2019 [MONDAY])
 3. [E][✘] project meeting (at: Dec 1 2019[SUNDAY])
@@ -66,6 +67,7 @@ Noted. MUG has removed this task:
 MUG don't have this task to Delete @_@
 **
 **
+Here is your tasks:
 1. [T][✓] borrow textbook
 2. [D][✘] return book (by: Dec 2 2019 [MONDAY])
 **
