@@ -24,6 +24,10 @@ public class Ui {
         System.out.println(str);
     }
 
+    /**
+     * Prints the given message with the formatting of horizontal lines wrapping it.
+     * @param message the message to be wrapped
+     */
     public void output(String message) {
         print(horizontalLine + "\n\t  " + message + "\n" + horizontalLine + "\n");
     }
