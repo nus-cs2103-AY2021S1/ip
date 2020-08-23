@@ -1,12 +1,10 @@
-public class Task {
-    private static final String STRING_FORMAT = "[%s] %s";
-
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     public void setDone(boolean isDone) {
@@ -18,8 +16,5 @@ public class Task {
         //return tick or X symbols
     }
 
-    @Override
-    public String toString() {
-        return String.format(Task.STRING_FORMAT, getStatusIcon(), description);
-    }
+    public abstract String toTaskData();
 }

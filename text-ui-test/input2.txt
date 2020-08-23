@@ -1,0 +1,10 @@
+event
+event /at
+event project meeting /at
+event project meeting /at 6pm
+done
+done a
+done 0
+done 1
+list
+bye
