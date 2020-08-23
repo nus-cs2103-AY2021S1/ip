@@ -18,9 +18,6 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Operations on local file.
- */
 public class Storage {
 
     private final String filepath;
@@ -38,10 +35,6 @@ public class Storage {
         }
     }
 
-    /**
-     * Loads Tasks from the file to arraylist of Task.
-     * @return arraylist of Task.
-     */
     public ArrayList<Task> load() {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
@@ -74,13 +67,6 @@ public class Storage {
         return taskList;
     }
 
-    /**
-     * Adds Task to local file
-     *
-     * @param command user command.
-     * @param info task description.
-     * @throws MugException when MugException cause by other method.
-     */
     public void appendTask(Command command, String info) throws MugException {
         try {
             FileWriter fw = new FileWriter(this.filepath, true);
@@ -121,12 +107,6 @@ public class Storage {
         }
     }
 
-    /**
-     * Deletes Task from local file.
-     *
-     * @param taskId task index
-     * @throws MugException when MugException cause by other method.
-     */
     public void deleteTask(int taskId) throws MugException {
         String tempFile = "temp.txt";
         File oldFile = new File(this.filepath);
@@ -159,12 +139,6 @@ public class Storage {
         }
     }
 
-    /**
-     * Marks Task done in local file.
-     *
-     * @param taskId task index.
-     * @throws MugException when MugException cause by other method.
-     */
     public void doneTask(int taskId) throws MugException {
         String tempFile = "temp.txt";
         File oldFile = new File(this.filepath);

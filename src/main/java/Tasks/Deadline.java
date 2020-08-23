@@ -3,9 +3,6 @@ package Tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Create Deadline objects extends from Task class.
- */
 public class Deadline extends Task {
 
     protected LocalDate by;
@@ -20,11 +17,6 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    /**
-     * Create a new Deadline object with isDone equal true.
-     *
-     * @return new Deadline object.
-     */
     @Override
     protected Deadline markAsDone() {
         return new Deadline(super.description, this.by, true);

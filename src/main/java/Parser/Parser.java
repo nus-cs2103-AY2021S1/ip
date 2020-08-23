@@ -6,19 +6,8 @@ import MugException.MugException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-/**
- * Parses and validates the user command
- */
 public class Parser {
 
-    /**
-     * Validates user's input.
-     *
-     * @param command user command.
-     * @param splitNum length of the split string.
-     * @param isTime about time.
-     * @throws MugException if splitNum less than 2.
-     */
     public static void input(Command command, int splitNum, boolean isTime) throws MugException {
         if (splitNum < 2 ) {
             if ((isTime && command == Command.DEADLINE)
@@ -33,14 +22,6 @@ public class Parser {
         }
     }
 
-    /**
-     * Validates the info that user's input.
-     *
-     * @param command user command.
-     * @param info task description.
-     * @param isTime about time.
-     * @throws MugException if info pass in is empty.
-     */
     public static void info(Command command, String info, boolean isTime) throws MugException {
         if (info.trim().equals("")) {
             if ((isTime && command == Command.DEADLINE)
@@ -55,13 +36,6 @@ public class Parser {
         }
     }
 
-    /**
-     * Parses and validates the date.
-     *
-     * @param date date.
-     * @return parse date.
-     * @throws MugException if date pass in with wrong format.
-     */
     public static LocalDate date(String date) throws MugException {
         try {
             return LocalDate.parse(date);
@@ -70,13 +44,6 @@ public class Parser {
         }
     }
 
-    /**
-     * Parses and validates command.
-     *
-     * @param command user command.
-     * @return parse command.
-     * @throws MugException if wrong command give.
-     */
     public static Command command(String command) throws MugException {
         try {
             return Command.valueOf(command.toUpperCase());
@@ -85,14 +52,6 @@ public class Parser {
         }
     }
 
-    /**
-     * Parses and validates integer number.
-     *
-     * @param strIndex integer in string.
-     * @param splitNum length of the split string.
-     * @return Integer number.
-     * @throws MugException if splitNum smaller than 2 or strIndex is not integer in string.
-     */
     public static int index(String strIndex, int splitNum) throws MugException {
         try {
             int index = Integer.parseInt(strIndex);

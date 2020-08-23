@@ -1,8 +1,5 @@
 package Command;
 
-/**
- * All the eligible command.
- */
 public enum Command {
     BYE,
     DEADLINE,

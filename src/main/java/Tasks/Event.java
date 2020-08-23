@@ -3,9 +3,6 @@ package Tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Create Event objects extends from Task class.
- */
 public class Event extends Task {
 
     protected LocalDate at;
@@ -20,11 +17,6 @@ public class Event extends Task {
         this.at = at;
     }
 
-    /**
-     * Create a new Event object with isDone equal true.
-     *
-     * @return new Event object.
-     */
     @Override
     protected Event markAsDone() {
         return new Event(super.description, this.at, true);

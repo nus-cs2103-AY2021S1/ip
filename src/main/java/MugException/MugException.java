@@ -1,8 +1,5 @@
 package MugException;
 
-/**
- * Error that cause by Mug.
- */
 public class MugException extends Exception {
 
     public MugException(String message) {
