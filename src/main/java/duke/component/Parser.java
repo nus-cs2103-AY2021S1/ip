@@ -62,6 +62,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses an AddCommand to tell what is the task need to be added.
+     * @param cmd the given input command
+     * @return the task to be added according to the command
+     * @throws InvalidCommandException if the command does not make sense
+     */
     public static Task generate(String cmd) throws InvalidCommandException {
         if (cmd.startsWith("todo")) {
             if (cmd.length() < 5) {
