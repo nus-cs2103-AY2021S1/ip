@@ -6,9 +6,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a Task with a deadline date.
+ */
 public class Deadline extends Task {
     LocalDate deadlineTime;
 
+    /**
+     * Constructs a Deadline with name and deadline date.
+     * @param taskName name of the Deadline.
+     * @param deadlineTime date of the Deadline.
+     * @throws DukeException If name is empty OR date is in wrong format.
+     */
     public Deadline(String taskName, String deadlineTime) throws DukeException {
         super (taskName);
         // ISO_LOCAL_DATE format, no conversion needed (yyyy-mm-dd)

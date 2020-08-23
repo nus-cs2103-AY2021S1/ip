@@ -2,6 +2,9 @@ package duke.tasks;
 
 import duke.DukeException;
 
+/**
+ * Represents a basic implementation of Task.
+ */
 public class Todo extends Task {
 
     public Todo(String taskName) throws DukeException {

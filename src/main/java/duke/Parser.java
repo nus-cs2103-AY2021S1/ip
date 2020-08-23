@@ -3,13 +3,27 @@ package duke;
 import java.io.InputStream;
 import java.util.Scanner;
 
+/**
+ * Takes an InputStream and creates a {@link ParsedCommand} object for each line of the InputStream.
+ * The ParsedCommand object is to later be worked on with other classes from this project.
+ */
 public class Parser {
     private Scanner sc;
 
+    /**
+     * Constructs a Parser from the specified InputStream.
+     * @param input the input that contains specific commands for the project.
+     */
     public Parser(InputStream input) {
         sc = new Scanner(input);
     }
 
+    /**
+     * Reads the next line in the InputStream and constructs a ParsedCommand from the line.
+     * @return a ParsedCommand containing parameters of the input command
+     * @throws DukeException If input command doesn't match the required parameters,
+     *          eg. wrong date format, unrecognized command
+     */
     public ParsedCommand parseNextCommand() throws DukeException {
         String commandType = sc.next();
         ParsedCommand command = new ParsedCommand(commandType);
