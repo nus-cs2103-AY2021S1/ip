@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ToDoTest {
     @Test
@@ -47,14 +46,14 @@ public class ToDoTest {
     public void happen_today_alwaysFalse() {
         ToDo t = new ToDo("return books");
         LocalDate today = LocalDate.now();
-        assertEquals(false, t.happenOnDate(today));
-        assertEquals(false, t.happenToday());
-        assertEquals(false, t.happenBeforeDate(today));
-        assertEquals(false, t.happenBeforeToday());
-        assertEquals(false, t.happenAfterDate(today));
-        assertEquals(false, t.happenAfterToday());
-        assertEquals(false, t.happenBetween(today, today));
-        assertEquals(false, t.happenIn(8));
+        assertFalse(t.happenOnDate(today));
+        assertFalse(t.happenToday());
+        assertFalse(t.happenBeforeDate(today));
+        assertFalse(t.happenBeforeToday());
+        assertFalse(t.happenAfterDate(today));
+        assertFalse(t.happenAfterToday());
+        assertFalse(t.happenBetween(today, today));
+        assertFalse(t.happenIn(8));
     }
 
     @Test
@@ -63,14 +62,14 @@ public class ToDoTest {
         LocalDate d1 = LocalDate.parse("2019-08-10");
         LocalDate d2 = LocalDate.parse("2010-09-01");
 
-        assertEquals(false, t.happenOnDate(d1));
-        assertEquals(false, t.happenToday());
-        assertEquals(false, t.happenBeforeDate(d1));
-        assertEquals(false, t.happenBeforeToday());
-        assertEquals(false, t.happenAfterDate(d1));
-        assertEquals(false, t.happenAfterToday());
-        assertEquals(false, t.happenBetween(d1, d2));
-        assertEquals(false, t.happenIn(8));
+        assertFalse(t.happenOnDate(d1));
+        assertFalse(t.happenToday());
+        assertFalse(t.happenBeforeDate(d1));
+        assertFalse(t.happenBeforeToday());
+        assertFalse(t.happenAfterDate(d1));
+        assertFalse(t.happenAfterToday());
+        assertFalse(t.happenBetween(d1, d2));
+        assertFalse(t.happenIn(8));
     }
 
     @Test
@@ -79,13 +78,13 @@ public class ToDoTest {
         LocalDate d1 = LocalDate.parse("2029-08-10");
         LocalDate d2 = LocalDate.parse("2030-09-01");
 
-        assertEquals(false, t.happenOnDate(d1));
-        assertEquals(false, t.happenToday());
-        assertEquals(false, t.happenBeforeDate(d1));
-        assertEquals(false, t.happenBeforeToday());
-        assertEquals(false, t.happenAfterDate(d1));
-        assertEquals(false, t.happenAfterToday());
-        assertEquals(false, t.happenBetween(d1, d2));
-        assertEquals(false, t.happenIn(8));
+        assertFalse(t.happenOnDate(d1));
+        assertFalse(t.happenToday());
+        assertFalse(t.happenBeforeDate(d1));
+        assertFalse(t.happenBeforeToday());
+        assertFalse(t.happenAfterDate(d1));
+        assertFalse(t.happenAfterToday());
+        assertFalse(t.happenBetween(d1, d2));
+        assertFalse(t.happenIn(8));
     }
 }
