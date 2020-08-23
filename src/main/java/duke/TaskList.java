@@ -48,4 +48,10 @@ public class TaskList {
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
+
+    public ArrayList<Task> findTasks(String find) {
+        ArrayList<Task> foundTasks = new ArrayList<>(this.tasks);
+        foundTasks.removeIf(task -> !task.getTaskDescription().contains(find));
+        return foundTasks;
+    }
 }

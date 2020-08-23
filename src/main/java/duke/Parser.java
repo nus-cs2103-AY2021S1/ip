@@ -46,6 +46,10 @@ public class Parser {
                 this.input.nextLine();
                 return "OOPS!!! Task number must be a number.";
             }
+        } else if (command.equals("find")) {
+            String find = input.nextLine().substring(1);
+            TaskList foundTasks = new TaskList(taskList.findTasks(find));
+            return "Here are the matching tasks in your list:\n" + foundTasks.listTasks();
         } else {
             try {
                 TaskType.TypeOfTask typeOfTask;
