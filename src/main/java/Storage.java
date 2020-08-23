@@ -2,7 +2,7 @@ import java.io.*;
 
 public class Storage {
 
-    public String path;
+    private String path;
 
     public Storage(String path) {
         this.path = path;
@@ -11,7 +11,7 @@ public class Storage {
     public void saveTasks() throws IOException {
         BufferedWriter taskWriter = new BufferedWriter(new FileWriter(path));
         String tasks = "";
-        for (Task task: TaskList.taskList) {
+        for (Task task : TaskList.taskList) {
             tasks += task.toSaveString() + "\n";
         }
         taskWriter.write(tasks);
@@ -25,18 +25,18 @@ public class Storage {
             String[] keywords = longCommand.split(" \\|\\| ");
             Task cur = null;
             switch (keywords[1]) {
-                case "todo":
-                    cur = new Todo(keywords[2]);
-                    break;
-                case "deadline":
-                    cur = new Deadline(keywords[2], keywords[3]);
-                    break;
-                case "event":
-                    cur = new Event(keywords[2], keywords[3]);
-                    break;
-                default:
-                    System.out.println("error");
-                    break;
+            case "todo":
+                cur = new Todo(keywords[2]);
+                break;
+            case "deadline":
+                cur = new Deadline(keywords[2], keywords[3]);
+                break;
+            case "event":
+                cur = new Event(keywords[2], keywords[3]);
+                break;
+            default:
+                System.out.println("error");
+                break;
             }
 
             if (keywords[0].equals("1")) {

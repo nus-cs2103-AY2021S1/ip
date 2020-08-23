@@ -1,4 +1,8 @@
-import exceptions.*;
+import exceptions.DukeMissingTimeException;
+import exceptions.DukeException;
+import exceptions.DukeEmptyMessageException;
+import exceptions.DukeInvalidMessageException;
+import exceptions.DukeUnknownCommandException;
 
 import java.io.*;
 import java.time.format.DateTimeParseException;
@@ -8,7 +12,7 @@ public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskList taskList;
-    public final static String FILEPATH = System.getProperty("user.dir") + (System.getProperty("user.dir").endsWith("text-ui-test")
+    private final static String FILEPATH = System.getProperty("user.dir") + (System.getProperty("user.dir").endsWith("text-ui-test")
             ? "/saved-tasks.txt"
             : "/text-ui-test/saved-tasks.txt");
 
@@ -23,7 +27,6 @@ public class Duke {
     }
 
     public void run() throws IOException {
-
         storage.handleLoad();
         ui.greeting();
         ui.showList();
