@@ -22,8 +22,26 @@ What can I do for you?
 
    ----------------------------------------------------------
     Got it. I've added this task:
-      [D][✘] return book (by: Sunday)
+      [D][✘] return book (by: Aug 23 2020)
     Now you have 2 tasks in the list.
+   ----------------------------------------------------------
+
+   ----------------------------------------------------------
+    Got it. I've added this task:
+      [D][✘] return book (by: Aug 23 2020, 10.15 AM)
+    Now you have 3 tasks in the list.
+   ----------------------------------------------------------
+
+   ----------------------------------------------------------
+    Got it. I've added this task:
+      [D][✘] return book (by: 2020-08-23 10:00)
+    Now you have 4 tasks in the list.
+   ----------------------------------------------------------
+
+   ----------------------------------------------------------
+    Got it. I've added this task:
+      [D][✘] return book (by: 10.20 AM)
+    Now you have 5 tasks in the list.
    ----------------------------------------------------------
 
    ----------------------------------------------------------
@@ -51,8 +69,8 @@ What can I do for you?
 
    ----------------------------------------------------------
     Got it. I've added this task:
-      [E][✘] project meeting (at: Mon 2-4pm)
-    Now you have 3 tasks in the list.
+      [E][✘] project meeting (at: Dec 1 2019)
+    Now you have 6 tasks in the list.
    ----------------------------------------------------------
 
    ----------------------------------------------------------
@@ -77,19 +95,22 @@ What can I do for you?
    ----------------------------------------------------------
     Here are the tasks in your list:
      1.[T][✓] test case
-     2.[D][✘] return book (by: Sunday)
-     3.[E][✘] project meeting (at: Mon 2-4pm)
+     2.[D][✘] return book (by: Aug 23 2020)
+     3.[D][✘] return book (by: Aug 23 2020, 10.15 AM)
+     4.[D][✘] return book (by: 2020-08-23 10:00)
+     5.[D][✘] return book (by: 10.20 AM)
+     6.[E][✘] project meeting (at: Dec 1 2019)
    ----------------------------------------------------------
 
    ----------------------------------------------------------
     Noted. I've removed this task:
       [T][✓] test case
-    Now you have 2 tasks in the list.
+    Now you have 5 tasks in the list.
    ----------------------------------------------------------
 
    ----------------------------------------------------------
     ☹OOPS!!! Task number does not exist in the list.
-    Your current list only has 2 tasks!
+    Your current list only has 5 tasks!
    ----------------------------------------------------------
 
    ----------------------------------------------------------
