@@ -1,25 +1,50 @@
-public enum Command {
-    LIST("list"),
-    DEADLINE("deadline"),
-    TODO("todo"),
-    EVENT("event"),
-    DONE("done"),
-    BYE("bye"),
-    DELETE("delete"),
-    LIST_DATE("date");
+public abstract class Command {
+  private final CommandType commandType;
+  private final String commandString;
 
-    private String name;
+  public Command(CommandType commandType, String commandString) {
+    this.commandType = commandType;
+    this.commandString = commandString;
+  }
 
-    Command(String name) {
-        this.name = name;
+  public static Command create(CommandType commandType, String commandString) throws DukeException {
+    switch (commandType) {
+      case LIST_DATE:
+        return new ListDateCommand(commandString);
+      case LIST:
+        return new ListCommand(commandString);
+      case DONE:
+        return new DoneCommand(commandString);
+      case TODO:
+        return new ToDoCommand(commandString);
+      case DEADLINE:
+        return new DeadlineCommand(commandString);
+      case EVENT:
+        return new EventCommand(commandString);
+      case DELETE:
+        return new DeleteCommand(commandString);
+      case BYE:
+        return new ByeCommand(commandString);
+      default:
+        throw Ui.commandInvalidException();
     }
+  }
 
-    public boolean is(String cmd) {
-        return cmd.startsWith(this.name);
-    }
+  public String getTaskDescription() throws DukeException {
+    return Parser.getTaskDescription(this.commandType, this.commandString);
+  }
 
-    @Override
-    public String toString() {
-        return this.name;
-    }
+  public String getCommandString() {
+    return commandString;
+  }
+
+  public CommandType getCommandType() {
+    return this.commandType;
+  }
+
+  public boolean isExit() {
+    return false;
+  }
+
+  public abstract void execute(TaskList tasks) throws DukeException;
 }
