@@ -36,9 +36,9 @@ public class Deadline extends Task {
     public String toCommand() {
         String rawDateTime = dateTime.toString();
         String pattern = "(\\d\\d\\d\\d-\\d\\d-\\d\\d)T(\\d\\d):(\\d\\d)";
-        String date = rawDateTime.replaceAll(pattern, "$4");
-        String hours = rawDateTime.replaceAll(pattern, "$5");
-        String minutes = rawDateTime.replaceAll(pattern, "$6");
+        String date = rawDateTime.replaceAll(pattern, "$1");
+        String hours = rawDateTime.replaceAll(pattern, "$2");
+        String minutes = rawDateTime.replaceAll(pattern, "$3");
         String newDateTime = date + " " + hours + minutes;
         return done
                 ? "done deadline " + text + " /by " + newDateTime

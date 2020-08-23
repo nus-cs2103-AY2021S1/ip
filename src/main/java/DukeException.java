@@ -48,4 +48,12 @@ public class DukeException extends Exception {
     public static DukeException wrongDueInFormat() {
         return new DukeException("Error! 'due in' command is in the wrong format.");
     }
+
+    public static DukeException loadingError(String path) {
+        return new DukeException("Error! No file found at path: " + path);
+    }
+
+    public static DukeException storageIOException(String message) {
+        return new DukeException("Error! " + message);
+    }
 }

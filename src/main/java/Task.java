@@ -1,6 +1,5 @@
 import java.time.LocalDateTime;
 
-
 public abstract class Task {
     protected final String text;
     protected boolean done = false;

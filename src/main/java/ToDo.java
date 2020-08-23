@@ -13,7 +13,6 @@ public class ToDo extends Task {
                 : "[T][✗] " + text;
     }
 
-
     public String toCommand() {
         return done
                 ? "done todo " + text
