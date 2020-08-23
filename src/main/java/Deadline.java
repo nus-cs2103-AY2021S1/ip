@@ -1,14 +1,20 @@
-public class Deadline extends Task {
-    protected String by;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
-    public Deadline(String description, String by) {
+public class Deadline extends Task {
+
+    public Deadline(String description, String by) throws DukeException {
         super(description);
-        this.by = by;
+        try {
+            this.date = LocalDate.parse(by);
+        } catch (DateTimeParseException ex) {
+            throw new DukeException("Please enter the date in this format: yyyy-mm-dd");
+        }
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + printDate() + ")";
     }
 
 }
