@@ -78,6 +78,11 @@ public class Event extends Task {
                 atTime.format(DateTimeFormatter.ofPattern("hh:mm a   MMM d yyyy")) + ")";
     }
 
+    /**
+     * Checks whether the given object equals this Event task.
+     * @param obj the given object to compare
+     * @return true if the object is an Event and both the description and atTime equals
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
