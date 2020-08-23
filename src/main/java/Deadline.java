@@ -2,11 +2,8 @@ package main.java;
 
 class Deadline extends Task {
 
-    final String dateTime;
-
-    Deadline(String description, String datetime) {
-        super(description);
-        this.dateTime = datetime;
+    Deadline(String description, String dateTimeString) {
+        super(description, dateTimeString);
     }
 
     @Override
