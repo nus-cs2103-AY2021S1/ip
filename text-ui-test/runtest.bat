@@ -1,6 +1,6 @@
 @ECHO OFF
 
-SET MY_PATH=C:\Users\clara\github\ip
+SET MY_PATH=C:\Users\clara\U\github\ip
 
 REM create bin directory if it doesn't exist
 if not exist "%MY_PATH%\bin" mkdir "%MY_PATH%\bin"
