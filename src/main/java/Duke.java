@@ -1,12 +1,20 @@
-import javax.management.InvalidAttributeValueException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+
+import javax.xml.crypto.Data;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
+    public static SimpleDateFormat readformatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    public static SimpleDateFormat writeformatter = new SimpleDateFormat ("MMM dd yyyy hh:mm a");
     public static ArrayList<Task> tasks = new ArrayList<Task>(100);
     public static String fileName = "data.txt";
     public static void main(String[] args) {
@@ -19,9 +27,9 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?");
         Scanner sc = new Scanner(System.in);
+
         boolean hasNext = true;
         while(hasNext) {
-            System.out.println("-----------------");
             try {
                 hasNext = processLine(sc);
             }  catch(DukeException ex) {
@@ -35,6 +43,7 @@ public class Duke {
     public static boolean processLine(Scanner sc) throws DukeException {
         String str;
         str = sc.nextLine();
+        System.out.println("-----------------");
         ArrayList<String> tokens = new ArrayList<String>(Arrays.asList(str.split(" ")));
         if (tokens.size()==0||tokens.get(0).equals("")){
             throw new EmptyCommandException();
@@ -128,8 +137,15 @@ public class Duke {
             if (ind == tokens.size()-1) {
                 throw new MissingArgumentException("Deadline needs a deadline time!");
             }
+            Date date;
+            try{
+                date = readformatter.parse(stringCombiner(tokens,ind+1, tokens.size()));
+            } catch(Exception ex) {
+                throw new InvalidCommandException("Provide a proper date and time!");
+            }
+
             return new Deadline(stringCombiner(tokens, 1, ind),
-                    stringCombiner(tokens, ind+1, tokens.size()));
+                    date);
         } else {
             int ind = 0;
             boolean found= false;
@@ -148,8 +164,14 @@ public class Duke {
             if (ind == tokens.size()-1) {
                 throw new MissingArgumentException("Event needs a event time!");
             }
+            Date date;
+            try{
+                date = readformatter.parse(stringCombiner(tokens,ind+1, tokens.size()));
+            } catch(Exception ex) {
+                throw new InvalidCommandException("Provide a proper date and time!");
+            }
             return new Event(stringCombiner(tokens, 1, ind),
-                    stringCombiner(tokens, ind+1, tokens.size()));
+                    date);
         }
     }
 
@@ -194,9 +216,9 @@ public class Duke {
                     if (type.equals("T")) {
                         t = new ToDo(desc);
                     } else if (type.equals("E")) {
-                        t = new Event(desc, sc.nextLine());
+                        t = new Event(desc, writeformatter.parse(sc.nextLine()));
                     } else {
-                        t = new Deadline(desc, sc.nextLine());
+                        t = new Deadline(desc, writeformatter.parse(sc.nextLine()));
                     }
                     if (done.equals("T")) {
                         t.completeTask();
@@ -204,7 +226,7 @@ public class Duke {
                     sc.nextLine();
                     tasks.add(t);
                 }
-            } catch (FileNotFoundException e) {
+            } catch (FileNotFoundException | ParseException e) {
                 System.out.println(e);
             }
         }
