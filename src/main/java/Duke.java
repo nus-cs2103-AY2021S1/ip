@@ -14,12 +14,12 @@ public class Duke {
     private final Ui ui;
 
     public static void main(String[] args) throws IOException {
-        new Duke(FILEPATH).run();
+        new Duke().run();
     }
 
-    public Duke(String filePath) throws IOException {
+    public Duke() throws IOException {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(FILEPATH);
         parser = new Parser();
         tasks = new TaskList();
         storage.load();
