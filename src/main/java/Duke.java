@@ -120,6 +120,25 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    void loadFile() {
+        try {
+            Path filePath = Paths.get(DATA_PATHNAME);
+
+            if (Files.exists(filePath)) {
+                loadTasks();
+            } else {
+                Path directoryPath = Paths.get("data/");
+                if (!Files.exists(directoryPath)) {
+                    Files.createDirectory(directoryPath);
+                }
+                Files.createFile(filePath);
+            }
+
+        } catch (IOException exception) {
+            System.out.println(exception);
+        }
+    }
+
     void loadTasks() {
         try {
             File localTasks = new File(DATA_PATHNAME);
@@ -163,7 +182,7 @@ public class Duke {
 
     void initializeChatbot() {
         greet();
-        loadTasks();
+        loadFile();
         Scanner sc = new Scanner(System.in);
         boolean hasEnded = false;
         while (!hasEnded) {
