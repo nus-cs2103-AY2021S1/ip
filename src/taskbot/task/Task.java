@@ -1,14 +1,15 @@
 package taskbot.task;
 
 /**
- * This class encapsulates the functionality of a task
+ * This class encapsulates the functionality of a task.
  */
 abstract public class Task {
     private String task;
     private boolean isDone;
+
     /**
-     * Constructor for the class
-     * @param task The task to be completed
+     * Creates an incomplete task.
+     * @param task Description of task.
      */
     public Task(String task) {
         this.task = task;
@@ -16,27 +17,45 @@ abstract public class Task {
     }
 
     /**
-     * Marks this task as complete
+     * Creates a Task given its completeness.
+     * @param task Description of task.
+     * @param isDone Whether the task is complete.
+     */
+    public Task(String task, boolean isDone) {
+        this.task = task;
+        this.isDone = isDone;
+    }
+
+    /**
+     * Marks this task as complete.
      */
     public void completeTask() {
         this.isDone = true;
     }
 
     /**
-     * Getter for the task
-     * @return The task to be completed
+     * Gets the task description.
+     * @return The task to be completed.
      */
     public String getTask() {
         return task;
     }
 
     /**
-     * Getter to see if the task is complete
-     * @return Whether the task is complete
+     * Gets the icon signifying completeness.
+     * @return The icon representing a complete task or not.
      */
     public String getStatusIcon() {
         //return tick or X symbols
         return (isDone ? "✓" : "✗");
+    }
+
+    /**
+     * Gets whether the task is complete.
+     * @return True if complete, false otherwise.
+     */
+    public boolean getIsDone() {
+        return isDone;
     }
 
     @Override
