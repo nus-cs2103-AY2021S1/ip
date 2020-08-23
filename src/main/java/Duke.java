@@ -159,15 +159,29 @@ public class Duke {
             String nextLine = userInput.nextLine();
             String[] commandParts = nextLine.split("\\s", 2);
             
-            if (!commandParts[0].contains("bye") && !commandParts[0].contains("list")) {
+            if (!commandParts[0].contains("bye") 
+                    && !commandParts[0].contains("list") 
+                    && !commandParts[0].contains("done")) {
 
                 Task newTask = new Task(nextLine);
                 listOfTasks.add(newTask);
-                
-                System.out.println(horizontalLine 
+
+                System.out.println(horizontalLine
                         + "\r\n"
                         + "Task added: "
-                        + nextLine 
+                        + nextLine
+                        + "\r\n"
+                        + horizontalLine);
+                
+            } else if (commandParts[0].contains("done")) {
+
+                int taskNumber = Integer.parseInt(commandParts[1].trim()) - 1;
+                Task doneTask = listOfTasks.get(taskNumber);
+                doneTask.markAsDone();
+                System.out.println(horizontalLine
+                        + "\r\n" 
+                        + "Nice! One thing done: \r\n"
+                        + doneTask.toString()
                         + "\r\n"
                         + horizontalLine);
                 
@@ -189,12 +203,14 @@ public class Duke {
                         + "\r\n"
                         + horizontalLine);
                 
-            } else {
+            } else if (commandParts[0].contains("bye")){
                  System.out.println(horizontalLine
                          + "\r\n"
                          + "Bye! See ya soon!"
                          + "\r\n"
                          + horizontalLine);
+            } else {
+                System.out.println("Command not recognised");
             }
         }
     }
