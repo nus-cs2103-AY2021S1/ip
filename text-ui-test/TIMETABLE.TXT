@@ -1,2 +1,3 @@
-T | 1 | buy book
-D | 0 | buy book | Aug 6th
+T | 0 | buy book
+E | 0 | submission | 12 Dec 1999
+D | 0 | read book | 12 Dec 1999
