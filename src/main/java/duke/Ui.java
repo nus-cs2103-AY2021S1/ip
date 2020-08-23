@@ -87,4 +87,12 @@ public class Ui {
     public void showLine() {
         System.out.println("\n ******************************************************************** \n");
     }
+
+    public void showMatchingTask(ArrayList<Task> tasks) {
+        System.out.println(" Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            int count = i + 1;
+            System.out.println(String.format("   %d. ", count) + tasks.get(i).toString());
+        }
+    }
 }
