@@ -31,6 +31,7 @@ public class Parser {
         String command = commandInputs[0].trim().toLowerCase();
 
         String commandDetails;
+
         switch (command) {
             case "list":
                 return new ListCommand();
