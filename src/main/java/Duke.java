@@ -84,12 +84,11 @@ public class Duke {
 
 
                             case "deadline":
-                                String [] arr = line.split("/",2);
-                                String by = arr[1].substring(arr[1].indexOf("by") + 3);
-                                String deadlineString = arr[0].substring(9);
-                                LocalDate localDate = TimeFormatter.localDate(by);
-
-                                Deadline deadline = new Deadline(deadlineString, localDate);
+                                String [] deadlineArr = line.split("/",2);
+                                String by = deadlineArr[1].substring(deadlineArr[1].indexOf("by") + 3);
+                                String deadlineString = deadlineArr[0].substring(9);
+                                LocalDate localDeadlineDate = TimeFormatter.localDate(by);
+                                Deadline deadline = new Deadline(deadlineString, localDeadlineDate);
                                 ls.add(deadline);
                                 System.out.println("Got it. I've added this task:");
                                 System.out.println(deadline.toString());
@@ -99,10 +98,11 @@ public class Duke {
                                 break;
 
                             case "event":
-                                String at = line.split("/",2)[1];
-                                String at2 = at.substring(at.indexOf("at") + 3);
-                                String eventString = line.split("/")[0].substring(6);
-                                Event event = new Event(eventString, at2);
+                                String[] eventArr =line.split("/",2);
+                                String at = eventArr[1].substring(eventArr[1].indexOf("at") + 3);
+                                String eventString = eventArr[0].substring(6);
+                                LocalDate localEventDate = TimeFormatter.localDate(at);
+                                Event event = new Event(eventString, localEventDate);
                                 ls.add(event);
                                 System.out.println("Got it. I've added this task:");
                                 System.out.println(event.toString());

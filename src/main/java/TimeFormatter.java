@@ -9,7 +9,7 @@ public class TimeFormatter {
     }
 
     public static String prettyDate(LocalDate localDate) {
-        return localDate.getMonth().name().substring(0, 3) + " " + localDate.getDayOfMonth()
-                + " " + localDate.getYear();
+        return localDate.getDayOfWeek() + "," +localDate.getMonth().name().substring(0, 3) +
+                " " + localDate.getDayOfMonth() + " " + localDate.getYear();
     }
 }
