@@ -52,7 +52,8 @@ public class Ui {
                 "\n    - done <num>" +
                 "\n    - todo <task>" +
                 "\n    - deadline <task> /by <yyyy-mm-dd>" +
-                "\n    - event <task> /at <yyyy-mm-dd>\n");
+                "\n    - event <task> /at <yyyy-mm-dd>" +
+                "\n    - find <keyword>\n");
 
 
     }

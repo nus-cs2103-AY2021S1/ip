@@ -7,7 +7,14 @@ REM delete output from previous run
 del ACTUAL.TXT
 
 REM compile the code into the bin folder
-javac -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\duke\*.java
+REM -cp class path, specifies where to find the user class files
+REM -d specify where to place generated class files
+REM javac -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\duke\*.java
+javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\*.java
+
+
+pause
+
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
