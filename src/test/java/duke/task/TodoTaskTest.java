@@ -1,10 +1,13 @@
 package duke.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class TodoTaskTest {
+
     @Test
     public void getData_todoTaskNotDone_correctOutput() {
         TodoTask task = new TodoTask("test");
@@ -35,5 +38,15 @@ public class TodoTaskTest {
         TodoTask task = new TodoTask("test").markAsDone();
         String str = task.toString();
         assertEquals("[T][\u2713] test", str);
+    }
+
+    @Test
+    public void contains_correctKeyword_true() {
+        assertTrue(new TodoTask("test").contains("test"));
+    }
+
+    @Test
+    public void contains_wrongKeyword_false() {
+        assertFalse(new TodoTask("test").contains("wrong"));
     }
 }

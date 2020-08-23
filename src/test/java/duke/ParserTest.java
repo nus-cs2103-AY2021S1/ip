@@ -1,13 +1,26 @@
 package duke;
 
-import duke.command.*;
-import duke.exception.DukeException;
-import duke.task.Task;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.SaveCommand;
+import duke.command.TodoCommand;
+import duke.exception.DukeException;
+import duke.task.Task;
 
 public class ParserTest {
+
     @Test
     public void parseInput_byeInput_correctCmd() {
         try {
@@ -39,7 +52,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseInput_doneInput_correctCmd() {
+    public void parseInput_doneInputCorrect_correctCmd() {
         try {
             Command c = Parser.parseInput("done 1");
             assertTrue(c instanceof DoneCommand);
@@ -49,12 +62,58 @@ public class ParserTest {
     }
 
     @Test
-    public void parseInput_deleteInput_correctCmd() {
+    public void parseInput_doneInputWrong_throwDukeException() {
+        try {
+            Command c = Parser.parseInput("done abc");
+            fail();
+        } catch (DukeException e) {
+            assertEquals(
+                    "Please check your inputs again, ensure words are spaced and numbers(if any) are correct.",
+                    e.getMessage());
+        }
+    }
+
+    @Test
+    public void parseInput_deleteInputCorrect_correctCmd() {
         try {
             Command c = Parser.parseInput("delete 1");
             assertTrue(c instanceof DeleteCommand);
         } catch (DukeException e) {
             fail();
+        }
+    }
+
+    @Test
+    public void parseInput_deleteInputWrong_throwDukeException() {
+        try {
+            Command c = Parser.parseInput("delete abc");
+            fail();
+        } catch (DukeException e) {
+            assertEquals(
+                    "Please check your inputs again, ensure words are spaced and numbers(if any) are correct.",
+                    e.getMessage());
+        }
+    }
+
+    @Test
+    public void parseInput_findInputCorrect_correctCmd() {
+        try {
+            Command c = Parser.parseInput("find a");
+            assertTrue(c instanceof FindCommand);
+        } catch (DukeException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parseInput_findInputWrong_throwDukeException() {
+        try {
+            Command c = Parser.parseInput("find ");
+            fail();
+        } catch (DukeException e) {
+            assertEquals(
+                    "Please check your inputs again, ensure words are spaced and numbers(if any) are correct.",
+                    e.getMessage());
         }
     }
 
@@ -127,7 +186,6 @@ public class ParserTest {
             assertEquals("/at keyword must be in input for all event commands!", e.getMessage());
         }
     }
-
 
     @Test
     public void parseInput_inputWithIllegalChar_throwDukeException() {

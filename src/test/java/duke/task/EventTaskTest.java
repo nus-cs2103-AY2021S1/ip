@@ -4,6 +4,8 @@ import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class EventTaskTest {
@@ -62,6 +64,24 @@ public class EventTaskTest {
             EventTask task = new EventTask("test", "2020-08-22").markAsDone();
             String str = task.toString();
             assertEquals("[E][\u2713] test (at: Aug 22 2020)", str);
+        } catch (DukeException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void contains_correctKeyword_true() {
+        try {
+            assertTrue(new EventTask("test", "2020-08-22").contains("test"));
+        } catch (DukeException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void contains_wrongKeyword_false() {
+        try {
+            assertFalse(new EventTask("test", "2020-08-22").contains("wrong"));
         } catch (DukeException e) {
             fail();
         }
