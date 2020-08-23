@@ -8,6 +8,9 @@ import Storage.Storage;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Operation for the list of Task.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
     private Storage store;
@@ -21,6 +24,11 @@ public class TaskList {
         return this.taskList.size();
     }
 
+    /**
+     * Reads list of Task.
+     *
+     * @return list of Task in String.
+     */
     public String readList() {
         if(this.taskListLen() == 0) {
             return "MUG don't have any of your task \"_\"";
@@ -40,6 +48,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds Task.
+     *
+     * @param command user command.
+     * @param info task descriptions.
+     * @return message when task add.
+     */
     public String addTask(Command command, String info) {
         try {
             Task task;
@@ -81,6 +96,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes Task.
+     *
+     * @param taskId task index.
+     * @return message when task delete.
+     */
     public String deleteTask(int taskId) {
         if ( taskId > this.taskListLen()) {
             return "MUG don't have this task to Delete @_@";
@@ -102,6 +123,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Updates Task done.
+     *
+     * @param taskId task index
+     * @return message when task update done.
+     */
     public String taskDone(int taskId) {
         if (taskId > this.taskListLen()) {
             return "MUG don't have this task to mark as Done :>";

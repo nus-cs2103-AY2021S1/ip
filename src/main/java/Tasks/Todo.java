@@ -1,5 +1,8 @@
 package Tasks;
 
+/**
+ * Create Todo objects extends from Task class.
+ */
 public class Todo extends Task {
 
     public Todo(String description) {
@@ -10,6 +13,10 @@ public class Todo extends Task {
         super(description, isDone);
     }
 
+    /**
+     * Create a new Todo object with isDone equal true.
+     * @return new Todo object.
+     */
     @Override
     protected Todo markAsDone() {
         return new Todo(super.description, true);

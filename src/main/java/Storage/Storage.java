@@ -39,7 +39,7 @@ public class Storage {
     }
 
     /**
-     * Loads the tasks from the file to arraylist of task.
+     * Loads Tasks from the file to arraylist of task.
      * @return arraylist of task.
      */
     public ArrayList<Task> load() {
@@ -122,7 +122,7 @@ public class Storage {
     }
 
     /**
-     * Deletes tasks from local file.
+     * Deletes Task from local file.
      *
      * @param taskId task index
      * @throws DukeException when DukeException cause by other method.
@@ -160,7 +160,7 @@ public class Storage {
     }
 
     /**
-     * Marks the task done in local file.
+     * Marks Task done in local file.
      *
      * @param taskId task index.
      * @throws DukeException when DukeException cause by other method.
