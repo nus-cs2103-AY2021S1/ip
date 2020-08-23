@@ -122,7 +122,10 @@ public class Duke {
                         } else if (inputString.contains("deadline /by ")) {
                             throw new DukeException("You aren't setting anything for your deadline?!");
                         } else {
-                            task = new Deadline(inputString.substring(9, byIndex), inputString.substring(byIndex + 4));
+                            if (Deadline.checkDateFormat(inputString.substring(byIndex + 5))) {
+                                task = new Deadline(inputString.substring(9, byIndex),
+                                        inputString.substring(byIndex + 5));
+                            }
                         }
                     } catch (DukeException e) {
                         System.out.println(divider + e.getMessage() + "\n" + divider);
