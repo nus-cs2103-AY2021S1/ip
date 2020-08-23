@@ -323,7 +323,6 @@ public class ParserTest {
         assertEquals(new DeleteCommand("delete -3"), Parser.parse("delete -3"));
         assertEquals(new DeleteCommand("delete "), Parser.parse("delete "));
         assertEquals(new DeleteCommand("delete //"), Parser.parse("delete //"));
-        assertEquals(new DeleteCommand("delete"), Parser.parse("delete"));
     }
 
     @Test
@@ -333,7 +332,6 @@ public class ParserTest {
         assertEquals(new DoneCommand("done -3"), Parser.parse("done -3"));
         assertEquals(new DoneCommand("done "), Parser.parse("done "));
         assertEquals(new DoneCommand("done //"), Parser.parse("done //"));
-        assertEquals(new DoneCommand("done"), Parser.parse("done"));
     }
 
     @Test
