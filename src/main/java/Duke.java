@@ -24,48 +24,7 @@ public class Duke {
         }
     }
   
-    public static void loadData(List<Task> list) { 
-        try {
-            File file = new File("data/duke.txt");
-            
-            if (file.exists()) {
-                Scanner sc = new Scanner(file);
-    
-                while (sc.hasNext()) {
-                    String[] data = sc.nextLine().split("/");
-                    String taskType = data[0];
-                    boolean status = data[1].equals("1");
-                    String description = data[2];
-                    String additional;
-                    
-                    switch (taskType) {
-                        case "t":
-                            list.add(new ToDo(description, status));
-                            break;
-                        case "d":
-                            additional = data[3];
-                            list.add(new Deadline(description, additional, status));
-                            break;
-                        case "e":
-                            additional = data[3];
-                            list.add(new Event(description, additional, status));
-                            break;
-                    }
-                }
-            } else {
-                File dir = new File("data");
-                dir.mkdir();
-                file.createNewFile();
-            }
-      
-        } catch (FileNotFoundException e) {
-            System.out.println("File not exists" + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("Something went wrong " + e.getMessage());
-        }
-    }
-  
-    public static String process(String input, List<Task> list) throws DukeException {
+    public static String process(String input, List<Task> list, Storage storage) throws DukeException {
         String output;
         String[] command = input.split(" ", 2);
 
@@ -111,7 +70,7 @@ public class Duke {
             }
 
             targetTask.setDone();
-            updateData(list);
+            storage.update(list);
             output = "\tNice! I've marked this task as done: \n\t\t" + targetTask;
         } else if (command[0].equals("todo")) {
             if (command.length < 2 || command[1].isBlank()) {
@@ -121,7 +80,7 @@ public class Duke {
             ToDo newToDo = new ToDo(command[1]);
 
             list.add(newToDo);
-            updateData(list);
+            storage.update(list);
             output = "\tGot it. I've added this task: \n\t\t" + newToDo + "\n\tNow you have " + list.size() + " tasks in the list.";
         } else if (command[0].equals("deadline")) {
             if (command.length < 2) {
@@ -152,7 +111,7 @@ public class Duke {
             Deadline newDeadline = new Deadline(description, by);
 
             list.add(newDeadline);
-            updateData(list);
+            storage.update(list);
             output = "\tGot it. I've added this task: \n\t\t" + newDeadline + "\n\tNow you have " + list.size() + " tasks in the list.";
         } else if (command[0].equals("event")) {
             if (command.length < 2) {
@@ -183,7 +142,7 @@ public class Duke {
             Event newEvent = new Event(description, at);
 
             list.add(newEvent);
-            updateData(list);
+            storage.update(list);
             output = "\tGot it. I've added this task: \n\t\t" + newEvent + "\n\tNow you have " + list.size() + " tasks in the list.";
         } else if (command[0].equals("delete")) {
             if (command.length < 2) {
@@ -208,7 +167,7 @@ public class Duke {
 
             int index = inputNumber - 1;
             Task targetTask = list.remove(index);
-            updateData(list);
+            storage.update(list);
             output = "\tNoted. I've removed this task: \n\t\t" + targetTask + "\n\tNow you have " + list.size() + " tasks in the list.";
         } else {
             throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -219,18 +178,19 @@ public class Duke {
 
     public static void main(String[] args) {
         Ui ui = new Ui();
+        Storage storage = new Storage("data/storage/duke.txt");
         String input = "";
-        List<Task> list = new ArrayList<>();
+        List<Task> list = storage.load();
         String output;
 
         ui.showWelcome();
-        loadData(list);
+        
 
         while (!input.equals("bye")) {
             input = ui.readInput();
 
             try {
-                output = process(input, list);
+                output = process(input, list, storage);
             } catch (DukeException e) {
                 output = e.getMessage();
             }
