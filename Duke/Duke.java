@@ -1,14 +1,17 @@
 package Duke;
 
+import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.*;
 
 /**
- * The Best2013TBot program that implements a chatbot.
+ * The Best2013TBot program that implements a chatbot. (Week 3)
  *
  * @author Zeng Yu Ting
- * @version 1.0
+ * @version 2.0
  * @since 2020-15-08
  */
 public class Duke {
@@ -16,6 +19,10 @@ public class Duke {
     private static String indent = "   ";
     private ArrayList<Task> taskList = new ArrayList<Task>();
     private static String line = indent + "----------------------------";
+    private static String storageDirectory = System.getProperty("user.dir") + "/data";
+    private static String textName = "/duke.txt";
+
+
 
     /**
      * This method greets the user.
@@ -38,6 +45,70 @@ public class Duke {
         System.out.println(indent + "  " + taskList.get(taskList.size() - 1));
         displayNoOfTasks();
         return taskName;
+    }
+
+    /**
+     * This method read the current existing text file and process it into a todolist.
+     */
+    public void readFiles() {
+        try {
+            FileInputStream inputStream = new FileInputStream(storageDirectory + textName);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+
+            String input = "";
+            while ((input = reader.readLine()) != null) {
+                try {
+                    System.out.println(input);
+
+                    // Split the string
+                    String[] inputList = input.split("\\|");
+                    // If  does not matches input throw exceptions
+                    if (!(Pattern.matches("(T)+\\s+([|])+\\s+([10])+\\s+([|])+\\s+\\w+.+", input.trim())
+                            | Pattern.matches("([DE])+\\s+([|])+\\s+([10])+\\s+([|])+\\s+\\w+.+\\s+([|])+\\s+\\w+.+", input.trim()))) {
+                        throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                    }
+                    if (inputList[0].trim().equals("D")) {
+                        taskList.add(new Deadline(inputList[2].trim(),inputList[3].trim()));
+                    }
+
+                    if (inputList[0].trim().equals("T")) {
+                        taskList.add(new Todo(inputList[2].trim()));
+                    }
+
+                    if (inputList[0].trim().equals("3")) {
+                        taskList.add(new Deadline(inputList[2].trim(),inputList[3].trim()));
+                    }
+
+                    if (inputList[1].trim().equals("1")) {
+                        taskList.get(taskList.size()-1).markAsDoneWithoutPrint();
+                    }
+                } catch (Exception m) {
+                    System.out.println(indent + m);
+                    System.out.println(line);
+                }
+            }
+            reader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * This method writes out the existing todolist to a text file.
+     */
+    public void writeFiles() {
+        try {
+            FileWriter writer = new FileWriter(storageDirectory + textName, false);
+            for (int i = 0; i < taskList.size(); i++){
+                writer.write(taskList.get(i).toWriteString());
+                writer.write("\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -78,18 +149,6 @@ public class Duke {
     }
 
     /**
-     * This method adds task for the bot.
-     *
-     * @param taskName name of the task
-     * @return taskName name of the task
-     */
-    public String addTask(String taskName) {
-        taskList.add(new Task(taskName));
-        System.out.println(indent + "Added: " + taskName);
-        return taskName;
-    }
-
-    /**
      * This method displays the task list.
      */
     public void displayList() {
@@ -123,6 +182,7 @@ public class Duke {
             try {
                 String input = userInput.nextLine();
                 System.out.println(line);
+
                 // Split the string
                 String[] inputList = input.split(" ");
                 // Use switch case
@@ -136,7 +196,7 @@ public class Duke {
                 if (inputList[0].equals("bye")) {
                     System.out.println(indent + "Bye. Hope to see you again soon!");
                     System.out.println(line);
-                    continue;
+                    break;
                 }
                 if (inputList[0].equals("done")) {
                     int number = Integer.parseInt(inputList[1]) - 1;
@@ -205,7 +265,13 @@ public class Duke {
 
     public static void main(String[] args) throws DukeException {
         Duke duke = new Duke();
+
+        // Retrieve existing file and parse it
+        duke.readFiles();
         duke.greet();
         duke.respond();
+
+        // Write out the file
+        duke.writeFiles();
     }
 }

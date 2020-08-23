@@ -17,4 +17,9 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + "(at: " + dueDate + ")";
     }
+
+    /**
+     * This method returns the string to be written for the event.
+     */
+    public String toWriteString() { return "E " +  super.toWriteString() + " | " + dueDate; }
 }

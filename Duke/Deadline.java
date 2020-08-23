@@ -16,4 +16,9 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + "(by: " + dueDate + ")";
     }
+
+    /**
+     * This method returns the string to be written for the deadline.
+     */
+    public String toWriteString() { return "D " +  super.toWriteString() + " | " + dueDate; }
 }
