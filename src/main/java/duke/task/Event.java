@@ -9,6 +9,12 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private final LocalDateTime atTime;
 
+    /**
+     * Creates an event task.
+     * @param description the description of the task
+     * @param atTime the string description of the time the event happens at
+     * @throws InvalidCommandException if the input time format is not yyyy-MM-dd HH:mm
+     */
     public Event(String description, String atTime) throws InvalidCommandException {
         super(description);
         try {
