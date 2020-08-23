@@ -11,8 +11,6 @@ public class Duke {
     public static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) throws DukeException, IOException {
-        readFile();
-        //FileWriter fw = new FileWriter("data/duke.txt");
 
         // Opening
         String open = "_______________________________________ \n"
@@ -22,6 +20,8 @@ public class Duke {
                 + "_______________________________________ \n";
         System.out.println(open);
 
+        readSavedData();
+        FileWriter writer = new FileWriter("data/duke.txt");
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
         while(running) {
@@ -78,6 +78,7 @@ public class Duke {
 
         // Closing
         scanner.close();
+        writer.close();
         String close = "_______________________________________ \n"
                 + "Goodbye! See you soon! \n"
                 + "_______________________________________ \n";
@@ -158,25 +159,30 @@ public class Duke {
         System.out.println(output);
     }
 
-    public static void readFile() throws IOException {
-        File f = new File("data/duke.txt");
-        if (!f.exists()) {
-            f.getParentFile().mkdirs();
-            f.createNewFile();
+    public static void readSavedData() throws IOException {
+        File file = new File("data/duke.txt");
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
         } else {
-            Scanner fileScanner = new Scanner(f);
+            Scanner fileScanner = new Scanner(file);
             while (fileScanner.hasNext()) {
                 String task = fileScanner.nextLine();
-                String[] taskSplit = task.split(" ", 3);
+                String[] taskSplit = task.split(">", 4);
                 String taskType = taskSplit[0];
-                boolean taskIsDone = taskSplit[1].equals("[" + "\u2713" + "]") ? true : false;
-                String taskDetails = taskSplit[2];
-                if (taskType.equals("[T]")) {
-                    taskList.add(new ToDo(taskDetails, taskIsDone));
-                } else if (taskType.equals("[D]")) {
-
+                boolean taskIsDone = taskSplit[1].equals("1") ? true : false;
+                String taskDescription = taskSplit[2];
+                if (taskType.equals("T")) {
+                    taskList.add(new ToDo(taskDescription, taskIsDone));
+                } else if (taskType.equals("D")) {
+                    String taskBy = taskSplit[3];
+                    taskList.add(new Deadline(taskDescription, taskBy, taskIsDone));
+                } else {
+                    String taskAt = taskSplit[3];
+                    taskList.add(new Event(taskDescription, taskAt, taskIsDone));
                 }
             }
+            fileScanner.close();
         }
     }
 

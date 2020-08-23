@@ -21,6 +21,6 @@ public class Deadline extends Task {
 
     public String toEncoding() {
         int completedBinary = this.completed ? 1 : 0;
-        return "D|" + completedBinary + "|" + this.description + "|" + this.by;
+        return "D>" + completedBinary + ">" + this.description + ">" + this.by;
     }
 }

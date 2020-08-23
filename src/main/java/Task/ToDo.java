@@ -21,6 +21,6 @@ public class ToDo extends Task {
 
     public String toEncoding() {
         int completedBinary = this.completed ? 1 : 0;
-        return "T|" + completedBinary + "|" + this.description;
+        return "T>" + completedBinary + ">" + this.description;
     }
 }

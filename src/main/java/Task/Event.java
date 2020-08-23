@@ -21,6 +21,6 @@ public class Event extends Task {
 
     public String toEncoding() {
         int completedBinary = this.completed ? 1 : 0;
-        return "E|" + completedBinary + "|" + this.description + "|" + this.at;
+        return "E>" + completedBinary + ">" + this.description + ">" + this.at;
     }
 }
