@@ -1,22 +1,25 @@
-package Storage;
+package storage;
 
-import Command.Command;
-import MugException.MugException;
-import Parser.Parser;
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.Todo;
+import command.Command;
+import mugexception.MugException;
+import parser.Parser;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
+
+import java.time.LocalDate;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
 
 public class Storage {
 
@@ -26,7 +29,7 @@ public class Storage {
         this.filepath = filepath;
         File file = new File(filepath);
         try {
-            if(!file.exists()){
+            if (!file.exists()) {
                 file.createNewFile();
             }
         } catch (IOException ex) {
@@ -59,10 +62,10 @@ public class Storage {
                 }
             }
 
-        } catch (FileNotFoundException | MugException ex){
+        } catch (FileNotFoundException | MugException ex) {
             System.out.println("WARNING: " + ex.getMessage() + " :WARNING");
         } catch (ArrayIndexOutOfBoundsException ex) {
-            System.out.println("WARNING: There is Something wrong with your Storage.Storage :WARNING");
+            System.out.println("WARNING: There is Something wrong with your Storage :WARNING");
         }
         return taskList;
     }
@@ -73,34 +76,34 @@ public class Storage {
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
 
-            switch(command) {
-                case TODO:
-                    pw.println("TODO|0|" + info);
-                    break;
-                case DEADLINE:
-                    String[] dInfo = info.split(" /by ");
-                    Parser.input(command, dInfo.length, true);
-                    Parser.info(command, dInfo[1], true);
-                    String deadlineEvent = dInfo[0];
-                    LocalDate deadlineTime = Parser.date(dInfo[1]);
-                    pw.println("DEADLINE|0|" + deadlineEvent + "|" + deadlineTime);
-                    break;
-                case EVENT:
-                    String[] eInfo = info.split(" /at ");
-                    Parser.input(command, eInfo.length, true);
-                    Parser.info(command, eInfo[1], true);
-                    String eventEvent = eInfo[0];
-                    LocalDate eventTime = Parser.date(eInfo[1]);
-                    pw.println("EVENT|0|" + eventEvent + "|" + eventTime);
-                    break;
-                default:
-                    break;
+            switch (command) {
+            case TODO:
+                pw.println("TODO|0|" + info);
+                break;
+            case DEADLINE:
+                String[] dInfo = info.split(" /by ");
+                Parser.input(command, dInfo.length, true);
+                Parser.info(command, dInfo[1], true);
+                String deadlineEvent = dInfo[0];
+                LocalDate deadlineTime = Parser.date(dInfo[1]);
+                pw.println("DEADLINE|0|" + deadlineEvent + "|" + deadlineTime);
+                break;
+            case EVENT:
+                String[] eInfo = info.split(" /at ");
+                Parser.input(command, eInfo.length, true);
+                Parser.info(command, eInfo[1], true);
+                String eventEvent = eInfo[0];
+                LocalDate eventTime = Parser.date(eInfo[1]);
+                pw.println("EVENT|0|" + eventEvent + "|" + eventTime);
+                break;
+            default:
+                break;
             }
 
             pw.flush();
             pw.close();
 
-        } catch (MugException ex){
+        } catch (MugException ex) {
             throw new MugException(ex.getMessage());
         } catch (IOException ex) {
             throw new MugException("Something went wrong. MUG fail to add the Tasks.Task :_:");
@@ -121,10 +124,10 @@ public class Storage {
             Scanner sc = new Scanner(new File(this.filepath));
             sc.useDelimiter("[\n]");
 
-            while(sc.hasNext()) {
+            while (sc.hasNext()) {
                 line = sc.next();
                 taskTrack++;
-                if(taskTrack != taskId) {
+                if (taskTrack != taskId) {
                     pw.println(line);
                 }
             }
@@ -153,14 +156,14 @@ public class Storage {
             Scanner sc = new Scanner(new File(this.filepath));
             sc.useDelimiter("[\n]");
 
-            while(sc.hasNext()) {
+            while (sc.hasNext()) {
                 line = sc.next();
                 taskTrack++;
-                if(taskTrack != taskId) {
+                if (taskTrack != taskId) {
                     pw.println(line);
                 } else {
                     String[] newLine = line.split("[|]" , 3);
-                    pw.println(newLine[0] + "|" + 1 + "|" + newLine[2] );
+                    pw.println(newLine[0] + "|" + 1 + "|" + newLine[2]);
                 }
             }
             sc.close();

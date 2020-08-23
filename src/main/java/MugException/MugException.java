@@ -1,4 +1,4 @@
-package MugException;
+package mugexception;
 
 public class MugException extends Exception {
 

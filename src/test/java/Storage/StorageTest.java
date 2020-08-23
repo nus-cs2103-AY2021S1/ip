@@ -1,10 +1,10 @@
-package Storage;
+package storage;
 
-import Tasks.Task;
-import Tasks.Todo;
-import org.junit.jupiter.api.Test;
+import tasks.Task;
 
 import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -16,7 +16,7 @@ public class StorageTest {
         ArrayList<Task> actResult = this.store.load();
         StringBuilder actString = new StringBuilder();
 
-        for(Task task: actResult) {
+        for (Task task: actResult) {
             actString.append(task);
         }
         String expResult = "[T][✘] read book[T][✘] return book";

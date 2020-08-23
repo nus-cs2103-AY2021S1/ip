@@ -1,8 +1,8 @@
-package Task;
+package task;
 
-import Command.Command;
-import Tasks.TaskList;
-import Storage.Storage;
+import command.Command;
+import tasks.TaskList;
+import storage.Storage;
 
 import org.junit.jupiter.api.Test;
 

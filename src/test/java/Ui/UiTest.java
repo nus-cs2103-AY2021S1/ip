@@ -1,16 +1,16 @@
-package Ui;
+package ui;
 
-import Storage.Storage;
-import Tasks.TaskList;
+import storage.Storage;
+import tasks.TaskList;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UiTest {
-    Ui ui = new Ui();
-    Storage store = new Storage("test.txt");
-    TaskList taskList = new TaskList(store);
+    private Ui ui = new Ui();
+    private Storage store = new Storage("test.txt");
+    private TaskList taskList = new TaskList(store);
 
     @Test
     public void readCommandTest() {
