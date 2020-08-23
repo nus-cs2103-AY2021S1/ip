@@ -38,7 +38,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        new Duke("/Users/doraheng/Documents/CS 2103T/Duke/ip/data/duke.txt").run();
+        new Duke("./data/duke.txt").run();
 
     }
 
