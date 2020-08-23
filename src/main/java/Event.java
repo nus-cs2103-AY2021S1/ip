@@ -1,22 +1,35 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
-    private static final String MESSAGE_MISSING_DATETIME = "Did you casually forget to put in the event date/time?";
-    private final String dateTime;
+    private final LocalDate date;
+    private final LocalTime time;
 
-    public Event(String name, String dateTime) throws BlankTaskException, MissingDateTimeException {
+    public Event(String name, LocalDate date) throws BlankTaskException {
         super(name);
-        if (dateTime.isBlank()) {
-            throw new MissingDateTimeException(MESSAGE_MISSING_DATETIME);
-        }
-        this.dateTime = dateTime.strip();
+        this.date = date;
+        this.time = null;
     }
 
-    public String getDateTime() {
-        return dateTime;
+    public Event(String name, LocalDate date, LocalTime time) throws BlankTaskException {
+        super(name);
+        this.date = date;
+        this.time = time;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getTime() {
+        return time;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + dateTime + ")";
+        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("EEE, d MMM yy"))
+                + (time == null ? "" : ", " + time.format(DateTimeFormatter.ofPattern("h.mm a"))) + ")";
     }
 }

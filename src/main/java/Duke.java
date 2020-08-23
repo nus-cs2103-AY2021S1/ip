@@ -3,6 +3,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +42,7 @@ public class Duke {
     private static final String MESSAGE_MISSING_DATETIME = "Did you casually forget to put in the date/time?";
     private static final String MESSAGE_ALR_DONE = "Do you happen to have short term memory?";
     private static final String MESSAGE_DELETE = "Got it. I removed this task:";
+    private static final String MESSAGE_WRONG_FORMAT = "The date format should be in DD-MM-YY and the time in HH:MM";
 
     // processes the input and generates the output in the correct format.
     private static String displayOutput(String input) {
@@ -60,21 +65,32 @@ public class Duke {
 
     // adds task to list
     public static String addToList(ArrayList<Task> taskList, TaskType taskType, String taskStr)
-            throws BlankTaskException, MissingDelimiterException, MissingDateTimeException {
+            throws BlankTaskException, MissingDelimiterException, MissingDateTimeException, DateTimeParseException {
         Task inputTask;
+        LocalDate date = null;
+        LocalTime time = null;
         int delimiter = taskStr.indexOf("/");
-        if (taskType != TaskType.T && delimiter == -1) {
-            throw new MissingDelimiterException(MESSAGE_MISSING_DELIM);
-        }
-        if (taskType != TaskType.T && delimiter + 3 > taskStr.length()) {
-            throw new MissingDateTimeException(MESSAGE_MISSING_DATETIME);
+        if (taskType != TaskType.T) {
+            if (delimiter == -1) {
+                throw new MissingDelimiterException(MESSAGE_MISSING_DELIM);
+            }
+            if (delimiter + 3 > taskStr.length()) {
+                throw new MissingDateTimeException(MESSAGE_MISSING_DATETIME);
+            }
+            String[] datetime = taskStr.substring(delimiter + 3).trim().split(" ");
+            date = LocalDate.parse(
+                    datetime[0], DateTimeFormatter.ofPattern("dd-MM-yy"));
+            if (datetime.length == 2) {
+                time = LocalTime.parse(
+                        datetime[1], DateTimeFormatter.ofPattern("HH:mm"));
+            }
         }
         switch (taskType) {
         case D:
-            inputTask = new Deadline(taskStr.substring(0, delimiter), taskStr.substring(delimiter + 3));
+            inputTask = new Deadline(taskStr.substring(0, delimiter), date, time);
             break;
         case E:
-            inputTask = new Event(taskStr.substring(0, delimiter), taskStr.substring(delimiter + 3));
+            inputTask = new Event(taskStr.substring(0, delimiter), date, time);
             break;
         default:
             inputTask = new ToDo(taskStr);
@@ -166,6 +182,8 @@ public class Duke {
                     System.out.print(addToList(taskList, currType, sc.nextLine()));
                 } catch (BlankTaskException | MissingDelimiterException | MissingDateTimeException e) {
                     System.out.print(displayOutput(e.getMessage()));
+                } catch (DateTimeParseException e) {
+                    System.out.print(displayOutput(MESSAGE_WRONG_FORMAT));
                 }
                 updateMemory(taskList);
                 break;
