@@ -22,11 +22,11 @@ public class DukeFile {
 
     public void saveToFile() throws IOException {
         FileWriter fileWriter = new FileWriter(fileName);
-
         for (String s : recordArrayLst) {
-            fileWriter.write(s);
+            fileWriter.write(s + "\n");
+            System.out.println("*****************************************\n" + "Text: " + s + " saved into " + fileName + "\n*****************************************");
         }
-        //System.out.println("_________________________________________\n" + "Text: " + text + " saved into " + filepath + "\n_________________________________________");
+
         fileWriter.close();
     }
 
@@ -35,11 +35,13 @@ public class DukeFile {
     }
 
     public void updateRecord(String record, int index) {
-        recordArrayLst.set(index, record);
+        int i = index -1;
+        recordArrayLst.set(i, record);
     }
 
     public void deleteRecord(int index) {
-        recordArrayLst.remove(index);
+        int i = index - 1;
+        recordArrayLst.remove(i);
     }
 
     public static DukeFile createDukeFile(String fileName) {

@@ -15,7 +15,7 @@ public class Duke {
         ArrayList<Task> arraylst = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         Processor processor = new Processor();
-        DukeFile dukeFile = DukeFile.createDukeFile("placeholder");
+        DukeFile dukeFile = DukeFile.createDukeFile("Saved");
 
         while (sc.hasNext()) {
             String cmd = sc.nextLine();
