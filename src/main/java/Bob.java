@@ -3,6 +3,7 @@ import main.java.*;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -71,10 +72,20 @@ public class Bob {
                 System.out.println("Sorry, I do not understand your request. Please try again.");
             } catch (IOException e) {
                 System.out.println("Sorry, but I had difficulty saving your information. Please try again.");
+            } catch (DateTimeParseException e) {
+                System.out.println("Please input dates and times in the correct format. The format is: ");
+                System.out.println("yyyy-MM-dd HHMM");
+                System.out.println("Note: Events require a start date and time and an end date and time with the following format:");
+                System.out.println("yyyy-MM-dd HHMM to yyyy-MM-dd HHMM");
             }
             command = sc.nextLine();
         }
         System.out.println(exit);
+        try {
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     static void respond(String command) throws IOException {
         if (command.equals("list")) {
@@ -126,7 +137,7 @@ public class Bob {
             System.out.println("Got it! I have added a new task to the list.");
             System.out.println("added: " + task.toString());
             writer.append(task.saveFormat() + System.lineSeparator());
-            writer.close();
+            writer.flush();
 
         } else if (command.contains("delete")) {
             int index = Integer.parseInt(command.substring(command.length()-1));
