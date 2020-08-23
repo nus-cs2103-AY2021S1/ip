@@ -1,8 +1,10 @@
+import java.time.LocalDate;
+
 public class Events extends Task {
 
-    protected String at;
+    protected LocalDate at;
 
-    public Events(String description, String at) {
+    public Events(String description, LocalDate at) {
         super(description);
         this.at = at;
     }

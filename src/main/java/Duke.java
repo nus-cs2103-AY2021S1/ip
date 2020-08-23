@@ -1,8 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Scanner;
-
 
 public class Duke {
 
@@ -34,13 +33,17 @@ public class Duke {
             } else if (taskType == 'E') {
                 String[] temp = line.substring(7).split(" \\(at: ");
                 String description = temp[0];
-                String at = temp[1].substring(0, temp[1].length() - 1);
-                task = new Events(description, at);
+                String[] dateTime = temp[1].substring(0, temp[1].length() - 1).split("-");
+                LocalDate by = LocalDate.of(Integer.parseInt(dateTime[0]), Integer.parseInt(dateTime[1]),
+                    Integer.parseInt(dateTime[2]));
+                task = new Events(description, by);
 
             } else {
                 String[] temp = line.substring(7).split(" \\(by: ");
                 String description = temp[0];
-                String at = temp[1].substring(0, temp[1].length() - 1);
+                String[] dateTime = temp[1].substring(0, temp[1].length() - 1).split("-");
+                LocalDate at = LocalDate.of(Integer.parseInt(dateTime[0]), Integer.parseInt(dateTime[1]),
+                    Integer.parseInt(dateTime[2]));
                 task = new Deadline(description, at);
 
             }
@@ -69,9 +72,6 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
 
-
-
-
         while (!str.equals("bye")) {
             System.out.println("____________________________________________________________\n");
             try {
@@ -82,6 +82,7 @@ public class Duke {
                     for (int i = 0; i < tasks.size(); i++) {
                         if (tasks.get(i) != null) {
                             System.out.println(counter + ". " + tasks.get(i));
+
                             counter++;
                         } else {
                             break;
@@ -98,6 +99,7 @@ public class Duke {
                 } else if (str.startsWith("done ")) {
                     int temp = Integer.parseInt(str.substring(5));
                     tasks.get(temp-1).doTask();
+
                 } else if (str.startsWith("todo ")) {
                     if (str.length() <= 5) {
                         throw new DescriptionException("todo");
@@ -120,15 +122,23 @@ public class Duke {
                     }
                     String[] temp = str.split(" /by ");
                     String desc = temp[0];
-                    String deadline = temp[1];
+                    String deadlineString = temp[1];
+
                     if (desc.length() == 0) {
                         throw new DescriptionException("deadline");
                     }
-                    if (deadline.length() == 0) {
+                    if (deadlineString.length() == 0) {
                         throw new TrackingException("deadline");
                     }
+                    String[] dateTime = deadlineString.split("-");
+                    if (dateTime.length != 3 ||
+                        dateTime[0].length() != 4 && dateTime[1].length() != 2 && dateTime[2].length() != 2) {
+                        throw new DateTimeException();
+                    } // check if the date and time are in the correct format.
+                    LocalDate by = LocalDate.of(Integer.parseInt(dateTime[0]), Integer.parseInt(dateTime[1]),
+                        Integer.parseInt(dateTime[2]));
 
-                    String by = temp[1];
+
                     tasks.add(new Deadline(desc, by));
 
                     System.out.println("Got it. I've added this task: \n"
@@ -145,18 +155,29 @@ public class Duke {
                     }
                     String[] temp = str.split(" /at ");
                     String desc = temp[0];
-                    String at = temp[1];
+                    String atString = temp[1];
+
                     if (desc.length() == 0) {
                         throw new DescriptionException("event");
                     }
-                    if (at.length() == 0) {
+                    if (atString.length() == 0) {
                         throw new TrackingException("event");
                     }
+
+
+                    String[] dateTime = atString.split("-");
+                    if (dateTime.length != 3 ||
+                        dateTime[0].length() != 4 && dateTime[1].length() != 2 && dateTime[2].length() != 2 ) {
+                        throw new DateTimeException();
+                    } // check if the date and time are in the correct format.
+                    LocalDate at = LocalDate.of(Integer.parseInt(dateTime[0]), Integer.parseInt(dateTime[1]),
+                        Integer.parseInt(dateTime[2]));
                     tasks.add(new Events(desc, at));
 
                     System.out.println("Got it. I've added this task: \n"
                         + tasks.get(tasks.size() - 1)
                         + "\nNow you have " + tasks.size() + " task(s) in the list.");
+
 
                 } else if (str.equals("event") || str.equals("deadline") || str.equals("todo") ||
                 str.equals("done")) {
