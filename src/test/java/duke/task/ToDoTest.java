@@ -17,7 +17,7 @@ public class ToDoTest {
     }
 
     @Test
-    public void outputTest() {
+    public void output__toWriteStorage() {
         try {
             ToDo t = new ToDo("return books");
             assertEquals("T | 0 | return books\n", t.output());
@@ -30,7 +30,7 @@ public class ToDoTest {
     }
 
     @Test
-    public void toStringTest() {
+    public void toString__systemOutput() {
         try {
             ToDo t = new ToDo("return books");
             assertEquals("[T][\u2718] return books", t.toString());
