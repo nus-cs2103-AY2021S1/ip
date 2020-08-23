@@ -32,5 +32,31 @@ public class HappenCommandTest {
         unrecognizedCommandHelper("happen ", ui, list, storage);
         unrecognizedCommandHelper("happen anything", ui, list, storage);
         unrecognizedCommandHelper("happen onward", ui, list, storage);
+        unrecognizedCommandHelper("happen on 1 2 3", ui, list, storage);
+        unrecognizedCommandHelper("happen after 1 2", ui, list, storage);
+        unrecognizedCommandHelper("happen in 3 months", ui, list, storage);
+        unrecognizedCommandHelper("happen between a b c", ui, list, storage);
+        unrecognizedCommandHelper("happen between a", ui, list, storage);
+    }
+
+    public void invalidDateFormatHelper(String s, Ui ui, TaskList list, Storage storage) {
+        try {
+            new HappenCommand(s).execute(ui, list, storage);
+            fail();
+        } catch (Exception e) {
+            assertEquals("Invalid date format. Please use yyyy-MM-dd.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void execute_invalidDateFormat_throwException() {
+        Ui ui = new Ui();
+        Storage storage = new StorageStub();
+        TaskList list = storage.getList();
+
+        invalidDateFormatHelper("happen on 2020", ui, list, storage);
+        invalidDateFormatHelper("happen on tomorrow", ui, list, storage);
+        invalidDateFormatHelper("happen before tomorrow", ui, list, storage);
+        invalidDateFormatHelper("happen between 2020-08-09 2020/09/01", ui, list, storage);
     }
 }
