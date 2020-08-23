@@ -14,9 +14,9 @@ public class Parser {
             if (taskType.equals("TODO")) {
                 return new ToDo(description, isDone);
             } else if (taskType.equals("EVENT")) {
-                return new Event(description, time, isDone);
+                return new ComplexTask(description, time, TaskType.EVENT);
             } else if (taskType.equals("DEADLINE")) { // DEADLINE
-                return new Deadline(description, time, isDone);
+                return new ComplexTask(description, time, TaskType.DEADLINE);
             } else {
                 throw new InvalidFileFormatException();
             }

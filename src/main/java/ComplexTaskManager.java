@@ -1,54 +1,57 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class ComplexTaskManager {
 
     private final String taskDetails;
-    private final TaskType complexTask;
+    private final TaskType taskType;
 
-    protected ComplexTaskManager(String taskDetails, TaskType complexTask) {
+    protected ComplexTaskManager(String taskDetails, TaskType taskType) {
         this.taskDetails = taskDetails;
-        this.complexTask = complexTask;
+        this.taskType = taskType;
     }
 
-    protected Task getTask() throws DukeException {
-        if (complexTask == TaskType.DEADLINE) {
-            String[] inputArr = taskDetails.split(" /by", 2);
-            if (inputArr.length == 1) {
-                throw new InvalidDeadlineException();
-            } else {
-                checkIfEmpty(inputArr);
-                String date = inputArr[1].trim();
-                if (isDateAndTimeFormat(date)) {
-                    return new Deadline(inputArr[0], LocalDateTime.parse(date));
-                } else if (isDateFormat(date)) {
-                    return new Deadline(inputArr[0], LocalDate.parse(date));
-                } else if (isTimeFormat(date)) {
-                    return new Deadline(inputArr[0], LocalTime.parse(date));
-                } else {
-                    return new Deadline(inputArr[0], date);
-                }
-            }
-        } else { // EVENT type
-            String[] inputArr = taskDetails.split(" /at", 2);
-            if (inputArr.length == 1) {
-                throw new InvalidEventException();
-            } else {
-                checkIfEmpty(inputArr);
-                String date = inputArr[1].trim();
-                if (isDateAndTimeFormat(date)) {
-                    return new Event(inputArr[0], LocalDateTime.parse(date));
-                } else if (isDateFormat(date)) {
-                    return new Event(inputArr[0], LocalDate.parse(date));
-                } else if (isTimeFormat(date)) {
-                    return new Event(inputArr[0], LocalTime.parse(date));
-                } else {
-                    return new Event(inputArr[0], date);
-                }
-            }
+    private String identifier() {
+        if (taskType == TaskType.DEADLINE) {
+            return " /by";
+        } else {
+            return " /at";
         }
+    }
+
+    protected ComplexTask getTask() throws DukeException {
+        String[] inputArr = taskDetails.split(identifier(), 2);
+        if (inputArr.length == 1) {
+            throw new InvalidDeadlineException();
+        }
+        checkIfEmpty(inputArr);
+        String date = inputArr[1].trim();
+        if (isDateAndTimeFormat(date.replace(" ", "T"))) {
+            return new ComplexTask(inputArr[0], dateAndTimeToString(date), taskType);
+        } else if (isDateFormat(date)) {
+            return new ComplexTask(inputArr[0], dateToString(date), taskType);
+        } else if (isTimeFormat(date)) {
+            return new ComplexTask(inputArr[0], timeToString(date), taskType);
+        } else {
+            return new ComplexTask(inputArr[0], date, taskType);
+        }
+    }
+
+    private String dateToString(String date) {
+        return LocalDate.parse(date).format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
+    private String dateAndTimeToString(String dateAndTime) {
+        return LocalDateTime
+                .parse(dateAndTime.replace(" ", "T"))
+                .format(DateTimeFormatter.ofPattern("MMM d yyyy / h.mm a"));
+    }
+
+    private String timeToString(String time) {
+        return LocalTime.parse(time).format(DateTimeFormatter.ofPattern("h.mm a"));
     }
 
     private boolean isDateFormat(String input) {
@@ -82,9 +85,9 @@ public class ComplexTaskManager {
         String description = inputArr[0];
         String time = inputArr[1];
         if (description.isEmpty()) {
-            throw new EmptyTaskException(complexTask);
+            throw new EmptyTaskException(taskType);
         } else if (time.isBlank()) {
-            throw new EmptyByException(complexTask);
+            throw new EmptyByException(taskType);
         }
     }
 }

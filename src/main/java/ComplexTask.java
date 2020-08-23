@@ -1,56 +1,20 @@
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class ComplexTask extends Task{
 
-    private String at;
-    private LocalDate date;
-    private LocalTime time;
-    private LocalDateTime dateAndTime;
+    private final String time;
+    private final TaskType taskType;
 
-    protected ComplexTask(String description, LocalDate date) {
-        super(description);
-        this.date = date;
-    }
-
-    protected ComplexTask(String description, String at) {
-        super(description);
-        this.at = at;
-    }
-
-    protected ComplexTask(String description, LocalDateTime dateAndTime) {
-        super(description);
-        this.dateAndTime = dateAndTime;
-    }
-
-    protected ComplexTask(String description, LocalTime time) {
-        super(description);
+    protected ComplexTask(String description, String time, TaskType taskType) {
+        super(description, false, taskType, time);
         this.time = time;
+        this.taskType = taskType;
     }
 
-    private String getTimeFormat() {
-        if (at != null) {
-            return at;
-        } else if (date != null) {
-            return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        } else if (time != null) {
-            return time.format(DateTimeFormatter.ofPattern("hh.mm a"));
-        } else {
-            return dateAndTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, hh.mm a"));
-        }
-    }
-
-    protected String convertToString(TaskType taskType) {
+    @Override
+    public String toString() {
         if (taskType == TaskType.EVENT) {
-            return "[E]" + super.toString() + " (at: "
-                    + getTimeFormat()
-                    + ")";
-        } else {
-            return "[D]" + super.toString() + " (by: "
-                    + getTimeFormat()
-                    + ")";
+            return "[E]" + super.toString() + " (at: " + time + ")";
+        } else { // DEADLINE
+            return "[D]" + super.toString() + " (by: " + time + ")";
         }
     }
 }
