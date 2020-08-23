@@ -21,7 +21,7 @@ public class Deadline extends Task{
         return String.format("[D][%s] %s (by: %s)",
                 super.isDone() ? "\u2713" : "\u2717",
                 getTask(),
-                deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy")));
+                deadline.format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
     }
 
 }
