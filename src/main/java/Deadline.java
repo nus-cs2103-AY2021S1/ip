@@ -7,10 +7,10 @@ public class Deadline extends Task {
     protected LocalDate deadlineDate;
     protected LocalTime deadlineTime;
 
-    public Deadline(String description, LocalDate date, LocalTime time) {
+    public Deadline(String description, LocalDate deadlineDate, LocalTime deadlineTime) {
         super(description);
-        this.deadlineDate = date;
-        this.deadlineTime = time;
+        this.deadlineDate = deadlineDate;
+        this.deadlineTime = deadlineTime;
     }
 
     public Optional<LocalDate> getDate() {

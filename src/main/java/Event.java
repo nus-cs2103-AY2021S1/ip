@@ -3,16 +3,16 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDate eventDate;
     protected LocalTime startTime;
     protected LocalTime endTime;
 
-    public Event(String description, LocalDate date, LocalTime start, LocalTime end) {
+    public Event(String description, LocalDate eventDate, LocalTime startTime, LocalTime endTime) {
         super(description);
-        this.eventDate = date;
-        this.startTime = start;
-        this.endTime = end;
+        this.eventDate = eventDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public Optional<LocalDate> getDate() {
