@@ -230,4 +230,23 @@ public class Storage {
     public int total() {
         return taskList.total();
     }
+
+    public void findRelevantTask(String s) throws DukeException{
+        try {
+            String searchName = s.substring(s.indexOf("find") + 5).trim();
+            List<Task> results = taskList.searchTask(searchName.toLowerCase());
+
+            if (results.isEmpty()) {
+                ui.noRelevantTask();
+            } else {
+                ui.relevantTaskHeader();
+                for (Task t : results) {
+                    ui.listBody(results.indexOf(t) + 1, t.toString());
+                }
+                ui.line();
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(ui.searchFail());
+        }
+    }
 }

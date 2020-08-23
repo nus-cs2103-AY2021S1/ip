@@ -39,11 +39,10 @@ public class Parser {
             return new DoneCommand();
         } else if (command.matches(ignoreCase + CommandState.CHECK.name() + wildcard)) {
             return new CheckCommand();
+        } else if (command.matches(ignoreCase + CommandState.DELETE.name() + "(.*)")) {
+            return new DeleteCommand();
         } else {
             Task t = checkAction(command);
-            if (t == null) {
-                return new DeleteCommand();
-            }
             return new AddCommand(t);
         }
     }
@@ -62,8 +61,6 @@ public class Parser {
             t = Event.createTask(command);
         } else if (command.matches(ignoreCase + CommandState.TODO.name() + wildcard)) {
             t = Todo.createTask(command);
-        } else if (command.matches(ignoreCase + CommandState.DELETE.name() + wildcard)) {
-            t = null;
         } else {
             String errMessage = ui.printFormat(" I'm sorry but i do not know what you want to do. *woof*\n");
             throw new DukeException(errMessage);

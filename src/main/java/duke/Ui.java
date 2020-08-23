@@ -187,4 +187,19 @@ public class Ui {
     public void markDoneRepeat() {
         print(" You have already completed this task! *Woof woof*\n");
     }
+
+    public String searchFail() {
+        return printFormat(" Please enter a keyword that you wish to search for...\n"
+                + " Or you can just enter *list* to see all your task! *Woof woof!*\n");
+    }
+
+    public void noRelevantTask() {
+        print(" I can't seem to find any task with this keyword! *woof*\n");
+    }
+
+    public void relevantTaskHeader() {
+        System.out.print(lines);
+        System.out.println(" Here is the list of matching task in your list: ");
+    }
+
 }

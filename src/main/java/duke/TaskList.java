@@ -110,4 +110,14 @@ public class TaskList {
         return sameDates;
     }
 
+    public List<Task> searchTask(String s) {
+        List<Task> validTask = new ArrayList<>();
+        for (Task t : listOfTask) {
+            if (t.toString().toLowerCase().contains(s)) {
+                validTask.add(t);
+            }
+        }
+        return validTask;
+    }
+
 }
