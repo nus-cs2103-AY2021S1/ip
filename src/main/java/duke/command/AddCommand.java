@@ -15,4 +15,11 @@ public class AddCommand implements Command {
     public void execute(String command, Storage s, Ui ui) throws DukeException {
         s.save(t);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else return o instanceof AddCommand;
+    }
 }

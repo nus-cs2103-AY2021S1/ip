@@ -9,4 +9,10 @@ public class ExitCommand implements Command {
         ui.goodBye();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else return o instanceof ExitCommand;
+    }
 }

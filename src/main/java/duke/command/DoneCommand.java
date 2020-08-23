@@ -11,4 +11,11 @@ public class DoneCommand implements Command {
         s.markDone(taskInd - 1);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else return o instanceof DoneCommand;
+    }
+
 }

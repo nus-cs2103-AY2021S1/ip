@@ -9,4 +9,10 @@ public class ListCommand implements Command {
         s.printAll();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else return o instanceof ListCommand;
+    }
 }
