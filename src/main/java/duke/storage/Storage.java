@@ -13,15 +13,24 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Storage class that deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
-    public File f;
+    private final File file;
     private Scanner lineReader;
 
-    public Storage(File f){
-        this.f = f;
+    /**
+     * Constructor for creating a storage variable. It will create a new tasklist.txt if it does not exist, or
+     * use existing one if it is pressent.
+     *
+     * @param file Contains the filepath to wear the tasklist.txt will be stored
+     */
+    public Storage(File file) {
+        this.file = file;
         try {
-            f.createNewFile();
-            this.lineReader = new Scanner(f);
+            file.createNewFile();
+            this.lineReader = new Scanner(file);
 
         } catch (FileNotFoundException e) {
             System.out.println("File is not found");
@@ -31,36 +40,51 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> loadFile(){
+    /**
+     * If a tasklist.txt file exists, this method would load it into the TaskList.
+     *
+     * @return A TaskList that is loaded with the tasks recorded on the txt file
+     */
+    public ArrayList<Task> loadFile() {
         ArrayList<Task> shelf = new ArrayList<>();
-        while(lineReader.hasNextLine()) {
+        while (lineReader.hasNextLine()) {
             String data = lineReader.nextLine();
             shelf.add(taskCreator(data));
         }
         return shelf;
     }
 
+    /**
+     * Updates the Tasklist.txt file with the existing tasks and states in the tasklist.
+     *
+     * @param shelf the TaskList that we are updating
+     * @throws IOException if the file cannot be found
+     */
     public void updateFile(TaskList shelf) throws IOException {
-        FileWriter fw = new FileWriter(f.getAbsolutePath());
-        for(int i = 0; i < shelf.getSize(); i++) {
+        FileWriter fw = new FileWriter(file.getAbsolutePath());
+        for (int i = 0; i < shelf.getSize(); i++) {
             fw.write(shelf.getTask(i).toString());
             fw.write(System.lineSeparator());
         }
         fw.close();
     }
 
-    private Task taskCreator(String task){
+    /**
+     * Creates a different type of task based on the response given
+     *
+     * @param task input by the user
+     * @return a new task child object that is the type that is indicated in the response.
+     */
+    private Task taskCreator(String task) {
         switch (task.charAt(1)) {
             case 'T':
-                return new ToDo(task.toString(), true);
+                return new ToDo(task.toString());
             case 'D':
-                return new Deadline(task.toString(), true);
+                return new Deadline(task.toString());
             default:
-                return new EventTask(task.toString(), true);
+                return new EventTask(task.toString());
         }
     }
-
-
 
 
 }

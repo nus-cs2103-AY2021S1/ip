@@ -1,6 +1,5 @@
 package duke.dukeexception;
 
-import duke.dukeexception.DukeException;
 
 public class DukeKeywordMissingException extends DukeException {
     public DukeKeywordMissingException(String message){

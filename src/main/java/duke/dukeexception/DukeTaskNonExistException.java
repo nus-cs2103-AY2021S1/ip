@@ -1,6 +1,5 @@
 package duke.dukeexception;
 
-import duke.dukeexception.DukeException;
 
 public class DukeTaskNonExistException extends DukeException {
 
