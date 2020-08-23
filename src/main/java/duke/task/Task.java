@@ -88,6 +88,10 @@ public abstract class Task {
         return false;
     }
 
+    /**
+     * Checks whether the task happens after today.
+     * @return true if the task happens after today, ToDo does not happen on any date, so always false
+     */
     public boolean happenAfterToday() {
         return false;
     }
