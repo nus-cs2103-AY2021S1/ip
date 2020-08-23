@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 public class UI {
 
@@ -11,7 +12,13 @@ public class UI {
 
     protected void greetUser() {
         String welcome = "Hello I am Duke!\nHow can I help you?\n";
+        String instructions = "Leave a single blankspace after each command to " +
+                "trigger Duke's response!\n";
+        String listOfCommand = "List of Commands = " +
+                "event, todo, deadline, delete, done, find, list\n";
         System.out.println(welcome);
+        System.out.println(instructions);
+        System.out.println(listOfCommand);
     }
 
     protected void doneTask(Task task) {
@@ -45,5 +52,19 @@ public class UI {
             index++;
         }
         System.out.println("\n");
+    }
+
+    protected void findTask(ArrayList<Task> foundTasks) {
+        if (foundTasks.isEmpty()) {
+            System.out.println("\nNo matching tasks found!\n");
+        } else {
+            System.out.println("\nHere are the tasks in your list!\n");
+            int index = 1;
+            for (Task task : foundTasks) {
+                System.out.println(index + "." + task);
+                index++;
+            }
+            System.out.println("\n");
+        }
     }
 }

@@ -16,6 +16,8 @@ public class Parser {
             return new ListCommand(userCommand);
         } else if (command[0].equals("bye")) {
             return new ByeCommand();
+        } else if (command[0].equals("find")) {
+            return new FindCommand(userCommand);
         } else {
             throw new InvalidCommandException();
         }
