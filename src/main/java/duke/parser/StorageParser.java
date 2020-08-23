@@ -9,11 +9,20 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.utils.Datetime;
 
+/**
+ * Represents an object that parses lines in a saved storage text file into actual Task objects.
+ * This object also parses Task objects into Strings that will be saved into the storage text file.
+ */
 public class StorageParser {
     private static final String IS_COMPLETED = "1";
     private static final String NOT_COMPLETED = "0";
     private static final String DELIMITER = ";";
 
+    /**
+     * Converts a Task to a String that will be saved onto the Storage text file.
+     * @param task the task that is to be converted.
+     * @return the String representing the Task.
+     */
     public String convertTaskToStorage(Task task) {
         String symbol = task.getTaskSymbol();
         String completed = task.isTaskCompleted()
@@ -53,6 +62,12 @@ public class StorageParser {
         return new Event(storageTask[2], isCompleted, time);
     }
 
+    /**
+     * Converts a String from the storage text file into its associated Task.
+     * @param storageTaskString the String that is to be converted.
+     * @return the associated Task from the given String.
+     * @throws DukeException if this does not recognise the format of the String being parsed.
+     */
     public Task convertStorageToTask(String storageTaskString) throws DukeException {
         String[] storageTask = storageTaskString.split(DELIMITER);
         switch(storageTask[0]) {

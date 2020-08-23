@@ -7,6 +7,9 @@ import duke.task.TaskList;
 import duke.storage.TaskStorage;
 import duke.ui.Ui;
 
+/**
+ * Represents the main driver class of Duke.
+ */
 public class Duke {
     private TaskStorage taskStorage;
     private TaskList taskList;
@@ -21,6 +24,10 @@ public class Duke {
         this.commandParser = new CommandParser();
     }
 
+    /**
+     * Drives the execution of <code>Duke</code>.
+     * It handles any exceptions thrown by printing them onto the User Interface.
+     */
     public void runDuke() {
         initialiseDuke();
 

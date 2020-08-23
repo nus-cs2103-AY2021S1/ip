@@ -1,5 +1,8 @@
 package duke.parser;
 
+/**
+ * Represents the various commands that Duke supports.
+ */
 public final class CommandType {
     public static final String BYE = "bye";
     public static final String LIST = "list";

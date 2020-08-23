@@ -19,6 +19,9 @@ import duke.task.TaskList;
 import duke.utils.Datetime;
 import duke.utils.Utils;
 
+/**
+ * The class that converts commands passed into Duke into Operations.
+ */
 public class CommandParser {
     private ExitOperation createExitOp(TaskStorage storage, TaskList list) {
         return new ExitOperation(storage, list);
@@ -87,6 +90,15 @@ public class CommandParser {
         return new DeleteOperation(list, index);
     }
 
+    /**
+     * Parses the String given into an Operation object.
+     * @param commandString the String that has been input by the user into Duke.
+     * @param list the TaskList to be operated on.
+     * @param taskStorage the TaskStorage object to be operated on, if the operation requires
+     *                    a save of the TaskList.
+     * @return the parsed Operation object.
+     * @throws DukeException if the command cannot be recognised or is erroneous.
+     */
     public Operation parse(String commandString, TaskList list, TaskStorage taskStorage)
             throws DukeException {
         String[] commands = commandString.split(" ");
