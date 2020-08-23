@@ -90,9 +90,9 @@ public class Storage {
         //Check if the directory exist
         if(!f.exists()){
             try{
-                Files.createDirectory(Path.of(this.f.getPath()));
+                Files.createDirectory(Path.of(f.getParent()));
             }catch (IOException e){
-                throw new UltronException(this.f.getPath(), ExceptionType.DIRECTORY_NOT_CREATED);
+                throw new UltronException(f.getPath(), ExceptionType.DIRECTORY_NOT_CREATED);
             }
         }
 
