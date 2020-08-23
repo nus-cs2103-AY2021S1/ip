@@ -2,6 +2,7 @@ package main.java;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Task {
     protected String description;
@@ -11,13 +12,13 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.time = "";
     }
 
     public Task(String description, String time) {
         this.description = description;
         this.isDone = false;
         this.time = time;
+                //LocalDate.parse(time);
     }
 
     public String getStatusIcon() {
@@ -28,9 +29,26 @@ public class Task {
         isDone = true;
     }
     
+    public String getNewFormatTime() {
+        try {
+            LocalDate newFormatTime = LocalDate.parse(time);
+            return newFormatTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        } catch (DateTimeParseException e) {
+            return this.time;
+        }
+    }
+    
+    public LocalDate getLocalDate() {
+        return LocalDate.parse(time);
+    }
+    
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
+    }
+    
+    public String getType() {
+        return "Task";
     }
     
     public String toStringFile() {

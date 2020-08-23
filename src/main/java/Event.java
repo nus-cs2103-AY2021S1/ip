@@ -8,11 +8,16 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.time + ")";
+        return "[E]" + super.toString() + " (at: " + this.getNewFormatTime() + ")";
     }
     
     @Override
     public String toStringFile() {
         return "E" + " | " + (isDone? "1" : "0") + " | " + this.description + " | " + super.time;
+    }
+    
+    @Override
+    public String getType() {
+        return "Event";
     }
 }

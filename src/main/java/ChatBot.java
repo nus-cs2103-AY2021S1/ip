@@ -136,6 +136,35 @@ public class ChatBot {
                     System.out.println("    _______________________________________________________________________________");
                 }
 
+            } else if (userInput.startsWith("filter")) {
+                String[] inputArray = userInput.split(" ");
+                QueryOnTasks queryOnTasks = new QueryOnTasks();
+                if (inputArray[1].equals("date")) {
+                    List<Task> queryList = queryOnTasks.filterByDate(list,inputArray[2]);
+                    System.out.println("    _______________________________________________________________________________");
+                    System.out.println("        Here are the tasks in your query list:");
+                    for(int i=0; i<queryList.size(); i++) {
+                        System.out.println("            " + (i+1) + "." + queryList.get(i));
+                    }
+                    System.out.println("    _______________________________________________________________________________");
+                } else if (inputArray[1].equals("month")) {
+                    List<Task> queryList = queryOnTasks.filterByMonth(list,inputArray[2]);
+                    System.out.println("    _______________________________________________________________________________");
+                    System.out.println("        Here are the tasks in your query list:");
+                    for(int i=0; i<queryList.size(); i++) {
+                        System.out.println("            " + (i+1) + "." + queryList.get(i));
+                    }
+                    System.out.println("    _______________________________________________________________________________");
+                } else if (inputArray[1].equals("year")) {
+                    List<Task> queryList = queryOnTasks.filterByYear(list,inputArray[2]);
+                    System.out.println("    _______________________________________________________________________________");
+                    System.out.println("        Here are the tasks in your query list:");
+                    for(int i=0; i<queryList.size(); i++) {
+                        System.out.println("            " + (i+1) + "." + queryList.get(i));
+                    }
+                    System.out.println("    _______________________________________________________________________________");
+                }
+                
             } else {
                 System.out.println("    _______________________________________________________________________________");
                 System.out.println("        ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
