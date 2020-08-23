@@ -2,8 +2,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
+
+    private static String DATA_PATHNAME = "data/duke.txt";
 
     private List<Task> tasks = new ArrayList<>();
 
@@ -11,30 +15,52 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
 
-    void addTask(String task, String date, TaskType taskType) throws DukeException {
-        Task t;
-        switch(taskType) {
-            case TODO: {
-                t = new TodoTask(task);
-                tasks.add(t);
-                break;
-            }
-            case DEADLINE: {
-                t = new DeadlineTask(task, date);
-                tasks.add(t);
-                break;
-            }
-            case EVENT: {
-                t = new EventTask(task, date);
-                tasks.add(t);
-                break;
-            }
-            default:
-                throw new DukeException("Invalid Task Type");
+    String convertTaskToText (Task task) {
+        if (task instanceof TodoTask) {
+            return "T" + " | " + "0" + " | " + task.description;
+        } else if (task instanceof DeadlineTask) {
+            return "D" + " | " + "0" + " | " + task.description + " | " + ((DeadlineTask) task).deadline;
+        } else {
+            return "E" + " | " + "0" + " | " + task.description + " | " + ((EventTask) task).timing;
         }
+    }
 
-        System.out.println("Got it. I've added this task:\n " + t);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+    void writeToFile(Task task) throws IOException {
+        // create a fileWriter in append mode instead of overwriting
+        FileWriter fw = new FileWriter(DATA_PATHNAME, true);
+        fw.append(convertTaskToText(task));
+        fw.close();
+    }
+
+    void addTask(String task, String date, TaskType taskType) throws DukeException {
+        try {
+            Task t;
+            switch (taskType) {
+                case TODO: {
+                    t = new TodoTask(task);
+                    tasks.add(t);
+                    break;
+                }
+                case DEADLINE: {
+                    t = new DeadlineTask(task, date);
+                    tasks.add(t);
+                    break;
+                }
+                case EVENT: {
+                    t = new EventTask(task, date);
+                    tasks.add(t);
+                    break;
+                }
+                default:
+                    throw new DukeException("Invalid Task Type");
+            }
+
+            writeToFile(t);
+            System.out.println("Got it. I've added this task:\n " + t);
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        } catch (IOException error) {
+            System.out.println(error);
+        }
 
     }
 
@@ -62,21 +88,20 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    void getFile() {
-        File f = new File("data/duke.txt");
-        System.out.println("file exists?: " + f.exists());
-    }
+
+
 
     void initializeChatbot() {
-        getFile();
         greet();
         Scanner sc = new Scanner(System.in);
         boolean hasEnded = false;
         while (!hasEnded) {
-            Command command = Command.getCommand(sc.next());
             try {
+                Command command = Command.getCommand(sc.next());
                 //Check if command is invalid
                 if (command == null ) {
+                    //ignore remaining words after invalid command
+                    sc.nextLine();
                     throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(.");
                 }
 
@@ -134,6 +159,9 @@ public class Duke {
                             throw new InvalidIndexException("☹ OOPS!!! There is no such task.");
                         }
                         deleteTask(index);
+                        break;
+                    }
+                    default: {
                         break;
                     }
                 }
