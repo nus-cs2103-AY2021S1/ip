@@ -28,4 +28,18 @@ public class TaskList {
 
         return deletedTask;
     }
+
+    public List<Task> searchToDoItems(String searchTerm) {
+        List<Task> result = new ArrayList<Task>();
+
+        for (Task task: toDoLst) {
+            String taskTodo = task.getTodo();
+
+            if (taskTodo.matches(String.format(".*?\\b%s\\b.*?", searchTerm))) {
+                result.add(task);
+            }
+        }
+
+        return result;
+    }
 }

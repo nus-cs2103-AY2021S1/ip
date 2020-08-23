@@ -122,7 +122,13 @@ public class Duke {
         while(!line.equals("bye")) {
             if (!line.equals("")) {
                 if (line.equals("list")) {
-                    ui.showListItems(getToDoLst());
+                    ui.showListItems(getToDoLst(), "list");
+                } else if (line.split(" ")[0].equals("find")) {
+                    String searchTerm = parser.processFind(line);
+
+                    List<Task> tasks = db.searchToDoItems(searchTerm);
+
+                    ui.showListItems(tasks, "search");
                 } else if (parser.isTaskModification(line.split(" ")[0])) {
                     String[] processedData = parser.processModification(line);
                     String type = processedData[0];

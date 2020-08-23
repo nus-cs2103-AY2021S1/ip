@@ -19,13 +19,8 @@ public final class Ui {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    /**
-     * Display all items in task list
-     *
-     * @param lst task list
-     */
-    public void showListItems(List<Task> lst) {
-        System.out.println("Here are the tasks in your list:");
+    public void showListItems(List<Task> lst, String action) {
+        System.out.println(String.format("Here are the %s tasks in your list:", action.equals("search") ? "matching" : ""));
 
         for (int i = 0; i < lst.size(); i++) {
             System.out.println(String.format("%d.%s", i + 1, lst.get(i)));

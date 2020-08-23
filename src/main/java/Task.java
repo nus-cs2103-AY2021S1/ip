@@ -17,6 +17,10 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public String getTodo() {
+        return todo;
+    }
+
     public void setStatus(boolean newStatus) {
         isDone = newStatus;
     }

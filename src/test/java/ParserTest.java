@@ -24,3 +24,15 @@ public class ParserTest {
         assertEquals(isTaskModification, false);
     }
 }
+
+/*
+todo borrow book
+deadline return book /by 2019-10-15
+event project meeting /at 2019-10-15
+
+list
+
+done 2
+
+delete 2
+ */

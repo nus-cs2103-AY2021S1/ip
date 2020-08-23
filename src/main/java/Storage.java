@@ -109,11 +109,10 @@ public final class Storage {
         return toDoLst.removeToDoItem(i);
     }
 
-    /**
-     * Saves current list of tasks to text file.
-     *
-     * @throws IOException
-     */
+    public List<Task> searchToDoItems(String searchTerm) {
+        return toDoLst.searchToDoItems(searchTerm);
+    }
+
     public void save() throws IOException {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(dbPath.toFile()));
