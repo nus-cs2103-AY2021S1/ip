@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * Class to represent all the tasks
+ * Class to represent all the tasks.
  * @author vanGoghhh
  */
 
@@ -10,16 +10,16 @@ public class TaskList {
     private ArrayList<Task> taskList;
 
     /**
-     * Constructor for tasklist
-     * @param taskList arraylist containing all the tasks
+     * Constructor for tasklist.
+     * @param taskList arraylist containing all the tasks.
      */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
     /**
-     * Mark a task as completed
-     * @param completedTask task to be completed
+     * Mark a task as completed.
+     * @param completedTask task to be completed.
      */
     protected void markTaskDone(Task completedTask) {
         completedTask.markAsDone();
@@ -29,32 +29,32 @@ public class TaskList {
     }
 
     /**
-     * Adds a task into the tasklist
-     * @param task the task to be added
+     * Adds a task into the tasklist.
+     * @param task the task to be added.
      */
     protected void addTask(Task task) {
         this.taskList.add(task);
     }
 
     /**
-     * Deletes a task from the tasklist
-     * @param task the task to be deleted
+     * Deletes a task from the tasklist.
+     * @param task the task to be deleted.
      */
     protected void deleteTask(Task task) {
         this.taskList.remove(task);
     }
 
-    /**
-     * Gets the tasklist containing all the tasks
-     * @return arraylist containing all the tasks
+    /**.
+     * Gets the tasklist containing all the tasks.
+     * @return arraylist containing all the tasks.
      */
     protected ArrayList<Task> getTaskList() {
         return this.taskList;
     }
 
     /**
-     * Returns number of uncompleted tasks in the tasklist
-     * @return number of uncompleted tasks
+     * Returns number of uncompleted tasks in the tasklist.
+     * @return number of uncompleted tasks.
      */
     protected int checkTasksLeft() {
         int index = 0;
@@ -65,11 +65,16 @@ public class TaskList {
         }
         return index;
     }
-    
-    protected ArrayList<Task> findTask(String keyword) {
+
+    /**
+     * Search and return tasks using keyword.
+     * @param keyWord word used to search.
+     * @return Tasks withg description matching the keyword.
+     */
+    protected ArrayList<Task> findTask(String keyWord) {
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task task: this.taskList) {
-            if (task.description.equals(keyword)) {
+            if (task.description.equals(keyWord)) {
                 foundTasks.add(task);
             }
         }

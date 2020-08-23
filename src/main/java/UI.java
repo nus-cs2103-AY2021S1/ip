@@ -85,6 +85,10 @@ public class UI {
         System.out.println("\n");
     }
 
+    /**
+     * Prints tasks found using find command
+     * @param foundTasks tasks found with find command
+     */
     protected void findTask(ArrayList<Task> foundTasks) {
         if (foundTasks.isEmpty()) {
             System.out.println("\nNo matching tasks found!\n");
