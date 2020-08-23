@@ -10,12 +10,8 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws NoSuchTaskException {
-        tasks.completeTask(taskNumber);
+        Task completedTask = tasks.completeTask(taskNumber);
+        ui.printMessage(String.format("Great! I've marked the following task as done: \n %s", completedTask));
         storage.updateTasks(tasks.getListOfTasks());
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

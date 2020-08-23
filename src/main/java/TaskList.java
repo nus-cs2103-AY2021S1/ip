@@ -15,20 +15,22 @@ public class TaskList {
         return List.copyOf(taskList);
     }
 
-    public void completeTask(int taskNumber) throws NoSuchTaskException {
+    public Task completeTask(int taskNumber) throws NoSuchTaskException {
         if (!validateTaskNumber(taskNumber)) {
             throw new NoSuchTaskException();
         }
         Task completedTask = taskList.get(taskNumber - 1).markCompleted();
         taskList.set(taskNumber - 1, completedTask);
+        return completedTask;
     }
 
-    public void deleteTask(int taskNumber) throws NoSuchTaskException {
+    public Task deleteTask(int taskNumber) throws NoSuchTaskException {
         if (!validateTaskNumber(taskNumber)) {
             throw new NoSuchTaskException();
         }
         Task toRemove = taskList.get(taskNumber - 1);
         taskList.remove(taskNumber - 1);
+        return toRemove;
     }
 
     private boolean validateTaskNumber(int taskNumber) {

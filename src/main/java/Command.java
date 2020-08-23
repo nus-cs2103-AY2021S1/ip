@@ -4,6 +4,8 @@ public abstract class Command {
 
     abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
-    abstract boolean isExit();
+    public boolean isExit() {
+        return false;
+    }
 
 }
