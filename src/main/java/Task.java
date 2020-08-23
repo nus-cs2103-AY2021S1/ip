@@ -46,7 +46,9 @@ public class Task {
      * @return A String representing a tick or cross symbol.
      */
     protected String getStatusIcon() {
-        return (isDone ? "✓" : "✗"); //return tick or X symbols
+        //return tick or cross symbols
+        // (only_exception_case : appears to be ? in ACTUAL.TXT after running runtest.bat)
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     /**
@@ -55,6 +57,16 @@ public class Task {
      */
     public Task markDone() {
         return new Task(getDescription(), true);
+    }
+
+    /**
+     * Convert to string value of task to be stored as data.
+     * @return String to be stored in hard disk.
+     */
+    public String convertToStringData() {
+        return checkIsDone()
+                ? "T/1/" + getDescription()
+                : "T/0/" + getDescription();
     }
 
     /**

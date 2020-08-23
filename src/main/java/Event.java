@@ -36,11 +36,22 @@ public class Event extends Task {
     }
 
     /**
+     * Convert to string value of event to be stored as data.
+     * @return String to be stored in hard disk.
+     */
+    @Override
+    public String convertToStringData() {
+        return checkIsDone()
+                ? "E/1/" + getDescription() + "/" + this.time
+                : "E/0/" + getDescription() + "/" + this.time;
+    }
+
+    /**
      * Overridden toString method.
      * @return String value of event.
      */
     @Override
     public String toString() {
-        return "[E][" + getStatusIcon() + "] " + getDescription() + "(at: " + time + ")";
+        return "[E][" + getStatusIcon() + "] " + getDescription() + " (at: " + time + ")";
     }
 }
