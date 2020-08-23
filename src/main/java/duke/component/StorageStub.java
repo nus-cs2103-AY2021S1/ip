@@ -5,7 +5,7 @@ import duke.task.Task;
 public class StorageStub implements Storage {
     @Override
     public TaskList getList() {
-        return null;
+        return new TaskList();
     }
 
     @Override

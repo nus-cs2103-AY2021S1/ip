@@ -1,5 +1,9 @@
 package duke.command;
 
+import duke.component.Storage;
+import duke.component.StorageStub;
+import duke.component.TaskList;
+import duke.component.Ui;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,17 +18,10 @@ public class ByeCommandTest {
 
     @Test
     public void execute_nothingWrong() {
-        /*Ui ui = new Ui();
-        Storage storage;
-        TaskList list;
-        try {
-            storage = new Storage("../data/tasks.txt");
-            list = storage.getList();
-        } catch (Exception e) {
-            ui.output(e.getMessage());
-            list = new TaskList();
-        }
+        Ui ui = new Ui();
+        Storage storage = new StorageStub();
+        TaskList list = storage.getList();
         ByeCommand b = new ByeCommand("bye");
-        assertEquals("bye", b.execute(ui, storage, list));*/
+        assertEquals("bye", b.execute(ui, list, storage));
     }
 }
