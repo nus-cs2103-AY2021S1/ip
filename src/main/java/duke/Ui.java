@@ -149,7 +149,8 @@ public class Ui {
      * Prints a message to inform users that they have no <code>Task</code> on the specified date.
      */
     public void noSameDate() {
-        print(" You have no event on this day! Have a good break! *Woof*\n");
+        System.out.println("here");
+        print(" You have no task on this day! Have a good break! *Woof*\n");
     }
 
     /**
@@ -159,7 +160,7 @@ public class Ui {
      */
     public void sameDateHeader(LocalDate date) {
         System.out.print(lines);
-        System.out.println(" Here is the list of ongoing events on "
+        System.out.println(" Here is the list of ongoing tasks on "
                 + DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(date) + ":");
     }
 
