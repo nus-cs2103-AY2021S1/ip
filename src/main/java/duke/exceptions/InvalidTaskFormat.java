@@ -2,14 +2,29 @@ package duke.exceptions;
 
 import duke.tasks.TaskType;
 
+/**
+ * Represents an Invalid Task format exception.
+ */
 public class InvalidTaskFormat extends DukeException {
 
     private TaskType taskType;
 
+    /**
+     * Creates an instance of an InvalidTaskFormat exception with the
+     * appropriate task type.
+     *
+     * @param taskType Type of task that has the wrong command format.
+     */
     public InvalidTaskFormat(TaskType taskType) {
         this.taskType = taskType;
     }
 
+    /**
+     * Returns a string of the appropriate format description for the
+     * infringing task.
+     *
+     * @return Task format description.
+     */
     @Override
     public String toString() {
         switch (taskType) {
