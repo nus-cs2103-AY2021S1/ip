@@ -1,4 +1,4 @@
-import java.io.*;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,61 +16,8 @@ public class Duke {
         System.out.println(str);
     }
 
-    private static final String path = "data/listOfTasks.txt";
-
-    public static void readFile(ArrayList<Task> tasks) {
-        try {
-            File file = new File(path);
-            FileReader fr = new FileReader(file);
-            BufferedReader br = new BufferedReader(fr);
-            String line = br.readLine();
-            while (line != null) {
-                String[] details = line.split(" \\| ");
-                boolean isDone = details[1].equals("1") ? true : false;
-                switch (details[0]) {
-                case "T":
-                    tasks.add(new ToDos(details[2], isDone));
-                    break;
-                case "D":
-                    tasks.add(new Deadlines(details[2], details[3], isDone));
-                    break;
-                case "E":
-                    tasks.add(new Events(details[2], details[3], isDone));
-                    break;
-                }
-                line = br.readLine();
-            }
-            br.close();
-            fr.close();
-        } catch (IOException e) {
-            System.err.println (e);
-        }
-    }
-
-    public static void writeFile(ArrayList<Task> tasks) {
-        try {
-            File file = new File(path);
-            file.getParentFile().mkdirs();
-            FileWriter fw;
-            if (file.exists()) {
-                fw = new FileWriter(file, false);
-            } else {
-                fw = new FileWriter(file, true);
-            }
-            for (Task task : tasks) {
-                fw.write(task.writeToFile() + "\n");
-            }
-            fw.close();
-        } catch (IOException e) {
-            System.err.println (e);
-        }
-    }
-
-
     public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
-
-        readFile(tasks);
 
         CommandHandler.greeting();
 
@@ -101,7 +48,7 @@ public class Duke {
                     if (input.split("deadline ").length < 2) {
                         throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.DEADLINE);
                     } else if (!input.contains("/by ")) {
-                        if (input.equals("deadline /by ")) {
+                        if (input.equals("deadline /by")) {
                             throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.DEADLINE);
                         } else {
                             throw new DukeException("", DukeExceptionType.MISSING_TIMING, DukeCommandType.DEADLINE);
@@ -119,8 +66,12 @@ public class Duke {
                             } else if (due.equals("")) {
                                 throw new DukeException("", DukeExceptionType.MISSING_TIMING, DukeCommandType.DEADLINE);
                             } else {
-                                Task newTask = new Deadlines(task, due);
-                                addTask(newTask);
+                                try {
+                                    Task newTask = new Deadlines(task, due);
+                                    addTask(newTask);
+                                } catch (DateTimeParseException e) {
+                                    CommandHandler.wrongTimeFormat();
+                                }
                             }
                         } catch (DukeException e){
                             System.err.println(e);
@@ -134,7 +85,7 @@ public class Duke {
                     if (input.split("event ").length < 2) {
                         throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.EVENT);
                     } else if (!input.contains("/at ")) {
-                        if (input.equals("event /at ")) {
+                        if (input.equals("event /at")) {
                             throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.EVENT);
                         } else {
                             throw new DukeException("", DukeExceptionType.MISSING_TIMING, DukeCommandType.EVENT);
@@ -157,6 +108,8 @@ public class Duke {
                             }
                         } catch (DukeException e){
                             System.err.println(e);
+                        } catch (DateTimeParseException e) {
+                            CommandHandler.wrongTimeFormat();
                         }
                     }
                 } catch (DukeException e) {
@@ -199,6 +152,5 @@ public class Duke {
             }
             input = sc.nextLine();
         }
-        writeFile(tasks);
     }
 }
