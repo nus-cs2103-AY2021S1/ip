@@ -5,6 +5,9 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class Duke {
     private static final List<Task> tasks = new ArrayList<>();
 
@@ -159,9 +162,11 @@ public class Duke {
                 case DEADLINE:
                     try {
                         String[] splitDescription = splitInput[1].split(" /by ", 2);
-                        tasks.add(new Deadline(splitDescription[0], splitDescription[1]));
+                        tasks.add(new Deadline(splitDescription[0], LocalDate.parse(splitDescription[1])));
                     } catch (IndexOutOfBoundsException ex) {
                         throw new DukeException("☹ OOPS!!! The description or date of a deadline cannot be empty.");
+                    } catch (DateTimeParseException ex) {
+                        throw new DukeException("☹ OOPS!!! The date does not look right.");
                     }
                     printAddTask(tasks.get(tasks.size() - 1));
                     saveTasks();
@@ -169,12 +174,31 @@ public class Duke {
                 case EVENT:
                     try {
                         String[] splitDescription = splitInput[1].split(" /at ", 2);
-                        tasks.add(new Event(splitDescription[0], splitDescription[1]));
+                        tasks.add(new Event(splitDescription[0], LocalDate.parse(splitDescription[1])));
                     } catch (IndexOutOfBoundsException ex) {
                         throw new DukeException("☹ OOPS!!! The description or date of an event cannot be empty.");
+                    } catch (DateTimeParseException ex) {
+                        throw new DukeException("☹ OOPS!!! The date does not look right.");
                     }
                     printAddTask(tasks.get(tasks.size() - 1));
                     saveTasks();
+                    break;
+                case VIEW:
+                    try {
+                        LocalDate date = LocalDate.parse(splitInput[1]);
+                        String numberedList = "Here are the tasks on this date:";
+                        for (int i = 0; i < tasks.size(); i++) {
+                            Task task = tasks.get(i);
+                            if ((task instanceof Deadline && ((Deadline) task).getBy().equals(date))
+                                    || task instanceof Event && ((Event) task).getAt().equals(date)) {
+                                numberedList += "\n\t" + (i + 1) + "." + tasks.get(i);
+                            }
+                        }
+                        printResponse(numberedList);
+                    } catch (NullPointerException | IndexOutOfBoundsException
+                            | DateTimeParseException ex) {
+                        throw new DukeException("☹ OOPS!!! The date is not valid.");
+                    }
                     break;
                 }
             } catch (DukeException ex) {

@@ -5,7 +5,8 @@ public enum Command {
     DELETE("delete"),
     TODO("todo"),
     DEADLINE("deadline"),
-    EVENT("event");
+    EVENT("event"),
+    VIEW("view");
 
     private final String command;
 
