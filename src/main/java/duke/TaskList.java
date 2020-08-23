@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 import duke.task.Task;
 
@@ -11,6 +13,7 @@ import java.util.ArrayList;
  * while Duke is still running.
  */
 public class TaskList {
+
     private ArrayList<Task> taskStore;
 
     /**

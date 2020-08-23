@@ -1,15 +1,16 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
 
 /**
  * Represents an Event Task at a specific timePeriod.
  */
 public class EventTask extends Task {
+
     private final LocalDate timePeriod; // YYYY-MM-DD
 
     /**
@@ -52,6 +53,7 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + timePeriod.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: " + timePeriod
+                .format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

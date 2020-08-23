@@ -5,6 +5,7 @@ package duke.exception;
  * while running Duke.
  */
 public class DukeException extends Exception {
+
     /**
      * Initializes DukeException with an error message.
      * @param msg The error message describing the error.

@@ -1,16 +1,17 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
 
 /**
  * Represents a DeadlineTask that has to be done
  * by a certain datetime.
  */
 public class DeadlineTask extends Task {
+
     private final LocalDate deadline; // YYYY-MM-DD
 
     /**
@@ -52,6 +53,7 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + deadline
+                .format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

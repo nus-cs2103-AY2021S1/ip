@@ -1,12 +1,14 @@
 package duke.task;
 
-import duke.exception.DukeException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import org.junit.jupiter.api.Test;
+
+import duke.exception.DukeException;
+
 public class DeadlineTaskTest {
+
     @Test
     public void createDeadlineTask_incorrectDateInput_throwDukeException() {
         try {

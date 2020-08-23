@@ -1,14 +1,15 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.exception.DukeException;
 import duke.Storage;
+import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
 
 /**
  * An interface that models a basic Command.
  */
 public interface Command {
+
     /**
      * Contains the logic required to execute the command.
      * @param ui The ui of Duke.

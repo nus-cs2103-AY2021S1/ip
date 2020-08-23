@@ -1,10 +1,10 @@
 package duke;
 
-import duke.command.Command;
-import duke.exception.DukeException;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.command.Command;
+import duke.exception.DukeException;
 
 /**
  * The Duke object initializes the core classes: Ui, Storage,
@@ -12,6 +12,7 @@ import java.util.List;
  * them together to run the Duke application.
  */
 public class Duke {
+
     private final Ui ui;
     private final Storage storage;
     private final TaskList taskList;
@@ -28,7 +29,8 @@ public class Duke {
         TaskList tmpTaskList;
         try {
             tmpTaskList = new TaskList(storage.load());
-            ui.printWithWrapper(new ArrayList<>(List.of("Duke has loaded from a previously saved file!")), false, false);
+            ui.printWithWrapper(new ArrayList<>(List.of("Duke has loaded from a previously saved file!")),
+                    false, false);
         } catch (DukeException e) {
             tmpTaskList = new TaskList();
             ui.printWithWrapper(new ArrayList<>(List.of(

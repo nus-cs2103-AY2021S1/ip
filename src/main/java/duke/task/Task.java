@@ -5,6 +5,7 @@ package duke.task;
  * basic Task.
  */
 public abstract class Task {
+
     protected final String description;
     protected final boolean isDone;
 

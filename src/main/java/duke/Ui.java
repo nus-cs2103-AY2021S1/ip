@@ -9,6 +9,7 @@ import java.util.Scanner;
  * and feel of the console messages.
  */
 public class Ui {
+
     private final Scanner sc;
     private final static String ERRORBORDER = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
     private final static String BORDER = "===================================================";

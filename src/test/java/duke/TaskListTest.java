@@ -1,14 +1,15 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
 import duke.exception.DukeException;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.TodoTask;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class TaskListTest {
 
@@ -22,16 +23,12 @@ public class TaskListTest {
 
     @Test
     public void markTaskAsDone_taskNum_correctOutput() {
-        try {
-            Task t = new TodoTask("test");
-            TaskList taskList = new TaskList();
-            taskList.add(t);
-            t = taskList.markTaskAsDone(1);
-            assertEquals("[T][\u2713] test", taskList.getListRepr().get(0));
-            assertEquals("[T][\u2713] test", t.toString());
-        } catch (DukeException e) {
-            fail();
-        }
+        Task t = new TodoTask("test");
+        TaskList taskList = new TaskList();
+        taskList.add(t);
+        t = taskList.markTaskAsDone(1);
+        assertEquals("[T][\u2713] test", taskList.getListRepr().get(0));
+        assertEquals("[T][\u2713] test", t.toString());
     }
 
     @Test

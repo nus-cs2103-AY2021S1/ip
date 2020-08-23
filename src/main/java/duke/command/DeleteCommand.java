@@ -1,18 +1,19 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.task.Task;
-import duke.Ui;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
 
 /**
  * Represents the Command to delete
  * existing Tasks from taskList.
  */
 public class DeleteCommand implements Command {
+
     private final int taskNum;
 
     /**

@@ -1,18 +1,21 @@
 package duke.command;
 
-import duke.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.DeadlineTask;
 import duke.task.Task;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Represents the command to add a new
  * DeadlineTask.
  */
 public class DeadlineCommand implements Command {
+
     String description;
     String deadline;
 

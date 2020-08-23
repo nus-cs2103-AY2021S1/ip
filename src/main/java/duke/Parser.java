@@ -1,20 +1,29 @@
 package duke;
 
-import duke.command.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ListCommand;
+import duke.command.SaveCommand;
+import duke.command.TodoCommand;
 import duke.exception.DukeException;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.TodoTask;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 /**
  * Class that is responsible for parsing raw inputs and
  * translating them to the correct Command or Task.
  */
 public class Parser {
+
     /**
      * Parses user input.
      * @param input The user input.
@@ -30,35 +39,35 @@ public class Parser {
 
         // CHECK FOR NON-TASKS-RELATED COMMANDS
         switch (cmd) {
-            case "bye":
-                return new ByeCommand();
-            case "save":
-                return new SaveCommand();
-            case "list":
-                return new ListCommand();
-            case "done":
-                return new DoneCommand(Integer.parseInt(segments[1].trim()));
-            case "delete":
-                return new DeleteCommand(Integer.parseInt(segments[1].trim()));
-            case "todo":
-            case "deadline":
-            case "event":
-                break;
-            default:
-                throw new DukeException("Aww! The first word of your input is wrong!");
+        case "bye":
+            return new ByeCommand();
+        case "save":
+            return new SaveCommand();
+        case "list":
+            return new ListCommand();
+        case "done":
+            return new DoneCommand(Integer.parseInt(segments[1].trim()));
+        case "delete":
+            return new DeleteCommand(Integer.parseInt(segments[1].trim()));
+        case "todo":
+        case "deadline":
+        case "event":
+            break;
+        default:
+            throw new DukeException("Aww! The first word of your input is wrong!");
         }
 
         String[] parsedSegments = parseSegments(input, cmd, getTaskBreakPt(cmd));
         // CHECK FOR TASKS-RELATED COMMANDS
         switch (cmd) {
-            case "todo":
-                return new TodoCommand(parsedSegments[0]);
-            case "deadline":
-                return new DeadlineCommand(parsedSegments[0], parsedSegments[1]);
-            case "event":
-                return new EventCommand(parsedSegments[0], parsedSegments[1]);
-            default:
-                throw new DukeException("Aww! The first word of your input is wrong!");
+        case "todo":
+            return new TodoCommand(parsedSegments[0]);
+        case "deadline":
+            return new DeadlineCommand(parsedSegments[0], parsedSegments[1]);
+        case "event":
+            return new EventCommand(parsedSegments[0], parsedSegments[1]);
+        default:
+            throw new DukeException("Aww! The first word of your input is wrong!");
         }
     }
 
@@ -76,17 +85,17 @@ public class Parser {
 
         try {
             switch (segments[0]) {
-                case "T":
-                    task = new TodoTask(segments[2], isDone);
-                    break;
-                case "D":
-                    task = new DeadlineTask(segments[2], isDone, LocalDate.parse(segments[3]));
-                    break;
-                case "E":
-                    task = new EventTask(segments[2], isDone, LocalDate.parse(segments[3]));
-                    break;
-                default:
-                    task = null;
+            case "T":
+                task = new TodoTask(segments[2], isDone);
+                break;
+            case "D":
+                task = new DeadlineTask(segments[2], isDone, LocalDate.parse(segments[3]));
+                break;
+            case "E":
+                task = new EventTask(segments[2], isDone, LocalDate.parse(segments[3]));
+                break;
+            default:
+                task = null;
             }
             return task;
         } catch (DateTimeParseException e) {
@@ -151,12 +160,12 @@ public class Parser {
 
     private static String getTaskBreakPt(String taskName) {
         switch (taskName) {
-            case "deadline":
-                return "/by";
-            case "event":
-                return "/at";
-            default:
-                return "";
+        case "deadline":
+            return "/by";
+        case "event":
+            return "/at";
+        default:
+            return "";
         }
 
     }
