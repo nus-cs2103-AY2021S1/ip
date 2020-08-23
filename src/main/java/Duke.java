@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -5,13 +6,26 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
+
 import java.util.Arrays;
+
+import java.util.Date;
+
 import java.util.List;
 import java.util.Scanner;
 
 
 public class Duke {
+    private static final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private static final SimpleDateFormat dateTimeConverterFormat = new SimpleDateFormat("MMM dd yyyy hh:mma");
+    private static final SimpleDateFormat dateConverterFormat = new SimpleDateFormat("MMM dd yyyy");
+
 
     public static void readAndEcho(List<Task> list) {
 
@@ -75,7 +89,17 @@ public class Duke {
                         if (deadlineArr.length < 2) {
                             throw new TaskException("☹ OOPS!!! The date of a deadline cannot be empty.\n");
                         }
-                        Deadline deadline = new Deadline(deadlineArr[0], deadlineArr[1]);
+
+                        Date date;
+                        boolean isTime;
+                        if (deadlineArr[1].split(" ").length == 1) {
+                            date = dateFormat.parse(deadlineArr[1]);
+                            isTime = false;
+                        } else {
+                            date = dateTimeFormat.parse(deadlineArr[1]);
+                            isTime = true;
+                        }
+                        Deadline deadline = new Deadline(deadlineArr[0], date, isTime);
                         list.add(deadline);
                         String s = formatString("Got it. I've added this task: \n") +
                                 formatString(deadline.toString() + '\n') +
@@ -92,7 +116,16 @@ public class Duke {
                         if (eventArr.length < 2) {
                             throw new TaskException("☹ OOPS!!! The date of an event cannot be empty.\n");
                         }
-                        Event event = new Event(eventArr[0], eventArr[1]);
+                        Date date;
+                        boolean isTime;
+                        if (eventArr[1].split(" ").length == 1) {
+                            date = dateFormat.parse(eventArr[1]);
+                            isTime = false;
+                        } else {
+                            date = dateTimeFormat.parse(eventArr[1]);
+                            isTime = true;
+                        }
+                        Event event = new Event(eventArr[0], date, isTime);
                         list.add(event);
                         String s = formatString("Got it. I've added this task: \n") +
                                 formatString(event.toString() + '\n') +
@@ -111,6 +144,10 @@ public class Duke {
                 System.out.println(addDividers(formatString(e.toString())));
             } catch (NumberFormatException e) {
                 System.out.println(addDividers(formatString("Please enter out a valid number\n")));
+            } catch (ParseException e) {
+                System.out.println(addDividers(formatString("Please enter a date and time in the format of \n") +
+                        formatString("dd/MM/2020 HHmm (e.g. 02/12/2020 1530) " +
+                        "or dd/MM/2020 (e.g. 15/02/2020)\n")));
             }
             input = sc.nextLine();
         }
@@ -162,7 +199,7 @@ public class Duke {
     }
 
     private static String addDividers(String s) {
-        String divider = "___________________________\n";
+        String divider = "____________________________________________________________________\n";
         String dividerFormatted = String.format("%" + (5 + divider.length()) + "s", divider);
         return dividerFormatted + s + dividerFormatted;
     }
@@ -198,23 +235,31 @@ public class Duke {
                 while (s.hasNext()) {
                     String string = s.nextLine();
                     String[] arr = string.split(" \\| ");
-                    System.out.println(Arrays.toString(arr));
+                    
                     boolean isDone = arr[1].equals("1");
+                    boolean isTime;
+                    Date date;
                     switch (arr[0]) {
                     case "T":
                         arrayList.add(new ToDo(arr[2], isDone));
                         break;
                     case "D":
-                        arrayList.add(new Deadline(arr[2], arr[3], isDone));
+                        isTime = arr[4].equals("1");
+                        date = (isTime) ? dateTimeConverterFormat.parse(arr[3]) : dateConverterFormat.parse(arr[3]);
+                        arrayList.add(new Deadline(arr[2], date, isTime, isDone));
                         break;
                     case "E":
-                        arrayList.add(new Event(arr[2], arr[3], isDone));
+                        isTime = arr[4].equals("1");
+                        date = (isTime) ? dateTimeConverterFormat.parse(arr[3]) : dateConverterFormat.parse(arr[3]);
+                        arrayList.add(new Event(arr[2], date, isTime, isDone));
                         break;
                     }
                 }
             } catch (FileNotFoundException e) {
                 System.out.println("Unable to find file :(");
                 createFile();
+            } catch (ParseException e) {
+                System.out.println("Unable to parse date :(");
             }
         }
     }

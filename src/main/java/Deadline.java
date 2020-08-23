@@ -1,24 +1,40 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Deadline extends Task {
 
-    protected String date;
+    protected Date date;
+    protected boolean isTime;
 
-    public Deadline (String description, String date) {
+    public Deadline (String description, Date date, boolean isTime) {
         super(description);
         this.date = date;
+        this.isTime = isTime;
     }
 
-    public Deadline (String description, String date, boolean isDone) {
+    public Deadline (String description, Date date, boolean isTime, boolean isDone) {
         super(description, isDone);
         this.date = date;
+        this.isTime = isTime;
+    }
+
+    public boolean getIsTime() {
+        return isTime;
+    }
+
+    public boolean getIsDone() {
+        return isDone;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + date + ")";
+        String s = isTime ? "MMM dd yyyy hh:mma" : "MMM dd yyyy";
+        return "[D]" + super.toString() + " (by: " + new SimpleDateFormat(s).format(date) + ")";
     }
 
     @Override
     public String toStoredTextString() {
-        return "D | " + super.toStoredTextString() + " | " + date;
+        String s = isTime ? "MMM dd yyyy hh:mma" : "MMM dd yyyy";
+        return "D | " + super.toStoredTextString() + " | " + new SimpleDateFormat(s).format(date) + " | " + (isTime ? "1" : "0");
     }
 }
