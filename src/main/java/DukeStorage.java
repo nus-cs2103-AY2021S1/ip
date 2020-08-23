@@ -29,12 +29,13 @@ public class DukeStorage {
         }
     }
 
-    public void reloadStorage(List<Task> tasks) throws FileNotFoundException {
+    public void reloadStorage(List<Task> tasks) throws FileNotFoundException, DukeException {
         File file = new File(filePath);
         Scanner sc = new Scanner(file);
         while (sc.hasNext()) {
             // decode and add the task
-            tasks.add(DukeInterpreter.decode(sc.nextLine()));
+            String line = sc.nextLine();
+            tasks.add(DukeInterpreter.decode(line));
         }
     }
 

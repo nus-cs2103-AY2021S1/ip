@@ -26,6 +26,8 @@ public class Duke {
             storage.reloadStorage(tasks);
         } catch (FileNotFoundException ex) {
             System.out.println("Duke data do not exist!");
+        } catch (DukeException ex) {
+            System.out.println("Its a duke exception!");
         }
 
         Scanner sc = new Scanner(System.in);
@@ -164,7 +166,7 @@ public class Duke {
         }
 
         String details = splittedDeadline[0].trim();
-        String by = splittedDeadline[1].split("by", 2)[1].trim();
+        String by = splittedDeadline[1].split("by", 2)[1];
         addOnToList(new Deadline(details, by));
     }
 
@@ -184,7 +186,7 @@ public class Duke {
         }
 
         String details = splittedEvent[0].trim();
-        String at = splittedEvent[1].split("at", 2)[1].trim();
+        String at = splittedEvent[1].split("at", 2)[1];
         addOnToList(new Event(details, at));
     }
 

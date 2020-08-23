@@ -13,8 +13,13 @@ public class DukeInterpreter {
         String details = rest[0].trim();
         String extra = "";
         if (rest.length == 2) {
-            extra = rest[1].split(":", 2)[1].trim();
-            extra = extra.substring(0, extra.length() - 1);
+            if (task instanceof Deadline) {
+                Deadline deadline = (Deadline) task;
+                extra = deadline.getDateTime().toString();
+            } else if (task instanceof Event) {
+                Event event = (Event) task;
+                extra = event.getDateTime().toString();
+            }
         }
         return encodeHelper(type, symbol, details, extra);
     }
@@ -24,14 +29,18 @@ public class DukeInterpreter {
             (extra.equals("") ? "" : " | " + extra);
     }
 
-    public static Task decode(String code) {
+    public static Task decode(String code) throws DukeException {
         char taskType = code.charAt(0);
         String[] splittedWords = code.split("\\|");
         boolean isCompleted = splittedWords[1].trim().equals("✓");
         String details = splittedWords[2].trim();
         String extra = null;
         if (splittedWords.length == 4) {
-            extra = splittedWords[3].trim();
+            // since the tostring has a 'T' char inside
+            String dateTime = splittedWords[3].trim();
+            String date = dateTime.substring(0, 10);
+            String time = dateTime.substring(11, 16);
+            extra = date + " " + time;
         }
         switch (taskType) {
         case 'T':
@@ -52,7 +61,7 @@ public class DukeInterpreter {
         return toDo;
     }
 
-    private static Deadline decodeDeadline(String details, boolean isCompleted, String extra) {
+    private static Deadline decodeDeadline(String details, boolean isCompleted, String extra) throws DukeException {
         Deadline deadline = new Deadline(details, extra);
         if (isCompleted) {
             deadline.markAsCompleted();
@@ -60,7 +69,7 @@ public class DukeInterpreter {
         return deadline;
     }
 
-    private static Event decodeEvent(String details, boolean isCompleted, String extra) {
+    private static Event decodeEvent(String details, boolean isCompleted, String extra) throws DukeException {
         Event event = new Event(details, extra);
         if (isCompleted) {
             event.markAsCompleted();

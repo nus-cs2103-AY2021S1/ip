@@ -1,3 +1,4 @@
-T | ✗ | watch lecture
-D | ✗ | finish work | 8pm
-E | ✗ | project meeting | mon 4pm
+D | ✗ | do work | 2011-01-02T12:30
+D | ✓ | do work | 2011-12-12T03:30
+T | ✗ | life
+E | ✗ | meeting | 2011-12-30T14:00
