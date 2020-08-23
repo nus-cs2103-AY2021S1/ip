@@ -1,15 +1,20 @@
 package main.java;
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 
 
 public class Duke {
@@ -22,7 +27,9 @@ public class Duke {
         DEADLINE("deadline"),
         EVENT("event"),
         HELP("--help"),
-        DELETE("delete");
+        DELETE("delete"),
+        SHOW_AFTER("show after"),
+        SHOW_BEFORE("show before");
 
         private String command;
 
@@ -47,7 +54,10 @@ public class Duke {
     static final String LINE = "     ___________________________________________________________________________\n";
     static final String DOUBLE_TAB = "      ";
 
+
     static final String PATH = "data/data.txt";
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
 
     public void mainProgram() {
@@ -90,12 +100,16 @@ public class Duke {
                     deadlineTask(input);
                 } catch (IndexOutOfBoundsException e) {
                     printException(new DeadlineException());
+                } catch (DateTimeParseException e) {
+                    printException(new DukeDateTimeParserException());
                 }
             } else if (input.contains(Command.EVENT.toString())) {
                 try {
                     eventTask(input);
                 } catch(IndexOutOfBoundsException e) {
                    printException(new EventException());
+                } catch(DateTimeParseException e) {
+                    printException(new DukeDateTimeParserException());
                 }
             } else if (input.equals(Command.HELP.toString())){
                 help();
@@ -105,6 +119,10 @@ public class Duke {
                 } catch (IndexOutOfBoundsException e) {
                     printException(new DeleteException());
                 }
+            } else if(input.contains(Command.SHOW_AFTER.toString())) {
+                showAfter(input);
+            } else if (input.contains(Command.SHOW_BEFORE.toString())) {
+                showBefore(input);
             } else {
                 printException(new AnonymousException(input));
             }
@@ -222,6 +240,48 @@ public class Duke {
         }
     }
 
+    private void showBefore(String input) {
+        String[] strings = input.split("\\s",3);
+        LocalDate dateTime = LocalDate.parse(strings[2]);
+        StringBuilder sb  = new StringBuilder();
+        int i = 1;
+        for (Task task : list) {
+            if (task instanceof DeadlineTask) {
+                DeadlineTask deadlineTask = (DeadlineTask) task;
+                if (deadlineTask.getDateTime().toLocalDate().isBefore(dateTime)) {
+                    sb.append(format(i + ". " + deadlineTask + "\n"));
+                }
+            } else if(task instanceof EventTask) {
+                EventTask eventTask = (EventTask) task;
+                if (eventTask.getDateTime().toLocalDate().isBefore(dateTime)) {
+                    sb.append(format(i + ". " + eventTask + "\n"));
+                }
+            }
+        }
+        printMessage(sb.toString());
+    }
+
+    private void showAfter(String input) {
+        String[] strings = input.split("\\s", 3);
+        LocalDate dateTime = LocalDate.parse(strings[2]);
+        StringBuilder sb = new StringBuilder();
+        int i = 1;
+        for (Task task : list) {
+            if (task instanceof DeadlineTask) {
+                DeadlineTask deadlineTask = (DeadlineTask) task;
+                if (deadlineTask.getDateTime().toLocalDate().isAfter(dateTime)) {
+                    sb.append(format(i + ". " + deadlineTask + "\n"));
+                }
+            } else if(task instanceof EventTask) {
+                EventTask eventTask = (EventTask) task;
+                if (eventTask.getDateTime().toLocalDate().isAfter(dateTime)) {
+                    sb.append(format(i + ". " + eventTask + "\n"));
+                }
+            }
+        }
+        printMessage(sb.toString());
+    }
+
     private void delete(String input) {
         int index = Integer.parseInt(input.split(" ")[1]);
         Task removedTask = list.remove(index-1);
@@ -232,22 +292,26 @@ public class Duke {
     }
 
     private void help() {
+        System.out.print(LINE);
         printCommandList("COMMAND","FORMAT");
         printCommandList("todo","todo <TASK_NAME>");
-        printCommandList("event","event <EVENT_NAME> / <EVENT_TIME>");
-        printCommandList("deadline", "deadline <DEADLINE_NAME> / <DEADLINE_TIME>");
+        printCommandList("event","event <EVENT_NAME> /at <yyyy-MM-dd> <HH:mm>");
+        printCommandList("deadline", "deadline <DEADLINE_NAME> /by <yyyy-MM-dd> <HH:mm>");
         printCommandList("delete", "delete <TASK_NUMBER>");
         printCommandList("done", "done <TASK_NUMBER>");
+        printCommandList("show after", "show after <yyyy-MM-dd>");
+        printCommandList("show before", "show before <yyyy-MM-dd>");
+        System.out.print(LINE);
     }
 
     private void printCommandList(String command, String format) {
         String indentation = "%-20s%s%n" ;
-        System.out.printf(indentation,command,format);
+        System.out.printf(indentation,format(command),format);
     }
 
 
     private void runList() {
-        printMessage("Here are the tasks in your list:\n" + showList());
+        printMessage(format("Here are the tasks in your list:\n" ) + showList());
     }
 
     private void printException(Exception e) {
@@ -262,7 +326,7 @@ public class Duke {
 
     private void printMessage(String text) {
         System.out.print(LINE);
-        System.out.println(format(text));
+        System.out.println(text);
         System.out.println(LINE);
     }
 
@@ -273,14 +337,18 @@ public class Duke {
         String taskTime = splitTaskDetails[1];
         final String BY = taskTime.split("\\s",2)[0];
         final String TIME = taskTime.split("\\s",2)[1];
-        DeadlineTask deadlineTask = new DeadlineTask(taskDetails);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DeadlineTask deadlineTask = new DeadlineTask(taskDescription,LocalDateTime.parse(TIME,formatter));
+
         list.add(deadlineTask);
-        printMessage("Got it. I've added this task:\n" +
-                format(deadlineTask + " (" + BY + ": " + TIME + ")\n")
+        printMessage(format("Got it. I've added this task:\n") +
+                format(deadlineTask + "\n")
                 + format("Now you have " + list.size() + " tasks in the list") );
 
         updateToFile();
     }
+
 
     private void eventTask(String input) {
         String taskDetails = input.split("\\s", 2)[1];
@@ -288,10 +356,14 @@ public class Duke {
         String taskTime = taskDetails.split("/", 2)[1];
         final String AT = taskTime.split("\\s", 2)[0];
         final String TIME = taskTime.split("\\s", 2)[1];
-        EventTask eventTask = new EventTask(taskDetails);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        EventTask eventTask = new EventTask(taskDescription, LocalDateTime.parse(TIME,formatter));
+
         list.add(eventTask);
-        printMessage("Got it. I've added this task:\n" +
-                format(eventTask + " (" + AT + ": " + TIME + ")\n")
+
+        printMessage(format("Got it. I've added this task:\n") +
+                format(eventTask + "\n")
         + format("Now you have " + list.size() + " tasks in the list" ));
 
         updateToFile();
@@ -302,10 +374,19 @@ public class Duke {
         String taskDescription = input.split("\\s", 2)[1];
         TodoTask todoTask = new TodoTask(taskDescription);
         list.add(todoTask);
-        printMessage("Got it. I've added this task :\n" + format(todoTask +"\n" +
-                format("Now you have " + list.size() + " tasks in the list")));
+
+        printMessage(format("Got it. I've added this task :\n")
+                + format(todoTask +"\n"
+                + format("Now you have " + list.size() + " tasks in the list")));
 
         updateToFile();
+
+    }
+
+    private String formatDate(String taskTime) {
+        LocalDate date = LocalDate.parse(taskTime);
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy")).toString();
+
     }
 
     private void done(String input) {
@@ -320,10 +401,11 @@ public class Duke {
     private String showList() {
         StringBuilder sb = new StringBuilder();
         for(int i = 0 ; i < list.size() ; i++) {
+
             if (i != list.size()-1) {
-                sb.append(DOUBLE_TAB + (i + 1) + ". " + list.get(i) + "\n");
+                sb.append(format ((i + 1) + ". " + list.get(i) + "\n"));
             } else {
-                sb.append(DOUBLE_TAB + (i + 1) + ". " + list.get(i));
+                sb.append(format((i + 1) + ". " + list.get(i)));
             }
         }
         return sb.toString();
