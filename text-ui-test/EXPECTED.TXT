@@ -12,27 +12,27 @@ Hello from
 	___________________________________________________________________________
 	 Got it. I've added this task:
 		[T][✘] read book
-	 Now you have 1 duke.tasks in the list
+	 Now you have 1 tasks in the list
 	___________________________________________________________________________
 	___________________________________________________________________________
 	 Got it. I've added this task:
-		[D][✘] return book (by: 6 sep)
-	 Now you have 2 duke.tasks in the list
+		[D][✘] return book (by: 06 Sep 2020)
+	 Now you have 2 tasks in the list
 	___________________________________________________________________________
 	___________________________________________________________________________
-	 Got it. I've added this task:
-		[E][✘] meeting (at: mon 2-4 pm)
-	 Now you have 3 duke.tasks in the list
+	 OOPS! Invalid date / time format!
+	___________________________________________________________________________
+	___________________________________________________________________________
+	 OOPS! Invalid date / time format!
 	___________________________________________________________________________
 	___________________________________________________________________________
 	 Nice! I've marked this task as done:
 		[T][✓] read book
 	___________________________________________________________________________
 	___________________________________________________________________________
-	 Here are the duke.tasks in your list:
+	 Here are the tasks in your list:
 	 1.[T][✓] read book
-	 2.[D][✘] return book (by: 6 sep)
-	 3.[E][✘] meeting (at: mon 2-4 pm)
+	 2.[D][✘] return book (by: 06 Sep 2020)
 	___________________________________________________________________________
 	___________________________________________________________________________
 	 OOPS! I'm sorry but I don't know what that means :-(
@@ -47,7 +47,7 @@ Hello from
 	 OOPS! The date / time of event cannot be empty!
 	___________________________________________________________________________
 	___________________________________________________________________________
-	 OOPS! The date / time of event cannot be empty!
+	 OOPS! The description of a event cannot be empty.
 	___________________________________________________________________________
 	___________________________________________________________________________
 	 OOPS! No such task exists!

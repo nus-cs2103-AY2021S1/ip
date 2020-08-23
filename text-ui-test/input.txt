@@ -1,13 +1,14 @@
 todo read book
-deadline return book /by 6 sep
-event meeting /at mon 2-4 pm
+deadline return book /by 6 Sep 2020
+event meeting /at 23/7/2020 2:00 PM
+event meet /at 1/13/2020
 done 1
 list
 blah
 todo
 deadline do something
 event meeting /at
-event /at mon 9pm
+event /at 1-1-2020 14:00
 done 10
 done done
 bye

@@ -1,3 +1,2 @@
 T | 1 | read book
-D | 0 | return book | 6 sep
-E | 0 | meeting | mon 2-4 pm
+D | 0 | return book | 06 Sep 2020
