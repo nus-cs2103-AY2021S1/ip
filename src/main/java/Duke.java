@@ -1,3 +1,4 @@
+import java.time.DateTimeException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -124,7 +125,7 @@ public class Duke {
                                 splitLineIntoTwo[1].trim());
                         taskList.add(newTask);
                         System.out.println(botReplyForAddTask(newTask));
-                    } catch (IndexOutOfBoundsException | WrongFormatException e)
+                    } catch (IndexOutOfBoundsException | WrongFormatException | DateTimeException e)
                     { // Command is in a wrong format
                         throw new DeadlineWrongFormatException();
                     }
