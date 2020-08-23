@@ -95,7 +95,7 @@ public class Parser {
             }
             String time = description.substring(s + 4);
             description = description.substring(0, s - 1);
-            return new Event(description, time);
+            return new ActualEvent(description, time);
         } else {
             throw new InvalidCommandException();
         }
