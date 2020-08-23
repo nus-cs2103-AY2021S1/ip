@@ -30,7 +30,7 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    public static Task parse(String txtFormat) {
+    public static Task parse(String txtFormat) throws DukeInvalidUserInputException {
         char firstLetter = txtFormat.charAt(0);
         String[] txtArray = txtFormat.split("\\|");
         if (firstLetter == 'T') {

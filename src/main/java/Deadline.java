@@ -27,10 +27,10 @@ public class Deadline extends Task {
     }
 
     public String toTxtFormat() {
-        return "D | " + super.toTxtFormat() + " | " + this.dateTime;
+        return "D | " + super.toTxtFormat() + " | " + this.dateTimeTxt;
     }
 
-    public static Deadline parse(String txtFormat, String[] txtArray) {
+    public static Deadline parse(String txtFormat, String[] txtArray) throws DukeInvalidUserInputException {
         Deadline deadline = new Deadline(txtArray[2].trim(), txtArray[3].trim());
         if (txtArray[1].trim().equals("1")) {
             deadline.markAsDone();

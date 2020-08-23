@@ -30,10 +30,10 @@ public class Event extends Task {
     }
 
     public String toTxtFormat() {
-        return "E | " + super.toTxtFormat() + " | " + this.dateTime;
+        return "E | " + super.toTxtFormat() + " | " + this.dateTimeTxt;
     }
 
-    public static Event parse(String txtFormat, String[] txtArray) {
+    public static Event parse(String txtFormat, String[] txtArray) throws DukeInvalidUserInputException {
         Event event = new Event(txtArray[2].trim(), txtArray[3].trim());
         if (txtArray[1].trim().equals("1")) {
             event.markAsDone();

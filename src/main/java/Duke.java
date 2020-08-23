@@ -36,7 +36,11 @@ public class Duke {
         //Initialisation Message
         String greeting = "Oh Golly! Who do we have here?\nThe name's Duke, how can I be of assistance?";
         System.out.println(greeting);
-        loadTaskList();
+        try {
+            loadTaskList();
+        } catch (DukeInvalidUserInputException e) {
+            //System.out.println(e.getMessage());
+        }
 
         //Initialise scanner to prompt user
         Scanner sc = new Scanner(System.in);
@@ -83,9 +87,7 @@ public class Duke {
                 else {
                     System.out.println("OH FIDDLESTICKS, WE SEEM TO HAVE HIT A BUMP ON THE ROAD HERE.");
                 }
-            } catch (DukeIllegalCommandException e) {
-                System.out.println(e.getMessage());
-            } catch (DukeInvalidUserInputException e) {
+            } catch (DukeIllegalCommandException | DukeInvalidUserInputException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -295,7 +297,7 @@ public class Duke {
     }
 
 
-    private void loadTaskList() {
+    private void loadTaskList() throws DukeInvalidUserInputException {
         File saveFile = new File(this.filepath);
         try {
             Scanner s = new Scanner(saveFile);
@@ -304,6 +306,7 @@ public class Duke {
                 this.taskList.add(toAdd);
             }
         } catch (FileNotFoundException e) {
+            //System.out.println(e.getMessage());
         }
     }
 
