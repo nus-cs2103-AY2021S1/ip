@@ -32,6 +32,13 @@ public class Ui {
         print(horizontalLine + "\n\t  " + message + "\n" + horizontalLine + "\n");
     }
 
+    /**
+     * Prints the filtered list with nice horizontal line formatting wrapping it and a text tip.
+     * @param list the list to be printed
+     * @param predicate the condition for the list element to be printed
+     * @param note the note that explains the filter, which should have a space at the end
+     * @return the note with the size of the filtered list at the end
+     */
     public String printList(TaskList list, Predicate<Task> predicate, String note) {
         System.out.println(horizontalLine + "\n\t  " + "Here are the tasks " + note + "in your list:");
         int n = list.print(predicate);
