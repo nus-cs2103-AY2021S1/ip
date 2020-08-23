@@ -13,12 +13,14 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
-    public void print(String str) {
+    public String print(String str) {
         System.out.println(str);
+        return str;
     }
 
-    public void output(String message) {
+    public String output(String message) {
         print(horizontalLine + "\n\t  " + message + "\n" + horizontalLine + "\n");
+        return message;
     }
 
     public void printList(TaskList list, Predicate<Task> predicate, String note) {
