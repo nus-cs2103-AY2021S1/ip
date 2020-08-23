@@ -11,6 +11,10 @@ import java.util.ArrayList;
 public class Storage {
     private final String filepath;
 
+    public Storage() {
+        this.filepath = "";
+    }
+
     public Storage(String filepath) {
         this.filepath = filepath;
     }

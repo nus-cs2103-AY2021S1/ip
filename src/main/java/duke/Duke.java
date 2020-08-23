@@ -1,12 +1,14 @@
 package duke;
 
+import duke.exceptions.DukeException;
+
 import java.util.Scanner;
 
 public class Duke {
-      private Storage storage;
-      private TaskList tasks;
-      private Ui ui;
-      private Parser parser;
+    private Storage storage;
+    protected TaskList tasks;
+    private Ui ui;
+    private Parser parser;
 
     public Duke(String filepath) {
         ui = new Ui();
@@ -21,7 +23,11 @@ public class Duke {
         String str = sc.nextLine();
         while (!str.equals("bye")) {
             ui.line();
-            parser.command(str, tasks, storage);
+            try {
+                parser.command(str, tasks, storage);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
             ui.line();
             str = sc.nextLine();
         }
@@ -29,7 +35,7 @@ public class Duke {
         ui.exit();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         new Duke("data/duke.txt").run();
     }
 
