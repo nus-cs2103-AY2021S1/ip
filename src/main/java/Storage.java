@@ -8,24 +8,30 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DataHandler {
-    public static void saveTask(String pathName, ArrayList<Task> data) throws IOException {
+public class Storage {
+    private final String savePath;
+
+    Storage(String savePath) {
+        this.savePath = savePath;
+    }
+
+    public void saveTask(TaskList data) throws IOException {
         // If no save file, create one
-        if (!Files.exists(Paths.get(pathName))) {
-            Files.createFile(Paths.get(pathName));
+        if (!Files.exists(Paths.get(savePath))) {
+            Files.createFile(Paths.get(savePath));
         }
 
         // Write to save file
-        FileWriter fs = new FileWriter(pathName);
-        for (Task i : data) {
-            fs.write(i.toString() + System.lineSeparator());
+        FileWriter fs = new FileWriter(savePath);
+        for (int i = 0; i < data.length(); i++) {
+            fs.write(data.getTask(i).toString() + System.lineSeparator());
         }
         fs.close();
     }
     
-    public static ArrayList<Task> loadTask(String pathName) {
+    public ArrayList<Task> loadTask() {
         ArrayList<Task> tasks = new ArrayList<>();
-        File f = new File(pathName);
+        File f = new File(savePath);
 
         // Loads the input from the file, if no file, return empty arraylist
         try {
@@ -52,11 +58,11 @@ public class DataHandler {
                         tasks.add(new ToDo(newTask, isDone));
                         break;
                     case 'D':
-                        description = Duke.stringSplit(newTask, "/by");
+                        description = Parser.stringSplit(newTask, "/by");
                         tasks.add(new Deadline(description[0], isDone, LocalDate.parse(description[1])));
                         break;
                     case 'E':
-                        description = Duke.stringSplit(newTask, "/at");
+                        description = Parser.stringSplit(newTask, "/at");
                         tasks.add(new Event(description[0], isDone, LocalDate.parse(description[1])));
                         break;
                 }
