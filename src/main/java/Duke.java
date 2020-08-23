@@ -1,14 +1,15 @@
-import java.io.File;
-import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
-// checkstyle was a struggle and a half
 public class Duke {
     static class Task {
         private boolean completion;
         private String name;
         private Type type;
+        private LocalDate date;
 
         enum Type {
             TODO("todo"),
@@ -29,6 +30,20 @@ public class Duke {
 
         Task(String type, String name) {
             this.name = name;
+            int dateLocation = containsDate(name);
+            if (dateLocation >= 0) {
+                try {
+                    this.date = LocalDate.parse(name.substring(dateLocation));
+                    if (!dateStorage.containsKey(date)) {
+                        dateStorage.put(date, new ArrayList<>());
+                    }
+                    dateStorage.get(date).add(this);
+                } catch (Exception e) {
+                    // can't be parsed
+                    System.out.println("Date could not be parsed, task added without date.");
+                }
+                this.name = name.substring(0, dateLocation - 5);
+            }
             this.completion = false;
             this.type = Type.valueOf(type.toUpperCase());
         }
@@ -63,9 +78,18 @@ public class Duke {
             }
         }
 
+        public String getDate() {
+            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
+            return date.format(dateFormat);
+        }
+
         @Override
         public String toString() {
-            return completion + name + type;
+            if (date != null) {
+                return getType() + getCompletion() + " " + getName() + " @ " + getDate();
+            } else {
+                return getType() + getCompletion() + " " + getName();
+            }
         }
     }
 
@@ -92,6 +116,9 @@ public class Duke {
 
     // Task storage
     private static ArrayList<Task> storage = new ArrayList<>();
+
+    // Date storage
+    private static HashMap<LocalDate, ArrayList<Task>> dateStorage = new HashMap<>();
 
     // border line
     public static void line() {
@@ -125,7 +152,7 @@ public class Duke {
      */
     public static void taskAdded(Task task) {
         String toEcho = "Task added: \n"
-                + task.getType() + task.getCompletion() + " " + task.getName() + "\n"
+                + task + "\n"
                 + "You now have " + storage.size() + " task(s).";
         echo(toEcho);
     }
@@ -139,10 +166,7 @@ public class Duke {
         for (int i = 0; i < storage.size(); i++) {
             // list starts from 1
             Task currentTask = storage.get(i);
-            System.out.println((i + 1) + ". "
-                    + currentTask.getType()
-                    + currentTask.getCompletion() + " "
-                    + currentTask.getName());
+            System.out.println((i + 1) + ". " + currentTask);
         }
         line();
     }
@@ -156,7 +180,7 @@ public class Duke {
         currentTask.complete();
         line();
         System.out.println("Marked task " + (taskNumber + 1) + " as complete.");
-        System.out.println(currentTask.getType() + "[✓] " + storage.get(taskNumber).getName());
+        System.out.println(currentTask);
         line();
     }
 
@@ -168,31 +192,20 @@ public class Duke {
         Task currentTask = storage.get(taskNumber);
         line();
         System.out.println("Deleted task:");
-        System.out.println(currentTask.getType() + "[✓] " + storage.get(taskNumber).getName());
+        System.out.println(currentTask);
         storage.remove(taskNumber);
         System.out.println("There are now " + storage.size() + " task(s) remaining.");
         line();
     }
 
     /**
-     * Saves contents of storage to a text file
-     * @param storage the storage to be saved
+     * finds /by or /at if the string contains them
+     * @param s the string to be searched
+     * @return the index of the date after /by or /at
      */
-    public static void save(ArrayList<Task> storage) {
-        try {
-            FileWriter writer = new FileWriter("./data/duke.txt");
-            for (Task task: storage) {
-                writer.write(task.toString());
-            }
-            writer.close();
-        } catch (Exception e) {
-            File folder = new File("./data");
-            if (folder.mkdir()) {
-                save(storage);
-            } else {
-                System.out.println("folder does not exist, while making folder failed");
-            }
-        }
+    public static int containsDate(String s) {
+        int eitherIndex = Math.max(s.indexOf(" /by "), s.indexOf(" /at "));
+        return eitherIndex == -1 ? eitherIndex : eitherIndex + 5;
     }
 
     /**
@@ -250,6 +263,21 @@ public class Duke {
                             throw DukeException.outOfBounds(intIndex);
                         }
                     } catch (DukeException e) {
+                        echo(e.getMessage());
+                    }
+                    break;
+                }
+                case "due": {
+                    try {
+                        LocalDate dueDate = LocalDate.parse(multiWord.nextLine().trim());
+                        line();
+                        System.out.println("These tasks are due:");
+                        for (Task task: dateStorage.get(dueDate)) {
+                            System.out.println(task);
+                        }
+                        line();
+                    } catch (Exception e) {
+                        // time can't be parsed
                         echo(e.getMessage());
                     }
                     break;
