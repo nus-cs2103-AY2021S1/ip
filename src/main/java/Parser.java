@@ -2,9 +2,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
+/**
+ * Represents the user input Parser handler.
+ */
 public class Parser {
     private static final Ui ui = new Ui();
 
+    /**
+     * Processes the user input date and returns it in the correct format.
+     * @param s The user input date
+     * @return The formatted date for use.
+     */
     public static String parseDateTime(String s) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy h:mma");
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd HHmm");
@@ -40,6 +48,11 @@ public class Parser {
         return s.equals("delete");
     }
 
+    /**
+     * Parses the user input and calls the appropriate functions.
+     * @param taskList The list of tasks handler
+     * @param storage The storage call handler
+     */
     public static void parseInput(TaskList taskList, Storage storage) {
         Scanner scan = new Scanner(System.in);
         while (scan.hasNext()) {
