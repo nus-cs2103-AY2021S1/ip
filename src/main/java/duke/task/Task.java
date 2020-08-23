@@ -107,6 +107,11 @@ public abstract class Task {
         return false;
     }
 
+    /**
+     * Check whether the task happens within the given days counting from today.
+     * @param n the number of days to construct the period, 1 for tomorrow
+     * @return true if the task happens within n days (inclusive), ToDo does not happen on any date, so always false
+     */
     public boolean happenIn(int n) {
         return false;
     }
