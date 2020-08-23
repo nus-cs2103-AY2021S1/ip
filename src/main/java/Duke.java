@@ -1,17 +1,16 @@
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Duke {
 
     // Collection of user's tasks
-    static List<Task> taskItems = new ArrayList<>();
-
+    private static List<Task> taskItems;
     /**
      * Sends a greeting to user and indicates the INTRUBOT is active.
+     * Loads data from harddisk
      */
-    static void start() {
+    static void start() throws DukeException{
         String logo =
                 "8888888 888b    888 88888888888 8888888b.  888     888 888888b.    .d88888b. 88888888888 \n" +
                         "  888   8888b   888     888     888   Y88b 888     888 888  \"88b  d88P\" \"Y88b    888     \n" +
@@ -22,6 +21,7 @@ public class Duke {
                         "  888   888   Y8888     888     888  T88b  Y88b. .d88P 888   d88P Y88b. .d88P    888     \n" +
                         "8888888 888    Y888     888     888   T88b  \"Y88888P\"  8888888P\"   \"Y88888P\"     888";
         printReply(replyFormatter("ITS ME: \n" + logo + "\nI want to know EVERYTHING ABOUT YOU"));
+        taskItems = DataSaver.loadTasksFromMemory();
     }
 
     // EventHandlers
@@ -31,6 +31,7 @@ public class Duke {
             Task task = taskItems.get(itemNumber);
             task.markDone();
             printReply(replyFormatter("Nice! I've marked this task as done:\n" + task.toString()));
+            DataSaver.saveTaskToMemory(taskItems);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task number does not exist");
         }
@@ -41,9 +42,16 @@ public class Duke {
             int itemNumber = Integer.parseInt(reply.split(" ")[1]) - 1;
             Task task = taskItems.remove(itemNumber);
             printReply(deleteTaskReplyFormatter(task));
+            DataSaver.saveTaskToMemory(taskItems);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Cannot delete task that does not exist");
         }
+    }
+    
+    static void handleAddTask(Task task) throws DukeException {
+        taskItems.add(task);
+        printReply(addTaskReplyFormatter(task));
+        DataSaver.saveTaskToMemory(taskItems);
     }
 
 
@@ -60,43 +68,41 @@ public class Duke {
                 printReply(replyFormatter(listFormatter(taskItems)));
             } else {
                 try {
-                    switch (command) {
-                        case "done":
+                    switch (command) { 
+                    case "done":
                             handleDone(reply);
                             break;
-                        case "delete":
+                    case "delete":
                             handleDelete(reply);
                             break;
-                        case "todo":
+                    case "todo":
                             Task newTodo = new ToDo(reply.substring(5));
-                            taskItems.add(newTodo);
-                            printReply(addTaskReplyFormatter(newTodo));
+                            handleAddTask(newTodo);
                             break;
-                        case "deadline":
+                    case "deadline":
                             String[] taskAndTimeByArray = reply.split(" /by ");
                             String deadlineDescription = taskAndTimeByArray[0].substring(9);
                             String by = taskAndTimeByArray[1];
                             Task newDeadline = new Deadline(deadlineDescription, by);
-                            taskItems.add(newDeadline);
-                            printReply(addTaskReplyFormatter(newDeadline));
+                            handleAddTask(newDeadline);
                             break;
-                        case "event":
+                    case "event":
                             String[] taskAndTimeAtArray = reply.split(" /at ");
                             String eventDescription = taskAndTimeAtArray[0].substring(6);
                             String at = taskAndTimeAtArray[1];
                             Task newEvent = new Event(eventDescription, at);
-                            taskItems.add(newEvent);
-                            printReply(addTaskReplyFormatter(newEvent));
+                            handleAddTask(newEvent);
                             break;
-                        default:
-                            throw new DukeException("Invalid Command Exception");
+                    default:
+                            throw new DukeException(
+                                    "Invalid Command Exception, start every cmd with todo, deadline or event");
                     }
-                } catch (StringIndexOutOfBoundsException e) {
-                    throw new DukeException(String.format("No arguments specified for %s", command));
+                } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+                    throw new DukeException(String.format("Invalid arguments specified for %s", command));
                 }
             }
-
     }
+    
 
     // Formatting and UI
     static String replyFormatter(String reply) {
@@ -129,18 +135,22 @@ public class Duke {
     static void printReply(String reply) {
         System.out.println(reply);
     }
-
+    
     /**
      * main driver function
      * @param args
      */
     public static void main(String[] args) {
-        start();
         Scanner sc = new Scanner(System.in);
+        try {
+            start();
+        } catch (DukeException duked) {
+            System.err.println(duked.getMessage());
+        }
         while(sc.hasNextLine()) {
-            String reply = sc.nextLine();
+            String userReply = sc.nextLine();
             try {
-                replyHandler(reply);
+                replyHandler(userReply);
             } catch (DukeException duked) {
                 errorReply(duked.getMessage());
             }
