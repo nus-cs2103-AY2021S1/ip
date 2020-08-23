@@ -33,6 +33,11 @@ public class ByeCommand extends Command {
         return "bye";
     }
 
+    /**
+     * Checks whether a command equals this one.
+     * @param obj the Object to compare
+     * @return true if obj is a ByeCommand
+     */
     @Override
     public boolean equals(Object obj) {
         return obj instanceof ByeCommand;
