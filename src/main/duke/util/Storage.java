@@ -46,15 +46,15 @@ public class Storage {
                 String[] lineArr = line.split("\\s(\\|)\\s");
 
                 switch (lineArr[0]) {
-                    case "T":
-                        output.add(new ToDo(lineArr[2]));
-                        break;
-                    case "D":
-                        output.add(new Deadline(lineArr[2], lineArr[3], lineArr[4]));
-                        break;
-                    case "E":
-                        output.add(new Event(lineArr[2], lineArr[3], lineArr[4]));
-                        break;
+                case "T":
+                    output.add(new ToDo(lineArr[2]));
+                    break;
+                case "D":
+                    output.add(new Deadline(lineArr[2], lineArr[3], lineArr[4]));
+                    break;
+                case "E":
+                    output.add(new Event(lineArr[2], lineArr[3], lineArr[4]));
+                    break;
                 }
 
                 if (lineArr[1].equals("1")) {
