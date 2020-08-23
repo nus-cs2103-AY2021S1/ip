@@ -1,3 +1,8 @@
+import Parser.Parser;
+import Storage.Storage;
+import Tasks.TaskList;
+import Ui.Ui;
+
 public class Duke {
 
     private Storage storage;

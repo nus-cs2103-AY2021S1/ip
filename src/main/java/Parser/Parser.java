@@ -1,3 +1,12 @@
+package Parser;
+
+import DukeException.DukeException;
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Todo;
+import Storage.Storage;
+import Tasks.TaskList;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
@@ -37,7 +46,7 @@ public class Parser {
         System.out.println("Oh no! Please only type in the date in this format: yyyy-mm-dd (eg, 2019-10-15).");
     }
 
-    public void setDoneTask(String command) throws DukeException{
+    public void setDoneTask(String command) throws DukeException {
         String[] doneCommand = command.split("\\W+");
         if (doneCommand.length == 1) {
             throw new DukeException("Oh no! This can't be DONE! (The description of done can't be empty!)");
@@ -47,7 +56,7 @@ public class Parser {
                 storage.setDoneLine(i);
                 String doneTask = storage.printLine(i);
                 doneTask = storage.processLine(doneTask);
-                System.out.println("Task marked as done! Good job!");
+                System.out.println("Tasks.Task marked as done! Good job!");
                 System.out.println(doneTask);
             } catch (IndexOutOfBoundsException e) {
                 indexOutOfBounds();

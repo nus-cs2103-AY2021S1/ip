@@ -1,3 +1,10 @@
+package Storage;
+
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.Todo;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;

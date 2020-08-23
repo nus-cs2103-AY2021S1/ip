@@ -1,3 +1,8 @@
+package Tasks;
+
+import DukeException.DukeException;
+import Storage.Storage;
+
 import java.util.ArrayList;
 import static java.lang.Integer.parseInt;
 
@@ -23,7 +28,7 @@ public class TaskList {
         return this.list.size();
     }
 
-    public void setDoneList(String command) throws DukeException{
+    public void setDoneList(String command) throws DukeException {
         String[] doneCommand = command.split("\\W+");
         try {
             int i = parseInt(command.split(" ")[1]);
