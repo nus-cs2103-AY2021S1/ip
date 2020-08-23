@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.function.Predicate;
 
 public class TaskList extends ArrayList<Task> {
+    /**
+     * Creates a list of tasks.
+     */
     public TaskList() {
         super();
     }
