@@ -1,18 +1,31 @@
 public class Task {
     protected String description;
-    protected boolean completed;
+    protected boolean isCompleted;
 
     Task(String description) {
         this.description = description;
-        this.completed = false;
+        this.isCompleted = false;
+    }
+
+    Task(String description, String completionStatus) {
+        this.description = description;
+        this.isCompleted = completionStatus.equals("1");
     }
 
     String getStatusIcon() {
-        return (completed ? "\u2713" : "\u2718");
+        return (isCompleted ? "\u2713" : "\u2718");
+    }
+
+    String getType() {
+        return null;
+    }
+
+    String getDate() {
+        return null;
     }
 
     void markAsDone() {
-        this.completed = true;
+        isCompleted = true;
     }
 
     @Override

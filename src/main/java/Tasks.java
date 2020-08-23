@@ -1,5 +1,9 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 enum Command {
     LIST("list"),
@@ -94,6 +98,26 @@ public class Tasks {
         }
     }
 
+    void processStorage(File f, Scanner sc) throws IOException {
+        while (sc.hasNext()) {
+            String data = sc.nextLine();
+            String[] dataArray = data.split(" \\| ");
+            switch (dataArray[0]) {
+            case "T":
+                list.add(new ToDo(dataArray[2], dataArray[1]));
+                break;
+            case "E":
+                list.add(new Event(dataArray[2], dataArray[3], dataArray[1]));
+                break;
+            case "D":
+                list.add(new Deadline(dataArray[2], dataArray[3], dataArray[1]));
+                break;
+            default:
+            throw new IOException("Invalid data");
+            }
+        }
+    }
+
     void listTasks() {
         System.out.println("\t___________________________________________________________________________");
         for (int i = 0; i < this.list.size(); i++) {
@@ -125,5 +149,15 @@ public class Tasks {
         this.list.remove(index - 1);
         System.out.println("\t Now you have " + this.list.size() + " tasks in the list.");
         System.out.println("\t___________________________________________________________________________\n");
+    }
+
+    void writeData() throws IOException {
+        FileWriter fw = new FileWriter("data/data.txt");
+        for (Task t: list) {
+            String toWrite = "";
+            toWrite += (t.getType() + " | " + (t.isCompleted ? "1" : "0") + " | " + t.description + (t.getDate() != null ? (" | " + t.getDate()) : "") + "\n");
+            fw.write(toWrite);
+        }
+        fw.close();
     }
 }
