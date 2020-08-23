@@ -133,7 +133,8 @@ public class ParserTest {
     }
 
     @Test
-    public void isValidDelete_exceedLimit_throwException() {try {
+    public void isValidDelete_exceedLimit_throwException() {
+        try {
             Parser.isValidDelete("delete 8", 5);
             fail();
         } catch (Exception e) {
@@ -148,6 +149,16 @@ public class ParserTest {
             assertEquals(5, Parser.isValidDelete("delete 5", 5));
         } catch (Exception e) {
             fail();
+        }
+    }
+
+    @Test
+    public void generate_nonTaskInput_throwException() {
+        try {
+            Parser.generate("anything");
+            fail();
+        } catch (Exception e) {
+            assertEquals("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
         }
     }
 }
