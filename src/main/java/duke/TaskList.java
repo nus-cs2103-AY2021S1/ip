@@ -84,4 +84,16 @@ public class TaskList {
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
+
+    /**
+     * Returns the list of tasks that match the keyword.
+     *
+     * @param find keyword to find.
+     * @return Tasks matching keyword.
+     */
+    public ArrayList<Task> findTasks(String find) {
+        ArrayList<Task> foundTasks = new ArrayList<>(this.tasks);
+        foundTasks.removeIf(task -> !task.getTaskDescription().contains(find));
+        return foundTasks;
+    }
 }
