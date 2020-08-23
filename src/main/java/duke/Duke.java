@@ -1,7 +1,13 @@
+package duke;
+
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.UI;
+
+
 import java.util.Scanner;
 import java.io.File;
-
-
 
 public class Duke {
     public final static String LINE = "*********************************************************";

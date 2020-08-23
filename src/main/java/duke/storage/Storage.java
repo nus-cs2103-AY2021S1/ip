@@ -1,3 +1,11 @@
+package duke.storage;
+
+import duke.task.deadline.Deadline;
+import duke.task.Task;
+import duke.task.eventtask.EventTask;
+import duke.task.todo.ToDo;
+import duke.tasklist.TaskList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

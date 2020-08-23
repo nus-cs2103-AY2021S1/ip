@@ -1,4 +1,8 @@
-public class DukeIncorrectTimeFormatException extends DukeException{
+package duke.dukeexception;
+
+import duke.dukeexception.DukeException;
+
+public class DukeIncorrectTimeFormatException extends DukeException {
 
     public DukeIncorrectTimeFormatException(String message){
         super(message);

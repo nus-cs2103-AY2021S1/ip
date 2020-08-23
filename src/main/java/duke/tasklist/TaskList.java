@@ -1,3 +1,8 @@
+package duke.tasklist;
+
+import duke.dukeexception.DukeTaskNonExistException;
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -38,10 +43,10 @@ public class TaskList {
             System.out.println(counter + ". " + iter.next());
             counter++;
         }
-        // reminder to print line from the UI side
+        // reminder to print line from the duke.ui.UI side
     }
 
-    public void delete(int index) throws DukeTaskNonExistException{
+    public void delete(int index) throws DukeTaskNonExistException {
         if(index <0 | index>=shelf.size()) {
             throw new DukeTaskNonExistException("error");
         }

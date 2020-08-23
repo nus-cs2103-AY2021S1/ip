@@ -1,4 +1,8 @@
-public class DukeTaskNonExistException extends DukeException{
+package duke.dukeexception;
+
+import duke.dukeexception.DukeException;
+
+public class DukeTaskNonExistException extends DukeException {
 
     public DukeTaskNonExistException(String message){
         super(message);
