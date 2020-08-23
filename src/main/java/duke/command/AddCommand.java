@@ -93,7 +93,7 @@ public class AddCommand extends Command {
 
             String formattedBy = by.replace(' ', 'T');
             LocalDateTime date;
-            try {
+            try { // user did not input correct format of date of deadline task
                 date = LocalDateTime.parse(formattedBy);
             } catch (DateTimeParseException e) {
                 throw new DukeException("\tPlease input the correct date format!\n"
@@ -141,7 +141,7 @@ public class AddCommand extends Command {
 
             String formattedAt = at.replace(' ', 'T');
             LocalDateTime date;
-            try {
+            try { // user did not input correct format of date of event task
                 date = LocalDateTime.parse(formattedAt);
             } catch (DateTimeParseException e) {
                 throw new DukeException("\tPlease input the correct date format!\n"
