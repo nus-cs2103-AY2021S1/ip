@@ -73,7 +73,11 @@ public class Ui {
             + "Now you have " + size + " tasks in the list.");
     }
 
-    public void displayTasksWithKeyword(List<Task> tasks) {
+    /**
+     * Prints tasks according to LIST/FIND Command.
+     * @param tasks tasks to be printed.
+     */
+    public void displayTasksWithCommand(List<Task> tasks, String command) {
         StringBuilder sb = new StringBuilder();
         int len = tasks.size();
         if (len == 0) {
@@ -81,7 +85,8 @@ public class Ui {
             format(sb.toString());
             return;
         }
-        sb.append("Here are the matching tasks in your list:\n");
+        sb.append("Here are the" + (command.equals("find") ? " matching " : " ")
+                + "tasks in your list:\n");
         for (int i = 0; i < len; i++) {
             sb.append(i + 1 + "." + tasks.get(i) + "\n");
         }

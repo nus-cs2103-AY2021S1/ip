@@ -1,9 +1,16 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a find/search command.
+ */
 public class FindCommand extends Command {
     private String afterCommand;
 
+    /**
+     * Constructor for the find command.
+     * @param afterCommand search keyword.
+     */
     public FindCommand(String afterCommand) {
         this.afterCommand = afterCommand;
     }
@@ -25,7 +32,7 @@ public class FindCommand extends Command {
             }
         }
         // display those tasks
-        ui.displayTasksWithKeyword(tempList);
+        ui.displayTasksWithCommand(tempList, "find");
     }
 
     @Override

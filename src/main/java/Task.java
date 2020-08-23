@@ -20,6 +20,10 @@ public class Task {
         this.isCompleted = true;
     }
 
+    /**
+     * Returns the details of the task.
+     * @return Task details.
+     */
     public String getDetails() {
         return this.details;
     }
