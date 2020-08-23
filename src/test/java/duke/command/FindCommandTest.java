@@ -29,4 +29,18 @@ public class FindCommandTest {
         list.add(task2);
         assertEquals("containing '' 2", new FindCommand("find ").execute(ui, list, storage));
     }
+
+    @Test
+    public void execute_anyString_findsMatches() {
+        Ui ui = new Ui();
+        Storage storage = new StorageStub();
+        TaskList list = storage.getList();
+        Task task = new ToDo("hello");
+        Task task2 = new ToDo("world");
+        list.add(task);
+        list.add(task2);
+        assertEquals("containing 'o' 2", new FindCommand("find o").execute(ui, list, storage));
+        assertEquals("containing 'll' 1", new FindCommand("find ll").execute(ui, list, storage));
+        assertEquals("containing 's' 0", new FindCommand("find s").execute(ui, list, storage));
+    }
 }
