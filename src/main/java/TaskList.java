@@ -97,35 +97,32 @@ public class TaskList {
     }
 
     public void delTask(String s) throws DukeException {
-        if (storage.size() == 0) {
+        if (storage.size() == 0 || s.toLowerCase().equals("all")) {
+            storage.clear();
             System.out.println(ui.getBorder() + "All tasks cleared!!\n" + ui.getBorder());
-            return;
-        }
-
-        if (s.equals("")) {
+        } else if (s.equals("")) {
             try {
                 addTask("delete", "");
             } catch (DukeException e) {
                 System.out.println(ui.getBorder() + e.getMessage() + "\n" + ui.getBorder());
             }
-            return;
-        }
-
-        try {
-            int i = Integer.parseInt(s);
-            if (i < 1 || i > storage.size()) {
-                throw new DukeException("You have entered an invalid number: " + i
-                        + ". Please try again.");
-            } else {
-                Task t = storage.get(i - 1);
-                storage.remove(i - 1);
-                ui.removeTaskLine(t, storage.size());
+        } else {
+            try {
+                int i = Integer.parseInt(s);
+                if (i < 1 || i > storage.size()) {
+                    throw new DukeException("You have entered an invalid number: " + i
+                            + ". Please try again.");
+                } else {
+                    Task t = storage.get(i - 1);
+                    storage.remove(i - 1);
+                    ui.removeTaskLine(t, storage.size());
+                }
+            } catch (NumberFormatException e) {
+                System.out.println(
+                        ui.getBorder() + "Please state the completed task number after \"delete\".\n"
+                                + ui.getBorder()
+                );
             }
-        } catch (NumberFormatException e) {
-            System.out.println(
-                    ui.getBorder() + "Please state the completed task number after \"delete\".\n"
-                    + ui.getBorder()
-            );
         }
     }
 
