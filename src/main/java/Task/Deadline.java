@@ -3,9 +3,10 @@ package Task;
 public class Deadline extends Task {
     protected String by;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by, boolean isDone) {
         super(description);
         this.by = by;
+        this.completed = isDone;
     }
 
     public String toString() {

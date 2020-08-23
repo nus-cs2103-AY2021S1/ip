@@ -4,8 +4,9 @@ import Task.Task;
 
 public class ToDo extends Task {
 
-    public ToDo(String description) {
+    public ToDo(String description, boolean isDone) {
         super(description);
+        this.completed = isDone;
     }
 
     public String toString() {

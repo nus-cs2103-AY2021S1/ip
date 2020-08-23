@@ -118,7 +118,7 @@ public class Duke {
     }
 
     public static void handleTodo(String todoDescription) {
-        taskList.add(new ToDo(todoDescription));
+        taskList.add(new ToDo(todoDescription, false));
         String output = LINE + "Got it. I've added this task: \n"
                 + taskList.get(taskList.size() - 1) + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list."
@@ -128,7 +128,7 @@ public class Duke {
 
     public static void handleDeadline(String deadlineDetails) {
         String[] details = deadlineDetails.split(" /by ", 2);
-        taskList.add(new Deadline(details[0], details[1]));
+        taskList.add(new Deadline(details[0], details[1], false));
         String output = LINE + "Got it. I've added this task: \n"
                 + taskList.get(taskList.size() - 1) + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list."
@@ -138,7 +138,7 @@ public class Duke {
 
     public static void handleEvent(String eventDetails) {
         String[] details = eventDetails.split(" /at ", 2);
-        taskList.add(new Event(details[0], details[1]));
+        taskList.add(new Event(details[0], details[1], false));
         String output = LINE + "Got it. I've added this task: \n"
                 + taskList.get(taskList.size() - 1) + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list."
@@ -171,9 +171,11 @@ public class Duke {
                 String taskType = taskSplit[0];
                 boolean taskIsDone = taskSplit[1].equals("[" + "\u2713" + "]") ? true : false;
                 String taskDetails = taskSplit[2];
+                if (taskType.equals("[T]")) {
+                    taskList.add(new ToDo(taskDetails, taskIsDone));
+                }
             }
         }
     }
 
-    public static void
 }

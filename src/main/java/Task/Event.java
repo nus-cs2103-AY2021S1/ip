@@ -3,9 +3,10 @@ package Task;
 public class Event extends Task {
     protected String at;
 
-    public Event(String description, String at) {
+    public Event(String description, String at, boolean isDone) {
         super(description);
         this.at = at;
+        this.completed = isDone;
     }
 
     public String toString() {
