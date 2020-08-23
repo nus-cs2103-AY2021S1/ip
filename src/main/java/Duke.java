@@ -42,7 +42,7 @@ public class Duke {
      */
     public void exit() {
         isRunning = false;
-        sendMessage("Bye!");
+        sendMessage("Bye! Tebby logging off...");
     }
 
     /**
@@ -82,9 +82,9 @@ public class Duke {
 
     /**
      * Creates a Task and adds to the list. Tasks have the following subtypes:
-     * 1) todo - a task with a description
-     * 2) event - a task with a description and occurrence time
-     * 3) deadline - a task with a deadline time
+     *     1) todo - a task with a description
+     *     2) event - a task with a description and occurrence time
+     *     3) deadline - a task with a description and deadline time
      * Task creation fails if the user input is of an incorrect format.
      * @param type the type of task as extracted from user input.
      * @param description the description of task as extracted from user input.
@@ -106,7 +106,7 @@ public class Duke {
     }
 
     /**
-     * Helper method to create valid Task objects.
+     * Factory method to create valid Task objects.
      * @param type the subtype of Task
      * @param description the description of the task
      * @return new Task object
@@ -250,15 +250,24 @@ public class Duke {
             Scanner sc = new Scanner(f);
             while (sc.hasNext()) {
                 String[] t = sc.nextLine().split(",");
+
                 switch (t[0]) {
                 case "T":
                     list.add(new Todo(t[2], t[1].equals("1")));
                     break;
                 case "D":
-                    list.add(new Deadline(t[2], t[3], t[1].equals("1")));
+                    try {
+                        list.add(new Deadline(t[2], t[3], t[1].equals("1")));
+                    } catch (DukeException e) {
+                        sendMessage(e.getMessage());
+                    }
                     break;
                 case "E":
-                    list.add(new Event(t[2], t[3], t[1].equals("1")));
+                    try {
+                        list.add(new Event(t[2], t[3], t[1].equals("1")));
+                    } catch (DukeException e) {
+                        sendMessage(e.getMessage());
+                    }
                     break;
                 }
             }
