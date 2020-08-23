@@ -3,38 +3,20 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
 public class Duke {
 
     public static void main(String[] args) throws IOException {
-        File directory = new File("src/main/data/");
-        if (!directory.exists()) {
-            directory.mkdir();
-        }
-        File data = new File("src/main/data/data.txt");
-        if (!data.exists()) {
-            data.createNewFile();
-        }
+        Storage storage = new Storage("src/main/data/", "src/main/data/data.txt");
+        storage.processData();
+        ArrayList<String> lines = storage.getData();
+        int numberOfItems = lines.size();
         String divider = "************************************************\n";
         String intro = "Hello! I'm Duke\nWhat can i do for you?\n";
         Scanner input = new Scanner(System.in);
-        Scanner fileReader = new Scanner(data);
-        StringBuffer buffer = new StringBuffer();
-        while (fileReader.hasNextLine()) {
-            buffer.append(fileReader.nextLine()).append("\n");
-        }
-        fileReader.close();
-        String fileContents = buffer.toString();
-        ArrayList<String> lines = new ArrayList<String>();
-        if (fileContents.length() != 0) {
-            String[] lineArray = fileContents.split("\n");
-            Collections.addAll(lines, lineArray);
-        }
         System.out.println(divider + intro + divider);
         boolean carryOn = true;
-        int numberOfItems = lines.size();
         while(carryOn) {
             String inputString = input.nextLine();
             if (inputString.indexOf("done ") == 0) {
@@ -69,14 +51,7 @@ public class Duke {
                 System.out.println(divider + "Bye! See you next time!" + "\n" + divider);
                 carryOn = false;
                 input.close();
-                StringBuffer finalLineList = new StringBuffer();
-                for (int i = 0; i < lines.size(); i++) {
-                    String currentLine = lines.get(i);
-                    finalLineList.append(currentLine).append("\n");
-                }
-                PrintWriter prw = new PrintWriter(data);
-                prw.println(finalLineList.toString());
-                prw.close();
+                storage.saveData(lines);
             } else if (inputString.indexOf("delete ") == 0) {
                 try {
                     int itemNumber = Integer.parseInt(inputString.substring(inputString.indexOf(" ") + 1));
