@@ -35,4 +35,9 @@ public class Ui {
                 "when I fell from grace for cavorting with demons. Now I'm exiled and hunted by assassins, but I " +
                 "assure you: I remain undaunted - and as determined as ever to claim my rightful throne!");
     }
+
+    public static void showFound(TaskList foundTasks) {
+        System.out.println("I found these tasks:");
+        System.out.println(foundTasks);
+    }
 }

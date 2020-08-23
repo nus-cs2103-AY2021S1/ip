@@ -61,4 +61,16 @@ public class TaskList implements Iterable<Task> {
 
         return tl.toString().equals(toString()); // might be a bit slow but is a simple implementation
     }
+
+    public TaskList find(String keyword) {
+        TaskList foundTasks = new TaskList();
+
+        for (Task task: tasks) {
+            if (task.getTaskName().contains(keyword)) {
+                foundTasks.addTask(task);
+            }
+        }
+
+        return foundTasks;
+    }
 }
