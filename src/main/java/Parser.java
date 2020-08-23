@@ -8,7 +8,6 @@ public class Parser {
     public static String parseDateTime(String s) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy h:mma");
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd HHmm");
-
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd MMM yyyy");
         SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -20,7 +19,7 @@ public class Parser {
             }
         } catch (ParseException e) {
             return ui.getBorder() + "Please input the time and date in\n"
-                            + dateParser.toPattern() + " or " + parser.toPattern() + "\n" + ui.getBorder();
+                + dateParser.toPattern() + " or " + parser.toPattern() + "\n" + ui.getBorder();
         }
     }
 
@@ -42,6 +41,7 @@ public class Parser {
 
     public static void parseInput(TaskList taskList, Storage storage) {
         Scanner scan = new Scanner(System.in);
+
         while (scan.hasNext()) {
             String test = scan.next().toLowerCase();
             if (checkBye(test)) {
