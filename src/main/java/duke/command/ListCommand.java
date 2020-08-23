@@ -17,6 +17,10 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.print(String.format("Here are the tasks in your list:\n%s", tasks));
+        if (tasks.size() == 0) {
+            ui.print("No tasks found.");
+        } else {
+            ui.print(String.format("Here are the tasks in your list:\n%s", tasks));
+        }
     }
 }

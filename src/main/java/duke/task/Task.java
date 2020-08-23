@@ -52,6 +52,13 @@ public abstract class Task implements Serialisable {
         this.isDone = true;
     }
 
+    /**
+     * Checks if the task description contains the given keyword.
+     * The check is case-insensitive.
+     *
+     * @param keyword The keyword to check.
+     * @return <code>true</code> if the task contains the keyword, <code>false</code> otherwise.
+     */
     public boolean containsKeyword(String keyword) {
         return this.description.toLowerCase().contains(keyword.toLowerCase());
     }

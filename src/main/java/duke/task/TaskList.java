@@ -64,6 +64,12 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    /**
+     * Returns a new list of tasks where each task's description contains the given keyword.
+     *
+     * @param keyword The keyword to check
+     * @return The list of tasks where all tasks' description contains the given keyword.
+     */
     public TaskList search(String keyword) {
         List<Task> filteredList =
                 this.tasks.stream().filter((task) -> task.containsKeyword(keyword))
