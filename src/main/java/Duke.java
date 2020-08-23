@@ -1,15 +1,40 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        File directory = new File("src/main/data/");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+        File data = new File("src/main/data/data.txt");
+        if (!data.exists()) {
+            data.createNewFile();
+        }
         String divider = "************************************************\n";
         String intro = "Hello! I'm Duke\nWhat can i do for you?\n";
+        Scanner input = new Scanner(System.in);
+        Scanner fileReader = new Scanner(data);
+        StringBuffer buffer = new StringBuffer();
+        while (fileReader.hasNextLine()) {
+            buffer.append(fileReader.nextLine()).append("\n");
+        }
+        fileReader.close();
+        String fileContents = buffer.toString();
+        ArrayList<String> lines = new ArrayList<String>();
+        if (fileContents.length() != 0) {
+            String[] lineArray = fileContents.split("\n");
+            Collections.addAll(lines, lineArray);
+        }
         System.out.println(divider + intro + divider);
         boolean carryOn = true;
-        ArrayList<Task> taskArray = new ArrayList<>();
-        int numberOfItems = 0;
+        int numberOfItems = lines.size();
         while(carryOn) {
             String inputString = input.nextLine();
             if (inputString.indexOf("done ") == 0) {
@@ -20,10 +45,11 @@ public class Duke {
                     } else if (numberOfItems < itemNumber || itemNumber <= 0) {
                         throw new DukeException("Hey, no such task exists!");
                     } else {
-                        Task task = taskArray.get(itemNumber - 1);
-                        task.updateTask(1);
+                        String doneTask = lines.get(itemNumber - 1);
+                        String updatedLine = doneTask.substring(0, 6) + "\u2713" + doneTask.substring(7);
+                        lines.set(itemNumber - 1, updatedLine);
                         System.out.println(divider + "Nice! I have marked this task as done:");
-                        System.out.println(task + "\n" + divider);
+                        System.out.println(updatedLine + "\n" + divider);
                     }
                 } catch (DukeException e) {
                     System.out.println(divider + e.getMessage() + "\n" + divider);
@@ -33,9 +59,9 @@ public class Duke {
             } else if (inputString.equals("list")) {
                 System.out.println(divider);
                 System.out.println("Here are the tasks in your list!");
-                for (int i = 0; i < taskArray.size(); i++) {
+                for (int i = 0; i < lines.size(); i++) {
                     int numbering = i + 1;
-                    Task task = taskArray.get(i);
+                    String task = lines.get(i);
                     System.out.println(numbering + "." + task);
                 }
                 System.out.println(divider);
@@ -43,6 +69,14 @@ public class Duke {
                 System.out.println(divider + "Bye! See you next time!" + "\n" + divider);
                 carryOn = false;
                 input.close();
+                StringBuffer finalLineList = new StringBuffer();
+                for (int i = 0; i < lines.size(); i++) {
+                    String currentLine = lines.get(i);
+                    finalLineList.append(currentLine).append("\n");
+                }
+                PrintWriter prw = new PrintWriter(data);
+                prw.println(finalLineList.toString());
+                prw.close();
             } else if (inputString.indexOf("delete ") == 0) {
                 try {
                     int itemNumber = Integer.parseInt(inputString.substring(inputString.indexOf(" ") + 1));
@@ -51,12 +85,12 @@ public class Duke {
                     } else if (numberOfItems < itemNumber || itemNumber <= 0) {
                         throw new DukeException("Hey, no such task exists!");
                     } else {
-                        Task task = taskArray.get(itemNumber - 1);
+                        String task = lines.get(itemNumber - 1);
                         System.out.println(divider + "Noted, the task has been deleted");
                         System.out.println(task + "\n" + divider);
                         numberOfItems -= 1;
                         System.out.println("Now you have " + numberOfItems + " tasks in the list.");
-                        taskArray.remove(itemNumber - 1);
+                        lines.remove(itemNumber - 1);
                     }
                 } catch (DukeException e) {
                     System.out.println(divider + e.getMessage() + "\n" + divider);
@@ -119,12 +153,13 @@ public class Duke {
                 }
                 if (task != null) {
                     if (numberOfItems < 100) {
-                        taskArray.add(task);
+                        String newTask = task.toString();
                         numberOfItems += 1;
                         System.out.println(divider + "Got it, I've added this task:");
                         System.out.println(" " + task);
                         System.out.println("Now you have " + numberOfItems + " tasks in the list.");
                         System.out.println(divider);
+                        lines.add(newTask);
                     } else {
                         System.out.println(divider + "Sorry, the list is full!\n" + divider);
                     }
