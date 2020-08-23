@@ -1,5 +1,6 @@
 package dependencies.storage;
 
+import dependencies.dukeexceptions.MissingListException;
 import dependencies.task.Schedulable;
 import dependencies.task.Task;
 
@@ -19,18 +20,28 @@ import java.util.ArrayList;
 
 public class Store {
 
-    private static final Path WORKING_DIR_PATH = Paths.get(".");
-    private static final Path DIR_PATH = Paths.get(".", "src", "data");
-    private static final Path FILE_PATH = Paths.get(".", "src", "data").resolve("taskdata.txt");
-
-
-    private boolean isDataFilePresentInitially;
+    /** Loader Object to read and write to save file. */
+    private Loader l;
 
     /** todoList that stores the tasks. */
     private ArrayList<Schedulable> todoList;
 
     /** Private constructor */
-    private Store() {}
+    private Store() {
+        l = new Loader(".", "data", "taskdata.txt");
+        if (l.isFilePresent()) {
+            try {
+                todoList = l.openAndReadObject();
+            } catch (MissingListException e) {
+                e.printStackTrace();
+                System.out.println("Error in save file: Helping you to initialise a new list!!!!!");
+                todoList = new ArrayList<>();
+            }
+        } else {
+            l.instantiateFile();
+            todoList = new ArrayList<>();
+        }
+    }
 
     /**
      * Initialises and returns the Store object.
@@ -38,16 +49,7 @@ public class Store {
      * @return the Store object
      */
     public static Store initStorage() {
-        Store s = new Store();
-        try {
-            s.openAndRead();
-        } catch (Exception e) {
-            System.out.println("Save file not present.");
-            System.out.println("Error: " + e.getMessage());
-            s.instantiateSaveFile();
-            s.todoList = new ArrayList<>();
-        }
-        return s;
+        return new Store();
     }
 
     /**
@@ -86,6 +88,7 @@ public class Store {
      */
     public String add(Task task) {
         todoList.add(task);
+        l.overwriteAndSave(todoList);
         return task.toString();
     }
 
@@ -105,6 +108,7 @@ public class Store {
                 sb.append("\n");
             }
         }
+        l.overwriteAndSave(todoList);
         return sb.toString();
     }
 
@@ -118,6 +122,7 @@ public class Store {
     public String deleteTask(Integer nums) {
         Schedulable t = todoList.get(nums - 1);
         todoList.remove(nums - 1);
+        l.overwriteAndSave(todoList);
         return t.toString();
     }
 
@@ -162,71 +167,67 @@ public class Store {
 
     /* ---------------------------------------- Serialisation Methods ------------------------------------ */
 
-    @SuppressWarnings("unchecked")
-    private ArrayList<Schedulable> read(
-            ObjectInputStream ois
-    ) throws IOException, ClassNotFoundException {
-
-        return (ArrayList<Schedulable>) ois.readObject();
-    }
-
-    /**
-     * Saves the todoList to the taskdata.txt file.
-     * Overwrites the data on the taskdata.txt file.
-     *
-     * @throws IOException
-     */
-    private void save() {
-        try {
-            FileOutputStream fos = new FileOutputStream(FILE_PATH.toString(), false);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(todoList);
-            oos.close();
-            System.out.println("Successfully saved your data.");
-        } catch (IOException e) {
-            System.out.println("Error in saving your data: " + e.getMessage());
-        }
-    }
-
-    private void instantiateSaveFile() {
-        try {
-            if (Files.exists(DIR_PATH)) {
-                System.out.println("Dir exist");
-                if (Files.exists(FILE_PATH)) {
-                    System.out.println("File exists");
-                    isDataFilePresentInitially = true;
-                } else {
-                    Files.createFile(FILE_PATH);
-                    System.out.println("File created");
-                    isDataFilePresentInitially = false;
-                }
-            } else {
-                // Directory and storage file not present
-                Files.createDirectory(DIR_PATH);
-                System.out.println("Dir created");
-                Files.createFile(FILE_PATH);
-                System.out.println("File created");
-                isDataFilePresentInitially = false;
-            }
-        } catch (IOException e) {
-            System.out.println("Unexpected error occurred while trying to create a file to save your data.");
-        }
-    }
-
-    private void openAndRead() throws IOException, ClassNotFoundException {
-        FileInputStream fis = new FileInputStream(FILE_PATH.toString());
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        todoList = read(ois);
-        ois.close();
-    }
+//    @SuppressWarnings("unchecked")
+//    private ArrayList<Schedulable> read(
+//            ObjectInputStream ois
+//    ) throws IOException, ClassNotFoundException {
+//
+//        return (ArrayList<Schedulable>) ois.readObject();
+//    }
+//
+//    /**
+//     * Saves the todoList to the taskdata.txt file.
+//     * Overwrites the data on the taskdata.txt file.
+//     *
+//     * @throws IOException
+//     */
+//    private void save() {
+//        try {
+//            FileOutputStream fos = new FileOutputStream(FILE_PATH.toString(), false);
+//            ObjectOutputStream oos = new ObjectOutputStream(fos);
+//            oos.writeObject(todoList);
+//            oos.close();
+//            System.out.println("Successfully saved your data.");
+//        } catch (IOException e) {
+//            System.out.println("Error in saving your data: " + e.getMessage());
+//        }
+//    }
+//
+//    private void instantiateSaveFile() {
+//        try {
+//            if (Files.exists(DIR_PATH)) {
+//                System.out.println("Dir exist");
+//                if (Files.exists(FILE_PATH)) {
+//                    System.out.println("File exists");
+//                } else {
+//                    Files.createFile(FILE_PATH);
+//                    System.out.println("File created");
+//                }
+//            } else {
+//                // Directory and storage file not present
+//                Files.createDirectory(DIR_PATH);
+//                System.out.println("Dir created");
+//                Files.createFile(FILE_PATH);
+//                System.out.println("File created");
+//            }
+//        } catch (IOException e) {
+//            System.out.println("Unexpected error occurred while trying to create a file to save your data.");
+//        }
+//    }
+//
+//    private void openAndRead() throws IOException, ClassNotFoundException {
+//        FileInputStream fis = new FileInputStream(FILE_PATH.toString());
+//        ObjectInputStream ois = new ObjectInputStream(fis);
+//        todoList = read(ois);
+//        ois.close();
+//    }
 
     /* ---------------------------------- END OF SERIALIZABLE METHODS ---------------------------------- */
 
     public static void main(String[] args) {
         Store s = initStorage();
-        s.add(Task.createEvent("Meeting 1", "Monday"));
+        s.add(Task.createEvent("Meeting", "Monday"));
         System.out.println(s.getTodosInList());
-        s.save();
     }
 
 }
