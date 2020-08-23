@@ -19,6 +19,6 @@ public class StorageTest {
     public void changeFile_validInput_success() {
         Storage storage = new Storage("data/duke.txt");
         storage.changeFile();
-        assertEquals(storage.fileIsChanged, true);
+        assertEquals(storage.isFileChanged, true);
     }
 }

@@ -1,5 +1,5 @@
 public class ListCommand extends Command {
-    boolean exitCheck;
+    protected boolean isExit;
 
     public void runCommand(TaskList arrayOfTasks, Ui ui, Storage storage) {
         try {
@@ -16,7 +16,7 @@ public class ListCommand extends Command {
     }
 
     public boolean exitCheck() {
-        exitCheck = false;
-        return exitCheck;
+        isExit = false;
+        return isExit;
     }
 }

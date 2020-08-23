@@ -1,9 +1,11 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class Storage {
-    public String path;
-    public boolean fileIsChanged = false;
+    protected String path;
+    protected boolean isFileChanged = false;
 
     public Storage(String path) {
         this.path = path;
@@ -25,29 +27,29 @@ public class Storage {
                 String descriptions = userInputArray[2];
 
                 switch (userInputArray[0]) {
-                    case "T":
-                        Todo newTodo = new Todo(descriptions, boolDone);
-                        outputTaskArray.add(newTodo);
-                        break;
+                case "T":
+                    Todo newTodo = new Todo(descriptions, boolDone);
+                    outputTaskArray.add(newTodo);
+                    break;
 
-                    case "D":
-                        dateTimeArray = userInputArray[3].split(" ");
-                        taskDate = dateTimeArray[0];
-                        taskTime = dateTimeArray[1];
-                        Deadline newDeadline = new Deadline(boolDone, descriptions, taskDate, taskTime);
-                        outputTaskArray.add(newDeadline);
-                        break;
+                case "D":
+                    dateTimeArray = userInputArray[3].split(" ");
+                    taskDate = dateTimeArray[0];
+                    taskTime = dateTimeArray[1];
+                    Deadline newDeadline = new Deadline(boolDone, descriptions, taskDate, taskTime);
+                    outputTaskArray.add(newDeadline);
+                    break;
 
-                    case "E":
-                        dateTimeArray = userInputArray[3].split(" ");
-                        taskDate = dateTimeArray[0];
-                        taskTime = dateTimeArray[1];
-                        Event newEvent = new Event(boolDone, descriptions, taskDate, taskTime);
-                        outputTaskArray.add(newEvent);
-                        break;
+                case "E":
+                    dateTimeArray = userInputArray[3].split(" ");
+                    taskDate = dateTimeArray[0];
+                    taskTime = dateTimeArray[1];
+                    Event newEvent = new Event(boolDone, descriptions, taskDate, taskTime);
+                    outputTaskArray.add(newEvent);
+                    break;
 
-                    default:
-                        break;
+                default:
+                    break;
                 }
                 inputData = bufferedReader.readLine();
             }
@@ -100,10 +102,10 @@ public class Storage {
     }
 
     public void changeFile() {
-        fileIsChanged = true;
+        isFileChanged = true;
     }
 
     public boolean isStorageChanged() {
-        return fileIsChanged;
+        return isFileChanged;
     }
 }

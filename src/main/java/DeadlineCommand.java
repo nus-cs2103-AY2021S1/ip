@@ -1,6 +1,6 @@
 public class DeadlineCommand extends Command {
-    boolean exitCheck;
-    Task deadlineTask;
+    protected boolean isExit;
+    protected Task deadlineTask;
 
     public DeadlineCommand(String description, String deadlineDate, String deadlineTime) {
         this.deadlineTask = new Deadline(description, deadlineDate, deadlineTime);
@@ -14,7 +14,7 @@ public class DeadlineCommand extends Command {
     }
 
     public boolean exitCheck() {
-        exitCheck = false;
-        return exitCheck;
+        isExit = false;
+        return isExit;
     }
 }

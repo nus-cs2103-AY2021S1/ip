@@ -1,6 +1,6 @@
 public class Deadline extends Task {
-    public Date deadlineDate;
-    public Timing deadlineTime;
+    protected Date deadlineDate;
+    protected Timing deadlineTime;
 
     public Deadline(String description, String deadlineDate) {
         super(description, TaskType.DEADLINE);
@@ -20,7 +20,6 @@ public class Deadline extends Task {
         this.deadlineTime = new Timing(deadlineTime);
         Task.totalTasks++;
     }
-
 
     public Date getDate() {
         return deadlineDate;

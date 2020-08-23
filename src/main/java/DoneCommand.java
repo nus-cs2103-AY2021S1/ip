@@ -1,6 +1,6 @@
 public class DoneCommand extends Command {
-    int taskIndex;
-    boolean exitCheck;
+    protected int taskIndex;
+    protected boolean isExit;
 
     public DoneCommand(int taskIndex) {
         this.taskIndex = taskIndex;
@@ -25,7 +25,7 @@ public class DoneCommand extends Command {
     }
 
     public boolean exitCheck() {
-        exitCheck = false;
-        return exitCheck;
+        isExit = false;
+        return isExit;
     }
 }

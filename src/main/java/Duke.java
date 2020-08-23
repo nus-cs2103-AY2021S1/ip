@@ -1,7 +1,7 @@
 public class Duke {
-    public Storage storage;
-    public Ui ui;
-    public TaskList arrayOfTasks;
+    protected Storage storage;
+    protected Ui ui;
+    protected TaskList arrayOfTasks;
 
     public Duke(String path) {
         this.storage = new Storage(path);

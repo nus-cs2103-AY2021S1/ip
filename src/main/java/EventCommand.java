@@ -1,6 +1,6 @@
 public class EventCommand extends Command {
-    boolean exitCheck;
-    Task eventTask;
+    protected boolean isExit;
+    protected Task eventTask;
 
     public EventCommand(String description, String eventDate, String eventTime) {
         this.eventTask = new Event(description, eventDate, eventTime);
@@ -14,7 +14,7 @@ public class EventCommand extends Command {
     }
 
     public boolean exitCheck() {
-        exitCheck = false;
-        return exitCheck;
+        isExit = false;
+        return isExit;
     }
 }

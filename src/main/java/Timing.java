@@ -1,18 +1,18 @@
 public class Timing {
-    private final int minute, hour;
-    private final boolean meridiemCheck;
+    private final int MINUTE, HOUR;
+    private final boolean isPM;
     protected String timing;
 
     public Timing(String timing) {
         this.timing = timing;
         int timeInt = Integer.parseInt(timing);
-        this.minute = timeInt % 100;
-        this.hour = timeInt / 100;
+        this.MINUTE = timeInt % 100;
+        this.HOUR = timeInt / 100;
 
-        if (this.hour < 12) {
-            meridiemCheck = false;
+        if (this.HOUR < 12) {
+            isPM = false;
         } else {
-            meridiemCheck = true;
+            isPM = true;
         }
     }
 
@@ -21,17 +21,17 @@ public class Timing {
         String formattedTiming;
         String AMPM;
 
-        if (hour == 0 || hour == 12) {
+        if (HOUR == 0 || HOUR == 12) {
             formattedTiming = "12";
         } else {
-            formattedTiming = hour % 12 + "";
+            formattedTiming = HOUR % 12 + "";
         }
 
-        if (minute != 0) {
-            formattedTiming = formattedTiming + ":" + String.format("%02d", minute);
+        if (MINUTE != 0) {
+            formattedTiming = formattedTiming + ":" + String.format("%02d", MINUTE);
         }
 
-        if (meridiemCheck) {
+        if (isPM) {
             AMPM = "pm";
         } else {
             AMPM = "am";

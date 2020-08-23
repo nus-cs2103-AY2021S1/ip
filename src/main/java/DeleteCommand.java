@@ -1,6 +1,6 @@
 public class DeleteCommand extends Command {
-    boolean exitCheck;
-    int taskIndex;
+    protected boolean isExit;
+    protected int taskIndex;
 
     public DeleteCommand(int taskIndex) {
         this.taskIndex = taskIndex;
@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
     }
 
     public boolean exitCheck() {
-        exitCheck = false;
-        return exitCheck;
+        isExit = false;
+        return isExit;
     }
 }

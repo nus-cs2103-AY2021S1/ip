@@ -1,5 +1,5 @@
 public abstract class Command {
-    String typeOfCommand;
+    protected String typeOfCommand;
 
     public String getCommandType() {
         return typeOfCommand;
