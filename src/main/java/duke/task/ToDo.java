@@ -8,6 +8,7 @@ public class ToDo extends Task {
 
     /**
      * Creates a todo object the containing details of the task.
+     * 
      * @param description Details of the task.
      */
     public ToDo(String description) {
@@ -16,6 +17,7 @@ public class ToDo extends Task {
 
     /**
      * Creates a todo object the containing details of the task.
+     * 
      * @param description Details of the task.
      * @param isDone Boolean value of whether a task is completed.
      */
@@ -25,6 +27,7 @@ public class ToDo extends Task {
 
     /**
      * Returns a proper styling to be recorded into CSV.
+     * 
      * @return A format to be recorded into CSV.
      */
     public String formatStyling() {

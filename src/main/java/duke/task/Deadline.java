@@ -13,6 +13,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a deadline object the containing details of the task.
+     * 
      * @param description Details of the task.
      * @param by LocalDateTime format of the time.
      */
@@ -23,6 +24,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a deadline object the containing details of the task.
+     * 
      * @param description Details of the task.
      * @param by String format of the time. Either YYYY-MM-DD HHMM or YYYY-MM-DD(Will be reformatted with 2359 as HHMM).
      * @param isDone Boolean value of whether a task is completed.
@@ -34,6 +36,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a proper styling to be recorded into CSV.
+     * 
      * @return A format to be recorded into CSV.
      */
     public String formatStyling() {

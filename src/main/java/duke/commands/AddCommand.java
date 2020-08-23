@@ -24,6 +24,7 @@ public class AddCommand extends Command {
     
     /**
      * Creates an AddCommand object
+     * 
      * @param inputArr Array of length 2 that contains information of the user input
      *                 At index 0, contains the type of command
      *                 At index 1, contains the message of the command.
@@ -41,6 +42,7 @@ public class AddCommand extends Command {
     /**
      * Adds the given task into the task list. Expected format for the date in message is YYYY-MM-DD HHMM or 
      * YYYY-MM-DD HHMM. If type is of todo, date can be omitted.
+     * 
      * @param type Type of task that is being entered (todo, event, deadline).
      * @param message Details of the task that the user entered.
      * @param ui Object that deals with interactions with the user.

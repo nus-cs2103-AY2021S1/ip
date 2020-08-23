@@ -13,6 +13,7 @@ public class Task {
 
     /**
      * Creates a task object the containing details of the task.
+     * 
      * @param description Details of the task.
      */
     public Task(String description) {
@@ -22,6 +23,7 @@ public class Task {
 
     /**
      * Creates a task object the containing details of the task.
+     * 
      * @param description Details of the task.
      * @param isDone Boolean value of whether a task is completed.
      */
@@ -32,6 +34,7 @@ public class Task {
 
     /**
      * Displays a cross if task is not done, a tick otherwise.
+     * 
      * @return Byte encoding strings of the symbols tick or X.
      */
     private String getStatusIcon() {
@@ -55,6 +58,7 @@ public class Task {
 
     /**
      * Returns a proper styling to be recorded into CSV.
+     * 
      * @return A format to be recorded into CSV.
      */
     public String formatStyling() {
@@ -63,6 +67,7 @@ public class Task {
 
     /**
      * If a task is completed, return 1 else 0
+     * 
      * @return An integer coded for the boolean status of the task.
      */
     private int getTaskStatus() {

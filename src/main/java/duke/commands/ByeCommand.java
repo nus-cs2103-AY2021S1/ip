@@ -12,6 +12,7 @@ public class ByeCommand extends Command {
 
     /**
      * Creates an ByeCommand object
+     * 
      * @param inputArr Array of length 2 that contains information of the user input
      *                 At index 0, contains the type of command
      *                 At index 1, contains the message of the command.

@@ -25,6 +25,7 @@ public class Storage {
 
     /**
      * Checking if a particular task is completed.
+     * 
      * @param s A string encoding whether a task is completed.
      * @return Returns true if the task is completed, false otherwise.
      */
@@ -34,6 +35,7 @@ public class Storage {
 
     /**
      * Creates a file path.
+     * 
      * @param path The directory that to be created.
      * @throws IOException
      */
@@ -45,6 +47,7 @@ public class Storage {
 
     /**
      * Creates a CSV file for the user.
+     * 
      * @param file The CSV file to be created.
      * @throws IOException
      */
@@ -55,6 +58,7 @@ public class Storage {
 
     /**
      * Recording down the list of tasks that the user have during this session.
+     * 
      * @param file The CSV file to record down the information.
      * @param tasks Object contains the task list.
      * @throws IOException
@@ -72,6 +76,7 @@ public class Storage {
 
     /**
      * When the user exits, records the data back into the user's file.
+     * 
      * @param tasks Object contains the task list.
      */
 
@@ -99,6 +104,7 @@ public class Storage {
 
     /**
      * Retrieves the user's data and load into the system.
+     * 
      * @param tasks Object contains the task list.
      */
     public void retrieve(TaskList tasks) {

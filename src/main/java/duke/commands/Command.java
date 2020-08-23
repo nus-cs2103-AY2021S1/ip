@@ -21,6 +21,7 @@ public class Command {
     
     /**
      * Creates a Command object
+     * 
      * @param inputArr Array of length 2 that contains information of the user input
      *                 At index 0, contains the type of command
      *                 At index 1, contains the message of the command.
@@ -31,6 +32,7 @@ public class Command {
 
     /**
      * Checks the exit status of the Duke program.
+     * 
      * @return true if the exit status is true, false otherwise.
      */
     public boolean getExitStatus() {
@@ -39,6 +41,7 @@ public class Command {
 
     /**
      * Set the exit status of the Duke program depending on the input 'status'.
+     * 
      * @param status boolean value to set the exit status.
      */
     public void setExitStatus(boolean status) {
@@ -54,6 +57,7 @@ public class Command {
 
     /**
      * Display out the number of task in the user's list.
+     * 
      * @param tasks the task object containing the list of task.
      */
     public void printNumTask(TaskList tasks) {
@@ -62,6 +66,7 @@ public class Command {
 
     /**
      * Mainly for polymorphism.
+     * 
      * @param tasks Object contains the task list.
      * @param ui Object that deals with interactions with the user.
      * @param storage Object that deals with loading tasks from the file and saving tasks in the file

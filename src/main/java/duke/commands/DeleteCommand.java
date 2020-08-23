@@ -17,6 +17,7 @@ public class DeleteCommand extends Command {
     private static final String DELETE_NOTIFICATION = "Noted. I've removed this duke.task:";
     /**
      * Creates a DeleteCommand object
+     * 
      * @param inputArr Array of length 2 that contains information of the user input
      *                 At index 0, contains the type of command
      *                 At index 1, contains the message of the command.
@@ -33,6 +34,7 @@ public class DeleteCommand extends Command {
     /**
      * Deletes the task at that index in the list. If the index 'pos' less than of equals to 0 or greater than the size
      * of the list, a message will printed, notifying the user of the invalid input.
+     * 
      * @param pos Index of the task to be deleted in the list.
      * @param ui Object that deals with interactions with the user.
      * @param tasks Object contains the task list.
