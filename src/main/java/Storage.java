@@ -1,11 +1,11 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Storage {
     private final String filePath = "/data.txt";
@@ -31,12 +31,14 @@ public class Storage {
                         break;
                     case "D":
                         String deadline = info[3];
-                        Deadline newDeadline = new Deadline(title, complete, deadline);
+                        LocalDate deadlineInLocalDate = LocalDate.parse(deadline);
+                        Deadline newDeadline = new Deadline(title, complete, deadlineInLocalDate);
                         tasks.add(newDeadline);
                         break;
                     case "E":
                         String time = info[3];
-                        Event newEvent = new Event(title, complete, time);
+                        LocalDate timeInLocalDate = LocalDate.parse(time);
+                        Event newEvent = new Event(title, complete, timeInLocalDate);
                         tasks.add(newEvent);
                         break;
                 }

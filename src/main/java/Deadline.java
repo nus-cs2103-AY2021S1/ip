@@ -1,19 +1,34 @@
-public class Deadline extends Task{
-    protected String time;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String time) {
+public class Deadline extends Task {
+    protected boolean hasTime = true;
+    protected LocalDate time;
+
+    public Deadline(String description, LocalDate time) {
         super(description);
         this.time = time;
     }
 
-    public Deadline(String description, int isDone, String time) {
+    public Deadline(String description, int isDone, LocalDate time) {
         super(description, isDone);
         this.time = time;
     }
 
+    public LocalDate getTime() {
+        return time;
+    }
+
+    public boolean getHasTime(){
+        return hasTime;
+    }
+
+
     @Override
     public String toString() {
-        return super.toString().replace("[\u2718]", "[D][\u2718]") + " (by: " + time + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        String timeString = time.format(formatter);
+        return super.toString().replace("[\u2718]", "[D][\u2718]") + " (by: " + timeString + ")";
     }
 
     @Override

@@ -1,6 +1,9 @@
+import java.time.LocalDate;
+
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected boolean hasTime;
     protected static int numberOfTasks = 0;
 
 
@@ -26,6 +29,14 @@ public class Task {
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
+    public boolean getHasTime(){
+        return hasTime;
+    }
+
+    public LocalDate getTime(){
+        return null;
     }
 
     public Task markAsDone() {
