@@ -9,7 +9,8 @@ public class DeadlineCommand extends Command {
     public void execute(TaskList taskList, Ui ui, DukeStorage storage) {
         // needs an after command
         if (afterCommand == null) {
-            ui.throwDukeException(new DukeException("Please do not leave the deadline description empty!"));
+            ui.throwDukeException(new DukeException(
+                    "Please do not leave the deadline description empty!"));
             return;
         }
         // first chunk is the deadline details, second chunk is by when
@@ -18,7 +19,7 @@ public class DeadlineCommand extends Command {
         // teach the user the format for the deadline
         if (splittedDeadline.length == 1) {
             ui.throwDukeException(new DukeException("Format of deadline recording: deadline keyword" +
-                    ", deadline instructions, forward slash, by keyword with a colon, specific date/time)"
+                ", deadline instructions, forward slash, by keyword with a colon, specific date/time)"
                     + "\n e.g. deadline return book /by Sunday"));
         } else {
             String details = splittedDeadline[0].trim();

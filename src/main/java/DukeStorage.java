@@ -16,7 +16,6 @@ public class DukeStorage {
     public void createStorage() {
         try {
             File file = new File(filePath);
-//            new File("data").mkdirs();
             file.getParentFile().mkdirs();
             if (file.createNewFile()) {
                 System.out.println("Duke storage is ready to use :-)");

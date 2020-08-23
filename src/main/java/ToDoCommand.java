@@ -9,7 +9,8 @@ public class ToDoCommand extends Command {
     public void execute(TaskList taskList, Ui ui, DukeStorage storage) {
         // needs an after command
         if (afterCommand == null) {
-            ui.throwDukeException(new DukeException("Please do not leave the todo description empty!"));
+            ui.throwDukeException(new DukeException(
+                    "Please do not leave the todo description empty!"));
         } else {
             Task newToDo = new ToDo(afterCommand);
             taskList.addTask(newToDo);

@@ -21,7 +21,7 @@ public class DukeInterpreter {
 
     private static String encodeHelper(char type, char symbol, String details, String extra) {
         return type + " | " + symbol + " | " + details +
-            (extra.equals("") ? "" : " | " + extra);
+                (extra.equals("") ? "" : " | " + extra);
     }
 
     public static Task decode(String code) throws DukeException {
@@ -56,7 +56,8 @@ public class DukeInterpreter {
         return toDo;
     }
 
-    private static Deadline decodeDeadline(String details, boolean isCompleted, String extra) throws DukeException {
+    private static Deadline decodeDeadline(String details, boolean isCompleted,
+                                           String extra) throws DukeException {
         Deadline deadline = new Deadline(details, extra);
         if (isCompleted) {
             deadline.markAsCompleted();
@@ -64,7 +65,8 @@ public class DukeInterpreter {
         return deadline;
     }
 
-    private static Event decodeEvent(String details, boolean isCompleted, String extra) throws DukeException {
+    private static Event decodeEvent(String details, boolean isCompleted,
+                                     String extra) throws DukeException {
         Event event = new Event(details, extra);
         if (isCompleted) {
             event.markAsCompleted();
