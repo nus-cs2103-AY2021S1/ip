@@ -4,8 +4,13 @@ public class Todo extends  Task{
         super(name);
     }
 
+    Todo(String name, String completed) {
+        super(name, completed);
+    }
+
     @Override
     public String toString() {
         return String.format("[T] %s", super.toString());
     }
+
 }

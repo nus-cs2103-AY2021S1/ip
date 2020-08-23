@@ -8,6 +8,11 @@ public class Task {
         this.completed = false;
     }
 
+    Task(String name, String completed) {
+        this.name = name;
+        this.completed = completed.equals("1");
+    }
+
     @Override
     public String toString() {
         if (completed) {
@@ -20,4 +25,13 @@ public class Task {
     public void setCompleted() {
         completed = true;
     }
+
+    public String[] toArray() {
+        String[] strings = new String[3];
+        strings[0] = "[T]";
+        strings[1] = completed ? "1" : "0";
+        strings[2] = name;
+        return strings;
+    }
+
 }
