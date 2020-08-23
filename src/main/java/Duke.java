@@ -2,6 +2,10 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileWriter;
 
 /**
  * Duke is a personal chatbot with the following functionalities:
@@ -14,20 +18,18 @@ import java.util.Arrays;
 
 public class Duke {
 
-    /**
-     * The implementation and main driver of the chatbot.
-     */
-
     /** Flag which acts as a switch for the program. */
     private boolean isRunning;
 
     /** List which stores the Tasks. */
     private final List<Task> list;
 
+    /** File path to the list */
+    private final String FILE_PATH = System.getProperty("user.dir") + "/data/duke.txt";
+
     /**
      * Constructor for initializing the bot.
      * Creates a new empty list and sends a greetings message.
-     * @param name the string name of the bot.
      */
     public Duke() {
         this.isRunning = true;
@@ -86,12 +88,15 @@ public class Duke {
      * Task creation fails if the user input is of an incorrect format.
      * @param type the type of task as extracted from user input.
      * @param description the description of task as extracted from user input.
-     * @throws DukeException
+     * @throws DukeException when the Task cannot be created due to input errors.
      */
     public void addToList(String type, String description) throws DukeException {
         try {
             Task task = createTask(type, description);
+
             list.add(task);
+            updateFile(list);
+
             String msg = "Okay I've added:\n    " + task + "\n";
             msg += getTaskReportMessage();
             sendMessage(msg);
@@ -105,10 +110,10 @@ public class Duke {
      * @param type the subtype of Task
      * @param description the description of the task
      * @return new Task object
-     * @throws DukeException
+     * @throws DukeException when the Task cannot be created due to input errors.
      */
     private Task createTask(String type, String description) throws DukeException {
-        Task task;
+        Task task = new Task("", "");
         String[] split;
         String desc;
         description = description.trim();
@@ -139,9 +144,6 @@ public class Duke {
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Invalid " + type + " description!");
                 }
-            default:
-                task = new Task(description);
-                break;
         }
         return task;
     }
@@ -149,7 +151,7 @@ public class Duke {
     /**
      * Marks the Task of the given task number as completed.
      * @param si the task number as extracted from user input.
-     * @throws DukeException
+     * @throws DukeException when the input task number is invalid.
      */
     public void markTaskDone(String si) throws DukeException {
         try {
@@ -160,6 +162,8 @@ public class Duke {
                 throw new DukeException("That task is already done!");
             } else {
                 t.markAsDone();
+                updateFile(list);
+
                 sendMessage("Okay I've marked this task as done:\n    " + t);
             }
         } catch (NumberFormatException e) {
@@ -172,14 +176,17 @@ public class Duke {
     /**
      * Removes the Task of the given task number from the list.
      * @param si the task number as extracted from user input.
-     * @throws DukeException
+     * @throws DukeException when the input task number is invalid.
      */
     public void deleteTask(String si) throws DukeException {
         try {
             int i = Integer.parseInt(si);
             int index = i - 1;
             Task task = list.get(index);
+
             list.remove(task);
+            updateFile(list);
+
             String msg = "Okay I've deleted:\n    " + task + "\n";
             msg += getTaskReportMessage();
             sendMessage(msg);
@@ -213,6 +220,88 @@ public class Duke {
     }
 
     /**
+     * Formats the raw input of user.
+     * @param input the input of the user.
+     * @return the formatted data structure.
+     */
+    private String[] inputFormat(String input) {
+        return input.split(" ");
+    }
+
+    /**
+     * Reads and parses the file duke.txt to create the tasks
+     * to be added to the task list. The values of each task
+     * are comma-separated in the format:
+     *
+     *     Type,Description,Additional Description,isDone
+     *
+     * where the additional description applies to tasks with
+     * time such as deadline or event.
+     * Example:
+     *     E,dinner,7pm,0
+     *     ==> [E][x] dinner (at: 7pm)
+     *
+     * If the file path does not exist, the program will attempt
+     * to create the required directories and the duke.txt file.
+     */
+    public void loadFromFile() {
+        File f = new File(FILE_PATH);
+        try {
+            Scanner sc = new Scanner(f);
+            while (sc.hasNext()) {
+                String[] t = sc.nextLine().split(",");
+                switch (t[0]) {
+                case "T":
+                    list.add(new Todo(t[2], t[1].equals("1")));
+                    break;
+                case "D":
+                    list.add(new Deadline(t[2], t[3], t[1].equals("1")));
+                    break;
+                case "E":
+                    list.add(new Event(t[2], t[3], t[1].equals("1")));
+                    break;
+                }
+            }
+            sc.close();
+        } catch (FileNotFoundException fe) {
+            try {
+                File newF = new File(System.getProperty("user.dir") + "/data");
+                if (!newF.exists()) {
+                    newF.mkdirs();
+                }
+                f.createNewFile();
+                String msg = "Your new list file has been created in\n";
+                msg += "    " + FILE_PATH + "\n";
+                msg += "Don't worry, things has been set up properly :)";
+                sendMessage(msg);
+            } catch (IOException ioe) {
+                System.err.println("IOException: " + ioe.getMessage());
+            }
+        }
+    }
+
+    public void updateFile(List<Task> list) {
+        try {
+            FileWriter fw = new FileWriter(FILE_PATH);
+            for (Task t: list) {
+                String toWrite = String.format("%s,%s", t.getType(), (t.getDone() ? "1" : "0"));
+                String desc = t.getDescription();
+                if ("DE".contains(t.getType())) {
+                    String[] descSplit = desc.split(" / ");
+                    toWrite += "," + descSplit[descSplit.length - 2];
+                    toWrite += "," + descSplit[descSplit.length - 1];
+                } else {
+                    toWrite += "," + desc;
+                }
+                fw.write(toWrite + "\n");
+            }
+            fw.close();
+        } catch (IOException ioe) {
+            System.err.println("IOException: " + ioe.getMessage());
+        }
+    }
+
+    /**
      * The main algorithm of the bot which runs indefinitely as long as
      * the running flag is true. The bot takes in user input, processes
      * it and detects command/keywords.
@@ -222,58 +311,57 @@ public class Duke {
 
         while (isRunning) {
             String input = sc.nextLine();
-            String[] inputSplit = input.split(" ");
-            String command = inputSplit[0];
+            String[] inputFormatted = inputFormat(input);
+            String command = inputFormatted[0];
 
-            switch(command.toLowerCase()) {
-                case "bye":
-                    exit();
+            switch (command.toLowerCase()) {
+            case "bye":
+                exit();
+                break;
+            case "list":
+                displayList();
+                break;
+            case "done":
+                try {
+                    String si = inputFormatted[1];
+                    markTaskDone(si);
                     break;
-                case "list":
-                    displayList();
+                } catch (DukeException e) {
+                    sendMessage(e.getMessage());
                     break;
-                case "done":
-                    try {
-                        String si = inputSplit[1];
-                        markTaskDone(si);
-                        break;
-                    } catch (DukeException e) {
-                        sendMessage(e.getMessage());
-                        break;
-                    }
-                case "todo":
-                case "deadline":
-                case "event":
-                    try {
-                        String[] descArr = Arrays.copyOfRange(inputSplit,
-                                1, inputSplit.length);
-                        String desc = String.join(" ", descArr);
-                        addToList(command, desc);
-                        break;
-                    } catch (DukeException e) {
-                        sendMessage(e.getMessage());
-                        break;
-                    }
-                case "delete":
-                    try {
-                        String si = inputSplit[1];
-                        deleteTask(si);
-                        break;
-                    } catch (DukeException e) {
-                        sendMessage(e.getMessage());
-                        break;
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        sendMessage(
-                                new DukeException("Give me a task number to delete!")
-                                .getMessage()
-                        );
-                        break;
-                    }
-                default:
+                }
+            case "todo":
+            case "deadline":
+            case "event":
+                try {
+                    String[] descArr = Arrays.copyOfRange(inputFormatted,
+                            1, inputFormatted.length);
+                    String desc = String.join(" ", descArr);
+                    addToList(command, desc);
+                    break;
+                } catch (DukeException e) {
+                    sendMessage(e.getMessage());
+                    break;
+                }
+            case "delete":
+                try {
+                    String si = inputFormatted[1];
+                    deleteTask(si);
+                    break;
+                } catch (DukeException e) {
+                    sendMessage(e.getMessage());
+                    break;
+                } catch (ArrayIndexOutOfBoundsException e) {
                     sendMessage(
-                            new DukeException("Sorry, I don't know what that means :(")
-                            .getMessage());
+                            new DukeException("Give me a task number to delete!")
+                                    .getMessage());
                     break;
+                }
+            default:
+                sendMessage(
+                        new DukeException("Sorry, I don't know what that means :(")
+                                .getMessage());
+                break;
             }
         }
         sc.close();
@@ -285,7 +373,7 @@ public class Duke {
      * @param args optional and will be treated as the first user input.
      */
     public static void main(String[] args) {
-        String lvl = "6";
+        String lvl = "7";
         String logo = "                                                 _     _\n"
                 + " _______  _______  _______  _______  __   __    (c).-.(c)\n"
                 + "|       ||       ||  _    ||  _    ||  | |  |    / ._. \\ \n"
@@ -299,6 +387,7 @@ public class Duke {
         System.out.println(logo);
 
         Duke duke = new Duke();
+        duke.loadFromFile();
         duke.run();
     }
 }

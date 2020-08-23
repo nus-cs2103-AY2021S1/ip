@@ -14,12 +14,22 @@ public class Deadline extends Task {
      * @param by the deadline of the task.
      */
     public Deadline(String description, String by) {
-        super(description);
+        super("D", description);
+        this.by = by;
+    }
+
+    public Deadline(String description, String by, boolean isDone) {
+        super("D", description, isDone);
         this.by = by;
     }
 
     @Override
+    public String getDescription() {
+        return description + " / " + by;
+    }
+
+    @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return super.toString() + " (by: " + by + ")";
     }
 }

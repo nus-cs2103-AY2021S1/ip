@@ -14,12 +14,22 @@ public class Event extends Task {
      * @param at the time of the task.
      */
     public Event(String description, String at) {
-        super(description);
+        super("E", description);
+        this.at = at;
+    }
+
+    public Event(String description, String at, boolean isDone) {
+        super("E", description, isDone);
         this.at = at;
     }
 
     @Override
+    public String getDescription() {
+        return description + " / " + at;
+    }
+
+    @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return super.toString() + " (at: " + at + ")";
     }
 }
