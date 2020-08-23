@@ -11,7 +11,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/**
+ * Encapsulates a save-and-load system that allows task information to be saved to the hard drive
+ * via a text file when the program ends, as well as allow the information to be loaded to
+ * the UI system when the program begins.
+ */
 public class Storage {
     private String filePath;
 
@@ -19,6 +23,10 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Creates a file and its parent directory in reference to the project root
+     * folder. If the file exists, nothing will change.
+     */
     public void createFile() {
         try {
             File saveFile = new File(filePath);
@@ -29,6 +37,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Load the contents of the text file onto an ArrayList to create a task list.
+     * @return A task list.
+     * @throws FileNotFoundException If file cannot be found.
+     * @throws DukeException If date format is incorrect.
+     */
     public ArrayList<Task> load() throws FileNotFoundException, DukeException {
         ArrayList<Task> lib = new ArrayList<>();
         File file = new File(filePath);
@@ -76,6 +90,12 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * Save the data from the updated task list to the text file and hence the hard
+     * drive.
+     * @param lib The updated task list.
+     * @throws IOException If issues occur when writing the text to the file path.
+     */
     public void save(ArrayList<Task> lib) throws IOException {
         for (int i = 0; i < lib.size(); i++) {
             String curr = lib.get(i).saveData();

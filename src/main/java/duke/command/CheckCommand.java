@@ -8,6 +8,10 @@ import java.time.LocalDate;
 
 import java.util.ArrayList;
 
+/**
+ * Encapsulates the Command which checks and loads tasks which occur
+ * on the date specified in the check command entered by the user.
+ */
 public class CheckCommand extends Command {
 
     private LocalDate date;

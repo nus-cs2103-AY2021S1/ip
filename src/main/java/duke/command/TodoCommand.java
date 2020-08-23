@@ -7,6 +7,10 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Encapsulates a Command which creates a new ToDo task to add to the task
+ * list.
+ */
 public class TodoCommand extends Command {
 
     private String description;

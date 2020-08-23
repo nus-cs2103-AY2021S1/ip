@@ -7,6 +7,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Encapsulates a UI system which is responsible for printing the responses that the
+ * user can interact with. It also reads and passes commands to the Duke class.
+ */
 public class Ui {
 
     private String startLine = "---------------\n";

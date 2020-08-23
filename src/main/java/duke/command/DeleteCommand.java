@@ -7,6 +7,9 @@ import duke.exception.DukeException;
 
 import java.util.ArrayList;
 
+/**
+ * Encapsulates a Command which deletes a task from the task list.
+ */
 public class DeleteCommand extends Command {
 
     private int index;

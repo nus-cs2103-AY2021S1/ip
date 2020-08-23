@@ -5,6 +5,9 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Encapsulates a command which facilitates leaving the Duke program.
+ */
 public class ExitCommand extends Command {
 
     @Override
