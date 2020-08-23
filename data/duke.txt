@@ -1,4 +1,2 @@
-Todo,false,Buy Book
-Deadline,true,Pay money,2012/12/12 1600
-Event,true,meeting,2020/12/12 1600-1800
-Todo,false,watch movie
+Deadline,false,return book,2020-02-02T18:20
+Event,false,meeting,2020-08-23T18:00,2020-08-23T19:20

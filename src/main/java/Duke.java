@@ -225,7 +225,8 @@ public class Duke {
         } else {
           writer.append(
               String.format(
-                  "%s,%s,%s,%s", taskType, task.isDone, task.description, ((Event) task).at));
+                  "%s,%s,%s,%s,%s",
+                  taskType, task.isDone, task.description, ((Event) task).at, ((Event) task).end));
         }
         writer.write("\n");
       }
@@ -248,14 +249,16 @@ public class Duke {
             dataArr.add(new Todo(tempArr[2]));
             break;
           case "Deadline":
-            Task tempDeadline = new Deadline(tempArr[2], tempArr[3]);
+            Task tempDeadline = new Deadline(tempArr[2], LocalDateTime.parse(tempArr[3]));
             if (tempArr[1].equals("true")) {
               tempDeadline.markAsDone();
             }
             dataArr.add(tempDeadline);
             break;
           case "Event":
-            Task tempEvent = new Event(tempArr[2], tempArr[3]);
+            Task tempEvent =
+                new Event(
+                    tempArr[2], LocalDateTime.parse(tempArr[3]), LocalDateTime.parse(tempArr[4]));
             if (tempArr[1].equals("true")) {
               tempEvent.markAsDone();
             }
