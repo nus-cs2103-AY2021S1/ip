@@ -50,4 +50,14 @@ public class TaskList implements Iterable<Task> {
         }
         return sb.toString();
     }
+
+    public TaskList findString(String searchword) {
+        TaskList foundTasks = new TaskList();
+        for (Task task : this.taskList) {
+            if (task.getTaskDescription().contains(searchword)) {
+                foundTasks.addTask(task);
+            }
+        }
+        return foundTasks;
+    }
 }
