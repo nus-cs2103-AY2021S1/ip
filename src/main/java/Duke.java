@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static final int DATE_INDEX = 4;
+    private static final int DATE_INDEX = 4;    // test commit
     private static final int DEADLINE_INDEX = 9;
     private static final int DELETE_INDEX = 7;
     private static final int DONE_INDEX = 5;
