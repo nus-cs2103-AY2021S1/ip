@@ -11,6 +11,7 @@ import duke.task.Todo;
  */
 public class Parser {
     private final static String ignoreCase = "(?i)";
+    private final static String wildcard = "(.*)";
     private final static Ui ui = new Ui();
 
     /**
@@ -34,9 +35,9 @@ public class Parser {
             return new ExitCommand();
         } else if (command.matches(ignoreCase + CommandState.LIST.name())) {
             return new ListCommand();
-        } else if (command.matches(ignoreCase + CommandState.DONE.name() + "(.*)")) {
+        } else if (command.matches(ignoreCase + CommandState.DONE.name() + wildcard)) {
             return new DoneCommand();
-        } else if (command.matches(ignoreCase + CommandState.CHECK.name() + "(.*)")) {
+        } else if (command.matches(ignoreCase + CommandState.CHECK.name() + wildcard)) {
             return new CheckCommand();
         } else {
             Task t = checkAction(command);
@@ -55,13 +56,13 @@ public class Parser {
      */
     public static Task checkAction(String command) throws DukeException{
         Task t;
-        if (command.matches(ignoreCase + CommandState.DEADLINE.name() + "(.*)")) {
+        if (command.matches(ignoreCase + CommandState.DEADLINE.name() + wildcard)) {
             t = Deadline.createTask(command);
-        } else if (command.matches(ignoreCase + CommandState.EVENT.name() + "(.*)")) {
+        } else if (command.matches(ignoreCase + CommandState.EVENT.name() + wildcard)) {
             t = Event.createTask(command);
-        } else if (command.matches(ignoreCase + CommandState.TODO.name() + "(.*)")) {
+        } else if (command.matches(ignoreCase + CommandState.TODO.name() + wildcard)) {
             t = Todo.createTask(command);
-        } else if (command.matches(ignoreCase + CommandState.DELETE.name() + "(.*)")) {
+        } else if (command.matches(ignoreCase + CommandState.DELETE.name() + wildcard)) {
             t = null;
         } else {
             String errMessage = ui.printFormat(" I'm sorry but i do not know what you want to do. *woof*\n");

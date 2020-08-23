@@ -5,14 +5,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Contains the list of <code>Task</code> object. <code>TaskList</code> saves all existing <code>Task</code> in a
@@ -36,10 +31,12 @@ public class TaskList {
             t = new Todo(task.substring(7), isDone);
         } else if (taskType.equals("[D]")){
             int indOfTime = task.lastIndexOf("(FINISH by: ");
-            t = new Deadline(task.substring(7, indOfTime), task.substring(indOfTime + 11, task.lastIndexOf(")")).trim(), isDone);
+            t = new Deadline(task.substring(7, indOfTime),
+                    task.substring(indOfTime + 11, task.lastIndexOf(")")).trim(), isDone);
         } else {
             int indOfTime = task.lastIndexOf("(APPEAR at: ");
-            t = new Event(task.substring(7, indOfTime), task.substring(indOfTime + 11, task.lastIndexOf(")")).trim(), isDone);
+            t = new Event(task.substring(7, indOfTime),
+                    task.substring(indOfTime + 11, task.lastIndexOf(")")).trim(), isDone);
         }
         listOfTask.add(t);
     }

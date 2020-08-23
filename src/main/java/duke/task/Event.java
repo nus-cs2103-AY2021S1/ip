@@ -76,9 +76,8 @@ public class Event extends Task{
                     LocalTime endTime = LocalTime.parse(times[1]);
                     return new Event(description, date, startTime, endTime);
                 } catch (Exception e) {
-                    String errMessage =
-                            Task.ui.printFormat(" Please input event time in the following format:\n "
-                                    + "   YYYY/MM/DD HH:MM-HH:MM!\n" + " *Woof woof*\n");
+                    String errMessage = Task.ui.printFormat(" Please input event time in the following format:\n "
+                            + "   YYYY/MM/DD HH:MM-HH:MM!\n" + " *Woof woof*\n");
                     throw new DukeException(errMessage);
                 }
             }
