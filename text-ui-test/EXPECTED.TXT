@@ -4,52 +4,74 @@
  | |  | | | __| '__/ _ \| '_ \ 
  | |__| | | |_| | | (_) | | | |
   \____/|_|\__|_|  \___/|_| |_|
+
 ____________________________________________________________
+
 Hello lesser being, I am Ultron
 What do you want?
+
 ____________________________________________________________
 
 ____________________________________________________________
+
 Can't you keep track of '[T][✘] read book' yourself?
 Now you have 1 burdens
 ____________________________________________________________
+
 ____________________________________________________________
+
 Can't you keep track of '[D][✘] return book (by: June 6th)' yourself?
 Now you have 2 burdens
 ____________________________________________________________
+
 ____________________________________________________________
+
 Can't you keep track of '[E][✘] project meeting (at: Aug 6th 2-4pm)' yourself?
 Now you have 3 burdens
 ____________________________________________________________
+
 ____________________________________________________________
+
 Can't you keep track of '[T][✘] join sports club' yourself?
 Now you have 4 burdens
 ____________________________________________________________
+
 ____________________________________________________________
+
 Finally! Making yourself useful
   [T][✓] read book
 ____________________________________________________________
+
 ____________________________________________________________
+
 Heh, you can't even type in a correct command
 'hello' is not a valid number
 I'll give u a pity tip
 Use 'help' for more information
 ____________________________________________________________
+
 ____________________________________________________________
+
 Finally! Making yourself useful
   [T][✓] join sports club
 ____________________________________________________________
+
 ____________________________________________________________
+
 Heh, you can't even type in a correct command
 No arguments supplied for todo
 I'll give u a pity tip
 Use 'help' for more information
 ____________________________________________________________
+
 ____________________________________________________________
+
 Can't you keep track of '[T][✘] return book' yourself?
 Now you have 5 burdens
 ____________________________________________________________
+
 ____________________________________________________________
+
 Heh, you cant even remember what you had
 1.[T][✓] read book
 2.[D][✘] return book (by: June 6th)
@@ -57,27 +79,40 @@ Heh, you cant even remember what you had
 4.[T][✓] join sports club
 5.[T][✘] return book
 ____________________________________________________________
+
 ____________________________________________________________
+
 Heh, you can't even type in a correct command
 No arguments supplied for deadline
 I'll give u a pity tip
 Use 'help' for more information
 ____________________________________________________________
+
 ____________________________________________________________
+
 Can't you keep track of '[D][✘] return book (by: Sunday)' yourself?
 Now you have 6 burdens
 ____________________________________________________________
+
 ____________________________________________________________
+
 Heh, you can't even type in a correct command
 No arguments supplied for event
 I'll give u a pity tip
 Use 'help' for more information
 ____________________________________________________________
+
 ____________________________________________________________
+
 Can't you keep track of '[E][✘] project meeting (at: Mon 2-4pm)' yourself?
 Now you have 7 burdens
 ____________________________________________________________
+
 ____________________________________________________________
+
 ____________________________________________________________
+
 Clearly you were not worth my time.
+
 ____________________________________________________________
+
