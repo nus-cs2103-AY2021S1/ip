@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.NotDirectoryException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,7 +19,11 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         File file = openFile();
         Bot bot = new Bot(SPACES);
-        bot.parseFile(file);
+        try {
+            bot.parseFile(file);
+        } catch(DukeException e) {
+            System.out.println(e.getMessage());
+        }
         bot.welcomeMessage();
 
         Scanner sc = new Scanner(System.in);

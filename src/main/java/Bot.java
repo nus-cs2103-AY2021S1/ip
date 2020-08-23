@@ -1,4 +1,6 @@
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,6 +11,7 @@ public class Bot {
 
     String welcomeMessage = "Hello! I'm Duke\n What can I do for you?";
     String goodbyeMessage = "Bye! Message me anytime!";
+    Pattern datePattern = Pattern.compile("^([0-9]{1,2})[/-]([0-9]{1,2})[/-]([0-9]{4}) ([0-9]{4})$");
 
     public Bot(String delim) {
         this.delim = delim;
@@ -36,19 +39,21 @@ public class Bot {
         activityReply(todoTask);
     }
 
-    public void addDeadline(String activity, String deadline) {
-        Task deadlineTask = new DeadlineTask(activity, deadline);
+    public void addDeadline(String activity, String deadline) throws InvalidDateException {
+        LocalDateTime dateTime = this.parseDate(deadline);
+        Task deadlineTask = new DeadlineTask(activity, dateTime);
         activityList.add(deadlineTask);
         activityReply(deadlineTask);
     }
 
-    public void addEvent(String activity, String time) {
-        Task event = new EventTask(activity,time);
+    public void addEvent(String activity, String time) throws InvalidDateException {
+        LocalDateTime dateTime = this.parseDate(time);
+        Task event = new EventTask(activity,dateTime);
         activityList.add(event);
         activityReply(event);
     }
 
-    public void parseFile(File file){
+    public void parseFile(File file) throws DukeException{
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
@@ -62,13 +67,13 @@ public class Bot {
 
             }
         } catch(FileNotFoundException e) {
-            System.out.println("File not found??");
+            throw new DukeException("File not Found");
         } catch (IOException e2) {
-            System.out.println("IO exception");
+            throw new DukeException("IO Exception");
         }
     }
 
-    public Task readLine(String line) {
+    public Task readLine(String line) throws InvalidDateException, InvalidInputException {
         Pattern todoPattern = Pattern.compile("T \\| ([01]) \\| (.+)");
         Pattern deadlinePattern = Pattern.compile("D \\| ([01]) \\| (.+?) \\| (.+)");
         Pattern eventPattern = Pattern.compile("E \\| ([01]) \\| (.+?) \\| (.+)");
@@ -76,15 +81,16 @@ public class Bot {
         Matcher deadlineMatcher = deadlinePattern.matcher(line);
         Matcher eventMatcher = eventPattern.matcher(line);
 
+
         if (todoMatcher.find()) {
             return new TodoTask(todoMatcher.group(2), Integer.parseInt(todoMatcher.group(1)));
         } else if (deadlineMatcher.find()){
-            return new DeadlineTask(deadlineMatcher.group(2), Integer.parseInt(deadlineMatcher.group(1)), deadlineMatcher.group(3));
+            return new DeadlineTask(deadlineMatcher.group(2), Integer.parseInt(deadlineMatcher.group(1)), LocalDateTime.parse(deadlineMatcher.group(3)));
         } else if (eventMatcher.find()) {
-            return new EventTask(eventMatcher.group(2), Integer.parseInt(eventMatcher.group(1)), eventMatcher.group(3));
+            return new EventTask(eventMatcher.group(2), Integer.parseInt(eventMatcher.group(1)), LocalDateTime.parse(eventMatcher.group(3)));
         } else {
-            // invalid input
-            return null;
+            // Formats do not match, input given is invalid
+            throw new InvalidInputException();
         }
     }
 
@@ -139,5 +145,31 @@ public class Bot {
          } catch(IOException e) {
              System.out.println(e.getMessage());
          }
+    }
+
+    public LocalDateTime parseDate(String dateString) throws InvalidDateException {
+        Matcher dateMatcher = datePattern.matcher(dateString);
+        try {
+            if (dateMatcher.find()) {
+                String day = dateMatcher.group(1);
+                if (day.length() == 1) {
+                    day = "0" + day;
+                }
+                String month = dateMatcher.group(2);
+
+                if (month.length() == 1) {
+                    month = "0" + month;
+                }
+                String year = dateMatcher.group(3);
+                String time = dateMatcher.group(4);
+                LocalDateTime localDateTime = LocalDateTime.parse(String.format("%s-%s-%s %s", day,month,year,time), DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+                return localDateTime;
+            } else {
+                throw new InvalidDateException();
+            }
+        }
+        catch (Exception e){
+            throw new InvalidDateException();
+        }
     }
 }
