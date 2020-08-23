@@ -41,11 +41,6 @@ public class AddCommandTest {
         executeExceptionHelper("bash", ui, list, storage);
         executeExceptionHelper("done", ui, list, storage);
         executeExceptionHelper("delete", ui, list, storage);
-        executeExceptionHelper("done 3", ui, list, storage);
-        executeExceptionHelper("done 0", ui, list, storage);
-        executeExceptionHelper("done -1", ui, list, storage);
-        executeExceptionHelper("done 1", ui, list, storage);
-        executeExceptionHelper("done 1", ui, list, storage);
         executeExceptionHelper("happen", ui, list, storage);
         executeExceptionHelper("todo", ui, list, storage);
         executeExceptionHelper("deadline do something", ui, list, storage);
