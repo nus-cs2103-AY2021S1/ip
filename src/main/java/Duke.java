@@ -11,6 +11,10 @@ public class Duke {
         ui = new Ui(parser);
     }
 
+    public Parser getParser() {
+        return this.parser;
+    }
+
     public static void main(String[] args) {
         new Duke();
     }
